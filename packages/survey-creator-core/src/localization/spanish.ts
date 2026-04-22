@@ -7,7 +7,7 @@ export var spanishTranslation = {
     edit: "Editar",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Mira y aprende a crear encuestas",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "¡Arrastra un tipo de pregunta para empezar a diseñar tu encuesta!",
@@ -53,8 +53,8 @@ export var spanishTranslation = {
     comment: "Comentario",
     // "Image Picker"
     imagepicker: "Selector de imágenes",
-    // "Ranking"
-    ranking: "Ranking",
+    // [Auto-translated] "Ranking"
+    ranking: "Clasificación",
     // "Image"
     image: "Imagen",
     // "Dropdown"
@@ -73,7 +73,7 @@ export var spanishTranslation = {
     matrixdynamic: "Matriz (filas dinámicas)",
     // "Multiple Textboxes"
     multipletext: "Múltiples textos",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (paneles dinámicos)",
@@ -105,8 +105,8 @@ export var spanishTranslation = {
     containers: "Contenedores",
     // "Matrix Questions"
     matrix: "Preguntas matriz",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Misceláneos"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -144,7 +144,7 @@ export var spanishTranslation = {
     surveyTypeName: "Encuesta",
     // "Page"
     pageTypeName: "Página",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panelTypeName: "Panel",
     // "Question"
     questionTypeName: "Pregunta",
@@ -238,6 +238,18 @@ export var spanishTranslation = {
     options: "Opciones",
     // "Generate Valid JSON"
     generateValidJSON: "Generar un JSON válido",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Función desconocida: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Funciones desconocidas: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Variable desconocida: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Variables desconocidas: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Error de sintaxis.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Error semántico.",
     // "Generate Readable JSON"
     generateReadableJSON: "Generar JSON legible",
     // "Toolbox"
@@ -753,6 +765,14 @@ export var spanishTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expresión"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Expresión"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Expresión"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -1034,7 +1054,7 @@ export var spanishTranslation = {
     columnEdit: "Editar columna: {0}",
     // "Edit item: {0}"
     itemEdit: "Editar artículo: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Camino",
@@ -1100,6 +1120,8 @@ export var spanishTranslation = {
     choicesOrder: "Seleccione el orden de las opciones",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Permitir opciones personalizadas",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Texto del comando \"Crear elección personalizada\"",
     // "Visible"
     visible: "¿Es visible?",
     // "Required"
@@ -1321,10 +1343,10 @@ export var spanishTranslation = {
     // "Regular expression"
     regex: "Expresión regular",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Mensaje de validación",
-      // [Auto-translated] "Validation expression"
-      expression: "Expresión de validación",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Mensaje de notificación para entrada inválida",
+      // [Auto-translated] "Valid when"
+      expression: "Válido cuando",
       // [Auto-translated] "Notification type"
       notificationType: "Tipo de notificación",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1480,6 +1502,66 @@ export var spanishTranslation = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Formato de información sobre herramientas"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL de la imagen",
+      // [Auto-translated] "Areas"
+      areas: "Zonas",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Permitir múltiples selecciones",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Nombre de la propiedad de valor",
+      // [Auto-translated] "Shape"
+      shape: "Forma",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Color de relleno en reposo",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Color de la carrera en ralentí",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Ancho de carrera en ralentí",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Color de relleno flotante",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Color de trazo flotante",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Ancho de la carrera en vuelo estacionario",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Color de relleno seleccionado",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Color de trazo seleccionado",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Ancho de trazo seleccionado",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Áreas seleccionadas máximas",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Áreas mínimas seleccionadas"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Valor",
+      // [Auto-translated] "Shape"
+      shape: "Forma",
+      // [Auto-translated] "Coordinates"
+      coords: "Coordenadas",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Color de relleno en reposo",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Color de la carrera en ralentí",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Ancho de carrera en ralentí",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Color de relleno flotante",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Color de trazo flotante",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Ancho de la carrera en vuelo estacionario",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Color de relleno seleccionado",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Color de trazo seleccionado",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Ancho de trazo seleccionado"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Altura de la imagen",
@@ -1510,6 +1592,8 @@ export var spanishTranslation = {
     minErrorText: "Mensaje de error \"El valor está por debajo del mínimo\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Mensaje de error \"El valor supera el máximo\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Mensaje de error \"El valor no coincide con el tamaño del paso\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Mensaje de error \"Comentario vacío\"",
     // "Error message for duplicate responses"
@@ -1614,7 +1698,7 @@ export var spanishTranslation = {
         // [Auto-translated] "Panel Layout"
         layout: "Diseño de paneles"
       },
-      // "General"
+      // [Auto-translated] "General"
       general: "General",
       // "Options"
       fileOptions: "Opciones",
@@ -1686,7 +1770,7 @@ export var spanishTranslation = {
       showOnCompleted: "Mostrar en completado",
       // "Logo in the Survey Header"
       logo: "Logo en el título de la encuesta",
-      // "Slider"
+      // [Auto-translated] "Slider"
       slider: "Slider",
       // "Expression"
       expression: "Expresión",
@@ -1934,7 +2018,7 @@ export var spanishTranslation = {
     selected: "Seleccionado",
     // [Auto-translated] "Unselected"
     unselected: "Sin seleccionar",
-    // "decimal"
+    // [Auto-translated] "decimal"
     decimal: "decimal",
     // "currency"
     currency: "divisa",
@@ -2591,8 +2675,8 @@ export var spanishTranslation = {
   validators: {
     // "Answer count"
     answercountvalidator: "Cantidad de respuestas",
-    // "Email"
-    emailvalidator: "Email",
+    // [Auto-translated] "Email"
+    emailvalidator: "Correo electrónico",
     // "Expression"
     expressionvalidator: "expresión",
     // "Number"
@@ -3531,6 +3615,18 @@ export var spanishTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contraste"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Básico",
+      // [Auto-translated] "Advanced"
+      advanced: "Avanzado",
+      // [Auto-translated] "Expert"
+      expert: "Experto"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Preajuste aplicado"
   }
 };
 

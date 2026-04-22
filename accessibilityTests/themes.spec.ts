@@ -24,3 +24,4 @@ test.describe("themes a11y", () => {
     await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
 });
+

@@ -7,7 +7,7 @@ export var simplifiedChineseTranslation = {
     edit: "编辑",
     // "Watch and learn how to create surveys"
     externalHelpLink: "教学小片",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "从左侧工具箱拖个问题",
@@ -238,6 +238,18 @@ export var simplifiedChineseTranslation = {
     options: "选项",
     // "Generate Valid JSON"
     generateValidJSON: "生成 JSON 数据",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "未知功能：“{0}”。",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "未知功能：“{0}”。",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "未知变量：“{0}”。",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "未知变量：“{0}”。",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "语法错误。",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "语义错误。",
     // "Generate Readable JSON"
     generateReadableJSON: "生成易读的 JSON 数据",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var simplifiedChineseTranslation = {
     toolboxFilteredTextPlaceholder: "键入以搜索...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "未找到结果",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "没有属性可显示",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "键入以搜索...",
     // [Auto-translated] "No results found"
@@ -751,6 +765,14 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Expression"
       expression: "表达"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "表达"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "表达"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -1032,8 +1054,8 @@ export var simplifiedChineseTranslation = {
     columnEdit: "编辑列: {0}",
     // "Edit item: {0}"
     itemEdit: "编辑选项: {0}",
-    // "URL"
-    url: "URL",
+    // [Auto-translated] "URL"
+    url: "网址",
     // "Path to data"
     path: "路径",
     choicesbyurl: {
@@ -1098,6 +1120,8 @@ export var simplifiedChineseTranslation = {
     choicesOrder: "设置选项顺序",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "允许自定义选项",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "“创建自定义选择”命令文本",
     // "Visible"
     visible: "是否可见?",
     // "Required"
@@ -1126,6 +1150,8 @@ export var simplifiedChineseTranslation = {
     storeDataAsText: "以 JSON 文本方式存储文件",
     // "Maximum file size (in bytes)"
     maxSize: "文件最大尺寸 (Bytes)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "最大文件数量",
     // "Row count"
     rowCount: "默认行数",
     // "Columns layout"
@@ -1317,10 +1343,10 @@ export var simplifiedChineseTranslation = {
     // "Regular expression"
     regex: "正则表达式",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "验证消息",
-      // [Auto-translated] "Validation expression"
-      expression: "验证表达式",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "无效输入通知消息",
+      // [Auto-translated] "Valid when"
+      expression: "当",
       // [Auto-translated] "Notification type"
       notificationType: "通知类型",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1426,10 @@ export var simplifiedChineseTranslation = {
     allowMultiple: "启用多个文件上传",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "预览上传的图片",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "接受的文件类型",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "接受的文件类别",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "附加文件扩展名",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "等待上传完成",
     // [Auto-translated] "Confirm file deletion"
@@ -1474,6 +1502,66 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "工具提示格式"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "图片网址",
+      // [Auto-translated] "Areas"
+      areas: "地区",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "允许多重选择",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "价值财产名称",
+      // [Auto-translated] "Shape"
+      shape: "形状",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "空闲填充颜色",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "闲置笔画颜色",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "怠速行程宽度",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "悬浮填充颜色",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "悬浮笔画颜色",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "悬停笔画宽度",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "选定的填充颜色",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "选定笔画颜色",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "选择笔画宽度",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "最大选区",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "最小选定区域"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "价值",
+      // [Auto-translated] "Shape"
+      shape: "形状",
+      // [Auto-translated] "Coordinates"
+      coords: "坐标",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "空闲填充颜色",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "闲置笔画颜色",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "怠速行程宽度",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "悬浮填充颜色",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "悬浮笔画颜色",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "悬停笔画宽度",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "选定的填充颜色",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "选定笔画颜色",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "选择笔画宽度"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "图像高度",
@@ -1504,6 +1592,8 @@ export var simplifiedChineseTranslation = {
     minErrorText: "“值低于最小值”错误消息",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "“值超过最大值”错误消息",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "“值与步长不匹配”错误提示",
     // "\"Empty comment\" error message"
     otherErrorText: "“空评论”错误消息",
     // "Error message for duplicate responses"
@@ -2082,6 +2172,20 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Informational"
       info: "信息"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "图片",
+      // [Auto-translated] "Videos"
+      video: "视频",
+      // [Auto-translated] "Audio"
+      audio: "音频",
+      // [Auto-translated] "Documents"
+      document: "文献",
+      // [Auto-translated] "Archives"
+      archive: "档案",
+      // [Auto-translated] "Custom"
+      custom: "习俗"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "全名",
@@ -2495,6 +2599,8 @@ export var simplifiedChineseTranslation = {
     notcontains: "不包含",
     // "Any of"
     anyof: "任意",
+    // [Auto-translated] "None of"
+    noneof: "没有",
     // "All of"
     allof: "全部",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var simplifiedChineseTranslation = {
     loadFromServer: "从服务器加载问卷 JSON 数据",
     // "Scripts and styles"
     titleScript: "脚本和样式",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2569,8 +2675,8 @@ export var simplifiedChineseTranslation = {
   validators: {
     // "Answer count"
     answercountvalidator: "数量检查",
-    // "Email"
-    emailvalidator: "Email",
+    // [Auto-translated] "Email"
+    emailvalidator: "电子邮件",
     // "Expression"
     expressionvalidator: "公式",
     // "Number"
@@ -3088,8 +3194,10 @@ export var simplifiedChineseTranslation = {
     storeOthersAsComment: "选择此选项可将“其他”选项值作为单独的属性存储在调查结果中。",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "使用 {0} 作为实际值的占位符。",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "有关详细信息，请参阅 [accept]（https://www.w3schools.com/tags/att_input_accept.asp） 属性说明。",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "选择“自定义”，在预设类别顶部添加你自己的文件扩展名。",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "输入用逗号分隔的文件扩展名（例如，.csv，.xml）。",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "在多列布局中排列选择选项。设置为 0 时，选项将显示在一行中。仅适用于将“单元格输入类型”设置为单选按钮组或复选框的列。",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3507,6 +3615,18 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "反差"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "基础",
+      // [Auto-translated] "Advanced"
+      advanced: "高级",
+      // [Auto-translated] "Expert"
+      expert: "专家"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "预设应用"
   }
 };
 

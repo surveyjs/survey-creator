@@ -32,6 +32,7 @@ export default () => {
       tsconfig: resolve(__dirname, "tsconfig.themes.json"),
       external: ["survey-creator-core"],
       dir: resolve(buildPath, "themes"),
+      declarationDir: resolve(buildPath, "themes"),
       globalName: globalName,
       exports,
       globals: { "survey-creator-core": "SurveyCreatorCore" },

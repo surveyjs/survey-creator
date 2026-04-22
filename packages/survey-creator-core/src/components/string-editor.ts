@@ -2,7 +2,7 @@ import { Base, LocalizableString, Serializer, JsonObjectProperty, property, Item
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
-import { getNextItemValue, getNextValue } from "../utils/creator-utils";
+import { getNextColumnTitle, getNextItemValue, getNextValue } from "../utils/creator-utils";
 import { select } from "../utils/html-element-utils";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
@@ -62,6 +62,9 @@ export abstract class StringItemsNavigatorBase {
       const itemIndex = items.indexOf(item);
       let itemToFocus: MultipleTextItemModel = null;
       if (itemIndex !== -1) {
+        const propertyName = this.getItemsPropertyName(items);
+        const property = Serializer.findProperty(this.question.getType(), propertyName);
+        if (property && !creator.onCollectionItemDeletingCallback(this.question, property, items, item)) return;
         if (itemIndex == 0 && items.length >= 2) itemToFocus = items[1];
         if (itemIndex > 0) itemToFocus = items[itemIndex - 1];
         if (itemToFocus) {
@@ -195,6 +198,7 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
     if (items == this.question.columns) {
       if (creator.maxColumns && items.length >= creator.maxColumns) return;
       var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
+      column.title = getNextColumnTitle(items);
       this.question.columns.push(column);
       creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
     }

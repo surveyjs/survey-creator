@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/survey-core.css" />
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
-  <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/ui-preset-editor/index.css">
+  <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/ui-preset-editor.css">
   <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-js.min.css" /> -->
   <style>
         /*imitation of Tailwind CSS, bootstrap and other CSS frameworks (only for survey-creator-js)*/
@@ -23,7 +23,7 @@
   <script src="../node_modules/survey-core/themes/test.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
-  <script src="../node_modules/survey-creator-core/ui-preset-editor/index.js"></script>
+  <script src="../node_modules/survey-creator-core/ui-preset-editor.js"></script>
   <script src="../node_modules/survey-creator-core/ui-presets/index.js"></script>
   <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
   <script src="../build/survey-creator-js.js"></script>
@@ -108,7 +108,7 @@
 
     const presetEditorLink = document.createElement("link");
     presetEditorLink.setAttribute("rel", "stylesheet");
-    presetEditorLink.setAttribute("href", "../node_modules/survey-creator-core/ui-preset-editor/index.css");
+    presetEditorLink.setAttribute("href", "../node_modules/survey-creator-core/ui-preset-editor.css");
     shadowRoot.appendChild(presetEditorLink);
 
     shadowRoot.appendChild(rootElement);

@@ -71,8 +71,8 @@ export var ruStrings = {
     matrixdropdown: "Матрица (множественный выбор)",
     // "Dynamic Matrix"
     matrixdynamic: "Матрица (динамические ряды)",
-    // "Multiple Textboxes"
-    multipletext: "Multiple Textboxes",
+    // [Auto-translated] "Multiple Textboxes"
+    multipletext: "Несколько текстовых окна",
     // "Panel"
     panel: "Панель (для группы вопросов)",
     // "Dynamic Panel"
@@ -238,6 +238,18 @@ export var ruStrings = {
     options: "Параметры",
     // "Generate Valid JSON"
     generateValidJSON: "Сформировать валидный JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Неизвестная функция: «{0}».",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Неизвестные функции: «{0}».",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Неизвестная переменная: «{0}».",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Неизвестные переменные: «{0}».",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Ошибка в синтаксисе.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Семантическая ошибка.",
     // "Generate Readable JSON"
     generateReadableJSON: "Сформировать читаемый JSON",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var ruStrings = {
     toolboxFilteredTextPlaceholder: "Введите для поиска...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Никаких результатов не найдено",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Нет свойств для показа",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Введите для поиска...",
     // [Auto-translated] "No results found"
@@ -751,6 +765,14 @@ export var ruStrings = {
       // [Auto-translated] "Expression"
       expression: "Выражение"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Выражение"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Выражение"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -868,8 +890,8 @@ export var ruStrings = {
     inherit: "Наследовать",
     // "Apply"
     apply: "Применить",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "Ладно",
     // "Save"
     save: "Сохранить",
     // [Auto-translated] "Clear"
@@ -1032,7 +1054,7 @@ export var ruStrings = {
     columnEdit: "Изменить столбец: {0}",
     // "Edit item: {0}"
     itemEdit: "Редактировать элемент: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Путь",
@@ -1098,6 +1120,8 @@ export var ruStrings = {
     choicesOrder: "Выбрать порядок отбора",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Как разрешить пользовательский выбор",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Текст команды «Создать пользовательский выбор»",
     // "Visible"
     visible: "Отображать?",
     // "Required"
@@ -1126,6 +1150,8 @@ export var ruStrings = {
     storeDataAsText: "Хранить содержимое файла в формате JSON как текст",
     // [Auto-translated] "Maximum file size (in bytes)"
     maxSize: "Максимальный размер файла (в байтах)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Максимальное количество файлов",
     // "Row count"
     rowCount: "Количество строк",
     // "Columns layout"
@@ -1317,10 +1343,10 @@ export var ruStrings = {
     // "Regular expression"
     regex: "Регулярное выражение",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Сообщение о проверке",
-      // [Auto-translated] "Validation expression"
-      expression: "Проверочное выражение",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Уведомление о некорректном вводе",
+      // [Auto-translated] "Valid when"
+      expression: "Валидно, когда",
       // [Auto-translated] "Notification type"
       notificationType: "Тип уведомления",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1426,10 @@ export var ruStrings = {
     allowMultiple: "Как включить загрузку нескольких файлов",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Предварительный просмотр загруженных изображений",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Допустимые типы файлов",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Принятые категории файлов",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Дополнительные расширения файлов",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Дождитесь завершения загрузки",
     // [Auto-translated] "Confirm file deletion"
@@ -1474,6 +1502,66 @@ export var ruStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Формат всплывающей подсказки"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL изображения",
+      // [Auto-translated] "Areas"
+      areas: "Районы",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Разрешить несколько вариантов",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Название свойства стоимости",
+      // [Auto-translated] "Shape"
+      shape: "Форма",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Цвет холостого режима заполнения",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Цвет штрихов в простое состояние",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Ширина хода холостого хода",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Цвет заполнения курсора",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Цвет штриха при наведении",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Ширина хода курсора",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Выбранный цвет заполнения",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Выбранный цвет штриха",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Выбранная ширина штриха",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Максимальное количество выбранных зон",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Минимально выбранные районы"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Ценность",
+      // [Auto-translated] "Shape"
+      shape: "Форма",
+      // [Auto-translated] "Coordinates"
+      coords: "Координаты",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Цвет холостого режима заполнения",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Цвет штрихов в простое состояние",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Ширина хода холостого хода",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Цвет заполнения курсора",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Цвет штриха при наведении",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Ширина хода курсора",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Выбранный цвет заполнения",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Выбранный цвет штриха",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Выбранная ширина штриха"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Высота изображения",
@@ -1504,6 +1592,8 @@ export var ruStrings = {
     minErrorText: "Сообщение об ошибке \"Значение ниже минимального\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Сообщение об ошибке «Значение превышает максимальное»",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Сообщение об ошибке «Значение не совпадает с размером шага»",
     // "\"Empty comment\" error message"
     otherErrorText: "Сообщение об ошибке «Пустой комментарий»",
     // "Error message for duplicate responses"
@@ -2082,6 +2172,20 @@ export var ruStrings = {
       // [Auto-translated] "Informational"
       info: "Информационный"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Изображения",
+      // [Auto-translated] "Videos"
+      video: "Видео",
+      // [Auto-translated] "Audio"
+      audio: "Аудио",
+      // [Auto-translated] "Documents"
+      document: "Документы",
+      // [Auto-translated] "Archives"
+      archive: "Архивы",
+      // [Auto-translated] "Custom"
+      custom: "Обычай"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Полное имя",
@@ -2495,6 +2599,8 @@ export var ruStrings = {
     notcontains: "не содержит",
     // "Any of"
     anyof: "любой из",
+    // [Auto-translated] "None of"
+    noneof: "Ни один из",
     // "All of"
     allof: "все из",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var ruStrings = {
     loadFromServer: "Загрузить Json опросника с сервера",
     // "Scripts and styles"
     titleScript: "Скрипты и стили",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3088,8 +3194,10 @@ export var ruStrings = {
     storeOthersAsComment: "Выберите, чтобы сохранить значение параметра «Другое» как отдельное свойство в результатах опроса.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Используйте {0} в качестве заполнителя для фактического значения.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Дополнительные сведения см. в описании атрибута [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Выберите «Custom», чтобы добавить свои расширения к заранее определённым категориям.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Вводим расширения файлов, разделённые запятыми (например, .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. Применяется только к столбцам с параметром \"Тип ввода ячейки\" как \"Группа переключателей\" или \"Флажки\".",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3507,6 +3615,18 @@ export var ruStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Контраст"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Основы",
+      // [Auto-translated] "Advanced"
+      advanced: "Продвинутый",
+      // [Auto-translated] "Expert"
+      expert: "Эксперт"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Применённый пресет"
   }
 };
 

@@ -694,7 +694,7 @@ export interface QuestionAddedEvent {
    */
   page: PageModel;
   /**
-   * A value that indicates how the question was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization) (`"DROPPED_FROM_TOOLBOX"`), created using the Add Question button (`"ADDED_FROM_PAGEBUTTON"`), duplicated (`"ELEMENT_COPIED"`), or converted from another question type (`"ELEMENT_CONVERTED"`).
+   * A value that indicates how the question was added: from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization) (`"DROPPED_FROM_TOOLBOX"` when added via drag-and-drop or `"ADDED_FROM_TOOLBOX"` when added via click), using the Add Question button (`"ADDED_FROM_PAGEBUTTON"`), by duplicating an existing question (`"ELEMENT_COPIED"`), or by converting from another question type (`"ELEMENT_CONVERTED"`).
    */
   reason: string;
 }
@@ -709,7 +709,7 @@ export interface PanelAddedEvent {
    */
   page: PageModel;
   /**
-   * A value that indicates how the panel was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization) (`"DROPPED_FROM_TOOLBOX"`), created using the Add Question button (`"ADDED_FROM_PAGEBUTTON"`), or duplicated (`"ELEMENT_COPIED"`).
+   * A value that indicates how the panel was added: from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization) (`"DROPPED_FROM_TOOLBOX"` when added via drag-and-drop or `"ADDED_FROM_TOOLBOX"` when added via click), using the Add Question button (`"ADDED_FROM_PAGEBUTTON"`), or by duplicating an existing question (`"ELEMENT_COPIED"`), or by converting from another element type (`"ELEMENT_CONVERTED"`).
    */
   reason: string;
 }

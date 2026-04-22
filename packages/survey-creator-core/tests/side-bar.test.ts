@@ -61,6 +61,27 @@ test("Sidebar: hasVisiblePages test", () => {
   expect(creator.sidebar.hasVisiblePages).toEqual(true);
 });
 
+test("sidebar: custom sidebar test page restores header and settings action after property grid", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
+  creator.selectElement(creator.survey);
+  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
+  designerPlugin.showOneCategoryInPropertyGrid = true;
+
+  creator.sidebar.addPage("testCustomSidebarPage", "svc-test-custom-sidebar-page", creator);
+  creator.sidebar.activePage = "testCustomSidebarPage";
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-header");
+  expect(creator.sidebar.header.componentData).toEqual(creator.sidebar.header);
+
+  const settingsBarItem = creator.getActionBarItem("svd-settings");
+  expect(settingsBarItem.active).toBeFalsy();
+
+  creator.sidebar.activePage = "propertyGrid";
+  expect(creator.sidebar.header.componentName).toEqual("svc-side-bar-property-grid-header");
+  expect(creator.sidebar.header.componentData).toEqual(designerPlugin.propertyGridViewModel.objectSelectionAction);
+  expect(settingsBarItem.active).toBeTruthy();
+});
+
 test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if survey is empty", () => {
   const savedNewJSON = creatorSetting.defaultNewSurveyJSON;
   creatorSetting.defaultNewSurveyJSON = {};

@@ -7,7 +7,7 @@ export var czStrings = {
     edit: "Upravit",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Podívejte se a naučte se vytvářet průzkumy",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Sem napište otázku ze sady nástrojů.",
@@ -63,7 +63,7 @@ export var czStrings = {
     tagbox: "Vícevýběrová rozbalovací nabídka",
     // "File Upload"
     file: "Soubor",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "Matice (jedna volba)",
@@ -73,7 +73,7 @@ export var czStrings = {
     matrixdynamic: "Matice (dynamické řádky)",
     // "Multiple Textboxes"
     multipletext: "Více textů",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (dynamické panely)",
@@ -144,7 +144,7 @@ export var czStrings = {
     surveyTypeName: "Průzkum",
     // "Page"
     pageTypeName: "Stránka",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panelTypeName: "Panel",
     // "Question"
     questionTypeName: "Otázka",
@@ -166,10 +166,10 @@ export var czStrings = {
     newPageName: "stránka",
     // "question"
     newQuestionName: "otázka",
-    // "panel"
-    newPanelName: "panel",
-    // "text"
-    newTextItemName: "text",
+    // [Auto-translated] "panel"
+    newPanelName: "Panel",
+    // [Auto-translated] "text"
+    newTextItemName: "Text",
     // "Default"
     defaultV2Theme: "Výchozí",
     // "Modern"
@@ -418,7 +418,7 @@ export var czStrings = {
     imageChooseImage: "Vybrat obrázek",
     // "Add {0}"
     addNewTypeQuestion: "Přidat {0}", // {0} is localizable question type
-    // "[LOGO]"
+    // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
     // "Item "
     choices_Item: "Položka ",
@@ -765,6 +765,14 @@ export var czStrings = {
       // [Auto-translated] "Expression"
       expression: "Výraz"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Vyjádření"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Vyjádření"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -882,8 +890,8 @@ export var czStrings = {
     inherit: "Zdědit",
     // "Apply"
     apply: "Použít",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "Dobře",
     // "Save"
     save: "Uložit",
     // "Clear"
@@ -1036,7 +1044,7 @@ export var czStrings = {
     expressionIsEmpty: "Výraz je prázdný",
     // "Value"
     value: "Hodnota",
-    // "Text"
+    // [Auto-translated] "Text"
     text: "Text",
     // "Row ID"
     rowid: "ID řady",
@@ -1046,7 +1054,7 @@ export var czStrings = {
     columnEdit: "Upravit sloupec: {0}",
     // "Edit item: {0}"
     itemEdit: "Upravit položku: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Cesta",
@@ -1112,6 +1120,8 @@ export var czStrings = {
     choicesOrder: "Vyberte pořadí voleb",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Povolit vlastní volby",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Text příkazu \"Vytvořit vlastní volbu\"",
     // "Visible"
     visible: "Viditelná?",
     // "Required"
@@ -1582,6 +1592,8 @@ export var czStrings = {
     minErrorText: "Zpráva pro chybu \"Hodnota je nižší než minimální\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Zpráva pro chybu \"Hodnota překračuje maximum\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Chybová zpráva \"Hodnota neodpovídá velikosti kroku\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Zpráva pro chybu \"Prázdný komentář\"",
     // "Error message for duplicate responses"
@@ -1748,7 +1760,7 @@ export var czStrings = {
         // [Auto-translated] "Layout"
         base: "Rozložení"
       },
-      // "Data"
+      // [Auto-translated] "Data"
       data: "Data",
       // "Validation"
       validation: "Ověřování",
@@ -2058,8 +2070,8 @@ export var czStrings = {
     datetime: "datum a čas",
     // "datetime-local"
     "datetime-local": "datum a čas - lokální",
-    // "email"
-    email: "email",
+    // [Auto-translated] "email"
+    email: "e-mail",
     // "month"
     month: "měsíc",
     // "number"
@@ -2068,14 +2080,14 @@ export var czStrings = {
     password: "heslo",
     // "range"
     range: "rozsah",
-    // "tel"
+    // [Auto-translated] "tel"
     tel: "tel",
-    // "text"
-    text: "text",
+    // [Auto-translated] "text"
+    text: "Text",
     // "time"
     time: "čas",
-    // "url"
-    url: "url",
+    // [Auto-translated] "url"
+    url: "URL",
     // "week"
     week: "týden",
     // "Hidden"
@@ -2117,8 +2129,8 @@ export var czStrings = {
       date: "Datum",
       // "Date and Time"
       "datetime-local": "Datum a čas",
-      // "Email"
-      email: "Email",
+      // [Auto-translated] "Email"
+      email: "E-mail",
       // "Month"
       month: "Měsíc",
       // "Number"
@@ -2129,11 +2141,11 @@ export var czStrings = {
       range: "Rozsah",
       // "Phone Number"
       tel: "Telefon",
-      // "Text"
+      // [Auto-translated] "Text"
       text: "Text",
       // "Time"
       time: "Čas",
-      // "URL"
+      // [Auto-translated] "URL"
       url: "URL",
       // "Week"
       week: "Týden"
@@ -2356,7 +2368,7 @@ export var czStrings = {
     underRow: "Pod řádkem",
     // "Under the row, display one section only"
     underRowSingle: "Pod řádkem, pouze jeden panel je viditelný",
-    // "Auto"
+    // [Auto-translated] "Auto"
     auto: "Auto",
     timerInfoMode: {
       // "Both"
@@ -2385,9 +2397,9 @@ export var czStrings = {
     contentMode: {
       // "Image"
       image: "Obrázek",
-      // "Video"
+      // [Auto-translated] "Video"
       video: "Video",
-      // "YouTube"
+      // [Auto-translated] "YouTube"
       youtube: "YouTube"
     },
     displayMode: {
@@ -2642,9 +2654,9 @@ export var czStrings = {
     loadFromServer: "Načíst průzkum JSON ze serveru",
     // "Scripts and styles"
     titleScript: "Skripty a styly",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3363,9 +3375,9 @@ export var czStrings = {
     inputFieldComponent: "Komponenta vstupního pole", // Auto-generated string
     // "Item component"
     itemComponent: "Komponenty položky", // Auto-generated string
-    // "Min"
+    // [Auto-translated] "Min"
     min: "Min", // Auto-generated string
-    // "Max"
+    // [Auto-translated] "Max"
     max: "Max", // Auto-generated string
     // "Min value expression"
     minValueExpression: "Minimální hodnota výrazu", // Auto-generated string
@@ -3479,8 +3491,8 @@ export var czStrings = {
     lines: "Řádky",
     // "Default"
     primaryDefaultColor: "Výchozí",
-    // "Hover"
-    primaryDarkColor: "Hover",
+    // [Auto-translated] "Hover"
+    primaryDarkColor: "Vznášejte se",
     // "Selected"
     primaryLightColor: "Vybraný",
     // "Background color"
@@ -3525,14 +3537,14 @@ export var czStrings = {
     size: "Velikost",
     // [Auto-translated] "Opacity"
     opacity: "Neprůhlednost",
-    // "X"
+    // [Auto-translated] "X"
     boxShadowX: "X",
-    // "Y"
+    // [Auto-translated] "Y"
     boxShadowY: "Y",
     // [Auto-translated] "Add Shadow Effect"
     boxShadowAddRule: "Přidat stínový efekt",
-    // "Blur"
-    boxShadowBlur: "Blur",
+    // [Auto-translated] "Blur"
+    boxShadowBlur: "Rozmazaný obraz",
     // "Spread"
     boxShadowSpread: "Rozšíření",
     // [Auto-translated] "Drop"
@@ -3612,7 +3624,9 @@ export var czStrings = {
       advanced: "Pokročilé",
       // [Auto-translated] "Expert"
       expert: "Expert"
-    }
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Použito přednastavení"
   }
 };
 
