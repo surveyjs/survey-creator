@@ -1,0 +1,6 @@
+<ng-template #template>
+    <span [class]="model.getActionBarItemCss()"
+        (pointerdown)="model.data.model.onPointerDown($event)">
+        <svg [iconName]="model.iconName" [size]="'auto'" [class]="model.cssClasses.itemIcon" sv-ng-svg-icon></svg>
+    </span>
+</ng-template>

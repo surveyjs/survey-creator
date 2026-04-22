@@ -75,6 +75,7 @@ import CellQuestion from "./adorners/CellQuestion.vue";
 import Panel from "./adorners/Panel.vue";
 import ItemValue from "./adorners/ItemValue.vue";
 import ImageItemValue from "./adorners/ImageItemValue.vue";
+import ImageItemDragAction from "./adorners/ImageItemDragAction.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
 import Search from "./components/Search.vue";
@@ -187,6 +188,7 @@ function registerComponents(
   registerComponent("svc-panel", Panel);
   registerComponent("svc-item-value", ItemValue);
   registerComponent("svc-image-item-value", ImageItemValue);
+  registerComponent("svc-image-item-drag-action", ImageItemDragAction);
   registerComponent("svc-dropdown-question", QuestionDropdown);
   registerComponent("svc-dropdown-question-adorner", Dropdown);
   registerComponent("svc-widget-question", CustomWidget);

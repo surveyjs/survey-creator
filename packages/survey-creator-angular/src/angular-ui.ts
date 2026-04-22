@@ -48,6 +48,7 @@ export * from "./add-question-type-selector.component";
 export * from "./question.component";
 export * from "./adorners/item-value.component";
 export * from "./adorners/image-item-value.component";
+export * from "./adorners/image-item-drag-action.component";
 export * from "./adorners/question-dropdown.component";
 export * from "./adorners/question-image.component";
 export * from "./panel.component";

@@ -22,34 +22,7 @@
     </template>
     <template v-if="logoRenderedHtml && !model.isUploading">
       <div :class="model.containerCss">
-        <div class="svc-context-container svc-logo-image-controls">
-          <span
-            class="svc-context-button"
-            @click="model.chooseFile(model)"
-            v-key2click
-            :title="undefined"
-            :aria-label="undefined"
-          >
-            <SvComponent
-              :is="'sv-svg-icon'"
-              :iconName="'icon-choosefile'"
-              :size="'auto'"
-            ></SvComponent>
-          </span>
-          <span
-            class="svc-context-button svc-context-button--danger"
-            @click="model.remove(model)"
-            v-key2click
-            :title="undefined"
-            :aria-label="undefined"
-          >
-            <SvComponent
-              :is="'sv-svg-icon'"
-              :iconName="'icon-clear'"
-              :size="'auto'"
-            ></SvComponent>
-          </span>
-        </div>
+        <SvComponent :is="'sv-action-bar'" :model="model.actionsContainer"></SvComponent>
         <SvComponent :is="'sv-logo-image'" :data="survey"></SvComponent>
       </div>
     </template>

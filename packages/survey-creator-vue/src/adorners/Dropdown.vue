@@ -15,12 +15,9 @@
         </div>
       </div>
       <SvComponent
-        :is="'svc-action-button'"
+        :is="'sv-action-bar-item'"
         v-if="model.needToCollapse"
-        :text="model.getButtonText()"
-        :click="model.switchCollapse.bind(model)"
-        :allowBubble="true"
-      >
+        :item="model.collapseAction">
       </SvComponent>
     </div>
   </div>
