@@ -7,7 +7,7 @@ export var huStrings = {
     edit: "Szerkesztés",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Nézze meg, hogyan kell kérdőíveket készíteni.",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Kérem dobjon ide egy kérdést a bal oldali menüből.",
@@ -63,7 +63,7 @@ export var huStrings = {
     tagbox: "Többszörös kijelölés legördülő menü",
     // "File Upload"
     file: "Állomány",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "Mátrix (egyválasztós)",
@@ -73,7 +73,7 @@ export var huStrings = {
     matrixdynamic: "Mátrix (dinamikus)",
     // "Multiple Textboxes"
     multipletext: "Többsoros szöveg",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (dinamikus)",
@@ -105,8 +105,8 @@ export var huStrings = {
     containers: "Konténerek",
     // "Matrix Questions"
     matrix: "Mátrix kérdések",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Egyéb"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -166,8 +166,8 @@ export var huStrings = {
     newPageName: "lap",
     // "question"
     newQuestionName: "kérdés",
-    // "panel"
-    newPanelName: "panel",
+    // [Auto-translated] "panel"
+    newPanelName: "Panel",
     // "text"
     newTextItemName: "szöveg",
     // [Auto-translated] "Default"
@@ -238,6 +238,18 @@ export var huStrings = {
     options: "Beállítások",
     // "Generate Valid JSON"
     generateValidJSON: "Érvényes JSON generálása",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Ismeretlen funkció: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Ismeretlen funkciók: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Ismeretlen változó: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Ismeretlen változók: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Szintaktishiba.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Szemantikai hiba.",
     // "Generate Readable JSON"
     generateReadableJSON: "Olvasható JSON generálása",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var huStrings = {
     toolboxFilteredTextPlaceholder: "Írja be a kereséshez...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Nincs találat",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Nincs megjeleníthető tulajdonság",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Írja be a kereséshez...",
     // [Auto-translated] "No results found"
@@ -751,6 +765,14 @@ export var huStrings = {
       // [Auto-translated] "Expression"
       expression: "Kifejezés"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Kifejezés"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Kifejezés"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -868,8 +890,8 @@ export var huStrings = {
     inherit: "Örököl",
     // "Apply"
     apply: "Alkalmaz",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "Rendben",
     // [Auto-translated] "Save"
     save: "Megment",
     // [Auto-translated] "Clear"
@@ -1032,7 +1054,7 @@ export var huStrings = {
     columnEdit: "Oszlop szerkesztése: {0}",
     // "Edit item: {0}"
     itemEdit: "Elem szerkesztése: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Útvonal",
@@ -1098,6 +1120,8 @@ export var huStrings = {
     choicesOrder: "Válassza ki a lehetőséget rendezését",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Egyéni választások engedélyezése",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "\"Egyedi választás létrehozása\" parancs szöveg",
     // "Visible"
     visible: "Látható?",
     // "Required"
@@ -1126,6 +1150,8 @@ export var huStrings = {
     storeDataAsText: "Az állomány tartalmát tárolja a JSON-ben, szövegként",
     // "Maximum file size (in bytes)"
     maxSize: "Maximális állományméret byte-ban",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maximális fájlszám",
     // "Row count"
     rowCount: "Sorok száma",
     // "Columns layout"
@@ -1317,10 +1343,10 @@ export var huStrings = {
     // "Regular expression"
     regex: "Reguláris kifejezés",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Érvényesítési üzenet",
-      // [Auto-translated] "Validation expression"
-      expression: "Érvényesítési kifejezés",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Értesítési üzenet értelen bemenethez",
+      // [Auto-translated] "Valid when"
+      expression: "Érvényes, amikor",
       // [Auto-translated] "Notification type"
       notificationType: "Értesítés típusa",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1426,10 @@ export var huStrings = {
     allowMultiple: "Több fájl feltöltésének engedélyezése",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "A feltöltött képek előnézete",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Elfogadott fájltípusok",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Elfogadott fájlkategóriák",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "További fájlkiterjesztések",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Várja meg, amíg a feltöltés befejeződik",
     // [Auto-translated] "Confirm file deletion"
@@ -1474,6 +1502,66 @@ export var huStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Elemleírás formátuma"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "Kép URL",
+      // [Auto-translated] "Areas"
+      areas: "Területek",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Engedélyezd a többszöri választást",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Értékérték tulajdonság neve",
+      // [Auto-translated] "Shape"
+      shape: "Forma",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Alapjárati töltő szín",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Alapjárati vonalszín",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Alapjárati vonalszélesség",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Lebegő kitöltés színe",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Lebegő vonal színe",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Lebegő vonal szélessége",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Kiválasztott töltőszín",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Kiválasztott vonalszín",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Kiválasztott vonalszélesség",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maximális kiválasztott területek",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimum kiválasztott területek"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Érték",
+      // [Auto-translated] "Shape"
+      shape: "Forma",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordináták",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Alapjárati töltő szín",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Alapjárati vonalszín",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Alapjárati vonalszélesség",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Lebegő kitöltés színe",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Lebegő vonal színe",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Lebegő vonal szélessége",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Kiválasztott töltőszín",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Kiválasztott vonalszín",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Kiválasztott vonalszélesség"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Kép magassága",
@@ -1504,6 +1592,8 @@ export var huStrings = {
     minErrorText: "\"Az érték a minimális érték alatt van\" hibaüzenet",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "\"Az érték meghaladja a maximumot\" hibaüzenet",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"Az érték nem egyezik lépésmérettel\" hibaüzenet",
     // "\"Empty comment\" error message"
     otherErrorText: "\"Üres megjegyzés\" hibaüzenet",
     // "Error message for duplicate responses"
@@ -2051,8 +2141,8 @@ export var huStrings = {
       range: "Tartomány",
       // [Auto-translated] "Phone Number"
       tel: "Telefonszám",
-      // "Text"
-      text: "Text",
+      // [Auto-translated] "Text"
+      text: "Szöveg",
       // [Auto-translated] "Time"
       time: "Idő",
       // [Auto-translated] "URL"
@@ -2081,6 +2171,20 @@ export var huStrings = {
       warning: "Figyelmeztetés",
       // [Auto-translated] "Informational"
       info: "Információs"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Képek",
+      // [Auto-translated] "Videos"
+      video: "Videók",
+      // [Auto-translated] "Audio"
+      audio: "Hang",
+      // [Auto-translated] "Documents"
+      document: "Dokumentumok",
+      // [Auto-translated] "Archives"
+      archive: "Archívumok",
+      // [Auto-translated] "Custom"
+      custom: "Egyedi"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2495,6 +2599,8 @@ export var huStrings = {
     notcontains: "nem tartalmazza",
     // [Auto-translated] "Any of"
     anyof: "Bármelyike",
+    // [Auto-translated] "None of"
+    noneof: "Egyik sem",
     // [Auto-translated] "All of"
     allof: "Az összes",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var huStrings = {
     loadFromServer: "Kérdőív JSON betöltése a szerverről",
     // "Scripts and styles"
     titleScript: "Szkriptek és stíluslapok",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3088,8 +3194,10 @@ export var huStrings = {
     storeOthersAsComment: "Válassza ezt a lehetőséget, ha az \"Egyéb\" beállítás értékét külön tulajdonságként szeretné tárolni a felmérés eredményeiben.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Használja {0} a tényleges érték helyőrzőjeként.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "További információt az [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribútum leírásában talál.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Válaszd a \"Custom\" opciót, hogy saját fájlbővítményeket adj hozzá az előre meghatározott kategóriák fölé.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Írj be fájlkiterjesztéseket, amelyeket vesszővel választottak el (pl. .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Többoszlopos elrendezésben rendezi a választási lehetőségeket. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg. Csak azokra az oszlopokra vonatkozik, amelyeknél a \"Cellabevitel típusa\" beállítása Választógomb-csoport vagy Jelölőnégyzetek.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3507,6 +3615,18 @@ export var huStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontraszt"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Alap",
+      // [Auto-translated] "Advanced"
+      advanced: "Haladó",
+      // [Auto-translated] "Expert"
+      expert: "Szakértő"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Előbeállítás alkalmazása"
   }
 };
 setupLocale({ localeCode: "hu", strings: huStrings });

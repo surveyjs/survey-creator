@@ -238,6 +238,18 @@ export var traditionalChineseTranslation = {
     options: "選項",
     // "Generate Valid JSON"
     generateValidJSON: "生成 JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "未知功能：「{0}」。",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "未知功能：「{0}」。",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "未知變數：「{0}」。",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "未知變數：「{0}」。",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "語法錯誤。",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "語意錯誤。",
     // "Generate Readable JSON"
     generateReadableJSON: "生成易讀的 JSON",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var traditionalChineseTranslation = {
     toolboxFilteredTextPlaceholder: "鍵入以搜尋...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "未找到結果",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "沒有物件可顯示",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
     // [Auto-translated] "No results found"
@@ -752,6 +766,14 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Expression"
       expression: "表達"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "表達方式"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "表達方式"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -1033,8 +1055,8 @@ export var traditionalChineseTranslation = {
     columnEdit: "編輯列: {0}",
     // "Edit item: {0}"
     itemEdit: "編輯選項: {0}",
-    // "URL"
-    url: "URL",
+    // [Auto-translated] "URL"
+    url: "網址",
     // "Path to data"
     path: "Path",
     choicesbyurl: {
@@ -1099,6 +1121,8 @@ export var traditionalChineseTranslation = {
     choicesOrder: "設置選項順序",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "允許自訂選項",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "「建立自訂選擇」指令文字",
     // "Visible"
     visible: "是否可見?",
     // "Required"
@@ -1127,6 +1151,8 @@ export var traditionalChineseTranslation = {
     storeDataAsText: "以 JSON 文本方式存儲文件",
     // "Maximum file size (in bytes)"
     maxSize: "文件最大尺寸 (Bytes)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "最大檔案數量",
     // "Row count"
     rowCount: "默認行數",
     // [Auto-translated] "Columns layout"
@@ -1318,10 +1344,10 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "Regular expression"
     regex: "正則表達式",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "驗證訊息",
-      // [Auto-translated] "Validation expression"
-      expression: "驗證表達式",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "無效輸入通知訊息",
+      // [Auto-translated] "Valid when"
+      expression: "當",
       // [Auto-translated] "Notification type"
       notificationType: "通知類型",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1401,8 +1427,10 @@ export var traditionalChineseTranslation = {
     allowMultiple: "啟用多個檔上傳",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "預覽上傳的圖片",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "接受的文件類型",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "可接受的檔案類別",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "額外檔案副檔名",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "等待上傳完成",
     // [Auto-translated] "Confirm file deletion"
@@ -1475,6 +1503,66 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "工具提示格式"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "圖片網址",
+      // [Auto-translated] "Areas"
+      areas: "區域",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "允許多重選擇",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "價值財產名稱",
+      // [Auto-translated] "Shape"
+      shape: "形狀",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "閒置填充顏色",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "閒置筆劃顏色",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "怠速行程寬度",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "滑鼠填充顏色",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "懸浮筆劃顏色",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "懸浮筆劃寬度",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "選擇的填充色",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "選擇筆觸顏色",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "選擇筆劃寬度",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "最大選取區域",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "最小選定區域"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "價值",
+      // [Auto-translated] "Shape"
+      shape: "形狀",
+      // [Auto-translated] "Coordinates"
+      coords: "座標",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "閒置填充顏色",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "閒置筆劃顏色",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "怠速行程寬度",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "滑鼠填充顏色",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "懸浮筆劃顏色",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "懸浮筆劃寬度",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "選擇的填充色",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "選擇筆觸顏色",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "選擇筆劃寬度"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "圖像高度",
@@ -1505,6 +1593,8 @@ export var traditionalChineseTranslation = {
     minErrorText: "“值低於最小值”錯誤消息",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "“值超過最大值”錯誤消息",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "「值步長不符」錯誤訊息",
     // "\"Empty comment\" error message"
     otherErrorText: "“空評論”錯誤消息",
     // "Error message for duplicate responses"
@@ -2083,6 +2173,20 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Informational"
       info: "資訊"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "圖片",
+      // [Auto-translated] "Videos"
+      video: "影片",
+      // [Auto-translated] "Audio"
+      audio: "音效",
+      // [Auto-translated] "Documents"
+      document: "文件",
+      // [Auto-translated] "Archives"
+      archive: "檔案館",
+      // [Auto-translated] "Custom"
+      custom: "習俗"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "全名",
@@ -2496,6 +2600,8 @@ export var traditionalChineseTranslation = {
     notcontains: "不包含",
     // [Auto-translated] "Any of"
     anyof: "任何",
+    // [Auto-translated] "None of"
+    noneof: "一個都不",
     // [Auto-translated] "All of"
     allof: "全部",
     // "Greater than"
@@ -2549,9 +2655,9 @@ export var traditionalChineseTranslation = {
     loadFromServer: "從服務器加載問卷 JSON 數據",
     // "Scripts and styles"
     titleScript: "腳本和樣式",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2570,8 +2676,8 @@ export var traditionalChineseTranslation = {
   validators: {
     // "Answer count"
     answercountvalidator: "數量檢查",
-    // "Email"
-    emailvalidator: "Email",
+    // [Auto-translated] "Email"
+    emailvalidator: "電子郵件",
     // [Auto-translated] "Expression"
     expressionvalidator: "表達",
     // "Number"
@@ -3089,8 +3195,10 @@ export var traditionalChineseTranslation = {
     storeOthersAsComment: "選擇此選項可將「其他」選項值作為單獨的屬性存儲在調查結果中。",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "使用 {0} 作為實際值的佔位元。",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "有關詳細資訊，請參閱 [accept]（https://www.w3schools.com/tags/att_input_accept.asp） 屬性說明。",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "選擇「自訂」，在預設分類上新增你自己的檔案副檔名。",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "請輸入以逗號分隔的檔案副檔名（例如 .csv、.xml）。",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "在多列佈局中排列選擇選項。設置為 0 時，選項將顯示在一行中。僅適用於將「儲存格輸入類型」設定為單選按鈕組或複選框的列。",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3508,6 +3616,18 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "反差"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "基本版",
+      // [Auto-translated] "Advanced"
+      advanced: "進階",
+      // [Auto-translated] "Expert"
+      expert: "專家"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "已套用預設"
   }
 };
 

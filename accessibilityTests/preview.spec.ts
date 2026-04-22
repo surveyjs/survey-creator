@@ -39,3 +39,4 @@ test.describe("preview a11y", () => {
     await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
 });
+

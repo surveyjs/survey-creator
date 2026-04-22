@@ -29,3 +29,4 @@ test.describe("translation a11y", () => {
     await checkA11y(page, ["#survey-creator", ".svc-creator"], { axeOptions });
   });
 });
+

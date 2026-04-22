@@ -7,7 +7,7 @@ export var slStrings = {
     edit: "Uredi",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Glej in se nauči, kako ustvariti ankete.",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Prosim, postavite vprašanje tukaj iz Orodjarne.",
@@ -63,17 +63,17 @@ export var slStrings = {
     tagbox: "Spustni meni za več izbir",
     // "File Upload"
     file: "Nalaganje datoteke",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "Matrika z eno izbiro",
-    // "Multi-Select Matrix"
-    matrixdropdown: "Multi-Select Matrix",
+    // [Auto-translated] "Multi-Select Matrix"
+    matrixdropdown: "Večkratna izbira matrike",
     // "Dynamic Matrix"
     matrixdynamic: "Dinamična matrica",
     // "Multiple Textboxes"
     multipletext: "Več besedilnih polj",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Dinamična plošča",
@@ -105,8 +105,8 @@ export var slStrings = {
     containers: "Zabojniki",
     // "Matrix Questions"
     matrix: "Matrična vprašanja",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Razno"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -144,7 +144,7 @@ export var slStrings = {
     surveyTypeName: "Anketa",
     // "Page"
     pageTypeName: "Stran",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panelTypeName: "Panel",
     // "Question"
     questionTypeName: "vprašanje",
@@ -166,8 +166,8 @@ export var slStrings = {
     newPageName: "stran",
     // "question"
     newQuestionName: "vprašanje",
-    // "panel"
-    newPanelName: "panel",
+    // [Auto-translated] "panel"
+    newPanelName: "Panel",
     // "text"
     newTextItemName: "tekst",
     // "Default"
@@ -208,8 +208,8 @@ export var slStrings = {
     collapseTooltip: "Strni",
     // "Expand All"
     expandAllTooltip: "Razširi vse",
-    // "Collapse All"
-    collapseAllTooltip: "Collapse All",
+    // [Auto-translated] "Collapse All"
+    collapseAllTooltip: "Zruši vse",
     // "Zoom In"
     zoomInTooltip: "Povečaj",
     // "Zoom to 100%"
@@ -238,6 +238,18 @@ export var slStrings = {
     options: "Možnosti",
     // "Generate Valid JSON"
     generateValidJSON: "Ustvari veljaven JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Neznana funkcija: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Neznane funkcije: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Neznana spremenljivka: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Neznane spremenljivke: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Sintaktična napaka.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Semantična napaka.",
     // "Generate Readable JSON"
     generateReadableJSON: "Ustvari berljiv JSON",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var slStrings = {
     toolboxFilteredTextPlaceholder: "Vnesite za iskanje...",
     // "No results found"
     toolboxNoResultsFound: "Ni najdenih rezultatov",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Brez lastnosti za prikaz",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Vnesite za iskanje...",
     // "No results found"
@@ -751,6 +765,14 @@ export var slStrings = {
       // "Expression"
       expression: "Izraz"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Izražanje"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Izražanje"
+    },
     // survey templates
     survey: {
       // "Survey title"
@@ -1032,7 +1054,7 @@ export var slStrings = {
     columnEdit: "Uredi stolpec: {0}",
     // "Edit item: {0}"
     itemEdit: "Uredi element: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Pot do podatkov",
@@ -1098,6 +1120,8 @@ export var slStrings = {
     choicesOrder: "Vrsta izbire",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Omogočanje izbir po meri",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Besedilo ukaza \"Create Custom Choice\"",
     // "Visible"
     visible: "Vidno",
     // "Required"
@@ -1126,6 +1150,8 @@ export var slStrings = {
     storeDataAsText: "Shrani vsebino datoteke v JSON rezultat kot besedilo",
     // "Maximum file size (in bytes)"
     maxSize: "Maksimalna velikost datoteke (v bajtih)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Največje število datotek",
     // "Row count"
     rowCount: "Število vrstic",
     // "Columns layout"
@@ -1317,10 +1343,10 @@ export var slStrings = {
     // "Regular expression"
     regex: "Regularni izraz",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Potrditveno sporočilo",
-      // [Auto-translated] "Validation expression"
-      expression: "Validacijski izraz",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Obvestilo o neveljavnom vnosu",
+      // [Auto-translated] "Valid when"
+      expression: "Velja, ko",
       // [Auto-translated] "Notification type"
       notificationType: "Vrsta obvestila",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,6 +1426,8 @@ export var slStrings = {
     allowMultiple: "Omogoči večkratno nalaganje datotek",
     // "Preview uploaded images"
     allowImagesPreview: "Ogled prenesenih slik",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Sprejete kategorije datotek",
     // "Accepted file types"
     acceptedTypes: "Dovoljeni tipi datotek",
     // "Wait for upload to complete"
@@ -1474,6 +1502,66 @@ export var slStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Oblika opisa orodja"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL slike",
+      // [Auto-translated] "Areas"
+      areas: "Območja",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Dovolite več izbir",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Ime vrednostne nepremičnine",
+      // [Auto-translated] "Shape"
+      shape: "Oblika",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Barva za praznovanje",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Barva prostega hoda",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Širina hoda prostega teka",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Lebdeča polnilna barva",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Barva poteze z miško",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Širina poteze z mišjem",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Izbrana barva polnila",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Izbrana barva potez",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Izbrana širina poteze",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Največ izbranih območij",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimalno izbrana območja"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Vrednost",
+      // [Auto-translated] "Shape"
+      shape: "Oblika",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordinate",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Barva za praznovanje",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Barva prostega hoda",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Širina hoda prostega teka",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Lebdeča polnilna barva",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Barva poteze z miško",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Širina poteze z mišjem",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Izbrana barva polnila",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Izbrana barva potez",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Izbrana širina poteze"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Višina slike",
@@ -1504,6 +1592,8 @@ export var slStrings = {
     minErrorText: "Sporočilo o napaki »Vrednost je pod minimalno vrednostjo«",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Sporočilo o napaki »Vrednost presega največjo vrednost«",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Sporočilo o napaki \"Vrednost ne ustreza velikosti koraka\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Sporočilo o napaki »Prazni komentar«",
     // "Error message for duplicate responses"
@@ -1996,7 +2086,7 @@ export var slStrings = {
     text: "besedilo",
     // "time"
     time: "čas",
-    // "url"
+    // [Auto-translated] "url"
     url: "url",
     // "week"
     week: "teden",
@@ -2051,11 +2141,11 @@ export var slStrings = {
       range: "Rozsah",
       // "Phone Number"
       tel: "Telefonní číslo",
-      // "Text"
-      text: "Text",
+      // [Auto-translated] "Text"
+      text: "Besedilo",
       // "Time"
       time: "Čas",
-      // "URL"
+      // [Auto-translated] "URL"
       url: "URL",
       // "Week"
       week: "Týden"
@@ -2082,11 +2172,25 @@ export var slStrings = {
       // [Auto-translated] "Informational"
       info: "Informativne"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Slike",
+      // [Auto-translated] "Videos"
+      video: "Videi",
+      // [Auto-translated] "Audio"
+      audio: "Zvok",
+      // [Auto-translated] "Documents"
+      document: "Dokumenti",
+      // [Auto-translated] "Archives"
+      archive: "Arhiv",
+      // [Auto-translated] "Custom"
+      custom: "Običaj"
+    },
     autocomplete: {
       // "Full Name"
       name: "Celé jméno",
-      // "Prefix"
-      "honorific-prefix": "Prefix",
+      // [Auto-translated] "Prefix"
+      "honorific-prefix": "Predpona",
       // "First Name"
       "given-name": "Křestní jméno",
       // "Middle Name"
@@ -2293,9 +2397,9 @@ export var slStrings = {
     contentMode: {
       // "Image"
       image: "Obrázek",
-      // "Video"
+      // [Auto-translated] "Video"
       video: "Video",
-      // "YouTube"
+      // [Auto-translated] "YouTube"
       youtube: "YouTube"
     },
     displayMode: {
@@ -2365,8 +2469,8 @@ export var slStrings = {
       vertical: "Iznad opcija"
     },
     displayStyle: {
-      // "Decimal"
-      decimal: "Decimal",
+      // [Auto-translated] "Decimal"
+      decimal: "Decimalno",
       // "Currency"
       currency: "Valuta",
       // "Percentage"
@@ -2375,8 +2479,8 @@ export var slStrings = {
       date: "Datum"
     },
     totalDisplayStyle: {
-      // "Decimal"
-      decimal: "Decimal",
+      // [Auto-translated] "Decimal"
+      decimal: "Decimalno",
       // "Currency"
       currency: "Valuta",
       // "Percentage"
@@ -2410,9 +2514,9 @@ export var slStrings = {
     sum: "Vsota",
     // "Count"
     count: "Štetje",
-    // "Min"
+    // [Auto-translated] "Min"
     min: "Min",
-    // "Max"
+    // [Auto-translated] "Max"
     max: "Max",
     // "Avg"
     avg: "Povprečje",
@@ -2495,6 +2599,8 @@ export var slStrings = {
     notcontains: "Ne vsebuje",
     // "Any of"
     anyof: "Karkoli od",
+    // [Auto-translated] "None of"
+    noneof: "Nič od",
     // "All of"
     allof: "Vse od",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var slStrings = {
     loadFromServer: "Naloži Survey JSON s strežnika",
     // "Scripts and styles"
     titleScript: "Skripte in slogi",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2575,7 +2681,7 @@ export var slStrings = {
     expressionvalidator: "Izraz",
     // "Number"
     numericvalidator: "Število",
-    // "Regex"
+    // [Auto-translated] "Regex"
     regexvalidator: "Regex",
     // "Text"
     textvalidator: "Besedilo"
@@ -3088,6 +3194,8 @@ export var slStrings = {
     storeOthersAsComment: "Izberite, da shranite vrednost možnosti \"Drugo\" kot ločeno lastnost v rezultatih ankete",
     // "Use {0} as a placeholder for the actual value."
     format: "Uporabite {0} kot nadomestni znak za dejansko vrednost",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Izberite \"Custom\", da dodate svoje lastne končnice datotek na vrh vnaprej določenih kategorij.",
     // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Poglejte opis atributa accept za več informacij",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
@@ -3267,9 +3375,9 @@ export var slStrings = {
     inputFieldComponent: "Komponenta vhodnega polja", // Auto-generated string
     // "Item component"
     itemComponent: "Komponenta predmeta", // Auto-generated string
-    // "Min"
+    // [Auto-translated] "Min"
     min: "Min", // Auto-generated string
-    // "Max"
+    // [Auto-translated] "Max"
     max: "Max", // Auto-generated string
     // "Min value expression"
     minValueExpression: "Izraz najmanjše vrednosti", // Auto-generated string
@@ -3429,9 +3537,9 @@ export var slStrings = {
     size: "Velikost",
     // "Opacity"
     opacity: "Prosojnost",
-    // "X"
+    // [Auto-translated] "X"
     boxShadowX: "X",
-    // "Y"
+    // [Auto-translated] "Y"
     boxShadowY: "Y",
     // "Add Shadow Effect"
     boxShadowAddRule: "Dodaj učinek sence",
@@ -3460,7 +3568,7 @@ export var slStrings = {
       layered: "Slojevit",
       // "Solid"
       solid: "Trd",
-      // "3D"
+      // [Auto-translated] "3D"
       threedimensional: "3D",
       // "Contrast"
       contrast: "Kontrast"
@@ -3507,6 +3615,18 @@ export var slStrings = {
       // "Contrast"
       "default-contrast": "Kontrast"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Osnovno",
+      // [Auto-translated] "Advanced"
+      advanced: "Napredni",
+      // [Auto-translated] "Expert"
+      expert: "Strokovnjak"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Uporabljena prednastavitev"
   }
 };
 

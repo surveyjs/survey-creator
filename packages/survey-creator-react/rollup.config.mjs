@@ -63,8 +63,8 @@ const buildPlatformJson = {
     },
     "./ui-preset-editor": {
       "types": "./typings/entries/presets.d.ts",
-      "import": "./fesm/ui-preset-editor/index.mjs",
-      "require": "./ui-preset-editor/index.js"
+      "import": "./fesm/ui-preset-editor.mjs",
+      "require": "./ui-preset-editor.js"
     }
   },
   peerDependencies: {
@@ -118,6 +118,7 @@ export default async (options) => {
       globalName: "SurveyCreator",
       emitMinified: process.env.emitMinified === "true",
       version: pkg.version,
+      noEmitOnError: !options.watch,
     }),
     createEsmConfig({
       version: pkg.version,
@@ -130,7 +131,8 @@ export default async (options) => {
         "survey-core",
         "survey-creator-core",
         "survey-react-ui"
-      ]
+      ],
+      noEmitOnError: !options.watch,
     })
   ];
 };

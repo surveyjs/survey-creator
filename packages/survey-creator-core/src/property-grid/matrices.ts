@@ -8,7 +8,7 @@ import {
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
-import { getNextItemText, getNextValue, getQuestionFromObj } from "../utils/creator-utils";
+import { getNextColumnTitle, getNextItemText, getNextValue, getQuestionFromObj } from "../utils/creator-utils";
 import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
   IPropertyEditorSetup,
@@ -194,6 +194,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     const arr = obj[prop.name];
     if (Serializer.isDescendantOf(item.getType(), "itemvalue")) {
       item.text = getNextItemText(arr);
+    }
+    if (Serializer.isDescendantOf(item.getType(), "matrixdropdowncolumn")) {
+      item.title = getNextColumnTitle(arr);
     }
     arr.push(item);
     if (arr != matrix.value) {
@@ -930,6 +933,10 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
   protected getChoices(obj: Base): Array<any> {
     return this.getAvailableTriggers().map((tr) => { return { value: tr.name, text: editorLocalization.getTriggerName(tr.name) }; });
+  }
+  onUpdateQuestionCssClasses(obj: Base, options: any): void {
+    super.onUpdateQuestionCssClasses(obj, options);
+    options.cssClasses.root += " spg-table--triggers";
   }
 }
 

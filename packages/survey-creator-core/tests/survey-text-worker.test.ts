@@ -1,4 +1,3 @@
-import { clear } from "console";
 import { SurveyTextWorker } from "../src/textWorker";
 import { ILoadFromJSONOptions } from "survey-core";
 

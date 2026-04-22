@@ -7,7 +7,7 @@ export var hebrewStrings = {
     edit: "עריכה",
     // "Watch and learn how to create surveys"
     externalHelpLink: "צפו ולמדו כיצד ליצור סקרים",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "אנא הזינו שאלה מארגז הכלים כאן.",
@@ -63,7 +63,7 @@ export var hebrewStrings = {
     tagbox: "תפריט נפתח מרובה בחירה",
     // "File Upload"
     file: "העלאת קובץ",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "מטריצת בחירה יחידה",
@@ -238,6 +238,18 @@ export var hebrewStrings = {
     options: "אפשרויות",
     // "Generate Valid JSON"
     generateValidJSON: "צור JSON תקין",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "פונקציה לא ידועה: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "פונקציות לא ידועות: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "משתנה לא ידוע: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "משתנים לא ידועים: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "שגיאת תחביר.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "טעות סמנטית.",
     // "Generate Readable JSON"
     generateReadableJSON: "צור JSON קריא",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var hebrewStrings = {
     toolboxFilteredTextPlaceholder: "הקלד כדי לחפש...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "לא נמצאו תוצאות",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "אין תכונות להצגה",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "הקלד כדי לחפש...",
     // [Auto-translated] "No results found"
@@ -751,6 +765,14 @@ export var hebrewStrings = {
       // [Auto-translated] "Expression"
       expression: "ביטוי"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "ביטוי"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "ביטוי"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -1098,6 +1120,8 @@ export var hebrewStrings = {
     choicesOrder: "סדר מיון של ברירות הבחירה",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "מתן אפשרות לבחירות מותאמות אישית",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "טקסט הפקודה \"Create Custom Choice\"",
     // "Visible"
     visible: "נראה",
     // "Required"
@@ -1126,6 +1150,8 @@ export var hebrewStrings = {
     storeDataAsText: "אחסן תוכן קובץ בתוצאת JSON כטקסט",
     // "Maximum file size (in bytes)"
     maxSize: "גודל הקובץ המרבי (בבתים)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "מספר מקסימלי של קבצים",
     // "Row count"
     rowCount: "כמות השורות",
     // "Columns layout"
@@ -1317,10 +1343,10 @@ export var hebrewStrings = {
     // "Regular expression"
     regex: "ביטוי רגולרי",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "הודעת אימות",
-      // [Auto-translated] "Validation expression"
-      expression: "ביטוי אימות",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "הודעת התראה על קלט שגוי",
+      // [Auto-translated] "Valid when"
+      expression: "תקף כאשר",
       // [Auto-translated] "Notification type"
       notificationType: "סוג הודעה",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,6 +1426,8 @@ export var hebrewStrings = {
     allowMultiple: "אפשר קבצים מרובים",
     // "Preview uploaded images"
     allowImagesPreview: "תצוגה מקדימה של תמונות",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "קטגוריות קבצים שהתקבלו",
     // "Accepted file types"
     acceptedTypes: "סוגי קבצים מקובלים",
     // "Wait for upload to complete"
@@ -1474,6 +1502,66 @@ export var hebrewStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "תבנית תיאור כלי"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "כתובת התמונה",
+      // [Auto-translated] "Areas"
+      areas: "אזורים",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "אפשר בחירות מרובות",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "שם נכס ערך",
+      // [Auto-translated] "Shape"
+      shape: "צורה",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "צבע מילוי סרק",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "צבע קו סרק",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "רוחב מהלך סרק",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "צבע מילוי ריחוף",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "צבע קו ריחוף",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "רוחב מהלך ריחוף",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "צבע מילוי נבחר",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "צבע קו נבחר",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "רוחב קו נבחר",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "אזורים נבחרים מקסימום",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "אזורים נבחרים מינימום"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "ערך",
+      // [Auto-translated] "Shape"
+      shape: "צורה",
+      // [Auto-translated] "Coordinates"
+      coords: "קואורדינטות",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "צבע מילוי סרק",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "צבע קו סרק",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "רוחב מהלך סרק",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "צבע מילוי ריחוף",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "צבע קו ריחוף",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "רוחב מהלך ריחוף",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "צבע מילוי נבחר",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "צבע קו נבחר",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "רוחב קו נבחר"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "גובה תמונה",
@@ -1504,6 +1592,8 @@ export var hebrewStrings = {
     minErrorText: "הודעת שגיאה: 'הערך נמוך מהמינימום'",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "הודעת שגיאה: 'הערך חורג מהמקסימום'",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "הודעת שגיאה \"הערך אינו תואם את גודל הצעד\"",
     // "\"Empty comment\" error message"
     otherErrorText: "הודעת שגיאה: 'תגובה ריקה'",
     // "Error message for duplicate responses"
@@ -2082,6 +2172,20 @@ export var hebrewStrings = {
       // [Auto-translated] "Informational"
       info: "אינפורמטיבי"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "תמונות",
+      // [Auto-translated] "Videos"
+      video: "סרטונים",
+      // [Auto-translated] "Audio"
+      audio: "אודיו",
+      // [Auto-translated] "Documents"
+      document: "מסמכים",
+      // [Auto-translated] "Archives"
+      archive: "ארכיונים",
+      // [Auto-translated] "Custom"
+      custom: "מנהג"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "שם מלא",
@@ -2295,8 +2399,8 @@ export var hebrewStrings = {
       image: "תמונה",
       // "Video"
       video: "וידאו",
-      // "YouTube"
-      youtube: "YouTube"
+      // [Auto-translated] "YouTube"
+      youtube: "יוטיוב"
     },
     displayMode: {
       // "Buttons"
@@ -2495,6 +2599,8 @@ export var hebrewStrings = {
     notcontains: "אינו מכיל",
     // "Any of"
     anyof: "כל אחד מתוך",
+    // [Auto-translated] "None of"
+    noneof: "אף אחד מזה",
     // "All of"
     allof: "כולם מתוך",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var hebrewStrings = {
     loadFromServer: "טען מסגרת JSON מהשרת",
     // "Scripts and styles"
     titleScript: "סקריפטים וסגנונות",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3088,6 +3194,8 @@ export var hebrewStrings = {
     storeOthersAsComment: "בחר כדי לאחסן את ערך האפשרות \"אחר\" כמאפיין נפרד בתוצאות הסקר.",
     // "Use {0} as a placeholder for the actual value."
     format: "השתמש ב-{0} כמציין מקום ריק.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "בחר \"מותאם אישית\" כדי להוסיף סיומות קבצים משלך מעל הקטגוריות המוגדרות מראש.",
     // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "התייחסות ל-[accept](https://www.w3schools.com/tags/att_input_accept.asp) למידע נוסף.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
@@ -3429,9 +3537,9 @@ export var hebrewStrings = {
     size: "גודל",
     // [Auto-translated] "Opacity"
     opacity: "אטימות",
-    // "X"
+    // [Auto-translated] "X"
     boxShadowX: "X",
-    // "Y"
+    // [Auto-translated] "Y"
     boxShadowY: "Y",
     // "Add Shadow Effect"
     boxShadowAddRule: "הוספת אפקט צל",
@@ -3507,6 +3615,18 @@ export var hebrewStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "ניגוד"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "בסיסי",
+      // [Auto-translated] "Advanced"
+      advanced: "מתקדם",
+      // [Auto-translated] "Expert"
+      expert: "מומחה"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "פריסט מוחל"
   }
 };
 

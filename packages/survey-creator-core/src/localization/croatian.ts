@@ -7,7 +7,7 @@ export var hrStrings = {
     edit: "Uređivanje",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Gledajte i saznajte kako stvoriti ankete",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Molimo ispustite pitanje ovdje iz Toolbox.",
@@ -238,6 +238,18 @@ export var hrStrings = {
     options: "Mogućnosti",
     // "Generate Valid JSON"
     generateValidJSON: "Generiranje valjanog JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Nepoznata funkcija: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Nepoznate funkcije: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Nepoznata varijabla: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Nepoznate varijable: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Sintaksna pogreška.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Semantička pogreška.",
     // "Generate Readable JSON"
     generateReadableJSON: "Generiranje čitljivog JSON",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var hrStrings = {
     toolboxFilteredTextPlaceholder: "Upišite za pretraživanje...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Nisu pronađeni rezultati",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Nema svojstava za prikaz",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
     // [Auto-translated] "No results found"
@@ -751,6 +765,14 @@ export var hrStrings = {
       // [Auto-translated] "Expression"
       expression: "Izraz"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Izražavanje"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Izražavanje"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -868,8 +890,8 @@ export var hrStrings = {
     inherit: "Naslijediti",
     // "Apply"
     apply: "Primijeniti",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "U redu",
     // "Save"
     save: "Spremiti",
     // [Auto-translated] "Clear"
@@ -926,7 +948,7 @@ export var hrStrings = {
     showChoices: "Pokažite izbore",
     // "Move"
     move: "Premjestiti",
-    // "<empty>"
+    // [Auto-translated] "<empty>"
     empty: "<empty>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Vrijednost je prazna",
@@ -1098,6 +1120,8 @@ export var hrStrings = {
     choicesOrder: "Odaberite redoslijed izbora",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Dopusti prilagođene izbore",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Tekst naredbe \"Create Custom Choice\"",
     // "Visible"
     visible: "Je li vidljivo?",
     // "Required"
@@ -1126,6 +1150,8 @@ export var hrStrings = {
     storeDataAsText: "Pohranite sadržaj datoteke u rezultat JSON kao tekst",
     // "Maximum file size (in bytes)"
     maxSize: "Maksimalna veličina datoteke u bytes",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maksimalan broj datoteka",
     // "Row count"
     rowCount: "Broj redaka",
     // "Columns layout"
@@ -1317,10 +1343,10 @@ export var hrStrings = {
     // "Regular expression"
     regex: "Redoviti izraz",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Poruka o provjeri valjanosti",
-      // [Auto-translated] "Validation expression"
-      expression: "Izraz za provjeru valjanosti",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Obavijest o nevažećem unosu",
+      // [Auto-translated] "Valid when"
+      expression: "Vrijedi kada",
       // [Auto-translated] "Notification type"
       notificationType: "Vrsta obavijesti",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1426,10 @@ export var hrStrings = {
     allowMultiple: "Omogućivanje prijenosa više datoteka",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Pregled prenesenih slika",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Prihvaćene vrste datoteka",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Prihvaćene kategorije datoteka",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Dodatne ekstenzije datoteka",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Pričekajte da se prijenos dovrši",
     // [Auto-translated] "Confirm file deletion"
@@ -1474,6 +1502,66 @@ export var hrStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Format opisa alata"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL slike",
+      // [Auto-translated] "Areas"
+      areas: "Područja",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Dopustite višestruke odabire",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Naziv vrijednosne nekretnine",
+      // [Auto-translated] "Shape"
+      shape: "Oblik",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Boja za popunu u mirovanju",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Boja praznog hoda",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Širina hoda u praznom hodu",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Boja za popunjavanje mišem",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Boja poteza lebdenja",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Širina pokreta lebdenja",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Odabrana boja za popunu",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Odabrana boja poteza",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Odabrana širina poteza",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maksimalno odabrana područja",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimalno odabrana područja"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Vrijednost",
+      // [Auto-translated] "Shape"
+      shape: "Oblik",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordinate",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Boja za popunu u mirovanju",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Boja praznog hoda",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Širina hoda u praznom hodu",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Boja za popunjavanje mišem",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Boja poteza lebdenja",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Širina pokreta lebdenja",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Odabrana boja za popunu",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Odabrana boja poteza",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Odabrana širina poteza"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Visina slike",
@@ -1504,6 +1592,8 @@ export var hrStrings = {
     minErrorText: "Poruka o pogrešci \"Vrijednost je ispod minimuma\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Poruka o pogrešci \"Vrijednost premašuje maksimum\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Poruka o pogrešci \"Vrijednost ne odgovara veličini koraka\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Poruka o pogrešci \"Prazan komentar\"",
     // "Error message for duplicate responses"
@@ -2082,6 +2172,20 @@ export var hrStrings = {
       // [Auto-translated] "Informational"
       info: "Informativan"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Slike",
+      // [Auto-translated] "Videos"
+      video: "Videozapisi",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Dokumenti",
+      // [Auto-translated] "Archives"
+      archive: "Arhiva",
+      // [Auto-translated] "Custom"
+      custom: "Običaj"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Puno ime i prezime",
@@ -2495,6 +2599,8 @@ export var hrStrings = {
     notcontains: "not contains",
     // "Any of"
     anyof: "any of",
+    // [Auto-translated] "None of"
+    noneof: "Ništa od",
     // "All of"
     allof: "all of",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var hrStrings = {
     loadFromServer: "Učitavanje Survey JSON s poslužitelja",
     // "Scripts and styles"
     titleScript: "Skripte i stilovi",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3088,8 +3194,10 @@ export var hrStrings = {
     storeOthersAsComment: "Odaberite za spremanje vrijednosti mogućnosti \"Ostalo\" kao zasebnog svojstva u rezultatima upitnika.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Koristite {0} kao rezervirano mjesto za stvarnu vrijednost.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Dodatne informacije potražite u opisu atributa [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Odaberite \"Custom\" kako biste dodali vlastite ekstenzije datoteka na vrh unaprijed definiranih kategorija.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Unesite ekstenzije datoteka odvojene zarezima (npr. .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Primjenjuje se samo na stupce s opcijom \"Vrsta unosa ćelije\" postavljenom na Grupa izbornih gumba ili Potvrdne okvire.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3164,8 +3272,8 @@ export var hrStrings = {
   // Properties
   p: {
     title: {
-      // "title"
-      name: "title",
+      // [Auto-translated] "title"
+      name: "Naslov",
       // "Leave it empty, if it is the same as 'Name'"
       title: "Ostavite prazno, ako je isto kao 'Name'"
     },
@@ -3507,6 +3615,18 @@ export var hrStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Razlika"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Osnovno",
+      // [Auto-translated] "Advanced"
+      advanced: "Napredno",
+      // [Auto-translated] "Expert"
+      expert: "Stručnjak"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Primijenjen predpostavka"
   }
 };
 setupLocale({ localeCode: "hr", strings: hrStrings });
