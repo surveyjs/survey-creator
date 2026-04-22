@@ -7,7 +7,8 @@ import {
   getTabbedMenuItemByText,
   creatorTabDesignerName,
   creatorTabLogicName,
-  getListItemByText
+  getListItemByText,
+  getVisibleSelectListItemByText
 } from "../helper";
 
 const title = "Logic tab";
@@ -29,8 +30,8 @@ function getBarItemByText(page: Page, text: string): Locator {
 }
 
 async function listItemClick(page:Page, text: string) {
-  await expect(getListItemByText(page, text)).toBeVisible();
-  await getListItemByText(page, text).click();
+  await expect(getVisibleSelectListItemByText(page, text)).toBeVisible();
+  await getVisibleSelectListItemByText(page, text).click();
   await page.waitForTimeout(100);
 }
 
@@ -273,12 +274,12 @@ test.describe(title, () => {
     await expect(tableRulesSelector(page)).toHaveCount(3);
 
     await getBarItemByText(page, "All Questions").click();
-    await listItemClick(page, "q2");
+    await getListItemByText(page, "q2").click();
     await expect(tableRulesSelector(page)).toHaveCount(2);
     await expect(getBarItemByText(page, "q2")).toBeVisible();
 
     await getBarItemByText(page, "All Action Types").click();
-    await listItemClick(page, "Skip to question");
+    await getListItemByText(page, "Skip to question").click();
     await expect(tableRulesSelector(page)).toHaveCount(1);
     await expect(getBarItemByText(page, "Skip to question")).toBeVisible();
 
@@ -546,8 +547,8 @@ test.describe(title, () => {
       ]
     };
 
-    const visibleListItems = page.locator(".svc-list__item").filter({ visible: true });
-    const visibleDisabledListItems = page.locator(".svc-list__item.svc-list__item--disabled").filter({ visible: true });
+    const visibleListItems = page.locator(".sd-selectlist__item").filter({ visible: true });
+    const visibleDisabledListItems = page.locator(".sd-selectlist__item.sd-selectlist__item--disabled").filter({ visible: true });
 
     await setJSON(page, jsonAvailability);
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
@@ -602,7 +603,7 @@ test.describe(title, () => {
         }
       ]
     };
-    const visibleListItems = page.locator(".svc-list__item").filter({ visible: true });
+    const visibleListItems = page.locator(".sd-selectlist__item").filter({ visible: true });
 
     await setJSON(page, jsonAndOr);
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
@@ -728,6 +729,6 @@ test.describe(title, () => {
 
     await logicQuestionSelector(page).first().click();
     await expect(logicQuestionSelector(page).first().locator("..").locator(".sv-popup")).toBeVisible();
-    await expect(logicQuestionSelector(page).first().locator("..").locator(".sv-popup .svc-list__filter")).toBeVisible();
+    await expect(logicQuestionSelector(page).first().locator("..").locator(".sv-popup .sd-selectlist__filter")).toBeVisible();
   });
 });

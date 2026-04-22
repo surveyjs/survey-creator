@@ -8,6 +8,7 @@ import {
   getToolboxItemByText,
   getListItemByText,
   generalGroupName,
+  getVisibleSelectListItemByText,
 } from "../helper";
 
 const title = "Question wrapper";
@@ -373,7 +374,7 @@ test.describe(title + " dropdown collapse", () => {
     await generalTabTitle.click();
     await choicesTabTitle.click();
     await carryForwardEditor.click();
-    await getListItemByText(page, "question1").click();
+    await getVisibleSelectListItemByText(page, "question1").click();
     await expect(page.locator("span").getByText("Copy choices from")).toHaveCount(1);
     await page.locator(".svc-carry-forward-panel").locator(".svc-action-button").getByText("question1").click();
     expect(await getSelectedElementName()).toBe("question1");
