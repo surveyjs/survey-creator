@@ -131,6 +131,12 @@ export function getListItemByText(page: Page, text: string): Locator {
   return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true }).filter({ visible: true });
 }
 
+export function getVisibleSelectListItemByText(page: Page, text: string): Locator {
+  return page.locator(".sv-popup__container .sd-selectlist__item", {
+    has: page.getByText(text, { exact: true })
+  }).filter({ visible: true });
+}
+
 export function getMenuItemByText(page: Page, text: string): Locator {
   return page.getByRole("menuitemradio", { name: text, exact: true });
 }

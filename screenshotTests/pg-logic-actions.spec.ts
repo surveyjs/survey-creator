@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, setJSON, getPropertyGridCategory, getListItemByText, generalGroupName, logicGroupName, expect } from "./helper";
+import { url, compareScreenshot, test, setJSON, getPropertyGridCategory, getListItemByText, generalGroupName, logicGroupName, expect, getVisibleSelectListItemByText } from "./helper";
 
 const title = "Actions in Logic section Screenshot";
 
@@ -66,7 +66,7 @@ test.describe(title, () => {
 
     await sectionContentElement.locator(".sd-action").nth(1).click();
     await page.locator(".sl-dropdown").first().click();
-    await getListItemByText(page, "region").click({ position: { x: 10, y: 20 } });
+    await getVisibleSelectListItemByText(page, "region").click({ position: { x: 10, y: 20 } });
     await page.waitForTimeout(1000);
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");

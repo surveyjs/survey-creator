@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { urlCreatorThemes, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector } from "./helper";
+import { urlCreatorThemes, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector, getVisibleSelectListItemByText } from "./helper";
 
 const title = "Theme settings";
 
@@ -40,15 +40,15 @@ test.describe(title, () => {
     await page.getByRole("combobox", { name: "Theme name" }).focus();
 
     await page.getByRole("combobox", { name: "Theme name" }).click();
-    await getListItemByText(page, "Dark").click();
+    await getVisibleSelectListItemByText(page, "Dark").click();
     await compareScreenshot(page, ".svc-creator", "creator-theme-default-dark.png");
 
     await page.getByRole("combobox", { name: "Theme name" }).click();
-    await getListItemByText(page, "Contrast").click();
+    await getVisibleSelectListItemByText(page, "Contrast").click();
     await compareScreenshot(page, ".svc-creator", "creator-theme-default-contrast.png");
 
     await page.getByRole("combobox", { name: "Theme name" }).click();
-    await getListItemByText(page, "Light").click();
+    await getVisibleSelectListItemByText(page, "Light").click();
     await compareScreenshot(page, ".svc-creator", "creator-theme-default-light.png");
   });
 

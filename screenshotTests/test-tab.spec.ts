@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText } from "./helper";
+import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText, getVisibleSelectListItemByText } from "./helper";
 
 const title = "Test tab Screenshot";
 
@@ -279,7 +279,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.setViewportSize({ width: 800, height: 800 });
     await page.locator('[data-name="nps-score"]').click();
-    await page.locator("li.sd-list__item span", { hasText: "2" }).click();
+    await getVisibleSelectListItemByText(page, "2").click();
     await page.locator('[data-name="nps-score"]').click();
     await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-opened-dropdown.png");
   });

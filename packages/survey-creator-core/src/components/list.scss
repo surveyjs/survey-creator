@@ -1,5 +1,9 @@
 @use "../variables" as *;
 
+.sd-selectlist__item-body {
+  padding-inline-end: var(--sjs-spacing-x550);
+}
+
 .svc-list {
   width: 100%;
   padding: var(--ctr-list-padding-top, var(--sjs-spacing-x1)) var(--ctr-list-padding-right, var(--sjs-spacing-x1))

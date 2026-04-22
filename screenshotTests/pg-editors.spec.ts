@@ -1,5 +1,5 @@
 import { test, expect } from "playwright/test";
-import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody } from "./helper";
+import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, getVisibleSelectListItemByText } from "./helper";
 
 const title = "Property Grid Editors";
 test.describe(title, () => {
@@ -707,7 +707,7 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, inputMaskSettingsGroupName).click();
     await page.locator(".spg-question[data-name='maskType'] .sd-dropdown").click();
-    await getListItemByText(page, "Pattern").click();
+    await getVisibleSelectListItemByText(page, "Pattern").click();
 
     const expandedGroup = page.locator(".spg-root-modern .spg-panel.sd-element--expanded");
     await resetFocusToBody(page);
