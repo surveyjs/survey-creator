@@ -206,10 +206,9 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     this.updateIsNew(model.question, model.item);
   }
 
-  public onFocusOut(event: any): void {
+  public onFocusOut = (event: any) => {
     this.question["_lastActiveItemValueIndex"] = this.question.choices.indexOf(this.item);
-  }
-
+  };
   private findNextElementIndexToRemove(index) {
     let indexToFocus = 0;
     if (this.question.choices.length > 0) {
@@ -228,7 +227,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
       const root = this.creator.rootElement?.getRootNode() || DomDocumentHelper.getDocument();
       if (!(root instanceof Document || root instanceof ShadowRoot)) return;
       const el = root.querySelector("#" + this.question.id);
-      const buttons = el.querySelectorAll(".svc-item-value-controls__remove");
+      const buttons = el.querySelectorAll(".svc-item-value-wrapper:not(.sd-item--leave) .svc-item-value-controls__remove");
       (buttons[index] as HTMLElement)?.focus();
     }, 100
     );
@@ -272,6 +271,10 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         appearance: { size: "x-small", style: "alert", mode: "tertiary" },
         iconSize: "auto",
         title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        onFocus: (isMouse: boolean, event: FocusEvent) => {
+          event.currentTarget.removeEventListener("focusout", this.onFocusOut);
+          event.currentTarget.addEventListener("focusout", this.onFocusOut);
+        },
         action: () => {
           this.remove(this);
         }
