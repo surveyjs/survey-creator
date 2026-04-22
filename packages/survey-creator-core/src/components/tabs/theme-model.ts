@@ -569,7 +569,7 @@ export class ThemeModel extends Base implements ITheme {
       this["editorPanel"] = backgroundCornerRadiusFromCssVariable(
         this.getPropertyByName("editorPanel"),
         json.cssVariables,
-        "--sjs2-color-bg-neutral-secondary",
+        "--sjs2-color-bg-basic-secondary",
         "--sjs2-color-bg-basic-secondary-dim",
         this.cornerRadius);
 
@@ -919,7 +919,7 @@ Serializer.addProperties("theme",
   { name: "--sjs2-color-bg-basic-primary", visible: false },
   { name: "--sjs2-color-bg-basic-primary-dim", visible: false },
 
-  { name: "--sjs2-color-bg-neutral-secondary", visible: false },
+  { name: "--sjs2-color-bg-basic-secondary", visible: false },
   { name: "--sjs2-color-component-formbox-default-bg", visible: false },
   { name: "--sjs2-color-bg-basic-secondary-dim", visible: false },
   { name: "--sjs2-color-fg-basic-primary", visible: false },

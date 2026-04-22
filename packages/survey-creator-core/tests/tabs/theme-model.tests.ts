@@ -247,13 +247,13 @@ test("Theme builder export value from composite question", (): any => {
   themeModel.initialize();
 
   expect(themeModel.editorPanel.backcolor).toBe("rgba(249, 249, 249, 1)");
-  expect(themeModel.getPropertyValue("--sjs2-color-bg-neutral-secondary")).toEqual("rgba(249, 249, 249, 1)");
-  expect(themeModel.cssVariables["--sjs2-color-bg-neutral-secondary"]).toBe("rgba(249, 249, 249, 1)");
+  expect(themeModel.getPropertyValue("--sjs2-color-bg-basic-secondary")).toEqual("rgba(249, 249, 249, 1)");
+  expect(themeModel.cssVariables["--sjs2-color-bg-basic-secondary"]).toBe("rgba(249, 249, 249, 1)");
 
   themeModel.themeName = "contrast";
   expect(themeModel.editorPanel.backcolor).toBe("rgba(255, 216, 77, 1)");
-  expect(themeModel.getPropertyValue("--sjs2-color-bg-neutral-secondary")).toEqual("rgba(255, 216, 77, 1)");
-  expect(themeModel.cssVariables["--sjs2-color-bg-neutral-secondary"]).toBe("rgba(255, 216, 77, 1)");
+  expect(themeModel.getPropertyValue("--sjs2-color-bg-basic-secondary")).toEqual("rgba(255, 216, 77, 1)");
+  expect(themeModel.cssVariables["--sjs2-color-bg-basic-secondary"]).toBe("rgba(255, 216, 77, 1)");
 });
 
 test("Theme builder switch themes", (): any => {
