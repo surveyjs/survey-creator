@@ -13,7 +13,7 @@
         <div *ngIf="!adorner.isNew" class="svc-image-item-value__item">
           <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
         </div>
-        <sv-ng-action-bar [model]="adorner.topActionsContainer" *ngIf="adorner.topActionsContainer"></sv-ng-action-bar>
+        <sv-ng-action-bar [model]="adorner.topActionsContainer" *ngIf="adorner.canRenderControls"></sv-ng-action-bar>
       </ng-container>
 
       <ng-container *ngIf="adorner.isNew || adorner.isUploading">
