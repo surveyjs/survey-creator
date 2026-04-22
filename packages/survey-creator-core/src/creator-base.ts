@@ -1998,8 +1998,7 @@ export class SurveyCreatorModel extends Base
       page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
-      const dd = this.dragDropSurveyElements;
-      if (!dd || !dd.isDraggingExistingElement) {
+      if (!this.survey.isQuestionDragging) {
         page.questions.forEach(question => {
           this.doOnQuestionAdded(question, page);
         });

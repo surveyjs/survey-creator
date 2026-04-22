@@ -1150,3 +1150,114 @@ test("StringEditor multiline paste for selectbase questions should respect creat
   expect(question.choices.map(c => c.text)).toEqual(["a", "b", "c", "item2"]);
   expect(question.choices.map(c => c.value)).toEqual(["item3", "item4", "item5", "item2"]);
 });
+
+test("onCollectionItemDeleting should fire when removing matrix columns via design surface", (): any => {
+  const creator = new CreatorTester();
+  let deletingLog: string[] = [];
+  creator.onCollectionItemDeleting.add((sender, options) => {
+    deletingLog.push(options.propertyName + ":" + options.item.value);
+    if (options.collection.length === 1) {
+      options.allow = false;
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionMatrixModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const connectorCol1 = StringEditorConnector.get(question.columns[0].locText);
+  const connectorCol2 = StringEditorConnector.get(question.columns[1].locText);
+
+  // Remove column 2 via backspace - should fire onCollectionItemDeleting
+  connectorCol2.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("columns:Column 2");
+  expect(question.columns.map(c => c.value)).toEqual(["Column 1"]);
+
+  // Try removing the last column - should be prevented by the callback
+  deletingLog = [];
+  connectorCol1.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("columns:Column 1");
+  expect(question.columns.map(c => c.value)).toEqual(["Column 1"]);
+});
+
+test("onCollectionItemDeleting should fire when removing matrix rows via design surface", (): any => {
+  const creator = new CreatorTester();
+  let deletingLog: string[] = [];
+  creator.onCollectionItemDeleting.add((sender, options) => {
+    deletingLog.push(options.propertyName + ":" + options.item.value);
+    if (options.collection.length === 1) {
+      options.allow = false;
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionMatrixModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const connectorRow1 = StringEditorConnector.get(question.rows[0].locText);
+  const connectorRow2 = StringEditorConnector.get(question.rows[1].locText);
+
+  // Remove row 2 via backspace - should fire onCollectionItemDeleting
+  connectorRow2.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("rows:Row 2");
+  expect(question.rows.map(r => r.value)).toEqual(["Row 1"]);
+
+  // Try removing the last row - should be prevented by the callback
+  deletingLog = [];
+  connectorRow1.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("rows:Row 1");
+  expect(question.rows.map(r => r.value)).toEqual(["Row 1"]);
+});
+
+test("onCollectionItemDeleting should fire when removing matrixdropdown columns via design surface", (): any => {
+  const creator = new CreatorTester();
+  let deletingLog: string[] = [];
+  creator.onCollectionItemDeleting.add((sender, options) => {
+    deletingLog.push(options.propertyName + ":" + options.item.name);
+    if (options.collection.length === 1) {
+      options.allow = false;
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrixdropdown", name: "q1", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionMatrixDropdownModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const connectorCol1 = StringEditorConnector.get(question.columns[0].locTitle);
+  const connectorCol2 = StringEditorConnector.get(question.columns[1].locTitle);
+
+  // Remove column 2 via backspace - should fire onCollectionItemDeleting
+  connectorCol2.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("columns:Column 2");
+  expect(question.columns.map(c => c.name)).toEqual(["Column 1"]);
+
+  // Try removing the last column - should be prevented by the callback
+  deletingLog = [];
+  connectorCol1.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("columns:Column 1");
+  expect(question.columns.map(c => c.name)).toEqual(["Column 1"]);
+});

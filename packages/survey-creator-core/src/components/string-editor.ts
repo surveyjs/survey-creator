@@ -62,6 +62,9 @@ export abstract class StringItemsNavigatorBase {
       const itemIndex = items.indexOf(item);
       let itemToFocus: MultipleTextItemModel = null;
       if (itemIndex !== -1) {
+        const propertyName = this.getItemsPropertyName(items);
+        const property = Serializer.findProperty(this.question.getType(), propertyName);
+        if (property && !creator.onCollectionItemDeletingCallback(this.question, property, items, item)) return;
         if (itemIndex == 0 && items.length >= 2) itemToFocus = items[1];
         if (itemIndex > 0) itemToFocus = items[itemIndex - 1];
         if (itemToFocus) {
