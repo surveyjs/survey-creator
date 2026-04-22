@@ -112,9 +112,10 @@ const buildPlatformJson = {
     },
     "./ui-preset-editor": {
       "types": "./ui-preset-editor/index.d.ts",
-      "import": "./fesm/ui-preset-editor/index.mjs",
-      "require": "./ui-preset-editor/index.js"
+      "import": "./fesm/ui-preset-editor.mjs",
+      "require": "./ui-preset-editor.js"
     },
+    "./ui-preset-editor/index.css": "./ui-preset-editor.css",
     "./ui-preset-editor/i18n": {
       "import": "./fesm/ui-preset-editor/i18n/index.mjs",
       "require": "./ui-preset-editor/i18n/index.js"
@@ -167,7 +168,8 @@ export default async (options) => {
         "iconsV1": imagesV1,
         "iconsV2": imagesV2
       },
-      emitCss: resolve(buildPath, "survey-creator-core.fontless.css")
+      emitCss: resolve(buildPath, "survey-creator-core.fontless.css"),
+      noEmitOnError: !options.watch
     }),
     createCssConfig({
       input: {
@@ -207,7 +209,8 @@ export default async (options) => {
         "iconsV1": imagesV1,
         "iconsV2": imagesV2
       },
-      emitCss: false
+      emitCss: false,
+      noEmitOnError: !options.watch
     })
   ];
 };

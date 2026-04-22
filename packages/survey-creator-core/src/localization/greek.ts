@@ -7,7 +7,7 @@ export var grStrings = {
     edit: "Επεξεργασία",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Παρακολουθήστε και μάθετε πώς να δημιουργείτε ερωτηματολόγια",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Σύρετε εδώ μια ερώτηση από την εργαλειοθήκη.",
@@ -63,7 +63,7 @@ export var grStrings = {
     tagbox: "Πολλαπλή επίλογή (Dropdown)",
     // "File Upload"
     file: "Μεταφόρτωση Αρχείου",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "Μήτρα Μονής Επιλογής",
@@ -238,6 +238,18 @@ export var grStrings = {
     options: "Επιλογές",
     // "Generate Valid JSON"
     generateValidJSON: "Δημιουργία Έγκυρου JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Άγνωστη λειτουργία: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Άγνωστες λειτουργίες: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Άγνωστη μεταβλητή: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Άγνωστες μεταβλητές: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Συντακτικό σφάλμα.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Σημασιολογικό σφάλμα.",
     // "Generate Readable JSON"
     generateReadableJSON: "Δημιουργία Αναγνώσιμου JSON",
     // "Toolbox"
@@ -753,6 +765,14 @@ export var grStrings = {
       // "Expression"
       expression: "Έκφραση"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Έκφραση"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Έκφραση"
+    },
     // survey templates
     survey: {
       // "Survey title"
@@ -870,7 +890,7 @@ export var grStrings = {
     inherit: "Κληρονομιά",
     // "Apply"
     apply: "Εφαρμογή",
-    // "OK"
+    // [Auto-translated] "OK"
     ok: "OK",
     // "Save"
     save: "Αποθήκευση",
@@ -1034,8 +1054,8 @@ export var grStrings = {
     columnEdit: "Επεξεργασία στήλης: {0}",
     // "Edit item: {0}"
     itemEdit: "Επεξεργασία στοιχείου: {0}",
-    // "URL"
-    url: "URL",
+    // [Auto-translated] "URL"
+    url: "Διεύθυνση URL",
     // "Path to data"
     path: "Διαδρομή προς τα δεδομένα",
     choicesbyurl: {
@@ -1100,6 +1120,8 @@ export var grStrings = {
     choicesOrder: "Σειρά επιλογών",
     // "Allow custom choices"
     allowCustomChoices: "Επιτρέπονται προσαρμοσμένες επιλογές",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Κείμενο εντολής \"Δημιουργία προσαρμοσμένης επιλογής\"",
     // "Visible"
     visible: "Ορατό",
     // "Required"
@@ -1321,10 +1343,10 @@ export var grStrings = {
     // "Regular expression"
     regex: "Κανονική έκφραση",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Μήνυμα επικύρωσης",
-      // [Auto-translated] "Validation expression"
-      expression: "Παράσταση επικύρωσης",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Μήνυμα ειδοποίησης για μη έγκυρη εισαγωγή",
+      // [Auto-translated] "Valid when"
+      expression: "Ισχύει όταν",
       // [Auto-translated] "Notification type"
       notificationType: "Τύπος ειδοποίησης",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1480,6 +1502,66 @@ export var grStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Μορφή συμβουλής εργαλείου"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL εικόνας",
+      // [Auto-translated] "Areas"
+      areas: "Περιοχές",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Να επιτρέπονται πολλές επιλογές",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Όνομα ιδιότητας τιμής",
+      // [Auto-translated] "Shape"
+      shape: "Σχήμα",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Χρώμα γεμίσματος ρελαντί",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Χρώμα περιγράμματος αδράνειας",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Πλάτος διαδρομής ρελαντί",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Χρώμα γεμίσματος αιώρησης",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Χρώμα περιγράμματος κατάδειξης",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Πλάτος περιγράμματος αιώρησης",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Επιλεγμένο χρώμα γεμίσματος",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Επιλεγμένο χρώμα περιγράμματος",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Επιλεγμένο πλάτος περιγράμματος",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Μέγιστες επιλεγμένες περιοχές",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Ελάχιστες επιλεγμένες περιοχές"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Αξία",
+      // [Auto-translated] "Shape"
+      shape: "Σχήμα",
+      // [Auto-translated] "Coordinates"
+      coords: "Συντεταγμένες",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Χρώμα γεμίσματος ρελαντί",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Χρώμα περιγράμματος αδράνειας",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Πλάτος διαδρομής ρελαντί",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Χρώμα γεμίσματος αιώρησης",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Χρώμα περιγράμματος κατάδειξης",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Πλάτος περιγράμματος αιώρησης",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Επιλεγμένο χρώμα γεμίσματος",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Επιλεγμένο χρώμα περιγράμματος",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Επιλεγμένο πλάτος περιγράμματος"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Ύψος εικόνας",
@@ -1510,6 +1592,8 @@ export var grStrings = {
     minErrorText: "Μήνυμα σφάλματος \"Η τιμή είναι κάτω από το ελάχιστο\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Μήνυμα σφάλματος \"Η τιμή υπερβαίνει το μέγιστο\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Μήνυμα λάθους \"Η τιμή δεν ταιριάζει με το μέγεθος του βήματος\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Μήνυμα σφάλματος \"Άδειο σχόλιο\"",
     // "Error message for duplicate responses"
@@ -2315,8 +2399,8 @@ export var grStrings = {
       image: "Εικόνα",
       // "Video"
       video: "Βίντεο",
-      // "YouTube"
-      youtube: "YouTube"
+      // [Auto-translated] "YouTube"
+      youtube: "Το YouTube"
     },
     displayMode: {
       // "Buttons"
@@ -2515,6 +2599,8 @@ export var grStrings = {
     notcontains: "Δεν περιέχει",
     // "Any of"
     anyof: "Οποιοδήποτε από",
+    // [Auto-translated] "None of"
+    noneof: "Κανένα από τα",
     // "All of"
     allof: "Όλα από",
     // "Greater than"
@@ -2568,9 +2654,9 @@ export var grStrings = {
     loadFromServer: "Φόρτωση JSON Έρευνας από τον διακομιστή",
     // "Scripts and styles"
     titleScript: "Σενάρια και στυλ",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3451,9 +3537,9 @@ export var grStrings = {
     size: "Μέγεθος",
     // "Opacity"
     opacity: "Διαφάνεια",
-    // "X"
+    // [Auto-translated] "X"
     boxShadowX: "X",
-    // "Y"
+    // [Auto-translated] "Y"
     boxShadowY: "Y",
     // "Add Shadow Effect"
     boxShadowAddRule: "Προσθήκη εφέ σκιάς",
@@ -3482,8 +3568,8 @@ export var grStrings = {
       layered: "Με στρώματα",
       // "Solid"
       solid: "Στερεό",
-      // "3D"
-      threedimensional: "3D",
+      // [Auto-translated] "3D"
+      threedimensional: "3Δ",
       // "Contrast"
       contrast: "Αντίθεση"
     },
@@ -3529,6 +3615,18 @@ export var grStrings = {
       // "Contrast"
       "default-contrast": "Αντίθεση"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Βασικό",
+      // [Auto-translated] "Advanced"
+      advanced: "Προηγμένη",
+      // [Auto-translated] "Expert"
+      expert: "Εμπειρογνώμονας"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Εφαρμόστηκε προεπιλογή"
   }
 };
 

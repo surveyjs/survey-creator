@@ -57,6 +57,15 @@ export function getNextItemText(choices: ItemValue[]): string {
   const nextValue = getNextValue("", values, true);
   return !!nextValue ? nextValue.toString() : "";
 }
+export function getNextColumnTitle(columns: MatrixDropdownColumn[]): string {
+  const ln = columns.length;
+  if (ln === 0) return "";
+  if (!columns[ln - 1].title || columns[ln - 1].title === columns[ln - 1].name) return "";
+  const values: Array<string> = [];
+  columns.forEach(col => { if (!!col.title && col.title !== col.name) values.push(col.title); });
+  const nextValue = getNextValue("", values, true);
+  return !!nextValue ? nextValue.toString() : "";
+}
 export function getNextValue(prefix: string, values: any[], isText?: boolean): string | number {
   let oposite: string | null = null;
   if (values.length > 0)

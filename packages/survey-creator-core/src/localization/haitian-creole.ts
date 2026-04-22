@@ -7,7 +7,7 @@ export var htStrings = {
     edit: "Modifye",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Gade epi aprann kijan pou kreye sondaj",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Tanpri lage yon kesyon isit la nan Toolbox la.",
@@ -36,7 +36,7 @@ export var htStrings = {
     theme: "Tèm",
     // "Translations"
     translation: "Tradiksyon",
-    // "Designer"
+    // [Auto-translated] "Designer"
     designer: "Designer",
     // "JSON Editor"
     json: "JSON Editè",
@@ -45,7 +45,7 @@ export var htStrings = {
   },
   // Question types
   qt: {
-    // "Default"
+    // [Auto-translated] "Default"
     default: "Default",
     // "Checkboxes"
     checkbox: "Bwat chèk",
@@ -57,13 +57,13 @@ export var htStrings = {
     ranking: "Klasman",
     // "Image"
     image: "Imaj",
-    // "Dropdown"
+    // [Auto-translated] "Dropdown"
     dropdown: "Dropdown",
     // "Multi-Select Dropdown"
     tagbox: "Multi-Chwazi Dropdown",
     // "File Upload"
     file: "Fichye Upload",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "Single-Chwazi Matrice",
@@ -110,7 +110,7 @@ export var htStrings = {
   },
   // Strings in SurveyJS Creator
   ed: {
-    // "Default ({0})"
+    // [Auto-translated] "Default ({0})"
     defaultLocale: "Default ({0})",
     // "Survey"
     survey: "Sondaj",
@@ -170,7 +170,7 @@ export var htStrings = {
     newPanelName: "panèl",
     // "text"
     newTextItemName: "tèks",
-    // "Default"
+    // [Auto-translated] "Default"
     defaultV2Theme: "Default",
     // "Modern"
     modernTheme: "Modèn",
@@ -214,8 +214,8 @@ export var htStrings = {
     zoomInTooltip: "Zoom nan",
     // "Zoom to 100%"
     zoom100Tooltip: "Zoom a 100%",
-    // "Zoom Out"
-    zoomOutTooltip: "Zoom Out",
+    // [Auto-translated] "Zoom Out"
+    zoomOutTooltip: "Rale soti",
     // "Lock expand/collapse state for questions"
     lockQuestionsTooltip: "Fèmen eta agrandi/effondreman pou kesyon yo",
     // "Show more"
@@ -238,6 +238,18 @@ export var htStrings = {
     options: "Opsyon",
     // "Generate Valid JSON"
     generateValidJSON: "Jenere JSON valab",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Fonksyon enkoni: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Fonksyon enkoni: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Varyab enkoni: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Varyab enkoni: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Erè sentaks",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Erè semantik",
     // "Generate Readable JSON"
     generateReadableJSON: "Jenere JSON lizib",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var htStrings = {
     toolboxFilteredTextPlaceholder: "Tape pou chèche...",
     // "No results found"
     toolboxNoResultsFound: "Pa gen rezilta yo jwenn",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Pa gen pwopriyete yo montre",
     // "Type to search..."
     propertyGridFilteredTextPlaceholder: "Tape pou chèche...",
     // "No results found"
@@ -404,7 +418,7 @@ export var htStrings = {
     imageChooseImage: "Chwazi Imaj",
     // "Add {0}"
     addNewTypeQuestion: "Ajoute {0}", // {0} is localizable question type
-    // "[LOGO]"
+    // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
     // "Item "
     choices_Item: "Atik",
@@ -751,6 +765,14 @@ export var htStrings = {
       // "Expression"
       expression: "Ekspresyon"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ekspresyon"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ekspresyon"
+    },
     // survey templates
     survey: {
       // "Survey title"
@@ -868,8 +890,8 @@ export var htStrings = {
     inherit: "Eritye",
     // "Apply"
     apply: "Aplike",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "OKE",
     // "Save"
     save: "Sove",
     // "Clear"
@@ -1032,8 +1054,8 @@ export var htStrings = {
     columnEdit: "Modifye kolòn: {0}",
     // "Edit item: {0}"
     itemEdit: "Modifye atik: {0}",
-    // "URL"
-    url: "URL",
+    // [Auto-translated] "URL"
+    url: "adrès entènèt",
     // "Path to data"
     path: "Chemen done yo",
     choicesbyurl: {
@@ -1098,6 +1120,8 @@ export var htStrings = {
     choicesOrder: "Lòd chwa",
     // "Allow custom choices"
     allowCustomChoices: "Pèmèt chwa koutim",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "\"Kreye Custom Chwa\" tèks kòmandman",
     // "Visible"
     visible: "Vizib",
     // "Required"
@@ -1319,10 +1343,10 @@ export var htStrings = {
     // "Regular expression"
     regex: "Ekspresyon regilye",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Mesaj validasyon an",
-      // [Auto-translated] "Validation expression"
-      expression: "Ekspresyon validasyon",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Mesaj notifikasyon pou opinyon envalid",
+      // [Auto-translated] "Valid when"
+      expression: "Valid lè",
       // [Auto-translated] "Notification type"
       notificationType: "Kalite notifikasyon",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1402,6 +1426,8 @@ export var htStrings = {
     allowMultiple: "Pèmèt telechaje fichye miltip",
     // "Preview uploaded images"
     allowImagesPreview: "Preview imaj telechaje yo",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Kategori dosye aksepte",
     // "Accepted file types"
     acceptedTypes: "Aksepte kalite dosye",
     // "Wait for upload to complete"
@@ -1476,6 +1502,66 @@ export var htStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Fòma zouti"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL imaj",
+      // [Auto-translated] "Areas"
+      areas: "Zòn yo",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Pèmèt seleksyon miltip",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Valè non pwopriyete",
+      // [Auto-translated] "Shape"
+      shape: "Fòm",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Koulè ranpli san fè anyen konsa.",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Koulè konjesyon serebral san fè anyen konsa",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Lajè konjesyon serebral san fè anyen konsa",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover koulè ranpli",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Hover koulè konjesyon serebral",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Hover lajè konjesyon serebral",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Chwazi koulè ranpli",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Koulè konjesyon serebral chwazi",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Lajè konjesyon serebral chwazi",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maksimòm zòn chwazi",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimòm zòn chwazi"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Valè",
+      // [Auto-translated] "Shape"
+      shape: "Fòm",
+      // [Auto-translated] "Coordinates"
+      coords: "Kowòdone yo",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Koulè ranpli san fè anyen konsa.",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Koulè konjesyon serebral san fè anyen konsa",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Lajè konjesyon serebral san fè anyen konsa",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover koulè ranpli",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Hover koulè konjesyon serebral",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Hover lajè konjesyon serebral",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Chwazi koulè ranpli",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Koulè konjesyon serebral chwazi",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Lajè konjesyon serebral chwazi"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Wotè imaj",
@@ -1506,6 +1592,8 @@ export var htStrings = {
     minErrorText: "Mesaj erè \"Valè pi ba pase minimòm\".",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Mesaj erè \"Valè depase maksimòm\".",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"Valè pa matche ak gwosè etap\" mesaj erè",
     // "\"Empty comment\" error message"
     otherErrorText: "Mesaj erè \"Komantè vid\".",
     // "Error message for duplicate responses"
@@ -1667,9 +1755,9 @@ export var htStrings = {
       layout: {
         // "Panel Layout"
         panel: "Layout panèl",
-        // "Layout"
+        // [Auto-translated] "Layout"
         question: "Layout",
-        // "Layout"
+        // [Auto-translated] "Layout"
         base: "Layout"
       },
       // "Data"
@@ -1836,7 +1924,7 @@ export var htStrings = {
       questionTitle: "Font Tit",
       // "Description font"
       questionDescription: "Deskripsyon font",
-      // "Font"
+      // [Auto-translated] "Font"
       editorFont: "Font",
       // "Opacity"
       backgroundOpacity: "Opakite", // Auto-generated string
@@ -1942,10 +2030,10 @@ export var htStrings = {
     off: "Kache nimewo kesyon yo",
     // "List"
     list: "Lis",
-    // "Carousel"
+    // [Auto-translated] "Carousel"
     carousel: "Carousel",
-    // "Tabs"
-    tab: "Tabs",
+    // [Auto-translated] "Tabs"
+    tab: "Onglè yo",
     // "Panel navigator + Progress bar at the top"
     progressTop: "Panel navigatè + ba pwogrè nan tèt la",
     // "Panel navigator + Progress bar at the bottom"
@@ -1956,8 +2044,8 @@ export var htStrings = {
     horizontal: "Orizontal",
     // "Vertical"
     vertical: "Vètikal",
-    // "Top"
-    top: "Top",
+    // [Auto-translated] "Top"
+    top: "Tèt",
     // "Bottom"
     bottom: "Anba",
     // "Top and bottom"
@@ -1992,14 +2080,14 @@ export var htStrings = {
     password: "modpas",
     // "range"
     range: "ranje",
-    // "tel"
+    // [Auto-translated] "tel"
     tel: "tel",
     // "text"
     text: "tèks",
     // "time"
     time: "tan",
-    // "url"
-    url: "url",
+    // [Auto-translated] "url"
+    url: "adrès entènèt",
     // "week"
     week: "semèn",
     // "Hidden"
@@ -2049,16 +2137,16 @@ export var htStrings = {
       number: "Nimewo",
       // "Password"
       password: "Modpas",
-      // "Range"
-      range: "Range",
+      // [Auto-translated] "Range"
+      range: "Ranje",
       // "Phone Number"
       tel: "Nimewo Telefòn",
       // "Text"
       text: "Tèks",
       // "Time"
       time: "Tan",
-      // "URL"
-      url: "URL",
+      // [Auto-translated] "URL"
+      url: "adrès entènèt",
       // "Week"
       week: "Semèn"
     },
@@ -2083,6 +2171,20 @@ export var htStrings = {
       warning: "Avètisman",
       // [Auto-translated] "Informational"
       info: "Enfòmasyon"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Imaj yo",
+      // [Auto-translated] "Videos"
+      video: "Videyo",
+      // [Auto-translated] "Audio"
+      audio: "Odyo",
+      // [Auto-translated] "Documents"
+      document: "Dokiman yo",
+      // [Auto-translated] "Archives"
+      archive: "Achiv yo",
+      // [Auto-translated] "Custom"
+      custom: "Koutim"
     },
     autocomplete: {
       // "Full Name"
@@ -2297,8 +2399,8 @@ export var htStrings = {
       image: "Imaj",
       // "Video"
       video: "Videyo",
-      // "YouTube"
-      youtube: "YouTube"
+      // [Auto-translated] "YouTube"
+      youtube: "Youtube"
     },
     displayMode: {
       // "Buttons"
@@ -2412,9 +2514,9 @@ export var htStrings = {
     sum: "Sòm",
     // "Count"
     count: "Konte",
-    // "Min"
+    // [Auto-translated] "Min"
     min: "Min",
-    // "Max"
+    // [Auto-translated] "Max"
     max: "Max",
     // "Avg"
     avg: "Mwayèn",
@@ -2439,8 +2541,8 @@ export var htStrings = {
     backgroundImageAttachment: {
       // "Fixed"
       fixed: "Fiks",
-      // "Scroll"
-      scroll: "Scroll"
+      // [Auto-translated] "Scroll"
+      scroll: "Woulo liv"
     },
     headerView: {
       // "Basic"
@@ -2459,8 +2561,8 @@ export var htStrings = {
       none: "Okenn",
       // "Accent color"
       accentColor: "Koulè aksan",
-      // "Custom"
-      custom: "Custom"
+      // [Auto-translated] "Custom"
+      custom: "Koutim"
     },
     colorPalette: {
       // "Light"
@@ -2497,6 +2599,8 @@ export var htStrings = {
     notcontains: "Pa genyen",
     // "Any of"
     anyof: "Nenpòt nan",
+    // [Auto-translated] "None of"
+    noneof: "Okenn nan",
     // "All of"
     allof: "Tout",
     // "Greater than"
@@ -2550,9 +2654,9 @@ export var htStrings = {
     loadFromServer: "Chaje Sondaj JSON soti nan sèvè",
     // "Scripts and styles"
     titleScript: "Scripts ak estil",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2577,7 +2681,7 @@ export var htStrings = {
     expressionvalidator: "Ekspresyon",
     // "Number"
     numericvalidator: "Nimewo",
-    // "Regex"
+    // [Auto-translated] "Regex"
     regexvalidator: "Regex",
     // "Text"
     textvalidator: "Tèks"
@@ -3090,6 +3194,8 @@ export var htStrings = {
     storeOthersAsComment: "Chwazi pou estoke valè opsyon \"Lòt\" kòm yon pwopriyete apa nan rezilta sondaj yo.",
     // "Use {0} as a placeholder for the actual value."
     format: "Sèvi ak {0} kòm yon anplasman pou valè aktyèl la.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Chwazi \"Custom\" yo ajoute ekstansyon dosye pwòp ou yo sou tèt kategori yo predefini.",
     // "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
     acceptedTypes: "Gade deskripsyon atribi [accept](https://www.w3schools.com/tags/att_input_accept.asp) pou plis enfòmasyon.",
     // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
@@ -3269,9 +3375,9 @@ export var htStrings = {
     inputFieldComponent: "Antre eleman jaden", // Auto-generated string
     // "Item component"
     itemComponent: "Eleman atik", // Auto-generated string
-    // "Min"
+    // [Auto-translated] "Min"
     min: "Min", // Auto-generated string
-    // "Max"
+    // [Auto-translated] "Max"
     max: "Max", // Auto-generated string
     // "Min value expression"
     minValueExpression: "Min valè ekspresyon", // Auto-generated string
@@ -3383,9 +3489,9 @@ export var htStrings = {
     editorPanel: "Eleman Antre",
     // "Lines"
     lines: "Liy",
-    // "Default"
+    // [Auto-translated] "Default"
     primaryDefaultColor: "Default",
-    // "Hover"
+    // [Auto-translated] "Hover"
     primaryDarkColor: "Hover",
     // "Selected"
     primaryLightColor: "Chwazi",
@@ -3393,9 +3499,9 @@ export var htStrings = {
     backgroundDimColor: "Koulè background",
     // "Corner radius"
     cornerRadius: "Reyon kwen",
-    // "Default background"
+    // [Auto-translated] "Default background"
     backcolor: "Default background",
-    // "Hover background"
+    // [Auto-translated] "Hover background"
     hovercolor: "Hover background",
     // "Border decoration"
     borderDecoration: "Dekorasyon fwontyè",
@@ -3407,7 +3513,7 @@ export var htStrings = {
     primaryForecolor: "Koulè default",
     // "Disabled color"
     primaryForecolorLight: "Koulè andikape",
-    // "Font"
+    // [Auto-translated] "Font"
     font: "Font",
     // "Darker"
     borderDefault: "Pi fonse",
@@ -3431,9 +3537,9 @@ export var htStrings = {
     size: "Gwosè",
     // "Opacity"
     opacity: "Opakite",
-    // "X"
+    // [Auto-translated] "X"
     boxShadowX: "X",
-    // "Y"
+    // [Auto-translated] "Y"
     boxShadowY: "Y",
     // "Add Shadow Effect"
     boxShadowAddRule: "Ajoute efè lonbraj",
@@ -3441,8 +3547,8 @@ export var htStrings = {
     boxShadowBlur: "Flou",
     // "Spread"
     boxShadowSpread: "Gaye",
-    // "Drop"
-    boxShadowDrop: "Drop",
+    // [Auto-translated] "Drop"
+    boxShadowDrop: "Gout",
     // "Inner"
     boxShadowInner: "Enteryè",
     names: {
@@ -3460,29 +3566,29 @@ export var htStrings = {
       doubleborder: "Double fwontyè",
       // "Layered"
       layered: "Kouch",
-      // "Solid"
+      // [Auto-translated] "Solid"
       solid: "Solid",
-      // "3D"
+      // [Auto-translated] "3D"
       threedimensional: "3D",
       // "Contrast"
       contrast: "Kontras"
     },
     colors: {
-      // "Teal"
+      // [Auto-translated] "Teal"
       teal: "Teal",
-      // "Blue"
-      blue: "Blue",
-      // "Purple"
-      purple: "Purple",
-      // "Orchid"
+      // [Auto-translated] "Blue"
+      blue: "Blè",
+      // [Auto-translated] "Purple"
+      purple: "Koulè wouj violèt",
+      // [Auto-translated] "Orchid"
       orchid: "Orchid",
-      // "Tulip"
+      // [Auto-translated] "Tulip"
       tulip: "Tulip",
-      // "Brown"
-      brown: "Brown",
-      // "Green"
-      green: "Green",
-      // "Gray"
+      // [Auto-translated] "Brown"
+      brown: "Mawon",
+      // [Auto-translated] "Green"
+      green: "Vèt",
+      // [Auto-translated] "Gray"
       gray: "Gray"
     }
   },
@@ -3497,7 +3603,7 @@ export var htStrings = {
     surfaceScale: "Sifas",
     // "UI elements"
     userInterfaceBaseUnit: "Eleman UI",
-    // "Font"
+    // [Auto-translated] "Font"
     fontScale: "Font",
     names: {
       // "Survey Creator 2020"
@@ -3509,6 +3615,18 @@ export var htStrings = {
       // "Contrast"
       "default-contrast": "Kontras"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Debaz",
+      // [Auto-translated] "Advanced"
+      advanced: "Avanse",
+      // [Auto-translated] "Expert"
+      expert: "Ekspè"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Prereglaj aplike"
   }
 };
 

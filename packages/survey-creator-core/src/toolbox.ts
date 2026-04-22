@@ -279,7 +279,11 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public hasText(text: string) {
     if (!text) return;
     const textLowerCase = text.toLowerCase();
-    return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
+    if (this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0) return true;
+    if (this.items) {
+      return this.items.some(item => item.hasText(text));
+    }
+    return false;
   }
 
   /**

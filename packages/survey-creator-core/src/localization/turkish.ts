@@ -7,7 +7,7 @@ export var turkishStrings = {
     edit: "Düzenle",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Nasıl anket oluşturulur izle",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Lütfen araç kutusundan bir soru sürükleyin.",
@@ -38,8 +38,8 @@ export var turkishStrings = {
     translation: "Çeviri",
     // "Designer"
     designer: "Anket Tasarımı",
-    // "JSON Editor"
-    json: "JSON Editor",
+    // [Auto-translated] "JSON Editor"
+    json: "JSON Editörü",
     // "Logic"
     logic: "Mantıksal Anket"
   },
@@ -73,7 +73,7 @@ export var turkishStrings = {
     matrixdynamic: "Matrix (dinamik satır)",
     // "Multiple Textboxes"
     multipletext: "Çoklu Yazı",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (dinamik panel)",
@@ -105,8 +105,8 @@ export var turkishStrings = {
     containers: "Konteyner",
     // "Matrix Questions"
     matrix: "Matris Soruları",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Çeşitli"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -238,6 +238,18 @@ export var turkishStrings = {
     options: "Seçenekler",
     // "Generate Valid JSON"
     generateValidJSON: "JSON Oluştur",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Bilinmeyen fonksiyon: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Bilinmeyen fonksiyonlar: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Bilinmeyen değişken: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Bilinmeyen değişkenler: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Sözdizimi hatası.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Anlamsal hata.",
     // "Generate Readable JSON"
     generateReadableJSON: "Okunabilir JSON oluştur",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var turkishStrings = {
     toolboxFilteredTextPlaceholder: "Aramak için yazın...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Sonuç bulunamadı",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Görüntülenecek özellik yok",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Aramak için yazın...",
     // [Auto-translated] "No results found"
@@ -751,6 +765,14 @@ export var turkishStrings = {
       // [Auto-translated] "Expression"
       expression: "İfade"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "İfade"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "İfade"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -1032,7 +1054,7 @@ export var turkishStrings = {
     columnEdit: "Kolonu düzenle: {0}",
     // "Edit item: {0}"
     itemEdit: "Eleman düzenle: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Yol",
@@ -1098,6 +1120,8 @@ export var turkishStrings = {
     choicesOrder: "Seçenek sırasını seç",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Özel seçimlere izin ver",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "\"Özel Seçim Oluştur\" komut metni",
     // "Visible"
     visible: "Görünür?",
     // "Required"
@@ -1126,6 +1150,8 @@ export var turkishStrings = {
     storeDataAsText: "Dosya içeriğini JSON sonucunda metin olarak depola",
     // "Maximum file size (in bytes)"
     maxSize: "Bayt cinsinden maksimum dosya boyutu",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maksimum dosya sayısı",
     // "Row count"
     rowCount: "Satır sayısı",
     // "Columns layout"
@@ -1317,10 +1343,10 @@ export var turkishStrings = {
     // "Regular expression"
     regex: "Düzenli ifade",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Doğrulama iletisi",
-      // [Auto-translated] "Validation expression"
-      expression: "Doğrulama ifadesi",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Geçersiz girdi için bildirim mesajı",
+      // [Auto-translated] "Valid when"
+      expression: "Geçerli",
       // [Auto-translated] "Notification type"
       notificationType: "Bildirim türü",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1400,8 +1426,10 @@ export var turkishStrings = {
     allowMultiple: "Birden çok dosya yüklemeyi etkinleştir",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Yüklenen resimleri önizleyin",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Kabul edilen dosya türleri",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Kabul edilen dosya kategorileri",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Ek dosya uzantıları",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Yüklemenin tamamlanmasını bekleyin",
     // [Auto-translated] "Confirm file deletion"
@@ -1474,6 +1502,66 @@ export var turkishStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Araç ipucu biçimi"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "Resim URL'si",
+      // [Auto-translated] "Areas"
+      areas: "Bölgeler",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Birden fazla seçime izin ver",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Değer mülk adı",
+      // [Auto-translated] "Shape"
+      shape: "Şekil",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Boşta dolgu rengi",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Boşta vuruş rengi",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Boşta vuruş genişliği",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Havada dolum rengi",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Havada asılı duran vuruş rengi",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Havada havada hareket etki genişliği",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Seçilmiş dolgu rengi",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Seçilmiş çizgi rengi",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Seçilmiş çizgi genişliği",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maksimum seçilmiş alanlar",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimum seçilen alanlar"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Değer",
+      // [Auto-translated] "Shape"
+      shape: "Şekil",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordinatlar",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Boşta dolgu rengi",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Boşta vuruş rengi",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Boşta vuruş genişliği",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Havada dolum rengi",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Havada asılı duran vuruş rengi",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Havada havada hareket etki genişliği",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Seçilmiş dolgu rengi",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Seçilmiş çizgi rengi",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Seçilmiş çizgi genişliği"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Görüntü yüksekliği",
@@ -1504,6 +1592,8 @@ export var turkishStrings = {
     minErrorText: "\"Değer minimumun altında\" hata iletisi",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "\"Değer maksimumu aşıyor\" hata iletisi",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"Değer adım boyutuna uymuyor\" hata mesajı",
     // "\"Empty comment\" error message"
     otherErrorText: "\"Boş yorum\" hata iletisi",
     // "Error message for duplicate responses"
@@ -2082,6 +2172,20 @@ export var turkishStrings = {
       // [Auto-translated] "Informational"
       info: "Bilgi"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Görseller",
+      // [Auto-translated] "Videos"
+      video: "Videolar",
+      // [Auto-translated] "Audio"
+      audio: "Ses",
+      // [Auto-translated] "Documents"
+      document: "Belgeler",
+      // [Auto-translated] "Archives"
+      archive: "Arşivler",
+      // [Auto-translated] "Custom"
+      custom: "Özel Yapı"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Adınız ve Soyadınız",
@@ -2495,6 +2599,8 @@ export var turkishStrings = {
     notcontains: "içermez",
     // "Any of"
     anyof: "herhangi biri",
+    // [Auto-translated] "None of"
+    noneof: "Hiçbiri",
     // "All of"
     allof: "tümü",
     // "Greater than"
@@ -2548,9 +2654,9 @@ export var turkishStrings = {
     loadFromServer: "Anket JSON'u sunucudan yükle",
     // "Scripts and styles"
     titleScript: "Scriptler ve stiller",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3088,8 +3194,10 @@ export var turkishStrings = {
     storeOthersAsComment: "\"Diğer\" seçenek değerini anket sonuçlarında ayrı bir özellik olarak saklamak için seçin.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "{0} gerçek değer için yer tutucu olarak kullanın.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Daha fazla bilgi için [accept](https://www.w3schools.com/tags/att_input_accept.asp) özelliğinin açıklamasına bakın.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Önceden tanımlanmış kategorilerin üzerine kendi dosya uzantılarınızı eklemek için \"Özelleştir\"i seçin.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Virgülle ayrılmış dosya uzantılarını girin (örneğin, .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. Yalnızca \"Hücre giriş türü\" Radyo Düğmesi Grubu veya Onay Kutuları olarak ayarlanmış sütunlar için geçerlidir.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3507,6 +3615,18 @@ export var turkishStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Karşıtlık"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Temel",
+      // [Auto-translated] "Advanced"
+      advanced: "İleri",
+      // [Auto-translated] "Expert"
+      expert: "Uzman"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Ön ayar uygulandı"
   }
 };
 

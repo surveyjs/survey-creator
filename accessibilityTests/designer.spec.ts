@@ -303,3 +303,4 @@ test.describe("designer a11y", () => {
     await checkA11y(page, ["#survey-creator", ".svc-tab-designer_content"], { axeOptions });
   });
 });
+

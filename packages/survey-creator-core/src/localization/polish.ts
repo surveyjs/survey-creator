@@ -38,8 +38,8 @@ export var polishStrings = {
     translation: "Tłumaczenie",
     // "Designer"
     designer: "Projektant ankiety",
-    // "JSON Editor"
-    json: "JSON Editor",
+    // [Auto-translated] "JSON Editor"
+    json: "Redaktor JSON",
     // [Auto-translated] "Logic"
     logic: "Logika"
   },
@@ -73,7 +73,7 @@ export var polishStrings = {
     matrixdynamic: "Matrix (dynamiczne wiersze)",
     // "Multiple Textboxes"
     multipletext: "Wiele linii tekstu",
-    // "Panel"
+    // [Auto-translated] "Panel"
     panel: "Panel",
     // "Dynamic Panel"
     paneldynamic: "Panel (dynamiczne panele)",
@@ -166,7 +166,7 @@ export var polishStrings = {
     newPageName: "sekcja",
     // "question"
     newQuestionName: "pytanie",
-    // "panel"
+    // [Auto-translated] "panel"
     newPanelName: "panel",
     // [Auto-translated] "text"
     newTextItemName: "Tekst",
@@ -236,10 +236,22 @@ export var polishStrings = {
     pasteTooltip: "Wklejanie ze schowka",
     // "Options"
     options: "Opcje",
-    // "Generate Valid JSON"
-    generateValidJSON: "Generate Valid JSON",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Generate Readable JSON",
+    // [Auto-translated] "Generate Valid JSON"
+    generateValidJSON: "Wygeneruj prawidłowy JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Nieznana funkcja: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Nieznane funkcje: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Nieznana zmienna: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Nieznane zmienne: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Błąd składniowy.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Błąd semantyczny.",
+    // [Auto-translated] "Generate Readable JSON"
+    generateReadableJSON: "Generuj czytelny JSON",
     // "Toolbox"
     toolbox: "Paleta",
     // [Auto-translated] "Properties"
@@ -250,6 +262,8 @@ export var polishStrings = {
     toolboxFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Nie znaleziono wyników",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Brak właściwości do pokazania",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
     // [Auto-translated] "No results found"
@@ -258,8 +272,8 @@ export var polishStrings = {
     propertyGridPlaceholderTitle: "Rozpocznij konfigurowanie formularza",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Kliknij dowolną ikonę kategorii, aby zapoznać się z ustawieniami ankiety. Dodatkowe ustawienia staną się dostępne po dodaniu elementu ankiety do powierzchni projektowej.",
-    // "Please correct JSON."
-    correctJSON: "Please correct JSON.",
+    // [Auto-translated] "Please correct JSON."
+    correctJSON: "Proszę poprawić JSON.",
     // "Survey Results "
     surveyResults: "Wynik ankiety: ",
     // [Auto-translated] "As Table"
@@ -752,6 +766,14 @@ export var polishStrings = {
       // [Auto-translated] "Expression"
       expression: "Wyrażenie"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ekspresja"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ekspresja"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -869,7 +891,7 @@ export var polishStrings = {
     inherit: "Odziedziczyć",
     // "Apply"
     apply: "Zastosuj",
-    // "OK"
+    // [Auto-translated] "OK"
     ok: "OK",
     // [Auto-translated] "Save"
     save: "Zapisać",
@@ -957,14 +979,14 @@ export var polishStrings = {
     conditionSelectPanel: "Wybierz panel...",
     // [Auto-translated] "Please enter/select the value"
     conditionValueQuestionTitle: "Wpisz/wybierz wartość",
-    // "Press ctrl+space to get expression completion hint"
-    aceEditorHelp: "Press ctrl+space to get expression completion hint",
-    // "Current row"
-    aceEditorRowTitle: "Current row",
-    // "Current panel"
-    aceEditorPanelTitle: "Current panel",
-    // "For more details please check the documentation"
-    showMore: "For more details please check the documentation",
+    // [Auto-translated] "Press ctrl+space to get expression completion hint"
+    aceEditorHelp: "Naciśnij ctrl+space, aby uzyskać wskazówkę o ukończeniu wyrażeń",
+    // [Auto-translated] "Current row"
+    aceEditorRowTitle: "Obecny rząd",
+    // [Auto-translated] "Current panel"
+    aceEditorPanelTitle: "Obecny panel",
+    // [Auto-translated] "For more details please check the documentation"
+    showMore: "Więcej szczegółów można znaleźć w dokumentacji",
     // "Available questions"
     assistantTitle: "Available questions:",
     // [Auto-translated] "There is should be at least one column or row"
@@ -1029,11 +1051,11 @@ export var polishStrings = {
     rowid: "Identyfikator wiersza",
     // [Auto-translated] "Image or video file URL"
     imageLink: "Adres URL obrazu lub pliku wideo",
-    // "Edit column: {0}"
-    columnEdit: "Edit column: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Edit item: {0}",
-    // "URL"
+    // [Auto-translated] "Edit column: {0}"
+    columnEdit: "Edytuj: {0}",
+    // [Auto-translated] "Edit item: {0}"
+    itemEdit: "Edycja: {0}",
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Path",
@@ -1099,6 +1121,8 @@ export var polishStrings = {
     choicesOrder: "Kolejność odpowiedzi",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Zezwalaj na niestandardowe wybory",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Tekst polecenia \"Create Custom Choice\"",
     // "Visible"
     visible: "Czy widoczne?",
     // "Required"
@@ -1121,14 +1145,16 @@ export var polishStrings = {
     cols: "Kolumny",
     // "Placeholder text within input field"
     placeholder: "Input place holder",
-    // "Show preview area"
-    showPreview: "Show preview area",
-    // "Store file content in JSON result as text"
-    storeDataAsText: "Store file content in JSON result as text",
+    // [Auto-translated] "Show preview area"
+    showPreview: "Obszar podglądowy pokazu",
+    // [Auto-translated] "Store file content in JSON result as text"
+    storeDataAsText: "Przechowuj zawartość pliku w wyniku JSON jako tekst",
     // "Maximum file size (in bytes)"
     maxSize: "Maximum file size in bytes",
-    // "Row count"
-    rowCount: "Row count",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "Maksymalna liczba plików",
+    // [Auto-translated] "Row count"
+    rowCount: "Liczba wierszy",
     // [Auto-translated] "Columns layout"
     columnLayout: "Układ kolumn",
     // [Auto-translated] "\"Add Row\" button alignment"
@@ -1151,8 +1177,8 @@ export var polishStrings = {
     minRateDescription: "Opis najniższej oceny",
     // "Maximum value label"
     maxRateDescription: "Opis najwyższej oceny",
-    // "Input type"
-    inputType: "Input type",
+    // [Auto-translated] "Input type"
+    inputType: "Typ wejścia",
     // "Default Answer"
     defaultValue: "Default value",
     // [Auto-translated] "Default texts"
@@ -1211,10 +1237,10 @@ export var polishStrings = {
     partialSendEnabled: "Send survey results on page next",
     // "Save the \"Other\" option value as a separate property"
     storeOthersAsComment: "Store 'others' value in separate field",
-    // "Show page titles"
-    showPageTitles: "Show page titles",
-    // "Show page numbers"
-    showPageNumbers: "Show page numbers",
+    // [Auto-translated] "Show page titles"
+    showPageTitles: "Tytuły stron programu",
+    // [Auto-translated] "Show page numbers"
+    showPageNumbers: "Pokazuj numery stron",
     // "\"Previous Page\" button text"
     pagePrevText: "Page previous button text",
     // "\"Next Page\" button text"
@@ -1251,8 +1277,8 @@ export var polishStrings = {
     questionTitleWidth: "Szerokość tytułu pytania",
     // "Required symbol(s)"
     requiredMark: "The question required symbol(s)",
-    // "Question title template, default is: '{no}. {require} {title}'"
-    questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
+    // [Auto-translated] "Question title template, default is: '{no}. {require} {title}'"
+    questionTitleTemplate: "Szablon tytułu pytania, domyślnie to: '{no}. {wymaga} {tytuł}'",
     // "Error message alignment"
     questionErrorLocation: "Question error location",
     // "Focus first question on a new page"
@@ -1277,8 +1303,8 @@ export var polishStrings = {
     addPanelText: "Adding panel text",
     // "\"Remove Entry\" button text"
     removePanelText: "Removing panel text",
-    // "Show all elements on one page"
-    isSinglePage: "Show all elements on one page",
+    // [Auto-translated] "Show all elements on one page"
+    isSinglePage: "Pokaż wszystkie elementy na jednej stronie",
     // [Auto-translated] "HTML markup"
     html: "Znaczniki HTML",
     // [Auto-translated] "Answer"
@@ -1318,10 +1344,10 @@ export var polishStrings = {
     // [Auto-translated] "Regular expression"
     regex: "Wyrażenie regularne",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Komunikat sprawdzania poprawności",
-      // [Auto-translated] "Validation expression"
-      expression: "Wyrażenie sprawdzania poprawności",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Powiadomienie o nieprawidłowym wejściu",
+      // [Auto-translated] "Valid when"
+      expression: "Ważne, gdy",
       // [Auto-translated] "Notification type"
       notificationType: "Typ powiadomienia",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1401,8 +1427,10 @@ export var polishStrings = {
     allowMultiple: "Włącz przesyłanie wielu plików",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Podgląd przesłanych obrazów",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Akceptowane typy plików",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Akceptowane kategorie plików",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Dodatkowe rozszerzenia plików",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Poczekaj na zakończenie przesyłania",
     // [Auto-translated] "Confirm file deletion"
@@ -1475,6 +1503,66 @@ export var polishStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Format podpowiedzi"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL obrazu",
+      // [Auto-translated] "Areas"
+      areas: "Obszary",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Pozwól na wielokrotne wybory",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Nazwa nieruchomości wartościowej",
+      // [Auto-translated] "Shape"
+      shape: "Kształt",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Kolor wypełnienia bezczynnego",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Kolor pociągnięcia jałowego",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Szerokość suwu biegu jałowego",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Kolor wypełniający kursorem wiorem",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Kolor pociągnięcia kursorem",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Szerokość ruchu kursorem",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Wybrany kolor wypełnienia",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Wybrany kolor kreski",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Wybrana szerokość kreski",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Maksymalna liczba wybranych obszarów",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Minimalne wybrane obszary"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Wartość",
+      // [Auto-translated] "Shape"
+      shape: "Kształt",
+      // [Auto-translated] "Coordinates"
+      coords: "Współrzędne",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Kolor wypełnienia bezczynnego",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Kolor pociągnięcia jałowego",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Szerokość suwu biegu jałowego",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Kolor wypełniający kursorem wiorem",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Kolor pociągnięcia kursorem",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Szerokość ruchu kursorem",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Wybrany kolor wypełnienia",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Wybrany kolor kreski",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Wybrana szerokość kreski"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Wysokość obrazu",
@@ -1505,6 +1593,8 @@ export var polishStrings = {
     minErrorText: "Komunikat o błędzie \"Wartość jest niższa niż minimalna\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Komunikat o błędzie \"Wartość przekracza maksimum\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Komunikat błędu \"Wartość nie zgadza się z rozmiarem kroku\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Komunikat o błędzie \"Pusty komentarz\"",
     // "Error message for duplicate responses"
@@ -1611,8 +1701,8 @@ export var polishStrings = {
       },
       // "General"
       general: "Ogólne",
-      // "Options"
-      fileOptions: "Options",
+      // [Auto-translated] "Options"
+      fileOptions: "Opcje",
       // "HTML Editor"
       html: "Html Editor",
       // "Columns"
@@ -1635,16 +1725,16 @@ export var polishStrings = {
       sliderSettings: "Ustawienia suwaka",
       // "Choices from a Web Service"
       choicesByUrl: "Odpowiedzi z webserwisu",
-      // "Default Choices"
-      matrixChoices: "Default Choices",
-      // "Text Inputs"
-      multipleTextItems: "Text Inputs",
+      // [Auto-translated] "Default Choices"
+      matrixChoices: "Domyślne wybory",
+      // [Auto-translated] "Text Inputs"
+      multipleTextItems: "Wprowadzanie tekstu",
       // [Auto-translated] "Numbering"
       numbering: "Numerowanie",
-      // "Validators"
-      validators: "Validators",
-      // "Navigation"
-      navigation: "Navigation",
+      // [Auto-translated] "Validators"
+      validators: "Walidatory",
+      // [Auto-translated] "Navigation"
+      navigation: "Nawigacja",
       // "Question Settings"
       question: "Question",
       // [Auto-translated] "Pages"
@@ -1653,8 +1743,8 @@ export var polishStrings = {
       timer: "Timer/Quiz",
       // [Auto-translated] "Calculated Values"
       calculatedValues: "Obliczone wartości",
-      // "Triggers"
-      triggers: "Triggers",
+      // [Auto-translated] "Triggers"
+      triggers: "Wyzwalacze",
       // "Title template"
       templateTitle: "Template title",
       // [Auto-translated] "Totals"
@@ -1702,10 +1792,10 @@ export var polishStrings = {
       // [Auto-translated] "Others"
       others: "Inni"
     },
-    // "Edit property '{0}'"
-    editProperty: "Edit property '{0}'",
-    // "Items"
-    items: "Items",
+    // [Auto-translated] "Edit property '{0}'"
+    editProperty: "Edytuj własność '{0}'",
+    // [Auto-translated] "Items"
+    items: "Przedmioty",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Uwidocznij wybory, jeśli",
     // [Auto-translated] "Make choices selectable if"
@@ -1722,13 +1812,13 @@ export var polishStrings = {
     enterNewValue: "Please, enter the value.",
     // "There are no questions in the survey."
     noquestions: "There is no any question in the survey.",
-    // "Please create a trigger"
-    createtrigger: "Please create a trigger",
+    // [Auto-translated] "Please create a trigger"
+    createtrigger: "Proszę, stwórz wyzwalacz",
     // [Auto-translated] "Press enter button to edit"
     titleKeyboardAdornerTip: "Naciśnij przycisk Enter, aby edytować",
     // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
     keyboardAdornerTip: "Naciśnij przycisk Enter, aby edytować element, naciśnij przycisk Delete, aby usunąć element, naciśnij Alt plus strzałka w górę lub strzałka w dół, aby przenieść element",
-    // "On "
+    // [Auto-translated] "On "
     triggerOn: "On ",
     // "Make pages visible"
     triggerMakePagesVisible: "Make pages visible:",
@@ -1736,22 +1826,22 @@ export var polishStrings = {
     triggerMakeQuestionsVisible: "Make elements visible:",
     // "Complete the survey if successful."
     triggerCompleteText: "Complete the survey if succeed.",
-    // "The trigger is not set"
-    triggerNotSet: "The trigger is not set",
-    // "Run if"
-    triggerRunIf: "Run if",
-    // "Change value of: "
-    triggerSetToName: "Change value of: ",
+    // [Auto-translated] "The trigger is not set"
+    triggerNotSet: "Wyzwalacz nie jest ustawiony",
+    // [Auto-translated] "Run if"
+    triggerRunIf: "Uciekaj, jeśli",
+    // [Auto-translated] "Change value of: "
+    triggerSetToName: "Zmiana wartości: ",
     // [Auto-translated] "Copy value from: "
     triggerFromName: "Skopiuj wartość z: ",
     // [Auto-translated] "Run this Expression"
     triggerRunExpression: "Uruchom to wyrażenie",
-    // "to: "
-    triggerSetValue: "to: ",
+    // [Auto-translated] "to: "
+    triggerSetValue: "do: ",
     // [Auto-translated] "Go to the question"
     triggerGotoName: "Przejdź do pytania",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Do not put the variable into the survey result.",
+    // [Auto-translated] "Do not put the variable into the survey result."
+    triggerIsVariable: "Nie wpisuj tej zmiennej do wyniku badania.",
     // [Auto-translated] "Please enter a valid expression"
     triggerRunExpressionEmpty: "Wpisz poprawne wyrażenie",
     // [Auto-translated] "Type expression here..."
@@ -2082,6 +2172,20 @@ export var polishStrings = {
       warning: "Ostrzeżenie",
       // [Auto-translated] "Informational"
       info: "Informacyjne"
+    },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Obrazy",
+      // [Auto-translated] "Videos"
+      video: "Filmy",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Dokumenty",
+      // [Auto-translated] "Archives"
+      archive: "Archiwa",
+      // [Auto-translated] "Custom"
+      custom: "Zwyczaj"
     },
     autocomplete: {
       // [Auto-translated] "Full Name"
@@ -2496,6 +2600,8 @@ export var polishStrings = {
     notcontains: "not contains",
     // [Auto-translated] "Any of"
     anyof: "Dowolny z",
+    // [Auto-translated] "None of"
+    noneof: "Żadne z",
     // [Auto-translated] "All of"
     allof: "Wszystko z",
     // "Greater than"
@@ -2513,18 +2619,18 @@ export var polishStrings = {
   },
   // Embed window
   ew: {
-    // "Use Angular version"
-    angular: "Use Angular version",
-    // "Use jQuery version"
-    jquery: "Use jQuery version",
-    // "Use Knockout version"
-    knockout: "Use Knockout version",
-    // "Use React version"
-    react: "Use React version",
-    // "Use Vue version"
-    vue: "Use Vue version",
-    // "For bootstrap framework"
-    bootstrap: "For bootstrap framework",
+    // [Auto-translated] "Use Angular version"
+    angular: "Użyj wersji Angular",
+    // [Auto-translated] "Use jQuery version"
+    jquery: "Użyj wersji jQuery",
+    // [Auto-translated] "Use Knockout version"
+    knockout: "Użyj wersji Knockout",
+    // [Auto-translated] "Use React version"
+    react: "Użyj wersji React",
+    // [Auto-translated] "Use Vue version"
+    vue: "Użyj wersji Vue",
+    // [Auto-translated] "For bootstrap framework"
+    bootstrap: "Dla frameworka bootstrap",
     // [Auto-translated] "Modern theme"
     modern: "Nowoczesny motyw",
     // [Auto-translated] "Default theme"
@@ -2541,17 +2647,17 @@ export var polishStrings = {
     winter: "Kompozycja zimowa",
     // [Auto-translated] "Winter-Stone theme"
     winterstone: "Kompozycja Kamień zimowy",
-    // "Show survey on a page"
-    showOnPage: "Show survey on a page",
-    // "Show survey in a window"
-    showInWindow: "Show survey in a window",
-    // "Load Survey JSON from server"
-    loadFromServer: "Load Survey JSON from server",
-    // "Scripts and styles"
-    titleScript: "Scripts and styles",
-    // "HTML"
+    // [Auto-translated] "Show survey on a page"
+    showOnPage: "Pokaż ankietę na stronie",
+    // [Auto-translated] "Show survey in a window"
+    showInWindow: "Pokaż przegląd w oknie",
+    // [Auto-translated] "Load Survey JSON from server"
+    loadFromServer: "Załaduj Survey JSON z serwera",
+    // [Auto-translated] "Scripts and styles"
+    titleScript: "Scenariusze i style",
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3089,8 +3195,10 @@ export var polishStrings = {
     storeOthersAsComment: "Wybierz, aby zapisać wartość opcji \"Inne\" jako oddzielną właściwość w wynikach ankiety.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Użyj {0} jako symbolu zastępczego dla rzeczywistej wartości.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Więcej informacji można znaleźć w opisie atrybutu [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Wybierz \"Custom\", aby dodać własne rozszerzenia plików na górę zdefiniowanych kategorii.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Wprowadź rozszerzenia plików oddzielone przecinkami (np. .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Dotyczy tylko kolumn z ustawioną opcją \"Typ danych wejściowych komórki\" na Grupa przycisków radiowych lub Pola wyboru.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3508,6 +3616,18 @@ export var polishStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Podstawy",
+      // [Auto-translated] "Advanced"
+      advanced: "Zaawansowane",
+      // [Auto-translated] "Expert"
+      expert: "Ekspert"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Zastosowano preset"
   }
 };
 
