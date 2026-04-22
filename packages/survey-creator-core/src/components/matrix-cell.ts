@@ -12,6 +12,7 @@ import {
   surveyLocalization,
   Serializer,
   Action,
+  getLocaleString,
 } from "survey-core";
 import { defaultCss } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
@@ -153,6 +154,7 @@ export class MatrixCellWrapperViewModel extends Base {
       this.editActionValue = new Action({
         id: "edit",
         showTitle: false,
+        title: editorLocalization.getString("ed.edit"),
         iconName: "icon-edit_16x16",
         innerCss: "svc-matrix-cell__question-controls-button",
         appearance: { style: "brand", size: "medium", mode: "quaternary-surface", showBorder: true },
