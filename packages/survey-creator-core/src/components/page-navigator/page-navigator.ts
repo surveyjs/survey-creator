@@ -1,11 +1,14 @@
 import { PagesController } from "../../pages-controller";
 import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
-
-import "./page-navigator.scss";
-import "./page-navigator-item.scss";
 import { getLocString } from "../../editorLocalization";
 import { listComponentCss } from "../list-theme";
 import { DomDocumentHelper } from "survey-core";
+import { CreatorBase } from "src/creator-base";
+import { PageAdorner } from "../page";
+import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
+
+import "./page-navigator.scss";
+import "./page-navigator-item.scss";
 
 export class PageNavigatorViewModel extends Base {
   public icon: string;
@@ -143,39 +146,26 @@ export class PageNavigatorViewModel extends Base {
     return this.pagesController.creator["pageEditMode"] === "bypage";
   }
   public scrollToPage(page: PageModel) {
-    const document = DomDocumentHelper.getDocument();
     if (this.pageEditMode === "bypage") {
       this.pagesController.currentPage = page;
       this.currentPage = page;
       this.pagesController.creator.selectElement(this.pagesController.currentPage);
       return;
     }
-    const rootNode = this._itemsContainer?.getRootNode();
-    const doc = rootNode instanceof Document || rootNode instanceof ShadowRoot ? rootNode : document;
-    const el: any = doc.getElementById(page.id);
-    if (!!el) {
-      const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
-      if (!!this._scrollableContainer) {
-        // const y = el.offsetTop - (this._scrollableContainer.clientHeight / 4);
-        this._scrollableContainer.scrollTo(this._scrollableContainer.scrollLeft, el.offsetTop - 20);
-        this.patchContainerOffset(el);
-        if (isLastPage) {
-          setTimeout(() => {
-            this._scrollableContainer.scrollTo(this._scrollableContainer.scrollLeft, el.offsetTop - 20);
-            this.patchContainerOffset(el);
-          }, 50);
-        }
-      } else {
-        el.scrollIntoView({ block: "start" });
-        this.patchContainerOffset(el);
-        if (isLastPage) {
-          setTimeout(() => {
-            el.scrollIntoView({ block: "start" });
-            this.patchContainerOffset(el);
-          }, 50);
-        }
-      }
+    const pageAdorner = SurveyElementAdornerBase.GetAdorner(page) as PageAdorner;
+    if (!!pageAdorner && !pageAdorner.needRenderContent) {
+      pageAdorner.needRenderContent = true;
     }
+    setTimeout(() => {
+      const document = DomDocumentHelper.getDocument();
+      const rootNode = this._itemsContainer?.getRootNode();
+      const doc = rootNode instanceof Document || rootNode instanceof ShadowRoot ? rootNode : document;
+      const el: any = doc.getElementById(page.id);
+      if (!!el) {
+        (this.pagesController.creator as any as CreatorBase).scrollToElement(page, el, el);
+        this.patchContainerOffset(el);
+      }
+    }, 50);
   }
   protected createActionBarCore(item: IAction): Action {
     return new Action(item);

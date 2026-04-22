@@ -626,6 +626,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
     items.push(this.saveThemeAction);
 
+    const creator = this.creator;
     this.resetTheme = new Action({
       id: "svc-reset-theme",
       css: "sv-action--reset-theme",
@@ -650,7 +651,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           {
             applyTitle: getLocString("ed.themeResetConfirmationOk"),
             locale: editorLocalization.currentLocale,
-            cssClass: "sv-popup--confirm svc-creator-popup"
+            cssClass: "sv-popup--confirm svc-creator-popup",
+            rootElement: creator.rootElement
           }
         );
       }

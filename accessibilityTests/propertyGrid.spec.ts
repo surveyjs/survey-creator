@@ -19,3 +19,4 @@ test.describe("property grid a11y", () => {
     await checkA11y(page, ["#survey-creator", ".spg-page"], { axeOptions });
   });
 });
+

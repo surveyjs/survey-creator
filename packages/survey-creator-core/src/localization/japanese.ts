@@ -7,7 +7,7 @@ export var jaStrings = {
     edit: "編集",
     // "Watch and learn how to create surveys"
     externalHelpLink: "アンケート作成方法の動画を見る",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "ツールボックスからここに質問をドロップしてください。",
@@ -63,7 +63,7 @@ export var jaStrings = {
     tagbox: "複数選択ドロップダウン",
     // "File Upload"
     file: "ファイル",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "マトリックス（単一選択）",
@@ -765,6 +765,14 @@ export var jaStrings = {
       // [Auto-translated] "Expression"
       expression: "表現"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "表現"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "表現"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -882,8 +890,8 @@ export var jaStrings = {
     inherit: "受け継ぐ",
     // "Apply"
     apply: "適用",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "わかった",
     // "Save"
     save: "保存",
     // [Auto-translated] "Clear"
@@ -1046,7 +1054,7 @@ export var jaStrings = {
     columnEdit: "行編集: {0}",
     // "Edit item: {0}"
     itemEdit: "アイテム編集: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "パス",
@@ -1112,6 +1120,8 @@ export var jaStrings = {
     choicesOrder: "選択順",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "カスタム選択を許可する",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "「Create Custom Choice」コマンドテキスト",
     // "Visible"
     visible: "表示",
     // "Required"
@@ -1582,6 +1592,8 @@ export var jaStrings = {
     minErrorText: "\"値が最小値を下回っています\" というエラー メッセージ",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "\"値が最大値を超えています\" というエラー メッセージ",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "「値がステップサイズと一致しません」というエラーメッセージ",
     // "\"Empty comment\" error message"
     otherErrorText: "「コメントを空にしました」というエラーメッセージ",
     // "Error message for duplicate responses"
@@ -2642,9 +2654,9 @@ export var jaStrings = {
     loadFromServer: "サーバーからアンケートのJSONファイルを読み込む",
     // "Scripts and styles"
     titleScript: "スクリプトとスタイル",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2690,18 +2702,18 @@ export var jaStrings = {
   },
   peplaceholder: {
     patternmask: {
-      // "Ex.: +1(999)-999-99-99"
-      pattern: "Ex.: +1(999)-999-99-99"
+      // [Auto-translated] "Ex.: +1(999)-999-99-99"
+      pattern: "例:+1(999)-999-99-99"
     },
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "例:mm / dd / yyyy HH:MM:ss"
     },
     currencymask: {
-      // "Ex.: $"
-      prefix: "Ex.: $",
-      // "Ex.: USD"
-      suffix: "Ex.: USD"
+      // [Auto-translated] "Ex.: $"
+      prefix: "例:$",
+      // [Auto-translated] "Ex.: USD"
+      suffix: "例:USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -3612,7 +3624,9 @@ export var jaStrings = {
       advanced: "上級",
       // [Auto-translated] "Expert"
       expert: "専門家"
-    }
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "プリセット適用"
   }
 };
 

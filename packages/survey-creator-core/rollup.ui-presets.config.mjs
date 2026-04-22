@@ -26,6 +26,7 @@ export default () => {
       tsconfig: resolve(__dirname, "tsconfig.ui-presets.json"),
       external: ["survey-creator-core"],
       dir: resolve(buildPath, "ui-presets"),
+      declarationDir: resolve(buildPath, "ui-presets"),
       globalName: globalName,
       globals: { "survey-creator-core": "SurveyCreatorCore" },
       emitMinified: process.env.emitMinified === "true",

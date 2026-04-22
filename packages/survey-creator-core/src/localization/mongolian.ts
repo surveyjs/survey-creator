@@ -7,7 +7,7 @@ export var mnStrings = {
     edit: "Засах",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Санал асуулга үүсгэх заавартай танилцах",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Хэрэглүүрээс асуулт нэмнэ үү",
@@ -63,7 +63,7 @@ export var mnStrings = {
     tagbox: "Tag Box",
     // "File Upload"
     file: "Файл",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "Нэг сонголттот матриц",
@@ -180,8 +180,8 @@ export var mnStrings = {
     testSurveyAgain: "Санал асуулгыг дахин урьдчилан харах",
     // "Survey width: "
     testSurveyWidth: "Санал асуулгын өргөн: ",
-    // "You had to navigate to"
-    navigateToMsg: "You had to navigate to",
+    // [Auto-translated] "You had to navigate to"
+    navigateToMsg: "Чи чиглүүлэх ёстой байсан",
     // "Save Survey"
     saveSurvey: "Санал асуулга хадгалах",
     // "Save Survey"
@@ -240,10 +240,16 @@ export var mnStrings = {
     generateValidJSON: "Бодит JSON үүсгэх",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Тодорхойгүй үүрэг: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Тодорхойгүй үүргүүд: \"{0}\".",
     // [Auto-translated] "Unknown variable: \"{0}\"."
     expressionUnknownVariable: "Тодорхойгүй хувьсагч: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Тодорхойгүй хувьсагч: \"{0}\".",
     // [Auto-translated] "Syntax error."
     expressionSyntaxError: "Синтаксын алдаа.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Семантик алдаа.",
     // "Generate Readable JSON"
     generateReadableJSON: "Ойлгомжтой JSON үүсгэх",
     // "Toolbox"
@@ -272,8 +278,8 @@ export var mnStrings = {
     surveyResults: "Санал асуулгын хариу",
     // "As Table"
     surveyResultsTable: "Санал асуулгын хариултыг хүснэгтээр харуулах",
-    // "As JSON"
-    surveyResultsJson: "As JSON",
+    // [Auto-translated] "As JSON"
+    surveyResultsJson: "JSON нэрээр",
     // "Question Title"
     resultsTitle: "Асуултын гарчиг",
     // "Question Name"
@@ -759,6 +765,14 @@ export var mnStrings = {
       // [Auto-translated] "Expression"
       expression: "Өгүүлбэр"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Илэрхийлэл"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Илэрхийлэл"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -876,8 +890,8 @@ export var mnStrings = {
     inherit: "Өв залгамжл",
     // "Apply"
     apply: "Хэрэгжүүл",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "ЗА",
     // "Save"
     save: "Хадгалах",
     // "Clear"
@@ -1106,6 +1120,8 @@ export var mnStrings = {
     choicesOrder: "Сонголтыг эрэмбэлэх дараалал",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Өөрийн сонголтыг хийх боломж олгох",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "\"Create Custom Choice\" командын текст",
     // "Visible"
     visible: "Харагдана",
     // "Required"
@@ -1576,6 +1592,8 @@ export var mnStrings = {
     minErrorText: "Хамгийн бага утгаас бага байна! алдааны мэдэгдэл",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Хамгийн их утгаас их байна! алдааны мэдэгдэл",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"Утга алхмын хэмжээтэй таарахгүй байна\" алдааны мэдэгдэл",
     // "\"Empty comment\" error message"
     otherErrorText: "Хоосон санал хүсэлт! алдааны мэдэгдэл",
     // "Error message for duplicate responses"
@@ -1799,8 +1817,8 @@ export var mnStrings = {
     titleKeyboardAdornerTip: "Засахын тулд Enter товчийг дарна уу",
     // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
     keyboardAdornerTip: "Засахын тулд Enter товчийг дарна уу, Устгахын тулд Delete товчийг дарна уу, Хөдөлгөхийн тулд alt + дээш сум эсвэл доош сум дарна уу",
-    // "On "
-    triggerOn: "On ",
+    // [Auto-translated] "On "
+    triggerOn: "Дээр ",
     // "Make pages visible"
     triggerMakePagesVisible: "Хуудсуудыг харуулах",
     // "Make elements visible"
@@ -2048,10 +2066,10 @@ export var mnStrings = {
     color: "өнгө",
     // "date"
     date: "огноо",
-    // "datetime"
-    datetime: "datetime",
-    // "datetime-local"
-    "datetime-local": "datetime-local",
+    // [Auto-translated] "datetime"
+    datetime: "Огноо",
+    // [Auto-translated] "datetime-local"
+    "datetime-local": "Огноо-Орон нутгийн",
     // "email"
     email: "цахим шуудан",
     // "month"
@@ -2060,15 +2078,15 @@ export var mnStrings = {
     number: "тоо",
     // "password"
     password: "нууц үг",
-    // "range"
-    range: "range",
+    // [Auto-translated] "range"
+    range: "Хүрээ",
     // "tel"
     tel: "Дугаар",
     // "text"
     text: "Текст",
     // "time"
     time: "цаг",
-    // "url"
+    // [Auto-translated] "url"
     url: "url",
     // "week"
     week: "долоо хоног",
@@ -2381,7 +2399,7 @@ export var mnStrings = {
       image: "Зураг",
       // "Video"
       video: "Видео",
-      // "YouTube"
+      // [Auto-translated] "YouTube"
       youtube: "YouTube"
     },
     displayMode: {
@@ -2636,9 +2654,9 @@ export var mnStrings = {
     loadFromServer: "JSON серверээс санал асуулгыг ачааллуулах",
     // "Scripts and styles"
     titleScript: "Скрипт ба хэв маяг",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2663,7 +2681,7 @@ export var mnStrings = {
     expressionvalidator: "илэрхийлэл",
     // "Number"
     numericvalidator: "Тоо",
-    // "Regex"
+    // [Auto-translated] "Regex"
     regexvalidator: "Regex",
     // "Text"
     textvalidator: "Текст"
@@ -3349,10 +3367,10 @@ export var mnStrings = {
     defaultRowValue: "Үндсэн мөрийн утга", // Auto-generated string
     // [Auto-translated] "Auto-expand new row details"
     detailPanelShowOnAdding: "Шинэ мөрийн нарийн ширийн зүйлсийг автоматаар тэлэх",
-    // "Choices lazy load enabled"
-    choicesLazyLoadEnabled: "Choices lazy load enabled", // Auto-generated string
-    // "Choices lazy load page size"
-    choicesLazyLoadPageSize: "Choices lazy load page size", // Auto-generated string
+    // [Auto-translated] "Choices lazy load enabled"
+    choicesLazyLoadEnabled: "Сонголтууд lazy load идэвхжсэн", // Auto-generated string
+    // [Auto-translated] "Choices lazy load page size"
+    choicesLazyLoadPageSize: "Сонголтууд: залхуу ачаалах хуудасны хэмжээ", // Auto-generated string
     // "Input field component"
     inputFieldComponent: "Оролтын утгын бүрэлдэхүүн", // Auto-generated string
     // "Item component"
@@ -3383,14 +3401,14 @@ export var mnStrings = {
     navigationTitle: "Чиглүүлэгчийн гарчиг", // Auto-generated string
     // "Navigation description"
     navigationDescription: "Чиглүүлэгчийн тайлбар", // Auto-generated string
-    // "Long tap"
-    longTap: "Long tap", // Auto-generated string
+    // [Auto-translated] "Long tap"
+    longTap: "Урт цохилт", // Auto-generated string
     // "Expand input field dynamically"
     autoGrow: "Автоматаар нэмэх",
     // [Auto-translated] "Enable resize handle"
     allowResize: "Дахин хэмжээ өөрчлөх хандлагыг идэвхжүүлэх",
-    // "Accept carriage return"
-    acceptCarriageReturn: "Accept carriage return", // Auto-generated string
+    // [Auto-translated] "Accept carriage return"
+    acceptCarriageReturn: "Тэрэгний буцаалтыг хүлээн авна", // Auto-generated string
     // "Display mode"
     displayMode: "Дэлгэцийн горим",
     // "Rate type"
@@ -3413,8 +3431,8 @@ export var mnStrings = {
     backgroundColor: "Дэвсгэр өнгө",
     // "Template elements"
     templateElements: "Загварын элементүүд", // Auto-generated string
-    // "Operator"
-    operator: "Operator", // Auto-generated string
+    // [Auto-translated] "Operator"
+    operator: "Оператор", // Auto-generated string
     // "Is variable"
     isVariable: "Хувьсах чадвартай", // Auto-generated string
     // "Run expression"
@@ -3606,7 +3624,9 @@ export var mnStrings = {
       advanced: "Дэвшилтэт",
       // [Auto-translated] "Expert"
       expert: "Мэргэжилтэн"
-    }
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Урьдчилсан тохируулга хэрэглээ"
   }
 };
 

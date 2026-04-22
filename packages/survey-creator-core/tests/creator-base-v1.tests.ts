@@ -14,9 +14,10 @@ import {
   Question,
   PageModel,
   ItemValue,
-  QuestionPanelDynamicModel
+  QuestionPanelDynamicModel,
+  MatrixDropdownColumn
 } from "survey-core";
-import { getNextValue, getNextItemText } from "../src/utils/creator-utils";
+import { getNextValue, getNextItemText, getNextColumnTitle } from "../src/utils/creator-utils";
 import { editorLocalization } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 import { CreatorTester } from "./creator-tester";
@@ -118,6 +119,27 @@ test("getNextItemText for simple text", (): any => {
   choices[0].text = "Item abc";
   choices[1].text = "Item bde";
   expect(getNextItemText(choices)).toBeFalsy();
+});
+
+test("getNextColumnTitle", (): any => {
+  const columns: Array<MatrixDropdownColumn> = [];
+  expect(getNextColumnTitle(columns)).toBeFalsy();
+  columns.push(new MatrixDropdownColumn("col1"));
+  columns.push(new MatrixDropdownColumn("col2"));
+  expect(getNextColumnTitle(columns)).toBeFalsy();
+  columns[0].title = "Column 1";
+  columns[1].title = "Column 2";
+  expect(getNextColumnTitle(columns)).toEqual("Column 3");
+});
+
+test("getNextColumnTitle with no pattern", (): any => {
+  const columns: Array<MatrixDropdownColumn> = [];
+  columns.push(new MatrixDropdownColumn("Column 1"));
+  columns.push(new MatrixDropdownColumn("Column 2"));
+  expect(getNextColumnTitle(columns)).toBeFalsy();
+  columns[0].title = "Title abc";
+  columns[1].title = "Title bde";
+  expect(getNextColumnTitle(columns)).toBeFalsy();
 });
 
 test("Set Text property", () => {

@@ -699,6 +699,29 @@ test("Toolbox search", (): any => {
   expect(creator.toolbox.items.filter(item => item.visible).map(item => item.name)).toEqual(["expression"]);
 });
 
+test("Toolbox search in sub items", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.searchEnabled = true;
+  const textItem = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
+  expect(textItem.hasSubItems).toBe(true);
+  expect(textItem.items.some(i => i.id === "date")).toBe(true);
+
+  creator.toolbox.searchManager.filterString = "date";
+  const visibleItems = creator.toolbox.items.filter(item => item.visible);
+  expect(visibleItems.map(item => item.name)).toContain("text");
+
+  creator.toolbox.searchManager.filterString = "email";
+  const visibleItems2 = creator.toolbox.items.filter(item => item.visible);
+  expect(visibleItems2.map(item => item.name)).toContain("text");
+
+  creator.toolbox.searchManager.filterString = "nonexistentsubitem";
+  const visibleItems3 = creator.toolbox.items.filter(item => item.visible);
+  expect(visibleItems3.map(item => item.name)).not.toContain("text");
+
+  creator.toolbox.searchManager.filterString = "";
+  expect(creator.toolbox.items.filter(item => item.visible).length).toBe(creator.toolbox.items.length);
+});
+
 test("Toolbox search within categories with titles", (): any => {
   const creator = new CreatorTester();
   creator.toolbox.searchEnabled = true;
