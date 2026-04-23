@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON, getListItemByText, getPropertyGridCategory } from "../helper";
+import { url, test, expect, setJSON, getPropertyGridCategory, getVisibleSelectListItemByText } from "../helper";
 
 const title = "Property Grid";
 
@@ -43,7 +43,7 @@ test.describe(title, () => {
     await logicTab.click();
     await editVisibleIf.first().click();
     await chooseQuestion.first().click();
-    await getListItemByText(page, "question2").click();
+    await getVisibleSelectListItemByText(page, "question2").click();
     await question2Text.fill("val1");
     await applyBtn.first().click();
   });

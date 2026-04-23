@@ -11,6 +11,7 @@ svg.svc-icon-item__icon use {
   fill: var(--sjs2-color-fg-brand-primary, #19b394);
 }
 
+.sd-selectlist__item--selected,
 .svc-list__item--selected {
   svg.svc-icon-item__icon,
   svg.svc-icon-item__icon use {

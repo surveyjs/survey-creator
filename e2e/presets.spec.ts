@@ -27,7 +27,7 @@ async function getMenuTexts(page: any) {
 }
 
 async function getDropdownTexts(page: any) {
-  return await getTextsBySelector(".svc-list__item", page);
+  return await getTextsBySelector(".sd-selectlist__item", page);
 }
 
 test.describe(title, () => {
