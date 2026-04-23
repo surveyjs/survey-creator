@@ -72,6 +72,9 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         innerCss: "svc-image-item-value-controls__add",
         showTitle: new ComputedUpdater(() => !this.showChooseButtonAsIcon) as unknown as boolean,
         appearance: { style: "brand", mode: "tertiary", size: "small" },
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
         action: () => {
           this.chooseNewFile(this);
         }
@@ -105,6 +108,9 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         showTitle: false,
         needSpace: true,
         appearance: { style: "brand", mode: "quaternary-surface", size: "medium" },
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
         action: () => {
           this.chooseFile(this);
         }
@@ -115,6 +121,9 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         iconName: "icon-delete",
         showTitle: false,
         appearance: { style: "alert", mode: "quaternary-surface", size: "medium" },
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
         action: () => {
           this.remove(this);
         }

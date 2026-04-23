@@ -18,6 +18,7 @@ import { getLocString } from "../editorLocalization";
 import { getNextValue, getQuestionFromObj } from "../utils/creator-utils";
 
 import "./question-rating.scss";
+import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 
 export class QuestionRatingAdornerViewModel extends Base {
   constructor(
@@ -124,6 +125,12 @@ export class QuestionRatingAdornerViewModel extends Base {
   public get enableRemove(): boolean {
     return this.allowRemove && QuestionRatingAdornerViewModel.allowRemoveForElement(this.element);
   }
+  protected onFocusAction (event: FocusEvent): void {
+    const adorner = this.surveyElement.getPropertyValue(SurveyElementAdornerBase.AdornerValueName);
+    if (adorner) {
+      adorner.select(adorner, event);
+    }
+  }
 
   protected createRateActions() {
     return [
@@ -136,6 +143,9 @@ export class QuestionRatingAdornerViewModel extends Base {
         visible: new ComputedUpdater(() => this.allowRemove) as unknown as boolean,
         enabled: new ComputedUpdater(() => this.enableRemove) as unknown as boolean,
         title: new ComputedUpdater(() => this.removeTooltip) as unknown as string,
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
         action: () => {
           this.removeItem(this);
         }
@@ -149,6 +159,9 @@ export class QuestionRatingAdornerViewModel extends Base {
         visible: new ComputedUpdater(() => this.allowAdd) as unknown as boolean,
         enabled: new ComputedUpdater(() => this.enableAdd) as unknown as boolean,
         title: new ComputedUpdater(() => this.addTooltip) as unknown as string,
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
         action: () => {
           this.addItem(this);
         }

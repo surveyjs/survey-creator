@@ -22,6 +22,7 @@ import { StringEditorConnector } from "./string-editor";
 import { ExpandCollapseManager, IExpandCollapseChoice } from "../expand-collapse-manager";
 import { SurveyHelper } from "../survey-helper";
 import { DomDocumentHelper } from "survey-core";
+import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 
 const specificChoices = {
   "noneItem": "showNoneItem",
@@ -241,7 +242,12 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
       this.item.setIsVisible(!(this.allowItemOperations?.allowAdd === false));
     }
   }
-
+  protected onFocusAction (event: FocusEvent): void {
+    const adorner = this.question.getPropertyValue(SurveyElementAdornerBase.AdornerValueName);
+    if (adorner) {
+      adorner.select(adorner, event);
+    }
+  }
   private addActionValue?: Action;
   public get addAction(): Action {
     if (!this.addActionValue) {
@@ -253,6 +259,9 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         showTitle: false,
         appearance: { size: "x-small", style: "brand", mode: "tertiary" },
         title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
         action: () => {
           this.add(this);
         }
@@ -271,7 +280,8 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         appearance: { size: "x-small", style: "alert", mode: "tertiary" },
         iconSize: "auto",
         title: new ComputedUpdater(() => this.tooltip) as unknown as string,
-        onFocus: (isMouse: boolean, event: FocusEvent) => {
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
           event.currentTarget.removeEventListener("focusout", this.onFocusOut);
           event.currentTarget.addEventListener("focusout", this.onFocusOut);
         },
@@ -293,6 +303,9 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         appearance: { style: "brand", size: "x-small", mode: "tertiary" },
         iconSize: "auto",
         title: new ComputedUpdater(() => this.dragTooltip) as unknown as string,
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
         action: () => {
           this.togglePanel();
         }

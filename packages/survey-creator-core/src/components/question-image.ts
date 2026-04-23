@@ -128,6 +128,9 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
       needSpace: true,
       visible: new ComputedUpdater(() => this.allowEdit) as unknown as boolean,
       appearance: { style: "brand", mode: "quaternary-surface", size: "medium" },
+      onFocus: (_, event: FocusEvent) => {
+        this.select(this, event);
+      },
       action: () => {
         this.chooseFile(this);
       }
