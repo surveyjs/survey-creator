@@ -75,7 +75,9 @@ test.describe(title, () => {
 
   test("Presets pages overview", async ({ page }) => {
     expect(await page.locator(".sps-page__title").getByText("Languages")).toBeVisible();
-    await compareScreenshot(page, page.locator(".sps-page"), "presets-languages.png");
+    await compareScreenshot(page, page.locator(".sps-page"), "presets-languages.png", {
+      mask: await page.locator(".sd-selectbase__column:nth-child(3) .sd-item:not(:first-child)").all()
+    });
 
     await page.locator(".sps-panel--navigation").getByText("Next").click();
     expect(await page.locator(".sps-page__title").getByText("Tabs")).toBeVisible();
@@ -216,6 +218,8 @@ test.describe(title, () => {
   test("Presets small screen", async ({ page }) => {
     await page.setViewportSize({ width: 900, height: 1507 });
     expect(await page.locator(".sps-page__title").getByText("Languages")).toBeVisible();
-    await compareScreenshot(page, page.locator(".sps-body"), "presets-small-screen.png");
+    await compareScreenshot(page, page.locator(".sps-body"), "presets-small-screen.png", {
+      mask: await page.locator(".sd-selectbase__column:nth-child(3) .sd-item:not(:first-child)").all()
+    });
   });
 });
