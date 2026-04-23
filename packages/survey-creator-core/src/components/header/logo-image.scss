@@ -43,10 +43,15 @@
   justify-content: center;
   align-items: center;
   border-radius: var(--ctr-survey-header-logo-placeholder-corner-radius, var(--lbr-corner-radius-round));
-  transition: background-color $creator-transition-duration, opacity $creator-transition-duration;
+  transition:
+    background-color $creator-transition-duration,
+    opacity $creator-transition-duration;
 
   &:hover {
-    background-color: var(--ctr-survey-header-logo-placeholder-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
+    background-color: var(
+      --ctr-survey-header-logo-placeholder-background-color-hovered,
+      var(--sjs-primary-background-10, #19b3941a)
+    );
     opacity: unset;
 
     use {
@@ -84,6 +89,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  --sd-action-gap: var(--sjs2-spacing-x100, 8px);
 }
 
 .svc-logo-image-container:not(.svc-logo-image-container--editable) {

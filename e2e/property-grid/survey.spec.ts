@@ -62,7 +62,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
     const question = page.locator(".sv-string-editor").getByText("Question 1");
-    const edit = page.locator("button[title='Edit']");
+    const edit = page.locator(".spg-table__cell button[title='Edit']");
     const showInMultiple = page.locator("input[name='showInMultipleColumns']").locator("..");
     const radioMatrixCell = page.locator("td:nth-of-type(2) .svc-matrix-cell");
     const controlButton = radioMatrixCell.locator(".svc-matrix-cell__question-controls");

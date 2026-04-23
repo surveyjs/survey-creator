@@ -124,11 +124,11 @@ test.describe(title, () => {
       }]
     });
 
-    await page.locator(".svc-tab-designer .svc-context-button--danger").first().click();
+    await page.locator(".svc-image-item-value-controls .sd-action--alert").first().click();
     await expect(page.locator(".svc-tab-designer .svc-image-item-value--new")).toBeVisible();
     await page.locator(".svc-image-item-value-wrapper").filter({ visible: true }).nth(1).locator(".svc-choose-file-input").setInputFiles("../../resources/logo.jpg");
     await page.waitForLoadState("load");
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.locator(".svc-image-item-value-controls button.sd-action").first().click();
   });
 
   test("Check imagepicker add/delete - 5817", async ({ page }) => {
@@ -147,15 +147,15 @@ test.describe(title, () => {
       creator.selectElement(creator.survey.getQuestionByName("q1"));
     });
     await expect(page.locator(".svc-tab-designer .svc-image-item-value--new")).toBeVisible();
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.locator(".svc-image-item-value-controls button.sd-action").last().click();
     await page.locator(".svc-image-item-value--new").filter({ visible: true }).locator(".svc-choose-file-input").setInputFiles("../../resources/logo.jpg");
     await page.waitForLoadState("load");
 
     await expect(page.locator(".svc-image-item-value").nth(2).locator("img").getAttribute("src")).resolves.toBeTruthy();
-    await page.locator(".svc-context-button--danger").nth(2).click();
+    await page.locator(".svc-image-item-value-controls .sd-action--alert").nth(2).click();
     await expect(page.locator(".svc-image-item-value").nth(2)).toHaveClass(/svc-image-item-value--new/);
     await expect(page.locator(".svc-tab-designer .svc-image-item-value--new")).toBeVisible();
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.locator(".svc-image-item-value-controls button.sd-action").last().click();
     await page.locator(".svc-image-item-value--new").filter({ visible: true }).locator(".svc-choose-file-input").setInputFiles("../../resources/logo.jpg");
     await page.waitForLoadState("load");
 
@@ -174,11 +174,11 @@ test.describe(title, () => {
       }]
     });
 
-    await expect(page.locator(".svc-tab-designer .svc-context-button--danger")).toHaveCount(2);
+    await expect(page.locator(".svc-image-item-value-controls .sd-action--alert")).toHaveCount(2);
     await expect(page.locator(".svc-image-item-value:not(.svc-image-item-value--new)")).toHaveCount(2);
 
-    await page.locator(".svc-tab-designer .svc-context-button--danger").first().click();
-    await expect(page.locator(".svc-tab-designer .svc-context-button--danger")).toHaveCount(1);
+    await page.locator(".svc-image-item-value-controls .sd-action--alert").first().click();
+    await expect(page.locator(".svc-image-item-value-controls .sd-action--alert")).toHaveCount(1);
     await expect(page.locator(".svc-image-item-value:not(.svc-image-item-value--new)")).toHaveCount(1);
   });
 

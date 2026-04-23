@@ -307,9 +307,9 @@ test.describe(title, () => {
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners.png");
     await page.hover(".svc-logo-image-container");
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners-hover.png");
-    await page.hover(".svc-logo-image-container .svc-context-button");
+    await page.hover(".svc-logo-image-container .sd-action");
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners-choose-hover.png");
-    await page.hover(".svc-logo-image-container .svc-context-button--danger");
+    await page.hover(".svc-logo-image-container .sd-action--alert");
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners-clear-hover.png");
   });
 

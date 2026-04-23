@@ -34,9 +34,13 @@
 
 .svc-image-item-value-controls {
   position: absolute;
-  top: calcSize(1);
-  right: calcSize(1);
+  box-sizing: border-box;
+  width: 100%;
+  top: var(--sjs-spacing-x100, 8px);
+  padding: 0 var(--sjs-spacing-x100, 8px);
   z-index: 2;
+  gap: var(--sjs-spacing-x100, 8px);
+  --sd-action-bar-gap: var(--sjs-spacing-x100, 8px);
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls {
@@ -48,7 +52,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: calcSize(1);
+  padding: 0;
 }
 .sd-imagepicker {
   container-type: inline-size;
@@ -78,10 +82,6 @@
   font-weight: 400;
   white-space: normal;
 }
-.svc-image-item-value--new .svc-image-item-value-controls__button {
-  background-color: transparent;
-  transition: background-color $creator-transition-duration;
-}
 
 .svc-choose-file-input {
   position: absolute;
@@ -100,14 +100,11 @@
 .svc-image-item-value-controls__drag-area-indicator {
   display: none;
   cursor: move;
-  position: absolute;
-  top: calcSize(1);
-  left: calcSize(1);
 }
 
 .svc-question__content--selected .svc-image-item-value-wrapper:hover {
   .svc-image-item-value-controls__drag-area-indicator {
-    display: block;
+    display: flex;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, IActionAppearance, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -72,10 +72,13 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         innerCss: "svc-image-item-value-controls__add",
         showTitle: new ComputedUpdater(() => !this.showChooseButtonAsIcon) as unknown as boolean,
         appearance: { style: "brand", mode: "tertiary", size: "small" },
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
         action: () => {
           this.chooseNewFile(this);
         }
-      })
+      }),
     ];
   }
   private actionsContainerValue?: ActionContainer;
@@ -84,6 +87,63 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       this.actionsContainerValue = this.createActionsContainer();
     }
     return this.actionsContainerValue;
+  }
+
+  protected createTopActions(): Array<Action> {
+    return [
+      new Action({
+        id: "drag",
+        component: "svc-image-item-drag-action",
+        iconName: "icon-drag-24x24",
+        showTitle: false,
+        innerCss: "svc-image-item-value-controls__drag-area-indicator",
+        data: { model: this },
+        visible: this.isDraggable,
+        appearance: { style: "brand", mode: "quaternary-surface", size: "medium" },
+      }),
+      new Action({
+        id: "choose",
+        title: new ComputedUpdater(() => this.selectFileTitle) as unknown as string,
+        iconName: "icon-choosefile",
+        showTitle: false,
+        needSpace: true,
+        appearance: { style: "brand", mode: "quaternary-surface", size: "medium" },
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
+        action: () => {
+          this.chooseFile(this);
+        }
+      }),
+      new Action({
+        id: "remove",
+        title: new ComputedUpdater(() => this.removeFileTitle) as unknown as string,
+        iconName: "icon-delete",
+        showTitle: false,
+        appearance: { style: "alert", mode: "quaternary-surface", size: "medium" },
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
+        action: () => {
+          this.remove(this);
+        }
+      })
+    ];
+  }
+
+  protected createTopActionsContainer(): ActionContainer {
+    const container = new ActionContainer();
+    container.containerCss = "svc-image-item-value-controls";
+    container.setItems(this.createTopActions());
+    container.flushUpdates();
+    return container;
+  }
+  private topActionsContainerValue?: ActionContainer;
+  public get topActionsContainer() {
+    if (!this.topActionsContainerValue) {
+      this.topActionsContainerValue = this.createTopActionsContainer();
+    }
+    return this.topActionsContainerValue;
   }
 
   chooseFile(model: ImageItemValueWrapperViewModel) {

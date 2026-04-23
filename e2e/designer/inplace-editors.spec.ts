@@ -653,8 +653,8 @@ test.describe(title, () => {
 
   test("Image picker question inplace editor", async ({ page }) => {
     await explicitErrorHandler(page);
-    const chooseButtonSelector = ".svc-image-item-value-controls .svc-context-button:not(.svc-context-buttton--danger):not(.svc-image-item-value-controls__add)";
-    const deleteButtonSelector = ".svc-image-item-value-controls .svc-context-button--danger";
+    const chooseButtonSelector = ".svc-image-item-value-controls button.sd-action--brand";
+    const deleteButtonSelector = ".svc-image-item-value-controls button.sd-action--alert";
     const imageItems = getVisibleElement(page, ".svc-image-item-value-wrapper");
     await setJSON(page, {
       elements: [
@@ -695,7 +695,7 @@ test.describe(title, () => {
     await expect(imageItems.nth(3).locator("img[alt=\"Image 4\"]")).toBeVisible();
     await expect(imageItems.nth(4)).toHaveClass(/svc-image-item-value--new/);
     await expect(imageItems.nth(4).locator(".svc-image-item-value-controls__add")).toBeVisible();
-    await expect(imageItems.nth(4).locator(chooseButtonSelector).first()).not.toBeVisible();
+    await expect(imageItems.nth(4).locator(chooseButtonSelector)).toHaveCount(1);
     await expect(imageItems.nth(4).locator(deleteButtonSelector).first()).not.toBeVisible();
     await expect(imageItems.nth(4).locator("img")).toHaveCount(0);
 
@@ -758,7 +758,7 @@ test.describe(title, () => {
     let imageLink = await getImageSrc(page, "img.sd-image__image");
     expect(imageLink.substring(0, 48)).toEqual(logoBase64Substring);
     await expect(controls).toHaveCount(1);
-    await expect(controls.nth(0).locator(".svc-context-button")).toHaveCount(1);
+    await expect(controls.locator(".sd-action")).toHaveCount(1);
     await expect(question.locator(".sd-image__no-image")).toHaveCount(0);
 
     await page.evaluate(() => {
@@ -768,7 +768,7 @@ test.describe(title, () => {
     expect(imageLink).toContain("testUrl");
     await expect(question.locator(".sd-image__no-image")).toBeVisible();
 
-    await getVisibleElement(page, ".svc-context-button").click();
+    await getVisibleElement(page, ".svc-image-question-controls .sd-action").click();
     await question.locator("input[type=file]").setInputFiles("../../resources/logo.jpg");
     await expect(question.locator("img")).toBeVisible();
 

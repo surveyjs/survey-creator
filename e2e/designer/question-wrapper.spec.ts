@@ -290,7 +290,7 @@ test.describe(title + " dropdown collapse", () => {
 
   test("Dropdown question with ability to collapse choices", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
-    const buttonSelector = page.locator(".svc-question__dropdown-choices--wrapper .svc-action-button");
+    const buttonSelector = page.locator(".svc-question__dropdown-collapse-button");
 
     await expect(questions).toHaveCount(0);
 

@@ -137,7 +137,7 @@ test.describe(title, () => {
 
     const imagePicker = page.locator(".sd-imagepicker");
     await imagePicker.click();
-    await page.locator(".svc-image-item-value-controls").getByRole("button", { name: "Select a file" }).click();
+    await page.locator(".svc-image-item-value-controls").getByRole("button", { name: "Select a file" }).last().click();
     await page.evaluate(() => {
       ((window as any).creator.rootElement.getRootNode().querySelector(".sd-loading-indicator .sv-svg-icon") as HTMLElement).style.animation = "none";
     });
