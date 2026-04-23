@@ -185,24 +185,6 @@
   }
 }
 
-.sps-smiley-icon {
-  width: calcSize(3);
-  height: calcSize(3);
-  margin: calcSize(1);
-  border-radius: 100px;
-  border: 1px solid var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: calcSize(4);
-
-  svg {
-    width: calcSize(1.5);
-    height: calcSize(1.5);
-    fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
-  }
-}
-
 .sps-question--matrixdynamic.sps-question--nested {
   .sps-question__header {
     padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x100, 8px)
