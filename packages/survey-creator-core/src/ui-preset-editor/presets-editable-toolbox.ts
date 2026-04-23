@@ -248,7 +248,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     const subItems = hasCategories ? catActions : catActions.map(a => a.items).flat();
     const rowDataIndex = question.visibleRows.indexOf(row);
     const rowData = question.value[rowDataIndex];
-    if (!rowData["subitems"]) {
+    if (!rowData?.["subitems"]) {
       if (question.name == this.nameItems || question.name == this.nameInnerMatrix) {
         actions.push(new Action({
           id: "subcategories",
