@@ -154,7 +154,7 @@ test.describe(title, () => {
     const moreButton = page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).getByTitle("More");
     expect(moreButton).toBeVisible();
     moreButton.click();
-    await page.getByText("Move to category...").hover();
+    await page.getByText("Move to category...").filter({ visible: true }).hover();
     await page.waitForTimeout(300);
     expect(await page.getByText("Text Input Questions")).toBeVisible();
     await compareScreenshot(page, root, "presets-context-menu.png");
