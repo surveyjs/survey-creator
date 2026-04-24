@@ -1,5 +1,5 @@
-@use "../../../variables.scss" as *;
-@use "../../../typography-mixins.scss" as *;
+@use "../../variables.scss" as *;
+@use "../../typography-mixins.scss" as *;
 
 // .sps-matrixdynamic__drag-element {
 //   padding: calcSize(2);
@@ -182,24 +182,6 @@
   justify-content: flex-start;
   .sd-action__icon use {
     fill: var(--sjs2-color-fg-basic-primary-muted, #424146);
-  }
-}
-
-.sps-smiley-icon {
-  width: calcSize(3);
-  height: calcSize(3);
-  margin: calcSize(1);
-  border-radius: 100px;
-  border: 1px solid var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: calcSize(4);
-
-  svg {
-    width: calcSize(1.5);
-    height: calcSize(1.5);
-    fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
   }
 }
 

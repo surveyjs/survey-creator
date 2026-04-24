@@ -1,5 +1,6 @@
 import { settings as libSettings, LocalizableString } from "survey-core";
-import { ComponentContainerModel, SurveyCreatorModel } from "survey-creator-core";
+import { ComponentContainerModel } from "../components/component-container/component-container";
+import { SurveyCreatorModel } from "../creator-base";
 
 export interface IConfirmDialogOptions {
   title: string;

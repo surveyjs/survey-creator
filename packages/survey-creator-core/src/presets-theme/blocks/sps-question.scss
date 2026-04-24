@@ -1,5 +1,4 @@
-@use "../../../variables.scss" as *;
-@use "../../../typography-mixins.scss" as *;
+@use "../../typography-mixins.scss" as *;
 
 .sps-question {
   background: var(--sjs2-color-bg-basic-primary, #fff);
@@ -13,7 +12,8 @@
   border-radius: var(--sjs2-radius-x250, 20px);
   border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
   .sps-question__content {
-    padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px);
+    padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px)
+      var(--sjs2-spacing-x250, 20px);
   }
 }
 
@@ -38,8 +38,9 @@
 
 .sps-question--nested {
   .sps-question__title {
-    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.60));
-    padding: var(--sjs2-layout-control-caption-medium-caption-vertical, 8px) var(--sjs2-layout-control-caption-medium-caption-horizontal, 0);
+    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+    padding: var(--sjs2-layout-control-caption-medium-caption-vertical, 8px)
+      var(--sjs2-layout-control-caption-medium-caption-horizontal, 0);
     @include sjs2--typography--default;
   }
   .sps-question__header {
@@ -53,9 +54,9 @@
     padding: 0;
   }
   .sps-question__description {
-    @include ctrSmallFont;
+    @include sjs2--typography--small;
     color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
-    padding-bottom: calcSize(2);
+    padding-bottom: var(--sjs2-spacing-x200, 16px);
     white-space: normal;
   }
 }
@@ -69,7 +70,7 @@
 
 .sps-question__description {
   white-space: normal;
-  color: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.40));
+  color: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.4));
 }
 
 .sps-question__description--under {

@@ -23,7 +23,7 @@ async function getPropertiesTexts(page: any) {
 }
 
 async function getMenuTexts(page: any) {
-  return await getTextsBySelector(".sps-list__item:not(.sps-list__item--disabled)", page);
+  return await getTextsBySelector(".svc-list__item:not(.svc-list__item--disabled)", page);
 }
 
 async function getDropdownTexts(page: any) {
@@ -39,8 +39,8 @@ test.describe(title, () => {
   });
 
   test("Check presets tabs", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Tabs").click();
 
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-question--matrixdynamic table").nth(1);
@@ -60,8 +60,8 @@ test.describe(title, () => {
   });
 
   test("Check presets tabs - drag-drop", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Tabs").click();
 
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-question--matrixdynamic table").nth(1);
@@ -87,8 +87,8 @@ test.describe(title, () => {
   });
 
   test("Check presets tabs - edit", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Tabs").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
     expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
@@ -116,8 +116,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -154,8 +154,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - drag-drop categories", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -172,8 +172,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - drag-drop items", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -200,8 +200,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - edit category", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Toolbox").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
@@ -222,8 +222,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - custom category and custom item", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Toolbox").click();
     const items = page.locator(".sps-question--matrixdynamic").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic").nth(0);
 
@@ -272,8 +272,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Property Grid").click();
     expect((await getPropertiesTexts(page)).slice(0, 3)).toEqual(["Survey title", "Survey description", "Make the title and description visible"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -311,8 +311,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - drag-drop categories", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Property Grid").click();
     expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(1).getAttribute("title")).toBe("General");
     expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(2).getAttribute("title")).toBe("Logo in the Survey Header");
 
@@ -338,8 +338,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - drag-drop items", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Property Grid").click();
     await page.locator(".svc-sidebar-tabs").getByTitle("Logo in the Survey Header").click();
     expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo width", "Logo height", "Logo fit"]);
 
@@ -362,8 +362,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - edit category", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Property Grid").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
@@ -392,8 +392,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - custom category", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Property Grid").click();
     const items = page.locator(".sps-question--matrixdynamic").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic").nth(0);
 
@@ -425,16 +425,16 @@ test.describe(title, () => {
   });
 
   test("Hide default preset", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.locator(".sps-table__cell--actions .sd-action").nth(1).click();
 
     await page.getByRole("button", { name: "Save" }).click();
 
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Expert", "Default configuration", "Manage presets..."]);
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Quit" }).click();
 
     await showCreatorSettings(page);
     await page.getByText("Expert").click();
@@ -443,9 +443,9 @@ test.describe(title, () => {
   });
 
   test("Add custom preset", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.getByText("Add new preset").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
     await page.getByRole("button", { name: "Add" }).nth(1).click();
@@ -453,9 +453,9 @@ test.describe(title, () => {
     expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert", "MyPreset"]);
     await page.getByRole("button", { name: "Save" }).click();
 
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Default configuration", "Manage presets..."]);
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Quit" }).click();
 
     await showCreatorSettings(page);
     await page.getByText("Expert").click();
@@ -464,19 +464,19 @@ test.describe(title, () => {
   });
 
   test("Delete current custom preset in list editor switches to Basic", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     await page.getByText("Add new preset").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
     await page.getByRole("button", { name: "Add" }).nth(1).click();
     await page.getByRole("button", { name: "Save" }).click();
 
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Default configuration", "Manage presets..."]);
-    await page.locator(".sps-list__item").filter({ hasText: "MyPreset" }).click();
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "MyPreset" }).click();
+    await page.locator(".svc-list__item").filter({ hasText: "MyPreset" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "MyPreset" }).click();
 
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Manage presets...").click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     const items = page.locator(".sv-popup__container table").nth(0);
     expect(await getRowsInputValues(items)).toContain("MyPreset");
 
@@ -486,9 +486,9 @@ test.describe(title, () => {
     expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert"]);
     await page.getByRole("button", { name: "Save" }).click();
 
-    await expect(page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" })).toBeVisible();
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" }).click();
-    await expect(page.locator(".sps-list__item--selected").filter({ hasText: "Basic" })).toBeVisible();
+    await expect(page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Basic" })).toBeVisible();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Basic" }).click();
+    await expect(page.locator(".svc-list__item--selected").filter({ hasText: "Basic" })).toBeVisible();
     expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
   });
 
@@ -509,8 +509,8 @@ test.describe(title, () => {
   });
 
   test("Save as shows 'Create preset' text for new preset name", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Edit" }).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Save as...").click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Edit" }).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Save as...").click();
     await page.locator(".sd-dropdown__filter-string-input").nth(-1).fill("MyNewPreset");
     await expect(page.getByText("Create \"MyNewPreset\" preset")).toBeVisible();
   });
@@ -518,8 +518,8 @@ test.describe(title, () => {
   test("Check presets import confirmation dialog when unsaved changes exist", async ({ page }) => {
     await page.getByText("Dansk").click();
 
-    await page.locator(".sps-navigation-bar-item").nth(2).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Import").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(2).click();
+    await page.locator(".svc-list__container").filter({ visible: true }).getByText("Import").click();
     await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Import a new preset?");
 
     await page.getByRole("button", { name: "Cancel" }).click();

@@ -1,7 +1,6 @@
 import { Action, createDropdownActionModel, IAction, MatrixDynamicRowModel, PopupModel, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
-import { SurveyCreatorModel, SurveyHelper, getLocString } from "survey-creator-core";
+import { SurveyCreatorModel, listComponentCss, getLocString } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
-import { listComponentCss } from "./presets-theme/list-theme";
 export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableList {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
@@ -63,7 +62,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
 
   protected setSubitemsToAction(action: Action, items: Action[]) {
     action.setSubItems({ items: items, cssClasses: listComponentCss });
-    action.markerIconName = "icon-chevronright-24x24";
+    //action.markerIconName = "icon-chevronright-24x24";
   }
 
   protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {

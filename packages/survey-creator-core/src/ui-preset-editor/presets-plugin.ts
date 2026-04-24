@@ -1,10 +1,8 @@
 import { createDropdownActionModel, IAction, ListModel, settings as libSettings, EventBase, hasLicense, glc, Base, Action, settings, IDialogOptions, SurveyModel, QuestionTextModel, QuestionMatrixDynamicModel, Serializer, LocalizableString } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString, IPreset, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
-import { listComponentCss } from "./presets-theme/list-theme";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
-import { showConfirmDialog } from "./confirm-dialog";
-import { ComponentContainerModel, TabContainerViewModel } from "survey-creator-core";
+import { ComponentContainerModel, TabContainerViewModel, showConfirmDialog, listComponentCss } from "survey-creator-core";
 
 /**
  * A class that instantiates the UI Preset Editor and provides APIs to manage presets and their configuration.
@@ -270,6 +268,7 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     const surfaceContainer = new ComponentContainerModel();
     surfaceContainer.cssClass = presetsTabClassName;
+    surfaceContainer.scrollable = true;
     surfaceContainer.elements = [
       { componentName: "sv-action-bar", componentData: { model: this.editor.navigationBar } },
       { componentName: "survey", componentData: { survey: survey, model: survey } }

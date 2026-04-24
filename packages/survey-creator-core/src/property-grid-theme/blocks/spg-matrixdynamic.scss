@@ -1,20 +1,6 @@
 @use "../../variables.scss" as *;
 @use "../../typography-mixins.scss" as *;
 
-// .spg-matrixdynamic__drag-element {
-//   padding: calcSize(2);
-
-//   &:hover {
-//     background-color: $background;
-//   }
-
-//   &:after {
-//     content: " ";
-//     display: block;
-//     height: calcSize(0.5);
-//   }
-// }
-
 .spg-drag-element__svg {
   width: var(--ctr-data-table-row-drag-area-icon-width, var(--sjs-font-size-x3));
   height: var(--ctr-data-table-row-drag-area-icon-height, var(--sjs-font-size-x3));

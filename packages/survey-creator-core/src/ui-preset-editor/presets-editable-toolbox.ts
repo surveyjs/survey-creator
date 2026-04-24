@@ -1,9 +1,8 @@
 import { Action, FunctionFactory, Helpers, IAction, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, editorLocalization, getLocString } from "survey-creator-core";
-import { ICreatorPresetToolboxItem } from "survey-creator-core";
+import { ICreatorPresetToolboxItem, listComponentCss } from "survey-creator-core";
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
-import { listComponentCss } from "./presets-theme/list-theme";
 
 const LocCategoriesName = "toolboxCategories";
 
