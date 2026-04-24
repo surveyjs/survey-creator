@@ -125,7 +125,7 @@ test.describe(title, () => {
     await items.getByRole("row", { name: "Choice Questions" }).hover();
     await items.getByRole("row", { name: "Choice Questions" }).getByTitle("Expand").click();
     await items.getByRole("row", { name: "Slider" }).getByRole("button").nth(3).click();
-    await items.getByText("Remove from Toolbox").filter({ visible: true }).click();
+    await items.getByText("Remove from Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Checkboxes"]);
 
     await hidden.getByRole("button", { name: "More" }).nth(0).click();
@@ -281,7 +281,7 @@ test.describe(title, () => {
     await items.getByRole("row", { name: "General" }).getByTitle("Expand").click();
     await items.getByRole("row", { name: "Survey description" }).hover();
     await items.getByRole("row", { name: "Survey description" }).getByRole("button").nth(2).click();
-    await items.getByText("Remove from properties").filter({ visible: true }).click();
+    await items.getByText("Remove from properties").click();
     expect((await getPropertiesTexts(page)).slice(0, 3)).toEqual(["Survey title", "Make the title and description visible", "Make the survey read-only"]);
 
     await hidden.getByRole("button", { name: "More" }).nth(0).click();
