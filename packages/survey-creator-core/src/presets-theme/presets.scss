@@ -33,6 +33,12 @@
   }
 }
 
+.sps-container-modern {
+  .svc-list__container {
+    width: 288px;
+  }
+}
+
 .sps-container {
   width: 100%;
   height: 100%;
@@ -223,10 +229,6 @@
     width: var(--sjs2-size-x300, 24px);
     height: var(--sjs2-size-x300, 24px);
     padding: 0;
-  }
-
-  .svc-list__container {
-    width: 288px;
   }
 
   .svc-list__item-body {
