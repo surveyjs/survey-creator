@@ -177,7 +177,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         appearance: { mode: "tertiary" as any },
         visibleIndex: 20
       }, {
-        items: this.getItemMenuActions(model, question, row),
+        items: [],
         showPointer: false,
         verticalPosition: "bottom",
         horizontalPosition: "center",
