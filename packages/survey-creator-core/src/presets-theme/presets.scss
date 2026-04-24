@@ -8,6 +8,9 @@
 
 .svc-tab-designer.svc-tab-designer--presets {
   background: white;
+  .svc-list__container {
+    width: 288px;
+  }
 }
 
 .sps-root-modern {
@@ -30,12 +33,6 @@
       min-width: 100%;
       flex-grow: 1;
     }
-  }
-}
-
-.sps-container-modern {
-  .svc-list__container {
-    width: 288px;
   }
 }
 
