@@ -13,22 +13,40 @@ export const urlThemeTab = "http://127.0.0.1:8080/test-pages/theme-tab";
 export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages/creator-themes";
 export const urlPresets = "http://127.0.0.1:8080/test-pages/presets";
 
-export async function compareScreenshot(page: Page, elementSelector: string | Locator | undefined, screenshotName: string, elementIndex = 0) {
+export async function compareScreenshot(
+  page: Page,
+  elementSelector: string | Locator | undefined,
+  screenshotName: string,
+  options: {
+      animations?: "disabled" | "allow",
+      caret?: "hide" | "initial",
+      mask?: Array<Locator>,
+      maskColor?: string,
+      maxDiffPixelRatio?: number,
+      maxDiffPixels?: number,
+      omitBackground?: boolean,
+      scale?: "css" | "device",
+      stylePath?: string | Array<string>,
+      threshold?: number,
+      timeout?: number,
+  } = {}) {
   let currentElement = elementSelector;
   if (!!currentElement && typeof currentElement == "string") {
     currentElement = page.locator(currentElement);
   }
 
+  const pwOptions: {timeout: number, maxDiffPixels?: number} = {
+    timeout: 10000,
+    maskColor: "#000000",
+    ...options
+  };
+
   if (!!currentElement) {
     const element = (<Locator>currentElement).filter({ visible: true });
-    await expect.soft(element.nth(elementIndex)).toBeVisible();
-    await expect.soft(element.nth(elementIndex)).toHaveScreenshot(screenshotName, {
-      timeout: 10000
-    });
+    await expect.soft(element.nth(0)).toBeVisible();
+    await expect.soft(element.nth(0)).toHaveScreenshot(screenshotName, pwOptions);
   } else {
-    await expect.soft(page).toHaveScreenshot(screenshotName, {
-      timeout: 10000
-    });
+    await expect.soft(page).toHaveScreenshot(screenshotName, pwOptions);
   }
 }
 
