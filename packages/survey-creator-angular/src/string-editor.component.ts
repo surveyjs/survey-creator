@@ -14,6 +14,51 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   private justFocused: boolean = false;
   @Input() model!: any;
   @ViewChild("container") container!: ElementRef<HTMLElement>;
+
+  // The 4 [attr.*] bindings on the inner editable span (aria-placeholder,
+  // aria-label, contenteditable, tabIndex) are not required for the first
+  // paint of a matrix cell. Setting them synchronously during ngOnInit is
+  // the dominant cost when many StringEditor instances are created at once
+  // (e.g. deleting a row in a property-grid matrix). We render the cell
+  // synchronously with these getters returning null (Angular emits a no-op
+  // removeAttribute on a fresh element) and apply the real values
+  // asynchronously, in time-bounded chunks per animation frame so the
+  // browser can paint between batches.
+  private _attrsActive: boolean = false;
+  private _isDestroyed: boolean = false;
+
+  private static _pendingActivation: StringEditorComponent[] = [];
+  private static _activationScheduled: boolean = false;
+  private static scheduleActivation(c: StringEditorComponent, ngZone: NgZone): void {
+    StringEditorComponent._pendingActivation.push(c);
+    if (StringEditorComponent._activationScheduled) return;
+    StringEditorComponent._activationScheduled = true;
+    ngZone.runOutsideAngular(() => {
+      const flush = (): void => {
+        const start = performance.now();
+        const queue = StringEditorComponent._pendingActivation;
+        while(queue.length > 0 && performance.now() - start < 8) {
+          const editor = queue.shift()!;
+          if (!editor._isDestroyed) editor.activateAttributes();
+        }
+        if (queue.length > 0) {
+          requestAnimationFrame(flush);
+        } else {
+          StringEditorComponent._activationScheduled = false;
+        }
+      };
+      requestAnimationFrame(flush);
+    });
+  }
+  private activateAttributes(): void {
+    if (this._attrsActive || this._isDestroyed || !this.embeddedView) return;
+    this._attrsActive = true;
+    // Re-run CD once so the (now non-null) attribute bindings are applied.
+    this.embeddedView.reattach();
+    this.embeddedView.detectChanges();
+    this.embeddedView.detach();
+  }
+
   constructor(cdr: ChangeDetectorRef, vcr: ViewContainerRef, private ngZone: NgZone) {
     super(cdr, vcr);
   }
@@ -41,11 +86,14 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   protected getPropertiesToTrack(): string[] {
     return ["creator", "locString"];
   }
-  public get placeholder(): string {
-    return this.baseModel.placeholder;
+  public get placeholder(): string | null {
+    return this._attrsActive ? this.baseModel.placeholder : null;
   }
-  public get contentEditable(): boolean {
-    return this.baseModel.contentEditable;
+  public get contentEditable(): boolean | null {
+    return this._attrsActive ? this.baseModel.contentEditable : null;
+  }
+  public get tabIndex(): number | null {
+    return this._attrsActive ? this.baseModel.tabIndex : null;
   }
   public get characterCounter(): CharacterCounter {
     return this.baseModel.characterCounter;
@@ -74,6 +122,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     return this.baseModel.errorText;
   }
   public onFocus(event: any): void {
+    this.activateAttributes();
     this.baseModel.onFocus(event);
     this.justFocused = true;
   }
@@ -85,6 +134,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     (<any>this.locString).__isEditing = false;
   }
   public edit(event: any): void {
+    this.activateAttributes();
     this.container.nativeElement.focus();
     (<any>this.locString).__isEditing = true;
     this.baseModel.onClick(event);
@@ -92,21 +142,27 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   override ngOnInit(): void {
     super.ngOnInit();
     this.locString?.onStringChanged.add(this.onChangeHandler);
+    // Defer the 4 [attr.*] bindings (aria-placeholder, aria-label,
+    // contenteditable, tabIndex) off the synchronous initial-render path.
+    // See _attrsActive comment for rationale.
+    StringEditorComponent.scheduleActivation(this, this.ngZone);
   }
   ngAfterViewInit(): void {
     if ((<any>this.locString).__isEditing) {
+      this.activateAttributes();
       this.container.nativeElement.focus();
     }
   }
   override ngOnDestroy(): void {
+    this._isDestroyed = true;
     this.baseModel.blurEditor = undefined as any;
     this.baseModel.getEditorElement = undefined as any;
     this.baseModel.dispose();
     this.locString?.onStringChanged.remove(this.onChangeHandler);
     super.ngOnDestroy();
   }
-  get ariaLabel(): string {
-    return this.placeholder || "content editable";
+  get ariaLabel(): string | null {
+    return this._attrsActive ? (this.baseModel.placeholder || "content editable") : null;
   }
 }
 
