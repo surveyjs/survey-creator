@@ -60,6 +60,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     await getBarItemByTitle(page, "Used Strings Only").click();
     await getListItemByText(page, "All Strings").click();
+    await page.waitForTimeout(500);
     await compareScreenshot(page, stringsView, "translation-tab-show-all-strings.png");
   });
 
