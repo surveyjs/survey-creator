@@ -29,7 +29,7 @@ test.describe(title, () => {
     await getAddNewQuestionButton(page).click();
     await expect(page.locator("span").getByText("question1").first()).toBeVisible();
     await expect(getVisibleElement(page, ".svc-question__content.svc-question__content--selected")).toBeVisible();
-    await page.locator(".svc-element__add-new-question > button.svc-element__question-type-selector").first().click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").first().click();
     await page.waitForTimeout(100);
     await page.keyboard.press("p");
     await getListItemByText(page, "Panel").click();
@@ -139,14 +139,14 @@ test.describe(title, () => {
     });
 
     await page.locator(".sv-string-editor").getByText("question1").click();
-    await page.locator(".svc-element__add-new-question").nth(0).click();
+    await page.locator(".svc-panel__add-new-question-container .sd-action").nth(0).click();
     await expect(page.locator("[data-name=\"question2\"]")).toBeVisible();
   });
 
   test("Add New Question with sub type", async ({ page }) => {
     const questionContentActions = getVisibleElement(page, ".svc-question__content-actions .sd-action__title");
 
-    await page.locator(".svc-element__add-new-question button").click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
     await getListItemByText(page, "Rating Scale").hover();
     await page.waitForTimeout(400);
     await getListItemByText(page, "Stars").click();

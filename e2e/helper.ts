@@ -272,12 +272,12 @@ export async function handleShiftEnter(page: Page, selector: string) {
 export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sd-action__title";
 
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
-  await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
+  await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
   await page.locator(".svc-list__item span").getByText(text, { exact: true }).filter({ visible: true }).click();
 }
 
 export function getAddNewQuestionButton(page: Page): Locator {
-  return page.locator(".svc-element__add-new-question > span").getByText("Add Question");
+  return page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn > span").getByText("Add Question");
 }
 
 export function getToolboxItemByText(page: Page, text: string): Locator {

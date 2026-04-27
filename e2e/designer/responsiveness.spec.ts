@@ -298,7 +298,7 @@ test.describe(title, () => {
     await setJSON(page, json);
     await page.setViewportSize({ width: 1920, height: 900 });
     await page.waitForTimeout(500);
-    await page.locator("button.svc-element__question-type-selector").click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
     await expect(getListItemByText(page, "Single-Line Input")).toHaveCount(1);
   });
 
@@ -307,7 +307,7 @@ test.describe(title, () => {
     await setJSON(page, json);
     await page.setViewportSize({ width: 380, height: 600 });
     await page.waitForTimeout(500);
-    await page.locator("button.svc-element__question-type-selector").first().click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").first().click();
     await expect(getListItemByText(page, "Single-Line Input")).toHaveCount(1);
   });
 
