@@ -1,7 +1,6 @@
 @use "../variables" as *;
 @use "./notifier.scss";
 @use "./popup.scss";
-@use "./button.scss";
 @use "./surface-placeholder.scss";
 @use "../lbr-font-sizes.scss";
 @use "../lbr-sizes.scss";
@@ -61,7 +60,10 @@ survey-creator,
 .svc-creator {
   .sv-drag-drop-choices-shortcut {
     .sv-drag-drop-choices-shortcut__content {
-      background: var(--ctr-survey-radio-button-group-item-background-color-floating, var(--sjs-layer-1-background-500, #ffffffff));
+      background: var(
+        --ctr-survey-radio-button-group-item-background-color-floating,
+        var(--sjs-layer-1-background-500, #ffffffff)
+      );
       border-radius: var(--ctr-survey-radio-button-group-item-corner-radius-floating, var(--lbr-corner-radius-x1));
       box-shadow:
         var(--ctr-survey-radio-button-group-item-shadow-floating-2-offset-x, 0px)
@@ -190,7 +192,7 @@ survey-creator,
   top: calcSize(0.75);
   width: 100%;
   height: calcSize(0.5);
-  background: var(--sjs-secondary-background-500, #19B394FF);
+  background: var(--sjs-secondary-background-500, #19b394ff);
   position: absolute;
 }
 
