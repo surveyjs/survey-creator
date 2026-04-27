@@ -199,7 +199,7 @@ export default {
     "--sjs2-radius-component-page": "var(--sjs2-radius-x150)",
     "--sjs2-radius-component-panel": "var(--sjs2-radius-x150)",
     "--sjs2-radius-component-panel-nested": "var(--sjs2-radius-x100)",
-    "--sjs2-radius-component-modal": "var(--sjs2-radius-x300)",
+    "--sjs2-radius-component-modal": "var(--sjs2-radius-x200)",
     "--sjs2-radius-component-notifier": "var(--sjs2-radius-x200)",
     "--sjs2-radius-component-tooltip": "var(--sjs2-radius-x050)",
     "--sjs2-typography-font-family-text": "Open Sans",
