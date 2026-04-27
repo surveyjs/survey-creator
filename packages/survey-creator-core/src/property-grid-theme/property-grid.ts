@@ -3,6 +3,7 @@ import { listComponentCss } from "../components/list-theme";
 
 export var propertyGridCss = {
   root: "spg-root-modern",
+  rootTheme: "",
   container: "spg-container-modern",
   header: "spg-title spg-container-modern__title",
   body: "spg-body",
