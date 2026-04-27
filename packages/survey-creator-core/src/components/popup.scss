@@ -6,7 +6,7 @@
 
     & > .sv-popup__container {
       background-color: var(--ctr-popup-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-      border-radius: var(--ctr-popup-corner-radius, var(--sjs-corner-radius-x2));
+      border-radius: var(--sjs2-radius-component-modal, 24px);
       box-shadow:
         var(--ctr-popup-shadow-1-offset-x, 0px) var(--ctr-popup-shadow-1-offset-y, 2px)
           var(--ctr-popup-shadow-1-blur, 8px) var(--ctr-popup-shadow-1-spread, 0px)
@@ -24,7 +24,7 @@
 
       & > .sv-popup__body-content {
         background-color: var(--ctr-popup-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-        border-radius: var(--ctr-popup-corner-radius, var(--sjs-corner-radius-x2));
+        border-radius: var(--sjs2-radius-component-modal, 24px);
 
         padding: var(--ctr-popup-padding-top, var(--sjs-spacing-x4))
           var(--ctr-popup-padding-right, var(--sjs-spacing-x4)) var(--ctr-popup-padding-bottom, var(--sjs-spacing-x4))
@@ -51,8 +51,7 @@
       height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
 
       display: flex;
-      border-radius: var(--ctr-popup-corner-radius-mobile, var(--sjs-corner-radius-x2))
-        var(--ctr-popup-corner-radius-mobile, var(--sjs-corner-radius-x2)) 0px 0px;
+      border-radius: var(--sjs2-radius-component-modal, 24px) var(--sjs2-radius-component-modal, 24px) 0px 0px;
       background: var(--ctr-popup-background-color, var(--sjs-layer-1-background-500, #ffffffff));
       box-shadow:
         var(--ctr-popup-shadow-3-offset-x, 0px) var(--ctr-popup-shadow-3-offset-y, 32px)
@@ -73,8 +72,7 @@
         var(--ctr-popup-padding-right-mobile, var(--sjs-spacing-x3))
         var(--ctr-popup-padding-bottom-mobile, var(--sjs-spacing-x3))
         var(--ctr-popup-padding-left-mobile, var(--sjs-spacing-x3));
-      border-radius: var(--ctr-popup-corner-radius-mobile, var(--sjs-corner-radius-x2))
-        var(--ctr-popup-corner-radius-mobile, var(--sjs-corner-radius-x2)) 0px 0px;
+      border-radius: var(--sjs2-radius-component-modal, 24px) var(--sjs2-radius-component-modal, 24px) 0px 0px;
       box-sizing: border-box;
       flex-direction: column;
       gap: var(--ctr-popup-gap-mobile, var(--sjs-spacing-x3));
