@@ -7,7 +7,8 @@
 @use "blocks/sps-popup.scss";
 
 .svc-tab-designer.svc-tab-designer--presets {
-  background: white;
+  background: var(--sjs2-color-utility-surface-presets-manager);
+
   .svc-list__container {
     width: 288px;
   }
