@@ -105,57 +105,6 @@
   background: var(--sjs2-color-component-toggle-false-default-thumb);
 }
 
-.spg-boolean-switch[aria-disabled="true"] {
-  pointer-events: none;
-
-  .spg-boolean-switch__button {
-    background: var(--sjs2-color-component-toggle-false-disabled-bg);
-    box-shadow: var(--sjs2-border-effect-component-toggle-false-disabled);
-
-    .spg-boolean-switch__thumb--left {
-      background: var(--sjs2-color-component-toggle-false-disabled-thumb);
-    }
-  }
-
-  .spg-boolean-switch__button--checked {
-    background: var(--sjs2-color-component-toggle-true-disabled-bg);
-    box-shadow: var(--sjs2-border-effect-component-toggle-true-disabled);
-
-    .spg-boolean-switch__thumb--left {
-      background: none;
-    }
-
-    .spg-boolean-switch__thumb--right {
-      background: var(--sjs2-color-component-toggle-true-disabled-thumb);
-    }
-  }
-}
-
-.spg-boolean-switch[aria-readonly="true"] {
-  pointer-events: none;
-
-  .spg-boolean-switch__button {
-    background: var(--sjs2-color-component-toggle-false-readonly-bg);
-    box-shadow: var(--sjs2-border-effect-component-toggle-false-default);
-
-    .spg-boolean-switch__thumb--left {
-      background: var(--sjs2-color-component-toggle-false-readonly-thumb);
-    }
-  }
-
-  .spg-boolean-switch__button--checked {
-    background: var(--sjs2-color-component-toggle-true-readonly-bg);
-    box-shadow: var(--sjs2-border-effect-component-toggle-true-default);
-
-    .spg-boolean-switch__thumb--left {
-      background: none;
-    }
-
-    .spg-boolean-switch__thumb--right {
-      background: var(--sjs2-color-component-toggle-true-readonly-thumb);
-    }
-  }
-}
 
 .spg-boolean-switch__caption {
   display: flex;
