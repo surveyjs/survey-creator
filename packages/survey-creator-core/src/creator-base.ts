@@ -743,7 +743,9 @@ export class SurveyCreatorModel extends Base
    */
   public onElementAllowOperations: EventBase<SurveyCreatorModel, ElementAllowOperationsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementAllowOperationsEvent>();
   /**
-   * An event that is raised to determine whether an element can be added to the survey. Use this event to conditionally prevent adding elements of specific types or converting existing elements to those types (for example, when a predefined limit has been reached).
+   * An event that is raised to determine whether an element can be added to the survey.
+   *
+   * Use this event to conditionally prevent adding elements of specific types or converting existing elements to those types (for example, when a predefined limit has been reached). The event is re-evaluated whenever the survey changes.
    *
    * For information on event handler parameters, refer to descriptions within the interface.
    *
