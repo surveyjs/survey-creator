@@ -743,7 +743,11 @@ export class SurveyCreatorModel extends Base
    */
   public onElementAllowOperations: EventBase<SurveyCreatorModel, ElementAllowOperationsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementAllowOperationsEvent>();
   /**
-   * An event that is raised before adding an element to the survey. Use it to control which elements can be added by allowing or preventing the action.
+   * An event that is raised to determine whether an element can be added to the survey. Use this event to conditionally prevent adding elements of specific types or converting existing elements to those types (for example, when a predefined limit has been reached).
+   *
+   * For information on event handler parameters, refer to descriptions within the interface.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    */
   public onAllowAddElement: EventBase<SurveyCreatorModel, AllowAddElementEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowAddElementEvent>();
 
@@ -1311,6 +1315,8 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: -1 (unlimited)
    *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
+   *
    * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#forbiddenNestedElements) property.
    */
   public maxPanelNestingLevel: number = -1;
@@ -1335,6 +1341,8 @@ export class SurveyCreatorModel extends Base
    *   paneldynamic: [ "panel", "paneldynamic" ]
    * };
    * ```
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    * @see maxPanelNestingLevel
    */
   public forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
