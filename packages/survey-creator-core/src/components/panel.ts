@@ -1,6 +1,6 @@
-import { Action, ActionContainer, ComputedUpdater, IAction, property, Question, SurveyElement } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, property, SurveyElement } from "survey-core";
 import { QuestionAdornerViewModel } from "./question";
-import { notShortCircuitAnd } from "src/entries";
+import { notShortCircuitAnd } from "../utils/utils";
 
 export class PanelAdornerViewModel extends QuestionAdornerViewModel {
   protected createAddQuestionActions(): Array<Action> {
