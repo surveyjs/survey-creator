@@ -11,12 +11,15 @@ import {
 } from "survey-react-ui";
 import { ReactMouseEvent } from "./events";
 
-export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action, buttonClass?: string }, any> {
+export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action }, any> {
   public get model() {
     return this.item.data;
   }
   public get item() {
     return this.props.item;
+  }
+  protected getStateElement() {
+    return this.item;
   }
   protected renderTypeSelector(): React.JSX.Element {
     return <div className={this.item.cssClasses.itemTypeSelector}>{ReactElementFactory.Instance.createElement("sv-action-bar-item-dropdown", { item: this.model.questionTypeSelectorModel })}</div>;
