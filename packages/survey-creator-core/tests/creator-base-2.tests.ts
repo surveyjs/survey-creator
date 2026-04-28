@@ -1,3 +1,4 @@
+import { MockedFunction, expect, test, vi } from "vitest";
 import {
   Base,
   PanelModel,
@@ -64,11 +65,13 @@ import { TabbedMenuMode } from "../src/tabbed-menu";
 
 export * from "../src/localization/french";
 
-jest.mock("survey-core", () => {
-  const originalModule = jest.requireActual("survey-core");
+// TODO(vitest-migration): review
+vi.mock("survey-core", () => {
+  // TODO(vitest-migration): review
+  const originalModule = vi.importActual("survey-core");
   return {
     ...originalModule,
-    hasLicense: jest.fn((id) => false)
+    hasLicense: vi.fn((id) => false)
   };
 });
 
@@ -857,7 +860,7 @@ test("License text for default locale and another default locale", (): any => {
 });
 
 test("License text from plugin (unlicensed creator)", (): any => {
-  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
+  const hasLicenseMock = hasLicense as MockedFunction<typeof hasLicense>;
   const creator = new CreatorTester();
 
   creator.addPlugin("one", <ICreatorPlugin>{
@@ -890,7 +893,7 @@ test("License text from plugin (unlicensed creator)", (): any => {
 });
 
 test("License text from plugin (licensed creator)", (): any => {
-  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
+  const hasLicenseMock = hasLicense as MockedFunction<typeof hasLicense>;
   hasLicenseMock.mockReturnValue(true);
   const creator = new CreatorTester();
 

@@ -1,3 +1,4 @@
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, UIPreset } from "../src/ui-presets-creator/presets";
@@ -73,8 +74,8 @@ describe("UIPresetEditor: saveClicked", () => {
     (plugin as any)["presetsManager"].presetSelector = { value: "custom1" } as any;
     plugin.activate();
 
-    const performSaveSpy = jest.spyOn(plugin as any, "performSave").mockImplementation(() => { });
-    const saveAsHandlerSpy = jest.spyOn(plugin as any, "saveAsHandler").mockImplementation(() => { });
+    const performSaveSpy = vi.spyOn(plugin as any, "performSave").mockImplementation(() => { });
+    const saveAsHandlerSpy = vi.spyOn(plugin as any, "saveAsHandler").mockImplementation(() => { });
 
     (plugin as any)["saveOrSaveAs"]();
 

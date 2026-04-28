@@ -1,3 +1,4 @@
+import { expect, it, test, vi } from "vitest";
 import { ItemValue, QuestionDropdownModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { Question } from "survey-core";
@@ -655,7 +656,7 @@ test("visible in classes", () => {
   settings.showDialog = (options: any) => {
     popupSurvey = options.data.survey;
     onApply = options.onApply;
-    return { dispose: jest.fn() };
+    return { dispose: vi.fn() };
   };
 
   const editor = new CreatorPresetEditorModel();

@@ -1,3 +1,4 @@
+import { MockedFunction, expect, test, vi } from "vitest";
 import { QuestionMatrixDynamicModel, glc, hasLicense, settings } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
@@ -7,12 +8,14 @@ import { getLocString } from "../src/editorLocalization";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
 
-jest.mock("survey-core", () => {
-  const originalModule = jest.requireActual("survey-core");
+// TODO(vitest-migration): review
+vi.mock("survey-core", () => {
+  // TODO(vitest-migration): review
+  const originalModule = vi.importActual("survey-core");
   return {
     ...originalModule,
-    hasLicense: jest.fn(() => false),
-    glc: jest.fn(() => undefined)
+    hasLicense: vi.fn(() => false),
+    glc: vi.fn(() => undefined)
   };
 });
 
@@ -253,8 +256,8 @@ test("Delete active tab", () => {
 test("Preset plugin, getLicenseText method", () => {
   const creator = new SurveyCreatorModel({});
   const plugin = new UIPresetEditor(creator);
-  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
-  const glcMock = glc as jest.MockedFunction<typeof glc>;
+  const hasLicenseMock = hasLicense as MockedFunction<typeof hasLicense>;
+  const glcMock = glc as MockedFunction<typeof glc>;
 
   const result1 = plugin.getLicenseText(false, "");
   expect(result1).toBeTruthy();

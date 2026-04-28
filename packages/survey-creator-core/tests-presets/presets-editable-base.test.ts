@@ -1,16 +1,19 @@
+import { Mock, MockInstance, afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { MatrixDropdownRowModel, MatrixDynamicRowModel, SurveyModel, settings } from "survey-core";
 import { CreatorPresetEditableList } from "../src/ui-preset-editor/presets-editable-list";
 import { CreatorPresetBase } from "../src/ui-presets-creator/presets-base";
 import { QuestionMatrixDynamicModel } from "survey-core";
 
 // Mock settings object
-jest.mock("survey-core", () => {
-  const originalModule = jest.requireActual("survey-core");
+// TODO(vitest-migration): review
+vi.mock("survey-core", () => {
+  // TODO(vitest-migration): review
+  const originalModule = vi.importActual("survey-core");
   return {
     ...originalModule,
     settings: {
       ...originalModule.settings,
-      showDialog: jest.fn()
+      showDialog: vi.fn()
     }
   };
 });
@@ -22,7 +25,7 @@ describe("CreatorPresetEditableBase", () => {
   let mockMatrix: QuestionMatrixDynamicModel;
   let mockRootElement: HTMLElement;
   let mockDetailPanel: SurveyModel;
-  let mockShowDialog: jest.SpyInstance;
+  let mockShowDialog: MockInstance;
 
   beforeEach(() => {
     // Create mock preset
@@ -53,20 +56,20 @@ describe("CreatorPresetEditableBase", () => {
     mockRootElement = document.createElement("div");
 
     // Create spy for settings.showDialog
-    mockShowDialog = jest.spyOn(settings, "showDialog");
+    mockShowDialog = vi.spyOn(settings, "showDialog");
 
     // Create instance of CreatorPresetEditableBase
     base = new CreatorPresetEditableList(mockPreset);
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe("showDetailPanelInPopup", () => {
     it("should hide detail panel and create popup with survey", () => {
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       // Act
@@ -90,7 +93,7 @@ describe("CreatorPresetEditableBase", () => {
 
     it("should create survey with correct configuration", () => {
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
       // Act
       base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
@@ -112,7 +115,7 @@ describe("CreatorPresetEditableBase", () => {
 
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
       // Act
       base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
@@ -131,7 +134,7 @@ describe("CreatorPresetEditableBase", () => {
 
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       // Act
@@ -150,7 +153,7 @@ describe("CreatorPresetEditableBase", () => {
 
       mockShowDialog.mockImplementation((options) => {
         onCancelCallback = options.onCancel;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       // Act

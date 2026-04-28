@@ -1,0 +1,15 @@
+# jest-to-vitest codemod report
+# Generated: 2026-04-28T12:05:07.457Z
+# Targets: tests, tests-presets
+# Scanned: 82, modified: 0, skipped: 82
+# Each line: <file>:<line>\t<category>\t<source>
+tests/creator-base-2.tests.ts:69	vi.mock(...) factory	vi.mock("survey-core", () => {
+tests/creator-base-2.tests.ts:71	vi.importActual (async)	const originalModule = vi.importActual("survey-core");
+tests/string-editor.tests.ts:10	vi.mock(...) factory	vi.mock("survey-core", () => ({
+tests/string-editor.tests.ts:12	vi.importActual (async)	...vi.importActual("survey-core"),
+tests-presets/presets-editable-base.test.ts:9	vi.mock(...) factory	vi.mock("survey-core", () => {
+tests-presets/presets-editable-base.test.ts:11	vi.importActual (async)	const originalModule = vi.importActual("survey-core");
+tests-presets/presets-editor.tests.ts:12	vi.mock(...) factory	vi.mock("survey-core", () => {
+tests-presets/presets-editor.tests.ts:14	vi.importActual (async)	const originalModule = vi.importActual("survey-core");
+tests-presets/presets-manager.tests.ts:8	vi.mock(...) factory	vi.mock("survey-core", () => {
+tests-presets/presets-manager.tests.ts:10	vi.importActual (async)	const originalModule = vi.importActual("survey-core");
