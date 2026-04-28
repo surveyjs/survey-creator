@@ -313,6 +313,8 @@ export interface ICreatorOptions {
    *
    * Default value: -1 (unlimited)
    *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
+   *
    * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#forbiddenNestedElements) property.
    */
   maxPanelNestingLevel?: number;
@@ -338,6 +340,8 @@ export interface ICreatorOptions {
    * };
    * const creator = new SurveyCreatorModel(creatorOptions);
    * ```
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    * @see maxPanelNestingLevel
    */
   forbiddenNestedElements?: { panel: string[], paneldynamic: string[] };

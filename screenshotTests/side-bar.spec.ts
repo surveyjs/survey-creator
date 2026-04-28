@@ -156,7 +156,12 @@ test.describe(title, () => {
     await page.locator(".spg-boolean-switch__button").filter({ visible: true }).hover();
     await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-hover.png");
     await page.locator(".spg-boolean-switch__button").filter({ visible: true }).click();
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Shift+Tab");
+    await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-checked-focus.png");
+    await page.keyboard.press("Space");
     await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-focus.png");
+    await page.keyboard.press("Space");
     await page.keyboard.press("Tab");
     await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-checked.png");
     await page.locator(".spg-boolean-switch__button").filter({ visible: true }).hover();

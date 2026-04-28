@@ -4044,6 +4044,21 @@ test("Add and remove question immediately, incorrect selection", (): any => {
   expect(creator.survey.currentPage.elements).toHaveLength(1);
   expect(creator.selectedElementName).toEqual("question1");
 });
+test("Remove text question immediately on adding it via onQuestionAdded, Bug#7652", (): any => {
+  const creator = new CreatorTester();
+  creator.onQuestionAdded.add((sender, options) => {
+    const q = options.question;
+    if (q.getType() === "text") {
+      q.delete();
+    }
+  });
+  creator.addNewQuestionInPage(() => { }, null, "dropdown");
+  creator.addNewQuestionInPage(() => { }, null, "text");
+  const allQuestions = creator.survey.getAllQuestions();
+  expect(allQuestions).toHaveLength(1);
+  expect(allQuestions[0].getType()).toEqual("dropdown");
+  expect(creator.survey.getAllQuestions().filter(q => q.getType() === "text")).toHaveLength(0);
+});
 test("Convert question type for a question on the last page with the only question", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
