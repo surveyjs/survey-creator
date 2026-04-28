@@ -187,7 +187,7 @@ export interface AllowAddElementEvent {
    */
   json?: any;
   /**
-   * A Boolean property that you can set to `false` to prevent the element from being added.
+   * A Boolean property that you can set to `false` to prevent adding or converting to this element type.
    */
   allow: boolean;
 }
