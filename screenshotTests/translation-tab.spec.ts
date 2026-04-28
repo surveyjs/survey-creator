@@ -61,7 +61,6 @@ test.describe(title, () => {
     await getBarItemByTitle(page, "Used Strings Only").click();
     await getListItemByText(page, "All Strings").click();
     await page.waitForTimeout(500);
-    await page.addStyleTag({ content: "*::-webkit-scrollbar { display: none !important; } * { scrollbar-width: none !important; }" });
     await compareScreenshot(page, stringsView, "translation-tab-show-all-strings.png");
   });
 

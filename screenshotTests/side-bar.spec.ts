@@ -1,5 +1,5 @@
 import { expect } from "playwright/test";
-import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab } from "./helper";
+import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab, resetFocusToBody } from "./helper";
 import { largeSurvey } from "./large-survey";
 
 const title = "Sidebar";
@@ -181,7 +181,8 @@ test.describe(title, () => {
     });
     await page.locator(".sv-action--svd-settings").click();
     await page.locator(".spg-question[data-name='locale'] .spg-dropdown").locator(".sd-editor-chevron-button").click();
-    await page.locator(".sv-popup").filter({ visible: true }).hover({ position: { x: 0, y: 0 } });
+    // await page.locator(".sv-popup").filter({ visible: true }).hover({ position: { x: 0, y: 0 } });
+    await resetFocusToBody(page);
     await compareScreenshot(page, undefined, "mobile-popup-inside-new-pg.png");
   });
 
