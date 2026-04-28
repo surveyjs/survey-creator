@@ -27,7 +27,7 @@ function QuestionElementContentFunc(props: { element: React.JSX.Element }): Reac
 const QuestionElementContent = React.memo(QuestionElementContentFunc);
 QuestionElementContent.displayName = "QuestionElementContent";
 
-export class QuestionAdornerComponent<T = QuestionAdornerViewModel> extends CreatorModelElement<
+export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = QuestionAdornerViewModel> extends CreatorModelElement<
   QuestionAdornerComponentProps,
   any
 > {
