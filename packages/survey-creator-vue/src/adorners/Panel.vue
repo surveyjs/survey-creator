@@ -103,6 +103,8 @@ import {
   PanelAdornerViewModel,
   type SurveyCreatorModel,
 } from "survey-creator-core";
+import { onMounted, onUpdated, ref } from "vue";
+const root = ref();
 const props = defineProps<{
   componentName: string;
   componentData: any;
@@ -119,4 +121,14 @@ const adorner = useCreatorModel(
     value.dispose();
   }
 );
+onUpdated(() => {
+  if (root.value && adorner.value) {
+    adorner.value.rootElement = root.value;
+  }
+});
+onMounted(() => {
+  if (root.value && adorner.value) {
+    adorner.value.rootElement = root.value;
+  }
+});
 </script>

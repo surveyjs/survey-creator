@@ -36,24 +36,23 @@ export class PanelAdornerViewModel extends QuestionAdornerViewModel {
   }
   @property() private isCompact: boolean = false;
   private resizeObserver: ResizeObserver;
-  public attachToUI(element: SurveyElement, rootElement?: HTMLElement): void {
-    super.attachToUI(element, rootElement);
-    if (!rootElement) return;
-    const htmlElement = rootElement.querySelector(".svc-question__content") as HTMLElement || rootElement;
-    if (!htmlElement) return;
-    const resizer = this.resizeObserver = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      if (entry.contentBoxSize[0].inlineSize <= 176) {
-        this.isCompact = true;
-      } else {
-        this.isCompact = false;
+  protected onRootElementChanged(): void {
+    if (!!this.rootElement) {
+      const htmlElement = this.rootElement.querySelector(".svc-question__content") as HTMLElement || this.rootElement;
+      if (!htmlElement) return;
+      const resizer = this.resizeObserver = new ResizeObserver((entries) => {
+        const entry = entries[0];
+        if (entry.contentBoxSize[0].inlineSize <= 176) {
+          this.isCompact = true;
+        } else {
+          this.isCompact = false;
+        }
       }
+      );
+      resizer.observe(htmlElement);
+    } else {
+      this.resizeObserver?.disconnect();
+      this.resizeObserver = undefined;
     }
-    );
-    resizer.observe(htmlElement);
-  }
-  public detachFromUI(): void {
-    super.detachFromUI();
-    this.resizeObserver?.disconnect();
   }
 }
