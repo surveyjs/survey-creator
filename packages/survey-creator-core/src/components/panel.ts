@@ -27,7 +27,7 @@ export class PanelAdornerViewModel extends QuestionAdornerViewModel {
     return container;
   }
 
-  private addQuestionActionsContainerValue?:ActionContainer;
+  private addQuestionActionsContainerValue?: ActionContainer;
   public get addQuestionActionsContainer(): ActionContainer {
     if (!this.addQuestionActionsContainerValue) {
       this.addQuestionActionsContainerValue = this.createAddQuestionActionContainer();
@@ -39,7 +39,7 @@ export class PanelAdornerViewModel extends QuestionAdornerViewModel {
   public attachToUI(element: SurveyElement, rootElement?: HTMLElement): void {
     super.attachToUI(element, rootElement);
     if (!rootElement) return;
-    const htmlElement = rootElement.querySelector(".svc-question__content") as HTMLElement;
+    const htmlElement = rootElement.querySelector(".svc-question__content") as HTMLElement || rootElement;
     if (!htmlElement) return;
     const resizer = this.resizeObserver = new ResizeObserver((entries) => {
       const entry = entries[0];
