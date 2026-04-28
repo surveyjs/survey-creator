@@ -279,6 +279,7 @@ export class TabDesignerViewModel extends Base {
   private calculateDesignerCss() {
     return new CssClassBuilder()
       .append("svc-designer-surface")
+      .append(this.survey.css.rootTheme)
       .append(this.survey.css.container)
       .append(this.survey.css.container + "--" + this.survey.calculatedWidthMode)
       .toString();
