@@ -6,10 +6,8 @@ import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { QuestionAdornerViewModel } from "../src/components/question";
 
-// TODO(vitest-migration): review
-vi.mock("survey-core", () => ({
-  // TODO(vitest-migration): review
-  ...vi.importActual("survey-core"),
+vi.mock("survey-core", async () => ({
+  ...await vi.importActual("survey-core"),
   sanitizeEditableContent: vi.fn(),
 }));
 test("Test css", (): any => {

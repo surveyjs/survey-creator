@@ -65,10 +65,8 @@ import { TabbedMenuMode } from "../src/tabbed-menu";
 
 export * from "../src/localization/french";
 
-// TODO(vitest-migration): review
-vi.mock("survey-core", () => {
-  // TODO(vitest-migration): review
-  const originalModule = vi.importActual("survey-core");
+vi.mock("survey-core", async () => {
+  const originalModule = await vi.importActual("survey-core");
   return {
     ...originalModule,
     hasLicense: vi.fn((id) => false)

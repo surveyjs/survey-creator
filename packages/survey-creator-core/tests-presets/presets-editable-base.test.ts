@@ -5,10 +5,8 @@ import { CreatorPresetBase } from "../src/ui-presets-creator/presets-base";
 import { QuestionMatrixDynamicModel } from "survey-core";
 
 // Mock settings object
-// TODO(vitest-migration): review
-vi.mock("survey-core", () => {
-  // TODO(vitest-migration): review
-  const originalModule = vi.importActual("survey-core");
+vi.mock("survey-core", async () => {
+  const originalModule = await vi.importActual("survey-core");
   return {
     ...originalModule,
     settings: {

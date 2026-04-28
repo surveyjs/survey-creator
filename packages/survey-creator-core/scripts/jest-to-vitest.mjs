@@ -91,10 +91,12 @@ const TYPE_RENAMES = [
 const TYPE_IMPORTS = ["MockedFunction", "Mocked", "MockInstance", "Mock"];
 
 const FLAG_PATTERNS = [
-  { re: /\bvi\.mock\s*\(\s*[^,]+,\s*\(/, label: "vi.mock(...) factory" },
-  { re: /\bvi\.importActual\b/, label: "vi.importActual (async)" },
-  { re: /\bvi\.importMock\b/, label: "vi.importMock (async)" },
-  { re: /\bvi\.isolateModules\b/, label: "vi.isolateModules (async)" },
+  // Sync vi.importActual / vi.importMock / vi.isolateModules - these all
+  // return Promises in Vitest. The mock-factory rewrite handles the common
+  // case automatically; remaining sites still need human review.
+  { re: /(?<!await\s)\bvi\.importActual\b/, label: "vi.importActual (must await)" },
+  { re: /(?<!await\s)\bvi\.importMock\b/, label: "vi.importMock (must await)" },
+  { re: /(?<!await\s)\bvi\.isolateModules\b/, label: "vi.isolateModules (must await)" },
   { re: /\bvi\.useFakeTimers\s*\(\s*["'`]/, label: "vi.useFakeTimers with string arg" },
 ];
 
@@ -131,7 +133,100 @@ function applyRenames(src) {
   }
   // Switch @jest/globals imports to vitest.
   out = out.replace(/(["'])@jest\/globals\1/g, "$1vitest$1");
+  // Rewrite vi.mock(spec, () => ...) factories that contain vi.importActual
+  // into async (importOriginal) form, awaiting importActual. We only touch
+  // factories whose body actually references vi.importActual to avoid
+  // disturbing pure-stub factories.
+  out = rewriteAsyncMockFactories(out);
   return out;
+}
+
+// Find `vi.mock("x", () => { ... vi.importActual("y") ... })` (also `=> ({...})`
+// shorthand) and rewrite to `vi.mock("x", async () => { ... await vi.importActual("y") ... })`.
+// Uses brace-balanced scanning rather than regex-only, since factory bodies
+// can be arbitrary JavaScript.
+function rewriteAsyncMockFactories(src) {
+  const marker = "vi.mock(";
+  let out = "";
+  let i = 0;
+  while(i < src.length) {
+    const idx = src.indexOf(marker, i);
+    if (idx === -1) {
+      out += src.slice(i);
+      break;
+    }
+    out += src.slice(i, idx);
+    // Find the matching close-paren of vi.mock(...)
+    const openParen = idx + marker.length - 1; // position of "("
+    const close = findMatchingClose(src, openParen, "(", ")");
+    if (close === -1) {
+      out += src.slice(idx);
+      break;
+    }
+    const callArgs = src.slice(openParen + 1, close);
+    const rewritten = rewriteOneMockCall(callArgs);
+    out += `vi.mock(${rewritten})`;
+    i = close + 1;
+  }
+  return out;
+}
+
+function rewriteOneMockCall(args) {
+  // Only rewrite if importActual appears in args.
+  if (!/\bvi\.importActual\b/.test(args)) return args;
+
+  // Match the factory arrow: `, () => ` or `, (name) => ` etc., optionally
+  // already async.
+  const arrowRe = /,\s*(async\s+)?(\([^)]*\))\s*=>\s*/;
+  const m = args.match(arrowRe);
+  if (!m) return args;
+
+  const before = args.slice(0, m.index);
+  const params = m[2];
+  const afterArrow = args.slice(m.index + m[0].length);
+
+  // Always make the factory async and await every importActual call.
+  const body = afterArrow.replace(/(?<!await\s)\bvi\.importActual\(/g, "await vi.importActual(");
+  return `${before}, async ${params} => ${body}`;
+}
+
+function findMatchingClose(src, openIdx, openCh, closeCh) {
+  let depth = 0;
+  let inS = null; // string delimiter
+  let inLineComment = false;
+  let inBlockComment = false;
+  for (let i = openIdx; i < src.length; i++) {
+    const ch = src[i];
+    const next = src[i + 1];
+    if (inLineComment) {
+      if (ch === "\n") inLineComment = false;
+      continue;
+    }
+    if (inBlockComment) {
+      if (ch === "*" && next === "/") { inBlockComment = false; i++; }
+      continue;
+    }
+    if (inS) {
+      if (ch === "\\") { i++; continue; }
+      if (ch === inS) inS = null;
+      // template literal: handle ${ ... } interpolation
+      if (inS === "`" && ch === "$" && next === "{") {
+        const sub = findMatchingClose(src, i + 1, "{", "}");
+        if (sub === -1) return -1;
+        i = sub;
+      }
+      continue;
+    }
+    if (ch === "/" && next === "/") { inLineComment = true; i++; continue; }
+    if (ch === "/" && next === "*") { inBlockComment = true; i++; continue; }
+    if (ch === "\"" || ch === "'" || ch === "`") { inS = ch; continue; }
+    if (ch === openCh) depth++;
+    else if (ch === closeCh) {
+      depth--;
+      if (depth === 0) return i;
+    }
+  }
+  return -1;
 }
 
 function detectUsedSymbols(src, symbols) {
@@ -231,13 +326,11 @@ async function processFile(file, report) {
     return { changed: false, skipped: "no-test-framework" };
   }
 
-  if (isAlreadyConverted(src)) {
-    // Still scan for flagged patterns so the report stays authoritative.
-    scanForFlags(src, rel, report);
-    return { changed: false, skipped: "already-converted" };
-  }
-
+  // Always run rename + factory-rewrite passes; they are idempotent. This
+  // lets the codemod fix newly-discovered patterns even in files that were
+  // already partially converted by a previous run.
   let out = applyRenames(src);
+  out = stripStaleTodoComments(out);
   out = ensureVitestImport(out);
   out = flagLines(out, rel, report);
 
@@ -257,6 +350,16 @@ function scanForFlags(src, filePath, report) {
       }
     }
   }
+}
+
+// Remove every standalone `// TODO(vitest-migration): review` line. The
+// codemod re-adds them via flagLines based on the current source state, so
+// stale markers (e.g. above a now-rewritten async factory) get cleaned up.
+function stripStaleTodoComments(src) {
+  return src
+    .split("\n")
+    .filter((line) => !/^\s*\/\/\s*TODO\(vitest-migration\)/.test(line))
+    .join("\n");
 }
 
 async function main() {

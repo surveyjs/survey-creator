@@ -4,10 +4,8 @@ import { PresetsManager } from "../src/ui-preset-editor/presets-manager";
 import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
 import { getLocString } from "../src/editorLocalization";
 
-// TODO(vitest-migration): review
-vi.mock("survey-core", () => {
-  // TODO(vitest-migration): review
-  const originalModule = vi.importActual("survey-core");
+vi.mock("survey-core", async () => {
+  const originalModule = await vi.importActual("survey-core");
   return {
     ...originalModule,
     settings: {

@@ -8,10 +8,8 @@ import { getLocString } from "../src/editorLocalization";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
 
-// TODO(vitest-migration): review
-vi.mock("survey-core", () => {
-  // TODO(vitest-migration): review
-  const originalModule = vi.importActual("survey-core");
+vi.mock("survey-core", async () => {
+  const originalModule = await vi.importActual("survey-core");
   return {
     ...originalModule,
     hasLicense: vi.fn(() => false),

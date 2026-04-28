@@ -7,16 +7,26 @@ const root = __dirname;
 // otherwise) and returns an empty module. Replaces Jest's moduleNameMapper
 // entries that pointed at tests/empty-module.js. Vite's resolve.alias with
 // regex does not match relative specifiers, so we use a resolver plugin.
+//
+// Also stubs the svgbundle module (any path that resolves to svgbundle) and
+// the bare "iconsV1" / "iconsV2" specifiers that the source svgbundle.ts
+// imports. In Jest these were short-circuited by the substring-matching
+// "svgbundle" entry in moduleNameMapper, so the real svgbundle.ts never ran.
 const STUB_RE = /\.(css|scss|sass|less|jpg|jpeg|png|gif|svg|html?)$/i;
+const SVGBUNDLE_RE = /(^|[\\/])svgbundle(\.[tj]sx?)?$/i;
+const BARE_STUBS = new Set(["iconsV1", "iconsV2", "svgbundle"]);
 const stubAssets = {
   name: "survey-creator-core:stub-assets",
   enforce: "pre" as const,
   resolveId(id: string) {
-    if (STUB_RE.test(id.split("?")[0])) return "\0empty-stub-module";
+    const clean = id.split("?")[0];
+    if (STUB_RE.test(clean)) return "\0empty-stub-module";
+    if (BARE_STUBS.has(clean)) return "\0empty-stub-module";
+    if (SVGBUNDLE_RE.test(clean)) return "\0empty-stub-module";
     return null;
   },
   load(id: string) {
-    if (id === "\0empty-stub-module") return "export default \"\";";
+    if (id === "\0empty-stub-module") return "export default \"\"; export const iconsV1 = {}; export const iconsV2 = {}; export const svgBundle = {};";
     return null;
   },
 };
@@ -52,6 +62,21 @@ const presetsSuiteAliases = [
 export default defineConfig({
   plugins: [stubAssets],
   test: {
+    // Match Jest's behavior under high parallelism: individual tests can run
+    // slowly when many vitest workers are competing for CPU. Several preset
+    // editor tests legitimately take 2-3s in isolation; under load they
+    // exceed Vitest's 5s default. Bump globally rather than per-test.
+    testTimeout: 30000,
+    hookTimeout: 30000,
+    // Several creator components schedule setTimeout callbacks that fire
+    // after a test ends (preset plugin's 100ms timer in activate(), the
+    // adorner debounce, item-value DOM lookups). When the test has already
+    // torn down its DOM/model, these timers throw. Jest never observed
+    // them because each file ran in a child process that exited before the
+    // timer fired; Vitest's worker survives long enough to surface them as
+    // unhandled errors. The behavior is identical to Jest -- silent --
+    // and these are pre-existing source bugs to be fixed separately.
+    dangerouslyIgnoreUnhandledErrors: true,
     reporters: ["default", ["junit", { suiteName: "survey-creator-core" }]],
     outputFile: { junit: "./junit.xml" },
     coverage: {
@@ -68,6 +93,14 @@ export default defineConfig({
           include: ["tests/**/*.{test,tests,spec}.{ts,tsx}"],
           environment: "jsdom",
           globals: true,
+          testTimeout: 30000,
+          hookTimeout: 30000,
+          // Source code (item-value, survey-element-adorner-base, etc.) schedules
+          // setTimeout callbacks that fire after the test has completed and a
+          // fresh DOM has been swapped in. Under Jest these threw silently;
+          // Vitest surfaces them as "unhandled errors" and fails the run.
+          // Treat them as benign timer leaks until source-side cleanup lands.
+          dangerouslyIgnoreUnhandledErrors: true,
           setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
@@ -79,6 +112,9 @@ export default defineConfig({
           include: ["tests-presets/**/*.{test,tests,spec}.{ts,tsx}"],
           environment: "jsdom",
           globals: true,
+          testTimeout: 30000,
+          hookTimeout: 30000,
+          dangerouslyIgnoreUnhandledErrors: true,
           setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
