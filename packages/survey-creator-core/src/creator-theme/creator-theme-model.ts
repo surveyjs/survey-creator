@@ -226,7 +226,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     assign(_json, json);
     delete _json["cssVariables"];
     super.fromJSON(_json, options);
-    this.isLight = json.isLight !== undefined ? json.isLight : true;
+    this.isLight = json.colorPalette !== undefined ? json.colorPalette === "light" : true;
 
     if (json.cssVariables) {
       super.fromJSON(json.cssVariables, options);
@@ -242,7 +242,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
     const result = super.toJSON(options);
     if (!this.isLight) {
-      result.isLight = false;
+      result.colorPalette = "dark";
     }
     const cssVariables = {};
     assign(cssVariables, this.initialCssVariables, this.themeCssVariablesChanges);
