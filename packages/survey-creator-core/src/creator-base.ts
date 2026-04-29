@@ -4548,6 +4548,7 @@ export class SurveyCreatorModel extends Base
       iconName: "icon-more",
       appearance: { style: "brand", mode: "tertiary", size: "small" },
       showTitle: false,
+      iconSize: "auto",
       title: this.getLocString("ed.addNewQuestion"),
     }, {
       items: [],
