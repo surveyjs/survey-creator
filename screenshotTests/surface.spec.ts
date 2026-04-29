@@ -186,7 +186,7 @@ test.describe(title, () => {
     };
     await setJSON(page, surveyJSON);
 
-    await page.click(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action");
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").nth(1).click();
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
