@@ -60,14 +60,14 @@
 }
 
 .svc-tabbed-menu-item__text.svc-tabbed-menu-item__text {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   white-space: nowrap;
   display: block;
   color: var(--ctr-menu-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
 .svc-tabbed-menu-item--selected .svc-tabbed-menu-item__text {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
 }
 
 .svc-tabbed-menu-item__icon {

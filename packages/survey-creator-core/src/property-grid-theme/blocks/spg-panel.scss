@@ -4,7 +4,7 @@
 .spg-panel {
 }
 .spg-panel__title {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -38,7 +38,7 @@
 }
 
 .spg-panel__title--expanded {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   color: var(--ctr-property-grid-chapter-caption-text-color-selected, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 
@@ -145,7 +145,7 @@
     box-shadow: none;
   }
   .spg-panel__title {
-    @include ctrDefaultFont;
+    @include sjs2--typography--default;
     color: var(--ctr-label-text-color, var(--sjs-layer-1-foreground-50, #00000080));
     box-shadow: none;
     background-color: transparent;

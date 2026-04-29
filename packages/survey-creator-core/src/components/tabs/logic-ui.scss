@@ -31,7 +31,7 @@
 }
 
 .svc-logic-paneldynamic .svc-logic-operator {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   -webkit-appearance: none;
   appearance: none;
   border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));

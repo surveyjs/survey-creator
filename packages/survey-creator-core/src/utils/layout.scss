@@ -55,7 +55,7 @@
 }
 
 .sv-action-bar--small-size-mode .sv-action-bar-item {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   align-items: center;
   border-radius: var(--ctr-survey-question-panel-toolbar-item-corner-radius, var(--lbr-corner-radius-x075));
 }

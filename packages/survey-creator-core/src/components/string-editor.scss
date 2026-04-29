@@ -114,7 +114,7 @@
 }
 
 .svc-string-editor__error {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   margin-left: calcSize(1);
   color: red;
   display: none;

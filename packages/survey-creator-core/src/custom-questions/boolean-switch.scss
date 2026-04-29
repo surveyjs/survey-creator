@@ -117,7 +117,7 @@
 }
 
 .spg-boolean-switch__title {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
 
   color: var(--sjs2-color-fg-basic-primary);
   text-align: left;

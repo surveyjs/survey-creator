@@ -250,7 +250,7 @@
 }
 
 .svc-toolbox__category-title {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   color: var(--ctr-toolbox-group-header-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   vertical-align: middle;
   display: block;
@@ -293,7 +293,7 @@
 }
 
 .svc-toolbox__placeholder {
-  @include ctrSmallFont;
+  @include sjs2--typography--small;
   padding-top: calcSize(13.5);
   margin-inline-start: auto;
   margin-inline-end: auto;

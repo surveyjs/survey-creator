@@ -20,7 +20,7 @@
     var(--ctr-button-shadow-color, var(--sjs-special-shadow, #00000040));
 }
 .svc-btn__text {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   display: flex;
   align-items: center;
   flex-grow: 1;

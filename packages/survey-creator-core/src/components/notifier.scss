@@ -6,7 +6,7 @@
 }
 
 .svc-notifier {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
 
   position: absolute;
   bottom: calcSize(1);

@@ -21,13 +21,13 @@
   gap: var(--ctr-property-grid-placeholder-text-gap, var(--sjs-spacing-x1));
 }
 .svc-property-grid-placeholder__title {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   color: var(--ctr-property-grid-placeholder-text-title-color, var(--sjs-layer-1-foreground-100, #000000e6));
   text-align: center;
   display: inline-block;
 }
 .svc-property-grid-placeholder__description {
-  @include ctrSmallFont;
+  @include sjs2--typography--small;
   color: var(--ctr-property-grid-placeholder-text-description-color, var(--sjs-layer-1-foreground-50, #00000080));
   text-align: center;
   display: inline-block;

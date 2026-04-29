@@ -30,7 +30,7 @@
 }
 
 .svc-logo-image-placeholder {
-  @include ctrLargeFont;
+  @include sjs2--typography--large;
   opacity: var(--ctr-survey-header-logo-placeholder-icon-opacity, 0.5);
   white-space: nowrap;
   word-break: keep-all;

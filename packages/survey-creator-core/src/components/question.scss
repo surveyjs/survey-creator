@@ -472,7 +472,7 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut__text {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 320px;

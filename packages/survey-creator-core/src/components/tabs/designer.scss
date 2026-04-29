@@ -189,7 +189,7 @@ svc-tab-designer {
     }
 
     .svc-add-new-item-button__text {
-      @include ctrDefaultBoldFont;
+      @include sjs2--typography--default-strong;
       color: var(--ctr-button-text-color, var(--sjs-primary-background-500, #19b394ff));
       text-align: center;
     }

@@ -77,7 +77,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 // }
 
 .svc-side-bar__container-title {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
 
   display: flex;
   flex-grow: 1;
@@ -93,7 +93,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   width: 100%;
   box-sizing: border-box;
   .sd-action__title {
-    @include ctrDefaultFont;
+    @include sjs2--typography--default;
   }
   .sv-action-bar {
     justify-content: flex-end;
