@@ -17,6 +17,12 @@ svc-tab-designer {
   width: 0;
 }
 
+.svc-test-tab--empty,
+.svc-translation-tab--empty,
+.svc-logic-tab--empty {
+  background: var(--sjs2-color-utility-surface-designer);
+}
+
 .svc-tab-designer--with-placeholder .svc-designer-header {
   width: 100%;
   min-width: var(--sjs-size-x90);
@@ -60,7 +66,7 @@ svc-tab-designer {
     .sv-string-editor {
       @include lbrVariables.lbrDefaultFont;
       color: var(--sjs2-color-component-header-default-description, rgba(28, 27, 32, 0.6));
-    
+
       &[aria-placeholder]:empty:before {
         color: var(--sjs2-color-component-header-default-description-placeholder, rgba(28, 27, 32, 0.4));
       }
