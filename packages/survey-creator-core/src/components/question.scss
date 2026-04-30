@@ -959,6 +959,14 @@ svc-question,
   display: flex;
   justify-content: center;
   position: relative;
+  margin-top: var(--sjs2-spacing-x050, 4px);
+}
+
+.svc-panel__question-type-selector {
+  position: absolute;
+  inset-inline-end: 0;
+  bottom: 0;
+  margin: 0;
 }
 
 @container (max-width: #{$sd-panel-normal-min-width}) {
