@@ -13,7 +13,7 @@ import {
 
 const title = "Logic tab";
 
-const logicAddNewRuleButton = (page: Page) => page.locator(".svc-logic-tab__content-action").getByText("Add New Rule").locator("..");
+const logicAddNewRuleButton = (page: Page) => page.locator(".svc-logic-tab__content-actions .sd-action");
 const logicQuestionSelector = (page: Page) => page.locator(".svc-logic-operator.svc-logic-operator--question").filter({ visible: true });
 const logicOperatorSelector = (page: Page) => page.locator(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filter({ visible: true });
 const logicActionSelector = (page: Page) => page.locator(".svc-logic-operator--action").filter({ visible: true });
@@ -110,7 +110,6 @@ function notifyBalloonSelector(page: Page) {
   return page.locator(".svc-notifier");
 }
 
-const disabledClass = /svc-logic-tab__content-action--disabled/;
 const newRuleDisplayText = "New rule";
 const selectQuestionPlaceHolder = "Select...";
 const selectActionTypePlaceHolder = "Select action...";
@@ -126,10 +125,10 @@ test.describe(title, () => {
 
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await expect(page.locator(".svc-logic-tab__content-empty")).toBeVisible();
-    await expect(logicAddNewRuleButton(page)).not.toHaveClass(disabledClass);
+    await expect(logicAddNewRuleButton(page)).not.toHaveAttribute("disabled");
 
     await logicAddNewRuleButton(page).click();
-    await expect(logicAddNewRuleButton(page)).toHaveClass(disabledClass);
+    await expect(logicAddNewRuleButton(page)).toHaveAttribute("disabled");
     await expect(page.locator(".svc-logic-tab__content-empty")).toHaveCount(0);
     await expect(cellRules(page)).toHaveText(newRuleDisplayText);
     await expect(logicQuestionSelector(page)).toHaveCount(1);
@@ -204,11 +203,11 @@ test.describe(title, () => {
     await removeButton(page).first().click();
     await expect(removeButton(page)).toHaveCount(0);
 
-    await expect(logicAddNewRuleButton(page)).toHaveClass(disabledClass);
+    await expect(logicAddNewRuleButton(page)).toHaveAttribute("disabled");
     await expect(cellRules(page)).toHaveText(newRuleDisplayText);
 
     await doneButton(page).click();
-    await expect(logicAddNewRuleButton(page)).not.toHaveClass(disabledClass);
+    await expect(logicAddNewRuleButton(page)).not.toHaveAttribute("disabled");
     await expect(notifyBalloonSelector(page).first()).toHaveText("Modified");
     await expect(cellRules(page)).toHaveText("If 'string_editor' Not empty, survey becomes completed");
     await expect(cellRules(page).locator("span").first()).toHaveAttribute("title", "If 'string_editor' Not empty, survey becomes completed");

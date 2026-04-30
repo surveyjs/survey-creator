@@ -54,7 +54,7 @@ test.describe(title, () => {
     const thankYouMessage = page.locator(".sd-completedpage");
     await compareScreenshot(page, thankYouMessage, "complete-tab-thank-message.png");
 
-    const startAgainButton = page.locator(".svc-preview__test-again");
+    const startAgainButton = page.locator(".svc-preview__content-actions .sd-action");
     await compareScreenshot(page, startAgainButton, "complete-tab-test-again.png");
 
     const upperPart = page.locator(".svc-test-tab__content");

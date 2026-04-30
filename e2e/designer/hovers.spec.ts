@@ -50,7 +50,7 @@ test.describe(title, () => {
 
     const hoveredClass = /svc-hovered/;
     const pageContent = page.locator(".svc-page__content").first();
-    const addQuestion = page.locator(".svc-element__add-new-question").first();
+    const addQuestion = page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").first();
 
     await addQuestion.hover({ position: { x: 5, y: 5 } });
     await page.waitForTimeout(300);

@@ -25,7 +25,6 @@ import ComponentContainer from "./components/ComponentContainer.vue";
 import Test from "./tabs/preview/Test.vue";
 import ContainerTab from "./tabs/ContainerTab.vue";
 
-import TestAgain from "./tabs/preview/TestAgain.vue";
 import SurveyResults from "./tabs/preview/SurveyResults.vue";
 import SurveyResultsRow from "./tabs/preview/SurveyResultsRow.vue";
 
@@ -64,7 +63,6 @@ import SideBarLaunchCard from "./side-bar/SideBarLaunchCard.vue";
 import IconItem from "./components/IconItem.vue";
 import Page from "./tabs/designer/Page.vue";
 import AddQuestion from "./tabs/designer/AddQuestion.vue";
-import AddQuestionTypeSelector from "./tabs/designer/AddQuestionTypeSelector.vue";
 import Row from "./tabs/designer/Row.vue";
 import QuestionAdorner from "./adorners/Question.vue";
 import QuestionImageAdorner from "./adorners/QuestionImage.vue";
@@ -138,7 +136,6 @@ function registerComponents(
   registerComponent("survey-widget", SurveyComponent);
   registerComponent("survey-simulator", Simulator);
   registerComponent("svc-tab-preview", Test);
-  registerComponent("svc-complete-page", TestAgain);
   registerComponent("survey-results", SurveyResults);
   registerComponent("survey-results-table-row", SurveyResultsRow);
 
@@ -174,7 +171,6 @@ function registerComponents(
   registerComponent("svc-page", Page);
   registerComponent("svc-row", Row);
   registerComponent("svc-add-new-question-btn", AddQuestion);
-  registerComponent("svc-add-question-type-selector", AddQuestionTypeSelector);
   registerComponent("svc-question", QuestionAdorner);
   registerComponent("svc-rating-question", QuestionAdorner);
   registerComponent("svc-rating-question-content", RatingAdorner);
