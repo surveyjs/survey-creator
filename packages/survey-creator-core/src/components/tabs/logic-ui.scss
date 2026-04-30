@@ -381,7 +381,7 @@
 }
 
 .svc-logic-placeholder__text.svc-logic-placeholder__text {
-  @include lbrDefaultFont;
+  @include sjs2--typography--default;
   color: var(--lbr-placeholder-text-color, var(--sjs-layer-1-foreground-50, #00000080));
   text-align: center;
   display: block;

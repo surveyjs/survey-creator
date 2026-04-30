@@ -36,7 +36,7 @@
   &:active {
     background: var(--sjs2-color-bg-basic-primary, #ffffff);
   }
-  &::after{
+  &::after {
     content: "";
     display: block;
     width: var(--sjs2-spacing-x600, 48px);
@@ -53,29 +53,25 @@
   position: relative;
 }
 .spg-launch__text {
-  color: var(--sjs2-color-fg-basic-primary, #1C1B20);
+  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
   text-align: left;
-  font-family: var(--sjs2-typography-default-strong-font-family, "OpenSans-SemiBold", sans-serif);
-  font-size: var(--sjs2-typography-default-strong-font-size, 16px);
-  line-height: var(--sjs2-typography-default-strong-line-height, 24px);
-  font-weight: var(--sjs2-typography-default-strong-font-weight, 600);
   position: relative;
   align-self: stretch;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+
+  @include sjs2--typography--default-strong;
 }
 .spg-launch__text2 {
   color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
   text-align: left;
-  font-family: var(--sjs2-typography-small-font-family, "OpenSans-Regular", sans-serif);
-  font-size: var(--sjs2-typography-small-font-size, 12px);
-  line-height: var(--sjs2-typography-small-line-height, 16px);
-  font-weight: var(--sjs2-typography-small-font-weight, 400);
   position: relative;
   text-overflow: ellipsis;
   overflow: hidden;
   padding-right: var(--sjs2-spacing-x300, 24px);
+
+  @include sjs2--typography--small;
 }
 .spg-launch__icon {
   display: flex;

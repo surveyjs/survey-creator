@@ -1,5 +1,4 @@
 @use "../../variables" as *;
-@use "../../lbr-variables.scss" as lbrVariables;
 
 svc-tab-designer {
   width: 100%;
@@ -52,7 +51,7 @@ svc-tab-designer {
 .svc-surface-header {
   .sd-title {
     .sv-string-editor {
-      @include lbrVariables.lbrLargeBoldFont;
+      @include sjs2--typography--large-strong;
       color: var(--sjs2-color-component-header-default-title, #1C1B20);
 
       &[aria-placeholder]:empty:before {
@@ -62,9 +61,9 @@ svc-tab-designer {
   }
 
   .sd-description {
-    @include lbrVariables.lbrDefaultFont;
+    @include sjs2--typography--default;
     .sv-string-editor {
-      @include lbrVariables.lbrDefaultFont;
+      @include sjs2--typography--default;
       color: var(--sjs2-color-component-header-default-description, rgba(28, 27, 32, 0.6));
 
       &[aria-placeholder]:empty:before {
