@@ -9,13 +9,15 @@ variables:
   ArtifactNameLibraryAngular: "SurveyJSLibraryBuildAngular"
   ArtifactNameLibraryVue: "SurveyJSLibraryBuildVue3"
   ArtifactNameLibraryJS: "SurveyJSLibraryBuildSurveyUI"
-  ArtifactNameCreatorV2Core: "SurveyJSCreatorV2BuildCore"
-  ArtifactNameCreatorV2Angular: "SurveyJSCreatorV2BuildAngular"
-  ArtifactNameCreatorV2React: "SurveyJSCreatorV2BuildReact"
-  ArtifactNameCreatorV2Vue: "SurveyJSCreatorV2BuildVue"
-  ArtifactNameCreatorV2JS: "SurveyJSCreatorV2BuildJS"
+  ArtifactNameCreatorCore: "SurveyJSCreatorBuildCore"
+  ArtifactNameCreatorAngular: "SurveyJSCreatorBuildAngular"
+  ArtifactNameCreatorReact: "SurveyJSCreatorBuildReact"
+  ArtifactNameCreatorVue: "SurveyJSCreatorBuildVue"
+  ArtifactNameCreatorJS: "SurveyJSCreatorBuildJS"
   ArtifactNameAnalytics: "SurveyJSAnalyticsBuild"
   ArtifactNamePDF: "SurveyjsPDFbuild"
+  PipelineLibrary: ${{ iif(eq($(System.PullRequest.TargetBranch), 'V3'), '138', '130') }}
+  PipelineLibraryPR: ${{ iif(eq($(System.PullRequest.TargetBranch), 'V3'), '139', '133') }}
 
 
 resources:
@@ -24,18 +26,22 @@ resources:
       type: github
       endpoint: github.com_surveyjsdeveloper
       name: surveyjs/survey-library
+      ref: $(System.PullRequest.TargetBranch)
     - repository: Creator
       type: github
       endpoint: github.com_surveyjsdeveloper
       name: surveyjs/survey-creator
+      ref: $(System.PullRequest.TargetBranch)
     - repository: Analytics
       type: github
       endpoint: github.com_surveyjsdeveloper
       name: surveyjs/survey-analytics
+      ref: $(System.PullRequest.TargetBranch)
     - repository: PDF
       type: github
       endpoint: github.com_surveyjsdeveloper
       name: surveyjs/survey-pdf
+      ref: $(System.PullRequest.TargetBranch)
 
 trigger: none
 
@@ -78,7 +84,7 @@ stages:
       - job: Download
         continueOnError: true
         variables:
-          LIBRARY_PIPELINE: $[ iif(eq(variables['PR'], ''), '130', '133') ]
+          LIBRARY_PIPELINE: $[ iif(eq($(PR), ''), $(PipelineLibrary), $(PipelineLibraryPR)) ]
         steps:
           - checkout: none
 
