@@ -7,7 +7,6 @@
 .svc-flex-row {
   display: flex;
   flex-direction: row;
-  background: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
 }
 
 .svc-full-container {
@@ -64,7 +63,7 @@
 }
 .svc-top-bar {
   display: flex;
-  background: var(--ctr-menu-item-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-utility-tabs);
   box-sizing: border-box;
   box-shadow: inset 0px -1px 0px var(--ctr-menu-border-color, var(--sjs-border-25, #d4d4d4ff));
 

@@ -11,11 +11,10 @@
   flex-grow: 1;
   flex-shrink: 0;
 
-  .svc-preview__test-again {
-    width: calcSize(33);
-    box-sizing: border-box;
+  .svc-preview__content-actions {
     margin-left: auto;
     margin-right: auto;
+    width: fit-content;
     margin-bottom: calcSize(12);
     margin-top: 8px;
   }

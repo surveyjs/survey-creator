@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString, CssClassBuilder } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
@@ -68,6 +68,12 @@ export class PreviewViewModel extends Base {
     return this.pages.actions;
   }
   @property({}) isPageToolbarVisible = new ComputedUpdater(() => notShortCircuitAnd(!this.pages.isEmpty, !this.surveyProvider.isMobileView));
+  @property({}) tabContentAdditionalCss = new ComputedUpdater(() => {
+    return new CssClassBuilder()
+      .append("svc-test-tab--empty", this.simulator?.survey?.isEmpty)
+      .append("svc-creator-tab__content--with-toolbar", !!this.isPageToolbarVisible)
+      .toString();
+  });
 
   constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultCss) {
     super();
@@ -83,6 +89,26 @@ export class PreviewViewModel extends Base {
     return this.getShowResults();
   }
 
+  protected createContentActions(): Array<Action> {
+    return [this.testAgainAction];
+  }
+
+  protected createContentActionsContainer(): ActionContainer {
+    const container = new ActionContainer();
+    container.containerCss = "svc-preview__content-actions";
+    container.setActionsAppearance({ mode: "tertiary-surface", size: "large", style: "brand", showBorder: true });
+    container.setItems(this.createContentActions());
+    return container;
+  }
+
+  private contentActionsContainerValue: ActionContainer;
+  public get contentActionsContainer(): ActionContainer {
+    if (!this.contentActionsContainerValue) {
+      this.contentActionsContainerValue = this.createContentActionsContainer();
+    }
+    return this.contentActionsContainerValue;
+  }
+
   public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, this.getTabName(), this, (survey: SurveyModel): void => {
       let preferredTheme: ITheme = undefined;
@@ -95,8 +121,8 @@ export class PreviewViewModel extends Base {
       survey.addLayoutElement({
         id: "complete-customization",
         container: "completePage" as any,
-        component: "svc-complete-page",
-        data: this
+        component: "sv-action-bar",
+        data: this.contentActionsContainer
       });
     });
     const hasSurveyBefore = !!this.simulator.survey;

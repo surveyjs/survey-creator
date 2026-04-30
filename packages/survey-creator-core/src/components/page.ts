@@ -11,6 +11,7 @@ import { DropIndicatorPosition } from "../drag-drop-enums";
 import { defaultActionBarCss } from "survey-core";
 
 import "./page.scss";
+import "./surface-btn.scss";
 
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
@@ -339,8 +340,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this._footerActionsBar = new ActionContainer();
       this._footerActionsBar.containerCss = "svc-page__footer";
       this._footerActionsBar.cssClasses = {
-        item: "svc-btn",
-        itemTitle: "svc-add-new-item-button__text"
+        item: "sd-action svc-surface-btn",
+        itemAppearancePrefix: "",
+        itemTypeSelector: "svc-surface-btn__selector",
       };
       let footerActions: Array<IAction> = [{
         css: "svc-add-new-question-action",

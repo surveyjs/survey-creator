@@ -75,44 +75,10 @@
             <div class="svc-panel__placeholder">
               {{ adorner.placeholderText }}
             </div>
-            <div
-              v-if="adorner.showAddQuestionButton"
-              class="svc-panel__add-new-question svc-action-button"
-              v-key2click
-              @click="addNewQuestion"
-            >
-              <SvComponent
-                :is="'sv-svg-icon'"
-                class="svc-panel__add-new-question-icon"
-                :iconName="'icon-add_24x24'"
-                :size="'auto'"
-              ></SvComponent>
-              <span class="svc-add-new-item-button__text">
-                {{ adorner.addNewQuestionText }}
-              </span>
-            </div>
+            <SvComponent v-if="adorner.showAddQuestionButton" :is="'sv-action-bar'" :model="adorner.addQuestionActionsContainer"></SvComponent>
           </div>
         </div>
-        <div
-          v-if="!adorner.isEmptyElement && adorner.showAddQuestionButton"
-          class="svc-panel__add-new-question-container"
-        >
-          <div class="svc-panel__question-type-selector-popup">
-            <SvComponent
-              :is="'sv-popup'"
-              :model="adorner.questionTypeSelectorModel.popupModel"
-            ></SvComponent>
-          </div>
-          <div class="svc-panel__add-new-question-wrapper">
-            <SvComponent
-              :is="'svc-add-new-question-btn'"
-              :item="{ data: adorner }"
-              :buttonClass="'svc-action-button'"
-              :renderPopup="false"
-            ></SvComponent>
-          </div>
-        </div>
-
+        <SvComponent v-if="!adorner.isEmptyElement && adorner.showAddQuestionButton" :is="'sv-action-bar'" :model="adorner.addQuestionActionsContainer"></SvComponent>
         <div
           v-if="adorner.element.isInteractiveDesignElement"
           class="svc-question__content-actions"
@@ -134,16 +100,18 @@ import { SvComponent } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { Question } from "survey-core";
 import {
-  QuestionAdornerViewModel,
+  PanelAdornerViewModel,
   type SurveyCreatorModel,
 } from "survey-creator-core";
+import { onMounted, onUpdated, ref } from "vue";
+const root = ref();
 const props = defineProps<{
   componentName: string;
   componentData: any;
 }>();
 const adorner = useCreatorModel(
   () =>
-    new QuestionAdornerViewModel(
+    new PanelAdornerViewModel(
       props.componentData.data as SurveyCreatorModel,
       props.componentData.element as Question,
       null as any
@@ -153,9 +121,14 @@ const adorner = useCreatorModel(
     value.dispose();
   }
 );
-const addNewQuestion = (event: Event) => {
-  event.stopPropagation();
-  adorner.value.addNewQuestion();
-};
-// svc-panel
+onUpdated(() => {
+  if (root.value && adorner.value) {
+    adorner.value.rootElement = root.value;
+  }
+});
+onMounted(() => {
+  if (root.value && adorner.value) {
+    adorner.value.rootElement = root.value;
+  }
+});
 </script>
