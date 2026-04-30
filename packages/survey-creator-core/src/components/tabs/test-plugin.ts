@@ -141,6 +141,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.testAgainAction = new Action({
       id: "testSurveyAgain",
       visible: false,
+      appearance: { mode: "tertiary-surface", size: "large", style: "brand", showBorder: true },
       locTitleName: "ed.testSurveyAgain",
       action: () => {
         this.model.testAgain();

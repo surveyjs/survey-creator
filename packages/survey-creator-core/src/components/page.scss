@@ -257,82 +257,9 @@ svc-page {
   margin-top: var(--sjs2-spacing-x200, 16px);
   gap: var(--sjs2-spacing-x200, 16px);
 
-  .svc-btn {
-    flex-grow: 1;
-    border: none;
-  }
-
   .svc-add-new-question-action {
     position: relative;
     flex: 1 1 0;
-  }
-}
-
-.svc-add-new-item-button__text {
-  @include lbrDefaultBoldFont;
-  color: var(--ctr-button-text-color, var(--sjs-primary-background-500, #19b394ff));
-  text-align: center;
-}
-
-.svc-element__add-new-question {
-  height: auto;
-  padding: var(--sjs2-spacing-x200, 16px) calc(var(--sjs2-base-unit-spacing) * 10);
-  border-radius: var(--sjs2-size-x050, 4px);
-}
-
-.svc-element__add-new-question:focus {
-  box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px)
-    var(--ctr-button-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
-}
-
-.svc-element__question-type-selector {
-  position: absolute;
-  inset-inline-end: 0;
-
-  appearance: none;
-  display: flex;
-  padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x100, 8px)
-    var(--sjs2-spacing-x100, 8px);
-  border-radius: var(--sjs2-size-x050, 4px);
-  box-sizing: border-box;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-
-  margin: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x100, 8px);
-  outline: none;
-  transition: background-color $creator-transition-duration;
-
-  &:hover {
-    background-color: var(
-      --ctr-button-contextual-button-background-color-hovered,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
-  }
-
-  &:focus {
-    background: var(
-      --ctr-button-contextual-button-background-color-focused,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
-  }
-}
-
-.svc-element__question-type-selector-icon {
-  width: var(--sjs2-size-x300, 24px);
-  height: var(--sjs2-size-x300, 24px);
-  display: flex;
-  align-items: center;
-
-  .sv-svg-icon {
-    width: var(--sjs2-size-x300, 24px);
-    height: var(--sjs2-size-x300, 24px);
-    display: flex;
-    align-items: center;
-  }
-
-  use {
-    fill: var(--ctr-button-contextual-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
   }
 }
 

@@ -580,6 +580,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       id: "testSurveyAgain",
       visible: false,
       iconSize: "auto",
+      appearance: { mode: "tertiary-surface", size: "large", style: "brand", showBorder: true },
       locTitleName: "ed.testSurveyAgain",
       action: () => {
         this.model.testAgain();

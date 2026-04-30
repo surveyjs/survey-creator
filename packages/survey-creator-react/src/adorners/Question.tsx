@@ -1,4 +1,4 @@
-import { QuestionAdornerViewModel, toggleHovered } from "survey-creator-core";
+import { QuestionAdornerViewModel } from "survey-creator-core";
 import * as React from "react";
 import { ReactDragEvent, ReactMouseEvent } from "../events";
 import { Base, PanelModel, Question, SurveyElementCore } from "survey-core";
@@ -27,11 +27,11 @@ function QuestionElementContentFunc(props: { element: React.JSX.Element }): Reac
 const QuestionElementContent = React.memo(QuestionElementContentFunc);
 QuestionElementContent.displayName = "QuestionElementContent";
 
-export class QuestionAdornerComponent extends CreatorModelElement<
+export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = QuestionAdornerViewModel> extends CreatorModelElement<
   QuestionAdornerComponentProps,
   any
 > {
-  private modelValue: QuestionAdornerViewModel;
+  private modelValue: T;
   protected rootRef: React.RefObject<HTMLDivElement>;
   constructor(props: QuestionAdornerComponentProps) {
     super(props);
@@ -44,17 +44,17 @@ export class QuestionAdornerComponent extends CreatorModelElement<
       this.modelValue = this.createQuestionViewModel(props);
     }
   }
-  protected createQuestionViewModel(props: any): QuestionAdornerViewModel {
+  protected createQuestionViewModel(props: any): T {
     return new QuestionAdornerViewModel(
       props.componentData,
       props.question,
       null
-    );
+    ) as T;
   }
   protected getUpdatedModelProps(): string[] {
     return ["question", "componentData"];
   }
-  public get model(): QuestionAdornerViewModel {
+  public get model(): T {
     return this.modelValue;
   }
   protected getStateElement(): Base {

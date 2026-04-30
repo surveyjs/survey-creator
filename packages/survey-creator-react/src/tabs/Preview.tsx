@@ -1,44 +1,13 @@
 import * as React from "react";
-import { Action, Base } from "survey-core";
+import { Base } from "survey-core";
 import {
   SurveyActionBar,
   ReactElementFactory,
-  SurveyElementBase,
-  attachKey2click
-} from "survey-react-ui";
+  SurveyElementBase } from "survey-react-ui";
 import { TestSurveyTabViewModel } from "survey-creator-core";
 import { SurveySimulator } from "./SurveySimulator";
 import { SurveyResults } from "../Results";
 import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
-
-export class TabPreviewTestSurveyAgainComponent extends SurveyElementBase<any, any> {
-  private get model(): Action {
-    return this.props.model.testAgainAction;
-  }
-  protected getStateElement(): Base {
-    return this.model;
-  }
-
-  renderElement(): React.JSX.Element {
-    const buttonClassName = "svc-preview__test-again svc-btn";
-    return attachKey2click(<div
-      role="button"
-      onClick={(e) => {
-        e.stopPropagation();
-        this.model.action();
-      }}
-      className={buttonClassName}
-      title={this.model.title}
-    >
-      <span className="svc-btn__text">
-        {this.model.title}
-      </span>
-    </div>);
-  }
-}
-ReactElementFactory.Instance.registerElement("svc-complete-page", (props) => {
-  return React.createElement(TabPreviewTestSurveyAgainComponent, props);
-});
 
 export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
   constructor(props) {

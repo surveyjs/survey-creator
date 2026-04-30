@@ -40,7 +40,18 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected expandCollapseAction: IAction;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
-  public rootElement: HTMLElement;
+  private rootElementValue: HTMLElement;
+
+  public get rootElement(): HTMLElement {
+    return this.rootElementValue;
+  }
+  public set rootElement(val: HTMLElement) {
+    const oldRootElement = this.rootElementValue;
+    this.rootElementValue = val;
+    if (oldRootElement !== val) {
+      this.onRootElementChanged();
+    }
+  }
 
   @property({ defaultValue: null }) dropIndicatorPosition: DropIndicatorPosition;
   @property({ defaultValue: false }) isBeingDragged: boolean;
@@ -533,5 +544,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected getCss(): string {
     return new CssClassBuilder().append("svc-hovered svc-hovered-ready", this.isHovered).toString();
+  }
+  protected onRootElementChanged(): void {
   }
 }

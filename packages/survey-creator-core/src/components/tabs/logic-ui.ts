@@ -1,6 +1,7 @@
 import {
   SurveyModel, Action, Question, MatrixDropdownRowModelBase, MatrixDynamicRowModel,
-  PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString, IDialogOptions
+  PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString, IDialogOptions,
+  ActionContainer
 } from "survey-core";
 import { settings as libSettings } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
@@ -505,6 +506,26 @@ export class SurveyLogicUI extends SurveyLogic {
         this.addNewUI();
       }
     });
+  }
+  protected createContentActions(): Array<Action> {
+    return [this.addNewButton];
+  }
+  protected createContentActionsContainer(): ActionContainer<Action> {
+    const container = new ActionContainer();
+    container.containerCss = "svc-logic-tab__content-actions";
+    container.cssClasses = {
+      item: "sd-action svc-surface-btn",
+      itemAppearancePrefix: ""
+    };
+    container.setItems(this.createContentActions());
+    return container;
+  }
+  private contentActionsContainerValue?: ActionContainer<Action>;
+  public get contentActionsContainer(): ActionContainer {
+    if (!this.contentActionsContainerValue) {
+      this.contentActionsContainerValue = this.createContentActionsContainer();
+    }
+    return this.contentActionsContainerValue;
   }
   public get addNewText(): string {
     return getLogicString("addNewItem");

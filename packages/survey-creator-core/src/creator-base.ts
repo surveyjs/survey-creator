@@ -4546,6 +4546,9 @@ export class SurveyCreatorModel extends Base
 
     const newAction = createDropdownActionModel({
       iconName: "icon-more",
+      appearance: { style: "brand", mode: "tertiary", size: "small" },
+      showTitle: false,
+      iconSize: "auto",
       title: this.getLocString("ed.addNewQuestion"),
     }, {
       items: [],
