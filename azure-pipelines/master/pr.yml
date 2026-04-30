@@ -16,8 +16,8 @@ variables:
   ArtifactNameCreatorJS: "SurveyJSCreatorBuildJS"
   ArtifactNameAnalytics: "SurveyJSAnalyticsBuild"
   ArtifactNamePDF: "SurveyjsPDFbuild"
-  PipelineLibrary: ${{ iif(eq($(System.PullRequest.TargetBranch), 'V3'), '138', '130') }}
-  PipelineLibraryPR: ${{ iif(eq($(System.PullRequest.TargetBranch), 'V3'), '139', '133') }}
+  PipelineLibrary: $[ iif(eq(variables['System.PullRequest.TargetBranch'], 'V3'), '138', '130') ]
+  PipelineLibraryPR: $[ iif(eq(variables['System.PullRequest.TargetBranch'], 'V3'), '139', '133') ]
 
 
 resources:
@@ -84,7 +84,7 @@ stages:
       - job: Download
         continueOnError: true
         variables:
-          LIBRARY_PIPELINE: $[ iif(eq($(PR), ''), $(PipelineLibrary), $(PipelineLibraryPR)) ]
+          LIBRARY_PIPELINE: $[ iif(eq(variables.PR, ''), variables.PipelineLibrary, variables.PipelineLibraryPR) ]
         steps:
           - checkout: none
 
