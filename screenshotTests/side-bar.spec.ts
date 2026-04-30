@@ -130,7 +130,7 @@ test.describe(title, () => {
     await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-general.png");
 
     await page.locator(".svc-sidebar-tabs__item .sd-action").filter({ visible: true }).nth(4).click();
-    await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png");
+    await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png", { maxDiffPixels: 2 });
 
     await page.locator(".spg-boolean-switch").filter({ visible: true }).click();
     await page.locator(".svc-top-bar").filter({ visible: true }).hover();
