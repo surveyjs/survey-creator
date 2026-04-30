@@ -4899,6 +4899,8 @@ export class SurveyCreatorModel extends Base
     if (!theme) return;
     this.creatorTheme = theme;
 
+    this.applySurfaceTheme(theme);
+
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
     this.patchLegacyCSSVariables(newCssVariable);
@@ -4959,7 +4961,7 @@ export class SurveyCreatorModel extends Base
       "--sjs2-color-bg-warning-secondary",
       "--sjs2-color-fg-warning-on-primary"
     ];
-    cssVariablesToDelete.forEach(variable => delete this.defaultSurfaceCssVariables[variable]);
+    //cssVariablesToDelete.forEach(variable => delete this.defaultSurfaceCssVariables[variable]);
 
     const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {
