@@ -21,7 +21,7 @@ svc-page {
   }
 
   .svc-panel__placeholder {
-    @include lbrDefaultFont;
+    @include sjs2--typography--default;
     color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
   }
 }

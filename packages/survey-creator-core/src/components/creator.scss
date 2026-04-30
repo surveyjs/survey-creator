@@ -172,7 +172,7 @@ survey-creator,
 // }
 
 .svc-creator__non-commercial-text {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   color: var(--ctr-page-banner-text-color, var(--sjs-secondary-foreground-100, #ffffffff));
   vertical-align: middle;
   padding: calcSize(1.5) calcSize(16);

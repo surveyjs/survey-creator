@@ -13,7 +13,7 @@
 }
 
 .spg-dropdown__value {
-    @include ctrDefaultFont;
+    @include sjs2--typography--default;
     // display: flex;
     align-items: center;
     width: 100%;
@@ -28,7 +28,7 @@
     margin-left: 0;
 }
 .spg-dropdown__filter-string-input {
-    @include ctrDefaultFont;
+    @include sjs2--typography--default;
 
     color: var(--ctr-editor-content-text-color, var(--sjs-layer-3-foreground-100, #000000e6));
 }

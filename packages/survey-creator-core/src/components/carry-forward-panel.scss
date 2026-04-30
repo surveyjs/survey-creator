@@ -7,7 +7,7 @@
   container-type: inline-size;
 }
 .svc-carry-forward-panel {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   box-sizing: border-box;
   width: 100%;
   padding: var(--ctr-survey-info-panel-padding-top, var(--lbr-spacing-x4))

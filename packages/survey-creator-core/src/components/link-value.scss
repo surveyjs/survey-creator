@@ -1,7 +1,7 @@
 @use "../variables" as *;
 
 .svc-link__button {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
 }
 

@@ -105,7 +105,7 @@ svc-page-navigator-item,
 }
 
 .svc-page-navigator-item__text {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   color: var(--ctr-page-navigator-item-text-color-hovered, var(--sjs-layer-1-foreground-100, #000000e6));
 }
 

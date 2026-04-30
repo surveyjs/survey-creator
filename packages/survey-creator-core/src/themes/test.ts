@@ -235,7 +235,7 @@ export default {
     "--sjs2-typography-line-height-component-header-title": "var(--sjs2-line-height-x500)",
     "--sjs2-typography-line-height-component-header-description": "var(--sjs2-line-height-x400)",
     "--sjs2-typography-font-weight-basic": "var(--sjs2-font-weight-regular)",
-    "--sjs2-typography-font-weight-strong": "var(--sjs2-font-weight-semibold)",
+    "--sjs2-typography-font-weight-strong": "700",
     "--sjs2-typography-font-weight-component-input-content": "var(--sjs2-font-weight-regular)",
     "--sjs2-typography-font-weight-component-question-title": "var(--sjs2-font-weight-semibold)",
     "--sjs2-typography-font-weight-component-question-description": "var(--sjs2-font-weight-regular)",

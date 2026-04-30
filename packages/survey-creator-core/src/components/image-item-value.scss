@@ -76,10 +76,9 @@
 }
 
 .svc-image-item-value__placeholder {
-  @include lbrDefaultFont;
+  @include sjs2--typography--default;
   color: var(--ctr-survey-placeholder-text-color, rgba(0, 0, 0, 0.5));
   text-align: center;
-  font-weight: 400;
   white-space: normal;
 }
 

@@ -73,7 +73,7 @@
 
 //is visible only on hover
 .svc-toolbox__item-banner {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   opacity: 0;
   box-sizing: border-box;
   align-items: center;
@@ -147,7 +147,7 @@
 }
 
 .svc-toolbox__item-title {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
 
   display: block;
   padding-inline-start: calcSize(1);

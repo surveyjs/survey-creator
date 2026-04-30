@@ -118,12 +118,7 @@
   color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
   text-align: center;
 
-  /* sjs2/typography/default */
-  font-family: var(--sjs2-typography-font-family-default, "Open Sans");
-  font-size: var(--sjs2-typography-font-size-default, 16px);
-  font-style: normal;
-  font-weight: 400;
-  line-height: var(--sjs2-typography-line-height-default, 24px); /* 150% */
+  @include sjs2--typography--default;
 }
 
 .spg-title-toolbar--single-help-action {

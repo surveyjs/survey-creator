@@ -35,7 +35,7 @@
 }
 
 .svc-logic-paneldynamic .svc-logic-operator {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   -webkit-appearance: none;
   appearance: none;
   border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
@@ -381,7 +381,7 @@
 }
 
 .svc-logic-placeholder__text.svc-logic-placeholder__text {
-  @include lbrDefaultFont;
+  @include sjs2--typography--default;
   color: var(--lbr-placeholder-text-color, var(--sjs-layer-1-foreground-50, #00000080));
   text-align: center;
   display: block;

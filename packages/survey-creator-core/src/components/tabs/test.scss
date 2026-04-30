@@ -55,7 +55,7 @@
   }
 }
 .svc-test-tab__content .sd-body--empty {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   color: var(--sjs-layer-1-foreground-100, #000000e6);
   text-align: center;
   overflow: hidden;

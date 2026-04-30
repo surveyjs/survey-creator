@@ -60,7 +60,7 @@
 }
 
 .svc-remaining-character-counter {
-  @include lbrSmallFont;
+  @include sjs2--typography--small;
   display: none;
   position: relative;
   outline: none;
@@ -114,7 +114,7 @@
 }
 
 .svc-string-editor__error {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   margin-left: calcSize(1);
   color: red;
   display: none;
