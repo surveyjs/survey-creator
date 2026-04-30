@@ -103,6 +103,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 }
 
 export class ThemeModel extends Base implements ITheme {
+  private baseThemeVariables: { [index: string]: string } = {};
   private static defaultThemeValue: ITheme;
   public static get DefaultTheme() {
     if (!this.defaultThemeValue) {
@@ -282,6 +283,9 @@ export class ThemeModel extends Base implements ITheme {
 
   constructor() {
     super();
+    const vars = Serializer.getProperties("theme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
+    this.baseThemeVariables = this.calculateThemeVariables({}, vars);
+
     updateCustomQuestionJSONs();
     this.setNewHeaderProperty();
     this.onPropertyValueChangedCallback = (
@@ -346,7 +350,7 @@ export class ThemeModel extends Base implements ITheme {
 
   private blockThemeChangedNotifications = 0;
 
-  private calculateThemeVariables(cssVariables) {
+  private calculateThemeVariables(cssVariables, additionalCssVariables: string[] = []) {
     let themeCopyCssVariables = JSON.parse(JSON.stringify(cssVariables));
 
     // If cssVariables exist, apply them to a div, then replace cssVariables with computed styles
@@ -355,6 +359,7 @@ export class ThemeModel extends Base implements ITheme {
       for (const key of Object.keys(themeCopyCssVariables)) {
         div.style.setProperty(key, themeCopyCssVariables[key] as string);
       }
+      div.classList.add("sd-theme-root");
       DomDocumentHelper.getBody().appendChild(div);
 
       const computed = DomWindowHelper.getWindow().getComputedStyle(div);
@@ -362,7 +367,7 @@ export class ThemeModel extends Base implements ITheme {
       // Replace cssVariables with computed values
       const newCssVariables: { [key: string]: string } = {};
       const calcProxyProperty = "width";
-      for (const key of Object.keys(themeCopyCssVariables)) {
+      for (const key of [...Object.keys(themeCopyCssVariables), ...additionalCssVariables]) {
         let value = computed.getPropertyValue(key);
         // getComputedStyle for custom properties may return calc() unresolved; force computation via a length property
         if (typeof value === "string" && value.indexOf("calc(") === 0) {
@@ -538,6 +543,7 @@ export class ThemeModel extends Base implements ITheme {
     if (!json) return;
 
     const _json = {};
+    assign(_json, this.baseThemeVariables);
     assign(_json, json);
     delete _json["header"];
     delete _json["cssVariables"];
