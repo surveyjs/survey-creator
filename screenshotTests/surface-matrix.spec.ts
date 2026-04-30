@@ -214,6 +214,7 @@ test.describe(title, () => {
       ],
     };
     await setJSON(page, json);
+    await page.locator("[data-name='question1'] .sv-string-editor").first().waitFor({ state: "visible" });
     await page.evaluate(() => {
       ((window as any).creator.rootElement.getRootNode().querySelector("[data-name='question1'] .sv-string-editor") as HTMLElement).focus();
     });
