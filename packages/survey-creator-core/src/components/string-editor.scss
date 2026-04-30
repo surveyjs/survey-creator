@@ -60,7 +60,7 @@
 }
 
 .svc-remaining-character-counter {
-  @include sjs2--typography--small;
+  @include sjs2--typography--small-strong;
   display: none;
   position: relative;
   outline: none;
