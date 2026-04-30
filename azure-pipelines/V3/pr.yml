@@ -84,7 +84,7 @@ stages:
       - job: Download
         continueOnError: true
         variables:
-          LIBRARY_PIPELINE: $[ iif(eq($(PR), ''), $(PipelineLibrary), $(PipelineLibraryPR)) ]
+          LIBRARY_PIPELINE: $[ iif(eq(variables.PR, ''), variables.PipelineLibrary, variables.PipelineLibraryPR) ]
         steps:
           - checkout: none
 
