@@ -4,7 +4,7 @@
 svc-tab-designer {
   width: 100%;
   height: 100%;
-  background: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
+  background: var(--sjs2-color-utility-surface-designer);
 }
 
 .svc-tab-designer {
@@ -13,8 +13,14 @@ svc-tab-designer {
   height: 100%;
   flex-direction: column;
   position: static;
-  background: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
+  background: var(--sjs2-color-utility-surface-designer);
   width: 0;
+}
+
+.svc-test-tab--empty,
+.svc-translation-tab--empty,
+.svc-logic-tab--empty {
+  background: var(--sjs2-color-utility-surface-designer);
 }
 
 .svc-tab-designer--with-placeholder .svc-designer-header {
@@ -60,7 +66,7 @@ svc-tab-designer {
     .sv-string-editor {
       @include lbrVariables.lbrDefaultFont;
       color: var(--sjs2-color-component-header-default-description, rgba(28, 27, 32, 0.6));
-    
+
       &[aria-placeholder]:empty:before {
         color: var(--sjs2-color-component-header-default-description-placeholder, rgba(28, 27, 32, 0.4));
       }

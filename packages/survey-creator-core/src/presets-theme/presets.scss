@@ -7,7 +7,8 @@
 @use "blocks/sps-popup.scss";
 
 .svc-tab-designer.svc-tab-designer--presets {
-  background: white;
+  background: var(--sjs2-color-utility-surface-presets-manager);
+
   .svc-list__container {
     width: 288px;
   }
@@ -86,7 +87,7 @@
 
 .sps-body {
   width: 100%;
-  background: var(--sjs2-color-utility-surface-muted, rgba(28, 27, 32, 0.05));
+  background: var(--sjs2-color-utility-surface-presets-manager);
 
   .sv-components-container-contentBottom {
     position: absolute;
@@ -211,7 +212,7 @@
   gap: var(--sjs2-spacing-x100, 8px);
   align-self: stretch;
   border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
-  background: var(--sjs2-color-utility-surface-muted, rgba(28, 27, 32, 0.05));
+  background: var(--sjs2-color-utility-surface-presets-manager);
 
   .sd-action {
     flex-direction: row-reverse;

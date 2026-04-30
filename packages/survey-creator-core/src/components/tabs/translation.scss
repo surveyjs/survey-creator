@@ -3,12 +3,12 @@
 .svc-tab-translation {
   width: 100%;
   height: 100%;
-  background-color: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
 }
 
 .svc-translation-tab {
   /* disable library transition animations */
   --sjs-transition-duration: 0ms;
+  background-color: var(--sjs2-color-utility-surface-translations);
 }
 
 .svc-translation-tab--empty {
