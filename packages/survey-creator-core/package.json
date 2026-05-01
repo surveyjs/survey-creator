@@ -32,7 +32,7 @@
     "lint:fix": "eslint . --max-warnings=0 --fix"
   },
   "dependencies": {
-    "survey-core": "^2.5.22"
+    "survey-core": "../../../survey-library/packages/survey-core/build"
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
