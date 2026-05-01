@@ -24,9 +24,11 @@ import "./matrix-cell.scss";
 export class MatrixCellWrapperEditSurvey {
   private surveyValue: SurveyModel;
   private creator: SurveyCreatorModel;
+  private originalCellQuestionJSON: any;
   constructor(creator: SurveyCreatorModel, private cellQuestion: Question, private column: MatrixDropdownColumn, model?: Base) {
     this.creator = creator;
     let questionJSON = cellQuestion.toJSON();
+    this.originalCellQuestionJSON = JSON.parse(JSON.stringify(questionJSON));
     questionJSON.type = cellQuestion.getType();
     this.surveyValue = creator.createSurvey({ elements: [questionJSON] }, "modal-question-editor", model, (survey: SurveyModel): void => {
       survey.css = defaultCss;
@@ -42,6 +44,9 @@ export class MatrixCellWrapperEditSurvey {
   }
   public get survey(): SurveyModel { return this.surveyValue; }
   public get question(): Question { return this.survey.getAllQuestions()[0]; }
+  private static extractItemValues(arr: Array<any>): Array<any> {
+    return arr.map(item => typeof item === "object" && item !== null ? item.value : item);
+  }
   public apply(): void {
     const matrix = <QuestionMatrixDropdownModelBase>this.cellQuestion.parentQuestion;
     const column: MatrixDropdownColumn = matrix.getColumnByName(this.cellQuestion.name);
@@ -61,11 +66,35 @@ export class MatrixCellWrapperEditSurvey {
     if (column.cellType === "default") {
       column.cellType = qType;
     }
+    let hasChanges = false;
     for (let key in questionJSON) {
       if (!Helpers.isTwoValueEquals(questionJSON[key], columnJSON[key])) {
-        column[key] = questionJSON[key];
+        // Skip properties that were not actually changed in the editor
+        if (Helpers.isTwoValueEquals(questionJSON[key], this.originalCellQuestionJSON[key])) continue;
+        hasChanges = true;
+        if (key in columnJSON) {
+          column[key] = questionJSON[key];
+        } else {
+          // The property was inherited from the matrix. If only item text/metadata
+          // changed (same item values), apply to the matrix to avoid duplicating
+          // the choices array onto the column. If the item values themselves differ,
+          // the user intends a column-specific override.
+          const origVal = this.originalCellQuestionJSON[key];
+          const newVal = questionJSON[key];
+          const matrixProp = Serializer.findProperty(matrix.getType(), key);
+          if (!!matrixProp && matrix[key] !== undefined &&
+              Array.isArray(origVal) && Array.isArray(newVal) &&
+              Helpers.isTwoValueEquals(
+                MatrixCellWrapperEditSurvey.extractItemValues(origVal),
+                MatrixCellWrapperEditSurvey.extractItemValues(newVal))) {
+            matrix[key] = newVal;
+          } else {
+            column[key] = questionJSON[key];
+          }
+        }
       }
     }
+    if (!hasChanges) return;
     matrix.onColumnCellTypeChanged(column);
     this.creator.setModified({ type: "MATRIX_CELL_EDITOR", column: column });
   }
