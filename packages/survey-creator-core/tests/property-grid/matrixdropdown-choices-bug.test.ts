@@ -1,6 +1,5 @@
 import {
-  QuestionMatrixDropdownModel, QuestionMatrixDynamicModel,
-  ItemValue, QuestionDropdownModel, QuestionCheckboxModel
+  QuestionMatrixDropdownModel, QuestionDropdownModel
 } from "survey-core";
 import { CreatorTester } from "../creator-tester";
 import { MatrixCellWrapperEditSurvey } from "../../src/components/matrix-cell";
@@ -34,8 +33,6 @@ test("Bug #7672: Editing cell choice text when column has own choices should not
   editQuestion.choices[0].text = "Modified One";
   editSurvey.apply();
 
-  console.log("Column JSON after edit:", JSON.stringify(col.toJSON()));
-  console.log("Matrix JSON after edit:", JSON.stringify(matrix.toJSON()));
   expect(col.choices).toHaveLength(3);
   expect(col.choices[0].text).toBe("Modified One");
 });
@@ -58,44 +55,21 @@ test("Bug #7672: Editing cell choice text when column inherits choices from matr
   const col = matrix.columns[0];
 
   // Column should NOT have its own choices (inheriting from matrix)
-  const colJSON = col.toJSON();
-  console.log("Column JSON before edit:", JSON.stringify(colJSON));
+  expect(col.toJSON()).not.toHaveProperty("choices");
 
   // Open cell editor
   const cellQuestion = matrix.visibleRows[0].cells[0].question;
   const editSurvey = new MatrixCellWrapperEditSurvey(creator, cellQuestion, col);
   const editQuestion = <QuestionDropdownModel>editSurvey.question;
 
-  // Show what the edit question looks like
-  console.log("Edit question choices:", JSON.stringify(editQuestion.toJSON().choices));
-
   // Modify choice text (just adding text to an existing choice)
   editQuestion.choices[0].text = "Strongly Disagree";
   editSurvey.apply();
 
   const matrixJSON = matrix.toJSON();
-  console.log("Matrix JSON after edit:", JSON.stringify(matrixJSON));
-  console.log("Column JSON after edit:", JSON.stringify(col.toJSON()));
 
   // The matrix choices should still be 5
   expect(matrix.choices).toHaveLength(5);
-
-  // Check for duplicated choices in JSON
-  const allChoices = [];
-  if (matrixJSON.choices) {
-    matrixJSON.choices.forEach((c: any) => {
-      allChoices.push(typeof c === "object" ? c.value : c);
-    });
-  }
-  if (matrixJSON.columns) {
-    matrixJSON.columns.forEach((col: any) => {
-      if (col.choices) {
-        col.choices.forEach((c: any) => {
-          allChoices.push(typeof c === "object" ? c.value : c);
-        });
-      }
-    });
-  }
 
   // Check if any choice value appears in both matrix-level and column-level
   const matrixChoiceValues = (matrixJSON.choices || []).map((c: any) => typeof c === "object" ? c.value : c);
@@ -110,9 +84,8 @@ test("Bug #7672: Editing cell choice text when column inherits choices from matr
     });
   }
   const duplicateValues = matrixChoiceValues.filter((v: any) => columnChoiceValues.includes(v));
-  console.log("Duplicate choice values (matrix + column):", duplicateValues);
 
-  // This is the key assertion - there should be no values duplicated between matrix and column
+  // There should be no values duplicated between matrix and column
   expect(duplicateValues).toHaveLength(0);
 });
 
@@ -151,7 +124,6 @@ test("Bug #7672: Cell editor choices vs matrix-level choices interaction", () =>
   editSurvey.apply();
 
   const matrixJSON = matrix.toJSON();
-  console.log("Full matrix JSON:", JSON.stringify(matrixJSON, null, 2));
 
   // Count total choice entries in the JSON
   let totalChoiceEntries = 0;
@@ -163,6 +135,5 @@ test("Bug #7672: Cell editor choices vs matrix-level choices interaction", () =>
   }
 
   // There should be at most 5 total choice entries (not 10)
-  console.log("Total choice entries in JSON:", totalChoiceEntries);
   expect(totalChoiceEntries).toBeLessThanOrEqual(5);
 });
