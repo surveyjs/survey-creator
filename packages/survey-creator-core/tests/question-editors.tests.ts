@@ -359,3 +359,163 @@ test("Edit matrix cell question & survey locale", (): any => {
   let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
   expect(editSurvey.survey.locale).toEqual("de");
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Tests for MatrixCellWrapperEditSurvey.apply() — issue #7672 / PR #7673
+//
+// When a matrixdropdown column inherits its choices from the parent matrix (no
+// column-level choices array), the unfixed apply() incorrectly copies those
+// inherited choices onto the column JSON, producing duplicate entries and
+// breaking matrix-level choice sharing.
+//
+// Tests marked test.failing() assert the EXPECTED post-fix behaviour.  They
+// currently fail on master (documenting the bug) and will start passing once
+// PR #7673 is merged and test.failing can be changed to a plain test().
+// ─────────────────────────────────────────────────────────────────────────────
+
+test("Edit matrix cell question - column with own choices: text edit (Bug #7672)", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "q1",
+        columns: [{ name: "col1", cellType: "dropdown", choices: [1, 2, 3] }],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  const col = matrix.columns[0];
+  expect(col.choices).toHaveLength(3);
+
+  const cellQuestion = matrix.visibleRows[0].cells[0].question;
+  const editSurvey = new MatrixCellWrapperEditSurvey(creator, cellQuestion, col);
+  const editQuestion = <QuestionSelectBase>editSurvey.question;
+
+  editQuestion.choices[0].text = "Modified One";
+  editSurvey.apply();
+
+  expect(col.choices).toHaveLength(3);
+  expect(col.choices[0].text).toBe("Modified One");
+});
+
+test.failing("Edit matrix cell question - inherited choices: text edit applies at matrix level (Bug #7672)", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "q1",
+        columns: [{ name: "col1", cellType: "dropdown" }],
+        choices: [1, 2, 3, 4, 5],
+        rows: ["row1", "row2"]
+      }
+    ]
+  };
+
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  const col = matrix.columns[0];
+  expect(col.toJSON()).not.toHaveProperty("choices");
+
+  const cellQuestion = matrix.visibleRows[0].cells[0].question;
+  const editSurvey = new MatrixCellWrapperEditSurvey(creator, cellQuestion, col);
+  const editQuestion = <QuestionSelectBase>editSurvey.question;
+
+  editQuestion.choices[0].text = "Strongly Disagree";
+  editSurvey.apply();
+
+  expect(matrix.choices).toHaveLength(5);
+  expect(col.toJSON()).not.toHaveProperty("choices");
+  expect(matrix.choices[0].text).toBe("Strongly Disagree");
+});
+
+test("Edit matrix cell question - inherited choices: structural change creates column override (Bug #7672)", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "q1",
+        columns: [{ name: "col1", cellType: "dropdown" }],
+        choices: [1, 2, 3],
+        rows: ["row1"]
+      }
+    ]
+  };
+
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  const col = matrix.columns[0];
+
+  const cellQuestion = matrix.visibleRows[0].cells[0].question;
+  const editSurvey = new MatrixCellWrapperEditSurvey(creator, cellQuestion, col);
+  const editQuestion = <QuestionSelectBase>editSurvey.question;
+
+  editQuestion.choices = [1, 2, 3, 4];
+  editSurvey.apply();
+
+  expect(col.choices).toHaveLength(4);
+  expect(matrix.choices).toHaveLength(3);
+});
+
+test.failing("Edit matrix cell question - inherited choices: text edit visible to all inheriting columns (Bug #7672)", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "q1",
+        columns: [
+          { name: "col1", cellType: "dropdown" },
+          { name: "col2", cellType: "dropdown" }
+        ],
+        choices: [1, 2, 3],
+        rows: ["row1"]
+      }
+    ]
+  };
+
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+
+  const cellQuestion = matrix.visibleRows[0].cells[0].question;
+  const editSurvey = new MatrixCellWrapperEditSurvey(creator, cellQuestion, matrix.columns[0]);
+  const editQuestion = <QuestionSelectBase>editSurvey.question;
+
+  editQuestion.choices[0].text = "Updated Label";
+  editSurvey.apply();
+
+  expect(matrix.choices[0].text).toBe("Updated Label");
+  expect(matrix.columns[0].toJSON()).not.toHaveProperty("choices");
+  expect(matrix.columns[1].toJSON()).not.toHaveProperty("choices");
+});
+
+test.failing("Edit matrix cell question - inherited choices: no-op apply does not modify state (Bug #7672)", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "q1",
+        columns: [{ name: "col1", cellType: "dropdown" }],
+        choices: [1, 2, 3, 4, 5],
+        rows: ["row1"]
+      }
+    ]
+  };
+
+  let modifiedCounter = 0;
+  creator.onModified.add((sender, options) => {
+    if (options.type === "MATRIX_CELL_EDITOR") {
+      modifiedCounter++;
+    }
+  });
+
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  const cellQuestion = matrix.visibleRows[0].cells[0].question;
+  const editSurvey = new MatrixCellWrapperEditSurvey(creator, cellQuestion, matrix.columns[0]);
+  editSurvey.apply();
+
+  expect(creator.state).not.toBe("modified");
+  expect(modifiedCounter).toBe(0);
+});
