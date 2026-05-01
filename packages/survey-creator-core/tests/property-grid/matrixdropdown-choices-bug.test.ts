@@ -71,22 +71,11 @@ test("Bug #7672: Editing cell choice text when column inherits choices from matr
   // The matrix choices should still be 5
   expect(matrix.choices).toHaveLength(5);
 
-  // Check if any choice value appears in both matrix-level and column-level
-  const matrixChoiceValues = (matrixJSON.choices || []).map((c: any) => typeof c === "object" ? c.value : c);
-  const columnChoiceValues = [];
-  if (matrixJSON.columns) {
-    matrixJSON.columns.forEach((col: any) => {
-      if (col.choices) {
-        col.choices.forEach((c: any) => {
-          columnChoiceValues.push(typeof c === "object" ? c.value : c);
-        });
-      }
-    });
-  }
-  const duplicateValues = matrixChoiceValues.filter((v: any) => columnChoiceValues.includes(v));
+  // The column should still not have its own choices after a text-only edit
+  expect(col.toJSON()).not.toHaveProperty("choices");
 
-  // There should be no values duplicated between matrix and column
-  expect(duplicateValues).toHaveLength(0);
+  // The text change should have been applied to the matrix-level choices
+  expect(matrix.choices[0].text).toBe("Strongly Disagree");
 });
 
 test("Bug #7672: Cell editor choices vs matrix-level choices interaction", () => {
@@ -136,4 +125,72 @@ test("Bug #7672: Cell editor choices vs matrix-level choices interaction", () =>
 
   // There should be at most 5 total choice entries (not 10)
   expect(totalChoiceEntries).toBeLessThanOrEqual(5);
+
+  // The text change should have been applied at the matrix level
+  expect(matrix.choices[2].text).toBe("Neither Agree nor Disagree");
+});
+
+test("Bug #7672: Structural change to inherited choices creates column-level override", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "q1",
+        columns: [{ name: "col1", cellType: "dropdown" }],
+        choices: [1, 2, 3],
+        rows: ["row1"]
+      }
+    ]
+  };
+
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  const col = matrix.columns[0];
+  expect(col.toJSON()).not.toHaveProperty("choices");
+
+  // Open cell editor and add a new choice (structural change)
+  const cellQuestion = matrix.visibleRows[0].cells[0].question;
+  const editSurvey = new MatrixCellWrapperEditSurvey(creator, cellQuestion, col);
+  const editQuestion = <QuestionDropdownModel>editSurvey.question;
+
+  editQuestion.choices = [1, 2, 3, 4];
+  editSurvey.apply();
+
+  // Structural change should create a column-level override
+  expect(col.choices).toHaveLength(4);
+  // Matrix-level choices should be unchanged
+  expect(matrix.choices).toHaveLength(3);
+});
+
+test("Bug #7672: Text edit on inherited choices propagates to all inheriting columns", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "q1",
+        columns: [
+          { name: "col1", cellType: "dropdown" },
+          { name: "col2", cellType: "dropdown" }
+        ],
+        choices: [1, 2, 3],
+        rows: ["row1"]
+      }
+    ]
+  };
+
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+
+  // Edit choice text via col1's cell editor
+  const cellQuestion = matrix.visibleRows[0].cells[0].question;
+  const editSurvey = new MatrixCellWrapperEditSurvey(creator, cellQuestion, matrix.columns[0]);
+  const editQuestion = <QuestionDropdownModel>editSurvey.question;
+
+  editQuestion.choices[0].text = "Updated Label";
+  editSurvey.apply();
+
+  // Change should be at the matrix level, visible to both columns
+  expect(matrix.choices[0].text).toBe("Updated Label");
+  expect(matrix.columns[0].toJSON()).not.toHaveProperty("choices");
+  expect(matrix.columns[1].toJSON()).not.toHaveProperty("choices");
 });
