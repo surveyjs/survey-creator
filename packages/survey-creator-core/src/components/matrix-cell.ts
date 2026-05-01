@@ -63,9 +63,7 @@ export class MatrixCellWrapperEditSurvey {
         questionJSON[key] = !columnJSON[key];
       }
     }
-    if (column.cellType === "default") {
-      column.cellType = qType;
-    }
+    const needsCellTypeChange = column.cellType === "default";
     let hasChanges = false;
     for (let key in questionJSON) {
       if (!Helpers.isTwoValueEquals(questionJSON[key], columnJSON[key])) {
@@ -95,6 +93,9 @@ export class MatrixCellWrapperEditSurvey {
       }
     }
     if (!hasChanges) return;
+    if (needsCellTypeChange) {
+      column.cellType = qType;
+    }
     matrix.onColumnCellTypeChanged(column);
     this.creator.setModified({ type: "MATRIX_CELL_EDITOR", column: column });
   }

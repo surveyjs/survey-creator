@@ -66,8 +66,6 @@ test("Bug #7672: Editing cell choice text when column inherits choices from matr
   editQuestion.choices[0].text = "Strongly Disagree";
   editSurvey.apply();
 
-  const matrixJSON = matrix.toJSON();
-
   // The matrix choices should still be 5
   expect(matrix.choices).toHaveLength(5);
 
