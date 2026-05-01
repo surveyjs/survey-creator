@@ -612,7 +612,7 @@ export class ThemeModel extends Base implements ITheme {
     const cssVariables = {};
     Object.keys(result).forEach(key => {
       if (key.indexOf("--") == 0) {
-        cssVariables[key] = result[key];
+        if (result[key] !== this.baseThemeVariables[key]) cssVariables[key] = result[key];
         delete result[key];
       } else if (typeof result[key] === "object") {
 
