@@ -17,6 +17,7 @@ export * from "../adorners/QuestionWidget";
 export * from "../adorners/CellQuestion";
 export * from "../adorners/CellQuestionDropdown";
 export * from "../adorners/Page";
+export * from "../AddQuestionButton";
 export * from "../adorners/Panel";
 
 export * from "../LogoImage";

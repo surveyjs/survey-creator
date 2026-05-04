@@ -545,7 +545,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1240, height: 1161 });
     await setShowSidebar(page, false);
     await compareScreenshot(page, toolboxElement, "toolbox-compact-disabled-items.png");
-    await page.locator("button.svc-element__question-type-selector").click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
     await compareScreenshot(page, page.locator(".sv-popup__container:visible"), "add-new-disabled-items.png");
   });
 });

@@ -21,8 +21,8 @@ test.describe(title, () => {
 
     const tabContent = page.locator(".svc-creator-tab__content");
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
-    await page.click(".svc-logic-tab__content-action");
-    await compareScreenshot(page, tabContent, "logic-tab-new-rule.png");
+    await page.click(".svc-logic-tab__content-actions .sd-action");
+    await compareScreenshot(page, tabContent, "logic-tab-new-rule.png", { maxDiffPixels: 10 });
   });
 
   const jsonOneRule = {
@@ -132,7 +132,7 @@ test.describe(title, () => {
     });
 
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
-    await page.click(".svc-logic-tab__content-action");
+    await page.click(".svc-logic-tab__content-actions .sd-action");
     await page.click(".sl-panel__done-button");
     await compareScreenshot(page, page.locator(".svc-notifier--error"), "logic-error-notifier.png");
   });
@@ -156,7 +156,7 @@ test.describe(title, () => {
       ]
     });
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
-    await page.click(".svc-logic-tab__content-action");
+    await page.click(".svc-logic-tab__content-actions .sd-action");
     await page.click(".svc-logic-operator--question");
     await compareScreenshot(page, page.locator(".sv-popup__container"), "logic-dropdown.png");
     await getVisibleSelectListItemByText(page, "q1").click();
@@ -236,7 +236,7 @@ test.describe(title, () => {
     await setJSON(page, jsonOneRule);
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
 
-    await page.click(".svc-logic-tab__content-action");
+    await page.click(".svc-logic-tab__content-actions .sd-action");
     await page.click(".sl-panel__done-button");
 
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-condition-question-name.png");

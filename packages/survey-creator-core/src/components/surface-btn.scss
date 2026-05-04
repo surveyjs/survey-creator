@@ -1,0 +1,38 @@
+@use "../typography-mixins.scss" as mixins;
+.svc-surface-btn {
+    justify-content: center;
+    align-items: center;
+    flex: 1 0 0;
+    --sd-action-border-radius: var(--sjs2-radius-component-panel, 12px);
+    --sd-action-padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x800, 64px);
+    --sd-action-title-font-size: var(--sjs2-typography-font-size-default);
+    --sd-action-title-line-height: var(--sjs2-typography-line-height-default);
+    --sd-action-title-padding: 0 var(--sjs2-spacing-x200, 16px);
+    --sd-action-icon-padding: 0;
+    --sd-action-icon-size: var(--sjs2-line-height-x300, 24px);
+
+    --sd-action-boxshadow: var(--sjs2-border-effect-surface-default, 0 0 0 1px rgba(17, 16, 20, 0.1));
+    --sd-action-disabled-box-shadow: var(--sjs2-border-effect-surface-disabled, 0 0 0 1px rgba(17, 16, 20, 0.1));
+
+    --sd-action-background: var(--sjs2-color-component-panel-default-bg, #fff);
+    --sd-action-hover-background: var(--sjs2-color-bg-brand-secondary-dim, rgba(25, 179, 148, 0.15));
+    --sd-action-disabled-background: var(--sjs2-color-bg-basic-primary-disabled, #f5f5f5);
+
+    --sd-action-title-color: var(--sjs2-color-fg-brand-primary, #15987e);
+    --sd-action-hover-title-color: var(--sjs2-color-fg-brand-primary, #15987e);
+    --sd-action-disabled-title-color: var(--sjs2-color-fg-brand-primary-disabled, rgba(28, 27, 32, 0.2));
+
+    --sd-action-icon-color: var(--sjs2-color-fg-brand-primary, #15987e);
+    --sd-action-hover-icon-color: var(--sjs2-color-fg-brand-primary, #15987e);
+    --sd-action-disabled-icon-color: var(--sjs2-color-fg-brand-primary-disabled, rgba(28, 27, 32, 0.2));
+}
+.svc-surface-btn:where(:active:has(.svc-surface-btn__selector:active)) {
+    transform: none;
+}
+.svc-surface-btn__selector {
+    position: absolute;
+    inset-inline-end: 0;
+    margin: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x100, 8px);
+    --sd-action-boxshadow: none;
+    --sd-action-disabled-box-shadow: none;
+}

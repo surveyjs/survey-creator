@@ -258,11 +258,11 @@ test.describe(title, () => {
       (window as any).creator.survey.getQuestionByName("question1").detailPanelMode = "underRow";
     });
     await expect(page.locator(".sd-question[data-name=question1] .svc-panel__placeholder").getByText("Drop a question")).toBeVisible();
-    await expect(page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question")).toBeVisible();
-    await page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question").click();
+    await expect(page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question-container .sd-action")).toBeVisible();
+    await page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question-container .sd-action").click();
     await expect(page.locator(".sd-question[data-name=question1] .sd-table__row").nth(1).locator(".svc-dropdown-action--convertTo .sd-action__title").getByText("Single-Line Input")).toBeVisible();
     await expect(page.locator(".sd-question[data-name=question2]")).toBeVisible();
-    await page.locator(".sd-question[data-name=question1] .svc-element__add-new-question").click();
+    await page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question-container .sd-action").first().click();
     await expect(page.locator(".sd-question[data-name=question3]")).toBeVisible();
   });
 
@@ -399,7 +399,7 @@ test.describe(title + " dropdown collapse", () => {
     await page.locator(".sv-string-editor").getByText("panel1").click();
     await expect(page.locator(".sv-string-editor").getByText("panel1")).toBeFocused();
     await page.keyboard.press("Tab");
-    await expect(page.locator(".svc-question__content--selected .svc-panel__add-new-question")).toBeFocused();
+    await expect(page.locator(".svc-question__content--selected .svc-panel__add-new-question-container .sd-action").first()).toBeFocused();
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
@@ -412,7 +412,7 @@ test.describe(title + " dropdown collapse", () => {
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
-    await expect(page.locator(".svc-question__content--panel .svc-element__add-new-question")).toBeFocused();
+    await expect(page.locator(".svc-question__content--panel .svc-panel__add-new-question-container .sd-action").first()).toBeFocused();
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
 
