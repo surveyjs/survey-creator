@@ -5,7 +5,7 @@ import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
-import { trimBoxShadowValue } from "survey-core";
+import { trimBoxShadowValue, parseBoxShadow, createBoxShadow } from "survey-core";
 import { HeaderModel } from "./header-model";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../../utils/configs";
 import { assign, roundTo2Decimals } from "../../utils/utils";
@@ -366,14 +366,20 @@ export class ThemeModel extends Base implements ITheme {
 
       // Replace cssVariables with computed values
       const newCssVariables: { [key: string]: string } = {};
-      const calcProxyProperty = "width";
+      const calcProxySizeProperty = "width";
+      const calcProxyBoxShadowProperty = "box-shadow";
       for (const key of [...Object.keys(themeCopyCssVariables), ...additionalCssVariables]) {
         let value = computed.getPropertyValue(key);
         // getComputedStyle for custom properties may return calc() unresolved; force computation via a length property
         if (typeof value === "string" && value.indexOf("calc(") === 0) {
-          div.style.setProperty(calcProxyProperty, value);
-          value = computed.getPropertyValue(calcProxyProperty);
-          div.style.removeProperty(calcProxyProperty);
+          div.style.setProperty(calcProxySizeProperty, value);
+          value = computed.getPropertyValue(calcProxySizeProperty);
+          div.style.removeProperty(calcProxySizeProperty);
+        }
+        if (key.indexOf("-border-effect-") !== -1) {
+          div.style.setProperty(calcProxyBoxShadowProperty, value);
+          value = createBoxShadow(parseBoxShadow(computed.getPropertyValue(calcProxyBoxShadowProperty)));
+          div.style.removeProperty(calcProxyBoxShadowProperty);
         }
         if (key.indexOf("-color-") !== -1 && value !== "transparent") {
           value = getRGBaColor(value);
@@ -405,7 +411,7 @@ export class ThemeModel extends Base implements ITheme {
       assign(effectiveThemeCssVariables, ThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
       patchLegacyCSSVariables(effectiveThemeCssVariables);
       assign(effectiveThemeCssVariables, this.calculateThemeVariables(effectiveThemeCssVariables));
-      assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
+      assign(effectiveThemeCssVariables, this.themeCssVariablesChanges);
       const effectiveTheme: ITheme = {
         backgroundImage: this.backgroundImage || baseTheme.backgroundImage || "",
         backgroundImageFit: this.backgroundImageFit || baseTheme.backgroundImageFit,
