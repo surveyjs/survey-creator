@@ -24,6 +24,7 @@ export class PanelAdornerViewModel extends QuestionAdornerViewModel {
     container.setActionsAppearance({ style: "brand", mode: "tertiary", size: "small" });
     container.setItems(this.createAddQuestionActions());
     container.containerCss = "svc-panel__add-new-question-container";
+    container.flushUpdates();
     return container;
   }
 
