@@ -18,6 +18,7 @@ export const defaultCreatorThemesOrder = ["default-light", "default-contrast", "
 export function registerCreatorTheme(...themes: Array<ConfigsHash<ICreatorTheme> | ICreatorTheme>) {
   const importedThemeNames = [];
   registerConfig((theme: ICreatorTheme) => {
+    if (theme.isPanelless) return;
     const fullname = `${theme.themeName}-${theme.colorPalette || "light"}`;
     CreatorThemes[fullname] = theme;
     importedThemeNames.push(fullname);

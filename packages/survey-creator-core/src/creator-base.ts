@@ -10,7 +10,8 @@ import {
   addIconsToThemeSet,
   SvgThemeSets,
   QuestionPanelDynamicModel,
-  ChoiceItem
+  ChoiceItem,
+  patchLegacyCSSVariables
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -4886,7 +4887,7 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  private patchLegacyCSSVariables(newCssVariable: any) {
+  private patchLegacyCreatorCSSVariables(newCssVariable: any) {
     Object.keys(legacyCssVariables).forEach((variable) => {
       if (!!newCssVariable[variable]) {
         newCssVariable[legacyCssVariables[variable]] = newCssVariable[variable];
@@ -4903,7 +4904,8 @@ export class SurveyCreatorModel extends Base
 
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
-    this.patchLegacyCSSVariables(newCssVariable);
+    this.patchLegacyCreatorCSSVariables(newCssVariable);
+    patchLegacyCSSVariables(newCssVariable);
     const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {
       designerPlugin.model.updateSurfaceCssVariables();
