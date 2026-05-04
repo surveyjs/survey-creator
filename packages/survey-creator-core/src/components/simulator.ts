@@ -145,6 +145,39 @@ export class SurveySimulatorModel extends Base {
     if (!!simulator) simulator.style.transform = "";
   }
 
+  private layoutRefreshRafId: number = 0;
+
+  /**
+   * Responsiveness depends on survey root width after the simulator shell layout updates.
+   * Schedules {@link SurveyModel.forceProcessResponsiveness} on the next animation frame
+   * so embedded framework bindings have applied frame sizes first.
+   */
+  public queueSurveyLayoutRefresh(): void {
+    const win = DomWindowHelper.getWindow();
+    const raf = win?.requestAnimationFrame?.bind(win);
+    const caf = win?.cancelAnimationFrame?.bind(win);
+    if (!raf) {
+      this.survey?.forceProcessResponsiveness();
+      return;
+    }
+    if (this.layoutRefreshRafId && caf) {
+      caf(this.layoutRefreshRafId);
+    }
+    this.layoutRefreshRafId = raf(() => {
+      this.layoutRefreshRafId = 0;
+      this.survey?.forceProcessResponsiveness();
+    });
+  }
+
+  public cancelSurveyLayoutRefresh(): void {
+    const win = DomWindowHelper.getWindow();
+    const caf = win?.cancelAnimationFrame?.bind(win);
+    if (this.layoutRefreshRafId && caf) {
+      caf(this.layoutRefreshRafId);
+    }
+    this.layoutRefreshRafId = 0;
+  }
+
   public get activeDevice(): string {
     return this.device;
   }

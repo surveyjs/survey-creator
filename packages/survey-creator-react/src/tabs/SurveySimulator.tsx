@@ -10,8 +10,6 @@ function simulatorShellStyle(overlayHeight: string): React.CSSProperties {
 }
 
 export class SurveySimulator extends SurveyElementBase<any, any> {
-  private layoutRafId: number = 0;
-
   private get model(): SurveySimulatorModel {
     return this.props.model;
   }
@@ -22,32 +20,17 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
 
   public componentDidMount(): void {
     super.componentDidMount();
-    this.queueSurveyLayoutRefresh();
+    this.model.queueSurveyLayoutRefresh();
   }
 
   public componentDidUpdate(prevProps: any, prevState: any): void {
     super.componentDidUpdate(prevProps, prevState);
-    this.queueSurveyLayoutRefresh();
+    this.model.queueSurveyLayoutRefresh();
   }
 
-  /**
-   * `forceProcessResponsiveness` uses survey root width; run after layout (rAF) so simulator frame size is applied.
-   */
-  private queueSurveyLayoutRefresh(): void {
-    const win = typeof window !== "undefined" ? window : undefined;
-    const raf = win?.requestAnimationFrame?.bind(win);
-    const caf = win?.cancelAnimationFrame?.bind(win);
-    if (!raf) {
-      this.model.survey?.forceProcessResponsiveness();
-      return;
-    }
-    if (this.layoutRafId && caf) {
-      caf(this.layoutRafId);
-    }
-    this.layoutRafId = raf(() => {
-      this.layoutRafId = 0;
-      this.model.survey?.forceProcessResponsiveness();
-    });
+  public componentWillUnmount(): void {
+    this.model.cancelSurveyLayoutRefresh();
+    super.componentWillUnmount();
   }
 
   renderElement(): React.JSX.Element {

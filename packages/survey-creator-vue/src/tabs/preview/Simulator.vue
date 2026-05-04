@@ -40,7 +40,7 @@
 import { SvComponent } from "survey-vue3-ui";
 import type { SurveySimulatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { computed, onMounted, onUpdated } from "vue";
+import { computed, onMounted, onUnmounted, onUpdated } from "vue";
 const props = defineProps<{ model: SurveySimulatorModel }>();
 useBase(() => props.model);
 const simulatorFrame = computed(() => props.model.simulatorFrame);
@@ -48,25 +48,9 @@ const shellStyle = computed(() => {
   const h = props.model.popupOverlayHeight;
   return h ? { "--sv-popup-overlay-height": h } : {};
 });
-let layoutRafId = 0;
-const queueSurveyLayoutRefresh = () => {
-  const win = typeof window !== "undefined" ? window : undefined;
-  const raf = win?.requestAnimationFrame?.bind(win);
-  const caf = win?.cancelAnimationFrame?.bind(win);
-  if (!raf) {
-    props.model.survey?.forceProcessResponsiveness();
-    return;
-  }
-  if (layoutRafId && caf) {
-    caf(layoutRafId);
-  }
-  layoutRafId = raf(() => {
-    layoutRafId = 0;
-    props.model.survey?.forceProcessResponsiveness();
-  });
-};
-onMounted(queueSurveyLayoutRefresh);
-onUpdated(queueSurveyLayoutRefresh);
+onMounted(() => props.model.queueSurveyLayoutRefresh());
+onUpdated(() => props.model.queueSurveyLayoutRefresh());
+onUnmounted(() => props.model.cancelSurveyLayoutRefresh());
 const activateZoom = () => {
   if (props.model.device !== "desktop") {
     props.model.activateZoom();

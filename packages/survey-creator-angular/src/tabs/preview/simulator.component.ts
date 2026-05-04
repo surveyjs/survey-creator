@@ -9,8 +9,6 @@ import { SurveySimulatorModel } from "survey-creator-core";
 })
 export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implements AfterViewInit, OnDestroy {
   @Input() model!: SurveySimulatorModel;
-  private layoutRafId = 0;
-  private simulatorLayoutRefreshDisposed = false;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -29,51 +27,17 @@ export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implem
   }
 
   ngAfterViewInit(): void {
-    this.simulatorLayoutRefreshDisposed = false;
-    this.queueSurveyLayoutRefresh();
+    this.model.queueSurveyLayoutRefresh();
   }
 
   override ngOnDestroy(): void {
-    this.simulatorLayoutRefreshDisposed = true;
-    this.cancelLayoutRaf();
+    this.model.cancelSurveyLayoutRefresh();
     super.ngOnDestroy();
-  }
-
-  private cancelLayoutRaf(): void {
-    const win = typeof window !== "undefined" ? window : undefined;
-    const caf = win?.cancelAnimationFrame?.bind(win);
-    if (this.layoutRafId && caf) {
-      caf(this.layoutRafId);
-    }
-    this.layoutRafId = 0;
-  }
-
-  /**
-   * Survey responsiveness uses root width after the simulator shell layout updates.
-   * Defer to the next frame so Angular has applied frame sizes and CSS bindings.
-   */
-  private queueSurveyLayoutRefresh(): void {
-    if (this.simulatorLayoutRefreshDisposed) return;
-    const win = typeof window !== "undefined" ? window : undefined;
-    const raf = win?.requestAnimationFrame?.bind(win);
-    const caf = win?.cancelAnimationFrame?.bind(win);
-    if (!raf) {
-      this.model?.survey?.forceProcessResponsiveness();
-      return;
-    }
-    if (this.layoutRafId && caf) {
-      caf(this.layoutRafId);
-    }
-    this.layoutRafId = raf(() => {
-      this.layoutRafId = 0;
-      if (this.simulatorLayoutRefreshDisposed) return;
-      this.model?.survey?.forceProcessResponsiveness();
-    });
   }
 
   protected override afterUpdate(isSync: boolean = false): void {
     super.afterUpdate(isSync);
-    this.queueSurveyLayoutRefresh();
+    this.model.queueSurveyLayoutRefresh();
   }
 
   protected getModel(): SurveySimulatorModel {
