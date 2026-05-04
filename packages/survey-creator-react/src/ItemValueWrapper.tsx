@@ -121,7 +121,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     return <div className="svc-item-value-controls svc-choice-elements-button-container">{btn}</div>;
   }
   private renderPanel(): React.JSX.Element | null {
-    if (!this.model.showPanel) return null;
+    if (!this.model.renderedShowPanel) return null;
     const creator = this.model.creator;
     const survey = creator.survey;
     return <ChoiceItemPanel element={this.model.item.panel} survey={survey} creator={creator} css={survey.getCss()}></ChoiceItemPanel>;

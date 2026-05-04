@@ -25,6 +25,6 @@
       <ng-template [component]="{name: 'sv-action-bar-item', data: { model: adorner.expandPanelAction } }"></ng-template>
     </div>
   </div>
-  <ng-template *ngIf="adorner.showPanel"
+  <ng-template *ngIf="adorner.renderedShowPanel"
           [component]="{ name: getPanelComponentName(item.panel), data: getPanelComponentData(item.panel) }"></ng-template>
 </ng-template>
