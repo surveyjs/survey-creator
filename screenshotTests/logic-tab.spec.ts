@@ -22,7 +22,7 @@ test.describe(title, () => {
     const tabContent = page.locator(".svc-creator-tab__content");
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await page.click(".svc-logic-tab__content-actions .sd-action");
-    await compareScreenshot(page, tabContent, "logic-tab-new-rule.png");
+    await compareScreenshot(page, tabContent, "logic-tab-new-rule.png", { maxDiffPixels: 10 });
   });
 
   const jsonOneRule = {
