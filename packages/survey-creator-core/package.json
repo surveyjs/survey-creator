@@ -44,14 +44,14 @@
     "@types/qunit": "2.0.31",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
-    "@vitest/coverage-v8": "^4.1.5",
-    "@vitest/ui": "^4.1.5",
+    "@vitest/coverage-v8": "^2.1.9",
+    "@vitest/ui": "^2.1.9",
     "ace-builds": "1.2.2",
     "autoprefixer": "^10.4.27",
     "eslint": "^8.57.0",
     "fast-glob": "^3.3.3",
     "jest-canvas-mock": "^2.3.1",
-    "jsdom": "^29.1.0",
+    "jsdom": "^25.0.1",
     "papaparse": "^5.5.3",
     "postcss": "8.4.32",
     "postcss-cli": "10.1.0",
@@ -63,6 +63,6 @@
     "ts-loader": "^9.5.2",
     "ts-node": "3.3.0",
     "tslib": "^2.8.1",
-    "vitest": "^4.1.5"
+    "vitest": "^2.1.9"
   }
 }
