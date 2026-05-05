@@ -45,10 +45,8 @@ export class SurveyPageNavigator extends CreatorModelElement<
   }
   componentDidMount() {
     super.componentDidMount();
-    if (this.props.pageEditMode !== "bypage") {
-      const el = this.containerRef.current as HTMLDivElement;
-      this.model.attachToUI(el);
-    }
+    const el = this.containerRef.current as HTMLDivElement;
+    this.model.attachToUI(el);
   }
   componentWillUnmount() {
     super.componentWillUnmount();
