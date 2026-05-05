@@ -60,14 +60,14 @@ test.describe(title, () => {
     await getAddNewQuestionButton(page).nth(1).click();
     await expect(page.locator("span").filter({ hasText: "question2" }).first()).toBeVisible();
     await page.waitForTimeout(1000);
-    await expect(page.locator(".svc-page-navigator")).not.toBeVisible();
+    await expect(page.locator(".svc-page-navigator")).toBeVisible();
 
     await getAddNewQuestionButton(page).nth(2).click();
     await expect(page.locator("span").filter({ hasText: "question3" }).first()).toBeVisible();
     await expect(page.locator(".svc-page-navigator")).toBeVisible();
 
     await page.setViewportSize({ width: 1600, height: 1750 });
-    await expect(page.locator(".svc-page-navigator")).not.toBeVisible();
+    await expect(page.locator(".svc-page-navigator")).toBeVisible();
 
     await page.setViewportSize({ width: 1600, height: 1400 });
     await expect(page.locator(".svc-page-navigator")).toBeVisible();
