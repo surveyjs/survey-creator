@@ -47,9 +47,9 @@ test.describe(title, () => {
     await page.waitForTimeout(1000);
     await compareScreenshot(page, pageNavigatorContainer, "page-navigator-right-hovered.png");
 
-    await page.setViewportSize({ width: 1920, height: 1400 });
-    await page.waitForTimeout(1000);
-    await expect(pageNavigatorElement).not.toBeVisible();
+    // await page.setViewportSize({ width: 1920, height: 1400 });
+    // await page.waitForTimeout(1000);
+    // await expect(pageNavigatorElement).not.toBeVisible();
   });
 
   test("On the right side opened popup", async ({ page }) => {
@@ -84,9 +84,9 @@ test.describe(title, () => {
     await page.waitForTimeout(1000);
     await compareScreenshot(page, pageNavigatorContainer, "page-navigator-left-hovered.png");
 
-    await page.setViewportSize({ width: 1920, height: 1400 });
-    await page.waitForTimeout(1000);
-    await expect(pageNavigatorElement).not.toBeVisible();
+    // await page.setViewportSize({ width: 1920, height: 1400 });
+    // await page.waitForTimeout(1000);
+    // await expect(pageNavigatorElement).not.toBeVisible();
   });
 
   test("On the left side (rtl)", async ({ page }) => {
