@@ -1,5 +1,5 @@
-import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, ViewContainerRef } from "@angular/core";
+import { BaseAngular } from "survey-angular-ui";
 import { SurveySimulatorModel } from "survey-creator-core";
 
 @Component({
@@ -7,8 +7,39 @@ import { SurveySimulatorModel } from "survey-creator-core";
   templateUrl: "./simulator.component.html",
   styles: [":host { display: none; }"]
 })
-export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> {
+export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implements AfterViewInit, OnDestroy {
   @Input() model!: SurveySimulatorModel;
+
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    viewContainerRef: ViewContainerRef
+  ) {
+    super(changeDetectorRef, viewContainerRef);
+  }
+
+  /**
+   * `BaseAngular` defers updates while `model.isRendering` is true during `ngDoCheck`, so
+   * `popupOverlayHeight` (and frame-driving props) would not refresh the embedded template in time.
+   * These properties must run synchronous `detectChanges` so `[style.--sv-popup-overlay-height]` applies.
+   */
+  protected override getPropertiesToUpdateSync(): Array<string> {
+    return ["popupOverlayHeight", "landscape", "device", "survey"];
+  }
+
+  ngAfterViewInit(): void {
+    this.model.queueSurveyLayoutRefresh();
+  }
+
+  override ngOnDestroy(): void {
+    this.model.cancelSurveyLayoutRefresh();
+    super.ngOnDestroy();
+  }
+
+  protected override afterUpdate(isSync: boolean = false): void {
+    super.afterUpdate(isSync);
+    this.model.queueSurveyLayoutRefresh();
+  }
+
   protected getModel(): SurveySimulatorModel {
     return this.model;
   }
