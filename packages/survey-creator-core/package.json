@@ -51,7 +51,7 @@
     "jest-environment-jsdom": "^30.3.0",
     "jest-junit": "^16.0.0",
     "papaparse": "^5.5.3",
-    "postcss": "8.4.32",
+    "postcss": "8.5.10",
     "postcss-cli": "10.1.0",
     "postcss-fail-on-warn": "0.2.1",
     "postcss-import": "16.1.0",
