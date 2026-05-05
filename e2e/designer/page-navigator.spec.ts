@@ -48,7 +48,7 @@ test.describe(title, () => {
     await expect(page.locator(lastPageNavigatorItem)).toBeVisible();
   });
 
-  test("PageNavigator shown if scrolling exists", async ({ page }) => {
+  test("PageNavigator is shown unrelated to scrolling existence", async ({ page }) => {
     await setAllowEditSurveyTitle(page, false);
     await page.setViewportSize({ width: 1600, height: 1400 });
 
@@ -74,6 +74,6 @@ test.describe(title, () => {
 
     await page.locator(".svc-question__content--selected span").filter({ hasText: "Delete" }).click();
     await expect(page.locator("span").filter({ hasText: "question3" }).first()).not.toBeVisible();
-    await expect(page.locator(".svc-page-navigator")).not.toBeVisible();
+    await expect(page.locator(".svc-page-navigator")).toBeVisible();
   });
 });
