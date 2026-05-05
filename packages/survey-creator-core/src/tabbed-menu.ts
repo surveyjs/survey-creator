@@ -1,7 +1,6 @@
 import { Action, AdaptiveActionContainer, CssClassBuilder, IAction, property, UpdateResponsivenessMode } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { ICreatorPlugin } from "./creator-settings";
-import { listComponentCss } from "./components/list-theme";
 
 export interface ITabbedMenuItem extends IAction {
   componentContent: string;
@@ -75,7 +74,6 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
     this.dotsItem.css += " svc-tabbed-menu-dots";
     this.dotsItem.innerCss += " svc-tabbed-menu-dots__item";
     this.dotsItem.iconSize = "auto";
-    this.hiddenItemsListModel.cssClasses = listComponentCss;
     this.minVisibleItemsCount = 1;
   }
   public addTab(name: string,

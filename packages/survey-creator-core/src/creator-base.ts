@@ -80,7 +80,6 @@ import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 import { doMachineStringsTranslation } from "./utils/creator-locstrings";
 
 import { iconsV1, iconsV2 } from "./svgbundle";
-import { listComponentCss } from "./components/list-theme";
 
 import "./components/creator.scss";
 import "./components/string-editor.scss";
@@ -4554,7 +4553,6 @@ export class SurveyCreatorModel extends Base
       items: [],
       allowSelection: false,
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
       verticalPosition: "bottom",
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
@@ -4629,7 +4627,7 @@ export class SurveyCreatorModel extends Base
           onSelectQuestionType(item.typeName, i.json);
         }
       }));
-      action.setSubItems({ items: innerItems, cssClasses: listComponentCss });
+      action.setSubItems({ items: innerItems });
     }
     return action;
   }

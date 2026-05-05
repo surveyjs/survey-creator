@@ -241,26 +241,3 @@
   }
 }
 
-.sps-list__item--label {
-  opacity: 1;
-  .svc-list__item-body {
-    display: flex;
-    padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x150, 8px) var(--sjs2-spacing-x050, 4px)
-      var(--sjs2-spacing-x200, 16px);
-    align-items: center;
-    gap: 8px;
-    align-self: stretch;
-
-    overflow: hidden;
-    color: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.4));
-
-    @include sjs2--typography--small-strong;
-  }
-  padding-bottom: var(--sjs2-spacing-x050, 4px);
-}
-
-.sps-list__item--alert {
-  .svc-list__item-body {
-    color: var(--sjs2-color-fg-alert-primary, #c30935);
-  }
-}

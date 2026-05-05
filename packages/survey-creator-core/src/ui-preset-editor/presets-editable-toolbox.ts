@@ -1,7 +1,7 @@
 import { Action, FunctionFactory, Helpers, IAction, MatrixDynamicRowModel, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { QuestionToolboxCategory, QuestionToolboxItem, SurveyCreatorModel, editorLocalization, getLocString } from "survey-creator-core";
-import { ICreatorPresetToolboxItem, listComponentCss } from "survey-creator-core";
+import { ICreatorPresetToolboxItem } from "survey-creator-core";
 import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-editable-categorized";
 
 const LocCategoriesName = "toolboxCategories";
@@ -253,8 +253,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         actions.push(new Action({
           id: "subcategories",
           title: getLocString("presets.toolbox.subitems"),
-          css: "sps-list__item--label",
-          enabled: false,
+          isLabel: false,
           needSeparator: true
         }));
         actions.push(new Action({
