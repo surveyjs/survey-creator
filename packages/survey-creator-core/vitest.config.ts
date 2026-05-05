@@ -40,8 +40,15 @@ const sharedAliases = [
   { find: /^survey\.i18n$/, replacement: resolve(root, "node_modules/survey-core/survey.i18n.js") },
   // survey-creator-core sub-paths (must come before bare "survey-creator-core")
   { find: /^survey-creator-core\/themes$/, replacement: resolve(root, "src/themes/index.ts") },
-  // bare survey-core
-  { find: /^survey-core$/, replacement: resolve(root, "node_modules/survey-core/survey.core.js") },
+  // bare survey-core: alias to the ESM (.mjs) build instead of CJS so that
+  // both the test's `import "survey-core"` AND the side-effect import
+  // `import "survey-core/survey.i18n"` (which Node `exports` resolution maps
+  // to `./fesm/survey.i18n.mjs`) end up sharing the SAME surveyLocalization
+  // module instance. With a CJS alias here, on Linux CI the i18n .mjs bundle
+  // would resolve its own `import { setupLocale } from "survey-core"` to a
+  // separate ESM module instance, and the registered locale names (e.g.
+  // German "Deutsch") would be invisible to the tests.
+  { find: /^survey-core$/, replacement: resolve(root, "node_modules/survey-core/fesm/survey-core.mjs") },
   { find: /^tslib$/, replacement: resolve(root, "node_modules/tslib") },
   { find: /^svgbundle$/, replacement: resolve(root, "tests/empty-module.js") },
 ];
