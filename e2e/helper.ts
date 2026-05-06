@@ -162,7 +162,7 @@ export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
 }
 
 export function getListItemByText(page: Page, text: string): Locator {
-  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true }).filter({ visible: true });
+  return page.locator(".sv-popup__content .sd-menu-list .sd-menu-item").getByText(text, { exact: true }).filter({ visible: true });
 }
 
 export function getVisibleSelectListItemByText(page: Page, text: string): Locator {
@@ -289,7 +289,7 @@ export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-a
 
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
   await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
-  await page.locator(".svc-list__item span").getByText(text, { exact: true }).filter({ visible: true }).click();
+  await page.locator(".sd-menu-item span").getByText(text, { exact: true }).filter({ visible: true }).click();
 }
 
 export function getAddNewQuestionButton(page: Page): Locator {

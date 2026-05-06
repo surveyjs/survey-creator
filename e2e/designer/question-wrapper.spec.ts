@@ -59,8 +59,8 @@ test.describe(title, () => {
     const questions = page.locator(".svc-question__content");
     const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
     const convertActionButton = page.locator(".svc-question__content--selected .svc-dropdown-action--convertTo").first();
-    const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
-    const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
+    const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
+    const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
     await expect(questions).toHaveCount(0);
 
@@ -89,8 +89,8 @@ test.describe(title, () => {
     const questions = page.locator(".svc-question__content");
     const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
     const convertInputTypeActionButton = questionToolbarActions.locator('button[title="Text"]');
-    const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
-    const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
+    const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
+    const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
     await expect(questions).toHaveCount(0);
 
@@ -115,8 +115,8 @@ test.describe(title, () => {
     const questions = page.locator(".svc-question__content");
     const unselectedQuestionToolbarActions = page.locator(".svc-question__content-actions").locator(".sd-action-bar__item");
     const convertActionButton = unselectedQuestionToolbarActions.locator('button[title="Single-Line Input"]');
-    const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
-    const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
+    const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
+    const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
     const json = { elements: [{ type: "text", name: "question1" }] };
     await setJSON(page, json);
@@ -318,8 +318,8 @@ test.describe(title + " dropdown collapse", () => {
   test("Keep focus on question convert", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
     const convertActionButton = page.locator(".svc-question__content--selected .svc-dropdown-action--convertTo").first();
-    const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
-    const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
+    const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
+    const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
     await expect(questions).toHaveCount(0);
 

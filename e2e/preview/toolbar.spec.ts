@@ -66,7 +66,7 @@ test.describe(title, () => {
 
   test("Page switcher", async ({ page }) => {
     await setJSON(page, json2);
-    const selectedClassName = /svc-list__item--selected/;
+    const selectedClassName = /sd-menu-item--selected/;
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await expect(page.locator(".sd-question__title").getByText("string_editor")).toBeVisible();
