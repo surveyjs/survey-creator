@@ -97,39 +97,12 @@
   flex-direction: row;
   flex-wrap: wrap;
   line-height: calcSize(6);
+  padding: var(--sjs2-spacing-x050, 4px);
   vertical-align: middle;
   align-items: stretch;
-
-  &:focus-within {
-    .spg-question__content--left {
-      box-shadow:
-        inset calc(-1 * var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
-        inset 0 calc(var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
-        inset 0 calc(-1 * var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
-    }
-
-    .spg-question__header--location--left {
-      box-shadow:
-        inset calc(var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
-        inset 0 calc(var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff)),
-        inset 0 calc(-1 * var(--ctr-editor-border-width-focused, var(--sjs-stroke-x2))) 0 0
-          var(--ctr-editor-border-color-focused, var(--sjs-primary-background-500, #19b394ff));
-    }
-  }
-
   &.spg-question--disabled {
-    .spg-question__content--left {
-      background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, white));
-    }
-
-    .spg-question__header--location--left {
-      background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, white));
-    }
+    background: var(--sjs2-color-component-formbox-readonly-bg, #fff);
+    box-shadow: var(--sjs2-border-effect-component-formbox-readonly, 0 0 0 1px #d4d4d4 inset);
   }
 }
 
@@ -143,34 +116,19 @@
 
 .spg-question__header--location--left {
   width: max-content;
-  box-sizing: border-box;
   max-width: 50%;
   flex: 0 0;
-  display: flex;
-  align-items: center;
-  padding-inline-start: var(--ctr-editor-padding-left, var(--sjs-spacing-x05));
-  border-top-left-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
-  border-bottom-left-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
-  background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4));
   box-sizing: border-box;
-  box-shadow:
-    inset calc(var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
-    inset 0 calc(var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
-    inset 0 calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro));
-
+  height: auto;
   .spg-question__title {
-    padding: var(--ctr-editor-label-padding-top, var(--sjs-spacing-x1))
-      var(--ctr-editor-label-padding-right, var(--sjs-spacing-x2))
-      var(--ctr-editor-label-padding-bottom, var(--sjs-spacing-x1))
-      var(--ctr-editor-label-padding-left, var(--sjs-spacing-x150));
-    border-inline-end: var(--ctr-editor-label-separator-width, var(--sjs-stroke-x1)) solid
-      var(--ctr-editor-label-separator-color, var(--sjs-border-10, #dcdcdcff));
-    display: inline-block;
-    color: var(--ctr-editor-label-color, var(--sjs-layer-3-foreground-50, #00000080));
+    color: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
     white-space: nowrap;
+    padding: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     .sv-string-viewer {
@@ -178,29 +136,24 @@
     }
   }
 }
-
 .spg-question__content--left {
-  flex: 2;
-  border-top-right-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
-  border-bottom-right-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
-  background: var(--ctr-editor-background-color, var(--sjs-layer-3-background-500, #f4f4f4));
-  box-shadow:
-    inset calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
-    inset 0 calc(var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro)),
-    inset 0 calc(-1 * var(--ctr-editor-border-width, var(--sjs-stroke-x1))) 0 0
-      var(--ctr-editor-border-color, var(--sjs-border-10, gainsboro));
-
-  .sd-formbox.sd-formbox.sd-formbox {
-    background-color: transparent;
+  width: auto;
+  flex-grow: 1;
+  .sd-formbox {
+    display: flex;
+    padding: 0;
     box-shadow: none;
-    border: none;
-
-    &:focus,
-    &:focus-within {
-      box-shadow: none;
-    }
+    background: transparent;
+  }
+  .sd-dropdown {
+    padding-top: var(--sjs2-spacing-x050, 4px);
+    padding-bottom: var(--sjs2-spacing-x050, 4px);
+    margin-top: calc(-1 * var(--sjs2-spacing-x050, 4px));
+    margin-bottom: calc(-1 * var(--sjs2-spacing-x050, 4px));
+  }
+  .sd-formbox__input {
+    width: 0;
+    flex-grow: 1;
   }
 }
 
