@@ -116,6 +116,23 @@ export class SurveyLogicAction {
       }
     });
   }
+  public hasReferenceToQuestion(name: string): boolean {
+    if (!this.element || !this.logicType) return false;
+    const qNames = this.questionNames;
+    for (let i = 0; i < qNames.length; i++) {
+      if (this.element[qNames[i]] === name) return true;
+    }
+    return false;
+  }
+  public clearReferenceToQuestion(name: string): void {
+    if (!this.element || !this.logicType) return;
+    const qNames = this.questionNames;
+    for (let i = 0; i < qNames.length; i++) {
+      if (this.element[qNames[i]] === name) {
+        this.element[qNames[i]] = "";
+      }
+    }
+  }
   private get questionNames(): Array<string> {
     if (!this.logicType || !this.logicType.questionNames) return [];
     return this.logicType.questionNames;
@@ -369,6 +386,10 @@ export class SurveyLogicItem {
   }
   public removeQuestion(name: string): void {
     this.removeQuestionInExpression(name);
+    this.clearActionsReferenceToQuestion(name);
+  }
+  private clearActionsReferenceToQuestion(name: string): void {
+    this.actions.forEach(action => action.clearReferenceToQuestion(name));
   }
   public getQuestionNames(): string[] {
     const res = [];

@@ -137,6 +137,22 @@ export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview"
   return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) })).filter({ visible: true });
 }
 
+/** Replaces `window.creator` via the React test page `updateCreatorModel` helper (see `test-pages/default.html`). */
+export const recreateCreatorWithOptions = async (page: Page, creatorOptions: Record<string, unknown>, json: object) => {
+  await expect(getTabbedMenuItemByText(page, creatorTabDesignerName)).toBeVisible();
+  await page.evaluate(
+    ({ creatorOptions, json }) => {
+      const defaults = {
+        expandCollapseButtonVisibility: "never",
+        showLogicTab: true,
+        showTranslationTab: true
+      };
+      (window as any).updateCreatorModel({ ...defaults, ...creatorOptions }, json);
+    },
+    { creatorOptions, json }
+  );
+};
+
 export function getBarItemByTitle(page: Page, text: string): Locator {
   return page.locator(".sd-action[title=\"" + text + "\"]");
 }
