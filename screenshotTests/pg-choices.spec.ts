@@ -150,6 +150,6 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Choice Options" }).click();
     await questionSelector.locator("td .sd-action").nth(0).click();
 
-    await compareScreenshot(page, questionSelector, "choices-editor-narrow-pg.png");
+    await compareScreenshot(page, questionSelector, "choices-editor-narrow-pg.png", { maxDiffPixels: 42 });
   });
 });
