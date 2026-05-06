@@ -25,10 +25,8 @@ export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorV
     return ["pagesController", "pageEditMode"];
   }
   public ngAfterViewInit(): void {
-    if (this.pageEditMode !== "bypage") {
-      const el = this.container.nativeElement;
-      this.model.attachToUI(el);
-    }
+    const el = this.container.nativeElement;
+    this.model.attachToUI(el);
   }
   public override ngOnDestroy(): void {
     super.ngOnDestroy();

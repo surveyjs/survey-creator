@@ -34,12 +34,10 @@ const model = useCreatorModel(
 const root = ref<HTMLDivElement>();
 
 onMounted(() => {
-  if (props.pageEditMode !== "bypage") {
-    const el = root.value;
-    const modelValue = model.value;
-    if(el) {
-      modelValue.attachToUI(el);
-    }
+  const el = root.value;
+  const modelValue = model.value;
+  if(el) {
+    modelValue.attachToUI(el);
   }
 });
 

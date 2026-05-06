@@ -48,7 +48,7 @@ test.describe(title, () => {
     await expect(page.locator(lastPageNavigatorItem)).toBeVisible();
   });
 
-  test("PageNavigator shown if scrolling exists", async ({ page }) => {
+  test("PageNavigator is shown unrelated to scrolling existence", async ({ page }) => {
     await setAllowEditSurveyTitle(page, false);
     await page.setViewportSize({ width: 1600, height: 1400 });
 
@@ -60,20 +60,20 @@ test.describe(title, () => {
     await getAddNewQuestionButton(page).nth(1).click();
     await expect(page.locator("span").filter({ hasText: "question2" }).first()).toBeVisible();
     await page.waitForTimeout(1000);
-    await expect(page.locator(".svc-page-navigator")).not.toBeVisible();
+    await expect(page.locator(".svc-page-navigator")).toBeVisible();
 
     await getAddNewQuestionButton(page).nth(2).click();
     await expect(page.locator("span").filter({ hasText: "question3" }).first()).toBeVisible();
     await expect(page.locator(".svc-page-navigator")).toBeVisible();
 
     await page.setViewportSize({ width: 1600, height: 1750 });
-    await expect(page.locator(".svc-page-navigator")).not.toBeVisible();
+    await expect(page.locator(".svc-page-navigator")).toBeVisible();
 
     await page.setViewportSize({ width: 1600, height: 1400 });
     await expect(page.locator(".svc-page-navigator")).toBeVisible();
 
     await page.locator(".svc-question__content--selected span").filter({ hasText: "Delete" }).click();
     await expect(page.locator("span").filter({ hasText: "question3" }).first()).not.toBeVisible();
-    await expect(page.locator(".svc-page-navigator")).not.toBeVisible();
+    await expect(page.locator(".svc-page-navigator")).toBeVisible();
   });
 });
