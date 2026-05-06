@@ -6,7 +6,7 @@ import { CreatorPresetEditableCaregorizedListConfigurator } from "./presets-edit
 
 const LocCategoriesName = "toolboxCategories";
 
-function validateToolboxJson (params) {
+function validateToolboxJson(params) {
   const value = params[0];
   if (!value || !value.type) return true;
   const obj = Serializer.createClass(value.type, value);
@@ -253,7 +253,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         actions.push(new Action({
           id: "subcategories",
           title: getLocString("presets.toolbox.subitems"),
-          isLabel: false,
+          isLabel: true,
           needSeparator: true
         }));
         actions.push(new Action({
@@ -350,7 +350,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       if (!item.subitems && defaultItem?.subitems) item.subitems = [];
       if (this.cleanIfNotDiffers(item, defaultItem)) differs = true;
     });
-    if (!differs && !Helpers.isTwoValueEquals(items.map(i=>i.name), this.defaultItems.map(i=>i.name))) differs = true;
+    if (!differs && !Helpers.isTwoValueEquals(items.map(i => i.name), this.defaultItems.map(i => i.name))) differs = true;
     return differs ? items : undefined;
   }
   protected isItemsMatrix(name: string): boolean {
@@ -414,7 +414,8 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
       categoriesDefinition = categoriesDefinition.map(c => ({
         ...defaultCategoriesMap[c.category],
         ...c,
-        ...{ items: c.items?.map(i => itemsMap[i]).filter(i => !!i) } }));
+        ...{ items: c.items?.map(i => itemsMap[i]).filter(i => !!i) }
+      }));
     }
 
     categoriesDefinition.filter((c: any) => c.items).forEach((c: any) => c.items.forEach((p: any) => delete defaultItemsMap[p.name]));
@@ -515,7 +516,7 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
     return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameItems);
   }
   private createToolboxItemRow(item: QuestionToolboxItem): ICreatorPresetToolboxItem {
-    const obj:ICreatorPresetToolboxItem = {
+    const obj: ICreatorPresetToolboxItem = {
       name: item.name,
       title: item.title,
       iconName: item.iconName,
