@@ -12,28 +12,23 @@ export class SurveySimulatorModel extends Base {
       options.menuType = device.deviceType === "desktop" ? "dropdown" : (device.deviceType == "tablet" ? "popup" : "overlay");
     });
   }
-  private updateSimulatorStyle(): void {
+
+  /**
+   * Value for CSS custom property `--sv-popup-overlay-height` on `.svd-simulator-content` (bound by framework views).
+   * Empty string when not used (desktop).
+   */
+  @property({ defaultValue: "" }) popupOverlayHeight: string;
+
+  private syncPopupOverlayHeight(): void {
     const device = simulatorDevices[this.activeDevice];
     const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
-
-    const simulator = this.surveyProvider.rootElement?.getElementsByClassName("svd-simulator-content")[0] as HTMLElement;
-    if (!!simulator) {
-      let overlayHeight = undefined;
-      if (device.deviceType === "tablet") {
-        overlayHeight = `${deviceHeight * this.scale}px`;
-      } else if (device.deviceType === "phone") {
-        overlayHeight = "100%";
-      }
-
-      if (!!overlayHeight) {
-        simulator.style.setProperty("--sv-popup-overlay-height", overlayHeight);
-      } else {
-        simulator.style.removeProperty("--sv-popup-overlay-height");
-      }
-      setTimeout(() => {
-        this.survey?.forceProcessResponsiveness();
-      });
+    let value = "";
+    if (device.deviceType === "tablet") {
+      value = `${deviceHeight * this.scale}px`;
+    } else if (device.deviceType === "phone") {
+      value = "100%";
     }
+    this.popupOverlayHeight = value;
   }
 
   constructor(private surveyProvider: SurveyCreatorModel) {
@@ -71,15 +66,18 @@ export class SurveySimulatorModel extends Base {
 
   @property({ defaultValue: true,
     onSet: (newVal:string, targer: SurveySimulatorModel) => {
-      targer.updateSimulatorStyle();
+      targer.syncPopupOverlayHeight();
     }
   }) landscape: boolean;
   @property({
-    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => { target.surveyChanged(); }
+    onSet: (newVal: SurveyModel, target: SurveySimulatorModel) => {
+      target.surveyChanged();
+      target.syncPopupOverlayHeight();
+    }
   }) survey: SurveyModel;
   @property({ defaultValue: "desktop",
     onSet: (newVal:string, targer: SurveySimulatorModel) => {
-      targer.updateSimulatorStyle();
+      targer.syncPopupOverlayHeight();
     }
   }) device: string;
   @property({ defaultValue: "l" }) orientation: string;
@@ -145,6 +143,39 @@ export class SurveySimulatorModel extends Base {
     this.currZoomScale = 1;
     const simulator = <HTMLElement>root.querySelector("#svd-simulator-wrapper");
     if (!!simulator) simulator.style.transform = "";
+  }
+
+  private layoutRefreshRafId: number = 0;
+
+  /**
+   * Responsiveness depends on survey root width after the simulator shell layout updates.
+   * Schedules {@link SurveyModel.forceProcessResponsiveness} on the next animation frame
+   * so embedded framework bindings have applied frame sizes first.
+   */
+  public queueSurveyLayoutRefresh(): void {
+    const win = DomWindowHelper.getWindow();
+    const raf = win?.requestAnimationFrame?.bind(win);
+    const caf = win?.cancelAnimationFrame?.bind(win);
+    if (!raf) {
+      this.survey?.forceProcessResponsiveness();
+      return;
+    }
+    if (this.layoutRefreshRafId && caf) {
+      caf(this.layoutRefreshRafId);
+    }
+    this.layoutRefreshRafId = raf(() => {
+      this.layoutRefreshRafId = 0;
+      this.survey?.forceProcessResponsiveness();
+    });
+  }
+
+  public cancelSurveyLayoutRefresh(): void {
+    const win = DomWindowHelper.getWindow();
+    const caf = win?.cancelAnimationFrame?.bind(win);
+    if (this.layoutRefreshRafId && caf) {
+      caf(this.layoutRefreshRafId);
+    }
+    this.layoutRefreshRafId = 0;
   }
 
   public get activeDevice(): string {

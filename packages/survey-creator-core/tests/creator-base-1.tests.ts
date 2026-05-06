@@ -697,6 +697,40 @@ test("Update expressions on deleting a panel with questions", (): any => {
   creator.deleteElement(<Base>(<any>creator.survey.getPanelByName("panel1")));
   expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
 });
+test("Clear trigger references (setToName, fromName, gotoName) when referenced question is deleted, Bug#7661", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "boolean", name: "question1" },
+          { type: "boolean", name: "question2" },
+          { type: "dropdown", name: "question3", choices: ["Item 1", "Item 2"] }
+        ]
+      }
+    ],
+    triggers: [
+      { type: "setvalue", expression: "{question1} = true", setToName: "question3", setValue: "Item 1" },
+      { type: "setvalue", expression: "{question2} = false", setToName: "question3", setValue: "Item 2" },
+      { type: "setvalue", expression: "{question1} = true", setToName: "question2", setValue: true },
+      { type: "copyvalue", expression: "{question1} = true", setToName: "question2", fromName: "question3" },
+      { type: "copyvalue", expression: "{question1} = true", setToName: "question3", fromName: "question2" },
+      { type: "skip", expression: "{question1} = true", gotoName: "question3" },
+      { type: "skip", expression: "{question2} = true", gotoName: "question2" }
+    ]
+  };
+  creator.deleteElement(creator.survey.getQuestionByName("question3"));
+  expect(creator.survey.triggers).toHaveLength(7);
+  expect((<any>creator.survey.triggers[0]).setToName).toBeFalsy();
+  expect((<any>creator.survey.triggers[1]).setToName).toBeFalsy();
+  expect((<any>creator.survey.triggers[2]).setToName).toBe("question2");
+  expect((<any>creator.survey.triggers[3]).setToName).toBe("question2");
+  expect((<any>creator.survey.triggers[3]).fromName).toBeFalsy();
+  expect((<any>creator.survey.triggers[4]).setToName).toBeFalsy();
+  expect((<any>creator.survey.triggers[4]).fromName).toBe("question2");
+  expect((<any>creator.survey.triggers[5]).gotoName).toBeFalsy();
+  expect((<any>creator.survey.triggers[6]).gotoName).toBe("question2");
+});
 test("Update expressions on deleting a page with questions", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
