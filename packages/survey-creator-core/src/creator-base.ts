@@ -4900,7 +4900,7 @@ export class SurveyCreatorModel extends Base
     if (!theme) return;
     this.creatorTheme = theme;
 
-    this.applySurfaceTheme(theme);
+    this.setSurfaceCssVariables(theme.cssVariables);
 
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
