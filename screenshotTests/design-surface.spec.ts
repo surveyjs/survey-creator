@@ -153,7 +153,7 @@ test.describe(title, () => {
     await page.waitForTimeout(300);
     await compareScreenshot(page, designerTabContent, "page-content-hover.png");
 
-    await pageContent.locator(".svc-element__add-new-question").hover();
+    await pageContent.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").hover();
     await compareScreenshot(page, pageContent, "question-add-hover.png");
 
     await pageContent.click({ position: { x: 5, y: 5 } });

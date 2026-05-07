@@ -36,7 +36,6 @@ import { StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
-import { listComponentCss } from "./list-theme";
 import { SurveyHelper } from "../survey-helper";
 import { DomDocumentHelper } from "survey-core";
 
@@ -592,7 +591,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           subactions.unshift(defaultSubaction);
           if (selectedAction == action && !selectedSubactionLocal) selectedSubactionLocal = defaultSubaction;
         }
-        action.setSubItems({ items: subactions, cssClasses: listComponentCss });
+        action.setSubItems({ items: subactions });
         if (selectedSubactionLocal) {
           selectedAction = action;
           selectedSubaction = selectedSubactionLocal;
@@ -623,7 +622,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     const listModel = new ListModel({
       items: [],
-      cssClasses: listComponentCss,
     });
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
     const propName = QuestionToolbox.getSubTypePropertyName(this.surveyElement.getType());
@@ -675,7 +673,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       allowSelection: true,
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
     }, this.creator);
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
       if (opt.isVisible) {

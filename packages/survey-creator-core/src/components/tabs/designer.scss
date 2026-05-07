@@ -164,42 +164,6 @@ svc-tab-designer {
   .svc-row--ghost {
     display: none;
   }
-
-  .svc-element__add-new-question {
-    padding: var(--sjs2-spacing-x200, 16px) calc(var(--sjs2-base-unit-spacing) * 10);
-
-    .svc-element__question-type-selector {
-      padding: var(--sjs2-spacing-x100, 8px)
-        var(--sjs2-spacing-x100, 8px)
-        var(--sjs2-spacing-x100, 8px)
-        var(--sjs2-spacing-x100, 8px);
-
-      margin: var(--sjs2-spacing-x100, 8px)
-        var(--sjs2-spacing-x100, 8px);
-
-      border-radius: var(--ctr-button-contextual-button-corner-radius, var(--sjs-corner-radius-x05));
-    }
-
-    .svc-element__question-type-selector-icon {
-      width: var(--sjs2-size-x300, 24px);
-      height: var(--sjs2-size-x300, 24px);
-
-      .sv-svg-icon {
-        width: var(--sjs2-size-x300, 24px);
-        height: var(--sjs2-size-x300, 24px);
-      }
-
-      use {
-        fill: var(--ctr-button-contextual-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
-      }
-    }
-
-    .svc-add-new-item-button__text {
-      @include ctrDefaultBoldFont;
-      color: var(--ctr-button-text-color, var(--sjs-primary-background-500, #19b394ff));
-      text-align: center;
-    }
-  }
 }
 
 .svc-tab-designer__tools {

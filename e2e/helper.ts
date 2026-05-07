@@ -137,6 +137,22 @@ export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview"
   return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) })).filter({ visible: true });
 }
 
+/** Replaces `window.creator` via the React test page `updateCreatorModel` helper (see `test-pages/default.html`). */
+export const recreateCreatorWithOptions = async (page: Page, creatorOptions: Record<string, unknown>, json: object) => {
+  await expect(getTabbedMenuItemByText(page, creatorTabDesignerName)).toBeVisible();
+  await page.evaluate(
+    ({ creatorOptions, json }) => {
+      const defaults = {
+        expandCollapseButtonVisibility: "never",
+        showLogicTab: true,
+        showTranslationTab: true
+      };
+      (window as any).updateCreatorModel({ ...defaults, ...creatorOptions }, json);
+    },
+    { creatorOptions, json }
+  );
+};
+
 export function getBarItemByTitle(page: Page, text: string): Locator {
   return page.locator(".sd-action[title=\"" + text + "\"]");
 }
@@ -146,7 +162,7 @@ export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
 }
 
 export function getListItemByText(page: Page, text: string): Locator {
-  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true }).filter({ visible: true });
+  return page.locator(".sv-popup__content .sd-menu-list .sd-menu-item").getByText(text, { exact: true }).filter({ visible: true });
 }
 
 export function getVisibleSelectListItemByText(page: Page, text: string): Locator {
@@ -272,12 +288,12 @@ export async function handleShiftEnter(page: Page, selector: string) {
 export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sd-action__title";
 
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
-  await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
-  await page.locator(".svc-list__item span").getByText(text, { exact: true }).filter({ visible: true }).click();
+  await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
+  await page.locator(".sd-menu-item span").getByText(text, { exact: true }).filter({ visible: true }).click();
 }
 
 export function getAddNewQuestionButton(page: Page): Locator {
-  return page.locator(".svc-element__add-new-question > span").getByText("Add Question");
+  return page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn > span").getByText("Add Question");
 }
 
 export function getToolboxItemByText(page: Page, text: string): Locator {

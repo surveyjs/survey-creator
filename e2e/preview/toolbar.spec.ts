@@ -66,7 +66,7 @@ test.describe(title, () => {
 
   test("Page switcher", async ({ page }) => {
     await setJSON(page, json2);
-    const selectedClassName = /svc-list__item--selected/;
+    const selectedClassName = /sd-menu-item--selected/;
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await expect(page.locator(".sd-question__title").getByText("string_editor")).toBeVisible();
@@ -112,7 +112,7 @@ test.describe(title, () => {
     await page.locator(".sv-action--nextPage").click();
     await getButtonByText(page, "Complete").click();
     await expect(page.locator(".sd-completedpage").getByText("Thank you for completing the survey")).toBeVisible();
-    await page.locator(".svc-preview__test-again span").getByText(restartSurveyButtonText).click();
+    await page.locator(".sd-action").getByText(restartSurveyButtonText).click();
     await expect(page.locator(".sd-question__title").getByText("string_editor")).toBeVisible();
   });
 
@@ -171,13 +171,13 @@ test.describe(title, () => {
     await getMenuItemByText(page, "iPad Air").click();
     await getButtonByText(page, "Complete").click();
     await expect(orientationAction).not.toHaveAttribute("disabled", "");
-    await expect(page.locator(".svc-preview__test-again span").getByText(restartSurveyButtonText)).toBeVisible();
+    await expect(page.locator(".sd-action").getByText(restartSurveyButtonText)).toBeVisible();
 
     await getBarItemByTitle(page, "Select device type").click();
     await expect(getMenuItemByText(page, "Desktop")).toBeVisible();
 
     await getMenuItemByText(page, "Desktop").click();
-    await page.locator(".svc-preview__test-again span").getByText(restartSurveyButtonText).click();
+    await page.locator(".sd-action").getByText(restartSurveyButtonText).click();
     await expect(orientationAction).toHaveAttribute("disabled", "");
     await expect(getBarItemByTitle(page, "Show invisible elements")).toBeVisible();
 

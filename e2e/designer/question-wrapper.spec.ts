@@ -59,8 +59,8 @@ test.describe(title, () => {
     const questions = page.locator(".svc-question__content");
     const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
     const convertActionButton = page.locator(".svc-question__content--selected .svc-dropdown-action--convertTo").first();
-    const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
-    const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
+    const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
+    const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
     await expect(questions).toHaveCount(0);
 
@@ -89,8 +89,8 @@ test.describe(title, () => {
     const questions = page.locator(".svc-question__content");
     const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
     const convertInputTypeActionButton = questionToolbarActions.locator('button[title="Text"]');
-    const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
-    const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
+    const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
+    const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
     await expect(questions).toHaveCount(0);
 
@@ -115,8 +115,8 @@ test.describe(title, () => {
     const questions = page.locator(".svc-question__content");
     const unselectedQuestionToolbarActions = page.locator(".svc-question__content-actions").locator(".sd-action-bar__item");
     const convertActionButton = unselectedQuestionToolbarActions.locator('button[title="Single-Line Input"]');
-    const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
-    const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
+    const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
+    const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
     const json = { elements: [{ type: "text", name: "question1" }] };
     await setJSON(page, json);
@@ -258,11 +258,11 @@ test.describe(title, () => {
       (window as any).creator.survey.getQuestionByName("question1").detailPanelMode = "underRow";
     });
     await expect(page.locator(".sd-question[data-name=question1] .svc-panel__placeholder").getByText("Drop a question")).toBeVisible();
-    await expect(page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question")).toBeVisible();
-    await page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question").click();
+    await expect(page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question-container .sd-action")).toBeVisible();
+    await page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question-container .sd-action").click();
     await expect(page.locator(".sd-question[data-name=question1] .sd-table__row").nth(1).locator(".svc-dropdown-action--convertTo .sd-action__title").getByText("Single-Line Input")).toBeVisible();
     await expect(page.locator(".sd-question[data-name=question2]")).toBeVisible();
-    await page.locator(".sd-question[data-name=question1] .svc-element__add-new-question").click();
+    await page.locator(".sd-question[data-name=question1] .svc-panel__add-new-question-container .sd-action").first().click();
     await expect(page.locator(".sd-question[data-name=question3]")).toBeVisible();
   });
 
@@ -318,8 +318,8 @@ test.describe(title + " dropdown collapse", () => {
   test("Keep focus on question convert", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
     const convertActionButton = page.locator(".svc-question__content--selected .svc-dropdown-action--convertTo").first();
-    const listItems = page.locator(".sv-popup .svc-list__item").filter({ visible: true });
-    const popupContent = page.locator(".sv-popup__content .svc-list").filter({ visible: true });
+    const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
+    const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
     await expect(questions).toHaveCount(0);
 
@@ -399,7 +399,7 @@ test.describe(title + " dropdown collapse", () => {
     await page.locator(".sv-string-editor").getByText("panel1").click();
     await expect(page.locator(".sv-string-editor").getByText("panel1")).toBeFocused();
     await page.keyboard.press("Tab");
-    await expect(page.locator(".svc-question__content--selected .svc-panel__add-new-question")).toBeFocused();
+    await expect(page.locator(".svc-question__content--selected .svc-panel__add-new-question-container .sd-action").first()).toBeFocused();
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
@@ -412,7 +412,7 @@ test.describe(title + " dropdown collapse", () => {
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
-    await expect(page.locator(".svc-question__content--panel .svc-element__add-new-question")).toBeFocused();
+    await expect(page.locator(".svc-question__content--panel .svc-panel__add-new-question-container .sd-action").first()).toBeFocused();
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
 

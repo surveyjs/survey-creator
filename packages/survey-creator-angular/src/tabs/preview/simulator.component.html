@@ -6,12 +6,14 @@
       <div class="svd-simulator" [style.width]="simulatorFrame.deviceWidth + 'px'"
         [style.height]="simulatorFrame.deviceHeight + 'px'"
         [style.transform]="'scale(' + simulatorFrame.scale + ') translate(-50%, -50%)'">
-        <div class="svd-simulator-content">
+        <div class="svd-simulator-content"
+          [style.--sv-popup-overlay-height]="model.popupOverlayHeight || null">
           <ng-template [component]="{ name: 'survey-widget', data: { model: model.survey } }"></ng-template>
         </div>
       </div>
     </div>
-    <div *ngIf="!model.hasFrame" class="svd-simulator-content">
+    <div *ngIf="!model.hasFrame" class="svd-simulator-content"
+      [style.--sv-popup-overlay-height]="model.popupOverlayHeight || null">
       <ng-template [component]="{ name: 'survey-widget', data: { model: model.survey } }"></ng-template>
     </div>
   </div>

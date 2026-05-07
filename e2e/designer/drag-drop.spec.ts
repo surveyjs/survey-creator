@@ -1579,10 +1579,10 @@ test.describe(title, () => {
     await page.waitForTimeout(500);
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
 
-    await page.locator(".svc-element__add-new-question").nth(2).filter({ visible: true }).scrollIntoViewIfNeeded();
-    await expect(page.locator(".svc-element__add-new-question").nth(3)).toHaveCount(0);
-    await page.locator(".svc-element__add-new-question").nth(2).filter({ visible: true }).click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(2).filter({ visible: true }).scrollIntoViewIfNeeded();
+    await expect(page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(3)).toHaveCount(0);
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(2).filter({ visible: true }).click();
     expect(await getJSON(page)).toEqual(expectedJson);
-    await expect(page.locator(".svc-element__add-new-question").nth(3)).toBeVisible({ timeout: 15000 });
+    await expect(page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(3)).toBeVisible({ timeout: 15000 });
   });
 });
