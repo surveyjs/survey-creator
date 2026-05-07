@@ -1,14 +1,6 @@
 @use "../../variables.scss" as *;
 @use "../../typography-mixins.scss" as *;
 
-.sps-popup-menu.sv-popup--menu-popup {
-  .sv-popup__container {
-    border: initial;
-    box-shadow: initial;
-    background: initial;
-    box-sizing: border-box;
-  }
-}
 
 .sps-popup-menu.sps-popup-menu--dropdown {
   height: 0;
