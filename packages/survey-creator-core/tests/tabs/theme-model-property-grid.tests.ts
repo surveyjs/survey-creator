@@ -18,27 +18,13 @@ import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 export * from "../../src/localization/french";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockSurveyCoreGetRGBaColorIdentity } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
-  jest.spyOn(SurveyCore, "getRGBaColor").mockImplementation((v: any) => v);
-  jest.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
-    ...window,
-    getComputedStyle: (el: any) => {
-      const style = el?.style;
-      return {
-        getPropertyValue: (property: string) => {
-          if (!style) return "";
-          const v = style.getPropertyValue?.(property);
-          if (typeof v === "string" && v.length > 0) return v;
-          // Fallback for non-custom properties in JSDOM mocks
-          const v2 = style[property];
-          return typeof v2 === "string" ? v2 : "";
-        }
-      } as any;
-    }
-  } as any);
+  mockSurveyCoreGetRGBaColorIdentity();
+  mockDomWindowGetComputedStyleFromInlineStyles();
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;

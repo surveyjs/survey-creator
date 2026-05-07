@@ -15,13 +15,14 @@ export * from "../../src/components/tabs/theme-custom-questions/shadow-effects";
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
+import { mockSurveyCoreGetRGBaColorIdentity } from "./theme-test-mocks";
 
 import SurveyThemes from "survey-core/themes";
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
-  jest.spyOn(SurveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+  mockSurveyCoreGetRGBaColorIdentity();
 
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;

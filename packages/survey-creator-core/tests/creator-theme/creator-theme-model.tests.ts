@@ -9,9 +9,10 @@ import { colorsAreEqual } from "../../src/utils/color-utils";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 import * as SurveyCore from "survey-core";
+import { mockSurveyCoreGetRGBaColorIdentity } from "../tabs/theme-test-mocks";
 
 beforeEach(() => {
-  jest.spyOn(SurveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+  mockSurveyCoreGetRGBaColorIdentity();
 });
 afterEach(() => {
   (SurveyCore.getRGBaColor as any).mockRestore?.();
