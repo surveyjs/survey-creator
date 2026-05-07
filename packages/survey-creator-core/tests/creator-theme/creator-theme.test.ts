@@ -19,7 +19,7 @@ test("onCreatorThemePropertyChanged event", (): any => {
   themeModel["--sjs2-color-project-brand-600"] = "#ff0000";
   expect(modificationsLog).toBe(
     "->THEME_MODIFIED --sjs2-color-project-brand-600 - #ff0000" +
-      "->THEME_MODIFIED --sjs2-color-utility-surface-designer - rgba(246, 246, 246, 1)"
+    "->THEME_MODIFIED --sjs2-color-utility-surface-designer - rgba(246, 246, 246, 1)"
   );
 });
 

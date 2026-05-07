@@ -20,7 +20,9 @@ export function registerCreatorTheme(...themes: Array<ConfigsHash<ICreatorTheme>
   const importedThemeNames = [];
   registerConfig((theme: ICreatorTheme) => {
     if (theme.isPanelless) return;
-    const fullname = `${theme.themeName}-${theme.colorPalette || "light"}`;
+    const themeName = theme.themeName;
+    const isAlreadyFullName = !!themeName && defaultCreatorThemesOrder.indexOf(themeName) !== -1;
+    const fullname = isAlreadyFullName ? themeName : `${themeName}-${theme.colorPalette || "light"}`;
     CreatorThemes[fullname] = theme;
     importedThemeNames.push(fullname);
   }, ...themes);

@@ -188,7 +188,14 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this.blockThemeChangedNotifications += 1;
     try {
       const baseTheme = this.getThemeFromCreatorThemes(theme.themeName) || {};
-      this.themeName = theme.themeName || baseTheme.themeName || CreatorThemeModel.defaultThemeName;
+      let resolvedThemeName = theme.themeName;
+      if (resolvedThemeName && theme.colorPalette && !CreatorThemes[resolvedThemeName]) {
+        const composedThemeName = `${resolvedThemeName}-${theme.colorPalette}`;
+        if (CreatorThemes[composedThemeName]) {
+          resolvedThemeName = composedThemeName;
+        }
+      }
+      this.themeName = resolvedThemeName || baseTheme.themeName || CreatorThemeModel.defaultThemeName;
 
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, baseTheme.cssVariables || {});
@@ -222,18 +229,23 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   fromJSON(json: ICreatorTheme, options?: ILoadFromJSONOptions): void {
     if (!json) return;
 
-    const _json = {};
-    assign(_json, json);
-    delete _json["cssVariables"];
-    super.fromJSON(_json, options);
-    this.isLight = json.colorPalette !== undefined ? json.colorPalette === "light" : (json.isLight !== undefined ? json.isLight : true);
+    this.blockThemeChangedNotifications += 1;
+    try {
+      const _json = {};
+      assign(_json, json);
+      delete _json["cssVariables"];
+      super.fromJSON(_json, options);
+      this.isLight = json.colorPalette !== undefined ? json.colorPalette === "light" : (json.isLight !== undefined ? json.isLight : true);
 
-    if (json.cssVariables) {
-      super.fromJSON(json.cssVariables, options);
-      this.initialCssVariables = {};
-      assign(this.initialCssVariables, json.cssVariables);
+      if (json.cssVariables) {
+        super.fromJSON(json.cssVariables, options);
+        this.initialCssVariables = {};
+        assign(this.initialCssVariables, json.cssVariables);
 
-      this.updateScaleProperties();
+        this.updateScaleProperties();
+      }
+    } finally {
+      this.blockThemeChangedNotifications -= 1;
     }
   }
 

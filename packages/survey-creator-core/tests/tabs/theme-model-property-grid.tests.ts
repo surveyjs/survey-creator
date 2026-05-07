@@ -48,6 +48,7 @@ beforeEach(() => {
 
 afterEach(() => {
   (SurveyCore.getRGBaColor as any).mockRestore?.();
+  (DomWindowHelper.getWindow as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
 

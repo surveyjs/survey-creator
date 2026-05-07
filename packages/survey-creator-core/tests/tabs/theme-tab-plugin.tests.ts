@@ -5,7 +5,7 @@ export { createColor } from "../../src/components/tabs/theme-custom-questions/co
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 
-import { Action, DefaultTheme, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
+import { Action, DefaultTheme, DomWindowHelper, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "../creator-tester";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
@@ -22,14 +22,32 @@ registerSurveyTheme(SurveyThemes);
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
   jest.spyOn(SurveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+  jest.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
+    ...window,
+    getComputedStyle: (el: any) => {
+      const style = el?.style;
+      return {
+        getPropertyValue: (property: string) => {
+          if (!style) return "";
+          const v = style.getPropertyValue?.(property);
+          if (typeof v === "string" && v.length > 0) return v;
+          // Fallback for non-custom properties in JSDOM mocks
+          const v2 = style[property];
+          return typeof v2 === "string" ? v2 : "";
+        }
+      } as any;
+    }
+  } as any);
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
   ThemeModel.DefaultTheme = Themes["default-light"];
   DefaultTheme.cssVariables = {} as any;
 });
+
 afterEach(() => {
   (SurveyCore.getRGBaColor as any).mockRestore?.();
+  (DomWindowHelper.getWindow as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
 
@@ -417,7 +435,7 @@ test("Get theme changes only", (): any => {
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(10);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(45);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(51);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(modifiedThemeChanges).length).toBe(6);
@@ -441,7 +459,7 @@ test("Get theme changes only", (): any => {
     "header",
     "headerView",
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(35);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(41);
 
   const themeChangesReset = themePlugin.getCurrentTheme(true);
   expect(Object.keys(themeChangesReset).length).toBe(6);
