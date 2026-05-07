@@ -4,13 +4,9 @@
 .sps-popup-menu.sv-popup--menu-popup {
   .sv-popup__container {
     border: initial;
-
-    padding: var(--sjs2-spacing-x150, 12px);
-
     box-shadow: initial;
     background: initial;
     box-sizing: border-box;
-
   }
 }
 
@@ -18,12 +14,6 @@
   height: 0;
   .sv-popup__container {
     padding-top: var(--sjs2-spacing-x50, 4px);
-  }
-}
-
-.sps-popup-menu.sps-popup-menu--context {
-  .sv-popup__container {
-    padding: 0 var(--sjs2-spacing-x100, 8px);
   }
 }
 
