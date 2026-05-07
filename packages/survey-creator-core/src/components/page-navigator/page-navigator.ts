@@ -1,7 +1,6 @@
 import { PagesController } from "../../pages-controller";
-import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
+import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater, menuListCss, classesToSelector } from "survey-core";
 import { getLocString } from "../../editorLocalization";
-import { listComponentCss } from "../list-theme";
 import { DomDocumentHelper } from "survey-core";
 import { CreatorBase } from "src/creator-base";
 import { PageAdorner } from "../page";
@@ -44,14 +43,14 @@ export class PageNavigatorViewModel extends Base {
         this.pagesController.selectPage(item.data);
         this.popupModel.hide();
       },
-      cssClasses: listComponentCss,
+      cssClasses: { ...menuListCss },
       allowSelection: true,
       listRole: "menu",
       listItemRole: "menuitemradio",
       locOwner: pagesController.creator as any
     });
-    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup" });
-    this.popupModel.focusFirstInputSelector = ".svc-list__item--selected";
+    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup", showPointer: false });
+    this.popupModel.focusFirstInputSelector = classesToSelector(this.pageListModel.cssClasses.itemSelected);
     !!this.pagesController && (this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"]);
     this.popupModel.onShow = () => {
       this.pageListModel.selectedItem = this.getActionBarByPage(this.pagesController.currentPage);

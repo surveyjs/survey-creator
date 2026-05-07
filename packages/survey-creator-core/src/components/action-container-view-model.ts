@@ -4,7 +4,6 @@ import {
   ResponsivityManager,
   UpdateResponsivenessMode
 } from "survey-core";
-import { listComponentCss } from "./list-theme";
 class SurveyElementResponsivityManager extends ResponsivityManager {
   constructor(container: HTMLDivElement, model: SurveyElementActionContainer) {
     super(container, model);
@@ -46,7 +45,6 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
     super();
     this.dotsItem.iconSize = "auto" as any;
     this.dotsItem.popupModel.cssClass += " svc-creator-popup";
-    this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
 
   public fit(options: { availableSpace: number, gap?: number }) {

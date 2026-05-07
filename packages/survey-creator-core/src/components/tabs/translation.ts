@@ -21,7 +21,6 @@ import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
 import { updateMatrixRemoveAction, updateMatixActionsAppearance, findAction } from "../../utils/actions";
 import { SurveyElementActionContainer } from "../action-container-view-model";
-import { listComponentCss } from "../list-theme";
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
 
@@ -1097,7 +1096,6 @@ export class Translation extends Base implements ITranslationLocales {
       items: this.chooseLanguageActions,
       allowSelection: false,
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
       onSelectionChanged: (item: IAction) => {
         this.addLocale(item.id);
       }
@@ -1474,7 +1472,6 @@ export class TranslationEditor {
         data: { model: locStr },
         onApply: (): boolean => { return true; },
         cssClass: "svc-creator-popup",
-        cssClasses: listComponentCss,
         title: dialogTitle,
         displayMode: "popup"
       }, this.options.rootElement);
@@ -1644,7 +1641,6 @@ export class TranslationEditor {
         this.setFromLocale(id);
         action.title = this.getActionTranslateFromText(id);
       },
-      cssClasses: listComponentCss,
       allowSelection: true,
       locOwner: this.options as any
     }, {

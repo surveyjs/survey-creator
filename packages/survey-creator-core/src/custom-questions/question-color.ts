@@ -1,6 +1,5 @@
 import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, LocalizableString, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/color-utils";
-import { listComponentCss } from "../components/list-theme";
 
 const DEFAULT_COLOR: string = "#000000";
 export class QuestionColorModel extends QuestionTextModel {
@@ -141,7 +140,6 @@ export class QuestionColorModel extends QuestionTextModel {
         this.value = (<ItemValue><unknown>item).value;
       },
       items: this.choices,
-      cssClasses: listComponentCss,
     }, {
       showPointer: false,
       verticalPosition: "bottom",

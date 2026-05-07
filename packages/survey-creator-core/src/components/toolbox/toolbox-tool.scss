@@ -33,6 +33,11 @@
     }
   }
 }
+
+.svc-toolbox__tool.sd-menu-list__item {
+  padding: 0;
+}
+
 .svc-toolbox__tool-content {
   display: flex;
   // padding: calcSize(0.25) 0;

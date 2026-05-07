@@ -4,7 +4,6 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
 import { findSuitableTheme, isThemeEmpty } from "./theme-model";
-import { listComponentCss } from "../list-theme";
 
 export class PreviewViewModel extends Base {
   public enableInvisiblePages: boolean = true;
@@ -310,7 +309,6 @@ export class PreviewViewModel extends Base {
         listModel.selectedItem = this.getCurrentPageItem();
       },
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
       verticalPosition: "top",
       horizontalPosition: "center"
     }, this.surveyProvider);

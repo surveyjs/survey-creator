@@ -75,7 +75,7 @@ test.describe(title, () => {
   test("SelectObject", async ({ page }) => {
     await setJSON(page, { pages: [{ name: "page1" }] });
 
-    const objectSelectorPopup = page.locator(".sv-popup.svc-object-selector .svc-list__container");
+    const objectSelectorPopup = page.locator(".sv-popup.svc-object-selector .sd-menu-list__container");
     const pageContent = page.locator(".svc-page__content").first();
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
@@ -85,7 +85,7 @@ test.describe(title, () => {
 
     await objectSelectorButton(page).click();
     await expect(objectSelectorPopup).toBeVisible();
-    await expect(objectSelectorPopup.locator(".svc-list__item").first()).toBeFocused();
+    await expect(objectSelectorPopup.locator(".sd-menu-item").first()).toBeFocused();
     await expect(pageContent).not.toHaveClass(/svc-page__content--selected/);
 
     await objectSelectorPopup.locator("span").getByText("page1").click();
@@ -181,14 +181,14 @@ test.describe(title, () => {
     let box = await toolboxPopup.boundingBox();
     expect(box!.y).toBeGreaterThanOrEqual(0);
     expect(box!.x).toBeGreaterThanOrEqual(0);
-    await toolboxPopup.locator(".svc-list__item").first().click();
+    await toolboxPopup.locator(".sd-menu-item").first().click();
 
     await pageNavigator.click();
     await expect(pageNavigationPopup).toBeVisible();
     box = await pageNavigationPopup.boundingBox();
     expect(box!.y).toBeGreaterThanOrEqual(0);
     expect(box!.x).toBeLessThan(1500 - 100);
-    await pageNavigationPopup.locator(".svc-list__item").getByText("page2").click();
+    await pageNavigationPopup.locator(".sd-menu-item").getByText("page2").click();
 
     await changeToolboxLocation(page, "right");
 
@@ -197,14 +197,14 @@ test.describe(title, () => {
     box = await toolboxPopup.boundingBox();
     expect(box!.y).toBeGreaterThanOrEqual(0);
     expect(box!.x).toBeLessThan(1500 - 100);
-    await toolboxPopup.locator(".svc-list__item").first().click();
+    await toolboxPopup.locator(".sd-menu-item").first().click();
 
     await pageNavigator.click();
     await expect(pageNavigationPopup).toBeVisible();
     box = await pageNavigationPopup.boundingBox();
     expect(box!.y).toBeGreaterThanOrEqual(0);
     expect(box!.x).toBeGreaterThanOrEqual(0);
-    await pageNavigationPopup.locator(".svc-list__item").first().click();
+    await pageNavigationPopup.locator(".sd-menu-item").first().click();
   });
 
   test("toolboxLocation sidebar: check toolbox items", async ({ page }) => {
@@ -325,7 +325,7 @@ test.describe(title, () => {
 
     expect(await getQuestionTopPosition()).toEqual(374);
     await page.locator(".sv-action--object-selector").click();
-    await page.locator(".svc-list__item").getByText("Column 2").click();
+    await page.locator(".sd-menu-item").getByText("Column 2").click();
     await page.waitForTimeout(500);
     expect(await getQuestionTopPosition()).toEqual(72);
   });

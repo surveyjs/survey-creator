@@ -5,7 +5,6 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyLogicUI } from "./logic-ui";
 import { SurveyHelper } from "../../survey-helper";
-import { listComponentCss } from "../list-theme";
 
 export class TabLogicPlugin implements ICreatorPlugin {
   private filterQuestionAction: Action;
@@ -113,7 +112,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
         this.model.questionFilter = !!item.id ? item.id : "";
       },
       allowSelection: true,
-      cssClasses: listComponentCss,
       locOwner: this.creator
     }, {
       verticalPosition: "bottom",
@@ -139,7 +137,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
         this.model.actionTypeFilter = !!item.id ? item.id : "";
       },
       allowSelection: true,
-      cssClasses: listComponentCss,
       locOwner: this.creator
     }, {
       verticalPosition: "bottom",
