@@ -3,7 +3,7 @@ import { registerCreatorTheme, SurveyCreatorModel, UIPreset } from "survey-creat
 import { settings } from "survey-core";
 import { TestDefaultComponent } from "./default.component";
 import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
-import TestCreatorTheme from "survey-creator-core/themes/test";
+import TestCreatorTheme from "survey-core/themes/test-creator";
 import TestLibraryTheme from "survey-core/themes/test";
 import SurveyCreatorUIPreset from "survey-creator-core/ui-presets";
 import { registerUIPreset } from 'survey-creator-core';

@@ -4,7 +4,7 @@ import * as SurveyCreatorCore from "survey-creator-core";
 import * as SurveyCreatorUIPreset from "survey-creator-core/ui-presets";
 import * as Survey from "survey-core";
 import SurveyThemes from "survey-core/themes";
-import TestCreatorTheme from "survey-creator-core/themes/test";
+import TestCreatorTheme from "survey-core/themes/test-creator";
 import TestLibraryTheme from "survey-core/themes/test";
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";

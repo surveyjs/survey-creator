@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 import { SurveyCreatorModel, localization } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
-import TestCreatorTheme from "survey-creator-core/themes/test";
+import TestCreatorTheme from "survey-core/themes/test-creator";
 import TestLibraryTheme from "survey-core/themes/test";
 
 @Component({

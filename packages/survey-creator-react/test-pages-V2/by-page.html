@@ -34,7 +34,7 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-    SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme);
+    SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
     creator.applyCreatorTheme(SurveyCreatorTheme.SC2020);
     creator.tabResponsivenessMode = "menu";

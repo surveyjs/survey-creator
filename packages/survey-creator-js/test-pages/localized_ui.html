@@ -24,7 +24,7 @@
   <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
   <script src="../build/survey-creator-js.js"></script>
   <script src="./sc.js"></script>
-  <script src="../node_modules/survey-creator-core/themes/test.js"></script>
+  <script src="../node_modules/survey-core/themes/test-creator.js"></script>
 </head>
 
 <body spellcheck="false">
@@ -33,12 +33,12 @@
 <script>
   window.surveyJSFramework = "react";
   SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-  SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme.Test);
+  SurveyCreatorCore.registerCreatorTheme(SurveyTheme.TestCreator);
   const loc = SurveyCreatorCore.localization.getLocale("de");
   loc.ed.logic = "Miner Logik";
   SurveyCreatorCore.localization.currentLocale = "de";
   const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-  creator.applyCreatorTheme(SurveyCreatorTheme.Test);
+  creator.applyCreatorTheme(SurveyTheme.TestCreator);
   creator.applySurfaceTheme(SurveyTheme.Test);
   creator.tabResponsivenessMode = "menu";
   creator["animationEnabled"] = false;

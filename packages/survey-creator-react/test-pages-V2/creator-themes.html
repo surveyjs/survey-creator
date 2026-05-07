@@ -34,9 +34,9 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-    SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme);
+    SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-    creator.applyCreatorTheme(SurveyCreatorTheme.Test);
+    creator.applyCreatorTheme(SurveyTheme.TestCreator);
   creator.applySurfaceTheme(SurveyTheme.Test);
     window.creator = creator;
     creator.tabResponsivenessMode = "menu";
@@ -51,7 +51,7 @@
         window.updateCreatorModel = (options, json) => {
           window.prevCreator = window.creator;
           const creator = new SurveyCreator.SurveyCreator(options);
-          creator.applyCreatorTheme(SurveyCreatorTheme.Test);
+          creator.applyCreatorTheme(SurveyTheme.TestCreator);
   creator.applySurfaceTheme(SurveyTheme.Test);
           creator.JSON = json;
           this.setState({ creator });
