@@ -427,7 +427,7 @@ test.describe(title, () => {
       ]
     });
     const pageSelectorButton = page.locator(".svc-page-selector");
-    const pageSelectorMenu = page.locator(".svc-list__container");
+    const pageSelectorMenu = page.locator(".sd-menu-list__container");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await compareScreenshot(page, pageSelectorButton, "test-tab-page-selector-markdown-button-first.png");
     await pageSelectorButton.click();

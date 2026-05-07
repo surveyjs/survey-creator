@@ -1,7 +1,6 @@
 import { SurveyCreatorModel } from "../creator-base";
-import { Base, SurveyModel, property, ListModel, IAction, Action } from "survey-core";
+import { Base, SurveyModel, property, ListModel, IAction, Action, menuListCss } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
-import { listComponentCss } from "../components/list-theme";
 
 export class ObjectSelectorItem extends Action {
   private textInLow: string;
@@ -155,7 +154,7 @@ export class ObjectSelectorModel extends Base {
         items: this.selector.items,
         onSelectionChanged: (item: IAction) => { onClose(item.data); },
         allowSelection: true,
-        cssClasses: listComponentCss,
+        cssClasses: { ...menuListCss },
         selectedItem: selectedItem,
         listRole: "menu",
         listItemRole: "menuitemradio",

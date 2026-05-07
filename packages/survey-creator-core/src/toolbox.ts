@@ -28,7 +28,6 @@ import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { SearchManagerToolbox } from "./components/toolbox/toolbox-search-manager";
-import { listComponentCss } from "./components/list-theme";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
@@ -663,7 +662,6 @@ export class QuestionToolbox
     };
     this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
     this.dotsItem.data.locOwner = this.creator;
-    this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
   private getDefaultQuestionCategories() {
     const questionCategoryMap = {};
