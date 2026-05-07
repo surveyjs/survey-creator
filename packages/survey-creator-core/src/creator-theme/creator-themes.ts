@@ -4,6 +4,7 @@ import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../utils/config
 import { ITheme } from "survey-core";
 
 export interface ICreatorTheme extends ITheme {
+  isLight?: boolean;
 }
 
 export const PredefinedCreatorThemes: string[] = ["default-light"];

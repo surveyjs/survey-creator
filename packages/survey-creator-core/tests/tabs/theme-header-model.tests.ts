@@ -1,4 +1,5 @@
-import { DefaultTheme, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
+import * as SurveyCore from "survey-core";
+import { DefaultTheme, DomWindowHelper, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
 import { HeaderModel, registerSurveyTheme, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
@@ -20,11 +21,17 @@ registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
+  jest.spyOn(SurveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
   ThemeModel.DefaultTheme = Themes["default-light"];
   DefaultTheme.cssVariables = {} as any;
+});
+
+afterEach(() => {
+  (SurveyCore.getRGBaColor as any).mockRestore?.();
 });
 
 afterEach(() => {

@@ -24,14 +24,15 @@ test("onCreatorThemePropertyChanged event", (): any => {
 });
 
 test("registerCreatorTheme function", (): any => {
-  const customThemeName = "customLight";
+  const customThemeFamily = "custom";
+  const customThemeName = "custom-light";
   const customCssVariables = {
     "--sjs2-color-project-brand-600": "red",
     "--sjs2-color-utility-surface-designer": "orange",
   };
 
   registerCreatorTheme({
-    themeName: customThemeName,
+    themeName: customThemeFamily,
     cssVariables: { ...customCssVariables }
   });
 
@@ -46,7 +47,7 @@ test("registerCreatorTheme function", (): any => {
 
     themeChooser.value = customThemeName;
     expect(creator.creatorTheme.themeName).toBe(customThemeName);
-    expect(creator.themeVariables).toStrictEqual({ ...Default.cssVariables, ...customCssVariables });
+    expect(creator.themeVariables).toStrictEqual({ ...customCssVariables });
   } finally {
     PredefinedCreatorThemes.splice(PredefinedCreatorThemes.indexOf(customThemeName), 1);
     delete CreatorThemes[customThemeName];

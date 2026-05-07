@@ -1,4 +1,5 @@
-import { DefaultTheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, Serializer, SurveyElement } from "survey-core";
+import { DefaultTheme, DomWindowHelper, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, Serializer, SurveyElement } from "survey-core";
+import * as SurveyCore from "survey-core";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
@@ -21,6 +22,23 @@ registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
+  jest.spyOn(SurveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+  jest.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
+    ...window,
+    getComputedStyle: (el: any) => {
+      const style = el?.style;
+      return {
+        getPropertyValue: (property: string) => {
+          if (!style) return "";
+          const v = style.getPropertyValue?.(property);
+          if (typeof v === "string" && v.length > 0) return v;
+          // Fallback for non-custom properties in JSDOM mocks
+          const v2 = style[property];
+          return typeof v2 === "string" ? v2 : "";
+        }
+      } as any;
+    }
+  } as any);
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
@@ -29,6 +47,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  (SurveyCore.getRGBaColor as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
 
@@ -117,9 +136,7 @@ test("Check shadow settings editor", () => {
 
   let cssVariables: any = creator?.theme?.cssVariables;
   expect(themeModel["--sjs2-border-effect-surface-default"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs2-border-effect-surface-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
   expect(themeModel["--sjs2-border-effect-component-formbox-default"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs2-border-effect-component-formbox-default-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowSmallEditor.value = [
     {

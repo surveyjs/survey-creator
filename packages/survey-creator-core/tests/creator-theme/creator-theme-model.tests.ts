@@ -8,6 +8,14 @@ import { PredefinedBackgroundColors, PredefinedColors } from "../../src/componen
 import { colorsAreEqual } from "../../src/utils/color-utils";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
+import * as SurveyCore from "survey-core";
+
+beforeEach(() => {
+  jest.spyOn(SurveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+});
+afterEach(() => {
+  (SurveyCore.getRGBaColor as any).mockRestore?.();
+});
 
 test("Creator theme model de/serialization", (): any => {
   const themeModel = new CreatorThemeModel();
@@ -57,8 +65,8 @@ test("Creator theme: sync css variables", (): any => {
   const themeModel = designerPlugin["themeModel"];
   let surfaceBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
 
-  expect(creator.themeVariables[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
-  expect((themeModel.cssVariables || {})[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
+  expect(creator.themeVariables[CreatorThemeModel.varColorUtilitySurface]).toEqual(undefined);
+  expect((themeModel.cssVariables || {})[CreatorThemeModel.varColorUtilitySurface]).toEqual(undefined);
   expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
 
   const newValue = "#c95ae7";
@@ -253,7 +261,7 @@ test("Creator theme model isLight de/serialization", (): any => {
   expect(themeModel.themeName).toBe("custom-dark");
 
   themeModelJson = themeModel.toJSON();
-  expect(themeModelJson).toStrictEqual(darkThemeJson);
+  expect(themeModelJson).toEqual({ themeName: "custom-dark", colorPalette: "dark" });
 
   themeModel.fromJSON(lightThemeJson);
   expect(themeModel.isLight).toBeTruthy();

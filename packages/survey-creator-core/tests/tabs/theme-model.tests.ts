@@ -1,4 +1,5 @@
-import { DefaultTheme, ITheme, Serializer } from "survey-core";
+import { DefaultTheme, DomWindowHelper, ITheme, Serializer } from "survey-core";
+import * as SurveyCore from "survey-core";
 import { Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
@@ -13,6 +14,27 @@ import SurveyThemes from "survey-core/themes";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
+
+const createComputedStyleFromInline = () => {
+  const legacyVarMap: Record<string, string> = {
+    // "--sjs2-color-component-panel-default-bg": "rgba(253, 255, 148, 0.6)",
+    // "--sjs2-color-unknown-variable-001": "rgba(237, 238, 186, 1)",
+    // "--sjs2-radius-container-panel": "6px",
+    "--sjs2-typography-font-family-component-question-title": "Verdana, sans-serif",
+    "--sjs2-typography-font-weight-component-question-title": "700",
+    "--sjs2-color-component-question-default-title": "rgba(201, 90, 231, 0.91)",
+    "--sjs2-typography-font-size-component-question-title": "18px",
+    "--sjs2-color-component-panel-default-bg": "rgba(255, 255, 255, 1)",
+    "--sjs2-color-unknown-variable-001": "rgba(248, 248, 248, 1)",
+    "--sjs2-radius-container-panel": "8px",
+
+  };
+  return (elt: any) => ({
+    getPropertyValue: (prop: string) => {
+      return legacyVarMap[prop] || DefaultLight.cssVariables[prop];
+    }
+  });
+};
 
 const themeFromFile = {
   "cssVariables": {
@@ -76,6 +98,14 @@ const themeFromFile = {
 
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
+  jest.spyOn(SurveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+  // // ThemeModel constructor may cache baseThemeVariables during module evaluation in some environments.
+  // // Ensure the mocked window is applied before tests rely on calculated css variables.
+  // jest.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
+  //   ...window,
+  //   getComputedStyle: createComputedStyleFromInline()
+  // } as any);
+
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
@@ -84,6 +114,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  (SurveyCore.getRGBaColor as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
 

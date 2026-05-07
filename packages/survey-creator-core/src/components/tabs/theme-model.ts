@@ -409,6 +409,8 @@ export class ThemeModel extends Base implements ITheme {
 
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, ThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
+      // Preserve explicit cssVariables passed in (e.g. imported theme JSON).
+      assign(effectiveThemeCssVariables, theme.cssVariables || {});
       patchLegacyCSSVariables(effectiveThemeCssVariables);
       assign(effectiveThemeCssVariables, this.calculateThemeVariables(effectiveThemeCssVariables));
       assign(effectiveThemeCssVariables, this.themeCssVariablesChanges);
@@ -938,6 +940,13 @@ Serializer.addProperties("theme",
   { name: "--sjs2-color-fg-basic-secondary", visible: false },
   { name: "--sjs2-color-fg-basic-primary", visible: false },
   { name: "--sjs2-color-fg-basic-secondary", visible: false },
+
+  { name: "--sjs2-base-unit-font-size", visible: false },
+  { name: "--sjs2-base-unit-line-height", visible: false },
+  { name: "--sjs2-base-unit-spacing", visible: false },
+  { name: "--sjs2-color-utility-property-grid", visible: false },
+  { name: "--sjs2-color-utility-tabs", visible: false },
+  { name: "--sjs2-color-utility-toolbox", visible: false },
 
   {
     name: "--sjs2-border-effect-surface-default-reset",
