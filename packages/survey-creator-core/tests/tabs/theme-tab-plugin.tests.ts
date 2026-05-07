@@ -9,7 +9,6 @@ import { Action, DefaultTheme, DomWindowHelper, ITheme, QuestionButtonGroupModel
 import { CreatorTester } from "../creator-tester";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
-import * as SurveyCore from "survey-core";
 import { ThemeTabViewModel } from "../../src/components/tabs/theme-builder";
 import { settings } from "../../src/creator-settings";
 import { assign } from "../../src/utils/utils";
@@ -17,7 +16,7 @@ import { PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
-import { mockDomWindowGetComputedStyleFromInlineStyles, mockSurveyCoreGetRGBaColorIdentity } from "./theme-test-mocks";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockSurveyCoreGetRGBaColorIdentity, restoreSurveyCoreGetRGBaColorMock } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
@@ -32,7 +31,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  (SurveyCore.getRGBaColor as any).mockRestore?.();
+  restoreSurveyCoreGetRGBaColorMock();
   (DomWindowHelper.getWindow as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
@@ -421,7 +420,7 @@ test("Get theme changes only", (): any => {
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(10);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(48);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(51);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(modifiedThemeChanges).length).toBe(6);
@@ -445,7 +444,7 @@ test("Get theme changes only", (): any => {
     "header",
     "headerView",
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(38);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(41);
 
   const themeChangesReset = themePlugin.getCurrentTheme(true);
   expect(Object.keys(themeChangesReset).length).toBe(6);

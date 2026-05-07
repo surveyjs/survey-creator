@@ -1,8 +1,17 @@
-import * as SurveyCore from "survey-core";
+import type { getRGBaColor } from "survey-core";
 import { DomWindowHelper } from "survey-core";
 
-export function mockSurveyCoreGetRGBaColorIdentity(): jest.SpyInstance {
-  return jest.spyOn(SurveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+let getRGBaColorSpy: jest.SpiedFunction<typeof getRGBaColor> | undefined;
+
+export function mockSurveyCoreGetRGBaColorIdentity(): void {
+  getRGBaColorSpy?.mockRestore();
+  const surveyCore = jest.requireActual<typeof import("survey-core")>("survey-core");
+  getRGBaColorSpy = jest.spyOn(surveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+}
+
+export function restoreSurveyCoreGetRGBaColorMock(): void {
+  getRGBaColorSpy?.mockRestore();
+  getRGBaColorSpy = undefined;
 }
 
 export function mockDomWindowGetComputedStyleFromInlineStyles(): jest.SpyInstance {

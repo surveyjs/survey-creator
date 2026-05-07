@@ -8,14 +8,13 @@ import { PredefinedBackgroundColors, PredefinedColors } from "../../src/componen
 import { colorsAreEqual } from "../../src/utils/color-utils";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
-import * as SurveyCore from "survey-core";
-import { mockSurveyCoreGetRGBaColorIdentity } from "../tabs/theme-test-mocks";
+import { mockSurveyCoreGetRGBaColorIdentity, restoreSurveyCoreGetRGBaColorMock } from "../tabs/theme-test-mocks";
 
 beforeEach(() => {
   mockSurveyCoreGetRGBaColorIdentity();
 });
 afterEach(() => {
-  (SurveyCore.getRGBaColor as any).mockRestore?.();
+  restoreSurveyCoreGetRGBaColorMock();
 });
 
 test("Creator theme model de/serialization", (): any => {

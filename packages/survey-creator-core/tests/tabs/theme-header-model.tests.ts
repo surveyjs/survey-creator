@@ -1,4 +1,3 @@
-import * as SurveyCore from "survey-core";
 import { DefaultTheme, DomWindowHelper, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
 import { HeaderModel, registerSurveyTheme, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
@@ -15,7 +14,7 @@ export * from "../../src/components/tabs/theme-custom-questions/shadow-effects";
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
-import { mockSurveyCoreGetRGBaColorIdentity } from "./theme-test-mocks";
+import { mockSurveyCoreGetRGBaColorIdentity, restoreSurveyCoreGetRGBaColorMock } from "./theme-test-mocks";
 
 import SurveyThemes from "survey-core/themes";
 registerSurveyTheme(SurveyThemes);
@@ -32,7 +31,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  (SurveyCore.getRGBaColor as any).mockRestore?.();
+  restoreSurveyCoreGetRGBaColorMock();
 });
 
 afterEach(() => {

@@ -1,5 +1,4 @@
 import { DefaultTheme, DomWindowHelper, ITheme, Serializer } from "survey-core";
-import * as SurveyCore from "survey-core";
 import { Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
@@ -12,7 +11,7 @@ import { ThemeModel, getThemeChanges } from "../../src/components/tabs/theme-mod
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
-import { mockSurveyCoreGetRGBaColorIdentity } from "./theme-test-mocks";
+import { mockSurveyCoreGetRGBaColorIdentity, restoreSurveyCoreGetRGBaColorMock } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
@@ -115,7 +114,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  (SurveyCore.getRGBaColor as any).mockRestore?.();
+  restoreSurveyCoreGetRGBaColorMock();
   DefaultTheme.cssVariables = cssVariables;
 });
 

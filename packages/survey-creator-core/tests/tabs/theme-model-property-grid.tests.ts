@@ -1,5 +1,4 @@
 import { DefaultTheme, DomWindowHelper, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, Serializer, SurveyElement } from "survey-core";
-import * as SurveyCore from "survey-core";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
@@ -18,7 +17,7 @@ import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 export * from "../../src/localization/french";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
-import { mockDomWindowGetComputedStyleFromInlineStyles, mockSurveyCoreGetRGBaColorIdentity } from "./theme-test-mocks";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockSurveyCoreGetRGBaColorIdentity, restoreSurveyCoreGetRGBaColorMock } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
@@ -33,7 +32,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  (SurveyCore.getRGBaColor as any).mockRestore?.();
+  restoreSurveyCoreGetRGBaColorMock();
   (DomWindowHelper.getWindow as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
