@@ -102,7 +102,7 @@
   }
 
   .spg-theme-group-caption {
-    @include ctrDefaultBoldFont;
+    @include sjs2--typography--default-strong;
     color: var(--ctr-property-grid-group-caption-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 
     position: relative;

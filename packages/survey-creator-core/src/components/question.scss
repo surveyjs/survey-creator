@@ -235,7 +235,7 @@ svc-question {
 }
 
 .svc-panel__placeholder {
-  @include lbrDefaultFont;
+  @include sjs2--typography--default;
   color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
   text-wrap: wrap;
   text-align: center;
@@ -447,7 +447,7 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut__text {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 320px;
@@ -936,6 +936,7 @@ svc-question,
   position: relative;
   margin-top: var(--sjs2-spacing-x050, 4px);
 }
+
 .svc-panel__question-type-selector {
   position: absolute;
   inset-inline-end: 0;

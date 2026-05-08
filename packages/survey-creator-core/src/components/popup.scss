@@ -123,12 +123,12 @@
   }
 
   .sv-popup__body-header {
-    @include ctrMediumBoldFont;
+    @include sjs2--typography--medium-strong;
     color: var(--ctr-popup-title-color, var(--sjs-layer-1-foreground-100, #000000e6));
   }
 
   .sv-popup__content {
-    @include ctrDefaultFont;
+    @include sjs2--typography--default;
   }
 
   &.sv-popup--menu-tablet {
@@ -172,7 +172,7 @@
   &.sv-popup--menu-phone,
   &.sv-popup--menu-tablet {
     .sv-menu-popup__button {
-      @include ctrDefaultBoldFont;
+      @include sjs2--typography--default-strong;
       color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
       border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
       padding: var(--ctr-actionbar-button-padding-top-medium-text, var(--sjs-spacing-x05))
@@ -201,9 +201,4 @@
       );
     }
   }
-
-  // .sv-popup__content {
-  //   @include ctrDefaultFont;
-  //   color: var(--ctr-popup-message-color, var(--sjs-layer-1-foreground-100, #000000e6));
-  // }
 }

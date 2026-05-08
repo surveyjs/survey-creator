@@ -70,8 +70,7 @@
 .sl-table__cell .svc-action-button:focus,
 .sl-table__cell .svc-action-button:hover:enabled,
 .sl-table__cell .svc-action-button:focus:enabled {
-  @include ctrMediumBoldFont;
-  --thm-logic-header-max-height: var(--ctr-font-medium-line-height, var(--ctr-medium-bold-line-height, calcSize(4)));
+  @include sjs2--typography--medium-strong;
   background: transparent;
   outline: none;
   border: none;
@@ -79,7 +78,7 @@
   border-radius: 0;
   color: var(--lbr-page-header-title-color, var(--sjs-layer-3-foreground-100, #000000e6));
   box-sizing: content-box;
-  max-height: calc(3 * var(--thm-logic-header-max-height));
+  max-height: calc(3 * var(--sjs2-typography-line-height-medium));
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -186,7 +185,7 @@
     transition: background-color $creator-transition-duration;
 
     .sd-action__title {
-      @include ctrDefaultBoldFont;
+      @include sjs2--typography--default-strong;
       color: var(--ctr-expression-item-text-color-button, var(--sjs-primary-background-500, #19b394ff));
       vertical-align: baseline;
       text-align: center;
@@ -207,7 +206,7 @@
   }
 
   .sv-action-bar-item__title {
-    @include ctrDefaultBoldFont;
+    @include sjs2--typography--default-strong;
     color: inherit;
     display: flex;
     align-items: center;
@@ -259,7 +258,7 @@
 }
 
 .sl-question__title {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   color: var(--ctr-expression-item-text-color-function, var(--sjs-layer-3-foreground-100, #000000e6));
   margin: 0;
 
