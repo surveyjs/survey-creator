@@ -22,7 +22,7 @@
 
 .svc-list__item-body {
   @include textEllipsis;
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   text-align: start;
   color: var(--ctr-list-item-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   transition: color $creator-transition-duration;
@@ -78,7 +78,7 @@
 .svc-list__item--selected:focus,
 .svc-list__item.svc-list__item--selected:hover {
   & > .svc-list__item-body {
-    @include ctrDefaultBoldFont;
+    @include sjs2--typography--default-strong;
     color: var(--ctr-list-item-text-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
     background: var(--ctr-list-item-background-color-selected, var(--sjs-primary-background-500, #19b394ff));
 
@@ -92,7 +92,7 @@
 .svc-list__item--group-selected:hover,
 .svc-list__item--group-selected:focus {
   & > .svc-list__item-body {
-    @include ctrDefaultFont;
+    @include sjs2--typography--default;
     color: var(--ctr-list-item-text-color-selected-submenu, var(--sjs-layer-1-foreground-100, #000000e6));
     background: var(--ctr-list-item-background-color-selected-submenu, var(--sjs-layer-1-background-400, #f5f5f5ff));
 
@@ -129,9 +129,10 @@
 
 .svc-list__item--with-icon.svc-list__item--group .sv-popup-inner > .sv-popup__container {
   margin-top: calc(
-    var(--ctr-list-item-padding-top, var(--sjs-spacing-x150)) -
-      var(--ctr-list-item-padding-top-with-icon, var(--sjs-spacing-x150)) -
-      var(--ctr-list-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-list-item-padding-top, var(--sjs-spacing-x150)) - var(
+        --ctr-list-item-padding-top-with-icon,
+        var(--sjs-spacing-x150)
+      ) - var(--ctr-list-padding-top, var(--sjs-spacing-x1))
   );
 }
 
@@ -216,7 +217,7 @@
 }
 
 .svc-list__input {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   background-color: transparent;
   color: var(--ctr-list-search-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
   -webkit-appearance: none;
@@ -280,7 +281,7 @@
 }
 
 .svc-list__empty-text {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   @include textEllipsis;
   text-align: center;
   align-self: stretch;
@@ -298,7 +299,7 @@
   }
 
   .svc-list__item--group-selected > .svc-list__item-body {
-    @include ctrDefaultBoldFont;
+    @include sjs2--typography--default-strong;
     color: var(--ctr-list-item-text-color-selected, var(--sjs-primary-foreground-100, #ffffffff));
     background: var(--ctr-list-item-background-color-selected, var(--sjs-primary-background-500, #19b394ff));
 
