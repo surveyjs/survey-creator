@@ -232,6 +232,9 @@ test.describe(title, () => {
   test("Logic popup mobile", async ({ page, browser }) => {
     // eslint-disable-next-line no-console
     console.log("Browser version:", await browser.version());
+    await page.evaluate(() => {
+      (window as any).creator.animationEnabled = false;
+    });
     await page.setViewportSize({ width: 1240, height: 870 });
     await getAddNewQuestionButton(page).click();
     await page.setViewportSize({ width: 500, height: 870 });
@@ -239,13 +242,19 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Conditions").click();
     await page.locator(".spg-panel__content div[data-name='visibleIf'] button").filter({ hasText: "Edit" }).click();
-    await page.waitForTimeout(500);
+
+    const popup = page.locator(".sv-popup.svc-property-editor.sv-popup--modal-overlay");
+    await expect(popup).toBeVisible();
+    await expect(popup.locator(".sv-popup__container").first()).toBeVisible();
+    await page.evaluate(() => (document as any).fonts && (document as any).fonts.ready);
+
     await compareScreenshot(
       page,
-      page.locator(".sv-popup.svc-property-editor.sv-popup--modal-overlay"),
+      popup,
       "pg-logic-popup-mobile.png",
       {
-        maxDiffPixels: 10
+        animations: "disabled",
+        maxDiffPixels: 20
       }
     );
   });

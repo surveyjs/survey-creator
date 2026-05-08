@@ -1,5 +1,4 @@
 import { defaultActionBarCss } from "survey-core";
-import { listComponentCss } from "../list-theme";
 
 export var logicCss = {
   root: "",
@@ -335,7 +334,6 @@ export var logicCss = {
       buttonCollapsed: ""
     }
   },
-  list: JSON.parse(JSON.stringify(listComponentCss)),
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
   },
