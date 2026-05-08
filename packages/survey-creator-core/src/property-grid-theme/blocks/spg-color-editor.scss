@@ -35,7 +35,7 @@
     var(--sjs2-color-border-basic-secondary-overlay, rgba(28, 27, 32, 0.4));
   width: var(--sjs2-size-x400, 32px);
   height: var(--sjs2-size-x300, 24px);
-  margin-left: var(--sjs2-spacing-x100, 8px);
+  margin-left: var(--ctr-editor-color-swatch-margin-left, var(--sjs-spacing-x150));
 
   .sv-svg-icon {
     position: absolute;
