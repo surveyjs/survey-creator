@@ -48,7 +48,6 @@ svc-tab-designer {
   overflow: visible;
 }
 
-/* Fix designer surface
 .svc-surface-header {
   .sd-title .sv-string-editor {
     &[aria-placeholder]:empty:before {
@@ -56,24 +55,13 @@ svc-tab-designer {
     }
   }
 
+  /* Fix designer surface
   .sd-description .sv-string-editor {
     &[aria-placeholder]:empty:before {
       color: var(--sjs2-color-component-header-default-description-placeholder, rgba(28, 27, 32, 0.4));
     }
   }
-} */
-
-.svc-surface-header {
-  .sd-title {
-    .sv-string-editor {
-      @include sjs2--typography--large-strong;
-      color: var(--sjs2-color-component-header-default-title, #1c1b20);
-
-      &[aria-placeholder]:empty:before {
-        color: var(--sjs2-color-component-header-default-title-placeholder, rgba(28, 27, 32, 0.6));
-      }
-    }
-  }
+*/
 
   .sd-description {
     @include sjs2--typography--default;
