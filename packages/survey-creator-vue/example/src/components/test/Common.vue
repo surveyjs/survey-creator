@@ -8,7 +8,7 @@ import { slk } from "survey-core";
 import { registerSurveyTheme, registerCreatorTheme, SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
 import SurveyThemes from "survey-core/themes";
 import TestCreatorTheme from "survey-core/themes/test-creator";
-import TestLibraryTheme from "survey-core/themes/test";
+import TestSurfaceTheme from "survey-core/themes/test-surface";
 registerSurveyTheme(SurveyThemes);
 registerCreatorTheme(TestCreatorTheme);
 import "survey-core/survey.i18n";
@@ -39,7 +39,7 @@ creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.
   creator.value = newCreator;
   creator.value.applyCreatorTheme(TestCreatorTheme);
   if(!props.useOriginalTheme) {
-    creator.value.applySurfaceTheme(TestLibraryTheme);
+    creator.value.applySurfaceTheme(TestSurfaceTheme);
   }
   creator.value.tabResponsivenessMode = "menu";
   creator.value["animationEnabled"] = false;

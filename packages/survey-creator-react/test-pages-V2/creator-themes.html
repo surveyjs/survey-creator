@@ -37,7 +37,7 @@
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     creator.applyCreatorTheme(SurveyTheme.TestCreator);
-  creator.applySurfaceTheme(SurveyTheme.Test);
+  creator.applySurfaceTheme(SurveyTheme.TestSurface);
     window.creator = creator;
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
@@ -52,7 +52,7 @@
           window.prevCreator = window.creator;
           const creator = new SurveyCreator.SurveyCreator(options);
           creator.applyCreatorTheme(SurveyTheme.TestCreator);
-  creator.applySurfaceTheme(SurveyTheme.Test);
+  creator.applySurfaceTheme(SurveyTheme.TestSurface);
           creator.JSON = json;
           this.setState({ creator });
           creator.tabResponsivenessMode = "menu";

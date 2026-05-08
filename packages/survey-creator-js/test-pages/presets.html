@@ -28,6 +28,7 @@
   <script src="../build/survey-creator-js.js"></script>
   <script src="./sc.js"></script>
   <script src="../node_modules/survey-core/themes/test-creator.js"></script>
+  <script src="../node_modules/survey-core/themes/test-surface.js"></script>
 </head>
 
 <body spellcheck="false">
@@ -41,7 +42,7 @@
     SurveyCreatorCore.registerUIPreset(SurveyCreatorUIPreset);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
     creator.applyCreatorTheme(SurveyTheme.TestCreator);
-  creator.applySurfaceTheme(SurveyTheme.Test);
+  creator.applySurfaceTheme(SurveyTheme.TestSurface);
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
     window["Survey"].settings.animationEnabled = false;
@@ -58,7 +59,7 @@
           window.prevCreator = window.creator;
           const creator = new SurveyCreator.SurveyCreator(options);
           creator.applyCreatorTheme(SurveyTheme.TestCreator);
-  creator.applySurfaceTheme(SurveyTheme.Test);
+  creator.applySurfaceTheme(SurveyTheme.TestSurface);
           creator.JSON = json;
           this.setState({ creator });
           creator.tabResponsivenessMode = "menu";
