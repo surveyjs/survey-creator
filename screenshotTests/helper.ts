@@ -90,7 +90,6 @@ export const surveySettingsButtonSelector = (page) => page.getByRole("button", {
 export const themeSettingsButtonSelector = (page) => page.getByRole("button", { name: "Theme settings" });
 // export const propertyGridSelector = Selector(".svc-side-bar__container");
 // export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sd-action");
-// export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .svc-list__container");
 // export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
 
 // export const questions = Selector(".svc-question__content");

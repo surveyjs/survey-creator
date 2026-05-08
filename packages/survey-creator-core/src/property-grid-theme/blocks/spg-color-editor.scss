@@ -13,18 +13,6 @@
   transform: translateY(-50%);
 }
 
-.svc-list__item-body {
-  // display: flex;
-  // gap: var(--ctr-list-item-gap, var(--sjs-spacing-x2));
-  // padding: var(--ctr-list-item-padding-top-with-icon, var(--sjs-spacing-x150)) var(--ctr-list-item-padding-right, var(--sjs-spacing-x6))
-  //   var(--ctr-list-item-padding-bottom-with-icon, var(--sjs-spacing-x150)) var(--ctr-list-item-padding-left, var(--sjs-spacing-x2));
-
-  .spg-color-editor__color-swatch {
-    margin-left: 0;
-    flex: 0 1 auto;
-  }
-}
-
 .spg-color-editor__color-swatch {
   position: relative;
   flex-shrink: 0;
