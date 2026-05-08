@@ -29,12 +29,11 @@
   position: relative;
   flex-shrink: 0;
   flex-grow: 0;
-  box-sizing: border-box;
   border-radius: var(--sjs2-radius-component-formbox-action, 4px);
-  border: var(--sjs2-border-width-x100, 1px) solid
-    var(--sjs2-color-border-basic-secondary-overlay, rgba(28, 27, 32, 0.4));
   width: var(--sjs2-size-x400, 32px);
   height: var(--sjs2-size-x300, 24px);
+  box-sizing: border-box;
+  border: 1px solid var(--ctr-list-item-color-swatch-border-color, var(--sjs-border-25-overlay, #00000026));
   margin-left: var(--ctr-editor-color-swatch-margin-left, var(--sjs-spacing-x150));
 
   .sv-svg-icon {
