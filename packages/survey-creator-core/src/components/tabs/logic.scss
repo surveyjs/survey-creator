@@ -71,7 +71,6 @@
 .sl-table__cell .svc-action-button:hover:enabled,
 .sl-table__cell .svc-action-button:focus:enabled {
   @include sjs2--typography--medium-strong;
-  --thm-logic-header-max-height: var(--ctr-font-medium-line-height, var(--ctr-medium-bold-line-height, calcSize(4)));
   background: transparent;
   outline: none;
   border: none;
@@ -79,7 +78,7 @@
   border-radius: 0;
   color: var(--lbr-page-header-title-color, var(--sjs-layer-3-foreground-100, #000000e6));
   box-sizing: content-box;
-  max-height: calc(3 * var(--thm-logic-header-max-height));
+  max-height: calc(3 * var(--sjs2-typography-line-height-medium));
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
