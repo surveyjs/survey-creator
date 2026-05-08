@@ -22,13 +22,13 @@
   }
 
   .svc-search__search-icon {
-    width: var(--ctr-toolbox-search-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-toolbox-search-icon-height, var(--sjs-font-size-x3));
-  
+    width: var(--ctr-toolbox-search-icon-width, var(--sjs2-line-height-x300));
+    height: var(--ctr-toolbox-search-icon-height, var(--sjs2-line-height-x300));
+
     .sv-svg-icon {
-      width: var(--ctr-toolbox-search-icon-width, var(--sjs-font-size-x3));
-      height: var(--ctr-toolbox-search-icon-height, var(--sjs-font-size-x3));
-  
+      width: var(--ctr-toolbox-search-icon-width, var(--sjs2-line-height-x300));
+      height: var(--ctr-toolbox-search-icon-height, var(--sjs2-line-height-x300));
+
       use {
         fill: var(--ctr-toolbox-search-icon-color, var(--sjs-primary-background-500, #19b394ff));
       }

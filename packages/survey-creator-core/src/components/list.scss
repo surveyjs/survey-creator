@@ -129,9 +129,10 @@
 
 .svc-list__item--with-icon.svc-list__item--group .sv-popup-inner > .sv-popup__container {
   margin-top: calc(
-    var(--ctr-list-item-padding-top, var(--sjs-spacing-x150)) -
-      var(--ctr-list-item-padding-top-with-icon, var(--sjs-spacing-x150)) -
-      var(--ctr-list-padding-top, var(--sjs-spacing-x1))
+    var(--ctr-list-item-padding-top, var(--sjs-spacing-x150)) - var(
+        --ctr-list-item-padding-top-with-icon,
+        var(--sjs-spacing-x150)
+      ) - var(--ctr-list-padding-top, var(--sjs-spacing-x1))
   );
 }
 
@@ -144,8 +145,8 @@
 
 .svc-list__item-icon {
   display: flex;
-  width: var(--ctr-list-item-icon-width, var(--sjs-font-size-x3));
-  height: var(--ctr-list-item-icon-height, var(--sjs-font-size-x3));
+  width: var(--ctr-list-item-icon-width, var(--sjs2-line-height-x300));
+  height: var(--ctr-list-item-icon-height, var(--sjs2-line-height-x300));
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
@@ -157,10 +158,10 @@
 
 .svc-list-item__marker-icon {
   display: flex;
-  padding: var(--ctr-list-item-submenu-arrow-padding, var(--sjs-spacing-x05));
+  // padding: var(--ctr-list-item-submenu-arrow-padding, var(--sjs-spacing-x05));
   align-items: flex-start;
-  width: var(--ctr-list-item-submenu-arrow-width, var(--sjs-font-size-x2));
-  height: var(--ctr-list-item-submenu-arrow-height, var(--sjs-font-size-x2));
+  width: var(--ctr-list-item-submenu-arrow-width, var(--sjs2-line-height-x300));
+  height: var(--ctr-list-item-submenu-arrow-height, var(--sjs2-line-height-x300));
   box-sizing: content-box;
   justify-content: center;
 
@@ -201,13 +202,13 @@
 .svc-list__filter-icon {
   opacity: var(--ctr-list-search-icon-opacity, 1);
   display: flex;
-  width: var(--ctr-list-search-icon-width, var(--sjs-font-size-x3));
-  height: var(--ctr-list-search-icon-height, var(--sjs-font-size-x3));
+  width: var(--ctr-list-search-icon-width, var(--sjs2-line-height-x300));
+  height: var(--ctr-list-search-icon-height, var(--sjs2-line-height-x300));
   align-items: center;
 
   .sv-svg-icon {
-    width: var(--ctr-list-search-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-list-search-icon-height, var(--sjs-font-size-x3));
+    width: var(--ctr-list-search-icon-width, var(--sjs2-line-height-x300));
+    height: var(--ctr-list-search-icon-height, var(--sjs2-line-height-x300));
   }
 
   use {
@@ -234,8 +235,8 @@
 
 .svc-list__filter-clear-button {
   display: flex;
-  padding: var(--ctr-search-button-padding-vertical, var(--sjs-spacing-x05))
-    var(--ctr-search-button-padding-horizontal, var(--sjs-spacing-x05));
+  // padding: var(--ctr-search-button-padding-vertical, var(--sjs-spacing-x05))
+  //   var(--ctr-search-button-padding-horizontal, var(--sjs-spacing-x05));
   justify-content: center;
   align-items: center;
   border-radius: var(--ctr-search-button-corner-radius, var(--sjs-corner-radius-x05));
@@ -246,8 +247,8 @@
 
   svg {
     display: flex;
-    width: var(--ctr-search-button-icon-width, var(--sjs-font-size-x2));
-    height: var(--ctr-search-button-icon-height, var(--sjs-font-size-x2));
+    width: var(--ctr-search-button-icon-width, var(--sjs2-line-height-x300));
+    height: var(--ctr-search-button-icon-height, var(--sjs2-line-height-x300));
     justify-content: center;
     align-items: center;
 

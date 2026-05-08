@@ -68,7 +68,7 @@ svc-tab-json-editor-textarea {
     var(--ctr-code-viewer-code-error-row-border-width-top, var(--sjs-stroke-x1)) +
       var(--ctr-code-viewer-code-error-row-padding-top, var(--sjs-spacing-x1)) +
       var(--ctr-code-viewer-code-error-row-padding-bottom, var(--sjs-spacing-x1)) +
-      var(--ctr-code-viewer-code-error-row-fix-button-icon-height, var(--sjs-font-size-x3))
+      var(--ctr-code-viewer-code-error-row-fix-button-icon-height, var(--sjs2-line-height-x300))
   );
   display: flex;
   max-height: calc(5 * var(--thm-json-error-row));
@@ -108,8 +108,8 @@ svc-tab-json-editor-textarea {
 
 .svc-json-error__icon {
   fill: var(--sjs-semantic-red-background-500, #e50a3eff);
-  width: var(--ctr-code-viewer-code-error-row-icon-width, var(--sjs-font-size-x2));
-  height: var(--ctr-code-viewer-code-error-row-icon-height, var(--sjs-font-size-x2));
+  width: var(--ctr-code-viewer-code-error-row-icon-width, var(--sjs2-line-height-x200));
+  height: var(--ctr-code-viewer-code-error-row-icon-height, var(--sjs2-line-height-x200));
   box-sizing: border-box;
   display: block;
 }
@@ -151,8 +151,8 @@ svc-tab-json-editor-textarea {
 
   svg {
     fill: var(--ctr-code-viewer-code-error-row-fix-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
-    width: var(--ctr-code-viewer-code-error-row-fix-button-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-code-viewer-code-error-row-fix-button-icon-height, var(--sjs-font-size-x3));
+    width: var(--ctr-code-viewer-code-error-row-fix-button-icon-width, var(--sjs2-line-height-x300));
+    height: var(--ctr-code-viewer-code-error-row-fix-button-icon-height, var(--sjs2-line-height-x300));
   }
 }
 

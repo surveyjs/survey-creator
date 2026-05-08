@@ -206,7 +206,7 @@ td.st-table__cell:first-of-type {
 .st-translation-machine-from__btn {
   flex-direction: row-reverse;
   white-space: nowrap;
-  --sd-action-icon-size: var(--ctr-actionbar-button-drop-down-arrow-height, var(--sjs-font-size-x2));
+  --sd-action-icon-size: var(--ctr-actionbar-button-drop-down-arrow-height, var(--sjs2-line-height-x200));
 }
 
 .st-translation-machine-from__btn:disabled .sd-action__title,

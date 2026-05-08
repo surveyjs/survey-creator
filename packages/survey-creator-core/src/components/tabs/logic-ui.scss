@@ -228,8 +228,8 @@
   border: none;
 
   .sv-svg-icon {
-    width: var(--ctr-expression-item-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-expression-item-icon-height, var(--sjs-font-size-x3));
+    width: var(--ctr-expression-item-icon-width, var(--sjs2-line-height-x300));
+    height: var(--ctr-expression-item-icon-height, var(--sjs2-line-height-x300));
   }
 
   use {

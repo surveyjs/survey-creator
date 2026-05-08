@@ -182,7 +182,7 @@
 .sps-table__row {
   --action-width: calc(
     2 * var(--ctr-actionbar-button-padding-top-large-icon, 8px) +
-      var(--ctr-actionbar-button-icon-width, var(--sjs-font-size-x3))
+      var(--ctr-actionbar-button-icon-width, var(--sjs2-line-height-x300))
   );
   --action-container-width: calc(3 * var(--action-width));
 }

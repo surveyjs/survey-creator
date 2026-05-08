@@ -2,21 +2,21 @@
 
 .svc-toolbox {
   --toolbox-width-compact: calc(
-    var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3)) +
-    var(--ctr-toolbox-item-padding-right-no-text, var(--sjs-spacing-x1)) +
-    var(--ctr-toolbox-item-padding-left-no-text, var(--sjs-spacing-x1)) +
-    var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)) * 2 +
-    var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)) +
-    var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150))
+    var(--ctr-toolbox-item-icon-width, var(--sjs2-line-height-x300)) +
+      var(--ctr-toolbox-item-padding-right-no-text, var(--sjs-spacing-x1)) +
+      var(--ctr-toolbox-item-padding-left-no-text, var(--sjs-spacing-x1)) +
+      var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)) * 2 +
+      var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)) +
+      var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150))
   );
 
   --thm-toolbox-item-banner-left: calc(
-    var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3)) +
-    var(--ctr-toolbox-item-padding-right-no-text, var(--sjs-spacing-x1)) +
-    var(--ctr-toolbox-item-padding-left-no-text, var(--sjs-spacing-x1)) +
-    var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)) * 2 +
-    var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)) +
-    var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) * 2
+    var(--ctr-toolbox-item-icon-width, var(--sjs2-line-height-x300)) +
+      var(--ctr-toolbox-item-padding-right-no-text, var(--sjs-spacing-x1)) +
+      var(--ctr-toolbox-item-padding-left-no-text, var(--sjs-spacing-x1)) +
+      var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)) * 2 +
+      var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)) +
+      var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) * 2
   );
 
   width: auto;
@@ -103,8 +103,8 @@
   align-items: center;
   width: fit-content;
   svg {
-    height: var(--ctr-toolbox-item-icon-height, var(--sjs-font-size-x3));
-    width: var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3));
+    height: var(--ctr-toolbox-item-icon-height, var(--sjs2-line-height-x300));
+    width: var(--ctr-toolbox-item-icon-width, var(--sjs2-line-height-x300));
   }
 }
 
@@ -270,8 +270,8 @@
 
 .svc-toolbox__category-header__button {
   fill: var(--ctr-toolbox-group-header-expand-button-color, var(--sjs-layer-1-foreground-75, #000000bf));
-  height: var(--ctr-toolbox-item-icon-height, var(--sjs-font-size-x3));
-  width: var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3));
+  height: var(--ctr-toolbox-item-icon-height, var(--sjs2-line-height-x300));
+  width: var(--ctr-toolbox-item-icon-width, var(--sjs2-line-height-x300));
 }
 
 .svc-toolbox__category-header:hover {

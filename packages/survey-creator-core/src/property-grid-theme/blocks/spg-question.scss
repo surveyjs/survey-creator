@@ -197,13 +197,13 @@ sv-question-error {
 }
 
 .spg-question__erbox-icon {
-  width: var(--ctr-error-message-icon-width, var(--sjs-font-size-x3));
-  height: var(--ctr-error-message-icon-height, var(--sjs-font-size-x3));
+  width: var(--ctr-error-message-icon-width, var(--sjs2-line-height-x300));
+  height: var(--ctr-error-message-icon-height, var(--sjs2-line-height-x300));
 
   .sv-svg-icon {
     vertical-align: top;
-    width: var(--ctr-error-message-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-error-message-icon-height, var(--sjs-font-size-x3));
+    width: var(--ctr-error-message-icon-width, var(--sjs2-line-height-x300));
+    height: var(--ctr-error-message-icon-height, var(--sjs2-line-height-x300));
   }
 
   use {

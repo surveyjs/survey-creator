@@ -30,16 +30,16 @@
   flex-shrink: 0;
   flex-grow: 0;
   border-radius: var(--ctr-list-item-color-swatch-corner-radius, var(--sjs-corner-radius-x05));
-  width: var(--ctr-list-item-color-swatch-width, var(--sjs-font-size-x4));
-  height: var(--ctr-list-item-color-swatch-height, var(--sjs-font-size-x3));
+  width: var(--ctr-list-item-color-swatch-width, var(--sjs2-line-height-x400));
+  height: var(--ctr-list-item-color-swatch-height, var(--sjs2-line-height-x300));
   box-sizing: border-box;
   border: 1px solid var(--ctr-list-item-color-swatch-border-color, var(--sjs-border-25-overlay, #00000026));
   margin-left: var(--ctr-editor-color-swatch-margin-left, var(--sjs-spacing-x150));
 
   .sv-svg-icon {
     position: absolute;
-    width: var(--ctr-editor-color-swatch-icon-width, var(--sjs-font-size-x2));
-    height: var(--ctr-editor-color-swatch-icon-height, var(--sjs-font-size-x2));
+    width: var(--ctr-editor-color-swatch-icon-width, var(--sjs2-line-height-x200));
+    height: var(--ctr-editor-color-swatch-icon-height, var(--sjs2-line-height-x200));
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);

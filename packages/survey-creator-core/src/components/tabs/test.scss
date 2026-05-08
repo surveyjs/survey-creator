@@ -50,8 +50,8 @@
   .svc-list-item__marker-icon {
     padding: 0;
     opacity: var(--ctr-list-item-icon-opacity-label, 0.5);
-    width: var(--ctr-list-item-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-list-item-icon-height, var(--sjs-font-size-x3));
+    width: var(--ctr-list-item-icon-width, var(--sjs2-line-height-x300));
+    height: var(--ctr-list-item-icon-height, var(--sjs2-line-height-x300));
   }
 }
 .svc-test-tab__content .sd-body--empty {
