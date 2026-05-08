@@ -245,7 +245,7 @@ test.describe(title, () => {
 
     const popup = page.locator(".sv-popup.svc-property-editor.sv-popup--modal-overlay");
     await expect(popup).toBeVisible();
-    await expect(popup.locator(".sv-popup__container")).toBeVisible();
+    await expect(popup.locator(".sv-popup__container").first()).toBeVisible();
     await page.evaluate(() => (document as any).fonts && (document as any).fonts.ready);
 
     await compareScreenshot(
