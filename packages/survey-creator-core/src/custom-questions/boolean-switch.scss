@@ -20,7 +20,7 @@
   outline: none;
   border-radius: var(--sjs2-radius-component-toggle);
   box-shadow: var(--sjs2-border-effect-component-toggle-false-default);
-  padding: calc(var(--sjs2-base-unit-font-size) * 0.75);
+  padding: var(--sjs2-spacing-x075, 6px);
   display: flex;
   flex-direction: row;
   gap: var(--sjs-spacing-x05);
