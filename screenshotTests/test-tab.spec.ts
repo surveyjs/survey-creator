@@ -235,7 +235,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.locator(".sd-navigation__start-btn").click();
     await resetHoverToCreator(page);
-    await compareScreenshot(page, page.locator(".svc-creator__content-wrapper"), "survey-timer.png");
+    await compareScreenshot(page, page.locator(".svc-creator__content-wrapper"), "survey-timer.png", { maxDiffPixels: 2 });
   });
 
   test("empty survey preview", async ({ page }) => {

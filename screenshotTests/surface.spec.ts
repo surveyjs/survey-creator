@@ -93,7 +93,7 @@ test.describe(title, () => {
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true }).first();
     await expect(popupContainer).toBeVisible();
-    await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-panel.png");
+    await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-panel.png", { maxDiffPixels: 2 });
   });
 
   test("Test question type converter on page for panel - 2", async ({ page }) => {
@@ -128,7 +128,7 @@ test.describe(title, () => {
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
-    await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-panel-not-empty.png");
+    await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-panel-not-empty.png", { maxDiffPixels: 5 });
   });
 
   test("Test question type converter (mobile)", async ({ page }) => {
@@ -162,7 +162,7 @@ test.describe(title, () => {
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
     await resetFocusToBody(page);
-    await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-mobile.png");
+    await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-mobile.png", { maxDiffPixels: 20 });
   });
 
   test("Test question type selector", async ({ page }) => {

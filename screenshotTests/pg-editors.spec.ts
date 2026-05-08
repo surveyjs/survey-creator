@@ -744,7 +744,7 @@ test.describe(title, () => {
     await addQuestionByAddQuestionButton(page, "Single-Line Input");
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, inputMaskSettingsGroupName).click();
-    await page.locator(".spg-question[data-name='maskType'] .sd-dropdown").click();
+    await page.locator(".spg-question[data-name='maskType'] .sd-dropdown .sd-action").click();
     await getVisibleSelectListItemByText(page, "Pattern").click();
 
     const expandedGroup = page.locator(".spg-root-modern .spg-panel.sd-element--expanded");

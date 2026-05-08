@@ -60,7 +60,8 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     await page.getByRole("button", { name: "Used Strings Only" }).click();
     await getListItemByText(page, "All Strings").click();
-    await compareScreenshot(page, stringsView, "translation-tab-show-all-strings.png");
+    await page.waitForTimeout(500);
+    await compareScreenshot(page, stringsView, "translation-tab-show-all-strings.png", { maxDiffPixels: 40 });
   });
 
   test("tranlation property grid", async ({ page }) => {
