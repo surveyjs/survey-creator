@@ -1,7 +1,7 @@
 <template>
-  <div class="svc-creator-tab__content">
+  <div class="svc-creator-tab__content svc-logic-tab">
     <div
-      class="svc-plugin-tab__content svc-logic-tab__content"
+      class="svc-plugin-tab__content svc-logic-tab svc-logic-tab__content"
       :class="{ 'svc-logic-tab--empty': !model.hasItems }"
     >
       <template v-if="model.hasItems">

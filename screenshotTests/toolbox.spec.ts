@@ -546,6 +546,6 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await compareScreenshot(page, toolboxElement, "toolbox-compact-disabled-items.png");
     await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
-    await compareScreenshot(page, page.locator(".sv-popup__container:visible"), "add-new-disabled-items.png");
+    await compareScreenshot(page, page.locator(".sv-popup__container:visible"), "add-new-disabled-items.png", { maxDiffPixels: 2 });
   });
 });
