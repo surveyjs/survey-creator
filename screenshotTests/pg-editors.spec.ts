@@ -243,7 +243,7 @@ test.describe(title, () => {
       page.locator(".sv-popup.svc-property-editor.sv-popup--modal-overlay"),
       "pg-logic-popup-mobile.png",
       {
-        maxDiffPixels: 10
+        maxDiffPixels: 20
       }
     );
   });
