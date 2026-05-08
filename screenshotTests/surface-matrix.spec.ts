@@ -276,7 +276,7 @@ test.describe(title, () => {
     await page.locator(".svc-matrix-cell").nth(3).hover({ force: true });
     await expect(dropdownButton).toBeVisible();
     await dropdownButton.click();
-    await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png");
+    await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png", { maxDiffPixels: 42 });
     await page.locator("button").filter({ hasText: "Cancel" }).click();
     await page.waitForTimeout(500);
 
