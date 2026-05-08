@@ -1,10 +1,11 @@
-import { ItemValue, QuestionDropdownModel, Serializer, settings, SurveyModel } from "survey-core";
+﻿import { ItemValue, QuestionDropdownModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { Question } from "survey-core";
 import { CreatorBase } from "../src/creator-base";
 import { UIPreset } from "../src/ui-presets-creator/presets";
 import { SurveyQuestionPresetPropertiesDetail } from "../src/ui-preset-editor/presets-editable-properties";
 import { ISurveyPropertiesDefinition, defaultPropertyGridDefinition } from "../src/question-editor/definition";
+import { vi } from "vitest";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
@@ -655,7 +656,7 @@ test("visible in classes", () => {
   settings.showDialog = (options: any) => {
     popupSurvey = options.data.survey;
     onApply = options.onApply;
-    return { dispose: jest.fn() };
+    return { dispose: vi.fn() };
   };
 
   const editor = new CreatorPresetEditorModel();

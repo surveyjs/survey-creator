@@ -1,4 +1,5 @@
-import { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
+﻿import { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
+import { vi } from "vitest";
 
 test("Check spin editor question", () => {
   const question = new QuestionSpinEditorModel("q1");
@@ -40,7 +41,7 @@ test("Check spin editor question with min/max values", () => {
 });
 
 test("Check spin editor question event callbacks", () => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
   const question = new QuestionSpinEditorModel("q1");
   question.value = 16;
 
@@ -74,22 +75,22 @@ test("Check spin editor question event callbacks", () => {
 
   question.value = 16;
   question.onDownButtonMouseDown();
-  jest.advanceTimersByTime(200);
+  vi.advanceTimersByTime(200);
   question.onButtonMouseUp();
   expect(question.value).toBe(14);
   question.onUpButtonMouseDown();
-  jest.advanceTimersByTime(200);
+  vi.advanceTimersByTime(200);
   question.onButtonMouseLeave();
   expect(question.value).toBe(16);
   question.onDownButtonMouseDown();
-  jest.advanceTimersByTime(200);
+  vi.advanceTimersByTime(200);
   question.onButtonMouseUp();
   expect(question.value).toBe(14);
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 test("Check spin editor question event callbacks if changeValueOnPressing is false", () => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
   const question = new QuestionSpinEditorModel("q1");
   question.changeValueOnPressing = false;
   question.value = 16;
@@ -115,16 +116,16 @@ test("Check spin editor question event callbacks if changeValueOnPressing is fal
 
   question.value = 16;
   question.onDownButtonMouseDown();
-  jest.advanceTimersByTime(200);
+  vi.advanceTimersByTime(200);
   question.onButtonMouseUp();
   expect(question.value).toBe(16);
   question.onUpButtonMouseDown();
-  jest.advanceTimersByTime(200);
+  vi.advanceTimersByTime(200);
   question.onButtonMouseLeave();
   expect(question.value).toBe(16);
   question.onDownButtonMouseDown();
-  jest.advanceTimersByTime(200);
+  vi.advanceTimersByTime(200);
   question.onButtonMouseUp();
   expect(question.value).toBe(16);
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
