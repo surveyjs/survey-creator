@@ -1951,9 +1951,22 @@ export var enStrings = {
     fontScale: "Font",
     names: {
       sc2020: "Survey Creator 2020",
-      "default-light": "Light",
-      "default-dark": "Dark",
-      "default-contrast": "Contrast"
+      "default-light": "Default Light",
+      "default-dark": "Default Dark",
+      "contrast-light": "Contrast Light",
+      "contrast-dark": "Contrast Dark",
+      "borderless-light": "Borderless Light",
+      "borderless-dark": "Borderless Dark",
+      "flat-light": "Flat Light",
+      "flat-dark": "Flat Dark",
+      "plain-light": "Plain Light",
+      "plain-dark": "Plain Dark",
+      "soft-light": "Soft Light",
+      "soft-dark": "Soft Dark",
+      "threedimensional-light": "3D Light",
+      "threedimensional-dark": "3D Dark",
+      "monochrome-light": "Monochrome Light",
+      "monochrome-dark": "Monochrome Dark",
     }
   },
   preset: {
