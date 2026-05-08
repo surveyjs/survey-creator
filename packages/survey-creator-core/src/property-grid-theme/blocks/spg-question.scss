@@ -27,7 +27,7 @@
 }
 
 .spg-question__title {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   width: 100%;
   margin: 0;
   padding: var(--ctr-label-padding-top, var(--sjs-spacing-x1)) var(--ctr-label-padding-right, 0px)
@@ -58,7 +58,7 @@
 }
 
 .spg-remaining-character-counter {
-  @include ctrSmallFont;
+  @include sjs2--typography--small;
   display: none;
   flex-direction: row;
   justify-content: flex-end;
@@ -71,7 +71,7 @@
 }
 
 .spg-question__description {
-  @include ctrSmallFont;
+  @include sjs2--typography--small;
   color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
   padding-bottom: calcSize(2);
   white-space: normal;
@@ -174,7 +174,7 @@
 }
 
 .spg-question__erbox {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   width: 100%;
   box-sizing: border-box;
   padding: var(--ctr-error-message-padding-top, var(--sjs-spacing-x1))
@@ -197,13 +197,13 @@ sv-question-error {
 }
 
 .spg-question__erbox-icon {
-  width: var(--ctr-error-message-icon-width, var(--sjs-font-size-x3));
-  height: var(--ctr-error-message-icon-height, var(--sjs-font-size-x3));
+  width: var(--sjs2-line-height-x300);
+  height: var(--sjs2-line-height-x300);
 
   .sv-svg-icon {
     vertical-align: top;
-    width: var(--ctr-error-message-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-error-message-icon-height, var(--sjs-font-size-x3));
+    width: var(--sjs2-line-height-x300);
+    height: var(--sjs2-line-height-x300);
   }
 
   use {

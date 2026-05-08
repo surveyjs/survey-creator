@@ -2,9 +2,7 @@
 @use "./notifier.scss";
 @use "./popup.scss";
 @use "./surface-placeholder.scss";
-@use "../lbr-font-sizes.scss";
 @use "../lbr-sizes.scss";
-@use "../ctr-font-sizes.scss";
 @use "../ctr-sizes.scss";
 @use "../ctr-colors.scss";
 @use "../ctr-base-units.scss";
@@ -172,7 +170,7 @@ survey-creator,
 // }
 
 .svc-creator__non-commercial-text {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   color: var(--ctr-page-banner-text-color, var(--sjs-secondary-foreground-100, #ffffffff));
   vertical-align: middle;
   padding: calcSize(1.5) calcSize(16);

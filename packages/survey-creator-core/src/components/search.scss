@@ -7,7 +7,7 @@
 
 .svc-search__input {
   @include textEllipsis;
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
 
   border: none;
   -webkit-appearance: none;
@@ -24,10 +24,9 @@
 }
 
 .svc-creator--mobile .svc-search__input {
-  $fontSize: var(--ctr-font-small-size, var(--sjs-font-size-x150));
+  $fontSize: var(--ctr-font-small-size, var(--sjs2-font-size-x150));
   font-size: Max(16px, #{$fontSize});
 }
-
 
 .svc-search__toolbar {
   display: flex;
@@ -45,10 +44,8 @@
   display: none;
 }
 
-
-
 .svc-search__toolbar-counter {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   display: flex;
   flex-shrink: 0;
 }

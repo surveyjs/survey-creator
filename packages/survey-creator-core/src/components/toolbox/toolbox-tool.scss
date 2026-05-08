@@ -14,8 +14,8 @@
 }
 .svc-toolbox__item-icon {
   display: block;
-  height: var(--ctr-toolbox-item-icon-height, var(--sjs-font-size-x3));
-  width: var(--ctr-toolbox-item-icon-width, var(--sjs-font-size-x3));
+  height: var(--sjs2-line-height-x300);
+  width: var(--sjs2-line-height-x300);
   pointer-events: none;
 }
 .svc-toolbox__tool {
@@ -78,7 +78,7 @@
 
 //is visible only on hover
 .svc-toolbox__item-banner {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   opacity: 0;
   box-sizing: border-box;
   align-items: center;
@@ -152,7 +152,7 @@
 }
 
 .svc-toolbox__item-title {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
 
   display: block;
   padding-inline-start: calcSize(1);
@@ -264,8 +264,8 @@
   }
   svg {
     fill: var(--ctr-toolbox-item-submenu-button-icon-color, var(--sjs-layer-1-foreground-50, #00000080));
-    width: var(--ctr-toolbox-item-submenu-button-icon-width, var(--sjs-font-size-x2));
-    height: var(--ctr-toolbox-item-submenu-button-icon-height, var(--sjs-font-size-x2));
+    width: var(--ctr-toolbox-item-submenu-button-icon-width, var(--sjs2-line-height-x200));
+    height: var(--ctr-toolbox-item-submenu-button-icon-height, var(--sjs2-line-height-x200));
   }
 }
 
