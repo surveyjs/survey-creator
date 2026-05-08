@@ -118,7 +118,7 @@ export class TabDesignerViewModel extends Base {
 
     this.initSurfaceToolbar();
     this.initSurvey();
-    //this.updateUnitDictionaryFromTheme();
+    this.updateUnitDictionaryFromTheme();
     this.updateSurfaceCssVariables();
   }
 
