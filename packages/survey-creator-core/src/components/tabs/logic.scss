@@ -236,6 +236,10 @@
   margin-top: 0;
 }
 
+.svc-creator-popup .sd-selectlist__item-body {
+  padding-inline-end: var(--sjs-spacing-x550);
+}
+
 .sl-row--multiple {
   .sl-panel {
     padding-bottom: 0;
