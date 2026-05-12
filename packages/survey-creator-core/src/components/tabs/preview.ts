@@ -68,8 +68,11 @@ export class PreviewViewModel extends Base {
   }
   @property({}) isPageToolbarVisible = new ComputedUpdater(() => notShortCircuitAnd(!this.pages.isEmpty, !this.surveyProvider.isMobileView));
   @property({}) tabContentAdditionalCss = new ComputedUpdater(() => {
+    const hasSimulatorFrame = this.simulator?.hasFrame;
+    const surveyIsEmpty = this.simulator?.survey?.isEmpty;
     return new CssClassBuilder()
-      .append("svc-test-tab--empty", this.simulator?.survey?.isEmpty)
+      .append("svc-test-tab--empty", surveyIsEmpty)
+      .append("svc-test-tab--with-simulator-frame", hasSimulatorFrame)
       .append("svc-creator-tab__content--with-toolbar", !!this.isPageToolbarVisible)
       .toString();
   });
