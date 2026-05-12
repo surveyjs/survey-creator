@@ -55,23 +55,9 @@ svc-tab-designer {
     }
   }
 
-  /* Fix designer surface
   .sd-description .sv-string-editor {
     &[aria-placeholder]:empty:before {
       color: var(--sjs2-color-component-header-default-description-placeholder, rgba(28, 27, 32, 0.4));
-    }
-  }
-*/
-
-  .sd-description {
-    @include sjs2--typography--default;
-    .sv-string-editor {
-      @include sjs2--typography--default;
-      color: var(--sjs2-color-component-header-default-description, rgba(28, 27, 32, 0.6));
-
-      &[aria-placeholder]:empty:before {
-        color: var(--sjs2-color-component-header-default-description-placeholder, rgba(28, 27, 32, 0.4));
-      }
     }
   }
 }
