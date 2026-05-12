@@ -68,6 +68,18 @@ const backgroundCornerRadiusSjs2VarNames: Record<string, Record<string, string>>
   },
 };
 
+export function cleanUpVarsFromCssVariables(cssVariables: { [index: string]: string }) {
+  Object.keys(backgroundCornerRadiusSjs2VarNames).forEach((outerKey) => {
+    const varMap = backgroundCornerRadiusSjs2VarNames[outerKey];
+    Object.keys(varMap).forEach((innerKey) => {
+      const cssVarName = varMap[innerKey];
+      if (cssVariables.hasOwnProperty(cssVarName)) {
+        delete cssVariables[cssVarName];
+      }
+    });
+  });
+}
+
 export function backgroundCornerRadiusToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
   const propKey = property.name.toLowerCase();
   const varMap = backgroundCornerRadiusSjs2VarNames[propKey];

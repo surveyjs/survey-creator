@@ -3,8 +3,8 @@ import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
-import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
-import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
+import { cleanUpFontSettingsVarsFromCssVariables, DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
+import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable, cleanUpVarsFromCssVariables } from "./theme-custom-questions/background-corner-radius";
 import { trimBoxShadowValue, parseBoxShadow, createBoxShadow } from "survey-core";
 import { HeaderModel } from "./header-model";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../../utils/configs";
@@ -563,40 +563,45 @@ export class ThemeModel extends Base implements ITheme {
     if (!!json["headerView"]) _headerJson["headerView"] = json["headerView"];
     this.header.fromJSON(_headerJson || {});
 
-    if (json.cssVariables) {
-      patchLegacyCSSVariables(json.cssVariables);
-      this["primaryColor"] = json.cssVariables["--sjs2-color-project-brand-600"];
-      super.fromJSON(json.cssVariables, options);
-      this.header.setCssVariables(json.cssVariables);
-
-      this.scale = !!this["--sjs2-base-unit-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-size"]) * 100 / 8) : undefined;
-      this.fontSize = !!this["--sjs2-base-unit-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-font-size"]) * 100 / 8) : undefined;
-      this.cornerRadius = this["--sjs2-base-unit-radius"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-radius"])) : undefined;
+    const cssVariables = { ...this.baseThemeVariables, ...json.cssVariables };
+    if (cssVariables) {
+      patchLegacyCSSVariables(cssVariables);
+      this["primaryColor"] = cssVariables["--sjs2-color-project-brand-600"];
       if (!!json["backgroundOpacity"])this.backgroundOpacity = json["backgroundOpacity"] * 100;
 
       this["questionPanel"] = backgroundCornerRadiusFromCssVariable(
         this.getPropertyByName("questionPanel"),
-        json.cssVariables,
+        cssVariables,
         "--sjs2-color-bg-basic-primary",
         "--sjs2-color-bg-basic-primary-dim",
         this.cornerRadius);
+
       this["editorPanel"] = backgroundCornerRadiusFromCssVariable(
         this.getPropertyByName("editorPanel"),
-        json.cssVariables,
+        cssVariables,
         "--sjs2-color-bg-basic-secondary",
         "--sjs2-color-bg-basic-secondary-dim",
         this.cornerRadius);
 
       Serializer.getProperties("theme").forEach(property => {
         if (property.type === "font") {
-          this[property.name] = fontsettingsFromCssVariable(property, json.cssVariables);
+          this[property.name] = fontsettingsFromCssVariable(property, cssVariables);
         }
       });
-      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs2-color-fg-basic-primary");
-      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs2-color-fg-basic-secondary");
-      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, "--sjs2-color-fg-basic-primary");
-      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, "--sjs2-color-fg-basic-secondary");
-      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, "--sjs2-color-fg-basic-primary", "--sjs2-color-fg-basic-secondary");
+      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), cssVariables, "--sjs2-color-fg-basic-primary");
+      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), cssVariables, "--sjs2-color-fg-basic-secondary");
+      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), cssVariables, "--sjs2-color-fg-basic-primary");
+      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), cssVariables, "--sjs2-color-fg-basic-secondary");
+      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), cssVariables, "--sjs2-color-fg-basic-primary", "--sjs2-color-fg-basic-secondary");
+
+      cleanUpVarsFromCssVariables(cssVariables);
+      cleanUpFontSettingsVarsFromCssVariables(cssVariables, ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "editorFont"]);
+      super.fromJSON(cssVariables, options);
+      this.header.setCssVariables(cssVariables);
+
+      this.scale = !!this["--sjs2-base-unit-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-size"]) * 100 / 8) : undefined;
+      this.fontSize = !!this["--sjs2-base-unit-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-font-size"]) * 100 / 8) : undefined;
+      this.cornerRadius = this["--sjs2-base-unit-radius"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-radius"])) : undefined;
     }
   }
 
@@ -620,7 +625,7 @@ export class ThemeModel extends Base implements ITheme {
     const cssVariables = {};
     Object.keys(result).forEach(key => {
       if (key.indexOf("--") == 0) {
-        if (result[key] !== this.baseThemeVariables[key]) cssVariables[key] = result[key];
+        cssVariables[key] = result[key];
         delete result[key];
       } else if (typeof result[key] === "object") {
 
