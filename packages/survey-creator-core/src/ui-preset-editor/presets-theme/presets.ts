@@ -3,6 +3,7 @@ import { listComponentCss } from "survey-creator-core";
 
 export var presetsCss = {
   root: "sps-root-modern",
+  rootTheme: "",
   container: "sps-container-modern",
   header: "sps-title sps-container-modern__title",
   body: "sps-body",
