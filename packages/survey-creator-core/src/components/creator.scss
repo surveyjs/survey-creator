@@ -115,6 +115,7 @@ survey-creator,
   overflow: hidden;
   position: relative;
   min-height: $tab-min-height;
+  background: var(--sjs2-color-utility-surface-designer);
 }
 
 .svc-creator__toolbox--right.svc-creator-tab {
