@@ -37,7 +37,7 @@
 }
 
 .svc-search__toolbar .sd-action-bar {
-  --sd-action-bar-gap: var(--sjs-spacing-x05)
+  --sd-action-bar-gap: var(--sjs-spacing-x05);
 }
 
 .svc-search__toolbar .sv-action--hidden {
@@ -48,4 +48,8 @@
   @include sjs2--typography--small-strong;
   display: flex;
   flex-shrink: 0;
+}
+
+.svc-action--search-close {
+  border-radius: var(--sjs2-radius-form-item);
 }
