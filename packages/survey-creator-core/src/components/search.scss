@@ -50,6 +50,6 @@
   flex-shrink: 0;
 }
 
-.svc-action--search-close {
-  border-radius: var(--sjs2-radius-form-item);
+.svc-search__bar-item {
+  --sd-action-border-radius: var(--sjs2-radius-form-item);
 }
