@@ -551,7 +551,6 @@ export class ThemeModel extends Base implements ITheme {
     if (!json) return;
 
     const _json = {};
-    assign(_json, this.baseThemeVariables);
     assign(_json, json);
     delete _json["header"];
     delete _json["cssVariables"];
@@ -563,10 +562,12 @@ export class ThemeModel extends Base implements ITheme {
     if (!!json["headerView"]) _headerJson["headerView"] = json["headerView"];
     this.header.fromJSON(_headerJson || {});
 
+    const completeThemeVariablesList = { ...this.baseThemeVariables, ...json.cssVariables };
+
     if (json.cssVariables) {
       patchLegacyCSSVariables(json.cssVariables);
-      this["primaryColor"] = json.cssVariables["--sjs2-color-project-brand-600"];
-      super.fromJSON(json.cssVariables, options);
+      this["primaryColor"] = completeThemeVariablesList["--sjs2-color-project-brand-600"];
+      super.fromJSON(completeThemeVariablesList, options);
       this.header.setCssVariables(json.cssVariables);
 
       this.scale = !!this["--sjs2-base-unit-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-size"]) * 100 / 8) : undefined;
@@ -577,14 +578,14 @@ export class ThemeModel extends Base implements ITheme {
       this["questionPanel"] = backgroundCornerRadiusFromCssVariable(
         this.getPropertyByName("questionPanel"),
         json.cssVariables,
-        "--sjs2-color-bg-basic-primary",
-        "--sjs2-color-bg-basic-primary-dim",
+        completeThemeVariablesList["--sjs2-color-bg-basic-primary"],
+        completeThemeVariablesList["--sjs2-color-bg-basic-primary-dim"],
         this.cornerRadius);
       this["editorPanel"] = backgroundCornerRadiusFromCssVariable(
         this.getPropertyByName("editorPanel"),
         json.cssVariables,
-        "--sjs2-color-bg-basic-secondary",
-        "--sjs2-color-bg-basic-secondary-dim",
+        completeThemeVariablesList["--sjs2-color-bg-basic-secondary"],
+        completeThemeVariablesList["--sjs2-color-bg-basic-secondary-dim"],
         this.cornerRadius);
 
       Serializer.getProperties("theme").forEach(property => {
@@ -592,11 +593,11 @@ export class ThemeModel extends Base implements ITheme {
           this[property.name] = fontsettingsFromCssVariable(property, json.cssVariables);
         }
       });
-      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs2-color-fg-basic-primary");
-      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs2-color-fg-basic-secondary");
-      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, "--sjs2-color-fg-basic-primary");
-      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, "--sjs2-color-fg-basic-secondary");
-      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, "--sjs2-color-fg-basic-primary", "--sjs2-color-fg-basic-secondary");
+      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-primary"]);
+      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-secondary"]);
+      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-primary"]);
+      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-secondary"]);
+      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-primary"], completeThemeVariablesList["--sjs2-color-fg-basic-secondary"]);
     }
   }
 
