@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@types/ace": "0.0.32",
-    "@types/node": "7.0.4",
+    "@types/node": "^20.0.0",
     "@types/papaparse": "^5.5.2",
     "@types/qunit": "2.0.31",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
