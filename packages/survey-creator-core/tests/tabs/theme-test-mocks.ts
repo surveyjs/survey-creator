@@ -1,17 +1,14 @@
 import { DomWindowHelper } from "survey-core";
 import { vi, type MockInstance } from "vitest";
+import { getRGBaColorTestBridge } from "../survey-core-getRGBA-test-state";
 
-let getRGBaColorSpy: MockInstance | undefined;
-
+/** ESM namespace exports are not spyable; wiring lives in survey-core-getRGBA-mock-setup.ts (first setup file). */
 export async function mockSurveyCoreGetRGBaColorIdentity(): Promise<void> {
-  getRGBaColorSpy?.mockRestore();
-  const surveyCore = await vi.importActual<typeof import("survey-core")>("survey-core");
-  getRGBaColorSpy = vi.spyOn(surveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+  getRGBaColorTestBridge.useIdentity = true;
 }
 
 export function restoreSurveyCoreGetRGBaColorMock(): void {
-  getRGBaColorSpy?.mockRestore();
-  getRGBaColorSpy = undefined;
+  getRGBaColorTestBridge.useIdentity = false;
 }
 
 export function mockDomWindowGetComputedStyleFromInlineStyles(): MockInstance {

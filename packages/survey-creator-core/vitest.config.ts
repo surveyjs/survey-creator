@@ -68,7 +68,7 @@ export default defineConfig({
           testTimeout: 30000,
           hookTimeout: 30000,
           dangerouslyIgnoreUnhandledErrors: true,
-          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+          setupFiles: ["./tests/survey-core-getRGBA-mock-setup.ts", "./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
       {
@@ -82,7 +82,7 @@ export default defineConfig({
           testTimeout: 30000,
           hookTimeout: 30000,
           dangerouslyIgnoreUnhandledErrors: true,
-          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+          setupFiles: ["./tests/survey-core-getRGBA-mock-setup.ts", "./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
     ],
