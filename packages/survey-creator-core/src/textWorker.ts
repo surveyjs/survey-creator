@@ -18,7 +18,7 @@ class SurveyForTextWorker extends SurveyModel {
     super.endLoadingFromJson();
   }
   //Do nothing on end loading
-  endLoadingFromJson(): void {}
+  endLoadingFromJson(): void { }
   getSurveyData(): ISurveyData { return null; }
 }
 
@@ -83,7 +83,7 @@ class SurveyTextWorkerJsonErrorFixer extends SurveyTextWorkerJsonErrorFixerBase 
     let indent = "";
     while(index > 0 && (text[index] === " " || text[index] === "\t")) {
       indent += text[index];
-      index --;
+      index--;
     }
     if (!indent) return content;
     const lines = content.split("\n");
@@ -260,6 +260,7 @@ export class SurveyTextWorker {
       const jsonErrors = this.surveyValue.jsonErrors;
       if (Array.isArray(jsonErrors)) {
         for (var i = 0; i < jsonErrors.length; i++) {
+          if (this.isIgnorableError(jsonErrors[i])) continue;
           const error = new SurveyTextWorkerJsonError(jsonErrors[i]);
           error.correctAt(this.text);
           this.errors.push(error);
@@ -268,6 +269,9 @@ export class SurveyTextWorker {
       this.getDuplicatedNamesErrors().forEach(error => this.errors.push(error));
     }
     this.setErrorsPositionByChartAt();
+  }
+  private isIgnorableError(jsonError: JsonError): boolean {
+    return jsonError.type === "incorrectvalue" && jsonError["property"]?.name === "locale" && jsonError["value"] === "default";
   }
   private updateJsonPositions(jsonObj: any) {
     jsonObj["pos"]["self"] = jsonObj;
@@ -330,9 +334,9 @@ export class SurveyTextWorker {
   private getDuplicatedElements(): Array<Base> {
     const res = [];
     const names = {};
-    this.survey.pages.forEach(p=> this.checkDuplicatedElement(p, names, res));
-    SurveyHelper.getAllElements(this.survey, true).forEach(p=> this.checkDuplicatedElement(p, names, res));
-    SurveyHelper.getAllElements(this.survey, false).forEach(q=> this.checkDuplicatedElement(q, names, res));
+    this.survey.pages.forEach(p => this.checkDuplicatedElement(p, names, res));
+    SurveyHelper.getAllElements(this.survey, true).forEach(p => this.checkDuplicatedElement(p, names, res));
+    SurveyHelper.getAllElements(this.survey, false).forEach(q => this.checkDuplicatedElement(q, names, res));
     return res;
   }
   private checkDuplicatedElement(el: any, names: any, duplicates: Array<Base>): void {

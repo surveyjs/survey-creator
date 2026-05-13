@@ -1,4 +1,4 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks, CssClassBuilder } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks, CssClassBuilder, ITheme } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
@@ -6,7 +6,6 @@ import { SurveyHelper } from "../../survey-helper";
 import { DragDropSurveyElements } from "../../dragdrop-survey-elements";
 import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
 import { assign } from "../../utils/utils";
-import designTabSurveyThemeJSON from "../../designTabSurveyThemeJSON";
 import "./designer.scss";
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.designMode.showEmptyTitles;
@@ -26,6 +25,13 @@ export class TabDesignerViewModel extends Base {
     "--lbr-spacing-unit": 8,
     "--lbr-corner-radius-unit": 8,
     "--lbr-stroke-unit": 1,
+    "--sjs-base-unit": 8,
+    "--sjs2-base-unit-size": 8,
+    "--sjs2-base-unit-spacing": 8,
+    "--sjs2-base-unit-radius": 8,
+    "--sjs2-base-unit-border-width": 1,
+    "--sjs2-base-unit-font-size": 8,
+    "--sjs2-base-unit-line-height": 8,
   };
 
   @property() newPage: PageModel;
@@ -101,9 +107,7 @@ export class TabDesignerViewModel extends Base {
 
     this.creator.dragDropChoices.onShortcutCreated = (shortcut: HTMLElement) => {
       const cssVariables = {};
-      if (this.creator.dragDropChoices["parentElement"]?.survey["isPopupEditorContent"]) {
-        assign(cssVariables, designTabSurveyThemeJSON.cssVariables);
-      } else {
+      if (!this.creator.dragDropChoices["parentElement"]?.survey["isPopupEditorContent"]) {
         shortcut.classList.add("svc-surface-drag-drop-choices-shortcut");
         assign(cssVariables, this.surfaceCssVariables);
       }
@@ -114,34 +118,27 @@ export class TabDesignerViewModel extends Base {
 
     this.initSurfaceToolbar();
     this.initSurvey();
+    this.updateUnitDictionaryFromTheme();
     this.updateSurfaceCssVariables();
   }
+
+  public updateUnitDictionaryFromTheme() {
+    Object.keys(this.unitDictionary).forEach(key => {
+      this.unitDictionary[key] = parseFloat(this.creator.defaultSurfaceCssVariables[key]) || this.unitDictionary[key];
+    });
+  }
+
   public updateSurfaceCssVariables() {
-    const cssVariables = {};
-    assign(
-      cssVariables,
-      designTabSurveyThemeJSON.cssVariables,
-      this.creator.creatorTheme?.cssVariables || {},
-      this.scaleCssVariables
-    );
-    this.surfaceCssVariables = cssVariables;
+    this.surfaceCssVariables = { ...this.creator.defaultSurfaceCssVariables, ...this.scaleCssVariables };
   }
 
   private initSurfaceToolbar() {
     this.surfaceToolbar = new ActionContainer();
 
     let defaultActionBarCss = {
-      root: "sv-action-bar svc-tab-designer__surface-toolbar",
-      defaultSizeMode: "",
-      smallSizeMode: "",
-      item: "svc-page-navigator__button",
-      itemWithTitle: "",
-      itemAsIcon: "",
-      itemActive: "svc-page-navigator__button--active",
-      itemPressed: "",
-      itemIcon: "svc-page-navigator__button-icon",
-      itemTitleWithIcon: "",
+      root: "sd-action-bar svc-tab-designer__surface-toolbar",
     };
+    this.surfaceToolbar.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "small" });
     this.surfaceToolbar.cssClasses = defaultActionBarCss;
 
     const surfaceToolbarItems: Array<IAction> = [];

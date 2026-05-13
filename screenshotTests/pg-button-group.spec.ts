@@ -15,7 +15,7 @@ test.describe(title, () => {
 
     await page.click('[title="Quiz Mode"]');
 
-    const buttongroup = page.locator(".spg-button-group").filter({ has: page.locator(":visible") });
+    const buttongroup = page.locator(".sv-button-group").filter({ has: page.locator(":visible") });
     await compareScreenshot(page, buttongroup, "button-group-disabled.png");
 
     await page.locator("span").filter({ hasText: "Use a timer" }).filter({ has: page.locator(":visible") }).click();

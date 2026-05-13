@@ -1,30 +1,52 @@
 import type { Locator, Page } from "@playwright/test";
 import { expect, test as baseTest } from "@playwright/test";
 
-export const url = "http://127.0.0.1:8080/testCafe/testcafe";
-export const urlByPage = "http://127.0.0.1:8080/testCafe/by-page";
-export const urlPreviewThemeSwitcher = "http://127.0.0.1:8080/testCafe/preview-theme-switcher";
-export const urlThemeForPreview = "http://127.0.0.1:8080/testCafe/theme-for-preview-option";
-export const urlDropdownCollapseView = "http://127.0.0.1:8080/testCafe/dropdown-collapse-view";
-export const urlLocalized_de = "http://127.0.0.1:8080/testCafe/testcafe_localized_ui";
-export const urlPresets = "http://127.0.0.1:8080/testCafe/presets";
+export const url = "http://127.0.0.1:8080/test-pages/default";
+export const urlByPage = "http://127.0.0.1:8080/test-pages/by-page";
+export const urlPreviewThemeSwitcher = "http://127.0.0.1:8080/test-pages/preview-theme-switcher";
+export const urlThemeForPreview = "http://127.0.0.1:8080/test-pages/theme-for-preview-option";
+export const urlDropdownCollapseView = "http://127.0.0.1:8080/test-pages/dropdown-collapse-view";
+export const urlLocalized_de = "http://127.0.0.1:8080/test-pages/localized_ui";
+export const urlNoLicense = "http://127.0.0.1:8080/test-pages/no-license";
+export const urlWidget = "http://127.0.0.1:8080/test-pages/widget";
+export const urlThemeTab = "http://127.0.0.1:8080/test-pages/theme-tab";
+export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages/creator-themes";
+export const urlPresets = "http://127.0.0.1:8080/test-pages/presets";
 
-export async function compareScreenshot(page: Page, elementSelector: string | Locator | undefined, screenshotName: string, elementIndex = 0) {
+export async function compareScreenshot(
+  page: Page,
+  elementSelector: string | Locator | undefined,
+  screenshotName: string,
+  options: {
+      animations?: "disabled" | "allow",
+      caret?: "hide" | "initial",
+      mask?: Array<Locator>,
+      maskColor?: string,
+      maxDiffPixelRatio?: number,
+      maxDiffPixels?: number,
+      omitBackground?: boolean,
+      scale?: "css" | "device",
+      stylePath?: string | Array<string>,
+      threshold?: number,
+      timeout?: number,
+  } = {}) {
   let currentElement = elementSelector;
   if (!!currentElement && typeof currentElement == "string") {
     currentElement = page.locator(currentElement);
   }
 
+  const pwOptions: {timeout: number, maxDiffPixels?: number} = {
+    timeout: 10000,
+    maskColor: "#000000",
+    ...options
+  };
+
   if (!!currentElement) {
     const element = (<Locator>currentElement).filter({ visible: true });
-    await expect.soft(element.nth(elementIndex)).toBeVisible();
-    await expect.soft(element.nth(elementIndex)).toHaveScreenshot(screenshotName, {
-      timeout: 10000
-    });
+    await expect.soft(element.nth(0)).toBeVisible();
+    await expect.soft(element.nth(0)).toHaveScreenshot(screenshotName, pwOptions);
   } else {
-    await expect.soft(page).toHaveScreenshot(screenshotName, {
-      timeout: 10000
-    });
+    await expect.soft(page).toHaveScreenshot(screenshotName, pwOptions);
   }
 }
 
@@ -45,6 +67,7 @@ export const test = baseTest.extend<{page: void, skipJSErrors: boolean}>({
 });
 
 export const setJSON = async (page: Page, json: object) => {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((json) => {
     window["creator"].text = JSON.stringify(json);
   }, json);
@@ -91,11 +114,11 @@ export async function doDragDrop({ page, element, target, options }: { page: Pag
 }
 
 export async function showCreatorSettings(page) {
-  await page.locator(".svc-sidebar-tabs__bottom-container .svc-menu-action__button").click();
+  await page.locator(".svc-sidebar-tabs__bottom-container .sd-action").click();
 }
 export async function showPresets(page) {
   await showCreatorSettings(page);
-  await page.locator(".sps-launch__card").click();
+  await page.locator(".spg-launch__card").click();
 }
 
 export const creatorTabDesignerName = "Designer";
@@ -108,20 +131,44 @@ export const generalGroupName = "General";
 export const logicGroupName = "Conditions";
 export const inputMaskSettingsGroupName = "Input Mask Settings";
 
+export const objectSelectorButton = (page) => page.locator(".svc-side-bar__container-header .sv-action--object-selector .sd-action");
+
 export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes"): Locator {
   return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) })).filter({ visible: true });
 }
 
+/** Replaces `window.creator` via the React test page `updateCreatorModel` helper (see `test-pages/default.html`). */
+export const recreateCreatorWithOptions = async (page: Page, creatorOptions: Record<string, unknown>, json: object) => {
+  await expect(getTabbedMenuItemByText(page, creatorTabDesignerName)).toBeVisible();
+  await page.evaluate(
+    ({ creatorOptions, json }) => {
+      const defaults = {
+        expandCollapseButtonVisibility: "never",
+        showLogicTab: true,
+        showTranslationTab: true
+      };
+      (window as any).updateCreatorModel({ ...defaults, ...creatorOptions }, json);
+    },
+    { creatorOptions, json }
+  );
+};
+
 export function getBarItemByTitle(page: Page, text: string): Locator {
-  return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
+  return page.locator(".sd-action[title=\"" + text + "\"]");
 }
 
 export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
-  return page.locator(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
+  return page.locator(".svc-question__content-actions .sd-action[title=\"" + text + "\"]");
 }
 
 export function getListItemByText(page: Page, text: string): Locator {
-  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true }).filter({ visible: true });
+  return page.locator(".sv-popup__content .sd-menu-list .sd-menu-item").getByText(text, { exact: true }).filter({ visible: true });
+}
+
+export function getVisibleSelectListItemByText(page: Page, text: string): Locator {
+  return page.locator(".sv-popup__container .sd-selectlist__item", {
+    has: page.getByText(text, { exact: true })
+  }).filter({ visible: true });
 }
 
 export function getMenuItemByText(page: Page, text: string): Locator {
@@ -238,15 +285,15 @@ export async function handleShiftEnter(page: Page, selector: string) {
   }, selector);
 }
 
-export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
+export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sd-action__title";
 
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
-  await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
-  await page.locator(".svc-list__item span").getByText(text, { exact: true }).filter({ visible: true }).click();
+  await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
+  await page.locator(".sd-menu-item span").getByText(text, { exact: true }).filter({ visible: true }).click();
 }
 
 export function getAddNewQuestionButton(page: Page): Locator {
-  return page.locator(".svc-element__add-new-question > span").getByText("Add Question");
+  return page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn > span").getByText("Add Question");
 }
 
 export function getToolboxItemByText(page: Page, text: string): Locator {
@@ -255,6 +302,12 @@ export function getToolboxItemByText(page: Page, text: string): Locator {
 
 export function getSubToolboxItemByText(page: Page, text: string): Locator {
   return page.locator(".svc-toolbox__item-subtype").getByText(text, { exact: true });
+}
+
+export async function hideElement(page: Page, selector: string) {
+  await page.locator(selector).evaluate((element) => {
+    element.style.visibility = "hidden";
+  });
 }
 
 export { expect };

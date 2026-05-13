@@ -23,8 +23,8 @@ import Switcher from "./components/Switcher.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import ComponentContainer from "./components/ComponentContainer.vue";
 import Test from "./tabs/preview/Test.vue";
+import ContainerTab from "./tabs/ContainerTab.vue";
 
-import TestAgain from "./tabs/preview/TestAgain.vue";
 import SurveyResults from "./tabs/preview/SurveyResults.vue";
 import SurveyResultsRow from "./tabs/preview/SurveyResultsRow.vue";
 
@@ -47,7 +47,6 @@ import Color from "./custom-questions/Color.vue";
 import ColorItem from "./custom-questions/ColorItem.vue";
 import File from "./custom-questions/File.vue";
 import SpinEditor from "./custom-questions/SpinEditor.vue";
-import TextWithReset from "./custom-questions/TextWithReset.vue";
 import BooleanSwitch from "./custom-questions/BooleanSwitch.vue";
 import { editableStringRendererName } from "survey-creator-core";
 
@@ -60,9 +59,10 @@ import ToolboxCategory from "./toolbox/ToolboxCategory.vue";
 import ToolboxList from "./toolbox/ToolboxList.vue";
 
 import Designer from "./tabs/designer/Designer.vue";
+import SideBarLaunchCard from "./side-bar/SideBarLaunchCard.vue";
+import IconItem from "./components/IconItem.vue";
 import Page from "./tabs/designer/Page.vue";
 import AddQuestion from "./tabs/designer/AddQuestion.vue";
-import AddQuestionTypeSelector from "./tabs/designer/AddQuestionTypeSelector.vue";
 import Row from "./tabs/designer/Row.vue";
 import QuestionAdorner from "./adorners/Question.vue";
 import QuestionImageAdorner from "./adorners/QuestionImage.vue";
@@ -73,6 +73,7 @@ import CellQuestion from "./adorners/CellQuestion.vue";
 import Panel from "./adorners/Panel.vue";
 import ItemValue from "./adorners/ItemValue.vue";
 import ImageItemValue from "./adorners/ImageItemValue.vue";
+import ImageItemDragAction from "./adorners/ImageItemDragAction.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
 import Search from "./components/Search.vue";
@@ -83,6 +84,8 @@ import QuestionDropdown from "./adorners/QuestionDropdown.vue";
 import CellQuestionDropdownVue from "./adorners/CellQuestionDropdown.vue";
 import CustomWidget from "./adorners/CustomWidget.vue";
 import QuestionBanner from "./adorners/QuestionBanner.vue";
+import SpinEditorButton from "./custom-questions/SpinEditorButton.vue";
+import FileEditorButton from "./custom-questions/FileEditorButton.vue";
 
 function registerComponentWithFunction(
   registerFunc: (name: string, component: any) => void,
@@ -130,12 +133,9 @@ function registerComponents(
   registerComponent("sv-boolean-switch", BooleanSwitch);
   registerComponent("survey-fileedit", File);
   registerComponent("survey-spinedit", SpinEditor);
-  registerComponent("survey-textwithreset", TextWithReset);
-  registerComponent("survey-commentwithreset", TextWithReset);
   registerComponent("survey-widget", SurveyComponent);
   registerComponent("survey-simulator", Simulator);
   registerComponent("svc-tab-preview", Test);
-  registerComponent("svc-complete-page", TestAgain);
   registerComponent("survey-results", SurveyResults);
   registerComponent("survey-results-table-row", SurveyResultsRow);
 
@@ -152,6 +152,7 @@ function registerComponents(
   registerComponent("svc-tab-theme", Theme);
 
   registerComponent("svc-component-container", ComponentContainer);
+  registerComponent("svc-tab-container", ContainerTab);
 
   registerComponent("svc-toolbox", AdaptiveToolbox);
   registerComponent("svc-toolbox-list", ToolboxList);
@@ -163,12 +164,13 @@ function registerComponents(
   registerComponent(editableStringRendererName, StringEditor);
 
   registerComponent("svc-tab-designer", Designer);
+  registerComponent("svc-side-bar-launch-card", SideBarLaunchCard);
+  registerComponent("svc-presets-icon-item", IconItem);
   registerComponent("svc-page-navigator", PageNavigator);
   registerComponent("svc-page-navigator-item", PageNavigatorItem);
   registerComponent("svc-page", Page);
   registerComponent("svc-row", Row);
   registerComponent("svc-add-new-question-btn", AddQuestion);
-  registerComponent("svc-add-question-type-selector", AddQuestionTypeSelector);
   registerComponent("svc-question", QuestionAdorner);
   registerComponent("svc-rating-question", QuestionAdorner);
   registerComponent("svc-rating-question-content", RatingAdorner);
@@ -182,10 +184,13 @@ function registerComponents(
   registerComponent("svc-panel", Panel);
   registerComponent("svc-item-value", ItemValue);
   registerComponent("svc-image-item-value", ImageItemValue);
+  registerComponent("svc-image-item-drag-action", ImageItemDragAction);
   registerComponent("svc-dropdown-question", QuestionDropdown);
   registerComponent("svc-dropdown-question-adorner", Dropdown);
   registerComponent("svc-widget-question", CustomWidget);
   registerComponent("svc-question-banner", QuestionBanner);
+  registerComponent("sv-spinedit-button", SpinEditorButton);
+  registerComponent("sv-fileedit-button", FileEditorButton);
 }
 
 registerComponents((name, component) =>

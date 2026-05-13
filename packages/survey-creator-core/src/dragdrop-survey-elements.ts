@@ -543,8 +543,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     };
 
     const srcContainer = src.parent || src.page;
+    let movingSurvey: SurveyModel = null;
     if (!!srcContainer) {
-      (page.survey as SurveyModel).startMovingQuestion();
+      movingSurvey = page.survey as SurveyModel;
+      movingSurvey?.startMovingQuestion();
       srcContainer.removeElement(src);
     }
     let dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
@@ -556,7 +558,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       const destParent = dest.parent || dest.page;
       if (destParent) (<PanelModelBase>destParent).insertElement(src, dest, convertLocation());
     }
-    (page.survey as SurveyModel).stopMovingQuestion();
+    if (!!movingSurvey) {
+      movingSurvey.stopMovingQuestion();
+    }
     return dragged;
   };
 

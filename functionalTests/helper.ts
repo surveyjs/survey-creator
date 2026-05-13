@@ -1,13 +1,13 @@
 import { Selector, ClientFunction } from "testcafe";
 
-export const url = "http://127.0.0.1:8080/testCafe/testcafe";
+export const url = "http://127.0.0.1:8080/test-pages/testcafe";
 // export const url =
 //     "http://127.0.0.1:7777/packages/survey-creator-knockout/example/index.html";
-export const urlByPage = "http://127.0.0.1:8080/testCafe/by-page";
-export const urlPreviewThemeSwitcher = "http://127.0.0.1:8080/testCafe/preview-theme-switcher";
-export const urlThemeForPreview = "http://127.0.0.1:8080/testCafe/theme-for-preview-option";
-export const urlDropdownCollapseView = "http://127.0.0.1:8080/testCafe/dropdown-collapse-view";
-export const urlLocalized_de = "http://127.0.0.1:8080/testCafe/testcafe_localized_ui";
+export const urlByPage = "http://127.0.0.1:8080/test-pages/by-page";
+export const urlPreviewThemeSwitcher = "http://127.0.0.1:8080/test-pages/preview-theme-switcher";
+export const urlThemeForPreview = "http://127.0.0.1:8080/test-pages/theme-for-preview-option";
+export const urlDropdownCollapseView = "http://127.0.0.1:8080/test-pages/dropdown-collapse-view";
+export const urlLocalized_de = "http://127.0.0.1:8080/test-pages/testcafe_localized_ui";
 
 export const base64image =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==";
@@ -43,11 +43,11 @@ export const getItemValueByIndex = ClientFunction((questionName, index) => {
 });
 
 export const handleShiftEnter = ClientFunction((selector: string) => {
-  document.querySelector(selector).addEventListener("keypress", function (e: any) {
+  (window as any).creator.rootElement.getRootNode().querySelector(selector).addEventListener("keypress", function (e: any) {
     if (e.charCode === 13 && e.shiftKey) {
-      var editorEl = document.querySelector(selector) as any;
+      var editorEl = (window as any).creator.rootElement.getRootNode().querySelector(selector) as any;
       var selection = window.getSelection() as any;
-      var range = document.createRange();
+      var range = (window as any).creator.rootElement.getRootNode().createRange();
 
       editorEl.innerHTML += "<div><br/></div>";
 
@@ -79,7 +79,7 @@ export const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide
 export const surveySettingsButtonSelector = Selector(".sv-action-bar-item[title=\"Survey settings\"]");
 export const themeSettingsButtonSelector = Selector(".sv-action-bar-item[title=\"Theme settings\"]");
 export const propertyGridSelector = Selector(".svc-side-bar__container");
-export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
+export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sd-action");
 export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .svc-list__container");
 export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
 
@@ -182,7 +182,7 @@ export async function changeToolboxSearchEnabled(enabled: boolean) {
 
 export async function setDirRTL() {
   await ClientFunction(() => {
-    document.body.setAttribute("dir", "rtl");
+    (window as any).creator.rootElement.getRootNode().body.setAttribute("dir", "rtl");
   })();
 }
 

@@ -7,7 +7,7 @@ export var persianStrings = {
     edit: "ویرایش",
     // "Watch and learn how to create surveys"
     externalHelpLink: "نگاه کنید و ساختن نظرسنجی را آموزش ببینید",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "لطفا از جعبه ابزار سوالی در اینجا قرار دهید",
@@ -238,6 +238,18 @@ export var persianStrings = {
     options: "انتخاب ها",
     // "Generate Valid JSON"
     generateValidJSON: "تولید کد معتبر JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "عملکرد ناشناخته: «{0}».",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "توابع ناشناخته: «{0}».",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "متغیر ناشناخته: «{0}».",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "متغیرهای ناشناخته: «{0}».",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "خطای نحوی.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "خطای معنایی.",
     // "Generate Readable JSON"
     generateReadableJSON: "تولید کد خوانا JSON",
     // "Toolbox"
@@ -753,6 +765,14 @@ export var persianStrings = {
       // [Auto-translated] "Expression"
       expression: "بیان"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "بیان"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "بیان"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -1100,6 +1120,8 @@ export var persianStrings = {
     choicesOrder: "ترتیب گزینه را انتخاب کنید",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "اجازه دادن به انتخاب های سفارشی",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "متن فرمان «ایجاد انتخاب سفارشی»",
     // "Visible"
     visible: "نمایش داده شود؟",
     // "Required"
@@ -1480,6 +1502,66 @@ export var persianStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "فرمت راهنمای ابزار"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "آدرس تصویر",
+      // [Auto-translated] "Areas"
+      areas: "مناطق",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "اجازه انتخاب های متعدد را بدهید",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "نام ملک ارزش",
+      // [Auto-translated] "Shape"
+      shape: "شکل",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "رنگ پرکننده بیکار",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "رنگ خط بیکار",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "عرض کورس بیکار",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "رنگ پرکننده شناور",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "رنگ ضربه شناور",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "عرض ضربه شناور",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "رنگ پرکننده انتخابی",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "رنگ ضربه انتخاب شده",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "عرض خط انتخاب شده",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "حداکثر مناطق انتخاب شده",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "حداقل مناطق انتخاب شده"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "ارزش",
+      // [Auto-translated] "Shape"
+      shape: "شکل",
+      // [Auto-translated] "Coordinates"
+      coords: "مختصات",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "رنگ پرکننده بیکار",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "رنگ خط بیکار",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "عرض کورس بیکار",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "رنگ پرکننده شناور",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "رنگ ضربه شناور",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "عرض ضربه شناور",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "رنگ پرکننده انتخابی",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "رنگ ضربه انتخاب شده",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "عرض خط انتخاب شده"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "ارتفاع تصویر",
@@ -1510,6 +1592,8 @@ export var persianStrings = {
     minErrorText: "پیام خطای \"مقدار کمتر از حداقل است\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "\"مقدار بیش از حداکثر\" پیام خطا",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "پیام خطای «مقدار با اندازه گام مطابقت ندارد»",
     // "\"Empty comment\" error message"
     otherErrorText: "پیام خطای \"نظر خالی\"",
     // "Error message for duplicate responses"
@@ -2570,7 +2654,7 @@ export var persianStrings = {
     loadFromServer: "بارگزاری JSON از سرور",
     // "Scripts and styles"
     titleScript: "اسکریپت و شیوه نمایش",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
     // "JavaScript"
     titleJavaScript: "جاوااسکریپت"
@@ -3540,7 +3624,9 @@ export var persianStrings = {
       advanced: "پیشرفته",
       // [Auto-translated] "Expert"
       expert: "کارشناس"
-    }
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "پریست اعمال شده"
   }
 };
 

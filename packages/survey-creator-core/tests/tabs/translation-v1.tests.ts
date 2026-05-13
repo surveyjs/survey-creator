@@ -453,9 +453,11 @@ test("Export settings.translation.prefix", () => {
   var translation = new Translation(survey);
   translation.reset();
   const exportStr1 = translation.exportToCSV();
+  const oldExportPrefix = settings.translation.exportPrefix;
   settings.translation.exportPrefix = "12345;";
   const exportStr2 = translation.exportToCSV();
   expect(exportStr2).toEqual("12345;" + exportStr1);
+  settings.translation.exportPrefix = oldExportPrefix;
 });
 test("Merging a locale with default", () => {
   surveyLocalization.defaultLocale = "de";

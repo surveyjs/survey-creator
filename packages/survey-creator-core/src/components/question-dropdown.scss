@@ -30,16 +30,8 @@
     margin: 0 calcSize(4);
   }
 
-  .svc-action-button {
-    @include lbrDefaultBoldFont;
-    margin-left: var(--ctr-survey-radio-button-group-show-more-button-margin-left, var(--lbr-spacing-x6));
-    margin-top: var(--ctr-survey-radio-button-group-show-more-button-margin-top, var(--lbr-spacing-x05));
-    padding: var(--ctr-survey-action-button-padding-top, var(--lbr-spacing-x1))
-      var(--ctr-survey-action-button-padding-right, var(--lbr-spacing-x3))
-      var(--ctr-survey-action-button-padding-bottom, var(--lbr-spacing-x1))
-      var(--ctr-survey-action-button-padding-left, var(--lbr-spacing-x3));
-    border-radius: var(--ctr-survey-action-button-corner-radius, var(--lbr-corner-radius-x1));
-
-    cursor: pointer;
+  .svc-question__dropdown-collapse-button {
+    margin-left: calc(var(--sjs2-spacing-x700, 56px) + var(--sjs2-spacing-x025, 2px));
+    margin-top: calc(var(--sjs2-spacing-x050, 4px));
   }
 }

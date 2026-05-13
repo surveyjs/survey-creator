@@ -111,10 +111,10 @@ test("Check image loading indicator", async ({ page }) => {
 
   const root = page.locator(".svc-question__content--image");
   await root.click({ position: { x: 5, y: 5 } });
-  await page.locator(".svc-question__content--image .svc-context-button").click();
+  await page.locator(".svc-image-question-controls .sd-action").click();
 
   await page.evaluate(() => {
-    (<HTMLElement>document.querySelector(".sd-loading-indicator .sv-svg-icon")).style.animation = "none";
+    (<HTMLElement>(window as any).creator.rootElement.getRootNode().querySelector(".sd-loading-indicator .sv-svg-icon")).style.animation = "none";
   });
 
   await expect(root).toHaveScreenshot("image-loading.png");

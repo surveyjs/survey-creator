@@ -44,15 +44,15 @@ test.describe(title, () => {
     await question1.click();
     await choicesTab.click();
     await expect(items).not.toBeVisible();
-    await page.locator(".spg-button-group__item-caption").getByText("Manual", { exact: true }).click();
+    await page.locator(".sv-button-group__item-caption").getByText("Manual", { exact: true }).click();
     await expect(items).toBeVisible();
-    await page.locator(".spg-button-group__item-caption").getByText("Auto-generate", { exact: true }).click();
+    await page.locator(".sv-button-group__item-caption").getByText("Auto-generate", { exact: true }).click();
     await expect(items).not.toBeVisible();
   });
 
   test("Check survey settings button", async ({ page }) => {
     const question1 = page.locator("[data-name=\"q1\"]");
-    const maskPage = page.locator('.svc-menu-action__button[title="Input Mask Settings"]');
+    const maskPage = page.locator('.svc-sidebar-tabs__item .sd-action[title="Input Mask Settings"]');
     await page.evaluate(() => {
       window["creator"].showOneCategoryInPropertyGrid = true;
     });

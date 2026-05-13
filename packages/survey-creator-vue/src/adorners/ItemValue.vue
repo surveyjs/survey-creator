@@ -26,52 +26,14 @@
           :title="adorner.dragTooltip"
         ></SvComponent>
       </span>
-      <span
-        v-if="adorner.allowAdd"
-        class="svc-item-value-controls__button svc-item-value-controls__add"
-        v-key2click
-        @click="adorner.add(adorner)"
-        role="button"
-        :aria-label="adorner.tooltip"
-        ><SvComponent
-          :is="'sv-svg-icon'"
-          :iconName="'icon-add_16x16'"
-          :size="'auto'"
-          :title="adorner.tooltip"
-        ></SvComponent
-      ></span>
-      <span
-        v-if="adorner.allowRemove"
-        class="svc-item-value-controls__button svc-item-value-controls__remove"
-        v-key2click
-        @click="adorner.remove(adorner)"
-        @blur="adorner.onFocusOut($event)"
-        role="button"
-        :aria-label="adorner.tooltip"
-        ><SvComponent
-          :is="'sv-svg-icon'"
-          :iconName="'icon-remove_16x16'"
-          :size="'auto'"
-          :title="adorner.tooltip"
-        ></SvComponent
-      ></span>
+      <SvComponent v-if="adorner.allowAdd" :is="'sv-action-bar-item'" :item="adorner.addAction"></SvComponent>
+      <SvComponent v-if="adorner.allowRemove" :is="'sv-action-bar-item'" :item="adorner.removeAction"></SvComponent>
     </div>
     <div class="svc-item-value__item" @click="adorner.select(adorner, $event)">
       <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
     </div>
     <div v-if="adorner.canShowPanel()" class="svc-item-value-controls svc-choice-elements-button-container">
-        <span
-            role="button"
-            class="svc-item-value-controls__button svc-item-value-controls__add svc-choice-elements-button"
-            @click="adorner.togglePanel()"
-            v-key2click
-          >
-            <SvComponent
-              :is="'sv-svg-icon'"
-              :iconName="adorner.showPanel ? 'icon-collapsepanel-16x16' : 'icon-expandpanel-16x16'"
-              :size="'auto'"
-            ></SvComponent>
-          </span>
+       <SvComponent :is="'sv-action-bar-item'" v-if="adorner.canShowPanel()" :item="adorner.expandPanelAction" ></SvComponent>
     </div>
   </div>
   <SvComponent
@@ -83,7 +45,6 @@
 
 <script lang="ts" setup>
 import { SvComponent } from "survey-vue3-ui";
-import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { ItemValue, PanelModel, QuestionSelectBase } from "survey-core";
 import {

@@ -7,7 +7,7 @@ export var bgStrings = {
     edit: "Редактиране",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Гледай и научи как се създават анкети.",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Моля, изтегли въпрос от кутията с инструменти.",
@@ -63,7 +63,7 @@ export var bgStrings = {
     tagbox: "Падащо меню за множествен избор",
     // "File Upload"
     file: "Качване на файл",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "Матрица с единичен избор",
@@ -238,6 +238,18 @@ export var bgStrings = {
     options: "Опции",
     // "Generate Valid JSON"
     generateValidJSON: "Генериране на валиден JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Неизвестна функция: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Неизвестни функции: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Неизвестна променлива: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Неизвестни променливи: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Синтактична грешка.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Семантична грешка.",
     // "Generate Readable JSON"
     generateReadableJSON: "Генериране на четим JSON",
     // "Toolbox"
@@ -406,8 +418,8 @@ export var bgStrings = {
     imageChooseImage: "Избери изображение.",
     // "Add {0}"
     addNewTypeQuestion: "Добави {0}", // {0} is localizable question type
-    // "[LOGO]"
-    chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "[LOGO]"
+    chooseLogoPlaceholder: "[ЛОГО]",
     // "Item "
     choices_Item: "Елемент ",
     // [Auto-translated] "Select a file"
@@ -750,6 +762,14 @@ export var bgStrings = {
       expression: "Изразяване"
     },
     calculatedvalue: {
+      // [Auto-translated] "Expression"
+      expression: "Изразяване"
+    },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Изразяване"
+    },
+    htmlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Изразяване"
     },
@@ -1100,6 +1120,8 @@ export var bgStrings = {
     choicesOrder: "Ред на сортиране на избора",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Разрешаване на персонализирани избори",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Текст на командата \"Create Custom Choice\"",
     // "Visible"
     visible: "Видим",
     // "Required"
@@ -1480,6 +1502,66 @@ export var bgStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Формат на подсказката"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL адрес на изображението",
+      // [Auto-translated] "Areas"
+      areas: "Райони",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Позволете множество избори",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Име на стойностно имущество",
+      // [Auto-translated] "Shape"
+      shape: "Форма",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Запълващ цвят на празен ход",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Цвят на щрихите в покой",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Ширина на хода на празен ход",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Цвят на запълване на захващане на курсора",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Цвят на задръжния щрих",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Ширина на задръжния ход",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Избран запълващ цвят",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Избран цвят на щрихите",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Избрана ширина на щриха",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Максимален брой избрани области",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Минимално избрани области"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Стойност",
+      // [Auto-translated] "Shape"
+      shape: "Форма",
+      // [Auto-translated] "Coordinates"
+      coords: "Координати",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Запълващ цвят на празен ход",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Цвят на щрихите в покой",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Ширина на хода на празен ход",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Цвят на запълване на захващане на курсора",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Цвят на задръжния щрих",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Ширина на задръжния ход",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Избран запълващ цвят",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Избран цвят на щрихите",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Избрана ширина на щриха"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Височина на изображението",
@@ -1510,6 +1592,8 @@ export var bgStrings = {
     minErrorText: "\"Стойността е под минимума.\" съобщение за грешка",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "\"Стойността надвишава максимума.\" съобщение за грешка",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Съобщение за грешка \"Стойността не съвпада с размера на стъпката\"",
     // "\"Empty comment\" error message"
     otherErrorText: "\"Празен коментар\" съобщение за грешка",
     // "Error message for duplicate responses"
@@ -2002,8 +2086,8 @@ export var bgStrings = {
     text: "текст",
     // "time"
     time: "време",
-    // "url"
-    url: "url",
+    // [Auto-translated] "url"
+    url: "URL",
     // "week"
     week: "седмица",
     // "Hidden"
@@ -2061,8 +2145,8 @@ export var bgStrings = {
       text: "Текст",
       // "Time"
       time: "Време",
-      // "URL"
-      url: "URL",
+      // [Auto-translated] "URL"
+      url: "URL адрес",
       // "Week"
       week: "Седмица"
     },
@@ -2315,7 +2399,7 @@ export var bgStrings = {
       image: "Изображение",
       // "Video"
       video: "Видяо",
-      // "YouTube"
+      // [Auto-translated] "YouTube"
       youtube: "YouTube"
     },
     displayMode: {
@@ -2570,9 +2654,9 @@ export var bgStrings = {
     loadFromServer: "Заредете JSON на анкетата от сървъра",
     // "Scripts and styles"
     titleScript: "Скриптове и стилове",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3453,9 +3537,9 @@ export var bgStrings = {
     size: "Големина",
     // [Auto-translated] "Opacity"
     opacity: "Непрозрачност",
-    // "X"
+    // [Auto-translated] "X"
     boxShadowX: "X",
-    // "Y"
+    // [Auto-translated] "Y"
     boxShadowY: "Y",
     // [Auto-translated] "Add Shadow Effect"
     boxShadowAddRule: "Добавяне на ефект на сянка",
@@ -3540,7 +3624,9 @@ export var bgStrings = {
       advanced: "Напреднали",
       // [Auto-translated] "Expert"
       expert: "Експерт"
-    }
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Приложена предварителна настройка"
   }
 };
 

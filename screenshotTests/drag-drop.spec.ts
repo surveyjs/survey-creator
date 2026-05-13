@@ -463,7 +463,7 @@ test.describe(title, () => {
 
     async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
       await page.evaluate(([idx, suffix, remove]) => {
-        const el = document.querySelectorAll(".svc-question__content")[idx];
+        const el = (window as any).creator.rootElement.getRootNode().querySelectorAll(".svc-question__content")[idx];
         if (remove != "remove") {
           el.classList.add("svc-question__content--" + suffix);
         } else {
@@ -521,7 +521,7 @@ test.describe(title, () => {
 
     async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
       await page.evaluate(([idx, suffix, remove]) => {
-        const el = document.querySelectorAll(".svc-question__content")[idx];
+        const el = (window as any).creator.rootElement.getRootNode().querySelectorAll(".svc-question__content")[idx];
         if (!el) return;
 
         if (remove != "remove") {
@@ -609,7 +609,12 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      if (rootNode instanceof Document) {
+        rootNode.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      } else if (rootNode instanceof ShadowRoot) {
+        rootNode.querySelector("div")?.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      }
     });
 
     await page.setViewportSize({ width: 1600, height: 1000 });
@@ -635,7 +640,7 @@ test.describe(title, () => {
     await panel.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.filter({ visible: true }).first().click();
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: panel });
     await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-page__content"), "drag-drop-in-collapsed-panel.png");
@@ -645,7 +650,12 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
-      document.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      if (rootNode instanceof Document) {
+        rootNode.head.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      } else if (rootNode instanceof ShadowRoot) {
+        rootNode.querySelector("div")?.insertAdjacentHTML("beforeend", "<style>*, ::after, ::before { animation: initial!important; }</style>");
+      }
     });
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
@@ -673,7 +683,7 @@ test.describe(title, () => {
     await pageElement.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.click();
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: pageElement });
     await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-tab-designer_content"), "drag-drop-in-collapsed-page.png");
@@ -722,7 +732,12 @@ test.describe("DragDrop custom widget Screenshot", () => {
                     </label>
                   </div>
                 `;
-      document.body.appendChild(widgetTemplateForKo);
+      const rootNode = (window as any).creator.rootElement.getRootNode();
+      if (rootNode instanceof Document) {
+        rootNode.body.appendChild(widgetTemplateForKo);
+      } else if (rootNode instanceof ShadowRoot) {
+        rootNode.appendChild(widgetTemplateForKo);
+      }
     });
 
     await hideAllAdornerActions(page);

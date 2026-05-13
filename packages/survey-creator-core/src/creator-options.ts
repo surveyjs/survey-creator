@@ -123,6 +123,13 @@ export interface ICreatorOptions {
    * Refer to the following MDN topic for information on differences between JSON and JavaScript objects: [JavaScript and JSON Differences](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON#javascript_and_json_differences)
    */
   generateValidJSON?: boolean;
+  /**
+   * Specifies whether to validate property values against their definitions.
+   *
+   * Default value: `true`
+   *
+   * > Disabling property validation may be useful if you add custom properties that accept complex or hierarchical objects. However, this also allows invalid values to be assigned in the JSON Editor tab. Use with caution.
+   */
   validateJsonPropertyValues?: boolean;
   /**
    * Enables the read-only mode. If you set this property to `true`, users cannot change the initial survey configuration.
@@ -306,6 +313,8 @@ export interface ICreatorOptions {
    *
    * Default value: -1 (unlimited)
    *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
+   *
    * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#forbiddenNestedElements) property.
    */
   maxPanelNestingLevel?: number;
@@ -331,6 +340,8 @@ export interface ICreatorOptions {
    * };
    * const creator = new SurveyCreatorModel(creatorOptions);
    * ```
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    * @see maxPanelNestingLevel
    */
   forbiddenNestedElements?: { panel: string[], paneldynamic: string[] };
@@ -536,4 +547,10 @@ export interface ICreatorOptions {
    * Default value: `true`
    */
   expressionsValidateSemantics?: boolean;
+  /**
+   * Specifies whether to display language names in English rather than in their native form.
+   *
+   * Default value: `false` (language names are displayed in their native form)
+   */
+  useEnglishLanguageNames?: boolean;
 }

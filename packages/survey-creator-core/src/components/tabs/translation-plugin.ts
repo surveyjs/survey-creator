@@ -5,8 +5,6 @@ import { editorLocalization } from "../../editorLocalization";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";
 import { TabControlModel } from "../side-bar/tab-control-model";
-import { MenuButton } from "../../utils/actions";
-import { listComponentCss } from "../list-theme";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
   private filterStringsAction: Action;
@@ -43,7 +41,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.showOneCategoryInPropertyGrid = creator.showOneCategoryInPropertyGrid;
     this.tabControlModel = new TabControlModel(this.creator.sidebar);
     this.sidebarTab = this.creator.sidebar.addPage("translation");
-    this.sidebarTab.locTileName = "ed.translationPropertyGridTitle";
+    this.sidebarTab.locTitleName = "ed.translationPropertyGridTitle";
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   public activate(): void {
@@ -153,12 +151,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
       const languagesString = editorLocalization.getString("ed.translationLanguages");
-      const action = new MenuButton({
+      const action = new Action({
         id: "pg-languages",
         tooltip: languagesString,
         iconName: "pg-general-24x24",
         active: true,
-        pressed: false,
         action: () => {
           this.creator.sidebar.expandSidebar();
           this.creator.sidebar.header.title = languagesString;
@@ -241,7 +238,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       },
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
     }, this.creator);
   }
   private createFilterStringsAction() {
@@ -258,7 +254,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       },
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
     }, this.creator);
   }
   private updateFilterStrigsAction(updateSelectedItem: boolean = false) {

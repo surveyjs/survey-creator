@@ -3,12 +3,12 @@
 .svc-tab-translation {
   width: 100%;
   height: 100%;
-  background-color: var(--ctr-surface-background-color, var(--sjs-special-background, #edf9f7ff));
 }
 
 .svc-translation-tab {
   /* disable library transition animations */
   --sjs-transition-duration: 0ms;
+  background-color: var(--sjs2-color-utility-surface-translations);
 }
 
 .svc-translation-tab--empty {
@@ -44,35 +44,18 @@
     }
 
     .spg-table__question-wrapper {
-      @include ctrDefaultFont;
+      @include sjs2--typography--default;
       padding: calcSize(1.5) calcSize(1);
       color: var(--ctr-checkbox-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 
       .spg-checkbox {
         margin: 0;
       }
-
-      .spg-selectbase__label {
-        gap: 0;
-      }
-    }
-
-    .spg-checkbox--disabled {
-      .spg-checkbox__caption {
-        color: var(--ctr-checkbox-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
-      }
-
-      .spg-checkbox__rectangle,
-      .spg-checkbox__rectangle:hover {
-        border: var(--ctr-checkbox-border-width, var(--sjs-stroke-x1)) solid
-          var(--ctr-checkbox-border-color-disabled, var(--sjs-border-10, #dcdcdcff));
-        background: var(--ctr-checkbox-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
-      }
     }
   }
 
   .spg-matrixdynamic__dragged-row {
-    @include ctrDefaultFont;
+    @include sjs2--typography--default;
     color: var(--ctr-checkbox-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 
     .spg-table__cell:nth-child(3) {
@@ -128,7 +111,7 @@
 
 .st-title.st-panel__title,
 .st-table__cell.st-table__cell--header {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   text-align: left;
 }
 
@@ -164,7 +147,7 @@
 }
 
 td.st-table__cell:first-of-type {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   color: var(--ctr-string-table-row-text-color-title, var(--sjs-layer-1-foreground-100, #000000e6));
   max-width: 300px;
   padding-right: calcSize(3);
@@ -188,8 +171,8 @@ td.st-table__cell:first-of-type {
   border-spacing: 0;
 }
 
-.st-comment {
-  @include ctrDefaultFont;
+.st-formbox__input {
+  @include sjs2--typography--default;
   display: block;
   width: calc(100% - 3 * #{$base-unit});
   border: unset;
@@ -203,53 +186,6 @@ td.st-table__cell:first-of-type {
 .sd-translation-line-skeleton {
   min-height: var(--sjs-size-x5);
   background-color: var(--sjs-layer-3-background-500, #f4f4f4ff);
-}
-
-.st-navigation-btn {
-  @include ctrDefaultBoldFont;
-  padding: var(--ctr-actionbar-button-padding-top-large-icon-text, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-right-large-icon-text, var(--sjs-spacing-x2))
-    var(--ctr-actionbar-button-padding-bottom-large-icon-text, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-left-large-icon-text, var(--sjs-spacing-x150));
-  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
-  white-space: nowrap;
-
-  .sd-action__icon {
-    width: var(--ctr-actionbar-button-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-actionbar-button-icon-height, var(--sjs-font-size-x3));
-    margin-left: 0;
-  }
-}
-
-.st-navigation-btn:hover {
-  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
-  background: var(
-    --ctr-actionbar-button-background-color-hovered-colorful,
-    var(--sjs-primary-background-10, #19b3941a)
-  );
-}
-
-.st-navigation-btn.sd-action--icon {
-  padding: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-right-large-icon, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-left-large-icon, var(--sjs-spacing-x1));
-  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
-
-  &:not(.sd-action--pressed) {
-    &:hover,
-    &:focus {
-      border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
-      background: var(
-        --ctr-actionbar-button-background-color-hovered-colorful,
-        var(--sjs-primary-background-10, #19b3941a)
-      );
-    }
-  }
-
-  svg use {
-    fill: var(--ctr-actionbar-button-icon-color-colorful, var(--sjs-primary-background-500, #19b394ff));
-  }
 }
 
 .svc-translation-machine {
@@ -269,44 +205,13 @@ td.st-table__cell:first-of-type {
 
 .st-translation-machine-from__btn {
   flex-direction: row-reverse;
-  padding: var(--ctr-actionbar-button-padding-top-large-text, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-right-large-text-drop-down, var(--sjs-spacing-x150))
-    var(--ctr-actionbar-button-padding-bottom-large-text, var(--sjs-spacing-x1))
-    var(--ctr-actionbar-button-padding-left-large-text, var(--sjs-spacing-x2));
-  gap: var(--ctr-actionbar-button-gap, var(--sjs-spacing-x1));
-  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
   white-space: nowrap;
-
-  .sd-action__title {
-    @include ctrDefaultBoldFont;
-    color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
-  }
-
-  .sd-action__icon {
-    width: var(--ctr-actionbar-button-drop-down-arrow-width, var(--sjs-font-size-x2));
-    height: var(--ctr-actionbar-button-drop-down-arrow-height, var(--sjs-font-size-x2));
-    margin-left: 0;
-  }
-
-  &.sd-action--pressed:not(.sd-action--active) {
-    opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
-    background: var(
-      --ctr-actionbar-button-background-color-hovered-colorful,
-      var(--sjs-primary-background-10, #19b3941a)
-    );
-  }
-
-  &:disabled {
-    opacity: 1;
-    color: var(--ctr-actionbar-button-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
-
-    fill: var(--ctr-actionbar-button-icon-color-with-text-disabled, var(--sjs-layer-1-foreground-75, #000000bf));
-  }
+  --sd-action-icon-size: var(--ctr-actionbar-button-drop-down-arrow-height, var(--sjs2-line-height-x200));
 }
 
 .st-translation-machine-from__btn:disabled .sd-action__title,
 .st-translation-machine-from__title {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   color: var(--ctr-string-table-title-caption-color, var(--sjs-layer-1-foreground-50, #00000080));
 }
 

@@ -1,4 +1,4 @@
-import { Base, CssClassBuilder, property, Serializer, SurveyModel } from "survey-core";
+import { Action, ActionContainer, Base, CssClassBuilder, property, Serializer, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getAcceptedTypesByContentMode } from "../../utils/utils";
 import "./logo-image.scss";
@@ -48,5 +48,41 @@ export class LogoImageViewModel extends Base {
   }
   public get acceptedTypes(): string {
     return getAcceptedTypesByContentMode("image");
+  }
+  protected createActionsContainer(): ActionContainer {
+    const container = new ActionContainer();
+    container.containerCss = "svc-logo-image-controls";
+    container.setActionsAppearance({ style: "neutral", mode: "quaternary-surface", size: "medium" });
+    container.setItems(this.createActions());
+    return container;
+  }
+  protected createActions(): Array<Action> {
+    return [
+      new Action({
+        id: "add",
+        iconName: "icon-choosefile",
+        showTitle: false,
+        appearance: { style: "brand" },
+        action: () => {
+          this.chooseFile(this);
+        }
+      }),
+      new Action({
+        id: "remove",
+        iconName: "icon-clear",
+        showTitle: false,
+        appearance: { style: "alert" },
+        action: () => {
+          this.remove(this);
+        }
+      }),
+    ];
+  }
+  private actionsContainerValue?: ActionContainer;
+  public get actionsContainer() {
+    if (!this.actionsContainerValue) {
+      this.actionsContainerValue = this.createActionsContainer();
+    }
+    return this.actionsContainerValue;
   }
 }

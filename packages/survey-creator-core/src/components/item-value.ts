@@ -8,7 +8,9 @@ import {
   DragOrClickHelper,
   Helpers,
   ITargets,
-  PanelModelBase
+  PanelModelBase,
+  Action,
+  ComputedUpdater
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { DragDropChoices } from "survey-core";
@@ -19,6 +21,8 @@ import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector } from "./string-editor";
 import { ExpandCollapseManager, IExpandCollapseChoice } from "../expand-collapse-manager";
 import { SurveyHelper } from "../survey-helper";
+import { DomDocumentHelper } from "survey-core";
+import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 
 const specificChoices = {
   "noneItem": "showNoneItem",
@@ -203,10 +207,9 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     this.updateIsNew(model.question, model.item);
   }
 
-  public onFocusOut(event: any): void {
+  public onFocusOut = (event: any) => {
     this.question["_lastActiveItemValueIndex"] = this.question.choices.indexOf(this.item);
-  }
-
+  };
   private findNextElementIndexToRemove(index) {
     let indexToFocus = 0;
     if (this.question.choices.length > 0) {
@@ -222,8 +225,11 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
   private focusNextElementToRemove(index) {
     setTimeout(() => {
-      const el = document.getElementById(this.question.id);
-      const buttons = el.querySelectorAll(".svc-item-value-controls__remove");
+      const root = this.creator.rootElement?.getRootNode() || DomDocumentHelper.getDocument();
+      if (!(root instanceof Document || root instanceof ShadowRoot)) return;
+      const el = root.querySelector("#" + this.question.id);
+      if (!el) return;
+      const buttons = el.querySelectorAll(".svc-item-value-wrapper:not(.sd-item--leave) .svc-item-value-controls__remove");
       (buttons[index] as HTMLElement)?.focus();
     }, 100
     );
@@ -236,6 +242,77 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     if (this.isNew) {
       this.item.setIsVisible(!(this.allowItemOperations?.allowAdd === false));
     }
+  }
+  protected onFocusAction (event: FocusEvent): void {
+    const adorner = this.question.getPropertyValue(SurveyElementAdornerBase.AdornerValueName);
+    if (adorner) {
+      adorner.select(adorner, event);
+    }
+  }
+  private addActionValue?: Action;
+  public get addAction(): Action {
+    if (!this.addActionValue) {
+      this.addActionValue = new Action({
+        id: "add",
+        iconName: "icon-add_16x16",
+        iconSize: "auto",
+        innerCss: "svc-item-value-controls__button svc-item-value-controls__add",
+        showTitle: false,
+        appearance: { size: "x-small", style: "brand", mode: "tertiary" },
+        title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
+        action: () => {
+          this.add(this);
+        }
+      });
+    }
+    return this.addActionValue;
+  }
+  private removeActionValue?: Action;
+  public get removeAction(): Action {
+    if (!this.removeActionValue) {
+      this.removeActionValue = new Action({
+        id: "remove",
+        showTitle: false,
+        iconName: "icon-remove_16x16",
+        innerCss: "svc-item-value-controls__button svc-item-value-controls__remove",
+        appearance: { size: "x-small", style: "alert", mode: "tertiary" },
+        iconSize: "auto",
+        title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+          event.currentTarget.removeEventListener("focusout", this.onFocusOut);
+          event.currentTarget.addEventListener("focusout", this.onFocusOut);
+        },
+        action: () => {
+          this.remove(this);
+        }
+      });
+    }
+    return this.removeActionValue;
+  }
+  private expandPanelActionValue?: Action;
+  public get expandPanelAction(): Action {
+    if (!this.expandPanelActionValue) {
+      this.expandPanelActionValue = new Action({
+        id: "expandPanel",
+        showTitle: false,
+        iconName: new ComputedUpdater(() => this.showPanel ? "icon-collapsepanel-16x16" : "icon-expandpanel-16x16") as unknown as string,
+        innerCss: "svc-item-value-controls__button svc-item-value-controls__add svc-choice-elements-button",
+        appearance: { style: "brand", size: "x-small", mode: "tertiary" },
+        iconSize: "auto",
+        title: new ComputedUpdater(() => this.dragTooltip) as unknown as string,
+        onFocus: (_, event: FocusEvent) => {
+          this.onFocusAction(event);
+        },
+        action: () => {
+          this.togglePanel();
+        }
+      });
+    }
+    return this.expandPanelActionValue;
   }
 
   get allowRemove() {
@@ -256,7 +333,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     const isAutoGenerated = this.isAutoGeneratedItem(this.item);
     return !this.creator.readOnly && this.canTouchItems && (this.allowItemOperations.allowAdd) && isNew && !isAutoGenerated;
   }
-  public select(model: ItemValueWrapperViewModel, event: Event|undefined) {
+  public select(model: ItemValueWrapperViewModel, event: Event | undefined) {
     if (model.question.inMatrixMode) return;
     model.creator.selectElement(model.question, "choices", false);
     event && event.stopPropagation();

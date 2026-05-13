@@ -38,7 +38,7 @@
 
   .spg-row--multiple {
     .spg-spin-editor {
-      .spg-input-container__buttons-container {
+      .sd-formbox__group {
         display: none;
       }
     }
@@ -55,10 +55,6 @@
 
       .spg-question--location--left {
         box-sizing: border-box;
-
-        .spg-input {
-          height: auto;
-        }
       }
     }
   }
@@ -106,18 +102,13 @@
   }
 
   .spg-theme-group-caption {
-    @include ctrDefaultBoldFont;
+    @include sjs2--typography--default-strong;
     color: var(--ctr-property-grid-group-caption-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
 
     position: relative;
     top: calc(4 * #{$base-unit});
     padding: calc(1 * #{$base-unit}) 0;
     cursor: auto;
-  }
-
-  .sv-theme-group_title-action .spg-action-button:hover,
-  .sv-theme-group_title-action .spg-action-button:focus {
-    background-color: unset;
   }
 
   .sd-panel__header.sd-element__header .spg-action-bar {

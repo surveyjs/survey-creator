@@ -34,9 +34,13 @@
 
 .svc-image-item-value-controls {
   position: absolute;
-  top: calcSize(1);
-  right: calcSize(1);
+  box-sizing: border-box;
+  width: 100%;
+  top: var(--sjs-spacing-x100, 8px);
+  padding: 0 var(--sjs-spacing-x100, 8px);
   z-index: 2;
+  gap: var(--sjs-spacing-x100, 8px);
+  --sd-action-bar-gap: var(--sjs-spacing-x100, 8px);
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls {
@@ -48,7 +52,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: calcSize(1);
+  padding: 0;
 }
 .sd-imagepicker {
   container-type: inline-size;
@@ -72,45 +76,10 @@
 }
 
 .svc-image-item-value__placeholder {
-  @include lbrDefaultFont;
+  @include sjs2--typography--default;
   color: var(--ctr-survey-placeholder-text-color, rgba(0, 0, 0, 0.5));
   text-align: center;
-  font-weight: 400;
   white-space: normal;
-}
-.svc-image-item-value--new .svc-image-item-value-controls__button {
-  background-color: transparent;
-  transition: background-color $creator-transition-duration;
-}
-
-.svc-image-item-value-controls__add {
-  border-radius: var(--ctr-survey-contextual-button-corner-radius, var(--lbr-corner-radius-round));
-  background: var(--ctr-survey-contextual-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-  transition: background-color $creator-transition-duration;
-
-  use {
-    fill: var(--ctr-survey-contextual-button-icon-color-positive, var(--sjs-primary-background-500, #19b394ff));
-    transition: fill $creator-transition-duration;
-  }
-
-  &:hover,
-  &:focus {
-    border-radius: var(--ctr-survey-contextual-button-corner-radius, var(--lbr-corner-radius-round));
-    background: linear-gradient(
-        0deg,
-        var(
-            --ctr-survey-contextual-button-background-color-hovered-positive,
-            var(--sjs-primary-background-10, #19b3941a)
-          )
-          0%,
-        var(
-            --ctr-survey-contextual-button-background-color-hovered-positive,
-            var(--sjs-primary-background-10, #19b3941a)
-          )
-          100%
-      ),
-      var(--ctr-survey-contextual-button-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-  }
 }
 
 .svc-choose-file-input {
@@ -130,14 +99,11 @@
 .svc-image-item-value-controls__drag-area-indicator {
   display: none;
   cursor: move;
-  position: absolute;
-  top: calcSize(1);
-  left: calcSize(1);
 }
 
 .svc-question__content--selected .svc-image-item-value-wrapper:hover {
   .svc-image-item-value-controls__drag-area-indicator {
-    display: block;
+    display: flex;
   }
 }
 

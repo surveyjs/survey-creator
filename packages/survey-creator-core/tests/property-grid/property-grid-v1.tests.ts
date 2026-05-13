@@ -847,6 +847,31 @@ test("SurveyPropertyMatrixDropdownColumns set properties", (): any => {
   expect(question.columns[2].name).toEqual("column 5");
   expect(rows[2].getQuestionByColumnName("title").placeholder).toEqual("column 5");
 });
+test("SurveyPropertyMatrixDropdownColumns auto generate title on adding column", (): any => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdropdown",
+        name: "q1",
+        columns: [
+          { name: "col1", title: "Column 1" },
+          { name: "col2", title: "Column 2" }
+        ],
+        rows: ["Row 1"]
+      }
+    ]
+  });
+  var question = survey.getQuestionByName("q1") as QuestionMatrixDropdownModel;
+  var propertyGrid = new PropertyGridModelTester(question);
+  var columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  columnsQuestion.visibleRows;
+  columnsQuestion.addRow();
+  expect(question.columns).toHaveLength(3);
+  expect(question.columns[2].name).toEqual("col3");
+  expect(question.columns[2].title).toEqual("Column 3");
+});
 test("SurveyPropertyMatrixDropdownColumns change columns", () => {
   var saveProperties =
     SurveyQuestionEditorDefinition.definition.matrixdropdowncolumn.properties;

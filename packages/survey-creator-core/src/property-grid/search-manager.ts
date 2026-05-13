@@ -2,6 +2,7 @@ import { Action, ComputedUpdater, IElement, Question, SurveyModel, property, set
 import { getLocString } from "../editorLocalization";
 import { scrollElementIntoView } from "../utils/creator-utils";
 import { SearchManager } from "../components/search-manager";
+import { DomDocumentHelper } from "survey-core";
 export class SearchManagerPropertyGrid extends SearchManager {
   private highlightedEditorClass = " spg-question--highlighted";
 
@@ -38,7 +39,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
       const newPanelExpanded = this.lastCollapsedElement != lastCollapsedElement;
       setTimeout(() => {
         const elementId = this.currentMatch?.id;
-        scrollElementIntoView(elementId);
+        scrollElementIntoView(elementId, this.survey.rootElement);
       }, newPanelExpanded ? 400 : 10);
     }
     this.updatedMatchCounterText(index);
@@ -138,10 +139,11 @@ export class SearchManagerPropertyGrid extends SearchManager {
     return searchActions;
   }
 
-  constructor() {
-    super();
-    this.initActionBar();
+  initActionBar() {
+    super.initActionBar();
+    this.searchActionBar.setActionsAppearance({ style: "neutral", mode: "tertiary-muted", size: "xx-small" });
   }
+
   public setSurvey(newSurvey: SurveyModel) {
     this.clearFilterString();
     this.survey = newSurvey;

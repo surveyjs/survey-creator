@@ -20,7 +20,6 @@ export class AddQuestionButtonComponent extends CreatorModelComponent<Base> {
     return this.model.data;
   }
   @Input() model!: any;
-  @Input() buttonClass?: string = "svc-btn";
   @Input() renderPopup?: boolean = true;
   public get adorner() {
     return this.model.data;

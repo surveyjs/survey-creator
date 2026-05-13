@@ -8,8 +8,10 @@ import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../drag-drop-enums";
+import { defaultActionBarCss } from "survey-core";
 
 import "./page.scss";
+import "./surface-btn.scss";
 
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
@@ -208,6 +210,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     const container = super.createActionContainer();
     container.alwaysShrink = this.creator.isMobileView;
     container.sizeMode = "small";
+    container.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
     container.cssClasses = this.containerCssClasses();
     container.dotsItem.iconSize = "auto";
     return container;
@@ -215,20 +218,15 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   protected createTopActionContainer(): ActionContainer {
     const container = super.createTopActionContainer();
+    container.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
     container.cssClasses = { ...this.containerCssClasses() };
     container.cssClasses.root += " svc-page-toolbar--collapse";
     return container;
   }
   private containerCssClasses(): any {
     return {
-      root: "svc-page-toolbar sv-action-bar",
-      item: "svc-page-toolbar__item",
-      itemWithTitle: "svc-page-toolbar__item--with-text",
-      itemActive: "svc-page-toolbar__item--active",
-      itemPressed: "svc-page-toolbar__item--pressed",
-      itemIcon: "svc-page-toolbar-item__icon",
-      itemTitle: "svc-page-toolbar-item__title",
-      itemTitleWithIcon: "svc-page-toolbar-item__title--with-icon",
+      ...defaultActionBarCss,
+      root: "svc-page-toolbar " + defaultActionBarCss.root,
     };
   }
   protected allowExpandCollapseByDblClick(element: any) {
@@ -342,8 +340,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this._footerActionsBar = new ActionContainer();
       this._footerActionsBar.containerCss = "svc-page__footer";
       this._footerActionsBar.cssClasses = {
-        item: "svc-btn",
-        itemTitle: "svc-add-new-item-button__text"
+        item: "sd-action svc-surface-btn",
+        itemAppearancePrefix: "",
+        itemTypeSelector: "svc-surface-btn__selector",
       };
       let footerActions: Array<IAction> = [{
         css: "svc-add-new-question-action",

@@ -11,13 +11,14 @@ import {
   PopupBaseViewModel,
   surveyLocalization,
   Serializer,
+  Action,
+  getLocaleString,
 } from "survey-core";
 import { defaultCss } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { toggleHovered } from "../utils/html-element-utils";
 import { SurveyHelper } from "../survey-helper";
 import { editorLocalization } from "../editorLocalization";
-import designTabSurveyThemeJSON from "../designTabSurveyThemeJSON";
 
 import "./matrix-cell.scss";
 
@@ -89,7 +90,7 @@ export class MatrixCellWrapperViewModel extends Base {
     }
   };
 
-  public editQuestion(model: MatrixCellWrapperViewModel, event: MouseEvent) {
+  public editQuestion(model: MatrixCellWrapperViewModel) {
     const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question, model.column, this);
     editSurvey.question.cellOwner = model;
 
@@ -102,7 +103,7 @@ export class MatrixCellWrapperViewModel extends Base {
         data: {
           survey: editSurvey.survey,
           creator: this.creator,
-          style: designTabSurveyThemeJSON.cssVariables
+          style: { ...this.creator.defaultSurfaceCssVariables }
         },
         onApply: () => {
           editSurvey.apply();
@@ -116,7 +117,6 @@ export class MatrixCellWrapperViewModel extends Base {
     popupModel.locale = locale;
     surveyLocalization.currentLocale = prevCurrentLocale;
 
-    event.stopPropagation();
     model.creator.selectElement(model.column);
   }
   get context() {
@@ -147,6 +147,21 @@ export class MatrixCellWrapperViewModel extends Base {
     if (!this.row && this.context && this.context.getPropertyValue && this.context.getType && !this.context.isDescendantOf("itemvalue")) {
       toggleHovered(event, element);
     }
+  }
+  private editActionValue?: Action;
+  public get editAction(): Action {
+    if (!this.editActionValue) {
+      this.editActionValue = new Action({
+        id: "edit",
+        showTitle: false,
+        title: editorLocalization.getString("ed.edit"),
+        iconName: "icon-edit_16x16",
+        innerCss: "svc-matrix-cell__question-controls-button",
+        appearance: { style: "brand", size: "medium", mode: "quaternary-surface", showBorder: true },
+        action: () => this.editQuestion(this)
+      });
+    }
+    return this.editActionValue;
   }
   public dispose(): void {
     this.creator.onElementSelected.remove(this.onSelectionChanged);

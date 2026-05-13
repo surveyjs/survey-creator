@@ -1,5 +1,5 @@
 export const Advanced = {
-  presetName: "advanced",
+  name: "advanced",
   json: {
     "tabs": {
       "items": [
@@ -18,7 +18,8 @@ export const Advanced = {
         {
           "name": "theme",
           "iconName": "icon-theme"
-        }
+        },
+        { "name": "logic" },
       ],
       "activeTab": "designer"
     },

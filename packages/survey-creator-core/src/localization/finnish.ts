@@ -7,7 +7,7 @@ export var fiStrings = {
     edit: "Muokkaa",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Katso ja opi luomaan kyselyjä",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Pudota kysymys Työkalupakista tähän.",
@@ -238,6 +238,18 @@ export var fiStrings = {
     options: "Vaihtoehdot",
     // "Generate Valid JSON"
     generateValidJSON: "Luo kelvollinen JSON",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Tuntematon funktio: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Tuntemattomat toiminnot: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Tuntematon muuttuja: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Tuntemattomat muuttujat: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Syntaksivirhe.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Semanttinen virhe.",
     // "Generate Readable JSON"
     generateReadableJSON: "Luo luettava JSON",
     // "Toolbox"
@@ -753,6 +765,14 @@ export var fiStrings = {
       // [Auto-translated] "Expression"
       expression: "Lauseke"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ilmentyminen"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Ilmentyminen"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -870,8 +890,8 @@ export var fiStrings = {
     inherit: "Peri",
     // "Apply"
     apply: "Käytä",
-    // "OK"
-    ok: "OK",
+    // [Auto-translated] "OK"
+    ok: "OKEI",
     // "Save"
     save: "Tallenna",
     // [Auto-translated] "Clear"
@@ -1034,7 +1054,7 @@ export var fiStrings = {
     columnEdit: "Muokkaa saraketta: {0}",
     // "Edit item: {0}"
     itemEdit: "Muokkaa kohdetta: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Polku",
@@ -1100,6 +1120,8 @@ export var fiStrings = {
     choicesOrder: "Valitse valintojen järjestys",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Salli mukautetut valinnat",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "\"Create Custom Choice\" -komentoteksti",
     // "Visible"
     visible: "Näkyvissä",
     // "Required"
@@ -1480,6 +1502,66 @@ export var fiStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Työkaluvihjeen muoto"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "Kuvan URL",
+      // [Auto-translated] "Areas"
+      areas: "Alueet",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Salli useita valintoja",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Arvo-ominaisuuden nimi",
+      // [Auto-translated] "Shape"
+      shape: "Muoto",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Lepotilan täyttöväri",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Tyhjäkäyntiviivan väri",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Tyhjäkäynnin leveys",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill -väri",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Leijuvan veturin väri",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Leijuntaviivan leveys",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Valittu täyttöväri",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Valittu viivaväri",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Valittu viivan leveys",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Enimmäisvalitut alueet",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Vähimmäisvalitut alueet"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Arvo",
+      // [Auto-translated] "Shape"
+      shape: "Muoto",
+      // [Auto-translated] "Coordinates"
+      coords: "Koordinaatit",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Lepotilan täyttöväri",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Tyhjäkäyntiviivan väri",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Tyhjäkäynnin leveys",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Hover fill -väri",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Leijuvan veturin väri",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Leijuntaviivan leveys",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Valittu täyttöväri",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Valittu viivaväri",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Valittu viivan leveys"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Kuvan korkeus",
@@ -1510,6 +1592,8 @@ export var fiStrings = {
     minErrorText: "Arvo on alle minimin -virhesanoma",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "\"Arvo ylittää maksimin\" -virhesanoma",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"Arvo ei vastaa askelkokoa\" -virheviesti",
     // "\"Empty comment\" error message"
     otherErrorText: "Tyhjä kommentti -virhesanoma",
     // "Error message for duplicate responses"
@@ -1676,8 +1760,8 @@ export var fiStrings = {
         // [Auto-translated] "Layout"
         base: "Asettelu"
       },
-      // "Data"
-      data: "Data",
+      // [Auto-translated] "Data"
+      data: "Tiedot",
       // "Validation"
       validation: "Validointi",
       // "Individual Cell Texts"
@@ -1803,10 +1887,10 @@ export var fiStrings = {
     minWidth_placeholder: "Esimerkki: 600 pikseliä",
     // [Auto-translated] "Ex.: 50%"
     maxWidth_placeholder: "Esimerkki: 50 %",
-    // "auto"
-    imageHeight_placeholder: "auto",
-    // "auto"
-    imageWidth_placeholder: "auto",
+    // [Auto-translated] "auto"
+    imageHeight_placeholder: "Auto",
+    // [Auto-translated] "auto"
+    imageWidth_placeholder: "Auto",
     // [Auto-translated] "Ex.: 100px"
     itemTitleWidth_placeholder: "Esimerkki: 100px",
     theme: {
@@ -2570,9 +2654,9 @@ export var fiStrings = {
     loadFromServer: "Lataa kysely palvelimelta JSON muodossa",
     // "Scripts and styles"
     titleScript: "Skriptit ja tyylit",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -3531,6 +3615,18 @@ export var fiStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrasti"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Perus",
+      // [Auto-translated] "Advanced"
+      advanced: "Edistynyt",
+      // [Auto-translated] "Expert"
+      expert: "Asiantuntija"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Esiasetus käytössä"
   }
 };
 setupLocale({ localeCode: "fi", strings: fiStrings });

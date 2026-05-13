@@ -1,10 +1,11 @@
-import { ItemValue, QuestionDropdownModel, Serializer, settings, SurveyModel } from "survey-core";
+﻿import { ItemValue, QuestionDropdownModel, Serializer, settings, SurveyModel } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { Question } from "survey-core";
 import { CreatorBase } from "../src/creator-base";
 import { UIPreset } from "../src/ui-presets-creator/presets";
 import { SurveyQuestionPresetPropertiesDetail } from "../src/ui-preset-editor/presets-editable-properties";
 import { ISurveyPropertiesDefinition, defaultPropertyGridDefinition } from "../src/question-editor/definition";
+import { vi } from "vitest";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
@@ -655,7 +656,7 @@ test("visible in classes", () => {
   settings.showDialog = (options: any) => {
     popupSurvey = options.data.survey;
     onApply = options.onApply;
-    return { dispose: jest.fn() };
+    return { dispose: vi.fn() };
   };
 
   const editor = new CreatorPresetEditorModel();
@@ -837,6 +838,26 @@ test("Hide a property from several types at once Bug#7439", () => {
   expect(classes?.dropdown?.properties).toEqual([{ name: "title", tab: "general" }]);
   expect(classes?.checkbox?.properties).toEqual([{ name: "name", tab: "general" }, { name: "title", tab: "general" }]);
   expect(classes?.rating?.properties).toEqual([{ name: "title", tab: "general" }]);
+});
+test("showRefuseItem and showDontKnowItem should not be available in the property editor for Expert preset, Bug#7564", () => {
+  const editor = new CreatorPresetEditorModel();
+  const survey = editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "dropdown");
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  const allPropertyNames: string[] = [];
+  for (let i = 0; i < propGridCategories.visibleRows.length; i++) {
+    const row = propGridCategories.visibleRows[i];
+    row.showDetailPanel();
+    const properties = row.detailPanel.getQuestionByName("properties");
+    properties.visibleRows.forEach(r => allPropertyNames.push(r.getValue("name")));
+  }
+  expect(allPropertyNames.indexOf("showNoneItem")).toBeGreaterThan(-1);
+  expect(allPropertyNames.indexOf("noneText")).toBeGreaterThan(-1);
+  expect(allPropertyNames.indexOf("showRefuseItem")).toBe(-1);
+  expect(allPropertyNames.indexOf("showDontKnowItem")).toBe(-1);
+  expect(allPropertyNames.indexOf("refuseText")).toBe(-1);
+  expect(allPropertyNames.indexOf("dontKnowText")).toBe(-1);
 });
 test("Hide a property from all types Bug#7442", () => {
   const editor = new CreatorPresetEditorModel();

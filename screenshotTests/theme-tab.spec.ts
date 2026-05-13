@@ -1,17 +1,17 @@
 import { test, expect } from "@playwright/test";
-import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector } from "./helper";
+import { urlThemeTab, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector, hideElement } from "./helper";
 
 const title = "Themes tab";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${url.replace(/\/testcafe$/, "/testcafe-theme-tab")}`);
+    await page.goto(urlThemeTab);
   });
 
   test("Check boxshadow settings", async ({ page }) => {
     await page.setViewportSize({ width: 2000, height: 2000 });
     await setJSON(page, {});
-    const root = page.locator("div[data-name='--sjs-shadow-small']");
+    const root = page.locator("div[data-name='--sjs2-border-effect-surface-default']");
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     await getPropertyGridCategory(page, "Appearance").click();
     await page.getByRole("checkbox", { name: "Advanced mode" }).click();
@@ -73,11 +73,11 @@ test.describe(title, () => {
 
     await getPropertyGridCategory(page, "General").click();
     await getPropertyGridCategory(page, "Header").click();
-    await expandedGroup.locator(".spg-button-group__item-caption").getByText("Basic").click();
+    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Basic").click();
     await resetFocusToBody(page);
     await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-header-group.png");
 
-    await expandedGroup.locator(".spg-button-group__item-caption").getByText("Advanced").click();
+    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Advanced").click();
     await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-header-group-advanced.png");
 
     await getPropertyGridCategory(page, "Header").click();
@@ -116,9 +116,10 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
     await getPropertyGridCategory(page, "General").click();
-    await expandedGroup.locator(".spg-button-group__item-caption").getByText("Dark").click();
-    await page.click(".sv-action--reset-theme .svc-toolbar__item");
+    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Dark").click();
+    await page.getByRole("button", { name: "Reset theme settings to" }).click();
     const popup = page.locator(".sv-popup__body-content").filter({ has: page.locator(":visible") });
+    await hideElement(page, ".svc-surface-placeholder");
     await compareScreenshot(page, popup, "theme-tab-reset-popup-dialog.png");
   });
 
@@ -139,8 +140,9 @@ test.describe(title, () => {
       ]
     });
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
+    await expect(page.locator(".svc-notifier")).not.toBeVisible();
     const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
-    await expandedGroup.locator(".spg-button-group__item-caption").getByText("Dark").click();
+    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Dark").click();
     const simulator = page.locator(".svd-simulator-main").filter({ has: page.locator(":visible") });
     await simulator.hover();
     await compareScreenshot(page, simulator, "theme-tab-scrollbar.png");

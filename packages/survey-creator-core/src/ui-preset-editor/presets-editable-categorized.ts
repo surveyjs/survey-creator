@@ -1,7 +1,6 @@
 import { Action, createDropdownActionModel, IAction, MatrixDynamicRowModel, PopupModel, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
-import { SurveyCreatorModel, SurveyHelper, getLocString } from "survey-creator-core";
+import { SurveyCreatorModel, getLocString } from "survey-creator-core";
 import { CreatorPresetEditableList } from "./presets-editable-list";
-import { listComponentCss } from "./presets-theme/list-theme";
 export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPresetEditableList {
   //private replaceNonLettersWithDash(inputString) {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
@@ -28,7 +27,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       if (a.id == "remove-row") {
         a.iconName = "icon-delete_24x24";
         a.tooltip = getLocString("presets.items.delete");
-        a.innerCss = "sps-action-button sps-action-button--icon sps-action-button--danger";
+        a.appearance = { style: "alert" as any, mode: "tertiary-muted" as any };
       }
       if (a.id == "reset-to-default") {
         a.action = () => { this.resetCategory(model, row); };
@@ -62,8 +61,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   }
 
   protected setSubitemsToAction(action: Action, items: Action[]) {
-    action.setSubItems({ items: items, cssClasses: listComponentCss });
-    action.markerIconName = "icon-chevronright-24x24";
+    action.setSubItems({ items: items });
   }
 
   protected getItemMenuActionsCore(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
@@ -88,8 +86,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         actions.push(new Action({
           id: "move-to",
           title: getLocString("presets.items.moveTo"),
-          css: "sps-list__item--label",
-          enabled: false
+          isLabel: true
         }));
       } else {
         actions.push(new Action({
@@ -116,8 +113,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
       actions.push(new Action({
         id: "categories",
         title: getLocString("presets.items.categoriesLabel"),
-        css: "sps-list__item--label",
-        enabled: false,
+        isLabel: true,
         needSeparator: true
       }));
       const catGroup = new Action({
@@ -138,7 +134,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         action: () => {
           const newCatRow = this.moveToCategory(model, question, row, this.getDefaultValueForRow(model, question, "category"), true);
           this.editItem(model, null, categoriesQuestion, newCatRow, {
-            description: getLocString("presets.items.newCategory") + " " + this.getPageShortTitle(model),
+            description: this.getCreatePopupTitle(model, categoriesQuestion),
             isNew: true
           });
         }
@@ -150,17 +146,16 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
   protected getItemMenuActions(model: SurveyModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel) {
     const actions = this.getItemMenuActionsCore(model, question, row);
     if (!this.getDefaultItem(question, row.value.name)) {
-      actions.push(
-        new Action({
-          id: "remove-custom-item",
-          title: getLocString("presets.toolbox.deleteCustomItem"),
-          css: "sps-list__item--alert",
-          needSeparator: true,
-          action: () => {
-            this.ejectRowData(question, row, true);
-          }
-        })
-      );
+      const removeCustomItemAction = new Action({
+        id: "remove-custom-item",
+        title: getLocString("presets.toolbox.deleteCustomItem"),
+        appearance: { style: "alert" },
+        needSeparator: true,
+        action: () => {
+          this.ejectRowData(question, row, true);
+        }
+      });
+      actions.push(removeCustomItemAction);
     }
     return actions;
   }
@@ -175,6 +170,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         iconName: "more-circle-24x24",
         tooltip: getLocString("presets.items.more"),
         location: "end",
+        appearance: { mode: "tertiary" as any },
         visibleIndex: 20
       }, {
         items: [],
@@ -182,7 +178,6 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
         verticalPosition: "bottom",
         horizontalPosition: "center",
         cssClass: "sps-popup-menu sps-popup-menu--context",
-        cssClasses: listComponentCss,
         searchEnabled: false
       });
       addAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
@@ -242,6 +237,18 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     }
     return generalCategory;
   }
+  protected getEditPopupTitle(question: QuestionMatrixDynamicModel): string {
+    if (question.name === this.nameCategories) {
+      return getLocString("presets." + this.path + ".editCategoryTitle");
+    }
+    return super.getEditPopupTitle(question);
+  }
+  protected getCreatePopupTitle(model: SurveyModel, question: QuestionMatrixDynamicModel): string {
+    if (question.name === this.nameCategories) {
+      return getLocString("presets." + this.path + ".createCategoryTitle");
+    }
+    return super.getCreatePopupTitle(model, question);
+  }
   protected needToSetActions(name: string) {
     return this.isItemsMatrix(name) || name === this.nameCategories;
   }
@@ -282,7 +289,7 @@ export class CreatorPresetEditableCaregorizedListConfigurator extends CreatorPre
     if (options.question.name == this.nameCategories) {
       this.setDefaultValueForRow(model, options.question, options.row);
       this.editItem(model, creator, options.question, options.row, {
-        description: getLocString("presets.items.newCategory") + " " + this.getPageShortTitle(model),
+        description: this.getCreatePopupTitle(model, options.question),
         isNew: true
       });
     }

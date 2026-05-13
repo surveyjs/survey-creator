@@ -5,7 +5,6 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyLogicUI } from "./logic-ui";
 import { SurveyHelper } from "../../survey-helper";
-import { listComponentCss } from "../list-theme";
 
 export class TabLogicPlugin implements ICreatorPlugin {
   private filterQuestionAction: Action;
@@ -98,7 +97,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   public createActions() {
     const items: Array<Action> = [];
     const onQuestionPopupShow = () => {
-      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "logic-tab:question-filter", "condition", question.name) }; });
+      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "logic-tab:question-filter", "condition") }; });
       SurveyHelper.sortItems(items, "title");
       const listModel = this.filterQuestionAction.popupModel.contentComponentData.model;
       listModel.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
@@ -113,7 +112,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
         this.model.questionFilter = !!item.id ? item.id : "";
       },
       allowSelection: true,
-      cssClasses: listComponentCss,
       locOwner: this.creator
     }, {
       verticalPosition: "bottom",
@@ -139,7 +137,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
         this.model.actionTypeFilter = !!item.id ? item.id : "";
       },
       allowSelection: true,
-      cssClasses: listComponentCss,
       locOwner: this.creator
     }, {
       verticalPosition: "bottom",

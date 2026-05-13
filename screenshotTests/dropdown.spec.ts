@@ -10,7 +10,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
     const questionSelector = page.locator(".svc-question__content");
-    const buttonSelector = page.locator(".svc-question__dropdown-choices--wrapper .svc-action-button");
+    const buttonSelector = page.locator(".svc-question__dropdown-collapse-button");
 
     await setJSON(page, {
       showQuestionNumbers: true,

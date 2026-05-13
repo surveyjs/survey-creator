@@ -49,7 +49,7 @@ test.describe(title, () => {
     await expect(page.locator("div [data-name=\"imageWidth\"] input")).toHaveValue("");
     await expect(page.locator("div [data-name=\"imageWidth\"] input").getAttribute("placeholder")).resolves.toEqual("auto");
 
-    await page.locator(".sv-action-bar-item[title=\"Hide Panel\"]").click();
+    await page.locator(".sd-action[title=\"Hide Panel\"]").click();
     await expect(imageQuestionSelector).toHaveCount(1);
     await expect(imageQuestionSelector).toHaveClass(/sd-image__image--adaptive/);
     await expect(await imageQuestionSelector.evaluate((el: HTMLElement) => el.clientWidth)).toEqual(624);
@@ -107,8 +107,8 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await page.locator(".svc-question__content").click();
     await page.locator(".spg-panel__title--expandable").getByText("Choice Options").click();
-    await page.locator(".spg-action-button[title='Add new choice']").filter({ visible: true }).click();
-    await page.locator(".spg-matrixdynamic tr:last-of-type .spg-action-button--danger").click();
+    await page.locator(".sd-action[title='Add new choice']").filter({ visible: true }).click();
+    await page.locator(".spg-matrixdynamic tr:last-of-type .sd-action--alert").click();
     await expect(page.locator(".sd-imagepicker > *:not(svc-image-item-value)")).toHaveCount(6);
   });
 
@@ -124,11 +124,11 @@ test.describe(title, () => {
       }]
     });
 
-    await page.locator(".svc-tab-designer .svc-context-button--danger").first().click();
+    await page.locator(".svc-image-item-value-controls .sd-action--alert").first().click();
     await expect(page.locator(".svc-tab-designer .svc-image-item-value--new")).toBeVisible();
     await page.locator(".svc-image-item-value-wrapper").filter({ visible: true }).nth(1).locator(".svc-choose-file-input").setInputFiles("../../resources/logo.jpg");
     await page.waitForLoadState("load");
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.locator(".svc-image-item-value-controls button.sd-action").first().click();
   });
 
   test("Check imagepicker add/delete - 5817", async ({ page }) => {
@@ -147,15 +147,15 @@ test.describe(title, () => {
       creator.selectElement(creator.survey.getQuestionByName("q1"));
     });
     await expect(page.locator(".svc-tab-designer .svc-image-item-value--new")).toBeVisible();
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.locator(".svc-image-item-value-controls button.sd-action").last().click();
     await page.locator(".svc-image-item-value--new").filter({ visible: true }).locator(".svc-choose-file-input").setInputFiles("../../resources/logo.jpg");
     await page.waitForLoadState("load");
 
     await expect(page.locator(".svc-image-item-value").nth(2).locator("img").getAttribute("src")).resolves.toBeTruthy();
-    await page.locator(".svc-context-button--danger").nth(2).click();
+    await page.locator(".svc-image-item-value-controls .sd-action--alert").nth(2).click();
     await expect(page.locator(".svc-image-item-value").nth(2)).toHaveClass(/svc-image-item-value--new/);
     await expect(page.locator(".svc-tab-designer .svc-image-item-value--new")).toBeVisible();
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.locator(".svc-image-item-value-controls button.sd-action").last().click();
     await page.locator(".svc-image-item-value--new").filter({ visible: true }).locator(".svc-choose-file-input").setInputFiles("../../resources/logo.jpg");
     await page.waitForLoadState("load");
 
@@ -174,11 +174,11 @@ test.describe(title, () => {
       }]
     });
 
-    await expect(page.locator(".svc-tab-designer .svc-context-button--danger")).toHaveCount(2);
+    await expect(page.locator(".svc-image-item-value-controls .sd-action--alert")).toHaveCount(2);
     await expect(page.locator(".svc-image-item-value:not(.svc-image-item-value--new)")).toHaveCount(2);
 
-    await page.locator(".svc-tab-designer .svc-context-button--danger").first().click();
-    await expect(page.locator(".svc-tab-designer .svc-context-button--danger")).toHaveCount(1);
+    await page.locator(".svc-image-item-value-controls .sd-action--alert").first().click();
+    await expect(page.locator(".svc-image-item-value-controls .sd-action--alert")).toHaveCount(1);
     await expect(page.locator(".svc-image-item-value:not(.svc-image-item-value--new)")).toHaveCount(1);
   });
 
@@ -374,7 +374,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const duplicateAction = page.locator(".svc-page__content-actions .sv-action--duplicate .svc-page-toolbar-item__title--with-icon");
+    const duplicateAction = page.locator(".svc-page__content-actions .sv-action--duplicate .sd-action__title");
     await page.locator(".svc-page").first().click({ position: { x: 3, y: 3 } });
     await expect(duplicateAction).toBeVisible();
 
@@ -388,7 +388,8 @@ test.describe(title, () => {
   test("Popup position", async ({ page }) => {
     async function setCreatorMarginTop(top: string) {
       await page.evaluate((t: string) => {
-        const el = document.getElementById("survey-creator") || document.querySelector(".svc-creator") as HTMLElement;
+        const rootNode = (window as any).creator.rootElement.getRootNode();
+        const el = rootNode.getElementById("survey-creator") || rootNode.querySelector(".svc-creator") as HTMLElement;
         if (el) el.style.marginTop = t;
       }, top);
     }
@@ -399,7 +400,7 @@ test.describe(title, () => {
     await setJSON(page, { "elements": [{ "type": "text", "name": "q1" }] });
     await page.locator('button[title="Survey settings"]').click();
     await page.locator('[data-name="locale"]').click();
-    const popupTop = await page.evaluate(() => (document.querySelector('[data-name="locale"] .sv-popup__container') as HTMLElement)?.getBoundingClientRect().top ?? 0);
+    const popupTop = await page.evaluate(() => ((window as any).creator.rootElement.getRootNode().querySelector('[data-name="locale"] .sv-popup__container') as HTMLElement)?.getBoundingClientRect().top ?? 0);
     expect(popupTop).toBeGreaterThanOrEqual(200);
     await setCreatorMarginTop("");
   });
@@ -412,7 +413,7 @@ test.describe(title, () => {
 
     const questionContentClass = "svc-question__content";
     const questionContent = page.locator(`[data-sv-drop-target-survey-element=${qName}]`).locator(`.${questionContentClass}`);
-    const questionInput = questionContent.locator(".sd-input:disabled");
+    const questionInput = questionContent.locator(".sd-formbox__input:disabled");
 
     await questionInput.click({ force: true });
     await expect(questionContent).toHaveClass(/svc-question__content--selected/);
@@ -425,7 +426,7 @@ test.describe(title, () => {
 
     const questionContentClass = "svc-question__content";
     const questionContent = page.locator(`[data-sv-drop-target-survey-element=${qName}]`).locator(`.${questionContentClass}`);
-    const questionInput = questionContent.locator(".sd-input:disabled");
+    const questionInput = questionContent.locator(".sd-formbox__input:disabled");
 
     await questionInput.click({ force: true });
     await expect(questionContent).toHaveClass(/svc-question__content--selected/);
@@ -538,9 +539,9 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1000, height: 800 });
     await page.setViewportSize({ width: 1600, height: 800 });
     const settingsButton = page.locator('button[title="Survey settings"]');
-    await expect(settingsButton).not.toHaveClass(/svc-toolbar__item--active/);
+    await expect(settingsButton).not.toHaveClass(/sd-action--active/);
 
-    await page.locator('.svc-menu-action__button[title="General"]').click();
-    await expect(settingsButton).toHaveClass(/svc-toolbar__item--active/);
+    await page.locator('.sd-action[title="General"]').click();
+    await expect(settingsButton).toHaveClass(/sd-action--active/);
   });
 });

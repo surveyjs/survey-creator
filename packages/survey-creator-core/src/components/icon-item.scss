@@ -1,0 +1,24 @@
+// extracted from ui-preset-editor/presets-theme/blocks/sps-dropdown.scss
+.svc-icon-item {
+  display: flex;
+  gap: var(--sjs2-spacing-x100, 8px);
+}
+
+svg.svc-icon-item__icon,
+svg.svc-icon-item__icon use {
+  width: var(--sjs2-size-icon-medium, 24px);
+  height: var(--sjs2-size-icon-medium, 24px);
+  fill: var(--sjs2-color-fg-brand-primary, #19b394);
+}
+
+.sd-selectlist__item--selected {
+  svg.svc-icon-item__icon,
+  svg.svc-icon-item__icon use {
+    fill: currentColor;
+  }
+}
+
+.svc-icon-item__text {
+  white-space: nowrap;
+}
+

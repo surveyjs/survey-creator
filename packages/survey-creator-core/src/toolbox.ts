@@ -28,7 +28,6 @@ import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
 import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { SearchManagerToolbox } from "./components/toolbox/toolbox-search-manager";
-import { listComponentCss } from "./components/list-theme";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
@@ -187,7 +186,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .append("svc-toolbox__tool--has-icon", !!this.iconName)
         .append("svc-toolbox__tool--has-subitems", !!(this.items?.length > 0))
         .append("svc-toolbox__tool--disabled", this.enabled === false)
-        .append("sv-action--hidden", !this.isVisible)
+        .append("svc-toolbox__tool--hidden", !this.isVisible)
         .toString();
     }) as any;
   }
@@ -279,7 +278,11 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public hasText(text: string) {
     if (!text) return;
     const textLowerCase = text.toLowerCase();
-    return this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0;
+    if (this.title.toLowerCase().indexOf(textLowerCase) >= 0 || this.name.toLowerCase().indexOf(textLowerCase) >= 0) return true;
+    if (this.items) {
+      return this.items.some(item => item.hasText(text));
+    }
+    return false;
   }
 
   /**
@@ -423,6 +426,7 @@ export class QuestionToolbox
     return ".sv-scroll__scroller";
   }
 
+  public static defaultQuestionJsonCache: { [name: string]: any } | undefined;
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
     return settings.toolbox.defaultJSON[questionType];
@@ -607,6 +611,9 @@ export class QuestionToolbox
     this.subItemsShowDelay = 0;
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
+    this.cssClasses = {
+      containerItemHidden: "svc-toolbox__tool--hidden",
+    };
     this.searchItem = new Action({
       id: "searchItem-id",
       css: "svc-toolbox__tool svc-toolbox__search-button",
@@ -614,6 +621,7 @@ export class QuestionToolbox
       iconName: "icon-search",
       iconSize: "auto",
       component: "sv-action-bar-item",
+      appearance: { mode: "quaternary", style: "neutral" },
       title: surveyLocalization.getString("ed.toolboxSearch"),
       showTitle: false,
       action: () => {
@@ -633,9 +641,10 @@ export class QuestionToolbox
     this.dotsItem.css = new ComputedUpdater(() => {
       return new CssClassBuilder()
         .append("svc-toolbox__tool svc-toolbox__tool--dots")
-        .append("sv-action--hidden", !this.dotsItem.isVisible)
+        .append("svc-toolbox__tool--hidden", !this.dotsItem.isVisible)
         .toString();
     }) as any;
+    this.dotsItem.appearance = { style: "brand", mode: "quaternary" };
 
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
@@ -653,7 +662,6 @@ export class QuestionToolbox
     };
     this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
     this.dotsItem.data.locOwner = this.creator;
-    this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
   private getDefaultQuestionCategories() {
     const questionCategoryMap = {};
@@ -1327,7 +1335,7 @@ export class QuestionToolbox
     super.patchAction(action);
     this.actionsHash = undefined;
   }
-  public getActionById(name : string): QuestionToolboxItem {
+  public getActionById(name: string): QuestionToolboxItem {
     if (!this.actionsHash) {
       this.actionsHash = {};
     }
@@ -1343,16 +1351,25 @@ export class QuestionToolbox
     const questions = this.getQuestionTypes(supportedQuestions);
     const defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
 
+    const jsonCache = QuestionToolbox.defaultQuestionJsonCache;
     for (var i = 0; i < questions.length; i++) {
       const name = questions[i];
       const defaultJson = QuestionToolbox.getQuestionDefaultSettings(name);
-      let question = (!defaultJson ? <Question>ElementFactory.Instance.createElement(name, "q1") : undefined) || Serializer.createClass(name);
-      if (!!defaultJson) {
-        question.fromJSON(defaultJson);
+      let json: any;
+      if (jsonCache && !defaultJson && name in jsonCache) {
+        json = { ...jsonCache[name] };
+      } else {
+        let question = (!defaultJson ? <Question>ElementFactory.Instance.createElement(name, "q1") : undefined) || Serializer.createClass(name);
+        if (!!defaultJson) {
+          question.fromJSON(defaultJson);
+        }
+        json = question.toJSON();
+        json.type = name;
+        delete json.name;
+        if (jsonCache && !defaultJson) {
+          jsonCache[name] = { ...json };
+        }
       }
-      const json = question.toJSON();
-      json.type = name;
-      delete json.name;
       const iconName = "icon-" + name;
       const item: IQuestionToolboxItem = {
         id: name,

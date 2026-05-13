@@ -46,25 +46,23 @@
               }"
             >
               <div class="svc-creator__content-holder svc-flex-column">
-                <template v-for="tab in model.tabs">
-                  <div
-                    role="tabpanel"
-                    class="svc-creator-tab"
-                    v-bind:key="tab.id"
-                    v-if="model.viewType == tab.id && tab.visible"
-                    :aria-labelledby="'tab-' + tab.id"
-                    :id="'scrollableDiv-' + tab.id"
-                    :class="{
-                      'svc-creator__toolbox--right':
-                        model.toolboxLocation == 'right',
-                    }"
-                  >
-                    <SvComponent
-                      :is="tab.componentContent"
-                      :model="tab.data.model"
-                    ></SvComponent>
-                  </div>
-                </template>
+                <div
+                  role="tabpanel"
+                  class="svc-creator-tab"
+                  v-if="!!model.activeTabMenuItem"
+                  :key="model.activeTabId"
+                  :aria-labelledby="'tab-' + model.activeTabId"
+                  :id="'scrollableDiv-' + model.activeTabId"
+                  :class="{
+                    'svc-creator__toolbox--right':
+                      model.toolboxLocation == 'right',
+                  }"
+                >
+                  <SvComponent
+                    :is="model.activeTabMenuItem.componentContent"
+                    :model="model.activeTabMenuItem.data.model"
+                  ></SvComponent>
+                </div>
               </div>
             </div>
             <div v-if="model.isMobileView" class="svc-footer-bar">

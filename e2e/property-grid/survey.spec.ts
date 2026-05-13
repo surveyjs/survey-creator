@@ -62,7 +62,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
     const question = page.locator(".sv-string-editor").getByText("Question 1");
-    const edit = page.locator("button[title='Edit']");
+    const edit = page.locator(".spg-table__cell button[title='Edit']");
     const showInMultiple = page.locator("input[name='showInMultipleColumns']").locator("..");
     const radioMatrixCell = page.locator("td:nth-of-type(2) .svc-matrix-cell");
     const controlButton = radioMatrixCell.locator(".svc-matrix-cell__question-controls");
@@ -149,7 +149,7 @@ test.describe(title, () => {
     const dataGroup = getPropertyGridCategory(page, "Data");
     await dataGroup.click();
     const panel = page.locator(".spg-panel.sd-element--expanded").first();
-    const dropdown = panel.locator(".spg-dropdown").first();
+    const dropdown = panel.locator(".sd-dropdown").first();
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true }).first();
 
     const clientRectWidth = await dropdown.boundingBox();
@@ -194,14 +194,14 @@ test.describe(title, () => {
 
     const isElementInViewport = async () => {
       return await page.evaluate(() => {
-        const element = document.querySelector("[data-name=logo] input") as HTMLElement;
+        const element = (window as any).creator.rootElement.getRootNode().querySelector("[data-name=logo] input") as HTMLElement;
         if (!element) return false;
         const getBoundValues = element.getBoundingClientRect();
 
         const windowHeight = window.innerHeight;
         const windowWidth = window.innerWidth;
 
-        return getBoundValues.bottom > 0 && getBoundValues.right > 0 && getBoundValues.left < (windowWidth || document.documentElement.clientWidth) && getBoundValues.top < (windowHeight || document.documentElement.clientHeight);
+        return getBoundValues.bottom > 0 && getBoundValues.right > 0 && getBoundValues.left < (windowWidth || (window as any).creator.rootElement.getRootNode().documentElement.clientWidth) && getBoundValues.top < (windowHeight || (window as any).creator.rootElement.getRootNode().documentElement.clientHeight);
       });
     };
 
@@ -217,7 +217,7 @@ test.describe(title, () => {
       "showTimer": true,
       "headerView": "advanced"
     });
-    const input = page.locator("[data-name='timeLimit'] .spg-input");
+    const input = page.locator("[data-name='timeLimit'] .sd-formbox__input");
     const helpButton = page.locator("[data-name='timeLimit'] .spg-help-action");
     await getPropertyGridCategory(page, "Quiz Mode").click();
     await input.click();

@@ -7,17 +7,18 @@ import {
   getTabbedMenuItemByText,
   creatorTabDesignerName,
   creatorTabLogicName,
-  getListItemByText
+  getListItemByText,
+  getVisibleSelectListItemByText
 } from "../helper";
 
 const title = "Logic tab";
 
-const logicAddNewRuleButton = (page: Page) => page.locator(".svc-logic-tab__content-action").getByText("Add New Rule").locator("..");
+const logicAddNewRuleButton = (page: Page) => page.locator(".svc-logic-tab__content-actions .sd-action");
 const logicQuestionSelector = (page: Page) => page.locator(".svc-logic-operator.svc-logic-operator--question").filter({ visible: true });
 const logicOperatorSelector = (page: Page) => page.locator(".svc-logic-operator.svc-logic-operator--operator:not(.sl-paneldynamic__add-btn)").filter({ visible: true });
 const logicActionSelector = (page: Page) => page.locator(".svc-logic-operator--action").filter({ visible: true });
 const logicQuestionValueSelector = (page: Page) => page.locator(".svc-logic-question-value input").filter({ visible: true });
-const logicDropdownValueSelector = (page: Page) => page.locator(".sd-input.sd-dropdown .sd-dropdown__value").filter({ visible: true });
+const logicDropdownValueSelector = (page: Page) => page.locator(".sd-dropdown .sd-dropdown__input").filter({ visible: true });
 const logicOperatorConjuction = (page: Page) => page.locator(".svc-logic-operator.svc-logic-operator--conjunction").filter({ visible: true });
 const logicActionTriggerEditorElement = (page: Page) => page.locator(".svc-logic_trigger-editor").filter({ visible: true });
 const logicActionTriggerQuestionsElement = (page: Page) => page.locator(".svc-logic_trigger-questions").filter({ visible: true });
@@ -25,12 +26,12 @@ const logicDetailButtonElement = (page: Page) => page.locator(".sl-table__detail
 const tableRulesSelector = (page: Page) => page.locator(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filter({ visible: true });
 
 function getBarItemByText(page: Page, text: string): Locator {
-  return page.locator(".sv-action-bar-item").filter({ has: page.locator(".sv-action-bar-item__title").getByText(text) }).filter({ visible: true });
+  return page.locator(".sd-action").filter({ has: page.locator(".sd-action__title").getByText(text) }).filter({ visible: true });
 }
 
 async function listItemClick(page:Page, text: string) {
-  await expect(getListItemByText(page, text)).toBeVisible();
-  await getListItemByText(page, text).click();
+  await expect(getVisibleSelectListItemByText(page, text)).toBeVisible();
+  await getVisibleSelectListItemByText(page, text).click();
   await page.waitForTimeout(100);
 }
 
@@ -109,7 +110,6 @@ function notifyBalloonSelector(page: Page) {
   return page.locator(".svc-notifier");
 }
 
-const disabledClass = /svc-logic-tab__content-action--disabled/;
 const newRuleDisplayText = "New rule";
 const selectQuestionPlaceHolder = "Select...";
 const selectActionTypePlaceHolder = "Select action...";
@@ -125,10 +125,10 @@ test.describe(title, () => {
 
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await expect(page.locator(".svc-logic-tab__content-empty")).toBeVisible();
-    await expect(logicAddNewRuleButton(page)).not.toHaveClass(disabledClass);
+    await expect(logicAddNewRuleButton(page)).not.toHaveAttribute("disabled");
 
     await logicAddNewRuleButton(page).click();
-    await expect(logicAddNewRuleButton(page)).toHaveClass(disabledClass);
+    await expect(logicAddNewRuleButton(page)).toHaveAttribute("disabled");
     await expect(page.locator(".svc-logic-tab__content-empty")).toHaveCount(0);
     await expect(cellRules(page)).toHaveText(newRuleDisplayText);
     await expect(logicQuestionSelector(page)).toHaveCount(1);
@@ -203,11 +203,11 @@ test.describe(title, () => {
     await removeButton(page).first().click();
     await expect(removeButton(page)).toHaveCount(0);
 
-    await expect(logicAddNewRuleButton(page)).toHaveClass(disabledClass);
+    await expect(logicAddNewRuleButton(page)).toHaveAttribute("disabled");
     await expect(cellRules(page)).toHaveText(newRuleDisplayText);
 
     await doneButton(page).click();
-    await expect(logicAddNewRuleButton(page)).not.toHaveClass(disabledClass);
+    await expect(logicAddNewRuleButton(page)).not.toHaveAttribute("disabled");
     await expect(notifyBalloonSelector(page).first()).toHaveText("Modified");
     await expect(cellRules(page)).toHaveText("If 'string_editor' Not empty, survey becomes completed");
     await expect(cellRules(page).locator("span").first()).toHaveAttribute("title", "If 'string_editor' Not empty, survey becomes completed");
@@ -273,12 +273,12 @@ test.describe(title, () => {
     await expect(tableRulesSelector(page)).toHaveCount(3);
 
     await getBarItemByText(page, "All Questions").click();
-    await listItemClick(page, "q2");
+    await getListItemByText(page, "q2").click();
     await expect(tableRulesSelector(page)).toHaveCount(2);
     await expect(getBarItemByText(page, "q2")).toBeVisible();
 
     await getBarItemByText(page, "All Action Types").click();
-    await listItemClick(page, "Skip to question");
+    await getListItemByText(page, "Skip to question").click();
     await expect(tableRulesSelector(page)).toHaveCount(1);
     await expect(getBarItemByText(page, "Skip to question")).toBeVisible();
 
@@ -321,17 +321,17 @@ test.describe(title, () => {
     await expect(fastEntryAction).not.toHaveAttribute("disabled");
     await expect(conditionBuilder).toHaveCount(1);
     await expect(conditionTextEdit).toHaveCount(0);
-    await expect(fastEntryAction).not.toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).not.toHaveClass(/sd-action--active/);
 
     await fastEntryAction.click();
     await expect(conditionBuilder).toHaveCount(0);
     await expect(conditionTextEdit).toHaveCount(1);
-    await expect(fastEntryAction).toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).toHaveClass(/sd-action--active/);
 
     await fastEntryAction.click();
     await expect(conditionBuilder).toHaveCount(1);
     await expect(conditionTextEdit).toHaveCount(0);
-    await expect(fastEntryAction).not.toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).not.toHaveClass(/sd-action--active/);
 
     await fastEntryAction.click();
     await expect(fastEntryAction).not.toHaveAttribute("disabled");
@@ -344,14 +344,14 @@ test.describe(title, () => {
     await expect(conditionBuilder).toHaveCount(1);
     await expect(conditionTextEdit).toHaveCount(0);
     await expect(fastEntryAction).not.toHaveAttribute("disabled");
-    await expect(fastEntryAction).not.toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).not.toHaveClass(/sd-action--active/);
 
     await tableRulesSelector(page).first().hover();
     await logicDetailButtonElement(page).first().click();
     await expect(conditionBuilder).toHaveCount(1);
     await expect(conditionTextEdit).toHaveCount(0);
     await expect(fastEntryAction).not.toHaveAttribute("disabled");
-    await expect(fastEntryAction).not.toHaveClass(/sv-action-bar-item--active/);
+    await expect(fastEntryAction).not.toHaveClass(/sd-action--active/);
 
     await tableRulesSelector(page).nth(1).hover();
     await removeRuleButton(page).nth(1).click();
@@ -463,10 +463,10 @@ test.describe(title, () => {
   });
 
   test("check button hover/focus state", async ({ page }) => {
-    const removeButtonIcon = page.locator(".sl-table__remove-button .sv-action-bar-item__icon");
-    const detailButtonIcon = page.locator(".sl-table__detail-button .sv-action-bar-item__icon");
-    const removeButtonRow = page.locator(".sl-table__remove-button .sv-action-bar-item");
-    const detailButtonRow = page.locator(".sl-table__detail-button.sv-action-bar-item");
+    const removeButtonIcon = page.locator(".sl-table__remove-button .sd-action__icon");
+    const detailButtonIcon = page.locator(".sl-table__detail-button .sd-action__icon");
+    const removeButtonRow = page.locator(".sl-table__remove-button .sd-action");
+    const detailButtonRow = page.locator(".sl-table__detail-button.sd-action");
     const focusedClassName = "sv-focused--by-key";
 
     await setJSON(page, surveyJSON);
@@ -510,7 +510,7 @@ test.describe(title, () => {
 
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     const compareWidths = await page.evaluate(() => {
-      const scrollableSelector = document.querySelector(".svc-logic-tab__content") as HTMLElement;
+      const scrollableSelector = (window as any).creator.rootElement.getRootNode().querySelector(".svc-logic-tab__content") as HTMLElement;
       return scrollableSelector && scrollableSelector.offsetWidth >= scrollableSelector.scrollWidth;
     });
     expect(compareWidths).toBeTruthy();
@@ -546,8 +546,8 @@ test.describe(title, () => {
       ]
     };
 
-    const visibleListItems = page.locator(".svc-list__item").filter({ visible: true });
-    const visibleDisabledListItems = page.locator(".svc-list__item.svc-list__item--disabled").filter({ visible: true });
+    const visibleListItems = page.locator(".sd-selectlist__item").filter({ visible: true });
+    const visibleDisabledListItems = page.locator(".sd-selectlist__item.sd-selectlist__item--disabled").filter({ visible: true });
 
     await setJSON(page, jsonAvailability);
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
@@ -602,7 +602,7 @@ test.describe(title, () => {
         }
       ]
     };
-    const visibleListItems = page.locator(".svc-list__item").filter({ visible: true });
+    const visibleListItems = page.locator(".sd-selectlist__item").filter({ visible: true });
 
     await setJSON(page, jsonAndOr);
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
@@ -616,8 +616,8 @@ test.describe(title, () => {
   });
 
   test("Confirm dialog on leaving tab with an incorrect rule", async ({ page }) => {
-    const cancelButton = page.locator(".sv-modal-popup__button").getByText("I want to complete the rules");
-    const applyButton = page.locator(".sv-modal-popup__button").getByText("Yes");
+    const cancelButton = page.locator(".sv-popup__button").getByText("I want to complete the rules");
+    const applyButton = page.locator(".sv-popup__button").getByText("Yes");
 
     await setJSON(page, json2);
 
@@ -728,6 +728,6 @@ test.describe(title, () => {
 
     await logicQuestionSelector(page).first().click();
     await expect(logicQuestionSelector(page).first().locator("..").locator(".sv-popup")).toBeVisible();
-    await expect(logicQuestionSelector(page).first().locator("..").locator(".sv-popup .svc-list__filter")).toBeVisible();
+    await expect(logicQuestionSelector(page).first().locator("..").locator(".sv-popup .sd-selectlist__filter")).toBeVisible();
   });
 });

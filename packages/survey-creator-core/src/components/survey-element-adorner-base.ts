@@ -27,11 +27,17 @@ function debounce(func, delay) {
 }
 
 const updateRowsVisibility = debounce((target: SurveyElementAdornerBase) => {
-  if (target.creator.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) {
+  const root = target?.creator?.rootElement;
+  if (!root || typeof (root as any).getAnimations !== "function") {
+    return;
+  }
+  if (root.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) {
     updateRowsVisibility(target);
   } else {
-    target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
-    target.creator.survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
+    const survey = target?.creator?.survey;
+    if (!survey) return;
+    survey.pages.forEach(p => p.ensureRowsVisibility());
+    survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
   }
 }, 50);
 
@@ -40,7 +46,18 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected expandCollapseAction: IAction;
   @property({ defaultValue: true }) allowDragging: boolean;
   @property({ defaultValue: false }) expandCollapseAnimationRunning: boolean;
-  public rootElement: HTMLElement;
+  private rootElementValue: HTMLElement;
+
+  public get rootElement(): HTMLElement {
+    return this.rootElementValue;
+  }
+  public set rootElement(val: HTMLElement) {
+    const oldRootElement = this.rootElementValue;
+    this.rootElementValue = val;
+    if (oldRootElement !== val) {
+      this.onRootElementChanged();
+    }
+  }
 
   @property({ defaultValue: null }) dropIndicatorPosition: DropIndicatorPosition;
   @property({ defaultValue: false }) isBeingDragged: boolean;
@@ -172,14 +189,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     const actionContainer = new ActionContainer();
     actionContainer.sizeMode = "small";
     if (this.creator.expandCollapseButtonVisibility != "never") {
+      actionContainer.setActionsAppearance({ style: "brand", size: "xx-small", mode: "quaternary" });
       actionContainer.setItems([this.expandCollapseAction]);
-      actionContainer.cssClasses = {
-        root: "svc-survey-element-top-toolbar sv-action-bar",
-        item: "svc-survey-element-top-toolbar__item",
-        itemIcon: "svc-survey-element-toolbar-item__icon",
-        itemTitle: "svc-survey-element-toolbar-item__title",
-        itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
-      };
+      actionContainer.containerCss = "svc-survey-element-top-toolbar";
     }
     return actionContainer;
   }
@@ -505,6 +517,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         //needSeparator: items.length > 0,
         title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
+        appearance: { style: "alert" },
         iconSize: "auto",
         action: () => {
           this.delete();
@@ -537,5 +550,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   }
   protected getCss(): string {
     return new CssClassBuilder().append("svc-hovered svc-hovered-ready", this.isHovered).toString();
+  }
+  protected onRootElementChanged(): void {
   }
 }

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { QuestionColorModel } from "survey-creator-core";
-import { ReactElementFactory, ReactQuestionFactory, SurveyQuestionText, SvgIcon, Popup } from "survey-react-ui";
+import { ReactQuestionFactory, SurveyQuestionText, SvgIcon, Popup, SurveyActionBar } from "survey-react-ui";
 
 export class SurveyQuestionColor extends SurveyQuestionText {
   constructor(props: any) {
@@ -34,10 +34,12 @@ export class SurveyQuestionColor extends SurveyQuestionText {
   }
   protected renderElement(): React.JSX.Element {
     return (
-      <div className={this.question.cssClasses.root} onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
-        {this.renderColorSwatch()}
-        {this.renderInput()}
-        {this.question.showDropdownAction ? this.renderDropdownAction() : null}
+      <div className={this.question.cssClasses.rootWrapper}>
+        <div className={this.question.cssClasses.root} onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
+          {this.renderColorSwatch()}
+          {this.renderInput()}
+          {this.renderButtons()}
+        </div>
       </div>
     );
   }
@@ -60,18 +62,8 @@ export class SurveyQuestionColor extends SurveyQuestionText {
         aria-describedby={this.question.a11y_input_ariaDescribedBy} />
     </label>;
   }
-  protected renderDropdownAction(): React.JSX.Element {
-    return (
-      <>
-        <div aria-hidden="true" className={this.question.cssClasses.choicesButtonWrapper}>
-          {ReactElementFactory.Instance.createElement("sv-action-bar-item", { item: this.question.dropdownAction })}
-        </div>
-        {this.renderPopup()}
-      </>
-    );
-  }
-  protected renderPopup(): React.JSX.Element {
-    return <Popup model={this.question.dropdownAction.popupModel}></Popup>;
+  protected renderButtons(): React.JSX.Element {
+    return this.question.hasVisibleInputActions ? <SurveyActionBar model={this.question.inputActionsContainer}></SurveyActionBar> : null;
   }
 }
 

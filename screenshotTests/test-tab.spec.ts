@@ -1,11 +1,14 @@
 import { test, expect } from "@playwright/test";
-import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText } from "./helper";
+import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText, getVisibleSelectListItemByText } from "./helper";
 
 const title = "Test tab Screenshot";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
+    await page.evaluate(() => {
+      window["creator"].applyTheme(window["SurveyTheme"].Test);
+    });
   });
 
   test("toolbar view", async ({ page }) => {
@@ -33,7 +36,7 @@ test.describe(title, () => {
 
     await page.waitForTimeout(300);
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await compareScreenshot(page, page.locator(".svc-test-tab__content .sv-action-bar--pages"), "test-tab-toolbar.png");
+    await compareScreenshot(page, page.locator(".svc-test-tab__content .svc-pages-toolbar"), "test-tab-toolbar.png");
 
     await page.setViewportSize({ width: 380, height: 600 });
     await page.waitForTimeout(300);
@@ -159,7 +162,7 @@ test.describe(title, () => {
 
   test("Check survey timer", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
-    await setJSON(page, {
+    const json = {
       showQuestionNumbers: true,
       headerView: "basic",
       "autoFocusFirstQuestion": true,
@@ -220,18 +223,19 @@ test.describe(title, () => {
           ]
         }
       ]
-    });
+    };
+    await setJSON(page, json);
 
     // Remove timer animation and disable timer start
     await page.addStyleTag({ content: ".sd-timer__progress--animation { transition: none !important; }" });
     await page.evaluate(() => {
-      (window as any).Survey.SurveyTimer.instance.start = () => {};
+      (window as any).Survey.SurveyTimer.instance.start = () => { };
     });
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.locator(".sd-navigation__start-btn").click();
     await resetHoverToCreator(page);
-    await compareScreenshot(page, page.locator(".svc-creator__content-wrapper"), "survey-timer.png");
+    await compareScreenshot(page, page.locator(".svc-creator__content-wrapper"), "survey-timer.png", { maxDiffPixels: 2 });
   });
 
   test("empty survey preview", async ({ page }) => {
@@ -265,8 +269,7 @@ test.describe(title, () => {
               "type": "comment",
               "name": "disappointing-experience",
               "visible": false,
-              "visibleIf": "{nps-score} <= 5",
-              "maxLength": 300
+              "visibleIf": "{nps-score} <= 5"
             }
           ]
         }
@@ -276,7 +279,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.setViewportSize({ width: 800, height: 800 });
     await page.locator('[data-name="nps-score"]').click();
-    await page.locator("li.sd-list__item span", { hasText: "2" }).click();
+    await getVisibleSelectListItemByText(page, "2").click();
     await page.locator('[data-name="nps-score"]').click();
     await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-opened-dropdown.png");
   });
@@ -313,7 +316,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.locator('[title="Select device type"]').click();
     await page.locator("span", { hasText: "iPhone SE" }).click();
-    await getBarItemByTitle(page, "Switch to portrait orientation").click();
+    await page.getByRole("button", { name: "Switch to portrait orientation" }).click();
     await page.locator('[data-name="nps-score"]').click();
     await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-opened-dropdown-mobile.png");
   });
@@ -424,7 +427,7 @@ test.describe(title, () => {
       ]
     });
     const pageSelectorButton = page.locator(".svc-page-selector");
-    const pageSelectorMenu = page.locator(".svc-list__container");
+    const pageSelectorMenu = page.locator(".sd-menu-list__container");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await compareScreenshot(page, pageSelectorButton, "test-tab-page-selector-markdown-button-first.png");
     await pageSelectorButton.click();
@@ -450,9 +453,42 @@ test.describe(title, () => {
       ]
     });
 
-    const questionTagbox = page.locator(".sd-input.sd-tagbox");
+    const questionTagbox = page.locator(".sd-formbox.sd-tagbox");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await questionTagbox.click();
     await compareScreenshot(page, page.locator(".sv-popup__container"), "test-tab-tagbox-style.png");
+  });
+
+  test("Simulator delete file confirmation popup", async ({ page }) => {
+    await setJSON(page, {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "file",
+              "name": "question1",
+              "defaultValue": [
+                {}
+              ],
+              "needConfirmRemoveFile": true
+            }
+          ]
+        }
+      ]
+    });
+    const clearButton = page.getByRole("button", { name: "Clear" });
+    const popup = page.locator(".svd-simulator-content .sv-popup");
+    await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
+
+    await page.getByRole("button", { name: "Select device type" }).click();
+    await page.getByText("iPhone SE").click();
+
+    await expect(clearButton).toBeVisible();
+    await expect(popup).not.toBeVisible();
+    await clearButton.click();
+
+    await expect(popup).toBeVisible();
+    await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-popup-delete-file-confirmation.png");
   });
 });

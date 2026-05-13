@@ -1,7 +1,7 @@
 @use "../variables" as *;
 
 .svc-action-button {
-  @include ctrDefaultBoldFont;
+  @include sjs2--typography--default-strong;
   display: inline-block;
 
   padding-top: var(--ctr-actionbar-button-padding-top-medium-text, var(--sjs-spacing-x05));

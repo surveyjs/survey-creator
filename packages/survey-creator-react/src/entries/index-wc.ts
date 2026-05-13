@@ -17,6 +17,7 @@ export * from "../adorners/QuestionWidget";
 export * from "../adorners/CellQuestion";
 export * from "../adorners/CellQuestionDropdown";
 export * from "../adorners/Page";
+export * from "../AddQuestionButton";
 export * from "../adorners/Panel";
 
 export * from "../LogoImage";
@@ -40,6 +41,7 @@ export * from "../side-bar/SideBarDefaultHeader";
 export * from "../side-bar/SideBarPropertyGridHeader";
 export * from "../side-bar/SideBarHeader";
 export * from "../side-bar/SideBar";
+export * from "../side-bar/SideBarLaunchCard";
 export * from "../tabs/translation/TranslationLineSkeleton";
 export * from "../tabs/translation/TranslateFromAction";
 export * from "../ActionButton";
@@ -62,16 +64,16 @@ export * from "../side-bar/ObjectSelector";
 export * from "../side-bar/PropertyGrid";
 export * from "../components/Search";
 export * from "../components/ComponentContainer";
+export * from "../components/IconItem";
 export * from "../Switcher";
 
 export * from "../tabs/JsonErrorItem";
-
+export * from "../tabs/ContainerTab";
 //custom questions
 export * from "../custom-questions/SpinEditor";
 export * from "../custom-questions/ColorItem";
 export * from "../custom-questions/ColorQuestion";
 export * from "../custom-questions/FileEditQuestion";
-export * from "../custom-questions/TextWithResetQuestion";
 export * from "../custom-questions/BooleanSwitch";
 
 export { editorLocalization, localization } from "survey-creator-core";

@@ -82,17 +82,7 @@ Use the File Upload type to allow respondents to upload files. Respondents drag 
 
 <img src="images/question-types-file.png" alt="SurveyJS Question types - File Upload" width="1544" height="1074">
 
-- How to: Restrict uploaded file types          
-The File Upload type is built upon the standard `<input type="file">` HTML element. To restrict file types, the standard element uses the <a href="https://www.w3schools.com/tags/att_input_accept.asp" target="_blank">`accept`</a> attribute. Enter its value into the **Accepted file types** field in the **General** category:            
-    
-    <img src="images/survey-creator-accepted-file-types.png" alt="Survey Creator - Accepted file types" width="1448" height="682">
-
-    > Always restrict the allowed file types to prevent possible security vulnerabilities. 
-
-- How to: Enable multiple file selection           
-Switch to the **General** category and select **Enable multiple file upload**:        
-    
-    <img src="images/survey-creator-allow-multiple-files.png" alt="Survey Creator - Enable multiple file upload" width="1448" height="702">
+[How to Create a Form with File Upload](/survey-creator/documentation/end-user-guide/create-form-with-file-upload#specify-accepted-file-types (linkStyle))
 
 #### Image Picker
 
@@ -100,15 +90,7 @@ Respondents select one or several images or videos from a series. A value associ
 
 <img src="images/question-types-imagepicker.png" alt="SurveyJS Question types - Image Picker" width="1544" height="1212">
 
-- How to: Associate values with images or videos          
-Switch to the **Choices** category and enter the values in the **Choices** table:      
-
-    <img src="images/survey-creator-choices-value.png" alt="Survey Creator - Image value" width="1448" height="650">
-
-- How to: Enable multiple image or video selection           
-Switch to the **General** category and select **Allow multiple selection**:            
-
-    <img src="images/survey-creator-allow-multiple-selection.png" alt="Survey Creator - Allow multiple selection" width="1448" height="650">
+[How to Design an Image-Based Survey](/survey-creator/documentation/end-user-guide/how-to-add-image-or-video-choice-question-to-form (linkStyle))
     
 #### Ranking 
 
@@ -222,6 +204,8 @@ The Dynamic Matrix type is similar to a [Multi-Select Matrix](#multi-select-matr
 
 Use the HTML type to format text as needed, include links, and insert media or other custom elements into the survey. This type is used for presentation only and does not produce a value to be saved in the survey results. Be aware that HTML content can be vulnerable to security breaches. Ensure that the links you insert lead to trusted resources.
 
+[How to Add Custom Survey Elements Using HTML](/survey-creator/documentation/end-user-guide/how-to-add-custom-survey-elements-with-html (linkStyle))
+
 #### Expression
 
 Use the Expression type to calculate values and present them to respondents. For example, you can sum up the scores of previous responses, display current date and time, or find an average value. The calculated value is saved in the survey results. In the following image, the Expression type concatenates the first and last names to display a full name:
@@ -233,6 +217,8 @@ To specify an expression, enter it into the **Expression** field in the **Genera
 #### Image
 
 Use the Image type to add an image or video to the survey. This type is used for presentation only and does not produce a value to be saved in the survey results.
+
+[How to Add an Image or Video to a Form](/survey-creator/documentation/end-user-guide/how-to-add-image-or-video-choice-question-to-form#how-to-add-an-image-or-video-to-a-form (linkStyle))
 
 <div id="signature-pad"></div>
 

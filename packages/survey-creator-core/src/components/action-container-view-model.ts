@@ -4,12 +4,11 @@ import {
   ResponsivityManager,
   UpdateResponsivenessMode
 } from "survey-core";
-import { listComponentCss } from "./list-theme";
 class SurveyElementResponsivityManager extends ResponsivityManager {
   constructor(container: HTMLDivElement, model: SurveyElementActionContainer) {
     super(container, model);
   }
-  shouldProcessResponsiveness():boolean {
+  shouldProcessResponsiveness(): boolean {
     return (this["model"] as SurveyElementActionContainer).isResponsivenessAllowed && super.shouldProcessResponsiveness();
   }
 }
@@ -46,32 +45,41 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
     super();
     this.dotsItem.iconSize = "auto" as any;
     this.dotsItem.popupModel.cssClass += " svc-creator-popup";
-    this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
 
   public fit(options: { availableSpace: number, gap?: number }) {
     if (options.availableSpace <= 0) return;
+    options.gap = options.gap ?? 0;
+    const { availableSpace, gap } = options;
 
     this.dotsItem.visible = false;
     const items = this.visibleActions;
 
+    const calcItemsSpace = (items: Action[], calc: (item: Action) => number) => {
+      return items.reduce((sum, item) => {
+        const itemSize = calc(item);
+        return sum + (!itemSize ? itemSize : itemSize + gap);
+      }, 0) - gap;
+    };
+
     if (!this.alwaysShrink) {
-      if (options.availableSpace >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
+      if (availableSpace >= calcItemsSpace(items, i => i.maxDimension)) {
         items.forEach(i => i.mode = "large");
         return;
       }
 
-      if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false), 0)) {
+      if (availableSpace >= calcItemsSpace(items, i => this.calcItemSize(i, false))) {
         this.setModeForActions(false);
         return;
       }
 
-      if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, ["convertInputType"]), 0)) {
+      if (availableSpace >= calcItemsSpace(items, i => this.calcItemSize(i, false, ["convertInputType"]))) {
         this.setModeForActions(false, ["convertInputType"]);
         return;
       }
     }
-    if (options.availableSpace >= items.reduce((sum, i) => sum += this.calcItemSize(i, true), 0)) {
+
+    if (availableSpace >= calcItemsSpace(items, i => this.calcItemSize(i, true))) {
       this.setModeForActions(true);
       return;
     }

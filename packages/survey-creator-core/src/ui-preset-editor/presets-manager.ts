@@ -1,29 +1,24 @@
 import { Action, IAction, IDialogOptions, ListModel, QuestionDropdownModel, QuestionMatrixDynamicModel, Serializer, settings, SurveyModel } from "survey-core";
-import { getLocString, SurveyCreatorModel, CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, propertyGridCss } from "survey-creator-core";
+import { getLocString, SurveyCreatorModel, showConfirmDialog, CreatorPresets, IPreset, PredefinedCreatorPresets, propertyGridCss, IPresetBase } from "survey-creator-core";
 import { presetsCss } from "./presets-theme/presets";
-import { get } from "lodash";
-import { showConfirmDialog } from "./confirm-dialog";
 
-export interface IPresetListItem {
-  name: string;
-  visible: boolean;
-}
+/**
+ * Describes an item in the preset list.
+ *
+ * A preset list item controls whether a preset is displayed in the list of available presets. Access the collection of preset list items using the [`availablePresets`](/survey-creator/documentation/api-reference/uipreseteditor#availablePresets) property of `UIPresetEditor`.
+ */
+export interface IPresetListItem extends IPresetBase { }
 
 export class PresetsManager {
-  /**
-   *
-   */
+  public static defaultConfigurationId = "default";
   constructor(private creator?: SurveyCreatorModel) {
 
   }
   public presetsList: ListModel;
-  public selectPresetCallback: (preset: ICreatorPresetConfig) => void;
+  public selectPresetCallback: (preset: IPreset) => void;
   public presetSelector: QuestionDropdownModel;
   private unsaved = false;
 
-  /**
-   * Callback fired when the presets list is saved in the Edit Presets List dialog.
-   */
   public onPresetListSaved: (presets: IPresetListItem[]) => void;
 
   private customPresets = [] as string[];
@@ -40,7 +35,7 @@ export class PresetsManager {
     return getLocString("preset.names." + name);
   }
 
-  private confirmSwitchPreset(onApply: ()=>void) {
+  private confirmSwitchPreset(onApply: () => void) {
     if (this.isSaved) {
       onApply();
       return;
@@ -57,27 +52,50 @@ export class PresetsManager {
     });
   }
 
+  private selectPreset(presetName: string) {
+    this.confirmSwitchPreset(() => {
+      if (this.presetsList && this.presetsList.actions) {
+        this.presetsList.selectedItem = this.presetsList.actions.filter(a => a.id == presetName)[0];
+        this.presetsList.onSelectionChanged?.(this.presetsList.selectedItem as any);
+      }
+      const preset = presetName === PresetsManager.defaultConfigurationId
+        ? { name: PresetsManager.defaultConfigurationId, json: {} }
+        : CreatorPresets[presetName];
+      this.selectPresetCallback?.(preset);
+    });
+  }
   private presetListToItems(presets: string[]) {
     return presets
       .filter(presetName => CreatorPresets[presetName].visible !== false)
-      .map(presetName => ({ id: presetName, title: this.getPresetTitle(presetName), action: (item: IAction) => {
-        this.confirmSwitchPreset(() => {
-          this.presetsList.selectedItem = item;
-          this.selectPresetCallback?.(CreatorPresets[presetName]);
-        });
-      } })) as IAction[];
+      .map(presetName => ({
+        id: presetName,
+        title: this.getPresetTitle(presetName),
+        action: () => this.selectPreset(presetName)
+      })) as IAction[];
   }
   private get presetsMenuItems(): IAction[] {
     const defaultPresets = this.presetListToItems(PredefinedCreatorPresets);
     const customPresets = this.presetListToItems(this.customPresets);
-    const editItem = { id: "editPresetsList",
+    const hasPresets = defaultPresets.length + customPresets.length > 0;
+    const defaultConfigItem = {
+      id: PresetsManager.defaultConfigurationId,
+      needSeparator: hasPresets,
+      title: getLocString("presets.plugin.defaultConfiguration"),
+      action: () => this.selectPreset(PresetsManager.defaultConfigurationId)
+    } as IAction;
+    const editItem = {
+      id: "editPresetsList",
       needSeparator: customPresets.length + defaultPresets.length > 0,
       title: getLocString("presets.plugin.editPresetsList"),
-      action: ()=>this.editPresetsList(this.applyPresetsList.bind(this))
+      action: () => this.editPresetsList(this.applyPresetsList.bind(this))
     } as IAction;
 
-    return [...defaultPresets, ...customPresets, editItem];
+    return [...defaultPresets, ...customPresets, defaultConfigItem, editItem];
   }
+  private isProtectedPresetName(name: string): boolean {
+    return PredefinedCreatorPresets.indexOf(name) !== -1;
+  }
+
   private setPresetNewName(onSet: (newName: string) => void) {
     const survey = new SurveyModel({
       showNavigationButtons: "none",
@@ -91,10 +109,18 @@ export class PresetsManager {
         choices: this.customPresets.map(i => ({ value: i, text: i })),
         titleLocation: "hidden",
         requiredErrorText: getLocString("presets.editor.required"),
-        isRequired: true }]
+        createCustomChoiceText: getLocString("presets.plugin.createNewPreset"),
+        isRequired: true
+      }]
     });
+    survey["cssVariables"] = {};
     survey.css = presetsCss;
     survey.questionErrorLocation = "bottom";
+    survey.onValidateQuestion.add((sender, options) => {
+      if (options.name === "presetName" && this.isProtectedPresetName(options.value)) {
+        options.error = getLocString("presets.editor.protectedPresetName");
+      }
+    });
 
     const popupModel = settings.showDialog?.(<IDialogOptions>{
       componentName: "survey",
@@ -112,8 +138,8 @@ export class PresetsManager {
   }
 
   private getPresetsListToEdit() {
-    return [...PredefinedCreatorPresets.map(p =>({ title: this.getPresetTitle(p), name: p, visible: CreatorPresets[p]?.visible !== false, custom: false })),
-      ...this.customPresets.map(p =>({ title: p, name: p, visible: true, custom: true }))];
+    return [...PredefinedCreatorPresets.map(p => ({ title: this.getPresetTitle(p), name: p, visible: CreatorPresets[p]?.visible !== false, custom: false })),
+      ...this.customPresets.map(p => ({ title: p, name: p, visible: true, custom: true }))];
   }
 
   private applyPresetsList(newList: any[]) {
@@ -131,7 +157,7 @@ export class PresetsManager {
 
         if (oldName && oldName !== newName && CreatorPresets[oldName]) {
           // Rename: copy config to new name, then remove old
-          CreatorPresets[newName] = { ...CreatorPresets[oldName], presetName: newName };
+          CreatorPresets[newName] = { ...CreatorPresets[oldName], name: newName };
           delete CreatorPresets[oldName];
           renamedPresets[oldName] = newName;
         }
@@ -143,24 +169,19 @@ export class PresetsManager {
     this.updateMenu();
     const selectedId = this.presetsList?.selectedItem?.id;
     if (selectedId && renamedPresets[selectedId]) {
-      const action = this.presetsList?.getActionById?.(renamedPresets[selectedId]);
-      if (action) {
-        this.presetsList.onItemClick(action);
-      }
+      this.selectPreset(renamedPresets[selectedId]);
     }
     this.ensureSelectedPresetAvailable();
   }
 
   private ensureSelectedPresetAvailable() {
     const current = this.presetsList?.selectedItem?.id;
+    if (current === PresetsManager.defaultConfigurationId) return;
     const visibleNames = this.getPresetsListToEdit().filter(p => p.visible).map(p => p.name);
     if (visibleNames.indexOf(current) >= 0) return;
     const fallback = visibleNames[0];
     if (!fallback || !CreatorPresets[fallback]) return;
-    const action = this.presetsList?.getActionById?.(fallback);
-    if (action) {
-      this.presetsList.onItemClick(action);
-    }
+    this.selectPreset(fallback);
   }
 
   private rebuildPresetsArray() {
@@ -173,9 +194,6 @@ export class PresetsManager {
     });
   }
 
-  /**
-   * Returns the presets array. Mutable - includes all presets from register, add, or user-saved.
-   */
   public getPresetsArray(): IPresetListItem[] {
     this.rebuildPresetsArray();
     return this._presetsArray;
@@ -189,7 +207,7 @@ export class PresetsManager {
       columns: [
         {
           name: "title",
-          title: "Title",
+          title: getLocString("presets.plugin.title"),
         },
         {
           name: "name",
@@ -208,12 +226,15 @@ export class PresetsManager {
         }
       ],
       cellType: "text",
+      rowCount: 0,
+      hideColumnsIfEmpty: true,
       //confirmDelete: true,
       //confirmDeleteText: getLocString("presets.plugin.confirmDeleteCustomPreset"),
       addRowText: getLocString("presets.plugin.addNewPreset"),
       allowRowReorder: true,
       allowCustomChoices: true,
-      isRequired: true }
+      isRequired: true
+    }
     );
 
     survey.onMatrixCellCreated.add((sender, options) => {
@@ -246,10 +267,12 @@ export class PresetsManager {
         id: "visible",
         iconName: getRowIconName(options.row),
         location: "end",
+        appearance: { mode: "quaternary" as any },
         css: options.row.getValue("visible") ? "" : "sps-action--invisible",
         action: () => {
           options.row.getQuestionByName("visible").value = !options.row.getValue("visible");
           visibleAction.iconName = getRowIconName(options.row);
+          visibleAction.appearance.mode = "quaternary";
           visibleAction.css = options.row.getValue("visible") ? "" : "sps-action--invisible";
         }
       });
@@ -259,7 +282,7 @@ export class PresetsManager {
         removeAction.iconName = "icon-delete-24x24";
         removeAction.iconSize = "auto";
         removeAction.component = "sv-action-bar-item";
-        removeAction.innerCss = "sps-action-button sps-action-button--danger";
+        removeAction.appearance.style = "alert";
         removeAction.tooltip = getLocString("presets.plugin.deletePreset");
         removeAction.showTitle = false;
         removeAction.action = () => {
@@ -282,27 +305,35 @@ export class PresetsManager {
         }, {
           type: "buttongroup",
           name: "template",
-          title: "Template",
+          title: getLocString("presets.plugin.template"),
           defaultValue: "basic",
           choices: [
-            { value: "basic", text: "Basic" },
-            { value: "advanced", text: "Advanced" },
-            { value: "expert", text: "Expert" }
+            { value: "basic", text: getLocString("presets.plugin.basic") },
+            { value: "advanced", text: getLocString("presets.plugin.advanced") },
+            { value: "expert", text: getLocString("presets.plugin.expert") }
           ],
         }]
       });
-      addSurvey.css = { ...presetsCss,
+      addSurvey.css = {
+        ...presetsCss,
         buttongroup: {
           ...propertyGridCss.buttongroup,
         }
       };
+      addSurvey["cssVariables"] = {};
+      addSurvey.onValidateQuestion.add((sender, options) => {
+        if (options.name === "presetName" && this.isProtectedPresetName(options.value)) {
+          options.error = getLocString("presets.editor.protectedPresetName");
+        }
+      });
       const popupModel = settings.showDialog?.(<IDialogOptions>{
         componentName: "survey",
         data: { survey: addSurvey, model: addSurvey },
         onApply: () => {
           if (!addSurvey.validate()) return false;
           const presetName = addSurvey.getValue("presetName");
-          CreatorPresets[presetName] = JSON.parse(JSON.stringify(CreatorPresets[addSurvey.getValue("template")]));
+          const templatePreset = CreatorPresets[addSurvey.getValue("template")];
+          CreatorPresets[presetName] = templatePreset ? JSON.parse(JSON.stringify(templatePreset)) : { presetName: presetName, json: {} };
           const value = options.question.value || [];
           value.push({ title: presetName, name: presetName, visible: true, custom: true });
           options.question.value = value;
@@ -320,17 +351,14 @@ export class PresetsManager {
   }
 
   private customizePopupButtons(popupModel: any, applyText: string, cancelText: string) {
+    if (!popupModel) return;
     if (popupModel.footerToolbar) {
-      const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
-      defaultActionBarCss.item = "sps-btn";
-      popupModel.footerToolbar.cssClasses = defaultActionBarCss;
       const applyAction = popupModel.footerToolbar.getActionById("apply");
       const cancelAction = popupModel.footerToolbar.getActionById("cancel");
-      applyAction.innerCss = "sps-btn--primary-brand";
       applyAction.title = applyText || getLocString("buttons.apply");
-      cancelAction.innerCss = "sps-btn--secondary-brand";
       cancelAction.css += " sps-action--grow";
       cancelAction.title = cancelText || getLocString("buttons.cancel");
+      cancelAction.appearance.mode = "secondary";
     }
   }
 
@@ -343,14 +371,12 @@ export class PresetsManager {
       pages: [{ name: "page1", elements: [] }]
     });
     this.addPresetsListEditor(survey);
+    survey["cssVariables"] = {};
     survey.css = {
       ...presetsCss,
-      actionBar: {
-        ...presetsCss.actionBar,
-        itemIcon: presetsCss.actionBar.itemIcon + " sps-action-button__icon--muted",
-      },
       matrixdynamic: {
         ...propertyGridCss.matrixdynamic,
+        actionsCell: propertyGridCss.matrixdynamic.actionsCell + " sps-table__cell--actions",
         buttonAdd: presetsCss.matrixdynamic.buttonAdd,
         footer: presetsCss.matrixdynamic.footer + " sps-matrixdynamic__footer--in-dialog",
       }
@@ -372,23 +398,36 @@ export class PresetsManager {
 
   private updateMenu() {
     this.presetsList?.setItems(this.presetsMenuItems);
-    if (this.presetSelector)this.presetSelector.choices = this.getPresetsListToEdit().filter(p => p.visible).map(i => ({ value: i.name, text: i.title }));
+    if (this.presetSelector) {
+      this.presetSelector.choices = this.getPresetsListToEdit().filter(p => p.visible).map(i => ({ value: i.name, text: i.title }));
+    }
   }
 
   public update() {
     this.updateMenu();
   }
 
+  public saveOrSaveAs(json: any, saveCallback: (newName: string) => void) {
+    const currentName = this.preset?.name;
+    if (currentName && currentName !== PresetsManager.defaultConfigurationId && PredefinedCreatorPresets.indexOf(currentName) === -1) {
+      this.getPreset(currentName).json = json;
+      saveCallback(currentName);
+    } else {
+      this.saveAs(json, saveCallback);
+    }
+  }
+
   public saveAs(json: any, saveCallback: (newName: string) => void) {
     this.setPresetNewName((newName) => {
-      this.addPreset({ presetName: newName, json: json });
+      this.addPreset({ name: newName, json: json });
+      this.unsaved = false;
+      this.selectPreset(newName);
       saveCallback(newName);
-      this.presetsList.onItemClick(this.presetsList.getActionById(newName));
     });
   }
 
-  public addPreset(preset: ICreatorPresetConfig) {
-    const presetName = preset?.presetName;
+  public addPreset(preset: IPreset) {
+    const presetName = preset?.name;
     if (!presetName) return;
 
     // Overwrite existing preset config without duplicating it in the list.
@@ -410,12 +449,14 @@ export class PresetsManager {
     this.ensureSelectedPresetAvailable();
   }
 
-  public getPreset(name: string): ICreatorPresetConfig | undefined {
+  public getPreset(name: string): IPreset | undefined {
     return CreatorPresets[name];
   }
 
-  public getCurrentPreset(): ICreatorPresetConfig | undefined {
+  public get preset(): IPreset | undefined {
     const value = this.presetsList?.selectedItem?.id;
-    return value ? CreatorPresets[value] : undefined;
+    if (!value) return undefined;
+    if (value === PresetsManager.defaultConfigurationId) return { name: PresetsManager.defaultConfigurationId, json: {} };
+    return CreatorPresets[value];
   }
 }

@@ -1,10 +1,13 @@
 import { PagesController } from "../../pages-controller";
-import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
+import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater, menuListCss, classesToSelector } from "survey-core";
+import { getLocString } from "../../editorLocalization";
+import { DomDocumentHelper } from "survey-core";
+import { CreatorBase } from "src/creator-base";
+import { PageAdorner } from "../page";
+import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
 
 import "./page-navigator.scss";
 import "./page-navigator-item.scss";
-import { getLocString } from "../../editorLocalization";
-import { listComponentCss } from "../list-theme";
 
 export class PageNavigatorViewModel extends Base {
   public icon: string;
@@ -17,6 +20,7 @@ export class PageNavigatorViewModel extends Base {
     this.currentPage = this.pagesController.currentPage;
   };
   private _resizeObserver: ResizeObserver;
+  private _rootUIElement: HTMLElement;
 
   private pcPropertyChangedHandler = (sender, options) => {
     if (options.name === "toolboxLocation") {
@@ -39,14 +43,14 @@ export class PageNavigatorViewModel extends Base {
         this.pagesController.selectPage(item.data);
         this.popupModel.hide();
       },
-      cssClasses: listComponentCss,
+      cssClasses: { ...menuListCss },
       allowSelection: true,
       listRole: "menu",
       listItemRole: "menuitemradio",
       locOwner: pagesController.creator as any
     });
-    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup" });
-    this.popupModel.focusFirstInputSelector = ".svc-list__item--selected";
+    this.popupModel = new PopupModel("sv-list", { model: this.pageListModel }, { cssClass: "svc-creator-popup", showPointer: false });
+    this.popupModel.focusFirstInputSelector = classesToSelector(this.pageListModel.cssClasses.itemSelected);
     !!this.pagesController && (this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"]);
     this.popupModel.onShow = () => {
       this.pageListModel.selectedItem = this.getActionBarByPage(this.pagesController.currentPage);
@@ -138,9 +142,6 @@ export class PageNavigatorViewModel extends Base {
     item.data = page;
     return this.createActionBarCore(item);
   }
-  public get isByPageMode() {
-    return this.pagesController.creator["pageEditMode"] === "bypage";
-  }
   public scrollToPage(page: PageModel) {
     if (this.pageEditMode === "bypage") {
       this.pagesController.currentPage = page;
@@ -148,32 +149,20 @@ export class PageNavigatorViewModel extends Base {
       this.pagesController.creator.selectElement(this.pagesController.currentPage);
       return;
     }
-    const rootNode = this._itemsContainer?.getRootNode();
-    const doc = rootNode instanceof Document || rootNode instanceof ShadowRoot ? rootNode : document;
-    const el: any = doc.getElementById(page.id);
-    if (!!el) {
-      const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
-      if (!!this._scrollableContainer) {
-        // const y = el.offsetTop - (this._scrollableContainer.clientHeight / 4);
-        this._scrollableContainer.scrollTo(this._scrollableContainer.scrollLeft, el.offsetTop - 20);
-        this.patchContainerOffset(el);
-        if (isLastPage) {
-          setTimeout(() => {
-            this._scrollableContainer.scrollTo(this._scrollableContainer.scrollLeft, el.offsetTop - 20);
-            this.patchContainerOffset(el);
-          }, 50);
-        }
-      } else {
-        el.scrollIntoView({ block: "start" });
-        this.patchContainerOffset(el);
-        if (isLastPage) {
-          setTimeout(() => {
-            el.scrollIntoView({ block: "start" });
-            this.patchContainerOffset(el);
-          }, 50);
-        }
-      }
+    const pageAdorner = SurveyElementAdornerBase.GetAdorner(page) as PageAdorner;
+    if (!!pageAdorner && !pageAdorner.needRenderContent) {
+      pageAdorner.needRenderContent = true;
     }
+    setTimeout(() => {
+      const document = DomDocumentHelper.getDocument();
+      const rootNode = this._itemsContainer?.getRootNode();
+      const doc = rootNode instanceof Document || rootNode instanceof ShadowRoot ? rootNode : document;
+      const el: any = doc.getElementById(page.id);
+      if (!!el) {
+        (this.pagesController.creator as any as CreatorBase).scrollToElement(page, el, el);
+        this.patchContainerOffset(el);
+      }
+    }, 50);
   }
   protected createActionBarCore(item: IAction): Action {
     return new Action(item);
@@ -190,7 +179,9 @@ export class PageNavigatorViewModel extends Base {
     let maxVisiblePage = undefined;
     let maxVisiblePagePart = 0;
     this.pagesController.pages.forEach(page => {
-      const pageElement = document.getElementById(page.id);
+      const root = viewPort?.getRootNode() || DomDocumentHelper.getDocument();
+      if (!(root instanceof Document || root instanceof ShadowRoot)) return;
+      const pageElement = <HTMLElement>root.querySelector("#" + page.id);
       if (!!pageElement) {
         const pageTop = pageElement.offsetTop;
         const pageBottom = pageTop + pageElement.clientHeight;
@@ -283,9 +274,6 @@ export class PageNavigatorViewModel extends Base {
   public static PAGE_NAVIGATION_ITEM_HEIGHT = 36;
   protected updateVisibleItems(allAvailableHeight: number): void {
     this.updateVisibility();
-    if (this.isByPageMode) {
-      return;
-    }
     const itemsAvailableHeight = allAvailableHeight - PageNavigatorViewModel.PAGE_NAVIGATION_MENU_ITEM_HEIGHT;
     this.visibleItemsCount = Math.floor(itemsAvailableHeight / PageNavigatorViewModel.PAGE_NAVIGATION_ITEM_HEIGHT);
 
@@ -297,12 +285,7 @@ export class PageNavigatorViewModel extends Base {
     this.visibleItemsStartIndex = visibleStart;
   }
   private _updateVisibility() {
-    this.hasScrolling = !this._scrollableContainer || (this._scrollableContainer.scrollHeight > this._scrollableContainer.clientHeight);
-    this.visible = this.items.length > 1 && (this.hasScrolling || this.isByPageMode);
-    if (this.isByPageMode) {
-      this.visibleItemsStartIndex = 0;
-      this.visibleItemsCount = this.items.length;
-    }
+    this.visible = this.items.length > 1;
   }
   private updateVisibility() {
     // this._updateVisibility();
@@ -316,15 +299,48 @@ export class PageNavigatorViewModel extends Base {
     }
     return this.items.slice(this.visibleItemsStartIndex, this.visibleItemsStartIndex + this.visibleItemsCount);
   }
+  public detachFromUI() {
+    if (!!this._rootUIElement) {
+      this._rootUIElement.removeEventListener("wheel", this._onWheel);
+      this._rootUIElement = undefined as any;
+    }
+  }
+  private _onWheel(event: WheelEvent) {
+    event.preventDefault();
+    if (event.deltaY > 10) {
+      this.visibleItemsStartIndex = Math.min(this.visibleItemsStartIndex + 1, this.items.length - this.visibleItemsCount);
+    } else if (event.deltaY < -10) {
+      this.visibleItemsStartIndex = Math.max(this.visibleItemsStartIndex - 1, 0);
+    }
+  }
   public attachToUI(el: HTMLDivElement) {
     if (!!el) {
-      const scrollableContainer = el.parentElement.parentElement.parentElement.parentElement.parentElement as HTMLDivElement;
+      const scrollableContainer = el.parentElement?.parentElement?.parentElement?.parentElement?.parentElement as HTMLDivElement;
       const self = this;
       scrollableContainer.onscroll = function (this: GlobalEventHandlers, ev: Event) {
         return self.onContainerScroll(ev.currentTarget as HTMLDivElement);
       };
+      this._rootUIElement = el;
+      el.addEventListener("wheel", this._onWheel.bind(this), { passive: false });
       this.setItemsContainer(el.parentElement as HTMLDivElement);
       this.setScrollableContainer(scrollableContainer);
     }
+  }
+  private selectorActionValue: Action;
+  public get selectorAction(): Action {
+    if (!this.selectorActionValue) {
+      this.selectorActionValue = new Action({
+        id: "select-page",
+        title: this.pageSelectorCaption,
+        appearance: { style: "brand", mode: "tertiary-muted", size: "small" },
+        innerCss: "svc-page-navigator__selector",
+        iconName: this.icon,
+        iconSize: "auto",
+        showTitle: false,
+        popupModel: this.popupModel,
+        action: () => this.togglePageSelector()
+      });
+    }
+    return this.selectorActionValue;
   }
 }

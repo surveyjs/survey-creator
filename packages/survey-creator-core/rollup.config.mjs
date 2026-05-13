@@ -6,8 +6,8 @@ import { fileURLToPath } from "node:url";
 import svgLoader from "svg-inline-loader";
 
 import process from "process";
-import pkg from "./package.json" assert { type: "json" };
-import { createEsmConfig, createUmdConfig, createCssConfig } from "./rollup.helpers.mjs";
+import pkg from "./package.json" with { type: "json" };
+import { createEsmConfig, createUmdConfig, createCssConfig } from "../../rollup.helpers.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const buildPath = resolve(__dirname, "build");
@@ -112,8 +112,8 @@ const buildPlatformJson = {
     },
     "./ui-preset-editor": {
       "types": "./ui-preset-editor/index.d.ts",
-      "import": "./fesm/ui-preset-editor/index.mjs",
-      "require": "./ui-preset-editor/index.js"
+      "import": "./fesm/ui-preset-editor.mjs",
+      "require": "./ui-preset-editor.js"
     },
     "./ui-preset-editor/i18n": {
       "import": "./fesm/ui-preset-editor/i18n/index.mjs",
@@ -128,6 +128,7 @@ const buildPlatformJson = {
 };
 
 if (process.env.emitNonSourceFiles === "true") {
+  fs.mkdirSync(buildPath, { recursive: true });
   fs.copyFileSync("./README.md", resolve(buildPath, "README.md"));
   fs.writeFileSync(
     resolve(buildPath, "package.json"),
@@ -166,7 +167,8 @@ export default async (options) => {
         "iconsV1": imagesV1,
         "iconsV2": imagesV2
       },
-      emitCss: resolve(buildPath, "survey-creator-core.fontless.css")
+      emitCss: resolve(buildPath, "survey-creator-core.fontless.css"),
+      noEmitOnError: !options.watch
     }),
     createCssConfig({
       input: {
@@ -175,6 +177,7 @@ export default async (options) => {
       dir: buildPath,
       emitMinified: process.env.emitMinified === "true",
       version: pkg.version,
+      watchFiles: [resolve(buildPath, "survey-creator-core.fontless.css")],
       onCloseBundle: async() => {
         for (const path of [resolve(buildPath, "survey-creator-core.css"), resolve(buildPath, "survey-creator-core.min.css")]) {
           if (fs.existsSync(path)) {
@@ -205,7 +208,8 @@ export default async (options) => {
         "iconsV1": imagesV1,
         "iconsV2": imagesV2
       },
-      emitCss: false
+      emitCss: false,
+      noEmitOnError: !options.watch
     })
   ];
 };

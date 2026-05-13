@@ -21,7 +21,8 @@ import {
   classesToSelector,
   QuestionFactory,
   PopupModel,
-  QuestionCompositeModel
+  QuestionCompositeModel,
+  defaultActionBarCss
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -35,8 +36,8 @@ import { StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
-import { listComponentCss } from "./list-theme";
 import { SurveyHelper } from "../survey-helper";
+import { DomDocumentHelper } from "survey-core";
 
 export interface QuestionBannerParams {
   text: string;
@@ -79,6 +80,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return super.canSelectElement() && this.surveyElement.isInteractiveDesignElement;
   }
   select(model: QuestionAdornerViewModel, event: IPortableEvent) {
+    const document = DomDocumentHelper.getDocument();
     if (!model.canSelectElement()) return;
     const creator = model.creator;
     const selEl = model.surveyElement;
@@ -303,19 +305,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected createActionContainer(): SurveyElementActionContainer {
     const actionContainer = super.createActionContainer();
+
     const defaultCssClasses = {
-      root: "svc-survey-element-toolbar sv-action-bar",
-      item: "svc-survey-element-toolbar__item",
-      itemWithTitle: "svc-survey-element-toolbar__item--with-text",
-      itemAsIcon: "svc-survey-element-toolbar__item--icon",
-      itemActive: "svc-survey-element-toolbar__item--active",
-      itemPressed: "svc-survey-element-toolbar__item--pressed",
-      itemIcon: "svc-survey-element-toolbar-item__icon",
-      itemTitle: "svc-survey-element-toolbar-item__title",
-      itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+      ...defaultActionBarCss,
+      root: "svc-survey-element-toolbar " + defaultActionBarCss.root,
     };
 
     actionContainer.sizeMode = "small";
+    actionContainer.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
     actionContainer.cssClasses = defaultCssClasses;
     (<SurveyElementActionContainer>actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
     return actionContainer;
@@ -594,7 +591,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           subactions.unshift(defaultSubaction);
           if (selectedAction == action && !selectedSubactionLocal) selectedSubactionLocal = defaultSubaction;
         }
-        action.setSubItems({ items: subactions, cssClasses: listComponentCss });
+        action.setSubItems({ items: subactions });
         if (selectedSubactionLocal) {
           selectedAction = action;
           selectedSubaction = selectedSubactionLocal;
@@ -625,7 +622,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     const listModel = new ListModel({
       items: [],
-      cssClasses: listComponentCss,
     });
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
     const propName = QuestionToolbox.getSubTypePropertyName(this.surveyElement.getType());
@@ -677,7 +673,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       allowSelection: true,
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
     }, this.creator);
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
       if (opt.isVisible) {

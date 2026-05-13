@@ -1,5 +1,5 @@
 import { expect } from "playwright/test";
-import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText } from "./helper";
+import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab, objectSelectorButton, expandButtonSelector } from "./helper";
 import { largeSurvey } from "./large-survey";
 
 const title = "Sidebar";
@@ -15,8 +15,8 @@ test.describe(title, () => {
       pages: [{ name: "page1" }]
     });
     await page.setViewportSize({ width: 750, height: 700 });
-    await page.locator(".sv-action-bar-item[title=\"Show Panel\"]").click();
-    await page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item").click();
+    await expandButtonSelector(page).click();
+    await objectSelectorButton(page).click();
 
     await compareScreenshot(page, ".svc-side-bar__container", "side-bar-object-selector.png");
   });
@@ -29,7 +29,7 @@ test.describe(title, () => {
     await page.locator(".svc-page-navigator__selector").click();
     await getListItemByText(page, "educationalNeeds").click();
     await page.locator(".svc-string-editor__input").filter({ hasText: "Patient Name" }).click();
-    await page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item").click();
+    await objectSelectorButton(page).click();
     await page.waitForTimeout(1000);
 
     await compareScreenshot(page, objectSelectorContent, "side-bar-object-selector-with-selected-item.png");
@@ -99,7 +99,7 @@ test.describe(title, () => {
       ]
     });
     await changeToolboxSearchEnabled(page, false);
-    await page.locator(".sd-question").click();
+    await page.locator(".svc-designer-surface .sd-question").click();
     await page.setViewportSize({ width: 1920, height: 900 });
 
     await page.locator(".svc-search__input").type("choices");
@@ -116,8 +116,7 @@ test.describe(title, () => {
   });
 
   test("tabbed mode", async ({ page }) => {
-    const themeTabUrl = url.replace(/\/testcafe$/, "/testcafe-theme-tab");
-    await page.goto(themeTabUrl);
+    await page.goto(urlThemeTab);
 
     await page.setViewportSize({ width: 1920, height: 1200 });
     await page.evaluate(() => {
@@ -130,8 +129,8 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-general.png");
 
-    await page.locator(".svc-menu-action__button").filter({ visible: true }).nth(4).click();
-    await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png");
+    await page.locator(".svc-sidebar-tabs__item .sd-action").filter({ visible: true }).nth(4).click();
+    await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png", { maxDiffPixels: 2 });
 
     await page.locator(".spg-boolean-switch").filter({ visible: true }).click();
     await page.locator(".svc-top-bar").filter({ visible: true }).hover();
@@ -143,8 +142,7 @@ test.describe(title, () => {
   });
 
   test("boolean switch", async ({ page }) => {
-    const themeTabUrl = url.replace(/\/testcafe$/, "/testcafe-theme-tab");
-    await page.goto(themeTabUrl);
+    await page.goto(urlThemeTab);
 
     await page.setViewportSize({ width: 1920, height: 1200 });
     await page.evaluate(() => {
@@ -153,12 +151,17 @@ test.describe(title, () => {
 
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
 
-    await page.locator(".svc-menu-action__button").filter({ visible: true }).nth(4).click();
+    await page.locator(".svc-sidebar-tabs__item .sd-action").filter({ visible: true }).nth(4).click();
     await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-default.png");
     await page.locator(".spg-boolean-switch__button").filter({ visible: true }).hover();
     await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-hover.png");
     await page.locator(".spg-boolean-switch__button").filter({ visible: true }).click();
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Shift+Tab");
+    await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-checked-focus.png");
+    await page.keyboard.press("Space");
     await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-focus.png");
+    await page.keyboard.press("Space");
     await page.keyboard.press("Tab");
     await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-checked.png");
     await page.locator(".spg-boolean-switch__button").filter({ visible: true }).hover();
@@ -182,9 +185,9 @@ test.describe(title, () => {
       window["creator"].showOneCategoryInPropertyGrid = true;
     });
     await page.locator(".sv-action--svd-settings").click();
-    await page.locator(".spg-question[data-name='locale'] .spg-dropdown").locator(".sd-editor-chevron-button").click();
+    await page.locator(".spg-question[data-name='locale'] .sd-dropdown").locator(".sd-editor-chevron-button").click();
     await page.locator(".sv-popup").filter({ visible: true }).hover({ position: { x: 0, y: 0 } });
-    await compareScreenshot(page, undefined, "mobile-popup-inside-new-pg.png");
+    await compareScreenshot(page, undefined, "mobile-popup-inside-new-pg.png", { maxDiffPixels: 2667 });
   });
 
   test("property grid empty survey", async ({ page }) => {

@@ -2,7 +2,6 @@
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 resources:
   repositories:
     - repository: Service
@@ -42,7 +41,7 @@ trigger:
 pr: none
 
 pool:
-  vmImage: "Ubuntu-22.04"
+  name: main-selfhosted
 
 jobs:
   - job: CreatorV2Core
@@ -66,7 +65,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - task: CopyFiles@2
@@ -403,7 +402,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - task: CopyFiles@2
@@ -590,11 +589,21 @@ jobs:
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 React"
 
+      - task: PublishTestResults@2
+        displayName: "Publish Playwright test results CreatorV2 React"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator React Playwright Tests"
+        condition: always()
+
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run test:a11y:ci
         displayName: "A11Y Functional test CreatorV2 React"
-
       - task: CopyFiles@2
         inputs:
           SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/build"
@@ -620,7 +629,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - powershell: |
@@ -747,6 +756,17 @@ jobs:
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 Angular"
 
+      - task: PublishTestResults@2
+        displayName: "Publish Playwright test results CreatorV2 Angular"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator Angular Playwright Tests"
+        condition: always()
+
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
           npm run test:a11y:ci
@@ -777,7 +797,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - powershell: |
@@ -904,6 +924,17 @@ jobs:
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 Vue"
 
+      - task: PublishTestResults@2
+        displayName: "Publish Playwright test results CreatorV2 Vue"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator Vue Playwright Tests"
+        condition: always()
+
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
           npm run test:a11y:ci
@@ -934,7 +965,7 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.x"
+          versionSpec: "24.x"
         displayName: "Install Node.js"
 
       - task: CopyFiles@2
@@ -1120,6 +1151,17 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run e2e:ci
         displayName: "Playwright Functional test CreatorV2 JS"
+
+      - task: PublishTestResults@2
+        displayName: "Publish Playwright test results CreatorV2 JS"
+        inputs:
+          searchFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/test-results"
+          testResultsFormat: "JUnit"
+          testResultsFiles: "e2e-junit-results.xml"
+          mergeTestResults: true
+          failTaskOnFailedTests: true
+          testRunTitle: "Creator JS Playwright Tests"
+        condition: always()
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js

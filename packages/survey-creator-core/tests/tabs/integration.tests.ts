@@ -40,7 +40,7 @@ test("saveSurvey and saveTheme actions integration", (): any => {
   expect(saveThemeAction.enabled).toBeFalsy();
 
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  propertyGridSurvey.getQuestionByName("--sjs-primary-backcolor").value = "some val";
+  propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600").value = "some val";
   expect(saveSurveyAction.enabled).toBeTruthy();
   expect(saveThemeAction.enabled).toBeTruthy();
 

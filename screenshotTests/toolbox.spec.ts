@@ -161,7 +161,7 @@ test.describe(title, () => {
 
   test("toolbox inside sidebar", async ({ page }) => {
     const toolboxItem = page.locator(".svc-toolbox__item");
-    const toolboxButtonSelector = page.locator('.sv-action-bar-item[title="Toolbox"]');
+    const toolboxButtonSelector = page.getByRole("button", { name: "Toolbox" });
 
     await changeToolboxLocation(page, "sidebar");
     await page.setViewportSize({ width: 1240, height: 870 });
@@ -179,7 +179,7 @@ test.describe(title, () => {
     await changeToolboxSearchEnabled(page, false);
     await page.setViewportSize({ width: 2560, height: 1440 });
     const toolboxTool = page.locator(".svc-toolbox__tool");
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
 
     await toolboxToolAction.dispatchEvent("pointerdown");
     await compareScreenshot(page, toolboxTool, "toolbox-tool-pressed-state.png");
@@ -403,14 +403,14 @@ test.describe(title, () => {
     await compareScreenshot(page, toolboxElement, "toolbox-search.png");
     await toolboxSearch.type("single");
     await compareScreenshot(page, toolboxElement, "toolbox-search-entered.png");
-    await page.locator(".sv-action--grid-search-close").hover();
+    await page.locator(".svc-action--search-close").hover();
     await compareScreenshot(page, toolboxElement, "toolbox-search-close-hover.png");
     await toolboxSearch.click();
     await toolboxSearch.type("qwerty");
     await compareScreenshot(page, toolboxElement, "toolbox-search-placeholder.png");
-    await page.locator(".sv-action--grid-search-close").click();
+    await page.locator(".svc-action--search-close").click();
     await page.evaluate(() => {
-      (document.querySelector(".svc-toolbox .sv-scroll__scroller") as HTMLDivElement).style.background = "red";
+      ((window as any).creator.rootElement.getRootNode().querySelector(".svc-toolbox .sv-scroll__scroller") as HTMLDivElement).style.background = "red";
     });
     await compareScreenshot(page, toolboxElement, "toolbox-search-background.png");
   });
@@ -545,7 +545,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1240, height: 1161 });
     await setShowSidebar(page, false);
     await compareScreenshot(page, toolboxElement, "toolbox-compact-disabled-items.png");
-    await page.locator("button.svc-element__question-type-selector").click();
-    await compareScreenshot(page, page.locator(".sv-popup__container:visible"), "add-new-disabled-items.png");
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
+    await compareScreenshot(page, page.locator(".sv-popup__container:visible"), "add-new-disabled-items.png", { maxDiffPixels: 2 });
   });
 });

@@ -47,7 +47,8 @@ async function setupToolboxProperty(page: Page, propertyName: string, propertyVa
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(url);
+    await page.goto(url, { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => !!window["creator"]);
   });
 
   test("Simple click", async ({ page }) => {
@@ -228,7 +229,7 @@ test.describe(title, () => {
     await page.locator(".svc-toolbox__tool--dots").click();
     await expect(popup.first()).toBeVisible();
 
-    await popup.locator(".svc-list__item").first().click();
+    await popup.locator(".sd-menu-item").first().click();
     await expect(page.locator(".svc-question__content")).toHaveCount(1);
   });
 
@@ -241,13 +242,13 @@ test.describe(title, () => {
 
     const hasNoScroll = () =>
       page.evaluate(() => {
-        const element = document.querySelector(".svc-toolbox");
+        const element = (window as any).creator.rootElement.getRootNode().querySelector(".svc-toolbox");
         return element?.scrollHeight === element?.clientHeight;
       });
 
     const setSize = (size: number) =>
       page.evaluate((s) => {
-        const element = document.querySelector(".svc-creator") as HTMLElement;
+        const element = (window as any).creator.rootElement.getRootNode().querySelector(".svc-creator") as HTMLElement;
         if (element) element.style.height = s + "px";
       }, size);
 
@@ -288,6 +289,8 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 598 });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
     await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
+    // Wait for layout to recalculate visibility after enabling search and viewport change
+    await page.waitForTimeout(100);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(10);
   });
 
@@ -352,7 +355,7 @@ test.describe(title, () => {
     await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
 
     await page.locator(".svc-question__content--text").click({ position: { x: 200, y: 20 } });
-    await page.locator(".svc-survey-element-toolbar-item__title").getByText("Save as Toolbox Item").click();
+    await page.locator(".sd-action__title").getByText("Save as Toolbox Item").click();
 
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
     const scrollContainerHeight2 = await page.locator(".sv-scroll__container").first().evaluate((el) => el.clientHeight);
@@ -488,7 +491,7 @@ test.describe(title, () => {
     await searchInput.fill("d");
     await expect(searchInput).toHaveValue("d");
     await expect(page.locator(".svc-toolbox")).toHaveClass(/svc-toolbox--flyout/);
-    await page.locator(".svc-toolbox .sv-action--grid-search-close").click();
+    await page.locator(".svc-toolbox .svc-action--search-close").click();
     await expect(searchInput).toHaveValue("");
     await expect(page.locator(".svc-toolbox")).toHaveClass(/svc-toolbox--flyout/);
   });

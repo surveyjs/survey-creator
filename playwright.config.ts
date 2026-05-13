@@ -1,14 +1,20 @@
 import { defineConfig } from "@playwright/test";
 import { resolve } from "path";
+
+const shardIndex = process.env.PLAYWRIGHT_SHARD_INDEX || "results";
+
 export default defineConfig({
   retries: 4,
   fullyParallel: true,
+  expect: {
+    toHaveScreenshot: { threshold: 0.02 }
+  },
   webServer: {
     command: "",
     url: "http://localhost:8080"
   },
   snapshotPathTemplate: "{testDir}/{testFilePath}-snapshots/{arg}{ext}",
-  reporter: [["junit", { outputFile: "test-results/e2e-junit-results.xml" }], ["html", { open: "never" }]],
+  reporter: [["line"], ["junit", { outputFile: `test-results/e2e-junit-${shardIndex}.xml` }], ["html", { open: "never", printSteps: false }]],
   use: {
     launchOptions: {
       ignoreDefaultArgs: ["--hide-scrollbars"],

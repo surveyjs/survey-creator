@@ -5,6 +5,12 @@
     "bootstrap": "^3.3.7",
     "survey-creator-angular": "../../build",
     "surveyjs-widgets": "^1.9.40",
-    "tslib": "^2.3.0"
+    "inputmask": "^5.0.9",
+    "nouislider": "^15.8.1",
+    "sortablejs": "^1.15.0",
+    "bootstrap-slider": "^11.0.2",
+    "icheck": "^1.0.2",
+    "tslib": "^2.3.0",
+    "jquery": "^3.7.0"
   }
 }

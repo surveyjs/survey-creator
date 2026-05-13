@@ -1,15 +1,6 @@
 <ng-template #template>
   <div class="svc-rating-question-content">
-    <div [class]="adorner.controlsClassNames">
-      <span *ngIf="adorner.allowRemove" [class]="adorner.removeClassNames" [key2click] 
-      (click)="adorner.removeItem(adorner)" role="button" [attr.aria-label]="adorner.removeTooltip">
-        <svg [iconName]="'icon-remove_16x16'" [size]="'auto'" [attr.title]="adorner.removeTooltip" sv-ng-svg-icon></svg>
-      </span>
-      <span *ngIf="adorner.allowAdd" [class]="adorner.addClassNames" [key2click]
-      (click)="adorner.addItem(adorner)" role="button" [attr.aria-label]="adorner.addTooltip">
-        <svg [iconName]="'icon-add_16x16'" [size]="'auto'" [attr.title]="adorner.addTooltip" sv-ng-svg-icon></svg>
-      </span>
-    </div>
+    <sv-action-bar [model]="adorner.rateActionsContainer"></sv-action-bar>
     <ng-container *ngTemplateOutlet="contentTempl"></ng-container>
   </div>
 </ng-template>

@@ -1,4 +1,3 @@
-import { clear } from "console";
 import { SurveyTextWorker } from "../src/textWorker";
 import { ILoadFromJSONOptions } from "survey-core";
 
@@ -46,7 +45,8 @@ test("SurveyTextWorker, show duplication name errors", () => {
         {
           type: "text", "name": "q1"
         }
-      ] }
+      ]
+    }
     ]
   });
   expect(textWorker.errors).toHaveLength(2);
@@ -84,7 +84,8 @@ test("SurveyTextWorker, required properties", () => {
         {
           type: "text"
         }
-      ] }
+      ]
+    }
     ]
   });
   expect(textWorker.errors).toHaveLength(1);
@@ -108,7 +109,8 @@ test("SurveyTextWorker, required properties", () => {
 test("SurveyTextWorker, validate properties value, Issue#7335", () => {
   const textWorker = createTextWorker({
     elements: [
-      { type: "text", name: "q1",
+      {
+        type: "text", name: "q1",
         clearIfInvisible: "test"
       }
     ]
@@ -125,4 +127,13 @@ test("SurveyTextWorker, validate properties value, Issue#7335", () => {
     name: "q1",
     clearIfInvisible: "default"
   });
+});
+test("SurveyTextWorker, locale 'default' should not produce an error Bug#7541", () => {
+  const textWorker = createTextWorker({
+    locale: "default",
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  }, { validatePropertyValues: true });
+  expect(textWorker.errors).toHaveLength(0);
 });

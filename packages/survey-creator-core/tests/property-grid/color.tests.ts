@@ -127,14 +127,13 @@ test("Check custom color question popup", () => {
       choices: ["#f1b505", "#359ba7", "#6a3bff"]
     }]
   });
-  survey.css = { color: { colorDropdownIcon: "colorDropdownIconTest", colorDropdown: "colorDropdownTest" } };
+  survey.css = { color: { colorDropdownIcon: "colorDropdownIconTest" } };
   const question = <QuestionColorModel>survey.getAllQuestions()[0];
   question.cssClasses;
   const dropdownAction = question.dropdownAction;
   const popupModel = dropdownAction.popupModel;
   const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
 
-  expect(dropdownAction.cssClasses.item).toBe("colorDropdownTest");
   expect(dropdownAction.iconName).toBe("colorDropdownIconTest");
   expect(popupModel.setWidthByTarget).toBeTruthy();
   expect(popupModel.positionMode).toBe("fixed");

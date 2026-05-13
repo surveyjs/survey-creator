@@ -263,7 +263,7 @@ test("PageNavigatorViewModel", (): any => {
       }
     ]
   };
-  expect(model.popupModel.focusFirstInputSelector).toEqual(".svc-list__item--selected");
+  expect(model.popupModel.focusFirstInputSelector).toEqual(".sd-menu-item--selected");
   expect(model.items).toHaveLength(2);
   expect(model.items[0].active).toBeTruthy();
   expect(model.items[1].active).toBeFalsy();
@@ -696,6 +696,40 @@ test("Update expressions on deleting a panel with questions", (): any => {
   );
   creator.deleteElement(<Base>(<any>creator.survey.getPanelByName("panel1")));
   expect(creator.survey.getQuestionByName("question1").visibleIf).toBeFalsy();
+});
+test("Clear trigger references (setToName, fromName, gotoName) when referenced question is deleted, Bug#7661", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "boolean", name: "question1" },
+          { type: "boolean", name: "question2" },
+          { type: "dropdown", name: "question3", choices: ["Item 1", "Item 2"] }
+        ]
+      }
+    ],
+    triggers: [
+      { type: "setvalue", expression: "{question1} = true", setToName: "question3", setValue: "Item 1" },
+      { type: "setvalue", expression: "{question2} = false", setToName: "question3", setValue: "Item 2" },
+      { type: "setvalue", expression: "{question1} = true", setToName: "question2", setValue: true },
+      { type: "copyvalue", expression: "{question1} = true", setToName: "question2", fromName: "question3" },
+      { type: "copyvalue", expression: "{question1} = true", setToName: "question3", fromName: "question2" },
+      { type: "skip", expression: "{question1} = true", gotoName: "question3" },
+      { type: "skip", expression: "{question2} = true", gotoName: "question2" }
+    ]
+  };
+  creator.deleteElement(creator.survey.getQuestionByName("question3"));
+  expect(creator.survey.triggers).toHaveLength(7);
+  expect((<any>creator.survey.triggers[0]).setToName).toBeFalsy();
+  expect((<any>creator.survey.triggers[1]).setToName).toBeFalsy();
+  expect((<any>creator.survey.triggers[2]).setToName).toBe("question2");
+  expect((<any>creator.survey.triggers[3]).setToName).toBe("question2");
+  expect((<any>creator.survey.triggers[3]).fromName).toBeFalsy();
+  expect((<any>creator.survey.triggers[4]).setToName).toBeFalsy();
+  expect((<any>creator.survey.triggers[4]).fromName).toBe("question2");
+  expect((<any>creator.survey.triggers[5]).gotoName).toBeFalsy();
+  expect((<any>creator.survey.triggers[6]).gotoName).toBe("question2");
 });
 test("Update expressions on deleting a page with questions", (): any => {
   const creator = new CreatorTester();
@@ -4043,6 +4077,21 @@ test("Add and remove question immediately, incorrect selection", (): any => {
   creator.addNewQuestionInPage(() => { });
   expect(creator.survey.currentPage.elements).toHaveLength(1);
   expect(creator.selectedElementName).toEqual("question1");
+});
+test("Remove text question immediately on adding it via onQuestionAdded, Bug#7652", (): any => {
+  const creator = new CreatorTester();
+  creator.onQuestionAdded.add((sender, options) => {
+    const q = options.question;
+    if (q.getType() === "text") {
+      q.delete();
+    }
+  });
+  creator.addNewQuestionInPage(() => { }, null, "dropdown");
+  creator.addNewQuestionInPage(() => { }, null, "text");
+  const allQuestions = creator.survey.getAllQuestions();
+  expect(allQuestions).toHaveLength(1);
+  expect(allQuestions[0].getType()).toEqual("dropdown");
+  expect(creator.survey.getAllQuestions().filter(q => q.getType() === "text")).toHaveLength(0);
 });
 test("Convert question type for a question on the last page with the only question", (): any => {
   const creator = new CreatorTester();

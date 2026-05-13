@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, setJSON, getPropertyGridCategory, getListItemByText, generalGroupName, logicGroupName, expect } from "./helper";
+import { url, compareScreenshot, test, setJSON, getPropertyGridCategory, getListItemByText, generalGroupName, logicGroupName, expect, getVisibleSelectListItemByText } from "./helper";
 
 const title = "Actions in Logic section Screenshot";
 
@@ -35,7 +35,7 @@ test.describe(title, () => {
     await expect(sectionContentElement).toBeVisible();
     await compareScreenshot(page, sectionContentElement, "logic-button-default.png");
 
-    await sectionContentElement.locator(".spg-action-button").nth(1).hover();
+    await sectionContentElement.locator(".sd-action").nth(1).hover();
     await compareScreenshot(page, sectionContentElement, "logic-button-hovered.png");
   });
 
@@ -64,9 +64,9 @@ test.describe(title, () => {
 
     const sectionContentElement = page.getByRole("group", { name: "Conditions" });
 
-    await sectionContentElement.locator(".spg-action-button").nth(1).click();
+    await sectionContentElement.locator(".sd-action").nth(1).click();
     await page.locator(".sl-dropdown").first().click();
-    await getListItemByText(page, "region").click({ position: { x: 10, y: 20 } });
+    await getVisibleSelectListItemByText(page, "region").click({ position: { x: 10, y: 20 } });
     await page.waitForTimeout(1000);
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
@@ -85,8 +85,8 @@ test.describe(title, () => {
 
     await setJSON(page, {});
     await getPropertyGridCategory(page, logicGroupName).click();
-    await page.locator("[data-name='triggers'] .spg-action-button").nth(1).click();
-    await page.locator("[data-name='runExpression'] .spg-action-button").click();
+    await page.locator("[data-name='triggers'] .sd-action").nth(1).click();
+    await page.locator("[data-name='runExpression'] .sd-action").click();
 
     await compareScreenshot(page, page.locator("[data-name='runExpression']"), "run-expression-description.png");
   });

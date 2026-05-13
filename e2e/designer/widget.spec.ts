@@ -1,7 +1,6 @@
-import { test, expect, setJSON } from "../helper";
+import { test, expect, setJSON, urlWidget } from "../helper";
 
 const title = "Widget";
-const urlWidget = "http://127.0.0.1:8080/testCafe/testcafe-widget";
 
 test.describe(title, () => {
   test("Custom widgets should be locked in design mode", async ({ page }) => {

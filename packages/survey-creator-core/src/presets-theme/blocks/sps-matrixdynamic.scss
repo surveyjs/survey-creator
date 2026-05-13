@@ -1,0 +1,223 @@
+@use "../../variables.scss" as *;
+@use "../../typography-mixins.scss" as *;
+
+// .sps-matrixdynamic__drag-element {
+//   padding: calcSize(2);
+
+//   &:hover {
+//     background-color: $background;
+//   }
+
+//   &:after {
+//     content: " ";
+//     display: block;
+//     height: calcSize(0.5);
+//   }
+// }
+
+.sps-drag-element__svg {
+  box-sizing: content-box;
+  width: var(--sjs2-size-icon-medium, 24px);
+  height: var(--sjs2-size-icon-medium, 24px);
+  display: flex;
+  padding: var(--sjs2-spacing-x100, 8px);
+  padding-right: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  use {
+    fill: var(--sjs2-color-fg-basic-tertiary, rgba(from #1c1b20 r g b / 0.4));
+  }
+}
+
+.sps-matrixdynamic__drag-drop-ghost-position-top,
+.sps-matrixdynamic__drag-drop-ghost-position-bottom {
+  position: relative;
+}
+
+.sps-matrixdynamic__drag-drop-ghost-position-top::after,
+.sps-matrixdynamic__drag-drop-ghost-position-bottom::after {
+  content: "";
+  width: 100%;
+  height: calcSize(0.5);
+  background-color: var(--sjs-secondary-background-500, #19b394ff);
+  position: absolute;
+  left: 0;
+}
+
+.sps-matrixdynamic__drag-drop-ghost-position-top::after {
+  top: 0;
+}
+
+.sps-matrixdynamic__drag-drop-ghost-position-bottom::after {
+  bottom: 0;
+}
+
+.sps-question--matrixdynamic {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .sps-question__title {
+    padding: 0;
+    line-height: var(--sjs2-typography-line-height-default, 24px); /* 150% */
+    color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+    @include sjs2--typography--default-strong;
+  }
+}
+
+.sps-matrixdynamic__content {
+  padding: var(--sjs2-spacing-x150, 12px);
+  &,
+  & > div {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .sps-question__description--under {
+    flex-grow: 0;
+  }
+}
+.sps-table__row--detail .sps-matrixdynamic__content {
+  padding: 0;
+}
+.sps-matrixdynamic__placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--sjs2-radius-form, 8px);
+  border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  background: var(--sjs2-color-bg-basic-secondary, #f5f5f5);
+  box-sizing: border-box;
+  padding: var(--sjs2-spacing-x600, 48px) var(--sjs2-spacing-x800, 64px);
+  gap: var(--sjs2-spacing-x050, 4px);
+
+  .sps-matrixdynamic__add-btn {
+    display: initial;
+    margin: 0;
+  }
+}
+
+.sps-matrixdynamic__placeholder-text {
+  @include sjs2--typography--default;
+  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+  text-align: center;
+}
+
+.sps-matrixdynamic__row-icon {
+  width: var(--sjs2-size-icon-medium, 24px);
+  height: var(--sjs2-size-icon-medium, 24px);
+  padding: 0;
+  margin: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1)) 0
+    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1)) 0;
+  margin-left: var(--sjs2-spacing-x150, 12px);
+  &:disabled {
+    opacity: 1;
+    use {
+      fill: var(--sjs2-color-fg-brand-primary, #19b394);
+    }
+  }
+}
+
+.sps-matrixdynamic__footer {
+  margin: 0 calc(-1 * var(--sjs2-spacing-x150, 12px)) var(--sjs2-spacing-x150, 12px);
+  padding: 0 var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px);
+  border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  display: flex;
+  .sd-action-bar {
+    width: 100%;
+  }
+  .sd-action-bar__item {
+    width: 100%;
+  }
+  .sd-action-bar__item-content {
+    width: 100%;
+  }
+  .sps-matrixdynamic__add-btn {
+    width: 100%;
+  }
+}
+
+.sps-matrixdynamic__footer--in-dialog {
+  display: flex;
+  margin: 0;
+  padding: var(--sjs2-spacing-x150, 12px) 0 0 0;
+  border-bottom: none;
+}
+
+.sps-table-wrapper,
+.sps-matrixdynamic__content sv-ng-matrix-table {
+  & ~ .sps-matrixdynamic__footer {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-top: var(--sjs2-spacing-x075, 6px);
+    padding-bottom: var(--sjs2-spacing-x050, 4px);
+    display: flex;
+    justify-content: stretch;
+  }
+}
+.sps-matrixdynamic__add-btn {
+  //display: none;
+  appearance: none;
+  border: none;
+  background: var(--sjs2-color-bg-neutral-secondary, rgba(95, 94, 97, 0.1));
+  text-align: center;
+  flex-grow: 1;
+  justify-content: center;
+  box-sizing: border-box;
+  &:hover {
+    background: var(--sjs2-color-bg-neutral-secondary-dim, rgba(95, 94, 97, 0.1));
+  }
+  .sd-action__title {
+    color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+    @include sjs2--typography--default;
+    padding: 0 var(--sjs2-spacing-x100, 8px);
+  }
+}
+
+.sps-matrixdynamic__add-btn--icon {
+  background: transparent;
+  padding: var(--sjs2-spacing-x100, 8px);
+  justify-content: flex-start;
+  .sd-action__icon use {
+    fill: var(--sjs2-color-fg-basic-primary-muted, #424146);
+  }
+}
+
+.sps-question--matrixdynamic.sps-question--nested {
+  .sps-question__header {
+    padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x100, 8px)
+      var(--sjs2-spacing-x250, 20px);
+    border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+    box-sizing: border-box;
+  }
+}
+
+.sps-matrixdynamic__dragged-row {
+  cursor: grabbing;
+  position: absolute;
+  z-index: 10000;
+
+  .sps-table__row {
+    display: flex;
+    align-items: center;
+    flex: 1 0 0;
+    border-radius: var(--sjs2-radius-container-drag, 8px);
+    background: var(--sjs2-color-bg-basic-primary, #fff);
+    box-shadow: var(--sjs2-border-offset-x-floating-default, 0) var(--sjs2-border-offset-y-floating-default, 6px)
+      var(--sjs2-border-blur-floating-default, 20px) var(--sjs2-border-spread-floating-default, 0)
+      var(--sjs2-color-utility-shadow-floating-default, rgba(0, 76, 68, 0.15));
+  }
+}
+
+.spg-table__row:has(.sps-action--invisible) {
+  .sd-formbox__input {
+    opacity: 0.25;
+  }
+}
+
+.spg-table__cell--actions:last-of-type .sps-action-bar {
+  justify-content: flex-end;
+  padding-inline-end: var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05));
+}

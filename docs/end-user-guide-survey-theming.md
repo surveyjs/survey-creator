@@ -144,7 +144,7 @@ Follow the steps below to modify the width of the survey header area that contai
    * Keep the default option **Same as survey** if you prefer the header content to match the width of the survey itself (its content).
    * Select **Same as container** if you want the header content area to automatically adjust its width to match the space where your survey is displayed.
 
-<img src="images/eud-content-area-width.png" alt="Advanced survey header settings: Area width of the header content" width="402" height="489">
+<img src="images/eud-content-area-width.png" alt="Advanced survey header settings: Area width of the header content" width="1544" height="670">
 
 ## Background Options
 

@@ -15,7 +15,7 @@
 }
 
 .svd-test-results__header {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +54,7 @@
 }
 
 .svd-test-results__text {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   display: flex;
   padding: var(--ctr-code-viewer-text-margin-top-results-table, var(--sjs-spacing-x2)) var(--ctr-code-viewer-text-margin-right-results-table, var(--sjs-spacing-x3)) var(--ctr-code-viewer-text-margin-bottom-results-table, var(--sjs-spacing-x2)) var(--ctr-code-viewer-text-margin-left-results-table, var(--sjs-spacing-x3));
   width: calc(100% - calcSize(6));
@@ -92,7 +92,7 @@
     }
 
     th {
-      @include ctrSmallBoldFont;
+      @include sjs2--typography--small-strong;
       padding: var(--ctr-string-table-row-padding-top, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3)) var(--ctr-string-table-row-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
       background: var(--ctr-string-table-header-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
       text-align: left;
@@ -104,7 +104,7 @@
     }
 
     td {
-      @include ctrDefaultFont;
+      @include sjs2--typography--default;
       padding: var(--ctr-string-table-row-padding-top, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3)) var(--ctr-string-table-row-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
       max-width: calcSize(50);
       overflow: auto;
@@ -113,7 +113,7 @@
       background: var(--ctr-string-table-row-background-color, var(--sjs-layer-1-background-500, #ffffffff));
 
       &:nth-child(1) {
-        @include ctrDefaultBoldFont;
+        @include sjs2--typography--default-strong;
         position: relative;
         width: 50%;
       }

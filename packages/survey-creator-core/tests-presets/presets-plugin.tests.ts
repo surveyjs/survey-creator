@@ -1,9 +1,24 @@
-import { CreatorTester } from "../tests/creator-tester";
+﻿import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
-import { CreatorPresets, ICreatorPresetConfig, PredefinedCreatorPresets, UIPreset } from "../src/ui-presets-creator/presets";
+import { CreatorPresets, IPreset, PredefinedCreatorPresets, registerUIPreset, UIPreset } from "../src/ui-presets-creator/presets";
+import { PresetsManager } from "../src/ui-preset-editor/presets-manager";
 
-const originalCreatorPresets: { [key: string]: ICreatorPresetConfig } = {};
+import { Basic } from "../src/ui-presets/basic";
+import { Advanced } from "../src/ui-presets/advanced";
+import { Expert } from "../src/ui-presets/expert";
+import { vi } from "vitest";
+
+const originalCreatorPresets: { [key: string]: IPreset } = {};
 let originalPredefinedPresets: string[] = [];
+
+class UIPresetEditorTester extends UIPresetEditor {
+  public performSaveTest() {
+    this.performSave();
+  }
+  public discardUnsavedTest() {
+    this.discardUnsaved();
+  }
+}
 
 beforeEach(() => {
   Object.keys(originalCreatorPresets).forEach(key => delete originalCreatorPresets[key]);
@@ -28,14 +43,14 @@ test("UIPresetEditor: pagesAction.title falls back to empty string when selected
 
   plugin.activate();
 
-  const pagesAction: any = plugin.model.navigationBar.getActionById("presets-pages");
+  const pagesAction: any = plugin.editor.navigationBar.getActionById("presets-pages");
   expect(pagesAction).toBeTruthy();
 
   const pagesList: any = (plugin as any)["pagesList"];
   expect(pagesList).toBeTruthy();
   expect(pagesList.actions.length).toBeGreaterThan(0);
 
-  const surveyModel: any = plugin.model.model;
+  const surveyModel: any = plugin.editor.model;
   surveyModel.currentPage = surveyModel.pages[1];
 
   expect(pagesAction.title).toBe(surveyModel.currentPage.navigationTitle);
@@ -48,48 +63,143 @@ test("UIPresetEditor: check status action on editor model json changed", () => {
 
   plugin.activate();
 
-  const statusAcion: any = plugin.model.navigationBar.getActionById("presets-status");
+  const statusAcion: any = plugin.editor.navigationBar.getActionById("presets-status");
   expect(statusAcion).toBeTruthy();
   expect(statusAcion.visible).toBeFalsy();
 
-  expect(plugin.model.model.getQuestionByName("propertyGrid_selector").value).toBe("survey");
-  plugin.model.model.getQuestionByName("propertyGrid_selector").value = "page";
+  expect(plugin.editor.model.getQuestionByName("propertyGrid_selector").value).toBe("survey");
+  plugin.editor.model.getQuestionByName("propertyGrid_selector").value = "page";
   expect(statusAcion.visible).toBeFalsy();
 
-  plugin.model.model.getQuestionByName("propertyGrid_categories").value = [];
+  plugin.editor.model.getQuestionByName("propertyGrid_categories").value = [];
   expect(statusAcion.visible).toBeTruthy();
   expect(statusAcion.title).toBe("Unsaved changes");
   plugin.deactivate();
 });
+test("UIPresetEditor: hidePresets should not throw when only Basic and Advanced presets are registered, Bug#7486", () => {
+  registerUIPreset(Basic);
+  registerUIPreset(Advanced);
 
-describe("UIPresetEditor: saveClicked", () => {
-  test("should call performSave for custom preset", () => {
-    PredefinedCreatorPresets.push("basic");
-    CreatorPresets["basic"] = { presetName: "basic", json: {}, visible: true };
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
 
-    const creator = new CreatorTester();
-    const plugin = new UIPresetEditor(creator);
-    plugin.addPreset(new UIPreset({ presetName: "custom1", json: {}, visible: true }));
-    (plugin as any)["presetsManager"].presetSelector = { value: "custom1" } as any;
-    plugin.activate();
+  expect(() => {
+    (plugin as any)["hidePresets"]();
+  }).not.toThrow();
 
-    const performSaveSpy = jest.spyOn(plugin as any, "performSave").mockImplementation(() => { });
-    const saveAsHandlerSpy = jest.spyOn(plugin as any, "saveAsHandler").mockImplementation(() => { });
+  plugin.deactivate();
+});
 
-    (plugin as any)["saveOrSaveAs"]();
+test("should call performSave for custom preset", () => {
+  PredefinedCreatorPresets.push("basic");
+  CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
 
-    expect(performSaveSpy).toHaveBeenCalledTimes(1);
-    expect(saveAsHandlerSpy).not.toHaveBeenCalled();
-    plugin.deactivate();
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditor(creator);
+  plugin.addPreset({ name: "custom1", json: {}, visible: true });
+  const presetsManager = (plugin as any)["presetsManager"];
+  presetsManager.presetSelector = { value: "custom1" } as any;
+  plugin.activate();
 
-    (plugin as any)["presetsManager"].presetSelector = { value: "basic" } as any;
-    plugin.activate();
+  const performSaveSpy = vi.spyOn(plugin as any, "performSave").mockImplementation(() => { });
+  const saveAsSpy = vi.spyOn(presetsManager, "saveAs").mockImplementation(() => { });
 
-    (plugin as any)["saveOrSaveAs"]();
+  (plugin as any)["saveOrSaveAs"]();
 
-    expect(saveAsHandlerSpy).toHaveBeenCalledTimes(1); //not changed
-    expect(performSaveSpy).toHaveBeenCalledTimes(1); // called
-    plugin.deactivate();
-  });
+  expect(performSaveSpy).toHaveBeenCalledTimes(1);
+  expect(saveAsSpy).not.toHaveBeenCalled();
+  plugin.deactivate();
+
+  presetsManager.presetSelector = { value: "basic" } as any;
+  plugin.activate();
+
+  (plugin as any)["saveOrSaveAs"]();
+
+  expect(saveAsSpy).toHaveBeenCalledTimes(1);
+  expect(performSaveSpy).toHaveBeenCalledTimes(1); // called
+  plugin.deactivate();
+});
+
+test("made changes, save, made more changes and discard to saved", () => {
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditorTester(creator);
+  plugin.activate();
+  plugin.editor.json = { tabs: { items: [{ name: "designer" }] } };
+  plugin.performSaveTest();
+  expect(plugin.editor.json.tabs.items).toEqual([{ name: "designer" }]);
+  plugin.editor.json = { tabs: { items: [{ name: "designer" }, { name: "preview" }] } };
+  expect(plugin.editor.json.tabs.items).toEqual([{ name: "designer" }, { name: "preview" }]);
+  plugin.discardUnsavedTest();
+  expect(plugin.editor.json.tabs.items).toEqual([{ name: "designer" }]);
+});
+
+test("Selecting Basic preset should update property grid on Property Grid page", () => {
+  PredefinedCreatorPresets.push("expert", "basic");
+  CreatorPresets["expert"] = Expert;
+  CreatorPresets["basic"] = Basic;
+
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
+
+  const survey = plugin.editor.model;
+  survey.currentPage = survey.getPageByName("page_propertyGrid");
+  survey.setValue("propertyGrid_selector", "survey");
+
+  const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
+  const expertCategories = propGridCategories.value;
+  expect(expertCategories.length).toBeGreaterThan(1);
+
+  const presetsManager = (plugin as any)["presetsManager"];
+  presetsManager.selectPresetCallback(CreatorPresets["basic"]);
+
+  const basicCategories = propGridCategories.value;
+  expect(basicCategories).toHaveLength(1);
+  expect(basicCategories[0].properties.map((p: any) => p.name)).toEqual(
+    Basic.json.propertyGrid.definition.classes.survey.properties
+  );
+
+  plugin.deactivate();
+});
+
+test("UIPresetEditor.preset should return Advanced name and unsaved edited json", () => {
+  PredefinedCreatorPresets.push("advanced");
+  CreatorPresets["advanced"] = Advanced;
+
+  const creator = new CreatorTester();
+  creator.activePresetName = "advanced";
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
+
+  const itemsQuestion = plugin.editor.model.getQuestionByName("tabs_items");
+  const itemsValue = [...itemsQuestion.value];
+  itemsValue.splice(itemsValue.length - 1, 1);
+  itemsQuestion.value = itemsValue;
+
+  expect(plugin.preset?.name).toBe("advanced");
+  expect(plugin.preset?.json.tabs.items.map((t: any) => t.name)).toEqual(itemsValue.map((t: any) => t.name));
+  expect(plugin.editor.model.getQuestionByName("tabs_items").value).toEqual(itemsValue);
+  plugin.deactivate();
+});
+
+test("UIPresetEditor.preset should return Default configuration name and unsaved edited json", () => {
+  PredefinedCreatorPresets.push("advanced");
+  CreatorPresets["advanced"] = Advanced;
+
+  const creator = new CreatorTester();
+  const plugin = new UIPresetEditor(creator);
+  plugin.activate();
+
+  const itemsQuestion = plugin.editor.model.getQuestionByName("tabs_items");
+  const itemsValue = [...itemsQuestion.value];
+  itemsValue.splice(itemsValue.length - 1, 1);
+  itemsQuestion.value = itemsValue;
+
+  expect(plugin.preset?.name).toBe(PresetsManager.defaultConfigurationId);
+  expect(plugin.preset?.json.tabs.items.map((t: any) => t.name)).toEqual(itemsValue.map((t: any) => t.name));
+  expect(plugin.editor.model.getQuestionByName("tabs_items").value).toEqual(itemsValue);
+
+  plugin.deactivate();
 });
 

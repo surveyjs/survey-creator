@@ -1654,6 +1654,84 @@ test("onQuestionAdded fires when drag drop new element", () => {
   });
   expect(log).toBe("->added:q4");
 });
+test("Remove dragged text question immediately on adding it via onQuestionAdded, Bug#7652", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  };
+  creator.onQuestionAdded.add((sender, options) => {
+    const q = options.question;
+    if (q.getType() === "text") {
+      q.delete();
+    }
+  });
+  const survey = creator.survey;
+  const q1 = survey.getQuestionByName("q1");
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  const designerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  new PageAdorner(creator, designerTab.newPage);
+
+  const ddHelper: any = creator.dragDropSurveyElements;
+  const newQuestion = new QuestionTextModel("q2");
+  ddHelper.draggedElement = newQuestion;
+
+  expect(() => {
+    ddHelper.dragOverCore(designerTab.newPage, DropIndicatorPosition.Inside);
+    ddHelper.doDrop();
+  }).not.toThrow();
+
+  expect(survey.getAllQuestions().filter(q => q.getType() === "text")).toHaveLength(1);
+  expect(survey.getAllQuestions()).toHaveLength(1);
+  expect(survey.getQuestionByName("q1")).toBeTruthy();
+  expect(survey.getQuestionByName("q2")).toBeFalsy();
+});
+test("onQuestionAdded doesn't fire when drag drop not selected existing element on new page, Bug#7628", () => {
+  const json = {
+    "elements": [
+      { "type": "text", "name": "q1" },
+      { "type": "text", "name": "q2" },
+      { "type": "text", "name": "q3" },
+    ]
+  };
+  let log = "";
+
+  const creator = new CreatorTester();
+  creator.JSON = json;
+  creator.onQuestionAdded.add((s, o) => {
+    log += "->added:" + o.question.name;
+  });
+  const survey = creator.survey;
+  const q1 = survey.getQuestionByName("q1");
+  new QuestionAdornerViewModel(creator, q1, null as any);
+  const designerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  new PageAdorner(creator, designerTab.newPage);
+
+  const ddHelper: any = creator.dragDropSurveyElements;
+  ddHelper.draggedElement = q1;
+
+  ddHelper.dragOverCore(designerTab.newPage, DropIndicatorPosition.Inside);
+  ddHelper.doDrop();
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          { "name": "q2", "type": "text" },
+          { "name": "q3", "type": "text" },
+        ],
+      },
+      {
+        "name": "page2",
+        "elements": [
+          { "name": "q1", "type": "text" },
+        ],
+      },
+    ],
+  });
+  expect(log).toBe("");
+});
 test("draggedElementType", () => {
   const survey = new SurveyModel({});
   const ddHelper: any = new DragDropSurveyElements(survey);

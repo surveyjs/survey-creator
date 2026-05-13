@@ -5,7 +5,7 @@
     >
       <div class="svc-sidebar__header-content">
         <div
-          :class="model.buttonClassName"
+          :class="model.getActionBarItemCss() + ' svc-sidebar__header-object-selector'"
           v-key2click="{ processEsc: false }"
           @click="model.action()"
         >
@@ -28,8 +28,8 @@ import {
   useBase,
   key2ClickDirective as vKey2click,
 } from "survey-vue3-ui";
-import { MenuButton } from "survey-creator-core";
-const props = defineProps<{ model: MenuButton }>();
+import { Action } from "survey-core";
+const props = defineProps<{ model: Action }>();
 
 useBase(() => props.model);
 </script>

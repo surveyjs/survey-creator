@@ -162,9 +162,9 @@ export var frenchTranslation = {
     editPage: "Éditer une page",
     // "Edit"
     edit: "Éditer",
-    // "page"
-    newPageName: "page",
-    // "question"
+    // [Auto-translated] "page"
+    newPageName: "Page",
+    // [Auto-translated] "question"
     newQuestionName: "question",
     // "panel"
     newPanelName: "panneau",
@@ -234,10 +234,22 @@ export var frenchTranslation = {
     cutTooltip: "Couper la sélection dans le presse-papiers",
     // [Auto-translated] "Paste from clipboard"
     pasteTooltip: "Coller à partir du presse-papiers",
-    // "Options"
+    // [Auto-translated] "Options"
     options: "Options",
     // "Generate Valid JSON"
     generateValidJSON: "Générer un JSON valide",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Fonction inconnue : « {0} ».",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Fonctions inconnues : « {0} ».",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Variable inconnue : « {0} ».",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Variables inconnues : « {0} ».",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Erreur de syntaxe.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Erreur sémantique.",
     // "Generate Readable JSON"
     generateReadableJSON: "Générer un JSON lisible",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var frenchTranslation = {
     toolboxFilteredTextPlaceholder: "Tapez pour rechercher...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "Aucun résultat trouvé",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "Aucune propriété à afficher",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
     // [Auto-translated] "No results found"
@@ -545,9 +559,9 @@ export var frenchTranslation = {
       showAllQuestions: "Toutes les questions",
       // [Auto-translated] "All Action Types"
       showAllActionTypes: "Tous les types d’action",
-      // "Condition(s)"
+      // [Auto-translated] "Condition(s)"
       conditions: "Condition(s)",
-      // "Action(s)"
+      // [Auto-translated] "Action(s)"
       actions: "Action(s)",
       // "Define condition(s)"
       expressionEditorTitle: "Définissez le(s) condition(s)",
@@ -748,6 +762,14 @@ export var frenchTranslation = {
       expression: "Expression"
     },
     calculatedvalue: {
+      // [Auto-translated] "Expression"
+      expression: "Expression"
+    },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Expression"
+    },
+    htmlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Expression"
     },
@@ -1032,7 +1054,7 @@ export var frenchTranslation = {
     columnEdit: "Éditer la colonne: {0}",
     // "Edit item: {0}"
     itemEdit: "Éditer l'item: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Chemin",
@@ -1098,6 +1120,8 @@ export var frenchTranslation = {
     choicesOrder: "Sélectionner l'ordre des choix",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Autoriser les choix personnalisés",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Texte de la commande « Créer un choix personnalisé »",
     // "Visible"
     visible: "Est visible ?",
     // "Required"
@@ -1319,10 +1343,10 @@ export var frenchTranslation = {
     // "Regular expression"
     regex: "Expression régulière (RegEx)",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Message de validation",
-      // [Auto-translated] "Validation expression"
-      expression: "Condition à respecter",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Message de notification pour saisie invalide",
+      // [Auto-translated] "Valid when"
+      expression: "Valide quand",
       // [Auto-translated] "Notification type"
       notificationType: "Type de notification",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1402,8 +1426,10 @@ export var frenchTranslation = {
     allowMultiple: "Activer le téléchargement de plusieurs fichiers",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "Prévisualiser les images téléchargées",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "Types de fichiers acceptés",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "Catégories de fichiers acceptées",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "Extensions de fichiers supplémentaires",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Attendez la fin du téléchargement",
     // [Auto-translated] "Confirm file deletion"
@@ -1476,6 +1502,66 @@ export var frenchTranslation = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Format de l’infobulle"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL de l’image",
+      // [Auto-translated] "Areas"
+      areas: "Zones",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Autoriser plusieurs sélections",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Nom de la propriété de valeur",
+      // [Auto-translated] "Shape"
+      shape: "Forme",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Couleur de remplissage au ralenti",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Couleur de la course au ralenti",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Largeur de course au ralenti",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Couleur de remplissage en survol",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Couleur du trait de survol",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Largeur de course en vol stationnaire",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Couleur de remplissage sélectionnée",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Couleur de trait sélectionnée",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Largeur de trait sélectionnée",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Zones sélectionnées maximales",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Zones minimales sélectionnées"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Valeur",
+      // [Auto-translated] "Shape"
+      shape: "Forme",
+      // [Auto-translated] "Coordinates"
+      coords: "Coordonnées",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Couleur de remplissage au ralenti",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Couleur de la course au ralenti",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Largeur de course au ralenti",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Couleur de remplissage en survol",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Couleur du trait de survol",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Largeur de course en vol stationnaire",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Couleur de remplissage sélectionnée",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Couleur de trait sélectionnée",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Largeur de trait sélectionnée"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Hauteur de l’image",
@@ -1506,6 +1592,8 @@ export var frenchTranslation = {
     minErrorText: "Message d’erreur « La valeur est inférieure au minimum »",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Message d’erreur « La valeur dépasse le maximum »",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Message d’erreur « La valeur ne correspond pas à la taille du pas »",
     // "\"Empty comment\" error message"
     otherErrorText: "Message d’erreur « Commentaire vide »",
     // "Error message for duplicate responses"
@@ -1612,7 +1700,7 @@ export var frenchTranslation = {
       },
       // "General"
       general: "Général",
-      // "Options"
+      // [Auto-translated] "Options"
       fileOptions: "Options",
       // "HTML Editor"
       html: "Éditeur HTML",
@@ -1644,7 +1732,7 @@ export var frenchTranslation = {
       numbering: "Numérotation",
       // "Validators"
       validators: "Validateurs",
-      // "Navigation"
+      // [Auto-translated] "Navigation"
       navigation: "Navigation",
       // "Question Settings"
       question: "Question",
@@ -1660,7 +1748,7 @@ export var frenchTranslation = {
       templateTitle: "Titre du modèle",
       // "Totals"
       totals: "Totaux",
-      // "Conditions"
+      // [Auto-translated] "Conditions"
       logic: "Conditions",
       // [Auto-translated] "Input Mask Settings"
       mask: "Paramètres du masque de saisie",
@@ -1799,10 +1887,10 @@ export var frenchTranslation = {
     minWidth_placeholder: "Ex. : 600px",
     // [Auto-translated] "Ex.: 50%"
     maxWidth_placeholder: "Ex. : 50 %",
-    // "auto"
-    imageHeight_placeholder: "auto",
-    // "auto"
-    imageWidth_placeholder: "auto",
+    // [Auto-translated] "auto"
+    imageHeight_placeholder: "Auto",
+    // [Auto-translated] "auto"
+    imageWidth_placeholder: "Auto",
     // [Auto-translated] "Ex.: 100px"
     itemTitleWidth_placeholder: "Ex. : 100px",
     theme: {
@@ -1910,8 +1998,8 @@ export var frenchTranslation = {
     hide: "Masquer",
     // "Inherit"
     default: "Par défaut",
-    // "Initial"
-    initial: "Initial",
+    // [Auto-translated] "Initial"
+    initial: "Initiale",
     // "Random"
     random: "Aléatoire",
     // "Collapsed"
@@ -2084,6 +2172,20 @@ export var frenchTranslation = {
       // [Auto-translated] "Informational"
       info: "Informationnel"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "Images",
+      // [Auto-translated] "Videos"
+      video: "Vidéos",
+      // [Auto-translated] "Audio"
+      audio: "Audio",
+      // [Auto-translated] "Documents"
+      document: "Documents",
+      // [Auto-translated] "Archives"
+      archive: "Archives",
+      // [Auto-translated] "Custom"
+      custom: "Coutumes"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "Nom complet",
@@ -2214,7 +2316,7 @@ export var frenchTranslation = {
     },
     // "All"
     all: "Tous",
-    // "Page"
+    // [Auto-translated] "Page"
     page: "Page",
     // "Survey"
     survey: "Sondage",
@@ -2266,7 +2368,7 @@ export var frenchTranslation = {
     underRow: "Sous la ligne",
     // [Auto-translated] "Under the row, display one section only"
     underRowSingle: "Sous la rangée, n’affichez qu’une seule section",
-    // "Auto"
+    // [Auto-translated] "Auto"
     auto: "Auto",
     timerInfoMode: {
       // "Both"
@@ -2497,6 +2599,8 @@ export var frenchTranslation = {
     notcontains: "Ne contient pas",
     // "Any of"
     anyof: "N'importe quel de",
+    // [Auto-translated] "None of"
+    noneof: "Aucun de ces",
     // "All of"
     allof: "Tous parmi",
     // "Greater than"
@@ -2550,9 +2654,9 @@ export var frenchTranslation = {
     loadFromServer: "Charger le JSON du sondage depuis un serveur",
     // "Scripts and styles"
     titleScript: "Scripts et styles",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2571,7 +2675,7 @@ export var frenchTranslation = {
   validators: {
     // "Answer count"
     answercountvalidator: "Total de réponses",
-    // "Email"
+    // [Auto-translated] "Email"
     emailvalidator: "Email",
     // [Auto-translated] "Expression"
     expressionvalidator: "Condition",
@@ -3090,8 +3194,10 @@ export var frenchTranslation = {
     storeOthersAsComment: "Sélectionnez cette option pour stocker la valeur de l’option « Autre » en tant que propriété distincte dans les résultats de l’enquête.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "Utilisez {0} comme espace réservé pour la valeur réelle.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "Reportez-vous à la description de l’attribut [accept](https://www.w3schools.com/tags/att_input_accept.asp) pour plus d’informations.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "Sélectionnez « Personnalisé » pour ajouter vos propres extensions de fichiers au-dessus des catégories prédéfinies.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "Entrez les extensions de fichiers séparées par des virgules (par exemple, .csv, .xml).",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. S’applique uniquement aux colonnes dont l’option « Type d’entrée de cellule » est définie sur Groupe de boutons radio ou Cases à cocher.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3187,7 +3293,7 @@ export var frenchTranslation = {
     fitToContainer: "S’adapte au conteneur",
     // [Auto-translated] "Set value expression"
     setValueExpression: "Définir l’expression de valeur",
-    // "Description"
+    // [Auto-translated] "Description"
     description: "Description", // Auto-generated string
     // [Auto-translated] "Logo fit"
     logoFit: "Ajustement du logo",
@@ -3509,6 +3615,18 @@ export var frenchTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contraste"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Base",
+      // [Auto-translated] "Advanced"
+      advanced: "Avancé",
+      // [Auto-translated] "Expert"
+      expert: "Expert"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Préréglage appliqué"
   }
 };
 

@@ -8,6 +8,7 @@ import {
   getToolboxItemByText,
   addQuestionByAddQuestionButton,
   doDragDrop,
+  objectSelectorButton,
 } from "../helper";
 
 const title = "Inplace editors";
@@ -20,7 +21,7 @@ function getVisibleElement(page: Page, selector: string): Locator {
 
 async function getImageSrc(page: Page, selector: string, index = 0): Promise<string> {
   return page.evaluate(
-    ({ sel, i }) => (document.querySelectorAll(sel)[i] as HTMLImageElement)?.src ?? "",
+    ({ sel, i }) => ((window as any).creator.rootElement.getRootNode().querySelectorAll(sel)[i] as HTMLImageElement)?.src ?? "",
     { sel: selector, i: index }
   );
 }
@@ -652,8 +653,8 @@ test.describe(title, () => {
 
   test("Image picker question inplace editor", async ({ page }) => {
     await explicitErrorHandler(page);
-    const chooseButtonSelector = ".svc-image-item-value-controls .svc-context-button:not(.svc-context-buttton--danger):not(.svc-image-item-value-controls__add)";
-    const deleteButtonSelector = ".svc-image-item-value-controls .svc-context-button--danger";
+    const chooseButtonSelector = ".svc-image-item-value-controls button.sd-action--brand";
+    const deleteButtonSelector = ".svc-image-item-value-controls button.sd-action--alert";
     const imageItems = getVisibleElement(page, ".svc-image-item-value-wrapper");
     await setJSON(page, {
       elements: [
@@ -694,7 +695,7 @@ test.describe(title, () => {
     await expect(imageItems.nth(3).locator("img[alt=\"Image 4\"]")).toBeVisible();
     await expect(imageItems.nth(4)).toHaveClass(/svc-image-item-value--new/);
     await expect(imageItems.nth(4).locator(".svc-image-item-value-controls__add")).toBeVisible();
-    await expect(imageItems.nth(4).locator(chooseButtonSelector).first()).not.toBeVisible();
+    await expect(imageItems.nth(4).locator(chooseButtonSelector)).toHaveCount(1);
     await expect(imageItems.nth(4).locator(deleteButtonSelector).first()).not.toBeVisible();
     await expect(imageItems.nth(4).locator("img")).toHaveCount(0);
 
@@ -757,7 +758,7 @@ test.describe(title, () => {
     let imageLink = await getImageSrc(page, "img.sd-image__image");
     expect(imageLink.substring(0, 48)).toEqual(logoBase64Substring);
     await expect(controls).toHaveCount(1);
-    await expect(controls.nth(0).locator(".svc-context-button")).toHaveCount(1);
+    await expect(controls.locator(".sd-action")).toHaveCount(1);
     await expect(question.locator(".sd-image__no-image")).toHaveCount(0);
 
     await page.evaluate(() => {
@@ -767,7 +768,7 @@ test.describe(title, () => {
     expect(imageLink).toContain("testUrl");
     await expect(question.locator(".sd-image__no-image")).toBeVisible();
 
-    await getVisibleElement(page, ".svc-context-button").click();
+    await getVisibleElement(page, ".svc-image-question-controls .sd-action").click();
     await question.locator("input[type=file]").setInputFiles("../../resources/logo.jpg");
     await expect(question.locator("img")).toBeVisible();
 
@@ -791,8 +792,7 @@ test.describe(title, () => {
 
     await page.locator(".sv-popup__button--cancel").click();
     await expect(page.locator(".svc-question__content--in-popup")).toHaveCount(0);
-    const objectSelectorButton = page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
-    await expect(objectSelectorButton.getByText("Column 1")).toBeVisible();
+    await expect(objectSelectorButton(page).getByText("Column 1")).toBeVisible();
   });
 
   test("Rating question inplace editor", async ({ page }) => {
@@ -816,11 +816,11 @@ test.describe(title, () => {
     await page.locator(".sd-table__row .svc-matrix-cell .sv-string-editor").first().click();
     await page.locator(".sd-table__row .svc-matrix-cell .sv-string-editor").first().pressSequentially("Row header");
     await page.locator("div[id$=ariaTitle][id^=sp].spg-title").first().click();
-    await page.locator("input.spg-input").first().click();
+    await page.locator("input.sd-formbox__input").first().click();
     await page.keyboard.press("Control+a");
     await page.keyboard.press("Delete");
     await page.keyboard.type("300px");
-    await expect(page.locator("input.spg-input").first()).toHaveValue("300px");
+    await expect(page.locator("input.sd-formbox__input").first()).toHaveValue("300px");
   });
 
   test("Checkbox question inplace editor - keyboard navigation", async ({ page }) => {

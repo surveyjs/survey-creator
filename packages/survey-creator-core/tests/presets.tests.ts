@@ -1,5 +1,5 @@
 import { CreatorTester } from "./creator-tester";
-import { UIPreset, ICreatorPresetData, registerUIPreset } from "../src/ui-presets-creator/presets";
+import { UIPreset, ICreatorPresetData, registerUIPreset, CreatorPresets, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
 import { defaultStrings, editorLocalization } from "../src/editorLocalization";
 import { surveyLocalization } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
@@ -496,12 +496,12 @@ test("apply supported locales", () => {
 
   preset.apply(creator);
   expect(surveyLocalization.supportedLocales).toStrictEqual(["de", "fr", "it"]);
-  expect(surveyLocalization.showNamesInEnglish).toBeTruthy();
+  expect(surveyLocalization.useEnglishNames).toBeTruthy();
 
   preset.setJson({});
   preset.apply(creator);
   expect(surveyLocalization.supportedLocales).toStrictEqual([]);
-  expect(surveyLocalization.showNamesInEnglish).toBeFalsy();
+  expect(surveyLocalization.useEnglishNames).toBeFalsy();
 });
 test("set creator options", () => {
   const creator = new CreatorTester();
@@ -520,7 +520,7 @@ test("ui preset registration", () => {
   expect(sideBarPageModel0.elements).toHaveLength(1);
   registerUIPreset(
     {
-      presetName: "basic",
+      name: "basic",
       json: {
         options: {
           allowZoom: false,
@@ -530,7 +530,7 @@ test("ui preset registration", () => {
   );
   registerUIPreset(
     {
-      presetName: "advanced",
+      name: "advanced",
       json: {
         options: {
           allowZoom: true,
@@ -550,4 +550,8 @@ test("ui preset registration", () => {
 
   survey.setValue("presetName", "advanced");
   expect(creator.allowZoom).toBeTruthy();
+
+  delete CreatorPresets["basic"];
+  delete CreatorPresets["advanced"];
+  PredefinedCreatorPresets.splice(0, PredefinedCreatorPresets.length);
 });

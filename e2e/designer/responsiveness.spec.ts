@@ -12,6 +12,7 @@ import {
   creatorTabPreviewName,
   generalGroupName,
   selectedObjectTextSelector,
+  objectSelectorButton,
 } from "../helper";
 import type { Locator, Page } from "@playwright/test";
 
@@ -42,16 +43,16 @@ test.describe(title, () => {
     await changeToolboxScrolling(page, false);
     const tabbedMenuItemSelector = page.locator(".svc-toolbox .svc-toolbox__tool:nth-of-type(20)");
     await page.setViewportSize({ width: 1280, height: 1200 });
-    await expect(tabbedMenuItemSelector).not.toHaveClass(/sv-action--hidden/);
+    await expect(tabbedMenuItemSelector).not.toHaveClass(/svc-toolbox__tool--hidden/);
     await page.setViewportSize({ width: 1280, height: 632 });
-    await expect(tabbedMenuItemSelector).toHaveClass(/sv-action--hidden/);
+    await expect(tabbedMenuItemSelector).toHaveClass(/svc-toolbox__tool--hidden/);
     await page.locator(".svc-toolbox__tool--dots").click();
     const popupSelector = page.locator(".sv-popup .sv-popup__container").filter({ visible: true });
     await expect(getListItemByText(page, "Dynamic Panel")).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(popupSelector).not.toBeVisible();
     await page.setViewportSize({ width: 1920, height: 1200 });
-    await expect(tabbedMenuItemSelector).not.toHaveClass(/sv-action--hidden/);
+    await expect(tabbedMenuItemSelector).not.toHaveClass(/svc-toolbox__tool--hidden/);
   });
 
   test("Responsive creator: toolbox & page navigator", async ({ page }) => {
@@ -63,7 +64,7 @@ test.describe(title, () => {
       ]
     });
     const toolboxItemCount = 22;
-    const collapseButtonSelector = page.locator(".sv-action-bar-item[title=\"Hide Panel\"]");
+    const collapseButtonSelector = page.locator(".sd-action[title=\"Hide Panel\"]");
     const toolbox = page.locator(".svc-toolbox");
     const toolboxItemIcons = page.locator(".svc-toolbox__tool .svc-toolbox__item-container").filter({ visible: true });
     const toolboxItemTitles = page.locator(".svc-toolbox__tool .svc-toolbox__item > .svc-toolbox__item-title").filter({ visible: true });
@@ -103,9 +104,9 @@ test.describe(title, () => {
     const westResizer = page.locator(".svc-resizer-west");
     const eastResizer = page.locator(".svc-resizer-east");
     const propertyGridSelector = page.locator(".svc-side-bar__container");
-    const collapseButtonSelector = page.locator(".sv-action-bar-item[title=\"Hide Panel\"]");
-    const expandButtonSelector = page.locator(".sv-action-bar-item[title=\"Show Panel\"]");
-    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions .sv-action").filter({ visible: true });
+    const collapseButtonSelector = page.locator(".sd-action[title=\"Hide Panel\"]");
+    const expandButtonSelector = page.locator(".sd-action[title=\"Show Panel\"]");
+    const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions .sd-action-bar__item").filter({ visible: true });
     const questions = page.locator(".svc-question__content");
     let pgWidth = 481;
 
@@ -138,7 +139,7 @@ test.describe(title, () => {
     await questions.locator(".sv-string-editor").getByText("question2").click();
     await expect(questionToolbarActions).toHaveCount(5);
 
-    await questionToolbarActions.locator(".svc-survey-element-toolbar-item__title").getByText("Settings").click();
+    await questionToolbarActions.locator(".sd-action__title").getByText("Settings").click();
     await expect(propertyGridSelector).toBeVisible();
     await expect(flyoutPropertyGrid).toHaveCount(1);
 
@@ -161,30 +162,30 @@ test.describe(title, () => {
   });
 
   test("Responsive creator: designer tab for mobile devices", async ({ page }) => {
-    const topToolBar = page.locator(".svc-top-bar .sv-action-bar");
-    const footerToolBar = page.locator(".svc-footer-bar .sv-action-bar");
-    const collapseButtonSelector = page.locator(".sv-action-bar-item[title=\"Hide Panel\"]");
+    const topToolBar = page.locator(".svc-top-bar .sd-action-bar");
+    const footerToolBar = page.locator(".svc-footer-bar .sd-action-bar");
+    const collapseButtonSelector = page.locator(".sd-action[title=\"Hide Panel\"]");
 
     await page.setViewportSize({ width: 750, height: 500 });
     await expect(topToolBar).toBeVisible();
     await expect(footerToolBar).not.toBeVisible();
-    await expect(topToolBar.locator(".sv-action").filter({ visible: true })).toHaveCount(4);
+    await expect(topToolBar.locator(".sd-action-bar__item").filter({ visible: true })).toHaveCount(4);
 
     await page.setViewportSize({ width: 370, height: 400 });
     await expect(topToolBar).not.toBeVisible();
     await expect(footerToolBar).toBeVisible();
-    await expect(footerToolBar.locator(".sv-action").filter({ visible: true })).toHaveCount(5);
+    await expect(footerToolBar.locator(".sd-action-bar__item").filter({ visible: true })).toHaveCount(5);
 
     await page.setViewportSize({ width: 1920, height: 900 });
     await collapseButtonSelector.click();
     await expect(topToolBar).toBeVisible();
     await expect(footerToolBar).not.toBeVisible();
-    await expect(topToolBar.locator(".sv-action").filter({ visible: true })).toHaveCount(4);
+    await expect(topToolBar.locator(".sd-action-bar__item").filter({ visible: true })).toHaveCount(4);
   });
 
   test("property grid for mobile devices", async ({ page }) => {
     const mobilePropertGrid = page.locator(".svc-side-bar--mobile .svc-side-bar__container");
-    const surveySettingsButtonSelector = page.locator(".sv-action-bar-item[title=\"Survey settings\"]");
+    const surveySettingsButtonSelector = page.locator(".sd-action[title=\"Survey settings\"]");
     const propertyGridSelector = page.locator(".svc-side-bar__container");
 
     await page.setViewportSize({ width: 750, height: 600 });
@@ -199,7 +200,7 @@ test.describe(title, () => {
 
     await page.locator(".svd-grid-hide").click();
     await getAddNewQuestionButton(page).click();
-    await page.locator(".svc-survey-element-toolbar__item[title=\"Open settings\"]").filter({ visible: true }).first().click();
+    await page.locator(".sd-action[title=\"Open settings\"]").filter({ visible: true }).first().click();
     await expect(page.locator(selectedObjectTextSelector)).toHaveText("question1");
 
     await page.setViewportSize({ width: 1920, height: 900 });
@@ -209,9 +210,9 @@ test.describe(title, () => {
 
   test("test tab for mobile devices", async ({ page }) => {
     await setJSON(page, { pages: [{ elements: [{ type: "text", name: "question1" }] }] });
-    const testTabToolbar = page.locator(".sv-action-bar--pages");
+    const testTabToolbar = page.locator(".svc-pages-toolbar");
     const creatorFooterToolbar = page.locator(".svc-footer-bar .svc-toolbar-wrapper");
-    const creatorFooterToolbarActions = creatorFooterToolbar.locator(".sv-action").filter({ visible: true });
+    const creatorFooterToolbarActions = creatorFooterToolbar.locator(".sd-action-bar__item").filter({ visible: true });
 
     await page.setViewportSize({ width: 1920, height: 900 });
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
@@ -234,7 +235,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await expect(testTabToolbar).toHaveCount(1);
     await expect(creatorFooterToolbar).toHaveCount(0);
-    await expect(testTabToolbar.locator(".sv-action").filter({ visible: true })).toHaveCount(3);
+    await expect(testTabToolbar.locator(".sd-action-bar__item").filter({ visible: true })).toHaveCount(3);
 
     await page.setViewportSize({ width: 370, height: 600 });
     await expect(testTabToolbar).toHaveCount(0);
@@ -242,14 +243,14 @@ test.describe(title, () => {
     await expect(creatorFooterToolbarActions.nth(0)).toHaveClass(/sv-action--svd-designer/);
     await expect(creatorFooterToolbarActions.nth(1)).toHaveClass(/sv-action--svd-preview/);
     await expect(creatorFooterToolbarActions.nth(2)).toHaveClass(/sv-action--prevPage/);
-    await expect(creatorFooterToolbarActions.locator(".svc-preview-pager__item").nth(0)).toHaveAttribute("disabled", "");
+    await expect(creatorFooterToolbarActions.nth(2).locator(".sd-action")).toHaveAttribute("disabled", "");
     await expect(creatorFooterToolbarActions.nth(3)).toHaveClass(/sv-action--nextPage/);
-    await expect(creatorFooterToolbarActions.locator(".svc-preview-pager__item").nth(1)).not.toHaveAttribute("disabled", "");
+    await expect(creatorFooterToolbarActions.nth(3).locator(".sd-action")).not.toHaveAttribute("disabled", "");
     await expect(creatorFooterToolbarActions.nth(4)).toHaveClass(/sv-action--showInvisible/);
 
     await creatorFooterToolbarActions.nth(3).click();
-    await expect(creatorFooterToolbarActions.locator(".svc-preview-pager__item").nth(0)).not.toHaveAttribute("disabled", "");
-    await expect(creatorFooterToolbarActions.locator(".svc-preview-pager__item").nth(1)).toHaveAttribute("disabled", "");
+    await expect(creatorFooterToolbarActions.nth(2).locator(".sd-action")).not.toHaveAttribute("disabled", "");
+    await expect(creatorFooterToolbarActions.nth(3).locator(".sd-action")).toHaveAttribute("disabled", "");
 
     await page.setViewportSize({ width: 1920, height: 900 });
     await expect(testTabToolbar).toHaveCount(1);
@@ -284,10 +285,10 @@ test.describe(title, () => {
     await expect(page.locator(".sv-popup--modal-popup")).toBeVisible();
     await page.getByRole("button", { name: "Cancel", exact: true }).click();
     await page.setViewportSize({ width: 380, height: 600 });
-    await page.locator(".svc-survey-element-toolbar__item[title=\"Open settings\"]").filter({ visible: true }).click();
+    await page.locator(".svc-question__content-actions .sd-action[title=\"Open settings\"]").filter({ visible: true }).click();
     await page.locator(".svd-grid-hide").click();
     await question1.click({ position: { x: 5, y: 5 } });
-    await page.locator(".svc-question__content-actions .svc-survey-element-toolbar__item[title=\"Open settings\"]").filter({ visible: true }).click();
+    await page.locator(".svc-question__content-actions .sd-action[title=\"Open settings\"]").filter({ visible: true }).click();
     await page.getByText("Set Default Answer", { exact: true }).click();
     await expect(page.locator(".sv-popup--modal-overlay")).toBeVisible();
   });
@@ -297,7 +298,7 @@ test.describe(title, () => {
     await setJSON(page, json);
     await page.setViewportSize({ width: 1920, height: 900 });
     await page.waitForTimeout(500);
-    await page.locator("button.svc-element__question-type-selector").click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
     await expect(getListItemByText(page, "Single-Line Input")).toHaveCount(1);
   });
 
@@ -306,7 +307,7 @@ test.describe(title, () => {
     await setJSON(page, json);
     await page.setViewportSize({ width: 380, height: 600 });
     await page.waitForTimeout(500);
-    await page.locator("button.svc-element__question-type-selector").first().click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").first().click();
     await expect(getListItemByText(page, "Single-Line Input")).toHaveCount(1);
   });
 
@@ -315,22 +316,21 @@ test.describe(title, () => {
     await setJSON(page, json);
     const propertyGridSelector = page.locator(".svc-side-bar__container");
     const flyoutPropertyGrid = page.locator(".svc-side-bar--flyout");
-    const expandButtonSelector = page.locator(".sv-action-bar-item[title=\"Show Panel\"]");
-    const collapseButtonSelector = page.locator(".sv-action-bar-item[title=\"Hide Panel\"]");
-    const surveySettingsButtonSelector = page.locator(".sv-action-bar-item[title=\"Survey settings\"]");
-    const objectSelectorButton = page.locator(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
+    const expandButtonSelector = page.locator(".sd-action[title=\"Show Panel\"]");
+    const collapseButtonSelector = page.locator(".sd-action[title=\"Hide Panel\"]");
+    const surveySettingsButtonSelector = page.locator(".sd-action[title=\"Survey settings\"]");
 
     await page.setViewportSize({ width: 900, height: 700 });
     await page.locator(".svc-page__content").first().click({ position: { x: 5, y: 5 } });
     await expandButtonSelector.click();
     await expect(propertyGridSelector).toBeVisible();
     await expect(flyoutPropertyGrid).toHaveCount(1);
-    await expect(objectSelectorButton.getByText("page1")).toBeVisible();
+    await expect(objectSelectorButton(page).getByText("page1")).toBeVisible();
     await collapseButtonSelector.click();
     await surveySettingsButtonSelector.click();
-    await expect(objectSelectorButton.getByText("Survey")).toBeVisible();
+    await expect(objectSelectorButton(page).getByText("Survey")).toBeVisible();
     await page.locator(".svc-creator").click({ position: { x: 237, y: 273 } });
 
-    await expect(objectSelectorButton.getByText("page1")).not.toBeVisible();
+    await expect(objectSelectorButton(page).getByText("page1")).not.toBeVisible();
   });
 });

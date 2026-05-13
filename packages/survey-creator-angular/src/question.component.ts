@@ -9,11 +9,11 @@ import { CreatorModelComponent } from "./creator-model.component";
   templateUrl: "./question.component.html",
   styles: [":host { display: none; }"]
 })
-export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdornerViewModel> {
+export class QuestionDesignerComponent<T extends QuestionAdornerViewModel = QuestionAdornerViewModel> extends CreatorModelComponent<T> {
   @Input() componentName!: string;
   @Input() componentData!: any;
   @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
-  public adorner!: QuestionAdornerViewModel;
+  public adorner!: T;
   protected get creator(): SurveyCreatorModel {
     return this.componentData.data;
   }
@@ -22,13 +22,13 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
   }
   protected createModel(): void {
     if (this.componentData) {
-      this.adorner = new QuestionAdornerViewModel(this.creator, this.model, <any>null);
+      this.adorner = new QuestionAdornerViewModel(this.creator, this.model, <any>null) as T;
     }
   }
   protected getPropertiesToTrack(): string[] {
     return ["model", "creator"];
   }
-  protected getModel(): QuestionAdornerViewModel {
+  protected getModel(): T {
     return this.adorner;
   }
   public get placeholderComponent(): string {

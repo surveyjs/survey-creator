@@ -63,7 +63,7 @@ export var koreanStrings = {
     tagbox: "다중 선택 드롭다운",
     // "File Upload"
     file: "파일",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "행렬 (단일 선택)",
@@ -238,6 +238,18 @@ export var koreanStrings = {
     options: "옵션",
     // "Generate Valid JSON"
     generateValidJSON: "JSON 데이터 생성",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "알 수 없는 기능: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "미지의 기능: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "미확인 변수: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "미확인 변수: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "문법 오류입니다.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "의미 오류입니다.",
     // "Generate Readable JSON"
     generateReadableJSON: "생성 JSON 데이터 읽기",
     // "Toolbox"
@@ -250,6 +262,8 @@ export var koreanStrings = {
     toolboxFilteredTextPlaceholder: "검색하려면 입력...",
     // [Auto-translated] "No results found"
     toolboxNoResultsFound: "결과를 찾을 수 없습니다.",
+    // [Auto-translated] "No properties to display"
+    propertyGridEmptySurveyText: "표시할 속성이 없습니다",
     // [Auto-translated] "Type to search..."
     propertyGridFilteredTextPlaceholder: "검색하려면 입력...",
     // [Auto-translated] "No results found"
@@ -752,6 +766,14 @@ export var koreanStrings = {
       // [Auto-translated] "Expression"
       expression: "식"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "표현"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "표현"
+    },
     // survey templates
     survey: {
       // [Auto-translated] "Survey title"
@@ -1033,7 +1055,7 @@ export var koreanStrings = {
     columnEdit: "열 편집: {0}",
     // "Edit item: {0}"
     itemEdit: "항목 편집: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "경로",
@@ -1099,6 +1121,8 @@ export var koreanStrings = {
     choicesOrder: "항목 순서 선택",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "사용자 지정 선택 허용",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "\"Create Custom Choice\" 명령어 텍스트",
     // "Visible"
     visible: "보입니까??",
     // "Required"
@@ -1127,6 +1151,8 @@ export var koreanStrings = {
     storeDataAsText: "파일 내용을 JSON 결과에 텍스트로 저장",
     // "Maximum file size (in bytes)"
     maxSize: "최대 파일 크기(bytes)",
+    // [Auto-translated] "Maximum number of files"
+    maxFiles: "최대 파일 수",
     // "Row count"
     rowCount: "행 수",
     // "Columns layout"
@@ -1318,10 +1344,10 @@ export var koreanStrings = {
     // [Auto-translated] "Regular expression"
     regex: "정규식",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "유효성 검사 메시지",
-      // [Auto-translated] "Validation expression"
-      expression: "유효성 검사 표현식",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "잘못된 입력에 대한 알림 메시지",
+      // [Auto-translated] "Valid when"
+      expression: "유효한 경우는",
       // [Auto-translated] "Notification type"
       notificationType: "알림 유형",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1401,8 +1427,10 @@ export var koreanStrings = {
     allowMultiple: "여러 파일 업로드 사용",
     // [Auto-translated] "Preview uploaded images"
     allowImagesPreview: "업로드된 이미지 미리보기",
-    // [Auto-translated] "Accepted file types"
-    acceptedTypes: "허용되는 파일 형식",
+    // [Auto-translated] "Accepted file categories"
+    acceptedCategories: "허용되는 파일 분류",
+    // [Auto-translated] "Additional file extensions"
+    acceptedTypes: "추가 파일 확장자",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "업로드가 완료될 때까지 기다리십시오.",
     // [Auto-translated] "Confirm file deletion"
@@ -1475,6 +1503,66 @@ export var koreanStrings = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "툴팁 형식"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "이미지 URL",
+      // [Auto-translated] "Areas"
+      areas: "지역",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "여러 선택 허용",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "가치 부동산 이름",
+      // [Auto-translated] "Shape"
+      shape: "형태",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "유휴 채우기 색상",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "유휴 획 색상",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "아이들 스트로크 폭",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "호버 필 색상",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "호버 획 색상",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "호버 스트로크 폭",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "선택된 채우기 색상",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "선택된 획 색상",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "선택된 획 폭",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "최대 선택 구역",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "최소 선택 구역"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "가치",
+      // [Auto-translated] "Shape"
+      shape: "형태",
+      // [Auto-translated] "Coordinates"
+      coords: "좌표",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "유휴 채우기 색상",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "유휴 획 색상",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "아이들 스트로크 폭",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "호버 필 색상",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "호버 획 색상",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "호버 스트로크 폭",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "선택된 채우기 색상",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "선택된 획 색상",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "선택된 획 폭"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "이미지 높이",
@@ -1505,6 +1593,8 @@ export var koreanStrings = {
     minErrorText: "\"값이 최소값 미만입니다.\" 오류 메시지",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "\"값이 최대값을 초과합니다.\" 오류 메시지",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "\"값이 스텝 사이즈와 일치하지 않음\" 오류 메시지",
     // "\"Empty comment\" error message"
     otherErrorText: "'빈 댓글' 오류 메시지",
     // "Error message for duplicate responses"
@@ -2083,6 +2173,20 @@ export var koreanStrings = {
       // [Auto-translated] "Informational"
       info: "정보"
     },
+    acceptedCategories: {
+      // [Auto-translated] "Images"
+      image: "이미지",
+      // [Auto-translated] "Videos"
+      video: "비디오",
+      // [Auto-translated] "Audio"
+      audio: "오디오",
+      // [Auto-translated] "Documents"
+      document: "문서",
+      // [Auto-translated] "Archives"
+      archive: "기록 보관소",
+      // [Auto-translated] "Custom"
+      custom: "관습"
+    },
     autocomplete: {
       // [Auto-translated] "Full Name"
       name: "성명",
@@ -2496,6 +2600,8 @@ export var koreanStrings = {
     notcontains: "포함하지 않습니다",
     // [Auto-translated] "Any of"
     anyof: "다음 중 하나",
+    // [Auto-translated] "None of"
+    noneof: "전혀",
     // [Auto-translated] "All of"
     allof: "모든",
     // "Greater than"
@@ -2549,7 +2655,7 @@ export var koreanStrings = {
     loadFromServer: "서버에서 설문조사 JSON 실행",
     // "Scripts and styles"
     titleScript: "스크립트 및 스타일",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
     // "JavaScript"
     titleJavaScript: "자바스크립트"
@@ -3089,8 +3195,10 @@ export var koreanStrings = {
     storeOthersAsComment: "\"기타\" 옵션 값을 측량 결과에 별도의 속성으로 저장하려면 선택합니다.",
     // [Auto-translated] "Use {0} as a placeholder for the actual value."
     format: "{0} 실제 값의 자리 표시자로 사용합니다.",
-    // [Auto-translated] "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information."
-    acceptedTypes: "자세한 내용은 [accept](https://www.w3schools.com/tags/att_input_accept.asp) 속성 설명을 참조하십시오.",
+    // [Auto-translated] "Select \"Custom\" to add your own file extensions on top of the predefined categories."
+    acceptedCategories: "\"커스텀\"을 선택해 미리 정의된 카테고리 위에 자신만의 파일 확장자를 추가하세요.",
+    // [Auto-translated] "Enter file extensions separated by commas (e.g., .csv, .xml)."
+    acceptedTypes: "쉼표로 구분된 파일 확장자(예: .csv, .xml)를 입력하세요.",
     // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. Applies only to columns with \"Cell input type\" set to Radio Button Group or Checkboxes."
     columnColCount: "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. \"셀 입력 유형\"이 라디오 단추 그룹 또는 확인란으로 설정된 열에만 적용됩니다.",
     // [Auto-translated] "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion."
@@ -3508,6 +3616,18 @@ export var koreanStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "대조"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "기본",
+      // [Auto-translated] "Advanced"
+      advanced: "고급",
+      // [Auto-translated] "Expert"
+      expert: "전문가"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "프리셋 적용"
   }
 };
 setupLocale({ localeCode: "ko", strings: koreanStrings });

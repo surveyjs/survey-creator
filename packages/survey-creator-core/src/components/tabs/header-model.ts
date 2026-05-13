@@ -39,7 +39,7 @@ export class HeaderModel extends Base implements IHeader {
       this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables);
     }
 
-    const backgroundColorValue = cssVariables["--sjs-header-backcolor"];
+    const backgroundColorValue = cssVariables["--sjs2-color-component-header-default-bg"];
     if (!!backgroundColorValue) {
       this["backgroundColorSwitch"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
       this["backgroundColor"] = this["backgroundColorSwitch"] === "custom" ? backgroundColorValue : undefined;
@@ -87,11 +87,11 @@ export class HeaderModel extends Base implements IHeader {
 
   private setHeaderBackgroundColorCssVariable(cssVariables: any) {
     if (this["backgroundColorSwitch"] === "none") {
-      cssVariables["--sjs-header-backcolor"] = undefined;
+      cssVariables["--sjs2-color-component-header-default-bg"] = undefined;
     } else if (this["backgroundColorSwitch"] === "custom") {
-      cssVariables["--sjs-header-backcolor"] = this["backgroundColor"] ?? "transparent";
+      cssVariables["--sjs2-color-component-header-default-bg"] = this["backgroundColor"] ?? "transparent";
     } else {
-      cssVariables["--sjs-header-backcolor"] = HeaderModel.primaryColorStr;
+      cssVariables["--sjs2-color-component-header-default-bg"] = HeaderModel.primaryColorStr;
     }
   }
 
@@ -103,6 +103,22 @@ export class HeaderModel extends Base implements IHeader {
 
   public getType(): string {
     return "header";
+  }
+
+  public get surveyTitle() {
+    return this.getPropertyValue("headerTitle");
+  }
+
+  public get surveyDescription() {
+    return this.getPropertyValue("headerDescription");
+  }
+
+  public set surveyTitle(value: any) {
+    this.setPropertyValue("headerTitle", value);
+  }
+
+  public set surveyDescription(value: any) {
+    this.setPropertyValue("headerDescription", value);
   }
 }
 
@@ -313,21 +329,8 @@ Serializer.addClass(
 Serializer.addProperties("header", [
   {
     type: "font",
-    name: "surveyTitle",
-    visibleIf: (obj) => obj.headerView === "basic",
-    default: getDefaultTitleSetting(),
-  },
-  {
-    type: "font",
-    name: "surveyDescription",
-    visibleIf: (obj) => obj.headerView === "basic",
-    default: getDefaultDescriptionSetting(),
-  },
-  {
-    type: "font",
     name: "headerTitle",
     default: getDefaultTitleSetting(),
-    visibleIf: (obj) => obj.headerView === "advanced",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;
@@ -338,7 +341,6 @@ Serializer.addProperties("header", [
     type: "font",
     name: "headerDescription",
     default: getDefaultDescriptionSetting(true),
-    visibleIf: (obj) => obj.headerView === "advanced",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;

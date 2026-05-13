@@ -1,3 +1,4 @@
+import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 
 export function getFirstNonTextElement(elements: any) {
   if (!elements || !elements.length) return;
@@ -107,6 +108,8 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
 }
 
 export function select(element: any) {
+  const window = DomWindowHelper.getWindow();
+  const document = DomDocumentHelper.getDocument();
   if (!window) return;
   var range, selection;
   if (window.getSelection && document.createRange) {
@@ -123,12 +126,14 @@ export function select(element: any) {
 }
 
 export function saveToFileHandler(fileName: string, blob: Blob) {
+  const window = DomWindowHelper.getWindow();
+  const document = DomDocumentHelper.getDocument();
   if (!window) return;
   if (window.navigator["msSaveOrOpenBlob"]) {
     window.navigator["msSaveBlob"](blob, fileName);
   } else {
-    const elem = window.document.createElement("a");
-    elem.href = window.URL.createObjectURL(blob);
+    const elem = document.createElement("a");
+    elem.href = URL.createObjectURL(blob);
     elem.download = fileName;
     document.body.appendChild(elem);
     elem.click();

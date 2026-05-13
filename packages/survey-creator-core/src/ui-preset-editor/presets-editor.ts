@@ -1,5 +1,6 @@
 import { SurveyCreatorModel, editorLocalization, ICreatorOptions, getLocString } from "survey-creator-core";
 import { UIPreset, ICreatorPresetData, CreatorDomHelper } from "survey-creator-core";
+import { DomDocumentHelper } from "survey-core";
 import { Action, ActionContainer, Base, LocalizableString, Question, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, SurveyModel } from "survey-core";
 import { CreatorPresetEditableBase, ICreatorPresetEditorSetup } from "./presets-editable-base";
 import { CreatorPresetEditableToolboxConfigurator } from "./presets-editable-toolbox";
@@ -15,16 +16,6 @@ export class NavigationBar extends ActionContainer {
     super();
     this.cssClasses = {
       root: "sps-navigation-bar",
-      defaultSizeMode: "",
-      smallSizeMode: "",
-      item: "sps-navigation-bar__item sps-navigation-bar-item",
-      itemWithTitle: "",
-      itemAsIcon: "",
-      itemActive: "sps-navigation-bar-item--active",
-      itemPressed: "sps-navigation-bar-item--pressed",
-      itemIcon: "sps-navigation-bar-item__icon",
-      itemTitle: "sps-navigation-bar-item__title",
-      itemTitleWithIcon: "",
     };
   }
 }
@@ -46,6 +37,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.locTitle = new LocalizableString(undefined, false);
     this.locTitle.text = getLocString("presets.editor.title");
     this.navigationBarValue = new NavigationBar();
+    this.navigationBarValue.setActionsAppearance({ size: "small", style: "neutral", mode: "tertiary-surface" });
     const firstTabName = "preset";
     this.preset.setJson(this.getJsonFromSurveyModel());
   }
@@ -66,7 +58,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   public get creator(): SurveyCreatorModel { return this.creatorValue; }
   public get model(): SurveyModel { return this.modelValue; }
   public get resultModel(): SurveyModel {
-    this.upldateResultJson();
+    this.updateResultJson();
     return this.resultModelValue;
   }
   public getLocale(): string { return editorLocalization.currentLocale || "en"; }
@@ -76,7 +68,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   public set json(val: ICreatorPresetData) {
     this.preset.setJson(val);
     this.updateDataFromJson(this.modelValue);
-    this.upldateResultJson();
+    this.applyFromSurveyModel(false);
+    this.activatePage(this.modelValue, this.creatorValue, this.modelValue.editablePresets);
+    this.updateResultJson();
   }
   public get jsonText(): string {
     return JSON.stringify(this.json, null, 2);
@@ -131,6 +125,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   protected createModel(): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
+    model["cssVariables"] = {};
     model.css = presetsCss;
     model.editablePresets = editablePresets;
     model.keepIncorrectValues = true;
@@ -164,7 +159,9 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       editablePresets.forEach(item => {
         if (options.question.name == item.getNavigationElementName()) {
           options.question.getTitleToolbar().isResponsivenessDisabled = true;
-          options.question.getTitleToolbar().cssClasses = sender.css.navigationBar;
+          options.question.getTitleToolbar().setActionsAppearance({ size: "medium", style: "brand", mode: "secondary" });
+          //model.navigationBar.getActionById("sv-nav-next").appearance.mode = "primary";
+          //model.navigationBar.getActionById("sv-nav-prev").appearance.mode = "secondary";
           options.actions = model.navigationBar.actions;
         }
         item.onGetQuestionTitleActions(model, this.creator, options);
@@ -174,9 +171,10 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
       editablePresets.forEach(item => {
         if (options.panel.name == item.getNavigationElementName()) {
           options.panel.getTitleToolbar().isResponsivenessDisabled = true;
-          options.panel.getTitleToolbar().cssClasses = sender.css.navigationBar;
+          options.panel.getTitleToolbar().setActionsAppearance({ size: "medium", style: "brand", mode: "secondary" });
+          //model.navigationBar.getActionById("sv-nav-next").appearance.mode = "primary";
+          //model.navigationBar.getActionById("sv-nav-prev").appearance.mode = "secondary";
           options.actions = model.navigationBar.actions;
-
         }
         item.onGetPanelTitleActions(model, this.creator, options);
       });
@@ -289,10 +287,11 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     return `<div>${getLocString("presets.editor.usageExample")}</div>`;
   }
   public downloadJsonFile(text?: string): void {
+    const document = DomDocumentHelper.getDocument();
     if (!text) text = this.jsonText;
     const jsonBlob = new Blob([text], { type: "application/json" });
-    const elem = window.document.createElement("a");
-    elem.href = window.URL.createObjectURL(jsonBlob);
+    const elem = document.createElement("a");
+    elem.href = URL.createObjectURL(jsonBlob);
     elem.download = "preset.json";
     document.body.appendChild(elem);
     elem.click();
@@ -309,7 +308,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     };
     fileReader.readAsText(file);
   }
-  private upldateResultJson(): void {
+  private updateResultJson(): void {
     this.resultModelValue.getQuestionByName("json").value = this.jsonText;
   }
   public applyFromSurveyModel(validate = true): boolean {

@@ -1,0 +1,117 @@
+@use "../../variables.scss" as *;
+@use "../../typography-mixins.scss" as *;
+
+
+.sps-popup-menu.sps-popup-menu--dropdown {
+  height: 0;
+  .sv-popup__container {
+    margin-top: var(--sjs2-spacing-x50, 4px);
+  }
+}
+
+.sps-popup {
+  .sv-popup__body-header {
+    @include sjs2--typography--medium-strong;
+    color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+  }
+
+  &.sv-popup--modal-popup {
+    z-index: 3000;
+    :has(.sps-page) {
+      min-height: initial;
+      flex-grow: initial;
+    }
+    .sv-components-row {
+      flex-direction: row;
+    }
+  }
+
+  .sv-popup__body-footer .sv-action-bar {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .sps-body {
+    background: var(--sjs2-color-utility-sheet, #fff);
+  }
+
+  .sps-page {
+    padding: 0;
+    gap: var(--sjs2-spacing-x200, 16px);
+    align-self: stretch;
+    max-width: initial;
+    width: initial;
+  }
+  .sps-row {
+    max-width: initial;
+  }
+  .sps-question--with-frame {
+    border: none;
+    border-radius: 0;
+  }
+
+  .sps-question__header {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+  }
+
+  .sps-question__title {
+    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+    padding: var(--sjs2-layout-control-caption-medium-caption-vertical, 8px)
+      var(--sjs2-layout-control-caption-medium-caption-horizontal, 0);
+    @include sjs2--typography--default;
+  }
+
+  .sps-question__content.sps-question__content {
+    padding: 0;
+  }
+
+  .sps-row--multiple {
+    margin: 0;
+    & > div {
+      align-items: stretch;
+      padding-left: var(--sjs2-spacing-x400, 32px);
+      padding-right: var(--sjs2-spacing-x400, 32px);
+      &:first-of-type {
+        padding-left: 0;
+      }
+      &:last-of-type {
+        padding-right: 0;
+      }
+    }
+  }
+
+  .sps-panel {
+    border: none;
+    border-radius: 0;
+    align-self: stretch;
+    .sps-row {
+      border: none;
+    }
+  }
+  .sps-panel__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sjs2-spacing-x200, 16px);
+    padding: 0;
+  }
+  &.svc-creator-confirm-dialog .sv-modal-footer-action-bar {
+    justify-content: stretch;
+    .sd-action-bar__item,
+    .sv-popup__body-footer-item {
+      flex-grow: 1;
+    }
+  }
+  .sv-popup__close-button {
+    padding: var(--sjs2-spacing-x100, 8px);
+  }
+}
+
+.sps-popup--level2 {
+  &.sv-popup--modal-popup.svc-property-editor .sv-popup__container {
+    .sv-components-column--expandable {
+      min-width: 540px;
+    }
+  }
+}

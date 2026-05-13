@@ -1,7 +1,6 @@
 import { Action, AdaptiveActionContainer, CssClassBuilder, IAction, property, UpdateResponsivenessMode } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { ICreatorPlugin } from "./creator-settings";
-import { listComponentCss } from "./components/list-theme";
 
 export interface ITabbedMenuItem extends IAction {
   componentContent: string;
@@ -67,12 +66,14 @@ export class TabbedMenuContainer extends AdaptiveActionContainer<TabbedMenuItem>
   private currentMode: TabbedMenuMode = TabbedMenuMode.Titles;
   constructor(private creator: CreatorBase) {
     super();
+    this.cssClasses = {
+      containerItemHidden: "svc-tabbed-menu-item-container--hidden",
+    };
     this.dotsItem.popupModel.horizontalPosition = "center";
     this.dotsItem.popupModel.cssClass += " svc-tabbed-menu-item__popup svc-creator-popup";
     this.dotsItem.css += " svc-tabbed-menu-dots";
     this.dotsItem.innerCss += " svc-tabbed-menu-dots__item";
     this.dotsItem.iconSize = "auto";
-    this.hiddenItemsListModel.cssClasses = listComponentCss;
     this.minVisibleItemsCount = 1;
   }
   public addTab(name: string,

@@ -1,14 +1,13 @@
 import * as React from "react";
-import { Base, getActionDropdownButtonTarget } from "survey-core";
+import { Action, Base, getActionDropdownButtonTarget } from "survey-core";
 import { SurveyElementBase, ReactElementFactory, Popup, attachKey2click } from "survey-react-ui";
-import { MenuButton } from "survey-creator-core";
 
 interface ISideBarPropertyGridHeaderProps {
-  model: MenuButton;
+  model: Action;
 }
 
 class SideBarPropertyGridHeader extends SurveyElementBase<ISideBarPropertyGridHeaderProps, any> {
-  get objectSelectionAction(): MenuButton {
+  get objectSelectionAction(): Action {
     return this.props.model;
   }
 
@@ -18,7 +17,7 @@ class SideBarPropertyGridHeader extends SurveyElementBase<ISideBarPropertyGridHe
 
   renderElement(): React.JSX.Element {
     const button = attachKey2click(
-      <div className={this.objectSelectionAction.buttonClassName} onClick={() => this.objectSelectionAction.action()}>
+      <div className={this.objectSelectionAction.getActionBarItemCss() + " svc-sidebar__header-object-selector"} onClick={() => this.objectSelectionAction.action()}>
         <div className="svc-sidebar__header-caption">
           <span className="svc-sidebar__header-title">{this.objectSelectionAction.title}</span>
           <span className="svc-sidebar__header-subtitle">{this.objectSelectionAction.tooltip}</span>

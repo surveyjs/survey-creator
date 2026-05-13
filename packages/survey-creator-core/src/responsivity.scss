@@ -22,11 +22,11 @@
       }
     }
 
-    &>.svc-question__dropdown-choices--wrapper {
+    & > .svc-question__dropdown-choices--wrapper {
       width: calc(100% + calcSize(6));
       margin: 0 calcSize(-3);
 
-      &>div {
+      & > div {
         width: calc(100% - calcSize(6));
         margin: 0 calcSize(3);
       }
@@ -93,7 +93,7 @@
       }
 
       h3 {
-        @include ctrMediumBoldFont;
+        @include sjs2--typography--medium-strong;
         margin: 0;
       }
 
@@ -114,10 +114,6 @@
   }
 
   .svc-question__content-actions {
-    width: calc(100% + 3 * #{$base-unit});
-
-    .svc-survey-element-toolbar__item {
-      border: 0;
-    }
+    width: calc(100% + 2.5 * #{$base-unit});
   }
 }

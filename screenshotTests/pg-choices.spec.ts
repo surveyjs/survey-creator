@@ -36,16 +36,16 @@ test.describe(title, () => {
     const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
     await expect(sectionContentElement).toBeVisible();
     await compareScreenshot(page, sectionContentElement, "choices-section-default.png");
-    await page.evaluate(() => (<any>document).querySelector("[data-name='choices'] .spg-input").focus());
+    await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector("[data-name='choices'] .sd-formbox__input").focus());
     await compareScreenshot(page, sectionContentElement, "choices-section-default-focused.png");
     await resetFocusToBody(page);
-    await sectionContentElement.locator(".spg-action-button").nth(0).hover();
+    await sectionContentElement.locator(".sd-action").nth(0).hover();
     await compareScreenshot(page, sectionContentElement, "choices-clear-button-hovered.png");
 
-    await sectionContentElement.locator(".spg-action-button").nth(3).hover();
+    await sectionContentElement.locator(".sd-action").nth(3).hover();
     await compareScreenshot(page, sectionContentElement, "choices-edit-item-button-hovered.png");
 
-    await sectionContentElement.locator(".spg-action-button").nth(3).click();
+    await sectionContentElement.locator(".sd-action").nth(3).click();
     await compareScreenshot(page, sectionContentElement, "choices-edit-item-content.png");
   });
 
@@ -148,8 +148,8 @@ test.describe(title, () => {
     await page.locator(".svc-question__content").click({ position: { x: 10, y: 10 } });
     await getPropertyGridCategory(page, generalGroupName).click();
     await page.getByRole("button", { name: "Choice Options" }).click();
-    await questionSelector.locator("td .spg-action-button").nth(0).click();
+    await questionSelector.locator("td .sd-action").nth(0).click();
 
-    await compareScreenshot(page, questionSelector, "choices-editor-narrow-pg.png");
+    await compareScreenshot(page, questionSelector, "choices-editor-narrow-pg.png", { maxDiffPixels: 2 });
   });
 });

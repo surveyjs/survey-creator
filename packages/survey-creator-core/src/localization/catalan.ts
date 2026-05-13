@@ -7,7 +7,7 @@ export var catalanTranslation = {
     edit: "Editar",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Mira y aprende a crear enquestes",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Arrossega un tipus de pregunta per començar a dissenyar la teva enquesta!",
@@ -53,8 +53,8 @@ export var catalanTranslation = {
     comment: "Text llarg",
     // "Image Picker"
     imagepicker: "Selector de imatges",
-    // "Ranking"
-    ranking: "Ranking",
+    // [Auto-translated] "Ranking"
+    ranking: "Classificació",
     // "Image"
     image: "Imatge",
     // "Dropdown"
@@ -105,8 +105,8 @@ export var catalanTranslation = {
     containers: "Contenidors",
     // "Matrix Questions"
     matrix: "Preguntes matriu",
-    // "Misc"
-    misc: "Misc"
+    // [Auto-translated] "Misc"
+    misc: "Diversos"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -238,6 +238,18 @@ export var catalanTranslation = {
     options: "Opcions",
     // "Generate Valid JSON"
     generateValidJSON: "Generar un JSON válido",
+    // [Auto-translated] "Unknown function: \"{0}\"."
+    expressionUnknownFunction: "Funció desconeguda: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Funcions desconegudes: \"{0}\".",
+    // [Auto-translated] "Unknown variable: \"{0}\"."
+    expressionUnknownVariable: "Variable desconeguda: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Variables desconegudes: \"{0}\".",
+    // [Auto-translated] "Syntax error."
+    expressionSyntaxError: "Error de sintaxi.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Error semàntic.",
     // "Generate Readable JSON"
     generateReadableJSON: "Generar JSON legible",
     // "Toolbox"
@@ -437,8 +449,8 @@ export var catalanTranslation = {
       panel_visibilityName: "Visibilidad del panell",
       // "Enable/disable panell"
       panel_enableName: "Panell habilitar / deshabilitar",
-      // [Auto-translated] "Make panell required"
-      panel_requireName: "Hacer que el panell sea obligatori",
+      // [Auto-translated] "Make panel required"
+      panel_requireName: "Cal fer el panell",
       // "Show/hide question"
       question_visibilityName: "Pregunta visibilidad",
       // "Enable/disable question"
@@ -580,32 +592,32 @@ export var catalanTranslation = {
   // Property Editors
   pe: {
     panel: {
-      // [Auto-translated] "Panell name"
+      // [Auto-translated] "Panel name"
       name: "Nom del panell",
-      // [Auto-translated] "Panell title"
-      title: "Títol de la viñeta",
-      // [Auto-translated] "Panell description"
+      // [Auto-translated] "Panel title"
+      title: "Títol del panell",
+      // [Auto-translated] "Panel description"
       description: "Descripció del panell",
-      // [Auto-translated] "Make the panell visible if"
-      visibleIf: "Haga que el panell sea visible si",
-      // [Auto-translated] "Make the panell required if"
-      requiredIf: "Haga que el panell sea obligatori si",
-      // [Auto-translated] "Question order within the panell"
-      questionOrder: "Orden de las preguntes dentro del panell",
-      // [Auto-translated] "Move the panell to page"
-      page: "Mover el panell a la pàgina",
-      // [Auto-translated] "Display the panell on a new line"
-      startWithNewLine: "Mostrar el panell en una nova línea",
-      // [Auto-translated] "Panell collapse state"
-      state: "Estado de contracción del panell",
-      // [Auto-translated] "Inline panell width"
-      width: "Ancho del panell en línea",
-      // [Auto-translated] "Minimum panell width"
-      minWidth: "Anchura mínima del panell",
-      // [Auto-translated] "Maximum panell width"
-      maxWidth: "Anchura máxima del panell",
-      // [Auto-translated] "Number this panell"
-      showNumber: "Numerar este panell"
+      // [Auto-translated] "Make the panel visible if"
+      visibleIf: "Fes visible el panell si",
+      // [Auto-translated] "Make the panel required if"
+      requiredIf: "Fes que el panell sigui obligatori si",
+      // [Auto-translated] "Question order within the panel"
+      questionOrder: "Ordre de les preguntes dins del panell",
+      // [Auto-translated] "Move the panel to page"
+      page: "Mou el panell a la pàgina",
+      // [Auto-translated] "Display the panel on a new line"
+      startWithNewLine: "Mostra el panell en una nova línia",
+      // [Auto-translated] "Panel collapse state"
+      state: "Estat de col·lapse del panell",
+      // [Auto-translated] "Inline panel width"
+      width: "Amplada del panell en línia",
+      // [Auto-translated] "Minimum panel width"
+      minWidth: "Amplada mínima del panell",
+      // [Auto-translated] "Maximum panel width"
+      maxWidth: "Amplada màxima del panell",
+      // [Auto-translated] "Number this panel"
+      showNumber: "Numeri aquest panell"
     },
     panellayoutcolumn: {
       // [Auto-translated] "Effective width, %"
@@ -614,50 +626,50 @@ export var catalanTranslation = {
       questionTitleWidth: "Ancho del títol de la pregunta, px"
     },
     paneldynamic: {
-      // [Auto-translated] "Panell name"
+      // [Auto-translated] "Panel name"
       name: "Nom del panell",
-      // [Auto-translated] "Panell title"
-      title: "Títol de la viñeta",
-      // [Auto-translated] "Panell description"
+      // [Auto-translated] "Panel title"
+      title: "Títol del panell",
+      // [Auto-translated] "Panel description"
       description: "Descripció del panell",
       // [Auto-translated] "Entry display mode"
       displayMode: "Modo de visualización de entrada",
-      // [Auto-translated] "Make the panell visible if"
-      visibleIf: "Haga que el panell sea visible si",
-      // [Auto-translated] "Make the panell required if"
-      requiredIf: "Haga que el panell sea obligatori si",
-      // [Auto-translated] "Move the panell to page"
-      page: "Mover el panell a la pàgina",
-      // [Auto-translated] "Display the panell on a new line"
-      startWithNewLine: "Mostrar el panell en una nova línea",
-      // [Auto-translated] "Panell collapse state"
-      state: "Estado de contracción del panell",
-      // [Auto-translated] "Inline panell width"
-      width: "Ancho del panell en línea",
-      // [Auto-translated] "Minimum panell width"
-      minWidth: "Anchura mínima del panell",
-      // [Auto-translated] "Maximum panell width"
-      maxWidth: "Anchura máxima del panell",
+      // [Auto-translated] "Make the panel visible if"
+      visibleIf: "Fes visible el panell si",
+      // [Auto-translated] "Make the panel required if"
+      requiredIf: "Fes que el panell sigui obligatori si",
+      // [Auto-translated] "Move the panel to page"
+      page: "Mou el panell a la pàgina",
+      // [Auto-translated] "Display the panel on a new line"
+      startWithNewLine: "Mostra el panell en una nova línia",
+      // [Auto-translated] "Panel collapse state"
+      state: "Estat de col·lapse del panell",
+      // [Auto-translated] "Inline panel width"
+      width: "Amplada del panell en línia",
+      // [Auto-translated] "Minimum panel width"
+      minWidth: "Amplada mínima del panell",
+      // [Auto-translated] "Maximum panel width"
+      maxWidth: "Amplada màxima del panell",
       // [Auto-translated] "Confirm entry removal"
       confirmDelete: "Confirmar la eliminación de la entrada",
       // [Auto-translated] "Entry description pattern"
       templateDescription: "Patrón de descripció de la entrada",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Patrón de títol de entrada",
-      // [Auto-translated] "Empty panell text"
-      noEntriesText: "Text de panell vacío",
+      // [Auto-translated] "Empty panel text"
+      noEntriesText: "Text de vinyeta buit",
       // [Auto-translated] "Tab title pattern"
       templateTabTitle: "Patrón de títol de tabulación",
       // [Auto-translated] "Tab title placeholder"
       tabTitlePlaceholder: "Marcador de posición del títol de la pestaña",
       // [Auto-translated] "Make an individual entry visible if"
       templateVisibleIf: "Haga visible una entrada individual si",
-      // [Auto-translated] "Number the panell"
-      showNumber: "Numerar el panell",
-      // [Auto-translated] "Panell title alignment"
-      titleLocation: "Alineación del títol del panell",
-      // [Auto-translated] "Panell description alignment"
-      descriptionLocation: "Alineación de la descripció del panell",
+      // [Auto-translated] "Number the panel"
+      showNumber: "Numera el panell",
+      // [Auto-translated] "Panel title alignment"
+      titleLocation: "Alineació amb els títols dels vinyetes",
+      // [Auto-translated] "Panel description alignment"
+      descriptionLocation: "Descripció del panell alineat",
       // [Auto-translated] "Question title alignment"
       templateQuestionTitleLocation: "Alineación del títol de la pregunta",
       // [Auto-translated] "Question title width"
@@ -750,6 +762,14 @@ export var catalanTranslation = {
       expression: "Expressió"
     },
     calculatedvalue: {
+      // [Auto-translated] "Expression"
+      expression: "Expressió"
+    },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Expressió"
+    },
+    htmlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Expressió"
     },
@@ -866,6 +886,8 @@ export var catalanTranslation = {
     enabled: "Habilitat",
     // [Auto-translated] "Disabled"
     disabled: "Deshabilitat",
+    // [Auto-translated] "Inherit"
+    inherit: "Heretar",
     // "Apply"
     apply: "Solicitar",
     // "OK"
@@ -1022,7 +1044,7 @@ export var catalanTranslation = {
     expressionIsEmpty: "La expressió está vacía",
     // "Value"
     value: "Valor",
-    // "Text"
+    // [Auto-translated] "Text"
     text: "Text",
     // "Row ID"
     rowid: "ID de fila",
@@ -1032,7 +1054,7 @@ export var catalanTranslation = {
     columnEdit: "Editar columna: {0}",
     // "Edit item: {0}"
     itemEdit: "Editar artículo: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Camino",
@@ -1098,6 +1120,8 @@ export var catalanTranslation = {
     choicesOrder: "Seleccione el orden de las opcions",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Permitir opcions personalitzades",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Text de la comanda \"Crea una elecció personalitzada\"",
     // "Visible"
     visible: "¿Es visible?",
     // "Required"
@@ -1319,10 +1343,10 @@ export var catalanTranslation = {
     // "Regular expression"
     regex: "Expressió regular",
     surveyvalidator: {
-      // [Auto-translated] "Validation message"
-      text: "Mensaje de validació",
-      // [Auto-translated] "Validation expression"
-      expression: "Expressió de validació",
+      // [Auto-translated] "Notification message for invalid input"
+      text: "Missatge de notificació per entrada invàlida",
+      // [Auto-translated] "Valid when"
+      expression: "Vàlid quan",
       // [Auto-translated] "Notification type"
       notificationType: "Tipo de notificación",
       // [Auto-translated] "Maximum length (in characters)"
@@ -1478,6 +1502,66 @@ export var catalanTranslation = {
       // [Auto-translated] "Tooltip format"
       tooltipFormat: "Formato de información sobre herramientas"
     },
+    imagemap: {
+      // [Auto-translated] "Image URL"
+      imageLink: "URL de la imatge",
+      // [Auto-translated] "Areas"
+      areas: "Zones",
+      // [Auto-translated] "Allow multiple selections"
+      multiSelect: "Permetre múltiples seleccions",
+      // [Auto-translated] "Value property name"
+      valuePropertyName: "Nom de la propietat de valor",
+      // [Auto-translated] "Shape"
+      shape: "Forma",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Color d'ompliment en ralentí",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Color del traç de ralentí",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Amplada de carrera al ralentí",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Color de farciment en hover",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Color del traç flotant",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Amplada del traç en vol estacionari",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Color de farciment seleccionat",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Color de traç seleccionat",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Amplada de traç seleccionada",
+      // [Auto-translated] "Maximum selected areas"
+      maxSelectedAreas: "Àrees màximes seleccionades",
+      // [Auto-translated] "Minimum selected areas"
+      minSelectedAreas: "Àrees mínimes seleccionades"
+    },
+    imagemaparea: {
+      // [Auto-translated] "Value"
+      value: "Valor",
+      // [Auto-translated] "Shape"
+      shape: "Forma",
+      // [Auto-translated] "Coordinates"
+      coords: "Coordenades",
+      // [Auto-translated] "Idle fill color"
+      idleFillColor: "Color d'ompliment en ralentí",
+      // [Auto-translated] "Idle stroke color"
+      idleStrokeColor: "Color del traç de ralentí",
+      // [Auto-translated] "Idle stroke width"
+      idleStrokeWidth: "Amplada de carrera al ralentí",
+      // [Auto-translated] "Hover fill color"
+      hoverFillColor: "Color de farciment en hover",
+      // [Auto-translated] "Hover stroke color"
+      hoverStrokeColor: "Color del traç flotant",
+      // [Auto-translated] "Hover stroke width"
+      hoverStrokeWidth: "Amplada del traç en vol estacionari",
+      // [Auto-translated] "Selected fill color"
+      selectedFillColor: "Color de farciment seleccionat",
+      // [Auto-translated] "Selected stroke color"
+      selectedStrokeColor: "Color de traç seleccionat",
+      // [Auto-translated] "Selected stroke width"
+      selectedStrokeWidth: "Amplada de traç seleccionada"
+    },
     file: {
       // [Auto-translated] "Image height"
       imageHeight: "Altura de la imatge",
@@ -1508,6 +1592,8 @@ export var catalanTranslation = {
     minErrorText: "Mensaje de error \"El valor está por debajo del mínimo\"",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Mensaje de error \"El valor supera el máximo\"",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Missatge d'error \"El valor no coincideix amb la mida del pas\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Mensaje de error \"Comentario vacío\"",
     // "Error message for duplicate responses"
@@ -1532,10 +1618,10 @@ export var catalanTranslation = {
     choicesFromQuestion: "Copiar opcions de la següent pregunta",
     // "Which choice options to copy"
     choicesFromQuestionMode: "Qué opcions a copiar?",
-    // [Auto-translated] "Use values from the following matrix column or panell question as choice IDs"
-    choiceValuesFromQuestion: "Utilice los valors de la següent columna de matriz o pregunta de panell como ID de opción",
-    // [Auto-translated] "Use values from the following matrix column or panell question as choice texts"
-    choiceTextsFromQuestion: "Utilice los valors de la següent columna de matriz o pregunta de panell como textos de elección",
+    // [Auto-translated] "Use values from the following matrix column or panel question as choice IDs"
+    choiceValuesFromQuestion: "Utilitza valors de la següent columna de matriu o pregunta de panell com a identificadors d'elecció",
+    // [Auto-translated] "Use values from the following matrix column or panel question as choice texts"
+    choiceTextsFromQuestion: "Utilitza valors de la següent columna matricial o pregunta de vinyeta com a textos de tria",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Mostrar los títols de las pàgines en la barra de progreso",
     // [Auto-translated] "Display page numbers in the progress bar"
@@ -1609,10 +1695,10 @@ export var catalanTranslation = {
     // Creator tabs
     tabs: {
       panel: {
-        // [Auto-translated] "Panell Layout"
-        layout: "Diseño de panells"
+        // [Auto-translated] "Panel Layout"
+        layout: "Disposició de panells"
       },
-      // "General"
+      // [Auto-translated] "General"
       general: "General",
       // "Options"
       fileOptions: "Opcions",
@@ -1667,8 +1753,8 @@ export var catalanTranslation = {
       // [Auto-translated] "Input Mask Settings"
       mask: "Configuració de la máscara de entrada",
       layout: {
-        // [Auto-translated] "Panell Layout"
-        panel: "Disseny de panell",
+        // [Auto-translated] "Panel Layout"
+        panel: "Disposició de panells",
         // [Auto-translated] "Layout"
         question: "Diseño",
         // [Auto-translated] "Layout"
@@ -1684,7 +1770,7 @@ export var catalanTranslation = {
       showOnCompleted: "Mostrar en completado",
       // "Logo in the Survey Header"
       logo: "Logo en el títol de la enquesta",
-      // "Slider"
+      // [Auto-translated] "Slider"
       slider: "Slider",
       // "Expression"
       expression: "Expressió",
@@ -1818,8 +1904,8 @@ export var catalanTranslation = {
       questionPanel: "Fondo y radio de esquina",
       // [Auto-translated] "Accent color"
       primaryColor: "Color de acento",
-      // [Auto-translated] "Panell and question box opacity"
-      panelBackgroundTransparency: "Opacidad del panell y del cuadro de preguntes",
+      // [Auto-translated] "Panel and question box opacity"
+      panelBackgroundTransparency: "Opacitat dels panells i de la caixa de preguntes",
       // [Auto-translated] "Input element opacity"
       questionBackgroundTransparency: "Opacidad del elemento de entrada",
       // [Auto-translated] "Survey font size"
@@ -1904,6 +1990,8 @@ export var catalanTranslation = {
     camera: "Cámara",
     // [Auto-translated] "Local file or Camera"
     "file-camera": "Fitxer local o cámara",
+    // [Auto-translated] "Inherit"
+    inherit: "Heretar",
     // "Visible"
     show: "mostrar",
     // "Hidden"
@@ -1930,8 +2018,8 @@ export var catalanTranslation = {
     selected: "Seleccionado",
     // [Auto-translated] "Unselected"
     unselected: "Sin seleccionar",
-    // "decimal"
-    decimal: "decimal",
+    // [Auto-translated] "decimal"
+    decimal: "Decimal",
     // "currency"
     currency: "divisa",
     // "percent"
@@ -1994,8 +2082,8 @@ export var catalanTranslation = {
     range: "rango",
     // [Auto-translated] "tel"
     tel: "Tel",
-    // "text"
-    text: "text",
+    // [Auto-translated] "text"
+    text: "Text",
     // "time"
     time: "hora",
     // [Auto-translated] "url"
@@ -2357,10 +2445,10 @@ export var catalanTranslation = {
       on: "Numeración automàtica",
       // [Auto-translated] "Reset on each page"
       onPage: "Restablecer en cada pàgina",
-      // [Auto-translated] "Reset on each panell"
-      onpanel: "Restablecer en cada panell",
-      // [Auto-translated] "Reset on each panell"
-      onPanel: "Restablecer en cada panell",
+      // [Auto-translated] "Reset on each panel"
+      onpanel: "Reinici a cada panell",
+      // [Auto-translated] "Reset on each panel"
+      onPanel: "Reinici a cada panell",
       // [Auto-translated] "Recursive numbering"
       recursive: "Numeración recursiva",
       // [Auto-translated] "Continue across the survey"
@@ -2587,8 +2675,8 @@ export var catalanTranslation = {
   validators: {
     // "Answer count"
     answercountvalidator: "Cantidad de respuestas",
-    // "Email"
-    emailvalidator: "Email",
+    // [Auto-translated] "Email"
+    emailvalidator: "Correu electrònic",
     // "Expression"
     expressionvalidator: "expressió",
     // "Number"
@@ -2642,38 +2730,38 @@ export var catalanTranslation = {
     panel: {
       // "A panel ID that is not visible to respondents."
       name: "Un ID de panell que no es visible para los encuestados.",
-      // [Auto-translated] "Type a panell subtitle."
-      description: "Escriba un subtítulo de panell.",
+      // [Auto-translated] "Type a panel subtitle."
+      description: "Escriu un subtítol de vinyeta.",
       // "Use the magic wand icon to set a conditional rule that determines panell visibility."
       visibleIf: "Utilice el icono de la varita mágica para establecer una regla condicional que determine la visibilidad del panell.",
-      // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panell."
-      enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que desactive el modo de solo lectura para el panell.",
+      // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
+      enableIf: "Utilitza la icona de la vareta màgica per establir una regla condicional que desactiva el mode de només lectura del panell.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de enquestes a menos que al menos una pregunta anidada tenga una respuesta.",
-      // [Auto-translated] "Applies to all questions within this panell. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Heredar\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
-      questionTitleLocation: "Se aplica a todas las preguntes dentro de este panell. Cuando se establece en \"Oculto\", también oculta las descripcions de las preguntas. Si desea anular esta configuració, defina regles de alineación de títols para preguntes individuales. La opción \"Heredar\" aplica la configuració a nivel de pàgina (si está establecida) o a nivel de enquesta (\"Superior\" de forma per defecte). ",
+      // [Auto-translated] "Applies to all questions within this panel. When set to \"Hidden\", it also hides question descriptions. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default). "
+      questionTitleLocation: "S'aplica a totes les preguntes dins d'aquest panell. Quan està configurat a \"Ocult\", també amaga les descripcions de les preguntes. Si vols anul·lar aquesta configuració, defineix regles d'alineació de títols per a preguntes individuals. L'opció \"Heretar\" aplica la configuració a nivell de pàgina (si està configurada) o a nivell d'enquesta (\"Top\" per defecte). ",
       // [Auto-translated] "Sets consistent width for question titles when they are aligned to the left of their question boxes. Accepts CSS values (px, %, in, pt, etc.)."
       questionTitleWidth: "Establece un ancho coherente para los títols de las preguntas cuando están alineados a la izquierda de sus cuadros de preguntes. Acepta valors CSS (px, %, in, pt, etc.).",
       // "Sets the location of an error message in relation to all questions within the panell. The \"Heredar\" option applies the page-level (if set) or survey-level setting."
       questionErrorLocation: "Establece la ubicación de un mensaje de error en relación con todas las preguntes del panell. La opción \"Heredar\" aplica la configuració a nivel de pàgina (si se establece) o a nivel de enquesta.",
-      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Heredar\" option applies the page-level (if set) or survey-level setting."
-      questionOrder: "Mantiene el orden original de las preguntes o las aleatoriza. La opción \"Heredar\" aplica la configuració de nivel de pàgina (si está establecida) o de nivel de enquesta.",
+      // [Auto-translated] "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting."
+      questionOrder: "Manté l'ordre original de les preguntes o les randomitza. L'opció \"Heretar\" aplica la configuració a nivell de pàgina (si està establerta) o a nivell d'enquesta.",
       // "Repositions the panell to the end of a selected page."
       page: "Cambia la posición del panell al final de una pàgina seleccionada.",
-      // [Auto-translated] "Adds space or margin between the panel content and the left border of the panell box."
-      innerIndent: "Añade espacio o margen entre el contenido del panel y el borde izquierdo del cuadro del panell.",
+      // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
+      innerIndent: "Afegeix espai o marge entre el contingut del panell i la vora esquerra de la caixa del panell.",
       // "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panell is the first element in your form."
       startWithNewLine: "Anule la selección para mostrar el panel en una línea con la pregunta o el panel anterior. La configuració no se aplica si el panell es el primer elemento del formulario.",
       // "Choose from: \"Expanded\" - the panell is displayed in full and can be collapsed; \"Collapsed\" - the panell displays only the title and description and can be expanded; \"Locked\" - the panell is displayed in full and cannot be collapsed."
       state: "Elija entre: \"Expandido\": el panell se muestra en su totalidad y se puede contraer; \"Contraído\": el panell muestra solo el títol y la descripció y se puede expandir; \"Bloqueado\": el panell se muestra en su totalidad y no se puede contraer.",
-      // [Auto-translated] "Sets the width of the panell in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
-      width: "Establece la anchura del panell en proporción a otros elementos de topografía de la misma línea. Acepta valors CSS (px, %, in, pt, etc.).",
-      // [Auto-translated] "Assigns numbers to questions nested within this panell."
-      showQuestionNumbers: "Asigna números a las preguntes anidadas dentro de este panell.",
-      // [Auto-translated] "Specifies how many columns this panell spans within the grid layout."
-      effectiveColSpan: "Especifica el número de columnes que abarca este panell dentro del diseño de cuadrícula.",
-      // [Auto-translated] "This table lets you configure each grid column within the panell. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula dentro del panell. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valors y defina el ancho del títol para todas las preguntes de cada columna."
+      // [Auto-translated] "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
+      width: "Estableix l'amplada del panell en proporció a altres elements de l'enquesta en la mateixa línia. Accepta valors CSS (px, %, in, pt, etc.).",
+      // [Auto-translated] "Assigns numbers to questions nested within this panel."
+      showQuestionNumbers: "Assigna números a preguntes entrades dins d'aquest panell.",
+      // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
+      effectiveColSpan: "Especifica quantes columnes abasta aquest panell dins la disposició de la quadrícula.",
+      // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
+      gridLayoutColumns: "Aquesta taula et permet configurar cada columna de la graella dins del panell. Estableix automàticament el percentatge d'amplada per a cada columna basant-se en el nombre màxim d'elements en una fila. Per personalitzar la disposició de la graella, ajusta manualment aquests valors i defineix l'amplada del títol per a totes les preguntes de cada columna."
     },
     paneldynamic: {
       // "A panell ID that is not visible to respondents."
@@ -2682,8 +2770,8 @@ export var catalanTranslation = {
       description: "Escriba un subtítulo de panell.",
       // "Use the magic wand icon to set a conditional rule that determines panell visibility."
       visibleIf: "Utilice el icono de la varita mágica para establecer una regla condicional que determine la visibilidad del panell.",
-      // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panell."
-      enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que desactive el modo de solo lectura para el panell.",
+      // [Auto-translated] "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel."
+      enableIf: "Utilitza la icona de la vareta màgica per establir una regla condicional que desactiva el mode de només lectura del panell.",
       // "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer."
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida el envío de enquestes a menos que al menos una pregunta anidada tenga una respuesta.",
       // "Applies to all questions within this dynamic panell. If you want to override this setting, define title alignment rules for individual questions. The \"Heredar\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)."
@@ -2696,8 +2784,8 @@ export var catalanTranslation = {
       errorLocation: "Establece la ubicación de un mensaje de error en relación con todas las preguntes del panell. La opción \"Heredar\" aplica la configuració a nivel de pàgina (si se establece) o a nivel de enquesta.",
       // "Repositions the panell to the end of a selected page."
       page: "Cambia la posición del panell al final de una pàgina seleccionada.",
-      // [Auto-translated] "Adds space or margin between the panel content and the left border of the panell box."
-      indent: "Añade espacio o margen entre el contenido del panel y el borde izquierdo del cuadro del panell.",
+      // [Auto-translated] "Adds space or margin between the panel content and the left border of the panel box."
+      indent: "Afegeix espai o marge entre el contingut del panell i la vora esquerra de la caixa del panell.",
       // "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panell is the first element in your form."
       startWithNewLine: "Anule la selección para mostrar el panel en una línea con la pregunta o el panel anterior. La configuració no se aplica si el panell es el primer elemento del formulario.",
       // "Choose from: \"Expanded\" - the panell is displayed in full and can be collapsed; \"Collapsed\" - the panell displays only the title and description and can be expanded; \"Locked\" - the panell is displayed in full and cannot be collapsed."
@@ -2724,8 +2812,8 @@ export var catalanTranslation = {
       keyName: "Haga referencia a un nom de pregunta para requerir que un usuario proporcione una respuesta única para esta pregunta en cada panell.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada.",
-      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panell."
-      showQuestionNumbers: "Asigna números a las preguntes anidadas dentro del panell dinámico."
+      // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
+      showQuestionNumbers: "Assigna números a les preguntes anidades dins del panell dinàmic."
     },
     matrixdynamic: {
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
@@ -2756,8 +2844,8 @@ export var catalanTranslation = {
       enableIf: "Utilice el icono de la varita mágica para establecer una regla condicional que deshabilite el modo de solo lectura para la pregunta.",
       // "Use the magic wand icon to set a conditional rule that prevents survey advancing or submission unless the question received an answer."
       requiredIf: "Utilice el icono de la varita mágica para establecer una regla condicional que impida que la enquesta avance o se envíe a menos que la pregunta reciba una respuesta.",
-      // [Auto-translated] "Unselect to display the question in one line with the previous question or panell. The setting doesn't apply if the question is the first element in your form."
-      startWithNewLine: "Anule la selección para mostrar la pregunta en una línea con la pregunta o el panell anterior. La configuració no se aplica si la pregunta es el primer elemento del formulario.",
+      // [Auto-translated] "Unselect to display the question in one line with the previous question or panel. The setting doesn't apply if the question is the first element in your form."
+      startWithNewLine: "Desselecciona per mostrar la pregunta en una línia amb la pregunta o el panell anterior. L'opció no s'aplica si la pregunta és el primer element de la teva forma.",
       // "Repositions the question to the end of a selected page."
       page: "Cambia la posición de la pregunta al final de una pàgina seleccionada.",
       // "Choose from: \"Expanded\" - the question box is displayed in full and can be collapsed; \"Collapsed\" - the question box displays only the title and description and can be expanded; \"Locked\" - the question box is displayed in full and cannot be collapsed."
@@ -2976,8 +3064,8 @@ export var catalanTranslation = {
     imageFit: "Elija entre: \"Ninguno\": la imatge mantiene su tamaño original; \"Contener\": se cambia el tamaño de la imatge para que se ajuste manteniendo su relación de aspecto; \"Portada\": la imatge llena toda la caja manteniendo su relación de aspecto; \"Relleno\": la imatge se estira para llenar el cuadro sin mantener su relación de aspecto.",
     // "The \"Heredar\" option applies a survey-level setting (\"Disabled\" by default)."
     autoGrow: "Aumenta gradualmente la altura del campo de entrada a medida que se introducen los datos. Anula el ajuste \"Altura del campo de entrada (en líneas)\".",
-    // [Auto-translated] "The \"Heredar\" option applies a survey-level setting (\"Enabled\" by default)."
-    allowResize: "La opción \"Heredar\" aplica una configuració a nivel de enquesta (\"Habilitat\" de forma per defecte).",
+    // [Auto-translated] "The \"Inherit\" option applies a survey-level setting (\"Enabled\" by default)."
+    allowResize: "L'opció \"Heretar\" aplica una configuració a nivell d'enquesta (\"Activat\" per defecte).",
     // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the \"Thank You\" page. When set to 0, counts the time spent on the survey."
     timeLimit: "Un intervalo de tiempo en segundos después del cual la enquesta avanza automáticamente a la pàgina \"Gracias\". Cuando se establece en 0, cuenta el tiempo dedicado a la enquesta.",
     // [Auto-translated] "A time interval in seconds after which the survey auto-advances to the next page. Hides the \"Previous\" navigation button. When set to 0, counts the time spent on the current page."
@@ -3040,10 +3128,10 @@ export var catalanTranslation = {
     clearIfInvisible: "Elija si desea o no borrar los valors de las preguntes ocultos por la lògica condicional y cuándo hacerlo. La opción \"Heredar\" aplica la configuració de nivel de enquesta (\"Al finalizar la encuesta\" de forma per defecte).",
     // "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question."
     choicesFromQuestionMode: "Elija entre: \"Todas\": copia todas las opcions de elección de la pregunta seleccionada; \"Seleccionado\": copia dinámicamente solo las opcions de elección seleccionadas; \"No seleccionado\": copia dinámicamente solo las opciones de elección no seleccionadas. Las opcions \"Ninguno\" y \"Otro\" se copian de forma per defecte si están habilitadas en la pregunta de origen.",
-    // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panell question should provide the IDs."
-    choiceValuesFromQuestion: "En los tipos de preguntes de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuració especifica qué columna de matriz o pregunta de panell debe proporcionar los identificadores.",
-    // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panell question should provide the display texts."
-    choiceTextsFromQuestion: "En los tipos de preguntes de selección única y múltiple, cada opción de opción tiene un ID y un valor de visualización. Esta configuració especifica qué columna de matriz o pregunta de panell debe proporcionar los textos de visualización.",
+    // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the IDs."
+    choiceValuesFromQuestion: "En els tipus de pregunta de selecció única i múltiple, cada opció d'elecció té un ID i un valor de visualització. Aquesta configuració especifica quina columna de matriu o pregunta de panell ha de proporcionar els IDs.",
+    // [Auto-translated] "In single- and multiple-selection question types, each choice option has an ID and display value. This setting specifies which matrix column or panel question should provide the display texts."
+    choiceTextsFromQuestion: "En els tipus de pregunta de selecció única i múltiple, cada opció d'elecció té un ID i un valor de visualització. Aquesta configuració especifica quina columna de matriu o pregunta de panell ha de proporcionar els textos de visualització.",
     // [Auto-translated] "Select to let respondents add their own choices if the desired option isn't available in the dropdown. Custom choices will only be stored temporarily for the duration of the current browser session."
     allowCustomChoices: "Seleccione esta opción para permitir que los encuestados agreguen sus propias opciones si la opción deseada no está disponible en el menú desplegable. Las opcions personalitzades solo se almacenarán temporalmente durante la sesión actual del navegador.",
     // [Auto-translated] "When selected, users can include additional input in a separate comment box."
@@ -3527,6 +3615,18 @@ export var catalanTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contraste"
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Bàsic",
+      // [Auto-translated] "Advanced"
+      advanced: "Avançat",
+      // [Auto-translated] "Expert"
+      expert: "Expert"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Preset aplicat"
   }
 };
 

@@ -1,4 +1,4 @@
-import {
+﻿import {
   Base,
   PanelModel,
   SurveyModel,
@@ -26,6 +26,7 @@ import {
   Question,
   SurveyElement,
   hasLicense,
+  surveyLocalization,
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -60,14 +61,15 @@ import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
 import { TabbedMenuMode } from "../src/tabbed-menu";
+import { vi, type MockedFunction } from "vitest";
 
 export * from "../src/localization/french";
 
-jest.mock("survey-core", () => {
-  const originalModule = jest.requireActual("survey-core");
+vi.mock("survey-core", async () => {
+  const originalModule = await vi.importActual<typeof import("survey-core")>("survey-core");
   return {
     ...originalModule,
-    hasLicense: jest.fn((id) => false)
+    hasLicense: vi.fn((id) => false)
   };
 });
 
@@ -168,7 +170,7 @@ test("creator.onSurveyInstanceSetupHandlers event", () => {
   creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
     if (options.area === "property-grid") {
       json = options.survey.toJSON();
-      counter ++;
+      counter++;
     }
   });
   creator.JSON = {
@@ -856,7 +858,7 @@ test("License text for default locale and another default locale", (): any => {
 });
 
 test("License text from plugin (unlicensed creator)", (): any => {
-  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
+  const hasLicenseMock = hasLicense as MockedFunction<typeof hasLicense>;
   const creator = new CreatorTester();
 
   creator.addPlugin("one", <ICreatorPlugin>{
@@ -889,7 +891,7 @@ test("License text from plugin (unlicensed creator)", (): any => {
 });
 
 test("License text from plugin (licensed creator)", (): any => {
-  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
+  const hasLicenseMock = hasLicense as MockedFunction<typeof hasLicense>;
   hasLicenseMock.mockReturnValue(true);
   const creator = new CreatorTester();
 
@@ -958,7 +960,7 @@ test("onGetIsStringEditable", (): any => {
   expect(lastEditableValue).toBeFalsy();
   expect(callCount).toBe(1);
 
-  expect(creator.isStringInplacelyEditable({ } as any, "")).toBeTruthy();
+  expect(creator.isStringInplacelyEditable({} as any, "")).toBeTruthy();
   expect(lastEditableValue).toBeTruthy();
   expect(callCount).toBe(2);
 
@@ -1009,7 +1011,7 @@ test("Restrict users from adding more than a specified number of questions to a 
   expect(action.enabled).toBeFalsy();
   expect(qDuplicateAction.isVisible).toBeFalsy();
   expect(pAdorner.currentAddQuestionType).toBe("");
-  creator.JSON = { };
+  creator.JSON = {};
   expect(action.enabled).toBeTruthy();
 });
 test("Should not modify expression properties  on copying questions inside the dynamic panel, Bug#7223", (): any => {
@@ -1123,6 +1125,25 @@ test("Test maximumChoicesCount <> maxChoices compatibility", () => {
   expect(creator.maxChoices).toEqual(5);
   creator.maxChoices = 3;
   expect(creator.maximumChoicesCount).toEqual(3);
+});
+
+test("Test useEnglishNames property get/set", () => {
+  surveyLocalization.useEnglishNames = false;
+  const creator = new CreatorTester();
+  expect(creator.useEnglishLanguageNames).toBeFalsy();
+  creator.useEnglishLanguageNames = true;
+  expect(surveyLocalization.useEnglishNames).toBeTruthy();
+  expect(creator.useEnglishLanguageNames).toBeTruthy();
+  creator.useEnglishLanguageNames = false;
+  expect(surveyLocalization.useEnglishNames).toBeFalsy();
+});
+
+test("Test useEnglishNames via creator options", () => {
+  surveyLocalization.useEnglishNames = false;
+  const creator = new CreatorTester({ useEnglishLanguageNames: true });
+  expect(creator.useEnglishLanguageNames).toBeTruthy();
+  expect(surveyLocalization.useEnglishNames).toBeTruthy();
+  surveyLocalization.useEnglishNames = false;
 });
 
 test("Test minimumChoicesCount <> minChoices compatibility", () => {
@@ -1245,3 +1266,4 @@ test("Do not count non  questions elements as unique, Bug#7398", () => {
   expect(questionName.hasErrors()).toBeTruthy();
   expect(question.name).toEqual("item2");
 });
+

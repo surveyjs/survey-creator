@@ -49,11 +49,6 @@
       "types": "./types/index.d.ts",
       "import": "./survey-creator-vue.es.js",
       "require": "./survey-creator-vue.umd.js"
-    },
-    "./ui-preset-editor": {
-      "types": "./types-presets/index.d.ts",
-      "import": "./ui-preset-editor/index.es.js",
-      "require": "./ui-preset-editor/index.umd.js"
     }
   }
 }

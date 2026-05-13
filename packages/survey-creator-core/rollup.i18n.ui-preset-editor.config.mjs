@@ -1,9 +1,9 @@
 import { resolve, extname, basename, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readdirSync } from "fs";
-import { createEsmConfig, createUmdConfig } from "./rollup.helpers.mjs";
+import { createEsmConfig, createUmdConfig } from "../../rollup.helpers.mjs";
 import process from "process";
-import pkg from "./package.json" assert { type: "json" };
+import pkg from "./package.json" with { type: "json" };
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const buildPath = resolve(__dirname, "build");
@@ -34,12 +34,14 @@ export default () => {
       dir: resolve(buildPath, "fesm"),
       external: ["survey-creator-core"],
       tsconfig: resolve(__dirname, "tsconfig.i18n.json"),
+      sourceMap: false,
       version: pkg.version,
       useEsbuild: true
     }),
     ...Object.entries(inputs).map(([name, path]) => createUmdConfig({
       input: { [name]: path },
       tsconfig: resolve(__dirname, "tsconfig.i18n.json"),
+      sourceMap: false,
       external: ["survey-creator-core"],
       dir: resolve(buildPath),
       emitMinified: process.env.emitMinified === "true",

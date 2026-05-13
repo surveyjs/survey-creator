@@ -74,14 +74,12 @@ import {
   CollectionItemDeletingEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
-import designTabSurveyThemeJSON from "./designTabSurveyThemeJSON";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 import { doMachineStringsTranslation } from "./utils/creator-locstrings";
 
 import { iconsV1, iconsV2 } from "./svgbundle";
-import { listComponentCss } from "./components/list-theme";
 
 import "./components/creator.scss";
 import "./components/string-editor.scss";
@@ -89,6 +87,7 @@ import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "survey-core";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
 import DefaultLight from "./themes/default-light";
+import DefaultLibraryLight from "survey-core/themes/default-light";
 import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
@@ -102,27 +101,8 @@ export interface IKeyboardShortcut {
   macOsHotkey?: { shiftKey?: boolean, keyCode: number };
   execute: (context: any) => void;
 }
-//Obsolete
-export class CreatorAction extends Action {
-}
 
-export class FooterToolbarActionContainer extends ActionContainer {
-  protected getDefaultCssClasses() {
-    const defaultCss = super.getDefaultCssClasses();
-    return {
-      root: defaultCss.root + " svc-toolbar sv-action-bar sv-action-bar--default-size-mode",
-      item: defaultCss.item + " svc-toolbar__item",
-      itemWithTitle: defaultCss.itemWithTitle + " svc-toolbar__item--with-text",
-      itemAsIcon: defaultCss.itemAsIcon + " svc-toolbar__item--icon",
-      itemActive: defaultCss.itemActive + " svc-toolbar__item--active",
-      itemPressed: defaultCss.itemPressed + " svc-toolbar__item--pressed",
-      itemIcon: defaultCss.itemIcon + " svc-toolbar-item__icon",
-      itemTitle: defaultCss.itemTitle + " svc-toolbar-item__title",
-      itemTitleWithIcon: defaultCss.itemTitleWithIcon + " svc-toolbar-item__title--with-icon",
-    };
-  }
-}
-export class ToolbarActionContainer extends FooterToolbarActionContainer {
+export class ToolbarActionContainer extends ActionContainer {
   constructor(private creator: SurveyCreatorModel) {
     super();
   }
@@ -201,6 +181,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/ (linkStyle))
    */
   @property({ defaultValue: true }) showCreatorThemeSettings: boolean;
+  @property() activePresetName: string;
   /**
    * Specifies whether the "Zoom In", "Zoom Out", and "Zoom to 100%" buttons are available.
    *
@@ -290,6 +271,17 @@ export class SurveyCreatorModel extends Base
     this.showOneCategoryInPropertyGrid = newValue === "buttons";
   }
   public trimValues: boolean = false;
+  /**
+   * Specifies whether to display language names in English rather than in their native form.
+   *
+   * Default value: `false` (language names are displayed in their native form)
+   */
+  get useEnglishLanguageNames(): boolean {
+    return surveyLocalization.useEnglishNames;
+  }
+  set useEnglishLanguageNames(val: boolean) {
+    surveyLocalization.useEnglishNames = val;
+  }
 
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
@@ -368,10 +360,43 @@ export class SurveyCreatorModel extends Base
   @property() showOptions: boolean;
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
+  /**
+   * Specifies whether to validate property values against their definitions.
+   *
+   * Default value: `true`
+   *
+   * > Disabling property validation may be useful if you add custom properties that accept complex or hierarchical objects. However, this also allows invalid values to be assigned in the JSON Editor tab. Use with caution.
+   */
   public validateJsonPropertyValues: boolean = true;
+  /**
+   * Specifies whether to validate that functions referenced in expressions exist.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `true`
+   */
   public expressionsValidateFunctions: boolean = true;
+  /**
+   * Specifies whether to validate that variables and question, panel, or page names referenced in expressions exist.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `false`
+   */
   public expressionsValidateVariables: boolean = false;
+  /**
+   * Specifies whether to validate the expression syntax (for example, unmatched parentheses, missing operands, or invalid operators).
+   *
+   * Default value: `true`
+   */
   public expressionsValidateSyntax: boolean = true;
+  /**
+   * Specifies whether to validate expressions that are syntactically valid but have no meaningful effect because they always evaluate to the same value.
+   *
+   * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
+   *
+   * Default value: `true`
+   */
   public expressionsValidateSemantics: boolean = true;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   /**
@@ -588,8 +613,11 @@ export class SurveyCreatorModel extends Base
     if (!!plugin && !pluginCreator) {
       pluginCreator = () => plugin;
     }
-    this.pluginTabs.push({ key: name, iconName, isInternal: isInternal || false });
-    this.pluginMenuHash[name] = this.tabbedMenu.addTab(name, pluginCreator, title, iconName, componentName, index);
+    isInternal = isInternal || false;
+    this.pluginTabs.push({ key: name, iconName, isInternal });
+    const tab = this.tabbedMenu.addTab(name, pluginCreator, title, iconName, componentName, index);
+    tab.visible = !isInternal;
+    this.pluginMenuHash[name] = tab;
     if (!!plugin) {
       this.addPlugin(name, plugin);
     }
@@ -696,7 +724,13 @@ export class SurveyCreatorModel extends Base
    */
   public onElementAllowOperations: EventBase<SurveyCreatorModel, ElementAllowOperationsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementAllowOperationsEvent>();
   /**
-   * An event that is raised before adding an element to the survey. Use it to control which elements can be added by allowing or preventing the action.
+   * An event that is raised to determine whether an element can be added to the survey.
+   *
+   * Use this event to conditionally prevent adding elements of specific types or converting existing elements to those types (for example, when a predefined limit has been reached). The event is re-evaluated whenever the survey changes.
+   *
+   * For information on event handler parameters, refer to descriptions within the interface.
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    */
   public onAllowAddElement: EventBase<SurveyCreatorModel, AllowAddElementEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowAddElementEvent>();
 
@@ -1264,6 +1298,8 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: -1 (unlimited)
    *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
+   *
    * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#forbiddenNestedElements) property.
    */
   public maxPanelNestingLevel: number = -1;
@@ -1288,6 +1324,8 @@ export class SurveyCreatorModel extends Base
    *   paneldynamic: [ "panel", "paneldynamic" ]
    * };
    * ```
+   *
+   * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    * @see maxPanelNestingLevel
    */
   public forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
@@ -1634,6 +1672,13 @@ export class SurveyCreatorModel extends Base
   public set activeTab(val: string) {
     this.switchTab(val);
   }
+  public get activeTabMenuItem(): TabbedMenuItem {
+    return this.pluginMenuHash[this.activeTab];
+  }
+  public get activeTabId() {
+    const menuItem = this.activeTabMenuItem;
+    return !!menuItem ? menuItem.id : "";
+  }
   /**
    * Switches the [active tab](#activeTab). Returns `false` if the tab cannot be switched.
    * @param tabName A tab that you want to make active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`.
@@ -1720,9 +1765,11 @@ export class SurveyCreatorModel extends Base
     }
     SvgRegistry.registerIcons(SvgThemeSets["v2"]);
     this.applyCreatorTheme(DefaultLight);
+    this.setSurfaceCssVariables(DefaultLibraryLight.cssVariables);
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
+    this.updateToolbar(this.toolbarValue);
     this.toolbarValue.locOwner = this;
     this.tabbedMenu = new TabbedMenuContainer(this);
     this.tabbedMenu.locOwner = this;
@@ -1944,8 +1991,7 @@ export class SurveyCreatorModel extends Base
       page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
-      const dd = this.dragDropSurveyElements;
-      if (!dd || !dd.isDraggingExistingElement) {
+      if (!this.survey.isQuestionDragging) {
         page.questions.forEach(question => {
           this.doOnQuestionAdded(question, page);
         });
@@ -2035,9 +2081,14 @@ export class SurveyCreatorModel extends Base
     const tabs = this.initialTabs();
     this.setTabs(tabs);
   }
+  private updateToolbar(toolbar: ActionContainer) {
+    toolbar.containerCss = "svc-toolbar";
+    toolbar.setActionsAppearance({ style: "neutral", size: "small", mode: "tertiary" });
+  }
   private updateFooterToolbar(): void {
     if (!this.footerToolbar) {
-      this.footerToolbar = new FooterToolbarActionContainer();
+      this.footerToolbar = new ActionContainer();
+      this.updateToolbar(this.footerToolbar);
     }
     this.removePluginFooterActions("undoredo");
     this.tabs.forEach(tab => this.addPluginFooterActions(tab.id));
@@ -2776,10 +2827,14 @@ export class SurveyCreatorModel extends Base
     area = area || this.getSurveyInstanceCreatedArea(reason);
     const element = area === "property-grid" && model ? model.obj : undefined;
     const survey = this.createSurveyCore(json, area, element);
-    if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
+    if (["designer", "preview", "theme", "property-grid", "theme-tab:property-grid",
+      "designer-tab:creator-settings:theme", "designer-tab:creator-settings:preset",
+      "translation_settings"].indexOf(reason) < 0) {
       survey.fitToContainer = false;
-      survey.applyTheme(designTabSurveyThemeJSON);
+      survey.applyTheme({ cssVariables: this.defaultSurfaceCssVariables });
       survey.gridLayoutEnabled = false;
+    } else {
+      survey["cssVariables"] = {};
     }
 
     if (reason === "theme") {
@@ -3414,6 +3469,7 @@ export class SurveyCreatorModel extends Base
       doFocus();
     }
   }
+
   private focusElementCore(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null, onCallback: () => void = null) {
     const elementPage = this.getPageByElement(selEl);
     clearInterval(this.currentFocusInterval);
@@ -3435,14 +3491,7 @@ export class SurveyCreatorModel extends Base
             if (!!el) {
               const isNeedScroll = SurveyHelper.isNeedScrollIntoView(el.parentElement ?? el, true);
               if (!!isNeedScroll) {
-                const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
-                if (!!elementPage) {
-                  this.survey.scrollElementToTop(selEl, undefined, elementPage, selEl.id, true, scrollIntoViewOptions, this.rootElement, () => {
-                    this.ensurePagesVisibility();
-                  });
-                } else {
-                  SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
-                }
+                this.scrollToElement(elementPage, selEl, el);
               }
               if (!propertyName && el.parentElement && selEl.getType() !== "matrixdropdowncolumn") {
                 let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
@@ -3460,6 +3509,26 @@ export class SurveyCreatorModel extends Base
       }, 100);
     }, 50);
   }
+  public scrollToElement(elementPage: PageModel, selEl: any, el: HTMLElement) {
+    const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
+    if (!!elementPage) {
+      this.survey.scrollElementToTop({
+        element: selEl,
+        question: undefined,
+        page: elementPage,
+        id: selEl.id,
+        scrollIfVisible: true,
+        scrollIntoViewOptions: scrollIntoViewOptions,
+        passedRootElement: this.rootElement,
+        onScolledCallback: () => {
+          this.ensurePagesVisibility();
+        }
+      });
+    } else {
+      SurveyHelper.scrollIntoViewIfNeeded(el.parentElement ?? el, () => { return scrollIntoViewOptions; }, true);
+    }
+  }
+
   private getChoiceItemQuestionToExpand(element: any): Question {
     const panel = SurveyHelper.getChoiceIItemPanel(element);
     const item: ChoiceItem = panel["choiceItem"];
@@ -3642,7 +3711,7 @@ export class SurveyCreatorModel extends Base
       }
       if (!!propertyName) {
         this.sidebar.executeOnExpand(() => {
-          this.designerPropertyGrid.selectProperty(propertyName, focus || !this.selectFromStringEditor);
+          this.designerPropertyGrid.selectProperty(propertyName, focus && !this.selectFromStringEditor);
         });
       }
       this.expandCategoryIfNeeded();
@@ -4476,12 +4545,14 @@ export class SurveyCreatorModel extends Base
 
     const newAction = createDropdownActionModel({
       iconName: "icon-more",
+      appearance: { style: "brand", mode: "tertiary", size: "small" },
+      showTitle: false,
+      iconSize: "auto",
       title: this.getLocString("ed.addNewQuestion"),
     }, {
       items: [],
       allowSelection: false,
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
       verticalPosition: "bottom",
       horizontalPosition: "center",
       displayMode: this.isTouch ? "overlay" : "popup"
@@ -4556,7 +4627,7 @@ export class SurveyCreatorModel extends Base
           onSelectQuestionType(item.typeName, i.json);
         }
       }));
-      action.setSubItems({ items: innerItems, cssClasses: listComponentCss });
+      action.setSubItems({ items: innerItems });
     }
     return action;
   }
@@ -4806,6 +4877,15 @@ export class SurveyCreatorModel extends Base
 
   }
 
+  public applySurfaceTheme(theme: ITheme): void {
+    this.setSurfaceCssVariables(theme.cssVariables);
+    const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
+    if (designerPlugin) {
+      designerPlugin.deactivate();
+      designerPlugin.activate();
+    }
+  }
+
   private patchLegacyCSSVariables(newCssVariable: any) {
     Object.keys(legacyCssVariables).forEach((variable) => {
       if (!!newCssVariable[variable]) {
@@ -4833,6 +4913,57 @@ export class SurveyCreatorModel extends Base
 
     if (isLight !== undefined) {
       this.preferredColorPalette = isLight ? "light" : "dark";
+    }
+  }
+
+  public defaultSurfaceCssVariables: { [index: string]: string };
+  public setSurfaceCssVariables(newDefaultSurveyCssVariables: { [index: string]: string }) {
+    this.defaultSurfaceCssVariables = { ...newDefaultSurveyCssVariables };
+    const cssVariablesToDelete = [
+      "--sjs2-base-unit-size",
+      "--sjs2-color-utility-surface-designer",
+      "--sjs2-color-project-brand-600",
+      "--sjs2-color-bg-brand-secondary",
+      "--sjs2-color-bg-brand-primary-dim",
+      "--sjs2-color-fg-brand-on-primary",
+      "--sjs2-color-fg-brand-primary-disabled",
+      "--sjs2-color-bg-accent-primary",
+      "--sjs2-color-bg-accent-secondary",
+      "--sjs2-color-bg-accent-secondary-dim",
+      "--sjs2-color-fg-accent-on-primary",
+      "--sjs2-color-fg-accent-primary-disabled",
+      "--sjs2-color-bg-basic-primary",
+      "--sjs2-color-bg-basic-primary-dim",
+      "--sjs2-color-fg-basic-primary",
+      "--sjs2-color-fg-basic-secondary",
+      "--sjs2-color-bg-neutral-tertiary-dim",
+      "--sjs2-color-bg-neutral-secondary",
+      "--sjs2-color-fg-neutral-primary",
+      "--sjs2-color-bg-basic-secondary",
+      "--sjs2-color-bg-basic-secondary-dim",
+      "--sjs2-color-component-input-default-line",
+      "--sjs2-color-component-formbox-default-bg",
+      "--sjs2-color-component-check-false-default-bg",
+      "--sjs2-color-border-basic-secondary",
+      "--sjs2-color-border-basic-secondary-overlay",
+      "--sjs2-color-bg-alert-primary",
+      "--sjs2-color-bg-alert-secondary",
+      "--sjs2-color-fg-alert-on-primary",
+      "--sjs2-color-bg-positive-primary",
+      "--sjs2-color-bg-positive-secondary",
+      "--sjs2-color-fg-positive-on-primary",
+      "--sjs2-color-bg-note-primary",
+      "--sjs2-color-bg-note-secondary",
+      "--sjs2-color-fg-note-on-primary",
+      "--sjs2-color-bg-warning-primary",
+      "--sjs2-color-bg-warning-secondary",
+      "--sjs2-color-fg-warning-on-primary"
+    ];
+    cssVariablesToDelete.forEach(variable => delete this.defaultSurfaceCssVariables[variable]);
+
+    const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
+    if (designerPlugin && designerPlugin.model) {
+      designerPlugin.model.updateUnitDictionaryFromTheme();
     }
   }
 

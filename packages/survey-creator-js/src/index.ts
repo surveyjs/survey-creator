@@ -4,8 +4,9 @@ import { SurveyCreatorComponent, SurveyCreator as SurveyCreatorReact } from "../
 
 export function renderSurveyCreator(creator: SurveyCreator, element: HTMLElement | string, props: any = {}) {
   let node: HTMLElement = element as HTMLElement;
+  const rootElement = creator.rootElement || document;
   if (typeof element === "string") {
-    node = document.getElementById(element);
+    node = rootElement.querySelector("#" + element);
   }
   const survey = preact.createElement(SurveyCreatorComponent, { creator, ...props });
   preact.render(survey, node);

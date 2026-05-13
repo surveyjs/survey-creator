@@ -53,6 +53,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   }
 
   protected updateRowAction(question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel, rowData: any, keyColumn: string, action: IAction) {
+    action.appearance = { mode: "tertiary" as any };
     if (action.id == "icon-action") {
       action.iconName = rowData.iconName || this.defaultIcon;
     }
@@ -76,6 +77,12 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     };
   }
 
+  protected getEditPopupTitle(question: QuestionMatrixDynamicModel): string {
+    return getLocString("presets." + this.path + ".editItemTitle");
+  }
+  protected getCreatePopupTitle(model: SurveyModel, question: QuestionMatrixDynamicModel): string {
+    return getLocString("presets." + this.path + ".createItemTitle");
+  }
   protected createEditAction(model: SurveyModel, creator: SurveyCreatorModel, question: QuestionMatrixDynamicModel, row: MatrixDynamicRowModel): IAction {
     return {
       id: "edit-item",
@@ -83,7 +90,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       tooltip: getLocString("presets.items.edit"),
       location: "end",
       visibleIndex: 13,
-      action: () => { this.editItem(model, creator, question, row); }
+      action: () => { this.editItem(model, creator, question, row, { description: this.getEditPopupTitle(question), isNew: false }); }
     };
   }
 
@@ -113,6 +120,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
         a.action = () => question.removeRowUI(row);
         a.iconName = isItemsMatrix ? "icon-add_24x24" : "icon-remove_24x24";
         a.tooltip = isItemsMatrix ? getLocString("presets.items.add") : getLocString("presets.items.delete");
+        a.appearance = { mode: "tertiary-muted" as any };
       }
     });
   }
@@ -125,7 +133,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       id: "reset-to-default",
       title: getLocString("presets.editor.resetToDefault"),
       css: "sps-action--grow",
-      innerCss: "sps-btn sps-btn--secondary-alert",
+      appearance: { style: "alert" as any },
       visibleIndex: 15,
       action: (a) => {
         const defaultItem = this.getDefaultItem(question, survey.getValue(itemKey));
@@ -229,7 +237,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     if (this.isItemsMatrix(options.question.name)) {
       this.setDefaultValueForRow(model, options.question, options.row);
       this.editItem(model, creator, options.question, options.row, {
-        description: getLocString("presets.items.newItem") + " " + (options.question.data?.value?.title || this.getPageShortTitle(model)),
+        description: this.getCreatePopupTitle(model, options.question),
         isNew: true
       });
     }
@@ -271,6 +279,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     survey.fitToContainer = false;
     survey.showNavigationButtons = false;
     survey.data = data;
+    survey["cssVariables"] = {};
     survey.css = presetsCss;
     survey.enterKeyAction = "loseFocus";
     survey.questionErrorLocation = "bottom";
@@ -297,12 +306,6 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
       }
 
       if (popupModel.footerToolbar) {
-        const defaultActionBarCss = popupModel.footerToolbar.cssClasses;
-        defaultActionBarCss.item = "sps-btn";
-        popupModel.footerToolbar.cssClasses = defaultActionBarCss;
-        popupModel.footerToolbar.getActionById("apply").innerCss = "sps-btn--primary-brand";
-        popupModel.footerToolbar.getActionById("cancel").innerCss = "sps-btn--secondary-brand";
-
         if (options.actions) {
           popupModel.footerToolbar.actions.unshift(...options.actions);
         }

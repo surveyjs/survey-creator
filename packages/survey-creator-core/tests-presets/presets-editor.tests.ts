@@ -1,18 +1,19 @@
-import { QuestionMatrixDynamicModel, glc, hasLicense, settings } from "survey-core";
+﻿import { QuestionMatrixDynamicModel, glc, hasLicense, settings } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { SurveyCreatorModel } from "../src/creator-base";
 import { getLocString } from "../src/editorLocalization";
+import { vi, type MockedFunction } from "vitest";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
 
-jest.mock("survey-core", () => {
-  const originalModule = jest.requireActual("survey-core");
+vi.mock("survey-core", async () => {
+  const originalModule = await vi.importActual<typeof import("survey-core")>("survey-core");
   return {
     ...originalModule,
-    hasLicense: jest.fn(() => false),
-    glc: jest.fn(() => undefined)
+    hasLicense: vi.fn(() => false),
+    glc: vi.fn(() => undefined)
   };
 });
 
@@ -20,12 +21,16 @@ test("Preset edit model, create pages", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   expect(survey.pages).toHaveLength(5);
-  expect(survey.visiblePages).toHaveLength(5);
   expect(survey.pages[0].name).toEqual("page_languages");
   expect(survey.pages[1].name).toEqual("page_tabs");
   expect(survey.pages[2].name).toEqual("page_toolbox");
   expect(survey.pages[3].name).toEqual("page_propertyGrid");
   expect(survey.pages[4].name).toEqual("page_options");
+  expect(survey.visiblePages).toHaveLength(4);
+  expect(survey.visiblePages[0].name).toEqual("page_tabs");
+  expect(survey.visiblePages[1].name).toEqual("page_toolbox");
+  expect(survey.visiblePages[2].name).toEqual("page_propertyGrid");
+  expect(survey.visiblePages[3].name).toEqual("page_options");
 });
 test("Preset edit model, page component", () => {
   const editor = new CreatorPresetEditorModel({ tabs: { items: [] } });
@@ -253,8 +258,8 @@ test("Delete active tab", () => {
 test("Preset plugin, getLicenseText method", () => {
   const creator = new SurveyCreatorModel({});
   const plugin = new UIPresetEditor(creator);
-  const hasLicenseMock = hasLicense as jest.MockedFunction<typeof hasLicense>;
-  const glcMock = glc as jest.MockedFunction<typeof glc>;
+  const hasLicenseMock = hasLicense as MockedFunction<typeof hasLicense>;
+  const glcMock = glc as MockedFunction<typeof glc>;
 
   const result1 = plugin.getLicenseText(false, "");
   expect(result1).toBeTruthy();
@@ -293,12 +298,12 @@ test("Preset plugin, menu title should not be changed", () => {
   const creator = new SurveyCreatorModel({});
   const plugin = new UIPresetEditor(creator);
   plugin.activate();
-  expect(plugin.model.navigationBar.actions.map(a => a.id)).toEqual(["presets-list", "presets-pages", "presets-edit", "presets-status", "presets-quit"]);
-  const oldTitle = plugin.model.navigationBar.actions[1].title;
-  const list = plugin.model.navigationBar.actions[2].popupModel.contentComponentData.model;
+  expect(plugin.editor.navigationBar.actions.map(a => a.id)).toEqual(["presets-list", "presets-pages", "presets-edit", "presets-status", "presets-quit"]);
+  const oldTitle = plugin.editor.navigationBar.actions[1].title;
+  const list = plugin.editor.navigationBar.actions[2].popupModel.contentComponentData.model;
   const testAction = list.getActionById("reset");
   testAction.action = () => { };
   list.onItemClick(testAction);
-  expect(plugin.model.navigationBar.actions[1].title).toEqual(oldTitle);
+  expect(plugin.editor.navigationBar.actions[1].title).toEqual(oldTitle);
 });
 

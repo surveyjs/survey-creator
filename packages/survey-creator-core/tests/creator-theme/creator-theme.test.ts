@@ -16,15 +16,18 @@ test("onCreatorThemePropertyChanged event", (): any => {
   });
   expect(modificationsLog).toBe("");
 
-  themeModel["--sjs2-color-project-accent-600"] = "#ff0000";
-  expect(modificationsLog).toBe("->THEME_MODIFIED --sjs2-color-project-accent-600 - #ff0000");
+  themeModel["--sjs2-color-project-brand-600"] = "#ff0000";
+  expect(modificationsLog).toBe(
+    "->THEME_MODIFIED --sjs2-color-project-brand-600 - #ff0000" +
+      "->THEME_MODIFIED --sjs2-color-utility-surface-designer - rgba(246, 246, 246, 1)"
+  );
 });
 
 test("registerCreatorTheme function", (): any => {
   const customThemeName = "customLight";
   const customCssVariables = {
     "--sjs2-color-project-brand-600": "red",
-    "--sjs2-color-project-accent-600": "orange",
+    "--sjs2-color-utility-surface-designer": "orange",
   };
 
   registerCreatorTheme({

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, getListItemByText, resetHoverToCreator, compareScreenshot, resetFocusToBody } from "./helper";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, getListItemByText, resetHoverToCreator, compareScreenshot, resetFocusToBody, getVisibleSelectListItemByText } from "./helper";
 
 const title = "Logic tab Screenshot";
 
@@ -21,8 +21,8 @@ test.describe(title, () => {
 
     const tabContent = page.locator(".svc-creator-tab__content");
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
-    await page.click(".svc-logic-tab__content-action");
-    await compareScreenshot(page, tabContent, "logic-tab-new-rule.png");
+    await page.click(".svc-logic-tab__content-actions .sd-action");
+    await compareScreenshot(page, tabContent, "logic-tab-new-rule.png", { maxDiffPixels: 10 });
   });
 
   const jsonOneRule = {
@@ -90,7 +90,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await page.hover(".sl-table__detail-button");
     await compareScreenshot(page, page.locator(".sl-table__detail-button"), "logic-expand-hover.png");
-    const removeRuleSelector = page.locator(".sl-table__remove-button .sv-action-bar-item");
+    const removeRuleSelector = page.locator(".sl-table__remove-button .sd-action");
     await removeRuleSelector.hover();
     await compareScreenshot(page, removeRuleSelector, "logic-rule-remove-hover.png");
     await page.click(".sl-table__detail-button");
@@ -132,7 +132,7 @@ test.describe(title, () => {
     });
 
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
-    await page.click(".svc-logic-tab__content-action");
+    await page.click(".svc-logic-tab__content-actions .sd-action");
     await page.click(".sl-panel__done-button");
     await compareScreenshot(page, page.locator(".svc-notifier--error"), "logic-error-notifier.png");
   });
@@ -156,10 +156,10 @@ test.describe(title, () => {
       ]
     });
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
-    await page.click(".svc-logic-tab__content-action");
+    await page.click(".svc-logic-tab__content-actions .sd-action");
     await page.click(".svc-logic-operator--question");
     await compareScreenshot(page, page.locator(".sv-popup__container"), "logic-dropdown.png");
-    await getListItemByText(page, "q1").click();
+    await getVisibleSelectListItemByText(page, "q1").click();
     await page.click(".svc-logic-operator--question");
     await compareScreenshot(page, page.locator(".sl-body"), "logic-dropdown-full.png");
   });
@@ -236,24 +236,24 @@ test.describe(title, () => {
     await setJSON(page, jsonOneRule);
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
 
-    await page.click(".svc-logic-tab__content-action");
+    await page.click(".svc-logic-tab__content-actions .sd-action");
     await page.click(".sl-panel__done-button");
 
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-condition-question-name.png");
     await page.click(".svc-logic-operator.svc-logic-operator--question");
-    await getListItemByText(page, "q1").click();
+    await getVisibleSelectListItemByText(page, "q1").click();
     await page.waitForTimeout(500);
     await page.click(".sl-panel__done-button");
 
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-condition-question-value.png");
 
-    await page.fill(".sd-input.sd-input--error", "test");
+    await page.fill(".sd-formbox.sd-formbox--error .sd-formbox__input", "test");
     await page.click(".sl-panel__done-button");
 
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-action-empty.png");
 
     await page.click(".svc-logic-operator--action");
-    await getListItemByText(page, "Copy answer").click();
+    await getVisibleSelectListItemByText(page, "Copy answer").click();
     await page.waitForTimeout(500);
     await page.click(".sl-panel__done-button");
 

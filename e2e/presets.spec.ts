@@ -19,15 +19,15 @@ async function getToolboxTexts(page: any) {
 }
 
 async function getPropertiesTexts(page: any) {
-  return await getTextsBySelector(".spg-checkbox__caption .sv-string-viewer, .spg-question__title .sv-string-viewer", page);
+  return await getTextsBySelector(".spg-checkbox .sd-selectbase__label .sv-string-viewer, .spg-question__title .sv-string-viewer", page);
 }
 
 async function getMenuTexts(page: any) {
-  return await getTextsBySelector(".sps-list__item:not(.sps-list__item--disabled)", page);
+  return await getTextsBySelector(".sd-menu-item:not(.sd-menu-item--disabled)", page);
 }
 
 async function getDropdownTexts(page: any) {
-  return await getTextsBySelector(".svc-list__item", page);
+  return await getTextsBySelector(".sd-selectlist__item", page);
 }
 
 test.describe(title, () => {
@@ -39,71 +39,71 @@ test.describe(title, () => {
   });
 
   test("Check presets tabs", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Tabs").click();
 
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-question--matrixdynamic table").nth(1);
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Themes", "JSON Editor"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await items.locator("tr").nth(1).getByTitle("Delete").click();
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Themes", "JSON Editor", "Preview"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual(["Preview"]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
 
-    await hidden.locator("tr").nth(1).getByTitle("Add").click();
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Logic", "Translations", "JSON Editor"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Themes", "Preview"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Logic", "Translations", "JSON Editor"]);
+    await hidden.locator("tr").nth(0).getByTitle("Add").click();
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations", "Preview"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations", "Preview"]);
   });
 
   test("Check presets tabs - drag-drop", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Tabs").click();
 
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-question--matrixdynamic table").nth(1);
 
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Themes", "JSON Editor"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await doDragDrop({ page, element: items.locator("tr").nth(1).locator(".sd-table__cell--drag"), target: hidden, options: { targetPosition: { x: 5, y: 5 } } });
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Preview", "Themes", "JSON Editor"]);
-    expect(await getTabsTexts(page)).toEqual(["Designer", "Logic", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual(["Preview"]);
+    expect(await getTabsTexts(page)).toEqual(["Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
 
-    await doDragDrop({ page, element: hidden.locator("tr").nth(2).locator(".sd-table__cell--drag"), target: items, options: { targetPosition: { x: 5, y: 5 } } });
-    expect(await getRowsInputValues(items)).toEqual(["JSON Editor", "Designer", "Logic", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Preview", "Themes"]);
-    expect(await getTabsTexts(page)).toEqual(["JSON Editor", "Designer", "Logic", "Translations"]);
+    await doDragDrop({ page, element: hidden.locator("tr").nth(0).locator(".sd-table__cell--drag"), target: items, options: { targetPosition: { x: 5, y: 5 } } });
+    expect(await getRowsInputValues(items)).toEqual(["Preview", "Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Preview", "Designer", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await doDragDrop({ page, element: items.locator("tr").nth(1).locator(".sd-table__cell--drag"), target: items.locator("tr").nth(3).locator(".sd-table__cell--drag"), options: { targetPosition: { x: 5, y: 5 } } });
-    expect(await getRowsInputValues(items)).toEqual(["JSON Editor", "Logic", "Designer", "Translations"]);
-    expect(await getRowsInputValues(hidden)).toEqual(["Preview", "Themes"]);
-    expect(await getTabsTexts(page)).toEqual(["JSON Editor", "Logic", "Designer", "Translations"]);
+    expect(await getRowsInputValues(items)).toEqual(["Preview", "Themes", "Designer", "Logic", "JSON Editor", "Translations"]);
+    expect(await getRowsInputValues(hidden)).toEqual([]);
+    expect(await getTabsTexts(page)).toEqual(["Preview", "Themes", "Designer", "Logic", "JSON Editor", "Translations"]);
   });
 
   test("Check presets tabs - edit", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Tabs").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Tabs").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
-    expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
+    expect(await items.locator("tr").nth(0).locator(".sd-action use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
 
     await page.getByRole("row", { name: "Designer" }).hover();
     await page.getByRole("row", { name: "Designer" }).getByRole("button").nth(1).click();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Designer1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
-    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Icon name" }) }).click();
     await page.getByText("icon-actual-size-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
-    expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-actual-size-24x24");
-    expect(await getRowsInputValues(items)).toEqual(["Designer1", "Preview", "Logic", "Translations"]);
+    expect(await items.locator("tr").nth(0).locator(".sd-action use").nth(0).getAttribute("xlink:href")).toBe("#icon-actual-size-24x24");
+    expect(await getRowsInputValues(items)).toEqual(["Designer1", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await page.getByRole("row", { name: "Designer1" }).hover();
     expect(await page.getByRole("row", { name: "Designer1" }).getByRole("button").nth(1)).toBeVisible();
@@ -111,13 +111,13 @@ test.describe(title, () => {
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).waitFor({ state: "visible" });
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).click();
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Apply" }).click();
-    expect(await items.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
-    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Logic", "Translations"]);
+    expect(await items.locator("tr").nth(0).locator(".sd-action use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
+    expect(await getRowsInputValues(items)).toEqual(["Designer", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
   });
 
   test("Check presets toolbox", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -154,8 +154,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - drag-drop categories", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -172,8 +172,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - drag-drop items", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Slider"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -200,8 +200,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - edit category", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Toolbox").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
@@ -222,8 +222,8 @@ test.describe(title, () => {
   });
 
   test("Check presets toolbox - custom category and custom item", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Toolbox").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Toolbox").click();
     const items = page.locator(".sps-question--matrixdynamic").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic").nth(0);
 
@@ -240,7 +240,7 @@ test.describe(title, () => {
     await page.getByRole("row", { name: "Custom" }).hover();
     await page.getByRole("row", { name: "Custom" }).getByTitle("Expand").click();
 
-    await items.getByRole("button", { name: "Add a new item" }).click();
+    await items.getByRole("button", { name: "Add new item" }).click();
     await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 1");
     await page.getByRole("textbox", { name: "Title", exact: true }).blur();
@@ -256,7 +256,7 @@ test.describe(title, () => {
     expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(22)).toHaveText("Custom 1");
     expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(22).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
 
-    await hidden.getByRole("button", { name: "Add a new item" }).click();
+    await hidden.getByRole("button", { name: "Add new item" }).click();
     await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom 2");
     await expect(page.getByRole("textbox", { name: "Title", exact: true })).toHaveValue("Custom 2");
@@ -268,12 +268,12 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).blur();
     await page.getByRole("button", { name: "Apply" }).click();
-    expect(await hidden.locator("tr").nth(0).locator(".sps-action-button--icon use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowright-16x16");
+    expect(await hidden.locator("tr").nth(0).locator(".sd-action use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowright-16x16");
   });
 
   test("Check presets Property Grid", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Property Grid").click();
     expect((await getPropertiesTexts(page)).slice(0, 3)).toEqual(["Survey title", "Survey description", "Make the title and description visible"]);
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
@@ -311,10 +311,10 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - drag-drop categories", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
-    expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(1).getAttribute("title")).toBe("General");
-    expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(2).getAttribute("title")).toBe("Logo in the Survey Header");
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(1).getAttribute("title")).toBe("General");
+    expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(2).getAttribute("title")).toBe("Logo in the Survey Header");
 
     const items = page.locator(".sps-row--multiple > div").nth(0).locator(".sps-question--matrixdynamic table").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
@@ -333,13 +333,13 @@ test.describe(title, () => {
       "Logo in the Survey Header",
       "Question Settings",]);
     expect(await getRowsInputValues(hidden)).toEqual([]);
-    expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(1).getAttribute("title")).toBe("Navigation");
-    expect(await page.locator(".svc-sidebar-tabs .svc-menu-action__button").nth(2).getAttribute("title")).toBe("General");
+    expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(1).getAttribute("title")).toBe("Navigation");
+    expect(await page.locator(".svc-sidebar-tabs .svc-sidebar-tabs__item .sd-action").nth(2).getAttribute("title")).toBe("General");
   });
 
   test("Check presets Property Grid - drag-drop items", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Property Grid").click();
     await page.locator(".svc-sidebar-tabs").getByTitle("Logo in the Survey Header").click();
     expect(await getPropertiesTexts(page)).toEqual(["Survey logo", "Logo width", "Logo height", "Logo fit"]);
 
@@ -362,8 +362,8 @@ test.describe(title, () => {
   });
 
   test("Check presets Property Grid - edit category", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Property Grid").click();
     const items = page.locator(".sps-question--matrixdynamic table").nth(0);
 
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
@@ -373,12 +373,12 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Navigation1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
-    await page.getByRole("combobox", { name: "Icon name" }).click();
+    await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Icon name" }) }).click();
     await page.getByText("icon-more-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation1", "Question Settings"]);
     expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(2).getAttribute("xlink:href")).toBe("#icon-more-24x24");
-    expect(await page.locator(".svc-menu-action__icon svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-more-24x24");
+    expect(await page.locator(".svc-sidebar-tabs__item svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-more-24x24");
 
     await page.getByRole("row", { name: "Navigation1" }).hover();
     expect(await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(1)).toBeVisible();
@@ -388,12 +388,12 @@ test.describe(title, () => {
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Apply" }).click();
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
     expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(2).getAttribute("xlink:href")).toBe("#icon-pg-navigation-24x24");
-    expect(await page.locator(".svc-menu-action__icon svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-pg-navigation-24x24");
+    expect(await page.locator(".svc-sidebar-tabs__item svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-pg-navigation-24x24");
   });
 
   test("Check presets Property Grid - custom category", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").nth(1).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Property Grid").click();
+    await page.locator(".sps-navigation-bar .sd-action").nth(1).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Property Grid").click();
     const items = page.locator(".sps-question--matrixdynamic").nth(0);
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic").nth(0);
 
@@ -425,16 +425,16 @@ test.describe(title, () => {
   });
 
   test("Hide default preset", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Edit Presets list..."]);
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
-    await page.locator(".sps-action-button").nth(1).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Manage presets...").click();
+    await page.locator(".sps-table__cell--actions .sd-action").nth(1).click();
 
     await page.getByRole("button", { name: "Save" }).click();
 
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Expert", "Edit Presets list..."]);
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Expert", "Default configuration", "Manage presets..."]);
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Quit" }).click();
 
     await showCreatorSettings(page);
     await page.getByText("Expert").click();
@@ -443,19 +443,19 @@ test.describe(title, () => {
   });
 
   test("Add custom preset", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Edit Presets list..."]);
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
-    await page.getByText("Add new preset...").click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Manage presets...").click();
+    await page.getByText("Add new preset").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
     await page.getByRole("button", { name: "Add" }).nth(1).click();
     const items = page.locator(".sv-popup__container table").nth(0);
     expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert", "MyPreset"]);
     await page.getByRole("button", { name: "Save" }).click();
 
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Edit Presets list..."]);
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Quit" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Default configuration", "Manage presets..."]);
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Quit" }).click();
 
     await showCreatorSettings(page);
     await page.getByText("Expert").click();
@@ -464,44 +464,66 @@ test.describe(title, () => {
   });
 
   test("Delete current custom preset in list editor switches to Basic", async ({ page }) => {
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
-    await page.getByText("Add new preset...").click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Manage presets...").click();
+    await page.getByText("Add new preset").click();
     await page.getByRole("textbox", { name: "presetName" }).fill("MyPreset");
     await page.getByRole("button", { name: "Add" }).nth(1).click();
     await page.getByRole("button", { name: "Save" }).click();
 
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Expert" }).click();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Edit Presets list..."]);
-    await page.locator(".sps-list__item").filter({ hasText: "MyPreset" }).click();
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "MyPreset" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Expert" }).click();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "MyPreset", "Default configuration", "Manage presets..."]);
+    await page.locator(".sd-menu-item").filter({ hasText: "MyPreset" }).click();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "MyPreset" }).click();
 
-    await page.locator(".sps-list__container").filter({ visible: true }).getByText("Edit presets list...").click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Manage presets...").click();
     const items = page.locator(".sv-popup__container table").nth(0);
     expect(await getRowsInputValues(items)).toContain("MyPreset");
 
     await page.getByTitle("Delete").click();
 
-    await page.getByTitle("Yes, delete").click();
+    await page.getByTitle("Delete").nth(1).click();
     expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert"]);
     await page.getByRole("button", { name: "Save" }).click();
 
-    await expect(page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" })).toBeVisible();
-    await page.locator(".sps-navigation-bar-item").filter({ hasText: "Basic" }).click();
-    await expect(page.locator(".sps-list__item--selected").filter({ hasText: "Basic" })).toBeVisible();
-    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Edit Presets list..."]);
+    await expect(page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Basic" })).toBeVisible();
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Basic" }).click();
+    await expect(page.locator(".sd-menu-item--selected").filter({ hasText: "Basic" })).toBeVisible();
+    expect(await getMenuTexts(page)).toEqual(["Basic", "Advanced", "Expert", "Default configuration", "Manage presets..."]);
   });
 
   test("Check presets quit confirmation dialog", async ({ page }) => {
     await page.getByText("Dansk").click();
     await page.getByTitle("Quit").click();
-    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Exit to Survey Creator?");
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Return to Survey Creator?");
 
     await page.locator(".sv-popup__close-button").click();
     await page.getByTitle("Quit").click();
-    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Exit to Survey Creator?");
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Return to Survey Creator?");
     await page.getByRole("button", { name: "Save and exit" }).click();
-    await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save current preset as");
+    await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save Preset As");
+
+    await page.locator("[data-name=presetName] input").fill("MyPreset2");
+    await page.getByText('Create "MyPreset2"').click();
+    await page.getByRole("button", { name: "Save", exact: true }).click();
+  });
+
+  test("Save as shows 'Create preset' text for new preset name", async ({ page }) => {
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Edit" }).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Save as...").click();
+    await page.locator(".sd-dropdown__filter-string-input").nth(-1).fill("MyNewPreset");
+    await expect(page.getByText("Create \"MyNewPreset\" preset")).toBeVisible();
+  });
+
+  test("Check presets import confirmation dialog when unsaved changes exist", async ({ page }) => {
+    await page.getByText("Dansk").click();
+
+    await page.locator(".sps-navigation-bar .sd-action").nth(2).click();
+    await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Import").click();
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Import a new preset?");
+
+    await page.getByRole("button", { name: "Cancel" }).click();
+    await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toBeHidden();
   });
 
 });

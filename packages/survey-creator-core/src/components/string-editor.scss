@@ -23,7 +23,7 @@
 
     &[aria-placeholder]:empty:before {
       content: attr(aria-placeholder);
-      color: var(--ctr-survey-page-header-title-color-placeholder, var(--sjs-layer-3-foreground-50, #00000080));
+      color: var(--sjs2-color-component-input-default-placeholder, #00000080);
       transition: color $creator-transition-duration;
     }
   }
@@ -60,7 +60,7 @@
 }
 
 .svc-remaining-character-counter {
-  @include lbrSmallFont;
+  @include sjs2--typography--small-strong;
   display: none;
   position: relative;
   outline: none;
@@ -114,7 +114,7 @@
 }
 
 .svc-string-editor__error {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   margin-left: calcSize(1);
   color: red;
   display: none;

@@ -14,9 +14,10 @@ import {
   Question,
   PageModel,
   ItemValue,
-  QuestionPanelDynamicModel
+  QuestionPanelDynamicModel,
+  MatrixDropdownColumn
 } from "survey-core";
-import { getNextValue, getNextItemText } from "../src/utils/creator-utils";
+import { getNextValue, getNextItemText, getNextColumnTitle } from "../src/utils/creator-utils";
 import { editorLocalization } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 import { CreatorTester } from "./creator-tester";
@@ -118,6 +119,27 @@ test("getNextItemText for simple text", (): any => {
   choices[0].text = "Item abc";
   choices[1].text = "Item bde";
   expect(getNextItemText(choices)).toBeFalsy();
+});
+
+test("getNextColumnTitle", (): any => {
+  const columns: Array<MatrixDropdownColumn> = [];
+  expect(getNextColumnTitle(columns)).toBeFalsy();
+  columns.push(new MatrixDropdownColumn("col1"));
+  columns.push(new MatrixDropdownColumn("col2"));
+  expect(getNextColumnTitle(columns)).toBeFalsy();
+  columns[0].title = "Column 1";
+  columns[1].title = "Column 2";
+  expect(getNextColumnTitle(columns)).toEqual("Column 3");
+});
+
+test("getNextColumnTitle with no pattern", (): any => {
+  const columns: Array<MatrixDropdownColumn> = [];
+  columns.push(new MatrixDropdownColumn("Column 1"));
+  columns.push(new MatrixDropdownColumn("Column 2"));
+  expect(getNextColumnTitle(columns)).toBeFalsy();
+  columns[0].title = "Title abc";
+  columns[1].title = "Title bde";
+  expect(getNextColumnTitle(columns)).toBeFalsy();
 });
 
 test("Set Text property", () => {
@@ -1250,6 +1272,48 @@ test("getDisplayText https://surveyjs.answerdesk.io/ticket/details/T1380", () =>
   creator.JSON = getSurveyJson();
   const model = new PageNavigatorViewModel(new PagesController(creator), "");
   expect(model.items[0].title).toEqual("Page 1");
+});
+test("selectFromStringEditor should prevent focus on property editor", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.selectElement(q1);
+  const propertyGrid = creator["designerPropertyGrid"];
+  const log: { propertyName: string, focus: boolean }[] = [];
+  const originalSelectProperty = propertyGrid.selectProperty.bind(propertyGrid);
+  propertyGrid.selectProperty = (propertyName: string, focus: boolean) => {
+    log.push({ propertyName, focus });
+    originalSelectProperty(propertyName, focus);
+  };
+
+  // Select q2 with propertyName "title" and selectFromStringEditor = false => should focus
+  creator.selectFromStringEditor = false;
+  creator.selectElement(q2, "title");
+  expect(log.length).toBe(1);
+  expect(log[0].propertyName).toBe("title");
+  expect(log[0].focus).toBe(true);
+  log.length = 0;
+
+  // Select q1 with propertyName "title" and selectFromStringEditor = true => should NOT focus
+  creator.selectFromStringEditor = true;
+  creator.selectElement(q1, "title");
+  expect(log.length).toBe(1);
+  expect(log[0].propertyName).toBe("title");
+  expect(log[0].focus).toBe(false);
+  log.length = 0;
+
+  // Verify selectFromStringEditor is reset to false after selectionChanged
+  expect(creator.selectFromStringEditor).toBe(false);
+
+  // Select q2 with propertyName "title" and selectFromStringEditor = true, focus = false => should NOT focus
+  creator.selectFromStringEditor = true;
+  creator.selectElement(q2, "title", false);
+  expect(log.length).toBe(1);
+  expect(log[0].propertyName).toBe("title");
+  expect(log[0].focus).toBe(false);
+
+  propertyGrid.selectProperty = originalSelectProperty;
 });
 test(
   "creator getMenuItems should respect property visibility (e.g. for image question) - https://github.com/surveyjs/survey-creator/issues/897",

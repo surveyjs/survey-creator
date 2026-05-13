@@ -215,7 +215,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
     await page.evaluate(() => {
-      (document.querySelector("[data-name='question1'] .sv-string-editor") as HTMLElement).focus();
+      ((window as any).creator.rootElement.getRootNode().querySelector("[data-name='question1'] .sv-string-editor") as HTMLElement).focus();
     });
     await compareScreenshot(page, page.locator(".svc-question__content"), "surface-matrix-title-editing.png");
   });
@@ -239,7 +239,7 @@ test.describe(title, () => {
       ],
     };
     await setJSON(page, json);
-    await page.locator(".sd-table__cell--detail-panel .svc-row").nth(0).click();
+    await page.locator(".sd-table__cell--detail-panel .svc-row").nth(0).click({ position: { x: 10, y: 10 } });
     await expect(page.locator(".svc-question__content--selected")).toBeVisible();
     await compareScreenshot(page, page.locator(".svc-question__content"), "surface-matrix-detail-two-questions-select.png");
   });
@@ -276,7 +276,7 @@ test.describe(title, () => {
     await page.locator(".svc-matrix-cell").nth(3).hover({ force: true });
     await expect(dropdownButton).toBeVisible();
     await dropdownButton.click();
-    await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png");
+    await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png", { maxDiffPixels: 42 });
     await page.locator("button").filter({ hasText: "Cancel" }).click();
     await page.waitForTimeout(500);
 

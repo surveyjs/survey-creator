@@ -76,7 +76,7 @@ test.describe(title, () => {
     await imagePicker.click();
     //emulate dragging class appear
     await page.evaluate(() => {
-      document.querySelector(".svc-image-item-value--new")?.classList.add("svc-image-item-value--file-dragging");
+      (window as any).creator.rootElement.getRootNode().querySelector(".svc-image-item-value--new")?.classList.add("svc-image-item-value--file-dragging");
     });
     await compareScreenshot(page, imagePicker, "image-picker-responsive-dragging-file.png");
   });
@@ -107,12 +107,12 @@ test.describe(title, () => {
     });
     await imagePicker.click();
     await compareScreenshot(page, imagePicker, "image-picker-single-new-item.png");
-    await page.evaluate(() => document.querySelector(".svc-image-item-value")?.classList.toggle("svc-image-item-value--file-dragging"));
+    await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector(".svc-image-item-value")?.classList.toggle("svc-image-item-value--file-dragging"));
     await compareScreenshot(page, imagePicker, "image-picker-single-new-item-dragging.png");
-    await page.evaluate(() => document.querySelector(".svc-image-item-value")?.classList.toggle("svc-image-item-value--file-dragging"));
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector(".svc-image-item-value")?.classList.toggle("svc-image-item-value--file-dragging"));
+    await page.locator(".svc-image-item-value-controls").getByRole("button", { name: "Choose Image" }).click();
     await page.evaluate(() => {
-      (document.querySelector(".sd-loading-indicator .sv-svg-icon") as HTMLElement).style.animation = "none";
+      ((window as any).creator.rootElement.getRootNode().querySelector(".sd-loading-indicator .sv-svg-icon") as HTMLElement).style.animation = "none";
     });
     await compareScreenshot(page, imagePicker, "image-picker-single-new-item-loading.png");
   });
@@ -137,9 +137,9 @@ test.describe(title, () => {
 
     const imagePicker = page.locator(".sd-imagepicker");
     await imagePicker.click();
-    await page.locator(".svc-image-item-value-controls__add").click();
+    await page.locator(".svc-image-item-value-controls").getByRole("button", { name: "Select a file" }).last().click();
     await page.evaluate(() => {
-      (document.querySelector(".sd-loading-indicator .sv-svg-icon") as HTMLElement).style.animation = "none";
+      ((window as any).creator.rootElement.getRootNode().querySelector(".sd-loading-indicator .sv-svg-icon") as HTMLElement).style.animation = "none";
     });
     await compareScreenshot(page, imagePicker, "imagepicker-loading.png");
   });

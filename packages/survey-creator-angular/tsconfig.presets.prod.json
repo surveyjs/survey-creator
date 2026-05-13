@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.presets.json",
-  "compilerOptions": {
-    "declarationMap": false
-  },
-  "angularCompilerOptions": {
-    "compilationMode": "partial"
-  }
-}

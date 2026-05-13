@@ -2,6 +2,7 @@ import { Base, DragOrClickHelper, ActionContainer, ListModel, PopupModel, CssCla
 import { IQuestionToolboxItem, QuestionToolbox, QuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../dragdrop-survey-elements";
+import { DomDocumentHelper } from "survey-core";
 export class ToolboxToolViewModel extends Base {
   private dragOrClickHelper: DragOrClickHelper;
   constructor(
@@ -70,14 +71,14 @@ export class ToolboxToolViewModel extends Base {
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
 
     this.toolboxItem.isPressed = true;
-    document.addEventListener("pointerup", this.onPointerUp);
+    DomDocumentHelper.getDocument().addEventListener("pointerup", this.onPointerUp);
     this.creator?.onDragDropItemStart();
   }
 
   private onPointerUp = (pointerUpEvent) => {
     this.hidePopup();
     this.toolboxItem.isPressed = false;
-    document.removeEventListener("pointerup", this.onPointerUp);
+    DomDocumentHelper.getDocument().removeEventListener("pointerup", this.onPointerUp);
   };
 
   private startDragToolboxItem = (pointerDownEvent: PointerEvent) => {

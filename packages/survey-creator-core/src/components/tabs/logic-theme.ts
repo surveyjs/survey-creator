@@ -1,5 +1,4 @@
 import { defaultActionBarCss } from "survey-core";
-import { listComponentCss } from "../list-theme";
 
 export var logicCss = {
   root: "",
@@ -288,7 +287,7 @@ export var logicCss = {
   },
   comment: {
     mainRoot: "",
-    root: "spg-input spg-comment sl-comment",
+    root: "sd-formbox sd-comment sl-comment",
     small: ""
   },
   expression: "",
@@ -335,7 +334,6 @@ export var logicCss = {
       buttonCollapsed: ""
     }
   },
-  list: JSON.parse(JSON.stringify(listComponentCss)),
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
   },

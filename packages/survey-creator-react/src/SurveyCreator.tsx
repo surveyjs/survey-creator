@@ -130,24 +130,18 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
   renderActiveTab() {
     const creator: SurveyCreatorModel = this.props.creator;
-    for (var i = 0; i < creator.tabs.length; i++) {
-      if (creator.tabs[i].id === creator.activeTab) {
-        return this.renderCreatorTab(creator.tabs[i]);
-      }
-    }
-    return null;
+    return this.renderCreatorTab(creator.activeTabMenuItem);
   }
   renderCreatorTab(tab: ITabbedMenuItem) {
-    if (tab.visible === false) {
-      return null;
-    }
+    if (!tab) return null;
     const creator: SurveyCreatorModel = this.props.creator;
     const component = !!tab.renderTab
       ? tab.renderTab()
       : ReactElementFactory.Instance.createElement(tab.componentContent, {
         creator: creator,
         survey: creator.survey,
-        data: tab.data.model
+        data: tab.data.model,
+        model: tab.data.model
       });
     const className = "svc-creator-tab" + (creator.toolboxLocation == "right" ? " svc-creator__toolbox--right" : "");
     return (

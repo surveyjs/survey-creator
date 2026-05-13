@@ -25,9 +25,11 @@ export class SearchComponent extends SurveyElementBase<ISearchComponentProps, an
     if (!this.model.isVisible) return null;
 
     const onChange = (e: any) => {
-      const { root } = settings.environment;
-      if (e.target === root.activeElement) {
-        this.model.filterString = e.target.value;
+      const target = e.target as HTMLInputElement;
+      const root = target?.getRootNode() || settings.environment.root;
+      if (!(root instanceof Document || root instanceof ShadowRoot)) return;
+      if (target === root.activeElement) {
+        this.model.filterString = target.value;
       }
     };
     return (

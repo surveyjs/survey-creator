@@ -3,21 +3,31 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+variables:
+  - template: templates/utils/variables.yml
+
 resources:
   repositories:
-    - repository: EmptyRepo
+    - repository: Library
       type: github
       endpoint: github.com_surveyjsdeveloper
-      name: surveyjs/azure-pipelines-repo-dont-remove-please
-  pipelines:
-    - pipeline: LibraryMain
-      source: Library Main
-      trigger: none
-
-variables:
-  npm_config_cache: $(Pipeline.Workspace)/.npm
-  CurrentBranch: $(Build.SourceBranchName)
-  ProjectId: "2cf848f9-83d5-4ec4-b2e3-ef3321ccc99f"
+      name: surveyjs/survey-library
+      ref: $(System.PullRequest.TargetBranch)
+    - repository: Creator
+      type: github
+      endpoint: github.com_surveyjsdeveloper
+      name: surveyjs/survey-creator
+      ref: $(System.PullRequest.TargetBranch)
+    - repository: Analytics
+      type: github
+      endpoint: github.com_surveyjsdeveloper
+      name: surveyjs/survey-analytics
+      ref: $(System.PullRequest.TargetBranch)
+    - repository: PDF
+      type: github
+      endpoint: github.com_surveyjsdeveloper
+      name: surveyjs/survey-pdf
+      ref: $(System.PullRequest.TargetBranch)
 
 trigger: none
 
@@ -27,691 +37,335 @@ pr:
       - V3
 
 pool:
-  vmImage: "Ubuntu-22.04"
-
-jobs:
-  - job: CreatorV2Core
-    steps:
-      - checkout: self
-      - checkout: EmptyRepo
-        persistCredentials: true
-        clean: true
-      - download: LibraryMain
-        artifact: SurveyJSLibraryBuildCore
-
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "16.x"
-        displayName: "Install Node.js"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
-          Contents: "package.json"
-          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
-          OverWrite: true
-        displayName: "Copy package.json for cache key (root)"
-
-      - task: Cache@2
-        inputs:
-          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
-          path: $(Build.SourcesDirectory)/survey-creator/node_modules
-          cacheHitVar: NPM_CACHE_RESTORED_ROOT
-        displayName: Cache NPM
-
-      - task: Npm@1
-        displayName: "Npm install root"
-        inputs:
-          command: install
-          verbose: false
-          workingDir: $(Build.SourcesDirectory)/survey-creator
-        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
-        
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/"
-          Contents: "package.json"
-          TargetFolder: "$(Build.SourcesDirectory)/Temp/"
-          OverWrite: true
-        displayName: "Copy package.json for cache key"
-
-      - task: Cache@2
-        inputs:
-          key: "npm-cache-creator-core | $(Build.SourcesDirectory)/Temp/package.json"
-          path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules
-          cacheHitVar: NPM_CACHE_RESTORED
-        displayName: Cache NPM Core
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/packages/survey-core"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
-          OverWrite: true
-
-      - task: Npm@1
-        displayName: "Npm install survey-creator-core"
-        inputs:
-          command: install
-          verbose: false
-          workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-        condition: ne(variables.NPM_CACHE_RESTORED, 'true')
-
-      # update 'file' npm dependencies in case of cache
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules
-          rm -rf survey-core
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "remove survey-core symlink from node_modules"
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: $(Build.SourcesDirectory)/survey-library/packages/survey-core/build
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules/survey-core"
-          OverWrite: true
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "copy survey-core in case of npm cache"
-      # EO update 'file' npm dependencies in case of cache
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-          npm run remove-package-lock
-        displayName: "npm run remove-package-lock"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-          npm run build:i18n
-          npm run build
-          npm run build:themes
-        displayName: "Build Creator V2 Core"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-          npm run test
-        displayName: "Unit tests CreatorV2 Core"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-          npm run test:presets
-        displayName: "Unit tests CreatorV2 Core presets"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-          npm run test:postcss
-        displayName: "check postcss compatibility"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
-          targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core
-
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: "$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-core"
-          ArtifactName: "SurveyJSCreatorV2BuildCore-$(Build.BuildId)"
-          publishLocation: "Container"
-
-  - job: CreatorV2React
-    dependsOn: CreatorV2Core
-    steps:
-      - checkout: self
-      - checkout: EmptyRepo
-        persistCredentials: true
-        clean: true
-      - download: LibraryMain
-        artifact: SurveyJSLibraryBuildReact
-      - download: LibraryMain
-        artifact: SurveyJSLibraryBuildCore
-
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "16.x"
-        displayName: "Install Node.js"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/"
-          Contents: "package.json"
-          TargetFolder: "$(Build.SourcesDirectory)/Temp/"
-          OverWrite: true
-        displayName: "Copy package.json for cache key"
-      - task: Cache@2
-        inputs:
-          key: "npm-cache-creator-react | $(Build.SourcesDirectory)/Temp/package.json"
-          path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules
-          cacheHitVar: NPM_CACHE_RESTORED
-        displayName: Cache NPM
-
-      - task: DownloadBuildArtifacts@0
-        inputs:
-          buildType: "current"
-          downloadType: "single"
-          artifactName: "SurveyJSCreatorV2BuildCore-$(Build.BuildId)"
-          downloadPath: "$(System.ArtifactsDirectory)"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/packages/survey-core"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
-          OverWrite: true
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildReact/packages/survey-react-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-react-ui/build"
-          OverWrite: true
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
-          Contents: "package.json"
-          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
-          OverWrite: true
-        displayName: "Copy package.json for cache key (root)"
-
-      - task: Cache@2
-        inputs:
-          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
-          path: $(Build.SourcesDirectory)/survey-creator/node_modules
-          cacheHitVar: NPM_CACHE_RESTORED_ROOT
-        displayName: Cache NPM
-
-      - task: Npm@1
-        displayName: "Npm install root"
-        inputs:
-          command: install
-          verbose: false
-          workingDir: $(Build.SourcesDirectory)/survey-creator
-        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator
-          npm run postinstall
-        displayName: "install chrome playwright"
-      # - script: |
-      #     cd $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
-      #     sed -i 's/"survey-core": .*"/"survey-core": "latest"/g' package.json
-      #   displayName: "Change survey-core dependency version from release next ver to local dependency"
-
-      - task: Npm@1
-        displayName: "Npm install survey-creator-react"
-        inputs:
-          command: install
-          verbose: false
-          workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-        condition: ne(variables.NPM_CACHE_RESTORED, 'true')
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npx puppeteer browsers install chrome
-        displayName: "install chrome"
-
-      # update 'file' npm dependencies in case of cache
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules
-          rm -rf survey-core survey-react-ui @survey
-          mkdir -p @survey/creator
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "remove symlinks from node_modules"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/packages/survey-core"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core"
-          OverWrite: true
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "copy survey-core in case of npm cache"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildReact/packages/survey-react-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui"
-          OverWrite: true
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "copy survey-react-ui in case of npm cache"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-creator-core"
-          OverWrite: true
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "copy survey-creator-core in case of npm cache"
-      # EO update 'file' npm dependencies in case of cache
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run remove-package-lock
-        displayName: "npm run remove-package-lock"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run build
-        displayName: "Build CreatorV2 React"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run test
-        displayName: "Unit test CreatorV2 React"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run e2e:ci
-        displayName: "Playwright Functional test CreatorV2 React"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run test:a11y:ci
-        displayName: "A11Y Functional test CreatorV2 React"
-
-  - job: CreatorV2Angular
-    dependsOn: CreatorV2Core
-    steps:
-      - checkout: self
-      - checkout: EmptyRepo
-        persistCredentials: true
-        clean: true
-      - download: LibraryMain
-        artifact: SurveyJSLibraryBuildAngular
-      - download: LibraryMain
-        artifact: SurveyJSLibraryBuildCore
-
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "16.x"
-        displayName: "Install Node.js"
-
-      - task: DownloadBuildArtifacts@0
-        inputs:
-          buildType: "current"
-          downloadType: "single"
-          artifactName: "SurveyJSCreatorV2BuildCore-$(Build.BuildId)"
-          downloadPath: "$(System.ArtifactsDirectory)"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/packages/survey-core"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
-          OverWrite: true
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildAngular/packages/survey-angular-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-angular-ui/build"
-          OverWrite: true
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
-          Contents: "package.json"
-          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
-          OverWrite: true
-        displayName: "Copy package.json for cache key (root)"
-
-      - task: Cache@2
-        inputs:
-          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
-          path: $(Build.SourcesDirectory)/survey-creator/node_modules
-          cacheHitVar: NPM_CACHE_RESTORED_ROOT
-        displayName: Cache NPM
-
-      - task: Npm@1
-        displayName: "Npm install root"
-        inputs:
-          command: install
-          verbose: false
-          workingDir: $(Build.SourcesDirectory)/survey-creator
-        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator
-          npm run postinstall
-        displayName: "install chrome playwright"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm i
-          rm node_modules/survey-angular-ui
-        displayName: "npm install"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npx puppeteer browsers install chrome
-        displayName: "install chrome"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildAngular/packages/survey-angular-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/node_modules/survey-angular-ui"
-          OverWrite: true
-        displayName: "copy survey-angular-ui in node_modules"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run build
-        displayName: "Build CreatorV2 Angular"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run test:single
-        displayName: "Unit test CreatorV2 Angular"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/example/angular-ui
-          npm i
-        displayName: "npm install in example project"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run build:example:prod
-        displayName: "build example"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run e2e:ci
-        displayName: "Playwright Functional test CreatorV2 Angular"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run test:a11y:ci
-        displayName: "A11Y Functional test CreatorV2 Angular"
-
-  - job: CreatorV2Vue
-    dependsOn: CreatorV2Core
-    steps:
-      - checkout: self
-      - checkout: EmptyRepo
-        persistCredentials: true
-        clean: true
-      - download: LibraryMain
-        artifact: SurveyJSLibraryBuildVue3
-      - download: LibraryMain
-        artifact: SurveyJSLibraryBuildCore
-
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "16.x"
-        displayName: "Install Node.js"
-
-      - task: DownloadBuildArtifacts@0
-        inputs:
-          buildType: "current"
-          downloadType: "single"
-          artifactName: "SurveyJSCreatorV2BuildCore-$(Build.BuildId)"
-          downloadPath: "$(System.ArtifactsDirectory)"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/packages/survey-core"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
-          OverWrite: true
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildVue3/packages/survey-vue3-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-vue3-ui/build"
-          OverWrite: true
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
-          Contents: "package.json"
-          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
-          OverWrite: true
-        displayName: "Copy package.json for cache key (root)"
-
-      - task: Cache@2
-        inputs:
-          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
-          path: $(Build.SourcesDirectory)/survey-creator/node_modules
-          cacheHitVar: NPM_CACHE_RESTORED_ROOT
-        displayName: Cache NPM
-
-      - task: Npm@1
-        displayName: "Npm install root"
-        inputs:
-          command: install
-          verbose: false
-          workingDir: $(Build.SourcesDirectory)/survey-creator
-        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator
-          npm run postinstall
-        displayName: "install chrome playwright"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm i
-          rm node_modules/survey-vue3-ui
-        displayName: "npm install"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npx puppeteer browsers install chrome
-        displayName: "install chrome"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildVue3/packages/survey-vue3-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue/node_modules/survey-vue3-ui"
-          OverWrite: true
-        displayName: "copy survey-vue3-ui in node_modules"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run build
-        displayName: "Build CreatorV2 Vue"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue/example
-          npm i
-        displayName: "npm install in example project"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run build:example:prod
-        displayName: "build example"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run e2e:ci
-        displayName: "Playwright Functional test CreatorV2 Vue"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run test:a11y:ci
-        displayName: "A11Y Functional test CreatorV2 Vue"
-
-  - job: Preact_ShadowDOM_BoxSizing
-    dependsOn: CreatorV2Core
-    steps:
-      - checkout: self
-      - checkout: EmptyRepo
-        persistCredentials: true
-        clean: true
-      - download: LibraryMain
-        artifact: SurveyJSLibraryBuildSurveyUI
-      - download: LibraryMain
-        artifact: SurveyJSLibraryBuildCore
-
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "16.x"
-        displayName: "Install Node.js"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/"
-          Contents: "package.json"
-          TargetFolder: "$(Build.SourcesDirectory)/Temp/"
-          OverWrite: true
-        displayName: "Copy package.json for cache key"
-      - task: Cache@2
-        inputs:
-          key: "npm-cache-creator-js | $(Build.SourcesDirectory)/Temp/package.json"
-          path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules
-          cacheHitVar: NPM_CACHE_RESTORED
-        displayName: Cache NPM
-
-      - task: DownloadBuildArtifacts@0
-        inputs:
-          buildType: "current"
-          downloadType: "single"
-          artifactName: "SurveyJSCreatorV2BuildCore-$(Build.BuildId)"
-          downloadPath: "$(System.ArtifactsDirectory)"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/packages/survey-core"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-core/build"
-          OverWrite: true
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildSurveyUI/packages/survey-js-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-library/packages/survey-js-ui/build"
-          OverWrite: true
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Build.SourcesDirectory)/survey-creator/"
-          Contents: "package.json"
-          TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
-          OverWrite: true
-        displayName: "Copy package.json for cache key (root)"
-
-      - task: Cache@2
-        inputs:
-          key: "npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json"
-          path: $(Build.SourcesDirectory)/survey-creator/node_modules
-          cacheHitVar: NPM_CACHE_RESTORED_ROOT
-        displayName: Cache NPM
-
-      - task: Npm@1
-        displayName: "Npm install root"
-        inputs:
-          command: install
-          verbose: false
-          workingDir: $(Build.SourcesDirectory)/survey-creator
-        condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator
-          npm run postinstall
-        displayName: "install chrome playwright"
-
-      # - script: |
-      #     cd $(Build.SourcesDirectory)/survey-library/build/survey-js-ui
-      #     sed -i 's/"survey-core": .*"/"survey-core": "latest"/g' package.json
-      #   displayName: "Change survey-core dependency version from release next ver to local dependency"
-
-      - task: Npm@1
-        displayName: "Npm install survey-creator-js"
-        inputs:
-          command: install
-          verbose: false
-          workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-        condition: ne(variables.NPM_CACHE_RESTORED, 'true')
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npx puppeteer browsers install chrome
-        displayName: "install chrome"
-
-      # update 'file' npm dependencies in case of cache
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules
-          rm -rf survey-core survey-js-ui @survey
-          mkdir -p @survey/creator
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "remove symlinks from node_modules"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/packages/survey-core"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core"
-          OverWrite: true
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "copy survey-core in case of npm cache"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildSurveyUI/packages/survey-js-ui"
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-js-ui"
-          OverWrite: true
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "copy survey-js-ui in case of npm cache"
-
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
-          Contents: "**"
-          TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-creator-core"
-          OverWrite: true
-        condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-        displayName: "copy survey-creator-core in case of npm cache"
-      # EO update 'file' npm dependencies in case of cache
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run remove-package-lock
-        displayName: "npm run remove-package-lock"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run build
-        displayName: "Build CreatorV2 JS"
-
-      #  - script: |
-      #      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-      #      npm run test
-      #    displayName: 'Unit test CreatorV2 JS'
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run e2e:ci
-        displayName: "Playwright Functional test CreatorV2 JS"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run test:a11y:ci
-        displayName: "A11Y Functional test CreatorV2 JS"
+  name: main-selfhosted
+
+stages:
+  - stage: Lint
+    dependsOn: []
+    jobs:
+      - job:
+        steps:
+          - checkout: self
+          - script: npm install --prefer-offline --no-audit --no-fund --no-update-notifier --no-package-lock --verbose
+            workingDirectory: $(Build.SourcesDirectory)
+            displayName: "npm install"
+          - script: npm run lint
+
+  - stage: Options
+    dependsOn: []
+    jobs:
+      - job: PRTitle
+        displayName: "Parse PR title"
+        steps:
+          - template: templates/utils/pr_title_parser.yml
+
+
+
+  - stage: Library
+    dependsOn:
+      - Options
+    variables:
+      PR: $[ stageDependencies.Options.PRTitle.outputs['data.LIBRARY'] ]
+    jobs:
+      - job: Download
+        continueOnError: true
+        variables:
+          LIBRARY_PIPELINE: $[ iif(eq(variables.PR, ''), variables.PipelineLibrary, variables.PipelineLibraryPR) ]
+        steps:
+          - checkout: none
+
+          - template: templates/utils/artifact.yml
+            parameters:
+              pr: $(PR)
+              pipeline: $(LIBRARY_PIPELINE)
+              artifacts:
+                - $(ArtifactNameLibraryCore)
+                - $(ArtifactNameLibraryReact)
+                - $(ArtifactNameLibraryAngular)
+                - $(ArtifactNameLibraryVue)
+                - $(ArtifactNameLibraryJS)
+
+          - bash: |
+              if [ -z "$(PR)" ]; then
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryCore)/packages/survey-core/. $(Build.SourcesDirectory)/survey-core/
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryReact)/packages/survey-react-ui/. $(Build.SourcesDirectory)/survey-react-ui/
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryAngular)/packages/survey-angular-ui/. $(Build.SourcesDirectory)/survey-angular-ui/
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryVue)/packages/survey-vue3-ui/. $(Build.SourcesDirectory)/survey-vue3-ui/
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryJS)/packages/survey-js-ui/. $(Build.SourcesDirectory)/survey-js-ui/
+              else
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryCore)/. $(Build.SourcesDirectory)/survey-core/
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryReact)/. $(Build.SourcesDirectory)/survey-react-ui/
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryAngular)/. $(Build.SourcesDirectory)/survey-angular-ui/
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryVue)/. $(Build.SourcesDirectory)/survey-vue3-ui/
+                cp -a $(Agent.TempDirectory)/$(ArtifactNameLibraryJS)/. $(Build.SourcesDirectory)/survey-js-ui/
+              fi
+            displayName: "Copy"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/survey-core'
+              ArtifactName: $(ArtifactNameLibraryCore)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/survey-react-ui'
+              ArtifactName: $(ArtifactNameLibraryReact)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/survey-angular-ui'
+              ArtifactName: $(ArtifactNameLibraryAngular)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/survey-vue3-ui'
+              ArtifactName: $(ArtifactNameLibraryVue)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/survey-js-ui'
+              ArtifactName: $(ArtifactNameLibraryJS)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+      - job: BuildCore
+        displayName: "Build Core"
+        dependsOn: Download
+        condition: in(dependencies.Download.result, 'Failed', 'SucceededWithIssues')
+        steps:
+          - checkout: Library
+
+          - script: git fetch origin pull/$(PR)/head && git checkout FETCH_HEAD
+            workingDirectory: $(Build.SourcesDirectory)
+            displayName: "Checkout PR $(PR)"
+            condition: ne(variables.PR, '')
+
+          - template: templates/utils/npm.yml
+            parameters:
+              directories:
+                - $(Build.SourcesDirectory)
+                - $(Build.SourcesDirectory)/packages/survey-core
+
+          - script: npm run build:all
+            workingDirectory: $(Build.SourcesDirectory)/packages/survey-core
+            displayName: "Build"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/packages/survey-core/build/'
+              ArtifactName: $(ArtifactNameLibraryCore)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+      - job: BuildReact
+        displayName: "Build React"
+        dependsOn: Download
+        condition: in(dependencies.Download.result, 'Failed', 'SucceededWithIssues')
+        steps:
+          - checkout: Library
+
+          - script: git fetch origin pull/$(PR)/head && git checkout FETCH_HEAD
+            workingDirectory: $(Build.SourcesDirectory)
+            displayName: "Checkout PR $(PR)"
+            condition: ne(variables.PR, '')
+
+          - template: templates/utils/npm.yml
+            parameters:
+              directories:
+                - $(Build.SourcesDirectory)
+                - $(Build.SourcesDirectory)/packages/survey-core
+                - $(Build.SourcesDirectory)/packages/survey-react-ui
+
+          - script: npm run build:all
+            workingDirectory: $(Build.SourcesDirectory)/packages/survey-core
+            displayName: "Build Core"
+
+          - script: npm run build
+            workingDirectory: $(Build.SourcesDirectory)/packages/survey-react-ui
+            displayName: "Build"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/packages/survey-react-ui/build/'
+              ArtifactName: $(ArtifactNameLibraryReact)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+      - job: BuildAngular
+        displayName: "Build Angular"
+        dependsOn: Download
+        condition: in(dependencies.Download.result, 'Failed', 'SucceededWithIssues')
+        steps:
+          - checkout: Library
+
+          - script: git fetch origin pull/$(PR)/head && git checkout FETCH_HEAD
+            workingDirectory: $(Build.SourcesDirectory)
+            displayName: "Checkout PR $(PR)"
+            condition: ne(variables.PR, '')
+
+          - template: templates/utils/npm.yml
+            parameters:
+              directories:
+                - $(Build.SourcesDirectory)
+                - $(Build.SourcesDirectory)/packages/survey-core
+                - $(Build.SourcesDirectory)/packages/survey-angular-ui
+
+          - script: npm run build:all
+            workingDirectory: $(Build.SourcesDirectory)/packages/survey-core
+            displayName: "Build Core"
+
+          - script: npm run build
+            workingDirectory: $(Build.SourcesDirectory)/packages/survey-angular-ui
+            displayName: "Build"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/packages/survey-angular-ui/build/'
+              ArtifactName: $(ArtifactNameLibraryAngular)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+      - job: BuildVue
+        displayName: "Build Vue"
+        dependsOn: Download
+        condition: in(dependencies.Download.result, 'Failed', 'SucceededWithIssues')
+        steps:
+          - checkout: Library
+
+          - script: git fetch origin pull/$(PR)/head && git checkout FETCH_HEAD
+            workingDirectory: $(Build.SourcesDirectory)
+            displayName: "Checkout PR $(PR)"
+            condition: ne(variables.PR, '')
+
+          - template: templates/utils/npm.yml
+            parameters:
+              directories:
+                - $(Build.SourcesDirectory)
+                - $(Build.SourcesDirectory)/packages/survey-core
+                - $(Build.SourcesDirectory)/packages/survey-vue3-ui
+
+          - script: npm run build:all
+            workingDirectory: $(Build.SourcesDirectory)/packages/survey-core
+            displayName: "Build Core"
+
+          - script: npm run build
+            workingDirectory: $(Build.SourcesDirectory)/packages/survey-vue3-ui
+            displayName: "Build"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/packages/survey-vue3-ui/build/'
+              ArtifactName: $(ArtifactNameLibraryVue)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+      - job: BuildSurveyUI
+        displayName: "Build JS UI"
+        dependsOn: Download
+        condition: in(dependencies.Download.result, 'Failed', 'SucceededWithIssues')
+        steps:
+          - checkout: Library
+
+          - script: git fetch origin pull/$(PR)/head && git checkout FETCH_HEAD
+            workingDirectory: $(Build.SourcesDirectory)
+            displayName: "Checkout PR $(PR)"
+            condition: ne(variables.PR, '')
+
+          - template: templates/utils/npm.yml
+            parameters:
+              directories:
+                - $(Build.SourcesDirectory)
+                - $(Build.SourcesDirectory)/packages/survey-core
+                - $(Build.SourcesDirectory)/packages/survey-js-ui
+
+          - script: npm run build:all
+            workingDirectory: $(Build.SourcesDirectory)/packages/survey-core
+            displayName: "Build Core"
+
+          - script: npm run build
+            workingDirectory: $(Build.SourcesDirectory)/packages/survey-js-ui
+            displayName: "Build"
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.SourcesDirectory)/packages/survey-js-ui/build/'
+              ArtifactName: $(ArtifactNameLibraryJS)
+              publishLocation: 'Container'
+              StoreAsTar: true
+
+
+
+
+
+  - stage: CreatorCore
+    displayName: "Creator Core"
+    dependsOn:
+      - Library
+    jobs:
+      - job:
+        displayName: "Build"
+        steps:
+          - template: templates/creator/core/build.yml
+            parameters:
+              store: true
+      - template: templates/creator/core/test.yml
+
+  - stage: CreatorReactBuild
+    displayName: "Creator React"
+    dependsOn:
+      - Library
+    jobs:
+      - job:
+        displayName: "Build"
+        steps:
+          - template: templates/creator/react/build.yml
+            parameters:
+              store: true
+      - template: templates/creator/react/test.yml
+
+  - stage: CreatorAngularBuild
+    displayName: "Creator Angular"
+    dependsOn:
+      - Library
+    jobs:
+      - job:
+        displayName: "Build"
+        steps:
+          - template: templates/creator/angular/build.yml
+            parameters:
+              store: true
+      - template: templates/creator/angular/test.yml
+
+  - stage: CreatorVueBuild
+    displayName: "Creator Vue"
+    dependsOn:
+      - Library
+    jobs:
+      - job:
+        displayName: "Build"
+        steps:
+          - template: templates/creator/vue/build.yml
+            parameters:
+              store: true
+      - template: templates/creator/vue/test.yml
+
+  - stage: CreatorJSBuild
+    displayName: "Creator JS (Preact ShadowDOM BoxSizing)"
+    dependsOn:
+      - Library
+    jobs:
+      - job:
+        displayName: "Build"
+        steps:
+          - template: templates/creator/js/build.yml
+            parameters:
+              store: true
+      - template: templates/creator/js/test.yml

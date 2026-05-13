@@ -139,9 +139,13 @@ The Answer Count validator ensures that respondents select a number of options w
 Alternatively, you can use the built-in **Minimum choices to select** and **Maximum choices to select** properties in the **Choices** category. The key differences are in behavior:
 
 - When the minimum condition is not met, the form field displays an error message as shown below. If you set the condition using the **Minimum choices to select**, you cannot customize the error message. The **Answer Count validator** allows you to do it.
-    <img src="images/eud-built-in-min-max-count-error.png" alt='Default message shown when the minimum number of options is not selected.' width="1544" height="934">
+
+<img src="images/eud-built-in-min-max-count-error.png" alt='Default message shown when the minimum number of options is not selected.' width="1544" height="934">
+
 - When the maximum condition is reached, the **Maximum choices to select** property disables further selection (see the illustration below). The **Answer Count validator**, on the other hand, allows selections to exceed the maximum number and displays an error only when the user leaves the field or moves forward in the form.
-    <img src="images/eud-built-in-max-count.png" alt='User selected the maximum number of choice options.' width="1544" height="934">
+
+<img src="images/eud-built-in-max-count.png" alt='User selected the maximum number of choice options.' width="1544" height="934">
+
 - The **Minimum/Maximum choices to select** properties always produce an error, which requires correction and prevents the user from submitting the form. With the **Answer Count validator**, you can configure the notification type as a warning or informational note.
 
 Choose the option that best fits your use case.

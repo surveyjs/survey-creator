@@ -404,6 +404,12 @@ export var enStrings = {
     calculatedvalue: {
       expression: "Expression"
     },
+    urlconditionitem: {
+      expression: "Expression"
+    },
+    htmlconditionitem: {
+      expression: "Expression"
+    },
     // survey templates
     survey: {
       title: "Survey title",
@@ -589,6 +595,7 @@ export var enStrings = {
     colCount: "Column count",
     choicesOrder: "Choice order",
     allowCustomChoices: "Allow custom choices",
+    createCustomChoiceText: "\"Create Custom Choice\" command text",
     visible: "Visible",
     isRequired: "Required",
     markRequired: "Mark as required",
@@ -833,6 +840,7 @@ export var enStrings = {
     valueFalse: "Value to store when \"False\" is selected",
     minErrorText: "\"Value is below minimum\" error message",
     maxErrorText: "\"Value exceeds maximum\" error message",
+    stepErrorText: "\"Value does not match step size\" error message",
     otherErrorText: "\"Empty comment\" error message",
     keyDuplicationError: "Error message for duplicate responses",
     minSelectedChoices: "Minimum choices to select",
@@ -1008,14 +1016,14 @@ export var enStrings = {
       questionDescription: "Description font",
       editorFont: "Font",
       backgroundOpacity: "Opacity", // Auto-generated string
-      "--sjs-font-family": "Survey font family",
-      "--sjs-general-backcolor-dim": "Background color",
-      "--sjs-primary-backcolor": "Accent background colors",
-      "--sjs-primary-forecolor": "Accent foreground colors",
-      "--sjs-special-red": "Error message colors",
-      "--sjs-shadow-small": "Shadow effects",
-      "--sjs-shadow-inner": "Shadow effects",
-      "--sjs-border-default": "Colors"
+      "--sjs2-typography-font-family-text": "Survey font family",
+      "--sjs2-color-bg-neutral-tertiary-dim": "Background color",
+      "--sjs2-color-project-brand-600": "Accent background colors",
+      "--sjs2-color-fg-brand-on-primary": "Accent foreground colors",
+      "--sjs2-color-bg-alert-primary": "Error message colors",
+      "--sjs2-border-effect-surface-default": "Shadow effects",
+      "--sjs2-border-effect-component-formbox-default": "Shadow effects",
+      "--sjs2-color-component-input-default-line": "Colors"
     },
     "header@header": {
       headerView: "View",
@@ -1756,7 +1764,7 @@ export var enStrings = {
       panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
       questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
       cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      "--sjs2-color-bg-neutral-tertiary-dim": "Sets the main background color of the survey."
     },
     header: {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
@@ -1872,7 +1880,7 @@ export var enStrings = {
     copyDisplayValue: "Copy display value", // Auto-generated string
     effectiveColSpan: "Column span",
     progressBarInheritWidthFrom: "Progress bar area width",
-    themeName: "Theme name",
+    themeName: "Theme name"
   },
   theme: {
     advancedMode: "Advanced mode",

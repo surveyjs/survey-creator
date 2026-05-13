@@ -89,13 +89,14 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const c = (window as any).creator;
       const root = c.rootElement.getRootNode();
-      const el = root.getElementById("survey-creator");
+      // eslint-disable-next-line surveyjs/eslint-plugin-i18n/allowed-in-shadow-dom
+      const el = document.getElementById("survey-creator");
       if (el) {
         el.style.position = "relative";
         (el.style as any).bottom = undefined;
         el.style.height = "15000px";
       }
-      const rootEl = root.getElementsByTagName("app-root")[0];
+      const rootEl = root.getElementsByTagName && root.getElementsByTagName("app-root")[0];
       if (rootEl) (rootEl as HTMLElement).style.position = "relative";
     });
 
@@ -226,9 +227,9 @@ test.describe(title, () => {
     const tabbedMenuItemSelector = page.locator(".svc-toolbox .svc-toolbox__tool:nth-of-type(18)").first();
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.waitForTimeout(150);
-    await expect(tabbedMenuItemSelector).not.toHaveClass(/sv-action--hidden/);
+    await expect(tabbedMenuItemSelector).not.toHaveClass(/svc-toolbox__tool--hidden/);
     await page.setViewportSize({ width: 970, height: 632 });
-    await expect(tabbedMenuItemSelector).toHaveClass(/sv-action--hidden/);
+    await expect(tabbedMenuItemSelector).toHaveClass(/svc-toolbox__tool--hidden/);
     await page.locator(".svc-toolbox__tool--dots").filter({ visible: true }).first().click();
 
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
@@ -346,7 +347,7 @@ test.describe(title, () => {
     await qCollapseButton.click();
 
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
 
     await doDrag({ page, element: toolboxToolAction, target: Panel, options: { steps: 25 } });
     await expect(Panel.locator(".svc-question__content--collapsed-drag-over-inside")).toBeVisible({ timeout: 15000 });
@@ -383,7 +384,7 @@ test.describe(title, () => {
     await qCollapseButton.click();
 
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
 
     await Panel.click({ position: { x: 1, y: 1 } });
     await doDrag({ page, element: toolboxToolAction, target: Panel,
@@ -417,7 +418,7 @@ test.describe(title, () => {
     await qCollapseButton.click();
 
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     await toolboxToolAction.hover();
     await page.mouse.down();
     await Panel.scrollIntoViewIfNeeded();
@@ -450,7 +451,7 @@ test.describe(title, () => {
     await pCollapseButton.click();
 
     const Page = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     const expectedJson = {
       pages: [{
         name: "page1",
@@ -1214,9 +1215,10 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const c = (window as any).creator;
       const root = c.rootElement.getRootNode();
-      const el = root.getElementById("survey-creator");
+      // eslint-disable-next-line surveyjs/eslint-plugin-i18n/allowed-in-shadow-dom
+      const el = document.getElementById("survey-creator");
       if (el) { el.style.position = "relative"; (el.style as any).bottom = undefined; el.style.height = "10000px"; }
-      const rootEl = root.getElementsByTagName("app-root")[0];
+      const rootEl = root.getElementsByTagName && root.getElementsByTagName("app-root")[0];
       if (rootEl) (rootEl as HTMLElement).style.position = "relative";
     });
 
@@ -1371,7 +1373,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     const rows = page.locator(".svc-row").filter({ visible: true });
 
     const adorner0 = rows.nth(0).locator(".svc-question__adorner").first();
@@ -1432,7 +1434,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     await expect(page.locator(".svc-question__adorner").first()).toBeVisible({ timeout: 15000 });
 
     const adorner = page.locator(".svc-question__adorner").first().filter({ visible: true }).first();
@@ -1441,7 +1443,7 @@ test.describe(title, () => {
     const questionRectRight = box.x + box.width;
     const questionRectBottom = box.y + box.height;
 
-    const creatorEl = page.locator("#survey-creator").filter({ visible: true }).first();
+    const creatorEl = page.locator("#survey-creator").first();
     const creatorBox = await creatorEl.boundingBox();
     if (!creatorBox) throw new Error("survey-creator boundingBox is null");
 
@@ -1521,7 +1523,7 @@ test.describe(title, () => {
     const pageRectBottom = page1Box.y + page1Box.height;
     const pageRectLeft = page1Box.x;
 
-    const creatorEl = page.locator("#survey-creator").filter({ visible: true }).first();
+    const creatorEl = page.locator("#survey-creator").first();
     const creatorBox = await creatorEl.boundingBox();
     if (!creatorBox) throw new Error("survey-creator boundingBox is null");
     await page.mouse.move(creatorBox.x + pageRectLeft + 50, creatorBox.y + pageRectBottom + 6, { steps: 20 });
@@ -1572,15 +1574,15 @@ test.describe(title, () => {
     await page2.hover({ position: { x: 150, y: 20 } });
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
     await page2DragHandle.dispatchEvent("pointerdown");
-    await page.locator(".svc-designer-header").filter({ visible: true }).first().hover();
+    await page.locator(".svc-designer-header").filter({ visible: true }).first().hover({ force: true });
     await page2DragHandle.dispatchEvent("pointerup");
     await page.waitForTimeout(500);
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
 
-    await page.locator(".svc-element__add-new-question").nth(2).filter({ visible: true }).scrollIntoViewIfNeeded();
-    await expect(page.locator(".svc-element__add-new-question").nth(3)).toHaveCount(0);
-    await page.locator(".svc-element__add-new-question").nth(2).filter({ visible: true }).click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(2).filter({ visible: true }).scrollIntoViewIfNeeded();
+    await expect(page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(3)).toHaveCount(0);
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(2).filter({ visible: true }).click();
     expect(await getJSON(page)).toEqual(expectedJson);
-    await expect(page.locator(".svc-element__add-new-question").nth(3)).toBeVisible({ timeout: 15000 });
+    await expect(page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(3)).toBeVisible({ timeout: 15000 });
   });
 });

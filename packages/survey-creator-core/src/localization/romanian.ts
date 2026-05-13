@@ -7,7 +7,7 @@ export const roStrings = {
     edit: "Editează",
     // "Watch and learn how to create surveys"
     externalHelpLink: "Vizionați și învățați cum să creați chestionare",
-    // "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
+    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
     externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     // "Please drop a question here from the Toolbox."
     dropQuestion: "Vă rugăm să lăsați o întrebare aici din cutia de instrumente.",
@@ -36,7 +36,7 @@ export const roStrings = {
     theme: "Teme",
     // "Translations"
     translation: "Traduceri",
-    // "Designer"
+    // [Auto-translated] "Designer"
     designer: "Designer",
     // "JSON Editor"
     json: "Editor JSON",
@@ -57,13 +57,13 @@ export const roStrings = {
     ranking: "Clasament",
     // "Image"
     image: "Imagine",
-    // "Dropdown"
-    dropdown: "Dropdown",
+    // [Auto-translated] "Dropdown"
+    dropdown: "Derulare",
     // "Multi-Select Dropdown"
     tagbox: "Dropdown Multi-Select",
     // "File Upload"
     file: "Încărcare fișier",
-    // "HTML"
+    // [Auto-translated] "HTML"
     html: "HTML",
     // "Single-Select Matrix"
     matrix: "Matrice cu selecție unică",
@@ -95,7 +95,7 @@ export const roStrings = {
     buttongroup: "Grup de butoane"
   },
   toolboxCategories: {
-    // "General"
+    // [Auto-translated] "General"
     general: "General",
     // "Choice Questions"
     choice: "Întrebări de alegere",
@@ -168,11 +168,11 @@ export const roStrings = {
     newQuestionName: "întrebare",
     // "panel"
     newPanelName: "panou",
-    // "text"
-    newTextItemName: "text",
+    // [Auto-translated] "text"
+    newTextItemName: "Text",
     // "Default"
     defaultV2Theme: "Implicit",
-    // "Modern"
+    // [Auto-translated] "Modern"
     modernTheme: "Modern",
     // "Default (legacy)"
     defaultTheme: "Implicit (legacy)",
@@ -240,10 +240,16 @@ export const roStrings = {
     generateValidJSON: "Generează JSON valid",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Funcție necunoscută: \"{0}\".",
+    // [Auto-translated] "Unknown functions: \"{0}\"."
+    expressionUnknownFunctions: "Funcții necunoscute: \"{0}\".",
     // [Auto-translated] "Unknown variable: \"{0}\"."
     expressionUnknownVariable: "Variabilă necunoscută: \"{0}\".",
+    // [Auto-translated] "Unknown variables: \"{0}\"."
+    expressionUnknownVariables: "Variabile necunoscute: \"{0}\".",
     // [Auto-translated] "Syntax error."
     expressionSyntaxError: "Eroare de sintaxă.",
+    // [Auto-translated] "Semantic error."
+    expressionSemanticsError: "Eroare semantică.",
     // "Generate Readable JSON"
     generateReadableJSON: "Generează JSON lizibil",
     // "Toolbox"
@@ -350,7 +356,7 @@ export const roStrings = {
     themeResetConfirmationOk: "Da, resetează tema",
     // "Bold"
     bold: "Îngroșat",
-    // "Italic"
+    // [Auto-translated] "Italic"
     italic: "Italic",
     // "Underline"
     underline: "Subliniat",
@@ -412,7 +418,7 @@ export const roStrings = {
     imageChooseImage: "Alegeți imaginea",
     // "Add {0}"
     addNewTypeQuestion: "Adăugați {0}", // {0} is localizable question type
-    // "[LOGO]"
+    // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
     // "Item "
     choices_Item: "Element ",
@@ -759,6 +765,14 @@ export const roStrings = {
       // "Expression"
       expression: "Expresie"
     },
+    urlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Exprimare"
+    },
+    htmlconditionitem: {
+      // [Auto-translated] "Expression"
+      expression: "Exprimare"
+    },
     // survey templates
     survey: {
       // "Survey title"
@@ -876,7 +890,7 @@ export const roStrings = {
     inherit: "Moștenit",
     // "Apply"
     apply: "Aplică",
-    // "OK"
+    // [Auto-translated] "OK"
     ok: "OK",
     // "Save"
     save: "Salvează",
@@ -1030,7 +1044,7 @@ export const roStrings = {
     expressionIsEmpty: "Expresia este goală",
     // "Value"
     value: "Valoare",
-    // "Text"
+    // [Auto-translated] "Text"
     text: "Text",
     // "Row ID"
     rowid: "ID rând",
@@ -1040,7 +1054,7 @@ export const roStrings = {
     columnEdit: "Editează coloana: {0}",
     // "Edit item: {0}"
     itemEdit: "Editează elementul: {0}",
-    // "URL"
+    // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
     path: "Calea către date",
@@ -1106,6 +1120,8 @@ export const roStrings = {
     choicesOrder: "Ordinea alegerilor",
     // [Auto-translated] "Allow custom choices"
     allowCustomChoices: "Permiteți opțiuni personalizate",
+    // [Auto-translated] "\"Create Custom Choice\" command text"
+    createCustomChoiceText: "Textul comenzii \"Creează alegere personalizată\"",
     // "Visible"
     visible: "Vizibil",
     // "Required"
@@ -1576,6 +1592,8 @@ export const roStrings = {
     minErrorText: "Mesaj de eroare pentru „Valoarea este sub minim”",
     // "\"Value exceeds maximum\" error message"
     maxErrorText: "Mesaj de eroare pentru „Valoarea depășește maximul”",
+    // [Auto-translated] "\"Value does not match step size\" error message"
+    stepErrorText: "Mesajul de eroare \"Valoarea nu se potrivește cu dimensiunea pasului\"",
     // "\"Empty comment\" error message"
     otherErrorText: "Mesaj de eroare pentru „Comentariu gol”",
     // "Error message for duplicate responses"
@@ -1680,7 +1698,7 @@ export const roStrings = {
         // "Panel Layout"
         layout: "Aspect panou"
       },
-      // "General"
+      // [Auto-translated] "General"
       general: "General",
       // "Options"
       fileOptions: "Opțiuni",
@@ -1752,7 +1770,7 @@ export const roStrings = {
       showOnCompleted: "Pagina de „Mulțumire”",
       // "Logo in the Survey Header"
       logo: "Logo-ul în antetul chestionarului",
-      // "Slider"
+      // [Auto-translated] "Slider"
       slider: "Slider",
       // "Expression"
       expression: "Expresie",
@@ -1861,18 +1879,18 @@ export const roStrings = {
     url_placeholder: "Ex.: https://api.example.com/cărți",
     // "Ex.: categories.fiction"
     path_placeholder: "Ex.: categorii.ficțiune",
-    // "Ex.: a)"
+    // [Auto-translated] "Ex.: a)"
     questionStartIndex_placeholder: "Ex.: a)",
-    // "Ex.: 6in"
+    // [Auto-translated] "Ex.: 6in"
     width_placeholder: "Ex.: 6in",
-    // "Ex.: 600px"
+    // [Auto-translated] "Ex.: 600px"
     minWidth_placeholder: "Ex.: 600px",
-    // "Ex.: 50%"
+    // [Auto-translated] "Ex.: 50%"
     maxWidth_placeholder: "Ex.: 50%",
-    // "auto"
-    imageHeight_placeholder: "auto",
-    // "auto"
-    imageWidth_placeholder: "auto",
+    // [Auto-translated] "auto"
+    imageHeight_placeholder: "Auto",
+    // [Auto-translated] "auto"
+    imageWidth_placeholder: "Auto",
     // [Auto-translated] "Ex.: 100px"
     itemTitleWidth_placeholder: "Ex.: 100px",
     theme: {
@@ -1906,7 +1924,7 @@ export const roStrings = {
       questionTitle: "Font titlu",
       // "Description font"
       questionDescription: "Font descriere",
-      // "Font"
+      // [Auto-translated] "Font"
       editorFont: "Font",
       // "Opacity"
       backgroundOpacity: "Opacitate", // Auto-generated string
@@ -2024,7 +2042,7 @@ export const roStrings = {
     progressTopBottom: "Navigator panou + bară de progres în partea de sus și de jos",
     // "Horizontal"
     horizontal: "Orizontal",
-    // "Vertical"
+    // [Auto-translated] "Vertical"
     vertical: "Vertical",
     // "Top"
     top: "Deasupra",
@@ -2052,8 +2070,8 @@ export const roStrings = {
     datetime: "data și ora",
     // "datetime-local"
     "datetime-local": "data și ora locală",
-    // "email"
-    email: "email",
+    // [Auto-translated] "email"
+    email: "Email",
     // "month"
     month: "lună",
     // "number"
@@ -2064,8 +2082,8 @@ export const roStrings = {
     range: "interval",
     // "tel"
     tel: "număr de telefon",
-    // "text"
-    text: "text",
+    // [Auto-translated] "text"
+    text: "Text",
     // "time"
     time: "ora",
     // "url"
@@ -2111,7 +2129,7 @@ export const roStrings = {
       date: "Dată",
       // "Date and Time"
       "datetime-local": "Dată și oră",
-      // "Email"
+      // [Auto-translated] "Email"
       email: "Email",
       // "Month"
       month: "Lună",
@@ -2123,11 +2141,11 @@ export const roStrings = {
       range: "Interval",
       // "Phone Number"
       tel: "Număr de telefon",
-      // "Text"
+      // [Auto-translated] "Text"
       text: "Text",
       // "Time"
       time: "Ora",
-      // "URL"
+      // [Auto-translated] "URL"
       url: "URL",
       // "Week"
       week: "Săptămână"
@@ -2350,7 +2368,7 @@ export const roStrings = {
     underRow: "Sub rând",
     // "Under the row, display one section only"
     underRowSingle: "Sub rând, afișați doar o singură extindere de rând",
-    // "Auto"
+    // [Auto-translated] "Auto"
     auto: "Auto",
     timerInfoMode: {
       // "Both"
@@ -2371,24 +2389,24 @@ export const roStrings = {
       firstExpanded: "Primul extins"
     },
     widthMode: {
-      // "Static"
+      // [Auto-translated] "Static"
       static: "Static",
-      // "Responsive"
+      // [Auto-translated] "Responsive"
       responsive: "Responsive"
     },
     contentMode: {
       // "Image"
       image: "Imagine",
-      // "Video"
+      // [Auto-translated] "Video"
       video: "Video",
-      // "YouTube"
+      // [Auto-translated] "YouTube"
       youtube: "YouTube"
     },
     displayMode: {
       // "Buttons"
       buttons: "Butoane",
-      // "Dropdown"
-      dropdown: "Dropdown"
+      // [Auto-translated] "Dropdown"
+      dropdown: "Derulare"
     },
     rateColorMode: {
       // "Default"
@@ -2405,7 +2423,7 @@ export const roStrings = {
     autoGenerate: {
       // "Auto-generate"
       "true": "Auto-generat",
-      // "Manual"
+      // [Auto-translated] "Manual"
       "false": "Manual"
     },
     rateType: {
@@ -2471,11 +2489,11 @@ export const roStrings = {
       date: "Dată"
     },
     rowOrder: {
-      // "Original"
+      // [Auto-translated] "Original"
       initial: "Original"
     },
     questionOrder: {
-      // "Original"
+      // [Auto-translated] "Original"
       initial: "Original"
     },
     progressBarLocation: {
@@ -2496,9 +2514,9 @@ export const roStrings = {
     sum: "Sumă",
     // "Count"
     count: "Numără",
-    // "Min"
+    // [Auto-translated] "Min"
     min: "Min",
-    // "Max"
+    // [Auto-translated] "Max"
     max: "Max",
     // "Avg"
     avg: "Medie",
@@ -2509,7 +2527,7 @@ export const roStrings = {
       startsWith: "Începe cu"
     },
     backgroundImageFit: {
-      // "Auto"
+      // [Auto-translated] "Auto"
       auto: "Auto",
       // "Cover"
       cover: "Acoperă",
@@ -2636,9 +2654,9 @@ export const roStrings = {
     loadFromServer: "Încărcați JSON-ul chestionarului de pe server",
     // "Scripts and styles"
     titleScript: "Scripturi și stiluri",
-    // "HTML"
+    // [Auto-translated] "HTML"
     titleHtml: "HTML",
-    // "JavaScript"
+    // [Auto-translated] "JavaScript"
     titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
@@ -2657,7 +2675,7 @@ export const roStrings = {
   validators: {
     // "Answer count"
     answercountvalidator: "Număr de răspunsuri",
-    // "Email"
+    // [Auto-translated] "Email"
     emailvalidator: "Email",
     // "Expression"
     expressionvalidator: "Expresie",
@@ -2665,7 +2683,7 @@ export const roStrings = {
     numericvalidator: "Număr",
     // "Regex"
     regexvalidator: "Expresie regulată",
-    // "Text"
+    // [Auto-translated] "Text"
     textvalidator: "Text"
   },
   triggers: {
@@ -2684,27 +2702,27 @@ export const roStrings = {
   },
   peplaceholder: {
     patternmask: {
-      // "Ex.: +1(999)-999-99-99"
+      // [Auto-translated] "Ex.: +1(999)-999-99-99"
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
-      // "Ex.: mm/dd/yyyy HH:MM:ss"
+      // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
     },
     currencymask: {
-      // "Ex.: $"
+      // [Auto-translated] "Ex.: $"
       prefix: "Ex.: $",
-      // "Ex.: USD"
+      // [Auto-translated] "Ex.: USD"
       suffix: "Ex.: USD"
     },
     panelbase: {
-      // "Ex.: 200px"
+      // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Ex.: 200px"
     },
     panellayoutcolumn: {
-      // "Ex.: 30%"
+      // [Auto-translated] "Ex.: 30%"
       effectiveWidth: "Ex.: 30%",
-      // "Ex.: 200px"
+      // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Ex.: 200px"
     }
   },
@@ -3254,8 +3272,8 @@ export const roStrings = {
   // Properties
   p: {
     title: {
-      // "title"
-      name: "title",
+      // [Auto-translated] "title"
+      name: "Titlu",
       // "Leave it empty, if it is the same as 'Name'"
       title: "Lăsați gol, dacă este la fel ca 'Nume'"
     },
@@ -3357,9 +3375,9 @@ export const roStrings = {
     inputFieldComponent: "Componenta câmpului de intrare", // Auto-generated string
     // "Item component"
     itemComponent: "Componentă element", // Auto-generated string
-    // "Min"
+    // [Auto-translated] "Min"
     min: "Min", // Auto-generated string
-    // "Max"
+    // [Auto-translated] "Max"
     max: "Max", // Auto-generated string
     // "Min value expression"
     minValueExpression: "Expresia valorii minime", // Auto-generated string
@@ -3413,7 +3431,7 @@ export const roStrings = {
     backgroundColor: "Culoarea fundalului",
     // "Template elements"
     templateElements: "Elemente template", // Auto-generated string
-    // "Operator"
+    // [Auto-translated] "Operator"
     operator: "Operator", // Auto-generated string
     // "Is variable"
     isVariable: "Este variabil", // Auto-generated string
@@ -3473,8 +3491,8 @@ export const roStrings = {
     lines: "Linii",
     // "Default"
     primaryDefaultColor: "Implicit",
-    // "Hover"
-    primaryDarkColor: "Hover",
+    // [Auto-translated] "Hover"
+    primaryDarkColor: "Plutește",
     // "Selected"
     primaryLightColor: "Selectat",
     // "Background color"
@@ -3495,7 +3513,7 @@ export const roStrings = {
     primaryForecolor: "Culoare implicită",
     // "Disabled color"
     primaryForecolorLight: "Culoare dezactivată",
-    // "Font"
+    // [Auto-translated] "Font"
     font: "Font",
     // "Darker"
     borderDefault: "Mai întunecat",
@@ -3503,14 +3521,14 @@ export const roStrings = {
     borderLight: "Mai deschis",
     // "Font family"
     fontFamily: "Familia de fonturi",
-    // "Regular"
-    fontWeightRegular: "Regular",
-    // "Heavy"
-    fontWeightHeavy: "Heavy",
-    // "Semi-bold"
-    fontWeightSemiBold: "Semi-bold",
-    // "Bold"
-    fontWeightBold: "Bold",
+    // [Auto-translated] "Regular"
+    fontWeightRegular: "Regulat",
+    // [Auto-translated] "Heavy"
+    fontWeightHeavy: "Greu",
+    // [Auto-translated] "Semi-bold"
+    fontWeightSemiBold: "Semi-îndrăzneț",
+    // [Auto-translated] "Bold"
+    fontWeightBold: "Îndrăzneț",
     // "Color"
     color: "Culoare",
     // "Placeholder color"
@@ -3519,44 +3537,44 @@ export const roStrings = {
     size: "Dimensiune",
     // "Opacity"
     opacity: "Opacitate",
-    // "X"
+    // [Auto-translated] "X"
     boxShadowX: "X",
-    // "Y"
+    // [Auto-translated] "Y"
     boxShadowY: "Y",
     // "Add Shadow Effect"
     boxShadowAddRule: "Adăugați efect de umbră",
-    // "Blur"
+    // [Auto-translated] "Blur"
     boxShadowBlur: "Blur",
     // "Spread"
     boxShadowSpread: "Întindere",
-    // "Drop"
+    // [Auto-translated] "Drop"
     boxShadowDrop: "Drop",
     // "Inner"
     boxShadowInner: "Interior",
     names: {
       // "Default"
       default: "Implicit",
-      // "Sharp"
+      // [Auto-translated] "Sharp"
       sharp: "Sharp",
       // "Borderless"
       borderless: "Fără bordură",
-      // "Flat"
-      flat: "Flat",
+      // [Auto-translated] "Flat"
+      flat: "Plat",
       // "Plain"
       plain: "Simplu",
       // "Double Border"
       doubleborder: "Bordură dublă",
       // "Layered"
       layered: "Stratificat",
-      // "Solid"
+      // [Auto-translated] "Solid"
       solid: "Solid",
-      // "3D"
+      // [Auto-translated] "3D"
       threedimensional: "3D",
-      // "Contrast"
+      // [Auto-translated] "Contrast"
       contrast: "Contrast"
     },
     colors: {
-      // "Teal"
+      // [Auto-translated] "Teal"
       teal: "Teal",
       // "Blue"
       blue: "Albastru",
@@ -3606,7 +3624,9 @@ export const roStrings = {
       advanced: "Avansat",
       // [Auto-translated] "Expert"
       expert: "Expert"
-    }
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Presetare aplicată"
   }
 };
 

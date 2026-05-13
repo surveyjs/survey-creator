@@ -1,4 +1,4 @@
-import { listComponentCss } from "../components/list-theme";
+import { defaultCss } from "survey-core";
 
 export var propertyGridCss = {
   root: "spg-root-modern",
@@ -48,8 +48,8 @@ export var propertyGridCss = {
     root: "spg-paneldynamic",
     navigation: "spg-paneldynamic__navigation",
     title: "spg-title spg-question__title",
-    button: "spg-action-button spg-action-button--text",
-    buttonRemove: "spg-action-button--danger",
+    button: "",
+    buttonRemove: "",
     buttonAdd: "spg-paneldynamic__add-btn",
     panelsContainer: "",
     panelWrapper: "spg-paneldynamic__panel-wrapper",
@@ -91,12 +91,12 @@ export var propertyGridCss = {
     flowRoot: "spg-question spg-row__question spg-row__question--flow",
     asCell: "spg-table__cell",
     header: "spg-question__header",
-    headerLeft: "spg-question__header--location--left",
+    headerLeft: "spg-question__header--location--left sd-formbox__label",
     headerTop: "spg-question__header--location--top",
     headerBottom: "spg-question__header--location--bottom",
     content: "spg-question__content",
     contentLeft: "spg-question__content--left",
-    titleLeftRoot: "spg-question--location--left",
+    titleLeftRoot: "spg-question--location--left sd-formbox",
     titleOnAnswer: "spg-question__title--answer",
     titleOnError: "spg-question__title--error",
     title: "spg-title spg-question__title",
@@ -125,66 +125,23 @@ export var propertyGridCss = {
     locationBottom: "spg-question__erbox--location--bottom"
   },
   checkbox: {
-    root: "spg-selectbase",
-    item: "spg-item spg-checkbox spg-selectbase__item",
-    itemSelectAll: "spg-checkbox--selectall",
-    itemNone: "spg-checkbox--none",
-    itemReadOnly: "spg-item--disabled spg-checkbox--disabled",
-    itemChecked: "spg-checkbox--checked",
-    itemHover: "spg-checkbox--allowhover",
-    itemInline: "spg-selectbase__item--inline",
-    label: "spg-selectbase__label",
-    // label: "spg-checkbox",
-    itemSvgIconId: "#icon-v2check",
-    labelChecked: "",
-    //itemControl: "spg-visuallyhidden spg-item__control",
-    itemControl: "spg-checkbox__control",
-    itemDecorator: "spg-checkbox__svg",
-    //itemDecorator: "spg-checkbox__hidden",
-    //controlLabel: "spg-item__control-label",
-    controlLabel: "spg-checkbox__caption",
-    materialDecorator: "spg-checkbox__rectangle",
-    //materialDecorator: "spg-item__decorator spg-checkbox__decorator",
-    other: "spg-comment spg-question__other",
-    column: "spg-selectbase__column"
+    ...defaultCss.checkbox,
   },
   radiogroup: {
-    root: "spg-selectbase",
-    item: "spg-item spg-radio spg-selectbase__item",
-    itemInline: "spg-selectbase__item--inline",
-    label: "spg-selectbase__label",
-    labelChecked: "",
-    itemReadOnly: "spg-item--disabled spg-radio--disabled",
-    itemChecked: "spg-radio--checked",
-    itemHover: "spg-radio--allowhover",
-    itemControl: "spg-visuallyhidden spg-item__control",
-    itemDecorator: "spg-item__svg spg-radio__svg",
-    controlLabel: "spg-item__control-label",
-    materialDecorator: "spg-item__decorator spg-radio__decorator",
-    other: "spg-comment spg-question__other",
-    clearButton: "spg-btn spg-selectbase__clear-btn",
-    column: "spg-selectbase__column"
+    ...defaultCss.radiogroup,
   },
+
   boolean: {
+    ...defaultCss.boolean,
+
     mainRoot: "spg-question spg-row__question spg-question--boolean",
     rootCheckbox: "spg-selectbase",
     checkboxItem: "spg-checkbox",
-    checkboxItemChecked: "spg-checkbox--checked",
-    checkboxitemIndeterminate: "spg-checkbox--indeterminate",
-    checkboxItemReadOnly: "spg-checkbox--disabled",
-    svgIconId: "#icon-v2check",
-    checkboxLabel: "spg-selectbase__label",
-    controlCheckbox: "spg-checkbox__control",
-    checkboxControlLabel: "spg-checkbox__caption",
-    checkboxItemDecorator: "spg-checkbox__svg",
-    checkboxMaterialDecorator: "spg-checkbox__rectangle"
   },
+
   text: {
-    root: "spg-input spg-text",
-    small: "spg-row__question--small",
+    ...defaultCss.text,
     content: "spg-question__content spg-text__content",
-    remainingCharacterCounter: "spg-remaining-character-counter",
-    onError: "spg-input--error"
   },
   multipletext: {
     root: "spg-multipletext",
@@ -194,51 +151,12 @@ export var propertyGridCss = {
     row: "spg-multipletext__row",
     cell: "spg-multipletext__cell"
   },
-  dropdown: {
-    root: "spg-selectbase",
-    popup: "spg-dropdown-popup svc-creator-popup",
-    small: "spg-row__question--small sd-row__question--small",
-    control: "spg-input spg-dropdown sd-input sd-dropdown",
-    controlEmpty: "spg-dropdown--empty sd-dropdown--empty",
-    controlValue: "spg-dropdown__value",
-    filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
-    other: "spg-comment spg-question__other",
-    onError: "spg-input--error",
-    selectWrapper: "sv-dropdown_select-wrapper spg-dropdown_select-wrapper",
-    chevronButtonIconId: "icon-chevron",
-    cleanButton: "spg-dropdown__clean-button spg-input__edit-button",
-    controlReadOnly: "sd-input--disabled sd-input--readonly"
-  },
-  tagbox: {
-    cleanItemButton: "sd-tagbox-item_clean-button spg-tagbox-item_clean-button",
-    cleanItemButtonSvg: "sd-tagbox-item_clean-button-svg spg-tagbox-item_clean-button-svg",
-    control: "sd-input sd-tagbox sd-dropdown spg-tagbox spg-dropdown",
-    controlValue: "sd-tagbox__value sd-dropdown__value spg-tagbox__value",
-  },
+  dropdown: { ...defaultCss.dropdown, popup: "spg-dropdown-popup svc-creator-popup", },
+  tagbox: { ...defaultCss.tagbox },
   buttongroup: {
-    root: "sd-button-group-scrollable-container spg-button-group",
-    item: "spg-button-group__item",
-    itemIcon: "spg-button-group__item-icon",
-    itemDecorator: "spg-button-group__item-decorator",
-    itemCaption: "spg-button-group__item-caption",
-    itemHover: "spg-button-group__item--hover",
-    itemSelected: "spg-button-group__item--selected",
-    itemDisabled: "spg-button-group__item--disabled",
-    itemControl: "sv-visuallyhidden",
-    readOnly: "spg-question--disabled",
-
-    rootDropdown: "sd-button-group-scrollable-container sd-scrollable-container--compact sd-selectbase",
-    selectWrapper: "sv-dropdown_select-wrapper spg-dropdown_select-wrapper",
-    control: "spg-input spg-dropdown sd-input sd-dropdown",
-    controlEmpty: "spg-dropdown--empty sd-dropdown--empty",
-    controlValue: "spg-dropdown__value",
-    controlDisabled: "spg-input--disabled sd-input--disabled",
-    controlReadOnly: "spg-input--readonly sd-input--readonly",
-    controlPreview: "spg-input--preview sd-input--preview",
-    filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
-    chevronButton: "sd-dropdown_chevron-button spg-dropdown_chevron-button",
-    chevronButtonSvg: "sd-dropdown_chevron-button-svg spg-dropdown_chevron-button-svg",
-    chevronButtonIconId: "icon-chevron",
+    ...defaultCss.buttongroup,
+    itemReadOnly: "sv-button-group__item--disabled",
+    controlReadOnly: "sd-formbox--disabled",
     popup: "spg-dropdown-popup svc-creator-popup",
   },
   imagepicker: {
@@ -292,13 +210,13 @@ export var propertyGridCss = {
     headerCell: "spg-table__cell spg-table__cell--header",
     button: "spg-btn",
     detailRow: "spg-table__row spg-table__row--detail",
-    detailButton: "spg-table__cell--detail-button",
-    detailButtonExpanded: "spg-table__cell--detail-button--expanded",
+    detailButton: "",
+    detailButtonExpanded: "",
     detailIcon: "spg-detail-panel__icon",
     detailIconExpanded: "spg-detail-panel__icon--expanded",
     detailPanelCell: "spg-table__cell spg-table__cell--detail-panel",
     actionsCell: "spg-table__cell spg-table__cell--actions",
-    buttonAdd: "spg-matrixdynamic__add-btn spg-action-button spg-action-button--large",
+    buttonAdd: "spg-matrixdynamic__add-btn",
     buttonRemove: "spg-matrixdynamic__remove-btn",
     iconAdd: "",
     iconRemove: "",
@@ -326,11 +244,8 @@ export var propertyGridCss = {
     readOnly: "spg-rating--disabled"
   },
   comment: {
-    root: "spg-input spg-comment",
-    content: "spg-question__content spg-comment__content",
-    remainingCharacterCounter: "spg-remaining-character-counter",
-    small: "spg-row__question--small",
-    onError: "spg-input--error"
+    ...defaultCss.comment,
+    content: "spg-question__content",
   },
   expression: "",
   file: {
@@ -397,56 +312,36 @@ export var propertyGridCss = {
       buttonCollapsed: ""
     }
   },
-  list: JSON.parse(JSON.stringify(listComponentCss)),
   actionBar: {
-    root: "spg-action-bar",
-    item: "spg-action-button",
-    itemPressed: "spg-action-button--pressed",
-    itemAsIcon: "spg-action-button--icon",
-    itemIcon: "spg-action-button__icon",
-    itemTitle: "spg-action-button__title",
+    root: "sd-action-bar spg-action-bar",
   },
   spinedit: {
-    root: "spg-input spg-spin-editor spg-input-container",
-    control: "spg-spin-editor__input spg-input-container__input",
-    buttonsContainer: "spg-input-container__buttons-container",
-    arrowButton: "spg-input__edit-button",
+    root: "sd-formbox spg-spin-editor",
+    control: "sd-formbox__input",
     increaseButtonIcon: "icon-arrow-up",
-    decreaseButtonIcon: "icon-arrow-down"
+    decreaseButtonIcon: "icon-arrow-down",
+    group: "sd-formbox__group"
   },
   color: {
-    root: "spg-input spg-color-editor spg-input-container",
+    root: "sd-formbox spg-color-editor",
+    control: "sd-formbox__input",
     swatch: "spg-color-editor__color-swatch",
     swatchDefault: "spg-color-editor__color-swatch--default",
     swatchDisabled: "spg-color-editor__color-swatch--disabled",
     colorInput: "spg-color-editor__color-input",
-    control: "spg-color-editor__input spg-input-container__input",
-    colorDropdown: "spg-input__edit-button",
     colorDropdownIcon: "icon-drop-down-arrow",
     swatchIcon: "icon-color-picker",
-    choicesButtonWrapper: "spg-color-editor__button-wrapper"
-  },
-  textwithreset: {
-    root: "spg-input spg-input-container",
-    rootMultiline: "spg-input-container--multiline",
-    control: "spg-input-container__input",
-    controlMultiline: "spg-input-container__input spg-comment",
-    resetButton: "spg-input__edit-button",
-    resetButtonIcon: "icon-reset",
-    content: "spg-question__content spg-text__content",
-    remainingCharacterCounter: "spg-remaining-character-counter",
-    onError: "spg-input--error"
+    group: "sd-formbox__group"
   },
   fileedit: {
-    root: "spg-input spg-input-container spg-file-edit",
-    control: "spg-input-container__input",
-    buttonsContainer: "spg-input-container__buttons-container",
+    root: "sd-formbox spg-file-edit",
+    control: "sd-formbox__input",
     chooseButtonIcon: "icon-choosefile",
     clearButtonIcon: "icon-cancel-24x24",
     fileInput: "sd-visuallyhidden",
-    clearButton: "spg-input__edit-button",
-    chooseButton: "spg-input__edit-button spg-file-edit__choose-button",
-    chooseButtonDisabled: "spg-input__edit-button--disabled"
+    chooseButton: "spg-file-edit__choose-button",
+    chooseButtonDisabled: "sd-action--disabled",
+    group: "sd-formbox__group"
   },
   linkvalue: {
     content: "spg-link"

@@ -1,13 +1,14 @@
-import { StringEditorConnector, StringItemsNavigatorBase, StringEditorViewModelBase } from "../src/components/string-editor";
+﻿import { StringEditorConnector, StringItemsNavigatorBase, StringEditorViewModelBase } from "../src/components/string-editor";
 import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings, QuestionRatingModel, QuestionMultipleTextModel, QuestionMatrixModel, QuestionCheckboxModel, QuestionTextModel, QuestionMatrixDynamicModel, QuestionImagePickerModel } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { vi } from "vitest";
 
-jest.mock("survey-core", () => ({
-  ...jest["requireActual"]("survey-core"),
-  sanitizeEditableContent: jest.fn(),
+vi.mock("survey-core", async () => ({
+  ...await vi.importActual("survey-core"),
+  sanitizeEditableContent: vi.fn(),
 }));
 test("Test css", (): any => {
   const creator = new CreatorTester();
@@ -380,7 +381,7 @@ test("Sanitizing in compostion input", (): any => {
   stringEditorSurveyTitle.onInput({ target: null });
   stringEditorSurveyTitle.onInput({ target: null });
   stringEditorSurveyTitle.onInput({ target: null });
-  expect(sanitizeEditableContent).toBeCalledTimes(0); // no sanitizer calls according new new approach
+  expect(sanitizeEditableContent).toHaveBeenCalledTimes(0); // no sanitizer calls according new new approach
 
   stringEditorSurveyTitle.onCompositionStart({ target: null });
   stringEditorSurveyTitle.onInput({ target: null });
@@ -388,7 +389,7 @@ test("Sanitizing in compostion input", (): any => {
   stringEditorSurveyTitle.onInput({ target: null });
   stringEditorSurveyTitle.onInput({ target: null });
   stringEditorSurveyTitle.onCompositionEnd({ target: null });
-  expect(sanitizeEditableContent).toBeCalledTimes(0); // no sanitizer calls according new new approach
+  expect(sanitizeEditableContent).toHaveBeenCalledTimes(0); // no sanitizer calls according new new approach
 });
 
 test("Maxlen check", (): any => {
@@ -412,7 +413,7 @@ test("Maxlen and required", (): any => {
   const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
   expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
-  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+  var target = { innerText: "t", focus: () => { }, parentElement: { click: () => { } } };
   stringEditorSurveyTitle.onFocus({ target: target });
   target.innerText = "title";
   stringEditorSurveyTitle.onInput({ target: target });
@@ -438,7 +439,7 @@ test("Maxlen and EOL", (): any => {
   const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
   expect(stringEditorSurveyTitle.characterCounter.remainingCharacterCounter).toBe(undefined);
-  var target = { innerText: "t", focus: ()=>{}, parentElement: { click: ()=>{} } };
+  var target = { innerText: "t", focus: () => { }, parentElement: { click: () => { } } };
 
   stringEditorSurveyTitle.onFocus({ target: target });
   target.innerText = "\n";
@@ -719,6 +720,33 @@ test("StringEditorConnector for matrixdropdown questions (columns)", (): any => 
 
     connectorItem3.onBackspaceEmptyString.fire(null, {});
     expect(question.columns.map(c => c.value)).toEqual([]);
+  }
+});
+
+test("StringEditorConnector for matrixdropdown - auto generate title on adding column", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrixdropdown", name: "q1", columns: [{ name: "col1", title: "Column 1" }, { name: "col2", title: "Column 2" }], rows: ["Row 1"] },
+      { type: "matrixdynamic", name: "q2", columns: [{ name: "col1", title: "Column 1" }, { name: "col2", title: "Column 2" }] }
+    ]
+  };
+  const allQuestions = creator.survey.getAllQuestions();
+
+  for (var i = 0; i < allQuestions.length; i++) {
+    const question = allQuestions[i] as any;
+    creator.selectElement(question);
+
+    const questionAdorner = new QuestionAdornerViewModel(
+      creator,
+      question,
+      <any>undefined
+    );
+    var connectorItem2 = StringEditorConnector.get(question.columns[1].locTitle);
+    connectorItem2.onEditComplete.fire(null, {});
+    expect(question.columns).toHaveLength(3);
+    expect(question.columns[2].name).toEqual("col3");
+    expect(question.columns[2].title).toEqual("Column 3");
   }
 });
 
@@ -1123,3 +1151,115 @@ test("StringEditor multiline paste for selectbase questions should respect creat
   expect(question.choices.map(c => c.text)).toEqual(["a", "b", "c", "item2"]);
   expect(question.choices.map(c => c.value)).toEqual(["item3", "item4", "item5", "item2"]);
 });
+
+test("onCollectionItemDeleting should fire when removing matrix columns via design surface", (): any => {
+  const creator = new CreatorTester();
+  let deletingLog: string[] = [];
+  creator.onCollectionItemDeleting.add((sender, options) => {
+    deletingLog.push(options.propertyName + ":" + options.item.value);
+    if (options.collection.length === 1) {
+      options.allow = false;
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionMatrixModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const connectorCol1 = StringEditorConnector.get(question.columns[0].locText);
+  const connectorCol2 = StringEditorConnector.get(question.columns[1].locText);
+
+  // Remove column 2 via backspace - should fire onCollectionItemDeleting
+  connectorCol2.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("columns:Column 2");
+  expect(question.columns.map(c => c.value)).toEqual(["Column 1"]);
+
+  // Try removing the last column - should be prevented by the callback
+  deletingLog = [];
+  connectorCol1.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("columns:Column 1");
+  expect(question.columns.map(c => c.value)).toEqual(["Column 1"]);
+});
+
+test("onCollectionItemDeleting should fire when removing matrix rows via design surface", (): any => {
+  const creator = new CreatorTester();
+  let deletingLog: string[] = [];
+  creator.onCollectionItemDeleting.add((sender, options) => {
+    deletingLog.push(options.propertyName + ":" + options.item.value);
+    if (options.collection.length === 1) {
+      options.allow = false;
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionMatrixModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const connectorRow1 = StringEditorConnector.get(question.rows[0].locText);
+  const connectorRow2 = StringEditorConnector.get(question.rows[1].locText);
+
+  // Remove row 2 via backspace - should fire onCollectionItemDeleting
+  connectorRow2.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("rows:Row 2");
+  expect(question.rows.map(r => r.value)).toEqual(["Row 1"]);
+
+  // Try removing the last row - should be prevented by the callback
+  deletingLog = [];
+  connectorRow1.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("rows:Row 1");
+  expect(question.rows.map(r => r.value)).toEqual(["Row 1"]);
+});
+
+test("onCollectionItemDeleting should fire when removing matrixdropdown columns via design surface", (): any => {
+  const creator = new CreatorTester();
+  let deletingLog: string[] = [];
+  creator.onCollectionItemDeleting.add((sender, options) => {
+    deletingLog.push(options.propertyName + ":" + options.item.name);
+    if (options.collection.length === 1) {
+      options.allow = false;
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrixdropdown", name: "q1", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionMatrixDropdownModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const connectorCol1 = StringEditorConnector.get(question.columns[0].locTitle);
+  const connectorCol2 = StringEditorConnector.get(question.columns[1].locTitle);
+
+  // Remove column 2 via backspace - should fire onCollectionItemDeleting
+  connectorCol2.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("columns:Column 2");
+  expect(question.columns.map(c => c.name)).toEqual(["Column 1"]);
+
+  // Try removing the last column - should be prevented by the callback
+  deletingLog = [];
+  connectorCol1.onBackspaceEmptyString.fire(null, {});
+  expect(deletingLog).toContain("columns:Column 1");
+  expect(question.columns.map(c => c.name)).toEqual(["Column 1"]);
+});
+

@@ -1,3 +1,5 @@
+import { DomDocumentHelper, DomWindowHelper } from "survey-core";
+
 export class ResizeManager {
   private originalMouseX: number;
   private originalWidth: number;
@@ -32,11 +34,12 @@ export class ResizeManager {
     this.eastResizer.style["display"] = isThereEastResizer ? "block" : "none";
   }
   private getStyleValue(element: HTMLElement, style: string): number {
+    const window = DomWindowHelper.getWindow();
     if (!window) return 0;
     return parseFloat(window.getComputedStyle(element).getPropertyValue(style).replace("px", ""));
   }
   private isEventSupported(eventName: string) {
-    let el = document.createElement("div");
+    let el = DomDocumentHelper.getDocument().createElement("div");
     eventName = "on" + eventName;
     let isSupported = (eventName in el);
     if (!isSupported) {
@@ -62,6 +65,7 @@ export class ResizeManager {
     return this.events[eventName][this.getEventPrefix()];
   }
   private onMouseDownListener = (e: any) => {
+    const window = DomWindowHelper.getWindow();
     if (!window) return;
     e.preventDefault();
     this.originalWidth = this.getStyleValue(this.container, "width");
@@ -86,6 +90,7 @@ export class ResizeManager {
     this.container.style.width = width + "px";
   };
   private stopResize = (e: any) => {
+    const window = DomWindowHelper.getWindow();
     if (!window) return;
     window.removeEventListener(this.getMouseEvent("mousemove"), this.resize);
     window.removeEventListener(this.getMouseEvent("mouseup"), this.stopResize);
@@ -99,7 +104,7 @@ export class ResizeManager {
     container.appendChild(this.eastResizer);
   }
   private createrResizerElement(className: string) {
-    const resizer = document.createElement("div");
+    const resizer = DomDocumentHelper.getDocument().createElement("div");
     resizer.className = className;
     resizer.addEventListener(this.getMouseEvent("mousedown"), this.onMouseDownListener);
     return resizer;
