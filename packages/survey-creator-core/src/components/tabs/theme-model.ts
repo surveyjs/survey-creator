@@ -13,6 +13,7 @@ import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-util
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import { SurveyCreatorModel } from "../../creator-base";
+import { DefaultLight } from "survey-core/themes";
 
 export * from "./header-model";
 
@@ -284,7 +285,7 @@ export class ThemeModel extends Base implements ITheme {
   constructor() {
     super();
     const vars = Serializer.getProperties("theme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
-    this.baseThemeVariables = this.calculateThemeVariables({}, vars);
+    this.baseThemeVariables = this.calculateThemeVariables(DefaultLight.cssVariables, vars);
 
     updateCustomQuestionJSONs();
     this.setNewHeaderProperty();
