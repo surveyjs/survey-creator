@@ -463,7 +463,7 @@
 //     .typeText(".svc-search__input", "d")
 //     .expect(Selector(".svc-search__input").value).eql("d")
 //     .expect(Selector(".svc-toolbox").hasClass("svc-toolbox--flyout")).ok()
-//     .click(".svc-toolbox .sv-action--grid-search-close")
+//     .click(".svc-toolbox .svc-action--search-close")
 //     .expect(Selector(".svc-search__input").value).eql("")
 //     .expect(Selector(".svc-toolbox").hasClass("svc-toolbox--flyout")).ok();
 // });
