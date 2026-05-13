@@ -10,8 +10,8 @@ export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spi
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 import { mockSurveyCoreGetRGBaColorIdentity, restoreSurveyCoreGetRGBaColorMock } from "../tabs/theme-test-mocks";
 
-beforeEach(() => {
-  mockSurveyCoreGetRGBaColorIdentity();
+beforeEach(async () => {
+  await mockSurveyCoreGetRGBaColorIdentity();
 });
 afterEach(() => {
   restoreSurveyCoreGetRGBaColorMock();

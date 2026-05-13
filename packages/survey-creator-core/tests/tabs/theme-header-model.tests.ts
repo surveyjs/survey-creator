@@ -20,8 +20,8 @@ import SurveyThemes from "survey-core/themes";
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
-beforeEach(() => {
-  mockSurveyCoreGetRGBaColorIdentity();
+beforeEach(async () => {
+  await mockSurveyCoreGetRGBaColorIdentity();
 
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;

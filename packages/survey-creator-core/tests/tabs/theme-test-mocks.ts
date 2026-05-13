@@ -1,12 +1,12 @@
-import type { getRGBaColor } from "survey-core";
 import { DomWindowHelper } from "survey-core";
+import { vi, type MockInstance } from "vitest";
 
-let getRGBaColorSpy: jest.SpiedFunction<typeof getRGBaColor> | undefined;
+let getRGBaColorSpy: MockInstance | undefined;
 
-export function mockSurveyCoreGetRGBaColorIdentity(): void {
+export async function mockSurveyCoreGetRGBaColorIdentity(): Promise<void> {
   getRGBaColorSpy?.mockRestore();
-  const surveyCore = jest.requireActual<typeof import("survey-core")>("survey-core");
-  getRGBaColorSpy = jest.spyOn(surveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+  const surveyCore = await vi.importActual<typeof import("survey-core")>("survey-core");
+  getRGBaColorSpy = vi.spyOn(surveyCore, "getRGBaColor").mockImplementation((v: any) => v);
 }
 
 export function restoreSurveyCoreGetRGBaColorMock(): void {
@@ -14,8 +14,8 @@ export function restoreSurveyCoreGetRGBaColorMock(): void {
   getRGBaColorSpy = undefined;
 }
 
-export function mockDomWindowGetComputedStyleFromInlineStyles(): jest.SpyInstance {
-  return jest.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
+export function mockDomWindowGetComputedStyleFromInlineStyles(): MockInstance {
+  return vi.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
     ...window,
     getComputedStyle: (el: any) => {
       const style = el?.style;
@@ -32,4 +32,3 @@ export function mockDomWindowGetComputedStyleFromInlineStyles(): jest.SpyInstanc
     }
   } as any);
 }
-

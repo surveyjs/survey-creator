@@ -20,8 +20,8 @@ import { mockDomWindowGetComputedStyleFromInlineStyles, mockSurveyCoreGetRGBaCol
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
-beforeEach(() => {
-  mockSurveyCoreGetRGBaColorIdentity();
+beforeEach(async () => {
+  await mockSurveyCoreGetRGBaColorIdentity();
   mockDomWindowGetComputedStyleFromInlineStyles();
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
