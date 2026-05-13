@@ -4904,7 +4904,6 @@ export class SurveyCreatorModel extends Base
 
     const newCssVariable = {};
     assign(newCssVariable, theme?.cssVariables);
-    if (theme.colorPalette === undefined) theme.colorPalette = (theme.isLight !== false) ? "light" : "dark" as any;
     this.patchLegacyCreatorCSSVariables(newCssVariable);
     patchLegacyCSSVariables(newCssVariable);
     const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;

@@ -562,10 +562,9 @@ export class ThemeModel extends Base implements ITheme {
     if (!!json["headerView"]) _headerJson["headerView"] = json["headerView"];
     this.header.fromJSON(_headerJson || {});
 
-    const completeThemeVariablesList = { ...this.baseThemeVariables, ...json.cssVariables };
-
     if (json.cssVariables) {
       patchLegacyCSSVariables(json.cssVariables);
+      const completeThemeVariablesList = { ...this.baseThemeVariables, ...json.cssVariables };
       this["primaryColor"] = completeThemeVariablesList["--sjs2-color-project-brand-600"];
       super.fromJSON(completeThemeVariablesList, options);
       this.header.setCssVariables(json.cssVariables);
