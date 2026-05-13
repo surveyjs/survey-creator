@@ -82,8 +82,7 @@
   flex-shrink: 0;
   flex-grow: 0;
   width: 450px;
-  border-left: var(--ctr-property-grid-border-width-left, var(--sjs-stroke-x1)) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only);
+  border-left: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary-for-tests-only);
 }
 
 .st-property-panel .spg-panel__content .spg-row {
@@ -221,8 +220,7 @@ td.st-table__cell:first-of-type {
     var(--ctr-string-table-title-padding-right-actions, var(--sjs-spacing-x2))
     var(--ctr-string-table-title-padding-bottom, var(--sjs-spacing-x2))
     var(--ctr-string-table-title-padding-left, var(--sjs-spacing-x3));
-  border-bottom: var(--ctr-string-table-title-border-width-bottom, var(--sjs-stroke-x1)) solid
-    var(--sjs2-color-border-basic-secondary);
+  border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-bg-basic-primary);
 }
 .st-translation-dialog .st-strings-wrapper {

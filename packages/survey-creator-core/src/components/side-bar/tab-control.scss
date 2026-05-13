@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  border-inline-start: var(--ctr-property-grid-tabs-border-width, var(--sjs-stroke-x1)) solid
+  border-inline-start: var(--sjs2-border-width-x100) solid
     var(--sjs2-color-border-basic-secondary-for-tests-only);
   background: var(--sjs2-color-bg-basic-primary);
   box-sizing: border-box;
@@ -91,7 +91,7 @@
   align-self: stretch;
 
   background: var(--sjs2-color-bg-basic-primary);
-  box-shadow: inset 0px calc(-1 * var(--ctr-property-grid-header-border-width-bottom, var(--sjs-stroke-x2))) 0px
+  box-shadow: inset 0px calc(-1 * var(--sjs2-border-width-x200)) 0px
     var(--sjs2-color-bg-brand-primary);
   box-sizing: border-box;
   width: 100%;

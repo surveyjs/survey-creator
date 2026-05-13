@@ -30,8 +30,7 @@
 .svc-matrix-cell--selected {
   position: absolute;
   border-radius: var(--ctr-survey-matrix-cell-corner-radius, var(--lbr-corner-radius-x075));
-  border: var(--ctr-survey-matrix-cell-border-width, var(--lbr-stroke-x2)) solid
-    var(--sjs2-color-bg-brand-primary);
+  border: var(--sjs2-border-width-x200) solid var(--sjs2-color-bg-brand-primary);
   top: calcSize(0);
   left: calcSize(0);
   right: calcSize(0);
@@ -40,14 +39,12 @@
 
   &.svc-visible {
     display: block;
-    border: var(--ctr-survey-matrix-cell-border-width, var(--lbr-stroke-x2)) solid
-      var(--sjs2-color-bg-brand-primary);
+    border: var(--sjs2-border-width-x200) solid var(--sjs2-color-bg-brand-primary);
   }
 }
 
 .svc-hovered > .svc-matrix-cell--selected:not(.svc-visible) {
-  border: var(--ctr-survey-matrix-cell-border-width, var(--lbr-stroke-x2)) solid
-    var(--sjs2-color-bg-brand-secondary);
+  border: var(--sjs2-border-width-x200) solid var(--sjs2-color-bg-brand-secondary);
   display: block;
 }
 

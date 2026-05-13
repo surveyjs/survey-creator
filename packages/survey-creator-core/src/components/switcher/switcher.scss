@@ -17,7 +17,7 @@
   padding-block-end: var(--ctr-property-grid-switcher-toggle-button-padding-bottom, var(--sjs-spacing-x05));
   padding-inline-start: var(--ctr-property-grid-switcher-toggle-button-padding-left, var(--sjs-spacing-x05));
   border-radius: var(--ctr-property-grid-switcher-toggle-button-corner-radius, var(--sjs-corner-radius-round));
-  border: var(--ctr-property-grid-switcher-toggle-button-border-width, var(--sjs-stroke-x1)) solid
+  border: var(--sjs2-border-width-x100) solid
     var(--sjs2-color-border-basic-secondary-for-tests-only);
   background: var(--sjs2-color-bg-basic-secondary);
 
@@ -27,18 +27,18 @@
 }
 
 .svc-switcher__icon:hover {
-  border: 1px solid var(--sjs2-color-border-basic-secondary-for-tests-only);
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary-for-tests-only);
   background: var(--sjs2-color-bg-basic-primary);
 }
 
 .svc-switcher__icon:focus {
-  border: var(--ctr-property-grid-switcher-toggle-button-border-width-focused, var(--sjs-stroke-x2)) solid
+  border: var(--sjs2-border-width-x200) solid
     var(--sjs2-color-bg-brand-primary);
   background: var(--sjs2-color-bg-basic-secondary);
 }
 
 .svc-switcher__icon:focus:hover {
-  border: var(--ctr-property-grid-switcher-toggle-button-border-width-focused, var(--sjs-stroke-x2)) solid
+  border: var(--sjs2-border-width-x200) solid
     var(--sjs2-color-bg-brand-primary);
   background: var(--sjs2-color-bg-basic-primary);
 }
@@ -51,13 +51,13 @@
   padding-inline-end: var(--ctr-property-grid-switcher-toggle-button-padding-right-checked, var(--sjs-spacing-x05));
   padding-block-end: var(--ctr-property-grid-switcher-toggle-button-padding-bottom, var(--sjs-spacing-x05));
   padding-inline-start: var(--ctr-property-grid-switcher-toggle-button-padding-left-checked, var(--sjs-spacing-x2));
-  border: var(--ctr-property-grid-switcher-toggle-button-border-width-checked, 0px) solid
+  border: var(--sjs2-border-width-x000) solid
     var(--sjs2-color-border-basic-secondary-for-tests-only);
   background: var(--sjs2-color-bg-brand-primary);
 }
 
 .svc-switcher__icon--checked:focus {
-  border: var(--ctr-property-grid-switcher-toggle-button-border-width-focused, var(--sjs-stroke-x2)) solid
+  border: var(--sjs2-border-width-x200) solid
     var(--sjs2-color-bg-brand-primary);
   background: var(--sjs2-color-fg-brand-on-primary);
 }

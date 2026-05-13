@@ -33,7 +33,7 @@
   height: 0;
   display: flex;
   flex-direction: column;
-  border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid var(--sjs2-color-border-basic-secondary-for-tests-only);
+  border-inline-end: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary-for-tests-only);
   background: var(--sjs2-color-utility-toolbox);
   min-width: var(--ctr-toolbox-min-width, var(--sjs-size-x20));
   box-sizing: content-box;
@@ -116,7 +116,7 @@
   width: var(--toolbox-width-compact);
   max-width: var(--thm-toolbox-width-compact, calcSize(10.5));
   overflow: visible;
-  border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid transparent;
+  border-inline-end: var(--sjs2-border-width-x100) solid transparent;
 
   .svc-search {
     opacity: 1;
@@ -153,7 +153,7 @@
   flex-direction: column;
   box-sizing: border-box;
   background: var(--sjs2-color-utility-toolbox);
-  border-bottom: var(--ctr-toolbox-search-border-width-bottom, var(--sjs-stroke-x1)) solid transparent;
+  border-bottom: var(--sjs2-border-width-x100) solid transparent;
 
   svg {
     pointer-events: none;
@@ -183,7 +183,7 @@
   &:after {
     content: "";
     display: block;
-    height: var(--ctr-toolbox-separator-height, var(--sjs-stroke-x1));
+    height: var(--sjs2-border-width-x100);
     background-color: var(--sjs2-color-border-basic-secondary-for-tests-only);
   }
 }

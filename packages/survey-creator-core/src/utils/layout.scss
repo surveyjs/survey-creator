@@ -103,7 +103,7 @@
 
       padding: var(--ctr-menu-toolbar-padding-vertical-mobile, var(--sjs-spacing-x05)) var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
       background:  var(--sjs2-color-bg-basic-primary);
-      border-top: var(--ctr-menu-border-width, var(--sjs-stroke-x1)) solid var(--sjs2-color-border-basic-secondary-for-tests-only);
+      border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary-for-tests-only);
       box-sizing: border-box;
     }
   }

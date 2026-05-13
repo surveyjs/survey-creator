@@ -24,7 +24,7 @@ svc-tab-json-editor-textarea {
 
 .svc-json-errors {
   --thm-json-error-row: calc(
-    var(--ctr-code-viewer-code-error-row-border-width-top, var(--sjs-stroke-x1)) +
+    var(--sjs2-border-width-x100) +
       var(--ctr-code-viewer-code-error-row-padding-top, var(--sjs-spacing-x1)) +
       var(--ctr-code-viewer-code-error-row-padding-bottom, var(--sjs-spacing-x1)) +
       var(--sjs2-line-height-x300)
@@ -40,7 +40,7 @@ svc-tab-json-editor-textarea {
 .svc-json-errors__item {
   pointer-events: none;
   display: block;
-  border-top: var(--ctr-code-viewer-code-error-row-border-width-top, var(--sjs-stroke-x1)) solid
+  border-top: var(--sjs2-border-width-x100) solid
     var(--sjs2-color-border-basic-secondary-for-tests-only);
   background: var(--sjs2-color-bg-alert-secondary);
 }

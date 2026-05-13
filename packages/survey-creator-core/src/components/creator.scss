@@ -32,7 +32,7 @@ survey-creator,
     }
 
     &::-webkit-scrollbar-thumb {
-      border: var(--ctr-scrollbar-padding-vertical, var(--sjs-spacing-x05)) solid rgba(0, 0, 0, 0);
+      border: var(--sjs2-border-width-x400) solid rgba(0, 0, 0, 0);
       background-clip: padding-box;
       border-radius: 1024px;
       background-color: var(--sjs2-color-utility-scrollbar);
@@ -43,7 +43,7 @@ survey-creator,
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      border: var(--ctr-scrollbar-padding-vertical-hovered, var(--sjs-spacing-x025)) solid rgba(0, 0, 0, 0);
+      border: var(--sjs2-border-width-x200) solid rgba(0, 0, 0, 0);
       background-color: var(--sjs2-color-utility-scrollbar);
     }
 

@@ -227,15 +227,15 @@ sv-question-error {
   .sd-formbox,
   .spg-question--location--left,
   .spg-table__cell:not(.spg-table__cell--detail-panel) .sd-formbox {
-    box-shadow: inset 0 0 0 var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2))
+    box-shadow: inset 0 0 0 var(--sjs2-border-width-x200)
       var(--sjs2-color-fg-basic-primary-muted);
   }
 
   .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
-    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid
+    outline: var(--sjs2-border-width-x200) solid
       var(--sjs2-color-fg-basic-primary-muted);
-    outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
+    outline-offset: calc(-1 * var(--sjs2-border-width-x200));
     border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
 
     .sd-formbox {
@@ -244,7 +244,7 @@ sv-question-error {
   }
 
   .svc-action-button {
-    border: var(--ctr-actionbar-button-border-width-highlighed, var(--sjs-stroke-x2)) solid
+    border: var(--sjs2-border-width-x200) solid
       var(--sjs2-color-fg-basic-primary-muted);
   }
 
@@ -253,8 +253,8 @@ sv-question-error {
   }
 
   .spg-checkbox__control + .spg-checkbox__rectangle {
-    outline: var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)) solid
+    outline: var(--sjs2-border-width-x200) solid
       var(--sjs2-color-fg-basic-primary-muted);
-    outline-offset: calc(-1 * var(--ctr-editor-border-width-highlighed, var(--sjs-stroke-x2)));
+    outline-offset: calc(-1 * var(--sjs2-border-width-x200));
   }
 }

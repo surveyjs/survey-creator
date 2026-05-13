@@ -317,7 +317,7 @@
       var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2)) +
         var(--ctr-toolbox-item-submenu-button-margin-right, var(--sjs-spacing-x1n)) +
         var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)) +
-        var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1))
+        var(--sjs2-border-width-x100)
     );
 
     box-shadow: unset;

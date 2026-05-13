@@ -98,7 +98,7 @@
 }
 
 .spg-action-title-bar {
-  margin-inline-end: var(--ctr-data-table-border-width, var(--sjs-stroke-x1));
+  margin-inline-end: var(--sjs2-border-width-x100);
   padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
 }
 

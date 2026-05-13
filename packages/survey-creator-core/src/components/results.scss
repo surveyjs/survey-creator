@@ -24,7 +24,7 @@
     var(--ctr-string-table-title-padding-bottom, var(--sjs-spacing-x2))
     var(--ctr-string-table-title-padding-left, var(--sjs-spacing-x3));
   color: var(--sjs2-color-fg-basic-secondary);
-  border-bottom: var(--ctr-string-table-title-border-width-bottom, var(--sjs-stroke-x1)) solid
+  border-bottom: var(--sjs2-border-width-x100) solid
     var(--sjs2-color-border-basic-secondary);
   background-color: var(--sjs2-color-bg-basic-primary);
 
@@ -49,7 +49,7 @@
   }
 
   .svc-action-button.svc-action-button--selected {
-    border: var(--ctr-actionbar-button-border-width-selected, var(--sjs-stroke-x2)) solid var(--sjs2-color-bg-brand-primary);
+    border: var(--sjs2-border-width-x200) solid var(--sjs2-color-bg-brand-primary);
   }
 }
 
@@ -108,7 +108,7 @@
       padding: var(--ctr-string-table-row-padding-top, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3)) var(--ctr-string-table-row-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
       max-width: calcSize(50);
       overflow: auto;
-      border-top: var(--ctr-string-table-row-border-width-bottom, var(--sjs-stroke-x1)) solid var(--sjs2-color-border-basic-secondary);
+      border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
       user-select: text;
       background: var(--sjs2-color-bg-basic-primary);
 
