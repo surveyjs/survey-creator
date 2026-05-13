@@ -11,7 +11,7 @@ import { ThemeModel, getThemeChanges } from "../../src/components/tabs/theme-mod
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
-import { mockSurveyCoreGetRGBaColorIdentity, restoreSurveyCoreGetRGBaColorMock } from "./theme-test-mocks";
+import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
@@ -97,8 +97,8 @@ const themeFromFile = {
 };
 
 const cssVariables = DefaultTheme.cssVariables;
-beforeEach(async () => {
-  await mockSurveyCoreGetRGBaColorIdentity();
+beforeEach(() => {
+  mockGetRGBaColorIdentity();
   // // ThemeModel constructor may cache baseThemeVariables during module evaluation in some environments.
   // // Ensure the mocked window is applied before tests rely on calculated css variables.
   // jest.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
@@ -114,7 +114,7 @@ beforeEach(async () => {
 });
 
 afterEach(() => {
-  restoreSurveyCoreGetRGBaColorMock();
+  restoreGetRGBaColorMock();
   DefaultTheme.cssVariables = cssVariables;
 });
 

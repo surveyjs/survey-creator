@@ -8,13 +8,13 @@ import { PredefinedBackgroundColors, PredefinedColors } from "../../src/componen
 import { colorsAreEqual } from "../../src/utils/color-utils";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
-import { mockSurveyCoreGetRGBaColorIdentity, restoreSurveyCoreGetRGBaColorMock } from "../tabs/theme-test-mocks";
+import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "../tabs/theme-test-mocks";
 
-beforeEach(async () => {
-  await mockSurveyCoreGetRGBaColorIdentity();
+beforeEach(() => {
+  mockGetRGBaColorIdentity();
 });
 afterEach(() => {
-  restoreSurveyCoreGetRGBaColorMock();
+  restoreGetRGBaColorMock();
 });
 
 test("Creator theme model de/serialization", (): any => {

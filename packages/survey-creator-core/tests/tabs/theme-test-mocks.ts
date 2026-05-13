@@ -1,15 +1,15 @@
 import { DomWindowHelper } from "survey-core";
 import { vi, type MockInstance } from "vitest";
+import * as colorUtils from "../../src/utils/color-utils";
 
 let getRGBaColorSpy: MockInstance | undefined;
 
-export async function mockSurveyCoreGetRGBaColorIdentity(): Promise<void> {
+export function mockGetRGBaColorIdentity(): void {
   getRGBaColorSpy?.mockRestore();
-  const surveyCore = await vi.importActual<typeof import("survey-core")>("survey-core");
-  getRGBaColorSpy = vi.spyOn(surveyCore, "getRGBaColor").mockImplementation((v: any) => v);
+  getRGBaColorSpy = vi.spyOn(colorUtils.getRGBaColorResolver, "getRGBaColor").mockImplementation((v: any) => v);
 }
 
-export function restoreSurveyCoreGetRGBaColorMock(): void {
+export function restoreGetRGBaColorMock(): void {
   getRGBaColorSpy?.mockRestore();
   getRGBaColorSpy = undefined;
 }
