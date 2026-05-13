@@ -10,7 +10,7 @@
   padding-inline-start: var(--ctr-actionbar-button-padding-left-medium-text, var(--sjs-spacing-x2));
 
   box-sizing: border-box;
-  border-radius: calcSize(12.5);
+  border-radius: var(--sjs2-radius-round);
 
   color: var(--sjs2-color-bg-brand-primary);
 

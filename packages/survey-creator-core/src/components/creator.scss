@@ -34,7 +34,7 @@ survey-creator,
     &::-webkit-scrollbar-thumb {
       border: var(--sjs2-border-width-x400) solid rgba(0, 0, 0, 0);
       background-clip: padding-box;
-      border-radius: 1024px;
+      border-radius: var(--sjs2-radius-round);
       background-color: var(--sjs2-color-utility-scrollbar);
     }
 
@@ -151,20 +151,6 @@ survey-creator,
   background-color: var(--sjs2-color-bg-brand-primary);
   text-align: center;
 }
-
-// .svc-item__banner {
-//   position: relative;
-//   max-width: 0;
-//   overflow: hidden;
-//   height: 100%;
-//   background-color: $background;
-//   /* Shadow / Medium */
-//   border-radius: calcSize(12.5);
-//   box-shadow: 0px 2px 6px 0px var(--sjs2-color-utility-shadow-floating-default);
-//   transition:
-//     max-width 0.1s ease-in-out,
-//     padding 0.2s ease-in-out;
-// }
 
 .svc-creator__non-commercial-text {
   @include sjs2--typography--default-strong;

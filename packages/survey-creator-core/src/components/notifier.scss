@@ -15,7 +15,7 @@
   opacity: 0;
   padding: calcSize(1) calcSize(2);
   box-shadow: 0px 2px 6px 0px var(--sjs2-color-utility-shadow-floating-default);
-  border-radius: calcSize(0.5);
+  border-radius: var(--sjs2-radius-x050);
   color: var(--sjs2-color-fg-basic-primary);
   min-width: calcSize(30);
   text-align: center;

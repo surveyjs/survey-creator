@@ -89,7 +89,7 @@
   }
 
   .sv-action-bar-item-dropdown {
-    border-radius: calcCornerRadius(0.5);
+    border-radius: var(--sjs2-radius-x050);
     background-color: transparent;
   }
 }

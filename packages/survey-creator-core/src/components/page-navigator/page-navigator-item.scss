@@ -100,7 +100,7 @@ svc-page-navigator-item,
     height: var(--sjs2-line-height-x100);
     flex-shrink: 0;
     background: var(--sjs2-color-bg-brand-primary);
-    border-radius: 100%;
+    border-radius: var(--sjs2-radius-round);
   }
 }
 

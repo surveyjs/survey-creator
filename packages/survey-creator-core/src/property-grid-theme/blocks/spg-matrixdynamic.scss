@@ -77,7 +77,7 @@
   width: calcSize(3);
   height: calcSize(3);
   margin: calcSize(1);
-  border-radius: 100px;
+  border-radius: var(--sjs2-radius-round);
   border: 1px solid var(--sjs2-color-fg-basic-primary-muted);
   display: flex;
   justify-content: center;
