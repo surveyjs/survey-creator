@@ -33,7 +33,7 @@
   height: 0;
   display: flex;
   flex-direction: column;
-  border-inline-end: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  border-inline-end: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary-for-tests-only);
   background: var(--sjs2-color-utility-toolbox);
   min-width: var(--ctr-toolbox-min-width, var(--sjs-size-x20));
   box-sizing: content-box;
@@ -184,7 +184,7 @@
     content: "";
     display: block;
     height: var(--sjs2-border-width-x100);
-    background-color: var(--sjs2-color-border-basic-secondary);
+    background-color: var(--sjs2-color-border-basic-secondary-for-tests-only);
   }
 }
 
@@ -228,11 +228,14 @@
   background: var(--sjs2-color-bg-basic-primary-dim);
 
   box-shadow:
-    inset 0 var(--ctr-toolbox-group-header-border-width-top, 0px) var(--sjs2-color-border-basic-secondary),
-    inset calc(0px - var(--ctr-toolbox-group-header-border-width-right, 0px)) 0 var(--sjs2-color-border-basic-secondary),
+    inset 0 var(--ctr-toolbox-group-header-border-width-top, 0px)
+      var(--sjs2-color-border-basic-secondary-for-tests-only),
+    inset calc(0px - var(--ctr-toolbox-group-header-border-width-right, 0px)) 0
+      var(--sjs2-color-border-basic-secondary-for-tests-only),
     inset 0 calc(0px - var(--ctr-toolbox-group-header-border-width-bottom, 0px))
-      var(--sjs2-color-border-basic-secondary),
-    inset var(--ctr-toolbox-group-header-border-width-left, 0px) 0 var(--sjs2-color-border-basic-secondary);
+      var(--sjs2-color-border-basic-secondary-for-tests-only),
+    inset var(--ctr-toolbox-group-header-border-width-left, 0px) 0
+      var(--sjs2-color-border-basic-secondary-for-tests-only);
 
   box-sizing: border-box;
   width: 100%;

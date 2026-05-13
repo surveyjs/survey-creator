@@ -17,7 +17,7 @@
   color: var(--sjs2-color-fg-basic-primary-muted);
   cursor: pointer;
   background-color: var(--sjs2-color-bg-basic-primary);
-  box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary);
+  box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary-for-tests-only);
   margin: 0;
   transition: color $creator-transition-duration, background-color $creator-transition-duration, opacity $creator-transition-duration;
 }
@@ -56,13 +56,13 @@
   padding-inline-start: var(--ctr-property-grid-form-padding-left, var(--sjs-spacing-x4));
   box-sizing: border-box;
   background: var(--sjs2-color-utility-property-grid);
-  box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary);
+  box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary-for-tests-only);
 }
 
 .spg-panel__content {
   .spg-row {
     width: 100%;
-    margin-top: var(--ctr-property-grid-form-gap, var(--sjs-spacing-x2));
+    margin-top: var(--ctr-property-grid-form-gap, var(--sjs-spacing-x2));;
   }
 
   .spg-row--multiple {

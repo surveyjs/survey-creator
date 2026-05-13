@@ -439,7 +439,8 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut--selected {
-  border: var(--sjs2-border-width-x200) solid var(--sjs2-color-bg-brand-primary);
+  border: var(--sjs2-border-width-x200) solid
+    var(--sjs2-color-bg-brand-primary);
 }
 
 .svc-dragged-element-shortcut__text {
@@ -833,7 +834,8 @@ svc-question,
       top: 0;
       bottom: 0;
       right: 0;
-      outline: var(--sjs2-border-width-x100) dashed var(--sjs2-color-border-basic-secondary);
+      outline: var(--sjs2-border-width-x100) dashed
+        var(--sjs2-color-border-basic-secondary-for-tests-only);
       outline-offset: calc(-1 * var(--sjs2-border-width-x100));
       z-index: 10;
     }
@@ -911,7 +913,7 @@ svc-question,
 }
 
 .svc-panel__placeholder_frame {
-  border: var(--sjs2-border-width-x100, 1px) dashed var(--sjs2-color-border-basic-secondary);
+  border: var(--sjs2-border-width-x100, 1px) dashed var(--sjs2-color-border-basic-secondary-for-tests-only);
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -1131,7 +1133,7 @@ svc-question,
   .sd-row--enter.sd-row--enter.sd-row--enter.sd-row--enter {
     .svc-question__content--selected {
       border-radius: 0;
-      border: var(--sjs2-border-width-x100, 1px) dashed var(--sjs2-color-border-basic-secondary);
+      border: var(--sjs2-border-width-x100, 1px) dashed var(--sjs2-color-border-basic-secondary-for-tests-only);
       box-shadow: none;
     }
   }
