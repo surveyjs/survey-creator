@@ -10,7 +10,7 @@
 
   .sd-imagepicker__image {
     box-sizing: border-box;
-    border-radius: var(--lbr-image-corner-radius, var(--lbr-corner-radius-x05));
+    border-radius: var(--sjs2-radius-x050);
     border: var(--sjs2-border-width-x100) dashed
       var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
   }
@@ -18,7 +18,7 @@
 
 .svc-image-item-value--file-dragging {
   .sd-imagepicker__image {
-    border-radius: var(--lbr-image-corner-radius, var(--lbr-corner-radius-x05));
+    border-radius: var(--sjs2-radius-x050);
     border: var(--sjs2-border-width-x200) solid var(--sjs2-color-bg-brand-primary);
     background: var(--sjs2-color-bg-brand-secondary);
   }
@@ -115,7 +115,7 @@
 
 .svc-image-item-value-wrapper__ghost {
   display: none;
-  border-radius: var(--lbr-image-corner-radius, var(--lbr-corner-radius-x05));
+  border-radius: var(--sjs2-radius-x050);
   background: var(--sjs2-color-component-formbox-design-bg);
 }
 

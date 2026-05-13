@@ -38,7 +38,7 @@
   @include sjs2--typography--default-strong;
   -webkit-appearance: none;
   appearance: none;
-  border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
   padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
     var(--ctr-expression-item-padding-right, var(--sjs-spacing-x2))
     var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
@@ -159,13 +159,11 @@
 }
 
 .svc-logic-operator.svc-logic-operator--error {
-  box-shadow: inset 0 0 0 2px
-    var(--sjs2-color-bg-alert-primary);
+  box-shadow: inset 0 0 0 2px var(--sjs2-color-bg-alert-primary);
 
   &:hover,
   &:focus {
-    box-shadow: inset 0 0 0 2px
-      var(--sjs2-color-bg-alert-primary);
+    box-shadow: inset 0 0 0 2px var(--sjs2-color-bg-alert-primary);
     background-color: var(--sjs2-color-bg-basic-primary);
     color: var(--sjs2-color-bg-alert-primary);
   }
@@ -187,7 +185,7 @@
     var(--ctr-expression-item-padding-right-icon-only, var(--sjs-spacing-x1))
     var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
     var(--ctr-expression-item-padding-left-icon-only, var(--sjs-spacing-x1));
-  border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
   background: none;
   justify-content: center;
   align-items: center;
@@ -330,7 +328,7 @@
   max-width: 100%;
   box-sizing: border-box;
   margin-top: var(--lbr-question-panel-header-padding-bottom, var(--lbr-spacing-x2));
-  border-radius: var(--lbr-question-panel-corner-radius, var(--lbr-corner-radius-x05));
+  border-radius: var(--sjs2-radius-x050);
   background: var(--sjs2-color-bg-basic-primary);
   box-shadow: var(--lbr-question-panel-shadow-offset-x, 0px) var(--lbr-question-panel-shadow-offset-y, 1px)
     var(--lbr-question-panel-shadow-blur, 2px) var(--lbr-question-panel-shadow-spread, 0px)

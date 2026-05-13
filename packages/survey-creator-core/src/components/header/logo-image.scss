@@ -42,7 +42,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: var(--ctr-survey-header-logo-placeholder-corner-radius, var(--lbr-corner-radius-round));
+  border-radius: var(--sjs2-radius-round);
   transition:
     background-color $creator-transition-duration,
     opacity $creator-transition-duration;

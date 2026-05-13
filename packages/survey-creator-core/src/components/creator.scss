@@ -60,7 +60,7 @@ survey-creator,
   .sv-drag-drop-choices-shortcut {
     .sv-drag-drop-choices-shortcut__content {
       background: var(--sjs2-color-bg-basic-primary);
-      border-radius: var(--ctr-survey-radio-button-group-item-corner-radius-floating, var(--lbr-corner-radius-x1));
+      border-radius: var(--sjs2-radius-x100);
       box-shadow:
         var(--ctr-survey-radio-button-group-item-shadow-floating-2-offset-x, 0px)
           var(--ctr-survey-radio-button-group-item-shadow-floating-2-offset-y, 2px)

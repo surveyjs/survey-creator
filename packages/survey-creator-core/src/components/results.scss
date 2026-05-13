@@ -1,7 +1,7 @@
 @use "../variables" as *;
 
 .svd-test-results {
-  border-radius: var(--ctr-string-table-corner-radius, var(--sjs-corner-radius-x05));
+  border-radius: var(--sjs2-radius-x050);
   box-shadow: inset 0px 1px 0px 0px var(--sjs2-color-utility-shadow-surface-default);
   padding: calc(12 * var(--sjs-base-unit, var(--base-unit, 8px)));
 }
@@ -24,8 +24,7 @@
     var(--ctr-string-table-title-padding-bottom, var(--sjs-spacing-x2))
     var(--ctr-string-table-title-padding-left, var(--sjs-spacing-x3));
   color: var(--sjs2-color-fg-basic-secondary);
-  border-bottom: var(--sjs2-border-width-x100) solid
-    var(--sjs2-color-border-basic-secondary);
+  border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background-color: var(--sjs2-color-bg-basic-primary);
 
   .svd-test-results__header-text {
@@ -39,7 +38,7 @@
 
   .svc-action-button {
     color: var(--sjs2-color-bg-brand-primary);
-    border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
+    border-radius: var(--sjs2-radius-x100);
     background-color: transparent;
 
     &:focus, &:hover {

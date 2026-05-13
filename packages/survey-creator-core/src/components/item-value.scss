@@ -111,7 +111,7 @@
   }
 
   .sv-ranking-item__index {
-    border-radius: var(--lbr-ranking-item-number-corner-radius, var(--lbr-corner-radius-round));
+    border-radius: var(--sjs2-radius-round);
     background: var(--sjs2-color-bg-basic-secondary);
 
     svg {
@@ -223,7 +223,7 @@
 .svc-item-value__ghost {
   display: none;
   background: var(--sjs2-color-bg-basic-primary-dim);
-  border-radius: var(--ctr-survey-radio-button-group-item-corner-radius-floating, var(--lbr-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
   width: calcSize(25);
   height: calcSize(5);
   z-index: 11;

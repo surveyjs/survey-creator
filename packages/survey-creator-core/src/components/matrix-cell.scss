@@ -29,7 +29,7 @@
 
 .svc-matrix-cell--selected {
   position: absolute;
-  border-radius: var(--ctr-survey-matrix-cell-corner-radius, var(--lbr-corner-radius-x075));
+  border-radius: var(--sjs2-radius-x075);
   border: var(--sjs2-border-width-x200) solid var(--sjs2-color-bg-brand-primary);
   top: calcSize(0);
   left: calcSize(0);

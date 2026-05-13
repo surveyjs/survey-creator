@@ -2,7 +2,7 @@
 
 .svc-side-bar {
   .svc-search {
-    border-bottom: 1px solid var(--sjs2-color-border-basic-secondary);
+    border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
     background: var(--sjs2-color-bg-basic-secondary);
     gap: var(--ctr-property-grid-search-gap, var(--sjs-spacing-x1));
 

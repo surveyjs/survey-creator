@@ -5,7 +5,7 @@
 .spg-table-wrapper {
   border: var(--sjs2-border-width-x100) solid
     var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
-  border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
+  border-radius: var(--sjs2-radius-x075);
   overflow: hidden;
 }
 
@@ -57,7 +57,7 @@
       var(--ctr-data-table-cell-padding-bottom, var(--sjs-spacing-x1))
       var(--ctr-data-table-cell-padding-left, var(--sjs-spacing-x1));
 
-    border-radius: var(--ctr-data-table-cell-corner-radius-focused, var(--sjs-corner-radius-x075));
+    border-radius: var(--sjs2-radius-x075);
     background-color: var(--sjs2-color-bg-basic-primary);
 
     &:focus-within {

@@ -92,12 +92,12 @@
 
   &:hover,
   &:focus {
-    border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
+    border-radius: var(--sjs2-radius-x100);
     background: var(--sjs2-color-bg-basic-primary-dim);
   }
 
   &.sv-action-bar-item--pressed {
-    border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
+    border-radius: var(--sjs2-radius-x100);
     opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
     background: var(--sjs2-color-bg-basic-primary-dim);
   }

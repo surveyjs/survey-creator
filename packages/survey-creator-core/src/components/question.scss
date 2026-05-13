@@ -411,7 +411,7 @@ svc-question {
 
 .svc-dragged-element-shortcut {
   //min-width: 100px;
-  border-radius: var(--ctr-toolbox-item-corner-radius, var(--sjs-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
   padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x150, 12px)
     var(--sjs2-spacing-x200, 16px);
   background-color: var(--sjs2-color-bg-basic-primary);

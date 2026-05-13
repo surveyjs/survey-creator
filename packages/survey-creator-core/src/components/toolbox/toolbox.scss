@@ -225,7 +225,7 @@
   padding-bottom: var(--ctr-toolbox-group-header-padding-bottom, var(--sjs-spacing-x1));
   padding-inline-start: var(--ctr-toolbox-group-header-padding-left, var(--sjs-spacing-x2));
 
-  border-radius: var(--ctr-toolbox-group-header-corner-radius, var(--sjs-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
   background: var(--sjs2-color-bg-basic-primary-dim);
 
   box-shadow:

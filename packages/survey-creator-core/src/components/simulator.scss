@@ -21,7 +21,7 @@
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  border-radius: var(--ctr-preview-device-corner-radius, var(--sjs-corner-radius-x4));
+  border-radius: var(--sjs2-radius-x400);
   box-shadow:
     0px 2px 6px 0px rgba(0, 0, 0, 0.1),
     0px 8px 16px 0px var(--sjs2-color-utility-shadow-floating-default);

@@ -135,7 +135,7 @@
     background-color: var(--sjs2-color-utility-overlay);
 
     & > .sv-popup__container {
-      border-radius: var(--ctr-popup-menu-corner-radius, var(--sjs-corner-radius-x1));
+      border-radius: var(--sjs2-radius-x100);
       box-shadow:
         var(--ctr-popup-menu-shadow-1-offset-x, 0px) var(--ctr-popup-menu-shadow-1-offset-y, 2px)
           var(--ctr-popup-menu-shadow-1-blur, 8px) var(--ctr-popup-menu-shadow-1-spread, 0px)
@@ -174,7 +174,7 @@
     .sv-menu-popup__button {
       @include sjs2--typography--default-strong;
       color: var(--sjs2-color-bg-brand-primary);
-      border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
+      border-radius: var(--sjs2-radius-x100);
       padding: var(--ctr-actionbar-button-padding-top-medium-text, var(--sjs-spacing-x05))
         var(--ctr-actionbar-button-padding-right-medium-text, var(--sjs-spacing-x2))
         var(--ctr-actionbar-button-padding-bottom-medium-text, var(--sjs-spacing-x05))

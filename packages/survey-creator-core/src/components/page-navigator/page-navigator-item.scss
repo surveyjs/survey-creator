@@ -72,7 +72,7 @@ svc-page-navigator-item,
   justify-content: flex-end;
   align-items: center;
   gap: var(--ctr-page-navigator-item-gap, var(--sjs-spacing-x1));
-  border-radius: var(--ctr-page-navigator-item-corner-radius, var(--sjs-corner-radius-x075));
+  border-radius: var(--sjs2-radius-x075);
   background: var(--sjs2-color-bg-basic-primary);
 
   box-shadow:

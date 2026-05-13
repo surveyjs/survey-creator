@@ -16,7 +16,7 @@
   padding-inline-end: var(--ctr-property-grid-switcher-toggle-button-padding-right, var(--sjs-spacing-x2));
   padding-block-end: var(--ctr-property-grid-switcher-toggle-button-padding-bottom, var(--sjs-spacing-x05));
   padding-inline-start: var(--ctr-property-grid-switcher-toggle-button-padding-left, var(--sjs-spacing-x05));
-  border-radius: var(--ctr-property-grid-switcher-toggle-button-corner-radius, var(--sjs-corner-radius-round));
+  border-radius: var(--sjs2-radius-round);
   border: var(--sjs2-border-width-x100) solid
     var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
   background: var(--sjs2-color-bg-basic-secondary);
@@ -63,7 +63,7 @@
 .svc-switcher__icon-thumb {
   width: var(--ctr-property-grid-switcher-toggle-button-thumb-width, var(--sjs-size-x1));
   height: var(--ctr-property-grid-switcher-toggle-button-thumb-height, var(--sjs-size-x1));
-  border-radius: var(--ctr-property-grid-switcher-toggle-button-thumb-corner-radius, var(--sjs-corner-radius-round));
+  border-radius: var(--sjs2-radius-round);
   background-color: var(--sjs2-color-fg-basic-secondary);
 
   transition-duration: 0.2s;

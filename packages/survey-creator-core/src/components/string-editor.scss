@@ -79,7 +79,7 @@
   justify-content: right;
   line-height: 0px;
   transition: opacity $creator-transition-duration;
-  border-radius: var(--ctr-text-decor-corner-radius, var(--lbr-corner-radius-x0375));
+  border-radius: calc(var(--sjs2-base-unit-radius) * 0.375);
   box-shadow: 0px 0px 0px var(--sjs2-border-width-x200)
     var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
   opacity: 0;
@@ -90,7 +90,7 @@
     left: calcSize(-0.5);
     right: calcSize(-0.5);
     //right: calcSize(-4.5); // if need pencil icon
-    border-radius: var(--ctr-text-decor-corner-radius, var(--lbr-corner-radius-x0375));
+    border-radius: calc(var(--sjs2-base-unit-radius) * 0.375);
     box-shadow: 0px 0px 0px var(--sjs2-border-width-x200)
       var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
     transition-delay: 0ms;
@@ -102,7 +102,7 @@
     left: calcSize(-1);
     right: calcSize(-1);
     box-sizing: content-box;
-    border-radius: var(--ctr-text-decor-corner-radius, var(--lbr-corner-radius-x0375));
+    border-radius: calc(var(--sjs2-base-unit-radius) * 0.375);
     background: var(--sjs2-color-bg-basic-primary);
     box-shadow:
       var(--ctr-text-decor-shadow-editing-offset-x, 0px) var(--ctr-text-decor-shadow-editing-offset-y, 2px)
@@ -192,7 +192,7 @@
 .sd-table__cell--column-title {
   .svc-matrix-cell:not(:focus):focus-within {
     .svc-matrix-cell--selected {
-      border-radius: var(--ctr-survey-matrix-cell-corner-radius, var(--lbr-corner-radius-x075));
+      border-radius: var(--sjs2-radius-x075);
       border: var(--sjs2-border-width-x200) solid var(--sjs2-color-bg-brand-primary);
       display: block;
     }

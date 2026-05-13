@@ -62,13 +62,13 @@
 
         &:hover,
         &:focus {
-            border-radius: var(--ctr-editor-button-corner-radius, var(--sjs-corner-radius-x05));
+            border-radius: var(--sjs2-radius-x050);
             background: var(--sjs2-color-bg-basic-secondary-dim);
             transition: background $creator-transition-duration;
         }
 
         &.sd-editor-button-item--pressed {
-            border-radius: var(--ctr-editor-button-corner-radius, var(--sjs-corner-radius-x05));
+            border-radius: var(--sjs2-radius-x050);
             opacity: var(--ctr-editor-button-icon-opacity-pressed, 0.5);
             background: var(--sjs2-color-bg-basic-secondary-dim);
             transition-property: opacity, background-color;

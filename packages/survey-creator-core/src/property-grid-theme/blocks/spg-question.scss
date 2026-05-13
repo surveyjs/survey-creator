@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  border-radius: var(--ctr-editor-corner-radius, var(--sjs-corner-radius-x075));
+  border-radius: var(--sjs2-radius-x075);
 }
 
 .spg-question__content {
@@ -181,7 +181,7 @@
 
   color: var(--sjs2-color-fg-basic-primary);
   background-color: var(--sjs2-color-bg-alert-secondary);
-  border-radius: var(--ctr-error-message-corner-radius, var(--sjs-corner-radius-x05));
+  border-radius: var(--sjs2-radius-x050);
 }
 
 .spg-question__erbox,
@@ -227,16 +227,14 @@ sv-question-error {
   .sd-formbox,
   .spg-question--location--left,
   .spg-table__cell:not(.spg-table__cell--detail-panel) .sd-formbox {
-    box-shadow: inset 0 0 0 var(--sjs2-border-width-x200)
-      var(--sjs2-color-fg-basic-primary-muted);
+    box-shadow: inset 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-fg-basic-primary-muted);
   }
 
   .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
-    outline: var(--sjs2-border-width-x200) solid
-      var(--sjs2-color-fg-basic-primary-muted);
+    outline: var(--sjs2-border-width-x200) solid var(--sjs2-color-fg-basic-primary-muted);
     outline-offset: calc(-1 * var(--sjs2-border-width-x200));
-    border-radius: var(--ctr-data-table-corner-radius, var(--sjs-corner-radius-x075));
+    border-radius: var(--sjs2-radius-x075);
 
     .sd-formbox {
       box-shadow: none;
@@ -244,8 +242,7 @@ sv-question-error {
   }
 
   .svc-action-button {
-    border: var(--sjs2-border-width-x200) solid
-      var(--sjs2-color-fg-basic-primary-muted);
+    border: var(--sjs2-border-width-x200) solid var(--sjs2-color-fg-basic-primary-muted);
   }
 
   .sv-button-group {
@@ -253,8 +250,7 @@ sv-question-error {
   }
 
   .spg-checkbox__control + .spg-checkbox__rectangle {
-    outline: var(--sjs2-border-width-x200) solid
-      var(--sjs2-color-fg-basic-primary-muted);
+    outline: var(--sjs2-border-width-x200) solid var(--sjs2-color-fg-basic-primary-muted);
     outline-offset: calc(-1 * var(--sjs2-border-width-x200));
   }
 }

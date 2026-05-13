@@ -97,7 +97,7 @@ svc-tab-json-editor-textarea {
     var(--ctr-code-viewer-code-error-row-fix-button-padding-bottom, 0px)
     var(--ctr-code-viewer-code-error-row-fix-button-padding-left, var(--sjs-spacing-x1));
 
-  border-radius: var(--ctr-code-viewer-code-error-row-fix-button-corner-radius, var(--sjs-corner-radius-x05));
+  border-radius: var(--sjs2-radius-x050);
   background: var(--sjs2-color-bg-basic-primary);
   box-shadow: var(--ctr-code-viewer-code-error-row-fix-button-shadow-offset-x, 0px)
     var(--ctr-code-viewer-code-error-row-fix-button-shadow-offset-y, 1px)

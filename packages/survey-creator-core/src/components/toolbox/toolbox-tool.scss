@@ -9,7 +9,7 @@
   padding-bottom: var(--ctr-toolbox-item-padding-bottom, var(--sjs-spacing-x1));
   padding-inline-end: var(--ctr-toolbox-item-padding-right, var(--sjs-spacing-x2));
   padding-inline-start: var(--ctr-toolbox-item-padding-left, var(--sjs-spacing-x150));
-  border-radius: var(--ctr-toolbox-item-corner-radius, var(--sjs-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
   cursor: pointer;
 }
 .svc-toolbox__item-icon {
@@ -93,7 +93,7 @@
   color: var(--sjs2-color-fg-basic-primary);
   transition: opacity $creator-transition-duration;
   /* Shadow / Medium */
-  border-radius: var(--ctr-tooltip-corner-radius, var(--sjs-corner-radius-x075));
+  border-radius: var(--sjs2-radius-x075);
   box-shadow:
     var(--ctr-tooltip-shadow-1-offset-x, 0px) var(--ctr-tooltip-shadow-1-offset-y, 2px)
       var(--ctr-tooltip-shadow-1-blur, 8px) var(--ctr-tooltip-shadow-1-spread, 0px)
@@ -227,7 +227,7 @@
 .svc-toolbox__tool .sv-dots__item:focus:enabled,
 .svc-toolbox__tool .sv-dots__item.sv-action-bar-item--pressed {
   background-color: var(--sjs2-color-bg-brand-secondary);
-  border-radius: var(--ctr-toolbox-item-corner-radius, var(--sjs-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
   box-shadow: none;
 
   .sv-svg-icon use {
@@ -250,7 +250,7 @@
     var(--ctr-toolbox-item-submenu-button-padding-left, var(--sjs-spacing-x05));
   box-sizing: border-box;
   align-items: center;
-  border-radius: var(--ctr-toolbox-item-submenu-button-corner-radius, var(--sjs-corner-radius-x05));
+  border-radius: var(--sjs2-radius-x050);
   background-color: var(--sjs2-color-bg-basic-primary);
   transition: background-color $creator-transition-duration;
   &:hover {
@@ -331,7 +331,7 @@
   }
 
   & > .sv-popup__container > .sv-popup__body-content {
-    border-radius: var(--ctr-toolbox-submenu-corner-radius, var(--sjs-corner-radius-x1));
+    border-radius: var(--sjs2-radius-x100);
     box-shadow:
       var(--ctr-toolbox-submenu-shadow-1-offset-x, 0px) var(--ctr-toolbox-submenu-shadow-1-offset-y, 2px)
         var(--ctr-toolbox-submenu-shadow-1-blur, 8px) var(--ctr-toolbox-submenu-shadow-1-spread, 0px)
@@ -360,7 +360,7 @@
   .svc-toolbox__item.svc-toolbox__item-subtype {
     opacity: var(--ctr-toolbox-item-opacity-submenu, 1);
     overflow: hidden;
-    border-radius: var(--ctr-toolbox-item-corner-radius, var(--sjs-corner-radius-x1));
+    border-radius: var(--sjs2-radius-x100);
     background: var(--sjs2-color-bg-basic-primary);
     box-shadow:
       var(--ctr-toolbox-item-shadow-hovered-1-offset-x, 0px) var(--ctr-toolbox-item-shadow-hovered-1-offset-y, 2px)

@@ -17,7 +17,7 @@
 
 .sl-table .sl-table__detail-button.sl-table__detail-button {
   box-sizing: border-box;
-  border-radius: var(--ctr-collapse-button-corner-radius, var(--sjs-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
   padding: var(--ctr-collapse-button-padding, var(--sjs-spacing-x150));
   transition: background-color $creator-transition-duration;
 
@@ -171,7 +171,7 @@
     width: auto;
     margin: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2)) 0 0 0;
     background-color: var(--sjs2-color-bg-brand-secondary);
-    border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
+    border-radius: var(--sjs2-radius-x100);
     padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
       var(--ctr-expression-item-padding-right-button, var(--sjs-spacing-x4))
       var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))

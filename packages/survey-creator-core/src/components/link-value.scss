@@ -2,7 +2,7 @@
 
 .svc-link__button {
   @include sjs2--typography--default-strong;
-  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
 }
 
 .svc-question-link__set-button {
