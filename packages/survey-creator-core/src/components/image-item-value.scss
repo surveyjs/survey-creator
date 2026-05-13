@@ -12,15 +12,14 @@
     box-sizing: border-box;
     border-radius: var(--lbr-image-corner-radius, var(--lbr-corner-radius-x05));
     border: var(--sjs2-border-width-x100) dashed
-      var(--sjs2-color-border-basic-secondary-for-tests-only);
+      var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
   }
 }
 
 .svc-image-item-value--file-dragging {
   .sd-imagepicker__image {
     border-radius: var(--lbr-image-corner-radius, var(--lbr-corner-radius-x05));
-    border: var(--sjs2-border-width-x200) solid
-      var(--sjs2-color-bg-brand-primary);
+    border: var(--sjs2-border-width-x200) solid var(--sjs2-color-bg-brand-primary);
     background: var(--sjs2-color-bg-brand-secondary);
   }
 }

@@ -13,7 +13,7 @@
   transform: scale(1.26) translate(-50%, -50%);
 
   border: var(--sjs2-border-width-x200) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only);
+    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
   background: var(--sjs2-color-bg-basic-secondary);
 }
 
@@ -25,8 +25,7 @@
   box-shadow:
     0px 2px 6px 0px rgba(0, 0, 0, 0.1),
     0px 8px 16px 0px var(--sjs2-color-utility-shadow-floating-default);
-  border: var(--sjs2-border-width-x400) solid
-    var(--sjs2-color-bg-basic-secondary);
+  border: var(--sjs2-border-width-x400) solid var(--sjs2-color-bg-basic-secondary);
   background: var(--sjs2-color-bg-basic-primary);
   box-sizing: content-box;
 }

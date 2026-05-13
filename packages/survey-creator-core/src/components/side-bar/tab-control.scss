@@ -6,7 +6,7 @@
   justify-content: space-between;
   align-items: flex-start;
   border-inline-start: var(--sjs2-border-width-x100) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only);
+    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
   background: var(--sjs2-color-bg-basic-primary);
   box-sizing: border-box;
 }
@@ -53,7 +53,7 @@
 
   & > div {
     height: var(--ctr-separator-width, var(--sjs-size-x0125));
-    background: var(--sjs2-color-border-basic-secondary-for-tests-only);
+    background: var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
     width: 100%;
   }
 }
@@ -91,8 +91,7 @@
   align-self: stretch;
 
   background: var(--sjs2-color-bg-basic-primary);
-  box-shadow: inset 0px calc(-1 * var(--sjs2-border-width-x200)) 0px
-    var(--sjs2-color-bg-brand-primary);
+  box-shadow: inset 0px calc(-1 * var(--sjs2-border-width-x200)) 0px var(--sjs2-color-bg-brand-primary);
   box-sizing: border-box;
   width: 100%;
 }
@@ -100,8 +99,7 @@
 .svc-sidebar__header--tabbed,
 .svc-sidebar__header-container {
   min-height: calc(
-    var(--sjs2-line-height-x300) +
-      var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) +
+    var(--sjs2-line-height-x300) + var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) +
       var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) +
       var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) +
       var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150))

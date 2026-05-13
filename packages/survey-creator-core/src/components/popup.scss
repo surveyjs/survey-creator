@@ -183,7 +183,8 @@
 
     .sv-popup__body-footer {
       background-color: var(--sjs2-color-bg-basic-secondary);
-      border-top: 1px solid var(--sjs2-color-border-basic-secondary-for-tests-only);
+      border-top: 1px solid
+        var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
     }
 
     .sv-menu-popup__button:disabled {
