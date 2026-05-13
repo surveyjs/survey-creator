@@ -52,7 +52,7 @@
   padding-inline-end: var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150));
 
   & > div {
-    height: var(--ctr-separator-width, var(--sjs-size-x0125));
+    height: var(--sjs2-border-width-x100);
     background: var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
     width: 100%;
   }

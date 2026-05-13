@@ -15,8 +15,8 @@
 }
 
 .svc-flex-row.svc-full-container {
-  height: calcSize(60);
-  min-height: calcSize(60);
+  height: calc(var(--sjs2-base-unit-size) * 60);
+  min-height: calc(var(--sjs2-base-unit-size) * 60);
   flex-grow: 1;
   position: relative;
 }
@@ -32,7 +32,7 @@
 }
 
 .sv-action-bar--default-size-mode .sv-action-bar-separator {
-  height: calcSize(5);
+  height: var(--sjs2-size-x500);
 }
 .sv-action-bar--default-size-mode .sv-action-bar-item {
   height: auto;
@@ -40,7 +40,7 @@
 }
 
 .sv-action-bar--small-size-mode .sv-action-bar-separator {
-  height: calcSize(4);
+  height: var(--sjs2-size-x400);
 }
 .sv-action-bar--small-size-mode .sv-action-bar-item {
   height: auto;
@@ -49,7 +49,7 @@
 
 .svc-creator--mobile {
   .sv-action-bar-separator {
-    height: var(--sjs-spacing-x3);
+    height: var(--sjs2-size-x300);
   }
 }
 

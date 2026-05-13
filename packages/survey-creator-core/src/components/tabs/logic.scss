@@ -293,7 +293,7 @@
 }
 
 .sd-comment.sl-comment {
-  height: calcSize(17);
+  height: calc(var(--sjs2-base-unit-line-height) * 17);
 }
 .sl-body {
   @include disableLibraryAnimations;

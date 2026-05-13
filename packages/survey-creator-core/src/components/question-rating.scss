@@ -102,7 +102,7 @@
 
   .svc-rating-question-controls {
     display: flex;
-    width: calcSize(8);
+    width: var(--sjs2-size-x800);
     min-width: auto;
     justify-content: flex-start;
   }

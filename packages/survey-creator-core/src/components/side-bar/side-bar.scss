@@ -9,9 +9,9 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   flex-direction: column;
   display: flex;
   position: relative;
-  width: var(--ctr-property-grid-width, var(--sjs-size-x60));
-  min-width: var(--ctr-property-grid-min-width, var(--sjs-size-x40));
-  max-width: var(--sjs-size-x90);
+  width: calc(var(--sjs2-base-unit-size) * 60);
+  min-width: calc(var(--sjs2-base-unit-size) * 40);
+  max-width: calc(var(--sjs2-base-unit-size) * 90);
   height: 100%;
   background: var(--sjs2-color-bg-basic-primary);
   border-inline-start: var(--sjs2-border-width-x100) solid

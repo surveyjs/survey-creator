@@ -15,7 +15,7 @@ svc-page-navigator,
 }
 
 .svc-page-navigator__popup {
-  min-width: calcSize(12.5);
+  min-width: calc(var(--sjs2-base-unit-size) * 12.5);
 }
 
 .svc-tab-designer__page-navigator {

@@ -3,7 +3,7 @@
 .spg-comment {
   height: auto;
   max-width: 100%;
-  min-width: calcSize(6);
-  min-height: calcSize(6);
-  line-height: calcSize(3);
+  min-width: var(--sjs2-size-x600);
+  min-height: var(--sjs2-size-x600);
+  line-height: var(--sjs2-line-height-x300);
 }

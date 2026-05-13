@@ -61,8 +61,8 @@
 }
 
 .svc-switcher__icon-thumb {
-  width: var(--ctr-property-grid-switcher-toggle-button-thumb-width, var(--sjs-size-x1));
-  height: var(--ctr-property-grid-switcher-toggle-button-thumb-height, var(--sjs-size-x1));
+  width: var(--sjs2-size-x100);
+  height: var(--sjs2-size-x100);
   border-radius: var(--sjs2-radius-round);
   background-color: var(--sjs2-color-fg-basic-secondary);
 

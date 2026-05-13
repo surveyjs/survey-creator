@@ -62,7 +62,7 @@
 }
 
 .svc-question__content--in-popup {
-  min-width: calcSize(70);
+  min-width: calc(var(--sjs2-base-unit-size) * 70);
   padding: calcSize(5);
 }
 

@@ -65,7 +65,7 @@
     }
 
     .sv-components-column--expandable {
-      min-width: calcSize(78);
+      min-width: calc(var(--sjs2-base-unit-size) * 78);
     }
   }
 
@@ -75,7 +75,7 @@
 
   .sd-body,
   .sl-body {
-    min-width: calcSize(78);
+    min-width: calc(var(--sjs2-base-unit-size) * 78);
     padding: 0;
   }
 }

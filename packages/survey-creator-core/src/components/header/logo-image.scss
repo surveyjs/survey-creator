@@ -19,8 +19,8 @@
 }
 
 .svc-logo-image__loading {
-  width: var(--ctr-survey-header-logo-loading-width, var(--lbr-size-x6));
-  height: var(--ctr-survey-header-logo-loading-height, var(--lbr-size-x6));
+  width: var(--sjs2-size-x600);
+  height: var(--sjs2-size-x600);
   padding: var(--ctr-survey-header-logo-loading-margin-top, var(--lbr-spacing-x1))
     var(--ctr-survey-header-logo-loading-margin-right, var(--lbr-spacing-x1))
     var(--ctr-survey-header-logo-loading-margin-bottom, var(--lbr-spacing-x1))
@@ -57,8 +57,8 @@
   }
 
   svg {
-    width: var(--ctr-survey-header-logo-placeholder-icon-width, var(--lbr-size-x6));
-    height: var(--ctr-survey-header-logo-placeholder-icon-height, var(--lbr-size-x6));
+    width: var(--sjs2-size-x600);
+    height: var(--sjs2-size-x600);
   }
 }
 

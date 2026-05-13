@@ -17,7 +17,7 @@
   box-shadow: 0px 2px 6px 0px var(--sjs2-color-utility-shadow-floating-default);
   border-radius: var(--sjs2-radius-x050);
   color: var(--sjs2-color-fg-basic-primary);
-  min-width: calcSize(30);
+  min-width: calc(var(--sjs2-base-unit-size) * 30);
   text-align: center;
   z-index: 1600; //todo: should overlap popup
 

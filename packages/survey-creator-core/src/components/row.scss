@@ -18,7 +18,7 @@
 
 .svc-row .sd-row.sd-row--multiple {
   overflow: auto;
-  width: calc(100% + 4 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  width: calc(100% + var(--sjs2-spacing-x400));
   flex-wrap: nowrap;
   margin-top: 0;
   padding-top: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
@@ -48,7 +48,7 @@
   }
 
   .sd-row {
-    height: calcSize(4);
+    height: var(--sjs2-size-x400);
   }
 
   &:last-child .sd-row {

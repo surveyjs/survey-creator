@@ -83,7 +83,7 @@
   box-sizing: border-box;
   align-items: center;
   inset-inline-start: var(--ctr-toolbox-item-banner-left, var(--thm-toolbox-item-banner-left));
-  max-width: calcSize(100);
+  max-width: calc(var(--sjs2-base-unit-size) * 100);
   padding-top: var(--ctr-tooltip-padding-top, var(--sjs-spacing-x2));
   padding-inline-end: var(--ctr-tooltip-padding-right, var(--sjs-spacing-x3));
   padding-bottom: var(--ctr-tooltip-padding-bottom, var(--sjs-spacing-x2));
@@ -121,8 +121,8 @@
   &:after {
     content: " ";
     display: var(--ctr-toolbox-item-banner-beak-display, block);
-    width: calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) * 1.41);
-    height: calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) * 1.41);
+    width: calc(var(--sjs2-size-x050) * 1.41);
+    height: calc(var(--sjs2-size-x050) * 1.41);
     background: var(--sjs2-color-bg-basic-primary);
     border-top-color: transparent;
     border-inline-end-color: transparent;

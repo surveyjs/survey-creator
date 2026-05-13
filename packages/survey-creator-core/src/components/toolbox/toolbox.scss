@@ -240,7 +240,7 @@
 
   box-sizing: border-box;
   width: 100%;
-  min-width: calcSize(20);
+  min-width: calc(var(--sjs2-base-unit-size) * 20);
   position: relative;
   display: flex;
   align-items: center;

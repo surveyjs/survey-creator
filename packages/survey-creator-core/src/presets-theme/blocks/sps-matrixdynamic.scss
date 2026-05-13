@@ -1,24 +1,10 @@
 @use "../../variables.scss" as *;
 @use "../../typography-mixins.scss" as *;
 
-// .sps-matrixdynamic__drag-element {
-//   padding: calcSize(2);
-
-//   &:hover {
-//     background-color: $background;
-//   }
-
-//   &:after {
-//     content: " ";
-//     display: block;
-//     height: calcSize(0.5);
-//   }
-// }
-
 .sps-drag-element__svg {
   box-sizing: content-box;
-  width: var(--sjs2-size-icon-medium, 24px);
-  height: var(--sjs2-size-icon-medium, 24px);
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
   display: flex;
   padding: var(--sjs2-spacing-x100, 8px);
   padding-right: 0;
@@ -39,7 +25,7 @@
 .sps-matrixdynamic__drag-drop-ghost-position-bottom::after {
   content: "";
   width: 100%;
-  height: calcSize(0.5);
+  height: var(--sjs2-size-x050);
   background-color: var(--sjs2-color-bg-brand-primary);
   position: absolute;
   left: 0;
@@ -106,8 +92,8 @@
 }
 
 .sps-matrixdynamic__row-icon {
-  width: var(--sjs2-size-icon-medium, 24px);
-  height: var(--sjs2-size-icon-medium, 24px);
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
   padding: 0;
   margin: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1)) 0
     var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1)) 0;

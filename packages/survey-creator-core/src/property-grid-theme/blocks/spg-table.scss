@@ -111,7 +111,7 @@
 }
 
 .spg-table__cell--actions:first-of-type {
-  width: calcSize(5);
+  width: var(--sjs2-size-x500);
 }
 
 .spg-table__cell--actions:last-of-type {

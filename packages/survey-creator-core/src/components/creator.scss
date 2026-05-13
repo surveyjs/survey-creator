@@ -26,8 +26,8 @@ survey-creator,
     }
 
     &::-webkit-scrollbar {
-      width: var(--ctr-scrollbar-width, var(--sjs-size-x150));
-      height: var(--ctr-scrollbar-width, var(--sjs-size-x150));
+      width: var(--sjs2-size-x150);
+      height: var(--sjs2-size-x150);
       background-color: transparent;
     }
 
@@ -147,7 +147,7 @@ survey-creator,
 
 .svc-creator__banner {
   width: 100%;
-  line-height: calcSize(4);
+  line-height: var(--sjs2-line-height-x400);
   background-color: var(--sjs2-color-bg-brand-primary);
   text-align: center;
 }
@@ -173,7 +173,7 @@ survey-creator,
 .sv-drag-drop-ghost {
   top: calcSize(0.75);
   width: 100%;
-  height: calcSize(0.5);
+  height: var(--sjs2-size-x050);
   background: var(--sjs2-color-bg-brand-primary);
   position: absolute;
 }

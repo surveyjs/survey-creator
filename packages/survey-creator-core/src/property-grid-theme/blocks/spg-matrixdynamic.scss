@@ -26,7 +26,7 @@
 .spg-matrixdynamic__drag-drop-ghost-position-bottom::after {
   content: "";
   width: 100%;
-  height: calcSize(0.5);
+  height: var(--sjs2-size-x050);
   background-color: var(--sjs2-color-bg-brand-primary);
   position: absolute;
   left: 0;
@@ -74,8 +74,8 @@
 }
 
 .spg-smiley-icon {
-  width: calcSize(3);
-  height: calcSize(3);
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
   margin: calcSize(1);
   border-radius: var(--sjs2-radius-round);
   border: 1px solid var(--sjs2-color-fg-basic-primary-muted);
@@ -86,8 +86,8 @@
   box-sizing: content-box;
 
   svg {
-    width: calcSize(1.5);
-    height: calcSize(1.5);
+    width: var(--sjs2-size-x150);
+    height: var(--sjs2-size-x150);
     fill: var(--sjs2-color-fg-basic-primary-muted);
   }
 }

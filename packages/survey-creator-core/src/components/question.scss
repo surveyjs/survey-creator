@@ -1036,7 +1036,7 @@ svc-question,
   }
 
   .sd-question__content {
-    min-width: min(var(--sjs2-size-x800, 64px), 100%);
+    min-width: min(var(--sjs2-size-x800), 100%);
     margin-left: var(--sjs2-spacing-negative-x500, -40px);
     margin-right: var(--sjs2-spacing-negative-x500, -40px);
     padding-left: var(--sjs2-spacing-x500, 40px);

@@ -8,7 +8,7 @@
   .spg-paneldynamic__separator {
     border: none;
     margin: 0;
-    height: calcSize(1);
+    height: var(--sjs2-size-x100);
   }
   .spg-paneldynamic__footer {
     .spg-paneldynamic__separator {
@@ -142,7 +142,7 @@
 
 .svc-side-bar--mobile .spg-theme-builder-root {
   .spg-nested-panel__content::after {
-    width: calc(4 * var(--sjs-base-unit, var(--base-unit, 8px)) + 100%);
-    left: calc(-2 * var(--sjs-base-unit, var(--base-unit, 8px)));
+    width: calc(var(--sjs2-size-400) + 100%);
+    left: var(--sjs2-spacing-negative-x200);
   }
 }
