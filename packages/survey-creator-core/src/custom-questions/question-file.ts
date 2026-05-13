@@ -2,6 +2,7 @@ import { Action, ActionContainer, ComputedUpdater, DomDocumentHelper } from "sur
 import { Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
 
 export class QuestionFileEditorModel extends QuestionFileModel {
+  confirmDelete = false;
   protected loadedFilesValue: any;
   protected onChangeQuestionValue(newValue: any): void { }
   protected setNewValue(newValue: any): void {
