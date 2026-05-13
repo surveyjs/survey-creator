@@ -1,5 +1,4 @@
 import { defaultCss } from "survey-core";
-import { listComponentCss } from "../components/list-theme";
 
 export var propertyGridCss = {
   root: "spg-root-modern",
@@ -314,7 +313,6 @@ export var propertyGridCss = {
       buttonCollapsed: ""
     }
   },
-  list: JSON.parse(JSON.stringify(listComponentCss)),
   actionBar: {
     root: "sd-action-bar spg-action-bar",
   },

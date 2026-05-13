@@ -235,7 +235,7 @@ svc-question {
 }
 
 .svc-panel__placeholder {
-  @include lbrDefaultFont;
+  @include sjs2--typography--default;
   color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
   text-wrap: wrap;
   text-align: center;
@@ -291,31 +291,6 @@ svc-question {
 
 .svc-dropdown-action--convertTo-last {
   margin-inline-end: auto; // margin-right
-}
-
-.svc-survey-element-toolbar__dots-item {
-  .svc-list__item-icon {
-    width: calc(
-      var(--sjs2-size-x300, 24px) - var(
-          --ctr-survey-question-panel-toolbar-item-icon-padding-right,
-          var(--sjs2-spacing-x050, 4px)
-        ) - var(--sjs2-spacing-x050, 4px)
-    );
-    height: calc(
-      var(--sjs2-size-x300, 24px) - var(
-          --ctr-survey-question-panel-toolbar-item-icon-padding-top,
-          var(--sjs2-spacing-x050, 4px)
-        ) - var(--sjs2-spacing-x050, 4px)
-    );
-  }
-  .svc-list__item {
-    &,
-    &:hover {
-      & > .svc-list__item-body .sv-svg-icon use {
-        fill: var(--sjs-secondary-background-500, #ff9814);
-      }
-    }
-  }
 }
 
 .svc-question__content:focus,
@@ -472,7 +447,7 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut__text {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 320px;
@@ -961,6 +936,7 @@ svc-question,
   position: relative;
   margin-top: var(--sjs2-spacing-x050, 4px);
 }
+
 .svc-panel__question-type-selector {
   position: absolute;
   inset-inline-end: 0;

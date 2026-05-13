@@ -62,8 +62,8 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
   public decrease(): void {
     this.changeValue(false);
   }
-  private increaseTimer: NodeJS.Timer;
-  private decreaseTimer: NodeJS.Timer;
+  private increaseTimer: any;
+  private decreaseTimer: any;
 
   private clearTimers() {
     clearTimeout(this.decreaseTimer);

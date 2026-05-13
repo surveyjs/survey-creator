@@ -3,6 +3,7 @@
 .svc-test-tab__content {
   align-items: center;
   justify-content: center;
+  background: var(--sjs2-color-utility-surface-designer);
 }
 
 .svc-test-tab__content .svc-plugin-tab__content {
@@ -40,22 +41,8 @@
   }
 }
 
-.svc-page-invisible {
-  .svc-list__item-body {
-    padding-block-start: var(--ctr-list-item-padding-top, var(--sjs-spacing-x150));
-    padding-block-end: var(--ctr-list-item-padding-bottom, var(--sjs-spacing-x150));
-    padding-inline-start: var(--ctr-list-item-padding-left, var(--sjs-spacing-x2));
-    padding-inline-end: var(--ctr-list-item-padding-right-with-label-icon, var(--sjs-spacing-x150));
-  }
-  .svc-list-item__marker-icon {
-    padding: 0;
-    opacity: var(--ctr-list-item-icon-opacity-label, 0.5);
-    width: var(--ctr-list-item-icon-width, var(--sjs-font-size-x3));
-    height: var(--ctr-list-item-icon-height, var(--sjs-font-size-x3));
-  }
-}
 .svc-test-tab__content .sd-body--empty {
-  @include ctrDefaultFont;
+  @include sjs2--typography--default;
   color: var(--sjs-layer-1-foreground-100, #000000e6);
   text-align: center;
   overflow: hidden;

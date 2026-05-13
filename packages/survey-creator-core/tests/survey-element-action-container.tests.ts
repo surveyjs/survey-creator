@@ -1,7 +1,8 @@
-import { Action, ActionContainer, AdaptiveContainerUpdateOptions, IAction, PopupDropdownViewModel, ResponsivityManager, UpdateResponsivenessMode } from "survey-core";
+﻿import { Action, ActionContainer, AdaptiveContainerUpdateOptions, IAction, PopupDropdownViewModel, ResponsivityManager, UpdateResponsivenessMode } from "survey-core";
 import { SurveyElementActionContainer } from "../src/components/action-container-view-model";
 import { CreatorTester } from "./creator-tester";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { vi } from "vitest";
 
 test("SurveyElementActionContainer with subtypes fit", () => {
   const actionContainer = new SurveyElementActionContainer();
@@ -260,7 +261,7 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   const q3 = creator.survey.getQuestionByName("q3");
   creator.selectElement(q1);
 
-  const spy = jest.spyOn(ResponsivityManager.prototype as any, "updateItemsDimensions");
+  const spy = vi.spyOn(ResponsivityManager.prototype as any, "updateItemsDimensions");
   const q1Adapter = new TestQuestionAdornerViewModel(creator, q1, <any>undefined);
   const q2Adapter = new TestQuestionAdornerViewModel(creator, q2, <any>undefined);
   const q3Adapter = new TestQuestionAdornerViewModel(creator, q3, <any>undefined);
@@ -268,7 +269,7 @@ test("Check actions container responsiveness doesn't run when invisible", () => 
   const q2ActionsContainer = q2Adapter.actionContainer as TestSurveyElementActionContainer;
   const q3ActionsContainer = q3Adapter.actionContainer as TestSurveyElementActionContainer;
   const container = document.createElement("div");
-  jest.spyOn(container, "offsetWidth", "get").mockImplementation(() => {
+  vi.spyOn(container, "offsetWidth", "get").mockImplementation(() => {
     return 100;
   });
   expect(q1ActionsContainer["isResponsivenessAllowed"]).toBeTruthy();

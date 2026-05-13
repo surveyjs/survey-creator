@@ -27,11 +27,17 @@ function debounce(func, delay) {
 }
 
 const updateRowsVisibility = debounce((target: SurveyElementAdornerBase) => {
-  if (target.creator.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) {
+  const root = target?.creator?.rootElement;
+  if (!root || typeof (root as any).getAnimations !== "function") {
+    return;
+  }
+  if (root.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) {
     updateRowsVisibility(target);
   } else {
-    target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
-    target.creator.survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
+    const survey = target?.creator?.survey;
+    if (!survey) return;
+    survey.pages.forEach(p => p.ensureRowsVisibility());
+    survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
   }
 }, 50);
 

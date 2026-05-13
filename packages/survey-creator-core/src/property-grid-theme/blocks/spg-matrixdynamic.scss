@@ -2,8 +2,8 @@
 @use "../../typography-mixins.scss" as *;
 
 .spg-drag-element__svg {
-  width: var(--ctr-data-table-row-drag-area-icon-width, var(--sjs-font-size-x3));
-  height: var(--ctr-data-table-row-drag-area-icon-height, var(--sjs-font-size-x3));
+  width: var(--sjs2-typography-line-height-default);
+  height: var(--sjs2-typography-line-height-default);
   padding-top: var(--ctr-data-table-row-drag-area-padding-top, var(--sjs-spacing-x1));
   padding-inline-end: var(--ctr-data-table-row-drag-area-padding-right, var(--sjs-spacing-x1));
   padding-bottom: var(--ctr-data-table-row-drag-area-padding-bottom, var(--sjs-spacing-x1));

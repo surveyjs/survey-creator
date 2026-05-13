@@ -6,9 +6,9 @@
 
 .sv-string-viewer {
   .spg-link {
+    @include sjs2--typography--default-strong;
     display: initial;
     color: var(--ctr-survey-action-button-text-color-positive, var(--sjs-primary-background-500, #19b394ff));
-    font-weight: 600;
     text-decoration-line: underline;
   }
 }
