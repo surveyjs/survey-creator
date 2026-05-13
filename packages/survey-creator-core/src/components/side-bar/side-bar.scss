@@ -14,8 +14,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   max-width: var(--sjs-size-x90);
   height: 100%;
   background: var(--sjs2-color-bg-basic-primary);
-  border-inline-start: var(--sjs2-border-width-x100) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only);
+  border-inline-start: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   box-sizing: content-box;
 }
 

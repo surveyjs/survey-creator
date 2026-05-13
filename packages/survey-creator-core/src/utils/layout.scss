@@ -65,7 +65,7 @@
   display: flex;
   background: var(--sjs2-color-utility-tabs);
   box-sizing: border-box;
-  box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary-for-tests-only);
+  box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary);
 
   .svc-toolbar-wrapper {
     flex: 0 0 auto;
@@ -84,7 +84,7 @@
   }
 
   .sv-action-bar-separator {
-    background-color: var(--sjs2-color-border-basic-secondary-for-tests-only);
+    background-color: var(--sjs2-color-border-basic-secondary);
   }
 
   .sv-action-bar-item-dropdown {
@@ -93,7 +93,6 @@
   }
 }
 
-
 .svc-footer-bar {
   .svc-toolbar-wrapper {
     .svc-toolbar {
@@ -101,9 +100,10 @@
       padding: 0;
       width: 100%;
 
-      padding: var(--ctr-menu-toolbar-padding-vertical-mobile, var(--sjs-spacing-x05)) var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
-      background:  var(--sjs2-color-bg-basic-primary);
-      border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary-for-tests-only);
+      padding: var(--ctr-menu-toolbar-padding-vertical-mobile, var(--sjs-spacing-x05))
+        var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
+      background: var(--sjs2-color-bg-basic-primary);
+      border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
       box-sizing: border-box;
     }
   }
