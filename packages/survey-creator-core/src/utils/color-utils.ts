@@ -1,4 +1,5 @@
 import { roundTo2Decimals } from "./utils";
+import { getRGBaColor } from "survey-core";
 
 export class ColorCalculator {
   colorSettings: Array<{ colorAlpha: number, colorDelta: number }> = [];
@@ -64,7 +65,9 @@ export function convertRgbaToString(rgbValues: Array<number>, alpha: number): st
 }
 
 export function parseRgbaFromString(value: string = ""): Array<number> {
-  const matchRgb = value.match(/\((.*)\)/);
+  const colorRgba = getRGBaColor(value);
+  if (!colorRgba) return [];
+  const matchRgb = colorRgba.match(/\((.*)\)/);
   if (matchRgb) {
     return matchRgb[1].split(",").map(i => parseFloat(i));
   } else {
