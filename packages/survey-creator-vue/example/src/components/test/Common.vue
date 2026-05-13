@@ -7,7 +7,7 @@
 import { slk } from "survey-core";
 import { registerSurveyTheme, registerCreatorTheme, SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
 import SurveyThemes from "survey-core/themes";
-import TestLibraryTheme from "survey-core/themes/test-library";
+import TestLibraryTheme from "survey-core/themes/test";
 import TestCreatorTheme from "survey-core/themes/test-creator";
 import TestSurfaceTheme from "survey-core/themes/test-surface";
 registerSurveyTheme(SurveyThemes);
