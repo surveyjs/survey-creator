@@ -307,6 +307,7 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     presets.forEach(p => {
       p.action = (item) => {
+        if (!this.editor) return;
         this.pagesList.selectedItem = item;
         this.editor.model.currentPage = this.editor.model.getPageByName(item.id);
       };
@@ -426,7 +427,9 @@ export class UIPresetEditor implements ICreatorPlugin {
       listAction.title = this.presetsList.selectedItem.title || "";
     }
     setTimeout(() => {
-      presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);
+      const preset = presets[this.currentPresetIndex];
+      if (!this.editor || !preset || !preset.action) return;
+      preset.action(preset);
     }, 100);
   }
 

@@ -1,15 +1,16 @@
-import { ListModel, QuestionDropdownModel, SurveyModel, settings, IAction, QuestionMatrixDynamicModel, Action, MatrixDynamicRowModel } from "survey-core";
+﻿import { ListModel, QuestionDropdownModel, SurveyModel, settings, IAction, QuestionMatrixDynamicModel, Action, MatrixDynamicRowModel } from "survey-core";
 import { PresetsManager } from "../src/ui-preset-editor/presets-manager";
 import { CreatorPresets, IPreset, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
 import { getLocString } from "../src/editorLocalization";
+import { vi, type Mock, type MockInstance } from "vitest";
 
-jest.mock("survey-core", () => {
-  const originalModule = jest.requireActual("survey-core");
+vi.mock("survey-core", async () => {
+  const originalModule = await vi.importActual<typeof import("survey-core")>("survey-core");
   return {
     ...originalModule,
     settings: {
       ...originalModule.settings,
-      showDialog: jest.fn()
+      showDialog: vi.fn()
     }
   };
 });
@@ -18,8 +19,8 @@ describe("PresetsManager", () => {
   let manager: PresetsManager;
   let mockPresetsList: ListModel;
   let mockPresetSelector: QuestionDropdownModel;
-  let mockSelectPresetCallback: jest.Mock;
-  let mockShowDialog: jest.SpyInstance;
+  let mockSelectPresetCallback: Mock;
+  let mockShowDialog: MockInstance;
 
   const originalCreatorPresets = { ...CreatorPresets };
   const originalPredefinedPresets = [...PredefinedCreatorPresets];
@@ -29,29 +30,29 @@ describe("PresetsManager", () => {
     PredefinedCreatorPresets.length = 0;
 
     mockPresetsList = {
-      setItems: jest.fn((items: any[]) => { (mockPresetsList as any).actions = items; }) as any,
+      setItems: vi.fn((items: any[]) => { (mockPresetsList as any).actions = items; }) as any,
       selectedItem: null,
       actions: [] as any,
-      onItemClick: jest.fn(),
-      getActionById: jest.fn()
+      onItemClick: vi.fn(),
+      getActionById: vi.fn()
     } as any;
 
     mockPresetSelector = {
       choices: []
     } as any;
 
-    mockSelectPresetCallback = jest.fn();
+    mockSelectPresetCallback = vi.fn();
 
     manager = new PresetsManager();
     manager.presetsList = mockPresetsList;
     manager.presetSelector = mockPresetSelector;
     manager.selectPresetCallback = mockSelectPresetCallback;
 
-    mockShowDialog = jest.spyOn(settings, "showDialog");
+    mockShowDialog = vi.spyOn(settings, "showDialog");
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     Object.keys(CreatorPresets).forEach(key => delete CreatorPresets[key]);
     Object.assign(CreatorPresets, originalCreatorPresets);
     PredefinedCreatorPresets.length = 0;
@@ -133,7 +134,7 @@ describe("PresetsManager", () => {
       };
 
       manager.addPreset(preset);
-      jest.clearAllMocks();
+      vi.clearAllMocks();
 
       manager.removePreset("custom4");
 
@@ -170,7 +171,7 @@ describe("PresetsManager", () => {
       manager.update();
 
       expect(mockPresetsList.setItems).toHaveBeenCalled();
-      expect(Array.isArray((mockPresetsList.setItems as jest.Mock).mock.calls[0][0])).toBe(true);
+      expect(Array.isArray((mockPresetsList.setItems as Mock).mock.calls[0][0])).toBe(true);
     });
 
     test("should update choices in presetSelector", () => {
@@ -183,7 +184,7 @@ describe("PresetsManager", () => {
     test("should include predefined presets in menu", () => {
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const basicAction = menuItems.find(item => item.id === "basic");
 
       expect(basicAction).toBeDefined();
@@ -195,11 +196,11 @@ describe("PresetsManager", () => {
         json: {}
       };
       manager.addPreset(preset);
-      jest.clearAllMocks();
+      vi.clearAllMocks();
 
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const customAction = menuItems.find(item => item.id === "customMenu");
 
       expect(customAction).toBeDefined();
@@ -208,7 +209,7 @@ describe("PresetsManager", () => {
     test("should include edit list item", () => {
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const editItem = menuItems.find(item => item.id === "editPresetsList");
 
       expect(editItem).toBeDefined();
@@ -225,7 +226,7 @@ describe("PresetsManager", () => {
 
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const hiddenAction = menuItems.find(item => item.id === "hidden");
 
       expect(hiddenAction).toBeUndefined();
@@ -235,10 +236,10 @@ describe("PresetsManager", () => {
   describe("Saving presets via saveAs", () => {
     test("should show dialog for entering name in saveAs", () => {
       const json = { toolbox: { showCategoryTitles: true } };
-      const saveCallback = jest.fn();
+      const saveCallback = vi.fn();
 
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.saveAs(json, saveCallback);
@@ -251,10 +252,10 @@ describe("PresetsManager", () => {
 
     test("should create survey with dropdown for entering name", () => {
       const json = { toolbox: {} };
-      const saveCallback = jest.fn();
+      const saveCallback = vi.fn();
 
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.saveAs(json, saveCallback);
@@ -270,14 +271,14 @@ describe("PresetsManager", () => {
 
     test("should add preset and call callback on confirmation", () => {
       const json = { toolbox: { showCategoryTitles: true } };
-      const saveCallback = jest.fn();
+      const saveCallback = vi.fn();
       const newName = "savedPreset";
 
       let onApplyCallback: (() => boolean) | undefined;
 
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.saveAs(json, saveCallback);
@@ -294,11 +295,11 @@ describe("PresetsManager", () => {
 
     test("should select new preset after saveAs", () => {
       const json = {};
-      const saveCallback = jest.fn();
+      const saveCallback = vi.fn();
       const newName = "clickedPreset";
 
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.saveAs(json, saveCallback);
@@ -317,13 +318,13 @@ describe("PresetsManager", () => {
       const presetName = "existingPreset";
       const initialJson = { toolbox: { showCategoryTitles: false } };
       const updatedJson = { toolbox: { showCategoryTitles: true } };
-      const saveCallback = jest.fn();
+      const saveCallback = vi.fn();
 
       // Prepare existing custom preset so it is present in the manager's custom list.
       manager.addPreset({ name: presetName, json: initialJson });
 
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.saveAs(updatedJson, saveCallback);
@@ -347,10 +348,10 @@ describe("PresetsManager", () => {
 
     test("should not add preset when dialog is cancelled", () => {
       const json = {};
-      const saveCallback = jest.fn();
+      const saveCallback = vi.fn();
 
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.saveAs(json, saveCallback);
@@ -374,11 +375,11 @@ describe("PresetsManager", () => {
 
     test("should show edit list dialog", () => {
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.update();
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const editItem = menuItems.find(item => item.id === "editPresetsList");
 
       if (editItem && editItem.action) {
@@ -393,11 +394,11 @@ describe("PresetsManager", () => {
 
     test("should add matrix editor to survey for editing", () => {
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.update();
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const editItem = menuItems.find(item => item.id === "editPresetsList");
       if (editItem && editItem.action) {
         editItem.action();
@@ -416,11 +417,11 @@ describe("PresetsManager", () => {
 
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.update();
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const editItem = menuItems.find(item => item.id === "editPresetsList");
       if (editItem && editItem.action) {
         editItem.action();
@@ -451,11 +452,11 @@ describe("PresetsManager", () => {
 
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.update();
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const editItem = menuItems.find(item => item.id === "editPresetsList");
       if (editItem && editItem.action) {
         editItem.action();
@@ -472,7 +473,7 @@ describe("PresetsManager", () => {
       onApplyCallback!();
 
       manager.update();
-      const setItemsMock = mockPresetsList.setItems as jest.Mock;
+      const setItemsMock = mockPresetsList.setItems as Mock;
       const updatedMenuItems = setItemsMock.mock.calls[setItemsMock.mock.calls.length - 1][0] as IAction[];
       const customAction = updatedMenuItems.find(item => item.id === "newCustom");
       expect(customAction).toBeDefined();
@@ -493,11 +494,11 @@ describe("PresetsManager", () => {
       let onApplyCallback: (() => boolean) | undefined;
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       manager.update();
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const editItem = menuItems.find(item => item.id === "editPresetsList");
       if (editItem && editItem.action) {
         editItem.action();
@@ -668,7 +669,7 @@ describe("PresetsManager", () => {
 
       const row = matrixQuestion.visibleRows.find((r: any) => r.getValue("custom") === true) as any;
 
-      matrixQuestion.removeRowUI = jest.fn();
+      matrixQuestion.removeRowUI = vi.fn();
       const options: any = {
         question: matrixQuestion,
         row: row,
@@ -746,7 +747,7 @@ describe("PresetsManager", () => {
 
     test("should call selectPresetCallback when preset is selected", () => {
       manager.update();
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const basicAction = menuItems.find(item => item.id === "basic");
 
       expect(basicAction).toBeDefined();
@@ -827,7 +828,7 @@ describe("PresetsManager", () => {
 
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       const options: any = {
@@ -880,7 +881,7 @@ describe("PresetsManager", () => {
       const matrixQuestion = survey.getQuestionByName("presetsList") as QuestionMatrixDynamicModel;
 
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       const options: any = {
@@ -907,7 +908,7 @@ describe("PresetsManager", () => {
       const matrixQuestion = survey.getQuestionByName("presetsList") as QuestionMatrixDynamicModel;
 
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       const options: any = {
@@ -945,7 +946,7 @@ describe("PresetsManager", () => {
 
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       const options: any = {
@@ -983,7 +984,7 @@ describe("PresetsManager", () => {
 
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       const options: any = {
@@ -1017,7 +1018,7 @@ describe("PresetsManager", () => {
 
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       const options: any = {
@@ -1051,7 +1052,7 @@ describe("PresetsManager", () => {
       const matrixQuestion = survey.getQuestionByName("presetsList") as QuestionMatrixDynamicModel;
 
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       const options: any = {
@@ -1079,10 +1080,10 @@ describe("PresetsManager", () => {
       let onApplyCallback: (() => boolean) | undefined;
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
-      manager.saveAs({}, jest.fn());
+      manager.saveAs({}, vi.fn());
 
       const survey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
       survey.setValue("presetName", "basic");
@@ -1094,10 +1095,10 @@ describe("PresetsManager", () => {
       let onApplyCallback: (() => boolean) | undefined;
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
-      manager.saveAs({}, jest.fn());
+      manager.saveAs({}, vi.fn());
 
       const survey = mockShowDialog.mock.calls[0][0].data.survey as SurveyModel;
       survey.setValue("presetName", "myCustomPreset");
@@ -1113,7 +1114,7 @@ describe("PresetsManager", () => {
       let onApplyCallback: (() => boolean) | undefined;
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       survey.onMatrixRowAdding.fire(survey, { question: matrixQuestion, allow: true, canAddRow: true } as any);
@@ -1134,7 +1135,7 @@ describe("PresetsManager", () => {
       let onApplyCallback: (() => boolean) | undefined;
       mockShowDialog.mockImplementation((options) => {
         onApplyCallback = options.onApply;
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
       survey.onMatrixRowAdding.fire(survey, { question: matrixQuestion, allow: true, canAddRow: true } as any);
@@ -1153,7 +1154,7 @@ describe("PresetsManager", () => {
       manager.update();
 
       expect(mockPresetsList.setItems).toHaveBeenCalled();
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const editItem = menuItems.find(item => item.id === "editPresetsList");
       expect(editItem).toBeDefined();
     });
@@ -1164,7 +1165,7 @@ describe("PresetsManager", () => {
 
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const action = menuItems.find(item => item.id === "noVisible");
       expect(action).toBeDefined();
     });
@@ -1179,7 +1180,7 @@ describe("PresetsManager", () => {
 
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const action = menuItems.find(item => item.id === "hiddenPreset");
       expect(action).toBeUndefined();
     });
@@ -1190,7 +1191,7 @@ describe("PresetsManager", () => {
       CreatorPresets["basic"] = { name: "basic", json: {}, visible: true };
 
       manager.update();
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const basicAction = menuItems.find(item => item.id === "basic");
 
       expect(() => {
@@ -1217,7 +1218,7 @@ describe("PresetsManager", () => {
     test("should always include default configuration in menu items", () => {
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
 
       expect(defaultConfigItem).toBeDefined();
@@ -1227,7 +1228,7 @@ describe("PresetsManager", () => {
     test("should call selectPresetCallback with empty json when default configuration is selected", () => {
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
 
       expect(defaultConfigItem?.action).toBeDefined();
@@ -1254,7 +1255,7 @@ describe("PresetsManager", () => {
     test("should return default configuration preset from getter when selected", () => {
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
       defaultConfigItem!.action!(defaultConfigItem);
 
@@ -1267,7 +1268,7 @@ describe("PresetsManager", () => {
     test("should keep default configuration selected in ensureSelectedPresetAvailable", () => {
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
       defaultConfigItem!.action!(defaultConfigItem);
 
@@ -1279,15 +1280,15 @@ describe("PresetsManager", () => {
     test("should force saveAs when saving from default configuration", () => {
       manager.update();
 
-      const menuItems = (mockPresetsList.setItems as jest.Mock).mock.calls[0][0] as IAction[];
+      const menuItems = (mockPresetsList.setItems as Mock).mock.calls[0][0] as IAction[];
       const defaultConfigItem = menuItems.find(item => item.id === PresetsManager.defaultConfigurationId);
       defaultConfigItem!.action!(defaultConfigItem);
 
       mockShowDialog.mockImplementation((options) => {
-        return { dispose: jest.fn() };
+        return { dispose: vi.fn() };
       });
 
-      const saveCallback = jest.fn();
+      const saveCallback = vi.fn();
       manager.saveOrSaveAs({ toolbox: {} }, saveCallback);
 
       expect(mockShowDialog).toHaveBeenCalled();
@@ -1295,3 +1296,4 @@ describe("PresetsManager", () => {
     });
   });
 });
+
