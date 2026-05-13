@@ -55,7 +55,7 @@
   }
   .sps-question__description {
     @include sjs2--typography--small;
-    color: var(--ctr-caption-with-actions-description-text-color, var(--sjs-layer-1-foreground-50, #00000080));
+    color: var(--sjs2-color-fg-basic-secondary);
     padding-bottom: var(--sjs2-spacing-x200, 16px);
     white-space: normal;
   }

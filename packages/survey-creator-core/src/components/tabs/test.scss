@@ -30,8 +30,8 @@
 
   .svc-pages-toolbar {
     padding: var(--sjs-spacing-x1) 0px;
-    box-shadow: inset 0 var(--sjs-stroke-x1) 0 0 var(--sjs-border-25, #d4d4d4ff);
-    background: var(--sjs-layer-1-background-500, #ffffffff);
+    box-shadow: inset 0 var(--sjs-stroke-x1) 0 0 var(--sjs2-color-border-basic-secondary-for-tests-only);
+    background: var(--sjs2-color-bg-basic-primary);
     width: 100%;
     justify-content: center;
   }
@@ -43,7 +43,7 @@
 
 .svc-test-tab__content .sd-body--empty {
   @include sjs2--typography--default;
-  color: var(--sjs-layer-1-foreground-100, #000000e6);
+  color: var(--sjs2-color-fg-basic-primary);
   text-align: center;
   overflow: hidden;
   position: static;

@@ -13,9 +13,9 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   min-width: var(--ctr-property-grid-min-width, var(--sjs-size-x40));
   max-width: var(--sjs-size-x90);
   height: 100%;
-  background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-bg-basic-primary);
   border-inline-start: var(--ctr-property-grid-border-width-left, var(--sjs-stroke-x1)) solid
-    var(--ctr-property-grid-border-color, var(--sjs-border-25, #d4d4d4ff));
+    var(--sjs2-color-border-basic-secondary-for-tests-only);
   box-sizing: content-box;
 }
 
@@ -48,8 +48,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 }
 
 .svc-side-bar__container-header {
-  background: var(--ctr-property-grid-header-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-  box-shadow: inset 0px -2px 0px var(--ctr-property-grid-header-border-color, var(--sjs-primary-background-500, #19b394ff));
+  background: var(--sjs2-color-bg-basic-primary);
+  box-shadow: inset 0px -2px 0px var(--sjs2-color-bg-brand-primary);
   // text-align: right;
   display: flex;
   padding: var(--ctr-property-grid-header-padding-top, var(--sjs-spacing-x150)) var(--ctr-property-grid-header-padding-right, var(--sjs-spacing-x2))
@@ -62,19 +62,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   align-items: flex-start;
   height: 100%;
   overflow-y: auto;
-  background-color: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-bg-basic-primary);
 }
-
-// .svc-side-bar__container-container {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: flex-start;
-//   width: 100%;
-//   padding: 0px calcSize(2) calcSize(3);
-//   box-sizing: border-box;
-//   background: $background-dim;
-//   box-shadow: inset 0px -1px 0px var(--sjs-border-default, var(--border, #d6d6d6));
-// }
 
 .svc-side-bar__container-title {
   @include sjs2--typography--default;
@@ -86,7 +75,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
     var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
     var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
-  color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-fg-basic-primary);
 }
 
 .svc-side-bar__container-actions {
@@ -108,24 +97,24 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     border-radius: var(--ctr-menu-toolbar-button-corner-radius, var(--sjs-corner-radius-x1));
 
     &:focus {
-      background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
+      background: var(--sjs2-color-bg-basic-primary-dim);
     }
     
     &:hover {
-      background: var(--ctr-menu-toolbar-button-background-color-hovered, var(--sjs-layer-1-background-400, #f5f5f5ff));
+      background: var(--sjs2-color-bg-basic-primary-dim);
     }
   }
   
   .sv-action-bar-item--pressed:not(.sv-action-bar-item--active) {
-    background: var(--ctr-menu-toolbar-button-background-color-pressed, var(--sjs-layer-1-background-400, #f5f5f5ff));
+    background: var(--sjs2-color-bg-basic-primary-dim);
   }
   
   .sv-action-bar-item__title {
-    color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+    color: var(--sjs2-color-fg-basic-primary);
   }
   
   .sv-action-bar-item__icon use {
-    fill: var(--ctr-menu-toolbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    fill: var(--sjs2-color-fg-basic-primary-muted);
   }
 }
 
@@ -153,7 +142,7 @@ $tabs-width: calc(
 .svc-side-bar--flyout {
   z-index: 1000;
   .svc-side-bar__shadow {
-    background-color: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
+    background-color: var(--sjs2-color-utility-overlay);
     position: absolute;
     top: 0;
     bottom: 0;

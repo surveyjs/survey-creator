@@ -2,29 +2,29 @@
 
 .svc-creator-popup {
   &.sv-popup--modal-popup {
-    background-color: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
+    background-color: var(--sjs2-color-utility-overlay);
 
     & > .sv-popup__container {
-      background-color: var(--ctr-popup-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-      border-radius: var(--sjs2-radius-component-modal, 24px);
+      background-color: var(--sjs2-color-bg-basic-primary);
+      border-radius: var(--sjs2-radius-component-modal);
       box-shadow:
         var(--ctr-popup-shadow-1-offset-x, 0px) var(--ctr-popup-shadow-1-offset-y, 2px)
           var(--ctr-popup-shadow-1-blur, 8px) var(--ctr-popup-shadow-1-spread, 0px)
-          var(--ctr-popup-shadow-1-color, var(--sjs-special-glow, #004c441a)),
+          var(--sjs2-color-utility-shadow-floating-default),
         var(--ctr-popup-shadow-2-offset-x, 0px) var(--ctr-popup-shadow-2-offset-y, 16px)
           var(--ctr-popup-shadow-2-blur, 32px) var(--ctr-popup-shadow-2-spread, 0px)
-          var(--ctr-popup-shadow-2-color, var(--sjs-special-glow, #004c441a)),
+          var(--sjs2-color-utility-shadow-floating-default),
         var(--ctr-popup-shadow-3-offset-x, 0px) var(--ctr-popup-shadow-3-offset-y, 32px)
           var(--ctr-popup-shadow-3-blur, 64px) var(--ctr-popup-shadow-3-spread, 0px)
-          var(--ctr-popup-shadow-3-color, var(--sjs-special-glow, #004c441a));
+          var(--sjs2-color-utility-shadow-floating-default);
 
       .sv-modal-footer-action-bar {
         gap: var(--ctr-popup-buttons-gap, var(--sjs-spacing-x2));
       }
 
       & > .sv-popup__body-content {
-        background-color: var(--ctr-popup-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-        border-radius: var(--sjs2-radius-component-modal, 24px);
+        background-color: var(--sjs2-color-bg-basic-primary);
+        border-radius: var(--sjs2-radius-component-modal);
 
         padding: var(--ctr-popup-padding-top, var(--sjs-spacing-x4))
           var(--ctr-popup-padding-right, var(--sjs-spacing-x4)) var(--ctr-popup-padding-bottom, var(--sjs-spacing-x4))
@@ -40,7 +40,7 @@
     // }
   }
   &.sv-popup--modal-overlay {
-    background: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
+    background: var(--sjs2-color-utility-overlay);
     padding-top: var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2));
     max-height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
     box-sizing: content-box;
@@ -51,18 +51,18 @@
       height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
 
       display: flex;
-      border-radius: var(--sjs2-radius-component-modal, 24px) var(--sjs2-radius-component-modal, 24px) 0px 0px;
-      background: var(--ctr-popup-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+      border-radius: var(--sjs2-radius-component-modal) var(--sjs2-radius-component-modal) 0px 0px;
+      background: var(--sjs2-color-bg-basic-primary);
       box-shadow:
         var(--ctr-popup-shadow-3-offset-x, 0px) var(--ctr-popup-shadow-3-offset-y, 32px)
           var(--ctr-popup-shadow-3-blur, 64px) var(--ctr-popup-shadow-3-spread, 0px)
-          var(--ctr-popup-shadow-3-color, var(--sjs-special-glow, #004c441a)),
+          var(--sjs2-color-utility-shadow-floating-default),
         var(--ctr-popup-shadow-2-offset-x, 0px) var(--ctr-popup-shadow-2-offset-y, 16px)
           var(--ctr-popup-shadow-2-blur, 32px) var(--ctr-popup-shadow-2-spread, 0px)
-          var(--ctr-popup-shadow-2-color, var(--sjs-special-glow, #004c441a)),
+          var(--sjs2-color-utility-shadow-floating-default),
         var(--ctr-popup-shadow-1-offset-x, 0px) var(--ctr-popup-shadow-1-offset-y, 2px)
           var(--ctr-popup-shadow-1-blur, 8px) var(--ctr-popup-shadow-1-spread, 0px)
-          var(--ctr-popup-shadow-1-color, var(--sjs-special-glow, #004c441a));
+          var(--sjs2-color-utility-shadow-floating-default);
     }
 
     & > .sv-popup__container > .sv-popup__body-content {
@@ -72,7 +72,7 @@
         var(--ctr-popup-padding-right-mobile, var(--sjs-spacing-x3))
         var(--ctr-popup-padding-bottom-mobile, var(--sjs-spacing-x3))
         var(--ctr-popup-padding-left-mobile, var(--sjs-spacing-x3));
-      border-radius: var(--sjs2-radius-component-modal, 24px) var(--sjs2-radius-component-modal, 24px) 0px 0px;
+      border-radius: var(--sjs2-radius-component-modal) var(--sjs2-radius-component-modal) 0px 0px;
       box-sizing: border-box;
       flex-direction: column;
       gap: var(--ctr-popup-gap-mobile, var(--sjs-spacing-x3));
@@ -118,13 +118,13 @@
   .sv-popup__pointer {
     &:after {
       content: " ";
-      border-bottom: calcSize(1) solid var(--ctr-popup-menu-pointer-color, var(--sjs-layer-1-background-500, #ffffffff));
+      border-bottom: calcSize(1) solid var(--sjs2-color-bg-basic-primary);
     }
   }
 
   .sv-popup__body-header {
     @include sjs2--typography--medium-strong;
-    color: var(--ctr-popup-title-color, var(--sjs-layer-1-foreground-100, #000000e6));
+    color: var(--sjs2-color-fg-basic-primary);
   }
 
   .sv-popup__content {
@@ -132,20 +132,20 @@
   }
 
   &.sv-popup--menu-tablet {
-    background-color: var(--ctr-popup-haze-background-color, var(--sjs-special-haze, #cceeee59));
+    background-color: var(--sjs2-color-utility-overlay);
 
     & > .sv-popup__container {
       border-radius: var(--ctr-popup-menu-corner-radius, var(--sjs-corner-radius-x1));
       box-shadow:
         var(--ctr-popup-menu-shadow-1-offset-x, 0px) var(--ctr-popup-menu-shadow-1-offset-y, 2px)
           var(--ctr-popup-menu-shadow-1-blur, 8px) var(--ctr-popup-menu-shadow-1-spread, 0px)
-          var(--ctr-popup-menu-shadow-1-color, var(--sjs-special-glow, #004c441a)),
+          var(--sjs2-color-utility-shadow-floating-default),
         var(--ctr-popup-menu-shadow-2-offset-x, 0px) var(--ctr-popup-menu-shadow-2-offset-y, 16px)
           var(--ctr-popup-menu-shadow-2-blur, 32px) var(--ctr-popup-menu-shadow-2-spread, 0px)
-          var(--ctr-popup-menu-shadow-2-color, var(--sjs-special-glow, #004c441a));
+          var(--sjs2-color-utility-shadow-floating-default);
     }
     & > .sv-popup__container > .sv-popup__body-content {
-      background: var(--ctr-popup-menu-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+      background: var(--sjs2-color-bg-basic-primary);
     }
   }
 
@@ -164,7 +164,7 @@
       flex-direction: column;
       flex: 1 0 0;
       align-self: stretch;
-      background-color: var(--ctr-popup-menu-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+      background-color: var(--sjs2-color-bg-basic-primary);
     }
   }
 
@@ -173,7 +173,7 @@
   &.sv-popup--menu-tablet {
     .sv-menu-popup__button {
       @include sjs2--typography--default-strong;
-      color: var(--ctr-actionbar-button-text-color, var(--sjs-primary-background-500, #19b394ff));
+      color: var(--sjs2-color-bg-brand-primary);
       border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
       padding: var(--ctr-actionbar-button-padding-top-medium-text, var(--sjs-spacing-x05))
         var(--ctr-actionbar-button-padding-right-medium-text, var(--sjs-spacing-x2))
@@ -182,12 +182,12 @@
     }
 
     .sv-popup__body-footer {
-      background-color: var(--ctr-popup-menu-footer-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
-      border-top: 1px solid var(--ctr-popup-menu-footer-border-color, var(--sjs-border-25, #d4d4d4ff));
+      background-color: var(--sjs2-color-bg-basic-secondary);
+      border-top: 1px solid var(--sjs2-color-border-basic-secondary-for-tests-only);
     }
 
     .sv-menu-popup__button:disabled {
-      color: var(--ctr-actionbar-button-text-color-disabled, var(--sjs-layer-1-foreground-100, #000000e6));
+      color: var(--sjs2-color-fg-basic-primary);
       opacity: var(--ctr-actionbar-button-opacity-disabled, 0.25);
     }
   }
@@ -195,10 +195,7 @@
   &.sv-dropdown-popup.sv-popup--menu-phone,
   &.sv-dropdown-popup.sv-popup--menu-tablet {
     .sv-popup__body-footer {
-      background-color: var(
-        --ctr-contextual-menu-footer-background-color,
-        var(--sjs-layer-3-background-500, var(--background-dim, #f3f3f3))
-      );
+      background-color: var(--sjs2-color-bg-basic-secondary);
     }
   }
 }

@@ -6,8 +6,8 @@
   justify-content: space-between;
   align-items: flex-start;
   border-inline-start: var(--ctr-property-grid-tabs-border-width, var(--sjs-stroke-x1)) solid
-    var(--ctr-property-grid-tabs-border-color, var(--sjs-border-25, #d4d4d4ff));
-  background: var(--ctr-property-grid-tabs-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+    var(--sjs2-color-border-basic-secondary-for-tests-only);
+  background: var(--sjs2-color-bg-basic-primary);
   box-sizing: border-box;
 }
 .svc-sidebar-tabs__top-container {
@@ -53,7 +53,7 @@
 
   & > div {
     height: var(--ctr-separator-width, var(--sjs-size-x0125));
-    background: var(--ctr-separator-color, var(--sjs-border-25, #d4d4d4ff));
+    background: var(--sjs2-color-border-basic-secondary-for-tests-only);
     width: 100%;
   }
 }
@@ -90,9 +90,9 @@
   flex: 1 0 0;
   align-self: stretch;
 
-  background: var(--ctr-property-grid-header-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-bg-basic-primary);
   box-shadow: inset 0px calc(-1 * var(--ctr-property-grid-header-border-width-bottom, var(--sjs-stroke-x2))) 0px
-    var(--ctr-property-grid-header-border-color, var(--sjs-primary-background-500, #19b394ff));
+    var(--sjs2-color-bg-brand-primary);
   box-sizing: border-box;
   width: 100%;
 }
@@ -100,7 +100,7 @@
 .svc-sidebar__header--tabbed,
 .svc-sidebar__header-container {
   min-height: calc(
-    var(--ctr-menu-toolbar-button-icon-height, var(--sjs2-line-height-x300)) +
+    var(--sjs2-line-height-x300) +
       var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) +
       var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) +
       var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) +
@@ -131,12 +131,12 @@
 }
 .svc-sidebar__header-title {
   @include sjs2--typography--default;
-  color: var(--ctr-menu-toolbar-button-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
+  color: var(--sjs2-color-fg-basic-primary);
   display: inline-block;
 }
 .svc-sidebar__header-subtitle {
   @include sjs2--typography--small;
-  color: var(--ctr-menu-toolbar-button-text-color-secondary, var(--sjs-layer-1-foreground-50, #00000080));
+  color: var(--sjs2-color-fg-basic-secondary);
   display: inline-block;
 }
 .svc-sidebar__header-object-selector {

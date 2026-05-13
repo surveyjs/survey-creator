@@ -38,7 +38,7 @@
 
 .svc-item-value--dragging {
   // background: $background;
-  box-shadow: 0px 8px 16px 0px var(--ctr-shadow-large-color, var(--sjs-special-glow, #004c441a));
+  box-shadow: 0px 8px 16px 0px var(--sjs2-color-utility-shadow-floating-default);
   border-radius: calcSize(12.5);
   padding-right: calcSize(3);
   padding-left: calcSize(0.5);
@@ -90,7 +90,7 @@
   }
 
   use {
-    fill: var(--ctr-survey-item-actionbar-drag-indicator-color, var(--sjs-layer-1-foreground-50, #00000080));
+    fill: var(--sjs2-color-fg-basic-secondary);
   }
 }
 
@@ -102,7 +102,7 @@
   .svc-item-value__item {
     .sd-item__control-label,
     .sv-ranking-item__text {
-      color: var(--ctr-survey-ranking-item-text-color-inactive, var(--sjs-layer-1-foreground-50, #00000080));
+      color: var(--sjs2-color-fg-basic-secondary);
     }
 
     .sd-item__decorator {
@@ -112,13 +112,10 @@
 
   .sv-ranking-item__index {
     border-radius: var(--lbr-ranking-item-number-corner-radius, var(--lbr-corner-radius-round));
-    background: var(
-      --ctr-survey-ranking-item-digit-background-color-inactive,
-      var(--sjs-layer-3-background-500, #f4f4f4ff)
-    );
+    background: var(--sjs2-color-bg-basic-secondary);
 
     svg {
-      fill: var(--ctr-survey-ranking-item-digit-text-color-inactive, var(--sjs-layer-3-foreground-50, #00000080));
+      fill: var(--sjs2-color-fg-basic-secondary);
     }
   }
 }
@@ -225,10 +222,7 @@
 
 .svc-item-value__ghost {
   display: none;
-  background: var(
-    --ctr-survey-radio-button-group-item-background-color-drop-spot,
-    var(--sjs-layer-1-background-400, #f5f5f5ff)
-  );
+  background: var(--sjs2-color-bg-basic-primary-dim);
   border-radius: var(--ctr-survey-radio-button-group-item-corner-radius-floating, var(--lbr-corner-radius-x1));
   width: calcSize(25);
   height: calcSize(5);

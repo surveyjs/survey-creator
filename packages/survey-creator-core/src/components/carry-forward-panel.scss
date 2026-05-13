@@ -15,9 +15,9 @@
     var(--ctr-survey-info-panel-padding-bottom, var(--lbr-spacing-x4))
     var(--ctr-survey-info-panel-padding-left, var(--lbr-spacing-x8));
   border-radius: var(--ctr-survey-info-panel-corner-radius, var(--lbr-corner-radius-x1));
-  background: var(--ctr-survey-info-panel-background-color, var(--sjs-layer-2-background-500, #f8f8f8ff));
+  background: var(--sjs2-color-component-formbox-design-bg);
   text-align: center;
-  color: var(--ctr-survey-info-panel-text-color, var(--sjs-layer-2-foreground-50, #00000080));
+  color: var(--sjs2-color-fg-basic-secondary);
 }
 
 @container (max-width: #{$sd-panel-medium-min-width}) {
