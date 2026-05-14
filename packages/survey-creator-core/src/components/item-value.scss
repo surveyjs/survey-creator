@@ -76,10 +76,7 @@
 }
 
 .svc-item-value-controls__drag {
-  padding: var(--ctr-survey-item-actionbar-drag-indicator-padding-top, var(--lbr-spacing-x05))
-    var(--ctr-survey-item-actionbar-drag-indicator-padding-right, var(--lbr-spacing-x1))
-    var(--ctr-survey-item-actionbar-drag-indicator-padding-bottom, var(--lbr-spacing-x05))
-    var(--ctr-survey-item-actionbar-drag-indicator-padding-left, var(--lbr-spacing-x1));
+  padding: var(--sjs2-spacing-x050) var(--sjs2-spacing-x100);
   height: auto;
   width: auto;
   cursor: move;

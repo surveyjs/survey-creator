@@ -10,10 +10,7 @@
   @include sjs2--typography--default;
   box-sizing: border-box;
   width: 100%;
-  padding: var(--ctr-survey-info-panel-padding-top, var(--lbr-spacing-x4))
-    var(--ctr-survey-info-panel-padding-right, var(--lbr-spacing-x8))
-    var(--ctr-survey-info-panel-padding-bottom, var(--lbr-spacing-x4))
-    var(--ctr-survey-info-panel-padding-left, var(--lbr-spacing-x8));
+  padding: var(--sjs2-spacing-x400) var(--sjs2-spacing-x800);
   border-radius: var(--sjs2-radius-x100);
   background: var(--sjs2-color-component-formbox-design-bg);
   text-align: center;

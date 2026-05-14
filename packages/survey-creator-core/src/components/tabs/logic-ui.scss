@@ -299,7 +299,7 @@
   min-width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  margin-top: var(--lbr-question-panel-header-padding-bottom, var(--lbr-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
   border-radius: var(--sjs2-radius-x050);
   background: var(--sjs2-color-bg-basic-primary);
   box-shadow: var(--lbr-question-panel-shadow-offset-x, 0px) var(--lbr-question-panel-shadow-offset-y, 1px)
@@ -319,10 +319,7 @@
   color: var(--sjs2-color-fg-basic-secondary);
   text-align: center;
   display: block;
-  padding: var(--lbr-placeholder-padding-top, var(--lbr-spacing-x2))
-    var(--lbr-placeholder-padding-right, var(--lbr-spacing-x8))
-    var(--lbr-placeholder-padding-bottom, var(--lbr-spacing-x2))
-    var(--lbr-placeholder-padding-left, var(--lbr-spacing-x8));
+  padding: var(--sjs2-spacing-x200) var(--sjs2-spacing-x800);
 }
 
 .svc-logic-tab__leave-apply-button {
