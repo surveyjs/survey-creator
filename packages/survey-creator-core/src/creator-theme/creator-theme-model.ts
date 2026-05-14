@@ -43,6 +43,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
   public onThemePropertyChanged = new EventBase<CreatorThemeModel, { name: string, value: any }>();
 
+  public getRootElement = (): HTMLElement => undefined;
+
   private getThemeFromCreatorThemes(themeName: string): ICreatorTheme {
     const theme = CreatorThemes[themeName];
     if (!theme) return;
@@ -97,9 +99,9 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     };
   }
 
-  public initializeBaseThemeVariables(creator?: SurveyCreatorModel) {
+  private initializeBaseThemeVariables() {
     const vars = Serializer.getProperties("creatortheme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
-    const computed = calculateThemeVariables(DefaultLight.cssVariables, vars, creator?.rootElement) || {};
+    const computed = calculateThemeVariables(DefaultLight.cssVariables, vars, this.getRootElement()) || {};
     const filtered: { [index: string]: string } = {};
     Object.keys(computed).forEach(key => {
       const value = computed[key];
@@ -207,6 +209,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   public loadTheme(theme: ICreatorTheme = {}) {
     this.blockThemeChangedNotifications += 1;
     try {
+      this.initializeBaseThemeVariables();
       const baseTheme = this.getThemeFromCreatorThemes(theme.themeName) || {};
       let resolvedThemeName = theme.themeName;
       if (resolvedThemeName && theme.colorPalette && !CreatorThemes[resolvedThemeName]) {
