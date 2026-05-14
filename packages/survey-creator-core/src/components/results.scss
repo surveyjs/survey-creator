@@ -74,7 +74,7 @@
 
     .svd-test-results__marker {
       position: absolute;
-      top: calcSize(1.5);
+      top: var(--sjs2-spacing-x150);
 
       .sv-svg-icon {
         transition: transform 0.2s ease-in-out;

@@ -22,14 +22,14 @@
   flex-wrap: nowrap;
   margin-top: 0;
   padding-top: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
-  padding-right: calcSize(2);
+  padding-right: var(--sjs2-spacing-x200);
   padding-bottom: 2px;
-  margin-right: calcSize(-2);
+  margin-right: var(--sjs2-spacing-negative-x200);
   margin-bottom: -2px;
 }
 
 .sd-panel .svc-row .sd-row--multiple {
-  padding: calcSize(0);
+  padding: var(--sjs2-spacing-x000);
   box-shadow: none;
   border-radius: 0;
   padding: 2px; //need for the https://github.com/surveyjs/survey-creator/issues/3288
@@ -53,8 +53,8 @@
 
   &:last-child .sd-row {
     height: initial;
-    margin-top: calcSize(2);
-    margin-bottom: calcSize(2);
+    margin-top: var(--sjs2-spacing-x200);
+    margin-bottom: var(--sjs2-spacing-x200);
   }
 
   & + .svc-row {
@@ -67,8 +67,8 @@
 .svc-panel .svc-row.svc-row--ghost.svc-row.svc-row--ghost {
   .sd-row {
     height: initial;
-    margin-top: calcSize(2);
-    margin-bottom: calcSize(2);
+    margin-top: var(--sjs2-spacing-x200);
+    margin-bottom: var(--sjs2-spacing-x200);
   }
 }
 
@@ -140,11 +140,11 @@
 .sd-panel .svc-row > .sd-row.sd-row--multiple {
   width: calc(100% + #{$base-unit});
   padding-left: 0;
-  margin-left: calcSize(-1);
+  margin-left: var(--sjs2-spacing-negative-x100);
   & > div {
     box-sizing: border-box;
-    --animation-padding-left: #{calcSize(1)};
-    padding-left: calcSize(1);
+    --animation-padding-left: #{var(--sjs2-spacing-x100)};
+    padding-left: var(--sjs2-spacing-x100);
   }
 }
 $svc-row-fade-in-duration: var(--sjs-svc-row-fade-in-duration, 250ms);

@@ -28,7 +28,7 @@
 
 @container (min-width: #{$sd-panel-medium-min-width}) and (max-width: #{$sd-panel-normal-min-width}) {
   .svc-carry-forward-panel {
-    padding: calcSize(4) calcSize(3);
+    padding: var(--sjs2-spacing-x400) var(--sjs2-spacing-x300);
     display: flex;
     flex-direction: column;
     align-items: stretch;

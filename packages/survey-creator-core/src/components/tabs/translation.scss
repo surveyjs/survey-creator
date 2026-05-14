@@ -25,9 +25,9 @@
 .st-properties {
   background-color: var(--sjs2-color-bg-basic-primary);
   flex-grow: 1;
-  padding-right: calcSize(4);
-  padding-left: calcSize(4);
-  padding-top: calcSize(2);
+  padding-right: var(--sjs2-spacing-x400);
+  padding-left: var(--sjs2-spacing-x400);
+  padding-top: var(--sjs2-spacing-x200);
 
   .spg-table {
     .spg-table__cell:first-of-type {
@@ -45,7 +45,7 @@
 
     .spg-table__question-wrapper {
       @include sjs2--typography--default;
-      padding: calcSize(1.5) calcSize(1);
+      padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x100);
       color: var(--sjs2-color-fg-basic-primary);
 
       .spg-checkbox {
@@ -91,7 +91,7 @@
 }
 
 .st-property-panel .spg-panel__content .spg-row:first-child {
-  margin-top: calcSize(2);
+  margin-top: var(--sjs2-spacing-x200);
 }
 
 .st-strings-header {
@@ -143,24 +143,24 @@
   box-sizing: border-box;
   background-color: var(--sjs2-color-bg-basic-primary);
   border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
-  padding: calcSize(1) 0;
+  padding: var(--sjs2-spacing-x100) 0;
 }
 
 td.st-table__cell:first-of-type {
   @include sjs2--typography--default-strong;
   color: var(--sjs2-color-fg-basic-primary);
   max-width: 300px;
-  padding-right: calcSize(3);
+  padding-right: var(--sjs2-spacing-x300);
 
   span {
     display: inline-block;
-    padding-left: calcSize(3);
+    padding-left: var(--sjs2-spacing-x300);
   }
 }
 
 .st-panel-indent .st-table__cell:first-of-type {
   span {
-    padding-left: calcSize(6);
+    padding-left: var(--sjs2-spacing-x600);
   }
 }
 

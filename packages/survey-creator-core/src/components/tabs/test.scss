@@ -16,7 +16,7 @@
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
-    margin-bottom: calcSize(12);
+    margin-bottom: calc(12 * var(--sjs2-spacing-x100));
     margin-top: 8px;
   }
 }

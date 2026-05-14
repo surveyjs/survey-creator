@@ -40,7 +40,6 @@
 
 .svc-toolbox__tool-content {
   display: flex;
-  // padding: calcSize(0.25) 0;
   padding-block-start: var(--ctr-toolbox-group-gap, var(--sjs-spacing-x05));
   flex-direction: column;
   align-items: var(--ctr-toolbox-item-align, stretch);
@@ -59,7 +58,7 @@
 }
 
 .svc-toolbox__item--has-subitems {
-  padding-inline-end: calcSize(6);
+  padding-inline-end: var(--sjs2-spacing-x600);
 }
 
 .svc-toolbox__tool--has-subitems {
@@ -88,7 +87,7 @@
   padding-inline-end: var(--ctr-tooltip-padding-right, var(--sjs-spacing-x3));
   padding-bottom: var(--ctr-tooltip-padding-bottom, var(--sjs-spacing-x2));
   padding-inline-start: var(--ctr-tooltip-padding-left, var(--sjs-spacing-x3));
-  margin-inline-end: calcSize(-2);
+  margin-inline-end: var(--sjs2-spacing-negative-x200);
   white-space: nowrap;
   color: var(--sjs2-color-fg-basic-primary);
   transition: opacity $creator-transition-duration;
@@ -114,8 +113,8 @@
   .svc-toolbox__item-icon {
     position: absolute;
     display: var(--ctr-toolbox-item-banner-icon-display, none);
-    inset-inline-start: calcSize(1.5);
-    top: calcSize(1);
+    inset-inline-start: var(--sjs2-spacing-x150);
+    top: var(--sjs2-spacing-x100);
   }
 
   &:after {
@@ -155,8 +154,8 @@
   @include sjs2--typography--small-strong;
 
   display: block;
-  padding-inline-start: calcSize(1);
-  padding-inline-end: calcSize(1.5);
+  padding-inline-start: var(--sjs2-spacing-x100);
+  padding-inline-end: var(--sjs2-spacing-x150);
   white-space: nowrap;
   color: var(--sjs2-color-fg-basic-primary);
   overflow: hidden;
@@ -169,10 +168,6 @@
     display: var(--ctr-toolbox-item-banner-display, flex);
     opacity: 1;
     pointer-events: initial;
-
-    // .svc-toolbox__item-title {
-    //   padding-inline-start: calcSize(4);
-    // }
   }
 }
 
@@ -272,10 +267,10 @@
     }
 
     .sv-list__item-body {
-      padding-top: calcSize(1.5);
-      padding-bottom: calcSize(1.5);
-      padding-inline-start: calcSize(2);
-      padding-inline-end: calcSize(5);
+      padding-top: var(--sjs2-spacing-x150);
+      padding-bottom: var(--sjs2-spacing-x150);
+      padding-inline-start: var(--sjs2-spacing-x200);
+      padding-inline-end: var(--sjs2-spacing-x500);
     }
   }
 }
@@ -326,7 +321,7 @@
 
   .sv-list__container {
     flex-wrap: wrap;
-    column-gap: calcSize(2);
+    column-gap: var(--sjs2-spacing-x200);
     row-gap: var(--ctr-toolbox-group-gap, var(--sjs-spacing-x05));
   }
 
@@ -409,7 +404,7 @@
 }
 .svc-toolbox__item--dots {
   padding-inline-end: var(--ctr-toolbox-item-padding-left, var(--sjs-spacing-x150));
-  margin-top: calcSize(0.5);
+  margin-top: var(--sjs2-spacing-x050);
   &.sd-action--pressed {
     opacity: 0.5;
   }

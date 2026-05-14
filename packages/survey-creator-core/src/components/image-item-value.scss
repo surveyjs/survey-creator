@@ -55,13 +55,13 @@
 }
 .svc-image-item-value--new.svc-image-item-value--single {
   .svc-image-item-value-controls {
-    padding: 0 calcSize(6);
+    padding: 0 var(--sjs2-spacing-x600);
   }
 }
 @container (max-width: 496px) {
   .svc-image-item-value--new.svc-image-item-value--single {
     .svc-image-item-value-controls {
-      padding: 0 calcSize(1);
+      padding: 0 var(--sjs2-spacing-x100);
     }
   }
 }

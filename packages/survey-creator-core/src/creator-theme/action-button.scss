@@ -2,19 +2,16 @@
 
 .svc-action-button {
   @include sjs2--typography--default-strong;
+  color: var(--sjs2-color-bg-brand-primary);
   display: inline-block;
 
   padding-top: var(--ctr-actionbar-button-padding-top-medium-text, var(--sjs-spacing-x05));
   padding-inline-end: var(--ctr-actionbar-button-padding-right-medium-text, var(--sjs-spacing-x2));
   padding-bottom: var(--ctr-actionbar-button-padding-bottom-medium-text, var(--sjs-spacing-x05)); 
   padding-inline-start: var(--ctr-actionbar-button-padding-left-medium-text, var(--sjs-spacing-x2));
-
   box-sizing: border-box;
   border-radius: var(--sjs2-radius-round);
-
-  color: var(--sjs2-color-bg-brand-primary);
-
-  border: calcSize(0.25) solid transparent;
+  border: var(--sjs2-border-width-x200) solid transparent;
 
   &:focus,
   &:hover {

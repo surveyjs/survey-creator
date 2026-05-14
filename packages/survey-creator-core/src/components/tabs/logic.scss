@@ -3,7 +3,7 @@
 .sl-table {
   width: 50%;
   margin: 0 25%;
-  margin-top: calcSize(-2);
+  margin-top: var(--sjs2-spacing-negative-x200);
 }
 
 .sl-table__row {
@@ -92,8 +92,8 @@
 }
 .sl-table__row {
   .sl-table__cell {
-    --animation-padding-top: #{calcSize(5)};
-    padding-top: calcSize(5);
+    --animation-padding-top: #{var(--sjs2-spacing-x500)};
+    padding-top: var(--sjs2-spacing-x500);
   }
 }
 
@@ -140,7 +140,7 @@
   td,
   th {
     &:first-of-type {
-      padding-left: calcSize(4);
+      padding-left: var(--sjs2-spacing-x400);
 
       .sv-action-bar {
         justify-content: flex-end;
@@ -151,7 +151,7 @@
   td,
   th {
     &:last-of-type {
-      padding-right: calcSize(4);
+      padding-right: var(--sjs2-spacing-x400);
     }
   }
 }
@@ -274,7 +274,7 @@
   --sd-base-padding: calc(5 * #{$base-unit});
   --sd-base-vertical-padding: calc(4 * #{$base-unit});
   --sd-page-vertical-padding: calc(3 * #{$base-unit});
-  padding-right: calcSize(5);
+  padding-right: var(--sjs2-spacing-x500);
   margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 

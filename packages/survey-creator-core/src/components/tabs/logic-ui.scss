@@ -224,7 +224,7 @@
     margin-left: 25%;
     margin-right: 25%;
     margin-top: var(--ctr-surface-gap, var(--sjs-spacing-x5));
-    margin-bottom: calcSize(8);
+    margin-bottom: var(--sjs2-spacing-x800);
   }
 }
 

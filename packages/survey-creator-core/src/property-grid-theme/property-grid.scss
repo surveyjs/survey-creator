@@ -85,8 +85,8 @@
 }
 
 .svc-object-selector .sv-popup__container {
-  margin-left: calcSize(1);
-  margin-right: calcSize(1);
+  margin-left: var(--sjs2-spacing-x100);
+  margin-right: var(--sjs2-spacing-x100);
 }
 
 .svc-object-selector__content {
@@ -99,7 +99,7 @@
 
 .spg-action-title-bar {
   margin-inline-end: var(--sjs2-border-width-x100);
-  padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
+  padding-inline-end: var(--sjs2-spacing-x050);
 }
 
 .spg-body {
@@ -123,7 +123,7 @@
 
 .spg-title-toolbar--single-help-action {
   justify-content: flex-start;
-  padding-left: calcSize(0.5);
+  padding-left: var(--sjs2-spacing-x050);
 
   // flex-grow: 0;
   // margin-left: 0;

@@ -156,7 +156,7 @@ survey-creator,
   @include sjs2--typography--default-strong;
   color: var(--sjs2-color-fg-brand-on-primary);
   vertical-align: middle;
-  padding: calcSize(1.5) calcSize(16);
+  padding: var(--sjs2-spacing-x150) calc(16 * var(--sjs2-spacing-x100));
   display: block;
 
   a {
@@ -166,12 +166,12 @@ survey-creator,
 
 .svc-creator--mobile {
   .svc-creator__non-commercial-text {
-    padding: calcSize(1.5) calcSize(5);
+    padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x500);
   }
 }
 
 .sv-drag-drop-ghost {
-  top: calcSize(0.75);
+  top: var(--sjs2-spacing-x075);
   width: 100%;
   height: var(--sjs2-size-x050);
   background: var(--sjs2-color-bg-brand-primary);
@@ -185,7 +185,7 @@ survey-creator,
 
 .sv-drag-drop-ghost--item-value-bottom {
   top: initial;
-  bottom: calcSize(-0.5);
+  bottom: var(--sjs2-spacing-negative-x050);
 }
 
 .svc-creator--disable-animations {

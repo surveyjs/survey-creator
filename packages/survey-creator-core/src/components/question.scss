@@ -242,8 +242,6 @@ svc-question {
   position: relative;
   opacity: 0;
   height: var(--sjs2-size-x600, 48px);
-  //inset-inline-start: calcSize(4); // left
-  //inset-inline-end: calcSize(3.5); // right
   margin-left: var(--sjs2-spacing-negative-x100, -8px);
   margin-top: auto;
   width: calc(100% + 2 * #{$base-unit});

@@ -67,7 +67,7 @@
   z-index: 20;
   padding: 0px;
   vertical-align: top;
-  margin-inline-start: calcSize(2);
+  margin-inline-start: var(--sjs2-spacing-x200);
   color: var(--sjs2-color-fg-basic-secondary);
 }
 
@@ -87,9 +87,9 @@
   &.svc-string-editor__border--hover {
     top: 0;
     bottom: 0;
-    left: calcSize(-0.5);
-    right: calcSize(-0.5);
-    //right: calcSize(-4.5); // if need pencil icon
+    left: var(--sjs2-spacing-negative-x050);
+    right: var(--sjs2-spacing-negative-x050);
+    //right: calc(var(--sjs2-base-unit-spacing) * -4.5); // if need pencil icon
     border-radius: calc(var(--sjs2-base-unit-radius) * 0.375);
     box-shadow: 0px 0px 0px var(--sjs2-border-width-x200)
       var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
@@ -97,10 +97,10 @@
   }
 
   &.svc-string-editor__border--focus {
-    top: calcSize(-0.5);
-    bottom: calcSize(-0.5);
-    left: calcSize(-1);
-    right: calcSize(-1);
+    top: var(--sjs2-spacing-negative-x050);
+    bottom: var(--sjs2-spacing-negative-x050);
+    left: var(--sjs2-spacing-negative-x100);
+    right: var(--sjs2-spacing-negative-x100);
     box-sizing: content-box;
     border-radius: calc(var(--sjs2-base-unit-radius) * 0.375);
     background: var(--sjs2-color-bg-basic-primary);
@@ -114,7 +114,7 @@
 
 .svc-string-editor__error {
   @include sjs2--typography--default;
-  margin-left: calcSize(1);
+  margin-left: var(--sjs2-spacing-x100);
   color: red;
   display: none;
 }
@@ -125,7 +125,7 @@
   height: 100%;
   width: var(--sjs2-size-x200);
   top: 0;
-  padding-left: calcSize(2);
+  padding-left: var(--sjs2-spacing-x200);
   z-index: 12;
   display: none;
   align-items: center;
@@ -166,7 +166,7 @@
   .svc-string-editor__border--focus {
     box-shadow:
       0px 2px 6px 0px var(--sjs2-color-utility-shadow-floating-default),
-      0px 0px 0px calcSize(0.25) var(--sjs2-color-bg-alert-primary);
+      0px 0px 0px var(--sjs2-border-width-x200) var(--sjs2-color-bg-alert-primary);
   }
 }
 
@@ -208,8 +208,8 @@
 .sd-item__control-label {
   .svc-string-editor:focus-within {
     .svc-string-editor__border {
-      left: calcSize(-0.7);
-      right: calcSize(-0.7);
+      left: calc(0.7 * var(--sjs2-spacing-negative-x100));
+      right: calc(0.7 * var(--sjs2-spacing-negative-x100));
     }
   }
 }

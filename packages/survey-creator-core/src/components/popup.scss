@@ -118,7 +118,7 @@
   .sv-popup__pointer {
     &:after {
       content: " ";
-      border-bottom: calcSize(1) solid var(--sjs2-color-bg-basic-primary);
+      border-bottom: var(--sjs2-size-x100) solid var(--sjs2-color-bg-basic-primary);
     }
   }
 

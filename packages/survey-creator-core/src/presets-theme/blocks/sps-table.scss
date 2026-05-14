@@ -111,7 +111,7 @@
 }
 .sps-table__cell:where(:not(.sps-table__cell--detail-panel)) {
   .sps-checkbox {
-    margin: 0 calcSize(2);
+    margin: 0 var(--sjs2-spacing-x200);
   }
 }
 
@@ -201,7 +201,7 @@
 }
 
 .sps-table__cell:not(.sps-table__cell--detail-panel):first-of-type .sps-text {
-  padding-left: calcSize(2);
+  padding-left: var(--sjs2-spacing-x200);
 }
 .sps-table__cell--actions {
   width: 0;

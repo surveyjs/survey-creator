@@ -2,8 +2,8 @@
 
 .svc-image-question-controls {
   position: absolute;
-  top: calcSize(5);
-  right: calcSize(1);
+  top: var(--sjs2-spacing-x500);
+  right: var(--sjs2-spacing-x100);
   display: none;
 }
 

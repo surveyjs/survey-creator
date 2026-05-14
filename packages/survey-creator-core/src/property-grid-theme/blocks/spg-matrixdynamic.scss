@@ -76,13 +76,13 @@
 .spg-smiley-icon {
   width: var(--sjs2-size-x300);
   height: var(--sjs2-size-x300);
-  margin: calcSize(1);
+  margin: var(--sjs2-spacing-x100);
   border-radius: var(--sjs2-radius-round);
   border: 1px solid var(--sjs2-color-fg-basic-primary-muted);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: calcSize(4);
+  margin-right: var(--sjs2-spacing-x400);
   box-sizing: content-box;
 
   svg {
