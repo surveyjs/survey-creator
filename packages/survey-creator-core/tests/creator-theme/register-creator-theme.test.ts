@@ -2,7 +2,7 @@ import { CreatorTester } from "../creator-tester";
 import { CreatorThemeModel } from "../../src/creator-theme/creator-theme-model";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 import { CreatorThemes, PredefinedCreatorThemes, registerCreatorTheme } from "../../src/creator-theme/creator-themes";
-import SurveyCreatorTheme from "../../src/themes/index";
+import SurveyThemes from "survey-core/themes";
 
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
@@ -13,7 +13,7 @@ let savedPredefinedCreatorThemes: string[];
 beforeAll(() => {
   savedCreatorThemes = { ...CreatorThemes };
   savedPredefinedCreatorThemes = [...PredefinedCreatorThemes];
-  registerCreatorTheme(SurveyCreatorTheme);
+  registerCreatorTheme(SurveyThemes);
 });
 
 afterAll(() => {
