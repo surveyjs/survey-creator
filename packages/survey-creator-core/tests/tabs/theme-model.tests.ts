@@ -15,27 +15,6 @@ import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
-const createComputedStyleFromInline = () => {
-  const legacyVarMap: Record<string, string> = {
-    // "--sjs2-color-component-panel-default-bg": "rgba(253, 255, 148, 0.6)",
-    // "--sjs2-color-unknown-variable-001": "rgba(237, 238, 186, 1)",
-    // "--sjs2-radius-container-panel": "6px",
-    "--sjs2-typography-font-family-component-question-title": "Verdana, sans-serif",
-    "--sjs2-typography-font-weight-component-question-title": "700",
-    "--sjs2-color-component-question-default-title": "rgba(201, 90, 231, 0.91)",
-    "--sjs2-typography-font-size-component-question-title": "18px",
-    "--sjs2-color-component-panel-default-bg": "rgba(255, 255, 255, 1)",
-    "--sjs2-color-unknown-variable-001": "rgba(248, 248, 248, 1)",
-    "--sjs2-radius-container-panel": "8px",
-
-  };
-  return (elt: any) => ({
-    getPropertyValue: (prop: string) => {
-      return legacyVarMap[prop] || DefaultLight.cssVariables[prop];
-    }
-  });
-};
-
 const themeFromFile = {
   "cssVariables": {
     "--sjs-font-family": "Segoe",
