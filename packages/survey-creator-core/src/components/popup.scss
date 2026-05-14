@@ -19,18 +19,14 @@
           var(--sjs2-color-utility-shadow-floating-default);
 
       .sv-modal-footer-action-bar {
-        gap: var(--ctr-popup-buttons-gap, var(--sjs-spacing-x2));
+        gap: var(--sjs2-spacing-x200);
       }
 
       & > .sv-popup__body-content {
         background-color: var(--sjs2-color-bg-basic-primary);
         border-radius: var(--sjs2-radius-component-modal);
-
-        padding: var(--ctr-popup-padding-top, var(--sjs-spacing-x4))
-          var(--ctr-popup-padding-right, var(--sjs-spacing-x4)) var(--ctr-popup-padding-bottom, var(--sjs-spacing-x4))
-          var(--ctr-popup-padding-left, var(--sjs-spacing-x4));
-
-        gap: var(--ctr-popup-gap, var(--sjs-spacing-x4));
+        padding: var(--sjs2-spacing-x400);
+        gap: var(--sjs2-spacing-x400);
         box-shadow: unset;
       }
     }
@@ -68,14 +64,11 @@
     & > .sv-popup__container > .sv-popup__body-content {
       display: flex;
       min-height: 100%;
-      padding: var(--ctr-popup-padding-top-mobile, var(--sjs-spacing-x3))
-        var(--ctr-popup-padding-right-mobile, var(--sjs-spacing-x3))
-        var(--ctr-popup-padding-bottom-mobile, var(--sjs-spacing-x3))
-        var(--ctr-popup-padding-left-mobile, var(--sjs-spacing-x3));
+      padding: var(--sjs2-spacing-x300);
       border-radius: var(--sjs2-radius-component-modal) var(--sjs2-radius-component-modal) 0px 0px;
       box-sizing: border-box;
       flex-direction: column;
-      gap: var(--ctr-popup-gap-mobile, var(--sjs-spacing-x3));
+      gap: var(--sjs2-spacing-x300);
       flex: 1 0 0;
       align-self: stretch;
     }
@@ -92,7 +85,7 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      gap: var(--ctr-popup-buttons-gap, var(--sjs-spacing-x2));
+      gap: var(--sjs2-spacing-x200);
       align-self: stretch;
     }
 
@@ -175,10 +168,7 @@
       @include sjs2--typography--default-strong;
       color: var(--sjs2-color-bg-brand-primary);
       border-radius: var(--sjs2-radius-x100);
-      padding: var(--ctr-actionbar-button-padding-top-medium-text, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-right-medium-text, var(--sjs-spacing-x2))
-        var(--ctr-actionbar-button-padding-bottom-medium-text, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-left-medium-text, var(--sjs-spacing-x2));
+      padding: var(--sjs2-spacing-x050) var(--sjs2-spacing-x200);
     }
 
     .sv-popup__body-footer {

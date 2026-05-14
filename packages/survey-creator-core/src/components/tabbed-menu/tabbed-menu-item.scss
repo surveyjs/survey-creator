@@ -4,10 +4,7 @@
   display: flex;
   align-items: center;
   min-height: calc(var(--sjs2-typography-line-height-default) + var(--sjs2-spacing-x500));
-  padding: var(--ctr-menu-item-padding-top, var(--sjs-spacing-x250))
-    var(--ctr-menu-item-padding-right, var(--sjs-spacing-x3))
-    var(--ctr-menu-item-padding-bottom, var(--sjs-spacing-x250))
-    var(--ctr-menu-item-padding-left, var(--sjs-spacing-x3));
+  padding: var(--sjs2-spacing-x250) var(--sjs2-spacing-x300);
   box-sizing: border-box;
   cursor: pointer;
   transition:
@@ -24,8 +21,8 @@
 }
 
 .svc-tabbed-menu-item--icon {
-  padding-right: var(--ctr-menu-item-padding-right-icon, var(--sjs-spacing-x2));
-  padding-left: var(--ctr-menu-item-padding-left-icon, var(--sjs-spacing-x2));
+  padding-right: var(--sjs2-spacing-x200);
+  padding-left: var(--sjs2-spacing-x200);
   display: flex;
   align-items: center;
 }
@@ -73,10 +70,7 @@
 
 .svc-tabbed-menu-dots__item {
   width: auto;
-  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
+  padding: var(--sjs2-spacing-x100);
 
   svg {
     width: var(--sjs2-typography-line-height-default);

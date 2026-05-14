@@ -98,7 +98,7 @@
 
   .sps-panel {
     border: none;
-    margin-top: calc(-1 * var(--sjs2-spacing-x075, 6px));
+    margin-top: var(--sjs2-spacing-negative-x075);
   }
   .sps-table__cell--detail-panel .sps-panel {
     margin-top: 0;

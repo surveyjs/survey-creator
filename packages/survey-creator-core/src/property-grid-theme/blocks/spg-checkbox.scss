@@ -2,7 +2,7 @@
 
 .spg-checkbox {
   cursor: pointer;
-  margin-top: var(--ctr-checkbox-list-gap-vertical, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
 
   &.sd-checkbox--label-rendered {
     gap: 0;

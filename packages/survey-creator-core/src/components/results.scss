@@ -3,7 +3,7 @@
 .svd-test-results {
   border-radius: var(--sjs2-radius-x050);
   box-shadow: inset 0px 1px 0px 0px var(--sjs2-color-utility-shadow-surface-default);
-  padding: calc(12 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  padding: calc(12 * var(--sjs2-spacing-x100));
 }
 
 .svd-test-results__content {
@@ -19,10 +19,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--ctr-string-table-title-padding-top, var(--sjs-spacing-x2))
-    var(--ctr-string-table-title-padding-right, var(--sjs-spacing-x3))
-    var(--ctr-string-table-title-padding-bottom, var(--sjs-spacing-x2))
-    var(--ctr-string-table-title-padding-left, var(--sjs-spacing-x3));
+  padding: var(--sjs2-spacing-x200) var(--sjs2-spacing-x300);
   color: var(--sjs2-color-fg-basic-secondary);
   border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background-color: var(--sjs2-color-bg-basic-primary);
@@ -33,7 +30,7 @@
 
   .svd-test-results__header-types {
     display: flex;
-    gap: var(--ctr-string-table-title-actionbar-gap, var(--sjs-spacing-x1));
+    gap: var(--sjs2-spacing-x100);
   }
 
   .svc-action-button {
@@ -92,19 +89,19 @@
 
     th {
       @include sjs2--typography--small-strong;
-      padding: var(--ctr-string-table-row-padding-top, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3)) var(--ctr-string-table-row-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
+      padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x300) var(--sjs2-spacing-x100) var(--sjs2-spacing-x300);
       background: var(--sjs2-color-bg-basic-secondary);
       text-align: left;
       color: var(--sjs2-color-fg-basic-primary-muted);
 
       &:nth-child(1) {
-        padding-left: var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
+        padding-left: var(--sjs2-spacing-x300);
       }
     }
 
     td {
       @include sjs2--typography--default;
-      padding: var(--ctr-string-table-row-padding-top, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3)) var(--ctr-string-table-row-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
+      padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x300) var(--sjs2-spacing-x100) var(--sjs2-spacing-x300);
       max-width: calc(var(--sjs2-base-unit-size) * 50);
       overflow: auto;
       border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
@@ -119,7 +116,7 @@
 
       &:nth-child(2) {
         width: 50%;
-        padding-right: var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3));
+        padding-right: var(--sjs2-spacing-x300);
       }
     }
 

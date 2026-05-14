@@ -4,12 +4,8 @@
   .svc-search {
     border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
     background: var(--sjs2-color-bg-basic-secondary);
-    gap: var(--ctr-property-grid-search-gap, var(--sjs-spacing-x1));
-
-    padding: var(--ctr-property-grid-search-padding-top, var(--sjs-spacing-x2))
-      var(--ctr-property-grid-search-padding-right, var(--sjs-spacing-x2))
-      var(--ctr-property-grid-search-padding-bottom, var(--sjs-spacing-x2))
-      var(--ctr-property-grid-search-padding-left, var(--sjs-spacing-x2));
+    gap: var(--sjs2-spacing-x100);
+    padding: var(--sjs2-spacing-x200);
   }
 
   .svc-search__input {

@@ -9,11 +9,8 @@ svc-page-navigator-item,
 
 .svc-page-navigator-item-content {
   display: flex;
-  padding: var(--ctr-page-navigator-item-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-page-navigator-item-padding-right, var(--sjs-spacing-x125))
-    var(--ctr-page-navigator-item-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-page-navigator-item-padding-left, var(--sjs-spacing-x125));
-  gap: var(--ctr-page-navigator-item-gap, var(--sjs-spacing-x1));
+  padding: var(--sjs2-spacing-x100) calc(1.25 * var(--sjs2-spacing-x100));
+  gap: var(--sjs2-spacing-x100);
   justify-content: flex-end;
   align-items: center;
   position: relative;
@@ -65,13 +62,11 @@ svc-page-navigator-item,
 
 .svc-page-navigator-item__banner {
   @include textEllipsis;
-  padding: var(--ctr-page-navigator-item-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-page-navigator-item-padding-right, var(--sjs-spacing-x125))
-    var(--ctr-page-navigator-item-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-page-navigator-item-padding-left-hovered, var(--sjs-spacing-x2));
+  padding: var(--sjs2-spacing-x100) calc(1.25 * var(--sjs2-spacing-x100)) var(--sjs2-spacing-x100)
+    var(--sjs2-spacing-x200);
   justify-content: flex-end;
   align-items: center;
-  gap: var(--ctr-page-navigator-item-gap, var(--sjs-spacing-x1));
+  gap: var(--sjs2-spacing-x100);
   border-radius: var(--sjs2-radius-x075);
   background: var(--sjs2-color-bg-basic-primary);
 
@@ -136,10 +131,8 @@ svc-page-navigator-item,
   .svc-page-navigator-item__banner {
     right: unset;
     left: 0;
-    padding: var(--ctr-page-navigator-item-padding-top, var(--sjs-spacing-x1))
-      var(--ctr-page-navigator-item-padding-left-hovered, var(--sjs-spacing-x2))
-      var(--ctr-page-navigator-item-padding-bottom, var(--sjs-spacing-x1))
-      var(--ctr-page-navigator-item-padding-left, var(--sjs-spacing-x125));
+    padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x200) var(--sjs2-spacing-x100)
+      calc(1.25 * var(--sjs2-spacing-x100));
     direction: rtl;
 
     .svc-page-navigator-item__dot {

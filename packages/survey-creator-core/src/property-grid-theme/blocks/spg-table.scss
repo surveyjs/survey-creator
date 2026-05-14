@@ -51,12 +51,7 @@
   .sd-formbox {
     box-shadow: none;
     background: none;
-
-    padding: var(--ctr-data-table-cell-padding-top, var(--sjs-spacing-x1))
-      var(--ctr-data-table-cell-padding-right, var(--sjs-spacing-x1))
-      var(--ctr-data-table-cell-padding-bottom, var(--sjs-spacing-x1))
-      var(--ctr-data-table-cell-padding-left, var(--sjs-spacing-x1));
-
+    padding: var(--sjs2-spacing-x100);
     border-radius: var(--sjs2-radius-x075);
     background-color: var(--sjs2-color-bg-basic-primary);
 
@@ -117,7 +112,7 @@
 .spg-table__cell--actions:last-of-type {
   .spg-action-bar {
     justify-content: flex-end;
-    padding-inline-end: var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05));
+    padding-inline-end: var(--sjs2-spacing-x050);
   }
 }
 
@@ -146,9 +141,7 @@
 }
 .spg-table__question-wrapper {
   box-sizing: border-box;
-  padding: var(--ctr-data-table-row-padding-top, var(--sjs-spacing-x05))
-    var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05))
-    var(--ctr-data-table-row-padding-bottom, var(--sjs-spacing-x05)) var(--ctr-data-table-row-padding-left, 0px);
+  padding: var(--sjs2-spacing-x050) var(--sjs2-spacing-x050) var(--sjs2-spacing-x050) 0;
 }
 
 .spg-table__row--leave,

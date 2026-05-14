@@ -32,11 +32,11 @@
   position: absolute;
   box-sizing: border-box;
   width: 100%;
-  top: var(--sjs-spacing-x100, 8px);
-  padding: 0 var(--sjs-spacing-x100, 8px);
+  top: var(--sjs2-spacing-x100);
+  padding: 0 var(--sjs2-spacing-x100);
   z-index: 2;
-  gap: var(--sjs-spacing-x100, 8px);
-  --sd-action-bar-gap: var(--sjs-spacing-x100, 8px);
+  gap: var(--sjs2-spacing-x100);
+  --sd-action-bar-gap: var(--sjs2-spacing-x100);
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls {

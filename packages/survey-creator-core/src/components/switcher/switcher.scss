@@ -2,7 +2,7 @@
 
 .svc-switcher {
   align-items: center;
-  gap: var(--ctr-property-grid-switcher-gap, var(--sjs-spacing-x1));
+  gap: var(--sjs2-spacing-x100);
   pointer-events: auto;
 }
 
@@ -12,10 +12,10 @@
 }
 
 .svc-switcher__icon {
-  padding-block-start: var(--ctr-property-grid-switcher-toggle-button-padding-top, var(--sjs-spacing-x05));
-  padding-inline-end: var(--ctr-property-grid-switcher-toggle-button-padding-right, var(--sjs-spacing-x2));
-  padding-block-end: var(--ctr-property-grid-switcher-toggle-button-padding-bottom, var(--sjs-spacing-x05));
-  padding-inline-start: var(--ctr-property-grid-switcher-toggle-button-padding-left, var(--sjs-spacing-x05));
+  padding-block-start: var(--sjs2-spacing-x050);
+  padding-inline-end: var(--sjs2-spacing-x200);
+  padding-block-end: var(--sjs2-spacing-x050);
+  padding-inline-start: var(--sjs2-spacing-x050);
   border-radius: var(--sjs2-radius-round);
   border: var(--sjs2-border-width-x100) solid
     var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
@@ -46,10 +46,10 @@
 .svc-switcher__icon--checked:hover {
   justify-content: center;
   align-items: center;
-  padding-block-start: var(--ctr-property-grid-switcher-toggle-button-padding-top, var(--sjs-spacing-x05));
-  padding-inline-end: var(--ctr-property-grid-switcher-toggle-button-padding-right-checked, var(--sjs-spacing-x05));
-  padding-block-end: var(--ctr-property-grid-switcher-toggle-button-padding-bottom, var(--sjs-spacing-x05));
-  padding-inline-start: var(--ctr-property-grid-switcher-toggle-button-padding-left-checked, var(--sjs-spacing-x2));
+  padding-block-start: var(--sjs2-spacing-x050);
+  padding-inline-end: var(--sjs2-spacing-x050);
+  padding-block-end: var(--sjs2-spacing-x050);
+  padding-inline-start: var(--sjs2-spacing-x200);
   border: var(--sjs2-border-width-x000) solid
     var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
   background: var(--sjs2-color-bg-brand-primary);

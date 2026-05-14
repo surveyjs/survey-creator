@@ -48,13 +48,9 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding-top: calc(
-    var(--ctr-property-grid-form-padding-top, var(--sjs-spacing-x2)) -
-      var(--ctr-property-grid-form-gap, var(--sjs-spacing-x2))
-  );
-  padding-inline-end: var(--ctr-property-grid-form-padding-right, var(--sjs-spacing-x4));
-  padding-bottom: var(--ctr-property-grid-form-padding-bottom, var(--sjs-spacing-x5));
-  padding-inline-start: var(--ctr-property-grid-form-padding-left, var(--sjs-spacing-x4));
+  padding-top: var(--sjs2-spacing-x000);
+  padding-inline: var(--sjs2-spacing-x400);
+  padding-bottom: var(--sjs2-spacing-x500);
   box-sizing: border-box;
   background: var(--sjs2-color-utility-property-grid);
   box-shadow: inset 0px -1px 0px
@@ -64,17 +60,16 @@
 .spg-panel__content {
   .spg-row {
     width: 100%;
-    margin-top: var(--ctr-property-grid-form-gap, var(--sjs-spacing-x2));
+    margin-top: var(--sjs2-spacing-x200);
   }
 
   .spg-row--multiple {
-    margin-top: var(--ctr-editor-layout-gap, var(--sjs-spacing-x1));
+    margin-top: var(--sjs2-spacing-x100);
   }
 }
 .svc-side-bar--mobile {
   .spg-panel__content {
-    padding-inline-end: var(--ctr-property-grid-form-padding-right, var(--sjs-spacing-x4));
-    padding-inline-start: var(--ctr-property-grid-form-padding-left, var(--sjs-spacing-x4));
+    padding: var(--sjs2-spacing-x400) 0;
   }
 }
 
@@ -149,14 +144,11 @@
     @include sjs2--typography--default;
     box-shadow: none;
     background-color: transparent;
-    padding-top: var(--ctr-label-padding-top, var(--sjs-spacing-x1));
-    padding-inline-end: var(--ctr-label-padding-right, 0px);
-    padding-bottom: var(--ctr-label-padding-bottom, var(--sjs-spacing-x1));
-    padding-inline-start: var(--ctr-label-padding-left, 0px);
+    padding: 0 var(--sjs2-spacing-x100);
     color: var(--sjs2-color-fg-basic-secondary);
   }
   .spg-row {
-    margin-top: var(--ctr-editor-layout-gap, var(--sjs-spacing-x1));
+    margin-top: var(--sjs2-spacing-x100);
   }
   .spg-row:first-of-type {
     margin-top: 0;

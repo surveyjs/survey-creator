@@ -11,14 +11,14 @@
 }
 
 .sl-table__cell.st-table__cell--actions:first-of-type .sd-action-bar {
-  margin-top: var(--ctr-collapse-button-margin-top, var(--sjs-spacing-x05n));
-  padding-right: var(--ctr-collapse-button-margin-right, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-negative-x050);
+  padding-right: var(--sjs2-spacing-x200);
 }
 
 .sl-table .sl-table__detail-button.sl-table__detail-button {
   box-sizing: border-box;
   border-radius: var(--sjs2-radius-x100);
-  padding: var(--ctr-collapse-button-padding, var(--sjs-spacing-x150));
+  padding: var(--sjs2-spacing-x150);
   transition: background-color $creator-transition-duration;
 
   &:focus:enabled {
@@ -61,7 +61,7 @@
   color: var(--sjs2-color-bg-brand-primary);
 }
 .sl-table .svc-action-button {
-  padding: var(--ctr-survey-page-header-padding-vertical-with-button, var(--sjs-spacing-x05)) 0px;
+  padding: var(--sjs2-spacing-x050) 0px;
   margin-left: 0;
 }
 
@@ -169,13 +169,10 @@
 
   button.sl-panel__done-button {
     width: auto;
-    margin: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2)) 0 0 0;
+    margin: var(--sjs2-spacing-x200) 0 0 0;
     background-color: var(--sjs2-color-bg-brand-secondary);
     border-radius: var(--sjs2-radius-x100);
-    padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
-      var(--ctr-expression-item-padding-right-button, var(--sjs-spacing-x4))
-      var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
-      var(--ctr-expression-item-padding-left-button, var(--sjs-spacing-x4));
+    padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x400);
 
     display: flex;
     align-items: center;
@@ -219,7 +216,7 @@
 .sl-question {
   display: flex;
   align-items: center;
-  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
 }
 
 .sl-row {
@@ -233,7 +230,7 @@
 }
 
 .svc-creator-popup .sd-selectlist__item-body {
-  padding-inline-end: var(--sjs-spacing-x550);
+  padding-inline-end: var(--sjs2-spacing-x550);
 }
 
 .sl-row--multiple {
@@ -243,7 +240,7 @@
 }
 
 .sl-question__header--left {
-  margin-right: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
+  margin-right: var(--sjs2-spacing-x100);
 }
 
 .sl-row {
@@ -265,21 +262,21 @@
 }
 
 .sl-row--multiple .sl-question {
-  padding-right: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
+  padding-right: var(--sjs2-spacing-x100);
 }
 .svc-logic-question-text-editor {
-  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
 }
 .svc-logic-question-value {
   --sd-base-padding: var(--sjs2-spacing-x500);
   --sd-base-vertical-padding: var(--sjs2-spacing-x400);
   --sd-page-vertical-padding: var(--sjs2-spacing-x300);
   padding-right: var(--sjs2-spacing-x500);
-  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
 }
 
 .svc-logic_trigger-editor {
-  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
 }
 
 .svc-logic_trigger-editor .svc-logic-question-value {

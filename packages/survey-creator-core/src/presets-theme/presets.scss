@@ -107,8 +107,8 @@
 .sps-row--multiple {
   display: flex;
   align-items: stretch;
-  margin: calc(-1 * var(--sjs2-spacing-x150, 12px)) calc(-1 * var(--sjs2-spacing-x250, 20px))
-    calc(-1 * var(--sjs2-spacing-x250, 20px)) calc(-1 * var(--sjs2-spacing-x250, 20px));
+  margin: var(--sjs2-spacing-negative-x150) var(--sjs2-spacing-negative-x250)
+    var(--sjs2-spacing-negative-x250) var(--sjs2-spacing-negative-x250);
   & > div {
     display: flex;
     flex-direction: column;
@@ -145,7 +145,7 @@
 }
 .sps-question--search {
   padding: 0 var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px);
-  margin: 0 calc(-1 * var(--sjs2-spacing-x250, 20px)) 0;
+  margin: 0 var(--sjs2-spacing-negative-x250) 0;
   position: relative;
   &:after {
     content: "";

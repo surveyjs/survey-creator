@@ -52,8 +52,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   box-shadow: inset 0px -2px 0px var(--sjs2-color-bg-brand-primary);
   // text-align: right;
   display: flex;
-  padding: var(--ctr-property-grid-header-padding-top, var(--sjs-spacing-x150)) var(--ctr-property-grid-header-padding-right, var(--sjs-spacing-x2))
-  var(--ctr-property-grid-header-padding-bottom, var(--sjs-spacing-x150)) var(--ctr-property-grid-header-padding-left, var(--sjs-spacing-x2));
+  padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x200);
 }
 
 .svc-side-bar__container-content {
@@ -72,9 +71,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   flex-grow: 1;
   flex-shrink: 0;
   justify-content: flex-end;
-  padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1)) var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
+  padding: var(--sjs2-spacing-x100);
   color: var(--sjs2-color-fg-basic-primary);
 }
 
@@ -131,13 +128,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   height: 100%;
 }
 
-$tabs-width: calc(
-  var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1)) +
-    var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1)) +
-    var(--sjs2-typography-line-height-default) +
-    var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150)) +
-    var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150))
-);
+$tabs-width: calc(var(--sjs2-typography-line-height-default) + var(--sjs2-spacing-x500));
 
 .svc-side-bar--flyout {
   z-index: 1000;
@@ -340,10 +331,7 @@ $tabs-width: calc(
   margin-inline-end: auto;
 
   .sv-action-bar-item--icon {
-    padding: var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1))
-      var(--ctr-menu-toolbar-button-padding-right, var(--sjs-spacing-x1))
-      var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
-      var(--ctr-menu-toolbar-button-padding-left, var(--sjs-spacing-x1));
+    padding: var(--sjs2-spacing-x100);
   }
   .sv-svg-icon {
     width: var(--sjs2-typography-line-height-default);

@@ -73,7 +73,7 @@
     display: flex;
 
     .svc-toolbar {
-      padding: var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
+      padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x200);
       justify-content: flex-end;
     }
     .sd-action-bar__separator {
@@ -101,8 +101,7 @@
       padding: 0;
       width: 100%;
 
-      padding: var(--ctr-menu-toolbar-padding-vertical-mobile, var(--sjs-spacing-x05))
-        var(--ctr-menu-toolbar-padding-horizontal, var(--sjs-spacing-x2));
+      padding: var(--sjs2-spacing-x050) var(--sjs2-spacing-x200);
       background: var(--sjs2-color-bg-basic-primary);
       border-top: var(--sjs2-border-width-x100) solid
         var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));

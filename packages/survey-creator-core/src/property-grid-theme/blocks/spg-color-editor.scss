@@ -22,7 +22,7 @@
   height: var(--sjs2-size-x300, 24px);
   box-sizing: border-box;
   border: var(--sjs2-border-width-x100) solid var(--sjs2-color-utility-scrollbar);
-  margin-left: var(--ctr-editor-color-swatch-margin-left, var(--sjs-spacing-x150));
+  margin-left: var(--sjs2-spacing-x150);
 
   .sv-svg-icon {
     position: absolute;

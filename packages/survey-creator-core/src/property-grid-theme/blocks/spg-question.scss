@@ -27,8 +27,7 @@
   @include sjs2--typography--default;
   width: 100%;
   margin: 0;
-  padding: var(--ctr-label-padding-top, var(--sjs-spacing-x1)) var(--ctr-label-padding-right, 0px)
-    var(--ctr-label-padding-bottom, var(--sjs-spacing-x1)) var(--ctr-label-padding-left, 0px);
+  padding: var(--sjs2-spacing-x100) 0;
   color: var(--sjs2-color-fg-basic-secondary);
   box-sizing: border-box;
 }
@@ -79,14 +78,12 @@
 }
 
 .spg-row-narrow__question {
-  --thm-ctr-property-grid-form-gap: var(--ctr-property-grid-form-gap, var(--sjs-spacing-x2));
-  margin-top: calc(-1 * var(--thm-ctr-property-grid-form-gap));
+  margin-top: var(--sjs2-spacing-negative-x200);
 }
 
 .spg-row--multiple {
   & > div > .spg-row-narrow__question {
-    --thm-ctr-editor-layout-gap: var(--ctr-editor-layout-gap, var(--sjs-spacing-x1));
-    margin-top: calc(-1 * var(--thm-ctr-editor-layout-gap));
+    margin-top: var(--sjs2-spacing-negative-x100);
   }
 }
 
@@ -145,8 +142,8 @@
   .sd-dropdown {
     padding-top: var(--sjs2-spacing-x050, 4px);
     padding-bottom: var(--sjs2-spacing-x050, 4px);
-    margin-top: calc(-1 * var(--sjs2-spacing-x050, 4px));
-    margin-bottom: calc(-1 * var(--sjs2-spacing-x050, 4px));
+    margin-top: var(--sjs2-spacing-negative-x050);
+    margin-bottom: var(--sjs2-spacing-negative-x050);
   }
   .sd-formbox__input {
     width: 0;
@@ -156,7 +153,7 @@
 
 .spg-row--multiple {
   display: flex;
-  gap: var(--ctr-editor-layout-gap, var(--sjs-spacing-x1));
+  gap: var(--sjs2-spacing-x100);
   flex-wrap: wrap;
 
   & > div {
@@ -174,10 +171,7 @@
   @include sjs2--typography--default;
   width: 100%;
   box-sizing: border-box;
-  padding: var(--ctr-error-message-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-error-message-padding-right, var(--sjs-spacing-x150))
-    var(--ctr-error-message-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-error-message-padding-left, var(--sjs-spacing-x150));
+  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x150);
 
   color: var(--sjs2-color-fg-basic-primary);
   background-color: var(--sjs2-color-bg-alert-secondary);
@@ -189,7 +183,7 @@
 sv-question-error {
   & > div {
     display: flex;
-    gap: var(--ctr-error-message-gap, var(--sjs-spacing-x1));
+    gap: var(--sjs2-spacing-x100);
   }
 }
 

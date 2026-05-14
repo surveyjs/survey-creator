@@ -2,11 +2,11 @@
 
 .svc-toolbox {
   .svc-search {
-    padding-top: var(--ctr-toolbox-search-padding-top, var(--sjs-spacing-x250));
-    padding-inline-end: var(--ctr-toolbox-search-padding-right, var(--sjs-spacing-x2));
-    padding-bottom: var(--ctr-toolbox-search-padding-bottom, var(--sjs-spacing-x250));
-    padding-inline-start: var(--ctr-toolbox-search-padding-left, var(--sjs-spacing-x3));
-    gap: var(--ctr-toolbox-search-gap, var(--sjs-spacing-x1));
+    padding-top: var(--sjs2-spacing-x250);
+    padding-inline-end: var(--sjs2-spacing-x200);
+    padding-bottom: var(--sjs2-spacing-x250);
+    padding-inline-start: var(--sjs2-spacing-x300);
+    gap: var(--sjs2-spacing-x100);
     height: unset;
 
     width: unset;

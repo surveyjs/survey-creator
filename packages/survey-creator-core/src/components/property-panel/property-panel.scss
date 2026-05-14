@@ -2,12 +2,10 @@
 
 .svc-property-grid-placeholder {
   display: flex;
-  padding: var(--ctr-property-grid-placeholder-padding-top, var(--sjs-spacing-x12))
-    var(--ctr-property-grid-placeholder-padding-right, var(--sjs-spacing-x6)) var(--ctr-property-grid-placeholder-padding-bottom, 0px)
-    var(--ctr-property-grid-placeholder-padding-left, var(--sjs-spacing-x6));
+  padding: calc(12 * var(--sjs2-spacing-x100)) var(--sjs2-spacing-x600) 0 var(--sjs2-spacing-x600);
   flex-direction: column;
   align-items: center;
-  gap: var(--ctr-property-grid-placeholder-image-margin-top, var(--sjs-spacing-x3));
+  gap: var(--sjs2-spacing-x300);
   flex: 1 0 0;
   align-self: stretch;
   background: var(--sjs2-color-utility-property-grid);
@@ -18,7 +16,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--ctr-property-grid-placeholder-text-gap, var(--sjs-spacing-x1));
+  gap: var(--sjs2-spacing-x100);
 }
 .svc-property-grid-placeholder__title {
   @include sjs2--typography--default-strong;

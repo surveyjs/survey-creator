@@ -43,11 +43,11 @@
 }
 
 .svc-surface-placeholder__text {
-  padding: var(--ctr-surface-placeholder-text-margin-top, var(--sjs-spacing-x4)) 0px
-    var(--ctr-surface-placeholder-text-margin-bottom, var(--sjs-spacing-x6)) 0px;
+  padding: var(--sjs2-spacing-x400) 0px
+    var(--sjs2-spacing-x600) 0px;
   display: flex;
   flex-direction: column;
-  gap: var(--ctr-surface-placeholder-text-gap, var(--sjs-spacing-x1));
+  gap: var(--sjs2-spacing-x100);
   align-items: center;
   justify-content: center;
   align-self: center;
@@ -74,8 +74,8 @@
 .svc-translation-tab--empty .svc-surface-placeholder,
 .svc-designer__placeholder-container {
   max-width: calc(var(--sjs2-base-unit-size) * 90);
-  padding: var(--ctr-surface-placeholder-padding-top, var(--sjs-spacing-x4))
-    var(--ctr-surface-placeholder-padding-right, var(--sjs-spacing-x6))
-    var(--ctr-surface-placeholder-padding-bottom, var(--sjs-spacing-x16))
-    var(--ctr-surface-placeholder-padding-left, var(--sjs-spacing-x6));
+  padding: var(--sjs2-spacing-x400)
+    var(--sjs2-spacing-x600)
+    calc(16 * var(--sjs2-spacing-x100))
+    var(--sjs2-spacing-x600);
 }

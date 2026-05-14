@@ -9,7 +9,7 @@
   cursor: pointer;
 }
 .svc-link-value-button {
-  margin-inline-start: calc(-1 * var(--ctr-actionbar-button-padding-left-medium-text, var(--sjs-spacing-x2)));
+  margin-inline-start: var(--sjs2-spacing-negative-x200);
 }
 .svc-question-link__clear-button {
   color: var(--sjs2-color-bg-alert-primary);

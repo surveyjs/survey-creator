@@ -35,15 +35,15 @@
   }
 
   .sv-scroll__scroller {
-    padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150))
-      var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150));
+    padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x150)
+      var(--sjs2-spacing-x200) var(--sjs2-spacing-x150);
     align-items: var(--ctr-toolbox-scroller-align-items, flex-start);
 
   }
   .sv-scroll__scrollbar {
     inset-inline-end: var(--ctr-toolbox-scrollbar-right, 0);
     inset-inline-start: var(--ctr-toolbox-scrollbar-left, "auto");
-    padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) 0 var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) 0;
+    padding: var(--sjs2-spacing-x150) 0 var(--sjs2-spacing-x200) 0;
   }
 }
 
@@ -59,8 +59,8 @@
   }
   .sv-scroll__scroller {
     width: 100vw;
-    padding: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150)) var(--ctr-toolbox-group-padding-right-compact, var(--sjs-spacing-x150))
-      var(--ctr-toolbox-padding-bottom, var(--sjs-spacing-x2)) var(--ctr-toolbox-group-padding-left-compact, var(--sjs-spacing-x150));
+    padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x150)
+      var(--sjs2-spacing-x200) var(--sjs2-spacing-x150);
     pointer-events: none;
   }
   .svc-search {
@@ -68,17 +68,17 @@
     position: absolute;
   }
   .svc-toolbox__search-container {
-    padding-top: var(--ctr-toolbox-padding-top, var(--sjs-spacing-x150));
-    padding-inline-start: var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150));
-    padding-inline-end: var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150));
-    padding-bottom: calc(var(--ctr-toolbox-separator-padding-top, var(--sjs-spacing-x1)) + var(--ctr-toolbox-gap, var(--sjs-spacing-x05)));
+    padding-top: var(--sjs2-spacing-x150);
+    padding-inline-start: var(--sjs2-spacing-x150);
+    padding-inline-end: var(--sjs2-spacing-x150);
+    padding-bottom: calc(var(--sjs2-spacing-x100) + var(--sjs2-spacing-x050));
   }
   .svc-toolbox__category-separator {
     box-sizing: content-box;
-    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, var(--sjs-spacing-x2));
-    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, var(--sjs-spacing-x2));
-    margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right-compact, var(--sjs-spacing-x150)) - var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)));
-    margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left-compact, var(--sjs-spacing-x150)) - var(--ctr-toolbox-item-margin-horizontal-no-text, var(--sjs-spacing-x05)));
+    padding-inline-end: var(--sjs2-spacing-x200);
+    padding-inline-start: var(--sjs2-spacing-x200);
+    margin-inline-end: calc(0px - var(--sjs2-spacing-x150) - var(--sjs2-spacing-x050));
+    margin-inline-start: calc(0px - var(--sjs2-spacing-x150) - var(--sjs2-spacing-x050));
   }
   .svc-toolbox__category-separator--search {
     margin-inline-end: 0;
@@ -153,7 +153,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: var(--ctr-toolbox-gap, var(--sjs-spacing-x05));
+  margin-bottom: var(--sjs2-spacing-x050);
   &:last-child {
     margin-bottom: 0;
   }
@@ -161,13 +161,13 @@
 
 .svc-toolbox__category-separator {
   box-sizing: border-box;
-  padding-top: var(--ctr-toolbox-separator-padding-top, var(--sjs-spacing-x1));
+  padding-top: var(--sjs2-spacing-x100);
   padding-inline-end: var(--ctr-toolbox-separator-padding-right, 0px);
-  padding-bottom: var(--ctr-toolbox-separator-padding-bottom, var(--sjs-spacing-x1));
-  padding-inline-start: var(--ctr-toolbox-separator-padding-left, var(--sjs-spacing-x2));
-  margin-top: var(--ctr-toolbox-gap, var(--sjs-spacing-x05));
-  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)));
-  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150)));
+  padding-bottom: var(--sjs2-spacing-x100);
+  padding-inline-start: var(--sjs2-spacing-x200);
+  margin-top: var(--sjs2-spacing-x050);
+  margin-inline-end: calc(0px - var(--sjs2-spacing-x150));
+  margin-inline-start: calc(0px - var(--sjs2-spacing-x150));
   max-width: 10000px;
   &:after {
     content: "";
@@ -200,18 +200,18 @@
 }
 
 .svc-toolbox__category-header-wrapper {
-  padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--ctr-toolbox-group-header-margin-left, var(--sjs-spacing-x150))
-    var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--ctr-toolbox-group-header-margin-right, var(--sjs-spacing-x150));
-  margin-inline-start: calc(0px - var(--ctr-toolbox-group-padding-left, var(--sjs-spacing-x150)));
-  margin-inline-end: calc(0px - var(--ctr-toolbox-group-padding-right, var(--sjs-spacing-x150)));
+  padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--sjs2-spacing-x150)
+    var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--sjs2-spacing-x150);
+  margin-inline-start: calc(0px - var(--sjs2-spacing-x150));
+  margin-inline-end: calc(0px - var(--sjs2-spacing-x150));
   align-self: stretch;
 }
 .svc-toolbox__category-header {
   min-height: var(--sjs2-size-x500);
-  padding-top: var(--ctr-toolbox-group-header-padding-top, var(--sjs-spacing-x1));
-  padding-inline-end: var(--ctr-toolbox-group-header-padding-right, var(--sjs-spacing-x1));
-  padding-bottom: var(--ctr-toolbox-group-header-padding-bottom, var(--sjs-spacing-x1));
-  padding-inline-start: var(--ctr-toolbox-group-header-padding-left, var(--sjs-spacing-x2));
+  padding-top: var(--sjs2-spacing-x100);
+  padding-inline-end: var(--sjs2-spacing-x100);
+  padding-bottom: var(--sjs2-spacing-x100);
+  padding-inline-start: var(--sjs2-spacing-x200);
 
   border-radius: var(--sjs2-radius-x100);
   background: var(--sjs2-color-bg-basic-primary-dim);

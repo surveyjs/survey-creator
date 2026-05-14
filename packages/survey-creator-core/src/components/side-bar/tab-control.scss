@@ -12,12 +12,12 @@
 }
 .svc-sidebar-tabs__top-container {
   display: flex;
-  padding-top: var(--ctr-property-grid-tabs-padding-top, var(--sjs-spacing-x150));
-  padding-bottom: var(--ctr-property-grid-tabs-padding-bottom, var(--sjs-spacing-x150));
+  padding-top: var(--sjs2-spacing-x150);
+  padding-bottom: var(--sjs2-spacing-x150);
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  gap: var(--ctr-property-grid-tabs-separator-margin, var(--sjs-spacing-x150));
+  gap: var(--sjs2-spacing-x150);
   flex-grow: 1;
 
   .sv-scroll__wrapper {
@@ -28,8 +28,8 @@
 .svc-sidebar-tabs__collapse-button {
   display: flex;
   align-items: center;
-  padding-inline-start: var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150));
-  padding-inline-end: var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150));
+  padding-inline-start: var(--sjs2-spacing-x150);
+  padding-inline-end: var(--sjs2-spacing-x150);
 }
 
 :dir(rtl),
@@ -48,8 +48,8 @@
   align-items: flex-start;
   align-self: stretch;
   margin-top: -1px;
-  padding-inline-start: var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150));
-  padding-inline-end: var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150));
+  padding-inline-start: var(--sjs2-spacing-x150);
+  padding-inline-end: var(--sjs2-spacing-x150);
 
   & > div {
     height: var(--sjs2-border-width-x100);
@@ -62,21 +62,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  gap: var(--ctr-property-grid-tabs-gap, var(--sjs-spacing-x150));
-  padding-inline-start: var(--ctr-property-grid-tabs-padding-left, var(--sjs-spacing-x150));
-  padding-inline-end: var(--ctr-property-grid-tabs-padding-right, var(--sjs-spacing-x150));
+  gap: var(--sjs2-spacing-x150);
+  padding-inline-start: var(--sjs2-spacing-x150);
+  padding-inline-end: var(--sjs2-spacing-x150);
 }
 .svc-creator--mobile .svc-sidebar-tabs--collapsed {
   display: none;
 }
 .svc-sidebar-tabs__bottom-container {
   display: flex;
-  padding-top: var(--ctr-property-grid-tabs-padding-top, var(--sjs-spacing-x150));
-  padding-bottom: var(--ctr-property-grid-tabs-padding-bottom, var(--sjs-spacing-x150));
+  padding-top: var(--sjs2-spacing-x150);
+  padding-bottom: var(--sjs2-spacing-x150);
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  gap: var(--ctr-property-grid-tabs-separator-margin, var(--sjs-spacing-x150));
+  gap: var(--sjs2-spacing-x150);
 }
 
 .svc-sidebar__header.svc-sidebar__header--tabbed {
@@ -102,10 +102,10 @@
 }
 
 .svc-sidebar__header-container.svc-sidebar__header-container--with-subtitle {
-  padding: var(--ctr-property-grid-header-padding-top-with-subtitle, var(--sjs-spacing-x075))
-    var(--ctr-property-grid-header-padding-right, var(--sjs-spacing-x2))
-    var(--ctr-property-grid-header-padding-bottom-with-subtitle, var(--sjs-spacing-x075))
-    var(--ctr-property-grid-header-padding-left, var(--sjs-spacing-x2));
+  padding: var(--sjs2-spacing-x075)
+    var(--sjs2-spacing-x200)
+    var(--sjs2-spacing-x075)
+    var(--sjs2-spacing-x200);
 }
 
 .svc-sidebar__header-container .svc-side-bar__container-title {
@@ -133,8 +133,8 @@
   display: inline-block;
 }
 .svc-sidebar__header-object-selector {
-  padding: var(--ctr-menu-toolbar-button-padding-top-with-description, var(--sjs-spacing-x05))
-    var(--ctr-menu-toolbar-button-padding-right-with-description, var(--sjs-spacing-x150))
-    var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-menu-toolbar-button-padding-left-with-description, var(--sjs-spacing-x150));
+  padding: var(--sjs2-spacing-x050)
+    var(--sjs2-spacing-x150)
+    var(--sjs2-spacing-x100)
+    var(--sjs2-spacing-x150);
 }

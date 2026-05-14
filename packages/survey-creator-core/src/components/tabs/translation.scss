@@ -124,10 +124,7 @@
   color: var(--sjs2-color-fg-basic-primary-muted);
   background-color: var(--sjs2-color-component-formbox-design-bg);
   border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
-  padding: var(--ctr-string-table-row-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-string-table-row-padding-right, var(--sjs-spacing-x3))
-    var(--ctr-string-table-row-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-string-table-row-padding-left, var(--sjs-spacing-x3));
+  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x300);
 }
 
 .st-table {
@@ -217,10 +214,10 @@ td.st-table__cell:first-of-type {
 
 .st-body__footer {
   box-sizing: border-box;
-  padding: var(--ctr-string-table-title-padding-top, var(--sjs-spacing-x2))
-    var(--ctr-string-table-title-padding-right-actions, var(--sjs-spacing-x2))
-    var(--ctr-string-table-title-padding-bottom, var(--sjs-spacing-x2))
-    var(--ctr-string-table-title-padding-left, var(--sjs-spacing-x3));
+  padding: var(--sjs2-spacing-x200)
+    var(--sjs2-spacing-x200)
+    var(--sjs2-spacing-x200)
+    var(--sjs2-spacing-x300);
   border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-bg-basic-primary);
 }

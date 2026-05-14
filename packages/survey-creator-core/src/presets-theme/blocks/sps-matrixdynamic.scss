@@ -95,8 +95,7 @@
   width: var(--sjs2-size-x300);
   height: var(--sjs2-size-x300);
   padding: 0;
-  margin: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1)) 0
-    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1)) 0;
+  margin: var(--sjs2-spacing-x100) 0;
   margin-left: var(--sjs2-spacing-x150, 12px);
   &:disabled {
     opacity: 1;
@@ -107,7 +106,7 @@
 }
 
 .sps-matrixdynamic__footer {
-  margin: 0 calc(-1 * var(--sjs2-spacing-x150, 12px)) var(--sjs2-spacing-x150, 12px);
+  margin: 0 var(--sjs2-spacing-negative-x150) var(--sjs2-spacing-x150, 12px);
   padding: 0 var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px);
   border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
   display: flex;
@@ -205,5 +204,5 @@
 
 .spg-table__cell--actions:last-of-type .sps-action-bar {
   justify-content: flex-end;
-  padding-inline-end: var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05));
+  padding-inline-end: var(--sjs2-spacing-x050);
 }

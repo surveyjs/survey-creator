@@ -10,7 +10,7 @@
 // }
 
 .svc-row > .sd-row.sd-page__row {
-  margin-top: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  margin-top: var(--sjs2-spacing-x200);
   &.sd-row--delayed-enter {
     margin-top: 0;
   }
@@ -21,7 +21,7 @@
   width: calc(100% + var(--sjs2-spacing-x400));
   flex-wrap: nowrap;
   margin-top: 0;
-  padding-top: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  padding-top: var(--sjs2-spacing-x200);
   padding-right: var(--sjs2-spacing-x200);
   padding-bottom: 2px;
   margin-right: var(--sjs2-spacing-negative-x200);

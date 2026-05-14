@@ -46,13 +46,13 @@ svc-tab-json-editor-textarea {
 
 .svc-json-error {
   @include sjs2--typography--default;
-  padding: var(--ctr-code-viewer-code-error-row-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-code-viewer-code-error-row-padding-right, var(--sjs-spacing-x1))
-    var(--ctr-code-viewer-code-error-row-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-code-viewer-code-error-row-padding-left, var(--sjs-spacing-x2));
+  padding: var(--sjs2-spacing-x100)
+    var(--sjs2-spacing-x100)
+    var(--sjs2-spacing-x100)
+    var(--sjs2-spacing-x200);
   display: flex;
   align-items: center;
-  gap: var(--ctr-code-viewer-code-error-row-gap, var(--sjs-spacing-x2));
+  gap: var(--sjs2-spacing-x200);
 }
 
 .svc-json-error .sv-string-viewer {
@@ -74,7 +74,7 @@ svc-tab-json-editor-textarea {
 
 .svc-json-error__container {
   display: flex;
-  gap: var(--ctr-code-viewer-code-error-row-gap, var(--sjs-spacing-x2));
+  gap: var(--sjs2-spacing-x200);
 }
 
 .svc-json-error__title {
@@ -91,10 +91,7 @@ svc-tab-json-editor-textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--ctr-code-viewer-code-error-row-fix-button-padding-top, 0px)
-    var(--ctr-code-viewer-code-error-row-fix-button-padding-right, var(--sjs-spacing-x1))
-    var(--ctr-code-viewer-code-error-row-fix-button-padding-bottom, 0px)
-    var(--ctr-code-viewer-code-error-row-fix-button-padding-left, var(--sjs-spacing-x1));
+  padding: 0 var(--sjs2-spacing-x100);
 
   border-radius: var(--sjs2-radius-x050);
   background: var(--sjs2-color-bg-basic-primary);

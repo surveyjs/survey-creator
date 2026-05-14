@@ -18,10 +18,7 @@
   -webkit-appearance: none;
   appearance: none;
   border-radius: var(--sjs2-radius-x100);
-  padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-expression-item-padding-right, var(--sjs-spacing-x2))
-    var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-expression-item-padding-left, var(--sjs-spacing-x2));
+  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x200);
 
   border: none;
   outline: none;
@@ -110,7 +107,7 @@
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn,
 .svc-logic-operator--operator.sl-paneldynamic__add-btn {
-  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
 }
 
 .svc-logic-operator--action.sl-paneldynamic__add-btn .sd-action__title {
@@ -160,10 +157,7 @@
 
 .svc-action-button--icon.svc-icon-remove {
   display: none;
-  padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
-    var(--ctr-expression-item-padding-right-icon-only, var(--sjs-spacing-x1))
-    var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
-    var(--ctr-expression-item-padding-left-icon-only, var(--sjs-spacing-x1));
+  padding: var(--sjs2-spacing-x100);
   border-radius: var(--sjs2-radius-x100);
   background: none;
   justify-content: center;
@@ -223,7 +217,7 @@
   .svc-logic-tab__content-actions {
     margin-left: 25%;
     margin-right: 25%;
-    margin-top: var(--ctr-surface-gap, var(--sjs-spacing-x5));
+    margin-top: var(--sjs2-spacing-x500);
     margin-bottom: var(--sjs2-spacing-x800);
   }
 }
