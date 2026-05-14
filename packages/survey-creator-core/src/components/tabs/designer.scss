@@ -24,7 +24,7 @@ svc-tab-designer {
 
 .svc-tab-designer--with-placeholder .svc-designer-header {
   width: 100%;
-  min-width: var(--sjs-size-x90);
+  min-width: calc(var(--sjs2-base-unit-size) * 90);
 }
 
 .svc-content-wrapper {

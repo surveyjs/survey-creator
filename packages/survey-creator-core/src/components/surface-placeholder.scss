@@ -3,7 +3,7 @@
 .svc-surface-placeholder {
   display: flex;
   width: 100%;
-  max-width: var(--ctr-surface-placeholder-max-width, var(--sjs-size-x90));
+  max-width: calc(var(--sjs2-base-unit-size) * 90);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -73,7 +73,7 @@
 .svc-test-tab__content .svc-surface-placeholder,
 .svc-translation-tab--empty .svc-surface-placeholder,
 .svc-designer__placeholder-container {
-  max-width: var(--ctr-surface-placeholder-max-width, var(--sjs-size-x90));
+  max-width: calc(var(--sjs2-base-unit-size) * 90);
   padding: var(--ctr-surface-placeholder-padding-top, var(--sjs-spacing-x4))
     var(--ctr-surface-placeholder-padding-right, var(--sjs-spacing-x6))
     var(--ctr-surface-placeholder-padding-bottom, var(--sjs-spacing-x16))

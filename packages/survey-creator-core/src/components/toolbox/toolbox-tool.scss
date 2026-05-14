@@ -138,8 +138,8 @@
     top: 50%;
     z-index: 300;
     transform: translate(
-        calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) / 1.41),
-        calc(var(--ctr-tooltip-pointer-height, var(--sjs-size-x05)) / -1.41)
+        calc(var(--sjs2-size-x050) / 1.41),
+        calc(var(--sjs2-size-x050) / -1.41)
       )
       rotate(45deg);
     clip-path: polygon(-100% -100%, -100% 200%, 200% 200%);
