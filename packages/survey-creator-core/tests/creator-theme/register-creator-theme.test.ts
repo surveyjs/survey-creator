@@ -3,7 +3,7 @@ import { CreatorThemeModel } from "../../src/creator-theme/creator-theme-model";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 import { CreatorThemes, PredefinedCreatorThemes, registerCreatorTheme } from "../../src/creator-theme/creator-themes";
 import SurveyThemes from "survey-core/themes";
-import { mockDomWindowGetComputedStyleFromInlineStyles } from "../tabs/theme-test-mocks";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "../tabs/theme-test-mocks";
 import { DomWindowHelper } from "survey-core";
 
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
@@ -13,13 +13,18 @@ let savedCreatorThemes: { [index: string]: any };
 let savedPredefinedCreatorThemes: string[];
 
 beforeAll(() => {
-  mockDomWindowGetComputedStyleFromInlineStyles();
+  mockGetRGBaColorIdentity();
+  mockDomWindowGetComputedStyleFromInlineStyles({
+    [CreatorThemeModel.varColorUtilitySurface]: "#EDF9F7",
+    [CreatorThemeModel.varColorProjectBrand]: "#19B394",
+  });
   savedCreatorThemes = { ...CreatorThemes };
   savedPredefinedCreatorThemes = [...PredefinedCreatorThemes];
   registerCreatorTheme(SurveyThemes);
 });
 
 afterAll(() => {
+  restoreGetRGBaColorMock();
   Object.keys(CreatorThemes).forEach(key => { if (!(key in savedCreatorThemes)) delete CreatorThemes[key]; });
   PredefinedCreatorThemes.length = 0;
   savedPredefinedCreatorThemes.forEach(t => PredefinedCreatorThemes.push(t));

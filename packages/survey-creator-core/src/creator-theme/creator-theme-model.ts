@@ -48,7 +48,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     if (!theme) return;
 
     if (themeName === CreatorThemeModel.defaultThemeName && (!theme.cssVariables || Object.keys(theme.cssVariables).length === 0)) {
-      theme.cssVariables = { ...DefaultLight.cssVariables };
+      theme.cssVariables = { ...this.baseThemeVariables, ...DefaultLight.cssVariables };
     }
     return theme;
   }
@@ -98,8 +98,15 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
 
   public initializeBaseThemeVariables(creator?: SurveyCreatorModel) {
-    const vars = Serializer.getProperties("theme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
-    this.baseThemeVariables = calculateThemeVariables(DefaultLight.cssVariables, vars, creator?.rootElement);
+    const vars = Serializer.getProperties("creatortheme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
+    const computed = calculateThemeVariables(DefaultLight.cssVariables, vars, creator?.rootElement) || {};
+    const filtered: { [index: string]: string } = {};
+    Object.keys(computed).forEach(key => {
+      const value = computed[key];
+      if (typeof value === "string" && value.trim() === "") return;
+      filtered[key] = value;
+    });
+    this.baseThemeVariables = filtered;
   }
 
   public getType(): string {
@@ -168,14 +175,19 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this[cssName] = (scale * baseUnit / 100) + "px";
   }
   private scaleCssVariables() {
-    if (this.fontScale !== undefined) {
-      this.scaleValue(CreatorThemeModel.varBaseUnitFontSize, this.fontScale);
-      this.scaleValue(CreatorThemeModel.varBaseUnitLineHeight, this.fontScale);
-    }
-    if (this.scale !== undefined) {
-      this.scaleValue(CreatorThemeModel.varBaseUnitSize, this.scale);
-      this.scaleValue(CreatorThemeModel.varBaseUnitSpacing, this.scale);
-      this.scaleValue(CreatorThemeModel.varBaseUnitRadius, this.scale);
+    this.blockThemeChangedNotifications += 1;
+    try {
+      if (this.fontScale !== undefined) {
+        this.scaleValue(CreatorThemeModel.varBaseUnitFontSize, this.fontScale);
+        this.scaleValue(CreatorThemeModel.varBaseUnitLineHeight, this.fontScale);
+      }
+      if (this.scale !== undefined) {
+        this.scaleValue(CreatorThemeModel.varBaseUnitSize, this.scale);
+        this.scaleValue(CreatorThemeModel.varBaseUnitSpacing, this.scale);
+        this.scaleValue(CreatorThemeModel.varBaseUnitRadius, this.scale);
+      }
+    } finally {
+      this.blockThemeChangedNotifications -= 1;
     }
   }
   private getScaleFactor(cssName: string): number {

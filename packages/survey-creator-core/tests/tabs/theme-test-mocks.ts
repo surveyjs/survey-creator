@@ -14,13 +14,14 @@ export function restoreGetRGBaColorMock(): void {
   getRGBaColorSpy = undefined;
 }
 
-export function mockDomWindowGetComputedStyleFromInlineStyles(): MockInstance {
+export function mockDomWindowGetComputedStyleFromInlineStyles(values: Record<string, string> = {}): MockInstance {
   return vi.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
     ...window,
     getComputedStyle: (el: any) => {
       const style = el?.style;
       return {
         getPropertyValue: (property: string) => {
+          if (values[property]) return values[property];
           if (!style) return "";
           const v = style.getPropertyValue?.(property);
           if (typeof v === "string" && v.length > 0) return v;
