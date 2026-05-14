@@ -10,6 +10,7 @@
     "build:main": "rollup -c rollup.config.mjs --environment emitMinified,emitNonSourceFiles",
     "build:i18n": "rollup -c rollup.i18n.config.mjs --environment emitMinified",
     "build:all": "npm run build && npm run build:i18n && npm run build:i18n:presets",
+    "build:themes": "echo 'build:themes is deprecated'",
     "build:ui-presets": "rollup -c rollup.ui-presets.config.mjs --environment emitMinified",
     "build:ui-preset-editor": "rollup -c rollup.ui-preset-editor.config.mjs --environment emitMinified",
     "build:presets": "npm run build:ui-presets && npm run build:ui-preset-editor",
