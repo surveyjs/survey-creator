@@ -194,6 +194,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private createCreatorSettingsPage(creator: SurveyCreatorModel) {
     this.themeModel = new CreatorThemeModel();
+    this.themeModel.getRootElement = () => creator?.rootElement;
     this.themePropertyGridViewModel = this.createSettingsPropertyGridViewModel("theme", creatorThemeModelPropertyGridDefinition, creator);
     this.themePropertyGridViewModel.onNewSurveyCreatedCallback = (survey) => {
       this.onThemePropertyGridSurveyCreated(survey);

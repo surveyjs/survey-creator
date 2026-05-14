@@ -81,7 +81,7 @@ export function backgroundCornerRadiusToCssVariable(value: any = {}, property: J
   });
 }
 
-export function backgroundCornerRadiusFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultBackcolorVariableName: string, defaultHovercolorVariableName: string, defaultCornerRadius: number = 4): any {
+export function backgroundCornerRadiusFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultBackcolorVariableValue: string, defaultHovercolorVariableValue: string, defaultCornerRadius: number = 4): any {
   if (!property) return;
 
   const propKey = property.name.toLowerCase();
@@ -89,8 +89,8 @@ export function backgroundCornerRadiusFromCssVariable(property: JsonObjectProper
 
   if (!property.defaultValue) property.defaultValue = {};
   assign(property.defaultValue, {
-    backcolor: themeCssVariables[defaultBackcolorVariableName],
-    hovercolor: themeCssVariables[defaultHovercolorVariableName],
+    backcolor: defaultBackcolorVariableValue,
+    hovercolor: defaultHovercolorVariableValue,
     cornerRadius: defaultCornerRadius
   });
 

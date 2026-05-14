@@ -130,7 +130,7 @@ export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectP
   });
 }
 
-export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableName?: string, defaultPlaceholderColorVariableName?: string): any {
+export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableValue?: string, defaultPlaceholderColorVariableValue?: string): any {
   if (!property) return;
 
   const propertyNameDashed = property.name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
@@ -146,8 +146,8 @@ export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeC
 
   if (!property.defaultValue) property.defaultValue = {};
   assign(property.defaultValue, {
-    color: themeCssVariables[defaultColorVariableName],
-    placeholdercolor: !!defaultPlaceholderColorVariableName ? themeCssVariables[defaultPlaceholderColorVariableName] : undefined,
+    color: defaultColorVariableValue,
+    placeholdercolor: defaultPlaceholderColorVariableValue,
   });
   if (!property.defaultValue["size"]) {
     const baseFontSize = themeCssVariables[varNames.size] ?? themeCssVariables["--sjs2-base-unit-font-size"] ?? themeCssVariables["--sjs-font-size"];

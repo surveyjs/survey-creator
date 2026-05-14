@@ -5,7 +5,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
     properties: [
       { name: "header", tab: "header" },
 
-      { name: "--sjs2-color-bg-neutral-tertiary-dim", tab: "background" },
+      { name: "--sjs2-color-utility-surface-survey", tab: "background" },
       { name: "backgroundImage", tab: "background" },
       { name: "backgroundImageFit", tab: "background" },
       { name: "backgroundImageAttachment", tab: "background" },

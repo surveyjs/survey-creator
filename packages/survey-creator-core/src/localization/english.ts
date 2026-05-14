@@ -1017,7 +1017,7 @@ export var enStrings = {
       editorFont: "Font",
       backgroundOpacity: "Opacity", // Auto-generated string
       "--sjs2-typography-font-family-text": "Survey font family",
-      "--sjs2-color-bg-neutral-tertiary-dim": "Background color",
+      "--sjs2-color-utility-surface-survey": "Background color",
       "--sjs2-color-project-brand-600": "Accent background colors",
       "--sjs2-color-fg-brand-on-primary": "Accent foreground colors",
       "--sjs2-color-bg-alert-primary": "Error message colors",
@@ -1764,7 +1764,7 @@ export var enStrings = {
       panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
       questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
       cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      "--sjs2-color-bg-neutral-tertiary-dim": "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Sets the main background color of the survey."
     },
     header: {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
@@ -1951,9 +1951,22 @@ export var enStrings = {
     fontScale: "Font",
     names: {
       sc2020: "Survey Creator 2020",
-      "default-light": "Light",
-      "default-dark": "Dark",
-      "default-contrast": "Contrast"
+      "default-light": "Default Light",
+      "default-dark": "Default Dark",
+      "contrast-light": "Contrast Light",
+      "contrast-dark": "Contrast Dark",
+      "borderless-light": "Borderless Light",
+      "borderless-dark": "Borderless Dark",
+      "flat-light": "Flat Light",
+      "flat-dark": "Flat Dark",
+      "plain-light": "Plain Light",
+      "plain-dark": "Plain Dark",
+      "soft-light": "Soft Light",
+      "soft-dark": "Soft Dark",
+      "threedimensional-light": "3D Light",
+      "threedimensional-dark": "3D Dark",
+      "monochrome-light": "Monochrome Light",
+      "monochrome-dark": "Monochrome Dark",
     }
   },
   preset: {

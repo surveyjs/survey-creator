@@ -10,7 +10,8 @@ import {
   addIconsToThemeSet,
   SvgThemeSets,
   QuestionPanelDynamicModel,
-  ChoiceItem
+  ChoiceItem,
+  patchLegacyCSSVariables
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -86,8 +87,7 @@ import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 import { DomDocumentHelper } from "survey-core";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
-import DefaultLight from "./themes/default-light";
-import DefaultLibraryLight from "survey-core/themes/default-light";
+import { DefaultLight } from "survey-core/themes";
 import { legacyCssVariables } from "./themes/legacy-vars";
 
 addIconsToThemeSet("v1", iconsV1);
@@ -1765,7 +1765,7 @@ export class SurveyCreatorModel extends Base
     }
     SvgRegistry.registerIcons(SvgThemeSets["v2"]);
     this.applyCreatorTheme(DefaultLight);
-    this.setSurfaceCssVariables(DefaultLibraryLight.cssVariables);
+    this.setSurfaceCssVariables(DefaultLight.cssVariables);
     this.previewDevice = options.previewDevice ?? "desktop";
     this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
@@ -4842,6 +4842,7 @@ export class SurveyCreatorModel extends Base
   public getRootCss() {
     return new CssClassBuilder()
       .append("svc-creator")
+      .append("sd-theme-root")
       .append("svc-creator--mobile", this.isMobileView)
       .append("svc-creator--touch", this.isTouch)
       .append("svc-creator--disable-animations", !this.animationEnabled)
@@ -4886,7 +4887,7 @@ export class SurveyCreatorModel extends Base
     }
   }
 
-  private patchLegacyCSSVariables(newCssVariable: any) {
+  private patchLegacyCreatorCSSVariables(newCssVariable: any) {
     Object.keys(legacyCssVariables).forEach((variable) => {
       if (!!newCssVariable[variable]) {
         newCssVariable[legacyCssVariables[variable]] = newCssVariable[variable];
@@ -4899,9 +4900,12 @@ export class SurveyCreatorModel extends Base
     if (!theme) return;
     this.creatorTheme = theme;
 
+    this.setSurfaceCssVariables(theme.cssVariables);
+
     const newCssVariable = {};
-    assign(newCssVariable, DefaultLight.cssVariables, theme?.cssVariables);
-    this.patchLegacyCSSVariables(newCssVariable);
+    assign(newCssVariable, theme?.cssVariables);
+    this.patchLegacyCreatorCSSVariables(newCssVariable);
+    patchLegacyCSSVariables(newCssVariable);
     const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {
       designerPlugin.model.updateSurfaceCssVariables();
@@ -4936,7 +4940,7 @@ export class SurveyCreatorModel extends Base
       "--sjs2-color-bg-basic-primary-dim",
       "--sjs2-color-fg-basic-primary",
       "--sjs2-color-fg-basic-secondary",
-      "--sjs2-color-bg-neutral-tertiary-dim",
+      "--sjs2-color-utility-surface-survey",
       "--sjs2-color-bg-neutral-secondary",
       "--sjs2-color-fg-neutral-primary",
       "--sjs2-color-bg-basic-secondary",
@@ -4959,7 +4963,7 @@ export class SurveyCreatorModel extends Base
       "--sjs2-color-bg-warning-secondary",
       "--sjs2-color-fg-warning-on-primary"
     ];
-    cssVariablesToDelete.forEach(variable => delete this.defaultSurfaceCssVariables[variable]);
+    //cssVariablesToDelete.forEach(variable => delete this.defaultSurfaceCssVariables[variable]);
 
     const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {

@@ -1,6 +1,15 @@
 import { ItemValue, ListModel, PageModel, QuestionSignaturePadModel, SurveyModel, _setIsTouch } from "survey-core";
 import { QuestionColorModel } from "../../src/custom-questions/question-color";
 import { PropertyGridModelTester } from "./property-grid.base";
+import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "../tabs/theme-test-mocks";
+import { afterEach, beforeEach } from "vitest";
+
+beforeEach(() => {
+  mockGetRGBaColorIdentity();
+});
+afterEach(() => {
+  restoreGetRGBaColorMock();
+});
 
 test("Check custom color question", () => {
   const question = new QuestionColorModel("q1");

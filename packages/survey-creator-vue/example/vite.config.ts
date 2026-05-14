@@ -20,7 +20,7 @@ export default defineConfig(({ command }) => {
       },
     },
     optimizeDeps: {
-      include: ["survey-creator-core/themes/test", "survey-core/themes/test"],
+      include: ["survey-core/themes/test-creator", "survey-core/themes/test"],
     },
 }
 })

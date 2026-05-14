@@ -1102,11 +1102,11 @@ SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => 
 });
 */
 SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme);
+SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
 //SurveyCreatorCore.registerUIPreset(SurveyCreatorUIPreset);
 const creator = new SurveyCreator.SurveyCreator(options);
-//creator.applyCreatorTheme(SurveyCreatorTheme.Test);
-  creator.applySurfaceTheme(SurveyTheme.Test);
+creator.applyCreatorTheme(SurveyTheme.TestCreator);
+creator.applySurfaceTheme(SurveyTheme.TestSurface);
   //creator.applyTheme(SurveyTheme.Test);
   //creator.theme = SurveyTheme.Test;
 creator.onModified.add((sender, options) => {
