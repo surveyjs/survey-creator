@@ -38,7 +38,8 @@ test("Creator theme: update editors after theme switching", (): any => {
   expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
   expect(primaryBackgroundColor.value).toEqual("#19B394");
 
-  themeName.value = "default-contrast";
+  // Survey Core registers contrast as "contrast-light" / "contrast-dark", not "default-contrast".
+  themeName.value = "contrast-light";
   expect(surfaceBackgroundColor.value).toEqual("#F4F2FB");
   expect(primaryBackgroundColor.value).toEqual("#3A179E");
 

@@ -2,6 +2,7 @@ import { CreatorTester } from "../creator-tester";
 import { CreatorThemeModel } from "../../src/creator-theme/creator-theme-model";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "../../src/creator-theme/creator-themes";
+import SurveyThemes from "survey-core/themes";
 
 import "survey-core/survey.i18n";
 import { PredefinedBackgroundColors, PredefinedColors } from "../../src/components/tabs/themes";
@@ -217,27 +218,34 @@ test("Creator theme: apply custom theme", (): any => {
 });
 
 test("sjs-special-background calculations on primary background changed", (): any => {
-  const themeModel = new CreatorThemeModel();
+  const surveyThemesRoot = (SurveyThemes as any).default ?? SurveyThemes;
+  const contrastLight = surveyThemesRoot.ContrastLight;
+  CreatorThemes["contrast-light"] = contrastLight;
+  try {
+    const themeModel = new CreatorThemeModel();
 
-  expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#19B394");
-  expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
+    expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#19B394");
+    expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
 
-  themeModel.loadTheme(PredefinedCreatorThemes["sc2020"]);
-  expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#19B394");
-  expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
+    themeModel.loadTheme({ themeName: "contrast-light" });
+    expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#3A179E");
+    expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#F4F2FB");
 
-  themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
-  themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["teal"])).toBeTruthy();
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["teal"])).toBeTruthy();
+    themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
+    themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["teal"])).toBeTruthy();
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["teal"])).toBeTruthy();
 
-  themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["orchid"];
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["orchid"])).toBeTruthy();
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["orchid"])).toBeTruthy();
+    themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["orchid"];
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["orchid"])).toBeTruthy();
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["orchid"])).toBeTruthy();
 
-  themeModel[CreatorThemeModel.varColorProjectBrand] = "#fefefe";
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], "#fefefe")).toBeTruthy();
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
+    themeModel[CreatorThemeModel.varColorProjectBrand] = "#fefefe";
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], "#fefefe")).toBeTruthy();
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
+  } finally {
+    delete CreatorThemes["contrast-light"];
+  }
 });
 
 test("Creator theme model isLight de/serialization", (): any => {

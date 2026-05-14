@@ -246,9 +246,10 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.isLight = json.colorPalette !== undefined ? json.colorPalette === "light" : (json.isLight !== undefined ? json.isLight : true);
 
       if (json.cssVariables) {
-        const resolvedCssVariables = { ...this.baseThemeVariables, ...json.cssVariables };
+        const rawCssVariables = { ...json.cssVariables };
+        const resolvedCssVariables = { ...this.baseThemeVariables, ...rawCssVariables };
         super.fromJSON(resolvedCssVariables, options);
-        this.initialCssVariables = { ...json.cssVariables };
+        this.initialCssVariables = rawCssVariables;
 
         this.updateScaleProperties();
       }
