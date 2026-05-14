@@ -138,7 +138,7 @@
 }
 
 .sd-panel .svc-row > .sd-row.sd-row--multiple {
-  width: calc(100% + #{$base-unit});
+  width: calc(100% + var(--sjs2-spacing-x100));
   padding-left: 0;
   margin-left: var(--sjs2-spacing-negative-x100);
   & > div {

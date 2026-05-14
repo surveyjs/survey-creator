@@ -3,9 +3,9 @@
 .svc-creator--mobile {
   .sd-root-modern,
   .sd-container-modern {
-    --sd-base-padding: calc(3 * #{$base-unit});
-    --sd-base-vertical-padding: calc(2 * #{$base-unit});
-    --sd-page-vertical-padding: calc(2 * #{$base-unit});
+    --sd-base-padding: var(--sjs2-spacing-x300);
+    --sd-base-vertical-padding: var(--sjs2-spacing-x200);
+    --sd-page-vertical-padding: var(--sjs2-spacing-x200);
   }
 
   .svc-question__content:not(.svc-question__content--composite-question) {
@@ -114,6 +114,6 @@
   }
 
   .svc-question__content-actions {
-    width: calc(100% + 2.5 * #{$base-unit});
+    width: calc(100% + var(--sjs2-spacing-x250));
   }
 }

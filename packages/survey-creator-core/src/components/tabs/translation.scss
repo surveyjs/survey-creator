@@ -174,7 +174,7 @@ td.st-table__cell:first-of-type {
 .st-formbox__input {
   @include sjs2--typography--default;
   display: block;
-  width: calc(100% - 3 * #{$base-unit});
+  width: calc(100% - var(--sjs2-spacing-x300));
   border: unset;
   outline: none;
   background-color: var(--sjs2-color-bg-basic-primary);

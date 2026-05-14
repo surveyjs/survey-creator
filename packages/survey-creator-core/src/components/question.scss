@@ -244,7 +244,7 @@ svc-question {
   height: var(--sjs2-size-x600, 48px);
   margin-left: var(--sjs2-spacing-negative-x100, -8px);
   margin-top: auto;
-  width: calc(100% + 2 * #{$base-unit});
+  width: calc(100% + var(--sjs2-spacing-x200));
   transition: opacity $creator-transition-duration;
 
   &:focus-within {

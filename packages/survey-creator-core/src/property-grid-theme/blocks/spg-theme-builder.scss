@@ -46,7 +46,7 @@
     & > div {
       flex-grow: 1;
       flex-shrink: 1;
-      flex-basis: calc(50% - #{$base-unit} * 0.5);
+      flex-basis: calc(50% - var(--sjs2-spacing-x050));
       min-width: auto;
 
       input {
@@ -73,8 +73,8 @@
       display: block;
       position: relative;
       left: var(--sjs2-spacing-negative-x400);
-      top: calc(5 * #{$base-unit});
-      width: calc(8 * #{$base-unit} + 100%);
+      top: var(--sjs2-spacing-x500);
+      width: calc(var(--sjs2-spacing-x800) + 100%);
       height: 1px;
       background-color: var(--sjs2-color-border-basic-secondary);
     }
@@ -106,8 +106,8 @@
     color: var(--sjs2-color-fg-basic-primary);
 
     position: relative;
-    top: calc(4 * #{$base-unit});
-    padding: calc(1 * #{$base-unit}) 0;
+    top: var(--sjs2-spacing-x400);
+    padding: var(--sjs2-spacing-x100) 0;
     cursor: auto;
   }
 

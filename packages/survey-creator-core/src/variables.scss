@@ -2,8 +2,6 @@
 @forward "./ctr-variables.scss";
 @forward "./typography-mixins.scss";
 
-$base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
-
 $sd-panel-normal-min-width: 496px;
 $sd-panel-medium-min-width: 176px;
 

@@ -23,8 +23,8 @@
 
 .svc-question__content {
   .sd-rating {
-    margin-inline-start: calc(9 * var(--sjs2-spacing-x100));
-    max-width: calc(100% - 9 * #{$base-unit});
+    margin-inline-start: calc(var(--sjs2-base-unit-spacing) * 9);
+    max-width: calc(100% - calc(var(--sjs2-base-unit-spacing) * 9));
 
     &.sd-rating--wrappable fieldset {
       min-width: 0;
@@ -126,7 +126,7 @@
     fieldset::before {
       content: "";
       display: block;
-      width: calc(8 * #{$base-unit});
+      width: var(--sjs2-spacing-x800);
     }
   }
 
@@ -145,7 +145,7 @@
     .sd-rating--labels-bottom,
     .sd-rating--labels-diagonal {
       .sd-rating__min-text {
-        margin-inline-start: calc(9 * #{$base-unit});
+        margin-inline-start: calc(var(--sjs2-base-unit-spacing) * 9);
       }
     }
   }

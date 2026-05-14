@@ -51,8 +51,8 @@
 .svc-matrix-cell__question-controls {
   opacity: 0;
   position: absolute;
-  top: calc(50% - 3 * #{$base-unit});
-  left: calc(50% - 3 * #{$base-unit});
+  top: calc(50% - var(--sjs2-spacing-x300));
+  left: calc(50% - var(--sjs2-spacing-x300));
   z-index: 2;
   transition: opacity $creator-transition-duration;
 }

@@ -271,9 +271,9 @@
   margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
 .svc-logic-question-value {
-  --sd-base-padding: calc(5 * #{$base-unit});
-  --sd-base-vertical-padding: calc(4 * #{$base-unit});
-  --sd-page-vertical-padding: calc(3 * #{$base-unit});
+  --sd-base-padding: var(--sjs2-spacing-x500);
+  --sd-base-vertical-padding: var(--sjs2-spacing-x400);
+  --sd-page-vertical-padding: var(--sjs2-spacing-x300);
   padding-right: var(--sjs2-spacing-x500);
   margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
 }
