@@ -371,7 +371,6 @@ export class ThemeModel extends Base implements ITheme {
 
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, ThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
-      // Preserve explicit cssVariables passed in (e.g. imported theme JSON).
       assign(effectiveThemeCssVariables, theme.cssVariables || {});
       patchLegacyCSSVariables(effectiveThemeCssVariables);
       assign(effectiveThemeCssVariables, calculateThemeVariables(effectiveThemeCssVariables, [], this.getRootElement()));
