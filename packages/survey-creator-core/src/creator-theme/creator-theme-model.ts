@@ -4,7 +4,7 @@ import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
-import DefaultLight from "../themes/default-light";
+import { DefaultLight } from "survey-core/themes";
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";

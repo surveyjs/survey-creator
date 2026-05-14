@@ -99,13 +99,6 @@ const themeFromFile = {
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
   mockGetRGBaColorIdentity();
-  // // ThemeModel constructor may cache baseThemeVariables during module evaluation in some environments.
-  // // Ensure the mocked window is applied before tests rely on calculated css variables.
-  // jest.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
-  //   ...window,
-  //   getComputedStyle: createComputedStyleFromInline()
-  // } as any);
-
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;

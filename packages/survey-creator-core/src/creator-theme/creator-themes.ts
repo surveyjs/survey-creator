@@ -1,5 +1,4 @@
-import { CreatorStylesManager } from "./styles-manager";
-import DefaultLight from "../themes/default-light";
+import { DefaultLight } from "survey-core/themes";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../utils/configs";
 import { ITheme } from "survey-core";
 
