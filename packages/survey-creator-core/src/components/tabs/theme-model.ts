@@ -284,9 +284,6 @@ export class ThemeModel extends Base implements ITheme {
 
   constructor() {
     super();
-    const vars = Serializer.getProperties("theme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
-    this.baseThemeVariables = this.calculateThemeVariables(DefaultLight.cssVariables, vars);
-
     updateCustomQuestionJSONs();
     this.setNewHeaderProperty();
     this.onPropertyValueChangedCallback = (
@@ -307,6 +304,10 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   initialize(surveyTheme: ITheme = {}, survey?: SurveyModel, creator?: SurveyCreatorModel) {
+    this.getRootElement = () => creator?.rootElement;
+    const vars = Serializer.getProperties("theme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
+    this.baseThemeVariables = this.calculateThemeVariables(DefaultLight.cssVariables, vars);
+
     this._defaultSessionTheme = ThemeModel.DefaultTheme;
     this.backgroundImage = "backgroundImage" in surveyTheme ? surveyTheme.backgroundImage : survey?.backgroundImage;
     this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : survey?.backgroundImageFit;
@@ -351,9 +352,11 @@ export class ThemeModel extends Base implements ITheme {
 
   private blockThemeChangedNotifications = 0;
 
+  private getRootElement = (): HTMLElement => undefined;
   private calculateThemeVariables(cssVariables, additionalCssVariables: string[] = []) {
     let themeCopyCssVariables = JSON.parse(JSON.stringify(cssVariables));
 
+    const body = this.getRootElement() || DomDocumentHelper.getBody();
     // If cssVariables exist, apply them to a div, then replace cssVariables with computed styles
     if (themeCopyCssVariables && typeof DomWindowHelper.getWindow() !== "undefined") {
       const div = DomDocumentHelper.createElement("div");
@@ -361,7 +364,7 @@ export class ThemeModel extends Base implements ITheme {
         div.style.setProperty(key, themeCopyCssVariables[key] as string);
       }
       div.classList.add("sd-theme-root");
-      DomDocumentHelper.getBody().appendChild(div);
+      body.appendChild(div);
 
       const computed = DomWindowHelper.getWindow().getComputedStyle(div);
 
@@ -389,7 +392,7 @@ export class ThemeModel extends Base implements ITheme {
       }
       themeCopyCssVariables = newCssVariables;
 
-      DomDocumentHelper.getBody().removeChild(div);
+      body.removeChild(div);
     }
     return themeCopyCssVariables;
   }
