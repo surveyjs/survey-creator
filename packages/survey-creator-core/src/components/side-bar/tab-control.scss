@@ -98,12 +98,7 @@
 
 .svc-sidebar__header--tabbed,
 .svc-sidebar__header-container {
-  min-height: calc(
-    var(--sjs2-line-height-x300) + var(--ctr-menu-toolbar-button-padding-top, var(--sjs-spacing-x1)) +
-      var(--ctr-menu-toolbar-button-padding-bottom, var(--sjs-spacing-x1)) +
-      var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150)) +
-      var(--ctr-menu-toolbar-padding-vertical, var(--sjs-spacing-x150))
-  );
+  min-height: calc(var(--sjs2-line-height-x300) + var(--sjs2-spacing-x500));
 }
 
 .svc-sidebar__header-container.svc-sidebar__header-container--with-subtitle {

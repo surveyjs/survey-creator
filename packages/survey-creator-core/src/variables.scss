@@ -21,8 +21,6 @@ $sd-panel-medium-min-width: 176px;
 
 // creator variables
 
-$tab-min-height: var(--tab-min-height, auto);
-
 @mixin textEllipsis {
   overflow: hidden;
   white-space: nowrap;

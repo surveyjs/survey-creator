@@ -106,7 +106,7 @@
   }
 
   .sps-table__row--empty {
-    height: 40px;
+    height: var(--sjs2-size-x500);
   }
 }
 .sps-table__cell:where(:not(.sps-table__cell--detail-panel)) {

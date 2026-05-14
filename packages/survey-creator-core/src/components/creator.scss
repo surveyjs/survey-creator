@@ -111,7 +111,7 @@ survey-creator,
   height: 100%;
   overflow: hidden;
   position: relative;
-  min-height: $tab-min-height;
+  min-height: auto;
 }
 
 .svc-creator__toolbox--right.svc-creator-tab {

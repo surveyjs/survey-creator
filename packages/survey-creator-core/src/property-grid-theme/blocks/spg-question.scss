@@ -194,13 +194,13 @@ sv-question-error {
 }
 
 .spg-question__erbox-icon {
-  width: var(--sjs2-line-height-x300);
-  height: var(--sjs2-line-height-x300);
+  width: var(--sjs2-typography-line-height-default);
+  height: var(--sjs2-typography-line-height-default);
 
   .sv-svg-icon {
     vertical-align: top;
-    width: var(--sjs2-line-height-x300);
-    height: var(--sjs2-line-height-x300);
+    width: var(--sjs2-typography-line-height-default);
+    height: var(--sjs2-typography-line-height-default);
   }
 
   use {

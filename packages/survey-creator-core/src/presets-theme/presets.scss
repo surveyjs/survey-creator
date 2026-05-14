@@ -166,12 +166,11 @@
   }
 
   .sps-action-button--icon {
-    padding: var(--sjs2-layout-control-action-xx-small-box-vertical, 4px)
-      var(--sjs2-layout-control-action-xx-small-box-horizontal, 4px);
+    padding: var(--sjs2-spacing-x050);
   }
   .sps-action-button__icon {
-    width: 16px;
-    height: 16px;
+    width: var(--sjs2-size-x200);
+    height: var(--sjs2-size-x200);
 
     use {
       fill: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.4));

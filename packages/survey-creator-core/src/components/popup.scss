@@ -41,14 +41,14 @@
   }
   &.sv-popup--modal-overlay {
     background: var(--sjs2-color-utility-overlay);
-    padding-top: var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2));
-    max-height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
+    padding-top: var(--sjs2-spacing-x200);
+    max-height: calc(100vh - var(--sjs2-spacing-x200));
     box-sizing: content-box;
 
     & > .sv-popup__container {
       width: 100vw;
-      max-height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
-      height: calc(100vh - var(--ctr-popup-margin-top-mobile, var(--sjs-spacing-x2)));
+      max-height: calc(100vh - var(--sjs2-spacing-x200));
+      height: calc(100vh - var(--sjs2-spacing-x200));
 
       display: flex;
       border-radius: var(--sjs2-radius-component-modal) var(--sjs2-radius-component-modal) 0px 0px;

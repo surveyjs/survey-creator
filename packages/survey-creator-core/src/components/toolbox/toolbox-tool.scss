@@ -375,7 +375,7 @@
       var(--ctr-toolbox-item-padding-bottom-submenu, var(--sjs-spacing-x150))
       var(--ctr-toolbox-item-padding-left-submenu, var(--sjs-spacing-x2));
     align-self: flex-start;
-    min-width: var(--ctr-toolbox-submenu-item-min-width, calc(17 * 8px));
+    min-width: calc(var(--sjs2-base-unit-size) * 17);
     box-sizing: border-box;
 
     .svc-toolbox__item-title {

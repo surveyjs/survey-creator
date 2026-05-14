@@ -21,7 +21,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 @keyframes toolboxMoveIn {
   from {
-    width: var(--toolbox-width-compact);
+    width: var(--thm-toolbox-width-compact);
     overflow: hidden;
   }
 
@@ -119,14 +119,13 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 }
 
 .svc-toolbox--flyout-to-compact-running {
-  width: var(--toolbox-width-compact);
+  width: var(--thm-toolbox-width-compact);
   margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
   z-index: 200;
   border-inline-end: var(--sjs2-border-width-x100) solid transparent;
 }
 
 .svc-creator--disable-animations {
-
   .svc-toolbox__panel--enter,
   .svc-toolbox__panel--leave {
     animation: none;

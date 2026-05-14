@@ -25,8 +25,7 @@ svc-tab-json-editor-textarea {
 .svc-json-errors {
   --thm-json-error-row: calc(
     var(--sjs2-border-width-x100) +
-      var(--ctr-code-viewer-code-error-row-padding-top, var(--sjs-spacing-x1)) +
-      var(--ctr-code-viewer-code-error-row-padding-bottom, var(--sjs-spacing-x1)) +
+      var(--sjs2-spacing-x200) +
       var(--sjs2-line-height-x300)
   );
   display: flex;
