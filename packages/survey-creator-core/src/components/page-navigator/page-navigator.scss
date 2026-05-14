@@ -10,7 +10,7 @@ svc-page-navigator,
 .svc-page-navigator-item--disabled {
   .svc-page-navigator-item__banner {
     color: var(--sjs2-color-fg-basic-primary);
-    opacity: var(--ctr-page-navigator-button-icon-opacity-disabled, 0.25);
+    opacity: var(--sjs2-opacity-disabled);
   }
 }
 

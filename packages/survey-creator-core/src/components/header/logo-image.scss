@@ -28,7 +28,7 @@
 
 .svc-logo-image-placeholder {
   @include sjs2--typography--large;
-  opacity: var(--ctr-survey-header-logo-placeholder-icon-opacity, 0.5);
+  opacity: var(--sjs2-opacity-x050);
   white-space: nowrap;
   word-break: keep-all;
   padding: var(--sjs2-spacing-x100);
@@ -73,7 +73,7 @@
 }
 
 .svc-logo-image-controls {
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
   width: max-content;
   position: absolute;
   top: 50%;
@@ -91,6 +91,6 @@
 .svc-logo-image-container--editable:focus-within,
 .svc-logo-image-container--editable:hover {
   .svc-logo-image-controls {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
   }
 }

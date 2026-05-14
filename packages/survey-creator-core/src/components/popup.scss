@@ -125,8 +125,7 @@
     }
     & > .sv-popup__container > .sv-popup__body-content {
       display: flex;
-      padding: var(--ctr-popup-menu-padding-top, 0px) var(--ctr-popup-menu-padding-right, 0px)
-        var(--ctr-popup-menu-padding-bottom, 0px) var(--ctr-popup-menu-padding-left, 0px);
+      padding: 0px;
       flex-direction: column;
       flex: 1 0 0;
       align-self: stretch;
@@ -152,7 +151,7 @@
 
     .sv-menu-popup__button:disabled {
       color: var(--sjs2-color-fg-basic-primary);
-      opacity: var(--ctr-actionbar-button-opacity-disabled, 0.25);
+      opacity: var(--sjs2-opacity-disabled);
     }
   }
 

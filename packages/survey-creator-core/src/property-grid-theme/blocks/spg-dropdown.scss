@@ -61,7 +61,7 @@
 
         &.sd-editor-button-item--pressed {
             border-radius: var(--sjs2-radius-x050);
-            opacity: var(--ctr-editor-button-icon-opacity-pressed, 0.5);
+            opacity: var(--sjs2-opacity-pressed);
             background: var(--sjs2-color-bg-basic-secondary-dim);
             transition-property: opacity, background-color;
             transition-duration: $creator-transition-duration;
@@ -74,17 +74,17 @@
 }
 .spg-question__content {
     .sd-formbox--readonly .sd-dropdown__input {
-        opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
+        opacity: var(--sjs2-opacity-disabled);
     }
 }
 .spg-dropdown.sd-input--disabled {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
 
     .spg-dropdown__value {
-        opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
+        opacity: var(--sjs2-opacity-disabled);
     }
     .sd-editor-button-item {
-        opacity: var(--ctr-editor-button-icon-opacity-disabled, 0.25);
+        opacity: var(--sjs2-opacity-disabled);
         background: transparent;
 
         svg {

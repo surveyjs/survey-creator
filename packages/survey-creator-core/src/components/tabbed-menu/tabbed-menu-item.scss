@@ -40,7 +40,7 @@
 
 .svc-tabbed-menu-item--disabled {
   cursor: default;
-  opacity: var(--ctr-menu-item-opacity-disabled, 0.25);
+  opacity: var(--sjs2-opacity-disabled);
 
   &:hover {
     background-color: var(--sjs2-color-bg-basic-primary);
@@ -88,7 +88,7 @@
 
   &.sv-action-bar-item--pressed {
     border-radius: var(--sjs2-radius-x100);
-    opacity: var(--ctr-menu-toolbar-button-opacity-pressed, 0.5);
+    opacity: var(--sjs2-opacity-pressed);
     background: var(--sjs2-color-bg-basic-primary-dim);
   }
 }

@@ -75,7 +75,7 @@
 .svc-row__drop-indicator {
   position: absolute;
   background: var(--sjs2-color-bg-brand-primary);
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
   transition: opacity $creator-transition-duration;
 }
 
@@ -96,14 +96,14 @@
 
 .svc-row--drag-over-top {
   >.svc-row__drop-indicator--top {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
     height: var(--sjs2-border-width-x200);
   }
 }
 
 .svc-row--drag-over-bottom {
   >.svc-row__drop-indicator--bottom {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
     height: var(--sjs2-border-width-x200);
   }
 }

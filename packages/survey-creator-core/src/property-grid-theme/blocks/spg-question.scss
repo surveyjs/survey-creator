@@ -11,7 +11,7 @@
 .spg-question__content {
   input.sd-formbox__input:read-only,
   input.sd-formbox__input:read-only::placeholder {
-    color: rgb(from var(--sjs2-color-fg-basic-primary) r g b / var(--sjs2-opacity-x025));
+    color: rgb(from var(--sjs2-color-fg-basic-primary) r g b / var(--sjs2-opacity-disabled));
   }
 }
 
@@ -20,7 +20,7 @@
 }
 
 .spg-question--disabled .spg-question__header .spg-title {
-  opacity: var(--ctr-editor-label-opacity-disabled, 0.25);
+  opacity: var(--sjs2-opacity-disabled);
 }
 
 .spg-question__title {

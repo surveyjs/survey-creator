@@ -74,7 +74,7 @@ svc-page {
 
 .svc-page__content-actions {
   position: absolute;
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
   top: var(--sjs2-spacing-x100, 8px);
   inset-inline-end: 0; // right
   inset-inline-start: 0;
@@ -160,14 +160,14 @@ svc-page {
 .svc-page__content--selected,
 .svc-hovered.svc-page__content {
   .svc-page__content-actions {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
   }
 
   & > .svc-question__drag-area {
     .svc-question__drag-element {
       width: var(--sjs2-size-x300, 24px);
       height: var(--sjs2-size-x200, 16px);
-      opacity: var(--ctr-survey-page-drag-indicator-opacity, 0.5);
+      opacity: var(--sjs2-opacity-x050);
     }
   }
 }
@@ -329,7 +329,7 @@ svc-page {
 .svc-creator .svc-page {
   .svc-page__content--collapse-always {
     .svc-page__content-actions {
-      opacity: 1;
+      opacity: var(--sjs2-opacity-visible);
 
       .sv-action {
         visibility: hidden;
@@ -377,7 +377,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
 }
 
 .svc-page--enter {
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
   --animation-direction: normal;
   --animation-timing-function: #{$ease-out};
   --fade-animation-duration: #{$svc-page-fade-in-duration};
@@ -412,7 +412,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
 
 .svc-page--enter.svc-page--enter {
   .svc-page__content-actions {
-    opacity: 0;
+    opacity: var(--sjs2-opacity-hidden);
   }
 
   .svc-page__content {
@@ -421,7 +421,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
 
     & > .svc-question__drag-area {
       .svc-question__drag-element {
-        opacity: 0;
+        opacity: var(--sjs2-opacity-hidden);
       }
     }
   }

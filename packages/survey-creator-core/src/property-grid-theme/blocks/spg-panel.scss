@@ -26,7 +26,7 @@
 .spg-panel__title:disabled,
 .spg-panel__title:disabled:hover {
   color: var(--sjs2-color-fg-basic-primary);
-  opacity: 0.25;
+  opacity: var(--sjs2-opacity-disabled);
   cursor: default;
 }
 

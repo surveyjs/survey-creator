@@ -12,7 +12,7 @@
 }
 .svc-property-grid-placeholder__header {
   display: flex;
-  max-width: var(--ctr-property-grid-placeholder-text-max-width, 320px);
+  max-width: calc(var(--sjs2-base-unit-size) * 40);
   flex-direction: column;
   justify-content: center;
   align-items: center;

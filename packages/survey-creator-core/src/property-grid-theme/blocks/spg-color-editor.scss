@@ -39,12 +39,12 @@
 }
 .spg-color-editor__color-swatch--disabled {
   .sv-svg-icon {
-    opacity: 0.25;
+    opacity: var(--sjs2-opacity-disabled);
   }
 }
 
 .spg-color-editor__color-swatch--default {
   .sv-svg-icon {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
   }
 }

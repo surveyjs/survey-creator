@@ -48,13 +48,13 @@
 }
 
 .sl-table__cell .sd-action__icon {
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
   transition: opacity $creator-transition-duration;
 }
 
 .sl-table__row:hover .sl-table__cell .sd-action__icon,
 .sl-table__cell .sd-action.sv-focused--by-key .sd-action__icon {
-  opacity: 1;
+  opacity: var(--sjs2-opacity-visible);
 }
 
 .sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {

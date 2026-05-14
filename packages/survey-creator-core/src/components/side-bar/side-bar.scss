@@ -181,10 +181,10 @@ $tabs-width: calc(var(--sjs2-typography-line-height-default) + var(--sjs2-spacin
 }
 @keyframes flyoutSideBarShadowFadeIn {
   from {
-    opacity: 0;
+    opacity: var(--sjs2-opacity-hidden);
   }
   to {
-    opacity: 0.75;
+    opacity: var(--sjs2-opacity-hovered);
   }
 }
 @keyframes sideBarMoveIn {

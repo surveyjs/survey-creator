@@ -95,7 +95,7 @@
       --sd-action-icon-color: color-mix(
         in srgb,
         var(--sjs2-color-fg-basic-secondary),
-        transparent calc(var(--ctr-data-table-cell-drop-down-arrow-opacity, 0.5) * 100%)
+        transparent var(--sjs2-opacity-x050)
       );
     }
   }

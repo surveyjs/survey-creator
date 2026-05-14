@@ -82,7 +82,7 @@
   border-radius: calc(var(--sjs2-base-unit-radius) * 0.375);
   box-shadow: 0px 0px 0px var(--sjs2-border-width-x200)
     var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
 
   &.svc-string-editor__border--hover {
     top: 0;
@@ -133,7 +133,7 @@
 
 .svc-string-editor:hover:not(.svc-string-editor--readonly):not(:focus-within) {
   .svc-string-editor__border--hover {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
     transition-delay: 0ms;
   }
 
@@ -152,7 +152,7 @@
 
 .svc-string-editor:focus-within {
   .svc-string-editor__border--focus {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
   }
 
   .svc-string-editor__border--hover {

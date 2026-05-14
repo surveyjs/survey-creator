@@ -49,7 +49,7 @@
 }
 
 .svc-matrix-cell__question-controls {
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
   position: absolute;
   top: calc(50% - var(--sjs2-spacing-x300));
   left: calc(50% - var(--sjs2-spacing-x300));
@@ -58,7 +58,7 @@
 }
 
 .svc-matrix-cell:hover .svc-matrix-cell__question-controls {
-  opacity: 1;
+  opacity: var(--sjs2-opacity-visible);
 }
 
 .svc-question__content--in-popup {

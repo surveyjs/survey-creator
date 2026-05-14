@@ -2,7 +2,7 @@
 
 .svc-notifier.svc-notifier--shown {
   visibility: visible;
-  opacity: var(--ctr-notification-opacity, 0.75);
+  opacity: var(--sjs2-opacity-x075);
 }
 
 .svc-notifier {
@@ -12,7 +12,7 @@
   bottom: var(--sjs2-spacing-x100);
   left: var(--sjs2-spacing-x100);
   background: var(--sjs2-color-bg-basic-primary);
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
   padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x200);
   box-shadow: var(--sjs2-border-effect-floating-default);
   border-radius: var(--sjs2-radius-x050);
@@ -27,7 +27,7 @@
 .svc-notifier.svc-notifier--error {
   background-color: var(--sjs2-color-bg-alert-primary);
   color: var(--sjs2-color-fg-alert-on-primary);
-  opacity: var(--ctr-notification-opacity-error, 1);
+  opacity: var(--sjs2-opacity-visible);
 }
 
 .svc-creator--mobile {
@@ -36,7 +36,7 @@
     bottom: var(--sjs2-spacing-x600);
     width: 100%;
     box-sizing: border-box;
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
     z-index: 1000;
   }
 }

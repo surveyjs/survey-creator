@@ -78,7 +78,7 @@
 //is visible only on hover
 .svc-toolbox__item-banner {
   @include sjs2--typography--small-strong;
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
   box-sizing: border-box;
   align-items: center;
   inset-inline-start: var(--thm-toolbox-item-banner-left);
@@ -151,7 +151,7 @@
 .svc-toolbox__tool:focus-within:not(.svc-toolbox__tool--disabled) {
   .svc-toolbox__item-banner {
     display: var(--ctr-toolbox-item-banner-display, flex);
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
     pointer-events: initial;
   }
 }
@@ -160,11 +160,11 @@
   pointer-events: none;
 
   use {
-    opacity: var(--ctr-toolbox-item-icon-opacity-disabled, 0.25);
+    opacity: var(--sjs2-opacity-disabled);
     fill: var(--sjs2-color-fg-basic-primary);
   }
   .svc-toolbox__item-title {
-    opacity: var(--ctr-toolbox-item-text-opacity-disabled, 0.25);
+    opacity: var(--sjs2-opacity-disabled);
   }
 }
 
@@ -256,12 +256,12 @@
 
   .svc-toolbox__item-title {
     color: var(--sjs2-color-fg-basic-primary);
-    opacity: var(--ctr-toolbox-item-text-opacity-pressed, 0.5);
+    opacity: var(--sjs2-opacity-pressed);
   }
 
   .sv-svg-icon use {
     fill: var(--sjs2-color-fg-basic-primary);
-    opacity: var(--ctr-toolbox-item-icon-opacity-pressed, 0.35);
+    opacity: var(--sjs2-opacity-pressed);
   }
 
   .svc-toolbox__item.svc-toolbox__item-subtype {
@@ -301,7 +301,7 @@
   }
 
   .svc-toolbox__item.svc-toolbox__item-subtype {
-    opacity: var(--ctr-toolbox-item-opacity-submenu, 1);
+    opacity: var(--sjs2-opacity-visible);
     overflow: hidden;
     border-radius: var(--sjs2-radius-x100);
     background: var(--sjs2-color-bg-basic-primary);
@@ -344,7 +344,7 @@
   padding-inline-end: var(--sjs2-spacing-x150);
   margin-top: var(--sjs2-spacing-x050);
   &.sd-action--pressed {
-    opacity: 0.5;
+    opacity: var(--sjs2-opacity-pressed);
   }
 }
 .svc-toolbox--compact {
