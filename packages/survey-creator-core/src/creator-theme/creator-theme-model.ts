@@ -211,8 +211,9 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.initializeBaseThemeVariables();
       const baseTheme = this.getThemeFromCreatorThemes(theme.themeName) || {};
       let resolvedThemeName = theme.themeName;
-      if (resolvedThemeName && theme.colorPalette && !CreatorThemes[resolvedThemeName]) {
-        const composedThemeName = `${resolvedThemeName}-${theme.colorPalette}`;
+      const colorPalette = theme.colorPalette || "light";
+      if (resolvedThemeName && !CreatorThemes[resolvedThemeName]) {
+        const composedThemeName = `${resolvedThemeName}-${colorPalette}`;
         if (CreatorThemes[composedThemeName]) {
           resolvedThemeName = composedThemeName;
         }
