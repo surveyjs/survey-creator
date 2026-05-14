@@ -1,15 +1,16 @@
-import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, DomDocumentHelper, DomWindowHelper } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
-import { trimBoxShadowValue, parseBoxShadow, createBoxShadow } from "survey-core";
+import { trimBoxShadowValue } from "survey-core";
 import { HeaderModel } from "./header-model";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../../utils/configs";
 import { assign, roundTo2Decimals } from "../../utils/utils";
 import { ColorCalculator, getRGBaColor, ingectAlpha, parseColor } from "../../utils/color-utils";
+import { calculateThemeVariables } from "../../utils/utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import { SurveyCreatorModel } from "../../creator-base";
@@ -306,7 +307,7 @@ export class ThemeModel extends Base implements ITheme {
   initialize(surveyTheme: ITheme = {}, survey?: SurveyModel, creator?: SurveyCreatorModel) {
     this.getRootElement = () => creator?.rootElement;
     const vars = Serializer.getProperties("theme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
-    this.baseThemeVariables = this.calculateThemeVariables(DefaultLight.cssVariables, vars);
+    this.baseThemeVariables = calculateThemeVariables(DefaultLight.cssVariables, vars, this.getRootElement());
 
     this._defaultSessionTheme = ThemeModel.DefaultTheme;
     this.backgroundImage = "backgroundImage" in surveyTheme ? surveyTheme.backgroundImage : survey?.backgroundImage;
@@ -353,49 +354,6 @@ export class ThemeModel extends Base implements ITheme {
   private blockThemeChangedNotifications = 0;
 
   private getRootElement = (): HTMLElement => undefined;
-  private calculateThemeVariables(cssVariables, additionalCssVariables: string[] = []) {
-    let themeCopyCssVariables = JSON.parse(JSON.stringify(cssVariables));
-
-    const body = this.getRootElement() || DomDocumentHelper.getBody();
-    // If cssVariables exist, apply them to a div, then replace cssVariables with computed styles
-    if (themeCopyCssVariables && typeof DomWindowHelper.getWindow() !== "undefined") {
-      const div = DomDocumentHelper.createElement("div");
-      for (const key of Object.keys(themeCopyCssVariables)) {
-        div.style.setProperty(key, themeCopyCssVariables[key] as string);
-      }
-      div.classList.add("sd-theme-root");
-      body.appendChild(div);
-
-      const computed = DomWindowHelper.getWindow().getComputedStyle(div);
-
-      // Replace cssVariables with computed values
-      const newCssVariables: { [key: string]: string } = {};
-      const calcProxySizeProperty = "width";
-      const calcProxyBoxShadowProperty = "box-shadow";
-      for (const key of [...Object.keys(themeCopyCssVariables), ...additionalCssVariables]) {
-        let value = computed.getPropertyValue(key);
-        // getComputedStyle for custom properties may return calc() unresolved; force computation via a length property
-        if (typeof value === "string" && value.indexOf("calc(") === 0) {
-          div.style.setProperty(calcProxySizeProperty, value);
-          value = computed.getPropertyValue(calcProxySizeProperty);
-          div.style.removeProperty(calcProxySizeProperty);
-        }
-        if (key.indexOf("-border-effect-") !== -1) {
-          div.style.setProperty(calcProxyBoxShadowProperty, value);
-          value = createBoxShadow(parseBoxShadow(computed.getPropertyValue(calcProxyBoxShadowProperty)));
-          div.style.removeProperty(calcProxyBoxShadowProperty);
-        }
-        if (key.indexOf("-color-") !== -1 && value !== "transparent") {
-          value = getRGBaColor(value);
-        }
-        newCssVariables[key] = value;
-      }
-      themeCopyCssVariables = newCssVariables;
-
-      body.removeChild(div);
-    }
-    return themeCopyCssVariables;
-  }
 
   public loadTheme(theme: ITheme, preferredColorPalette?: string) {
     this.blockThemeChangedNotifications += 1;
@@ -416,7 +374,7 @@ export class ThemeModel extends Base implements ITheme {
       // Preserve explicit cssVariables passed in (e.g. imported theme JSON).
       assign(effectiveThemeCssVariables, theme.cssVariables || {});
       patchLegacyCSSVariables(effectiveThemeCssVariables);
-      assign(effectiveThemeCssVariables, this.calculateThemeVariables(effectiveThemeCssVariables));
+      assign(effectiveThemeCssVariables, calculateThemeVariables(effectiveThemeCssVariables, [], this.getRootElement()));
       assign(effectiveThemeCssVariables, this.themeCssVariablesChanges);
       const effectiveTheme: ITheme = {
         backgroundImage: this.backgroundImage || baseTheme.backgroundImage || "",

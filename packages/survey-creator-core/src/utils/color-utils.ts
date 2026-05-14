@@ -1,5 +1,8 @@
-import { roundTo2Decimals } from "./utils";
 import { getRGBaColor as _getRGBaColor } from "survey-core";
+
+function roundTo2Decimals(number: number): number {
+  return Math.round(number * 100) / 100;
+}
 
 /** Single implementation point so tests can `vi.spyOn(getRGBaColorResolver, "getRGBaColor")`. */
 export const getRGBaColorResolver = {

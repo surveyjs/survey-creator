@@ -2,9 +2,11 @@ import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptio
 import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
+import { calculateThemeVariables } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 import { DefaultLight } from "survey-core/themes";
+import { SurveyCreatorModel } from "src/creator-base";
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
@@ -20,6 +22,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   static varColorProjectBrand = "--sjs2-color-project-brand-600";
   static varColorUtilitySurface = "--sjs2-color-utility-surface-designer";
 
+  private baseThemeVariables: { [index: string]: string } = {};
   initialCssVariables: { [index: string]: string } = {};
   themeCssVariablesChanges?: { [index: string]: string } = {};
 
@@ -92,6 +95,11 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
         arrayChanges
       );
     };
+  }
+
+  public initializeBaseThemeVariables(creator?: SurveyCreatorModel) {
+    const vars = Serializer.getProperties("theme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
+    this.baseThemeVariables = calculateThemeVariables(DefaultLight.cssVariables, vars, creator?.rootElement);
   }
 
   public getType(): string {
@@ -238,9 +246,9 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       this.isLight = json.colorPalette !== undefined ? json.colorPalette === "light" : (json.isLight !== undefined ? json.isLight : true);
 
       if (json.cssVariables) {
-        super.fromJSON(json.cssVariables, options);
-        this.initialCssVariables = {};
-        assign(this.initialCssVariables, json.cssVariables);
+        const resolvedCssVariables = { ...this.baseThemeVariables, ...json.cssVariables };
+        super.fromJSON(resolvedCssVariables, options);
+        this.initialCssVariables = { ...json.cssVariables };
 
         this.updateScaleProperties();
       }
