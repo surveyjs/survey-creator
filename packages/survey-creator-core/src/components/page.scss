@@ -139,8 +139,7 @@ svc-page {
 
 .svc-page__content:focus,
 .svc-hovered.svc-page__content {
-  box-shadow: 0 0 0 var(--sjs2-border-width-x200)
-    var(--sjs2-color-utility-shadow-surface-hovered);
+  box-shadow: var(--sjs2-border-effect-surface-hovered);
   background: var(--sjs2-color-utility-surface-designer);
 }
 
@@ -174,7 +173,7 @@ svc-page {
 }
 
 .svc-page__content--selected.svc-page__content--selected {
-  box-shadow: 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-utility-shadow-surface-focused);
+  box-shadow: var(--sjs2-border-effect-surface-focused);
   background: var(--sjs2-color-utility-surface-designer);
 }
 
@@ -213,7 +212,7 @@ svc-page {
   }
 
   &.svc-page__content--collapsed-drag-over-inside {
-    box-shadow: 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-utility-shadow-surface-focused);
+    box-shadow: var(--sjs2-border-effect-surface-focused);
     background: var(--sjs2-color-bg-brand-secondary);
     animation: collapsed-drag-over-inside-blinking 1s infinite;
     outline-color: transparent;
@@ -236,10 +235,7 @@ svc-page {
   &.svc-creator .svc-page .svc-page__content--selected:focus,
   .svc-hovered.svc-page__content {
     &.svc-page__content--selected {
-      box-shadow: 0 0 0 var(--sjs2-border-width-x200) inset var(--sjs2-color-bg-brand-primary);
-
-      box-shadow: 0 0 0 var(--sjs2-border-width-x200) inset
-        var(--sjs2-color-utility-shadow-surface-focused);
+      box-shadow: inset var(--sjs2-border-effect-surface-focused);
       background: var(--sjs2-color-utility-surface-designer);
 
       .svc-page__content-actions {
@@ -250,8 +246,7 @@ svc-page {
 
   .svc-page__content:not(.svc-page__content--new):focus,
   .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-    box-shadow: 0 0 0 var(--sjs2-border-width-x200) inset
-      var(--sjs2-color-utility-shadow-surface-hovered);
+    box-shadow: inset var(--sjs2-border-effect-surface-hovered);
   }
 }
 

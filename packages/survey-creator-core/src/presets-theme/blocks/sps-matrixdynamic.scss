@@ -190,9 +190,7 @@
     flex: 1 0 0;
     border-radius: var(--sjs2-radius-container-drag, 8px);
     background: var(--sjs2-color-bg-basic-primary, #fff);
-    box-shadow: var(--sjs2-border-offset-x-floating-default, 0) var(--sjs2-border-offset-y-floating-default, 6px)
-      var(--sjs2-border-blur-floating-default, 20px) var(--sjs2-border-spread-floating-default, 0)
-      var(--sjs2-color-utility-shadow-floating-default, rgba(0, 76, 68, 0.15));
+    box-shadow: var(--sjs2-border-effect-floating-default);
   }
 }
 
