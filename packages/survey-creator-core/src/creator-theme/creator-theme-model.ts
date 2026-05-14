@@ -6,7 +6,6 @@ import { calculateThemeVariables } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 import { DefaultLight } from "survey-core/themes";
-import { SurveyCreatorModel } from "src/creator-base";
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
