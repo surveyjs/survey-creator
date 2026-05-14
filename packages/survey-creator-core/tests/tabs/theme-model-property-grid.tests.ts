@@ -359,7 +359,7 @@ test("onAllowModifyTheme events + use creator.readOnly", (): any => {
   const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const colorPalette = propertyGridSurvey.getQuestionByName("colorPalette");
   const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
-  const backgroundDimColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-neutral-tertiary-dim");
+  const backgroundDimColor = propertyGridSurvey.getQuestionByName("--sjs2-color-utility-surface-survey");
 
   expect(themeChooser.isReadOnly).toBeFalsy();
   expect(colorPalette.isReadOnly).toBeFalsy();

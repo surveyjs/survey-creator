@@ -951,11 +951,10 @@ Serializer.addProperties("theme",
   { name: "--sjs2-color-bg-warning-primary", visible: false },
   { name: "--sjs2-color-bg-warning-secondary", visible: false },
   { name: "--sjs2-color-fg-warning-on-primary", visible: false },
-  { name: "--sjs2-color-utility-surface-survey", visible: false },
   { name: "--sjs2-color-utility-surface-survey-panelless", visible: false },
   {
     type: "coloralpha",
-    name: "--sjs2-color-bg-neutral-tertiary-dim",
+    name: "--sjs2-color-utility-surface-survey",
   },
   {
     type: "coloralpha",

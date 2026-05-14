@@ -4940,7 +4940,7 @@ export class SurveyCreatorModel extends Base
       "--sjs2-color-bg-basic-primary-dim",
       "--sjs2-color-fg-basic-primary",
       "--sjs2-color-fg-basic-secondary",
-      "--sjs2-color-bg-neutral-tertiary-dim",
+      "--sjs2-color-utility-surface-survey",
       "--sjs2-color-bg-neutral-secondary",
       "--sjs2-color-fg-neutral-primary",
       "--sjs2-color-bg-basic-secondary",
