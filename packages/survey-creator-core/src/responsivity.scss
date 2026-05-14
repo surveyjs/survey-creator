@@ -39,7 +39,7 @@
 
   .svc-question__content--selected {
     .svc-rating-question-controls {
-      bottom: calc(10 * var(--sjs2-spacing-x100));
+      bottom: calc(var(--sjs2-base-unit-spacing) * 10);
     }
   }
   .svc-designer-header + svc-page-wrapper + .svc-page,

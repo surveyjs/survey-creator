@@ -153,7 +153,7 @@ survey-creator,
   @include sjs2--typography--default-strong;
   color: var(--sjs2-color-fg-brand-on-primary);
   vertical-align: middle;
-  padding: var(--sjs2-spacing-x150) calc(16 * var(--sjs2-spacing-x100));
+  padding: var(--sjs2-spacing-x150) calc(var(--sjs2-base-unit-spacing) * 16);
   display: block;
 
   a {

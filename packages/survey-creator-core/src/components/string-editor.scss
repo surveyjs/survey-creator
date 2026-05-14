@@ -208,8 +208,8 @@
 .sd-item__control-label {
   .svc-string-editor:focus-within {
     .svc-string-editor__border {
-      left: calc(0.7 * var(--sjs2-spacing-negative-x100));
-      right: calc(0.7 * var(--sjs2-spacing-negative-x100));
+      left: calc(var(--sjs2-base-unit-spacing) * -0.7);
+      right: calc(var(--sjs2-base-unit-spacing) * -0.7);
     }
   }
 }

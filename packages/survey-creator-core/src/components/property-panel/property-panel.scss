@@ -2,7 +2,7 @@
 
 .svc-property-grid-placeholder {
   display: flex;
-  padding: calc(12 * var(--sjs2-spacing-x100)) var(--sjs2-spacing-x600) 0 var(--sjs2-spacing-x600);
+  padding: calc(var(--sjs2-base-unit-spacing) * 12) var(--sjs2-spacing-x600) 0 var(--sjs2-spacing-x600);
   flex-direction: column;
   align-items: center;
   gap: var(--sjs2-spacing-x300);

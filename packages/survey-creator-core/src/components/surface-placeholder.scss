@@ -76,6 +76,6 @@
   max-width: calc(var(--sjs2-base-unit-size) * 90);
   padding: var(--sjs2-spacing-x400)
     var(--sjs2-spacing-x600)
-    calc(16 * var(--sjs2-spacing-x100))
+    calc(var(--sjs2-base-unit-spacing) * 16)
     var(--sjs2-spacing-x600);
 }

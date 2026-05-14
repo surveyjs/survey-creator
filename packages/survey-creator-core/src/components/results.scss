@@ -3,7 +3,7 @@
 .svd-test-results {
   border-radius: var(--sjs2-radius-x050);
   box-shadow: inset 0px 1px 0px 0px var(--sjs2-color-utility-shadow-surface-default);
-  padding: calc(12 * var(--sjs2-spacing-x100));
+  padding: calc(var(--sjs2-base-unit-spacing) * 12);
 }
 
 .svd-test-results__content {

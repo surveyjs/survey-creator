@@ -9,7 +9,7 @@ svc-page-navigator-item,
 
 .svc-page-navigator-item-content {
   display: flex;
-  padding: var(--sjs2-spacing-x100) calc(1.25 * var(--sjs2-spacing-x100));
+  padding: var(--sjs2-spacing-x100) calc(var(--sjs2-base-unit-spacing) * 1.25);
   gap: var(--sjs2-spacing-x100);
   justify-content: flex-end;
   align-items: center;
@@ -62,7 +62,7 @@ svc-page-navigator-item,
 
 .svc-page-navigator-item__banner {
   @include textEllipsis;
-  padding: var(--sjs2-spacing-x100) calc(1.25 * var(--sjs2-spacing-x100)) var(--sjs2-spacing-x100)
+  padding: var(--sjs2-spacing-x100) calc(var(--sjs2-base-unit-spacing) * 1.25) var(--sjs2-spacing-x100)
     var(--sjs2-spacing-x200);
   justify-content: flex-end;
   align-items: center;
@@ -132,7 +132,7 @@ svc-page-navigator-item,
     right: unset;
     left: 0;
     padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x200) var(--sjs2-spacing-x100)
-      calc(1.25 * var(--sjs2-spacing-x100));
+      calc(var(--sjs2-base-unit-spacing) * 1.25);
     direction: rtl;
 
     .svc-page-navigator-item__dot {

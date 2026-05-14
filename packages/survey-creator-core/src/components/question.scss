@@ -940,8 +940,8 @@ svc-question,
 
 @container (max-width: #{$sd-panel-normal-min-width}) {
   .svc-panel__placeholder_frame {
-    padding: calc(var(--sjs2-spacing-x100, 8px) * 11) var(--sjs2-spacing-x300, 24px)
-      calc(var(--sjs2-spacing-x100, 8px) * 10);
+    padding: calc(var(--sjs2-base-unit-spacing) * 11) var(--sjs2-spacing-x300, 24px)
+      calc(var(--sjs2-base-unit-spacing) * 10);
   }
 }
 
@@ -951,8 +951,8 @@ svc-question,
   }
 
   .svc-panel__placeholder_frame {
-    padding: calc(var(--sjs2-spacing-x100, 8px) * 10) var(--sjs2-spacing-x300, 24px)
-      calc(var(--sjs2-spacing-x100, 8px) * 10);
+    padding: calc(var(--sjs2-base-unit-spacing) * 10) var(--sjs2-spacing-x300, 24px)
+      calc(var(--sjs2-base-unit-spacing) * 10);
   }
 }
 

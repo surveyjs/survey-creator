@@ -283,7 +283,7 @@
 
 .svc-toolbox__placeholder {
   @include sjs2--typography--small;
-  padding-top: calc(13.5 * var(--sjs2-spacing-x100));
+  padding-top: calc(var(--sjs2-base-unit-spacing) * 13.5);
   margin-inline-start: auto;
   margin-inline-end: auto;
   color: var(--sjs2-color-fg-basic-secondary);
