@@ -37,8 +37,7 @@
     SurveyCreatorCore.registerUIPreset(SurveyCreatorUIPreset);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
     new SurveyCreatorCore.UIPreset(SurveyCreatorUIPreset.Expert).applyTo(creator);
-    creator.applyCreatorTheme(SurveyCreatorTheme.SC2020);
-    creator.tabResponsivenessMode = "menu";
+      creator.tabResponsivenessMode = "menu";
     window["Survey"].settings.animationEnabled = false;
     creator["animationEnabled"] = false;
     creator.allowZoom = false;

@@ -34,8 +34,7 @@
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-    creator.applyCreatorTheme(SurveyCreatorTheme.SC2020);
-    creator.tabResponsivenessMode = "menu";
+      creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
     creator.showOneCategoryInPropertyGrid = false;
     creator.allowZoom = false;
@@ -48,8 +47,7 @@
         window.updateCreatorModel = (options, json) => {
           window.prevCreator = window.creator;
           const creator = new SurveyCreator.SurveyCreator(options);
-          creator.applyCreatorTheme(SurveyCreatorTheme.SC2020);
-          creator.JSON = json;
+                  creator.JSON = json;
           this.setState({ creator });
           creator.tabResponsivenessMode = "menu";
           creator["animationEnabled"] = false;

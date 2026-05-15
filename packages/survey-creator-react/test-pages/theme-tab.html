@@ -33,8 +33,7 @@
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showThemeTab: true });
-    creator.applyCreatorTheme(SurveyCreatorTheme.SC2020);
-    window.creator = creator;
+      window.creator = creator;
     creator.showOneCategoryInPropertyGrid = false;
     creator.allowZoom = false;
     const root = ReactDOMClient.createRoot(document.getElementById("survey-creator"));
