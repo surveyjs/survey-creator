@@ -26,7 +26,8 @@
   <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
   <script src="../build/survey-creator-js.js"></script>
   <script src="./sc.js"></script>
-  <script src="../node_modules/survey-creator-core/themes/test.js"></script>
+  <script src="../node_modules/survey-core/themes/test-creator.js"></script>
+  <script src="../node_modules/survey-core/themes/test-surface.js"></script>
 </head>
 
 <body spellcheck="false">
@@ -35,10 +36,10 @@
 <script>
   window.surveyJSFramework = "react";
   SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-  SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme.Test);
+  SurveyCreatorCore.registerCreatorTheme(SurveyTheme.TestCreator);
   const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", themeForPreview: "modern" });
-  creator.applyCreatorTheme(SurveyCreatorTheme.Test);
-  creator.applySurfaceTheme(SurveyTheme.Test);
+  creator.applyCreatorTheme(SurveyTheme.TestCreator);
+  creator.applySurfaceTheme(SurveyTheme.TestSurface);
   creator.tabResponsivenessMode = "menu";
   creator["animationEnabled"] = false;
   creator.showOneCategoryInPropertyGrid = false;

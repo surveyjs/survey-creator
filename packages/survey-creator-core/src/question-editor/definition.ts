@@ -106,7 +106,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showPreview" },
       "allowImagesPreview",
       "waitForUpload",
-      "needConfirmRemoveFile",
+      "confirmDelete",
       { name: "storeDataAsText" },
       "allowCameraAccess",
       "acceptedCategories",

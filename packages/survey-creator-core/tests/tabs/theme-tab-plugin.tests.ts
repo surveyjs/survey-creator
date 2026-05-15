@@ -5,7 +5,7 @@ export { createColor } from "../../src/components/tabs/theme-custom-questions/co
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 
-import { Action, DefaultTheme, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
+import { Action, DefaultTheme, DomWindowHelper, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "../creator-tester";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
@@ -16,17 +16,23 @@ import { PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
+  mockGetRGBaColorIdentity();
+  mockDomWindowGetComputedStyleFromInlineStyles();
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
   ThemeModel.DefaultTheme = Themes["default-light"];
   DefaultTheme.cssVariables = {} as any;
 });
+
 afterEach(() => {
+  restoreGetRGBaColorMock();
+  (DomWindowHelper.getWindow as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
 
@@ -153,12 +159,12 @@ test("Theme builder: set backcolor to simulator", (): any => {
   const themeModel = themePlugin.themeModel as ThemeModel;
   const themeTabViewModel = themePlugin.model as ThemeTabViewModel;
 
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toBe("rgba(243, 243, 243, 1)");
-  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toBe("rgba(243, 243, 243, 1)");
+  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-utility-surface-survey"]).toEqual("rgba(243, 243, 243, 1)");
 
-  themeModel["--sjs2-color-bg-neutral-tertiary-dim"] = "red";
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toBe("red");
-  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("red");
+  themeModel["--sjs2-color-utility-surface-survey"] = "red";
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toBe("red");
+  expect(themeTabViewModel.survey.themeVariables["--sjs2-color-utility-surface-survey"]).toEqual("red");
 });
 
 test("Theme builder: survey settings", (): any => {
@@ -352,7 +358,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(creator.hasPendingThemeChanges).toBeFalsy();
   expect(themePlugin.isModified).toBeTruthy();
 
-  themeModel["--sjs2-color-bg-neutral-tertiary-dim"] = "#ff0000";
+  themeModel["--sjs2-color-utility-surface-survey"] = "#ff0000";
 
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
@@ -414,7 +420,7 @@ test("Get theme changes only", (): any => {
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(10);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(49);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(50);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(modifiedThemeChanges).length).toBe(6);
@@ -438,7 +444,7 @@ test("Get theme changes only", (): any => {
     "header",
     "headerView",
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(39);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(40);
 
   const themeChangesReset = themePlugin.getCurrentTheme(true);
   expect(Object.keys(themeChangesReset).length).toBe(6);
@@ -556,7 +562,7 @@ test("Keep theme modifications between edit sessions", (): any => {
   let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
 
-  themeModel.themeName = "layered";
+  themeModel.themeName = "soft";
   themeModel["--sjs2-color-project-brand-600"] = "#0000ff";
   expect(savedTheme.cssVariables["--sjs2-color-project-brand-600"]).toBe("#0000ff");
 
@@ -569,7 +575,7 @@ test("Keep theme modifications between edit sessions", (): any => {
   themePlugin.activate();
 
   themeTabViewModel = themePlugin.model as ThemeTabViewModel;
-  expect(themeModel.themeName).toBe("layered");
+  expect(themeModel.themeName).toBe("soft");
   expect(themeModel["--sjs2-color-project-brand-600"]).toBe("#0000ff");
   expect(themeTabViewModel.survey.themeVariables["--sjs2-color-project-brand-600"]).toBe("#0000ff");
 });
@@ -730,33 +736,33 @@ test("Theme undo redo changes", (): any => {
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
   const propertyGridSurvey = themePlugin.propertyGrid.survey;
-  const question = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-neutral-tertiary-dim");
+  const question = propertyGridSurvey.getQuestionByName("--sjs2-color-utility-surface-survey");
 
   expect(themeModel.undoRedoManager.canUndo()).toBe(false);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toBe("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toBe("rgba(243, 243, 243, 1)");
   expect(question.value).toBe("rgba(243, 243, 243, 1)");
 
   question.value = "#ff0000";
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toBe("#ff0000");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toBe("#ff0000");
   expect(question.value).toBe("#ff0000");
 
   themePlugin.undo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(false);
   expect(themeModel.undoRedoManager.canRedo()).toBe(true);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toBe("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toBe("rgba(243, 243, 243, 1)");
   expect(question.value).toBe("rgba(243, 243, 243, 1)");
 
   themePlugin.redo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toBe("#ff0000");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toBe("#ff0000");
   expect(question.value).toBe("#ff0000");
 });
 
@@ -987,7 +993,7 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const colorPalette = propertyGridSurvey.getQuestionByName("colorPalette");
   const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
-  const backgroundDimColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-neutral-tertiary-dim");
+  const backgroundDimColor = propertyGridSurvey.getQuestionByName("--sjs2-color-utility-surface-survey");
   const primaryColor = propertyGridSurvey.getQuestionByName("primaryColor");
 
   let pluginThemeSelectedCount = 0;
@@ -1364,7 +1370,7 @@ test("Theme builder switch custom theme", (): any => {
     "cssVariables": {
       "--sjs2-color-bg-basic-primary": "rgba(246, 248, 250, 1)",
       "--sjs2-color-bg-basic-primary-dim": "rgba(248, 248, 248, 1)",
-      "--sjs2-color-bg-neutral-tertiary-dim": "rgba(255, 255, 255, 1)",
+      "--sjs2-color-utility-surface-survey": "rgba(255, 255, 255, 1)",
       "--sjs2-color-component-formbox-default-bg": "rgba(246, 248, 250, 1)",
       "--sjs2-color-bg-basic-secondary-dim": "rgba(243, 243, 243, 1)",
       "--sjs2-color-fg-basic-primary": "rgba(0, 0, 0, 0.91)",

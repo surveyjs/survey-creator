@@ -25,7 +25,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ["survey-creator-core/themes/test"],
+    include: ["survey-core/themes/test-creator"],
     esbuildOptions: {
       define: {
         global: 'globalThis',

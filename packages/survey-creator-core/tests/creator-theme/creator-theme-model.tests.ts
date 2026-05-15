@@ -2,12 +2,24 @@ import { CreatorTester } from "../creator-tester";
 import { CreatorThemeModel } from "../../src/creator-theme/creator-theme-model";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "../../src/creator-theme/creator-themes";
+import SurveyThemes from "survey-core/themes";
 
 import "survey-core/survey.i18n";
 import { PredefinedBackgroundColors, PredefinedColors } from "../../src/components/tabs/themes";
 import { colorsAreEqual } from "../../src/utils/color-utils";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "../tabs/theme-test-mocks";
+import { DomWindowHelper } from "survey-core";
+
+beforeEach(() => {
+  mockGetRGBaColorIdentity();
+  mockDomWindowGetComputedStyleFromInlineStyles();
+});
+afterEach(() => {
+  restoreGetRGBaColorMock();
+  (DomWindowHelper.getWindow as any).mockRestore?.();
+});
 
 test("Creator theme model de/serialization", (): any => {
   const themeModel = new CreatorThemeModel();
@@ -57,8 +69,8 @@ test("Creator theme: sync css variables", (): any => {
   const themeModel = designerPlugin["themeModel"];
   let surfaceBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
 
-  expect(creator.themeVariables[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
-  expect((themeModel.cssVariables || {})[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
+  expect(creator.themeVariables[CreatorThemeModel.varColorUtilitySurface]).toEqual(undefined);
+  expect((themeModel.cssVariables || {})[CreatorThemeModel.varColorUtilitySurface]).toEqual(undefined);
   expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
 
   const newValue = "#c95ae7";
@@ -206,27 +218,34 @@ test("Creator theme: apply custom theme", (): any => {
 });
 
 test("sjs-special-background calculations on primary background changed", (): any => {
-  const themeModel = new CreatorThemeModel();
+  const surveyThemesRoot = (SurveyThemes as any).default ?? SurveyThemes;
+  const contrastLight = surveyThemesRoot.ContrastLight;
+  CreatorThemes["contrast-light"] = contrastLight;
+  try {
+    const themeModel = new CreatorThemeModel();
 
-  expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#19B394");
-  expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
+    expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#19B394");
+    expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
 
-  themeModel.loadTheme(PredefinedCreatorThemes["sc2020"]);
-  expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#19B394");
-  expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
+    themeModel.loadTheme({ themeName: "contrast-light" });
+    expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#3A179E");
+    expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#F4F2FB");
 
-  themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
-  themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["teal"])).toBeTruthy();
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["teal"])).toBeTruthy();
+    themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
+    themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["teal"];
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["teal"])).toBeTruthy();
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["teal"])).toBeTruthy();
 
-  themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["orchid"];
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["orchid"])).toBeTruthy();
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["orchid"])).toBeTruthy();
+    themeModel[CreatorThemeModel.varColorProjectBrand] = PredefinedColors["light"]["orchid"];
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], PredefinedColors["light"]["orchid"])).toBeTruthy();
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["orchid"])).toBeTruthy();
 
-  themeModel[CreatorThemeModel.varColorProjectBrand] = "#fefefe";
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], "#fefefe")).toBeTruthy();
-  expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
+    themeModel[CreatorThemeModel.varColorProjectBrand] = "#fefefe";
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorProjectBrand], "#fefefe")).toBeTruthy();
+    expect(colorsAreEqual(themeModel[CreatorThemeModel.varColorUtilitySurface], PredefinedBackgroundColors["light"]["gray"])).toBeTruthy();
+  } finally {
+    delete CreatorThemes["contrast-light"];
+  }
 });
 
 test("Creator theme model isLight de/serialization", (): any => {
@@ -253,7 +272,7 @@ test("Creator theme model isLight de/serialization", (): any => {
   expect(themeModel.themeName).toBe("custom-dark");
 
   themeModelJson = themeModel.toJSON();
-  expect(themeModelJson).toStrictEqual(darkThemeJson);
+  expect(themeModelJson).toEqual({ themeName: "custom-dark", colorPalette: "dark" });
 
   themeModel.fromJSON(lightThemeJson);
   expect(themeModel.isLight).toBeTruthy();

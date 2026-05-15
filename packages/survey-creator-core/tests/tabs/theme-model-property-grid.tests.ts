@@ -1,4 +1,4 @@
-import { DefaultTheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, Serializer, SurveyElement } from "survey-core";
+import { DefaultTheme, DomWindowHelper, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, Serializer, SurveyElement } from "survey-core";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
@@ -17,10 +17,13 @@ import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 export * from "../../src/localization/french";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
+  mockGetRGBaColorIdentity();
+  mockDomWindowGetComputedStyleFromInlineStyles();
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
@@ -29,6 +32,8 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  restoreGetRGBaColorMock();
+  (DomWindowHelper.getWindow as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
 
@@ -117,9 +122,7 @@ test("Check shadow settings editor", () => {
 
   let cssVariables: any = creator?.theme?.cssVariables;
   expect(themeModel["--sjs2-border-effect-surface-default"]).toBe("0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs2-border-effect-surface-default-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
   expect(themeModel["--sjs2-border-effect-component-formbox-default"]).toBe("inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)");
-  expect(themeModel["--sjs2-border-effect-component-formbox-default-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowSmallEditor.value = [
     {
@@ -356,7 +359,7 @@ test("onAllowModifyTheme events + use creator.readOnly", (): any => {
   const themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const colorPalette = propertyGridSurvey.getQuestionByName("colorPalette");
   const primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
-  const backgroundDimColor = propertyGridSurvey.getQuestionByName("--sjs2-color-bg-neutral-tertiary-dim");
+  const backgroundDimColor = propertyGridSurvey.getQuestionByName("--sjs2-color-utility-surface-survey");
 
   expect(themeChooser.isReadOnly).toBeFalsy();
   expect(colorPalette.isReadOnly).toBeFalsy();

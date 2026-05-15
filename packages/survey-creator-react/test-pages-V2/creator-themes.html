@@ -24,7 +24,6 @@
   <script src="../node_modules/survey-react-ui/survey-react-ui.js" defer></script>
   <script src="../build/survey-creator-react.js" defer></script>
   <script src="./sc.js" defer></script>
-  <script src="../node_modules/survey-creator-core/themes/index.js" defer></script>
 </head>
 
 <body spellcheck="false">
@@ -34,10 +33,10 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-    SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme);
+    SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-    creator.applyCreatorTheme(SurveyCreatorTheme.Test);
-  creator.applySurfaceTheme(SurveyTheme.Test);
+    creator.applyCreatorTheme(SurveyTheme.TestCreator);
+  creator.applySurfaceTheme(SurveyTheme.TestSurface);
     window.creator = creator;
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
@@ -51,8 +50,8 @@
         window.updateCreatorModel = (options, json) => {
           window.prevCreator = window.creator;
           const creator = new SurveyCreator.SurveyCreator(options);
-          creator.applyCreatorTheme(SurveyCreatorTheme.Test);
-  creator.applySurfaceTheme(SurveyTheme.Test);
+          creator.applyCreatorTheme(SurveyTheme.TestCreator);
+  creator.applySurfaceTheme(SurveyTheme.TestSurface);
           creator.JSON = json;
           this.setState({ creator });
           creator.tabResponsivenessMode = "menu";

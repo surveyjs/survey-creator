@@ -1,12 +1,9 @@
-import { CreatorStylesManager } from "./styles-manager";
-import DefaultLight from "../themes/default-light";
+import { DefaultLight } from "survey-core/themes";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../utils/configs";
+import { ITheme } from "survey-core";
 
-export interface ICreatorTheme {
-  themeName?: string;
-  iconSet?: string;
+export interface ICreatorTheme extends ITheme {
   isLight?: boolean;
-  cssVariables?: { [index: string]: string | any };
 }
 
 export const PredefinedCreatorThemes: string[] = ["default-light"];
@@ -21,8 +18,12 @@ export const defaultCreatorThemesOrder = ["default-light", "default-contrast", "
 export function registerCreatorTheme(...themes: Array<ConfigsHash<ICreatorTheme> | ICreatorTheme>) {
   const importedThemeNames = [];
   registerConfig((theme: ICreatorTheme) => {
-    CreatorThemes[theme.themeName] = theme;
-    importedThemeNames.push(theme.themeName);
+    if (theme.isPanelless) return;
+    const themeName = theme.themeName;
+    const isAlreadyFullName = !!themeName && defaultCreatorThemesOrder.indexOf(themeName) !== -1;
+    const fullname = isAlreadyFullName ? themeName : `${themeName}-${theme.colorPalette || "light"}`;
+    CreatorThemes[fullname] = theme;
+    importedThemeNames.push(fullname);
   }, ...themes);
   sortDefaultConfigs(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
 }

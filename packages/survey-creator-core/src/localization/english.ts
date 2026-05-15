@@ -752,7 +752,6 @@ export var enStrings = {
     acceptedCategories: "Accepted file categories",
     acceptedTypes: "Additional file extensions",
     waitForUpload: "Wait for upload to complete",
-    needConfirmRemoveFile: "Confirm file deletion",
     detailPanelMode: "Row details alignment",
     minRowCount: "Minimum row count",
     maxRowCount: "Maximum row count",
@@ -826,7 +825,8 @@ export var enStrings = {
     },
     file: {
       imageHeight: "Image height",
-      imageWidth: "Image width"
+      imageWidth: "Image width",
+      confirmDelete: "Confirm file deletion"
     },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",
@@ -1017,7 +1017,7 @@ export var enStrings = {
       editorFont: "Font",
       backgroundOpacity: "Opacity", // Auto-generated string
       "--sjs2-typography-font-family-text": "Survey font family",
-      "--sjs2-color-bg-neutral-tertiary-dim": "Background color",
+      "--sjs2-color-utility-surface-survey": "Background color",
       "--sjs2-color-project-brand-600": "Accent background colors",
       "--sjs2-color-fg-brand-on-primary": "Accent foreground colors",
       "--sjs2-color-bg-alert-primary": "Error message colors",
@@ -1562,7 +1562,8 @@ export var enStrings = {
     file: {
       imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
       imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
-      allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
+      allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead.",
+      confirmDelete: "Triggers a prompt asking to confirm the file deletion."
     },
     image: {
       contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -1714,7 +1715,6 @@ export var enStrings = {
     valueTrue: "A value to save in survey results when respondents give a positive answer.",
     valueFalse: "A value to save in survey results when respondents give a negative answer.",
     showPreview: "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded.",
-    needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion.",
     selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area.",
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
     inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
@@ -1764,7 +1764,7 @@ export var enStrings = {
       panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
       questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
       cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      "--sjs2-color-bg-neutral-tertiary-dim": "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Sets the main background color of the survey."
     },
     header: {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
@@ -1951,9 +1951,22 @@ export var enStrings = {
     fontScale: "Font",
     names: {
       sc2020: "Survey Creator 2020",
-      "default-light": "Light",
-      "default-dark": "Dark",
-      "default-contrast": "Contrast"
+      "default-light": "Default Light",
+      "default-dark": "Default Dark",
+      "contrast-light": "Contrast Light",
+      "contrast-dark": "Contrast Dark",
+      "borderless-light": "Borderless Light",
+      "borderless-dark": "Borderless Dark",
+      "flat-light": "Flat Light",
+      "flat-dark": "Flat Dark",
+      "plain-light": "Plain Light",
+      "plain-dark": "Plain Dark",
+      "soft-light": "Soft Light",
+      "soft-dark": "Soft Dark",
+      "threedimensional-light": "3D Light",
+      "threedimensional-dark": "3D Dark",
+      "monochrome-light": "Monochrome Light",
+      "monochrome-dark": "Monochrome Dark",
     }
   },
   preset: {
