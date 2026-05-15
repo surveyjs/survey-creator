@@ -934,6 +934,40 @@ test("restfull property editor, show imageLinkName", () => {
   imageLinkQuestion = restFullQuestion.contentPanel.getQuestionByName("imageLinkName");
   expect(imageLinkQuestion.isVisible).toBeFalsy();
 });
+test("restfull property editor, blockitemvalue[] in choicesByUrl blocks property - add new item", () => {
+  Serializer.addClass("blockitemvalue", [
+    { name: "randomizationGroup", displayName: "Randomization group" }
+  ], undefined, "itemvalue");
+  ["text", "visibleIf", "enableIf"].forEach(name => {
+    Serializer.getProperty("blockitemvalue", name).visible = false;
+  });
+  Serializer.addProperty("choicesByUrl", {
+    name: "blocks",
+    type: "blockitemvalue[]"
+  });
+
+  try {
+    const question = new QuestionDropdownModel("q1");
+    const propertyGrid = new PropertyGridModelTester(question);
+    const choicesByUrlQuestion = <QuestionCompositeModel>(
+      propertyGrid.survey.getQuestionByName("choicesByUrl")
+    );
+    expect(choicesByUrlQuestion).toBeTruthy();
+
+    const blocksQuestion = <QuestionMatrixDynamicModel>(
+      choicesByUrlQuestion.contentPanel.getQuestionByName("blocks")
+    );
+    expect(blocksQuestion).toBeTruthy();
+
+    blocksQuestion.addRow();
+    expect(blocksQuestion.visibleRows).toHaveLength(1);
+    expect(question.choicesByUrl["blocks"]).toHaveLength(1);
+    expect(question.choicesByUrl["blocks"][0].getType()).toEqual("blockitemvalue");
+  } finally {
+    Serializer.removeProperty("choicesByUrl", "blocks");
+    Serializer.removeClass("blockitemvalue");
+  }
+});
 test("check imagepicker responsiveImageSize properties", () => {
   const imagePicker = new QuestionImagePickerModel("q2");
   let propertyGrid = new PropertyGridModelTester(imagePicker);
