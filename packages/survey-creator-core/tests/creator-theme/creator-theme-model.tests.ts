@@ -28,6 +28,7 @@ test("Creator theme model de/serialization", (): any => {
 
   const themeJson: ICreatorTheme = {
     themeName: "custom",
+    colorPalette: "light",
     cssVariables: {
       [CreatorThemeModel.varBaseUnitSize]: "6px",
       [CreatorThemeModel.varBaseUnitRadius]: "6px",
@@ -39,13 +40,15 @@ test("Creator theme model de/serialization", (): any => {
   themeModel.fromJSON(themeJson);
   expect(themeModel.scale).toBe(75);
   expect(themeModel.themeName).toBe("custom");
+  expect(themeModel.colorPalette).toBe("light");
 
   expect(themeModel[CreatorThemeModel.varBaseUnitSize]).toBe("6px");
   expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toBe("rgba(253, 255, 148, 0.5)");
   expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toBe("rgba(248, 248, 248, 1)");
 
   const themeModelJson = themeModel.toJSON();
-  expect(themeModelJson).toStrictEqual(themeJson);
+  const { colorPalette, ...themeJsonWithoutLightPalette } = themeJson;
+  expect(themeModelJson).toStrictEqual(themeJsonWithoutLightPalette);
 });
 
 test("Default theme serialization", (): any => {
@@ -54,13 +57,14 @@ test("Default theme serialization", (): any => {
   expect(Object.keys(result).length).toBe(0);
 
   themeModel.loadTheme();
-  expect(themeModel.themeName).toBe("default-light");
+  expect(themeModel.themeName).toBe("default");
+  expect(themeModel.colorPalette).toBe("light");
   expect(themeModel.scale).toBe(100);
   expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toBe("#EDF9F7");
   expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toBe("#19B394");
 
   const themeModelJson = themeModel.toJSON();
-  expect(themeModelJson).toStrictEqual({ themeName: "default-light" });
+  expect(themeModelJson).toStrictEqual({ themeName: "default" });
 });
 
 test("Creator theme: sync css variables", (): any => {
@@ -80,10 +84,10 @@ test("Creator theme: sync css variables", (): any => {
   expect(surfaceBackgroundColor.value).toEqual(newValue);
 });
 
-test("Creator theme: reset color variables after change theme", (): any => {
-  CreatorThemes["dark"] = <any>{
-    "themeName": "dark",
-    "isLight": false,
+test("Creator theme: reset color variables after change palette", (): any => {
+  CreatorThemes["default-dark"] = <any>{
+    "themeName": "default",
+    "colorPalette": "dark",
     "cssVariables": {
       "--sjs-special-haze": "#000000BF",
       [CreatorThemeModel.varColorUtilitySurface]: "#0C0C0CFF",
@@ -102,10 +106,12 @@ test("Creator theme: reset color variables after change theme", (): any => {
     const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
     const themeModel = designerPlugin["themeModel"];
     const themeName = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName("themeName");
+    const colorPalette = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName("colorPalette");
     const surfaceBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
     const primaryBackgroundColor = designerPlugin["themePropertyGridViewModel"].survey.findQuestionByName(CreatorThemeModel.varColorProjectBrand);
 
-    expect(themeName.value).toEqual("default-light");
+    expect(themeName.value).toEqual("default");
+    expect(colorPalette.value).toEqual("light");
     expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
     expect(primaryBackgroundColor.value).toEqual("#19B394");
 
@@ -116,12 +122,14 @@ test("Creator theme: reset color variables after change theme", (): any => {
       [CreatorThemeModel.varColorUtilitySurface]: "#0a0a0a",
     });
 
-    themeName.value = "dark";
+    colorPalette.value = "dark";
+    expect(themeName.value).toEqual("default");
+    expect(colorPalette.value).toEqual("dark");
     expect(surfaceBackgroundColor.value).toEqual("#0C0C0CFF");
     expect(primaryBackgroundColor.value).toEqual("#3EDFD5FF");
     expect(Object.keys(themeModel.themeCssVariablesChanges).length).toEqual(0);
   } finally {
-    delete CreatorThemes["dark"];
+    delete CreatorThemes["default-dark"];
   }
 });
 
@@ -227,7 +235,9 @@ test("sjs-special-background calculations on primary background changed", (): an
     expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#19B394");
     expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#EDF9F7");
 
-    themeModel.loadTheme({ themeName: "contrast-light" });
+    themeModel.loadTheme({ themeName: "contrast", colorPalette: "light" });
+    expect(themeModel.themeName).toEqual("contrast");
+    expect(themeModel.colorPalette).toEqual("light");
     expect(themeModel[CreatorThemeModel.varColorProjectBrand]).toEqual("#3A179E");
     expect(themeModel[CreatorThemeModel.varColorUtilitySurface]).toEqual("#F4F2FB");
 
@@ -248,38 +258,57 @@ test("sjs-special-background calculations on primary background changed", (): an
   }
 });
 
-test("Creator theme model isLight de/serialization", (): any => {
+test("Creator theme model colorPalette de/serialization", (): any => {
   const themeModel = new CreatorThemeModel();
   let result = themeModel.cssVariables || {};
   expect(Object.keys(result).length).toBe(0);
 
   const lightThemeJson: ICreatorTheme = {
-    themeName: "custom-light",
+    themeName: "custom",
+    colorPalette: "light",
   };
   themeModel.fromJSON(lightThemeJson);
   expect(themeModel.isLight).toBeTruthy();
-  expect(themeModel.themeName).toBe("custom-light");
+  expect(themeModel.themeName).toBe("custom");
+  expect(themeModel.colorPalette).toBe("light");
 
   let themeModelJson = themeModel.toJSON();
-  expect(themeModelJson).toStrictEqual(lightThemeJson);
+  expect(themeModelJson).toStrictEqual({ themeName: "custom" });
 
   const darkThemeJson: ICreatorTheme = {
-    themeName: "custom-dark",
+    themeName: "custom",
+    colorPalette: "dark",
+  };
+  themeModel.fromJSON(darkThemeJson);
+  expect(themeModel.isLight).toBeFalsy();
+  expect(themeModel.themeName).toBe("custom");
+  expect(themeModel.colorPalette).toBe("dark");
+
+  themeModelJson = themeModel.toJSON();
+  expect(themeModelJson).toEqual({ themeName: "custom", colorPalette: "dark" });
+
+  themeModel.fromJSON(lightThemeJson);
+  expect(themeModel.isLight).toBeTruthy();
+  expect(themeModel.themeName).toBe("custom");
+  expect(themeModel.colorPalette).toBe("light");
+
+  themeModelJson = themeModel.toJSON();
+  expect(themeModelJson).toStrictEqual({ themeName: "custom" });
+});
+
+test("Creator theme model legacy isLight field de/serialization", (): any => {
+  const themeModel = new CreatorThemeModel();
+  const darkThemeJson: ICreatorTheme = {
+    themeName: "custom",
     isLight: false,
   };
   themeModel.fromJSON(darkThemeJson);
   expect(themeModel.isLight).toBeFalsy();
-  expect(themeModel.themeName).toBe("custom-dark");
+  expect(themeModel.themeName).toBe("custom");
+  expect(themeModel.colorPalette).toBe("dark");
 
-  themeModelJson = themeModel.toJSON();
-  expect(themeModelJson).toEqual({ themeName: "custom-dark", colorPalette: "dark" });
-
-  themeModel.fromJSON(lightThemeJson);
-  expect(themeModel.isLight).toBeTruthy();
-  expect(themeModel.themeName).toBe("custom-light");
-
-  themeModelJson = themeModel.toJSON();
-  expect(themeModelJson).toStrictEqual(lightThemeJson);
+  const themeModelJson = themeModel.toJSON();
+  expect(themeModelJson).toEqual({ themeName: "custom", colorPalette: "dark" });
 });
 test("creator.showCreatorThemeSettings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
