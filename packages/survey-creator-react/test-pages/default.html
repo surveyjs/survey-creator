@@ -18,14 +18,11 @@
   <script src="../node_modules/survey-core/survey.core.js" defer></script>
   <script src="../node_modules/survey-core/survey.i18n.js" defer></script>
   <script src="../node_modules/survey-core/themes/index.js" defer></script>
-  <script src="../node_modules/survey-core/themes/test.js" defer></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js" defer></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js" defer></script>
   <script src="../node_modules/survey-react-ui/survey-react-ui.js" defer></script>
   <script src="../build/survey-creator-react.js" defer></script>
   <script src="./sc.js" defer></script>
-  <script src="../node_modules/survey-core/themes/test-creator.js" defer></script>
-  <script src="../node_modules/survey-core/themes/test-surface.js" defer></script>
 </head>
 
 <body spellcheck="false">
@@ -36,10 +33,8 @@
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
-    SurveyCreatorCore.registerCreatorTheme(SurveyTheme.TestCreator);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-    creator.applyCreatorTheme(SurveyTheme.TestCreator);
-  creator.applySurfaceTheme(SurveyTheme.TestSurface);
+    creator.applyCreatorTheme(SurveyCreatorTheme.SC2020);
     window.creator = creator;
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
@@ -53,8 +48,7 @@
         window.updateCreatorModel = (options, json) => {
           window.prevCreator = window.creator;
           const creator = new SurveyCreator.SurveyCreator(options);
-          creator.applyCreatorTheme(SurveyTheme.TestCreator);
-  creator.applySurfaceTheme(SurveyTheme.TestSurface);
+          creator.applyCreatorTheme(SurveyCreatorTheme.SC2020);
           creator.JSON = json;
           this.setState({ creator });
           creator.tabResponsivenessMode = "menu";
