@@ -144,7 +144,7 @@
     @include sjs2--typography--default;
     box-shadow: none;
     background-color: transparent;
-    padding: 0 var(--sjs2-spacing-x100);
+    padding: var(--sjs2-spacing-x100) 0;
     color: var(--sjs2-color-fg-basic-secondary);
   }
   .spg-row {
