@@ -934,38 +934,90 @@ test("restfull property editor, show imageLinkName", () => {
   imageLinkQuestion = restFullQuestion.contentPanel.getQuestionByName("imageLinkName");
   expect(imageLinkQuestion.isVisible).toBeFalsy();
 });
-test("restfull property editor, blockitemvalue[] in choicesByUrl blocks property - add new item", () => {
+function setupBlockItemValue() {
   Serializer.addClass("blockitemvalue", [
     { name: "randomizationGroup", displayName: "Randomization group" }
   ], undefined, "itemvalue");
   ["text", "visibleIf", "enableIf"].forEach(name => {
     Serializer.getProperty("blockitemvalue", name).visible = false;
   });
-  Serializer.addProperty("choicesByUrl", {
-    name: "blocks",
-    type: "blockitemvalue[]"
-  });
+  Serializer.addProperty("choicesByUrl", { name: "blocks", type: "blockitemvalue[]" });
+}
+function teardownBlockItemValue() {
+  Serializer.removeProperty("choicesByUrl", "blocks");
+  Serializer.removeClass("blockitemvalue");
+}
+function getBlocksMatrix(propertyGrid: PropertyGridModelTester): QuestionMatrixDynamicModel {
+  const choicesByUrlQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  return <QuestionMatrixDynamicModel>(
+    choicesByUrlQuestion.contentPanel.getQuestionByName("blocks")
+  );
+}
 
+test("restfull property editor, blockitemvalue[] in choicesByUrl - add and edit items, Bug#7705", () => {
+  setupBlockItemValue();
   try {
     const question = new QuestionDropdownModel("q1");
     const propertyGrid = new PropertyGridModelTester(question);
-    const choicesByUrlQuestion = <QuestionCompositeModel>(
-      propertyGrid.survey.getQuestionByName("choicesByUrl")
-    );
-    expect(choicesByUrlQuestion).toBeTruthy();
-
-    const blocksQuestion = <QuestionMatrixDynamicModel>(
-      choicesByUrlQuestion.contentPanel.getQuestionByName("blocks")
-    );
+    const blocksQuestion = getBlocksMatrix(propertyGrid);
     expect(blocksQuestion).toBeTruthy();
 
     blocksQuestion.addRow();
     expect(blocksQuestion.visibleRows).toHaveLength(1);
-    expect(question.choicesByUrl["blocks"]).toHaveLength(1);
-    expect(question.choicesByUrl["blocks"][0].getType()).toEqual("blockitemvalue");
+    const blocks: any[] = (<any>question.choicesByUrl)["blocks"];
+    expect(blocks).toHaveLength(1);
+    expect(blocks[0].getType()).toEqual("blockitemvalue");
+
+    blocksQuestion.addRow();
+    blocksQuestion.addRow();
+    expect(blocksQuestion.visibleRows).toHaveLength(3);
+    expect(blocks).toHaveLength(3);
+    expect(blocks[1].getType()).toEqual("blockitemvalue");
+    expect(blocks[2].getType()).toEqual("blockitemvalue");
+
+    const rows = blocksQuestion.visibleRows;
+    rows[0].cells[0].value = "block1";
+    rows[1].cells[0].value = "block2";
+    expect(blocks[0].value).toEqual("block1");
+    expect(blocks[1].value).toEqual("block2");
+
+    rows[0].showDetailPanel();
+    const rgQuestion = rows[0].detailPanel.getQuestionByName("randomizationGroup");
+    expect(rgQuestion).toBeTruthy();
+    rgQuestion.value = "GroupA";
+    expect(blocks[0]["randomizationGroup"]).toEqual("GroupA");
   } finally {
-    Serializer.removeProperty("choicesByUrl", "blocks");
-    Serializer.removeClass("blockitemvalue");
+    teardownBlockItemValue();
+  }
+});
+test("restfull property editor, blockitemvalue[] in choicesByUrl - delete items, Bug#7705", () => {
+  setupBlockItemValue();
+  try {
+    const question = new QuestionDropdownModel("q1");
+    const propertyGrid = new PropertyGridModelTester(question);
+    const blocksQuestion = getBlocksMatrix(propertyGrid);
+
+    blocksQuestion.addRow();
+    blocksQuestion.addRow();
+    blocksQuestion.addRow();
+    expect(blocksQuestion.visibleRows).toHaveLength(3);
+
+    const rows = blocksQuestion.visibleRows;
+    rows[0].cells[0].value = "block1";
+    rows[1].cells[0].value = "block2";
+    rows[2].cells[0].value = "block3";
+
+    blocksQuestion.removeRow(1);
+
+    expect(blocksQuestion.visibleRows).toHaveLength(2);
+    const blocks: any[] = (<any>question.choicesByUrl)["blocks"];
+    expect(blocks).toHaveLength(2);
+    expect(blocks[0].value).toEqual("block1");
+    expect(blocks[1].value).toEqual("block3");
+  } finally {
+    teardownBlockItemValue();
   }
 });
 test("check imagepicker responsiveImageSize properties", () => {
