@@ -528,7 +528,7 @@ export class ThemeModel extends Base implements ITheme {
       const completeThemeVariablesList = { ...this.baseThemeVariables, ...json.cssVariables };
       this["primaryColor"] = completeThemeVariablesList["--sjs2-color-project-brand-600"];
       super.fromJSON(completeThemeVariablesList, options);
-      this.header.setCssVariables(json.cssVariables);
+      this.header.setCssVariables(json.cssVariables, completeThemeVariablesList);
 
       this.scale = !!this["--sjs2-base-unit-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-size"]) * 100 / 8) : undefined;
       this.fontSize = !!this["--sjs2-base-unit-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-font-size"]) * 100 / 8) : undefined;

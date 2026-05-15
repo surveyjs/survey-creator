@@ -31,12 +31,12 @@ export class HeaderModel extends Base implements IHeader {
     if (!!json["backgroundImageOpacity"])this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
   }
 
-  public setCssVariables(cssVariables?: { [index: string]: string }) {
+  public setCssVariables(cssVariables?: { [index: string]: string }, completeThemeVariablesList?: { [index: string]: string }) {
     if (cssVariables) {
       this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), cssVariables);
       this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), cssVariables);
-      this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables);
-      this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables);
+      this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-primary"]);
+      this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-secondary"]);
     }
 
     const backgroundColorValue = cssVariables["--sjs2-color-component-header-default-bg"];
@@ -128,10 +128,7 @@ function getDefaultTitleSetting() {
 }
 
 function getDefaultDescriptionSetting(isAdvanced?: boolean) {
-  const result = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16 };
-  if (isAdvanced) {
-    result["size"] = 20;
-  }
+  const result = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 24 };
   return result;
 }
 
