@@ -39,16 +39,19 @@ test.describe(title, () => {
 
     await page.getByRole("combobox", { name: "Theme name" }).focus();
 
-    await page.getByRole("combobox", { name: "Theme name" }).click();
-    await getVisibleSelectListItemByText(page, "Default Dark").click();
+    const colorPaletteGroup = page.locator(".spg-question[data-name='colorPalette']");
+
+    await colorPaletteGroup.locator(".sv-button-group__item-caption").getByText("Dark").click();
     await compareScreenshot(page, ".svc-creator", "creator-theme-default-dark.png");
 
+    await colorPaletteGroup.locator(".sv-button-group__item-caption").getByText("Light").click();
+    await page.getByRole("combobox", { name: "Theme name" }).focus();
     await page.getByRole("combobox", { name: "Theme name" }).click();
-    await getVisibleSelectListItemByText(page, "Contrast Light").click();
+    await getVisibleSelectListItemByText(page, "Contrast").click();
     await compareScreenshot(page, ".svc-creator", "creator-theme-default-contrast.png");
 
     await page.getByRole("combobox", { name: "Theme name" }).click();
-    await getVisibleSelectListItemByText(page, "Default Light").click();
+    await getVisibleSelectListItemByText(page, "Default").click();
     await compareScreenshot(page, ".svc-creator", "creator-theme-default-light.png");
   });
 
