@@ -207,7 +207,12 @@ test.describe(title, () => {
 
     await page.locator(".spg-container_search .svc-search input").click();
     await page.locator(".spg-container_search .svc-search input").fill("log");
-    await page.waitForTimeout(500);
+    await page.waitForFunction(() => {
+      const element = (window as any).creator.rootElement.getRootNode().querySelector("[data-name=logo] input") as HTMLElement;
+      if (!element) return false;
+      const r = element.getBoundingClientRect();
+      return r.bottom > 0 && r.right > 0 && r.left < window.innerWidth && r.top < window.innerHeight;
+    });
     const inViewport = await isElementInViewport();
     await expect(inViewport).toBe(true);
   });
