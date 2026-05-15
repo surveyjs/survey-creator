@@ -24,8 +24,7 @@
 }
 
 .svc-creator--mobile .svc-search__input {
-  $fontSize: var(--ctr-font-small-size, var(--sjs2-font-size-x150));
-  font-size: Max(16px, #{$fontSize});
+  font-size: Max(16px, var(--sjs2-font-size-x150));
 }
 
 .svc-search__toolbar {

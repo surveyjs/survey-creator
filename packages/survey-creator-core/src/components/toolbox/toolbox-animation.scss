@@ -54,7 +54,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   }
 
   to {
-    padding-inline-end: var(--ctr-toolbox-separator-padding-right, 0px);
+    padding-inline-end: 0;
     padding-inline-start: var(--sjs2-spacing-x200);
     overflow: hidden;
   }
@@ -120,7 +120,6 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 .svc-toolbox--flyout-to-compact-running {
   width: var(--thm-toolbox-width-compact);
-  margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
   z-index: 200;
   border-inline-end: var(--sjs2-border-width-x100) solid transparent;
 }

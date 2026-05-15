@@ -21,8 +21,8 @@
 .svc-toolbox__tool {
   cursor: default;
   width: initial;
-  align-items: var(--ctr-toolbox-item-align, stretch);
-  align-self: var(--ctr-toolbox-item-align, stretch);
+  align-items: stretch;
+  align-self: stretch;
   &:first-of-type > .svc-toolbox__tool-content {
     padding-block-start: 0;
     .svc-toolbox__item-banner {
@@ -42,7 +42,7 @@
   display: flex;
   padding-block-start: var(--sjs2-spacing-x050);
   flex-direction: column;
-  align-items: var(--ctr-toolbox-item-align, stretch);
+  align-items: stretch;
   position: relative;
   & > * {
     flex: 0 0 auto;
@@ -62,8 +62,8 @@
 }
 
 .svc-toolbox__tool--has-subitems {
-  align-items: var(--ctr-toolbox-item-align, stretch);
-  align-self: var(--ctr-toolbox-item-align, stretch);
+  align-items: stretch;
+  align-self: stretch;
 }
 
 // is always visible
@@ -103,14 +103,14 @@
   pointer-events: none;
   .svc-toolbox__item-icon {
     position: absolute;
-    display: var(--ctr-toolbox-item-banner-icon-display, none);
+    display: none;
     inset-inline-start: var(--sjs2-spacing-x150);
     top: var(--sjs2-spacing-x100);
   }
 
   &:after {
     content: " ";
-    display: var(--ctr-toolbox-item-banner-beak-display, block);
+    display: block;
     width: calc(var(--sjs2-size-x050) * 1.41);
     height: calc(var(--sjs2-size-x050) * 1.41);
     background: var(--sjs2-color-bg-basic-primary);
@@ -150,7 +150,7 @@
 .svc-toolbox__tool:hover:not(.svc-toolbox__tool--disabled),
 .svc-toolbox__tool:focus-within:not(.svc-toolbox__tool--disabled) {
   .svc-toolbox__item-banner {
-    display: var(--ctr-toolbox-item-banner-display, flex);
+    display: flex;  
     opacity: var(--sjs2-opacity-visible);
     pointer-events: initial;
   }

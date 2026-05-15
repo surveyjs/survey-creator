@@ -39,8 +39,7 @@
 .sps-question--nested {
   .sps-question__title {
     color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
-    padding: var(--sjs2-layout-control-caption-medium-caption-vertical, 8px)
-      var(--sjs2-layout-control-caption-medium-caption-horizontal, 0);
+    padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x000);
     @include sjs2--typography--default;
   }
   .sps-question__header {

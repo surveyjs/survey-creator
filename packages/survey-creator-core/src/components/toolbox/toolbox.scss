@@ -37,12 +37,12 @@
   .sv-scroll__scroller {
     padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x150)
       var(--sjs2-spacing-x200) var(--sjs2-spacing-x150);
-    align-items: var(--ctr-toolbox-scroller-align-items, flex-start);
+    align-items: flex-start;
 
   }
   .sv-scroll__scrollbar {
-    inset-inline-end: var(--ctr-toolbox-scrollbar-right, 0);
-    inset-inline-start: var(--ctr-toolbox-scrollbar-left, "auto");
+    inset-inline-end: 0;
+    inset-inline-start: auto;
     padding: var(--sjs2-spacing-x150) 0 var(--sjs2-spacing-x200) 0;
   }
 }
@@ -51,7 +51,6 @@
   // --toolbox-width: calc(var(--sjs2-base-unit-size) * 20);
 }
 .svc-toolbox--compact {
-  margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
   .svc-toolbox__panel {
     overflow: visible;
     width: var(--thm-toolbox-width-compact);
@@ -77,8 +76,8 @@
     box-sizing: content-box;
     padding-inline-end: var(--sjs2-spacing-x200);
     padding-inline-start: var(--sjs2-spacing-x200);
-    margin-inline-end: calc(0px - var(--sjs2-spacing-x150) - var(--sjs2-spacing-x050));
-    margin-inline-start: calc(0px - var(--sjs2-spacing-x150) - var(--sjs2-spacing-x050));
+    margin-inline-end: var(--sjs2-spacing-negative-x200);
+    margin-inline-start: var(--sjs2-spacing-negative-x200);
   }
   .svc-toolbox__category-separator--search {
     margin-inline-end: 0;
@@ -99,7 +98,6 @@
 
 .svc-toolbox--flyout {
   // --toolbox-width: calc(var(--sjs2-base-unit-size) * 20);
-  margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
   overflow: visible;
   overflow: visible;
   width: var(--thm-toolbox-width-compact);
@@ -152,12 +150,12 @@
 .svc-toolbox__category-separator {
   box-sizing: border-box;
   padding-top: var(--sjs2-spacing-x100);
-  padding-inline-end: var(--ctr-toolbox-separator-padding-right, 0px);
+  padding-inline-end: 0;
   padding-bottom: var(--sjs2-spacing-x100);
   padding-inline-start: var(--sjs2-spacing-x200);
   margin-top: var(--sjs2-spacing-x050);
-  margin-inline-end: calc(0px - var(--sjs2-spacing-x150));
-  margin-inline-start: calc(0px - var(--sjs2-spacing-x150));
+  margin-inline-end: var(--sjs2-spacing-negative-x150);
+  margin-inline-start: var(--sjs2-spacing-negative-x150);
   max-width: 10000px;
   &:after {
     content: "";
@@ -190,10 +188,9 @@
 }
 
 .svc-toolbox__category-header-wrapper {
-  padding: var(--ctr-toolbox-group-header-margin-top, 0px) var(--sjs2-spacing-x150)
-    var(--ctr-toolbox-group-header-margin-bottom, 0px) var(--sjs2-spacing-x150);
-  margin-inline-start: calc(0px - var(--sjs2-spacing-x150));
-  margin-inline-end: calc(0px - var(--sjs2-spacing-x150));
+  padding: 0 var(--sjs2-spacing-x150);
+  margin-inline-start: var(--sjs2-spacing-negative-x150);
+  margin-inline-end: var(--sjs2-spacing-negative-x150);
   align-self: stretch;
 }
 .svc-toolbox__category-header {
@@ -205,16 +202,6 @@
 
   border-radius: var(--sjs2-radius-x100);
   background: var(--sjs2-color-bg-basic-primary-dim);
-
-  box-shadow:
-    inset 0 var(--ctr-toolbox-group-header-border-width-top, 0px)
-      var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary)),
-    inset calc(0px - var(--ctr-toolbox-group-header-border-width-right, 0px)) 0
-      var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary)),
-    inset 0 calc(0px - var(--ctr-toolbox-group-header-border-width-bottom, 0px))
-      var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary)),
-    inset var(--ctr-toolbox-group-header-border-width-left, 0px) 0
-      var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
 
   box-sizing: border-box;
   width: 100%;
