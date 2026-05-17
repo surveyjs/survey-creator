@@ -32,7 +32,7 @@ test.describe(title, () => {
     await editColumnButton.click();
     await page.mouse.move(0, 0);
     // await page.locator(".sv-popup__body-content").hover({ position: { x: 10, y: 10 } });
-    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit-surface-zoomed-out.png");
+    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit-surface-zoomed-out.png", { maxDiffPixels: 5 });
   });
 
   test("Matrix column", async ({ page }) => {

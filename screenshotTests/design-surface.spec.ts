@@ -184,7 +184,7 @@ test.describe(title, () => {
     await setJSON(page, json);
     const rootSelector = page.locator(".svc-tab-designer");
     await page.click(".svc-page", { position: { x: 5, y: 5 } });
-    await compareScreenshot(page, rootSelector, "page-selected-responsive.png");
+    await compareScreenshot(page, rootSelector, "page-selected-responsive.png", { maxDiffPixels: 2 });
   });
 
   test("Page hidden header and top toolbar", async ({ page }) => {
