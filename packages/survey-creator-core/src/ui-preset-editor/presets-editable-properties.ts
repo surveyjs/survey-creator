@@ -536,7 +536,7 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
     const categories = this.currentProperties?.getInitialJson(true) || [];
     this.defaultCategories = [...categories];
     this.defaultItems = [];
-    categories.forEach(c => this.defaultItems.push(...c.properties));
+    categories.forEach(c => { if (c.properties)this.defaultItems.push(...c.properties); });
   }
 
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {

@@ -2,9 +2,10 @@ import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptio
 import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
+import { calculateThemeVariables } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
-import DefaultLight from "../themes/default-light";
+import { DefaultLight } from "survey-core/themes";
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
   static legacyThemeName = "sc2020";
@@ -20,6 +21,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   static varColorProjectBrand = "--sjs2-color-project-brand-600";
   static varColorUtilitySurface = "--sjs2-color-utility-surface-designer";
 
+  private baseThemeVariables: { [index: string]: string } = {};
   initialCssVariables: { [index: string]: string } = {};
   themeCssVariablesChanges?: { [index: string]: string } = {};
 
@@ -40,12 +42,14 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
   public onThemePropertyChanged = new EventBase<CreatorThemeModel, { name: string, value: any }>();
 
+  public getRootElement = (): HTMLElement => undefined;
+
   private getThemeFromCreatorThemes(themeName: string): ICreatorTheme {
     const theme = CreatorThemes[themeName];
     if (!theme) return;
 
     if (themeName === CreatorThemeModel.defaultThemeName && (!theme.cssVariables || Object.keys(theme.cssVariables).length === 0)) {
-      theme.cssVariables = { ...DefaultLight.cssVariables };
+      theme.cssVariables = { ...this.baseThemeVariables, ...DefaultLight.cssVariables };
     }
     return theme;
   }
@@ -92,6 +96,18 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
         arrayChanges
       );
     };
+  }
+
+  private initializeBaseThemeVariables() {
+    const vars = Serializer.getProperties("creatortheme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
+    const computed = calculateThemeVariables(DefaultLight.cssVariables, vars, this.getRootElement()) || {};
+    const filtered: { [index: string]: string } = {};
+    Object.keys(computed).forEach(key => {
+      const value = computed[key];
+      if (typeof value === "string" && value.trim() === "") return;
+      filtered[key] = value;
+    });
+    this.baseThemeVariables = filtered;
   }
 
   public getType(): string {
@@ -160,14 +176,19 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this[cssName] = (scale * baseUnit / 100) + "px";
   }
   private scaleCssVariables() {
-    if (this.fontScale !== undefined) {
-      this.scaleValue(CreatorThemeModel.varBaseUnitFontSize, this.fontScale);
-      this.scaleValue(CreatorThemeModel.varBaseUnitLineHeight, this.fontScale);
-    }
-    if (this.scale !== undefined) {
-      this.scaleValue(CreatorThemeModel.varBaseUnitSize, this.scale);
-      this.scaleValue(CreatorThemeModel.varBaseUnitSpacing, this.scale);
-      this.scaleValue(CreatorThemeModel.varBaseUnitRadius, this.scale);
+    this.blockThemeChangedNotifications += 1;
+    try {
+      if (this.fontScale !== undefined) {
+        this.scaleValue(CreatorThemeModel.varBaseUnitFontSize, this.fontScale);
+        this.scaleValue(CreatorThemeModel.varBaseUnitLineHeight, this.fontScale);
+      }
+      if (this.scale !== undefined) {
+        this.scaleValue(CreatorThemeModel.varBaseUnitSize, this.scale);
+        this.scaleValue(CreatorThemeModel.varBaseUnitSpacing, this.scale);
+        this.scaleValue(CreatorThemeModel.varBaseUnitRadius, this.scale);
+      }
+    } finally {
+      this.blockThemeChangedNotifications -= 1;
     }
   }
   private getScaleFactor(cssName: string): number {
@@ -187,8 +208,17 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   public loadTheme(theme: ICreatorTheme = {}) {
     this.blockThemeChangedNotifications += 1;
     try {
+      this.initializeBaseThemeVariables();
       const baseTheme = this.getThemeFromCreatorThemes(theme.themeName) || {};
-      this.themeName = theme.themeName || baseTheme.themeName || CreatorThemeModel.defaultThemeName;
+      let resolvedThemeName = theme.themeName;
+      const colorPalette = theme.colorPalette || "light";
+      if (resolvedThemeName && !CreatorThemes[resolvedThemeName]) {
+        const composedThemeName = `${resolvedThemeName}-${colorPalette}`;
+        if (CreatorThemes[composedThemeName]) {
+          resolvedThemeName = composedThemeName;
+        }
+      }
+      this.themeName = resolvedThemeName || baseTheme.themeName || CreatorThemeModel.defaultThemeName;
 
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, baseTheme.cssVariables || {});
@@ -222,18 +252,24 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   fromJSON(json: ICreatorTheme, options?: ILoadFromJSONOptions): void {
     if (!json) return;
 
-    const _json = {};
-    assign(_json, json);
-    delete _json["cssVariables"];
-    super.fromJSON(_json, options);
-    this.isLight = json.isLight !== undefined ? json.isLight : true;
+    this.blockThemeChangedNotifications += 1;
+    try {
+      const _json = {};
+      assign(_json, json);
+      delete _json["cssVariables"];
+      super.fromJSON(_json, options);
+      this.isLight = json.colorPalette !== undefined ? json.colorPalette === "light" : (json.isLight !== undefined ? json.isLight : true);
 
-    if (json.cssVariables) {
-      super.fromJSON(json.cssVariables, options);
-      this.initialCssVariables = {};
-      assign(this.initialCssVariables, json.cssVariables);
+      if (json.cssVariables) {
+        const rawCssVariables = { ...json.cssVariables };
+        const resolvedCssVariables = { ...this.baseThemeVariables, ...rawCssVariables };
+        super.fromJSON(resolvedCssVariables, options);
+        this.initialCssVariables = rawCssVariables;
 
-      this.updateScaleProperties();
+        this.updateScaleProperties();
+      }
+    } finally {
+      this.blockThemeChangedNotifications -= 1;
     }
   }
 
@@ -242,7 +278,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
     const result = super.toJSON(options);
     if (!this.isLight) {
-      result.isLight = false;
+      result.colorPalette = "dark";
     }
     const cssVariables = {};
     assign(cssVariables, this.initialCssVariables, this.themeCssVariablesChanges);

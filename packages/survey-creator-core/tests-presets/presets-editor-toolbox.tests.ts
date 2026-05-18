@@ -1,8 +1,9 @@
-import { QuestionMatrixDynamicModel, settings, ComponentCollection } from "survey-core";
+﻿import { QuestionMatrixDynamicModel, settings, ComponentCollection } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { ICreatorPresetData } from "../src/presets-creator/presets";
 import { SurveyModel } from "survey-core";
 import { QuestionToolbox } from "../src/toolbox";
+import { vi } from "vitest";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";
@@ -529,7 +530,7 @@ test("Preset edit, toolbox - edit category", () => {
 
   settings.showDialog = (options: any) => {
     popupSurvey = options.data.survey;
-    return { dispose: jest.fn() };
+    return { dispose: vi.fn() };
   };
 
   try {
@@ -564,7 +565,7 @@ test("Preset edit, toolbox - edit item", () => {
   let popupSurvey: SurveyModel | undefined;
   settings.showDialog = (options: any) => {
     popupSurvey = options.data.survey;
-    return { dispose: jest.fn() };
+    return { dispose: vi.fn() };
   };
 
   try {

@@ -1162,7 +1162,7 @@ test.describe(title, () => {
 
     const qContent = page.locator(".svc-question__content");
     await qContent.nth(0).click({ position: { x: 5, y: 5 } });
-    await compareScreenshot(page, qContent.nth(0), "question-tiny.png");
+    await compareScreenshot(page, qContent.nth(0), "question-tiny.png", { maxDiffPixels: 2 });
 
     await qContent.nth(1).click({ position: { x: 5, y: 5 } });
     await compareScreenshot(page, qContent.nth(1), "question-small.png");

@@ -18,14 +18,12 @@
   <script src="../node_modules/survey-core/survey.core.js" defer></script>
   <script src="../node_modules/survey-core/survey.i18n.js" defer></script>
   <script src="../node_modules/survey-core/themes/index.js" defer></script>
-  <script src="../node_modules/survey-core/themes/test.js" defer></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js" defer></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js" defer></script>
   <script src="../node_modules/survey-creator-core/ui-preset-editor.js" defer></script>
   <script src="../node_modules/survey-creator-core/ui-presets/index.js"></script>
   <script src="../node_modules/survey-react-ui/survey-react-ui.js" defer></script>
   <script src="../build/survey-creator-react.js" defer></script>
-  <script src="../node_modules/survey-creator-core/themes/test.js" defer></script>
   <script src="./sc.js" defer></script>
 </head>
 
@@ -36,13 +34,10 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-    SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme.Test);
     SurveyCreatorCore.registerUIPreset(SurveyCreatorUIPreset);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
     new SurveyCreatorCore.UIPreset(SurveyCreatorUIPreset.Expert).applyTo(creator);
-    creator.applyCreatorTheme(SurveyCreatorTheme.Test);
-  creator.applySurfaceTheme(SurveyTheme.Test);
-    creator.tabResponsivenessMode = "menu";
+      creator.tabResponsivenessMode = "menu";
     window["Survey"].settings.animationEnabled = false;
     creator["animationEnabled"] = false;
     creator.allowZoom = false;

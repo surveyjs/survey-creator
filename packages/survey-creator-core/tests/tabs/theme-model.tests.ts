@@ -1,4 +1,4 @@
-import { DefaultTheme, ITheme, Serializer } from "survey-core";
+import { DefaultTheme, DomWindowHelper, ITheme, Serializer } from "survey-core";
 import { Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
@@ -11,6 +11,7 @@ import { ThemeModel, getThemeChanges } from "../../src/components/tabs/theme-mod
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
+import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
@@ -76,6 +77,7 @@ const themeFromFile = {
 
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
+  mockGetRGBaColorIdentity();
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
@@ -84,6 +86,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  restoreGetRGBaColorMock();
   DefaultTheme.cssVariables = cssVariables;
 });
 
@@ -116,7 +119,6 @@ test("Theme model de/serialization", (): any => {
       "--sjs-font-size": "17.6px",
       "--sjs-general-backcolor": "rgba(253, 255, 148, 0.5)",
       "--sjs-general-backcolor-dark": "rgba(248, 248, 248, 1)",
-      "--sjs-general-backcolor-dim": "#0b864b",
       "--sjs-general-backcolor-dim-light": "rgba(45, 235, 223, 1)",
       "--sjs-general-backcolor-dim-dark": "rgba(243, 243, 243, 1)",
       "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
@@ -262,11 +264,11 @@ test("Theme builder switch themes", (): any => {
 
   expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toEqual("rgba(243, 243, 243, 1)");
 
   themeModel.colorPalette = "dark";
   expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(255, 152, 20, 1)");
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(36, 36, 36, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toEqual("rgba(36, 36, 36, 1)");
 });
 
 test("Theme builder: composite question font", (): any => {
@@ -461,13 +463,13 @@ test("Keep theme css changes through the different themes choosen", (): any => {
   expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(25, 179, 148, 1)");
   expect(themeModel["--sjs2-color-bg-brand-secondary"]).toEqual("rgba(25, 179, 148, 0.1)");
   expect(themeModel["--sjs2-color-bg-brand-primary-dim"]).toEqual("rgba(20, 164, 139, 1)");
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 
   themeModel["--sjs2-color-project-brand-600"] = fefefeColor;
   expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs2-color-project-brand-600"]).toEqual(fefefeColor);
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({
     "--sjs2-color-project-brand-600": fefefeColor,
     "--sjs2-color-bg-brand-primary-dim": "rgba(239, 239, 239, 1)",
@@ -477,7 +479,7 @@ test("Keep theme css changes through the different themes choosen", (): any => {
   themeModel.colorPalette = "dark";
   expect(themeModel.colorPalette).toEqual("dark");
   expect(themeModel["--sjs2-color-project-brand-600"]).toEqual(fefefeColor);
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(36, 36, 36, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toEqual("rgba(36, 36, 36, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({
     "--sjs2-color-project-brand-600": fefefeColor,
     "--sjs2-color-bg-brand-primary-dim": "rgba(239, 239, 239, 1)",
@@ -487,7 +489,7 @@ test("Keep theme css changes through the different themes choosen", (): any => {
   themeModel.resetTheme();
   expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 });
 
@@ -589,14 +591,14 @@ test("selectTheme", (): any => {
   expect(themeModel.themeName).toEqual("default");
   expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(25, 179, 148, 1)");
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(243, 243, 243, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toEqual("rgba(243, 243, 243, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 
   themeModel.selectTheme("contrast");
   expect(themeModel.themeName).toEqual("contrast");
   expect(themeModel.colorPalette).toEqual("light");
   expect(themeModel["--sjs2-color-project-brand-600"]).toEqual("rgba(0, 0, 0, 1)");
-  expect(themeModel["--sjs2-color-bg-neutral-tertiary-dim"]).toEqual("rgba(255, 216, 77, 1)");
+  expect(themeModel["--sjs2-color-utility-surface-survey"]).toEqual("rgba(255, 216, 77, 1)");
   expect(themeModel.themeCssCustomizations).toStrictEqual({});
 });
 

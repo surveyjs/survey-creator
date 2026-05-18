@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { SurveyCreator, SurveyCreatorComponent } from 'survey-creator-react'
 import { registerSurveyTheme, registerCreatorTheme, registerUIPreset } from 'survey-creator-core'
 import SurveyThemes from 'survey-core/themes'
-import SurveyCreatorTheme from 'survey-creator-core/themes'
 import SurveyCreatorPresets from 'survey-creator-core/ui-presets'
 import { UIPresetEditor } from 'survey-creator-core/ui-preset-editor'
 
@@ -12,7 +11,7 @@ function App() {
     useEffect(() => {
         // Register themes
         registerSurveyTheme(SurveyThemes)
-        registerCreatorTheme(SurveyCreatorTheme)
+        registerCreatorTheme(SurveyThemes)
         registerUIPreset(SurveyCreatorPresets)
 
         // Create SurveyCreator instance
@@ -23,7 +22,6 @@ function App() {
             showJSONEditorTab: false
         })
 
-        creatorInstance.applyCreatorTheme(SurveyCreatorTheme)
         window.creator = creatorInstance
         new UIPresetEditor(creatorInstance)
         setCreator(creatorInstance)
