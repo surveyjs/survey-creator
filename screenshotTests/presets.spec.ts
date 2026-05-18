@@ -69,7 +69,7 @@ test.describe(title, () => {
 
   test("Check presets quit confirmation dialog", async ({ page }) => {
     await page.getByText("Dansk").click();
-    await page.getByTitle("Quit").click();
+    await page.getByRole("button", { name: "Quit" }).click();
     await compareScreenshot(page, ".svc-creator-confirm-dialog .sv-popup__container", "presets-exit-confirmation-dialog.png");
   });
 
