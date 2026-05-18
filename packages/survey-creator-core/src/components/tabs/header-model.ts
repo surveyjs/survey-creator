@@ -47,18 +47,20 @@ export class HeaderModel extends Base implements IHeader {
     if (!!json["backgroundImageOpacity"])this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
   }
 
-  public setCssVariables(cssVariables?: { [index: string]: string }, completeThemeVariablesList?: { [index: string]: string }) {
+  public setCssVariables(cssVariables?: { [index: string]: string }) {
     if (cssVariables) {
       this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), cssVariables);
       this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), cssVariables);
       this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables,
         {
+          color: this.baseThemeVariables["--sjs2-color-component-header-default-title"],
           family: this.baseThemeVariables["--sjs2-typography-font-family-component-header-title"] || this.baseThemeVariables["--sjs2-typography-font-family-text"],
           weight: this.baseThemeVariables["--sjs2-typography-font-weight-component-header-title"],
           size: this.baseThemeVariables["--sjs2-typography-font-size-component-header-title"]
         });
       this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables,
         {
+          color: this.baseThemeVariables["--sjs2-color-component-header-default-description"],
           family: this.baseThemeVariables["--sjs2-typography-font-family-component-header-description"] || this.baseThemeVariables["--sjs2-typography-font-family-text"],
           weight: this.baseThemeVariables["--sjs2-typography-font-weight-component-header-description"],
           size: this.baseThemeVariables["--sjs2-typography-font-size-component-header-description"]

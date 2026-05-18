@@ -863,11 +863,13 @@ test("headerViewContainer init state", (): any => {
     "height": 0,
     "mobileHeight": 0,
     "headerDescription": {
+      "color": "rgba(0, 0, 0, 0.45)",
       "family": "Open Sans",
       "size": 20,
       "weight": "400",
     },
     "headerTitle": {
+      "color": "rgba(0, 0, 0, 0.91)",
       "family": "Open Sans",
       "size": 32,
       "weight": "700",
@@ -891,8 +893,8 @@ test("set headerViewContainer basic", (): any => {
 
   expect(simulatorSurvey.logoPosition).toEqual("left");
   expect(creator.survey.logoPosition).toEqual("left");
-  expect(header["headerTitle"]).toStrictEqual({ family: "Open Sans", weight: "700", size: 32 });
-  expect(header["headerDescription"]).toStrictEqual({ family: "Open Sans", weight: "400", size: 20 });
+  expect(header["headerTitle"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.91)", family: "Open Sans", weight: "700", size: 32 });
+  expect(header["headerDescription"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.45)", family: "Open Sans", weight: "400", size: 20 });
 
   headerViewContainer.getElementByName("logoPosition").value = "right";
   headerTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
@@ -902,8 +904,8 @@ test("set headerViewContainer basic", (): any => {
   headerDescriptionQuestion.contentPanel.getQuestionByName("size").value = 21;
   headerDescriptionQuestion.contentPanel.getQuestionByName("family").value = "Trebuchet MS";
 
-  expect(header["headerTitle"]).toStrictEqual({ family: "Courier New", weight: "400", size: 41 });
-  expect(header["headerDescription"]).toStrictEqual({ family: "Trebuchet MS", weight: "800", size: 21 });
+  expect(header["headerTitle"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.91)", family: "Courier New", weight: "400", size: 41 });
+  expect(header["headerDescription"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.45)", family: "Trebuchet MS", weight: "800", size: 21 });
 
   expect(creator.theme.header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
   expect(creator.survey.logoPosition).toEqual("right");
