@@ -6,6 +6,7 @@ import { assign } from "../../utils/utils";
 export class HeaderModel extends Base implements IHeader {
   static primaryColorStr = "var(--sjs-primary-backcolor)";
 
+  private baseThemeVariablesList: { [index: string]: string } = {};
   height: number;
   mobileHeight: number;
   inheritWidthFrom: "survey" | "container";
@@ -31,7 +32,8 @@ export class HeaderModel extends Base implements IHeader {
     if (!!json["backgroundImageOpacity"])this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
   }
 
-  public setCssVariables(cssVariables?: { [index: string]: string }, completeThemeVariablesList?: { [index: string]: string }) {
+  public setCssVariables(cssVariables?: { [index: string]: string }, completeThemeVariablesList?: { [index: string]: string }, baseThemeVariablesList?: { [index: string]: string }) {
+    this.baseThemeVariablesList = { ...baseThemeVariablesList };
     if (cssVariables) {
       this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), cssVariables);
       this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), cssVariables);
@@ -61,7 +63,7 @@ export class HeaderModel extends Base implements IHeader {
       if (typeof result[key] === "object") {
         const property = this.getPropertyByName(key);
         if (property.type === "font") {
-          fontsettingsToCssVariable(result[key], property, cssVariables);
+          fontsettingsToCssVariable(result[key], property, cssVariables, this.baseThemeVariablesList);
           delete result[key];
         }
 
@@ -90,13 +92,10 @@ export class HeaderModel extends Base implements IHeader {
       cssVariables["--sjs2-color-component-header-default-bg"] = undefined;
     } else if (this["backgroundColorSwitch"] === "custom") {
       cssVariables["--sjs2-color-component-header-default-bg"] = this["backgroundColor"] ?? "transparent";
-    } else {
-      cssVariables["--sjs2-color-component-header-default-bg"] = HeaderModel.primaryColorStr;
     }
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (backgroundColor === HeaderModel.primaryColorStr) return "accentColor";
     if (!backgroundColor || backgroundColor === "transparent") return "none";
     return "custom";
   }
@@ -120,16 +119,6 @@ export class HeaderModel extends Base implements IHeader {
   public set surveyDescription(value: any) {
     this.setPropertyValue("headerDescription", value);
   }
-}
-
-function getDefaultTitleSetting() {
-  const result = { family: settings.themeEditor.defaultFontFamily, weight: "700", size: 32 };
-  return result;
-}
-
-function getDefaultDescriptionSetting(isAdvanced?: boolean) {
-  const result = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 24 };
-  return result;
 }
 
 function getHorizontalAlignment(questionName: string): IJsonPropertyInfo {
@@ -236,7 +225,6 @@ Serializer.addClass(
       default: "none",
       choices: [
         { value: "none" },
-        { value: "accentColor" },
         { value: "custom" },
       ],
     },
@@ -327,7 +315,7 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerTitle",
-    default: getDefaultTitleSetting(),
+    default: {},
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;
@@ -337,7 +325,7 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerDescription",
-    default: getDefaultDescriptionSetting(true),
+    default: {},
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;

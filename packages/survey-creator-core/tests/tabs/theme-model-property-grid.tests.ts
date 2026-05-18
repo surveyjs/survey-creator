@@ -23,7 +23,10 @@ registerSurveyTheme(SurveyThemes);
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
   mockGetRGBaColorIdentity();
-  mockDomWindowGetComputedStyleFromInlineStyles();
+  mockDomWindowGetComputedStyleFromInlineStyles({
+    "--sjs2-color-component-header-default-title": "rgba(0, 0, 0, 0.91)",
+    "--sjs2-color-component-header-default-description": "rgba(0, 0, 0, 0.45)",
+  });
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;

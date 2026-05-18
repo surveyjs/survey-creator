@@ -116,13 +116,14 @@ export function updateFontSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
-export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
+export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultValues?: any) {
   Object.keys(value).forEach(key => {
     const propertyNameDashed = property.name.replace(/([a-z])([A-Z])/g, key === "color" ? "$1-default-$2" : "$1-$2").toLowerCase();
     const cssVarName = key === "color"
       ? `--sjs2-color-component-${propertyNameDashed}`
       : `--sjs2-typography-font-${key}-component-${propertyNameDashed}`;
-    if (!property.defaultValue || value[key] !== property.defaultValue[key]) {
+    const defaultValue = defaultValues?.[key] ?? property.defaultValue?.[key];
+    if (!defaultValue || value[key] !== defaultValue) {
       themeCssVariables[cssVarName] = value[key] + (key === "size" ? "px" : "");
     } else {
       themeCssVariables[cssVarName] = undefined;
