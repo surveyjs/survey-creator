@@ -10,14 +10,11 @@
   @include sjs2--typography--default;
   box-sizing: border-box;
   width: 100%;
-  padding: var(--ctr-survey-info-panel-padding-top, var(--lbr-spacing-x4))
-    var(--ctr-survey-info-panel-padding-right, var(--lbr-spacing-x8))
-    var(--ctr-survey-info-panel-padding-bottom, var(--lbr-spacing-x4))
-    var(--ctr-survey-info-panel-padding-left, var(--lbr-spacing-x8));
-  border-radius: var(--ctr-survey-info-panel-corner-radius, var(--lbr-corner-radius-x1));
-  background: var(--ctr-survey-info-panel-background-color, var(--sjs-layer-2-background-500, #f8f8f8ff));
+  padding: var(--sjs2-spacing-x400) var(--sjs2-spacing-x800);
+  border-radius: var(--sjs2-radius-x100);
+  background: var(--sjs2-color-component-formbox-design-bg);
   text-align: center;
-  color: var(--ctr-survey-info-panel-text-color, var(--sjs-layer-2-foreground-50, #00000080));
+  color: var(--sjs2-color-fg-basic-secondary);
 }
 
 @container (max-width: #{$sd-panel-medium-min-width}) {
@@ -28,7 +25,7 @@
 
 @container (min-width: #{$sd-panel-medium-min-width}) and (max-width: #{$sd-panel-normal-min-width}) {
   .svc-carry-forward-panel {
-    padding: calcSize(4) calcSize(3);
+    padding: var(--sjs2-spacing-x400) var(--sjs2-spacing-x300);
     display: flex;
     flex-direction: column;
     align-items: stretch;

@@ -1,7 +1,7 @@
 @use "../variables" as *;
 
 .svc-question__dropdown-choices {
-  margin-top: calcSize(2);
+  margin-top: var(--sjs2-spacing-x200);
 }
 
 .svc-question__dropdown-choice--collapsed:nth-last-child(1) {
@@ -19,15 +19,15 @@
 }
 
 .svc-question__content>.svc-question__dropdown-choices--wrapper {
-  width: calc(100% + calcSize(8));
+  width: calc(100% + var(--sjs2-spacing-x800));
   overflow-x: auto;
-  margin: 0 calcSize(-4);
+  margin: 0 var(--sjs2-spacing-negative-x400);
 
   &>div {
-    width: calc(100% - calcSize(8));
+    width: calc(100% - var(--sjs2-spacing-x800));
     display: inline-block;
-    min-width: calcSize(15);
-    margin: 0 calcSize(4);
+    min-width: var(--sjs2-size-x1500);
+    margin: 0 var(--sjs2-spacing-x400);
   }
 
   .svc-question__dropdown-collapse-button {

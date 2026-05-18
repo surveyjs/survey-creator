@@ -1,9 +1,6 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
-import TestCreatorTheme from "survey-core/themes/test-creator";
-import TestSurfaceTheme from "survey-core/themes/test-surface";
-
 @Component({
   selector: "test-by-page",
   templateUrl: "./test.component.html",
@@ -16,7 +13,5 @@ export class TestByPageComponent extends TestDefaultComponent {
     this.creator["animationEnabled"] = false;
     this.creator.showOneCategoryInPropertyGrid = false;
     this.creator.allowZoom = false;
-    this.creator.applyCreatorTheme(TestCreatorTheme);
-    this.creator.applySurfaceTheme(TestSurfaceTheme);
   }
 }

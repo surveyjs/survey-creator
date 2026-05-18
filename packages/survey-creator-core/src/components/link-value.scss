@@ -2,20 +2,20 @@
 
 .svc-link__button {
   @include sjs2--typography--default-strong;
-  border-radius: var(--ctr-actionbar-button-corner-radius, var(--sjs-corner-radius-x1));
+  border-radius: var(--sjs2-radius-x100);
 }
 
 .svc-question-link__set-button {
   cursor: pointer;
 }
 .svc-link-value-button {
-  margin-inline-start: calc(-1 * var(--ctr-actionbar-button-padding-left-medium-text, var(--sjs-spacing-x2)));
+  margin-inline-start: var(--sjs2-spacing-negative-x200);
 }
 .svc-question-link__clear-button {
-  color: var(--sjs-semantic-red-background-500, #e50a3eff);
+  color: var(--sjs2-color-bg-alert-primary);
   cursor: pointer;
 }
 .svc-question-link__clear-button:focus,
 .svc-question-link__clear-button:hover {
-  background-color: var(--sjs-semantic-red-background-10, #e50a3e1a);
+  background-color: var(--sjs2-color-bg-alert-secondary);
 }

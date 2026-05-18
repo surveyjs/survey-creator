@@ -4,10 +4,7 @@
 .spg-drag-element__svg {
   width: var(--sjs2-typography-line-height-default);
   height: var(--sjs2-typography-line-height-default);
-  padding-top: var(--ctr-data-table-row-drag-area-padding-top, var(--sjs-spacing-x1));
-  padding-inline-end: var(--ctr-data-table-row-drag-area-padding-right, var(--sjs-spacing-x1));
-  padding-bottom: var(--ctr-data-table-row-drag-area-padding-bottom, var(--sjs-spacing-x1));
-  padding-inline-start: var(--ctr-data-table-row-drag-area-padding-left, var(--sjs-spacing-x1));
+  padding: var(--sjs2-spacing-x100);
   box-sizing: content-box;
   display: block;
   opacity: 0.5;
@@ -26,8 +23,8 @@
 .spg-matrixdynamic__drag-drop-ghost-position-bottom::after {
   content: "";
   width: 100%;
-  height: calcSize(0.5);
-  background-color: var(--sjs-secondary-background-500, #19b394ff);
+  height: var(--sjs2-size-x050);
+  background-color: var(--sjs2-color-bg-brand-primary);
   position: absolute;
   left: 0;
 }
@@ -45,9 +42,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: var(--sjs2-radius-form, 8px);
-  border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
-  background: var(--sjs2-color-bg-basic-secondary, #f5f5f5);
+  border-radius: var(--sjs2-radius-form);
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  background: var(--sjs2-color-bg-basic-secondary);
 
   box-sizing: border-box;
   padding: var(--sjs2-spacing-x600, 48px) var(--sjs2-spacing-x800, 64px);
@@ -74,21 +71,21 @@
 }
 
 .spg-smiley-icon {
-  width: calcSize(3);
-  height: calcSize(3);
-  margin: calcSize(1);
-  border-radius: 100px;
-  border: 1px solid var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
+  margin: var(--sjs2-spacing-x100);
+  border-radius: var(--sjs2-radius-round);
+  border: 1px solid var(--sjs2-color-fg-basic-primary-muted);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: calcSize(4);
+  margin-right: var(--sjs2-spacing-x400);
   box-sizing: content-box;
 
   svg {
-    width: calcSize(1.5);
-    height: calcSize(1.5);
-    fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
+    width: var(--sjs2-size-x150);
+    height: var(--sjs2-size-x150);
+    fill: var(--sjs2-color-fg-basic-primary-muted);
   }
 }
 
@@ -103,8 +100,6 @@
     flex: 1 0 0;
     border-radius: var(--sjs2-radius-container-drag, 8px);
     background: var(--sjs2-color-bg-basic-primary, #fff);
-    box-shadow: var(--sjs2-border-offset-x-floating-default, 0) var(--sjs2-border-offset-y-floating-default, 6px)
-      var(--sjs2-border-blur-floating-default, 20px) var(--sjs2-border-spread-floating-default, 0)
-      var(--sjs2-color-utility-shadow-floating-default, rgba(0, 76, 68, 0.15));
+    box-shadow: var(--sjs2-border-effect-floating-default);
   }
 }
