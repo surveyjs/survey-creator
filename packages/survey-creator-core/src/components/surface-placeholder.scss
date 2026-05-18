@@ -3,7 +3,7 @@
 .svc-surface-placeholder {
   display: flex;
   width: 100%;
-  max-width: var(--ctr-surface-placeholder-max-width, var(--sjs-size-x90));
+  max-width: calc(var(--sjs2-base-unit-size) * 90);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -43,11 +43,11 @@
 }
 
 .svc-surface-placeholder__text {
-  padding: var(--ctr-surface-placeholder-text-margin-top, var(--sjs-spacing-x4)) 0px
-    var(--ctr-surface-placeholder-text-margin-bottom, var(--sjs-spacing-x6)) 0px;
+  padding: var(--sjs2-spacing-x400) 0px
+    var(--sjs2-spacing-x600) 0px;
   display: flex;
   flex-direction: column;
-  gap: var(--ctr-surface-placeholder-text-gap, var(--sjs-spacing-x1));
+  gap: var(--sjs2-spacing-x100);
   align-items: center;
   justify-content: center;
   align-self: center;
@@ -57,14 +57,14 @@
 
 .svc-surface-placeholder__title {
   @include sjs2--typography--medium-strong;
-  color: var(--ctr-surface-placeholder-text-title-color, var(--sjs-layer-3-foreground-100, #000000e6));
+  color: var(--sjs2-color-fg-basic-primary);
   text-align: center;
   align-self: stretch;
 }
 
 .svc-surface-placeholder__description {
   @include sjs2--typography--default;
-  color: var(--ctr-surface-placeholder-text-description-color, var(--sjs-layer-3-foreground-50, #00000080));
+  color: var(--sjs2-color-fg-basic-secondary);
   text-align: center;
   align-self: stretch;
 }
@@ -73,9 +73,9 @@
 .svc-test-tab__content .svc-surface-placeholder,
 .svc-translation-tab--empty .svc-surface-placeholder,
 .svc-designer__placeholder-container {
-  max-width: var(--ctr-surface-placeholder-max-width, var(--sjs-size-x90));
-  padding: var(--ctr-surface-placeholder-padding-top, var(--sjs-spacing-x4))
-    var(--ctr-surface-placeholder-padding-right, var(--sjs-spacing-x6))
-    var(--ctr-surface-placeholder-padding-bottom, var(--sjs-spacing-x16))
-    var(--ctr-surface-placeholder-padding-left, var(--sjs-spacing-x6));
+  max-width: calc(var(--sjs2-base-unit-size) * 90);
+  padding: var(--sjs2-spacing-x400)
+    var(--sjs2-spacing-x600)
+    calc(var(--sjs2-base-unit-spacing) * 16)
+    var(--sjs2-spacing-x600);
 }

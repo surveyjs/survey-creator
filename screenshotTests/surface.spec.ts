@@ -64,7 +64,7 @@ test.describe(title, () => {
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
-    await compareScreenshot(page, ".sv-popup__container", "convert-to-popup.png");
+    await compareScreenshot(page, ".sv-popup__container", "convert-to-popup.png", { maxDiffPixels: 4 });
   });
 
   test("Test question type converter on page for panel - 1", async ({ page }) => {

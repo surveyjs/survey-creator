@@ -1,24 +1,10 @@
 @use "../../variables.scss" as *;
 @use "../../typography-mixins.scss" as *;
 
-// .sps-matrixdynamic__drag-element {
-//   padding: calcSize(2);
-
-//   &:hover {
-//     background-color: $background;
-//   }
-
-//   &:after {
-//     content: " ";
-//     display: block;
-//     height: calcSize(0.5);
-//   }
-// }
-
 .sps-drag-element__svg {
   box-sizing: content-box;
-  width: var(--sjs2-size-icon-medium, 24px);
-  height: var(--sjs2-size-icon-medium, 24px);
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
   display: flex;
   padding: var(--sjs2-spacing-x100, 8px);
   padding-right: 0;
@@ -39,8 +25,8 @@
 .sps-matrixdynamic__drag-drop-ghost-position-bottom::after {
   content: "";
   width: 100%;
-  height: calcSize(0.5);
-  background-color: var(--sjs-secondary-background-500, #19b394ff);
+  height: var(--sjs2-size-x050);
+  background-color: var(--sjs2-color-bg-brand-primary);
   position: absolute;
   left: 0;
 }
@@ -106,11 +92,10 @@
 }
 
 .sps-matrixdynamic__row-icon {
-  width: var(--sjs2-size-icon-medium, 24px);
-  height: var(--sjs2-size-icon-medium, 24px);
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
   padding: 0;
-  margin: var(--ctr-actionbar-button-padding-top-large-icon, var(--sjs-spacing-x1)) 0
-    var(--ctr-actionbar-button-padding-bottom-large-icon, var(--sjs-spacing-x1)) 0;
+  margin: var(--sjs2-spacing-x100) 0;
   margin-left: var(--sjs2-spacing-x150, 12px);
   &:disabled {
     opacity: 1;
@@ -121,7 +106,7 @@
 }
 
 .sps-matrixdynamic__footer {
-  margin: 0 calc(-1 * var(--sjs2-spacing-x150, 12px)) var(--sjs2-spacing-x150, 12px);
+  margin: 0 var(--sjs2-spacing-negative-x150) var(--sjs2-spacing-x150, 12px);
   padding: 0 var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px);
   border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
   display: flex;
@@ -205,9 +190,7 @@
     flex: 1 0 0;
     border-radius: var(--sjs2-radius-container-drag, 8px);
     background: var(--sjs2-color-bg-basic-primary, #fff);
-    box-shadow: var(--sjs2-border-offset-x-floating-default, 0) var(--sjs2-border-offset-y-floating-default, 6px)
-      var(--sjs2-border-blur-floating-default, 20px) var(--sjs2-border-spread-floating-default, 0)
-      var(--sjs2-color-utility-shadow-floating-default, rgba(0, 76, 68, 0.15));
+    box-shadow: var(--sjs2-border-effect-floating-default);
   }
 }
 
@@ -219,5 +202,5 @@
 
 .spg-table__cell--actions:last-of-type .sps-action-bar {
   justify-content: flex-end;
-  padding-inline-end: var(--ctr-data-table-row-padding-right, var(--sjs-spacing-x05));
+  padding-inline-end: var(--sjs2-spacing-x050);
 }
