@@ -1,10 +1,8 @@
 import { Component, ViewEncapsulation } from "@angular/core";
-import { registerCreatorTheme, SurveyCreatorModel, UIPreset } from "survey-creator-core";
+import { SurveyCreatorModel, UIPreset } from "survey-creator-core";
 import { settings } from "survey-core";
 import { TestDefaultComponent } from "./default.component";
 import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
-import TestCreatorTheme from "survey-core/themes/test-creator";
-import TestSurfaceTheme from "survey-core/themes/test-surface";
 import SurveyCreatorUIPreset from "survey-creator-core/ui-presets";
 import { registerUIPreset } from 'survey-creator-core';
 @Component({
@@ -19,10 +17,7 @@ export class PresetsComponent extends TestDefaultComponent {
   protected override getSlk(): boolean { return true }
   protected override createCreator(): void {
     registerUIPreset(SurveyCreatorUIPreset);
-    registerCreatorTheme(TestCreatorTheme);
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
-    this.creator.applyCreatorTheme(TestCreatorTheme);
-    this.creator.applySurfaceTheme(TestSurfaceTheme);
     this.creator.tabResponsivenessMode = "menu";
     this.creator["animationEnabled"] = false;
     settings.animationEnabled = false;
@@ -32,4 +27,3 @@ export class PresetsComponent extends TestDefaultComponent {
     new UIPresetEditor(this.creator);
   }
 }
-
