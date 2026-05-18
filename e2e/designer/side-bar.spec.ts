@@ -288,8 +288,8 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 500, height: 800 });
 
     await page.locator(".svc-question__adorner").click({ position: { x: 5, y: 5 } });
-    await expect(page.locator(".svc-question__adorner button[title='Open settings']")).toBeVisible();
-    await page.locator(".svc-question__adorner button[title='Open settings']").click();
+    await expect(page.locator(".svc-question__adorner").getByRole("button", { name: "Open settings" })).toBeVisible();
+    await page.locator(".svc-question__adorner").getByRole("button", { name: "Open settings" }).click();
     await expect(page.locator(".spg-question[data-name=name] input")).not.toBeFocused();
   });
 

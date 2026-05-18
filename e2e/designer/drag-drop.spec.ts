@@ -1207,7 +1207,7 @@ test.describe(title, () => {
   test("Drag Drop to new page and Undo", async ({ page }) => {
     const newGhostPagePage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']").filter({ visible: true }).first();
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
-    const undoAction = page.locator("button[title=Undo]").filter({ visible: true }).first();
+    const undoAction = page.getByRole("button", { name: "Undo" }).filter({ visible: true }).first();
     const SingleInputToolboxItem = page.locator("[aria-label='Single-Line Input']").filter({ visible: true }).first();
     await setJSON(page, { pages: [{ name: "page1" }] });
 

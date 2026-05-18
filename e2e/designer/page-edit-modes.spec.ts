@@ -82,7 +82,7 @@ test.describe(title, () => {
   test("By page edit mode - delete second page", async ({ page }) => {
     await page.goto(urlByPage);
 
-    const deleteActionButton = page.locator(".svc-page__content-actions").locator(".sd-action-bar__item").locator('button[title="Delete"]');
+    const deleteActionButton = page.locator(".svc-page__content-actions").locator(".sd-action-bar__item").getByRole("button", { name: "Delete" });
 
     await getAddNewQuestionButton(page).click();
     await expect(page.locator("span").filter({ hasText: "question1" }).first()).toBeVisible();

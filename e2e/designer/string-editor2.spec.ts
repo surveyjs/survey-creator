@@ -564,7 +564,7 @@ test.describe(title, () => {
     await getToolboxItemByText(page, "Radio Button Group").click();
     await page.locator(".svc-item-value-controls__add").filter({ visible: true }).nth(1).click();
     await expect(page.locator(".svc-item-value-controls__remove")).toHaveCount(4);
-    await page.locator("button[title=Undo]").click();
+    await page.getByRole("button", { name: "Undo" }).click();
     await expect(page.locator(".svc-item-value-controls__remove")).toHaveCount(3);
   });
 

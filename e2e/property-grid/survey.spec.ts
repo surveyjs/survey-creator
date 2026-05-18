@@ -25,7 +25,7 @@ test.describe(title, () => {
   });
 
   test("Delete second page", async ({ page }) => {
-    const deleteButtons = page.locator("div[data-name=pages]").locator("button[title=Remove]");
+    const deleteButtons = page.locator("div[data-name=pages]").getByRole("button", { name: "Remove" });
     await setJSON(page, json);
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Pages").click();
@@ -62,7 +62,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
     const question = page.locator(".sv-string-editor").getByText("Question 1");
-    const edit = page.locator(".spg-table__cell button[title='Edit']");
+    const edit = page.locator(".spg-table__cell").getByRole("button", { name: "Edit" });
     const showInMultiple = page.locator("input[name='showInMultipleColumns']").locator("..");
     const radioMatrixCell = page.locator("td:nth-of-type(2) .svc-matrix-cell");
     const controlButton = radioMatrixCell.locator(".svc-matrix-cell__question-controls");
@@ -80,7 +80,7 @@ test.describe(title, () => {
   test("Merge undo/redo transcactioins for text", async ({ page }) => {
     const question = page.locator("[data-name=\"q1\"]");
     const titleEditor = page.locator("[data-name='title']").locator("textarea");
-    const undoAction = page.locator("button[title=Undo]");
+    const undoAction = page.getByRole("button", { name: "Undo" });
     const getQuestionTitle = async () => {
       return await page.evaluate(() => {
         return window["creator"].survey.getQuestionByName("q1").title;

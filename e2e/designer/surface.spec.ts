@@ -249,7 +249,7 @@ test.describe(title, () => {
   test("Check sidebar shadow height", async ({ page }) => {
     await page.setViewportSize({ width: 1000, height: 300 });
     await setJSON(page, {});
-    await page.locator('button[title="Survey settings"]').click();
+    await page.getByRole("button", { name: "Survey settings" }).click();
     const offsetHeight = await page.locator(".svc-side-bar__shadow").evaluate((el: HTMLElement) => el.offsetHeight);
     expect(offsetHeight).toBeLessThanOrEqual(480);
   });
@@ -398,8 +398,8 @@ test.describe(title, () => {
 
     await page.setViewportSize({ width: 1400, height: 900 });
     await setJSON(page, { "elements": [{ "type": "text", "name": "q1" }] });
-    await page.locator('button[title="Survey settings"]').click();
-    await page.locator('[data-name="locale"]').click();
+    await page.getByRole("button", { name: "Survey settings" }).click();
+    await page.getByRole("button", { name: "Locale" }).click();
     const popupTop = await page.evaluate(() => ((window as any).creator.rootElement.getRootNode().querySelector('[data-name="locale"] .sv-popup__container') as HTMLElement)?.getBoundingClientRect().top ?? 0);
     expect(popupTop).toBeGreaterThanOrEqual(200);
     await setCreatorMarginTop("");
@@ -538,10 +538,10 @@ test.describe(title, () => {
     await page.evaluate(() => { (window as any).creator.showOneCategoryInPropertyGrid = true; });
     await page.setViewportSize({ width: 1000, height: 800 });
     await page.setViewportSize({ width: 1600, height: 800 });
-    const settingsButton = page.locator('button[title="Survey settings"]');
+    const settingsButton = page.getByRole("button", { name: "Survey settings" });
     await expect(settingsButton).not.toHaveClass(/sd-action--active/);
 
-    await page.locator('.sd-action[title="General"]').click();
+    await page.getByRole("button", { name: "General" }).click();
     await expect(settingsButton).toHaveClass(/sd-action--active/);
   });
 });
