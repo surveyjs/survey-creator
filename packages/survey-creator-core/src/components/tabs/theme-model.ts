@@ -105,7 +105,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 }
 
 export class ThemeModel extends Base implements ITheme {
-  private baseThemeVariables: { [index: string]: string } = {};
+  public baseThemeVariables: { [index: string]: string } = {};
   private static defaultThemeValue: ITheme;
   public static get DefaultTheme() {
     if (!this.defaultThemeValue) {
@@ -189,6 +189,7 @@ export class ThemeModel extends Base implements ITheme {
 
   private setNewHeaderProperty() {
     const header = new HeaderModel();
+    header.baseThemeVariables = { ...this.baseThemeVariables };
     header.owner = this;
     this.setPropertyValue("header", header);
   }
@@ -306,7 +307,7 @@ export class ThemeModel extends Base implements ITheme {
 
   initialize(surveyTheme: ITheme = {}, survey?: SurveyModel, creator?: SurveyCreatorModel) {
     this.getRootElement = () => creator?.rootElement;
-    const vars = Serializer.getProperties("theme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
+    const vars = [...Serializer.getProperties("theme").map(p => p.name), ...HeaderModel.getDefaultVars()].filter(name => name.indexOf("--sjs2-") == 0);
     this.baseThemeVariables = calculateThemeVariables(DefaultLight.cssVariables, vars, this.getRootElement());
 
     this._defaultSessionTheme = ThemeModel.DefaultTheme;
@@ -316,6 +317,7 @@ export class ThemeModel extends Base implements ITheme {
     this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : survey?.backgroundOpacity) || 1) * 100;
     this.loadTheme(surveyTheme, creator && creator.preferredColorPalette);
     this.header["logoPosition"] = survey?.logoPosition;
+    this.header.baseThemeVariables = { ...this.baseThemeVariables };
     this.undoRedoManager = new UndoRedoManager();
   }
 
@@ -521,6 +523,7 @@ export class ThemeModel extends Base implements ITheme {
     const _headerJson = {};
     assign(_headerJson, json.header);
     if (!!json["headerView"]) _headerJson["headerView"] = json["headerView"];
+    this.header.baseThemeVariables = { ...this.baseThemeVariables };
     this.header.fromJSON(_headerJson || {});
 
     if (json.cssVariables) {
@@ -528,7 +531,7 @@ export class ThemeModel extends Base implements ITheme {
       const completeThemeVariablesList = { ...this.baseThemeVariables, ...json.cssVariables };
       this["primaryColor"] = completeThemeVariablesList["--sjs2-color-project-brand-600"];
       super.fromJSON(completeThemeVariablesList, options);
-      this.header.setCssVariables(json.cssVariables, completeThemeVariablesList, this.baseThemeVariables);
+      this.header.setCssVariables(json.cssVariables, completeThemeVariablesList);
 
       this.scale = !!this["--sjs2-base-unit-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-size"]) * 100 / 8) : undefined;
       this.fontSize = !!this["--sjs2-base-unit-font-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-font-size"]) * 100 / 8) : undefined;
@@ -553,11 +556,14 @@ export class ThemeModel extends Base implements ITheme {
           this[property.name] = fontsettingsFromCssVariable(property, json.cssVariables);
         }
       });
-      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-primary"]);
-      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-secondary"]);
-      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-primary"]);
-      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-secondary"]);
-      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-primary"], completeThemeVariablesList["--sjs2-color-fg-basic-secondary"]);
+      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"] });
+      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"] });
+      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"] });
+      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"] });
+      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, {
+        color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"],
+        placeholdercolor: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"],
+      });
     }
   }
 

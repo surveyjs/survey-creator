@@ -5,8 +5,23 @@ import { assign } from "../../utils/utils";
 
 export class HeaderModel extends Base implements IHeader {
   static primaryColorStr = "var(--sjs-primary-backcolor)";
+  static defaultTitleSettings = {
+    color: "--sjs2-color-component-header-default-title",
+    weight: "--sjs2-typography-font-weight-component-header-title",
+    size: "--sjs2-typography-font-size-component-header-title",
+  };
+  static defaultDescriptionSettings = {
+    color: "--sjs2-color-component-header-default-description",
+    size: "--sjs2-typography-font-size-component-header-description",
+    weight: "--sjs2-typography-font-weight-component-header-description",
+  };
+  static getDefaultVars() {
+    const titleVars = Object.keys(this.defaultTitleSettings).map(key => this.defaultTitleSettings[key as keyof typeof this.defaultTitleSettings]);
+    const descriptionVars = Object.keys(this.defaultDescriptionSettings).map(key => this.defaultDescriptionSettings[key as keyof typeof this.defaultDescriptionSettings]);
+    return [...titleVars, ...descriptionVars];
+  }
 
-  private baseThemeVariablesList: { [index: string]: string } = {};
+  public baseThemeVariables: { [index: string]: string } = {};
   height: number;
   mobileHeight: number;
   inheritWidthFrom: "survey" | "container";
@@ -32,13 +47,22 @@ export class HeaderModel extends Base implements IHeader {
     if (!!json["backgroundImageOpacity"])this.backgroundImageOpacity = json["backgroundImageOpacity"] * 100;
   }
 
-  public setCssVariables(cssVariables?: { [index: string]: string }, completeThemeVariablesList?: { [index: string]: string }, baseThemeVariablesList?: { [index: string]: string }) {
-    this.baseThemeVariablesList = { ...baseThemeVariablesList };
+  public setCssVariables(cssVariables?: { [index: string]: string }, completeThemeVariablesList?: { [index: string]: string }) {
     if (cssVariables) {
       this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), cssVariables);
       this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), cssVariables);
-      this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-primary"]);
-      this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables, completeThemeVariablesList["--sjs2-color-fg-basic-secondary"]);
+      this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables,
+        {
+          family: this.baseThemeVariables["--sjs2-typography-font-family-component-header-title"] || this.baseThemeVariables["--sjs2-typography-font-family-text"],
+          weight: this.baseThemeVariables["--sjs2-typography-font-weight-component-header-title"],
+          size: this.baseThemeVariables["--sjs2-typography-font-size-component-header-title"]
+        });
+      this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables,
+        {
+          family: this.baseThemeVariables["--sjs2-typography-font-family-component-header-description"] || this.baseThemeVariables["--sjs2-typography-font-family-text"],
+          weight: this.baseThemeVariables["--sjs2-typography-font-weight-component-header-description"],
+          size: this.baseThemeVariables["--sjs2-typography-font-size-component-header-description"]
+        });
     }
 
     const backgroundColorValue = cssVariables["--sjs2-color-component-header-default-bg"];
@@ -63,7 +87,7 @@ export class HeaderModel extends Base implements IHeader {
       if (typeof result[key] === "object") {
         const property = this.getPropertyByName(key);
         if (property.type === "font") {
-          fontsettingsToCssVariable(result[key], property, cssVariables, this.baseThemeVariablesList);
+          fontsettingsToCssVariable(result[key], property, cssVariables, this.baseThemeVariables);
           delete result[key];
         }
 
