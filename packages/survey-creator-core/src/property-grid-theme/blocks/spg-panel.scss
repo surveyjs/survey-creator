@@ -17,8 +17,7 @@
   color: var(--sjs2-color-fg-basic-primary-muted);
   cursor: pointer;
   background-color: var(--sjs2-color-bg-basic-primary);
-  box-shadow: inset 0px -1px 0px
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary);
   margin: 0;
   transition: color $creator-transition-duration, background-color $creator-transition-duration, opacity $creator-transition-duration;
 }
@@ -53,8 +52,7 @@
   padding-bottom: var(--sjs2-spacing-x500);
   box-sizing: border-box;
   background: var(--sjs2-color-utility-property-grid);
-  box-shadow: inset 0px -1px 0px
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary);
 }
 
 .spg-panel__content {

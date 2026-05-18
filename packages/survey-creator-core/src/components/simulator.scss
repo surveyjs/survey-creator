@@ -12,8 +12,7 @@
   left: 50%;
   transform: scale(1.26) translate(-50%, -50%);
 
-  border: var(--sjs2-border-width-x200) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  border: var(--sjs2-border-width-x200) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-bg-basic-secondary);
 }
 

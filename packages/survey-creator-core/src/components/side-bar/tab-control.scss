@@ -5,8 +5,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  border-inline-start: var(--sjs2-border-width-x100) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  border-inline-start: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-bg-basic-primary);
   box-sizing: border-box;
 }
@@ -53,7 +52,7 @@
 
   & > div {
     height: var(--sjs2-border-width-x100);
-    background: var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+    background: var(--sjs2-color-border-basic-secondary);
     width: 100%;
   }
 }
@@ -102,10 +101,7 @@
 }
 
 .svc-sidebar__header-container.svc-sidebar__header-container--with-subtitle {
-  padding: var(--sjs2-spacing-x075)
-    var(--sjs2-spacing-x200)
-    var(--sjs2-spacing-x075)
-    var(--sjs2-spacing-x200);
+  padding: var(--sjs2-spacing-x075) var(--sjs2-spacing-x200) var(--sjs2-spacing-x075) var(--sjs2-spacing-x200);
 }
 
 .svc-sidebar__header-container .svc-side-bar__container-title {
@@ -133,8 +129,5 @@
   display: inline-block;
 }
 .svc-sidebar__header-object-selector {
-  padding: var(--sjs2-spacing-x050)
-    var(--sjs2-spacing-x150)
-    var(--sjs2-spacing-x100)
-    var(--sjs2-spacing-x150);
+  padding: var(--sjs2-spacing-x050) var(--sjs2-spacing-x150) var(--sjs2-spacing-x100) var(--sjs2-spacing-x150);
 }

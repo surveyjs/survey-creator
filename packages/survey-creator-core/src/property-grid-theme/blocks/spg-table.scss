@@ -3,8 +3,7 @@
 @use "../../typography-mixins.scss" as *;
 
 .spg-table-wrapper {
-  border: var(--sjs2-border-width-x100) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   border-radius: var(--sjs2-radius-x075);
   overflow: hidden;
 }

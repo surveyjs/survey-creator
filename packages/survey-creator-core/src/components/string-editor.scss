@@ -80,8 +80,7 @@
   line-height: 0px;
   transition: opacity $creator-transition-duration;
   border-radius: calc(var(--sjs2-base-unit-radius) * 0.375);
-  box-shadow: 0px 0px 0px var(--sjs2-border-width-x200)
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) var(--sjs2-color-border-basic-secondary);
   opacity: var(--sjs2-opacity-hidden);
 
   &.svc-string-editor__border--hover {
@@ -91,8 +90,7 @@
     right: var(--sjs2-spacing-negative-x050);
     //right: calc(var(--sjs2-base-unit-spacing) * -4.5); // if need pencil icon
     border-radius: calc(var(--sjs2-base-unit-radius) * 0.375);
-    box-shadow: 0px 0px 0px var(--sjs2-border-width-x200)
-      var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+    box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) var(--sjs2-color-border-basic-secondary);
     transition-delay: 0ms;
   }
 

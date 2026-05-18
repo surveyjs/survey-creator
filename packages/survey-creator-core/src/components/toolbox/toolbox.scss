@@ -21,8 +21,7 @@
   height: 0;
   display: flex;
   flex-direction: column;
-  border-inline-end: var(--sjs2-border-width-x100) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  border-inline-end: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-utility-toolbox);
   min-width: calc(var(--sjs2-base-unit-size) * 20);
   box-sizing: content-box;
@@ -161,7 +160,7 @@
     content: "";
     display: block;
     height: var(--sjs2-border-width-x100);
-    background-color: var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+    background-color: var(--sjs2-color-border-basic-secondary);
   }
 }
 

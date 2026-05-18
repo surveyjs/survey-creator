@@ -11,8 +11,7 @@
   .sd-imagepicker__image {
     box-sizing: border-box;
     border-radius: var(--sjs2-radius-x050);
-    border: var(--sjs2-border-width-x100) dashed
-      var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+    border: var(--sjs2-border-width-x100) dashed var(--sjs2-color-border-basic-secondary);
   }
 }
 

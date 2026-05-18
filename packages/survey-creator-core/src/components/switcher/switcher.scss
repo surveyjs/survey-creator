@@ -17,8 +17,7 @@
   padding-block-end: var(--sjs2-spacing-x050);
   padding-inline-start: var(--sjs2-spacing-x050);
   border-radius: var(--sjs2-radius-round);
-  border: var(--sjs2-border-width-x100) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-bg-basic-secondary);
 
   transition-duration: 0.2s;
@@ -27,8 +26,7 @@
 }
 
 .svc-switcher__icon:hover {
-  border: var(--sjs2-border-width-x100) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-bg-basic-primary);
 }
 
@@ -50,8 +48,7 @@
   padding-inline-end: var(--sjs2-spacing-x050);
   padding-block-end: var(--sjs2-spacing-x050);
   padding-inline-start: var(--sjs2-spacing-x200);
-  border: var(--sjs2-border-width-x000) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  border: var(--sjs2-border-width-x000) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-bg-brand-primary);
 }
 

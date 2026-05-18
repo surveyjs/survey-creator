@@ -39,8 +39,7 @@ svc-tab-json-editor-textarea {
 .svc-json-errors__item {
   pointer-events: none;
   display: block;
-  border-top: var(--sjs2-border-width-x100) solid
-    var(--sjs2-color-border-basic-secondary-for-tests-only, var(--sjs2-color-border-basic-secondary));
+  border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-bg-alert-secondary);
 }
 
