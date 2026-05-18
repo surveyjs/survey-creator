@@ -3,6 +3,7 @@ resources:
     - repository: azurepipelines
       type: github
       endpoint: surveyjs
+      name: surveyjs/azure-pipelines
       ref: refs/heads/disable-artifact-download
 
 trigger: none
