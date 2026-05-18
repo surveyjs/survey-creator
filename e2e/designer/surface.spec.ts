@@ -399,7 +399,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await setJSON(page, { "elements": [{ "type": "text", "name": "q1" }] });
     await page.getByRole("button", { name: "Survey settings" }).click();
-    await page.getByRole("button", { name: "Locale" }).click();
+    await page.locator('[data-name="locale"]').click();
     const popupTop = await page.evaluate(() => ((window as any).creator.rootElement.getRootNode().querySelector('[data-name="locale"] .sv-popup__container') as HTMLElement)?.getBoundingClientRect().top ?? 0);
     expect(popupTop).toBeGreaterThanOrEqual(200);
     await setCreatorMarginTop("");
