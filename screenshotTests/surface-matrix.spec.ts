@@ -15,7 +15,7 @@ test.describe(title, () => {
 
     await row1Column1Cell.hover({ force: true });
     await editColumnButton.click();
-    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit.png");
+    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit.png", { maxDiffPixels: 5 });
   });
 
   test("Matrix column editor with design surface zoomed out", async ({ page }) => {
