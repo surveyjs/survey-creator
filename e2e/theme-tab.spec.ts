@@ -31,17 +31,20 @@ test.describe(title, () => {
     await colorQuestionInputSelector.click();
     await expect(colorQuestionInputSelector).toBeFocused();
     await page.keyboard.press("Enter");
+    await page.waitForTimeout(100);
     await expect(colorQuestionInputSelector).not.toBeFocused();
 
     await backgroundOpacityInputSelector.click();
     await expect(backgroundOpacityInputSelector).toBeFocused();
     await page.keyboard.press("Enter");
+    await page.waitForTimeout(100);
     await expect(backgroundOpacityInputSelector).not.toBeFocused();
 
     await getPropertyGridCategory(page, "Background").click();
     await backgroundImageQuestionInputSelector.click();
     await expect(backgroundImageQuestionInputSelector).toBeFocused();
     await page.keyboard.press("Enter");
+    await page.waitForTimeout(100);
     await expect(backgroundImageQuestionInputSelector).not.toBeFocused();
   });
 });
