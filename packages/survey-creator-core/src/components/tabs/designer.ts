@@ -18,14 +18,6 @@ export class TabDesignerViewModel extends Base {
   private pagesControllerValue: PagesController;
 
   unitDictionary: { [index: string]: number } = {
-    "--ctr-surface-base-unit": 8,
-    "--lbr-font-unit": 8,
-    "--lbr-line-height-unit": 8,
-    "--lbr-size-unit": 8,
-    "--lbr-spacing-unit": 8,
-    "--lbr-corner-radius-unit": 8,
-    "--lbr-stroke-unit": 1,
-    "--sjs-base-unit": 8,
     "--sjs2-base-unit-size": 8,
     "--sjs2-base-unit-spacing": 8,
     "--sjs2-base-unit-radius": 8,

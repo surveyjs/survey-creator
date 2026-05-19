@@ -5,7 +5,23 @@ import { assign } from "../../utils/utils";
 
 export class HeaderModel extends Base implements IHeader {
   static primaryColorStr = "var(--sjs-primary-backcolor)";
+  static defaultTitleSettings = {
+    color: "--sjs2-color-component-header-default-title",
+    weight: "--sjs2-typography-font-weight-component-header-title",
+    size: "--sjs2-typography-font-size-component-header-title",
+  };
+  static defaultDescriptionSettings = {
+    color: "--sjs2-color-component-header-default-description",
+    size: "--sjs2-typography-font-size-component-header-description",
+    weight: "--sjs2-typography-font-weight-component-header-description",
+  };
+  static getDefaultVars() {
+    const titleVars = Object.keys(this.defaultTitleSettings).map(key => this.defaultTitleSettings[key as keyof typeof this.defaultTitleSettings]);
+    const descriptionVars = Object.keys(this.defaultDescriptionSettings).map(key => this.defaultDescriptionSettings[key as keyof typeof this.defaultDescriptionSettings]);
+    return [...titleVars, ...descriptionVars];
+  }
 
+  public baseThemeVariables: { [index: string]: string } = {};
   height: number;
   mobileHeight: number;
   inheritWidthFrom: "survey" | "container";
@@ -35,8 +51,20 @@ export class HeaderModel extends Base implements IHeader {
     if (cssVariables) {
       this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), cssVariables);
       this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), cssVariables);
-      this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables);
-      this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables);
+      this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables,
+        {
+          color: this.baseThemeVariables["--sjs2-color-component-header-default-title"],
+          family: this.baseThemeVariables["--sjs2-typography-font-family-component-header-title"] || this.baseThemeVariables["--sjs2-typography-font-family-text"],
+          weight: this.baseThemeVariables["--sjs2-typography-font-weight-component-header-title"],
+          size: this.baseThemeVariables["--sjs2-typography-font-size-component-header-title"]
+        });
+      this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables,
+        {
+          color: this.baseThemeVariables["--sjs2-color-component-header-default-description"],
+          family: this.baseThemeVariables["--sjs2-typography-font-family-component-header-description"] || this.baseThemeVariables["--sjs2-typography-font-family-text"],
+          weight: this.baseThemeVariables["--sjs2-typography-font-weight-component-header-description"],
+          size: this.baseThemeVariables["--sjs2-typography-font-size-component-header-description"]
+        });
     }
 
     const backgroundColorValue = cssVariables["--sjs2-color-component-header-default-bg"];
@@ -61,7 +89,7 @@ export class HeaderModel extends Base implements IHeader {
       if (typeof result[key] === "object") {
         const property = this.getPropertyByName(key);
         if (property.type === "font") {
-          fontsettingsToCssVariable(result[key], property, cssVariables);
+          fontsettingsToCssVariable(result[key], property, cssVariables, this.baseThemeVariables);
           delete result[key];
         }
 
@@ -90,13 +118,10 @@ export class HeaderModel extends Base implements IHeader {
       cssVariables["--sjs2-color-component-header-default-bg"] = undefined;
     } else if (this["backgroundColorSwitch"] === "custom") {
       cssVariables["--sjs2-color-component-header-default-bg"] = this["backgroundColor"] ?? "transparent";
-    } else {
-      cssVariables["--sjs2-color-component-header-default-bg"] = HeaderModel.primaryColorStr;
     }
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (backgroundColor === HeaderModel.primaryColorStr) return "accentColor";
     if (!backgroundColor || backgroundColor === "transparent") return "none";
     return "custom";
   }
@@ -120,19 +145,6 @@ export class HeaderModel extends Base implements IHeader {
   public set surveyDescription(value: any) {
     this.setPropertyValue("headerDescription", value);
   }
-}
-
-function getDefaultTitleSetting() {
-  const result = { family: settings.themeEditor.defaultFontFamily, weight: "700", size: 32 };
-  return result;
-}
-
-function getDefaultDescriptionSetting(isAdvanced?: boolean) {
-  const result = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16 };
-  if (isAdvanced) {
-    result["size"] = 20;
-  }
-  return result;
 }
 
 function getHorizontalAlignment(questionName: string): IJsonPropertyInfo {
@@ -239,7 +251,6 @@ Serializer.addClass(
       default: "none",
       choices: [
         { value: "none" },
-        { value: "accentColor" },
         { value: "custom" },
       ],
     },
@@ -330,7 +341,7 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerTitle",
-    default: getDefaultTitleSetting(),
+    default: {},
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;
@@ -340,7 +351,7 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerDescription",
-    default: getDefaultDescriptionSetting(true),
+    default: {},
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;

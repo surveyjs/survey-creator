@@ -3,7 +3,7 @@
 .sl-table {
   width: 50%;
   margin: 0 25%;
-  margin-top: calcSize(-2);
+  margin-top: var(--sjs2-spacing-negative-x200);
 }
 
 .sl-table__row {
@@ -11,14 +11,14 @@
 }
 
 .sl-table__cell.st-table__cell--actions:first-of-type .sd-action-bar {
-  margin-top: var(--ctr-collapse-button-margin-top, var(--sjs-spacing-x05n));
-  padding-right: var(--ctr-collapse-button-margin-right, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-negative-x050);
+  padding-right: var(--sjs2-spacing-x200);
 }
 
 .sl-table .sl-table__detail-button.sl-table__detail-button {
   box-sizing: border-box;
-  border-radius: var(--ctr-collapse-button-corner-radius, var(--sjs-corner-radius-x1));
-  padding: var(--ctr-collapse-button-padding, var(--sjs-spacing-x150));
+  border-radius: var(--sjs2-radius-x100);
+  padding: var(--sjs2-spacing-x150);
   transition: background-color $creator-transition-duration;
 
   &:focus:enabled {
@@ -29,10 +29,10 @@
   }
   &:hover:enabled,
   &.sv-focused--by-key.sv-focused--by-key {
-    background-color: var(--ctr-collapse-button-background-color-hovered, var(--sjs-primary-background-10, #19b3941a));
+    background-color: var(--sjs2-color-bg-brand-secondary);
 
     use {
-      fill: var(--ctr-collapse-button-icon-color-hovered, var(--sjs-layer-3-foreground-75, #000000bf));
+      fill: var(--sjs2-color-fg-basic-primary-muted);
     }
   }
 }
@@ -43,25 +43,25 @@
 
 .sl-table__remove-button .sd-action {
   use {
-    fill: var(--ctr-expression-item-icon-color, var(--sjs-semantic-red-background-500, #e50a3eff));
+    fill: var(--sjs2-color-bg-alert-primary);
   }
 }
 
 .sl-table__cell .sd-action__icon {
-  opacity: 0;
+  opacity: var(--sjs2-opacity-hidden);
   transition: opacity $creator-transition-duration;
 }
 
 .sl-table__row:hover .sl-table__cell .sd-action__icon,
 .sl-table__cell .sd-action.sv-focused--by-key .sd-action__icon {
-  opacity: 1;
+  opacity: var(--sjs2-opacity-visible);
 }
 
 .sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {
-  color: var(--lbr-page-header-title-color-not-completed-rule, var(--sjs-secondary-background-500, #19b394ff));
+  color: var(--sjs2-color-bg-brand-primary);
 }
 .sl-table .svc-action-button {
-  padding: var(--ctr-survey-page-header-padding-vertical-with-button, var(--sjs-spacing-x05)) 0px;
+  padding: var(--sjs2-spacing-x050) 0px;
   margin-left: 0;
 }
 
@@ -76,7 +76,7 @@
   border: none;
   box-shadow: none;
   border-radius: 0;
-  color: var(--lbr-page-header-title-color, var(--sjs-layer-3-foreground-100, #000000e6));
+  color: var(--sjs2-color-fg-basic-primary);
   box-sizing: content-box;
   max-height: calc(3 * var(--sjs2-typography-line-height-medium));
   overflow: hidden;
@@ -92,8 +92,8 @@
 }
 .sl-table__row {
   .sl-table__cell {
-    --animation-padding-top: #{calcSize(5)};
-    padding-top: calcSize(5);
+    --animation-padding-top: #{var(--sjs2-spacing-x500)};
+    padding-top: var(--sjs2-spacing-x500);
   }
 }
 
@@ -140,7 +140,7 @@
   td,
   th {
     &:first-of-type {
-      padding-left: calcSize(4);
+      padding-left: var(--sjs2-spacing-x400);
 
       .sv-action-bar {
         justify-content: flex-end;
@@ -151,7 +151,7 @@
   td,
   th {
     &:last-of-type {
-      padding-right: calcSize(4);
+      padding-right: var(--sjs2-spacing-x400);
     }
   }
 }
@@ -169,13 +169,10 @@
 
   button.sl-panel__done-button {
     width: auto;
-    margin: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2)) 0 0 0;
-    background-color: var(--ctr-expression-item-background-color-button, var(--sjs-primary-background-10, #19b3941a));
-    border-radius: var(--ctr-expression-item-corner-radius, var(--sjs-corner-radius-x1));
-    padding: var(--ctr-expression-item-padding-top, var(--sjs-spacing-x1))
-      var(--ctr-expression-item-padding-right-button, var(--sjs-spacing-x4))
-      var(--ctr-expression-item-padding-bottom, var(--sjs-spacing-x1))
-      var(--ctr-expression-item-padding-left-button, var(--sjs-spacing-x4));
+    margin: var(--sjs2-spacing-x200) 0 0 0;
+    background-color: var(--sjs2-color-bg-brand-secondary);
+    border-radius: var(--sjs2-radius-x100);
+    padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x400);
 
     display: flex;
     align-items: center;
@@ -186,7 +183,7 @@
 
     .sd-action__title {
       @include sjs2--typography--default-strong;
-      color: var(--ctr-expression-item-text-color-button, var(--sjs-primary-background-500, #19b394ff));
+      color: var(--sjs2-color-bg-brand-primary);
       vertical-align: baseline;
       text-align: center;
 
@@ -195,13 +192,10 @@
   }
 
   button:hover:enabled {
-    background-color: var(
-      --ctr-expression-item-background-color-button-hovered,
-      var(--sjs-primary-background-500, #19b394ff)
-    );
+    background-color: var(--sjs2-color-bg-brand-primary);
 
     .sd-action__title {
-      color: var(--ctr-expression-item-text-color-button-hovered, var(--sjs-primary-foreground-100, #ffffffff));
+      color: var(--sjs2-color-fg-brand-on-primary);
     }
   }
 
@@ -222,7 +216,7 @@
 .sl-question {
   display: flex;
   align-items: center;
-  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
 }
 
 .sl-row {
@@ -236,7 +230,7 @@
 }
 
 .svc-creator-popup .sd-selectlist__item-body {
-  padding-inline-end: var(--sjs-spacing-x550);
+  padding-inline-end: var(--sjs2-spacing-x550);
 }
 
 .sl-row--multiple {
@@ -246,7 +240,7 @@
 }
 
 .sl-question__header--left {
-  margin-right: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
+  margin-right: var(--sjs2-spacing-x100);
 }
 
 .sl-row {
@@ -259,7 +253,7 @@
 
 .sl-question__title {
   @include sjs2--typography--default-strong;
-  color: var(--ctr-expression-item-text-color-function, var(--sjs-layer-3-foreground-100, #000000e6));
+  color: var(--sjs2-color-fg-basic-primary);
   margin: 0;
 
   span + span {
@@ -268,21 +262,21 @@
 }
 
 .sl-row--multiple .sl-question {
-  padding-right: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
+  padding-right: var(--sjs2-spacing-x100);
 }
 .svc-logic-question-text-editor {
-  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
 }
 .svc-logic-question-value {
-  --sd-base-padding: calc(5 * #{$base-unit});
-  --sd-base-vertical-padding: calc(4 * #{$base-unit});
-  --sd-page-vertical-padding: calc(3 * #{$base-unit});
-  padding-right: calcSize(5);
-  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+  --sd-base-padding: var(--sjs2-spacing-x500);
+  --sd-base-vertical-padding: var(--sjs2-spacing-x400);
+  --sd-page-vertical-padding: var(--sjs2-spacing-x300);
+  padding-right: var(--sjs2-spacing-x500);
+  margin-top: var(--sjs2-spacing-x200);
 }
 
 .svc-logic_trigger-editor {
-  margin-top: var(--ctr-expression-rows-gap, var(--sjs-spacing-x2));
+  margin-top: var(--sjs2-spacing-x200);
 }
 
 .svc-logic_trigger-editor .svc-logic-question-value {
@@ -296,7 +290,7 @@
 }
 
 .sd-comment.sl-comment {
-  height: calcSize(17);
+  height: calc(var(--sjs2-base-unit-line-height) * 17);
 }
 .sl-body {
   @include disableLibraryAnimations;

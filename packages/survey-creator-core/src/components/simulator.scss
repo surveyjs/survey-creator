@@ -12,22 +12,20 @@
   left: 50%;
   transform: scale(1.26) translate(-50%, -50%);
 
-  border: var(--ctr-preview-device-frame-border-width, var(--sjs-stroke-x2)) solid
-    var(--ctr-preview-device-frame-border-color, var(--sjs-border-25, #d4d4d4ff));
-  background: var(--ctr-preview-device-frame-background-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
+  border: var(--sjs2-border-width-x200) solid var(--sjs2-color-border-basic-secondary);
+  background: var(--sjs2-color-bg-basic-secondary);
 }
 
 .svd-simulator-wrapper {
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  border-radius: var(--ctr-preview-device-corner-radius, var(--sjs-corner-radius-x4));
+  border-radius: var(--sjs2-radius-x400);
   box-shadow:
     0px 2px 6px 0px rgba(0, 0, 0, 0.1),
-    0px 8px 16px 0px var(--ctr-preview-device-shadow-2-color, var(--sjs-special-glow, #004c441a));
-  border: var(--ctr-preview-device-border-width, var(--sjs-stroke-x4)) solid
-    var(--ctr-preview-device-border-color, var(--sjs-layer-3-background-500, #f4f4f4ff));
-  background: var(--ctr-preview-device-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+    0px 8px 16px 0px var(--sjs2-color-utility-shadow-floating-default);
+  border: var(--sjs2-border-width-x400) solid var(--sjs2-color-bg-basic-secondary);
+  background: var(--sjs2-color-bg-basic-primary);
   box-sizing: content-box;
 }
 

@@ -4,18 +4,18 @@ svc-page-navigator,
 .svc-page-navigator {
   display: flex;
   flex-direction: column;
-  gap: var(--ctr-page-navigator-gap, var(--sjs-spacing-x2));
+  gap: var(--sjs2-spacing-x200);
 }
 
 .svc-page-navigator-item--disabled {
   .svc-page-navigator-item__banner {
-    color: var(--ctr-page-navigator-button-icon-color-disabled, var(--sjs-layer-3-foreground-100, #000000e6));
-    opacity: var(--ctr-page-navigator-button-icon-opacity-disabled, 0.25);
+    color: var(--sjs2-color-fg-basic-primary);
+    opacity: var(--sjs2-opacity-disabled);
   }
 }
 
 .svc-page-navigator__popup {
-  min-width: calcSize(12.5);
+  min-width: calc(var(--sjs2-base-unit-size) * 12.5);
 }
 
 .svc-tab-designer__page-navigator {

@@ -232,18 +232,6 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   expect(header["backgroundColorSwitch"]).toEqual("none");
   expect(header["backgroundColor"]).toBeUndefined();
 
-  header["backgroundColorSwitch"] = "accentColor";
-  expect(header["backgroundColor"]).toBeUndefined();
-
-  creator.activeTab = "designer";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe(HeaderModel.primaryColorStr);
-
-  creator.activeTab = "theme";
-  header = themeModel.header as HeaderModel;
-
-  expect(header["backgroundColorSwitch"]).toEqual("accentColor");
-  expect(header["backgroundColor"]).toBeUndefined();
-
   header["backgroundColorSwitch"] = "custom";
   expect(header["backgroundColor"]).toBeUndefined();
   header["backgroundColor"] = "#ff0000";
@@ -270,9 +258,6 @@ test("headerViewContainer: background color", (): any => {
   expect(header["backgroundColorSwitch"]).toBe("none");
   expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();
 
-  header["backgroundColorSwitch"] = "accentColor";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe(HeaderModel.primaryColorStr);
-
   header["backgroundColorSwitch"] = "custom";
   expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe("transparent");
 
@@ -295,10 +280,6 @@ test("headerViewContainer: background color reset #5940", (): any => {
   expect(header["backgroundColorSwitch"]).toBe("none");
   expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-color-component-header-default-bg"]).toBeUndefined();
-
-  header["backgroundColorSwitch"] = "accentColor";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe(HeaderModel.primaryColorStr);
-  expect(themeModel.cssVariables["--sjs2-color-component-header-default-bg"]).toBe(HeaderModel.primaryColorStr);
 
   header["backgroundColorSwitch"] = "none";
   expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();

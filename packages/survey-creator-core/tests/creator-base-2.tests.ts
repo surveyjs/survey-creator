@@ -241,13 +241,12 @@ test("ZoomIn/ZoomOut designer surface", (): any => {
   expect(creator.survey.widthScale).toBe(150);
   expect(designerTabModel["surfaceScale"]).toBe(150);
 
-  expect(designerTabModel.surfaceCssVariables["--ctr-surface-base-unit"]).toBe("12px");
-  expect(designerTabModel.surfaceCssVariables["--lbr-corner-radius-unit"]).toBe("12px");
-  expect(designerTabModel.surfaceCssVariables["--lbr-font-unit"]).toBe("12px");
-  expect(designerTabModel.surfaceCssVariables["--lbr-line-height-unit"]).toBe("12px");
-  expect(designerTabModel.surfaceCssVariables["--lbr-size-unit"]).toBe("12px");
-  expect(designerTabModel.surfaceCssVariables["--lbr-spacing-unit"]).toBe("12px");
-  expect(designerTabModel.surfaceCssVariables["--lbr-stroke-unit"]).toBe("1.5px");
+  expect(designerTabModel.surfaceCssVariables["--sjs2-base-unit-size"]).toBe("12px");
+  expect(designerTabModel.surfaceCssVariables["--sjs2-base-unit-spacing"]).toBe("12px");
+  expect(designerTabModel.surfaceCssVariables["--sjs2-base-unit-radius"]).toBe("12px");
+  expect(designerTabModel.surfaceCssVariables["--sjs2-base-unit-border-width"]).toBe("1.5px");
+  expect(designerTabModel.surfaceCssVariables["--sjs2-base-unit-font-size"]).toBe("12px");
+  expect(designerTabModel.surfaceCssVariables["--sjs2-base-unit-line-height"]).toBe("12px");
 });
 
 test("ZoomIn/ZoomOut actions limits", (): any => {

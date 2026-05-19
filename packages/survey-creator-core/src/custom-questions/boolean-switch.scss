@@ -8,7 +8,7 @@
 .spg-boolean-switch {
   display: flex;
   flex-direction: row;
-  gap: var(--sjs-spacing-x1);
+  gap: var(--sjs2-spacing-x100);
   align-items: flex-start;
   justify-content: flex-start;
   flex-shrink: 0;
@@ -23,7 +23,7 @@
   padding: var(--sjs2-spacing-x075, 6px);
   display: flex;
   flex-direction: row;
-  gap: var(--sjs-spacing-x05);
+  gap: var(--sjs2-spacing-x050);
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;

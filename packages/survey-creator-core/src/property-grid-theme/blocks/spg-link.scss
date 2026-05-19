@@ -8,7 +8,7 @@
   .spg-link {
     @include sjs2--typography--default-strong;
     display: initial;
-    color: var(--ctr-survey-action-button-text-color-positive, var(--sjs-primary-background-500, #19b394ff));
+    color: var(--sjs2-color-bg-brand-primary);
     text-decoration-line: underline;
   }
 }
