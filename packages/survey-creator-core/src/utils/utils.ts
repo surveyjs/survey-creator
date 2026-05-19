@@ -36,8 +36,10 @@ export function calculateThemeVariables(
     for (const key of [...Object.keys(themeCopyCssVariables), ...additionalCssVariables]) {
       const sourceValue = themeCopyCssVariables[key];
       let value = computed.getPropertyValue(key);
-      if (typeof value === "string" && value.trim() === "" && sourceValue !== undefined) {
-        newCssVariables[key] = sourceValue;
+      if (typeof value === "string" && value.trim() === "") {
+        if (sourceValue !== undefined) {
+          newCssVariables[key] = sourceValue;
+        }
         continue;
       }
       if (typeof value === "string" && value.indexOf("calc(") === 0) {
