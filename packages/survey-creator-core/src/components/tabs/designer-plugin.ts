@@ -8,12 +8,12 @@ import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { TabDesignerViewModel } from "./designer";
 import { DesignerStateManager } from "./designer-state-manager";
 import { TabControlModel } from "../side-bar/tab-control-model";
-import { editorLocalization, getLocString } from "../../editorLocalization";
+import { getLocString } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
 import { creatorPresetsModelPropertyGridDefinition } from "../../ui-presets-creator/creator-presets-model-definition";
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
 import { CreatorPresetsModel } from "../../ui-presets-creator/creator-presets-model";
-import { ICreatorTheme, PredefinedCreatorThemes } from "../../creator-theme/creator-themes";
+import { ICreatorTheme, getPredefinedCreatorThemeChoices } from "../../creator-theme/creator-themes";
 import { getPredefinedBackgoundColorsChoices, getPredefinedColorsItemValues } from "./themes";
 import { UIPreset, PredefinedCreatorPresets } from "../../ui-presets-creator/presets";
 import { ComponentContainerModel } from "../component-container/component-container";
@@ -277,7 +277,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
     const themeChooser = survey.getQuestionByName("themeName") as QuestionDropdownModel;
     if (!!themeChooser) {
-      themeChooser.choices = PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) }));
+      themeChooser.choices = getPredefinedCreatorThemeChoices();
     }
     survey.runExpressions();
     this.updatePredefinedColorChoices();

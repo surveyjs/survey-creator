@@ -3,7 +3,7 @@ import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
 import { calculateThemeVariables } from "../utils/utils";
-import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
+import { CreatorThemes, ICreatorTheme, getPredefinedCreatorThemeChoices } from "./creator-themes";
 import { getThemeFullName } from "../components/tabs/theme-model";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 import { DefaultLight } from "survey-core/themes";
@@ -323,7 +323,7 @@ Serializer.addClass(
     {
       type: "dropdown",
       name: "themeName",
-      choices: PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
+      choices: getPredefinedCreatorThemeChoices(),
     },
     {
       type: "buttongroup",

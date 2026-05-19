@@ -2,6 +2,7 @@ import { DefaultLight } from "survey-core/themes";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../utils/configs";
 import { ITheme } from "survey-core";
 import { getThemeFullName } from "../components/tabs/theme-model";
+import { editorLocalization, getLocString } from "../editorLocalization";
 
 export interface ICreatorTheme extends ITheme {
   isLight?: boolean;
@@ -18,6 +19,15 @@ export const defaultCreatorThemesOrder = [
   "3d",
   "monochrome"
 ];
+
+export function getLocalizedCreatorThemeName(theme: string): string {
+  const key = (editorLocalization.hasString("creatortheme.names." + theme) ? "creatortheme" : "theme") + ".names." + theme;
+  return getLocString(key);
+}
+
+export function getPredefinedCreatorThemeChoices(): Array<{ value: string, text: string }> {
+  return PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocalizedCreatorThemeName(theme) }));
+}
 
 /**
  * Registers Survey Creator themes to make them available for customization in the Survey Creator UI.
