@@ -2,12 +2,7 @@
 @use "./notifier.scss";
 @use "./popup.scss";
 @use "./surface-placeholder.scss";
-@use "../lbr-font-sizes.scss";
-@use "../lbr-sizes.scss";
-@use "../ctr-font-sizes.scss";
-@use "../ctr-sizes.scss";
 @use "../ctr-colors.scss";
-@use "../ctr-base-units.scss";
 
 survey-creator,
 .svc-creator {
@@ -24,20 +19,20 @@ survey-creator,
   :not(.svd-simulator-main *) {
     @-moz-document url-prefix() {
       scrollbar-width: thin;
-      scrollbar-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026)) transparent;
+      scrollbar-color: var(--sjs2-color-utility-scrollbar) transparent;
     }
 
     &::-webkit-scrollbar {
-      width: var(--ctr-scrollbar-width, var(--sjs-size-x150));
-      height: var(--ctr-scrollbar-width, var(--sjs-size-x150));
+      width: var(--sjs2-size-x150);
+      height: var(--sjs2-size-x150);
       background-color: transparent;
     }
 
     &::-webkit-scrollbar-thumb {
-      border: var(--ctr-scrollbar-padding-vertical, var(--sjs-spacing-x05)) solid rgba(0, 0, 0, 0);
+      border: var(--sjs2-border-width-x400) solid rgba(0, 0, 0, 0);
       background-clip: padding-box;
-      border-radius: 1024px;
-      background-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026));
+      border-radius: var(--sjs2-radius-round);
+      background-color: var(--sjs2-color-utility-scrollbar);
     }
 
     &::-webkit-scrollbar-track {
@@ -45,13 +40,13 @@ survey-creator,
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      border: var(--ctr-scrollbar-padding-vertical-hovered, var(--sjs-spacing-x025)) solid rgba(0, 0, 0, 0);
-      background-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026));
+      border: var(--sjs2-border-width-x200) solid rgba(0, 0, 0, 0);
+      background-color: var(--sjs2-color-utility-scrollbar);
     }
 
     .sv-popup .sv-popup__scrolling-content {
       ::-webkit-scrollbar-thumb:hover {
-        background-color: var(--ctr-scrollbar-background-color, var(--sjs-border-25-overlay, #00000026));
+        background-color: var(--sjs2-color-utility-scrollbar);
       }
     }
   }
@@ -61,22 +56,9 @@ survey-creator,
 .svc-creator {
   .sv-drag-drop-choices-shortcut {
     .sv-drag-drop-choices-shortcut__content {
-      background: var(
-        --ctr-survey-radio-button-group-item-background-color-floating,
-        var(--sjs-layer-1-background-500, #ffffffff)
-      );
-      border-radius: var(--ctr-survey-radio-button-group-item-corner-radius-floating, var(--lbr-corner-radius-x1));
-      box-shadow:
-        var(--ctr-survey-radio-button-group-item-shadow-floating-2-offset-x, 0px)
-          var(--ctr-survey-radio-button-group-item-shadow-floating-2-offset-y, 2px)
-          var(--ctr-survey-radio-button-group-item-shadow-floating-2-blur, 8px)
-          var(--ctr-survey-radio-button-group-item-shadow-floating-2-spread, 0px)
-          var(--ctr-survey-radio-button-group-item-shadow-floating-2-color, var(--sjs-special-glow, #004c441a)),
-        var(--ctr-survey-radio-button-group-item-shadow-floating-1-offset-x, 0px)
-          var(--ctr-survey-radio-button-group-item-shadow-floating-1-offset-y, 16px)
-          var(--ctr-survey-radio-button-group-item-shadow-floating-1-blur, 32px)
-          var(--ctr-survey-radio-button-group-item-shadow-floating-1-spread, 0px)
-          var(--ctr-survey-radio-button-group-item-shadow-floating-1-color, var(--sjs-special-glow, #004c441a));
+      background: var(--sjs2-color-bg-basic-primary);
+      border-radius: var(--sjs2-radius-x100);
+      box-shadow: var(--sjs2-border-effect-floating-default);
 
       .sd-item__decorator {
       }
@@ -116,7 +98,7 @@ survey-creator,
   height: 100%;
   overflow: hidden;
   position: relative;
-  min-height: $tab-min-height;
+  min-height: auto;
 }
 
 .svc-creator__toolbox--right.svc-creator-tab {
@@ -152,48 +134,34 @@ survey-creator,
 
 .svc-creator__banner {
   width: 100%;
-  line-height: calcSize(4);
-  background-color: var(--ctr-page-banner-background-color, var(--sjs-secondary-background-500, #19b394ff));
+  line-height: var(--sjs2-line-height-x400);
+  background-color: var(--sjs2-color-bg-brand-primary);
   text-align: center;
 }
 
-// .svc-item__banner {
-//   position: relative;
-//   max-width: 0;
-//   overflow: hidden;
-//   height: 100%;
-//   background-color: $background;
-//   /* Shadow / Medium */
-//   border-radius: calcSize(12.5);
-//   box-shadow: 0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a));
-//   transition:
-//     max-width 0.1s ease-in-out,
-//     padding 0.2s ease-in-out;
-// }
-
 .svc-creator__non-commercial-text {
-  @include ctrDefaultBoldFont;
-  color: var(--ctr-page-banner-text-color, var(--sjs-secondary-foreground-100, #ffffffff));
+  @include sjs2--typography--default-strong;
+  color: var(--sjs2-color-fg-brand-on-primary);
   vertical-align: middle;
-  padding: calcSize(1.5) calcSize(16);
+  padding: var(--sjs2-spacing-x150) calc(var(--sjs2-base-unit-spacing) * 16);
   display: block;
 
   a {
-    color: var(--ctr-page-banner-text-color, var(--sjs-secondary-foreground-100, #ffffffff));
+    color: var(--sjs2-color-fg-brand-on-primary);
   }
 }
 
 .svc-creator--mobile {
   .svc-creator__non-commercial-text {
-    padding: calcSize(1.5) calcSize(5);
+    padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x500);
   }
 }
 
 .sv-drag-drop-ghost {
-  top: calcSize(0.75);
+  top: var(--sjs2-spacing-x075);
   width: 100%;
-  height: calcSize(0.5);
-  background: var(--sjs-secondary-background-500, #19b394ff);
+  height: var(--sjs2-size-x050);
+  background: var(--sjs2-color-bg-brand-primary);
   position: absolute;
 }
 
@@ -204,7 +172,7 @@ survey-creator,
 
 .sv-drag-drop-ghost--item-value-bottom {
   top: initial;
-  bottom: calcSize(-0.5);
+  bottom: var(--sjs2-spacing-negative-x050);
 }
 
 .svc-creator--disable-animations {

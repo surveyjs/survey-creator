@@ -116,13 +116,14 @@ export function updateFontSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
-export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }) {
+export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultValues?: any) {
   Object.keys(value).forEach(key => {
     const propertyNameDashed = property.name.replace(/([a-z])([A-Z])/g, key === "color" ? "$1-default-$2" : "$1-$2").toLowerCase();
     const cssVarName = key === "color"
       ? `--sjs2-color-component-${propertyNameDashed}`
       : `--sjs2-typography-font-${key}-component-${propertyNameDashed}`;
-    if (!property.defaultValue || value[key] !== property.defaultValue[key]) {
+    const defaultValue = defaultValues?.[key] ?? property.defaultValue?.[key];
+    if ((!defaultValue || value[key] !== defaultValue) && value[key] !== undefined) {
       themeCssVariables[cssVarName] = value[key] + (key === "size" ? "px" : "");
     } else {
       themeCssVariables[cssVarName] = undefined;
@@ -130,7 +131,15 @@ export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectP
   });
 }
 
-export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultColorVariableName?: string, defaultPlaceholderColorVariableName?: string): any {
+export interface FontSettingsDefaults {
+  family?: string;
+  weight?: string;
+  size?: string;
+  color?: string;
+  placeholdercolor?: string;
+}
+
+export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaults?: FontSettingsDefaults): any {
   if (!property) return;
 
   const propertyNameDashed = property.name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
@@ -145,22 +154,18 @@ export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeC
   };
 
   if (!property.defaultValue) property.defaultValue = {};
-  assign(property.defaultValue, {
-    color: themeCssVariables[defaultColorVariableName],
-    placeholdercolor: !!defaultPlaceholderColorVariableName ? themeCssVariables[defaultPlaceholderColorVariableName] : undefined,
-  });
-  if (!property.defaultValue["size"]) {
+  if (defaults) {
+    assign(property.defaultValue, defaults);
+  }
+  if (typeof property.defaultValue["size"] === "string") {
+    property.defaultValue["size"] = parseFloat(property.defaultValue["size"]);
+  }
+  if (property.defaultValue["size"] === undefined || Number.isNaN(property.defaultValue["size"])) {
     const baseFontSize = themeCssVariables[varNames.size] ?? themeCssVariables["--sjs2-base-unit-font-size"] ?? themeCssVariables["--sjs-font-size"];
     property.defaultValue["size"] = baseFontSize !== undefined ? parseFloat(baseFontSize) : undefined;
   }
 
-  const colorValue = themeCssVariables[varNames.color] ?? property.defaultValue.color;
-  const placeholderColorValue = themeCssVariables[varNames.placeholdercolor] ?? property.defaultValue.placeholdercolor;
   const result = { ...property.defaultValue };
-  assign(result, {
-    color: colorValue,
-    placeholdercolor: placeholderColorValue,
-  });
 
   (Object.keys(varNames) as Array<keyof typeof varNames>).forEach((key) => {
     const cssVarName = varNames[key];

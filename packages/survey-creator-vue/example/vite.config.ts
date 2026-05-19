@@ -16,11 +16,10 @@ export default defineConfig(({ command }) => {
     },
     build: {
       commonjsOptions: {
-        include: [/survey-creator-core\/build\/themes\/test/,/survey-core\/build\/themes\/test/, /node_modules/],
+        include: [/node_modules/],
       },
     },
     optimizeDeps: {
-      include: ["survey-creator-core/themes/test", "survey-core/themes/test"],
     },
 }
 })

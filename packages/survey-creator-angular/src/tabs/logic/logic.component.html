@@ -1,6 +1,6 @@
 <ng-template #template>
-  <div class="svc-creator-tab__content">
-    <div class="svc-plugin-tab__content svc-logic-tab__content" [class.svc-logic-tab--empty]="!model.hasItems">
+  <div class="svc-creator-tab__content svc-logic-tab">
+    <div class="svc-plugin-tab__content svc-logic-tab svc-logic-tab__content" [class.svc-logic-tab--empty]="!model.hasItems">
       <ng-container *ngIf="model.hasItems">
         <survey-content [model]="model.itemsSurvey"></survey-content>
         <sv-action-bar *ngIf="!model.readOnly" [model]="model.contentActionsContainer"></sv-action-bar>

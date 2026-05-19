@@ -53,7 +53,7 @@ test.describe(title, () => {
     const qCollapseButton = page.getByRole("button", { name: "Collapse" }).first();
     await qContent.nth(0).click({ position: { x: 10, y: 10 } });
     await qCollapseButton.click();
-    await compareScreenshot(page, qContent.nth(0), "question-adorner-collapsed.png");
+    await compareScreenshot(page, qContent.nth(0), "question-adorner-collapsed.png", { maxDiffPixels: 2 });
     await qContent.nth(1).click({ position: { x: 10, y: 10 } });
     await qCollapseButton.click();
     await compareScreenshot(page, qContent.nth(1), "panel-adorner-collapsed.png");

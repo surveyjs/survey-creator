@@ -62,8 +62,8 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
   public decrease(): void {
     this.changeValue(false);
   }
-  private increaseTimer: NodeJS.Timer;
-  private decreaseTimer: NodeJS.Timer;
+  private increaseTimer: any;
+  private decreaseTimer: any;
 
   private clearTimers() {
     clearTimeout(this.decreaseTimer);
@@ -167,6 +167,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     res.push(new Action({
       iconName: new ComputedUpdater(() => this.cssClasses.decreaseButtonIcon) as unknown as string,
       component,
+      action: () => { },
       enabled: new ComputedUpdater(() => !this.isInputReadOnly),
       data: {
         question,
@@ -178,6 +179,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     res.push(new Action({
       iconName: new ComputedUpdater(() => this.cssClasses.increaseButtonIcon) as unknown as string,
       component,
+      action: () => { },
       enabled: new ComputedUpdater(() => !this.isInputReadOnly),
       data: {
         question,

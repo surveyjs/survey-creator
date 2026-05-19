@@ -1,26 +1,9 @@
-@forward "./lbr-variables.scss";
-@forward "./ctr-variables.scss";
-
-$base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
+@forward "./typography-mixins.scss";
 
 $sd-panel-normal-min-width: 496px;
 $sd-panel-medium-min-width: 176px;
 
-@function calcSize($multiplier) {
-  @if $multiplier ==1 {
-    $result: #{$base-unit};
-    @return $result;
-  }
-
-  @else {
-    $result: calc(#{$multiplier} * (#{$base-unit}));
-    @return $result;
-  }
-}
-
 // creator variables
-
-$tab-min-height: var(--tab-min-height, auto);
 
 @mixin textEllipsis {
   overflow: hidden;

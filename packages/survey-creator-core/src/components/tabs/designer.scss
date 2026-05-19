@@ -1,5 +1,4 @@
 @use "../../variables" as *;
-@use "../../lbr-variables.scss" as lbrVariables;
 
 svc-tab-designer {
   width: 100%;
@@ -25,7 +24,7 @@ svc-tab-designer {
 
 .svc-tab-designer--with-placeholder .svc-designer-header {
   width: 100%;
-  min-width: var(--sjs-size-x90);
+  min-width: calc(var(--sjs2-base-unit-size) * 90);
 }
 
 .svc-content-wrapper {
@@ -50,21 +49,24 @@ svc-tab-designer {
 }
 
 .svc-surface-header {
-  .sd-title {
-    .sv-string-editor {
-      @include lbrVariables.lbrLargeBoldFont;
-      color: var(--sjs2-color-component-header-default-title, #1C1B20);
-
-      &[aria-placeholder]:empty:before {
-        color: var(--sjs2-color-component-header-default-title-placeholder, rgba(28, 27, 32, 0.6));
-      }
+  .sd-title .sv-string-editor {
+    &[aria-placeholder]:empty:before {
+      color: var(--sjs2-color-component-header-default-title-placeholder, rgba(28, 27, 32, 0.6));
     }
   }
 
+  /* Fix designer surface
+  .sd-description .sv-string-editor {
+    &[aria-placeholder]:empty:before {
+      color: var(--sjs2-color-component-header-default-description-placeholder, rgba(28, 27, 32, 0.4));
+    }
+  }
+*/
+
   .sd-description {
-    @include lbrVariables.lbrDefaultFont;
+    @include sjs2--typography--default;
     .sv-string-editor {
-      @include lbrVariables.lbrDefaultFont;
+      @include sjs2--typography--default;
       color: var(--sjs2-color-component-header-default-description, rgba(28, 27, 32, 0.6));
 
       &[aria-placeholder]:empty:before {
@@ -157,7 +159,6 @@ svc-tab-designer {
 
 .svc-designer-placeholder-page {
   .svc-page__footer {
-    // width: calcSize(33);
     margin: auto;
   }
 
@@ -172,9 +173,7 @@ svc-tab-designer {
   top: 0;
   bottom: 0;
   right: 0;
-  padding: var(--sjs2-spacing-x200, 16px)
-    var(--sjs2-spacing-x200, 16px)
-    var(--sjs2-spacing-x200, 16px)
+  padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x200, 16px)
     var(--sjs2-spacing-x200, 16px);
   flex-direction: column;
   align-items: center;
@@ -215,18 +214,22 @@ svc-tab-designer {
 }
 
 .sv-action-bar-separator {
-  background: var(--ctr-separator-color, var(--sjs-border-25, #d4d4d4ff));
+  background: var(--sjs2-color-border-basic-secondary);
 }
 
 // Temporary fix for disabled formbox buttons in designer
 .svc-tab-designer_content,
 .svc-question__content--in-popup {
-  .sd-editor-chevron-button, .sd-editor-clean-button{
+  .sd-editor-chevron-button,
+  .sd-editor-clean-button {
     .sd-action {
       cursor: default;
-      --sd-action-disabled-background: var(--sjs2-color-component-action-neutral-tertiary-default-bg, rgba(95, 94, 97, 0));
+      --sd-action-disabled-background: var(
+        --sjs2-color-component-action-neutral-tertiary-default-bg,
+        rgba(95, 94, 97, 0)
+      );
       --sd-action-disabled-title-color: var(--sjs2-color-component-action-neutral-tertiary-default-label, #1c1b20);
       --sd-action-disabled-icon-color: var(--sjs2-color-component-action-neutral-tertiary-default-icon, #424146);
     }
-  } 
+  }
 }

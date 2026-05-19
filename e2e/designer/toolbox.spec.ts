@@ -229,7 +229,7 @@ test.describe(title, () => {
     await page.locator(".svc-toolbox__tool--dots").click();
     await expect(popup.first()).toBeVisible();
 
-    await popup.locator(".svc-list__item").first().click();
+    await popup.locator(".sd-menu-item").first().click();
     await expect(page.locator(".svc-question__content")).toHaveCount(1);
   });
 
@@ -491,7 +491,7 @@ test.describe(title, () => {
     await searchInput.fill("d");
     await expect(searchInput).toHaveValue("d");
     await expect(page.locator(".svc-toolbox")).toHaveClass(/svc-toolbox--flyout/);
-    await page.locator(".svc-toolbox .sv-action--grid-search-close").click();
+    await page.locator(".svc-toolbox .svc-action--search-close").click();
     await expect(searchInput).toHaveValue("");
     await expect(page.locator(".svc-toolbox")).toHaveClass(/svc-toolbox--flyout/);
   });

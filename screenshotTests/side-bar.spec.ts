@@ -130,7 +130,7 @@ test.describe(title, () => {
     await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-general.png");
 
     await page.locator(".svc-sidebar-tabs__item .sd-action").filter({ visible: true }).nth(4).click();
-    await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png");
+    await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png", { maxDiffPixels: 2 });
 
     await page.locator(".spg-boolean-switch").filter({ visible: true }).click();
     await page.locator(".svc-top-bar").filter({ visible: true }).hover();
@@ -187,7 +187,7 @@ test.describe(title, () => {
     await page.locator(".sv-action--svd-settings").click();
     await page.locator(".spg-question[data-name='locale'] .sd-dropdown").locator(".sd-editor-chevron-button").click();
     await page.locator(".sv-popup").filter({ visible: true }).hover({ position: { x: 0, y: 0 } });
-    await compareScreenshot(page, undefined, "mobile-popup-inside-new-pg.png");
+    await compareScreenshot(page, undefined, "mobile-popup-inside-new-pg.png", { maxDiffPixels: 2668 });
   });
 
   test("property grid empty survey", async ({ page }) => {

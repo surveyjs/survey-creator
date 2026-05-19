@@ -7,7 +7,7 @@
 
 .svc-search__input {
   @include textEllipsis;
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
 
   border: none;
   -webkit-appearance: none;
@@ -24,31 +24,31 @@
 }
 
 .svc-creator--mobile .svc-search__input {
-  $fontSize: var(--ctr-font-small-size, var(--sjs-font-size-x150));
-  font-size: Max(16px, #{$fontSize});
+  font-size: Max(16px, var(--sjs2-font-size-x150));
 }
-
 
 .svc-search__toolbar {
   display: flex;
-  gap: var(--sjs-spacing-x05);
+  gap: var(--sjs2-spacing-x050);
   justify-content: flex-end;
   align-items: center;
   flex-shrink: 0;
 }
 
 .svc-search__toolbar .sd-action-bar {
-  --sd-action-bar-gap: var(--sjs-spacing-x05)
+  --sd-action-bar-gap: var(--sjs2-spacing-x050);
 }
 
 .svc-search__toolbar .sv-action--hidden {
   display: none;
 }
 
-
-
 .svc-search__toolbar-counter {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
   display: flex;
   flex-shrink: 0;
+}
+
+.svc-search__bar-item {
+  --sd-action-border-radius: var(--sjs2-radius-form-item);
 }

@@ -1,4 +1,19 @@
-import { roundTo2Decimals } from "./utils";
+import { getRGBaColor as _getRGBaColor } from "survey-core";
+
+function roundTo2Decimals(number: number): number {
+  return Math.round(number * 100) / 100;
+}
+
+/** Single implementation point so tests can `vi.spyOn(getRGBaColorResolver, "getRGBaColor")`. */
+export const getRGBaColorResolver = {
+  getRGBaColor(value: any): any {
+    return _getRGBaColor(value);
+  }
+};
+
+export function getRGBaColor(value: any): any {
+  return getRGBaColorResolver.getRGBaColor(value);
+}
 
 export class ColorCalculator {
   colorSettings: Array<{ colorAlpha: number, colorDelta: number }> = [];
@@ -64,7 +79,9 @@ export function convertRgbaToString(rgbValues: Array<number>, alpha: number): st
 }
 
 export function parseRgbaFromString(value: string = ""): Array<number> {
-  const matchRgb = value.match(/\((.*)\)/);
+  const colorRgba = getRGBaColorResolver.getRGBaColor(value);
+  if (!colorRgba) return [];
+  const matchRgb = colorRgba.match(/\((.*)\)/);
   if (matchRgb) {
     return matchRgb[1].split(",").map(i => parseFloat(i));
   } else {

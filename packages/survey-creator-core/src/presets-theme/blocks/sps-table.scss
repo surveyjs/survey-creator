@@ -13,14 +13,14 @@
   & > tbody > tr {
     background-color: var(--sjs2-color-bg-basic-primary, #fff);
     & > td:last-of-type > .sd-action-bar .sd-action {
-      opacity: 0;
+      opacity: var(--sjs2-opacity-hidden);
     }
     &:hover {
       & > td > div {
         background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
       }
       & > td:last-of-type > .sd-action-bar .sd-action {
-        opacity: 1;
+        opacity: var(--sjs2-opacity-visible);
       }
     }
   }
@@ -98,7 +98,7 @@
 
   .sps-panel {
     border: none;
-    margin-top: calc(-1 * var(--sjs2-spacing-x075, 6px));
+    margin-top: var(--sjs2-spacing-negative-x075);
   }
   .sps-table__cell--detail-panel .sps-panel {
     margin-top: 0;
@@ -106,12 +106,12 @@
   }
 
   .sps-table__row--empty {
-    height: 40px;
+    height: var(--sjs2-size-x500);
   }
 }
 .sps-table__cell:where(:not(.sps-table__cell--detail-panel)) {
   .sps-checkbox {
-    margin: 0 calcSize(2);
+    margin: 0 var(--sjs2-spacing-x200);
   }
 }
 
@@ -180,10 +180,7 @@
 }
 
 .sps-table__row {
-  --action-width: calc(
-    2 * var(--ctr-actionbar-button-padding-top-large-icon, 8px) +
-      var(--ctr-actionbar-button-icon-width, var(--sjs-font-size-x3))
-  );
+  --action-width: calc(var(--sjs2-spacing-x200, 8px) + var(--sjs2-line-height-x300));
   --action-container-width: calc(3 * var(--action-width));
 }
 
@@ -204,7 +201,7 @@
 }
 
 .sps-table__cell:not(.sps-table__cell--detail-panel):first-of-type .sps-text {
-  padding-left: calcSize(2);
+  padding-left: var(--sjs2-spacing-x200);
 }
 .sps-table__cell--actions {
   width: 0;

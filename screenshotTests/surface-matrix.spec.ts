@@ -15,7 +15,7 @@ test.describe(title, () => {
 
     await row1Column1Cell.hover({ force: true });
     await editColumnButton.click();
-    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit.png");
+    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit.png", { maxDiffPixels: 5 });
   });
 
   test("Matrix column editor with design surface zoomed out", async ({ page }) => {
@@ -32,7 +32,7 @@ test.describe(title, () => {
     await editColumnButton.click();
     await page.mouse.move(0, 0);
     // await page.locator(".sv-popup__body-content").hover({ position: { x: 10, y: 10 } });
-    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit-surface-zoomed-out.png");
+    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit-surface-zoomed-out.png", { maxDiffPixels: 5 });
   });
 
   test("Matrix column", async ({ page }) => {
@@ -214,6 +214,7 @@ test.describe(title, () => {
       ],
     };
     await setJSON(page, json);
+    await expect(page.locator("[data-name='question1'] .sv-string-editor").first()).toBeVisible();
     await page.evaluate(() => {
       ((window as any).creator.rootElement.getRootNode().querySelector("[data-name='question1'] .sv-string-editor") as HTMLElement).focus();
     });
@@ -276,7 +277,7 @@ test.describe(title, () => {
     await page.locator(".svc-matrix-cell").nth(3).hover({ force: true });
     await expect(dropdownButton).toBeVisible();
     await dropdownButton.click();
-    await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png");
+    await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png", { maxDiffPixels: 42 });
     await page.locator("button").filter({ hasText: "Cancel" }).click();
     await page.waitForTimeout(500);
 

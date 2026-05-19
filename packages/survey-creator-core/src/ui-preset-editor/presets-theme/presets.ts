@@ -1,8 +1,8 @@
 import { defaultCss } from "survey-core";
-import { listComponentCss } from "survey-creator-core";
 
 export var presetsCss = {
   root: "sps-root-modern",
+  rootTheme: "",
   container: "sps-container-modern",
   header: "sps-title sps-container-modern__title",
   body: "sps-body",
@@ -16,7 +16,6 @@ export var presetsCss = {
   navigationButton: "",
   bodyNavigationButton: "",
   completedPage: "sps-completedpage",
-  list: JSON.parse(JSON.stringify(listComponentCss)),
   panel: {
     withFrame: "sps-panel--with-frame",
     nested: "sps-panel--nested",

@@ -4,7 +4,6 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
 import { findSuitableTheme, isThemeEmpty } from "./theme-model";
-import { listComponentCss } from "../list-theme";
 
 export class PreviewViewModel extends Base {
   public enableInvisiblePages: boolean = true;
@@ -67,19 +66,27 @@ export class PreviewViewModel extends Base {
   public get pageActions(): Array<Action> {
     return this.pages.actions;
   }
-  @property({}) isPageToolbarVisible = new ComputedUpdater(() => notShortCircuitAnd(!this.pages.isEmpty, !this.surveyProvider.isMobileView));
-  @property({}) tabContentAdditionalCss = new ComputedUpdater(() => {
-    return new CssClassBuilder()
-      .append("svc-test-tab--empty", this.simulator?.survey?.isEmpty)
-      .append("svc-creator-tab__content--with-toolbar", !!this.isPageToolbarVisible)
-      .toString();
-  });
+
+  @property() isPageToolbarVisible: boolean;
+  @property() tabContentAdditionalCss: string;
 
   constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultCss) {
     super();
     this.simulator = new SurveySimulatorModel(surveyProvider);
     this.pages.setActionsAppearance({ style: "neutral", mode: "tertiary", size: "x-small" });
     this.pages.containerCss = "svc-pages-toolbar";
+
+    this.isPageToolbarVisible = new ComputedUpdater<boolean>(() => notShortCircuitAnd(!this.pages.isEmpty, !this.surveyProvider.isMobileView)) as any as boolean;
+    this.tabContentAdditionalCss = new ComputedUpdater<string>(() => {
+      const self = this;
+      const hasSimulatorFrame = self.simulator.hasFrame;
+      const surveyIsEmpty = !!self.survey?.isEmpty;
+      return new CssClassBuilder()
+        .append("svc-test-tab--empty", surveyIsEmpty)
+        .append("svc-test-tab--with-simulator-frame", hasSimulatorFrame)
+        .append("svc-creator-tab__content--with-toolbar", !!self.isPageToolbarVisible)
+        .toString();
+    }) as any as string;
   }
 
   public get isMobileView() {
@@ -310,7 +317,6 @@ export class PreviewViewModel extends Base {
         listModel.selectedItem = this.getCurrentPageItem();
       },
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
       verticalPosition: "top",
       horizontalPosition: "center"
     }, this.surveyProvider);

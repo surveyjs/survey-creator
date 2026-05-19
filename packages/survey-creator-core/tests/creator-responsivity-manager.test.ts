@@ -1,7 +1,10 @@
+﻿import { DomWindowHelper } from "survey-core";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { SurveyCreatorModel, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
 import { CreatorTester } from "./creator-tester";
+import { afterEach, beforeEach, vi } from "vitest";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./tabs/theme-test-mocks";
 
 class SimpleContainer {
   clientRects = [{ x: 0, y: 0, height: 20, width: 20 }];
@@ -16,6 +19,15 @@ class SimpleContainer {
     return this.clientRects;
   }
 }
+
+beforeEach(() => {
+  mockGetRGBaColorIdentity();
+  mockDomWindowGetComputedStyleFromInlineStyles();
+});
+afterEach(() => {
+  restoreGetRGBaColorMock();
+  (DomWindowHelper.getWindow as any).mockRestore?.();
+});
 
 test("CreatorResponsivityManager getScreenWidth", (): any => {
   const container: SimpleContainer = new SimpleContainer({});
@@ -457,7 +469,7 @@ test("CreatorResponsivityManager shold not change showSidebar on init", (): any 
   const oldResizeObserver = window.ResizeObserver;
   const oldGetComputedStyle = window.getComputedStyle;
   window.ResizeObserver = <any>ResizeObserver;
-  window.getComputedStyle = <any>jest.fn((element) => ({
+  window.getComputedStyle = <any>vi.fn((element) => ({
     display: "block"
   }));
   const container: SimpleContainer = new SimpleContainer({});

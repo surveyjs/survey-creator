@@ -1,8 +1,8 @@
 import { defaultCss } from "survey-core";
-import { listComponentCss } from "../components/list-theme";
 
 export var propertyGridCss = {
   root: "spg-root-modern",
+  rootTheme: "",
   container: "spg-container-modern",
   header: "spg-title spg-container-modern__title",
   body: "spg-body",
@@ -92,12 +92,12 @@ export var propertyGridCss = {
     flowRoot: "spg-question spg-row__question spg-row__question--flow",
     asCell: "spg-table__cell",
     header: "spg-question__header",
-    headerLeft: "spg-question__header--location--left",
+    headerLeft: "spg-question__header--location--left sd-formbox__label",
     headerTop: "spg-question__header--location--top",
     headerBottom: "spg-question__header--location--bottom",
     content: "spg-question__content",
     contentLeft: "spg-question__content--left",
-    titleLeftRoot: "spg-question--location--left",
+    titleLeftRoot: "spg-question--location--left sd-formbox",
     titleOnAnswer: "spg-question__title--answer",
     titleOnError: "spg-question__title--error",
     title: "spg-title spg-question__title",
@@ -313,7 +313,6 @@ export var propertyGridCss = {
       buttonCollapsed: ""
     }
   },
-  list: JSON.parse(JSON.stringify(listComponentCss)),
   actionBar: {
     root: "sd-action-bar spg-action-bar",
   },

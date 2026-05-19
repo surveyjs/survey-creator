@@ -90,7 +90,6 @@ export const surveySettingsButtonSelector = (page) => page.getByRole("button", {
 export const themeSettingsButtonSelector = (page) => page.getByRole("button", { name: "Theme settings" });
 // export const propertyGridSelector = Selector(".svc-side-bar__container");
 // export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sd-action");
-// export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .svc-list__container");
 // export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
 
 // export const questions = Selector(".svc-question__content");
@@ -132,10 +131,10 @@ export function getBarItemByTitle(page, text: string) {
   return page.locator(".sd-action-bar-item[title=\"" + text + "\"]");
 }
 export function getListItemByText(page, text) {
-  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text);
+  return page.locator(".sv-popup__content .sd-menu-list .sd-menu-item").getByText(text);
 }
 export function getSurveyListItemByText(page, text) {
-  return page.locator(".sv-popup__content .sv-list__item").getByText(text);
+  return page.locator(".sv-popup__content .sd-menu-item").getByText(text);
 }
 export function getAddNewQuestionButton(page: Page): Locator {
   return page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn > span").getByText("Add Question");
@@ -152,7 +151,7 @@ export function getSubToolboxItemByText(page, text) {
 }
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
   await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
-  await page.locator(".svc-list__item span").getByText(text, { exact: true }).filter({ visible: true }).click();
+  await page.locator(".sd-menu-item span").getByText(text, { exact: true }).filter({ visible: true }).click();
 }
 
 export async function changeToolboxLocation(page: Page, newVal: string) {

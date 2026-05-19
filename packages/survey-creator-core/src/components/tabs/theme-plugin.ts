@@ -918,6 +918,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public getThemeChanges() {
     const themeModel = new ThemeModel();
+    themeModel.baseThemeVariables = this.themeModel.baseThemeVariables;
     themeModel.fromJSON(this.creator.theme);
     const theme = themeModel.toJSON({ storeDefaults: false });
     return getThemeChanges(theme);

@@ -2,7 +2,7 @@ import { createDropdownActionModel, IAction, ListModel, settings as libSettings,
 import { ICreatorPlugin, SurveyCreatorModel, saveToFileHandler, getLocString, IPreset, PredefinedCreatorPresets, CreatorPresets } from "survey-creator-core";
 import { CreatorPresetEditorModel } from "./presets-editor";
 import { PresetsManager, IPresetListItem } from "./presets-manager";
-import { ComponentContainerModel, TabContainerViewModel, showConfirmDialog, listComponentCss } from "survey-creator-core";
+import { ComponentContainerModel, TabContainerViewModel, showConfirmDialog } from "survey-creator-core";
 
 /**
  * A class that instantiates the UI Preset Editor and provides APIs to manage presets and their configuration.
@@ -302,11 +302,12 @@ export class UIPresetEditor implements ICreatorPlugin {
       { id: "saveAs", title: getLocString("presets.plugin.saveAs"), action: () => this.saveAs() }, //locTitleName: "presets.plugin.save"
       { id: "import", title: getLocString("presets.plugin.import"), markerIconName: "import-24x24", needSeparator: true, action: (item: IAction) => { this.confirmImport(() => { this.editor?.loadJsonFile(); }); } },
       { id: "export", title: getLocString("presets.plugin.export"), markerIconName: "download-24x24", action: (item: IAction) => { this.editor?.downloadJsonFile(); } },
-      { id: "reset", title: getLocString("presets.plugin.resetAll"), needSeparator: true, css: "sps-list__item--alert", action: () => { this.confirmReset(() => { this.discardUnsaved(); }); } },
+      { id: "reset", title: getLocString("presets.plugin.resetAll"), needSeparator: true, appearance: { style: "alert" } as any, action: () => { this.confirmReset(() => { this.discardUnsaved(); }); } },
     ];
 
     presets.forEach(p => {
       p.action = (item) => {
+        if (!this.editor) return;
         this.pagesList.selectedItem = item;
         this.editor.model.currentPage = this.editor.model.getPageByName(item.id);
       };
@@ -317,7 +318,6 @@ export class UIPresetEditor implements ICreatorPlugin {
       horizontalPosition: "center" as any,
       searchEnabled: false,
       cssClass: "sps-popup-menu sps-popup-menu--dropdown",
-      cssClasses: listComponentCss,
     };
 
     let curentlySelectedPreset: IAction;
@@ -427,7 +427,9 @@ export class UIPresetEditor implements ICreatorPlugin {
       listAction.title = this.presetsList.selectedItem.title || "";
     }
     setTimeout(() => {
-      presets[this.currentPresetIndex].action(presets[this.currentPresetIndex]);
+      const preset = presets[this.currentPresetIndex];
+      if (!this.editor || !preset || !preset.action) return;
+      preset.action(preset);
     }, 100);
   }
 

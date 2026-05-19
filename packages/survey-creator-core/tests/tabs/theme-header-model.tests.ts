@@ -1,4 +1,4 @@
-import { DefaultTheme, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
+import { DefaultTheme, DomWindowHelper, ITheme, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, SurveyElement } from "survey-core";
 import { HeaderModel, registerSurveyTheme, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { CreatorTester } from "../creator-tester";
@@ -14,17 +14,24 @@ export * from "../../src/components/tabs/theme-custom-questions/shadow-effects";
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
+import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
 
 import SurveyThemes from "survey-core/themes";
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
+  mockGetRGBaColorIdentity();
+
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
   ThemeModel.DefaultTheme = Themes["default-light"];
   DefaultTheme.cssVariables = {} as any;
+});
+
+afterEach(() => {
+  restoreGetRGBaColorMock();
 });
 
 afterEach(() => {
@@ -225,18 +232,6 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   expect(header["backgroundColorSwitch"]).toEqual("none");
   expect(header["backgroundColor"]).toBeUndefined();
 
-  header["backgroundColorSwitch"] = "accentColor";
-  expect(header["backgroundColor"]).toBeUndefined();
-
-  creator.activeTab = "designer";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe(HeaderModel.primaryColorStr);
-
-  creator.activeTab = "theme";
-  header = themeModel.header as HeaderModel;
-
-  expect(header["backgroundColorSwitch"]).toEqual("accentColor");
-  expect(header["backgroundColor"]).toBeUndefined();
-
   header["backgroundColorSwitch"] = "custom";
   expect(header["backgroundColor"]).toBeUndefined();
   header["backgroundColor"] = "#ff0000";
@@ -263,9 +258,6 @@ test("headerViewContainer: background color", (): any => {
   expect(header["backgroundColorSwitch"]).toBe("none");
   expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();
 
-  header["backgroundColorSwitch"] = "accentColor";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe(HeaderModel.primaryColorStr);
-
   header["backgroundColorSwitch"] = "custom";
   expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe("transparent");
 
@@ -288,10 +280,6 @@ test("headerViewContainer: background color reset #5940", (): any => {
   expect(header["backgroundColorSwitch"]).toBe("none");
   expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-color-component-header-default-bg"]).toBeUndefined();
-
-  header["backgroundColorSwitch"] = "accentColor";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe(HeaderModel.primaryColorStr);
-  expect(themeModel.cssVariables["--sjs2-color-component-header-default-bg"]).toBe(HeaderModel.primaryColorStr);
 
   header["backgroundColorSwitch"] = "none";
   expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();

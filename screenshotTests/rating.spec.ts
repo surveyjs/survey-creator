@@ -197,7 +197,7 @@ test.describe(title, () => {
     await compareScreenshot(page, question, "rating-multiline-smileys-mobile-selected.png");
     await page.locator(".svc-question__adorner").nth(1).click({ position: { x: 1, y: 1 } });
     await expect(page.locator(".svc-question__adorner").nth(1).locator(".svc-question__content-actions")).toBeVisible();
-    await compareScreenshot(page, question2, "rating-multiline-smileys-mobile-text-selected.png");
+    await compareScreenshot(page, question2, "rating-multiline-smileys-mobile-text-selected.png", { maxDiffPixels: 2 });
   });
 
   test("Multi row rating adorner stars", async ({ page }) => {

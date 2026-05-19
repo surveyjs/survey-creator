@@ -11,17 +11,17 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 @keyframes toolboxFadeIn {
   from {
-    opacity: 0;
+    opacity: var(--sjs2-opacity-hidden);
   }
 
   to {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
   }
 }
 
 @keyframes toolboxMoveIn {
   from {
-    width: var(--toolbox-width-compact);
+    width: var(--thm-toolbox-width-compact);
     overflow: hidden;
   }
 
@@ -33,8 +33,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 @keyframes toolboxSeparatorSearchMoveIn {
   from {
-    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, var(--sjs-spacing-x2));
-    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, var(--sjs-spacing-x2));
+    padding-inline-end: var(--sjs2-spacing-x200);
+    padding-inline-start: var(--sjs2-spacing-x200);
 
     overflow: hidden;
   }
@@ -48,14 +48,14 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 
 @keyframes toolboxSeparatorMoveIn {
   from {
-    padding-inline-end: var(--ctr-toolbox-separator-padding-right-compact, var(--sjs-spacing-x2));
-    padding-inline-start: var(--ctr-toolbox-separator-padding-left-compact, var(--sjs-spacing-x2));
+    padding-inline-end: var(--sjs2-spacing-x200);
+    padding-inline-start: var(--sjs2-spacing-x200);
     overflow: hidden;
   }
 
   to {
-    padding-inline-end: var(--ctr-toolbox-separator-padding-right, 0px);
-    padding-inline-start: var(--ctr-toolbox-separator-padding-left, var(--sjs-spacing-x2));
+    padding-inline-end: 0;
+    padding-inline-start: var(--sjs2-spacing-x200);
     overflow: hidden;
   }
 }
@@ -93,7 +93,7 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
     animation-timing-function: var(--animation-timing-function);
     animation-name: toolboxFadeIn;
     animation-fill-mode: forwards;
-    opacity: 0;
+    opacity: var(--sjs2-opacity-hidden);
     text-overflow: initial;
   }
 }
@@ -119,14 +119,12 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
 }
 
 .svc-toolbox--flyout-to-compact-running {
-  width: var(--toolbox-width-compact);
-  margin-inline-end: var(--ctr-toolbox-margin-left-compact, 0);
+  width: var(--thm-toolbox-width-compact);
   z-index: 200;
-  border-inline-end: var(--ctr-toolbox-border-width-right, var(--sjs-stroke-x1)) solid transparent;
+  border-inline-end: var(--sjs2-border-width-x100) solid transparent;
 }
 
 .svc-creator--disable-animations {
-
   .svc-toolbox__panel--enter,
   .svc-toolbox__panel--leave {
     animation: none;

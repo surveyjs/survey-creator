@@ -1,4 +1,4 @@
-import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, getRGBaColor, DomDocumentHelper, DomWindowHelper } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
@@ -9,10 +9,12 @@ import { trimBoxShadowValue } from "survey-core";
 import { HeaderModel } from "./header-model";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../../utils/configs";
 import { assign, roundTo2Decimals } from "../../utils/utils";
-import { ColorCalculator, ingectAlpha, parseColor } from "../../utils/color-utils";
+import { ColorCalculator, getRGBaColor, ingectAlpha, parseColor } from "../../utils/color-utils";
+import { calculateThemeVariables } from "../../utils/utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import { SurveyCreatorModel } from "../../creator-base";
+import { DefaultLight } from "survey-core/themes";
 
 export * from "./header-model";
 
@@ -103,6 +105,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 }
 
 export class ThemeModel extends Base implements ITheme {
+  public baseThemeVariables: { [index: string]: string } = {};
   private static defaultThemeValue: ITheme;
   public static get DefaultTheme() {
     if (!this.defaultThemeValue) {
@@ -186,6 +189,7 @@ export class ThemeModel extends Base implements ITheme {
 
   private setNewHeaderProperty() {
     const header = new HeaderModel();
+    header.baseThemeVariables = { ...this.baseThemeVariables };
     header.owner = this;
     this.setPropertyValue("header", header);
   }
@@ -302,6 +306,10 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   initialize(surveyTheme: ITheme = {}, survey?: SurveyModel, creator?: SurveyCreatorModel) {
+    this.getRootElement = () => creator?.rootElement;
+    const vars = [...Serializer.getProperties("theme").map(p => p.name), ...HeaderModel.getDefaultVars()].filter(name => name.indexOf("--sjs2-") == 0);
+    this.baseThemeVariables = calculateThemeVariables(DefaultLight.cssVariables, vars, this.getRootElement());
+
     this._defaultSessionTheme = ThemeModel.DefaultTheme;
     this.backgroundImage = "backgroundImage" in surveyTheme ? surveyTheme.backgroundImage : survey?.backgroundImage;
     this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : survey?.backgroundImageFit;
@@ -309,6 +317,7 @@ export class ThemeModel extends Base implements ITheme {
     this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : survey?.backgroundOpacity) || 1) * 100;
     this.loadTheme(surveyTheme, creator && creator.preferredColorPalette);
     this.header["logoPosition"] = survey?.logoPosition;
+    this.header.baseThemeVariables = { ...this.baseThemeVariables };
     this.undoRedoManager = new UndoRedoManager();
   }
 
@@ -346,41 +355,7 @@ export class ThemeModel extends Base implements ITheme {
 
   private blockThemeChangedNotifications = 0;
 
-  private calculateThemeVariables(cssVariables) {
-    let themeCopyCssVariables = JSON.parse(JSON.stringify(cssVariables));
-
-    // If cssVariables exist, apply them to a div, then replace cssVariables with computed styles
-    if (themeCopyCssVariables && typeof DomWindowHelper.getWindow() !== "undefined") {
-      const div = DomDocumentHelper.createElement("div");
-      for (const key of Object.keys(themeCopyCssVariables)) {
-        div.style.setProperty(key, themeCopyCssVariables[key] as string);
-      }
-      DomDocumentHelper.getBody().appendChild(div);
-
-      const computed = DomWindowHelper.getWindow().getComputedStyle(div);
-
-      // Replace cssVariables with computed values
-      const newCssVariables: { [key: string]: string } = {};
-      const calcProxyProperty = "width";
-      for (const key of Object.keys(themeCopyCssVariables)) {
-        let value = computed.getPropertyValue(key);
-        // getComputedStyle for custom properties may return calc() unresolved; force computation via a length property
-        if (typeof value === "string" && value.indexOf("calc(") === 0) {
-          div.style.setProperty(calcProxyProperty, value);
-          value = computed.getPropertyValue(calcProxyProperty);
-          div.style.removeProperty(calcProxyProperty);
-        }
-        if (key.indexOf("-color-") !== -1 && value !== "transparent") {
-          value = getRGBaColor(value);
-        }
-        newCssVariables[key] = value;
-      }
-      themeCopyCssVariables = newCssVariables;
-
-      DomDocumentHelper.getBody().removeChild(div);
-    }
-    return themeCopyCssVariables;
-  }
+  private getRootElement = (): HTMLElement => undefined;
 
   public loadTheme(theme: ITheme, preferredColorPalette?: string) {
     this.blockThemeChangedNotifications += 1;
@@ -398,9 +373,10 @@ export class ThemeModel extends Base implements ITheme {
 
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, ThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
+      assign(effectiveThemeCssVariables, theme.cssVariables || {});
       patchLegacyCSSVariables(effectiveThemeCssVariables);
-      assign(effectiveThemeCssVariables, this.calculateThemeVariables(effectiveThemeCssVariables));
-      assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
+      assign(effectiveThemeCssVariables, calculateThemeVariables(effectiveThemeCssVariables, [], this.getRootElement()));
+      assign(effectiveThemeCssVariables, this.themeCssVariablesChanges);
       const effectiveTheme: ITheme = {
         backgroundImage: this.backgroundImage || baseTheme.backgroundImage || "",
         backgroundImageFit: this.backgroundImageFit || baseTheme.backgroundImageFit,
@@ -547,12 +523,14 @@ export class ThemeModel extends Base implements ITheme {
     const _headerJson = {};
     assign(_headerJson, json.header);
     if (!!json["headerView"]) _headerJson["headerView"] = json["headerView"];
+    this.header.baseThemeVariables = { ...this.baseThemeVariables };
     this.header.fromJSON(_headerJson || {});
 
     if (json.cssVariables) {
       patchLegacyCSSVariables(json.cssVariables);
-      this["primaryColor"] = json.cssVariables["--sjs2-color-project-brand-600"];
-      super.fromJSON(json.cssVariables, options);
+      const completeThemeVariablesList = { ...this.baseThemeVariables, ...json.cssVariables };
+      this["primaryColor"] = completeThemeVariablesList["--sjs2-color-project-brand-600"];
+      super.fromJSON(completeThemeVariablesList, options);
       this.header.setCssVariables(json.cssVariables);
 
       this.scale = !!this["--sjs2-base-unit-size"] ? roundTo2Decimals(parseFloat(this["--sjs2-base-unit-size"]) * 100 / 8) : undefined;
@@ -563,14 +541,14 @@ export class ThemeModel extends Base implements ITheme {
       this["questionPanel"] = backgroundCornerRadiusFromCssVariable(
         this.getPropertyByName("questionPanel"),
         json.cssVariables,
-        "--sjs2-color-bg-basic-primary",
-        "--sjs2-color-bg-basic-primary-dim",
+        completeThemeVariablesList["--sjs2-color-bg-basic-primary"],
+        completeThemeVariablesList["--sjs2-color-bg-basic-primary-dim"],
         this.cornerRadius);
       this["editorPanel"] = backgroundCornerRadiusFromCssVariable(
         this.getPropertyByName("editorPanel"),
         json.cssVariables,
-        "--sjs2-color-bg-basic-secondary",
-        "--sjs2-color-bg-basic-secondary-dim",
+        completeThemeVariablesList["--sjs2-color-bg-basic-secondary"],
+        completeThemeVariablesList["--sjs2-color-bg-basic-secondary-dim"],
         this.cornerRadius);
 
       Serializer.getProperties("theme").forEach(property => {
@@ -578,11 +556,14 @@ export class ThemeModel extends Base implements ITheme {
           this[property.name] = fontsettingsFromCssVariable(property, json.cssVariables);
         }
       });
-      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, "--sjs2-color-fg-basic-primary");
-      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, "--sjs2-color-fg-basic-secondary");
-      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, "--sjs2-color-fg-basic-primary");
-      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, "--sjs2-color-fg-basic-secondary");
-      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, "--sjs2-color-fg-basic-primary", "--sjs2-color-fg-basic-secondary");
+      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"] });
+      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"] });
+      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"] });
+      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"] });
+      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, {
+        color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"],
+        placeholdercolor: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"],
+      });
     }
   }
 
@@ -606,7 +587,7 @@ export class ThemeModel extends Base implements ITheme {
     const cssVariables = {};
     Object.keys(result).forEach(key => {
       if (key.indexOf("--") == 0) {
-        cssVariables[key] = result[key];
+        if (result[key] !== this.baseThemeVariables[key]) cssVariables[key] = result[key];
         delete result[key];
       } else if (typeof result[key] === "object") {
 
@@ -928,6 +909,13 @@ Serializer.addProperties("theme",
   { name: "--sjs2-color-fg-basic-primary", visible: false },
   { name: "--sjs2-color-fg-basic-secondary", visible: false },
 
+  { name: "--sjs2-base-unit-font-size", visible: false },
+  { name: "--sjs2-base-unit-line-height", visible: false },
+  { name: "--sjs2-base-unit-spacing", visible: false },
+  { name: "--sjs2-color-utility-property-grid", visible: false },
+  { name: "--sjs2-color-utility-tabs", visible: false },
+  { name: "--sjs2-color-utility-toolbox", visible: false },
+
   {
     name: "--sjs2-border-effect-surface-default-reset",
     visible: false,
@@ -969,11 +957,10 @@ Serializer.addProperties("theme",
   { name: "--sjs2-color-bg-warning-primary", visible: false },
   { name: "--sjs2-color-bg-warning-secondary", visible: false },
   { name: "--sjs2-color-fg-warning-on-primary", visible: false },
-  { name: "--sjs2-color-utility-surface-survey", visible: false },
   { name: "--sjs2-color-utility-surface-survey-panelless", visible: false },
   {
     type: "coloralpha",
-    name: "--sjs2-color-bg-neutral-tertiary-dim",
+    name: "--sjs2-color-utility-surface-survey",
   },
   {
     type: "coloralpha",

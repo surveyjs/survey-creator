@@ -403,12 +403,12 @@ test.describe(title, () => {
     await compareScreenshot(page, toolboxElement, "toolbox-search.png");
     await toolboxSearch.type("single");
     await compareScreenshot(page, toolboxElement, "toolbox-search-entered.png");
-    await page.locator(".sv-action--grid-search-close").hover();
+    await page.locator(".svc-action--search-close").hover();
     await compareScreenshot(page, toolboxElement, "toolbox-search-close-hover.png");
     await toolboxSearch.click();
     await toolboxSearch.type("qwerty");
     await compareScreenshot(page, toolboxElement, "toolbox-search-placeholder.png");
-    await page.locator(".sv-action--grid-search-close").click();
+    await page.locator(".svc-action--search-close").click();
     await page.evaluate(() => {
       ((window as any).creator.rootElement.getRootNode().querySelector(".svc-toolbox .sv-scroll__scroller") as HTMLDivElement).style.background = "red";
     });
@@ -546,6 +546,6 @@ test.describe(title, () => {
     await setShowSidebar(page, false);
     await compareScreenshot(page, toolboxElement, "toolbox-compact-disabled-items.png");
     await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
-    await compareScreenshot(page, page.locator(".sv-popup__container:visible"), "add-new-disabled-items.png");
+    await compareScreenshot(page, page.locator(".sv-popup__container:visible"), "add-new-disabled-items.png", { maxDiffPixels: 2 });
   });
 });

@@ -1,7 +1,67 @@
-import { DomWindowHelper } from "survey-core";
+import { createBoxShadow, DomDocumentHelper, DomWindowHelper, parseBoxShadow } from "survey-core";
+import { getRGBaColor } from "./color-utils";
 
 export function roundTo2Decimals(number: number): number {
   return Math.round(number * 100) / 100;
+}
+
+/**
+ * Applies CSS variables on a temporary `.sd-theme-root` element and replaces them with computed values
+ * (resolves `calc()`, normalizes border-effect box-shadows, and converts color variables to RGBA strings).
+ */
+export function calculateThemeVariables(
+  cssVariables: { [key: string]: string } | undefined | null,
+  additionalCssVariables: string[] = [],
+  rootElement?: HTMLElement
+): { [key: string]: string } | undefined | null {
+  if (cssVariables == null) {
+    return cssVariables as undefined | null;
+  }
+  let themeCopyCssVariables = JSON.parse(JSON.stringify(cssVariables)) as { [key: string]: string };
+
+  const body = rootElement || DomDocumentHelper.getBody();
+  if (themeCopyCssVariables && typeof DomWindowHelper.getWindow() !== "undefined") {
+    const div = DomDocumentHelper.createElement("div");
+    for (const key of Object.keys(themeCopyCssVariables)) {
+      div.style.setProperty(key, themeCopyCssVariables[key] as string);
+    }
+    div.classList.add("sd-theme-root");
+    body.appendChild(div);
+
+    const computed = DomWindowHelper.getWindow().getComputedStyle(div);
+
+    const newCssVariables: { [key: string]: string } = {};
+    const calcProxySizeProperty = "width";
+    const calcProxyBoxShadowProperty = "box-shadow";
+    for (const key of [...Object.keys(themeCopyCssVariables), ...additionalCssVariables]) {
+      const sourceValue = themeCopyCssVariables[key];
+      let value = computed.getPropertyValue(key);
+      if (typeof value === "string" && value.trim() === "") {
+        if (sourceValue !== undefined) {
+          newCssVariables[key] = sourceValue;
+        }
+        continue;
+      }
+      if (typeof value === "string" && value.indexOf("calc(") === 0) {
+        div.style.setProperty(calcProxySizeProperty, value);
+        value = computed.getPropertyValue(calcProxySizeProperty);
+        div.style.removeProperty(calcProxySizeProperty);
+      }
+      if (key.indexOf("-border-effect-") !== -1) {
+        div.style.setProperty(calcProxyBoxShadowProperty, value);
+        value = createBoxShadow(parseBoxShadow(computed.getPropertyValue(calcProxyBoxShadowProperty)));
+        div.style.removeProperty(calcProxyBoxShadowProperty);
+      }
+      if (key.indexOf("-color-") !== -1 && value !== "transparent") {
+        value = getRGBaColor(value);
+      }
+      newCssVariables[key] = value;
+    }
+    themeCopyCssVariables = newCssVariables;
+
+    body.removeChild(div);
+  }
+  return themeCopyCssVariables;
 }
 
 const endLineRegExp = new RegExp("(\\r\\n|\\n|\\r)", "gm");

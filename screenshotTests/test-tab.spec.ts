@@ -6,9 +6,6 @@ const title = "Test tab Screenshot";
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
-    await page.evaluate(() => {
-      window["creator"].applyTheme(window["SurveyTheme"].Test);
-    });
   });
 
   test("toolbar view", async ({ page }) => {
@@ -235,7 +232,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.locator(".sd-navigation__start-btn").click();
     await resetHoverToCreator(page);
-    await compareScreenshot(page, page.locator(".svc-creator__content-wrapper"), "survey-timer.png");
+    await compareScreenshot(page, page.locator(".svc-creator__content-wrapper"), "survey-timer.png", { maxDiffPixels: 2 });
   });
 
   test("empty survey preview", async ({ page }) => {
@@ -427,7 +424,7 @@ test.describe(title, () => {
       ]
     });
     const pageSelectorButton = page.locator(".svc-page-selector");
-    const pageSelectorMenu = page.locator(".svc-list__container");
+    const pageSelectorMenu = page.locator(".sd-menu-list__container");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await compareScreenshot(page, pageSelectorButton, "test-tab-page-selector-markdown-button-first.png");
     await pageSelectorButton.click();

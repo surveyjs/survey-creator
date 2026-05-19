@@ -6,13 +6,12 @@
 
 svg.svc-icon-item__icon,
 svg.svc-icon-item__icon use {
-  width: var(--sjs2-size-icon-medium, 24px);
-  height: var(--sjs2-size-icon-medium, 24px);
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
   fill: var(--sjs2-color-fg-brand-primary, #19b394);
 }
 
-.sd-selectlist__item--selected,
-.svc-list__item--selected {
+.sd-selectlist__item--selected {
   svg.svc-icon-item__icon,
   svg.svc-icon-item__icon use {
     fill: currentColor;
