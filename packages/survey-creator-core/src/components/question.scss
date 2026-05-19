@@ -1030,6 +1030,10 @@ svc-question,
     overflow-x: auto;
   }
 
+  .sd-row__question--small .sd-question__content {
+    overflow: visible;
+  }
+
   .sd-question--description-under-input .sd-question__content {
     margin-bottom: var(--sjs2-spacing-negative-x100, -8px);
     padding-bottom: var(--sjs2-spacing-x100, 8px);
