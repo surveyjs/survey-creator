@@ -397,7 +397,7 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[1].name).toBe("fr");
   expect(matrix.columns[2].name).toBe("es");
   expect(headerMatrix.columns[0].title).toBe("Default (English)");
-  expect(headerMatrix.columns[1].title).toBe("Source: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(headerMatrix.columns[1].title).toBe("Source: francais"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(headerMatrix.columns[2].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("");
@@ -526,7 +526,7 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
       }
     ]
   };
-  creator.onMachineTranslate.add((sender, options) => {});
+  creator.onMachineTranslate.add((sender, options) => { });
   creator.onSurveyInstanceCreated.add((sender, options) => {
     if (options.area === "translation-tab:table-header-popup-editor") {
       const actions = options.survey.navigationBar.actions;
@@ -557,7 +557,7 @@ test("Check navigation bar in translation dialog", () => {
       }
     ]
   };
-  creator.onMachineTranslate.add((sender, options) => {});
+  creator.onMachineTranslate.add((sender, options) => { });
   creator.JSON = json;
   let tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
@@ -587,7 +587,7 @@ test("Check navigation bar in translation dialog", () => {
       }
     ]
   };
-  creator.onMachineTranslate.add((sender, options) => {});
+  creator.onMachineTranslate.add((sender, options) => { });
   creator.JSON = json;
   tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();

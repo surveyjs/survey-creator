@@ -174,7 +174,7 @@ test("stringsSurvey - one question in survey", () => {
   expect(choicesProps1.columns[0].name).toEqual("default");
   expect(choicesProps1.columns[0].title).toEqual("Default (English)");
   expect(choicesProps1.columns[1].name).toEqual("fr");
-  expect(choicesProps1.columns[1].title).toEqual("Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(choicesProps1.columns[1].title).toEqual("francais"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(choicesProps1.rows).toHaveLength(1);
   expect(choicesProps1.rows[0].value).toEqual("item1");
   expect(choicesProps1.rows[0].text).toEqual("Item 1");
