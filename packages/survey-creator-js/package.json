@@ -1,6 +1,10 @@
 {
   "name": "survey-creator-js",
+<<<<<<< HEAD
   "version": "3.0.0-beta.3",
+=======
+  "version": "2.5.25",
+>>>>>>> origin/master
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/survey-creator.git"

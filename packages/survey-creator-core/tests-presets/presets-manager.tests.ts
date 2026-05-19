@@ -1,8 +1,8 @@
-﻿import { ListModel, QuestionDropdownModel, SurveyModel, settings, IAction, QuestionMatrixDynamicModel, Action, MatrixDynamicRowModel } from "survey-core";
+import { Mock, MockInstance, afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
+import { ListModel, QuestionDropdownModel, SurveyModel, settings, IAction, QuestionMatrixDynamicModel, Action, MatrixDynamicRowModel } from "survey-core";
 import { PresetsManager } from "../src/ui-preset-editor/presets-manager";
 import { CreatorPresets, IPreset, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
 import { getLocString } from "../src/editorLocalization";
-import { vi, type Mock, type MockInstance } from "vitest";
 
 vi.mock("survey-core", async () => {
   const originalModule = await vi.importActual<typeof import("survey-core")>("survey-core");
@@ -298,6 +298,9 @@ describe("PresetsManager", () => {
       const saveCallback = vi.fn();
       const newName = "clickedPreset";
 
+      const mockAction = { id: newName } as IAction;
+      (manager.presetsList.getActionById as Mock).mockReturnValue(mockAction);
+
       mockShowDialog.mockImplementation((options) => {
         return { dispose: vi.fn() };
       });
@@ -321,7 +324,10 @@ describe("PresetsManager", () => {
       const saveCallback = vi.fn();
 
       // Prepare existing custom preset so it is present in the manager's custom list.
-      manager.addPreset({ name: presetName, json: initialJson });
+      manager.addPreset({ presetName, json: initialJson });
+
+      const mockAction = { id: presetName } as IAction;
+      (manager.presetsList.getActionById as Mock).mockReturnValue(mockAction);
 
       mockShowDialog.mockImplementation((options) => {
         return { dispose: vi.fn() };

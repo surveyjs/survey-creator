@@ -1,0 +1,5 @@
+# jest-to-vitest codemod report
+# Generated: 2026-04-28T12:14:04.489Z
+# Targets: tests, tests-presets
+# Scanned: 82, modified: 1, skipped: 81
+# Each line: <file>:<line>\t<category>\t<source>

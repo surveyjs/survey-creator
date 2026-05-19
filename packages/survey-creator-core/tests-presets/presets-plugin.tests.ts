@@ -1,4 +1,5 @@
-﻿import { CreatorTester } from "../tests/creator-tester";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { CreatorPresets, IPreset, PredefinedCreatorPresets, registerUIPreset, UIPreset } from "../src/ui-presets-creator/presets";
 import { PresetsManager } from "../src/ui-preset-editor/presets-manager";
@@ -6,7 +7,6 @@ import { PresetsManager } from "../src/ui-preset-editor/presets-manager";
 import { Basic } from "../src/ui-presets/basic";
 import { Advanced } from "../src/ui-presets/advanced";
 import { Expert } from "../src/ui-presets/expert";
-import { vi } from "vitest";
 
 const originalCreatorPresets: { [key: string]: IPreset } = {};
 let originalPredefinedPresets: string[] = [];

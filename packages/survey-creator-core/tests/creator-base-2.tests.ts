@@ -1,4 +1,5 @@
-﻿import {
+import { MockedFunction, expect, test, vi } from "vitest";
+import {
   Base,
   PanelModel,
   SurveyModel,
@@ -66,7 +67,7 @@ import { vi, type MockedFunction } from "vitest";
 export * from "../src/localization/french";
 
 vi.mock("survey-core", async () => {
-  const originalModule = await vi.importActual<typeof import("survey-core")>("survey-core");
+  const originalModule = await vi.importActual("survey-core");
   return {
     ...originalModule,
     hasLicense: vi.fn((id) => false)

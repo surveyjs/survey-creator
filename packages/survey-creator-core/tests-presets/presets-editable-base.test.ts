@@ -1,8 +1,8 @@
-﻿import { MatrixDropdownRowModel, MatrixDynamicRowModel, SurveyModel, settings } from "survey-core";
+import { Mock, MockInstance, afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
+import { MatrixDropdownRowModel, MatrixDynamicRowModel, SurveyModel, settings } from "survey-core";
 import { CreatorPresetEditableList } from "../src/ui-preset-editor/presets-editable-list";
 import { CreatorPresetBase } from "../src/ui-presets-creator/presets-base";
 import { QuestionMatrixDynamicModel } from "survey-core";
-import { vi, type MockInstance } from "vitest";
 
 // Mock settings object
 vi.mock("survey-core", async () => {

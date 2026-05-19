@@ -1,5 +1,5 @@
-﻿import { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
-import { vi } from "vitest";
+import { expect, test, vi } from "vitest";
+import { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 
 test("Check spin editor question", () => {
   const question = new QuestionSpinEditorModel("q1");

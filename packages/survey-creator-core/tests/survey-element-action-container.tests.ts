@@ -1,8 +1,8 @@
-﻿import { Action, ActionContainer, AdaptiveContainerUpdateOptions, IAction, PopupDropdownViewModel, ResponsivityManager, UpdateResponsivenessMode } from "survey-core";
+import { expect, test, vi } from "vitest";
+import { Action, ActionContainer, AdaptiveContainerUpdateOptions, IAction, PopupDropdownViewModel, ResponsivityManager, UpdateResponsivenessMode } from "survey-core";
 import { SurveyElementActionContainer } from "../src/components/action-container-view-model";
 import { CreatorTester } from "./creator-tester";
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { vi } from "vitest";
 
 test("SurveyElementActionContainer with subtypes fit", () => {
   const actionContainer = new SurveyElementActionContainer();
