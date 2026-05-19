@@ -1,9 +1,9 @@
-﻿import { QuestionMatrixDynamicModel, glc, hasLicense, settings } from "survey-core";
+import { MockedFunction, expect, test, vi } from "vitest";
+import { QuestionMatrixDynamicModel, glc, hasLicense, settings } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { SurveyCreatorModel } from "../src/creator-base";
 import { getLocString } from "../src/editorLocalization";
-import { vi, type MockedFunction } from "vitest";
 //import "survey-creator-core/i18n/german";
 //import "survey-creator-core/i18n/italian";
 //import "survey-creator-core/i18n/french";

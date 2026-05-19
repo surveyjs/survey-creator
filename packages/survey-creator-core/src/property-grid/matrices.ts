@@ -192,15 +192,16 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       item[this.getObjTypeName()] = item.getType();
     }
     const arr = obj[prop.name];
+    const safeArr = Array.isArray(arr) ? arr : (Array.isArray(matrix.value) ? matrix.value : []);
     if (Serializer.isDescendantOf(item.getType(), "itemvalue")) {
-      item.text = getNextItemText(arr);
+      item.text = getNextItemText(safeArr);
     }
     if (Serializer.isDescendantOf(item.getType(), "matrixdropdowncolumn")) {
-      item.title = getNextColumnTitle(arr);
+      item.title = getNextColumnTitle(safeArr);
     }
-    arr.push(item);
-    if (arr != matrix.value) {
-      matrix.value = arr;
+    safeArr.push(item);
+    if (safeArr != matrix.value) {
+      matrix.value = safeArr;
     }
     return item;
   }

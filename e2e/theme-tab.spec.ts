@@ -1,5 +1,4 @@
-import { urlThemeTab, test, expect, setJSON } from "./helper";
-import { creatorTabThemeName, getPropertyGridCategory, getTabbedMenuItemByText } from "../screenshotTests/helper";
+import { urlThemeTab, test, expect, setJSON, getPropertyGridCategory, getTabbedMenuItemByText, creatorTabThemeName } from "./helper";
 
 const title = "Theme Editor";
 
@@ -28,20 +27,26 @@ test.describe(title, () => {
     const backgroundImageQuestionInputSelector = page.locator("div[data-name=backgroundImage] input.sd-formbox__input");
     const backgroundOpacityInputSelector = page.locator("div[data-name=panelBackgroundTransparency] input.sd-formbox__input");
 
+    await expect(colorQuestionInputSelector).toBeVisible();
     await colorQuestionInputSelector.click();
     await expect(colorQuestionInputSelector).toBeFocused();
     await page.keyboard.press("Enter");
+    await page.waitForTimeout(100);
     await expect(colorQuestionInputSelector).not.toBeFocused();
 
+    await expect(backgroundOpacityInputSelector).toBeVisible();
     await backgroundOpacityInputSelector.click();
     await expect(backgroundOpacityInputSelector).toBeFocused();
     await page.keyboard.press("Enter");
+    await page.waitForTimeout(100);
     await expect(backgroundOpacityInputSelector).not.toBeFocused();
 
     await getPropertyGridCategory(page, "Background").click();
+    await expect(backgroundImageQuestionInputSelector).toBeVisible();
     await backgroundImageQuestionInputSelector.click();
     await expect(backgroundImageQuestionInputSelector).toBeFocused();
     await page.keyboard.press("Enter");
+    await page.waitForTimeout(100);
     await expect(backgroundImageQuestionInputSelector).not.toBeFocused();
   });
 });

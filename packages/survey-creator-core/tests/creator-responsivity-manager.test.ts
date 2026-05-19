@@ -1,9 +1,9 @@
 ﻿import { DomWindowHelper } from "survey-core";
+import { expect, test, afterEach, beforeEach, vi } from "vitest";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { SurveyCreatorModel, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
 import { CreatorTester } from "./creator-tester";
-import { afterEach, beforeEach, vi } from "vitest";
 import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./tabs/theme-test-mocks";
 
 class SimpleContainer {
