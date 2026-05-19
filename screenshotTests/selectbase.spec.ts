@@ -108,7 +108,7 @@ test.describe(title, () => {
       maxChoiceContentNestingLevel: 2
     });
     await page.evaluate(() => {
-      (window as any).creator.onNotify.add(()=>{});
+      (window as any).creator.onNotify.add(() => { });
     });
     await setJSON(page, json);
     const choiceExpandButton = page.locator(".svc-choice-elements-button").first();
@@ -116,6 +116,8 @@ test.describe(title, () => {
 
     await choiceExpandButton.click();
     await addQuestion.click();
+    await page.waitForTimeout(1000);
+    await page.mouse.move(0, 0);
     await compareScreenshot(page, ".sd-element__content", "choices-elements-designe-surface.png");
   });
 });
