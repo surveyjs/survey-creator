@@ -154,11 +154,12 @@ export const recreateCreatorWithOptions = async (page: Page, creatorOptions: Rec
 };
 
 export function getBarItemByTitle(page: Page, text: string): Locator {
-  return page.locator(".sd-action[title=\"" + text + "\"]");
+  return page.getByRole("button", { name: text }).and(page.locator(".sd-action"));
 }
 
 export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
-  return page.locator(".svc-question__content-actions .sd-action[title=\"" + text + "\"]");
+  const role = text === "Required" ? "checkbox" : "button";
+  return page.locator(".svc-question__content-actions").getByRole(role, { name: text });
 }
 
 export function getListItemByText(page: Page, text: string): Locator {

@@ -374,6 +374,9 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public get subitemsButtonIcon() {
     return "icon-next_16x16";
   }
+  public getTooltip(): string {
+    return this.tooltip || this.title;
+  }
 }
 
 /**

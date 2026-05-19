@@ -264,7 +264,7 @@ test.describe(title, () => {
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
-    await page.getByTitle("icon-arrowright-16x16").click();
+    await page.getByRole("option", { name: "icon-arrowright-16x16" }).click();
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).blur();
     await page.getByRole("button", { name: "Apply" }).click();
@@ -480,9 +480,9 @@ test.describe(title, () => {
     const items = page.locator(".sv-popup__container table").nth(0);
     expect(await getRowsInputValues(items)).toContain("MyPreset");
 
-    await page.getByTitle("Delete").click();
+    await page.getByRole("button", { name: "Delete" }).click();
 
-    await page.getByTitle("Delete").nth(1).click();
+    await page.getByRole("button", { name: "Delete" }).nth(1).click();
     expect(await getRowsInputValues(items)).toEqual(["Basic", "Advanced", "Expert"]);
     await page.getByRole("button", { name: "Save" }).click();
 
@@ -494,11 +494,11 @@ test.describe(title, () => {
 
   test("Check presets quit confirmation dialog", async ({ page }) => {
     await page.getByText("Dansk").click();
-    await page.getByTitle("Quit").click();
+    await page.getByRole("button", { name: "Quit" }).click();
     await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Return to Survey Creator?");
 
     await page.locator(".sv-popup__close-button").click();
-    await page.getByTitle("Quit").click();
+    await page.getByRole("button", { name: "Quit" }).click();
     await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toContainText("Return to Survey Creator?");
     await page.getByRole("button", { name: "Save and exit" }).click();
     await expect(page.locator(".svc-creator-popup").filter({ visible: true })).toContainText("Save Preset As");
