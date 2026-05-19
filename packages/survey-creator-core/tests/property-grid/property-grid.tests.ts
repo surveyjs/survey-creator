@@ -1563,6 +1563,27 @@ test("property-grid-setup disable for multiple", () => {
   expect(action).toBeTruthy();
   expect(action.enabled).toBeFalsy();
 });
+test("property-grid-setup disable for non-default locale", () => {
+  const question1 = new QuestionDropdownModel("q1");
+  question1.choices = [1, 2, 3];
+  const propertyGrid = new PropertyGridModelTester(question1);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const action = choicesQuestion.getTitleToolbar().getActionById("property-grid-setup");
+  expect(action).toBeTruthy();
+  expect(action.enabled).toBeTruthy();
+
+  editorLocalization.currentLocale = "de";
+  const propertyGrid2 = new PropertyGridModelTester(question1);
+  const choicesQuestion2 = <QuestionMatrixDynamicModel>(
+    propertyGrid2.survey.getQuestionByName("choices")
+  );
+  const action2 = choicesQuestion2.getTitleToolbar().getActionById("property-grid-setup");
+  expect(action2).toBeTruthy();
+  expect(action2.enabled).toBeFalsy();
+  editorLocalization.currentLocale = "";
+});
 test("options.onSetPropertyEditorOptionsCallback - allowBatchEdit", () => {
   const options = new EmptySurveyCreatorOptions();
   var propName = "";
