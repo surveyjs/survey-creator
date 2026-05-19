@@ -239,9 +239,6 @@ test.describe(title, () => {
     await page.locator(".spg-panel__content div[data-name='visibleIf'] button").filter({ hasText: "Edit" }).click();
     const logicPopup = page.locator(".sv-popup.svc-property-editor.sv-popup--modal-overlay");
     await logicPopup.waitFor({ state: "visible" });
-    // Wait for focusFirstInput (100ms setTimeout) to fire, then blur to get a stable unfocused state
-    await page.waitForTimeout(200);
-    await page.evaluate(() => { (document.activeElement as HTMLElement)?.blur(); });
     await compareScreenshot(
       page,
       logicPopup,
