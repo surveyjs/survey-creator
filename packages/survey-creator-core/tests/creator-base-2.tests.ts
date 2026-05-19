@@ -62,7 +62,6 @@ import { ConfigureTablePropertyEditorEvent } from "../src/creator-events-api";
 import { IQuestionToolboxItem } from "../src/toolbox";
 import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
 import { TabbedMenuMode } from "../src/tabbed-menu";
-import { vi, type MockedFunction } from "vitest";
 
 export * from "../src/localization/french";
 
