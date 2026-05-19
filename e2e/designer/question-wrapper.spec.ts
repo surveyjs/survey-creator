@@ -33,10 +33,10 @@ test.describe(title, () => {
     const questions = page.locator(".svc-question__content");
     const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item:not(.sv-dots)");
     const convertActionButton = page.locator(".svc-question__content--selected .svc-dropdown-action--convertTo").first();
-    const convertInputTypeActionButton = questionToolbarActions.locator('button[title="Text"]');
-    const duplicateActionButton = questionToolbarActions.locator('button[title="Duplicate"]');
-    const requiredActionButton = questionToolbarActions.locator('button[title="Required"]');
-    const deleteActionButton = questionToolbarActions.locator('button[title="Delete"]');
+    const convertInputTypeActionButton = questionToolbarActions.getByRole("button", { name: "Text" });
+    const duplicateActionButton = questionToolbarActions.getByRole("button", { name: "Duplicate" });
+    const requiredActionButton = questionToolbarActions.getByRole("checkbox", { name: "Required" });
+    const deleteActionButton = questionToolbarActions.getByRole("button", { name: "Delete" });
     const dotsButton = page.locator(".svc-question__content-actions .sd-action-bar__item.sv-dots");
 
     await expect(questions).toHaveCount(0);
@@ -77,7 +77,7 @@ test.describe(title, () => {
     await getListItemByText(page, "Long Text").click();
     await expect(page.locator(".svc-question__content--selected").locator("textarea")).toBeVisible();
 
-    await questionToolbarActions.locator('button[title="Long Text"]').click();
+    await questionToolbarActions.getByRole("button", { name: "Long Text" }).click();
     await expect(listItems).toHaveCount(convertQuestionTypesCount);
     expect(await popupContent.innerText()).toEqual(convertPopupContent);
 
@@ -88,7 +88,7 @@ test.describe(title, () => {
   test("Single input question wrapper action convert inputType", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
     const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
-    const convertInputTypeActionButton = questionToolbarActions.locator('button[title="Text"]');
+    const convertInputTypeActionButton = questionToolbarActions.getByRole("button", { name: "Text" });
     const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
     const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
@@ -106,7 +106,7 @@ test.describe(title, () => {
 
     await getListItemByText(page, "Date").click();
 
-    await questionToolbarActions.locator('button[title="Date"]').click();
+    await questionToolbarActions.getByRole("button", { name: "Date" }).click();
     await expect(listItems).toHaveCount(convertTextQuestionInputTypesCount);
     expect(await popupContent.innerText()).toEqual(convertInputTypePopupContent);
   });
@@ -114,7 +114,7 @@ test.describe(title, () => {
   test("Single input question wrapper action convert on hover", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
     const unselectedQuestionToolbarActions = page.locator(".svc-question__content-actions").locator(".sd-action-bar__item");
-    const convertActionButton = unselectedQuestionToolbarActions.locator('button[title="Single-Line Input"]');
+    const convertActionButton = unselectedQuestionToolbarActions.getByRole("button", { name: "Single-Line Input" });
     const listItems = page.locator(".sv-popup .sd-menu-item").filter({ visible: true });
     const popupContent = page.locator(".sv-popup__content .sd-menu-list").filter({ visible: true });
 
@@ -137,7 +137,7 @@ test.describe(title, () => {
     await expect(page.locator(".svc-question__content textarea")).toBeVisible();
     await expect(page.locator(".svc-question__content input")).toHaveCount(0);
 
-    await page.locator(".svc-question__content--selected .svc-question__content-actions").locator('button[title="Long Text"]').click();
+    await page.locator(".svc-question__content--selected .svc-question__content-actions").getByRole("button", { name: "Long Text" }).click();
     await expect(listItems).toHaveCount(convertQuestionTypesCount);
     expect(await popupContent.innerText()).toEqual(convertPopupContent);
 
@@ -149,7 +149,7 @@ test.describe(title, () => {
   test("Single input question wrapper action duplicate", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
     const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
-    const duplicateActionButton = questionToolbarActions.locator('button[title="Duplicate"]');
+    const duplicateActionButton = questionToolbarActions.getByRole("button", { name: "Duplicate" });
 
     await expect(questions).toHaveCount(0);
 
@@ -174,7 +174,7 @@ test.describe(title, () => {
   test("Single input question wrapper action change require", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
     const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
-    const requiredActionButton = questionToolbarActions.locator('button[title="Required"]');
+    const requiredActionButton = questionToolbarActions.getByRole("checkbox", { name: "Required" });
     const questionTitle = page.locator(".sd-question__title");
 
     await expect(questions).toHaveCount(0);
@@ -199,7 +199,7 @@ test.describe(title, () => {
   test("Single input question wrapper action delete", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
     const questionToolbarActions = page.locator(".svc-question__content--selected .svc-question__content-actions").locator(".sd-action-bar__item");
-    const deleteActionButton = questionToolbarActions.locator('button[title="Delete"]');
+    const deleteActionButton = questionToolbarActions.getByRole("button", { name: "Delete" });
 
     await expect(questions).toHaveCount(0);
 
