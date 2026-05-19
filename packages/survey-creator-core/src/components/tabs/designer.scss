@@ -37,7 +37,7 @@ svc-tab-designer {
   display: flex;
   padding-block-start: var(--sjs2-spacing-x200, 16px);
   padding-inline-end: var(--sjs2-spacing-x300, 24px);
-  padding-block-end: calc(var(--sjs2-base-unit-spacing) * 1.25);
+  padding-block-end:  var(--sjs2-spacing-x100);
   padding-inline-start: var(--sjs2-spacing-x300, 24px);
 
   flex-direction: column-reverse;
