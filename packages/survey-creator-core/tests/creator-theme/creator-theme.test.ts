@@ -33,7 +33,7 @@ test("onCreatorThemePropertyChanged event", (): any => {
 
 test("registerCreatorTheme function", (): any => {
   const customThemeFamily = "custom";
-  const customThemeName = "custom-light";
+  const customThemeFullName = "custom-light";
   const customCssVariables = {
     "--sjs2-color-project-brand-600": "red",
     "--sjs2-color-utility-surface-designer": "orange",
@@ -49,16 +49,17 @@ test("registerCreatorTheme function", (): any => {
     const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
     const themeChooser = designerPlugin["themePropertyGridViewModel"].survey.getQuestionByName("themeName") as QuestionDropdownModel;
     expect(themeChooser.choices).toHaveLength(2);
-    expect(themeChooser.choices[1].value).toBe(customThemeName);
+    expect(themeChooser.choices[1].value).toBe(customThemeFamily);
     //expect(creator.creatorTheme).toBeUndefined();
     //expect(creator.themeVariables).toStrictEqual({});
 
-    themeChooser.value = customThemeName;
-    expect(creator.creatorTheme.themeName).toBe(customThemeName);
+    themeChooser.value = customThemeFamily;
+    expect(creator.creatorTheme.themeName).toBe(customThemeFamily);
+    expect(creator.creatorTheme.colorPalette).toBeUndefined();
     expect(creator.themeVariables).toStrictEqual({ ...customCssVariables });
   } finally {
-    PredefinedCreatorThemes.splice(PredefinedCreatorThemes.indexOf(customThemeName), 1);
-    delete CreatorThemes[customThemeName];
+    PredefinedCreatorThemes.splice(PredefinedCreatorThemes.indexOf(customThemeFamily), 1);
+    delete CreatorThemes[customThemeFullName];
   }
 });
 

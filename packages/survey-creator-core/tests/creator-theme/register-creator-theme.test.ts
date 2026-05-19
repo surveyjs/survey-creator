@@ -36,20 +36,47 @@ test("Creator theme: update editors after theme switching", (): any => {
   const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
   const themePGSurvey = designerPlugin["themePropertyGridViewModel"].survey;
   const themeName = themePGSurvey.findQuestionByName("themeName");
+  const colorPalette = themePGSurvey.findQuestionByName("colorPalette");
   const surfaceBackgroundColor = themePGSurvey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
   const primaryBackgroundColor = themePGSurvey.findQuestionByName(CreatorThemeModel.varColorProjectBrand);
 
-  expect(themeName.value).toEqual("default-light");
+  expect(themeName.value).toEqual("default");
+  expect(colorPalette.value).toEqual("light");
   expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
   expect(primaryBackgroundColor.value).toEqual("#19B394");
 
-  // Survey Core registers contrast as "contrast-light" / "contrast-dark", not "default-contrast".
-  themeName.value = "contrast-light";
+  themeName.value = "contrast";
+  expect(themeName.value).toEqual("contrast");
+  expect(colorPalette.value).toEqual("light");
   expect(surfaceBackgroundColor.value).toEqual("#F4F2FB");
   expect(primaryBackgroundColor.value).toEqual("#3A179E");
 
-  themeName.value = "default-light";
-  expect(themeName.value).toEqual("default-light");
+  themeName.value = "default";
+  expect(themeName.value).toEqual("default");
+  expect(colorPalette.value).toEqual("light");
+  expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
+  expect(primaryBackgroundColor.value).toEqual("#19B394");
+});
+
+test("Creator theme: update editors after palette switching", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
+  const designerPlugin: TabDesignerPlugin = <TabDesignerPlugin>creator.getPlugin("designer");
+  const themePGSurvey = designerPlugin["themePropertyGridViewModel"].survey;
+  const themeName = themePGSurvey.findQuestionByName("themeName");
+  const colorPalette = themePGSurvey.findQuestionByName("colorPalette");
+  const surfaceBackgroundColor = themePGSurvey.findQuestionByName(CreatorThemeModel.varColorUtilitySurface);
+  const primaryBackgroundColor = themePGSurvey.findQuestionByName(CreatorThemeModel.varColorProjectBrand);
+
+  expect(themeName.value).toEqual("default");
+  expect(colorPalette.value).toEqual("light");
+
+  colorPalette.value = "dark";
+  expect(themeName.value).toEqual("default");
+  expect(colorPalette.value).toEqual("dark");
+
+  colorPalette.value = "light";
+  expect(themeName.value).toEqual("default");
+  expect(colorPalette.value).toEqual("light");
   expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
   expect(primaryBackgroundColor.value).toEqual("#19B394");
 });

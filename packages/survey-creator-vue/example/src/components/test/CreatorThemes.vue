@@ -6,5 +6,4 @@
 import { registerCreatorTheme } from 'survey-creator-core';
 import Common from './Common.vue';
 import SurveyTheme from 'survey-core/themes';
-registerCreatorTheme(SurveyTheme);
 </script>

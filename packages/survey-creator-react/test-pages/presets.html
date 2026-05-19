@@ -34,6 +34,7 @@
   window.addEventListener("DOMContentLoaded", () => {
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+    SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
     SurveyCreatorCore.registerUIPreset(SurveyCreatorUIPreset);
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true, showJSONEditorTab: false });
     new SurveyCreatorCore.UIPreset(SurveyCreatorUIPreset.Expert).applyTo(creator);

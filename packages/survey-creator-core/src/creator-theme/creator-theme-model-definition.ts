@@ -5,6 +5,7 @@ const creatorThemeModelProperties: ISurveyPropertiesDefinition = {
   "creatortheme": {
     properties: [
       { name: "themeName", index: 2 },
+      { name: "colorPalette", index: 3 },
       { name: CreatorThemeModel.varColorProjectBrand, index: 10, tab: "accentColors" },
       { name: CreatorThemeModel.varColorUtilitySurface, index: 30, tab: "surfaceBackground" },
       { name: "fontScale", index: 40, tab: "scaling" },

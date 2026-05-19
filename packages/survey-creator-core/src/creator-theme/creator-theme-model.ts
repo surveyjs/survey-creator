@@ -4,12 +4,13 @@ import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
 import { calculateThemeVariables } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "./creator-themes";
+import { getThemeFullName } from "../components/tabs/theme-model";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
 import { DefaultLight } from "survey-core/themes";
 
 export class CreatorThemeModel extends Base implements ICreatorTheme {
-  static legacyThemeName = "sc2020";
-  static defaultThemeName = "default-light";
+  static defaultThemeName = "default";
+  static defaultColorPalette = "light";
 
   static varBaseUnitFontSize = "--sjs2-base-unit-font-size";
   static varBaseUnitLineHeight = "--sjs2-base-unit-line-height";
@@ -35,26 +36,42 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   };
 
   @property() themeName: string = CreatorThemeModel.defaultThemeName;
+  @property() colorPalette: "light" | "dark" | string = CreatorThemeModel.defaultColorPalette;
   @property() scale: number;
   @property() fontScale: number;
-  @property() isLight: boolean = true;
+
+  public get isLight(): boolean {
+    return this.colorPalette !== "dark";
+  }
+  public set isLight(val: boolean) {
+    this.colorPalette = val ? "light" : "dark";
+  }
 
   public onThemeSelected = new EventBase<CreatorThemeModel, { theme: ICreatorTheme }>();
   public onThemePropertyChanged = new EventBase<CreatorThemeModel, { name: string, value: any }>();
 
   public getRootElement = (): HTMLElement => undefined;
 
-  private getThemeFromCreatorThemes(themeName: string): ICreatorTheme {
-    const theme = CreatorThemes[themeName];
+  public hasVariations(palette: boolean): boolean {
+    if (!palette) return false;
+    const registeredThemes = Object.keys(CreatorThemes);
+    const themeLight = this.themeName + "-light";
+    const themeDark = this.themeName + "-dark";
+    return registeredThemes.indexOf(themeLight) !== -1 && registeredThemes.indexOf(themeDark) !== -1;
+  }
+
+  private getThemeFromCreatorThemes(themeName: string, colorPalette?: string): ICreatorTheme {
+    const fullKey = getThemeFullName({ themeName, colorPalette });
+    const theme = CreatorThemes[fullKey];
     if (!theme) return;
 
-    if (themeName === CreatorThemeModel.defaultThemeName && (!theme.cssVariables || Object.keys(theme.cssVariables).length === 0)) {
+    if (themeName === CreatorThemeModel.defaultThemeName && (colorPalette || CreatorThemeModel.defaultColorPalette) === CreatorThemeModel.defaultColorPalette && (!theme.cssVariables || Object.keys(theme.cssVariables).length === 0)) {
       theme.cssVariables = { ...this.baseThemeVariables, ...DefaultLight.cssVariables };
     }
     return theme;
   }
   private isSpecialBackgroundFromCurrentTheme() {
-    const currentTheme = this.getThemeFromCreatorThemes(this.themeName);
+    const currentTheme = this.getThemeFromCreatorThemes(this.themeName, this.colorPalette);
     const currentThemeCssVariables = currentTheme?.cssVariables;
     return colorsAreEqual(currentThemeCssVariables?.[CreatorThemeModel.varColorUtilitySurface], this[CreatorThemeModel.varColorUtilitySurface]);
   }
@@ -119,8 +136,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
   }
 
   private cssVariableChangedHandler() {
-    if (this.themeName === CreatorThemeModel.defaultThemeName && Object.keys(this.cssVariables).length === 0) {
-      this.loadTheme({ themeName: CreatorThemeModel.defaultThemeName });
+    if (this.themeName === CreatorThemeModel.defaultThemeName && this.colorPalette === CreatorThemeModel.defaultColorPalette && Object.keys(this.cssVariables).length === 0) {
+      this.loadTheme({ themeName: CreatorThemeModel.defaultThemeName, colorPalette: CreatorThemeModel.defaultColorPalette });
     }
   }
   private setThemeCssVariablesChanges(name: string, value: any) {
@@ -142,7 +159,11 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
     if (name === "themeName") {
       this.resetColorThemeCssVariablesChanges();
-      this.loadTheme({ themeName: newValue });
+      this.loadTheme({ themeName: newValue, colorPalette: this.colorPalette });
+      this.onThemeSelected.fire(this, { theme: this.toJSON() });
+    } else if (name === "colorPalette") {
+      this.resetColorThemeCssVariablesChanges();
+      this.loadTheme({ themeName: this.themeName, colorPalette: newValue });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name === CreatorThemeModel.varColorProjectBrand) {
       this.setThemeCssVariablesChanges(name, newValue);
@@ -209,23 +230,20 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this.blockThemeChangedNotifications += 1;
     try {
       this.initializeBaseThemeVariables();
-      const baseTheme = this.getThemeFromCreatorThemes(theme.themeName) || {};
-      let resolvedThemeName = theme.themeName;
-      const colorPalette = theme.colorPalette || "light";
-      if (resolvedThemeName && !CreatorThemes[resolvedThemeName]) {
-        const composedThemeName = `${resolvedThemeName}-${colorPalette}`;
-        if (CreatorThemes[composedThemeName]) {
-          resolvedThemeName = composedThemeName;
-        }
-      }
-      this.themeName = resolvedThemeName || baseTheme.themeName || CreatorThemeModel.defaultThemeName;
+      const requestedColorPalette = theme.colorPalette || (theme.isLight === false ? "dark" : undefined);
+      const baseTheme = (theme.themeName ? this.getThemeFromCreatorThemes(theme.themeName, requestedColorPalette || this.colorPalette || CreatorThemeModel.defaultColorPalette) : undefined) || {};
+      const resolvedColorPalette = requestedColorPalette || baseTheme.colorPalette || this.colorPalette || CreatorThemeModel.defaultColorPalette;
+      const resolvedThemeName = theme.themeName || baseTheme.themeName || CreatorThemeModel.defaultThemeName;
+
+      this.themeName = resolvedThemeName;
+      this.colorPalette = resolvedColorPalette;
 
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, baseTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
 
       const effectiveTheme: ICreatorTheme = {};
-      assign(effectiveTheme, baseTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName });
+      assign(effectiveTheme, baseTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.colorPalette });
 
       this.fromJSON(effectiveTheme);
     } finally {
@@ -258,7 +276,11 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       assign(_json, json);
       delete _json["cssVariables"];
       super.fromJSON(_json, options);
-      this.isLight = json.colorPalette !== undefined ? json.colorPalette === "light" : (json.isLight !== undefined ? json.isLight : true);
+      if (json.colorPalette !== undefined) {
+        this.colorPalette = json.colorPalette;
+      } else if (json.isLight !== undefined) {
+        this.colorPalette = json.isLight ? "light" : "dark";
+      }
 
       if (json.cssVariables) {
         const rawCssVariables = { ...json.cssVariables };
@@ -277,8 +299,8 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     this.scaleCssVariables();
 
     const result = super.toJSON(options);
-    if (!this.isLight) {
-      result.colorPalette = "dark";
+    if (result.colorPalette === CreatorThemeModel.defaultColorPalette) {
+      delete result.colorPalette;
     }
     const cssVariables = {};
     assign(cssVariables, this.initialCssVariables, this.themeCssVariablesChanges);
@@ -304,6 +326,18 @@ Serializer.addClass(
       choices: PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocString("creatortheme.names." + theme) })),
     },
     {
+      type: "buttongroup",
+      name: "colorPalette",
+      displayName: "",
+      choices: [
+        { value: "light" },
+        { value: "dark" }
+      ],
+      enableIf: (obj: CreatorThemeModel): boolean => {
+        return !obj || obj.hasVariations(true);
+      },
+    },
+    {
       type: "string",
       visible: false,
       name: "iconSet",
@@ -318,9 +352,6 @@ Serializer.addProperties("creatortheme", [
     type: "color",
     name: CreatorThemeModel.varColorUtilitySurface,
     default: "#EDF9F7",
-    enableIf: (obj: CreatorThemeModel): boolean => {
-      return !obj || obj.themeName !== CreatorThemeModel.legacyThemeName;
-    },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.titleLocation = "hidden";
@@ -350,9 +381,6 @@ Serializer.addProperties("creatortheme", [
     name: "fontScale",
     isSerializable: false,
     default: 100,
-    enableIf: (obj: CreatorThemeModel): boolean => {
-      return !obj || obj.themeName !== CreatorThemeModel.legacyThemeName;
-    },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
@@ -382,9 +410,6 @@ Serializer.addProperties("creatortheme", [
     name: "scale",
     isSerializable: false,
     default: 100,
-    enableIf: (obj: CreatorThemeModel): boolean => {
-      return !obj || obj.themeName !== CreatorThemeModel.legacyThemeName;
-    },
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.unit = "%";
@@ -397,10 +422,6 @@ Serializer.addProperties("creatortheme", [
         editor.changeValueOnPressing = false;
       }
     }
-  }, {
-    name: "isLight:boolean",
-    visible: false,
-    isSerializable: false,
   },
   { name: "--sjs-primary-background-400", visible: false },
   { name: "--sjs-primary-background-10", visible: false },
