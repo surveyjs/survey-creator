@@ -3,13 +3,10 @@
 .spg-dropdown {
     display: flex;
 
-    padding-top: calc(var(--ctr-editor-padding-top, var(--sjs-spacing-x05)));
-    padding-right: calc(var(--ctr-editor-padding-right, var(--sjs-spacing-x05)));
-    padding-bottom: calc(var(--ctr-editor-padding-bottom, var(--sjs-spacing-x05)));
-    padding-left: calc(
-        var(--ctr-editor-padding-left, var(--sjs-spacing-x05)) +
-            var(--ctr-editor-content-margin-left, var(--sjs-spacing-x150))
-    );
+    padding-top: var(--sjs2-spacing-x050);
+    padding-right: var(--sjs2-spacing-x050);
+    padding-bottom: var(--sjs2-spacing-x050);
+    padding-left: var(--sjs2-spacing-x200);
 }
 
 .spg-dropdown__value {
@@ -22,15 +19,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    margin-top: var(--ctr-editor-content-margin-top, var(--sjs-spacing-x1));
-    margin-right: var(--ctr-editor-content-margin-right, var(--sjs-spacing-x150));
-    margin-bottom: var(--ctr-editor-content-margin-bottom, var(--sjs-spacing-x1));
+    margin-top: var(--sjs2-spacing-x100);
+    margin-right: var(--sjs2-spacing-x150);
+    margin-bottom: var(--sjs2-spacing-x100);
     margin-left: 0;
 }
 .spg-dropdown__filter-string-input {
     @include sjs2--typography--default;
 
-    color: var(--ctr-editor-content-text-color, var(--sjs-layer-3-foreground-100, #000000e6));
+    color: var(--sjs2-color-fg-basic-primary);
 }
 
 .spg-dropdown-popup.sv-popup--menu-popup {
@@ -38,10 +35,8 @@
 }
 
 .spg-dropdown__clean-button {
-    --thm-ctr-editor-content-margin-top: var(--ctr-editor-content-margin-top, var(--sjs-spacing-x1));
-    --thm-ctr-editor-content-margin-bottom: var(--ctr-editor-content-margin-bottom, var(--sjs-spacing-x1));
-    margin-top: calc(-1 * var(--thm-ctr-editor-content-margin-top));
-    margin-bottom: calc(-1 * var(--thm-ctr-editor-content-margin-bottom));
+    margin-top: var(--sjs2-spacing-negative-x100);
+    margin-bottom: var(--sjs2-spacing-negative-x100);
     use {
         fill: inherit;
     }
@@ -49,54 +44,51 @@
 
 .spg-dropdown {
     .sd-dropdown-action-bar {
-        margin-inline-start: var(--ctr-editor-gap, var(--sjs-spacing-x05));
-        gap: var(--ctr-editor-buttons-gap, var(--sjs-spacing-x05));
+        margin-inline-start: var(--sjs2-spacing-x050);
+        gap: var(--sjs2-spacing-x050);
     }
 
     .sd-editor-button-item {
-        padding-top: var(--ctr-editor-button-padding-top, var(--sjs-spacing-x1));
-        padding-right: var(--ctr-editor-button-padding-right, var(--sjs-spacing-x1));
-        padding-bottom: var(--ctr-editor-button-padding-bottom, var(--sjs-spacing-x1));
-        padding-left: var(--ctr-editor-button-padding-left, var(--sjs-spacing-x1));
+        padding: var(--sjs2-spacing-x100);
         transform: none;
 
         &:hover,
         &:focus {
-            border-radius: var(--ctr-editor-button-corner-radius, var(--sjs-corner-radius-x05));
-            background: var(--ctr-editor-button-background-color-hovered, var(--sjs-layer-3-background-400, #eaeaeaff));
+            border-radius: var(--sjs2-radius-x050);
+            background: var(--sjs2-color-bg-basic-secondary-dim);
             transition: background $creator-transition-duration;
         }
 
         &.sd-editor-button-item--pressed {
-            border-radius: var(--ctr-editor-button-corner-radius, var(--sjs-corner-radius-x05));
-            opacity: var(--ctr-editor-button-icon-opacity-pressed, 0.5);
-            background: var(--ctr-editor-button-background-color-hovered, var(--sjs-layer-3-background-400, #eaeaeaff));
+            border-radius: var(--sjs2-radius-x050);
+            opacity: var(--sjs2-opacity-pressed);
+            background: var(--sjs2-color-bg-basic-secondary-dim);
             transition-property: opacity, background-color;
             transition-duration: $creator-transition-duration;
         }
 
         use {
-            fill: var(--ctr-editor-button-icon-color, var(--sjs-layer-3-foreground-75, #000000bf));
+            fill: var(--sjs2-color-fg-basic-primary-muted);
         }
     }
 }
 .spg-question__content {
     .sd-formbox--readonly .sd-dropdown__input {
-        opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
+        opacity: var(--sjs2-opacity-disabled);
     }
 }
 .spg-dropdown.sd-input--disabled {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
 
     .spg-dropdown__value {
-        opacity: var(--ctr-editor-content-text-opacity-disabled, 0.25);
+        opacity: var(--sjs2-opacity-disabled);
     }
     .sd-editor-button-item {
-        opacity: var(--ctr-editor-button-icon-opacity-disabled, 0.25);
+        opacity: var(--sjs2-opacity-disabled);
         background: transparent;
 
         svg {
-            fill: var(--ctr-editor-button-icon-color-disabled, var(--sjs-layer-3-foreground-75, #000000bf));
+            fill: var(--sjs2-color-fg-basic-primary-muted);
         }
     }
 }

@@ -406,30 +406,6 @@ Serializer.addProperties("creatortheme", [
     default: "8px",
     visible: false,
   }, {
-    name: "--lbr-font-unit",
-    default: "8px",
-    visible: false,
-  }, {
-    name: "--lbr-line-height-unit",
-    default: "8px",
-    visible: false,
-  }, {
-    name: "--lbr-size-unit",
-    default: "8px",
-    visible: false,
-  }, {
-    name: "--lbr-spacing-unit",
-    default: "8px",
-    visible: false,
-  }, {
-    name: "--lbr-corner-radius-unit",
-    default: "8px",
-    visible: false,
-  }, {
-    name: "--lbr-size-unit",
-    default: "8px",
-    visible: false,
-  }, {
     type: "spinedit",
     name: "scale",
     isSerializable: false,

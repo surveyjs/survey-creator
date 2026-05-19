@@ -21,8 +21,8 @@
   width: var(--sjs2-size-x400, 32px);
   height: var(--sjs2-size-x300, 24px);
   box-sizing: border-box;
-  border: 1px solid var(--ctr-list-item-color-swatch-border-color, var(--sjs-border-25-overlay, #00000026));
-  margin-left: var(--ctr-editor-color-swatch-margin-left, var(--sjs-spacing-x150));
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-utility-scrollbar);
+  margin-left: var(--sjs2-spacing-x150);
 
   .sv-svg-icon {
     position: absolute;
@@ -35,16 +35,16 @@
   }
 }
 .spg-question--disabled .spg-color-editor {
-  background-color: var(--ctr-editor-background-color-disabled, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-bg-basic-primary);
 }
 .spg-color-editor__color-swatch--disabled {
   .sv-svg-icon {
-    opacity: 0.25;
+    opacity: var(--sjs2-opacity-disabled);
   }
 }
 
 .spg-color-editor__color-swatch--default {
   .sv-svg-icon {
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
   }
 }

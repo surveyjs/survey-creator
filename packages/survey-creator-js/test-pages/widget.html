@@ -18,7 +18,6 @@
   <script src="../node_modules/survey-core/survey.core.js"></script>
   <script src="../node_modules/survey-core/survey.i18n.js"></script>
   <script src="../node_modules/survey-core/themes/index.js"></script>
-  <script src="../node_modules/survey-core/themes/test.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
   <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
@@ -46,8 +45,6 @@
   <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
   <script src="https://unpkg.com/jquery-bar-rating"></script>
   <script src="./sc.js"></script>
-  <script src="../node_modules/survey-core/themes/test-creator.js"></script>
-  <script src="../node_modules/survey-core/themes/test-surface.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
   <!-- Themes -->
   <link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bars-1to10.css" />
@@ -69,10 +66,7 @@
 </body>
 <script>
   SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
-  SurveyCreatorCore.registerCreatorTheme(SurveyTheme.TestCreator);
   const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-  creator.applyCreatorTheme(SurveyTheme.TestCreator);
-  creator.applySurfaceTheme(SurveyTheme.TestSurface);
   creator.tabResponsivenessMode = "menu";
   creator["animationEnabled"] = false;
   creator.showOneCategoryInPropertyGrid = false;
