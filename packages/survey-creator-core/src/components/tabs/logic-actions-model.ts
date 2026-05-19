@@ -170,6 +170,9 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     }
     if (!obj["setToName"] || !survey) return;
     const originalQuestion = <Question>survey.getQuestionByValueName(obj["setToName"]);
+    if (question.parent && question.parent["wasRendered"]) {
+      question.onFirstRendering();
+    }
     question.title = originalQuestion.title;
     question.titleLocation = "top";
   }
