@@ -473,8 +473,10 @@ test.describe(title, () => {
     await compareScreenshot(page, toolboxElement, "toolbox-search-right.png");
     await toolboxSearch.click();
     await toolboxSearch.type("single");
+    await page.waitForTimeout(300);
     await compareScreenshot(page, toolboxElement, "toolbox-search-right-entered.png");
     await toolboxSearch.type("qwerty");
+    await page.waitForTimeout(300);
     await compareScreenshot(page, toolboxElement, "toolbox-search-right-placeholder.png");
   });
 
