@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, expect, setJSON, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody } from "./helper";
+import { url, compareScreenshot, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody } from "./helper";
 
 const title = "Design Surface Screenshot";
 
@@ -217,6 +217,7 @@ test.describe(title, () => {
   });
 
   test("Choices (Checkbox): Layout", async ({ page }) => {
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.setViewportSize({ width: 2560, height: 1440 });
 
     const json = {
@@ -270,6 +271,7 @@ test.describe(title, () => {
   });
 
   test("Choices (Checkbox): Layout small screen", async ({ page }) => {
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.setViewportSize({ width: 500, height: 900 });
     const json = {
       showQuestionNumbers: true,
@@ -605,6 +607,7 @@ test.describe(title, () => {
   });
 
   test("Check question scroll", async ({ page }) => {
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.setViewportSize({ width: 1952, height: 1080 });
     await setJSON(page, {
       showQuestionNumbers: true,
@@ -815,6 +818,7 @@ test.describe(title, () => {
   });
 
   test("String editor whitespaces and linedreaks", async ({ page }) => {
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.evaluate(() => {
       window["creator"].onSurveyInstanceCreated.add((sender, options) => {
         options.survey.onTextMarkdown.add((survey, options) => {
@@ -1352,6 +1356,7 @@ test.describe(title, () => {
   });
 
   test("Dynamic panels in multi-line", async ({ page }) => {
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.setViewportSize({ width: 1032, height: 1000 });
     const json = {
       showQuestionNumbers: true,
