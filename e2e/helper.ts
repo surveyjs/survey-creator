@@ -79,6 +79,13 @@ export const setSurveyProp = async (page: Page, propName: string, value: unknown
   }, { propName, value });
 };
 
+export const setCreatorProp = async (page: Page, propName: string, value: unknown) => {
+  await page.waitForFunction(() => !!window["creator"]);
+  await page.evaluate(({ propName, value }) => {
+    window["creator"][propName] = value;
+  }, { propName, value });
+};
+
 export const getJSON = async (page: Page) => {
   return await page.evaluate(() => {
     return JSON.parse(window["creator"].text);
