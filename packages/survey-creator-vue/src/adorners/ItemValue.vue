@@ -37,7 +37,7 @@
     </div>
   </div>
   <SvComponent
-    v-if="adorner.showPanel"
+    v-if="adorner.renderedShowPanel"
     :is="getPanelComponentName(item.panel)"
     v-bind="getPanelComponentData(item.panel)"
   />

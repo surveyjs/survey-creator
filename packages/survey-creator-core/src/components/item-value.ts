@@ -10,7 +10,12 @@ import {
   ITargets,
   PanelModelBase,
   Action,
-  ComputedUpdater
+  ComputedUpdater,
+  AnimationBoolean,
+  ChoiceItem,
+  settings,
+  prepareElementForVerticalAnimation,
+  cleanHtmlElementAfterAnimation
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { DragDropChoices } from "survey-core";
@@ -243,7 +248,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
       this.item.setIsVisible(!(this.allowItemOperations?.allowAdd === false));
     }
   }
-  protected onFocusAction (event: FocusEvent): void {
+  protected onFocusAction(event: FocusEvent): void {
     const adorner = this.question.getPropertyValue(SurveyElementAdornerBase.AdornerValueName);
     if (adorner) {
       adorner.select(adorner, event);
@@ -366,6 +371,47 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     }
     return !!parent && index < level;
   }
+  @property() private renderedShowPanelValue: boolean;
+  private panelAnimationValue?: AnimationBoolean;
+  private get panelAnimation(): AnimationBoolean | undefined {
+    if (!this.panelAnimationValue && this.question.supportElementsInChoice()) {
+      const baseOptions = {
+        onBeforeRunAnimation: prepareElementForVerticalAnimation,
+        onAfterRunAnimation: cleanHtmlElementAfterAnimation
+      };
+      const cssClasses = this.question.getCssClassesForCommentPanelAnimation("panel");
+      this.panelAnimationValue = new AnimationBoolean({
+        getEnterOptions() {
+          return { cssClass: cssClasses.onEnter, ...baseOptions };
+        },
+        getLeaveOptions() {
+          return { cssClass: cssClasses.onLeave, ...baseOptions };
+        },
+        getAnimatedElement: () => {
+          return this.question.getWrapperElement()?.querySelector(`#${this.item.panel.id}`).parentElement.parentElement as HTMLElement;
+        },
+        isAnimationEnabled: () => {
+          return settings.animationEnabled && this.creator.animationAllowed;
+        },
+        getRerenderEvent: () => {
+          return this.onElementRerendered;
+        },
+      }, (val) => this.renderedShowPanelValue = val, () => this.renderedShowPanelValue);
+    }
+    return this.panelAnimationValue;
+  }
+  public set renderedShowPanel(val: boolean) {
+    if (this.panelAnimation) {
+      const panel = (this.item as ChoiceItem).panel;
+      panel.forceRenderRows(panel.visibleRows);
+      this.panelAnimation.sync(val);
+    } else {
+      this.renderedShowPanelValue = val;
+    }
+  }
+  public get renderedShowPanel(): boolean {
+    return this.renderedShowPanelValue;
+  }
   public get showPanel(): boolean {
     return this.getPropertyValue("showPanel", false);
   }
@@ -376,6 +422,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     }
     this.expandCollapseManager.setChoicesState(this.item, val, this);
     this.expandCollapse(val);
+    this.renderedShowPanel = val;
   }
   public expandCollapse(val: boolean): void {
     this.setPropertyValue("showPanel", val);
