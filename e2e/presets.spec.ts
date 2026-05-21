@@ -526,4 +526,31 @@ test.describe(title, () => {
     await expect(page.locator(".svc-creator-confirm-dialog .sv-popup__container")).toBeHidden();
   });
 
+  test("Hide action popup after scroll content", async ({ page }) => {
+    const visiblePopups = page.locator(".sv-popup__container").filter({ visible: true });
+    const timeout = 50;
+
+    expect(await visiblePopups.count()).toBe(0);
+    await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Languages" }).click();
+    await page.waitForTimeout(timeout);
+    expect(await visiblePopups.count()).toBe(1);
+
+    await page.locator(".svc-tab-designer > .sv-scroll__wrapper > .sv-scroll__scrollbar").first().evaluate((el) => el.scrollBy(2, 10));
+    await page.waitForTimeout(timeout);
+    expect(await visiblePopups.count()).toBe(0);
+  });
+
+  test("Hide dropdown popup after scroll content", async ({ page }) => {
+    const visiblePopups = page.locator(".sv-popup__container").filter({ visible: true });
+    const timeout = 50;
+
+    expect(await visiblePopups.count()).toBe(0);
+    await page.locator("[data-name='languages_creator']").getByRole("button", { name: "Select", exact: true }).click();
+    await page.waitForTimeout(timeout);
+    expect(await visiblePopups.count()).toBe(1);
+
+    await page.locator(".svc-tab-designer > .sv-scroll__wrapper > .sv-scroll__scrollbar").first().evaluate((el) => el.scrollBy(2, 10));
+    await page.waitForTimeout(timeout);
+    expect(await visiblePopups.count()).toBe(0);
+  });
 });
