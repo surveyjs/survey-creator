@@ -167,7 +167,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     res.push(new Action({
       iconName: new ComputedUpdater(() => this.cssClasses.decreaseButtonIcon) as unknown as string,
       component,
-      action: () => { },
+      action: () => { this.onDownButtonClick(); },
       enabled: new ComputedUpdater(() => !this.isInputReadOnly),
       data: {
         question,
@@ -179,7 +179,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     res.push(new Action({
       iconName: new ComputedUpdater(() => this.cssClasses.increaseButtonIcon) as unknown as string,
       component,
-      action: () => { },
+      action: () => { this.onUpButtonClick(); },
       enabled: new ComputedUpdater(() => !this.isInputReadOnly),
       data: {
         question,
