@@ -311,4 +311,22 @@ export async function hideElement(page: Page, selector: string) {
   });
 }
 
+const HIDE_CONTENT_BEHIND_POPUP_STYLE_ID = "hide-content-behind-popup-style";
+
+export async function hideContentBehindPopup(page: Page) {
+  const handle = await page.addStyleTag({
+    content: `
+      .svc-creator, .sps-body { visibility: hidden !important; }
+      .sv-popup, .sv-popup * { visibility: visible !important; }
+    `,
+  });
+  await handle.evaluate((el, id) => { (el as HTMLElement).id = id; }, HIDE_CONTENT_BEHIND_POPUP_STYLE_ID);
+}
+
+export async function showContentBehindPopup(page: Page) {
+  await page.evaluate((id) => {
+    document.getElementById(id)?.remove();
+  }, HIDE_CONTENT_BEHIND_POPUP_STYLE_ID);
+}
+
 export { expect };
