@@ -223,7 +223,9 @@ export class UIPresetEditor implements ICreatorPlugin {
     presets.forEach(p => {
       p.action = (item) => {
         this.pagesList.selectedItem = item;
-        this.model.model.currentPage = this.model.model.getPageByName(item.id);
+        if (this.model) {
+          this.model.model.currentPage = this.model.model.getPageByName(item.id);
+        }
       };
     });
     const popupOptions = {
