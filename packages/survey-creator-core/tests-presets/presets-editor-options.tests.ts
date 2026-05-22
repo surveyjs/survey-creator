@@ -82,8 +82,8 @@ test("CreatorPresetEditableOptions - maxChoiceContentNestingLevel question exist
   const survey = editor.model;
   const question = survey.getQuestionByName("options_maxChoiceContentNestingLevel");
   expect(question).toBeTruthy();
-  expect(editor.creator.maxChoiceContentNestingLevel).toBe(0);
-  expect(question.value).toBe(0);
+  expect(editor.creator.maxChoiceContentNestingLevel).toBe(2);
+  expect(question.value).toBe(2);
   question.value = 2;
   expect(editor.creator.maxChoiceContentNestingLevel).toBe(2);
 });
@@ -92,16 +92,16 @@ test("CreatorPresetEditableOptions - maxChoiceContentNestingLevel export", () =>
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
   expect(editor.json).toEqual({});
-  survey.getQuestionByName("options_maxChoiceContentNestingLevel").value = 2;
-  expect(editor.json.options.maxChoiceContentNestingLevel).toBe(2);
   survey.getQuestionByName("options_maxChoiceContentNestingLevel").value = 0;
+  expect(editor.json.options.maxChoiceContentNestingLevel).toBe(0);
+  survey.getQuestionByName("options_maxChoiceContentNestingLevel").value = 2;
   expect(editor.json).toEqual({});
 });
 
 test("CreatorPresetEditableOptions - maxChoiceContentNestingLevel import", () => {
   const editor = new CreatorPresetEditorModel();
   const survey = editor.model;
-  expect(survey.getQuestionByName("options_maxChoiceContentNestingLevel").value).toBe(0);
+  expect(survey.getQuestionByName("options_maxChoiceContentNestingLevel").value).toBe(2);
   editor.json = { options: { maxChoiceContentNestingLevel: 3 } };
   expect(survey.getQuestionByName("options_maxChoiceContentNestingLevel").value).toBe(3);
 });
@@ -116,7 +116,7 @@ test("CreatorPresetEditableOptions - maxChoiceContentNestingLevel initial value 
 
 test("UIPreset non-visual - maxChoiceContentNestingLevel applied via options JSON", () => {
   const creator = new CreatorTester();
-  expect(creator.maxChoiceContentNestingLevel).toBe(0);
+  expect(creator.maxChoiceContentNestingLevel).toBe(2);
   const preset = new UIPreset({ options: { maxChoiceContentNestingLevel: 2 } });
   preset.applyTo(creator);
   expect(creator.maxChoiceContentNestingLevel).toBe(2);
@@ -126,5 +126,5 @@ test("UIPreset non-visual - maxChoiceContentNestingLevel default (not in options
   const creator = new CreatorTester();
   const preset = new UIPreset({ options: {} });
   preset.applyTo(creator);
-  expect(creator.maxChoiceContentNestingLevel).toBe(0);
+  expect(creator.maxChoiceContentNestingLevel).toBe(2);
 });
