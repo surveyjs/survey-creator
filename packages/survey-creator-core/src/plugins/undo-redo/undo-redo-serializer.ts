@@ -54,9 +54,52 @@ export interface ISyncArrayAction {
 
 export type ISyncAction = ISyncPropertyAction | ISyncArrayAction;
 
-export interface ISyncMessage {
+// Collaborative undo/redo wire format. Every transaction is tagged with a
+// stable `id` chosen by its originator; subsequent undo/redo of that same
+// transaction is broadcast as a short `{kind, id}` message rather than as a
+// reverse transaction. Peers maintain a shared linear stack keyed by id so
+// any client can undo/redo any transaction, regardless of authorship, and
+// the result mirrors back to all peers without echo loops.
+export interface ISyncTransactionMessage {
   kind: "transaction";
+  // Optional only for backward-compat with hand-built test fixtures; the
+  // receiver generates one when missing. Real broadcasts always carry it.
+  id?: string;
   actions: ISyncAction[];
+}
+export interface ISyncUndoMessage {
+  kind: "undo";
+  id: string;
+}
+export interface ISyncRedoMessage {
+  kind: "redo";
+  id: string;
+}
+export type ISyncMessage = ISyncTransactionMessage | ISyncUndoMessage | ISyncRedoMessage;
+
+// Snapshot of a manager's currently-applied transaction stack. Used to
+// bootstrap a peer that joins mid-session: combined with a survey JSON
+// snapshot (which captures the *state* after all applied transactions),
+// the snapshot lets the joiner undo/redo any of the host's pre-join
+// transactions exactly as if it had been wired from the start.
+//
+// Forward and inverse wire actions are pre-computed by the host at export
+// time (against its live state), so the joiner does not need access to
+// the original Base instances. Only applied transactions are exported;
+// any redo tail on the host is dropped.
+export interface ISyncStackEntry {
+  id: string;
+  forward: ISyncAction[];
+  inverse: ISyncAction[];
+}
+export interface ISyncStackSnapshot {
+  kind: "stack";
+  // Number of entries that should be considered applied after import.
+  // Always equal to `entries.length` for the current export logic; kept
+  // explicit so future versions can ship a redo tail and a separate
+  // cursor without breaking the wire format.
+  cursor: number;
+  entries: ISyncStackEntry[];
 }
 
 const DEFAULT_LOCALE_TOKEN = "default";
@@ -301,6 +344,44 @@ export function serializeAction(action: IUndoRedoActionLike, isUndo: boolean): I
   };
 }
 
+// Build a property wire action with an *explicit* value, bypassing the
+// live-state read that `serializeAction` performs for localizable
+// properties. Used by the stack exporter so it can describe both
+// forward and inverse directions of a past UndoRedoAction without
+// being misled by intervening edits that have since mutated the live
+// `LocalizableString`. The locale segment is derived from the live
+// `lastChangedLoc`, which is correct for the typical single-edited-
+// locale flow; multi-locale ping-pong on the same property would lose
+// per-entry locale fidelity (same caveat as `serializeAction`'s
+// retroactive use).
+export function buildPropertyAction(target: any, propertyName: string, value: any): ISyncPropertyAction | null {
+  let t = target;
+  let p = propertyName;
+  if (isPanelDynamicTemplate(t)) {
+    p = remapTemplateProperty(p);
+    t = t.parentQuestion;
+  }
+  const base = baseLocatorOf(t);
+  if (base === null) return null;
+  if (isLocalizableProperty(t, p)) {
+    const locStr = getLocStr(t, p);
+    if (!!locStr && typeof locStr.lastChangedLoc === "string") {
+      const loc: string = locStr.lastChangedLoc;
+      const localeSeg = loc.length === 0 ? DEFAULT_LOCALE_TOKEN : loc;
+      return {
+        kind: "property",
+        locator: joinLocator(base, p, localeSeg),
+        value: typeof value === "string" ? value : (value == null ? "" : String(value))
+      };
+    }
+  }
+  return {
+    kind: "property",
+    locator: joinLocator(base, p),
+    value: serializeValue(value)
+  };
+}
+
 export function applyAction(survey: SurveyModel, action: ISyncAction): void {
   const segments = splitLocator(action.locator);
   if (action.kind === "array") {
@@ -397,4 +478,78 @@ export function applyAction(survey: SurveyModel, action: ISyncAction): void {
   }
 
   parent[propertyName] = deserializeValue(action.value);
+}
+
+// Walk the survey tree to the parent of `action` and read the value that
+// `action` is about to overwrite (or insert into / delete from). Returns
+// the inverse action(s) that, when applied via `applyAction`, restore the
+// pre-state. Used by peers to make remotely-applied transactions undoable
+// against the same shared linear stack. Returning [] means the action was
+// (or would be) a no-op locally and contributes nothing to the stack.
+export function captureInverse(survey: SurveyModel, action: ISyncAction): ISyncAction[] {
+  const segments = splitLocator(action.locator);
+  if (action.kind === "array") {
+    if (segments.length < 2 || (segments.length - 2) % 2 !== 0) return [];
+    const pairCount = (segments.length - 2) / 2;
+    const parent: any = walkPairs(survey, segments, pairCount);
+    if (!parent) return [];
+    const arrayProp = segments[segments.length - 2];
+    const index = parseInt(segments[segments.length - 1], 10);
+    if (!Number.isFinite(index)) return [];
+    const array = parent[arrayProp];
+    if (!Array.isArray(array)) return [];
+
+    if (action.value === null) {
+      // Forward = single-item delete at index. Capture the live item so
+      // the inverse re-inserts the same definition (including nested
+      // children).
+      const item = array[index];
+      if (!item) return [];
+      return [{ kind: "array", locator: action.locator, value: [serializeValue(item)] }];
+    }
+    if (!Array.isArray(action.value) || action.value.length === 0) return [];
+    // Forward = insert. Only items that survive the name-based dedup in
+    // applyAction will actually appear in the array, so the inverse must
+    // delete exactly that many slots.
+    let toInsertCount = 0;
+    for (let i = 0; i < action.value.length; i++) {
+      const v: any = action.value[i];
+      const name = !!v && typeof v === "object" && v.__syncJson ? v.__syncJson.name : undefined;
+      if (typeof name === "string" && name.length > 0 &&
+        array.some((x: any) => !!x && x.name === name)) continue;
+      toInsertCount++;
+    }
+    const inverses: ISyncAction[] = [];
+    for (let i = 0; i < toInsertCount; i++) {
+      inverses.push({ kind: "array", locator: action.locator, value: null });
+    }
+    return inverses;
+  }
+
+  // Property action.
+  const total = segments.length;
+  if (total === 0) return [];
+  let parent: any = null;
+  let propertyName: string | null = null;
+  let locale: string | null = null;
+  if (total % 2 === 1) {
+    const pairCount = (total - 1) / 2;
+    parent = walkPairs(survey, segments, pairCount);
+    propertyName = segments[total - 1];
+  } else {
+    const pairCount = (total - 2) / 2;
+    parent = walkPairs(survey, segments, pairCount);
+    propertyName = segments[total - 2];
+    locale = segments[total - 1];
+  }
+  if (!parent || propertyName === null) return [];
+
+  if (locale !== null && isLocalizableProperty(parent, propertyName)) {
+    const locStr = getLocStr(parent, propertyName);
+    const realLocale = locale === DEFAULT_LOCALE_TOKEN ? "" : locale;
+    const oldText = !!locStr ? (locStr.getLocaleText(realLocale) || "") : "";
+    return [{ kind: "property", locator: action.locator, value: oldText }];
+  }
+  const oldValue = parent[propertyName];
+  return [{ kind: "property", locator: action.locator, value: serializeValue(oldValue) }];
 }

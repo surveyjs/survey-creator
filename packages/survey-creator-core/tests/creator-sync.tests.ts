@@ -1,5 +1,5 @@
 import { CreatorTester } from "./creator-tester";
-import { ISyncMessage } from "../src/plugins/undo-redo/undo-redo-manager";
+import { ISyncMessage, ISyncStackSnapshot } from "../src/plugins/undo-redo/undo-redo-manager";
 import { describe, test, expect } from "vitest";
 
 // Wire two creators' UndoRedoManagers together through plain JSON, simulating
@@ -52,15 +52,19 @@ test("changes propagate bidirectionally without echo loops", () => {
   expect(creatorB.survey.getQuestionByName("q1")).toBeTruthy();
   expect(creatorA.survey.getQuestionByName("q2")).toBeTruthy();
 
-  // Remote-applied messages must not become local undo entries: otherwise
-  // each side would re-broadcast and we would see an infinite echo loop.
-  // Each creator only has its own two local edits in its undo stack.
+  // Each side keeps the full shared linear stack of all four edits (A's
+  // two and B's two), in the order they were applied. Undoing on A walks
+  // back through every entry, regardless of who authored it.
   let undoCount = 0;
   while(creatorA.undoRedoManager.canUndo()) {
     creatorA.undo();
     undoCount++;
   }
-  expect(undoCount).toEqual(2);
+  expect(undoCount).toEqual(4);
+  // Symmetric: B also drained its mirror of the same stack along the way
+  // (each A.undo broadcast back to B as {kind:"undo", id}), so B has
+  // nothing left to undo either.
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
 });
 
 test("undo/redo on one creator is reflected on the other", () => {
@@ -89,15 +93,26 @@ test("undo/redo on one creator is reflected on the other", () => {
   expect(creatorA.survey.getQuestionByName("q2")).toBeFalsy();
 });
 
-test("remote-applied changes on B do not pollute B's undo stack", () => {
+test("remote-applied changes enter the shared undo stack on B", () => {
   const { creatorA, creatorB } = makeCreators();
 
   creatorA.survey.title = "From A";
   creatorA.survey.pages[0].addNewQuestion("text", "q1");
 
-  // B received two remote messages, but neither must enter B's own undo
-  // stack: collaborative remote ops are not user actions on B.
-  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+  // Shared stack: the two remote transactions are now undoable on B.
+  // (Echo prevention is structural: peer-applied changes do not
+  // re-broadcast, so allowing them onto the stack does not loop.)
+  expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
+
+  // Undoing on B walks back from the top of the shared stack (the
+  // question add) and mirrors back to A.
+  creatorB.undo();
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+  expect(creatorA.survey.getQuestionByName("q1")).toBeFalsy();
+
+  creatorB.undo();
+  expect(creatorB.survey.title).toEqual("");
+  expect(creatorA.survey.title).toEqual("");
 });
 
 test("undo/redo of nested change inside a matrix column propagates", () => {
@@ -188,32 +203,45 @@ test("converting a question type and then undoing restores the original on the p
   expect(creatorB.survey.getQuestionByName("question1").getType()).toEqual("comment");
 });
 
-test("each creator owns an independent undo stack", () => {
+test("shared linear stack: undo on either creator rolls back the globally-last transaction", () => {
+  // The undo stack is collaborative: every transaction (from any peer)
+  // joins the same ordered list keyed by transaction id. `undo()` always
+  // targets the topmost entry regardless of which creator authored it.
   const { creatorA, creatorB } = makeCreators();
 
-  creatorA.survey.title = "A1";
-  creatorB.survey.description = "B1";
+  creatorA.survey.title = "A1"; // top after this step: A1
+  creatorB.survey.description = "B1"; // top after this step: B1
 
   expect(creatorA.survey.title).toEqual("A1");
   expect(creatorA.survey.description).toEqual("B1");
   expect(creatorB.survey.title).toEqual("A1");
   expect(creatorB.survey.description).toEqual("B1");
 
-  // A undoes only its own change.
+  // The newest transaction was B's `description` edit. A.undo() rolls
+  // *that* back, not A's own older `title` edit.
   creatorA.undo();
-  expect(creatorA.survey.title).toEqual("");
-  expect(creatorB.survey.title).toEqual("");
-  // B's edit is still in place on both sides.
-  expect(creatorA.survey.description).toEqual("B1");
-  expect(creatorB.survey.description).toEqual("B1");
-
-  // B undoes only its own change.
-  creatorB.undo();
   expect(creatorA.survey.description).toEqual("");
   expect(creatorB.survey.description).toEqual("");
+  // A's earlier edit is untouched on both sides.
+  expect(creatorA.survey.title).toEqual("A1");
+  expect(creatorB.survey.title).toEqual("A1");
+
+  // The new top is A's title edit; B.undo() rolls that back.
+  creatorB.undo();
+  expect(creatorA.survey.title).toEqual("");
+  expect(creatorB.survey.title).toEqual("");
 
   expect(creatorA.undoRedoManager.canUndo()).toBeFalsy();
   expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+
+  // Redo is symmetric and also globally-ordered: B's edit redo'd from A
+  // first (since it was rolled back last), then A's edit redo'd from B.
+  creatorA.redo();
+  expect(creatorA.survey.title).toEqual("A1");
+  expect(creatorB.survey.title).toEqual("A1");
+  creatorB.redo();
+  expect(creatorA.survey.description).toEqual("B1");
+  expect(creatorB.survey.description).toEqual("B1");
 });
 
 test("outgoing messages are plain JSON (no class instances, no cycles)", () => {
@@ -427,7 +455,7 @@ test("successive title edits (typing 'Hello') propagate the full final value", (
   // many intermediate messages were sent (merging may collapse some of
   // them).
   expect(outgoing.length).toBeGreaterThan(0);
-  const last = outgoing[outgoing.length - 1];
+  const last = outgoing[outgoing.length - 1] as any;
   const lastAction = last.actions[last.actions.length - 1];
   expect(lastAction.kind).toEqual("property");
   // The locator ends with the property name (and, since `title` is
@@ -553,7 +581,7 @@ test("editing a non-active locale via the translation tab propagates that locale
   // And the broadcast itself must carry "question1", not the active-locale
   // "question2".
   expect(outgoing.length).toBeGreaterThan(0);
-  const last = outgoing[outgoing.length - 1];
+  const last = outgoing[outgoing.length - 1] as any;
   const lastAction: any = last.actions[last.actions.length - 1];
   // The locator must address the `en` slot of the question's `title`,
   // not the active "es" locale.
@@ -632,4 +660,279 @@ test("paneldynamic: undo/redo of nested add round-trips on the peer", () => {
   creatorA.redo();
   expect(pdB.templateElements).toHaveLength(1);
   expect(pdB.templateElements[0].name).toEqual("q_in_pd");
+});
+
+// ---------------------------------------------------------------------------
+// Shared collaborative undo/redo stack
+// ---------------------------------------------------------------------------
+// The undo stack is a single ordered list of transactions keyed by id and
+// mirrored on every peer. Local undo/redo of *any* entry (own or remote)
+// is broadcast as a short {kind:"undo"|"redo", id} message; peers locate
+// the entry by id and replay/rollback against their own materialized copy.
+
+test("B can undo a transaction authored by A; the rollback reflects on A", () => {
+  const { creatorA, creatorB } = makeCreators();
+
+  creatorA.survey.pages[0].addNewQuestion("text", "q1");
+  expect(creatorB.survey.getQuestionByName("q1")).toBeTruthy();
+  expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
+
+  creatorB.undo();
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+  expect(creatorA.survey.getQuestionByName("q1")).toBeFalsy();
+
+  // Redo from A also works: same shared entry, both sides re-apply.
+  expect(creatorA.undoRedoManager.canRedo()).toBeTruthy();
+  creatorA.redo();
+  expect(creatorA.survey.getQuestionByName("q1")).toBeTruthy();
+  expect(creatorB.survey.getQuestionByName("q1")).toBeTruthy();
+});
+
+test("a fresh local edit after a remote tx invalidates the redo tail on both peers", () => {
+  const { creatorA, creatorB } = makeCreators();
+
+  creatorA.survey.title = "T1"; // shared stack: [T1]
+  creatorA.undo(); // []
+  expect(creatorA.undoRedoManager.canRedo()).toBeTruthy();
+  expect(creatorB.undoRedoManager.canRedo()).toBeTruthy();
+
+  // A new edit (from B) lands on top of the empty applied region and
+  // truncates the redo tail on both sides simultaneously.
+  creatorB.survey.description = "D1";
+  expect(creatorA.undoRedoManager.canRedo()).toBeFalsy();
+  expect(creatorB.undoRedoManager.canRedo()).toBeFalsy();
+  expect(creatorA.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
+});
+
+test("undo broadcast carries {kind:\"undo\", id} matching the original transaction id", () => {
+  const creatorA = new CreatorTester();
+  const creatorB = new CreatorTester();
+  creatorA.JSON = { pages: [{ name: "page1" }] };
+  creatorB.JSON = { pages: [{ name: "page1" }] };
+
+  const outgoing: ISyncMessage[] = [];
+  creatorA.undoRedoManager.onSerializedChanges = (msg) => {
+    outgoing.push(JSON.parse(JSON.stringify(msg)));
+    creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  };
+  creatorB.undoRedoManager.onSerializedChanges = (msg) => {
+    creatorA.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  };
+
+  creatorA.survey.title = "Hello";
+  const forward = outgoing[0];
+  expect(forward.kind).toEqual("transaction");
+  const forwardId = (forward as any).id;
+  expect(typeof forwardId).toEqual("string");
+  expect(forwardId.length).toBeGreaterThan(0);
+
+  creatorA.undo();
+
+  // The most recent outgoing message must be the undo command keyed by
+  // the same id: no replayed payload, just a pointer into the shared
+  // stack.
+  const undoMsg = outgoing[outgoing.length - 1];
+  expect(undoMsg.kind).toEqual("undo");
+  expect((undoMsg as any).id).toEqual(forwardId);
+  expect((undoMsg as any).actions).toBeUndefined();
+});
+
+test("a burst of merged title edits collapses to a single shared-stack entry", () => {
+  // Typing into a title fires many property changes that the manager
+  // merges into one local transaction. The peer must also collapse them
+  // into the same shared-stack entry (matched by id), so one undo on
+  // either side rolls back the entire word at once.
+  const { creatorA, creatorB } = makeCreators();
+
+  const word = "Hello";
+  for (let i = 1; i <= word.length; i++) {
+    creatorA.survey.title = word.substring(0, i);
+  }
+  expect(creatorA.survey.title).toEqual("Hello");
+  expect(creatorB.survey.title).toEqual("Hello");
+
+  creatorB.undo();
+  expect(creatorA.survey.title).toEqual("");
+  expect(creatorB.survey.title).toEqual("");
+  expect(creatorA.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+});
+
+test("undo of a remote transaction does not re-broadcast a reverse transaction", () => {
+  // A remote-undo on B must travel as {kind:"undo", id} *once*. It must
+  // not be re-emitted as a fresh transaction back to A (that would echo
+  // forever or, worse, look like a new edit on the stack).
+  const creatorA = new CreatorTester();
+  const creatorB = new CreatorTester();
+  creatorA.JSON = { pages: [{ name: "page1" }] };
+  creatorB.JSON = { pages: [{ name: "page1" }] };
+
+  const aSent: ISyncMessage[] = [];
+  const bSent: ISyncMessage[] = [];
+  creatorA.undoRedoManager.onSerializedChanges = (msg) => {
+    aSent.push(JSON.parse(JSON.stringify(msg)));
+    creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  };
+  creatorB.undoRedoManager.onSerializedChanges = (msg) => {
+    bSent.push(JSON.parse(JSON.stringify(msg)));
+    creatorA.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  };
+
+  creatorA.survey.title = "X";
+  expect(aSent.length).toEqual(1);
+  expect(bSent.length).toEqual(0);
+
+  creatorB.undo();
+  // Exactly one outbound message from B, of kind "undo".
+  expect(bSent.length).toEqual(1);
+  expect(bSent[0].kind).toEqual("undo");
+  // A applied that undo and did NOT re-broadcast.
+  expect(aSent.length).toEqual(1);
+
+  expect(creatorA.survey.title).toEqual("");
+  expect(creatorB.survey.title).toEqual("");
+});
+
+test("interleaved local + remote edits stay in shared linear order on undo", () => {
+  // A does, B does, A does: shared stack is [A1, B1, A2]. Undo from B
+  // pops A2 first (top), then B1, then A1.
+  const { creatorA, creatorB } = makeCreators();
+
+  creatorA.survey.title = "A1";
+  creatorB.survey.description = "B1";
+  creatorA.survey.pages[0].addNewQuestion("text", "qA2");
+
+  creatorB.undo();
+  expect(creatorA.survey.getQuestionByName("qA2")).toBeFalsy();
+  expect(creatorB.survey.getQuestionByName("qA2")).toBeFalsy();
+  expect(creatorA.survey.title).toEqual("A1");
+  expect(creatorB.survey.description).toEqual("B1");
+
+  creatorB.undo();
+  expect(creatorA.survey.description).toEqual("");
+  expect(creatorB.survey.description).toEqual("");
+  expect(creatorA.survey.title).toEqual("A1");
+
+  creatorA.undo();
+  expect(creatorA.survey.title).toEqual("");
+  expect(creatorB.survey.title).toEqual("");
+  expect(creatorA.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+});
+
+test("creator joining mid-session inherits the host's undo stack and can undo host transactions", () => {
+  // Real-world handshake on join: the host serializes its current survey
+  // JSON (to bootstrap the joiner's state) AND its undo stack snapshot
+  // (so the joiner can undo/redo anything the host could). After both
+  // sides exchange the snapshots and wire the bidirectional bridge,
+  // collaborative undo/redo must work for both pre-join and post-join
+  // transactions, regardless of which side initiates the undo.
+
+  // ----- Stage 1: host (A) works alone, builds up a stack -----
+  const creatorA = new CreatorTester();
+  creatorA.JSON = { pages: [{ name: "page1" }] };
+
+  creatorA.survey.title = "T1"; // tx 1: scalar
+  creatorA.survey.pages[0].addNewQuestion("text", "q1"); // tx 2: array insert
+  creatorA.survey.getQuestionByName("q1").title = "Q1 title"; // tx 3: scalar on nested
+  expect(creatorA.undoRedoManager.canUndo()).toBeTruthy();
+
+  // ----- Stage 2: joiner (B) bootstraps -----
+  // (a) Survey state via JSON snapshot - same path used by `deferred wiring`.
+  // (b) Undo stack via exportStack / importStack handshake.
+  const jsonSnapshot = JSON.parse(JSON.stringify(creatorA.JSON));
+  const stackSnapshot: ISyncStackSnapshot = JSON.parse(JSON.stringify(creatorA.undoRedoManager.exportStack()));
+  expect(stackSnapshot.kind).toEqual("stack");
+  expect(stackSnapshot.entries).toHaveLength(3);
+  expect(stackSnapshot.cursor).toEqual(3);
+  // Every entry must carry a stable id and both forward + inverse payloads.
+  for (const e of stackSnapshot.entries) {
+    expect(typeof e.id).toEqual("string");
+    expect(e.id.length).toBeGreaterThan(0);
+    expect(Array.isArray(e.forward)).toBe(true);
+    expect(Array.isArray(e.inverse)).toBe(true);
+    expect(e.forward.length).toBeGreaterThan(0);
+    expect(e.inverse.length).toBeGreaterThan(0);
+  }
+
+  const creatorB = new CreatorTester();
+  creatorB.JSON = jsonSnapshot;
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+  creatorB.undoRedoManager.importStack(stackSnapshot);
+
+  // B now mirrors A's stack: same entry count, cursor at top, no redo.
+  expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creatorB.undoRedoManager.canRedo()).toBeFalsy();
+
+  // Wire the bidirectional bridge (live edits + undo/redo broadcasts).
+  creatorA.undoRedoManager.onSerializedChanges = (msg) =>
+    creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  creatorB.undoRedoManager.onSerializedChanges = (msg) =>
+    creatorA.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+
+  // ----- Stage 3: B undoes a pre-join transaction; A mirrors -----
+  // Top of the shared stack is A's nested title edit (tx 3).
+  // Note: `question.title` falls back to `name` when empty, so check
+  // the raw locale text directly to assert the underlying value.
+  creatorB.undo();
+  expect(creatorB.survey.getQuestionByName("q1").locTitle.getLocaleText("")).toEqual("");
+  expect(creatorA.survey.getQuestionByName("q1").locTitle.getLocaleText("")).toEqual("");
+
+  // ----- Stage 4: B undoes the question add (tx 2) - array action through bulk -----
+  creatorB.undo();
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+  expect(creatorA.survey.getQuestionByName("q1")).toBeFalsy();
+
+  // ----- Stage 5: A redoes from its own side - both come back -----
+  expect(creatorA.undoRedoManager.canRedo()).toBeTruthy();
+  creatorA.redo();
+  expect(creatorA.survey.getQuestionByName("q1")).toBeTruthy();
+  expect(creatorB.survey.getQuestionByName("q1")).toBeTruthy();
+
+  creatorA.redo();
+  expect(creatorA.survey.getQuestionByName("q1").locTitle.getLocaleText("")).toEqual("Q1 title");
+  expect(creatorB.survey.getQuestionByName("q1").locTitle.getLocaleText("")).toEqual("Q1 title");
+
+  // ----- Stage 6: post-join edit from B integrates on top of inherited stack -----
+  creatorB.survey.description = "Added after join";
+  expect(creatorA.survey.description).toEqual("Added after join");
+  // Now both stacks have 4 entries; B undoes its own latest edit.
+  creatorB.undo();
+  expect(creatorA.survey.description).toEqual("");
+  expect(creatorB.survey.description).toEqual("");
+
+  // ----- Stage 7: drain the entire shared stack from A -----
+  while(creatorA.undoRedoManager.canUndo()) { creatorA.undo(); }
+  expect(creatorA.survey.title).toEqual("");
+  expect(creatorB.survey.title).toEqual("");
+  expect(creatorA.survey.getQuestionByName("q1")).toBeFalsy();
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+});
+
+test("importStack drops the host's redo tail (only applied entries are exported)", () => {
+  // Edge case: when the host has a redo tail at export time, only the
+  // applied prefix is shipped to the joiner. This keeps the export logic
+  // simple and matches the typical join flow (a joiner cares about
+  // undoing what's currently visible, not about redoing operations the
+  // host has already rolled back).
+  const creatorA = new CreatorTester();
+  creatorA.JSON = { pages: [{ name: "page1" }] };
+  creatorA.survey.title = "Kept";
+  creatorA.survey.description = "Dropped";
+  creatorA.undo(); // now description is undone; redo tail = [descriptionEdit]
+  expect(creatorA.undoRedoManager.canRedo()).toBeTruthy();
+
+  const snapshot = creatorA.undoRedoManager.exportStack();
+  expect(snapshot.entries).toHaveLength(1);
+  expect(snapshot.cursor).toEqual(1);
+
+  const creatorB = new CreatorTester();
+  creatorB.JSON = JSON.parse(JSON.stringify(creatorA.JSON));
+  creatorB.undoRedoManager.importStack(snapshot);
+
+  expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creatorB.undoRedoManager.canRedo()).toBeFalsy();
+  creatorB.undo();
+  expect(creatorB.survey.title).toEqual("");
 });
