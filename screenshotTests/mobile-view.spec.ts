@@ -1,4 +1,4 @@
-import { url, test, setJSON, compareScreenshot } from "./helper";
+import { url, test, setJSON, setOptions, compareScreenshot } from "./helper";
 
 const title = "Mobile view / responsiveness";
 
@@ -8,6 +8,7 @@ test.describe(title, () => {
   });
 
   test("check whole layout", async ({ page }) => {
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.setViewportSize({ width: 500, height: 900 });
     await setJSON(page, {
       showQuestionNumbers: true,
@@ -36,6 +37,7 @@ test.describe(title, () => {
   });
 
   test("smartphone layout", async ({ page }) => {
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.setViewportSize({ width: 375, height: 900 });
     await setJSON(page, {
       showQuestionNumbers: true,
@@ -64,6 +66,7 @@ test.describe(title, () => {
   });
 
   test("smartphone layout with page drag", async ({ page }) => {
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.evaluate(() => {
       window["creator"].allowDragPages = true;
       window["creator"].expandCollapseButtonVisibility = "onhover";

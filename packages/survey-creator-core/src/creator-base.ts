@@ -5006,11 +5006,11 @@ export class SurveyCreatorModel extends Base
    * - 1 - Allows first-level choice options to contain survey elements.
    * - 2 - Allows first- and second-level choice options to contain survey elements, and so on.
    *
-   * Default value: 0
+   * Default value: 2
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
    */
-  public maxChoiceContentNestingLevel: number = 0;
+  public maxChoiceContentNestingLevel: number = 2;
 
   /**
    * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.

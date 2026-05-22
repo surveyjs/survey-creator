@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { urlCreatorThemes, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector, getVisibleSelectListItemByText } from "./helper";
+import { urlCreatorThemes, getTabbedMenuItemByText, getBarItemByTitle, setJSON, setOptions, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector, getVisibleSelectListItemByText } from "./helper";
 
 const title = "Theme settings";
 
@@ -8,6 +8,7 @@ test.describe(title, () => {
     await page.goto(urlCreatorThemes);
   });
   test("Check creator themes", async ({ page }) => {
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.setViewportSize({ width: 2000, height: 2000 });
     await setJSON(page, {
       "title": "Themes",
