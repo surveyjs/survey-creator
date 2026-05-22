@@ -1020,6 +1020,50 @@ test("restfull property editor, blockitemvalue[] in choicesByUrl - delete items,
     teardownBlockItemValue();
   }
 });
+test("restfull property editor, blockitemvalue[] in choicesByUrl - serialize to JSON after adding items, Bug#7705", () => {
+  setupBlockItemValue();
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "dropdown", name: "q1" }] };
+    creator.selectQuestionByName("q1");
+    const propGridSurvey = creator.propertyGrid;
+    const choicesByUrlQuestion = <QuestionCompositeModel>(
+      propGridSurvey.getQuestionByName("choicesByUrl")
+    );
+    const blocksQuestion = <QuestionMatrixDynamicModel>(
+      choicesByUrlQuestion.contentPanel.getQuestionByName("blocks")
+    );
+    expect(blocksQuestion).toBeTruthy();
+
+    blocksQuestion.addRow();
+    blocksQuestion.addRow();
+    expect(blocksQuestion.visibleRows).toHaveLength(2);
+
+    const rows = blocksQuestion.visibleRows;
+    rows[0].cells[0].value = "block1";
+    rows[1].cells[0].value = "block2";
+
+    // Simulate opening the JSON editor tab - the JSON editor reads creator.text on activation
+    const creatorText = creator.text;
+    expect(creatorText).toBeTruthy();
+    const creatorJSON = JSON.parse(creatorText);
+    const q1JSON = creatorJSON.pages[0].elements[0];
+    expect(q1JSON.choicesByUrl).toBeTruthy();
+    expect(q1JSON.choicesByUrl.blocks).toHaveLength(2);
+    expect(q1JSON.choicesByUrl.blocks[0].value).toEqual("block1");
+    expect(q1JSON.choicesByUrl.blocks[1].value).toEqual("block2");
+
+    // Simulate JSON editor deactivation - the JSON editor calls creator.changeText on deactivation
+    creator.text = creatorText;
+    const q1Restored = creator.survey.getQuestionByName("q1");
+    const blocksRestored: any[] = (<any>q1Restored.choicesByUrl)["blocks"];
+    expect(blocksRestored).toHaveLength(2);
+    expect(blocksRestored[0].value).toEqual("block1");
+    expect(blocksRestored[1].value).toEqual("block2");
+  } finally {
+    teardownBlockItemValue();
+  }
+});
 test("check imagepicker responsiveImageSize properties", () => {
   const imagePicker = new QuestionImagePickerModel("q2");
   let propertyGrid = new PropertyGridModelTester(imagePicker);
