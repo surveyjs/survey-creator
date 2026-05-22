@@ -6,6 +6,13 @@ import {
   SurveyModel
 } from "survey-core";
 import { EditableObject } from "../../editable-object";
+import {
+  ISyncAction,
+  ISyncMessage,
+  applyAction,
+  serializeAction
+} from "./undo-redo-serializer";
+export type { ISyncMessage, ISyncAction } from "./undo-redo-serializer";
 
 export interface IUndoRedoChange {
   object: any;
@@ -50,7 +57,26 @@ export class UndoRedoManager {
     const lastTransaction = this._getCurrentTransaction();
     if (!lastTransaction || lastTransaction.actions.length == 0) return false;
     const lastAction = lastTransaction.actions[lastTransaction.actions.length - 1];
-    return lastAction.tryMerge(sender, propertyName, newValue);
+    const merged = lastAction.tryMerge(sender, propertyName, newValue);
+    if (merged) {
+      // The undo stack collapses successive string edits into one action,
+      // but peers still need every intermediate value (or at least the
+      // latest) to stay in sync. Broadcast the merged change as a
+      // standalone serialized property update; it does not affect the
+      // local stack.
+      this.notifyMergedChange(sender, propertyName, newValue);
+    }
+    return merged;
+  }
+  private notifyMergedChange(sender: Base, propertyName: string, newValue: any): void {
+    if (!this.onSerializedChanges) return;
+    const adapter: any = {
+      getChanges: () => ({ object: sender, propertyName, oldValue: undefined, newValue }),
+      getIndex: () => -1
+    };
+    const action = serializeAction(adapter, false);
+    if (!action) return;
+    this.onSerializedChanges({ kind: "transaction", actions: [action] });
   }
   private _ignoreChanges = false;
   private _isExecuting = false;
@@ -88,12 +114,46 @@ export class UndoRedoManager {
     return nextTransaction;
   }
   private notifyChangesFinished(transaction: Transaction, isUndo: boolean = false) {
+    this.notifySerialized(transaction, isUndo);
     if (transaction.actions.length > 0) {
       !!this.changesFinishedCallback &&
         this.changesFinishedCallback(transaction.actions, isUndo);
       // this.changesFinishedCallback(transaction.actions[0].getChanges(isUndo));
     }
   }
+
+  private notifySerialized(transaction: Transaction, isUndo: boolean): void {
+    if (!this.onSerializedChanges) return;
+    const actions: ISyncAction[] = [];
+    for (let i = 0; i < transaction.actions.length; i++) {
+      const msg = serializeAction(transaction.actions[i] as any, isUndo);
+      if (!!msg) actions.push(msg);
+    }
+    if (actions.length === 0) return;
+    this.onSerializedChanges({ kind: "transaction", actions });
+  }
+
+  // Apply a serialized message produced by another UndoRedoManager.
+  // While applying, the survey's local change observer is detached so that
+  // remote ops do not enter this manager's stack and do not re-broadcast.
+  public applySerialized(message: ISyncMessage): void {
+    if (!message || message.kind !== "transaction" || !Array.isArray(message.actions)) return;
+    if (!this.survey) return;
+    const survey: any = this.survey;
+    const previousCallback = survey.onPropertyValueChangedCallback;
+    const wasIgnoring = this._ignoreChanges;
+    survey.onPropertyValueChangedCallback = undefined;
+    this._ignoreChanges = true;
+    try {
+      for (let i = 0; i < message.actions.length; i++) {
+        applyAction(this.survey, message.actions[i]);
+      }
+    } finally {
+      this._ignoreChanges = wasIgnoring;
+      survey.onPropertyValueChangedCallback = previousCallback;
+    }
+  }
+
   canUndoRedoCallback() { }
   private transactionCounter = 0;
   startTransaction(name: string) {
@@ -158,6 +218,8 @@ export class UndoRedoManager {
     this._ignoreChanges = false;
   }
   public changesFinishedCallback: (changes: UndoRedoAction[], isUndo: boolean) => void;
+  public survey: SurveyModel;
+  public onSerializedChanges: (message: ISyncMessage) => void;
 }
 
 export class Transaction {

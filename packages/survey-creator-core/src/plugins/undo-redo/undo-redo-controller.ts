@@ -65,6 +65,7 @@ export class UndoRedoController extends Base {
       };
     }
     this.undoRedoManager = new UndoRedoManager();
+    this.undoRedoManager.survey = surveyModel;
     this.undoRedoManager.changesFinishedCallback = (actions: UndoRedoAction[], isUndo: boolean) => {
       if (this.notifySurveyMoveItem(actions, isUndo)) return;
       for (let i = actions.length - 1; i >= 0; i--) {
