@@ -266,22 +266,29 @@ export class UIPresetEditor implements ICreatorPlugin {
     const survey = this.editor.model;
     const presetsTabClassName = "svc-tab-designer svc-tab-designer--presets";
 
-    const surfaceContainer = new ComponentContainerModel();
-    surfaceContainer.cssClass = presetsTabClassName;
-    surfaceContainer.scrollable = true;
-    surfaceContainer.elements = [
-      { componentName: "sv-action-bar", componentData: { model: this.editor.navigationBar } },
-      { componentName: "survey", componentData: { survey: survey, model: survey } }
-    ];
-    const presetsContainer = new ComponentContainerModel();
-    presetsContainer.wrapped = false;
-    presetsContainer.elements = [
-      { componentName: "svc-component-container", componentData: {
-        model: {
-          cssClass: "svc-flex-column",
-          elements: [{ componentName: "svc-toolbox", componentData: { model: this.creator } }] } } },
-      { componentName: "svc-component-container", componentData: { model: surfaceContainer } }
-    ];
+    const surfaceContainer = new ComponentContainerModel({
+      cssClass: presetsTabClassName,
+      scrollable: true,
+      elements: [
+        { componentName: "sv-action-bar", componentData: { model: this.editor.navigationBar } },
+        { componentName: "survey", componentData: { survey: survey, model: survey } }
+      ]
+    });
+
+    const presetsContainer = new ComponentContainerModel({
+      wrapped: false,
+      elements: [
+        { componentName: "svc-component-container",
+          componentData: {
+            model: new ComponentContainerModel({
+              elements: [{ componentName: "svc-toolbox", componentData: { model: this.creator } }],
+              cssClass: "svc-flex-column"
+            })
+          }
+        },
+        { componentName: "svc-component-container", componentData: { model: surfaceContainer } }
+      ]
+    });
     this.model.containerModel = presetsContainer;
     this.creator.onActiveTabChanging.add(this.preventTabSwitch);
 
