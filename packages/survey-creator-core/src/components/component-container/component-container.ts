@@ -1,7 +1,13 @@
-import { Base } from "survey-core";
 interface IComponentContainerElement {
   componentName: string;
   componentData: any;
+}
+
+export interface IComponentContainerOptions {
+  cssClass?: string;
+  wrapped?: boolean;
+  scrollable?: boolean;
+  elements?: IComponentContainerElement[];
 }
 
 export class ComponentContainerModel {
@@ -9,4 +15,8 @@ export class ComponentContainerModel {
   public wrapped: boolean = true;
   public scrollable: boolean = false;
   public elements: IComponentContainerElement[] = [];
+
+  constructor(options?: IComponentContainerOptions) {
+    Object.assign(this, options);
+  }
 }
