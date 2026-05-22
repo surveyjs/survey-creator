@@ -74,9 +74,11 @@ export class UndoRedoManager {
       getChanges: () => ({ object: sender, propertyName, oldValue: undefined, newValue }),
       getIndex: () => -1
     };
-    const action = serializeAction(adapter, false);
-    if (!action) return;
-    this.onSerializedChanges({ kind: "transaction", actions: [action] });
+    const result = serializeAction(adapter, false);
+    if (!result) return;
+    const actions = Array.isArray(result) ? result : [result];
+    if (actions.length === 0) return;
+    this.onSerializedChanges({ kind: "transaction", actions });
   }
   private _ignoreChanges = false;
   private _isExecuting = false;
@@ -125,9 +127,22 @@ export class UndoRedoManager {
   private notifySerialized(transaction: Transaction, isUndo: boolean): void {
     if (!this.onSerializedChanges) return;
     const actions: ISyncAction[] = [];
-    for (let i = 0; i < transaction.actions.length; i++) {
+    // On undo, Transaction.rollback() iterates actions in reverse and
+    // mutates each action's internal state (deletedItems/itemsToAdd swap)
+    // in that order. The serialized stream must mirror the same order so
+    // peers see the operations in the same sequence as the local mutations,
+    // otherwise paired delete+insert transactions (e.g. question type
+    // conversion) can be applied in an order that wipes the restored item.
+    const count = transaction.actions.length;
+    for (let k = 0; k < count; k++) {
+      const i = isUndo ? count - 1 - k : k;
       const msg = serializeAction(transaction.actions[i] as any, isUndo);
-      if (!!msg) actions.push(msg);
+      if (!msg) continue;
+      if (Array.isArray(msg)) {
+        for (let j = 0; j < msg.length; j++) actions.push(msg[j]);
+      } else {
+        actions.push(msg);
+      }
     }
     if (actions.length === 0) return;
     this.onSerializedChanges({ kind: "transaction", actions });

@@ -1,5 +1,6 @@
 import { CreatorTester } from "./creator-tester";
 import { ISyncMessage } from "../src/plugins/undo-redo/undo-redo-manager";
+import { describe, test, expect } from "vitest";
 
 // Wire two creators' UndoRedoManagers together through plain JSON, simulating
 // a transport like WebSocket / SignalR. The bridge is intentionally trivial:
@@ -152,6 +153,39 @@ test("undo of page add on A removes the page on B", () => {
   creatorA.redo();
   expect(creatorA.survey.getPageByName("page2")).toBeTruthy();
   expect(creatorB.survey.getPageByName("page2")).toBeTruthy();
+});
+
+test("converting a question type and then undoing restores the original on the peer", () => {
+  // Question-type conversion produces a transaction with two array actions:
+  // delete the old question at index N, insert the new question at index N.
+  // On undo, Transaction.rollback() iterates actions in reverse, so the
+  // serialized stream must also be reversed; otherwise the peer applies
+  // `insert old, delete index N` and the just-restored question is
+  // immediately wiped, leaving an empty page.
+  const { creatorA, creatorB } = makeCreators();
+
+  const q1 = creatorA.survey.pages[0].addNewQuestion("text", "question1");
+  q1["inputType"] = "date";
+  expect(creatorB.survey.getQuestionByName("question1").getType()).toEqual("text");
+  expect(creatorB.survey.getQuestionByName("question1")["inputType"]).toEqual("date");
+
+  creatorA.selectElement(q1);
+  creatorA.convertCurrentQuestion("comment");
+  expect(creatorA.survey.getQuestionByName("question1").getType()).toEqual("comment");
+  expect(creatorB.survey.getQuestionByName("question1")).toBeTruthy();
+  expect(creatorB.survey.getQuestionByName("question1").getType()).toEqual("comment");
+  expect(creatorB.survey.pages[0].elements).toHaveLength(1);
+
+  creatorA.undo();
+  expect(creatorA.survey.getQuestionByName("question1").getType()).toEqual("text");
+  expect(creatorB.survey.pages[0].elements).toHaveLength(1);
+  expect(creatorB.survey.getQuestionByName("question1")).toBeTruthy();
+  expect(creatorB.survey.getQuestionByName("question1").getType()).toEqual("text");
+  expect(creatorB.survey.getQuestionByName("question1")["inputType"]).toEqual("date");
+
+  creatorA.redo();
+  expect(creatorB.survey.pages[0].elements).toHaveLength(1);
+  expect(creatorB.survey.getQuestionByName("question1").getType()).toEqual("comment");
 });
 
 test("each creator owns an independent undo stack", () => {
@@ -323,11 +357,8 @@ test("nested inserts inside a parent-insert transaction are deduplicated by name
     actions: [
       {
         kind: "array",
-        locator: [],
-        propertyName: "pages",
-        index: 1,
-        deleteCount: 0,
-        itemsToAdd: [
+        locator: "/pages/1",
+        value: [
           {
             __syncType: "page",
             __syncJson: {
@@ -342,11 +373,8 @@ test("nested inserts inside a parent-insert transaction are deduplicated by name
       },
       {
         kind: "array",
-        locator: [{ prop: "pages", name: "page2" }],
-        propertyName: "elements",
-        index: 0,
-        deleteCount: 0,
-        itemsToAdd: [
+        locator: "/pages/1/elements/0",
+        value: [
           { __syncType: "text", __syncJson: { name: "nested_q1" } },
           { __syncType: "checkbox", __syncJson: { name: "nested_q2" } }
         ]
@@ -402,8 +430,11 @@ test("successive title edits (typing 'Hello') propagate the full final value", (
   const last = outgoing[outgoing.length - 1];
   const lastAction = last.actions[last.actions.length - 1];
   expect(lastAction.kind).toEqual("property");
-  expect((lastAction as any).propertyName).toEqual("title");
-  expect((lastAction as any).newValue).toEqual("Hello");
+  // The locator ends with the property name (and, since `title` is
+  // localizable, a trailing locale segment: "default" for the default
+  // locale).
+  expect((lastAction as any).locator).toEqual("/title/default");
+  expect((lastAction as any).value).toEqual("Hello");
 });
 
 test("renaming a text question name propagates to the peer", () => {
@@ -430,4 +461,175 @@ test("renaming a text question name propagates to the peer", () => {
   // And edits from B reach A by the new name as well.
   creatorB.survey.getQuestionByName("q1_renamed").title = "Edited on B";
   expect(creatorA.survey.getQuestionByName("q1_renamed").title).toEqual("Edited on B");
+});
+
+test("locale change and per-locale text edits propagate between creators", () => {
+  // Localizable strings keep one value per locale. When a creator switches
+  // its active locale and edits a localizable property, the peer must see
+  // both the new active locale and the per-locale text.
+  const { creatorA, creatorB } = makeCreators();
+
+  creatorA.survey.pages[0].addNewQuestion("text", "q1");
+  const qA: any = creatorA.survey.getQuestionByName("q1");
+  const qB: any = creatorB.survey.getQuestionByName("q1");
+
+  // Default locale edit on A is visible on B in the same default locale.
+  qA.title = "Title in default";
+  expect(qB.title).toEqual("Title in default");
+
+  // Switching locale on A must propagate to B so that subsequent reads of
+  // localizable properties resolve against the same active locale.
+  creatorA.survey.locale = "de";
+  expect(creatorB.survey.locale).toEqual("de");
+
+  // Now an edit on A writes the German text; B (also in "de") sees it.
+  qA.title = "Titel auf Deutsch";
+  expect(qB.title).toEqual("Titel auf Deutsch");
+
+  // The default-locale text must be preserved on both sides.
+  expect(qA.locTitle.getLocaleText("")).toEqual("Title in default");
+  expect(qB.locTitle.getLocaleText("")).toEqual("Title in default");
+  expect(qA.locTitle.getLocaleText("de")).toEqual("Titel auf Deutsch");
+  expect(qB.locTitle.getLocaleText("de")).toEqual("Titel auf Deutsch");
+
+  // An edit from B in the active locale propagates back to A.
+  qB.title = "Anderer Titel";
+  expect(qA.title).toEqual("Anderer Titel");
+
+  // Switching locale back on B propagates and reveals the original default
+  // text on both sides.
+  creatorB.survey.locale = "";
+  expect(creatorA.survey.locale).toEqual("");
+  expect(qA.title).toEqual("Title in default");
+  expect(qB.title).toEqual("Title in default");
+
+  // Undo on A rolls back the last German edit; both sides agree.
+  creatorA.survey.locale = "de";
+  expect(qA.title).toEqual("Anderer Titel");
+  expect(qB.title).toEqual("Anderer Titel");
+  creatorA.undo();
+  expect(qA.title).toEqual(qB.title);
+  expect(qA.title).not.toEqual("Anderer Titel");
+});
+
+test("editing a non-active locale via the translation tab propagates that locale's text", () => {
+  // Reproduces the bug observed in the Translation tab: the active locale
+  // on A is "es" with title "question2", and the user edits the English
+  // text to "question1". The message sent to the peer must carry the
+  // English text "question1" (and write it into the "en" slot), NOT the
+  // currently-active "es" text "question2".
+  const { creatorA, creatorB } = makeCreators();
+
+  creatorA.survey.pages[0].addNewQuestion("text", "q1");
+  const qA: any = creatorA.survey.getQuestionByName("q1");
+  const qB: any = creatorB.survey.getQuestionByName("q1");
+
+  // Make "es" the active locale on A and set the Spanish title.
+  creatorA.survey.locale = "es";
+  qA.title = "question2";
+  expect(qB.locTitle.getLocaleText("es")).toEqual("question2");
+
+  // Capture broadcasts so we can also assert the wire format.
+  const outgoing: ISyncMessage[] = [];
+  const previous = creatorA.undoRedoManager.onSerializedChanges;
+  creatorA.undoRedoManager.onSerializedChanges = (msg) => {
+    outgoing.push(JSON.parse(JSON.stringify(msg)));
+    previous && previous(msg);
+  };
+
+  // Translation-tab edit: write the English text directly while the active
+  // locale is still "es". The Spanish value must not be touched.
+  qA.locTitle.setLocaleText("en", "question1");
+
+  // Local sanity: A keeps both locales.
+  expect(qA.locTitle.getLocaleText("es")).toEqual("question2");
+  expect(qA.locTitle.getLocaleText("en")).toEqual("question1");
+
+  // Peer must see the English edit in the English slot, and the Spanish
+  // text must remain "question2".
+  expect(qB.locTitle.getLocaleText("en")).toEqual("question1");
+  expect(qB.locTitle.getLocaleText("es")).toEqual("question2");
+
+  // And the broadcast itself must carry "question1", not the active-locale
+  // "question2".
+  expect(outgoing.length).toBeGreaterThan(0);
+  const last = outgoing[outgoing.length - 1];
+  const lastAction: any = last.actions[last.actions.length - 1];
+  // The locator must address the `en` slot of the question's `title`,
+  // not the active "es" locale.
+  expect(lastAction.locator).toEqual("/pages/0/elements/0/title/en");
+  // The transmitted value must reflect the edited "en" text. The
+  // active-locale text "question2" must NOT be what gets sent.
+  const flat = JSON.stringify(lastAction.value);
+  expect(flat).toContain("question1");
+  expect(lastAction.value).not.toEqual("question2");
+});
+test("paneldynamic: adding a question to the template propagates to the peer", () => {
+  // The template panel of a paneldynamic question has no `parent`/`getOwner`
+  // back to its host; it is only reachable through `parentQuestion` and is
+  // serialized on the host as `templateElements`. The serializer must
+  // transparently rewrite changes on the template panel to the
+  // corresponding paneldynamic-level property so the peer receives them.
+  const { creatorA, creatorB } = makeCreators();
+  creatorA.survey.pages[0].addNewQuestion("paneldynamic", "pd1");
+  const pdA: any = creatorA.survey.getQuestionByName("pd1");
+  const pdB: any = creatorB.survey.getQuestionByName("pd1");
+  expect(pdB).toBeTruthy();
+
+  pdA.template.addNewQuestion("text", "q_in_pd");
+  expect(pdB.templateElements).toHaveLength(1);
+  expect(pdB.templateElements[0].name).toEqual("q_in_pd");
+  expect(pdB.templateElements[0].getType()).toEqual("text");
+});
+
+test("paneldynamic: edits on a templated question propagate to the peer", () => {
+  const { creatorA, creatorB } = makeCreators();
+  creatorA.survey.pages[0].addNewQuestion("paneldynamic", "pd1");
+  const pdA: any = creatorA.survey.getQuestionByName("pd1");
+  pdA.template.addNewQuestion("text", "q_in_pd");
+  const pdB: any = creatorB.survey.getQuestionByName("pd1");
+
+  pdA.templateElements[0].title = "Nested title";
+  expect(pdB.templateElements[0].title).toEqual("Nested title");
+
+  pdA.templateElements[0].isRequired = true;
+  expect(pdB.templateElements[0].isRequired).toEqual(true);
+});
+
+test("paneldynamic: templateTitle change on the template propagates", () => {
+  const { creatorA, creatorB } = makeCreators();
+  creatorA.survey.pages[0].addNewQuestion("paneldynamic", "pd1");
+  const pdA: any = creatorA.survey.getQuestionByName("pd1");
+  const pdB: any = creatorB.survey.getQuestionByName("pd1");
+  pdA.template.title = "T title";
+  expect(pdB.templateTitle).toEqual("T title");
+});
+
+test("paneldynamic: deleting a templated question propagates to the peer", () => {
+  const { creatorA, creatorB } = makeCreators();
+  creatorA.survey.pages[0].addNewQuestion("paneldynamic", "pd1");
+  const pdA: any = creatorA.survey.getQuestionByName("pd1");
+  pdA.template.addNewQuestion("text", "q_in_pd");
+  const pdB: any = creatorB.survey.getQuestionByName("pd1");
+  expect(pdB.templateElements).toHaveLength(1);
+
+  pdA.templateElements[0].delete();
+  expect(pdB.templateElements).toHaveLength(0);
+});
+
+test("paneldynamic: undo/redo of nested add round-trips on the peer", () => {
+  const { creatorA, creatorB } = makeCreators();
+  creatorA.survey.pages[0].addNewQuestion("paneldynamic", "pd1");
+  const pdA: any = creatorA.survey.getQuestionByName("pd1");
+  pdA.template.addNewQuestion("text", "q_in_pd");
+  const pdB: any = creatorB.survey.getQuestionByName("pd1");
+  expect(pdB.templateElements).toHaveLength(1);
+
+  creatorA.undo();
+  expect(pdA.templateElements).toHaveLength(0);
+  expect(pdB.templateElements).toHaveLength(0);
+
+  creatorA.redo();
+  expect(pdB.templateElements).toHaveLength(1);
+  expect(pdB.templateElements[0].name).toEqual("q_in_pd");
 });
