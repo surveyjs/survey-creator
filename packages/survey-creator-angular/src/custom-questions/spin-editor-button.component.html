@@ -1,6 +1,6 @@
 <ng-template #template>
     <button [disabled]="modelAction.disabled" [attr.aria-hidden]="'true'" [class]="modelAction.getActionBarItemCss()"
-        (click)="question.onDownButtonClick()" (mousedown)="model.data.onMouseDown()"
+        (click)="modelAction.action()" (mousedown)="model.data.onMouseDown()"
         (mouseup)="question.onButtonMouseUp()" (mouseleave)="question.onButtonMouseLeave()" (blur)="question.onBlur($event)"
         (focus)="question.onFocus($event)" tabindex="-1">
         <svg [class]="modelAction.cssClasses.itemIcon" [iconName]="modelAction.iconName" [size]="'auto'" sv-ng-svg-icon></svg>
