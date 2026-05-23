@@ -414,6 +414,31 @@ test("Theme builder: restore values of font from loadTheme", (): any => {
   });
 });
 
+test("Theme builder: toJSON returns loaded theme with user edits", (): any => {
+  const themeModel = new ThemeModel();
+  themeModel.initialize();
+
+  const loadedTheme = {};
+  assign(loadedTheme, themeFromFile);
+  themeModel.loadTheme(loadedTheme as ITheme);
+
+  const loadedJson = themeModel.toJSON();
+  const editedPrimaryColor = "rgba(255, 0, 0, 1)";
+  themeModel.primaryColor = editedPrimaryColor;
+
+  const expectedTheme: ITheme = {
+    ...loadedJson,
+    cssVariables: {
+      ...loadedJson.cssVariables,
+      "--sjs2-color-project-brand-600": editedPrimaryColor,
+      "--sjs2-color-bg-brand-secondary": "rgba(255, 0, 0, 0.1)",
+      "--sjs2-color-bg-brand-primary-dim": "rgba(240, 0, 0, 1)",
+    }
+  };
+
+  expect(themeModel.toJSON()).toStrictEqual(expectedTheme);
+});
+
 test("Modify property grid: restore new property", (): any => {
   Serializer.addProperty("theme", {
     name: "matrix-title",

@@ -106,6 +106,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
 
 export class ThemeModel extends Base implements ITheme {
   public baseThemeVariables: { [index: string]: string } = {};
+  private loadedThemeVariables: { [index: string]: string } = {};
   private static defaultThemeValue: ITheme;
   public static get DefaultTheme() {
     if (!this.defaultThemeValue) {
@@ -358,6 +359,8 @@ export class ThemeModel extends Base implements ITheme {
   private getRootElement = (): HTMLElement => undefined;
 
   public loadTheme(theme: ITheme, preferredColorPalette?: string) {
+    this.loadedThemeVariables = {};
+    assign(this.loadedThemeVariables, theme.cssVariables || {});
     this.blockThemeChangedNotifications += 1;
     try {
       let probeThemeFullName = getThemeFullName({ themeName: theme.themeName, colorPalette: theme.colorPalette || preferredColorPalette, isPanelless: theme.isPanelless });
@@ -578,7 +581,7 @@ export class ThemeModel extends Base implements ITheme {
       this["--sjs2-base-unit-radius"] = this.cornerRadius + "px";
     }
 
-    const result = super.toJSON(options);
+    const result = { ...this.loadedThemeVariables, ...super.toJSON(options) };
     result["backgroundImage"] = this.backgroundImage || "";
     result["backgroundOpacity"] = this.backgroundOpacity / 100;
     result["backgroundImageAttachment"] = this.backgroundImageAttachment;
