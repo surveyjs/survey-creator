@@ -2897,8 +2897,13 @@ export class SurveyCreatorModel extends Base
     return !!res ? res : reason;
   }
   protected createSurveyCore(json: any = {}, area: string, element: Base): SurveyModel {
-    if (this.onSurveyInstanceSetupHandlers.isEmpty) return new SurveyModel(json);
+    if (this.onSurveyInstanceSetupHandlers.isEmpty) {
+      const model = new SurveyModel(json);
+      model.generateStylesheet = false;
+      return model;
+    }
     const model = new SurveyModel();
+    model.generateStylesheet = false;
     const options = { survey: model, area: area, element: element, json: json };
     this.onSurveyInstanceSetupHandlers.fire(this, options);
     model.fromJSON(options.json);
