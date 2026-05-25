@@ -1,8 +1,7 @@
-import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions } from "survey-core";
+import { Serializer, Base, property, ArrayChanges, EventBase, ILoadFromJSONOptions, ISaveToJSONOptions, getComputedCssVariableValues } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { assign, roundTo2Decimals } from "../utils/utils";
 import { colorsAreEqual } from "../utils/color-utils";
-import { calculateThemeVariables } from "../utils/utils";
 import { CreatorThemes, ICreatorTheme, getPredefinedCreatorThemeChoices } from "./creator-themes";
 import { getThemeFullName } from "../components/tabs/theme-model";
 import { PredefinedBackgroundColors, PredefinedColors } from "../components/tabs/themes";
@@ -117,7 +116,7 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
 
   private initializeBaseThemeVariables() {
     const vars = Serializer.getProperties("creatortheme").map(p => p.name).filter(name => name.indexOf("--sjs2-") == 0);
-    const computed = calculateThemeVariables(DefaultLight.cssVariables, vars, this.getRootElement()) || {};
+    const computed = getComputedCssVariableValues(DefaultLight.cssVariables, vars, this.getRootElement()) || {};
     const filtered: { [index: string]: string } = {};
     Object.keys(computed).forEach(key => {
       const value = computed[key];

@@ -1,4 +1,4 @@
-import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, getComputedCssVariableValues } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
@@ -10,7 +10,6 @@ import { HeaderModel } from "./header-model";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../../utils/configs";
 import { assign, roundTo2Decimals } from "../../utils/utils";
 import { ColorCalculator, getRGBaColor, ingectAlpha, parseColor } from "../../utils/color-utils";
-import { calculateThemeVariables } from "../../utils/utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import { SurveyCreatorModel } from "../../creator-base";
@@ -309,7 +308,7 @@ export class ThemeModel extends Base implements ITheme {
   initialize(surveyTheme: ITheme = {}, survey?: SurveyModel, creator?: SurveyCreatorModel) {
     this.getRootElement = () => creator?.rootElement;
     const vars = [...Serializer.getProperties("theme").map(p => p.name), ...HeaderModel.getDefaultVars()].filter(name => name.indexOf("--sjs2-") == 0);
-    this.baseThemeVariables = calculateThemeVariables(DefaultLight.cssVariables, vars, this.getRootElement());
+    this.baseThemeVariables = getComputedCssVariableValues(DefaultLight.cssVariables, vars, this.getRootElement());
 
     this._defaultSessionTheme = ThemeModel.DefaultTheme;
     this.backgroundImage = "backgroundImage" in surveyTheme ? surveyTheme.backgroundImage : survey?.backgroundImage;
@@ -378,7 +377,7 @@ export class ThemeModel extends Base implements ITheme {
       assign(effectiveThemeCssVariables, ThemeModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {});
       patchLegacyCSSVariables(effectiveThemeCssVariables);
-      assign(effectiveThemeCssVariables, calculateThemeVariables(effectiveThemeCssVariables, [], this.getRootElement()));
+      assign(effectiveThemeCssVariables, getComputedCssVariableValues(effectiveThemeCssVariables, [], this.getRootElement()));
       assign(effectiveThemeCssVariables, this.themeCssVariablesChanges);
       const effectiveTheme: ITheme = {
         backgroundImage: this.backgroundImage || baseTheme.backgroundImage || "",
