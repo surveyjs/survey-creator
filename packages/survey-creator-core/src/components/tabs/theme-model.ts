@@ -359,12 +359,13 @@ export class ThemeModel extends Base implements ITheme {
   private getRootElement = (): HTMLElement => undefined;
 
   public loadTheme(theme: ITheme, preferredColorPalette?: string) {
-    this.loadedThemeVariables = {};
-    assign(this.loadedThemeVariables, theme.cssVariables || {});
     this.blockThemeChangedNotifications += 1;
     try {
       let probeThemeFullName = getThemeFullName({ themeName: theme.themeName, colorPalette: theme.colorPalette || preferredColorPalette, isPanelless: theme.isPanelless });
       const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette || preferredColorPalette, theme.isPanelless, probeThemeFullName);
+      this.loadedThemeVariables = {};
+      assign(this.loadedThemeVariables, baseTheme.cssVariables || {});
+      assign(this.loadedThemeVariables, theme.cssVariables || {});
       const themeChanges = getThemeChanges(theme, baseTheme);
       this.themeName = themeChanges.themeName;
       this.colorPalette = themeChanges.colorPalette as any;

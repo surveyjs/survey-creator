@@ -609,6 +609,18 @@ test("getThemeChanges", (): any => {
   expect(themeChanges.cssVariables!["--sjs2-color-project-brand-600"]).toBe("rgba(255, 0, 0, 1)");
 });
 
+test("Theme builder: toJSON keeps base theme variables on colorPalette change", (): any => {
+  const themeModel = new ThemeModel();
+  themeModel.initialize();
+
+  themeModel.selectTheme("default", "light");
+  themeModel.colorPalette = "dark";
+
+  const cssVariables = themeModel.toJSON().cssVariables || {};
+  expect(cssVariables["--sjs-general-backcolor"]).toBe(DefaultDark.cssVariables["--sjs-general-backcolor"]);
+  expect(cssVariables["--sjs-article-font-default-lineHeight"]).toBe(DefaultDark.cssVariables["--sjs-article-font-default-lineHeight"]);
+});
+
 test("selectTheme", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
