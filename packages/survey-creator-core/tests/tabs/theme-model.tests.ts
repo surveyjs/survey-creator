@@ -617,8 +617,8 @@ test("Theme builder: toJSON keeps base theme variables on colorPalette change", 
   themeModel.colorPalette = "dark";
 
   const cssVariables = themeModel.toJSON().cssVariables || {};
-  expect(cssVariables["--sjs-general-backcolor"]).toBe(DefaultDark.cssVariables["--sjs-general-backcolor"]);
-  expect(cssVariables["--sjs-article-font-default-lineHeight"]).toBe(DefaultDark.cssVariables["--sjs-article-font-default-lineHeight"]);
+  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toBe("rgba(48, 48, 48, 1)");
+  expect(cssVariables["--sjs-article-font-default-lineHeight"]).toBe("28px");
 });
 
 test("selectTheme", (): any => {

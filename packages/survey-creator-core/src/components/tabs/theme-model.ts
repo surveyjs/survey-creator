@@ -359,13 +359,12 @@ export class ThemeModel extends Base implements ITheme {
   private getRootElement = (): HTMLElement => undefined;
 
   public loadTheme(theme: ITheme, preferredColorPalette?: string) {
+    this.loadedThemeVariables = {};
+    assign(this.loadedThemeVariables, theme.cssVariables || {});
     this.blockThemeChangedNotifications += 1;
     try {
       let probeThemeFullName = getThemeFullName({ themeName: theme.themeName, colorPalette: theme.colorPalette || preferredColorPalette, isPanelless: theme.isPanelless });
       const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette || preferredColorPalette, theme.isPanelless, probeThemeFullName);
-      this.loadedThemeVariables = {};
-      assign(this.loadedThemeVariables, baseTheme.cssVariables || {});
-      assign(this.loadedThemeVariables, theme.cssVariables || {});
       const themeChanges = getThemeChanges(theme, baseTheme);
       this.themeName = themeChanges.themeName;
       this.colorPalette = themeChanges.colorPalette as any;
@@ -443,10 +442,10 @@ export class ThemeModel extends Base implements ITheme {
         this.loadTheme(this.findSuitableTheme(value) || { [name]: value, isPanelless: this.isPanelless, colorPalette: this.colorPalette });
       }
       if (name === "isPanelless") {
-        this.loadTheme({ themeName: this.themeName, isPanelless: value, colorPalette: this.colorPalette });
+        this.loadTheme(this.findSuitableTheme(this.themeName));
       }
       if (name === "colorPalette") {
-        this.loadTheme({ themeName: this.themeName, isPanelless: this.isPanelless, colorPalette: value });
+        this.loadTheme(this.findSuitableTheme(this.themeName));
       }
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
       return true;
