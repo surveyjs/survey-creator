@@ -11,7 +11,8 @@ import {
   SvgThemeSets,
   QuestionPanelDynamicModel,
   ChoiceItem,
-  patchLegacyCSSVariables
+  patchLegacyCSSVariables,
+  ensureBaseThemeStyles
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -3828,6 +3829,7 @@ export class SurveyCreatorModel extends Base
   }
   public setRootElement(element: HTMLElement) {
     this._rootElementValue = element;
+    ensureBaseThemeStyles(element);
     this.initKeyboardShortcuts(element);
     this.initResponsivityManager(element as HTMLDivElement);
   }
