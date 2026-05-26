@@ -273,7 +273,8 @@ export async function resetFocusToBody(page: Page): Promise<void> {
 // for several consecutive animation frames - i.e. the smooth scrollIntoView is finished.
 export function waitForScrollEnd(page: Page, selector: string) {
   return test.step(`waitForScrollEnd ${selector}`, () => page.waitForFunction((sel) => {
-    const el = document.querySelector(sel);
+    const root: ParentNode = (window as any).creator?.rootElement?.getRootNode?.() ?? document;
+    const el = root.querySelector(sel);
     if (!el) return false;
     const top = el.getBoundingClientRect().top;
     const w = window as any;
