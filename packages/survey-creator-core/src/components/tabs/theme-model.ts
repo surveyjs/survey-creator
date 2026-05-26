@@ -441,10 +441,10 @@ export class ThemeModel extends Base implements ITheme {
         this.loadTheme(this.findSuitableTheme(value) || { [name]: value, isPanelless: this.isPanelless, colorPalette: this.colorPalette });
       }
       if (name === "isPanelless") {
-        this.loadTheme({ themeName: this.themeName, isPanelless: value, colorPalette: this.colorPalette });
+        this.loadTheme(this.findSuitableTheme(this.themeName));
       }
       if (name === "colorPalette") {
-        this.loadTheme({ themeName: this.themeName, isPanelless: this.isPanelless, colorPalette: value });
+        this.loadTheme(this.findSuitableTheme(this.themeName));
       }
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
       return true;
