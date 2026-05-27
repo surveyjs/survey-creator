@@ -42,8 +42,8 @@ test("Creator theme: update editors after theme switching", (): any => {
 
   expect(themeName.value).toEqual("default");
   expect(colorPalette.value).toEqual("light");
-  expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
-  expect(primaryBackgroundColor.value).toEqual("#19B394");
+  expect(surfaceBackgroundColor.value).toEqual("rgba(237, 249, 247, 1)");
+  expect(primaryBackgroundColor.value).toEqual("rgba(25, 179, 148, 1)");
 
   themeName.value = "contrast";
   expect(themeName.value).toEqual("contrast");
@@ -54,8 +54,8 @@ test("Creator theme: update editors after theme switching", (): any => {
   themeName.value = "default";
   expect(themeName.value).toEqual("default");
   expect(colorPalette.value).toEqual("light");
-  expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
-  expect(primaryBackgroundColor.value).toEqual("#19B394");
+  expect(surfaceBackgroundColor.value).toEqual("rgba(237, 249, 247, 1)");
+  expect(primaryBackgroundColor.value).toEqual("rgba(25, 179, 148, 1)");
 });
 
 test("Creator theme: update editors after palette switching", (): any => {
@@ -77,6 +77,6 @@ test("Creator theme: update editors after palette switching", (): any => {
   colorPalette.value = "light";
   expect(themeName.value).toEqual("default");
   expect(colorPalette.value).toEqual("light");
-  expect(surfaceBackgroundColor.value).toEqual("#EDF9F7");
-  expect(primaryBackgroundColor.value).toEqual("#19B394");
+  expect(surfaceBackgroundColor.value).toEqual("rgba(237, 249, 247, 1)");
+  expect(primaryBackgroundColor.value).toEqual("rgba(25, 179, 148, 1)");
 });
