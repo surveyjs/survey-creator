@@ -165,6 +165,10 @@
   }
 }
 
+html[dir="rtl"] .svc-list-item__marker-icon {
+  transform: rotate(180deg);
+}
+
 .svc-list-item__marker-icon + * {
   --thm-list-item-gap: var(--ctr-list-item-gap, var(--sjs-spacing-x2));
   margin-inline-start: calc(0px - var(--thm-list-item-gap));
