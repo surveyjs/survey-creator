@@ -19,8 +19,6 @@
   width: 100%;
   box-sizing: border-box;
   flex-grow: 1;
-  /* disable library transition animations */
-  --sjs-transition-duration: 0ms;
   @include disableLibraryAnimations;
   display: flex;
   flex-direction: column;
@@ -107,8 +105,8 @@
 .sps-row--multiple {
   display: flex;
   align-items: stretch;
-  margin: var(--sjs2-spacing-negative-x150) var(--sjs2-spacing-negative-x250)
-    var(--sjs2-spacing-negative-x250) var(--sjs2-spacing-negative-x250);
+  margin: var(--sjs2-spacing-negative-x150) var(--sjs2-spacing-negative-x250) var(--sjs2-spacing-negative-x250)
+    var(--sjs2-spacing-negative-x250);
   & > div {
     display: flex;
     flex-direction: column;
@@ -229,4 +227,3 @@
     padding: 0;
   }
 }
-
