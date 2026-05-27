@@ -30,9 +30,11 @@
     "e2e:ci": "playwright test --project e2e",
     "test:scr": "playwright test --project scr --ui",
     "test:scr:ci": "playwright test --project scr",
+    "test:scr:update": "playwright test --project scr --update-snapshots",
     "test:scr:copy:tests": "node copy-src-tests.js",
     "test:scr:legacy": "node copy-src-tests.js && playwright test --project scr_legacy --ui",
-    "test:scr:legacy:ci": "node copy-src-tests.js && playwright test --project scr_legacy"
+    "test:scr:legacy:ci": "node copy-src-tests.js && playwright test --project scr_legacy",
+    "test:scr:legacy:update": "node copy-src-tests.js && playwright test --project scr_legacy --update-snapshots"
   },
   "devDependencies": {
     "@types/ace": "0.0.44",
