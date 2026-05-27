@@ -1,4 +1,4 @@
-import { Mock, MockInstance, afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
+﻿import { Mock, MockInstance, afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { ListModel, QuestionDropdownModel, SurveyModel, settings, IAction, QuestionMatrixDynamicModel, Action, MatrixDynamicRowModel } from "survey-core";
 import { PresetsManager } from "../src/ui-preset-editor/presets-manager";
 import { CreatorPresets, IPreset, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";

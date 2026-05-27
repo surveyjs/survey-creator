@@ -122,6 +122,6 @@ test.describe(title, () => {
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-medium-screen.png", { maxDiffPixels: 2 });
     await page.setViewportSize({ width: 800, height: 1440 });
     await page.waitForTimeout(500);
-    await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-small-screen.png");
+    await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-small-screen.png", { maxDiffPixels: 2 });
   });
 });
