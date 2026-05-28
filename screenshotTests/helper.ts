@@ -3,54 +3,11 @@ import { test } from "../e2e/helper";
 
 export * from "../e2e/helper";
 
-export const getPagesLength = async (page) => {
-  await page.evaluate(() => {
-    (window as any).creator.survey.pages.length;
-  });
-};
-
-export const getQuestionsLength = async (page) => {
-  await page.evaluate(() => {
-    (window as any).creator.survey.getAllQuestions().length;
-  });
-};
-
-export const setJSON = async (page, json) => {
-  await page.evaluate((json) => {
-    (window as any).creator.text = JSON.stringify(json);
-  }, json);
-};
-
 export const setOptions = async (page, options) => {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((options) => {
     (window as any).creator.setOptions(options);
   }, options);
-};
-
-export const setSurveyProp = async (page, propName, value) => {
-  await page.evaluate(([propName, value]) => {
-    (window as any).creator.survey[propName] = value;
-  }, [propName, value]);
-};
-
-export const getJSON = async (page) => {
-  await page.evaluate(() => {
-    return JSON.parse((window as any).creator.text);
-  });
-};
-
-export const getQuestionNameByIndex = async (page, index) => {
-  await page.evaluate((index) => {
-    return (window as any).creator.survey.getAllQuestions()[index].name;
-  }, index);
-};
-
-export const getItemValueByIndex = async (page, questionName, index) => {
-  await page.evaluate(([questionName, index]) => {
-    const question = (window as any).survey.getQuestionByName(questionName);
-    const choices = question.visibleChoices;
-    return choices[index].value;
-  }, [questionName, index]);
 };
 
 // export const handleShiftEnter = ClientFunction((selector: string) => {
@@ -160,22 +117,11 @@ export async function addQuestionByAddQuestionButton(page, text) {
 }
 
 export async function changeToolboxLocation(page: Page, newVal: string) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {
     window["creator"].toolboxLocation = newVal;
   }, newVal);
   await page.waitForTimeout(500);
-}
-
-export async function changeToolboxScrolling(page, hasScroll: boolean) {
-  await page.evaluate((newVal) => {
-    window["creator"].toolbox.overflowBehavior = newVal ? "scroll" : "hideInMenu";
-  }, hasScroll);
-}
-
-export async function changeToolboxSearchEnabled(page, enabled: boolean) {
-  await page.evaluate((newVal) => {
-    window["creator"].toolbox.searchEnabled = newVal;
-  }, enabled);
 }
 
 export async function setDirRTL(page) {
@@ -185,52 +131,42 @@ export async function setDirRTL(page) {
 }
 
 export async function setShowToolbox(page, newVal: boolean) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {
     window["creator"].showToolbox = newVal;
   }, newVal);
 }
 export async function setShowSidebar(page, newVal: boolean) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {
     window["creator"].showSidebar = newVal;
   }, newVal);
 }
 export async function setShowAddQuestionButton(page, newVal: boolean) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {
     window["creator"].showAddQuestionButton = newVal;
   }, newVal);
 }
-export async function setAllowEditSurveyTitle(page, newVal: boolean) {
-  await page.evaluate((newVal) => {
-    window["creator"].showSurveyHeader = newVal;
-  }, newVal);
-}
 export async function setExpandCollapseButtonVisibility(page, newVal: string) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {
     window["creator"].expandCollapseButtonVisibility = newVal;
   }, newVal);
 }
 export async function setAllowZoom(page, newVal: boolean) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {
     window["creator"].allowZoom = newVal;
   }, newVal);
 }
 
 export async function setIsCompact(page, newVal: boolean) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {
     window["creator"].toolbox.isCompact = newVal;
   }, newVal);
 }
-
-export const explicitErrorHandler = async (page) => {
-  await page.evaluate(() => {
-    window.addEventListener("error", e => {
-      if (e.message === "ResizeObserver loop completed with undelivered notifications." ||
-      e.message === "ResizeObserver loop limit exceeded") {
-        e.stopImmediatePropagation();
-      }
-    });
-  });
-};
 
 // export const patchDragDropToDisableDrop = ClientFunction(() => {
 //   window["creator"].dragDropSurveyElements.drop = () => { };
@@ -248,6 +184,7 @@ export async function resetHoverToCreator(page: Page, offsetX: number = 0, offse
 }
 
 export const hideAllAdornerActions = async (page) => {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate(() => {
     (<any>window).creator.onElementAllowOperations.add((_, options) => {
       Object.keys(options).forEach(key => {
@@ -260,6 +197,7 @@ export const hideAllAdornerActions = async (page) => {
 };
 
 export async function resetFocusToBody(page: Page): Promise<void> {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate(() => {
     const rootNode = (window as any).creator.rootElement.getRootNode();
     if (!!rootNode.activeElement) {
