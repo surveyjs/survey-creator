@@ -309,14 +309,14 @@ test("Theme builder: composite question backgroundcornerradius", (): any => {
   let cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toBeUndefined();
   expect(cssVariables["--sjs2-color-unknown-variable-001"]).toBeUndefined();
-  expect(cssVariables["--sjs2-radius-container-panel"]).toBeUndefined();
+  expect(cssVariables["--sjs2-radius-component-panel"]).toBeUndefined();
 
   themeModel.questionPanel = { backcolor: "#ff44ff", hovercolor: "#969696", cornerRadius: 5 };
 
   cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toEqual("#ff44ff");
   expect(cssVariables["--sjs2-color-unknown-variable-001"]).toEqual("#969696");
-  expect(cssVariables["--sjs2-radius-container-panel"]).toEqual("5px");
+  expect(cssVariables["--sjs2-radius-component-panel"]).toEqual("5px");
 });
 
 test("Theme builder reset to default", (): any => {
@@ -356,7 +356,7 @@ test("Theme builder: restore values of backgroundcornerradius from loadTheme", (
   let cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toBeUndefined();
   expect(cssVariables["--sjs2-color-unknown-variable-001"]).toBeUndefined();
-  expect(cssVariables["--sjs2-radius-container-panel"]).toBeUndefined();
+  expect(cssVariables["--sjs2-radius-component-panel"]).toBeUndefined();
 
   expect(themeModel["questionPanel"]).toStrictEqual({
     "backcolor": "rgba(255, 255, 255, 1)",
@@ -371,7 +371,7 @@ test("Theme builder: restore values of backgroundcornerradius from loadTheme", (
   cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toEqual("rgba(253, 255, 148, 0.6)");
   expect(cssVariables["--sjs2-color-unknown-variable-001"]).toEqual("rgba(237, 238, 186, 1)");
-  expect(cssVariables["--sjs2-radius-container-panel"]).toEqual("6px");
+  expect(cssVariables["--sjs2-radius-component-panel"]).toEqual("6px");
 
   expect(themeModel["questionPanel"]).toStrictEqual({
     "backcolor": "rgba(253, 255, 148, 0.6)",
