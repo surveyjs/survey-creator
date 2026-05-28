@@ -72,7 +72,7 @@ test.describe(title, () => {
     await compareScreenshot(page, tabContent, "json-tab-with-errors.png");
   });
 
-  test("JSON Ace editor", async ({ page }) => {
+  test("JSON Ace editor (only React!)", async ({ page }) => {
     await page.goto(urlWidget);
     const skipIfNotReact = await page.evaluate(() => {
       return window["creator"].survey.platformName != "react";

@@ -1,4 +1,5 @@
 import { Locator, Page } from "playwright/test";
+import { test } from "../e2e/helper";
 
 export * from "../e2e/helper";
 
@@ -262,4 +263,25 @@ export async function resetFocusToBody(page: Page): Promise<void> {
     }
     document.body.focus();
   });
+}
+
+// Waits until the bounding box of the element matched by `selector` stays the same
+// for several consecutive animation frames - i.e. the smooth scrollIntoView is finished.
+export function waitForScrollEnd(page: Page, selector: string) {
+  return test.step(`waitForScrollEnd ${selector}`, () => page.waitForFunction((sel) => {
+    const root: ParentNode = (window as any).creator?.rootElement?.getRootNode?.() ?? document;
+    const el = root.querySelector(sel);
+    if (!el) return false;
+    const top = el.getBoundingClientRect().top;
+    const w = window as any;
+    const state = w.__waitForScrollEndState || (w.__waitForScrollEndState = {});
+    const stable = state.prevTop === top ? (state.frames || 0) + 1 : 0;
+    state.prevTop = top;
+    state.frames = stable;
+    if (stable >= 3) {
+      delete w.__waitForScrollEndState;
+      return true;
+    }
+    return false;
+  }, selector), { box: true });
 }

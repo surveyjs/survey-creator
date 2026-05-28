@@ -1,4 +1,4 @@
-import { MockedFunction, expect, test, vi } from "vitest";
+﻿import { MockedFunction, expect, test, vi } from "vitest";
 import { QuestionMatrixDynamicModel, glc, hasLicense, settings } from "survey-core";
 import { CreatorPresetEditorModel } from "../src/ui-preset-editor/presets-editor";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";

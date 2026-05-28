@@ -3386,7 +3386,7 @@ export class SurveyCreatorModel extends Base
   }
   @undoRedoTransaction()
   protected deleteObject(obj: any) {
-    if (!obj || obj.isDisposed) return;
+    if (!obj || obj.isDisposed || obj.isSurvey) return;
     const allowedOperations = this.getElementAllowOperations(obj);
     if (!allowedOperations.allowDelete) return;
     if (!this.checkOnElementDeleting(obj)) return;
