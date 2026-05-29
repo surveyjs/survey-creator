@@ -4,6 +4,7 @@ import {
   test,
   expect,
   setJSON,
+  setCreatorProp,
   explicitErrorHandler,
   getToolboxItemByText,
   addQuestionByAddQuestionButton,
@@ -33,6 +34,7 @@ test.describe(title, () => {
   });
 
   test("Checkbox question inplace editor", async ({ page }) => {
+    await setCreatorProp(page, "maxChoiceContentNestingLevel", 0);
     const items = getVisibleElement(page, ".svc-item-value-wrapper");
 
     await expect(getVisibleElement(page, ".svc-question__content")).toHaveCount(0);
@@ -138,6 +140,7 @@ test.describe(title, () => {
   });
 
   test("Radiogroup question inplace editor", async ({ page }) => {
+    await setCreatorProp(page, "maxChoiceContentNestingLevel", 0);
     const items = getVisibleElement(page, ".svc-item-value-wrapper");
 
     await expect(getVisibleElement(page, ".svc-question__content")).toHaveCount(0);
@@ -236,6 +239,7 @@ test.describe(title, () => {
   });
 
   test("Radiogroup inside PanelDynamic question inplace editor", async ({ page }) => {
+    await setCreatorProp(page, "maxChoiceContentNestingLevel", 0);
     const items = getVisibleElement(page, ".svc-item-value-wrapper");
     const json = {
       "pages": [
@@ -824,6 +828,7 @@ test.describe(title, () => {
   });
 
   test("Checkbox question inplace editor - keyboard navigation", async ({ page }) => {
+    await setCreatorProp(page, "maxChoiceContentNestingLevel", 0);
     const json = {
       "pages": [
         {

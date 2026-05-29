@@ -45,6 +45,7 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         { name: "forbiddenNestedElementsPanel", type: "tagbox", choices: allTypes },
         { name: "forbiddenNestedElementsPanelDynamic", type: "tagbox", choices: allTypes },
         { name: "maxPanelNestingLevel", type: "text", inputType: "number", min: -1 },
+        { name: "maxChoiceContentNestingLevel", type: "text", inputType: "number", min: 0, max: 2 },
         { type: "panel", name: "expressionsValidation", elements: [
           { name: "expressionsValidateFunctions", type: "boolean" },
           { name: "expressionsValidateVariables", type: "boolean" },

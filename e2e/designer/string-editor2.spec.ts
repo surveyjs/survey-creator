@@ -4,6 +4,7 @@ import {
   test,
   expect,
   setJSON,
+  setCreatorProp,
   getToolboxItemByText,
   explicitErrorHandler,
   handleShiftEnter,
@@ -265,6 +266,7 @@ test.describe(title, () => {
   });
 
   test("Disable edit inactive items", async ({ page }) => {
+    await setCreatorProp(page, "maxChoiceContentNestingLevel", 0);
     await getToolboxItemByText(page, "Checkboxes").click();
 
     const itemSelector = ".svc-item-value__item .svc-string-editor .sv-string-editor";
@@ -561,6 +563,7 @@ test.describe(title, () => {
   });
 
   test("Undo after new item add", async ({ page }) => {
+    await setCreatorProp(page, "maxChoiceContentNestingLevel", 0);
     await getToolboxItemByText(page, "Radio Button Group").click();
     await page.locator(".svc-item-value-controls__add").filter({ visible: true }).nth(1).click();
     await expect(page.locator(".svc-item-value-controls__remove")).toHaveCount(4);
@@ -643,6 +646,7 @@ test.describe(title, () => {
 
   test("Check string editor focus does not throw error: #4459", async ({ page }) => {
     await explicitErrorHandler(page);
+    await setCreatorProp(page, "maxChoiceContentNestingLevel", 0);
     await setJSON(page, { "elements": [{ "type": "checkbox", "name": "promoter_features", "colCount": 1, "choices": ["Item 1", "Item 2", "Item 3"] }] });
     await page.locator(".svc-question__content").click();
     await expect(getStringEditorByText(page, "Item 4")).toHaveCount(1);

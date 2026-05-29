@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, setJSON, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, compareScreenshot, doDrag, doDragDrop } from "./helper";
+import { url, setJSON, setOptions, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, compareScreenshot, doDrag, doDragDrop } from "./helper";
 import { downArrowImageLink, upArrowImageLink } from "../resources/base64images";
 
 const title = "DragDrop Screenshot";
@@ -185,6 +185,7 @@ test.describe(title, () => {
 
   test("Choices: Mobile", async ({ page }) => {
     await hideAllAdornerActions(page);
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.setViewportSize({ width: 390, height: 844 });
 
     const json = {

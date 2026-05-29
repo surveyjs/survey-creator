@@ -309,14 +309,14 @@ test("Theme builder: composite question backgroundcornerradius", (): any => {
   let cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toBeUndefined();
   expect(cssVariables["--sjs2-color-unknown-variable-001"]).toBeUndefined();
-  expect(cssVariables["--sjs2-radius-container-panel"]).toBeUndefined();
+  expect(cssVariables["--sjs2-radius-component-panel"]).toBeUndefined();
 
   themeModel.questionPanel = { backcolor: "#ff44ff", hovercolor: "#969696", cornerRadius: 5 };
 
   cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toEqual("#ff44ff");
   expect(cssVariables["--sjs2-color-unknown-variable-001"]).toEqual("#969696");
-  expect(cssVariables["--sjs2-radius-container-panel"]).toEqual("5px");
+  expect(cssVariables["--sjs2-radius-component-panel"]).toEqual("5px");
 });
 
 test("Theme builder reset to default", (): any => {
@@ -356,7 +356,7 @@ test("Theme builder: restore values of backgroundcornerradius from loadTheme", (
   let cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toBeUndefined();
   expect(cssVariables["--sjs2-color-unknown-variable-001"]).toBeUndefined();
-  expect(cssVariables["--sjs2-radius-container-panel"]).toBeUndefined();
+  expect(cssVariables["--sjs2-radius-component-panel"]).toBeUndefined();
 
   expect(themeModel["questionPanel"]).toStrictEqual({
     "backcolor": "rgba(255, 255, 255, 1)",
@@ -371,7 +371,7 @@ test("Theme builder: restore values of backgroundcornerradius from loadTheme", (
   cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-color-component-panel-default-bg"]).toEqual("rgba(253, 255, 148, 0.6)");
   expect(cssVariables["--sjs2-color-unknown-variable-001"]).toEqual("rgba(237, 238, 186, 1)");
-  expect(cssVariables["--sjs2-radius-container-panel"]).toEqual("6px");
+  expect(cssVariables["--sjs2-radius-component-panel"]).toEqual("6px");
 
   expect(themeModel["questionPanel"]).toStrictEqual({
     "backcolor": "rgba(253, 255, 148, 0.6)",
@@ -412,6 +412,31 @@ test("Theme builder: restore values of font from loadTheme", (): any => {
     "color": "rgba(201, 90, 231, 0.91)",
     "size": 18
   });
+});
+
+test("Theme builder: toJSON returns loaded theme with user edits", (): any => {
+  const themeModel = new ThemeModel();
+  themeModel.initialize();
+
+  const loadedTheme = {};
+  assign(loadedTheme, themeFromFile);
+  themeModel.loadTheme(loadedTheme as ITheme);
+
+  const loadedJson = themeModel.toJSON();
+  const editedPrimaryColor = "rgba(255, 0, 0, 1)";
+  themeModel.primaryColor = editedPrimaryColor;
+
+  const expectedTheme: ITheme = {
+    ...loadedJson,
+    cssVariables: {
+      ...loadedJson.cssVariables,
+      "--sjs2-color-project-brand-600": editedPrimaryColor,
+      "--sjs2-color-bg-brand-secondary": "rgba(255, 0, 0, 0.1)",
+      "--sjs2-color-bg-brand-primary-dim": "rgba(240, 0, 0, 1)",
+    }
+  };
+
+  expect(themeModel.toJSON()).toStrictEqual(expectedTheme);
 });
 
 test("Modify property grid: restore new property", (): any => {
@@ -582,6 +607,18 @@ test("getThemeChanges", (): any => {
   expect(themeChanges.isPanelless).toBe(true);
   expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-project-brand-600"]);
   expect(themeChanges.cssVariables!["--sjs2-color-project-brand-600"]).toBe("rgba(255, 0, 0, 1)");
+});
+
+test("Theme builder: toJSON keeps base theme variables on colorPalette change", (): any => {
+  const themeModel = new ThemeModel();
+  themeModel.initialize();
+
+  themeModel.selectTheme("default", "light");
+  themeModel.colorPalette = "dark";
+
+  const cssVariables = themeModel.toJSON().cssVariables || {};
+  expect(cssVariables["--sjs2-color-bg-basic-primary"]).toBe("rgba(48, 48, 48, 1)");
+  expect(cssVariables["--sjs-article-font-default-lineHeight"]).toBe("28px");
 });
 
 test("selectTheme", (): any => {

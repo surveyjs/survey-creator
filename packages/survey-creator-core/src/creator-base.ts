@@ -11,7 +11,8 @@ import {
   SvgThemeSets,
   QuestionPanelDynamicModel,
   ChoiceItem,
-  patchLegacyCSSVariables
+  patchLegacyCSSVariables,
+  ensureBaseThemeStyles
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale } from "./editorLocalization";
@@ -2896,8 +2897,13 @@ export class SurveyCreatorModel extends Base
     return !!res ? res : reason;
   }
   protected createSurveyCore(json: any = {}, area: string, element: Base): SurveyModel {
-    if (this.onSurveyInstanceSetupHandlers.isEmpty) return new SurveyModel(json);
+    if (this.onSurveyInstanceSetupHandlers.isEmpty) {
+      const model = new SurveyModel(json);
+      model.generateStylesheet = false;
+      return model;
+    }
     const model = new SurveyModel();
+    model.generateStylesheet = false;
     const options = { survey: model, area: area, element: element, json: json };
     this.onSurveyInstanceSetupHandlers.fire(this, options);
     model.fromJSON(options.json);
@@ -3380,7 +3386,7 @@ export class SurveyCreatorModel extends Base
   }
   @undoRedoTransaction()
   protected deleteObject(obj: any) {
-    if (!obj || obj.isDisposed) return;
+    if (!obj || obj.isDisposed || obj.isSurvey) return;
     const allowedOperations = this.getElementAllowOperations(obj);
     if (!allowedOperations.allowDelete) return;
     if (!this.checkOnElementDeleting(obj)) return;
@@ -3828,6 +3834,7 @@ export class SurveyCreatorModel extends Base
   }
   public setRootElement(element: HTMLElement) {
     this._rootElementValue = element;
+    ensureBaseThemeStyles(element);
     this.initKeyboardShortcuts(element);
     this.initResponsivityManager(element as HTMLDivElement);
   }
@@ -5006,11 +5013,11 @@ export class SurveyCreatorModel extends Base
    * - 1 - Allows first-level choice options to contain survey elements.
    * - 2 - Allows first- and second-level choice options to contain survey elements, and so on.
    *
-   * Default value: 0
+   * Default value: 2
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
    */
-  public maxChoiceContentNestingLevel: number = 0;
+  public maxChoiceContentNestingLevel: number = 2;
 
   /**
    * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.

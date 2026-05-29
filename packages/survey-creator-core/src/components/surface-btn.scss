@@ -35,4 +35,5 @@
     margin: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x100, 8px);
     --sd-action-boxshadow: none;
     --sd-action-disabled-box-shadow: none;
+    --sd-action-border-radius: var(--sjs2-radius-component-action, 8px);
 }
