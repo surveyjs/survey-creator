@@ -11,7 +11,8 @@ import { ThemeModel, getThemeChanges } from "../../src/components/tabs/theme-mod
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
-import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
+import type { MockInstance } from "vitest";
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
@@ -76,16 +77,19 @@ const themeFromFile = {
 };
 
 const cssVariables = DefaultTheme.cssVariables;
+let getComputedStyleMock: MockInstance | undefined;
 beforeEach(() => {
   mockGetRGBaColorIdentity();
+  getComputedStyleMock = mockDomWindowGetComputedStyleFromInlineStyles();
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
   ThemeModel.DefaultTheme = Themes["default-light"];
-  DefaultTheme.cssVariables = {} as any;
 });
 
 afterEach(() => {
+  getComputedStyleMock?.mockRestore();
+  getComputedStyleMock = undefined;
   restoreGetRGBaColorMock();
   DefaultTheme.cssVariables = cssVariables;
 });

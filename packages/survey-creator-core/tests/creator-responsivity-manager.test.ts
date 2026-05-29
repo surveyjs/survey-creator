@@ -470,15 +470,18 @@ test("CreatorResponsivityManager shold not change showSidebar on init", (): any 
   const oldGetComputedStyle = window.getComputedStyle;
   window.ResizeObserver = <any>ResizeObserver;
   window.getComputedStyle = <any>vi.fn((element) => ({
-    display: "block"
+    display: "block",
+    getPropertyValue: (propertyName: string) => propertyName === "display" ? "block" : ""
   }));
-  const container: SimpleContainer = new SimpleContainer({});
-  const creator = new CreatorTester();
-  container.offsetWidth = 1000;
-  creator.showSidebar = true;
-  const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
-  expect(creator.showSidebar).toBeTruthy();
-
-  window.ResizeObserver = oldResizeObserver;
-  window.getComputedStyle = oldGetComputedStyle;
+  try {
+    const container: SimpleContainer = new SimpleContainer({});
+    const creator = new CreatorTester();
+    container.offsetWidth = 1000;
+    creator.showSidebar = true;
+    const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+    expect(creator.showSidebar).toBeTruthy();
+  } finally {
+    window.ResizeObserver = oldResizeObserver;
+    window.getComputedStyle = oldGetComputedStyle;
+  }
 });

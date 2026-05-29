@@ -14,14 +14,17 @@ export * from "../../src/components/tabs/theme-custom-questions/shadow-effects";
 export * from "../../src/property-grid/theme-settings";
 export * from "../../src/property-grid/header-settings";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
-import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
+import type { MockInstance } from "vitest";
 
 import SurveyThemes from "survey-core/themes";
 registerSurveyTheme(SurveyThemes);
 
 const cssVariables = DefaultTheme.cssVariables;
+let computedStyleSpy: MockInstance | undefined;
 beforeEach(() => {
   mockGetRGBaColorIdentity();
+  computedStyleSpy = mockDomWindowGetComputedStyleFromInlineStyles();
 
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
@@ -31,6 +34,8 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  computedStyleSpy?.mockRestore();
+  computedStyleSpy = undefined;
   restoreGetRGBaColorMock();
 });
 
