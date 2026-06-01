@@ -199,11 +199,6 @@
 }
 
 .svc-logic-tab__content {
-  /* disable library transition animations */
-  --sjs-transition-duration: 0ms;
-}
-
-.svc-logic-tab__content {
   &.svc-logic-tab--empty {
     display: flex;
     flex-direction: column;
