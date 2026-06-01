@@ -2159,6 +2159,21 @@ test("Show survey in property grid on deleting last page", (): any => {
   creator.deleteCurrentElement();
   expect(creator.selectedElementName).toEqual("survey");
 });
+test("deleteCurrentElement should not crash when survey is selected, Bug#7724", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  creator.selectElement(creator.survey.pages[0]);
+  creator.deleteCurrentElement();
+  creator.deleteCurrentElement();
+  expect(creator.selectedElementName).toEqual("survey");
+  creator.deleteCurrentElement();
+  expect(creator.selectedElementName).toEqual("survey");
+});
 test("Test TabDesignerViewModel.pageCount - reactive", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

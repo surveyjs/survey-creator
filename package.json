@@ -19,7 +19,7 @@
     "devDependencies": {
         "@commitlint/cli": "^19.8.0",
         "@commitlint/config-conventional": "^19.8.0",
-        "@playwright/test": "1.53.2",
+        "@playwright/test": "1.60.0",
         "@rollup/plugin-alias": "^6.0.0",
         "@rollup/plugin-commonjs": "^29.0.0",
         "@rollup/plugin-node-resolve": "^16.0.3",
@@ -42,7 +42,7 @@
         "get-func-name": "2.0.0",
         "husky": "^9.1.7",
         "lint-staged": "^15.4.3",
-        "playwright": "1.53.2",
+        "playwright": "1.60.0",
         "postcss": "^8.5.8",
         "postcss-banner": "^4.0.1",
         "postcss-calc": "^10.1.1",

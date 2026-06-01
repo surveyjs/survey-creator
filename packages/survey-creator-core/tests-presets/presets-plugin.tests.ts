@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+﻿import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { CreatorTester } from "../tests/creator-tester";
 import { UIPresetEditor } from "../src/ui-preset-editor/presets-plugin";
 import { CreatorPresets, IPreset, PredefinedCreatorPresets, registerUIPreset, UIPreset } from "../src/ui-presets-creator/presets";
