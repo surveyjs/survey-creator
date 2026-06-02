@@ -1624,6 +1624,10 @@ export var grStrings = {
     choiceTextsFromQuestion: "Χρήση τιμών από την εξής στήλη πίνακα ή ερώτηση πάνελ ως κείμενα επιλογών",
     // "Display page titles in the progress bar"
     progressBarShowPageTitles: "Εμφάνιση τίτλων σελίδων στη γραμμή προόδου",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Εμφάνιση κειμένου περιήγησης στη γραμμή προόδου",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Στοίχιση κειμένου πλοήγησης",
     // "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Εμφάνιση αριθμών σελίδων στη γραμμή προόδου",
     // "Add a comment box"

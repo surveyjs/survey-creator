@@ -1624,6 +1624,10 @@ export var frenchTranslation = {
     choiceTextsFromQuestion: "Utilisez les valeurs de la question matricielle, de la colonne ou du panneau suivant comme textes de choix",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Afficher les titres des pages dans la barre de progression",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Afficher le texte de navigation dans la barre de progression",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Alignement du texte de navigation",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Affichage des numéros de page dans la barre de progression",
     // [Auto-translated] "Add a comment box"

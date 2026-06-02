@@ -1624,6 +1624,10 @@ export var nbStrings = {
     choiceTextsFromQuestion: "Bruk verdier fra følgende matrisekolonne eller paneloppgave som valgtekster",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Vise sidetitler i fremdriftslinjen",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Vis navigasjonstekst i fremdriftslinjen",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Navigasjonstekstjustering",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Vise sidetall i fremdriftslinjen",
     // [Auto-translated] "Add a comment box"

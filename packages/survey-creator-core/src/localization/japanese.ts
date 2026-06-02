@@ -1624,6 +1624,10 @@ export var jaStrings = {
     choiceTextsFromQuestion: "次の行列の列またはパネルの質問の値を選択テキストとして使用します",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "進行状況バーにページタイトルを表示する",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "進行バーにナビゲーションテキストを表示します",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "ナビゲーションテキストのアラインメント",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "進行状況バーにページ番号を表示する",
     // [Auto-translated] "Add a comment box"

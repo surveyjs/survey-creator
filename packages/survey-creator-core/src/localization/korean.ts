@@ -1625,6 +1625,10 @@ export var koreanStrings = {
     choiceTextsFromQuestion: "다음 행렬 열 또는 패널 질문의 값을 선택 텍스트로 사용합니다.",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "진행률 표시줄에 페이지 제목 표시",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "진행 바에 내비게이션 텍스트를 표시하세요",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "내비게이션 텍스트 정렬",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "진행률 표시줄에 페이지 번호 표시",
     // [Auto-translated] "Add a comment box"

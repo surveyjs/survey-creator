@@ -1624,6 +1624,10 @@ export var nlStrings = {
     choiceTextsFromQuestion: "Gebruik waarden uit de volgende matrixkolom of paneelvraag als keuzeteksten",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Paginatitels weergeven in de voortgangsbalk",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Toon navigatietekst in de voortgangsbalk",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Navigatietekstuitlijning",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Paginanummers weergeven in de voortgangsbalk",
     // [Auto-translated] "Add a comment box"

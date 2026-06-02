@@ -1624,6 +1624,10 @@ export var czStrings = {
     choiceTextsFromQuestion: "Jako texty voleb použijte hodnoty z následujícího sloupce matice nebo otázky panelu",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Zobrazení názvů stránek v pruhu průběhu",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Zobrazit navigační text v průběhu",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Zarovnání navigačního textu",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Zobrazení čísel stránek v pruhu průběhu",
     // "Add a comment box"

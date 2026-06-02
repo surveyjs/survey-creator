@@ -1624,6 +1624,10 @@ export var ruStrings = {
     choiceTextsFromQuestion: "Используйте значения из следующего столбца матрицы или панельного вопроса в качестве текстов для выбора",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Отображение заголовков страниц в индикаторе выполнения",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Отобразите навигационный текст в шкале прогресса",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Выравнивание навигационного текста",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Отображение номеров страниц в индикаторе выполнения",
     // [Auto-translated] "Add a comment box"

@@ -1624,6 +1624,10 @@ export var italianTranslation = {
     choiceTextsFromQuestion: "Usa i valori della seguente colonna matrice o domanda del pannello come testi di scelta",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Visualizzare i titoli delle pagine nella barra di avanzamento",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Visualizza il testo di navigazione nella barra di progresso",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Allineamento del testo di navigazione",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Visualizzare i numeri di pagina nella barra di avanzamento",
     // "Add a comment box"

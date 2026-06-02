@@ -1624,6 +1624,10 @@ export var hebrewStrings = {
     choiceTextsFromQuestion: "השתמש בערכים מעמודת המטריצה או משאלת החלונית הבאה כטקסטים נבחרים",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "הצגת כותרות עמודים בסרגל ההתקדמות",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "הצג טקסט ניווט בסרגל ההתקדמות",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "יישור טקסט בניווט",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "הצגת מספרי עמודים בסרגל ההתקדמות",
     // "Add a comment box"

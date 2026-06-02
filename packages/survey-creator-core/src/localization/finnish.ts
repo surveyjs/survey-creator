@@ -1624,6 +1624,10 @@ export var fiStrings = {
     choiceTextsFromQuestion: "Käytä seuraavan matriisin sarakkeen tai paneelikysymyksen arvoja valintateksteinä",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Näytä sivujen otsikot edistymispalkissa",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Näytä navigointiteksti etenemispalkissa",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Navigointitekstin kohdistus",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Sivunumeroiden näyttäminen edistymispalkissa",
     // [Auto-translated] "Add a comment box"

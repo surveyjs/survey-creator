@@ -1624,6 +1624,10 @@ export var indonesianStrings = {
     choiceTextsFromQuestion: "Gunakan nilai dari kolom matriks atau pertanyaan panel berikut sebagai teks pilihan",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Menampilkan judul halaman di bilah kemajuan",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Tampilkan teks navigasi di bilah kemajuan",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Perataan teks navigasi",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Menampilkan nomor halaman di bilah kemajuan",
     // [Auto-translated] "Add a comment box"

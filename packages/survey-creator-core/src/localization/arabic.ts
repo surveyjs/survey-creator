@@ -1624,6 +1624,10 @@ export var arStrings = {
     choiceTextsFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "عرض عناوين الصفحات في شريط التقدم",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "عرض نص التنقل في شريط التقدم",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "محاذاة نص التنقل",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "عرض أرقام الصفحات في شريط التقدم",
     // [Auto-translated] "Add a comment box"

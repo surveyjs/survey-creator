@@ -1624,6 +1624,10 @@ export var slStrings = {
     choiceTextsFromQuestion: "Uporabi vrednosti iz naslednje matrične vrstice ali panela kot besedila možnosti",
     // "Display page titles in the progress bar"
     progressBarShowPageTitles: "Prikaz naslovov strani v napredku",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Prikaži navigacijsko besedilo v vrstici napredka",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Poravnava navigacijskega besedila",
     // "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Prikaz številk strani v napredku",
     // "Add a comment box"

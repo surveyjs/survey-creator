@@ -1625,6 +1625,10 @@ export let svStrings = {
     choiceTextsFromQuestion: "Använd värden från följande matriskolumn eller panelfråga som valtexter",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Visa sidtitlar i förloppsindikatorn",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Visa navigationstext i progressfältet",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Navigeringstextjustering",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Visa sidnummer i förloppsindikatorn",
     // [Auto-translated] "Add a comment box"

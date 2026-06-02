@@ -1624,6 +1624,10 @@ export var persianStrings = {
     choiceTextsFromQuestion: "از مقادیر ستون ماتریس یا سوال پانل زیر به عنوان متن انتخابی استفاده کنید",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "نمایش عناوین صفحه در نوار پیشرفت",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "نمایش متن ناوبری در نوار پیشرفت",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "تراز متن ناوبری",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "نمایش شماره صفحات در نوار پیشرفت",
     // [Auto-translated] "Add a comment box"

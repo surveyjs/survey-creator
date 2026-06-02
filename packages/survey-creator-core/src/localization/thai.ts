@@ -1624,6 +1624,10 @@ export const thStrings = {
     choiceTextsFromQuestion: "ใช้ค่าจากคอลัมน์เมทริกซ์หรือคําถามแผงต่อไปนี้เป็นข้อความตัวเลือก",
     // "Display page titles in the progress bar"
     progressBarShowPageTitles: "แสดงชื่อหน้าในแถบความคืบหน้า",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "แสดงข้อความนําทางในแถบความคืบหน้า",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "การจัดตําแหน่งข้อความการนําทาง",
     // "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "แสดงหมายเลขหน้าในแถบความคืบหน้า",
     // "Add a comment box"

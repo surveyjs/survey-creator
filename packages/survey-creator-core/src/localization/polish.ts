@@ -1625,6 +1625,10 @@ export var polishStrings = {
     choiceTextsFromQuestion: "Użyj wartości z poniższego pytania macierzowego, kolumnowego lub panelowego jako tekstów wyboru",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Wyświetlanie tytułów stron na pasku postępu",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Wyświetlaj tekst nawigacji na pasku postępu",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Wyrównanie tekstu nawigacyjnego",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Wyświetlanie numerów stron na pasku postępu",
     // [Auto-translated] "Add a comment box"

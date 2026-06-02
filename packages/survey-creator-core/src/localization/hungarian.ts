@@ -1624,6 +1624,10 @@ export var huStrings = {
     choiceTextsFromQuestion: "Használja a következő mátrixoszlop vagy panelkérdés értékeit választási szövegként:",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Oldalcímek megjelenítése a folyamatjelző sávon",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "A navigációs szöveg megjelenítése a haladó sávban",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Navigációs szöveg igazítása",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Oldalszámok megjelenítése a folyamatjelző sávon",
     // [Auto-translated] "Add a comment box"

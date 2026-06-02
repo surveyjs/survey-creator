@@ -1624,6 +1624,10 @@ export var bgStrings = {
     choiceTextsFromQuestion: "Използване на стойности от следната матрична колона или панелен въпрос като текстове за избор",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Показване на заглавията на страниците в лентата за напредъка",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Покажете навигационния текст в лентата за напредък",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Подравняване на навигационния текст",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Показване на номерата на страниците в лентата за напредъка",
     // "Add a comment box"

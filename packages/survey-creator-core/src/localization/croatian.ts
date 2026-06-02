@@ -1624,6 +1624,10 @@ export var hrStrings = {
     choiceTextsFromQuestion: "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja na ploči kao tekstove izbora",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Prikaz naslova stranica na traci napretka",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Prikaži tekst navigacije u traci napretka",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Poravnanje navigacijskog teksta",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Prikaz brojeva stranica na traci napretka",
     // [Auto-translated] "Add a comment box"

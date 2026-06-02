@@ -1624,6 +1624,10 @@ export var mnStrings = {
     choiceTextsFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Явцын самбар дээр хуудасны гарчгийг харуул",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Навигацийн текстийг явцын самбар дээр харуулна уу",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Навигацийн текстийн тэнцвэржүүлэлт",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Явцын самбар дээр хуудасны дугаарыг харуул",
     // "Add a comment box"

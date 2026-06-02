@@ -1624,6 +1624,10 @@ export var skStrings = {
     choiceTextsFromQuestion: "Ako texty výberu použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Zobrazenie názvov strán na indikátore priebehu",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Zobraziť navigačný text v priebežnom paneli",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Zarovnanie navigačného textu",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Zobrazenie čísel strán na indikátore priebehu",
     // [Auto-translated] "Add a comment box"

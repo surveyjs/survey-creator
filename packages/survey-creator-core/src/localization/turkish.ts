@@ -1624,6 +1624,10 @@ export var turkishStrings = {
     choiceTextsFromQuestion: "Aşağıdaki matris sütununda veya panel sorusunda yer alan değerleri seçim metinleri olarak kullanın",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "İlerleme çubuğunda sayfa başlıklarını görüntüleme",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Ilerleme çubuğunda gezinme metnini göster",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Navigasyon metni hizalanması",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "İlerleme çubuğunda sayfa numaralarını görüntüleme",
     // "Add a comment box"

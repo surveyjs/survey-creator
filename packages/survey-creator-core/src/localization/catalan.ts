@@ -1624,6 +1624,10 @@ export var catalanTranslation = {
     choiceTextsFromQuestion: "Utilitza valors de la següent columna matricial o pregunta de vinyeta com a textos de tria",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Mostrar los títols de las pàgines en la barra de progreso",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Mostra el text de navegació a la barra de progrés",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Alineació del text de navegació",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Mostrar números de pàgina en la barra de progreso",
     // "Add a comment box"

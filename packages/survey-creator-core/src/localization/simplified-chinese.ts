@@ -1624,6 +1624,10 @@ export var simplifiedChineseTranslation = {
     choiceTextsFromQuestion: "使用以下矩阵、列或面板问题中的值作为选择文本",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "在进度条中显示页面标题",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "在进度栏中显示导航文字",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "导航文本对齐",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "在进度条中显示页码",
     // [Auto-translated] "Add a comment box"

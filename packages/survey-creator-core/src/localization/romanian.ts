@@ -1624,6 +1624,10 @@ export const roStrings = {
     choiceTextsFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere",
     // "Display page titles in the progress bar"
     progressBarShowPageTitles: "Afișează titlurile paginilor în bara de progres",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Afișează textul de navigare în bara de progres",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Alinierea textului de navigare",
     // "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Afișează numerele paginilor în bara de progres",
     // "Add a comment box"

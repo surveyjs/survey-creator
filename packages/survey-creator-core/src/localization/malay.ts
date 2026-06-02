@@ -1624,6 +1624,10 @@ export var msStrings = {
     choiceTextsFromQuestion: "Gunakan nilai daripada lajur matriks atau soalan panel berikut sebagai teks pilihan",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Paparkan tajuk halaman dalam bar kemajuan",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Paparkan teks navigasi dalam bar kemajuan",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Penjajaran teks navigasi",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Paparkan nombor halaman dalam bar kemajuan",
     // [Auto-translated] "Add a comment box"

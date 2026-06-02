@@ -1625,6 +1625,10 @@ export var danishStrings = {
     choiceTextsFromQuestion: "Brug værdier fra følgende matrixkolonne eller panelspørgsmål som valgtekster",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Vise sidetitler på statuslinjen",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Vis navigationstekst i fremdriftslinjen",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Navigationstekstjustering",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Vise sidetal på statuslinjen",
     // [Auto-translated] "Add a comment box"

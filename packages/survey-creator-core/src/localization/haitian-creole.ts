@@ -1624,6 +1624,10 @@ export var htStrings = {
     choiceTextsFromQuestion: "Sèvi ak valè nan kolòn matris sa a oswa kesyon panèl la kòm tèks chwa",
     // "Display page titles in the progress bar"
     progressBarShowPageTitles: "Montre tit paj nan ba pwogrè a",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Montre tèks navigasyon nan ba pwogrè a",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Navigasyon nan aliyman tèks",
     // "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Montre nimewo paj nan ba pwogrè a",
     // "Add a comment box"

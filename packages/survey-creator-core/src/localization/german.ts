@@ -1624,6 +1624,10 @@ export var germanTranslation = {
     choiceTextsFromQuestion: "Verwenden Sie Werte aus der folgenden Matrixspalte oder Panelfrage als Auswahltexte",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Seitentitel in der Fortschrittsleiste anzeigen",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Anzeige von Navigationstext in der Fortschrittsleiste",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Ausrichtung des Navigationstextes",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Seitenzahlen in der Fortschrittsleiste anzeigen",
     // [Auto-translated] "Add a comment box"
