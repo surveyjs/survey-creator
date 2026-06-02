@@ -380,7 +380,7 @@ jobs:
           git fetch origin $branch
           git checkout -B $branch origin/$branch
           git add packages/survey-creator-core/src/localization
-          git add packages/survey-creator-core/src/presets/localization
+          git add packages/survey-creator-core/src/ui-preset-editor/localization
           if (git status --porcelain) {
               git commit -m "updated survey-creator translation for $branch [azurepipelines skip]"
               git push origin $branch
