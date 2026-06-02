@@ -372,21 +372,22 @@ jobs:
           node ./dist/translateCreatorPresets.js
         displayName: "survey-utils translate creator"
 
-      - powershell: |
-          $branch = "$(CurrentBranch)"
-          cd $(Build.SourcesDirectory)/survey-creator
-          $env:GIT_REDIRECT_STDERR = '2>&1'
-          git config --global user.email "surveyjs.org@gmail.com"
-          git config --global user.name "surveyjsdeveloper"
-          git fetch origin $branch
-          git checkout -B $branch origin/$branch
-          git add packages/survey-creator-core/src/localization
-          git add packages/survey-creator-core/src/ui-preset-editor/localization
-          if (git status --porcelain) {
-              git commit -m "updated survey-creator translation for $branch [azurepipelines skip]"
-              git push origin $branch
-          }
-        displayName: "Creator - push updated translation to github for $(CurrentBranch)"
+#TODO uncomment and fix me
+      # - powershell: |
+      #     $branch = "$(CurrentBranch)"
+      #     cd $(Build.SourcesDirectory)/survey-creator
+      #     $env:GIT_REDIRECT_STDERR = '2>&1'
+      #     git config --global user.email "surveyjs.org@gmail.com"
+      #     git config --global user.name "surveyjsdeveloper"
+      #     git fetch origin $branch
+      #     git checkout -B $branch origin/$branch
+      #     git add packages/survey-creator-core/src/localization
+      #     git add packages/survey-creator-core/src/ui-preset-editor/localization
+      #     if (git status --porcelain) {
+      #         git commit -m "updated survey-creator translation for $branch [azurepipelines skip]"
+      #         git push origin $branch
+      #     }
+      #   displayName: "Creator - push updated translation to github for $(CurrentBranch)"
 
   - job: CreatorV2React
     dependsOn: CreatorV2Core
