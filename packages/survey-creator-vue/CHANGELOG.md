@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 2.5.26 (2026-05-28)
+
+
+### Bug Fixes
+
+* Do not auto-delete empty page in bypage mode, Bug[#7758](https://github.com/surveyjs/survey-creator/issues/7758) ([#7759](https://github.com/surveyjs/survey-creator/issues/7759)) ([2780e66](https://github.com/surveyjs/survey-creator/commit/2780e660c4cef460c4ca284d54159ed2e6030d35))
+
 ### 2.5.25 (2026-05-18)
 
 ### 2.5.24 (2026-05-12)
