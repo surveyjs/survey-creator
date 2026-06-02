@@ -18,6 +18,7 @@
     "test:postcss": "postcss build/survey-creator-core.css --silent -u postcss-calc -u autoprefixer -u postcss-fail-on-warn -u postcss-import -o survey-creator-core.postcss.css && rimraf survey-creator-core.postcss.css",
     "test:core": "vitest run --project core",
     "test:core:watch": "vitest --project core",
+    "test:presets": "exit 0",
     "doc_gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "watch:dev": "rollup -c rollup.config.mjs -w",
     "watch:prod": "rollup -c rollup.config.mjs -w --environment emitMinified",
