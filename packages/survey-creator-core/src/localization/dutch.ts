@@ -1432,8 +1432,6 @@ export var nlStrings = {
     acceptedTypes: "Extra bestandsextensies",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Wacht tot het uploaden is voltooid",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Bevestig het verwijderen van bestanden",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Uitlijning van rijdetails",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var nlStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Hoogte afbeelding",
       // [Auto-translated] "Image width"
-      imageWidth: "Breedte afbeelding"
+      imageWidth: "Breedte afbeelding",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Bevestig bestandsverwijdering"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Verberg de vraag als er geen keuzes in zitten",
@@ -1929,21 +1929,21 @@ export var nlStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Dekking", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Familie van enquêtelettertypen",
+      "--sjs2-typography-font-family-text": "Surveylettertypefamilie",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Achtergrondkleur",
+      "--sjs2-color-utility-surface-survey": "Achtergrondkleur",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Accent achtergrondkleuren",
+      "--sjs2-color-project-brand-600": "Accentkleuren op de achtergrond",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Accent voorgrondkleuren",
+      "--sjs2-color-fg-brand-on-primary": "Accentkleuren voorgrond",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Foutmelding kleuren",
+      "--sjs2-color-bg-alert-primary": "Kleuren van foutmeldingen",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Schaduweffecten",
+      "--sjs2-border-effect-surface-default": "Schaduweffecten",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Schaduweffecten",
+      "--sjs2-border-effect-component-formbox-default": "Schaduweffecten",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Kleuren"
+      "--sjs2-color-component-input-default-line": "Kleuren"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2891,9 @@ export var nlStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Hiermee geeft u de weergavebreedte op van geüploade afbeeldingen in het voorbeeld en de werkelijke breedte van de foto's die met de camera zijn gemaakt. In de uploadmodus voor één bestand wordt de weergavebreedte beperkt door het voorbeeldgebied; In de modus voor het uploaden van meerdere bestanden wordt dit beperkt door het miniatuurgebied.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven."
+      allowImagesPreview: "Geeft indien mogelijk miniatuurvoorbeelden weer voor geüploade bestanden. Schakel de selectie uit als u in plaats daarvan bestandspictogrammen wilt weergeven.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Er wordt een prompt geactiveerd waarin wordt gevraagd om het verwijderen van het bestand te bevestigen."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var nlStrings = {
     valueFalse: "Een waarde die moet worden opgeslagen in enquêteresultaten wanneer respondenten een negatief antwoord geven.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Het wordt niet aanbevolen om deze optie uit te schakelen, omdat deze de voorbeeldafbeelding overschrijft en het voor een gebruiker moeilijk maakt om te begrijpen of de bestanden zijn geüpload.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Hiermee wordt een prompt geactiveerd waarin wordt gevraagd om het verwijderen van het bestand te bevestigen.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Schakel in om alleen geselecteerde keuzes te rangschikken. Gebruikers slepen geselecteerde items uit de keuzelijst om ze binnen het rangschikkingsgebied te rangschikken.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var nlStrings = {
       questionBackgroundTransparency: "Hiermee past u de transparantie van invoerelementen aan ten opzichte van de achtergrond van de enquête.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Hiermee stelt u de hoekradius in voor alle rechthoekige elementen. Schakel de geavanceerde modus in als u afzonderlijke hoekradiuswaarden wilt instellen voor invoerelementen of deelvensters en vraagvakken.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Hiermee stelt u de hoofdachtergrondkleur van de enquête in."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Bepaalt de hoofdkleur van de enquête."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var nlStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Verstek",
-      // [Auto-translated] "Sharp"
-      sharp: "Scherp",
+      // [Auto-translated] "Contrast"
+      contrast: "Tegenstelling",
       // [Auto-translated] "Borderless"
       borderless: "Grenzeloos",
       // [Auto-translated] "Flat"
       flat: "Plat",
       // [Auto-translated] "Plain"
       plain: "Vlakte",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Dubbele rand",
-      // [Auto-translated] "Layered"
-      layered: "Gelaagd",
-      // [Auto-translated] "Solid"
-      solid: "Degelijk",
+      // [Auto-translated] "Soft"
+      soft: "Zacht",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Tegenstelling"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monochroom"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3602,7 @@ export var nlStrings = {
     // [Auto-translated] "Font"
     fontScale: "Lettertype",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Enquête maken 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Licht",
-      // [Auto-translated] "Dark"
-      "default-dark": "Donker",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Tegenstelling"
+
     }
   },
   preset: {

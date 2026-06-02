@@ -1432,8 +1432,6 @@ export var huStrings = {
     acceptedTypes: "További fájlkiterjesztések",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Várja meg, amíg a feltöltés befejeződik",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Fájltörlés megerősítése",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Sorrészletek igazítása",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var huStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Kép magassága",
       // [Auto-translated] "Image width"
-      imageWidth: "Kép szélessége"
+      imageWidth: "Kép szélessége",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Fájltörlés megerősítése"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Rejtse el a kérdést, ha nincs más választása",
@@ -1929,21 +1929,21 @@ export var huStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Átlátszatlanság", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Földmérési betűcsalád",
+      "--sjs2-typography-font-family-text": "Felmérési betűtípuscsalád",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Háttérszín",
+      "--sjs2-color-utility-surface-survey": "Háttérszín",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Kiemelő háttérszínek",
+      "--sjs2-color-project-brand-600": "Kiemelő háttérszínek",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Kiemelő előtérszínek",
+      "--sjs2-color-fg-brand-on-primary": "Kiemelő előtér színek",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "A hibaüzenetek színei",
+      "--sjs2-color-bg-alert-primary": "Hibaüzenet színek",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Árnyék effektusok",
+      "--sjs2-border-effect-surface-default": "Árnyékhatások",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Árnyék effektusok",
+      "--sjs2-border-effect-component-formbox-default": "Árnyékhatások",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Színek"
+      "--sjs2-color-component-input-default-line": "Színek"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2891,9 @@ export var huStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Megadja a feltöltött képek megjelenítési szélességét az előnézetben és a fényképezőgéppel készített képek tényleges szélességét. Egyfájlfeltöltési módban a megjelenítési szélességet az előnézeti terület korlátozza; Több fájl feltöltési módban a miniatűr terület korlátozza.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Ha lehetséges, miniatűr előnézeteket jelenít meg a feltöltött fájlokhoz. Törölje a jelölést, ha inkább fájlikonokat szeretne megjeleníteni."
+      allowImagesPreview: "Ha lehetséges, miniatűr előnézeteket jelenít meg a feltöltött fájlokhoz. Törölje a jelölést, ha inkább fájlikonokat szeretne megjeleníteni.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Indít egy promptot, amely a fájltörlés megerősítését kéri."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var huStrings = {
     valueFalse: "A felmérés eredményeiben mentendő érték, ha a válaszadók negatív választ adnak.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nem ajánlott letiltani ezt a beállítást, mivel felülbírálja az előnézeti képet, és megnehezíti a felhasználó számára annak megértését, hogy a fájlok fel vannak-e töltve.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "A fájl törlésének megerősítését kérő üzenet jelenik meg.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Engedélyezésével csak a kiválasztott választásokat rangsorolhatja. A felhasználók a kiválasztott elemeket az adatválaszték-listából húzzák, hogy a rangsorolási területen belül rendezzék őket.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var huStrings = {
       questionBackgroundTransparency: "Beállítja a bemeneti elemek átlátszóságát a földmérési háttérhez képest.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Beállítja az összes téglalap alakú elem saroksugarát. Engedélyezze a Speciális módot, ha egyedi sarokrádiuszértékeket szeretne beállítani a bemeneti elemekhez vagy panelekhez és kérdésmezőkhöz.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Beállítja a felmérés fő háttérszínét."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "A felmérés fő háttérszínét állítja be."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var huStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Alapértelmezett",
-      // [Auto-translated] "Sharp"
-      sharp: "Éles",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontraszt",
       // [Auto-translated] "Borderless"
       borderless: "Szegély nélküli",
       // [Auto-translated] "Flat"
       flat: "Lapos",
       // [Auto-translated] "Plain"
       plain: "Síkság",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Dupla szegély",
-      // [Auto-translated] "Layered"
-      layered: "Rakott",
-      // [Auto-translated] "Solid"
-      solid: "Szilárd",
+      // [Auto-translated] "Soft"
+      soft: "Lágy",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontraszt"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monokróm"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3602,7 @@ export var huStrings = {
     // [Auto-translated] "Font"
     fontScale: "Betűkészlet",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Felmérés készítője 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Fény",
-      // [Auto-translated] "Dark"
-      "default-dark": "Sötét",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontraszt"
+
     }
   },
   preset: {

@@ -1432,8 +1432,6 @@ export var htStrings = {
     acceptedTypes: "Aksepte kalite dosye",
     // "Wait for upload to complete"
     waitForUpload: "Rete tann pou telechaje yo fini",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Konfime efase fichye a",
     // "Row details alignment"
     detailPanelMode: "Aliyman ekspansyon ranje",
     // "Minimum row count"
@@ -1566,7 +1564,9 @@ export var htStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Wotè imaj",
       // [Auto-translated] "Image width"
-      imageWidth: "Lajè imaj"
+      imageWidth: "Lajè imaj",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Konfime efase dosye"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Kache kesyon an si li pa gen chwa",
@@ -1928,22 +1928,22 @@ export var htStrings = {
       editorFont: "Font",
       // "Opacity"
       backgroundOpacity: "Opakite", // Auto-generated string
-      // "Survey font family"
-      "--sjs-font-family": "Fanmi font sondaj",
-      // "Background color"
-      "--sjs-general-backcolor-dim": "Koulè background",
-      // "Accent background colors"
-      "--sjs-primary-backcolor": "Aksan koulè background",
-      // "Accent foreground colors"
-      "--sjs-primary-forecolor": "Aksan koulè premye plan",
-      // "Error message colors"
-      "--sjs-special-red": "Koulè mesaj erè",
-      // "Shadow effects"
-      "--sjs-shadow-small": "Efè lonbraj",
-      // "Shadow effects"
-      "--sjs-shadow-inner": "Efè lonbraj",
-      // "Colors"
-      "--sjs-border-default": "Koulè"
+      // [Auto-translated] "Survey font family"
+      "--sjs2-typography-font-family-text": "Sondaj font fanmi",
+      // [Auto-translated] "Background color"
+      "--sjs2-color-utility-surface-survey": "Koulè background",
+      // [Auto-translated] "Accent background colors"
+      "--sjs2-color-project-brand-600": "Koulè background aksan",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs2-color-fg-brand-on-primary": "Koulè premye plan aksan",
+      // [Auto-translated] "Error message colors"
+      "--sjs2-color-bg-alert-primary": "Erè mesaj koulè",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-surface-default": "Efè lonbraj",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-component-formbox-default": "Efè lonbraj",
+      // [Auto-translated] "Colors"
+      "--sjs2-color-component-input-default-line": "Koulè"
     },
     "header@header": {
       // "View"
@@ -2891,7 +2891,9 @@ export var htStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Espesifye lajè a nan imaj Uploaded nan preview la ak lajè aktyèl la nan imaj pran ak kamera a. Nan yon sèl mòd dosye Upload, lajè a ekspozisyon limite pa zòn nan preview; nan mòd miltip Upload, li limite pa zòn nan thumbnail.",
       // "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Montre aperçu miniatures pou fichye telechaje lè sa posib. Dezeleksyone si ou vle montre ikon dosye pito."
+      allowImagesPreview: "Montre aperçu miniatures pou fichye telechaje lè sa posib. Dezeleksyone si ou vle montre ikon dosye pito.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Deklanche yon èd lè mande pou konfime suplera dosye a."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var htStrings = {
     valueFalse: "Yon valè pou sove nan rezilta sondaj yo lè moun ki repond bay yon repons negatif.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Li pa rekòmande pou ou enfim opsyon sa a paske li depase imaj Preview la epi li fè li difisil pou yon itilizatè konprann si wi ou non dosye yo te Uploaded.",
-    // "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Deklanche yon èd memwa ki mande konfime sipresyon fichye a.",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Pèmèt yo klase sèlman chwa chwazi yo. Itilizatè yo pral trennen atik yo chwazi nan lis chwa a pou kòmande yo nan zòn klasman an.",
     // "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var htStrings = {
       questionBackgroundTransparency: "Ajiste transparans eleman opinyon yo parapò ak background sondaj la.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Mete reyon kwen an pou tout eleman rektangilè. Pèmèt Mòd Avanse a si ou vle mete valè reyon kwen endividyèl pou eleman opinyon oswa panno ak bwat kesyon.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Mete koulè background prensipal sondaj la."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Mete koulè background prensipal sondaj la"
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var htStrings = {
     names: {
       // "Default"
       default: "Defo",
-      // "Sharp"
-      sharp: "Byen file",
+      // "Contrast"
+      contrast: "Kontras",
       // "Borderless"
       borderless: "San fwontyè",
       // "Flat"
       flat: "Plat",
       // "Plain"
       plain: "Plenn",
-      // "Double Border"
-      doubleborder: "Double fwontyè",
-      // "Layered"
-      layered: "Kouch",
-      // [Auto-translated] "Solid"
-      solid: "Solid",
+      // [Auto-translated] "Soft"
+      soft: "Mou",
       // [Auto-translated] "3D"
       threedimensional: "3D",
-      // "Contrast"
-      contrast: "Kontras"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monochrome"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3602,7 @@ export var htStrings = {
     // [Auto-translated] "Font"
     fontScale: "Font",
     names: {
-      // "Survey Creator 2020"
-      sc2020: "Sondaj Kreyatè 2020",
-      // "Light"
-      "default-light": "Limyè",
-      // "Dark"
-      "default-dark": "Fè nwa",
-      // "Contrast"
-      "default-contrast": "Kontras"
+
     }
   },
   preset: {

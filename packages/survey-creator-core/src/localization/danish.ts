@@ -1433,8 +1433,6 @@ export var danishStrings = {
     acceptedTypes: "Yderligere filendelser",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Vent på, at overførslen er fuldført",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Bekræft sletning af fil",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Justering af rækkedetaljer",
     // [Auto-translated] "Minimum row count"
@@ -1567,7 +1565,9 @@ export var danishStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Billedets højde",
       // [Auto-translated] "Image width"
-      imageWidth: "Billedets bredde"
+      imageWidth: "Billedets bredde",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Bekræft filsletning"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Skjul spørgsmålet, hvis det ikke har nogen valgmuligheder",
@@ -1930,21 +1930,21 @@ export var danishStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacitet", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Skrifttypefamilie til undersøgelser",
+      "--sjs2-typography-font-family-text": "Opmålingsskrifttypefamilie",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Baggrundsfarve",
+      "--sjs2-color-utility-surface-survey": "Baggrundsfarve",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Baggrundsfarver med accent",
+      "--sjs2-color-project-brand-600": "Accentbaggrundsfarver",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Accentfarver i forgrunden",
+      "--sjs2-color-fg-brand-on-primary": "Accentfarver i forgrunden",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Farver på fejlmeddelelser",
+      "--sjs2-color-bg-alert-primary": "Fejlmeddelelsers farver",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Skyggeeffekter",
+      "--sjs2-border-effect-surface-default": "Skyggeeffekter",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Skyggeeffekter",
+      "--sjs2-border-effect-component-formbox-default": "Skyggeeffekter",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Farver"
+      "--sjs2-color-component-input-default-line": "Farver"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2892,7 +2892,9 @@ export var danishStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Angiver visningsbredden for uploadede billeder i forhåndsvisningen og den faktiske bredde af billeder, der er taget med kameraet. I enkeltfiloverførselstilstand er visningsbredden begrænset af forhåndsvisningsområdet; I multifiloverførselstilstand er den begrænset af miniatureområdet.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet."
+      allowImagesPreview: "Viser miniaturebilleder for uploadede filer, når det er muligt. Fjern markeringen, hvis du vil vise filikoner i stedet.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Det udløser en prompt, der beder om at bekræfte filsletningen."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3167,8 +3169,6 @@ export var danishStrings = {
     valueFalse: "En værdi, der skal gemmes i undersøgelsesresultater, når respondenterne giver et negativt svar.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Det anbefales ikke, at du deaktiverer denne indstilling, da den tilsidesætter eksempelbilledet og gør det svært for en bruger at forstå, om filerne er blevet uploadet.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Udløser en prompt, der beder om at bekræfte filsletningen.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Aktivér for kun at rangere valgte valg. Brugere trækker valgte elementer fra valglisten for at sortere dem inden for rangeringsområdet.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3252,8 +3252,8 @@ export var danishStrings = {
       questionBackgroundTransparency: "Justerer gennemsigtigheden af inputelementer i forhold til undersøgelsesbaggrunden.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Indstiller hjørneradius for alle rektangulære elementer. Aktiver Avanceret tilstand, hvis du vil indstille individuelle hjørneradiusværdier for inputelementer eller paneler og spørgsmålsfelter.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Indstiller undersøgelsens primære baggrundsfarve."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Sætter hovedbaggrundsfarven for undersøgelsen."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3555,24 +3555,20 @@ export var danishStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Standard",
-      // [Auto-translated] "Sharp"
-      sharp: "Skarp",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontrast",
       // [Auto-translated] "Borderless"
       borderless: "Kant",
       // [Auto-translated] "Flat"
       flat: "Flad",
       // [Auto-translated] "Plain"
       plain: "Slette",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Dobbelt kant",
-      // [Auto-translated] "Layered"
-      layered: "Lagdelte",
-      // [Auto-translated] "Solid"
-      solid: "Fast",
+      // [Auto-translated] "Soft"
+      soft: "Blød",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontrast"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monokrom"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3607,14 +3603,7 @@ export var danishStrings = {
     // [Auto-translated] "Font"
     fontScale: "Skrifttype",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Skaberen af spørgeundersøgelsen 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Lys",
-      // [Auto-translated] "Dark"
-      "default-dark": "Mørk",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontrast"
+
     }
   },
   preset: {

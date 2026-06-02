@@ -1432,8 +1432,6 @@ export var msStrings = {
     acceptedTypes: "Sambungan fail tambahan",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Tunggu muat naik selesai",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Sahkan penghapusan fail",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Penjajaran butiran baris",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var msStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Ketinggian imej",
       // [Auto-translated] "Image width"
-      imageWidth: "Lebar imej"
+      imageWidth: "Lebar imej",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Sahkan pemadaman fail"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Sembunyikan soalan jika ia tidak mempunyai pilihan",
@@ -1929,21 +1929,21 @@ export var msStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Kelegapan", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Keluarga fon tinjauan",
+      "--sjs2-typography-font-family-text": "Keluarga fon tinjauan",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Warna latar belakang",
+      "--sjs2-color-utility-surface-survey": "Warna latar belakang",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Warna latar belakang aksen",
+      "--sjs2-color-project-brand-600": "Warna latar belakang aksen",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Warna latar depan aksen",
+      "--sjs2-color-fg-brand-on-primary": "Warna latar depan aksen",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Warna mesej ralat",
+      "--sjs2-color-bg-alert-primary": "Warna mesej ralat",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Kesan bayang",
+      "--sjs2-border-effect-surface-default": "Kesan bayang-bayang",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Kesan bayang",
+      "--sjs2-border-effect-component-formbox-default": "Kesan bayang-bayang",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Warna"
+      "--sjs2-color-component-input-default-line": "Warna"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2891,9 @@ export var msStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Menentukan lebar paparan imej yang dimuat naik dalam pratonton dan lebar sebenar imej yang diambil dengan kamera. Dalam mod muat naik fail tunggal, lebar paparan dihadkan oleh kawasan pratonton; Dalam mod muat naik berbilang fail, ia dihadkan oleh kawasan lakaran kecil.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail."
+      allowImagesPreview: "Memaparkan pratonton lakaran kecil untuk fail yang dimuat naik apabila boleh. Nyahpilih jika anda mahu menunjukkan ikon fail.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Mencetuskan gesaan yang meminta untuk mengesahkan pemadaman fail."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var msStrings = {
     valueFalse: "Nilai untuk menyimpan hasil tinjauan apabila responden memberikan jawapan negatif.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Anda tidak disyorkan untuk menyahdayakan pilihan ini kerana ia mengatasi imej Pratonton dan menyukarkan pengguna untuk memahami sama ada fail telah dimuat naik.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Mencetuskan gesaan yang meminta untuk mengesahkan penghapusan fail.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Membolehkan untuk menilai pilihan yang dipilih sahaja. Pengguna akan menyeret item terpilih dari senarai pilihan untuk memesannya dalam kawasan kedudukan.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var msStrings = {
       questionBackgroundTransparency: "Melaraskan ketelusan elemen input berbanding dengan latar belakang tinjauan.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Menetapkan jejari sudut untuk semua elemen segi empat tepat. Dayakan Mod Lanjutan jika anda ingin menetapkan nilai jejari sudut individu untuk elemen input atau panel dan kotak soalan.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Menetapkan warna latar belakang utama tinjauan."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Menetapkan warna latar belakang utama tinjauan."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var msStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Lalai",
-      // [Auto-translated] "Sharp"
-      sharp: "Tajam",
+      // [Auto-translated] "Contrast"
+      contrast: "Sebaliknya",
       // [Auto-translated] "Borderless"
       borderless: "Tanpa sempadan",
       // [Auto-translated] "Flat"
       flat: "Rata",
       // [Auto-translated] "Plain"
       plain: "Biasa",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Sempadan Berkembar",
-      // [Auto-translated] "Layered"
-      layered: "Berlapis",
-      // [Auto-translated] "Solid"
-      solid: "Pepejal",
+      // [Auto-translated] "Soft"
+      soft: "Lembut",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Sebaliknya"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monokrom"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3602,7 @@ export var msStrings = {
     // [Auto-translated] "Font"
     fontScale: "Fon",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Pencipta Tinjauan 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Cahaya",
-      // [Auto-translated] "Dark"
-      "default-dark": "Gelap",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Sebaliknya"
+
     }
   },
   preset: {

@@ -1432,8 +1432,6 @@ export var slStrings = {
     acceptedTypes: "Dovoljeni tipi datotek",
     // "Wait for upload to complete"
     waitForUpload: "Počakaj, da se nalaganje zaključi",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Potrdi brisanje datoteke",
     // "Row details alignment"
     detailPanelMode: "Poravnava širjenja vrstice",
     // "Minimum row count"
@@ -1566,7 +1564,9 @@ export var slStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Višina slike",
       // [Auto-translated] "Image width"
-      imageWidth: "Širina slike"
+      imageWidth: "Širina slike",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Potrdite izbris datoteke"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Skrij vprašanje, če nima možnosti",
@@ -1928,22 +1928,22 @@ export var slStrings = {
       editorFont: "Pisava",
       // "Opacity"
       backgroundOpacity: "Prosojnost", // Auto-generated string
-      // "Survey font family"
-      "--sjs-font-family": "Pisava ankete",
-      // "Background color"
-      "--sjs-general-backcolor-dim": "Barva ozadja",
-      // "Accent background colors"
-      "--sjs-primary-backcolor": "Poudarne barve ozadja",
-      // "Accent foreground colors"
-      "--sjs-primary-forecolor": "Poudarne barve besedila",
-      // "Error message colors"
-      "--sjs-special-red": "Barve sporočil o napakah",
-      // "Shadow effects"
-      "--sjs-shadow-small": "Efekti senc",
-      // "Shadow effects"
-      "--sjs-shadow-inner": "Efekti notranjih senc",
-      // "Colors"
-      "--sjs-border-default": "Barve"
+      // [Auto-translated] "Survey font family"
+      "--sjs2-typography-font-family-text": "Družina pisav za pregled",
+      // [Auto-translated] "Background color"
+      "--sjs2-color-utility-surface-survey": "Barva ozadja",
+      // [Auto-translated] "Accent background colors"
+      "--sjs2-color-project-brand-600": "Poudarjene barve ozadja",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs2-color-fg-brand-on-primary": "Poudarjene barve v ospredju",
+      // [Auto-translated] "Error message colors"
+      "--sjs2-color-bg-alert-primary": "Barve sporočil o napakah",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-surface-default": "Senčni učinki",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-component-formbox-default": "Senčni učinki",
+      // [Auto-translated] "Colors"
+      "--sjs2-color-component-input-default-line": "Barve"
     },
     "header@header": {
       // "View"
@@ -2891,7 +2891,9 @@ export var slStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Določa širino prikaza prenesenih slik v predogledu in dejansko širino slik, posnetih s fotoaparatom. V načinu nalaganja ene datoteke je širina prikaza omejena z območjem predogleda; V načinu nalaganja več datotek je omejen z območjem sličic.",
       // "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Prikaže sličice naloženih datotek, kadar je to mogoče. Odznačite, če želite namesto tega prikazati ikone datotek."
+      allowImagesPreview: "Prikaže sličice naloženih datotek, kadar je to mogoče. Odznačite, če želite namesto tega prikazati ikone datotek.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Sproži poziv, ki zahteva potrditev izbrisa datoteke."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var slStrings = {
     valueFalse: "Vrednost, ki se shrani v rezultate ankete, ko anketiranec poda negativen odgovor",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Ni priporočljivo, da onemogočite to možnost, saj preglasi predogled slike in uporabniku oteži razumevanje, ali so bile datoteke naložene",
-    // "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Sproži poziv za potrditev brisanja datoteke",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Omogoči razvrščanje samo izbranih možnosti. Uporabniki bodo povlekli izbrane elemente s seznama možnosti in jih razvrstili v območju za razvrščanje",
     // "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var slStrings = {
       questionBackgroundTransparency: "Prilagodi prosojnost vhodnih elementov glede na ozadje ankete.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Nastavi radij kota za vse pravokotne elemente. Omogočite napreden način, če želite nastaviti posamezne vrednosti radija kota za vhodne elemente ali panele in polja vprašanj.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Nastavi glavno ozadje ankete."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Določi glavno barvo ozadja ankete."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var slStrings = {
     names: {
       // "Default"
       default: "Privzeto",
-      // "Sharp"
-      sharp: "Ostrina",
+      // "Contrast"
+      contrast: "Kontrast",
       // "Borderless"
       borderless: "Brez roba",
       // "Flat"
       flat: "Raven",
       // "Plain"
       plain: "Preprost",
-      // "Double Border"
-      doubleborder: "Dvojni rob",
-      // "Layered"
-      layered: "Slojevit",
-      // "Solid"
-      solid: "Trd",
+      // [Auto-translated] "Soft"
+      soft: "Mehko",
       // [Auto-translated] "3D"
       threedimensional: "3D",
-      // "Contrast"
-      contrast: "Kontrast"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monokromatski"
     },
     colors: {
       // "Teal"
@@ -3606,14 +3602,7 @@ export var slStrings = {
     // "Font"
     fontScale: "Pisava",
     names: {
-      // "Survey Creator 2020"
-      sc2020: "Ustvarjalec anket 2020",
-      // "Light"
-      "default-light": "Svetla",
-      // "Dark"
-      "default-dark": "Temna",
-      // "Contrast"
-      "default-contrast": "Kontrast"
+
     }
   },
   preset: {

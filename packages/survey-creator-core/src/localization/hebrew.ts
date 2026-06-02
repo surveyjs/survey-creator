@@ -1432,8 +1432,6 @@ export var hebrewStrings = {
     acceptedTypes: "סוגי קבצים מקובלים",
     // "Wait for upload to complete"
     waitForUpload: "המתן להשלמת ההעלאה",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "אישור מחיקת הקובץ",
     // "Row details alignment"
     detailPanelMode: "מקום הפאנל המפרט",
     // "Minimum row count"
@@ -1566,7 +1564,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "גובה תמונה",
       // [Auto-translated] "Image width"
-      imageWidth: "רוחב תמונה"
+      imageWidth: "רוחב תמונה",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "אשר מחיקת קובץ"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "הסתר את השאלה אם אין בה בחירות",
@@ -1929,21 +1929,21 @@ export var hebrewStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "אטימות", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "משפחת גופני סקר",
+      "--sjs2-typography-font-family-text": "משפחת גופני הסקר",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "צבע רקע",
+      "--sjs2-color-utility-surface-survey": "צבע רקע",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "צבעי רקע מודגשים",
+      "--sjs2-color-project-brand-600": "צבעי רקע דגש",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "צבעי חזית מודגשים",
+      "--sjs2-color-fg-brand-on-primary": "צבעי הדגשה בקדמת התמונה",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "צבעי הודעת שגיאה",
+      "--sjs2-color-bg-alert-primary": "צבעי הודעות שגיאה",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "אפקטי צל",
+      "--sjs2-border-effect-surface-default": "אפקטי צל",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "אפקטי צל",
+      "--sjs2-border-effect-component-formbox-default": "אפקטי צל",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "צבעים"
+      "--sjs2-color-component-input-default-line": "צבעים"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2891,9 @@ export var hebrewStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "מציין את רוחב התצוגה של תמונות שהועלו בתצוגה המקדימה ואת הרוחב בפועל של תמונות שצולמו במצלמה. במצב העלאת קובץ יחיד, רוחב התצוגה מוגבל על ידי אזור התצוגה המקדימה; במצב העלאת קבצים מרובים, הוא מוגבל על ידי אזור התמונות הממוזערות.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת."
+      allowImagesPreview: "מציג תצוגות מקדימות של תמונות ממוזערות עבור קבצים שהועלו במידת האפשר. בטל את הבחירה אם ברצונך להציג סמלי קבצים במקום זאת.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "מפעיל הודעה שמבקשת לאשר את מחיקת הקבצים."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var hebrewStrings = {
     valueFalse: "ערך שיש לשמור בתוצאות הסקר כאשר המשיבים נותנים תשובה שלילית.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "לא מומלץ להשבית אפשרות זו מכיוון שהיא עוקפת את תמונת התצוגה המקדימה ומקשה על המשתמש להבין אם הקבצים הועלו.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "מפעיל בקשה המבקשת לאשר את מחיקת הקובץ.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "אפשר לדרג רק בחירות נבחרות. המשתמשים יגררו פריטים נבחרים מרשימת האפשרויות כדי לסדר אותם באזור הדירוג.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var hebrewStrings = {
       questionBackgroundTransparency: "התאמת השקיפות של רכיבי הקלט ביחס לרקע הסקר.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "קובע את רדיוס הפינה לכל הרכיבים המלבניים. הפעילו את 'מצב מתקדם' אם ברצונכם להגדיר ערכי רדיוס פינה בודדים לרכיבי קלט או לחלוניות ולתיבות שאלה.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "מגדיר את צבע הרקע הראשי של הסקר."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "מגדיר את צבע הרקע הראשי של הסקר."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var hebrewStrings = {
     names: {
       // "Default"
       default: "ברירת מחדל",
-      // "Sharp"
-      sharp: "חד",
+      // "Contrast"
+      contrast: "ניגודיות",
       // "Borderless"
       borderless: "ללא גבול",
       // "Flat"
       flat: "שטוח",
       // "Plain"
       plain: "פשוט",
-      // "Double Border"
-      doubleborder: "גבול כפול",
-      // "Layered"
-      layered: "בשכבות",
-      // "Solid"
-      solid: "מוצק",
+      // [Auto-translated] "Soft"
+      soft: "רך",
       // "3D"
       threedimensional: "שלושה מימדים",
-      // "Contrast"
-      contrast: "ניגודיות"
+      // [Auto-translated] "Monochrome"
+      monochrome: "מונוכרום"
     },
     colors: {
       // "Teal"
@@ -3606,14 +3602,7 @@ export var hebrewStrings = {
     // [Auto-translated] "Font"
     fontScale: "גופן",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "יוצר הסקר 2020",
-      // [Auto-translated] "Light"
-      "default-light": "אור",
-      // [Auto-translated] "Dark"
-      "default-dark": "חשוך",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "ניגוד"
+
     }
   },
   preset: {

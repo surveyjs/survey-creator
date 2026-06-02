@@ -1432,8 +1432,6 @@ export var turkishStrings = {
     acceptedTypes: "Ek dosya uzantıları",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Yüklemenin tamamlanmasını bekleyin",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Dosya silme işlemini onaylama",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Satır ayrıntıları hizalaması",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var turkishStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Görüntü yüksekliği",
       // [Auto-translated] "Image width"
-      imageWidth: "Görüntü genişliği"
+      imageWidth: "Görüntü genişliği",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Dosya silme onayı"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Seçeneği yoksa soruyu gizleyin",
@@ -1929,21 +1929,21 @@ export var turkishStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opak -lık", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Anket yazı tipi ailesi",
+      "--sjs2-typography-font-family-text": "Ölçüm fontu ailesi",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Arka plan rengi",
+      "--sjs2-color-utility-surface-survey": "Arka plan rengi",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Vurgu arka plan renkleri",
+      "--sjs2-color-project-brand-600": "Vurgulu arka plan renkleri",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Vurgu ön plan renkleri",
+      "--sjs2-color-fg-brand-on-primary": "Ön plan vurgulu renkler",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Hata mesajı renkleri",
+      "--sjs2-color-bg-alert-primary": "Hata mesajı renkleri",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Gölge efektleri",
+      "--sjs2-border-effect-surface-default": "Gölge etkileri",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Gölge efektleri",
+      "--sjs2-border-effect-component-formbox-default": "Gölge etkileri",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Renk"
+      "--sjs2-color-component-input-default-line": "Renkler"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2891,9 @@ export var turkishStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Önizlemede yüklenen görüntülerin görüntülenme genişliğini ve fotoğraf makinesiyle çekilen görüntülerin gerçek genişliğini belirtir. Tek dosya yükleme modunda, görüntüleme genişliği önizleme alanıyla sınırlıdır; Çoklu dosya yükleme modunda, küçük resim alanı ile sınırlıdır.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın."
+      allowImagesPreview: "Mümkün olduğunda karşıya yüklenen dosyalar için küçük resim önizlemelerini görüntüler. Bunun yerine dosya simgelerini göstermek istiyorsanız seçimi kaldırın.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Dosya silinmesini onaylayan bir isteği tetikliyor."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var turkishStrings = {
     valueFalse: "Yanıtlayanlar olumsuz yanıt verdiğinde anket sonuçlarına kaydedilecek bir değer.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Önizleme görüntüsünü geçersiz kıldığı ve kullanıcının dosyaların karşıya yüklenip yüklenmediğini anlamasını zorlaştırdığı için bu seçeneği devre dışı bırakmanız önerilmez.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Dosya silme işlemini onaylamanızı isteyen bir istemi tetikler.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Yalnızca seçilen seçenekleri sıralamak için etkinleştirin. Kullanıcılar, sıralama alanı içinde sıralamak için seçim listesinden seçilen öğeleri sürükleyecektir.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var turkishStrings = {
       questionBackgroundTransparency: "Giriş öğelerinin saydamlığını anket arka planına göre ayarlar.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Tüm dikdörtgen elemanlar için köşe yarıçapını ayarlar. Giriş öğeleri veya paneller ve soru kutuları için ayrı köşe yarıçapı değerleri ayarlamak istiyorsanız Gelişmiş Modu etkinleştirin.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Anketin ana arka plan rengini ayarlar."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Anketin ana arka plan rengini belirler."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var turkishStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Temerrüt",
-      // [Auto-translated] "Sharp"
-      sharp: "Keskin",
+      // [Auto-translated] "Contrast"
+      contrast: "Karşıtlık",
       // [Auto-translated] "Borderless"
       borderless: "Kenarlıksız",
       // [Auto-translated] "Flat"
       flat: "Düz",
       // [Auto-translated] "Plain"
       plain: "Düz",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Çift Kenarlık",
-      // [Auto-translated] "Layered"
-      layered: "Katmanlı",
-      // [Auto-translated] "Solid"
-      solid: "Katı",
+      // [Auto-translated] "Soft"
+      soft: "Yumuşak",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Karşıtlık"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monokrom"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3602,7 @@ export var turkishStrings = {
     // [Auto-translated] "Font"
     fontScale: "Yazı tipi",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Anket Oluşturucu 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Işık",
-      // [Auto-translated] "Dark"
-      "default-dark": "Koyu",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Karşıtlık"
+
     }
   },
   preset: {

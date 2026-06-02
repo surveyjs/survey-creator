@@ -1432,8 +1432,6 @@ export var fiStrings = {
     acceptedTypes: "Lisätiedostopäätteet",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Odota latauksen valmistumista",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Vahvista tiedoston poistaminen",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Rivin tietojen tasaus",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var fiStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Kuvan korkeus",
       // [Auto-translated] "Image width"
-      imageWidth: "Kuvan leveys"
+      imageWidth: "Kuvan leveys",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Vahvista tiedoston poisto"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Piilota kysymys, jos sillä ei ole vaihtoehtoja",
@@ -1929,21 +1929,21 @@ export var fiStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Läpikuultamattomuus", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Kyselyn fonttiperhe",
+      "--sjs2-typography-font-family-text": "Survey fonttiperhe",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Taustaväri",
+      "--sjs2-color-utility-surface-survey": "Taustaväri",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Korosta taustavärejä",
+      "--sjs2-color-project-brand-600": "Korostustaustavärit",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Korosta etualan värejä",
+      "--sjs2-color-fg-brand-on-primary": "Korostusetualan värit",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Virheilmoituksen värit",
+      "--sjs2-color-bg-alert-primary": "Vikaviestin värit",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Varjo-tehosteet",
+      "--sjs2-border-effect-surface-default": "Varjovaikutukset",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Varjo-tehosteet",
+      "--sjs2-border-effect-component-formbox-default": "Varjovaikutukset",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Värit"
+      "--sjs2-color-component-input-default-line": "Värit"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2891,9 @@ export var fiStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Määrittää ladattujen kuvien näyttöleveyden esikatselussa ja kameralla otettujen kuvien todellisen leveyden. Yhden tiedoston lataustilassa esikatselualue rajoittaa näytön leveyttä. Usean tiedoston lataustilassa sitä rajoittaa pikkukuva-alue.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Näyttää ladattujen tiedostojen pikkukuvien esikatselut, kun mahdollista. Poista valinta, jos haluat näyttää tiedostokuvakkeet sen sijaan."
+      allowImagesPreview: "Näyttää ladattujen tiedostojen pikkukuvien esikatselut, kun mahdollista. Poista valinta, jos haluat näyttää tiedostokuvakkeet sen sijaan.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Se käynnistää kehotteen, jossa pyydetään vahvistamaan tiedoston poisto."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var fiStrings = {
     valueFalse: "Arvo, joka tallennetaan kyselyn tuloksiin, kun vastaajat antavat kielteisen vastauksen.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Tätä asetusta ei suositella poistettavaksi käytöstä, koska se ohittaa esikatselukuvan ja vaikeuttaa käyttäjän ymmärtämistä, onko tiedostot ladattu.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Käynnistää kehotteen, jossa pyydetään vahvistamaan tiedoston poistaminen.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Ota käyttöön, jos haluat luokitella vain valitut vaihtoehdot. Käyttäjät vetävät valitut kohteet valintaluettelosta järjestääkseen ne sijoitusalueella.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var fiStrings = {
       questionBackgroundTransparency: "Säätää syöttöelementtien läpinäkyvyyttä suhteessa kyselyn taustaan.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Asettaa kulmasäteen kaikille suorakaiteen muotoisille elementeille. Ota edistynyt tila käyttöön, jos haluat määrittää syöttöelementtien tai paneelien ja kysymysruutujen yksittäiset kulmasäteen arvot.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Määrittää kyselyn päätaustavärin."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Asettaa kyselyn päätaustavärin."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var fiStrings = {
     names: {
       // "Default"
       default: "Oletus",
-      // [Auto-translated] "Sharp"
-      sharp: "Terävä",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontrasti",
       // [Auto-translated] "Borderless"
       borderless: "Reunukseton",
       // [Auto-translated] "Flat"
       flat: "Tasainen",
       // "Plain"
       plain: "Yksinkertainen",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Kaksinkertainen reunus",
-      // [Auto-translated] "Layered"
-      layered: "Kerroksellinen",
-      // [Auto-translated] "Solid"
-      solid: "Kiinteä",
+      // [Auto-translated] "Soft"
+      soft: "Pehmeä",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontrasti"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Mustavalkoinen"
     },
     colors: {
       // "Teal"
@@ -3606,14 +3602,7 @@ export var fiStrings = {
     // [Auto-translated] "Font"
     fontScale: "Fontti",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Kyselyn laatija 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Valo",
-      // [Auto-translated] "Dark"
-      "default-dark": "Tumma",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontrasti"
+
     }
   },
   preset: {

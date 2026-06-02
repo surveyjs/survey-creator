@@ -1433,8 +1433,6 @@ export let svStrings = {
     acceptedTypes: "Ytterligare filtillägg",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Vänta tills uppladdningen är klar",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Bekräfta borttagning av fil",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Justering av raddetaljer",
     // [Auto-translated] "Minimum row count"
@@ -1567,7 +1565,9 @@ export let svStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Bildens höjd",
       // [Auto-translated] "Image width"
-      imageWidth: "Bildens bredd"
+      imageWidth: "Bildens bredd",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Bekräfta filradering"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Dölj frågan om den inte har några val",
@@ -1930,21 +1930,21 @@ export let svStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Ogenomskinlighet", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Familj av undersökningsteckensnitt",
+      "--sjs2-typography-font-family-text": "Undersökningstypsnittsfamilj",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Bakgrundsfärg",
+      "--sjs2-color-utility-surface-survey": "Bakgrundsfärg",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Accentuerade bakgrundsfärger",
+      "--sjs2-color-project-brand-600": "Accentfärger i bakgrunden",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Accentuerade förgrundsfärger",
+      "--sjs2-color-fg-brand-on-primary": "Accentfärger i förgrunden",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Färger för felmeddelanden",
+      "--sjs2-color-bg-alert-primary": "Felmeddelandens färger",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Skugga effekter",
+      "--sjs2-border-effect-surface-default": "Skuggeffekter",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Skugga effekter",
+      "--sjs2-border-effect-component-formbox-default": "Skuggeffekter",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Färger"
+      "--sjs2-color-component-input-default-line": "Färger"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2892,7 +2892,9 @@ export let svStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Anger visningsbredden för överförda bilder i förhandsgranskningen och den faktiska bredden för bilder som tagits med kameran. I läget för uppladdning av en fil begränsas visningsbredden av förhandsgranskningsområdet. I läget för uppladdning av flera filer begränsas den av miniatyrbildsområdet.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället."
+      allowImagesPreview: "Visar miniatyrbilder av uppladdade filer när det är möjligt. Avmarkera om du vill visa filikoner i stället.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Det utlöser en uppmaning om att bekräfta filborttagningen."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3167,8 +3169,6 @@ export let svStrings = {
     valueFalse: "Ett värde att spara i undersökningsresultaten när respondenterna ger ett negativt svar.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Vi rekommenderar inte att du inaktiverar det här alternativet eftersom det åsidosätter förhandsgranskningsbilden och gör det svårt för en användare att förstå om filerna har laddats upp.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Utlöser en uppmaning om att bekräfta borttagningen av filen.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Aktivera för att endast rangordna valda alternativ. Användarna drar de valda objekten från urvalslistan för att ordna dem i rangordningsområdet.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3252,8 +3252,8 @@ export let svStrings = {
       questionBackgroundTransparency: "Justerar transparensen för indataelement i förhållande till undersökningens bakgrund.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Anger hörnradien för alla rektangulära element. Aktivera Avancerat läge om du vill ställa in individuella hörnradievärden för inmatningselement eller paneler och frågerutor.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Ställer in undersökningens huvudsakliga bakgrundsfärg."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Sätter huvudfärgen på bakgrunden i undersökningen."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3555,24 +3555,20 @@ export let svStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Standard",
-      // [Auto-translated] "Sharp"
-      sharp: "Skarp",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontrast",
       // [Auto-translated] "Borderless"
       borderless: "Marginalfri",
       // [Auto-translated] "Flat"
       flat: "Flat",
       // [Auto-translated] "Plain"
       plain: "Slätt",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Dubbel kantlinje",
-      // [Auto-translated] "Layered"
-      layered: "Lager",
-      // [Auto-translated] "Solid"
-      solid: "Solid",
+      // [Auto-translated] "Soft"
+      soft: "Mjuk",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontrast"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monokromt"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3607,14 +3603,7 @@ export let svStrings = {
     // [Auto-translated] "Font"
     fontScale: "Teckensnitt",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Enkät skapare 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Ljus",
-      // [Auto-translated] "Dark"
-      "default-dark": "Mörk",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontrast"
+
     }
   },
   preset: {

@@ -1432,8 +1432,6 @@ export var persianStrings = {
     acceptedTypes: "پسوندهای فایل اضافی",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "منتظر بمانید تا آپلود کامل شود",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "تایید حذف پرونده",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "تراز جزئیات ردیف",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var persianStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "ارتفاع تصویر",
       // [Auto-translated] "Image width"
-      imageWidth: "عرض تصویر"
+      imageWidth: "عرض تصویر",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "حذف فایل را تأیید کنید"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "اگر گزینه ای ندارد سوال را پنهان کنید",
@@ -1929,21 +1929,21 @@ export var persianStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "کدورت", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "خانواده فونت نظرسنجی",
+      "--sjs2-typography-font-family-text": "خانواده فونت نقشه برداری",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "رنگ پسزمینه",
+      "--sjs2-color-utility-surface-survey": "رنگ پس زمینه",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "رنگ های پس زمینه برجسته",
+      "--sjs2-color-project-brand-600": "رنگ های پس زمینه تأکیدی",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "رنگ های پیش زمینه لهجه",
+      "--sjs2-color-fg-brand-on-primary": "رنگ های پیش زمینه تأکیدی",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "رنگ های پیام خطا",
+      "--sjs2-color-bg-alert-primary": "رنگ های پیام خطا",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "جلوه های سایه",
+      "--sjs2-border-effect-surface-default": "افکت های سایه",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "جلوه های سایه",
+      "--sjs2-border-effect-component-formbox-default": "افکت های سایه",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "رنگ"
+      "--sjs2-color-component-input-default-line": "رنگ ها"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2891,9 @@ export var persianStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "عرض نمایش تصاویر آپلود شده در پیش نمایش و عرض واقعی تصاویر گرفته شده با دوربین را مشخص می کند. در حالت آپلود تک فایل، عرض نمایشگر توسط ناحیه پیش نمایش محدود می شود. در حالت آپلود چند فایل، توسط ناحیه تصویر کوچک محدود می شود.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید."
+      allowImagesPreview: "در صورت امکان، پیش نمایش تصاویر کوچک را برای فایل های آپلود شده نمایش می دهد. اگر می خواهید به جای آن نمادهای فایل را نشان دهید، انتخاب را لغو کنید.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "یک پیام برای تأیید حذف فایل فعال می شود."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var persianStrings = {
     valueFalse: "ارزش برای صرفه جویی در نتایج نظرسنجی زمانی که پاسخ دهندگان پاسخ منفی می دهند.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "توصیه نمی شود که این گزینه را غیرفعال کنید زیرا تصویر پیش نمایش را لغو می کند و درک اینکه آیا فایل ها آپلود شده اند یا خیر را برای کاربر دشوار می کند.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "یک اعلان برای تایید حذف پرونده ایجاد می کند.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "فقط گزینه های انتخاب شده را رتبه بندی کنید. کاربران موارد انتخاب شده را از لیست انتخاب می کنند تا انها را در منطقه رتبه بندی سفارش دهند.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var persianStrings = {
       questionBackgroundTransparency: "شفافیت عناصر ورودی را نسبت به پیشینه نظرسنجی تنظیم می کند.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "شعاع گوشه را برای همه عناصر مستطیلی تنظیم می کند. اگر می خواهید مقادیر شعاع گوشه جداگانه را برای عناصر ورودی یا پانل ها و جعبه های سؤال تنظیم کنید، حالت پیشرفته را فعال کنید.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "رنگ پس زمینه اصلی نظرسنجی را تنظیم می کند."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "رنگ پس زمینه اصلی نظرسنجی را تنظیم می کند."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var persianStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "پیش فرض",
-      // [Auto-translated] "Sharp"
-      sharp: "تیز",
+      // [Auto-translated] "Contrast"
+      contrast: "کنتراست",
       // [Auto-translated] "Borderless"
       borderless: "مرز",
       // [Auto-translated] "Flat"
       flat: "تخت",
       // [Auto-translated] "Plain"
       plain: "ساده",
-      // [Auto-translated] "Double Border"
-      doubleborder: "دو لبه",
-      // [Auto-translated] "Layered"
-      layered: "لایه",
-      // [Auto-translated] "Solid"
-      solid: "جامد",
+      // [Auto-translated] "Soft"
+      soft: "نرم",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "کنتراست"
+      // [Auto-translated] "Monochrome"
+      monochrome: "سیاه و سفید"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3602,7 @@ export var persianStrings = {
     // [Auto-translated] "Font"
     fontScale: "فونت",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "خالق نظرسنجی 2020",
-      // [Auto-translated] "Light"
-      "default-light": "نور",
-      // [Auto-translated] "Dark"
-      "default-dark": "تاریک",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "کنتراست"
+
     }
   },
   preset: {

@@ -1432,8 +1432,6 @@ export var spanishTranslation = {
     acceptedTypes: "Extensiones de archivo adicionales",
     // "Wait for upload to complete"
     waitForUpload: "Espera a que se complete la carga",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Confirmar borrado de fichero",
     // "Row details alignment"
     detailPanelMode: "Localización del panel de detalle",
     // "Minimum row count"
@@ -1566,7 +1564,9 @@ export var spanishTranslation = {
       // [Auto-translated] "Image height"
       imageHeight: "Altura de la imagen",
       // [Auto-translated] "Image width"
-      imageWidth: "Ancho de la imagen"
+      imageWidth: "Ancho de la imagen",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Confirmar eliminación de archivo"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Ocultar la pregunta si no contiene opciones",
@@ -1929,21 +1929,21 @@ export var spanishTranslation = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacidad", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Familia de fuentes de topografía",
+      "--sjs2-typography-font-family-text": "Familia de fuentes de encuesta",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Color de fondo",
+      "--sjs2-color-utility-surface-survey": "Color de fondo",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Colores de fondo de acento",
+      "--sjs2-color-project-brand-600": "Colores de fondo de acento",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Colores de primer plano de acento",
+      "--sjs2-color-fg-brand-on-primary": "Colores de acento en primer plano",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Colores de los mensajes de error",
+      "--sjs2-color-bg-alert-primary": "Colores de mensajes de error",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Efectos de sombra",
+      "--sjs2-border-effect-surface-default": "Efectos de sombra",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Efectos de sombra",
+      "--sjs2-border-effect-component-formbox-default": "Efectos de sombra",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Colores"
+      "--sjs2-color-component-input-default-line": "Colores"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2891,9 @@ export var spanishTranslation = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Especifica la anchura de visualización de las imágenes cargadas en la vista previa y la anchura real de las imágenes tomadas con la cámara. En el modo de carga de un solo archivo, el ancho de la pantalla está limitado por el área de vista previa; En el modo de carga de archivos múltiples, está limitado por el área de miniaturas.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Muestra vistas previas en miniatura de los archivos cargados cuando es posible. Anule la selección si desea mostrar los iconos de archivo en su lugar."
+      allowImagesPreview: "Muestra vistas previas en miniatura de los archivos cargados cuando es posible. Anule la selección si desea mostrar los iconos de archivo en su lugar.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Activa un aviso pidiendo confirmar la eliminación del archivo."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var spanishTranslation = {
     valueFalse: "Un valor que se debe guardar en los resultados de la encuesta cuando los encuestados dan una respuesta negativa.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "No se recomienda deshabilitar esta opción, ya que invalida la imagen de vista previa y dificulta que un usuario comprenda si los archivos se han cargado.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Activa un mensaje que le pide que confirme la eliminación del archivo.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Habilite esta opción para clasificar solo las opciones seleccionadas. Los usuarios arrastrarán los elementos seleccionados de la lista de opciones para ordenarlos dentro del área de clasificación.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var spanishTranslation = {
       questionBackgroundTransparency: "Ajusta la transparencia de los elementos de entrada en relación con el fondo de la encuesta.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Define el radio de vértice de todos los elementos rectangulares. Active el modo avanzado si desea establecer valores de radio de vértice individuales para elementos de entrada o paneles y cuadros de preguntas.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Establece el color de fondo principal de la encuesta."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Establece el color de fondo principal de la encuesta."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var spanishTranslation = {
     names: {
       // [Auto-translated] "Default"
       default: "Predeterminado",
-      // [Auto-translated] "Sharp"
-      sharp: "Afilado",
+      // [Auto-translated] "Contrast"
+      contrast: "Contraste",
       // [Auto-translated] "Borderless"
       borderless: "Sin bordes",
       // [Auto-translated] "Flat"
       flat: "Plano",
       // [Auto-translated] "Plain"
       plain: "Llanura",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Doble Borde",
-      // [Auto-translated] "Layered"
-      layered: "Capas",
-      // [Auto-translated] "Solid"
-      solid: "Sólido",
+      // [Auto-translated] "Soft"
+      soft: "Suave",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Contraste"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monocromo"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3602,7 @@ export var spanishTranslation = {
     // [Auto-translated] "Font"
     fontScale: "Fuente",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Creador de encuestas 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Luz",
-      // [Auto-translated] "Dark"
-      "default-dark": "Oscuro",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Contraste"
+
     }
   },
   preset: {

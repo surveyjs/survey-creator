@@ -1432,8 +1432,6 @@ export var ruStrings = {
     acceptedTypes: "Дополнительные расширения файлов",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Дождитесь завершения загрузки",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Подтвердите удаление файла",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Выравнивание сведений о строке",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var ruStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Высота изображения",
       // [Auto-translated] "Image width"
-      imageWidth: "Ширина изображения"
+      imageWidth: "Ширина изображения",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Подтвердить удаление файла"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Скройте вопрос, если у него нет вариантов",
@@ -1929,21 +1929,21 @@ export var ruStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Непрозрачность", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Семейство шрифтов Survey",
+      "--sjs2-typography-font-family-text": "Семейство обзорных шрифтов",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Цвет фона",
+      "--sjs2-color-utility-surface-survey": "Цвет фона",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Акцентные цвета фона",
+      "--sjs2-color-project-brand-600": "Акцентные цвета фона",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Акцентные цвета переднего плана",
+      "--sjs2-color-fg-brand-on-primary": "Акцентные цвета переднего плана",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Цвета сообщений об ошибках",
+      "--sjs2-color-bg-alert-primary": "Цвета сообщений об ошибках",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Эффекты теней",
+      "--sjs2-border-effect-surface-default": "Эффекты теней",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Эффекты теней",
+      "--sjs2-border-effect-component-formbox-default": "Эффекты теней",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Знамя"
+      "--sjs2-color-component-input-default-line": "Цвета"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2891,9 @@ export var ruStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Указывает ширину отображения загруженных изображений в окне предварительного просмотра и фактическую ширину изображений, сделанных камерой. В режиме загрузки одного файла ширина отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."
+      allowImagesPreview: "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Появляется запрос подтвердить удаление файла."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3168,6 @@ export var ruStrings = {
     valueFalse: "Значение, сохраняемое в результатах опроса, когда респонденты дают отрицательный ответ.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Не рекомендуется отключать эту опцию, так как она переопределяет изображение предварительного просмотра и затрудняет понимание пользователем того, были ли файлы загружены.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Запускает запрос на подтверждение удаления файла.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Включите этот параметр, чтобы ранжировать только выбранные варианты. Пользователи будут перетаскивать выбранные элементы из списка вариантов, чтобы упорядочить их в области ранжирования.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3251,8 @@ export var ruStrings = {
       questionBackgroundTransparency: "Настройка прозрачности входных элементов относительно фона опроса.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Задает радиус угла для всех прямоугольных элементов. Включите расширенный режим, если вы хотите задать индивидуальные значения углового радиуса для элементов ввода или панелей и полей вопросов.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Задает основной цвет фона опроса."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Задаёт основной цвет фона опроса."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3554,20 @@ export var ruStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "По умолчанию",
-      // [Auto-translated] "Sharp"
-      sharp: "Чёткая",
+      // [Auto-translated] "Contrast"
+      contrast: "Контрастная",
       // [Auto-translated] "Borderless"
       borderless: "Без границ",
       // [Auto-translated] "Flat"
       flat: "Плоская",
       // [Auto-translated] "Plain"
       plain: "Простая",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Удвоенные границы",
-      // [Auto-translated] "Layered"
-      layered: "Многослойная",
-      // [Auto-translated] "Solid"
-      solid: "Монолитная",
+      // [Auto-translated] "Soft"
+      soft: "Мягкий",
       // [Auto-translated] "3D"
       threedimensional: "Трёхмерная",
-      // [Auto-translated] "Contrast"
-      contrast: "Контрастная"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Монохром"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3602,7 @@ export var ruStrings = {
     // [Auto-translated] "Font"
     fontScale: "Шрифт",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Создатель опросов 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Свет",
-      // [Auto-translated] "Dark"
-      "default-dark": "Темный",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Контраст"
+
     }
   },
   preset: {
