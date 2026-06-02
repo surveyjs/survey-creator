@@ -3615,19 +3615,7 @@ export var nbStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Grunnleggende",
-      // [Auto-translated] "Advanced"
-      advanced: "Avansert",
-      // [Auto-translated] "Expert"
-      expert: "Ekspert"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Forhåndsinnstilling anvendt"
-  }
+  },
 };
 
 setupLocale({ localeCode: "nb", strings: nbStrings });

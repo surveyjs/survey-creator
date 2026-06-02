@@ -3615,19 +3615,7 @@ export var turkishStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Karşıtlık"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Temel",
-      // [Auto-translated] "Advanced"
-      advanced: "İleri",
-      // [Auto-translated] "Expert"
-      expert: "Uzman"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Ön ayar uygulandı"
-  }
+  },
 };
 
 setupLocale({ localeCode: "tr", strings: turkishStrings });

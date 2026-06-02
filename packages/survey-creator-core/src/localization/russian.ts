@@ -3615,19 +3615,7 @@ export var ruStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Контраст"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Основы",
-      // [Auto-translated] "Advanced"
-      advanced: "Продвинутый",
-      // [Auto-translated] "Expert"
-      expert: "Эксперт"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Применённый пресет"
-  }
+  },
 };
 
 setupLocale({ localeCode: "ru", strings: ruStrings });

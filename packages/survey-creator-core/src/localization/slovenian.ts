@@ -3615,19 +3615,7 @@ export var slStrings = {
       // "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Osnovno",
-      // [Auto-translated] "Advanced"
-      advanced: "Napredni",
-      // [Auto-translated] "Expert"
-      expert: "Strokovnjak"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Uporabljena prednastavitev"
-  }
+  },
 };
 
 setupLocale({ localeCode: "sl", strings: slStrings });

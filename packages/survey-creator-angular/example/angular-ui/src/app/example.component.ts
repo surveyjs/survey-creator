@@ -4,8 +4,6 @@ import { SurveyCreatorModel } from "survey-creator-core";
 import * as Survey from "survey-core";
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
-import "survey-creator-core/ui-preset-editor.css";
-import { UIPresetEditor } from "survey-creator-core/ui-preset-editor";
 const json = {
   "logoPosition": "right",
   "completedHtml": "<h3>Thank you for your feedback.</h3><h5>Your thoughts and ideas will help us to create a great product!</h5>",
@@ -86,7 +84,6 @@ export class ExampleComponent {
     this.creator.JSON = json;
     (<any>window).creator = this.creator;
     (<any>window).Survey = Survey;
-    new UIPresetEditor(this.creator)
   }
 
   public survey = new SurveyModel(json);

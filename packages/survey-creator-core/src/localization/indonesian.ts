@@ -3615,19 +3615,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontras"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Dasar",
-      // [Auto-translated] "Advanced"
-      advanced: "Lanjutan",
-      // [Auto-translated] "Expert"
-      expert: "Ahli"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Preset diterapkan"
-  }
+  },
 };
 
 setupLocale({ localeCode: "id", strings: indonesianStrings });

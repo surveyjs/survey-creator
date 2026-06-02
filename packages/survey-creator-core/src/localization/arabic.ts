@@ -3615,19 +3615,7 @@ export var arStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "تباين"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "أساسي",
-      // [Auto-translated] "Advanced"
-      advanced: "متقدمة",
-      // [Auto-translated] "Expert"
-      expert: "خبير"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "تطبيق الإعداد المسبق"
-  }
+  },
 };
 
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.

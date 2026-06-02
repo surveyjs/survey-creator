@@ -3615,19 +3615,7 @@ export var germanTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Grundlegend",
-      // [Auto-translated] "Advanced"
-      advanced: "Fortgeschritten",
-      // [Auto-translated] "Expert"
-      expert: "Experte"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Preset angewendet"
-  }
+  },
 };
 
 setupLocale({ localeCode: "de", strings: germanTranslation });

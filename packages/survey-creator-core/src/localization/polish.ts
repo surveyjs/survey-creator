@@ -3616,19 +3616,7 @@ export var polishStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Podstawy",
-      // [Auto-translated] "Advanced"
-      advanced: "Zaawansowane",
-      // [Auto-translated] "Expert"
-      expert: "Ekspert"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Zastosowano preset"
-  }
+  },
 };
 
 setupLocale({ localeCode: "pl", strings: polishStrings });

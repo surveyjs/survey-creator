@@ -3615,19 +3615,7 @@ export var catalanTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contraste"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Bàsic",
-      // [Auto-translated] "Advanced"
-      advanced: "Avançat",
-      // [Auto-translated] "Expert"
-      expert: "Expert"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Preset aplicat"
-  }
+  },
 };
 
 setupLocale({ localeCode: "ca", strings: catalanTranslation });

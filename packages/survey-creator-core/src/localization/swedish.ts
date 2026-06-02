@@ -3616,19 +3616,7 @@ export let svStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Grundläggande",
-      // [Auto-translated] "Advanced"
-      advanced: "Avancerad",
-      // [Auto-translated] "Expert"
-      expert: "Expert"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Förinställning applicerad"
-  }
+  },
 };
 
 setupLocale({ localeCode: "sv", strings: svStrings });

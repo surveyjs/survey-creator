@@ -3615,19 +3615,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "ניגוד"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "בסיסי",
-      // [Auto-translated] "Advanced"
-      advanced: "מתקדם",
-      // [Auto-translated] "Expert"
-      expert: "מומחה"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "פריסט מוחל"
-  }
+  },
 };
 
 setupLocale({ localeCode: "he", strings: hebrewStrings });
