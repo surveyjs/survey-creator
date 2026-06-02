@@ -379,7 +379,6 @@ jobs:
           git config --global user.email "surveyjs.org@gmail.com"
           git config --global user.name "surveyjsdeveloper"
           git fetch origin $branch
-          git checkout -B $branch origin/$branch
           git reset --hard origin/$branch
           git add packages/survey-creator-core/src/localization
           git add packages/survey-creator-core/src/presets/localization
