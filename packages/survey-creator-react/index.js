@@ -182,7 +182,6 @@ SurveyReact.ReactElementFactory.Instance.registerElement("svc-page", (props) => 
 */
 SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
 SurveyCreatorCore.registerCreatorTheme(SurveyCreatorTheme);
-//SurveyCreatorCore.registerUIPreset(SurveyCreatorPreset);
 const creator = new SurveyCreator.SurveyCreator(options);
 //creator.applyCreatorTheme(SurveyCreatorTheme.testTheme);
 creator.onModified.add((sender, options) => {
@@ -284,10 +283,6 @@ creator.saveSurveyFunc = (no, callback) => {
     callback(no, true);
   }, 1000);
 };
-
-if(window.SurveyCreatorUIPresetEditorCore) {
-  window.editor = new SurveyCreatorUIPresetEditorCore.UIPresetEditor(creator);
-}
 
 ReactDOM.render(
   <React.StrictMode>

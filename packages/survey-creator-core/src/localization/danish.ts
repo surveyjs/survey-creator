@@ -3616,18 +3616,6 @@ export var danishStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Grundlæggende",
-      // [Auto-translated] "Advanced"
-      advanced: "Avanceret",
-      // [Auto-translated] "Expert"
-      expert: "Ekspert"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Forudindstilling anvendt"
-  }
+  },
 };
 setupLocale({ localeCode: "da", strings: danishStrings });

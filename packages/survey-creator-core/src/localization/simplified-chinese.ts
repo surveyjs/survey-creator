@@ -3615,19 +3615,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "反差"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "基础",
-      // [Auto-translated] "Advanced"
-      advanced: "高级",
-      // [Auto-translated] "Expert"
-      expert: "专家"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "预设应用"
-  }
+  },
 };
 
 setupLocale({ localeCode: "zh-cn", strings: simplifiedChineseTranslation });

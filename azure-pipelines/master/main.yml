@@ -184,11 +184,6 @@ jobs:
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-          npm run test:presets
-        displayName: "Unit tests CreatorV2 Core presets"
-
-      - script: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
           npm run test:postcss
         displayName: "check postcss compatibility"
 
@@ -369,7 +364,6 @@ jobs:
       - script: |
           cd $(Build.SourcesDirectory)/survey-utils
           node ./dist/translateCreator.js
-          node ./dist/translateCreatorPresets.js
         displayName: "survey-utils translate creator"
 
 #TODO uncomment and fix me
@@ -382,7 +376,6 @@ jobs:
       #     git fetch origin $branch
       #     git checkout -B $branch origin/$branch
       #     git add packages/survey-creator-core/src/localization
-      #     git add packages/survey-creator-core/src/ui-preset-editor/localization
       #     if (git status --porcelain) {
       #         git commit -m "updated survey-creator translation for $branch [azurepipelines skip]"
       #         git push origin $branch

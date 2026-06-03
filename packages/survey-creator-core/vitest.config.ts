@@ -31,8 +31,8 @@ const stubAssets = {
   },
 };
 
-// Aliases ported 1:1 from jest.config.js / jest.ui-preset-editor.config.js
-// moduleNameMapper. Order is significant: more specific entries (e.g.
+// Aliases ported 1:1 from jest.config.js moduleNameMapper.
+// Order is significant: more specific entries (e.g.
 // "survey-core/themes") MUST come before less specific ones ("survey-core").
 const sharedAliases = [
   // survey-core sub-paths (must come before bare "survey-core")
@@ -53,31 +53,24 @@ const sharedAliases = [
   { find: /^svgbundle$/, replacement: resolve(root, "tests/empty-module.js") },
 ];
 
-// Per-suite alias for survey-creator-core differs between the two suites:
+// Per-suite alias for survey-creator-core:
 // - tests/        -> src/editorLocalization.ts
-// - tests-presets -> src/entries/index.ts
 const coreSuiteAliases = [
   ...sharedAliases,
   { find: /^survey-creator-core$/, replacement: resolve(root, "src/editorLocalization.ts") },
-];
-
-const presetsSuiteAliases = [
-  ...sharedAliases,
-  { find: /^survey-creator-core$/, replacement: resolve(root, "src/entries/index.ts") },
 ];
 
 export default defineConfig({
   plugins: [stubAssets],
   test: {
     // Match Jest's behavior under high parallelism: individual tests can run
-    // slowly when many vitest workers are competing for CPU. Several preset
-    // editor tests legitimately take 2-3s in isolation; under load they
+    // slowly when many vitest workers are competing for CPU. Several creator
+    // tests legitimately take 2-3s in isolation; under load they
     // exceed Vitest's 5s default. Bump globally rather than per-test.
     testTimeout: 30000,
     hookTimeout: 30000,
     // Several creator components schedule setTimeout callbacks that fire
-    // after a test ends (preset plugin's 100ms timer in activate(), the
-    // adorner debounce, item-value DOM lookups). When the test has already
+    // after a test ends (the adorner debounce, item-value DOM lookups). When the test has already
     // torn down its DOM/model, these timers throw. Jest never observed
     // them because each file ran in a child process that exited before the
     // timer fired; Vitest's worker survives long enough to surface them as
@@ -107,20 +100,6 @@ export default defineConfig({
           // fresh DOM has been swapped in. Under Jest these threw silently;
           // Vitest surfaces them as "unhandled errors" and fails the run.
           // Treat them as benign timer leaks until source-side cleanup lands.
-          dangerouslyIgnoreUnhandledErrors: true,
-          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
-        },
-      },
-      {
-        plugins: [stubAssets],
-        resolve: { alias: presetsSuiteAliases },
-        test: {
-          name: "presets",
-          include: ["tests-presets/**/*.{test,tests,spec}.{ts,tsx}"],
-          environment: "jsdom",
-          globals: true,
-          testTimeout: 30000,
-          hookTimeout: 30000,
           dangerouslyIgnoreUnhandledErrors: true,
           setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },

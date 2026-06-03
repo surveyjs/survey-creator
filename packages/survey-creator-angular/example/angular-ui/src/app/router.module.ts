@@ -9,7 +9,6 @@ import { TestThemeSwitcherComponent } from "./test/theme-switcher.component";
 import { TestLocalizationComponent } from "./test/localization.component";
 import { ThemeTabComponent } from "./test/test-theme-tab.component";
 import { NoLicenseComponent } from "./test/test-no-license.component";
-import { PresetsComponent } from "./test/presets.component";
 import { CreatorThemesComponent } from "./test/creator-themes.component";
 import { ExampleComponent } from "./example.component";
 
@@ -23,8 +22,7 @@ const routes = [
   { path: "test-pages/dropdown-collapse-view", component: TestDropdownCollapseComponent },
   { path: "test-pages/theme-tab", component: ThemeTabComponent },
   { path: "test-pages/no-license", component: NoLicenseComponent },
-  { path: "test-pages/presets", component: PresetsComponent },
-  { path: "test-pages/creator-themes", component: CreatorThemesComponent }, 
+  { path: "test-pages/creator-themes", component: CreatorThemesComponent },
   { path: "", component: ExampleComponent }
 ];
 

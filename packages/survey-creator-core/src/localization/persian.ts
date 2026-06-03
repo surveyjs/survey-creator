@@ -3615,19 +3615,7 @@ export var persianStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "کنتراست"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "پایه",
-      // [Auto-translated] "Advanced"
-      advanced: "پیشرفته",
-      // [Auto-translated] "Expert"
-      expert: "کارشناس"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "پریست اعمال شده"
-  }
+  },
 };
 
 setupLocale({ localeCode: "fa", strings: persianStrings });

@@ -3615,19 +3615,7 @@ export var spanishTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contraste"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Básico",
-      // [Auto-translated] "Advanced"
-      advanced: "Avanzado",
-      // [Auto-translated] "Expert"
-      expert: "Experto"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Preajuste aplicado"
-  }
+  },
 };
 
 setupLocale({ localeCode: "es", strings: spanishTranslation });

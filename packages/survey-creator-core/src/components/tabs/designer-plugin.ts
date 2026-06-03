@@ -11,12 +11,9 @@ import { TabControlModel } from "../side-bar/tab-control-model";
 import { MenuButton } from "../../utils/actions";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { creatorThemeModelPropertyGridDefinition } from "../../creator-theme/creator-theme-model-definition";
-import { creatorPresetsModelPropertyGridDefinition } from "../../ui-presets-creator/creator-presets-model-definition";
 import { CreatorThemeModel } from "../../creator-theme/creator-theme-model";
-import { CreatorPresetsModel } from "../../ui-presets-creator/creator-presets-model";
 import { ICreatorTheme, PredefinedCreatorThemes } from "../../creator-theme/creator-themes";
 import { getPredefinedBackgoundColorsChoices, getPredefinedColorsItemValues } from "./themes";
-import { UIPreset, PredefinedCreatorPresets } from "../../ui-presets-creator/presets";
 import { ComponentContainerModel } from "../component-container/component-container";
 import { ISurveyPropertyGridDefinition } from "../../question-editor/definition";
 export class TabDesignerPlugin implements ICreatorPlugin {
@@ -201,27 +198,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     const sidebarPageModelElements = [
       { componentName: "svc-property-grid", componentData: { model: this.themePropertyGridViewModel } },
     ];
-
-    if (PredefinedCreatorPresets.length > 0) {
-      const presetModel = new CreatorPresetsModel();
-      const presetPropertyGridViewModel = this.createSettingsPropertyGridViewModel("preset", creatorPresetsModelPropertyGridDefinition, creator);
-      presetPropertyGridViewModel.onNewSurveyCreatedCallback = (survey) => {
-        survey.css.root += " spg-preset-root";
-        const presetChooser = survey.getQuestionByName("presetName") as QuestionDropdownModel;
-        if (!!presetChooser && presetChooser.choices.length === 0) {
-          presetChooser.choices = PredefinedCreatorPresets.map(preset => ({ value: preset, text: getLocString("preset.names." + preset) }));
-        }
-      };
-      presetPropertyGridViewModel.setObject(presetModel);
-      presetModel.onPresetSelected.add((sender, options) => {
-        new UIPreset(options.preset.json).apply(creator);
-        creator.notify(getLocString("preset.presetApplied"), "info");
-        this.openCreatorThemeSettings();
-      });
-      sidebarPageModelElements.unshift(
-        { componentName: "svc-property-grid", componentData: { model: presetPropertyGridViewModel } }
-      );
-    }
 
     const sidebarPageModel = new ComponentContainerModel();
     sidebarPageModel.elements = sidebarPageModelElements;

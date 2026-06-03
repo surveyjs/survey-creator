@@ -3615,18 +3615,6 @@ export var nlStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Tegenstelling"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Basis",
-      // [Auto-translated] "Advanced"
-      advanced: "Geavanceerd",
-      // [Auto-translated] "Expert"
-      expert: "Expert"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Preset toegepast"
-  }
+  },
 };
 setupLocale({ localeCode: "nl", strings: nlStrings });

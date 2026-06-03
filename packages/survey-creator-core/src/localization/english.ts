@@ -1955,15 +1955,7 @@ export var enStrings = {
       "default-dark": "Dark",
       "default-contrast": "Contrast"
     }
-  },
-  preset: {
-    names: {
-      basic: "Basic",
-      advanced: "Advanced",
-      expert: "Expert",
-    },
-    presetApplied: "Preset applied",
-  }
+  },
 };
 
 /*

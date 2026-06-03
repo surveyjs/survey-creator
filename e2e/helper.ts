@@ -11,7 +11,6 @@ export const urlNoLicense = "http://127.0.0.1:8080/test-pages/no-license";
 export const urlWidget = "http://127.0.0.1:8080/test-pages/widget";
 export const urlThemeTab = "http://127.0.0.1:8080/test-pages/theme-tab";
 export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages/creator-themes";
-export const urlPresets = "http://127.0.0.1:8080/test-pages/presets";
 
 export async function compareScreenshot(
   page: Page,
@@ -117,10 +116,6 @@ export async function doDragDrop({ page, element, target, options }: { page: Pag
 
 export async function showCreatorSettings(page) {
   await page.locator(".svc-sidebar-tabs__bottom-container .svc-menu-action__button").click();
-}
-export async function showPresets(page) {
-  await showCreatorSettings(page);
-  await page.locator(".sps-launch__card").click();
 }
 
 export const creatorTabDesignerName = "Designer";

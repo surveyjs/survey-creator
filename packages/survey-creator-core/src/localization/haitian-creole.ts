@@ -3615,19 +3615,7 @@ export var htStrings = {
       // "Contrast"
       "default-contrast": "Kontras"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Debaz",
-      // [Auto-translated] "Advanced"
-      advanced: "Avanse",
-      // [Auto-translated] "Expert"
-      expert: "Ekspè"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Prereglaj aplike"
-  }
+  },
 };
 
 // Uncomment the line below if you create a custom dictionary.
