@@ -130,7 +130,7 @@ test.describe(title, () => {
     await page.locator(".svc-page-navigator-item-content").filter({ hasText: "page3" }).click();
     await expect(page.locator(".sd-question[data-name='testimonial']")).toBeVisible();
 
-    const deleteButton = page.locator(".svc-tab-designer .svc-question__adorner.svc-hovered .svc-survey-element-toolbar__item[title=Delete]");
+    const deleteButton = page.locator(".svc-tab-designer .svc-question__adorner.svc-hovered").getByRole("button", { name: "Delete" });
 
     // Delete first question on page3
     await page.locator(".sd-question[data-name='testimonial']").hover();
