@@ -4,6 +4,8 @@ import {
   test,
   expect,
   getAddNewQuestionButton,
+  setJSON,
+  getPagesLength,
 } from "../helper";
 
 const title = "Page Edit Modes";
@@ -96,5 +98,57 @@ test.describe(title, () => {
     await deleteActionButton.click();
     await expect(page.locator(".svc-page-navigator-item-content").filter({ hasText: "page1" })).toBeVisible();
     await expect(page.locator("span").filter({ hasText: "question1" }).first()).toBeVisible();
+  });
+
+  test("By page mode - delete questions one by one from last page, no crash, Bug#7758", async ({ page }) => {
+    await page.goto(urlByPage);
+    await setJSON(page, {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            { type: "rating", name: "nps-score" },
+            { type: "comment", name: "improvements-required" }
+          ]
+        },
+        {
+          name: "page2",
+          elements: [
+            { type: "boolean", name: "rebuy" }
+          ]
+        },
+        {
+          name: "page3",
+          elements: [
+            { type: "radiogroup", name: "testimonial", choices: ["yes", "no"] },
+            { type: "text", name: "email", visibleIf: "{testimonial} = 'yes'" }
+          ]
+        }
+      ]
+    });
+
+    await page.locator(".svc-page-navigator-item-content").filter({ hasText: "page3" }).click();
+    await expect(page.locator(".sd-question[data-name='testimonial']")).toBeVisible();
+
+    const deleteButton = page.locator(".svc-tab-designer .svc-question__adorner.svc-hovered").getByRole("button", { name: "Delete" });
+
+    // Delete first question on page3
+    await page.locator(".sd-question[data-name='testimonial']").hover();
+    await expect(deleteButton).toBeVisible();
+    await deleteButton.click();
+
+    await expect(page.locator(".sd-question[data-name='email']")).toBeVisible();
+
+    // Delete last question on page3 - in bypage mode the page stays, only the question disappears
+    await page.locator(".sd-question[data-name='email']").hover();
+    await expect(deleteButton).toBeVisible();
+    await deleteButton.click();
+
+    // email is immediately removed from the DOM (no stale component)
+    await expect(page.locator(".sd-question[data-name='email']")).toHaveCount(0);
+
+    // page3 remains visible but empty - it is not auto-deleted in bypage mode
+    expect(await getPagesLength(page)).toBe(3);
+    await expect(page.locator(".svc-page-navigator-item-content").filter({ hasText: "page3" })).toBeVisible();
   });
 });

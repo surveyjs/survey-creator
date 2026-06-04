@@ -1432,8 +1432,6 @@ export var bgStrings = {
     acceptedTypes: "Допълнителни разширения на файловете",
     // "Wait for upload to complete"
     waitForUpload: "Изчакай да завърши качването.",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Потвърждаване изтриването на файл",
     // "Row details alignment"
     detailPanelMode: "Местоположение на детайлния панел",
     // "Minimum row count"
@@ -1566,7 +1564,9 @@ export var bgStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Височина на изображението",
       // [Auto-translated] "Image width"
-      imageWidth: "Ширина на изображението"
+      imageWidth: "Ширина на изображението",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Потвърдете изтриването на файла"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Показване въпроса, ако не съдържа избор",
@@ -1624,6 +1624,10 @@ export var bgStrings = {
     choiceTextsFromQuestion: "Използване на стойности от следната матрична колона или панелен въпрос като текстове за избор",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Показване на заглавията на страниците в лентата за напредъка",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Покажете навигационния текст в лентата за напредък",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Подравняване на навигационния текст",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Показване на номерата на страниците в лентата за напредъка",
     // "Add a comment box"
@@ -1929,21 +1933,21 @@ export var bgStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Непрозрачност", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Семейство шрифтове за проучване",
+      "--sjs2-typography-font-family-text": "Семейство шрифтове за проучване",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Цвят на фона",
+      "--sjs2-color-utility-surface-survey": "Фонов цвят",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Акцентни цветове на фона",
+      "--sjs2-color-project-brand-600": "Акцентни цветове на фона",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Акцентни цветове на преден план",
+      "--sjs2-color-fg-brand-on-primary": "Акцентни цветове на преден план",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Цветове на съобщението за грешка",
+      "--sjs2-color-bg-alert-primary": "Цветовете на съобщенията за грешка",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Ефекти на сянка",
+      "--sjs2-border-effect-surface-default": "Сенчести ефекти",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Ефекти на сянка",
+      "--sjs2-border-effect-component-formbox-default": "Сенчести ефекти",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Цветове"
+      "--sjs2-color-component-input-default-line": "Цветове"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2895,9 @@ export var bgStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Указва ширината на показване на качените изображения във визуализацията и действителната ширина на изображенията, направени с фотоапарата. В режим на качване на един файл ширината на дисплея е ограничена от областта за визуализация; В режим на качване на множество файлове той е ограничен от областта на миниатюрите.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове."
+      allowImagesPreview: "Показва визуализации на миниатюри за качени файлове, когато е възможно. Премахнете отметката, ако вместо това искате да показвате икони на файлове.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Задейства се подсказка за потвърждаване на изтриването на файла."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3172,6 @@ export var bgStrings = {
     valueFalse: "Стойност, която трябва да се спести в резултатите от проучването, когато респондентите дадат отрицателен отговор.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Не се препоръчва да деактивирате тази опция, тъй като тя игнорира изображението за визуализация и затруднява потребителя да разбере дали файловете са качени.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Задейства подкана с молба за потвърждаване на изтриването на файла.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Разреши да се класират само избраните възможности за избор. Потребителите ще плъзгат избраните елементи от списъка за избор, за да ги подредят в областта за класиране.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3255,8 @@ export var bgStrings = {
       questionBackgroundTransparency: "Регулира прозрачността на входните елементи спрямо фона на проучването.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Задава ъгловия радиус за всички правоъгълни елементи. Разрешете разширения режим, ако искате да зададете индивидуални стойности на радиуса на ъгъла за входни елементи или панели и полета за въпроси.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Задава основния цвят на фона на проучването."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Определя основния фонов цвят на проучването."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3558,20 @@ export var bgStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "По подразбиране",
-      // [Auto-translated] "Sharp"
-      sharp: "Остър",
+      // [Auto-translated] "Contrast"
+      contrast: "Контраст",
       // [Auto-translated] "Borderless"
       borderless: "Без граници",
       // [Auto-translated] "Flat"
       flat: "Апартамент",
       // [Auto-translated] "Plain"
       plain: "Равнина",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Двойна граница",
-      // [Auto-translated] "Layered"
-      layered: "Пластове",
-      // [Auto-translated] "Solid"
-      solid: "Солиден",
+      // [Auto-translated] "Soft"
+      soft: "Мека",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Контраст"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Монохром"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3606,7 @@ export var bgStrings = {
     // [Auto-translated] "Font"
     fontScale: "Шрифт",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Създател на анкета 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Светлина",
-      // [Auto-translated] "Dark"
-      "default-dark": "Тъмен",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Контраст"
+
     }
   },
   preset: {

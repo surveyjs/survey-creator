@@ -1432,8 +1432,6 @@ export const roStrings = {
     acceptedTypes: "Extensii suplimentare de fișiere",
     // "Wait for upload to complete"
     waitForUpload: "Așteptați finalizarea încărcării",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Confirmați ștergerea fișierului",
     // "Row details alignment"
     detailPanelMode: "Alinierea extinderii rândului",
     // "Minimum row count"
@@ -1566,7 +1564,9 @@ export const roStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Înălțimea imaginii",
       // [Auto-translated] "Image width"
-      imageWidth: "Lățimea imaginii"
+      imageWidth: "Lățimea imaginii",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Confirmă ștergerea fișierului"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Ascunde întrebarea dacă nu are alegeri",
@@ -1624,6 +1624,10 @@ export const roStrings = {
     choiceTextsFromQuestion: "Utilizați valorile din următoarea coloană de matrice sau întrebare de panou ca texte de alegere",
     // "Display page titles in the progress bar"
     progressBarShowPageTitles: "Afișează titlurile paginilor în bara de progres",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Afișează textul de navigare în bara de progres",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Alinierea textului de navigare",
     // "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Afișează numerele paginilor în bara de progres",
     // "Add a comment box"
@@ -1928,22 +1932,22 @@ export const roStrings = {
       editorFont: "Font",
       // "Opacity"
       backgroundOpacity: "Opacitate", // Auto-generated string
-      // "Survey font family"
-      "--sjs-font-family": "Familia fontului chestionarului",
-      // "Background color"
-      "--sjs-general-backcolor-dim": "Culoarea fundalului",
-      // "Accent background colors"
-      "--sjs-primary-backcolor": "Culorile fundalului accent",
-      // "Accent foreground colors"
-      "--sjs-primary-forecolor": "Culorile primului plan accent",
-      // "Error message colors"
-      "--sjs-special-red": "Culorile mesajului de eroare",
-      // "Shadow effects"
-      "--sjs-shadow-small": "Efecte de umbră",
-      // "Shadow effects"
-      "--sjs-shadow-inner": "Efecte de umbră",
-      // "Colors"
-      "--sjs-border-default": "Culori"
+      // [Auto-translated] "Survey font family"
+      "--sjs2-typography-font-family-text": "Familia fonturilor de sondaj",
+      // [Auto-translated] "Background color"
+      "--sjs2-color-utility-surface-survey": "Culoare de fundal",
+      // [Auto-translated] "Accent background colors"
+      "--sjs2-color-project-brand-600": "Culori de fundal de accent",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs2-color-fg-brand-on-primary": "Culori de accent în prim-plan",
+      // [Auto-translated] "Error message colors"
+      "--sjs2-color-bg-alert-primary": "Culorile mesajului de eroare",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-surface-default": "Efecte de umbră",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-component-formbox-default": "Efecte de umbră",
+      // [Auto-translated] "Colors"
+      "--sjs2-color-component-input-default-line": "Culori"
     },
     "header@header": {
       // "View"
@@ -2891,7 +2895,9 @@ export const roStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Specifică lățimea de afișare a imaginilor încărcate în previzualizare și lățimea reală a imaginilor realizate cu camera. În modul de încărcare a unui singur fișier, lățimea afișării este limitată de zona de previzualizare; În modul de încărcare a mai multor fișiere, este limitat de zona de miniaturi.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor."
+      allowImagesPreview: "Afișează previzualizări în miniatură pentru fișierele încărcate atunci când este posibil. Deselectați dacă doriți să afișați pictogramele fișierelor.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Declanșează un prompt care cere confirmarea ștergerii fișierului."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3172,6 @@ export const roStrings = {
     valueFalse: "O valoare de salvat în rezultatele chestionarului atunci când respondenții oferă un răspuns negativ.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nu este recomandat să dezactivați această opțiune, deoarece suprascrie Previzualizarea imaginii și face dificilă pentru utilizator înțelegerea dacă fișierele au fost încărcate.",
-    // "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Declanșează un prompt care solicită confirmarea ștergerii fișierului.",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Activați pentru a clasifica doar opțiunile selectate. Utilizatorii vor trage elementele selectate din lista de opțiuni pentru a le ordona în zona de clasificare.",
     // "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3255,8 @@ export const roStrings = {
       questionBackgroundTransparency: "Ajustează transparența elementelor de intrare în raport cu fundalul chestionarului.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Setează raza colțurilor pentru toate elementele dreptunghiulare. Activați modul avansat dacă doriți să setați valori individuale pentru raza colțurilor pentru elementele de intrare sau panourile și casetele de întrebări.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Setează culoarea principală a fundalului chestionarului."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Setează culoarea principală de fundal a sondajului."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3558,20 @@ export const roStrings = {
     names: {
       // "Default"
       default: "Implicit",
-      // [Auto-translated] "Sharp"
-      sharp: "Sharp",
+      // [Auto-translated] "Contrast"
+      contrast: "Contrast",
       // "Borderless"
       borderless: "Fără bordură",
       // [Auto-translated] "Flat"
       flat: "Plat",
       // "Plain"
       plain: "Simplu",
-      // "Double Border"
-      doubleborder: "Bordură dublă",
-      // "Layered"
-      layered: "Stratificat",
-      // [Auto-translated] "Solid"
-      solid: "Solid",
+      // [Auto-translated] "Soft"
+      soft: "Moale",
       // [Auto-translated] "3D"
       threedimensional: "3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Contrast"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monocrom"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3606,7 @@ export const roStrings = {
     // [Auto-translated] "Font"
     fontScale: "Font",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Creator de sondaje 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Lumină",
-      // [Auto-translated] "Dark"
-      "default-dark": "Întunecat",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Contrast"
+
     }
   },
   preset: {

@@ -1432,8 +1432,6 @@ export var indonesianStrings = {
     acceptedTypes: "Ekstensi file tambahan",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Tunggu hingga upload selesai",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Konfirmasi penghapusan file",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Perataan detail baris",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Tinggi gambar",
       // [Auto-translated] "Image width"
-      imageWidth: "Lebar gambar"
+      imageWidth: "Lebar gambar",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Konfirmasi penghapusan file"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Sembunyikan pertanyaan jika tidak punya pilihan",
@@ -1624,6 +1624,10 @@ export var indonesianStrings = {
     choiceTextsFromQuestion: "Gunakan nilai dari kolom matriks atau pertanyaan panel berikut sebagai teks pilihan",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Menampilkan judul halaman di bilah kemajuan",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Tampilkan teks navigasi di bilah kemajuan",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Perataan teks navigasi",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Menampilkan nomor halaman di bilah kemajuan",
     // [Auto-translated] "Add a comment box"
@@ -1929,21 +1933,21 @@ export var indonesianStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacity", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Keluarga font survei",
+      "--sjs2-typography-font-family-text": "Keluarga font survei",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Warna latar belakang",
+      "--sjs2-color-utility-surface-survey": "Warna latar belakang",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Warna latar belakang aksen",
+      "--sjs2-color-project-brand-600": "Warna latar belakang aksen",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Warna latar depan aksen",
+      "--sjs2-color-fg-brand-on-primary": "Warna latar depan aksen",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Warna pesan kesalahan",
+      "--sjs2-color-bg-alert-primary": "Warna pesan kesalahan",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Efek bayangan",
+      "--sjs2-border-effect-surface-default": "Efek bayangan",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Efek bayangan",
+      "--sjs2-border-effect-component-formbox-default": "Efek bayangan",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Warna"
+      "--sjs2-color-component-input-default-line": "Warna"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2895,9 @@ export var indonesianStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Menentukan lebar tampilan gambar yang diunggah dalam pratinjau dan lebar sebenarnya gambar yang diambil dengan kamera. Dalam mode unggah file tunggal, lebar tampilan dibatasi oleh area pratinjau; Dalam mode unggah beberapa file, itu dibatasi oleh area thumbnail.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya."
+      allowImagesPreview: "Menampilkan pratinjau thumbnail untuk file yang diunggah jika memungkinkan. Batalkan pilihan jika Anda ingin menampilkan ikon file sebagai gantinya.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Memicu perintah yang meminta untuk mengonfirmasi penghapusan file."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3172,6 @@ export var indonesianStrings = {
     valueFalse: "Nilai untuk disimpan dalam hasil survei ketika responden memberikan jawaban negatif.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Anda tidak disarankan untuk menonaktifkan opsi ini karena menggantikan gambar Pratinjau dan menyulitkan pengguna untuk memahami apakah file telah diunggah.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Memicu prompt yang meminta konfirmasi penghapusan file.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Aktifkan untuk memberi peringkat hanya pada pilihan yang dipilih. Pengguna akan menyeret item yang dipilih dari daftar pilihan untuk memesannya di dalam area peringkat.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3255,8 @@ export var indonesianStrings = {
       questionBackgroundTransparency: "Menyesuaikan transparansi elemen input relatif terhadap latar belakang survei.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Mengatur jari-jari sudut untuk semua elemen persegi panjang. Aktifkan Mode Lanjutan jika Anda ingin mengatur nilai radius sudut individual untuk elemen input atau panel dan kotak pertanyaan.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Mengatur warna latar belakang utama survei."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Mengatur warna latar belakang utama survei."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3558,20 @@ export var indonesianStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Default",
-      // [Auto-translated] "Sharp"
-      sharp: "Tajam",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontras",
       // [Auto-translated] "Borderless"
       borderless: "Tanpa batas",
       // [Auto-translated] "Flat"
       flat: "Rata",
       // [Auto-translated] "Plain"
       plain: "Polos",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Batas Ganda",
-      // [Auto-translated] "Layered"
-      layered: "Berlapis",
-      // [Auto-translated] "Solid"
-      solid: "Keras",
+      // [Auto-translated] "Soft"
+      soft: "Lembut",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontras"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monokrom"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3606,7 @@ export var indonesianStrings = {
     // [Auto-translated] "Font"
     fontScale: "Font",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Pembuat Survei 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Ringan",
-      // [Auto-translated] "Dark"
-      "default-dark": "Gelap",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontras"
+
     }
   },
   preset: {

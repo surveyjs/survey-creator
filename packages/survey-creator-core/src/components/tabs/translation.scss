@@ -6,8 +6,6 @@
 }
 
 .svc-translation-tab {
-  /* disable library transition animations */
-  --sjs-transition-duration: 0ms;
   background-color: var(--sjs2-color-utility-surface-translations);
 }
 
@@ -213,10 +211,7 @@ td.st-table__cell:first-of-type {
 
 .st-body__footer {
   box-sizing: border-box;
-  padding: var(--sjs2-spacing-x200)
-    var(--sjs2-spacing-x200)
-    var(--sjs2-spacing-x200)
-    var(--sjs2-spacing-x300);
+  padding: var(--sjs2-spacing-x200) var(--sjs2-spacing-x200) var(--sjs2-spacing-x200) var(--sjs2-spacing-x300);
   border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-bg-basic-primary);
 }

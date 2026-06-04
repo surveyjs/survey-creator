@@ -1432,8 +1432,6 @@ export var arStrings = {
     acceptedTypes: "امتدادات ملفات إض��فية",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "انتظر حتى يكتمل التحميل",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "تأكيد حذف الملف",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "محاذاة تفاصيل الصف",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var arStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "ارتفاع الصورة",
       // [Auto-translated] "Image width"
-      imageWidth: "عرض الصورة"
+      imageWidth: "عرض الصورة",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "تأكيد حذف الملف"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "إخفاء السؤال إذا لم يكن لديه خيارات",
@@ -1624,6 +1624,10 @@ export var arStrings = {
     choiceTextsFromQuestion: "استخدم القيم من عمود المصفوفة التالي أو سؤال اللوحة كنصوص اختيار",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "عرض عناوين الصفحات في شريط التقدم",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "عرض نص التنقل في شريط التقدم",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "محاذاة نص التنقل",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "عرض أرقام الصفحات في شريط التقدم",
     // [Auto-translated] "Add a comment box"
@@ -1929,21 +1933,21 @@ export var arStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "العتامه", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "عائلة خطوط الاستطلاع",
+      "--sjs2-typography-font-family-text": "عائلة خطوط المسح",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "لون الخلفية",
+      "--sjs2-color-utility-surface-survey": "لون الخلفية",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "ألوان خلفية مميزة",
+      "--sjs2-color-project-brand-600": "ألوان الخلفية المميزة",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "ألوان مميزة في المقدمة",
+      "--sjs2-color-fg-brand-on-primary": "ألوان المقدمة المميزة",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "ألوان رسالة الخطأ",
+      "--sjs2-color-bg-alert-primary": "ألوان رسائل الخطأ",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "تأثيرات الظل",
+      "--sjs2-border-effect-surface-default": "تأثيرات الظل",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "تأثيرات الظل",
+      "--sjs2-border-effect-component-formbox-default": "تأثيرات الظل",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "الوان"
+      "--sjs2-color-component-input-default-line": "الألوان"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2895,9 @@ export var arStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "يحدد عرض عرض الصور التي تم تحميلها في المعاينة والعرض الفعلي للصور الملتقطة بالكاميرا. في وضع تحميل الملف الفردي ، يكون عرض العرض محدودا بمنطقة المعاينة. في وضع تحميل الملفات المتعددة ، يتم تقييده بمنطقة الصورة المصغرة.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك."
+      allowImagesPreview: "يعرض معاينات الصور المصغرة للملفات التي تم تحميلها عندما يكون ذلك ممكنا. قم بإلغاء تحديد ما إذا كنت تريد إظهار رموز الملفات بدلا من ذلك.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "يفعل ذلك طلب تأكيد حذف الملف."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3172,6 @@ export var arStrings = {
     valueFalse: "قيمة يجب حفظها في نتائج الاستطلاع عندما يعطي المستجيبون إجابة سلبية.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "لا يوصى بتعطيل هذا الخيار لأنه يتجاوز صورة المعاينة ويجعل من الصعب على المستخدم فهم ما إذا كان قد تم تحميل الملفات.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "تشغيل مطالبة تطلب تأكيد حذف الملف.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "تمكين لترتيب الخيارات المحددة فقط. سيقوم المستخدمون بسحب العناصر المحددة من قائمة الاختيار لترتيبها داخل منطقة الترتيب.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3255,8 @@ export var arStrings = {
       questionBackgroundTransparency: "يضبط شفافية عناصر الإدخال بالنسبة لخلفية الاستطلاع.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "يضبط نصف قطر الزاوية لكل العناصر المستطيلة. قم بتمكين الوضع المتقدم إذا كنت تريد تعيين قيم نصف قطر زاوية فردية لعناصر الإدخال أو اللوحات ومربعات الأسئلة.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "يضبط لون الخلفية الرئيسي للاستطلاع."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "يحدد لون الخلفية الرئيسي للمسح."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3558,20 @@ export var arStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "افتراضي",
-      // [Auto-translated] "Sharp"
-      sharp: "حاد",
+      // [Auto-translated] "Contrast"
+      contrast: "تباين",
       // [Auto-translated] "Borderless"
       borderless: "بلا حدود",
       // [Auto-translated] "Flat"
       flat: "وطيء",
       // [Auto-translated] "Plain"
       plain: "واضح",
-      // [Auto-translated] "Double Border"
-      doubleborder: "حدود مزدوجة",
-      // [Auto-translated] "Layered"
-      layered: "الطبقات",
-      // [Auto-translated] "Solid"
-      solid: "صلب",
+      // [Auto-translated] "Soft"
+      soft: "ناعم",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "تباين"
+      // [Auto-translated] "Monochrome"
+      monochrome: "أحادي اللون"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3606,7 @@ export var arStrings = {
     // [Auto-translated] "Font"
     fontScale: "الخط",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "منشئ الاستطلاع 2020",
-      // [Auto-translated] "Light"
-      "default-light": "ضوء",
-      // [Auto-translated] "Dark"
-      "default-dark": "داكن",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "تباين"
+
     }
   },
   preset: {

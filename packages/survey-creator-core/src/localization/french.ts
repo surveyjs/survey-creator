@@ -1432,8 +1432,6 @@ export var frenchTranslation = {
     acceptedTypes: "Extensions de fichiers supplémentaires",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Attendez la fin du téléchargement",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Confirmer la suppression du fichier",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Alignement des détails de la ligne",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var frenchTranslation = {
       // [Auto-translated] "Image height"
       imageHeight: "Hauteur de l’image",
       // [Auto-translated] "Image width"
-      imageWidth: "Largeur de l’image"
+      imageWidth: "Largeur de l’image",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Confirmer la suppression du fichier"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Masquer la question s’il n’a pas le choix",
@@ -1624,6 +1624,10 @@ export var frenchTranslation = {
     choiceTextsFromQuestion: "Utilisez les valeurs de la question matricielle, de la colonne ou du panneau suivant comme textes de choix",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Afficher les titres des pages dans la barre de progression",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Afficher le texte de navigation dans la barre de progression",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Alignement du texte de navigation",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Affichage des numéros de page dans la barre de progression",
     // [Auto-translated] "Add a comment box"
@@ -1929,21 +1933,21 @@ export var frenchTranslation = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacité", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Famille de polices de topographie",
+      "--sjs2-typography-font-family-text": "Famille de polices d’arpentage",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Couleur de fond",
+      "--sjs2-color-utility-surface-survey": "Couleur de fond",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Couleurs d’arrière-plan d’accentuation",
+      "--sjs2-color-project-brand-600": "Couleurs d’arrière-plan d’accent",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Accentuer les couleurs de premier plan",
+      "--sjs2-color-fg-brand-on-primary": "Couleurs d’accent au premier plan",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Couleurs du message d’erreur",
+      "--sjs2-color-bg-alert-primary": "Couleurs des messages d’erreur",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Effets d’ombre",
+      "--sjs2-border-effect-surface-default": "Effets d’ombre",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Effets d’ombre",
+      "--sjs2-border-effect-component-formbox-default": "Effets d’ombre",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Couleurs"
+      "--sjs2-color-component-input-default-line": "Couleurs"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2895,9 @@ export var frenchTranslation = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Spécifie la largeur d’affichage des images téléchargées dans l’aperçu et la largeur réelle des images prises avec l’appareil photo. En mode de téléchargement de fichier unique, la largeur d’affichage est limitée par la zone de prévisualisation ; En mode de téléchargement de plusieurs fichiers, il est limité par la zone des vignettes.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Affiche des aperçus miniatures pour les fichiers téléchargés lorsque cela est possible. Désélectionnez si vous souhaitez afficher les icônes de fichier à la place."
+      allowImagesPreview: "Affiche des aperçus miniatures pour les fichiers téléchargés lorsque cela est possible. Désélectionnez si vous souhaitez afficher les icônes de fichier à la place.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Ça déclenche une invite demandant de confirmer la suppression du fichier."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3172,6 @@ export var frenchTranslation = {
     valueFalse: "Une valeur à enregistrer dans les résultats de l’enquête lorsque les personnes interrogées donnent une réponse négative.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Il n’est pas recommandé de désactiver cette option, car elle remplace l’image d’aperçu et empêche l’utilisateur de comprendre si les fichiers ont été téléchargés.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Déclenche une invite vous demandant de confirmer la suppression du fichier.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Activez cette option pour classer uniquement les choix sélectionnés. Les utilisateurs feront glisser les éléments sélectionnés de la liste de choix pour les classer dans la zone de classement.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3255,8 @@ export var frenchTranslation = {
       questionBackgroundTransparency: "Ajuste la transparence des éléments d’entrée par rapport à l’arrière-plan de l’enquête.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Définit le rayon d’angle de tous les éléments rectangulaires. Activez le mode avancé si vous souhaitez définir des valeurs de rayon d’angle individuelles pour les éléments de saisie ou les panneaux et les zones de question.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Définit la couleur d’arrière-plan principale de l’enquête."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Définit la couleur d’arrière-plan principale de l’enquête."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3558,20 @@ export var frenchTranslation = {
     names: {
       // [Auto-translated] "Default"
       default: "Par défaut",
-      // [Auto-translated] "Sharp"
-      sharp: "Tranchant",
+      // [Auto-translated] "Contrast"
+      contrast: "Contraste",
       // [Auto-translated] "Borderless"
       borderless: "Sans bord",
       // [Auto-translated] "Flat"
       flat: "Plat",
       // [Auto-translated] "Plain"
       plain: "Plaine",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Double bordure",
-      // [Auto-translated] "Layered"
-      layered: "Superposé",
-      // [Auto-translated] "Solid"
-      solid: "Solide",
+      // [Auto-translated] "Soft"
+      soft: "Doux",
       // [Auto-translated] "3D"
       threedimensional: "3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Contraste"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monochrome"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3606,7 @@ export var frenchTranslation = {
     // [Auto-translated] "Font"
     fontScale: "Police",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Créateur d’enquête 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Lumière",
-      // [Auto-translated] "Dark"
-      "default-dark": "Sombre",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Contraste"
+
     }
   },
   preset: {

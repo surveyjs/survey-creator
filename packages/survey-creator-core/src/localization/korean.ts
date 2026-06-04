@@ -1433,8 +1433,6 @@ export var koreanStrings = {
     acceptedTypes: "추가 파일 확장자",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "업로드가 완료될 때까지 기다리십시오.",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "파일 삭제 확인",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "행 세부 정보 정렬",
     // [Auto-translated] "Minimum row count"
@@ -1567,7 +1565,9 @@ export var koreanStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "이미지 높이",
       // [Auto-translated] "Image width"
-      imageWidth: "이미지 너비"
+      imageWidth: "이미지 너비",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "파일 삭제 확인"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "선택의 여지가 없는 경우 질문을 숨깁니다.",
@@ -1625,6 +1625,10 @@ export var koreanStrings = {
     choiceTextsFromQuestion: "다음 행렬 열 또는 패널 질문의 값을 선택 텍스트로 사용합니다.",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "진행률 표시줄에 페이지 제목 표시",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "진행 바에 내비게이션 텍스트를 표시하세요",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "내비게이션 텍스트 정렬",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "진행률 표시줄에 페이지 번호 표시",
     // [Auto-translated] "Add a comment box"
@@ -1930,21 +1934,21 @@ export var koreanStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "불투명도", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "설문조사 글꼴 패밀리",
+      "--sjs2-typography-font-family-text": "측량 폰트 계열",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "배경색",
+      "--sjs2-color-utility-surface-survey": "배경색",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "강조 배경색",
+      "--sjs2-color-project-brand-600": "악센트 배경 색상",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "강조 전경색",
+      "--sjs2-color-fg-brand-on-primary": "악센트 전경 색상",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "오류 메시지 색상",
+      "--sjs2-color-bg-alert-primary": "오류 메시지 색상",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "그림자 효과",
+      "--sjs2-border-effect-surface-default": "그림자 효과",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "그림자 효과",
+      "--sjs2-border-effect-component-formbox-default": "그림자 효과",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "색상"
+      "--sjs2-color-component-input-default-line": "색상"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2892,7 +2896,9 @@ export var koreanStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "미리보기에 업로드된 이미지의 표시 너비와 카메라로 촬영한 이미지의 실제 너비를 지정합니다. 단일 파일 업로드 모드에서는 디스플레이 너비가 미리보기 영역에 의해 제한됩니다. 다중 파일 업로드 모드에서는 썸네일 영역에 의해 제한됩니다.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다."
+      allowImagesPreview: "가능한 경우 업로드된 파일에 대한 썸네일 미리보기를 표시합니다. 대신 파일 아이콘을 표시하려면 선택을 취소합니다.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "파일 삭제 확인 요청 프롬프트가 트리거됩니다."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3167,8 +3173,6 @@ export var koreanStrings = {
     valueFalse: "응답자들이 부정적인 답변을 할 때 설문조사 결과에 저장하는 값입니다.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "이 옵션은 미리 보기 이미지를 재정의하고 사용자가 파일이 업로드되었는지 여부를 이해하기 어렵게 만들기 때문에 사용하지 않도록 설정하지 않는 것이 좋습니다.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "파일 삭제를 확인하는 프롬프트를 트리거합니다.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "선택한 선택 항목만 순위를 지정할 수 있습니다. 사용자는 선택 목록에서 선택한 항목을 끌어 순위 영역 내에서 정렬합니다.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3252,8 +3256,8 @@ export var koreanStrings = {
       questionBackgroundTransparency: "현장조사 배경에 상대적인 입력 요소의 투명도를 조정합니다.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "모든 직사각형 요소의 구석 반지름을 설정합니다. Advanced Mode(고급 모드)를 활성화하면 입력 요소 또는 패널 및 질문 상자에 대한 개별 모서리 반경 값을 설정할 수 있습니다.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "현장조사의 기본 배경색을 설정합니다."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "설문조사의 주요 배경색을 설정합니다."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3555,24 +3559,20 @@ export var koreanStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "기본값",
-      // [Auto-translated] "Sharp"
-      sharp: "날카로운",
+      // [Auto-translated] "Contrast"
+      contrast: "대조",
       // [Auto-translated] "Borderless"
       borderless: "국경",
       // [Auto-translated] "Flat"
       flat: "플랫",
       // [Auto-translated] "Plain"
       plain: "평야",
-      // [Auto-translated] "Double Border"
-      doubleborder: "이중 테두리",
-      // [Auto-translated] "Layered"
-      layered: "계층",
-      // [Auto-translated] "Solid"
-      solid: "고체",
+      // [Auto-translated] "Soft"
+      soft: "부드럽게",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "대조"
+      // [Auto-translated] "Monochrome"
+      monochrome: "단색"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3607,14 +3607,7 @@ export var koreanStrings = {
     // [Auto-translated] "Font"
     fontScale: "글꼴",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "설문조사 작성기 2020",
-      // [Auto-translated] "Light"
-      "default-light": "광",
-      // [Auto-translated] "Dark"
-      "default-dark": "어둠",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "대조"
+
     }
   },
   preset: {

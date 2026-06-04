@@ -1432,8 +1432,6 @@ export var czStrings = {
     acceptedTypes: "Další přípony souboru",
     // "Wait for upload to complete"
     waitForUpload: "Počkejte na dokončení nahrávání",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Potvrdit smazání souboru",
     // "Row details alignment"
     detailPanelMode: "Umístění detailního panelu",
     // "Minimum row count"
@@ -1566,7 +1564,9 @@ export var czStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Výška obrazu",
       // [Auto-translated] "Image width"
-      imageWidth: "Šířka obrazu"
+      imageWidth: "Šířka obrazu",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Potvrdit smazání souboru"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Skrýt otázku, pokud neobsahuje žádné volby",
@@ -1624,6 +1624,10 @@ export var czStrings = {
     choiceTextsFromQuestion: "Jako texty voleb použijte hodnoty z následujícího sloupce matice nebo otázky panelu",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Zobrazení názvů stránek v pruhu průběhu",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Zobrazit navigační text v průběhu",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Zarovnání navigačního textu",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Zobrazení čísel stránek v pruhu průběhu",
     // "Add a comment box"
@@ -1929,21 +1933,21 @@ export var czStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Neprůhlednost", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Rodina písma Survey",
+      "--sjs2-typography-font-family-text": "Rodina fontů podle průzkumu",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Barva pozadí",
+      "--sjs2-color-utility-surface-survey": "Barva pozadí",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Zvýraznění barev pozadí",
+      "--sjs2-color-project-brand-600": "Akcentní barvy pozadí",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Zvýraznění barev popředí",
+      "--sjs2-color-fg-brand-on-primary": "Akcentní barvy popředí",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Barvy chybové zprávy",
+      "--sjs2-color-bg-alert-primary": "Barvy chybových zpráv",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Stínové efekty",
+      "--sjs2-border-effect-surface-default": "Stínové efekty",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Stínové efekty",
+      "--sjs2-border-effect-component-formbox-default": "Stínové efekty",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Barvy"
+      "--sjs2-color-component-input-default-line": "Barvy"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2895,9 @@ export var czStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Určuje šířku zobrazení odeslaných obrazů v náhledu a skutečnou šířku obrazů pořízených fotoaparátem. V režimu odesílání jednoho souboru je šířka zobrazení omezena oblastí náhledu; V režimu odesílání více souborů je omezena oblastí miniatur.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Pokud je to možné, zobrazuje náhledy miniatur pro nahrané soubory. Zrušte výběr, pokud chcete místo toho zobrazit ikony souborů."
+      allowImagesPreview: "Pokud je to možné, zobrazuje náhledy miniatur pro nahrané soubory. Zrušte výběr, pokud chcete místo toho zobrazit ikony souborů.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Spustí se výzva k potvrzení smazání souboru."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3172,6 @@ export var czStrings = {
     valueFalse: "Hodnota, která se má uložit do výsledků průzkumu, když respondenti odpoví záporně.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nedoporučujeme tuto volbu vypínat, protože přepíše obraz náhledu a uživateli ztíží pochopení, zda byly soubory odeslány.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Spustí výzvu s žádostí o potvrzení odstranění souboru.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Povolením seřadíte pouze vybrané volby. Uživatelé přetáhnou vybrané položky ze seznamu voleb a seřadí je v oblasti hodnocení.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3255,8 @@ export var czStrings = {
       questionBackgroundTransparency: "Upraví průhlednost vstupních prvků vzhledem k pozadí průzkumu.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Nastaví poloměr rohů pro všechny obdélníkové prvky. Rozšířený režim povolte, pokud chcete nastavit jednotlivé hodnoty poloměru rohů pro vstupní prvky nebo panely a pole s otázkami.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Nastaví hlavní barvu pozadí průzkumu."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Nastavuje hlavní barvu pozadí průzkumu."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3558,20 @@ export var czStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Výchozí",
-      // [Auto-translated] "Sharp"
-      sharp: "Ostrý",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontrast",
       // [Auto-translated] "Borderless"
       borderless: "Bez okrajů",
       // [Auto-translated] "Flat"
       flat: "Byt",
       // [Auto-translated] "Plain"
       plain: "Planina",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Dvojitý okraj",
-      // [Auto-translated] "Layered"
-      layered: "Vrstvený",
-      // [Auto-translated] "Solid"
-      solid: "Solidní",
+      // [Auto-translated] "Soft"
+      soft: "Měkké",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontrast"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Černobílý"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3606,7 @@ export var czStrings = {
     // [Auto-translated] "Font"
     fontScale: "Písmo",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Tvůrce průzkumu 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Světlo",
-      // [Auto-translated] "Dark"
-      "default-dark": "Temný",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontrast"
+
     }
   },
   preset: {

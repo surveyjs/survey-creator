@@ -1433,8 +1433,6 @@ export var polishStrings = {
     acceptedTypes: "Dodatkowe rozszerzenia plików",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Poczekaj na zakończenie przesyłania",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Potwierdź usunięcie pliku",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Wyrównanie szczegółów wiersza",
     // [Auto-translated] "Minimum row count"
@@ -1567,7 +1565,9 @@ export var polishStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Wysokość obrazu",
       // [Auto-translated] "Image width"
-      imageWidth: "Szerokość obrazu"
+      imageWidth: "Szerokość obrazu",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Potwierdź usunięcie pliku"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Ukryj pytanie, jeśli nie ma opcji",
@@ -1625,6 +1625,10 @@ export var polishStrings = {
     choiceTextsFromQuestion: "Użyj wartości z poniższego pytania macierzowego, kolumnowego lub panelowego jako tekstów wyboru",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Wyświetlanie tytułów stron na pasku postępu",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Wyświetlaj tekst nawigacji na pasku postępu",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Wyrównanie tekstu nawigacyjnego",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Wyświetlanie numerów stron na pasku postępu",
     // [Auto-translated] "Add a comment box"
@@ -1930,21 +1934,21 @@ export var polishStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Nieprzezroczystość", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Rodzina czcionek ankietowych",
+      "--sjs2-typography-font-family-text": "Rodzina czcionek ankietowych",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Kolor tła",
+      "--sjs2-color-utility-surface-survey": "Kolor tła",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Akcentujące kolory tła",
+      "--sjs2-color-project-brand-600": "Kolory tła akcentowego",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Akcentujące kolory pierwszego planu",
+      "--sjs2-color-fg-brand-on-primary": "Kolory akcentowe na pierwszym planie",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Kolory komunikatów o błędach",
+      "--sjs2-color-bg-alert-primary": "Kolory komunikatów o błędzie",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Efekty cienia",
+      "--sjs2-border-effect-surface-default": "Efekty cienia",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Efekty cienia",
+      "--sjs2-border-effect-component-formbox-default": "Efekty cienia",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Kolory"
+      "--sjs2-color-component-input-default-line": "Kolory"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2892,7 +2896,9 @@ export var polishStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Określa szerokość wyświetlania przesyłanych obrazów w podglądzie oraz rzeczywistą szerokość zdjęć wykonanych aparatem. W trybie przesyłania pojedynczego pliku szerokość wyświetlania jest ograniczona przez obszar podglądu; W trybie przesyłania wielu plików jest on ograniczony przez obszar miniatur.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików."
+      allowImagesPreview: "Wyświetla podgląd miniatur przesłanych plików, jeśli to możliwe. Usuń zaznaczenie, jeśli zamiast tego chcesz wyświetlać ikony plików.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Uruchamia się komunikat o potwierdzeniu usunięcia pliku."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3167,8 +3173,6 @@ export var polishStrings = {
     valueFalse: "Wartość, która ma zostać zapisana w wynikach ankiety, gdy respondenci udzielą odpowiedzi negatywnej.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nie zaleca się wyłączania tej opcji, ponieważ zastępuje ona obraz podglądu i utrudnia użytkownikowi zrozumienie, czy pliki zostały przekazane.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Uruchamia monit z prośbą o potwierdzenie usunięcia pliku.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Włącz, aby uszeregować tylko wybrane wybory. Użytkownicy będą przeciągać wybrane elementy z listy wyboru, aby uporządkować je w obszarze rankingu.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3252,8 +3256,8 @@ export var polishStrings = {
       questionBackgroundTransparency: "Dostosowuje przezroczystość elementów wejściowych względem tła ankiety.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Ustawia promień narożnika dla wszystkich elementów prostokątnych. Włącz tryb zaawansowany, jeśli chcesz ustawić indywidualne wartości promienia narożnika dla elementów wejściowych lub paneli i pól pytań.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Ustawia główny kolor tła ankiety."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Ustala główny kolor tła ankiety."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3555,24 +3559,20 @@ export var polishStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Domyślny",
-      // [Auto-translated] "Sharp"
-      sharp: "Ostry",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontrast",
       // [Auto-translated] "Borderless"
       borderless: "Bez obramowania",
       // [Auto-translated] "Flat"
       flat: "Płaski",
       // [Auto-translated] "Plain"
       plain: "Równina",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Podwójna ramka",
-      // [Auto-translated] "Layered"
-      layered: "Warstwowe",
-      // [Auto-translated] "Solid"
-      solid: "Bryła",
+      // [Auto-translated] "Soft"
+      soft: "Miękkie",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontrast"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monochrom"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3607,14 +3607,7 @@ export var polishStrings = {
     // [Auto-translated] "Font"
     fontScale: "Czcionka",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Kreator ankiet 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Światło",
-      // [Auto-translated] "Dark"
-      "default-dark": "Ciemny",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontrast"
+
     }
   },
   preset: {
