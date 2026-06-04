@@ -1584,3 +1584,14 @@ test("Update default font family", (): any => {
     settings.themeEditor.defaultFontFamily = oldFontFamily;
   }
 });
+
+test("inputContent color and placeholdercolor resolved from base theme", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.themeEditor.activate();
+  const propertyGridSurvey = creator.themeEditor.propertyGrid.survey;
+
+  const inputContent = propertyGridSurvey.getQuestionByName("inputContent").value;
+  expect(inputContent.color).toBe("rgba(0, 0, 0, 0.91)");
+  expect(inputContent.placeholdercolor).toBe("rgba(0, 0, 0, 0.45)");
+});
