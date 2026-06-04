@@ -40,7 +40,7 @@ const themeModelProperties: ISurveyPropertiesDefinition = {
 
       { name: "editorPanel", tab: "appearanceinput" },
       { name: "--sjs2-border-effect-component-formbox-default", tab: "appearanceinput" },
-      { name: "editorFont", tab: "appearanceinput" },
+      { name: "inputContent", tab: "appearanceinput" },
 
       { name: "--sjs2-color-component-input-default-line", tab: "appearancelines" },
       { name: "--sjs2-color-border-basic-secondary", tab: "appearancelines" },

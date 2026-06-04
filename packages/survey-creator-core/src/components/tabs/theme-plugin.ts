@@ -1003,7 +1003,7 @@ export function updateThemeEditorsDefaultFontFamily() {
     }
   };
   ["surveyTitle", "headerTitle", "surveyDescription", "headerDescription"].forEach(getPropertyUpdater("header"));
-  ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "editorFont"].forEach(getPropertyUpdater("theme"));
+  ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "inputContent"].forEach(getPropertyUpdater("theme"));
   const fontFamilyProperty = Serializer.getProperty("theme", "--sjs2-typography-font-family-text");
   if (fontFamilyProperty) {
     fontFamilyProperty.defaultValue = settings.themeEditor.defaultFontFamily;

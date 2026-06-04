@@ -91,7 +91,7 @@ if (!ComponentCollection.Instance.getCustomQuestionByName("font")) {
       const color = question.contentPanel.getQuestionByName("color");
       color.visible = question.name !== "surveyTitle" && question.name !== "surveyDescription";
       const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
-      placeholderColor.visible = question.name === "editorFont";
+      placeholderColor.visible = question.name === "inputContent";
 
       const family = question.contentPanel.getQuestionByName("family");
       family.choices = [].concat(DefaultFonts);

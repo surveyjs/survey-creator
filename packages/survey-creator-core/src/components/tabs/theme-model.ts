@@ -563,7 +563,7 @@ export class ThemeModel extends Base implements ITheme {
       this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"] });
       this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"] });
       this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"] });
-      this["editorFont"] = fontsettingsFromCssVariable(this.getPropertyByName("editorFont"), json.cssVariables, {
+      this["inputContent"] = fontsettingsFromCssVariable(this.getPropertyByName("inputContent"), json.cssVariables, {
         color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"],
         placeholdercolor: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"],
       });
@@ -873,7 +873,7 @@ Serializer.addProperties("theme",
     },
   }, {
     type: "font",
-    name: "editorFont",
+    name: "inputContent",
     default: {
       family: settings.themeEditor.defaultFontFamily,
       weight: "400",
