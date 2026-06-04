@@ -3,7 +3,7 @@ import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
-import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable, getFontSettingsDefaultsFromBaseTheme, getThemeFontSettingsCssVarNames, themeFontPropertyNames } from "./theme-custom-questions/font-settings";
+import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable, getThemeFontSettingsCssVarNames, themeFontPropertyNames } from "./theme-custom-questions/font-settings";
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
 import { trimBoxShadowValue } from "survey-core";
 import { HeaderModel } from "./header-model";
@@ -265,7 +265,7 @@ export class ThemeModel extends Base implements ITheme {
 
     let typeProcessed = true;
     if (property.type === "font") {
-      fontsettingsToCssVariable(value, property, this.themeCssVariablesChanges, getFontSettingsDefaultsFromBaseTheme(property.name, this.baseThemeVariables));
+      fontsettingsToCssVariable(value, property, this.themeCssVariablesChanges, this.baseThemeVariables);
       this.onThemePropertyChanged.fire(this, { name, value });
     } else if (property.type === "backgroundcornerradius") {
       backgroundCornerRadiusToCssVariable(value, property, this.themeCssVariablesChanges);
@@ -564,8 +564,7 @@ export class ThemeModel extends Base implements ITheme {
       });
 
       themeFontPropertyNames.forEach(propertyName => {
-        this[propertyName] = fontsettingsFromCssVariable(this.getPropertyByName(propertyName), json.cssVariables,
-          getFontSettingsDefaultsFromBaseTheme(propertyName, this.baseThemeVariables));
+        this[propertyName] = fontsettingsFromCssVariable(this.getPropertyByName(propertyName), json.cssVariables, this.baseThemeVariables);
       });
     }
   }
@@ -596,7 +595,7 @@ export class ThemeModel extends Base implements ITheme {
 
         const property = this.getPropertyByName(key);
         if (property.type === "font") {
-          fontsettingsToCssVariable(result[key], property, cssVariables, getFontSettingsDefaultsFromBaseTheme(key, this.baseThemeVariables));
+          fontsettingsToCssVariable(result[key], property, cssVariables, this.baseThemeVariables);
           delete result[key];
         }
         if (property.type === "backgroundcornerradius") {

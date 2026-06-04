@@ -1,6 +1,6 @@
 import { Base, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, Serializer, HorizontalAlignment, VerticalAlignment, property } from "survey-core";
 import { settings } from "../../creator-settings";
-import { fontsettingsFromCssVariable, fontsettingsToCssVariable, getFontSettingsDefaultsFromBaseTheme } from "./theme-custom-questions/font-settings";
+import { fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { assign } from "../../utils/utils";
 
 export class HeaderModel extends Base implements IHeader {
@@ -53,8 +53,7 @@ export class HeaderModel extends Base implements IHeader {
   public setCssVariables(cssVariables?: { [index: string]: string }) {
     if (cssVariables) {
       ["headerTitle", "headerDescription"].forEach(propertyName => {
-        this[propertyName] = fontsettingsFromCssVariable(this.getPropertyByName(propertyName), cssVariables,
-          getFontSettingsDefaultsFromBaseTheme(propertyName, this.baseThemeVariables));
+        this[propertyName] = fontsettingsFromCssVariable(this.getPropertyByName(propertyName), cssVariables, this.baseThemeVariables);
       });
     }
 
