@@ -3,14 +3,13 @@ import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
 
-import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
+import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable, getFontSettingsDefaultsFromBaseTheme, getThemeFontSettingsCssVarNames, themeFontPropertyNames } from "./theme-custom-questions/font-settings";
 import { backgroundCornerRadiusFromCssVariable, backgroundCornerRadiusToCssVariable } from "./theme-custom-questions/background-corner-radius";
 import { trimBoxShadowValue } from "survey-core";
 import { HeaderModel } from "./header-model";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../../utils/configs";
-import { assign, roundTo2Decimals } from "../../utils/utils";
+import { assign, roundTo2Decimals, calculateThemeVariables } from "../../utils/utils";
 import { ColorCalculator, getRGBaColor, ingectAlpha, parseColor } from "../../utils/color-utils";
-import { calculateThemeVariables } from "../../utils/utils";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import { SurveyCreatorModel } from "../../creator-base";
@@ -266,7 +265,7 @@ export class ThemeModel extends Base implements ITheme {
 
     let typeProcessed = true;
     if (property.type === "font") {
-      fontsettingsToCssVariable(value, property, this.themeCssVariablesChanges);
+      fontsettingsToCssVariable(value, property, this.themeCssVariablesChanges, getFontSettingsDefaultsFromBaseTheme(property.name, this.baseThemeVariables));
       this.onThemePropertyChanged.fire(this, { name, value });
     } else if (property.type === "backgroundcornerradius") {
       backgroundCornerRadiusToCssVariable(value, property, this.themeCssVariablesChanges);
@@ -308,7 +307,11 @@ export class ThemeModel extends Base implements ITheme {
 
   initialize(surveyTheme: ITheme = {}, survey?: SurveyModel, creator?: SurveyCreatorModel) {
     this.getRootElement = () => creator?.rootElement;
-    const vars = [...Serializer.getProperties("theme").map(p => p.name), ...HeaderModel.getDefaultVars()].filter(name => name.indexOf("--sjs2-") == 0);
+    const vars = [
+      ...Serializer.getProperties("theme").map(p => p.name),
+      ...HeaderModel.getDefaultVars(),
+      ...getThemeFontSettingsCssVarNames(),
+    ].filter(name => name.indexOf("--sjs2-") == 0);
     this.baseThemeVariables = calculateThemeVariables(DefaultLight.cssVariables, vars, this.getRootElement());
 
     this._defaultSessionTheme = ThemeModel.DefaultTheme;
@@ -555,17 +558,14 @@ export class ThemeModel extends Base implements ITheme {
         this.cornerRadius);
 
       Serializer.getProperties("theme").forEach(property => {
-        if (property.type === "font") {
+        if (property.type === "font" && themeFontPropertyNames.indexOf(property.name) < 0) {
           this[property.name] = fontsettingsFromCssVariable(property, json.cssVariables);
         }
       });
-      this["pageTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("pageTitle"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"] });
-      this["pageDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("pageDescription"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"] });
-      this["questionTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("questionTitle"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"] });
-      this["questionDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("questionDescription"), json.cssVariables, { color: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"] });
-      this["inputContent"] = fontsettingsFromCssVariable(this.getPropertyByName("inputContent"), json.cssVariables, {
-        color: completeThemeVariablesList["--sjs2-color-fg-basic-primary"],
-        placeholdercolor: completeThemeVariablesList["--sjs2-color-fg-basic-secondary"],
+
+      themeFontPropertyNames.forEach(propertyName => {
+        this[propertyName] = fontsettingsFromCssVariable(this.getPropertyByName(propertyName), json.cssVariables,
+          getFontSettingsDefaultsFromBaseTheme(propertyName, this.baseThemeVariables));
       });
     }
   }
@@ -596,7 +596,7 @@ export class ThemeModel extends Base implements ITheme {
 
         const property = this.getPropertyByName(key);
         if (property.type === "font") {
-          fontsettingsToCssVariable(result[key], property, cssVariables);
+          fontsettingsToCssVariable(result[key], property, cssVariables, getFontSettingsDefaultsFromBaseTheme(key, this.baseThemeVariables));
           delete result[key];
         }
         if (property.type === "backgroundcornerradius") {
@@ -829,19 +829,11 @@ Serializer.addProperties("theme",
   {
     type: "font",
     name: "pageTitle",
-    default: {
-      family: settings.themeEditor.defaultFontFamily,
-      weight: "700",
-      size: 24
-    },
+    default: {},
   }, {
     type: "font",
     name: "pageDescription",
-    default: {
-      family: settings.themeEditor.defaultFontFamily,
-      weight: "700",
-      size: 24
-    },
+    default: {},
   }, {
     type: "shadoweffects",
     name: "--sjs2-border-effect-surface-default",
@@ -851,19 +843,11 @@ Serializer.addProperties("theme",
   }, {
     type: "font",
     name: "questionTitle",
-    default: {
-      family: settings.themeEditor.defaultFontFamily,
-      weight: "600",
-      size: 16,
-    },
+    default: {},
   }, {
     type: "font",
     name: "questionDescription",
-    default: {
-      family: settings.themeEditor.defaultFontFamily,
-      weight: "400",
-      size: 16
-    },
+    default: {},
   },
   {
     type: "shadoweffects",
@@ -874,11 +858,7 @@ Serializer.addProperties("theme",
   }, {
     type: "font",
     name: "inputContent",
-    default: {
-      family: settings.themeEditor.defaultFontFamily,
-      weight: "400",
-      size: 16
-    },
+    default: {},
   }, {
     type: "coloralpha",
     name: "--sjs2-color-component-input-default-line",

@@ -113,7 +113,7 @@ export function getAcceptedTypesByContentMode(contentMode: string) {
   }
 }
 
-export function trimEmptyFields(object: { [index: string]: string }): void {
+export function trimEmptyFields(object: { [index: string]: any | undefined | null }): void {
   Object.keys(object).forEach(key => {
     if (object[key] === undefined || object[key] === null) {
       delete object[key];

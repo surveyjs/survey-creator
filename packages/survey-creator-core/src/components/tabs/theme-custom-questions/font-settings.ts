@@ -1,6 +1,7 @@
 import { Base, ComponentCollection, JsonObjectProperty, Question, QuestionCompositeModel, Serializer } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
-import { assign } from "../../../utils/utils";
+import { assign, trimEmptyFields } from "../../../utils/utils";
+import { settings } from "../../../creator-settings";
 
 export const DefaultFonts = [
   "Open Sans",
@@ -88,8 +89,6 @@ if (!ComponentCollection.Instance.getCustomQuestionByName("font")) {
       syncPropertiesFromComposite(question, propertyName, newValue);
     },
     onCreated(question) {
-      const color = question.contentPanel.getQuestionByName("color");
-      color.visible = question.name !== "surveyTitle" && question.name !== "surveyDescription";
       const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
       placeholderColor.visible = question.name === "inputContent";
 
@@ -134,9 +133,57 @@ export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectP
 export interface FontSettingsDefaults {
   family?: string;
   weight?: string;
-  size?: string;
+  size?: number;
   color?: string;
   placeholdercolor?: string;
+}
+
+export const themeFontPropertyNames: Array<string> = ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "inputContent"];
+
+export function getFontSettingsCssVarNames(propertyName: string): string[] {
+  const propertyNameDashed = propertyName.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+  const propertyNameColorDashed = propertyName.replace(/([a-z])([A-Z])/g, "$1-default-$2").toLowerCase();
+  const vars = [
+    `--sjs2-color-component-${propertyNameColorDashed}`,
+    `--sjs2-typography-font-family-component-${propertyNameDashed}`,
+    `--sjs2-typography-font-weight-component-${propertyNameDashed}`,
+    `--sjs2-typography-font-size-component-${propertyNameDashed}`,
+  ];
+  if (propertyName === "inputContent") {
+    vars.push("--sjs2-color-component-input-default-placeholder");
+  }
+  return vars;
+}
+
+export function getThemeFontSettingsCssVarNames(): string[] {
+  return [
+    "--sjs2-typography-font-family-text",
+    ...themeFontPropertyNames.flatMap(name => getFontSettingsCssVarNames(name)),
+  ];
+}
+
+export function getFontSettingsDefaultsFromBaseTheme(
+  propertyName: string,
+  baseThemeVariables: { [index: string]: string }
+): FontSettingsDefaults {
+  const propertyNameDashed = propertyName.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+  const propertyNameColorDashed = propertyName.replace(/([a-z])([A-Z])/g, "$1-default-$2").toLowerCase();
+  const sizeValue = baseThemeVariables[`--sjs2-typography-font-size-component-${propertyNameDashed}`];
+  const result: FontSettingsDefaults = {
+    color: baseThemeVariables[`--sjs2-color-component-${propertyNameColorDashed}`],
+    family: baseThemeVariables[`--sjs2-typography-font-family-component-${propertyNameDashed}`] || baseThemeVariables["--sjs2-typography-font-family-text"] || settings.themeEditor.defaultFontFamily,
+    weight: baseThemeVariables[`--sjs2-typography-font-weight-component-${propertyNameDashed}`],
+    size: sizeValue !== undefined ? parseFloat(sizeValue) : undefined,
+  };
+
+  if (propertyName === "inputContent") {
+    result.placeholdercolor = baseThemeVariables["--sjs2-color-component-input-default-placeholder"];
+  }
+  if (result.size !== undefined && Number.isNaN(result.size)) {
+    delete result.size;
+  }
+  trimEmptyFields(result);
+  return result;
 }
 
 export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaults?: FontSettingsDefaults): any {
