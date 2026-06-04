@@ -11,12 +11,12 @@ export interface ICreatorTheme extends ITheme {
 export const PredefinedCreatorThemes: string[] = ["default"];
 export const defaultCreatorThemesOrder = [
   "default",
-  "soft",
   "contrast",
   "borderless",
   "flat",
   "plain",
-  "3d",
+  "threedimensional",
+  "soft",
   "monochrome"
 ];
 
