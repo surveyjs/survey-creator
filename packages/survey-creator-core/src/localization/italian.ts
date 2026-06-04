@@ -1929,7 +1929,7 @@ export var italianTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Descrizione del carattere",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacità", // Auto-generated string
       // [Auto-translated] "Survey font family"

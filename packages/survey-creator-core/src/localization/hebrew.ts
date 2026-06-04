@@ -1929,7 +1929,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "גופן תיאור",
       // [Auto-translated] "Font"
-      editorFont: "גופן",
+      inputContent: "גופן",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "אטימות", // Auto-generated string
       // [Auto-translated] "Survey font family"

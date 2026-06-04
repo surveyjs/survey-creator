@@ -1929,7 +1929,7 @@ export var msStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Fon penerangan",
       // [Auto-translated] "Font"
-      editorFont: "Fon",
+      inputContent: "Fon",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Kelegapan", // Auto-generated string
       // [Auto-translated] "Survey font family"

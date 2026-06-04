@@ -1719,7 +1719,7 @@ export var mmStrings = {
       // "Description font"
       questionDescription: "မေးခွန်းဖော်ပြချက် font",
       // "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // "Opacity"
       backgroundOpacity: "Transparency" // Auto-generated string
     },

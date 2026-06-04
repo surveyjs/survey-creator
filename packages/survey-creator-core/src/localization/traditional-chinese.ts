@@ -1930,7 +1930,7 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "描述字體",
       // [Auto-translated] "Font"
-      editorFont: "字體",
+      inputContent: "字體",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明度", // Auto-generated string
       // [Auto-translated] "Survey font family"

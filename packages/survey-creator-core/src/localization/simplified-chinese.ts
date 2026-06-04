@@ -1929,7 +1929,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "描述字体",
       // [Auto-translated] "Font"
-      editorFont: "字体",
+      inputContent: "字体",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明度", // Auto-generated string
       // [Auto-translated] "Survey font family"

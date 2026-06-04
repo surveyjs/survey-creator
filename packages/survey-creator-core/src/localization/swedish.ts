@@ -1930,7 +1930,7 @@ export let svStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Beskrivning typsnitt",
       // [Auto-translated] "Font"
-      editorFont: "Teckensnitt",
+      inputContent: "Teckensnitt",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Ogenomskinlighet", // Auto-generated string
       // [Auto-translated] "Survey font family"

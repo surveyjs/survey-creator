@@ -1929,7 +1929,7 @@ export const thStrings = {
       // "Description font"
       questionDescription: "ฟอนต์คำอธิบายคำถาม",
       // "Font"
-      editorFont: "ฟอนต์",
+      inputContent: "ฟอนต์",
       // "Opacity"
       backgroundOpacity: "ความทึบ", // Auto-generated string
       // [Auto-translated] "Survey font family"

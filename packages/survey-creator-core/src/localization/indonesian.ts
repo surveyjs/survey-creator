@@ -1929,7 +1929,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Font deskripsi",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacity", // Auto-generated string
       // [Auto-translated] "Survey font family"

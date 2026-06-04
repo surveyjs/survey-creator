@@ -1929,7 +1929,7 @@ export var bgStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Шрифт за описание",
       // [Auto-translated] "Font"
-      editorFont: "Шрифт",
+      inputContent: "Шрифт",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Непрозрачност", // Auto-generated string
       // [Auto-translated] "Survey font family"

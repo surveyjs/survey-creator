@@ -1929,7 +1929,7 @@ export var slStrings = {
       // "Description font"
       questionDescription: "Pisava opisa vprašanja",
       // "Font"
-      editorFont: "Pisava",
+      inputContent: "Pisava",
       // "Opacity"
       backgroundOpacity: "Prosojnost", // Auto-generated string
       // [Auto-translated] "Survey font family"

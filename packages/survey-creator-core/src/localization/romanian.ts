@@ -1929,7 +1929,7 @@ export const roStrings = {
       // "Description font"
       questionDescription: "Font descriere",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // "Opacity"
       backgroundOpacity: "Opacitate", // Auto-generated string
       // [Auto-translated] "Survey font family"

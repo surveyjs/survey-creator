@@ -1929,7 +1929,7 @@ export var nbStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Beskrivelse skrift",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Ugjennomsiktighet", // Auto-generated string
       // [Auto-translated] "Survey font family"

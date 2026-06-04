@@ -1929,7 +1929,7 @@ export var arStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "وصف الخط",
       // [Auto-translated] "Font"
-      editorFont: "الخط",
+      inputContent: "الخط",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "العتامه", // Auto-generated string
       // [Auto-translated] "Survey font family"
