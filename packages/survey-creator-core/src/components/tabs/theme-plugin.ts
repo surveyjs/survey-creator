@@ -996,6 +996,7 @@ export function updateThemeEditorsDefaultFontFamily() {
   const getPropertyUpdater = className => propertyName => {
     const property = Serializer.getProperty(className, propertyName);
     if (property) {
+      if (!property.defaultValue) property.defaultValue = {};
       property.defaultValue.family = settings.themeEditor.defaultFontFamily;
     }
   };

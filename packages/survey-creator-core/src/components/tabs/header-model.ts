@@ -315,7 +315,6 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerTitle",
-    default: {},
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;
@@ -325,7 +324,6 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerDescription",
-    default: {},
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;

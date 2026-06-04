@@ -828,11 +828,9 @@ Serializer.addProperties("theme",
   {
     type: "font",
     name: "pageTitle",
-    default: {},
   }, {
     type: "font",
     name: "pageDescription",
-    default: {},
   }, {
     type: "shadoweffects",
     name: "--sjs2-border-effect-surface-default",
@@ -842,11 +840,9 @@ Serializer.addProperties("theme",
   }, {
     type: "font",
     name: "questionTitle",
-    default: {},
   }, {
     type: "font",
     name: "questionDescription",
-    default: {},
   },
   {
     type: "shadoweffects",
@@ -857,7 +853,6 @@ Serializer.addProperties("theme",
   }, {
     type: "font",
     name: "inputContent",
-    default: {},
   }, {
     type: "coloralpha",
     name: "--sjs2-color-component-input-default-line",
