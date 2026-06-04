@@ -119,6 +119,7 @@ const FONT_FAMILY_TEXT_VAR = "--sjs2-typography-font-family-text";
 const BASE_UNIT_FONT_SIZE_VAR = "--sjs2-base-unit-font-size";
 const LEGACY_FONT_SIZE_VAR = "--sjs-font-size";
 const INPUT_PLACEHOLDER_COLOR_VAR = "--sjs2-color-component-input-default-placeholder";
+const INPUT_VALUE_COLOR_VAR = "--sjs2-color-component-input-default-value";
 
 type FontSettingKey = "family" | "weight" | "size" | "color" | "placeholdercolor";
 
@@ -128,6 +129,9 @@ function toComponentName(propertyName: string, color = false): string {
 
 function getFontCssVarName(propertyName: string, key: FontSettingKey): string {
   if (key === "color") {
+    if (propertyName === "inputContent") {
+      return INPUT_VALUE_COLOR_VAR;
+    }
     return `--sjs2-color-component-${toComponentName(propertyName, true)}`;
   }
   return `--sjs2-typography-font-${key}-component-${toComponentName(propertyName)}`;
