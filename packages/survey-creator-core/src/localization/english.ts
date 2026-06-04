@@ -856,6 +856,8 @@ export var enStrings = {
     choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs",
     choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts",
     progressBarShowPageTitles: "Display page titles in the progress bar",
+    progressBarShowNavigationText: "Display navigation text in the progress bar",
+    progressBarNavigationTextLocation: "Navigation text alignment",
     progressBarShowPageNumbers: "Display page numbers in the progress bar",
     showCommentArea: "Add a comment box",
     commentPlaceholder: "Placeholder text for the comment box",

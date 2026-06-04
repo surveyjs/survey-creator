@@ -1432,8 +1432,6 @@ export const thStrings = {
     acceptedTypes: "ประเภทไฟล์ที่ยอมรับ",
     // "Wait for upload to complete"
     waitForUpload: "รอให้การอัปโหลดเสร็จสมบูรณ์",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "ยืนยันการลบไฟล์",
     // "Row details alignment"
     detailPanelMode: "การจัดตำแหน่งการขยายแถว",
     // "Minimum row count"
@@ -1566,7 +1564,9 @@ export const thStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "ความสูงของภาพ",
       // [Auto-translated] "Image width"
-      imageWidth: "ความกว้างของภาพ"
+      imageWidth: "ความกว้างของภาพ",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "ยืนยันการลบไฟล์"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "ซ่อนคำถามหากไม่มีตัวเลือก",
@@ -1624,6 +1624,10 @@ export const thStrings = {
     choiceTextsFromQuestion: "ใช้ค่าจากคอลัมน์เมทริกซ์หรือคําถามแผงต่อไปนี้เป็นข้อความตัวเลือก",
     // "Display page titles in the progress bar"
     progressBarShowPageTitles: "แสดงชื่อหน้าในแถบความคืบหน้า",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "แสดงข้อความนําทางในแถบความคืบหน้า",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "การจัดตําแหน่งข้อความการนําทาง",
     // "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "แสดงหมายเลขหน้าในแถบความคืบหน้า",
     // "Add a comment box"
@@ -1928,22 +1932,22 @@ export const thStrings = {
       editorFont: "ฟอนต์",
       // "Opacity"
       backgroundOpacity: "ความทึบ", // Auto-generated string
-      // "Survey font family"
-      "--sjs-font-family": "ฟอนต์แบบสำรวจ",
-      // "Background color"
-      "--sjs-general-backcolor-dim": "สีพื้นหลัง",
-      // "Accent background colors"
-      "--sjs-primary-backcolor": "สีพื้นหลังเน้น",
-      // "Accent foreground colors"
-      "--sjs-primary-forecolor": "สีเน้นพื้นหน้า",
-      // "Error message colors"
-      "--sjs-special-red": "สีข้อความข้อผิดพลาด",
-      // "Shadow effects"
-      "--sjs-shadow-small": "เอฟเฟกต์เงา",
-      // "Shadow effects"
-      "--sjs-shadow-inner": "เอฟเฟกต์เงา",
-      // "Colors"
-      "--sjs-border-default": "สี"
+      // [Auto-translated] "Survey font family"
+      "--sjs2-typography-font-family-text": "ตระกูลฟอนต์แบบสํารวจ",
+      // [Auto-translated] "Background color"
+      "--sjs2-color-utility-surface-survey": "สีพื้นหลัง",
+      // [Auto-translated] "Accent background colors"
+      "--sjs2-color-project-brand-600": "สีพื้นหลังเน้นเสียง",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs2-color-fg-brand-on-primary": "เน้นสีพื้นหน้า",
+      // [Auto-translated] "Error message colors"
+      "--sjs2-color-bg-alert-primary": "สีของข้อความแสดงข้อผิดพลาด",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-surface-default": "เอฟเฟกต์เงา",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-component-formbox-default": "เอฟเฟกต์เงา",
+      // [Auto-translated] "Colors"
+      "--sjs2-color-component-input-default-line": "สี"
     },
     "header@header": {
       // "View"
@@ -2891,7 +2895,9 @@ export const thStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "ระบุความกว้างที่แสดงของภาพที่อัปโหลดในการแสดงตัวอย่างและความกว้างจริงของภาพที่ถ่ายด้วยกล้อง ในโหมดอัปโหลดไฟล์เดียว ความกว้างของการแสดงผลจะถูกจํากัดโดยพื้นที่แสดงตัวอย่าง ในโหมดอัปโหลดไฟล์หลายไฟล์ จะถูกจํากัดด้วยพื้นที่ภาพขนาดย่อ",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน"
+      allowImagesPreview: "แสดงตัวอย่างภาพขนาดย่อสําหรับไฟล์ที่อัปโหลดเมื่อเป็นไปได้ ยกเลิกการเลือกหากคุณต้องการแสดงไอคอนไฟล์แทน",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "ทริกเกอร์ข้อความแจ้งเพื่อขอให้ยืนยันการลบไฟล์"
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3172,6 @@ export const thStrings = {
     valueFalse: "ค่าที่จะบันทึกในผลลัพธ์แบบสำรวจเมื่อผู้ตอบให้คำตอบที่ลบ",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "ไม่แนะนำให้คุณปิดใช้งานตัวเลือกนี้เนื่องจากจะยกเลิกการพรีวิวภาพและทำให้ผู้ใช้เข้าใจได้ยากว่าไฟล์ได้ถูกอัปโหลดหรือไม่",
-    // "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "เรียกใช้งานพร้อมท์เพื่อยืนยันการลบไฟล์",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "เปิดใช้งานเพื่อจัดอันดับเฉพาะตัวเลือกที่เลือก ผู้ใช้จะลากรายการที่เลือกจากรายการตัวเลือกเพื่อจัดลำดับในพื้นที่จัดอันดับ",
     // "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3255,8 @@ export const thStrings = {
       questionBackgroundTransparency: "ปรับความโปร่งใสขององค์ประกอบป้อนข้อมูลเมื่อเทียบกับพื้นหลังแบบสำรวจ",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "ตั้งรัศมีมุมสำหรับองค์ประกอบสี่เหลี่ยมทั้งหมด เปิดโหมดขั้นสูงถ้าคุณต้องการตั้งค่ารัศมีมุมแต่ละมุมสำหรับองค์ประกอบป้อนข้อมูลหรือแผงและกล่องคำถาม",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "ตั้งค่าสีพื้นหลังหลักของแบบสำรวจ"
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "ตั้งค่าสีพื้นหลังหลักของแบบสํารวจ"
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3558,20 @@ export const thStrings = {
     names: {
       // "Default"
       default: "ค่าเริ่มต้น",
-      // "Sharp"
-      sharp: "คม",
+      // "Contrast"
+      contrast: "คอนทราสต์",
       // "Borderless"
       borderless: "ไม่มีขอบ",
       // "Flat"
       flat: "แบน",
       // "Plain"
       plain: "ธรรมดา",
-      // "Double Border"
-      doubleborder: "ขอบสองชั้น",
-      // "Layered"
-      layered: "มีชั้น",
-      // "Solid"
-      solid: "ทึบ",
+      // [Auto-translated] "Soft"
+      soft: "นุ่มนวล",
       // "3D"
       threedimensional: "3 มิติ",
-      // "Contrast"
-      contrast: "คอนทราสต์"
+      // [Auto-translated] "Monochrome"
+      monochrome: "ขาวดํา"
     },
     colors: {
       // "Teal"
@@ -3606,14 +3606,7 @@ export const thStrings = {
     // [Auto-translated] "Font"
     fontScale: "แบบอักษร",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "ผู้สร้างแบบสํารวจ 2020",
-      // [Auto-translated] "Light"
-      "default-light": "แสง",
-      // [Auto-translated] "Dark"
-      "default-dark": "มืด",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "ความแตกต่าง"
+
     }
   },
   preset: {

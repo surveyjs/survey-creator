@@ -62,7 +62,7 @@ const backgroundCornerRadiusSjs2VarNames: Record<string, Record<string, string>>
     hovercolor: "--sjs2-color-component-check-false-hovered-bg",
   },
   questionpanel: {
-    cornerRadius: "--sjs2-radius-container-panel",
+    cornerRadius: "--sjs2-radius-component-panel",
     backcolor: "--sjs2-color-component-panel-default-bg",
     hovercolor: "--sjs2-color-unknown-variable-001",
   },

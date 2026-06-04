@@ -1432,8 +1432,6 @@ export var jaStrings = {
     acceptedTypes: "追加のファイル拡張子",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "アップロードが完了するまで待ちます",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "ファイルの削除を確認する",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "行の詳細の配置",
     // [Auto-translated] "Minimum row count"
@@ -1566,7 +1564,9 @@ export var jaStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "画像の高さ",
       // [Auto-translated] "Image width"
-      imageWidth: "画像幅"
+      imageWidth: "画像幅",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "ファイル削除確認"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "選択肢がない場合は質問を非表示にする",
@@ -1624,6 +1624,10 @@ export var jaStrings = {
     choiceTextsFromQuestion: "次の行列の列またはパネルの質問の値を選択テキストとして使用します",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "進行状況バーにページタイトルを表示する",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "進行バーにナビゲーションテキストを表示します",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "ナビゲーションテキストのアラインメント",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "進行状況バーにページ番号を表示する",
     // [Auto-translated] "Add a comment box"
@@ -1929,21 +1933,21 @@ export var jaStrings = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "調査フォント ファミリ",
+      "--sjs2-typography-font-family-text": "サーベイフォントファミリー",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "背景色",
+      "--sjs2-color-utility-surface-survey": "背景色",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "アクセントの背景色",
+      "--sjs2-color-project-brand-600": "アクセントの背景色",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "前景色のアクセント",
+      "--sjs2-color-fg-brand-on-primary": "アクセントの前景色",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "エラーメッセージの色",
+      "--sjs2-color-bg-alert-primary": "エラーメッセージの色",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "影の効果",
+      "--sjs2-border-effect-surface-default": "影効果",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "影の効果",
+      "--sjs2-border-effect-component-formbox-default": "影効果",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "色"
+      "--sjs2-color-component-input-default-line": "カラー"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2891,7 +2895,9 @@ export var jaStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "プレビューでアップロードした画像の表示幅と、カメラで撮影した画像の実際の幅を指定します。単一ファイルのアップロード モードでは、表示幅はプレビュー領域によって制限されます。複数ファイルのアップロードモードでは、サムネイル領域によって制限されます。",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。"
+      allowImagesPreview: "可能な場合は、アップロードされたファイルのサムネイル プレビューを表示します。代わりにファイルアイコンを表示する場合は、選択を解除します。",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "ファイル削除確認を求めるプロンプトが発生します。"
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3166,8 +3172,6 @@ export var jaStrings = {
     valueFalse: "回答者が否定的な回答をした場合にアンケート結果に保存する値。",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "このオプションはプレビュー画像を上書きし、ファイルがアップロードされたかどうかをユーザーが理解しにくくなるため、無効にすることはお勧めしません。",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "ファイルの削除を確認するプロンプトを表示します。",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "選択した選択肢のみをランク付けできるようにします。ユーザーは、選択した項目を選択リストからドラッグして、ランキング領域内で並べ替えます。",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3251,8 +3255,8 @@ export var jaStrings = {
       questionBackgroundTransparency: "調査の背景に対する入力エレメントの透過表示を調整します。",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "すべての長方形要素のコーナー半径を設定します。詳細モードを有効にするのは、入力要素またはパネルと質問ボックスに個々のコーナー半径値を設定する場合です。",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "調査のメインの背景色を設定します。"
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "調査のメイン背景色を設定します。"
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3554,24 +3558,20 @@ export var jaStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "デフォルト",
-      // [Auto-translated] "Sharp"
-      sharp: "鋭い",
+      // [Auto-translated] "Contrast"
+      contrast: "対照",
       // [Auto-translated] "Borderless"
       borderless: "ボーダレス",
       // [Auto-translated] "Flat"
       flat: "平",
       // [Auto-translated] "Plain"
       plain: "平地",
-      // [Auto-translated] "Double Border"
-      doubleborder: "二重ボーダー",
-      // [Auto-translated] "Layered"
-      layered: "層状",
-      // [Auto-translated] "Solid"
-      solid: "固体",
+      // [Auto-translated] "Soft"
+      soft: "柔らかい",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "対照"
+      // [Auto-translated] "Monochrome"
+      monochrome: "モノクロ"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3606,14 +3606,7 @@ export var jaStrings = {
     // [Auto-translated] "Font"
     fontScale: "フォント",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "サーベイクリエーター2020",
-      // [Auto-translated] "Light"
-      "default-light": "光",
-      // [Auto-translated] "Dark"
-      "default-dark": "暗い",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "対照"
+
     }
   },
   preset: {

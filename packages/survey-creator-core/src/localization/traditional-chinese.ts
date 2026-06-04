@@ -1433,8 +1433,6 @@ export var traditionalChineseTranslation = {
     acceptedTypes: "額外檔案副檔名",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "等待上傳完成",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "確認文件刪除",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "行詳細資訊對齊方式",
     // [Auto-translated] "Minimum row count"
@@ -1567,7 +1565,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Image height"
       imageHeight: "圖像高度",
       // [Auto-translated] "Image width"
-      imageWidth: "圖像寬度"
+      imageWidth: "圖像寬度",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "確認檔案刪除"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "如果沒有選擇，則隱藏問題",
@@ -1625,6 +1625,10 @@ export var traditionalChineseTranslation = {
     choiceTextsFromQuestion: "使用以下矩陣、列或面板問題中的值作為選擇文本",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "在進度條中顯示頁面標題",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "在進度列中顯示導航文字",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "導覽文字對齊",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "在進度條中顯示頁碼",
     // [Auto-translated] "Add a comment box"
@@ -1930,21 +1934,21 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明度", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "調查字體系列",
+      "--sjs2-typography-font-family-text": "調查字體家族",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "背景顏色",
+      "--sjs2-color-utility-surface-survey": "背景色",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "強調背景色",
+      "--sjs2-color-project-brand-600": "點綴背景色",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "強調前景色",
+      "--sjs2-color-fg-brand-on-primary": "強調前景色",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "錯誤訊息顏色",
+      "--sjs2-color-bg-alert-primary": "錯誤訊息顏色",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "陰影效果",
+      "--sjs2-border-effect-surface-default": "陰影效應",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "陰影效果",
+      "--sjs2-border-effect-component-formbox-default": "陰影效應",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "顏色"
+      "--sjs2-color-component-input-default-line": "顏色"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -2892,7 +2896,9 @@ export var traditionalChineseTranslation = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "指定預覽中上傳圖像的顯示寬度以及使用相機拍攝的圖像的實際寬度。在單個檔上傳模式下，顯示寬度受預覽區域限制;在多檔上傳模式下，它受縮圖區域限制。",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。"
+      allowImagesPreview: "儘可能顯示已上傳檔的縮圖預覽。取消選擇是否要顯示檔圖示。",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "會觸發一個提示，要求確認檔案刪除。"
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -3167,8 +3173,6 @@ export var traditionalChineseTranslation = {
     valueFalse: "當受訪者給出否定答案時保存在調查結果中的值。",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "不建議禁用此選項，因為它會覆蓋預覽圖像，並使用戶難以了解檔是否已上傳。",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "觸發提示，要求確認文件刪除。",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "啟用此選項可僅對選定的選項進行排名。使用者將從選項清單中拖動所選專案，以在排名區域內對它們進行排序。",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -3252,8 +3256,8 @@ export var traditionalChineseTranslation = {
       questionBackgroundTransparency: "調整輸入元素相對於調查背景的透明度。",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "設置所有矩形元素的圓角半徑。如果要為輸入元素或面板和問題框設置單獨的角半徑值，請啟用高級模式。",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "設置調查的主要背景顏色。"
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "設定調查的主要背景色。"
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3555,24 +3559,20 @@ export var traditionalChineseTranslation = {
     names: {
       // [Auto-translated] "Default"
       default: "違約",
-      // [Auto-translated] "Sharp"
-      sharp: "鋒利",
+      // [Auto-translated] "Contrast"
+      contrast: "反差",
       // [Auto-translated] "Borderless"
       borderless: "無國界",
       // [Auto-translated] "Flat"
       flat: "平",
       // [Auto-translated] "Plain"
       plain: "平原",
-      // [Auto-translated] "Double Border"
-      doubleborder: "雙邊框",
-      // [Auto-translated] "Layered"
-      layered: "分層的",
-      // [Auto-translated] "Solid"
-      solid: "固體",
+      // [Auto-translated] "Soft"
+      soft: "柔和",
       // [Auto-translated] "3D"
       threedimensional: "。.3D",
-      // [Auto-translated] "Contrast"
-      contrast: "反差"
+      // [Auto-translated] "Monochrome"
+      monochrome: "單色"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3607,14 +3607,7 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "Font"
     fontScale: "字體",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "調查建立者 2020",
-      // [Auto-translated] "Light"
-      "default-light": "光",
-      // [Auto-translated] "Dark"
-      "default-dark": "黑暗",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "反差"
+
     }
   },
   preset: {

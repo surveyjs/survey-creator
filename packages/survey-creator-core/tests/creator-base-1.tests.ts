@@ -2159,6 +2159,21 @@ test("Show survey in property grid on deleting last page", (): any => {
   creator.deleteCurrentElement();
   expect(creator.selectedElementName).toEqual("survey");
 });
+test("deleteCurrentElement should not crash when survey is selected, Bug#7724", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  creator.selectElement(creator.survey.pages[0]);
+  creator.deleteCurrentElement();
+  creator.deleteCurrentElement();
+  expect(creator.selectedElementName).toEqual("survey");
+  creator.deleteCurrentElement();
+  expect(creator.selectedElementName).toEqual("survey");
+});
 test("Test TabDesignerViewModel.pageCount - reactive", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -4892,4 +4907,59 @@ test("Check the placeholders of the survey items if isMobileView is true", (): a
   expect(pageModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the page.");
   expect(panelModelAdorner.placeholderText).toBe("Click the \"Add Question\" button below to add a new element to the panel.");
   expect(imageQuestionModelAdorner.placeholderText).toBe("Click the button below and choose an image to upload");
+});
+
+test("bypage mode - delete questions one by one from last page, Bug#7758", (): any => {
+  const creator = new CreatorTester({ pageEditMode: "bypage" });
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "rating", name: "nps-score" },
+          { type: "comment", name: "improvements-required" }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          { type: "boolean", name: "rebuy" }
+        ]
+      },
+      {
+        name: "page3",
+        elements: [
+          { type: "radiogroup", name: "testimonial", choices: ["yes", "no"] },
+          { type: "text", name: "email", visibleIf: "{testimonial} = 'yes'" }
+        ]
+      }
+    ]
+  };
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const pagesController = desigerTab.pagesController;
+
+  const page3 = creator.survey.pages[2];
+  pagesController.currentPage = page3;
+  creator.selectElement(page3);
+
+  expect(creator.survey.pages).toHaveLength(3);
+  expect(creator.survey.currentPage.name).toBe("page3");
+
+  const testimonial = creator.survey.getQuestionByName("testimonial");
+  creator.selectElement(testimonial);
+  creator.deleteElement(testimonial);
+
+  expect(creator.survey.pages).toHaveLength(3);
+  expect(creator.selectedElementName).toBe("email");
+
+  const email = creator.survey.getQuestionByName("email");
+  creator.selectElement(email);
+  creator.deleteElement(email);
+
+  // In bypage mode the page should stay visible but empty, not auto-deleted
+  expect(creator.survey.pages).toHaveLength(3);
+  expect(creator.survey.pages[2].name).toBe("page3");
+  expect(creator.survey.pages[2].elements).toHaveLength(0);
+  expect(creator.selectedElementName).toBe("page3");
+  expect(creator.survey.currentPage.name).toBe("page3");
 });

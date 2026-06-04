@@ -3386,7 +3386,7 @@ export class SurveyCreatorModel extends Base
   }
   @undoRedoTransaction()
   protected deleteObject(obj: any) {
-    if (!obj || obj.isDisposed) return;
+    if (!obj || obj.isDisposed || obj.isSurvey) return;
     const allowedOperations = this.getElementAllowOperations(obj);
     if (!allowedOperations.allowDelete) return;
     if (!this.checkOnElementDeleting(obj)) return;
@@ -3886,6 +3886,7 @@ export class SurveyCreatorModel extends Base
   protected deletePanelOrQuestion(obj: Base): void {
     const changeSelection = obj === this.selectedElement;
     var parent = obj["parent"];
+    if (!parent) return;
     const elements = parent.elements;
     var objIndex = elements.indexOf(obj);
     if (objIndex == elements.length - 1) {
@@ -3895,7 +3896,7 @@ export class SurveyCreatorModel extends Base
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
     obj["delete"](false);
-    if (parent.isPage && (this.pageEditMode === "single" || elements.length === 0)) {
+    if (parent.isPage && (this.pageEditMode === "single" || (elements.length === 0 && this.pageEditMode !== "bypage"))) {
       parent = this.survey;
     }
     if (changeSelection) {
