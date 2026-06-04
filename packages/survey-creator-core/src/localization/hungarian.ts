@@ -1929,7 +1929,7 @@ export var huStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Leírás betűtípus",
       // [Auto-translated] "Font"
-      editorFont: "Betűkészlet",
+      inputContent: "Betűkészlet",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Átlátszatlanság", // Auto-generated string
       // [Auto-translated] "Survey font family"

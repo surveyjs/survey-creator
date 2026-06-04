@@ -1930,7 +1930,7 @@ export var koreanStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "설명 글꼴",
       // [Auto-translated] "Font"
-      editorFont: "글꼴",
+      inputContent: "글꼴",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "불투명도", // Auto-generated string
       // [Auto-translated] "Survey font family"

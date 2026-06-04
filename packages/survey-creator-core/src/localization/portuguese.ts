@@ -1929,7 +1929,7 @@ export var portugueseTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Fonte da descrição",
       // [Auto-translated] "Font"
-      editorFont: "Fonte",
+      inputContent: "Fonte",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacidade", // Auto-generated string
       // [Auto-translated] "Survey font family"

@@ -1016,7 +1016,7 @@ export var enStrings = {
       pageDescription: "Description font",
       questionTitle: "Title font",
       questionDescription: "Description font",
-      editorFont: "Font",
+      inputContent: "Font",
       backgroundOpacity: "Opacity", // Auto-generated string
       "--sjs2-typography-font-family-text": "Survey font family",
       "--sjs2-color-utility-surface-survey": "Background color",

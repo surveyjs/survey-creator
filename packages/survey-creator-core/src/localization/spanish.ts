@@ -1929,7 +1929,7 @@ export var spanishTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Descripción fuente",
       // [Auto-translated] "Font"
-      editorFont: "Fuente",
+      inputContent: "Fuente",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacidad", // Auto-generated string
       // [Auto-translated] "Survey font family"

@@ -85,8 +85,8 @@ test("set headerViewContainer basic", (): any => {
   expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-description"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-description"]).toBeUndefined();
 
-  header["surveyTitle"] = { family: "Courier New", weight: "400", size: 41 };
-  header["surveyDescription"] = { family: "Trebuchet MS", weight: "800", size: 21 };
+  header.headerTitle = { family: "Courier New", weight: "400", size: 41 };
+  header.headerDescription = { family: "Trebuchet MS", weight: "800", size: 21 };
   header["logoPosition"] = "right";
 
   currentThemeCssVariables = themeModel.cssVariables;
@@ -134,8 +134,8 @@ test("set headerViewContainer advanced", (): any => {
   header.descriptionPositionX = "center";
   header.descriptionPositionY = "middle";
 
-  header["headerTitle"] = { color: "#FBFF24", weight: "400", size: 39, family: "Georgia" };
-  header["headerDescription"] = { color: "rgba(50, 16, 218, 0.45)", weight: "800", size: 19, family: "Verdana" };
+  header.headerTitle = { color: "#FBFF24", weight: "400", size: 39, family: "Georgia" };
+  header.headerDescription = { color: "rgba(50, 16, 218, 0.45)", weight: "800", size: 19, family: "Verdana" };
 
   const result = themeModel.toJSON();
   expect(result.header).toStrictEqual({
@@ -177,8 +177,8 @@ test("headerViewContainer survey title & description", (): any => {
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-description"]).toBeUndefined();
 
   header["headerView"] = "advanced";
-  header["headerTitle"] = { family: settings.themeEditor.defaultFontFamily, weight: "700", size: 32, color: "rgba(255, 255, 255, 1)" };
-  header["headerDescription"] = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16, color: "rgba(255, 255, 255, 1)" };
+  header.headerTitle = { family: settings.themeEditor.defaultFontFamily, weight: "700", size: 32, color: "rgba(255, 255, 255, 1)" };
+  header.headerDescription = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16, color: "rgba(255, 255, 255, 1)" };
 
   currentThemeCssVariables = themeModel.cssVariables || {};
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBe("rgba(255, 255, 255, 1)");

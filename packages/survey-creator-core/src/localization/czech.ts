@@ -1929,7 +1929,7 @@ export var czStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Popisné písmo",
       // [Auto-translated] "Font"
-      editorFont: "Písmo",
+      inputContent: "Písmo",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Neprůhlednost", // Auto-generated string
       // [Auto-translated] "Survey font family"

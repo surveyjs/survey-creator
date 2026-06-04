@@ -738,7 +738,7 @@ test("Check Theme builder's custom questions respect creator locale", (): any =>
   expect(propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600").contentPanel.getQuestionByName("opacity").title).toBe("opacity_test");
   expect(propertyGridSurvey.getQuestionByName("--sjs2-border-effect-surface-default").contentQuestion.panels[0].getQuestionByName("x").title).toBe("boxShadowX_test");
   expect(propertyGridSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").colorTitle).toBe("backcolor_test");
-  expect(propertyGridSurvey.getQuestionByName("editorFont").contentPanel.getQuestionByName("family").title).toBe("fontFamily_test");
+  expect(propertyGridSurvey.getQuestionByName("inputContent").contentPanel.getQuestionByName("family").title).toBe("fontFamily_test");
   editorLocalization.currentLocale = "en";
 });
 

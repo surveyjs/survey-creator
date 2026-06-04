@@ -1929,7 +1929,7 @@ export var mnStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Тайлбар фонт",
       // [Auto-translated] "Font"
-      editorFont: "Фонт",
+      inputContent: "Фонт",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Бүдүүлэг байдал", // Auto-generated string
       // [Auto-translated] "Survey font family"

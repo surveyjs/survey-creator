@@ -1929,7 +1929,7 @@ export var nlStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Beschrijving lettertype",
       // [Auto-translated] "Font"
-      editorFont: "Lettertype",
+      inputContent: "Lettertype",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Dekking", // Auto-generated string
       // [Auto-translated] "Survey font family"

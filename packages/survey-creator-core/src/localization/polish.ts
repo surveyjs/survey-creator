@@ -1930,7 +1930,7 @@ export var polishStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Czcionka opisu",
       // [Auto-translated] "Font"
-      editorFont: "Czcionka",
+      inputContent: "Czcionka",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Nieprzezroczystość", // Auto-generated string
       // [Auto-translated] "Survey font family"

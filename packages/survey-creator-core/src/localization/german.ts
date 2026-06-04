@@ -1929,7 +1929,7 @@ export var germanTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Beschreibung Schriftart",
       // [Auto-translated] "Font"
-      editorFont: "Schriftart",
+      inputContent: "Schriftart",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Undurchsichtigkeit", // Auto-generated string
       // [Auto-translated] "Survey font family"

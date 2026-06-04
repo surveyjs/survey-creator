@@ -1929,7 +1929,7 @@ export var jaStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "説明フォント",
       // [Auto-translated] "Font"
-      editorFont: "フォント",
+      inputContent: "フォント",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明", // Auto-generated string
       // [Auto-translated] "Survey font family"

@@ -1929,7 +1929,7 @@ export var grStrings = {
       // "Description font"
       questionDescription: "Γραμματοσειρά περιγραφής ερώτησης",
       // "Font"
-      editorFont: "Γραμματοσειρά επεξεργαστή",
+      inputContent: "Γραμματοσειρά επεξεργαστή",
       // "Opacity"
       backgroundOpacity: "Διαφάνεια", // Auto-generated string
       // [Auto-translated] "Survey font family"

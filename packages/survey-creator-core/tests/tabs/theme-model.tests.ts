@@ -11,7 +11,7 @@ import { ThemeModel, getThemeChanges } from "../../src/components/tabs/theme-mod
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
-import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
@@ -78,6 +78,7 @@ const themeFromFile = {
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
   mockGetRGBaColorIdentity();
+  mockDomWindowGetComputedStyleFromInlineStyles();
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
@@ -87,6 +88,7 @@ beforeEach(() => {
 
 afterEach(() => {
   restoreGetRGBaColorMock();
+  (DomWindowHelper.getWindow as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
 

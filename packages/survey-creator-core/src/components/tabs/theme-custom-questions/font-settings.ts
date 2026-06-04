@@ -1,6 +1,7 @@
 import { Base, ComponentCollection, JsonObjectProperty, Question, QuestionCompositeModel, Serializer } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
-import { assign } from "../../../utils/utils";
+import { assign, trimEmptyFields } from "../../../utils/utils";
+import { settings } from "../../../creator-settings";
 
 export const DefaultFonts = [
   "Open Sans",
@@ -88,10 +89,8 @@ if (!ComponentCollection.Instance.getCustomQuestionByName("font")) {
       syncPropertiesFromComposite(question, propertyName, newValue);
     },
     onCreated(question) {
-      const color = question.contentPanel.getQuestionByName("color");
-      color.visible = question.name !== "surveyTitle" && question.name !== "surveyDescription";
       const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
-      placeholderColor.visible = question.name === "editorFont";
+      placeholderColor.visible = question.name === "inputContent";
 
       const family = question.contentPanel.getQuestionByName("family");
       family.choices = [].concat(DefaultFonts);
@@ -116,12 +115,31 @@ export function updateFontSettingsJSON() {
   config.json.elementsJSON = getElementsJSON();
 }
 
-export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultValues?: any) {
+const FONT_FAMILY_TEXT_VAR = "--sjs2-typography-font-family-text";
+const BASE_UNIT_FONT_SIZE_VAR = "--sjs2-base-unit-font-size";
+const LEGACY_FONT_SIZE_VAR = "--sjs-font-size";
+const INPUT_PLACEHOLDER_COLOR_VAR = "--sjs2-color-component-input-default-placeholder";
+const INPUT_VALUE_COLOR_VAR = "--sjs2-color-component-input-default-value";
+
+type FontSettingKey = "family" | "weight" | "size" | "color" | "placeholdercolor";
+
+function toComponentName(propertyName: string, color = false): string {
+  return propertyName.replace(/([a-z])([A-Z])/g, color ? "$1-default-$2" : "$1-$2").toLowerCase();
+}
+
+function getFontCssVarName(propertyName: string, key: FontSettingKey): string {
+  if (key === "color") {
+    if (propertyName === "inputContent") {
+      return INPUT_VALUE_COLOR_VAR;
+    }
+    return `--sjs2-color-component-${toComponentName(propertyName, true)}`;
+  }
+  return `--sjs2-typography-font-${key}-component-${toComponentName(propertyName)}`;
+}
+
+export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaultValues?: { [index: string]: string }) {
   Object.keys(value).forEach(key => {
-    const propertyNameDashed = property.name.replace(/([a-z])([A-Z])/g, key === "color" ? "$1-default-$2" : "$1-$2").toLowerCase();
-    const cssVarName = key === "color"
-      ? `--sjs2-color-component-${propertyNameDashed}`
-      : `--sjs2-typography-font-${key}-component-${propertyNameDashed}`;
+    const cssVarName = getFontCssVarName(property.name, key as FontSettingKey);
     const defaultValue = defaultValues?.[key] ?? property.defaultValue?.[key];
     if ((!defaultValue || value[key] !== defaultValue) && value[key] !== undefined) {
       themeCssVariables[cssVarName] = value[key] + (key === "size" ? "px" : "");
@@ -134,24 +152,67 @@ export function fontsettingsToCssVariable(value: any = {}, property: JsonObjectP
 export interface FontSettingsDefaults {
   family?: string;
   weight?: string;
-  size?: string;
+  size?: number;
   color?: string;
   placeholdercolor?: string;
 }
 
-export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, defaults?: FontSettingsDefaults): any {
+export const themeFontPropertyNames: Array<string> = ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "inputContent"];
+
+export function getFontSettingsCssVarNames(propertyName: string): string[] {
+  const vars = [
+    getFontCssVarName(propertyName, "color"),
+    getFontCssVarName(propertyName, "family"),
+    getFontCssVarName(propertyName, "weight"),
+    getFontCssVarName(propertyName, "size"),
+  ];
+  if (propertyName === "inputContent") {
+    vars.push(INPUT_PLACEHOLDER_COLOR_VAR);
+  }
+  return vars;
+}
+
+export function getThemeFontSettingsCssVarNames(): string[] {
+  return [
+    FONT_FAMILY_TEXT_VAR,
+    ...themeFontPropertyNames.flatMap(name => getFontSettingsCssVarNames(name)),
+  ];
+}
+
+export function getFontSettingsDefaultsFromBaseTheme(
+  propertyName: string,
+  baseThemeVariables: { [index: string]: string }
+): FontSettingsDefaults {
+  const sizeValue = baseThemeVariables[getFontCssVarName(propertyName, "size")];
+  const result: FontSettingsDefaults = {
+    color: baseThemeVariables[getFontCssVarName(propertyName, "color")],
+    family: baseThemeVariables[getFontCssVarName(propertyName, "family")] || baseThemeVariables[FONT_FAMILY_TEXT_VAR] || settings.themeEditor.defaultFontFamily,
+    weight: baseThemeVariables[getFontCssVarName(propertyName, "weight")],
+    size: sizeValue !== undefined ? parseFloat(sizeValue) : undefined,
+  };
+
+  if (propertyName === "inputContent") {
+    result.placeholdercolor = baseThemeVariables[INPUT_PLACEHOLDER_COLOR_VAR];
+  }
+  if (result.size !== undefined && Number.isNaN(result.size)) {
+    delete result.size;
+  }
+  trimEmptyFields(result);
+  return result;
+}
+
+export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeCssVariables: { [index: string]: string }, baseThemeVariables?: { [index: string]: string }): any {
   if (!property) return;
 
-  const propertyNameDashed = property.name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
-  const propertyNameColorDashed = property.name.replace(/([a-z])([A-Z])/g, "$1-default-$2").toLowerCase();
-
-  const varNames: { [key: string]: string } = {
-    family: `--sjs2-typography-font-family-component-${propertyNameDashed}`,
-    weight: `--sjs2-typography-font-weight-component-${propertyNameDashed}`,
-    size: `--sjs2-typography-font-size-component-${propertyNameDashed}`,
-    placeholdercolor: `--sjs2-typography-font-placeholdercolor-component-${propertyNameDashed}`,
-    color: `--sjs2-color-component-${propertyNameColorDashed}`,
+  const varNames: { [key in FontSettingKey]: string } = {
+    family: getFontCssVarName(property.name, "family"),
+    weight: getFontCssVarName(property.name, "weight"),
+    size: getFontCssVarName(property.name, "size"),
+    placeholdercolor: getFontCssVarName(property.name, "placeholdercolor"),
+    color: getFontCssVarName(property.name, "color"),
   };
+
+  const defaults = baseThemeVariables ? getFontSettingsDefaultsFromBaseTheme(property.name, baseThemeVariables) : undefined;
 
   if (!property.defaultValue) property.defaultValue = {};
   if (defaults) {
@@ -161,7 +222,7 @@ export function fontsettingsFromCssVariable(property: JsonObjectProperty, themeC
     property.defaultValue["size"] = parseFloat(property.defaultValue["size"]);
   }
   if (property.defaultValue["size"] === undefined || Number.isNaN(property.defaultValue["size"])) {
-    const baseFontSize = themeCssVariables[varNames.size] ?? themeCssVariables["--sjs2-base-unit-font-size"] ?? themeCssVariables["--sjs-font-size"];
+    const baseFontSize = themeCssVariables[varNames.size] ?? themeCssVariables[BASE_UNIT_FONT_SIZE_VAR] ?? themeCssVariables[LEGACY_FONT_SIZE_VAR];
     property.defaultValue["size"] = baseFontSize !== undefined ? parseFloat(baseFontSize) : undefined;
   }
 

@@ -1929,7 +1929,7 @@ export var htStrings = {
       // "Description font"
       questionDescription: "Deskripsyon font",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // "Opacity"
       backgroundOpacity: "Opakite", // Auto-generated string
       // [Auto-translated] "Survey font family"

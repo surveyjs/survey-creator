@@ -208,11 +208,11 @@ test("Theme builder: composite question values are lost", (): any => {
 
   expect(themeModel.cssVariables["--sjs2-typography-font-family-component-question-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-family-component-page-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-page-title"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs2-color-component-page-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeModel.cssVariables["--sjs2-color-component-page-default-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-size-component-page-title"]).toBeUndefined();
 
   questionTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#fefefe", size: 40 };
@@ -223,7 +223,7 @@ test("Theme builder: composite question values are lost", (): any => {
   expect(themeModel.cssVariables["--sjs2-typography-font-size-component-question-title"]).toEqual("40px");
   expect(themeModel.cssVariables["--sjs2-typography-font-family-component-page-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-page-title"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs2-color-component-page-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeModel.cssVariables["--sjs2-color-component-page-default-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-size-component-page-title"]).toBeUndefined();
 
   pageTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#101010", size: 28 };
@@ -420,7 +420,7 @@ test("Get theme changes only", (): any => {
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(10);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(50);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(44);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(modifiedThemeChanges).length).toBe(6);
@@ -1302,7 +1302,7 @@ test("Modify property grid: add/hide properties", (): any => {
 
     expect(themeModel.cssVariables["--sjs2-typography-font-family-component-question-title"]).toBeUndefined();
     expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
-    expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
+    expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
     expect(themeModel.cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
 
     expect(themeModel.cssVariables["--sjs2-typography-font-family-component-custom-question-title"]).toBe("Courier New");
@@ -1564,7 +1564,12 @@ test("Update default font family", (): any => {
   const oldFontFamily = "Open Sans";
   const newFontFamily = "Georgia, serif";
   settings.themeEditor.defaultFontFamily = newFontFamily;
-  Themes["default-light"].cssVariables["--sjs2-typography-font-family-text"] = newFontFamily;
+  // Component font families are now derived from the resolved base theme variables,
+  // so simulate the new default font being applied to the base theme.
+  mockDomWindowGetComputedStyleFromInlineStyles({
+    "--sjs2-typography-font-family-text": newFontFamily,
+    "--sjs2-typography-font-family-component-question-title": newFontFamily,
+  });
 
   try {
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -1577,6 +1582,16 @@ test("Update default font family", (): any => {
 
   } finally {
     settings.themeEditor.defaultFontFamily = oldFontFamily;
-    Themes["default-light"].cssVariables["--sjs2-typography-font-family-text"] = oldFontFamily;
   }
+});
+
+test("inputContent color and placeholdercolor resolved from base theme", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.themeEditor.activate();
+  const propertyGridSurvey = creator.themeEditor.propertyGrid.survey;
+
+  const inputContent = propertyGridSurvey.getQuestionByName("inputContent").value;
+  expect(inputContent.color).toBe("rgba(0, 0, 0, 0.91)");
+  expect(inputContent.placeholdercolor).toBe("rgba(0, 0, 0, 0.45)");
 });

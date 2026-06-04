@@ -1929,7 +1929,7 @@ export var ruStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Описание шрифта",
       // [Auto-translated] "Font"
-      editorFont: "Шрифт",
+      inputContent: "Шрифт",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Непрозрачность", // Auto-generated string
       // [Auto-translated] "Survey font family"

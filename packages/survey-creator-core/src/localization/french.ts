@@ -1929,7 +1929,7 @@ export var frenchTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Police de description",
       // [Auto-translated] "Font"
-      editorFont: "Police",
+      inputContent: "Police",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacité", // Auto-generated string
       // [Auto-translated] "Survey font family"

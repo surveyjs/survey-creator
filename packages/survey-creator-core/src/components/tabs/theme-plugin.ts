@@ -181,9 +181,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this._setPGEditorPropertyValue(panel.getQuestionByName("headerView"), "value", survey.headerView);
     this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "value", survey.logoPosition);
 
-    this._setPGEditorPropertyValue(panel.getQuestionByName("surveyTitle"), "readOnly", !survey.hasTitle);
-    this._setPGEditorPropertyValue(panel.getQuestionByName("surveyDescription"), "readOnly", !survey.hasDescription);
-
     this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !survey.hasTitle);
     this._setPGEditorPropertyValue(panel.getQuestionByName("headerDescription"), "readOnly", !survey.hasDescription);
 
@@ -999,11 +996,12 @@ export function updateThemeEditorsDefaultFontFamily() {
   const getPropertyUpdater = className => propertyName => {
     const property = Serializer.getProperty(className, propertyName);
     if (property) {
+      if (!property.defaultValue) property.defaultValue = {};
       property.defaultValue.family = settings.themeEditor.defaultFontFamily;
     }
   };
-  ["surveyTitle", "headerTitle", "surveyDescription", "headerDescription"].forEach(getPropertyUpdater("header"));
-  ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "editorFont"].forEach(getPropertyUpdater("theme"));
+  ["surveyDescription", "headerDescription"].forEach(getPropertyUpdater("header"));
+  ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "inputContent"].forEach(getPropertyUpdater("theme"));
   const fontFamilyProperty = Serializer.getProperty("theme", "--sjs2-typography-font-family-text");
   if (fontFamilyProperty) {
     fontFamilyProperty.defaultValue = settings.themeEditor.defaultFontFamily;
