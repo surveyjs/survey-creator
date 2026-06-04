@@ -3615,6 +3615,6 @@ export var hrStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Razlika"
     }
-  },
+  }
 };
 setupLocale({ localeCode: "hr", strings: hrStrings });

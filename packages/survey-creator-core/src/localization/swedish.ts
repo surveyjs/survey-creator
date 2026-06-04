@@ -3616,7 +3616,7 @@ export let svStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "sv", strings: svStrings });

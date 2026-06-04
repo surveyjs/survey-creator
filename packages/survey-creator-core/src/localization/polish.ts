@@ -3616,7 +3616,7 @@ export var polishStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "pl", strings: polishStrings });

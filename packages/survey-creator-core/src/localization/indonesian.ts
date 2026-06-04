@@ -3615,7 +3615,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontras"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "id", strings: indonesianStrings });

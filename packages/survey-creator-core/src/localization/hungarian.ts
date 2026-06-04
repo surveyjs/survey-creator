@@ -3615,6 +3615,6 @@ export var huStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontraszt"
     }
-  },
+  }
 };
 setupLocale({ localeCode: "hu", strings: huStrings });

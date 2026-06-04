@@ -3615,6 +3615,6 @@ export var nlStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Tegenstelling"
     }
-  },
+  }
 };
 setupLocale({ localeCode: "nl", strings: nlStrings });

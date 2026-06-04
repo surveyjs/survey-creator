@@ -3615,7 +3615,7 @@ export var germanTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "de", strings: germanTranslation });

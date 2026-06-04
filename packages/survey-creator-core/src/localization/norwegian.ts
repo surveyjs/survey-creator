@@ -3615,7 +3615,7 @@ export var nbStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "nb", strings: nbStrings });

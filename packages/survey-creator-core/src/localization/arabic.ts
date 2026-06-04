@@ -3615,7 +3615,7 @@ export var arStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "تباين"
     }
-  },
+  }
 };
 
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.

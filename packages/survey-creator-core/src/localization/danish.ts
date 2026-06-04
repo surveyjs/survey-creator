@@ -3616,6 +3616,6 @@ export var danishStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
+  }
 };
 setupLocale({ localeCode: "da", strings: danishStrings });

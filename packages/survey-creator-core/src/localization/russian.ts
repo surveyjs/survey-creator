@@ -3615,7 +3615,7 @@ export var ruStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Контраст"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "ru", strings: ruStrings });

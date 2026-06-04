@@ -3615,7 +3615,7 @@ export var turkishStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Karşıtlık"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "tr", strings: turkishStrings });

@@ -3615,7 +3615,7 @@ export var persianStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "کنتراست"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "fa", strings: persianStrings });

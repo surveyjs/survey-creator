@@ -3615,7 +3615,7 @@ export var htStrings = {
       // "Contrast"
       "default-contrast": "Kontras"
     }
-  },
+  }
 };
 
 // Uncomment the line below if you create a custom dictionary.

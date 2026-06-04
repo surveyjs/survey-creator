@@ -3615,7 +3615,7 @@ export var bgStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Контраст"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "bg", strings: bgStrings });

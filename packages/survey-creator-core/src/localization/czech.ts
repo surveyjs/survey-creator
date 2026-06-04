@@ -3615,7 +3615,7 @@ export var czStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "cs", strings: czStrings });

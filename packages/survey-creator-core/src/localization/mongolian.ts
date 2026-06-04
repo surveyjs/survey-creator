@@ -3615,7 +3615,7 @@ export var mnStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Эсрэг тэсрэг байдал"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "mn", strings: mnStrings });

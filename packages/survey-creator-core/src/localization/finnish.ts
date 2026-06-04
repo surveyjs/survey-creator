@@ -3615,6 +3615,6 @@ export var fiStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrasti"
     }
-  },
+  }
 };
 setupLocale({ localeCode: "fi", strings: fiStrings });

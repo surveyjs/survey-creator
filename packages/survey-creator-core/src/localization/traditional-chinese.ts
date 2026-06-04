@@ -3616,7 +3616,7 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "反差"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "zh-tw", strings: traditionalChineseTranslation });

@@ -3615,7 +3615,7 @@ export var skStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "sk", strings: skStrings });

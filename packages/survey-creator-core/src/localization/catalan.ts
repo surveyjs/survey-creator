@@ -3615,7 +3615,7 @@ export var catalanTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contraste"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "ca", strings: catalanTranslation });

@@ -3615,7 +3615,7 @@ export const thStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "ความแตกต่าง"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "th", strings: thStrings });

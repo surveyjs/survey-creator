@@ -3615,7 +3615,7 @@ export var portugueseTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contraste"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "pt", strings: portugueseTranslation });

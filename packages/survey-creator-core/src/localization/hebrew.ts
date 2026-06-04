@@ -3615,7 +3615,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "ניגוד"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "he", strings: hebrewStrings });

@@ -3615,7 +3615,7 @@ export var italianTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contrasto"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "it", strings: italianTranslation });

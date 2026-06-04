@@ -3615,7 +3615,7 @@ export var slStrings = {
       // "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "sl", strings: slStrings });

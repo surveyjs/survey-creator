@@ -3615,7 +3615,7 @@ export const roStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contrast"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "ro", strings: roStrings });

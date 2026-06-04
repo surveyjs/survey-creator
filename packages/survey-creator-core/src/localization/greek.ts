@@ -3615,7 +3615,7 @@ export var grStrings = {
       // "Contrast"
       "default-contrast": "Αντίθεση"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "el", strings: grStrings });

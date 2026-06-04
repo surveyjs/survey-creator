@@ -3616,6 +3616,6 @@ export var koreanStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "대조"
     }
-  },
+  }
 };
 setupLocale({ localeCode: "ko", strings: koreanStrings });

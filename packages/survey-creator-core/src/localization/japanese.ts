@@ -3615,7 +3615,7 @@ export var jaStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "対照"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "ja", strings: jaStrings });

@@ -3615,7 +3615,7 @@ export var msStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Sebaliknya"
     }
-  },
+  }
 };
 
 setupLocale({ localeCode: "ms", strings: msStrings });
