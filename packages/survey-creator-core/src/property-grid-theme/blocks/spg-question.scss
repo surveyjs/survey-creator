@@ -173,9 +173,9 @@
   box-sizing: border-box;
   padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x150);
 
-  color: var(--sjs2-color-fg-basic-primary);
-  background-color: var(--sjs2-color-bg-alert-secondary);
-  border-radius: var(--sjs2-radius-x050);
+  border-radius: var(--sjs2-radius-component-message);
+  color: var(--sjs2-color-component-message-error-text);
+  background: var(--sjs2-color-component-message-error-bg);
 }
 
 .spg-question__erbox,
@@ -188,17 +188,11 @@ sv-question-error {
 }
 
 .spg-question__erbox-icon {
-  width: var(--sjs2-typography-line-height-default);
-  height: var(--sjs2-typography-line-height-default);
-
-  .sv-svg-icon {
-    vertical-align: top;
-    width: var(--sjs2-typography-line-height-default);
-    height: var(--sjs2-typography-line-height-default);
-  }
+  width: 1lh;
+  height: 1lh;
 
   use {
-    fill: var(--sjs2-color-bg-alert-primary);
+    fill: var(--sjs2-color-component-message-error-icon);
   }
 }
 
