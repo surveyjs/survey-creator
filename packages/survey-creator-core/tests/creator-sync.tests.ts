@@ -1,10 +1,27 @@
 import { CreatorTester } from "./creator-tester";
-import { ISyncMessage, ISyncStackSnapshot } from "../src/plugins/undo-redo/undo-redo-manager";
+import { UndoRedoSyncPlugin, ISyncMessage, ISyncStackSnapshot } from "../src/plugins/undo-redo-sync";
 import { describe, test, expect } from "vitest";
 
-// Wire two creators' UndoRedoManagers together through plain JSON, simulating
-// a transport like WebSocket / SignalR. The bridge is intentionally trivial:
-// the manager itself produces and consumes JSON-serializable messages.
+// Each CreatorTester gets its own UndoRedoSyncPlugin attached on first
+// access. Tests use `syncOf(creator)` to set `onSerializedChanges`,
+// invoke `applySerialized`, or grab the stack snapshot helpers i.e.
+// the *plugin* is the entry point for collaborative wire format, not
+// `creator.undoRedoManager`.
+const syncPluginsByCreator = new WeakMap<CreatorTester, UndoRedoSyncPlugin>();
+function syncOf(creator: CreatorTester): UndoRedoSyncPlugin {
+  let plugin = syncPluginsByCreator.get(creator);
+  if (!plugin) {
+    plugin = new UndoRedoSyncPlugin(creator);
+    creator.addPlugin("undoredoSync", plugin);
+    syncPluginsByCreator.set(creator, plugin);
+  }
+  return plugin;
+}
+
+// Wire two creators' undo/redo through the sync plugin via plain JSON,
+// simulating a transport like WebSocket / SignalR. The bridge is
+// intentionally trivial: the plugin produces and consumes
+// JSON-serializable messages.
 function makeCreators() {
   const creatorA = new CreatorTester();
   const creatorB = new CreatorTester();
@@ -12,11 +29,11 @@ function makeCreators() {
   creatorA.JSON = startJSON;
   creatorB.JSON = startJSON;
 
-  creatorA.undoRedoManager.onSerializedChanges = (msg: ISyncMessage) => {
-    creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  syncOf(creatorA).onSerializedChanges = (msg: ISyncMessage) => {
+    syncOf(creatorB).applySerialized(JSON.parse(JSON.stringify(msg)));
   };
-  creatorB.undoRedoManager.onSerializedChanges = (msg: ISyncMessage) => {
-    creatorA.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  syncOf(creatorB).onSerializedChanges = (msg: ISyncMessage) => {
+    syncOf(creatorA).applySerialized(JSON.parse(JSON.stringify(msg)));
   };
   return { creatorA, creatorB };
 }
@@ -248,7 +265,7 @@ test("outgoing messages are plain JSON (no class instances, no cycles)", () => {
   const creator = new CreatorTester();
   creator.JSON = { pages: [{ name: "page1" }] };
   const messages: ISyncMessage[] = [];
-  creator.undoRedoManager.onSerializedChanges = (msg) => messages.push(msg);
+  syncOf(creator).onSerializedChanges = (msg) => messages.push(msg);
 
   creator.survey.title = "Hello";
   creator.survey.pages[0].addNewQuestion("text", "q1");
@@ -347,10 +364,10 @@ test("deferred wiring: second creator joins after edits, then syncs", () => {
   const creatorB = new CreatorTester();
   creatorB.JSON = snapshot;
 
-  creatorA.undoRedoManager.onSerializedChanges = (msg) =>
-    creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
-  creatorB.undoRedoManager.onSerializedChanges = (msg) =>
-    creatorA.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  syncOf(creatorA).onSerializedChanges = (msg) =>
+    syncOf(creatorB).applySerialized(JSON.parse(JSON.stringify(msg)));
+  syncOf(creatorB).onSerializedChanges = (msg) =>
+    syncOf(creatorA).applySerialized(JSON.parse(JSON.stringify(msg)));
 
   // Initial bootstrap state must match.
   expect(creatorB.survey.title).toEqual("Pre-sync title");
@@ -410,7 +427,7 @@ test("nested inserts inside a parent-insert transaction are deduplicated by name
     ]
   };
 
-  creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(message)));
+  syncOf(creatorB).applySerialized(JSON.parse(JSON.stringify(message)));
 
   const page2: any = creatorB.survey.getPageByName("page2");
   expect(page2).toBeTruthy();
@@ -435,12 +452,12 @@ test("successive title edits (typing 'Hello') propagate the full final value", (
   creatorB.JSON = { pages: [{ name: "page1" }] };
 
   const outgoing: ISyncMessage[] = [];
-  creatorA.undoRedoManager.onSerializedChanges = (msg) => {
+  syncOf(creatorA).onSerializedChanges = (msg) => {
     outgoing.push(JSON.parse(JSON.stringify(msg)));
-    creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+    syncOf(creatorB).applySerialized(JSON.parse(JSON.stringify(msg)));
   };
-  creatorB.undoRedoManager.onSerializedChanges = (msg) =>
-    creatorA.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  syncOf(creatorB).onSerializedChanges = (msg) =>
+    syncOf(creatorA).applySerialized(JSON.parse(JSON.stringify(msg)));
 
   const word = "Hello";
   for (let i = 1; i <= word.length; i++) {
@@ -559,8 +576,8 @@ test("editing a non-active locale via the translation tab propagates that locale
 
   // Capture broadcasts so we can also assert the wire format.
   const outgoing: ISyncMessage[] = [];
-  const previous = creatorA.undoRedoManager.onSerializedChanges;
-  creatorA.undoRedoManager.onSerializedChanges = (msg) => {
+  const previous = syncOf(creatorA).onSerializedChanges;
+  syncOf(creatorA).onSerializedChanges = (msg) => {
     outgoing.push(JSON.parse(JSON.stringify(msg)));
     previous && previous(msg);
   };
@@ -712,12 +729,12 @@ test("undo broadcast carries {kind:\"undo\", id} matching the original transacti
   creatorB.JSON = { pages: [{ name: "page1" }] };
 
   const outgoing: ISyncMessage[] = [];
-  creatorA.undoRedoManager.onSerializedChanges = (msg) => {
+  syncOf(creatorA).onSerializedChanges = (msg) => {
     outgoing.push(JSON.parse(JSON.stringify(msg)));
-    creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+    syncOf(creatorB).applySerialized(JSON.parse(JSON.stringify(msg)));
   };
-  creatorB.undoRedoManager.onSerializedChanges = (msg) => {
-    creatorA.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  syncOf(creatorB).onSerializedChanges = (msg) => {
+    syncOf(creatorA).applySerialized(JSON.parse(JSON.stringify(msg)));
   };
 
   creatorA.survey.title = "Hello";
@@ -770,13 +787,13 @@ test("undo of a remote transaction does not re-broadcast a reverse transaction",
 
   const aSent: ISyncMessage[] = [];
   const bSent: ISyncMessage[] = [];
-  creatorA.undoRedoManager.onSerializedChanges = (msg) => {
+  syncOf(creatorA).onSerializedChanges = (msg) => {
     aSent.push(JSON.parse(JSON.stringify(msg)));
-    creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+    syncOf(creatorB).applySerialized(JSON.parse(JSON.stringify(msg)));
   };
-  creatorB.undoRedoManager.onSerializedChanges = (msg) => {
+  syncOf(creatorB).onSerializedChanges = (msg) => {
     bSent.push(JSON.parse(JSON.stringify(msg)));
-    creatorA.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+    syncOf(creatorA).applySerialized(JSON.parse(JSON.stringify(msg)));
   };
 
   creatorA.survey.title = "X";
@@ -832,6 +849,9 @@ test("creator joining mid-session inherits the host's undo stack and can undo ho
   // ----- Stage 1: host (A) works alone, builds up a stack -----
   const creatorA = new CreatorTester();
   creatorA.JSON = { pages: [{ name: "page1" }] };
+  // Attach the sync plugin up-front so transaction ids are assigned
+  // (later `exportStack` only ships entries that carry an id).
+  syncOf(creatorA);
 
   creatorA.survey.title = "T1"; // tx 1: scalar
   creatorA.survey.pages[0].addNewQuestion("text", "q1"); // tx 2: array insert
@@ -842,7 +862,7 @@ test("creator joining mid-session inherits the host's undo stack and can undo ho
   // (a) Survey state via JSON snapshot - same path used by `deferred wiring`.
   // (b) Undo stack via exportStack / importStack handshake.
   const jsonSnapshot = JSON.parse(JSON.stringify(creatorA.JSON));
-  const stackSnapshot: ISyncStackSnapshot = JSON.parse(JSON.stringify(creatorA.undoRedoManager.exportStack()));
+  const stackSnapshot: ISyncStackSnapshot = JSON.parse(JSON.stringify(syncOf(creatorA).exportStack()));
   expect(stackSnapshot.kind).toEqual("stack");
   expect(stackSnapshot.entries).toHaveLength(3);
   expect(stackSnapshot.cursor).toEqual(3);
@@ -859,17 +879,17 @@ test("creator joining mid-session inherits the host's undo stack and can undo ho
   const creatorB = new CreatorTester();
   creatorB.JSON = jsonSnapshot;
   expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
-  creatorB.undoRedoManager.importStack(stackSnapshot);
+  syncOf(creatorB).importStack(stackSnapshot);
 
   // B now mirrors A's stack: same entry count, cursor at top, no redo.
   expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
   expect(creatorB.undoRedoManager.canRedo()).toBeFalsy();
 
   // Wire the bidirectional bridge (live edits + undo/redo broadcasts).
-  creatorA.undoRedoManager.onSerializedChanges = (msg) =>
-    creatorB.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
-  creatorB.undoRedoManager.onSerializedChanges = (msg) =>
-    creatorA.undoRedoManager.applySerialized(JSON.parse(JSON.stringify(msg)));
+  syncOf(creatorA).onSerializedChanges = (msg) =>
+    syncOf(creatorB).applySerialized(JSON.parse(JSON.stringify(msg)));
+  syncOf(creatorB).onSerializedChanges = (msg) =>
+    syncOf(creatorA).applySerialized(JSON.parse(JSON.stringify(msg)));
 
   // ----- Stage 3: B undoes a pre-join transaction; A mirrors -----
   // Top of the shared stack is A's nested title edit (tx 3).
@@ -918,21 +938,84 @@ test("importStack drops the host's redo tail (only applied entries are exported)
   // host has already rolled back).
   const creatorA = new CreatorTester();
   creatorA.JSON = { pages: [{ name: "page1" }] };
+  // Attach the sync plugin up-front so transaction ids are assigned
+  // (later `exportStack` only ships entries that carry an id).
+  syncOf(creatorA);
   creatorA.survey.title = "Kept";
   creatorA.survey.description = "Dropped";
   creatorA.undo(); // now description is undone; redo tail = [descriptionEdit]
   expect(creatorA.undoRedoManager.canRedo()).toBeTruthy();
 
-  const snapshot = creatorA.undoRedoManager.exportStack();
+  const snapshot = syncOf(creatorA).exportStack();
   expect(snapshot.entries).toHaveLength(1);
   expect(snapshot.cursor).toEqual(1);
 
   const creatorB = new CreatorTester();
   creatorB.JSON = JSON.parse(JSON.stringify(creatorA.JSON));
-  creatorB.undoRedoManager.importStack(snapshot);
+  syncOf(creatorB).importStack(snapshot);
 
   expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
   expect(creatorB.undoRedoManager.canRedo()).toBeFalsy();
   creatorB.undo();
   expect(creatorB.survey.title).toEqual("");
+});
+
+// ---------------------------------------------------------------------------
+// Plugin lifecycle: parity with master when no plugin is registered, and
+// detach on dispose.
+// ---------------------------------------------------------------------------
+
+test("without UndoRedoSyncPlugin the manager has no sync side-effects", () => {
+  // Without the plugin registered the manager must behave exactly like
+  // a stand-alone undo/redo stack: no transaction ids assigned, no
+  // sync hooks set, and undo/redo work locally.
+  const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
+
+  expect(creator.undoRedoManager.transactionIdGenerator).toBeUndefined();
+  expect(creator.undoRedoManager.onTransactionMerged).toBeUndefined();
+  expect(creator.undoRedoManager.onTransactionFinished).toBeUndefined();
+
+  creator.survey.title = "Hello";
+  creator.survey.pages[0].addNewQuestion("text", "q1");
+
+  // Newly-pushed transactions have empty ids in the no-plugin setup.
+  for (const tx of creator.undoRedoManager.transactions) {
+    expect(tx.id).toEqual("");
+  }
+
+  // Local undo/redo still works.
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  creator.undo();
+  expect(creator.survey.getQuestionByName("q1")).toBeFalsy();
+  creator.redo();
+  expect(creator.survey.getQuestionByName("q1")).toBeTruthy();
+});
+
+test("UndoRedoSyncPlugin.dispose detaches manager hooks and stops broadcasting", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
+  const plugin = new UndoRedoSyncPlugin(creator);
+  creator.addPlugin("undoredoSync", plugin);
+
+  // While attached: hooks installed, broadcasts emitted.
+  expect(creator.undoRedoManager.transactionIdGenerator).toBeDefined();
+  expect(creator.undoRedoManager.onTransactionFinished).toBeDefined();
+  const messages: ISyncMessage[] = [];
+  plugin.onSerializedChanges = (msg) => messages.push(msg);
+  creator.survey.title = "Hello";
+  expect(messages.length).toBeGreaterThan(0);
+
+  // After dispose: hooks restored, no further broadcasts even if the
+  // outbound callback is somehow re-attached (the manager no longer
+  // calls it).
+  plugin.dispose();
+  expect(creator.undoRedoManager.transactionIdGenerator).toBeUndefined();
+  expect(creator.undoRedoManager.onTransactionFinished).toBeUndefined();
+  expect(creator.undoRedoManager.onTransactionMerged).toBeUndefined();
+
+  const messagesAfter: ISyncMessage[] = [];
+  plugin.onSerializedChanges = (msg) => messagesAfter.push(msg);
+  creator.survey.description = "After dispose";
+  expect(messagesAfter).toHaveLength(0);
 });
