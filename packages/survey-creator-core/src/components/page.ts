@@ -340,7 +340,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this._footerActionsBar = new ActionContainer();
       this._footerActionsBar.containerCss = "svc-page__footer";
       this._footerActionsBar.cssClasses = {
-        item: "sd-action svc-surface-btn",
+        item: "sd-action sd-action--border svc-surface-btn",
         itemAppearancePrefix: "",
         itemTypeSelector: "svc-surface-btn__selector",
       };
