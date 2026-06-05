@@ -143,6 +143,7 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
   private prevTransactionIdGenerator: () => string;
   private prevOnTransactionMerged: (tx: Transaction, sender: Base, propertyName: string, newValue: any) => void;
   private prevOnTransactionFinished: (tx: Transaction, phase: "do" | "undo" | "redo") => void;
+  private prevSurvey: any;
 
   constructor(private creator: SurveyCreatorModel, transport?: ISyncTransport) {
     this.manager = creator.undoRedoManager;
@@ -269,6 +270,13 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
     this.prevTransactionIdGenerator = this.manager.transactionIdGenerator;
     this.prevOnTransactionMerged = this.manager.onTransactionMerged;
     this.prevOnTransactionFinished = this.manager.onTransactionFinished;
+    this.prevSurvey = this.manager.survey;
+
+    // The base UndoRedoManager does not need a back-reference to the
+    // survey model; only sync-plugin code (`withSuppressedBroadcast`,
+    // `applyRemoteTransaction`) consumes it. Set it here so the manager
+    // can stay survey-agnostic when no plugin is attached.
+    this.manager.survey = this.creator.survey;
 
     this.manager.transactionIdGenerator = generateTxId;
     this.manager.onTransactionMerged = (tx, sender, propertyName, newValue) => {
@@ -287,6 +295,7 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
     }
     this.manager.onTransactionMerged = this.prevOnTransactionMerged;
     this.manager.onTransactionFinished = this.prevOnTransactionFinished;
+    this.manager.survey = this.prevSurvey;
   }
 
   private notifyMergedChange(transaction: Transaction, sender: Base, propertyName: string, newValue: any): void {
