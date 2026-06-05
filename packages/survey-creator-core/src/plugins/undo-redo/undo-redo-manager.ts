@@ -96,13 +96,10 @@ export class UndoRedoManager {
     const nextTransaction = this._transactions[index + 1];
     return nextTransaction;
   }
-  private notifyChangesFinished(transaction: Transaction, phase: "do" | "undo" | "redo" = "do") {
-    if (!!this.onTransactionFinished) {
-      this.onTransactionFinished(transaction, phase);
-    }
+  private notifyChangesFinished(transaction: Transaction, isUndo: boolean = false) {
     if (transaction.actions.length > 0) {
       !!this.changesFinishedCallback &&
-        this.changesFinishedCallback(transaction.actions, phase === "undo");
+        this.changesFinishedCallback(transaction.actions, isUndo);
       // this.changesFinishedCallback(transaction.actions[0].getChanges(isUndo));
     }
   }
@@ -124,6 +121,7 @@ export class UndoRedoManager {
     this._addTransaction(this._preparingTransaction);
     if (this.transactionCounter === 0) {
       this.notifyChangesFinished(this._preparingTransaction);
+      if (!!this.onTransactionFinished)this.onTransactionFinished(this._preparingTransaction, "do");
     }
     this._preparingTransaction = null;
   }
@@ -147,7 +145,8 @@ export class UndoRedoManager {
 
     this._currentTransactionIndex--;
     this.canUndoRedoCallback();
-    this.notifyChangesFinished(currentTransaction, "undo");
+    this.notifyChangesFinished(currentTransaction, true);
+    if (!!this.onTransactionFinished)this.onTransactionFinished(currentTransaction, "undo");
   }
   canRedo() {
     return !!this._getNextTransaction();
@@ -162,7 +161,8 @@ export class UndoRedoManager {
 
     this._currentTransactionIndex++;
     this.canUndoRedoCallback();
-    this.notifyChangesFinished(nextTransaction, "redo");
+    this.notifyChangesFinished(nextTransaction);
+    if (!!this.onTransactionFinished)this.onTransactionFinished(nextTransaction, "redo");
   }
   suspend() {
     this._ignoreChanges = true;
@@ -185,8 +185,7 @@ export class UndoRedoManager {
   // observe these merge events without affecting local-stack semantics.
   public onTransactionMerged: (transaction: Transaction, sender: Base, propertyName: string, newValue: any) => void;
 
-  // Invoked from `notifyChangesFinished` for every transaction lifecycle
-  // event:
+  // Invoked after every transaction lifecycle event:
   //   - phase "do":    a fresh local transaction was just pushed
   //   - phase "undo":  the cursor moved down past `transaction`
   //   - phase "redo":  the cursor moved up onto `transaction`
@@ -245,7 +244,7 @@ export class Transaction {
   // exactly as before.
   public id: string = "";
 
-  private _actions: any[] = [];
+  private _actions: UndoRedoAction[] = [];
 
   public undoCallback: () => void = () => {};
 
