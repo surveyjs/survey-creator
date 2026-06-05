@@ -475,7 +475,8 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       column.isVisible &&
       !column.readOnly &&
       !this.hasMultipleLanguage(items) &&
-      !this.hasVisibleIfOrEnableIf(items)
+      !this.hasVisibleIfOrEnableIf(items) &&
+      !editorLocalization.currentLocale
     );
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
