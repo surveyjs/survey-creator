@@ -199,11 +199,11 @@ export class UndoRedoManager {
 export class Transaction {
   constructor(private _name: string) { }
 
-  // Shared-stack identity for collaborative undo/redo. Assigned by the
-  // originator when the transaction enters the local stack (via the
-  // optional `UndoRedoManager.transactionIdGenerator`). When no plugin
-  // installs a generator, ids stay empty and the local stack works
-  // exactly as before.
+  // Shared-stack identity for collaborative undo/redo. Set by sync
+  // plugins (e.g. `UndoRedoSyncPlugin`) on every freshly-pushed
+  // transaction so peers can address it across the wire. When no plugin
+  // is attached, ids stay empty and the local stack works exactly as
+  // before.
   public id: string = "";
 
   private _actions: UndoRedoAction[] = [];

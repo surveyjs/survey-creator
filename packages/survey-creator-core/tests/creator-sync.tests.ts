@@ -972,7 +972,6 @@ test("without UndoRedoSyncPlugin the manager has no sync side-effects", () => {
   const creator = new CreatorTester();
   creator.JSON = { pages: [{ name: "page1" }] };
 
-  expect(creator.undoRedoManager.transactionIdGenerator).toBeUndefined();
   expect(creator.undoRedoManager.onTransactionMerged).toBeUndefined();
   expect(creator.undoRedoManager.onTransactionFinished).toBeUndefined();
 
@@ -999,7 +998,6 @@ test("UndoRedoSyncPlugin.dispose detaches manager hooks and stops broadcasting",
   creator.addPlugin("undoredoSync", plugin);
 
   // While attached: hooks installed, broadcasts emitted.
-  expect(creator.undoRedoManager.transactionIdGenerator).toBeDefined();
   expect(creator.undoRedoManager.onTransactionFinished).toBeDefined();
   const messages: ISyncMessage[] = [];
   plugin.onSerializedChanges = (msg) => messages.push(msg);
@@ -1010,7 +1008,6 @@ test("UndoRedoSyncPlugin.dispose detaches manager hooks and stops broadcasting",
   // outbound callback is somehow re-attached (the manager no longer
   // calls it).
   plugin.dispose();
-  expect(creator.undoRedoManager.transactionIdGenerator).toBeUndefined();
   expect(creator.undoRedoManager.onTransactionFinished).toBeUndefined();
   expect(creator.undoRedoManager.onTransactionMerged).toBeUndefined();
 
