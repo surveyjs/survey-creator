@@ -26,8 +26,9 @@
 
   .sv-svg-icon {
     position: absolute;
-    width: var(--sjs2-line-height-x200);
-    height: var(--sjs2-line-height-x200);
+    line-height: var(--sjs2-line-height-x200);
+    width: 1lh;
+    height: 1lh;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);

@@ -81,8 +81,9 @@ svc-page-navigator-item,
   display: none;
 
   .svc-page-navigator-item__dot-content {
-    width: var(--sjs2-line-height-x100);
-    height: var(--sjs2-line-height-x100);
+    line-height: var(--sjs2-line-height-x100);
+    width: 1lh;
+    height: 1lh;
     flex-shrink: 0;
     background: var(--sjs2-color-bg-brand-primary);
     border-radius: var(--sjs2-radius-round);

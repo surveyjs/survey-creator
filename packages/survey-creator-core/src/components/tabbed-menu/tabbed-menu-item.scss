@@ -62,8 +62,9 @@
 }
 
 .svc-tabbed-menu-item__icon {
-  width: var(--sjs2-line-height-x300);
-  height: var(--sjs2-line-height-x300);
+  line-height: var(--sjs2-line-height-x300);
+  width: 1lh;
+  height: 1lh;
   fill: var(--sjs2-color-fg-basic-primary-muted);
 }
 
@@ -72,8 +73,9 @@
   padding: var(--sjs2-spacing-x100);
 
   svg {
-    width: var(--sjs2-typography-line-height-default);
-    height: var(--sjs2-typography-line-height-default);
+    line-height: var(--sjs2-typography-line-height-default);
+    width: 1lh;
+    height: 1lh;
   }
   use {
     fill: var(--sjs2-color-fg-basic-primary-muted);
