@@ -3817,3 +3817,62 @@ test("SurveyLogic: Delete completedHtmlOnCondition item instead of removing expr
   expect(survey.completedHtmlOnCondition).toHaveLength(0);
 });
 
+test("LogicItemEditor: element selector shows titles in survey locale when showObjectTitles is true, Bug#7727", () => {
+  const creator = new CreatorTester({ showObjectTitles: true, showTitlesInExpressions: true });
+  creator.JSON = {
+    locale: "fr",
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "Question 1", fr: "Question 1 en francais" }
+      },
+      {
+        type: "text",
+        name: "q2",
+        title: { default: "Question 2", fr: "Question 2 en francais" },
+        visibleIf: "{q1}=1"
+      },
+      {
+        type: "text",
+        name: "q3",
+        title: { default: "Question 3", fr: "Question 3 en francais" }
+      }
+    ]
+  };
+  const logic = new SurveyLogicUI(creator.survey, creator);
+  logic.editItem(logic.items[0]);
+  const panel = logic.itemEditor.panels[0];
+  const elementSelector = <QuestionDropdownModel>panel.getQuestionByName("elementSelector");
+  const q2Choice = elementSelector.choices.find(c => c.value === "q2");
+  expect(q2Choice).toBeTruthy();
+  expect(q2Choice.text).toBe("Question 2 en francais");
+  const q3Choice = elementSelector.choices.find(c => c.value === "q3");
+  expect(q3Choice).toBeTruthy();
+  expect(q3Choice.text).toBe("Question 3 en francais");
+});
+
+test("SurveyLogicUI: display text respects survey locale when showObjectTitles is true, Bug#7727", () => {
+  const creator = new CreatorTester({ showObjectTitles: true, showTitlesInExpressions: true });
+  creator.JSON = {
+    locale: "fr",
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "Question 1", fr: "Question 1 en francais" }
+      },
+      {
+        type: "text",
+        name: "q2",
+        title: { default: "Question 2", fr: "Question 2 en francais" },
+        visibleIf: "{q1}=1"
+      }
+    ]
+  };
+  const logic = new SurveyLogicUI(creator.survey, creator);
+  expect(logic.items).toHaveLength(1);
+  const displayText = logic.items[0].getDisplayText();
+  expect(displayText).toContain("Question 1 en francais");
+  expect(displayText).toContain("Question 2 en francais");
+});

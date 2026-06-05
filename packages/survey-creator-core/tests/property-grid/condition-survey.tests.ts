@@ -1905,3 +1905,58 @@ test("Do not show comment for other if storeOthersAsComment is true/false", () =
   expect(radioQuestion2.showOtherItem).toBeTruthy();
   expect(radioQuestion2.comment).toBe("foo");
 });
+
+test("Condition editor: questionValue choices respect survey locale, Bug#7727", () => {
+  const survey = new SurveyModel({
+    locale: "fr",
+    elements: [
+      {
+        type: "radiogroup",
+        name: "q1",
+        choices: [
+          { value: "item1", text: { default: "Yes", fr: "Oui" } },
+          { value: "item2", text: { default: "No", fr: "Non" } }
+        ]
+      },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const q2 = survey.getQuestionByName("q2");
+  const editor = new ConditionEditor(survey, q2, undefined, "visibleIf");
+  const panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "q1";
+  const questionValue = panel.getQuestionByName("questionValue");
+  expect(questionValue).toBeTruthy();
+  expect(questionValue.choices[0].text).toBe("Oui");
+  expect(questionValue.choices[1].text).toBe("Non");
+});
+
+test("Condition editor: allConditionQuestions titles respect survey locale when showTitlesInExpressions is true, Bug#7727", () => {
+  const survey = new SurveyModel({
+    locale: "fr",
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "Question 1", fr: "Question 1 en francais" }
+      },
+      {
+        type: "text",
+        name: "q2",
+        title: { default: "Question 2", fr: "Question 2 en francais" }
+      },
+      {
+        type: "text",
+        name: "q3",
+        title: { default: "Question 3", fr: "Question 3 en francais" }
+      }
+    ]
+  });
+  const q3 = survey.getQuestionByName("q3");
+  const options = new EmptySurveyCreatorOptions();
+  options.showTitlesInExpressions = true;
+  const editor = new ConditionEditor(survey, q3, options, "visibleIf");
+  expect(editor.allConditionQuestions).toHaveLength(2);
+  expect(editor.allConditionQuestions[0].text).toBe("Question 1 en francais");
+  expect(editor.allConditionQuestions[1].text).toBe("Question 2 en francais");
+});

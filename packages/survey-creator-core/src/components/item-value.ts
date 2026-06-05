@@ -211,6 +211,7 @@ export class ItemValueWrapperViewModel extends Base {
   private focusNextElementToRemove(index) {
     setTimeout(() => {
       const el = document.getElementById(this.question.id);
+      if (!el) return;
       const buttons = el.querySelectorAll(".svc-item-value-controls__remove");
       (buttons[index] as HTMLElement)?.focus();
     }, 100

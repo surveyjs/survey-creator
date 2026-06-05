@@ -102,7 +102,7 @@ function debounce(func, delay) {
 }
 
 const updateRowsVisibility = debounce((target: SurveyElementAdornerBase) => {
-  if (target.creator.rootElement.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) {
+  if (target.creator.rootElement?.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) {
     updateRowsVisibility(target);
   } else {
     target.creator.survey.pages.forEach(p => p.ensureRowsVisibility());
