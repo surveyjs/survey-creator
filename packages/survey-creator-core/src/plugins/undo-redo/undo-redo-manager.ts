@@ -78,9 +78,6 @@ export class UndoRedoManager {
 
     this._cutOffTail();
     if (this._transactions[this._currentTransactionIndex] !== transaction) {
-      if (!transaction.id && !!this.transactionIdGenerator) {
-        transaction.id = this.transactionIdGenerator();
-      }
       this._transactions.push(transaction);
       this._currentTransactionIndex++;
     }
@@ -173,13 +170,6 @@ export class UndoRedoManager {
 
   // ----- Public hooks for sync / collaboration plugins -----
 
-  // If set, used by `_addTransaction` to assign a stable id to every
-  // newly-pushed transaction. Plugins (e.g. `UndoRedoSyncPlugin`) install
-  // a generator so that ids can be referenced across peers; in the
-  // default no-plugin setup transactions have empty ids and the local
-  // stack works exactly as before.
-  public transactionIdGenerator: () => string;
-
   // Invoked when `tryMergeTransaction` folds a successive edit into the
   // current top transaction. Plugins that mirror the stack to peers can
   // observe these merge events without affecting local-stack semantics.
@@ -203,35 +193,7 @@ export class UndoRedoManager {
   public get currentTransactionIndex(): number { return this._currentTransactionIndex; }
   public set currentTransactionIndex(value: number) { this._currentTransactionIndex = value; }
 
-  // Drop any redo tail. Mirrors the private `_cutOffTail` invoked by
-  // `_addTransaction`; exposed for sync plugins applying a remote
-  // transaction that lands on top of an existing redo tail.
-  public cutOffTail(): void { this._cutOffTail(); }
-
-  // Run `fn` with local-broadcast suppression: detaches the survey's
-  // change observer and toggles `_ignoreChanges` / `_isExecuting` so
-  // mutations made inside `fn` do NOT enter the local stack and do NOT
-  // re-emit through `onTransactionFinished` / `onTransactionMerged`.
-  // Sync plugins use this when applying a peer-authored message.
-  public withSuppressedBroadcast(fn: () => void): void {
-    const survey: any = this.survey;
-    const previousCallback = !!survey ? survey.onPropertyValueChangedCallback : undefined;
-    const wasIgnoring = this._ignoreChanges;
-    const wasExecuting = this._isExecuting;
-    if (!!survey) survey.onPropertyValueChangedCallback = undefined;
-    this._ignoreChanges = true;
-    this._isExecuting = true;
-    try {
-      fn();
-    } finally {
-      this._isExecuting = wasExecuting;
-      this._ignoreChanges = wasIgnoring;
-      if (!!survey) survey.onPropertyValueChangedCallback = previousCallback;
-    }
-  }
-
   public changesFinishedCallback: (changes: UndoRedoAction[], isUndo: boolean) => void;
-  public survey: SurveyModel;
 }
 
 export class Transaction {

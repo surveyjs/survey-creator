@@ -140,10 +140,8 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
   private manager: UndoRedoManager;
 
   // Saved hooks for `dispose`.
-  private prevTransactionIdGenerator: () => string;
   private prevOnTransactionMerged: (tx: Transaction, sender: Base, propertyName: string, newValue: any) => void;
   private prevOnTransactionFinished: (tx: Transaction, phase: "do" | "undo" | "redo") => void;
-  private prevSurvey: any;
 
   constructor(private creator: SurveyCreatorModel, transport?: ISyncTransport) {
     this.manager = creator.undoRedoManager;
@@ -188,8 +186,15 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
   // (true for the in-process bridge used by tests; real transports must
   // preserve message order).
   public applySerialized(message: ISyncMessage): void {
-    if (!message || !this.manager.survey) return;
-    this.manager.withSuppressedBroadcast(() => {
+    const survey: any = this.creator.survey;
+    if (!message || !survey) return;
+    // Detach survey-level change observer so peer-applied mutations do
+    // not re-enter the controller's `onPropertyValueChangedCallback`
+    // (which would push them onto the local stack and re-broadcast).
+    const previousCallback = survey.onPropertyValueChangedCallback;
+    survey.onPropertyValueChangedCallback = undefined;
+    this.manager.suspend();
+    try {
       if (message.kind === "transaction") {
         this.applyRemoteTransaction(message);
       } else if (message.kind === "undo") {
@@ -197,7 +202,10 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
       } else if (message.kind === "redo") {
         this.applyRemoteRedo(message);
       }
-    });
+    } finally {
+      this.manager.resume();
+      survey.onPropertyValueChangedCallback = previousCallback;
+    }
   }
 
   // ----- Outbound: stack export / import for late join -----
@@ -244,6 +252,7 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
   // messages and applies them against its matching shared-stack entry.
   public importStack(snapshot: ISyncStackSnapshot): void {
     if (!snapshot || snapshot.kind !== "stack" || !Array.isArray(snapshot.entries)) return;
+    const survey = this.creator.survey;
     const transactions = this.manager.transactions;
     transactions.length = 0;
     this.manager.currentTransactionIndex = -1;
@@ -253,7 +262,7 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
       const tx = new Transaction("imported");
       tx.id = e.id;
       tx.addAction(new RemoteBulkAction(
-        this.manager.survey,
+        survey,
         Array.isArray(e.forward) ? e.forward : [],
         Array.isArray(e.inverse) ? e.inverse : []
       ));
@@ -267,35 +276,25 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
   // ----- Internals -----
 
   private attach(): void {
-    this.prevTransactionIdGenerator = this.manager.transactionIdGenerator;
     this.prevOnTransactionMerged = this.manager.onTransactionMerged;
     this.prevOnTransactionFinished = this.manager.onTransactionFinished;
-    this.prevSurvey = this.manager.survey;
 
-    // The base UndoRedoManager does not need a back-reference to the
-    // survey model; only sync-plugin code (`withSuppressedBroadcast`,
-    // `applyRemoteTransaction`) consumes it. Set it here so the manager
-    // can stay survey-agnostic when no plugin is attached.
-    this.manager.survey = this.creator.survey;
-
-    this.manager.transactionIdGenerator = generateTxId;
     this.manager.onTransactionMerged = (tx, sender, propertyName, newValue) => {
       if (!!this.prevOnTransactionMerged)this.prevOnTransactionMerged(tx, sender, propertyName, newValue);
       this.notifyMergedChange(tx, sender, propertyName, newValue);
     };
     this.manager.onTransactionFinished = (tx, phase) => {
       if (!!this.prevOnTransactionFinished)this.prevOnTransactionFinished(tx, phase);
+      // The originator stamps a stable id onto every freshly-pushed
+      // local transaction so peers can address it across the wire.
+      if (phase === "do" && !tx.id) tx.id = generateTxId();
       this.notifyTransactionFinished(tx, phase);
     };
   }
 
   private detach(): void {
-    if (this.manager.transactionIdGenerator === generateTxId) {
-      this.manager.transactionIdGenerator = this.prevTransactionIdGenerator;
-    }
     this.manager.onTransactionMerged = this.prevOnTransactionMerged;
     this.manager.onTransactionFinished = this.prevOnTransactionFinished;
-    this.manager.survey = this.prevSurvey;
   }
 
   private notifyMergedChange(transaction: Transaction, sender: Base, propertyName: string, newValue: any): void {
@@ -365,7 +364,10 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
 
     // Fresh remote transaction: a new top entry. Any local redo tail
     // is invalidated, just like a fresh local edit would invalidate it.
-    this.manager.cutOffTail();
+    const cursor = this.manager.currentTransactionIndex;
+    if (cursor + 1 !== transactions.length) {
+      transactions.length = cursor + 1;
+    }
     const tx = new Transaction("remote");
     tx.id = id;
     this.applyForwardInto(tx, message.actions);
@@ -380,7 +382,7 @@ export class UndoRedoSyncPlugin implements ICreatorPlugin {
   // later. Skip actions whose forward is a no-op locally (e.g. an
   // insert dedup'd by name).
   private applyForwardInto(tx: Transaction, actions: ISyncAction[]): void {
-    const survey = this.manager.survey;
+    const survey = this.creator.survey;
     for (let i = 0; i < actions.length; i++) {
       const action = actions[i];
       const inverses = captureInverse(survey, action);
