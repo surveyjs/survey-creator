@@ -1,5 +1,4 @@
 import { Base, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, Serializer, HorizontalAlignment, VerticalAlignment, property } from "survey-core";
-import { settings } from "../../creator-settings";
 import { fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { assign } from "../../utils/utils";
 
@@ -9,11 +8,13 @@ export class HeaderModel extends Base implements IHeader {
     color: "--sjs2-color-component-header-default-title",
     weight: "--sjs2-typography-font-weight-component-header-title",
     size: "--sjs2-typography-font-size-component-header-title",
+    lineHeight: "--sjs2-typography-line-height-component-header-title",
   };
   static defaultDescriptionSettings = {
     color: "--sjs2-color-component-header-default-description",
     size: "--sjs2-typography-font-size-component-header-description",
     weight: "--sjs2-typography-font-weight-component-header-description",
+    lineHeight: "--sjs2-typography-line-height-component-header-description",
   };
   static getDefaultVars() {
     const titleVars = Object.keys(this.defaultTitleSettings).map(key => this.defaultTitleSettings[key as keyof typeof this.defaultTitleSettings]);

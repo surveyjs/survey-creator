@@ -1913,6 +1913,7 @@ export var enStrings = {
     color: "Color",
     placeholderColor: "Placeholder color",
     size: "Size",
+    lineHeight: "Line height",
     opacity: "Opacity",
     boxShadowX: "X",
     boxShadowY: "Y",

@@ -50,7 +50,7 @@ test.describe(title, () => {
   });
 
   test("theme setting property grid", async ({ page }) => {
-    await page.setViewportSize({ width: 1580, height: 4000 });
+    await page.setViewportSize({ width: 1580, height: 4300 });
     await setJSON(page, {
       showQuestionNumbers: true,
       title: "Title",
