@@ -514,7 +514,7 @@ export class SurveyLogicUI extends SurveyLogic {
     const container = new ActionContainer();
     container.containerCss = "svc-logic-tab__content-actions";
     container.cssClasses = {
-      item: "sd-action svc-surface-btn",
+      item: "sd-action sd-action--border svc-surface-btn",
       itemAppearancePrefix: ""
     };
     container.setItems(this.createContentActions());
