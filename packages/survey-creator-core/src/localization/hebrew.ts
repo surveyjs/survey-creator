@@ -3539,6 +3539,8 @@ export var hebrewStrings = {
     placeholderColor: "צבע מציין מיקום",
     // [Auto-translated] "Size"
     size: "גודל",
+    // [Auto-translated] "Line height"
+    lineHeight: "גובה הקו",
     // [Auto-translated] "Opacity"
     opacity: "אטימות",
     // [Auto-translated] "X"

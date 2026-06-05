@@ -3539,6 +3539,8 @@ export var nbStrings = {
     placeholderColor: "Plassholderfarge",
     // [Auto-translated] "Size"
     size: "Størrelse",
+    // [Auto-translated] "Line height"
+    lineHeight: "Linjehøyde",
     // [Auto-translated] "Opacity"
     opacity: "Ugjennomsiktighet",
     // [Auto-translated] "X"

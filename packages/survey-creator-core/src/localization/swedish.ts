@@ -3540,6 +3540,8 @@ export let svStrings = {
     placeholderColor: "Platshållarens färg",
     // [Auto-translated] "Size"
     size: "Storlek",
+    // [Auto-translated] "Line height"
+    lineHeight: "Linjehöjd",
     // [Auto-translated] "Opacity"
     opacity: "Ogenomskinlighet",
     // [Auto-translated] "X"

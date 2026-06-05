@@ -3539,6 +3539,8 @@ export const thStrings = {
     placeholderColor: "สีข้อความสำรอง",
     // "Size"
     size: "ขนาด",
+    // [Auto-translated] "Line height"
+    lineHeight: "ความสูงของเส้น",
     // "Opacity"
     opacity: "ความโปร่งใส",
     // [Auto-translated] "X"

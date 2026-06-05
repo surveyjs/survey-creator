@@ -3540,6 +3540,8 @@ export var polishStrings = {
     placeholderColor: "Kolor symbolu zastępczego",
     // [Auto-translated] "Size"
     size: "Rozmiar",
+    // [Auto-translated] "Line height"
+    lineHeight: "Wysokość linii",
     // [Auto-translated] "Opacity"
     opacity: "Nieprzezroczystość",
     // [Auto-translated] "X"

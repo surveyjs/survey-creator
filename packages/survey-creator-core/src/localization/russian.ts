@@ -3539,6 +3539,8 @@ export var ruStrings = {
     placeholderColor: "Цвет заполнителя",
     // [Auto-translated] "Size"
     size: "Размер",
+    // [Auto-translated] "Line height"
+    lineHeight: "Высота линии",
     // [Auto-translated] "Opacity"
     opacity: "Непрозрачность",
     // [Auto-translated] "X"

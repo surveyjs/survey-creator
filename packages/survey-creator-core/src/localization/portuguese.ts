@@ -3539,6 +3539,8 @@ export var portugueseTranslation = {
     placeholderColor: "Cor do espaço reservado",
     // [Auto-translated] "Size"
     size: "Tamanho",
+    // [Auto-translated] "Line height"
+    lineHeight: "Altura da linha",
     // [Auto-translated] "Opacity"
     opacity: "Opacidade",
     // [Auto-translated] "X"

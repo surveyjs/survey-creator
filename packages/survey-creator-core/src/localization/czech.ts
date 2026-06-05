@@ -3539,6 +3539,8 @@ export var czStrings = {
     placeholderColor: "Barva zástupného symbolu",
     // [Auto-translated] "Size"
     size: "Velikost",
+    // [Auto-translated] "Line height"
+    lineHeight: "Výška trati",
     // [Auto-translated] "Opacity"
     opacity: "Neprůhlednost",
     // [Auto-translated] "X"

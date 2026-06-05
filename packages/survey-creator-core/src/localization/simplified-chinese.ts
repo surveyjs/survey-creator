@@ -3539,6 +3539,8 @@ export var simplifiedChineseTranslation = {
     placeholderColor: "占位符颜色",
     // [Auto-translated] "Size"
     size: "大小",
+    // [Auto-translated] "Line height"
+    lineHeight: "线路高度",
     // [Auto-translated] "Opacity"
     opacity: "不透明度",
     // [Auto-translated] "X"

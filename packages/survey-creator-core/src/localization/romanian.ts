@@ -3539,6 +3539,8 @@ export const roStrings = {
     placeholderColor: "Culoarea textului substitut",
     // "Size"
     size: "Dimensiune",
+    // [Auto-translated] "Line height"
+    lineHeight: "Înălțimea liniei",
     // "Opacity"
     opacity: "Opacitate",
     // [Auto-translated] "X"

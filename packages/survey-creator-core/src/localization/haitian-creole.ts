@@ -3539,6 +3539,8 @@ export var htStrings = {
     placeholderColor: "Koulè placeholder",
     // "Size"
     size: "Gwosè",
+    // [Auto-translated] "Line height"
+    lineHeight: "Wotè liy",
     // "Opacity"
     opacity: "Opakite",
     // [Auto-translated] "X"

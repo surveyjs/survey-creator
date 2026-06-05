@@ -3539,6 +3539,8 @@ export var bgStrings = {
     placeholderColor: "Цвят на контейнера",
     // [Auto-translated] "Size"
     size: "Големина",
+    // [Auto-translated] "Line height"
+    lineHeight: "Височина на линията",
     // [Auto-translated] "Opacity"
     opacity: "Непрозрачност",
     // [Auto-translated] "X"

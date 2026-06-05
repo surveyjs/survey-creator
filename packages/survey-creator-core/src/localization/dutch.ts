@@ -3539,6 +3539,8 @@ export var nlStrings = {
     placeholderColor: "Tijdelijke aanduiding voor kleur",
     // [Auto-translated] "Size"
     size: "Grootte",
+    // [Auto-translated] "Line height"
+    lineHeight: "Lijnhoogte",
     // [Auto-translated] "Opacity"
     opacity: "Dekking",
     // [Auto-translated] "X"

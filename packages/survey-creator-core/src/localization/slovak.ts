@@ -3539,6 +3539,8 @@ export var skStrings = {
     placeholderColor: "Farba zástupného symbolu",
     // [Auto-translated] "Size"
     size: "Veľkosť",
+    // [Auto-translated] "Line height"
+    lineHeight: "Výška trate",
     // [Auto-translated] "Opacity"
     opacity: "Neprehľadnosť",
     // [Auto-translated] "X"

@@ -3539,6 +3539,8 @@ export var fiStrings = {
     placeholderColor: "Paikkamerkin väri",
     // [Auto-translated] "Size"
     size: "Koko",
+    // [Auto-translated] "Line height"
+    lineHeight: "Linjakorkeus",
     // [Auto-translated] "Opacity"
     opacity: "Läpikuultavuus",
     // [Auto-translated] "X"

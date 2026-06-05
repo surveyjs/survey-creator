@@ -3539,6 +3539,8 @@ export var grStrings = {
     placeholderColor: "Χρώμα κειμένου πλακίδας",
     // "Size"
     size: "Μέγεθος",
+    // [Auto-translated] "Line height"
+    lineHeight: "Ύψος γραμμής",
     // "Opacity"
     opacity: "Διαφάνεια",
     // [Auto-translated] "X"

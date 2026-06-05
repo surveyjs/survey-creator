@@ -3539,6 +3539,8 @@ export var turkishStrings = {
     placeholderColor: "Yer tutucu rengi",
     // [Auto-translated] "Size"
     size: "Boyut",
+    // [Auto-translated] "Line height"
+    lineHeight: "Hat yüksekliği",
     // [Auto-translated] "Opacity"
     opacity: "Opak -lık",
     // [Auto-translated] "X"

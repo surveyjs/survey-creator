@@ -3539,6 +3539,8 @@ export var italianTranslation = {
     placeholderColor: "Colore segnaposto",
     // [Auto-translated] "Size"
     size: "Grandezza",
+    // [Auto-translated] "Line height"
+    lineHeight: "Altezza della linea",
     // [Auto-translated] "Opacity"
     opacity: "Opacità",
     // [Auto-translated] "X"

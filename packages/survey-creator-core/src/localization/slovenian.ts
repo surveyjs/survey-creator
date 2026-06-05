@@ -3539,6 +3539,8 @@ export var slStrings = {
     placeholderColor: "Barva oznake",
     // "Size"
     size: "Velikost",
+    // [Auto-translated] "Line height"
+    lineHeight: "Višina proga",
     // "Opacity"
     opacity: "Prosojnost",
     // [Auto-translated] "X"

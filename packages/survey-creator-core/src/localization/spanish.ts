@@ -3539,6 +3539,8 @@ export var spanishTranslation = {
     placeholderColor: "Color del marcador de posición",
     // [Auto-translated] "Size"
     size: "Tamaño",
+    // [Auto-translated] "Line height"
+    lineHeight: "Altura de la línea",
     // [Auto-translated] "Opacity"
     opacity: "Opacidad",
     // [Auto-translated] "X"

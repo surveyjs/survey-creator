@@ -3539,6 +3539,8 @@ export var jaStrings = {
     placeholderColor: "プレースホルダーの色",
     // [Auto-translated] "Size"
     size: "大きさ",
+    // [Auto-translated] "Line height"
+    lineHeight: "線高",
     // [Auto-translated] "Opacity"
     opacity: "不透明",
     // [Auto-translated] "X"

@@ -3539,6 +3539,8 @@ export var arStrings = {
     placeholderColor: "لون العنصر النائب",
     // [Auto-translated] "Size"
     size: "حجم",
+    // [Auto-translated] "Line height"
+    lineHeight: "ارتفاع الخط",
     // [Auto-translated] "Opacity"
     opacity: "العتامه",
     // [Auto-translated] "X"

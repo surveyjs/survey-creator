@@ -3539,6 +3539,8 @@ export var huStrings = {
     placeholderColor: "Helyőrző színe",
     // [Auto-translated] "Size"
     size: "Méret",
+    // [Auto-translated] "Line height"
+    lineHeight: "Vonalmagasság",
     // [Auto-translated] "Opacity"
     opacity: "Átlátszatlanság",
     // [Auto-translated] "X"

@@ -3540,6 +3540,8 @@ export var traditionalChineseTranslation = {
     placeholderColor: "佔位元顏色",
     // [Auto-translated] "Size"
     size: "大小",
+    // [Auto-translated] "Line height"
+    lineHeight: "線路高度",
     // [Auto-translated] "Opacity"
     opacity: "不透明度",
     // [Auto-translated] "X"

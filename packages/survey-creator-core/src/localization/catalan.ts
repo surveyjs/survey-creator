@@ -3539,6 +3539,8 @@ export var catalanTranslation = {
     placeholderColor: "Color del marcador de posición",
     // [Auto-translated] "Size"
     size: "Tamaño",
+    // [Auto-translated] "Line height"
+    lineHeight: "Alçada de la línia",
     // [Auto-translated] "Opacity"
     opacity: "Opacidad",
     // [Auto-translated] "X"

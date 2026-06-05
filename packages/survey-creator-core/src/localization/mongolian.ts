@@ -3539,6 +3539,8 @@ export var mnStrings = {
     placeholderColor: "Газар эзэмшигчийн өнгө",
     // [Auto-translated] "Size"
     size: "Хэмжээ",
+    // [Auto-translated] "Line height"
+    lineHeight: "Шугамын өндөр",
     // [Auto-translated] "Opacity"
     opacity: "Бүдүүлэг байдал",
     // [Auto-translated] "X"

@@ -3539,6 +3539,8 @@ export var persianStrings = {
     placeholderColor: "رنگ نگهدارنده",
     // [Auto-translated] "Size"
     size: "اندازه",
+    // [Auto-translated] "Line height"
+    lineHeight: "ارتفاع خط",
     // [Auto-translated] "Opacity"
     opacity: "کدورت",
     // [Auto-translated] "X"

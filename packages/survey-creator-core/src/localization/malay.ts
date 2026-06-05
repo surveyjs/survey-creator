@@ -3539,6 +3539,8 @@ export var msStrings = {
     placeholderColor: "Warna ruang letak",
     // [Auto-translated] "Size"
     size: "Saiz",
+    // [Auto-translated] "Line height"
+    lineHeight: "Ketinggian garisan",
     // [Auto-translated] "Opacity"
     opacity: "Kelegapan",
     // [Auto-translated] "X"

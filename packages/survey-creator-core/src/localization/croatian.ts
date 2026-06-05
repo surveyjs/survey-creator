@@ -3539,6 +3539,8 @@ export var hrStrings = {
     placeholderColor: "Boja rezerviranog mjesta",
     // [Auto-translated] "Size"
     size: "Veličina",
+    // [Auto-translated] "Line height"
+    lineHeight: "Visina pruge",
     // [Auto-translated] "Opacity"
     opacity: "Neprozirnost",
     // [Auto-translated] "X"

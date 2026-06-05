@@ -3540,6 +3540,8 @@ export var danishStrings = {
     placeholderColor: "Pladsholderfarve",
     // [Auto-translated] "Size"
     size: "Størrelse",
+    // [Auto-translated] "Line height"
+    lineHeight: "Linjehøjde",
     // [Auto-translated] "Opacity"
     opacity: "Opacitet",
     // [Auto-translated] "X"

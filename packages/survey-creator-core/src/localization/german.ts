@@ -3539,6 +3539,8 @@ export var germanTranslation = {
     placeholderColor: "Platzhalterfarbe",
     // [Auto-translated] "Size"
     size: "Größe",
+    // [Auto-translated] "Line height"
+    lineHeight: "Streckenhöhe",
     // [Auto-translated] "Opacity"
     opacity: "Undurchsichtigkeit",
     // [Auto-translated] "X"

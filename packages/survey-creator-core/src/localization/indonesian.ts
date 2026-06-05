@@ -3539,6 +3539,8 @@ export var indonesianStrings = {
     placeholderColor: "Warna tempat penampung",
     // [Auto-translated] "Size"
     size: "Tingginya",
+    // [Auto-translated] "Line height"
+    lineHeight: "Tinggi garis",
     // [Auto-translated] "Opacity"
     opacity: "Opacity",
     // [Auto-translated] "X"
