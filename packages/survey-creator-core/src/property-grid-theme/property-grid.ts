@@ -157,7 +157,6 @@ export var propertyGridCss = {
   buttongroup: {
     ...defaultCss.buttongroup,
     itemReadOnly: "sv-button-group__item--disabled",
-    controlReadOnly: "sd-formbox--disabled",
     popup: "spg-dropdown-popup svc-creator-popup",
   },
   imagepicker: {
