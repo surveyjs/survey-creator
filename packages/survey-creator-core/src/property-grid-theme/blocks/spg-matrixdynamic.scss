@@ -2,8 +2,9 @@
 @use "../../typography-mixins.scss" as *;
 
 .spg-drag-element__svg {
-  width: var(--sjs2-typography-line-height-default);
-  height: var(--sjs2-typography-line-height-default);
+  line-height: var(--sjs2-typography-line-height-default);
+  width: 1lh;
+  height: 1lh;
   padding: var(--sjs2-spacing-x100);
   box-sizing: content-box;
   display: block;

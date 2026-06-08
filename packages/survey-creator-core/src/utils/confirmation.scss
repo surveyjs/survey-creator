@@ -21,8 +21,9 @@
   display: flex;
   padding: 12px;
   align-items: center;
-  width: var(--sjs2-typography-line-height-default);
-  height: var(--sjs2-typography-line-height-default);
+  line-height: var(--sjs2-typography-line-height-default);
+  width: 1lh;
+  height: 1lh;
   box-sizing: content-box;
   border-radius: var(--sjs2-radius-round, 9999px);
   background: var(--sjs2-color-bg-warning-secondary, rgba(255, 152, 20, 0.1));

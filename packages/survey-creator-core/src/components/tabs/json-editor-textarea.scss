@@ -65,8 +65,9 @@ svc-tab-json-editor-textarea {
 
 .svc-json-error__icon {
   fill: var(--sjs2-color-bg-alert-primary);
-  width: var(--sjs2-line-height-x200);
-  height: var(--sjs2-line-height-x200);
+  line-height: var(--sjs2-line-height-x200);
+  width: 1lh;
+  height: 1lh;
   box-sizing: border-box;
   display: block;
 }
@@ -97,8 +98,9 @@ svc-tab-json-editor-textarea {
 
   svg {
     fill: var(--sjs2-color-fg-basic-secondary);
-    width: var(--sjs2-line-height-x300);
-    height: var(--sjs2-line-height-x300);
+    line-height: var(--sjs2-line-height-x300);
+    width: 1lh;
+    height: 1lh;
   }
 }
 
