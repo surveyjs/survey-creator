@@ -13,39 +13,70 @@
   transform: translateY(-50%);
 }
 
-.spg-color-editor__color-swatch {
-  position: relative;
-  flex-shrink: 0;
-  flex-grow: 0;
-  border-radius: var(--sjs2-radius-component-formbox-action, 4px);
-  width: var(--sjs2-size-x400, 32px);
-  height: var(--sjs2-size-x300, 24px);
-  box-sizing: border-box;
-  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-utility-scrollbar);
-  margin-left: var(--sjs2-spacing-x150);
-
-  .sv-svg-icon {
-    position: absolute;
-    line-height: var(--sjs2-line-height-x200);
-    width: 1lh;
-    height: 1lh;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    fill: var(--sjs2-color-border-basic-secondary-overlay, rgba(28, 27, 32, 0.4));
-  }
-}
 .spg-question--disabled .spg-color-editor {
   background-color: var(--sjs2-color-bg-basic-primary);
 }
-.spg-color-editor__color-swatch--disabled {
-  .sv-svg-icon {
-    opacity: var(--sjs2-opacity-disabled);
+
+.sd-color-swatch-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--sjs2-spacing-x100);
+}
+
+.sd-color-swatch-item__label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.sd-color-swatch-item__caption {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spg-color-editor__swatch {
+  display: flex;
+  padding: var(--sjs2-layout-component-input-medium-swatch-padding-vertical, 8px)
+    var(--sjs2-layout-component-input-medium-swatch-padding-right, 0)
+    var(--sjs2-layout-component-input-medium-swatch-padding-vertical, 8px)
+    var(--sjs2-layout-component-input-medium-swatch-padding-left, 12px);
+  align-items: center;
+}
+
+.sd-color-swatch {
+  display: flex;
+  align-items: flex-start;
+  border-radius: var(--sjs2-radius-component-swatch, 4px);
+}
+
+.sd-color-swatch__icon {
+  display: flex;
+  line-height: var(--sjs2-typography-line-height-small);
+  width: 1lh;
+  height: 1lh;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  use {
+    fill: var(--sjs2-color-fg-static-1-primary);
   }
 }
 
-.spg-color-editor__color-swatch--default {
-  .sv-svg-icon {
-    opacity: var(--sjs2-opacity-visible);
-  }
+.sd-color-swatch__content {
+  position: relative;
+  display: flex;
+  width: var(--sjs2-size-x400, 32px);
+  height: var(--sjs2-size-x300, 24px);
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: var(--sjs2-radius-component-formbox-action, 4px);
+  border: var(--sjs2-border-width-x100, 1px) solid
+    var(--sjs2-color-border-basic-secondary-overlay, rgba(28, 27, 32, 0.4));
+}
+
+.sd-color-swatch--disabled {
+  opacity: var(--sjs2-opacity-disabled);
 }
