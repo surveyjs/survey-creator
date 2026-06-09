@@ -25,6 +25,7 @@ export function calculateThemeVariables(
     for (const key of Object.keys(themeCopyCssVariables)) {
       div.style.setProperty(key, themeCopyCssVariables[key] as string);
     }
+    div.classList.add("sd-theme-root");
     body.appendChild(div);
 
     const computed = DomWindowHelper.getWindow().getComputedStyle(div);
