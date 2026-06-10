@@ -15,7 +15,7 @@
         :value="colorInputValue"
         :class="colorInputClassName"
         tabindex="-1"
-        v-bind="arias"
+        v-bind="inputArias"
         @change="colorInputChange"
       />
     </div>
@@ -44,4 +44,5 @@ const props = withDefaults(defineProps<{
 const rootTag = computed(() => props.colorInputChange ? "label" : "div");
 const rootClassName = computed(() => props.className ?? "sd-color-swatch");
 const rootStyle = computed(() => ({ backgroundColor: props.color }));
+const inputArias = computed(() => props.arias ?? {});
 </script>
