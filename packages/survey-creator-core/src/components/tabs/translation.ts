@@ -1537,6 +1537,7 @@ export class TranslationEditor {
     this.updateMatricesColumns();
   }
   private updateMatricesColumns(): void {
+    if (!this.translation.stringsHeaderSurvey) return;
     this.translation.stringsHeaderSurvey.getAllQuestions().forEach(
       q => {
         this.updateMatrixColumns(<QuestionMatrixDropdownModel>q);
@@ -1673,6 +1674,7 @@ export class TranslationEditor {
     return action;
   }
   private updateFromLocaleAction() {
+    if (!this.translation.stringsHeaderSurvey) return;
     const action = this.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale");
     if (!!action) {
       action.enabled = this.fromLocales.length > 0;
