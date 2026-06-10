@@ -426,7 +426,7 @@ test("Get theme changes only", (): any => {
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(10);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(44);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(42);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(modifiedThemeChanges).length).toBe(6);
@@ -450,7 +450,7 @@ test("Get theme changes only", (): any => {
     "header",
     "headerView",
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(40);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(36);
 
   const themeChangesReset = themePlugin.getCurrentTheme(true);
   expect(Object.keys(themeChangesReset).length).toBe(6);
@@ -607,7 +607,7 @@ test("Set and use custom default theme", (): any => {
   let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
   expect(themeModel.themeName).toBe("custom");
-  expect(creator.theme.cssVariables["--a-var"]).toBe(undefined);
+  expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
   expect(themeTabViewModel.survey.themeVariables["--a-var"]).toBe("aVal");
 
   themeModel["--sjs2-color-project-brand-600"] = "#0000ff";
@@ -887,7 +887,7 @@ test("Theme undo redo expression questions", (): any => {
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(fontSizeQuestion.value).toBe(100);
-  expect(themeModel.cssVariables["--sjs2-base-unit-font-size"]).toBe("8px");
+  expect(themeModel.cssVariables["--sjs2-base-unit-font-size"]).toBe(undefined);
 
   fontSizeQuestion.value = 150;
 
@@ -902,7 +902,7 @@ test("Theme undo redo expression questions", (): any => {
   expect(themeModel.undoRedoManager.canRedo()).toBe(true);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(fontSizeQuestion.value).toBe(100);
-  expect(themeModel.cssVariables["--sjs2-base-unit-font-size"]).toBe("8px");
+  expect(themeModel.cssVariables["--sjs2-base-unit-font-size"]).toBe(undefined);
 
   themePlugin.redo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);

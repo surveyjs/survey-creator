@@ -15,6 +15,7 @@ export function restoreGetRGBaColorMock(): void {
 }
 
 const defaultComputedCssVariables: Record<string, string> = {
+  "--sjs2-base-unit-font-size": "8px",
   "--sjs2-typography-font-family-text": "Open Sans",
   "--sjs2-typography-font-family-component-input-content": "Open Sans",
   "--sjs2-typography-font-weight-component-input-content": "400",
@@ -50,24 +51,26 @@ const defaultComputedCssVariables: Record<string, string> = {
   "--sjs2-typography-line-height-component-input-content": "24px",
   "--sjs2-color-component-input-default-value": "rgba(0, 0, 0, 0.91)",
   "--sjs2-color-component-input-default-placeholder": "rgba(0, 0, 0, 0.45)",
+  "--sjs2-color-fg-basic-primary": "rgba(0, 0, 0, 0.91)",
+  "--sjs2-typography-font-weight-strong": "600",
 };
 
 export function mockDomWindowGetComputedStyleFromInlineStyles(values: Record<string, string> = {}): MockInstance {
-  const mergedDefaults = { ...defaultComputedCssVariables, ...values };
   return vi.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
     ...window,
     getComputedStyle: (el: any) => {
       const style = el?.style;
       return {
         getPropertyValue: (property: string) => {
+          if (values[property] !== undefined) return values[property];
           if (style) {
             const v = style.getPropertyValue?.(property);
-            if (typeof v === "string" && v.length > 0) return v;
+            if (typeof v === "string" && v.indexOf("var(") === -1 && v.length > 0) return v;
             // Fallback for non-custom properties in JSDOM mocks
             const v2 = style[property];
-            if (typeof v2 === "string" && v2.length > 0) return v2;
+            if (typeof v2 === "string" && v.indexOf("var(") === -1 && v2.length > 0) return v2;
           }
-          if (mergedDefaults[property] !== undefined) return mergedDefaults[property];
+          if (defaultComputedCssVariables[property] !== undefined) return defaultComputedCssVariables[property];
           return "";
         }
       } as any;
