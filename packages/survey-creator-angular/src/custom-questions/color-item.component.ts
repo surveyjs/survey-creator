@@ -12,10 +12,6 @@ export class ColorItemComponent extends BaseAngular<ItemValue> {
   protected override getModel(): ItemValue {
     return this.model;
   }
-
-  getStyle() {
-    return { backgroundColor: this.model.value };
-  }
 }
 
 AngularComponentFactory.Instance.registerComponent("color-item", ColorItemComponent);
