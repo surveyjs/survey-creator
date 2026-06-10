@@ -1,4 +1,3 @@
-import { SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { UndoRedoController } from "./undo-redo-controller";
