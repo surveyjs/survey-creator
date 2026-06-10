@@ -1,4 +1,4 @@
-import { BaseTheme, createBoxShadow, DomDocumentHelper, DomWindowHelper, parseBoxShadow } from "survey-core";
+import { createBoxShadow, DomDocumentHelper, DomWindowHelper, parseBoxShadow } from "survey-core";
 import { getRGBaColor } from "./color-utils";
 
 export function roundTo2Decimals(number: number): number {
@@ -18,13 +18,12 @@ export function calculateThemeVariables(
     return cssVariables as undefined | null;
   }
   let themeCopyCssVariables = JSON.parse(JSON.stringify(cssVariables)) as { [key: string]: string };
-  const extendedBaseTheme = { /*...BaseTheme.cssVariables,*/ ...themeCopyCssVariables };
 
   const body = rootElement || DomDocumentHelper.getBody();
-  if (extendedBaseTheme && typeof DomWindowHelper.getWindow() !== "undefined") {
+  if (themeCopyCssVariables && typeof DomWindowHelper.getWindow() !== "undefined") {
     const div = DomDocumentHelper.createElement("div");
-    for (const key of Object.keys(extendedBaseTheme)) {
-      div.style.setProperty(key, extendedBaseTheme[key] as string);
+    for (const key of Object.keys(themeCopyCssVariables)) {
+      div.style.setProperty(key, themeCopyCssVariables[key] as string);
     }
     div.classList.add("sd-theme-root");
     body.appendChild(div);
