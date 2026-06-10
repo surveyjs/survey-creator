@@ -2470,3 +2470,206 @@ test("Error on getting placeholder, Bug#7327", () => {
   translation.root.allLocItems.forEach(item => placeholders.push(item.getPlaceholder("de")));
   expect(placeholders).toStrictEqual(["q1", "Column 1", "Row 1", "Zelltext 1", "Zelltext 1"]);
 });
+
+test("Import translations from CSV should not throw error, Issue#7790", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              default: "Question 1",
+              fr: "Question 1 FR",
+              de: "Question 1 DE"
+            }
+          },
+          {
+            type: "text",
+            name: "question2",
+            title: {
+              default: "Question 2",
+              fr: "Question 2 FR"
+            }
+          }
+        ]
+      }
+    ]
+  });
+
+  const translation = new Translation(survey);
+  translation.reset();
+
+  // Export to CSV
+  let csvData: string[][] = [];
+  parse(translation.exportToCSV(), {
+    complete: function (results) {
+      csvData = results.data;
+    }
+  });
+
+  // Verify export has data
+  expect(csvData.length).toBeGreaterThan(1);
+
+  // Import the CSV data back - this should not throw an error
+  expect(() => {
+    translation.importFromNestedArray(JSON.parse(JSON.stringify(csvData)));
+  }).not.toThrow();
+
+  // Verify that translations are still accessible after import
+  expect(translation.root).toBeDefined();
+  expect(translation.root.allLocItems.length).toBeGreaterThan(0);
+});
+
+test("Import translations via TabTranslationPlugin should not throw error, Issue#7790", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              default: "Question 1",
+              fr: "Question 1 FR",
+              de: "Question 1 DE"
+            }
+          },
+          {
+            type: "text",
+            name: "question2",
+            title: {
+              default: "Question 2",
+              fr: "Question 2 FR"
+            }
+          }
+        ]
+      }
+    ]
+  };
+
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation: Translation = tabTranslation.model;
+
+  // Export to CSV
+  let csvData: string[][] = [];
+  parse(translation.exportToCSV(), {
+    complete: function (results) {
+      csvData = results.data;
+    }
+  });
+
+  // Verify export has data
+  expect(csvData.length).toBeGreaterThan(1);
+
+  // Import the CSV data back - this should not throw an error
+  // This is the critical test - the import should work with the full UI context
+  expect(() => {
+    translation.importFromNestedArray(JSON.parse(JSON.stringify(csvData)));
+  }).not.toThrow();
+
+  // Verify that translations are still accessible after import
+  expect(translation.root).toBeDefined();
+  expect(translation.stringsSurvey).toBeDefined();
+  expect(translation.stringsHeaderSurvey).toBeDefined();
+});
+
+test("TranslationEditor with imported translations should not throw error, Issue#7790", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              default: "Question 1",
+              fr: "Question 1 FR",
+              de: "Question 1 DE"
+            }
+          }
+        ]
+      }
+    ]
+  });
+
+  const translation = new Translation(survey, null);
+  translation.reset();
+
+  // Export to CSV
+  let csvData: string[][] = [];
+  parse(translation.exportToCSV(), {
+    complete: function (results) {
+      csvData = results.data;
+    }
+  });
+
+  // Import the CSV data back
+  translation.importFromNestedArray(JSON.parse(JSON.stringify(csvData)));
+
+  // Create a TranslationEditor - this should not throw an error
+  // The constructor calls updateFromLocaleAction() and updateMatricesColumns()
+  // which access stringsHeaderSurvey
+  expect(() => {
+    const editor = translation.createTranslationEditor("fr");
+  }).not.toThrow();
+});
+
+test("Import after creating TranslationEditor should not throw error, Issue#7790", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              default: "Question 1",
+              fr: "Question 1 FR",
+              de: "Question 1 DE"
+            }
+          },
+          {
+            type: "text",
+            name: "question2",
+            title: {
+              default: "Question 2",
+              fr: "Question 2 FR"
+            }
+          }
+        ]
+      }
+    ]
+  });
+
+  const translation = new Translation(survey, null);
+  translation.reset();
+
+  // Create a TranslationEditor first (simulates opening the auto-translate dialog)
+  const editor = translation.createTranslationEditor("fr");
+
+  // Export to CSV from the original translation
+  let csvData: string[][] = [];
+  parse(translation.exportToCSV(), {
+    complete: function (results) {
+      csvData = results.data;
+    }
+  });
+
+  // Now import while the editor exists - this should not throw an error
+  // This simulates the scenario in the issue where import is called
+  // while the Auto-Translate dialog is open
+  expect(() => {
+    translation.importFromNestedArray(JSON.parse(JSON.stringify(csvData)));
+  }).not.toThrow();
+
+  expect(translation.root).toBeDefined();
+  expect(translation.stringsHeaderSurvey).toBeDefined();
+});
