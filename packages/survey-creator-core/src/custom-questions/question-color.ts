@@ -78,7 +78,6 @@ export class QuestionColorModel extends QuestionTextModel {
   public getSwatchCss() {
     return new CssClassBuilder()
       .append(this.cssClasses.swatch)
-      .append(this.cssClasses.swatchDefault, !this.renderedValue)
       .append(this.cssClasses.swatchDisabled, this.isInputReadOnly)
       .toString();
   }

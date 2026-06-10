@@ -73,6 +73,7 @@ import { QuestionSpinEditorComponent } from "./custom-questions/spin-editor.comp
 import { SpinEditorButtonComponent } from "./custom-questions/spin-editor-button.component";
 import { ColorItemComponent } from "./custom-questions/color-item.component";
 import { QuestionColorComponent } from "./custom-questions/color.component";
+import { SwatchComponent } from "./custom-questions/swatch.component";
 import { QuestionFileEditorComponent } from "./custom-questions/file.component";
 import { FileEditorButtonComponent } from "./custom-questions/file-editor-button.component";
 import { BooleanSwitchComponent } from "./custom-questions/boolean-switch.component";
@@ -90,7 +91,7 @@ import { ImageItemDragActionComponent } from "./adorners/image-item-drag-action.
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxItemGroupComponent, ToolboxListComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, CreatorLogoImageComponent,
-    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, SpinEditorButtonComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, FileEditorButtonComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent,
+    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, SpinEditorButtonComponent, ColorItemComponent, QuestionColorComponent, SwatchComponent, QuestionFileEditorComponent, FileEditorButtonComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent,
     BooleanSwitchComponent, TranslateFromAction, QuestionElementContentComponent, PageElementContentComponent, PageWrapperComponent, ComponentContainerComponent,
     IconItemComponent, SideBarLaunchCardComponent, ContainerTabComponent, ImageItemDragActionComponent],
 
@@ -102,7 +103,7 @@ import { ImageItemDragActionComponent } from "./adorners/image-item-drag-action.
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxItemGroupComponent, ToolboxListComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, CreatorLogoImageComponent,
-    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, SpinEditorButtonComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, FileEditorButtonComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, BooleanSwitchComponent, TranslateFromAction, QuestionElementContentComponent, PageElementContentComponent, ComponentContainerComponent,
+    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, SpinEditorButtonComponent, ColorItemComponent, QuestionColorComponent, SwatchComponent, QuestionFileEditorComponent, FileEditorButtonComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, BooleanSwitchComponent, TranslateFromAction, QuestionElementContentComponent, PageElementContentComponent, ComponentContainerComponent,
     IconItemComponent, SideBarLaunchCardComponent, ContainerTabComponent, ImageItemDragActionComponent],
   providers: [],
 })
