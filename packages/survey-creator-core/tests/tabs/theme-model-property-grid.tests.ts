@@ -1017,6 +1017,9 @@ test("set headerViewContainer advanced", (): any => {
 
 test("restore basic headerViewContainer values", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+
+  mockDomWindowGetComputedStyleFromInlineStyles({});
+
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {
@@ -1092,6 +1095,7 @@ test("restore basic headerViewContainer values", (): any => {
 
 test("restore advanced headerViewContainer values", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  mockDomWindowGetComputedStyleFromInlineStyles({});
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {

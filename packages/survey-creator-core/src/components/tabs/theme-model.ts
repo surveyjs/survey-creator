@@ -1,4 +1,4 @@
-import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables } from "survey-core";
+import { Base, ITheme, JsonObjectProperty, Question, Serializer, property, ILoadFromJSONOptions, ISaveToJSONOptions, IHeader, EventBase, SurveyModel, ArrayChanges, patchLegacyCSSVariables, BaseTheme } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { defaultThemesOrder, PredefinedThemes, Themes } from "./themes";
 import { settings } from "../../creator-settings";
@@ -13,7 +13,6 @@ import { ColorCalculator, getRGBaColor, ingectAlpha, parseColor } from "../../ut
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import { SurveyCreatorModel } from "../../creator-base";
-import { DefaultLight } from "survey-core/themes";
 
 export * from "./header-model";
 
@@ -312,7 +311,7 @@ export class ThemeModel extends Base implements ITheme {
       ...HeaderModel.getDefaultVars(),
       ...getThemeFontSettingsCssVarNames(),
     ].filter(name => name.indexOf("--sjs2-") == 0);
-    this.baseThemeVariables = calculateThemeVariables(DefaultLight.cssVariables, vars, this.getRootElement());
+    this.baseThemeVariables = calculateThemeVariables(BaseTheme.cssVariables, vars, this.getRootElement());
 
     this._defaultSessionTheme = ThemeModel.DefaultTheme;
     this.backgroundImage = "backgroundImage" in surveyTheme ? surveyTheme.backgroundImage : survey?.backgroundImage;
