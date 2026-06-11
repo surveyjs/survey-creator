@@ -35,8 +35,9 @@ export class SurveyHelper {
     const survey: SurveyModel = (<any>el).getSurvey();
     if (!survey) return el.name;
     if (el.isPage) return this.getNewPageName(survey.pages);
-    if (el.isPanel) return this.getNewPanelName(survey.getAllPanels());
-    return this.getNewQuestionName(survey.getAllQuestions(false, false, true));
+    const elements = (<Array<any>>survey.getAllQuestions(false, false, true)).concat(survey.getAllPanels());
+    if (el.isPanel) return this.getNewPanelName(elements);
+    return this.getNewQuestionName(elements);
   }
   public static getNewPageName(objs: Array<any>) {
     return SurveyHelper.getNewName(
