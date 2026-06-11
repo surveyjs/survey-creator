@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, setJSON, getPropertyGridCategory, getListItemByText, generalGroupName, logicGroupName, expect, getVisibleSelectListItemByText } from "./helper";
+import { url, compareScreenshot, test, setJSON, getPropertyGridCategory, getListItemByText, generalGroupName, logicGroupName, expect, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Actions in Logic section Screenshot";
 
@@ -73,7 +73,9 @@ test.describe(title, () => {
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("ArrowDown");
 
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup-dropdown-list-item--focused.png");
+    await showContentBehindPopup(page);
   });
 
   test("Check run expression description", async ({ page }) => {

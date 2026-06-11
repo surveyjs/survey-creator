@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody } from "./helper";
+import { url, compareScreenshot, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Design Surface Screenshot";
 
@@ -64,7 +64,9 @@ test.describe(title, () => {
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".sv-popup__container", "convert-to-popup.png", { maxDiffPixels: 4 });
+    await showContentBehindPopup(page);
   });
 
   test("Test question type converter on page for panel - 1", async ({ page }) => {
@@ -93,7 +95,9 @@ test.describe(title, () => {
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true }).first();
     await expect(popupContainer).toBeVisible();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-panel.png", { maxDiffPixels: 2 });
+    await showContentBehindPopup(page);
   });
 
   test("Test question type converter on page for panel - 2", async ({ page }) => {
@@ -128,7 +132,9 @@ test.describe(title, () => {
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-panel-not-empty.png", { maxDiffPixels: 5 });
+    await showContentBehindPopup(page);
   });
 
   test("Test question type converter (mobile)", async ({ page }) => {
@@ -162,7 +168,9 @@ test.describe(title, () => {
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
     await resetFocusToBody(page);
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".sv-popup__container", "convert-to-popup-mobile.png", { maxDiffPixels: 20 });
+    await showContentBehindPopup(page);
   });
 
   test("Test question type selector", async ({ page }) => {
@@ -190,7 +198,9 @@ test.describe(title, () => {
 
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true });
     await expect(popupContainer).toBeVisible();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".sv-popup__container", "select-type-popup.png");
+    await showContentBehindPopup(page);
   });
 
   test("Boolean no wrap", async ({ page }) => {
@@ -1487,7 +1497,9 @@ test.describe(title, () => {
     await getListItemByText(page, "Rating Scale").hover();
     await page.waitForTimeout(400);
     await getListItemByText(page, "Labels").hover();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup--menu-popup").filter({ visible: true }), "question-type-rating-subtypes.png");
+    await showContentBehindPopup(page);
   });
 
   test("Question description bottom", async ({ page }) => {
