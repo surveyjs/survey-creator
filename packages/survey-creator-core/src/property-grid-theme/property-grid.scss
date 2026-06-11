@@ -117,10 +117,7 @@
 
 .spg-title-toolbar--single-help-action {
   justify-content: flex-start;
-
-  // flex-grow: 0;
-  // margin-left: 0;
-  // padding-left: 0;
+  padding-left: var(--sjs2-spacing-x050);
 
   .spg-help-action {
     margin-inline-end: auto;
