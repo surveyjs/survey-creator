@@ -1497,9 +1497,7 @@ test.describe(title, () => {
     await getListItemByText(page, "Rating Scale").hover();
     await page.waitForTimeout(400);
     await getListItemByText(page, "Labels").hover();
-    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup--menu-popup").filter({ visible: true }), "question-type-rating-subtypes.png");
-    await showContentBehindPopup(page);
   });
 
   test("Question description bottom", async ({ page }) => {

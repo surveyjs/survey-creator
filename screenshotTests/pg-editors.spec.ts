@@ -812,9 +812,7 @@ test.describe(title, () => {
     await getQuestionBarItemByTitle(page, "Open settings").click();
     await page.locator(".spg-question[data-name='inputType'] .sd-dropdown").click();
 
-    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup").filter({ visible: true }).first(), "pg-overlay-popup.png");
-    await showContentBehindPopup(page);
   });
 
   test("Check creator theme settings", async ({ page }) => {
