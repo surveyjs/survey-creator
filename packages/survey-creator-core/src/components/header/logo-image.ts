@@ -61,6 +61,7 @@ export class LogoImageViewModel extends Base {
       new Action({
         id: "add",
         iconName: "icon-choosefile",
+        title: this.creator.getLocString("ed.selectFile"),
         showTitle: false,
         appearance: { style: "brand" },
         action: () => {
@@ -70,6 +71,7 @@ export class LogoImageViewModel extends Base {
       new Action({
         id: "remove",
         iconName: "icon-clear",
+        title: this.creator.getLocString("ed.removeFile"),
         showTitle: false,
         appearance: { style: "alert" },
         action: () => {
