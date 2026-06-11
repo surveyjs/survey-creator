@@ -329,20 +329,56 @@ export async function hideElement(page: Page, selector: string) {
 }
 
 const HIDE_CONTENT_BEHIND_POPUP_STYLE_ID = "hide-content-behind-popup-style";
+const HIDE_CONTENT_BEHIND_POPUP_CSS = `
+  .svc-creator, .sps-body { visibility: hidden !important; }
+  .sv-popup, .sv-popup *, .sv-dropdown-popup, .sv-dropdown-popup * { visibility: visible !important; }
+`;
 
 export async function hideContentBehindPopup(page: Page) {
-  const handle = await page.addStyleTag({
-    content: `
-      .svc-creator, .sps-body { visibility: hidden !important; }
-      .sv-popup, .sv-popup * { visibility: visible !important; }
-    `,
-  });
-  await handle.evaluate((el, id) => { (el as HTMLElement).id = id; }, HIDE_CONTENT_BEHIND_POPUP_STYLE_ID);
+  await page.evaluate(({ styleId, css }) => {
+    const roots: Array<Document | ShadowRoot> = [];
+    const addRoot = (root: Document | ShadowRoot | null | undefined) => {
+      if (root && !roots.includes(root)) {
+        roots.push(root);
+      }
+    };
+
+    const creator = (window as any).creator;
+    addRoot(creator?.rootElement?.getRootNode?.());
+    addRoot(document.getElementById("survey-creator")?.shadowRoot ?? null);
+    addRoot(document);
+
+    for (const root of roots) {
+      const host = root === document ? document.head : root;
+      if (host.querySelector(`#${styleId}`)) {
+        continue;
+      }
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.textContent = css;
+      host.appendChild(style);
+    }
+  }, { styleId: HIDE_CONTENT_BEHIND_POPUP_STYLE_ID, css: HIDE_CONTENT_BEHIND_POPUP_CSS });
 }
 
 export async function showContentBehindPopup(page: Page) {
-  await page.evaluate((id) => {
-    document.getElementById(id)?.remove();
+  await page.evaluate((styleId) => {
+    const roots: Array<Document | ShadowRoot> = [];
+    const addRoot = (root: Document | ShadowRoot | null | undefined) => {
+      if (root && !roots.includes(root)) {
+        roots.push(root);
+      }
+    };
+
+    const creator = (window as any).creator;
+    addRoot(creator?.rootElement?.getRootNode?.());
+    addRoot(document.getElementById("survey-creator")?.shadowRoot ?? null);
+    addRoot(document);
+
+    for (const root of roots) {
+      const host = root === document ? document.head : root;
+      host.querySelector(`#${styleId}`)?.remove();
+    }
   }, HIDE_CONTENT_BEHIND_POPUP_STYLE_ID);
 }
 
