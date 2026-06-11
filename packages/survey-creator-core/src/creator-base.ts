@@ -3206,10 +3206,10 @@ export class SurveyCreatorModel extends Base
     return this.getNewQuestionName();
   }
   protected getNewQuestionName(): string {
-    return SurveyHelper.getNewQuestionName(this.getAllQuestions());
+    return SurveyHelper.getNewQuestionName(this.getAllQuestions().concat(this.getAllPanels()));
   }
   protected getNewPanelName(): string {
-    return SurveyHelper.getNewPanelName(this.getAllPanels());
+    return SurveyHelper.getNewPanelName(this.getAllPanels().concat(this.getAllQuestions()));
   }
 
   protected setNewNamesCore(element: ISurveyElement) {
