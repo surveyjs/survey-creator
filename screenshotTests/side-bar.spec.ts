@@ -1,5 +1,5 @@
 import { expect } from "playwright/test";
-import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab, objectSelectorButton, expandButtonSelector, waitForScrollEnd } from "./helper";
+import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab, objectSelectorButton, expandButtonSelector, waitForScrollEnd, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 import { largeSurvey } from "./large-survey";
 
 const title = "Sidebar";
@@ -32,7 +32,9 @@ test.describe(title, () => {
     await objectSelectorButton(page).click();
     await page.waitForTimeout(1000);
 
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, objectSelectorContent, "side-bar-object-selector-with-selected-item.png");
+    await showContentBehindPopup(page);
   });
 
   test("object selector with large object's name", async ({ page }) => {

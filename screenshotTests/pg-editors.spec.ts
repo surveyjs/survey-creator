@@ -1,5 +1,5 @@
 import { test, expect } from "playwright/test";
-import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, getVisibleSelectListItemByText } from "./helper";
+import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Property Grid Editors";
 test.describe(title, () => {
@@ -148,7 +148,9 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Data").click();
     await page.locator(".svc-action-button.svc-question-link__set-button").filter({ hasText: "Set Default Answer" }).click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-default-value-popup.png");
+    await showContentBehindPopup(page);
   });
 
   test("Custom button into fast entry popup", async ({ page }) => {
@@ -174,7 +176,9 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Choice Options").click();
     await page.locator(".sd-action").filter({ hasText: "Edit" }).first().click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-choices-fast-entry-popup.png");
+    await showContentBehindPopup(page);
   });
 
   test("Logic popup", async ({ page }) => {
@@ -183,7 +187,9 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Conditions").click();
     await page.locator(".spg-panel__content div[data-name='visibleIf'] button").filter({ hasText: "Edit" }).click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup.png");
+    await showContentBehindPopup(page);
   });
 
   test("Logic popup with boolean question", async ({ page }) => {
@@ -222,11 +228,15 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, "Conditions").click();
     await page.locator(".spg-panel__content div[data-name='visibleIf'] button").filter({ hasText: "Edit" }).click();
     await page.locator(".sd-boolean--checked").click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup-boolean.png");
+    await showContentBehindPopup(page);
     await page.locator("button").filter({ hasText: "Cancel" }).first().click();
     await page.waitForTimeout(1000);
     await page.locator(".spg-panel__content div[data-name='enableIf'] button").filter({ hasText: "Edit" }).click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup-rating.png");
+    await showContentBehindPopup(page);
   });
 
   test("Logic popup mobile", async ({ page, browser }) => {
@@ -248,6 +258,7 @@ test.describe(title, () => {
     await expect(popup.locator(".sv-popup__container").first()).toBeVisible();
     await page.evaluate(() => (document as any).fonts && (document as any).fonts.ready);
 
+    await hideContentBehindPopup(page);
     await compareScreenshot(
       page,
       popup,
@@ -257,6 +268,7 @@ test.describe(title, () => {
         maxDiffPixels: 20
       }
     );
+    await showContentBehindPopup(page);
   });
 
   test("Property grid checkbox - all states", async ({ page }) => {
@@ -471,7 +483,9 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "color-editor-button-hover.png");
     await questionSelector.locator(".sd-formbox .sd-action").click();
     await resetHoverToCreator(page);
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup__container").filter({ visible: true }), "color-editor-choices.png");
+    await showContentBehindPopup(page);
     await page.keyboard.press("Escape");
     await questionSelector.locator(".sd-formbox__input").click();
     await compareScreenshot(page, questionSelector, "color-editor-focus.png");
