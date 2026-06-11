@@ -455,9 +455,7 @@ test.describe(title, () => {
     const questionTagbox = page.locator(".sd-formbox.sd-tagbox");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await questionTagbox.click();
-    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup__container"), "test-tab-tagbox-style.png");
-    await showContentBehindPopup(page);
   });
 
   test("Simulator delete file confirmation popup", async ({ page }) => {
@@ -490,8 +488,6 @@ test.describe(title, () => {
     await clearButton.click();
 
     await expect(popup).toBeVisible();
-    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-popup-delete-file-confirmation.png");
-    await showContentBehindPopup(page);
   });
 });
