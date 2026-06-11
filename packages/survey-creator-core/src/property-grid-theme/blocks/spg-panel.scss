@@ -24,8 +24,7 @@
 
 .spg-panel__title:disabled,
 .spg-panel__title:disabled:hover {
-  color: var(--sjs2-color-fg-basic-primary);
-  opacity: var(--sjs2-opacity-disabled);
+  color: var(--sjs2-color-component-caption-disabled-text);
   cursor: default;
 }
 
@@ -139,11 +138,12 @@
     box-shadow: none;
   }
   .spg-panel__title {
-    @include sjs2--typography--default;
+    @include sjs2--typography--component-caption-content;
     box-shadow: none;
     background-color: transparent;
-    padding: var(--sjs2-spacing-x100) 0;
-    color: var(--sjs2-color-fg-basic-secondary);
+    color: var(--sjs2-color-component-caption-default-text);
+    padding: var(--sjs2-layout-component-caption-content-padding-vertical)
+      var(--sjs2-layout-component-caption-content-padding-horizontal);
   }
   .spg-row {
     margin-top: var(--sjs2-spacing-x100);
