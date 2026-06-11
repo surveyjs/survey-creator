@@ -19,6 +19,10 @@
   width: 100%;
 }
 
+div:not(.sd-formbox__label) > .spg-title {
+  padding: var(--sjs2-layout-component-caption-content-padding-vertical)
+    var(--sjs2-layout-component-caption-content-padding-horizontal);
+}
 
 .spg-question__title {
   @include sjs2--typography--component-caption-content;
@@ -33,11 +37,6 @@
 
   .sv-title-actions {
     gap: var(--sjs2-layout-component-caption-box-gap-vertical);
-  }
-
-  .sv-title-actions__title {
-    padding: var(--sjs2-layout-component-caption-content-padding-vertical)
-      var(--sjs2-layout-component-caption-content-padding-horizontal);
   }
 }
 .spg-question--disabled .spg-question__title {
@@ -116,7 +115,7 @@
 }
 
 .spg-question--disabled.spg-question--location--left .spg-question__title {
-  color: var(--sjs2-color-fg-basic-primary);
+  color: var(--sjs2-color-component-input-disabled-label);
 }
 
 .spg-question__header--location--left {
