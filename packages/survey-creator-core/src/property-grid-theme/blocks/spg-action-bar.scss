@@ -1,5 +1,5 @@
 @use "../../variables.scss" as *;
 
 .spg-action-bar {
-  --sd-action-bar-gap: 0;
+  --sd-action-bar-gap: var(--sjs2-layout-component-caption-action-group-gap);
 }

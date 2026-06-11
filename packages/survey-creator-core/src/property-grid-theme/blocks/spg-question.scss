@@ -19,20 +19,29 @@
   width: 100%;
 }
 
-.spg-question--disabled .spg-question__header .spg-title {
-  opacity: var(--sjs2-opacity-disabled);
-}
 
 .spg-question__title {
-  @include sjs2--typography--default;
+  @include sjs2--typography--component-caption-content;
   width: 100%;
   margin: 0;
-  padding: var(--sjs2-spacing-x100) 0;
-  color: var(--sjs2-color-fg-basic-secondary);
+  padding-block-start: var(--sjs2-layout-component-caption-box-padding-top);
+  padding-block-end: var(--sjs2-layout-component-caption-box-padding-bottom);
+  padding-inline-start: var(--sjs2-layout-component-caption-box-padding-left);
+  padding-inline-end: var(--sjs2-layout-component-caption-box-padding-right);
+  color: var(--sjs2-color-component-caption-default-text);
   box-sizing: border-box;
+
+  .sv-title-actions {
+    gap: var(--sjs2-layout-component-caption-box-gap-vertical);
+  }
+
+  .sv-title-actions__title {
+    padding: var(--sjs2-layout-component-caption-content-padding-vertical)
+      var(--sjs2-layout-component-caption-content-padding-horizontal);
+  }
 }
-.spg-question__title.sd-element__title--disabled {
-  color: var(--sjs2-color-fg-basic-primary);
+.spg-question--disabled .spg-question__title {
+  color: var(--sjs2-color-component-caption-disabled-text);
 }
 
 .spg-question__content {
@@ -67,14 +76,16 @@
 }
 
 .spg-question__description {
-  @include sjs2--typography--small;
-  color: var(--sjs2-color-fg-basic-secondary);
-  padding-bottom: var(--sjs2-spacing-x200);
+  @include sjs2--typography--component-caption-hint;
+  color: var(--sjs2-color-component-caption-default-hint);
+  padding-block-start: var(--sjs2-layout-component-caption-hint-padding-top);
+  padding-block-end: var(--sjs2-layout-component-caption-hint-padding-bottom);
+  padding-inline: var(--sjs2-layout-component-caption-hint-padding-horizontal);
   white-space: normal;
 }
 
 .spg-question--disabled .spg-question__description {
-  color: var(--sjs2-color-fg-basic-secondary);
+  color: var(--sjs2-color-component-caption-disabled-hint);
 }
 
 .spg-row-narrow__question {
