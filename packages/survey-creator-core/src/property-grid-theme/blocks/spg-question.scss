@@ -85,7 +85,7 @@
   white-space: normal;
 }
 
-.spg-question--disabled .spg-question__description {
+.spg-question--disabled:not(.spg-question--boolean) .spg-question__description {
   color: var(--sjs2-color-component-caption-disabled-hint);
 }
 
