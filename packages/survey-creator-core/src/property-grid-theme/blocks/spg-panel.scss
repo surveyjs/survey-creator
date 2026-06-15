@@ -36,6 +36,12 @@
   background-color: var(--sjs2-color-bg-basic-primary-dim);
 }
 
+.spg-panel__title--expandable {
+  @include sjs2--typography--default;
+  color: var(--sjs2-color-fg-basic-secondary);
+  padding: var(--sjs2-spacing-x200);
+}
+
 .spg-panel__title--expanded {
   @include sjs2--typography--default-strong;
   color: var(--sjs2-color-fg-basic-primary);

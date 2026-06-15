@@ -19,7 +19,7 @@
   width: 100%;
 }
 
-div:not(.sd-formbox__label) > .spg-title {
+.spg-question__header--location--top > .spg-title {
   padding: var(--sjs2-layout-component-caption-content-padding-vertical)
     var(--sjs2-layout-component-caption-content-padding-horizontal);
 }
@@ -37,6 +37,8 @@ div:not(.sd-formbox__label) > .spg-title {
 
   .sv-title-actions {
     gap: var(--sjs2-layout-component-caption-box-gap-vertical);
+    padding-right: var(--sjs2-spacing-x050);
+    box-sizing: border-box;
   }
 }
 .spg-question--disabled .spg-question__title {
