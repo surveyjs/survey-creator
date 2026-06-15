@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { urlThemeTab, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector, hideElement } from "./helper";
+import { urlThemeTab, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, creatorTabThemeName, getPropertyGridCategory, themeSettingsButtonSelector, resetFocusToBody, collapseButtonSelector, hideElement, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Themes tab";
 
@@ -120,7 +120,9 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Reset theme settings to" }).click();
     const popup = page.locator(".sv-popup__body-content").filter({ has: page.locator(":visible") });
     await hideElement(page, ".svc-surface-placeholder");
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, popup, "theme-tab-reset-popup-dialog.png");
+    await showContentBehindPopup(page);
   });
 
   test("Scrollbar theming", async ({ page }) => {

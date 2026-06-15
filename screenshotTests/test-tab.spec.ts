@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText, getVisibleSelectListItemByText } from "./helper";
+import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Test tab Screenshot";
 
@@ -391,7 +391,9 @@ test.describe(title, () => {
     const pageSelectorButton = page.locator(".svc-page-selector");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await pageSelectorButton.click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".svc-page-selector .sv-popup__container"), "test-tab-page-selector-witn-invisible-page.png");
+    await showContentBehindPopup(page);
   });
   test("Page selector & markdown", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
