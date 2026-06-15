@@ -95,10 +95,6 @@
   flex-direction: column;
 }
 
-.spg-action-title-bar {
-  margin-inline-end: var(--sjs2-border-width-x100);
-  padding-inline-end: var(--sjs2-spacing-x050);
-}
 
 .spg-body {
   width: 100%;
@@ -121,11 +117,6 @@
 
 .spg-title-toolbar--single-help-action {
   justify-content: flex-start;
-  padding-left: var(--sjs2-spacing-x050);
-
-  // flex-grow: 0;
-  // margin-left: 0;
-  // padding-left: 0;
 
   .spg-help-action {
     margin-inline-end: auto;

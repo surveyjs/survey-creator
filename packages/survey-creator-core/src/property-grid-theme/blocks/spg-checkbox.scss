@@ -22,6 +22,10 @@
     padding-inline-start: var(--sjs2-spacing-x400);
   }
 
+  .spg-title-toolbar--single-help-action {
+    padding-left: var(--sjs2-spacing-x050);
+  }
+
   .spg-help-action {
     use {
       pointer-events: none;
