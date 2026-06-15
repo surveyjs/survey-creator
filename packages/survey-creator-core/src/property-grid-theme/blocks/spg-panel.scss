@@ -38,7 +38,7 @@
 
 .spg-panel__title--expandable {
   @include sjs2--typography--default;
-  color: var(--sjs2-color-fg-basic-secondary);
+  color: var(--sjs2-color-fg-basic-primary-muted);
   padding: var(--sjs2-spacing-x200);
 }
 
