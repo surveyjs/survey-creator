@@ -1,4 +1,4 @@
-import { url, test, setJSON, expect, changeToolboxLocation, setDirRTL, setShowToolbox, setAllowEditSurveyTitle, setShowAddQuestionButton, setShowSidebar, getListItemByText, compareScreenshot } from "./helper";
+import { url, test, setJSON, expect, changeToolboxLocation, setDirRTL, setShowToolbox, setAllowEditSurveyTitle, setShowAddQuestionButton, setShowSidebar, getListItemByText, compareScreenshot, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Page Navigator Screenshot";
 
@@ -63,7 +63,9 @@ test.describe(title, () => {
     // await page.locator(".svc-page-navigator__selector").click();
     // await page.locator(".svc-page-navigator__selector").click();
     await page.locator(".svc-page-navigator__selector").click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".svc-page-navigator .sv-popup__container"), "page-navigator-popup.png");
+    await showContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".svc-creator-tab"), "page-navigator-with-popup.png");
   });
 
