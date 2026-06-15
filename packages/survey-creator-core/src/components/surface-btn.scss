@@ -5,8 +5,10 @@
     flex: 1 0 0;
     --sd-action-border-radius: var(--sjs2-radius-component-panel, 12px);
     --sd-action-padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x800, 64px);
-    --sd-action-title-font-size: var(--sjs2-typography-font-size-default);
-    --sd-action-title-line-height: var(--sjs2-typography-line-height-default);
+    --sd-action-title-font-family: var(--sjs2-typography-font-family-component-action-large-content);
+    --sd-action-title-font-weight: var(--sjs2-typography-font-weight-component-action-large-content);
+    --sd-action-title-font-size: var(--sjs2-typography-font-size-component-action-large-content);
+    --sd-action-title-line-height: var(--sjs2-typography-line-height-component-action-large-content);
     --sd-action-title-padding: 0 var(--sjs2-spacing-x200, 16px);
     --sd-action-icon-padding: 0;
     --sd-action-icon-size: var(--sjs2-line-height-x300, 24px);
