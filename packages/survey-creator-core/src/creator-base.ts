@@ -23,7 +23,7 @@ import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { assign, getOS } from "./utils/utils";
 import { getNextItemValue, getNextItemText } from "./utils/creator-utils";
 import { PropertyGridModel } from "./property-grid";
-import { ObjType, SurveyHelper } from "./survey-helper";
+import { ObjType, SurveyHelper, getDefaultLocaleName } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
 import { SelectionHistory } from "./selection-history";
 
@@ -3002,7 +3002,7 @@ export class SurveyCreatorModel extends Base
       if (ctrl) ctrl.ignoreChanges = true;
       const locs = locStr.getLocales();
       locs.forEach(l => {
-        if (l !== surveyLocalization.defaultLocale && l !== "default") {
+        if (l !== surveyLocalization.defaultLocale && l !== getDefaultLocaleName()) {
           locStr.setLocaleText(l, "");
         }
       });
