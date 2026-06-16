@@ -3,7 +3,6 @@
 svc-tab-designer {
   width: 100%;
   height: 100%;
-  background: var(--sjs2-color-utility-surface-designer);
 }
 
 .svc-tab-designer {
@@ -11,8 +10,6 @@ svc-tab-designer {
   flex-grow: 1;
   height: 100%;
   flex-direction: column;
-  position: static;
-  background: var(--sjs2-color-utility-surface-designer);
   width: 0;
 }
 
