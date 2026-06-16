@@ -3036,6 +3036,10 @@ export class SurveyCreatorModel extends Base
   }
 
   protected convertQuestion(obj: Question, className: string, defaultJSON: any = null): Question {
+    if (obj instanceof QuestionSelectBase) {
+      // On changing the question type the choice items should not keep their expanded state.
+      this.expandCollapseManager.clearChoicesState(obj.choices);
+    }
     const objJSON = QuestionConverter.getObjJSON(obj, this.getDefaultElementJSON(obj.getType()));
     const options: QuestionConvertingEvent = {
       sourceQuestion: obj,

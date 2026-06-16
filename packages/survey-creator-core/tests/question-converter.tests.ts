@@ -21,6 +21,8 @@ import {
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
 import { QuestionConvertMode, settings } from "../src/creator-settings";
+import { CreatorTester } from "./creator-tester";
+import { ItemValueWrapperViewModel } from "../src/components/item-value";
 
 test("get converted classes", () => {
   settings.questionConvertMode = QuestionConvertMode.CompatibleTypes;
@@ -525,43 +527,68 @@ test("Convert default matrix dropdown into single matrix, Bug#5025", () => {
   expect(matrix3.columns[1].name).toBe("Column 2");
   expect(matrix3.rows[1].value).toBe("Row 2");
 });
-test("Convert checkbox to radiogroup and back, keep nested panel in choice item, Bug#7803", () => {
-  Serializer.addProperty("itemvalue", { name: "contentPanel:panel", className: "panel" });
-  try {
-    const survey = new SurveyModel({
-      elements: [
-        {
-          type: "checkbox",
-          name: "q1",
-          choices: [
-            { value: "item1", contentPanel: { elements: [{ type: "text", name: "nested1" }] } },
-            "item2"
-          ]
-        }
-      ]
-    });
-    const q1 = <QuestionCheckboxModel>survey.getQuestionByName("q1");
-    const panel = <PanelModel>(<any>q1.choices[0]).contentPanel;
-    expect(panel).toBeTruthy();
-    expect(panel.elements).toHaveLength(1);
-    expect(panel.elements[0].name).toEqual("nested1");
+test("Convert checkbox to radiogroup and back, keep nested panel and collapse choice adorner, Bug#7803", () => {
+  const creator = new CreatorTester();
+  creator.maxChoiceContentNestingLevel = 1;
+  creator.JSON = {
+    elements: [
+      {
+        type: "checkbox",
+        name: "q1",
+        choices: [
+          "item1",
+          { value: "item2", elements: [{ type: "text", name: "nested1" }] }
+        ]
+      }
+    ]
+  };
+  const checkbox = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  // The second choice item adorner can show its nested panel. Expand it.
+  const checkboxItemAdorner = new ItemValueWrapperViewModel(creator, checkbox, checkbox.choices[1]);
+  expect(checkboxItemAdorner.canShowPanel()).toBeTruthy();
+  checkboxItemAdorner.showPanel = true;
+  expect(checkboxItemAdorner.showPanel).toBeTruthy();
+  const panel = <PanelModel>(<any>checkbox.choices[1]).panel;
+  expect(panel.elements).toHaveLength(1);
+  expect(panel.elements[0].name).toEqual("nested1");
 
-    const radio = <QuestionRadiogroupModel>QuestionConverter.convertObject(q1, "radiogroup", q1.toJSON());
-    expect(radio.getType()).toEqual("radiogroup");
-    const radioPanel = <PanelModel>(<any>radio.choices[0]).contentPanel;
-    expect(radioPanel).toBeTruthy();
-    expect(radioPanel.elements).toHaveLength(1);
-    expect(radioPanel.elements[0].name).toEqual("nested1");
+  // Convert the root question (not the nested textbox) into radiogroup.
+  creator.selectElement(checkbox);
+  creator.convertCurrentQuestion("radiogroup");
+  const radio = <QuestionRadiogroupModel>creator.survey.getQuestionByName("q1");
+  expect(radio.getType()).toEqual("radiogroup");
+  // The nested panel and its element are preserved and reconnected to the survey so it renders.
+  const radioPanel = <PanelModel>(<any>radio.choices[1]).panel;
+  expect(radioPanel.elements).toHaveLength(1);
+  expect(radioPanel.elements[0].name).toEqual("nested1");
+  expect(radioPanel.survey).toBeTruthy();
+  expect(radioPanel.parent).toBeTruthy();
+  // The converted question must not keep the choice item expanded state.
+  expect(checkboxItemAdorner.showPanel).toBeFalsy();
+  expect(creator.expandCollapseManager.isChoiceExpanded(checkbox.choices[1])).toBeFalsy();
+  // The choice item adorner must reset to the collapsed state after conversion.
+  const radioItemAdorner = new ItemValueWrapperViewModel(creator, radio, radio.choices[1]);
+  expect(radioItemAdorner.canShowPanel()).toBeTruthy();
+  expect(radioItemAdorner.showPanel).toBeFalsy();
+  expect(creator.expandCollapseManager.isChoiceExpanded(radio.choices[1])).toBeFalsy();
 
-    const checkbox = <QuestionCheckboxModel>QuestionConverter.convertObject(radio, "checkbox", radio.toJSON());
-    expect(checkbox.getType()).toEqual("checkbox");
-    const checkboxPanel = <PanelModel>(<any>checkbox.choices[0]).contentPanel;
-    expect(checkboxPanel).toBeTruthy();
-    expect(checkboxPanel.elements).toHaveLength(1);
-    expect(checkboxPanel.elements[0].name).toEqual("nested1");
-  } finally {
-    Serializer.removeProperty("itemvalue", "contentPanel");
-  }
+  // Convert back into checkbox: the nested panel is kept and the adorner is collapsed again.
+  radioItemAdorner.showPanel = true;
+  creator.selectElement(radio);
+  creator.convertCurrentQuestion("checkbox");
+  const checkbox2 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  expect(checkbox2.getType()).toEqual("checkbox");
+  const checkbox2Panel = <PanelModel>(<any>checkbox2.choices[1]).panel;
+  expect(checkbox2Panel.elements).toHaveLength(1);
+  expect(checkbox2Panel.elements[0].name).toEqual("nested1");
+  expect(checkbox2Panel.survey).toBeTruthy();
+  expect(checkbox2Panel.parent).toBeTruthy();
+  // The expanded radiogroup choice item adorner is collapsed by the conversion.
+  expect(radioItemAdorner.showPanel).toBeFalsy();
+  expect(creator.expandCollapseManager.isChoiceExpanded(radio.choices[1])).toBeFalsy();
+  const checkbox2ItemAdorner = new ItemValueWrapperViewModel(creator, checkbox2, checkbox2.choices[1]);
+  expect(checkbox2ItemAdorner.showPanel).toBeFalsy();
+  expect(creator.expandCollapseManager.isChoiceExpanded(checkbox2.choices[1])).toBeFalsy();
 });
 test("get converted classes, it should include itself", () => {
   settings.questionConvertMode = QuestionConvertMode.CompatibleTypes;
