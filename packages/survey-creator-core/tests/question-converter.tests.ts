@@ -397,13 +397,15 @@ test("Convert text to custom widget barrating", () => {
 test("Remove incorrect validators, Bug#4228", () => {
   const survey = new SurveyModel({
     elements: [
-      { type: "text", name: "q1",
+      {
+        type: "text", name: "q1",
         validators: [
           { type: "numeric", minValue: 10 },
           { type: "text", maxLength: 20 },
         ]
       },
-      { type: "checkbox", name: "q2",
+      {
+        type: "checkbox", name: "q2",
         validators: [
           { type: "answercount", minCount: 3 }
         ]
@@ -430,7 +432,8 @@ test("Remove incorrect validators, Bug#4228", () => {
 test("Convert matrix into matrixdropdown, Bug#4455", () => {
   const survey = new SurveyModel({
     elements: [
-      { type: "matrix", name: "q1",
+      {
+        type: "matrix", name: "q1",
         columns: [{ value: 1, text: "Column 1" }],
         rows: [{ value: 1, text: "Row 1" }]
       }
@@ -521,6 +524,44 @@ test("Convert default matrix dropdown into single matrix, Bug#5025", () => {
   expect(matrix3.rows).toHaveLength(2);
   expect(matrix3.columns[1].name).toBe("Column 2");
   expect(matrix3.rows[1].value).toBe("Row 2");
+});
+test("Convert checkbox to radiogroup and back, keep nested panel in choice item, Bug#7803", () => {
+  Serializer.addProperty("itemvalue", { name: "contentPanel:panel", className: "panel" });
+  try {
+    const survey = new SurveyModel({
+      elements: [
+        {
+          type: "checkbox",
+          name: "q1",
+          choices: [
+            { value: "item1", contentPanel: { elements: [{ type: "text", name: "nested1" }] } },
+            "item2"
+          ]
+        }
+      ]
+    });
+    const q1 = <QuestionCheckboxModel>survey.getQuestionByName("q1");
+    const panel = <PanelModel>(<any>q1.choices[0]).contentPanel;
+    expect(panel).toBeTruthy();
+    expect(panel.elements).toHaveLength(1);
+    expect(panel.elements[0].name).toEqual("nested1");
+
+    const radio = <QuestionRadiogroupModel>QuestionConverter.convertObject(q1, "radiogroup", q1.toJSON());
+    expect(radio.getType()).toEqual("radiogroup");
+    const radioPanel = <PanelModel>(<any>radio.choices[0]).contentPanel;
+    expect(radioPanel).toBeTruthy();
+    expect(radioPanel.elements).toHaveLength(1);
+    expect(radioPanel.elements[0].name).toEqual("nested1");
+
+    const checkbox = <QuestionCheckboxModel>QuestionConverter.convertObject(radio, "checkbox", radio.toJSON());
+    expect(checkbox.getType()).toEqual("checkbox");
+    const checkboxPanel = <PanelModel>(<any>checkbox.choices[0]).contentPanel;
+    expect(checkboxPanel).toBeTruthy();
+    expect(checkboxPanel.elements).toHaveLength(1);
+    expect(checkboxPanel.elements[0].name).toEqual("nested1");
+  } finally {
+    Serializer.removeProperty("itemvalue", "contentPanel");
+  }
 });
 test("get converted classes, it should include itself", () => {
   settings.questionConvertMode = QuestionConvertMode.CompatibleTypes;
