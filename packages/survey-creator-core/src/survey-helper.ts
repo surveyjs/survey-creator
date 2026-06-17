@@ -22,6 +22,10 @@ export function getItemValueSeparator(): string {
   return !!res ? res : "|";
 }
 
+export function getDefaultLocaleName(): string {
+  return settings.localization.defaultLocaleName || "default";
+}
+
 export enum ObjType {
   Unknown = "unknown",
   Survey = "survey",

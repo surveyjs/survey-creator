@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, settings as coreSettings } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { EmptySurveyCreatorOptions, settings } from "../../src/creator-settings";
@@ -1243,6 +1243,57 @@ test("localize placeholders, default locale is 'fr'", () => {
   surveyLocalization.defaultLocale = prevLoc;
 });
 
+test("Default column should show the text of the non-default locale, Bug#7802", () => {
+  const prevLoc = surveyLocalization.defaultLocale;
+  const prevDefName = coreSettings.localization.defaultLocaleName;
+  surveyLocalization.defaultLocale = "de";
+  coreSettings.localization.defaultLocaleName = "de";
+  try {
+    const survey = new SurveyModel({
+      "elements": [
+        {
+          "type": "boolean",
+          "name": "question2",
+          "title": { "en": "\"question2\" from de to  en" }
+        },
+        {
+          "type": "boolean",
+          "name": "question1",
+          "title": { "de": "Magst du Fußball?", "en": "\"Magst du Fußball?\" from de to  en" } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        }
+      ]
+    });
+    const translation = new Translation(survey);
+    translation.reset();
+    const page = translation.stringsSurvey.pages[0];
+    const pagePanel = <PanelModel>page.elements[0];
+    const getCell = (questionIndex: number, colIndex: number): QuestionCommentModel => {
+      const qPanel = <PanelModel>pagePanel.elements[questionIndex];
+      const props = <QuestionMatrixDropdownModel>qPanel.elements[0];
+      return <QuestionCommentModel>props.visibleRows[0].cells[colIndex].question;
+    };
+    const getColumns = (questionIndex: number): Array<string> => {
+      const qPanel = <PanelModel>pagePanel.elements[questionIndex];
+      const props = <QuestionMatrixDropdownModel>qPanel.elements[0];
+      return props.columns.map(col => col.name);
+    };
+
+    expect(getColumns(0)).toEqual(["de", "en"]);
+    expect(getColumns(1)).toEqual(["de", "en"]);
+
+    // question2 has only the "en" title, the default ("de") column stays empty
+    expect(getCell(0, 0).value).toBeFalsy();
+    expect(getCell(0, 0).placeholder).toEqual("question2");
+    expect(getCell(0, 1).value).toEqual("\"question2\" from de to  en");
+
+    // question1 has the German title, the default ("de") column should show it
+    expect(getCell(1, 0).value).toEqual("Magst du Fußball?"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    expect(getCell(1, 1).value).toEqual("\"Magst du Fußball?\" from de to  en"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  } finally {
+    surveyLocalization.defaultLocale = prevLoc;
+    coreSettings.localization.defaultLocaleName = prevDefName;
+  }
+});
 test("init placeholders for dialects", () => {
   const survey = new SurveyModel({
     "elements": [
