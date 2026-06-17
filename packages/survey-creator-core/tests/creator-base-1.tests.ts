@@ -1363,6 +1363,26 @@ test("Convert text question into single matrix", (): any => {
   expect(el.rows).toHaveLength(2);
   expect(el.rows[0].value).toEqual("Row 1");
 });
+test("Add panel after converting a panel into html generates a unique name, Bug#7793", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "panel", name: "panel1" },
+      { type: "panel", name: "panel2" },
+      { type: "panel", name: "panel3" }
+    ]
+  };
+  creator.selectElement(creator.survey.getPanelByName("panel3"));
+  creator.convertCurrentQuestion("html");
+  const htmlQuestion = <Question>creator.selectedElement;
+  expect(htmlQuestion.getType()).toEqual("html");
+  expect(htmlQuestion.name).toEqual("panel3");
+
+  creator.clickToolboxItem({ type: "panel" });
+  const panels = creator.survey.getAllPanels();
+  expect(panels).toHaveLength(3);
+  expect(panels[2].name).toEqual("panel4");
+});
 test("Question type selector", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();

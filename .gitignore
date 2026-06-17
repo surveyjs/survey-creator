@@ -60,3 +60,4 @@ packages/survey-creator-core/.vscode/launch.json
 **/playwright-report/
 packages/survey-creator-core/junit.presets.xml
 packages/survey-creator-core/.claude/settings.local.json
+packages/survey-creator-core/.claude/
