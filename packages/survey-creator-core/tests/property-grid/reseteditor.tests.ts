@@ -35,16 +35,17 @@ test("Check textwithreset editor is used for minErrorText on the first question 
   const question = new QuestionTextModel("q1");
   question.inputType = "number";
   const propertyGrid = new PropertyGridModelTester(question);
-  const questionEditor = <QuestionTextWithResetModel>propertyGrid.survey.getQuestionByName("minErrorText");
-  expect(questionEditor.getType()).toBe("textwithreset");
-  expect(questionEditor.resetValueAdorner.allowResetValue).toBeFalsy();
+  const questionEditor = <QuestionTextModel>propertyGrid.survey.getQuestionByName("minErrorText");
+  const resetAction = questionEditor.inputActionsContainer.getActionById("reset");
+  expect(questionEditor.getType()).toBe("text");
+  expect(resetAction.enabled).toBeFalsy();
 
   question.minErrorText = "custom error text";
-  expect(questionEditor.resetValueAdorner.allowResetValue).toBeTruthy();
+  expect(resetAction.enabled).toBeTruthy();
 
-  questionEditor.resetValueAdorner.resetValue();
+  resetAction.action();
   expect(question.minErrorText).toBe("The value should not be less than {0}");
-  expect(questionEditor.resetValueAdorner.allowResetValue).toBeFalsy();
+  expect(resetAction.enabled).toBeFalsy();
 });
 
 test("Check textwithreset editor is not loaded if max length is set", () => {
