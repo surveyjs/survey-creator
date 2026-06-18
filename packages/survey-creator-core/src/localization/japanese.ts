@@ -1929,7 +1929,7 @@ export var jaStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "説明フォント",
       // [Auto-translated] "Font"
-      editorFont: "フォント",
+      inputContent: "フォント",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var jaStrings = {
     placeholderColor: "プレースホルダーの色",
     // [Auto-translated] "Size"
     size: "大きさ",
+    // [Auto-translated] "Line height"
+    lineHeight: "線高",
     // [Auto-translated] "Opacity"
     opacity: "不透明",
     // [Auto-translated] "X"

@@ -1929,7 +1929,7 @@ export var slStrings = {
       // "Description font"
       questionDescription: "Pisava opisa vprašanja",
       // "Font"
-      editorFont: "Pisava",
+      inputContent: "Pisava",
       // "Opacity"
       backgroundOpacity: "Prosojnost", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var slStrings = {
     placeholderColor: "Barva oznake",
     // "Size"
     size: "Velikost",
+    // [Auto-translated] "Line height"
+    lineHeight: "Višina proga",
     // "Opacity"
     opacity: "Prosojnost",
     // [Auto-translated] "X"

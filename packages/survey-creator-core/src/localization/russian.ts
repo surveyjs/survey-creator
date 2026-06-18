@@ -1929,7 +1929,7 @@ export var ruStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Описание шрифта",
       // [Auto-translated] "Font"
-      editorFont: "Шрифт",
+      inputContent: "Шрифт",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Непрозрачность", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var ruStrings = {
     placeholderColor: "Цвет заполнителя",
     // [Auto-translated] "Size"
     size: "Размер",
+    // [Auto-translated] "Line height"
+    lineHeight: "Высота линии",
     // [Auto-translated] "Opacity"
     opacity: "Непрозрачность",
     // [Auto-translated] "X"

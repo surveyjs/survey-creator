@@ -90,8 +90,9 @@
   align-items: center;
   width: fit-content;
   svg {
-    height: var(--sjs2-line-height-x300);
-    width: var(--sjs2-line-height-x300);
+    line-height: var(--sjs2-line-height-x300);
+    width: 1lh;
+    height: 1lh;
   }
 }
 
@@ -235,8 +236,9 @@
 
 .svc-toolbox__category-header__button {
   fill: var(--sjs2-color-fg-basic-primary-muted);
-  height: var(--sjs2-line-height-x300);
-  width: var(--sjs2-line-height-x300);
+  line-height: var(--sjs2-line-height-x300);
+  width: 1lh;
+  height: 1lh;
 }
 
 .svc-toolbox__category-header:hover {

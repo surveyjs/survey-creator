@@ -10,6 +10,7 @@ import { CreatorTester } from "../creator-tester";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabViewModel } from "../../src/components/tabs/theme-builder";
+import { PreviewViewModel } from "../../src/components/tabs/preview";
 import { settings } from "../../src/creator-settings";
 import { assign } from "../../src/utils/utils";
 import { PredefinedThemes, Themes } from "../../src/components/tabs/themes";
@@ -208,25 +209,29 @@ test("Theme builder: composite question values are lost", (): any => {
 
   expect(themeModel.cssVariables["--sjs2-typography-font-family-component-question-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs2-typography-line-height-component-question-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-family-component-page-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-page-title"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs2-color-component-page-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeModel.cssVariables["--sjs2-color-component-page-default-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-size-component-page-title"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs2-typography-line-height-component-page-title"]).toBeUndefined();
 
-  questionTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#fefefe", size: 40 };
+  questionTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#fefefe", size: 40, lineHeight: 60 };
 
   expect(themeModel.cssVariables["--sjs2-typography-font-family-component-question-title"]).toEqual("Arial, sans-serif");
   expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-question-title"]).toEqual("semiBold");
   expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toEqual("#fefefe");
   expect(themeModel.cssVariables["--sjs2-typography-font-size-component-question-title"]).toEqual("40px");
+  expect(themeModel.cssVariables["--sjs2-typography-line-height-component-question-title"]).toEqual("60px");
   expect(themeModel.cssVariables["--sjs2-typography-font-family-component-page-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-page-title"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs2-color-component-page-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeModel.cssVariables["--sjs2-color-component-page-default-title"]).toBeUndefined();
   expect(themeModel.cssVariables["--sjs2-typography-font-size-component-page-title"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs2-typography-line-height-component-page-title"]).toBeUndefined();
 
-  pageTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#101010", size: 28 };
+  pageTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#101010", size: 28, lineHeight: 42 };
 
   expect(themeModel.cssVariables["--sjs2-typography-font-family-component-question-title"]).toEqual("Arial, sans-serif");
   expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-question-title"]).toEqual("semiBold");
@@ -236,6 +241,7 @@ test("Theme builder: composite question values are lost", (): any => {
   expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-page-title"]).toEqual("semiBold");
   expect(themeModel.cssVariables["--sjs2-color-component-page-default-title"]).toEqual("#101010");
   expect(themeModel.cssVariables["--sjs2-typography-font-size-component-page-title"]).toEqual("28px");
+  expect(themeModel.cssVariables["--sjs2-typography-line-height-component-page-title"]).toEqual("42px");
 });
 
 test("import theme from file", (done) => {
@@ -283,7 +289,7 @@ test("export theme to file", (done): any => {
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeModel = themePlugin.themeModel as ThemeModel;
-  themeModel["questionTitle"] = { family: settings.themeEditor.defaultFontFamily, color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 19 };
+  themeModel["questionTitle"] = { family: settings.themeEditor.defaultFontFamily, color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 19, lineHeight: 29 };
 
   themePlugin.saveToFileHandler = async (fileName: string, blob: Blob) => {
     let fileReader = new FileReader();
@@ -294,6 +300,7 @@ test("export theme to file", (done): any => {
         expect(theme.themeName).toEqual("default");
         expect(theme.cssVariables["--sjs2-color-component-question-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
         expect(theme.cssVariables["--sjs2-typography-font-size-component-question-title"]).toBe("19px");
+        expect(theme.cssVariables["--sjs2-typography-line-height-component-question-title"]).toBe("29px");
       } finally {
         done();
       }
@@ -420,7 +427,7 @@ test("Get theme changes only", (): any => {
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(10);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(50);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(40);
 
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(modifiedThemeChanges).length).toBe(6);
@@ -444,7 +451,7 @@ test("Get theme changes only", (): any => {
     "header",
     "headerView",
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(40);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(34);
 
   const themeChangesReset = themePlugin.getCurrentTheme(true);
   expect(Object.keys(themeChangesReset).length).toBe(6);
@@ -601,7 +608,7 @@ test("Set and use custom default theme", (): any => {
   let themeTabViewModel = themePlugin.model as ThemeTabViewModel;
   let themeModel = themePlugin.themeModel as ThemeModel;
   expect(themeModel.themeName).toBe("custom");
-  expect(creator.theme.cssVariables["--a-var"]).toBe(undefined);
+  expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
   expect(themeTabViewModel.survey.themeVariables["--a-var"]).toBe("aVal");
 
   themeModel["--sjs2-color-project-brand-600"] = "#0000ff";
@@ -881,7 +888,7 @@ test("Theme undo redo expression questions", (): any => {
   expect(themeModel.undoRedoManager.canRedo()).toBe(false);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(fontSizeQuestion.value).toBe(100);
-  expect(themeModel.cssVariables["--sjs2-base-unit-font-size"]).toBe("8px");
+  expect(themeModel.cssVariables["--sjs2-base-unit-font-size"]).toBe(undefined);
 
   fontSizeQuestion.value = 150;
 
@@ -896,7 +903,7 @@ test("Theme undo redo expression questions", (): any => {
   expect(themeModel.undoRedoManager.canRedo()).toBe(true);
   expect(themeModel["blockThemeChangedNotifications"]).toBe(0);
   expect(fontSizeQuestion.value).toBe(100);
-  expect(themeModel.cssVariables["--sjs2-base-unit-font-size"]).toBe("8px");
+  expect(themeModel.cssVariables["--sjs2-base-unit-font-size"]).toBe(undefined);
 
   themePlugin.redo();
   expect(themeModel.undoRedoManager.canUndo()).toBe(true);
@@ -1297,23 +1304,26 @@ test("Modify property grid: add/hide properties", (): any => {
     expect(propertyGridSurvey.getQuestionByName("custom-question-title") !== null).toBeTruthy();
     expect(propertyGridSurvey.getQuestionByName("matrix-title") !== null).toBeTruthy();
 
-    themeModel["custom-question-title"] = { family: "Courier New", weight: "400", size: 41, color: "#787878" };
-    themeModel["matrix-title"] = { family: "Trebuchet MS", weight: "800", size: 21, color: "#232323" };
+    themeModel["custom-question-title"] = { family: "Courier New", weight: "400", size: 41, color: "#787878", lineHeight: 53 };
+    themeModel["matrix-title"] = { family: "Trebuchet MS", weight: "800", size: 21, color: "#232323", lineHeight: 34 };
 
     expect(themeModel.cssVariables["--sjs2-typography-font-family-component-question-title"]).toBeUndefined();
     expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
-    expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toBe("rgba(0, 0, 0, 0.91)");
+    expect(themeModel.cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
     expect(themeModel.cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
+    expect(themeModel.cssVariables["--sjs2-typography-line-height-component-question-title"]).toBeUndefined();
 
     expect(themeModel.cssVariables["--sjs2-typography-font-family-component-custom-question-title"]).toBe("Courier New");
     expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-custom-question-title"]).toBe("400");
     expect(themeModel.cssVariables["--sjs2-color-component-custom-question-title"]).toBe("#787878");
     expect(themeModel.cssVariables["--sjs2-typography-font-size-component-custom-question-title"]).toBe("41px");
+    expect(themeModel.cssVariables["--sjs2-typography-line-height-component-custom-question-title"]).toBe("53px");
 
     expect(themeModel.cssVariables["--sjs2-typography-font-family-component-matrix-title"]).toBe("Trebuchet MS");
     expect(themeModel.cssVariables["--sjs2-typography-font-weight-component-matrix-title"]).toBe("800");
     expect(themeModel.cssVariables["--sjs2-color-component-matrix-title"]).toBe("#232323");
     expect(themeModel.cssVariables["--sjs2-typography-font-size-component-matrix-title"]).toBe("21px");
+    expect(themeModel.cssVariables["--sjs2-typography-line-height-component-matrix-title"]).toBe("34px");
   } finally {
     Serializer.getProperty("theme", "questionTitle").visible = true;
     Serializer.removeProperty("theme", "custom-question-title");
@@ -1564,7 +1574,12 @@ test("Update default font family", (): any => {
   const oldFontFamily = "Open Sans";
   const newFontFamily = "Georgia, serif";
   settings.themeEditor.defaultFontFamily = newFontFamily;
-  Themes["default-light"].cssVariables["--sjs2-typography-font-family-text"] = newFontFamily;
+  // Component font families are now derived from the resolved base theme variables,
+  // so simulate the new default font being applied to the base theme.
+  mockDomWindowGetComputedStyleFromInlineStyles({
+    "--sjs2-typography-font-family-text": newFontFamily,
+    "--sjs2-typography-font-family-component-question-title": newFontFamily,
+  });
 
   try {
     const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -1577,6 +1592,44 @@ test("Update default font family", (): any => {
 
   } finally {
     settings.themeEditor.defaultFontFamily = oldFontFamily;
-    Themes["default-light"].cssVariables["--sjs2-typography-font-family-text"] = oldFontFamily;
   }
+});
+
+test("inputContent color and placeholdercolor resolved from base theme", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.themeEditor.activate();
+  const propertyGridSurvey = creator.themeEditor.propertyGrid.survey;
+
+  const inputContent = propertyGridSurvey.getQuestionByName("inputContent").value;
+  expect(inputContent.color).toBe("rgba(0, 0, 0, 0.91)");
+  expect(inputContent.placeholdercolor).toBe("rgba(0, 0, 0, 0.45)");
+});
+test("Theme builder: survey in the Theme tab is created with TOC when showTOC is true, Bug#7801", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = {
+    showTOC: true,
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] }
+    ]
+  };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const previewPlugin: any = creator.getPlugin("preview");
+
+  creator.activeTab = "theme";
+  let themeSurveyTab = themePlugin.model as ThemeTabViewModel;
+  expect(themeSurveyTab.survey.showTOC).toBeTruthy();
+  // Force the TOC list model (and thus survey.layoutElements) to be built - this is the code path that overflowed in Bug#7801
+  expect((themeSurveyTab.survey as any).tocModel.listModel.actions.length).toBe(2);
+
+  creator.activeTab = "preview";
+  const previewSurveyTab = previewPlugin.model as PreviewViewModel;
+  expect(previewSurveyTab.survey.showTOC).toBeTruthy();
+  expect((previewSurveyTab.survey as any).tocModel.listModel.actions.length).toBe(2);
+
+  creator.activeTab = "theme";
+  themeSurveyTab = themePlugin.model as ThemeTabViewModel;
+  expect(themeSurveyTab.survey.showTOC).toBeTruthy();
+  expect((themeSurveyTab.survey as any).tocModel.listModel.actions.length).toBe(2);
 });

@@ -1929,7 +1929,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "描述字体",
       // [Auto-translated] "Font"
-      editorFont: "字体",
+      inputContent: "字体",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明度", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var simplifiedChineseTranslation = {
     placeholderColor: "占位符颜色",
     // [Auto-translated] "Size"
     size: "大小",
+    // [Auto-translated] "Line height"
+    lineHeight: "线路高度",
     // [Auto-translated] "Opacity"
     opacity: "不透明度",
     // [Auto-translated] "X"

@@ -1929,7 +1929,7 @@ export var italianTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Descrizione del carattere",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacità", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var italianTranslation = {
     placeholderColor: "Colore segnaposto",
     // [Auto-translated] "Size"
     size: "Grandezza",
+    // [Auto-translated] "Line height"
+    lineHeight: "Altezza della linea",
     // [Auto-translated] "Opacity"
     opacity: "Opacità",
     // [Auto-translated] "X"

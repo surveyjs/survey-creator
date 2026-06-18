@@ -1929,7 +1929,7 @@ export const roStrings = {
       // "Description font"
       questionDescription: "Font descriere",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // "Opacity"
       backgroundOpacity: "Opacitate", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export const roStrings = {
     placeholderColor: "Culoarea textului substitut",
     // "Size"
     size: "Dimensiune",
+    // [Auto-translated] "Line height"
+    lineHeight: "Înălțimea liniei",
     // "Opacity"
     opacity: "Opacitate",
     // [Auto-translated] "X"

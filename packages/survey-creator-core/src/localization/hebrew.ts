@@ -1929,7 +1929,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "גופן תיאור",
       // [Auto-translated] "Font"
-      editorFont: "גופן",
+      inputContent: "גופן",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "אטימות", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var hebrewStrings = {
     placeholderColor: "צבע מציין מיקום",
     // [Auto-translated] "Size"
     size: "גודל",
+    // [Auto-translated] "Line height"
+    lineHeight: "גובה הקו",
     // [Auto-translated] "Opacity"
     opacity: "אטימות",
     // [Auto-translated] "X"

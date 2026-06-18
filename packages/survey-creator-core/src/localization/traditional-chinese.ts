@@ -1930,7 +1930,7 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "描述字體",
       // [Auto-translated] "Font"
-      editorFont: "字體",
+      inputContent: "字體",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明度", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3540,6 +3540,8 @@ export var traditionalChineseTranslation = {
     placeholderColor: "佔位元顏色",
     // [Auto-translated] "Size"
     size: "大小",
+    // [Auto-translated] "Line height"
+    lineHeight: "線路高度",
     // [Auto-translated] "Opacity"
     opacity: "不透明度",
     // [Auto-translated] "X"

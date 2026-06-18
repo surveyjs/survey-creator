@@ -1929,7 +1929,7 @@ export var hrStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Opisni font",
       // [Auto-translated] "Font"
-      editorFont: "Krstionica",
+      inputContent: "Krstionica",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Neprozirnost", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var hrStrings = {
     placeholderColor: "Boja rezerviranog mjesta",
     // [Auto-translated] "Size"
     size: "Veličina",
+    // [Auto-translated] "Line height"
+    lineHeight: "Visina pruge",
     // [Auto-translated] "Opacity"
     opacity: "Neprozirnost",
     // [Auto-translated] "X"

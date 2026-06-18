@@ -1,5 +1,4 @@
-import { Base, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, Serializer, HorizontalAlignment, VerticalAlignment } from "survey-core";
-import { settings } from "../../creator-settings";
+import { Base, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, Serializer, HorizontalAlignment, VerticalAlignment, property } from "survey-core";
 import { fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { assign } from "../../utils/utils";
 
@@ -9,11 +8,13 @@ export class HeaderModel extends Base implements IHeader {
     color: "--sjs2-color-component-header-default-title",
     weight: "--sjs2-typography-font-weight-component-header-title",
     size: "--sjs2-typography-font-size-component-header-title",
+    lineHeight: "--sjs2-typography-line-height-component-header-title",
   };
   static defaultDescriptionSettings = {
     color: "--sjs2-color-component-header-default-description",
     size: "--sjs2-typography-font-size-component-header-description",
     weight: "--sjs2-typography-font-weight-component-header-description",
+    lineHeight: "--sjs2-typography-line-height-component-header-description",
   };
   static getDefaultVars() {
     const titleVars = Object.keys(this.defaultTitleSettings).map(key => this.defaultTitleSettings[key as keyof typeof this.defaultTitleSettings]);
@@ -38,6 +39,9 @@ export class HeaderModel extends Base implements IHeader {
   descriptionPositionY: VerticalAlignment;
   public owner: ITheme;
 
+  @property() headerTitle;
+  @property() headerDescription;
+
   public getSurvey(live: boolean = false): ISurvey {
     return this.owner as any;
   }
@@ -49,22 +53,9 @@ export class HeaderModel extends Base implements IHeader {
 
   public setCssVariables(cssVariables?: { [index: string]: string }) {
     if (cssVariables) {
-      this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), cssVariables);
-      this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), cssVariables);
-      this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables,
-        {
-          color: this.baseThemeVariables["--sjs2-color-component-header-default-title"],
-          family: this.baseThemeVariables["--sjs2-typography-font-family-component-header-title"] || this.baseThemeVariables["--sjs2-typography-font-family-text"],
-          weight: this.baseThemeVariables["--sjs2-typography-font-weight-component-header-title"],
-          size: this.baseThemeVariables["--sjs2-typography-font-size-component-header-title"]
-        });
-      this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables,
-        {
-          color: this.baseThemeVariables["--sjs2-color-component-header-default-description"],
-          family: this.baseThemeVariables["--sjs2-typography-font-family-component-header-description"] || this.baseThemeVariables["--sjs2-typography-font-family-text"],
-          weight: this.baseThemeVariables["--sjs2-typography-font-weight-component-header-description"],
-          size: this.baseThemeVariables["--sjs2-typography-font-size-component-header-description"]
-        });
+      ["headerTitle", "headerDescription"].forEach(propertyName => {
+        this[propertyName] = fontsettingsFromCssVariable(this.getPropertyByName(propertyName), cssVariables, this.baseThemeVariables);
+      });
     }
 
     const backgroundColorValue = cssVariables["--sjs2-color-component-header-default-bg"];
@@ -128,22 +119,6 @@ export class HeaderModel extends Base implements IHeader {
 
   public getType(): string {
     return "header";
-  }
-
-  public get surveyTitle() {
-    return this.getPropertyValue("headerTitle");
-  }
-
-  public get surveyDescription() {
-    return this.getPropertyValue("headerDescription");
-  }
-
-  public set surveyTitle(value: any) {
-    this.setPropertyValue("headerTitle", value);
-  }
-
-  public set surveyDescription(value: any) {
-    this.setPropertyValue("headerDescription", value);
   }
 }
 
@@ -341,7 +316,6 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerTitle",
-    default: {},
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;
@@ -351,7 +325,6 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerDescription",
-    default: {},
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;

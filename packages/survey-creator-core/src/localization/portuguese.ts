@@ -1929,7 +1929,7 @@ export var portugueseTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Fonte da descrição",
       // [Auto-translated] "Font"
-      editorFont: "Fonte",
+      inputContent: "Fonte",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacidade", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var portugueseTranslation = {
     placeholderColor: "Cor do espaço reservado",
     // [Auto-translated] "Size"
     size: "Tamanho",
+    // [Auto-translated] "Line height"
+    lineHeight: "Altura da linha",
     // [Auto-translated] "Opacity"
     opacity: "Opacidade",
     // [Auto-translated] "X"

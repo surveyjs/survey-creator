@@ -3,7 +3,7 @@ import { getLocString } from "../../editorLocalization";
 
 export const Themes: { [index: string]: ITheme } = {};
 export const PredefinedThemes: string[] = ["default"];
-export const defaultThemesOrder = ["default", "borderless", "flat", "plain", "threedimensional", "monochrome", "soft", "contrast"];
+export const defaultThemesOrder = ["default", "contrast", "borderless", "flat", "plain", "threedimensional", "soft", "monochrome"];
 
 export const PredefinedColors = {
   light: {

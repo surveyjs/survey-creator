@@ -167,8 +167,9 @@
   border: none;
 
   .sv-svg-icon {
-    width: var(--sjs2-line-height-x300);
-    height: var(--sjs2-line-height-x300);
+    line-height: var(--sjs2-line-height-x300);
+    width: 1lh;
+    height: 1lh;
   }
 
   use {

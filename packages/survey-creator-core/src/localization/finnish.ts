@@ -1929,7 +1929,7 @@ export var fiStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Kuvaus fontti",
       // [Auto-translated] "Font"
-      editorFont: "Fontti",
+      inputContent: "Fontti",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Läpikuultamattomuus", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var fiStrings = {
     placeholderColor: "Paikkamerkin väri",
     // [Auto-translated] "Size"
     size: "Koko",
+    // [Auto-translated] "Line height"
+    lineHeight: "Linjakorkeus",
     // [Auto-translated] "Opacity"
     opacity: "Läpikuultavuus",
     // [Auto-translated] "X"

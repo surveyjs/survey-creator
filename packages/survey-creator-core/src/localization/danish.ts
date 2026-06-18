@@ -1930,7 +1930,7 @@ export var danishStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Beskrivelse skrifttype",
       // [Auto-translated] "Font"
-      editorFont: "Skrifttype",
+      inputContent: "Skrifttype",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacitet", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3540,6 +3540,8 @@ export var danishStrings = {
     placeholderColor: "Pladsholderfarve",
     // [Auto-translated] "Size"
     size: "Størrelse",
+    // [Auto-translated] "Line height"
+    lineHeight: "Linjehøjde",
     // [Auto-translated] "Opacity"
     opacity: "Opacitet",
     // [Auto-translated] "X"

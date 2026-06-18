@@ -1929,7 +1929,7 @@ export var nbStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Beskrivelse skrift",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Ugjennomsiktighet", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var nbStrings = {
     placeholderColor: "Plassholderfarge",
     // [Auto-translated] "Size"
     size: "Størrelse",
+    // [Auto-translated] "Line height"
+    lineHeight: "Linjehøyde",
     // [Auto-translated] "Opacity"
     opacity: "Ugjennomsiktighet",
     // [Auto-translated] "X"

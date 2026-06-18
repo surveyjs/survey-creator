@@ -11,7 +11,7 @@ import { ThemeModel, getThemeChanges } from "../../src/components/tabs/theme-mod
 import { registerSurveyTheme } from "../../src/components/tabs/theme-model";
 import SurveyThemes from "survey-core/themes";
 import { ContrastLight, DefaultDark, DefaultLight } from "./test-themes";
-import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./theme-test-mocks";
 registerSurveyTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 
@@ -78,6 +78,7 @@ const themeFromFile = {
 const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
   mockGetRGBaColorIdentity();
+  mockDomWindowGetComputedStyleFromInlineStyles();
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
   Themes["default-dark"] = DefaultDark;
@@ -87,6 +88,7 @@ beforeEach(() => {
 
 afterEach(() => {
   restoreGetRGBaColorMock();
+  (DomWindowHelper.getWindow as any).mockRestore?.();
   DefaultTheme.cssVariables = cssVariables;
 });
 
@@ -275,29 +277,32 @@ test("Theme builder: composite question font", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();
 
-  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16 });
+  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16, lineHeight: 24 });
 
   let cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-typography-font-family-component-question-title"]).toBeUndefined();
   expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
   expect(cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
   expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-line-height-component-question-title"]).toBeUndefined();
 
-  themeModel["questionTitle"] = { family: "Arial, sans-serif", weight: "500", size: 40 };
+  themeModel["questionTitle"] = { family: "Arial, sans-serif", weight: "500", size: 40, lineHeight: 60 };
 
   cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-typography-font-family-component-question-title"]).toEqual("Arial, sans-serif");
   expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toEqual("500");
   expect(cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
   expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toEqual("40px");
+  expect(cssVariables["--sjs2-typography-line-height-component-question-title"]).toEqual("60px");
 
-  themeModel["questionTitle"] = { family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16 };
+  themeModel["questionTitle"] = { family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16, lineHeight: 24 };
 
   cssVariables = themeModel.cssVariables || {};
   expect(cssVariables["--sjs2-typography-font-family-component-question-title"]).toBeUndefined();
   expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
   expect(cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
   expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-line-height-component-question-title"]).toBeUndefined();
 });
 
 test("Theme builder: composite question backgroundcornerradius", (): any => {
@@ -388,12 +393,14 @@ test("Theme builder: restore values of font from loadTheme", (): any => {
   expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toBeUndefined();
   expect(cssVariables["--sjs2-color-component-question-default-title"]).toBeUndefined();
   expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toBeUndefined();
+  expect(cssVariables["--sjs2-typography-line-height-component-question-title"]).toBeUndefined();
 
   expect(themeModel["questionTitle"]).toStrictEqual({
     "family": "Open Sans",
     "color": "rgba(0, 0, 0, 0.91)",
     "weight": "600",
-    "size": 16
+    "size": 16,
+    "lineHeight": 24
   });
 
   const newTheme = {};
@@ -405,12 +412,14 @@ test("Theme builder: restore values of font from loadTheme", (): any => {
   expect(cssVariables["--sjs2-typography-font-weight-component-question-title"]).toEqual("700");
   expect(cssVariables["--sjs2-color-component-question-default-title"]).toEqual("rgba(201, 90, 231, 0.91)");
   expect(cssVariables["--sjs2-typography-font-size-component-question-title"]).toEqual("18px");
+  expect(cssVariables["--sjs2-typography-line-height-component-question-title"]).toEqual("27px");
 
   expect(themeModel["questionTitle"]).toStrictEqual({
     "family": "Verdana, sans-serif",
     "weight": "700",
     "color": "rgba(201, 90, 231, 0.91)",
-    "size": 18
+    "size": 18,
+    "lineHeight": 27
   });
 });
 
@@ -448,6 +457,7 @@ test("Modify property grid: restore new property", (): any => {
       family: "Open Sans",
       weight: "600",
       size: 16,
+      lineHeight: 24,
       color: "rgba(0, 0, 0, 0.91)"
     },
   });
@@ -469,6 +479,7 @@ test("Modify property grid: restore new property", (): any => {
       family: "Open Sans",
       weight: "600",
       size: 16,
+      lineHeight: 24,
       color: "rgba(215, 15, 15, 0.91)"
     });
 

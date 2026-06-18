@@ -1929,7 +1929,7 @@ export var skStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Písmo popisu",
       // [Auto-translated] "Font"
-      editorFont: "Písmo",
+      inputContent: "Písmo",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Neprehľadnosť", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var skStrings = {
     placeholderColor: "Farba zástupného symbolu",
     // [Auto-translated] "Size"
     size: "Veľkosť",
+    // [Auto-translated] "Line height"
+    lineHeight: "Výška trate",
     // [Auto-translated] "Opacity"
     opacity: "Neprehľadnosť",
     // [Auto-translated] "X"

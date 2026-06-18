@@ -1929,7 +1929,7 @@ export var mnStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Тайлбар фонт",
       // [Auto-translated] "Font"
-      editorFont: "Фонт",
+      inputContent: "Фонт",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Бүдүүлэг байдал", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var mnStrings = {
     placeholderColor: "Газар эзэмшигчийн өнгө",
     // [Auto-translated] "Size"
     size: "Хэмжээ",
+    // [Auto-translated] "Line height"
+    lineHeight: "Шугамын өндөр",
     // [Auto-translated] "Opacity"
     opacity: "Бүдүүлэг байдал",
     // [Auto-translated] "X"

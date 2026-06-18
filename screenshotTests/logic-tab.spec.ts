@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, getListItemByText, resetHoverToCreator, compareScreenshot, resetFocusToBody, getVisibleSelectListItemByText } from "./helper";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, getListItemByText, resetHoverToCreator, compareScreenshot, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Logic tab Screenshot";
 
@@ -158,7 +158,9 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabLogicName).click();
     await page.click(".svc-logic-tab__content-actions .sd-action");
     await page.click(".svc-logic-operator--question");
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup__container"), "logic-dropdown.png");
+    await showContentBehindPopup(page);
     await getVisibleSelectListItemByText(page, "q1").click();
     await page.click(".svc-logic-operator--question");
     await compareScreenshot(page, page.locator(".sl-body"), "logic-dropdown-full.png");

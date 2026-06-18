@@ -53,9 +53,13 @@ test.describe(title, () => {
     await page.getByText("Manage Presets", { exact: true }).hover();
     await page.getByText("Manage Presets", { exact: true }).click();
     await page.waitForTimeout(300);
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".sv-popup__container", "presets-list-dialog.png");
+    await showContentBehindPopup(page);
     await page.getByText("Add new preset").click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup__container").filter({ visible: true }), "presets-select-dialog.png");
+    await showContentBehindPopup(page);
   });
 
   test("Check presets delete confirmation dialog", async ({ page }) => {
@@ -64,13 +68,17 @@ test.describe(title, () => {
     await page.locator(".spg-table__cell--actions .sd-action").nth(1).click();
     await page.getByText("Manage Presets", { exact: true }).click();
     await page.getByTitle("Delete").click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".svc-creator-confirm-dialog .sv-popup__container", "presets-delete-confirmation-dialog.png");
+    await showContentBehindPopup(page);
   });
 
   test("Check presets quit confirmation dialog", async ({ page }) => {
     await page.getByText("Dansk").click();
     await page.getByRole("button", { name: "Quit" }).click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".svc-creator-confirm-dialog .sv-popup__container", "presets-exit-confirmation-dialog.png");
+    await showContentBehindPopup(page);
   });
 
   test("Presets pages overview", async ({ page }) => {
@@ -184,13 +192,17 @@ test.describe(title, () => {
     const root = page.locator(".sps-panel").first();
 
     await page.locator(".sps-table__row").first().getByTitle("Edit").click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".sv-popup__container", "presets-dialog-small.png");
+    await showContentBehindPopup(page);
     await page.getByText("Cancel").click();
 
     await page.locator(".sps-table__row").first().getByTitle("Expand").click();
     await page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).hover();
     await page.locator(".sps-table__row--detail").first().locator(".sps-table__row").nth(1).getByTitle("Edit").click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, ".sv-popup__container", "presets-dialog-large.png");
+    await showContentBehindPopup(page);
   });
 
   test("Presets options hints", async ({ page }) => {

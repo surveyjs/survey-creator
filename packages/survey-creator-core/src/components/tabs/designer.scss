@@ -14,6 +14,9 @@ svc-tab-designer {
   position: static;
   background: var(--sjs2-color-utility-surface-designer);
   width: 0;
+  &:before {
+    content: none;
+  }
 }
 
 .svc-test-tab--empty,

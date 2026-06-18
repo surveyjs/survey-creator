@@ -14,8 +14,9 @@
 }
 .svc-toolbox__item-icon {
   display: block;
-  height: var(--sjs2-line-height-x300);
-  width: var(--sjs2-line-height-x300);
+  line-height: var(--sjs2-line-height-x300);
+  width: 1lh;
+  height: 1lh;
   pointer-events: none;
 }
 .svc-toolbox__tool {
@@ -227,8 +228,9 @@
   }
   svg {
     fill: var(--sjs2-color-fg-basic-secondary);
-    width: var(--sjs2-line-height-x200);
-    height: var(--sjs2-line-height-x200);
+    line-height: var(--sjs2-line-height-x200);
+    width: 1lh;
+    height: 1lh;
   }
 }
 

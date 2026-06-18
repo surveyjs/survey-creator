@@ -1929,7 +1929,7 @@ export var catalanTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Descripció fuente",
       // [Auto-translated] "Font"
-      editorFont: "Fuente",
+      inputContent: "Fuente",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacidad", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var catalanTranslation = {
     placeholderColor: "Color del marcador de posición",
     // [Auto-translated] "Size"
     size: "Tamaño",
+    // [Auto-translated] "Line height"
+    lineHeight: "Alçada de la línia",
     // [Auto-translated] "Opacity"
     opacity: "Opacidad",
     // [Auto-translated] "X"

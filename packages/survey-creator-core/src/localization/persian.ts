@@ -1929,7 +1929,7 @@ export var persianStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "توضیحات فونت",
       // [Auto-translated] "Font"
-      editorFont: "فونت",
+      inputContent: "فونت",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "کدورت", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var persianStrings = {
     placeholderColor: "رنگ نگهدارنده",
     // [Auto-translated] "Size"
     size: "اندازه",
+    // [Auto-translated] "Line height"
+    lineHeight: "ارتفاع خط",
     // [Auto-translated] "Opacity"
     opacity: "کدورت",
     // [Auto-translated] "X"

@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, setJSON, expect, resetHoverToCreator, addQuestionByAddQuestionButton, setAllowZoom } from "./helper";
+import { url, compareScreenshot, test, setJSON, expect, resetHoverToCreator, addQuestionByAddQuestionButton, setAllowZoom, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Matrix surface";
 
@@ -15,7 +15,9 @@ test.describe(title, () => {
 
     await row1Column1Cell.hover({ force: true });
     await editColumnButton.click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit.png", { maxDiffPixels: 5 });
+    await showContentBehindPopup(page);
   });
 
   test("Matrix column editor with design surface zoomed out", async ({ page }) => {
@@ -32,7 +34,9 @@ test.describe(title, () => {
     await editColumnButton.click();
     await page.mouse.move(0, 0);
     // await page.locator(".sv-popup__body-content").hover({ position: { x: 10, y: 10 } });
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit-surface-zoomed-out.png", { maxDiffPixels: 5 });
+    await showContentBehindPopup(page);
   });
 
   test("Matrix column", async ({ page }) => {
@@ -277,14 +281,18 @@ test.describe(title, () => {
     await page.locator(".svc-matrix-cell").nth(3).hover({ force: true });
     await expect(dropdownButton).toBeVisible();
     await dropdownButton.click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png", { maxDiffPixels: 42 });
+    await showContentBehindPopup(page);
     await page.locator("button").filter({ hasText: "Cancel" }).click();
     await page.waitForTimeout(500);
 
     await page.locator(".svc-matrix-cell").nth(4).hover({ force: true });
     await expect(ratingButton).toBeVisible();
     await ratingButton.click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-rating.png");
+    await showContentBehindPopup(page);
   });
 
   test("Matrix Dynamiv with rows drad-drop", async ({ page }) => {

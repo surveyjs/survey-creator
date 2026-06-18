@@ -1929,7 +1929,7 @@ export var huStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Leírás betűtípus",
       // [Auto-translated] "Font"
-      editorFont: "Betűkészlet",
+      inputContent: "Betűkészlet",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Átlátszatlanság", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var huStrings = {
     placeholderColor: "Helyőrző színe",
     // [Auto-translated] "Size"
     size: "Méret",
+    // [Auto-translated] "Line height"
+    lineHeight: "Vonalmagasság",
     // [Auto-translated] "Opacity"
     opacity: "Átlátszatlanság",
     // [Auto-translated] "X"

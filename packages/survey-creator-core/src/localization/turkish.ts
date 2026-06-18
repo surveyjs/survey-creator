@@ -1929,7 +1929,7 @@ export var turkishStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Açıklama yazı tipi",
       // [Auto-translated] "Font"
-      editorFont: "Yazı tipi",
+      inputContent: "Yazı tipi",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opak -lık", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var turkishStrings = {
     placeholderColor: "Yer tutucu rengi",
     // [Auto-translated] "Size"
     size: "Boyut",
+    // [Auto-translated] "Line height"
+    lineHeight: "Hat yüksekliği",
     // [Auto-translated] "Opacity"
     opacity: "Opak -lık",
     // [Auto-translated] "X"

@@ -1930,7 +1930,7 @@ export let svStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Beskrivning typsnitt",
       // [Auto-translated] "Font"
-      editorFont: "Teckensnitt",
+      inputContent: "Teckensnitt",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Ogenomskinlighet", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3540,6 +3540,8 @@ export let svStrings = {
     placeholderColor: "Platshållarens färg",
     // [Auto-translated] "Size"
     size: "Storlek",
+    // [Auto-translated] "Line height"
+    lineHeight: "Linjehöjd",
     // [Auto-translated] "Opacity"
     opacity: "Ogenomskinlighet",
     // [Auto-translated] "X"

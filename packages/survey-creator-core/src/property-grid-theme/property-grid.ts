@@ -157,7 +157,6 @@ export var propertyGridCss = {
   buttongroup: {
     ...defaultCss.buttongroup,
     itemReadOnly: "sv-button-group__item--disabled",
-    controlReadOnly: "sd-formbox--disabled",
     popup: "spg-dropdown-popup svc-creator-popup",
   },
   imagepicker: {
@@ -326,12 +325,13 @@ export var propertyGridCss = {
   color: {
     root: "sd-formbox spg-color-editor",
     control: "sd-formbox__input",
-    swatch: "spg-color-editor__color-swatch",
-    swatchDefault: "spg-color-editor__color-swatch--default",
-    swatchDisabled: "spg-color-editor__color-swatch--disabled",
     colorInput: "spg-color-editor__color-input",
+    colorSwatch: "spg-color-editor__swatch",
+    swatch: "sd-color-swatch",
+    swatchDisabled: "sd-color-swatch--disabled",
     colorDropdownIcon: "icon-drop-down-arrow",
-    swatchIcon: "icon-color-picker",
+    swatchIcon: "icon-dropper-16x16",
+    iconClassName: "sd-color-swatch__icon",
     group: "sd-formbox__group"
   },
   fileedit: {

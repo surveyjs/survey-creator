@@ -1929,7 +1929,7 @@ export var nlStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Beschrijving lettertype",
       // [Auto-translated] "Font"
-      editorFont: "Lettertype",
+      inputContent: "Lettertype",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Dekking", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var nlStrings = {
     placeholderColor: "Tijdelijke aanduiding voor kleur",
     // [Auto-translated] "Size"
     size: "Grootte",
+    // [Auto-translated] "Line height"
+    lineHeight: "Lijnhoogte",
     // [Auto-translated] "Opacity"
     opacity: "Dekking",
     // [Auto-translated] "X"

@@ -1929,7 +1929,7 @@ export var grStrings = {
       // "Description font"
       questionDescription: "Γραμματοσειρά περιγραφής ερώτησης",
       // "Font"
-      editorFont: "Γραμματοσειρά επεξεργαστή",
+      inputContent: "Γραμματοσειρά επεξεργαστή",
       // "Opacity"
       backgroundOpacity: "Διαφάνεια", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var grStrings = {
     placeholderColor: "Χρώμα κειμένου πλακίδας",
     // "Size"
     size: "Μέγεθος",
+    // [Auto-translated] "Line height"
+    lineHeight: "Ύψος γραμμής",
     // "Opacity"
     opacity: "Διαφάνεια",
     // [Auto-translated] "X"

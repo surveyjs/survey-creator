@@ -1929,7 +1929,7 @@ export var htStrings = {
       // "Description font"
       questionDescription: "Deskripsyon font",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // "Opacity"
       backgroundOpacity: "Opakite", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var htStrings = {
     placeholderColor: "Koulè placeholder",
     // "Size"
     size: "Gwosè",
+    // [Auto-translated] "Line height"
+    lineHeight: "Wotè liy",
     // "Opacity"
     opacity: "Opakite",
     // [Auto-translated] "X"

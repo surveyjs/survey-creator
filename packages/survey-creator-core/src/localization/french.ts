@@ -1929,7 +1929,7 @@ export var frenchTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Police de description",
       // [Auto-translated] "Font"
-      editorFont: "Police",
+      inputContent: "Police",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacité", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var frenchTranslation = {
     placeholderColor: "Couleur de l’espace réservé",
     // [Auto-translated] "Size"
     size: "Taille",
+    // [Auto-translated] "Line height"
+    lineHeight: "Hauteur de ligne",
     // [Auto-translated] "Opacity"
     opacity: "Opacité",
     // [Auto-translated] "X"

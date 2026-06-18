@@ -333,8 +333,9 @@ $tabs-width: calc(var(--sjs2-typography-line-height-default) + var(--sjs2-spacin
     padding: var(--sjs2-spacing-x100);
   }
   .sv-svg-icon {
-    width: var(--sjs2-typography-line-height-default);
-    height: var(--sjs2-typography-line-height-default);
+    line-height: var(--sjs2-typography-line-height-default);
+    width: 1lh;
+    height: 1lh;
   }
 }
 

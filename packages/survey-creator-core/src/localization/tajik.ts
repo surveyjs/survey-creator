@@ -952,7 +952,7 @@ export var tgStrings = {
       // pageDescription: "Description font",
       // questionTitle: "Title font",
       // questionDescription: "Description font",
-      // editorFont: "Font",
+      // inputContent: "Font",
       // backgroundOpacity: "Opacity",
       // "--sjs-font-family": "Survey font family",
       // "--sjs-general-backcolor-dim": "Background color",

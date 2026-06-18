@@ -71,26 +71,28 @@ test("Theme builder: composite question font", (): any => {
   const themeModel = themePlugin.themeModel as ThemeModel;
   const questionTitleFontSettings = themePlugin.propertyGrid.survey.findQuestionByName("questionTitle") as QuestionCompositeModel;
 
-  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16 });
+  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "600", size: 16, lineHeight: 24 });
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual("rgba(0, 0, 0, 0.91)");
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("weight").value).toEqual("600");
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("size").value).toEqual(16);
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("family").value).toEqual("Open Sans");
 
-  questionTitleFontSettings.value = { family: "Arial, sans-serif", weight: "500", size: 40 };
+  questionTitleFontSettings.value = { family: "Arial, sans-serif", weight: "500", size: 40, lineHeight: 56 };
 
-  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Arial, sans-serif", weight: "500", size: 40 });
+  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Arial, sans-serif", weight: "500", size: 40, lineHeight: 56 });
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual(undefined);
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("weight").value).toEqual("500");
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("size").value).toEqual(40);
+  expect(questionTitleFontSettings.contentPanel.getQuestionByName("lineHeight").value).toEqual(56);
   expect(questionTitleFontSettings.contentPanel.getQuestionByName("family").value).toEqual("Arial, sans-serif");
 
   questionTitleFontSettings.contentPanel.getQuestionByName("color").value = "#222222";
   questionTitleFontSettings.contentPanel.getQuestionByName("weight").value = "450";
   questionTitleFontSettings.contentPanel.getQuestionByName("size").value = 18;
+  questionTitleFontSettings.contentPanel.getQuestionByName("lineHeight").value = 27;
   questionTitleFontSettings.contentPanel.getQuestionByName("family").value = "Some font";
 
-  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Some font", weight: "450", size: 18, color: "#222222" });
+  expect(themeModel["questionTitle"]).toStrictEqual({ family: "Some font", weight: "450", size: 18, lineHeight: 27, color: "#222222" });
 });
 
 test("Theme builder: composite question backgroundcornerradius", (): any => {
@@ -215,7 +217,8 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
     "family": "Open Sans",
     "weight": "600",
     "color": "rgba(0, 0, 0, 0.91)",
-    "size": 16
+    "size": 16,
+    "lineHeight": 24
   };
 
   expect(questionTitleFontSettings.value).toEqual(questionTitleValue);
@@ -738,7 +741,7 @@ test("Check Theme builder's custom questions respect creator locale", (): any =>
   expect(propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600").contentPanel.getQuestionByName("opacity").title).toBe("opacity_test");
   expect(propertyGridSurvey.getQuestionByName("--sjs2-border-effect-surface-default").contentQuestion.panels[0].getQuestionByName("x").title).toBe("boxShadowX_test");
   expect(propertyGridSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").colorTitle).toBe("backcolor_test");
-  expect(propertyGridSurvey.getQuestionByName("editorFont").contentPanel.getQuestionByName("family").title).toBe("fontFamily_test");
+  expect(propertyGridSurvey.getQuestionByName("inputContent").contentPanel.getQuestionByName("family").title).toBe("fontFamily_test");
   editorLocalization.currentLocale = "en";
 });
 
@@ -865,12 +868,14 @@ test("headerViewContainer init state", (): any => {
     "headerDescription": {
       "color": "rgba(0, 0, 0, 0.45)",
       "family": "Open Sans",
+      "lineHeight": 32,
       "size": 20,
       "weight": "400",
     },
     "headerTitle": {
       "color": "rgba(0, 0, 0, 0.91)",
       "family": "Open Sans",
+      "lineHeight": 40,
       "size": 32,
       "weight": "700",
     },
@@ -893,19 +898,21 @@ test("set headerViewContainer basic", (): any => {
 
   expect(simulatorSurvey.logoPosition).toEqual("left");
   expect(creator.survey.logoPosition).toEqual("left");
-  expect(header["headerTitle"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.91)", family: "Open Sans", weight: "700", size: 32 });
-  expect(header["headerDescription"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.45)", family: "Open Sans", weight: "400", size: 20 });
+  expect(header["headerTitle"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.91)", family: "Open Sans", weight: "700", size: 32, lineHeight: 40 });
+  expect(header["headerDescription"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.45)", family: "Open Sans", weight: "400", size: 20, lineHeight: 32 });
 
   headerViewContainer.getElementByName("logoPosition").value = "right";
   headerTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
+  headerTitleQuestion.contentPanel.getQuestionByName("lineHeight").value = 53;
   headerTitleQuestion.contentPanel.getQuestionByName("size").value = 41;
   headerTitleQuestion.contentPanel.getQuestionByName("family").value = "Courier New";
   headerDescriptionQuestion.contentPanel.getQuestionByName("weight").value = "800";
+  headerDescriptionQuestion.contentPanel.getQuestionByName("lineHeight").value = 34;
   headerDescriptionQuestion.contentPanel.getQuestionByName("size").value = 21;
   headerDescriptionQuestion.contentPanel.getQuestionByName("family").value = "Trebuchet MS";
 
-  expect(header["headerTitle"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.91)", family: "Courier New", weight: "400", size: 41 });
-  expect(header["headerDescription"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.45)", family: "Trebuchet MS", weight: "800", size: 21 });
+  expect(header["headerTitle"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.91)", family: "Courier New", weight: "400", size: 41, lineHeight: 53 });
+  expect(header["headerDescription"]).toStrictEqual({ color: "rgba(0, 0, 0, 0.45)", family: "Trebuchet MS", weight: "800", size: 21, lineHeight: 34 });
 
   expect(creator.theme.header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
   expect(creator.survey.logoPosition).toEqual("right");
@@ -940,10 +947,12 @@ test("set headerViewContainer advanced", (): any => {
   expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-description"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-description"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-description"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-description"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-bg"]).toBeUndefined();
 
@@ -968,10 +977,12 @@ test("set headerViewContainer advanced", (): any => {
   headerTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
   headerTitleQuestion.contentPanel.getQuestionByName("size").value = 39;
   headerTitleQuestion.contentPanel.getQuestionByName("family").value = "Georgia";
+  headerTitleQuestion.contentPanel.getQuestionByName("lineHeight").value = 51;
   headerDescriptionQuestion.contentPanel.getQuestionByName("color").value = "rgba(50, 16, 218, 0.45)";
   headerDescriptionQuestion.contentPanel.getQuestionByName("weight").value = "800";
   headerDescriptionQuestion.contentPanel.getQuestionByName("size").value = 19;
   headerDescriptionQuestion.contentPanel.getQuestionByName("family").value = "Verdana";
+  headerDescriptionQuestion.contentPanel.getQuestionByName("lineHeight").value = 29;
 
   expect(creator.theme.header).toStrictEqual({
     "height": 300,
@@ -993,10 +1004,12 @@ test("set headerViewContainer advanced", (): any => {
   currentThemeCssVariables = creator.theme.cssVariables || {};
   expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBe("Georgia");
   expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBe("400");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBe("51px");
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBe("#FBFF24");
   expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBe("39px");
   expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-description"]).toBe("Verdana");
   expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-description"]).toBe("800");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-description"]).toBe("29px");
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-description"]).toBe("rgba(50, 16, 218, 0.45)");
   expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-description"]).toBe("19px");
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-bg"]).toBe("#5094ed");
@@ -1004,6 +1017,9 @@ test("set headerViewContainer advanced", (): any => {
 
 test("restore basic headerViewContainer values", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+
+  mockDomWindowGetComputedStyleFromInlineStyles({});
+
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {
@@ -1016,6 +1032,8 @@ test("restore basic headerViewContainer values", (): any => {
       "--sjs2-typography-font-family-component-header-title": "Georgia",
       "--sjs2-typography-font-weight-component-header-title": "800",
       "--sjs2-typography-font-size-component-header-title": "39px",
+      "--sjs2-typography-line-height-component-header-title": "51px",
+      "--sjs2-typography-line-height-component-header-description": "29px",
       "--sjs2-typography-font-family-component-header-description": "Verdana",
       "--sjs2-typography-font-weight-component-header-description": "800",
       "--sjs2-typography-font-size-component-header-description": "19px"
@@ -1064,17 +1082,20 @@ test("restore basic headerViewContainer values", (): any => {
     "family": "Verdana",
     "size": 19,
     "weight": "800",
+    "lineHeight": 29,
   });
   expect(headerViewContainer.getQuestionByName("headerTitle").value).toStrictEqual({
     "color": "rgba(219, 15, 15, 0.91)",
     "family": "Georgia",
     "size": 39,
     "weight": "800",
+    "lineHeight": 51,
   });
 });
 
 test("restore advanced headerViewContainer values", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  mockDomWindowGetComputedStyleFromInlineStyles({});
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {
@@ -1087,9 +1108,11 @@ test("restore advanced headerViewContainer values", (): any => {
       "--sjs2-typography-font-family-component-header-title": "Georgia",
       "--sjs2-typography-font-weight-component-header-title": "800",
       "--sjs2-typography-font-size-component-header-title": "39px",
+      "--sjs2-typography-line-height-component-header-title": "51px",
       "--sjs2-typography-font-family-component-header-description": "Verdana",
       "--sjs2-typography-font-weight-component-header-description": "800",
-      "--sjs2-typography-font-size-component-header-description": "19px"
+      "--sjs2-typography-font-size-component-header-description": "19px",
+      "--sjs2-typography-line-height-component-header-description": "29px",
     },
     "header": {
       "height": 300,
@@ -1136,12 +1159,14 @@ test("restore advanced headerViewContainer values", (): any => {
     "family": "Verdana",
     "size": 19,
     "weight": "800",
+    "lineHeight": 29,
   });
   expect(headerViewContainer.getQuestionByName("headerTitle").value).toStrictEqual({
     "color": "rgba(219, 15, 15, 0.91)",
     "family": "Georgia",
     "size": 39,
     "weight": "800",
+    "lineHeight": 51,
   });
 });
 
@@ -1296,6 +1321,7 @@ test("header survey title font color changed", (): any => {
   expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBeUndefined();
 
   headerViewContainer.getElementByName("headerView").value = "advanced";
@@ -1304,6 +1330,7 @@ test("header survey title font color changed", (): any => {
   expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBeUndefined();
   expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBeUndefined();
 
   // headerTitleQuestion.contentPanel.getQuestionByName("color").value = "#FBFF24";

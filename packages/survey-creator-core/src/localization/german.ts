@@ -1929,7 +1929,7 @@ export var germanTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Beschreibung Schriftart",
       // [Auto-translated] "Font"
-      editorFont: "Schriftart",
+      inputContent: "Schriftart",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Undurchsichtigkeit", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3539,6 +3539,8 @@ export var germanTranslation = {
     placeholderColor: "Platzhalterfarbe",
     // [Auto-translated] "Size"
     size: "Größe",
+    // [Auto-translated] "Line height"
+    lineHeight: "Streckenhöhe",
     // [Auto-translated] "Opacity"
     opacity: "Undurchsichtigkeit",
     // [Auto-translated] "X"

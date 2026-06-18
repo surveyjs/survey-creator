@@ -1930,7 +1930,7 @@ export var koreanStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "설명 글꼴",
       // [Auto-translated] "Font"
-      editorFont: "글꼴",
+      inputContent: "글꼴",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "불투명도", // Auto-generated string
       // [Auto-translated] "Survey font family"
@@ -3540,6 +3540,8 @@ export var koreanStrings = {
     placeholderColor: "자리 표시자 색",
     // [Auto-translated] "Size"
     size: "크기",
+    // [Auto-translated] "Line height"
+    lineHeight: "노선 높이",
     // [Auto-translated] "Opacity"
     opacity: "불투명도",
     // [Auto-translated] "X"
