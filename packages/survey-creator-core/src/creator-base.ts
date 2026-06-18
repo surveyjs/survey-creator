@@ -4892,7 +4892,7 @@ export class SurveyCreatorModel extends Base
     return new CssClassBuilder()
       .append("svc-creator")
       .append("sd-theme-root")
-      .append("sjs-theme-override")
+      .append("sjs-theme-overrides")
       .append("svc-creator--mobile", this.isMobileView)
       .append("svc-creator--touch", this.isTouch)
       .append("svc-creator--disable-animations", !this.animationEnabled)
