@@ -10,6 +10,7 @@ import { CreatorTester } from "../creator-tester";
 import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { HeaderModel, ThemeModel } from "../../src/components/tabs/theme-model";
 import { ThemeTabViewModel } from "../../src/components/tabs/theme-builder";
+import { PreviewViewModel } from "../../src/components/tabs/preview";
 import { settings } from "../../src/creator-settings";
 import { assign } from "../../src/utils/utils";
 import { PredefinedThemes, Themes } from "../../src/components/tabs/themes";
@@ -1603,4 +1604,32 @@ test("inputContent color and placeholdercolor resolved from base theme", (): any
   const inputContent = propertyGridSurvey.getQuestionByName("inputContent").value;
   expect(inputContent.color).toBe("rgba(0, 0, 0, 0.91)");
   expect(inputContent.placeholdercolor).toBe("rgba(0, 0, 0, 0.45)");
+});
+test("Theme builder: survey in the Theme tab is created with TOC when showTOC is true, Bug#7801", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = {
+    showTOC: true,
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", elements: [{ type: "text", name: "q2" }] }
+    ]
+  };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const previewPlugin: any = creator.getPlugin("preview");
+
+  creator.activeTab = "theme";
+  let themeSurveyTab = themePlugin.model as ThemeTabViewModel;
+  expect(themeSurveyTab.survey.showTOC).toBeTruthy();
+  // Force the TOC list model (and thus survey.layoutElements) to be built - this is the code path that overflowed in Bug#7801
+  expect((themeSurveyTab.survey as any).tocModel.listModel.actions.length).toBe(2);
+
+  creator.activeTab = "preview";
+  const previewSurveyTab = previewPlugin.model as PreviewViewModel;
+  expect(previewSurveyTab.survey.showTOC).toBeTruthy();
+  expect((previewSurveyTab.survey as any).tocModel.listModel.actions.length).toBe(2);
+
+  creator.activeTab = "theme";
+  themeSurveyTab = themePlugin.model as ThemeTabViewModel;
+  expect(themeSurveyTab.survey.showTOC).toBeTruthy();
+  expect((themeSurveyTab.survey as any).tocModel.listModel.actions.length).toBe(2);
 });

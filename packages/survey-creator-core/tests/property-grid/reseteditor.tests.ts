@@ -31,6 +31,23 @@ test("Check textwithreset editor", () => {
   Serializer.removeProperty("survey", "test");
 });
 
+test("Check textwithreset editor is used for minErrorText on the first question selection", () => {
+  const question = new QuestionTextModel("q1");
+  question.inputType = "number";
+  const propertyGrid = new PropertyGridModelTester(question);
+  const questionEditor = <QuestionTextModel>propertyGrid.survey.getQuestionByName("minErrorText");
+  const resetAction = questionEditor.inputActionsContainer.getActionById("reset");
+  expect(questionEditor.getType()).toBe("text");
+  expect(resetAction.enabled).toBeFalsy();
+
+  question.minErrorText = "custom error text";
+  expect(resetAction.enabled).toBeTruthy();
+
+  resetAction.action();
+  expect(question.minErrorText).toBe("The value should not be less than {0}");
+  expect(resetAction.enabled).toBeFalsy();
+});
+
 test("Check textwithreset editor is not loaded if max length is set", () => {
   Serializer.addProperty("survey",
     {

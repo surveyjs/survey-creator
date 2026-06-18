@@ -16,7 +16,7 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import "./translation.scss";
-import { SurveyHelper } from "../../survey-helper";
+import { SurveyHelper, getDefaultLocaleName } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
 import { updateMatrixRemoveAction, updateMatixActionsAppearance, findAction } from "../../utils/actions";
@@ -228,7 +228,7 @@ export class TranslationItem extends TranslationItemBase {
     return res;
   }
   public getPlaceholder(locale: string, ignorePlaceHolder: boolean = false): string {
-    const textLocale = !!locale && locale !== "default" ? locale : surveyLocalization.defaultLocale;
+    const textLocale = !!locale && locale !== getDefaultLocaleName() ? locale : surveyLocalization.defaultLocale;
     const placeholderText = !ignorePlaceHolder ? editorLocalization.getString("ed.translationPlaceHolder", textLocale) : "";
     return this.getPlaceHolderCore(locale) || placeholderText;
   }
@@ -257,7 +257,7 @@ export class TranslationItem extends TranslationItemBase {
     return this.getPlaceholderText(loc);
   }
   public getPlaceholderText(loc: string): string {
-    if (!loc || loc === "default") return "";
+    if (!loc || loc === getDefaultLocaleName()) return "";
     const root = this.getRootDialect(loc);
     return this.locString.getLocaleText(root);
   }
@@ -928,7 +928,7 @@ export class Translation extends Base implements ITranslationLocales {
         item.setLocText(options.columnName, options.value);
         const colName = options.columnName;
         options.row.cells.forEach(cell => {
-          if (colName === "default" || cell.column.name.indexOf(colName + "-") === 0)
+          if (colName === getDefaultLocaleName() || cell.column.name.indexOf(colName + "-") === 0)
             this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
         });
       }
@@ -997,7 +997,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
     var locs = this.getSelectedLocales();
-    matrix.addColumn("default", this.getLocaleName("")).readOnly = this.isEditMode;
+    matrix.addColumn(getDefaultLocaleName(), this.getLocaleName("")).readOnly = this.isEditMode;
     for (var i = 0; i < locs.length; i++) {
       matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
     }
@@ -1265,7 +1265,7 @@ export class Translation extends Base implements ITranslationLocales {
     const visibleLocales = this.locales;
     headerRow.push("description ↓ - language →"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     for (let i = 0; i < visibleLocales.length; i++) {
-      headerRow.push(!!visibleLocales[i] ? visibleLocales[i] : "default");
+      headerRow.push(!!visibleLocales[i] ? visibleLocales[i] : getDefaultLocaleName());
     }
     res.push(headerRow);
     let itemsHash = <HashTable<TranslationItem>>{};
@@ -1300,7 +1300,7 @@ export class Translation extends Base implements ITranslationLocales {
 
   public importFromNestedArray(rows: string[][]) {
     let locales = rows.shift().slice(1);
-    if (locales[0] === "default") {
+    if (locales[0] === getDefaultLocaleName() || locales[0] === "default") {
       locales[0] = "";
     }
     let translation = new Translation(this.survey, this.options, false);
@@ -1534,6 +1534,7 @@ export class TranslationEditor {
     this.updateMatricesColumns();
   }
   private updateMatricesColumns(): void {
+    if (!this.translation.stringsHeaderSurvey) return;
     this.translation.stringsHeaderSurvey.getAllQuestions().forEach(
       q => {
         this.updateMatrixColumns(<QuestionMatrixDropdownModel>q);
@@ -1670,6 +1671,7 @@ export class TranslationEditor {
     return action;
   }
   private updateFromLocaleAction() {
+    if (!this.translation.stringsHeaderSurvey) return;
     const action = this.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale");
     if (!!action) {
       action.enabled = this.fromLocales.length > 0;
