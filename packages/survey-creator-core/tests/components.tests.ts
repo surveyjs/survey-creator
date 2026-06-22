@@ -741,6 +741,48 @@ test("ImageItemValueWrapperViewModel raises onItemValueAdded", () => {
   expect(imageItemAdorner["isChoosingNewFile"]).toBeFalsy();
 });
 
+test("Image Picker new choices should not set text to empty string", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", showLabel: true }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const newItemAdorner = new ImageItemValueWrapperViewModel(
+    creator,
+    question,
+    question.newItem,
+    undefined,
+    {} as HTMLElement
+  );
+
+  creator.onUploadFile.add((s, o) => {
+    o.callback("success", "data:image/png;base64,test");
+  });
+
+  newItemAdorner["isChoosingNewFile"] = true;
+  newItemAdorner.uploadFiles([{}]);
+
+  expect(question.choices).toHaveLength(1);
+  const choice = question.choices[0];
+  expect(choice.hasText).toBeFalsy();
+  expect(choice.text).toEqual(choice.value);
+  expect(JSON.stringify(choice.toJSON())).not.toContain("\"text\"");
+  expect(choice.toJSON()).toEqual({
+    value: choice.value,
+    imageLink: "data:image/png;base64,test"
+  });
+
+  creator.createNewItemValue(question);
+  expect(question.choices).toHaveLength(2);
+  expect(question.choices[1].hasText).toBeFalsy();
+  expect(JSON.stringify(question.choices[1].toJSON())).not.toContain("\"text\"");
+
+  question.choices[1].text = "Custom label";
+  expect(question.choices[1].hasText).toBeTruthy();
+  expect(question.choices[1].toJSON().text).toEqual("Custom label");
+  expect(question.choices[1].text).toEqual("Custom label");
+});
+
 test("ImageItemValueWrapperViewModel acceptedTypes", () => {
   const creator = new CreatorTester();
   creator.JSON = {

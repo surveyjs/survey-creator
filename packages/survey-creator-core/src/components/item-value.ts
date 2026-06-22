@@ -98,7 +98,10 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   private updateNewItemValue() {
     if (!this.creator || !this.question || !this.question.newItem) return;
     this.question.newItem.value = this.creator.getNextItemValue(this.question);
-    this.question.newItem.text = getNextItemText(this.question.choices);
+    const nextText = getNextItemText(this.question.choices);
+    if (nextText) {
+      this.question.newItem.text = nextText;
+    }
   }
   private registerOnPropertyChanged(itemName: string, propertyName: string): void {
     if (this.question[itemName] === this.item) {

@@ -4683,7 +4683,8 @@ export class SurveyCreatorModel extends Base
   public createNewItemValue(question: QuestionSelectBase, callEvent: boolean = true, callback?: (res: ItemValue) => void): ItemValue {
     const nextValue = this.getNextItemValue(question);
     const res = question.createItemValue(nextValue);
-    res.text = getNextItemText(question.choices);
+    const nextText = getNextItemText(question.choices);
+    if (nextText) res.text = nextText;
     question.choices.push(res);
     if (callback) {
       callback(res);
