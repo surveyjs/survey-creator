@@ -762,7 +762,6 @@ test("Apply theme from theme builder", (): any => {
   creator.theme = <any>{
     "cssVariables": {
       "--sjs2-color-bg-basic-primary": "#252525",
-      "--sjs-general-backcolor-dark": "#606060"
     },
     "themeName": "playful",
     "themePalette": "dark",
