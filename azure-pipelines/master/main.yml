@@ -150,26 +150,6 @@ jobs:
           npm run remove-package-lock
         displayName: "npm run remove-package-lock"
 
-      # set release specific version
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/"
-          Contents: "version.txt"
-          TargetFolder: "$(Build.SourcesDirectory)/"
-          OverWrite: true
-        displayName: "Copy build artifact - SurveyJSVersion File"
-
-      - powershell: |
-          $version = Get-Content $(Build.SourcesDirectory)/version.txt
-          Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
-        displayName: "Setup SurveyJSVersion variable from SurveyJSVersionFile"
-
-      - powershell: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-          npm run release -- --release-as $(SurveyJSVersion)
-        displayName: "Release specific version survey-creator-core"
-      # EO set release specific version
-
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
           npm run build:i18n
@@ -547,26 +527,6 @@ jobs:
           npm run remove-package-lock
         displayName: "npm run remove-package-lock"
 
-      # set release specific version
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/"
-          Contents: "version.txt"
-          TargetFolder: "$(Build.SourcesDirectory)/"
-          OverWrite: true
-        displayName: "Copy build artifact - SurveyJSVersion File"
-
-      - powershell: |
-          $version = Get-Content $(Build.SourcesDirectory)/version.txt
-          Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
-        displayName: "Setup SurveyJSVersion variable from SurveyJSVersionFile"
-
-      - powershell: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-          npm run release -- --release-as $(SurveyJSVersion)
-        displayName: "Release specific version survey-creator-react"
-      # EO set release specific version
-
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
           npm run build
@@ -703,26 +663,6 @@ jobs:
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/node_modules/survey-angular-ui"
           OverWrite: true
         displayName: "copy survey-angular-ui in node_modules"
-
-      # set release specific version
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/"
-          Contents: "version.txt"
-          TargetFolder: "$(Build.SourcesDirectory)/"
-          OverWrite: true
-        displayName: "Copy build artifact - SurveyJSVersion File"
-
-      - powershell: |
-          $version = Get-Content $(Build.SourcesDirectory)/version.txt
-          Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
-        displayName: "Setup SurveyJSVersion variable from SurveyJSVersionFile"
-
-      - powershell: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-          npm run release -- --release-as $(SurveyJSVersion)
-        displayName: "Release specific version survey-creator-angular"
-      # EO set release specific version
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
@@ -876,26 +816,6 @@ jobs:
           TargetFolder: "$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue/node_modules/survey-vue3-ui"
           OverWrite: true
         displayName: "copy survey-vue3-ui in node_modules"
-
-      # set release specific version
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/"
-          Contents: "version.txt"
-          TargetFolder: "$(Build.SourcesDirectory)/"
-          OverWrite: true
-        displayName: "Copy build artifact - SurveyJSVersion File"
-
-      - powershell: |
-          $version = Get-Content $(Build.SourcesDirectory)/version.txt
-          Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
-        displayName: "Setup SurveyJSVersion variable from SurveyJSVersionFile"
-
-      - powershell: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
-          npm run release -- --release-as $(SurveyJSVersion)
-        displayName: "Release specific version survey-creator-vue"
-      # EO set release specific version
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
@@ -1109,26 +1029,6 @@ jobs:
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
           npm run remove-package-lock
         displayName: "npm run remove-package-lock"
-
-      # set release specific version
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: "$(Pipeline.Workspace)/LibraryMain/SurveyJSLibraryBuildCore/"
-          Contents: "version.txt"
-          TargetFolder: "$(Build.SourcesDirectory)/"
-          OverWrite: true
-        displayName: "Copy build artifact - SurveyJSVersion File"
-
-      - powershell: |
-          $version = Get-Content $(Build.SourcesDirectory)/version.txt
-          Write-Host "##vso[task.setvariable variable=SurveyJSVersion;]$version"
-        displayName: "Setup SurveyJSVersion variable from SurveyJSVersionFile"
-
-      - powershell: |
-          cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-          npm run release -- --release-as $(SurveyJSVersion)
-        displayName: "Release specific version survey-creator-js"
-      # EO set release specific version
 
       - script: |
           cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
