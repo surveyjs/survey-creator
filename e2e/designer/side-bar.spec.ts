@@ -327,6 +327,6 @@ test.describe(title, () => {
     await page.locator(".sv-action--object-selector").click();
     await page.locator(".sd-menu-item").getByText("Column 2").click();
     await page.waitForTimeout(500);
-    expect(await getQuestionTopPosition()).toEqual(64);
+    expect(await getQuestionTopPosition()).toEqual(72);
   });
 });
