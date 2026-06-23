@@ -41,11 +41,11 @@ export class CreatorPresetEditableOptions extends CreatorPresetEditableBase {
         { name: "minChoices", type: "text", inputType: "number" },
         { name: "maxChoices", type: "text", inputType: "number" },
         { name: "maxVisibleChoices", type: "text", inputType: "number", min: -1 },
+        { name: "maxChoiceContentNestingLevel", type: "text", inputType: "number", min: 0 },
         { name: "maxRateValues", type: "text", inputType: "number" },
         { name: "forbiddenNestedElementsPanel", type: "tagbox", choices: allTypes },
         { name: "forbiddenNestedElementsPanelDynamic", type: "tagbox", choices: allTypes },
         { name: "maxPanelNestingLevel", type: "text", inputType: "number", min: -1 },
-        { name: "maxChoiceContentNestingLevel", type: "text", inputType: "number", min: 0, max: 2 },
         { type: "panel", name: "expressionsValidation", elements: [
           { name: "expressionsValidateFunctions", type: "boolean" },
           { name: "expressionsValidateVariables", type: "boolean" },
