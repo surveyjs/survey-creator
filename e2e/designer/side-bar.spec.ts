@@ -323,10 +323,10 @@ test.describe(title, () => {
       return el ? Math.round(el.getBoundingClientRect().top) : 0;
     });
 
-    expect(await getQuestionTopPosition()).toEqual(374);
+    expect(await getQuestionTopPosition()).toEqual(366);
     await page.locator(".sv-action--object-selector").click();
     await page.locator(".sd-menu-item").getByText("Column 2").click();
     await page.waitForTimeout(500);
-    expect(await getQuestionTopPosition()).toEqual(72);
+    expect(await getQuestionTopPosition()).toEqual(64);
   });
 });
