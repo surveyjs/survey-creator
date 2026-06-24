@@ -284,8 +284,8 @@ export const jaStrings = {
       maxRateValues: "調査設計者が評価尺度の質問に追加できる最大評価値の数を指定します。",
       // [Auto-translated] "Specifies the maximum nesting level for Panels and Dynamic Panels. Use -1 for no limit, 0 to allow nesting only questions, or a positive number to set the maximum nesting depth."
       maxPanelNestingLevel: "パネルおよび動的パネルの最大ネストレベルを指定します。制限なしは-1、質問のみ入れ子に0、最大入れ子深さを設定するには正の数を使いましょう。",
-      // [Auto-translated] "Specifies how deeply choice options in Radio Button Group and Checkboxes questions can contain nested survey content. Use 0 to disable nesting (default), or a positive number to set the maximum nesting depth."
-      maxChoiceContentNestingLevel: "ラジオボタングループおよびチェックボックスの選択肢オプションに、入れ子調査内容をどの程度含められるかを指定します。0を使えばネストを無効にし(デフォルト)、正の数値で最大入れ子深さを設定します。",
+      // [Auto-translated] "Specifies how many levels of follow-up questions can be nested within choice options in Radio Button Group and Checkboxes questions. Use 0 to disable nesting, 1 to allow first-level choice options to contain nested content, 2 to allow first- and second-level choice options to contain nested content, and so on. Higher values enable deeper nesting levels."
+      maxChoiceContentNestingLevel: "ラジオボタングループおよびチェックボックス問題の選択オプション内に、フォローアップ質問をいくつ入れ子にできるかを指定します。0はネストを無効にし、1はファーストレベル選択オプションに入れ子された内容を含ませるため、2は1レベルおよびセカンドレベルの選択オプションに入れ子を許可する、という具合です。値が高いほど、より深い入れ子レベルが可能になります。",
       // [Auto-translated] "Controls whether the Preview tab shows the Device button for testing surveys on different devices."
       previewAllowSimulateDevices: "プレビュータブにデバイスボタンが表示されるかどうかを制御し、異なるデバイスで調査をテストします。",
       // [Auto-translated] "Choose whether the Preview tab shows the language selector. \"Only for multilingual surveys\" - show the selector only if the survey has translations; \"Always (translated languages when available)\" - always show the selector, listing only survey translations when present and all available languages otherwise; \"Always (all available languages)\" - always show the selector with all available languages; \"Never\" - never show the selector."

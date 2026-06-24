@@ -284,8 +284,8 @@ export const koStrings = {
       maxRateValues: "설문조사 설계자가 평가 척도 질문에 추가할 수 있는 최대 등급 수를 지정합니다.",
       // [Auto-translated] "Specifies the maximum nesting level for Panels and Dynamic Panels. Use -1 for no limit, 0 to allow nesting only questions, or a positive number to set the maximum nesting depth."
       maxPanelNestingLevel: "패널과 동적 패널의 최대 중첩 레벨을 지정합니다. -1은 제한 없음, 0은 질문만 중첩 가능, 최대 중첩 깊이를 설정할 때는 양수로 사용하세요.",
-      // [Auto-translated] "Specifies how deeply choice options in Radio Button Group and Checkboxes questions can contain nested survey content. Use 0 to disable nesting (default), or a positive number to set the maximum nesting depth."
-      maxChoiceContentNestingLevel: "라디오 버튼 그룹 및 체크박스 질문의 선택 옵션에 중첩된 설문 내용을 얼마나 깊이 포함할 수 있는지 명시합니다. 0을 사용해 네스팅(기본값)을 비��성��하거나, 최대 중첩 깊이를 설정하려면 양수로 설정하세요.",
+      // [Auto-translated] "Specifies how many levels of follow-up questions can be nested within choice options in Radio Button Group and Checkboxes questions. Use 0 to disable nesting, 1 to allow first-level choice options to contain nested content, 2 to allow first- and second-level choice options to contain nested content, and so on. Higher values enable deeper nesting levels."
+      maxChoiceContentNestingLevel: "라디오 버튼 그룹 및 체크박스 질문의 선택 옵션 내에 몇 개의 후속 질문을 중첩할 수 있는지 명시합니다. 0을 사용하면 중첩을 비활성화하고, 1을 사용하면 1차 선택 옵션에 중첩된 내용을 포함할 수 있으며, 2를 사용하면 1차 및 2차 선택 옵션이 중첩된 내용을 포함하도록 하는 등, 이런 식으로 사용하세요. 더 높은 값일수록 더 깊은 중첩 레벨이 가능합니다.",
       // [Auto-translated] "Controls whether the Preview tab shows the Device button for testing surveys on different devices."
       previewAllowSimulateDevices: "미리보기 탭에 다양한 기기에서 설문조사를 테스트할 때 장치 버튼이 표시되는지 제어합니다.",
       // [Auto-translated] "Choose whether the Preview tab shows the language selector. \"Only for multilingual surveys\" - show the selector only if the survey has translations; \"Always (translated languages when available)\" - always show the selector, listing only survey translations when present and all available languages otherwise; \"Always (all available languages)\" - always show the selector with all available languages; \"Never\" - never show the selector."
