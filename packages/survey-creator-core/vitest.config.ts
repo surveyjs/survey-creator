@@ -87,6 +87,11 @@ export default defineConfig({
     projects: [
       {
         plugins: [stubAssets],
+        oxc: {
+          decorator: { legacy: true },
+          assumptions: { setPublicClassFields: true },
+          typescript: { removeClassFieldsWithoutInitializer: true },
+        },
         resolve: { alias: coreSuiteAliases },
         test: {
           name: "core",
