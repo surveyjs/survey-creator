@@ -24,7 +24,7 @@
     "test:cov": "vitest run --coverage",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "test:postcss": "postcss build/survey-creator-core.css --silent -u postcss-calc -u autoprefixer -u postcss-fail-on-warn -u postcss-import -o survey-creator-core.postcss.css && rimraf survey-creator-core.postcss.css",
+    "test:postcss": "postcss build/survey-creator-core.css --silent --config ./postcss -o survey-creator-core.postcss.css && rimraf survey-creator-core.postcss.css",
     "test:presets": "vitest run --project presets",
     "test:presets:watch": "vitest --project presets",
     "test:presets:cov": "vitest run --project presets --coverage",
