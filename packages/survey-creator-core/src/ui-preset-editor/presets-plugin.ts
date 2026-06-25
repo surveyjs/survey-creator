@@ -381,6 +381,7 @@ export class UIPresetEditor implements ICreatorPlugin {
       enabled: false,
       visible: false,
       title: "Saved",
+      appearance: { mode: "tertiary", size: "small", style: "neutral", showBorder: false },
       css: "sps-navigation-action sps-navigation-action--label sps-navigation-action--large-icon",
     });
 
@@ -396,6 +397,7 @@ export class UIPresetEditor implements ICreatorPlugin {
 
     const bottomActions = this.designerPlugin.tabControlModel.bottomToolbar.actions;
     bottomActions.forEach(a => a.visible = false);
+    this.editor.navigationBar.setActionsAppearance({ mode: "tertiary-surface", size: "small", style: "neutral", showBorder: true });
     if (defaultPresets.length > 0)this.editor.navigationBar.addAction(listAction);
     this.editor.navigationBar.addAction(pagesAction);
     this.editor.navigationBar.addAction(editAction);
