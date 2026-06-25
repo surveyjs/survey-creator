@@ -46,6 +46,103 @@ test("create locales question for edit translation", () => {
   expect(itemsGroup.groups).toHaveLength(0);
   expect(itemsGroup.items).toHaveLength(2);
 });
+test("Auto-translate into the default locale: default locale is not in the 'Translate from' dropdown, issue#7815", () => {
+  const survey = new SurveyModel({
+    locale: "de",
+    title: {
+      de: "Beispielumfrage"
+    },
+    elements: [
+      {
+        type: "boolean",
+        name: "question1",
+        title: {
+          de: "Magst du Fußball?" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        }
+      },
+      {
+        type: "boolean",
+        name: "question2",
+        title: {
+          de: "Siehst du gern Sport im Fernsehen?"
+        }
+      }
+    ]
+  });
+  const options = new EmptySurveyCreatorOptions();
+  options.machineTranslationValue = true;
+  let fromLocaleUsed = "";
+  let toLocaleUsed: string = undefined;
+  options.doMachineTranslation = (fromLocale, toLocale, strings, callback) => {
+    fromLocaleUsed = fromLocale;
+    toLocaleUsed = toLocale;
+    callback(strings.map((str) => "en: " + str));
+  };
+
+  // The translation target is the default locale.
+  const editor = new Translation(survey, options).createTranslationEditor("");
+  expect(editor.fromLocales).toStrictEqual(["de"]);
+
+  // The default locale is the target, so it is not shown in the "Translate from" dropdown; only "de" is available.
+  const fromAction = editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale");
+  const dropdownIds = fromAction.popupModel.contentComponentData.model.actions.map((a) => a.id);
+  expect(dropdownIds).not.toContain(null); // the default locale (id === null) is not present
+  expect(dropdownIds).toStrictEqual(["de"]);
+
+  // Auto-translate from "de" into the default locale.
+  editor.setFromLocale("de");
+  editor.doMachineTranslation();
+  expect(fromLocaleUsed).toBe("de");
+  expect(toLocaleUsed).toBe("en");
+
+  // The translated strings are displayed in the editor matrices (default locale column) before applying.
+  const translatedInMatrix: Array<any> = [];
+  editor.translation.stringsSurvey.getAllQuestions().forEach((q) => {
+    const matrix = <QuestionMatrixDropdownModel>q;
+    const targetColumn = matrix.columns[matrix.columns.length - 1];
+    expect(targetColumn.name).toBe("default");
+    matrix.visibleRows.forEach((row) => translatedInMatrix.push(row.cells[matrix.columns.length - 1].question.value));
+  });
+  expect(translatedInMatrix).toContain("en: Magst du Fußball?"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(translatedInMatrix).toContain("en: Siehst du gern Sport im Fernsehen?");
+
+  editor.apply();
+
+  expect(survey.getQuestionByName("question1").locTitle.getLocaleText("")).toBe("en: Magst du Fußball?"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(survey.getQuestionByName("question2").locTitle.getLocaleText("")).toBe("en: Siehst du gern Sport im Fernsehen?");
+});
+test("Auto-translate window shows Source column immediately without the Default column, issue#7815", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "title en", de: "title de" }
+      }
+    ]
+  });
+  const editor = new Translation(survey).createTranslationEditor("fr");
+  const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  const headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
+
+  // The default locale is not shown as a separate column; the Source column (default locale) is shown immediately.
+  expect(matrix.columns).toHaveLength(2);
+  expect(matrix.columns[0].name).toBe("default");
+  expect(matrix.columns[0].readOnly).toBeTruthy();
+  expect(matrix.columns[1].name).toBe("fr");
+  expect(matrix.columns[1].readOnly).toBeFalsy();
+  expect(headerMatrix.columns[0].title).toBe("Source: Default (English)");
+  expect(headerMatrix.columns[1].title).toBe("Target: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+
+  // Changing the "translate from" locale updates the Source column instead of adding a Default column.
+  editor.setFromLocale("de");
+  expect(matrix.columns).toHaveLength(2);
+  expect(matrix.columns[0].name).toBe("de");
+  expect(matrix.columns[0].readOnly).toBeTruthy();
+  expect(matrix.columns[1].name).toBe("fr");
+  expect(headerMatrix.columns[0].title).toBe("Source: Deutsch");
+  expect(headerMatrix.columns[1].title).toBe("Target: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+});
 test("onTranslationStringVisibility for editor, Bug#7094", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -309,14 +406,18 @@ test("Show Edit action only if doMachineTranslation is set", () => {
   translation.addLocale("fr");
   let matrix = translation.localesQuestion;
   expect(matrix.visibleRows).toHaveLength(2);
+  // The default locale can be moved, so row reordering is enabled and a drag cell is added.
+  expect(matrix.allowRowReorder).toBeTruthy();
   let rows = matrix.renderedTable.rows;
   expect(rows).toHaveLength(2 * 2);
-  expect(rows[1].cells).toHaveLength(3);
-  let cell = rows[1].cells[2];
+  expect(rows[1].cells).toHaveLength(4);
+  // The default locale row has no actions when machine translation is off (it can't be removed).
+  let cell = rows[1].cells[3];
   expect(cell.isActionsCell).toBeFalsy();
-  cell = rows[3].cells[2];
+  cell = rows[3].cells[3];
   expect(cell.isActionsCell).toBeTruthy();
   expect(cell.item.value.actions).toHaveLength(1);
+  expect(cell.item.value.actions[0].iconName).toBe("icon-delete");
 
   const options = new EmptySurveyCreatorOptions();
   options.machineTranslationValue = true;
@@ -326,10 +427,14 @@ test("Show Edit action only if doMachineTranslation is set", () => {
   expect(matrix.visibleRows).toHaveLength(2);
   rows = matrix.renderedTable.rows;
   expect(rows).toHaveLength(2 * 2);
-  expect(rows[1].cells).toHaveLength(3);
-  cell = rows[1].cells[2];
-  expect(cell.isActionsCell).toBeFalsy();
-  cell = rows[3].cells[2];
+  expect(rows[1].cells).toHaveLength(4);
+  // The default locale can be auto-translated, so it shows the translate action (but still no remove action).
+  cell = rows[1].cells[3];
+  expect(cell.isActionsCell).toBeTruthy();
+  let defaultActions = cell.item.value.actions;
+  expect(defaultActions).toHaveLength(1);
+  expect(defaultActions[0].iconName).toBe("icon-language");
+  cell = rows[3].cells[3];
   expect(cell.isActionsCell).toBeTruthy();
   const actions = cell.item.value.actions;
   expect(actions).toHaveLength(2);
@@ -372,39 +477,43 @@ test("Machine translation from non default locale - UI", () => {
   expect(editor.translation.root.allLocItems).toHaveLength(3);
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   let matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  let headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
+  // The default locale is not shown as a separate column; the Source column (default locale) is shown immediately.
   expect(matrix.showHeader).toBeFalsy();
   expect(matrix.columns).toHaveLength(2);
+  expect(matrix.columns[0].name).toBe("default");
   expect(matrix.columns[1].name).toBe("es");
+  expect(headerMatrix.columns[0].title).toBe("Source: Default (English)");
+  expect(headerMatrix.columns[1].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("de");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  let headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
+  headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
   expect(matrix.showHeader).toBeFalsy();
-  expect(matrix.columns).toHaveLength(3);
-  expect(matrix.columns[1].name).toBe("de");
-  expect(matrix.columns[2].name).toBe("es");
-  expect(headerMatrix.columns[0].title).toBe("Default (English)");
-  expect(headerMatrix.columns[1].title).toBe("Source: Deutsch");
-  expect(headerMatrix.columns[2].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(matrix.columns).toHaveLength(2);
+  expect(matrix.columns[0].name).toBe("de");
+  expect(matrix.columns[1].name).toBe("es");
+  expect(headerMatrix.columns[0].title).toBe("Source: Deutsch");
+  expect(headerMatrix.columns[1].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("fr");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
   headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
   expect(matrix.showHeader).toBeFalsy();
-  expect(matrix.columns).toHaveLength(3);
-  expect(matrix.columns[1].name).toBe("fr");
-  expect(matrix.columns[2].name).toBe("es");
-  expect(headerMatrix.columns[0].title).toBe("Default (English)");
-  expect(headerMatrix.columns[1].title).toBe("Source: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  expect(headerMatrix.columns[2].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(matrix.columns).toHaveLength(2);
+  expect(matrix.columns[0].name).toBe("fr");
+  expect(matrix.columns[1].name).toBe("es");
+  expect(headerMatrix.columns[0].title).toBe("Source: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(headerMatrix.columns[1].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
   expect(matrix.showHeader).toBeFalsy();
   expect(matrix.columns).toHaveLength(2);
+  expect(matrix.columns[0].name).toBe("default");
   expect(matrix.columns[1].name).toBe("es");
 });
 test("Machine translation from non default locale - onMachineTranslate", () => {

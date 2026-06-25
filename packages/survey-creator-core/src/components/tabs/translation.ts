@@ -19,11 +19,12 @@ import "./translation.scss";
 import { SurveyHelper, getDefaultLocaleName } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
-import { updateMatrixRemoveAction, updateMatixActionsClasses, findAction } from "../../utils/actions";
+import { updateMatrixRemoveAction, updateMatixActionsClasses } from "../../utils/actions";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import { listComponentCss } from "../list-theme";
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
+import { getActualLocaleName } from "../../utils/creator-locstrings";
 
 let isLocaleEnableIfExecuting: boolean;
 function localeEnableIf(params: any): boolean {
@@ -33,14 +34,25 @@ function localeEnableIf(params: any): boolean {
   isLocaleEnableIfExecuting = true;
   const index = matrix.visibleRows.indexOf(this.row);
   isLocaleEnableIfExecuting = false;
-  if (index <= 0) return false;
+  if (index < 0) return false;
   const val = matrix.value;
   if (!Array.isArray(val)) return true;
   const rowVal = val[index];
-  if (!rowVal || rowVal.isSelected) return true;
+  if (!rowVal) return true;
+  const isDefault = !rowVal.name;
+  if (rowVal.isSelected) {
+    // A selected locale can be unselected, unless it is the default locale and the only selected one.
+    if (!isDefault) return true;
+    let selectedCount = 0;
+    for (let i = 0; i < val.length; i++) {
+      if (val[i].isSelected) selectedCount++;
+    }
+    return selectedCount > 1;
+  }
+  if (isDefault) return true; // the default locale can always be shown
   let selectedCounter = 0;
-  for (let i = 1; i < val.length; i++) {
-    if (val[i].isSelected) selectedCounter++;
+  for (let i = 0; i < val.length; i++) {
+    if (!!val[i].name && val[i].isSelected) selectedCounter++;
   }
   return selectedCounter < settings.translation.maximumSelectedLocales;
 }
@@ -158,7 +170,7 @@ export class TranslationItem extends TranslationItemBase {
   public values(loc: string): TranslationItemString {
     if (!this.hashValues[loc]) {
       var val = new TranslationItemString(this.locString, loc);
-      val.isReadOnly = !!this.translation?.getEditLocale();
+      val.isReadOnly = !!this.translation?.isEditMode;
       if (!loc) {
         val.placeholder = this.defaultValue;
       }
@@ -191,7 +203,8 @@ export class TranslationItem extends TranslationItemBase {
           if (typeof json === "string") {
             json = { default: json };
           }
-          json[loc] = text;
+          // The default locale ("") is stored in JSON under the default-locale key, matching the matrix column name.
+          json[loc ? loc : getDefaultLocaleName()] = text;
         }
       });
     }
@@ -291,6 +304,7 @@ export interface ITranslationLocales {
   removeLocale(loc: string): void;
   canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean): boolean;
   getEditLocale(): string;
+  readonly isEditMode: boolean;
   getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string, context: any): string;
 }
 
@@ -538,8 +552,7 @@ export class TranslationGroup extends TranslationItemBase {
     if (!locStr) return null;
     const defaultValue = this.getDefaultValue(obj, property);
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
-    const editLocale = this.translation?.getEditLocale();
-    if (!!editLocale && !!locStr.getLocaleText(editLocale)) return null;
+    if (!!this.translation?.isEditMode && !!locStr.getLocaleText(this.translation.getEditLocale())) return null;
     if (!this.canShowProperty(property, locStr.isEmpty)) return null;
     return new TranslationItem(
       property.name,
@@ -595,12 +608,13 @@ export class TranslationGroup extends TranslationItemBase {
     }
   }
   private createItemValuesLocale() {
-    const editMode = this.translation?.getEditLocale();
+    const inEditMode = !!this.translation?.isEditMode;
+    const editLocale = this.translation?.getEditLocale();
     for (var i = 0; i < this.obj.length; i++) {
       var val = this.obj[i];
       var canAdd =
         this.showAllStrings || !val.locText.isEmpty || isNaN(val.value);
-      if (!!editMode && val.locText.getLocaleText(editMode)) {
+      if (inEditMode && val.locText.getLocaleText(editLocale)) {
         canAdd = false;
       }
       if (!canAdd) continue;
@@ -707,12 +721,14 @@ export class Translation extends Base implements ITranslationLocales {
   @property() stringsHeaderSurvey: SurveyModel;
   @property({ defaultValue: true }) isEmpty: boolean;
   private editLocale: string;
+  private editModeValue: boolean = false;
   public getEditLocale(): string { return this.editLocale; }
   public setEditMode(locale: string): void {
+    this.editModeValue = true;
     this.editLocale = locale;
     this.addLocale(locale);
   }
-  public get isEditMode(): boolean { return !!this.editLocale; }
+  public get isEditMode(): boolean { return this.editModeValue; }
   public applyEditLocale(): void {
     if (!this.isEditMode || !this.root) return;
     this.root.applyEditLocale(this.editLocale);
@@ -760,7 +776,18 @@ export class Translation extends Base implements ITranslationLocales {
         this.updateLocales();
       }
     });
-    res.getQuestionByName("locales").lockedRowCount = 1;
+    res.onMatrixCellValueChanged.add((sender, options) => {
+      if (options.question === this.localesQuestion) {
+        // Runs after the cell change is applied, so re-selecting the default locale updates the rendered cell.
+        this.ensureSelectedLocale();
+      }
+    });
+    res.onMatrixRenderRemoveButton.add((sender, options) => {
+      const val = options.question.value;
+      if (Array.isArray(val) && options.rowIndex >= 0 && options.rowIndex < val.length && !val[options.rowIndex].name) {
+        options.allow = false; // the default locale can't be removed
+      }
+    });
     res.onMatrixRowRemoving.add((sender, options) => {
       this.removingLocale = options.question.value[options.rowIndex].name;
     });
@@ -773,22 +800,25 @@ export class Translation extends Base implements ITranslationLocales {
       options.actions = [this.addLanguageAction];
     });
     res.onGetMatrixRowActions.add((sender, options) => {
-      updateMatrixRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);
-      if (this.options.getHasMachineTranslation() && findAction(options.actions, "remove-row") &&
-        Array.isArray(options.question.value)) {
-        const q = options.question;
+      const q = options.question;
+      let locale: string | undefined = undefined;
+      if (Array.isArray(q.value)) {
         const rowIndex = q.visibleRows.indexOf(options.row);
         if (rowIndex >= 0 && rowIndex < q.value.length) {
-          const locale = q.value[rowIndex].name;
-          options.actions.splice(0, 0, new Action({
-            iconName: "icon-language",
-            iconSize: "auto",
-            locTooltipName: "ed.translateUsigAI",
-            visibleIndex: 5,
-            location: "end",
-            action: () => this.showTranslationEditor(locale)
-          }));
+          locale = q.value[rowIndex].name;
         }
+      }
+      // The default locale's remove action is already suppressed by onMatrixRenderRemoveButton, so this is a no-op for it.
+      updateMatrixRemoveAction(<QuestionMatrixDynamicModel>q, options.actions, <MatrixDynamicRowModel>options.row);
+      if (this.options.getHasMachineTranslation() && locale !== undefined) {
+        options.actions.splice(0, 0, new Action({
+          iconName: "icon-language",
+          iconSize: "auto",
+          locTooltipName: "ed.translateUsigAI",
+          visibleIndex: 5,
+          location: "end",
+          action: () => this.showTranslationEditor(locale)
+        }));
       }
       updateMatixActionsClasses(options.actions);
     });
@@ -808,14 +838,13 @@ export class Translation extends Base implements ITranslationLocales {
   }
 
   private updateLocales() {
-    var res = [""];
-    var val = this.getSelectedLocales();
-    if (!Array.isArray(val)) val = [];
-    this.options.translationLocalesOrder = val;
-    val.forEach(lc => res.push(lc));
-    this.locales = res;
+    // Ordered list of the locales (including the default one represented as "") that are shown as columns.
+    const selected = this.getOrderedLocales(true);
+    // Persist the full order (including the default locale and its position) so it can be restored on reset.
+    this.options.translationLocalesOrder = this.getOrderedLocales(false);
+    this.locales = selected;
     this.canMergeLocaleWithDefault = this.hasLocale(this.defaultLocale);
-    this.localesQuestion.allowRowReorder = res.length > 2;
+    this.localesQuestion.allowRowReorder = Array.isArray(this.localesQuestion.value) && this.localesQuestion.value.length > 1;
   }
   private getSettingsSurveyJSON(): any {
     return {
@@ -996,12 +1025,21 @@ export class Translation extends Base implements ITranslationLocales {
       this.addTranslationGroupIntoStringsSurvey(pnl, item);
     }
   }
+  private getLocaleColumnName(loc: string): string {
+    return !loc ? getDefaultLocaleName() : loc;
+  }
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
-    var locs = this.getSelectedLocales();
-    matrix.addColumn(getDefaultLocaleName(), this.getLocaleName("")).readOnly = this.isEditMode;
-    for (var i = 0; i < locs.length; i++) {
-      matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
+    if (this.isEditMode) {
+      // In the auto-translate dialog the default locale is not shown as a separate column.
+      // The editable "Target" column is the base; the read-only "Source" column is added by the TranslationEditor.
+      const editLocale = this.getEditLocale();
+      matrix.addColumn(this.getLocaleColumnName(editLocale), this.getLocaleName(editLocale));
+      return;
     }
+    const locs = this.getOrderedLocales(true);
+    locs.forEach(loc => {
+      matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
+    });
   }
   private getStringsSurveyData(survey: SurveyModel): any {
     var res = {};
@@ -1223,24 +1261,69 @@ export class Translation extends Base implements ITranslationLocales {
     val.forEach(item => { if (!!item.name && (!isSelected || item.isSelected)) res.push(item.name); });
     return res;
   }
+  // Returns the locale names (including the default locale represented as "") in the order they are displayed.
+  private getOrderedLocales(onlySelected: boolean): Array<string> {
+    if (!this.localesQuestion) return [];
+    const val = this.localesQuestion.value;
+    if (!Array.isArray(val)) return [];
+    const res: Array<string> = [];
+    val.forEach(item => {
+      if (!item || item.name === undefined || item.name === null) return;
+      if (!onlySelected || item.isSelected) res.push(item.name);
+    });
+    return res;
+  }
+  // There must always be at least one selected locale. When the last selected locale is unselected, select the default locale.
+  // Must be called when the matrix is not updating its rows (e.g. from onMatrixCellValueChanged), so the value
+  // reassignment below refreshes the rendered checkbox cells.
+  private ensureSelectedLocale(): void {
+    if (!this.localesQuestion) return;
+    const val = this.localesQuestion.value;
+    if (!Array.isArray(val) || val.length === 0) return;
+    if (val.some(item => !!item && item.isSelected)) return;
+    this.localesQuestion.value = val.map(item => (!!item && item.name === "") ? { ...item, isSelected: true } : item);
+  }
+  private isDefaultLocaleSelected(): boolean {
+    if (!this.localesQuestion) return true;
+    const val = this.localesQuestion.value;
+    if (!Array.isArray(val)) return true;
+    for (let i = 0; i < val.length; i++) {
+      if (!!val[i] && val[i].name === "") return val[i].isSelected !== false;
+    }
+    return true;
+  }
+  // Builds the resulting locale names list, keeping the current order (and the default locale position) where possible.
+  private getOrderedLocaleNames(locales: Array<string>): Array<string> {
+    const current = this.getOrderedLocales(false);
+    const res: Array<string> = [];
+    current.forEach(loc => {
+      if (loc === "" || locales.indexOf(loc) > -1) res.push(loc);
+    });
+    locales.forEach(loc => { if (res.indexOf(loc) < 0) res.push(loc); });
+    if (res.indexOf("") < 0) res.unshift("");
+    return res;
+  }
   private setSelectedAndVisibleLocales(locales: Array<string>, selectedLocales: Array<string>, includeSelected: boolean): void {
     if (!this.localesQuestion) return;
     if (!Array.isArray(selectedLocales)) selectedLocales = [];
-    const val = [];
     if (includeSelected && selectedLocales.length > 0) {
-      const res = [].concat(selectedLocales);
+      const res: Array<string> = selectedLocales.slice();
       locales.forEach(loc => { if (res.indexOf(loc) < 0) res.push(loc); });
       locales = res;
     }
-    const locDefault = this.defaultLocale;
-    val.push({ isSelected: true, name: "", displayName: this.getLocaleName("") });
-    if (this.getEditLocale()) {
-      val.push({ isSelected: true, name: this.getEditLocale() });
+    const val: Array<any> = [];
+    if (this.isEditMode) {
+      val.push({ isSelected: true, name: "", displayName: this.getLocaleName("") });
+      const editLocale = this.getEditLocale();
+      if (!!editLocale) {
+        val.push({ isSelected: true, name: editLocale, displayName: this.getLocaleName(editLocale) });
+      }
     } else {
-      locales.forEach(loc => {
-        if (!!loc) {
-          val.push({ isSelected: loc === locDefault || selectedLocales.indexOf(loc) > -1, name: loc, displayName: this.getLocaleName(loc) });
-        }
+      const locDefault = this.defaultLocale;
+      const defSelected = this.isDefaultLocaleSelected();
+      this.getOrderedLocaleNames(locales).forEach(loc => {
+        const isSelected = loc === "" ? defSelected : (loc === locDefault || selectedLocales.indexOf(loc) > -1);
+        val.push({ isSelected: isSelected, name: loc, displayName: this.getLocaleName(loc) });
       });
     }
     this.localesQuestion.value = val;
@@ -1302,9 +1385,7 @@ export class Translation extends Base implements ITranslationLocales {
 
   public importFromNestedArray(rows: string[][]) {
     let locales = rows.shift().slice(1);
-    if (locales[0] === getDefaultLocaleName() || locales[0] === "default") {
-      locales[0] = "";
-    }
+    locales = locales.map((loc) => (loc === getDefaultLocaleName() || loc === "default") ? "" : loc);
     let translation = new Translation(this.survey, this.options, false);
     translation.showAllStrings = true;
     let itemsHash = <HashTable<TranslationItem>>{};
@@ -1459,8 +1540,18 @@ export class TranslationEditor {
     this.translation.setEditMode(this.locale);
     this.translation.reset();
     this.fillFromLocales();
+    this.fromLocale = this.getInitialFromLocale();
     this.updateFromLocaleAction();
     this.updateMatricesColumns();
+  }
+  // The "Source" column is shown immediately by selecting the first item ("Default") from the "Translate from" dropdown.
+  private getInitialFromLocale(): string {
+    let res = "";
+    if (res === (this.locale || "")) {
+      // When translating into the default locale, the default can't be the source: pick the first available source instead.
+      res = this.fromLocales.length > 0 ? this.fromLocales[0] : this.locale;
+    }
+    return res;
   }
   public get translation(): Translation { return this.translationValue; }
   public showDialog(): void {
@@ -1503,10 +1594,8 @@ export class TranslationEditor {
     popupModel.locale = editorLocalization.currentLocale;
   }
   public doMachineTranslation(): void {
-    let fromLocale = this.fromLocale || this.translation.defaultLocale;
-    if (!fromLocale) fromLocale = "en";
     const items = this.createStringsToTranslate();
-    const strings = [];
+    const strings = new Array<string>();
     items.forEach(item => {
       strings.push(this.getTextToTranslate(item));
     });
@@ -1517,7 +1606,9 @@ export class TranslationEditor {
       }
       this.translation.updateStringsSurveyData();
     };
-    this.options.doMachineTranslation(fromLocale, this.locale, strings, callback);
+    const fromLocale = getActualLocaleName(this.fromLocale);
+    const toLocale = getActualLocaleName(this.locale);
+    this.options.doMachineTranslation(fromLocale, toLocale, strings, callback);
   }
   public apply(): void {
     this.translation.applyEditLocale();
@@ -1551,25 +1642,27 @@ export class TranslationEditor {
   }
   private updateHeaderMatrixColumns(matrix: QuestionMatrixDropdownModel) {
     const cols = matrix.columns;
-    cols[0].title = this.translation.getLocaleName("");
-    if (cols.length > 2) {
-      cols[1].title = this.getHeaderTitle("translationSource", cols[1].name);
-      cols[2].title = this.getHeaderTitle("translationTarget", cols[2].name);
+    // Columns are [Source, Target]; the default locale is no longer shown as a separate first column.
+    if (cols.length > 1) {
+      cols[0].title = this.getHeaderTitle("translationSource", this.fromLocale || "");
+      cols[1].title = this.getHeaderTitle("translationTarget", this.locale);
     } else {
-      cols[1].title = this.getHeaderTitle("translationTarget", cols[1].name);
+      cols[0].title = this.getHeaderTitle("translationTarget", this.locale);
     }
   }
   private updateMatrixColumns(matrix: QuestionMatrixDropdownModel): void {
-    const colIndex = 1;
-    if (matrix.columns.length === 3) {
-      matrix.columns.splice(colIndex, 1);
+    // The base matrix has the editable "Target" column only; the read-only "Source" column is shown at the first position.
+    if (matrix.columns.length === 2) {
+      matrix.columns.splice(0, 1);
     }
-    const loc = this.fromLocale;
-    if (loc) {
-      const column = new MatrixDropdownColumn(loc, this.translation.getLocaleName(loc));
-      column.readOnly = true;
-      matrix.columns.splice(colIndex, 0, column);
-    }
+    const loc = this.fromLocale || "";
+    if (loc === (this.locale || "")) return; // the source can't be the same as the target
+    const column = new MatrixDropdownColumn(this.getSourceColumnName(loc), this.translation.getLocaleName(loc));
+    column.readOnly = true;
+    matrix.columns.splice(0, 0, column);
+  }
+  private getSourceColumnName(loc: string): string {
+    return !loc ? getDefaultLocaleName() : loc;
   }
   private getHeaderTitle(strName: string, locale: string): string {
     return editorLocalization.getString("ed." + strName) + this.translation.getLocaleName(locale);
@@ -1626,19 +1719,26 @@ export class TranslationEditor {
     }
     return res;
   }
+  private get isDefaultLocaleTarget(): boolean {
+    return !this.locale;
+  }
+  private getFromLocaleItems(): Array<any> {
+    // When the target is the default locale, the default locale itself can't be a source, so it is not shown.
+    const items: Array<any> = this.isDefaultLocaleTarget ? [] : [{ id: null, title: this.getActionTranslateFromText("") }];
+    this.fromLocales.forEach(locale => {
+      items.push({ id: locale, title: this.getActionTranslateFromText(locale) });
+    });
+    return items;
+  }
   private createLocaleFromAction(): IAction {
     const defaultLocaleTitle = this.getActionTranslateFromText("");
     const onActionTypesPopupShow = () => {
-      const items = [{ id: null, title: defaultLocaleTitle }];
-      this.fromLocales.forEach(locale => {
-        items.push({ id: locale, title: this.getActionTranslateFromText(locale) });
-      });
       const listModel = action.popupModel.contentComponentData.model;
-      listModel.setItems(items);
+      listModel.setItems(this.getFromLocaleItems());
     };
 
     const actionTypesPopupModel = createPopupModelWithListModel({
-      items: [{ id: null, title: defaultLocaleTitle }],
+      items: this.getFromLocaleItems(),
       onSelectionChanged: (item: IAction) => {
         const id = item.id || "";
         this.setFromLocale(id);
@@ -1677,6 +1777,7 @@ export class TranslationEditor {
     if (!this.translation.stringsHeaderSurvey) return;
     const action = this.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale");
     if (!!action) {
+      action.title = this.getActionTranslateFromText(this.fromLocale || "");
       action.enabled = this.fromLocales.length > 0;
       action.iconName = action.enabled ? "icon-chevron_16x16" : undefined;
       action.iconSize = "auto";
@@ -1684,6 +1785,10 @@ export class TranslationEditor {
         .append("st-translation-machine-from__container")
         .append("st-translation-machine-from__container--disabled", !action.enabled)
         .toString();
+      const listModel = action.popupModel && action.popupModel.contentComponentData && action.popupModel.contentComponentData.model;
+      if (!!listModel) {
+        listModel.setItems(this.getFromLocaleItems());
+      }
     }
   }
   private getActionTranslateFromText(loc: string): string {

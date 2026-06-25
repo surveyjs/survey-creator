@@ -1555,7 +1555,8 @@ test("Import from array, onTraslationItemImport", () => {
   ]);
   expect(counter).toEqual(1);
   expect(translation.localesQuestion.visibleRows).toHaveLength(1 + 1);
-  expect(translation.localesQuestion.allowRowReorder).toBeFalsy();
+  // The default locale can be moved, so reordering is enabled once there is at least one more locale.
+  expect(translation.localesQuestion.allowRowReorder).toBeTruthy();
   const page = creator.survey.pages[0];
   const question = creator.survey.getQuestionByName("q1");
   expect(page.locTitle.getLocaleText("")).toEqual("page en");
@@ -1991,7 +1992,7 @@ test("Translation doesnt' work with two matrix dropdown & choices. Bug #4473", (
   expect(cells[0].question.value).toEqual("A");
   expect(cells[1].question.value).toEqual("A (german)");
 });
-test("You can't delete or unselect the default locale", () => {
+test("The default locale can be hidden but not removed", () => {
   const survey = new SurveyModel();
   const translation = new Translation(survey);
   translation.reset();
@@ -2000,14 +2001,130 @@ test("You can't delete or unselect the default locale", () => {
   const rows = question.visibleRows;
   const checkQuestion1 = rows[0].cells[0].question;
   expect(checkQuestion1.value).toBeTruthy();
-  expect(checkQuestion1.isReadOnly).toBeTruthy();
+  // The default locale can be hidden (the checkbox is enabled), but can't be removed.
+  expect(checkQuestion1.isReadOnly).toBeFalsy();
   const checkQuestion2 = rows[1].cells[0].question;
   expect(checkQuestion2.value).toBeTruthy();
   expect(checkQuestion2.isReadOnly).toBeFalsy();
   expect(question.canRemoveRow(rows[0])).toBeFalsy();
   expect(question.canRemoveRow(rows[1])).toBeTruthy();
 });
-test("You can't delete or unselect the default locale, there is only default locale", () => {
+test("Default locale can be hidden, moved, auto-translated but not removed, issue#7815", () => {
+  const options = new EmptySurveyCreatorOptions();
+  options.machineTranslationValue = true;
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1", title: { default: "en", de: "de" } }] });
+  const translation = new Translation(survey, options);
+  translation.reset();
+  translation.addLocale("de");
+  const matrix = translation.localesQuestion;
+  const getHeaderColumnNames = (): Array<string> =>
+    (<QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getAllQuestions()[0]).columns.map((c) => c.name);
+
+  // The default locale checkbox is enabled (can be hidden), but the row can't be removed.
+  const defaultRow = matrix.visibleRows[0];
+  expect(defaultRow.cells[0].question.value).toBeTruthy();
+  expect(defaultRow.cells[0].question.isReadOnly).toBeFalsy();
+  expect(matrix.canRemoveRow(defaultRow)).toBeFalsy();
+  expect(matrix.canRemoveRow(matrix.visibleRows[1])).toBeTruthy();
+
+  // The default locale can be auto-translated (the translate action is shown on its row).
+  const rows = matrix.renderedTable.rows;
+  const defaultActions = rows[1].cells[rows[1].cells.length - 1].item.value.actions;
+  expect(defaultActions).toHaveLength(1);
+  expect(defaultActions[0].iconName).toBe("icon-language");
+
+  // The default locale can be moved: the column order follows the row order.
+  expect(getHeaderColumnNames()).toStrictEqual(["default", "de"]);
+  matrix.value = [
+    { isSelected: true, name: "de", displayName: "Deutsch" }, // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    { isSelected: true, name: "", displayName: "Default (English)" }
+  ];
+  expect(getHeaderColumnNames()).toStrictEqual(["de", "default"]);
+
+  // The default locale can be hidden: hiding it removes its column.
+  matrix.value = [
+    { isSelected: true, name: "de", displayName: "Deutsch" }, // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    { isSelected: false, name: "", displayName: "Default (English)" }
+  ];
+  expect(getHeaderColumnNames()).toStrictEqual(["de"]);
+});
+test("Unselecting the last selected locale selects the default locale, issue#7815", () => {
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1", title: { default: "en", de: "de" } }] });
+  const translation = new Translation(survey);
+  translation.reset();
+  translation.addLocale("de");
+  const matrix = translation.localesQuestion;
+
+  // Both the default locale and "de" are selected: the default checkbox can be unselected.
+  expect(matrix.visibleRows[0].cells[0].question.value).toBeTruthy();
+  expect(matrix.visibleRows[1].cells[0].question.value).toBeTruthy();
+  expect(matrix.visibleRows[0].cells[0].question.isReadOnly).toBeFalsy();
+
+  // Hide the default locale, leaving "de" as the only selected locale.
+  matrix.visibleRows[0].cells[0].question.value = false;
+  expect([...translation.locales]).toStrictEqual(["de"]);
+
+  // Unselect the last selected locale ("de"): the default locale is selected automatically.
+  matrix.visibleRows[1].cells[0].question.value = false;
+  expect(matrix.visibleRows[0].cells[0].question.value).toBeTruthy();
+  expect([...translation.locales]).toStrictEqual([""]);
+
+  // The default locale is now the only selected locale: it can't be unselected.
+  expect(matrix.visibleRows[0].cells[0].question.isReadOnly).toBeTruthy();
+});
+test("Unselecting the default locale then the last locale re-selects and disables the default locale checkbox, issue#7815", () => {
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1", title: { default: "en", de: "de" } }] });
+  const translation = new Translation(survey);
+  translation.reset();
+  translation.addLocale("de");
+  const matrix = translation.localesQuestion;
+
+  // Two selected locales: the default locale and "de". Both checkbox cells are set.
+  expect(matrix.visibleRows[0].cells[0].question.value).toBe(true);
+  expect(matrix.visibleRows[1].cells[0].question.value).toBe(true);
+
+  // The user unselects the default locale first ("de" is still selected, so it is allowed).
+  matrix.visibleRows[0].cells[0].question.value = false;
+  expect(matrix.visibleRows[0].cells[0].question.value).toBe(false);
+  expect([...translation.locales]).toStrictEqual(["de"]);
+
+  // The user then unselects the second locale ("de").
+  matrix.visibleRows[1].cells[0].question.value = false;
+
+  // The checkbox cell in the default locale row becomes selected and disabled.
+  const defaultCheckbox = matrix.visibleRows[0].cells[0].question;
+  expect(defaultCheckbox.value).toBe(true);
+  expect(defaultCheckbox.isReadOnly).toBe(true);
+  expect([...translation.locales]).toStrictEqual([""]);
+});
+test("The default locale can be moved and hidden", () => {
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1", title: { default: "en", de: "de" } }] });
+  const translation = new Translation(survey);
+  translation.reset();
+  translation.addLocale("de");
+  const getHeaderColumnNames = (): Array<string> =>
+    (<QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getAllQuestions()[0]).columns.map((c) => c.name);
+
+  expect([...translation.locales]).toStrictEqual(["", "de"]);
+  expect(getHeaderColumnNames()).toStrictEqual(["default", "de"]);
+
+  // Move the default locale after "de"
+  translation.localesQuestion.value = [
+    { isSelected: true, name: "de", displayName: "Deutsch" }, // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    { isSelected: true, name: "", displayName: "Default (English)" }
+  ];
+  expect([...translation.locales]).toStrictEqual(["de", ""]);
+  expect(getHeaderColumnNames()).toStrictEqual(["de", "default"]);
+
+  // Hide the default locale
+  translation.localesQuestion.value = [
+    { isSelected: true, name: "de", displayName: "Deutsch" }, // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    { isSelected: false, name: "", displayName: "Default (English)" }
+  ];
+  expect([...translation.locales]).toStrictEqual(["de"]);
+  expect(getHeaderColumnNames()).toStrictEqual(["de"]);
+});
+test("The default locale can't be unselected or removed when it is the only locale", () => {
   const survey = new SurveyModel();
   const translation = new Translation(survey);
   translation.reset();
@@ -2016,6 +2133,7 @@ test("You can't delete or unselect the default locale, there is only default loc
   expect(rows).toHaveLength(1);
   const checkQuestion1 = rows[0].cells[0].question;
   expect(checkQuestion1.value).toBeTruthy();
+  // The default locale is the only selected locale, so it can't be unselected.
   expect(checkQuestion1.isReadOnly).toBeTruthy();
   expect(question.canRemoveRow(rows[0])).toBeFalsy();
 });

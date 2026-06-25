@@ -32,7 +32,8 @@ test.describe(title, () => {
     await expect(stringsColumnSelector).toHaveCount(2);
 
     await expect(languagesSelector).toHaveCount(1);
-    await expect(languagesSelector.nth(0)).toHaveClass(new RegExp(disabledClassName));
+    // The default locale can now be hidden, so its checkbox is enabled (not disabled) but checked by default.
+    await expect(languagesSelector.nth(0)).not.toHaveClass(new RegExp(disabledClassName));
     await expect(languagesSelector.nth(0)).toHaveClass(new RegExp(checkedClassName));
     await expect(languageDefaultText).toBeVisible();
 
@@ -41,7 +42,7 @@ test.describe(title, () => {
     await expect(languageHeaderColumnSelector).toHaveCount(2);
     await expect(stringsColumnSelector).toHaveCount(3);
     await expect(languagesSelector).toHaveCount(2);
-    await expect(languagesSelector.nth(0)).toHaveClass(new RegExp(disabledClassName));
+    await expect(languagesSelector.nth(0)).not.toHaveClass(new RegExp(disabledClassName));
     await expect(languagesSelector.nth(0)).toHaveClass(new RegExp(checkedClassName));
     await expect(languageDefaultText).toBeVisible();
     await expect(languagesSelector.nth(1)).toHaveClass(new RegExp(checkedClassName));
