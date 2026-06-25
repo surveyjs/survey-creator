@@ -2,6 +2,7 @@ import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownMode
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { EmptySurveyCreatorOptions, settings } from "../../src/creator-settings";
+import { getDefaultLocaleName } from "../../src/survey-helper";
 import { CreatorTester } from "../creator-tester";
 import { parse } from "papaparse";
 import "survey-core/survey.i18n";
@@ -2723,4 +2724,193 @@ test("Import after creating TranslationEditor should not throw error, Issue#7790
 
   expect(translation.root).toBeDefined();
   expect(translation.stringsHeaderSurvey).toBeDefined();
+});
+
+function createSourceLocaleSurvey(): SurveyModel {
+  return new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: {
+          default: "en title", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+          de: "de title", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+          fr: "fr title" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        }
+      }
+    ]
+  });
+}
+function getStringsColumnNames(translation: Translation): Array<string> {
+  const matrix = <QuestionMatrixDropdownModel>translation.stringsSurvey.getAllQuestions()[0];
+  return matrix.columns.map(col => col.name);
+}
+
+test("translationSourceLocale: empty property keeps default behavior, Issue#7243", () => {
+  const survey = createSourceLocaleSurvey();
+  const options = new EmptySurveyCreatorOptions();
+  const translation = new Translation(survey, options);
+  translation.reset();
+  expect(translation.isSourceLocaleMode).toBeFalsy();
+  expect(getStringsColumnNames(translation)).toEqual([getDefaultLocaleName(), "de", "fr"]);
+  expect(translation.localesQuestion.lockedRowCount).toBe(1);
+  expect(translation.localesQuestion.value[0].name).toBe("");
+});
+
+test("translationSourceLocale: source mode column order, Issue#7243", () => {
+  const survey = createSourceLocaleSurvey();
+  const options = new EmptySurveyCreatorOptions();
+  options.translationSourceLocale = "de";
+  const translation = new Translation(survey, options);
+  translation.reset();
+  expect(translation.isSourceLocaleMode).toBeTruthy();
+  expect(translation.getSourceLocale()).toBe("de");
+  expect(getStringsColumnNames(translation)).toEqual(["de", getDefaultLocaleName(), "fr"]);
+});
+
+test("translationSourceLocale: source is the only locked row, default is a regular hideable row, Issue#7243", () => {
+  const survey = createSourceLocaleSurvey();
+  const options = new EmptySurveyCreatorOptions();
+  options.translationSourceLocale = "de";
+  const translation = new Translation(survey, options);
+  translation.reset();
+  // only the source-of-truth locale (the source locale) is locked/first
+  expect(translation.localesQuestion.lockedRowCount).toBe(1);
+  const value = translation.localesQuestion.value;
+  expect(value[0].name).toBe("de");
+  expect(value[0].isSelected).toBe(true);
+  expect(value[1].name).toBe("");
+  expect(value[1].isSelected).toBe(true);
+
+  // hide the default locale column
+  const hiddenDefault = JSON.parse(JSON.stringify(value));
+  hiddenDefault[1].isSelected = false;
+  translation.localesQuestion.value = hiddenDefault;
+  expect(getStringsColumnNames(translation)).toEqual(["de", "fr"]);
+
+  // show the default locale column again
+  const shownDefault = JSON.parse(JSON.stringify(translation.localesQuestion.value));
+  shownDefault[1].isSelected = true;
+  translation.localesQuestion.value = shownDefault;
+  expect(getStringsColumnNames(translation)).toEqual(["de", getDefaultLocaleName(), "fr"]);
+});
+
+function getRowActionIcons(matrix: QuestionMatrixDynamicModel, renderedRowIndex: number): Array<string> {
+  const cell = matrix.renderedTable.rows[renderedRowIndex].cells.find((c: any) => c.isActionsCell);
+  if (!cell) return [];
+  return cell.item.value.actions.map((a: any) => a.iconName);
+}
+
+test("translationSourceLocale: only the source row is protected; default is a regular locale, Issue#7243", () => {
+  const survey = createSourceLocaleSurvey();
+  const options = new EmptySurveyCreatorOptions();
+  options.machineTranslationValue = true;
+  options.translationSourceLocale = "de";
+  const translation = new Translation(survey, options);
+  translation.reset();
+  const matrix = translation.localesQuestion;
+  expect(matrix.visibleRows).toHaveLength(3);
+  // rendered data rows are at odd indices: de=1, ""=3, fr=5
+  const deIcons = getRowActionIcons(matrix, 1);
+  const defaultIcons = getRowActionIcons(matrix, 3);
+  const frIcons = getRowActionIcons(matrix, 5);
+  // de (source / the single special locale) is never auto-translated and cannot be removed
+  expect(deIcons).not.toContain("icon-language");
+  expect(deIcons).not.toContain("icon-delete");
+  // "" (default) is treated as a regular locale now: auto-translatable and removable
+  expect(defaultIcons).toContain("icon-language");
+  expect(defaultIcons).toContain("icon-delete");
+  // fr is a regular locale: auto-translated and removable
+  expect(frIcons).toContain("icon-language");
+  expect(frIcons).toContain("icon-delete");
+});
+
+test("translationSourceLocale: removing the default locale hides its column and keeps its strings, Issue#7243", () => {
+  const survey = createSourceLocaleSurvey();
+  const options = new EmptySurveyCreatorOptions();
+  options.translationSourceLocale = "de";
+  const translation = new Translation(survey, options);
+  translation.reset();
+  expect(getStringsColumnNames(translation)).toEqual(["de", getDefaultLocaleName(), "fr"]);
+  // the default locale is the second row in source mode
+  expect(translation.localesQuestion.value[1].name).toBe("");
+  translation.localesQuestion.removeRow(1, false);
+  // the default column disappears, the source stays first
+  expect(getStringsColumnNames(translation)).toEqual(["de", "fr"]);
+  // removing the default locale must not delete the original default strings
+  expect(survey.getQuestionByName("q1").locTitle.getLocaleText("")).toBe("en title");
+});
+
+test("translationSourceLocale: default locale is a regular entry in the language list, Issue#7243", () => {
+  const survey = createSourceLocaleSurvey();
+  const options = new EmptySurveyCreatorOptions();
+  options.translationSourceLocale = "de";
+  const translation = new Translation(survey, options);
+  translation.reset();
+  // the default locale is offered as a choosable language
+  const defaultAction = translation.chooseLanguageActions.filter((a: IAction) => (a.data.value || "") === "")[0];
+  expect(defaultAction).toBeTruthy();
+  // it is currently shown in the grid, so it cannot be added again
+  expect(getStringsColumnNames(translation)).toContain(getDefaultLocaleName());
+  expect(defaultAction.visible).toBeFalsy();
+
+  // remove the default locale: its column disappears and it becomes addable again
+  const defaultRowIndex = translation.localesQuestion.value.findIndex((r: any) => (r.name || "") === "");
+  translation.localesQuestion.removeRow(defaultRowIndex, false);
+  expect(getStringsColumnNames(translation)).not.toContain(getDefaultLocaleName());
+  expect(defaultAction.visible).toBeTruthy();
+
+  // re-add the default locale from the list: like any other re-added locale it is appended,
+  // and the source locale stays first
+  translation.addLocale("");
+  expect(getStringsColumnNames(translation)).toEqual(["de", "fr", getDefaultLocaleName()]);
+  expect(defaultAction.visible).toBeFalsy();
+});
+
+test("translationSourceLocale: default locale is not in the language list without a source, Issue#7243", () => {
+  const survey = createSourceLocaleSurvey();
+  const options = new EmptySurveyCreatorOptions();
+  const translation = new Translation(survey, options);
+  translation.reset();
+  const defaultAction = translation.chooseLanguageActions.filter((a: IAction) => (a.data.value || "") === "")[0];
+  expect(defaultAction).toBeFalsy();
+});
+
+test("translationSourceLocale: source locale always present, Issue#7243", () => {
+  const survey = new SurveyModel({
+    elements: [{ type: "text", name: "q1", title: "en title" }] // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  });
+  const options = new EmptySurveyCreatorOptions();
+  options.translationSourceLocale = "de";
+  const translation = new Translation(survey, options);
+  translation.reset();
+  const names = getStringsColumnNames(translation);
+  expect(names[0]).toBe("de");
+});
+
+test("translationSourceLocale: equal to default locale is inactive", () => {
+  const survey = createSourceLocaleSurvey();
+  const options = new EmptySurveyCreatorOptions();
+  options.translationSourceLocale = surveyLocalization.defaultLocale;
+  const translation = new Translation(survey, options);
+  translation.reset();
+  expect(translation.isSourceLocaleMode).toBeFalsy();
+  expect(getStringsColumnNames(translation)).toEqual([getDefaultLocaleName(), "de", "fr"]);
+  expect(translation.localesQuestion.lockedRowCount).toBe(1);
+  expect(translation.localesQuestion.value[0].name).toBe("");
+});
+
+test("translationSourceLocale: CSV export order, Issue#7243", () => {
+  const survey = createSourceLocaleSurvey();
+  const options = new EmptySurveyCreatorOptions();
+  options.translationSourceLocale = "de";
+  const translation = new Translation(survey, options);
+  translation.reset();
+  let exported: Array<any> = [];
+  parse(translation.exportToCSV(), {
+    complete: function (results) {
+      exported = results.data;
+    }
+  });
+  expect(exported[0]).toEqual(["description ↓ - language →", "de", getDefaultLocaleName(), "fr"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 });

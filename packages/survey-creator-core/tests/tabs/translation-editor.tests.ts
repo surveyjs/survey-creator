@@ -1,5 +1,6 @@
 import { QuestionMatrixDropdownModel, SurveyModel } from "survey-core";
 import { Translation, TranslationEditor, TranslationItem } from "../../src/components/tabs/translation";
+import { getDefaultLocaleName } from "../../src/survey-helper";
 import "survey-core/survey.i18n";
 import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
@@ -171,6 +172,185 @@ test("Update data in original translation", () => {
   pagePropsGroup2 = originalTranslation.root.groups[0];
   item2 = <TranslationItem>pagePropsGroup2.groups[0].items[0];
   expect(item2.values("fr").text).toBe("Title fr");
+});
+test("translationSourceLocale: auto-translate dialog uses source locale as origin column, Issue#7243", () => {
+  const creator = new CreatorTester();
+  creator.translationSourceLocale = "de";
+  creator.onMachineTranslate.add((sender, options) => { });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: { default: "en t", de: "de t" } } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  // auto-translate the default (English) locale from the source (Deutsch)
+  const editor = tabTranslation.model.createTranslationEditor("");
+  const header = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
+  expect(header.columns).toHaveLength(2);
+  // Bug #1: the first (origin) column must be the source locale, not "Default (English)"
+  expect(header.columns[0].name).toBe("de");
+  expect(header.columns[0].title).toBe("Deutsch");
+  // Bug #3: the target column for the default locale must read "Target: Default (English)"
+  expect(header.columns[1].name).toBe(getDefaultLocaleName());
+  expect(header.columns[1].title).toBe("Target: Default (English)");
+});
+test("translationSourceLocale: auto-translate 'translate from' defaults to the source locale, Issue#7243", () => {
+  const creator = new CreatorTester();
+  creator.translationSourceLocale = "de";
+  creator.onMachineTranslate.add((sender, options) => { });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: { default: "en t", de: "de t", fr: "fr t" } } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const editor: TranslationEditor = tabTranslation.model.createTranslationEditor("es");
+  const fromAction = editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale");
+  // Bug #2: the source locale (Deutsch) is the default "translate from" option
+  expect(fromAction.title).toBe("Deutsch");
+  // the source locale is the default option, so it must not be duplicated inside the list
+  expect(editor.fromLocales.indexOf("de")).toBe(-1);
+  // the default (English) locale has text, so it is treated as any other locale and is listed
+  expect(editor.fromLocales).toContain(getDefaultLocaleName());
+  expect(editor.fromLocales).toContain("fr");
+});
+test("translationSourceLocale: default locale appears in 'translate from' only when it has text, Issue#7243", () => {
+  const createEditor = (defaultText: boolean): TranslationEditor => {
+    const creator = new CreatorTester();
+    creator.translationSourceLocale = "de";
+    creator.onMachineTranslate.add((sender, options) => { });
+    creator.JSON = {
+      elements: [
+        {
+          type: "text",
+          name: "q1",
+          title: defaultText
+            ? { default: "en t", de: "de t", fr: "fr t" } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+            : { de: "de t", fr: "fr t" } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        }
+      ]
+    };
+    const tabTranslation = new TabTranslationPlugin(creator);
+    tabTranslation.activate();
+    return tabTranslation.model.createTranslationEditor("es");
+  };
+  // default locale has text -> listed as a normal locale
+  expect(createEditor(true).fromLocales).toContain(getDefaultLocaleName());
+  // default locale has no text -> not listed
+  expect(createEditor(false).fromLocales.indexOf(getDefaultLocaleName())).toBe(-1);
+});
+test("translationSourceLocale: machine-translate from the default locale, Issue#7243", () => {
+  const creator = new CreatorTester();
+  creator.translationSourceLocale = "de";
+  let fromLocale = "";
+  let fromStrings: Array<string> = [];
+  creator.onMachineTranslate.add((sender, options) => {
+    fromLocale = options.fromLocale;
+    fromStrings = options.strings;
+    options.callback(options.strings.map(str => options.toLocale + ": " + str));
+  });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: { default: "en title", de: "de title" } } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const editor = tabTranslation.model.createTranslationEditor("fr");
+  // pick the default locale as the "translate from" source
+  editor.setFromLocale(getDefaultLocaleName());
+  // the source/origin reference column shows the default locale name
+  const header = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
+  expect(header.columns.map(c => c.name)).toStrictEqual(["de", getDefaultLocaleName(), "fr"]);
+  expect(header.columns[1].title).toBe("Source: Default (English)");
+  editor.doMachineTranslation();
+  // the machine-translation service receives the real default locale code and its text
+  expect(fromLocale).toBe("en");
+  expect(fromStrings).toStrictEqual(["en title"]);
+  editor.apply();
+  expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("fr")).toBe("fr: en title");
+});
+test("translationSourceLocale: target placeholders are taken from the source locale text, Issue#7243", () => {
+  const creator = new CreatorTester();
+  creator.translationSourceLocale = "de";
+  creator.onMachineTranslate.add((sender, options) => { });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: { default: "en title", de: "de title" } } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+
+  // translating into a regular locale: placeholder is the source (de) text, not the default (en) text
+  let editor = tabTranslation.model.createTranslationEditor("fr");
+  let matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.columns.map(c => c.name)).toStrictEqual(["de", "fr"]);
+  const targetCell = matrix.visibleRows[0].cells[matrix.columns.length - 1].question;
+  expect(targetCell.placeholder).toBe("de title");
+  editor.cancel();
+
+  // translating into the default locale: placeholder is still the source (de) text
+  editor = tabTranslation.model.createTranslationEditor("");
+  matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.columns.map(c => c.name)).toStrictEqual(["de", getDefaultLocaleName()]);
+  const defaultTargetCell = matrix.visibleRows[0].cells[matrix.columns.length - 1].question;
+  expect(defaultTargetCell.placeholder).toBe("de title");
+});
+test("translationSourceLocale: machine translation source defaults to source locale, Issue#7243", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "en title", de: "de title" } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+      }
+    ]
+  });
+  const options = new EmptySurveyCreatorOptions();
+  options.machineTranslationValue = true;
+  let fromLocaleArg: string = "";
+  options.doMachineTranslation = (fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void => {
+    fromLocaleArg = fromLocale;
+    callback([]);
+  };
+  // without source mode the default machine-translation source is the default locale
+  let editor = new Translation(survey, options).createTranslationEditor("fr");
+  editor.doMachineTranslation();
+  expect(fromLocaleArg).toBe("en");
+
+  // in source mode the default machine-translation source is the source locale
+  options.translationSourceLocale = "de";
+  editor = new Translation(survey, options).createTranslationEditor("");
+  editor.doMachineTranslation();
+  expect(fromLocaleArg).toBe("de");
+});
+test("translationSourceLocale: auto-translate the default locale from the source locale", () => {
+  const creator = new CreatorTester();
+  creator.translationSourceLocale = "de";
+  let fromLocale = "";
+  let fromStrings: Array<string> = [];
+  creator.onMachineTranslate.add((sender, options) => {
+    fromLocale = options.fromLocale;
+    fromStrings = options.strings;
+    options.callback(options.strings.map(str => options.toLocale + " from " + options.fromLocale + ": " + str));
+  });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: { de: "de title" } } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const editor = tabTranslation.model.createTranslationEditor("");
+  editor.doMachineTranslation();
+  expect(fromLocale).toBe("de");
+  expect(fromStrings).toStrictEqual(["de title"]);
+  editor.apply();
+  const q1 = creator.survey.getQuestionByName("q1");
+  expect(q1.locTitle.getLocaleText("")).toBe(" from de: de title");
 });
 test("Call do machine translation", () => {
   const survey = new SurveyModel({

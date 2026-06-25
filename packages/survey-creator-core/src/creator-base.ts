@@ -4286,6 +4286,16 @@ export class SurveyCreatorModel extends Base
   }
   translationLocalesOrder: Array<string> = [];
   /**
+   * A locale code (for example, `"de"`) whose strings are treated as the original/source content in the Translation tab.
+   *
+   * When set, this locale becomes the first, non-removable column in the Translation tab and the default source for machine translation. The default (fallback) locale becomes a translatable, hideable, but still non-removable column.
+   *
+   * If this property is set to the default locale code or an empty string, source-locale mode is inactive and the Translation tab behaves as usual (the default locale is the source).
+   *
+   * Default value: `""`
+   */
+  @property({ defaultValue: "" }) translationSourceLocale: string;
+  /**
    * Starts the translation of survey strings from the default language to one or more specified languages using a machine translation service, such as Google Translate or Microsoft Translator.
    *
    * This method only launches the operation by raising the [`onMachineTranslate`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMachineTranslate) event. Handle this event to perform the actual translation.

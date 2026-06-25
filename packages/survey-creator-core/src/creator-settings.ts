@@ -349,6 +349,7 @@ export interface ISurveyCreatorOptions {
     context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ): void;
   translationLocalesOrder: Array<string>;
+  translationSourceLocale: string;
   canAddPage(pageToAdd?: PageModel): boolean;
   expressionsValidateFunctions?: boolean;
   expressionsValidateVariables?: boolean;
@@ -512,6 +513,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
   chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }
   translationLocalesOrder: Array<string> = [];
+  translationSourceLocale: string = "";
   canAddPage(pageToAdd?: PageModel): boolean { return true; }
 
   // ILocalizableOwner implemented
