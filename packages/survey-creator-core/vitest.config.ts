@@ -66,6 +66,30 @@ const presetsSuiteAliases = [
   { find: /^survey-creator-core$/, replacement: resolve(root, "src/entries/index.ts") },
 ];
 
+// Vite 8 transpiles TS via Oxc (Rolldown). Its OxcOptions omits `tsconfig`, so
+// Oxc does NOT auto-detect `experimentalDecorators` from tsconfig.json and
+// defaults to TC39 (standard) decorators. Under the SSR transform it then keeps
+// the decorator in `@expr` form AND rewrites the imported decorator identifier
+// into the ESM-interop sequence `(0, ns.property)`, emitting the invalid
+// `@(0, ns.property)() name;` -> "SyntaxError: Invalid or unexpected token" on
+// every file that (transitively) imports a @property-decorated class. Forcing
+// legacy decorators makes Oxc lower them to the decorate() helper, which is
+// valid. (Regressed in rolldown 1.1.x; fine in 1.0.x.) Must be set per-project:
+// the root-level `oxc` option is not inherited by `test.projects`.
+// `decorator.legacy` alone fixes the syntax error but leaves Oxc defaulting to
+// `useDefineForClassFields: true`, which emits `defineProperty(this, "name")`
+// for uninitialized fields and clobbers the accessors the legacy @property
+// decorator installs -> properties stop working at runtime. The project's
+// tsconfig uses `target: es5` (i.e. useDefineForClassFields: false), so we
+// reproduce that: `assumptions.setPublicClassFields` +
+// `typescript.removeClassFieldsWithoutInitializer` together == TS
+// `useDefineForClassFields: false`.
+const oxcLegacyDecorators = {
+  decorator: { legacy: true },
+  assumptions: { setPublicClassFields: true },
+  typescript: { removeClassFieldsWithoutInitializer: true },
+};
+
 export default defineConfig({
   plugins: [stubAssets],
   test: {
@@ -94,6 +118,7 @@ export default defineConfig({
     projects: [
       {
         plugins: [stubAssets],
+        oxc: oxcLegacyDecorators,
         resolve: { alias: coreSuiteAliases },
         test: {
           name: "core",
@@ -113,6 +138,7 @@ export default defineConfig({
       },
       {
         plugins: [stubAssets],
+        oxc: oxcLegacyDecorators,
         resolve: { alias: presetsSuiteAliases },
         test: {
           name: "presets",

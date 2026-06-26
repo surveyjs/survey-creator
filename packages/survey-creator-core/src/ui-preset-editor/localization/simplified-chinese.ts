@@ -284,8 +284,8 @@ export const zhCnStrings = {
       maxRateValues: "规定调查设计者在评分量表问题中可添加的最大评分数值。",
       // [Auto-translated] "Specifies the maximum nesting level for Panels and Dynamic Panels. Use -1 for no limit, 0 to allow nesting only questions, or a positive number to set the maximum nesting depth."
       maxPanelNestingLevel: "指定面板和动态面板的最大嵌套级别。使用-1表示无限制，0表示仅允许嵌套问题，或使用正数设置最大嵌套深度。",
-      // [Auto-translated] "Specifies how deeply choice options in Radio Button Group and Checkboxes questions can contain nested survey content. Use 0 to disable nesting (default), or a positive number to set the maximum nesting depth."
-      maxChoiceContentNestingLevel: "规定了广播按钮、组和复选框问题中选项中嵌套调查内容的深度。使用0来禁用嵌套（默认），或使用正数来设置最大嵌套深度。",
+      // [Auto-translated] "Specifies how many levels of follow-up questions can be nested within choice options in Radio Button Group and Checkboxes questions. Use 0 to disable nesting, 1 to allow first-level choice options to contain nested content, 2 to allow first- and second-level choice options to contain nested content, and so on. Higher values enable deeper nesting levels."
+      maxChoiceContentNestingLevel: "规定在“单选按钮组”和“复选框”问题的选项中，可以嵌套多少级后续问题。使用0关闭嵌套，1允许第一层选择选项包含嵌套内容，2允许第一层和第二层选择选项包含嵌套内容，依此类推。更高的值则可以实现更深的嵌套层次。",
       // [Auto-translated] "Controls whether the Preview tab shows the Device button for testing surveys on different devices."
       previewAllowSimulateDevices: "控制预览标签页是否显示设备按钮，用于测试不同设备上的调查。",
       // [Auto-translated] "Choose whether the Preview tab shows the language selector. \"Only for multilingual surveys\" - show the selector only if the survey has translations; \"Always (translated languages when available)\" - always show the selector, listing only survey translations when present and all available languages otherwise; \"Always (all available languages)\" - always show the selector with all available languages; \"Never\" - never show the selector."
