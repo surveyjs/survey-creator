@@ -37,7 +37,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
     this.locTitle = new LocalizableString(undefined, false);
     this.locTitle.text = getLocString("presets.editor.title");
     this.navigationBarValue = new NavigationBar();
-    this.navigationBarValue.setActionsAppearance({ size: "small", style: "neutral", mode: "tertiary-surface" });
+    this.navigationBarValue.setActionsAppearance({ mode: "tertiary-surface", size: "small", style: "neutral", showBorder: true });
     const firstTabName = "preset";
     this.preset.setJson(this.getJsonFromSurveyModel());
   }
@@ -160,8 +160,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         if (options.question.name == item.getNavigationElementName()) {
           options.question.getTitleToolbar().isResponsivenessDisabled = true;
           options.question.getTitleToolbar().setActionsAppearance({ size: "medium", style: "brand", mode: "secondary" });
-          //model.navigationBar.getActionById("sv-nav-next").appearance.mode = "primary";
-          //model.navigationBar.getActionById("sv-nav-prev").appearance.mode = "secondary";
           options.actions = model.navigationBar.actions;
         }
         item.onGetQuestionTitleActions(model, this.creator, options);
@@ -172,8 +170,6 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
         if (options.panel.name == item.getNavigationElementName()) {
           options.panel.getTitleToolbar().isResponsivenessDisabled = true;
           options.panel.getTitleToolbar().setActionsAppearance({ size: "medium", style: "brand", mode: "secondary" });
-          //model.navigationBar.getActionById("sv-nav-next").appearance.mode = "primary";
-          //model.navigationBar.getActionById("sv-nav-prev").appearance.mode = "secondary";
           options.actions = model.navigationBar.actions;
         }
         item.onGetPanelTitleActions(model, this.creator, options);
