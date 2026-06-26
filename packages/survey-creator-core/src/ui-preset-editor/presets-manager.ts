@@ -272,7 +272,7 @@ export class PresetsManager {
         action: () => {
           options.row.getQuestionByName("visible").value = !options.row.getValue("visible");
           visibleAction.iconName = getRowIconName(options.row);
-          visibleAction.appearance = { ...visibleAction.appearance, mode: "quaternary" };
+          visibleAction.appearance = { mode: "quaternary" };
           visibleAction.css = options.row.getValue("visible") ? "" : "sps-action--invisible";
         }
       });
@@ -282,7 +282,7 @@ export class PresetsManager {
         removeAction.iconName = "icon-delete-24x24";
         removeAction.iconSize = "auto";
         removeAction.component = "sv-action-bar-item";
-        removeAction.appearance = { ...removeAction.appearance, style: "alert" };
+        removeAction.appearance = { style: "alert" };
         removeAction.tooltip = getLocString("presets.plugin.deletePreset");
         removeAction.showTitle = false;
         removeAction.action = () => {
@@ -358,7 +358,7 @@ export class PresetsManager {
       applyAction.title = applyText || getLocString("buttons.apply");
       cancelAction.css += " sps-action--grow";
       cancelAction.title = cancelText || getLocString("buttons.cancel");
-      cancelAction.appearance = { ...cancelAction.appearance, mode: "secondary" };
+      cancelAction.appearance = { mode: "secondary" };
     }
   }
 
