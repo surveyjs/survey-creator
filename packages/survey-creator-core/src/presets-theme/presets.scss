@@ -214,10 +214,6 @@
   .sd-action {
     flex-direction: row-reverse;
   }
-
-  .sd-action__icon {
-   // padding: var(--sjs2-spacing-x050, 4px);
-  }
 }
 
 .sps-navigation-action--right {
@@ -228,6 +224,21 @@
 }
 
 .sps-navigation-action--label {
+  .sd-action {
+    flex-direction: row;
+    &:before {
+      content: "";
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: var(--sjs2-color-fg-basic-secondary);
+      border-radius: var(--sjs2-radius-round);
+    }
+  }
+  .sd-action__title {
+    --sd-action-disabled-title-color: var(--sjs2-color-fg-basic-secondary);
+    --sd-action-title-font-weight: var(--sjs2-color-fg-basic-primary);
+  }
   .sd-action__icon {
     padding: 0;
   }
