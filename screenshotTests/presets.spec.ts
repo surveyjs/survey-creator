@@ -235,7 +235,7 @@ test.describe(title, () => {
   });
 
   test("Presets small screen", async ({ page }) => {
-    await page.setViewportSize({ width: 900, height: 1507 });
+    await page.setViewportSize({ width: 900, height: 1505 });
     expect(await page.locator(".sps-page__title").getByText("Languages")).toBeVisible();
     await compareScreenshot(page, page.locator(".sps-body"), "presets-small-screen.png", {
       mask: await page.locator(".sd-selectbase__column:nth-child(3) .sd-item:not(:first-of-type)").all()
