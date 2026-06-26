@@ -40,7 +40,7 @@ svc-tab-designer {
   display: flex;
   padding-block-start: var(--sjs2-spacing-x200, 16px);
   padding-inline-end: var(--sjs2-spacing-x300, 24px);
-  padding-block-end:  var(--sjs2-spacing-x100);
+  padding-block-end: var(--sjs2-spacing-x100);
   padding-inline-start: var(--sjs2-spacing-x300, 24px);
 
   flex-direction: column-reverse;
@@ -223,6 +223,7 @@ svc-tab-designer {
   }
 
   .sd-formbox {
-    pointer-events: none;
+    --sjs2-color-component-formbox-hovered-bg: var(--sjs2-color-component-formbox-default-bg);
+    --sjs2-border-effect-component-formbox-hovered: var(--sjs2-border-effect-component-formbox-default);
   }
 }
