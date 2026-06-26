@@ -5,10 +5,12 @@ import {
 import { ISurveyCreatorOptions } from "../creator-settings";
 
 export function getActualLocaleName(loc: string): string {
-  if (loc === surveySettings.defaultLocaleName) {
-    loc = "";
+  if (!loc || loc === surveySettings.defaultLocaleName) {
+    const defaultLocaleName = surveySettings.defaultLocaleName;
+    if (!!defaultLocaleName && defaultLocaleName !== "default") return defaultLocaleName;
+    return surveyLocalization.defaultLocale || "en";
   }
-  return loc || surveyLocalization.defaultLocale || "en";
+  return loc;
 }
 
 export function doMachineStringsTranslation(survey: SurveyModel, creatorOptions: ISurveyCreatorOptions, locales: Array<string>): void {
