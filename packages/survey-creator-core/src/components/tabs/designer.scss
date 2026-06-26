@@ -221,4 +221,8 @@ svc-tab-designer {
       --sd-action-disabled-icon-color: var(--sjs2-color-component-action-neutral-tertiary-default-icon, #424146);
     }
   }
+
+  .sd-formbox {
+    pointer-events: none;
+  }
 }
