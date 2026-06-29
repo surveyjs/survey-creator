@@ -119,6 +119,10 @@ export var presetsCss = {
     ...defaultCss.boolean,
     rootCheckbox: defaultCss.boolean.rootCheckbox + " sps-selectbase",
   },
+  dropdown: {
+    ...defaultCss.dropdown,
+    content: "sps-question__content sps-question__content--dropdown",
+  },
   matrixdynamic: {
     mainRoot: "sps-question sps-question--matrixdynamic sd-element sd-question sd-row__question sd-element--complex sd-question--complex sd-question--table",
     tableWrapper: "sps-table-wrapper",

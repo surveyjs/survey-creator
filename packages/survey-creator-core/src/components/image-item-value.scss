@@ -34,8 +34,8 @@
   top: var(--sjs2-spacing-x100);
   padding: 0 var(--sjs2-spacing-x100);
   z-index: 2;
-  gap: var(--sjs2-spacing-x100);
-  --sd-action-bar-gap: var(--sjs2-spacing-x100);
+  gap: var(--sjs2-layout-component-image-picker-action-group-gap);
+  --sd-action-bar-gap: var(--sjs2-layout-component-image-picker-action-group-gap);
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls {
@@ -48,6 +48,7 @@
   justify-content: center;
   align-items: center;
   padding: 0;
+  gap: var(--sjs2-spacing-x200);
 }
 .sd-imagepicker {
   container-type: inline-size;
