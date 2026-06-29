@@ -152,8 +152,15 @@ export var propertyGridCss = {
     row: "spg-multipletext__row",
     cell: "spg-multipletext__cell"
   },
-  dropdown: { ...defaultCss.dropdown, popup: "spg-dropdown-popup svc-creator-popup", },
-  tagbox: { ...defaultCss.tagbox },
+  dropdown: {
+    ...defaultCss.dropdown,
+    content: "spg-question__content spg-question__content--dropdown",
+    popup: "spg-dropdown-popup svc-creator-popup",
+  },
+  tagbox: {
+    ...defaultCss.tagbox,
+    content: "spg-question__content spg-question__content--dropdown spg-question__content--tagbox",
+  },
   buttongroup: {
     ...defaultCss.buttongroup,
     itemReadOnly: "sv-button-group__item--disabled",

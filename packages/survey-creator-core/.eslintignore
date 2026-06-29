@@ -2,5 +2,3 @@
 build/
 doc_generator/
 node_modules/
-creator-themes-import.js
-creator-themes-update-fallback.js

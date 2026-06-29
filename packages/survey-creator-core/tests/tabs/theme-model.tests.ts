@@ -17,61 +17,87 @@ import "survey-core/survey.i18n";
 
 const themeFromFile = {
   "cssVariables": {
-    "--sjs-font-family": "Segoe",
-    "--sjs-general-backcolor": "rgba(253, 255, 148, 0.5)",
-    "--sjs-general-backcolor-dark": "rgba(248, 248, 248, 1)",
-    "--sjs-general-backcolor-dim": "#0b864b",
-    "--sjs-general-backcolor-dim-light": "rgba(45, 235, 223, 1)",
-    "--sjs-general-backcolor-dim-dark": "rgba(243, 243, 243, 1)",
-    "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
-    "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.45)",
-    "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91)",
-    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45)",
-    "--sjs-primary-backcolor": "rgba(229, 244, 154, 1)",
-    "--sjs-primary-backcolor-light": "rgba(229, 244, 154, 0.1)",
-    "--sjs-primary-backcolor-dark": "rgba(215, 229, 145, 1)",
-    "--sjs-primary-forecolor": "rgba(178, 61, 153, 1)",
-    "--sjs-primary-forecolor-light": "rgba(39, 114, 203, 0.25)",
-    "--sjs-base-unit": "8px",
-    "--sjs-corner-radius": "4px",
-    "--sjs-secondary-backcolor": "rgba(255, 152, 20, 1)",
-    "--sjs-secondary-backcolor-light": "rgba(255, 152, 20, 0.1)",
-    "--sjs-secondary-backcolor-semi-light": "rgba(255, 152, 20, 0.25)",
-    "--sjs-secondary-forecolor": "rgba(255, 255, 255, 1)",
-    "--sjs-secondary-forecolor-light": "rgba(255, 255, 255, 0.25)",
-    "--sjs-shadow-small": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
-    "--sjs-shadow-medium": "0px 2px 6px 0px rgba(0, 0, 0, 0.1)",
-    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
-    "--sjs-shadow-inner": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
-    "--sjs-border-light": "rgba(0, 0, 0, 0.09)",
-    "--sjs-border-default": "rgba(0, 0, 0, 0.16)",
-    "--sjs-border-inside": "rgba(0, 0, 0, 0.16)",
-    "--sjs-special-red": "rgba(229, 10, 62, 1)",
-    "--sjs-special-red-light": "rgba(229, 10, 62, 0.1)",
-    "--sjs-special-red-forecolor": "rgba(255, 255, 255, 1)",
-    "--sjs-special-green": "rgba(25, 179, 148, 1)",
-    "--sjs-special-green-light": "rgba(25, 179, 148, 0.1)",
-    "--sjs-special-green-forecolor": "rgba(255, 255, 255, 1)",
-    "--sjs-special-blue": "rgba(67, 127, 217, 1)",
-    "--sjs-special-blue-light": "rgba(67, 127, 217, 0.1)",
-    "--sjs-special-blue-forecolor": "rgba(255, 255, 255, 1)",
-    "--sjs-special-yellow": "rgba(255, 152, 20, 1)",
-    "--sjs-special-yellow-light": "rgba(255, 152, 20, 0.1)",
-    "--sjs-special-yellow-forecolor": "rgba(255, 255, 255, 1)",
-    "--sjs-font-editorfont-family": "Arial, sans-serif",
-    "--sjs-font-editorfont-weight": "600",
-    "--sjs-font-editorfont-color": "rgba(204, 25, 25, 1)",
-    "--sjs-font-editorfont-size": "17px",
-    "--sjs-editorpanel-backcolor": "rgba(45, 235, 223, 1)",
-    "--sjs-editorpanel-hovercolor": "rgba(70, 143, 221, 1)",
-    "--sjs-editorpanel-cornerRadius": "4px",
-    "--sjs-font-questiontitle-family": "Verdana, sans-serif",
-    "--sjs-font-questiontitle-weight": "700",
-    "--sjs-font-questiontitle-color": "rgba(201, 90, 231, 0.91)",
-    "--sjs-font-questiontitle-size": "18px",
-    "--sjs-questionpanel-backcolor": "rgba(253, 255, 148, 0.6)",
-    "--sjs-questionpanel-hovercolor": "rgba(237, 238, 186, 1)",
-    "--sjs-questionpanel-cornerRadius": "6px"
+    "--sjs2-typography-font-size-component-action-large-content": "18px",
+    "--sjs2-typography-line-height-component-action-large-content": "27px",
+    "--sjs2-color-component-action-brand-tertiary-surface-default-bg": "rgba(253, 255, 148, 0.6)",
+    "--sjs2-color-component-action-brand-tertiary-surface-hovered-bg": "rgba(237, 238, 186, 1)",
+    "--sjs2-color-bg-basic-primary": "rgba(253, 255, 148, 0.5)",
+    "--sjs2-color-utility-property-grid": "rgba(253, 255, 148, 0.5)",
+    "--sjs2-color-utility-tabs": "rgba(253, 255, 148, 0.5)",
+    "--sjs2-color-utility-toolbox": "rgba(253, 255, 148, 0.5)",
+    "--sjs2-color-component-action-alert-quaternary-surface-default-bg": "rgba(253, 255, 148, 0.6)",
+    "--sjs2-color-component-action-alert-quaternary-surface-hovered-bg": "rgba(253, 255, 148, 0.6)",
+    "--sjs2-color-component-action-brand-quaternary-surface-default-bg": "rgba(253, 255, 148, 0.6)",
+    "--sjs2-color-component-action-brand-quaternary-surface-hovered-bg": "rgba(253, 255, 148, 0.6)",
+    "--sjs2-color-component-action-neutral-quaternary-surface-default-bg": "rgba(253, 255, 148, 0.6)",
+    "--sjs2-color-component-action-neutral-quaternary-surface-hovered-bg": "rgba(253, 255, 148, 0.6)",
+    "--sjs2-color-bg-basic-primary-dim": "rgba(248, 248, 248, 1)",
+    "--sjs2-color-bg-neutral-tertiary-dim": "#0b864b",
+    "--sjs2-color-utility-surface-survey-panelless": "#0b864b",
+    "--sjs2-color-utility-surface-survey": "#0b864b",
+    "--sjs2-color-bg-basic-secondary": "rgba(45, 235, 223, 1)",
+    "--sjs2-color-bg-basic-secondary-dim": "rgba(243, 243, 243, 1)",
+    "--sjs2-color-fg-basic-primary": "rgba(201, 90, 231, 0.91)",
+    "--sjs2-color-fg-basic-secondary": "rgba(0, 0, 0, 0.45)",
+    "--sjs2-color-component-action-alert-quaternary-surface-default-icon": "rgba(0, 0, 0, 0.45)",
+    "--sjs2-color-component-action-brand-quaternary-surface-default-icon": "rgba(0, 0, 0, 0.45)",
+    "--sjs2-color-component-action-neutral-quaternary-surface-default-icon": "rgba(0, 0, 0, 0.45)",
+    "--sjs2-color-project-brand-600": "rgba(229, 244, 154, 1)",
+    "--sjs2-color-bg-brand-secondary": "rgba(229, 244, 154, 0.1)",
+    "--sjs2-color-bg-brand-primary-dim": "rgba(215, 229, 145, 1)",
+    "--sjs2-color-fg-brand-on-primary": "rgba(178, 61, 153, 1)",
+    "--sjs2-color-fg-brand-primary-disabled": "rgba(39, 114, 203, 0.25)",
+    "--sjs2-base-unit-size": "8px",
+    "--sjs2-base-unit-spacing": "8px",
+    "--sjs2-base-unit-radius": "4px",
+    "--sjs2-border-effect-surface-default": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-border-effect-component-action-brand-tertiary-surface-default": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-border-effect-component-action-brand-tertiary-surface-hovered": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-border-effect-component-action-brand-tertiary-surface-disabled": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-border-effect-component-action-brand-primary-default": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-border-effect-component-action-brand-primary-hovered": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-border-effect-component-action-brand-primary-disabled": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-border-effect-floating-default": "0px 2px 6px 0px rgba(0, 0, 0, 0.1),0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs2-border-effect-component-formbox-default": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-border-effect-component-check-true-default": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-border-effect-component-check-false-default": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs2-color-border-basic-secondary": "rgba(0, 0, 0, 0.09)",
+    "--sjs2-color-component-input-default-line": "rgba(0, 0, 0, 0.16)",
+    "--sjs2-color-border-basic-secondary-overlay": "rgba(0, 0, 0, 0.16)",
+    "--sjs2-color-bg-alert-primary": "rgba(229, 10, 62, 1)",
+    "--sjs2-color-bg-alert-secondary": "rgba(229, 10, 62, 0.1)",
+    "--sjs2-color-fg-alert-on-primary": "rgba(255, 255, 255, 1)",
+    "--sjs2-color-bg-positive-primary": "rgba(25, 179, 148, 1)",
+    "--sjs2-color-bg-positive-secondary": "rgba(25, 179, 148, 0.1)",
+    "--sjs2-color-fg-positive-on-primary": "rgba(255, 255, 255, 1)",
+    "--sjs2-color-bg-note-primary": "rgba(67, 127, 217, 1)",
+    "--sjs2-color-bg-note-secondary": "rgba(67, 127, 217, 0.1)",
+    "--sjs2-color-fg-note-on-primary": "rgba(255, 255, 255, 1)",
+    "--sjs2-color-bg-warning-primary": "rgba(255, 152, 20, 1)",
+    "--sjs2-color-bg-warning-secondary": "rgba(255, 152, 20, 0.1)",
+    "--sjs2-color-fg-warning-on-primary": "rgba(255, 255, 255, 1)",
+    "--sjs2-radius-form": "4px",
+    "--sjs2-color-component-formbox-default-bg": "rgba(45, 235, 223, 1)",
+    "--sjs2-color-component-check-false-hovered-bg": "rgba(70, 143, 221, 1)",
+    "--sjs2-radius-component-panel": "6px",
+    "--sjs2-color-component-panel-default-bg": "rgba(253, 255, 148, 0.6)",
+    "--sjs2-color-unknown-variable-001": "rgba(237, 238, 186, 1)",
+    "--sjs2-typography-font-family-text": "Segoe",
+    "--sjs2-typography-font-family-component-question-title": "Verdana, sans-serif",
+    "--sjs2-typography-font-weight-component-question-title": "700",
+    "--sjs2-typography-font-size-component-question-title": "18px",
+    "--sjs2-color-component-question-default-title": "rgba(201, 90, 231, 0.91)",
+    "--sjs2-typography-font-family-component-input-content": "Arial, sans-serif",
+    "--sjs2-typography-font-family-component-label-content": "Arial, sans-serif",
+    "--sjs2-typography-font-weight-component-input-content": "600",
+    "--sjs2-typography-font-weight-component-label-content": "600",
+    "--sjs2-typography-font-size-component-input-content": "17px",
+    "--sjs2-typography-font-size-component-label-content": "17px",
+    "--sjs2-color-component-input-default-value": "rgba(204, 25, 25, 1)",
+    "--sjs2-color-component-label-default-text": "rgba(204, 25, 25, 1)",
+    "--sjs2-typography-line-height-component-question-title": "27px",
+    "--sjs2-typography-line-height-component-input-content": "26px",
+    "--sjs2-typography-line-height-component-label-content": "26px",
   }
 };
 
@@ -103,8 +129,7 @@ test("assign function", (): any => {
 
 test("Theme model de/serialization", (): any => {
   const themeModel = new ThemeModel();
-  let result = themeModel.cssVariables || {};
-  expect(Object.keys(result).length).toBe(2);
+  themeModel.initialize();
 
   const themeJson: ITheme = {
     themeName: "custom",
@@ -115,28 +140,19 @@ test("Theme model de/serialization", (): any => {
     backgroundImageAttachment: "fixed",
     backgroundOpacity: 0.7,
     cssVariables: {
-      "--sjs-base-unit": "6px",
-      "--sjs-corner-radius": "20px",
-      "--sjs-font-family": "Open Sans",
-      "--sjs-font-size": "17.6px",
-      "--sjs-general-backcolor": "rgba(253, 255, 148, 0.5)",
-      "--sjs-general-backcolor-dark": "rgba(248, 248, 248, 1)",
-      "--sjs-general-backcolor-dim-light": "rgba(45, 235, 223, 1)",
-      "--sjs-general-backcolor-dim-dark": "rgba(243, 243, 243, 1)",
-      "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
-      "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.45)",
-      "--sjs-primary-backcolor": "rgba(229, 244, 154, 1)",
-      "--sjs-primary-backcolor-light": "rgba(229, 244, 154, 0.1)",
-      "--sjs-primary-backcolor-dark": "rgba(215, 229, 145, 1)",
-      "--sjs-primary-forecolor": "rgba(178, 61, 153, 1)",
-      "--sjs-primary-forecolor-light": "rgba(39, 114, 203, 0.25)",
-    }
+      "--sjs2-base-unit-size": "6px",
+      "--sjs2-base-unit-radius": "20px",
+      "--sjs2-base-unit-font-size": "8.8px",
+      "--sjs2-color-project-brand-600": "rgba(178, 61, 153, 1)",
+      "--sjs2-color-bg-basic-primary": "rgba(253, 255, 148, 0.5)",
+      "--sjs2-color-bg-basic-primary-dim": "rgba(45, 235, 223, 1)",
+      "--sjs2-typography-font-family-component-question-title": "Verdana, sans-serif",
+      "--sjs2-typography-font-weight-component-question-title": "700",
+      "--sjs2-color-component-question-default-title": "rgba(201, 90, 231, 0.91)",
+      "--sjs2-typography-font-size-component-question-title": "18px",
+    },
   };
   themeModel.fromJSON(themeJson);
-
-  expect(themeModel.scale).toBe(75);
-  expect(themeModel.cornerRadius).toBe(20);
-  expect(themeModel.fontSize).toBe(110);
 
   expect(themeModel.themeName).toBe("custom");
   expect(themeModel.colorPalette).toBe("light");
@@ -145,12 +161,30 @@ test("Theme model de/serialization", (): any => {
   expect(themeModel.backgroundImageFit).toBe("cover");
   expect(themeModel.backgroundImageAttachment).toBe("fixed");
   expect(themeModel.backgroundOpacity).toBe(70);
+  expect(themeModel.scale).toBe(75);
+  expect(themeModel.cornerRadius).toBe(20);
+  expect(themeModel.fontSize).toBe(110);
 
-  result = themeModel.cssVariables || {};
-  expect(result).toStrictEqual(themeJson.cssVariables || {});
-  expect(result["--sjs2-base-unit-size"]).toBe("6px");
-  expect(result["--sjs2-base-unit-radius"]).toBe("20px");
-  expect(result["--sjs2-base-unit-font-size"]).toBe("8.8px");
+  Object.keys(themeJson.cssVariables || {}).forEach(key => {
+    expect(themeModel.cssVariables[key]).toBe(themeJson.cssVariables![key]);
+  });
+
+  const serialized = themeModel.toJSON();
+  expect(serialized.themeName).toBe("custom");
+  expect(serialized.isPanelless).toBe(true);
+  expect(serialized.backgroundImage).toBe("image.png");
+  expect(serialized.backgroundImageFit).toBe("cover");
+  expect(serialized.backgroundImageAttachment).toBe("fixed");
+  expect(serialized.backgroundOpacity).toBe(0.7);
+
+  Object.keys(themeJson.cssVariables || {}).forEach(key => {
+    expect(serialized.cssVariables?.[key]).toBe(themeJson.cssVariables![key]);
+  });
+
+  const themeModel2 = new ThemeModel();
+  themeModel2.initialize();
+  themeModel2.fromJSON(serialized);
+  expect(themeModel2.toJSON()).toStrictEqual(serialized);
 });
 
 test("Theme model backgroundImage serialization", (): any => {
@@ -187,8 +221,8 @@ test("Theme model load custom theme", (): any => {
     backgroundOpacity: 1,
     cssVariables: {
       "--a-var": "aVal",
-      "--sjs-font-family": "Open Sans",
-      "--sjs-font-size": "16px",
+      "--sjs2-typography-font-family-text": "Open Sans",
+      "--sjs2-base-unit-font-size": "8px",
     },
     "header": {
       "backgroundImageFit": "cover",
@@ -629,7 +663,7 @@ test("Theme builder: toJSON keeps base theme variables on colorPalette change", 
 
   const cssVariables = themeModel.toJSON().cssVariables || {};
   expect(cssVariables["--sjs2-color-bg-basic-primary"]).toBe("rgba(48, 48, 48, 1)");
-  expect(cssVariables["--sjs-article-font-default-lineHeight"]).toBe("28px");
+  expect(cssVariables["--sjs2-base-unit-radius"]).toBe("4px");
 });
 
 test("selectTheme", (): any => {

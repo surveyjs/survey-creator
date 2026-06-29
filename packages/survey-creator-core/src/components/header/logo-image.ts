@@ -52,7 +52,7 @@ export class LogoImageViewModel extends Base {
   protected createActionsContainer(): ActionContainer {
     const container = new ActionContainer();
     container.containerCss = "svc-logo-image-controls";
-    container.setActionsAppearance({ style: "neutral", mode: "quaternary-surface", size: "medium" });
+    container.setActionsAppearance({ style: "neutral", mode: "quaternary-surface", size: "small" });
     container.setItems(this.createActions());
     return container;
   }

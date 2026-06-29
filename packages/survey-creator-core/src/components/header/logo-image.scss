@@ -79,7 +79,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  --sd-action-gap: var(--sjs2-spacing-x100, 8px);
+  --sd-action-gap: var(--sjs2-layout-component-header-action-group-gap, 8px);
 }
 
 .svc-logo-image-container:not(.svc-logo-image-container--editable) {

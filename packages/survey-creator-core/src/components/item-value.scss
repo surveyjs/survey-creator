@@ -6,6 +6,9 @@
   gap: var(--sjs2-spacing-x100);
   align-items: center;
   margin-left: var(--sjs2-spacing-negative-x500);
+  .sd-item {
+    padding: var(--sjs2-spacing-x150) 0;
+  }
 }
 
 .svc-question__dropdown-choice,

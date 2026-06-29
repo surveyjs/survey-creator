@@ -98,7 +98,7 @@ https://github.com/surveyjs/survey-creator/assets/102306951/afb8a75d-921e-4e5f-8
 - [Website](https://surveyjs.io/)
 - [Documentation](https://surveyjs.io/survey-creator/documentation/overview)
 - [Starter Demos](https://surveyjs.io/survey-creator/examples/free-nps-survey-template/reactjs)
-- [What's New](https://surveyjs.io/stay-updated/major-updates/2024)
+- [What's New](https://surveyjs.io/WhatsNew)
 
 ## SurveyJS Product Family
 
