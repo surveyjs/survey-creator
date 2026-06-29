@@ -226,6 +226,9 @@
 .sps-navigation-action--label {
   .sd-action {
     flex-direction: row;
+    --sd-action-disabled-title-color: var(--sjs2-color-fg-basic-secondary);
+    --sd-action-title-font-weight: var(--sjs2-color-fg-basic-primary);
+    --sd-action-icon-padding: 0;
     &:before {
       content: "";
       display: block;
@@ -234,12 +237,5 @@
       background: var(--sjs2-color-fg-basic-secondary);
       border-radius: var(--sjs2-radius-round);
     }
-  }
-  .sd-action__title {
-    --sd-action-disabled-title-color: var(--sjs2-color-fg-basic-secondary);
-    --sd-action-title-font-weight: var(--sjs2-color-fg-basic-primary);
-  }
-  .sd-action__icon {
-    padding: 0;
   }
 }
