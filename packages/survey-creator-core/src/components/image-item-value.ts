@@ -71,7 +71,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         iconName: new ComputedUpdater(() => this.showChooseButtonAsIcon ? "icon-add-lg" : undefined) as unknown as string,
         innerCss: "svc-image-item-value-controls__add",
         showTitle: new ComputedUpdater(() => !this.showChooseButtonAsIcon) as unknown as boolean,
-        appearance: { style: "brand", mode: "tertiary", size: "small" },
+        appearance: { style: "brand", mode: "secondary", size: "small" },
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
@@ -99,7 +99,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         innerCss: "svc-image-item-value-controls__drag-area-indicator",
         data: { model: this },
         visible: this.isDraggable,
-        appearance: { style: "brand", mode: "quaternary-surface", size: "medium" },
+        appearance: { style: "brand", mode: "quaternary-surface", size: "small" },
       }),
       new Action({
         id: "choose",
@@ -107,7 +107,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         iconName: "icon-choosefile",
         showTitle: false,
         needSpace: true,
-        appearance: { style: "brand", mode: "quaternary-surface", size: "medium" },
+        appearance: { style: "brand", mode: "quaternary-surface", size: "small" },
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
@@ -120,7 +120,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         title: new ComputedUpdater(() => this.removeFileTitle) as unknown as string,
         iconName: "icon-delete",
         showTitle: false,
-        appearance: { style: "alert", mode: "quaternary-surface", size: "medium" },
+        appearance: { style: "alert", mode: "quaternary-surface", size: "small" },
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
