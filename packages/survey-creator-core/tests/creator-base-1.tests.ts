@@ -4128,6 +4128,43 @@ test("Remove text question immediately on adding it via onQuestionAdded, Bug#765
   expect(allQuestions[0].getType()).toEqual("dropdown");
   expect(creator.survey.getAllQuestions().filter(q => q.getType() === "text")).toHaveLength(0);
 });
+test("Remove text question immediately on adding it into a new page via onQuestionAdded, Bug#11475", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "question1" }] }
+    ]
+  };
+  // onQuestionAdded must fire before the new question is rendered into a row. Otherwise the
+  // renderer is notified about a question that the next handler deletes, and renders a question
+  // detached from its page: "Cannot read properties of undefined (reading 'page')".
+  let renderedBeforeAddedEvent = false;
+  creator.onQuestionAdded.add((_, options) => {
+    const q = options.question;
+    const page = q.page as PageModel;
+    if (!!page && page.rows.some(row => row.elements.indexOf(q) > -1)) {
+      renderedBeforeAddedEvent = true;
+    }
+  });
+  // The user's handler that prevents adding a "text" question (the demo code from the issue)
+  creator.onQuestionAdded.add((_, options) => {
+    const q = options.question;
+    if (q.getType() === "text") {
+      q.delete();
+    }
+  });
+
+  // Add a "text" question into the not-yet-existing page2 (the ghost new page)
+  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
+  const pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  pageModel.isGhost = true;
+  pageModel.addNewQuestion(pageModel, null, "text");
+
+  expect(renderedBeforeAddedEvent).toBeFalsy();
+  // the text question is rejected and no empty page2 is left behind
+  expect(creator.survey.pageCount).toEqual(1);
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+});
 test("Convert question type for a question on the last page with the only question", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
