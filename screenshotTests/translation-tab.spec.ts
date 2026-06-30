@@ -108,14 +108,14 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, "Translation").click();
     await page.locator(".spg-action-button").first().click();
     await page.locator("span", { hasText: "Català" }).click(); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-    await page.locator("button[title='Auto-translate All']").click();
+    await page.locator("button[title='Auto-translate All']").last().click();
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup.png");
     await page.locator("button[title='Apply']").click();
     await page.waitForTimeout(1000);
     await page.locator("textarea").nth(1).type("translated");
     await page.locator(".spg-action-button").first().click();
     await page.locator("span", { hasText: "Dansk" }).click();
-    await page.locator("button[title='Auto-translate All']").nth(1).click();
+    await page.locator("button[title='Auto-translate All']").last().click();
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-enabled-dropdown.png");
     await page.setViewportSize({ width: 1000, height: 1440 });
     await page.waitForTimeout(500);

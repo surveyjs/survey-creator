@@ -41,7 +41,7 @@ test.describe(title, () => {
     await expect(languageHeaderColumnSelector).toHaveCount(2);
     await expect(stringsColumnSelector).toHaveCount(3);
     await expect(languagesSelector).toHaveCount(2);
-    await expect(languagesSelector.nth(0)).toHaveClass(new RegExp(disabledClassName));
+    await expect(languagesSelector.nth(0)).not.toHaveClass(new RegExp(disabledClassName));
     await expect(languagesSelector.nth(0)).toHaveClass(new RegExp(checkedClassName));
     await expect(languageDefaultText).toBeVisible();
     await expect(languagesSelector.nth(1)).toHaveClass(new RegExp(checkedClassName));
