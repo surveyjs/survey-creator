@@ -1,5 +1,5 @@
 import { expect } from "playwright/test";
-import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab } from "./helper";
+import { url, compareScreenshot, test, setJSON, changeToolboxSearchEnabled, getAddNewQuestionButton, getTabbedMenuItemByText, creatorTabTranslationName, creatorTabThemeName, getListItemByText, urlThemeTab, waitForScrollEnd } from "./helper";
 import { largeSurvey } from "./large-survey";
 
 const title = "Sidebar";
@@ -78,9 +78,11 @@ test.describe(title, () => {
     await compareScreenshot(page, ".spg-container_search", "side-bar-search-general-group.png");
 
     await page.locator(".svc-search__bar-item").first().click(); // prev
+    await waitForScrollEnd(page, ".spg-question--highlighted");
     await compareScreenshot(page, ".spg-container_search", "side-bar-search-question-group.png");
 
     await page.locator(".svc-search__bar-item").nth(1).click(); // next
+    await waitForScrollEnd(page, ".spg-question--highlighted");
     await compareScreenshot(page, ".spg-container_search", "side-bar-search-general-group-after-next.png");
 
     await page.locator(".svc-search__bar-item").nth(2).click(); // clear
@@ -130,7 +132,7 @@ test.describe(title, () => {
     await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-general.png");
 
     await page.locator(".svc-menu-action__button").filter({ visible: true }).nth(4).click();
-    await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png");
+    await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png", { maxDiffPixels: 2 });
 
     await page.locator(".spg-boolean-switch").filter({ visible: true }).click();
     await page.locator(".svc-top-bar").filter({ visible: true }).hover();

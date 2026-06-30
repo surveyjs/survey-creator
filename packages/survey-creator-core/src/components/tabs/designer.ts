@@ -351,6 +351,7 @@ export class TabDesignerViewModel extends Base {
     this.survey.unRegisterFunctionOnPropertiesValueChanged(["widthMode", "calculatedWidthMode"], "__designer_tab_model__");
   }
   private checkLastPageToDelete(): boolean {
+    if (this.creator.pageEditMode === "bypage") return false;
     if (this.survey.pageCount === 0 || this.survey.isQuestionDragging) return false;
     const lastPage: PageModel = this.survey.pages[this.survey.pageCount - 1];
     if (lastPage.elements.length > 0 || (<any>lastPage).isConverting) return false;

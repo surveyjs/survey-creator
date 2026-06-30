@@ -3615,18 +3615,6 @@ export var huStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontraszt"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Alap",
-      // [Auto-translated] "Advanced"
-      advanced: "Haladó",
-      // [Auto-translated] "Expert"
-      expert: "Szakértő"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Előbeállítás alkalmazása"
   }
 };
 setupLocale({ localeCode: "hu", strings: huStrings });

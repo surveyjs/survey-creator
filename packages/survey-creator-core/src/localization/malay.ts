@@ -3615,18 +3615,6 @@ export var msStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Sebaliknya"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Asas",
-      // [Auto-translated] "Advanced"
-      advanced: "Lanjutan",
-      // [Auto-translated] "Expert"
-      expert: "Pakar"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Pratetap digunakan"
   }
 };
 

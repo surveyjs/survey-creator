@@ -3615,18 +3615,6 @@ export var hrStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Razlika"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Osnovno",
-      // [Auto-translated] "Advanced"
-      advanced: "Napredno",
-      // [Auto-translated] "Expert"
-      expert: "Stručnjak"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Primijenjen predpostavka"
   }
 };
 setupLocale({ localeCode: "hr", strings: hrStrings });

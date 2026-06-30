@@ -3616,18 +3616,6 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "反差"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "基本版",
-      // [Auto-translated] "Advanced"
-      advanced: "進階",
-      // [Auto-translated] "Expert"
-      expert: "專家"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "已套用預設"
   }
 };
 

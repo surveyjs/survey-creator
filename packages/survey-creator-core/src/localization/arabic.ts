@@ -3615,18 +3615,6 @@ export var arStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "تباين"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "أساسي",
-      // [Auto-translated] "Advanced"
-      advanced: "متقدمة",
-      // [Auto-translated] "Expert"
-      expert: "خبير"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "تطبيق الإعداد المسبق"
   }
 };
 

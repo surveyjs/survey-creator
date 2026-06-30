@@ -3615,18 +3615,6 @@ export const thStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "ความแตกต่าง"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "พื้นฐาน",
-      // [Auto-translated] "Advanced"
-      advanced: "ขั้นสูง",
-      // [Auto-translated] "Expert"
-      expert: "ผู้เชี่ยวชาญ"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "ใช้ค่าที่ตั้งไว้ล่วงหน้า"
   }
 };
 

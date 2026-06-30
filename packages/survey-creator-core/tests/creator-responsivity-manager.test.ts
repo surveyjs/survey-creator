@@ -1,3 +1,4 @@
+import { expect, test, vi } from "vitest";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { SurveyCreatorModel, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
@@ -457,7 +458,7 @@ test("CreatorResponsivityManager shold not change showSidebar on init", (): any 
   const oldResizeObserver = window.ResizeObserver;
   const oldGetComputedStyle = window.getComputedStyle;
   window.ResizeObserver = <any>ResizeObserver;
-  window.getComputedStyle = <any>jest.fn((element) => ({
+  window.getComputedStyle = <any>vi.fn((element) => ({
     display: "block"
   }));
   const container: SimpleContainer = new SimpleContainer({});

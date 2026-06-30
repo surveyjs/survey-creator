@@ -5,7 +5,7 @@ parameters:
 
 jobs:
   - job:
-    displayName: "Unit & Presets & PostCSS"
+    displayName: "Unit & PostCSS"
     steps:
       - template: build.yml
         parameters:
@@ -14,10 +14,6 @@ jobs:
       - script: npm run test
         workingDirectory: $(Build.SourcesDirectory)/packages/survey-creator-core
         displayName: "Unit"
-
-      - script: npm run test:presets
-        workingDirectory: $(Build.SourcesDirectory)/packages/survey-creator-core
-        displayName: "Presets"
 
       - script: npm run test:postcss
         workingDirectory: $(Build.SourcesDirectory)/packages/survey-creator-core

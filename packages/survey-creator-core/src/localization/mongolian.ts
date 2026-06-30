@@ -3615,18 +3615,6 @@ export var mnStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Эсрэг тэсрэг байдал"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Үндсэн",
-      // [Auto-translated] "Advanced"
-      advanced: "Дэвшилтэт",
-      // [Auto-translated] "Expert"
-      expert: "Мэргэжилтэн"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Урьдчилсан тохируулга хэрэглээ"
   }
 };
 

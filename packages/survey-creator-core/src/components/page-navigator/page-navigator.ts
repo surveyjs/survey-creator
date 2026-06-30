@@ -21,6 +21,7 @@ export class PageNavigatorViewModel extends Base {
     this.currentPage = this.pagesController.currentPage;
   };
   private _resizeObserver: ResizeObserver;
+  private _rootUIElement: HTMLElement;
 
   private pcPropertyChangedHandler = (sender, options) => {
     if (options.name === "toolboxLocation") {
@@ -141,9 +142,6 @@ export class PageNavigatorViewModel extends Base {
     };
     item.data = page;
     return this.createActionBarCore(item);
-  }
-  public get isByPageMode() {
-    return this.pagesController.creator["pageEditMode"] === "bypage";
   }
   public scrollToPage(page: PageModel) {
     if (this.pageEditMode === "bypage") {
@@ -277,9 +275,6 @@ export class PageNavigatorViewModel extends Base {
   public static PAGE_NAVIGATION_ITEM_HEIGHT = 36;
   protected updateVisibleItems(allAvailableHeight: number): void {
     this.updateVisibility();
-    if (this.isByPageMode) {
-      return;
-    }
     const itemsAvailableHeight = allAvailableHeight - PageNavigatorViewModel.PAGE_NAVIGATION_MENU_ITEM_HEIGHT;
     this.visibleItemsCount = Math.floor(itemsAvailableHeight / PageNavigatorViewModel.PAGE_NAVIGATION_ITEM_HEIGHT);
 
@@ -291,12 +286,7 @@ export class PageNavigatorViewModel extends Base {
     this.visibleItemsStartIndex = visibleStart;
   }
   private _updateVisibility() {
-    this.hasScrolling = !this._scrollableContainer || (this._scrollableContainer.scrollHeight > this._scrollableContainer.clientHeight);
-    this.visible = this.items.length > 1 && (this.hasScrolling || this.isByPageMode);
-    if (this.isByPageMode) {
-      this.visibleItemsStartIndex = 0;
-      this.visibleItemsCount = this.items.length;
-    }
+    this.visible = this.items.length > 1;
   }
   private updateVisibility() {
     // this._updateVisibility();
@@ -310,13 +300,29 @@ export class PageNavigatorViewModel extends Base {
     }
     return this.items.slice(this.visibleItemsStartIndex, this.visibleItemsStartIndex + this.visibleItemsCount);
   }
+  public detachFromUI() {
+    if (!!this._rootUIElement) {
+      this._rootUIElement.removeEventListener("wheel", this._onWheel);
+      this._rootUIElement = undefined as any;
+    }
+  }
+  private _onWheel(event: WheelEvent) {
+    event.preventDefault();
+    if (event.deltaY > 10) {
+      this.visibleItemsStartIndex = Math.min(this.visibleItemsStartIndex + 1, this.items.length - this.visibleItemsCount);
+    } else if (event.deltaY < -10) {
+      this.visibleItemsStartIndex = Math.max(this.visibleItemsStartIndex - 1, 0);
+    }
+  }
   public attachToUI(el: HTMLDivElement) {
     if (!!el) {
-      const scrollableContainer = el.parentElement.parentElement.parentElement.parentElement.parentElement as HTMLDivElement;
+      const scrollableContainer = el.parentElement?.parentElement?.parentElement?.parentElement?.parentElement as HTMLDivElement;
       const self = this;
       scrollableContainer.onscroll = function (this: GlobalEventHandlers, ev: Event) {
         return self.onContainerScroll(ev.currentTarget as HTMLDivElement);
       };
+      this._rootUIElement = el;
+      el.addEventListener("wheel", this._onWheel.bind(this), { passive: false });
       this.setItemsContainer(el.parentElement as HTMLDivElement);
       this.setScrollableContainer(scrollableContainer);
     }

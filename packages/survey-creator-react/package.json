@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "2.5.22",
+  "version": "2.5.30",
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/survey-creator.git"
@@ -18,8 +18,7 @@
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
     "build:main": "rollup -c rollup.config.mjs --environment emitMinified,emitNonSourceFiles",
-    "build:presets": "rollup -c rollup.presets.config.mjs --environment emitMinified",
-    "build": "npm run build:main && npm run build:presets",
+    "build": "npm run build:main",
     "watch:dev": "rollup -c rollup.config.mjs -w",
     "watch:prod": "rollup -c rollup.config.mjs -w --environment emitMinified",
     "lint": "eslint . --max-warnings=0",
@@ -30,9 +29,11 @@
     "e2e:ci": "playwright test --project e2e",
     "test:scr": "playwright test --project scr --ui",
     "test:scr:ci": "playwright test --project scr",
+    "test:scr:update": "playwright test --project scr --update-snapshots",
     "test:scr:copy:tests": "node copy-src-tests.js",
     "test:scr:legacy": "node copy-src-tests.js && playwright test --project scr_legacy --ui",
-    "test:scr:legacy:ci": "node copy-src-tests.js && playwright test --project scr_legacy"
+    "test:scr:legacy:ci": "node copy-src-tests.js && playwright test --project scr_legacy",
+    "test:scr:legacy:update": "node copy-src-tests.js && playwright test --project scr_legacy --update-snapshots"
   },
   "devDependencies": {
     "@types/ace": "0.0.44",

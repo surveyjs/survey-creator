@@ -3615,18 +3615,6 @@ export var grStrings = {
       // "Contrast"
       "default-contrast": "Αντίθεση"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Βασικό",
-      // [Auto-translated] "Advanced"
-      advanced: "Προηγμένη",
-      // [Auto-translated] "Expert"
-      expert: "Εμπειρογνώμονας"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Εφαρμόστηκε προεπιλογή"
   }
 };
 

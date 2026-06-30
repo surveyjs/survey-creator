@@ -96,34 +96,6 @@ const buildPlatformJson = {
       "types": "./themes/*.d.ts",
       "default": "./themes/*.js",
     },
-    "./ui-presets": {
-      "types": "./ui-presets/index.d.ts",
-      "import": "./fesm/ui-presets/index.mjs",
-      "require": "./ui-presets/index.js"
-    },
-    "./ui-presets/index": {
-      "types": "./ui-presets/index.d.ts",
-      "import": "./fesm/ui-presets/index.mjs",
-      "require": "./ui-presets/index.js"
-    },
-    "./ui-presets/*": {
-      "types": "./ui-presets/*.d.ts",
-      "default": "./ui-presets/*.js",
-    },
-    "./ui-preset-editor": {
-      "types": "./ui-preset-editor/index.d.ts",
-      "import": "./fesm/ui-preset-editor.mjs",
-      "require": "./ui-preset-editor.js"
-    },
-    "./ui-preset-editor/index.css": "./ui-preset-editor.css",
-    "./ui-preset-editor/i18n": {
-      "import": "./fesm/ui-preset-editor/i18n/index.mjs",
-      "require": "./ui-preset-editor/i18n/index.js"
-    },
-    "./ui-preset-editor/i18n/*": {
-      "import": "./fesm/ui-preset-editor/i18n/*.mjs",
-      "require": "./ui-preset-editor/i18n/*.js"
-    },
   },
   devDependencies: {},
 };

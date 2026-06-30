@@ -3616,18 +3616,6 @@ export var koreanStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "대조"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "기본",
-      // [Auto-translated] "Advanced"
-      advanced: "고급",
-      // [Auto-translated] "Expert"
-      expert: "전문가"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "프리셋 적용"
   }
 };
 setupLocale({ localeCode: "ko", strings: koreanStrings });

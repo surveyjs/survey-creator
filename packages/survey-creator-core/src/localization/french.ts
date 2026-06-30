@@ -3615,18 +3615,6 @@ export var frenchTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contraste"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Base",
-      // [Auto-translated] "Advanced"
-      advanced: "Avancé",
-      // [Auto-translated] "Expert"
-      expert: "Expert"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Préréglage appliqué"
   }
 };
 

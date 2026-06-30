@@ -3615,18 +3615,6 @@ export var bgStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Контраст"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Основно",
-      // [Auto-translated] "Advanced"
-      advanced: "Напреднали",
-      // [Auto-translated] "Expert"
-      expert: "Експерт"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Приложена предварителна настройка"
   }
 };
 

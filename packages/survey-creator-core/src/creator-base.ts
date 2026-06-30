@@ -23,7 +23,7 @@ import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { assign, getOS } from "./utils/utils";
 import { getNextItemValue, getNextItemText } from "./utils/creator-utils";
 import { PropertyGridModel } from "./property-grid";
-import { ObjType, SurveyHelper } from "./survey-helper";
+import { ObjType, SurveyHelper, getDefaultLocaleName } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
 import { SelectionHistory } from "./selection-history";
 
@@ -3002,7 +3002,7 @@ export class SurveyCreatorModel extends Base
       if (ctrl) ctrl.ignoreChanges = true;
       const locs = locStr.getLocales();
       locs.forEach(l => {
-        if (l !== surveyLocalization.defaultLocale && l !== "default") {
+        if (l !== surveyLocalization.defaultLocale && l !== getDefaultLocaleName()) {
           locStr.setLocaleText(l, "");
         }
       });
@@ -3036,6 +3036,10 @@ export class SurveyCreatorModel extends Base
   }
 
   protected convertQuestion(obj: Question, className: string, defaultJSON: any = null): Question {
+    if (obj instanceof QuestionSelectBase) {
+      // On changing the question type the choice items should not keep their expanded state.
+      this.expandCollapseManager.clearChoicesState(obj.choices);
+    }
     const objJSON = QuestionConverter.getObjJSON(obj, this.getDefaultElementJSON(obj.getType()));
     const options: QuestionConvertingEvent = {
       sourceQuestion: obj,
@@ -3206,10 +3210,10 @@ export class SurveyCreatorModel extends Base
     return this.getNewQuestionName();
   }
   protected getNewQuestionName(): string {
-    return SurveyHelper.getNewQuestionName(this.getAllQuestions());
+    return SurveyHelper.getNewQuestionName(this.getAllQuestions().concat(this.getAllPanels()));
   }
   protected getNewPanelName(): string {
-    return SurveyHelper.getNewPanelName(this.getAllPanels());
+    return SurveyHelper.getNewPanelName(this.getAllPanels().concat(this.getAllQuestions()));
   }
 
   protected setNewNamesCore(element: ISurveyElement) {
@@ -3388,7 +3392,7 @@ export class SurveyCreatorModel extends Base
   }
   @undoRedoTransaction()
   protected deleteObject(obj: any) {
-    if (!obj || obj.isDisposed) return;
+    if (!obj || obj.isDisposed || obj.isSurvey) return;
     const allowedOperations = this.getElementAllowOperations(obj);
     if (!allowedOperations.allowDelete) return;
     if (!this.checkOnElementDeleting(obj)) return;
@@ -3887,6 +3891,7 @@ export class SurveyCreatorModel extends Base
   protected deletePanelOrQuestion(obj: Base): void {
     const changeSelection = obj === this.selectedElement;
     var parent = obj["parent"];
+    if (!parent) return;
     const elements = parent.elements;
     var objIndex = elements.indexOf(obj);
     if (objIndex == elements.length - 1) {
@@ -3896,7 +3901,7 @@ export class SurveyCreatorModel extends Base
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
     obj["delete"](false);
-    if (parent.isPage && (this.pageEditMode === "single" || elements.length === 0)) {
+    if (parent.isPage && (this.pageEditMode === "single" || (elements.length === 0 && this.pageEditMode !== "bypage"))) {
       parent = this.survey;
     }
     if (changeSelection) {
@@ -4678,7 +4683,8 @@ export class SurveyCreatorModel extends Base
   public createNewItemValue(question: QuestionSelectBase, callEvent: boolean = true, callback?: (res: ItemValue) => void): ItemValue {
     const nextValue = this.getNextItemValue(question);
     const res = question.createItemValue(nextValue);
-    res.text = getNextItemText(question.choices);
+    const nextText = getNextItemText(question.choices);
+    if (nextText) res.text = nextText;
     question.choices.push(res);
     if (callback) {
       callback(res);

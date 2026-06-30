@@ -3615,18 +3615,6 @@ export var fiStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrasti"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Perus",
-      // [Auto-translated] "Advanced"
-      advanced: "Edistynyt",
-      // [Auto-translated] "Expert"
-      expert: "Asiantuntija"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Esiasetus käytössä"
   }
 };
 setupLocale({ localeCode: "fi", strings: fiStrings });

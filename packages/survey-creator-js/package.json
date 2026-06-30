@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-js",
-  "version": "2.5.22",
+  "version": "2.5.30",
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/survey-creator.git"
@@ -19,8 +19,7 @@
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
     "build:main": "rollup -c rollup.config.mjs --environment emitMinified,emitNonSourceFiles",
-    "build:presets": "rollup -c rollup.presets.config.mjs --environment emitMinified",
-    "build": "npm run build:main && npm run build:presets",
+    "build": "npm run build:main",
     "watch:dev": "rollup -c rollup.config.mjs -w",
     "watch:prod": "rollup -c rollup.config.mjs -w --environment emitMinified",
     "lint": "eslint ./src",

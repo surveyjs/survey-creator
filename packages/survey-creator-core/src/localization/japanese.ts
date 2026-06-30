@@ -3615,18 +3615,6 @@ export var jaStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "対照"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "基本的な",
-      // [Auto-translated] "Advanced"
-      advanced: "上級",
-      // [Auto-translated] "Expert"
-      expert: "専門家"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "プリセット適用"
   }
 };
 

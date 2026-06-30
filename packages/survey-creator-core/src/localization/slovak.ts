@@ -3615,18 +3615,6 @@ export var skStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Kontrast"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Základné",
-      // [Auto-translated] "Advanced"
-      advanced: "Pokročilé",
-      // [Auto-translated] "Expert"
-      expert: "Expert"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Použitá predsada"
   }
 };
 

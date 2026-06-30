@@ -3615,18 +3615,6 @@ export var italianTranslation = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contrasto"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Base",
-      // [Auto-translated] "Advanced"
-      advanced: "Avanzato",
-      // [Auto-translated] "Expert"
-      expert: "Esperto"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Presetto applicato"
   }
 };
 

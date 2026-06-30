@@ -1,3 +1,4 @@
+import { describe, expect, test, vi } from "vitest";
 import { StringEditorConnector, StringItemsNavigatorBase, StringEditorViewModelBase } from "../src/components/string-editor";
 import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings, QuestionRatingModel, QuestionMultipleTextModel, QuestionMatrixModel, QuestionCheckboxModel, QuestionTextModel, QuestionMatrixDynamicModel, QuestionImagePickerModel } from "survey-core";
 import { CreatorTester } from "./creator-tester";
@@ -5,9 +6,9 @@ import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { QuestionAdornerViewModel } from "../src/components/question";
 
-jest.mock("survey-core", () => ({
-  ...jest["requireActual"]("survey-core"),
-  sanitizeEditableContent: jest.fn(),
+vi.mock("survey-core", async () => ({
+  ...await vi.importActual("survey-core"),
+  sanitizeEditableContent: vi.fn(),
 }));
 test("Test css", (): any => {
   const creator = new CreatorTester();

@@ -11,7 +11,6 @@ export const urlNoLicense = "http://127.0.0.1:8080/test-pages/no-license";
 export const urlWidget = "http://127.0.0.1:8080/test-pages/widget";
 export const urlThemeTab = "http://127.0.0.1:8080/test-pages/theme-tab";
 export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages/creator-themes";
-export const urlPresets = "http://127.0.0.1:8080/test-pages/presets";
 
 export async function compareScreenshot(
   page: Page,
@@ -74,12 +73,14 @@ export const setJSON = async (page: Page, json: object) => {
 };
 
 export const setSurveyProp = async (page: Page, propName: string, value: unknown) => {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate(({ propName, value }) => {
     window["creator"].survey[propName] = value;
   }, { propName, value });
 };
 
 export const getJSON = async (page: Page) => {
+  await page.waitForFunction(() => !!window["creator"]);
   return await page.evaluate(() => {
     return JSON.parse(window["creator"].text);
   });
@@ -115,10 +116,6 @@ export async function doDragDrop({ page, element, target, options }: { page: Pag
 
 export async function showCreatorSettings(page) {
   await page.locator(".svc-sidebar-tabs__bottom-container .svc-menu-action__button").click();
-}
-export async function showPresets(page) {
-  await showCreatorSettings(page);
-  await page.locator(".sps-launch__card").click();
 }
 
 export const creatorTabDesignerName = "Designer";
@@ -208,35 +205,42 @@ export function getVisibleElement(page: Page, selector: string) {
 }
 
 export async function changeToolboxScrolling(page: Page, hasScroll: boolean) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {
     window["creator"].toolbox.overflowBehavior = newVal ? "scroll" : "hideInMenu";
   }, hasScroll);
 }
 
 export async function changeToolboxSearchEnabled(page: Page, enabled: boolean) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {
     window["creator"].toolbox.searchEnabled = newVal;
   }, enabled);
 }
 
 export async function changeToolboxLocation(page: Page, newVal: string) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((val) => {
     window["creator"].toolboxLocation = val;
   }, newVal);
 }
 
 export async function getPagesLength(page: Page): Promise<number> {
+  await page.waitForFunction(() => !!window["creator"]);
   return await page.evaluate(() => window["creator"].survey.pages.length);
 }
 export async function getQuestionsLength(page: Page): Promise<number> {
+  await page.waitForFunction(() => !!window["creator"]);
   return await page.evaluate(() => window["creator"].survey.getAllQuestions().length);
 }
 
 export async function getQuestionNameByIndex(page: Page, index: number): Promise<string> {
+  await page.waitForFunction(() => !!window["creator"]);
   return await page.evaluate((i) => window["creator"].survey.getAllQuestions()[i].name, index);
 }
 
 export async function getItemValueByIndex(page: Page, questionName: string, index: number): Promise<string | undefined> {
+  await page.waitForFunction(() => !!window["creator"]);
   return await page.evaluate(([qName, i]) => {
     const creator = (window as any).creator;
     if (!creator || !creator.survey) return undefined;
@@ -248,6 +252,7 @@ export async function getItemValueByIndex(page: Page, questionName: string, inde
 }
 
 export async function setAllowEditSurveyTitle(page: Page, newVal: boolean) {
+  await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((val) => {
     window["creator"].showSurveyHeader = val;
   }, newVal);

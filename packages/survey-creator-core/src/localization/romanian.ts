@@ -3615,18 +3615,6 @@ export const roStrings = {
       // [Auto-translated] "Contrast"
       "default-contrast": "Contrast"
     }
-  },
-  preset: {
-    names: {
-      // [Auto-translated] "Basic"
-      basic: "Bază",
-      // [Auto-translated] "Advanced"
-      advanced: "Avansat",
-      // [Auto-translated] "Expert"
-      expert: "Expert"
-    },
-    // [Auto-translated] "Preset applied"
-    presetApplied: "Presetare aplicată"
   }
 };
 
