@@ -130,7 +130,6 @@ import "../components/side-bar/side-bar.scss";
 import "../components/side-bar/tab-control.scss";
 import "../property-grid-theme/property-grid.scss";
 import "../utils/layout.scss";
-import "../custom-questions/boolean-switch.scss";
 import "../utils/confirmation.scss";
 
 import "../presets-theme/presets.scss";

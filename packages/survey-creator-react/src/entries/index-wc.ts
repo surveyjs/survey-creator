@@ -74,7 +74,6 @@ export * from "../custom-questions/SpinEditor";
 export * from "../custom-questions/ColorItem";
 export * from "../custom-questions/ColorQuestion";
 export * from "../custom-questions/FileEditQuestion";
-export * from "../custom-questions/BooleanSwitch";
 
 export { editorLocalization, localization } from "survey-creator-core";
 export { settings } from "survey-creator-core";
