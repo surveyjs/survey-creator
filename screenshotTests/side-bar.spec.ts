@@ -136,7 +136,7 @@ test.describe(title, () => {
     await page.locator(".svc-sidebar-tabs__item .sd-action").filter({ visible: true }).nth(4).click();
     await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance.png", { maxDiffPixels: 2 });
 
-    await page.locator(".spg-boolean-switch").filter({ visible: true }).click();
+    await page.locator(".sd-boolean-switch").filter({ visible: true }).click();
     await page.locator(".svc-top-bar").filter({ visible: true }).hover();
     await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-theme-appearance-advanced.png");
 
@@ -156,20 +156,20 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
 
     await page.locator(".svc-sidebar-tabs__item .sd-action").filter({ visible: true }).nth(4).click();
-    await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-default.png");
-    await page.locator(".spg-boolean-switch__button").filter({ visible: true }).hover();
-    await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-hover.png");
-    await page.locator(".spg-boolean-switch__button").filter({ visible: true }).click();
+    await compareScreenshot(page, ".sd-boolean-switch", "boolean-switch-default.png");
+    await page.locator(".sd-boolean-switch__button").filter({ visible: true }).hover();
+    await compareScreenshot(page, ".sd-boolean-switch", "boolean-switch-hover.png");
+    await page.locator(".sd-boolean-switch__button").filter({ visible: true }).click();
     await page.keyboard.press("Tab");
     await page.keyboard.press("Shift+Tab");
-    await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-checked-focus.png");
+    await compareScreenshot(page, ".sd-boolean-switch", "boolean-switch-checked-focus.png");
     await page.keyboard.press("Space");
-    await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-focus.png");
+    await compareScreenshot(page, ".sd-boolean-switch", "boolean-switch-focus.png");
     await page.keyboard.press("Space");
     await page.keyboard.press("Tab");
-    await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-checked.png");
-    await page.locator(".spg-boolean-switch__button").filter({ visible: true }).hover();
-    await compareScreenshot(page, ".spg-boolean-switch", "boolean-switch-checked-hover.png");
+    await compareScreenshot(page, ".sd-boolean-switch", "boolean-switch-checked.png");
+    await page.locator(".sd-boolean-switch__button").filter({ visible: true }).hover();
+    await compareScreenshot(page, ".sd-boolean-switch", "boolean-switch-checked-hover.png");
   });
 
   test("translation tab tabbed property grid", async ({ page }) => {
