@@ -8,6 +8,10 @@ import { Basic } from "../src/ui-presets/basic";
 import { Advanced } from "../src/ui-presets/advanced";
 import { Expert } from "../src/ui-presets/expert";
 
+import "../src/localization/german";
+import "../src/ui-preset-editor/localization/english";
+import "../src/ui-preset-editor/localization/german";
+
 const originalCreatorPresets: { [key: string]: IPreset } = {};
 let originalPredefinedPresets: string[] = [];
 
@@ -201,5 +205,27 @@ test("UIPresetEditor.preset should return Default configuration name and unsaved
   expect(plugin.editor.model.getQuestionByName("tabs_items").value).toEqual(itemsValue);
 
   plugin.deactivate();
+});
+
+test("UIPresetEditor: launch card buttonTitle/buttonDescription should update on creator.locale change, Bug#7816", () => {
+  const creator = new CreatorTester();
+  new UIPresetEditor(creator);
+
+  const settingsPage: any = creator.sidebar.getPageById("creatorTheme");
+  const launchCard: any = settingsPage.componentData.elements.find((el: any) => el.componentName === "svc-side-bar-launch-card");
+  expect(launchCard).toBeTruthy();
+  const model: any = launchCard.componentData.model;
+
+  expect(model.title).toBe("UI Preset Editor");
+  expect(model.description).toBe("Configure the Toolbox, Tabs, Property Grid, and other UI elements, and save the setup as a reusable preset.");
+
+  try {
+    creator.locale = "de";
+
+    expect(model.title).toBe("UI-Preset-Editor");
+    expect(model.description).toBe("Konfigurieren Sie das Toolbox, die Tabs, das Property Grid und andere UI-Elemente und speichern Sie das Setup als wiederverwendbare Voreinstellung.");
+  } finally {
+    creator.locale = "";
+  }
 });
 
