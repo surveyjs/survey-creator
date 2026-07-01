@@ -108,7 +108,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, "Translation").click();
     await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Català" }).click(); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-    await page.getByRole("button", { name: "Auto-translate All" }).click();
+    await page.locator("button[title='Auto-translate All']").last().click();
     await hideContentBehindPopup(page);
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup.png");
     await showContentBehindPopup(page);
@@ -117,7 +117,7 @@ test.describe(title, () => {
     await page.locator("textarea").nth(1).type("translated");
     await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Dansk" }).click();
-    await page.getByRole("button", { name: "Auto-translate All" }).nth(1).click();
+    await page.locator("button[title='Auto-translate All']").last().click();
     await hideContentBehindPopup(page);
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-enabled-dropdown.png");
     await showContentBehindPopup(page);
