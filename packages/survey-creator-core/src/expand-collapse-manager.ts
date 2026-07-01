@@ -48,6 +48,15 @@ export class ExpandCollapseManager {
     this.collapsedChoices = items;
     this.expandCollapseChoices(items, false);
   }
+  public clearChoicesState(items: Array<Base>) {
+    items.forEach(item => {
+      const adorners = this.expandChoicesStates[item.uniqueId];
+      if (Array.isArray(adorners)) {
+        adorners.forEach(adorner => adorner.expandCollapse(false));
+      }
+      delete this.expandChoicesStates[item.uniqueId];
+    });
+  }
   public disposeChoice(item: Base, adorner: IExpandCollapseChoice) {
     const id = item.uniqueId;
     const adorners = this.expandChoicesStates[id];
