@@ -2970,6 +2970,35 @@ test("Modify property editor via property grid survey", (): any => {
   expect(placeholderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeholderQuestion.dataList).toHaveLength(2);
 });
+test("createSurvey assigns a short idPrefix derived from the survey area", (): any => {
+  const creator = new CreatorTester();
+  const getIdPrefix = (area: string): string => {
+    return creator.createSurvey({}, area, undefined, undefined, area).idPrefix;
+  };
+  expect(getIdPrefix("designer-tab")).toEqual("dt-");
+  expect(getIdPrefix("property-grid")).toEqual("pg-");
+  expect(getIdPrefix("preview-tab")).toEqual("pt-");
+  expect(getIdPrefix("logic-rule:condition-editor")).toEqual("lrce-");
+  expect(getIdPrefix("translation-tab:language-list")).toEqual("ttll-");
+  expect(getIdPrefix("matrix-cell-values-popup-editor")).toEqual("mcvpe-");
+  expect(getIdPrefix("")).toEqual("");
+});
+test("Design surface and property grid surveys do not share element ids", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const designerSurvey = creator.survey;
+  creator.selectElement(designerSurvey.getAllQuestions()[0]);
+  const propertyGridSurvey = creator.sidebar.getPageById("propertyGrid").componentData.survey;
+
+  expect(designerSurvey.idPrefix).toEqual("dt-");
+  expect(propertyGridSurvey.idPrefix).toEqual("pg-");
+
+  const designerQuestionId = designerSurvey.getAllQuestions()[0].id;
+  const nameEditorId = propertyGridSurvey.getQuestionByName("name").id;
+  expect(designerQuestionId.indexOf("dt-sq_")).toEqual(0);
+  expect(nameEditorId.indexOf("pg-sq_")).toEqual(0);
+  expect(designerQuestionId).not.toEqual(nameEditorId);
+});
 test("Modify property editor titleActions on event", (): any => {
   PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
   const creator = new CreatorTester();
