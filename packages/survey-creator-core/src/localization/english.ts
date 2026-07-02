@@ -1275,9 +1275,9 @@ export var enStrings = {
       youtube: "YouTube"
     },
     displayMode: {
-      segmented: "Segmented",
       buttons: "Buttons",
       dropdown: "Dropdown",
+      segmented: "Segmented",
       radio: "Radio Buttons",
       checkbox: "Checkbox",
       switch: "Switch",
