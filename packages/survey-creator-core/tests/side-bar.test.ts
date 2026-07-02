@@ -19,18 +19,18 @@ test("Sidebar: activate tab change", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
   expect(creator.sidebar.header.title).toEqual("Survey Settings");
   expect(creator.sidebar.activePage).toEqual("propertyGridPlaceholder");
-  expect(creator.sidebar.pages[0].id).toEqual("propertyGridPlaceholder");
+  expect(creator.sidebar.pages[0].pageId).toEqual("propertyGridPlaceholder");
   expect(creator.sidebar.pages[0].visible).toEqual(true); // propertyGridPlaceholder
-  expect(creator.sidebar.pages[1].id).toEqual("propertyGrid");
+  expect(creator.sidebar.pages[1].pageId).toEqual("propertyGrid");
   expect(creator.sidebar.pages[1].visible).toEqual(false); // propertyGrid
-  expect(creator.sidebar.pages[2].id).toEqual("toolbox");
+  expect(creator.sidebar.pages[2].pageId).toEqual("toolbox");
   expect(creator.sidebar.pages[2].visible).toEqual(false); // toolbox
-  expect(creator.sidebar.pages[3].id).toEqual("creatorTheme");
+  expect(creator.sidebar.pages[3].pageId).toEqual("creatorTheme");
   expect(creator.sidebar.pages[3].visible).toEqual(false); // creatorTheme
 
   creator.activeTab = "translation";
   expect(creator.sidebar.activePage).toEqual("translation");
-  expect(creator.sidebar.pages[4].id).toEqual("translation");
+  expect(creator.sidebar.pages[4].pageId).toEqual("translation");
   expect(creator.sidebar.header.title).toEqual("Languages");
   expect(creator.sidebar.header.subTitle).toEqual("Language Settings");
   expect(creator.sidebar.activePage).toEqual("translation");

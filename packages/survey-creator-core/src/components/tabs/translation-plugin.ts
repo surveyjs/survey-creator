@@ -70,7 +70,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     };
     this.sidebarTab.componentData = this.model.settingsSurvey;
     this.sidebarTab.componentName = "survey-widget";
-    this.creator.sidebar.activePage = this.sidebarTab.id;
+    this.creator.sidebar.activePage = this.sidebarTab.pageId;
 
     this.mergeLocaleWithDefaultAction.title = this.createMergeLocaleWithDefaultActionTitleUpdater();
     this.mergeLocaleWithDefaultAction.tooltip = this.createMergeLocaleWithDefaultActionTitleUpdater();

@@ -51,10 +51,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.activePageIsPropertyGrid);
   }
   private get activePageIsPropertyGrid(): boolean {
-    return this.creator.sidebar.activePage === this.propertyGridTab.id;
+    return this.creator.sidebar.activePage === this.propertyGridTab.pageId;
   }
   private get activePageIsPropertyGridPlaceholder(): boolean {
-    return this.creator.sidebar.activePage === this.propertyGridPlaceholderPage.id;
+    return this.creator.sidebar.activePage === this.propertyGridPlaceholderPage.pageId;
   }
   private createSelectedUpdater() {
     return <any>new ComputedUpdater<boolean>(() => {
@@ -122,14 +122,14 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   private updateActivePage(showPlaceholder = true) {
     if (this.showOneCategoryInPropertyGrid) {
-      this.setActivePage(this.creator.survey.pageCount || !showPlaceholder ? this.propertyGridTab.id : this.propertyGridPlaceholderPage.id);
+      this.setActivePage(this.creator.survey.pageCount || !showPlaceholder ? this.propertyGridTab.pageId : this.propertyGridPlaceholderPage.pageId);
     } else {
       this.setPropertyGridIsActivePage();
     }
   }
 
   private setPropertyGridIsActivePage() {
-    this.setActivePage(this.propertyGridTab.id);
+    this.setActivePage(this.propertyGridTab.pageId);
   }
 
   private setActivePage(id: string): void {
@@ -536,10 +536,10 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public openCreatorThemeSettings(): void {
     this.creator.sidebar.expandSidebar();
     this.prevActivePage = this.creator.sidebar.activePage;
-    this.setActivePage(this.settingsPropertyGridTab.id);
+    this.setActivePage(this.settingsPropertyGridTab.pageId);
   }
 
   public closeCreatorThemeSettings(): void {
-    this.setActivePage(this.prevActivePage || this.propertyGridTab.id);
+    this.setActivePage(this.prevActivePage || this.propertyGridTab.pageId);
   }
 }

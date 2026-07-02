@@ -17,7 +17,7 @@ export class SidebarPageModel extends Base {
 
   private captionValue: string;
 
-  constructor(public id: string, public sidePanel: SidebarModel, componentName?: string, componentData?: any) {
+  constructor(public pageId: string, public sidePanel: SidebarModel, componentName?: string, componentData?: any) {
     super();
     !!componentName && (this.componentName = componentName);
     !!componentData && (this.componentData = componentData);
