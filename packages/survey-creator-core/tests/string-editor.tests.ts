@@ -69,6 +69,30 @@ test("Test string editor content editable", (): any => {
   expect(stringEditorQuestion3Description.contentEditable).toEqual(false);
 });
 
+test("Reset the placeholder cache when the loc string changes via setLocString", (): any => {
+  const creator = new CreatorTester();
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] });
+  const descProp: any = Serializer.findProperty("question", "description");
+  const prevPlaceholder = descProp.placeholder;
+  descProp.placeholder = undefined;
+  try {
+    const locDesc1 = new LocalizableString(survey.getQuestionByName("q1"), false, "description");
+    const se = new StringEditorViewModelBase(locDesc1, creator);
+    // No placeholder configured and no text -> the description editor is hidden.
+    expect(se.placeholder).toEqual("");
+    expect(se.className("").indexOf("svc-string-editor--hidden") !== -1).toBe(true);
+
+    // A placeholder becomes available, and the same editor model is reused for another empty
+    // description (as a React component is now that element ids are deterministic across reloads).
+    descProp.placeholder = "Q placeholder";
+    se.setLocString(new LocalizableString(survey.getQuestionByName("q2"), false, "description"));
+
+    expect(se.placeholder).not.toEqual("");
+    expect(se.className("").indexOf("svc-string-editor--hidden") !== -1).toBe(false);
+  } finally {
+    descProp.placeholder = prevPlaceholder;
+  }
+});
 test("Test string editor select questions items readonly", (): any => {
 
   function checkItemEdit() {

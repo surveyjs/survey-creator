@@ -24,8 +24,8 @@ test.describe(title, () => {
     // await page.click(".svd-grid-expand");
     await page.locator(".svc-question__content").click({ position: { x: 10, y: 10 } });
     await page.waitForTimeout(500);
-    await page.locator("div[id$='ariaTitle'][id^='sp']:has-text('General')").click();
-    await page.locator("div[id$='ariaTitle'][id^='sp']:has-text('Data')").click();
+    await page.locator("div[id$='ariaTitle'][id^='pg-sp']:has-text('General')").click();
+    await page.locator("div[id$='ariaTitle'][id^='pg-sp']:has-text('Data')").click();
 
     const buttonElement = page.locator(".svc-action-button.svc-link-value-button.svc-question-link__set-button");
     await compareScreenshot(page, buttonElement, "action-button-default.png");
@@ -44,8 +44,8 @@ test.describe(title, () => {
   test("Default value clear button", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 870 });
 
-    const generalTab = page.locator("div[id$='ariaTitle'][id^='sp']").filter({ hasText: "General" }).first();
-    const dataTab = page.locator("div[id$='ariaTitle'][id^='sp']").filter({ hasText: "Data" }).first();
+    const generalTab = page.locator("div[id$='ariaTitle'][id^='pg-sp']").filter({ hasText: "General" }).first();
+    const dataTab = page.locator("div[id$='ariaTitle'][id^='pg-sp']").filter({ hasText: "Data" }).first();
 
     await setJSON(page, {
       "pages": [

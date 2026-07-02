@@ -2839,6 +2839,7 @@ export class SurveyCreatorModel extends Base
     area = area || this.getSurveyInstanceCreatedArea(reason);
     const element = area === "property-grid" && model ? model.obj : undefined;
     const survey = this.createSurveyCore(json, area, element);
+    survey.idPrefix = this.getSurveyIdPrefix(area);
     if (reason !== "designer" && reason !== "preview" && reason !== "theme" && reason !== "property-grid" && reason !== "theme-tab:property-grid") {
       survey.fitToContainer = false;
       survey.applyTheme(designTabSurveyThemeJSON);
@@ -2902,6 +2903,11 @@ export class SurveyCreatorModel extends Base
     hash["modal-question-editor"] = "matrix-cell-question-popup-editor";
     const res = hash[reason];
     return !!res ? res : reason;
+  }
+  private getSurveyIdPrefix(area: string): string {
+    const words = (area || "").split(/[^a-zA-Z0-9]+/).filter(word => !!word);
+    if (words.length === 0) return "";
+    return words.map(word => word[0]).join("").toLowerCase() + "-";
   }
   protected createSurveyCore(json: any = {}, area: string, element: Base): SurveyModel {
     if (this.onSurveyInstanceSetupHandlers.isEmpty) return new SurveyModel(json);
