@@ -453,12 +453,12 @@ test("Check question converter selected item for customized subitems (json)", ()
   // create subitems from new items (the same type, different json)
   const booleans = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
   booleans.addSubitem(<any>{ name: "booleandefault", json: { type: "boolean" }, title: "Slider" });
-  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", renderAs: "radio" }, title: "Radio" });
-  booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", renderAs: "checkbox" }, title: "Checkbox" });
+  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", displayMode: "radio" }, title: "Radio" });
+  booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", displayMode: "checkbox" }, title: "Checkbox" });
 
   creator.JSON = {
     elements: [
-      { type: "boolean", name: "q1", renderAs: "radio" },
+      { type: "boolean", name: "q1", displayMode: "radio" },
     ]
   };
   const question = creator.survey.getQuestionByName("q1");
@@ -753,13 +753,13 @@ test("Check question converter with subitems (json)", (): any => {
 
   // create subitems from new items (the same type, different json)
   const booleans = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
-  booleans.addSubitem(<any>{ name: "booleandefault", json: { type: "boolean" }, title: "Slider" });
-  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", renderAs: "radio" }, title: "Radio" });
-  booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", renderAs: "checkbox" }, title: "Checkbox" });
+  booleans.addSubitem(<any>{ name: "booleansegmented", json: { type: "boolean" }, title: "Slider" });
+  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", displayMode: "radio" }, title: "Radio" });
+  booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", displayMode: "checkbox" }, title: "Checkbox" });
 
   creator.JSON = {
     elements: [
-      { type: "boolean", name: "q1", renderAs: "radio" },
+      { type: "boolean", name: "q1", displayMode: "radio" },
     ]
   };
   const question = creator.survey.getQuestionByName("q1");
@@ -774,18 +774,22 @@ test("Check question converter with subitems (json)", (): any => {
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   popup.show();
   const list = popup.contentComponentData.model;
+  expect(creator.survey.getQuestionByName("q1").displayMode).toBe("radio");
+  expect(creator.survey.getQuestionByName("q1").renderAs).toBe("default");
 
   const booleanAction = list.getActionById("boolean");
   const booleanCheckAction = booleanAction.items[2];
   booleanCheckAction.action();
   const questionConverted = creator.survey.getQuestionByName("q1");
-  expect(questionConverted.renderAs).toBe("checkbox");
+  expect(creator.survey.getQuestionByName("q1").displayMode).toBe("checkbox");
+  expect(creator.survey.getQuestionByName("q1").renderAs).toBe("default");
 
   popup.show();
   const booleanCheckAction2 = booleanAction.items[0];
   booleanCheckAction2.action();
   const questionConverted2 = creator.survey.getQuestionByName("q1");
-  expect(questionConverted2.renderAs).toBe("default");
+  expect(creator.survey.getQuestionByName("q1").displayMode).toBe("segmented");
+  expect(creator.survey.getQuestionByName("q1").renderAs).toBe("default");
 
   surveySettings.animationEnabled = true;
 });
@@ -927,12 +931,12 @@ test("Check question converter with subitems (types)", (): any => {
   // create subitems from new items (the same type, different json)
   const booleans = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
   booleans.addSubitem(<any>{ name: "booleandefault", json: { type: "boolean" }, title: "Slider" });
-  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", renderAs: "radio" }, title: "Radio" });
+  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", displayMode: "radio" }, title: "Radio" });
   booleans.addSubitem(<any>{ name: "radio", json: { type: "radiogroup" }, title: "Radiogroup" });
 
   creator.JSON = {
     elements: [
-      { type: "boolean", name: "q1", renderAs: "radio" },
+      { type: "boolean", name: "q1", displayMode: "radio" },
     ]
   };
   const question = creator.survey.getQuestionByName("q1");
@@ -1006,7 +1010,7 @@ test("Check question converter with single subitem (json)", (): any => {
 
   creator.JSON = {
     elements: [
-      { type: "boolean", name: "q1", renderAs: "radio" },
+      { type: "boolean", name: "q1", displayMode: "radio" },
     ]
   };
 
