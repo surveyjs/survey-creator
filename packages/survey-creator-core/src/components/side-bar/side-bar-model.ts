@@ -113,7 +113,7 @@ export class SidebarModel extends Base {
     return getLocString("pe.close");
   }
   public getPageById(id: string) {
-    return this.pages.filter(page => page.id === id)[0];
+    return this.pages.filter(page => page.pageId === id)[0];
   }
   public locStrsChanged(): void {
     super.locStrsChanged();
@@ -191,13 +191,13 @@ export class SidebarModel extends Base {
   public get activePage(): string { return this.getPropertyValue("activePage"); }
   public set activePage(val: string) {
     this.setPropertyValue("activePage", val);
-    this.setActivePage(this.pages.filter(page => page.id === val)[0]);
+    this.setActivePage(this.pages.filter(page => page.pageId === val)[0]);
   }
   public getActivePage(): SidebarPageModel {
     return this._activePage;
   }
   public setActivePage(newPage: SidebarPageModel): void {
-    if (!!this._activePage && this._activePage.id !== newPage.id && !!this._activePage.deactivateCallback) {
+    if (!!this._activePage && this._activePage.pageId !== newPage.pageId && !!this._activePage.deactivateCallback) {
       this._activePage.deactivateCallback();
     }
     this.pages.forEach(page => page.visible = false);

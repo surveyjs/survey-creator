@@ -39,7 +39,7 @@ export class SidebarComponent extends SurveyElementBase<ISidebarComponentProps, 
   renderElement(): React.JSX.Element {
     const style = { display: this.model.renderRoot ? "" : "none" };
     const containerStyle = { display: this.model.renderContainer ? "" : "none" };
-    const items = this.model.pages.map((page) => <SidebarPage page={page} key={page.id} />);
+    const items = this.model.pages.map((page) => <SidebarPage page={page} key={page.pageId} />);
     const headerArea = ReactElementFactory.Instance.createElement(this.model.header.component, { model: this.model.header.componentModel });
     let sideArea = null;
     if (this.model.sideAreaComponentName) {
