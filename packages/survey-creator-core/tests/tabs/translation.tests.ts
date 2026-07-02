@@ -125,6 +125,37 @@ test("create locales question", () => {
   surveyLocalization.supportedLocales = [];
 });
 
+test("Recreated strings survey uses a distinct element id space so React remounts it", () => {
+  const survey = new SurveyModel({ elements: [
+    { type: "text", name: "q1", title: "Q1" },
+    { type: "radiogroup", name: "q3", choices: ["Item 1", "Item 2", "Item 3"] }
+  ] });
+  const translation = new Translation(survey);
+  const collectRenderKeys = (s: SurveyModel): string[] => {
+    const keys: string[] = [];
+    (s.getAllQuestions().filter(q => q.getType() === "matrixdropdown") as QuestionMatrixDropdownModel[]).forEach(m => {
+      (<any>m).renderedTable.renderedRows.forEach((rr: any) => {
+        keys.push("row" + rr.id);
+        rr.cells.forEach((c: any) => keys.push("cell" + c.id));
+      });
+    });
+    return keys;
+  };
+  translation.reset();
+  const survey1 = translation.stringsSurvey;
+  const keys1 = collectRenderKeys(survey1);
+  // The translation editor's Apply handler (and showAllStrings, import, ...) calls reset(), which
+  // fully recreates the strings survey.
+  translation.reset();
+  const survey2 = translation.stringsSurvey;
+  expect(survey2).not.toBe(survey1);
+  const keys2 = collectRenderKeys(survey2);
+  // With deterministic per-survey ids the two instances emit identical row/cell ids, so React
+  // (which keys matrix rows/cells by id) reuses the stale lazy-rendered rows of the disposed survey
+  // and the cell textareas never render. Distinct id spaces make the keys differ and force a remount.
+  expect(keys1.length).toBeGreaterThan(0);
+  expect(keys2.some(k => keys1.indexOf(k) !== -1)).toBe(false);
+});
 test("stringsSurvey - one question in survey", () => {
   const survey = new SurveyModel({
     pages: [
