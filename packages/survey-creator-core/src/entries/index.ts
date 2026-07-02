@@ -79,6 +79,7 @@ export * from "../property-grid/values";
 export * from "../property-grid/search-manager";
 export * from "../property-grid/maskSettings";
 export * from "../property-grid/header-settings";
+export * from "../property-grid/boolean-display-mode";
 export { propertyGridCss } from "../property-grid-theme/property-grid";
 export * from "../questionconverter";
 export * from "../svgbundle";

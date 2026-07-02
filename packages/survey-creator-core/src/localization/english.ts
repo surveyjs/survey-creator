@@ -1275,12 +1275,13 @@ export var enStrings = {
       youtube: "YouTube"
     },
     displayMode: {
-      default: "Default",
+      segmented: "Segmented",
       buttons: "Buttons",
       dropdown: "Dropdown",
       radio: "Radio Buttons",
       checkbox: "Checkbox",
       switch: "Switch",
+      custom: "Custom",
     },
     rateColorMode: {
       default: "Default",
