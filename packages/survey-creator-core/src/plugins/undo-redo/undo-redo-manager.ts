@@ -50,7 +50,13 @@ export class UndoRedoManager {
     const lastTransaction = this._getCurrentTransaction();
     if (!lastTransaction || lastTransaction.actions.length == 0) return false;
     const lastAction = lastTransaction.actions[lastTransaction.actions.length - 1];
-    return lastAction.tryMerge(sender, propertyName, newValue);
+    const merged = lastAction.tryMerge(sender, propertyName, newValue);
+    if (merged && !!this.onTransactionMerged) {
+      // Plugins (e.g. collaborative-sync) may need to observe merged-into
+      // edits even though they do not push a new entry onto the stack.
+      this.onTransactionMerged(lastTransaction, sender, propertyName, newValue);
+    }
+    return merged;
   }
   private _ignoreChanges = false;
   private _isExecuting = false;
@@ -94,6 +100,7 @@ export class UndoRedoManager {
       // this.changesFinishedCallback(transaction.actions[0].getChanges(isUndo));
     }
   }
+
   canUndoRedoCallback() { }
   private transactionCounter = 0;
   startTransaction(name: string) {
@@ -111,6 +118,7 @@ export class UndoRedoManager {
     this._addTransaction(this._preparingTransaction);
     if (this.transactionCounter === 0) {
       this.notifyChangesFinished(this._preparingTransaction);
+      if (!!this.onTransactionFinished)this.onTransactionFinished(this._preparingTransaction, "do");
     }
     this._preparingTransaction = null;
   }
@@ -135,6 +143,7 @@ export class UndoRedoManager {
     this._currentTransactionIndex--;
     this.canUndoRedoCallback();
     this.notifyChangesFinished(currentTransaction, true);
+    if (!!this.onTransactionFinished)this.onTransactionFinished(currentTransaction, "undo");
   }
   canRedo() {
     return !!this._getNextTransaction();
@@ -150,6 +159,7 @@ export class UndoRedoManager {
     this._currentTransactionIndex++;
     this.canUndoRedoCallback();
     this.notifyChangesFinished(nextTransaction);
+    if (!!this.onTransactionFinished)this.onTransactionFinished(nextTransaction, "redo");
   }
   suspend() {
     this._ignoreChanges = true;
@@ -157,11 +167,44 @@ export class UndoRedoManager {
   resume() {
     this._ignoreChanges = false;
   }
+
+  // ----- Public hooks for sync / collaboration plugins -----
+
+  // Invoked when `tryMergeTransaction` folds a successive edit into the
+  // current top transaction. Plugins that mirror the stack to peers can
+  // observe these merge events without affecting local-stack semantics.
+  public onTransactionMerged: (transaction: Transaction, sender: Base, propertyName: string, newValue: any) => void;
+
+  // Invoked after every transaction lifecycle event:
+  //   - phase "do":    a fresh local transaction was just pushed
+  //   - phase "undo":  the cursor moved down past `transaction`
+  //   - phase "redo":  the cursor moved up onto `transaction`
+  // Used by sync plugins to broadcast the matching wire message.
+  public onTransactionFinished: (transaction: Transaction, phase: "do" | "undo" | "redo") => void;
+
+  // ----- Stack accessors for sync / collaboration plugins -----
+
+  // Direct access to the underlying transaction array. Plugins use this
+  // to mutate the stack (truncate, splice, replace) when applying remote
+  // operations. Outside of plugins prefer `canUndo()` / `canRedo()` /
+  // `undo()` / `redo()`.
+  public get transactions(): Transaction[] { return this._transactions; }
+
+  public get currentTransactionIndex(): number { return this._currentTransactionIndex; }
+  public set currentTransactionIndex(value: number) { this._currentTransactionIndex = value; }
+
   public changesFinishedCallback: (changes: UndoRedoAction[], isUndo: boolean) => void;
 }
 
 export class Transaction {
   constructor(private _name: string) { }
+
+  // Shared-stack identity for collaborative undo/redo. Set by sync
+  // plugins (e.g. `UndoRedoSyncPlugin`) on every freshly-pushed
+  // transaction so peers can address it across the wire. When no plugin
+  // is attached, ids stay empty and the local stack works exactly as
+  // before.
+  public id: string = "";
 
   private _actions: UndoRedoAction[] = [];
 
