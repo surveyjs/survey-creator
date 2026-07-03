@@ -812,7 +812,7 @@ test("Show property grid placeholder on removing all elements, #7409", () => {
       designerPlugin.activateSidebar(true);
     }
   });
-  const placeHolderId = designerPlugin["propertyGridPlaceholderPage"].pageId;
+  const placeHolderId = designerPlugin["propertyGridPlaceholderPage"].id;
   expect(creator.sidebar.activePage).toBe(placeHolderId);
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   expect(creator.sidebar.activePage).not.toBe(placeHolderId);
