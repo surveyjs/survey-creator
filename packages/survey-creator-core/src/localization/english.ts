@@ -1276,7 +1276,12 @@ export var enStrings = {
     },
     displayMode: {
       buttons: "Buttons",
-      dropdown: "Dropdown"
+      dropdown: "Dropdown",
+      segmented: "Segmented",
+      radio: "Radio Buttons",
+      checkbox: "Checkbox",
+      switch: "Switch",
+      custom: "Custom",
     },
     rateColorMode: {
       default: "Default",

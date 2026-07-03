@@ -426,6 +426,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   boolean: {
     properties: [
+      "displayMode",
       "label",
       "labelTrue",
       "labelFalse",
