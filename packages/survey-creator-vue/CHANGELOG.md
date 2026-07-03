@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.0.0-beta.8 (2026-07-01)
+
 ## 3.0.0-beta.7 (2026-06-19)
 ### [2.5.32](https://github.com/surveyjs/survey-creator/compare/v2.5.31...v2.5.32) (2026-07-01)
 
