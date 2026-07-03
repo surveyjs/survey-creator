@@ -774,22 +774,23 @@ test("Check question converter with subitems (json)", (): any => {
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   popup.show();
   const list = popup.contentComponentData.model;
-  expect(creator.survey.getQuestionByName("q1").displayMode).toBe("radio");
-  expect(creator.survey.getQuestionByName("q1").renderAs).toBe("default");
+  const q1 = creator.survey.getQuestionByName("q1");
+  expect(q1.displayMode).toBe("radio");
+  expect(q1.renderAs).toBe("default");
 
   const booleanAction = list.getActionById("boolean");
   const booleanCheckAction = booleanAction.items[2];
   booleanCheckAction.action();
   const questionConverted = creator.survey.getQuestionByName("q1");
-  expect(creator.survey.getQuestionByName("q1").displayMode).toBe("checkbox");
-  expect(creator.survey.getQuestionByName("q1").renderAs).toBe("default");
+  expect(questionConverted.displayMode).toBe("checkbox");
+  expect(questionConverted.renderAs).toBe("default");
 
   popup.show();
   const booleanCheckAction2 = booleanAction.items[0];
   booleanCheckAction2.action();
   const questionConverted2 = creator.survey.getQuestionByName("q1");
-  expect(creator.survey.getQuestionByName("q1").displayMode).toBe("segmented");
-  expect(creator.survey.getQuestionByName("q1").renderAs).toBe("default");
+  expect(questionConverted2.displayMode).toBe("segmented");
+  expect(questionConverted2.renderAs).toBe("default");
 
   surveySettings.animationEnabled = true;
 });
