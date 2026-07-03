@@ -123,6 +123,17 @@ export interface ElementGetExpandCollapseStateEvent {
   reason: ElementGetExpandCollapseStateEventReason;
 }
 
+export interface ShowElementDescriptionInDesignerEvent {
+  /**
+   * A survey element (question, panel, or page) whose description you can show or hide on the design surface.
+   */
+  element: Question | PanelModel | PageModel;
+  /**
+   * A Boolean value that specifies whether the element's description with an empty text is displayed on the design surface. Set this parameter to `false` to hide the empty description for the current `element` or to `true` to display it.
+   */
+  show: boolean;
+}
+
 export interface ElementAllowOperationsEvent {
   /**
    * A survey element (question or panel) for which you can disable user interactions.
