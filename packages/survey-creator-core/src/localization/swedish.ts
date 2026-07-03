@@ -2411,7 +2411,17 @@ export let svStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Knappar",
       // [Auto-translated] "Dropdown"
-      dropdown: "Rullgardinsmeny"
+      dropdown: "Rullgardinsmeny",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmenterad",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Radioknappar",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Kryssruta",
+      // [Auto-translated] "Switch"
+      switch: "Switch",
+      // [Auto-translated] "Custom"
+      custom: "Sedvänja"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

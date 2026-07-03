@@ -2410,7 +2410,17 @@ export var nbStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Knapper",
       // [Auto-translated] "Dropdown"
-      dropdown: "Rullegardinmeny"
+      dropdown: "Rullegardinmeny",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentert",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Radioknapper",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Avkrysningsboks",
+      // [Auto-translated] "Switch"
+      switch: "Bytte",
+      // [Auto-translated] "Custom"
+      custom: "Skikk"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

@@ -2410,7 +2410,17 @@ export var persianStrings = {
       // [Auto-translated] "Buttons"
       buttons: "دکمه",
       // [Auto-translated] "Dropdown"
-      dropdown: "کشویی"
+      dropdown: "کشویی",
+      // [Auto-translated] "Segmented"
+      segmented: "بخش بندی شده",
+      // [Auto-translated] "Radio Buttons"
+      radio: "دکمه های رادیویی",
+      // [Auto-translated] "Checkbox"
+      checkbox: "چک باکس",
+      // [Auto-translated] "Switch"
+      switch: "تعویض",
+      // [Auto-translated] "Custom"
+      custom: "عرف"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

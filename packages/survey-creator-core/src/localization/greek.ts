@@ -2410,7 +2410,17 @@ export var grStrings = {
       // "Buttons"
       buttons: "Κουμπιά",
       // "Dropdown"
-      dropdown: "Αναπτυσσόμενο μενού"
+      dropdown: "Αναπτυσσόμενο μενού",
+      // [Auto-translated] "Segmented"
+      segmented: "Τμηματοποιημένο",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Κουμπιά επιλογής",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Πλαίσιο ελέγχου",
+      // [Auto-translated] "Switch"
+      switch: "Διακόπτης",
+      // [Auto-translated] "Custom"
+      custom: "Εθιμο"
     },
     rateColorMode: {
       // "Default"

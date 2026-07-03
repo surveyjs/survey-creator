@@ -2411,7 +2411,17 @@ export var koreanStrings = {
       // [Auto-translated] "Buttons"
       buttons: "단추",
       // [Auto-translated] "Dropdown"
-      dropdown: "드롭다운(Dropdown)"
+      dropdown: "드롭다운(Dropdown)",
+      // [Auto-translated] "Segmented"
+      segmented: "분할",
+      // [Auto-translated] "Radio Buttons"
+      radio: "라디오 버튼",
+      // [Auto-translated] "Checkbox"
+      checkbox: "체크박스",
+      // [Auto-translated] "Switch"
+      switch: "스위치",
+      // [Auto-translated] "Custom"
+      custom: "관습"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

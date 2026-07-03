@@ -2410,7 +2410,17 @@ export var indonesianStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Tombol",
       // [Auto-translated] "Dropdown"
-      dropdown: "Tarik-turun"
+      dropdown: "Tarik-turun",
+      // [Auto-translated] "Segmented"
+      segmented: "Tersegmentasi",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Tombol Radio",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Kotak centang",
+      // [Auto-translated] "Switch"
+      switch: "Beralih",
+      // [Auto-translated] "Custom"
+      custom: "Kustom"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

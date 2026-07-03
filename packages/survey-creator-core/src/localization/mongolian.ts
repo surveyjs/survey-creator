@@ -2410,7 +2410,17 @@ export var mnStrings = {
       // "Buttons"
       buttons: "Товчнууд",
       // "Dropdown"
-      dropdown: "Доош задрах"
+      dropdown: "Доош задрах",
+      // [Auto-translated] "Segmented"
+      segmented: "Сегментчилсэн",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Радио Товчлуурууд",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Шалгах хуудас",
+      // [Auto-translated] "Switch"
+      switch: "Шилж",
+      // [Auto-translated] "Custom"
+      custom: "Custom"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

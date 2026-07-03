@@ -2410,7 +2410,17 @@ export var catalanTranslation = {
       // "Buttons"
       buttons: "Botomes",
       // [Auto-translated] "Dropdown"
-      dropdown: "Menú desplegable"
+      dropdown: "Menú desplegable",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentat",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Botons de ràdio",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Casella de marcar",
+      // [Auto-translated] "Switch"
+      switch: "Canvi",
+      // [Auto-translated] "Custom"
+      custom: "Costum"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

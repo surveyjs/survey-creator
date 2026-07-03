@@ -2410,7 +2410,17 @@ export var msStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Butang",
       // [Auto-translated] "Dropdown"
-      dropdown: "Dropdown"
+      dropdown: "Dropdown",
+      // [Auto-translated] "Segmented"
+      segmented: "Bersegmen",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Butang Radio",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Kotak semak",
+      // [Auto-translated] "Switch"
+      switch: "Tukar",
+      // [Auto-translated] "Custom"
+      custom: "Tersuai"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

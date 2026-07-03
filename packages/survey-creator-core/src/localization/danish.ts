@@ -2411,7 +2411,17 @@ export var danishStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Knapper",
       // [Auto-translated] "Dropdown"
-      dropdown: "Rullemenu"
+      dropdown: "Rullemenu",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmenteret",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Radioknapper",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Afkrydsningsboks",
+      // [Auto-translated] "Switch"
+      switch: "Switch",
+      // [Auto-translated] "Custom"
+      custom: "Skik"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

@@ -2410,7 +2410,17 @@ export var nlStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Knopen",
       // [Auto-translated] "Dropdown"
-      dropdown: "Vervolgkeuzemenu"
+      dropdown: "Vervolgkeuzemenu",
+      // [Auto-translated] "Segmented"
+      segmented: "Gesegmenteerd",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Radioknoppen",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Selectievakje",
+      // [Auto-translated] "Switch"
+      switch: "Switch",
+      // [Auto-translated] "Custom"
+      custom: "Gewoonte"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

@@ -2410,7 +2410,17 @@ export var czStrings = {
       // "Buttons"
       buttons: "Tlačítka",
       // "Dropdown"
-      dropdown: "Rozbalovací nabídka"
+      dropdown: "Rozbalovací nabídka",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentované",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Tlačítka rádia",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Zaškrtávací políčko",
+      // [Auto-translated] "Switch"
+      switch: "Přepnutí",
+      // [Auto-translated] "Custom"
+      custom: "Zvyk"
     },
     rateColorMode: {
       // "Default"

@@ -2410,7 +2410,17 @@ export var frenchTranslation = {
       // [Auto-translated] "Buttons"
       buttons: "Boutons",
       // [Auto-translated] "Dropdown"
-      dropdown: "Liste déroulante"
+      dropdown: "Liste déroulante",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmenté",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Boutons radio",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Case à cocher",
+      // [Auto-translated] "Switch"
+      switch: "Changement",
+      // [Auto-translated] "Custom"
+      custom: "Coutumes"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

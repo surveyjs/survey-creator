@@ -2411,7 +2411,17 @@ export var polishStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Przyciski",
       // [Auto-translated] "Dropdown"
-      dropdown: "Lista rozwijana"
+      dropdown: "Lista rozwijana",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentowane",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Przyciski radiowe",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Pole do odhaczenia",
+      // [Auto-translated] "Switch"
+      switch: "Zmiana",
+      // [Auto-translated] "Custom"
+      custom: "Zwyczaj"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

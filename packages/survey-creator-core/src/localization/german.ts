@@ -2410,7 +2410,17 @@ export var germanTranslation = {
       // [Auto-translated] "Buttons"
       buttons: "Tasten",
       // [Auto-translated] "Dropdown"
-      dropdown: "Dropdown-Liste"
+      dropdown: "Dropdown-Liste",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentiert",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Funkknöpfe",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Checkkästchen",
+      // [Auto-translated] "Switch"
+      switch: "Wechsel",
+      // [Auto-translated] "Custom"
+      custom: "Gepflogenheit"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

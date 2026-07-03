@@ -2410,7 +2410,17 @@ export var slStrings = {
       // "Buttons"
       buttons: "Tlačítka",
       // "Dropdown"
-      dropdown: "Rozbalovací nabídka"
+      dropdown: "Rozbalovací nabídka",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentirani",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Radijski gumbi",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Potrditveno polje",
+      // [Auto-translated] "Switch"
+      switch: "Preklop",
+      // [Auto-translated] "Custom"
+      custom: "Običaj"
     },
     rateColorMode: {
       // "Default"

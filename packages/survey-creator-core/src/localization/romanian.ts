@@ -2410,7 +2410,17 @@ export const roStrings = {
       // "Buttons"
       buttons: "Butoane",
       // [Auto-translated] "Dropdown"
-      dropdown: "Derulare"
+      dropdown: "Derulare",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentat",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Butoane radio",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Bifă",
+      // [Auto-translated] "Switch"
+      switch: "Schimbare",
+      // [Auto-translated] "Custom"
+      custom: "Obiceiuri"
     },
     rateColorMode: {
       // "Default"

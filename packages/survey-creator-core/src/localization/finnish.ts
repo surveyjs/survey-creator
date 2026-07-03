@@ -2410,7 +2410,17 @@ export var fiStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Painikkeet",
       // [Auto-translated] "Dropdown"
-      dropdown: "Avattava valikko"
+      dropdown: "Avattava valikko",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentoitu",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Radiopainikkeet",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Valintaruutu",
+      // [Auto-translated] "Switch"
+      switch: "Kytkin",
+      // [Auto-translated] "Custom"
+      custom: "Tapana"
     },
     rateColorMode: {
       // "Default"
