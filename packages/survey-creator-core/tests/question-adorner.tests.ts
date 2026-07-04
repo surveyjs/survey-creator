@@ -5,6 +5,25 @@ import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { QuestionToolboxItem } from "../src/toolbox";
 
+test("Collapse action updates when the adorner is re-attached after expandCollapseButtonVisibility changes", (): any => {
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "never";
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  // Force the (lazily built, cached) top action container to be created while the button is off.
+  adorner.topActionContainer;
+  expect(adorner.getActionById("collapse")?.visible).toBeFalsy();
+
+  // The button becomes visible and the same adorner model is reused for another element - as a
+  // React component now is, because element ids are deterministic across a JSON reload.
+  creator.expandCollapseButtonVisibility = "onhover";
+  creator.JSON = { elements: [{ type: "text", name: "q2" }] };
+  const q2 = creator.survey.getQuestionByName("q2");
+  adorner.attachToUI(q2);
+
+  expect(adorner.getActionById("collapse").visible).toBe(true);
+});
 test("Check required action", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

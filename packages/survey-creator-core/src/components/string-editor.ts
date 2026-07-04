@@ -300,9 +300,13 @@ export class StringEditorViewModelBase extends Base {
   };
 
   public setLocString(locString: LocalizableString) {
+    const locStringChanged = this.locString !== locString;
     this.removeCreatorEvents();
     this.connector?.onDoActivate.remove(this.activate);
     this.locString = locString;
+    if (locStringChanged) {
+      this.resetPropertyValue("placeholderValue");
+    }
     this.connector = StringEditorConnector.get(locString);
     this.connector.onDoActivate.add(this.activate);
     this.addCreatorEvents();

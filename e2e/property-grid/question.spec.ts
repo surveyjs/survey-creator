@@ -38,7 +38,7 @@ test.describe(title, () => {
     await setJSON(page, json);
 
     const question1 = page.locator("[data-name=\"question1\"]");
-    const choicesTab = page.locator("div[id$=ariaTitle][id^=sp]").getByText("Rating Values", { exact: true });
+    const choicesTab = page.locator("div[id$=ariaTitle][id^=pg-sp]").getByText("Rating Values", { exact: true });
     const items = page.locator("[data-name=\"rateValues\"]");
 
     await question1.click();

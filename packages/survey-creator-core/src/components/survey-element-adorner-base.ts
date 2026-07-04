@@ -188,12 +188,15 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected createTopActionContainer(): ActionContainer {
     const actionContainer = new ActionContainer();
     actionContainer.sizeMode = "small";
-    if (this.creator.expandCollapseButtonVisibility != "never") {
-      actionContainer.setActionsAppearance({ style: "brand", size: "xx-small", mode: "quaternary" });
-      actionContainer.setItems([this.expandCollapseAction]);
-      actionContainer.containerCss = "svc-survey-element-top-toolbar";
-    }
+    actionContainer.setActionsAppearance({ style: "brand", size: "xx-small", mode: "quaternary" });
+    actionContainer.containerCss = "svc-survey-element-top-toolbar";
+    this.updateTopActionContainer(actionContainer);
     return actionContainer;
+  }
+  protected updateTopActionContainer(container: ActionContainer = this.topActionContainerValue): void {
+    if (!container) return;
+    const showCollapse = this.creator.expandCollapseButtonVisibility != "never";
+    container.setItems(showCollapse ? [this.expandCollapseAction] : []);
   }
 
   protected createActionContainer(): SurveyElementActionContainer {
@@ -337,6 +340,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.actionContainer.allowResponsiveness();
       }
       this.updateActionsContainer(surveyElement);
+      this.updateTopActionContainer();
       this.updateActionsProperties();
       surveyElement.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, this);
     }

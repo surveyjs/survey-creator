@@ -819,7 +819,7 @@ test.describe(title, () => {
 
     await page.locator(".sd-table__row .svc-matrix-cell .sv-string-editor").first().click();
     await page.locator(".sd-table__row .svc-matrix-cell .sv-string-editor").first().pressSequentially("Row header");
-    await page.locator("div[id$=ariaTitle][id^=sp].spg-title").first().click();
+    await page.locator("div[id$=ariaTitle][id^=pg-sp].spg-title").first().click();
     await page.locator("input.sd-formbox__input").first().click();
     await page.keyboard.press("Control+a");
     await page.keyboard.press("Delete");
