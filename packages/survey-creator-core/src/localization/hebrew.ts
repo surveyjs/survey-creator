@@ -2410,7 +2410,17 @@ export var hebrewStrings = {
       // "Buttons"
       buttons: "כפתורים",
       // "Dropdown"
-      dropdown: "רשימה נפתחת"
+      dropdown: "רשימה נפתחת",
+      // [Auto-translated] "Segmented"
+      segmented: "מקוטע",
+      // [Auto-translated] "Radio Buttons"
+      radio: "כפתורי רדיו",
+      // [Auto-translated] "Checkbox"
+      checkbox: "תיבת סימון",
+      // [Auto-translated] "Switch"
+      switch: "מתג",
+      // [Auto-translated] "Custom"
+      custom: "מנהג"
     },
     rateColorMode: {
       // "Default"

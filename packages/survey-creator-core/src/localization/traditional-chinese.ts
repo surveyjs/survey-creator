@@ -2411,7 +2411,17 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Buttons"
       buttons: "按鈕",
       // [Auto-translated] "Dropdown"
-      dropdown: "下拉清單"
+      dropdown: "下拉清單",
+      // [Auto-translated] "Segmented"
+      segmented: "分段式",
+      // [Auto-translated] "Radio Buttons"
+      radio: "無線電按鈕",
+      // [Auto-translated] "Checkbox"
+      checkbox: "勾選框",
+      // [Auto-translated] "Switch"
+      switch: "切換",
+      // [Auto-translated] "Custom"
+      custom: "習俗"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

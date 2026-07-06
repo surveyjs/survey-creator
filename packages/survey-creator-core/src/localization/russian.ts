@@ -2410,7 +2410,17 @@ export var ruStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Кнопки",
       // [Auto-translated] "Dropdown"
-      dropdown: "Выпадающий список"
+      dropdown: "Выпадающий список",
+      // [Auto-translated] "Segmented"
+      segmented: "Сегментированная",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Радиокнопки",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Чекбокс",
+      // [Auto-translated] "Switch"
+      switch: "Переключатель",
+      // [Auto-translated] "Custom"
+      custom: "Обычай"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

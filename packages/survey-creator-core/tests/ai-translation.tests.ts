@@ -1,5 +1,30 @@
+import { settings, surveyLocalization } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 
+test("startMachineTranslationTo passes the default locale name into onMachineTranslate options", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1", title: "Title" }]
+  };
+  let fromLocale: string = undefined;
+  creator.onMachineTranslate.add((sender, options) => {
+    fromLocale = options.fromLocale;
+    options.callback(options.strings.map(str => options.toLocale + ": " + str));
+  });
+  // By default the survey-core default locale is used
+  creator.startMachineTranslationTo(["de"]);
+  expect(fromLocale, "default locale name is not set").toBe(surveyLocalization.defaultLocale);
+
+  // A configured default locale name is passed as the source locale
+  settings.localization.defaultLocaleName = "en-GB";
+  try {
+    creator.JSON = { elements: [{ type: "text", name: "q2", title: "Title2" }] };
+    creator.startMachineTranslationTo(["fr"]);
+    expect(fromLocale, "configured default locale name").toBe("en-GB");
+  } finally {
+    settings.localization.defaultLocaleName = "default";
+  }
+});
 test("Translate untranslated strings", () => {
   const creator = new CreatorTester();
   creator.JSON = {

@@ -2410,7 +2410,17 @@ export var bgStrings = {
       // "Buttons"
       buttons: "Бутони",
       // "Dropdown"
-      dropdown: "Падащо меню"
+      dropdown: "Падащо меню",
+      // [Auto-translated] "Segmented"
+      segmented: "Сегментирани",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Радио бутони",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Отметка",
+      // [Auto-translated] "Switch"
+      switch: "Превключване",
+      // [Auto-translated] "Custom"
+      custom: "Обичай"
     },
     rateColorMode: {
       // "Default"

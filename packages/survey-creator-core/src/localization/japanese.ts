@@ -2410,7 +2410,17 @@ export var jaStrings = {
       // [Auto-translated] "Buttons"
       buttons: "ボタン",
       // [Auto-translated] "Dropdown"
-      dropdown: "ドロップダウン"
+      dropdown: "ドロップダウン",
+      // [Auto-translated] "Segmented"
+      segmented: "セグメント化",
+      // [Auto-translated] "Radio Buttons"
+      radio: "ラジオボタン",
+      // [Auto-translated] "Checkbox"
+      checkbox: "チェックボックス",
+      // [Auto-translated] "Switch"
+      switch: "スイッチ",
+      // [Auto-translated] "Custom"
+      custom: "習慣"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

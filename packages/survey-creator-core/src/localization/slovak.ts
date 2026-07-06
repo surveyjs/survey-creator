@@ -2410,7 +2410,17 @@ export var skStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Tlačidlá",
       // [Auto-translated] "Dropdown"
-      dropdown: "Rozbaľovací zoznam"
+      dropdown: "Rozbaľovací zoznam",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentované",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Tlačidlá rádia",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Zaškrtávacie políčko",
+      // [Auto-translated] "Switch"
+      switch: "Prepínač",
+      // [Auto-translated] "Custom"
+      custom: "Zvyk"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

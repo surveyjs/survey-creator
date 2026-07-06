@@ -2410,7 +2410,17 @@ export var arStrings = {
       // [Auto-translated] "Buttons"
       buttons: "ازرار",
       // [Auto-translated] "Dropdown"
-      dropdown: "القائمة المنسدلة"
+      dropdown: "القائمة المنسدلة",
+      // [Auto-translated] "Segmented"
+      segmented: "مقسم",
+      // [Auto-translated] "Radio Buttons"
+      radio: "أزرار الراديو",
+      // [Auto-translated] "Checkbox"
+      checkbox: "صندوق الاختيار",
+      // [Auto-translated] "Switch"
+      switch: "التبديل",
+      // [Auto-translated] "Custom"
+      custom: "العرف"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

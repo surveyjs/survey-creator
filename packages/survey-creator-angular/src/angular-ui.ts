@@ -78,7 +78,6 @@ export * from "./custom-questions/color-item.component";
 export * from "./custom-questions/color.component";
 export * from "./custom-questions/file.component";
 export * from "./custom-questions/file-editor-button.component";
-export * from "./custom-questions/boolean-switch.component";
 export * from "./question-banner.component";
 export * from "./question-element-content.component";
 export * from "./page-element-content.component";

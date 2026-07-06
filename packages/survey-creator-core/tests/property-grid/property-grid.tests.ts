@@ -51,6 +51,7 @@ import {
   PropertyGridValueEditorBase
 } from "../../src/property-grid/values";
 import { PropertyGridEditorMatrixPages, PropertyGridEditorMatrixRateValues } from "../../src/property-grid/matrices";
+import { PropertyGridEditorBooleanDisplayMode } from "../../src/property-grid/boolean-display-mode";
 import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyQuestionEditorDefinition, defaultPropertyGridDefinition } from "../../src/question-editor/definition";
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
@@ -132,6 +133,26 @@ test("boolean property editor (boolean/switch)", () => {
   expect(isRequiredQuestion.value).toEqual(true); //"isRequired is true now");
   isRequiredQuestion.value = false;
   expect(question.isRequired).toEqual(false); //"isRequired is false again - two way bindings"
+});
+test("boolean displayMode property editor", () => {
+  const question = new QuestionBooleanModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const displayModeQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("displayMode");
+  expect(displayModeQuestion.getType()).toEqual("dropdown");
+  expect(displayModeQuestion.choices).toHaveLength(4);
+  expect(displayModeQuestion.choices.map(c => c.value)).toEqual(["segmented", "radio", "checkbox", "switch"]);
+  expect(displayModeQuestion.value).toEqual("segmented");
+
+  question.displayMode = "custom";
+  PropertyGridEditorCollection.clearHash();
+  const propertyGridCustom = new PropertyGridModelTester(question);
+  const displayModeQuestionCustom = <QuestionDropdownModel>propertyGridCustom.survey.getQuestionByName("displayMode");
+  expect(displayModeQuestionCustom.choices).toHaveLength(5);
+  expect(displayModeQuestionCustom.choices.map(c => c.value)).toEqual(["segmented", "radio", "checkbox", "switch", "custom"]);
+  expect(displayModeQuestionCustom.value).toEqual("custom");
+
+  const prop = Serializer.findProperty("boolean", "displayMode");
+  expect(PropertyGridEditorCollection.getEditor(prop)).toBeInstanceOf(PropertyGridEditorBooleanDisplayMode);
 });
 test("dropdown property editor", () => {
   var question = new QuestionTextModel("q1");
@@ -3534,7 +3555,8 @@ test("property with boolean type and two choices", () => {
   const propertyGrid = new PropertyGridModelTester(matrix);
   const columnLayoutQuestion = <QuestionBooleanModel>propertyGrid.survey.getQuestionByName("columnLayout");
   expect(columnLayoutQuestion.getType()).toBe("boolean");
-  expect(columnLayoutQuestion.renderAs).toBe("checkbox");
+  expect(columnLayoutQuestion.displayMode).toBe("checkbox");
+  expect(columnLayoutQuestion.renderAs).toBe("default");
   expect(columnLayoutQuestion.valueTrue).toBe("horizontal");
   expect(columnLayoutQuestion.valueFalse).toBe("vertical");
   expect(columnLayoutQuestion.labelTrue).toBe("Horizontal");

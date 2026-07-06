@@ -2410,7 +2410,17 @@ export var hrStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Gumbe",
       // [Auto-translated] "Dropdown"
-      dropdown: "Padajući izbornik"
+      dropdown: "Padajući izbornik",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentirani",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Radio tipke",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Kvačica",
+      // [Auto-translated] "Switch"
+      switch: "Prekidač",
+      // [Auto-translated] "Custom"
+      custom: "Običaj"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

@@ -61,11 +61,15 @@ export function showConfirmDialog(creator: SurveyCreatorModel, options: IConfirm
   const applyAction = dialogModel.footerToolbar.getActionById("apply");
   const cancelAction = dialogModel.footerToolbar.getActionById("cancel");
   applyAction.title = options.applyText;
-  applyAction.appearance.style = options.category === "danger" ? "alert" : "neutral";
-  applyAction.appearance.mode = options.category === "danger" ? "secondary" : "primary";
+  applyAction.appearance = {
+    style: options.category === "danger" ? "alert" : "neutral",
+    mode: options.category === "danger" ? "secondary" : "primary",
+  };
   cancelAction.title = options.cancelText;
-  cancelAction.appearance.style = "neutral";
-  cancelAction.appearance.mode = "secondary";
+  cancelAction.appearance = {
+    style: "neutral",
+    mode: "secondary",
+  };
 
   return dialogModel;
 }

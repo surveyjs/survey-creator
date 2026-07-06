@@ -2410,7 +2410,17 @@ export const thStrings = {
       // "Buttons"
       buttons: "ปุ่ม",
       // "Dropdown"
-      dropdown: "ดรอปดาวน์"
+      dropdown: "ดรอปดาวน์",
+      // [Auto-translated] "Segmented"
+      segmented: "แบ่งกลุ่ม",
+      // [Auto-translated] "Radio Buttons"
+      radio: "ปุ่มตัวเลือก",
+      // [Auto-translated] "Checkbox"
+      checkbox: "ช่องทําเครื่องหมาย",
+      // [Auto-translated] "Switch"
+      switch: "สวิตซ์",
+      // [Auto-translated] "Custom"
+      custom: "กําหนดเอง"
     },
     rateColorMode: {
       // "Default"

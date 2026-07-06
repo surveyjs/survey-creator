@@ -2410,7 +2410,17 @@ export var turkishStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Düğme",
       // [Auto-translated] "Dropdown"
-      dropdown: "Açılır menü"
+      dropdown: "Açılır menü",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentli",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Radyo Düğmeleri",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Kontrol kutusu",
+      // [Auto-translated] "Switch"
+      switch: "Switch",
+      // [Auto-translated] "Custom"
+      custom: "Özel Yapı"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

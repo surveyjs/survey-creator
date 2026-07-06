@@ -79,6 +79,7 @@ export * from "../property-grid/values";
 export * from "../property-grid/search-manager";
 export * from "../property-grid/maskSettings";
 export * from "../property-grid/header-settings";
+export * from "../property-grid/boolean-display-mode";
 export { propertyGridCss } from "../property-grid-theme/property-grid";
 export * from "../questionconverter";
 export * from "../svgbundle";
@@ -131,7 +132,6 @@ import "../components/side-bar/side-bar.scss";
 import "../components/side-bar/tab-control.scss";
 import "../property-grid-theme/property-grid.scss";
 import "../utils/layout.scss";
-import "../custom-questions/boolean-switch.scss";
 import "../utils/confirmation.scss";
 
 import "../presets-theme/presets.scss";

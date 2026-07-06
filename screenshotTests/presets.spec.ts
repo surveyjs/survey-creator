@@ -30,7 +30,7 @@ test.describe(title, () => {
       const customPreset = { ...(window as any).SurveyCreatorUIPreset.Basic, name: "Custom Preset" };
       presetsPlugin.addPreset(customPreset);
     });
-    await page.setViewportSize({ width: 1440, height: 1507 });
+    await page.setViewportSize({ width: 1440, height: 1505 });
     await showPresets(page);
   });
 
@@ -44,6 +44,10 @@ test.describe(title, () => {
     await page.locator(".sd-menu-list__container").filter({ visible: true }).locator(".sd-menu-item").nth(2).hover();
     await compareScreenshot(page, page.locator(".sd-menu-list__container"), "presets-menu.png");
     await compareScreenshot(page, page.locator(".sps-navigation-bar"), "presets-menu-position.png");
+
+    await page.keyboard.press("Escape");
+    await page.getByText("Norsk").click();
+    await compareScreenshot(page, page.locator(".sps-navigation-bar"), "presets-menu-status.png");
   });
 
   test("Check presets list", async ({ page }) => {
@@ -231,7 +235,7 @@ test.describe(title, () => {
   });
 
   test("Presets small screen", async ({ page }) => {
-    await page.setViewportSize({ width: 900, height: 1507 });
+    await page.setViewportSize({ width: 900, height: 1505 });
     expect(await page.locator(".sps-page__title").getByText("Languages")).toBeVisible();
     await compareScreenshot(page, page.locator(".sps-body"), "presets-small-screen.png", {
       mask: await page.locator(".sd-selectbase__column:nth-child(3) .sd-item:not(:first-of-type)").all()

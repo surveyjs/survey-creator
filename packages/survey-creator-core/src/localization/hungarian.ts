@@ -2410,7 +2410,17 @@ export var huStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Gombok",
       // [Auto-translated] "Dropdown"
-      dropdown: "Legördülő menü"
+      dropdown: "Legördülő menü",
+      // [Auto-translated] "Segmented"
+      segmented: "Szegmentált",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Rádiógombok",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Jelölőnégyzet",
+      // [Auto-translated] "Switch"
+      switch: "Kapcsoló",
+      // [Auto-translated] "Custom"
+      custom: "Egyedi"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

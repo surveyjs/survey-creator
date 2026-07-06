@@ -40,7 +40,7 @@ svc-tab-designer {
   display: flex;
   padding-block-start: var(--sjs2-spacing-x200, 16px);
   padding-inline-end: var(--sjs2-spacing-x300, 24px);
-  padding-block-end:  var(--sjs2-spacing-x100);
+  padding-block-end: var(--sjs2-spacing-x100);
   padding-inline-start: var(--sjs2-spacing-x300, 24px);
 
   flex-direction: column-reverse;
@@ -220,5 +220,10 @@ svc-tab-designer {
       --sd-action-disabled-title-color: var(--sjs2-color-component-action-neutral-tertiary-default-label, #1c1b20);
       --sd-action-disabled-icon-color: var(--sjs2-color-component-action-neutral-tertiary-default-icon, #424146);
     }
+  }
+
+  .sd-formbox {
+    --sjs2-color-component-formbox-hovered-bg: var(--sjs2-color-component-formbox-default-bg);
+    --sjs2-border-effect-component-formbox-hovered: var(--sjs2-border-effect-component-formbox-default);
   }
 }

@@ -2410,7 +2410,17 @@ export var portugueseTranslation = {
       // "Buttons"
       buttons: "Botões",
       // "Dropdown"
-      dropdown: "Suspenso"
+      dropdown: "Suspenso",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentado",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Botões de Rádio",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Caixa de seleção",
+      // [Auto-translated] "Switch"
+      switch: "Troca",
+      // [Auto-translated] "Custom"
+      custom: "Costume"
     },
     rateColorMode: {
       // [Auto-translated] "Default"

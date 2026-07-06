@@ -2410,7 +2410,17 @@ export var htStrings = {
       // "Buttons"
       buttons: "Bouton",
       // "Dropdown"
-      dropdown: "depoze"
+      dropdown: "depoze",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmente",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Bouton radyo",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Kaz chèk",
+      // [Auto-translated] "Switch"
+      switch: "Chanje",
+      // [Auto-translated] "Custom"
+      custom: "Koutim"
     },
     rateColorMode: {
       // "Default"

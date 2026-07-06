@@ -2410,7 +2410,17 @@ export var italianTranslation = {
       // [Auto-translated] "Buttons"
       buttons: "Pulsanti",
       // [Auto-translated] "Dropdown"
-      dropdown: "Menù a discesa"
+      dropdown: "Menù a discesa",
+      // [Auto-translated] "Segmented"
+      segmented: "Segmentato",
+      // [Auto-translated] "Radio Buttons"
+      radio: "Pulsanti radio",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Casella da spuntare",
+      // [Auto-translated] "Switch"
+      switch: "Cambio",
+      // [Auto-translated] "Custom"
+      custom: "Consuetudine"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
