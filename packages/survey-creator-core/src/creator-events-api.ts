@@ -123,13 +123,13 @@ export interface ElementGetExpandCollapseStateEvent {
   reason: ElementGetExpandCollapseStateEventReason;
 }
 
-export interface ShowElementDescriptionInDesignerEvent {
+export interface BeforeShowInplaceDescriptionEditorEvent {
   /**
-   * A survey element (question, panel, or page) whose description you can show or hide on the design surface.
+   * A survey element (survey, question, panel, or page) whose in-place description editor is about to be displayed on the design surface.
    */
-  element: Question | PanelModel | PageModel;
+  element: SurveyModel | Question | PanelModel | PageModel;
   /**
-   * A Boolean value that specifies whether the element's description with an empty text is displayed on the design surface. Set this parameter to `false` to hide the empty description for the current `element` or to `true` to display it.
+   * A Boolean value that specifies whether the in-place description editor is displayed for the element's empty description on the design surface. Set this parameter to `false` to hide the empty description editor for the current `element` or to `true` to display it.
    */
   show: boolean;
 }

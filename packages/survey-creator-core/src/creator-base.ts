@@ -59,7 +59,7 @@ import {
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
   ElementGetExpandCollapseStateEventReason,
-  ShowElementDescriptionInDesignerEvent,
+  BeforeShowInplaceDescriptionEditorEvent,
   AfterPropertyChangedEvent,
   PropertyValueChangingEvent,
   PropertyValueChangedEvent,
@@ -733,14 +733,14 @@ export class SurveyCreatorModel extends Base
    */
   public onElementGetExpandCollapseState: EventBase<SurveyCreatorModel, ElementGetExpandCollapseStateEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetExpandCollapseStateEvent>();
   /**
-   * An event that is raised when Survey Creator is about to display a survey element's description with an empty text on the design surface. Handle this event to show or hide the empty description for individual questions, panels (including panels within a dynamic panel), and pages.
+   * An event that is raised before Survey Creator displays the in-place description editor for a survey element with an empty description on the design surface. Handle this event to show or hide the empty description editor for the survey and individual questions, panels (including panels within a dynamic panel), and pages.
    *
    * By default, elements with an empty description show a placeholder that prompts the user to enter a description. Set `options.show` to `false` to hide this placeholder for a particular element, or to `true` to display it.
    *
    * For information on event handler parameters, refer to descriptions within the interface.
    * @see onElementGetExpandCollapseState
    */
-  public onShowElementDescriptionInDesigner: EventBase<SurveyCreatorModel, ShowElementDescriptionInDesignerEvent> = this.addCreatorEvent<SurveyCreatorModel, ShowElementDescriptionInDesignerEvent>();
+  public onBeforeShowInplaceDescriptionEditor: EventBase<SurveyCreatorModel, BeforeShowInplaceDescriptionEditorEvent> = this.addCreatorEvent<SurveyCreatorModel, BeforeShowInplaceDescriptionEditorEvent>();
   /**
    * An event that is raised when Survey Creator obtains permitted operations for a survey element. Use this event to disable user interactions with a question, panel, or page on the design surface.
    *
@@ -2520,13 +2520,13 @@ export class SurveyCreatorModel extends Base
     return options.collapsed;
   }
 
-  getShowElementDescriptionInDesigner(element: Question | PageModel | PanelModel, show: boolean): boolean {
-    if (this.onShowElementDescriptionInDesigner.isEmpty) return show;
-    const options: ShowElementDescriptionInDesignerEvent = {
+  beforeShowInplaceDescriptionEditor(element: SurveyModel | Question | PageModel | PanelModel, show: boolean): boolean {
+    if (this.onBeforeShowInplaceDescriptionEditor.isEmpty) return show;
+    const options: BeforeShowInplaceDescriptionEditorEvent = {
       element: element,
       show: show
     };
-    this.onShowElementDescriptionInDesigner.fire(this, options);
+    this.onBeforeShowInplaceDescriptionEditor.fire(this, options);
     return options.show;
   }
 
@@ -4998,8 +4998,8 @@ export class CreatorBase extends SurveyCreatorModel { }
 export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreatorModel) {
   model.creator = creator;
   model.isPopupEditorContent = false;
-  model.getShowElementDescriptionInDesignerCallback = (element: Question | PageModel | PanelModel, show: boolean): boolean => {
-    return creator.getShowElementDescriptionInDesigner(element, show);
+  model.beforeShowInplaceDescriptionEditorCallback = (element: SurveyModel | Question | PageModel | PanelModel, show: boolean): boolean => {
+    return creator.beforeShowInplaceDescriptionEditor(element, show);
   };
   model.onElementWrapperComponentName.add((_, opt) => {
     const compName = opt.componentName;
