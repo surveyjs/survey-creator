@@ -1144,6 +1144,33 @@ test("Page duplicate action, copy a page and check the index", (): any => {
   expect(creator.survey.pages[1].elements[0].name).toEqual("question5");
   expect(creator.survey.pages[1].elements[2].name).toEqual("question7");
 });
+test("Page duplicate, the new created page should be selected and styled as selected, Bug#7846", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }]
+      }
+    ]
+  };
+  expect(creator.survey.pages).toHaveLength(1);
+  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  creator.selectElement(creator.survey.pages[0]);
+
+  const action = creator.getActionBarItemByActions(
+    pageModel.actionContainer.actions,
+    "duplicate"
+  );
+  action.action();
+
+  expect(creator.survey.pages).toHaveLength(2);
+  const newPage = creator.survey.pages[1];
+  expect(creator.selectedElementName).toEqual(newPage.name);
+
+  const newPageModel = new PageAdorner(creator, newPage);
+  expect(newPageModel.isSelected).toBeTruthy();
+  expect(newPageModel.css).toContain("svc-page__content--selected");
+});
 test("Page duplicate and add new page, check name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
