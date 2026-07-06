@@ -13,7 +13,7 @@ import {
   ChoiceItem
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
-import { editorLocalization, setupLocale } from "./editorLocalization";
+import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
@@ -2852,7 +2852,7 @@ export class SurveyCreatorModel extends Base
       initializeDesignTimeSurveyModel(survey, this);
     }
     survey["needRenderIcons"] = false;
-    if (reason != "designer" && reason != "preview" && reason !== "theme") {
+    if (reason != "designer" && reason != "preview" && reason !== "theme" && reason !== "condition-builder") {
       survey.locale = editorLocalization.locale;
       if (!json["clearInvisibleValues"]) {
         survey.clearInvisibleValues = "onComplete";
@@ -2880,6 +2880,9 @@ export class SurveyCreatorModel extends Base
       if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
       if (reason === "property-grid" && options.question?.parentQuestion?.isDescendantOf("matrixdropdownbase") && options.question?.parent?.getType() !== "panel") {
         options.popup.setWidthByTarget = false;
+      }
+      if (reason !== "designer" && reason !== "preview" && reason !== "theme") {
+        applyCreatorUiLocaleToPopup(options.popup, this);
       }
     });
     return survey;

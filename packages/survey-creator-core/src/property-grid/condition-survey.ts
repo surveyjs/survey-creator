@@ -3,7 +3,7 @@ import {
   PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization, applyCreatorUiLocaleToPopup } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
 import { assignDefaultClasses, wrapTextByCurlyBraces } from "../utils/creator-utils";
@@ -272,7 +272,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     super(options);
     this.surveyValue = survey;
     this.objectValue = object;
-    this.editSurvey.locale = editorLocalization.locale;
+    this.editSurvey.locale = survey.locale;
+    this.editSurvey.onPopupVisibleChanged.add((_, options) => {
+      applyCreatorUiLocaleToPopup(options.popup, this.options as any);
+    });
     this.panelValue = <QuestionPanelDynamicModel>(this.editSurvey.getQuestionByName("panel"));
     this.textEditorValue = <QuestionCommentModel>(this.editSurvey.getQuestionByName("textEditor"));
     if (!!this.options.logicMaxItemsInCondition) {
@@ -357,6 +360,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               type: "dropdown",
               renderAs: "logicoperator",
               title: editorLocalization.getString("pe.if"),
+              placeholder: editorLocalization.getString("pe.conditionSelectQuestion"),
               titleLocation: "left",
               allowClear: false,
               startWithNewLine: false,
