@@ -109,7 +109,6 @@ test.describe(title, () => {
     await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Català" }).click(); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     await page.locator("button[title='Auto-translate All']").last().click();
-    await hideContentBehindPopup(page);
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup.png");
     await showContentBehindPopup(page);
     await page.getByRole("button", { name: "Apply" }).click();
@@ -118,7 +117,6 @@ test.describe(title, () => {
     await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Dansk" }).click();
     await page.locator("button[title='Auto-translate All']").last().click();
-    await hideContentBehindPopup(page);
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-enabled-dropdown.png");
     await showContentBehindPopup(page);
     await page.setViewportSize({ width: 1000, height: 1440 });
