@@ -4,6 +4,7 @@ import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { QuestionToolboxItem } from "../src/toolbox";
+import { DropIndicatorPosition } from "../src/drag-drop-enums";
 
 test("Check required action", (): any => {
   const creator = new CreatorTester();
@@ -1479,4 +1480,23 @@ test("Test showHiddenTitle functionality", (): any => {
   const dPanel = panel.getQuestionByName("question4") as QuestionPanelDynamicModel;
   const question5 = dPanel.panels[0].getQuestionByName("question5") as QuestionTextModel;
   expect(new QuestionAdornerViewModel(creator, question5, <any>undefined).showHiddenTitle).toBeTruthy();
+});
+
+test("Nested choice content panel shows the drop-over highlight while dragging over it", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
+  const panel = (question.choices[0] as any).panel;
+  // The choice content panel is a non-interactive nested element, but it still acts as a drop target.
+  expect(panel.isInteractiveDesignElement).toBeFalsy();
+
+  const panelAdorner = new QuestionAdornerViewModel(creator, panel, <any>undefined);
+  expect(panelAdorner.css().indexOf("svc-question__content--drag-over-inside")).toBe(-1);
+
+  panelAdorner.dropIndicatorPosition = DropIndicatorPosition.Inside;
+  expect(panelAdorner.css().indexOf("svc-question__content--drag-over-inside")).not.toBe(-1);
 });

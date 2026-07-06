@@ -108,7 +108,17 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   css() {
     const isInsideCollapsed = this.dropIndicatorPosition === DropIndicatorPosition.Inside && this.collapsed;
 
-    if (!this.surveyElement.isInteractiveDesignElement) return "";
+    if (!this.surveyElement.isInteractiveDesignElement) {
+      // Non-interactive nested elements (e.g. a choice content panel) don't render the full
+      // adorner chrome, but they still act as drop targets. Emit the drag-over classes so the
+      // drop highlight appears when an element is dragged over them.
+      return new CssClassBuilder()
+        .append("svc-question__content--collapsed-drag-over-inside", isInsideCollapsed)
+        .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed)
+        .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
+        .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
+        .toString();
+    }
 
     if (isInsideCollapsed) {
       this.dragIn();
