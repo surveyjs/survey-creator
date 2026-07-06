@@ -11,7 +11,8 @@ import {
   ComponentCollection,
   QuestionCheckboxModel,
   QuestionCommentModel,
-  settings as surveySettings
+  settings as surveySettings,
+  surveyLocalization
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
@@ -26,6 +27,28 @@ function setDoubleBraces() {
 function resetBraces() {
   surveySettings.expressionVariableDelimiters = { start: "{", end: "}" };
 }
+
+test("Condition editor uses creator locale, not survey default locale", () => {
+  const prevDefault = surveyLocalization.defaultLocale;
+  try {
+    surveyLocalization.defaultLocale = "de";
+    const survey = new SurveyModel({
+      elements: [{ type: "text", name: "question1" }]
+    });
+    const conditionEditor = new ConditionEditor(
+      survey,
+      survey.getQuestionByName("question1"),
+      new EmptySurveyCreatorOptions()
+    );
+    const questionNameQuestion = <QuestionDropdownModel>(
+      conditionEditor.panel.panels[0].getQuestionByName("questionName")
+    );
+    expect(conditionEditor.editSurvey.locale).toBe("en");
+    expect(questionNameQuestion.placeholder).toBe("Select...");
+  } finally {
+    surveyLocalization.defaultLocale = prevDefault;
+  }
+});
 
 test("Items Builder, simple test", () => {
   var builder = new ConditionEditorItemsBuilder();

@@ -272,9 +272,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     super(options);
     this.surveyValue = survey;
     this.objectValue = object;
-    if (survey.locale) {
-      this.editSurvey.locale = survey.locale;
-    }
+    this.editSurvey.locale = editorLocalization.locale;
     this.panelValue = <QuestionPanelDynamicModel>(this.editSurvey.getQuestionByName("panel"));
     this.textEditorValue = <QuestionCommentModel>(this.editSurvey.getQuestionByName("textEditor"));
     if (!!this.options.logicMaxItemsInCondition) {

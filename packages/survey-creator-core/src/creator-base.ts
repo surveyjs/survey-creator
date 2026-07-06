@@ -2853,7 +2853,7 @@ export class SurveyCreatorModel extends Base
     }
     survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "preview" && reason !== "theme") {
-      survey.locale = editorLocalization.currentLocale;
+      survey.locale = editorLocalization.locale;
       if (!json["clearInvisibleValues"]) {
         survey.clearInvisibleValues = "onComplete";
       }
