@@ -322,6 +322,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       );
       this.restoreState();
       if (surveyElement.getPropertyValue("isSelectedInDesigner")) {
+        this.onElementSelectedChanged(true);
         this.actionContainer.allowResponsiveness();
       }
       this.updateActionsContainer(surveyElement);
