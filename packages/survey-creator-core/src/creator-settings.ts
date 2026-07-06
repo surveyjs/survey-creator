@@ -4,6 +4,7 @@ import {
   SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner, LocalizableString,
   settings as surveyLibSettings
 } from "survey-core";
+import { editorLocalization } from "./editorLocalization";
 
 /**
  * List available question convert modes
@@ -516,7 +517,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
 
   // ILocalizableOwner implemented
   getLocale(): string {
-    return "";
+    return editorLocalization.locale;
   }
   getMarkdownHtml(text: string, name: string, item?: any): string {
     return text;

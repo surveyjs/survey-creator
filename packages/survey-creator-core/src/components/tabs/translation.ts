@@ -1591,7 +1591,7 @@ export class TranslationEditor {
         title: dialogTitle,
         displayMode: this.options.isMobileView ? "overlay" : "popup"
       }, this.options.rootElement);
-    popupModel.locale = editorLocalization.currentLocale;
+    popupModel.locale = editorLocalization.locale;
   }
   public doMachineTranslation(): void {
     const items = this.createStringsToTranslate();

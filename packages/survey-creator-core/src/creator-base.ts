@@ -154,7 +154,7 @@ export class SurveyCreatorModel extends Base
   public getRenderer(name: string): string { return null; }
   public getRendererContext(locStr: LocalizableString): any { return locStr; }
   public getProcessedText(text: string): string { return text; }
-  public getLocale(): string { return this.locale; }
+  public getLocale(): string { return editorLocalization.locale; }
   /**
    * Specifies whether to display the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#designer-tab) tab.
    *
