@@ -315,6 +315,7 @@ export class SurveyCreatorModel extends Base
    * Specifies whether users can see and edit the survey header and related survey properties.
    *
    * Default value: `true`
+   * @see onBeforeShowInplaceDescriptionEditor
    */
   get showSurveyHeader(): boolean {
     return this.allowEditSurveyTitle;
@@ -733,12 +734,10 @@ export class SurveyCreatorModel extends Base
    */
   public onElementGetExpandCollapseState: EventBase<SurveyCreatorModel, ElementGetExpandCollapseStateEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetExpandCollapseStateEvent>();
   /**
-   * An event that is raised before Survey Creator displays the in-place description editor for a survey element with an empty description on the design surface. Handle this event to show or hide the empty description editor for the survey and individual questions, panels (including panels within a dynamic panel), and pages.
-   *
-   * By default, elements with an empty description show a placeholder that prompts the user to enter a description. Set `options.show` to `false` to hide this placeholder for a particular element, or to `true` to display it.
-   *
-   * For information on event handler parameters, refer to descriptions within the interface.
-   * @see onElementGetExpandCollapseState
+   * An event that is raised before Survey Creator displays an in-place description editor on the design surface. Handle this event to show or hide the description editor for the survey, individual questions, panels (including panels within a Dynamic Panel), and pages.
+   * @see onAllowInplaceEdit
+   * @see inplaceEditChoiceValues
+   * @see showSurveyHeader
    */
   public onBeforeShowInplaceDescriptionEditor: EventBase<SurveyCreatorModel, BeforeShowInplaceDescriptionEditorEvent> = this.addCreatorEvent<SurveyCreatorModel, BeforeShowInplaceDescriptionEditorEvent>();
   /**
@@ -4982,6 +4981,7 @@ export class SurveyCreatorModel extends Base
 
   /**
    * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.
+   * @see onBeforeShowInplaceDescriptionEditor
    * @see inplaceEditChoiceValues
    */
   public onAllowInplaceEdit: EventBase<SurveyCreatorModel, AllowInplaceEditEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowInplaceEditEvent>();

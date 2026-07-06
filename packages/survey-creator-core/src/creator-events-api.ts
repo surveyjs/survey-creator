@@ -129,7 +129,7 @@ export interface BeforeShowInplaceDescriptionEditorEvent {
    */
   element: SurveyModel | Question | PanelModel | PageModel;
   /**
-   * A Boolean value that specifies whether the in-place description editor is displayed for the element's empty description on the design surface. Set this parameter to `false` to hide the empty description editor for the current `element` or to `true` to display it.
+   * A Boolean property that specifies whether the in-place description editor is displayed. Set this property to `false` to hide the editor for the current `options.element` or to `true` to display it.
    */
   show: boolean;
 }
