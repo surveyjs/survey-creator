@@ -143,6 +143,91 @@ test("Auto-translate window shows Source column immediately without the Default 
   expect(headerMatrix.columns[0].title).toBe("Source: Deutsch");
   expect(headerMatrix.columns[1].title).toBe("Target: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 });
+test("Auto-translate dialog persists the selected Translate from locale", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "title en", de: "title de", fr: "title fr" }
+      }
+    ]
+  });
+  const options = new EmptySurveyCreatorOptions();
+  const translation = new Translation(survey, options);
+  let persisted: string | undefined;
+  translation.getMachineTranslationFromLocale = () => persisted;
+  translation.setMachineTranslationFromLocale = (locale) => { persisted = locale; };
+
+  let editor = translation.createTranslationEditor("es");
+  expect(editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale").title).toBe("Default (English)");
+  editor.setFromLocale("de");
+
+  editor = translation.createTranslationEditor("es");
+  let matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.columns[0].name).toBe("de");
+  expect(editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale").title).toBe("Deutsch");
+  expect(persisted).toBe("de");
+});
+test("Auto-translate dialog ignores persisted Translate from locale if it is no longer available", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "title en", de: "title de" }
+      }
+    ]
+  });
+  const options = new EmptySurveyCreatorOptions();
+  const translation = new Translation(survey, options);
+  translation.getMachineTranslationFromLocale = () => "fr";
+  const editor = translation.createTranslationEditor("es");
+  const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.columns[0].name).toBe("default");
+});
+test("Auto-translate dialog ignores persisted Translate from locale if it matches the target locale", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "title en", es: "title es" }
+      }
+    ]
+  });
+  const options = new EmptySurveyCreatorOptions();
+  const translation = new Translation(survey, options);
+  translation.getMachineTranslationFromLocale = () => "de";
+  const editor = translation.createTranslationEditor("de");
+  const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.columns[0].name).toBe("default");
+});
+test("Auto-translate dialog persists Translate from locale on translation plugin", () => {
+  const creator = new CreatorTester();
+  creator.onMachineTranslate.add(() => { });
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "title en", de: "title de", fr: "title fr" }
+      }
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  let editor = tabTranslation.model.createTranslationEditor("es");
+  editor.setFromLocale("de");
+  expect(tabTranslation.machineTranslationFromLocale).toBe("de");
+
+  tabTranslation.deactivate();
+  tabTranslation.activate();
+  editor = tabTranslation.model.createTranslationEditor("es");
+  const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.columns[0].name).toBe("de");
+  expect(tabTranslation.machineTranslationFromLocale).toBe("de");
+});
 test("onTranslationStringVisibility for editor, Bug#7094", () => {
   const creator = new CreatorTester();
   creator.JSON = {
