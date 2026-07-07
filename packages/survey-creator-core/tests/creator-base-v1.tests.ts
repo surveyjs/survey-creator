@@ -1005,7 +1005,7 @@ test("SurveyPropertyConditionEditor, set correct locale into internal survey, Bu
   expect(creator["designerPropertyGrid"].survey.locale).toEqual("de");
   const question = creator.survey.getQuestionByName("q2");
   const editor = new ConditionEditor(creator.survey, question, creator);
-  expect(editor.editSurvey.locale).toEqual("de");
+  expect(editor.editSurvey.locale).toBeFalsy();
   editorLocalization.currentLocale = "";
 });
 test("creator.onSurveyInstanceCreated, can pass ConditionEditor as model", () => {

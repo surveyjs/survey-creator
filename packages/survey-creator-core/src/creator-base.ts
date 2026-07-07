@@ -13,7 +13,7 @@ import {
   ChoiceItem
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
-import { editorLocalization, setupLocale } from "./editorLocalization";
+import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
@@ -155,7 +155,7 @@ export class SurveyCreatorModel extends Base
   public getRenderer(name: string): string { return null; }
   public getRendererContext(locStr: LocalizableString): any { return locStr; }
   public getProcessedText(text: string): string { return text; }
-  public getLocale(): string { return this.locale; }
+  public getLocale(): string { return editorLocalization.locale; }
   /**
    * Specifies whether to display the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#designer-tab) tab.
    *
@@ -2871,8 +2871,8 @@ export class SurveyCreatorModel extends Base
       initializeDesignTimeSurveyModel(survey, this);
     }
     survey["needRenderIcons"] = false;
-    if (reason != "designer" && reason != "preview" && reason !== "theme") {
-      survey.locale = editorLocalization.currentLocale;
+    if (reason != "designer" && reason != "preview" && reason !== "theme" && reason !== "condition-builder") {
+      survey.locale = editorLocalization.locale;
       if (!json["clearInvisibleValues"]) {
         survey.clearInvisibleValues = "onComplete";
       }
@@ -2899,6 +2899,9 @@ export class SurveyCreatorModel extends Base
       if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
       if (reason === "property-grid" && options.question?.parentQuestion?.isDescendantOf("matrixdropdownbase") && options.question?.parent?.getType() !== "panel") {
         options.popup.setWidthByTarget = false;
+      }
+      if (reason !== "designer" && reason !== "preview" && reason !== "theme") {
+        applyCreatorUiLocaleToPopup(options.popup, this);
       }
     });
     return survey;

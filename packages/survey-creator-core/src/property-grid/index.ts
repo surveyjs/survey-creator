@@ -1507,7 +1507,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       surveyPropertyEditor.editSurvey.readOnly = true;
     }
     const prevCurrentLocale = surveyLocalization.currentLocale;
-    const locale = editorLocalization.currentLocale;
+    const locale = editorLocalization.locale;
     surveyLocalization.currentLocale = locale;
     const popupModel: PopupBaseViewModel = settings.showDialog(
       <IDialogOptions>{

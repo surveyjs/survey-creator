@@ -11,7 +11,8 @@ import {
   ComponentCollection,
   QuestionCheckboxModel,
   QuestionCommentModel,
-  settings as surveySettings
+  settings as surveySettings,
+  surveyLocalization
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
@@ -26,6 +27,55 @@ function setDoubleBraces() {
 function resetBraces() {
   surveySettings.expressionVariableDelimiters = { start: "{", end: "}" };
 }
+
+test("Condition editor dropdown popup list UI uses creator locale when list is empty", () => {
+  const prevDefault = surveyLocalization.defaultLocale;
+  try {
+    surveyLocalization.defaultLocale = "de";
+    const survey = new SurveyModel({
+      elements: [{ type: "text", name: "q1" }]
+    });
+    const conditionEditor = new ConditionEditor(
+      survey,
+      survey.getQuestionByName("q1"),
+      new EmptySurveyCreatorOptions(),
+      "visibleIf"
+    );
+    const questionName = <QuestionDropdownModel>(
+      conditionEditor.panel.panels[0].getQuestionByName("questionName")
+    );
+    expect(questionName.choices).toHaveLength(0);
+    const dropdownListModel = questionName.dropdownListModel;
+    dropdownListModel["createPopup"]();
+    const popup = dropdownListModel["popupModel"];
+    conditionEditor.editSurvey.processPopupVisiblityChanged(questionName, popup, true);
+    expect(popup.contentComponentData.model.emptyMessage).toBe("No data to display");
+  } finally {
+    surveyLocalization.defaultLocale = prevDefault;
+  }
+});
+
+test("Condition editor uses creator locale for UI, survey locale for survey content", () => {
+  const prevDefault = surveyLocalization.defaultLocale;
+  try {
+    surveyLocalization.defaultLocale = "de";
+    const survey = new SurveyModel({
+      elements: [{ type: "text", name: "question1" }]
+    });
+    const conditionEditor = new ConditionEditor(
+      survey,
+      survey.getQuestionByName("question1"),
+      new EmptySurveyCreatorOptions()
+    );
+    const questionNameQuestion = <QuestionDropdownModel>(
+      conditionEditor.panel.panels[0].getQuestionByName("questionName")
+    );
+    expect(conditionEditor.editSurvey.locale).toBe(survey.locale);
+    expect(questionNameQuestion.placeholder).toBe("Select...");
+  } finally {
+    surveyLocalization.defaultLocale = prevDefault;
+  }
+});
 
 test("Items Builder, simple test", () => {
   var builder = new ConditionEditorItemsBuilder();
