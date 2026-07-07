@@ -71,7 +71,7 @@ test("Condition editor uses creator locale for UI, survey locale for survey cont
       conditionEditor.panel.panels[0].getQuestionByName("questionName")
     );
     expect(conditionEditor.editSurvey.locale).toBe(survey.locale);
-    expect(questionNameQuestion.placeholder).toBe("Select a question...");
+    expect(questionNameQuestion.placeholder).toBe("Select...");
   } finally {
     surveyLocalization.defaultLocale = prevDefault;
   }

@@ -111,7 +111,7 @@ function notifyBalloonSelector(page: Page) {
 
 const disabledClass = /svc-logic-tab__content-action--disabled/;
 const newRuleDisplayText = "New rule";
-const selectQuestionPlaceHolder = "Select a question...";
+const selectQuestionPlaceHolder = "Select...";
 const selectActionTypePlaceHolder = "Select action...";
 
 test.describe(title, () => {
