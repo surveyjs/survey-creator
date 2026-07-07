@@ -1,6 +1,6 @@
 import {
   SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue,
-  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel
+  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization, applyCreatorUiLocaleToPopup } from "../editorLocalization";
@@ -361,6 +361,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               renderAs: "logicoperator",
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
+              placeholder: surveyLocalization.getString("placeholder", editorLocalization.locale),
               allowClear: false,
               startWithNewLine: false,
               isRequired: true
