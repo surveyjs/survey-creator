@@ -1,5 +1,5 @@
 import { test, expect } from "playwright/test";
-import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody } from "./helper";
+import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, waitForSubpixelAntialiasing } from "./helper";
 
 const title = "Property Grid Editors";
 test.describe(title, () => {
@@ -239,6 +239,15 @@ test.describe(title, () => {
     await page.locator(".spg-panel__content div[data-name='visibleIf'] button").filter({ hasText: "Edit" }).click();
     const logicPopup = page.locator(".sv-popup.svc-property-editor.sv-popup--modal-overlay");
     await logicPopup.waitFor({ state: "visible" });
+    // Right after the popup opens Chromium renders its text with grayscale antialiasing and the
+    // first toHaveScreenshot capture freezes that state for the whole retry loop; after ~1-2s of
+    // idle the text repaints with subpixel antialiasing (see waitForSubpixelAntialiasing). The
+    // scr_legacy baseline was captured in the late (subpixel) state, while the scr baseline was
+    // captured in the immediate (grayscale) state, so wait for the repaint only on the legacy
+    // (V2) page.
+    if (url.includes("-V2")) {
+      await waitForSubpixelAntialiasing(page, logicPopup.locator(".sv-popup__body-header"));
+    }
     await compareScreenshot(
       page,
       logicPopup,

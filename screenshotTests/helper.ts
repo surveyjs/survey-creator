@@ -207,6 +207,40 @@ export async function resetFocusToBody(page: Page): Promise<void> {
   });
 }
 
+// Chromium renders the text of a freshly opened popup with grayscale antialiasing while the
+// popup still sits on its own composited layer, and repaints it with subpixel antialiasing
+// (colored fringes around glyphs) once the layer is released after ~1-2s of idle. There is no
+// DOM-observable signal for that, but the state itself is visible in pixels: poll a screenshot
+// of a text element until colored pixels appear. The polling screenshots must pass
+// animations: "allow" - the style injection done by the default "disabled" mode freezes the
+// antialiasing state and the repaint never happens. If subpixel antialiasing never shows up
+// (e.g. LCD text is disabled in the environment), the wait gives up silently and the following
+// screenshot comparison reports the mismatch.
+export async function waitForSubpixelAntialiasing(page: Page, textElement: Locator, timeoutMs: number = 3000): Promise<void> {
+  const deadline = Date.now() + timeoutMs;
+  while(Date.now() < deadline) {
+    const base64 = (await textElement.screenshot({ animations: "allow" })).toString("base64");
+    const coloredPixels = await page.evaluate(async (b64) => {
+      const img = new Image();
+      img.src = "data:image/png;base64," + b64;
+      await img.decode();
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      const data = ctx.getImageData(0, 0, img.width, img.height).data;
+      let colored = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        if (Math.abs(data[i] - data[i + 1]) + Math.abs(data[i + 1] - data[i + 2]) > 30) colored++;
+      }
+      return colored;
+    }, base64);
+    if (coloredPixels > 50) return;
+    await page.waitForTimeout(200);
+  }
+}
+
 // Waits until the bounding box of the element matched by `selector` stays the same
 // for several consecutive animation frames - i.e. the smooth scrollIntoView is finished.
 export function waitForScrollEnd(page: Page, selector: string) {
