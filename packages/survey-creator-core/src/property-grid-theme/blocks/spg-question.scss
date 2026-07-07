@@ -6,6 +6,9 @@
   align-items: flex-start;
   padding: 0px;
   border-radius: var(--sjs2-radius-x075);
+  &>.sd-question__container {
+    width: 100%;
+  }
 }
 
 .spg-question__content {

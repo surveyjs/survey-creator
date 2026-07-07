@@ -3,6 +3,10 @@
 .svc-row {
   width: 100%;
   position: relative;
+
+  .sd-element__header ~ hr {
+    display: none;
+  }
 }
 
 // .svc-row:not(.svc-row--ghost) > .sd-row {
@@ -10,7 +14,7 @@
 // }
 
 .svc-row > .sd-row.sd-page__row {
-  margin-top: var(--sjs2-spacing-x200);
+  // margin-top: var(--sjs2-spacing-x200);
   &.sd-row--delayed-enter {
     margin-top: 0;
   }

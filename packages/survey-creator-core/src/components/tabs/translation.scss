@@ -231,3 +231,14 @@ td.st-table__cell:first-of-type {
 .st-body {
   @include disableLibraryAnimations;
 }
+
+.st-page {
+  .sd-page__content {
+    row-gap: 0;
+  }
+}
+.st-panel {
+  .sd-panel__header {
+    padding: 0;
+  }
+}

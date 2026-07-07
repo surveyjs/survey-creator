@@ -61,9 +61,12 @@
 }
 
 .spg-panel__content {
+  padding-top: var(--sjs2-spacing-x200);
+  // row-gap: var(--sjs2-spacing-x200);
+
   .spg-row {
     width: 100%;
-    margin-top: var(--sjs2-spacing-x200);
+    // margin-top: var(--sjs2-spacing-x200);
   }
 
   .spg-row--multiple {
@@ -157,4 +160,9 @@
   .spg-row:first-of-type {
     margin-top: 0;
   }
+}
+.spg-row {
+  .spg-question__header ~ hr {
+    display: none;
+  }  
 }
