@@ -152,7 +152,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected onElementSelectedChanged(isSelected: boolean) {
     super.onElementSelectedChanged(isSelected);
     this.isSelected = isSelected;
-    if (isSelected && this.creator.pageEditMode === "bypage") {
+    if (isSelected && this.creator.pageEditMode === "bypage" && this.surveyElement !== this.creator.selectedElement) {
       this.setSurveyElement(<PageModel>this.creator.selectedElement);
     }
     if (isSelected) {
