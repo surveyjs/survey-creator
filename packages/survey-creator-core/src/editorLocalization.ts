@@ -1,6 +1,6 @@
 import { enStrings } from "./localization/english";
 import { capitalize } from "./utils/utils";
-import { surveyLocalization, Serializer } from "survey-core";
+import { surveyLocalization, Serializer, ILocalizableOwner } from "survey-core";
 
 const renamedKeys = {};
 renamedKeys["tabs.preview"] = "ed.testSurvey";
@@ -320,6 +320,14 @@ surveyLocalization.onGetExternalString = (name: string, locale: string): string 
 
 export function getLocString(strName: string, locale: string = null) {
   return editorLocalization.getString(strName, locale);
+}
+
+export function applyCreatorUiLocaleToPopup(popup: { locale?: string, contentComponentData?: any }, locOwner: ILocalizableOwner): void {
+  popup.locale = editorLocalization.locale;
+  const listModel = (<any>popup.contentComponentData)?.model;
+  if (listModel && "locOwner" in listModel) {
+    listModel.locOwner = locOwner;
+  }
 }
 
 export function getLocaleStrings(loc: string): any {
