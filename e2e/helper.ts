@@ -40,6 +40,11 @@ export async function compareScreenshot(
     ...options
   };
 
+  // Web fonts (Open Sans) load over the network; a screenshot taken before they finish
+  // captures fallback-font rendering, which shifts text metrics and fails the comparison.
+  // toHaveScreenshot's own font wait is capped by the screenshot timeout - this one is not.
+  await page.waitForFunction(() => (document as any).fonts.status === "loaded");
+
   if (!!currentElement) {
     const element = (<Locator>currentElement).filter({ visible: true });
     await expect.soft(element.nth(0)).toBeVisible();
