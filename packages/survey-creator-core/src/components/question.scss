@@ -976,6 +976,10 @@ svc-question,
     padding-bottom: calc(0.5 * var(--sd-base-vertical-padding));
   }
 
+  .sd-element--complex > .sd-element__header:after {
+    display: none;
+  }
+
   .sd-panel__content {
     gap: 0;
     padding: 0;
