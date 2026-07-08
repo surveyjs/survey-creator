@@ -217,6 +217,19 @@
   display: flex;
   align-items: center;
   margin-top: var(--sjs2-spacing-x200);
+
+ .sd-question__header-and-content-container {
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 0;
+    &>div {
+      width: 100%;
+    }
+  }
+  .sd-paneldynamic__footer {
+    padding: 0;
+  }
 }
 
 .sl-row {
@@ -271,8 +284,18 @@
   --sd-base-padding: var(--sjs2-spacing-x500);
   --sd-base-vertical-padding: var(--sjs2-spacing-x400);
   --sd-page-vertical-padding: var(--sjs2-spacing-x300);
-  padding-right: var(--sjs2-spacing-x500);
+  // padding-right: var(--sjs2-spacing-x500);
   margin-top: var(--sjs2-spacing-x200);
+  &>.sd-question__container {
+    &>.sd-question__header-and-content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: var(--sd-base-padding);
+      padding-top: var(--sd-base-vertical-padding);
+      row-gap: var(--sjs2-spacing-x200);
+    }
+  }
 }
 
 .svc-logic_trigger-editor {
@@ -323,6 +346,9 @@ $sl-pd-list-move-out-delay: var(--sl-pd-list-move-out-delay, 100ms);
     animation-duration: $sl-pd-list-fade-out-duration, $sl-pd-list-move-out-duration;
     animation-delay: 0s, $sl-pd-list-move-out-delay;
   }
+}
+.sl-paneldynamic__content {
+  width: 100%;
 }
 .sl-paneldynamic__buttons-container {
   display: flex;
