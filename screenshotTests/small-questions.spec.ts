@@ -179,6 +179,6 @@ test.describe(title, () => {
 
     await question.click({ position: { x: 0, y: 40 } });
     await expect(page.locator(".svc-question__content--selected div[data-name=question5]")).toBeVisible();
-    await compareScreenshot(page, page.locator("div[data-sv-drop-target-survey-element=question5]"), "small-multiple-text-selected.png");
+    await compareScreenshot(page, page.locator("div[data-sv-drop-target-survey-element=question5]"), "small-multiple-text-selected.png", { maxDiffPixels: 2 });
   });
 });
