@@ -20,6 +20,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
   public model: Translation;
   public static iconName = "icon-language";
+  private _machineTranslationFromLocale: string | undefined;
+  public get machineTranslationFromLocale(): string | undefined {
+    return this._machineTranslationFromLocale;
+  }
   public get showOneCategoryInPropertyGrid(): boolean {
     return this._showOneCategoryInPropertyGrid;
   }
@@ -48,6 +52,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
+    this.model.getMachineTranslationFromLocale = () => this._machineTranslationFromLocale;
+    this.model.setMachineTranslationFromLocale = (locale: string) => {
+      this._machineTranslationFromLocale = locale;
+    };
     this.updateSettingsSurvey();
     this.model.readOnly = this.creator.readOnly;
     this.model.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean) => {
