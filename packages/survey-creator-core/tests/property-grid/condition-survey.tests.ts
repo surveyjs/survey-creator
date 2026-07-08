@@ -15,6 +15,7 @@ import {
   surveyLocalization
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
+import { editorLocalization } from "../../src/editorLocalization";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { ActionContainer } from "survey-core";
@@ -74,6 +75,36 @@ test("Condition editor uses creator locale for UI, survey locale for survey cont
     expect(questionNameQuestion.placeholder).toBe("Select...");
   } finally {
     surveyLocalization.defaultLocale = prevDefault;
+  }
+});
+
+test("Condition editor questionName placeholder uses creator locale, survey stays in survey locale, Bug#7853", () => {
+  const prevCurrent = editorLocalization.currentLocale;
+  surveyLocalization.locales["de"] = { placeholder: "de-placeholder" };
+  surveyLocalization.locales["fr"] = { placeholder: "fr-placeholder" };
+  try {
+    // Creator (UI) locale is "de", while the edited survey content locale is "fr".
+    editorLocalization.currentLocale = "de";
+    const survey = new SurveyModel({
+      elements: [{ type: "text", name: "question1" }]
+    });
+    survey.locale = "fr";
+    const conditionEditor = new ConditionEditor(
+      survey,
+      survey.getQuestionByName("question1"),
+      new EmptySurveyCreatorOptions()
+    );
+    const questionNameQuestion = <QuestionDropdownModel>(
+      conditionEditor.panel.panels[0].getQuestionByName("questionName")
+    );
+    // The survey itself must stay in "fr"...
+    expect(survey.locale).toBe("fr");
+    // ...but the condition editor UI (the questionName placeholder) must use the creator "de" locale.
+    expect(questionNameQuestion.placeholder).toBe("de-placeholder");
+  } finally {
+    editorLocalization.currentLocale = prevCurrent;
+    delete surveyLocalization.locales["de"];
+    delete surveyLocalization.locales["fr"];
   }
 });
 
