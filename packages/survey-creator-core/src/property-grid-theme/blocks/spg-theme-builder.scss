@@ -135,6 +135,12 @@
   .spg-question-composite__content .spg-row:first-of-type {
     margin-top: var(--sjs2-spacing-x100);
   }
+
+  .spg-panel-group__content, .spg-nested-panel__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sjs2-spacing-x200);
+  }  
 }
 
 .svc-side-bar--mobile .spg-theme-builder-root {

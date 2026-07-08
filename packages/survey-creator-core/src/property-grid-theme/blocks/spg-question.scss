@@ -103,6 +103,15 @@
 }
 
 .spg-question--location--left {
+  &>.sd-question__container {
+    &>.sd-question__header-and-content-container {
+      display: flex;
+      flex-direction: row;
+      vertical-align: middle;
+      align-items: stretch;
+      gap: var(--sjs2-layout-component-formbox-medium-gap);
+    }
+  }
   flex-direction: row;
   flex-wrap: wrap;
   line-height: var(--sjs2-line-height-x600);
