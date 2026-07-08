@@ -2,6 +2,9 @@
 @use "./variables.scss" as *;
 
 .spg-panel {
+  .sd-panel__header {
+    padding: 0;
+  }
 }
 .spg-panel__title {
   @include sjs2--typography--default;
