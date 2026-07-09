@@ -1,0 +1,92 @@
+import { EventBase } from "survey-core";
+import { SurveyCreatorModel } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
+import { IJournalApplyResult, IJournalOptions, IJournalRecord } from "./journal-record";
+import { JournalRecorder } from "./journal-recorder";
+import { IJournalApplyOptions, JournalApplier } from "./journal-applier";
+
+export { JournalRecorder } from "./journal-recorder";
+export { JournalApplier, IJournalApplyOptions } from "./journal-applier";
+export * from "./journal-record";
+export { buildLocator, resolveLocator, serializeValue, deserializeValue } from "./journal-locator";
+
+/**
+ * A background (non-tab) creator plugin that records all survey modifications
+ * as a serializable action journal and can apply such a journal to synchronize
+ * this creator with another one (via a file, websocket, etc.).
+ *
+ * ```ts
+ * const plugin = new JournalPlugin(creator);
+ * creator.addPlugin("journal", plugin);
+ * plugin.onRecordAdded.add((sender, options) => socket.send(JSON.stringify(options.record)));
+ * socket.onmessage = (msg) => plugin.apply(msg.data);
+ * ```
+ *
+ * Undo semantics: applied records enter the receiver's undo stack (when the
+ * undoredo plugin is present) as regular local transactions, so a receiver can
+ * undo changes authored by a peer. Such an undo travels back to peers as a new
+ * inverse record - the stacks are per-client (not id-synchronized), operations
+ * are mirrored.
+ *
+ * Limitations:
+ * - Convergence is guaranteed for a single ordered stream of records
+ *   (last-write-wins, no conflict resolution for concurrent edits).
+ * - Programmatic `creator.JSON = ...` / `creator.changeText()` calls do not fire
+ *   `onModified` and are not recorded automatically - call `snapshot()` after them.
+ * - A `fullSnapshot` record (JSON tab, bootstrap) rebuilds the survey and
+ *   resets the receiver's undo history.
+ */
+export class JournalPlugin implements ICreatorPlugin {
+  public model: any = undefined;
+  public recorder: JournalRecorder;
+  public applier: JournalApplier;
+
+  constructor(private creator: SurveyCreatorModel, options: IJournalOptions = {}) {
+    this.recorder = new JournalRecorder(creator, options);
+    this.applier = new JournalApplier(creator, this.recorder);
+  }
+  public activate(): void { }
+  public deactivate(): boolean {
+    return true;
+  }
+  public dispose(): void {
+    this.recorder.dispose();
+  }
+
+  public get records(): Array<IJournalRecord> {
+    return this.recorder.records;
+  }
+  public get isRecording(): boolean {
+    return this.recorder.isRecording;
+  }
+  public get isApplying(): boolean {
+    return this.recorder.isApplying;
+  }
+  public get onRecordAdded(): EventBase<JournalRecorder, { record: IJournalRecord }> {
+    return this.recorder.onRecordAdded;
+  }
+  public get onRecordChanged(): EventBase<JournalRecorder, { record: IJournalRecord }> {
+    return this.recorder.onRecordChanged;
+  }
+  public startRecording(): void {
+    this.recorder.startRecording();
+  }
+  public stopRecording(): void {
+    this.recorder.stopRecording();
+  }
+  public clear(): void {
+    this.recorder.clear();
+  }
+  public toJSON(): Array<IJournalRecord> {
+    return this.recorder.toJSON();
+  }
+  public toText(): string {
+    return this.recorder.toText();
+  }
+  public snapshot(): IJournalRecord {
+    return this.recorder.snapshot();
+  }
+  public apply(input: IJournalRecord | Array<IJournalRecord> | string, options?: IJournalApplyOptions): Array<IJournalApplyResult> {
+    return this.applier.apply(input, options);
+  }
+}
