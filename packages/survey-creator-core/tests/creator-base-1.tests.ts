@@ -1144,6 +1144,33 @@ test("Page duplicate action, copy a page and check the index", (): any => {
   expect(creator.survey.pages[1].elements[0].name).toEqual("question5");
   expect(creator.survey.pages[1].elements[2].name).toEqual("question7");
 });
+test("Page duplicate, the new created page should be selected and styled as selected, Bug#7846", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }]
+      }
+    ]
+  };
+  expect(creator.survey.pages).toHaveLength(1);
+  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  creator.selectElement(creator.survey.pages[0]);
+
+  const action = creator.getActionBarItemByActions(
+    pageModel.actionContainer.actions,
+    "duplicate"
+  );
+  action.action();
+
+  expect(creator.survey.pages).toHaveLength(2);
+  const newPage = creator.survey.pages[1];
+  expect(creator.selectedElementName).toEqual(newPage.name);
+
+  const newPageModel = new PageAdorner(creator, newPage);
+  expect(newPageModel.isSelected).toBeTruthy();
+  expect(newPageModel.css).toContain("svc-page__content--selected");
+});
 test("Page duplicate and add new page, check name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -2969,6 +2996,35 @@ test("Modify property editor via property grid survey", (): any => {
   const placeholderQuestion = creator.sidebar.getPageById("propertyGrid").componentData.survey.getQuestionByName("placeholder");
   expect(placeholderQuestion.textUpdateMode).toEqual("onTyping");
   expect(placeholderQuestion.dataList).toHaveLength(2);
+});
+test("createSurvey assigns a short renderedIdPrefix derived from the survey area", (): any => {
+  const creator = new CreatorTester();
+  const getIdPrefix = (area: string): string => {
+    return creator.createSurvey({}, area, undefined, undefined, area).renderedIdPrefix;
+  };
+  expect(getIdPrefix("designer-tab")).toEqual("dt-");
+  expect(getIdPrefix("property-grid")).toEqual("pg-");
+  expect(getIdPrefix("preview-tab")).toEqual("pt-");
+  expect(getIdPrefix("logic-rule:condition-editor")).toEqual("lrce-");
+  expect(getIdPrefix("translation-tab:language-list")).toEqual("ttll-");
+  expect(getIdPrefix("matrix-cell-values-popup-editor")).toEqual("mcvpe-");
+  expect(getIdPrefix("")).toEqual("");
+});
+test("Design surface and property grid surveys do not share element ids", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const designerSurvey = creator.survey;
+  creator.selectElement(designerSurvey.getAllQuestions()[0]);
+  const propertyGridSurvey = creator.sidebar.getPageById("propertyGrid").componentData.survey;
+
+  expect(designerSurvey.renderedIdPrefix).toEqual("dt-");
+  expect(propertyGridSurvey.renderedIdPrefix).toEqual("pg-");
+
+  const designerQuestionId = designerSurvey.getAllQuestions()[0].renderedId;
+  const nameEditorId = propertyGridSurvey.getQuestionByName("name").renderedId;
+  expect(designerQuestionId.indexOf("dt-sq_")).toEqual(0);
+  expect(nameEditorId.indexOf("pg-sq_")).toEqual(0);
+  expect(designerQuestionId).not.toEqual(nameEditorId);
 });
 test("Modify property editor titleActions on event", (): any => {
   PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());

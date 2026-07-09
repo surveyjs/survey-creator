@@ -208,7 +208,11 @@ test.describe(title, () => {
 
     await page.getByRole("row", { name: "Containers" }).hover();
     await page.getByRole("row", { name: "Containers" }).getByRole("button").nth(1).click();
-    await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers1");
+    // Target the popup's Title field by data-name rather than accessible name: the edit popup and the
+    // main presets survey are two un-namespaced SurveyModels, and on Angular (where renderedIdSuffix
+    // is disabled) their aria-labelledby ids collide, so the field's accessible name resolves to the
+    // main survey's title ("Toolbox") instead of "Title".
+    await page.locator(".sps-popup [data-name='title'] input").fill("Containers1");
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers1", "Matrix Questions", "Misc"]);
 

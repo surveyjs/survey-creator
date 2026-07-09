@@ -13,6 +13,12 @@ export class TranslationTabComponent extends BaseAngular<Translation> {
   protected getModel(): Translation {
     return this.model;
   }
+  // The strings survey is fully recreated on reset(). Its elements keep deterministic ids across
+  // instances, so *ngFor's element trackBy would reuse the disposed survey's (lazy-skeleton) rows.
+  // Keying the survey-content by the per-instance renderedIdPrefix forces Angular to recreate it.
+  public trackStringsSurveyBy(_: number, survey: any): string {
+    return survey?.renderedIdPrefix || "";
+  }
 }
 AngularComponentFactory.Instance.registerComponent("svc-tab-translation", TranslationTabComponent);
 

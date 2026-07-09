@@ -41,6 +41,21 @@ export async function compareScreenshot(
     ...options
   };
 
+  // Web fonts (Open Sans, several weights) load lazily over the network; a screenshot taken
+  // before they finish captures fallback-font rendering, which shifts text metrics and fails
+  // the comparison. `document.fonts.status === "loaded"` is NOT enough: it reports "loaded"
+  // whenever no load is *currently in progress*, so it returns true in the gap before a
+  // lazily-used weight (e.g. 700) has even started loading - the screenshot then races the
+  // font fetch (flaky on cold-cache/slow-network CI). Instead, explicitly kick off every
+  // declared @font-face, await them all, then wait for the set to settle.
+  await page.evaluate(async () => {
+    const fonts: any = (document as any).fonts;
+    const pending: Array<Promise<unknown>> = [];
+    fonts.forEach((face: any) => pending.push(face.load().catch(() => undefined)));
+    await Promise.all(pending);
+    await fonts.ready;
+  });
+
   if (!!currentElement) {
     const element = (<Locator>currentElement).filter({ visible: true });
     await expect.soft(element.nth(0)).toBeVisible();
