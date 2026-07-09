@@ -624,6 +624,22 @@ test("A language selector shows 'No data to display'", () => {
 
   surveyLocalization.supportedLocales = [];
 });
+test("Add language popup search placeholder uses creator locale, not survey default locale", () => {
+  const prevDefault = surveyLocalization.defaultLocale;
+  try {
+    surveyLocalization.defaultLocale = "de";
+    surveyLocalization.supportedLocales = ["en", "fr", "de"];
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+    const tabTranslation = new TabTranslationPlugin(creator);
+    tabTranslation.activate();
+    const list = <ListModel>tabTranslation.model["addLanguageAction"].data;
+    expect(list.filterStringPlaceholder).toBe("Type to search...");
+  } finally {
+    surveyLocalization.defaultLocale = prevDefault;
+    surveyLocalization.supportedLocales = [];
+  }
+});
 test("Make invisible locales in language selector, that has been already choosen", () => {
   const survey = new SurveyModel({
     pages: [
