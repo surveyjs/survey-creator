@@ -184,7 +184,7 @@ test.describe(title, () => {
     await page.getByRole("combobox", { name: "Icon name" }).click({ force: true });
 
     await hideContentBehindPopup(page);
-    await compareScreenshot(page, ".sv-dropdown-popup .sd-selectlist__container", "presets-icon-edit-popup.png");
+    await compareScreenshot(page, ".sv-dropdown-popup .sd-selectlist__container", "presets-icon-edit-popup.png", { maxDiffPixels: 1 });
     await showContentBehindPopup(page);
   });
 

@@ -123,6 +123,17 @@ export interface ElementGetExpandCollapseStateEvent {
   reason: ElementGetExpandCollapseStateEventReason;
 }
 
+export interface BeforeShowInplaceDescriptionEditorEvent {
+  /**
+   * A survey element (survey, question, panel, or page) whose in-place description editor is about to be displayed on the design surface.
+   */
+  element: SurveyModel | Question | PanelModel | PageModel;
+  /**
+   * A Boolean property that specifies whether the in-place description editor is displayed. Set this property to `false` to hide the editor for the current `options.element` or to `true` to display it.
+   */
+  show: boolean;
+}
+
 export interface ElementAllowOperationsEvent {
   /**
    * A survey element (question or panel) for which you can disable user interactions.

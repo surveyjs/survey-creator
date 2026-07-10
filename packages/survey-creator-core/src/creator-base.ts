@@ -15,7 +15,7 @@ import {
   ensureBaseThemeStyles
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
-import { editorLocalization, setupLocale } from "./editorLocalization";
+import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
@@ -61,6 +61,7 @@ import {
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
   ElementGetExpandCollapseStateEventReason,
+  BeforeShowInplaceDescriptionEditorEvent,
   AfterPropertyChangedEvent,
   PropertyValueChangingEvent,
   PropertyValueChangedEvent,
@@ -135,7 +136,7 @@ export class SurveyCreatorModel extends Base
   public getRenderer(name: string): string { return null; }
   public getRendererContext(locStr: LocalizableString): any { return locStr; }
   public getProcessedText(text: string): string { return text; }
-  public getLocale(): string { return this.locale; }
+  public getLocale(): string { return editorLocalization.locale; }
   /**
    * Specifies whether to display the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#designer-tab) tab.
    *
@@ -297,6 +298,7 @@ export class SurveyCreatorModel extends Base
    * Specifies whether users can see and edit the survey header and related survey properties.
    *
    * Default value: `true`
+   * @see onBeforeShowInplaceDescriptionEditor
    */
   get showSurveyHeader(): boolean {
     return this.allowEditSurveyTitle;
@@ -719,6 +721,13 @@ export class SurveyCreatorModel extends Base
    * @see expandAll
    */
   public onElementGetExpandCollapseState: EventBase<SurveyCreatorModel, ElementGetExpandCollapseStateEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetExpandCollapseStateEvent>();
+  /**
+   * An event that is raised before Survey Creator displays an in-place description editor on the design surface. Handle this event to show or hide the description editor for the survey, individual questions, panels (including panels within a Dynamic Panel), and pages.
+   * @see onAllowInplaceEdit
+   * @see inplaceEditChoiceValues
+   * @see showSurveyHeader
+   */
+  public onBeforeShowInplaceDescriptionEditor: EventBase<SurveyCreatorModel, BeforeShowInplaceDescriptionEditorEvent> = this.addCreatorEvent<SurveyCreatorModel, BeforeShowInplaceDescriptionEditorEvent>();
   /**
    * An event that is raised when Survey Creator obtains permitted operations for a survey element. Use this event to disable user interactions with a question, panel, or page on the design surface.
    *
@@ -2539,6 +2548,16 @@ export class SurveyCreatorModel extends Base
     return options.collapsed;
   }
 
+  beforeShowInplaceDescriptionEditor(element: SurveyModel | Question | PageModel | PanelModel, show: boolean): boolean {
+    if (this.onBeforeShowInplaceDescriptionEditor.isEmpty) return show;
+    const options: BeforeShowInplaceDescriptionEditorEvent = {
+      element: element,
+      show: show
+    };
+    this.onBeforeShowInplaceDescriptionEditor.fire(this, options);
+    return options.show;
+  }
+
   private restoreState(element: SurveyElement) {
     const state = this.getElementExpandCollapseState(element as any, "drag-end", undefined);
     if (state !== undefined) {
@@ -2885,8 +2904,8 @@ export class SurveyCreatorModel extends Base
       initializeDesignTimeSurveyModel(survey, this);
     }
     survey["needRenderIcons"] = false;
-    if (reason != "designer" && reason != "preview" && reason !== "theme") {
-      survey.locale = editorLocalization.currentLocale;
+    if (reason != "designer" && reason != "preview" && reason !== "theme" && reason !== "condition-builder") {
+      survey.locale = editorLocalization.locale;
       if (!json["clearInvisibleValues"]) {
         survey.clearInvisibleValues = "onComplete";
       }
@@ -2913,6 +2932,9 @@ export class SurveyCreatorModel extends Base
       if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
       if (reason === "property-grid" && options.question?.parentQuestion?.isDescendantOf("matrixdropdownbase") && options.question?.parent?.getType() !== "panel") {
         options.popup.setWidthByTarget = false;
+      }
+      if (reason !== "designer" && reason !== "preview" && reason !== "theme") {
+        applyCreatorUiLocaleToPopup(options.popup, this);
       }
     });
     return survey;
@@ -5069,6 +5091,7 @@ export class SurveyCreatorModel extends Base
 
   /**
    * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.
+   * @see onBeforeShowInplaceDescriptionEditor
    * @see inplaceEditChoiceValues
    */
   public onAllowInplaceEdit: EventBase<SurveyCreatorModel, AllowInplaceEditEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowInplaceEditEvent>();
@@ -5085,6 +5108,9 @@ export class CreatorBase extends SurveyCreatorModel { }
 export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreatorModel) {
   model.creator = creator;
   model.isPopupEditorContent = false;
+  model.beforeShowInplaceDescriptionEditorCallback = (element: SurveyModel | Question | PageModel | PanelModel, show: boolean): boolean => {
+    return creator.beforeShowInplaceDescriptionEditor(element, show);
+  };
   model.onElementWrapperComponentName.add((_, opt) => {
     const compName = opt.componentName;
     if (opt.wrapperName === "component") {
