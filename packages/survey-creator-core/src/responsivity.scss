@@ -52,6 +52,10 @@
     padding-right: 0;
     border: 0;
 
+    .sd-page__header {
+      row-gap: 0;
+    }
+
     .sd-page__title {
       margin: 0;
     }
