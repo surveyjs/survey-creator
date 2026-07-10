@@ -55,17 +55,18 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding-top: var(--sjs2-spacing-x000);
+  // padding-top: var(--sjs2-spacing-x000);
   padding-inline: var(--sjs2-spacing-x400);
   padding-bottom: var(--sjs2-spacing-x500);
+  padding-top: var(--sjs2-spacing-x200);
+  row-gap: var(--sjs2-spacing-x200);
+
   box-sizing: border-box;
   background: var(--sjs2-color-utility-property-grid);
   box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary);
-}
+// }
 
-.spg-panel__content {
-  padding-top: var(--sjs2-spacing-x200);
-  // row-gap: var(--sjs2-spacing-x200);
+// .spg-panel__content {
 
   .spg-row {
     width: 100%;
@@ -73,9 +74,10 @@
   }
 
   .spg-row--multiple {
-    margin-top: var(--sjs2-spacing-x100);
+    margin-top: var(--sjs2-spacing-negative-x100);
   }
 }
+
 .svc-side-bar--mobile {
   .spg-panel__content {
     padding-inline: var(--sjs2-spacing-x150);
@@ -88,9 +90,11 @@
     box-shadow: unset;
   }
 }
-.spg-row--enter.spg-row.spg-row.spg-row {
-  margin-top: 0;
-}
+
+// .spg-row--enter.spg-row.spg-row.spg-row {
+//   margin-top: 0;
+// }
+
 .spg-row--enter {
   animation-fill-mode: forwards;
   animation-name: fadeIn, moveInWithOverflow;
@@ -146,6 +150,7 @@
 }
 .spg-panel.spg-panel--group {
   &>.spg-panel__content {
+    row-gap: var(--sjs2-spacing-x100);
     padding: 0;
     box-shadow: none;
   }
@@ -157,12 +162,12 @@
     padding: var(--sjs2-layout-component-caption-content-padding-vertical)
       var(--sjs2-layout-component-caption-content-padding-horizontal);
   }
-  .spg-row {
-    margin-top: var(--sjs2-spacing-x100);
-  }
-  .spg-row:first-of-type {
-    margin-top: 0;
-  }
+  // .spg-row {
+  //   margin-top: var(--sjs2-spacing-x100);
+  // }
+  // .spg-row:first-of-type {
+  //   margin-top: 0;
+  // }
 }
 .spg-row {
   .spg-question__header ~ hr {
