@@ -35,7 +35,20 @@ export enum JournalOp {
   ElementRemoved = 2,
   ElementReordered = 3,
   ElementConverted = 4,
-  FullSnapshot = 5
+  FullSnapshot = 5,
+  ElementMoved = 6
+}
+
+/**
+ * Thrown (or reported via `IJournalApplyResult.errorName`) when a record
+ * cannot be applied because the receiver's survey diverged from the sender's:
+ * the element or container the record addresses does not exist here.
+ */
+export class JournalSyncError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "JournalSyncError";
+  }
 }
 
 export interface IJournalPropertyChangedPayload {
@@ -91,13 +104,25 @@ export interface IJournalFullSnapshotPayload {
   json: any;
 }
 
+export interface IJournalElementMovedPayload {
+  /** Path to the source array, e.g. `/pages/page1/elements`. */
+  from: JournalLocator;
+  /** Path to the destination array, e.g. `/pages/page2/elements`. */
+  to: JournalLocator;
+  /** The element's index in the destination array. */
+  index: number;
+  /** Identity (name) of the moved element. */
+  key: string | number;
+}
+
 export type JournalPayload =
   | IJournalPropertyChangedPayload
   | IJournalArrayChangedPayload
   | IJournalElementRemovedPayload
   | IJournalElementReorderedPayload
   | IJournalElementConvertedPayload
-  | IJournalFullSnapshotPayload;
+  | IJournalFullSnapshotPayload
+  | IJournalElementMovedPayload;
 
 /**
  * A single serializable entry of the creator action journal. Records can be
@@ -116,6 +141,8 @@ export interface IJournalApplyResult {
   seq: number;
   success: boolean;
   error?: string;
+  /** The thrown error's class name, e.g. `"JournalSyncError"`. */
+  errorName?: string;
 }
 
 export interface IJournalOptions {

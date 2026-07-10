@@ -1,6 +1,6 @@
 import { CreatorTester } from "./creator-tester";
 import { JournalPlugin } from "../src/plugins/journal";
-import { IJournalRecord } from "../src/plugins/journal/journal-record";
+import { IJournalRecord, JournalOp } from "../src/plugins/journal/journal-record";
 
 // Replicates the creator-synchronization scenarios of the UndoRedoSyncPlugin
 // test suite (feature/undo-redo-sync branch) on top of the JournalPlugin.
@@ -605,6 +605,57 @@ test("journal-sync: paneldynamic - undo/redo of nested add round-trips on the pe
   creatorA.redo();
   expect(pdB.templateElements).toHaveLength(1);
   expect(pdB.templateElements[0].name).toEqual("q_in_pd");
+});
+
+test("journal-sync: cross-page move travels live as one record, the peer keeps its instance", () => {
+  const { creatorA, creatorB, pluginA } = makeCreators({
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "q1", title: "T1", isRequired: true }] },
+      { name: "page2", elements: [{ type: "comment", name: "q2" }] }
+    ]
+  });
+  const qB = creatorB.survey.getQuestionByName("q1");
+  let addedOnB = 0;
+  creatorB.onQuestionAdded.add(() => addedOnB++);
+  const q = creatorA.survey.getQuestionByName("q1");
+  creatorA.startUndoRedoTransaction("drag drop");
+  creatorA.survey.pages[0].elements.splice(0, 1);
+  creatorA.survey.pages[1].elements.splice(1, 0, q);
+  creatorA.stopUndoRedoTransaction();
+  expect(pluginA.records).toHaveLength(1);
+  expect(pluginA.records[0].op).toEqual(JournalOp.ElementMoved);
+  expect(creatorB.JSON).toEqual(creatorA.JSON);
+  // The peer relocated its existing instance without reporting a question add.
+  expect(creatorB.survey.getQuestionByName("q1")).toBe(qB);
+  expect(creatorB.survey.getQuestionByName("q1").page.name).toEqual("page2");
+  expect((<any>qB).isRequired).toBeTruthy();
+  expect(addedOnB).toEqual(0);
+});
+
+test("journal-sync: B undo of a remote cross-page move returns the element on both sides", () => {
+  const { creatorA, creatorB } = makeCreators({
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "q1", title: "T1" }] },
+      { name: "page2", elements: [{ type: "comment", name: "q2" }] }
+    ]
+  });
+  const qA = creatorA.survey.getQuestionByName("q1");
+  const qB = creatorB.survey.getQuestionByName("q1");
+  creatorA.startUndoRedoTransaction("drag drop");
+  creatorA.survey.pages[0].elements.splice(0, 1);
+  creatorA.survey.pages[1].elements.splice(0, 0, qA);
+  creatorA.stopUndoRedoTransaction();
+  expect(creatorB.survey.getQuestionByName("q1").page.name).toEqual("page2");
+
+  // The applied move is one transaction on B; its undo travels back to A as
+  // the remove-first arrayChanged pair (not mergeable - the remove is already
+  // on the wire when the add is recorded) and A converges through it. B keeps
+  // its own instance; on A the element is re-created from the serialized add.
+  creatorB.undo();
+  expect(creatorB.survey.getQuestionByName("q1").page.name).toEqual("page1");
+  expect(creatorA.survey.getQuestionByName("q1").page.name).toEqual("page1");
+  expect(creatorB.survey.getQuestionByName("q1")).toBe(qB);
+  expect(creatorA.JSON).toEqual(creatorB.JSON);
 });
 
 test("journal-sync: dispose detaches the plugin and stops broadcasting", () => {

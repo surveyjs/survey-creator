@@ -11,7 +11,7 @@ import {
   JournalOp,
   JournalPayload
 } from "./journal-record";
-import { appendSegment, buildLocator, escapeSegment, findStep, getItemIdentity, getOwner, serializeElement, serializeValue } from "./journal-locator";
+import { appendSegment, buildLocator, escapeSegment, findStep, getItemIdentity, getOwner, isSerializedSurveyObj, serializeElement, serializeValue } from "./journal-locator";
 
 interface IAddedElementEntry {
   record: IJournalRecord;
@@ -212,6 +212,7 @@ export class JournalRecorder {
       const key = getItemIdentity(item);
       payload.removed.push(key !== undefined ? { key: key } : { matchJSON: this.serializeSafe(item) });
     }
+    if (this.tryMergeMoveRecord(payload, removedItems)) return;
     const record = this.pushRecord(JournalOp.ArrayChanged, payload);
     for (let i = 0; i < addedItems.length; i++) {
       const item = addedItems[i];
@@ -219,6 +220,45 @@ export class JournalRecorder {
         this.addedElements.set(item, { record: record, added: payload.added[i] });
       }
     }
+  }
+  private tryMergeMoveRecord(payload: IJournalArrayChangedPayload, removedItems: Array<any>): boolean {
+    // A cross-container drag&drop reaches onModified as an "add to the new
+    // array" PROPERTY_CHANGED followed by a "remove from the old array" one
+    // (the undo-redo controller notifies the transaction's actions in reverse
+    // order). The pair is one operation: rewrite the already-recorded add into
+    // a single atomic elementMoved record IN PLACE - like typing coalescing,
+    // live subscribers get onRecordChanged and re-apply idempotently - and
+    // drop the remove record.
+    // The reverse order (remove first, then add: an undo of a move or a
+    // programmatic move outside a transaction) is NOT merged: the remove
+    // record has already been emitted and live peers have deleted the element,
+    // so a rewritten elementMoved could no longer be applied there. Such pairs
+    // keep traveling as two arrayChanged records.
+    // A same-name add+remove pair across two different arrays cannot be two
+    // unrelated operations - element names are unique per survey - so no
+    // extra time-window guard is needed.
+    if (payload.added.length !== 0 || payload.removed.length !== 1) return false;
+    const key = payload.removed[0].key;
+    if (key === undefined) return false;
+    const last = this.recordsValue[this.recordsValue.length - 1];
+    if (!last || last.op !== JournalOp.ArrayChanged) return false;
+    const lastPayload = <IJournalArrayChangedPayload>last.payload;
+    if (lastPayload.target === payload.target || Array.isArray(lastPayload.fullValue)) return false;
+    if (lastPayload.added.length !== 1 || lastPayload.removed.length !== 0) return false;
+    const item = lastPayload.added[0].item;
+    if (!isSerializedSurveyObj(item) || !item.json || item.json.name !== key) return false;
+    last.op = JournalOp.ElementMoved;
+    last.payload = {
+      from: payload.target,
+      to: lastPayload.target,
+      index: lastPayload.added[0].index,
+      key: key
+    };
+    last.timestamp = new Date().getTime();
+    const movedElement = removedItems[0];
+    if (!!movedElement && typeof movedElement === "object")this.addedElements.delete(movedElement);
+    this.onRecordChanged.fire(this, { record: last });
+    return true;
   }
   private reconcileAddedElement(element: any): void {
     // Semantic add events (ADDED_FROM_TOOLBOX, PAGE_ADDED, ...) duplicate the

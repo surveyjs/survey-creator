@@ -5,12 +5,14 @@ import {
   IJournalArrayChangedPayload,
   IJournalArrayItemRemoved,
   IJournalElementConvertedPayload,
+  IJournalElementMovedPayload,
   IJournalElementRemovedPayload,
   IJournalElementReorderedPayload,
   IJournalFullSnapshotPayload,
   IJournalPropertyChangedPayload,
   IJournalRecord,
-  JournalOp
+  JournalOp,
+  JournalSyncError
 } from "./journal-record";
 import { deserializeValue, findItemByIdentity, isSerializedSurveyObj, resolveLocator, splitPointer } from "./journal-locator";
 import { JournalRecorder } from "./journal-recorder";
@@ -46,7 +48,9 @@ export class JournalApplier {
           results.push({ seq: record.seq, success: true });
         } catch(e) {
           if (options.strict) throw e;
-          results.push({ seq: record.seq, success: false, error: !!e && e.message ? e.message : "" + e });
+          const result: IJournalApplyResult = { seq: record.seq, success: false, error: !!e && e.message ? e.message : "" + e };
+          if (!!e && !!e.name) result.errorName = e.name;
+          results.push(result);
         }
       }
     } finally {
@@ -55,7 +59,7 @@ export class JournalApplier {
     return results;
   }
 
-  private normalizeInput(input: IJournalRecord | Array<IJournalRecord> | string): Array<IJournalRecord> {
+  public normalizeInput(input: IJournalRecord | Array<IJournalRecord> | string): Array<IJournalRecord> {
     if (typeof input === "string") {
       const parsed = JSON.parse(input);
       return Array.isArray(parsed) ? parsed : [parsed];
@@ -87,6 +91,9 @@ export class JournalApplier {
         break;
       case JournalOp.ElementConverted:
         this.runInTransaction(() => this.applyElementConverted(<IJournalElementConvertedPayload>record.payload));
+        break;
+      case JournalOp.ElementMoved:
+        this.runInTransaction(() => this.applyElementMoved(<IJournalElementMovedPayload>record.payload));
         break;
       case JournalOp.FullSnapshot:
         this.creator.JSON = (<IJournalFullSnapshotPayload>record.payload).json;
@@ -171,9 +178,61 @@ export class JournalApplier {
     for (let i = 0; i < payload.added.length; i++) {
       const added = payload.added[i];
       if (this.isItemPresent(array, added.item)) continue;
-      const item = deserializeValue(added.item);
       const index = added.index >= 0 ? Math.min(added.index, array.length) : array.length;
+      if (this.tryMoveExistingElement(payload.target, array, added.item, index)) continue;
+      const item = deserializeValue(added.item);
       array.splice(index, 0, item);
+    }
+  }
+  private applyElementMoved(payload: IJournalElementMovedPayload): void {
+    const array: any = resolveLocator(payload.to, this.survey);
+    if (!Array.isArray(array)) {
+      throw new JournalSyncError("Cannot apply element move: destination array not found: " + JSON.stringify(payload.to));
+    }
+    if (!!findItemByIdentity(array, payload.key)) return; // already moved - no-op for idempotency
+    const existing: any = this.survey.getQuestionByName(String(payload.key)) || this.survey.getPanelByName(String(payload.key));
+    if (!existing) {
+      throw new JournalSyncError("Cannot apply element move: \"" + payload.key + "\" not found (from " + JSON.stringify(payload.from) + " to " + JSON.stringify(payload.to) + ")");
+    }
+    const dest: any = resolveLocator(splitPointer(payload.to).container, this.survey);
+    if (!dest || typeof dest.addElement !== "function") {
+      throw new JournalSyncError("Cannot apply element move: destination container not found: " + JSON.stringify(payload.to));
+    }
+    this.relocateElement(existing, dest, payload.index, array.length);
+  }
+  private tryMoveExistingElement(target: string, array: Array<any>, serializedItem: any, index: number): boolean {
+    // A cross-container move normally travels as a single elementMoved record,
+    // but programmatic moves outside an undo transaction (e.g. `q.page = otherPage`
+    // in user code - two single-action changes) still produce an "add here" +
+    // "remove there" pair of array records. Applying such an add by
+    // deserializing a copy would duplicate the element's name while the
+    // original still lives in the old container (the creator renames the
+    // duplicate on insert) - relocate the existing instance instead, so the
+    // receiver reproduces a true move and the element keeps its state.
+    if (!isSerializedSurveyObj(serializedItem) || !serializedItem.json) return false;
+    const name = serializedItem.json.name;
+    if (!name) return false;
+    const existing: any = this.survey.getQuestionByName(name) || this.survey.getPanelByName(name);
+    if (!existing) return false;
+    const parent: any = existing.parent;
+    if (!parent || typeof parent.removeElement !== "function" || parent.elements === array) return false;
+    const dest: any = resolveLocator(splitPointer(target).container, this.survey);
+    if (!dest || typeof dest.addElement !== "function") return false;
+    this.relocateElement(existing, dest, index, array.length);
+    return true;
+  }
+  private relocateElement(existing: any, dest: any, index: number, arrayLength: number): void {
+    // The same move primitives the creator's drag&drop uses (doDrop):
+    // isMovingQuestion suppresses onQuestionAdded, so the receiver does not
+    // treat the relocation as adding a new question (no unique-name pass, no
+    // creator.onQuestionAdded for subscribers).
+    const parent: any = existing.parent;
+    this.survey.startMovingQuestion();
+    try {
+      if (!!parent && typeof parent.removeElement === "function") parent.removeElement(existing);
+      dest.addElement(existing, Math.min(index, arrayLength));
+    } finally {
+      this.survey.stopMovingQuestion();
     }
   }
   private findRemovedIndex(array: Array<any>, removed: IJournalArrayItemRemoved): number {
@@ -237,7 +296,11 @@ export class JournalApplier {
   }
   private applyElementConverted(payload: IJournalElementConvertedPayload): void {
     const existing: any = resolveLocator(payload.target, this.survey);
-    if (!!existing && existing.getType() === payload.element.type) return; // already converted
+    // Idempotency: skip only if the element already matches the record exactly.
+    // Same type alone is not enough a subtype conversion (e.g. text -> text
+    // with a different inputType) keeps the type but changes the JSON.
+    if (!!existing && existing.getType() === payload.element.type &&
+      JSON.stringify(existing.toJSON()) === JSON.stringify(payload.element.json)) return;
     const newElement: any = deserializeValue(payload.element);
     if (!newElement || typeof newElement.getType !== "function") {
       throw new Error("Cannot rehydrate converted element: " + JSON.stringify(payload.target));

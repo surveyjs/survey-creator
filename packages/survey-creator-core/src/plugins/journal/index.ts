@@ -4,10 +4,12 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { IJournalApplyResult, IJournalOptions, IJournalRecord } from "./journal-record";
 import { JournalRecorder } from "./journal-recorder";
 import { IJournalApplyOptions, JournalApplier } from "./journal-applier";
+import { JournalTabRefresher } from "./journal-tab-refresher";
 
 export { JournalRecorder } from "./journal-recorder";
 export { JournalApplier, IJournalApplyOptions } from "./journal-applier";
 export * from "./journal-record";
+export * from "./journal-tab-refresher";
 export { buildLocator, resolveLocator, serializeValue, deserializeValue } from "./journal-locator";
 
 /**
@@ -40,10 +42,12 @@ export class JournalPlugin implements ICreatorPlugin {
   public model: any = undefined;
   public recorder: JournalRecorder;
   public applier: JournalApplier;
+  public refresher: JournalTabRefresher;
 
   constructor(private creator: SurveyCreatorModel, options: IJournalOptions = {}) {
     this.recorder = new JournalRecorder(creator, options);
     this.applier = new JournalApplier(creator, this.recorder);
+    this.refresher = new JournalTabRefresher(creator);
   }
   public activate(): void { }
   public deactivate(): boolean {
@@ -51,6 +55,7 @@ export class JournalPlugin implements ICreatorPlugin {
   }
   public dispose(): void {
     this.recorder.dispose();
+    this.refresher.dispose();
   }
 
   public get records(): Array<IJournalRecord> {
@@ -87,6 +92,13 @@ export class JournalPlugin implements ICreatorPlugin {
     return this.recorder.snapshot();
   }
   public apply(input: IJournalRecord | Array<IJournalRecord> | string, options?: IJournalApplyOptions): Array<IJournalApplyResult> {
-    return this.applier.apply(input, options);
+    const records = this.applier.normalizeInput(input);
+    try {
+      return this.applier.apply(records, options);
+    } finally {
+      // The Translation/Logic tabs render private snapshot models that do not
+      // react to in-place survey mutations - refresh them (see the refresher).
+      this.refresher.refresh(records);
+    }
   }
 }
