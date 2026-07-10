@@ -2506,3 +2506,25 @@ test("Condition editor: allConditionQuestions titles respect survey locale when 
   expect(editor.allConditionQuestions[0].text).toBe("Question 1 en francais");
   expect(editor.allConditionQuestions[1].text).toBe("Question 2 en francais");
 });
+test("questionValue title is invisible on selecting a calculated value, Bug#7862", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text", title: "Question 1" },
+      { name: "q2", type: "text" }
+    ],
+    calculatedValues: [{ name: "val1", expression: "{q1} + 1" }]
+  });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("q2"), new EmptySurveyCreatorOptions(), "visibleIf");
+  const panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "q1";
+  panel.getQuestionByName("operator").value = "equal";
+  const questionValue = <QuestionTextModel>panel.getQuestionByName("questionValue");
+  expect(questionValue.title).toBe("Question 1");
+  expect(questionValue.hasTitle).toBe(true);
+  expect(questionValue.placeholder).toBeFalsy();
+
+  panel.getQuestionByName("questionName").value = "val1";
+  const calcQuestionValue = <QuestionTextModel>panel.getQuestionByName("questionValue");
+  expect(calcQuestionValue.hasTitle).toBe(false);
+  expect(calcQuestionValue.placeholder).toBe("Enter a value...");
+});
