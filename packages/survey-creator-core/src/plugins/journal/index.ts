@@ -31,6 +31,10 @@ export { buildLocator, resolveLocator, serializeValue, deserializeValue } from "
  * are mirrored.
  *
  * Limitations:
+ * - Requires the creator's undo-redo plugin (always registered by the creator
+ *   itself): its controller is the source of the `onModified` notifications
+ *   the recorder consumes, and applied records enter the undo stack through it.
+ *   The constructor throws when the plugin is missing.
  * - Convergence is guaranteed for a single ordered stream of records
  *   (last-write-wins, no conflict resolution for concurrent edits).
  * - Programmatic `creator.JSON = ...` / `creator.changeText()` calls do not fire

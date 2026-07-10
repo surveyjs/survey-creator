@@ -21,6 +21,13 @@ interface IAddedElementEntry {
 /**
  * Records survey modifications reported by `creator.onModified` as serializable
  * journal records. See `JournalPlugin` for the public facade.
+ *
+ * Requires the creator's undo-redo plugin: its controller is the creator's
+ * only subscriber to survey-core mutations (`survey.onPropertyValueChangedCallback`)
+ * and the source of the `onModified` notifications this recorder consumes.
+ * The plugin is registered unconditionally by the creator today; the constructor
+ * check exists so that a future opt-out fails loudly instead of silently
+ * recording nothing.
  */
 export class JournalRecorder {
   public onRecordAdded: EventBase<JournalRecorder, { record: IJournalRecord }> = new EventBase<JournalRecorder, { record: IJournalRecord }>();
@@ -40,6 +47,11 @@ export class JournalRecorder {
   private modifiedHandler: (sender: SurveyCreatorModel, options: ModifiedEvent) => void;
 
   constructor(private creator: SurveyCreatorModel, options: IJournalOptions = {}) {
+    if (!creator.undoRedoController) {
+      throw new Error("JournalRecorder requires the creator's undo-redo plugin: " +
+        "its controller is the source of the onModified change notifications the journal records. " +
+        "Without it survey modifications would be lost silently.");
+    }
     this.coalesceInterval = typeof options.coalesceInterval === "number" ? options.coalesceInterval : 1000;
     this.modifiedHandler = (sender: SurveyCreatorModel, opts: ModifiedEvent) => this.onCreatorModified(opts);
     this.creator.onModified.add(this.modifiedHandler);

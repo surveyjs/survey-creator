@@ -528,3 +528,13 @@ test("journal: startRecording/stopRecording", (): any => {
   a.survey.title = "recorded";
   expect(pluginA.records).toHaveLength(1);
 });
+
+test("journal: constructor throws without the undo-redo plugin", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = initialJSON;
+  // The creator registers the undoredo plugin unconditionally; simulate a
+  // hypothetical opt-out to pin the recorder's fail-loudly contract.
+  (<any>creator).plugins["undoredo"] = undefined;
+  expect(creator.undoRedoController).toBeFalsy();
+  expect(() => new JournalPlugin(creator)).toThrow(/undo-redo/);
+});
