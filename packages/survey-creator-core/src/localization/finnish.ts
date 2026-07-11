@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var fiStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Muokkaa",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "Katso ja opi luomaan kyselyjä",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Pudota kysymys Työkalupakista tähän.",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "Luo sääntö mukauttamaan kyselyn kulkua.",
-    // "Copy"
-    copy: "Kopioi",
     // "Duplicate"
     duplicate: "Monista",
-    // "Add to toolbox"
-    addToToolbox: "Lisää Työkalupakkiin",
-    // "Delete Panel"
-    deletePanel: "Poista Paneeli",
-    // "Delete Question"
-    deleteQuestion: "Poista Kysymys",
-    // "Convert to"
-    convertTo: "Konvertoi",
-    // "Drag element"
-    drag: "Vedä elementtiä"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var fiStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "Vakio ({0})",
-    // "Survey"
-    survey: "Kysely",
     // "Settings"
     settings: "Kyselyn asetukset",
     // "Open settings"
@@ -144,42 +120,14 @@ export var fiStrings = {
     surveyTypeName: "Kysely",
     // [Auto-translated] "Page"
     pageTypeName: "Sivu",
-    // [Auto-translated] "Panel"
-    panelTypeName: "Paneeli",
-    // [Auto-translated] "Question"
-    questionTypeName: "Kysymys",
-    // [Auto-translated] "Column"
-    columnTypeName: "Sarake",
-    // "Add New Page"
-    addNewPage: "Lisää uusi sivu",
-    // "Scroll to the Right"
-    moveRight: "Selaa oikealle",
-    // "Scroll to the Left"
-    moveLeft: "Selaa vasemmalle",
-    // "Delete Page"
-    deletePage: "Poista sivu",
-    // "Edit Page"
-    editPage: "Muokkaa sivua",
-    // "Edit"
-    edit: "Muokkaa",
     // "page"
     newPageName: "sivu",
     // "question"
     newQuestionName: "kysymys",
     // "panel"
     newPanelName: "paneeli",
-    // "text"
-    newTextItemName: "teksti",
-    // "Default"
-    defaultV2Theme: "Oletus",
-    // [Auto-translated] "Modern"
-    modernTheme: "Moderni",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Oletus (vanha)",
     // "Preview Survey Again"
     testSurveyAgain: "Testaa kysely uudestaan",
-    // "Survey width: "
-    testSurveyWidth: "Kyselyn laajuus: ",
     // "You had to navigate to"
     navigateToMsg: "Sinun piti navigoida:",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var fiStrings = {
     undo: "Kumoa",
     // "Redo"
     redo: "Tee uudelleen",
-    // "Undo last change"
-    undoTooltip: "Kumoa viimeinen muutos",
-    // "Redo the change"
-    redoTooltip: "Tee muutos uudelleen",
     // [Auto-translated] "Expand"
     expandTooltip: "Laajenna",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var fiStrings = {
     showMoreChoices: "Näytä lisää",
     // [Auto-translated] "Show less"
     showLessChoices: "Näytä vähemmän",
-    // "Copy"
-    copy: "Kopioi",
-    // "Cut"
-    cut: "Leikkaa",
-    // "Paste"
-    paste: "Liitä",
-    // "Copy selection to clipboard"
-    copyTooltip: "Kopioi valinta leikepöydälle",
-    // "Cut selection to clipboard"
-    cutTooltip: "Leikkaa valinta leikepöydälle",
-    // "Paste from clipboard"
-    pasteTooltip: "Liitä leikepöydältä",
-    // "Options"
-    options: "Vaihtoehdot",
-    // "Generate Valid JSON"
-    generateValidJSON: "Luo kelvollinen JSON",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Tuntematon funktio: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var fiStrings = {
     expressionSyntaxError: "Syntaksivirhe.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Semanttinen virhe.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Luo luettava JSON",
     // "Toolbox"
     toolbox: "Työkalupakki",
-    // "Properties"
-    "property-grid": "Ominaisuudet",
     // [Auto-translated] "Search"
     toolboxSearch: "Etsiä",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var fiStrings = {
     propertyGridPlaceholderTitle: "Aloita lomakkeen määrittäminen",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Napsauta mitä tahansa luokkakuvaketta tutustuaksesi kyselyn asetuksiin. Lisäasetukset ovat käytettävissä, kun lisäät mittauselementin suunnittelupintaan.",
-    // "Please correct JSON."
-    correctJSON: "Korjaa JSON.",
     // "Survey Results "
     surveyResults: "Kyselyn tulos:",
     // "As Table"
@@ -294,8 +216,6 @@ export var fiStrings = {
     saving: "Tallentaa",
     // "Saved"
     saved: "Tallennettu",
-    // "Error"
-    propertyEditorError: "Virhe:",
     // "Error! Editor content is not saved."
     saveError: "Virhe! Editorin sisältöä ei ole tallennettu.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var fiStrings = {
     themeResetConfirmation: "Haluatko todella nollata teeman? Kaikki mukautuksesi menetetään.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Kyllä, nollaa teema",
-    // "Bold"
-    bold: "Lihavoitu",
-    // "Italic"
-    italic: "Kursiivi",
-    // "Underline"
-    underline: "Alleviivaa",
     // "Add Question"
     addNewQuestion: "Lisää kysymys",
     // "Select page..."
@@ -507,8 +421,6 @@ export var fiStrings = {
       trigger_runExpressionDescription: "Kun looginen lauseke palauttaa arvon tosi, mukautettu lauseke suoritetaan. Voit valinnaisesti asettaa tämän lausekkeen tuloksen valittuun kysymykseen.",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Jos looginen lauseke palauttaa arvon tosi, 'Kiitos-sivun' oletusteksti muutetaan annetuksi tekstiksi.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Kun lauseke: '{0}' palauttaa arvon tosi:", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "Uusi sääntö",
       // "make page {0} visible"
@@ -563,8 +475,6 @@ export var fiStrings = {
       conditions: "Ehdot",
       // "Action(s)"
       actions: "Toiminnot",
-      // "Define condition(s)"
-      expressionEditorTitle: "Määritä olosuhteet",
       // "Define action(s)"
       actionsEditorTitle: "Määritä toiminnot",
       // "Delete Action"
@@ -575,8 +485,6 @@ export var fiStrings = {
       selectedActionCaption: "Valitse lisättävä toiminto ...",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Looginen lauseke on tyhjä tai virheellinen. Korjaa se.",
-      // "Please add at least one action."
-      noActionError: "Lisää ainakin yksi toiminto.",
       // "Please fix issues in your action(s)."
       actionInvalid: "Korjaa ongelmat toiminnoissa.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +786,6 @@ export var fiStrings = {
     defaultDisplayValue: "Dynaamisten tekstien oletusnäyttöarvo",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Otsikon tasaus",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Syöttökentän leveys (merkkeinä)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Solun virhesanoman tasaus",
     // [Auto-translated] "Enabled"
@@ -888,32 +794,16 @@ export var fiStrings = {
     disabled: "Pois käytöstä",
     // [Auto-translated] "Inherit"
     inherit: "Peri",
-    // "Apply"
-    apply: "Käytä",
-    // [Auto-translated] "OK"
-    ok: "OKEI",
-    // "Save"
-    save: "Tallenna",
     // [Auto-translated] "Clear"
     clear: "Tyhjennä",
-    // "Save"
-    saveTooltip: "Tallenna",
-    // "Cancel"
-    cancel: "Peruuta",
     // [Auto-translated] "Set"
     set: "Aseta",
-    // "Reset"
-    reset: "Nollaa",
     // [Auto-translated] "Change"
     change: "Muuttaa",
-    // "Refresh"
-    refresh: "Päivitä",
     // [Auto-translated] "Close"
     close: "Sulje",
     // "Delete"
     delete: "Poista",
-    // "Add"
-    add: "Lisää",
     // "Add New"
     addNew: "Lisää uusi",
     // "Click to add an item..."
@@ -922,34 +812,10 @@ export var fiStrings = {
     removeItem: "Poista kohde napsauttamalla...",
     // [Auto-translated] "Drag the item"
     dragItem: "Kohteen vetäminen",
-    // "Other"
-    addOther: "Muu",
-    // "Select All"
-    addSelectAll: "Valitse kaikki",
-    // "None"
-    addNone: "Ei mitään",
-    // "Remove All"
-    removeAll: "Poista kaikki",
     // "Edit"
     edit: "Muokkaa",
-    // "Return without saving"
-    back: "Palaa tallentamatta",
-    // "Return without saving"
-    backTooltip: "Palaa tallentamatta",
-    // "Save and return"
-    saveAndBack: "Tallenna ja palaa",
-    // "Save and return"
-    saveAndBackTooltip: "Tallenna ja palaa",
     // [Auto-translated] "Done"
     doneEditing: "Valmis",
-    // "Edit Choices"
-    editChoices: "Muokkaa valintoja",
-    // "Show Choices"
-    showChoices: "Näytä valinnat",
-    // "Move"
-    move: "Siirrä",
-    // "<empty>"
-    empty: "<tyhjä>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Arvo on tyhjä",
     // "Manual Entry"
@@ -962,12 +828,6 @@ export var fiStrings = {
     fastEntryChoicesMinCountError: "Anna vähintään {0} kohdetta",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Kirjoita valintavaihtoehtojen luettelo ja niiden tunnukset seuraavassa muodossa:\n\nid|vaihtoehto\n\nValintavaihtoehdon tunnus ei näy vastaajille, ja sitä voidaan käyttää ehdollisissa säännöissä.",
-    // "Form Entry"
-    formEntry: "Lomakkeen pääsy",
-    // "Test the service"
-    testService: "Testaa palvelu",
-    // "Please select the element"
-    itemSelectorEmpty: "Valitse elementti",
     // "Please select the action"
     conditionActionEmpty: "Valitse toiminto",
     // "Select a question..."
@@ -976,20 +836,8 @@ export var fiStrings = {
     conditionSelectPage: "Valitse sivu...",
     // "Select a panel..."
     conditionSelectPanel: "Valitse paneeli...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Syötä / valitse arvo",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Paina ctrl + välilyönti saadaksesi lausekkeen täydennysvihje",
-    // "Current row"
-    aceEditorRowTitle: "Nykyinen rivi",
-    // "Current panel"
-    aceEditorPanelTitle: "Nykyinen paneeli",
-    // "For more details please check the documentation"
-    showMore: "Katso lisätietoja dokumentaatiosta",
-    // "Available questions"
-    assistantTitle: "Saatavilla olevat kysymykset:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Sarakkeita tai rivejä on oltava vähintään yksi",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "Tarkista ennen lähettämistä",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +888,12 @@ export var fiStrings = {
     "addNew@navigateToUrlOnCondition": "Lisää uusi URL-osoite",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Lisää uusi sivu",
-    // "Expression is empty"
-    expressionIsEmpty: "Lauseke on tyhjä",
     // "Value"
     value: "Arvo",
     // "Text"
     text: "Teksti",
-    // "Row ID"
-    rowid: "Rivin ID",
     // "Image or video file URL"
     imageLink: "Kuvalinkki",
-    // "Edit column: {0}"
-    columnEdit: "Muokkaa saraketta: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Muokkaa kohdetta: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1070,8 +910,6 @@ export var fiStrings = {
     imageLinkName: "Hae tiedostojen URL-osoitteet seuraavasta omaisuudesta",
     // [Auto-translated] "Accept empty response"
     allowEmptyResponse: "Hyväksy tyhjä vastaus",
-    // "Title"
-    titlePlaceholder: "Syötä otsikko tähän",
     // "Survey Title"
     surveyTitlePlaceholder: "Syötä kyselyn otsikko tähän",
     // "Page {num}"
@@ -1182,16 +1020,8 @@ export var fiStrings = {
     defaultValue: "Oletusarvo",
     // "Default texts"
     cellsDefaultRow: "Oletussolutekstit",
-    // "Edit survey settings"
-    surveyEditorTitle: "Muokkaa kyselyn asetuksia",
-    // "Edit: {0}"
-    qEditorTitle: "Muokkaa: {0}",
     // "Maximum character limit"
     maxLength: "Enimmäispituus",
-    // "Build"
-    buildExpression: "Luo",
-    // "Edit"
-    editExpression: "Muokkaa",
     // [Auto-translated] "and"
     and: "ja",
     // [Auto-translated] "or"
@@ -1218,8 +1048,6 @@ export var fiStrings = {
     includeIntoResult: "Lisää kyselyn tuloksiin",
     // "Make the title and description visible"
     showTitle: "Näytä/piilota otsikko",
-    // "Expand/collapse title"
-    expandCollapseTitle: "Laajenna / tiivistä otsikkoa",
     // "Select a survey language"
     locale: "Oletus kieli",
     // "Select device type"
@@ -1634,8 +1462,6 @@ export var fiStrings = {
     displayRateDescriptionsAsExtremeItems: "Otsikoiden näyttäminen ääriarvoina",
     // [Auto-translated] "Row order"
     rowOrder: "Rivien järjestys",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "Sarakkeen asettelu",
     // [Auto-translated] "Nested column count"
     columnColCount: "Sisäkkäisten sarakkeiden määrä",
     // [Auto-translated] "Correct Answer"
@@ -1666,22 +1492,6 @@ export var fiStrings = {
     },
     // "Logo alignment"
     logoPosition: "Logo sijainti",
-    // "Add logo..."
-    addLogo: "Lisää logo...",
-    // "Change logo..."
-    changeLogo: "Muuta logo...",
-    logoPositions: {
-      // "Remove logo"
-      none: "Poista logo",
-      // "Left"
-      left: "Vasen",
-      // "Right"
-      right: "Oikea",
-      // "On the top"
-      top: "Päällä",
-      // "In the bottom"
-      bottom: "Alla"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Esikatselu-tila",
     // [Auto-translated] "Enable grid layout"
@@ -1694,14 +1504,8 @@ export var fiStrings = {
     detailErrorLocation: "Rivin tietojen virhesanoman tasaus",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Paneelin asettelu"
-      },
       // "General"
       general: "Yleinen",
-      // "Options"
-      fileOptions: "Vaihtoehdot",
       // "HTML Editor"
       html: "Html Editori",
       // "Columns"
@@ -1724,10 +1528,6 @@ export var fiStrings = {
       sliderSettings: "Liukusäätimen asetukset",
       // "Choices from a Web Service"
       choicesByUrl: "Valintoja verkosta",
-      // "Default Choices"
-      matrixChoices: "Oletusvalinnat",
-      // "Text Inputs"
-      multipleTextItems: "Tekstinsyötöt",
       // "Numbering"
       numbering: "Numerointi",
       // "Validators"
@@ -1770,8 +1570,6 @@ export var fiStrings = {
       showOnCompleted: "Näytä kun valmis",
       // "Logo in the Survey Header"
       logo: "Logo kyselyn otsikossa",
-      // "Slider"
-      slider: "Liukusäädin",
       // [Auto-translated] "Expression"
       expression: "Lauseke",
       // [Auto-translated] "Question Settings"
@@ -1791,62 +1589,18 @@ export var fiStrings = {
       // "Others"
       others: "Muut"
     },
-    // "Edit property '{0}'"
-    editProperty: "Muokkaa ominaisuutta'{0}'",
     // "Items"
     items: "[ Kohteet: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Tee valinnat näkyviksi, jos",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "Tee valinnoista valittavia, jos",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "Tee sarakkeet näkyviksi, jos",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "Tee rivit näkyviksi, jos",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "Suurenna sisemmän sisennyksen",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Käytä viimeisimmän merkinnän arvoja oletuksena",
-    // "Please enter a value."
-    enterNewValue: "Anna arvo.",
-    // "There are no questions in the survey."
-    noquestions: "Kyselyssä ei ole yhtään kysymystä.",
-    // "Please create a trigger"
-    createtrigger: "Luo triggeri",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "Paina Enter -painiketta muokataksesi",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Voit muokata kohdetta painamalla Enter -painiketta, poistaa kohteen painamalla poistopainiketta, siirtää kohdetta painamalla Alt plus nuoli ylös tai nuoli alas",
-    // "On "
-    triggerOn: "Päällä ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Tee sivuista näkyviä:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Tee elementit näkyviksi:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Valmista kysely, jos se on onnistunut.",
-    // "The trigger is not set"
-    triggerNotSet: "Triggeriä ei ole asetettu",
-    // "Run if"
-    triggerRunIf: "Suorita jos",
-    // "Change value of: "
-    triggerSetToName: "Muuta arvoa: ",
-    // "Copy value from: "
-    triggerFromName: "Kopioi arvo kohteesta: ",
-    // "Run this Expression"
-    triggerRunExpression: "Suorita tämä lauseke:",
-    // "to: "
-    triggerSetValue: "kohtaan: ",
-    // "Go to the question"
-    triggerGotoName: "Siirry kysymykseen:",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Älä lisää muuttujaa kyselyn tulokseen.",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Anna kelvollinen lauseke",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Kirjoita lauseke tähän...",
-    // "No file chosen"
-    noFile: "Tiedostoa ei ole valittuna",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "Tyhjennä piilokysymysten arvot",
     // [Auto-translated] "Store values in the following property"
@@ -1992,10 +1746,6 @@ export var fiStrings = {
     "file-camera": "Paikallinen tiedosto tai kamera",
     // "Inherit"
     inherit: "Peri",
-    // "Visible"
-    show: "Näytä",
-    // "Hidden"
-    hide: "Piilota",
     // "Inherit"
     default: "Oletusarvo",
     // "Initial"
@@ -2012,8 +1762,6 @@ export var fiStrings = {
     asc: "Nouseva",
     // "Descending"
     desc: "Laskeva",
-    // "Indeterminate"
-    indeterminate: "Ei määritelty",
     // [Auto-translated] "Selected"
     selected: "Valittu",
     // [Auto-translated] "Unselected"
@@ -2034,12 +1782,6 @@ export var fiStrings = {
     carousel: "Karuselli",
     // [Auto-translated] "Tabs"
     tab: "Välilehdet",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "Edistyminen ylhäällä",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "Edistyminen alhaalla",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "Edistyminen ylhäällä ja alhaalla",
     // "Horizontal"
     horizontal: "Vaaka",
     // "Vertical"
@@ -2050,8 +1792,6 @@ export var fiStrings = {
     bottom: "Alhaalla",
     // "Top and bottom"
     topBottom: "Ylhäällä ja alhaalla",
-    // "Both"
-    both: "Molemmat",
     // "Left"
     left: "Vasen",
     // [Auto-translated] "Right"
@@ -2092,10 +1832,6 @@ export var fiStrings = {
     week: "viikko",
     // "Hidden"
     hidden: "Piilotettu",
-    // "Editable"
-    edit: "Muokkaa",
-    // "Read-only"
-    display: "Näytä",
     // [Auto-translated] "Contain"
     contain: "Sisältää",
     // [Auto-translated] "Cover"
@@ -2324,8 +2060,6 @@ export var fiStrings = {
     onNextPage: "Seuraavalla sivulla",
     // "After an answer is changed"
     onValueChanged: "Vastauksen muuttuessa",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "Ennen vastauksen muuttamista",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Alkuperäinen rakenne",
@@ -2336,12 +2070,6 @@ export var fiStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Näytä yksi syöttökenttä sivua kohden"
     },
-    // "No preview"
-    noPreview: "Ei esikatselua",
-    // "Show all questions"
-    showAllQuestions: "Näytä esikatselu kaikilla kysymyksillä",
-    // "Show answered questions only"
-    showAnsweredQuestions: "Näytä esikatselu vastatuilla kysymyksillä",
     // [Auto-translated] "Show all questions"
     allQuestions: "Näytä kaikki kysymykset",
     // [Auto-translated] "Show answered questions only"
@@ -2447,12 +2175,8 @@ export var fiStrings = {
       onPage: "Nollaa jokaisella sivulla",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Nollaa jokaisessa paneelissa",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Nollaa jokaisessa paneelissa",
       // [Auto-translated] "Recursive numbering"
       recursive: "Rekursiivinen numerointi",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Jatka kyselyssä",
       // [Auto-translated] "No numbering"
       off: "Ei numerointia"
     },
@@ -2615,49 +2339,6 @@ export var fiStrings = {
     and: "ja",
     // [Auto-translated] "or"
     or: "tai"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Käytä Angular versiota",
-    // "Use jQuery version"
-    jquery: "Käytä jQuery versiota",
-    // "Use Knockout version"
-    knockout: "Käytä Knockout versiota",
-    // "Use React version"
-    react: "Käytä React versiota",
-    // "Use Vue version"
-    vue: "Käytä Vue versiota",
-    // "For bootstrap framework"
-    bootstrap: "Bootstrap työkalulle",
-    // "Modern theme"
-    modern: "Moderni teema",
-    // "Default theme"
-    default: "Oletus teema",
-    // "Orange theme"
-    orange: "Oranssi teema",
-    // "Darkblue theme"
-    darkblue: "Tummansininen teema",
-    // "Darkrose theme"
-    darkrose: "Tumma ruusu teema",
-    // "Stone theme"
-    stone: "Kiviteema",
-    // "Winter theme"
-    winter: "Talvi teema",
-    // "Winter-Stone theme"
-    winterstone: "Talvi-kivi-teema",
-    // "Show survey on a page"
-    showOnPage: "Näytä kysely sivulla",
-    // "Show survey in a window"
-    showInWindow: "Näytä kysely ikkunassa",
-    // "Load Survey JSON from server"
-    loadFromServer: "Lataa kysely palvelimelta JSON muodossa",
-    // "Scripts and styles"
-    titleScript: "Skriptit ja tyylit",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2906,10 +2587,6 @@ export var fiStrings = {
       choices: "\"Arvo\" toimii ehdollisissa säännöissä käytettävänä nimiketunnuksena; \"Teksti\" näytetään vastaajille.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Valitse \"Kuva\" tai \"Video\" asettaaksesi mediavalitsimen sisältötilan. Jos \"Kuva\" on valittuna, varmista, että kaikki annetut vaihtoehdot ovat kuvatiedostoja seuraavissa muodoissa: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Samoin, jos \"Video\" on valittuna, varmista, että kaikki vaihtoehdot ovat suoria linkkejä videotiedostoihin seuraavissa muodoissa: MP4, MOV, WMV, FLV, AVI, MKV. Huomaa, että YouTube-linkkejä ei tueta videoasetuksissa."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Tämä asetus muuttaa vain syöttökentän kokoa, eikä se vaikuta kysymysruudun leveyteen. Voit rajoittaa hyväksyttyä syötteen pituutta siirtymällä kohtaan \"Vahvistus\" → \"Merkkien enimmäisrajoitus\"."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3495,16 +3172,12 @@ export var fiStrings = {
     primaryDarkColor: "Tumma väri",
     // "Selected"
     primaryLightColor: "Vaalea väri",
-    // "Background color"
-    backgroundDimColor: "Taustan himmennysväri",
     // "Corner radius"
     cornerRadius: "Kulman säde",
     // "Default background"
     backcolor: "Taustan väri",
     // [Auto-translated] "Hover background"
     hovercolor: "Vie hiiri taustalle",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Reunusten koristelu",
     // [Auto-translated] "Font color"
     fontColor: "Fontin väri",
     // [Auto-translated] "Background color"
@@ -3513,8 +3186,6 @@ export var fiStrings = {
     primaryForecolor: "Etuosan väri",
     // "Disabled color"
     primaryForecolorLight: "Vaalea etuosan väri",
-    // [Auto-translated] "Font"
-    font: "Fontti",
     // "Darker"
     borderDefault: "Oletus",
     // "Lighter"
@@ -3593,14 +3264,10 @@ export var fiStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Pinnan tausta",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Ensisijainen",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Toissijainen",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Pinta",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Käyttöliittymän elementit",
     // [Auto-translated] "Font"

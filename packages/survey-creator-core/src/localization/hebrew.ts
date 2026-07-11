@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var hebrewStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "עריכה",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "צפו ולמדו כיצד ליצור סקרים",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "אנא הזינו שאלה מארגז הכלים כאן.",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "צרו כלל להתאמה אישית של זרימת הסקר.",
-    // "Copy"
-    copy: "העתק",
     // "Duplicate"
     duplicate: "שכפול",
-    // "Add to toolbox"
-    addToToolbox: "הוסיפו לכלי הכלים",
-    // "Delete Panel"
-    deletePanel: "מחיקת לוח",
-    // "Delete Question"
-    deleteQuestion: "מחיקת שאלה",
-    // "Convert to"
-    convertTo: "המרה ל",
-    // "Drag element"
-    drag: "גרירת אלמנט"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var hebrewStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "ברירת מחדל ({0})",
-    // "Survey"
-    survey: "סקר",
     // "Settings"
     settings: "הגדרות",
     // "Open settings"
@@ -144,42 +120,14 @@ export var hebrewStrings = {
     surveyTypeName: "סקר",
     // "Page"
     pageTypeName: "דף",
-    // "Panel"
-    panelTypeName: "לוח",
-    // "Question"
-    questionTypeName: "שאלה",
-    // "Column"
-    columnTypeName: "עמודה",
-    // "Add New Page"
-    addNewPage: "הוסף דף חדש",
-    // "Scroll to the Right"
-    moveRight: "גלול ימינה",
-    // "Scroll to the Left"
-    moveLeft: "גלול שמאלה",
-    // "Delete Page"
-    deletePage: "מחק דף",
-    // "Edit Page"
-    editPage: "ערוך דף",
-    // "Edit"
-    edit: "ערוך",
     // "page"
     newPageName: "דף",
     // "question"
     newQuestionName: "שאלה",
     // "panel"
     newPanelName: "לוח",
-    // "text"
-    newTextItemName: "טקסט",
-    // "Default"
-    defaultV2Theme: "ברירת מחדל",
-    // "Modern"
-    modernTheme: "מודרני",
-    // "Default (legacy)"
-    defaultTheme: "ברירת מחדל (ירושה)",
     // "Preview Survey Again"
     testSurveyAgain: "תצוגה מקדימה שוב",
-    // "Survey width: "
-    testSurveyWidth: "רוחב הסקר: ",
     // "You had to navigate to"
     navigateToMsg: "הייתם צריכים לנווט אל",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var hebrewStrings = {
     undo: "בטל",
     // "Redo"
     redo: "בצע מחדש",
-    // "Undo last change"
-    undoTooltip: "בטל שינוי אחרון",
-    // "Redo the change"
-    redoTooltip: "בצע מחדש את השינוי",
     // [Auto-translated] "Expand"
     expandTooltip: "להרחיב",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var hebrewStrings = {
     showMoreChoices: "הצג עוד",
     // "Show less"
     showLessChoices: "הצג פחות",
-    // "Copy"
-    copy: "העתק",
-    // "Cut"
-    cut: "גזור",
-    // "Paste"
-    paste: "הדבק",
-    // "Copy selection to clipboard"
-    copyTooltip: "העתק את הבחירה ללוח הגזירים",
-    // "Cut selection to clipboard"
-    cutTooltip: "גזור את הבחירה ללוח הגזירים",
-    // "Paste from clipboard"
-    pasteTooltip: "הדבק מלוח הגזירים",
-    // "Options"
-    options: "אפשרויות",
-    // "Generate Valid JSON"
-    generateValidJSON: "צור JSON תקין",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "פונקציה לא ידועה: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var hebrewStrings = {
     expressionSyntaxError: "שגיאת תחביר.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "טעות סמנטית.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "צור JSON קריא",
     // "Toolbox"
     toolbox: "ארגז הכלים",
-    // "Properties"
-    "property-grid": "מאפיינים",
     // [Auto-translated] "Search"
     toolboxSearch: "חיפוש",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var hebrewStrings = {
     propertyGridPlaceholderTitle: "התחל לקבוע את תצורת הטופס שלך",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "לחץ על סמל קטגוריה כלשהו כדי לחקור את הגדרות הסקר. הגדרות נוספות יהיו זמינות לאחר הוספת רכיב סקר למשטח העיצוב.",
-    // "Please correct JSON."
-    correctJSON: "אנא תקנו את ה-JSON.",
     // "Survey Results "
     surveyResults: "תוצאות הסקר",
     // "As Table"
@@ -294,8 +216,6 @@ export var hebrewStrings = {
     saving: "שומר",
     // "Saved"
     saved: "נשמר",
-    // "Error"
-    propertyEditorError: "שגיאה",
     // "Error! Editor content is not saved."
     saveError: "שגיאה! התוכן של העורך לא נשמר.",
     // "Language Settings"
@@ -354,12 +274,6 @@ export var hebrewStrings = {
     themeResetConfirmation: "האם אתה באמת רוצה לאפס את ערכת הנושא? כל ההתאמות האישיות שלך יאבדו.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "כן, אפס את ערכת הנושא",
-    // "Bold"
-    bold: "מודגש",
-    // "Italic"
-    italic: "נטוי",
-    // "Underline"
-    underline: "קו תחתון",
     // "Add Question"
     addNewQuestion: "הוסף שאלה",
     // "Select page..."
@@ -507,8 +421,6 @@ export var hebrewStrings = {
       trigger_runExpressionDescription: "כאשר הביטוי הלוגי מוערך כ- true, הסקר מעריך ביטוי אחר. לחלופין, ניתן להקצות את התוצאה של הביטוי האחרון כערך לשאלה שנבחרה",
       // [Auto-translated] "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "אם הביטוי הלוגי מוערך כ- true, הדף \"תודה\" מציג את התוכן שצוין.",
-      // [Auto-translated] "When expression: '{0}' returns true"
-      itemExpressionText: "כאשר expression: '{0}' מחזיר ערך True", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "כלל חדש",
       // [Auto-translated] "make page {0} visible"
@@ -563,8 +475,6 @@ export var hebrewStrings = {
       conditions: "תנאים(ים)",
       // [Auto-translated] "Action(s)"
       actions: "פעולה(ות)",
-      // [Auto-translated] "Define condition(s)"
-      expressionEditorTitle: "הגדרת תנאים",
       // [Auto-translated] "Define action(s)"
       actionsEditorTitle: "הגדרת פעולות",
       // [Auto-translated] "Delete Action"
@@ -575,8 +485,6 @@ export var hebrewStrings = {
       selectedActionCaption: "בחר פעולה...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "ביטוי הלוגיקה ריק או לא חוקי. אנא תקן זאת.",
-      // [Auto-translated] "Please add at least one action."
-      noActionError: "אנא הוסף פעולה אחת לפחות.",
       // [Auto-translated] "Please fix issues in your action(s)."
       actionInvalid: "אנא תקן בעיות בפעולות שלך.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +786,6 @@ export var hebrewStrings = {
     defaultDisplayValue: "ערך תצוגה המוגדר כברירת מחדל לטקסטים דינמיים",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "יישור תוויות",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "רוחב שדה קלט (בתווים)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "יישור הודעת שגיאה של תא",
     // [Auto-translated] "Enabled"
@@ -888,32 +794,16 @@ export var hebrewStrings = {
     disabled: "נכים",
     // [Auto-translated] "Inherit"
     inherit: "לרשת",
-    // "Apply"
-    apply: "החל",
-    // "OK"
-    ok: "אוקי",
-    // "Save"
-    save: "שמור",
     // "Clear"
     clear: "נקה",
-    // "Save"
-    saveTooltip: "שמור",
-    // "Cancel"
-    cancel: "בטל",
     // "Set"
     set: "הגדר",
-    // "Reset"
-    reset: "איפוס",
     // "Change"
     change: "שנה",
-    // "Refresh"
-    refresh: "רענן",
     // "Close"
     close: "סגור",
     // "Delete"
     delete: "מחק",
-    // "Add"
-    add: "הוסף",
     // "Add New"
     addNew: "הוסף חדש",
     // "Click to add an item..."
@@ -922,34 +812,10 @@ export var hebrewStrings = {
     removeItem: "לחץ להסרת הפריט...",
     // "Drag the item"
     dragItem: "גרור את הפריט",
-    // "Other"
-    addOther: "אחר",
-    // "Select All"
-    addSelectAll: "בחר הכל",
-    // "None"
-    addNone: "אף אחד",
-    // "Remove All"
-    removeAll: "הסר הכל",
     // "Edit"
     edit: "ערוך",
-    // "Return without saving"
-    back: "חזור ללא שמירה",
-    // "Return without saving"
-    backTooltip: "חזור ללא שמירה",
-    // "Save and return"
-    saveAndBack: "שמור וחזור",
-    // "Save and return"
-    saveAndBackTooltip: "שמור וחזור",
     // "Done"
     doneEditing: "סיום",
-    // "Edit Choices"
-    editChoices: "ערוך ברירות בחירה",
-    // "Show Choices"
-    showChoices: "הצג ברירות בחירה",
-    // "Move"
-    move: "הזז",
-    // "<empty>"
-    empty: "<ריק>",
     // "Value is empty"
     emptyValue: "הערך ריק",
     // "Manual Entry"
@@ -962,12 +828,6 @@ export var hebrewStrings = {
     fastEntryChoicesMinCountError: "אנא הכנס לפחות {0} פריטים",
     // "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "תוכל להזין נתונים בפורמט הבא:\nערך1|טקסט1\nערך2|טקסט2",
-    // "Form Entry"
-    formEntry: "הזנת טופס",
-    // "Test the service"
-    testService: "בדוק את השירות",
-    // "Please select the element"
-    itemSelectorEmpty: "בחר את האלמנט",
     // "Please select the action"
     conditionActionEmpty: "בחר את הפעולה",
     // "Select a question..."
@@ -976,20 +836,8 @@ export var hebrewStrings = {
     conditionSelectPage: "בחר עמוד...",
     // "Select a panel..."
     conditionSelectPanel: "בחר פאנל...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "אנא הכנס/בחר את הערך",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "לחץ על ctrl+space כדי לקבל הצעות להשלמה של הביטוי",
-    // "Current row"
-    aceEditorRowTitle: "שורה נוכחית",
-    // "Current panel"
-    aceEditorPanelTitle: "פאנל נוכחי",
-    // "For more details please check the documentation"
-    showMore: "לקבלת פרטים נוספים, אנא בדוק את התיעוד",
-    // "Available questions"
-    assistantTitle: "שאלות זמינות",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "חייב להיות לפחות עמודה או שורה אחת",
     // "Review before submit"
     showPreviewBeforeComplete: "הצג תצוגה מקדימה לפני השלמת הסקר",
     // "Enabled by a condition"
@@ -1040,20 +888,12 @@ export var hebrewStrings = {
     "addNew@navigateToUrlOnCondition": "הוספת כתובת URL חדשה",
     // [Auto-translated] "Add new page"
     "addNew@pages": "הוספת עמוד חדש",
-    // "Expression is empty"
-    expressionIsEmpty: "הביטוי ריק",
     // "Value"
     value: "ערך",
     // "Text"
     text: "טקסט",
-    // "Row ID"
-    rowid: "מזהה שורה",
     // "Image or video file URL"
     imageLink: "קישור לתמונה או וידיאו",
-    // "Edit column: {0}"
-    columnEdit: "ערוך עמודה: {0}",
-    // "Edit item: {0}"
-    itemEdit: "ערוך פריט: {0}",
     // "URL"
     url: "כתובת URL של השירות",
     // "Path to data"
@@ -1070,8 +910,6 @@ export var hebrewStrings = {
     imageLinkName: "קבל קישורים לתמונות משדה JSON הבא",
     // "Accept empty response"
     allowEmptyResponse: "אפשר תשובה ריקה",
-    // "Title"
-    titlePlaceholder: "כותרת",
     // "Survey Title"
     surveyTitlePlaceholder: "כותרת הסקר",
     // "Page {num}"
@@ -1182,16 +1020,8 @@ export var hebrewStrings = {
     defaultValue: "תשובת ברירת המחדל",
     // "Default texts"
     cellsDefaultRow: "טקסטים ברירת המחדל",
-    // "Edit survey settings"
-    surveyEditorTitle: "ערוך הגדרות סקר",
-    // "Edit: {0}"
-    qEditorTitle: "ערוך: {0}",
     // "Maximum character limit"
     maxLength: "אורך מרבי (בתווים)",
-    // "Build"
-    buildExpression: "בנה",
-    // "Edit"
-    editExpression: "ערוך",
     // "and"
     and: "וגם",
     // "or"
@@ -1218,8 +1048,6 @@ export var hebrewStrings = {
     includeIntoResult: "כלול בתוצאות הסקר",
     // "Make the title and description visible"
     showTitle: "הצג את הכותרת",
-    // "Expand/collapse title"
-    expandCollapseTitle: "הרחב/כווץ את הכותרת",
     // "Select a survey language"
     locale: "שפת הסקר",
     // "Select device type"
@@ -1634,8 +1462,6 @@ export var hebrewStrings = {
     displayRateDescriptionsAsExtremeItems: "הצג תיאורי דירוג כערכים קצה",
     // "Row order"
     rowOrder: "סדר השורות",
-    // "Column layout"
-    columnsLayout: "פריסת עמודות",
     // "Nested column count"
     columnColCount: "ספירת עמודות מקוננות",
     // "Correct Answer"
@@ -1666,22 +1492,6 @@ export var hebrewStrings = {
     },
     // "Logo alignment"
     logoPosition: "מיקום הלוגו",
-    // "Add logo..."
-    addLogo: "הוסף לוגו...",
-    // "Change logo..."
-    changeLogo: "שנה לוגו...",
-    logoPositions: {
-      // "Remove logo"
-      none: "הסר לוגו",
-      // "Left"
-      left: "שמאלה",
-      // "Right"
-      right: "ימינה",
-      // "On the top"
-      top: "מלמעלה",
-      // "In the bottom"
-      bottom: "מלמטה"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "מצב תצוגה מקדימה",
     // [Auto-translated] "Enable grid layout"
@@ -1694,14 +1504,8 @@ export var hebrewStrings = {
     detailErrorLocation: "יישור הודעת שגיאה של פרטי שורה",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "פריסת חלונית"
-      },
       // "General"
       general: "כללי",
-      // "Options"
-      fileOptions: "אפשרויות",
       // "HTML Editor"
       html: "עורך HTML",
       // "Columns"
@@ -1724,10 +1528,6 @@ export var hebrewStrings = {
       sliderSettings: "הגדרות מחוון",
       // "Choices from a Web Service"
       choicesByUrl: "בחירות משירות RESTful",
-      // "Default Choices"
-      matrixChoices: "בחירות דיפולטיות",
-      // "Text Inputs"
-      multipleTextItems: "קלטי טקסט",
       // "Numbering"
       numbering: "מספור",
       // "Validators"
@@ -1770,8 +1570,6 @@ export var hebrewStrings = {
       showOnCompleted: "השאלון הושלם",
       // "Logo in the Survey Header"
       logo: "לוגו בכותרת השאלון",
-      // "Slider"
-      slider: "מחוון",
       // "Expression"
       expression: "ביטוי",
       // [Auto-translated] "Question Settings"
@@ -1791,62 +1589,18 @@ export var hebrewStrings = {
       // "Others"
       others: "אחרים"
     },
-    // "Edit property '{0}'"
-    editProperty: "עריכת מאפיין '{0}'",
     // "Items"
     items: "פריטים",
     // "Make choices visible if"
     choicesVisibleIf: "הבחירות יוצגו אם",
     // "Make choices selectable if"
     choicesEnableIf: "ניתן לבחור את האפשרויות אם",
-    // "Make columns visible if"
-    columnsEnableIf: "העמודות יוצגו אם",
-    // "Make rows visible if"
-    rowsEnableIf: "השורות יוצגו אם",
     // "Increase the inner indent"
     innerIndent: "הוסף כניסות פנימיות",
     // "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "קבל ערכי ברירת מחדל מהפאנל האחרון",
-    // "Please enter a value."
-    enterNewValue: "נא להזין את הערך.",
-    // "There are no questions in the survey."
-    noquestions: "אין שאלות בשאלון.",
-    // "Please create a trigger"
-    createtrigger: "יש ליצור מפעיל",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "לחץ על כפתור Enter לעריכה",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "לחץ על כפתור Enter לעריכת פריט, לחץ על מקש מחיקה למחיקת פריט, לחץ על Alt + חץ למעלה או חץ למטה להעברת פריט",
-    // "On "
-    triggerOn: "ב-",
-    // "Make pages visible"
-    triggerMakePagesVisible: "הצג עמודים",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "הצג רכיבים",
-    // "Complete the survey if successful."
-    triggerCompleteText: "השלם את השאלון אם הצליח.",
-    // "The trigger is not set"
-    triggerNotSet: "המפעיל לא הוגדר",
-    // "Run if"
-    triggerRunIf: "הפעל אם",
-    // "Change value of: "
-    triggerSetToName: "שנה את הערך של: ",
-    // "Copy value from: "
-    triggerFromName: "העתק את הערך מ: ",
-    // "Run this Expression"
-    triggerRunExpression: "הפעל ביטוי זה",
-    // "to: "
-    triggerSetValue: "ל: ",
-    // "Go to the question"
-    triggerGotoName: "עבור לשאלה",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "אל תכלול את המשתנה בתוצאה של השאלון.",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "יש להזין ביטוי חוקי",
     // "Type expression here..."
     emptyExpressionPlaceHolder: "הקלד ביטוי כאן...",
-    // "No file chosen"
-    noFile: "לא נבחר קובץ",
     // "Clear hidden question values"
     clearIfInvisible: "נקה את הערך אם השאלה הופכת חבויה",
     // "Store values in the following property"
@@ -1992,10 +1746,6 @@ export var hebrewStrings = {
     "file-camera": "קבצים מקומיים או מצלמה",
     // "Inherit"
     inherit: "ירושה",
-    // "Visible"
-    show: "נראה",
-    // "Hidden"
-    hide: "מוסתר",
     // "Inherit"
     default: "ירושה",
     // "Initial"
@@ -2012,8 +1762,6 @@ export var hebrewStrings = {
     asc: "סדר עולה",
     // "Descending"
     desc: "סדר יורד",
-    // "Indeterminate"
-    indeterminate: "לא קבוע",
     // [Auto-translated] "Selected"
     selected: "שנבחרו",
     // [Auto-translated] "Unselected"
@@ -2034,12 +1782,6 @@ export var hebrewStrings = {
     carousel: "קרוסלה",
     // "Tabs"
     tab: "כרטיסיות",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "ניווט בפאנל + סרגל התקדמות בחלק העליון",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "ניווט בפאנל + סרגל התקדמות בחלק התחתון",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "ניווט בפאנל + סרגל התקדמות בחלק העליון והתחתון",
     // "Horizontal"
     horizontal: "אופקי",
     // "Vertical"
@@ -2050,8 +1792,6 @@ export var hebrewStrings = {
     bottom: "תחתון",
     // "Top and bottom"
     topBottom: "עליון ותחתון",
-    // "Both"
-    both: "שניהם",
     // "Left"
     left: "שמאל",
     // "Right"
@@ -2092,10 +1832,6 @@ export var hebrewStrings = {
     week: "שבוע",
     // "Hidden"
     hidden: "מוסתר",
-    // "Editable"
-    edit: "ניתן לעריכה",
-    // "Read-only"
-    display: "לקריאה בלבד",
     // [Auto-translated] "Contain"
     contain: "להכיל",
     // [Auto-translated] "Cover"
@@ -2324,8 +2060,6 @@ export var hebrewStrings = {
     onNextPage: "כאשר מתבצע מעבר לעמוד הבא",
     // "After an answer is changed"
     onValueChanged: "לאחר שהתשובה השתנתה",
-    // "Before an answer is changed"
-    onValueChanging: "לפני שהתשובה השתנתה",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "מבנה מקורי",
@@ -2336,12 +2070,6 @@ export var hebrewStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "הצגת שדה קלט יחיד בכל עמוד"
     },
-    // "No preview"
-    noPreview: "אין תצוגה מקדימה",
-    // "Show all questions"
-    showAllQuestions: "הצג את כל השאלות",
-    // "Show answered questions only"
-    showAnsweredQuestions: "הצג רק שאלות עם תשובות",
     // [Auto-translated] "Show all questions"
     allQuestions: "הצג את כל השאלות",
     // [Auto-translated] "Show answered questions only"
@@ -2447,12 +2175,8 @@ export var hebrewStrings = {
       onPage: "איפוס בכל עמוד",
       // [Auto-translated] "Reset on each panel"
       onpanel: "איפוס בכל חלונית",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "איפוס בכל חלונית",
       // [Auto-translated] "Recursive numbering"
       recursive: "מספור רקורסיבי",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "המשך לאורך הסקר",
       // [Auto-translated] "No numbering"
       off: "ללא מספור"
     },
@@ -2615,49 +2339,6 @@ export var hebrewStrings = {
     and: "וגם",
     // "or"
     or: "או"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "השתמש בגרסת Angular",
-    // "Use jQuery version"
-    jquery: "השתמש בגרסת jQuery",
-    // "Use Knockout version"
-    knockout: "השתמש בגרסת Knockout",
-    // "Use React version"
-    react: "השתמש בגרסת React",
-    // "Use Vue version"
-    vue: "השתמש בגרסת Vue",
-    // "For bootstrap framework"
-    bootstrap: "למסגרת Bootstrap",
-    // "Modern theme"
-    modern: "ערכת עיצוב מודרנית",
-    // "Default theme"
-    default: "ערכת עיצוב ברירת מחדל",
-    // "Orange theme"
-    orange: "ערכת עיצוב כתומה",
-    // "Darkblue theme"
-    darkblue: "ערכת עיצוב כחולה כהה",
-    // "Darkrose theme"
-    darkrose: "ערכת עיצוב ורודה כהה",
-    // "Stone theme"
-    stone: "ערכת עיצוב אבן",
-    // "Winter theme"
-    winter: "ערכת עיצוב חורף",
-    // "Winter-Stone theme"
-    winterstone: "ערכת עיצוב חורף-אבן",
-    // "Show survey on a page"
-    showOnPage: "הצג את השאלון בעמוד",
-    // "Show survey in a window"
-    showInWindow: "הצג את השאלון בחלון",
-    // "Load Survey JSON from server"
-    loadFromServer: "טען מסגרת JSON מהשרת",
-    // "Scripts and styles"
-    titleScript: "סקריפטים וסגנונות",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2906,10 +2587,6 @@ export var hebrewStrings = {
       choices: "\"ערך\" משמש כמזהה פריט המשמש בכללים מותנים; \"טקסט\" מוצג למשיבים.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "בחר בין \"תמונה\" ו\"וידאו\" כדי להגדיר את מצב התוכן של בורר המדיה. אם נבחרה האפשרות \"תמונה\", ודא שכל האפשרויות שסופקו הן קובצי תמונה בתבניות הבאות: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. באופן דומה, אם נבחר \"וידאו\", ודא שכל האפשרויות הן קישורים ישירים לקבצי וידאו בפורמטים הבאים: MP4, MOV, WMV, FLV, AVI, MKV. שים לב שקישורי YouTube אינם נתמכים עבור אפשרויות וידאו."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "הגדרה זו משנה רק את גודל שדה הקלט ואינה משפיעה על רוחב תיבת השאלה. כדי להגביל את אורך הקלט המקובל, עבור אל \"אימות\" →\"מגבלת תווים מקסימלית\"."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3495,16 +3172,12 @@ export var hebrewStrings = {
     primaryDarkColor: "עכבר",
     // "Selected"
     primaryLightColor: "נבחר",
-    // "Background color"
-    backgroundDimColor: "צבע רקע",
     // "Corner radius"
     cornerRadius: "רדיוס פינה",
     // "Default background"
     backcolor: "רקע ברירת מחדל",
     // "Hover background"
     hovercolor: "רקע העברת עכבר",
-    // "Border decoration"
-    borderDecoration: "קישוט גבול",
     // [Auto-translated] "Font color"
     fontColor: "צבע גופן",
     // [Auto-translated] "Background color"
@@ -3513,8 +3186,6 @@ export var hebrewStrings = {
     primaryForecolor: "צבע ברירת מחדל",
     // "Disabled color"
     primaryForecolorLight: "צבע כבוי",
-    // [Auto-translated] "Font"
-    font: "גופן",
     // "Darker"
     borderDefault: "כהה",
     // "Lighter"
@@ -3593,14 +3264,10 @@ export var hebrewStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "רקע פני השטח",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "הראשי",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "משני",
-    // [Auto-translated] "Surface"
-    surfaceScale: "משטח",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "רכיבי ממשק משתמש",
     // [Auto-translated] "Font"

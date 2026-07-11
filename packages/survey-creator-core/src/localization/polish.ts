@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var polishStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Edytuj",
-    // [Auto-translated] "Watch and learn how to create surveys"
-    externalHelpLink: "Obejrzyj i dowiedz się, jak tworzyć ankiety",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Przeciągnij pytanie.",
-    // [Auto-translated] "Create a rule to customize the flow of the survey."
-    addLogicItem: "Utwórz regułę, aby dostosować przepływ ankiety.",
-    // "Copy"
-    copy: "Kopiuj",
     // [Auto-translated] "Duplicate"
     duplicate: "Duplikat",
-    // "Add to toolbox"
-    addToToolbox: "Dodaj do palety",
-    // "Delete Panel"
-    deletePanel: "Usuń panel",
-    // "Delete Question"
-    deleteQuestion: "Usuń pytanie",
-    // "Convert to"
-    convertTo: "Konwertuj na",
-    // [Auto-translated] "Drag element"
-    drag: "Przeciągnij element"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var polishStrings = {
   ed: {
     // [Auto-translated] "Default ({0})"
     defaultLocale: "Domyślne ({0})",
-    // "Survey"
-    survey: "Ankieta",
     // [Auto-translated] "Settings"
     settings: "Ustawienia",
     // [Auto-translated] "Open settings"
@@ -144,42 +120,14 @@ export var polishStrings = {
     surveyTypeName: "Sondaż",
     // [Auto-translated] "Page"
     pageTypeName: "Strona",
-    // [Auto-translated] "Panel"
-    panelTypeName: "Panel",
-    // [Auto-translated] "Question"
-    questionTypeName: "Pytanie",
-    // [Auto-translated] "Column"
-    columnTypeName: "Kolumna",
-    // "Add New Page"
-    addNewPage: "Dodaj nową sekcję",
-    // [Auto-translated] "Scroll to the Right"
-    moveRight: "Przewiń w prawo",
-    // [Auto-translated] "Scroll to the Left"
-    moveLeft: "Przewiń w lewo",
-    // "Delete Page"
-    deletePage: "Usuń sekcję",
-    // "Edit Page"
-    editPage: "Edytuj sekcję",
-    // [Auto-translated] "Edit"
-    edit: "Redagować",
     // "page"
     newPageName: "sekcja",
     // "question"
     newQuestionName: "pytanie",
     // [Auto-translated] "panel"
     newPanelName: "panel",
-    // [Auto-translated] "text"
-    newTextItemName: "Tekst",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "Domyślny",
-    // [Auto-translated] "Modern"
-    modernTheme: "Nowoczesny",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Domyślne (starsze)",
     // "Preview Survey Again"
     testSurveyAgain: "Testuj ponownie",
-    // "Survey width: "
-    testSurveyWidth: "Szerokość ankiety: ",
     // [Auto-translated] "You had to navigate to"
     navigateToMsg: "Trzeba było nawigować do",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var polishStrings = {
     undo: "Cofnij",
     // "Redo"
     redo: "Ponów",
-    // [Auto-translated] "Undo last change"
-    undoTooltip: "Cofanie ostatniej zmiany",
-    // [Auto-translated] "Redo the change"
-    redoTooltip: "Ponowne wprowadzanie zmian",
     // [Auto-translated] "Expand"
     expandTooltip: "Rozszerzać",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var polishStrings = {
     showMoreChoices: "Pokaż więcej",
     // [Auto-translated] "Show less"
     showLessChoices: "Pokaż mniej",
-    // [Auto-translated] "Copy"
-    copy: "Kopiować",
-    // [Auto-translated] "Cut"
-    cut: "Ciąć",
-    // [Auto-translated] "Paste"
-    paste: "Wklejać",
-    // [Auto-translated] "Copy selection to clipboard"
-    copyTooltip: "Kopiuj zaznaczenie do schowka",
-    // [Auto-translated] "Cut selection to clipboard"
-    cutTooltip: "Wytnij zaznaczenie do schowka",
-    // [Auto-translated] "Paste from clipboard"
-    pasteTooltip: "Wklejanie ze schowka",
-    // "Options"
-    options: "Opcje",
-    // [Auto-translated] "Generate Valid JSON"
-    generateValidJSON: "Wygeneruj prawidłowy JSON",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Nieznana funkcja: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var polishStrings = {
     expressionSyntaxError: "Błąd składniowy.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Błąd semantyczny.",
-    // [Auto-translated] "Generate Readable JSON"
-    generateReadableJSON: "Generuj czytelny JSON",
     // "Toolbox"
     toolbox: "Paleta",
-    // [Auto-translated] "Properties"
-    "property-grid": "Właściwości",
     // [Auto-translated] "Search"
     toolboxSearch: "Szukać",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var polishStrings = {
     propertyGridPlaceholderTitle: "Rozpocznij konfigurowanie formularza",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Kliknij dowolną ikonę kategorii, aby zapoznać się z ustawieniami ankiety. Dodatkowe ustawienia staną się dostępne po dodaniu elementu ankiety do powierzchni projektowej.",
-    // [Auto-translated] "Please correct JSON."
-    correctJSON: "Proszę poprawić JSON.",
     // "Survey Results "
     surveyResults: "Wynik ankiety: ",
     // [Auto-translated] "As Table"
@@ -294,8 +216,6 @@ export var polishStrings = {
     saving: "Trwa zapis",
     // "Saved"
     saved: "Zapisano",
-    // [Auto-translated] "Error"
-    propertyEditorError: "Błąd",
     // [Auto-translated] "Error! Editor content is not saved."
     saveError: "Błąd! Zawartość edytora nie jest zapisywana.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var polishStrings = {
     themeResetConfirmation: "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Tak, zresetuj motyw",
-    // [Auto-translated] "Bold"
-    bold: "Śmiały",
-    // [Auto-translated] "Italic"
-    italic: "Kursywa",
-    // [Auto-translated] "Underline"
-    underline: "Podkreślać",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Dodaj pytanie",
     // [Auto-translated] "Select page..."
@@ -507,8 +421,6 @@ export var polishStrings = {
       trigger_runExpressionDescription: "Gdy wyrażenie logiczne ma wartość true, ankieta oblicza wartość innego wyrażenia. Opcjonalnie wynik tego ostatniego wyrażenia może zostać przypisany jako wartość do wybranego pytania",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Jeśli wyrażenie logiczne zwróci wartość true, domyślny tekst strony \"Dziękuję\" zostanie zmieniony na podany.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Gdy wyrażenie \"{0}\" zwraca wartość true", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "Nowa reguła",
       // [Auto-translated] "make page {0} visible"
@@ -563,8 +475,6 @@ export var polishStrings = {
       conditions: "Warunek (warunki)",
       // [Auto-translated] "Action(s)"
       actions: "Działania(e)",
-      // [Auto-translated] "Define condition(s)"
-      expressionEditorTitle: "Zdefiniuj warunki",
       // [Auto-translated] "Define action(s)"
       actionsEditorTitle: "Definiowanie akcji",
       // [Auto-translated] "Delete Action"
@@ -575,8 +485,6 @@ export var polishStrings = {
       selectedActionCaption: "Wybierz akcję...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Wyrażenie logiczne jest puste lub nieprawidłowe. Proszę to poprawić.",
-      // [Auto-translated] "Please add at least one action."
-      noActionError: "Dodaj co najmniej jedną akcję.",
       // [Auto-translated] "Please fix issues in your action(s)."
       actionInvalid: "Rozwiąż problemy z działaniami.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -879,8 +787,6 @@ export var polishStrings = {
     defaultDisplayValue: "Domyślna wartość wyświetlana dla tekstów dynamicznych",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Wyrównanie etykiety",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Szerokość pola wejściowego (w znakach)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Wyrównanie komunikatu o błędzie komórki",
     // [Auto-translated] "Enabled"
@@ -889,32 +795,16 @@ export var polishStrings = {
     disabled: "Niepełnosprawny",
     // [Auto-translated] "Inherit"
     inherit: "Odziedziczyć",
-    // "Apply"
-    apply: "Zastosuj",
-    // [Auto-translated] "OK"
-    ok: "OK",
-    // [Auto-translated] "Save"
-    save: "Zapisać",
     // [Auto-translated] "Clear"
     clear: "Jasny",
-    // [Auto-translated] "Save"
-    saveTooltip: "Zapisać",
-    // "Cancel"
-    cancel: "Anuluj",
     // [Auto-translated] "Set"
     set: "Zbiór",
-    // "Reset"
-    reset: "Resetuj",
     // [Auto-translated] "Change"
     change: "Zmieniać",
-    // [Auto-translated] "Refresh"
-    refresh: "Odświeżyć",
     // "Close"
     close: "Zamknij",
     // "Delete"
     delete: "Usuń",
-    // [Auto-translated] "Add"
-    add: "Dodawać",
     // "Add New"
     addNew: "Dodaj nową",
     // [Auto-translated] "Click to add an item..."
@@ -923,34 +813,10 @@ export var polishStrings = {
     removeItem: "Kliknij, aby usunąć element...",
     // [Auto-translated] "Drag the item"
     dragItem: "Przeciągnij element",
-    // [Auto-translated] "Other"
-    addOther: "Inny",
-    // [Auto-translated] "Select All"
-    addSelectAll: "Zaznacz wszystko",
-    // [Auto-translated] "None"
-    addNone: "Żaden",
-    // "Remove All"
-    removeAll: "Usuń wszystkie",
     // "Edit"
     edit: "Edytuj",
-    // [Auto-translated] "Return without saving"
-    back: "Zwrot bez zapisywania",
-    // [Auto-translated] "Return without saving"
-    backTooltip: "Zwrot bez zapisywania",
-    // [Auto-translated] "Save and return"
-    saveAndBack: "Zapisz i zwróć",
-    // [Auto-translated] "Save and return"
-    saveAndBackTooltip: "Zapisz i zwróć",
     // [Auto-translated] "Done"
     doneEditing: "Gotowy",
-    // [Auto-translated] "Edit Choices"
-    editChoices: "Edytuj opcje",
-    // [Auto-translated] "Show Choices"
-    showChoices: "Pokaż wybór",
-    // [Auto-translated] "Move"
-    move: "Ruszać",
-    // "<empty>"
-    empty: "<pusty>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Wartość jest pusta",
     // "Manual Entry"
@@ -963,12 +829,6 @@ export var polishStrings = {
     fastEntryChoicesMinCountError: "Podaj co najmniej {0} przedmiotów",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Wprowadź listę opcji wyboru i ich identyfikatory w następującym formacie:\n\nid|opcja\n\nIdentyfikator opcji wyboru nie jest widoczny dla respondentów i może być używany w regułach warunkowych.",
-    // "Form Entry"
-    formEntry: "Formularz",
-    // "Test the service"
-    testService: "Testuj usługę",
-    // [Auto-translated] "Please select the element"
-    itemSelectorEmpty: "Proszę wybrać element",
     // [Auto-translated] "Please select the action"
     conditionActionEmpty: "Wybierz akcję",
     // [Auto-translated] "Select a question..."
@@ -977,20 +837,8 @@ export var polishStrings = {
     conditionSelectPage: "Wybierz stronę...",
     // [Auto-translated] "Select a panel..."
     conditionSelectPanel: "Wybierz panel...",
-    // [Auto-translated] "Please enter/select the value"
-    conditionValueQuestionTitle: "Wpisz/wybierz wartość",
     // [Auto-translated] "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Naciśnij ctrl+space, aby uzyskać wskazówkę o ukończeniu wyrażeń",
-    // [Auto-translated] "Current row"
-    aceEditorRowTitle: "Obecny rząd",
-    // [Auto-translated] "Current panel"
-    aceEditorPanelTitle: "Obecny panel",
-    // [Auto-translated] "For more details please check the documentation"
-    showMore: "Więcej szczegółów można znaleźć w dokumentacji",
-    // "Available questions"
-    assistantTitle: "Available questions:",
-    // [Auto-translated] "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Powinna istnieć co najmniej jedna kolumna lub wiersz",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "Przejrzyj przed przesłaniem",
     // [Auto-translated] "Enabled by a condition"
@@ -1041,20 +889,12 @@ export var polishStrings = {
     "addNew@navigateToUrlOnCondition": "Dodaj nowy adres URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Dodaj nową stronę",
-    // [Auto-translated] "Expression is empty"
-    expressionIsEmpty: "Wyrażenie jest puste",
     // "Value"
     value: "Wartość",
     // "Text"
     text: "Etykieta",
-    // [Auto-translated] "Row ID"
-    rowid: "Identyfikator wiersza",
     // [Auto-translated] "Image or video file URL"
     imageLink: "Adres URL obrazu lub pliku wideo",
-    // [Auto-translated] "Edit column: {0}"
-    columnEdit: "Edytuj: {0}",
-    // [Auto-translated] "Edit item: {0}"
-    itemEdit: "Edycja: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1071,8 +911,6 @@ export var polishStrings = {
     imageLinkName: "Pobierz adresy URL plików z następującej właściwości",
     // [Auto-translated] "Accept empty response"
     allowEmptyResponse: "Zaakceptuj pustą odpowiedź",
-    // [Auto-translated] "Title"
-    titlePlaceholder: "Tytuł",
     // [Auto-translated] "Survey Title"
     surveyTitlePlaceholder: "Tytuł ankiety",
     // [Auto-translated] "Page {num}"
@@ -1183,16 +1021,8 @@ export var polishStrings = {
     defaultValue: "Default value",
     // [Auto-translated] "Default texts"
     cellsDefaultRow: "Teksty domyślne",
-    // "Edit survey settings"
-    surveyEditorTitle: "Edytuj ankietę",
-    // "Edit: {0}"
-    qEditorTitle: "Edytuj: {0}",
     // [Auto-translated] "Maximum character limit"
     maxLength: "Maksymalny limit znaków",
-    // [Auto-translated] "Build"
-    buildExpression: "Budować",
-    // [Auto-translated] "Edit"
-    editExpression: "Redagować",
     // [Auto-translated] "and"
     and: "i",
     // [Auto-translated] "or"
@@ -1219,8 +1049,6 @@ export var polishStrings = {
     includeIntoResult: "Dodaj do wyników ankiety",
     // "Make the title and description visible"
     showTitle: "Pokaż/ukryj tytuł",
-    // [Auto-translated] "Expand/collapse title"
-    expandCollapseTitle: "Rozwiń/zwiń tytuł",
     // "Select a survey language"
     locale: "Domyślny język",
     // [Auto-translated] "Select device type"
@@ -1635,8 +1463,6 @@ export var polishStrings = {
     displayRateDescriptionsAsExtremeItems: "Pokazywanie etykiet jako wartości skrajnych",
     // [Auto-translated] "Row order"
     rowOrder: "Kolejność wierszy",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "Układ kolumn",
     // [Auto-translated] "Nested column count"
     columnColCount: "Liczba kolumn zagnieżdżonych",
     // [Auto-translated] "Correct Answer"
@@ -1667,22 +1493,6 @@ export var polishStrings = {
     },
     // [Auto-translated] "Logo alignment"
     logoPosition: "Wyrównanie logo",
-    // [Auto-translated] "Add logo..."
-    addLogo: "Dodaj logo...",
-    // [Auto-translated] "Change logo..."
-    changeLogo: "Zmień logo...",
-    logoPositions: {
-      // [Auto-translated] "Remove logo"
-      none: "Usuń logo",
-      // [Auto-translated] "Left"
-      left: "Lewy",
-      // [Auto-translated] "Right"
-      right: "Prawy",
-      // [Auto-translated] "On the top"
-      top: "Na górze",
-      // [Auto-translated] "In the bottom"
-      bottom: "Na dole"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Tryb podglądu",
     // [Auto-translated] "Enable grid layout"
@@ -1695,14 +1505,8 @@ export var polishStrings = {
     detailErrorLocation: "Wyrównanie komunikatu o błędzie szczegółów wiersza",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Układ panelu"
-      },
       // "General"
       general: "Ogólne",
-      // [Auto-translated] "Options"
-      fileOptions: "Opcje",
       // "HTML Editor"
       html: "Html Editor",
       // "Columns"
@@ -1725,10 +1529,6 @@ export var polishStrings = {
       sliderSettings: "Ustawienia suwaka",
       // "Choices from a Web Service"
       choicesByUrl: "Odpowiedzi z webserwisu",
-      // [Auto-translated] "Default Choices"
-      matrixChoices: "Domyślne wybory",
-      // [Auto-translated] "Text Inputs"
-      multipleTextItems: "Wprowadzanie tekstu",
       // [Auto-translated] "Numbering"
       numbering: "Numerowanie",
       // [Auto-translated] "Validators"
@@ -1771,8 +1571,6 @@ export var polishStrings = {
       showOnCompleted: "Strona z podziękowaniami",
       // [Auto-translated] "Logo in the Survey Header"
       logo: "Logo w nagłówku ankiety",
-      // [Auto-translated] "Slider"
-      slider: "Suwak",
       // [Auto-translated] "Expression"
       expression: "Wyrażenie",
       // [Auto-translated] "Question Settings"
@@ -1792,62 +1590,18 @@ export var polishStrings = {
       // [Auto-translated] "Others"
       others: "Inni"
     },
-    // [Auto-translated] "Edit property '{0}'"
-    editProperty: "Edytuj własność '{0}'",
     // [Auto-translated] "Items"
     items: "Przedmioty",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Uwidocznij wybory, jeśli",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "Dokonaj wyboru opcji, jeśli",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "Uwidocznij kolumny, jeśli",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "Uwidocznij wiersze, jeśli",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "Zwiększ wcięcie wewnętrzne",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Domyślnie używaj odpowiedzi z ostatniego wpisu",
-    // "Please enter a value."
-    enterNewValue: "Please, enter the value.",
-    // "There are no questions in the survey."
-    noquestions: "There is no any question in the survey.",
-    // [Auto-translated] "Please create a trigger"
-    createtrigger: "Proszę, stwórz wyzwalacz",
-    // [Auto-translated] "Press enter button to edit"
-    titleKeyboardAdornerTip: "Naciśnij przycisk Enter, aby edytować",
-    // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Naciśnij przycisk Enter, aby edytować element, naciśnij przycisk Delete, aby usunąć element, naciśnij Alt plus strzałka w górę lub strzałka w dół, aby przenieść element",
-    // [Auto-translated] "On "
-    triggerOn: "On ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Make pages visible:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Make elements visible:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Complete the survey if succeed.",
-    // [Auto-translated] "The trigger is not set"
-    triggerNotSet: "Wyzwalacz nie jest ustawiony",
-    // [Auto-translated] "Run if"
-    triggerRunIf: "Uciekaj, jeśli",
-    // [Auto-translated] "Change value of: "
-    triggerSetToName: "Zmiana wartości: ",
-    // [Auto-translated] "Copy value from: "
-    triggerFromName: "Skopiuj wartość z: ",
-    // [Auto-translated] "Run this Expression"
-    triggerRunExpression: "Uruchom to wyrażenie",
-    // [Auto-translated] "to: "
-    triggerSetValue: "do: ",
-    // [Auto-translated] "Go to the question"
-    triggerGotoName: "Przejdź do pytania",
-    // [Auto-translated] "Do not put the variable into the survey result."
-    triggerIsVariable: "Nie wpisuj tej zmiennej do wyniku badania.",
-    // [Auto-translated] "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Wpisz poprawne wyrażenie",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Wpisz wyrażenie tutaj...",
-    // [Auto-translated] "No file chosen"
-    noFile: "Nie wybrano pliku",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "Wyczyść ukryte wartości pytań",
     // [Auto-translated] "Store values in the following property"
@@ -1993,10 +1747,6 @@ export var polishStrings = {
     "file-camera": "Plik lokalny lub kamera",
     // [Auto-translated] "Inherit"
     inherit: "Odziedziczyć",
-    // [Auto-translated] "Visible"
-    show: "Widoczny",
-    // [Auto-translated] "Hidden"
-    hide: "Ukryty",
     // [Auto-translated] "Inherit"
     default: "Odziedziczyć",
     // [Auto-translated] "Initial"
@@ -2013,8 +1763,6 @@ export var polishStrings = {
     asc: "Rosnąco",
     // [Auto-translated] "Descending"
     desc: "Malejąco",
-    // [Auto-translated] "Indeterminate"
-    indeterminate: "Nieokreślony",
     // [Auto-translated] "Selected"
     selected: "Wybrany",
     // [Auto-translated] "Unselected"
@@ -2035,12 +1783,6 @@ export var polishStrings = {
     carousel: "Karuzela",
     // [Auto-translated] "Tabs"
     tab: "Karty",
-    // [Auto-translated] "Panel navigator + Progress bar at the top"
-    progressTop: "Nawigator paneli + pasek postępu u góry",
-    // [Auto-translated] "Panel navigator + Progress bar at the bottom"
-    progressBottom: "Nawigator panelu + pasek postępu u dołu",
-    // [Auto-translated] "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "Nawigator panelu + pasek postępu u góry i u dołu",
     // [Auto-translated] "Horizontal"
     horizontal: "Poziomy",
     // [Auto-translated] "Vertical"
@@ -2051,8 +1793,6 @@ export var polishStrings = {
     bottom: "Dno",
     // [Auto-translated] "Top and bottom"
     topBottom: "Góra i dół",
-    // [Auto-translated] "Both"
-    both: "Obie",
     // [Auto-translated] "Left"
     left: "Lewy",
     // [Auto-translated] "Right"
@@ -2093,10 +1833,6 @@ export var polishStrings = {
     week: "tydzień",
     // [Auto-translated] "Hidden"
     hidden: "Ukryty",
-    // [Auto-translated] "Editable"
-    edit: "Edytowalny",
-    // [Auto-translated] "Read-only"
-    display: "Tylko do odczytu",
     // [Auto-translated] "Contain"
     contain: "Zawierać",
     // [Auto-translated] "Cover"
@@ -2325,8 +2061,6 @@ export var polishStrings = {
     onNextPage: "Podczas przełączania do następnej strony",
     // [Auto-translated] "After an answer is changed"
     onValueChanged: "Po zmianie odpowiedzi",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "Zanim odpowiedź zostanie zmieniona",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Oryginalna struktura",
@@ -2337,12 +2071,6 @@ export var polishStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Pokaż pojedyncze pole wejściowe na stronę"
     },
-    // [Auto-translated] "No preview"
-    noPreview: "Brak podglądu",
-    // [Auto-translated] "Show all questions"
-    showAllQuestions: "Pokaż wszystkie pytania",
-    // [Auto-translated] "Show answered questions only"
-    showAnsweredQuestions: "Pokaż tylko odpowiedzi na pytania",
     // [Auto-translated] "Show all questions"
     allQuestions: "Pokaż wszystkie pytania",
     // [Auto-translated] "Show answered questions only"
@@ -2448,12 +2176,8 @@ export var polishStrings = {
       onPage: "Resetuj na każdej stronie",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Resetuj na każdym panelu",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Resetuj na każdym panelu",
       // [Auto-translated] "Recursive numbering"
       recursive: "Numeracja rekurencyjna",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Kontynuuj badanie",
       // [Auto-translated] "No numbering"
       off: "Brak numeracji"
     },
@@ -2616,49 +2340,6 @@ export var polishStrings = {
     and: "i",
     // [Auto-translated] "or"
     or: "lub"
-  },
-  // Embed window
-  ew: {
-    // [Auto-translated] "Use Angular version"
-    angular: "Użyj wersji Angular",
-    // [Auto-translated] "Use jQuery version"
-    jquery: "Użyj wersji jQuery",
-    // [Auto-translated] "Use Knockout version"
-    knockout: "Użyj wersji Knockout",
-    // [Auto-translated] "Use React version"
-    react: "Użyj wersji React",
-    // [Auto-translated] "Use Vue version"
-    vue: "Użyj wersji Vue",
-    // [Auto-translated] "For bootstrap framework"
-    bootstrap: "Dla frameworka bootstrap",
-    // [Auto-translated] "Modern theme"
-    modern: "Nowoczesny motyw",
-    // [Auto-translated] "Default theme"
-    default: "Motyw domyślny",
-    // [Auto-translated] "Orange theme"
-    orange: "Kompozycja pomarańczowa",
-    // [Auto-translated] "Darkblue theme"
-    darkblue: "Kompozycja Ciemnoniebieski",
-    // [Auto-translated] "Darkrose theme"
-    darkrose: "Kompozycja Darkrose",
-    // [Auto-translated] "Stone theme"
-    stone: "Kompozycja Kamień",
-    // [Auto-translated] "Winter theme"
-    winter: "Kompozycja zimowa",
-    // [Auto-translated] "Winter-Stone theme"
-    winterstone: "Kompozycja Kamień zimowy",
-    // [Auto-translated] "Show survey on a page"
-    showOnPage: "Pokaż ankietę na stronie",
-    // [Auto-translated] "Show survey in a window"
-    showInWindow: "Pokaż przegląd w oknie",
-    // [Auto-translated] "Load Survey JSON from server"
-    loadFromServer: "Załaduj Survey JSON z serwera",
-    // [Auto-translated] "Scripts and styles"
-    titleScript: "Scenariusze i style",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2907,10 +2588,6 @@ export var polishStrings = {
       choices: "\"Wartość\" służy jako identyfikator elementu używany w regułach warunkowych; Respondentom wyświetlany jest \"Tekst\".",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Wybierz pomiędzy \"Obraz\" i \"Wideo\", aby ustawić tryb zawartości selektora multimediów. W przypadku wybrania opcji \"Obraz\" upewnij się, że wszystkie dostępne opcje są plikami graficznymi w następujących formatach: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Podobnie, jeśli wybrana jest opcja \"Wideo\", upewnij się, że wszystkie opcje są bezpośrednimi linkami do plików wideo w następujących formatach: MP4, MOV, WMV, FLV, AVI, MKV. Należy pamiętać, że linki do YouTube nie są obsługiwane w przypadku opcji wideo."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "To ustawienie zmienia tylko rozmiar pola wejściowego i nie ma wpływu na szerokość pola pytania. Aby ograniczyć akceptowaną długość danych wejściowych, przejdź do \"Walidacja\" → \"Maksymalny limit znaków\"."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3496,16 +3173,12 @@ export var polishStrings = {
     primaryDarkColor: "Hover",
     // [Auto-translated] "Selected"
     primaryLightColor: "Wybrany",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "Kolor tła",
     // "Corner radius"
     cornerRadius: "Promień naroża",
     // [Auto-translated] "Default background"
     backcolor: "Domyślne tło",
     // [Auto-translated] "Hover background"
     hovercolor: "Najedź kursorem na tło",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Dekoracja obramowania",
     // [Auto-translated] "Font color"
     fontColor: "Kolor czcionki",
     // [Auto-translated] "Background color"
@@ -3514,8 +3187,6 @@ export var polishStrings = {
     primaryForecolor: "Kolor domyślny",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Kolor wyłączony",
-    // [Auto-translated] "Font"
-    font: "Czcionka",
     // [Auto-translated] "Darker"
     borderDefault: "Ciemniejsze",
     // [Auto-translated] "Lighter"
@@ -3594,14 +3265,10 @@ export var polishStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Tło powierzchni",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Podstawowy",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Wtórny",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Powierzchnia",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Elementy interfejsu użytkownika",
     // [Auto-translated] "Font"

@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var turkishStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Düzenle",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "Nasıl anket oluşturulur izle",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Lütfen araç kutusundan bir soru sürükleyin.",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "Anket akışını özelleştirmek için bir kural oluşturun.",
-    // "Copy"
-    copy: "Kopyala",
     // [Auto-translated] "Duplicate"
     duplicate: "Yinelenen",
-    // "Add to toolbox"
-    addToToolbox: "Araç kutusuna ekle",
-    // "Delete Panel"
-    deletePanel: "Paneli Sil",
-    // "Delete Question"
-    deleteQuestion: "Soruyu Sil",
-    // "Convert to"
-    convertTo: "Çevir",
-    // "Drag element"
-    drag: "Nesne sürükleyin"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var turkishStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "Varyayılan ({0})",
-    // "Survey"
-    survey: "Anket",
     // "Settings"
     settings: "Anket Ayarları",
     // "Open settings"
@@ -144,42 +120,14 @@ export var turkishStrings = {
     surveyTypeName: "Anket",
     // [Auto-translated] "Page"
     pageTypeName: "Sayfa",
-    // [Auto-translated] "Panel"
-    panelTypeName: "Panel",
-    // [Auto-translated] "Question"
-    questionTypeName: "Soru",
-    // [Auto-translated] "Column"
-    columnTypeName: "Sütun",
-    // "Add New Page"
-    addNewPage: "Yeni Sayfa Ekle",
-    // "Scroll to the Right"
-    moveRight: "Sağa sürükle",
-    // "Scroll to the Left"
-    moveLeft: "Sola sürükle",
-    // "Delete Page"
-    deletePage: "Sayfayı Sil",
-    // "Edit Page"
-    editPage: "Sayfayı Düzenle",
-    // "Edit"
-    edit: "Düzenle",
     // "page"
     newPageName: "Sayfa",
     // "question"
     newQuestionName: "Soru",
     // "panel"
     newPanelName: "Panel",
-    // "text"
-    newTextItemName: "Yazı",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "Temerrüt",
-    // [Auto-translated] "Modern"
-    modernTheme: "Modern",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Varsayılan (eski)",
     // "Preview Survey Again"
     testSurveyAgain: "Anketi Tekrar Test Et",
-    // "Survey width: "
-    testSurveyWidth: "Anket genişliği: ",
     // "You had to navigate to"
     navigateToMsg: "Şuraya git:",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var turkishStrings = {
     undo: "Geri",
     // "Redo"
     redo: "İleri",
-    // "Undo last change"
-    undoTooltip: "Son değişikliği geri al",
-    // "Redo the change"
-    redoTooltip: "Son değişikliği ileri al",
     // [Auto-translated] "Expand"
     expandTooltip: "Genişletmek",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var turkishStrings = {
     showMoreChoices: "Daha fazlasını göster",
     // [Auto-translated] "Show less"
     showLessChoices: "Daha az göster",
-    // [Auto-translated] "Copy"
-    copy: "Kopya etmek",
-    // [Auto-translated] "Cut"
-    cut: "Kesmek",
-    // [Auto-translated] "Paste"
-    paste: "Yapıştırmak",
-    // [Auto-translated] "Copy selection to clipboard"
-    copyTooltip: "Seçimi panoya kopyala",
-    // [Auto-translated] "Cut selection to clipboard"
-    cutTooltip: "Seçimi panoya kes",
-    // [Auto-translated] "Paste from clipboard"
-    pasteTooltip: "Panodan yapıştır",
-    // "Options"
-    options: "Seçenekler",
-    // "Generate Valid JSON"
-    generateValidJSON: "JSON Oluştur",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Bilinmeyen fonksiyon: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var turkishStrings = {
     expressionSyntaxError: "Sözdizimi hatası.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Anlamsal hata.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Okunabilir JSON oluştur",
     // "Toolbox"
     toolbox: "Araç Kutusu",
-    // "Properties"
-    "property-grid": "Özellikler",
     // [Auto-translated] "Search"
     toolboxSearch: "Aramak",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var turkishStrings = {
     propertyGridPlaceholderTitle: "Formunuzu yapılandırmaya başlayın",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Anket ayarlarını keşfetmek için herhangi bir kategori simgesini tıklayın. Tasarım yüzeyine bir anket öğesi eklediğinizde ek ayarlar kullanılabilir hale gelir.",
-    // "Please correct JSON."
-    correctJSON: "JSON nesnesini doğrular.",
     // "Survey Results "
     surveyResults: "Anket Sonucu: ",
     // "As Table"
@@ -294,8 +216,6 @@ export var turkishStrings = {
     saving: "Kaydediliyor",
     // "Saved"
     saved: "Kaydedildi",
-    // [Auto-translated] "Error"
-    propertyEditorError: "Hata",
     // "Error! Editor content is not saved."
     saveError: "Hata! Editor içerisi kaydedilmedi.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var turkishStrings = {
     themeResetConfirmation: "Temayı gerçekten sıfırlamak istiyor musunuz? Tüm özelleştirmeleriniz kaybolacak.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Evet, temayı sıfırlayın",
-    // "Bold"
-    bold: "Kalın",
-    // "Italic"
-    italic: "Italik",
-    // "Underline"
-    underline: "Alt Çizgi",
     // "Add Question"
     addNewQuestion: "Soru Ekle",
     // [Auto-translated] "Select page..."
@@ -507,8 +421,6 @@ export var turkishStrings = {
       trigger_runExpressionDescription: "Mantksal ifade geçerli olduğunda ve özel ifade gereçli olur. İsteğe bağlı olarak bu ifade sonucunu seçilen soruya ayarlayabilirsiniz.",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Eğer mantıksa ifade geçerli olursa, varsayılan ''Teşekkürler sayfası' yazısı girilen ile dğeiştirilsin.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Mantıksal ifade: '{0}' geçerli olsun:", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "Yeni kural",
       // "make page {0} visible"
@@ -563,8 +475,6 @@ export var turkishStrings = {
       conditions: "Koşul(lar)",
       // "Action(s)"
       actions: "Olay(lar)",
-      // "Define condition(s)"
-      expressionEditorTitle: "Koşul(ları) tanımla",
       // "Define action(s)"
       actionsEditorTitle: "Olay(ları) tanımla",
       // "Delete Action"
@@ -575,8 +485,6 @@ export var turkishStrings = {
       selectedActionCaption: "Eklemek için bir olay seçin...",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Mantıksal ifade boş veya geçersiz. Lütfen düzenleyin.",
-      // "Please add at least one action."
-      noActionError: "Lütfen, En az bir olay seçiniz.",
       // "Please fix issues in your action(s)."
       actionInvalid: "Lütfen, Olay(lar)daki sorunları gideriniz.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +786,6 @@ export var turkishStrings = {
     defaultDisplayValue: "Dinamik metinler için varsayılan görüntüleme değeri",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Etiket hizalama",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Giriş alanı genişliği (karakter olarak)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Hücre hata iletisi hizalaması",
     // [Auto-translated] "Enabled"
@@ -888,32 +794,16 @@ export var turkishStrings = {
     disabled: "Sakat",
     // [Auto-translated] "Inherit"
     inherit: "Devralır",
-    // "Apply"
-    apply: "Uygula",
-    // "OK"
-    ok: "TAMAM",
-    // "Save"
-    save: "Kaydet",
     // [Auto-translated] "Clear"
     clear: "Berrak",
-    // [Auto-translated] "Save"
-    saveTooltip: "Kurtarmak",
-    // "Cancel"
-    cancel: "İptal",
     // [Auto-translated] "Set"
     set: "Ayarlamak",
-    // "Reset"
-    reset: "Sıfırla",
     // [Auto-translated] "Change"
     change: "Değiştirmek",
-    // "Refresh"
-    refresh: "Yenile",
     // [Auto-translated] "Close"
     close: "Kapatmak",
     // "Delete"
     delete: "Sil",
-    // "Add"
-    add: "Ekle",
     // "Add New"
     addNew: "Yeni Ekle",
     // "Click to add an item..."
@@ -922,34 +812,10 @@ export var turkishStrings = {
     removeItem: "Öğeyi kaldırmak için tıklayın...",
     // [Auto-translated] "Drag the item"
     dragItem: "Öğeyi sürükleyin",
-    // "Other"
-    addOther: "Diğer",
-    // "Select All"
-    addSelectAll: "Tümünü Seç",
-    // "None"
-    addNone: "Hiçbiri",
-    // "Remove All"
-    removeAll: "Tümünü Sil",
     // "Edit"
     edit: "Düzenle",
-    // "Return without saving"
-    back: "Kaydetmeden çık",
-    // [Auto-translated] "Return without saving"
-    backTooltip: "Kaydetmeden geri dönün",
-    // "Save and return"
-    saveAndBack: "Kaydet ve çık",
-    // [Auto-translated] "Save and return"
-    saveAndBackTooltip: "Kaydet ve geri dön",
     // [Auto-translated] "Done"
     doneEditing: "Yapılmış",
-    // "Edit Choices"
-    editChoices: "Seçenekleri düzenle",
-    // "Show Choices"
-    showChoices: "Seçenekleri göster",
-    // "Move"
-    move: "Hareket",
-    // "<empty>"
-    empty: "<boş>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Değer boş",
     // "Manual Entry"
@@ -962,12 +828,6 @@ export var turkishStrings = {
     fastEntryChoicesMinCountError: "Lütfen en az {0} ürün girin",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Seçim seçenekleri listesini ve kimliklerini aşağıdaki biçimde girin:\n\nkimlik|seçenek\n\nSeçim seçeneği kimliği yanıtlayanlar tarafından görülemez ve koşullu kurallarda kullanılabilir.",
-    // "Form Entry"
-    formEntry: "Form Girişi",
-    // "Test the service"
-    testService: "Servisi test et",
-    // "Please select the element"
-    itemSelectorEmpty: "Lütfen nesneyi seçiniz",
     // "Please select the action"
     conditionActionEmpty: "Lütfen olayı seçiniz",
     // "Select a question..."
@@ -976,20 +836,8 @@ export var turkishStrings = {
     conditionSelectPage: "Sayfayı seç...",
     // "Select a panel..."
     conditionSelectPanel: "Paneli seç...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Lütfen değer/seçenek giriniz",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Mantıksal ifade kopyası için ctrl+space tuşlarına basınız",
-    // "Current row"
-    aceEditorRowTitle: "Geçerli satır",
-    // "Current panel"
-    aceEditorPanelTitle: "Geçerli panel",
-    // "For more details please check the documentation"
-    showMore: "Daha fazla bilgi için dokümantasyonu inceleyiniz",
-    // "Available questions"
-    assistantTitle: "Erişilebilir sorular:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "En az bir kolon veya satır olmalı",
     // "Review before submit"
     showPreviewBeforeComplete: "Tamamlanmadan önce önizlemeyi göster",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +888,12 @@ export var turkishStrings = {
     "addNew@navigateToUrlOnCondition": "Yeni URL ekle",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Yeni sayfa ekle",
-    // "Expression is empty"
-    expressionIsEmpty: "Mantıksal ifade boş",
     // "Value"
     value: "Değer",
     // "Text"
     text: "Yazı",
-    // "Row ID"
-    rowid: "Satır ID",
     // "Image or video file URL"
     imageLink: "Resim linki",
-    // "Edit column: {0}"
-    columnEdit: "Kolonu düzenle: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Eleman düzenle: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1070,8 +910,6 @@ export var turkishStrings = {
     imageLinkName: "Aşağıdaki özellikten dosya URL'lerini alın",
     // "Accept empty response"
     allowEmptyResponse: "Boş cevaba izin ver",
-    // "Title"
-    titlePlaceholder: "Başlık",
     // "Survey Title"
     surveyTitlePlaceholder: "Anket başlığı",
     // "Page {num}"
@@ -1182,16 +1020,8 @@ export var turkishStrings = {
     defaultValue: "Varsayılan değer",
     // "Default texts"
     cellsDefaultRow: "Varsayılan hücre yazısı",
-    // "Edit survey settings"
-    surveyEditorTitle: "Anket ayarlarını düzenle",
-    // "Edit: {0}"
-    qEditorTitle: "Düzenle: {0}",
     // "Maximum character limit"
     maxLength: "Maksimum uzunluk",
-    // "Build"
-    buildExpression: "Kur",
-    // "Edit"
-    editExpression: "Düzenle",
     // [Auto-translated] "and"
     and: "ve",
     // [Auto-translated] "or"
@@ -1218,8 +1048,6 @@ export var turkishStrings = {
     includeIntoResult: "Anket sonuçlarına ekle",
     // "Make the title and description visible"
     showTitle: "Başlığı göster/gizle",
-    // [Auto-translated] "Expand/collapse title"
-    expandCollapseTitle: "Başlığı genişletme/daraltma",
     // "Select a survey language"
     locale: "Varsayılan dil",
     // "Select device type"
@@ -1634,8 +1462,6 @@ export var turkishStrings = {
     displayRateDescriptionsAsExtremeItems: "Etiketleri uç değerler olarak gösterme",
     // [Auto-translated] "Row order"
     rowOrder: "Satır sırası",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "Sütun düzeni",
     // [Auto-translated] "Nested column count"
     columnColCount: "İç içe geçmiş sütun sayısı",
     // [Auto-translated] "Correct Answer"
@@ -1666,22 +1492,6 @@ export var turkishStrings = {
     },
     // "Logo alignment"
     logoPosition: "Logo pozisyonu",
-    // "Add logo..."
-    addLogo: "Logo ekle...",
-    // "Change logo..."
-    changeLogo: "Logoyu değiştir...",
-    logoPositions: {
-      // "Remove logo"
-      none: "Logoyu kaldır",
-      // "Left"
-      left: "Sol",
-      // "Right"
-      right: "Sağ",
-      // "On the top"
-      top: "Üstte",
-      // "In the bottom"
-      bottom: "Altta"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Önizleme modu",
     // [Auto-translated] "Enable grid layout"
@@ -1694,14 +1504,8 @@ export var turkishStrings = {
     detailErrorLocation: "Satır ayrıntıları hata iletisi hizalaması",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Panel Düzeni"
-      },
       // "General"
       general: "Genel",
-      // "Options"
-      fileOptions: "Seçenekler",
       // "HTML Editor"
       html: "Html Editor",
       // "Columns"
@@ -1724,10 +1528,6 @@ export var turkishStrings = {
       sliderSettings: "Kaydırıcı Ayarları",
       // "Choices from a Web Service"
       choicesByUrl: "Webten seçenekler",
-      // "Default Choices"
-      matrixChoices: "Varsayılan seçenekler",
-      // "Text Inputs"
-      multipleTextItems: "Yazı girdileri",
       // "Numbering"
       numbering: "Rakamlama",
       // "Validators"
@@ -1770,8 +1570,6 @@ export var turkishStrings = {
       showOnCompleted: "Tamamlandı Göster",
       // "Logo in the Survey Header"
       logo: "Anket Başlığında Logo",
-      // [Auto-translated] "Slider"
-      slider: "Kaydırıcı",
       // [Auto-translated] "Expression"
       expression: "İfade",
       // [Auto-translated] "Question Settings"
@@ -1791,62 +1589,18 @@ export var turkishStrings = {
       // "Others"
       others: "Diğer"
     },
-    // "Edit property '{0}'"
-    editProperty: "Özelliği düzenle '{0}'",
     // "Items"
     items: "[ Elemanlar: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Aşağıdaki durumlarda seçimleri görünür hale getirin",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "Aşağıdaki durumlarda seçimleri seçilebilir hale getirin",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "Aşağıdaki durumlarda sütunları görünür hale getirin",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "Aşağıdaki durumlarda satırları görünür hale getirin",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "İç girintiyi artırma",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Varsayılan olarak son girişteki yanıtları kullan",
-    // "Please enter a value."
-    enterNewValue: "Lütfen, değer girin.",
-    // "There are no questions in the survey."
-    noquestions: "Ankette herhangi bir soru yok.",
-    // "Please create a trigger"
-    createtrigger: "Lütfen bir tetikleyici oluşturun",
-    // [Auto-translated] "Press enter button to edit"
-    titleKeyboardAdornerTip: "Düzenlemek için enter düğmesine basın",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Öğeyi düzenlemek için enter butonuna basın, öğeyi silmek için sil butonuna basın, öğeyi taşımak için kontrol artı ok yukarı veya ok tuşuna basın",
-    // "On "
-    triggerOn: "Açık ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Sayfaları görünür yap:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Elemanları görünür yap:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Başarılı olursa anketi tamamlayın.",
-    // "The trigger is not set"
-    triggerNotSet: "Tetikleyici ayarlanmadı",
-    // "Run if"
-    triggerRunIf: "Çalıştır eğer",
-    // "Change value of: "
-    triggerSetToName: "Değerini şuradan değiştir: ",
-    // "Copy value from: "
-    triggerFromName: "Değerini şuradan kopyala: ",
-    // "Run this Expression"
-    triggerRunExpression: "Mantıksal ifadeyi çalıştır:",
-    // "to: "
-    triggerSetValue: "şuraya: ",
-    // "Go to the question"
-    triggerGotoName: "Soruya git:",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Değişkeni anket sonucuna koymayın.",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Lütfen geçerli bir ifade girin",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "İfadeyi buraya yazın...",
-    // [Auto-translated] "No file chosen"
-    noFile: "Hiçbir dosya seçilmedi",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "Gizli soru değerlerini temizleme",
     // [Auto-translated] "Store values in the following property"
@@ -1992,10 +1746,6 @@ export var turkishStrings = {
     "file-camera": "Yerel dosya veya Kamera",
     // "Inherit"
     inherit: "Başlangıç",
-    // "Visible"
-    show: "Göster",
-    // "Hidden"
-    hide: "Gizle",
     // "Inherit"
     default: "Varsayılan",
     // "Initial"
@@ -2012,8 +1762,6 @@ export var turkishStrings = {
     asc: "Artan",
     // "Descending"
     desc: "Azalan",
-    // "Indeterminate"
-    indeterminate: "Belirsiz",
     // [Auto-translated] "Selected"
     selected: "Seçilmiş",
     // [Auto-translated] "Unselected"
@@ -2034,12 +1782,6 @@ export var turkishStrings = {
     carousel: "Atlıkarınca",
     // [Auto-translated] "Tabs"
     tab: "Sekmeler",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "progressTop",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "progressBottom",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "progressTopBottom",
     // "Horizontal"
     horizontal: "Yatay",
     // "Vertical"
@@ -2050,8 +1792,6 @@ export var turkishStrings = {
     bottom: "Alt",
     // "Top and bottom"
     topBottom: "Üst ve alt",
-    // "Both"
-    both: "Her ikiside",
     // "Left"
     left: "Sol",
     // [Auto-translated] "Right"
@@ -2092,10 +1832,6 @@ export var turkishStrings = {
     week: "hafta",
     // "Hidden"
     hidden: "Gizli",
-    // "Editable"
-    edit: "Düzenle",
-    // "Read-only"
-    display: "Görüntüle",
     // [Auto-translated] "Contain"
     contain: "Kapsamak",
     // [Auto-translated] "Cover"
@@ -2324,8 +2060,6 @@ export var turkishStrings = {
     onNextPage: "Sonraki sayfada",
     // "After an answer is changed"
     onValueChanged: "Değer değiştiğinde",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "Bir yanıt değiştirilmeden önce",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Orijinal yapı",
@@ -2336,12 +2070,6 @@ export var turkishStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Sayfa başına tek giriş alanı göster"
     },
-    // "No preview"
-    noPreview: "Önizleme yok",
-    // "Show all questions"
-    showAllQuestions: "Tüm soruları göster",
-    // "Show answered questions only"
-    showAnsweredQuestions: "Cevaplanan soruları göster",
     // [Auto-translated] "Show all questions"
     allQuestions: "Tüm soruları göster",
     // [Auto-translated] "Show answered questions only"
@@ -2447,12 +2175,8 @@ export var turkishStrings = {
       onPage: "Her sayfada sıfırla",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Her panelde sıfırla",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Her panelde sıfırla",
       // [Auto-translated] "Recursive numbering"
       recursive: "Özyinelemeli numaralandırma",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Ankete devam edin",
       // [Auto-translated] "No numbering"
       off: "Numaralandırma yok"
     },
@@ -2615,49 +2339,6 @@ export var turkishStrings = {
     and: "ve",
     // [Auto-translated] "or"
     or: "veya"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Angular versiyonu kullan",
-    // "Use jQuery version"
-    jquery: "Jquery versiyonu kullan",
-    // "Use Knockout version"
-    knockout: "Knockout versiyonu kullan",
-    // "Use React version"
-    react: "React versiyonu kullan",
-    // "Use Vue version"
-    vue: "Vue versiyonu kullan",
-    // "For bootstrap framework"
-    bootstrap: "Bootstrap",
-    // [Auto-translated] "Modern theme"
-    modern: "Modern tema",
-    // [Auto-translated] "Default theme"
-    default: "Varsayılan tema",
-    // [Auto-translated] "Orange theme"
-    orange: "Turuncu tema",
-    // [Auto-translated] "Darkblue theme"
-    darkblue: "Lacivert tema",
-    // [Auto-translated] "Darkrose theme"
-    darkrose: "Darkrose teması",
-    // [Auto-translated] "Stone theme"
-    stone: "Taş teması",
-    // [Auto-translated] "Winter theme"
-    winter: "Kış teması",
-    // [Auto-translated] "Winter-Stone theme"
-    winterstone: "Kış-Taş teması",
-    // "Show survey on a page"
-    showOnPage: "Bir sayfada anket göster",
-    // "Show survey in a window"
-    showInWindow: "Anketi bir pencerede göster",
-    // "Load Survey JSON from server"
-    loadFromServer: "Anket JSON'u sunucudan yükle",
-    // "Scripts and styles"
-    titleScript: "Scriptler ve stiller",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2906,10 +2587,6 @@ export var turkishStrings = {
       choices: "\"Değer\", koşullu kurallarda kullanılan bir öğe kimliği görevi görür; Yanıtlayanlara \"Metin\" görüntülenir.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Medya seçicinin içerik modunu ayarlamak için \"Görüntü\" ve \"Video\" arasında seçim yapın. \"Resim\" seçilirse, sağlanan tüm seçeneklerin şu biçimlerdeki resim dosyaları olduğundan emin olun: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Benzer şekilde, \"Video\" seçilirse, tüm seçeneklerin aşağıdaki formatlardaki video dosyalarına doğrudan bağlantılar olduğundan emin olun: MP4, MOV, WMV, FLV, AVI, MKV. Video seçenekleri için YouTube bağlantılarının desteklenmediğini lütfen unutmayın."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Bu ayar yalnızca giriş alanını yeniden boyutlandırır ve soru kutusunun genişliğini etkilemez. Kabul edilen giriş uzunluğunu sınırlamak için \"Doğrulama\" → \"Maksimum karakter sınırı\"na gidin."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3495,16 +3172,12 @@ export var turkishStrings = {
     primaryDarkColor: "Hover",
     // [Auto-translated] "Selected"
     primaryLightColor: "Seçilmiş",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "Arka plan rengi",
     // "Corner radius"
     cornerRadius: "Köşe yarıçapı",
     // [Auto-translated] "Default background"
     backcolor: "Varsayılan arka plan",
     // [Auto-translated] "Hover background"
     hovercolor: "Arka planın üzerine gelin",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Bordür dekorasyonu",
     // [Auto-translated] "Font color"
     fontColor: "Yazı tipi rengi",
     // [Auto-translated] "Background color"
@@ -3513,8 +3186,6 @@ export var turkishStrings = {
     primaryForecolor: "Varsayılan renk",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Devre dışı bırakılmış renk",
-    // [Auto-translated] "Font"
-    font: "Yazı tipi",
     // [Auto-translated] "Darker"
     borderDefault: "Koyu",
     // [Auto-translated] "Lighter"
@@ -3593,14 +3264,10 @@ export var turkishStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Yüzey arka planı",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Birincil",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "İkincil",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Yüzey",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Kullanıcı arayüzü öğeleri",
     // [Auto-translated] "Font"
