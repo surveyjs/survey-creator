@@ -3136,22 +3136,22 @@ test("File question photoPlaceholder placeholder is taken from the survey locale
     const propertyGrid = new PropertyGridModelTester(question);
     return <QuestionCommentModel>propertyGrid.survey.getQuestionByName("photoPlaceholder");
   };
-  expect(getEditor().placeholder).toEqual(defaultEnText);
+  expect(getEditor().renderedPlaceholder).toEqual(defaultEnText);
 
   const editor = getEditor();
   survey.locale = "de";
-  expect(editor.placeholder).toEqual("de-photoPlaceholder");
-  expect(getEditor().placeholder).toEqual("de-photoPlaceholder");
+  expect(editor.renderedPlaceholder).toEqual("de-photoPlaceholder");
+  expect(getEditor().renderedPlaceholder).toEqual("de-photoPlaceholder");
 
   editorLocalization.currentLocale = "de";
-  expect(getEditor().placeholder).toEqual("de-photoPlaceholder");
+  expect(getEditor().renderedPlaceholder).toEqual("de-photoPlaceholder");
   survey.locale = "";
-  expect(getEditor().placeholder).toEqual(defaultEnText);
+  expect(getEditor().renderedPlaceholder).toEqual(defaultEnText);
   editorLocalization.currentLocale = "";
 
   question.photoPlaceholder = "Take a photo!";
   survey.locale = "de";
-  expect(getEditor().placeholder).toEqual("Take a photo!");
+  expect(getEditor().renderedPlaceholder).toEqual("Take a photo!");
 
   survey.locale = "";
   delete surveyLocalization.locales["de"];

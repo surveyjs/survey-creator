@@ -1692,16 +1692,7 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     }
     return json;
   }
-  protected updatePlaceholder(obj: Base, question: Question, prop: JsonObjectProperty): void {
-    if (!(question instanceof QuestionTextBase) || !!question.placeholder) return;
-    const locStr = obj.getLocalizableString(prop.name);
-    if (!locStr || !locStr.localizationName) return;
-    (<any>question).placeholder = new ComputedUpdater<string>(() => {
-      return locStr.getPlaceholder() || surveyLocalization.getString(locStr.localizationName, locStr.locale);
-    });
-  }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
-    this.updatePlaceholder(obj, question, prop);
     if (question instanceof QuestionTextBase) {
       question.onKeyDownPreprocess = (event: KeyboardEvent) => {
         if ((event.ctrlKey || event.metaKey) && [89, 90].indexOf(event.keyCode) !== -1) {

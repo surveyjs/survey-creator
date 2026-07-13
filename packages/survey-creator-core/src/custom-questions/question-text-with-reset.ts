@@ -1,5 +1,16 @@
 import { Base, CssClassBuilder, QuestionCommentModel, QuestionFactory, QuestionTextModel, Serializer, property } from "survey-core";
 
+//Show the default property value as the placeholder. It is based on the edited object locale and doesn't depend on the creator locale.
+function getRenderedPlaceholder(question: QuestionTextModel | QuestionCommentModel): string {
+  if (question.isReadOnly) return "";
+  if (!!question.placeholder) return question.placeholder;
+  const obj: any = !!question.survey ? (<any>question.survey).editingObj : undefined;
+  if (!obj) return "";
+  const locStr = obj.getLocalizableString(question.name);
+  const res = !!locStr ? locStr.getPlaceholder() : "";
+  return res || obj.getDefaultPropertyValue(question.name) || "";
+}
+
 export class ResetValueAdorner extends Base {
   constructor(private question: QuestionTextModel | QuestionCommentModel) {
     super();
@@ -30,6 +41,9 @@ export class QuestionTextWithResetModel extends QuestionTextModel {
   getType(): string {
     return "textwithreset";
   }
+  public get renderedPlaceholder(): string {
+    return getRenderedPlaceholder(this);
+  }
   public getRootClass(): string {
     return new CssClassBuilder()
       .append(this.cssClasses.root)
@@ -59,6 +73,9 @@ export class QuestionCommentWithResetModel extends QuestionCommentModel {
   }
   getType(): string {
     return "commentwithreset";
+  }
+  public get renderedPlaceholder(): string {
+    return getRenderedPlaceholder(this);
   }
   protected getCssType(): string {
     return "textwithreset";
