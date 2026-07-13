@@ -53,7 +53,6 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
     const json = PropertyGridEditorCollection.getJSON(obj, prop, options);
     json.titleLocation = "left";
     json.descriptionLocation = "hidden";
-    json.minWidth = "0px";
     json.name = bindingName;
     json.title = editorLocalization.getPropertyName(bindingName);
     return json;

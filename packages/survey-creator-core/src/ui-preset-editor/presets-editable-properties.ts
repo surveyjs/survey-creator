@@ -378,7 +378,6 @@ export class CreatorPresetEditablePropertyGrid extends CreatorPresetEditableCare
                       {
                         "type": "panel",
                         "name": "details",
-                        "maxWidth": "30%",
                         "elements": [
                           { type: "text", name: "name", title: getLocString("presets.propertyGrid.name"), isUnique: true, isRequired: true, visible: false },
                           { type: "text", name: "title", title: getLocString("presets.propertyGrid.titleField"), isUnique: true, isRequired: true, visible: false },

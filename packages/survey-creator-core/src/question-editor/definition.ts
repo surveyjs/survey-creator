@@ -55,14 +55,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         name: "width",
         tab: "layout",
       },
-      {
-        name: "minWidth",
-        tab: "layout",
-      },
-      {
-        name: "maxWidth",
-        tab: "layout",
-      },
       { name: "effectiveColSpan", tab: "layout" },
       { name: "visibleIf", tab: "logic", index: 100 },
       { name: "enableIf", tab: "logic", index: 200 },
@@ -793,8 +785,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "startWithNewLine", tab: "layout" },
       { name: "state", tab: "layout" },
       { name: "width", tab: "layout" },
-      { name: "minWidth", tab: "layout" },
-      { name: "maxWidth", tab: "layout" },
       { name: "effectiveColSpan", tab: "layout" },
       { name: "showNumber", tab: "numbering" },
       { name: "showQuestionNumbers", tab: "numbering" },

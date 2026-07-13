@@ -41,7 +41,6 @@ export class CreatorPresetEditableToolboxConfigurator extends CreatorPresetEdita
         {
           "type": "panel",
           "name": "details",
-          "maxWidth": "30%",
           "elements": [
             { type: "text", name: "name", title: getLocString("presets.toolbox.categoryName"), isUnique: true, visible: false, isRequired: true },
             { type: "text", name: "title", title: getLocString("presets.toolbox.categoryTitle"), visible: false },

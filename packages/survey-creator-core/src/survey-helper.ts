@@ -277,8 +277,6 @@ export class SurveyHelper {
     delete json["rowsVisibleIf"];
     delete json["rowsEnableIf"];
     delete json["width"];
-    delete json["minWidth"];
-    delete json["maxWidth"];
   }
   private static deleteRandomProperties(json: any) {
     ["choicesOrder", "rowOrder"].forEach(prop => {

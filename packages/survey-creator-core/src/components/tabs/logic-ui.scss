@@ -151,6 +151,9 @@
 }
 
 .svc-logic-paneldynamic {
+  // A condition packs several questions onto one line, so they must stay far below the default element min-width.
+  --sjs-element-min-width: 50px;
+
   .sd-paneldynamic__separator {
     display: none;
   }

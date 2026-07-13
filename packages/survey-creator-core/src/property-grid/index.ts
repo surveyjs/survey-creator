@@ -701,7 +701,6 @@ export class PropertyJSONGenerator {
   }
   private updateQuestionJSONOnSameLine(json: any) {
     json.titleLocation = "left";
-    json.minWidth = "50px";
   }
   private createPanelJSON(category: string, title: string, iconName: string, isChild: boolean): any {
     const res: any = {

@@ -989,18 +989,14 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const isValueSameLine = !!valueQuestion && !valueQuestion.startWithNewLine;
     const isFirst = !conjunctionQuestion || !conjunctionQuestion.isVisible;
     if (!isFirst) {
-      conjunctionQuestion.minWidth = "50px";
       conjunctionQuestion.width = "15%";
     }
 
-    nameQuestion.minWidth = "50px";
     nameQuestion.width = isFirst ? "40%" : "25%";
 
-    operatorQuestion.minWidth = "50px";
     operatorQuestion.width = isValueSameLine ? "25%" : "60%";
 
     if (!!valueQuestion) {
-      valueQuestion.minWidth = "50px";
       valueQuestion.width = isValueSameLine ? "35%" : "";
     }
   }

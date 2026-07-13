@@ -3026,8 +3026,6 @@ test("nextToProperty on the same line", () => {
   expect(maxQuestion.startWithNewLine).toBeFalsy();
   expect(minQuestion.titleLocation).toEqual("left");
   expect(maxQuestion.titleLocation).toEqual("left");
-  expect(minQuestion.minWidth).toEqual("50px");
-  expect(maxQuestion.minWidth).toEqual("50px");
   maxProperty.nextToProperty = oldNextToProperty;
 });
 test("nextToProperty on the same line", () => {
