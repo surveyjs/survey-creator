@@ -5,9 +5,11 @@ import { IJournalApplyResult, IJournalOptions, IJournalRecord } from "./journal-
 import { JournalRecorder } from "./journal-recorder";
 import { IJournalApplyOptions, JournalApplier } from "./journal-applier";
 import { JournalTabRefresher } from "./journal-tab-refresher";
+import { JournalStackGuard } from "./journal-stack-guard";
 
 export { JournalRecorder } from "./journal-recorder";
 export { JournalApplier, IJournalApplyOptions } from "./journal-applier";
+export { JournalStackGuard } from "./journal-stack-guard";
 export * from "./journal-record";
 export * from "./journal-tab-refresher";
 export { buildLocator, resolveLocator, serializeValue, deserializeValue } from "./journal-locator";
@@ -24,34 +26,44 @@ export { buildLocator, resolveLocator, serializeValue, deserializeValue } from "
  * socket.onmessage = (msg) => plugin.apply(msg.data);
  * ```
  *
- * Undo semantics: applied records enter the receiver's undo stack (when the
- * undoredo plugin is present) as regular local transactions, so a receiver can
- * undo changes authored by a peer. Such an undo travels back to peers as a new
- * inverse record - the stacks are per-client (not id-synchronized), operations
- * are mirrored.
+ * Undo semantics: stacks are strictly per-client. Applied remote records
+ * bypass the receiver's undo-redo entirely, so only the AUTHOR of a change
+ * can undo it; a local undo/redo mutates the survey normally, is recorded and
+ * travels to peers as ordinary inverse records. Stacks are never synchronized
+ * or rebased across clients. A local entry whose context was invalidated by a
+ * later remote record - its target was deleted/converted, or the value it set
+ * was overwritten (last write wins) - is consumed as a no-op on undo/redo:
+ * the key press visibly does nothing (see `JournalStackGuard`).
  *
  * Limitations:
  * - Requires the creator's undo-redo plugin (always registered by the creator
  *   itself): its controller is the source of the `onModified` notifications
- *   the recorder consumes, and applied records enter the undo stack through it.
- *   The constructor throws when the plugin is missing.
+ *   the recorder consumes (the applier suspends that controller while remote
+ *   records are applied). The constructor throws when the plugin is missing.
  * - Convergence is guaranteed for a single ordered stream of records
  *   (last-write-wins, no conflict resolution for concurrent edits).
  * - Programmatic `creator.JSON = ...` / `creator.changeText()` calls do not fire
  *   `onModified` and are not recorded automatically - call `snapshot()` after them.
  * - A `fullSnapshot` record (JSON tab, bootstrap) rebuilds the survey and
  *   resets the receiver's undo history.
+ * - Undo of an ARRAY entry whose array was concurrently reordered by a peer
+ *   splices by the stored index (the guard's value check covers scalars only);
+ *   whatever a local undo does is itself recorded and broadcast, so clients
+ *   converge in every case.
  */
 export class JournalPlugin implements ICreatorPlugin {
   public model: any = undefined;
   public recorder: JournalRecorder;
   public applier: JournalApplier;
   public refresher: JournalTabRefresher;
+  public guard: JournalStackGuard;
 
   constructor(private creator: SurveyCreatorModel, options: IJournalOptions = {}) {
     this.recorder = new JournalRecorder(creator, options);
-    this.applier = new JournalApplier(creator, this.recorder);
+    this.guard = new JournalStackGuard(creator);
+    this.applier = new JournalApplier(creator, this.recorder, this.guard);
     this.refresher = new JournalTabRefresher(creator);
+    this.guard.attach();
   }
   public activate(): void { }
   public deactivate(): boolean {

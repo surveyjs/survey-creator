@@ -11,6 +11,9 @@ import { IJournalRecord, JournalOp } from "../src/plugins/journal/journal-record
 // NOT maintain a shared collaborative undo stack. Applied remote records
 // bypass the receiver's undo-redo, so only the AUTHOR of a change can undo
 // it; the undo then propagates to peers as an ordinary inverse record.
+// A local entry invalidated by a later remote record - its target was
+// deleted/converted, or the value it set was overwritten - is consumed as a
+// no-op on undo/redo: the press visibly does nothing (JournalStackGuard).
 
 function wire(from: JournalPlugin, to: JournalPlugin): void {
   const send = (sender: any, options: { record: IJournalRecord }): void => {
@@ -100,47 +103,60 @@ test("journal-sync: undo/redo on the author creator is reflected on the peer", (
   expect(creatorA.survey.getQuestionByName("q2")).toBeFalsy();
 });
 
-test("journal-sync: remote-applied changes enter the receiver's undo stack", () => {
-  // Applied records go through the regular undo-redo pipeline, so the
-  // receiver can undo changes authored by a peer as if they were local.
+test("journal-sync: remote-applied changes do NOT enter the receiver's undo stack", () => {
+  // Undo stacks are strictly local: applied records bypass the receiver's
+  // undo-redo pipeline, so only the author of a change can undo it.
   const { creatorA, creatorB } = makeCreators();
 
   expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
   creatorA.survey.title = "From A";
   creatorA.survey.pages[0].addNewQuestion("text", "q1");
   expect(creatorB.survey.getQuestionByName("q1")).toBeTruthy();
-  expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creatorA.undoRedoManager.canUndo()).toBeTruthy();
 });
 
-test("journal-sync: B can undo a question add authored by A; the rollback reflects on A", () => {
-  const { creatorA, creatorB } = makeCreators();
+test("journal-sync: B cannot undo a question add authored by A; B's own add stays undoable", () => {
+  const { creatorA, creatorB, pluginB } = makeCreators();
 
   creatorA.survey.pages[0].addNewQuestion("text", "q1");
   expect(creatorB.survey.getQuestionByName("q1")).toBeTruthy();
 
+  // Nothing local to undo - the press is a no-op and broadcasts nothing.
   creatorB.undo();
-  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
-  expect(creatorA.survey.getQuestionByName("q1")).toBeFalsy();
+  expect(creatorB.survey.getQuestionByName("q1")).toBeTruthy();
+  expect(creatorA.survey.getQuestionByName("q1")).toBeTruthy();
+  expect(pluginB.records).toHaveLength(0);
 
-  // The rollback arrived on A as a new applied transaction, so undoing on A
-  // brings the question back on both sides.
-  creatorA.undo();
+  // B's OWN add is undoable and the rollback reaches A; A's question stays.
+  creatorB.survey.pages[0].addNewQuestion("checkbox", "q2");
+  expect(creatorA.survey.getQuestionByName("q2")).toBeTruthy();
+  creatorB.undo();
+  expect(creatorB.survey.getQuestionByName("q2")).toBeFalsy();
+  expect(creatorA.survey.getQuestionByName("q2")).toBeFalsy();
   expect(creatorA.survey.getQuestionByName("q1")).toBeTruthy();
   expect(creatorB.survey.getQuestionByName("q1")).toBeTruthy();
 });
 
-test("journal-sync: B undo of A's property edit propagates", () => {
+test("journal-sync: B cannot undo A's property edit; B's own edit of another property can", () => {
   const { creatorA, creatorB } = makeCreators();
 
   creatorA.survey.title = "From A";
   expect(creatorB.survey.title).toEqual("From A");
 
   creatorB.undo();
-  expect(creatorB.survey.title).toEqual("");
-  expect(creatorA.survey.title).toEqual("");
+  expect(creatorB.survey.title).toEqual("From A");
+  expect(creatorA.survey.title).toEqual("From A");
+
+  creatorB.survey.description = "By B";
+  expect(creatorA.survey.description).toEqual("By B");
+  creatorB.undo();
+  expect(creatorB.survey.description).toEqual("");
+  expect(creatorA.survey.description).toEqual("");
+  expect(creatorA.survey.title).toEqual("From A");
 });
 
-test("journal-sync: B undo of a remote reorder restores the order on both sides", () => {
+test("journal-sync: B cannot undo a remote reorder", () => {
   const { creatorA, creatorB } = makeCreators();
   creatorA.survey.pages[0].addNewQuestion("text", "q1");
   creatorA.survey.pages[0].addNewQuestion("text", "q2");
@@ -155,13 +171,14 @@ test("journal-sync: B undo of a remote reorder restores the order on both sides"
   const names = (p: any) => p.elements.map((e: any) => e.name);
   expect(names(creatorB.survey.pages[0])).toEqual(["q2", "q3", "q1"]);
 
-  // The applied reorder is one transaction on B: a single undo restores it.
+  // The applied reorder never entered B's stack - undo is a no-op.
   creatorB.undo();
-  expect(names(creatorB.survey.pages[0])).toEqual(["q1", "q2", "q3"]);
-  expect(names(creatorA.survey.pages[0])).toEqual(["q1", "q2", "q3"]);
+  expect(names(creatorB.survey.pages[0])).toEqual(["q2", "q3", "q1"]);
+  expect(names(creatorA.survey.pages[0])).toEqual(["q2", "q3", "q1"]);
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
 });
 
-test("journal-sync: B undo of a remote question conversion restores the original type on both sides", () => {
+test("journal-sync: B cannot undo a remote question conversion", () => {
   const { creatorA, creatorB } = makeCreators();
   const q1 = creatorA.survey.pages[0].addNewQuestion("text", "q1");
   q1["inputType"] = "date";
@@ -171,15 +188,13 @@ test("journal-sync: B undo of a remote question conversion restores the original
   expect(creatorB.survey.getQuestionByName("q1").getType()).toEqual("comment");
 
   creatorB.undo();
-  expect(creatorB.survey.getQuestionByName("q1").getType()).toEqual("text");
-  expect(creatorB.survey.getQuestionByName("q1")["inputType"]).toEqual("date");
-  expect(creatorA.survey.getQuestionByName("q1").getType()).toEqual("text");
-  expect(creatorA.survey.getQuestionByName("q1")["inputType"]).toEqual("date");
+  expect(creatorB.survey.getQuestionByName("q1").getType()).toEqual("comment");
+  expect(creatorA.survey.getQuestionByName("q1").getType()).toEqual("comment");
   expect(creatorB.survey.pages[0].elements).toHaveLength(1);
   expect(creatorA.survey.pages[0].elements).toHaveLength(1);
 });
 
-test("journal-sync: a typing burst applies as one undoable transaction on B", () => {
+test("journal-sync: a typing burst leaves the receiver's undo stack empty", () => {
   const { creatorA, creatorB } = makeCreators();
 
   const word = "Hello";
@@ -188,14 +203,15 @@ test("journal-sync: a typing burst applies as one undoable transaction on B", ()
   }
   expect(creatorB.survey.title).toEqual("Hello");
 
-  // Re-sends of the coalesced record merged natively on B: one undo clears
-  // the whole word on both sides.
+  // Coalesced re-sends bypass B's undo-redo entirely - nothing to undo, and
+  // nothing to merge into a local typing transaction.
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
   creatorB.undo();
-  expect(creatorB.survey.title).toEqual("");
-  expect(creatorA.survey.title).toEqual("");
+  expect(creatorB.survey.title).toEqual("Hello");
+  expect(creatorA.survey.title).toEqual("Hello");
 });
 
-test("journal-sync: whole-dictionary translation apply is undoable on B", () => {
+test("journal-sync: whole-dictionary translation apply is not undoable on B", () => {
   const { creatorA, creatorB } = makeCreators({
     pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Original" }] }]
   });
@@ -207,8 +223,9 @@ test("journal-sync: whole-dictionary translation apply is undoable on B", () => 
   expect(qB.title).toEqual("Changed");
 
   creatorB.undo();
-  expect(qB.title).toEqual("Original");
-  expect(qA.title).toEqual("Original");
+  expect(qB.title).toEqual("Changed");
+  expect(qA.title).toEqual("Changed");
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
 });
 
 test("journal-sync: undo/redo of nested change inside a matrix column propagates", () => {
@@ -632,7 +649,7 @@ test("journal-sync: cross-page move travels live as one record, the peer keeps i
   expect(addedOnB).toEqual(0);
 });
 
-test("journal-sync: B undo of a remote cross-page move returns the element on both sides", () => {
+test("journal-sync: B cannot undo a remote cross-page move; the author can", () => {
   const { creatorA, creatorB } = makeCreators({
     pages: [
       { name: "page1", elements: [{ type: "text", name: "q1", title: "T1" }] },
@@ -647,14 +664,19 @@ test("journal-sync: B undo of a remote cross-page move returns the element on bo
   creatorA.stopUndoRedoTransaction();
   expect(creatorB.survey.getQuestionByName("q1").page.name).toEqual("page2");
 
-  // The applied move is one transaction on B; its undo travels back to A as
-  // the remove-first arrayChanged pair (not mergeable - the remove is already
-  // on the wire when the add is recorded) and A converges through it. B keeps
-  // its own instance; on A the element is re-created from the serialized add.
+  // The applied move never entered B's stack - undo is a no-op and B keeps
+  // its own instance in place.
   creatorB.undo();
-  expect(creatorB.survey.getQuestionByName("q1").page.name).toEqual("page1");
-  expect(creatorA.survey.getQuestionByName("q1").page.name).toEqual("page1");
+  expect(creatorB.survey.getQuestionByName("q1").page.name).toEqual("page2");
+  expect(creatorA.survey.getQuestionByName("q1").page.name).toEqual("page2");
   expect(creatorB.survey.getQuestionByName("q1")).toBe(qB);
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+
+  // The AUTHOR undoes the move; it travels to B as the remove-first
+  // arrayChanged pair and B converges through it.
+  creatorA.undo();
+  expect(creatorA.survey.getQuestionByName("q1").page.name).toEqual("page1");
+  expect(creatorB.survey.getQuestionByName("q1").page.name).toEqual("page1");
   expect(creatorA.JSON).toEqual(creatorB.JSON);
 });
 
@@ -674,4 +696,201 @@ test("journal-sync: dispose detaches the plugin and stops broadcasting", () => {
   creator.survey.description = "After dispose";
   expect(messages).toHaveLength(countBefore);
   expect(plugin.records).toHaveLength(countBefore);
+});
+
+// ---------------------------------------------------------------------------
+// JournalStackGuard: local entries invalidated by later remote records are
+// consumed as no-ops on undo/redo - the press visibly does nothing.
+
+test("journal-sync: undo of a type conversion is a no-op after the peer deleted the question", () => {
+  // A adds a question, B converts its type, A deletes the question. The
+  // conversion entry in B's stack is meaningless now: undo must not resurrect
+  // the question anywhere and must broadcast nothing.
+  const { creatorA, creatorB, pluginB } = makeCreators();
+
+  creatorA.survey.pages[0].addNewQuestion("text", "q1");
+  creatorB.selectElement(creatorB.survey.getQuestionByName("q1"));
+  creatorB.convertCurrentQuestion("comment");
+  expect(creatorA.survey.getQuestionByName("q1").getType()).toEqual("comment");
+  expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
+
+  creatorA.deleteElement(creatorA.survey.getQuestionByName("q1"));
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+
+  const recordsBefore = pluginB.records.length;
+  creatorB.undo();
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+  expect(creatorA.survey.getQuestionByName("q1")).toBeFalsy();
+  expect(pluginB.records).toHaveLength(recordsBefore);
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creatorA.JSON).toEqual(creatorB.JSON);
+});
+
+test("journal-sync: undo of a property edit is a no-op after the peer deleted the target", () => {
+  // Without the guard this press would fall back to a full-snapshot record
+  // (the recorder cannot address the dead target anymore) and reset every
+  // peer's survey and history.
+  const { creatorA, creatorB, pluginB } = makeCreators();
+
+  creatorA.survey.pages[0].addNewQuestion("text", "q1");
+  const qB: any = creatorB.survey.getQuestionByName("q1");
+  qB.title = "Edited on B";
+  expect(creatorA.survey.getQuestionByName("q1").title).toEqual("Edited on B");
+  const recordsBefore = pluginB.records.length;
+
+  creatorA.deleteElement(creatorA.survey.getQuestionByName("q1"));
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+
+  creatorB.undo();
+  expect(pluginB.records).toHaveLength(recordsBefore);
+  expect(pluginB.records.filter(r => r.op === JournalOp.FullSnapshot)).toHaveLength(0);
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creatorA.JSON).toEqual(creatorB.JSON);
+});
+
+test("journal-sync: undo is a no-op when the peer overwrote the value (last write wins)", () => {
+  const { creatorA, creatorB, pluginA } = makeCreators();
+
+  creatorA.survey.description = "Base by A";
+  creatorA.survey.title = "Hello1";
+  expect(creatorB.survey.title).toEqual("Hello1");
+
+  creatorB.survey.title = "Hello2";
+  expect(creatorA.survey.title).toEqual("Hello2");
+
+  // A's title entry expects the value it has put ("Hello1"), but B has
+  // overwritten it since - the press consumes the entry and changes nothing.
+  const recordsBefore = pluginA.records.length;
+  creatorA.undo();
+  expect(creatorA.survey.title).toEqual("Hello2");
+  expect(creatorB.survey.title).toEqual("Hello2");
+  expect(pluginA.records).toHaveLength(recordsBefore);
+
+  // The next press reaches A's previous valid edit.
+  creatorA.undo();
+  expect(creatorA.survey.description).toEqual("");
+  expect(creatorB.survey.description).toEqual("");
+  expect(creatorB.survey.title).toEqual("Hello2");
+});
+
+test("journal-sync: a peer edit of ANOTHER property does not invalidate the local entry", () => {
+  const { creatorA, creatorB } = makeCreators();
+
+  creatorA.survey.title = "By A";
+  creatorB.survey.description = "By B";
+  expect(creatorA.survey.description).toEqual("By B");
+
+  creatorA.undo();
+  expect(creatorA.survey.title).toEqual("");
+  expect(creatorB.survey.title).toEqual("");
+  expect(creatorB.survey.description).toEqual("By B");
+  expect(creatorA.survey.description).toEqual("By B");
+});
+
+test("journal-sync: redo is a no-op when the peer changed the value since the undo", () => {
+  const { creatorA, creatorB } = makeCreators();
+
+  creatorA.survey.title = "Hello1";
+  creatorA.undo();
+  expect(creatorA.survey.title).toEqual("");
+  expect(creatorB.survey.title).toEqual("");
+
+  creatorB.survey.title = "By B";
+  expect(creatorA.survey.title).toEqual("By B");
+
+  // A's redo expects to find the value its undo has left (empty), but B has
+  // written since - the press consumes the redo entry and changes nothing.
+  creatorA.redo();
+  expect(creatorA.survey.title).toEqual("By B");
+  expect(creatorB.survey.title).toEqual("By B");
+  expect(creatorA.undoRedoManager.canRedo()).toBeFalsy();
+});
+
+test("journal-sync: a dead entry is consumed first, the next press undoes the valid own edit", () => {
+  const { creatorA, creatorB } = makeCreators();
+
+  creatorB.survey.description = "Kept";
+  creatorA.survey.pages[0].addNewQuestion("text", "q1");
+  const qB: any = creatorB.survey.getQuestionByName("q1");
+  qB.title = "Doomed";
+  expect(creatorA.survey.getQuestionByName("q1").title).toEqual("Doomed");
+  creatorA.deleteElement(creatorA.survey.getQuestionByName("q1"));
+
+  // Press 1: consumes the dead entry, visibly does nothing.
+  creatorB.undo();
+  expect(creatorB.survey.description).toEqual("Kept");
+  expect(creatorA.survey.description).toEqual("Kept");
+  expect(creatorB.undoRedoManager.canUndo()).toBeTruthy();
+
+  // Press 2: undoes the remaining valid edit on both sides.
+  creatorB.undo();
+  expect(creatorB.survey.description).toEqual("");
+  expect(creatorA.survey.description).toEqual("");
+});
+
+test("journal-sync: undo is a no-op after the peer deleted the whole page of the target", () => {
+  const { creatorA, creatorB, pluginB } = makeCreators();
+
+  creatorA.survey.addNewPage("page2");
+  creatorA.survey.getPageByName("page2").addNewQuestion("text", "q2");
+  const qB: any = creatorB.survey.getQuestionByName("q2");
+  qB.title = "Edited on B";
+  expect(creatorA.survey.getQuestionByName("q2").title).toEqual("Edited on B");
+
+  creatorA.survey.removePage(creatorA.survey.getPageByName("page2"));
+  expect(creatorB.survey.getPageByName("page2")).toBeFalsy();
+
+  const recordsBefore = pluginB.records.length;
+  creatorB.undo();
+  expect(pluginB.records).toHaveLength(recordsBefore);
+  expect(creatorB.survey.getPageByName("page2")).toBeFalsy();
+  expect(creatorB.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creatorA.JSON).toEqual(creatorB.JSON);
+});
+
+test("journal-sync: redo is a no-op after the peer deleted the target", () => {
+  const { creatorA, creatorB, pluginB } = makeCreators({
+    pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "First" }] }]
+  });
+  const qB: any = creatorB.survey.getQuestionByName("q1");
+  qB.title = "Edited on B";
+  creatorB.undo();
+  expect(creatorA.survey.getQuestionByName("q1").title).toEqual("First");
+  expect(creatorB.undoRedoManager.canRedo()).toBeTruthy();
+
+  creatorA.deleteElement(creatorA.survey.getQuestionByName("q1"));
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+
+  const recordsBefore = pluginB.records.length;
+  creatorB.redo();
+  expect(pluginB.records).toHaveLength(recordsBefore);
+  expect(creatorB.survey.getQuestionByName("q1")).toBeFalsy();
+  expect(creatorB.undoRedoManager.canRedo()).toBeFalsy();
+  expect(creatorA.JSON).toEqual(creatorB.JSON);
+});
+
+test("journal-sync: a transaction is consumed whole when any of its values was overwritten", () => {
+  const { creatorA, creatorB } = makeCreators({
+    pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "T0", description: "D0" }] }]
+  });
+  const qA: any = creatorA.survey.getQuestionByName("q1");
+  const qB: any = creatorB.survey.getQuestionByName("q1");
+
+  creatorB.startUndoRedoTransaction("batch");
+  qB.title = "T1";
+  qB.description = "D1";
+  creatorB.stopUndoRedoTransaction();
+  expect(qA.description).toEqual("D1");
+
+  qA.description = "D2";
+  expect(qB.description).toEqual("D2");
+
+  // One value of B's transaction was overwritten since - undoing the rest
+  // would tear the operation apart, so the whole entry is a no-op.
+  creatorB.undo();
+  expect(qB.title).toEqual("T1");
+  expect(qB.description).toEqual("D2");
+  expect(qA.title).toEqual("T1");
+  expect(qA.description).toEqual("D2");
 });

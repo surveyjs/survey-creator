@@ -16,6 +16,7 @@ import {
 } from "./journal-record";
 import { deserializeValue, findItemByIdentity, isSerializedSurveyObj, resolveLocator, splitPointer } from "./journal-locator";
 import { JournalRecorder } from "./journal-recorder";
+import { JournalStackGuard } from "./journal-stack-guard";
 
 export interface IJournalApplyOptions {
   /**
@@ -27,19 +28,30 @@ export interface IJournalApplyOptions {
 
 /**
  * Applies journal records produced by a `JournalRecorder` of another creator
- * instance to this creator's survey. Application is idempotent. Applied
- * changes go through the regular undo-redo pipeline (when the undoredo plugin
- * is present), so they enter the local undo stack as if made locally and can
- * be undone here; the undo then travels back to peers as a regular inverse
- * record. Echo into the journal itself is suppressed via `recorder.isApplying`.
+ * instance to this creator's survey. Application is idempotent. Undo stacks
+ * are strictly local: applied records bypass this creator's undo-redo
+ * entirely (the whole batch runs under the controller's `ignoreChanges`), so
+ * only the author of a change can undo it - a local undo travels to peers as
+ * an ordinary inverse record. The bypass also keeps remote values from
+ * merging into a local typing transaction and from triggering local-edit side
+ * effects (modified state, autosave). Echo into the journal itself is
+ * suppressed via `recorder.isApplying` - still required, because some
+ * `onModified` paths are driven by survey events outside the suppressed
+ * pipeline (e.g. PAGE_ADDED).
  */
 export class JournalApplier {
-  constructor(private creator: SurveyCreatorModel, private recorder: JournalRecorder) { }
+  constructor(private creator: SurveyCreatorModel, private recorder: JournalRecorder, private guard?: JournalStackGuard) { }
 
   public apply(input: IJournalRecord | Array<IJournalRecord> | string, options: IJournalApplyOptions = {}): Array<IJournalApplyResult> {
     const records = this.normalizeInput(input);
     const results: Array<IJournalApplyResult> = [];
+    const ctrl = this.creator.undoRedoController;
+    const prevIgnoreChanges = !!ctrl && ctrl.ignoreChanges;
     this.recorder.isApplying = true;
+    if (!!ctrl) ctrl.ignoreChanges = true;
+    // The manager is replaced on every survey rebuild (fullSnapshot) - attach
+    // the local-stack guard lazily before each batch.
+    if (!!this.guard)this.guard.attach();
     try {
       for (let i = 0; i < records.length; i++) {
         const record = records[i];
@@ -54,7 +66,12 @@ export class JournalApplier {
         }
       }
     } finally {
+      if (!!ctrl) ctrl.ignoreChanges = prevIgnoreChanges;
       this.recorder.isApplying = false;
+      // The suppressed pipeline is what invalidated the logic-tab cache for
+      // remote edits before; reset it so the next local rename does not
+      // rewrite expressions from a stale model.
+      (<any>this.creator).surveyLogicForUpdate = undefined;
     }
     return results;
   }
@@ -70,45 +87,34 @@ export class JournalApplier {
     return this.creator.survey;
   }
   private applyRecord(record: IJournalRecord): void {
-    // Multi-mutation operations run inside one undo transaction so that a
-    // single local undo reverts the whole record (and the undo-redo pipeline
-    // recognizes the remove+insert pairs as move/convert). A propertyChanged
-    // record is a single mutation: it is auto-wrapped by the pipeline and
-    // consecutive re-sends of a coalesced typing record merge natively into
-    // one transaction. A fullSnapshot resets the undo history by design.
+    // Plain in-place mutations: apply() suspends the undo-redo pipeline for
+    // the whole batch, so nothing here enters the local undo stack. A
+    // fullSnapshot still resets the local undo history - the survey rebuild
+    // replaces the undo-redo manager.
     switch(record.op) {
       case JournalOp.PropertyChanged:
         this.applyPropertyChanged(<IJournalPropertyChangedPayload>record.payload);
         break;
       case JournalOp.ArrayChanged:
-        this.runInTransaction(() => this.applyArrayChanged(<IJournalArrayChangedPayload>record.payload));
+        this.applyArrayChanged(<IJournalArrayChangedPayload>record.payload);
         break;
       case JournalOp.ElementRemoved:
-        this.runInTransaction(() => this.applyElementRemoved(<IJournalElementRemovedPayload>record.payload));
+        this.applyElementRemoved(<IJournalElementRemovedPayload>record.payload);
         break;
       case JournalOp.ElementReordered:
-        this.runInTransaction(() => this.applyElementReordered(<IJournalElementReorderedPayload>record.payload));
+        this.applyElementReordered(<IJournalElementReorderedPayload>record.payload);
         break;
       case JournalOp.ElementConverted:
-        this.runInTransaction(() => this.applyElementConverted(<IJournalElementConvertedPayload>record.payload));
+        this.applyElementConverted(<IJournalElementConvertedPayload>record.payload);
         break;
       case JournalOp.ElementMoved:
-        this.runInTransaction(() => this.applyElementMoved(<IJournalElementMovedPayload>record.payload));
+        this.applyElementMoved(<IJournalElementMovedPayload>record.payload);
         break;
       case JournalOp.FullSnapshot:
         this.creator.JSON = (<IJournalFullSnapshotPayload>record.payload).json;
         break;
       default:
         throw new Error("Unknown journal operation: " + (<any>record).op);
-    }
-  }
-  private runInTransaction(fn: () => void): void {
-    const ctrl = this.creator.undoRedoController;
-    if (!!ctrl) ctrl.startTransaction("journal apply");
-    try {
-      fn();
-    } finally {
-      if (!!ctrl) ctrl.stopTransaction();
     }
   }
 
@@ -132,15 +138,22 @@ export class JournalApplier {
     const prop = Serializer.getOriginalProperty(obj, outer.key);
     // Whole-dictionary change of a localizable property: apply as a per-locale
     // diff via setLocaleText. locStr.setJson would replace the values silently
-    // (no change notifications), making the change invisible to the undo stack.
+    // (no change notifications), leaving the receiver's UI rendering stale
+    // strings.
     if (!!prop && prop.isLocalizable && !!prop.serializationProperty && !!obj[prop.serializationProperty]) {
-      this.runInTransaction(() => this.applyLocalizableValue(obj[prop.serializationProperty], value));
+      this.applyLocalizableValue(obj[prop.serializationProperty], value);
       return;
     }
     if (!!prop) {
       prop.setValue(obj, value, new JsonObject());
     } else {
       obj[outer.key] = value;
+    }
+    // The suspended pipeline is what used to force re-rendering of all
+    // localizable strings on a locale switch (survey-core itself never calls
+    // locStrsChanged for it) - compensate here.
+    if (outer.key === "locale" && obj === this.survey) {
+      this.creator.updateElementsOnLocaleChanged(obj, "locale");
     }
   }
   private applyLocalizableValue(locStr: any, value: any): void {
@@ -168,6 +181,11 @@ export class JournalApplier {
     if (!Array.isArray(array)) throw new Error("Cannot resolve array: " + JSON.stringify(payload.target));
     if (Array.isArray(payload.fullValue)) {
       const items = payload.fullValue.map(item => deserializeValue(item));
+      // The old instances are replaced wholesale - local undo entries
+      // referencing them are dead from now on.
+      if (!!this.guard) {
+        for (let i = 0; i < array.length; i++)this.guard.markRemoved(array[i]);
+      }
       array.splice.apply(array, (<Array<any>>[0, array.length]).concat(items));
       return;
     }
@@ -259,6 +277,7 @@ export class JournalApplier {
   }
   private removeArrayItem(array: Array<any>, index: number): void {
     const item = array[index];
+    if (!!this.guard)this.guard.markRemoved(item);
     // Survey elements clean up after themselves (unregister nested questions
     // from the survey, detach from the parent) in delete() - a bare splice
     // would leave stale name registrations behind. This is the same call
@@ -274,6 +293,7 @@ export class JournalApplier {
   private applyElementRemoved(payload: IJournalElementRemovedPayload): void {
     const element: any = resolveLocator(payload.target, this.survey);
     if (!element) return; // already removed - no-op for idempotency
+    if (!!this.guard)this.guard.markRemoved(element);
     if (typeof element.delete === "function") {
       element.delete(false);
       return;
@@ -306,6 +326,9 @@ export class JournalApplier {
       throw new Error("Cannot rehydrate converted element: " + JSON.stringify(payload.target));
     }
     if (!!existing && !!existing.parent && Array.isArray(existing.parent.elements)) {
+      // The conversion replaces the instance - local undo entries referencing
+      // the old one are dead from now on.
+      if (!!this.guard)this.guard.markRemoved(existing);
       const array = existing.parent.elements;
       const index = array.indexOf(existing);
       array.splice(index, 1);

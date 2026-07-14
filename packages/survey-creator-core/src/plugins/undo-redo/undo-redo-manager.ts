@@ -125,6 +125,7 @@ export class UndoRedoManager {
     return !!this._getCurrentTransaction();
   }
   undo() {
+    if (this._dropInvalidTransactions(true)) return;
     const currentTransaction = this._getCurrentTransaction();
     if (!this.canUndo()) return;
 
@@ -140,6 +141,7 @@ export class UndoRedoManager {
     return !!this._getNextTransaction();
   }
   redo() {
+    if (this._dropInvalidTransactions(false)) return;
     const nextTransaction = this._getNextTransaction();
     if (!this.canRedo()) return;
 
@@ -150,6 +152,27 @@ export class UndoRedoManager {
     this._currentTransactionIndex++;
     this.canUndoRedoCallback();
     this.notifyChangesFinished(nextTransaction);
+  }
+  /**
+   * Optional validity gate consulted before a transaction is undone/redone.
+   * When it returns `false`, undo()/redo() consumes the transaction without
+   * executing it (and without notifying changesFinishedCallback) instead of
+   * rolling it back / re-applying it. Undefined means every transaction is
+   * valid (single-creator behavior is unchanged).
+   */
+  public isTransactionValidCallback: (transaction: Transaction, isUndo: boolean) => boolean;
+  private _dropInvalidTransactions(isUndo: boolean): boolean {
+    if (!this.isTransactionValidCallback) return false;
+    let dropped = false;
+    let transaction = isUndo ? this._getCurrentTransaction() : this._getNextTransaction();
+    while(!!transaction && !this.isTransactionValidCallback(transaction, isUndo)) {
+      this._transactions.splice(this._currentTransactionIndex + (isUndo ? 0 : 1), 1);
+      if (isUndo)this._currentTransactionIndex--;
+      dropped = true;
+      transaction = isUndo ? this._getCurrentTransaction() : this._getNextTransaction();
+    }
+    if (dropped)this.canUndoRedoCallback();
+    return dropped;
   }
   suspend() {
     this._ignoreChanges = true;
