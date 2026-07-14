@@ -3633,6 +3633,13 @@ export var koreanStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "프리셋 적용"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "항목 1" }, { value: "item2", text: "항목 2" }, { value: "item3", text: "항목 3" }],
+    columns: [{ value: "column1", text: "열 1" }, { value: "column2", text: "열 2" }, { value: "column3", text: "열 3" }],
+    rows: [{ value: "row1", text: "행 1" }, { value: "row2", text: "행 2" }],
+    matrixColumns: [{ name: "column1", title: "열 1" }, { name: "column2", title: "열 2" }, { name: "column3", title: "열 3" }]
   }
 };
 setupLocale({ localeCode: "ko", strings: koreanStrings });

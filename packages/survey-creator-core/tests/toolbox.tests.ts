@@ -609,6 +609,7 @@ test("default toolbox JSON by question and converter", (): any => {
   delete settings.toolbox.defaultJSON["radiogroup"];
 });
 test("default toolbox JSON for matrices, Bug#7394", (): any => {
+  const oldJSON = settings.toolbox.defaultJSON["matrixdynamic"];
   settings.toolbox.defaultJSON["matrixdynamic"] = { cellType: "text", columns: [{ name: "col1" }] };
   const creator = new CreatorTester();
   const json: any = creator.toolbox.getItemByName("matrixdynamic").json;
@@ -621,7 +622,98 @@ test("default toolbox JSON for matrices, Bug#7394", (): any => {
     cellType: "text",
     columns: [{ name: "col1" }]
   });
-  delete settings.toolbox.defaultJSON["matrixdynamic"];
+  settings.toolbox.defaultJSON["matrixdynamic"] = oldJSON;
+});
+test("default toolbox JSON for matrices", (): any => {
+  const creator = new CreatorTester();
+  expect(creator.toolbox.getItemByName("matrix").json).toStrictEqual({
+    type: "matrix",
+    columns: [
+      { value: "column1", text: "Column 1" },
+      { value: "column2", text: "Column 2" },
+      { value: "column3", text: "Column 3" }
+    ],
+    rows: [
+      { value: "row1", text: "Row 1" },
+      { value: "row2", text: "Row 2" }
+    ]
+  });
+  expect(creator.toolbox.getItemByName("matrixdropdown").json).toStrictEqual({
+    type: "matrixdropdown",
+    columns: [
+      { name: "column1", title: "Column 1" },
+      { name: "column2", title: "Column 2" },
+      { name: "column3", title: "Column 3" }
+    ],
+    rows: [
+      { value: "row1", text: "Row 1" },
+      { value: "row2", text: "Row 2" }
+    ],
+    choices: [1, 2, 3, 4, 5]
+  });
+  expect(creator.toolbox.getItemByName("matrixdynamic").json).toStrictEqual({
+    type: "matrixdynamic",
+    columns: [
+      { name: "column1", title: "Column 1" },
+      { name: "column2", title: "Column 2" },
+      { name: "column3", title: "Column 3" }
+    ],
+    choices: [1, 2, 3, 4, 5]
+  });
+  creator.clickToolboxItem(creator.toolbox.getItemByName("matrixdynamic").json);
+  const question = <Question>creator.selectedElement;
+  expect(question.getType()).toEqual("matrixdynamic");
+  expect(question.toJSON()["columns"]).toHaveLength(3);
+});
+test("localizable default toolbox JSON, choices", (): any => {
+  const creator = new CreatorTester();
+  const getChoices = (): any => creator.toolbox.getItemByName("dropdown").json["choices"];
+  expect(getChoices()).toStrictEqual([
+    { value: "item1", text: "Item 1" },
+    { value: "item2", text: "Item 2" },
+    { value: "item3", text: "Item 3" }
+  ]);
+  creator.locale = "de";
+  expect(getChoices()).toStrictEqual([
+    { value: "item1", text: "Artikel 1" },
+    { value: "item2", text: "Artikel 2" },
+    { value: "item3", text: "Artikel 3" }
+  ]);
+  expect(creator.toolbox.getItemByName("matrix").json["rows"]).toStrictEqual([
+    { value: "row1", text: "Zeile 1" },
+    { value: "row2", text: "Zeile 2" }
+  ]);
+  expect(creator.toolbox.getItemByName("matrixdynamic").json["columns"][0]).toStrictEqual({ name: "column1", title: "Spalte 1" });
+  creator.clickToolboxItem(creator.toolbox.getItemByName("dropdown").json);
+  const question = <Question>creator.selectedElement;
+  expect(question.toJSON()["choices"][0]).toStrictEqual({ value: "item1", text: "Artikel 1" });
+
+  creator.locale = "";
+  expect(getChoices()[0]).toStrictEqual({ value: "item1", text: "Item 1" });
+});
+test("localizable default toolbox JSON, take JSON from the locale dictionary", (): any => {
+  const creator = new CreatorTester();
+  const oldDeStrings = editorLocalization.locales["de"];
+  editorLocalization.locales["de"] = {
+    defaultJson: {
+      choices: [{ value: "item1", text: "Erste" }, { value: "item2", text: "Zweite" }]
+    }
+  };
+  creator.locale = "de";
+  expect(creator.toolbox.getItemByName("checkbox").json["choices"]).toStrictEqual([
+    { value: "item1", text: "Erste" },
+    { value: "item2", text: "Zweite" }
+  ]);
+  creator.locale = "";
+  editorLocalization.locales["de"] = oldDeStrings;
+});
+test("localizable default toolbox JSON, do not override the modified toolbox item JSON", (): any => {
+  const creator = new CreatorTester();
+  const item = creator.toolbox.getItemByName("dropdown");
+  item.json = { type: "dropdown", choices: [1, 2, 3, 4, 5] };
+  creator.locale = "de";
+  expect(item.json["choices"]).toStrictEqual([1, 2, 3, 4, 5]);
+  creator.locale = "";
 });
 test("Check that d&d not working for toobox invisible items in readOnly mode", (): any => {
   const creator = new CreatorTester();

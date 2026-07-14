@@ -4,6 +4,7 @@ import {
   SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner, LocalizableString,
   settings as surveyLibSettings
 } from "survey-core";
+import { localizableJSON } from "./localizable-json";
 
 /**
  * List available question convert modes
@@ -116,22 +117,26 @@ export var settings = {
   toolbox: {
     /**
      * Use it to change the default question JSON on dropping it into designer or converting questions
+     *
+     * A part of the JSON can be localizable. Mark it with the `localizableJSON` function and it is replaced
+     * with the JSON from the localization dictionary of the current Creator UI locale, `defaultJson.choices`
+     * in the example below, when the question is created.
      */
     defaultJSON: <{ [index: string]: any }>{
       dropdown: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       tagbox: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       checkbox: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       radiogroup: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       ranking: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       imagepicker: {
         imageFit: "cover"
@@ -140,6 +145,19 @@ export var settings = {
         imageFit: "cover",
         imageHeight: "auto",
         imageWidth: "100%"
+      },
+      matrix: {
+        columns: localizableJSON("defaultJson.columns"),
+        rows: localizableJSON("defaultJson.rows")
+      },
+      matrixdropdown: {
+        columns: localizableJSON("defaultJson.matrixColumns"),
+        rows: localizableJSON("defaultJson.rows"),
+        choices: [1, 2, 3, 4, 5]
+      },
+      matrixdynamic: {
+        columns: localizableJSON("defaultJson.matrixColumns"),
+        choices: [1, 2, 3, 4, 5]
       }
     }
   },

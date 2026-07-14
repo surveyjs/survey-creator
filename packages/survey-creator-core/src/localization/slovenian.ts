@@ -3632,6 +3632,13 @@ export var slStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Uporabljena prednastavitev"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Element 1" }, { value: "item2", text: "Element 2" }, { value: "item3", text: "Element 3" }],
+    columns: [{ value: "column1", text: "Stolpec 1" }, { value: "column2", text: "Stolpec 2" }, { value: "column3", text: "Stolpec 3" }],
+    rows: [{ value: "row1", text: "Vrstica 1" }, { value: "row2", text: "Vrstica 2" }],
+    matrixColumns: [{ name: "column1", title: "Stolpec 1" }, { name: "column2", title: "Stolpec 2" }, { name: "column3", title: "Stolpec 3" }]
   }
 };
 

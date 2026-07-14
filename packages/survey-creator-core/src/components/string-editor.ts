@@ -2,7 +2,7 @@ import { Base, LocalizableString, Serializer, JsonObjectProperty, property, Item
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
-import { getNextColumnTitle, getNextItemValue, getNextValue } from "../utils/creator-utils";
+import { getNextColumnTitle, getNextItemText, getNextItemValue, getNextValue } from "../utils/creator-utils";
 import { select } from "../utils/html-element-utils";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
@@ -176,6 +176,8 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
       titleBase = "Row "; propertyName = "rows";
     }
     const newItem = new ItemValue(getNextValue(titleBase, items.map(i => i.value)) as string);
+    const nextText = getNextItemText(items);
+    if (nextText) newItem.text = nextText;
     items.push(text || newItem);
     creator.onItemValueAddedCallback(
       this.question,

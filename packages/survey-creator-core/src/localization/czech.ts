@@ -3632,6 +3632,13 @@ export var czStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Použito přednastavení"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Položka 1" }, { value: "item2", text: "Položka 2" }, { value: "item3", text: "Položka 3" }],
+    columns: [{ value: "column1", text: "Sloupec 1" }, { value: "column2", text: "Sloupec 2" }, { value: "column3", text: "Sloupec 3" }],
+    rows: [{ value: "row1", text: "Řádek 1" }, { value: "row2", text: "Řádek 2" }],
+    matrixColumns: [{ name: "column1", title: "Sloupec 1" }, { name: "column2", title: "Sloupec 2" }, { name: "column3", title: "Sloupec 3" }]
   }
 };
 

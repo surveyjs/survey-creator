@@ -1340,7 +1340,8 @@ test("Convert text question into dropdown", (): any => {
   var el = <QuestionDropdownModel>creator.selectedElement;
   expect(el.getType()).toEqual("dropdown");
   expect(el.choices).toHaveLength(3);
-  expect(el.choices[0].value).toEqual("Item 1");
+  expect(el.choices[0].value).toEqual("item1");
+  expect(el.choices[0].text).toEqual("Item 1");
 });
 test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any => {
   var creator = new CreatorTester();
@@ -1355,7 +1356,7 @@ test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any =
   var el = <QuestionDropdownModel>creator.selectedElement;
   expect(el.getType()).toEqual("dropdown");
   expect(el.choices).toHaveLength(3);
-  expect(el.choices[0].value).toEqual("Item 1");
+  expect(el.choices[0].value).toEqual("item1");
 
   objJSON = { choices: [5, 6] };
   creator.JSON = json;
@@ -1373,7 +1374,7 @@ test("Convert radiogroup question into dropdown, onQuestionCoverting", (): any =
   var el = <QuestionDropdownModel>creator.selectedElement;
   expect(el.getType()).toEqual("dropdown");
   expect(el.choices).toHaveLength(3);
-  expect(el.choices[0].value).toEqual("Item 1");
+  expect(el.choices[0].value).toEqual("item1");
 });
 test("Convert text question into single matrix", (): any => {
   var creator = new CreatorTester();
@@ -1386,9 +1387,11 @@ test("Convert text question into single matrix", (): any => {
   var el = <QuestionMatrixModel>creator.selectedElement;
   expect(el.getType()).toEqual("matrix");
   expect(el.columns).toHaveLength(3);
-  expect(el.columns[0].value).toEqual("Column 1");
+  expect(el.columns[0].value).toEqual("column1");
+  expect(el.columns[0].text).toEqual("Column 1");
   expect(el.rows).toHaveLength(2);
-  expect(el.rows[0].value).toEqual("Row 1");
+  expect(el.rows[0].value).toEqual("row1");
+  expect(el.rows[0].text).toEqual("Row 1");
 });
 test("Add panel after converting a panel into html generates a unique name, Bug#7793", (): any => {
   const creator = new CreatorTester();

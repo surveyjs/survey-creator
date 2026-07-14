@@ -3632,6 +3632,13 @@ export var italianTranslation = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Presetto applicato"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Articolo 1" }, { value: "item2", text: "Articolo 2" }, { value: "item3", text: "Articolo 3" }],
+    columns: [{ value: "column1", text: "Colonna 1" }, { value: "column2", text: "Colonna 2" }, { value: "column3", text: "Colonna 3" }],
+    rows: [{ value: "row1", text: "Riga 1" }, { value: "row2", text: "Riga 2" }],
+    matrixColumns: [{ name: "column1", title: "Colonna 1" }, { name: "column2", title: "Colonna 2" }, { name: "column3", title: "Colonna 3" }]
   }
 };
 

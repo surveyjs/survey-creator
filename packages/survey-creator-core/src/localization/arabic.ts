@@ -3632,6 +3632,13 @@ export var arStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "تطبيق الإعداد المسبق"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "بند 1" }, { value: "item2", text: "بند 2" }, { value: "item3", text: "بند 3" }],
+    columns: [{ value: "column1", text: "عمود 1" }, { value: "column2", text: "عمود 2" }, { value: "column3", text: "عمود 3" }],
+    rows: [{ value: "row1", text: "صف 1" }, { value: "row2", text: "صف 2" }],
+    matrixColumns: [{ name: "column1", title: "عمود 1" }, { name: "column2", title: "عمود 2" }, { name: "column3", title: "عمود 3" }]
   }
 };
 
