@@ -65,16 +65,16 @@ test.describe(title, () => {
 
     await page.locator("span[aria-placeholder='Survey Title']").click();
     await expect(page.locator(selectedObjectTextSelector)).toHaveText("Survey");
-    await expect(page.locator("div[id$=ariaTitle][id^=sq].spg-title").getByText("Columns")).not.toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Columns")).not.toBeVisible();
 
     await page.locator(".sv-string-editor").getByText("Column 1").click();
     await expect(page.locator(selectedObjectTextSelector)).toHaveText("question1");
-    await expect(page.locator("div[id$=ariaTitle][id^=sq].spg-title").getByText("Columns")).toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Columns")).toBeVisible();
 
     await page.locator(".sv-string-editor").getByText("Row 1").click();
     await expect(page.locator(selectedObjectTextSelector)).toHaveText("question1");
-    await expect(page.locator("div[id$=ariaTitle][id^=sq].spg-title").getByText("Columns")).not.toBeVisible();
-    await expect(page.locator("div[id$=ariaTitle][id^=sq].spg-title").getByText("Rows")).toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Columns")).not.toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Rows")).toBeVisible();
   });
 
   test("Matrix dropdown question", async ({ page }) => {
@@ -87,12 +87,12 @@ test.describe(title, () => {
 
     await page.locator(".sv-string-editor").getByText("Column 1").click();
     await expect(page.locator(selectedObjectTextSelector)).toHaveText("Column 1");
-    await expect(page.locator("div[id$=ariaTitle][id^=sq].spg-title").getByText("Columns")).not.toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Columns")).not.toBeVisible();
 
     await page.locator(".sv-string-editor").getByText("Row 1").click();
     await expect(page.locator(selectedObjectTextSelector)).toHaveText("question1");
-    await expect(page.locator("div[id$=ariaTitle][id^=sq].spg-title").getByText("Columns")).not.toBeVisible();
-    await expect(page.locator("div[id$=ariaTitle][id^=sq].spg-title").getByText("Rows")).toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Columns")).not.toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Rows")).toBeVisible();
   });
 
   test("Matrix dropdown question select column", async ({ page }) => {

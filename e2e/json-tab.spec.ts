@@ -74,7 +74,7 @@ test.describe(title, () => {
     await page.keyboard.type("I am changed");
 
     await getTabbedMenuItemByText(page, creatorTabDesignerName).click();
-    await expect(page.locator("div[id$=ariaTitle][id^=sq]").getByText("I am changed")).toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=dt-sq]").getByText("I am changed")).toBeVisible();
   });
 
   test("Check show/hide errors list visibility", async ({ page }) => {
@@ -119,7 +119,7 @@ test.describe(title, () => {
     await page.keyboard.type("I am error string )");
 
     await getTabbedMenuItemByText(page, creatorTabDesignerName).click();
-    await expect(page.locator("div[id$=ariaTitle][id^=sq]").getByText("Change me")).not.toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=dt-sq]").getByText("Change me")).not.toBeVisible();
   });
 
   test("Check search", async ({ page }) => {

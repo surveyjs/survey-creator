@@ -947,7 +947,7 @@ test.describe(title, () => {
     await setJSON(page, json);
 
     await page.locator("[data-name=\"question1\"]").filter({ visible: true }).first().click();
-    const ChoicesTab = page.locator("div[id$=ariaTitle][id^=sp]").getByText("Choice Options", { exact: true }).filter({ visible: true }).first();
+    const ChoicesTab = page.locator("div[id$=ariaTitle][id^=pg-sp]").getByText("Choice Options", { exact: true }).filter({ visible: true }).first();
     await ChoicesTab.click();
 
     const Item1 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
@@ -995,7 +995,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const PagesTab = page.locator("div[id$=ariaTitle][id^=sp]").getByText("Pages", { exact: true }).filter({ visible: true }).first();
+    const PagesTab = page.locator("div[id$=ariaTitle][id^=pg-sp]").getByText("Pages", { exact: true }).filter({ visible: true }).first();
     await getBarItemByTitle(page, "Survey settings").click();
     await PagesTab.click();
 

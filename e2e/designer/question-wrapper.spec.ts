@@ -226,8 +226,8 @@ test.describe(title, () => {
 
     await page.locator(".sv-string-editor").getByText("Row 1").click();
     await expect(page.locator(selectedObjectTextSelector)).toHaveText("question1");
-    await expect(page.locator("div[id$=ariaTitle][id^=sq].spg-title").getByText("Columns")).not.toBeVisible();
-    await expect(page.locator("div[id$=ariaTitle][id^=sq].spg-title").getByText("Rows")).toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Columns")).not.toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Rows")).toBeVisible();
   });
 
   test("Matrix dropdown with detail panel", async ({ page }) => {
@@ -354,8 +354,8 @@ test.describe(title + " dropdown collapse", () => {
 
   test("Carryforward banner", async ({ page }) => {
     const questions = page.locator(".svc-question__content");
-    const choicesTabTitle = page.locator("div[id$=ariaTitle][id^=sp]").getByText("Choice Options", { exact: true });
-    const generalTabTitle = page.locator("div[id$=ariaTitle][id^=sp]").getByText(generalGroupName, { exact: true });
+    const choicesTabTitle = page.locator("div[id$=ariaTitle][id^=pg-sp]").getByText("Choice Options", { exact: true });
+    const generalTabTitle = page.locator("div[id$=ariaTitle][id^=pg-sp]").getByText(generalGroupName, { exact: true });
     const carryForwardEditor = page.locator("div[data-name='choicesFromQuestion'] .sd-dropdown");
 
     await expect(questions).toHaveCount(0);
