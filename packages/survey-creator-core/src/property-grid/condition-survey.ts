@@ -880,14 +880,21 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     if (this.canShowQuestionValue(panel)) {
       const title = newQuestion.title;
+      const question = this.getConditionQuestion(qName);
       newQuestion.name = "questionValue";
       newQuestion.visibleIf = "questionValueVisibleIf({panel.questionName}, {panel.operator})";
       newQuestion.title = title;
       newQuestion.description = "";
-      newQuestion.titleLocation = "top";
+      if (!!question && question === this.calculatedValueQuestion) {
+        newQuestion.titleLocation = "hidden";
+        if (!!newQuestion.getPropertyByName("placeholder")) {
+          newQuestion.placeholder = editorLocalization.getString("ed.lg.calculatedValuePlaceholder");
+        }
+      } else {
+        newQuestion.titleLocation = "top";
+      }
       newQuestion.showCommentArea = false;
       if (newQuestion.showOtherItem) {
-        const question = this.getConditionQuestion(qName);
         if (question && question.getStoreOthersAsComment && question.getStoreOthersAsComment()) {
           const other = newQuestion.otherItem;
           newQuestion.choices.push(new ItemValue(other.value, other.title));

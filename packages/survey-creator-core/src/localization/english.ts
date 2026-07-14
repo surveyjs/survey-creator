@@ -236,6 +236,7 @@ export var enStrings = {
       column_resetValueText: "reset cell value for column: {0}", // {0} column name
       column_setValueText: "assign cell value: {1} to column: {0}", // {0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "An expression whose result will be assigned to the target question.",
+      calculatedValuePlaceholder: "Enter a value...",
       trigger_completeText: "survey becomes completed",
       trigger_setvalueText: "set into question: {0} value {1}", // {0} question name, {1} setValue
       trigger_setvalueEmptyText: "clear question value: {0}", // {0} question name
@@ -1784,7 +1785,7 @@ export var enStrings = {
       "default-dark": "Dark",
       "default-contrast": "Contrast"
     }
-  },
+  },
 };
 
 /*
