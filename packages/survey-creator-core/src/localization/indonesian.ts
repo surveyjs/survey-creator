@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var indonesianStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Ubah",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "Tonton dan pelajari cara membuat survei",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Silahkan letakkan pertanyaan di sini dari Kotak Perkakas di sebelah kiri.",
-    // [Auto-translated] "Create a rule to customize the flow of the survey."
-    addLogicItem: "Buat aturan untuk menyesuaikan alur survei.",
-    // "Copy"
-    copy: "Salin",
     // [Auto-translated] "Duplicate"
     duplicate: "Duplikat",
-    // "Add to toolbox"
-    addToToolbox: "Tambahkan ke Kotak Perkakas",
-    // "Delete Panel"
-    deletePanel: "Hapus Panel",
-    // "Delete Question"
-    deleteQuestion: "Hapus Pertanyaan",
-    // "Convert to"
-    convertTo: "Mengubah ke",
-    // "Drag element"
-    drag: "Tarik elemen"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var indonesianStrings = {
   ed: {
     // [Auto-translated] "Default ({0})"
     defaultLocale: "Default ({0})",
-    // "Survey"
-    survey: "Survei",
     // "Settings"
     settings: "Pengaturan Survei",
     // [Auto-translated] "Open settings"
@@ -144,42 +120,14 @@ export var indonesianStrings = {
     surveyTypeName: "Survei",
     // [Auto-translated] "Page"
     pageTypeName: "Halaman",
-    // [Auto-translated] "Panel"
-    panelTypeName: "Panel",
-    // [Auto-translated] "Question"
-    questionTypeName: "Pertanyaan",
-    // [Auto-translated] "Column"
-    columnTypeName: "Kolom",
-    // "Add New Page"
-    addNewPage: "Tambah Halaman Baru",
-    // "Scroll to the Right"
-    moveRight: "Geser ke Kanan",
-    // "Scroll to the Left"
-    moveLeft: "Geser ke Kiri",
-    // "Delete Page"
-    deletePage: "Hapus Halaman",
-    // "Edit Page"
-    editPage: "Ubah Halaman",
-    // "Edit"
-    edit: "Ubah",
     // "page"
     newPageName: "halaman",
     // "question"
     newQuestionName: "pertanyaan",
     // [Auto-translated] "panel"
     newPanelName: "Panel",
-    // [Auto-translated] "text"
-    newTextItemName: "Teks",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "Default",
-    // [Auto-translated] "Modern"
-    modernTheme: "Modern",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Default (warisan)",
     // "Preview Survey Again"
     testSurveyAgain: "Coba Survei Lagi",
-    // "Survey width: "
-    testSurveyWidth: "Lebar survei: ",
     // [Auto-translated] "You had to navigate to"
     navigateToMsg: "Anda harus menavigasi ke",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var indonesianStrings = {
     undo: "Urungkan",
     // "Redo"
     redo: "Ulangi",
-    // [Auto-translated] "Undo last change"
-    undoTooltip: "Mengurungkan perubahan terakhir",
-    // [Auto-translated] "Redo the change"
-    redoTooltip: "Mengulangi perubahan",
     // [Auto-translated] "Expand"
     expandTooltip: "Memperluas",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var indonesianStrings = {
     showMoreChoices: "Tampilkan lebih banyak",
     // [Auto-translated] "Show less"
     showLessChoices: "Tampilkan lebih sedikit",
-    // [Auto-translated] "Copy"
-    copy: "Menyalin",
-    // [Auto-translated] "Cut"
-    cut: "Memotong",
-    // [Auto-translated] "Paste"
-    paste: "Pasta",
-    // [Auto-translated] "Copy selection to clipboard"
-    copyTooltip: "Salin pilihan ke clipboard",
-    // [Auto-translated] "Cut selection to clipboard"
-    cutTooltip: "Memotong pilihan ke clipboard",
-    // [Auto-translated] "Paste from clipboard"
-    pasteTooltip: "Tempel dari papan klip",
-    // "Options"
-    options: "Pilihan",
-    // "Generate Valid JSON"
-    generateValidJSON: "Hasilkan JSON yang Valid",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Fungsi tidak diketahui: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var indonesianStrings = {
     expressionSyntaxError: "Kesalahan sintaks.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Kesalahan semantik.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Hasilkan JSON yang dapat dibaca",
     // "Toolbox"
     toolbox: "Kotak Perkakas",
-    // [Auto-translated] "Properties"
-    "property-grid": "Properti",
     // [Auto-translated] "Search"
     toolboxSearch: "Mencari",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var indonesianStrings = {
     propertyGridPlaceholderTitle: "Mulai mengonfigurasi formulir Anda",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Klik ikon kategori apa pun untuk menjelajahi pengaturan survei. Pengaturan tambahan akan tersedia setelah Anda menambahkan elemen survei ke permukaan desain.",
-    // [Auto-translated] "Please correct JSON."
-    correctJSON: "Harap perbaiki JSON.",
     // "Survey Results "
     surveyResults: "Hasil survei: ",
     // "As Table"
@@ -294,8 +216,6 @@ export var indonesianStrings = {
     saving: "Menyimpan",
     // "Saved"
     saved: "Tersimpan",
-    // [Auto-translated] "Error"
-    propertyEditorError: "Kesalahan",
     // "Error! Editor content is not saved."
     saveError: "Error! Konten editor tidak berhasil disimpan.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var indonesianStrings = {
     themeResetConfirmation: "Apakah Anda benar-benar ingin mengatur ulang tema? Semua penyesuaian Anda akan hilang.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Ya, atur ulang tema",
-    // "Bold"
-    bold: "Tebal",
-    // "Italic"
-    italic: "Miring",
-    // "Underline"
-    underline: "Garis Bawah",
     // "Add Question"
     addNewQuestion: "Tambah pertanyaan",
     // [Auto-translated] "Select page..."
@@ -507,8 +421,6 @@ export var indonesianStrings = {
       trigger_runExpressionDescription: "Ketika ekspresi logis dievaluasi menjadi true, survei mengevaluasi ekspresi lain. Secara opsional, hasil dari ekspresi terakhir dapat ditetapkan sebagai nilai untuk pertanyaan yang dipilih",
       // [Auto-translated] "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Jika ekspresi logis dievaluasi menjadi true, halaman \"Terima kasih\" menampilkan konten yang ditentukan.",
-      // [Auto-translated] "When expression: '{0}' returns true"
-      itemExpressionText: "Ketika ekspresi: '{0}' mengembalikan true", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "Aturan baru",
       // [Auto-translated] "make page {0} visible"
@@ -563,8 +475,6 @@ export var indonesianStrings = {
       conditions: "Ketentuan",
       // [Auto-translated] "Action(s)"
       actions: "Tindakan",
-      // [Auto-translated] "Define condition(s)"
-      expressionEditorTitle: "Tentukan kondisi",
       // [Auto-translated] "Define action(s)"
       actionsEditorTitle: "Menentukan tindakan",
       // [Auto-translated] "Delete Action"
@@ -575,8 +485,6 @@ export var indonesianStrings = {
       selectedActionCaption: "Pilih tindakan...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Ekspresi logika kosong atau tidak valid. Mohon koreksinya.",
-      // [Auto-translated] "Please add at least one action."
-      noActionError: "Silakan tambahkan setidaknya satu tindakan.",
       // [Auto-translated] "Please fix issues in your action(s)."
       actionInvalid: "Harap perbaiki masalah dalam tindakan Anda.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +786,6 @@ export var indonesianStrings = {
     defaultDisplayValue: "Nilai tampilan default untuk teks dinamis",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Perataan label",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Lebar bidang input (dalam karakter)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Perataan pesan kesalahan sel",
     // [Auto-translated] "Enabled"
@@ -888,32 +794,16 @@ export var indonesianStrings = {
     disabled: "Cacat",
     // [Auto-translated] "Inherit"
     inherit: "Mewarisi",
-    // "Apply"
-    apply: "Terapkan",
-    // [Auto-translated] "OK"
-    ok: "OK",
-    // [Auto-translated] "Save"
-    save: "Simpan",
     // [Auto-translated] "Clear"
     clear: "Jelas",
-    // [Auto-translated] "Save"
-    saveTooltip: "Simpan",
-    // "Cancel"
-    cancel: "Batal",
     // [Auto-translated] "Set"
     set: "Mengeset",
-    // [Auto-translated] "Reset"
-    reset: "Atur ulang",
     // [Auto-translated] "Change"
     change: "Ubah",
-    // [Auto-translated] "Refresh"
-    refresh: "Refresh",
     // "Close"
     close: "Tutup",
     // "Delete"
     delete: "Hapus",
-    // [Auto-translated] "Add"
-    add: "Tambah",
     // "Add New"
     addNew: "Tambahkan Baru",
     // "Click to add an item..."
@@ -922,34 +812,10 @@ export var indonesianStrings = {
     removeItem: "Klik untuk menghapus item...",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
-    // [Auto-translated] "Other"
-    addOther: "Lain",
-    // [Auto-translated] "Select All"
-    addSelectAll: "Pilih Semua",
-    // [Auto-translated] "None"
-    addNone: "Tidak",
-    // "Remove All"
-    removeAll: "Hapus Semua",
     // "Edit"
     edit: "Ubah",
-    // [Auto-translated] "Return without saving"
-    back: "Pengembalian tanpa menabung",
-    // [Auto-translated] "Return without saving"
-    backTooltip: "Pengembalian tanpa menabung",
-    // [Auto-translated] "Save and return"
-    saveAndBack: "Simpan dan kembalikan",
-    // [Auto-translated] "Save and return"
-    saveAndBackTooltip: "Simpan dan kembalikan",
     // [Auto-translated] "Done"
     doneEditing: "Selesai",
-    // "Edit Choices"
-    editChoices: "Ubah Pilihan",
-    // [Auto-translated] "Show Choices"
-    showChoices: "Tampilkan Pilihan",
-    // "Move"
-    move: "Pindah",
-    // "<empty>"
-    empty: "<kosong>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Nilai kosong",
     // "Manual Entry"
@@ -962,12 +828,6 @@ export var indonesianStrings = {
     fastEntryChoicesMinCountError: "Harap masukkan setidaknya {0} item",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Masukkan daftar opsi pilihan dan ID-nya dalam format berikut:\n\nid|opsi\n\nID opsi pilihan tidak terlihat oleh responden dan dapat digunakan dalam aturan bersyarat.",
-    // "Form Entry"
-    formEntry: "Entri Form",
-    // "Test the service"
-    testService: "Coba layanan",
-    // [Auto-translated] "Please select the element"
-    itemSelectorEmpty: "Silakan pilih elemen",
     // [Auto-translated] "Please select the action"
     conditionActionEmpty: "Silakan pilih tindakan",
     // "Select a question..."
@@ -976,20 +836,8 @@ export var indonesianStrings = {
     conditionSelectPage: "Pilih halaman...",
     // [Auto-translated] "Select a panel..."
     conditionSelectPanel: "Pilih panel...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Silahkan masukkan/pilih nilai",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Tekan ctrl+spasi untuk mendapatkan petunjuk penyelesaian ekspresi",
-    // "Current row"
-    aceEditorRowTitle: "Baris saat ini",
-    // "Current panel"
-    aceEditorPanelTitle: "Panel saat ini",
-    // "For more details please check the documentation"
-    showMore: "Untuk detil selanjutnya silahkan periksa dokumentasi",
-    // "Available questions"
-    assistantTitle: "Pertanyaan tersedia:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Harus ada setidaknya satu kolom atau baris",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "Tinjau sebelum mengirimkan",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +888,12 @@ export var indonesianStrings = {
     "addNew@navigateToUrlOnCondition": "Tambahkan URL baru",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Tambahkan halaman baru",
-    // [Auto-translated] "Expression is empty"
-    expressionIsEmpty: "Ekspresi kosong",
     // "Value"
     value: "Nilai",
     // "Text"
     text: "Teks",
-    // "Row ID"
-    rowid: "ID baris",
     // "Image or video file URL"
     imageLink: "Link Gambar",
-    // "Edit column: {0}"
-    columnEdit: "Ubah kolom: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Ubah item: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1070,8 +910,6 @@ export var indonesianStrings = {
     imageLinkName: "Mendapatkan URL file dari properti berikut",
     // [Auto-translated] "Accept empty response"
     allowEmptyResponse: "Terima respons kosong",
-    // [Auto-translated] "Title"
-    titlePlaceholder: "Titel",
     // [Auto-translated] "Survey Title"
     surveyTitlePlaceholder: "Judul Survei",
     // [Auto-translated] "Page {num}"
@@ -1182,16 +1020,8 @@ export var indonesianStrings = {
     defaultValue: "Nilai standar",
     // "Default texts"
     cellsDefaultRow: "Teks sel standar",
-    // "Edit survey settings"
-    surveyEditorTitle: "Ubah pengaturan survei",
-    // "Edit: {0}"
-    qEditorTitle: "Ubah: {0}",
     // "Maximum character limit"
     maxLength: "Panjang maksimum",
-    // [Auto-translated] "Build"
-    buildExpression: "Membangun",
-    // [Auto-translated] "Edit"
-    editExpression: "Mengedit",
     // [Auto-translated] "and"
     and: "dan",
     // [Auto-translated] "or"
@@ -1218,8 +1048,6 @@ export var indonesianStrings = {
     includeIntoResult: "Tambahkan ke hasil survei",
     // "Make the title and description visible"
     showTitle: "Tampilkan/sembunyikan judul",
-    // [Auto-translated] "Expand/collapse title"
-    expandCollapseTitle: "Perluas/ciutkan judul",
     // "Select a survey language"
     locale: "Bahasa standar",
     // [Auto-translated] "Select device type"
@@ -1634,8 +1462,6 @@ export var indonesianStrings = {
     displayRateDescriptionsAsExtremeItems: "Menampilkan label sebagai nilai ekstrem",
     // [Auto-translated] "Row order"
     rowOrder: "Urutan baris",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "Tata letak kolom",
     // [Auto-translated] "Nested column count"
     columnColCount: "Jumlah kolom bertumpuk",
     // [Auto-translated] "Correct Answer"
@@ -1666,22 +1492,6 @@ export var indonesianStrings = {
     },
     // [Auto-translated] "Logo alignment"
     logoPosition: "Perataan logo",
-    // [Auto-translated] "Add logo..."
-    addLogo: "Tambahkan logo...",
-    // [Auto-translated] "Change logo..."
-    changeLogo: "Ubah logo...",
-    logoPositions: {
-      // [Auto-translated] "Remove logo"
-      none: "Hapus logo",
-      // [Auto-translated] "Left"
-      left: "Kiri",
-      // [Auto-translated] "Right"
-      right: "Kanan",
-      // [Auto-translated] "On the top"
-      top: "Di atas",
-      // [Auto-translated] "In the bottom"
-      bottom: "Di bagian bawah"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Mode pratinjau",
     // [Auto-translated] "Enable grid layout"
@@ -1694,14 +1504,8 @@ export var indonesianStrings = {
     detailErrorLocation: "Perataan pesan kesalahan detail baris",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Tata Letak Panel"
-      },
       // "General"
       general: "Umum",
-      // "Options"
-      fileOptions: "Pilihan berkas",
       // "HTML Editor"
       html: "Editor Html",
       // "Columns"
@@ -1724,10 +1528,6 @@ export var indonesianStrings = {
       sliderSettings: "Pengaturan Penggeser",
       // "Choices from a Web Service"
       choicesByUrl: "Pilih dari Web",
-      // "Default Choices"
-      matrixChoices: "Pilihan Standar",
-      // "Text Inputs"
-      multipleTextItems: "Masukan Teks",
       // [Auto-translated] "Numbering"
       numbering: "Penomoran",
       // "Validators"
@@ -1770,8 +1570,6 @@ export var indonesianStrings = {
       showOnCompleted: "Halaman \"Terima kasih\"",
       // [Auto-translated] "Logo in the Survey Header"
       logo: "Logo di Header Survei",
-      // [Auto-translated] "Slider"
-      slider: "Slider",
       // [Auto-translated] "Expression"
       expression: "Ekspresi",
       // [Auto-translated] "Question Settings"
@@ -1791,62 +1589,18 @@ export var indonesianStrings = {
       // [Auto-translated] "Others"
       others: "Lain"
     },
-    // "Edit property '{0}'"
-    editProperty: "Ubah properti '{0}'",
     // "Items"
     items: "[ Barang: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Buat pilihan terlihat jika",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "Buat pilihan yang dapat dipilih jika",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "Membuat kolom terlihat jika",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "Membuat baris terlihat jika",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "Tingkatkan lekukan bagian dalam",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Gunakan jawaban dari entri terakhir sebagai default",
-    // "Please enter a value."
-    enterNewValue: "Silahkan masukkan nilai",
-    // "There are no questions in the survey."
-    noquestions: "Tidak ada pertanyaan dalam survei.",
-    // "Please create a trigger"
-    createtrigger: "Silahkan buat sebuah trigger",
-    // [Auto-translated] "Press enter button to edit"
-    titleKeyboardAdornerTip: "Tekan tombol enter untuk mengedit",
-    // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Tekan tombol enter untuk mengedit item, tekan tombol hapus untuk menghapus item, tekan alt plus panah ke atas atau panah ke bawah untuk memindahkan item",
-    // [Auto-translated] "On "
-    triggerOn: "Aktif ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Buat halaman terlihat:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Buat elemen terlihat:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Selesaikan survei jika sukses.",
-    // "The trigger is not set"
-    triggerNotSet: "Trigger belum diatur",
-    // "Run if"
-    triggerRunIf: "Berjalan jika",
-    // "Change value of: "
-    triggerSetToName: "Ubah nilai dari: ",
-    // "Copy value from: "
-    triggerFromName: "Salin nilai dari: ",
-    // "Run this Expression"
-    triggerRunExpression: "Jalankan ekspresi ini:",
-    // "to: "
-    triggerSetValue: "ke: ",
-    // [Auto-translated] "Go to the question"
-    triggerGotoName: "Pergi ke pertanyaan",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Jangan meletakkan variabel ke hasil survey.",
-    // [Auto-translated] "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Silakan masukkan ekspresi yang valid",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Ketik ekspresi di sini...",
-    // [Auto-translated] "No file chosen"
-    noFile: "Tidak ada file yang dipilih",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "Hapus nilai pertanyaan tersembunyi",
     // [Auto-translated] "Store values in the following property"
@@ -1992,10 +1746,6 @@ export var indonesianStrings = {
     "file-camera": "File lokal atau Kamera",
     // "Inherit"
     inherit: "inherit",
-    // "Visible"
-    show: "tampilkan",
-    // "Hidden"
-    hide: "sembunyikan",
     // "Inherit"
     default: "standar",
     // "Initial"
@@ -2012,8 +1762,6 @@ export var indonesianStrings = {
     asc: "naik",
     // "Descending"
     desc: "turun",
-    // "Indeterminate"
-    indeterminate: "tidak tentu",
     // [Auto-translated] "Selected"
     selected: "Dipilih",
     // [Auto-translated] "Unselected"
@@ -2034,12 +1782,6 @@ export var indonesianStrings = {
     carousel: "Korsel",
     // [Auto-translated] "Tabs"
     tab: "Tab",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "progress atas",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "progress bawah",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "progress atas bawah",
     // "Horizontal"
     horizontal: "horizontal",
     // "Vertical"
@@ -2050,8 +1792,6 @@ export var indonesianStrings = {
     bottom: "bawah",
     // "Top and bottom"
     topBottom: "atas dan bawah",
-    // [Auto-translated] "Both"
-    both: "Keduanya",
     // "Left"
     left: "kiri",
     // [Auto-translated] "Right"
@@ -2092,10 +1832,6 @@ export var indonesianStrings = {
     week: "minggu",
     // "Hidden"
     hidden: "tersembunyi",
-    // "Editable"
-    edit: "ubah",
-    // "Read-only"
-    display: "tampilan",
     // [Auto-translated] "Contain"
     contain: "Mengandung",
     // [Auto-translated] "Cover"
@@ -2324,8 +2060,6 @@ export var indonesianStrings = {
     onNextPage: "pada halaman selanjutnya",
     // "After an answer is changed"
     onValueChanged: "saat nilai berubah",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "Sebelum jawaban diubah",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Struktur asli",
@@ -2336,12 +2070,6 @@ export var indonesianStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Tampilkan satu bidang input per halaman"
     },
-    // [Auto-translated] "No preview"
-    noPreview: "Tidak ada pratinjau",
-    // [Auto-translated] "Show all questions"
-    showAllQuestions: "Tampilkan semua pertanyaan",
-    // [Auto-translated] "Show answered questions only"
-    showAnsweredQuestions: "Tampilkan pertanyaan yang sudah terjawab saja",
     // [Auto-translated] "Show all questions"
     allQuestions: "Tampilkan semua pertanyaan",
     // [Auto-translated] "Show answered questions only"
@@ -2447,12 +2175,8 @@ export var indonesianStrings = {
       onPage: "Setel ulang di setiap halaman",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Atur ulang di setiap panel",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Setel ulang pada setiap panel",
       // [Auto-translated] "Recursive numbering"
       recursive: "Penomoran rekursif",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Lanjutkan di seluruh survei",
       // [Auto-translated] "No numbering"
       off: "Tanpa penomoran"
     },
@@ -2615,49 +2339,6 @@ export var indonesianStrings = {
     and: "dan",
     // [Auto-translated] "or"
     or: "atau"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Gunakan versi Angular",
-    // "Use jQuery version"
-    jquery: "Gunakan versi JQuery",
-    // "Use Knockout version"
-    knockout: "Gunakan versi Knockout",
-    // "Use React version"
-    react: "Gunakan versi React",
-    // "Use Vue version"
-    vue: "Gunakan versi Vue",
-    // "For bootstrap framework"
-    bootstrap: "Untuk framework bootstrap",
-    // [Auto-translated] "Modern theme"
-    modern: "Tema modern",
-    // [Auto-translated] "Default theme"
-    default: "Tema default",
-    // [Auto-translated] "Orange theme"
-    orange: "Tema oranye",
-    // [Auto-translated] "Darkblue theme"
-    darkblue: "Tema biru tua",
-    // [Auto-translated] "Darkrose theme"
-    darkrose: "Tema Darkrose",
-    // [Auto-translated] "Stone theme"
-    stone: "Tema batu",
-    // [Auto-translated] "Winter theme"
-    winter: "Tema musim dingin",
-    // [Auto-translated] "Winter-Stone theme"
-    winterstone: "Tema Winter-Stone",
-    // "Show survey on a page"
-    showOnPage: "Tampilkan survei pada sebuah halaman",
-    // "Show survey in a window"
-    showInWindow: "Tampilkan survei pada sebuah jendela",
-    // "Load Survey JSON from server"
-    loadFromServer: "Muat survei JSON dari server",
-    // "Scripts and styles"
-    titleScript: "Skrip dan gaya",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2906,10 +2587,6 @@ export var indonesianStrings = {
       choices: "\"Nilai\" berfungsi sebagai ID item yang digunakan dalam aturan bersyarat; \"Teks\" ditampilkan kepada responden.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Pilih antara \"Gambar\" dan \"Video\" untuk mengatur mode konten pemilih media. Jika \"Gambar\" dipilih, pastikan bahwa semua opsi yang disediakan adalah file gambar dalam format berikut: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Demikian pula, jika \"Video\" dipilih, pastikan bahwa semua opsi adalah tautan langsung ke file video dalam format berikut: MP4, MOV, WMV, FLV, AVI, MKV. Perhatikan bahwa tautan YouTube tidak didukung untuk opsi video."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Pengaturan ini hanya mengubah ukuran bidang input dan tidak memengaruhi lebar kotak pertanyaan. Untuk membatasi panjang input yang diterima, buka \"Validasi\" → \"Batas karakter maksimum\"."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3495,16 +3172,12 @@ export var indonesianStrings = {
     primaryDarkColor: "Hover",
     // [Auto-translated] "Selected"
     primaryLightColor: "Dipilih",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "Warna latar belakang",
     // "Corner radius"
     cornerRadius: "Radius sudut",
     // [Auto-translated] "Default background"
     backcolor: "Latar belakang default",
     // [Auto-translated] "Hover background"
     hovercolor: "Arahkan kursor ke latar belakang",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Dekorasi perbatasan",
     // [Auto-translated] "Font color"
     fontColor: "Warna font",
     // [Auto-translated] "Background color"
@@ -3513,8 +3186,6 @@ export var indonesianStrings = {
     primaryForecolor: "Warna default",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Warna dinonaktifkan",
-    // [Auto-translated] "Font"
-    font: "Font",
     // [Auto-translated] "Darker"
     borderDefault: "Gelap",
     // [Auto-translated] "Lighter"
@@ -3593,14 +3264,10 @@ export var indonesianStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Latar belakang permukaan",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Utama",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Sekunder",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Permukaan",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Elemen UI",
     // [Auto-translated] "Font"

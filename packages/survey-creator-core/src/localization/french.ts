@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var frenchTranslation = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Éditer",
-    // [Auto-translated] "Watch and learn how to create surveys"
-    externalHelpLink: "Regardez et apprenez à créer des sondages",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Déposer votre question ici.",
-    // [Auto-translated] "Create a rule to customize the flow of the survey."
-    addLogicItem: "Créez une règle pour personnaliser le déroulement du sondage.",
-    // "Copy"
-    copy: "Copier",
     // [Auto-translated] "Duplicate"
     duplicate: "Dupliquer",
-    // "Add to toolbox"
-    addToToolbox: "Ajouter à la boîte à outils",
-    // "Delete Panel"
-    deletePanel: "Supprimer le panneau",
-    // "Delete Question"
-    deleteQuestion: "Supprimer la question",
-    // "Convert to"
-    convertTo: "Convertir en",
-    // [Auto-translated] "Drag element"
-    drag: "Élément Drag"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var frenchTranslation = {
   ed: {
     // [Auto-translated] "Default ({0})"
     defaultLocale: "Valeur par défaut ({0})",
-    // "Survey"
-    survey: "Sondage",
     // "Settings"
     settings: "Configuration du sondage",
     // [Auto-translated] "Open settings"
@@ -144,42 +120,14 @@ export var frenchTranslation = {
     surveyTypeName: "Sondage",
     // [Auto-translated] "Page"
     pageTypeName: "Page",
-    // [Auto-translated] "Panel"
-    panelTypeName: "Panneau",
-    // [Auto-translated] "Question"
-    questionTypeName: "Question",
-    // [Auto-translated] "Column"
-    columnTypeName: "Colonne",
-    // "Add New Page"
-    addNewPage: "Ajouter une page",
-    // "Scroll to the Right"
-    moveRight: "Défiler à droite",
-    // "Scroll to the Left"
-    moveLeft: "Défiler à gauche",
-    // "Delete Page"
-    deletePage: "Supprimer une page",
-    // "Edit Page"
-    editPage: "Éditer une page",
-    // "Edit"
-    edit: "Éditer",
     // [Auto-translated] "page"
     newPageName: "Page",
     // [Auto-translated] "question"
     newQuestionName: "question",
     // "panel"
     newPanelName: "panneau",
-    // "text"
-    newTextItemName: "texte",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "Défaut",
-    // [Auto-translated] "Modern"
-    modernTheme: "Moderne",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Valeur par défaut (héritée)",
     // "Preview Survey Again"
     testSurveyAgain: "Tester à nouveau le sondage",
-    // "Survey width: "
-    testSurveyWidth: "Largeur du sondage : ",
     // [Auto-translated] "You had to navigate to"
     navigateToMsg: "Vous deviez naviguer vers",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var frenchTranslation = {
     undo: "Annuler",
     // "Redo"
     redo: "Rétablir",
-    // [Auto-translated] "Undo last change"
-    undoTooltip: "Annuler la dernière modification",
-    // [Auto-translated] "Redo the change"
-    redoTooltip: "Rétablir la modification",
     // [Auto-translated] "Expand"
     expandTooltip: "Développer",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var frenchTranslation = {
     showMoreChoices: "Afficher plus",
     // [Auto-translated] "Show less"
     showLessChoices: "Afficher moins",
-    // [Auto-translated] "Copy"
-    copy: "Copier",
-    // [Auto-translated] "Cut"
-    cut: "Couper",
-    // [Auto-translated] "Paste"
-    paste: "Coller",
-    // [Auto-translated] "Copy selection to clipboard"
-    copyTooltip: "Copier la sélection dans le presse-papiers",
-    // [Auto-translated] "Cut selection to clipboard"
-    cutTooltip: "Couper la sélection dans le presse-papiers",
-    // [Auto-translated] "Paste from clipboard"
-    pasteTooltip: "Coller à partir du presse-papiers",
-    // [Auto-translated] "Options"
-    options: "Options",
-    // "Generate Valid JSON"
-    generateValidJSON: "Générer un JSON valide",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Fonction inconnue : « {0} ».",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var frenchTranslation = {
     expressionSyntaxError: "Erreur de syntaxe.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Erreur sémantique.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Générer un JSON lisible",
     // "Toolbox"
     toolbox: "Boîte à outils",
-    // "Properties"
-    "property-grid": "Propriétés",
     // [Auto-translated] "Search"
     toolboxSearch: "Rechercher",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var frenchTranslation = {
     propertyGridPlaceholderTitle: "Commencez à configurer votre formulaire",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Cliquez sur n’importe quelle icône de catégorie pour explorer les paramètres de l’enquête. Des paramètres supplémentaires seront disponibles une fois que vous aurez ajouté un élément de topographie à l’aire de conception.",
-    // "Please correct JSON."
-    correctJSON: "Merci de corriger le JSON",
     // "Survey Results "
     surveyResults: "Résultat du sondage : ",
     // "As Table"
@@ -294,8 +216,6 @@ export var frenchTranslation = {
     saving: "Sauvegarde en cours",
     // "Saved"
     saved: "Sauvegardé",
-    // [Auto-translated] "Error"
-    propertyEditorError: "Erreur",
     // "Error! Editor content is not saved."
     saveError: "Erreur! Le contenu de l'éditeur n'a pas été sauvegardé.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var frenchTranslation = {
     themeResetConfirmation: "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Oui, réinitialisez le thème",
-    // "Bold"
-    bold: "Gras",
-    // "Italic"
-    italic: "Italique",
-    // "Underline"
-    underline: "Souligné",
     // "Add Question"
     addNewQuestion: "Ajouter Question",
     // [Auto-translated] "Select page..."
@@ -507,8 +421,6 @@ export var frenchTranslation = {
       trigger_runExpressionDescription: "Lorsque la condition renvoie 'vrai', alors la condition personnalisée est exécutée. Vous pouvez éventuellement définir ce résultat de condition dans la question sélectionnée.",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Si la condition renvoie 'vrai', le texte par défaut de la page de remerciements est remplacé par celui que vous avez défini.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Lorsque la condition: '{0}' renvoie 'vrai':", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "Nouvelle règle",
       // "make page {0} visible"
@@ -563,8 +475,6 @@ export var frenchTranslation = {
       conditions: "Condition(s)",
       // [Auto-translated] "Action(s)"
       actions: "Action(s)",
-      // "Define condition(s)"
-      expressionEditorTitle: "Définissez le(s) condition(s)",
       // "Define action(s)"
       actionsEditorTitle: "Définissez le(s) action(s)",
       // "Delete Action"
@@ -575,8 +485,6 @@ export var frenchTranslation = {
       selectedActionCaption: "Sélectionnez une action à ajouter …",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "La condition est vide ou non valide. Merci de corriger.",
-      // "Please add at least one action."
-      noActionError: "Veuillez ajouter au moins une action.",
       // "Please fix issues in your action(s)."
       actionInvalid: "Veuillez corriger les problèmes dans vos actions.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +786,6 @@ export var frenchTranslation = {
     defaultDisplayValue: "Valeur d’affichage par défaut pour les textes dynamiques",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Alignement des étiquettes",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Largeur du champ de saisie (en caractères)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Alignement des messages d’erreur de cellule",
     // [Auto-translated] "Enabled"
@@ -888,32 +794,16 @@ export var frenchTranslation = {
     disabled: "Handicapé",
     // [Auto-translated] "Inherit"
     inherit: "Hériter",
-    // "Apply"
-    apply: "Appliquer",
-    // "OK"
-    ok: "Ok",
-    // "Save"
-    save: "Enregistrer",
     // [Auto-translated] "Clear"
     clear: "Effacer",
-    // [Auto-translated] "Save"
-    saveTooltip: "Sauvegarder",
-    // "Cancel"
-    cancel: "Annuler",
     // [Auto-translated] "Set"
     set: "Définir",
-    // "Reset"
-    reset: "Réinitialiser",
     // [Auto-translated] "Change"
     change: "Changer",
-    // [Auto-translated] "Refresh"
-    refresh: "Rafraîchir",
     // "Close"
     close: "Fermer",
     // "Delete"
     delete: "Supprimer",
-    // [Auto-translated] "Add"
-    add: "Ajouter",
     // "Add New"
     addNew: "Ajouter un nouvel élément",
     // "Click to add an item..."
@@ -922,34 +812,10 @@ export var frenchTranslation = {
     removeItem: "Cliquez pour supprimer l’élément...",
     // [Auto-translated] "Drag the item"
     dragItem: "Faire glisser l’élément",
-    // "Other"
-    addOther: "Autre",
-    // "Select All"
-    addSelectAll: "Tout sélectionner",
-    // "None"
-    addNone: "Aucun",
-    // "Remove All"
-    removeAll: "Tout supprimer",
     // "Edit"
     edit: "Éditer",
-    // "Return without saving"
-    back: "Quitter sans sauvegarder",
-    // "Return without saving"
-    backTooltip: "Quitter sans sauvegarder",
-    // "Save and return"
-    saveAndBack: "Sauvegarder et quitter",
-    // "Save and return"
-    saveAndBackTooltip: "Sauvegarder et quitter",
     // [Auto-translated] "Done"
     doneEditing: "Terminé",
-    // "Edit Choices"
-    editChoices: "Editer les choix",
-    // [Auto-translated] "Show Choices"
-    showChoices: "Afficher les choix",
-    // "Move"
-    move: "Déplacer",
-    // "<empty>"
-    empty: "<vide>",
     // [Auto-translated] "Value is empty"
     emptyValue: "La valeur est vide",
     // "Manual Entry"
@@ -962,12 +828,6 @@ export var frenchTranslation = {
     fastEntryChoicesMinCountError: "Veuillez saisir au moins {0} éléments",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Entrez la liste des options de choix et leurs ID au format suivant :\n\nid|option\n\nL’ID d’une option de choix n’est pas visible par les personnes interrogées et peut être utilisé dans les règles conditionnelles.",
-    // "Form Entry"
-    formEntry: "Ajout via formulaire",
-    // "Test the service"
-    testService: "Tester le service",
-    // [Auto-translated] "Please select the element"
-    itemSelectorEmpty: "Veuillez sélectionner l’élément",
     // [Auto-translated] "Please select the action"
     conditionActionEmpty: "Veuillez sélectionner l’action",
     // "Select a question..."
@@ -976,20 +836,8 @@ export var frenchTranslation = {
     conditionSelectPage: "Sélectionnez une page...",
     // [Auto-translated] "Select a panel..."
     conditionSelectPanel: "Sélectionnez un panneau...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Sélectionner ou saisir la valeur",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Appuyer sur Ctrl + espace pour obtenir une aide pour la saisie d'expression",
-    // "Current row"
-    aceEditorRowTitle: "Ligne actuelle",
-    // "Current panel"
-    aceEditorPanelTitle: "Panneau actuel",
-    // "For more details please check the documentation"
-    showMore: "Pour plus d'informations, veuillez vous référer à la documentation",
-    // "Available questions"
-    assistantTitle: "Questions disponibles :",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Ajoutez au minimum une ligne ou une colonne",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "Examiner avant de soumettre",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +888,12 @@ export var frenchTranslation = {
     "addNew@navigateToUrlOnCondition": "Ajouter une nouvelle URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Ajouter une nouvelle page",
-    // "Expression is empty"
-    expressionIsEmpty: "La condition est vide",
     // "Value"
     value: "Valeur",
     // "Text"
     text: "Texte",
-    // "Row ID"
-    rowid: "ID Ligne",
     // "Image or video file URL"
     imageLink: "URL de l'image",
-    // "Edit column: {0}"
-    columnEdit: "Éditer la colonne: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Éditer l'item: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1070,8 +910,6 @@ export var frenchTranslation = {
     imageLinkName: "Obtenir les URL de fichier à partir de la propriété suivante",
     // [Auto-translated] "Accept empty response"
     allowEmptyResponse: "Accepter une réponse vide",
-    // "Title"
-    titlePlaceholder: "Titre de la page",
     // "Survey Title"
     surveyTitlePlaceholder: "Saisissez le titre du sondage",
     // "Page {num}"
@@ -1182,16 +1020,8 @@ export var frenchTranslation = {
     defaultValue: "Valeur par défaut",
     // "Default texts"
     cellsDefaultRow: "Texte de cellule par défaut",
-    // "Edit survey settings"
-    surveyEditorTitle: "Éditer les paramètres du sondage",
-    // "Edit: {0}"
-    qEditorTitle: "Éditer la question: {0}",
     // "Maximum character limit"
     maxLength: "Longueur maximum",
-    // "Build"
-    buildExpression: "Construire",
-    // "Edit"
-    editExpression: "Editer",
     // [Auto-translated] "and"
     and: "et",
     // [Auto-translated] "or"
@@ -1218,8 +1048,6 @@ export var frenchTranslation = {
     includeIntoResult: "Ajouter aux résultats de l’enquête",
     // "Make the title and description visible"
     showTitle: "Afficher/masquer le titre",
-    // [Auto-translated] "Expand/collapse title"
-    expandCollapseTitle: "Développer/réduire le titre",
     // "Select a survey language"
     locale: "Langue par défaut",
     // "Select device type"
@@ -1634,8 +1462,6 @@ export var frenchTranslation = {
     displayRateDescriptionsAsExtremeItems: "Afficher les étiquettes sous forme de valeurs extrêmes",
     // [Auto-translated] "Row order"
     rowOrder: "Ordre des lignes",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "Disposition des colonnes",
     // [Auto-translated] "Nested column count"
     columnColCount: "Nombre de colonnes imbriquées",
     // [Auto-translated] "Correct Answer"
@@ -1666,22 +1492,6 @@ export var frenchTranslation = {
     },
     // "Logo alignment"
     logoPosition: "Position du logo",
-    // "Add logo..."
-    addLogo: "Ajouter un logo...",
-    // "Change logo..."
-    changeLogo: "Changer le logo...",
-    logoPositions: {
-      // "Remove logo"
-      none: "Retirer le logo",
-      // "Left"
-      left: "Gauche",
-      // "Right"
-      right: "Droite",
-      // "On the top"
-      top: "Au dessus",
-      // "In the bottom"
-      bottom: "En dessous"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Mode de prévisualisation",
     // [Auto-translated] "Enable grid layout"
@@ -1694,14 +1504,8 @@ export var frenchTranslation = {
     detailErrorLocation: "Alignement du message d’erreur Détails de la ligne",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Disposition du panneau"
-      },
       // "General"
       general: "Général",
-      // [Auto-translated] "Options"
-      fileOptions: "Options",
       // "HTML Editor"
       html: "Éditeur HTML",
       // "Columns"
@@ -1724,10 +1528,6 @@ export var frenchTranslation = {
       sliderSettings: "Paramètres du curseur",
       // "Choices from a Web Service"
       choicesByUrl: "Choix depuis API web",
-      // "Default Choices"
-      matrixChoices: "Choix par défaut",
-      // "Text Inputs"
-      multipleTextItems: "Champs de saisie multiples",
       // [Auto-translated] "Numbering"
       numbering: "Numérotation",
       // "Validators"
@@ -1770,8 +1570,6 @@ export var frenchTranslation = {
       showOnCompleted: "Page « Merci »",
       // "Logo in the Survey Header"
       logo: "Logo dans le titre du sondage",
-      // [Auto-translated] "Slider"
-      slider: "Curseur",
       // [Auto-translated] "Expression"
       expression: "Condition",
       // [Auto-translated] "Question Settings"
@@ -1791,62 +1589,18 @@ export var frenchTranslation = {
       // "Others"
       others: "Autres"
     },
-    // "Edit property '{0}'"
-    editProperty: "Éditer la propriété \"{0}\"",
     // "Items"
     items: "[ Éléments: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Rendez les choix visibles si",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "Rendre les choix sélectionnables si",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "Rendre les colonnes visibles si",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "Rendre les lignes visibles si",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "Augmenter l’empreinte intérieure",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Utiliser les réponses de la dernière entrée par défaut",
-    // "Please enter a value."
-    enterNewValue: "Veuillez saisir la valeur.",
-    // "There are no questions in the survey."
-    noquestions: "Il n'y a aucune question dans le sondage.",
-    // "Please create a trigger"
-    createtrigger: "Veuillez créer un déclencheur",
-    // [Auto-translated] "Press enter button to edit"
-    titleKeyboardAdornerTip: "Appuyez sur le bouton Entrée pour modifier",
-    // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Appuyez sur le bouton Entrée pour modifier l’élément, appuyez sur le bouton Supprimer pour supprimer l’élément, appuyez sur alt plus flèche vers le haut ou flèche vers le bas pour déplacer l’élément",
-    // "On "
-    triggerOn: "Quand ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Rendre les pages visibles :",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Rendre les questions visibles :",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Terminer le sondage si la condition est remplie.",
-    // "The trigger is not set"
-    triggerNotSet: "Le déclencheur n'est pas défini",
-    // "Run if"
-    triggerRunIf: "Exécuter si",
-    // "Change value of: "
-    triggerSetToName: "Changer la valeur de : ",
-    // "Copy value from: "
-    triggerFromName: "Copier la valeur de : ",
-    // "Run this Expression"
-    triggerRunExpression: "Exécuter cette expression :",
-    // "to: "
-    triggerSetValue: "à : ",
-    // "Go to the question"
-    triggerGotoName: "Aller à la question :",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Ne pas enregistrer le résultat dans les résultats du sondage.",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Veuillez entrer une condition valide",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Saisir la condition ici...",
-    // [Auto-translated] "No file chosen"
-    noFile: "Aucun fichier choisi",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "Effacer les valeurs des questions cachées",
     // [Auto-translated] "Store values in the following property"
@@ -1992,10 +1746,6 @@ export var frenchTranslation = {
     "file-camera": "Fichier local ou appareil photo",
     // "Inherit"
     inherit: "Hérité",
-    // "Visible"
-    show: "Afficher",
-    // "Hidden"
-    hide: "Masquer",
     // "Inherit"
     default: "Par défaut",
     // [Auto-translated] "Initial"
@@ -2012,8 +1762,6 @@ export var frenchTranslation = {
     asc: "Ascendant",
     // "Descending"
     desc: "Descendant",
-    // "Indeterminate"
-    indeterminate: "Indeterminé",
     // [Auto-translated] "Selected"
     selected: "Sélectionné",
     // [Auto-translated] "Unselected"
@@ -2034,12 +1782,6 @@ export var frenchTranslation = {
     carousel: "Carrousel",
     // [Auto-translated] "Tabs"
     tab: "Onglets",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "Barre de progression en haut",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "Barre de progression en bas",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "Barre de progression en haut et en bas",
     // [Auto-translated] "Horizontal"
     horizontal: "Horizontal",
     // [Auto-translated] "Vertical"
@@ -2050,8 +1792,6 @@ export var frenchTranslation = {
     bottom: "Bas",
     // "Top and bottom"
     topBottom: "Haut et bas",
-    // "Both"
-    both: "Les deux",
     // "Left"
     left: "Gauche",
     // [Auto-translated] "Right"
@@ -2092,10 +1832,6 @@ export var frenchTranslation = {
     week: "Semaine",
     // "Hidden"
     hidden: "Masqué",
-    // "Editable"
-    edit: "Éditer",
-    // "Read-only"
-    display: "Affichage",
     // [Auto-translated] "Contain"
     contain: "Contenir",
     // [Auto-translated] "Cover"
@@ -2324,8 +2060,6 @@ export var frenchTranslation = {
     onNextPage: "Lors du passage à la page suivante",
     // [Auto-translated] "After an answer is changed"
     onValueChanged: "Après la modification d’une réponse",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "Avant qu’une réponse ne soit modifiée",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Structure d’origine",
@@ -2336,12 +2070,6 @@ export var frenchTranslation = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Afficher un seul champ de saisie par page"
     },
-    // [Auto-translated] "No preview"
-    noPreview: "Pas d’aperçu",
-    // [Auto-translated] "Show all questions"
-    showAllQuestions: "Afficher toutes les questions",
-    // [Auto-translated] "Show answered questions only"
-    showAnsweredQuestions: "Afficher uniquement les questions complétées",
     // [Auto-translated] "Show all questions"
     allQuestions: "Afficher toutes les questions",
     // [Auto-translated] "Show answered questions only"
@@ -2447,12 +2175,8 @@ export var frenchTranslation = {
       onPage: "Réinitialisation sur chaque page",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Réinitialisation sur chaque panneau",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Réinitialisation sur chaque panneau",
       // [Auto-translated] "Recursive numbering"
       recursive: "Numérotation récursive",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Continuez tout au long de l’enquête",
       // [Auto-translated] "No numbering"
       off: "Pas de numérotation"
     },
@@ -2615,49 +2339,6 @@ export var frenchTranslation = {
     and: "Et",
     // [Auto-translated] "or"
     or: "Ou"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Utiliser la version Angular",
-    // "Use jQuery version"
-    jquery: "Utiliser la version jQuery",
-    // "Use Knockout version"
-    knockout: "Utiliser la version Knockout",
-    // "Use React version"
-    react: "Utiliser la version React",
-    // "Use Vue version"
-    vue: "Utiliser la version Vue",
-    // "For bootstrap framework"
-    bootstrap: "Pour le framework Bootstrap",
-    // [Auto-translated] "Modern theme"
-    modern: "Thème Moderne",
-    // [Auto-translated] "Default theme"
-    default: "Thème par défaut",
-    // [Auto-translated] "Orange theme"
-    orange: "Thème Orange",
-    // [Auto-translated] "Darkblue theme"
-    darkblue: "Thème Bleu foncé",
-    // [Auto-translated] "Darkrose theme"
-    darkrose: "Thème Rose foncé",
-    // [Auto-translated] "Stone theme"
-    stone: "Thème Pierre",
-    // [Auto-translated] "Winter theme"
-    winter: "Thème Hiver",
-    // [Auto-translated] "Winter-Stone theme"
-    winterstone: "Thème Winter-Stone",
-    // "Show survey on a page"
-    showOnPage: "Afficher le sondage dans une page",
-    // "Show survey in a window"
-    showInWindow: "Afficher le sondage dans une fenêtre",
-    // "Load Survey JSON from server"
-    loadFromServer: "Charger le JSON du sondage depuis un serveur",
-    // "Scripts and styles"
-    titleScript: "Scripts et styles",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2906,10 +2587,6 @@ export var frenchTranslation = {
       choices: "« Valeur » sert d’ID d’élément utilisé dans les règles conditionnelles ; « Texte » s’affiche aux répondants.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Choisissez entre « Image » et « Vidéo » pour définir le mode de contenu du sélecteur de médias. Si « Image » est sélectionné, assurez-vous que toutes les options fournies sont des fichiers image dans les formats suivants : JPEG, GIF, PNG, APNG, SVG, BMP, ICO. De même, si « Vidéo » est sélectionné, assurez-vous que toutes les options sont des liens directs vers des fichiers vidéo dans les formats suivants : MP4, MOV, WMV, FLV, AVI, MKV. Veuillez noter que les liens YouTube ne sont pas pris en charge pour les options vidéo."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Ce paramètre redimensionne uniquement le champ de saisie et n’affecte pas la largeur de la zone de question. Pour limiter la longueur de saisie acceptée, allez dans « Validation » → « Limite maximale de caractères »."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3495,16 +3172,12 @@ export var frenchTranslation = {
     primaryDarkColor: "Au survol",
     // [Auto-translated] "Selected"
     primaryLightColor: "Sélectionné",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "Couleur d’arrière-plan",
     // "Corner radius"
     cornerRadius: "Rayon d’angle",
     // [Auto-translated] "Default background"
     backcolor: "Arrière-plan par défaut",
     // [Auto-translated] "Hover background"
     hovercolor: "Arrière-plan du survol",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Décoration de bordure",
     // [Auto-translated] "Font color"
     fontColor: "Couleur de la police",
     // [Auto-translated] "Background color"
@@ -3513,8 +3186,6 @@ export var frenchTranslation = {
     primaryForecolor: "Couleur par défaut",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Couleur Désactivée",
-    // [Auto-translated] "Font"
-    font: "Police",
     // [Auto-translated] "Darker"
     borderDefault: "Sombre",
     // [Auto-translated] "Lighter"
@@ -3593,14 +3264,10 @@ export var frenchTranslation = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Arrière-plan de surface",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Primaire",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Secondaire",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Surface",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Éléments d’interface utilisateur",
     // [Auto-translated] "Font"

@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var bgStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Редактиране",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "Гледай и научи как се създават анкети.",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Моля, изтегли въпрос от кутията с инструменти.",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "Създай правило, за да персонализираш анкетата.",
-    // "Copy"
-    copy: "Копиране",
     // "Duplicate"
     duplicate: "Дубликат",
-    // "Add to toolbox"
-    addToToolbox: "Добавяне към кутията с инструменти",
-    // "Delete Panel"
-    deletePanel: "Изтриване на панел",
-    // "Delete Question"
-    deleteQuestion: "Изтриване на въпрос",
-    // "Convert to"
-    convertTo: "Преобразуване",
-    // "Drag element"
-    drag: "Изтегляне на елемент"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var bgStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "По подразбиране ({0})",
-    // "Survey"
-    survey: "Анкета",
     // "Settings"
     settings: "Настройки",
     // "Open settings"
@@ -144,42 +120,14 @@ export var bgStrings = {
     surveyTypeName: "Анкета",
     // "Page"
     pageTypeName: "Страница",
-    // "Panel"
-    panelTypeName: "Паниел",
-    // "Question"
-    questionTypeName: "Въпрос",
-    // "Column"
-    columnTypeName: "Колона",
-    // "Add New Page"
-    addNewPage: "Добавяне на нова страница",
-    // "Scroll to the Right"
-    moveRight: "Превърти надясно",
-    // "Scroll to the Left"
-    moveLeft: "Превърти наляво",
-    // "Delete Page"
-    deletePage: "Изтриване на страница",
-    // "Edit Page"
-    editPage: "Редактиране на страница",
-    // "Edit"
-    edit: "Редактиране",
     // "page"
     newPageName: "страница",
     // "question"
     newQuestionName: "въпрос",
     // "panel"
     newPanelName: "панел",
-    // "text"
-    newTextItemName: "текст",
-    // "Default"
-    defaultV2Theme: "По подразбиране",
-    // "Modern"
-    modernTheme: "Модерен",
-    // "Default (legacy)"
-    defaultTheme: "По подразбиране (по наследство)",
     // "Preview Survey Again"
     testSurveyAgain: "Прегледай анкетата отново",
-    // "Survey width: "
-    testSurveyWidth: "Широчина на анкетата: ",
     // "You had to navigate to"
     navigateToMsg: "Трябва да навигираш до",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var bgStrings = {
     undo: "Отмяна",
     // "Redo"
     redo: "Повтаряне",
-    // "Undo last change"
-    undoTooltip: "Отмяна на последната промяна",
-    // "Redo the change"
-    redoTooltip: "Повтаряне на последната промяна",
     // [Auto-translated] "Expand"
     expandTooltip: "Разширявам",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var bgStrings = {
     showMoreChoices: "Покажи повече.",
     // "Show less"
     showLessChoices: "Покажи по-малко.",
-    // "Copy"
-    copy: "Копиране",
-    // "Cut"
-    cut: "Изрязване",
-    // "Paste"
-    paste: "Поставяне на копираното",
-    // "Copy selection to clipboard"
-    copyTooltip: "Копиране на селектираното в клипборда",
-    // "Cut selection to clipboard"
-    cutTooltip: "Изрязване на селекцията в клипборда",
-    // "Paste from clipboard"
-    pasteTooltip: "Поставяне от клипборда",
-    // "Options"
-    options: "Опции",
-    // "Generate Valid JSON"
-    generateValidJSON: "Генериране на валиден JSON",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Неизвестна функция: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var bgStrings = {
     expressionSyntaxError: "Синтактична грешка.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Семантична грешка.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Генериране на четим JSON",
     // "Toolbox"
     toolbox: "Кутия с инструменти",
-    // "Properties"
-    "property-grid": "Свойства",
     // [Auto-translated] "Search"
     toolboxSearch: "Търсене",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var bgStrings = {
     propertyGridPlaceholderTitle: "Започнете да конфигурирате формуляра си",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Щракнете върху която и да е икона на категория, за да разгледате настройките на проучването. Допълнителни настройки ще станат налични, след като добавите елемент на проучване към повърхността за проектиране.",
-    // "Please correct JSON."
-    correctJSON: "Моля, коригирай JSON.",
     // "Survey Results "
     surveyResults: "Резултати от анкетата ",
     // "As Table"
@@ -294,8 +216,6 @@ export var bgStrings = {
     saving: "Спасен",
     // "Saved"
     saved: "Запазен",
-    // "Error"
-    propertyEditorError: "Грешка",
     // "Error! Editor content is not saved."
     saveError: "Грешка! Съдържанието на редактора не е запазено.",
     // "Language Settings"
@@ -354,12 +274,6 @@ export var bgStrings = {
     themeResetConfirmation: "Наистина ли искате да нулирате темата? Всички ваши персонализации ще бъдат загубени.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Да, нулирайте темата",
-    // "Bold"
-    bold: "Удебелен",
-    // "Italic"
-    italic: "Курсив",
-    // "Underline"
-    underline: "Подчертан",
     // "Add Question"
     addNewQuestion: "Добавяне на въпрос",
     // "Select page..."
@@ -507,8 +421,6 @@ export var bgStrings = {
       trigger_runExpressionDescription: "Когато логическият израз върне истина, тогава се изпълнява персонализираният израз. По желание може да зададете този израз в избрания въпрос.",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Ако логическият израз върне вярно, то текстът по подразбиране за страницата „Благодаря“ се променя с дадения.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Когато логическият израз: '{0}' върне истина", // {0} - the expression
       // "New rule"
       itemEmptyExpressionText: "Ново правило",
       // "make page {0} visible"
@@ -563,8 +475,6 @@ export var bgStrings = {
       conditions: "Условие/условия",
       // "Action(s)"
       actions: "Действие/действия",
-      // "Define condition(s)"
-      expressionEditorTitle: "Дефинирай условието/условията",
       // "Define action(s)"
       actionsEditorTitle: "Дефинирай действието/действията",
       // "Delete Action"
@@ -575,8 +485,6 @@ export var bgStrings = {
       selectedActionCaption: "Избиране на действие...",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Логическият израз е празен или невалиден. Моля, коригирайте го.",
-      // "Please add at least one action."
-      noActionError: "Моля, добави поне едно действие.",
       // "Please fix issues in your action(s)."
       actionInvalid: "Моля, отстрани проблемите във вашите действия.",
       // "Logical rules are incomplete"
@@ -878,8 +786,6 @@ export var bgStrings = {
     defaultDisplayValue: "Стойност по подразбиране за показване за динамични текстове",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Подравняване на етикети",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Ширина на полето за въвеждане (в знаци)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Подравняване на съобщение за грешка в клетка",
     // [Auto-translated] "Enabled"
@@ -888,32 +794,16 @@ export var bgStrings = {
     disabled: "Инвалид",
     // [Auto-translated] "Inherit"
     inherit: "Наследявам",
-    // "Apply"
-    apply: "Приложи",
-    // "OK"
-    ok: "ДА",
-    // "Save"
-    save: "Запази",
     // "Clear"
     clear: "Изчисти",
-    // "Save"
-    saveTooltip: "Запази",
-    // "Cancel"
-    cancel: "Откажи",
     // "Set"
     set: "Окомплектовай",
-    // "Reset"
-    reset: "Нулиране",
     // "Change"
     change: "Промени",
-    // "Refresh"
-    refresh: "Опресни",
     // "Close"
     close: "Затвори",
     // "Delete"
     delete: "Изтрий",
-    // "Add"
-    add: "Добави",
     // "Add New"
     addNew: "Добави нов",
     // "Click to add an item..."
@@ -922,34 +812,10 @@ export var bgStrings = {
     removeItem: "Кликни за изтриване на елемент...",
     // "Drag the item"
     dragItem: "Плъзни елемента",
-    // "Other"
-    addOther: "Друг",
-    // "Select All"
-    addSelectAll: "Избери всички",
-    // "None"
-    addNone: "Нито един",
-    // "Remove All"
-    removeAll: "Премахни всички",
     // "Edit"
     edit: "Редактиране",
-    // "Return without saving"
-    back: "Връщане без запазване",
-    // "Return without saving"
-    backTooltip: "Връщане без запазване",
-    // "Save and return"
-    saveAndBack: "Запазване и връщане",
-    // "Save and return"
-    saveAndBackTooltip: "Запазване и връщане",
     // "Done"
     doneEditing: "Завършен",
-    // "Edit Choices"
-    editChoices: "Редактиране на избора",
-    // "Show Choices"
-    showChoices: "Показване на избора",
-    // "Move"
-    move: "Ход",
-    // "<empty>"
-    empty: "<празен>",
     // "Value is empty"
     emptyValue: "Стойността е празна.",
     // "Manual Entry"
@@ -962,12 +828,6 @@ export var bgStrings = {
     fastEntryChoicesMinCountError: "Моля, въведете поне {0} артикула",
     // "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Може да зададеш данни в следния формат:стойност1|текстстойност2",
-    // "Form Entry"
-    formEntry: "Въвеждане на формуляр",
-    // "Test the service"
-    testService: "Тествай услугата.",
-    // "Please select the element"
-    itemSelectorEmpty: "Моля, избери елемент.",
     // "Please select the action"
     conditionActionEmpty: "Моля, избери действие.",
     // "Select a question..."
@@ -976,20 +836,8 @@ export var bgStrings = {
     conditionSelectPage: "Избери страница...",
     // "Select a panel..."
     conditionSelectPanel: "Избери панел...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Моля, въведи/избери стойността.",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Натисни ctrl+space за подсказка за окомплектоване на израза.",
-    // "Current row"
-    aceEditorRowTitle: "Текущ ред",
-    // "Current panel"
-    aceEditorPanelTitle: "Текущ панел",
-    // "For more details please check the documentation"
-    showMore: "За повече подробности, моля, провери документацията.",
-    // "Available questions"
-    assistantTitle: "Налични въпроси",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Трябва да има поне една колона или ред.",
     // "Review before submit"
     showPreviewBeforeComplete: "Визуализирай отговорите, преди да изпратиш анкетата.",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +888,12 @@ export var bgStrings = {
     "addNew@navigateToUrlOnCondition": "Добавяне на нов URL адрес",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Добавяне на нова страница",
-    // "Expression is empty"
-    expressionIsEmpty: "Изразът е празен.",
     // "Value"
     value: "Стойност",
     // "Text"
     text: "Текст",
-    // "Row ID"
-    rowid: "Идентификатор на ред",
     // "Image or video file URL"
     imageLink: "URL на изображение или видео",
-    // "Edit column: {0}"
-    columnEdit: "Редактиране на колона: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Редактиране на елемент: {0}",
     // "URL"
     url: "URL на услугата",
     // "Path to data"
@@ -1070,8 +910,6 @@ export var bgStrings = {
     imageLinkName: "Вземи URL адреси на изображения от следното JSON поле.",
     // "Accept empty response"
     allowEmptyResponse: "Разреши празен отговор.",
-    // "Title"
-    titlePlaceholder: "Заглавие",
     // "Survey Title"
     surveyTitlePlaceholder: "Заглавие на анкетата",
     // "Page {num}"
@@ -1182,16 +1020,8 @@ export var bgStrings = {
     defaultValue: "Отговор по подразбиране",
     // "Default texts"
     cellsDefaultRow: "Текстове по подразбиране",
-    // "Edit survey settings"
-    surveyEditorTitle: "Редактиране на настройките на анкетата",
-    // "Edit: {0}"
-    qEditorTitle: "Редактиране: {0}",
     // "Maximum character limit"
     maxLength: "Максимална дължина (в знаци)",
-    // "Build"
-    buildExpression: "Изграждане",
-    // "Edit"
-    editExpression: "Редактиране",
     // "and"
     and: "и",
     // "or"
@@ -1218,8 +1048,6 @@ export var bgStrings = {
     includeIntoResult: "Включете в резултатите от анкетата",
     // "Make the title and description visible"
     showTitle: "Показване на заглавието",
-    // "Expand/collapse title"
-    expandCollapseTitle: "Разширяване/свиване на заглавие",
     // "Select a survey language"
     locale: "Език на анкетата",
     // "Select device type"
@@ -1634,8 +1462,6 @@ export var bgStrings = {
     displayRateDescriptionsAsExtremeItems: "Показване описанията на скоростта като екстремни стойности",
     // "Row order"
     rowOrder: "Поредност на редовете",
-    // "Column layout"
-    columnsLayout: "Поредност на колоните",
     // "Nested column count"
     columnColCount: "Брой вложени колони",
     // "Correct Answer"
@@ -1666,22 +1492,6 @@ export var bgStrings = {
     },
     // "Logo alignment"
     logoPosition: "Позиция на логото",
-    // "Add logo..."
-    addLogo: "Добавяне на лого...",
-    // "Change logo..."
-    changeLogo: "Промяна на логото...",
-    logoPositions: {
-      // "Remove logo"
-      none: "Изтриване на логото",
-      // "Left"
-      left: "Вляво",
-      // "Right"
-      right: "Вдясно",
-      // "On the top"
-      top: "Отгоре",
-      // "In the bottom"
-      bottom: "Отдолу"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Режим на визуализация",
     // [Auto-translated] "Enable grid layout"
@@ -1694,14 +1504,8 @@ export var bgStrings = {
     detailErrorLocation: "Подравняване на съобщенията за грешка на подробните редове",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Оформление на панела"
-      },
       // "General"
       general: "Общ (главен)",
-      // "Options"
-      fileOptions: "Настройки",
       // "HTML Editor"
       html: "HTML Редактор",
       // "Columns"
@@ -1724,10 +1528,6 @@ export var bgStrings = {
       sliderSettings: "Настройки на плъзгача",
       // "Choices from a Web Service"
       choicesByUrl: "Избор от услугата RESTful",
-      // "Default Choices"
-      matrixChoices: "Избор по подразбиране",
-      // "Text Inputs"
-      multipleTextItems: "Въвеждане на текст",
       // "Numbering"
       numbering: "Номерация",
       // "Validators"
@@ -1770,8 +1570,6 @@ export var bgStrings = {
       showOnCompleted: "Проучването е завършено.",
       // "Logo in the Survey Header"
       logo: "Лого в заглавието на анкетата",
-      // "Slider"
-      slider: "Плъзгач",
       // "Expression"
       expression: "Израз (фраза)",
       // [Auto-translated] "Question Settings"
@@ -1791,62 +1589,18 @@ export var bgStrings = {
       // "Others"
       others: "Други"
     },
-    // "Edit property '{0}'"
-    editProperty: "Редактиране на свойства '{0}'",
     // "Items"
     items: "Елементи",
     // "Make choices visible if"
     choicesVisibleIf: "Изборите са видими, ако",
     // "Make choices selectable if"
     choicesEnableIf: "Изборите може да се избират, ако",
-    // "Make columns visible if"
-    columnsEnableIf: "Колоните са видими, ако",
-    // "Make rows visible if"
-    rowsEnableIf: "Редовете са видими, ако",
     // "Increase the inner indent"
     innerIndent: "Добавяне на вътрешни отстъпи",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Използване на отговорите от последния запис по подразбиране",
-    // "Please enter a value."
-    enterNewValue: "Моля, въведете стойността.",
-    // "There are no questions in the survey."
-    noquestions: "В анкетата няма въпроси.",
-    // "Please create a trigger"
-    createtrigger: "Моля, създайте тригер.",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "Натиснете бутона за въвеждане, за да редактирате.",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Натиснете бутона за въвеждане, за да редактирате елемент, натиснете бутона за изтриване, за да изтриете елемент, натиснете alt плюс стрелка нагоре или стрелка надолу, за да преместите елемент.",
-    // "On "
-    triggerOn: "На ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Направете страниците видими.",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Направете елементите видими.",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Попълнете анкетата, ако можете.",
-    // "The trigger is not set"
-    triggerNotSet: "Тригерът не е зададен.",
-    // "Run if"
-    triggerRunIf: "Работете, ако",
-    // "Change value of: "
-    triggerSetToName: "Промяна на стойността на: ",
-    // "Copy value from: "
-    triggerFromName: "Копиране на стойност от: ",
-    // "Run this Expression"
-    triggerRunExpression: "Изпълнете този израз.",
-    // "to: "
-    triggerSetValue: "до: ",
-    // "Go to the question"
-    triggerGotoName: "Отидете на въпроса.",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Не поставяйте променливата в резултата от анкетата.",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Моля, въведете валиден израз.",
     // "Type expression here..."
     emptyExpressionPlaceHolder: "Въведете израз тук...",
-    // "No file chosen"
-    noFile: "Няма избран файл.",
     // "Clear hidden question values"
     clearIfInvisible: "Изчистване на стойността, ако въпросът се скрие",
     // "Store values in the following property"
@@ -1992,10 +1746,6 @@ export var bgStrings = {
     "file-camera": "Локален файл или камера",
     // "Inherit"
     inherit: "Наследяване",
-    // "Visible"
-    show: "Видим",
-    // "Hidden"
-    hide: "Скрит",
     // "Inherit"
     default: "Наследен",
     // "Initial"
@@ -2012,8 +1762,6 @@ export var bgStrings = {
     asc: "Възходящ",
     // "Descending"
     desc: "Низходящ",
-    // "Indeterminate"
-    indeterminate: "Неопределен",
     // [Auto-translated] "Selected"
     selected: "Избран",
     // [Auto-translated] "Unselected"
@@ -2034,12 +1782,6 @@ export var bgStrings = {
     carousel: "Въртележката",
     // "Tabs"
     tab: "Раздели",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "Панел навигатор + Лента за напредък в горната част",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "Панел навигатор + Лента за напредък в долната част",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "Панел навигатор + Лента за напредък в горната и долната част",
     // "Horizontal"
     horizontal: "Хоризонтален",
     // "Vertical"
@@ -2050,8 +1792,6 @@ export var bgStrings = {
     bottom: "Долен",
     // "Top and bottom"
     topBottom: "Отгоре и отдолу",
-    // "Both"
-    both: "И двете",
     // "Left"
     left: "Вляво",
     // "Right"
@@ -2092,10 +1832,6 @@ export var bgStrings = {
     week: "седмица",
     // "Hidden"
     hidden: "Скрит",
-    // "Editable"
-    edit: "Редактируем",
-    // "Read-only"
-    display: "Само за четене",
     // [Auto-translated] "Contain"
     contain: "Съдържам",
     // [Auto-translated] "Cover"
@@ -2324,8 +2060,6 @@ export var bgStrings = {
     onNextPage: "При превключване към следващата страница",
     // "After an answer is changed"
     onValueChanged: "След промяна на отговора",
-    // "Before an answer is changed"
-    onValueChanging: "Преди да бъде променен отговор",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Оригинална структура",
@@ -2336,12 +2070,6 @@ export var bgStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Показване на едно поле за въвеждане на страница"
     },
-    // "No preview"
-    noPreview: "Без визуализация",
-    // "Show all questions"
-    showAllQuestions: "Показване на всички въпроси",
-    // "Show answered questions only"
-    showAnsweredQuestions: "Показване само на въпроси с отговор",
     // [Auto-translated] "Show all questions"
     allQuestions: "Покажи всички въпроси",
     // [Auto-translated] "Show answered questions only"
@@ -2447,12 +2175,8 @@ export var bgStrings = {
       onPage: "Нулиране на всяка страница",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Нулиране на всеки панел",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Нулиране на всеки панел",
       // [Auto-translated] "Recursive numbering"
       recursive: "Рекурсивно номериране",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Продължете през проучването",
       // [Auto-translated] "No numbering"
       off: "Без номериране"
     },
@@ -2615,49 +2339,6 @@ export var bgStrings = {
     and: "и",
     // "or"
     or: "или"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Използвайте Angular версия",
-    // "Use jQuery version"
-    jquery: "Използвайте jQuery версия",
-    // "Use Knockout version"
-    knockout: "Използвайте Knockout версия",
-    // "Use React version"
-    react: "Използвайте версията на React",
-    // "Use Vue version"
-    vue: "Използвайте версията на Vue",
-    // "For bootstrap framework"
-    bootstrap: "За bootstrap framework",
-    // "Modern theme"
-    modern: "Модерна тема",
-    // "Default theme"
-    default: "тема по подразбиране",
-    // "Orange theme"
-    orange: "Оранжева тема",
-    // "Darkblue theme"
-    darkblue: "Тъмносиня тема",
-    // "Darkrose theme"
-    darkrose: "Тъмнорозова тема",
-    // "Stone theme"
-    stone: "Каменна тема",
-    // "Winter theme"
-    winter: "Зимна тема",
-    // "Winter-Stone theme"
-    winterstone: "Зимно-каменна тема",
-    // "Show survey on a page"
-    showOnPage: "Показване на анкетата на страница",
-    // "Show survey in a window"
-    showInWindow: "Показване на анкетата в прозорец",
-    // "Load Survey JSON from server"
-    loadFromServer: "Заредете JSON на анкетата от сървъра",
-    // "Scripts and styles"
-    titleScript: "Скриптове и стилове",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2906,10 +2587,6 @@ export var bgStrings = {
       choices: "\"Стойност\" служи като идентификатор на елемента, използван в условни правила; \"Текст\" се показва на респондентите.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Изберете между \"Изображение\" и \"Видео\", за да зададете режима на съдържание на селектора на мултимедия. Ако е избрано \"Изображение\", уверете се, че всички предоставени опции са файлове с изображения в следните формати: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. По същия начин, ако е избрано \"Видео\", уверете се, че всички опции са директни връзки към видео файлове в следните формати: MP4, MOV, WMV, FLV, AVI, MKV. Моля, имайте предвид, че връзките в YouTube не се поддържат за опции за видео."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Тази настройка само преоразмерява полето за въвеждане и не засяга ширината на полето за въпроси. За да ограничите приетата дължина на въвеждане, отидете на \"Валидиране\" → \"Максимално ограничение на знаците\"."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3495,16 +3172,12 @@ export var bgStrings = {
     primaryDarkColor: "Върху",
     // "Selected"
     primaryLightColor: "Селектиран",
-    // "Background color"
-    backgroundDimColor: "Цвят на фона",
     // "Corner radius"
     cornerRadius: "Радиус на ъгъла",
     // "Default background"
     backcolor: "Фон по подразбиране",
     // "Hover background"
     hovercolor: "Фон под курсора на мишката",
-    // "Border decoration"
-    borderDecoration: "Декорация на контура",
     // [Auto-translated] "Font color"
     fontColor: "Цвят на шрифта",
     // [Auto-translated] "Background color"
@@ -3513,8 +3186,6 @@ export var bgStrings = {
     primaryForecolor: "Цвят по подразбиране",
     // "Disabled color"
     primaryForecolorLight: "Деактивиран цвят",
-    // [Auto-translated] "Font"
-    font: "Шрифт",
     // "Darker"
     borderDefault: "Преобладаващ",
     // "Lighter"
@@ -3593,14 +3264,10 @@ export var bgStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Повърхностен фон",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Първичен",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Вторичен",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Повърхност",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Елементи на потребителския интерфейс",
     // [Auto-translated] "Font"

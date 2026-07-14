@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var huStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Szerkesztés",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "Nézze meg, hogyan kell kérdőíveket készíteni.",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Kérem dobjon ide egy kérdést a bal oldali menüből.",
-    // [Auto-translated] "Create a rule to customize the flow of the survey."
-    addLogicItem: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
-    // "Copy"
-    copy: "Másolás",
     // [Auto-translated] "Duplicate"
     duplicate: "Ismétlődő",
-    // "Add to toolbox"
-    addToToolbox: "Hozzáadás az eszköztárhoz",
-    // "Delete Panel"
-    deletePanel: "Panel eltávolítása",
-    // "Delete Question"
-    deleteQuestion: "Kérdés eltávolítása",
-    // "Convert to"
-    convertTo: "Konvertálás",
-    // "Drag element"
-    drag: "Elem mozgatása"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var huStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "Alapértelmezett ({0})",
-    // "Survey"
-    survey: "Kérdőív",
     // "Settings"
     settings: "Kérdőívbeállítások",
     // [Auto-translated] "Open settings"
@@ -144,42 +120,14 @@ export var huStrings = {
     surveyTypeName: "Felmérés",
     // [Auto-translated] "Page"
     pageTypeName: "Oldal",
-    // [Auto-translated] "Panel"
-    panelTypeName: "Panel",
-    // [Auto-translated] "Question"
-    questionTypeName: "Kérdés",
-    // [Auto-translated] "Column"
-    columnTypeName: "Oszlop",
-    // "Add New Page"
-    addNewPage: "Új lap felvétele",
-    // "Scroll to the Right"
-    moveRight: "Görgetés jobbra",
-    // "Scroll to the Left"
-    moveLeft: "Görgetés balra",
-    // "Delete Page"
-    deletePage: "Lap eltávolítása",
-    // "Edit Page"
-    editPage: "Lap szerkesztése",
-    // "Edit"
-    edit: "Szerkesztés",
     // "page"
     newPageName: "lap",
     // "question"
     newQuestionName: "kérdés",
     // [Auto-translated] "panel"
     newPanelName: "Panel",
-    // "text"
-    newTextItemName: "szöveg",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "Alapértelmezett",
-    // [Auto-translated] "Modern"
-    modernTheme: "Modern",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Alapértelmezett (örökölt)",
     // "Preview Survey Again"
     testSurveyAgain: "Próba ismét",
-    // "Survey width: "
-    testSurveyWidth: "Kérdőív szélessége: ",
     // [Auto-translated] "You had to navigate to"
     navigateToMsg: "Navigálnia kellett",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var huStrings = {
     undo: "Mégse",
     // "Redo"
     redo: "Ismét",
-    // [Auto-translated] "Undo last change"
-    undoTooltip: "Utolsó módosítás visszavonása",
-    // [Auto-translated] "Redo the change"
-    redoTooltip: "Ismételje meg a módosítást",
     // [Auto-translated] "Expand"
     expandTooltip: "Kibővít",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var huStrings = {
     showMoreChoices: "Bővebben",
     // [Auto-translated] "Show less"
     showLessChoices: "Rövidebben",
-    // [Auto-translated] "Copy"
-    copy: "Másolat",
-    // [Auto-translated] "Cut"
-    cut: "Vág",
-    // [Auto-translated] "Paste"
-    paste: "Paszta",
-    // [Auto-translated] "Copy selection to clipboard"
-    copyTooltip: "Kijelölés másolása a vágólapra",
-    // [Auto-translated] "Cut selection to clipboard"
-    cutTooltip: "Kijelölés kivágása a vágólapra",
-    // [Auto-translated] "Paste from clipboard"
-    pasteTooltip: "Beillesztés vágólapról",
-    // "Options"
-    options: "Beállítások",
-    // "Generate Valid JSON"
-    generateValidJSON: "Érvényes JSON generálása",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Ismeretlen funkció: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var huStrings = {
     expressionSyntaxError: "Szintaktishiba.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Szemantikai hiba.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Olvasható JSON generálása",
     // "Toolbox"
     toolbox: "Eszköztár",
-    // [Auto-translated] "Properties"
-    "property-grid": "Kellékek",
     // [Auto-translated] "Search"
     toolboxSearch: "Keresés",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var huStrings = {
     propertyGridPlaceholderTitle: "Kezdje el konfigurálni az űrlapot",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Kattintson bármelyik kategória ikonjára a felmérési beállítások felfedezéséhez. További beállítások válnak elérhetővé, ha hozzáad egy földmérési elemet a tervezési felülethez.",
-    // "Please correct JSON."
-    correctJSON: "Kérem javítsa a JSON-t.",
     // "Survey Results "
     surveyResults: "Kérdőív eredménye: ",
     // "As Table"
@@ -294,8 +216,6 @@ export var huStrings = {
     saving: "Mentés folyamatban",
     // "Saved"
     saved: "Mentve",
-    // [Auto-translated] "Error"
-    propertyEditorError: "Hiba",
     // "Error! Editor content is not saved."
     saveError: "Hiba! A szerkesztő értéke nem került mentésre.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var huStrings = {
     themeResetConfirmation: "Tényleg vissza akarja állítani a témát? Az összes testreszabás elvész.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Igen, állítsa vissza a témát",
-    // "Bold"
-    bold: "Félkövér",
-    // "Italic"
-    italic: "Dőlt",
-    // "Underline"
-    underline: "Aláhúzott",
     // "Add Question"
     addNewQuestion: "Kérdés felvétele",
     // [Auto-translated] "Select page..."
@@ -507,8 +421,6 @@ export var huStrings = {
       trigger_runExpressionDescription: "Amikor a logikai kifejezés eredménye igaz, a felmérés egy másik kifejezést értékel ki. Opcionálisan az utóbbi kifejezés eredménye értékként rendelhető hozzá a kiválasztott kérdéshez",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Ha a logikai kifejezés igaz értéket ad vissza, akkor a \"Köszönöm oldal\" alapértelmezett szövege a megadott szövegre változik.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Amikor a kifejezés: \"{0}\" igaz értéket ad vissza", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "Új szabály",
       // [Auto-translated] "make page {0} visible"
@@ -563,8 +475,6 @@ export var huStrings = {
       conditions: "Állapot(ok)",
       // [Auto-translated] "Action(s)"
       actions: "Művelet(ek)",
-      // [Auto-translated] "Define condition(s)"
-      expressionEditorTitle: "Feltétel(ek) meghatározása",
       // [Auto-translated] "Define action(s)"
       actionsEditorTitle: "Művelet(ek) meghatározása",
       // [Auto-translated] "Delete Action"
@@ -575,8 +485,6 @@ export var huStrings = {
       selectedActionCaption: "Válassza ki a műveletet...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "A logikai kifejezés üres vagy érvénytelen. Kérjük, javítsa ki.",
-      // [Auto-translated] "Please add at least one action."
-      noActionError: "Kérjük, adjon hozzá legalább egy műveletet.",
       // [Auto-translated] "Please fix issues in your action(s)."
       actionInvalid: "Kérjük, javítsa ki a problémákat a művelet(ek)ben.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +786,6 @@ export var huStrings = {
     defaultDisplayValue: "Dinamikus szövegek alapértelmezett megjelenítési értéke",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Feliratigazítás",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Beviteli mező szélessége (karakterben)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Cellahibaüzenet igazítása",
     // [Auto-translated] "Enabled"
@@ -888,32 +794,16 @@ export var huStrings = {
     disabled: "Fogyatékos",
     // [Auto-translated] "Inherit"
     inherit: "Örököl",
-    // "Apply"
-    apply: "Alkalmaz",
-    // [Auto-translated] "OK"
-    ok: "Rendben",
-    // [Auto-translated] "Save"
-    save: "Megment",
     // [Auto-translated] "Clear"
     clear: "Világos",
-    // [Auto-translated] "Save"
-    saveTooltip: "Megment",
-    // "Cancel"
-    cancel: "Mégsem",
     // [Auto-translated] "Set"
     set: "Beállít",
-    // "Reset"
-    reset: "Visszaállítás",
     // [Auto-translated] "Change"
     change: "Változás",
-    // [Auto-translated] "Refresh"
-    refresh: "Felfrissít",
     // "Close"
     close: "Bezárás",
     // "Delete"
     delete: "Eltávolítás",
-    // [Auto-translated] "Add"
-    add: "Hozzáad",
     // "Add New"
     addNew: "Új felvétele",
     // "Click to add an item..."
@@ -922,34 +812,10 @@ export var huStrings = {
     removeItem: "Kattintson az elem eltávolításához...",
     // [Auto-translated] "Drag the item"
     dragItem: "Húzza az elemet",
-    // "Other"
-    addOther: "Egyéb",
-    // "Select All"
-    addSelectAll: "Összes kijelölése",
-    // "None"
-    addNone: "Semmi",
-    // "Remove All"
-    removeAll: "Összes eltávolítása",
     // "Edit"
     edit: "Szerkesztés",
-    // [Auto-translated] "Return without saving"
-    back: "Visszaküldés mentés nélkül",
-    // [Auto-translated] "Return without saving"
-    backTooltip: "Visszaküldés mentés nélkül",
-    // [Auto-translated] "Save and return"
-    saveAndBack: "Mentés és visszaküldés",
-    // [Auto-translated] "Save and return"
-    saveAndBackTooltip: "Mentés és visszaküldés",
     // [Auto-translated] "Done"
     doneEditing: "Kész",
-    // "Edit Choices"
-    editChoices: "Lehetőségek szerkesztése",
-    // [Auto-translated] "Show Choices"
-    showChoices: "Választási lehetőségek megjelenítése",
-    // "Move"
-    move: "Mozgatás",
-    // "<empty>"
-    empty: "<üres>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Az érték üres",
     // "Manual Entry"
@@ -962,12 +828,6 @@ export var huStrings = {
     fastEntryChoicesMinCountError: "Kérjük, adjon meg legalább {0} elemet",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Adja meg a választási lehetőségek listáját és azonosítóit a következő formátumban:\n\nid|opció\n\nA választási lehetőség azonosítója nem látható a válaszadók számára, és feltételes szabályokban használható.",
-    // "Form Entry"
-    formEntry: "Felvétel űrlappal",
-    // "Test the service"
-    testService: "Szolgáltatás tesztelése",
-    // [Auto-translated] "Please select the element"
-    itemSelectorEmpty: "Kérjük, válassza ki az elemet",
     // [Auto-translated] "Please select the action"
     conditionActionEmpty: "Kérjük, válassza ki a műveletet",
     // "Select a question..."
@@ -976,20 +836,8 @@ export var huStrings = {
     conditionSelectPage: "Válasszon ki egy oldalt...",
     // [Auto-translated] "Select a panel..."
     conditionSelectPanel: "Válasszon egy panelt...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Kérem adjon meg, vagy válasszon értéket",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Nyomja meg a ctrl+space billentyűkombinációt a kifejezés befejezésére vonatkozó segítségért.",
-    // "Current row"
-    aceEditorRowTitle: "Jelenlegi sor",
-    // "Current panel"
-    aceEditorPanelTitle: "Jelenlegi panel",
-    // "For more details please check the documentation"
-    showMore: "További információért kérem tekintse meg a dokumentációt",
-    // "Available questions"
-    assistantTitle: "Elérhető kérdések:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Legalább egy sornak vagy egy oszlopnak lennie kell",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "Áttekintés beküldés előtt",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +888,12 @@ export var huStrings = {
     "addNew@navigateToUrlOnCondition": "Új URL hozzáadása",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Új oldal hozzáadása",
-    // [Auto-translated] "Expression is empty"
-    expressionIsEmpty: "A kifejezés üres",
     // "Value"
     value: "Érték",
     // "Text"
     text: "Szöveg",
-    // "Row ID"
-    rowid: "Sor ID",
     // "Image or video file URL"
     imageLink: "Kép URL",
-    // "Edit column: {0}"
-    columnEdit: "Oszlop szerkesztése: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Elem szerkesztése: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1070,8 +910,6 @@ export var huStrings = {
     imageLinkName: "Fájl URL-címek lekérése a következő tulajdonból",
     // [Auto-translated] "Accept empty response"
     allowEmptyResponse: "Üres válasz elfogadása",
-    // [Auto-translated] "Title"
-    titlePlaceholder: "Cím",
     // [Auto-translated] "Survey Title"
     surveyTitlePlaceholder: "Felmérés címe",
     // [Auto-translated] "Page {num}"
@@ -1182,16 +1020,8 @@ export var huStrings = {
     defaultValue: "Alapértelmezett érték",
     // "Default texts"
     cellsDefaultRow: "Cellák alapértelmezett szövege",
-    // "Edit survey settings"
-    surveyEditorTitle: "Kérdőív beállításainak módosítása",
-    // "Edit: {0}"
-    qEditorTitle: "Szerkesztés: {0}",
     // "Maximum character limit"
     maxLength: "Maximális hossz",
-    // [Auto-translated] "Build"
-    buildExpression: "Épít",
-    // [Auto-translated] "Edit"
-    editExpression: "Szerkeszt",
     // [Auto-translated] "and"
     and: "és",
     // [Auto-translated] "or"
@@ -1218,8 +1048,6 @@ export var huStrings = {
     includeIntoResult: "Hozzáadás a felmérés eredményeihez",
     // "Make the title and description visible"
     showTitle: "Cím mutatása/elrejtése",
-    // [Auto-translated] "Expand/collapse title"
-    expandCollapseTitle: "Cím kibontása/összecsukása",
     // "Select a survey language"
     locale: "Alapértelmezett nyelv",
     // [Auto-translated] "Select device type"
@@ -1634,8 +1462,6 @@ export var huStrings = {
     displayRateDescriptionsAsExtremeItems: "A címkék megjelenítése szélsőséges értékekként",
     // [Auto-translated] "Row order"
     rowOrder: "Sorsorrend",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "Oszlopelrendezés",
     // [Auto-translated] "Nested column count"
     columnColCount: "Beágyazott oszlopok száma",
     // [Auto-translated] "Correct Answer"
@@ -1666,22 +1492,6 @@ export var huStrings = {
     },
     // [Auto-translated] "Logo alignment"
     logoPosition: "Logó igazítása",
-    // [Auto-translated] "Add logo..."
-    addLogo: "Logó hozzáadása...",
-    // [Auto-translated] "Change logo..."
-    changeLogo: "Logó módosítása...",
-    logoPositions: {
-      // [Auto-translated] "Remove logo"
-      none: "Embléma eltávolítása",
-      // [Auto-translated] "Left"
-      left: "Balra",
-      // [Auto-translated] "Right"
-      right: "Jobbra",
-      // [Auto-translated] "On the top"
-      top: "A tetején",
-      // [Auto-translated] "In the bottom"
-      bottom: "Alul"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Előnézeti mód",
     // [Auto-translated] "Enable grid layout"
@@ -1694,14 +1504,8 @@ export var huStrings = {
     detailErrorLocation: "Soradatok hibaüzenet-igazítása",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Panel elrendezése"
-      },
       // "General"
       general: "Általános",
-      // "Options"
-      fileOptions: "Beállítások",
       // "HTML Editor"
       html: "HTML szerkesztő",
       // "Columns"
@@ -1724,10 +1528,6 @@ export var huStrings = {
       sliderSettings: "Csúszka beállításai",
       // "Choices from a Web Service"
       choicesByUrl: "Lehetőségek a webről",
-      // "Default Choices"
-      matrixChoices: "Alapértelmezett lehetőségek",
-      // "Text Inputs"
-      multipleTextItems: "Szövegmezők",
       // [Auto-translated] "Numbering"
       numbering: "Számozás",
       // "Validators"
@@ -1770,8 +1570,6 @@ export var huStrings = {
       showOnCompleted: "\"Köszönöm\" oldal",
       // [Auto-translated] "Logo in the Survey Header"
       logo: "Embléma a földmérés fejlécében",
-      // [Auto-translated] "Slider"
-      slider: "Csúszka",
       // [Auto-translated] "Expression"
       expression: "Kifejezés",
       // [Auto-translated] "Question Settings"
@@ -1791,62 +1589,18 @@ export var huStrings = {
       // [Auto-translated] "Others"
       others: "Mások"
     },
-    // "Edit property '{0}'"
-    editProperty: "Tulajdonság szerkesztése '{0}'",
     // "Items"
     items: "[ Elemek: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Tegye láthatóvá a választásokat, ha",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "Tegye a választásokat választhatóvá, ha",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "Oszlopok láthatóvá tétele, ha",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "Tegye láthatóvá a sorokat, ha",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "A belső behúzás növelése",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Az utolsó bejegyzés válaszainak használata alapértelmezettként",
-    // "Please enter a value."
-    enterNewValue: "Kérem, adja meg az értéket.",
-    // "There are no questions in the survey."
-    noquestions: "Nincsenek kérdések a kérdőívben.",
-    // "Please create a trigger"
-    createtrigger: "Kérem hozzon létre egy eseményvezérlőt",
-    // [Auto-translated] "Press enter button to edit"
-    titleKeyboardAdornerTip: "Nyomja meg az Enter gombot a szerkesztéshez",
-    // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Nyomja meg az Enter gombot az elem szerkesztéséhez, nyomja meg a törlés gombot az elem törléséhez, nyomja meg az alt plusz felfelé vagy lefelé mutató nyilat az elem áthelyezéséhez",
-    // "On "
-    triggerOn: "Be ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Lapok láthatóvá tétele:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Elemek láthatóvá tétele:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Kérdőív befejezése, ha sikeres.",
-    // "The trigger is not set"
-    triggerNotSet: "Nincs eseménykezelő beállítva",
-    // "Run if"
-    triggerRunIf: "Futtatás ha",
-    // "Change value of: "
-    triggerSetToName: "A következő értékének cseréje: ",
-    // "Copy value from: "
-    triggerFromName: "A következő értékének másolása: ",
-    // "Run this Expression"
-    triggerRunExpression: "A következő kifejezés futtatása:",
-    // "to: "
-    triggerSetValue: "erre: ",
-    // [Auto-translated] "Go to the question"
-    triggerGotoName: "Tovább a kérdéshez",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Ne mentse az eredményt a kérdőív eredményébe.",
-    // [Auto-translated] "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Kérjük, adjon meg egy érvényes kifejezést",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Írja be ide a kifejezést...",
-    // [Auto-translated] "No file chosen"
-    noFile: "Nincs kiválasztott fájl",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "Rejtett kérdésértékek törlése",
     // [Auto-translated] "Store values in the following property"
@@ -1992,10 +1746,6 @@ export var huStrings = {
     "file-camera": "Helyi fájl vagy kamera",
     // "Inherit"
     inherit: "öröklött",
-    // "Visible"
-    show: "mutatás",
-    // "Hidden"
-    hide: "elrejtés",
     // "Inherit"
     default: "alapértelmezett",
     // "Initial"
@@ -2012,8 +1762,6 @@ export var huStrings = {
     asc: "növekvő",
     // "Descending"
     desc: "csökkenő",
-    // "Indeterminate"
-    indeterminate: "határozatlan",
     // [Auto-translated] "Selected"
     selected: "Kiválasztott",
     // [Auto-translated] "Unselected"
@@ -2034,12 +1782,6 @@ export var huStrings = {
     carousel: "Körhinta",
     // [Auto-translated] "Tabs"
     tab: "Lapfülek",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "felül",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "alul",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "alül és felül",
     // "Horizontal"
     horizontal: "horizontális",
     // "Vertical"
@@ -2050,8 +1792,6 @@ export var huStrings = {
     bottom: "lent",
     // "Top and bottom"
     topBottom: "fent és lent",
-    // [Auto-translated] "Both"
-    both: "Mindkettő",
     // "Left"
     left: "bal",
     // [Auto-translated] "Right"
@@ -2092,10 +1832,6 @@ export var huStrings = {
     week: "hét",
     // "Hidden"
     hidden: "rejtett",
-    // "Editable"
-    edit: "szerkesztés",
-    // "Read-only"
-    display: "mutatás",
     // [Auto-translated] "Contain"
     contain: "Tartalmaz",
     // [Auto-translated] "Cover"
@@ -2324,8 +2060,6 @@ export var huStrings = {
     onNextPage: "a következő lapra lépéskor",
     // "After an answer is changed"
     onValueChanged: "az érték változásakor",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "A válasz módosítása előtt",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Eredeti szerkezet",
@@ -2336,12 +2070,6 @@ export var huStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Egyetlen beviteli mező megjelenítése oldalanként"
     },
-    // [Auto-translated] "No preview"
-    noPreview: "Nincs előnézet",
-    // [Auto-translated] "Show all questions"
-    showAllQuestions: "Az összes kérdés megjelenítése",
-    // [Auto-translated] "Show answered questions only"
-    showAnsweredQuestions: "Csak a megválaszolt kérdések megjelenítése",
     // [Auto-translated] "Show all questions"
     allQuestions: "Az összes kérdés megjelenítése",
     // [Auto-translated] "Show answered questions only"
@@ -2447,12 +2175,8 @@ export var huStrings = {
       onPage: "Visszaállítás minden oldalon",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Visszaállítás minden panelen",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Visszaállítás az egyes paneleken",
       // [Auto-translated] "Recursive numbering"
       recursive: "Rekurzív számozás",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Folytassa a felmérést",
       // [Auto-translated] "No numbering"
       off: "Nincs számozás"
     },
@@ -2615,49 +2339,6 @@ export var huStrings = {
     and: "és",
     // [Auto-translated] "or"
     or: "vagy"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Angular verzió használata",
-    // "Use jQuery version"
-    jquery: "jQuery verzió használata",
-    // "Use Knockout version"
-    knockout: "Knockout verzió használata",
-    // "Use React version"
-    react: "React verzió használata",
-    // "Use Vue version"
-    vue: "Vue verzió használata",
-    // "For bootstrap framework"
-    bootstrap: "Használat Bootstrap frameworkkel",
-    // [Auto-translated] "Modern theme"
-    modern: "Modern téma",
-    // [Auto-translated] "Default theme"
-    default: "Alapértelmezett téma",
-    // [Auto-translated] "Orange theme"
-    orange: "Narancssárga téma",
-    // [Auto-translated] "Darkblue theme"
-    darkblue: "Sötétkék téma",
-    // [Auto-translated] "Darkrose theme"
-    darkrose: "Darkrose téma",
-    // [Auto-translated] "Stone theme"
-    stone: "Kő téma",
-    // [Auto-translated] "Winter theme"
-    winter: "Téli téma",
-    // [Auto-translated] "Winter-Stone theme"
-    winterstone: "Téli-kő téma",
-    // "Show survey on a page"
-    showOnPage: "Kérdőív mutatása a lapon",
-    // "Show survey in a window"
-    showInWindow: "Kérdőív mutatása egy ablakban",
-    // "Load Survey JSON from server"
-    loadFromServer: "Kérdőív JSON betöltése a szerverről",
-    // "Scripts and styles"
-    titleScript: "Szkriptek és stíluslapok",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2906,10 +2587,6 @@ export var huStrings = {
       choices: "Az \"Érték\" a feltételes szabályokban használt elemazonosítóként szolgál; A válaszadók számára a \"Szöveg\" jelenik meg.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Válasszon a \"Kép\" és a \"Videó\" között a médiaválasztó tartalommódjának beállításához. Ha a \"Kép\" van kiválasztva, győződjön meg arról, hogy az összes rendelkezésre álló opció a következő formátumú képfájlok: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Hasonlóképpen, ha a \"Video\" van kiválasztva, győződjön meg arról, hogy az összes opció közvetlen link a következő formátumú videofájlokhoz: MP4, MOV, WMV, FLV, AVI, MKV. Felhívjuk figyelmét, hogy a YouTube-linkek nem támogatottak a videóbeállításoknál."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Ez a beállítás csak a beviteli mezőt méretezi át, és nem befolyásolja a kérdésmező szélességét. Az elfogadott beviteli hossz korlátozásához lépjen az \"Ellenőrzés\" → a \"Maximális karakterkorlát\" menüpontra."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3495,16 +3172,12 @@ export var huStrings = {
     primaryDarkColor: "Lebeg",
     // [Auto-translated] "Selected"
     primaryLightColor: "Kiválasztott",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "Háttérszín",
     // "Corner radius"
     cornerRadius: "Sarok sugara",
     // [Auto-translated] "Default background"
     backcolor: "Alapértelmezett háttér",
     // [Auto-translated] "Hover background"
     hovercolor: "Háttér rámutatása",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Szegély dekoráció",
     // [Auto-translated] "Font color"
     fontColor: "Betűszín",
     // [Auto-translated] "Background color"
@@ -3513,8 +3186,6 @@ export var huStrings = {
     primaryForecolor: "Alapértelmezett szín",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Letiltott szín",
-    // [Auto-translated] "Font"
-    font: "Betűkészlet",
     // [Auto-translated] "Darker"
     borderDefault: "Sötétebb",
     // [Auto-translated] "Lighter"
@@ -3593,14 +3264,10 @@ export var huStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Felület háttér",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Elsődleges",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Másodlagos",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Felület",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Felhasználói felület elemei",
     // [Auto-translated] "Font"

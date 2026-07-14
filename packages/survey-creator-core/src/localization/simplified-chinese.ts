@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var simplifiedChineseTranslation = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "编辑",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "教学小片",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "从左侧工具箱拖个问题",
-    // [Auto-translated] "Create a rule to customize the flow of the survey."
-    addLogicItem: "创建规则以自定义调查流。",
-    // "Copy"
-    copy: "复制",
     // [Auto-translated] "Duplicate"
     duplicate: "重复",
-    // "Add to toolbox"
-    addToToolbox: "添加到工具箱",
-    // "Delete Panel"
-    deletePanel: "删除面板",
-    // "Delete Question"
-    deleteQuestion: "删除题目",
-    // "Convert to"
-    convertTo: "转变为",
-    // "Drag element"
-    drag: "拖放元件"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var simplifiedChineseTranslation = {
   ed: {
     // "Default ({0})"
     defaultLocale: "默认语言 ({0})",
-    // "Survey"
-    survey: "调查问卷",
     // "Settings"
     settings: "问卷设置",
     // [Auto-translated] "Open settings"
@@ -144,42 +120,14 @@ export var simplifiedChineseTranslation = {
     surveyTypeName: "调查",
     // [Auto-translated] "Page"
     pageTypeName: "页",
-    // [Auto-translated] "Panel"
-    panelTypeName: "面板",
-    // [Auto-translated] "Question"
-    questionTypeName: "问题",
-    // [Auto-translated] "Column"
-    columnTypeName: "列",
-    // "Add New Page"
-    addNewPage: "添加新页面",
-    // "Scroll to the Right"
-    moveRight: "滚动到右侧",
-    // "Scroll to the Left"
-    moveLeft: "滚动到左侧",
-    // "Delete Page"
-    deletePage: "删除页面",
-    // "Edit Page"
-    editPage: "编辑页面",
-    // "Edit"
-    edit: "编辑",
     // "page"
     newPageName: "页面",
     // "question"
     newQuestionName: "问题",
     // "panel"
     newPanelName: "面板",
-    // "text"
-    newTextItemName: "文本",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "违约",
-    // [Auto-translated] "Modern"
-    modernTheme: "摩登",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "默认（旧版）",
     // "Preview Survey Again"
     testSurveyAgain: "再次测试问卷",
-    // "Survey width: "
-    testSurveyWidth: "问卷宽度: ",
     // [Auto-translated] "You had to navigate to"
     navigateToMsg: "你必须导航到",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var simplifiedChineseTranslation = {
     undo: "撤销",
     // "Redo"
     redo: "恢复",
-    // [Auto-translated] "Undo last change"
-    undoTooltip: "撤消上次更改",
-    // [Auto-translated] "Redo the change"
-    redoTooltip: "重做更改",
     // [Auto-translated] "Expand"
     expandTooltip: "扩大",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var simplifiedChineseTranslation = {
     showMoreChoices: "显示更多",
     // [Auto-translated] "Show less"
     showLessChoices: "显示更少",
-    // [Auto-translated] "Copy"
-    copy: "复制",
-    // [Auto-translated] "Cut"
-    cut: "切",
-    // [Auto-translated] "Paste"
-    paste: "糊",
-    // [Auto-translated] "Copy selection to clipboard"
-    copyTooltip: "将所选内容复制到剪贴板",
-    // [Auto-translated] "Cut selection to clipboard"
-    cutTooltip: "将所选内容剪切到剪贴板",
-    // [Auto-translated] "Paste from clipboard"
-    pasteTooltip: "从剪贴板粘贴",
-    // "Options"
-    options: "选项",
-    // "Generate Valid JSON"
-    generateValidJSON: "生成 JSON 数据",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "未知功能：“{0}”。",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var simplifiedChineseTranslation = {
     expressionSyntaxError: "语法错误。",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "语义错误。",
-    // "Generate Readable JSON"
-    generateReadableJSON: "生成易读的 JSON 数据",
     // "Toolbox"
     toolbox: "工具箱",
-    // [Auto-translated] "Properties"
-    "property-grid": "性能",
     // [Auto-translated] "Search"
     toolboxSearch: "搜索",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var simplifiedChineseTranslation = {
     propertyGridPlaceholderTitle: "开始配置表单",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "单击任何类别图标以浏览调查设置。将测量元素添加到设计图面后，其他设置将变为可用。",
-    // "Please correct JSON."
-    correctJSON: "请修正 JSON 数据",
     // "Survey Results "
     surveyResults: "问卷结果: ",
     // "As Table"
@@ -294,8 +216,6 @@ export var simplifiedChineseTranslation = {
     saving: "保存中...",
     // "Saved"
     saved: "已保存",
-    // [Auto-translated] "Error"
-    propertyEditorError: "错误",
     // "Error! Editor content is not saved."
     saveError: "错误，未保存",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var simplifiedChineseTranslation = {
     themeResetConfirmation: "你真的要重置主题吗？您的所有自定义项都将丢失。",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "是，重置主题",
-    // "Bold"
-    bold: "加粗",
-    // "Italic"
-    italic: "斜体",
-    // "Underline"
-    underline: "下划线",
     // "Add Question"
     addNewQuestion: "添加问题",
     // [Auto-translated] "Select page..."
@@ -507,8 +421,6 @@ export var simplifiedChineseTranslation = {
       trigger_runExpressionDescription: "当逻辑表达式的计算结果为 true 时，调查将计算另一个表达式。可选地，可以将后一个表达式的结果作为值分配给所选问题",
       // [Auto-translated] "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "如果逻辑表达式的计算结果为 true，则“谢谢”页面将显示指定的内容。",
-      // [Auto-translated] "When expression: '{0}' returns true"
-      itemExpressionText: "当表达式：“{0}”返回 true", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "新规则",
       // [Auto-translated] "make page {0} visible"
@@ -563,8 +475,6 @@ export var simplifiedChineseTranslation = {
       conditions: "条件",
       // [Auto-translated] "Action(s)"
       actions: "操作 （s）",
-      // [Auto-translated] "Define condition(s)"
-      expressionEditorTitle: "定义条件",
       // [Auto-translated] "Define action(s)"
       actionsEditorTitle: "定义操作",
       // [Auto-translated] "Delete Action"
@@ -575,8 +485,6 @@ export var simplifiedChineseTranslation = {
       selectedActionCaption: "选择操作...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "逻辑表达式为空或无效。请更正。",
-      // [Auto-translated] "Please add at least one action."
-      noActionError: "请添加至少一个作。",
       // [Auto-translated] "Please fix issues in your action(s)."
       actionInvalid: "请解决作中的问题。",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +786,6 @@ export var simplifiedChineseTranslation = {
     defaultDisplayValue: "动态文本的默认显示值",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "标签对齐",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "输入字段宽度（以字符为单位）",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "单元格错误消息对齐方式",
     // [Auto-translated] "Enabled"
@@ -888,32 +794,16 @@ export var simplifiedChineseTranslation = {
     disabled: "禁用",
     // [Auto-translated] "Inherit"
     inherit: "继承",
-    // "Apply"
-    apply: "应用",
-    // "OK"
-    ok: "确定",
-    // [Auto-translated] "Save"
-    save: "救",
     // [Auto-translated] "Clear"
     clear: "清楚",
-    // [Auto-translated] "Save"
-    saveTooltip: "救",
-    // "Cancel"
-    cancel: "取消",
     // [Auto-translated] "Set"
     set: "设置",
-    // "Reset"
-    reset: "重置",
     // [Auto-translated] "Change"
     change: "改变",
-    // [Auto-translated] "Refresh"
-    refresh: "刷新",
     // "Close"
     close: "关闭",
     // "Delete"
     delete: "删除",
-    // [Auto-translated] "Add"
-    add: "加",
     // "Add New"
     addNew: "新建",
     // "Click to add an item..."
@@ -922,34 +812,10 @@ export var simplifiedChineseTranslation = {
     removeItem: "单击以删除该项目...",
     // [Auto-translated] "Drag the item"
     dragItem: "拖动项目",
-    // "Other"
-    addOther: "其他",
-    // "Select All"
-    addSelectAll: "全选",
-    // "None"
-    addNone: "无",
-    // "Remove All"
-    removeAll: "全部删除",
     // "Edit"
     edit: "编辑器",
-    // [Auto-translated] "Return without saving"
-    back: "退货而不保存",
-    // [Auto-translated] "Return without saving"
-    backTooltip: "退货而不保存",
-    // [Auto-translated] "Save and return"
-    saveAndBack: "保存并返回",
-    // [Auto-translated] "Save and return"
-    saveAndBackTooltip: "保存并返回",
     // [Auto-translated] "Done"
     doneEditing: "做",
-    // "Edit Choices"
-    editChoices: "编辑选项",
-    // [Auto-translated] "Show Choices"
-    showChoices: "显示选项",
-    // "Move"
-    move: "移动",
-    // "<empty>"
-    empty: "<空>",
     // [Auto-translated] "Value is empty"
     emptyValue: "值为空",
     // "Manual Entry"
@@ -962,12 +828,6 @@ export var simplifiedChineseTranslation = {
     fastEntryChoicesMinCountError: "请输入至少{0}项目",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "按以下格式输入选择选项列表及其 ID：\n\nid|选项\n\n选择选项 ID 对受访者不可见，可用于条件规则。",
-    // "Form Entry"
-    formEntry: "表单输入",
-    // "Test the service"
-    testService: "测试服务",
-    // [Auto-translated] "Please select the element"
-    itemSelectorEmpty: "请选择元素",
     // [Auto-translated] "Please select the action"
     conditionActionEmpty: "请选择操作",
     // "Select a question..."
@@ -976,20 +836,8 @@ export var simplifiedChineseTranslation = {
     conditionSelectPage: "选择一个页面...",
     // [Auto-translated] "Select a panel..."
     conditionSelectPanel: "选择面板...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "选择值",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "trl+space公式补完提示",
-    // "Current row"
-    aceEditorRowTitle: "当前行",
-    // "Current panel"
-    aceEditorPanelTitle: "当前面板",
-    // "For more details please check the documentation"
-    showMore: "更多细节请查看文档",
-    // "Available questions"
-    assistantTitle: "Available questions:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "至少有1行",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "提交前审核",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +888,12 @@ export var simplifiedChineseTranslation = {
     "addNew@navigateToUrlOnCondition": "添加新 URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "添加新页面",
-    // [Auto-translated] "Expression is empty"
-    expressionIsEmpty: "表达式为空",
     // "Value"
     value: "值",
     // "Text"
     text: "显示文本",
-    // "Row ID"
-    rowid: "行号",
     // "Image or video file URL"
     imageLink: "图片链接",
-    // "Edit column: {0}"
-    columnEdit: "编辑列: {0}",
-    // "Edit item: {0}"
-    itemEdit: "编辑选项: {0}",
     // [Auto-translated] "URL"
     url: "网址",
     // "Path to data"
@@ -1070,8 +910,6 @@ export var simplifiedChineseTranslation = {
     imageLinkName: "从以下属性获取文件 URL",
     // [Auto-translated] "Accept empty response"
     allowEmptyResponse: "接受空响应",
-    // [Auto-translated] "Title"
-    titlePlaceholder: "标题",
     // [Auto-translated] "Survey Title"
     surveyTitlePlaceholder: "调查标题",
     // [Auto-translated] "Page {num}"
@@ -1182,16 +1020,8 @@ export var simplifiedChineseTranslation = {
     defaultValue: "默认值",
     // "Default texts"
     cellsDefaultRow: "Default cells texts",
-    // "Edit survey settings"
-    surveyEditorTitle: "问卷设置",
-    // "Edit: {0}"
-    qEditorTitle: "编辑问题: {0}",
     // "Maximum character limit"
     maxLength: "最大长度",
-    // [Auto-translated] "Build"
-    buildExpression: "建",
-    // [Auto-translated] "Edit"
-    editExpression: "编辑",
     // [Auto-translated] "and"
     and: "和",
     // [Auto-translated] "or"
@@ -1218,8 +1048,6 @@ export var simplifiedChineseTranslation = {
     includeIntoResult: "添加到调查结果",
     // "Make the title and description visible"
     showTitle: "显示/隐藏 标题",
-    // [Auto-translated] "Expand/collapse title"
-    expandCollapseTitle: "展开/折叠标题",
     // "Select a survey language"
     locale: "默认语言",
     // [Auto-translated] "Select device type"
@@ -1634,8 +1462,6 @@ export var simplifiedChineseTranslation = {
     displayRateDescriptionsAsExtremeItems: "将标签显示为极值",
     // [Auto-translated] "Row order"
     rowOrder: "行顺序",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "列布局",
     // [Auto-translated] "Nested column count"
     columnColCount: "嵌套列计数",
     // [Auto-translated] "Correct Answer"
@@ -1666,22 +1492,6 @@ export var simplifiedChineseTranslation = {
     },
     // [Auto-translated] "Logo alignment"
     logoPosition: "徽标对齐",
-    // [Auto-translated] "Add logo..."
-    addLogo: "添加徽标...",
-    // [Auto-translated] "Change logo..."
-    changeLogo: "更改徽标...",
-    logoPositions: {
-      // [Auto-translated] "Remove logo"
-      none: "删除徽标",
-      // [Auto-translated] "Left"
-      left: "左",
-      // [Auto-translated] "Right"
-      right: "右",
-      // [Auto-translated] "On the top"
-      top: "在顶部",
-      // [Auto-translated] "In the bottom"
-      bottom: "在底部"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "预览模式",
     // [Auto-translated] "Enable grid layout"
@@ -1694,14 +1504,8 @@ export var simplifiedChineseTranslation = {
     detailErrorLocation: "行详细信息错误消息对齐方式",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "面板布局"
-      },
       // "General"
       general: "一般",
-      // "Options"
-      fileOptions: "选项",
       // "HTML Editor"
       html: "HTML 编辑器",
       // "Columns"
@@ -1724,10 +1528,6 @@ export var simplifiedChineseTranslation = {
       sliderSettings: "滑块设置",
       // "Choices from a Web Service"
       choicesByUrl: "通过 URL 导入选项",
-      // "Default Choices"
-      matrixChoices: "默认选项",
-      // "Text Inputs"
-      multipleTextItems: "文本输入",
       // [Auto-translated] "Numbering"
       numbering: "编号",
       // "Validators"
@@ -1770,8 +1570,6 @@ export var simplifiedChineseTranslation = {
       showOnCompleted: "“谢谢”页面",
       // [Auto-translated] "Logo in the Survey Header"
       logo: "调查标题中的徽标",
-      // [Auto-translated] "Slider"
-      slider: "滑 块",
       // [Auto-translated] "Expression"
       expression: "表达",
       // [Auto-translated] "Question Settings"
@@ -1791,62 +1589,18 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Others"
       others: "别人"
     },
-    // "Edit property '{0}'"
-    editProperty: "编辑属性: '{0}'",
     // "Items"
     items: "[ 项目数量: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "在以下情况下使选择可见",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "在以下情况下选择选项",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "在以下情况下使列可见",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "在以下情况下使行可见",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "增加内缩进",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "使用最后一个条目中的答案作为默认值",
-    // "Please enter a value."
-    enterNewValue: "请设定值",
-    // "There are no questions in the survey."
-    noquestions: "问卷中还没有创建任何问题",
-    // "Please create a trigger"
-    createtrigger: "请创建触发器",
-    // [Auto-translated] "Press enter button to edit"
-    titleKeyboardAdornerTip: "按回车键编辑",
-    // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "按回车键编辑项目，按删除按钮删除项目，按 Alt 加向上箭头或向下箭头移动项目",
-    // "On "
-    triggerOn: "当 ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "使页面可见:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "使问题可见:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "如果满足条件，则完成问卷",
-    // "The trigger is not set"
-    triggerNotSet: "触发器尚未设置",
-    // "Run if"
-    triggerRunIf: "满足下列条件时执行",
-    // "Change value of: "
-    triggerSetToName: "修改下列问题值: ",
-    // "Copy value from: "
-    triggerFromName: "复制值: ",
-    // "Run this Expression"
-    triggerRunExpression: "运行公式:",
-    // "to: "
-    triggerSetValue: "修改为: ",
-    // [Auto-translated] "Go to the question"
-    triggerGotoName: "转到问题",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "在问卷提交结果中不要包含该变量",
-    // [Auto-translated] "Please enter a valid expression"
-    triggerRunExpressionEmpty: "请输入有效的表达式",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "在此处键入表达式...",
-    // [Auto-translated] "No file chosen"
-    noFile: "未选择文件",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "清除隐藏的问题值",
     // [Auto-translated] "Store values in the following property"
@@ -1992,10 +1746,6 @@ export var simplifiedChineseTranslation = {
     "file-camera": "本地文件或摄像机",
     // "Inherit"
     inherit: "继承",
-    // "Visible"
-    show: "显示",
-    // "Hidden"
-    hide: "隐藏",
     // "Inherit"
     default: "默认",
     // "Initial"
@@ -2012,8 +1762,6 @@ export var simplifiedChineseTranslation = {
     asc: "升序",
     // "Descending"
     desc: "降序",
-    // "Indeterminate"
-    indeterminate: "indeterminate",
     // [Auto-translated] "Selected"
     selected: "选择",
     // [Auto-translated] "Unselected"
@@ -2034,12 +1782,6 @@ export var simplifiedChineseTranslation = {
     carousel: "旋转 木马",
     // [Auto-translated] "Tabs"
     tab: "制表符",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "progressTop",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "progressBottom",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "progressTopBottom",
     // "Horizontal"
     horizontal: "水平",
     // "Vertical"
@@ -2050,8 +1792,6 @@ export var simplifiedChineseTranslation = {
     bottom: "底",
     // "Top and bottom"
     topBottom: "顶和底",
-    // [Auto-translated] "Both"
-    both: "双",
     // "Left"
     left: "左",
     // [Auto-translated] "Right"
@@ -2092,10 +1832,6 @@ export var simplifiedChineseTranslation = {
     week: "周",
     // "Hidden"
     hidden: "隐藏",
-    // "Editable"
-    edit: "编辑",
-    // "Read-only"
-    display: "仅显示",
     // [Auto-translated] "Contain"
     contain: "包含",
     // [Auto-translated] "Cover"
@@ -2324,8 +2060,6 @@ export var simplifiedChineseTranslation = {
     onNextPage: "下一页时",
     // "After an answer is changed"
     onValueChanged: "值变动时",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "更改答案之前",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "原始结构",
@@ -2336,12 +2070,6 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "每页显示单个输入字段"
     },
-    // [Auto-translated] "No preview"
-    noPreview: "无预览",
-    // [Auto-translated] "Show all questions"
-    showAllQuestions: "显示所有问题",
-    // [Auto-translated] "Show answered questions only"
-    showAnsweredQuestions: "仅显示已回答的问题",
     // [Auto-translated] "Show all questions"
     allQuestions: "显示所有问题",
     // [Auto-translated] "Show answered questions only"
@@ -2447,12 +2175,8 @@ export var simplifiedChineseTranslation = {
       onPage: "在每个页面上重置",
       // [Auto-translated] "Reset on each panel"
       onpanel: "在每个面板上重置",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "在每个面板上重置",
       // [Auto-translated] "Recursive numbering"
       recursive: "递归编号",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "在整个调查中继续",
       // [Auto-translated] "No numbering"
       off: "无编号"
     },
@@ -2615,49 +2339,6 @@ export var simplifiedChineseTranslation = {
     and: "和",
     // [Auto-translated] "or"
     or: "或"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "使用 Angular 时",
-    // "Use jQuery version"
-    jquery: "使用 JQuery 时",
-    // "Use Knockout version"
-    knockout: "使用 Knockout 时",
-    // "Use React version"
-    react: "使用 React 时",
-    // "Use Vue version"
-    vue: "使用 Vue 时",
-    // "For bootstrap framework"
-    bootstrap: "使用 Bootstrap 时",
-    // [Auto-translated] "Modern theme"
-    modern: "现代主题",
-    // [Auto-translated] "Default theme"
-    default: "默认主题",
-    // [Auto-translated] "Orange theme"
-    orange: "橙色主题",
-    // [Auto-translated] "Darkblue theme"
-    darkblue: "深蓝色主题",
-    // [Auto-translated] "Darkrose theme"
-    darkrose: "“暗玫瑰”主题",
-    // [Auto-translated] "Stone theme"
-    stone: "“石头”主题",
-    // [Auto-translated] "Winter theme"
-    winter: "“冬季”主题",
-    // [Auto-translated] "Winter-Stone theme"
-    winterstone: "“冬日之石”主题",
-    // "Show survey on a page"
-    showOnPage: "嵌入页面显示",
-    // "Show survey in a window"
-    showInWindow: "使用单独的问卷窗口",
-    // "Load Survey JSON from server"
-    loadFromServer: "从服务器加载问卷 JSON 数据",
-    // "Scripts and styles"
-    titleScript: "脚本和样式",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2906,10 +2587,6 @@ export var simplifiedChineseTranslation = {
       choices: "“值”用作条件规则中使用的项目 ID;“文本”将显示给受访者。",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "在“图像”和“视频”之间进行选择以设置媒体选择器的内容模式。如果选择“图像”，请确保提供的所有选项都是以下格式的图像文件：JPEG、GIF、PNG、APNG、SVG、BMP、ICO。同样，如果选择“视频”，请确保所有选项都是指向以下格式的视频文件的直接链接：MP4、MOV、WMV、FLV、AVI、MKV。请注意，视频选项不支持 YouTube 链接。"
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "此设置仅调整输入字段的大小，不会影响问题框的宽度。要限制接受的输入长度，请转到“验证”→“最大字符限制”。"
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3495,16 +3172,12 @@ export var simplifiedChineseTranslation = {
     primaryDarkColor: "悬停",
     // [Auto-translated] "Selected"
     primaryLightColor: "选择",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "背景色",
     // "Corner radius"
     cornerRadius: "拐角半径",
     // [Auto-translated] "Default background"
     backcolor: "默认背景",
     // [Auto-translated] "Hover background"
     hovercolor: "悬停背景",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "边框装饰",
     // [Auto-translated] "Font color"
     fontColor: "字体颜色",
     // [Auto-translated] "Background color"
@@ -3513,8 +3186,6 @@ export var simplifiedChineseTranslation = {
     primaryForecolor: "默认颜色",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "禁用颜色",
-    // [Auto-translated] "Font"
-    font: "字体",
     // [Auto-translated] "Darker"
     borderDefault: "暗",
     // [Auto-translated] "Lighter"
@@ -3593,14 +3264,10 @@ export var simplifiedChineseTranslation = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "表面背景",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "主要",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "二 次",
-    // [Auto-translated] "Surface"
-    surfaceScale: "表面",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "UI 元素",
     // [Auto-translated] "Font"

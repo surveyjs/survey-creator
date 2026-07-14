@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var koreanStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "편집",
-    // [Auto-translated] "Watch and learn how to create surveys"
-    externalHelpLink: "설문조사를 만드는 방법을 보고 알아보세요.",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "왼쪽 도구상자에서 질문을 여기에 놓으십시오.",
-    // [Auto-translated] "Create a rule to customize the flow of the survey."
-    addLogicItem: "설문 조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
-    // "Copy"
-    copy: "복사",
     // [Auto-translated] "Duplicate"
     duplicate: "복사하다",
-    // "Add to toolbox"
-    addToToolbox: "도구상자에 추가",
-    // "Delete Panel"
-    deletePanel: "패널 삭제",
-    // "Delete Question"
-    deleteQuestion: "질문 삭제",
-    // "Convert to"
-    convertTo: "다음으로 변경",
-    // "Drag element"
-    drag: "항목 끌어오기"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var koreanStrings = {
   ed: {
     // [Auto-translated] "Default ({0})"
     defaultLocale: "기본값({0})",
-    // "Survey"
-    survey: "설문지",
     // "Settings"
     settings: "설정",
     // [Auto-translated] "Open settings"
@@ -144,42 +120,14 @@ export var koreanStrings = {
     surveyTypeName: "조사",
     // [Auto-translated] "Page"
     pageTypeName: "페이지",
-    // [Auto-translated] "Panel"
-    panelTypeName: "패널",
-    // [Auto-translated] "Question"
-    questionTypeName: "질문",
-    // [Auto-translated] "Column"
-    columnTypeName: "열",
-    // "Add New Page"
-    addNewPage: "새 페이지 추가",
-    // "Scroll to the Right"
-    moveRight: "오른쪽으로 스크롤",
-    // "Scroll to the Left"
-    moveLeft: "왼쪽으로 스크롤",
-    // "Delete Page"
-    deletePage: "페이지 삭제",
-    // "Edit Page"
-    editPage: "페이지 편집",
-    // "Edit"
-    edit: "편집",
     // "page"
     newPageName: "페이지",
     // "question"
     newQuestionName: "질문",
     // "panel"
     newPanelName: "패널",
-    // [Auto-translated] "text"
-    newTextItemName: "문자 메시지",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "기본값",
-    // [Auto-translated] "Modern"
-    modernTheme: "현대의",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "기본값(레거시)",
     // "Preview Survey Again"
     testSurveyAgain: "테스트 설문지 다시하기",
-    // "Survey width: "
-    testSurveyWidth: "설문지 너비: ",
     // [Auto-translated] "You had to navigate to"
     navigateToMsg: "다음으로 이동해야 했습니다.",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var koreanStrings = {
     undo: "실행 취소",
     // "Redo"
     redo: "복원",
-    // [Auto-translated] "Undo last change"
-    undoTooltip: "마지막 변경 사항 실행 취소",
-    // [Auto-translated] "Redo the change"
-    redoTooltip: "변경 내용 다시 실행",
     // [Auto-translated] "Expand"
     expandTooltip: "넓히다",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var koreanStrings = {
     showMoreChoices: "더 보기",
     // [Auto-translated] "Show less"
     showLessChoices: "간략하게 표시",
-    // [Auto-translated] "Copy"
-    copy: "복사",
-    // [Auto-translated] "Cut"
-    cut: "삭감",
-    // [Auto-translated] "Paste"
-    paste: "붙여넣기",
-    // [Auto-translated] "Copy selection to clipboard"
-    copyTooltip: "클립보드에 선택 항목 복사",
-    // [Auto-translated] "Cut selection to clipboard"
-    cutTooltip: "선택 영역을 클립보드로 잘라내기",
-    // [Auto-translated] "Paste from clipboard"
-    pasteTooltip: "클립보드에서 붙여넣기",
-    // "Options"
-    options: "옵션",
-    // "Generate Valid JSON"
-    generateValidJSON: "JSON 데이터 생성",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "알 수 없는 기능: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var koreanStrings = {
     expressionSyntaxError: "문법 오류입니다.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "의미 오류입니다.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "생성 JSON 데이터 읽기",
     // "Toolbox"
     toolbox: "도구상자",
-    // [Auto-translated] "Properties"
-    "property-grid": "속성",
     // [Auto-translated] "Search"
     toolboxSearch: "검색",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var koreanStrings = {
     propertyGridPlaceholderTitle: "양식 구성 시작",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "범주 아이콘을 클릭하여 설문조사 설정을 탐색합니다. 디자인 화면에 설문 조사 요소를 추가하면 추가 설정을 사용할 수 있게 됩니다.",
-    // "Please correct JSON."
-    correctJSON: "JSON 데이터를 수정하십시오.",
     // "Survey Results "
     surveyResults: "설문 결과: ",
     // [Auto-translated] "As Table"
@@ -294,8 +216,6 @@ export var koreanStrings = {
     saving: "저장중",
     // "Saved"
     saved: "저장됨",
-    // [Auto-translated] "Error"
-    propertyEditorError: "오류",
     // [Auto-translated] "Error! Editor content is not saved."
     saveError: "오류! 편집기 컨텐츠는 저장되지 않습니다.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var koreanStrings = {
     themeResetConfirmation: "테마를 재설정 하시겠습니까? 모든 사용자 지정이 손실됩니다.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "예, 테마를 재설정합니다.",
-    // [Auto-translated] "Bold"
-    bold: "대담한",
-    // [Auto-translated] "Italic"
-    italic: "이탤릭체",
-    // [Auto-translated] "Underline"
-    underline: "밑줄",
     // [Auto-translated] "Add Question"
     addNewQuestion: "질문 추가",
     // [Auto-translated] "Select page..."
@@ -507,8 +421,6 @@ export var koreanStrings = {
       trigger_runExpressionDescription: "논리식 값이 true로 평가되면 설문 조사는 다른 식을 평가합니다. 선택적으로 후자의 표현식의 결과를 선택한 질문에 값으로 할당할 수 있습니다",
       // [Auto-translated] "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "논리식이 true로 평가되면 \"감사합니다\" 페이지에 지정된 내용이 표시됩니다.",
-      // [Auto-translated] "When expression: '{0}' returns true"
-      itemExpressionText: "표현식: '{0}'가 true를 반환하는 경우", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "새 규칙",
       // [Auto-translated] "make page {0} visible"
@@ -563,8 +475,6 @@ export var koreanStrings = {
       conditions: "조건",
       // [Auto-translated] "Action(s)"
       actions: "작업",
-      // [Auto-translated] "Define condition(s)"
-      expressionEditorTitle: "조건 정의",
       // [Auto-translated] "Define action(s)"
       actionsEditorTitle: "작업 정의",
       // [Auto-translated] "Delete Action"
@@ -575,8 +485,6 @@ export var koreanStrings = {
       selectedActionCaption: "작업 선택...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "논리 표현식이 비어 있거나 올바르지 않습니다. 수정해 주세요.",
-      // [Auto-translated] "Please add at least one action."
-      noActionError: "적어도 하나의 작업을 추가하십시오.",
       // [Auto-translated] "Please fix issues in your action(s)."
       actionInvalid: "작업에서 문제를 해결하십시오.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -879,8 +787,6 @@ export var koreanStrings = {
     defaultDisplayValue: "동적 텍스트에 대한 기본 표시 값",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "레이블 정렬",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "입력 필드 너비(문자)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "셀 오류 메시지 맞춤",
     // [Auto-translated] "Enabled"
@@ -889,32 +795,16 @@ export var koreanStrings = {
     disabled: "비활성화",
     // [Auto-translated] "Inherit"
     inherit: "물려받다",
-    // "Apply"
-    apply: "적용",
-    // "OK"
-    ok: "확인",
-    // [Auto-translated] "Save"
-    save: "구해내다",
     // [Auto-translated] "Clear"
     clear: "맑다",
-    // [Auto-translated] "Save"
-    saveTooltip: "구해내다",
-    // "Cancel"
-    cancel: "취소",
     // [Auto-translated] "Set"
     set: "집합",
-    // "Reset"
-    reset: "재설정",
     // [Auto-translated] "Change"
     change: "잔돈",
-    // [Auto-translated] "Refresh"
-    refresh: "리프레쉬",
     // "Close"
     close: "닫기",
     // "Delete"
     delete: "삭제",
-    // [Auto-translated] "Add"
-    add: "더하다",
     // "Add New"
     addNew: "새로 만들기",
     // "Click to add an item..."
@@ -923,34 +813,10 @@ export var koreanStrings = {
     removeItem: "항목을 제거하려면 클릭하세요...",
     // [Auto-translated] "Drag the item"
     dragItem: "항목을 드래그합니다",
-    // [Auto-translated] "Other"
-    addOther: "다른",
-    // [Auto-translated] "Select All"
-    addSelectAll: "모두 선택",
-    // [Auto-translated] "None"
-    addNone: "없음",
-    // "Remove All"
-    removeAll: "모두 삭제",
     // "Edit"
     edit: "편집",
-    // [Auto-translated] "Return without saving"
-    back: "저장하지 않고 반환",
-    // [Auto-translated] "Return without saving"
-    backTooltip: "저장하지 않고 반환",
-    // [Auto-translated] "Save and return"
-    saveAndBack: "저장 및 반환",
-    // [Auto-translated] "Save and return"
-    saveAndBackTooltip: "저장 및 반환",
     // [Auto-translated] "Done"
     doneEditing: "수행",
-    // "Edit Choices"
-    editChoices: "선택사항 편집",
-    // [Auto-translated] "Show Choices"
-    showChoices: "선택 항목 표시",
-    // "Move"
-    move: "이동",
-    // "<empty>"
-    empty: "<비어있음>",
     // [Auto-translated] "Value is empty"
     emptyValue: "값이 비어 있습니다.",
     // "Manual Entry"
@@ -963,12 +829,6 @@ export var koreanStrings = {
     fastEntryChoicesMinCountError: "최소 {0} 항목을 입력하십시오.",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "선택 옵션 목록과 해당 ID를 다음 형식으로 입력합니다.\n\nid|옵션\n\n선택 옵션 ID는 응답자에게 표시되지 않으며 조건부 규칙에서 사용할 수 있습니다.",
-    // "Form Entry"
-    formEntry: "양식 입력",
-    // "Test the service"
-    testService: "서비스 테스트",
-    // [Auto-translated] "Please select the element"
-    itemSelectorEmpty: "요소를 선택해 주세요",
     // [Auto-translated] "Please select the action"
     conditionActionEmpty: "작업을 선택하십시오.",
     // "Select a question..."
@@ -977,20 +837,8 @@ export var koreanStrings = {
     conditionSelectPage: "페이지 선택...",
     // [Auto-translated] "Select a panel..."
     conditionSelectPanel: "패널 선택...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "값을 입력하거나 선택하십시오.",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "ctrl+space를 눌러 완성된 수식에 대한 힌트를 얻으십시오",
-    // "Current row"
-    aceEditorRowTitle: "현재 행",
-    // "Current panel"
-    aceEditorPanelTitle: "현재 패널",
-    // "For more details please check the documentation"
-    showMore: "자세한 내용은 설명서를 확인하십시오.",
-    // "Available questions"
-    assistantTitle: "유효 질문:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "최소한 하나의 열 또는 행이 있어야 합니다.",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "제출 전 검토",
     // [Auto-translated] "Enabled by a condition"
@@ -1041,20 +889,12 @@ export var koreanStrings = {
     "addNew@navigateToUrlOnCondition": "새 URL 추가",
     // [Auto-translated] "Add new page"
     "addNew@pages": "새 페이지 추가",
-    // [Auto-translated] "Expression is empty"
-    expressionIsEmpty: "식이 비어 있습니다.",
     // "Value"
     value: "값",
     // "Text"
     text: "텍스트",
-    // [Auto-translated] "Row ID"
-    rowid: "행 ID",
     // [Auto-translated] "Image or video file URL"
     imageLink: "이미지 또는 동영상 파일 URL",
-    // "Edit column: {0}"
-    columnEdit: "열 편집: {0}",
-    // "Edit item: {0}"
-    itemEdit: "항목 편집: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1071,8 +911,6 @@ export var koreanStrings = {
     imageLinkName: "다음 속성에서 파일 URL 가져오기",
     // [Auto-translated] "Accept empty response"
     allowEmptyResponse: "빈 응답 수락",
-    // [Auto-translated] "Title"
-    titlePlaceholder: "타이틀",
     // [Auto-translated] "Survey Title"
     surveyTitlePlaceholder: "설문조사 제목",
     // [Auto-translated] "Page {num}"
@@ -1183,16 +1021,8 @@ export var koreanStrings = {
     defaultValue: "기본값",
     // "Default texts"
     cellsDefaultRow: "기본 셀 텍스트",
-    // "Edit survey settings"
-    surveyEditorTitle: "설문지 설정 편집",
-    // "Edit: {0}"
-    qEditorTitle: "편집: {0}",
     // [Auto-translated] "Maximum character limit"
     maxLength: "최대 글자 수 제한",
-    // [Auto-translated] "Build"
-    buildExpression: "체격",
-    // [Auto-translated] "Edit"
-    editExpression: "편집하다",
     // [Auto-translated] "and"
     and: "그리고",
     // [Auto-translated] "or"
@@ -1219,8 +1049,6 @@ export var koreanStrings = {
     includeIntoResult: "설문조사 결과에 추가",
     // "Make the title and description visible"
     showTitle: "제목 표시/숨김",
-    // [Auto-translated] "Expand/collapse title"
-    expandCollapseTitle: "제목 확장/축소",
     // "Select a survey language"
     locale: "기본 언어",
     // [Auto-translated] "Select device type"
@@ -1635,8 +1463,6 @@ export var koreanStrings = {
     displayRateDescriptionsAsExtremeItems: "레이블을 극단값으로 표시",
     // [Auto-translated] "Row order"
     rowOrder: "행 순서",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "열 레이아웃",
     // [Auto-translated] "Nested column count"
     columnColCount: "중첩된 열 개수",
     // [Auto-translated] "Correct Answer"
@@ -1667,22 +1493,6 @@ export var koreanStrings = {
     },
     // [Auto-translated] "Logo alignment"
     logoPosition: "로고 정렬",
-    // [Auto-translated] "Add logo..."
-    addLogo: "로고 추가...",
-    // [Auto-translated] "Change logo..."
-    changeLogo: "로고 변경...",
-    logoPositions: {
-      // [Auto-translated] "Remove logo"
-      none: "로고 제거",
-      // [Auto-translated] "Left"
-      left: "왼쪽",
-      // [Auto-translated] "Right"
-      right: "오른쪽",
-      // [Auto-translated] "On the top"
-      top: "맨 위에",
-      // [Auto-translated] "In the bottom"
-      bottom: "하단에"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "미리보기 모드",
     // [Auto-translated] "Enable grid layout"
@@ -1695,14 +1505,8 @@ export var koreanStrings = {
     detailErrorLocation: "행 세부사항 오류 메시지 정렬",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "패널 레이아웃"
-      },
       // "General"
       general: "일반",
-      // "Options"
-      fileOptions: "옵션",
       // "HTML Editor"
       html: "Html 편집기",
       // "Columns"
@@ -1725,10 +1529,6 @@ export var koreanStrings = {
       sliderSettings: "슬라이더 설정",
       // "Choices from a Web Service"
       choicesByUrl: "웹에서 선택",
-      // "Default Choices"
-      matrixChoices: "기본 선택",
-      // "Text Inputs"
-      multipleTextItems: "텍스트 입력",
       // [Auto-translated] "Numbering"
       numbering: "번호 매기기",
       // "Validators"
@@ -1771,8 +1571,6 @@ export var koreanStrings = {
       showOnCompleted: "\"감사합니다\" 페이지",
       // [Auto-translated] "Logo in the Survey Header"
       logo: "설문조사 헤더의 로고",
-      // [Auto-translated] "Slider"
-      slider: "슬라이더",
       // [Auto-translated] "Expression"
       expression: "식",
       // [Auto-translated] "Question Settings"
@@ -1792,62 +1590,18 @@ export var koreanStrings = {
       // [Auto-translated] "Others"
       others: "다른"
     },
-    // "Edit property '{0}'"
-    editProperty: "편집 속성 '{0}'",
     // "Items"
     items: "[ 항목: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "다음과 같은 경우 선택 사항을 표시합니다.",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "다음과 같은 경우 선택 항목을 선택할 수 있습니다.",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "다음과 같은 경우 열을 표시합니다.",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "다음과 같은 경우 행을 표시합니다.",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "내부 들여쓰기 늘리기",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "마지막 항목의 답변을 기본값으로 사용",
-    // "Please enter a value."
-    enterNewValue: "값을 입력하십시오.",
-    // "There are no questions in the survey."
-    noquestions: "설문 조사에는 어떤 질문도 없습니다.",
-    // "Please create a trigger"
-    createtrigger: "트리거를 만드십시오",
-    // [Auto-translated] "Press enter button to edit"
-    titleKeyboardAdornerTip: "Enter 버튼을 눌러 편집합니다.",
-    // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "항목을 편집하려면 Enter 버튼을 누르고, 항목을 삭제하려면 삭제 버튼을 누르고, 항목을 이동하려면 alt 더하기 화살표 위쪽 또는 아래쪽 화살표를 누릅니다.",
-    // "On "
-    triggerOn: "트리거 켜기",
-    // "Make pages visible"
-    triggerMakePagesVisible: "페이지 표시:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "요소 표시:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "조건 충족 시 설문 조사를 작성하십시오.",
-    // "The trigger is not set"
-    triggerNotSet: "트리거가 설정되지 않았습니다.",
-    // "Run if"
-    triggerRunIf: "다음 조건 충족 시 실행",
-    // "Change value of: "
-    triggerSetToName: "다음 값 변경: ",
-    // [Auto-translated] "Copy value from: "
-    triggerFromName: "다음에서 값 복사: ",
-    // [Auto-translated] "Run this Expression"
-    triggerRunExpression: "이 표현식을 실행합니다.",
-    // "to: "
-    triggerSetValue: "다음으로 수정: ",
-    // [Auto-translated] "Go to the question"
-    triggerGotoName: "질문으로 이동",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "변수를 설문 결과에 넣지 마십시오.",
-    // [Auto-translated] "Please enter a valid expression"
-    triggerRunExpressionEmpty: "올바른 표현식을 입력하십시오.",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "여기에 표현식을 입력하십시오 ...",
-    // [Auto-translated] "No file chosen"
-    noFile: "선택한 파일이 없습니다.",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "숨겨진 질문 값 지우기",
     // [Auto-translated] "Store values in the following property"
@@ -1993,10 +1747,6 @@ export var koreanStrings = {
     "file-camera": "로컬 파일 또는 카메라",
     // "Inherit"
     inherit: "상속",
-    // "Visible"
-    show: "보기",
-    // "Hidden"
-    hide: "숨기기",
     // "Inherit"
     default: "기본값",
     // "Initial"
@@ -2013,8 +1763,6 @@ export var koreanStrings = {
     asc: "오름차순",
     // "Descending"
     desc: "내림차순",
-    // "Indeterminate"
-    indeterminate: "불확정",
     // [Auto-translated] "Selected"
     selected: "선택한",
     // [Auto-translated] "Unselected"
@@ -2035,12 +1783,6 @@ export var koreanStrings = {
     carousel: "회전목마",
     // [Auto-translated] "Tabs"
     tab: "탭",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "상단 진행률",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "하단 진행률",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "상하단 진행률",
     // "Horizontal"
     horizontal: "가로",
     // "Vertical"
@@ -2051,8 +1793,6 @@ export var koreanStrings = {
     bottom: "아래",
     // "Top and bottom"
     topBottom: "위아래",
-    // [Auto-translated] "Both"
-    both: "둘다",
     // "Left"
     left: "왼쪽",
     // [Auto-translated] "Right"
@@ -2093,10 +1833,6 @@ export var koreanStrings = {
     week: "주",
     // "Hidden"
     hidden: "숨김",
-    // "Editable"
-    edit: "편집",
-    // "Read-only"
-    display: "디스플레이",
     // [Auto-translated] "Contain"
     contain: "포함하다",
     // [Auto-translated] "Cover"
@@ -2325,8 +2061,6 @@ export var koreanStrings = {
     onNextPage: "다음 페이지로",
     // "After an answer is changed"
     onValueChanged: "값 변경",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "답변이 변경되기 전에",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "원래 구조",
@@ -2337,12 +2071,6 @@ export var koreanStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "페이지당 단일 입력 필드 표시"
     },
-    // [Auto-translated] "No preview"
-    noPreview: "미리보기 없음",
-    // [Auto-translated] "Show all questions"
-    showAllQuestions: "모든 질문 표시",
-    // [Auto-translated] "Show answered questions only"
-    showAnsweredQuestions: "답변된 질문만 표시",
     // [Auto-translated] "Show all questions"
     allQuestions: "모든 질문 보기",
     // [Auto-translated] "Show answered questions only"
@@ -2448,12 +2176,8 @@ export var koreanStrings = {
       onPage: "각 페이지에서 재설정",
       // [Auto-translated] "Reset on each panel"
       onpanel: "각 패널에서 재설정",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "각 패널에서 재설정",
       // [Auto-translated] "Recursive numbering"
       recursive: "재귀 번호 매기기",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "설문조사 계속하기",
       // [Auto-translated] "No numbering"
       off: "번호 매기기 없음"
     },
@@ -2616,49 +2340,6 @@ export var koreanStrings = {
     and: "그리고",
     // [Auto-translated] "or"
     or: "또는"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Angular 버전 사용",
-    // "Use jQuery version"
-    jquery: "jQuery 버전 사용",
-    // "Use Knockout version"
-    knockout: "Knockout 버전 사용",
-    // "Use React version"
-    react: "React 버전 사용",
-    // "Use Vue version"
-    vue: "Vue 버전 사용",
-    // "For bootstrap framework"
-    bootstrap: "부트 스트랩 프레임",
-    // [Auto-translated] "Modern theme"
-    modern: "현대 테마",
-    // [Auto-translated] "Default theme"
-    default: "기본 테마",
-    // [Auto-translated] "Orange theme"
-    orange: "오렌지 테마",
-    // [Auto-translated] "Darkblue theme"
-    darkblue: "진한 파란색 테마",
-    // [Auto-translated] "Darkrose theme"
-    darkrose: "다크로즈 테마",
-    // [Auto-translated] "Stone theme"
-    stone: "돌 테마",
-    // [Auto-translated] "Winter theme"
-    winter: "겨울 테마",
-    // [Auto-translated] "Winter-Stone theme"
-    winterstone: "겨울 돌 테마",
-    // "Show survey on a page"
-    showOnPage: "페이지에서 설문조사 보기",
-    // "Show survey in a window"
-    showInWindow: "윈도우 창에서 설문조사 보기",
-    // "Load Survey JSON from server"
-    loadFromServer: "서버에서 설문조사 JSON 실행",
-    // "Scripts and styles"
-    titleScript: "스크립트 및 스타일",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // "JavaScript"
-    titleJavaScript: "자바스크립트"
   },
   // Preview (Survey)
   ts: {
@@ -2907,10 +2588,6 @@ export var koreanStrings = {
       choices: "\"값\"은 조건부 규칙에 사용되는 항목 ID 역할을 합니다. 응답자에게 \"텍스트\"가 표시됩니다.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "\"이미지\"와 \"비디오\" 중에서 선택하여 미디어 선택기의 콘텐츠 모드를 설정합니다. \"이미지\"를 선택한 경우 제공된 모든 옵션이 JPEG, GIF, PNG, APNG, SVG, BMP, ICO 형식의 이미지 파일인지 확인하십시오. 마찬가지로 \"비디오\"를 선택한 경우 모든 옵션이 MP4, MOV, WMV, FLV, AVI, MKV 형식의 비디오 파일에 대한 직접 링크인지 확인하십시오. YouTube 링크는 비디오 옵션에서 지원되지 않습니다."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "이 설정은 입력 필드의 크기만 조정하며 질문 상자의 너비에는 영향을 주지 않습니다. 허용되는 입력 길이를 제한하려면 \"유효성 검사\" → \"최대 문자 제한\"으로 이동합니다."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3496,16 +3173,12 @@ export var koreanStrings = {
     primaryDarkColor: "호버",
     // [Auto-translated] "Selected"
     primaryLightColor: "선택한",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "배경색",
     // "Corner radius"
     cornerRadius: "코너 반경",
     // [Auto-translated] "Default background"
     backcolor: "기본 배경",
     // [Auto-translated] "Hover background"
     hovercolor: "배경 가리키기",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "테두리 장식",
     // [Auto-translated] "Font color"
     fontColor: "글꼴 색상",
     // [Auto-translated] "Background color"
@@ -3514,8 +3187,6 @@ export var koreanStrings = {
     primaryForecolor: "기본 색상",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "비활성화 된 색상",
-    // [Auto-translated] "Font"
-    font: "글꼴",
     // [Auto-translated] "Darker"
     borderDefault: "어두운",
     // [Auto-translated] "Lighter"
@@ -3594,14 +3265,10 @@ export var koreanStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "표면 배경",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "본래의",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "보조",
-    // [Auto-translated] "Surface"
-    surfaceScale: "표면",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "UI 요소",
     // [Auto-translated] "Font"
