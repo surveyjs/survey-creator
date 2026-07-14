@@ -4,7 +4,7 @@ export var jaStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "複製",
+    duplicate: "複製"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var jaStrings = {
       column_setValueText: "セル値の割り当て:列への{1}:{0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "結果が対象の質問に割り当てられる式。",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "値を入力する...",
       // "survey becomes completed"
       trigger_completeText: "アンケートが完了する",
       // "set into question: {0} value {1}"

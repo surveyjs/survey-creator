@@ -4,7 +4,7 @@ export var czStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Duplikovat",
+    duplicate: "Duplikovat"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var czStrings = {
       column_setValueText: "Přiřaďte hodnotu buňky: {1} sloupci: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Výraz, jehož výsledek bude přiřazen k cílové otázce.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Zadejte hodnotu...",
       // "survey becomes completed"
       trigger_completeText: "Průzkum se stává dokončeným",
       // "set into question: {0} value {1}"

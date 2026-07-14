@@ -4,7 +4,7 @@ export var msStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Pendua",
+    duplicate: "Pendua"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var msStrings = {
       column_setValueText: "Peruntukkan nilai sel: {1} kepada lajur: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Ungkapan yang hasilnya akan diberikan kepada soalan sasaran.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Masukkan nilai...",
       // "survey becomes completed"
       trigger_completeText: "Tinjauan dilengkapkan",
       // "set into question: {0} value {1}"

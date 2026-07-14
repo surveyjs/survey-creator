@@ -4,7 +4,7 @@ export const roStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Duplică",
+    duplicate: "Duplică"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export const roStrings = {
       column_setValueText: "atribuiți valoarea celulei: {1} coloanei: {0}", // {0} column name and {1} setValueExpression
       // "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "O expresie al cărei rezultat va fi atribuit întrebării țintă.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Introdu o valoare...",
       // "survey becomes completed"
       trigger_completeText: "chestionarul devine completat",
       // "set into question: {0} value {1}"

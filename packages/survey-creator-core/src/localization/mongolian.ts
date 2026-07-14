@@ -4,7 +4,7 @@ export var mnStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Хуулбарлах",
+    duplicate: "Хуулбарлах"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var mnStrings = {
       column_setValueText: "эсийн үнэ цэнийг хуваарил: {1} багана: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Үр дүн нь бай асуултанд оногдох илэрхийлэлт.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Утга оруул...",
       // "survey becomes completed"
       trigger_completeText: "Санал асуулга амжилттай бөглөсөн.",
       // "set into question: {0} value {1}"

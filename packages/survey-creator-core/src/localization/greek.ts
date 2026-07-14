@@ -4,7 +4,7 @@ export var grStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Διπλασιασμός",
+    duplicate: "Διπλασιασμός"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var grStrings = {
       column_setValueText: "ορισμός τιμής: {1} για τη στήλη: {0}", // {0} column name and {1} setValueExpression
       // "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Μια έκφραση της οποίας το αποτέλεσμα θα αποδοθεί στην επιλεγμένη ερώτηση.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Εισαγάγετε μια τιμή...",
       // "survey becomes completed"
       trigger_completeText: "το ερωτηματολόγιο ολοκληρώνεται",
       // "set into question: {0} value {1}"

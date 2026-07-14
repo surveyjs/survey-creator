@@ -4,7 +4,7 @@ export var persianStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "کپی کردن",
+    duplicate: "کپی کردن"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var persianStrings = {
       column_setValueText: "اختصاص مقدار سلول: {1} به ستون: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "عبارتی که نتیجه آن به سوال هدف اختصاص داده می شود.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "یک مقدار وارد کنید...",
       // "survey becomes completed"
       trigger_completeText: "بررسی نظرسنجی تمام شد",
       // "set into question: {0} value {1}"

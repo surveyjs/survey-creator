@@ -4,7 +4,7 @@ export var hebrewStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "שכפול",
+    duplicate: "שכפול"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var hebrewStrings = {
       column_setValueText: "הקצאת ערך תא: {1} לעמודה: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "ביטוי שתוצאתו תוקצה לשאלת היעד.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "הכנס ערך...",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "הסקר הושלם",
       // [Auto-translated] "set into question: {0} value {1}"

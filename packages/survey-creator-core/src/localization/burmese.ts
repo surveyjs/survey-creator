@@ -4,7 +4,7 @@ export var mmStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "မိတ္တူပြုလုပ်ပါ",
+    duplicate: "မိတ္တူပြုလုပ်ပါ"
   },
   // Creator tabs
   tabs: {

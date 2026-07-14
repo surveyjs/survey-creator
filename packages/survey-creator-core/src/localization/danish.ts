@@ -4,7 +4,7 @@ export var danishStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Multiplicere",
+    duplicate: "Multiplicere"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var danishStrings = {
       column_setValueText: "Tildel celleværdi: {1} til kolonne: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Et udtryk, hvis resultat tildeles målspørgsmålet.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Indtast en værdi...",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "Undersøgelsen bliver afsluttet",
       // [Auto-translated] "set into question: {0} value {1}"

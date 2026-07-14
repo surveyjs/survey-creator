@@ -4,7 +4,7 @@ export var indonesianStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Duplikat",
+    duplicate: "Duplikat"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var indonesianStrings = {
       column_setValueText: "Menetapkan nilai sel: {1} ke kolom: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Masukkan nilai...",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "Survei menjadi selesai",
       // [Auto-translated] "set into question: {0} value {1}"

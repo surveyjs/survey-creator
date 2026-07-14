@@ -4,7 +4,7 @@ export var nlStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Duplicaat",
+    duplicate: "Duplicaat"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var nlStrings = {
       column_setValueText: "Celwaarde: {1} toewijzen aan kolom: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Voer een waarde in...",
       // "survey becomes completed"
       trigger_completeText: "Enquête wordt voltooid",
       // "set into question: {0} value {1}"

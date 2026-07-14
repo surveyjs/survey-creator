@@ -4,7 +4,7 @@ export var slStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Dvojnik",
+    duplicate: "Dvojnik"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var slStrings = {
       column_setValueText: "dodeli vrednost celice: {1} stolpcu: {0}", // {0} column name and {1} setValueExpression
       // "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Izraz, katerega rezultat bo dodeljen ciljnemu vprašanju.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Vnesi vrednost...",
       // "survey becomes completed"
       trigger_completeText: "anketa je zaključena",
       // "set into question: {0} value {1}"

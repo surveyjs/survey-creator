@@ -4,7 +4,7 @@ export var fiStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Monista",
+    duplicate: "Monista"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var fiStrings = {
       column_setValueText: "Määritä solun arvo: {1} sarakkeeseen: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Lauseke, jonka tulos määritetään kohdekysymykseen.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Syötä arvo...",
       // "survey becomes completed"
       trigger_completeText: "Kyselystä tulee täytetty",
       // "set into question: {0} value {1}"

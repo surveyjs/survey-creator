@@ -4,7 +4,7 @@ export var traditionalChineseTranslation = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "重複",
+    duplicate: "重複"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var traditionalChineseTranslation = {
       column_setValueText: "將儲存格值：{1}分配給列：{0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "一個表達式，其結果將分配給目標問題。",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "輸入一個數值......",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "調查完成",
       // [Auto-translated] "set into question: {0} value {1}"

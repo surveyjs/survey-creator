@@ -4,7 +4,7 @@ export let svStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Duplicera",
+    duplicate: "Duplicera"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export let svStrings = {
       column_setValueText: "Tilldela cellvärde: {1} till kolumn: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Ett uttryck vars resultat kommer att tilldelas målfrågan.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Ange ett värde...",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "Undersökningen blir slutförd",
       // [Auto-translated] "set into question: {0} value {1}"

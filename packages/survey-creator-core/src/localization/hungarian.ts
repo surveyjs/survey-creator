@@ -4,7 +4,7 @@ export var huStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Ismétlődő",
+    duplicate: "Ismétlődő"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var huStrings = {
       column_setValueText: "Cellaérték hozzárendelése: {1} oszlophoz: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Írj be egy értéket...",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "A felmérés befejeződött",
       // [Auto-translated] "set into question: {0} value {1}"

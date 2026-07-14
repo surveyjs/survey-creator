@@ -4,7 +4,7 @@ export var catalanTranslation = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Duplicar",
+    duplicate: "Duplicar"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var catalanTranslation = {
       column_setValueText: "Asignar valor de celda: {1} a columna: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Una expressió cuyo resultado se asignará a la pregunta de destino.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Introdueix un valor...",
       // "survey becomes completed"
       trigger_completeText: "La enquesta se completa",
       // "set into question: {0} value {1}"

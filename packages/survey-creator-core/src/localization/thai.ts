@@ -4,7 +4,7 @@ export const thStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "ทำซ้ำ",
+    duplicate: "ทำซ้ำ"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export const thStrings = {
       column_setValueText: "กำหนดค่าคอลัมน์: {1} ให้คอลัมน์: {0}", // {0} column name and {1} setValueExpression
       // "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "นิพจน์ที่ผลลัพธ์จะถูกกำหนดให้กับคำถามเป้าหมาย",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "ป้อนค่า...",
       // "survey becomes completed"
       trigger_completeText: "แบบสำรวจเสร็จสิ้น",
       // "set into question: {0} value {1}"

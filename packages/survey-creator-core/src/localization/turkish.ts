@@ -4,7 +4,7 @@ export var turkishStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Yinelenen",
+    duplicate: "Yinelenen"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var turkishStrings = {
       column_setValueText: "Hücre değeri atayın: Sütuna {1}: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Sonucu hedef soruya atanacak bir ifade.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Bir değer gir...",
       // "survey becomes completed"
       trigger_completeText: "Anket tamamlandı",
       // "set into question: {0} value {1}"

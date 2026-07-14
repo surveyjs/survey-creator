@@ -4,7 +4,7 @@ export var germanTranslation = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Duplizieren",
+    duplicate: "Duplizieren"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var germanTranslation = {
       column_setValueText: "Zellenwert zuweisen: {1} zur Spalte: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Ein Ausdruck, dessen Ergebnis der Zielfrage zugewiesen wird.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Geben Sie einen Wert ein...",
       // "survey becomes completed"
       trigger_completeText: "Umfrage abschließen",
       // "set into question: {0} value {1}"

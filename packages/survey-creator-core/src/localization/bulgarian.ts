@@ -4,7 +4,7 @@ export var bgStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Дубликат",
+    duplicate: "Дубликат"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var bgStrings = {
       column_setValueText: "Присвояване на стойност на клетка: {1} на колона: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Израз, чийто резултат ще бъде присвоен на целевия въпрос.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Въведете стойност...",
       // "survey becomes completed"
       trigger_completeText: "анкетата е завършена",
       // "set into question: {0} value {1}"

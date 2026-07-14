@@ -4,7 +4,7 @@ export var nbStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Duplikat",
+    duplicate: "Duplikat"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var nbStrings = {
       column_setValueText: "Tilordne celleverdi: {1} til kolonne: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Et uttrykk der resultatet skal tilordnes målspørsmålet.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Skriv inn en verdi...",
       // "survey becomes completed"
       trigger_completeText: "Skjemaet blir fullført",
       // "set into question: {0} value {1}"

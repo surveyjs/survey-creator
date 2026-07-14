@@ -4,7 +4,7 @@ export var frenchTranslation = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Dupliquer",
+    duplicate: "Dupliquer"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var frenchTranslation = {
       column_setValueText: "Affecter la valeur de la cellule : {1} à la colonne : {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Expression dont le résultat sera attribué à la question cible.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Entrez une valeur...",
       // "survey becomes completed"
       trigger_completeText: "Le sondage se termine.",
       // "set into question: {0} value {1}"

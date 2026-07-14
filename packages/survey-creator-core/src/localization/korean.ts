@@ -4,7 +4,7 @@ export var koreanStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "복사하다",
+    duplicate: "복사하다"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var koreanStrings = {
       column_setValueText: "셀 값 할당 : {1} 열 : {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "결과가 대상 질문에 할당되는 표현식입니다.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "값을 입력하세요...",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "조사가 완료됩니다",
       // [Auto-translated] "set into question: {0} value {1}"

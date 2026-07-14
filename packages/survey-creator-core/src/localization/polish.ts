@@ -4,7 +4,7 @@ export var polishStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Duplikat",
+    duplicate: "Duplikat"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var polishStrings = {
       column_setValueText: "Przypisz wartość komórki: {1} do kolumny: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Wyrażenie, którego wynik zostanie przypisany do pytania docelowego.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Wprowadź wartość...",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "Ankieta zostaje zakończona",
       // [Auto-translated] "set into question: {0} value {1}"

@@ -4,7 +4,7 @@ export var arStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "نسخة طبق الأصل",
+    duplicate: "نسخة طبق الأصل"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var arStrings = {
       column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "تعبير سيتم تعيين نتيجته للسؤال الهدف.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "أدخل قيمة...",
       // "survey becomes completed"
       trigger_completeText: "الإستبيان سيصبح مكتمل",
       // "set into question: {0} value {1}"

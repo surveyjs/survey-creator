@@ -4,7 +4,7 @@ export var htStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Diplike",
+    duplicate: "Diplike"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var htStrings = {
       column_setValueText: "bay valè selilè: {1} nan kolòn: {0}", // {0} column name and {1} setValueExpression
       // "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Yon ekspresyon ki gen rezilta yo pral asiyen nan kesyon sib la.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Antre yon valè...",
       // "survey becomes completed"
       trigger_completeText: "sondaj la fini",
       // "set into question: {0} value {1}"

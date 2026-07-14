@@ -4,7 +4,7 @@ export var ruStrings = {
   // survey templates
   survey: {
     // [Auto-translated] "Duplicate"
-    duplicate: "Дублировать",
+    duplicate: "Дублировать"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var ruStrings = {
       column_setValueText: "Присвойте значение ячейки: {1} столбцу: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Выражение, результат которого будет присвоен целевому вопросу.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Введите значение...",
       // "survey becomes completed"
       trigger_completeText: "Опрос становится завершенным",
       // "set into question: {0} value {1}"

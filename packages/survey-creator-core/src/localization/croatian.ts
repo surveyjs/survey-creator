@@ -4,7 +4,7 @@ export var hrStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Duplikata",
+    duplicate: "Duplikata"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var hrStrings = {
       column_setValueText: "Dodijeli vrijednost ćelije: {1} stupcu: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Izraz čiji će rezultat biti dodijeljen ciljnom pitanju.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Unesite vrijednost...",
       // "survey becomes completed"
       trigger_completeText: "Anketa se dovrša",
       // "set into question: {0} value {1}"

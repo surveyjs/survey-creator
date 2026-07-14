@@ -4,7 +4,7 @@ export var skStrings = {
   // survey templates
   survey: {
     // "Duplicate"
-    duplicate: "Duplikovať",
+    duplicate: "Duplikovať"
   },
   // Creator tabs
   tabs: {
@@ -451,6 +451,8 @@ export var skStrings = {
       column_setValueText: "Priradenie hodnoty bunky: {1} do stĺpca: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Výraz, ktorého výsledok bude priradený k cieľovej otázke.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Zadajte hodnotu...",
       // "survey becomes completed"
       trigger_completeText: "Prieskum bude dokončený",
       // "set into question: {0} value {1}"
