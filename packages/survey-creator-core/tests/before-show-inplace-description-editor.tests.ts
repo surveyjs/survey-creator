@@ -297,3 +297,60 @@ test("onBeforeShowInplaceDescriptionEditor: setting/clearing the description in 
     expect(isDescriptionRendered(creator, type), `${type}: hidden after clearing the description in code`).toBe(false);
   });
 });
+
+test("onBeforeShowInplaceDescriptionEditor: panel adorner - the description input appears with the title and disappears without it, Bug#7861", () => {
+  const creator = new CreatorTester();
+  // Every time the event is raised for panel1, remember the title/description it saw and the decision it made.
+  const raisedForPanel: Array<{ title: string, description: string, show: boolean }> = [];
+  creator.onBeforeShowInplaceDescriptionEditor.add((_, options: BeforeShowInplaceDescriptionEditorEvent) => {
+    const element: any = options.element;
+    const hasDescription = !!element.description;
+    const hasTitle = !!element.title;
+    if (element.isPanel) {
+      options.show = hasTitle && hasDescription;
+      raisedForPanel.push({ title: element.title, description: element.description, show: options.show });
+    }
+  });
+  creator.JSON = {
+    elements: [
+      { type: "panel", name: "panel1", elements: [{ type: "text", name: "q1" }] }
+    ]
+  };
+  const panel1 = creator.survey.getPanelByName("panel1") as PanelModel;
+  // The design surface renders the panel through its adorner, which wires the in-place description editor.
+  const adorner = new QuestionAdornerViewModel(creator, <any>panel1, <any>{});
+  expect((panel1.locDescription as any).placeholder, "the in-place description editor is wired").toBe("pe.descriptionPlaceholder");
+
+  // The design surface renders the panel once. hasDescriptionUnderTitle is what the panel header
+  // binds to when it decides whether to render the description element.
+  expect(panel1.hasDescriptionUnderTitle, "no title, no description: description input hidden").toBe(false);
+  raisedForPanel.length = 0;
+
+  // From now on nothing reads the visibility: each change must raise the event by itself, otherwise
+  // the UI is never told to re-render the description input.
+
+  // 1. Set the description: the event is raised, but the description input stays hidden, because
+  // the panel has no title yet.
+  panel1.description = "Panel description";
+  expect(raisedForPanel.length, "the event is raised after the description is set").toBe(1);
+  expect(raisedForPanel[0], "the event sees the new description and hides it").toStrictEqual(
+    { title: "", description: "Panel description", show: false });
+
+  // 2. Set the title: the event is raised again and the description input appears.
+  panel1.title = "Panel title";
+  expect(raisedForPanel.length, "the event is raised after the title is set").toBe(2);
+  expect(raisedForPanel[1], "the event sees the new title and shows the description").toStrictEqual(
+    { title: "Panel title", description: "Panel description", show: true });
+
+  // 3. Clear the title: the event is raised again and the description input disappears.
+  panel1.title = "";
+  expect(raisedForPanel.length, "the event is raised after the title is cleared").toBe(3);
+  expect(raisedForPanel[2], "the event sees the cleared title and hides the description").toStrictEqual(
+    { title: "", description: "Panel description", show: false });
+
+  // The rendered flag already holds the value the last event produced, no extra event is raised.
+  expect(panel1.hasDescriptionUnderTitle, "description input hidden again").toBe(false);
+  expect(raisedForPanel.length, "reading the rendered flag raises no further event").toBe(3);
+
+  adorner.dispose();
+});
