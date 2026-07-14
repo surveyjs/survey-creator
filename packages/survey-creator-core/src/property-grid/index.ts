@@ -1715,6 +1715,7 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     if (question.getType() == "text" || question.getType() == "comment") {
       const textQuestion = question as QuestionTextBase;
       if (!textQuestion.getMaxLength() && obj.hasDefaultPropertyValue(prop.name)) {
+        this.setupDefaultValuePlaceholder(obj, textQuestion, prop);
         const isDefaultValue = () => prop.isDefaultValueByObj(obj, prop.getValue(obj));
         const action = new Action({
           id: "reset",
@@ -1732,6 +1733,19 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
         textQuestion.inputActionsContainer.addAction(action);
       }
     }
+  }
+  //Show the default property value as the placeholder. It is based on the edited object locale and doesn't depend on the creator locale.
+  private setupDefaultValuePlaceholder(obj: Base, question: QuestionTextBase, prop: JsonObjectProperty): void {
+    Object.defineProperty(question, "renderedPlaceholder", {
+      configurable: true,
+      get: (): string => {
+        if (question.isReadOnly) return "";
+        if (!!question.placeholder) return question.placeholder;
+        const locStr = obj.getLocalizableString(prop.name);
+        const res = !!locStr ? locStr.getPlaceholder() : "";
+        return res || obj.getDefaultPropertyValue(prop.name) || "";
+      }
+    });
   }
 }
 export class PropertyGridEditorString extends PropertyGridEditorStringBase {

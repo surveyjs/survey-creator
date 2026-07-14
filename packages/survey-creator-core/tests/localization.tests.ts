@@ -125,11 +125,11 @@ test("change default ('en') locale", () => {
 
 test("change string to empty string", () => {
   var enStrings = defaultStrings;
-  var prevValue = enStrings.ed.newTextItemName;
-  enStrings.ed.newTextItemName = "";
+  var prevValue = enStrings.ed.addNewQuestion;
+  enStrings.ed.addNewQuestion = "";
 
-  expect(editorLocalization.getString("ed.newTextItemName")).toEqual("");
-  enStrings.ed.newTextItemName = prevValue;
+  expect(editorLocalization.getString("ed.addNewQuestion")).toEqual("");
+  enStrings.ed.addNewQuestion = prevValue;
 });
 
 test("getPropertyNameInEditor", () => {
@@ -148,7 +148,7 @@ test("getPropertyNameInEditor, go to p, if pe is emtpy", () => {
   expect(editorLocalization.getPropertyNameInEditor("question", "isRequired2")).toEqual("some new text");
 });
 test("getPropertyValue and convertToCamelCase", () => {
-  expect(editorLocalization.getPropertyValue("progressTop")).toEqual("Panel navigator + Progress bar at the top");
+  expect(editorLocalization.getPropertyValue("file")).toEqual("Local file");
   expect(editorLocalization.convertToCamelCase("onTop")).toEqual("On top");
   expect(editorLocalization.convertToCamelCase("USD")).toEqual("USD");
   expect(editorLocalization.convertToCamelCase("USD", true)).toEqual("USD");
