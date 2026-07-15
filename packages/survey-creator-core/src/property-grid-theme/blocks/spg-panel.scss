@@ -22,7 +22,10 @@
   background-color: var(--sjs2-color-bg-basic-primary);
   box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary);
   margin: 0;
-  transition: color $creator-transition-duration, background-color $creator-transition-duration, opacity $creator-transition-duration;
+  transition:
+    color $creator-transition-duration,
+    background-color $creator-transition-duration,
+    opacity $creator-transition-duration;
 }
 
 .spg-panel__title:disabled,
@@ -64,16 +67,16 @@
   box-sizing: border-box;
   background: var(--sjs2-color-utility-property-grid);
   box-shadow: inset 0px -1px 0px var(--sjs2-color-border-basic-secondary);
-// }
+  // }
 
-// .spg-panel__content {
+  // .spg-panel__content {
 
   .spg-row {
     width: 100%;
     // margin-top: var(--sjs2-spacing-x200);
   }
 
-  .spg-row--multiple {
+  .spg-row--multiple:where(:not(:first-of-type)) {
     margin-top: var(--sjs2-spacing-negative-x100);
   }
 }
@@ -106,8 +109,9 @@
   animation-duration: $spg-row-fade-in-duration, $spg-row-move-in-duration, $spg-row-move-in-duration;
 }
 .spg-row--delayed-enter {
-  animation-delay: calc(#{$spg-row-fade-in-delay} + #{$spg-row-fade-in-animation-delay}),
-    $spg-row-fade-in-animation-delay, $spg-row-fade-in-animation-delay;
+  animation-delay:
+    calc(#{$spg-row-fade-in-delay} + #{$spg-row-fade-in-animation-delay}), $spg-row-fade-in-animation-delay,
+    $spg-row-fade-in-animation-delay;
 }
 
 .spg-row--leave {
@@ -149,7 +153,7 @@
   }
 }
 .spg-panel.spg-panel--group {
-  &>.spg-panel__content {
+  & > .spg-panel__content {
     row-gap: var(--sjs2-spacing-x100);
     padding: 0;
     box-shadow: none;
@@ -172,5 +176,5 @@
 .spg-row {
   .spg-question__header ~ hr {
     display: none;
-  }  
+  }
 }

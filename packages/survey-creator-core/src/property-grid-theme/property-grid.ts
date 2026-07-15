@@ -48,6 +48,7 @@ export var propertyGridCss = {
     mainRoot: "spg-question spg-row__question",
     root: "spg-paneldynamic",
     navigation: "spg-paneldynamic__navigation",
+    header: "spg-question__header",
     title: "spg-title spg-question__title",
     button: "",
     buttonRemove: "",
