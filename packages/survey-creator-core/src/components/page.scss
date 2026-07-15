@@ -434,3 +434,9 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
 .svc-page {
   scroll-margin-top: var(--sjs2-spacing-x100, 8px);
 }
+
+.svc-page__content {
+  .sd-page__content:empty {
+    display: none;
+  }
+}
