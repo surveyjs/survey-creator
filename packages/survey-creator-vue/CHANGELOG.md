@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file. See [standa
 ## 3.0.0-beta.8 (2026-07-01)
 
 ## 3.0.0-beta.7 (2026-06-19)
+### 2.5.33 (2026-07-08)
+
+
+### Bug Fixes
+
+* Update placeholder handling for empty descriptions in the in-place editor ([#7859](https://github.com/surveyjs/survey-creator/issues/7859)) ([eac2c1e](https://github.com/surveyjs/survey-creator/commit/eac2c1ed31bd39305b218d142ca66a3fe89fea64))
+
 ### [2.5.32](https://github.com/surveyjs/survey-creator/compare/v2.5.31...v2.5.32) (2026-07-01)
 
 ### 2.5.31 (2026-06-30)

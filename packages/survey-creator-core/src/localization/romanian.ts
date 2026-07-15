@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export const roStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Editează",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "Vizionați și învățați cum să creați chestionare",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Vă rugăm să lăsați o întrebare aici din cutia de instrumente.",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "Creați o regulă pentru a personaliza fluxul chestionarului.",
-    // "Copy"
-    copy: "Copiază",
     // "Duplicate"
-    duplicate: "Duplică",
-    // "Add to toolbox"
-    addToToolbox: "Adaugă în cutia de instrumente",
-    // "Delete Panel"
-    deletePanel: "Șterge panoul",
-    // "Delete Question"
-    deleteQuestion: "Șterge întrebarea",
-    // "Convert to"
-    convertTo: "Convertiți în",
-    // "Drag element"
-    drag: "Trage elementul"
+    duplicate: "Duplică"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export const roStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "Implicit ({0})",
-    // "Survey"
-    survey: "Chestionar",
     // "Settings"
     settings: "Setări",
     // "Open settings"
@@ -144,42 +120,14 @@ export const roStrings = {
     surveyTypeName: "Chestionar",
     // "Page"
     pageTypeName: "Pagină",
-    // "Panel"
-    panelTypeName: "Panou",
-    // "Question"
-    questionTypeName: "Întrebare",
-    // "Column"
-    columnTypeName: "Coloană",
-    // "Add New Page"
-    addNewPage: "Adaugă pagină nouă",
-    // "Scroll to the Right"
-    moveRight: "Derulează spre dreapta",
-    // "Scroll to the Left"
-    moveLeft: "Derulează spre stânga",
-    // "Delete Page"
-    deletePage: "Șterge pagina",
-    // "Edit Page"
-    editPage: "Editează pagina",
-    // "Edit"
-    edit: "Editează",
     // "page"
     newPageName: "pagină",
     // "question"
     newQuestionName: "întrebare",
     // "panel"
     newPanelName: "panou",
-    // [Auto-translated] "text"
-    newTextItemName: "Text",
-    // "Default"
-    defaultV2Theme: "Implicit",
-    // [Auto-translated] "Modern"
-    modernTheme: "Modern",
-    // "Default (legacy)"
-    defaultTheme: "Implicit (legacy)",
     // "Preview Survey Again"
     testSurveyAgain: "Previzualizați chestionarul din nou",
-    // "Survey width: "
-    testSurveyWidth: "Lățimea chestionarului: ",
     // "You had to navigate to"
     navigateToMsg: "A trebuit să navighezi la",
     // "Save Survey"
@@ -198,10 +146,6 @@ export const roStrings = {
     undo: "Anulează",
     // "Redo"
     redo: "Refă",
-    // "Undo last change"
-    undoTooltip: "Anulează ultima modificare",
-    // "Redo the change"
-    redoTooltip: "Refă modificarea",
     // [Auto-translated] "Expand"
     expandTooltip: "Expanda",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export const roStrings = {
     showMoreChoices: "Afișează mai multe",
     // "Show less"
     showLessChoices: "Afișează mai puține",
-    // "Copy"
-    copy: "Copiază",
-    // "Cut"
-    cut: "Taie",
-    // "Paste"
-    paste: "Lipește",
-    // "Copy selection to clipboard"
-    copyTooltip: "Copiază selecția în clipboard",
-    // "Cut selection to clipboard"
-    cutTooltip: "Taie selecția în clipboard",
-    // "Paste from clipboard"
-    pasteTooltip: "Lipește din clipboard",
-    // "Options"
-    options: "Opțiuni",
-    // "Generate Valid JSON"
-    generateValidJSON: "Generează JSON valid",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Funcție necunoscută: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export const roStrings = {
     expressionSyntaxError: "Eroare de sintaxă.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Eroare semantică.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Generează JSON lizibil",
     // "Toolbox"
     toolbox: "Cutia de instrumente",
-    // "Properties"
-    "property-grid": "Proprietăți",
     // [Auto-translated] "Search"
     toolboxSearch: "Căutare",
     // "Type to search..."
@@ -272,8 +196,6 @@ export const roStrings = {
     propertyGridPlaceholderTitle: "Începeți să configurați formularul",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Faceți clic pe orice pictogramă de categorie pentru a explora setările sondajului. Setările suplimentare vor deveni disponibile odată ce adăugați un element de chestionar la suprafața de proiectare.",
-    // "Please correct JSON."
-    correctJSON: "Vă rugăm să corectați JSON.",
     // "Survey Results "
     surveyResults: "Rezultatele chestionarului ",
     // "As Table"
@@ -294,8 +216,6 @@ export const roStrings = {
     saving: "Se salvează",
     // "Saved"
     saved: "Salvat",
-    // "Error"
-    propertyEditorError: "Eroare",
     // "Error! Editor content is not saved."
     saveError: "Eroare! Conținutul editorului nu este salvat.",
     // "Language Settings"
@@ -354,12 +274,6 @@ export const roStrings = {
     themeResetConfirmation: "Sigur doriți să resetați tema? Toate personalizările dvs. vor fi pierdute.",
     // "Yes, reset the theme"
     themeResetConfirmationOk: "Da, resetează tema",
-    // "Bold"
-    bold: "Îngroșat",
-    // [Auto-translated] "Italic"
-    italic: "Italic",
-    // "Underline"
-    underline: "Subliniat",
     // "Add Question"
     addNewQuestion: "Adaugă întrebare",
     // "Select page..."
@@ -507,8 +421,6 @@ export const roStrings = {
       trigger_runExpressionDescription: "Când expresia logică evaluează la adevărat, chestionarul evaluează o altă expresie. Opțional, rezultatul ultimei expresii poate fi atribuit ca valoare întrebării selectate",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Dacă expresia logică evaluează la adevărat, pagina de „Mulțumire” afișează conținutul specificat.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Când expresia: '{0}' returnează adevărat", // {0} - the expression
       // "New rule"
       itemEmptyExpressionText: "Regulă nouă",
       // "make page {0} visible"
@@ -539,6 +451,8 @@ export const roStrings = {
       column_setValueText: "atribuiți valoarea celulei: {1} coloanei: {0}", // {0} column name and {1} setValueExpression
       // "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "O expresie al cărei rezultat va fi atribuit întrebării țintă.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Introdu o valoare...",
       // "survey becomes completed"
       trigger_completeText: "chestionarul devine completat",
       // "set into question: {0} value {1}"
@@ -563,8 +477,6 @@ export const roStrings = {
       conditions: "Condiție(i)",
       // "Action(s)"
       actions: "Acțiune(i)",
-      // "Define condition(s)"
-      expressionEditorTitle: "Definește condiție(i)",
       // "Define action(s)"
       actionsEditorTitle: "Definește acțiune(i)",
       // "Delete Action"
@@ -575,8 +487,6 @@ export const roStrings = {
       selectedActionCaption: "Selectează acțiunea...",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Expresia logică este goală sau invalidă. Vă rugăm să o corectați.",
-      // "Please add at least one action."
-      noActionError: "Vă rugăm să adăugați cel puțin o acțiune.",
       // "Please fix issues in your action(s)."
       actionInvalid: "Vă rugăm să remediați problemele în acțiunile dvs.",
       // "Logical rules are incomplete"
@@ -878,8 +788,6 @@ export const roStrings = {
     defaultDisplayValue: "Valoarea de afișare implicită pentru textele dinamice",
     // "Label alignment"
     rateDescriptionLocation: "Alinierea etichetei",
-    // "Input field width (in characters)"
-    size: "Lățimea câmpului de intrare (în caractere)",
     // "Cell error message alignment"
     cellErrorLocation: "Alinierea mesajului de eroare al celulei",
     // "Enabled"
@@ -888,32 +796,16 @@ export const roStrings = {
     disabled: "Dezactivat",
     // "Inherit"
     inherit: "Moștenit",
-    // "Apply"
-    apply: "Aplică",
-    // [Auto-translated] "OK"
-    ok: "OK",
-    // "Save"
-    save: "Salvează",
     // "Clear"
     clear: "Șterge",
-    // "Save"
-    saveTooltip: "Salvează",
-    // "Cancel"
-    cancel: "Anulează",
     // "Set"
     set: "Setează",
-    // "Reset"
-    reset: "Resetează",
     // "Change"
     change: "Schimbă",
-    // "Refresh"
-    refresh: "Reîmprospătează",
     // "Close"
     close: "Închide",
     // "Delete"
     delete: "Șterge",
-    // "Add"
-    add: "Adaugă",
     // "Add New"
     addNew: "Adaugă nou",
     // "Click to add an item..."
@@ -922,34 +814,10 @@ export const roStrings = {
     removeItem: "Faceți clic pentru a elimina elementul...",
     // "Drag the item"
     dragItem: "Trageți elementul",
-    // "Other"
-    addOther: "Altul",
-    // "Select All"
-    addSelectAll: "Selectează tot",
-    // "None"
-    addNone: "Niciunul",
-    // "Remove All"
-    removeAll: "Eliminați tot",
     // "Edit"
     edit: "Editează",
-    // "Return without saving"
-    back: "Întoarceți-vă fără a salva",
-    // "Return without saving"
-    backTooltip: "Întoarceți-vă fără a salva",
-    // "Save and return"
-    saveAndBack: "Salvează și întoarce-te",
-    // "Save and return"
-    saveAndBackTooltip: "Salvează și întoarce-te",
     // "Done"
     doneEditing: "Gata",
-    // "Edit Choices"
-    editChoices: "Editează alegerile",
-    // "Show Choices"
-    showChoices: "Afișează alegerile",
-    // "Move"
-    move: "Mută",
-    // "<empty>"
-    empty: "<gol>",
     // "Value is empty"
     emptyValue: "Valoarea este goală",
     // "Manual Entry"
@@ -962,12 +830,6 @@ export const roStrings = {
     fastEntryChoicesMinCountError: "Vă rugăm să introduceți cel puțin {0} elemente",
     // "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Introduceți lista opțiunilor de alegere și ID-urile acestora în următorul format:\n\nid|opțiune\n\nUn ID de opțiune de alegere nu este vizibil pentru respondenți și poate fi utilizat în regulile condiționale.",
-    // "Form Entry"
-    formEntry: "Intrare în formular",
-    // "Test the service"
-    testService: "Testează serviciul",
-    // "Please select the element"
-    itemSelectorEmpty: "Vă rugăm să selectați elementul",
     // "Please select the action"
     conditionActionEmpty: "Vă rugăm să selectați acțiunea",
     // "Select a question..."
@@ -976,20 +838,8 @@ export const roStrings = {
     conditionSelectPage: "Selectează o pagină...",
     // "Select a panel..."
     conditionSelectPanel: "Selectează un panou...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Vă rugăm să introduceți/selectați valoarea",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Apăsați ctrl+spațiu pentru a obține sugestii de completare a expresiei",
-    // "Current row"
-    aceEditorRowTitle: "Rândul curent",
-    // "Current panel"
-    aceEditorPanelTitle: "Panoul curent",
-    // "For more details please check the documentation"
-    showMore: "Pentru mai multe detalii, vă rugăm să consultați documentația",
-    // "Available questions"
-    assistantTitle: "Întrebări disponibile",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Trebuie să existe cel puțin o coloană sau un rând",
     // "Review before submit"
     showPreviewBeforeComplete: "Revizuire înainte de a trimite",
     // "Enabled by a condition"
@@ -1040,20 +890,12 @@ export const roStrings = {
     "addNew@navigateToUrlOnCondition": "Adăugați un URL nou",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Adaugă o pagină nouă",
-    // "Expression is empty"
-    expressionIsEmpty: "Expresia este goală",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"
     text: "Text",
-    // "Row ID"
-    rowid: "ID rând",
     // "Image or video file URL"
     imageLink: "URL fișier imagine sau video",
-    // "Edit column: {0}"
-    columnEdit: "Editează coloana: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Editează elementul: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1070,8 +912,6 @@ export const roStrings = {
     imageLinkName: "Obțineți URL-urile fișierelor din următoarea proprietate",
     // "Accept empty response"
     allowEmptyResponse: "Acceptă răspuns gol",
-    // "Title"
-    titlePlaceholder: "Titlu",
     // "Survey Title"
     surveyTitlePlaceholder: "Titlul chestionarului",
     // "Page {num}"
@@ -1182,16 +1022,8 @@ export const roStrings = {
     defaultValue: "Răspuns implicit",
     // "Default texts"
     cellsDefaultRow: "Texte implicite",
-    // "Edit survey settings"
-    surveyEditorTitle: "Editează setările chestionarului",
-    // "Edit: {0}"
-    qEditorTitle: "Editează: {0}",
     // "Maximum character limit"
     maxLength: "Limită maximă de caractere",
-    // "Build"
-    buildExpression: "Construiește",
-    // "Edit"
-    editExpression: "Editează",
     // "and"
     and: "și",
     // "or"
@@ -1218,8 +1050,6 @@ export const roStrings = {
     includeIntoResult: "Adăugați la rezultatele chestionarului",
     // "Make the title and description visible"
     showTitle: "Faceți titlul și descrierea vizibile",
-    // "Expand/collapse title"
-    expandCollapseTitle: "Extinde/colapsează titlul",
     // "Select a survey language"
     locale: "Selectați o limbă pentru chestionar",
     // "Select device type"
@@ -1638,8 +1468,6 @@ export const roStrings = {
     displayRateDescriptionsAsExtremeItems: "Afișați etichetele ca valori extreme",
     // "Row order"
     rowOrder: "Ordinea rândurilor",
-    // "Column layout"
-    columnsLayout: "Aspect coloane",
     // "Nested column count"
     columnColCount: "Număr coloane imbricate",
     // "Correct Answer"
@@ -1670,22 +1498,6 @@ export const roStrings = {
     },
     // "Logo alignment"
     logoPosition: "Alinierea logo-ului",
-    // "Add logo..."
-    addLogo: "Adăugați logo...",
-    // "Change logo..."
-    changeLogo: "Schimbați logo...",
-    logoPositions: {
-      // "Remove logo"
-      none: "Eliminați logo-ul",
-      // "Left"
-      left: "Stânga",
-      // "Right"
-      right: "Dreapta",
-      // "On the top"
-      top: "Deasupra",
-      // "In the bottom"
-      bottom: "Dedesubt"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Modul de previzualizare",
     // [Auto-translated] "Enable grid layout"
@@ -1698,14 +1510,8 @@ export const roStrings = {
     detailErrorLocation: "Alinierea mesajelor de eroare cu detaliile rândului",
     // Creator tabs
     tabs: {
-      panel: {
-        // "Panel Layout"
-        layout: "Aspect panou"
-      },
       // [Auto-translated] "General"
       general: "General",
-      // "Options"
-      fileOptions: "Opțiuni",
       // "HTML Editor"
       html: "Editor HTML",
       // "Columns"
@@ -1728,10 +1534,6 @@ export const roStrings = {
       sliderSettings: "Setări glisor",
       // "Choices from a Web Service"
       choicesByUrl: "Alegeri dintr-un serviciu web",
-      // "Default Choices"
-      matrixChoices: "Alegeri implicite",
-      // "Text Inputs"
-      multipleTextItems: "Câmpuri de text",
       // "Numbering"
       numbering: "Numerotare",
       // "Validators"
@@ -1774,8 +1576,6 @@ export const roStrings = {
       showOnCompleted: "Pagina de „Mulțumire”",
       // "Logo in the Survey Header"
       logo: "Logo-ul în antetul chestionarului",
-      // [Auto-translated] "Slider"
-      slider: "Slider",
       // "Expression"
       expression: "Expresie",
       // "Question Settings"
@@ -1795,62 +1595,18 @@ export const roStrings = {
       // "Others"
       others: "Altele"
     },
-    // "Edit property '{0}'"
-    editProperty: "Editează proprietatea '{0}'",
     // "Items"
     items: "Elemente",
     // "Make choices visible if"
     choicesVisibleIf: "Fă alegerile vizibile dacă",
     // "Make choices selectable if"
     choicesEnableIf: "Fă alegerile selectabile dacă",
-    // "Make columns visible if"
-    columnsEnableIf: "Fă coloanele vizibile dacă",
-    // "Make rows visible if"
-    rowsEnableIf: "Fă rândurile vizibile dacă",
     // "Increase the inner indent"
     innerIndent: "Crește indentarea internă",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Utilizați răspunsurile de la ultima intrare ca implicit",
-    // "Please enter a value."
-    enterNewValue: "Vă rugăm să introduceți o valoare.",
-    // "There are no questions in the survey."
-    noquestions: "Nu există întrebări în chestionar.",
-    // "Please create a trigger"
-    createtrigger: "Vă rugăm să creați un declanșator",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "Apăsați butonul Enter pentru a edita",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Apăsați butonul Enter pentru a edita elementul, apăsați butonul Ștergere pentru a șterge elementul, apăsați Alt + săgeată în sus sau în jos pentru a muta elementul",
-    // "On "
-    triggerOn: "Pe ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Fă paginile vizibile",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Fă elementele vizibile",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Completează chestionarul dacă este de succes.",
-    // "The trigger is not set"
-    triggerNotSet: "Declanșatorul nu este setat",
-    // "Run if"
-    triggerRunIf: "Execută dacă",
-    // "Change value of: "
-    triggerSetToName: "Schimbă valoarea pentru: ",
-    // "Copy value from: "
-    triggerFromName: "Copiază valoarea de la: ",
-    // "Run this Expression"
-    triggerRunExpression: "Execută această expresie",
-    // "to: "
-    triggerSetValue: "la: ",
-    // "Go to the question"
-    triggerGotoName: "Sari la întrebarea",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Nu adăuga variabila în rezultatul chestionarului.",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Vă rugăm să introduceți o expresie validă",
     // "Type expression here..."
     emptyExpressionPlaceHolder: "Tastați expresia aici...",
-    // "No file chosen"
-    noFile: "Niciun fișier ales",
     // "Clear hidden question values"
     clearIfInvisible: "Ștergeți valorile întrebărilor ascunse",
     // "Store values in the following property"
@@ -1996,10 +1752,6 @@ export const roStrings = {
     "file-camera": "Fișier local sau cameră",
     // "Inherit"
     inherit: "Moștenit",
-    // "Visible"
-    show: "Vizibil",
-    // "Hidden"
-    hide: "Ascuns",
     // "Inherit"
     default: "Moștenit",
     // "Initial"
@@ -2016,8 +1768,6 @@ export const roStrings = {
     asc: "Ascendent",
     // "Descending"
     desc: "Descendent",
-    // "Indeterminate"
-    indeterminate: "Nedeterminat",
     // "Selected"
     selected: "Selectat",
     // "Unselected"
@@ -2038,12 +1788,6 @@ export const roStrings = {
     carousel: "Carusel",
     // "Tabs"
     tab: "File",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "Navigator panou + bară de progres în partea de sus",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "Navigator panou + bară de progres în partea de jos",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "Navigator panou + bară de progres în partea de sus și de jos",
     // "Horizontal"
     horizontal: "Orizontal",
     // [Auto-translated] "Vertical"
@@ -2054,8 +1798,6 @@ export const roStrings = {
     bottom: "Dedesubt",
     // "Top and bottom"
     topBottom: "Deasupra și dedesubt",
-    // "Both"
-    both: "Ambele",
     // "Left"
     left: "Stânga",
     // "Right"
@@ -2096,10 +1838,6 @@ export const roStrings = {
     week: "săptămână",
     // "Hidden"
     hidden: "Ascuns",
-    // "Editable"
-    edit: "Editabil",
-    // "Read-only"
-    display: "Doar citire",
     // "Contain"
     contain: "Conține",
     // "Cover"
@@ -2328,8 +2066,6 @@ export const roStrings = {
     onNextPage: "La trecerea la pagina următoare",
     // "After an answer is changed"
     onValueChanged: "După modificarea unui răspuns",
-    // "Before an answer is changed"
-    onValueChanging: "Înainte de modificarea unui răspuns",
     questionsOnPageMode: {
       // "Original structure"
       standard: "Structură originală",
@@ -2340,12 +2076,6 @@ export const roStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Afișează un singur câmp de introducere pe pagină"
     },
-    // "No preview"
-    noPreview: "Fără previzualizare",
-    // "Show all questions"
-    showAllQuestions: "Afișați toate întrebările",
-    // "Show answered questions only"
-    showAnsweredQuestions: "Afișați doar întrebările la care s-a răspuns",
     // [Auto-translated] "Show all questions"
     allQuestions: "Afișează toate întrebările",
     // [Auto-translated] "Show answered questions only"
@@ -2461,12 +2191,8 @@ export const roStrings = {
       onPage: "Resetare pe fiecare pagină",
       // "Reset on each panel"
       onpanel: "Resetare pe fiecare panou",
-      // "Reset on each panel"
-      onPanel: "Resetare pe fiecare panou",
       // [Auto-translated] "Recursive numbering"
       recursive: "Numerotare recursivă",
-      // "Continue across the survey"
-      onSurvey: "Continuă pe tot chestionarul",
       // "No numbering"
       off: "Fără numerotare"
     },
@@ -2629,49 +2355,6 @@ export const roStrings = {
     and: "și",
     // "or"
     or: "sau"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Utilizați versiunea Angular",
-    // "Use jQuery version"
-    jquery: "Utilizați versiunea jQuery",
-    // "Use Knockout version"
-    knockout: "Utilizați versiunea Knockout",
-    // "Use React version"
-    react: "Utilizați versiunea React",
-    // "Use Vue version"
-    vue: "Utilizați versiunea Vue",
-    // "For bootstrap framework"
-    bootstrap: "Pentru cadrul bootstrap",
-    // "Modern theme"
-    modern: "Tema modernă",
-    // "Default theme"
-    default: "Tema implicită",
-    // "Orange theme"
-    orange: "Tema portocalie",
-    // "Darkblue theme"
-    darkblue: "Tema albastru închis",
-    // "Darkrose theme"
-    darkrose: "Tema trandafir închis",
-    // "Stone theme"
-    stone: "Tema piatră",
-    // "Winter theme"
-    winter: "Tema iarnă",
-    // "Winter-Stone theme"
-    winterstone: "Tema iarnă-piatră",
-    // "Show survey on a page"
-    showOnPage: "Afișați chestionarul pe o pagină",
-    // "Show survey in a window"
-    showInWindow: "Afișați chestionarul într-o fereastră",
-    // "Load Survey JSON from server"
-    loadFromServer: "Încărcați JSON-ul chestionarului de pe server",
-    // "Scripts and styles"
-    titleScript: "Scripturi și stiluri",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2922,10 +2605,6 @@ export const roStrings = {
       choices: "\"Valoare\" servește ca un ID al elementului utilizat în regulile condiționale; „Text” este afișat respondenților.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Alegeți între „Imagine” și „Video” pentru a seta modul de conținut al selectorului media. Dacă este selectată „Imagine”, asigurați-vă că toate opțiunile furnizate sunt fișiere de imagine în următoarele formate: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. În mod similar, dacă este selectat „Video”, asigurați-vă că toate opțiunile sunt linkuri directe către fișiere video în următoarele formate: MP4, MOV, WMV, FLV, AVI, MKV. Vă rugăm să rețineți că linkurile YouTube nu sunt acceptate pentru opțiunile video."
-    },
-    text: {
-      // "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Această setare redimensionează doar câmpul de intrare și nu afectează lățimea casetei întrebării. Pentru a limita lungimea acceptată a intrării, accesați <b>Validare → Limită maximă de caractere</b>."
     },
     comment: {
       // "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3509,16 +3188,12 @@ export const roStrings = {
     primaryDarkColor: "Plutește",
     // "Selected"
     primaryLightColor: "Selectat",
-    // "Background color"
-    backgroundDimColor: "Culoarea fundalului",
     // "Corner radius"
     cornerRadius: "Raza colțului",
     // "Default background"
     backcolor: "Fundal implicit",
     // "Hover background"
     hovercolor: "Fundal la trecere",
-    // "Border decoration"
-    borderDecoration: "Decorarea bordurii",
     // "Font color"
     fontColor: "Culoarea fontului",
     // "Background color"
@@ -3527,8 +3202,6 @@ export const roStrings = {
     primaryForecolor: "Culoare implicită",
     // "Disabled color"
     primaryForecolorLight: "Culoare dezactivată",
-    // [Auto-translated] "Font"
-    font: "Font",
     // "Darker"
     borderDefault: "Mai întunecat",
     // "Lighter"
@@ -3605,14 +3278,10 @@ export const roStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Fundal de suprafață",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Primar",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Secundar",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Suprafață",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Elemente de interfață",
     // [Auto-translated] "Font"

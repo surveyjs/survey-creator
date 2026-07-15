@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var italianTranslation = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Modifica",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "Guarda e impara come creare sondaggio",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Aggiungi una domanda qui",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "Crea una regola per personalizzare il percorso del sondaggio.",
-    // "Copy"
-    copy: "Copia",
     // "Duplicate"
-    duplicate: "Duplica",
-    // "Add to toolbox"
-    addToToolbox: "Aggiungi alla toolbox",
-    // "Delete Panel"
-    deletePanel: "Elimina Pannello",
-    // "Delete Question"
-    deleteQuestion: "Elimina Domanda",
-    // "Convert to"
-    convertTo: "Converti in",
-    // "Drag element"
-    drag: "Trascina l'elemento"
+    duplicate: "Duplica"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var italianTranslation = {
   ed: {
     // [Auto-translated] "Default ({0})"
     defaultLocale: "Predefinito ({0})",
-    // "Survey"
-    survey: "Sondaggio",
     // "Settings"
     settings: "Impostazioni sondaggio",
     // "Open settings"
@@ -144,42 +120,14 @@ export var italianTranslation = {
     surveyTypeName: "Sondaggio",
     // "Page"
     pageTypeName: "Pagina",
-    // "Panel"
-    panelTypeName: "Pannello",
-    // "Question"
-    questionTypeName: "Domanda",
-    // "Column"
-    columnTypeName: "Colonna",
-    // "Add New Page"
-    addNewPage: "Aggiungi Nuova Pagina",
-    // "Scroll to the Right"
-    moveRight: "Scorri a destra",
-    // "Scroll to the Left"
-    moveLeft: "Scorri a sinistra",
-    // "Delete Page"
-    deletePage: "Elimina Pagina",
-    // "Edit Page"
-    editPage: "Modifica Pagina",
-    // "Edit"
-    edit: "Modifica",
     // "page"
     newPageName: "Pagina",
     // "question"
     newQuestionName: "Domanda",
     // "panel"
     newPanelName: "Pannello",
-    // "text"
-    newTextItemName: "Testo",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "Predefinito",
-    // "Modern"
-    modernTheme: "Tema Moderno",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Predefinito (legacy)",
     // "Preview Survey Again"
     testSurveyAgain: "Prova il sondaggio di nuovo",
-    // "Survey width: "
-    testSurveyWidth: "Larghezza sondaggio:",
     // "You had to navigate to"
     navigateToMsg: "Bisogna navigare fino a:",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var italianTranslation = {
     undo: "Annulla",
     // "Redo"
     redo: "Ripristina",
-    // "Undo last change"
-    undoTooltip: "Annulla l'ultima modifica",
-    // "Redo the change"
-    redoTooltip: "Ripristina l'ultima modifica",
     // [Auto-translated] "Expand"
     expandTooltip: "Espandere",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var italianTranslation = {
     showMoreChoices: "Mostra di più",
     // [Auto-translated] "Show less"
     showLessChoices: "Mostra meno",
-    // "Copy"
-    copy: "Copia",
-    // "Cut"
-    cut: "Taglia",
-    // "Paste"
-    paste: "Incolla",
-    // "Copy selection to clipboard"
-    copyTooltip: "Copia la selezione negli appunti",
-    // "Cut selection to clipboard"
-    cutTooltip: "Taglia la selezione negli appunti",
-    // "Paste from clipboard"
-    pasteTooltip: "Incolla dagli appunti",
-    // "Options"
-    options: "Opzioni",
-    // "Generate Valid JSON"
-    generateValidJSON: "Genera JSON Valido",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Funzione sconosciuta: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var italianTranslation = {
     expressionSyntaxError: "Errore di sintassi.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Errore semantico.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Genera JSON Leggibile",
     // [Auto-translated] "Toolbox"
     toolbox: "Cassetta degli attrezzi",
-    // "Properties"
-    "property-grid": "Proprietà",
     // [Auto-translated] "Search"
     toolboxSearch: "Ricerca",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var italianTranslation = {
     propertyGridPlaceholderTitle: "Inizia a configurare il tuo modulo",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Fai clic sull'icona di una categoria per esplorare le impostazioni dell'indagine. Dopo l'aggiunta di un elemento di rilievo all'area di progettazione, saranno disponibili impostazioni aggiuntive.",
-    // "Please correct JSON."
-    correctJSON: "Correggi il tuo JSON",
     // "Survey Results "
     surveyResults: "Risultati del sondaggio: ",
     // "As Table"
@@ -294,8 +216,6 @@ export var italianTranslation = {
     saving: "Salvataggio",
     // "Saved"
     saved: "Salvato",
-    // "Error"
-    propertyEditorError: "Errore:",
     // "Error! Editor content is not saved."
     saveError: "Errore! Il contenuto dell'editor non è salvato.",
     // "Language Settings"
@@ -354,12 +274,6 @@ export var italianTranslation = {
     themeResetConfirmation: "Vuoi davvero resettare il tema? Tutte le tue personalizzazioni andranno perse.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Sì, reimposta il tema",
-    // "Bold"
-    bold: "Grassetto",
-    // "Italic"
-    italic: "Corsivo",
-    // "Underline"
-    underline: "Sottolineato",
     // "Add Question"
     addNewQuestion: "Aggiungi domanda",
     // "Select page..."
@@ -507,8 +421,6 @@ export var italianTranslation = {
       trigger_runExpressionDescription: "Quando l'espressione logica restituisce vero, viene eseguita l'espressione personalizzata. È possibile impostare il risultato dell'espressione nella domanda selezionata.",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Se l'espressione logica restituisce vero, il testo di default per la 'Pagina di ringraziamento' viene modificato in quello indicato.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Quando l'espressione: '{0}' restituisce vero:", // {0} - the expression
       // "New rule"
       itemEmptyExpressionText: "Nuova regola",
       // "make page {0} visible"
@@ -539,6 +451,8 @@ export var italianTranslation = {
       column_setValueText: "Assegna valore cella: {1} alla colonna: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Un'espressione il cui risultato verrà assegnato alla domanda di destinazione.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Inserisci un valore...",
       // "survey becomes completed"
       trigger_completeText: "il sondaggio viene completato",
       // "set into question: {0} value {1}"
@@ -563,8 +477,6 @@ export var italianTranslation = {
       conditions: "Condizione(i)",
       // "Action(s)"
       actions: "Azione(i)",
-      // "Define condition(s)"
-      expressionEditorTitle: "Definisci condizione(i)",
       // "Define action(s)"
       actionsEditorTitle: "Definisci azione(i)",
       // "Delete Action"
@@ -575,8 +487,6 @@ export var italianTranslation = {
       selectedActionCaption: "Seleziona azione...",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "L'espressione logica è vuota o invalida. Correggila.",
-      // "Please add at least one action."
-      noActionError: "Aggiungi almeno un'azione.",
       // "Please fix issues in your action(s)."
       actionInvalid: "Risolvi i problemi nell'azione(i)",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +788,6 @@ export var italianTranslation = {
     defaultDisplayValue: "Valore di visualizzazione predefinito per i testi dinamici",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Allineamento delle etichette",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Larghezza del campo di input (in caratteri)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Allineamento dei messaggi di errore delle celle",
     // [Auto-translated] "Enabled"
@@ -888,32 +796,16 @@ export var italianTranslation = {
     disabled: "Disabile",
     // [Auto-translated] "Inherit"
     inherit: "Ereditare",
-    // "Apply"
-    apply: "Applica",
-    // [Auto-translated] "OK"
-    ok: "OK",
-    // "Save"
-    save: "Salva",
     // "Clear"
     clear: "Cancella",
-    // "Save"
-    saveTooltip: "Salva",
-    // "Cancel"
-    cancel: "Annulla",
     // "Set"
     set: "Imposta",
-    // "Reset"
-    reset: "Reimposta",
     // "Change"
     change: "Modifica",
-    // "Refresh"
-    refresh: "Aggiorna",
     // "Close"
     close: "Chiudi",
     // "Delete"
     delete: "Elimina",
-    // "Add"
-    add: "Aggiungi",
     // "Add New"
     addNew: "Aggiungi Nuovo",
     // "Click to add an item..."
@@ -922,34 +814,10 @@ export var italianTranslation = {
     removeItem: "Clicca per rimuovere un'opzione...",
     // "Drag the item"
     dragItem: "Trascina l'opzione",
-    // "Other"
-    addOther: "Altro",
-    // "Select All"
-    addSelectAll: "Seleziona Tutti",
-    // "None"
-    addNone: "Nessuno",
-    // "Remove All"
-    removeAll: "Elimina tutto",
     // "Edit"
     edit: "Modifica",
-    // "Return without saving"
-    back: "Torna indietro senza salvare",
-    // "Return without saving"
-    backTooltip: "Torna indietro senza salvare",
-    // "Save and return"
-    saveAndBack: "Salva e torna indietro",
-    // "Save and return"
-    saveAndBackTooltip: "Salva e torna indietro",
     // "Done"
     doneEditing: "Fatto",
-    // "Edit Choices"
-    editChoices: "Modifica Scelte",
-    // "Show Choices"
-    showChoices: "Mostra Scelte",
-    // "Move"
-    move: "Muovi",
-    // [Auto-translated] "<empty>"
-    empty: "<empty>",
     // "Value is empty"
     emptyValue: "Il valore è vuoto",
     // "Manual Entry"
@@ -962,12 +830,6 @@ export var italianTranslation = {
     fastEntryChoicesMinCountError: "Inserisci almeno {0} elementi",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Inserisci l'elenco delle opzioni di scelta e i relativi ID nel seguente formato:\n\nid|opzione\n\nL'ID di un'opzione di scelta non è visibile ai rispondenti e può essere utilizzato nelle regole condizionali.",
-    // "Form Entry"
-    formEntry: "Inserimento dati",
-    // "Test the service"
-    testService: "Prova il servizio",
-    // "Please select the element"
-    itemSelectorEmpty: "Seleziona elemento",
     // "Please select the action"
     conditionActionEmpty: "Seleziona azione",
     // "Select a question..."
@@ -976,20 +838,8 @@ export var italianTranslation = {
     conditionSelectPage: "Seleziona pagina...",
     // "Select a panel..."
     conditionSelectPanel: "Seleziona pannello...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Inserisci/seleziona valore",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Premi ctrl+spazio per ottenere un suggerimento sul completamento dell'espressione",
-    // "Current row"
-    aceEditorRowTitle: "Riga corrente",
-    // "Current panel"
-    aceEditorPanelTitle: "Pannello Corrente",
-    // "For more details please check the documentation"
-    showMore: "Per maggiori dettagli, guarda la documentazione",
-    // "Available questions"
-    assistantTitle: "Domande disponibili:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Dovrebbe esserci almeno una colonna o riga",
     // "Review before submit"
     showPreviewBeforeComplete: "Vedi l'anteprima delle risposte prima di inviare il sondaggio",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +890,12 @@ export var italianTranslation = {
     "addNew@navigateToUrlOnCondition": "Aggiungi nuovo URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Aggiungi nuova pagina",
-    // "Expression is empty"
-    expressionIsEmpty: "Espressione vuota",
     // "Value"
     value: "Valore",
     // "Text"
     text: "Testo",
-    // "Row ID"
-    rowid: "ID Riga",
     // "Image or video file URL"
     imageLink: "URL immagine o video",
-    // "Edit column: {0}"
-    columnEdit: "Modifica colonna: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Modifica elemento: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1070,8 +912,6 @@ export var italianTranslation = {
     imageLinkName: "Ottieni gli URL delle immagini dal seguente campo JSON:",
     // "Accept empty response"
     allowEmptyResponse: "Consenti risposta vuota",
-    // "Title"
-    titlePlaceholder: "Titolo",
     // "Survey Title"
     surveyTitlePlaceholder: "Titolo del sondaggio",
     // "Page {num}"
@@ -1182,16 +1022,8 @@ export var italianTranslation = {
     defaultValue: "Valore default",
     // "Default texts"
     cellsDefaultRow: "Testi default",
-    // "Edit survey settings"
-    surveyEditorTitle: "Modifica le impostazioni del sondaggio",
-    // "Edit: {0}"
-    qEditorTitle: "Modifica domanda: {0}",
     // "Maximum character limit"
     maxLength: "Lunghezza massima (in caratteri)",
-    // [Auto-translated] "Build"
-    buildExpression: "Build",
-    // "Edit"
-    editExpression: "Modifica",
     // [Auto-translated] "and"
     and: "e",
     // [Auto-translated] "or"
@@ -1218,8 +1050,6 @@ export var italianTranslation = {
     includeIntoResult: "Includi nei risultati del sondaggio",
     // "Make the title and description visible"
     showTitle: "Mostra/nascondi titolo",
-    // "Expand/collapse title"
-    expandCollapseTitle: "Espandi/comprimi il titolo",
     // "Select a survey language"
     locale: "Lingua Default",
     // "Select device type"
@@ -1638,8 +1468,6 @@ export var italianTranslation = {
     displayRateDescriptionsAsExtremeItems: "Mostra le descrizioni come valori estremi",
     // "Row order"
     rowOrder: "Ordine righe",
-    // "Column layout"
-    columnsLayout: "Layout colonna",
     // "Nested column count"
     columnColCount: "Numero colonne annidate",
     // "Correct Answer"
@@ -1670,22 +1498,6 @@ export var italianTranslation = {
     },
     // "Logo alignment"
     logoPosition: "Posizione Logo",
-    // "Add logo..."
-    addLogo: "Aggiungi logo...",
-    // "Change logo..."
-    changeLogo: "Modifica logo...",
-    logoPositions: {
-      // "Remove logo"
-      none: "Rimuovi logo",
-      // "Left"
-      left: "Sinistra",
-      // "Right"
-      right: "Destra",
-      // "On the top"
-      top: "In alto",
-      // "In the bottom"
-      bottom: "In basso"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Modalità anteprima",
     // [Auto-translated] "Enable grid layout"
@@ -1698,14 +1510,8 @@ export var italianTranslation = {
     detailErrorLocation: "Allineamento dei messaggi di errore dei dettagli delle righe",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Layout del pannello"
-      },
       // "General"
       general: "Generale",
-      // "Options"
-      fileOptions: "Opzioni",
       // "HTML Editor"
       html: "Modifica Html",
       // "Columns"
@@ -1728,10 +1534,6 @@ export var italianTranslation = {
       sliderSettings: "Impostazioni del dispositivo di scorrimento",
       // "Choices from a Web Service"
       choicesByUrl: "Opzioni da URL",
-      // "Default Choices"
-      matrixChoices: "Opzioni predefinite",
-      // "Text Inputs"
-      multipleTextItems: "Voci di testo",
       // "Numbering"
       numbering: "Numerazione",
       // "Validators"
@@ -1774,8 +1576,6 @@ export var italianTranslation = {
       showOnCompleted: "Sondaggio Completo",
       // "Logo in the Survey Header"
       logo: "Logo nel Titolo sondaggio",
-      // "Slider"
-      slider: "Cursore",
       // [Auto-translated] "Expression"
       expression: "Espressione",
       // [Auto-translated] "Question Settings"
@@ -1795,62 +1595,18 @@ export var italianTranslation = {
       // "Others"
       others: "Altri"
     },
-    // "Edit property '{0}'"
-    editProperty: "Modifica propietà '{0}'",
     // "Items"
     items: "[ Elemento: {0} ]",
     // "Make choices visible if"
     choicesVisibleIf: "Scelte visibili se",
     // "Make choices selectable if"
     choicesEnableIf: "Scelte selezionabili se",
-    // "Make columns visible if"
-    columnsEnableIf: "Colonne visibili se",
-    // "Make rows visible if"
-    rowsEnableIf: "Righe visibili se",
     // "Increase the inner indent"
     innerIndent: "Aggiungi rientri interni",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Usa le risposte dell'ultima voce come impostazione predefinita",
-    // "Please enter a value."
-    enterNewValue: "Inserisci il valore.",
-    // "There are no questions in the survey."
-    noquestions: "Non c'è alcuna domanda nel sondaggio.",
-    // "Please create a trigger"
-    createtrigger: "Il trigger non è impostato",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "Premi il tasto Invio per modificare",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Premi il tasto Invio per modificare l'elemento, premi il tasto Cancella per eliminare l'elemento, premi alt più freccia su o freccia giù per spostare l'elemento.",
-    // "On "
-    triggerOn: "Attivazione",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Rendi visibili le pagine:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Rendi visibili le domande:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Completa il sondaggio.",
-    // "The trigger is not set"
-    triggerNotSet: "Non impostato",
-    // "Run if"
-    triggerRunIf: "Esegui se",
-    // "Change value of: "
-    triggerSetToName: "Cambia il valore di: ",
-    // "Copy value from: "
-    triggerFromName: "Copia valore da: ",
-    // "Run this Expression"
-    triggerRunExpression: "Esegui questa Espressione:",
-    // "to: "
-    triggerSetValue: "a: ",
-    // "Go to the question"
-    triggerGotoName: "Vai alla domanda:",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Non inserire la variabile del risultato del sondaggio",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Inserisci un'espressione valida",
     // "Type expression here..."
     emptyExpressionPlaceHolder: "Digita qui l'espressione...",
-    // "No file chosen"
-    noFile: "Nessun file scelto",
     // "Clear hidden question values"
     clearIfInvisible: "Cancella se Invisibile",
     // [Auto-translated] "Store values in the following property"
@@ -1996,10 +1752,6 @@ export var italianTranslation = {
     "file-camera": "File locale o fotocamera",
     // "Inherit"
     inherit: "Default",
-    // "Visible"
-    show: "Visibile",
-    // "Hidden"
-    hide: "Nascosto",
     // "Inherit"
     default: "Default",
     // "Initial"
@@ -2016,8 +1768,6 @@ export var italianTranslation = {
     asc: "Ascendente",
     // "Descending"
     desc: "Discendente",
-    // "Indeterminate"
-    indeterminate: "Indeterminato",
     // [Auto-translated] "Selected"
     selected: "Selezionato",
     // [Auto-translated] "Unselected"
@@ -2038,12 +1788,6 @@ export var italianTranslation = {
     carousel: "Carosello",
     // [Auto-translated] "Tabs"
     tab: "Schede",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "Navigatore del pannello + Barra di avanzamento in alto",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "Navigatore del pannello + Barra di avanzamento in basso",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "Navigatore del pannello + Barra di avanzamento in alto e in basso",
     // "Horizontal"
     horizontal: "Orizzontale",
     // "Vertical"
@@ -2054,8 +1798,6 @@ export var italianTranslation = {
     bottom: "In basso",
     // "Top and bottom"
     topBottom: "In alto e in basso",
-    // "Both"
-    both: "Entrambe",
     // "Left"
     left: "Sinistra",
     // "Right"
@@ -2096,10 +1838,6 @@ export var italianTranslation = {
     week: "settimana",
     // "Hidden"
     hidden: "Nascosto",
-    // "Editable"
-    edit: "Editabile",
-    // "Read-only"
-    display: "Sola lettura",
     // [Auto-translated] "Contain"
     contain: "Contenere",
     // [Auto-translated] "Cover"
@@ -2328,8 +2066,6 @@ export var italianTranslation = {
     onNextPage: "Quando si passa alla pagina successiva",
     // "After an answer is changed"
     onValueChanged: "Dopo la modifica di una risposta",
-    // "Before an answer is changed"
-    onValueChanging: "Prima della modifica di una risposta",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Struttura originale",
@@ -2340,12 +2076,6 @@ export var italianTranslation = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Mostra un singolo campo di input per pagina"
     },
-    // "No preview"
-    noPreview: "No anteprima",
-    // "Show all questions"
-    showAllQuestions: "Mostra tutte le domande",
-    // "Show answered questions only"
-    showAnsweredQuestions: "Mostra solo le domande con risposta",
     // [Auto-translated] "Show all questions"
     allQuestions: "Mostra tutte le domande",
     // [Auto-translated] "Show answered questions only"
@@ -2461,12 +2191,8 @@ export var italianTranslation = {
       onPage: "Inizia da capo in ogni pagina",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Ripristina su ogni pannello",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Ripristina su ogni pannello",
       // [Auto-translated] "Recursive numbering"
       recursive: "Numerazione ricorsiva",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Continua con l'indagine",
       // [Auto-translated] "No numbering"
       off: "Nessuna numerazione"
     },
@@ -2629,49 +2355,6 @@ export var italianTranslation = {
     and: "e",
     // [Auto-translated] "or"
     or: "o"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Versione per Angular",
-    // "Use jQuery version"
-    jquery: "Versione per jQuery",
-    // "Use Knockout version"
-    knockout: "Versione per Knockout",
-    // "Use React version"
-    react: "Versione per React",
-    // "Use Vue version"
-    vue: "Versione per Vue",
-    // "For bootstrap framework"
-    bootstrap: "Per framework bootstrap",
-    // "Modern theme"
-    modern: "Tema moderno",
-    // "Default theme"
-    default: "Tema default",
-    // "Orange theme"
-    orange: "Tema Orange",
-    // "Darkblue theme"
-    darkblue: "Tema Darkblue",
-    // "Darkrose theme"
-    darkrose: "Tema Darkrose",
-    // "Stone theme"
-    stone: "Tema Stone",
-    // "Winter theme"
-    winter: "Tema Winter",
-    // "Winter-Stone theme"
-    winterstone: "Tema Winter-Stone",
-    // "Show survey on a page"
-    showOnPage: "Visualizza in questa pagina",
-    // "Show survey in a window"
-    showInWindow: "Visualizza in una finestra",
-    // "Load Survey JSON from server"
-    loadFromServer: "Carica JSON dal server",
-    // "Scripts and styles"
-    titleScript: "Scripts e stili",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2922,10 +2605,6 @@ export var italianTranslation = {
       choices: "\"Value\" funge da ID elemento utilizzato nelle regole condizionali; \"Testo\" viene mostrato ai rispondenti.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Scegli tra \"Immagine\" e \"Video\" per impostare la modalità contenuto del selettore multimediale. Se è selezionata l'opzione \"Immagine\", assicurarsi che tutte le opzioni fornite siano file immagine nei seguenti formati: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Allo stesso modo, se è selezionato \"Video\", assicurarsi che tutte le opzioni siano collegamenti diretti a file video nei seguenti formati: MP4, MOV, WMV, FLV, AVI, MKV. Tieni presente che i link di YouTube non sono supportati per le opzioni video."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Questa impostazione ridimensiona solo il campo di input e non influisce sulla larghezza della casella della domanda. Per limitare la lunghezza dell'input accettato, vai su \"Convalida\" → \"Limite massimo di caratteri\"."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3509,16 +3188,12 @@ export var italianTranslation = {
     primaryDarkColor: "Fluttuare",
     // [Auto-translated] "Selected"
     primaryLightColor: "Selezionato",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "Colore di sfondo",
     // "Corner radius"
     cornerRadius: "Raggio d'angolo",
     // [Auto-translated] "Default background"
     backcolor: "Sfondo predefinito",
     // [Auto-translated] "Hover background"
     hovercolor: "Sfondo al passaggio del mouse",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Decorazione del bordo",
     // [Auto-translated] "Font color"
     fontColor: "Colore del carattere",
     // [Auto-translated] "Background color"
@@ -3527,8 +3202,6 @@ export var italianTranslation = {
     primaryForecolor: "Colore predefinito",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Colore disabilitato",
-    // [Auto-translated] "Font"
-    font: "Font",
     // [Auto-translated] "Darker"
     borderDefault: "Scuro",
     // [Auto-translated] "Lighter"
@@ -3605,14 +3278,10 @@ export var italianTranslation = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Sfondo della superficie",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Primario",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Secondario",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Superficie",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Elementi dell'interfaccia utente",
     // [Auto-translated] "Font"

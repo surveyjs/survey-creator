@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export let svStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Redigera",
-    // [Auto-translated] "Watch and learn how to create surveys"
-    externalHelpLink: "Se och lär dig hur du skapar enkäter",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Dra och släpp en fråga från Verktygslistan till vänster.",
-    // [Auto-translated] "Create a rule to customize the flow of the survey."
-    addLogicItem: "Skapa en regel för att anpassa undersökningens flöde.",
-    // "Copy"
-    copy: "Kopiera",
     // [Auto-translated] "Duplicate"
-    duplicate: "Duplicera",
-    // "Add to toolbox"
-    addToToolbox: "Lägg till Verktygslistan",
-    // "Delete Panel"
-    deletePanel: "Radera Panel",
-    // "Delete Question"
-    deleteQuestion: "Radera Fråga",
-    // "Convert to"
-    convertTo: "Konvertera till",
-    // "Drag element"
-    drag: "Dra element"
+    duplicate: "Duplicera"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export let svStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "Standard ({0})",
-    // "Survey"
-    survey: "Enkät",
     // "Settings"
     settings: "Enkät inställningar",
     // [Auto-translated] "Open settings"
@@ -144,42 +120,14 @@ export let svStrings = {
     surveyTypeName: "Undersökning",
     // [Auto-translated] "Page"
     pageTypeName: "Sida",
-    // [Auto-translated] "Panel"
-    panelTypeName: "Panel",
-    // [Auto-translated] "Question"
-    questionTypeName: "Fråga",
-    // [Auto-translated] "Column"
-    columnTypeName: "Spalt",
-    // "Add New Page"
-    addNewPage: "Lägg till en ny sida",
-    // "Scroll to the Right"
-    moveRight: "Scrolla till höger",
-    // "Scroll to the Left"
-    moveLeft: "Scrolla till vänster",
-    // "Delete Page"
-    deletePage: "Radera sida",
-    // "Edit Page"
-    editPage: "Redigera sida",
-    // "Edit"
-    edit: "Redigera",
     // "page"
     newPageName: "sida",
     // "question"
     newQuestionName: "fråga",
     // [Auto-translated] "panel"
     newPanelName: "Panel",
-    // [Auto-translated] "text"
-    newTextItemName: "Text",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "Standard",
-    // [Auto-translated] "Modern"
-    modernTheme: "Modern",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Standard (äldre)",
     // "Preview Survey Again"
     testSurveyAgain: "Testa enkät igen",
-    // "Survey width: "
-    testSurveyWidth: "Enkät bredd: ",
     // [Auto-translated] "You had to navigate to"
     navigateToMsg: "Du var tvungen att navigera till",
     // "Save Survey"
@@ -198,10 +146,6 @@ export let svStrings = {
     undo: "Ångra",
     // "Redo"
     redo: "Göra om",
-    // [Auto-translated] "Undo last change"
-    undoTooltip: "Ångra senaste ändring",
-    // [Auto-translated] "Redo the change"
-    redoTooltip: "Gör om ändringen",
     // [Auto-translated] "Expand"
     expandTooltip: "Expandera",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export let svStrings = {
     showMoreChoices: "Visa mer",
     // [Auto-translated] "Show less"
     showLessChoices: "Visa mindre",
-    // [Auto-translated] "Copy"
-    copy: "Kopia",
-    // [Auto-translated] "Cut"
-    cut: "Skära",
-    // [Auto-translated] "Paste"
-    paste: "Klistra",
-    // [Auto-translated] "Copy selection to clipboard"
-    copyTooltip: "Kopiera markering till Urklipp",
-    // [Auto-translated] "Cut selection to clipboard"
-    cutTooltip: "Klipp markering till Urklipp",
-    // [Auto-translated] "Paste from clipboard"
-    pasteTooltip: "Klistra in från Urklipp",
-    // "Options"
-    options: "Alternativ",
-    // "Generate Valid JSON"
-    generateValidJSON: "Generera giltig JSON",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Okänd funktion: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export let svStrings = {
     expressionSyntaxError: "Syntaxfel.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Semantiskt fel.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Generera läsbar JSON",
     // "Toolbox"
     toolbox: "Verktygslista",
-    // [Auto-translated] "Properties"
-    "property-grid": "Egenskaper",
     // [Auto-translated] "Search"
     toolboxSearch: "Söka",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export let svStrings = {
     propertyGridPlaceholderTitle: "Börja konfigurera formuläret",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Klicka på en kategoriikon för att utforska undersökningsinställningarna. Ytterligare inställningar blir tillgängliga när du lägger till ett undersökningselement på designytan.",
-    // "Please correct JSON."
-    correctJSON: "Var vänligen korrigera JSON.",
     // "Survey Results "
     surveyResults: "Enkät resultat: ",
     // "As Table"
@@ -294,8 +216,6 @@ export let svStrings = {
     saving: "Sparar",
     // "Saved"
     saved: "Sparat",
-    // [Auto-translated] "Error"
-    propertyEditorError: "Fel",
     // "Error! Editor content is not saved."
     saveError: "Fel! Innehållet i enkäten är inte sparat.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export let svStrings = {
     themeResetConfirmation: "Vill du verkligen återställa temat? Alla dina anpassningar kommer att gå förlorade.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Ja, återställ temat",
-    // [Auto-translated] "Bold"
-    bold: "Djärv",
-    // [Auto-translated] "Italic"
-    italic: "Kursiv",
-    // [Auto-translated] "Underline"
-    underline: "Understryka",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Lägg till fråga",
     // [Auto-translated] "Select page..."
@@ -507,8 +421,6 @@ export let svStrings = {
       trigger_runExpressionDescription: "När det logiska uttrycket utvärderas till true utvärderar undersökningen ett annat uttryck. Du kan också tilldela resultatet av det senare uttrycket som ett värde till den valda frågan",
       // [Auto-translated] "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Om det logiska uttrycket utvärderas till true visas det angivna innehållet på sidan \"Tack\".",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "När uttryck: \"{0}\" returnerar true", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "Ny regel",
       // [Auto-translated] "make page {0} visible"
@@ -539,6 +451,8 @@ export let svStrings = {
       column_setValueText: "Tilldela cellvärde: {1} till kolumn: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Ett uttryck vars resultat kommer att tilldelas målfrågan.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Ange ett värde...",
       // [Auto-translated] "survey becomes completed"
       trigger_completeText: "Undersökningen blir slutförd",
       // [Auto-translated] "set into question: {0} value {1}"
@@ -563,8 +477,6 @@ export let svStrings = {
       conditions: "Skick",
       // [Auto-translated] "Action(s)"
       actions: "Åtgärd(er)",
-      // [Auto-translated] "Define condition(s)"
-      expressionEditorTitle: "Definiera villkor",
       // [Auto-translated] "Define action(s)"
       actionsEditorTitle: "Definiera åtgärder",
       // [Auto-translated] "Delete Action"
@@ -575,8 +487,6 @@ export let svStrings = {
       selectedActionCaption: "Välj åtgärd...",
       // [Auto-translated] "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Logikuttrycket är tomt eller ogiltigt. Var snäll och rätta till det.",
-      // [Auto-translated] "Please add at least one action."
-      noActionError: "Lägg till minst en åtgärd.",
       // [Auto-translated] "Please fix issues in your action(s)."
       actionInvalid: "Åtgärda problem i din(a) åtgärd(er).",
       // [Auto-translated] "Logical rules are incomplete"
@@ -879,8 +789,6 @@ export let svStrings = {
     defaultDisplayValue: "Standardvisningsvärde för dynamiska texter",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Justering av etiketter",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Inmatningsfältets bredd (i tecken)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Justering av cellfelmeddelande",
     // [Auto-translated] "Enabled"
@@ -889,32 +797,16 @@ export let svStrings = {
     disabled: "Inaktiverad",
     // [Auto-translated] "Inherit"
     inherit: "Ärva",
-    // "Apply"
-    apply: "Faställ",
-    // [Auto-translated] "OK"
-    ok: "Okej",
-    // [Auto-translated] "Save"
-    save: "Spara",
     // [Auto-translated] "Clear"
     clear: "Klar",
-    // [Auto-translated] "Save"
-    saveTooltip: "Spara",
-    // "Cancel"
-    cancel: "Avbryt",
     // [Auto-translated] "Set"
     set: "Ställa",
-    // "Reset"
-    reset: "Återställ",
     // [Auto-translated] "Change"
     change: "Förändring",
-    // [Auto-translated] "Refresh"
-    refresh: "Svalka",
     // "Close"
     close: "Stäng",
     // "Delete"
     delete: "Radera",
-    // [Auto-translated] "Add"
-    add: "Addera",
     // "Add New"
     addNew: "Lägg till ny",
     // "Click to add an item..."
@@ -923,34 +815,10 @@ export let svStrings = {
     removeItem: "Klicka för att ta bort objektet...",
     // [Auto-translated] "Drag the item"
     dragItem: "Dra objektet",
-    // [Auto-translated] "Other"
-    addOther: "Annan",
-    // [Auto-translated] "Select All"
-    addSelectAll: "Markera alla",
-    // [Auto-translated] "None"
-    addNone: "Ingen",
-    // "Remove All"
-    removeAll: "Ta bort allt",
     // "Edit"
     edit: "Redigera",
-    // [Auto-translated] "Return without saving"
-    back: "Returnera utan att spara",
-    // [Auto-translated] "Return without saving"
-    backTooltip: "Returnera utan att spara",
-    // [Auto-translated] "Save and return"
-    saveAndBack: "Spara och returnera",
-    // [Auto-translated] "Save and return"
-    saveAndBackTooltip: "Spara och returnera",
     // [Auto-translated] "Done"
     doneEditing: "Färdig",
-    // "Edit Choices"
-    editChoices: "Redigera val",
-    // [Auto-translated] "Show Choices"
-    showChoices: "Visa alternativ",
-    // "Move"
-    move: "Flytta",
-    // "<empty>"
-    empty: "<tom>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Värdet är tomt",
     // "Manual Entry"
@@ -963,12 +831,6 @@ export let svStrings = {
     fastEntryChoicesMinCountError: "Ange minst {0} artiklar",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Ange listan med alternativ och deras ID:n i följande format:\n\nid|alternativ\n\nEtt alternativalternativ-ID är inte synligt för respondenterna och kan användas i villkorsregler.",
-    // "Form Entry"
-    formEntry: "Ifyllning i enkäten",
-    // "Test the service"
-    testService: "Testa tjänsten",
-    // [Auto-translated] "Please select the element"
-    itemSelectorEmpty: "Välj elementet",
     // [Auto-translated] "Please select the action"
     conditionActionEmpty: "Välj åtgärd",
     // "Select a question..."
@@ -977,20 +839,8 @@ export let svStrings = {
     conditionSelectPage: "Välj en sida...",
     // [Auto-translated] "Select a panel..."
     conditionSelectPanel: "Välj en panel...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Vänligen skriv in/välj värdet",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Tryck ctrl+mellanslag för att få en ledtråd",
-    // "Current row"
-    aceEditorRowTitle: "Nuvarande rad",
-    // "Current panel"
-    aceEditorPanelTitle: "Nuvarande panel",
-    // "For more details please check the documentation"
-    showMore: "För mer detaljer - se dokumentationen",
-    // "Available questions"
-    assistantTitle: "Tillgängliga frågor:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Det bör vara minst 1 kolumn eller rad",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "Granska innan du skickar in",
     // [Auto-translated] "Enabled by a condition"
@@ -1041,20 +891,12 @@ export let svStrings = {
     "addNew@navigateToUrlOnCondition": "Lägg till ny URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Lägg till ny sida",
-    // [Auto-translated] "Expression is empty"
-    expressionIsEmpty: "Uttrycket är tomt",
     // "Value"
     value: "Värde",
     // [Auto-translated] "Text"
     text: "Text",
-    // "Row ID"
-    rowid: "Rad ID",
     // "Image or video file URL"
     imageLink: "Bild länk",
-    // "Edit column: {0}"
-    columnEdit: "Redigera kolumn: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Redigera element: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1071,8 +913,6 @@ export let svStrings = {
     imageLinkName: "Hämta fil-URL:er från följande egenskap",
     // [Auto-translated] "Accept empty response"
     allowEmptyResponse: "Acceptera tomt svar",
-    // [Auto-translated] "Title"
-    titlePlaceholder: "Titel",
     // [Auto-translated] "Survey Title"
     surveyTitlePlaceholder: "Undersökningens titel",
     // [Auto-translated] "Page {num}"
@@ -1183,16 +1023,8 @@ export let svStrings = {
     defaultValue: "Standard värde",
     // "Default texts"
     cellsDefaultRow: "Standard cell texter",
-    // "Edit survey settings"
-    surveyEditorTitle: "Redigera schema inställningar",
-    // "Edit: {0}"
-    qEditorTitle: "Redigera: {0}",
     // "Maximum character limit"
     maxLength: "Max längd",
-    // [Auto-translated] "Build"
-    buildExpression: "Bygga",
-    // [Auto-translated] "Edit"
-    editExpression: "Redigera",
     // [Auto-translated] "and"
     and: "och",
     // [Auto-translated] "or"
@@ -1219,8 +1051,6 @@ export let svStrings = {
     includeIntoResult: "Lägg till i undersökningsresultaten",
     // "Make the title and description visible"
     showTitle: "Visa/dölj titel",
-    // [Auto-translated] "Expand/collapse title"
-    expandCollapseTitle: "Expandera/komprimera titel",
     // "Select a survey language"
     locale: "Standard språk",
     // [Auto-translated] "Select device type"
@@ -1639,8 +1469,6 @@ export let svStrings = {
     displayRateDescriptionsAsExtremeItems: "Visa etiketterna som extrema värden",
     // [Auto-translated] "Row order"
     rowOrder: "Radordning",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "Kolumnlayout",
     // [Auto-translated] "Nested column count"
     columnColCount: "Kapslat antal kolumner",
     // [Auto-translated] "Correct Answer"
@@ -1671,22 +1499,6 @@ export let svStrings = {
     },
     // [Auto-translated] "Logo alignment"
     logoPosition: "Justering av logotyp",
-    // [Auto-translated] "Add logo..."
-    addLogo: "Lägg till logotyp...",
-    // [Auto-translated] "Change logo..."
-    changeLogo: "Ändra logotyp...",
-    logoPositions: {
-      // [Auto-translated] "Remove logo"
-      none: "Ta bort logotyp",
-      // [Auto-translated] "Left"
-      left: "Vänster",
-      // [Auto-translated] "Right"
-      right: "Höger",
-      // [Auto-translated] "On the top"
-      top: "På toppen",
-      // [Auto-translated] "In the bottom"
-      bottom: "I botten"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Förhandsgranska läge",
     // [Auto-translated] "Enable grid layout"
@@ -1699,14 +1511,8 @@ export let svStrings = {
     detailErrorLocation: "Justering av felmeddelande med radinformation",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Panelens layout"
-      },
       // "General"
       general: "Generellt",
-      // "Options"
-      fileOptions: "Alternativ",
       // "HTML Editor"
       html: "Html-editor",
       // "Columns"
@@ -1729,10 +1535,6 @@ export let svStrings = {
       sliderSettings: "Inställningar för skjutreglage",
       // "Choices from a Web Service"
       choicesByUrl: "Välj från webben",
-      // "Default Choices"
-      matrixChoices: "Standard val",
-      // "Text Inputs"
-      multipleTextItems: "Text indata",
       // [Auto-translated] "Numbering"
       numbering: "Numrering",
       // "Validators"
@@ -1775,8 +1577,6 @@ export let svStrings = {
       showOnCompleted: "Sidan \"Tack\"",
       // [Auto-translated] "Logo in the Survey Header"
       logo: "Logotyp i undersökningens sidhuvud",
-      // [Auto-translated] "Slider"
-      slider: "Skjutreglage",
       // [Auto-translated] "Expression"
       expression: "Uttryck",
       // [Auto-translated] "Question Settings"
@@ -1796,62 +1596,18 @@ export let svStrings = {
       // [Auto-translated] "Others"
       others: "Andra"
     },
-    // "Edit property '{0}'"
-    editProperty: "Redigera egenskap '{0}'",
     // "Items"
     items: "[ Element: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Gör valen synliga om",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "Gör valbara val om",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "Gör kolumner synliga om",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "Gör rader synliga om",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "Öka det inre indraget",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Använd svar från den senaste posten som standard",
-    // "Please enter a value."
-    enterNewValue: "Vänligen skriv in ett värde.",
-    // "There are no questions in the survey."
-    noquestions: "Det finns ingen fråga i enkäten.",
-    // "Please create a trigger"
-    createtrigger: "Vänligen skapa en trigger",
-    // [Auto-translated] "Press enter button to edit"
-    titleKeyboardAdornerTip: "Tryck på enter-knappen för att redigera",
-    // [Auto-translated] "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Tryck på enter-knappen för att redigera objektet, tryck på raderingsknappen för att radera objektet, tryck på alt plus pil uppåt eller pil nedåt för att flytta objektet",
-    // "On "
-    triggerOn: "På ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Synligör sidor:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Synligör element:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Avsluta enkät vid verkställ.",
-    // "The trigger is not set"
-    triggerNotSet: "Trigger är inte satt",
-    // "Run if"
-    triggerRunIf: "Kör ",
-    // "Change value of: "
-    triggerSetToName: "Ändra värden av: ",
-    // "Copy value from: "
-    triggerFromName: "Kopiera värden från: ",
-    // "Run this Expression"
-    triggerRunExpression: "Kör detta uttryck:",
-    // "to: "
-    triggerSetValue: "till: ",
-    // [Auto-translated] "Go to the question"
-    triggerGotoName: "Gå till frågan",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Var vänligen skriv ett giltigt uttryck.",
-    // [Auto-translated] "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Ange ett giltigt uttryck",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Skriv uttryck här...",
-    // [Auto-translated] "No file chosen"
-    noFile: "Ingen fil har valts",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "Rensa dolda frågevärden",
     // [Auto-translated] "Store values in the following property"
@@ -1997,10 +1753,6 @@ export let svStrings = {
     "file-camera": "Lokal fil eller kamera",
     // "Inherit"
     inherit: "inherit",
-    // "Visible"
-    show: "show",
-    // "Hidden"
-    hide: "hide",
     // "Inherit"
     default: "default",
     // "Initial"
@@ -2017,8 +1769,6 @@ export let svStrings = {
     asc: "ascending",
     // "Descending"
     desc: "descending",
-    // "Indeterminate"
-    indeterminate: "indeterminate",
     // [Auto-translated] "Selected"
     selected: "Vald",
     // [Auto-translated] "Unselected"
@@ -2039,12 +1789,6 @@ export let svStrings = {
     carousel: "Karusell",
     // [Auto-translated] "Tabs"
     tab: "Flikar",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "progressTop",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "progressBottom",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "progressTopBottom",
     // "Horizontal"
     horizontal: "horizontal",
     // "Vertical"
@@ -2055,8 +1799,6 @@ export let svStrings = {
     bottom: "bottom",
     // "Top and bottom"
     topBottom: "top and bottom",
-    // [Auto-translated] "Both"
-    both: "Båda",
     // "Left"
     left: "left",
     // [Auto-translated] "Right"
@@ -2097,10 +1839,6 @@ export let svStrings = {
     week: "vecka",
     // "Hidden"
     hidden: "hidden",
-    // "Editable"
-    edit: "edit",
-    // "Read-only"
-    display: "display",
     // [Auto-translated] "Contain"
     contain: "Innehålla",
     // [Auto-translated] "Cover"
@@ -2329,8 +2067,6 @@ export let svStrings = {
     onNextPage: "På nästa sida",
     // "After an answer is changed"
     onValueChanged: "På värdeförändring",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "Innan ett svar ändras",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Ursprunglig struktur",
@@ -2341,12 +2077,6 @@ export let svStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Visa ett enskilt inmatningsfält per sida"
     },
-    // [Auto-translated] "No preview"
-    noPreview: "Ingen förhandsgranskning",
-    // [Auto-translated] "Show all questions"
-    showAllQuestions: "Visa alla frågor",
-    // [Auto-translated] "Show answered questions only"
-    showAnsweredQuestions: "Visa endast besvarade frågor",
     // [Auto-translated] "Show all questions"
     allQuestions: "Visa alla frågor",
     // [Auto-translated] "Show answered questions only"
@@ -2462,12 +2192,8 @@ export let svStrings = {
       onPage: "Återställ på varje sida",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Återställ på varje panel",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Återställ på varje panel",
       // [Auto-translated] "Recursive numbering"
       recursive: "Rekursiv numrering",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Fortsätt genom undersökningen",
       // [Auto-translated] "No numbering"
       off: "Ingen numrering"
     },
@@ -2630,49 +2356,6 @@ export let svStrings = {
     and: "och",
     // [Auto-translated] "or"
     or: "eller"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Använd Angular version",
-    // "Use jQuery version"
-    jquery: "Använd jQuery version",
-    // "Use Knockout version"
-    knockout: "Använd Knockout version",
-    // "Use React version"
-    react: "Använd React version",
-    // "Use Vue version"
-    vue: "Använd Vue version",
-    // "For bootstrap framework"
-    bootstrap: "För bootstrap framework",
-    // [Auto-translated] "Modern theme"
-    modern: "Modernt tema",
-    // [Auto-translated] "Default theme"
-    default: "Standardtema",
-    // [Auto-translated] "Orange theme"
-    orange: "Orange tema",
-    // [Auto-translated] "Darkblue theme"
-    darkblue: "Mörkblått tema",
-    // [Auto-translated] "Darkrose theme"
-    darkrose: "Darkrose-tema",
-    // [Auto-translated] "Stone theme"
-    stone: "Sten tema",
-    // [Auto-translated] "Winter theme"
-    winter: "Vinter tema",
-    // [Auto-translated] "Winter-Stone theme"
-    winterstone: "Vintersten, tema",
-    // "Show survey on a page"
-    showOnPage: "Visa enkät på en sida",
-    // "Show survey in a window"
-    showInWindow: "Visa enkäten i ett nytt fönster",
-    // "Load Survey JSON from server"
-    loadFromServer: "Hämta enkäten som JSON från servern",
-    // "Scripts and styles"
-    titleScript: "Scripts och styles",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2923,10 +2606,6 @@ export let svStrings = {
       choices: "\"Värde\" fungerar som ett objekt-ID som används i villkorsregler. \"Text\" visas för de svarande.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Välj mellan \"Bild\" och \"Video\" för att ställa in innehållsläget för medieväljaren. Om \"Bild\" är valt, se till att alla alternativ som tillhandahålls är bildfiler i följande format: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. På samma sätt, om \"Video\" är valt, se till att alla alternativ är direktlänkar till videofiler i följande format: MP4, MOV, WMV, FLV, AVI, MKV. Observera att YouTube-länkar inte stöds för videoalternativ."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Den här inställningen ändrar bara storleken på inmatningsfältet och påverkar inte bredden på frågerutan. Om du vill begränsa den tillåtna inmatningsl��ngden går du till \"Validering\" → \"Gräns för maximalt antal tecken\"."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3510,16 +3189,12 @@ export let svStrings = {
     primaryDarkColor: "Sväva",
     // [Auto-translated] "Selected"
     primaryLightColor: "Vald",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "Bakgrundsfärg",
     // "Corner radius"
     cornerRadius: "Hörn radie",
     // [Auto-translated] "Default background"
     backcolor: "Standardbakgrund",
     // [Auto-translated] "Hover background"
     hovercolor: "Håll muspekaren bakgrund",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Border dekoration",
     // [Auto-translated] "Font color"
     fontColor: "Teckenfärg",
     // [Auto-translated] "Background color"
@@ -3528,8 +3203,6 @@ export let svStrings = {
     primaryForecolor: "Standardfärg",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Inaktiverad färg",
-    // [Auto-translated] "Font"
-    font: "Teckensnitt",
     // [Auto-translated] "Darker"
     borderDefault: "Mörkare",
     // [Auto-translated] "Lighter"
@@ -3606,14 +3279,10 @@ export let svStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Bakgrund på ytan",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Primär",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Sekundär",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Yta",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Element i användargränssnittet",
     // [Auto-translated] "Font"

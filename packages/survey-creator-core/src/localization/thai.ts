@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export const thStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "แก้ไข",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "ชมและเรียนรู้วิธีสร้างแบบสำรวจ",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "กรุณาวางคำถามที่นี่จากกล่องเครื่องมือ",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "สร้างกฎเพื่อปรับแต่งการไหลของแบบสำรวจ",
-    // "Copy"
-    copy: "คัดลอก",
     // "Duplicate"
-    duplicate: "ทำซ้ำ",
-    // "Add to toolbox"
-    addToToolbox: "เพิ่มลงในกล่องเครื่องมือ",
-    // "Delete Panel"
-    deletePanel: "ลบแผง",
-    // "Delete Question"
-    deleteQuestion: "ลบคำถาม",
-    // "Convert to"
-    convertTo: "แปลงเป็น",
-    // "Drag element"
-    drag: "ลากองค์ประกอบ"
+    duplicate: "ทำซ้ำ"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export const thStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "ค่าเริ่มต้น ({0})",
-    // "Survey"
-    survey: "แบบสำรวจ",
     // "Settings"
     settings: "การตั้งค่า",
     // "Open settings"
@@ -144,42 +120,14 @@ export const thStrings = {
     surveyTypeName: "แบบสำรวจ",
     // "Page"
     pageTypeName: "หน้า",
-    // "Panel"
-    panelTypeName: "แผง",
-    // "Question"
-    questionTypeName: "คำถาม",
-    // "Column"
-    columnTypeName: "คอลัมน์",
-    // "Add New Page"
-    addNewPage: "เพิ่มหน้าใหม่",
-    // "Scroll to the Right"
-    moveRight: "เลื่อนไปทางขวา",
-    // "Scroll to the Left"
-    moveLeft: "เลื่อนไปทางซ้าย",
-    // "Delete Page"
-    deletePage: "ลบหน้า",
-    // "Edit Page"
-    editPage: "แก้ไขหน้า",
-    // "Edit"
-    edit: "แก้ไข",
     // "page"
     newPageName: "หน้า",
     // "question"
     newQuestionName: "คำถาม",
     // "panel"
     newPanelName: "แผง",
-    // "text"
-    newTextItemName: "ข้อความ",
-    // "Default"
-    defaultV2Theme: "ค่าเริ่มต้น",
-    // "Modern"
-    modernTheme: "ทันสมัย",
-    // "Default (legacy)"
-    defaultTheme: "ค่าเริ่มต้น (เวอร์ชันเก่า)",
     // "Preview Survey Again"
     testSurveyAgain: "ดูตัวอย่างแบบสำรวจอีกครั้ง",
-    // "Survey width: "
-    testSurveyWidth: "ความกว้างของแบบสำรวจ: ",
     // "You had to navigate to"
     navigateToMsg: "คุณต้องไปที่",
     // "Save Survey"
@@ -198,10 +146,6 @@ export const thStrings = {
     undo: "เลิกทำ",
     // "Redo"
     redo: "ทำซ้ำ",
-    // "Undo last change"
-    undoTooltip: "เลิกทำการเปลี่ยนแปลงครั้งล่าสุด",
-    // "Redo the change"
-    redoTooltip: "ทำซ้ำการเปลี่ยนแปลง",
     // [Auto-translated] "Expand"
     expandTooltip: "ขยาย",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export const thStrings = {
     showMoreChoices: "แสดงเพิ่มเติม",
     // "Show less"
     showLessChoices: "แสดงน้อยลง",
-    // "Copy"
-    copy: "คัดลอก",
-    // "Cut"
-    cut: "ตัด",
-    // "Paste"
-    paste: "วาง",
-    // "Copy selection to clipboard"
-    copyTooltip: "คัดลอกการเลือกไปยังคลิปบอร์ด",
-    // "Cut selection to clipboard"
-    cutTooltip: "ตัดการเลือกไปยังคลิปบอร์ด",
-    // "Paste from clipboard"
-    pasteTooltip: "วางจากคลิปบอร์ด",
-    // "Options"
-    options: "ตัวเลือก",
-    // "Generate Valid JSON"
-    generateValidJSON: "สร้าง JSON ที่ถูกต้อง",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "ฟังก์ชันที่ไม่รู้จัก: \"{0}\"",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export const thStrings = {
     expressionSyntaxError: "ข้อผิดพลาดทางไวยากรณ์",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "ข้อผิดพลาดทางความหมาย",
-    // "Generate Readable JSON"
-    generateReadableJSON: "สร้าง JSON ที่อ่านง่าย",
     // "Toolbox"
     toolbox: "กล่องเครื่องมือ",
-    // "Properties"
-    "property-grid": "คุณสมบัติ",
     // [Auto-translated] "Search"
     toolboxSearch: "ค้น",
     // "Type to search..."
@@ -272,8 +196,6 @@ export const thStrings = {
     propertyGridPlaceholderTitle: "เริ่มกําหนดค่าฟอร์มของคุณ",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "คลิกไอคอนหมวดหมู่ใดก็ได้เพื่อสํารวจการตั้งค่าแบบสํารวจ การตั้งค่าเพิ่มเติมจะพร้อมใช้งานเมื่อคุณเพิ่มองค์ประกอบแบบสํารวจลงในพื้นผิวการออกแบบ",
-    // "Please correct JSON."
-    correctJSON: "กรุณาแก้ไข JSON",
     // "Survey Results "
     surveyResults: "ผลลัพธ์ของแบบสำรวจ",
     // "As Table"
@@ -294,8 +216,6 @@ export const thStrings = {
     saving: "กำลังบันทึก",
     // "Saved"
     saved: "บันทึกแล้ว",
-    // "Error"
-    propertyEditorError: "ข้อผิดพลาด",
     // "Error! Editor content is not saved."
     saveError: "ข้อผิดพลาด! เนื้อหาของตัวแก้ไขไม่ได้รับการบันทึก",
     // "Language Settings"
@@ -354,12 +274,6 @@ export const thStrings = {
     themeResetConfirmation: "คุณแน่ใจหรือว่าต้องการรีเซ็ตธีม? การปรับแต่งทั้งหมดของคุณจะหายไป",
     // "Yes, reset the theme"
     themeResetConfirmationOk: "ใช่ รีเซ็ตธีม",
-    // "Bold"
-    bold: "ตัวหนา",
-    // "Italic"
-    italic: "ตัวเอียง",
-    // "Underline"
-    underline: "ขีดเส้นใต้",
     // "Add Question"
     addNewQuestion: "เพิ่มคำถาม",
     // "Select page..."
@@ -507,8 +421,6 @@ export const thStrings = {
       trigger_runExpressionDescription: "เมื่อการแสดงผลตรรกะเป็นจริง แบบสำรวจจะประเมินนิพจน์อื่น เป็นทางเลือก ผลลัพธ์ของนิพจน์หลังสามารถกำหนดเป็นค่าของคำถามที่เลือกได้",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "หากนิพจน์ตรรกะเป็นจริง หน้าขอบคุณจะแสดงเนื้อหาที่ระบุ",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "เมื่อนิพจน์: '{0}' เป็นจริง", // {0} - the expression
       // "New rule"
       itemEmptyExpressionText: "กฎใหม่",
       // "make page {0} visible"
@@ -539,6 +451,8 @@ export const thStrings = {
       column_setValueText: "กำหนดค่าคอลัมน์: {1} ให้คอลัมน์: {0}", // {0} column name and {1} setValueExpression
       // "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "นิพจน์ที่ผลลัพธ์จะถูกกำหนดให้กับคำถามเป้าหมาย",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "ป้อนค่า...",
       // "survey becomes completed"
       trigger_completeText: "แบบสำรวจเสร็จสิ้น",
       // "set into question: {0} value {1}"
@@ -563,8 +477,6 @@ export const thStrings = {
       conditions: "เงื่อนไข",
       // "Action(s)"
       actions: "การกระทำ",
-      // "Define condition(s)"
-      expressionEditorTitle: "กำหนดเงื่อนไข",
       // "Define action(s)"
       actionsEditorTitle: "กำหนดการกระทำ",
       // "Delete Action"
@@ -575,8 +487,6 @@ export const thStrings = {
       selectedActionCaption: "เลือกการกระทำ...",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "นิพจน์ตรรกะว่างเปล่าหรือไม่ถูกต้อง กรุณาแก้ไข",
-      // "Please add at least one action."
-      noActionError: "กรุณาเพิ่มอย่างน้อยหนึ่งการกระทำ",
       // "Please fix issues in your action(s)."
       actionInvalid: "กรุณาแก้ไขปัญหาในการกระทำของคุณ",
       // "Logical rules are incomplete"
@@ -878,8 +788,6 @@ export const thStrings = {
     defaultDisplayValue: "ค่าที่แสดงดีฟอลต์สําหรับข้อความไดนามิก",
     // "Label alignment"
     rateDescriptionLocation: "การจัดตำแหน่งป้าย",
-    // "Input field width (in characters)"
-    size: "ความกว้างของช่องป้อนข้อมูล (ในตัวอักษร)",
     // "Cell error message alignment"
     cellErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาดในเซลล์",
     // "Enabled"
@@ -888,32 +796,16 @@ export const thStrings = {
     disabled: "ปิดใช้งาน",
     // "Inherit"
     inherit: "สืบทอด",
-    // "Apply"
-    apply: "ใช้",
-    // "OK"
-    ok: "ตกลง",
-    // "Save"
-    save: "บันทึก",
     // "Clear"
     clear: "ล้าง",
-    // "Save"
-    saveTooltip: "บันทึก",
-    // "Cancel"
-    cancel: "ยกเลิก",
     // "Set"
     set: "ตั้งค่า",
-    // "Reset"
-    reset: "รีเซ็ต",
     // "Change"
     change: "เปลี่ยน",
-    // "Refresh"
-    refresh: "รีเฟรช",
     // "Close"
     close: "ปิด",
     // "Delete"
     delete: "ลบ",
-    // "Add"
-    add: "เพิ่ม",
     // "Add New"
     addNew: "เพิ่มใหม่",
     // "Click to add an item..."
@@ -922,34 +814,10 @@ export const thStrings = {
     removeItem: "คลิกเพื่อลบรายการ...",
     // "Drag the item"
     dragItem: "ลากรายการ",
-    // "Other"
-    addOther: "อื่นๆ",
-    // "Select All"
-    addSelectAll: "เลือกทั้งหมด",
-    // "None"
-    addNone: "ไม่มี",
-    // "Remove All"
-    removeAll: "ลบทั้งหมด",
     // "Edit"
     edit: "แก้ไข",
-    // "Return without saving"
-    back: "กลับโดยไม่บันทึก",
-    // "Return without saving"
-    backTooltip: "กลับโดยไม่บันทึก",
-    // "Save and return"
-    saveAndBack: "บันทึกและกลับ",
-    // "Save and return"
-    saveAndBackTooltip: "บันทึกและกลับ",
     // "Done"
     doneEditing: "เสร็จสิ้นการแก้ไข",
-    // "Edit Choices"
-    editChoices: "แก้ไขตัวเลือก",
-    // "Show Choices"
-    showChoices: "แสดงตัวเลือก",
-    // "Move"
-    move: "ย้าย",
-    // "<empty>"
-    empty: "<ว่าง>",
     // "Value is empty"
     emptyValue: "ค่าว่างเปล่า",
     // "Manual Entry"
@@ -962,12 +830,6 @@ export const thStrings = {
     fastEntryChoicesMinCountError: "กรุณาป้อนอย่างน้อย {0} รายการ",
     // "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "ป้อนรายการตัวเลือกและ ID ของพวกเขาในรูปแบบต่อไปนี้:\n\nid|option\n\nID ตัวเลือกไม่แสดงต่อผู้ตอบแบบสำรวจและสามารถใช้ในกฎเงื่อนไขได้",
-    // "Form Entry"
-    formEntry: "ป้อนข้อมูลในแบบฟอร์ม",
-    // "Test the service"
-    testService: "ทดสอบบริการ",
-    // "Please select the element"
-    itemSelectorEmpty: "กรุณาเลือกองค์ประกอบ",
     // "Please select the action"
     conditionActionEmpty: "กรุณาเลือกการกระทำ",
     // "Select a question..."
@@ -976,20 +838,8 @@ export const thStrings = {
     conditionSelectPage: "เลือกหน้า...",
     // "Select a panel..."
     conditionSelectPanel: "เลือกแผง...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "กรุณาป้อน/เลือกค่า",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "กด ctrl+space เพื่อรับคำแนะนำการเติมเต็มนิพจน์",
-    // "Current row"
-    aceEditorRowTitle: "แถวปัจจุบัน",
-    // "Current panel"
-    aceEditorPanelTitle: "แผงปัจจุบัน",
-    // "For more details please check the documentation"
-    showMore: "สำหรับรายละเอียดเพิ่มเติมกรุณาตรวจสอบเอกสาร",
-    // "Available questions"
-    assistantTitle: "คำถามที่มีอยู่",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "ต้องมีอย่างน้อยหนึ่งคอลัมน์หรือแถว",
     // "Review before submit"
     showPreviewBeforeComplete: "ตรวจสอบก่อนส่ง",
     // "Enabled by a condition"
@@ -1040,20 +890,12 @@ export const thStrings = {
     "addNew@navigateToUrlOnCondition": "เพิ่ม URL ใหม่",
     // [Auto-translated] "Add new page"
     "addNew@pages": "เพิ่มหน้าใหม่",
-    // "Expression is empty"
-    expressionIsEmpty: "นิพจน์ว่างเปล่า",
     // "Value"
     value: "ค่า",
     // "Text"
     text: "ข้อความ",
-    // "Row ID"
-    rowid: "ID แถว",
     // "Image or video file URL"
     imageLink: "URL ไฟล์ภาพหรือวิดีโอ",
-    // "Edit column: {0}"
-    columnEdit: "แก้ไขคอลัมน์: {0}",
-    // "Edit item: {0}"
-    itemEdit: "แก้ไขรายการ: {0}",
     // [Auto-translated] "URL"
     url: "เว็บไซต์",
     // "Path to data"
@@ -1070,8 +912,6 @@ export const thStrings = {
     imageLinkName: "รับ URL ไฟล์จากคุณสมบัติต่อไปนี้",
     // "Accept empty response"
     allowEmptyResponse: "ยอมรับการตอบว่าง",
-    // "Title"
-    titlePlaceholder: "ชื่อเรื่อง",
     // "Survey Title"
     surveyTitlePlaceholder: "ชื่อเรื่องแบบสำรวจ",
     // "Page {num}"
@@ -1182,16 +1022,8 @@ export const thStrings = {
     defaultValue: "คำตอบเริ่มต้น",
     // "Default texts"
     cellsDefaultRow: "ข้อความเริ่มต้น",
-    // "Edit survey settings"
-    surveyEditorTitle: "แก้ไขการตั้งค่าแบบสำรวจ",
-    // "Edit: {0}"
-    qEditorTitle: "แก้ไข: {0}",
     // "Maximum character limit"
     maxLength: "ขีดจำกัดอักขระสูงสุด",
-    // "Build"
-    buildExpression: "สร้าง",
-    // "Edit"
-    editExpression: "แก้ไข",
     // "and"
     and: "และ",
     // "or"
@@ -1218,8 +1050,6 @@ export const thStrings = {
     includeIntoResult: "เพิ่มลงในผลลัพธ์แบบสำรวจ",
     // "Make the title and description visible"
     showTitle: "ทำให้ชื่อเรื่องและคำอธิบายมองเห็นได้",
-    // "Expand/collapse title"
-    expandCollapseTitle: "ขยาย/ยุบชื่อเรื่อง",
     // "Select a survey language"
     locale: "เลือกภาษาของแบบสำรวจ",
     // "Select device type"
@@ -1638,8 +1468,6 @@ export const thStrings = {
     displayRateDescriptionsAsExtremeItems: "แสดงป้ายกำกับเป็นค่าขั้นสุด",
     // "Row order"
     rowOrder: "ลำดับแถว",
-    // "Column layout"
-    columnsLayout: "เค้าโครงคอลัมน์",
     // "Nested column count"
     columnColCount: "จำนวนคอลัมน์ซ้อน",
     // "Correct Answer"
@@ -1670,22 +1498,6 @@ export const thStrings = {
     },
     // "Logo alignment"
     logoPosition: "การจัดตำแหน่งโลโก้",
-    // "Add logo..."
-    addLogo: "เพิ่มโลโก้...",
-    // "Change logo..."
-    changeLogo: "เปลี่ยนโลโก้...",
-    logoPositions: {
-      // "Remove logo"
-      none: "ลบโลโก้",
-      // "Left"
-      left: "ซ้าย",
-      // "Right"
-      right: "ขวา",
-      // "On the top"
-      top: "ด้านบน",
-      // "In the bottom"
-      bottom: "ด้านล่าง"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "โหมดแสดงตัวอย่าง",
     // [Auto-translated] "Enable grid layout"
@@ -1698,14 +1510,8 @@ export const thStrings = {
     detailErrorLocation: "การจัดตําแหน่งข้อความแสดงข้อผิดพลาดรายละเอียดแถว",
     // Creator tabs
     tabs: {
-      panel: {
-        // "Panel Layout"
-        layout: "เค้าโครงแผง"
-      },
       // "General"
       general: "ทั่วไป",
-      // "Options"
-      fileOptions: "ตัวเลือก",
       // "HTML Editor"
       html: "ตัวแก้ไข HTML",
       // "Columns"
@@ -1728,10 +1534,6 @@ export const thStrings = {
       sliderSettings: "การตั้งค่าตัวเลื่อน",
       // "Choices from a Web Service"
       choicesByUrl: "ตัวเลือกจากบริการเว็บ",
-      // "Default Choices"
-      matrixChoices: "ตัวเลือกเริ่มต้น",
-      // "Text Inputs"
-      multipleTextItems: "อินพุตข้อความ",
       // "Numbering"
       numbering: "การจัดลำดับ",
       // "Validators"
@@ -1774,8 +1576,6 @@ export const thStrings = {
       showOnCompleted: "หน้าขอบคุณ",
       // "Logo in the Survey Header"
       logo: "โลโก้ในหัวเรื่องแบบสำรวจ",
-      // "Slider"
-      slider: "ตัวเลื่อน",
       // "Expression"
       expression: "นิพจน์",
       // "Question Settings"
@@ -1795,62 +1595,18 @@ export const thStrings = {
       // "Others"
       others: "อื่นๆ"
     },
-    // "Edit property '{0}'"
-    editProperty: "แก้ไขคุณสมบัติ '{0}'",
     // "Items"
     items: "รายการ",
     // "Make choices visible if"
     choicesVisibleIf: "ทำให้ตัวเลือกมองเห็นได้ถ้า",
     // "Make choices selectable if"
     choicesEnableIf: "ทำให้ตัวเลือกสามารถเลือกได้ถ้า",
-    // "Make columns visible if"
-    columnsEnableIf: "ทำให้คอลัมน์มองเห็นได้ถ้า",
-    // "Make rows visible if"
-    rowsEnableIf: "ทำให้แถวมองเห็นได้ถ้า",
     // "Increase the inner indent"
     innerIndent: "เพิ่มการเว้นวรรคภายใน",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "ใช้คําตอบจากรายการสุดท้ายเป็นค่าเริ่มต้น",
-    // "Please enter a value."
-    enterNewValue: "กรุณาป้อนค่า",
-    // "There are no questions in the survey."
-    noquestions: "ไม่มีคำถามในแบบสำรวจ",
-    // "Please create a trigger"
-    createtrigger: "กรุณาสร้างทริกเกอร์",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "กดปุ่ม Enter เพื่อแก้ไข",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "กดปุ่ม Enter เพื่อแก้ไขรายการ, กดปุ่ม Delete เพื่อลบรายการ, กด alt+ลูกศรขึ้นหรือลงเพื่อย้ายรายการ",
-    // "On "
-    triggerOn: "บน",
-    // "Make pages visible"
-    triggerMakePagesVisible: "ทำให้หน้าแสดง",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "ทำให้องค์ประกอบแสดง",
-    // "Complete the survey if successful."
-    triggerCompleteText: "เสร็จสิ้นแบบสำรวจหากสำเร็จ",
-    // "The trigger is not set"
-    triggerNotSet: "ทริกเกอร์ยังไม่ถูกตั้งค่า",
-    // "Run if"
-    triggerRunIf: "รันถ้า",
-    // "Change value of: "
-    triggerSetToName: "เปลี่ยนค่าของ:",
-    // "Copy value from: "
-    triggerFromName: "คัดลอกค่าจาก:",
-    // "Run this Expression"
-    triggerRunExpression: "รันนิพจน์นี้",
-    // "to: "
-    triggerSetValue: "ไปยัง:",
-    // "Go to the question"
-    triggerGotoName: "ไปยังคำถาม",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "ไม่ใส่ตัวแปรในผลลัพธ์แบบสำรวจ",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "กรุณาป้อนนิพจน์ที่ถูกต้อง",
     // "Type expression here..."
     emptyExpressionPlaceHolder: "ป้อนนิพจน์ที่นี่...",
-    // "No file chosen"
-    noFile: "ไม่มีไฟล์ที่เลือก",
     // "Clear hidden question values"
     clearIfInvisible: "ล้างค่าคำถามที่ซ่อนอยู่",
     // "Store values in the following property"
@@ -1996,10 +1752,6 @@ export const thStrings = {
     "file-camera": "ไฟล์ท้องถิ่นหรือกล้อง",
     // "Inherit"
     inherit: "สืบทอด",
-    // "Visible"
-    show: "มองเห็นได้",
-    // "Hidden"
-    hide: "ซ่อน",
     // "Inherit"
     default: "สืบทอด",
     // "Initial"
@@ -2016,8 +1768,6 @@ export const thStrings = {
     asc: "เพิ่มขึ้น",
     // "Descending"
     desc: "ลดลง",
-    // "Indeterminate"
-    indeterminate: "ไม่แน่นอน",
     // "Selected"
     selected: "เลือก",
     // "Unselected"
@@ -2038,12 +1788,6 @@ export const thStrings = {
     carousel: "ม้าหมุน",
     // "Tabs"
     tab: "แท็บ",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "ตัวนำทางแผง + แถบความคืบหน้าด้านบน",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "ตัวนำทางแผง + แถบความคืบหน้าด้านล่าง",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "ตัวนำทางแผง + แถบความคืบหน้าด้านบนและล่าง",
     // "Horizontal"
     horizontal: "แนวนอน",
     // "Vertical"
@@ -2054,8 +1798,6 @@ export const thStrings = {
     bottom: "ด้านล่าง",
     // "Top and bottom"
     topBottom: "ด้านบนและล่าง",
-    // "Both"
-    both: "ทั้งสอง",
     // "Left"
     left: "ซ้าย",
     // "Right"
@@ -2096,10 +1838,6 @@ export const thStrings = {
     week: "สัปดาห์",
     // "Hidden"
     hidden: "ซ่อน",
-    // "Editable"
-    edit: "แก้ไขได้",
-    // "Read-only"
-    display: "อ่านอย่างเดียว",
     // "Contain"
     contain: "พอดี",
     // "Cover"
@@ -2328,8 +2066,6 @@ export const thStrings = {
     onNextPage: "เมื่อเปลี่ยนไปหน้าถัดไป",
     // "After an answer is changed"
     onValueChanged: "หลังจากคำตอบถูกเปลี่ยน",
-    // "Before an answer is changed"
-    onValueChanging: "ก่อนที่คำตอบจะถูกเปลี่ยน",
     questionsOnPageMode: {
       // "Original structure"
       standard: "โครงสร้างดั้งเดิม",
@@ -2340,12 +2076,6 @@ export const thStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "แสดงช่องป้อนข้อมูลเดียวต่อหน้า"
     },
-    // "No preview"
-    noPreview: "ไม่มีการแสดงตัวอย่าง",
-    // "Show all questions"
-    showAllQuestions: "แสดงคำถามทั้งหมด",
-    // "Show answered questions only"
-    showAnsweredQuestions: "แสดงเฉพาะคำถามที่ตอบแล้ว",
     // [Auto-translated] "Show all questions"
     allQuestions: "แสดงคําถามทั้งหมด",
     // [Auto-translated] "Show answered questions only"
@@ -2461,12 +2191,8 @@ export const thStrings = {
       onPage: "รีเซ็ตในแต่ละหน้า",
       // "Reset on each panel"
       onpanel: "รีเซ็ตในแต่ละแผง",
-      // "Reset on each panel"
-      onPanel: "รีเซ็ตในแต่ละแผง",
       // [Auto-translated] "Recursive numbering"
       recursive: "การกําหนดหมายเลขแบบเรียกซ้ํา",
-      // "Continue across the survey"
-      onSurvey: "ต่อเนื่องทั่วทั้งแบบสำรวจ",
       // "No numbering"
       off: "ไม่มีการจัดลำดับ"
     },
@@ -2629,49 +2355,6 @@ export const thStrings = {
     and: "และ",
     // "or"
     or: "หรือ"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "ใช้ Angular เวอร์ชัน",
-    // "Use jQuery version"
-    jquery: "ใช้ jQuery เวอร์ชัน",
-    // "Use Knockout version"
-    knockout: "ใช้ Knockout เวอร์ชัน",
-    // "Use React version"
-    react: "ใช้ React เวอร์ชัน",
-    // "Use Vue version"
-    vue: "ใช้ Vue เวอร์ชัน",
-    // "For bootstrap framework"
-    bootstrap: "สำหรับกรอบ Bootstrap",
-    // "Modern theme"
-    modern: "ธีมสมัยใหม่",
-    // "Default theme"
-    default: "ธีมค่าเริ่มต้น",
-    // "Orange theme"
-    orange: "ธีมสีส้ม",
-    // "Darkblue theme"
-    darkblue: "ธีมสีน้ำเงินเข้ม",
-    // "Darkrose theme"
-    darkrose: "ธีมสีแดงเข้ม",
-    // "Stone theme"
-    stone: "ธีมหิน",
-    // "Winter theme"
-    winter: "ธีมฤดูหนาว",
-    // "Winter-Stone theme"
-    winterstone: "ธีมหินฤดูหนาว",
-    // "Show survey on a page"
-    showOnPage: "แสดงแบบสำรวจในหน้า",
-    // "Show survey in a window"
-    showInWindow: "แสดงแบบสำรวจในหน้าต่าง",
-    // "Load Survey JSON from server"
-    loadFromServer: "โหลด JSON แบบสำรวจจากเซิร์ฟเวอร์",
-    // "Scripts and styles"
-    titleScript: "สคริปต์และสไตล์",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "จาวาสคริปต์"
   },
   // Preview (Survey)
   ts: {
@@ -2922,10 +2605,6 @@ export const thStrings = {
       choices: "\"ค่า\" ทำหน้าที่เป็น ID รายการที่ใช้ในกฎเงื่อนไข; \"ข้อความ\" แสดงให้ผู้ตอบเห็น",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "เลือกจาก \"รูปภาพ\" และ \"วิดีโอ\" เพื่อกำหนดโหมดเนื้อหาของตัวเลือกสื่อ ถ้าเลือก \"รูปภาพ\" ให้แน่ใจว่าตัวเลือกทั้งหมดที่ให้เป็นไฟล์รูปภาพในรูปแบบ JPEG, GIF, PNG, APNG, SVG, BMP, ICO ถ้าเลือก \"วิดีโอ\" ให้แน่ใจว่าตัวเลือกทั้งหมดเป็นลิงก์ตรงไปยังไฟล์วิดีโอในรูปแบบ MP4, MOV, WMV, FLV, AVI, MKV โปรดทราบว่าลิงก์ YouTube ไม่รองรับสำหรับตัวเลือกวิดีโอ"
-    },
-    text: {
-      // "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "การตั้งค่านี้เพียงแค่เปลี่ยนขนาดของช่องป้อนข้อมูลและไม่ส่งผลต่อความกว้างของกล่องคำถาม เพื่อจำกัดความยาวของอินพุตที่รับได้ไปที่ <b>การตรวจสอบความถูกต้อง → ขีดจำกัดตัวอักษรสูงสุด</b>"
     },
     comment: {
       // "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3509,16 +3188,12 @@ export const thStrings = {
     primaryDarkColor: "เมื่อชี้เมาส์",
     // "Selected"
     primaryLightColor: "เมื่อเลือก",
-    // "Background color"
-    backgroundDimColor: "สีพื้นหลัง",
     // "Corner radius"
     cornerRadius: "รัศมีมุม",
     // "Default background"
     backcolor: "พื้นหลังค่าเริ่มต้น",
     // "Hover background"
     hovercolor: "พื้นหลังเมื่อชี้เมาส์",
-    // "Border decoration"
-    borderDecoration: "การตกแต่งขอบ",
     // "Font color"
     fontColor: "สีฟอนต์",
     // "Background color"
@@ -3527,8 +3202,6 @@ export const thStrings = {
     primaryForecolor: "สีค่าเริ่มต้น",
     // "Disabled color"
     primaryForecolorLight: "สีเมื่อปิดใช้งาน",
-    // "Font"
-    font: "ฟอนต์",
     // "Darker"
     borderDefault: "สีเข้ม",
     // "Lighter"
@@ -3605,14 +3278,10 @@ export const thStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "พื้นหลังพื้นผิว",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "ประถม",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "รอง",
-    // [Auto-translated] "Surface"
-    surfaceScale: "พื้นผิว",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "องค์ประกอบ UI",
     // [Auto-translated] "Font"
