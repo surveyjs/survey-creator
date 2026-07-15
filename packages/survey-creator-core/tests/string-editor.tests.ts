@@ -321,6 +321,49 @@ test("Test string editor inplaceEditChoiceValues + creator.trimValues", (): any 
   seChoice.onBlur({ target: { innerText: "  trimValue  ", innerHTML: "  trimValue  ", setAttribute: () => { }, removeAttribute: () => { } } });
   expect(itemValue.value).toEqual("trimValue");
 });
+test("Editing dynamic panel template title/description on the design surface updates templateTitle/templateDescription in Property Grid, #7876", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "paneldynamic",
+            name: "panel",
+            templateTitle: "Initial title",
+            templateDescription: "Initial description"
+          }
+        ]
+      }
+    ]
+  };
+  const question = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("panel");
+  creator.selectElement(question);
+
+  const propertyGrid = creator["designerPropertyGrid"].survey;
+  const templateTitleQuestion = propertyGrid.getQuestionByName("templateTitle");
+  const templateDescriptionQuestion = propertyGrid.getQuestionByName("templateDescription");
+  expect(templateTitleQuestion.value).toEqual("Initial title");
+  expect(templateDescriptionQuestion.value).toEqual("Initial description");
+
+  // The design surface renders the template panel; its title/description inline editors edit template.locTitle/locDescription
+  const template = question.getPanelInDesignMode();
+  const titleEditor = new StringEditorViewModelBase(template.locTitle, creator);
+  titleEditor.onBlur({ target: { innerText: "Edited title", innerHTML: "Edited title", setAttribute: () => { }, removeAttribute: () => { } } });
+  const descriptionEditor = new StringEditorViewModelBase(template.locDescription, creator);
+  descriptionEditor.onBlur({ target: { innerText: "Edited description", innerHTML: "Edited description", setAttribute: () => { }, removeAttribute: () => { } } });
+
+  expect(question.templateTitle).toEqual("Edited title");
+  expect(question.templateDescription).toEqual("Edited description");
+  expect(templateTitleQuestion.value).toEqual("Edited title");
+  expect(templateDescriptionQuestion.value).toEqual("Edited description");
+
+  // Clearing the values on the design surface should also update the Property Grid
+  titleEditor.onBlur({ target: { innerText: "", innerHTML: "", setAttribute: () => { }, removeAttribute: () => { } } });
+  descriptionEditor.onBlur({ target: { innerText: "", innerHTML: "", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(templateTitleQuestion.value).toBeFalsy();
+  expect(templateDescriptionQuestion.value).toBeFalsy();
+});
 test("Test string editor inplaceEditChoiceValues + correct non-unique value", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {
