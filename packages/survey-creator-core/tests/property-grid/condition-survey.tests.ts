@@ -1953,6 +1953,45 @@ test("Condition editor and question value cssClasses", () => {
   expect(comp.contentQuestion.cssClasses.content).toContain("sd-question__content");
   ComponentCollection.Instance.clear();
 });
+test("Condition editor for a component that wraps matrixdropdown, Bug#7879", () => {
+  ComponentCollection.Instance.add({
+    name: "test7879",
+    questionJSON: {
+      type: "matrixdropdown",
+      columns: [
+        { name: "Column 1", cellType: "radiogroup", showInMultipleColumns: true }
+      ],
+      choices: [1, 2, 3, 4, 5],
+      rows: ["Row 1", "Row 2"]
+    }
+  });
+  try {
+    const survey = new SurveyModel({
+      elements: [
+        { type: "test7879", name: "question2" },
+        { type: "text", name: "question3" }
+      ]
+    });
+    const editor = new ConditionEditor(survey, survey.getQuestionByName("question3"));
+    const panel = editor.panel.panels[0];
+    const nameQuestion = <QuestionDropdownModel>panel.getQuestionByName("questionName");
+    // The component should expose the inner matrix cells (as a plain matrixdropdown does),
+    // not the whole component whose value is an object.
+    expect(nameQuestion.choices.map(c => c.value)).toEqual([
+      "question2.Row 1.Column 1",
+      "question2.Row 2.Column 1"
+    ]);
+    nameQuestion.value = "question2.Row 1.Column 1";
+    const valueQuestion = panel.getQuestionByName("questionValue");
+    expect(valueQuestion.getType()).toEqual("radiogroup");
+    expect((<QuestionRadiogroupModel>valueQuestion).choices.map(c => c.value)).toEqual([1, 2, 3, 4, 5]);
+    valueQuestion.value = 3;
+    // The expression must reference the inner cell and must not contain "[object Object]".
+    expect(editor.text).toEqual("{question2.Row 1.Column 1} = 3");
+  } finally {
+    ComponentCollection.Instance.clear();
+  }
+});
 test("Hide search for conjunction", () => {
   var survey = new SurveyModel({
     elements: [
