@@ -63,6 +63,7 @@ export class PropertyGridViewModel extends Base {
     return new CssClassBuilder()
       .append("spg-container")
       .append("spg-container_search", this.searchEnabled)
+      .append("spg-container--multi-page", this.creator.showOneCategoryInPropertyGrid)
       .toString();
   }
 

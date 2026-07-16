@@ -77,6 +77,7 @@ export var propertyGridCss = {
   page: {
     root: "spg-page spg-body__page",
     title: "spg-title spg-page__title",
+    content: "spg-page__content",
     description: "spg-description spg-page__description"
   },
   pageTitle: "spg-title spg-page__title",

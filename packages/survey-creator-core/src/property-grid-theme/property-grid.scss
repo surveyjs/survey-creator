@@ -27,11 +27,27 @@
   @include disableLibraryAnimations;
 }
 
+.spg-page__content {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sjs2-layout-component-page-content-area-padding-vertical)
+    var(--sjs2-layout-component-page-content-area-padding-horizontal);
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .spg-container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.spg-container--multi-page {
+  .spg-page__content {
+    row-gap: var(--sjs2-layout-component-page-content-area-gap-vertical);
+    column-gap: var(--sjs2-layout-component-page-content-area-gap-horizontal);
+  }
 }
 
 .spg-root-modern.spg-root--one-category {
