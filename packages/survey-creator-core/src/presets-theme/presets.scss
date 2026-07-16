@@ -53,6 +53,13 @@
   max-width: min(100%, 936px);
   width: 936px;
   box-sizing: border-box;
+  .sd-page__header {
+    gap: var(--sjs2-spacing-x150, 12px);
+    margin-bottom: 0;
+  }
+  .sd-page__content {
+    gap: var(--sjs2-spacing-x150, 12px);
+  }
 }
 
 .sps-page__title {
