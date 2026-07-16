@@ -317,9 +317,14 @@ svc-page {
     & > * {
       display: none;
     }
-
-    .sd-title {
+    .sd-page__header {
       display: block;
+      & > * {
+        display: none;
+      }
+      .sd-title {
+        display: block;
+      }
     }
   }
 }
