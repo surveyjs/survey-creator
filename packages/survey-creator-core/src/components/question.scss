@@ -142,6 +142,12 @@ svc-question {
       var(--sjs2-border-effect-component-formbox-default, 0 1px 2px 0 #d4d4d4 inset),
       var(--sjs2-border-effect-component-formbox-focused-reset, 0 0 0 0 #19b394 inset);
   }
+  .sd-question.sd-question--table > .sd-question__container .sd-question__header-and-content-container {
+    padding-left: var(--sd-base-padding);
+    padding-right: var(--sd-base-padding);
+    margin-left: calc(-1 * var(--sd-base-padding));
+    margin-right: calc(-1 * var(--sd-base-padding));
+  }
 
   .sjs_sp_placeholder {
     user-select: all;
