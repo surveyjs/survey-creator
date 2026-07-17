@@ -94,7 +94,7 @@ export var logicCss = {
     headerBottom: "",
     content: "",
     contentLeft: "",
-    titleLeftRoot: "",
+    titleLeftRoot: "sl-question--header-left",
     titleOnAnswer: "",
     titleOnError: "",
     enter: "sl-element-wrapper--enter",
