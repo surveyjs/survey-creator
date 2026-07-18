@@ -2887,7 +2887,7 @@ export class SurveyCreatorModel extends Base
     area = area || this.getSurveyInstanceCreatedArea(reason);
     const element = area === "property-grid" && model ? model.obj : undefined;
     const survey = this.createSurveyCore(json, area, element);
-    survey.renderedIdPrefix = this.getSurveyIdPrefix(area);
+    survey.elementIdPrefix = this.getSurveyIdPrefix(area);
     if (["designer", "preview", "theme", "property-grid", "theme-tab:property-grid",
       "designer-tab:creator-settings:theme", "designer-tab:creator-settings:preset",
       "translation_settings"].indexOf(reason) < 0) {
