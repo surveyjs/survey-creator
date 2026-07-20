@@ -19,12 +19,13 @@
     margin-top: 0;
   }
 }
-
+.svc-row:where(:has(> .sd-row--multiple)) {
+  margin-top: var(--sjs2-spacing-negative-x200);
+}
 .svc-row > .sd-row.sd-row--multiple {
   overflow: auto;
   width: calc(100% + var(--sjs2-spacing-x400));
   flex-wrap: nowrap;
-  margin-top: var(--sjs2-spacing-negative-x200);
   padding-top: var(--sjs2-spacing-x200);
   padding-right: var(--sjs2-spacing-x200);
   padding-bottom: 2px;
