@@ -62,6 +62,14 @@
   }
 }
 
+.sps-popup {
+  .sps-page {
+    .sd-page__content {
+      gap: var(--sjs2-spacing-x200, 16px);
+    }
+  }
+}
+
 .sps-page__title {
   color: var(--sjs2-color-fg-basic-primary, #1c1b20);
 
