@@ -151,6 +151,7 @@ export class SurveySimulatorModel extends Base {
    * Responsiveness depends on survey root width after the simulator shell layout updates.
    * Schedules {@link SurveyModel.forceProcessResponsiveness} on the next animation frame
    * so embedded framework bindings have applied frame sizes first.
+   * @since 2.5.23
    */
   public queueSurveyLayoutRefresh(): void {
     const win = DomWindowHelper.getWindow();
