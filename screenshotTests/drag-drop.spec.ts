@@ -157,6 +157,7 @@ test.describe(title, () => {
           elements: [
             {
               "type": "ranking",
+              "titleLocation": "hidden",
               "name": "question1",
               "choices": [
                 "Item 1",
@@ -169,7 +170,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const qRoot = page.locator(".svc-question__adorner .sd-question__content").first();
+    const qRoot = page.locator(".svc-question__adorner .svc-question__content").first();
     const firstItem = qRoot.locator(".svc-item-value-wrapper").first();
 
     await compareScreenshot(page, qRoot, "drag-drop-item-values-ranking.png");
