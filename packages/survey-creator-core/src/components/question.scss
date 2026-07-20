@@ -121,6 +121,9 @@ svc-question {
   .sd-selectbase:not(.sd-imagepicker) {
     padding-left: var(--sjs2-spacing-x500, 40px);
     margin-left: var(--sjs2-spacing-negative-x500, -40px);
+    padding-right: var(--sjs2-spacing-x500, 40px);
+    margin-right: var(--sjs2-spacing-negative-x500, -40px);
+    overflow-x: auto;
   }
 
   .sd-table .sd-selectbase:not(.sd-imagepicker) {
