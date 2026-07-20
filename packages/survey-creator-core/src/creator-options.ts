@@ -67,12 +67,14 @@ export interface ICreatorOptions {
    * Default value: `true`
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
+   * @since 2.0.0
    */
   allowZoom?: boolean;
   /**
    * Specifies whether to call the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions each time survey or theme settings are changed.
    *
    * Default value: `false`
+   * @since 2.0.0
    */
   autoSaveEnabled?: boolean;
   /**
@@ -89,6 +91,7 @@ export interface ICreatorOptions {
    * Specifies whether users can see and edit the survey header and related survey properties.
    *
    * Default value: `true`
+   * @since 2.0.0
    */
   showSurveyHeader?: boolean;
   /**
@@ -103,6 +106,7 @@ export interface ICreatorOptions {
    * Default value: `true`
    *
    * @see showLogicTab
+   * @since 2.0.0
    */
   logicAllowTextEditExpressions?: boolean;
   /**
@@ -129,6 +133,7 @@ export interface ICreatorOptions {
    * Default value: `true`
    *
    * > Disabling property validation may be useful if you add custom properties that accept complex or hierarchical objects. However, this also allows invalid values to be assigned in the JSON Editor tab. Use with caution.
+   * @since 2.5.2
    */
   validateJsonPropertyValues?: boolean;
   /**
@@ -141,6 +146,7 @@ export interface ICreatorOptions {
    * Specifies whether to show the page selector at the bottom of the Preview tab.
    *
    * Default value: `true`
+   * @since 2.0.0
    */
   previewAllowSelectPage?: boolean;
   /**
@@ -149,6 +155,7 @@ export interface ICreatorOptions {
   showPagesInPreviewTab?: boolean;
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
+   * @since 2.0.0
    */
   previewTheme?: string;
   /**
@@ -159,6 +166,7 @@ export interface ICreatorOptions {
    * Specifies whether the Preview tab displays the Device button that allows users to preview the survey on different device types.
    *
    * Default value: `true`
+   * @since 2.0.0
    */
   previewAllowSimulateDevices?: boolean;
   /**
@@ -183,6 +191,7 @@ export interface ICreatorOptions {
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization).
    *
    * [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+   * @since 2.0.0
    */
   previewAllowSelectLanguage?: boolean | string;
   /**
@@ -193,6 +202,7 @@ export interface ICreatorOptions {
    * Specifies whether the Preview tab displays a checkbox that allows users to show or hide invisible survey elements.
    *
    * Default value: `true`
+   * @since 2.0.0
    */
   previewAllowHiddenElements?: boolean;
   /**
@@ -213,6 +223,7 @@ export interface ICreatorOptions {
    * Default value: `false`
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/dynamically-modify-newly-added-questions/ (linkStyle))
+   * @since 2.0.0
    */
   useElementTitles?: boolean;
   /**
@@ -239,30 +250,35 @@ export interface ICreatorOptions {
    * Limits the number of columns that users can add to [Single-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Multi-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel), and [Dynamic Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxColumns`)
+   * @since 2.0.0
    */
   maxColumns?: number;
   /**
    * Limits the minimum number of choices in [Checkboxes](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radio Button Group](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.minChoices`)
+   * @since 2.0.0
    */
   minChoices?: number;
   /**
    * Limits the number of choices that users can add to [Checkboxes](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radio Button Group](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxChoices`)
+   * @since 2.0.0
    */
   maxChoices?: number;
   /**
    * Limits the number of rows that users can add to [Single-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Multi-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRows`)
+   * @since 2.0.0
    */
   maxRows?: number;
   /**
    * Limits the number of rate values that users can add to [Rating Scale](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRateValues`)
+   * @since 2.0.0
    */
   maxRateValues?: number;
   /**
@@ -290,6 +306,7 @@ export interface ICreatorOptions {
    * Limits the number of items in a logical condition.
    *
    * Default value: -1 (unlimited)
+   * @since 2.0.0
    */
   logicMaxItemsInCondition?: number;
   /**
@@ -316,6 +333,7 @@ export interface ICreatorOptions {
    * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    *
    * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#forbiddenNestedElements) property.
+   * @since 2.2.0
    */
   maxPanelNestingLevel?: number;
 
@@ -343,11 +361,13 @@ export interface ICreatorOptions {
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    * @see maxPanelNestingLevel
+   * @since 2.2.0
    */
   forbiddenNestedElements?: { panel: string[], paneldynamic: string[] };
 
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
+   * @since 2.0.0
    */
   previewAllowSelectTheme?: boolean;
   /**
@@ -399,6 +419,7 @@ export interface ICreatorOptions {
    * Specifies the [question type](https://surveyjs.io/form-library/documentation/api-reference/question#getType) to use by default when users click the "Add Question" button on the design surface.
    *
    * Default value: `"text"`
+   * @since 2.4.1
    */
   defaultAddQuestionType?: string;
   /**
@@ -488,12 +509,14 @@ export interface ICreatorOptions {
    *
    * Default value: `true` if [`pageEditMode`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#pageEditMode) is `"standard"`; `false` otherwise.
    * @see collapseOnDrag
+   * @since 2.0.0
    */
   allowDragPages?: boolean;
   /**
    * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
    *
    * Default value: `false`
+   * @since 2.0.0
    */
   collapseOnDrag?: boolean;
   /**
@@ -503,6 +526,7 @@ export interface ICreatorOptions {
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/ai-translation/ (linkStyle))
    * @see showTranslationTab
+   * @since 2.0.2
    */
   clearTranslationsOnSourceTextChange?: boolean;
   /**
@@ -515,6 +539,7 @@ export interface ICreatorOptions {
    * Default value: 0
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
+   * @since 2.3.11
    */
   maxChoiceContentNestingLevel?: number;
   /**
@@ -523,6 +548,7 @@ export interface ICreatorOptions {
    * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
    *
    * Default value: `true`
+   * @since 2.5.6
    */
   expressionsValidateFunctions?: boolean;
   /**
@@ -531,12 +557,14 @@ export interface ICreatorOptions {
    * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
    *
    * Default value: `false`
+   * @since 2.5.6
    */
   expressionsValidateVariables?: boolean;
   /**
    * Specifies whether to validate the expression syntax (for example, unmatched parentheses, missing operands, or invalid operators).
    *
    * Default value: `true`
+   * @since 2.5.6
    */
   expressionsValidateSyntax?: boolean;
   /**
@@ -545,12 +573,14 @@ export interface ICreatorOptions {
    * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
    *
    * Default value: `true`
+   * @since 2.5.7
    */
   expressionsValidateSemantics?: boolean;
   /**
    * Specifies whether to display language names in English rather than in their native form.
    *
    * Default value: `false` (language names are displayed in their native form)
+   * @since 2.5.19
    */
   useEnglishLanguageNames?: boolean;
 }

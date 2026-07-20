@@ -980,6 +980,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * Default value: `false`
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/change-form-theme/ (linkStyle))
+   * @since 2.0.0
    */
   public get advancedModeEnabled(): boolean {
     return this._advancedModeValue;

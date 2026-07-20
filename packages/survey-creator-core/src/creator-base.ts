@@ -295,6 +295,7 @@ export class SurveyCreatorModel extends Base
    * Specifies whether to display language names in English rather than in their native form.
    *
    * Default value: `false` (language names are displayed in their native form)
+   * @since 2.5.19
    */
   get useEnglishLanguageNames(): boolean {
     return surveyLocalization.useEnglishNames;
@@ -316,6 +317,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    * @see onBeforeShowInplaceDescriptionEditor
+   * @since 2.0.0
    */
   get showSurveyHeader(): boolean {
     return this.allowEditSurveyTitle;
@@ -387,6 +389,7 @@ export class SurveyCreatorModel extends Base
    * Default value: `true`
    *
    * > Disabling property validation may be useful if you add custom properties that accept complex or hierarchical objects. However, this also allows invalid values to be assigned in the JSON Editor tab. Use with caution.
+   * @since 2.5.2
    */
   public validateJsonPropertyValues: boolean = true;
   /**
@@ -395,6 +398,7 @@ export class SurveyCreatorModel extends Base
    * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
    *
    * Default value: `true`
+   * @since 2.5.6
    */
   public expressionsValidateFunctions: boolean = true;
   /**
@@ -403,12 +407,14 @@ export class SurveyCreatorModel extends Base
    * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
    *
    * Default value: `false`
+   * @since 2.5.6
    */
   public expressionsValidateVariables: boolean = false;
   /**
    * Specifies whether to validate the expression syntax (for example, unmatched parentheses, missing operands, or invalid operators).
    *
    * Default value: `true`
+   * @since 2.5.6
    */
   public expressionsValidateSyntax: boolean = true;
   /**
@@ -417,6 +423,7 @@ export class SurveyCreatorModel extends Base
    * This check is performed only if [`expressionsValidateSyntax`](#expressionsValidateSyntax) is `true`.
    *
    * Default value: `true`
+   * @since 2.5.7
    */
   public expressionsValidateSemantics: boolean = true;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
@@ -425,6 +432,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    * @see addNewQuestionLast
+   * @since 2.2.0
    */
   rememberLastQuestionType: boolean = true;
   get currentAddQuestionType(): string {
@@ -678,6 +686,7 @@ export class SurveyCreatorModel extends Base
   public onElementDeleting: EventBase<SurveyCreatorModel, ElementDeletingEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementDeletingEvent>();
   /**
    * An event that is raised when Survey Creator sets the read-only status for a survey element property. Use this event to change the read-only status for individual properties.
+   * @since 2.0.0
    */
   public onPropertyGetReadOnly: EventBase<SurveyCreatorModel, PropertyGetReadOnlyEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGetReadOnlyEvent>();
   /**
@@ -704,6 +713,7 @@ export class SurveyCreatorModel extends Base
    * For information on event handler parameters, refer to descriptions within the interface.
    *
    * > This event is raised *before* the survey instance is initialized with a survey JSON schema. Therefore, you cannot access individual questions, panels, and pages within the event handler. If you need to customize those survey elements, handle the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
+   * @since 2.0.4
    */
   public onSurveyInstanceSetupHandlers: EventBase<SurveyCreatorModel, SurveyInstanceCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, SurveyInstanceCreatedEvent>();
 
@@ -711,6 +721,7 @@ export class SurveyCreatorModel extends Base
    * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
    *
    * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead of handling this event.
+   * @since 2.0.0
    */
   public onElementGetDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
   /**
@@ -738,6 +749,7 @@ export class SurveyCreatorModel extends Base
    * @see onAllowInplaceEdit
    * @see inplaceEditChoiceValues
    * @see showSurveyHeader
+   * @since 2.5.33
    */
   public onBeforeShowInplaceDescriptionEditor: EventBase<SurveyCreatorModel, BeforeShowInplaceDescriptionEditorEvent> = this.addCreatorEvent<SurveyCreatorModel, BeforeShowInplaceDescriptionEditorEvent>();
   /**
@@ -759,6 +771,7 @@ export class SurveyCreatorModel extends Base
    * For information on event handler parameters, refer to descriptions within the interface.
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
+   * @since 2.3.8
    */
   public onAllowAddElement: EventBase<SurveyCreatorModel, AllowAddElementEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowAddElementEvent>();
 
@@ -770,6 +783,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/create-custom-adorners/ (linkStyle))
    * @see onElementAllowOperations
    * @see onPageGetFooterActions
+   * @since 2.0.0
    */
   public onElementGetActions: EventBase<SurveyCreatorModel, ElementGetActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetActionsEvent>();
   /**
@@ -782,6 +796,7 @@ export class SurveyCreatorModel extends Base
    * For information on event handler parameters, refer to descriptions within the interface.
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/remove-properties-from-property-grid/ (linkStyle))
+   * @since 2.0.0
    */
   public onPropertyShowing: EventBase<SurveyCreatorModel, PropertyShowingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyShowingEvent>();
   public onCanShowProperty: EventBase<SurveyCreatorModel, any> = this.onPropertyShowing;
@@ -809,6 +824,7 @@ export class SurveyCreatorModel extends Base
   public onPropertyEditorUpdateTitleActions: EventBase<SurveyCreatorModel, PropertyEditorUpdateTitleActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyEditorUpdateTitleActionsEvent>();
   /**
    * An event that is raised before Survey Creator displays a pop-up window called from the Property Grid. This window allows users to edit choices, conditions, etc. Use this event to customize the pop-up window, for example, add custom action buttons.
+   * @since 2.0.0
    */
   public onPropertyGridShowPopup: EventBase<SurveyCreatorModel, PropertyGridShowPopupEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGridShowPopupEvent>();
   /**
@@ -865,6 +881,7 @@ export class SurveyCreatorModel extends Base
    * An event that is raised when Survey Creator validates a modified value of a survey element property. Use this event to display a custom error message when the value is incorrect.
    * @see onBeforePropertyChanged
    * @see onAfterPropertyChanged
+   * @since 2.0.0
    */
   public onPropertyDisplayCustomError: EventBase<SurveyCreatorModel, PropertyDisplayCustomErrorEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyDisplayCustomErrorEvent>();
   /**
@@ -875,6 +892,7 @@ export class SurveyCreatorModel extends Base
    * An event that is raised each time a user modifies a survey element property. Use this event to validate or correct a property value while the user changes it.
    * @see onPropertyDisplayCustomError
    * @see onAfterPropertyChanged
+   * @since 2.0.0
    */
   public onBeforePropertyChanged: EventBase<SurveyCreatorModel, BeforePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, BeforePropertyChangedEvent>();
   /**
@@ -885,6 +903,7 @@ export class SurveyCreatorModel extends Base
    * An event that is raised after a survey element property has changed.
    * @see onPropertyDisplayCustomError
    * @see onBeforePropertyChanged
+   * @since 2.0.0
    */
   public onAfterPropertyChanged: EventBase<SurveyCreatorModel, AfterPropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, AfterPropertyChangedEvent>();
   /**
@@ -893,6 +912,7 @@ export class SurveyCreatorModel extends Base
   public onSurveyPropertyValueChanged: EventBase<SurveyCreatorModel, PropertyValueChangedEvent> = this.onAfterPropertyChanged;
   /**
    * An event that is raised when a condition editor renders a list of questions and variables available for selection. Use this event to modify this list.
+   * @since 2.0.0
    */
   public onConditionGetQuestionList: EventBase<SurveyCreatorModel, ConditionGetQuestionListEvent> = this.addCreatorEvent<SurveyCreatorModel, ConditionGetQuestionListEvent>();
   /**
@@ -907,6 +927,7 @@ export class SurveyCreatorModel extends Base
   public onGetConditionOperator: EventBase<SurveyCreatorModel, GetConditionOperatorEvent> = this.addCreatorEvent<SurveyCreatorModel, GetConditionOperatorEvent>();
   /**
    * An event that is raised when the Logic tab constructs a user-friendly display text for a logic rule. Use this event to modify this display text.
+   * @since 2.0.0
    */
   public onLogicRuleGetDisplayText: EventBase<SurveyCreatorModel, LogicRuleGetDisplayTextEvent> = this.addCreatorEvent<SurveyCreatorModel, LogicRuleGetDisplayTextEvent>();
   /**
@@ -950,6 +971,7 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised when Survey Creator renders action buttons under each page on the design surface. Use this event to add, remove, or modify the buttons.
    * @see onElementGetActions
+   * @since 2.0.0
    */
   public onPageGetFooterActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
   /**
@@ -975,6 +997,7 @@ export class SurveyCreatorModel extends Base
    * An event that is raised before a survey element (question, panel, page, or the survey itself) is selected. Use this event if you want to select a different survey element.
    * @see onElementSelected
    * @see selectedElement
+   * @since 2.0.0
    */
   public onElementSelecting: EventBase<SurveyCreatorModel, ElementSelectingEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementSelectingEvent>();
   /**
@@ -984,6 +1007,7 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised after a survey element (a question, panel, page, or the survey itself) is selected.
    * @see onElementSelecting
+   * @since 2.0.0
    */
   public onElementSelected: EventBase<SurveyCreatorModel, ElementSelectedEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementSelectedEvent>();
   /**
@@ -1162,10 +1186,12 @@ export class SurveyCreatorModel extends Base
   public onCreateCustomMessagePanel: EventBase<SurveyCreatorModel, CreateCustomMessagePanelEvent> = this.addCreatorEvent<SurveyCreatorModel, CreateCustomMessagePanelEvent>();
   /**
    * An event that is raised when users change a property in a [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme).
+   * @since 2.0.0
    */
   public onCreatorThemePropertyChanged: EventBase<SurveyCreatorModel, CreatorThemePropertyChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemePropertyChangedEvent>();
   /**
    * An event that is raised when users select a [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme) from the drop-down list of UI themes.
+   * @since 2.0.0
    */
   public onCreatorThemeSelected: EventBase<SurveyCreatorModel, CreatorThemeSelectedEvent> = this.addCreatorEvent<SurveyCreatorModel, CreatorThemeSelectedEvent>();
 
@@ -1181,10 +1207,12 @@ export class SurveyCreatorModel extends Base
    * Limits the number of items in a logical condition.
    *
    * Default value: -1 (unlimited)
+   * @since 2.0.0
    */
   public logicMaxItemsInCondition: number = -1;
   /**
    * @deprecated Use the [`logicMaxItemsInCondition`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#logicMaxItemsInCondition) property instead.
+   * @since 2.0.0
    */
   public get maxLogicItemsInCondition() {
     return this.logicMaxItemsInCondition;
@@ -1195,6 +1223,7 @@ export class SurveyCreatorModel extends Base
 
   /**
    * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
+   * @since 2.3.14
    */
   get showObjectTitles() {
     return this.useElementTitles;
@@ -1205,6 +1234,7 @@ export class SurveyCreatorModel extends Base
 
   /**
    * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
+   * @since 2.3.14
    */
   get showTitlesInExpressions() {
     return this.useElementTitles;
@@ -1220,6 +1250,7 @@ export class SurveyCreatorModel extends Base
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/dynamically-modify-newly-added-questions/ (linkStyle))
    * @see onElementGetDisplayName
+   * @since 2.0.0
    */
   public useElementTitles = false;
 
@@ -1239,10 +1270,12 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    * @see showLogicTab
+   * @since 2.0.0
    */
   public logicAllowTextEditExpressions = true;
   /**
    * @deprecated Use the [`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#logicAllowTextEditExpressions) property instead.
+   * @since 2.0.0
    */
   get allowEditExpressionsInTextEditor() {
     return this.logicAllowTextEditExpressions;
@@ -1254,11 +1287,13 @@ export class SurveyCreatorModel extends Base
    * Limits the number of columns that users can add to [Single-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel), [Multi-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel), and [Dynamic Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxColumns`)
+   * @since 2.0.0
    */
   public maxColumns: number =
     settings.propertyGrid.maximumColumnsCount || settings.propertyGrid.maxColumns;
   /**
    * @deprecated Use the [`maxColumns`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxColumns) property instead.
+   * @since 2.0.0
    */
   public get maximumColumnsCount() { return this.maxColumns; }
   public set maximumColumnsCount(val) { this.maxColumns = val; }
@@ -1266,11 +1301,13 @@ export class SurveyCreatorModel extends Base
    * Limits the number of choices that users can add to [Checkboxes](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radio Button Group](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxChoices`)
+   * @since 2.0.0
    */
   public maxChoices: number =
     settings.propertyGrid.maximumChoicesCount || settings.propertyGrid.maxChoices;
   /**
    * @deprecated Use the [`maxChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxChoices) property instead.
+   * @since 2.0.0
    */
   public get maximumChoicesCount() { return this.maxChoices; }
   public set maximumChoicesCount(val) { this.maxChoices = val; }
@@ -1279,11 +1316,13 @@ export class SurveyCreatorModel extends Base
    * Limits the minimum number of choices in [Checkboxes](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radio Button Group](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.minChoices`)
+   * @since 2.0.0
    */
   public minChoices: number =
     settings.propertyGrid.minimumChoicesCount || settings.propertyGrid.minChoices;
   /**
    * @deprecated Use the [`minChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#minChoices) property instead.
+   * @since 2.0.0
    */
   public get minimumChoicesCount() { return this.minChoices; }
   public set minimumChoicesCount(val) { this.minChoices = val; }
@@ -1291,10 +1330,12 @@ export class SurveyCreatorModel extends Base
    * Limits the number of rows that users can add to [Single-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Multi-Select Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRows`)
+   * @since 2.0.0
    */
   public maxRows: number = settings.propertyGrid.maximumRowsCount || settings.propertyGrid.maxRows;
   /**
    * @deprecated Use the [`maxRows`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxRows) property instead.
+   * @since 2.0.0
    */
   public get maximumRowsCount() { return this.maxRows; }
   public set maximumRowsCount(val) { this.maxRows = val; }
@@ -1302,10 +1343,12 @@ export class SurveyCreatorModel extends Base
    * Limits the number of rate values that users can add to [Rating Scale](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maxRateValues`)
+   * @since 2.0.0
    */
   public maxRateValues: number = settings.propertyGrid.maximumRateValues || settings.propertyGrid.maxRateValues;
   /**
    * @deprecated Use the [`maxRateValues`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#maxRateValues) property instead.
+   * @since 2.0.0
    */
   public get maximumRateValues() { return this.maxRateValues; }
   public set maximumRateValues(val) { this.maxRateValues = val; }
@@ -1329,6 +1372,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    *
    * If you don't want users to nest certain element types within panels, specify the [`forbiddenNestedElements`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#forbiddenNestedElements) property.
+   * @since 2.2.0
    */
   public maxPanelNestingLevel: number = -1;
 
@@ -1355,6 +1399,7 @@ export class SurveyCreatorModel extends Base
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/limit-number-of-survey-elements/ (linkStyle))
    * @see maxPanelNestingLevel
+   * @since 2.2.0
    */
   public forbiddenNestedElements: { panel: string[], paneldynamic: string[] };
 
@@ -1363,6 +1408,7 @@ export class SurveyCreatorModel extends Base
    * Specifies whether to show a page selector at the bottom of the Preview tab.
    *
    * Default value: `true`
+   * @since 2.0.0
    */
   public get previewAllowSelectPage(): boolean { return this.showPagesInTestSurveyTab; }
   public set previewAllowSelectPage(val: boolean) { this.showPagesInTestSurveyTab = val; }
@@ -1377,6 +1423,7 @@ export class SurveyCreatorModel extends Base
    * Specifies whether the Preview tab displays a Device button that allows users to preview the survey on different device types.
    *
    * Default value: `true`
+   * @since 2.0.0
    */
   public get previewAllowSimulateDevices(): boolean { return this.showSimulatorInTestSurveyTab; }
   public set previewAllowSimulateDevices(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
@@ -1387,10 +1434,12 @@ export class SurveyCreatorModel extends Base
   public set showSimulatorInPreviewTab(val: boolean) { this.showSimulatorInTestSurveyTab = val; }
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
+   * @since 2.0.0
    */
   public previewTheme: string = "default";
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
+   * @since 2.0.0
    */
   public get themeForPreview() { return this.previewTheme; }
   public set themeForPreview(val) { this.previewTheme = val; }
@@ -1533,6 +1582,7 @@ export class SurveyCreatorModel extends Base
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization).
    *
    * [Localization & Globalization](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages (linkStyle))
+   * @since 2.0.0
    */
   public get previewAllowSelectLanguage(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
   public set previewAllowSelectLanguage(val: boolean | string) { this.showDefaultLanguageInTestSurveyTab = val; }
@@ -1547,6 +1597,7 @@ export class SurveyCreatorModel extends Base
    * Specifies whether the Preview tab displays a toggle that allows users to show or hide invisible survey elements.
    *
    * Default value: `true`
+   * @since 2.0.0
    */
   public get previewAllowHiddenElements(): boolean { return this.showInvisibleElementsInTestSurveyTab; }
   public set previewAllowHiddenElements(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
@@ -1558,10 +1609,12 @@ export class SurveyCreatorModel extends Base
 
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
+   * @since 2.0.0
    */
   public previewAllowSelectTheme = true;
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
+   * @since 2.0.0
    */
   get allowChangeThemeInPreview() { return this.previewAllowSelectTheme; }
   set allowChangeThemeInPreview(val) { this.previewAllowSelectTheme = val; }
@@ -1711,6 +1764,7 @@ export class SurveyCreatorModel extends Base
    * Switches the [active tab](#activeTab). Returns `false` if the tab cannot be switched.
    * @param tabName A tab that you want to make active: `"designer"`, `"preview"`, `"theme"`, `"json"`, `"logic"`, or `"translation"`.
    * @returns `false` if the active tab cannot be switched, `true` otherwise.
+   * @since 2.0.0
    */
   public switchTab(tabName: string): boolean {
     if (tabName == this.viewType) return false;
@@ -2452,6 +2506,7 @@ export class SurveyCreatorModel extends Base
    * @see onDragStart
    * @see onDragEnd
    * @see onDragDropAllow
+   * @since 2.0.0
    */
   public onDragClear: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
   private initDragDropSurveyElements() {
@@ -3598,6 +3653,7 @@ export class SurveyCreatorModel extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/ (linkStyle))
    * @see closeCreatorThemeSettings
    * @see showCreatorThemeSettings
+   * @since 2.0.0
    */
   public openCreatorThemeSettings(): void {
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
@@ -3610,6 +3666,7 @@ export class SurveyCreatorModel extends Base
    * Closes [Survey Creator theme](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#creatorTheme) settings in Property Grid. Applies only if [`propertyGridNavigationMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#propertyGridNavigationMode) is `"buttons"`.
    * @see openCreatorThemeSettings
    * @see showCreatorThemeSettings
+   * @since 2.0.0
    */
   public closeCreatorThemeSettings(): void {
     const designerPlugin = this.getPlugin("designer") as TabDesignerPlugin;
@@ -3623,6 +3680,7 @@ export class SurveyCreatorModel extends Base
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/add-properties-to-property-grid/ (linkStyle))
    * @param name A [category name](https://surveyjs.io/form-library/documentation/customize-question-types/add-custom-properties-to-a-form#category).
+   * @since 2.0.0
    */
   public activatePropertyGridCategory(name: string): void {
     if (!!this.designerPropertyGrid) {
@@ -4314,6 +4372,7 @@ export class SurveyCreatorModel extends Base
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/ai-translation/ (linkStyle))
    * @param locales An array of locale codes that correspond to target languages, for example, `[ "de", "fr" ]`.
+   * @since 2.0.2
    */
   public startMachineTranslationTo(locales: Array<string>): void {
     if (!this.getHasMachineTranslation()) return;
@@ -4828,6 +4887,7 @@ export class SurveyCreatorModel extends Base
    * @param element A survey element to collapse.
    * @see expandElement
    * @see collapseAll
+   * @since 2.0.0
    */
   public collapseElement(element: SurveyElement) {
     SurveyElementAdornerBase.GetAdorner(element).collapsed = true;
@@ -4837,6 +4897,7 @@ export class SurveyCreatorModel extends Base
    * @param element A survey element to expand.
    * @see collapseElement
    * @see expandAll
+   * @since 2.0.0
    */
   public expandElement(element: SurveyElement) {
     SurveyElementAdornerBase.GetAdorner(element).collapsed = false;
@@ -4947,6 +5008,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true` if [`pageEditMode`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#pageEditMode) is `"standard"`; `false` otherwise.
    * @see collapseOnDrag
+   * @since 2.0.0
    */
   public get allowDragPages(): boolean {
     return this._allowDragPages && this.pageEditMode !== "single" && this.pageEditMode !== "bypage";
@@ -4958,6 +5020,7 @@ export class SurveyCreatorModel extends Base
    * Specifies whether to collapse pages on the design surface when users start dragging a survey element.
    *
    * Default value: `false`
+   * @since 2.0.0
    */
   public collapseOnDrag: boolean = false;
   /**
@@ -4967,6 +5030,7 @@ export class SurveyCreatorModel extends Base
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/ai-translation/ (linkStyle))
    * @see showTranslationTab
+   * @since 2.0.2
    */
   public clearTranslationsOnSourceTextChange: boolean = false;
   /**
@@ -4979,6 +5043,7 @@ export class SurveyCreatorModel extends Base
    * Default value: 0
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
+   * @since 2.3.11
    */
   public maxChoiceContentNestingLevel: number = 0;
 
@@ -4986,6 +5051,7 @@ export class SurveyCreatorModel extends Base
    * An event that is raised to determine whether in-place editing is allowed for an element on the design surface. Use this event to enable or disable in-place editing for specific elements.
    * @see onBeforeShowInplaceDescriptionEditor
    * @see inplaceEditChoiceValues
+   * @since 2.3.7
    */
   public onAllowInplaceEdit: EventBase<SurveyCreatorModel, AllowInplaceEditEvent> = this.addCreatorEvent<SurveyCreatorModel, AllowInplaceEditEvent>();
 

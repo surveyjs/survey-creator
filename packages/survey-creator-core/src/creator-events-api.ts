@@ -29,22 +29,27 @@ export interface ElementDeletingEvent {
 export interface GetPropertyReadOnlyEvent {
   /**
    * A property whose read-only status you can change.
+   * @since 2.0.0
    */
   property: JsonObjectProperty;
   /**
    * A property that nests `options.property` (`choices` for an item value, `columns` for a matrix column, `rows` for a matrix row etc.). `options.parentProperty` has a value only for nested properties.
+   * @since 2.0.0
    */
   parentProperty: JsonObjectProperty;
   /**
    * @deprecated Use `options.element` instead.
+   * @since 2.0.0
    */
   obj?: Base;
   /**
    * @deprecated Use `options.parentElement` instead.
+   * @since 2.0.0
    */
   parentObj?: Base;
   /**
    * A Boolean value that specifies the property's read-only status.
+   * @since 2.0.0
    */
   readOnly: boolean;
 }
@@ -126,10 +131,12 @@ export interface ElementGetExpandCollapseStateEvent {
 export interface BeforeShowInplaceDescriptionEditorEvent {
   /**
    * A survey element (survey, question, panel, or page) whose in-place description editor is about to be displayed on the design surface.
+   * @since 2.5.33
    */
   element: SurveyModel | Question | PanelModel | PageModel;
   /**
    * A Boolean property that specifies whether the in-place description editor is displayed. Set this property to `false` to hide the editor for the current `options.element` or to `true` to display it.
+   * @since 2.5.33
    */
   show: boolean;
 }
@@ -187,28 +194,34 @@ export interface ElementAllowOperationsEvent {
 export interface AllowAddElementEvent {
   /**
    * The name of the toolbox item used to create the element. Usually matches the element's [type](https://surveyjs.io/form-library/documentation/api-reference/question#getType).
+   * @since 2.3.8
    */
   name: string;
   /**
    * The [toolbox item instance](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolboxitem) that corresponds to the element.
+   * @since 2.3.8
    */
   toolboxItem?: QuestionToolboxItem;
   /**
    * The element's JSON definition.
+   * @since 2.3.8
    */
   json?: any;
   /**
    * A Boolean property that you can set to `false` to prevent adding or converting to this element type.
+   * @since 2.3.8
    */
   allow: boolean;
 }
 export interface DefineElementMenuItemsEvent {
   /**
    * @deprecated Use `options.element` instead.
+   * @since 2.0.0
    */
   obj?: Base;
   /**
    * @deprecated Use `options.actions` instead.
+   * @since 2.0.0
    */
   items?: IAction[];
 }
@@ -248,14 +261,17 @@ export interface PropertyAddingEvent {
 export interface PropertyShowingEvent extends PropertyAddingEvent {
   /**
    * A Boolean property that you can set to `false` if you do not want to add the property.
+   * @since 2.0.0
    */
   show: boolean;
   /**
    * A survey element that contains `options.property`: page, panel, question, the survey itself, item value (choice option), matrix column, etc.
+   * @since 2.0.0
    */
   element: Base;
   /**
    * A survey element that contains `options.parentProperty`. `options.parentElement` has a value only for nested properties.
+   * @since 2.0.0
    */
   parentElement: Base;
 }
@@ -382,34 +398,42 @@ export interface CollectionItemAllowOperationsEvent {
 export interface CollectionItemDeletingEvent {
   /**
    * @deprecated Use `options.element` instead.
+   * @since 2.5.11
    */
   obj?: Base;
   /**
    * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
+   * @since 2.5.11
    */
   element: Base;
   /**
    * A property that contains the collection to which the target item belongs.
+   * @since 2.5.11
    */
   property: JsonObjectProperty;
   /**
    * The property's name: `columns`, `rows`, `choices`, `rateValues`, etc.
+   * @since 2.5.11
    */
   propertyName: string;
   /**
    * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.).
+   * @since 2.5.11
    */
   collection: Base[];
   /**
    * A target collection item.
+   * @since 2.5.11
    */
   item: Base;
   /**
    * @deprecated Use `options.allow` instead.
+   * @since 2.5.11
    */
   allowDelete?: boolean;
   /**
    * A Boolean property that you can set to `false` if you want to prevent the target item from being deleted.
+   * @since 2.5.11
    */
   allow: boolean;
 }
@@ -543,10 +567,12 @@ export interface PropertyValueChangingEvent {
 export interface BeforePropertyChangedEvent extends PropertyValueChangingEvent {
   /**
    * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   * @since 2.0.0
    */
   element: Base;
   /**
    * An old property value.
+   * @since 2.0.0
    */
   oldValue: any;
 }
@@ -568,6 +594,7 @@ export interface PropertyValueChangedEvent {
 export interface AfterPropertyChangedEvent extends PropertyValueChangedEvent {
   /**
    * A survey element (question, panel, page, or the survey itself) whose property has changed.
+   * @since 2.0.0
    */
   element: Base;
 }
@@ -837,6 +864,7 @@ export interface ElementFocusingEvent {
 export interface ElementSelectingEvent extends ElementFocusingEvent {
   /**
    * An element that is going to be selected.
+   * @since 2.0.0
    */
   element: Base;
 }
@@ -850,6 +878,7 @@ export interface ElementFocusedEvent {
 export interface ElementSelectedEvent extends ElementFocusedEvent {
   /**
    * The [selected element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
+   * @since 2.0.0
    */
   element: Base;
 }
@@ -1156,34 +1185,41 @@ export interface DragStartEndEvent {
 export interface CreatorThemePropertyChangedEvent {
   /**
    * A property name.
+   * @since 2.0.0
    */
   name: string;
   /**
    * A new property value.
+   * @since 2.0.0
    */
   value: any;
 }
 export interface CreatorThemeSelectedEvent {
   /**
    * A selected Survey Creator theme.
+   * @since 2.0.1
    */
   theme: ICreatorTheme;
 }
 export interface AllowInplaceEditEvent {
   /**
    * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   * @since 2.3.7
    */
   element: Base;
   /**
    * A choice item being edited. Defined only when in-place editing targets a choice option.
+   * @since 2.3.7
    */
   item?: ItemValue;
   /**
    * The name of the property being edited.
+   * @since 2.3.7
    */
   propertyName: string;
   /**
    * A Boolean property that you can set to `false` if you want to disable in-place editing.
+   * @since 2.3.7
    */
   allow: boolean;
 }
