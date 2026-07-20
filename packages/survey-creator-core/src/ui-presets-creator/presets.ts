@@ -34,14 +34,17 @@ export interface ICreatorPresetData {
 
 /**
  * A base interface for the [`IPresetListItem`](/survey-creator/documentation/api-reference/IPresetListItem) and [`IPreset`](/survey-creator/documentation/api-reference/IPreset) interfaces.
+ * @since 3.0.0
  */
 export interface IPresetBase {
   /**
    * The preset's unique name.
+   * @since 3.0.0
    */
   name: string;
   /**
    * Specifies whether the preset is visible in the preset list.
+   * @since 3.0.0
    */
   visible?: boolean;
 }
@@ -50,10 +53,12 @@ export interface IPresetBase {
  * Describes a UI preset configuration.
  *
  * A preset configuration specifies whether a preset is visible in the preset list and contains a JSON object that defines how the preset customizes the Survey Creator UI.
+ * @since 3.0.0
  */
 export interface IPreset extends IPresetBase {
   /**
    * Survey Creator UI configuration associated with the preset.
+   * @since 3.0.0
    */
   json?: ICreatorPresetData | any;
 }
@@ -66,6 +71,7 @@ export const defaultCreatorPresetsOrder = ["basic", "advanced", "expert"];
  *
  * [How to Register Predefined Presets](https://surveyjs.io/survey-creator/documentation/ui-preset-editor#register-predefined-presets (linkStyle))
  * @param presets One or more UI preset configuations separated by commas, or an object containing multiple configurations.
+ * @since 3.0.0
  */
 export function registerUIPreset(...presets: Array<ConfigsHash<IPreset> | IPreset>) {
   const importedPresetNames: string[] = [];
@@ -79,6 +85,7 @@ export function registerUIPreset(...presets: Array<ConfigsHash<IPreset> | IPrese
  * A class that instantiates a UI preset using an [`IPreset`](https://surveyjs.io/survey-creator/documentation/api-reference/uipreset) JSON configuration and provides an API to apply it.
  *
  * [How to Apply a UI Preset](https://surveyjs.io/survey-creator/documentation/ui-preset-editor#apply-a-ui-preset (linkStyle))
+ * @since 3.0.0
  */
 export class UIPreset extends CreatorPresetBase {
   public constructor(data: ICreatorPresetData | IPreset) {
@@ -100,6 +107,7 @@ export class UIPreset extends CreatorPresetBase {
    *
    * [How to Apply a UI Preset](https://surveyjs.io/survey-creator/documentation/ui-preset-editor#apply-a-ui-preset (linkStyle))
    * @param creator A [`SurveyCreatorModel`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator) instance to which the preset is applied.
+   * @since 3.0.0
    */
   public applyTo(creator: SurveyCreatorModel): void {
     super.apply(creator, false);

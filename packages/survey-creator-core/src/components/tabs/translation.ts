@@ -722,7 +722,7 @@ export class Translation extends Base implements ITranslationLocales {
   @property() stringsHeaderSurvey: SurveyModel;
   private stringsSurveyInstanceId = 0;
   private makeSurveyIdSpaceUnique(survey: SurveyModel): void {
-    survey.renderedIdPrefix = (survey.renderedIdPrefix || "") + (++this.stringsSurveyInstanceId) + "-";
+    survey.elementIdPrefix = (survey.elementIdPrefix || "") + (++this.stringsSurveyInstanceId) + "-";
   }
   @property({ defaultValue: true }) isEmpty: boolean;
   private editLocale: string;
