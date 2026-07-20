@@ -25,6 +25,7 @@ pool:
 jobs:
 
 - job: CreatorV2Core
+  timeoutInMinutes: 90
   steps:
   - checkout: self
   - checkout: EmptyRepo
@@ -43,13 +44,6 @@ jobs:
       TargetFolder: "$(Build.SourcesDirectory)/Temp/"
       OverWrite: true
     displayName: "Copy package.json for cache key"
-
-  - task: Cache@2
-    inputs:
-      key: 'npm-cache-creator-core | $(Build.SourcesDirectory)/Temp/package.json'
-      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules
-      cacheHitVar: NPM_CACHE_RESTORED
-    displayName: Cache NPM Core
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -75,25 +69,7 @@ jobs:
       command: install
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
-    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
   
-  # update 'file' npm dependencies in case of cache
-  - script: |
-      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules
-      rm -rf survey-core
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'remove survey-core symlink from node_modules'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
-      Contents: '**'
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules/survey-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-core in case of npm cache'
-  # EO update 'file' npm dependencies in case of cache
-
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run remove-package-lock
@@ -128,6 +104,7 @@ jobs:
 
 - job: CreatorV2React
   dependsOn: CreatorV2Core
+  timeoutInMinutes: 90
   steps:
   - checkout: self
   - checkout: EmptyRepo
@@ -160,20 +137,6 @@ jobs:
       TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
       OverWrite: true
     displayName: "Copy package.json for cache key (root)"
-
-  - task: Cache@2
-    inputs:
-      key: 'npm-cache-creator-react | $(Build.SourcesDirectory)/Temp/react/package.json'
-      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules
-      cacheHitVar: NPM_CACHE_RESTORED
-    displayName: Cache NPM
-
-  - task: Cache@2
-    inputs:
-      key: 'npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json'
-      path: $(Build.SourcesDirectory)/survey-creator/node_modules
-      cacheHitVar: NPM_CACHE_RESTORED_ROOT
-    displayName: Cache NPM
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -234,7 +197,6 @@ jobs:
       command: install
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator
-    condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
   
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator
@@ -247,46 +209,11 @@ jobs:
       command: install
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
-    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npx puppeteer browsers install chrome
     displayName: "install chrome"
-
-  # update 'file' npm dependencies in case of cache
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-core in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-core in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-react-ui
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-react-ui in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-creator-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-creator-core in case of npm cache'
-  # EO update 'file' npm dependencies in case of cache
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
@@ -352,6 +279,7 @@ jobs:
 
 - job: CreatorV2Knockout
   dependsOn: CreatorV2Core
+  timeoutInMinutes: 90
   steps:
   - checkout: self
   - checkout: EmptyRepo
@@ -375,13 +303,6 @@ jobs:
       TargetFolder: "$(Build.SourcesDirectory)/Temp/"
       OverWrite: true
     displayName: "Copy package.json for cache key"
-  - task: Cache@2
-    inputs:
-      key: 'npm-cache-creator-knockout | $(Build.SourcesDirectory)/Temp/package.json'
-      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules
-      cacheHitVar: NPM_CACHE_RESTORED
-    displayName: Cache NPM
-
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -447,40 +368,12 @@ jobs:
       command: install
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
-    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
       npx puppeteer browsers install chrome
     displayName: "install chrome"
-
-  # update 'file' npm dependencies in case of cache
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-core in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-knockout-ui
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-knockout-ui in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-creator-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-creator-core in case of npm cache'
-  # EO update 'file' npm dependencies in case of cache
-
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
@@ -535,6 +428,7 @@ jobs:
 
 - job: CreatorV2Angular
   dependsOn: CreatorV2Core
+  timeoutInMinutes: 90
   steps:
   - checkout: self
   - checkout: EmptyRepo
@@ -668,6 +562,7 @@ jobs:
 
 - job: CreatorV2Vue
   dependsOn: CreatorV2Core
+  timeoutInMinutes: 90
   steps:
   - checkout: self
   - checkout: EmptyRepo
@@ -801,6 +696,7 @@ jobs:
 
 - job: CreatorV2JS
   dependsOn: CreatorV2Core
+  timeoutInMinutes: 90
   steps:
   - checkout: self
   - checkout: EmptyRepo
@@ -833,20 +729,6 @@ jobs:
       TargetFolder: "$(Build.SourcesDirectory)/Temp/root/"
       OverWrite: true
     displayName: "Copy package.json for cache key (root)"
-
-  - task: Cache@2
-    inputs:
-      key: 'npm-cache-creator-js-ui | $(Build.SourcesDirectory)/Temp/js-ui/package.json'
-      path: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules
-      cacheHitVar: NPM_CACHE_RESTORED
-    displayName: Cache NPM
-
-  - task: Cache@2
-    inputs:
-      key: 'npm-cache-creator-root | $(Build.SourcesDirectory)/Temp/root/package.json'
-      path: $(Build.SourcesDirectory)/survey-creator/node_modules
-      cacheHitVar: NPM_CACHE_RESTORED_ROOT
-    displayName: Cache NPM
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -907,7 +789,6 @@ jobs:
       command: install
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator
-    condition: ne(variables.NPM_CACHE_RESTORED_ROOT, 'true')
   
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator
@@ -920,46 +801,11 @@ jobs:
       command: install
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
-    condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
       npx puppeteer browsers install chrome
     displayName: "install chrome"
-
-  # update 'file' npm dependencies in case of cache
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-core in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-core in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-js-ui
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-js-ui'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-js-ui in case of npm cache'
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js/node_modules/survey-creator-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-creator-core in case of npm cache'
-  # EO update 'file' npm dependencies in case of cache
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-js
