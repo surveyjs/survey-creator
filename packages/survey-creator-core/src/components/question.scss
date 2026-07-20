@@ -919,10 +919,11 @@ svc-question,
     }
   }
 }
-
-.sd-paneldynamic__panels-container {
-  padding-bottom: 2px;
-  margin-bottom: -2px;
+.svc-question__content {
+  .sd-paneldynamic__panels-container {
+    padding: 2px;
+    margin: -2px;
+  }
 }
 
 .svc-panel__placeholder_frame {
