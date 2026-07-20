@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON } from "../helper";
+import { url, test, expect, setJSON, setCreatorProp } from "../helper";
 
 const title = "Property Grid";
 
@@ -75,5 +75,54 @@ test.describe(title, () => {
       window["creator"].survey.getQuestionByName("q1").inputType = val;
     }, "text");
     await expect(maskPage).toBeVisible();
+  });
+
+  const titleJSON = {
+    "elements": [
+      { "type": "text", "name": "q1", "title": "Question 1 title" },
+      { "type": "text", "name": "q2", "title": "Question 2 title" },
+      { "type": "text", "name": "q3" }
+    ]
+  };
+
+  test("Show and edit the question title", async ({ page }) => {
+    await setJSON(page, titleJSON);
+
+    const titleEditor = page.locator("[data-name=\"title\"] textarea");
+
+    await page.locator("[data-name=\"q1\"]").click();
+    await expect(titleEditor).toHaveValue("Question 1 title");
+
+    await titleEditor.click();
+    await page.keyboard.press("Control+a");
+    await page.keyboard.type("Question 1 new title");
+    await page.keyboard.press("Tab");
+    expect(await page.evaluate(() => window["creator"].survey.getQuestionByName("q1").title)).toEqual("Question 1 new title");
+
+    // the editor has to show the title of the newly selected question
+    await page.locator("[data-name=\"q2\"]").click();
+    await expect(titleEditor).toHaveValue("Question 2 title");
+
+    // a question without a title: empty editor with the question name as a placeholder
+    await page.locator("[data-name=\"q3\"]").click();
+    await expect(titleEditor).toHaveValue("");
+    await expect(titleEditor).toHaveAttribute("placeholder", "q3");
+  });
+
+  test("Show the question title, showOneCategoryInPropertyGrid is true", async ({ page }) => {
+    await setCreatorProp(page, "showOneCategoryInPropertyGrid", true);
+    await setJSON(page, titleJSON);
+
+    const titleEditor = page.locator("[data-name=\"title\"] textarea");
+
+    await page.locator("[data-name=\"q1\"]").click();
+    await expect(titleEditor).toHaveValue("Question 1 title");
+
+    await page.locator("[data-name=\"q2\"]").click();
+    await expect(titleEditor).toHaveValue("Question 2 title");
+
+    await page.locator("[data-name=\"q3\"]").click();
+    await expect(titleEditor).toHaveValue("");
+    await expect(titleEditor).toHaveAttribute("placeholder", "q3");
   });
 });

@@ -15,6 +15,7 @@ import {
   surveyLocalization
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
+import { editorLocalization } from "../../src/editorLocalization";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { ActionContainer } from "survey-core";
@@ -74,6 +75,36 @@ test("Condition editor uses creator locale for UI, survey locale for survey cont
     expect(questionNameQuestion.placeholder).toBe("Select...");
   } finally {
     surveyLocalization.defaultLocale = prevDefault;
+  }
+});
+
+test("Condition editor questionName placeholder uses creator locale, survey stays in survey locale, Bug#7853", () => {
+  const prevCurrent = editorLocalization.currentLocale;
+  surveyLocalization.locales["de"] = { placeholder: "de-placeholder" };
+  surveyLocalization.locales["fr"] = { placeholder: "fr-placeholder" };
+  try {
+    // Creator (UI) locale is "de", while the edited survey content locale is "fr".
+    editorLocalization.currentLocale = "de";
+    const survey = new SurveyModel({
+      elements: [{ type: "text", name: "question1" }]
+    });
+    survey.locale = "fr";
+    const conditionEditor = new ConditionEditor(
+      survey,
+      survey.getQuestionByName("question1"),
+      new EmptySurveyCreatorOptions()
+    );
+    const questionNameQuestion = <QuestionDropdownModel>(
+      conditionEditor.panel.panels[0].getQuestionByName("questionName")
+    );
+    // The survey itself must stay in "fr"...
+    expect(survey.locale).toBe("fr");
+    // ...but the condition editor UI (the questionName placeholder) must use the creator "de" locale.
+    expect(questionNameQuestion.placeholder).toBe("de-placeholder");
+  } finally {
+    editorLocalization.currentLocale = prevCurrent;
+    delete surveyLocalization.locales["de"];
+    delete surveyLocalization.locales["fr"];
   }
 });
 
@@ -1922,6 +1953,45 @@ test("Condition editor and question value cssClasses", () => {
   expect(comp.contentQuestion.cssClasses.content).toContain("sd-question__content");
   ComponentCollection.Instance.clear();
 });
+test("Condition editor for a component that wraps matrixdropdown, Bug#7879", () => {
+  ComponentCollection.Instance.add({
+    name: "test7879",
+    questionJSON: {
+      type: "matrixdropdown",
+      columns: [
+        { name: "Column 1", cellType: "radiogroup", showInMultipleColumns: true }
+      ],
+      choices: [1, 2, 3, 4, 5],
+      rows: ["Row 1", "Row 2"]
+    }
+  });
+  try {
+    const survey = new SurveyModel({
+      elements: [
+        { type: "test7879", name: "question2" },
+        { type: "text", name: "question3" }
+      ]
+    });
+    const editor = new ConditionEditor(survey, survey.getQuestionByName("question3"));
+    const panel = editor.panel.panels[0];
+    const nameQuestion = <QuestionDropdownModel>panel.getQuestionByName("questionName");
+    // The component should expose the inner matrix cells (as a plain matrixdropdown does),
+    // not the whole component whose value is an object.
+    expect(nameQuestion.choices.map(c => c.value)).toEqual([
+      "question2.Row 1.Column 1",
+      "question2.Row 2.Column 1"
+    ]);
+    nameQuestion.value = "question2.Row 1.Column 1";
+    const valueQuestion = panel.getQuestionByName("questionValue");
+    expect(valueQuestion.getType()).toEqual("radiogroup");
+    expect((<QuestionRadiogroupModel>valueQuestion).choices.map(c => c.value)).toEqual([1, 2, 3, 4, 5]);
+    valueQuestion.value = 3;
+    // The expression must reference the inner cell and must not contain "[object Object]".
+    expect(editor.text).toEqual("{question2.Row 1.Column 1} = 3");
+  } finally {
+    ComponentCollection.Instance.clear();
+  }
+});
 test("Hide search for conjunction", () => {
   var survey = new SurveyModel({
     elements: [
@@ -2474,4 +2544,26 @@ test("Condition editor: allConditionQuestions titles respect survey locale when 
   expect(editor.allConditionQuestions).toHaveLength(2);
   expect(editor.allConditionQuestions[0].text).toBe("Question 1 en francais");
   expect(editor.allConditionQuestions[1].text).toBe("Question 2 en francais");
+});
+test("questionValue title is invisible on selecting a calculated value, Bug#7862", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text", title: "Question 1" },
+      { name: "q2", type: "text" }
+    ],
+    calculatedValues: [{ name: "val1", expression: "{q1} + 1" }]
+  });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("q2"), new EmptySurveyCreatorOptions(), "visibleIf");
+  const panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "q1";
+  panel.getQuestionByName("operator").value = "equal";
+  const questionValue = <QuestionTextModel>panel.getQuestionByName("questionValue");
+  expect(questionValue.title).toBe("Question 1");
+  expect(questionValue.hasTitle).toBe(true);
+  expect(questionValue.placeholder).toBeFalsy();
+
+  panel.getQuestionByName("questionName").value = "val1";
+  const calcQuestionValue = <QuestionTextModel>panel.getQuestionByName("questionValue");
+  expect(calcQuestionValue.hasTitle).toBe(false);
+  expect(calcQuestionValue.placeholder).toBe("Enter a value...");
 });

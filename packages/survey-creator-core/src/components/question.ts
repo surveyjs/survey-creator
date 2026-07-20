@@ -259,6 +259,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       if (!!surveyElement["setCanShowOptionItemCallback"]) {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
       }
+      delete (<any>surveyElement.locDescription).placeholder;
     }
     this.resetPropertyValue("isEmptyElement");
     super.detachElement(this.element);
@@ -296,6 +297,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           this.updateRequiredAction(requiredAction);
         }
       }, "isRequiredAdorner");
+      (<any>surveyElement.locDescription).placeholder = "pe.descriptionPlaceholder";
     }
   }
   get isDraggable() {

@@ -1,6 +1,6 @@
 import {
   SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue,
-  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel
+  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization, applyCreatorUiLocaleToPopup } from "../editorLocalization";
@@ -361,6 +361,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               renderAs: "logicoperator",
               title: editorLocalization.getString("pe.if"),
               titleLocation: "left",
+              placeholder: surveyLocalization.getString("placeholder", editorLocalization.locale),
               allowClear: false,
               startWithNewLine: false,
               isRequired: true
@@ -879,14 +880,21 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     if (this.canShowQuestionValue(panel)) {
       const title = newQuestion.title;
+      const question = this.getConditionQuestion(qName);
       newQuestion.name = "questionValue";
       newQuestion.visibleIf = "questionValueVisibleIf({panel.questionName}, {panel.operator})";
       newQuestion.title = title;
       newQuestion.description = "";
-      newQuestion.titleLocation = "top";
+      if (!!question && question === this.calculatedValueQuestion) {
+        newQuestion.titleLocation = "hidden";
+        if (!!newQuestion.getPropertyByName("placeholder")) {
+          newQuestion.placeholder = editorLocalization.getString("ed.lg.calculatedValuePlaceholder");
+        }
+      } else {
+        newQuestion.titleLocation = "top";
+      }
       newQuestion.showCommentArea = false;
       if (newQuestion.showOtherItem) {
-        const question = this.getConditionQuestion(qName);
         if (question && question.getStoreOthersAsComment && question.getStoreOthersAsComment()) {
           const other = newQuestion.otherItem;
           newQuestion.choices.push(new ItemValue(other.value, other.title));

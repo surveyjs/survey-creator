@@ -30,6 +30,7 @@ import {
   surveyLocalization,
   AdaptiveActionContainer,
   QuestionCommentModel,
+  QuestionFileModel,
   QuestionImagePickerModel,
   ComponentCollection,
   QuestionBooleanModel,
@@ -3144,6 +3145,37 @@ test("Image picker question imageHeight placeholder", () => {
   );
   expect(imageHeightQuestion.placeholder).toEqual("Auto 2");
   curStrings.pe.imageHeight_placeholder = "auto";
+});
+test("File question photoPlaceholder placeholder is taken from the survey locale and doesn't depend on the creator locale, Bug#7867", () => {
+  const defaultEnText = "Click the button below to take a photo using the camera.";
+  surveyLocalization.locales["de"] = <any>{ photoPlaceholder: "de-photoPlaceholder" };
+  const survey = new SurveyModel({
+    elements: [{ type: "file", name: "q1", sourceType: "camera" }]
+  });
+  const question = <QuestionFileModel>survey.getQuestionByName("q1");
+  const getEditor = (): QuestionCommentModel => {
+    const propertyGrid = new PropertyGridModelTester(question);
+    return <QuestionCommentModel>propertyGrid.survey.getQuestionByName("photoPlaceholder");
+  };
+  expect(getEditor().renderedPlaceholder).toEqual(defaultEnText);
+
+  const editor = getEditor();
+  survey.locale = "de";
+  expect(editor.renderedPlaceholder).toEqual("de-photoPlaceholder");
+  expect(getEditor().renderedPlaceholder).toEqual("de-photoPlaceholder");
+
+  editorLocalization.currentLocale = "de";
+  expect(getEditor().renderedPlaceholder).toEqual("de-photoPlaceholder");
+  survey.locale = "";
+  expect(getEditor().renderedPlaceholder).toEqual(defaultEnText);
+  editorLocalization.currentLocale = "";
+
+  question.photoPlaceholder = "Take a photo!";
+  survey.locale = "de";
+  expect(getEditor().renderedPlaceholder).toEqual("Take a photo!");
+
+  survey.locale = "";
+  delete surveyLocalization.locales["de"];
 });
 test("Add tab after general for survey object", () => {
   Serializer.addProperty("survey", { name: "region", category: "geoLocation", categoryIndex: 10 });

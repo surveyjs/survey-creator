@@ -4,10 +4,10 @@
     <div v-if="!model.isEmpty" class="st-content">
       <div class="svc-flex-column st-strings-wrapper">
         <div class="svc-flex-row st-strings-header">
-          <SurveyComponent :key="model.stringsHeaderSurvey?.renderedIdPrefix" :model="model.stringsHeaderSurvey"></SurveyComponent>
+          <SurveyComponent :key="model.stringsHeaderSurvey?.elementIdPrefix" :model="model.stringsHeaderSurvey"></SurveyComponent>
         </div>
         <div class="svc-flex-row svc-plugin-tab__content st-strings">
-          <SurveyComponent :key="model.stringsSurvey?.renderedIdPrefix" :model="model.stringsSurvey"></SurveyComponent>
+          <SurveyComponent :key="model.stringsSurvey?.elementIdPrefix" :model="model.stringsSurvey"></SurveyComponent>
         </div>
       </div>
     </div>

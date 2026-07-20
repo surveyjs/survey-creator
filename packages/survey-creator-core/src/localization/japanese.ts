@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var jaStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "編集",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "アンケート作成方法の動画を見る",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "ツールボックスからここに質問をドロップしてください。",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "アンケートの流れをカスタマイズするルールを作成します。",
-    // "Copy"
-    copy: "コピー",
     // "Duplicate"
-    duplicate: "複製",
-    // "Add to toolbox"
-    addToToolbox: "ツールボックスに追加する",
-    // "Delete Panel"
-    deletePanel: "パネルを削除する",
-    // "Delete Question"
-    deleteQuestion: "質問を削除する",
-    // "Convert to"
-    convertTo: "に変換する",
-    // "Drag element"
-    drag: "要素をドラッグする"
+    duplicate: "複製"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var jaStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "デフォルト（{0}）",
-    // "Survey"
-    survey: "アンケート",
     // "Settings"
     settings: "アンケートの設定",
     // "Open settings"
@@ -144,42 +120,14 @@ export var jaStrings = {
     surveyTypeName: "アンケート",
     // [Auto-translated] "Page"
     pageTypeName: "ページ",
-    // [Auto-translated] "Panel"
-    panelTypeName: "パネル",
-    // [Auto-translated] "Question"
-    questionTypeName: "質問",
-    // [Auto-translated] "Column"
-    columnTypeName: "コラム",
-    // "Add New Page"
-    addNewPage: "新規ページを追加する",
-    // "Scroll to the Right"
-    moveRight: "右にスクロールする",
-    // "Scroll to the Left"
-    moveLeft: "左にスクロールする",
-    // "Delete Page"
-    deletePage: "ページを削除する",
-    // "Edit Page"
-    editPage: "ページを編集する",
-    // "Edit"
-    edit: "編集",
     // "page"
     newPageName: "ページ",
     // "question"
     newQuestionName: "質問",
     // "panel"
     newPanelName: "パネル",
-    // "text"
-    newTextItemName: "テキスト",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "デフォルト",
-    // [Auto-translated] "Modern"
-    modernTheme: "モダン",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "デフォルト (レガシー)",
     // "Preview Survey Again"
     testSurveyAgain: "アンケートを再度テストする",
-    // "Survey width: "
-    testSurveyWidth: "アンケートの幅： ",
     // "You had to navigate to"
     navigateToMsg: "次の場所に移動する必要がありました：",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var jaStrings = {
     undo: "元に戻す",
     // "Redo"
     redo: "やり直す",
-    // "Undo last change"
-    undoTooltip: "最後の変更を元に戻す",
-    // "Redo the change"
-    redoTooltip: "変更をやり直す",
     // [Auto-translated] "Expand"
     expandTooltip: "膨らむ",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var jaStrings = {
     showMoreChoices: "さらに表示",
     // [Auto-translated] "Show less"
     showLessChoices: "表示を減らす",
-    // "Copy"
-    copy: "コピー",
-    // "Cut"
-    cut: "カット",
-    // "Paste"
-    paste: "貼り付ける",
-    // "Copy selection to clipboard"
-    copyTooltip: "選択範囲をクリップボードにコピーする",
-    // "Cut selection to clipboard"
-    cutTooltip: "選択範囲をクリップボードにカットする",
-    // "Paste from clipboard"
-    pasteTooltip: "クリップボードから貼り付ける",
-    // "Options"
-    options: "オプション",
-    // "Generate Valid JSON"
-    generateValidJSON: "有効なJSONを生成する",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "不明な機能:「{0}」。",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var jaStrings = {
     expressionSyntaxError: "構文の誤りです。",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "意味誤りです。",
-    // "Generate Readable JSON"
-    generateReadableJSON: "読み取り可能なJSONを生成する",
     // "Toolbox"
     toolbox: "ツールボックス",
-    // "Properties"
-    "property-grid": "プロパティ",
     // [Auto-translated] "Search"
     toolboxSearch: "捜索",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var jaStrings = {
     propertyGridPlaceholderTitle: "フォームの設定を開始する",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "任意のカテゴリアイコンをクリックして、アンケート設定を探索します。追加の設定は、デザイン画面にアンケート要素を追加すると使用可能になります。",
-    // "Please correct JSON."
-    correctJSON: "JSONを修正してください。",
     // "Survey Results "
     surveyResults: "アンケート結果： ",
     // "As Table"
@@ -294,8 +216,6 @@ export var jaStrings = {
     saving: "保存",
     // "Saved"
     saved: "保存済み",
-    // "Error"
-    propertyEditorError: "エラー：",
     // "Error! Editor content is not saved."
     saveError: "エラー！ エディタのコンテンツは保存されません。",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var jaStrings = {
     themeResetConfirmation: "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "はい、テーマをリセットします",
-    // "Bold"
-    bold: "太字",
-    // "Italic"
-    italic: "イタリック",
-    // "Underline"
-    underline: "下線",
     // "Add Question"
     addNewQuestion: "質問を追加",
     // "Select page..."
@@ -507,8 +421,6 @@ export var jaStrings = {
       trigger_runExpressionDescription: "論理式がtrue（真）を返した場合、カスタム式が実行されます。オプションで、この式の結果を選択した質問に設定することができます。",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "論理式がtrue（真）を返した場合、「サンキューページ」のデフォルトテキストは指定されたものに変更されます。",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "式：「{0}」がtrue（真）を返した場合：", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "新しいルール",
       // "make page {0} visible"
@@ -539,6 +451,8 @@ export var jaStrings = {
       column_setValueText: "セル値の割り当て:列への{1}:{0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "結果が対象の質問に割り当てられる式。",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "値を入力する...",
       // "survey becomes completed"
       trigger_completeText: "アンケートが完了する",
       // "set into question: {0} value {1}"
@@ -563,8 +477,6 @@ export var jaStrings = {
       conditions: "条件",
       // "Action(s)"
       actions: "アクション",
-      // "Define condition(s)"
-      expressionEditorTitle: "条件を定義する",
       // "Define action(s)"
       actionsEditorTitle: "アクションを定義する",
       // "Delete Action"
@@ -575,8 +487,6 @@ export var jaStrings = {
       selectedActionCaption: "追加するアクションを選択…",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "論理式が空または無効です。修正してください。",
-      // "Please add at least one action."
-      noActionError: "少なくとも1つのアクションを追加してください。",
       // "Please fix issues in your action(s)."
       actionInvalid: "アクションの問題を解決してください。",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +788,6 @@ export var jaStrings = {
     defaultDisplayValue: "ダイナミックテキストのデフォルトの表示値",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "ラベルの配置",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "入力フィールド幅 (文字)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "セル・エラー・メッセージの配置",
     // [Auto-translated] "Enabled"
@@ -888,32 +796,16 @@ export var jaStrings = {
     disabled: "無効",
     // [Auto-translated] "Inherit"
     inherit: "受け継ぐ",
-    // "Apply"
-    apply: "適用",
-    // [Auto-translated] "OK"
-    ok: "わかった",
-    // "Save"
-    save: "保存",
     // [Auto-translated] "Clear"
     clear: "クリア",
-    // "Save"
-    saveTooltip: "保存",
-    // "Cancel"
-    cancel: "キャンセル",
     // [Auto-translated] "Set"
     set: "セット",
-    // "Reset"
-    reset: "リセット",
     // [Auto-translated] "Change"
     change: "変える",
-    // "Refresh"
-    refresh: "リフレッシュ",
     // [Auto-translated] "Close"
     close: "閉める",
     // "Delete"
     delete: "削除",
-    // "Add"
-    add: "追加",
     // "Add New"
     addNew: "新規追加:",
     // "Click to add an item..."
@@ -922,34 +814,10 @@ export var jaStrings = {
     removeItem: "クリックしてアイテムを削除します...",
     // [Auto-translated] "Drag the item"
     dragItem: "アイテムをドラッグする",
-    // "Other"
-    addOther: "その他",
-    // "Select All"
-    addSelectAll: "すべて選択",
-    // "None"
-    addNone: "なし",
-    // "Remove All"
-    removeAll: "すべて削除",
     // "Edit"
     edit: "編集",
-    // "Return without saving"
-    back: "保存せずに戻る",
-    // "Return without saving"
-    backTooltip: "保存せずに戻る",
-    // "Save and return"
-    saveAndBack: "保存して戻る",
-    // "Save and return"
-    saveAndBackTooltip: "保存して戻る",
     // [Auto-translated] "Done"
     doneEditing: "完成です",
-    // "Edit Choices"
-    editChoices: "選択肢を編集",
-    // "Show Choices"
-    showChoices: "選択肢を表示",
-    // "Move"
-    move: "移動",
-    // [Auto-translated] "<empty>"
-    empty: "<empty>",
     // [Auto-translated] "Value is empty"
     emptyValue: "値が空です",
     // "Manual Entry"
@@ -962,12 +830,6 @@ export var jaStrings = {
     fastEntryChoicesMinCountError: "{0}項目以上入力してください",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "選択肢のリストとその ID を次の形式で入力します。\n\nid|オプション\n\n選択肢 ID は回答者には表示されず、条件付きルールで使用できます。",
-    // "Form Entry"
-    formEntry: "フォーム入力",
-    // "Test the service"
-    testService: "サービスをテスト",
-    // "Please select the element"
-    itemSelectorEmpty: "エレメントを選択してください",
     // "Please select the action"
     conditionActionEmpty: "アクションを選択してください",
     // "Select a question..."
@@ -976,20 +838,8 @@ export var jaStrings = {
     conditionSelectPage: "ページを選択...",
     // "Select a panel..."
     conditionSelectPanel: "パネルを選択...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "値を入力/選択してください",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "表現の補完のヒントを取得するには「ctrl+space」を押してください",
-    // "Current row"
-    aceEditorRowTitle: "現在の行",
-    // "Current panel"
-    aceEditorPanelTitle: "現在のパネル",
-    // "For more details please check the documentation"
-    showMore: "詳細は文書をご確認ください",
-    // "Available questions"
-    assistantTitle: "利用できる質問:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "少なくとも1つの列または行を含む必要があります",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "提出前に確認する",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +890,12 @@ export var jaStrings = {
     "addNew@navigateToUrlOnCondition": "新しい URL を追加",
     // [Auto-translated] "Add new page"
     "addNew@pages": "新しいページを追加",
-    // "Expression is empty"
-    expressionIsEmpty: "表現が空白です",
     // "Value"
     value: "値",
     // "Text"
     text: "テキスト",
-    // "Row ID"
-    rowid: "行ID",
     // "Image or video file URL"
     imageLink: "画像リンク",
-    // "Edit column: {0}"
-    columnEdit: "行編集: {0}",
-    // "Edit item: {0}"
-    itemEdit: "アイテム編集: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1070,8 +912,6 @@ export var jaStrings = {
     imageLinkName: "次のプロパティからファイル URL を取得する",
     // "Accept empty response"
     allowEmptyResponse: "空の応答を許可",
-    // "Title"
-    titlePlaceholder: "タイトルを入力",
     // "Survey Title"
     surveyTitlePlaceholder: "調査タイトルを入力",
     // "Page {num}"
@@ -1182,16 +1022,8 @@ export var jaStrings = {
     defaultValue: "デフォルト値",
     // "Default texts"
     cellsDefaultRow: "デフォルトのセルテキスト",
-    // "Edit survey settings"
-    surveyEditorTitle: "アンケート設定を編集する",
-    // "Edit: {0}"
-    qEditorTitle: "編集： {0}",
     // "Maximum character limit"
     maxLength: "最大長",
-    // "Build"
-    buildExpression: "構築する",
-    // "Edit"
-    editExpression: "編集",
     // [Auto-translated] "and"
     and: "そして",
     // [Auto-translated] "or"
@@ -1218,8 +1050,6 @@ export var jaStrings = {
     includeIntoResult: "アンケート結果に追加する",
     // "Make the title and description visible"
     showTitle: "タイトルの表示/非表示",
-    // "Expand/collapse title"
-    expandCollapseTitle: "タイトルを展開/折りたたむ",
     // "Select a survey language"
     locale: "デフォルトの言語",
     // "Select device type"
@@ -1638,8 +1468,6 @@ export var jaStrings = {
     displayRateDescriptionsAsExtremeItems: "ラベルを極値として表示する",
     // [Auto-translated] "Row order"
     rowOrder: "行の順序",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "列のレイアウト",
     // [Auto-translated] "Nested column count"
     columnColCount: "ネストされた列数",
     // [Auto-translated] "Correct Answer"
@@ -1670,22 +1498,6 @@ export var jaStrings = {
     },
     // "Logo alignment"
     logoPosition: "ロゴの位置",
-    // "Add logo..."
-    addLogo: "ロゴを追加...",
-    // "Change logo..."
-    changeLogo: "ロゴを変更...",
-    logoPositions: {
-      // "Remove logo"
-      none: "ロゴを削除",
-      // "Left"
-      left: "左",
-      // "Right"
-      right: "右",
-      // "On the top"
-      top: "上に",
-      // "In the bottom"
-      bottom: "下に"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "プレビューモード",
     // [Auto-translated] "Enable grid layout"
@@ -1698,14 +1510,8 @@ export var jaStrings = {
     detailErrorLocation: "行の詳細エラーメッセージの配置",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "パネルレイアウト"
-      },
       // "General"
       general: "一般",
-      // "Options"
-      fileOptions: "オプション",
       // "HTML Editor"
       html: "HTMLエディター",
       // "Columns"
@@ -1728,10 +1534,6 @@ export var jaStrings = {
       sliderSettings: "スライダー設定",
       // "Choices from a Web Service"
       choicesByUrl: "ウェブの選択",
-      // "Default Choices"
-      matrixChoices: "デフォルトの選択",
-      // "Text Inputs"
-      multipleTextItems: "テキスト入力",
       // "Numbering"
       numbering: "番号付け",
       // "Validators"
@@ -1774,8 +1576,6 @@ export var jaStrings = {
       showOnCompleted: "完成したものに表示",
       // "Logo in the Survey Header"
       logo: "アンケートタイトルのロゴ",
-      // "Slider"
-      slider: "スライダー",
       // [Auto-translated] "Expression"
       expression: "表現",
       // [Auto-translated] "Question Settings"
@@ -1795,62 +1595,18 @@ export var jaStrings = {
       // "Others"
       others: "その他"
     },
-    // "Edit property '{0}'"
-    editProperty: "プロパティ'{0}'を編集",
     // "Items"
     items: "[ アイテム: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "次の場合に選択肢を表示する",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "次の場合に選択肢を選択可能にする",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "次の場合に列を表示する",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "次の場合に行を表示する",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "内側のインデントを増やす",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "最後のエントリの回答をデフォルトとして使用する",
-    // "Please enter a value."
-    enterNewValue: "値を入力してください。",
-    // "There are no questions in the survey."
-    noquestions: "アンケートに質問はありません。",
-    // "Please create a trigger"
-    createtrigger: "トリガーを作成してください。",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "編集するには「enter」キーを押してください",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "アイテムを編集するには「enter」キーを押してください、アイテムを削除するには「delete」キーを押してください、アイテムを移動するには「alt」+上矢印キーまたは「alt」+下矢印キーを押してください",
-    // "On "
-    triggerOn: "オン ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "ページを可視化:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "エレメントを可視化:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "うまくいけばアンケートが完了します。",
-    // "The trigger is not set"
-    triggerNotSet: "トリガーが設定されていません",
-    // "Run if"
-    triggerRunIf: "次の場合、実行",
-    // "Change value of: "
-    triggerSetToName: "次の値を変更: ",
-    // "Copy value from: "
-    triggerFromName: "次から値をコピー: ",
-    // "Run this Expression"
-    triggerRunExpression: "この表現を実行:",
-    // "to: "
-    triggerSetValue: "宛先: ",
-    // "Go to the question"
-    triggerGotoName: "質問に移動:",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "アンケートの結果に変数を入れないでください。",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "有効な表現を入力してください",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "ここに式を入力してください...",
-    // "No file chosen"
-    noFile: "ファイルが選択されていません",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "非表示の質問値をクリアする",
     // [Auto-translated] "Store values in the following property"
@@ -1996,10 +1752,6 @@ export var jaStrings = {
     "file-camera": "ローカルファイルまたはカメラ",
     // "Inherit"
     inherit: "継承する",
-    // "Visible"
-    show: "表示する",
-    // "Hidden"
-    hide: "非表示にする",
     // "Inherit"
     default: "デフォルト",
     // "Initial"
@@ -2016,8 +1768,6 @@ export var jaStrings = {
     asc: "昇順",
     // "Descending"
     desc: "降順",
-    // "Indeterminate"
-    indeterminate: "不確定",
     // [Auto-translated] "Selected"
     selected: "入選",
     // [Auto-translated] "Unselected"
@@ -2038,12 +1788,6 @@ export var jaStrings = {
     carousel: "回転木馬",
     // [Auto-translated] "Tabs"
     tab: "タブ",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "progressTop",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "progressBottom",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "progressTopBottom",
     // "Horizontal"
     horizontal: "水平",
     // "Vertical"
@@ -2054,8 +1798,6 @@ export var jaStrings = {
     bottom: "下",
     // "Top and bottom"
     topBottom: "上と下",
-    // "Both"
-    both: "両方",
     // "Left"
     left: "左",
     // [Auto-translated] "Right"
@@ -2096,10 +1838,6 @@ export var jaStrings = {
     week: "週",
     // "Hidden"
     hidden: "非表示",
-    // "Editable"
-    edit: "編集",
-    // "Read-only"
-    display: "表示",
     // [Auto-translated] "Contain"
     contain: "含む",
     // [Auto-translated] "Cover"
@@ -2328,8 +2066,6 @@ export var jaStrings = {
     onNextPage: "onNextPage",
     // "After an answer is changed"
     onValueChanged: "onValueChanged",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "回答が変更される前に",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "元の構造",
@@ -2340,12 +2076,6 @@ export var jaStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "ページごとに 1 つの入力フィールドを表示"
     },
-    // "No preview"
-    noPreview: "プレビューなし",
-    // "Show all questions"
-    showAllQuestions: "すべての質問を含むプレビューを表示",
-    // "Show answered questions only"
-    showAnsweredQuestions: "回答された質問を含むプレビューを表示",
     // [Auto-translated] "Show all questions"
     allQuestions: "すべての質問を表示",
     // [Auto-translated] "Show answered questions only"
@@ -2461,12 +2191,8 @@ export var jaStrings = {
       onPage: "各ページでリセット",
       // [Auto-translated] "Reset on each panel"
       onpanel: "各パネルでリセット",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "各パネルでリセット",
       // [Auto-translated] "Recursive numbering"
       recursive: "再帰的なナンバリング",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "調査を続ける",
       // [Auto-translated] "No numbering"
       off: "ナンバリングなし"
     },
@@ -2629,49 +2355,6 @@ export var jaStrings = {
     and: "そして",
     // [Auto-translated] "or"
     or: "又は"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Angularバージョンを使用",
-    // "Use jQuery version"
-    jquery: "jQueryバージョンを使用",
-    // "Use Knockout version"
-    knockout: "Knockoutバージョンを使用",
-    // "Use React version"
-    react: "Reactバージョンを使用",
-    // "Use Vue version"
-    vue: "Vueバージョンを使用",
-    // "For bootstrap framework"
-    bootstrap: "Bootstrapフレームワーク向け",
-    // "Modern theme"
-    modern: "モダンテーマ",
-    // "Default theme"
-    default: "デフォルトテーマ",
-    // "Orange theme"
-    orange: "オレンジテーマ",
-    // "Darkblue theme"
-    darkblue: "ダークブルーテーマ",
-    // "Darkrose theme"
-    darkrose: "ダークローズテーマ",
-    // "Stone theme"
-    stone: "ストーンテーマ",
-    // "Winter theme"
-    winter: "ウィンターテーマ",
-    // "Winter-Stone theme"
-    winterstone: "ウィンターストーンテーマ",
-    // "Show survey on a page"
-    showOnPage: "1つのページにアンケートを表示",
-    // "Show survey in a window"
-    showInWindow: "1つのウィンドウにアンケートを表示",
-    // "Load Survey JSON from server"
-    loadFromServer: "サーバーからアンケートのJSONファイルを読み込む",
-    // "Scripts and styles"
-    titleScript: "スクリプトとスタイル",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2922,10 +2605,6 @@ export var jaStrings = {
       choices: "「値」は、条件付きルールで使用されるアイテム ID として機能します。回答者には「テキスト」が表示されます。",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "「画像」と「動画」のどちらかを選択して、メディアセレクタのコンテンツモードを設定します。「画像」を選択した場合は、提供されるすべてのオプションが、JPEG、GIF、PNG、APNG、SVG、BMP、ICO形式の画像ファイルであることを確認してください。同様に、「ビデオ」を選択した場合は、すべてのオプションがMP4、MOV、WMV、FLV、AVI、MKV形式のビデオファイルへの直接リンクであることを確認してください。YouTubeのリンクは動画オプションではサポートされていませんのでご注意ください。"
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "この設定は入力フィールドのサイズを変更するだけで、質問ボックスの幅には影響しません。受け入れられる入力長を制限するには、「検証」→「最大文字数制限」に移動します。"
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3509,16 +3188,12 @@ export var jaStrings = {
     primaryDarkColor: "ホバー",
     // [Auto-translated] "Selected"
     primaryLightColor: "入選",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "背景色",
     // "Corner radius"
     cornerRadius: "コーナR(Corner Radius)",
     // [Auto-translated] "Default background"
     backcolor: "デフォルトの背景",
     // [Auto-translated] "Hover background"
     hovercolor: "ホバー背景",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "ボーダーデコレーション",
     // [Auto-translated] "Font color"
     fontColor: "フォントの色",
     // [Auto-translated] "Background color"
@@ -3527,8 +3202,6 @@ export var jaStrings = {
     primaryForecolor: "デフォルトの色",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "無効色",
-    // [Auto-translated] "Font"
-    font: "フォント",
     // [Auto-translated] "Darker"
     borderDefault: "暗い",
     // [Auto-translated] "Lighter"
@@ -3605,14 +3278,10 @@ export var jaStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "サーフェスの背景",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "原発",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "付帯",
-    // [Auto-translated] "Surface"
-    surfaceScale: "表面",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "UI 要素",
     // [Auto-translated] "Font"
