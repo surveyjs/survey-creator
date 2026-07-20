@@ -50,6 +50,9 @@
     color: var(--sjs2-color-fg-basic-primary, #1c1b20);
     @include sjs2--typography--default-strong;
   }
+  .sd-question.sd-question--table > .sd-question__container > .sd-question__header-and-content-container {
+    overflow: visible;
+  }
 }
 
 .sps-matrixdynamic__content {
