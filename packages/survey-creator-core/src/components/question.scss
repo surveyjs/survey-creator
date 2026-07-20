@@ -981,7 +981,7 @@ svc-question,
     margin-top: 0;
   }
 
-  .svc-row .sd-row {
+  .svc-row > .sd-row {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 0;
@@ -997,10 +997,13 @@ svc-question,
   }
 }
 
-.svc-question__content:where(:not(.svc-question__content--composite-question)) {
+.svc-question__content {
   //todo: remove this rules after design refactoring
   .sd-element--complex > .sd-element__header--location-top,
-  .sd-element--complex > div > div > .sd-element__header--location-top {
+  .sd-element--complex
+    > .sd-question__container
+    > .sd-question__header-and-content-container
+    > .sd-element__header--location-top {
     padding: 0;
     padding-bottom: calc(0.5 * var(--sd-base-vertical-padding));
   }
@@ -1011,6 +1014,16 @@ svc-question,
 
   .sd-panel__content {
     gap: 0;
+    padding: 0;
+  }
+  //todo: need refactor this style after refactor in library
+  .sd-composite
+    > .sd-question__container
+    > .sd-question__header-and-content-container
+    > .sd-question__header
+    ~ .sd-question__content
+    > .sd-panel
+    > .sd-panel__content {
     padding: 0;
   }
 }

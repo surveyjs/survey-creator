@@ -20,7 +20,7 @@
   }
 }
 
-.svc-row .sd-row.sd-row--multiple {
+.svc-row > .sd-row.sd-row--multiple {
   overflow: auto;
   width: calc(100% + var(--sjs2-spacing-x400));
   flex-wrap: nowrap;
@@ -32,7 +32,7 @@
   margin-bottom: -2px;
 }
 
-.sd-panel .svc-row .sd-row--multiple {
+.sd-panel .svc-row > .sd-row--multiple {
   padding: var(--sjs2-spacing-x000);
   box-shadow: none;
   border-radius: 0;
@@ -62,7 +62,7 @@
   }
 
   & + .svc-row {
-    .sd-page__row {
+    & > .sd-page__row {
       margin-top: 0;
     }
   }
