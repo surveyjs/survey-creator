@@ -131,3 +131,8 @@ The tab strip itself is `tabbed-menu.ts`.
 
 ### Public API surface
 `packages/survey-creator-core/src/entries/index.ts` is the public export surface (set `process.env.VERSION` into `Version`). Like survey-core, factories and registrations are populated by import side effects, so the entry file determines what gets bundled and registered.
+
+## Coding conventions
+
+- **Do not generate API doccomments** (`/** ... */`) for either new or existing API members.
+- If an API requires clarification for maintainers, add a regular JavaScript comment (`//` or `/* ... */`) in the implementation instead of a doccomment.
