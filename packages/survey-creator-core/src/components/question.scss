@@ -410,6 +410,11 @@ svc-question {
     margin-top: var(--sjs2-spacing-negative-x100, -8px);
     padding-top: var(--sjs2-spacing-x100, 8px);
   }
+  .sd-question--table:not(.sd-element--nested)
+    > .sd-question__container
+    > .sd-question__header-and-content-container:first-child {
+    margin-top: calc(-0.5 * var(--sd-base-vertical-padding));
+  }
 }
 
 .svc-dragged-element-shortcut {
@@ -992,6 +997,7 @@ svc-question,
 }
 
 .svc-question__content:where(:not(.svc-question__content--composite-question)) {
+  //todo: remove this rules after design refactoring
   .sd-element--complex > .sd-element__header--location-top,
   .sd-element--complex > div > div > .sd-element__header--location-top {
     padding: 0;
@@ -1005,6 +1011,14 @@ svc-question,
   .sd-panel__content {
     gap: 0;
     padding: 0;
+  }
+}
+.svc-creator--mobile {
+  //todo: remove this rules after design refactoring
+  .svc-question__content:where(:not(.svc-question__content--composite-question)) {
+    .sd-element--complex.sd-question--table > div > div > .sd-element__header--location-top {
+      padding-bottom: calc(var(--sd-base-vertical-padding));
+    }
   }
 }
 
