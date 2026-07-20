@@ -300,7 +300,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return 0;
   }
   public hover(event: MouseEvent, element: HTMLElement | any) {
-    if (!this.surveyElement.isInteractiveDesignElement) {
+    if (!this.surveyElement || !this.surveyElement.isInteractiveDesignElement) {
       return;
     }
     super.hover(event, element);
