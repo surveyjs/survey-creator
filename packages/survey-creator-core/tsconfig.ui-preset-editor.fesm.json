@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.ui-preset-editor.json",
   "compilerOptions": {
-    "target": "ES6"
+    "target": "ES2019"
   }
 }

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
+    "target": "ES2019",
+    "module": "ES2020",
+    "lib": [
+      "DOM",
+      "ES2019"
+    ],
     "sourceMap": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,
