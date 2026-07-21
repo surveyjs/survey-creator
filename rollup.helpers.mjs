@@ -197,7 +197,7 @@ export function createEsmConfig(options) {
             sourceMap: sourceMap,
             declaration: false,
             declarationDir: null,
-            target: "ES6"
+            target: "ES2019"
           }
         }),
       emitCss

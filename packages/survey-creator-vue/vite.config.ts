@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => {
 
     build: {
       emptyOutDir: false,
+      target: "ES2019",
       sourcemap: mode == "development",
       outDir: "./build",
       lib: {
