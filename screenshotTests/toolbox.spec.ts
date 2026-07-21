@@ -234,7 +234,13 @@ test.describe(title, () => {
     await page.evaluate(() => { window["creator"].toolbox.changeCategories([]); });
     await page.evaluate(() => { window["creator"].toolbox.showCategoryTitles = true; });
     await page.setViewportSize({ width: 2560, height: 1440 });
-    await compareScreenshot(page, toolboxElement, "toolbox-categories.png");
+    // The toolbox is compact at the default viewport and switches to the full width only on the
+    // next frame after the resize - screenshot it before that and the capture is 73px wide.
+    await expect(toolboxElement).not.toHaveClass(/svc-toolbox--compact/);
+    // With category titles shown the toolbox items land on one of two sub-pixel horizontal
+    // positions (stable within a page load, random across loads), which flips the anti-aliased
+    // left edge of the matrix icon circles by ~4-6 pixels - tolerate that jitter.
+    await compareScreenshot(page, toolboxElement, "toolbox-categories.png", { maxDiffPixels: 10 });
   });
 
   test("Toolbox with subtypes (ltr)", async ({ page }) => {
@@ -428,8 +434,13 @@ test.describe(title, () => {
 
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
+    await expect(toolboxElement).not.toHaveClass(/svc-toolbox--compact/);
     await toolboxSearch.type("single");
-    await compareScreenshot(page, toolboxElement, "toolbox-search-categories.png");
+    // "single" leaves only the Text Input and Matrix categories non-empty - wait for the filtered
+    // markup instead of screenshotting whatever is rendered right after the last keystroke.
+    await expect(page.locator(".svc-toolbox__category:not(.svc-toolbox__category--empty)")).toHaveCount(2);
+    // Same sub-pixel anti-aliasing jitter on the matrix icon as in "Toolbox with category titles"
+    await compareScreenshot(page, toolboxElement, "toolbox-search-categories.png", { maxDiffPixels: 10 });
   });
 
   test("Toolbox with search compact", async ({ page }) => {
@@ -506,12 +517,18 @@ test.describe(title, () => {
 
     await page.setViewportSize({ width: 950, height: 870 });
     await changeToolboxSearchEnabled(page, true);
+    await expect(toolboxElement).toHaveClass(/svc-toolbox--compact/);
     await compareScreenshot(page, creatorTabElement, "toolbox-search-rtl-compact.png");
     await page.locator(".svc-toolbox__search-button").click();
+    // the compact toolbox flies out on click - the panel keeps the compact width until it does
+    await expect(toolboxElement).toHaveClass(/svc-toolbox--flyout/);
     await toolboxSearch.click();
     await toolboxSearch.type("single");
+    await expect(getToolboxItemByText(page, "Single-Select Matrix")).toBeVisible();
+    await expect(page.locator(".svc-toolbox__item-title:visible")).toHaveCount(2);
     await compareScreenshot(page, creatorTabElement.locator(".svc-toolbox__panel"), "toolbox-search-rtl-compact-entered.png");
     await toolboxSearch.type("qwerty");
+    await expect(page.locator(".svc-toolbox__item-title:visible")).toHaveCount(0);
     await compareScreenshot(page, creatorTabElement.locator(".svc-toolbox__panel"), "toolbox-search-rtl-compact-placeholder.png");
   });
 
