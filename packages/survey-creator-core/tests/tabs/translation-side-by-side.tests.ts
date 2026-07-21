@@ -268,6 +268,44 @@ test("onTranslationItemChanging applies to forwarded edits", () => {
   expect(dstQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu!");
 });
 
+test("source and destination panes keep their scrollbars in sync", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  const source = document.createElement("div");
+  const destination = document.createElement("div");
+  model.setSourceScrollElement(source);
+  model.setDestinationScrollElement(destination);
+
+  source.scrollTop = 100;
+  source.dispatchEvent(new Event("scroll"));
+  expect(destination.scrollTop).toBe(100);
+
+  destination.scrollTop = 40;
+  destination.dispatchEvent(new Event("scroll"));
+  expect(source.scrollTop).toBe(40);
+
+  // Unmounting a pane (element set to undefined) detaches the sync.
+  model.setSourceScrollElement(undefined);
+  destination.scrollTop = 70;
+  destination.dispatchEvent(new Event("scroll"));
+  expect(source.scrollTop).toBe(40);
+
+  // Re-attaching a new element (a rebuilt pane) restores the sync.
+  const newSource = document.createElement("div");
+  model.setSourceScrollElement(newSource);
+  destination.scrollTop = 25;
+  destination.dispatchEvent(new Event("scroll"));
+  expect(newSource.scrollTop).toBe(25);
+
+  // dispose() detaches everything; firing scroll on old elements must not throw.
+  creator.activeTab = "designer";
+  expect(() => {
+    destination.scrollTop = 10;
+    destination.dispatchEvent(new Event("scroll"));
+  }).not.toThrow();
+  expect(newSource.scrollTop).toBe(25);
+});
+
 test("deactivate detaches copies", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);

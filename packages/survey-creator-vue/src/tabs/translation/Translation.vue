@@ -12,10 +12,10 @@
       </div>
     </div>
     <div v-if="!model.isEmpty && sideBySideModel && !sideBySideModel.showSurveyStrings" class="st-side-by-side">
-      <div class="st-side-by-side__source" :key="sideBySideModel.sourceSurvey?.elementIdPrefix">
+      <div class="st-side-by-side__source" :key="sideBySideModel.sourceSurvey?.elementIdPrefix" :ref="setSourceScrollElement">
         <SurveyComponent :model="sideBySideModel.sourceSurvey"></SurveyComponent>
       </div>
-      <div class="st-side-by-side__target" :key="sideBySideModel.destinationSurvey?.elementIdPrefix">
+      <div class="st-side-by-side__target" :key="sideBySideModel.destinationSurvey?.elementIdPrefix" :ref="setDestinationScrollElement">
         <SurveyComponent :model="sideBySideModel.destinationSurvey"></SurveyComponent>
       </div>
     </div>
@@ -39,4 +39,10 @@ const stringsModel = computed<Translation | undefined>(() => {
   const model = props.model as TranslationSideBySide;
   return model.showSurveyStrings ? model.surveyStringsTranslation : undefined;
 });
+const setSourceScrollElement = (el: unknown) => {
+  sideBySideModel.value?.setSourceScrollElement(el as HTMLElement);
+};
+const setDestinationScrollElement = (el: unknown) => {
+  sideBySideModel.value?.setDestinationScrollElement(el as HTMLElement);
+};
 </script>

@@ -52,10 +52,12 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     }
     return (
       <div className="st-side-by-side">
-        <div key={model.sourceSurvey?.elementIdPrefix} className="st-side-by-side__source">
+        <div key={model.sourceSurvey?.elementIdPrefix} className="st-side-by-side__source"
+          ref={(el) => { model.setSourceScrollElement(el); }}>
           <Survey model={model.sourceSurvey}></Survey>
         </div>
-        <div key={model.destinationSurvey?.elementIdPrefix} className="st-side-by-side__target">
+        <div key={model.destinationSurvey?.elementIdPrefix} className="st-side-by-side__target"
+          ref={(el) => { model.setDestinationScrollElement(el); }}>
           <Survey model={model.destinationSurvey}></Survey>
         </div>
       </div>

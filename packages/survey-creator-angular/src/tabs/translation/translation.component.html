@@ -20,12 +20,12 @@
         </div>
       </div>
       <div *ngIf="sideBySideModel && !sideBySideModel.showSurveyStrings" class="st-side-by-side">
-        <div class="st-side-by-side__source">
+        <div class="st-side-by-side__source" #sourceScrollContainer>
           <ng-container *ngFor="let s of [sideBySideModel.sourceSurvey]; trackBy: trackStringsSurveyBy">
             <survey-content [model]="s"></survey-content>
           </ng-container>
         </div>
-        <div class="st-side-by-side__target">
+        <div class="st-side-by-side__target" #destinationScrollContainer>
           <ng-container *ngFor="let s of [sideBySideModel.destinationSurvey]; trackBy: trackStringsSurveyBy">
             <survey-content [model]="s"></survey-content>
           </ng-container>

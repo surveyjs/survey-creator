@@ -137,7 +137,38 @@ export class TranslationSideBySide extends Translation {
     if ((newText || "") === current) return;
     this.doUndoableAction(new UndoRedoLocaleTextAction(item, locale, newText), "translation changed");
   }
+  // Keeps the vertical scrollbars of the two panes in sync. The UI components pass their
+  // scrollable containers here; passing null/undefined (on unmount) detaches the listener.
+  public setSourceScrollElement(element: HTMLElement): void {
+    this.setScrollElement(0, element);
+  }
+  public setDestinationScrollElement(element: HTMLElement): void {
+    this.setScrollElement(1, element);
+  }
+  private scrollElements: Array<HTMLElement> = [undefined, undefined];
+  private scrollHandlers: Array<() => void> = [undefined, undefined];
+  private setScrollElement(index: number, element: HTMLElement): void {
+    const prev = this.scrollElements[index];
+    if (prev === element) return;
+    if (!!prev) prev.removeEventListener("scroll", this.scrollHandlers[index]);
+    this.scrollElements[index] = element || undefined;
+    this.scrollHandlers[index] = undefined;
+    if (!element) return;
+    const handler = (): void => this.syncScroll(index);
+    this.scrollHandlers[index] = handler;
+    element.addEventListener("scroll", handler);
+  }
+  // Mirrors scrollTop into the other pane. The mirrored pane's echo scroll event finds the
+  // values already equal and stops, so no re-entrancy flag is needed.
+  private syncScroll(index: number): void {
+    const from = this.scrollElements[index];
+    const to = this.scrollElements[1 - index];
+    if (!from || !to || to.scrollTop === from.scrollTop) return;
+    to.scrollTop = from.scrollTop;
+  }
   public dispose(): void {
+    this.setSourceScrollElement(undefined);
+    this.setDestinationScrollElement(undefined);
     this.disposeInstances();
     if (!!this.surveyStringsTranslationValue) {
       this.surveyStringsTranslationValue.dispose();

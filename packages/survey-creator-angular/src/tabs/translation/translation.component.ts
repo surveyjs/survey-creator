@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 import { Translation, TranslationSideBySide } from "survey-creator-core";
 
@@ -15,6 +15,13 @@ export class TranslationTabComponent extends BaseAngular<Translation> {
   }
   public get sideBySideModel(): TranslationSideBySide | undefined {
     return this.model.isSideBySide ? <TranslationSideBySide>this.model : undefined;
+  }
+  // The setters also fire with undefined when *ngIf removes the panes, which detaches the listeners.
+  @ViewChild("sourceScrollContainer") set sourceScrollContainer(ref: ElementRef<HTMLElement> | undefined) {
+    this.sideBySideModel?.setSourceScrollElement(ref ? ref.nativeElement : undefined as any);
+  }
+  @ViewChild("destinationScrollContainer") set destinationScrollContainer(ref: ElementRef<HTMLElement> | undefined) {
+    this.sideBySideModel?.setDestinationScrollElement(ref ? ref.nativeElement : undefined as any);
   }
   // The strings-grid model: the tab model itself in the default mode, the scoped survey-level
   // strings model when the side-by-side mode shows the synthetic "Survey Strings" entry.
