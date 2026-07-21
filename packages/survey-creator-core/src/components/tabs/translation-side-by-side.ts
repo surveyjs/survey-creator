@@ -1,5 +1,5 @@
 import {
-  Base, ILocalizableString, ItemValue, LocalizableString, Serializer, SurveyModel, property
+  Base, ILocalizableString, ItemValue, LocalizableString, Serializer, SurveyModel, property, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
 import { editableStringRendererName } from "../../creator-base";
@@ -49,6 +49,9 @@ export class TranslationSideBySide extends Translation {
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "sourceLocale" || name === "destinationLocale") {
+      if (name === "destinationLocale") {
+        this.updateSurveyLocale();
+      }
       this.updateInstanceLocales();
       this.applySurveyStringsLocales();
     }
@@ -85,6 +88,12 @@ export class TranslationSideBySide extends Translation {
   // undo/redo rollbacks, survey-level strings grid edits, or any external modification.
   public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
     if (this._syncing || this.isDisposed || !this.destinationSurvey) return;
+    if (obj === this.survey && propName === "locale") {
+      // An external change (an undo/redo rollback) - follow it instead of rebuilding.
+      const locale = this.survey.locale;
+      this.destinationLocale = !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
+      return;
+    }
     const realLocStr = this.getLocStrByName(obj, propName);
     const copies = !!realLocStr ? this.byRealLocStr.get(realLocStr) : undefined;
     if (!copies) {
@@ -223,6 +232,22 @@ export class TranslationSideBySide extends Translation {
     this.destinationSurvey = undefined;
     this.byDstLocStr = new Map<ILocalizableString, TranslationItem>();
     this.byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
+  }
+  // Keeps the real survey's locale in sync with the language being translated. An empty
+  // destination means the default language; an explicit default-locale name on the survey
+  // ("en") is the same language, so it is left untouched in that case.
+  private updateSurveyLocale(): void {
+    if (!this.survey || this.isDisposed) return;
+    const locale = this.destinationLocale || "";
+    const current = this.survey.locale || "";
+    if (current === locale || (!locale && current === surveyLocalization.defaultLocale)) return;
+    const wasSyncing = this._syncing;
+    this._syncing = true;
+    try {
+      this.survey.locale = locale;
+    } finally {
+      this._syncing = wasSyncing;
+    }
   }
   private updateInstanceLocales(): void {
     const wasSyncing = this._syncing;

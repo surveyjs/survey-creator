@@ -169,6 +169,45 @@ test("changing destinationLocale switches copy locale without recreating instanc
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
 });
 
+test("changing destinationLocale updates survey.locale; undo/redo keeps them in sync", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  expect(creator.survey.locale).toBe("de");
+  model.destinationLocale = "fr";
+  expect(creator.survey.locale).toBe("fr");
+  creator.undo();
+  expect(creator.survey.locale).toBe("de");
+  expect(model.destinationLocale).toBe("de");
+  expect(model.destinationSurvey.locale).toBe("de");
+  creator.redo();
+  expect(creator.survey.locale).toBe("fr");
+  expect(model.destinationLocale).toBe("fr");
+  expect(model.destinationSurvey.locale).toBe("fr");
+});
+
+test("destination locale choice persists via survey.locale across tab switches", () => {
+  const creator = createSideBySideCreator();
+  getModel(creator).destinationLocale = "fr";
+  expect(creator.survey.locale).toBe("fr");
+  creator.activeTab = "designer";
+  creator.activeTab = "translation";
+  const model = getModel(creator);
+  expect(model.destinationLocale).toBe("fr");
+  expect(model.destinationSurvey.locale).toBe("fr");
+});
+
+test("activating the tab does not modify the survey locale, no undo step is created", () => {
+  const creator = createSideBySideCreator();
+  expect(creator.survey.locale).toBe("de");
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  json.locale = "en";
+  const enCreator = createSideBySideCreator(json);
+  expect(getModel(enCreator).destinationLocale || "").toBe("");
+  expect(enCreator.survey.locale || "").toBe("");
+  expect(enCreator.undoRedoManager.canUndo()).toBeFalsy();
+});
+
 test("locale dropdowns exclude each other's selection", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);

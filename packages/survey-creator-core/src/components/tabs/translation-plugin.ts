@@ -19,7 +19,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private sidebarTab: SidebarPageModel;
   private _showOneCategoryInPropertyGrid: boolean = true;
   private tabControlModel: TabControlModel;
-  private _sideBySideDestinationLocale: string | undefined;
 
   public model: Translation;
   public static iconName = "icon-language";
@@ -296,7 +295,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.sourceLocaleAction);
     this.destinationLocaleAction = this.createLocaleDropdownAction("svc-translation-destination-locale", "ed.translationDestinationLanguage", (locale: string) => {
-      this._sideBySideDestinationLocale = locale;
       (<TranslationSideBySide>this.model).destinationLocale = locale;
     });
     items.push(this.destinationLocaleAction);
@@ -446,10 +444,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     return res;
   }
-  // The default destination is survey.locale; when it is empty (or the explicit name of the
-  // default locale) it is the default language, which may be equal to the source language.
+  // The default destination is survey.locale (the model keeps them in sync while the tab is
+  // active); when it is empty (or the explicit name of the default locale) it is the default
+  // language, which may be equal to the source language.
   private calcDefaultDestinationLocale(): string {
-    if (this._sideBySideDestinationLocale !== undefined) return this._sideBySideDestinationLocale;
     const locale = this.creator.survey.locale;
     return !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
   }
