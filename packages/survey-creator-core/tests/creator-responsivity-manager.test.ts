@@ -2,6 +2,7 @@ import { expect, test, vi } from "vitest";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { SurveyCreatorModel, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
+import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { CreatorTester } from "./creator-tester";
 
 class SimpleContainer {
@@ -345,6 +346,34 @@ test("CreatorResponsivityManager: sidebar expand/collapse on width change", (): 
   container.offsetWidth = 1900;
   responsivityManager.process();
   expect(creator.sidebar.visible).toEqual(false);
+});
+
+test("CreatorResponsivityManager: sidebar stays collapsed after manual collapse via tab control in one-category mode", (): any => {
+  const container: SimpleContainer = new SimpleContainer({});
+  const creator = new CreatorTester();
+  creator.JSON = { pages: [{ name: "page1" }] };
+  const designerPlugin = creator.getPlugin("designer") as TabDesignerPlugin;
+  designerPlugin.showOneCategoryInPropertyGrid = true;
+
+  const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+  container.offsetWidth = 1900;
+  responsivityManager.process();
+  expect(creator.sidebar.visible).toEqual(true);
+  expect(creator.sidebar.flyoutMode).toEqual(false);
+
+  const expandCollapseAction = designerPlugin["tabControlModel"].expandCollapseAction;
+  expandCollapseAction.action();
+  expect(creator.sidebar.visible).toEqual(false);
+  expect(creator.sidebar.collapsedManually).toEqual(true);
+
+  // a container resize (e.g. window resize) must not auto-expand the manually collapsed sidebar
+  responsivityManager.process();
+  expect(creator.sidebar.visible).toEqual(false);
+
+  // expanding via the same action must clear the manual-collapse flag
+  expandCollapseAction.action();
+  expect(creator.sidebar.visible).toEqual(true);
+  expect(creator.sidebar.collapsedManually).toEqual(false);
 });
 
 test("CreatorResponsivityManager: override screenSizeBreakpoints", (): any => {

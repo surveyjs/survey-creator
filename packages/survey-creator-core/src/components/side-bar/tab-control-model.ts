@@ -24,8 +24,16 @@ export class TabControlModel extends Base {
         if (!this.expandCollapseAction.enabled) return;
         if (this.sidePanel.visible) {
           this.sidePanel.collapseSidebar();
+          if (!this.sidePanel.flyoutMode) {
+            this.sidePanel.collapsedManually = true;
+            this.sidePanel.expandedManually = false;
+          }
         } else {
           this.sidePanel.expandSidebar();
+          if (!this.sidePanel.flyoutMode) {
+            this.sidePanel.collapsedManually = false;
+            this.sidePanel.expandedManually = false;
+          }
         }
       }
     });
