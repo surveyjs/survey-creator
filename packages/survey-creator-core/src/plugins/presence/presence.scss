@@ -1,0 +1,66 @@
+// Remote-collaborator focus decorations. The presence renderer stamps
+// data-collab-focus="on|away" plus an inline --collab-peer-color variable
+// onto the REAL creator nodes; these rules draw the same box-shadow ring the
+// native selection uses (see question.scss .svc-question__content--selected),
+// so the ring scrolls, clips and layers exactly like the built-in one.
+//
+// Local selection has priority: a locally selected element keeps its native
+// ring untouched (the :not(...--selected) guards below).
+
+.svc-question__content[data-collab-focus="on"]:not(.svc-question__content--selected),
+.svc-page__content[data-collab-focus="on"]:not(.svc-page__content--selected),
+.svc-side-bar [data-name][data-collab-focus="on"],
+.svc-side-bar .spg-question__content[data-collab-focus="on"] {
+  box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused));
+}
+
+// Property-grid ring hugs the input area; round it like the row itself.
+.svc-side-bar [data-name][data-collab-focus="on"],
+.svc-side-bar .spg-question__content[data-collab-focus="on"] {
+  border-radius: var(--sjs2-radius-x075);
+}
+
+// The peer is focused here but currently on another tab: dimmed ring.
+.svc-question__content[data-collab-focus="away"]:not(.svc-question__content--selected),
+.svc-page__content[data-collab-focus="away"]:not(.svc-page__content--selected) {
+  box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) color-mix(in srgb, var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused)) 50%, transparent);
+}
+
+// A peer is editing an inline text (question/page/survey title or
+// description, a choice, ...): light up the editor's own native focus border
+// (the same element the local :focus-within shows), recolored to the peer.
+// A locally focused editor keeps its native look (:not(:focus-within)).
+.svc-string-editor[data-collab-focus]:not(:focus-within) .svc-string-editor__border--focus {
+  opacity: var(--sjs2-opacity-visible);
+  box-shadow:
+    var(--sjs2-border-effect-floating-default),
+    0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-bg-brand-primary));
+}
+
+// Questions nested inside a panel draw the native ring INSET on the ::after
+// pseudo-element while the content node itself has box-shadow: none (see the
+// .sd-panel block in question.scss) - mirror both parts of that technique.
+.sd-panel .svc-question__content[data-collab-focus="on"]:not(.svc-question__content--selected),
+.sd-panel .svc-question__content[data-collab-focus="away"]:not(.svc-question__content--selected) {
+  box-shadow: none;
+}
+
+.sd-panel .svc-question__content[data-collab-focus="on"]:not(.svc-question__content--selected)::after {
+  box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused)) inset;
+  outline: none;
+}
+
+.sd-panel .svc-question__content[data-collab-focus="away"]:not(.svc-question__content--selected)::after {
+  box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) color-mix(in srgb, var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused)) 50%, transparent) inset;
+  outline: none;
+}
+
+// Mobile creator: the native selected-page ring is inset (see the
+// .svc-creator--mobile block in page.scss) - mirror it for peer rings.
+.svc-creator--mobile .svc-page__content[data-collab-focus="on"]:not(.svc-page__content--selected) {
+  box-shadow: inset 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused));
+}
+
+.svc-creator--mobile .svc-page__content[data-collab-focus="away"]:not(.svc-page__content--selected) {
+  box-shadow: inset 0px 0px 0px var(--sjs2-border-width-x200) color-mix(in srgb, var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused)) 50%, transparent);
+}
