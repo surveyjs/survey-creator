@@ -5,6 +5,7 @@ import { CreatorTester } from "../creator-tester";
 import "survey-core/survey.i18n";
 
 const sideBySideJSON = {
+  locale: "de",
   pages: [
     {
       name: "page1",
@@ -180,6 +181,39 @@ test("locale dropdowns exclude each other's selection", () => {
   expect(destinationIds.indexOf(null)).toBe(-1);
   expect(destinationIds.indexOf("de")).toBeGreaterThan(-1);
   expect(getSelectedListItem(creator, "svc-translation-destination-locale").id).toBe("de");
+});
+
+test("destination locale defaults to survey.locale, not to the first locale in the list", () => {
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  json.locale = "fr";
+  json.pages[0].elements[0].title.fr = "Question 1 fr";
+  const creator = createSideBySideCreator(json);
+  const model = getModel(creator);
+  expect(model.destinationLocale).toBe("fr");
+  expect(model.destinationSurvey.locale).toBe("fr");
+  expect(getSelectedListItem(creator, "svc-translation-destination-locale").id).toBe("fr");
+});
+
+test("destination locale defaults to the default language when survey.locale is empty, it equals the source language", () => {
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  delete json.locale;
+  const creator = createSideBySideCreator(json);
+  const model = getModel(creator);
+  expect(model.sourceLocale || "").toBe("");
+  expect(model.destinationLocale || "").toBe("");
+  expect(model.destinationSurvey.locale).toBeFalsy();
+  const destinationIds = getListItems(creator, "svc-translation-destination-locale").map(item => item.id);
+  expect(destinationIds.indexOf(null)).toBeGreaterThan(-1);
+  expect(getSelectedListItem(creator, "svc-translation-destination-locale").id).toBe(null);
+  expect(getSelectedListItem(creator, "svc-translation-source-locale").id).toBe(null);
+});
+
+test("destination locale defaults to the default language when survey.locale equals the default locale name", () => {
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  json.locale = "en";
+  const creator = createSideBySideCreator(json);
+  const model = getModel(creator);
+  expect(model.destinationLocale || "").toBe("");
 });
 
 test("'Survey Strings': scoped translation has no page groups, exactly two locales; editing pagePrevText sets real de value; undo works", () => {

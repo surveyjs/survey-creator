@@ -156,7 +156,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     model.reset();
 
     model.sourceLocale = "";
-    model.destinationLocale = this.calcDefaultDestinationLocale(model, "");
+    model.destinationLocale = this.calcDefaultDestinationLocale();
     const pages = this.creator.survey.pages;
     model.selectedPageName = pages.length > 0 ? pages[0].name : "";
     model.showSurveyStrings = false;
@@ -423,9 +423,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.updateLocaleAction(this.sourceLocaleAction, model, locales, source, destination);
     this.updateLocaleAction(this.destinationLocaleAction, model, locales, destination, source);
   }
-  // Each dropdown's list hides the locale currently selected in the other one, so source is never equal to destination.
+  // Each dropdown's list hides the locale currently selected in the other one, except its own
+  // selection - by default both sides can be the default language.
   private updateLocaleAction(action: Action, model: TranslationSideBySide, locales: Array<string>, selected: string, excluded: string): void {
-    const items = locales.filter(loc => loc !== excluded).map(loc => (<IAction>{
+    const items = locales.filter(loc => loc !== excluded || loc === selected).map(loc => (<IAction>{
       id: loc || null,
       title: model.getLocaleName(loc)
     }));
@@ -445,19 +446,12 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     return res;
   }
-  private calcDefaultDestinationLocale(model: TranslationSideBySide, source: string): string {
-    const candidates: Array<string> = [];
-    if (this._sideBySideDestinationLocale !== undefined) {
-      candidates.push(this._sideBySideDestinationLocale);
-    }
-    candidates.push(this.creator.survey.locale);
-    this.creator.survey.getUsedLocales().forEach((loc: string) => candidates.push(loc));
-    model.getSurveyLocales()[0].forEach((item: ItemValue) => candidates.push(item.value));
-    for (let i = 0; i < candidates.length; i++) {
-      const loc = candidates[i];
-      if (!!loc && loc !== surveyLocalization.defaultLocale && loc !== source) return loc;
-    }
-    return "";
+  // The default destination is survey.locale; when it is empty (or the explicit name of the
+  // default locale) it is the default language, which may be equal to the source language.
+  private calcDefaultDestinationLocale(): string {
+    if (this._sideBySideDestinationLocale !== undefined) return this._sideBySideDestinationLocale;
+    const locale = this.creator.survey.locale;
+    return !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
   }
   private showSideBySideMachineTranslation(): void {
     const model = <TranslationSideBySide>this.model;
