@@ -237,7 +237,10 @@ test.describe(title, () => {
     // The toolbox is compact at the default viewport and switches to the full width only on the
     // next frame after the resize - screenshot it before that and the capture is 73px wide.
     await expect(toolboxElement).not.toHaveClass(/svc-toolbox--compact/);
-    await compareScreenshot(page, toolboxElement, "toolbox-categories.png");
+    // With category titles shown the toolbox items land on one of two sub-pixel horizontal
+    // positions (stable within a page load, random across loads), which flips the anti-aliased
+    // left edge of the matrix icon circles by ~4-6 pixels - tolerate that jitter.
+    await compareScreenshot(page, toolboxElement, "toolbox-categories.png", { maxDiffPixels: 10 });
   });
 
   test("Toolbox with subtypes (ltr)", async ({ page }) => {
@@ -436,7 +439,8 @@ test.describe(title, () => {
     // "single" leaves only the Text Input and Matrix categories non-empty - wait for the filtered
     // markup instead of screenshotting whatever is rendered right after the last keystroke.
     await expect(page.locator(".svc-toolbox__category:not(.svc-toolbox__category--empty)")).toHaveCount(2);
-    await compareScreenshot(page, toolboxElement, "toolbox-search-categories.png");
+    // Same sub-pixel anti-aliasing jitter on the matrix icon as in "Toolbox with category titles"
+    await compareScreenshot(page, toolboxElement, "toolbox-search-categories.png", { maxDiffPixels: 10 });
   });
 
   test("Toolbox with search compact", async ({ page }) => {
