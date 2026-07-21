@@ -182,7 +182,10 @@ export default async (options) => {
         "iconsV2": imagesV2
       },
       emitCss: false,
-      noEmitOnError: !options.watch
+      // The UMD config above already type-checks the same graph with noEmitOnError
+      // and emits the .d.ts typings, so the fesm bundle only needs fast transpilation.
+      useEsbuild: true,
+      esbuildTarget: "es2015"
     })
   ];
 };
