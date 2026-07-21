@@ -8,7 +8,7 @@ export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings, getLocaleStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
 export * from "../creator-settings";
-export { ICreatorOptions } from "../creator-options";
+export type { ICreatorOptions } from "../creator-options";
 
 export * from "../creator-events-api";
 export * from "../creator-base";
