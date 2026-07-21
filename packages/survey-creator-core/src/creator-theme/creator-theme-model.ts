@@ -154,15 +154,32 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
       }
     });
   }
+  // the default themes define no explicit variables (values come from the CSS
+  // fallbacks), so loading one does not overwrite variable values set by the
+  // previously selected theme - reset them to the property defaults instead
+  private resetColorThemeCssVariables(): void {
+    this.blockThemeChangedNotifications += 1;
+    try {
+      this.iteratePropertiesHash((hash, key) => {
+        if (key.indexOf("--sjs2-") === 0) {
+          this.setPropertyValue(key, undefined);
+        }
+      });
+    } finally {
+      this.blockThemeChangedNotifications -= 1;
+    }
+  }
   private onThemePropertyValueChangedCallback(name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: ArrayChanges) {
     if (this.blockThemeChangedNotifications > 0) return;
 
     if (name === "themeName") {
       this.resetColorThemeCssVariablesChanges();
+      this.resetColorThemeCssVariables();
       this.loadTheme({ themeName: newValue, colorPalette: this.colorPalette });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name === "colorPalette") {
       this.resetColorThemeCssVariablesChanges();
+      this.resetColorThemeCssVariables();
       this.loadTheme({ themeName: this.themeName, colorPalette: newValue });
       this.onThemeSelected.fire(this, { theme: this.toJSON() });
     } else if (name === CreatorThemeModel.varColorProjectBrand) {

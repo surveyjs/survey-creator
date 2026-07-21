@@ -25,6 +25,15 @@ export function calculateThemeVariables(
     for (const key of Object.keys(themeCopyCssVariables)) {
       div.style.setProperty(key, themeCopyCssVariables[key] as string);
     }
+    // custom properties inherit, so a queried variable the theme does not define
+    // would resolve to the currently applied theme's value (inline variables on
+    // the creator root). "initial" makes it compute to the guaranteed-invalid
+    // value (empty string) instead, the same result as when no theme is applied.
+    for (const key of additionalCssVariables) {
+      if (themeCopyCssVariables[key] === undefined) {
+        div.style.setProperty(key, "initial");
+      }
+    }
     div.classList.add("sd-theme-root");
     body.appendChild(div);
 
@@ -36,6 +45,7 @@ export function calculateThemeVariables(
     for (const key of [...Object.keys(themeCopyCssVariables), ...additionalCssVariables]) {
       const sourceValue = themeCopyCssVariables[key];
       let value = computed.getPropertyValue(key);
+      if (value === "initial") value = ""; // jsdom-style mocks echo inline values as is
       if (typeof value === "string" && value.trim() === "") {
         if (sourceValue !== undefined) {
           newCssVariables[key] = sourceValue;
