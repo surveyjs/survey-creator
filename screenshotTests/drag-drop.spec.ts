@@ -171,6 +171,7 @@ test.describe(title, () => {
     await setJSON(page, json);
 
     const qRoot = page.locator(".svc-question__adorner .svc-question__content").first();
+    await qRoot.click({ position: { x: 5, y: 5 } });
     const firstItem = qRoot.locator(".svc-item-value-wrapper").first();
 
     await compareScreenshot(page, qRoot, "drag-drop-item-values-ranking.png");
