@@ -1,14 +1,14 @@
 // extracted from ui-preset-editor/presets-theme/blocks/sps-dropdown.scss
 .svc-icon-item {
   display: flex;
-  gap: var(--sjs2-spacing-x100, 8px);
+  gap: var(--sjs2-spacing-x100);
 }
 
 svg.svc-icon-item__icon,
 svg.svc-icon-item__icon use {
   width: var(--sjs2-size-x300);
   height: var(--sjs2-size-x300);
-  fill: var(--sjs2-color-fg-brand-primary, #19b394);
+  fill: var(--sjs2-color-fg-brand-primary);
 }
 
 .sd-selectlist__item--selected {

@@ -37,17 +37,17 @@
 
 .spg-color-editor__swatch {
   display: flex;
-  padding: var(--sjs2-layout-component-input-medium-swatch-padding-vertical, 8px)
-    var(--sjs2-layout-component-input-medium-swatch-padding-right, 0)
-    var(--sjs2-layout-component-input-medium-swatch-padding-vertical, 8px)
-    var(--sjs2-layout-component-input-medium-swatch-padding-left, 12px);
+  padding: var(--sjs2-layout-component-input-medium-swatch-padding-vertical)
+    var(--sjs2-layout-component-input-medium-swatch-padding-right)
+    var(--sjs2-layout-component-input-medium-swatch-padding-vertical)
+    var(--sjs2-layout-component-input-medium-swatch-padding-left);
   align-items: center;
 }
 
 .sd-color-swatch {
   display: flex;
   align-items: flex-start;
-  border-radius: var(--sjs2-radius-component-swatch, 4px);
+  border-radius: var(--sjs2-radius-component-swatch);
 }
 
 .sd-color-swatch__icon {
@@ -67,14 +67,14 @@
 .sd-color-swatch__content {
   position: relative;
   display: flex;
-  width: var(--sjs2-size-x400, 32px);
-  height: var(--sjs2-size-x300, 24px);
+  width: var(--sjs2-size-x400);
+  height: var(--sjs2-size-x300);
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  border-radius: var(--sjs2-radius-component-formbox-action, 4px);
-  border: var(--sjs2-border-width-x100, 1px) solid
-    var(--sjs2-color-border-basic-secondary-overlay, rgba(28, 27, 32, 0.4));
+  border-radius: var(--sjs2-radius-component-formbox-action);
+  border: var(--sjs2-border-width-x100) solid
+    var(--sjs2-color-border-basic-secondary-overlay);
 }
 
 .sd-color-swatch--disabled {

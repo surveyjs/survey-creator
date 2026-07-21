@@ -4,14 +4,14 @@
 .sps-popup-menu.sps-popup-menu--dropdown {
   height: 0;
   .sv-popup__container {
-    margin-top: var(--sjs2-spacing-x50, 4px);
+    margin-top: var(--sjs2-spacing-x050);
   }
 }
 
 .sps-popup {
   .sv-popup__body-header {
     @include sjs2--typography--medium-strong;
-    color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+    color: var(--sjs2-color-fg-basic-primary);
   }
 
   &.sv-popup--modal-popup {
@@ -31,12 +31,12 @@
   }
 
   .sps-body {
-    background: var(--sjs2-color-utility-sheet, #fff);
+    background: var(--sjs2-color-utility-sheet);
   }
 
   .sps-page {
     padding: 0;
-    gap: var(--sjs2-spacing-x200, 16px);
+    gap: var(--sjs2-spacing-x200);
     align-self: stretch;
     max-width: initial;
     width: initial;
@@ -56,7 +56,7 @@
   }
 
   .sps-question__title {
-    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+    color: var(--sjs2-color-fg-basic-secondary);
     padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x000);
     @include sjs2--typography--default;
   }
@@ -69,8 +69,8 @@
     margin: 0;
     & > div {
       align-items: stretch;
-      padding-left: var(--sjs2-spacing-x400, 32px);
-      padding-right: var(--sjs2-spacing-x400, 32px);
+      padding-left: var(--sjs2-spacing-x400);
+      padding-right: var(--sjs2-spacing-x400);
       &:first-of-type {
         padding-left: 0;
       }
@@ -91,7 +91,7 @@
   .sps-panel__content {
     display: flex;
     flex-direction: column;
-    gap: var(--sjs2-spacing-x200, 16px);
+    gap: var(--sjs2-spacing-x200);
     padding: 0;
   }
   &.svc-creator-confirm-dialog .sv-modal-footer-action-bar {
@@ -102,7 +102,7 @@
     }
   }
   .sv-popup__close-button {
-    padding: var(--sjs2-spacing-x100, 8px);
+    padding: var(--sjs2-spacing-x100);
   }
 }
 

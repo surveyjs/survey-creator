@@ -7,17 +7,17 @@
 
 .sps-table {
   width: 100%;
-  background-color: var(--sjs2-color-bg-basic-primary, #fff);
+  background-color: var(--sjs2-color-bg-basic-primary);
   border-collapse: collapse;
 
   & > tbody > tr {
-    background-color: var(--sjs2-color-bg-basic-primary, #fff);
+    background-color: var(--sjs2-color-bg-basic-primary);
     & > td:last-of-type > .sd-action-bar .sd-action {
       opacity: var(--sjs2-opacity-hidden);
     }
     &:hover {
       & > td > div {
-        background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
+        background: var(--sjs2-color-bg-basic-primary-dim);
       }
       & > td:last-of-type > .sd-action-bar .sd-action {
         opacity: var(--sjs2-opacity-visible);
@@ -53,16 +53,16 @@
 
 .sps-table__cell {
   padding: 0;
-  padding-bottom: var(--sjs2-spacing-x075, 6px);
+  padding-bottom: var(--sjs2-spacing-x075);
   padding-top: 0;
   border-top: none;
   &:first-of-type > div {
-    border-top-left-radius: var(--sjs2-radius-semantic-form, 8px);
-    border-bottom-left-radius: var(--sjs2-radius-semantic-form, 8px);
+    border-top-left-radius: var(--sjs2-radius-form);
+    border-bottom-left-radius: var(--sjs2-radius-form);
   }
   &:last-of-type > div {
-    border-top-right-radius: var(--sjs2-radius-semantic-form, 8px);
-    border-bottom-right-radius: var(--sjs2-radius-semantic-form, 8px);
+    border-top-right-radius: var(--sjs2-radius-form);
+    border-bottom-right-radius: var(--sjs2-radius-form);
   }
 
   .sd-action-bar {
@@ -77,12 +77,12 @@
   }
 }
 .sps-table__row--main > .sps-table__cell {
-  padding-bottom: calc(var(--sjs2-spacing-x075, 6px) + var(--sjs2-spacing-x050, 4px));
-  padding-top: calc(var(--sjs2-spacing-x075, 6px) + var(--sjs2-spacing-x050, 4px));
-  border-top: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  padding-bottom: calc(var(--sjs2-spacing-x075) + var(--sjs2-spacing-x050));
+  padding-top: calc(var(--sjs2-spacing-x075) + var(--sjs2-spacing-x050));
+  border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   &.sps-table__cell--detail-panel {
     border-top: none;
-    padding: 0 0 var(--sjs2-spacing-x075, 6px) 0;
+    padding: 0 0 var(--sjs2-spacing-x075) 0;
   }
 }
 
@@ -129,31 +129,31 @@
       box-shadow: none;
       background-color: transparent;
       height: auto;
-      padding: var(--sjs2-spacing-x100, 8px) 0;
+      padding: var(--sjs2-spacing-x100) 0;
 
       width: calc(100% + var(--action-container-width));
       margin-right: calc(-1 * var(--action-container-width));
       text-overflow: ellipsis;
 
-      border-radius: var(--sjs2-radius-semantic-form, 8px);
-      padding: var(--sjs2-spacing-x100, 8px);
+      border-radius: var(--sjs2-radius-form);
+      padding: var(--sjs2-spacing-x100);
       margin-left: 0;
       transition: margin-left $creator-transition-duration;
 
       &:hover {
-        background: var(--sjs2-color-control-formbox-focused-bg, #f5f5f5);
-        box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0)
-          var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
-          var(--sjs2-color-control-formbox-hovered-border, #d4d4d4) inset;
+        background: var(--sjs2-color-component-formbox-focused-bg);
+        box-shadow: var(--sjs2-border-offset-x-form-focused) var(--sjs2-border-offset-y-form-focused)
+          var(--sjs2-border-blur-form-focused) var(--sjs2-border-spread-form-focused)
+          var(--sjs2-color-component-formbox-hovered-border) inset;
       }
 
       &:focus,
       &:focus-within {
-        background: var(--sjs2-color-control-formbox-focused-bg, #f5f5f5);
-        box-shadow: var(--sjs2-border-offset-x-form-focused, 0) var(--sjs2-border-offset-y-form-focused, 0)
-          var(--sjs2-border-blur-form-focused, 0) var(--sjs2-border-spread-form-focused, 2px)
-          var(--sjs2-color-control-formbox-focused-border, #19b394) inset;
-        margin-left: var(--sjs2-spacing-x100, 8px);
+        background: var(--sjs2-color-component-formbox-focused-bg);
+        box-shadow: var(--sjs2-border-offset-x-form-focused) var(--sjs2-border-offset-y-form-focused)
+          var(--sjs2-border-blur-form-focused) var(--sjs2-border-spread-form-focused)
+          var(--sjs2-color-component-formbox-focused-border) inset;
+        margin-left: var(--sjs2-spacing-x100);
       }
     }
   }
@@ -180,7 +180,7 @@
 }
 
 .sps-table__row {
-  --action-width: calc(var(--sjs2-spacing-x200, 8px) + var(--sjs2-line-height-x300));
+  --action-width: calc(var(--sjs2-spacing-x200) + var(--sjs2-line-height-x300));
   --action-container-width: calc(3 * var(--action-width));
 }
 
@@ -193,7 +193,7 @@
   &:focus-within {
     .sps-table__cell:not(.sps-table__cell--detail-panel) {
       .sd-formbox__input {
-        width: calc(100% - var(--sjs2-spacing-x100, 8px));
+        width: calc(100% - var(--sjs2-spacing-x100));
         margin-right: 0;
       }
     }
@@ -210,7 +210,7 @@
   }
   &.spg-table__cell--actions:last-of-type .sd-action-bar {
     justify-content: flex-end;
-    padding-inline-end: var(--sjs2-spacing-x050, 4px);
+    padding-inline-end: var(--sjs2-spacing-x050);
   }
 }
 
@@ -223,9 +223,9 @@
 
 .sps-table__row--empty {
   @include sjs2--typography--default;
-  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+  color: var(--sjs2-color-fg-basic-primary);
   text-align: center;
   height: calc(
-    var(--sjs2-spacing-x400, 32px) + var(--sjs2-spacing-x300, 24px) + var(--sjs2-typography-line-height-default, 24px)
+    var(--sjs2-spacing-x400) + var(--sjs2-spacing-x300) + var(--sjs2-typography-line-height-default)
   );
 }

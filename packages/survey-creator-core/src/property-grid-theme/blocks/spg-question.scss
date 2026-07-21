@@ -103,12 +103,12 @@
   flex-direction: row;
   flex-wrap: wrap;
   line-height: var(--sjs2-line-height-x600);
-  padding: var(--sjs2-spacing-x050, 4px);
+  padding: var(--sjs2-spacing-x050);
   vertical-align: middle;
   align-items: stretch;
   &.spg-question--disabled {
-    background: var(--sjs2-color-component-formbox-readonly-bg, #fff);
-    box-shadow: var(--sjs2-border-effect-component-formbox-readonly, 0 0 0 1px #d4d4d4 inset);
+    background: var(--sjs2-color-component-formbox-readonly-bg);
+    box-shadow: var(--sjs2-border-effect-component-formbox-readonly);
   }
 }
 
@@ -152,8 +152,8 @@
     background: transparent;
   }
   .sd-dropdown {
-    padding-top: var(--sjs2-spacing-x050, 4px);
-    padding-bottom: var(--sjs2-spacing-x050, 4px);
+    padding-top: var(--sjs2-spacing-x050);
+    padding-bottom: var(--sjs2-spacing-x050);
     margin-top: var(--sjs2-spacing-negative-x050);
     margin-bottom: var(--sjs2-spacing-negative-x050);
   }
@@ -246,7 +246,7 @@ sv-question-error {
   }
 
   .sv-button-group {
-    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted, 0 0 0 2px #1c1b20 inset);
+    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted);
   }
 
   .spg-checkbox__control + .spg-checkbox__rectangle {

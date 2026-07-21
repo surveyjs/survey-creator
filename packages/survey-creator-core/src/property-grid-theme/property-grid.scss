@@ -103,7 +103,7 @@
 }
 
 .spg-body--empty {
-  padding: var(--sjs2-spacing-x500, 40px) var(--sjs2-spacing-x400, 32px);
+  padding: var(--sjs2-spacing-x500) var(--sjs2-spacing-x400);
   box-sizing: border-box;
 
   display: flex;
@@ -111,7 +111,7 @@
   align-items: center;
   align-self: stretch;
 
-  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+  color: var(--sjs2-color-fg-basic-secondary);
   text-align: center;
 
   @include sjs2--typography--default;

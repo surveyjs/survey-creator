@@ -31,7 +31,7 @@
   }
 
   .svc-question__dropdown-collapse-button {
-    margin-left: calc(var(--sjs2-spacing-x700, 56px) + var(--sjs2-spacing-x025, 2px));
-    margin-top: calc(var(--sjs2-spacing-x050, 4px));
+    margin-left: calc(var(--sjs2-spacing-x700) + var(--sjs2-spacing-x025));
+    margin-top: calc(var(--sjs2-spacing-x050));
   }
 }

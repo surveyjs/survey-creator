@@ -18,6 +18,8 @@ import postcss from "postcss";
 import cssnano from "cssnano";
 import { minify } from "terser";
 
+import sjs2Fallbacks from "./postcss-sjs2-fallbacks.mjs";
+
 function getOwnBanner(version) {
   return [
     "SurveyJS Creator v" + version,
@@ -95,7 +97,7 @@ function pluginIgnoreStyles() {
 
 export function createUmdConfig(options) {
 
-  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
+  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true, cssVariableDefaults } = options;
 
   if (Object.keys(input).length > 1) throw Error("umd config accepts only one input");
 
@@ -141,8 +143,11 @@ export function createUmdConfig(options) {
           },
           plugins: [
             postcssUrl({ url: "inline" }),
+            // bakes base-theme defaults into var() fallback chains so the runtime
+            // does not need to declare them (keeps DevTools' Styles panel fast)
+            cssVariableDefaults && sjs2Fallbacks({ defaultsPath: cssVariableDefaults }),
             postcssBanner({ banner: getOwnBanner(version), important: true }),
-          ],
+          ].filter(Boolean),
         })
         : pluginIgnoreStyles(),
       bannerPlugin({
@@ -169,7 +174,7 @@ export function createUmdConfig(options) {
 
 export function createEsmConfig(options) {
 
-  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
+  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true, cssVariableDefaults } = options;
 
   return {
     context: "this",
@@ -213,8 +218,11 @@ export function createEsmConfig(options) {
           },
           plugins: [
             postcssUrl({ url: "inline" }),
+            // bakes base-theme defaults into var() fallback chains so the runtime
+            // does not need to declare them (keeps DevTools' Styles panel fast)
+            cssVariableDefaults && sjs2Fallbacks({ defaultsPath: cssVariableDefaults }),
             postcssBanner({ banner: getOwnBanner(version), important: true }),
-          ],
+          ].filter(Boolean),
         })
         : pluginIgnoreStyles(),
       bannerPlugin({
@@ -244,7 +252,7 @@ export function createEsmConfig(options) {
 
 export function createCssConfig(options) {
 
-  const { input, dir, emitMinified, version, onCloseBundle, watchFiles } = options;
+  const { input, dir, emitMinified, version, onCloseBundle, watchFiles, cssVariableDefaults } = options;
 
   if (Object.keys(input).length > 1) throw Error("css config accepts only one input");
 
@@ -274,8 +282,11 @@ export function createCssConfig(options) {
         },
         plugins: [
           postcssUrl({ url: "inline" }),
+          // bakes base-theme defaults into var() fallback chains so the runtime
+          // does not need to declare them (keeps DevTools' Styles panel fast)
+          cssVariableDefaults && sjs2Fallbacks({ defaultsPath: cssVariableDefaults }),
           postcssBanner({ banner: getOwnBanner(version), important: true }),
-        ],
+        ].filter(Boolean),
       }),
       pluginOmit(e => e.endsWith(".omitted")),
       emitMinified && pluginMinify(),
