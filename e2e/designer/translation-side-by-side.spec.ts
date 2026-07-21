@@ -3,6 +3,7 @@ import { url, test, expect, setJSON, setCreatorProp, getJSON, getTabbedMenuItemB
 const title = "Translation tab - side by side";
 
 const json = {
+  locale: "de",
   pages: [
     {
       name: "page1",
