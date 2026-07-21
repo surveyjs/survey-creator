@@ -4,19 +4,33 @@
       [placeholderTitleText]="model.placeholderTitleText"
       [placeholderDescriptionText]="model.placeholderDescriptionText">
     </svc-surface-placeholder>
-    <div *ngIf="!model.isEmpty" class="st-content">
-      <div class="svc-flex-column st-strings-wrapper">
-        <div class="svc-flex-row st-strings-header">
-          <ng-container *ngFor="let s of [model.stringsHeaderSurvey]; trackBy: trackStringsSurveyBy">
+    <ng-container *ngIf="!model.isEmpty">
+      <div *ngIf="stringsModel" class="st-content">
+        <div class="svc-flex-column st-strings-wrapper">
+          <div class="svc-flex-row st-strings-header">
+            <ng-container *ngFor="let s of [stringsModel.stringsHeaderSurvey]; trackBy: trackStringsSurveyBy">
+              <survey-content [model]="s"></survey-content>
+            </ng-container>
+          </div>
+          <div class="svc-flex-row svc-plugin-tab__content st-strings">
+            <ng-container *ngFor="let s of [stringsModel.stringsSurvey]; trackBy: trackStringsSurveyBy">
+              <survey-content [model]="s"></survey-content>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="sideBySideModel && !sideBySideModel.showSurveyStrings" class="st-side-by-side">
+        <div class="st-side-by-side__source">
+          <ng-container *ngFor="let s of [sideBySideModel.sourceSurvey]; trackBy: trackStringsSurveyBy">
             <survey-content [model]="s"></survey-content>
           </ng-container>
         </div>
-        <div class="svc-flex-row svc-plugin-tab__content st-strings">
-          <ng-container *ngFor="let s of [model.stringsSurvey]; trackBy: trackStringsSurveyBy">
+        <div class="st-side-by-side__target">
+          <ng-container *ngFor="let s of [sideBySideModel.destinationSurvey]; trackBy: trackStringsSurveyBy">
             <survey-content [model]="s"></survey-content>
           </ng-container>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 </ng-template>

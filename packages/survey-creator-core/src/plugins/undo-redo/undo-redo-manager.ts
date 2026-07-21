@@ -1,6 +1,7 @@
 import {
   ArrayChanges,
   Base,
+  ILocalizableString,
   JsonObjectProperty,
   Serializer,
   SurveyModel
@@ -120,6 +121,26 @@ export class UndoRedoManager {
   }
   public get isProcessingUndoRedo(): boolean {
     return this._isExecuting === true;
+  }
+  // Executes an action that records itself into the undo/redo stack as a single transaction.
+  // The raw property-change recording is suppressed while the action runs: the action knows how to
+  // roll itself back (e.g. per-locale text writes that the raw recording would roll back incorrectly).
+  public performAction(action: IUndoRedoAction, transactionName: string = ""): void {
+    if (this.isIgnoring) return;
+    this._isExecuting = true;
+    try {
+      action.apply();
+    } finally {
+      this._isExecuting = false;
+    }
+    if (this._preparingTransaction) {
+      this._preparingTransaction.addAction(action);
+      return;
+    }
+    const transaction = new Transaction(transactionName);
+    transaction.addAction(action);
+    this._addTransaction(transaction);
+    this.notifyChangesFinished(transaction);
   }
   canUndo() {
     return !!this._getCurrentTransaction();
@@ -242,6 +263,48 @@ export class UndoRedoAction implements IUndoRedoAction {
     if (new Date().getTime() - this.tickCount > UndoRedoAction.maximumMergeTime) return false;
     this._newValue = newValue;
     return true;
+  }
+}
+
+// The subset of TranslationItem the locale-aware action needs. Declared structurally to avoid
+// importing the translation tab into the undo/redo layer.
+export interface ILocaleTranslationItem {
+  name: string;
+  locString: ILocalizableString;
+  context: any;
+  setLocText(loc: string, newValue: string): void;
+}
+
+// Writes a translation item's text for one specific locale. The generic UndoRedoAction cannot be used
+// for cross-locale writes: it captures oldValue = undefined when the edited locale is not the current
+// one and rolls back through the property setter into the current locale, which would clear the
+// default text when undoing a translation edit.
+export class UndoRedoLocaleTextAction implements IUndoRedoAction {
+  private oldText: string;
+  constructor(private item: ILocaleTranslationItem, private locale: string, private newText: string) {
+    this.oldText = item.locString.getLocaleText(locale);
+  }
+  public apply(): void {
+    this.item.setLocText(this.locale, this.newText);
+  }
+  public rollback(): void {
+    this.item.setLocText(this.locale, this.oldText);
+  }
+  public getChanges(isUndo: boolean = false): IUndoRedoChange {
+    const context = this.item.context;
+    const object = !!context && typeof context.getType === "function" ? context : (<any>this.item.locString).owner;
+    return {
+      object: object,
+      propertyName: (<any>this.item.locString).name || this.item.name,
+      oldValue: isUndo ? this.newText : this.oldText,
+      newValue: isUndo ? this.oldText : this.newText
+    };
+  }
+  public getDeletedElement(isUndo: boolean): any { return undefined; }
+  public getInsertedElement(isUndo: boolean): any { return undefined; }
+  public getIndex(): number { return -1; }
+  public tryMerge(sender: Base, propertyName: string, newValue: any): boolean {
+    return false;
   }
 }
 

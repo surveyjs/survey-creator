@@ -30,6 +30,7 @@ export { registerSurveyTheme } from "../components/tabs/theme-model";
 export * from "../components/tabs/theme-model-definition";
 export * from "../components/tabs/logic";
 export * from "../components/tabs/translation";
+export * from "../components/tabs/translation-side-by-side";
 export * from "../components/tabs/translation-theme";
 export * from "../components/tabs/translation-plugin";
 export * from "../components/tabs/designer";

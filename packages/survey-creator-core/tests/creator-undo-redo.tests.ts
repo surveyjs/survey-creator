@@ -479,4 +479,36 @@ test("Clear undo/redo transactions on settings creator.JSON, bug#6208", (): any 
   creator.JSON = {};
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
   expect(undoAction.enabled).toBeFalsy();
+}); test("performAction executes once, records one transaction, suppresses raw recording", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } }]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  let applyCounter = 0;
+  const action = {
+    apply: () => {
+      applyCounter++;
+      question.locTitle.setLocaleText("de", "Frage 1 neu");
+    },
+    rollback: () => {
+      question.locTitle.setLocaleText("de", "Frage 1");
+    },
+    getChanges: () => ({ object: question, propertyName: "title", oldValue: "Frage 1", newValue: "Frage 1 neu" }),
+    tryMerge: () => false
+  };
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  creator.undoRedoManager.performAction(action, "translation changed");
+  expect(applyCounter).toBe(1);
+  expect(question.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  creator.undo();
+  // The raw recording was suppressed while the action ran: the single undo rolls back
+  // through the action and only the "de" text reverts, the default text stays untouched.
+  expect(question.locTitle.getLocaleText("de")).toBe("Frage 1");
+  expect(question.locTitle.getLocaleText("")).toBe("Question 1");
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  creator.redo();
+  expect(question.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
+  expect(question.locTitle.getLocaleText("")).toBe("Question 1");
 });

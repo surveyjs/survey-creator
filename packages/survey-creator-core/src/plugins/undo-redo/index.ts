@@ -31,6 +31,34 @@ export class UndoRedoPlugin implements ICreatorPlugin {
       },
       execute: () => this.model.redo()
     });
+    creator.registerShortcut("undo_translation", {
+      name: "undo",
+      affectedTab: "translation",
+      hotKey: {
+        ctrlKey: true,
+        keyCode: 90,
+      },
+      macOsHotkey: {
+        keyCode: 90,
+      },
+      execute: () => {
+        if (creator.translationMode === "sideBySide")this.model.undo();
+      }
+    });
+    creator.registerShortcut("redo_translation", {
+      name: "redo",
+      affectedTab: "translation",
+      hotKey: {
+        ctrlKey: true,
+        keyCode: 89,
+      },
+      macOsHotkey: {
+        keyCode: 89,
+      },
+      execute: () => {
+        if (creator.translationMode === "sideBySide")this.model.redo();
+      }
+    });
   }
   public model: any = undefined;
   public activate(): void {}
