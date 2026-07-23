@@ -3,6 +3,7 @@ export default {
   "iconSet": "v2",
   "isLight": true,
   "cssVariables": {
+    "--ctr-editor-label-color": "rgba(from var(--sjs-layer-3-foreground-100) r g b / 75%)",
     "--sjs2-base-unit-size": "8px",
     "--sjs2-base-unit-spacing": "8px",
     "--sjs2-base-unit-radius": "8px",
