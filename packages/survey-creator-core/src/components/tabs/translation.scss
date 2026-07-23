@@ -235,10 +235,14 @@ td.st-table__cell:first-of-type {
 .st-page {
   .sd-page__content {
     row-gap: 0;
+    padding: 0;
   }
 }
 .st-panel {
   .sd-panel__header {
     padding: 0;
   }
+}
+.st-row .sd-question__header-and-content-container {
+  padding: 0;
 }

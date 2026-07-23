@@ -44,7 +44,11 @@ svc-page {
     row-gap: var(--sjs2-spacing-x200, 16px);
   }
   .sd-page__header {
+    padding: 0;
     margin-bottom: 0;
+  }
+  .sd-page__content {
+    padding: 0;
   }
   &:before {
     position: absolute;

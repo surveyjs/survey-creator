@@ -185,6 +185,7 @@ export var propertyGridCss = {
   matrix: {
     tableWrapper: "spg-matrix spg-table-wrapper",
     root: "spg-table",
+    header: "spg-question__header",
     rowError: "spg-matrix__row--error",
     cell: "spg-table__cell spg-matrix__cell",
     headerCell: "spg-table__cell spg-table__cell--header",
@@ -202,6 +203,7 @@ export var propertyGridCss = {
   matrixdropdown: {
     tableWrapper: "spg-table-wrapper",
     root: "spg-table",
+    header: "spg-question__header",
     cell: "spg-table__cell",
     headerCell: "spg-table__cell spg-table__cell--header",
     emptyCell: "spg-table__cell--empty",
@@ -211,6 +213,7 @@ export var propertyGridCss = {
   matrixdynamic: {
     tableWrapper: "spg-table-wrapper",
     root: "spg-table spg-matrixdynamic",
+    header: "spg-question__header",
     content: "spg-matrixdynamic__content spg-text__content",
     cell: "spg-table__cell",
     row: "spg-table__row",

@@ -45,8 +45,8 @@
 
 .spg-container--multi-page {
   .spg-page__content {
-    row-gap: var(--sjs2-layout-component-page-content-area-gap-vertical);
-    column-gap: var(--sjs2-layout-component-page-content-area-gap-horizontal);
+    row-gap: var(--sjs2-spacing-x200);
+    column-gap: var(--sjs2-spacing-x200);
   }
 }
 

@@ -331,6 +331,9 @@
 }
 .sl-body {
   @include disableLibraryAnimations;
+  .sd-page__content {
+    padding: 0;
+  }
 }
 
 $sl-pd-list-fade-in-duration: var(--sl-pd-list-fade-in-duration, 250ms);
