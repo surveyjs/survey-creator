@@ -139,7 +139,7 @@
 
 .svc-side-bar--mobile .spg-theme-builder-root {
   .spg-nested-panel__content::after {
-    width: calc(var(--sjs2-size-400) + 100%);
+    width: calc(var(--sjs2-size-x400) + 100%);
     left: var(--sjs2-spacing-negative-x200);
   }
 }

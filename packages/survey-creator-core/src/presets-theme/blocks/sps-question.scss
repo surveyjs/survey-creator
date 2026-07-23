@@ -1,7 +1,7 @@
 @use "../../typography-mixins.scss" as *;
 
 .sps-question {
-  background: var(--sjs2-color-bg-basic-primary, #fff);
+  background: var(--sjs2-color-bg-basic-primary);
 }
 
 .sps-question--main {
@@ -9,11 +9,11 @@
 }
 
 .sps-question--with-frame {
-  border-radius: var(--sjs2-radius-x250, 20px);
-  border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  border-radius: var(--sjs2-radius-x250);
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   .sps-question__content {
-    padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px)
-      var(--sjs2-spacing-x250, 20px);
+    padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x250) var(--sjs2-spacing-x250)
+      var(--sjs2-spacing-x250);
   }
 }
 
@@ -22,23 +22,23 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x250, 20px) 0 var(--sjs2-spacing-x250, 20px);
+  padding: var(--sjs2-spacing-x200) var(--sjs2-spacing-x250) 0 var(--sjs2-spacing-x250);
   align-items: flex-start;
   align-self: stretch;
 }
 
 .sps-question__title {
-  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+  color: var(--sjs2-color-fg-basic-primary);
   @include sjs2--typography--default-strong;
 
   .sv-title-actions {
-    gap: var(--sjs2-spacing-x050, 4px);
+    gap: var(--sjs2-spacing-x050);
   }
 }
 
 .sps-question--nested {
   .sps-question__title {
-    color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+    color: var(--sjs2-color-fg-basic-secondary);
     padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x000);
     @include sjs2--typography--default;
   }
@@ -55,7 +55,7 @@
   .sps-question__description {
     @include sjs2--typography--small;
     color: var(--sjs2-color-fg-basic-secondary);
-    padding-bottom: var(--sjs2-spacing-x200, 16px);
+    padding-bottom: var(--sjs2-spacing-x200);
     white-space: normal;
   }
 }
@@ -69,12 +69,12 @@
 
 .sps-question__description {
   white-space: normal;
-  color: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.4));
+  color: var(--sjs2-color-fg-basic-tertiary);
 }
 
 .sps-question__description--under {
   display: flex;
-  padding: var(--sjs2-spacing-x100, 8px);
+  padding: var(--sjs2-spacing-x100);
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;

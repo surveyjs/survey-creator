@@ -2,13 +2,13 @@
 @use "../../typography-mixins.scss" as *;
 
 .sps-panel--with-frame {
-  border-radius: var(--sjs2-radius-x250, 20px);
-  border: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
-  background: var(--sjs2-color-bg-basic-primary, #fff);
+  border-radius: var(--sjs2-radius-x250);
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  background: var(--sjs2-color-bg-basic-primary);
   overflow: hidden;
 
   // .sps-row {
-  //   border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #D4D4D4);
+  //   border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   //   &:last-of-type {
   //     border-bottom: none;
   //   }
@@ -18,10 +18,10 @@
   position: relative;
   display: flex;
   flex-direction: row-reverse;
-  padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x150, 12px)
-    var(--sjs2-spacing-x250, 20px);
+  padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x150) var(--sjs2-spacing-x150)
+    var(--sjs2-spacing-x250);
   align-items: center;
-  gap: var(--sjs2-spacing-x150, 12px);
+  gap: var(--sjs2-spacing-x150);
 
   .sps-panel__header {
     width: auto;
@@ -38,7 +38,7 @@
   .sps-row {
     border: none;
     padding: 0 0 0 var(--sjs2-spacing-x300);
-    border-left: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
+    border-left: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
     &:first-of-type {
       padding-left: 0;
       border-left: none;
@@ -61,14 +61,14 @@
   width: 100%;
   box-sizing: border-box;
   display: flex;
-  padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x250, 20px) 0 var(--sjs2-spacing-x250, 20px);
+  padding: var(--sjs2-spacing-x200) var(--sjs2-spacing-x250) 0 var(--sjs2-spacing-x250);
   align-items: flex-start;
   align-self: stretch;
 }
 
 .sps-panel__title {
   flex-grow: 1;
-  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+  color: var(--sjs2-color-fg-basic-primary);
 
   @include sjs2--typography--default-strong;
 }
@@ -76,9 +76,9 @@
 .sps-panel__content {
   display: flex;
   flex-direction: column;
-  padding: var(--sjs2-spacing-x150, 12px) var(--sjs2-spacing-x250, 20px) var(--sjs2-spacing-x250, 20px)
-    var(--sjs2-spacing-x250, 20px);
-  gap: var(--sjs2-spacing-x200, 16px);
+  padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x250) var(--sjs2-spacing-x250)
+    var(--sjs2-spacing-x250);
+  gap: var(--sjs2-spacing-x200);
 }
 
 .sps-panel--nested {
@@ -87,10 +87,10 @@
   }
 
   .sps-panel__content {
-    padding: var(--sjs2-spacing-x200, 16px) 0 0;
+    padding: var(--sjs2-spacing-x200) 0 0;
   }
 }
 
 .sps-panel--collapsed {
-  padding-bottom: var(--sjs2-spacing-x200, 16px);
+  padding-bottom: var(--sjs2-spacing-x200);
 }

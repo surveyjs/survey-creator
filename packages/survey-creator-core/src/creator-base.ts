@@ -12,6 +12,7 @@ import {
   QuestionPanelDynamicModel,
   ChoiceItem,
   patchLegacyCSSVariables,
+  expandThemeCssVariables,
   ensureBaseThemeStyles
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
@@ -5050,6 +5051,9 @@ export class SurveyCreatorModel extends Base
     assign(newCssVariable, theme?.cssVariables);
     this.patchLegacyCreatorCSSVariables(newCssVariable);
     patchLegacyCSSVariables(newCssVariable);
+    // theme variables are rendered as inline styles on the creator root, where
+    // the fallbacks baked into the compiled CSS do not reach
+    expandThemeCssVariables(newCssVariable);
     const designerPlugin = this.getPlugin("designer", false) as TabDesignerPlugin;
     if (designerPlugin && designerPlugin.model) {
       designerPlugin.model.updateSurfaceCssVariables();
@@ -5067,6 +5071,9 @@ export class SurveyCreatorModel extends Base
   public defaultSurfaceCssVariables: { [index: string]: string };
   public setSurfaceCssVariables(newDefaultSurveyCssVariables: { [index: string]: string }) {
     this.defaultSurfaceCssVariables = { ...newDefaultSurveyCssVariables };
+    // surface variables are applied as inline styles (drag-drop shortcuts), where
+    // the fallbacks baked into the compiled CSS do not reach
+    expandThemeCssVariables(this.defaultSurfaceCssVariables);
     const cssVariablesToDelete = [
       "--sjs2-base-unit-size",
       "--sjs2-color-utility-surface-designer",

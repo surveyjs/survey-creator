@@ -7,14 +7,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  gap: var(--sjs2-spacing-x200, 16px);
+  gap: var(--sjs2-spacing-x200);
   align-self: stretch;
 }
 .svc-creator-confirm-dialog__title-container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: var(--sjs2-spacing-x150, 12px);
+  gap: var(--sjs2-spacing-x150);
   align-self: stretch;
 }
 .svc-creator-confirm-dialog__icon {
@@ -25,28 +25,28 @@
   width: 1lh;
   height: 1lh;
   box-sizing: content-box;
-  border-radius: var(--sjs2-radius-round, 9999px);
-  background: var(--sjs2-color-bg-warning-secondary, rgba(255, 152, 20, 0.1));
+  border-radius: var(--sjs2-radius-round);
+  background: var(--sjs2-color-bg-warning-secondary);
   margin: 0 auto;
   use {
-    fill: var(--sjs2-color-fg-warning-primary, #ff9814);
+    fill: var(--sjs2-color-fg-warning-primary);
   }
 }
 .svc-creator-confirm-dialog__icon--danger {
-  background: var(--sjs2-color-bg-alert-secondary, rgba(229, 10, 62, 0.1));
+  background: var(--sjs2-color-bg-alert-secondary);
   use {
-    fill: var(--sjs2-color-fg-alert-primary, #c30935);
+    fill: var(--sjs2-color-fg-alert-primary);
   }
 }
 .svc-creator-confirm-dialog__title {
   @include sjs2--typography--medium-strong;
-  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+  color: var(--sjs2-color-fg-basic-primary);
   text-align: center;
   display: block;
 }
 .svc-creator-confirm-dialog__message {
   @include sjs2--typography--default;
-  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+  color: var(--sjs2-color-fg-basic-secondary);
   text-align: center;
   display: block;
 }
@@ -55,7 +55,7 @@
   .sv-modal-footer-action-bar {
     display: flex;
     align-items: center;
-    gap: var(--sjs2-spacing-x150, 12px);
+    gap: var(--sjs2-spacing-x150);
     align-self: stretch;
     justify-content: stretch;
     flex-grow: 1;

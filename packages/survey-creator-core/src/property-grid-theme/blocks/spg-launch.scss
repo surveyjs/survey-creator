@@ -5,10 +5,10 @@
   box-sizing: border-box;
 }
 .spg-launch {
-  padding: var(--sjs2-spacing-x200, 16px) var(--sjs2-spacing-x400, 32px) 0px var(--sjs2-spacing-x400, 32px);
+  padding: var(--sjs2-spacing-x200) var(--sjs2-spacing-x400) 0px var(--sjs2-spacing-x400);
   display: flex;
   flex-direction: column;
-  gap: var(--sjs2-spacing-x200, 16px);
+  gap: var(--sjs2-spacing-x200);
   align-items: flex-start;
   justify-content: flex-start;
   align-self: stretch;
@@ -16,10 +16,10 @@
   position: relative;
 }
 .spg-launch__card {
-  background: var(--sjs2-color-bg-basic-primary, #ffffff);
+  background: var(--sjs2-color-bg-basic-primary);
   border-radius: var(--sjs2-radius-form);
   border-style: solid;
-  border-color: var(--sjs2-color-border-basic-secondary, #d4d4d4);
+  border-color: var(--sjs2-color-border-basic-secondary);
   border-width: 1px;
   display: flex;
   flex-direction: row;
@@ -31,17 +31,17 @@
   position: relative;
   cursor: pointer;
   appearance: none;
-  padding: var(--sjs2-spacing-x200, 16px);
+  padding: var(--sjs2-spacing-x200);
   &:hover {
-    background: var(--sjs2-color-bg-basic-primary-dim, rgba(28, 27, 32, 0.05));
+    background: var(--sjs2-color-bg-basic-primary-dim);
   }
   &:active {
-    background: var(--sjs2-color-bg-basic-primary, #ffffff);
+    background: var(--sjs2-color-bg-basic-primary);
   }
   &::after {
     content: "";
     display: block;
-    width: var(--sjs2-spacing-x600, 48px);
+    width: var(--sjs2-spacing-x600);
     align-self: stretch;
   }
 }
@@ -55,7 +55,7 @@
   position: relative;
 }
 .spg-launch__text {
-  color: var(--sjs2-color-fg-basic-primary, #1c1b20);
+  color: var(--sjs2-color-fg-basic-primary);
   text-align: left;
   position: relative;
   align-self: stretch;
@@ -66,12 +66,12 @@
   @include sjs2--typography--default-strong;
 }
 .spg-launch__text2 {
-  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+  color: var(--sjs2-color-fg-basic-secondary);
   text-align: left;
   position: relative;
   text-overflow: ellipsis;
   overflow: hidden;
-  padding-right: var(--sjs2-spacing-x300, 24px);
+  padding-right: var(--sjs2-spacing-x300);
 
   @include sjs2--typography--small;
 }
@@ -112,7 +112,7 @@
   transform-origin: 0 0;
   transform: rotate(-90deg) scale(1, 1);
   use {
-    fill: var(--sjs2-color-fg-basic-primary-muted, #424146);
+    fill: var(--sjs2-color-fg-basic-primary-muted);
   }
 }
 .spg-launch__chevron-down {

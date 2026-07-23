@@ -12,6 +12,15 @@ import { createEsmConfig, createUmdConfig, createCssConfig } from "../../rollup.
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const buildPath = resolve(__dirname, "build");
 
+// Base-theme defaults for the sjs2-fallbacks PostCSS plugin. Read from the
+// installed survey-core package (on CI only the built package is available,
+// not the survey-library sources); fall back to the sibling survey-library
+// checkout for local setups whose survey-core build predates base-theme.json.
+const packagedCssVariableDefaults = resolve(__dirname, "./node_modules/survey-core/base-theme.json");
+const cssVariableDefaults = fs.existsSync(packagedCssVariableDefaults)
+  ? packagedCssVariableDefaults
+  : resolve(__dirname, "../../../survey-library/packages/survey-core/src/default-theme/base-theme.ts");
+
 const buildPlatformJson = {
   name: pkg.name,
   version: pkg.version,
@@ -168,6 +177,7 @@ export default async (options) => {
         "iconsV2": imagesV2
       },
       emitCss: resolve(buildPath, "survey-creator-core.fontless.css"),
+      cssVariableDefaults,
       noEmitOnError: !options.watch
     }),
     createCssConfig({
@@ -177,6 +187,7 @@ export default async (options) => {
       dir: buildPath,
       emitMinified: process.env.emitMinified === "true",
       version: pkg.version,
+      cssVariableDefaults,
       watchFiles: [resolve(buildPath, "survey-creator-core.fontless.css")],
       onCloseBundle: async() => {
         for (const path of [resolve(buildPath, "survey-creator-core.css"), resolve(buildPath, "survey-creator-core.min.css")]) {

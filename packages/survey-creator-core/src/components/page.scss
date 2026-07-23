@@ -5,15 +5,15 @@ svc-page {
 }
 
 .svc-page {
-  margin-top: var(--sjs2-spacing-x200, 16px);
+  margin-top: var(--sjs2-spacing-x200);
 
   .sd-page__title {
-    margin-top: var(--sjs2-spacing-x300, 24px);
-    gap: var(--sjs2-spacing-x050, 4px);
+    margin-top: var(--sjs2-spacing-x300);
+    gap: var(--sjs2-spacing-x050);
   }
 
   .sd-page__description {
-    margin-bottom: var(--sjs2-spacing-x100, 8px);
+    margin-bottom: var(--sjs2-spacing-x100);
   }
 
   .sd-page__num {
@@ -28,32 +28,32 @@ svc-page {
 
 .svc-page__content {
   position: relative;
-  border-radius: var(--sjs2-radius-component-page, 12px);
-  padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x000, 0px) var(--sjs2-spacing-x300, 24px);
+  border-radius: var(--sjs2-radius-component-page);
+  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x000) var(--sjs2-spacing-x300);
 
   box-sizing: border-box;
   width: 100%;
   outline-color: transparent;
-  outline: var(--sjs2-border-width-x200, 2px) transparent dashed;
+  outline: var(--sjs2-border-width-x200) transparent dashed;
   transition-property: background-color, box-shadow, outline-color;
   transition-duration: $creator-transition-duration;
 
   .sd-page {
     margin: 0;
-    padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x300, 24px) 0;
+    padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x300) 0;
   }
   &:before {
     position: absolute;
     content: "";
     width: 100%;
     height: 100%;
-    margin-top: var(--sjs2-spacing-negative-x200, -16px);
-    padding-top: var(--sjs2-spacing-x200, 16px);
+    margin-top: var(--sjs2-spacing-negative-x200);
+    padding-top: var(--sjs2-spacing-x200);
     bottom: 0;
     box-sizing: content-box;
   }
   & > .svc-question__drag-area {
-    padding-top: calc(var(--sjs2-spacing-x100, 8px) + var(--sjs2-spacing-x025, 2px));
+    padding-top: calc(var(--sjs2-spacing-x100) + var(--sjs2-spacing-x025));
 
     .svc-question__drag-element {
       transition: opacity $creator-transition-duration;
@@ -63,8 +63,8 @@ svc-page {
 
 .svc-page__content.svc-page__content--no-header {
   .sd-page {
-    margin-top: var(--sjs2-spacing-x200, 16px);
-    padding-top: var(--sjs2-spacing-x100, 8px);
+    margin-top: var(--sjs2-spacing-x200);
+    padding-top: var(--sjs2-spacing-x100);
   }
 }
 
@@ -75,16 +75,16 @@ svc-page {
 .svc-page__content-actions {
   position: absolute;
   opacity: var(--sjs2-opacity-hidden);
-  top: var(--sjs2-spacing-x100, 8px);
+  top: var(--sjs2-spacing-x100);
   inset-inline-end: 0; // right
   inset-inline-start: 0;
   display: flex;
   justify-content: flex-end;
   box-sizing: border-box;
-  padding: 0 var(--sjs2-spacing-x150, 12px) 0 var(--sjs2-size-x300, 24px);
+  padding: 0 var(--sjs2-spacing-x150) 0 var(--sjs2-size-x300);
   transition: opacity $creator-transition-duration;
   white-space: nowrap;
-  gap: var(--sjs2-spacing-x150, 12px);
+  gap: var(--sjs2-spacing-x150);
 
   h4.sd-title {
     .sv-string-editor {
@@ -102,7 +102,7 @@ svc-page {
 }
 
 .svc-page__loading-content {
-  padding: var(--sjs2-spacing-x500, 40px);
+  padding: var(--sjs2-spacing-x500);
   text-align: center;
   .sd-loading-indicator {
     display: inline-block;
@@ -114,7 +114,7 @@ svc-page {
 }
 
 .svc-page-toolbar {
-  --sd-action-bar-gap: var(--sjs2-spacing-x100, 8px);
+  --sd-action-bar-gap: var(--sjs2-spacing-x100);
   flex-grow: 1;
   justify-content: flex-end;
   pointer-events: none;
@@ -127,7 +127,7 @@ svc-page {
 .svc-page-toolbar--collapse {
   flex-grow: 0;
   flex-shrink: 0;
-  --sd-action-bar-gap: var(--sjs2-spacing-x150, 12px);
+  --sd-action-bar-gap: var(--sjs2-spacing-x150);
 }
 
 .svc-page__content-actions {
@@ -165,8 +165,8 @@ svc-page {
 
   & > .svc-question__drag-area {
     .svc-question__drag-element {
-      width: var(--sjs2-size-x300, 24px);
-      height: var(--sjs2-size-x200, 16px);
+      width: var(--sjs2-size-x300);
+      height: var(--sjs2-size-x200);
       opacity: var(--sjs2-opacity-x050);
     }
   }
@@ -227,7 +227,7 @@ svc-page {
   .svc-page__content {
     &::after {
       margin: 0;
-      border-radius: var(--sjs2-radius-component-page, 12px);
+      border-radius: var(--sjs2-radius-component-page);
     }
   }
 
@@ -253,10 +253,10 @@ svc-page {
 .svc-page__footer {
   position: relative;
   overflow: visible;
-  margin-left: var(--sjs2-spacing-x300, 24px);
-  margin-right: var(--sjs2-spacing-x300, 24px);
-  margin-top: var(--sjs2-spacing-x200, 16px);
-  gap: var(--sjs2-spacing-x200, 16px);
+  margin-left: var(--sjs2-spacing-x300);
+  margin-right: var(--sjs2-spacing-x300);
+  margin-top: var(--sjs2-spacing-x200);
+  gap: var(--sjs2-spacing-x200);
 
   .svc-add-new-question-action {
     position: relative;
@@ -269,9 +269,9 @@ svc-page {
   position: absolute;
   background: var(--sjs2-color-bg-brand-primary);
   width: 100%;
-  height: var(--sjs2-border-width-x200, 2px);
+  height: var(--sjs2-border-width-x200);
   left: 0;
-  top: calc(calc(var(--sjs2-spacing-x200, 16px) + var(--sjs2-border-width-x200, 2px)) / -2);
+  top: calc(calc(var(--sjs2-spacing-x200) + var(--sjs2-border-width-x200)) / -2);
 }
 
 .svc-page--drag-over-empty-no-add-button:after {
@@ -281,11 +281,11 @@ svc-page {
 .svc-page__placeholder_frame {
   min-width: auto;
   max-width: 100%;
-  margin-top: var(--sjs2-spacing-x200, 16px);
-  padding: 0 var(--sjs2-spacing-x300, 24px);
+  margin-top: var(--sjs2-spacing-x200);
+  padding: 0 var(--sjs2-spacing-x300);
 
   .svc-panel__placeholder_frame {
-    padding: var(--sjs2-spacing-x600, 48px) var(--sjs2-spacing-x800, 64px);
+    padding: var(--sjs2-spacing-x600) var(--sjs2-spacing-x800);
     height: auto;
   }
 }
@@ -416,7 +416,7 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
   }
 
   .svc-page__content {
-    box-shadow: 0 0 0 var(--sjs2-border-width-x200, 2px) transparent;
+    box-shadow: 0 0 0 var(--sjs2-border-width-x200) transparent;
     background-color: transparent;
 
     & > .svc-question__drag-area {
@@ -428,5 +428,5 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
 }
 
 .svc-page {
-  scroll-margin-top: var(--sjs2-spacing-x100, 8px);
+  scroll-margin-top: var(--sjs2-spacing-x100);
 }

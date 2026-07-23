@@ -11,7 +11,7 @@
   opacity: 0.5;
 
   use {
-    fill: var(--sjs2-color-fg-basic-tertiary, rgba(28, 27, 32, 0.4));
+    fill: var(--sjs2-color-fg-basic-tertiary);
   }
 }
 
@@ -48,8 +48,8 @@
   background: var(--sjs2-color-bg-basic-secondary);
 
   box-sizing: border-box;
-  padding: var(--sjs2-spacing-x600, 48px) var(--sjs2-spacing-x800, 64px);
-  gap: var(--sjs2-spacing-x050, 4px);
+  padding: var(--sjs2-spacing-x600) var(--sjs2-spacing-x800);
+  gap: var(--sjs2-spacing-x050);
 
   .spg-action-bar {
     margin-left: 0;
@@ -63,7 +63,7 @@
 
 .spg-matrixdynamic__placeholder-text {
   @include sjs2--typography--default;
-  color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
+  color: var(--sjs2-color-fg-basic-secondary);
   text-align: center;
 }
 
@@ -100,7 +100,7 @@
     align-items: center;
     flex: 1 0 0;
     border-radius: var(--sjs2-radius-container-drag, 8px);
-    background: var(--sjs2-color-bg-basic-primary, #fff);
+    background: var(--sjs2-color-bg-basic-primary);
     box-shadow: var(--sjs2-border-effect-floating-default);
   }
 }
