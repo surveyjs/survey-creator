@@ -144,7 +144,7 @@ input.spg-input:read-only::placeholder {
 }
 
 .spg-input-container--multiline {
-  align-items: end;
+  align-items: flex-end;
   flex-direction: column;
   gap: 0;
   height: auto;

@@ -355,7 +355,7 @@ $sl-pd-list-move-out-delay: var(--sl-pd-list-move-out-delay, 100ms);
 }
 .sl-paneldynamic__buttons-container {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   .sv-action-bar {
     margin: 0;
   }
