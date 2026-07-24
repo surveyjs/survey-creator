@@ -145,11 +145,16 @@ svc-question {
       var(--sjs2-border-effect-component-formbox-default, 0 1px 2px 0 #d4d4d4 inset),
       var(--sjs2-border-effect-component-formbox-focused-reset, 0 0 0 0 #19b394 inset);
   }
-  .sd-question.sd-question--table > .sd-question__container .sd-question__header-and-content-container {
+  .sd-question.sd-question--table
+    > .sd-question__container
+    > .sd-question__header-and-content-container
+    > .sd-question__content {
     padding-left: var(--sd-base-padding);
     padding-right: var(--sd-base-padding);
     margin-left: calc(-1 * var(--sd-base-padding));
     margin-right: calc(-1 * var(--sd-base-padding));
+    padding-bottom: 0;
+    padding-top: var(--sjs2-spacing-x200, 16px);
   }
 
   .sjs_sp_placeholder {
@@ -412,11 +417,6 @@ svc-question {
   .sd-question.sd-question--table {
     margin-top: var(--sjs2-spacing-negative-x100, -8px);
     padding-top: var(--sjs2-spacing-x100, 8px);
-  }
-  .sd-question--table:not(.sd-element--nested)
-    > .sd-question__container
-    > .sd-question__header-and-content-container:first-child {
-    margin-top: calc(-0.5 * var(--sd-base-vertical-padding));
   }
 }
 
