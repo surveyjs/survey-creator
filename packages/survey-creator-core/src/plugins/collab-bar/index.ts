@@ -1,7 +1,6 @@
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
-import { JournalPlugin } from "../journal";
 import { PresencePlugin } from "../presence";
 import { IPresencePeer } from "../presence/presence-state";
 import { CollabBarStatus, ICollabChange, ICollabParticipant } from "./collab-bar-types";
@@ -26,11 +25,6 @@ export interface ICollabBarOptions {
   getInviteLink?: () => string;
   /** The "Back to lobby" menu item action; the item is hidden when absent. */
   onBack?: () => void;
-  /**
-   * Backs the save-version menu item. Default: snapshot through the creator's
-   * registered JournalPlugin; the item is hidden when neither is available.
-   */
-  onSaveVersion?: (label: string) => void;
   /**
    * A participant chip/row was clicked. Default: follow them to their tab
    * (`creator.activeTab = user.tab`).
@@ -84,8 +78,10 @@ export class CollabBarPlugin implements ICreatorPlugin {
       framework: options.framework,
       getInviteLink: options.getInviteLink,
       onBack: options.onBack,
-      onSaveVersion: this.resolveSaveVersion(),
-      onGoToParticipant: (user) => this.goToParticipant(user)
+      onGoToParticipant: (user) => this.goToParticipant(user),
+      // Windows mount into the themed creator root (theme CSS variables live
+      // there as inline style); resolved lazily -- the root renders later.
+      getRootElement: () => this.creator.rootElement
     });
     // rootElement appears only after the framework renders the creator: poll
     // fast (rAF) for the first mount, then keep a slow self-heal tick that
@@ -126,14 +122,6 @@ export class CollabBarPlugin implements ICreatorPlugin {
   /** The bar strip element (tests / host tweaks); undefined without a DOM. */
   public get element(): HTMLElement | undefined {
     return this.view?.element;
-  }
-
-  private resolveSaveVersion(): ((label: string) => void) | undefined {
-    if (this.options.onSaveVersion) return this.options.onSaveVersion;
-    // No handler and no journal to snapshot into -> the menu item is hidden.
-    // Register the bar after JournalPlugin for the default to kick in.
-    if (!this.creator.getPlugin<JournalPlugin>("journal", false)) return undefined;
-    return (label: string) => this.creator.getPlugin<JournalPlugin>("journal", false)?.snapshot(label);
   }
 
   private goToParticipant(user: ICollabParticipant): void {

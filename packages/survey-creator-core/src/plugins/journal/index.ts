@@ -13,6 +13,7 @@ export { JournalStackGuard } from "./journal-stack-guard";
 export * from "./journal-record";
 export * from "./journal-tab-refresher";
 export { buildLocator, resolveLocator, serializeValue, deserializeValue } from "./journal-locator";
+export { describeRecord } from "./journal-describe";
 
 /**
  * A background (non-tab) creator plugin that records all survey modifications

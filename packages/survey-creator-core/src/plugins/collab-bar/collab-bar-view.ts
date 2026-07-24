@@ -1,19 +1,21 @@
 import { DomDocumentHelper } from "survey-core";
 import { JournalOp } from "../journal/journal-record";
+import { describeRecord } from "../journal/journal-describe";
 import { presenceInitials } from "../presence/presence-state";
 import { CollabBarStatus, ICollabChange, ICollabParticipant } from "./collab-bar-types";
 
 /**
  * Pure-DOM view of the collaboration bar: the "Collaboration" menu and the
  * connection plate on the left, participant avatars and the "Invite" button on
- * the right, plus the right-docked Version History panel and the save-version
- * modal (both appended to the document body).
+ * the right, plus the right-docked Version History panel.
  *
  * All widget styling is inline `cssText`. Colors come from the SJS2 theme
  * variables that `ensureBaseThemeStyles` defines on the creator root (the
  * action tokens live under the `neutral`/`brand` families -- there is no
  * `style-*` family), so the bar follows the active creator theme; the
  * fallbacks mirror the default light theme for the rare out-of-root render.
+ * Windows mount into `getRootElement()` (falling back to the document body)
+ * for the same reason: the theme variables live on the creator root.
  */
 export interface ICollabBarViewOptions {
   /** Shown in the menu "Room" row; the row is hidden when absent. */
@@ -24,10 +26,14 @@ export interface ICollabBarViewOptions {
   getInviteLink?: () => string;
   /** The "Back to lobby" menu item; the item is hidden when absent. */
   onBack?: () => void;
-  /** Backs the save-version menu item; the item is hidden when absent. */
-  onSaveVersion?: (label: string) => void;
   /** A participant chip/row was clicked: follow them to their tab. */
   onGoToParticipant?: (user: ICollabParticipant) => void;
+  /**
+   * The creator root that carries the theme CSS variables; windows mount
+   * there so they follow the active theme. Absent (or not yet rendered) ->
+   * the document body.
+   */
+  getRootElement?: () => HTMLElement | undefined;
 }
 
 const doc = (): Document => DomDocumentHelper.getDocument();
@@ -135,7 +141,7 @@ export class CollabBarView {
   private avatars: HTMLElement;
   private overflowWrap: HTMLElement;
   private overflowMenu: HTMLDivElement;
-  // Body-attached windows and popover closers, released on dispose.
+  // Open windows and popover closers, released on dispose.
   private openWindows = new Set<IWindow>();
   private popoverClosers: Array<() => void> = [];
   private inviteTimer: ReturnType<typeof setTimeout> | undefined;
@@ -170,13 +176,6 @@ export class CollabBarView {
       closeMenu();
       this.openHistoryWindow();
     }));
-    if (this.options.onSaveVersion) {
-      // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
-      menu.appendChild(menuButton("Save to Version History…", () => {
-        closeMenu();
-        this.openSaveVersionWindow();
-      }));
-    }
     // Room/framework info rows and the host navigation are optional: each is
     // rendered only when the host supplied the corresponding option.
     const infoRows: Array<HTMLElement> = [];
@@ -355,7 +354,7 @@ export class CollabBarView {
   private openHistoryWindow(): void {
     // Single instance: re-selecting the menu item while open is a no-op.
     if (this.refreshHistoryWindow) return;
-    const panel = this.trackWindow(createPanel("Version History"));
+    const panel = this.trackWindow(createPanel("Version History", this.options.getRootElement?.()));
     // Per-group expand/collapse, keyed by the group's first change; survives
     // live re-renders. Absent key -> default (newest group open, rest closed).
     const groupState = new Map<string, boolean>();
@@ -397,46 +396,7 @@ export class CollabBarView {
     panel.onClose(() => { this.refreshHistoryWindow = undefined; });
   }
 
-  // --- Save to Version History window ------------------------------------------
-  private openSaveVersionWindow(): void {
-    const modal = this.trackWindow(createModal("Save to Version History"));
-    const label = doc().createElement("label");
-    label.textContent = "Version name";
-    label.style.cssText = "display:block;margin-bottom:6px;opacity:.7;";
-    const input = doc().createElement("input");
-    input.type = "text";
-    input.className = "collab-version-name";
-    input.placeholder = "e.g. Before rewording section 2";
-    input.style.cssText =
-      `width:100%;box-sizing:border-box;padding:8px 10px;background:${C.barBg};color:${C.fg};` +
-      `border:1px solid ${C.border};border-radius:${RADIUS};font:${FONT};margin-bottom:12px;`;
-    const actions = doc().createElement("div");
-    actions.style.cssText = "display:flex;justify-content:flex-end;gap:8px;";
-    const cancelBtn = doc().createElement("button");
-    cancelBtn.type = "button";
-    cancelBtn.textContent = "Cancel";
-    cancelBtn.style.cssText =
-      `padding:8px 12px;background:${C.surfaceBg};color:${C.fg};border:none;box-shadow:inset 0 0 0 1px ${C.border};` +
-      `border-radius:${RADIUS};font:${FONT};cursor:pointer;`;
-    const saveBtn = doc().createElement("button");
-    saveBtn.type = "button";
-    saveBtn.textContent = "Save";
-    saveBtn.style.cssText =
-      `padding:8px 12px;background:${C.primaryBg};color:${C.primaryFg};border:none;` +
-      `border-radius:${RADIUS};font:${FONT};cursor:pointer;`;
-    const submit = (): void => {
-      this.options.onSaveVersion?.(input.value.trim());
-      modal.close();
-    };
-    cancelBtn.addEventListener("click", () => modal.close());
-    saveBtn.addEventListener("click", submit);
-    input.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
-    actions.append(cancelBtn, saveBtn);
-    modal.body.append(label, input, actions);
-    input.focus();
-  }
-
-  /** Track a body-attached window so dispose() can close it. */
+  /** Track an open window so dispose() can close it. */
   private trackWindow(win: IWindow): IWindow {
     this.openWindows.add(win);
     win.onClose(() => this.openWindows.delete(win));
@@ -533,64 +493,13 @@ interface IWindow {
   onClose(handler: () => void): void;
 }
 
-/** Centered modal window over a dimmed backdrop. Closes on X, backdrop, Escape. */
-function createModal(title: string): IWindow {
-  const overlay = doc().createElement("div");
-  overlay.className = "collab-modal";
-  overlay.style.cssText =
-    // Above the bar's popovers (z-index:1100).
-    "position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;" +
-    "background:rgba(0,0,0,.5);";
-  const card = doc().createElement("div");
-  card.style.cssText =
-    `background:${C.menuBg};color:${C.fg};border:1px solid ${C.border};border-radius:${RADIUS};` +
-    "box-shadow:0 8px 24px rgba(0,0,0,.4);width:min(520px,92vw);max-height:80vh;" +
-    `display:flex;flex-direction:column;box-sizing:border-box;font:${FONT};`;
-  const header = doc().createElement("div");
-  header.style.cssText =
-    "display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px;" +
-    `border-bottom:1px solid ${C.border};flex:none;`;
-  const titleEl = doc().createElement("div");
-  titleEl.textContent = title;
-  titleEl.style.cssText = "font-size:14px;font-weight:600;";
-  const closeBtn = doc().createElement("button");
-  closeBtn.type = "button";
-  closeBtn.setAttribute("aria-label", "Close");
-  closeBtn.innerHTML = ICON_CLOSE;
-  closeBtn.style.cssText =
-    "display:inline-flex;align-items:center;justify-content:center;padding:4px;background:transparent;" +
-    `color:${C.fg};border:none;border-radius:${RADIUS};cursor:pointer;flex:none;`;
-  header.append(titleEl, closeBtn);
-  const body = doc().createElement("div");
-  body.style.cssText = "padding:12px 16px;overflow:auto;";
-  card.append(header, body);
-  overlay.appendChild(card);
-
-  const closeHandlers: Array<() => void> = [];
-  let closed = false;
-  const close = (): void => {
-    if (closed) return;
-    closed = true;
-    doc().removeEventListener("keydown", onKeyDown);
-    overlay.remove();
-    for (const h of closeHandlers) h();
-  };
-  const onKeyDown = (e: KeyboardEvent): void => { if (e.key === "Escape") close(); };
-  closeBtn.addEventListener("click", close);
-  // Backdrop click (but not clicks bubbling up from the card).
-  overlay.addEventListener("mousedown", (e) => { if (e.target === overlay) close(); });
-  doc().addEventListener("keydown", onKeyDown);
-  DomDocumentHelper.getBody().appendChild(overlay);
-
-  return { body, close, onClose: (h) => closeHandlers.push(h) };
-}
-
 /**
  * Right-docked floating panel for Version History. Closes on X or Escape; the
  * minimize button collapses it to just the header. No backdrop -- the Creator
- * stays usable alongside it.
+ * stays usable alongside it. Mounts into `container` (the themed creator root)
+ * when given, else the body; position:fixed keeps the viewport geometry either way.
  */
-function createPanel(title: string): IWindow {
+function createPanel(title: string, container?: HTMLElement): IWindow {
   const panel = doc().createElement("div");
   panel.className = "collab-version-panel";
   panel.style.cssText =
@@ -640,7 +549,7 @@ function createPanel(title: string): IWindow {
     panel.style.bottom = minimized ? "auto" : "12px";
   });
   doc().addEventListener("keydown", onKeyDown);
-  DomDocumentHelper.getBody().appendChild(panel);
+  (container ?? DomDocumentHelper.getBody()).appendChild(panel);
 
   return { body, close, onClose: (h) => closeHandlers.push(h) };
 }
@@ -695,11 +604,15 @@ function buildTimeline(changes: ReadonlyArray<ICollabChange>): Array<TimelineNod
   return nodes;
 }
 
-/** Stable per-render key for a group (its first change), to preserve expansion. */
+/**
+ * Stable per-render key for a group (its first change), to preserve expansion.
+ * Keyed by `seq` only: the recorder coalesces rapid edits by rewriting the
+ * last record (including its timestamp) in place, and a timestamp-based key
+ * would reset the group's expanded state on such a live refresh.
+ */
 function groupKey(node: TimelineNode): string {
   if (node.type !== "group" || node.changes.length === 0) return "";
-  const f = node.changes[0];
-  return `${f.timestamp}:${f.seq}`;
+  return String(node.changes[0].seq);
 }
 
 function circleIcon(): HTMLElement {
@@ -784,7 +697,10 @@ function groupHeaderRow(count: number, expanded: boolean, onToggle: () => void):
   return btn;
 }
 
-/** Expanded body of an autosaved group: timestamps with a left connector line. */
+/**
+ * Expanded body of an autosaved group: what happened + when, per change,
+ * with a left connector line.
+ */
 function autosavedGroupBody(changes: Array<ICollabChange>): HTMLElement {
   const wrap = doc().createElement("div");
   wrap.style.cssText = "position:relative;";
@@ -794,13 +710,17 @@ function autosavedGroupBody(changes: Array<ICollabChange>): HTMLElement {
   for (let i = changes.length - 1; i >= 0; i--) { // newest first
     const row = doc().createElement("div");
     row.className = "collab-version-autosaved";
-    row.style.cssText = `padding:8px 8px 8px 48px;border-radius:${RADIUS};cursor:default;position:relative;`;
+    row.style.cssText = `display:flex;flex-direction:column;gap:6px;padding:8px 8px 8px 48px;border-radius:${RADIUS};cursor:default;position:relative;`;
     row.addEventListener("mouseenter", () => { row.style.background = C.barBg; });
     row.addEventListener("mouseleave", () => { row.style.background = "transparent"; });
+    const desc = doc().createElement("div");
+    desc.textContent = describeRecord(changes[i]);
+    desc.title = desc.textContent;
+    desc.style.cssText = `font:${FONT_TEXT};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;`;
     const time = doc().createElement("div");
     time.textContent = formatVersionTime(changes[i].timestamp);
     time.style.cssText = `font:${FONT_TEXT};color:${C.fgTertiary};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;`;
-    row.appendChild(time);
+    row.append(desc, time);
     wrap.appendChild(row);
   }
   return wrap;

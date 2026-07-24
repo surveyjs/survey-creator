@@ -1,5 +1,5 @@
 import { CreatorTester } from "./creator-tester";
-import { JournalOp, JournalPlugin } from "../src/plugins/journal";
+import { JournalOp } from "../src/plugins/journal";
 import { IPresencePeerEntry, PresencePlugin } from "../src/plugins/presence";
 import { CollabBarPlugin, ICollabBarOptions } from "../src/plugins/collab-bar";
 
@@ -18,21 +18,15 @@ const tick = (ms = 50): Promise<void> => new Promise((resolve) => setTimeout(res
 
 interface ISetup {
   creator: CreatorTester;
-  journal: JournalPlugin;
   presence: PresencePlugin;
   bar: CollabBarPlugin;
   root: HTMLElement;
   cleanup: () => void;
 }
 
-function setup(options: ICollabBarOptions = {}, withJournal = true): ISetup {
+function setup(options: ICollabBarOptions = {}): ISetup {
   const creator = new CreatorTester();
   creator.JSON = initialJSON;
-  let journal: JournalPlugin | undefined;
-  if (withJournal) {
-    journal = new JournalPlugin(creator);
-    creator.addPlugin("journal", journal);
-  }
   const presence = new PresencePlugin(creator);
   creator.addPlugin("presence", presence);
   const bar = new CollabBarPlugin(creator, options);
@@ -49,7 +43,7 @@ function setup(options: ICollabBarOptions = {}, withJournal = true): ISetup {
     presence.dispose();
     root.remove();
   };
-  return { creator, journal: <JournalPlugin>journal, presence, bar, root, cleanup };
+  return { creator, presence, bar, root, cleanup };
 }
 
 const peerEntry = (clientId: string, tab: string): IPresencePeerEntry => ({
@@ -150,7 +144,7 @@ test("collab-bar: version history panel renders named versions from setHistory",
   try {
     await tick();
     bar.setHistory([
-      { seq: 0, timestamp: Date.now(), op: JournalOp.PropertyChanged, payload: {} },
+      { seq: 0, timestamp: Date.now(), op: JournalOp.PropertyChanged, payload: { target: "/pages/page1/elements/q1/title", value: "Hello" } },
       { seq: 1, timestamp: Date.now(), op: JournalOp.FullSnapshot, payload: { json: {}, label: "First milestone" } }
     ]);
     barButton(bar, "Show Version History")!.click();
@@ -159,6 +153,13 @@ test("collab-bar: version history panel renders named versions from setHistory",
     expect(panel!.querySelector(".collab-version-current")).toBeTruthy();
     expect(panel!.querySelector(".collab-version-named")!.textContent).toContain("First milestone");
     expect(panel!.querySelector(".collab-version-group")!.textContent).toContain("1 autosaved version");
+    // The newest group is expanded by default; its rows describe the action
+    // in human-readable form plus the timestamp.
+    const autosaved = panel!.querySelector(".collab-version-autosaved");
+    expect(autosaved).toBeTruthy();
+    // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    expect(autosaved!.textContent).toContain("Property \"title\" changed on \"q1\"");
+    expect(autosaved!.textContent).toMatch(/\d{2}:\d{2}/); // the timestamp line is still there
     expect(panel!.querySelector(".collab-version-base")).toBeTruthy();
     // Live refresh while open.
     bar.setHistory([
@@ -171,34 +172,24 @@ test("collab-bar: version history panel renders named versions from setHistory",
   }
 });
 
-test("collab-bar: save to version history snapshots through the journal by default", async (): Promise<any> => {
-  const { journal, bar, cleanup } = setup();
+test("collab-bar: windows mount inside the creator root so theme variables cascade", async (): Promise<any> => {
+  const { bar, root, cleanup } = setup();
   try {
     await tick();
-    // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
-    barButton(bar, "Save to Version History…")!.click();
-    const modal = document.body.querySelector(".collab-modal");
-    expect(modal).toBeTruthy();
-    const input = <HTMLInputElement>modal!.querySelector("input.collab-version-name");
-    input.value = "Release candidate";
-    (<HTMLButtonElement>Array.from(modal!.querySelectorAll("button")).find((b) => b.textContent === "Save")).click();
-    expect(document.body.querySelector(".collab-modal")).toBeFalsy();
-    const named = journal.records.filter((r) => r.op === JournalOp.FullSnapshot && (<any>r.payload).label === "Release candidate");
-    expect(named.length).toBe(1);
+    bar.setHistory([]);
+    barButton(bar, "Show Version History")!.click();
+    expect(root.querySelector(".collab-version-panel")).toBeTruthy();
   } finally {
     cleanup();
   }
 });
 
 test("collab-bar: host-specific elements are hidden without options", async (): Promise<any> => {
-  const plain = setup({}, false);
+  const plain = setup({});
   try {
     await tick();
     expect(barButton(plain.bar, "Invite")).toBeFalsy();
     expect(barButton(plain.bar, "Back to lobby")).toBeFalsy();
-    // No journal registered and no onSaveVersion -> the item is hidden.
-    // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
-    expect(barButton(plain.bar, "Save to Version History…")).toBeFalsy();
     expect(menuText(plain.bar)).not.toContain("Room");
     expect(menuText(plain.bar)).not.toContain("Framework");
   } finally {
@@ -214,8 +205,6 @@ test("collab-bar: host-specific elements are hidden without options", async (): 
     await tick();
     expect(barButton(full.bar, "Invite")).toBeTruthy();
     expect(barButton(full.bar, "Back to lobby")).toBeTruthy();
-    // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
-    expect(barButton(full.bar, "Save to Version History…")).toBeTruthy();
     expect(menuText(full.bar)).toContain("Room");
     expect(menuText(full.bar)).toContain("r-1");
     expect(menuText(full.bar)).toContain("Framework");
