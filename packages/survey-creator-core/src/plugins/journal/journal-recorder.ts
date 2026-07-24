@@ -5,6 +5,7 @@ import { EditableObject } from "../../editable-object";
 import {
   IJournalArrayChangedPayload,
   IJournalArrayItemAdded,
+  IJournalFullSnapshotPayload,
   IJournalOptions,
   IJournalRecord,
   JOURNAL_VERSION,
@@ -85,10 +86,12 @@ export class JournalRecorder {
   /**
    * Manually records a full-survey snapshot. Call it to bootstrap a receiver or
    * after a programmatic `creator.JSON = ...` / `creator.changeText()`, which do
-   * not fire `onModified`.
+   * not fire `onModified`. Pass `label` to tag it as a named version.
    */
-  public snapshot(): IJournalRecord {
-    return this.pushRecord(JournalOp.FullSnapshot, { json: this.creator.JSON });
+  public snapshot(label?: string): IJournalRecord {
+    const payload: IJournalFullSnapshotPayload = { json: this.creator.JSON };
+    if (label !== undefined) payload.label = label;
+    return this.pushRecord(JournalOp.FullSnapshot, payload);
   }
 
   private get survey(): SurveyModel {

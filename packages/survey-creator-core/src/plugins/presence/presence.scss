@@ -10,7 +10,8 @@
 .svc-question__content[data-collab-focus="on"]:not(.svc-question__content--selected),
 .svc-page__content[data-collab-focus="on"]:not(.svc-page__content--selected),
 .svc-side-bar [data-name][data-collab-focus="on"],
-.svc-side-bar .spg-question__content[data-collab-focus="on"] {
+.svc-side-bar .spg-question__content[data-collab-focus="on"],
+.svc-side-bar .sd-checkbox__decorator[data-collab-focus="on"] {
   box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused));
 }
 

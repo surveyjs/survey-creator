@@ -171,6 +171,85 @@ test("presence: remote selection decorates the native ring node", (): any => {
   }
 });
 
+test("presence: name badge sits under the ring's bottom-right corner and dims when away", (): any => {
+  const { plugin } = createCreator();
+  const designer = document.createElement("div");
+  designer.id = "scrollableDiv-designer";
+  designer.innerHTML =
+    "<div data-sv-drop-target-survey-element=\"q1\"><div class=\"svc-question__content\"></div></div>";
+  document.body.appendChild(designer);
+  designer.getBoundingClientRect = () => (<any>{ left: 0, top: 0, width: 800, height: 600 });
+  const content = <HTMLElement>designer.querySelector(".svc-question__content");
+  content.getBoundingClientRect = () => (<any>{ left: 100, top: 50, width: 300, height: 80 });
+  const selState = (tab: string): any => ({
+    tab, tabId: tab, sel: { loc: "/pages/page1/elements/q1", name: "q1", kind: "text", title: "q1" },
+    pgFocus: null, edit: null, cur: null
+  });
+  try {
+    plugin.upsertPeer(peerEntry("c1", { state: selState("designer") }));
+    (<any>plugin.overlay).render();
+    const badge = <HTMLElement>document.body.querySelector(".collab-presence-badge");
+    expect(badge).toBeTruthy();
+    expect(badge.textContent).toEqual("User c1");
+    expect(badge.style.display).toEqual("block");
+    // Right edge inset 8px from the ring's outer right edge (400 + 2 - 8,
+    // via translateX(-100%)); top hangs 4px below the 2px ring (130 + 2 + 4).
+    expect(badge.style.left).toEqual("394px");
+    expect(badge.style.top).toEqual("136px");
+    expect(badge.style.opacity).toEqual("1");
+
+    // The peer walks to another tab: dimmed like the ring.
+    plugin.upsertPeer(peerEntry("c1", { state: selState("test") }));
+    (<any>plugin.overlay).render();
+    expect(badge.style.opacity).toEqual("0.5");
+
+    // The node scrolls out of the designer viewport: the badge hides.
+    content.getBoundingClientRect = () => (<any>{ left: 100, top: 900, width: 300, height: 80 });
+    (<any>plugin.overlay).render();
+    expect(badge.style.display).toEqual("none");
+
+    plugin.removePeer("c1");
+    (<any>plugin.overlay).render();
+    expect(document.body.querySelector(".collab-presence-badge")).toBeFalsy();
+  } finally {
+    designer.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: editor badge anchors to the inflated focus border, not the editor node", (): any => {
+  const { plugin } = createCreator();
+  const designer = document.createElement("div");
+  designer.id = "scrollableDiv-designer";
+  designer.innerHTML =
+    "<div data-sv-drop-target-survey-element=\"q1\"><div class=\"svc-question__content\">" +
+    "<span class=\"svc-string-editor\"><span class=\"svc-string-editor__border svc-string-editor__border--focus\"></span></span>" +
+    "</div></div>";
+  document.body.appendChild(designer);
+  designer.getBoundingClientRect = () => (<any>{ left: 0, top: 0, width: 800, height: 600 });
+  const editor = <HTMLElement>designer.querySelector(".svc-string-editor");
+  editor.getBoundingClientRect = () => (<any>{ left: 108, top: 54, width: 84, height: 22 });
+  const border = <HTMLElement>designer.querySelector(".svc-string-editor__border--focus");
+  border.getBoundingClientRect = () => (<any>{ left: 100, top: 50, width: 100, height: 30 });
+  try {
+    plugin.upsertPeer(peerEntry("c1", {
+      state: {
+        tab: "designer", tabId: "designer", sel: null, pgFocus: null,
+        edit: { scope: "el", name: "q1", idx: 0 }, cur: null
+      }
+    }));
+    (<any>plugin.overlay).render();
+    const badge = <HTMLElement>document.body.querySelector(".collab-presence-badge");
+    // Offsets are taken from the BORDER rect (right 200, bottom 80), not the
+    // editor's: left = 200 + 2 - 8, top = 80 + 2 + 4.
+    expect(badge.style.left).toEqual("194px");
+    expect(badge.style.top).toEqual("86px");
+  } finally {
+    designer.remove();
+    plugin.dispose();
+  }
+});
+
 test("presence: remote editor focus decorates the string editor; dispose cleans up", (): any => {
   const { plugin } = createCreator();
   const designer = document.createElement("div");
@@ -235,6 +314,32 @@ test("presence: remote property-grid focus decorates the input area, not the who
     plugin.clearPeers();
     (<any>plugin.overlay).render();
     expect(field.hasAttribute("data-collab-focus")).toBeFalsy();
+  } finally {
+    sidebar.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: boolean property row rings just the checkbox decorator", (): any => {
+  const { plugin } = createCreator();
+  const sidebar = document.createElement("div");
+  sidebar.className = "svc-side-bar";
+  sidebar.innerHTML =
+    "<div data-name=\"showTitle\" class=\"spg-question--boolean\"><div class=\"spg-question__content\">" +
+    "<span class=\"sd-item__decorator sd-checkbox__decorator\"></span></div></div>";
+  document.body.appendChild(sidebar);
+  const content = <HTMLElement>sidebar.querySelector(".spg-question__content");
+  const decorator = <HTMLElement>sidebar.querySelector(".sd-checkbox__decorator");
+  try {
+    plugin.upsertPeer(peerEntry("c1", {
+      state: {
+        tab: "designer", tabId: "designer", sel: null,
+        pgFocus: { grid: "main", prop: "showTitle", objLoc: "" }, edit: null, cur: null
+      }
+    }));
+    (<any>plugin.overlay).render();
+    expect(decorator.getAttribute("data-collab-focus")).toEqual("on");
+    expect(content.hasAttribute("data-collab-focus")).toBeFalsy();
   } finally {
     sidebar.remove();
     plugin.dispose();

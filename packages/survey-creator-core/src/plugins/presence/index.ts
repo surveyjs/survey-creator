@@ -13,7 +13,7 @@ export * from "./presence-state";
  * A background (non-tab) creator plugin that tracks the local user's presence
  * (active tab, selected element, property-grid focus, mouse cursor) and
  * renders remote participants' presence over the creator (selection outlines,
- * tab badges, property-grid markers, cursors).
+ * property-grid markers, cursors).
  *
  * Like `JournalPlugin`, it has no transport of its own: the outbound side is
  * the `onStateChanged` event with the full local state, the inbound side is

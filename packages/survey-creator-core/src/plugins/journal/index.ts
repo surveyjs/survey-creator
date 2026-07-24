@@ -104,8 +104,8 @@ export class JournalPlugin implements ICreatorPlugin {
   public toText(): string {
     return this.recorder.toText();
   }
-  public snapshot(): IJournalRecord {
-    return this.recorder.snapshot();
+  public snapshot(label?: string): IJournalRecord {
+    return this.recorder.snapshot(label);
   }
   public apply(input: IJournalRecord | Array<IJournalRecord> | string, options?: IJournalApplyOptions): Array<IJournalApplyResult> {
     const records = this.applier.normalizeInput(input);

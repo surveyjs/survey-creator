@@ -102,6 +102,13 @@ export interface IJournalElementConvertedPayload {
 
 export interface IJournalFullSnapshotPayload {
   json: any;
+  /**
+   * Optional human-readable name for a snapshot saved explicitly as a named
+   * version (e.g. via a "Save to Version History" action). Purely descriptive:
+   * `apply()` ignores it (it reads only `json`), so it is safe for older
+   * receivers that predate this field.
+   */
+  label?: string;
 }
 
 export interface IJournalElementMovedPayload {

@@ -10,8 +10,12 @@ const OVERLAY_Z_INDEX = 1100;
 const CURSOR_IDLE_MS = 30_000;
 /** Safety tick for changes no observer catches (animations, scrollIntoView). */
 const FALLBACK_TICK_MS = 500;
-/** Em dash, the "name - detail" separator in badge tooltips. */
-const EM_DASH = String.fromCharCode(0x2014);
+/** The peer ring is a 2px (--sjs2-border-width-x200) box-shadow outside the node. */
+const RING_WIDTH = 2;
+/** Badge offsets from the ring's OUTER edges (Figma node 102:20059): the
+ * badge hangs 4px below the ring, its right edge 8px inside the ring's. */
+const BADGE_GAP = 4;
+const BADGE_INSET = 8;
 
 interface IRect { left: number, top: number, width: number, height: number }
 
@@ -19,9 +23,18 @@ const intersects = (a: IRect, b: IRect): boolean =>
   a.left < b.left + b.width && a.left + a.width > b.left &&
   a.top < b.top + b.height && a.top + a.height > b.top;
 
+/** A native decoration wanted on a node this tick, plus its name-badge data. */
+interface IDecoration {
+  mode: "on" | "away";
+  color: string;
+  /** Peer name shown on the badge under the ring. */
+  name: string;
+  /** Visible area of the node's scroll container - the badge hides outside it. */
+  clip?: IRect;
+}
+
 /** Per-peer DOM artifacts, created lazily and repositioned every tick. */
 interface IPeerArtifacts {
-  badge: HTMLElement;
   cursor: HTMLElement;
   cursorName: HTMLElement;
   /** Receiver-side time of the last observed cursor change (staleness). */
@@ -40,8 +53,8 @@ interface IPeerArtifacts {
  * unknown attributes survive framework re-renders; a re-CREATED node loses
  * them, but the MutationObserver tick below re-applies on the next pass.
  *
- * Only the mouse cursors and the tab-strip badges, which cannot be expressed
- * as element decorations, live in a fixed pointer-transparent layer.
+ * Only the mouse cursors and the name badges, which cannot be expressed as
+ * element decorations, live in a fixed pointer-transparent layer.
  */
 export class PresenceOverlay {
   private disposed = false;
@@ -49,6 +62,8 @@ export class PresenceOverlay {
   private artifacts = new Map<string, IPeerArtifacts>();
   /** Nodes currently carrying a decoration -> the applied "mode|color". */
   private decorated = new Map<HTMLElement, string>();
+  /** Name badge (a layer artifact) per decorated node. */
+  private badges = new Map<HTMLElement, HTMLElement>();
   private rafId: any = 0;
   private scheduled = false;
   private rootPoll: any = 0;
@@ -126,7 +141,7 @@ export class PresenceOverlay {
     }
   };
 
-  // --- layer artifacts (cursors and tab badges only) ---------------------------
+  // --- layer artifacts (cursors only) ------------------------------------------
 
   private el(className: string, css: string): HTMLElement {
     const node = this.doc.createElement("div");
@@ -141,7 +156,6 @@ export class PresenceOverlay {
     if (a) return a;
     const color = peer.color || "#888";
     a = {
-      badge: this.el("collab-presence-badge", `width:10px;height:10px;border-radius:50%;border:2px solid #fff;box-sizing:border-box;background:${color};`),
       cursor: this.el("collab-presence-cursor", "width:0;height:0;"),
       cursorName: this.el("collab-presence-cursor-name", `padding:2px 7px;border-radius:10px;background:${color};color:#fff;white-space:nowrap;`),
       curChangedAt: 0,
@@ -158,7 +172,7 @@ export class PresenceOverlay {
   private dropArtifacts(clientId: string): void {
     const a = this.artifacts.get(clientId);
     if (!a) return;
-    for (const node of [a.badge, a.cursor, a.cursorName]) node.remove();
+    for (const node of [a.cursor, a.cursorName]) node.remove();
     this.artifacts.delete(clientId);
   }
 
@@ -227,8 +241,8 @@ export class PresenceOverlay {
 
   // --- native decorations (data-collab-focus + --collab-peer-color) -------------
 
-  /** Sync the decorated-node set to `wanted` (node -> "mode|color"). */
-  private applyDecorations(wanted: Map<HTMLElement, string>): void {
+  /** Sync the decorated-node set (attributes + name badges) to `wanted`. */
+  private applyDecorations(wanted: Map<HTMLElement, IDecoration>): void {
     const stale: Array<HTMLElement> = [];
     this.decorated.forEach((_, node) => {
       if (!wanted.has(node)) stale.push(node);
@@ -237,14 +251,57 @@ export class PresenceOverlay {
       node.removeAttribute("data-collab-focus");
       node.style.removeProperty("--collab-peer-color");
       this.decorated.delete(node);
+      this.badges.get(node)?.remove();
+      this.badges.delete(node);
     });
-    wanted.forEach((value, node) => {
-      if (this.decorated.get(node) === value) return;
-      const sep = value.indexOf("|");
-      node.setAttribute("data-collab-focus", value.substring(0, sep));
-      node.style.setProperty("--collab-peer-color", value.substring(sep + 1));
-      this.decorated.set(node, value);
+    wanted.forEach((dec, node) => {
+      const value = `${dec.mode}|${dec.color}`;
+      if (this.decorated.get(node) !== value) {
+        node.setAttribute("data-collab-focus", dec.mode);
+        node.style.setProperty("--collab-peer-color", dec.color);
+        this.decorated.set(node, value);
+      }
+      this.placeBadge(node, dec);
     });
+  }
+
+  /**
+   * Name badge hugging the ring's bottom-right corner (per the Figma spec).
+   * Like the cursors it cannot be expressed as a node decoration, so it lives
+   * in the layer and is repositioned from the node's rect every tick.
+   */
+  private placeBadge(node: HTMLElement, dec: IDecoration): void {
+    let badge = this.badges.get(node);
+    if (!badge) {
+      // Figma: sjs2/typography/x-small-strong on the user color, 4px radius.
+      badge = this.el("collab-presence-badge",
+        "padding:4px 8px;border-radius:4px;color:#fff;white-space:nowrap;" +
+        "font-weight:600;font-size:10px;line-height:14px;" +
+        "font-family:var(--sjs2-font-family, system-ui, sans-serif);" +
+        "max-width:160px;overflow:hidden;text-overflow:ellipsis;transform:translateX(-100%);");
+      this.badges.set(node, badge);
+    }
+    // An inline string editor draws its visible frame on the border child,
+    // INFLATED past the node rect (string-editor.scss: --focus sits at
+    // -x050/-x100 offsets) - anchor the badge to that frame, not the node.
+    const anchor = node.classList.contains("svc-string-editor")
+      ? node.querySelector(".svc-string-editor__border--focus") ?? node
+      : node;
+    const r = anchor.getBoundingClientRect();
+    if (!dec.name || r.width === 0 || (dec.clip && !intersects(r, dec.clip))) {
+      this.hide(badge);
+      return;
+    }
+    badge.textContent = dec.name;
+    badge.style.background = dec.color;
+    badge.style.opacity = dec.mode === "away" ? "0.5" : "1";
+    badge.style.display = "block"; // measurable before placing
+    // On a node narrower than the badge (a checkbox) don't hang out past the
+    // ring's left edge - grow rightwards from it instead.
+    const rightEdge = Math.max(
+      r.left + r.width + RING_WIDTH - BADGE_INSET,
+      r.left - RING_WIDTH + badge.offsetWidth);
+    this.place(badge, rightEdge, r.top + r.height + RING_WIDTH + BADGE_GAP);
   }
 
   // --- per-tick render -----------------------------------------------------------
@@ -262,31 +319,21 @@ export class PresenceOverlay {
     const localSelLoc = this.localSelectionLoc();
     const now = Date.now();
     const sidebar = this.doc.querySelector(PRESENCE_SELECTORS.sidebar);
-    const sidebarRect = sidebar?.getBoundingClientRect();
+    // In flyout/mobile mode the .svc-side-bar box shrinks to the tabs strip
+    // while the visible panel is positioned absolutely outside of it (see
+    // side-bar.scss) - measure the panel, not the host box.
+    const sidebarRect = (sidebar?.querySelector(".svc-side-bar__container") ?? sidebar)?.getBoundingClientRect();
     const designer = localTab === "designer" ? this.designerContainer() : null;
-    const badgeCountPerTab = new Map<string, number>();
+    const designerRect = designer?.getBoundingClientRect();
     // Desired decorations this tick; first peer to claim a node wins.
-    const wanted = new Map<HTMLElement, string>();
+    const wanted = new Map<HTMLElement, IDecoration>();
 
     peers.forEach((peer) => {
       const a = this.getArtifacts(peer);
       const state = peer.state;
       const color = peer.color || "#888";
 
-      // 1) tab badge - stacked per tab, right-to-left from the tab's corner
-      const tabNode = state.tabId ? this.doc.querySelector(PRESENCE_SELECTORS.tabItem(state.tabId)) : null;
-      const badgeAnchor = tabNode ?? this.doc.querySelector(PRESENCE_SELECTORS.tabbedMenu);
-      if (badgeAnchor) {
-        const idx = badgeCountPerTab.get(state.tabId) ?? 0;
-        badgeCountPerTab.set(state.tabId, idx + 1);
-        const r = badgeAnchor.getBoundingClientRect();
-        this.place(a.badge, r.right - 12 - idx * 11, r.top + 2);
-        a.badge.title = `${peer.name} ${EM_DASH} ${state.tab || "?"}`;
-      } else {
-        this.hide(a.badge);
-      }
-
-      // 2) element focus ring - decorate the real node; independently, a
+      // 1) element focus ring - decorate the real node; independently, a
       // focused inline string editor lights up its native focus border
       // (mirrors what the peer sees locally: selection ring + editor border).
       if (designer) {
@@ -295,18 +342,18 @@ export class PresenceOverlay {
           const target = anchor ? this.ringNode(anchor) : null;
           if (target instanceof HTMLElement && !wanted.has(target)) {
             const mode = state.tab === "designer" ? "on" : "away";
-            wanted.set(target, `${mode}|${color}`);
+            wanted.set(target, { mode, color, name: peer.name, clip: designerRect });
           }
         }
         if (state.edit) {
           const editor = resolveEditFocus(state.edit, designer);
           if (editor instanceof HTMLElement && !wanted.has(editor)) {
-            wanted.set(editor, `on|${color}`);
+            wanted.set(editor, { mode: "on", color, name: peer.name, clip: designerRect });
           }
         }
       }
 
-      // 3) property-grid field ring - only when the local grid shows the same content
+      // 2) property-grid field ring - only when the local grid shows the same content
       if (state.pgFocus && sidebar) {
         const sameContent = state.pgFocus.grid === "theme"
           ? localTab === "theme"
@@ -315,15 +362,18 @@ export class PresenceOverlay {
           const field = sidebar.querySelector(PRESENCE_SELECTORS.dataName(state.pgFocus.prop));
           // The [data-name] node spans the whole row incl. its title; the
           // native focus only outlines the input area, so decorate the
-          // question content when present.
-          const target = field?.querySelector(PRESENCE_SELECTORS.pgQuestionContent) ?? field;
+          // question content when present. A boolean row's content spans the
+          // checkbox AND its label - ring just the checkbox itself.
+          const target = (field?.classList.contains(PRESENCE_SELECTORS.pgBooleanRow)
+            ? field.querySelector(PRESENCE_SELECTORS.pgCheckbox) : null) ??
+            field?.querySelector(PRESENCE_SELECTORS.pgQuestionContent) ?? field;
           if (target instanceof HTMLElement && !wanted.has(target)) {
-            wanted.set(target, `on|${color}`);
+            wanted.set(target, { mode: "on", color, name: peer.name, clip: sidebarRect });
           }
         }
       }
 
-      // 4) cursor - same tab only (tab strip cursors are global), idle fade
+      // 3) cursor - same tab only (tab strip cursors are global), idle fade
       if (state.cur && state.cur.t !== a.lastCurStamp) {
         a.lastCurStamp = state.cur.t;
         a.curChangedAt = now;

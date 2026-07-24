@@ -122,6 +122,8 @@ export const PRESENCE_SELECTORS = {
   designerSurfaceContent: ".svc-tab-designer_content",
   dataName: (name: string): string => `[data-name="${cssEsc(name)}"]`,
   pgQuestionContent: ".spg-question__content",
+  pgBooleanRow: "spg-question--boolean",
+  pgCheckbox: ".sd-checkbox__decorator",
   stringEditor: ".svc-string-editor",
   designerHeader: ".svc-designer-header",
   tabItem: (tabId: string): string => `#${cssEsc(`tab-${tabId}`)}`,
