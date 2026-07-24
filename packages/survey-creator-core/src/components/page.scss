@@ -49,6 +49,8 @@ svc-page {
   }
   .sd-page__content {
     padding: 0;
+    row-gap: var(--sjs2-spacing-x200, 16px);
+    column-gap: var(--sjs2-spacing-x300, 16px);
   }
   &:before {
     position: absolute;
