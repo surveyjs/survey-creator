@@ -49,12 +49,15 @@ test("Check page getAnimatedElement methods", () => {
   descriptionElement.className = page.cssClasses.page.description;
   const bodyElement = document.createElement("div");
   bodyElement.className = page.cssRoot;
+  const contentElement = document.createElement("div");
+  contentElement.className = page.cssContent;
   const rowElement = document.createElement("div");
   rowElement.className = "svc-row";
   const footerElement = document.createElement("div");
   footerElement.className = "svc-page__footer";
+  contentElement.appendChild(rowElement);
   bodyElement.appendChild(descriptionElement);
-  bodyElement.appendChild(rowElement);
+  bodyElement.appendChild(contentElement);
   rootElement.appendChild(bodyElement);
   rootElement.appendChild(footerElement);
   pageAdorner.rootElement = rootElement;

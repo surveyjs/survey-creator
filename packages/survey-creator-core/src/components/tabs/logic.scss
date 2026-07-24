@@ -217,6 +217,35 @@
   display: flex;
   align-items: center;
   margin-top: var(--sjs2-spacing-x200);
+
+  .sd-question__header-and-content-container {
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 0;
+    & > div {
+      width: 100%;
+    }
+  }
+  .sd-paneldynamic__footer {
+    padding: 0;
+  }
+}
+.sl-row {
+  .sd-question__header-and-content-container {
+    padding: 0;
+  }
+}
+.sl-question--header-left {
+  & > .sd-question__container > .sd-question__header-and-content-container {
+    & > .sl-question__header {
+      width: auto;
+    }
+    & > .sd-question__content {
+      flex-grow: 1;
+      width: auto;
+    }
+  }
 }
 
 .sl-row {
@@ -244,6 +273,9 @@
 }
 
 .sl-row {
+  .svc-logic-question-value.sd-question--title-top .sd-question__content {
+    width: 100%;
+  }
   .sd-rating {
     overflow-x: auto;
     padding: 2px;
@@ -271,8 +303,18 @@
   --sd-base-padding: var(--sjs2-spacing-x500);
   --sd-base-vertical-padding: var(--sjs2-spacing-x400);
   --sd-page-vertical-padding: var(--sjs2-spacing-x300);
-  padding-right: var(--sjs2-spacing-x500);
+  // padding-right: var(--sjs2-spacing-x500);
   margin-top: var(--sjs2-spacing-x200);
+  & > .sd-question__container {
+    & > .sd-question__header-and-content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: var(--sd-base-padding);
+      padding-top: var(--sd-base-vertical-padding);
+      row-gap: var(--sjs2-spacing-x200);
+    }
+  }
 }
 
 .svc-logic_trigger-editor {
@@ -294,6 +336,9 @@
 }
 .sl-body {
   @include disableLibraryAnimations;
+  .sd-page__content {
+    padding: 0;
+  }
 }
 
 $sl-pd-list-fade-in-duration: var(--sl-pd-list-fade-in-duration, 250ms);
@@ -323,6 +368,9 @@ $sl-pd-list-move-out-delay: var(--sl-pd-list-move-out-delay, 100ms);
     animation-duration: $sl-pd-list-fade-out-duration, $sl-pd-list-move-out-duration;
     animation-delay: 0s, $sl-pd-list-move-out-delay;
   }
+}
+.sl-paneldynamic__content {
+  width: 100%;
 }
 .sl-paneldynamic__buttons-container {
   display: flex;

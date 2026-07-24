@@ -14,7 +14,6 @@
       :class="model.css()"
       v-key2click
       @click="model.select(model, $event)"
-      data-bind="clickBubble: false"
     >
       <div
         class="svc-question__drop-indicator svc-question__drop-indicator--left"
@@ -46,7 +45,6 @@
       <div v-if="model.isEmptyElement" class="svc-panel__placeholder_frame">
         <div
           class="svc-panel__placeholder"
-          data-bind="text: placeholderText"
         ></div>
       </div>
       <div class="svc-question__content-actions">

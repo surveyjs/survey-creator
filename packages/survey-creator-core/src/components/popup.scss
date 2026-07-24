@@ -1,6 +1,9 @@
 @use "../variables" as *;
 
 .svc-creator-popup {
+  .sd-page__content {
+    padding: 0;
+  }
   &.sv-popup--modal-popup {
     background-color: var(--sjs2-color-utility-overlay);
 
