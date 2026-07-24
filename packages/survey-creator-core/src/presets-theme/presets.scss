@@ -56,9 +56,11 @@
   .sd-page__header {
     gap: var(--sjs2-spacing-x150, 12px);
     margin-bottom: 0;
+    padding: 0;
   }
   .sd-page__content {
     gap: var(--sjs2-spacing-x150, 12px);
+    padding: 0;
   }
 }
 
