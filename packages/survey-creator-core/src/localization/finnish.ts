@@ -3301,6 +3301,13 @@ export var fiStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Esiasetus käytössä"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Kohta 1" }, { value: "item2", text: "Kohta 2" }, { value: "item3", text: "Kohta 3" }],
+    columns: [{ value: "column1", text: "Sarake 1" }, { value: "column2", text: "Sarake 2" }, { value: "column3", text: "Sarake 3" }],
+    rows: [{ value: "row1", text: "Rivi 1" }, { value: "row2", text: "Rivi 2" }],
+    matrixColumns: [{ name: "column1", title: "Sarake 1" }, { name: "column2", title: "Sarake 2" }, { name: "column3", title: "Sarake 3" }]
   }
 };
 setupLocale({ localeCode: "fi", strings: fiStrings });

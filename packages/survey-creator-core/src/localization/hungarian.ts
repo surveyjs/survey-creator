@@ -3301,6 +3301,13 @@ export var huStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Előbeállítás alkalmazása"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Cikk 1" }, { value: "item2", text: "Cikk 2" }, { value: "item3", text: "Cikk 3" }],
+    columns: [{ value: "column1", text: "Oszlop 1" }, { value: "column2", text: "Oszlop 2" }, { value: "column3", text: "Oszlop 3" }],
+    rows: [{ value: "row1", text: "Sor 1" }, { value: "row2", text: "Sor 2" }],
+    matrixColumns: [{ name: "column1", title: "Oszlop 1" }, { name: "column2", title: "Oszlop 2" }, { name: "column3", title: "Oszlop 3" }]
   }
 };
 setupLocale({ localeCode: "hu", strings: huStrings });

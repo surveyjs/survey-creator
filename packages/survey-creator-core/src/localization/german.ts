@@ -3301,6 +3301,13 @@ export var germanTranslation = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset angewendet"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Artikel 1" }, { value: "item2", text: "Artikel 2" }, { value: "item3", text: "Artikel 3" }],
+    columns: [{ value: "column1", text: "Spalte 1" }, { value: "column2", text: "Spalte 2" }, { value: "column3", text: "Spalte 3" }],
+    rows: [{ value: "row1", text: "Zeile 1" }, { value: "row2", text: "Zeile 2" }],
+    matrixColumns: [{ name: "column1", title: "Spalte 1" }, { name: "column2", title: "Spalte 2" }, { name: "column3", title: "Spalte 3" }]
   }
 };
 

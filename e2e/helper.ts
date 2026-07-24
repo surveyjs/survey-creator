@@ -88,6 +88,14 @@ export const setJSON = async (page: Page, json: object) => {
   }, json);
 };
 
+/** Overrides the JSON that the toolbox item (and the Add Question menu) uses to create a new question. */
+export const setToolboxItemJSON = async (page: Page, itemName: string, json: object) => {
+  await page.waitForFunction(() => !!window["creator"]);
+  await page.evaluate(({ itemName, json }) => {
+    window["creator"].toolbox.getItemByName(itemName).json = { type: itemName, ...json };
+  }, { itemName, json });
+};
+
 export const setSurveyProp = async (page: Page, propName: string, value: unknown) => {
   await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate(({ propName, value }) => {

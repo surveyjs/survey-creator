@@ -3301,6 +3301,13 @@ export var skStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Použitá predsada"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Položka 1" }, { value: "item2", text: "Položka 2" }, { value: "item3", text: "Položka 3" }],
+    columns: [{ value: "column1", text: "Stĺpec 1" }, { value: "column2", text: "Stĺpec 2" }, { value: "column3", text: "Stĺpec 3" }],
+    rows: [{ value: "row1", text: "Riadok 1" }, { value: "row2", text: "Riadok 2" }],
+    matrixColumns: [{ name: "column1", title: "Stĺpec 1" }, { name: "column2", title: "Stĺpec 2" }, { name: "column3", title: "Stĺpec 3" }]
   }
 };
 

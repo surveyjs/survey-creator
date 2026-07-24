@@ -3301,6 +3301,13 @@ export var indonesianStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset diterapkan"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Benda 1" }, { value: "item2", text: "Benda 2" }, { value: "item3", text: "Benda 3" }],
+    columns: [{ value: "column1", text: "Kolom 1" }, { value: "column2", text: "Kolom 2" }, { value: "column3", text: "Kolom 3" }],
+    rows: [{ value: "row1", text: "Baris 1" }, { value: "row2", text: "Baris 2" }],
+    matrixColumns: [{ name: "column1", title: "Kolom 1" }, { name: "column2", title: "Kolom 2" }, { name: "column3", title: "Kolom 3" }]
   }
 };
 

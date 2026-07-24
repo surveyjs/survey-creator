@@ -3301,6 +3301,13 @@ export var frenchTranslation = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Préréglage appliqué"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Article 1" }, { value: "item2", text: "Article 2" }, { value: "item3", text: "Article 3" }],
+    columns: [{ value: "column1", text: "Colonne 1" }, { value: "column2", text: "Colonne 2" }, { value: "column3", text: "Colonne 3" }],
+    rows: [{ value: "row1", text: "Ligne 1" }, { value: "row2", text: "Ligne 2" }],
+    matrixColumns: [{ name: "column1", title: "Colonne 1" }, { name: "column2", title: "Colonne 2" }, { name: "column3", title: "Colonne 3" }]
   }
 };
 

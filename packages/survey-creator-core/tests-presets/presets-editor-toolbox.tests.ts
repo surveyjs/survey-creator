@@ -823,9 +823,9 @@ test("Toolbox import and defaults", () => {
           "iconName": "icon-radiogroup",
           "json": {
             "choices": [
-              "Item 1",
-              "Item 2",
-              "Item 3"
+              { "value": "item1", "text": "Item 1" },
+              { "value": "item2", "text": "Item 2" },
+              { "value": "item3", "text": "Item 3" }
             ],
             "type": "radiogroup"
           }
@@ -937,9 +937,9 @@ test("Toolbox import and defaults", () => {
           "iconName": "icon-radiogroup",
           "json": {
             "choices": [
-              "Item 1",
-              "Item 2",
-              "Item 3"
+              { "value": "item1", "text": "Item 1" },
+              { "value": "item2", "text": "Item 2" },
+              { "value": "item3", "text": "Item 3" }
             ],
             "type": "radiogroup"
           }

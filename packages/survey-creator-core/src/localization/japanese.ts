@@ -3301,6 +3301,13 @@ export var jaStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "プリセット適用"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "アイテム1" }, { value: "item2", text: "アイテム2" }, { value: "item3", text: "アイテム3" }],
+    columns: [{ value: "column1", text: "列 1" }, { value: "column2", text: "列 2" }, { value: "column3", text: "列 3" }],
+    rows: [{ value: "row1", text: "行 1" }, { value: "row2", text: "行 2" }],
+    matrixColumns: [{ name: "column1", title: "列 1" }, { name: "column2", title: "列 2" }, { name: "column3", title: "列 3" }]
   }
 };
 

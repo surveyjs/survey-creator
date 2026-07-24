@@ -67,6 +67,13 @@ export class EditorLocalization {
     }
     return path[path.length - 1];
   }
+  public getJsonValue(strName: string, locale: string = null): any {
+    if (!strName) return undefined;
+    const path = strName.split(".");
+    const res = this.getStringByPath(path, locale);
+    //getStringByPath returns the last path element, if there is no string for the path
+    return res === path[path.length - 1] ? undefined : res;
+  }
   public hasString(strName: string, locale: string = null): boolean {
     return this.getStringByLocale(strName.split("."), this.getLocale(locale)) !== undefined;
   }

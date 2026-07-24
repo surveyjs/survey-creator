@@ -3301,6 +3301,13 @@ export var htStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Prereglaj aplike"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Atik1" }, { value: "item2", text: "Atik2" }, { value: "item3", text: "Atik3" }],
+    columns: [{ value: "column1", text: "Kolòn 1" }, { value: "column2", text: "Kolòn 2" }, { value: "column3", text: "Kolòn 3" }],
+    rows: [{ value: "row1", text: "Ranje 1" }, { value: "row2", text: "Ranje 2" }],
+    matrixColumns: [{ name: "column1", title: "Kolòn 1" }, { name: "column2", title: "Kolòn 2" }, { name: "column3", title: "Kolòn 3" }]
   }
 };
 

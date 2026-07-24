@@ -3302,6 +3302,13 @@ export let svStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Förinställning applicerad"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Sak 1" }, { value: "item2", text: "Sak 2" }, { value: "item3", text: "Sak 3" }],
+    columns: [{ value: "column1", text: "Kolumn 1" }, { value: "column2", text: "Kolumn 2" }, { value: "column3", text: "Kolumn 3" }],
+    rows: [{ value: "row1", text: "Rad 1" }, { value: "row2", text: "Rad 2" }],
+    matrixColumns: [{ name: "column1", title: "Kolumn 1" }, { name: "column2", title: "Kolumn 2" }, { name: "column3", title: "Kolumn 3" }]
   }
 };
 

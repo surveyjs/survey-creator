@@ -3301,6 +3301,13 @@ export var hrStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Primijenjen predpostavka"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "Stavka 1" }, { value: "item2", text: "Stavka 2" }, { value: "item3", text: "Stavka 3" }],
+    columns: [{ value: "column1", text: "Stupca 1" }, { value: "column2", text: "Stupca 2" }, { value: "column3", text: "Stupca 3" }],
+    rows: [{ value: "row1", text: "Redak 1" }, { value: "row2", text: "Redak 2" }],
+    matrixColumns: [{ name: "column1", title: "Stupca 1" }, { name: "column2", title: "Stupca 2" }, { name: "column3", title: "Stupca 3" }]
   }
 };
 setupLocale({ localeCode: "hr", strings: hrStrings });

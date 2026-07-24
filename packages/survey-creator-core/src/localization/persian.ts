@@ -3301,6 +3301,13 @@ export var persianStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "پریست اعمال شده"
+  },
+  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  defaultJson: {
+    choices: [{ value: "item1", text: "مورد 1" }, { value: "item2", text: "مورد 2" }, { value: "item3", text: "مورد 3" }],
+    columns: [{ value: "column1", text: "ستون 1" }, { value: "column2", text: "ستون 2" }, { value: "column3", text: "ستون 3" }],
+    rows: [{ value: "row1", text: "سطر 1" }, { value: "row2", text: "سطر 2" }],
+    matrixColumns: [{ name: "column1", title: "ستون 1" }, { name: "column2", title: "ستون 2" }, { name: "column3", title: "ستون 3" }]
   }
 };
 
