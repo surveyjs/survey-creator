@@ -2858,3 +2858,81 @@ test("Import after creating TranslationEditor should not throw error, Issue#7790
   expect(translation.root).toBeDefined();
   expect(translation.stringsHeaderSurvey).toBeDefined();
 });
+
+test("Do not remove a just added locale on removing another locale, Bug#7904", () => {
+  const oldMaximumSelectedLocales = settings.translation.maximumSelectedLocales;
+  settings.translation.maximumSelectedLocales = 4;
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title en",
+          de: "title de",
+          fr: "title fr",
+          it: "title it",
+          es: "title es"
+        }
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  const question = translation.localesQuestion;
+  expect(translation.getSelectedLocales()).toStrictEqual(["de", "fr", "it", "es"]);
+  translation.addLocale("pt");
+  expect(translation.getVisibleLocales()).toStrictEqual(["de", "fr", "it", "es", "pt"]);
+  // The maximum is reached, so the added "pt" locale is visible but not selected
+  expect(translation.getSelectedLocales()).toStrictEqual(["de", "fr", "it", "es"]);
+  // Remove the "de" locale to free a space for "pt"
+  question.removeRow(1, false);
+  // The added "pt" locale should stay in the languages list
+  expect(translation.getVisibleLocales()).toStrictEqual(["fr", "it", "es", "pt"]);
+  expect(translation.getSelectedLocales()).toStrictEqual(["fr", "it", "es"]);
+  // Select the "pt" locale, there is a space for it now
+  const ptRowIndex = question.value.map(v => v.name).indexOf("pt");
+  question.visibleRows[ptRowIndex].cells[0].question.value = true;
+  expect(translation.getSelectedLocales()).toStrictEqual(["fr", "it", "es", "pt"]);
+  expect([...translation.locales]).toStrictEqual(["", "fr", "it", "es", "pt"]);
+  settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
+});
+
+test("Keep locales selection on removing a locale, Bug#7904", () => {
+  const oldMaximumSelectedLocales = settings.translation.maximumSelectedLocales;
+  settings.translation.maximumSelectedLocales = 4;
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title en",
+          de: "title de",
+          fr: "title fr",
+          it: "title it",
+          es: "title es",
+          pt: "title pt",
+          nl: "title nl"
+        }
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  const question = translation.localesQuestion;
+  // The first maximumSelectedLocales locales are selected
+  expect(translation.getSelectedLocales()).toStrictEqual(["de", "fr", "it", "es"]);
+  expect(translation.getVisibleLocales()).toStrictEqual(["de", "fr", "it", "es", "pt", "nl"]);
+  // Unselect the "de" locale and select the "pt" locale, value rows are: ["", "de", "fr", "it", "es", "pt", "nl"]
+  question.visibleRows[1].cells[0].question.value = false;
+  question.visibleRows[5].cells[0].question.value = true;
+  expect(translation.getSelectedLocales()).toStrictEqual(["fr", "it", "es", "pt"]);
+  // Remove the "nl" locale
+  question.removeRow(6, false);
+  expect(translation.getVisibleLocales()).toStrictEqual(["de", "fr", "it", "es", "pt"]);
+  // The selection should not be reset: "de" should stay unselected and "pt" should stay selected
+  expect(translation.getSelectedLocales()).toStrictEqual(["fr", "it", "es", "pt"]);
+  expect([...translation.locales]).toStrictEqual(["", "fr", "it", "es", "pt"]);
+  settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
+});

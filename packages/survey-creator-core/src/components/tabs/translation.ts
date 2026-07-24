@@ -889,17 +889,17 @@ export class Translation extends Base implements ITranslationLocales {
   public importFromCSVFileDOM(): void {
     CreatorDomHelper.openFileDialog((file: File) => this.importFromCSVFileUI(file));
   }
-  private updateSettingsSurveyLocales() {
+  private updateSettingsSurveyLocales(prevVisibleLocales: Array<string>) {
     let [choices, locales] = this.getSurveyLocales();
-    const selectedLocales = [];
     if (!locales) locales = [];
-    for (var i = 0; i < locales.length; i++) {
-      if (!!this.localeInitialVisibleCallback && !this.localeInitialVisibleCallback(locales[i])) continue;
-      selectedLocales.push(locales[i]);
-    }
     const maxLocales = settings.translation.maximumSelectedLocales;
-    if (maxLocales > 0 && selectedLocales.length > maxLocales) {
-      selectedLocales.splice(maxLocales);
+    const selectedLocales = this.getSelectedLocales();
+    for (var i = 0; i < locales.length; i++) {
+      if (maxLocales > 0 && selectedLocales.length >= maxLocales) break;
+      const loc = locales[i];
+      if (selectedLocales.indexOf(loc) > -1 || prevVisibleLocales.indexOf(loc) > -1) continue;
+      if (!!this.localeInitialVisibleCallback && !this.localeInitialVisibleCallback(loc)) continue;
+      selectedLocales.push(loc);
     }
     this.setSelectedLocales(selectedLocales);
   }
@@ -1169,6 +1169,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
   public reset(alwaysReset: boolean = true): void {
     if (!alwaysReset && !!this.root) return;
+    const prevVisibleLocales = this.getVisibleLocales();
     var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
     var rootName = !!this.filteredPage ? rootObj["name"] : "survey";
     this.root = new TranslationGroup(rootName, rootObj, this);
@@ -1176,7 +1177,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.root.reset();
     this.resetLocales();
     this.isEmpty = !this.root.hasItems;
-    this.updateSettingsSurveyLocales();
+    this.updateSettingsSurveyLocales(prevVisibleLocales);
     this.updateLocales();
     this.resetStringsSurvey();
     this.updateChooseLanguageActions();
@@ -1227,6 +1228,9 @@ export class Translation extends Base implements ITranslationLocales {
   public resetLocales(): void {
     var locales = [""];
     this.root.fillLocales(locales);
+    this.getVisibleLocales().forEach(loc => {
+      if (locales.indexOf(loc) < 0) locales.push(loc);
+    });
     const sortedLocales = this.options.translationLocalesOrder;
     if (Array.isArray(sortedLocales) && sortedLocales.length > 0) {
       const sortFunc = (a: string, b: string, arr: Array<string>): number => {
