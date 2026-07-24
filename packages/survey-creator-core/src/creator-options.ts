@@ -48,6 +48,18 @@ export interface ICreatorOptions {
    */
   showTranslationTab?: boolean;
   /**
+   * Specifies how the [Translation](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#translation-tab) tab edits translations.
+   *
+   * Accepted values:
+   *
+   * - `"default"` - A grid of translatable strings with a column per language.
+   * - `"sideBySide"` - Two design-mode instances of the edited survey rendered side by side: a read-only source language on the left and an inline-editable destination language on the right.
+   *
+   * Default value: `"default"`
+   * @see showTranslationTab
+   */
+  translationMode?: "default" | "sideBySide";
+  /**
    * Specifies whether to display the [Themes](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#themes-tab) tab.
    *
    * Default value: `false`

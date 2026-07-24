@@ -676,7 +676,7 @@ export class Translation extends Base implements ITranslationLocales {
 
   constructor(
     survey: SurveyModel,
-    private options: ISurveyCreatorOptions = null,
+    protected options: ISurveyCreatorOptions = null,
     private hasUI: boolean = true
   ) {
     super();
@@ -698,6 +698,9 @@ export class Translation extends Base implements ITranslationLocales {
   }
   public getType(): string {
     return "translation";
+  }
+  public get isSideBySide(): boolean {
+    return false;
   }
   @propertyArray() locales: Array<string>;
   @property() canMergeLocaleWithDefault: boolean;
@@ -721,7 +724,7 @@ export class Translation extends Base implements ITranslationLocales {
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
   private stringsSurveyInstanceId = 0;
-  private makeSurveyIdSpaceUnique(survey: SurveyModel): void {
+  protected makeSurveyIdSpaceUnique(survey: SurveyModel): void {
     survey.elementIdPrefix = (survey.elementIdPrefix || "") + (++this.stringsSurveyInstanceId) + "-";
   }
   @property({ defaultValue: true }) isEmpty: boolean;
@@ -961,7 +964,7 @@ export class Translation extends Base implements ITranslationLocales {
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
       const item = getTransationItem(options.question, options.row.name);
       if (!!item) {
-        item.setLocText(options.columnName, options.value);
+        this.setItemLocText(item, options.columnName, options.value);
         const colName = options.columnName;
         options.row.cells.forEach(cell => {
           if (colName === getDefaultLocaleName() || cell.column.name.indexOf(colName + "-") === 0)
@@ -979,6 +982,9 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
     cellQuestion.placeholder = item.getPlaceholder(locale);
+  }
+  protected setItemLocText(item: TranslationItem, locale: string, text: string): void {
+    item.setLocText(locale, text);
   }
   private createStringsHeaderSurvey() {
     let json = {};

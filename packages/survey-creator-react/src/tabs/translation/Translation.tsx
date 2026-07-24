@@ -5,7 +5,7 @@ import {
   SurveyElementBase,
   Survey
 } from "survey-react-ui";
-import { Translation } from "survey-creator-core";
+import { Translation, TranslationSideBySide } from "survey-creator-core";
 import { SurfacePlaceholder } from "../../components/SurfacePlaceholder";
 
 export class TabTranslationComponent extends SurveyElementBase<any, any> {
@@ -26,20 +26,42 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
   renderElementContent(): React.JSX.Element {
     if (this.model.isEmpty) {
       return <SurfacePlaceholder name={"translation"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
-    } else {
-      return (
-        <div className="st-content">
-          <div className="svc-flex-column st-strings-wrapper">
-            <div className="svc-flex-row st-strings-header">
-              <Survey key={this.model.stringsHeaderSurvey?.elementIdPrefix} model={this.model.stringsHeaderSurvey}></Survey>
-            </div>
-            <div className="svc-flex-row svc-plugin-tab__content st-strings">
-              <Survey key={this.model.stringsSurvey?.elementIdPrefix} model={this.model.stringsSurvey}></Survey>
-            </div>
+    }
+    if (this.model.isSideBySide) {
+      return this.renderSideBySideContent(this.model as TranslationSideBySide);
+    }
+    return this.renderStringsContent(this.model);
+  }
+  renderStringsContent(model: Translation): React.JSX.Element {
+    return (
+      <div className="st-content">
+        <div className="svc-flex-column st-strings-wrapper">
+          <div className="svc-flex-row st-strings-header">
+            <Survey key={model.stringsHeaderSurvey?.elementIdPrefix} model={model.stringsHeaderSurvey}></Survey>
+          </div>
+          <div className="svc-flex-row svc-plugin-tab__content st-strings">
+            <Survey key={model.stringsSurvey?.elementIdPrefix} model={model.stringsSurvey}></Survey>
           </div>
         </div>
-      );
+      </div>
+    );
+  }
+  renderSideBySideContent(model: TranslationSideBySide): React.JSX.Element {
+    if (model.showSurveyStrings) {
+      return this.renderStringsContent(model.surveyStringsTranslation);
     }
+    return (
+      <div className="st-side-by-side">
+        <div key={model.sourceSurvey?.elementIdPrefix} className="st-side-by-side__source"
+          ref={(el) => { model.setSourceScrollElement(el); }}>
+          <Survey model={model.sourceSurvey}></Survey>
+        </div>
+        <div key={model.destinationSurvey?.elementIdPrefix} className="st-side-by-side__target"
+          ref={(el) => { model.setDestinationScrollElement(el); }}>
+          <Survey model={model.destinationSurvey}></Survey>
+        </div>
+      </div>
+    );
   }
 }
 

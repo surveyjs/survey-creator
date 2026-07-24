@@ -231,3 +231,20 @@ td.st-table__cell:first-of-type {
 .st-body {
   @include disableLibraryAnimations;
 }
+
+.st-side-by-side {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.st-side-by-side__source,
+.st-side-by-side__target {
+  flex: 1 1 50%;
+  width: 50%;
+  overflow-y: auto;
+}
+
+.st-side-by-side__source {
+  border-right: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+}

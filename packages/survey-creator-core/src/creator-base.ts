@@ -203,6 +203,18 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
   /**
+   * Specifies how the [Translation](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#translation-tab) tab edits translations.
+   *
+   * Accepted values:
+   *
+   * - `"default"` - A grid of translatable strings with a column per language.
+   * - `"sideBySide"` - Two design-mode instances of the edited survey rendered side by side: a read-only source language on the left and an inline-editable destination language on the right.
+   *
+   * Default value: `"default"`
+   * @see showTranslationTab
+   */
+  public translationMode: "default" | "sideBySide" = "default";
+  /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *
    * Default value: `true`
@@ -3008,6 +3020,8 @@ export class SurveyCreatorModel extends Base
     hash["translation_settings"] = "translation-tab:language-list";
     hash["translation_strings"] = "translation-tab:table";
     hash["translation_strings_header"] = "translation-tab:table-header";
+    hash["translation_source"] = "translation-tab:source-survey";
+    hash["translation_target"] = "translation-tab:target-survey";
     hash["cells-editor"] = "matrix-cell-values-popup-editor";
     hash["fast-entry"] = "table-values-popup-editor";
     hash["modal-question-editor"] = "matrix-cell-question-popup-editor";
