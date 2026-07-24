@@ -31,10 +31,10 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
         <div className="st-content">
           <div className="svc-flex-column st-strings-wrapper">
             <div className="svc-flex-row st-strings-header">
-              <Survey key={this.model.stringsHeaderSurvey?.renderedIdPrefix} model={this.model.stringsHeaderSurvey}></Survey>
+              <Survey key={this.model.stringsHeaderSurvey?.elementIdPrefix} model={this.model.stringsHeaderSurvey}></Survey>
             </div>
             <div className="svc-flex-row svc-plugin-tab__content st-strings">
-              <Survey key={this.model.stringsSurvey?.renderedIdPrefix} model={this.model.stringsSurvey}></Survey>
+              <Survey key={this.model.stringsSurvey?.elementIdPrefix} model={this.model.stringsSurvey}></Survey>
             </div>
           </div>
         </div>

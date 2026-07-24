@@ -10,6 +10,7 @@ import { ComponentContainerModel, TabContainerViewModel, showConfirmDialog } fro
  * [UI Preset Editor Documentation](https://surveyjs.io/survey-creator/documentation/ui-preset-editor (linkStyle))
  *
  * [UI Preset Editor Demo](https://surveyjs.io/survey-creator/examples/ui-preset-editor/ (linkStyle))
+ * @since 3.0.0
  */
 export class UIPresetEditor implements ICreatorPlugin {
   static defaultPresetName = "expert";
@@ -40,6 +41,7 @@ export class UIPresetEditor implements ICreatorPlugin {
    * [How to Save and Load Presets](https://surveyjs.io/survey-creator/documentation/ui-preset-editor#save-and-load-custom-presets (linkStyle))
    * @param saveNo An incremental number that identifies the current change.
    * @param callback A callback function. Pass `saveNo` as the first argument. Set the second argument to `true` if the server successfully applied the change or `false` if it was rejected.
+   * @since 3.0.0
    */
   public savePresetFunc: (saveNo: number, callback: (no: number, isSuccess: boolean) => void) => void;
 
@@ -52,6 +54,7 @@ export class UIPresetEditor implements ICreatorPlugin {
    * A `UIPresetEditor` instance that raised the event.
    * - `options.presets`: [`IPresetListItem[]`](/survey-creator/documentation/api-reference/ipresetlistitem)\
    * The updated preset list.
+   * @since 3.0.0
    */
   public onPresetListSaved = new EventBase<UIPresetEditor, { presets: IPresetListItem[] }>();
 
@@ -164,6 +167,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   /**
    * Adds a new preset to the UI Preset Editor.
    * @param preset An [`IPreset`](https://surveyjs.io/survey-creator/documentation/api-reference/ipreset) object to add.
+   * @since 3.0.0
    * @see removePreset
    */
   public addPreset(preset: IPreset) {
@@ -172,6 +176,7 @@ export class UIPresetEditor implements ICreatorPlugin {
   /**
    * Removes a preset from the UI Preset Editor.
    * @param presetAccessor An [`IPreset`](https://surveyjs.io/survey-creator/documentation/api-reference/ipreset) object to delete or a preset name.
+   * @since 3.0.0
    * @see addPreset
    */
   public removePreset(presetAccessor: string | IPreset): void {
@@ -182,6 +187,7 @@ export class UIPresetEditor implements ICreatorPlugin {
    * Returns a preset with the specified `name`.
    * @param name The preset name.
    * @returns An [`IPreset`](https://surveyjs.io/survey-creator/documentation/api-reference/ipreset) object or `undefined` if a preset with this `name` is not found.
+   * @since 3.0.0
    */
   public getPreset(name: string): IPreset | undefined {
     return this.presetsManager.getPreset(name);
@@ -191,6 +197,7 @@ export class UIPresetEditor implements ICreatorPlugin {
    * A [preset](/survey-creator/documentation/api-reference/ipreset) being configured in the UI Preset Editor.
    *
    * [UI Preset Editor Demo](https://surveyjs.io/survey-creator/examples/ui-preset-editor/ (linkStyle))
+   * @since 3.0.0
    * @see savePresetFunc
    */
   public get preset(): IPreset | undefined {
@@ -203,6 +210,7 @@ export class UIPresetEditor implements ICreatorPlugin {
 
   /**
    * A mutable array of presets added to the UI Preset Editor either in code (using `registerUIPreset` or [`addPreset`](#addPreset)) or by the user.
+   * @since 3.0.0
    */
   public get availablePresets(): IPresetListItem[] {
     return this.presetsManager.getPresetsArray();

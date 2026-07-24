@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var hrStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Uređivanje",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "Gledajte i saznajte kako stvoriti ankete",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Molimo ispustite pitanje ovdje iz Toolbox.",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "Izradite pravilo za prilagodbu tijeka ankete.",
-    // "Copy"
-    copy: "Kopirati",
     // "Duplicate"
-    duplicate: "Duplikata",
-    // "Add to toolbox"
-    addToToolbox: "Dodaj u Toolbox",
-    // "Delete Panel"
-    deletePanel: "Brisanje ploče",
-    // "Delete Question"
-    deleteQuestion: "Izbriši pitanje",
-    // "Convert to"
-    convertTo: "Pretvorite u",
-    // "Drag element"
-    drag: "Povucite element"
+    duplicate: "Duplikata"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var hrStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "Zadani ({0})",
-    // "Survey"
-    survey: "Anketa",
     // "Settings"
     settings: "Postavke ankete",
     // "Open settings"
@@ -144,42 +120,14 @@ export var hrStrings = {
     surveyTypeName: "Anketa",
     // [Auto-translated] "Page"
     pageTypeName: "Stranica",
-    // [Auto-translated] "Panel"
-    panelTypeName: "Panel",
-    // [Auto-translated] "Question"
-    questionTypeName: "Pitanje",
-    // [Auto-translated] "Column"
-    columnTypeName: "Stupac",
-    // "Add New Page"
-    addNewPage: "Dodavanje nove stranice",
-    // "Scroll to the Right"
-    moveRight: "Pomicanje udesno",
-    // "Scroll to the Left"
-    moveLeft: "Pomicanje ulijevo",
-    // "Delete Page"
-    deletePage: "Brisanje stranice",
-    // "Edit Page"
-    editPage: "Uređivanje stranice",
-    // "Edit"
-    edit: "Uređivanje",
     // "page"
     newPageName: "stranica",
     // "question"
     newQuestionName: "pitanje",
     // "panel"
     newPanelName: "ploča",
-    // "text"
-    newTextItemName: "tekst",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "Propust",
-    // [Auto-translated] "Modern"
-    modernTheme: "Moderan",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Zadano (naslijeđeno)",
     // "Preview Survey Again"
     testSurveyAgain: "Ponovno probna anketa",
-    // "Survey width: "
-    testSurveyWidth: "Širina ankete: ",
     // "You had to navigate to"
     navigateToMsg: "Morao si navigirati do:",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var hrStrings = {
     undo: "Poništiti",
     // "Redo"
     redo: "Ponoviti",
-    // "Undo last change"
-    undoTooltip: "Poništi posljednju promjenu",
-    // "Redo the change"
-    redoTooltip: "Preusmjeti promjenu",
     // [Auto-translated] "Expand"
     expandTooltip: "Proširiti",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var hrStrings = {
     showMoreChoices: "Pokaži više",
     // [Auto-translated] "Show less"
     showLessChoices: "Pokaži manje",
-    // "Copy"
-    copy: "Kopirati",
-    // "Cut"
-    cut: "Izrezati",
-    // "Paste"
-    paste: "Zalijepite",
-    // "Copy selection to clipboard"
-    copyTooltip: "Kopiranje odabira u međuspremnik",
-    // "Cut selection to clipboard"
-    cutTooltip: "Izrežite odabir na međuspremnik",
-    // "Paste from clipboard"
-    pasteTooltip: "Pasta iz međuspremnika",
-    // "Options"
-    options: "Mogućnosti",
-    // "Generate Valid JSON"
-    generateValidJSON: "Generiranje valjanog JSON",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Nepoznata funkcija: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var hrStrings = {
     expressionSyntaxError: "Sintaksna pogreška.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Semantička pogreška.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Generiranje čitljivog JSON",
     // "Toolbox"
     toolbox: "Alatni okvir",
-    // "Properties"
-    "property-grid": "Svojstva",
     // [Auto-translated] "Search"
     toolboxSearch: "Pretraživanje",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var hrStrings = {
     propertyGridPlaceholderTitle: "Počnite konfigurirati svoj obrazac",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Kliknite bilo koju ikonu kategorije da biste istražili postavke upitnika. Dodatne postavke postat će dostupne nakon što dodate element upitnika na površinu dizajna.",
-    // "Please correct JSON."
-    correctJSON: "Ispravite JSON.",
     // "Survey Results "
     surveyResults: "Rezultat ankete: ",
     // "As Table"
@@ -294,8 +216,6 @@ export var hrStrings = {
     saving: "Spremanje",
     // "Saved"
     saved: "Spremiti",
-    // "Error"
-    propertyEditorError: "Pogreška:",
     // "Error! Editor content is not saved."
     saveError: "Pogreška! Sadržaj urednika nije spremljen.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var hrStrings = {
     themeResetConfirmation: "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Da, resetirajte temu",
-    // "Bold"
-    bold: "podebljano",
-    // "Italic"
-    italic: "kurziv",
-    // "Underline"
-    underline: "podcrtavanje",
     // "Add Question"
     addNewQuestion: "Dodaj pitanje",
     // "Select page..."
@@ -507,8 +421,6 @@ export var hrStrings = {
       trigger_runExpressionDescription: "Kada se logička ekspresija vrati istinita, tada se izvodi prilagođeni izraz. Taj rezultat izraza možete neobavezno postaviti u odabrano pitanje.",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Ako se logička ekspresija vrati istinita, zadani tekst za 'Thank you page' mijenja se u zadani.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Kada se izraz '{0}' vrati istinit", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "Novo pravilo",
       // "make page {0} visible"
@@ -539,6 +451,8 @@ export var hrStrings = {
       column_setValueText: "Dodijeli vrijednost ćelije: {1} stupcu: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Izraz čiji će rezultat biti dodijeljen ciljnom pitanju.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Unesite vrijednost...",
       // "survey becomes completed"
       trigger_completeText: "Anketa se dovrša",
       // "set into question: {0} value {1}"
@@ -563,8 +477,6 @@ export var hrStrings = {
       conditions: "Stanje/Stanja",
       // "Action(s)"
       actions: "Akcije",
-      // "Define condition(s)"
-      expressionEditorTitle: "Definiranje uvjeta",
       // "Define action(s)"
       actionsEditorTitle: "Definiranje radnji",
       // "Delete Action"
@@ -575,8 +487,6 @@ export var hrStrings = {
       selectedActionCaption: "Odaberite radnju za dodavanje...",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "Logička ekspresija je prazna ili nevažeća. Molim vas, ispravite to.",
-      // "Please add at least one action."
-      noActionError: "Molim vas, dodajte barem jednu akciju.",
       // "Please fix issues in your action(s)."
       actionInvalid: "Molimo vas da riješite probleme u svojoj akciji.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +788,6 @@ export var hrStrings = {
     defaultDisplayValue: "Zadana vrijednost prikaza za dinamičke tekstove",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Poravnanje natpisa",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Širina polja za unos (u znakovima)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Poravnanje poruke o pogrešci ćelije",
     // [Auto-translated] "Enabled"
@@ -888,32 +796,16 @@ export var hrStrings = {
     disabled: "Onemogućen",
     // [Auto-translated] "Inherit"
     inherit: "Naslijediti",
-    // "Apply"
-    apply: "Primijeniti",
-    // [Auto-translated] "OK"
-    ok: "U redu",
-    // "Save"
-    save: "Spremiti",
     // [Auto-translated] "Clear"
     clear: "Jasan",
-    // "Save"
-    saveTooltip: "Spremiti",
-    // "Cancel"
-    cancel: "Otkazati",
     // [Auto-translated] "Set"
     set: "Skup",
-    // "Reset"
-    reset: "Resetirati",
     // [Auto-translated] "Change"
     change: "Mijenjati",
-    // "Refresh"
-    refresh: "Osvježi",
     // [Auto-translated] "Close"
     close: "Blizak",
     // "Delete"
     delete: "Izbrisati",
-    // "Add"
-    add: "Dodati",
     // "Add New"
     addNew: "Dodaj novo",
     // "Click to add an item..."
@@ -922,34 +814,10 @@ export var hrStrings = {
     removeItem: "Kliknite da biste uklonili stavku...",
     // [Auto-translated] "Drag the item"
     dragItem: "Vucite stavku",
-    // "Other"
-    addOther: "Drugih",
-    // "Select All"
-    addSelectAll: "Odaberite sve",
-    // "None"
-    addNone: "Nitko",
-    // "Remove All"
-    removeAll: "Uklonite sve",
     // "Edit"
     edit: "Uređivanje",
-    // "Return without saving"
-    back: "Povratak bez uštede",
-    // "Return without saving"
-    backTooltip: "Povratak bez uštede",
-    // "Save and return"
-    saveAndBack: "Spremanje i vraćanje",
-    // "Save and return"
-    saveAndBackTooltip: "Spremanje i vraćanje",
     // [Auto-translated] "Done"
     doneEditing: "Učinjeno",
-    // "Edit Choices"
-    editChoices: "Uređivanje izbora",
-    // "Show Choices"
-    showChoices: "Pokažite izbore",
-    // "Move"
-    move: "Premjestiti",
-    // [Auto-translated] "<empty>"
-    empty: "<empty>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Vrijednost je prazna",
     // "Manual Entry"
@@ -962,12 +830,6 @@ export var hrStrings = {
     fastEntryChoicesMinCountError: "Unesite najmanje {0} stavki",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Unesite popis opcija izbora i njihove ID-ove u sljedećem formatu:\n\nid|opcija\n\nID opcije izbora nije vidljiv ispitanicima i može se koristiti u uvjetnim pravilima.",
-    // "Form Entry"
-    formEntry: "Unos obrasca",
-    // "Test the service"
-    testService: "Testirajte uslugu",
-    // "Please select the element"
-    itemSelectorEmpty: "Odaberite element",
     // "Please select the action"
     conditionActionEmpty: "Odaberite radnju",
     // "Select a question..."
@@ -976,20 +838,8 @@ export var hrStrings = {
     conditionSelectPage: "Odaberite stranicu...",
     // "Select a panel..."
     conditionSelectPanel: "Odabir ploče...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Unesite/odaberite vrijednost",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Pritisnite ctrl + prostor kako biste dobili savjet o završetku ekspresije",
-    // "Current row"
-    aceEditorRowTitle: "Trenutni redk",
-    // "Current panel"
-    aceEditorPanelTitle: "Trenutna ploča",
-    // "For more details please check the documentation"
-    showMore: "Više detalja potražite u dokumentaciji",
-    // "Available questions"
-    assistantTitle: "Dostupna pitanja:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Trebao bi postojati barem jedan stupac ili red",
     // [Auto-translated] "Review before submit"
     showPreviewBeforeComplete: "Pregledajte prije slanja",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +890,12 @@ export var hrStrings = {
     "addNew@navigateToUrlOnCondition": "Dodaj novi URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Dodaj novu stranicu",
-    // "Expression is empty"
-    expressionIsEmpty: "Izraz je prazan",
     // "Value"
     value: "Vrijednost",
     // "Text"
     text: "tekst",
-    // "Row ID"
-    rowid: "ID redaka",
     // "Image or video file URL"
     imageLink: "Veza slike",
-    // "Edit column: {0}"
-    columnEdit: "Uređivanje stupca: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Uređivanje stavke: {0}",
     // "URL"
     url: "Url",
     // "Path to data"
@@ -1070,8 +912,6 @@ export var hrStrings = {
     imageLinkName: "Dohvaćanje URL-ova datoteka iz sljedećeg entiteta",
     // [Auto-translated] "Accept empty response"
     allowEmptyResponse: "Prihvati prazan odgovor",
-    // "Title"
-    titlePlaceholder: "Ulazni naslov ovdje",
     // "Survey Title"
     surveyTitlePlaceholder: "Naslov ulazne ankete ovdje",
     // "Page {num}"
@@ -1182,16 +1022,8 @@ export var hrStrings = {
     defaultValue: "Zadana vrijednost",
     // "Default texts"
     cellsDefaultRow: "Zadani tekstovi ćelija",
-    // "Edit survey settings"
-    surveyEditorTitle: "Uređivanje postavki ankete",
-    // "Edit: {0}"
-    qEditorTitle: "Uređivanje: {0}",
     // "Maximum character limit"
     maxLength: "Maksimalna duljina",
-    // "Build"
-    buildExpression: "Graditi",
-    // "Edit"
-    editExpression: "Uređivanje",
     // [Auto-translated] "and"
     and: "i",
     // [Auto-translated] "or"
@@ -1218,8 +1050,6 @@ export var hrStrings = {
     includeIntoResult: "Dodaj u rezultate ankete",
     // "Make the title and description visible"
     showTitle: "Pokaži/sakrij naslov",
-    // "Expand/collapse title"
-    expandCollapseTitle: "Naslov proširenja/kolapsa",
     // "Select a survey language"
     locale: "Zadani jezik",
     // "Select device type"
@@ -1638,8 +1468,6 @@ export var hrStrings = {
     displayRateDescriptionsAsExtremeItems: "Prikaz oznaka kao ekstremnih vrijednosti",
     // [Auto-translated] "Row order"
     rowOrder: "Redoslijed redaka",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "Izgled stupca",
     // [Auto-translated] "Nested column count"
     columnColCount: "Broj ugniježđenih stupaca",
     // [Auto-translated] "Correct Answer"
@@ -1670,22 +1498,6 @@ export var hrStrings = {
     },
     // "Logo alignment"
     logoPosition: "Položaj logotipa",
-    // "Add logo..."
-    addLogo: "Dodavanje logotipa...",
-    // "Change logo..."
-    changeLogo: "Promjena logotipa...",
-    logoPositions: {
-      // "Remove logo"
-      none: "Uklanjanje logotipa",
-      // "Left"
-      left: "Lijevo",
-      // "Right"
-      right: "Desno",
-      // "On the top"
-      top: "Na vrhu",
-      // "In the bottom"
-      bottom: "Na dnu"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Način pregleda",
     // [Auto-translated] "Enable grid layout"
@@ -1698,14 +1510,8 @@ export var hrStrings = {
     detailErrorLocation: "Poravnanje poruke o pogrešci s pojedinostima retka",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Izgled ploče"
-      },
       // "General"
       general: "Općenito",
-      // "Options"
-      fileOptions: "Mogućnosti",
       // "HTML Editor"
       html: "Html Editor",
       // "Columns"
@@ -1728,10 +1534,6 @@ export var hrStrings = {
       sliderSettings: "Postavke klizača",
       // "Choices from a Web Service"
       choicesByUrl: "Izbori s weba",
-      // "Default Choices"
-      matrixChoices: "Zadani izbori",
-      // "Text Inputs"
-      multipleTextItems: "Unosi teksta",
       // "Numbering"
       numbering: "Numeriranje",
       // "Validators"
@@ -1774,8 +1576,6 @@ export var hrStrings = {
       showOnCompleted: "Prikazuje se na dovršenom",
       // "Logo in the Survey Header"
       logo: "Logotip u naslovu ankete",
-      // "Slider"
-      slider: "Klizač",
       // [Auto-translated] "Expression"
       expression: "Izraz",
       // [Auto-translated] "Question Settings"
@@ -1795,62 +1595,18 @@ export var hrStrings = {
       // "Others"
       others: "Drugi"
     },
-    // "Edit property '{0}'"
-    editProperty: "Uređivanje objekta '{0}'",
     // "Items"
     items: "[ Stavke: {0} ]",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Učinite izbore vidljivima ako",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "Mogućnost odabira odabira ako",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "Učinite stupce vidljivima ako",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "Učinite redove vidljivima ako",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "Povećajte unutarnju uvlaku",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Koristite odgovore iz posljednjeg unosa kao standardne",
-    // "Please enter a value."
-    enterNewValue: "Unesite vrijednost.",
-    // "There are no questions in the survey."
-    noquestions: "U anketi nema nikakvog pitanja.",
-    // "Please create a trigger"
-    createtrigger: "Izradite okidač",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "Pritisnite gumb za unos za uređivanje",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Pritisnite gumb enter za uređivanje stavke, pritisnite gumb za brisanje stavke, pritisnite alt plus strelica prema gore ili strelica prema dolje za pomicanje stavke.",
-    // "On "
-    triggerOn: "Na ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Učinite stranice vidljivima:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Učinite elemente vidljivima:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Dovršite anketu ako uspijete.",
-    // "The trigger is not set"
-    triggerNotSet: "Okidač nije postavljen",
-    // "Run if"
-    triggerRunIf: "Trčanje ako",
-    // "Change value of: "
-    triggerSetToName: "Promjena vrijednosti: ",
-    // "Copy value from: "
-    triggerFromName: "Vrijednost kopiranja iz: ",
-    // "Run this Expression"
-    triggerRunExpression: "Postisni ovaj izraz:",
-    // "to: "
-    triggerSetValue: "za: ",
-    // "Go to the question"
-    triggerGotoName: "Idi na pitanje:",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Ne stavljajte varijablu u rezultat ankete.",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Unesite valjani izraz",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Ovdje upišite izraz...",
-    // "No file chosen"
-    noFile: "Nema odabira datoteke",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "Brisanje skrivenih vrijednosti pitanja",
     // [Auto-translated] "Store values in the following property"
@@ -1996,10 +1752,6 @@ export var hrStrings = {
     "file-camera": "Lokalna datoteka ili kamera",
     // "Inherit"
     inherit: "naslijediti",
-    // "Visible"
-    show: "pokazati",
-    // "Hidden"
-    hide: "sakrij",
     // "Inherit"
     default: "zadani",
     // "Initial"
@@ -2016,8 +1768,6 @@ export var hrStrings = {
     asc: "uzlazno",
     // "Descending"
     desc: "silazno",
-    // "Indeterminate"
-    indeterminate: "neodređeno",
     // [Auto-translated] "Selected"
     selected: "Odabrani",
     // [Auto-translated] "Unselected"
@@ -2038,12 +1788,6 @@ export var hrStrings = {
     carousel: "Vrtuljak",
     // [Auto-translated] "Tabs"
     tab: "Tabulatori",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "progressTop",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "progressBottom",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "progressTopBottom",
     // "Horizontal"
     horizontal: "horizontal",
     // "Vertical"
@@ -2054,8 +1798,6 @@ export var hrStrings = {
     bottom: "bottom",
     // "Top and bottom"
     topBottom: "top and bottom",
-    // "Both"
-    both: "oba",
     // "Left"
     left: "lijevo",
     // [Auto-translated] "Right"
@@ -2096,10 +1838,6 @@ export var hrStrings = {
     week: "tjedan",
     // "Hidden"
     hidden: "hidden",
-    // "Editable"
-    edit: "edit",
-    // "Read-only"
-    display: "display",
     // [Auto-translated] "Contain"
     contain: "Sadržavati",
     // [Auto-translated] "Cover"
@@ -2328,8 +2066,6 @@ export var hrStrings = {
     onNextPage: "onNextPage",
     // "After an answer is changed"
     onValueChanged: "onValueChanged",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "Prije promjene odgovora",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Izvorna struktura",
@@ -2340,12 +2076,6 @@ export var hrStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Prikaz jednog polja za unos po stranici"
     },
-    // "No preview"
-    noPreview: "no preview",
-    // "Show all questions"
-    showAllQuestions: "show preview with all questions",
-    // "Show answered questions only"
-    showAnsweredQuestions: "show preview with answered questions",
     // [Auto-translated] "Show all questions"
     allQuestions: "Prikaži sva pitanja",
     // [Auto-translated] "Show answered questions only"
@@ -2461,12 +2191,8 @@ export var hrStrings = {
       onPage: "Vrati izvorno na svaku stranicu",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Resetirajte na svakoj ploči",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Vrati izvorno na svaku ploču",
       // [Auto-translated] "Recursive numbering"
       recursive: "Rekurzivno numeriranje",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Nastavi kroz anketu",
       // [Auto-translated] "No numbering"
       off: "Bez numeriranja"
     },
@@ -2629,49 +2355,6 @@ export var hrStrings = {
     and: "i",
     // [Auto-translated] "or"
     or: "ili"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Koristite kutnu verziju",
-    // "Use jQuery version"
-    jquery: "Koristite jQuery verziju",
-    // "Use Knockout version"
-    knockout: "Korištenje nokaut verzije",
-    // "Use React version"
-    react: "Korištenje verzije React",
-    // "Use Vue version"
-    vue: "Koristite Vue verziju",
-    // "For bootstrap framework"
-    bootstrap: "Za bootstrap okvir",
-    // "Modern theme"
-    modern: "Moderna tema",
-    // "Default theme"
-    default: "Zadana tema",
-    // "Orange theme"
-    orange: "Narančasta tema",
-    // "Darkblue theme"
-    darkblue: "Darkblue tema",
-    // "Darkrose theme"
-    darkrose: "Darkrose tema",
-    // "Stone theme"
-    stone: "Kamena tema",
-    // "Winter theme"
-    winter: "Zimska tema",
-    // "Winter-Stone theme"
-    winterstone: "Tema Zimsko-kamen",
-    // "Show survey on a page"
-    showOnPage: "Pokažite anketu na stranici",
-    // "Show survey in a window"
-    showInWindow: "Pokažite anketu u prozoru",
-    // "Load Survey JSON from server"
-    loadFromServer: "Učitavanje Survey JSON s poslužitelja",
-    // "Scripts and styles"
-    titleScript: "Skripte i stilovi",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2922,10 +2605,6 @@ export var hrStrings = {
       choices: "\"Vrijednost\" služi kao ID stavke koji se koristi u uvjetnim pravilima; \"Tekst\" se prikazuje ispitanicima.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Odaberite između \"Slika\" i \"Videozapis\" da biste postavili način sadržaja birača medija. Ako je odabrana opcija \"Slika\", provjerite jesu li sve ponuđene opcije slikovne datoteke u sljedećim formatima: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Slično tome, ako je odabran \"Video\", provjerite jesu li sve opcije izravne veze na video datoteke u sljedećim formatima: MP4, MOV, WMV, FLV, AVI, MKV. Napominjemo da veze na YouTube nisu podržane za opcije videozapisa."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Ova postavka samo mijenja veličinu polja za unos i ne utječe na širinu okvira pitanja. Da biste ograničili prihvaćenu duljinu unosa, idite na \"Provjera valjanosti\" → \"Maksimalno ograničenje broja znakova\"."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3509,16 +3188,12 @@ export var hrStrings = {
     primaryDarkColor: "Lebdjeti",
     // [Auto-translated] "Selected"
     primaryLightColor: "Odabrani",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "Boja pozadine",
     // "Corner radius"
     cornerRadius: "Kutni radijus",
     // [Auto-translated] "Default background"
     backcolor: "Zadana pozadina",
     // [Auto-translated] "Hover background"
     hovercolor: "Pozadina držanja pokazivača miša",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Uređenje obruba",
     // [Auto-translated] "Font color"
     fontColor: "Boja fonta",
     // [Auto-translated] "Background color"
@@ -3527,8 +3202,6 @@ export var hrStrings = {
     primaryForecolor: "Zadana boja",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Onemogućena boja",
-    // [Auto-translated] "Font"
-    font: "Krstionica",
     // [Auto-translated] "Darker"
     borderDefault: "Tamnije",
     // [Auto-translated] "Lighter"
@@ -3605,14 +3278,10 @@ export var hrStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Pozadina površine",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Glavni",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Sekundaran",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Površina",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "Elementi korisničkog sučelja",
     // [Auto-translated] "Font"

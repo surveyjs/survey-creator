@@ -3,30 +3,8 @@ import { setupLocale } from "survey-creator-core";
 export var nlStrings = {
   // survey templates
   survey: {
-    // "Edit"
-    edit: "Bewerk",
-    // "Watch and learn how to create surveys"
-    externalHelpLink: "Bekijk en leer hoe u enquêtes maakt",
-    // [Auto-translated] "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber"
-    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
-    // "Please drop a question here from the Toolbox."
-    dropQuestion: "Stel hier een vraag vanuit de Toolbox.",
-    // "Create a rule to customize the flow of the survey."
-    addLogicItem: "Maak een regel om de stroom van de enquête aan te passen.",
-    // "Copy"
-    copy: "Kopiëren",
     // [Auto-translated] "Duplicate"
-    duplicate: "Duplicaat",
-    // "Add to toolbox"
-    addToToolbox: "Toevoegen aan toolbox",
-    // "Delete Panel"
-    deletePanel: "Paneel verwijderen",
-    // "Delete Question"
-    deleteQuestion: "Vraag verwijderen",
-    // "Convert to"
-    convertTo: "Omzetten naar",
-    // "Drag element"
-    drag: "Sleep element"
+    duplicate: "Duplicaat"
   },
   // Creator tabs
   tabs: {
@@ -112,8 +90,6 @@ export var nlStrings = {
   ed: {
     // "Default ({0})"
     defaultLocale: "Standaard ({0})",
-    // "Survey"
-    survey: "Enquête",
     // "Settings"
     settings: "Enquête-instellingen",
     // "Open settings"
@@ -144,42 +120,14 @@ export var nlStrings = {
     surveyTypeName: "Enquête",
     // [Auto-translated] "Page"
     pageTypeName: "Bladzijde",
-    // [Auto-translated] "Panel"
-    panelTypeName: "Paneel",
-    // [Auto-translated] "Question"
-    questionTypeName: "Vraag",
-    // [Auto-translated] "Column"
-    columnTypeName: "Kolom",
-    // "Add New Page"
-    addNewPage: "Pagina toevoegen",
-    // "Scroll to the Right"
-    moveRight: "Scroll naar rechts",
-    // "Scroll to the Left"
-    moveLeft: "Scroll naar links",
-    // "Delete Page"
-    deletePage: "Pagina verwijderen",
-    // "Edit Page"
-    editPage: "Pagina aanpassen",
-    // "Edit"
-    edit: "Bewerk",
     // "page"
     newPageName: "Pagina",
     // "question"
     newQuestionName: "Vraag",
     // "panel"
     newPanelName: "Paneel",
-    // "text"
-    newTextItemName: "Tekst",
-    // [Auto-translated] "Default"
-    defaultV2Theme: "Verstek",
-    // [Auto-translated] "Modern"
-    modernTheme: "Modern",
-    // [Auto-translated] "Default (legacy)"
-    defaultTheme: "Standaard (verouderd)",
     // "Preview Survey Again"
     testSurveyAgain: "Test de enquête opnieuw",
-    // "Survey width: "
-    testSurveyWidth: "Onderzoeksbreedte: ",
     // "You had to navigate to"
     navigateToMsg: "Je moest navigeren naar:",
     // "Save Survey"
@@ -198,10 +146,6 @@ export var nlStrings = {
     undo: "Ongedaan maken",
     // "Redo"
     redo: "Opnieuw uitvoeren",
-    // "Undo last change"
-    undoTooltip: "Maak de laatste wijziging ongedaan",
-    // "Redo the change"
-    redoTooltip: "Voer de wijziging opnieuw uit",
     // [Auto-translated] "Expand"
     expandTooltip: "Uitbreiden",
     // [Auto-translated] "Collapse"
@@ -222,22 +166,6 @@ export var nlStrings = {
     showMoreChoices: "Toon meer",
     // [Auto-translated] "Show less"
     showLessChoices: "Toon minder",
-    // "Copy"
-    copy: "Kopiëren",
-    // "Cut"
-    cut: "Besnoeiing",
-    // "Paste"
-    paste: "Plakken",
-    // "Copy selection to clipboard"
-    copyTooltip: "Kopieer selectie naar klembord",
-    // "Cut selection to clipboard"
-    cutTooltip: "Knip de selectie naar het klembord",
-    // "Paste from clipboard"
-    pasteTooltip: "Plakken vanaf klembord",
-    // "Options"
-    options: "Opties",
-    // "Generate Valid JSON"
-    generateValidJSON: "Genereer geldige JSON",
     // [Auto-translated] "Unknown function: \"{0}\"."
     expressionUnknownFunction: "Onbekende functie: \"{0}\".",
     // [Auto-translated] "Unknown functions: \"{0}\"."
@@ -250,12 +178,8 @@ export var nlStrings = {
     expressionSyntaxError: "Syntaxisfout.",
     // [Auto-translated] "Semantic error."
     expressionSemanticsError: "Semantische fout.",
-    // "Generate Readable JSON"
-    generateReadableJSON: "Genereer leesbare JSON",
     // "Toolbox"
     toolbox: "Gereedschap",
-    // "Properties"
-    "property-grid": "Eigenschappen",
     // [Auto-translated] "Search"
     toolboxSearch: "Zoeken",
     // [Auto-translated] "Type to search..."
@@ -272,8 +196,6 @@ export var nlStrings = {
     propertyGridPlaceholderTitle: "Begin met het configureren van uw formulier",
     // [Auto-translated] "Click any category icon to explore survey settings. Additional settings will become available once you add a survey element to the design surface."
     propertyGridPlaceholderDescription: "Klik op een categoriepictogram om de enquête-instellingen te verkennen. Aanvullende instellingen worden beschikbaar zodra u een enquête-element aan het ontwerpoppervlak toevoegt.",
-    // "Please correct JSON."
-    correctJSON: "Corrigeer JSON.",
     // "Survey Results "
     surveyResults: "Enquêteresultaat: ",
     // "As Table"
@@ -294,8 +216,6 @@ export var nlStrings = {
     saving: "Besparing",
     // "Saved"
     saved: "Opgeslagen",
-    // "Error"
-    propertyEditorError: "Fout:",
     // "Error! Editor content is not saved."
     saveError: "Fout! De inhoud van de editor wordt niet opgeslagen.",
     // [Auto-translated] "Language Settings"
@@ -354,12 +274,6 @@ export var nlStrings = {
     themeResetConfirmation: "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren.",
     // [Auto-translated] "Yes, reset the theme"
     themeResetConfirmationOk: "Ja, reset het thema",
-    // "Bold"
-    bold: "Vetgedrukt",
-    // "Italic"
-    italic: "Cursief",
-    // "Underline"
-    underline: "Onderstrepen",
     // "Add Question"
     addNewQuestion: "Vraag toevoegen",
     // "Select page..."
@@ -507,8 +421,6 @@ export var nlStrings = {
       trigger_runExpressionDescription: "Wanneer de logische expressie true retourneert, wordt de aangepaste expressie uitgevoerd. U kunt dit expressieresultaat optioneel instellen voor de geselecteerde vraag",
       // "If the logical expression evaluates to true, the \"Thank You\" page displays the specified content."
       completedHtmlOnConditionDescription: "Als de logische uitdrukking true retourneert, wordt de standaardtekst voor de 'Bedankpagina' gewijzigd in de opgegeven tekst.",
-      // "When expression: '{0}' returns true"
-      itemExpressionText: "Wanneer expressie: '{0}' true retourneert:", // {0} - the expression
       // [Auto-translated] "New rule"
       itemEmptyExpressionText: "Nieuwe regel",
       // "make page {0} visible"
@@ -539,6 +451,8 @@ export var nlStrings = {
       column_setValueText: "Celwaarde: {1} toewijzen aan kolom: {0}", // {0} column name and {1} setValueExpression
       // [Auto-translated] "An expression whose result will be assigned to the target question."
       setValueExpressionPlaceholder: "Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
+      // [Auto-translated] "Enter a value..."
+      calculatedValuePlaceholder: "Voer een waarde in...",
       // "survey becomes completed"
       trigger_completeText: "Enquête wordt voltooid",
       // "set into question: {0} value {1}"
@@ -563,8 +477,6 @@ export var nlStrings = {
       conditions: "Voorwaard(en)",
       // "Action(s)"
       actions: "Actie(s)",
-      // "Define condition(s)"
-      expressionEditorTitle: "Definieer conditie(s)",
       // "Define action(s)"
       actionsEditorTitle: "Definieer actie(s)",
       // "Delete Action"
@@ -575,8 +487,6 @@ export var nlStrings = {
       selectedActionCaption: "Selecteer een actie om toe te voegen...",
       // "The logic expression is empty or invalid. Please correct it."
       expressionInvalid: "De logische uitdrukking is leeg of ongeldig. Verbeter dit alstublieft.",
-      // "Please add at least one action."
-      noActionError: "Voeg ten minste één actie toe.",
       // "Please fix issues in your action(s)."
       actionInvalid: "Los problemen in uw actie(s) op.",
       // [Auto-translated] "Logical rules are incomplete"
@@ -878,8 +788,6 @@ export var nlStrings = {
     defaultDisplayValue: "Standaardweergavewaarde voor dynamische teksten",
     // [Auto-translated] "Label alignment"
     rateDescriptionLocation: "Etiket uitlijnen",
-    // [Auto-translated] "Input field width (in characters)"
-    size: "Breedte invoerveld (in tekens)",
     // [Auto-translated] "Cell error message alignment"
     cellErrorLocation: "Uitlijning van celfoutmeldingen",
     // [Auto-translated] "Enabled"
@@ -888,32 +796,16 @@ export var nlStrings = {
     disabled: "Invalide",
     // [Auto-translated] "Inherit"
     inherit: "Erven",
-    // "Apply"
-    apply: "Van toepassing zijn",
-    // [Auto-translated] "OK"
-    ok: "Oké",
-    // "Save"
-    save: "Opslaan",
     // [Auto-translated] "Clear"
     clear: "Verwijder alles",
-    // "Save"
-    saveTooltip: "Opslaan",
-    // "Cancel"
-    cancel: "Annuleren",
     // [Auto-translated] "Set"
     set: "Set",
-    // "Reset"
-    reset: "Resetten",
     // [Auto-translated] "Change"
     change: "Veranderen",
-    // "Refresh"
-    refresh: "Opslaan",
     // [Auto-translated] "Close"
     close: "Sluiten",
     // "Delete"
     delete: "Verwijderen",
-    // "Add"
-    add: "Toevoegen",
     // "Add New"
     addNew: "Nieuwe toevoegen",
     // "Click to add an item..."
@@ -922,34 +814,10 @@ export var nlStrings = {
     removeItem: "Klik om het item te verwijderen...",
     // [Auto-translated] "Drag the item"
     dragItem: "Sleep het item",
-    // "Other"
-    addOther: "Andere",
-    // "Select All"
-    addSelectAll: "Selecteer alles",
-    // "None"
-    addNone: "Geen",
-    // "Remove All"
-    removeAll: "Verwijder alles",
     // "Edit"
     edit: "Bewerk",
-    // "Return without saving"
-    back: "Keer terug zonder op te slaan",
-    // "Return without saving"
-    backTooltip: "Keer terug zonder op te slaan",
-    // "Save and return"
-    saveAndBack: "Bewaar en keer terug",
-    // "Save and return"
-    saveAndBackTooltip: "Bewaar en keer terug",
     // [Auto-translated] "Done"
     doneEditing: "Klaar",
-    // "Edit Choices"
-    editChoices: "Keuzes bewerken",
-    // "Show Choices"
-    showChoices: "Toon keuzes",
-    // "Move"
-    move: "Bewegen",
-    // "<empty>"
-    empty: "<leeg>",
     // [Auto-translated] "Value is empty"
     emptyValue: "Waarde is leeg",
     // "Manual Entry"
@@ -962,12 +830,6 @@ export var nlStrings = {
     fastEntryChoicesMinCountError: "Voer ten minste {0} objecten in",
     // [Auto-translated] "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules."
     fastEntryPlaceholder: "Voer de lijst met keuzeopties en hun ID's in de volgende indeling in:\n\nid|optie\n\nEen keuzeoptie-id is niet zichtbaar voor respondenten en kan worden gebruikt in voorwaardelijke regels.",
-    // "Form Entry"
-    formEntry: "Formulierinvoer",
-    // "Test the service"
-    testService: "Test de service",
-    // "Please select the element"
-    itemSelectorEmpty: "Selecteer het element",
     // "Please select the action"
     conditionActionEmpty: "Selecteer de actie",
     // "Select a question..."
@@ -976,20 +838,8 @@ export var nlStrings = {
     conditionSelectPage: "Selecteer pagina...",
     // "Select a panel..."
     conditionSelectPanel: "Selecteer paneel...",
-    // "Please enter/select the value"
-    conditionValueQuestionTitle: "Voer/selecteer de waarde",
     // "Press ctrl+space to get expression completion hint"
     aceEditorHelp: "Druk op Ctrl+spatiebalk om een hint voor het voltooien van een uitdrukking te krijgen",
-    // "Current row"
-    aceEditorRowTitle: "Huidige rij",
-    // "Current panel"
-    aceEditorPanelTitle: "Huidig paneel",
-    // "For more details please check the documentation"
-    showMore: "Raadpleeg de documentatie voor meer details",
-    // "Available questions"
-    assistantTitle: "Beschikbare vragen:",
-    // "There is should be at least one column or row"
-    cellsEmptyRowsColumns: "Er moet minimaal één kolom of rij zijn",
     // "Review before submit"
     showPreviewBeforeComplete: "Voorbeeldweergave voor afronden",
     // [Auto-translated] "Enabled by a condition"
@@ -1040,20 +890,12 @@ export var nlStrings = {
     "addNew@navigateToUrlOnCondition": "Nieuwe URL toevoegen",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Nieuwe pagina toevoegen",
-    // "Expression is empty"
-    expressionIsEmpty: "Expressie is leeg",
     // "Value"
     value: "Waarde",
     // "Text"
     text: "Tekst",
-    // "Row ID"
-    rowid: "Rij-ID",
     // "Image or video file URL"
     imageLink: "Afbeeldingslink",
-    // "Edit column: {0}"
-    columnEdit: "Kolom bewerken: {0}",
-    // "Edit item: {0}"
-    itemEdit: "Bewerk item: {0}",
     // [Auto-translated] "URL"
     url: "URL",
     // "Path to data"
@@ -1070,8 +912,6 @@ export var nlStrings = {
     imageLinkName: "Bestands-URL's ophalen van de volgende eigenschap",
     // "Accept empty response"
     allowEmptyResponse: "Leeg respons toestaan",
-    // "Title"
-    titlePlaceholder: "Voer hier de titel in",
     // "Survey Title"
     surveyTitlePlaceholder: "Voer de enquêtetitel hier in",
     // "Page {num}"
@@ -1182,16 +1022,8 @@ export var nlStrings = {
     defaultValue: "Standaardwaarde",
     // "Default texts"
     cellsDefaultRow: "Standaard celteksten",
-    // "Edit survey settings"
-    surveyEditorTitle: "Bewerk enquête-instellingen",
-    // "Edit: {0}"
-    qEditorTitle: "Bewerken: {0}",
     // "Maximum character limit"
     maxLength: "Maximale lengte",
-    // "Build"
-    buildExpression: "Bouwen",
-    // "Edit"
-    editExpression: "Bewerk",
     // [Auto-translated] "and"
     and: "en",
     // [Auto-translated] "or"
@@ -1218,8 +1050,6 @@ export var nlStrings = {
     includeIntoResult: "Toevoegen aan de enquêteresultaten",
     // "Make the title and description visible"
     showTitle: "Titel weergeven/verbergen",
-    // "Expand/collapse title"
-    expandCollapseTitle: "Titel uitvouwen/samenvouwen",
     // "Select a survey language"
     locale: "Standaardtaal",
     // "Select device type"
@@ -1638,8 +1468,6 @@ export var nlStrings = {
     displayRateDescriptionsAsExtremeItems: "De labels weergeven als extreme waarden",
     // [Auto-translated] "Row order"
     rowOrder: "Rijvolgorde",
-    // [Auto-translated] "Column layout"
-    columnsLayout: "Kolomindeling",
     // [Auto-translated] "Nested column count"
     columnColCount: "Aantal geneste kolommen",
     // [Auto-translated] "Correct Answer"
@@ -1670,22 +1498,6 @@ export var nlStrings = {
     },
     // "Logo alignment"
     logoPosition: "Positie logo",
-    // "Add logo..."
-    addLogo: "Logo toevoegen...",
-    // "Change logo..."
-    changeLogo: "Logo wijzigen...",
-    logoPositions: {
-      // "Remove logo"
-      none: "Logo verwijderen",
-      // "Left"
-      left: "Links",
-      // "Right"
-      right: "Rechtsaf",
-      // "On the top"
-      top: "Bovenop",
-      // "In the bottom"
-      bottom: "Onder aan"
-    },
     // [Auto-translated] "Preview mode"
     previewMode: "Preview-modus",
     // [Auto-translated] "Enable grid layout"
@@ -1698,14 +1510,8 @@ export var nlStrings = {
     detailErrorLocation: "Uitlijning van foutberichten in rijen",
     // Creator tabs
     tabs: {
-      panel: {
-        // [Auto-translated] "Panel Layout"
-        layout: "Paneel Lay-out"
-      },
       // "General"
       general: "Algemeen",
-      // "Options"
-      fileOptions: "Opties",
       // "HTML Editor"
       html: "Html-editor",
       // "Columns"
@@ -1728,10 +1534,6 @@ export var nlStrings = {
       sliderSettings: "Instellingen voor schuifregelaars",
       // "Choices from a Web Service"
       choicesByUrl: "Keuzes van internet",
-      // "Default Choices"
-      matrixChoices: "Standaardkeuzes",
-      // "Text Inputs"
-      multipleTextItems: "Tekstinvoer",
       // "Numbering"
       numbering: "Nummering",
       // [Auto-translated] "Validators"
@@ -1774,8 +1576,6 @@ export var nlStrings = {
       showOnCompleted: "Weergeven bij afronden",
       // "Logo in the Survey Header"
       logo: "Logo in enquêtetitel",
-      // "Slider"
-      slider: "Schuifregelaar",
       // [Auto-translated] "Expression"
       expression: "Uitdrukking",
       // [Auto-translated] "Question Settings"
@@ -1795,62 +1595,18 @@ export var nlStrings = {
       // "Others"
       others: "Anderen"
     },
-    // "Edit property '{0}'"
-    editProperty: "Eigenschap '{0}' bewerken",
     // [Auto-translated] "Items"
     items: "Items",
     // [Auto-translated] "Make choices visible if"
     choicesVisibleIf: "Maak keuzes zichtbaar als",
     // [Auto-translated] "Make choices selectable if"
     choicesEnableIf: "Maak keuzes selecteerbaar als",
-    // [Auto-translated] "Make columns visible if"
-    columnsEnableIf: "Maak kolommen zichtbaar als",
-    // [Auto-translated] "Make rows visible if"
-    rowsEnableIf: "Maak rijen zichtbaar als",
     // [Auto-translated] "Increase the inner indent"
     innerIndent: "Vergroot de binnenste inkeping",
     // [Auto-translated] "Use answers from the last entry as default"
     copyDefaultValueFromLastEntry: "Gebruik antwoorden van de laatste invoer als standaard",
-    // "Please enter a value."
-    enterNewValue: "Voer de waarde in.",
-    // "There are no questions in the survey."
-    noquestions: "Er is geen enkele vraag in de enquête.",
-    // "Please create a trigger"
-    createtrigger: "Maak een trigger",
-    // "Press enter button to edit"
-    titleKeyboardAdornerTip: "Druk op de enter-knop om te bewerken",
-    // "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item"
-    keyboardAdornerTip: "Druk op de enter-knop om het item te bewerken, druk op de delete-knop om het item te verwijderen, druk op alt plus pijl omhoog of pijl omlaag om item te verplaatsen",
-    // "On "
-    triggerOn: "Aan ",
-    // "Make pages visible"
-    triggerMakePagesVisible: "Maak pagina's zichtbaar:",
-    // "Make elements visible"
-    triggerMakeQuestionsVisible: "Maak elementen zichtbaar:",
-    // "Complete the survey if successful."
-    triggerCompleteText: "Vul de enquête in als dit lukt.",
-    // "The trigger is not set"
-    triggerNotSet: "De trigger is niet ingesteld",
-    // "Run if"
-    triggerRunIf: "Voer als",
-    // "Change value of: "
-    triggerSetToName: "Verander waarde van: ",
-    // "Copy value from: "
-    triggerFromName: "Waarde kopiëren van: ",
-    // "Run this Expression"
-    triggerRunExpression: "Voer deze expressie uit:",
-    // "to: "
-    triggerSetValue: "naar: ",
-    // "Go to the question"
-    triggerGotoName: "Ga naar de vraag:",
-    // "Do not put the variable into the survey result."
-    triggerIsVariable: "Zet de variabele niet in het onderzoeksresultaat.",
-    // "Please enter a valid expression"
-    triggerRunExpressionEmpty: "Voer een geldige uitdrukking in",
     // [Auto-translated] "Type expression here..."
     emptyExpressionPlaceHolder: "Typ hier expressie...",
-    // "No file chosen"
-    noFile: "Geen bestand gekozen",
     // [Auto-translated] "Clear hidden question values"
     clearIfInvisible: "Waarden voor verborgen vragen wissen",
     // [Auto-translated] "Store values in the following property"
@@ -1996,10 +1752,6 @@ export var nlStrings = {
     "file-camera": "Lokaal bestand of camera",
     // "Inherit"
     inherit: "Erven",
-    // "Visible"
-    show: "Tonen",
-    // "Hidden"
-    hide: "Zich verstoppen",
     // "Inherit"
     default: "Standaard",
     // "Initial"
@@ -2016,8 +1768,6 @@ export var nlStrings = {
     asc: "Oplopend",
     // "Descending"
     desc: "Aflopend",
-    // "Indeterminate"
-    indeterminate: "Onbepaald",
     // [Auto-translated] "Selected"
     selected: "Uitverkoren",
     // [Auto-translated] "Unselected"
@@ -2038,12 +1788,6 @@ export var nlStrings = {
     carousel: "Carrousel",
     // [Auto-translated] "Tabs"
     tab: "Tabs",
-    // "Panel navigator + Progress bar at the top"
-    progressTop: "Voortgang top",
-    // "Panel navigator + Progress bar at the bottom"
-    progressBottom: "Voortgang bodem",
-    // "Panel navigator + Progress bar at the top and bottom"
-    progressTopBottom: "Voortgang top bodem",
     // "Horizontal"
     horizontal: "Horizontaal",
     // "Vertical"
@@ -2054,8 +1798,6 @@ export var nlStrings = {
     bottom: "Beneden",
     // "Top and bottom"
     topBottom: "Top en beneden",
-    // "Both"
-    both: "Beide",
     // "Left"
     left: "Links",
     // "Right"
@@ -2096,10 +1838,6 @@ export var nlStrings = {
     week: "week",
     // "Hidden"
     hidden: "Verborgen",
-    // "Editable"
-    edit: "Bewerk",
-    // "Read-only"
-    display: "Scherm",
     // [Auto-translated] "Contain"
     contain: "Bevatten",
     // [Auto-translated] "Cover"
@@ -2328,8 +2066,6 @@ export var nlStrings = {
     onNextPage: "Bij pagina-overgang",
     // "After an answer is changed"
     onValueChanged: "Bij waardeverandering",
-    // [Auto-translated] "Before an answer is changed"
-    onValueChanging: "Voordat een antwoord wordt gewijzigd",
     questionsOnPageMode: {
       // [Auto-translated] "Original structure"
       standard: "Oorspronkelijke structuur",
@@ -2340,12 +2076,6 @@ export var nlStrings = {
       // [Auto-translated] "Show single input field per page"
       inputPerPage: "Toon enkel invoerveld per pagina"
     },
-    // "No preview"
-    noPreview: "Geen preview",
-    // "Show all questions"
-    showAllQuestions: "Toon voorbeeld met alle vragen",
-    // "Show answered questions only"
-    showAnsweredQuestions: "Toon voorbeeld met beantwoorde vragen",
     // [Auto-translated] "Show all questions"
     allQuestions: "Toon alle vragen",
     // [Auto-translated] "Show answered questions only"
@@ -2461,12 +2191,8 @@ export var nlStrings = {
       onPage: "Reset op elke pagina",
       // [Auto-translated] "Reset on each panel"
       onpanel: "Reset op elk paneel",
-      // [Auto-translated] "Reset on each panel"
-      onPanel: "Reset op elk paneel",
       // [Auto-translated] "Recursive numbering"
       recursive: "Recursieve nummering",
-      // [Auto-translated] "Continue across the survey"
-      onSurvey: "Doorgaan in de enquête",
       // [Auto-translated] "No numbering"
       off: "Geen nummering"
     },
@@ -2629,49 +2355,6 @@ export var nlStrings = {
     and: "en",
     // [Auto-translated] "or"
     or: "of"
-  },
-  // Embed window
-  ew: {
-    // "Use Angular version"
-    angular: "Gebruik de Angular-versie",
-    // "Use jQuery version"
-    jquery: "Gebruik de jQuery-versie",
-    // "Use Knockout version"
-    knockout: "Gebruik de Knockout-versie",
-    // "Use React version"
-    react: "Gebruik de React-versie",
-    // "Use Vue version"
-    vue: "Gebruik de Vue-versie",
-    // "For bootstrap framework"
-    bootstrap: "Voor bootstrap-framework",
-    // "Modern theme"
-    modern: "Modern thema",
-    // "Default theme"
-    default: "Standaard thema",
-    // "Orange theme"
-    orange: "Oranje thema",
-    // "Darkblue theme"
-    darkblue: "Donkerblauw thema",
-    // "Darkrose theme"
-    darkrose: "Donkereroos thema",
-    // "Stone theme"
-    stone: "Stenen thema",
-    // "Winter theme"
-    winter: "Winter thema",
-    // "Winter-Stone theme"
-    winterstone: "Wintersteen thema",
-    // "Show survey on a page"
-    showOnPage: "Toon enquête op een pagina",
-    // "Show survey in a window"
-    showInWindow: "Toon enquête in een venster",
-    // "Load Survey JSON from server"
-    loadFromServer: "Laad Survey JSON vanaf de server",
-    // "Scripts and styles"
-    titleScript: "Scripts en stijlen",
-    // [Auto-translated] "HTML"
-    titleHtml: "HTML",
-    // [Auto-translated] "JavaScript"
-    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
@@ -2922,10 +2605,6 @@ export var nlStrings = {
       choices: "\"Waarde\" dient als een item-ID die wordt gebruikt in voorwaardelijke regels; \"Tekst\" wordt weergegeven aan respondenten.",
       // "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
       contentMode: "Kies tussen \"Afbeelding\" en \"Video\" om de inhoudsmodus van de mediakiezer in te stellen. Als \"Afbeelding\" is geselecteerd, zorg er dan voor dat alle beschikbare opties afbeeldingsbestanden zijn in de volgende formaten: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Evenzo, als \"Video\" is geselecteerd, zorg er dan voor dat alle opties directe links zijn naar videobestanden in de volgende formaten: MP4, MOV, WMV, FLV, AVI, MKV. Houd er rekening mee dat YouTube-links niet worden ondersteund voor video-opties."
-    },
-    text: {
-      // [Auto-translated] "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to \"Validation\" → \"Maximum character limit\"."
-      size: "Met deze instelling wordt alleen het formaat van het invoerveld gewijzigd en wordt de breedte van het vraagvak niet beïnvloed. Om de geaccepteerde invoerlengte te beperken, gaat u naar \"Validatie\" → \"Maximale tekenlimiet\"."
     },
     comment: {
       // [Auto-translated] "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
@@ -3509,16 +3188,12 @@ export var nlStrings = {
     primaryDarkColor: "Zweven",
     // [Auto-translated] "Selected"
     primaryLightColor: "Uitverkoren",
-    // [Auto-translated] "Background color"
-    backgroundDimColor: "Achtergrondkleur",
     // "Corner radius"
     cornerRadius: "De straal van de hoek",
     // [Auto-translated] "Default background"
     backcolor: "Standaard achtergrond",
     // [Auto-translated] "Hover background"
     hovercolor: "Achtergrond aanwijzen",
-    // [Auto-translated] "Border decoration"
-    borderDecoration: "Randdecoratie",
     // [Auto-translated] "Font color"
     fontColor: "Tekstkleur",
     // [Auto-translated] "Background color"
@@ -3527,8 +3202,6 @@ export var nlStrings = {
     primaryForecolor: "Standaardkleur",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Uitgeschakelde kleur",
-    // [Auto-translated] "Font"
-    font: "Lettertype",
     // [Auto-translated] "Darker"
     borderDefault: "Donkerder",
     // [Auto-translated] "Lighter"
@@ -3605,14 +3278,10 @@ export var nlStrings = {
     }
   },
   creatortheme: {
-    // [Auto-translated] "Surface background"
-    "--sjs-special-background": "Oppervlakte achtergrond",
     // [Auto-translated] "Primary"
     "--sjs-primary-background-500": "Primair",
     // [Auto-translated] "Secondary"
     "--sjs-secondary-background-500": "Secundair",
-    // [Auto-translated] "Surface"
-    surfaceScale: "Oppervlak",
     // [Auto-translated] "UI elements"
     userInterfaceBaseUnit: "UI-elementen",
     // [Auto-translated] "Font"

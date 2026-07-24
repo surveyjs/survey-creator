@@ -666,6 +666,8 @@ export class Translation extends Base implements ITranslationLocales {
   ) => void;
   public translationStringVisibilityCallback: (obj: Base, propertyName: string, visible: boolean) => boolean;
   public localeInitialVisibleCallback: (locale: string) => boolean;
+  public getMachineTranslationFromLocale?: () => string | undefined;
+  public setMachineTranslationFromLocale?: (locale: string) => void;
   private surveyValue: SurveyModel;
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
@@ -720,7 +722,7 @@ export class Translation extends Base implements ITranslationLocales {
   @property() stringsHeaderSurvey: SurveyModel;
   private stringsSurveyInstanceId = 0;
   private makeSurveyIdSpaceUnique(survey: SurveyModel): void {
-    survey.renderedIdPrefix = (survey.renderedIdPrefix || "") + (++this.stringsSurveyInstanceId) + "-";
+    survey.elementIdPrefix = (survey.elementIdPrefix || "") + (++this.stringsSurveyInstanceId) + "-";
   }
   @property({ defaultValue: true }) isEmpty: boolean;
   private editLocale: string;
@@ -1439,7 +1441,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.reset();
   }
   public createTranslationEditor(locale: string): TranslationEditor {
-    const res = new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback);
+    const res = new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback, this);
     res.onApply = () => {
       this.reset();
     };
@@ -1532,11 +1534,13 @@ export class TranslationEditor {
   private options: ISurveyCreatorOptions;
   private fromLocale: string;
   private locale: string;
+  private translationTab: Translation;
   public onApply: () => void;
-  constructor(survey: SurveyModel, locale: string, options: ISurveyCreatorOptions, translationStringVisibilityCallback?: (obj: Base, propertyName: string, visible: boolean) => boolean) {
+  constructor(survey: SurveyModel, locale: string, options: ISurveyCreatorOptions, translationStringVisibilityCallback?: (obj: Base, propertyName: string, visible: boolean) => boolean, translationTab?: Translation) {
     this.survey = survey;
     this.options = options;
     this.locale = locale;
+    this.translationTab = translationTab;
     this.translationValue = new TranslationForEditor(this.survey, this.options, (survey: SurveyModel) => {
       this.setupNavigationButtons(survey);
     });
@@ -1550,12 +1554,22 @@ export class TranslationEditor {
   }
   // The "Source" column is shown immediately by selecting the first item ("Default") from the "Translate from" dropdown.
   private getInitialFromLocale(): string {
+    const persisted = this.translationTab?.getMachineTranslationFromLocale?.();
+    if (persisted !== undefined && this.isValidFromLocale(persisted)) {
+      return persisted;
+    }
     let res = "";
     if (res === (this.locale || "")) {
       // When translating into the default locale, the default can't be the source: pick the first available source instead.
       res = this.fromLocales.length > 0 ? this.fromLocales[0] : this.locale;
     }
     return res;
+  }
+  private isValidFromLocale(locale: string): boolean {
+    const loc = locale || "";
+    if (loc === (this.locale || "")) return false;
+    if (loc === "") return !this.isDefaultLocaleTarget;
+    return this.fromLocales.indexOf(loc) >= 0;
   }
   public get translation(): Translation { return this.translationValue; }
   public showDialog(): void {
@@ -1628,7 +1642,9 @@ export class TranslationEditor {
   public setFromLocale(locale: string): void {
     if (this.fromLocale === locale) return;
     this.fromLocale = locale;
+    this.translationTab?.setMachineTranslationFromLocale?.(locale);
     this.updateMatricesColumns();
+    this.updateFromLocaleAction();
   }
   private updateMatricesColumns(): void {
     if (!this.translation.stringsHeaderSurvey) return;
