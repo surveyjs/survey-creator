@@ -1,6 +1,6 @@
 import { Action, ArrayChanges, Base, ComputedUpdater, property, EventBase } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
-import { IUndoRedoChange, UndoRedoAction, UndoRedoManager } from "./undo-redo-manager";
+import { UndoRedoAction, UndoRedoManager } from "./undo-redo-manager";
 
 export class UndoRedoController extends Base {
   private undoAction: Action;
