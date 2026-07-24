@@ -158,7 +158,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     model.destinationLocale = this.calcDefaultDestinationLocale();
     const pages = this.creator.survey.pages;
     model.selectedPageName = pages.length > 0 ? pages[0].name : "";
-    model.showSurveyStrings = false;
     model.rebuildInstances();
 
     this.filterPageAction.visible = true;
@@ -174,7 +173,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       if (options.name === "sourceLocale" || options.name === "destinationLocale") {
         this.updateLocaleActions();
       }
-      if (options.name === "selectedPageName" || options.name === "showSurveyStrings") {
+      if (options.name === "selectedPageName") {
         this.updateSideBySidePagesAction();
       }
     });
@@ -185,7 +184,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     if (this.isSideBySide) {
       const model = <TranslationSideBySide>this.model;
       const pages = this.creator.survey.pages;
-      model.showSurveyStrings = false;
       model.selectedPageName = pages.length > 0 ? pages[0].name : "";
       model.rebuildInstances();
       this.updateSideBySidePagesAction();
@@ -350,13 +348,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       allowSelection: true,
       onSelectionChanged: (item: IAction) => {
         if (this.isSideBySide) {
-          const model = <TranslationSideBySide>this.model;
-          if (item.id === TranslationSideBySide.surveyStringsPageId) {
-            model.showSurveyStrings = true;
-          } else {
-            model.showSurveyStrings = false;
-            model.selectedPageName = <string>item.id;
-          }
+          (<TranslationSideBySide>this.model).selectedPageName = <string>item.id;
         } else {
           this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
         }
@@ -404,10 +396,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       id: page.name,
       title: this.getPageDisplayText(page)
     }));
-    items.push(<IAction>{ id: TranslationSideBySide.surveyStringsPageId, title: this.surveyStringsText });
     const list = <ListModel>this.filterPageAction.data;
     list.setItems(items, false);
-    const selectedId = model.showSurveyStrings ? TranslationSideBySide.surveyStringsPageId : model.selectedPageName;
+    const selectedId = model.selectedPageName;
     const selectedItem = list.actions.filter((el: IAction) => el.id === selectedId)[0];
     list.selectedItem = selectedItem;
     this.filterPageAction.title = !!selectedItem ? selectedItem.title : "";

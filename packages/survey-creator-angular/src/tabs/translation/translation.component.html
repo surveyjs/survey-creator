@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="sideBySideModel && !sideBySideModel.showSurveyStrings" class="st-side-by-side">
+      <div *ngIf="sideBySideModel" class="st-side-by-side">
         <div class="st-side-by-side__source" #sourceScrollContainer>
           <ng-container *ngFor="let s of [sideBySideModel.sourceSurvey]; trackBy: trackStringsSurveyBy">
             <survey-content [model]="s"></survey-content>

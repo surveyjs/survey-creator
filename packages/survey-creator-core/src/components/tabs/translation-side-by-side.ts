@@ -6,29 +6,15 @@ import { editableStringRendererName } from "../../creator-base";
 import { IUndoRedoAction, UndoRedoLocaleTextAction } from "../../plugins/undo-redo/undo-redo-manager";
 import { Translation, TranslationGroup, TranslationItem } from "./translation";
 
-// The scoped survey-level strings grid shown for the synthetic "Survey Strings" entry.
-// Routes its matrix edits through the owner's locale-aware undoable action instead of a direct write.
-export class TranslationSurveyStrings extends Translation {
-  constructor(survey: SurveyModel, options: ISurveyCreatorOptions, private owner: TranslationSideBySide) {
-    super(survey, options, true);
-  }
-  protected setItemLocText(item: TranslationItem, locale: string, text: string): void {
-    this.owner.performItemLocTextAction(item, locale, text);
-  }
-}
-
 export class TranslationSideBySide extends Translation {
-  public static readonly surveyStringsPageId = "svc:survey-strings";
   @property() sourceLocale: string;
   @property() destinationLocale: string;
   @property() selectedPageName: string;
-  @property({ defaultValue: false }) showSurveyStrings: boolean;
   @property() sourceSurvey: SurveyModel;
   @property() destinationSurvey: SurveyModel;
   // Wired by TabTranslationPlugin to record the action in the creator's undo/redo stack.
   public doUndoableAction: (action: IUndoRedoAction, title: string) => void = (action) => action.apply();
 
-  private surveyStringsTranslationValue: TranslationSurveyStrings;
   private byDstLocStr = new Map<ILocalizableString, TranslationItem>();
   private byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
   private _syncing: boolean = false;
@@ -40,12 +26,6 @@ export class TranslationSideBySide extends Translation {
   public get isSideBySide(): boolean {
     return true;
   }
-  public get surveyStringsTranslation(): Translation {
-    if (!this.surveyStringsTranslationValue) {
-      this.surveyStringsTranslationValue = this.createSurveyStringsTranslation();
-    }
-    return this.surveyStringsTranslationValue;
-  }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "sourceLocale" || name === "destinationLocale") {
@@ -53,7 +33,6 @@ export class TranslationSideBySide extends Translation {
         this.updateSurveyLocale();
       }
       this.updateInstanceLocales();
-      this.applySurveyStringsLocales();
     }
     if (name === "selectedPageName") {
       this.updateInstancePages();
@@ -68,10 +47,6 @@ export class TranslationSideBySide extends Translation {
       if (!this.root) {
         this.reset();
       }
-      if (!!this.surveyStringsTranslationValue && this.surveyStringsTranslationValue.survey !== this.survey) {
-        this.surveyStringsTranslationValue.dispose();
-        this.surveyStringsTranslationValue = undefined;
-      }
       const json = this.survey.toJSON();
       this.sourceSurvey = this.createInstance(json, "translation_source");
       this.destinationSurvey = this.createInstance(json, "translation_target");
@@ -85,7 +60,7 @@ export class TranslationSideBySide extends Translation {
     }
   }
   // Called (through the plugin's onDesignerSurveyPropertyChanged hook) when the real survey changes:
-  // undo/redo rollbacks, survey-level strings grid edits, or any external modification.
+  // undo/redo rollbacks or any external modification.
   public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
     if (this._syncing || this.isDisposed || !this.destinationSurvey) return;
     if (obj === this.survey && propName === "locale") {
@@ -104,9 +79,6 @@ export class TranslationSideBySide extends Translation {
     this._syncing = true;
     try {
       this.mirrorLocStrIntoCopies(realLocStr, copies);
-      if (!!this.surveyStringsTranslationValue) {
-        this.surveyStringsTranslationValue.updateStringsSurveyData();
-      }
     } finally {
       this._syncing = false;
     }
@@ -179,10 +151,6 @@ export class TranslationSideBySide extends Translation {
     this.setSourceScrollElement(undefined);
     this.setDestinationScrollElement(undefined);
     this.disposeInstances();
-    if (!!this.surveyStringsTranslationValue) {
-      this.surveyStringsTranslationValue.dispose();
-      this.surveyStringsTranslationValue = undefined;
-    }
     this.doUndoableAction = undefined;
     super.dispose();
   }
@@ -324,30 +292,6 @@ export class TranslationSideBySide extends Translation {
     copies.forEach(copy => {
       (<LocalizableString>copy).setJson(json);
       (<LocalizableString>copy).strChanged();
-    });
-  }
-  private createSurveyStringsTranslation(): TranslationSurveyStrings {
-    const res = new TranslationSurveyStrings(this.survey, this.options, this);
-    res.readOnly = this.readOnly;
-    res.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean): boolean => {
-      // Scope the grid to survey-level strings: hide everything that belongs to pages and their content.
-      if (obj !== this.survey) return false;
-      const callback = this.translationStringVisibilityCallback;
-      return !!callback ? callback(obj, propertyName, visible) : visible;
-    };
-    res.showAllStrings = true;
-    this.applySurveyStringsLocales(res);
-    return res;
-  }
-  // Shows exactly two locale columns - source and destination - in the survey-level strings grid.
-  private applySurveyStringsLocales(target?: TranslationSurveyStrings): void {
-    const translation = target || this.surveyStringsTranslationValue;
-    if (!translation || !translation.localesQuestion) return;
-    const source = this.sourceLocale || "";
-    const destination = this.destinationLocale || "";
-    const locales = source === destination ? [source] : [source, destination];
-    translation.localesQuestion.value = locales.map(loc => {
-      return { isSelected: true, name: loc, displayName: translation.getLocaleName(loc) };
     });
   }
 }

@@ -47,9 +47,6 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     );
   }
   renderSideBySideContent(model: TranslationSideBySide): React.JSX.Element {
-    if (model.showSurveyStrings) {
-      return this.renderStringsContent(model.surveyStringsTranslation);
-    }
     return (
       <div className="st-side-by-side">
         <div key={model.sourceSurvey?.elementIdPrefix} className="st-side-by-side__source"

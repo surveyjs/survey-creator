@@ -44,14 +44,15 @@ test.describe(title, () => {
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
   });
 
-  test("toolbar: no 'All Pages'; 'Survey Strings' present; source/destination dropdowns show defaults", async ({ page }) => {
+  test("toolbar: pages dropdown holds real pages only; source/destination dropdowns show defaults", async ({ page }) => {
     await openSideBySideTranslation(page);
     await expect(getBarItemByTitle(page, "All Pages")).toHaveCount(0);
     await expect(getBarItemByTitle(page, "page1")).toBeVisible();
     await expect(getBarItemByTitle(page, "Default (English)")).toBeVisible();
     await expect(getBarItemByTitle(page, "Deutsch")).toBeVisible();
     await getBarItemByTitle(page, "page1").click();
-    await expect(getListItemByText(page, "Survey Strings")).toBeVisible();
+    await expect(getListItemByText(page, "page2")).toBeVisible();
+    await expect(getListItemByText(page, "Survey Strings")).toHaveCount(0);
     await expect(getListItemByText(page, "All Pages")).toHaveCount(0);
     await page.keyboard.press("Escape");
   });
@@ -130,24 +131,5 @@ test.describe(title, () => {
     const resultJson = await getJSON(page);
     expect(resultJson.pages[0].elements[0].title.it).toEqual("Question 1 it");
     expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1");
-  });
-
-  test("'Survey Strings' shows the two-column grid; editing the Complete button caption writes the destination value", async ({ page }) => {
-    await openSideBySideTranslation(page);
-    await getBarItemByTitle(page, "page1").click();
-    await getListItemByText(page, "Survey Strings").click();
-    await expect(page.locator(".st-side-by-side__source")).toHaveCount(0);
-    await expect(page.locator(".st-strings")).toBeVisible();
-    const headerColumns = page.locator(".st-strings-header table tr").first().locator("th");
-    await expect(headerColumns).toHaveCount(2);
-
-    const completeTextRow = page.locator(".st-strings table tr").filter({ hasText: "\"Complete Survey\" button text" }).first();
-    await expect(completeTextRow).toBeVisible();
-    const destinationCell = completeTextRow.locator("textarea").nth(1);
-    await destinationCell.click();
-    await destinationCell.fill("Fertig");
-    await page.keyboard.press("Tab");
-    const resultJson = await getJSON(page);
-    expect(resultJson.completeText.de).toEqual("Fertig");
   });
 });

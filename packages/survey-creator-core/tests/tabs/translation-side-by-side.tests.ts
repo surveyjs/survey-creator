@@ -60,13 +60,12 @@ test("activate creates side-by-side model, no strings surveys, sidebar hidden", 
   expect(sidebarPage.visible).toBeFalsy();
 });
 
-test("pages dropdown: no 'All Pages', trailing 'Survey Strings', first page preselected; strings filter & merge actions hidden", () => {
+test("pages dropdown: no 'All Pages', real pages only, first page preselected; strings filter & merge actions hidden", () => {
   const creator = createSideBySideCreator();
   const filterPageAction = creator.toolbar.getActionById("svc-translation-filter-page");
   expect(filterPageAction.visible).toBeTruthy();
   const items = getListItems(creator, "svc-translation-filter-page");
-  expect(items.map(item => item.id)).toEqual(["page1", "page2", TranslationSideBySide.surveyStringsPageId]);
-  expect(items[2].title).toBe("Survey Strings");
+  expect(items.map(item => item.id)).toEqual(["page1", "page2"]);
   expect(getSelectedListItem(creator, "svc-translation-filter-page").id).toBe("page1");
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeFalsy();
   expect(creator.toolbar.getActionById("svd-translation-merge_locale_withdefault").visible).toBeFalsy();
@@ -253,29 +252,6 @@ test("destination locale defaults to the default language when survey.locale equ
   const creator = createSideBySideCreator(json);
   const model = getModel(creator);
   expect(model.destinationLocale || "").toBe("");
-});
-
-test("'Survey Strings': scoped translation has no page groups, exactly two locales; editing pagePrevText sets real de value; undo works", () => {
-  const creator = createSideBySideCreator();
-  const model = getModel(creator);
-  const surveyStrings = model.surveyStringsTranslation;
-  expect(surveyStrings.root.groups).toHaveLength(0);
-  expect([...surveyStrings.locales]).toEqual(["", "de"]);
-  const matrices = surveyStrings.stringsSurvey.getAllQuestions();
-  const matrix = <QuestionMatrixDropdownModel>matrices.filter(
-    question => (<QuestionMatrixDropdownModel>question).rows[0].value === "pagePrevText"
-  )[0];
-  expect(matrix).toBeTruthy();
-  expect(matrix.columns).toHaveLength(2);
-  const row = matrix.visibleRows[0];
-  row.cells[1].question.value = "Back-de";
-  expect(creator.survey.locPagePrevText.getLocaleText("de")).toBe("Back-de");
-  expect(creator.survey.locPagePrevText.getLocaleText("")).toBeFalsy();
-  creator.undo();
-  expect(creator.survey.locPagePrevText.getLocaleText("de")).toBeFalsy();
-  expect(creator.survey.locPagePrevText.getLocaleText("")).toBeFalsy();
-  creator.redo();
-  expect(creator.survey.locPagePrevText.getLocaleText("de")).toBe("Back-de");
 });
 
 test("structural undo rebuilds instances", () => {

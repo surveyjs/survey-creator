@@ -23,12 +23,9 @@ export class TranslationTabComponent extends BaseAngular<Translation> {
   @ViewChild("destinationScrollContainer") set destinationScrollContainer(ref: ElementRef<HTMLElement> | undefined) {
     this.sideBySideModel?.setDestinationScrollElement(ref ? ref.nativeElement : undefined as any);
   }
-  // The strings-grid model: the tab model itself in the default mode, the scoped survey-level
-  // strings model when the side-by-side mode shows the synthetic "Survey Strings" entry.
+  // The strings-grid model: the tab model itself in the default (non-side-by-side) mode.
   public get stringsModel(): Translation | undefined {
-    if (!this.model.isSideBySide) return this.model;
-    const model = <TranslationSideBySide>this.model;
-    return model.showSurveyStrings ? model.surveyStringsTranslation : undefined;
+    return this.model.isSideBySide ? undefined : this.model;
   }
   // The strings survey is fully recreated on reset(). Its elements keep deterministic ids across
   // instances, so *ngFor's element trackBy would reuse the disposed survey's (lazy-skeleton) rows.

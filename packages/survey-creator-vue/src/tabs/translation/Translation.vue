@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!model.isEmpty && sideBySideModel && !sideBySideModel.showSurveyStrings" class="st-side-by-side">
+    <div v-if="!model.isEmpty && sideBySideModel" class="st-side-by-side">
       <div class="st-side-by-side__source" :key="sideBySideModel.sourceSurvey?.elementIdPrefix" :ref="setSourceScrollElement">
         <SurveyComponent :model="sideBySideModel.sourceSurvey"></SurveyComponent>
       </div>
@@ -32,13 +32,10 @@ useBase(() => props.model);
 const sideBySideModel = computed<TranslationSideBySide | undefined>(() =>
   props.model.isSideBySide ? (props.model as TranslationSideBySide) : undefined
 );
-// The strings-grid model: the tab model itself in the default mode, the scoped survey-level
-// strings model when the side-by-side mode shows the synthetic "Survey Strings" entry.
-const stringsModel = computed<Translation | undefined>(() => {
-  if (!props.model.isSideBySide) return props.model;
-  const model = props.model as TranslationSideBySide;
-  return model.showSurveyStrings ? model.surveyStringsTranslation : undefined;
-});
+// The strings-grid model: the tab model itself in the default (non-side-by-side) mode.
+const stringsModel = computed<Translation | undefined>(() =>
+  props.model.isSideBySide ? undefined : props.model
+);
 const setSourceScrollElement = (el: unknown) => {
   sideBySideModel.value?.setSourceScrollElement(el as HTMLElement);
 };
