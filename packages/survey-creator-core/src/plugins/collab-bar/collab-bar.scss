@@ -1,0 +1,15 @@
+// Layout integration of the collaboration bar strip. Widget visuals live in
+// inline cssText (collab-bar-view.ts); these rules only wire the strip into
+// the creator's flex column.
+.svc-collab-bar {
+  flex: none;
+}
+
+// .svc-creator__area is .svc-full-container (height: 100%); with the strip
+// above it, it must take the remaining height instead or the creator content
+// overflows the root by the strip's height.
+.svc-collab-bar~.svc-creator__area {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+}
