@@ -5,7 +5,7 @@
     </ng-container>
   </div>
   <div class="svc-tab-designer" [class]="model.getRootCss()" (click)="model.clickDesigner()">
-    <sv-scroll>
+    <sv-scroll [onInnerHeightChanged]="model.setHasScroll">
       <div class="svc-tab-designer_content">
         <ng-container *ngIf="model.showPlaceholder">
           <div *ngIf="creator.showHeaderInEmptySurvey && creator.showSurveyHeader" class="svc-designer-header">
