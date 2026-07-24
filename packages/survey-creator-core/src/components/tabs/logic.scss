@@ -231,6 +231,11 @@
     padding: 0;
   }
 }
+.sl-row {
+  .sd-question__header-and-content-container {
+    padding: 0;
+  }
+}
 .sl-question--header-left {
   & > .sd-question__container > .sd-question__header-and-content-container {
     & > .sl-question__header {
