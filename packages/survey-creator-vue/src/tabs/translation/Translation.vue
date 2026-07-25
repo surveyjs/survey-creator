@@ -30,11 +30,11 @@ import SurfacePlaceholder from "../../components/SurfacePlaceholder.vue";
 const props = defineProps<{ model: Translation }>();
 useBase(() => props.model);
 const sideBySideModel = computed<TranslationSideBySide | undefined>(() =>
-  props.model.isSideBySide ? (props.model as TranslationSideBySide) : undefined
+  props.model.isSideBySideForms ? (props.model as TranslationSideBySide) : undefined
 );
-// The strings-grid model: the tab model itself in the default (non-side-by-side) mode.
+// The strings-grid model: the tab model itself in the default mode and in the side-by-side grid view.
 const stringsModel = computed<Translation | undefined>(() =>
-  props.model.isSideBySide ? undefined : props.model
+  sideBySideModel.value ? undefined : props.model
 );
 const setSourceScrollElement = (el: unknown) => {
   sideBySideModel.value?.setSourceScrollElement(el as HTMLElement);

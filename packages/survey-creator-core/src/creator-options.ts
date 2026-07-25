@@ -59,6 +59,10 @@ export interface ICreatorOptions {
    * @see showTranslationTab
    */
   translationMode?: "default" | "sideBySide";
+  // How the side-by-side Translation tab renders its editing surface; applies only if
+  // translationMode is "sideBySide": "forms" - two design-mode survey instances side by side,
+  // "grid" - a translation grid with a source and a destination locale column.
+  translationSideBySideView?: "forms" | "grid";
   /**
    * Specifies whether to display the [Themes](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#themes-tab) tab.
    *

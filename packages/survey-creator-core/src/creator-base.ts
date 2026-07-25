@@ -214,6 +214,10 @@ export class SurveyCreatorModel extends Base
    * @see showTranslationTab
    */
   public translationMode: "default" | "sideBySide" = "default";
+  // How the side-by-side Translation tab renders its editing surface; applies only if
+  // translationMode is "sideBySide": "forms" - two design-mode survey instances side by side,
+  // "grid" - a translation grid with a source and a destination locale column.
+  public translationSideBySideView: "forms" | "grid" = "forms";
   /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *

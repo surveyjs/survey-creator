@@ -1,5 +1,6 @@
 import {
-  Base, ILocalizableString, ItemValue, LocalizableString, Serializer, SurveyModel, property, surveyLocalization
+  Base, ILocalizableString, ItemValue, LocalizableString,
+  Serializer, SurveyModel, property, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
 import { editableStringRendererName } from "../../creator-base";
@@ -7,8 +8,6 @@ import { IUndoRedoAction, UndoRedoLocaleTextAction } from "../../plugins/undo-re
 import { Translation, TranslationGroup, TranslationItem } from "./translation";
 
 export class TranslationSideBySide extends Translation {
-  @property() sourceLocale: string;
-  @property() destinationLocale: string;
   @property() selectedPageName: string;
   @property() sourceSurvey: SurveyModel;
   @property() destinationSurvey: SurveyModel;
@@ -17,11 +16,15 @@ export class TranslationSideBySide extends Translation {
 
   private byDstLocStr = new Map<ILocalizableString, TranslationItem>();
   private byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
-  private _syncing: boolean = false;
+  protected _syncing: boolean = false;
 
-  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null) {
-    super(survey, options, false);
-    this.showAllStrings = true;
+  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, hasUI: boolean = false) {
+    super(survey, options, hasUI);
+    // The forms view maps every localizable string of the survey copies; the grid view keeps
+    // the default ("used strings only") and lets the user switch via the toolbar dropdown.
+    if (!this.isSideBySideGrid) {
+      this.showAllStrings = true;
+    }
   }
   public get isSideBySide(): boolean {
     return true;
@@ -64,9 +67,7 @@ export class TranslationSideBySide extends Translation {
   public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
     if (this._syncing || this.isDisposed || !this.destinationSurvey) return;
     if (obj === this.survey && propName === "locale") {
-      // An external change (an undo/redo rollback) - follow it instead of rebuilding.
-      const locale = this.survey.locale;
-      this.destinationLocale = !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
+      this.followSurveyLocale();
       return;
     }
     const realLocStr = this.getLocStrByName(obj, propName);
@@ -298,7 +299,12 @@ export class TranslationSideBySide extends Translation {
   // Resolves the localizable string a property change refers to. Some objects report the change
   // themselves while the string lives on a nested object (a matrix column's title is stored on its
   // template question), so the serialization metadata is used when the own-strings hash has no entry.
-  private getLocStrByName(obj: Base, name: string): ILocalizableString {
+  // An external survey.locale change (an undo/redo rollback) - follow it instead of rebuilding.
+  protected followSurveyLocale(): void {
+    const locale = this.survey.locale;
+    this.destinationLocale = !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
+  }
+  protected getLocStrByName(obj: Base, name: string): ILocalizableString {
     if (!obj) return undefined;
     if (typeof (<any>obj).getLocalizableString === "function") {
       const res = (<any>obj).getLocalizableString(name);
@@ -317,5 +323,66 @@ export class TranslationSideBySide extends Translation {
       (<LocalizableString>copy).setJson(json);
       (<LocalizableString>copy).strChanged();
     });
+  }
+}
+
+// The grid alternative of the side-by-side mode: instead of two rendered survey panes it shows
+// the strings grid of the base Translation class with a source and a destination locale column.
+// Page filtering (filteredPage) and the all/used strings filter work as in the standard mode.
+export class TranslationSideBySideGrid extends TranslationSideBySide {
+  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null) {
+    super(survey, options, true);
+    this.useSourceDestinationColumns = true;
+  }
+  public get isSideBySideGrid(): boolean {
+    return true;
+  }
+  // The grid view has no survey copies to rebuild - re-create the grid over the current survey,
+  // dropping a page filter that no longer belongs to it (survey replaced, structural undo).
+  public rebuildInstances(): void {
+    if (this.isDisposed) return;
+    if (!!this.filteredPage && this.survey.pages.indexOf(this.filteredPage) < 0) {
+      this.filteredPage = null; // the property's onSet rebuilds the grid
+      return;
+    }
+    this.reset();
+  }
+  public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
+    if (this._syncing || this.isDisposed) return;
+    if (obj === this.survey && propName === "locale") {
+      this.followSurveyLocale();
+      return;
+    }
+    if (!this.getLocStrByName(obj, propName)) {
+      // Not a localizable string - a structural change (element added/removed by undo/redo, etc.).
+      this.rebuildInstances();
+      return;
+    }
+    // A localizable string changed on the real survey (an undo/redo rollback or an external
+    // edit): refresh the grid cells.
+    this.updateStringsSurveyData();
+  }
+  // Routes grid edits through the creator's undo/redo stack - the base implementation writes
+  // directly into the localizable string and would bypass it.
+  protected setItemLocText(item: TranslationItem, locale: string, text: string): void {
+    this._syncing = true;
+    try {
+      this.performItemLocTextAction(item, locale, text);
+    } finally {
+      this._syncing = false;
+    }
+  }
+  // The grid can be scoped to a single page; CSV export must still cover the whole survey,
+  // exactly like the forms view does.
+  public exportToCSV(): string {
+    const translation = new Translation(this.survey, this.options, false);
+    translation.showAllStrings = true;
+    translation.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
+    translation.localeInitialVisibleCallback = this.localeInitialVisibleCallback;
+    try {
+      return translation.exportToCSV();
+    } finally {
+      translation.dispose();
+    }
   }
 }

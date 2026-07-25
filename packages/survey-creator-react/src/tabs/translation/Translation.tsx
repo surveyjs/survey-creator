@@ -27,9 +27,10 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     if (this.model.isEmpty) {
       return <SurfacePlaceholder name={"translation"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
     }
-    if (this.model.isSideBySide) {
+    if (this.model.isSideBySideForms) {
       return this.renderSideBySideContent(this.model as TranslationSideBySide);
     }
+    // The side-by-side grid view reuses the default strings-grid markup.
     return this.renderStringsContent(this.model);
   }
   renderStringsContent(model: Translation): React.JSX.Element {

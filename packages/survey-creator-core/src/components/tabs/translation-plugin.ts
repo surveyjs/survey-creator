@@ -4,7 +4,7 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";
-import { TranslationSideBySide } from "./translation-side-by-side";
+import { TranslationSideBySide, TranslationSideBySideGrid } from "./translation-side-by-side";
 import { TabControlModel } from "../side-bar/tab-control-model";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
@@ -41,6 +41,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
   private get isSideBySide(): boolean {
     return this.creator.translationMode === "sideBySide";
+  }
+  private get isSideBySideGrid(): boolean {
+    return this.isSideBySide && this.creator.translationSideBySideView === "grid";
   }
 
   private updateSettingsSurvey(): void {
@@ -106,12 +109,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
 
-    this.filterPageAction.data.setItems([{ id: null, title: this.showAllPagesText }].concat(
-      this.creator.survey.pages.map((page) => ({
-        id: page.name,
-        title: this.getPageDisplayText(page)
-      }))
-    ), false);
+    this.setFilterPageActionItems();
 
     this.model.onPropertyChanged.add((sender, options) => {
       if (options.name === "filteredPage") {
@@ -134,7 +132,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.updateTabControl();
   }
   private activateSideBySide(): void {
-    const model = new TranslationSideBySide(this.creator.survey, this.creator);
+    const model = this.isSideBySideGrid
+      ? new TranslationSideBySideGrid(this.creator.survey, this.creator)
+      : new TranslationSideBySide(this.creator.survey, this.creator);
     this.model = model;
     this.wireModelCallbacks(model);
     model.importFinishedCallback = (): void => {
@@ -156,12 +156,20 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     model.sourceLocale = "";
     model.destinationLocale = this.calcDefaultDestinationLocale();
-    const pages = this.creator.survey.pages;
-    model.selectedPageName = pages.length > 0 ? pages[0].name : "";
-    model.rebuildInstances();
 
     this.filterPageAction.visible = true;
-    this.updateSideBySidePagesAction();
+    if (this.isSideBySideGrid) {
+      // The page and strings filters work exactly as in the default mode.
+      this.setFilterPageActionItems();
+      this.updateFilterPageAction(true);
+      this.filterStringsAction.visible = true;
+      this.updateFilterStrigsAction(true);
+    } else {
+      const pages = this.creator.survey.pages;
+      model.selectedPageName = pages.length > 0 ? pages[0].name : "";
+      model.rebuildInstances();
+      this.updateSideBySidePagesAction();
+    }
     this.sourceLocaleAction.visible = true;
     this.destinationLocaleAction.visible = true;
     this.updateLocaleActions();
@@ -176,17 +184,28 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       if (options.name === "selectedPageName") {
         this.updateSideBySidePagesAction();
       }
+      if (options.name === "filteredPage") {
+        this.updateFilterPageAction();
+      }
+      if (options.name === "showAllStrings") {
+        this.updateFilterStrigsAction();
+      }
     });
   }
   public update(): void {
     if (!this.model) return;
     this.model.survey = this.creator.survey;
-    if (this.isSideBySide) {
+    if (this.isSideBySide && !this.isSideBySideGrid) {
       const model = <TranslationSideBySide>this.model;
       const pages = this.creator.survey.pages;
       model.selectedPageName = pages.length > 0 ? pages[0].name : "";
       model.rebuildInstances();
       this.updateSideBySidePagesAction();
+      this.updateLocaleActions();
+    } else if (this.isSideBySideGrid) {
+      this.model.filteredPage = null;
+      this.setFilterPageActionItems();
+      this.updateFilterPageAction(true);
       this.updateLocaleActions();
     } else {
       this.model.filteredPage = null;
@@ -347,7 +366,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       items: [{ id: null, title: this.showAllPagesText }],
       allowSelection: true,
       onSelectionChanged: (item: IAction) => {
-        if (this.isSideBySide) {
+        if (this.isSideBySide && !this.isSideBySideGrid) {
           (<TranslationSideBySide>this.model).selectedPageName = <string>item.id;
         } else {
           this.model.filteredPage = !!item.id ? this.creator.survey.getPageByName(item.id) : null;
@@ -389,9 +408,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       cssClass: "svc-creator-popup",
     }, this.creator);
   }
+  // The pages dropdown of the forms view: real pages only, no "All Pages" - the panes always
+  // show a concrete page. The grid view uses the standard items set by setFilterPageActionItems.
   private updateSideBySidePagesAction(): void {
     const model = <TranslationSideBySide>this.model;
-    if (!model || !model.isSideBySide) return;
+    if (!model || !model.isSideBySideForms) return;
     const items: Array<IAction> = this.creator.survey.pages.map((page) => (<IAction>{
       id: page.name,
       title: this.getPageDisplayText(page)
@@ -402,6 +423,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     const selectedItem = list.actions.filter((el: IAction) => el.id === selectedId)[0];
     list.selectedItem = selectedItem;
     this.filterPageAction.title = !!selectedItem ? selectedItem.title : "";
+  }
+  private setFilterPageActionItems(): void {
+    (<ListModel>this.filterPageAction.data).setItems([{ id: null, title: this.showAllPagesText }].concat(
+      this.creator.survey.pages.map((page) => ({
+        id: page.name,
+        title: this.getPageDisplayText(page)
+      }))
+    ), false);
   }
   private updateLocaleActions(): void {
     const model = <TranslationSideBySide>this.model;

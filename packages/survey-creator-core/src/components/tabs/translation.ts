@@ -702,7 +702,21 @@ export class Translation extends Base implements ITranslationLocales {
   public get isSideBySide(): boolean {
     return false;
   }
+  public get isSideBySideGrid(): boolean {
+    return false;
+  }
+  // True when the side-by-side mode shows its two rendered survey panes (the UI components'
+  // single switch between the panes and the strings-grid markup).
+  public get isSideBySideForms(): boolean {
+    return this.isSideBySide && !this.isSideBySideGrid;
+  }
   @propertyArray() locales: Array<string>;
+  // When true, the strings grid shows exactly two columns - sourceLocale and destinationLocale -
+  // instead of a column per selected locale, and updates them (keeping the entered values)
+  // whenever one of the two locales changes.
+  @property({ defaultValue: false }) useSourceDestinationColumns: boolean;
+  @property() sourceLocale: string;
+  @property() destinationLocale: string;
   @property() canMergeLocaleWithDefault: boolean;
   @property() mergeLocaleWithDefaultText: string;
   @property({
@@ -1038,10 +1052,46 @@ export class Translation extends Base implements ITranslationLocales {
       this.addTranslationGroupIntoStringsSurvey(pnl, item);
     }
   }
-  private getLocaleColumnName(loc: string): string {
+  protected getLocaleColumnName(loc: string): string {
     return !loc ? getDefaultLocaleName() : loc;
   }
-  private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
+  // Shows a source column before the target column (removing a previously added source column
+  // first); no source column when the locales are equal. Shared by the machine-translation
+  // dialog (a read-only source) and the side-by-side grid (an editable one, like any locale
+  // column in the standard mode).
+  public updateMatrixSourceColumn(matrix: QuestionMatrixDropdownModel, sourceLoc: string, targetLoc: string, isReadOnly: boolean = false): void {
+    if (matrix.columns.length === 2) {
+      matrix.columns.splice(0, 1);
+    }
+    const loc = sourceLoc || "";
+    if (loc === (targetLoc || "")) return;
+    const column = new MatrixDropdownColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
+    column.readOnly = isReadOnly;
+    matrix.columns.splice(0, 0, column);
+  }
+  // Columns are [Source, Target] (or [Target] only when the locales are equal).
+  public updateSourceTargetHeaderColumns(matrix: QuestionMatrixDropdownModel, sourceLoc: string, targetLoc: string): void {
+    const cols = matrix.columns;
+    if (cols.length > 1) {
+      cols[0].title = this.getSourceTargetHeaderTitle("translationSource", sourceLoc || "");
+      cols[1].title = this.getSourceTargetHeaderTitle("translationTarget", targetLoc);
+    } else {
+      cols[0].title = this.getSourceTargetHeaderTitle("translationTarget", targetLoc);
+    }
+  }
+  private getSourceTargetHeaderTitle(strName: string, locale: string): string {
+    return editorLocalization.getString("ed." + strName) + this.getLocaleName(locale);
+  }
+  protected addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
+    if (this.useSourceDestinationColumns) {
+      const destination = this.destinationLocale || "";
+      matrix.addColumn(this.getLocaleColumnName(destination), this.getLocaleName(destination));
+      this.updateMatrixSourceColumn(matrix, this.sourceLocale, destination);
+      if (matrix.name === "stringsHeader") {
+        this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, destination);
+      }
+      return;
+    }
     if (this.isEditMode) {
       // In the auto-translate dialog the default locale is not shown as a separate column.
       // The editable "Target" column is the base; the read-only "Source" column is added by the TranslationEditor.
@@ -1082,7 +1132,7 @@ export class Translation extends Base implements ITranslationLocales {
     }
     return res;
   }
-  private updateHeaderStringsSurveyColumns() {
+  protected updateHeaderStringsSurveyColumns(): void {
     if (!this.stringsHeaderSurvey) return;
     let matrix = <QuestionMatrixDropdownModel>(
       this.stringsHeaderSurvey.getQuestionByName("stringsHeader")
@@ -1090,7 +1140,7 @@ export class Translation extends Base implements ITranslationLocales {
     matrix.columns = [];
     this.addLocaleColumns(matrix);
   }
-  private updateStringsSurveyColumns() {
+  protected updateStringsSurveyColumns(): void {
     if (!this.stringsSurvey) return;
     var questions = this.stringsSurvey.getAllQuestions();
     for (var i = 0; i < questions.length; i++) {
@@ -1162,6 +1212,16 @@ export class Translation extends Base implements ITranslationLocales {
       this.updateHeaderStringsSurveyColumns();
       this.updateStringsSurveyColumns();
     }
+    if (name === "useSourceDestinationColumns" ||
+      (this.useSourceDestinationColumns && (name === "sourceLocale" || name === "destinationLocale"))) {
+      this.updateStringsSurveyColumnsAndData();
+    }
+  }
+  // Re-runs the column setup on the header and data matrices, keeping the entered values.
+  protected updateStringsSurveyColumnsAndData(): void {
+    this.updateHeaderStringsSurveyColumns();
+    this.updateStringsSurveyColumns();
+    this.updateStringsSurveyData();
   }
   private getMergeLocaleWithDefaultText(): string {
     if (!this.canMergeLocaleWithDefault) return "";
@@ -1666,31 +1726,11 @@ export class TranslationEditor {
     }
   }
   private updateHeaderMatrixColumns(matrix: QuestionMatrixDropdownModel) {
-    const cols = matrix.columns;
-    // Columns are [Source, Target]; the default locale is no longer shown as a separate first column.
-    if (cols.length > 1) {
-      cols[0].title = this.getHeaderTitle("translationSource", this.fromLocale || "");
-      cols[1].title = this.getHeaderTitle("translationTarget", this.locale);
-    } else {
-      cols[0].title = this.getHeaderTitle("translationTarget", this.locale);
-    }
+    this.translation.updateSourceTargetHeaderColumns(matrix, this.fromLocale, this.locale);
   }
   private updateMatrixColumns(matrix: QuestionMatrixDropdownModel): void {
     // The base matrix has the editable "Target" column only; the read-only "Source" column is shown at the first position.
-    if (matrix.columns.length === 2) {
-      matrix.columns.splice(0, 1);
-    }
-    const loc = this.fromLocale || "";
-    if (loc === (this.locale || "")) return; // the source can't be the same as the target
-    const column = new MatrixDropdownColumn(this.getSourceColumnName(loc), this.translation.getLocaleName(loc));
-    column.readOnly = true;
-    matrix.columns.splice(0, 0, column);
-  }
-  private getSourceColumnName(loc: string): string {
-    return !loc ? getDefaultLocaleName() : loc;
-  }
-  private getHeaderTitle(strName: string, locale: string): string {
-    return editorLocalization.getString("ed." + strName) + this.translation.getLocaleName(locale);
+    this.translation.updateMatrixSourceColumn(matrix, this.fromLocale, this.locale, true);
   }
   private fillFromLocales(): void {
     this.fromLocales = [];
