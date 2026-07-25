@@ -78,6 +78,8 @@ test("grid view: activate creates the grid model, no survey copies, toolbar comp
   expect(creator.toolbar.getActionById("svc-translation-import").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svc-translation-export").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svd-translation-merge_locale_withdefault").visible).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-side-by-side-view").visible).toBeTruthy();
+  expect(creator.toolbar.getActionById("svc-translation-side-by-side-view").title).toBe("Grid View");
 });
 
 test("grid view: the creator option defaults to the forms view", () => {
@@ -233,6 +235,58 @@ test("grid view: the machine-translation editor operates on the whole survey", (
   // q4 (page2, no "de" text yet) must be offered although the grid shows page1 only.
   expect(contexts.indexOf("q4")).toBeGreaterThan(-1);
   editor.dispose();
+});
+
+test("view switcher: the toolbar action switches between the forms and grid views keeping locales", () => {
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+  creator.JSON = JSON.parse(JSON.stringify(gridJSON));
+  creator.activeTab = "translation";
+  const action = creator.toolbar.getActionById("svc-translation-side-by-side-view");
+  expect(action.visible).toBeTruthy();
+  expect(action.title).toBe("Form View");
+  const formsModel = <TranslationSideBySide>getPlugin(creator).model;
+  expect(formsModel.isSideBySideGrid).toBeFalsy();
+  formsModel.sourceLocale = "fr";
+
+  const list = <ListModel>action.data;
+  list.onItemClick(list.actions.filter(item => item.id === "grid")[0]);
+  expect(creator.translationSideBySideView).toBe("grid");
+  expect(action.title).toBe("Grid View");
+  // The same model rebuilds its editing surface in place.
+  expect(getPlugin(creator).model).toBe(formsModel);
+  expect(formsModel.isSideBySideGrid).toBeTruthy();
+  expect(formsModel.stringsSurvey).toBeTruthy();
+  expect(formsModel.sourceSurvey).toBeFalsy();
+  expect(formsModel.showAllStrings).toBeFalsy();
+  expect(formsModel.sourceLocale).toBe("fr");
+  expect(formsModel.destinationLocale).toBe("de");
+  expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeTruthy();
+
+  list.onItemClick(list.actions.filter(item => item.id === "forms")[0]);
+  expect(creator.translationSideBySideView).toBe("forms");
+  expect(action.title).toBe("Form View");
+  expect(getPlugin(creator).model).toBe(formsModel);
+  expect(formsModel.isSideBySideGrid).toBeFalsy();
+  expect(formsModel.sourceSurvey).toBeTruthy();
+  expect(formsModel.destinationSurvey).toBeTruthy();
+  expect(formsModel.showAllStrings).toBeTruthy();
+  expect(formsModel.sourceLocale).toBe("fr");
+  expect(formsModel.destinationLocale).toBe("de");
+  // The all/used strings filter belongs to the grid view only.
+  expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeFalsy();
+});
+
+test("view switcher: hidden in the default translation mode and after leaving the tab", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = JSON.parse(JSON.stringify(gridJSON));
+  creator.activeTab = "translation";
+  expect(creator.toolbar.getActionById("svc-translation-side-by-side-view").visible).toBeFalsy();
+
+  const sideBySideCreator = createGridCreator();
+  const action = sideBySideCreator.toolbar.getActionById("svc-translation-side-by-side-view");
+  expect(action.visible).toBeTruthy();
+  sideBySideCreator.activeTab = "designer";
+  expect(action.visible).toBeFalsy();
 });
 
 test("grid view: replacing the survey rebuilds the grid for the new survey", () => {

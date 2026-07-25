@@ -923,8 +923,13 @@ export class Translation extends Base implements ITranslationLocales {
     }
     this.setSelectedLocales(selectedLocales);
   }
+  // Whether reset() (re)builds the strings-grid surveys; the side-by-side model overrides it
+  // to build them only in its grid view.
+  protected get hasStringsSurveyUI(): boolean {
+    return this.hasUI;
+  }
   private resetStringsSurvey() {
-    if (!this.hasUI) return;
+    if (!this.hasStringsSurveyUI) return;
     this.stringsSurvey = this.createStringsSurvey();
     this.stringsHeaderSurvey = this.createStringsHeaderSurvey();
     this.updateReadOnly();

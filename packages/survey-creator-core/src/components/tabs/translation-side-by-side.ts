@@ -11,6 +11,11 @@ export class TranslationSideBySide extends Translation {
   @property() selectedPageName: string;
   @property() sourceSurvey: SurveyModel;
   @property() destinationSurvey: SurveyModel;
+  // The editing surface of the side-by-side mode: "forms" - two design-mode survey copies
+  // rendered side by side, "grid" - the strings grid with a source and a destination column.
+  // Changing it rebuilds the surface in place on the same model, so the locales chosen in
+  // the toolbar survive the switch.
+  @property({ defaultValue: "forms" }) view: "forms" | "grid";
   // Wired by TabTranslationPlugin to record the action in the creator's undo/redo stack.
   public doUndoableAction: (action: IUndoRedoAction, title: string) => void = (action) => action.apply();
 
@@ -18,8 +23,11 @@ export class TranslationSideBySide extends Translation {
   private byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
   protected _syncing: boolean = false;
 
-  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, hasUI: boolean = false) {
-    super(survey, options, hasUI);
+  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms") {
+    super(survey, options, true);
+    // Directly: applyView is for later view switches, the plugin resets the fresh model itself.
+    this.setPropertyValueDirectly("view", view);
+    this.useSourceDestinationColumns = this.isSideBySideGrid;
     // The forms view maps every localizable string of the survey copies; the grid view keeps
     // the default ("used strings only") and lets the user switch via the toolbar dropdown.
     if (!this.isSideBySideGrid) {
@@ -29,8 +37,19 @@ export class TranslationSideBySide extends Translation {
   public get isSideBySide(): boolean {
     return true;
   }
+  public get isSideBySideGrid(): boolean {
+    return this.view === "grid";
+  }
+  // The strings grid of the base class is the grid view's surface; the forms view renders
+  // the survey copies instead.
+  protected get hasStringsSurveyUI(): boolean {
+    return this.isSideBySideGrid;
+  }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
+    if (name === "view") {
+      this.applyView();
+    }
     if (name === "sourceLocale" || name === "destinationLocale") {
       if (name === "destinationLocale") {
         this.updateSurveyLocale();
@@ -41,8 +60,35 @@ export class TranslationSideBySide extends Translation {
       this.updateInstancePages();
     }
   }
+  // Rebuilds the editing surface after a view change: the grid view builds the strings grid
+  // over the current survey, the forms view builds the two survey copies.
+  private applyView(): void {
+    if (this.isDisposed) return;
+    this.useSourceDestinationColumns = this.isSideBySideGrid;
+    if (this.isSideBySideGrid) {
+      this.disposeInstances();
+      if (this.showAllStrings) {
+        this.showAllStrings = false; // its reset builds the grid
+      } else {
+        this.reset();
+      }
+    } else {
+      this.showAllStrings = true;
+      this.rebuildInstances();
+    }
+  }
   public rebuildInstances(): void {
     if (this.isDisposed) return;
+    if (this.isSideBySideGrid) {
+      // No survey copies to rebuild - re-create the grid over the current survey, dropping
+      // a page filter that no longer belongs to it (survey replaced, structural undo).
+      if (!!this.filteredPage && this.survey.pages.indexOf(this.filteredPage) < 0) {
+        this.filteredPage = null; // the property's onSet rebuilds the grid
+        return;
+      }
+      this.reset();
+      return;
+    }
     const wasSyncing = this._syncing;
     this._syncing = true;
     try {
@@ -65,11 +111,23 @@ export class TranslationSideBySide extends Translation {
   // Called (through the plugin's onDesignerSurveyPropertyChanged hook) when the real survey changes:
   // undo/redo rollbacks or any external modification.
   public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
-    if (this._syncing || this.isDisposed || !this.destinationSurvey) return;
+    if (this._syncing || this.isDisposed) return;
     if (obj === this.survey && propName === "locale") {
       this.followSurveyLocale();
       return;
     }
+    if (this.isSideBySideGrid) {
+      if (!this.getLocStrByName(obj, propName)) {
+        // Not a localizable string - a structural change (element added/removed by undo/redo, etc.).
+        this.rebuildInstances();
+        return;
+      }
+      // A localizable string changed on the real survey (an undo/redo rollback or an external
+      // edit): refresh the grid cells.
+      this.updateStringsSurveyData();
+      return;
+    }
+    if (!this.destinationSurvey) return;
     const realLocStr = this.getLocStrByName(obj, propName);
     const copies = !!realLocStr ? this.byRealLocStr.get(realLocStr) : undefined;
     if (!copies) {
@@ -118,6 +176,34 @@ export class TranslationSideBySide extends Translation {
     const current = item.locString.getLocaleText(locale) || "";
     if ((newText || "") === current) return;
     this.doUndoableAction(new UndoRedoLocaleTextAction(item, locale, newText), "translation changed");
+  }
+  // Routes grid edits through the creator's undo/redo stack - the base implementation writes
+  // directly into the localizable string and would bypass it.
+  protected setItemLocText(item: TranslationItem, locale: string, text: string): void {
+    if (!this.isSideBySideGrid) {
+      super.setItemLocText(item, locale, text);
+      return;
+    }
+    this._syncing = true;
+    try {
+      this.performItemLocTextAction(item, locale, text);
+    } finally {
+      this._syncing = false;
+    }
+  }
+  // The grid can be scoped to a single page; CSV export must still cover the whole survey,
+  // exactly like the forms view does.
+  public exportToCSV(): string {
+    if (!this.isSideBySideGrid) return super.exportToCSV();
+    const translation = new Translation(this.survey, this.options, false);
+    translation.showAllStrings = true;
+    translation.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
+    translation.localeInitialVisibleCallback = this.localeInitialVisibleCallback;
+    try {
+      return translation.exportToCSV();
+    } finally {
+      translation.dispose();
+    }
   }
   // Keeps the vertical scrollbars of the two panes in sync. The UI components pass their
   // scrollable containers here; passing null/undefined (on unmount) detaches the listener.
@@ -329,60 +415,9 @@ export class TranslationSideBySide extends Translation {
 // The grid alternative of the side-by-side mode: instead of two rendered survey panes it shows
 // the strings grid of the base Translation class with a source and a destination locale column.
 // Page filtering (filteredPage) and the all/used strings filter work as in the standard mode.
+// Kept as a constructor shortcut - the behavior lives in TranslationSideBySide's "grid" view.
 export class TranslationSideBySideGrid extends TranslationSideBySide {
   constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null) {
-    super(survey, options, true);
-    this.useSourceDestinationColumns = true;
-  }
-  public get isSideBySideGrid(): boolean {
-    return true;
-  }
-  // The grid view has no survey copies to rebuild - re-create the grid over the current survey,
-  // dropping a page filter that no longer belongs to it (survey replaced, structural undo).
-  public rebuildInstances(): void {
-    if (this.isDisposed) return;
-    if (!!this.filteredPage && this.survey.pages.indexOf(this.filteredPage) < 0) {
-      this.filteredPage = null; // the property's onSet rebuilds the grid
-      return;
-    }
-    this.reset();
-  }
-  public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
-    if (this._syncing || this.isDisposed) return;
-    if (obj === this.survey && propName === "locale") {
-      this.followSurveyLocale();
-      return;
-    }
-    if (!this.getLocStrByName(obj, propName)) {
-      // Not a localizable string - a structural change (element added/removed by undo/redo, etc.).
-      this.rebuildInstances();
-      return;
-    }
-    // A localizable string changed on the real survey (an undo/redo rollback or an external
-    // edit): refresh the grid cells.
-    this.updateStringsSurveyData();
-  }
-  // Routes grid edits through the creator's undo/redo stack - the base implementation writes
-  // directly into the localizable string and would bypass it.
-  protected setItemLocText(item: TranslationItem, locale: string, text: string): void {
-    this._syncing = true;
-    try {
-      this.performItemLocTextAction(item, locale, text);
-    } finally {
-      this._syncing = false;
-    }
-  }
-  // The grid can be scoped to a single page; CSV export must still cover the whole survey,
-  // exactly like the forms view does.
-  public exportToCSV(): string {
-    const translation = new Translation(this.survey, this.options, false);
-    translation.showAllStrings = true;
-    translation.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
-    translation.localeInitialVisibleCallback = this.localeInitialVisibleCallback;
-    try {
-      return translation.exportToCSV();
-    } finally {
-      translation.dispose();
-    }
+    super(survey, options, "grid");
   }
 }

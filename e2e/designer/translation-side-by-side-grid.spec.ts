@@ -86,6 +86,25 @@ test.describe(title, () => {
     expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1 neu");
   });
 
+  test("view switcher: the toolbar dropdown switches between the grid and the forms views", async ({ page }) => {
+    await openGridTranslation(page);
+    await expect(getBarItemByTitle(page, "Grid View")).toBeVisible();
+
+    await getBarItemByTitle(page, "Grid View").click();
+    await getListItemByText(page, "Form View").click();
+    await expect(page.locator(".st-side-by-side__source")).toBeVisible();
+    await expect(page.locator(".st-side-by-side__target")).toBeVisible();
+    await expect(page.locator(".st-strings")).toHaveCount(0);
+    // The locales chosen in the toolbar survive the switch.
+    await expect(getBarItemByTitle(page, "Default (English)")).toBeVisible();
+    await expect(getBarItemByTitle(page, "Deutsch")).toBeVisible();
+
+    await getBarItemByTitle(page, "Form View").click();
+    await getListItemByText(page, "Grid View").click();
+    await expect(page.locator(".st-strings")).toBeVisible();
+    await expect(page.locator(".st-side-by-side__source")).toHaveCount(0);
+  });
+
   test("page dropdown: All Pages by default, selecting a page scopes the grid", async ({ page }) => {
     await openGridTranslation(page);
     // All Pages: the first "Title" row belongs to q1 from page1.
