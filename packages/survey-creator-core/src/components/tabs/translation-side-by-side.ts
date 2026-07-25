@@ -159,11 +159,24 @@ export class TranslationSideBySide extends Translation {
       this.makeSurveyIdSpaceUnique(survey);
       survey.setDesignMode(true);
       survey.lazyRenderEnabled = true;
+      // The panes show the navigation buttons the runtime survey would show: the callback
+      // gets the final say over the design-mode guard.
+      survey.isNavigationButtonsShowingCallback = (show: string): string => show;
+      // Required questions must not block Next while navigating the panes.
+      survey.validationEnabled = false;
     });
   }
   private setupSourceSurvey(survey: SurveyModel): void {
     // No renderer at all: suppresses the built-in design-mode string editor, the source pane is read-only.
     survey.getRendererForString = (): string => undefined;
+    // Completing or previewing the copy would swap the pane away from the translation surface.
+    this.suppressNavigationActions(survey, ["sv-nav-preview", "sv-nav-complete"]);
+    // Prev/Next/Start navigate the source copy for real; the destination pane and the page
+    // dropdown follow through the selectedPageName observer.
+    survey.onCurrentPageChanged.add((sender: SurveyModel): void => {
+      if (this.isDisposed || !sender.currentPage) return;
+      this.selectedPageName = sender.currentPage.name;
+    });
   }
   private setupDestinationSurvey(survey: SurveyModel): void {
     const creator = this.creatorModel;
@@ -181,6 +194,16 @@ export class TranslationSideBySide extends Translation {
     survey.onPropertyValueChangedCallback = (name: string, oldValue: any, newValue: any, sender: Base): void => {
       this.forwardDestinationChange(name, sender);
     };
+    // Clicking a destination nav button means "edit this caption" - it must never navigate,
+    // preview or complete. Page changes reach this pane only through selectedPageName.
+    this.suppressNavigationActions(survey,
+      ["sv-nav-start", "sv-nav-prev", "sv-nav-next", "sv-nav-preview", "sv-nav-complete"]);
+  }
+  private suppressNavigationActions(survey: SurveyModel, ids: Array<string>): void {
+    ids.forEach(id => {
+      const action = survey.navigationBar.getActionById(id);
+      if (!!action) action.action = (): void => {};
+    });
   }
   // The creator instance when the model is created by the translation plugin. The options object
   // is checked structurally so the model stays constructible with EmptySurveyCreatorOptions in tests.
@@ -194,6 +217,7 @@ export class TranslationSideBySide extends Translation {
       survey.getRendererForString = undefined;
       survey.getRendererContextForString = undefined;
       survey.onPropertyValueChangedCallback = undefined;
+      survey.isNavigationButtonsShowingCallback = undefined;
       survey.dispose();
     });
     this.sourceSurvey = undefined;
