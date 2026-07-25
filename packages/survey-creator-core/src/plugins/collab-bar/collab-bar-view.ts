@@ -1,4 +1,4 @@
-import { DomDocumentHelper } from "survey-core";
+import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { JournalOp } from "../journal/journal-record";
 import { describeRecord } from "../journal/journal-describe";
 import { presenceInitials } from "../presence/presence-state";
@@ -65,6 +65,9 @@ const FONT_TEXT_STRONG = "600 16px/24px 'Open Sans', system-ui, sans-serif";
 
 /** Above the creator's flyout sidebar (z-index 1000, later in the DOM). */
 const POPOVER_Z_INDEX = 1100;
+
+/** Inset of the docked Version History panel from the viewport edges, px. */
+const PANEL_GAP = 12;
 
 const STATUS_COLORS: Record<CollabBarStatus, string> = {
   connecting: "#b78600",
@@ -495,24 +498,29 @@ interface IWindow {
 
 /**
  * Right-docked floating panel for Version History. Closes on X or Escape; the
- * minimize button collapses it to just the header. No backdrop -- the Creator
- * stays usable alongside it. Mounts into `container` (the themed creator root)
- * when given, else the body; position:fixed keeps the viewport geometry either way.
+ * minimize button collapses it to just the header; dragging the header tears
+ * the panel off the dock and floats it (clamped to the viewport). No backdrop
+ * -- the Creator stays usable alongside it. Mounts into `container` (the
+ * themed creator root) when given, else the body; position:fixed keeps the
+ * viewport geometry either way.
  */
 function createPanel(title: string, container?: HTMLElement): IWindow {
   const panel = doc().createElement("div");
   panel.className = "collab-version-panel";
   panel.style.cssText =
-    "position:fixed;top:12px;right:12px;bottom:12px;width:360px;max-width:calc(100vw - 24px);z-index:2000;" +
+    `position:fixed;top:${PANEL_GAP}px;right:${PANEL_GAP}px;bottom:${PANEL_GAP}px;width:360px;` +
+    `max-width:calc(100vw - ${PANEL_GAP * 2}px);z-index:2000;` +
     `background:${C.sheet};color:${C.fg};border:1px solid ${C.border};border-radius:12px;` +
     "box-shadow:0 6px 20px rgba(17,16,20,0.6);display:flex;flex-direction:column;" +
     `box-sizing:border-box;overflow:hidden;font:${FONT_TEXT};`;
 
-  // Header: title + centered drag affordance + minimize + close.
+  // Header: title + centered drag affordance + minimize + close. The header
+  // itself is the drag handle.
   const header = doc().createElement("div");
+  header.className = "collab-version-header";
   header.style.cssText =
     "position:relative;display:flex;align-items:center;gap:4px;padding:12px;" +
-    `border-bottom:1px solid ${C.border};flex:none;`;
+    `border-bottom:1px solid ${C.border};flex:none;cursor:grab;touch-action:none;user-select:none;`;
   const titleEl = doc().createElement("div");
   titleEl.textContent = title;
   titleEl.style.cssText = `flex:1 0 0;min-width:0;font:${FONT_TEXT_STRONG};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;`;
@@ -536,19 +544,86 @@ function createPanel(title: string, container?: HTMLElement): IWindow {
     if (closed) return;
     closed = true;
     doc().removeEventListener("keydown", onKeyDown);
+    DomWindowHelper.getWindow().removeEventListener("resize", onResize);
     panel.remove();
     for (const h of closeHandlers) h();
   };
   const onKeyDown = (e: KeyboardEvent): void => { if (e.key === "Escape") close(); };
   closeBtn.addEventListener("click", close);
   let minimized = false;
+  let dragged = false; // the panel left its right-docked position
+  let expandedHeight = 0; // last measured expanded height, for un-minimize while floating
+
+  const moveTo = (x: number, y: number): void => {
+    // Keep the whole panel inside the viewport (the min bound wins when the
+    // viewport is smaller than the panel).
+    const maxX = DomWindowHelper.getInnerWidth() - panel.offsetWidth - PANEL_GAP;
+    const maxY = DomWindowHelper.getInnerHeight() - panel.offsetHeight - PANEL_GAP;
+    panel.style.left = Math.max(PANEL_GAP, Math.min(x, maxX)) + "px";
+    panel.style.top = Math.max(PANEL_GAP, Math.min(y, maxY)) + "px";
+  };
+  // Give a floating panel its expanded height back, pulling the top up when
+  // there is not enough room below the current position.
+  const restoreFloatingHeight = (): void => {
+    const vh = DomWindowHelper.getInnerHeight();
+    const height = Math.min(expandedHeight || vh - PANEL_GAP * 2, vh - PANEL_GAP * 2);
+    const top = Math.max(PANEL_GAP, Math.min(parseFloat(panel.style.top) || PANEL_GAP, vh - PANEL_GAP - height));
+    panel.style.top = top + "px";
+    panel.style.height = height + "px";
+  };
   minimizeBtn.addEventListener("click", () => {
     minimized = !minimized;
     body.style.display = minimized ? "none" : "block";
-    // Collapse the panel to its header when minimized.
-    panel.style.bottom = minimized ? "auto" : "12px";
+    if (!dragged) {
+      // Docked: collapse the panel to its header / restore the full-height dock.
+      panel.style.bottom = minimized ? "auto" : PANEL_GAP + "px";
+    } else if (minimized) {
+      panel.style.height = "auto"; // collapse the floating panel to its header
+    } else {
+      restoreFloatingHeight();
+    }
   });
+  // Dragging: the header is the handle; its buttons keep their own behavior.
+  header.addEventListener("pointerdown", (e: PointerEvent) => {
+    if (e.button !== 0 || (e.target as HTMLElement).closest("button")) return;
+    const rect = panel.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+    // Undock: switch the (top,right,bottom) anchors to an explicit
+    // (top,left[,height]) box at the current position, so the panel can move.
+    dragged = true;
+    if (!minimized && rect.height) expandedHeight = rect.height;
+    panel.style.left = rect.left + "px";
+    panel.style.top = rect.top + "px";
+    panel.style.right = "auto";
+    panel.style.bottom = "auto";
+    panel.style.height = !minimized && rect.height ? rect.height + "px" : "auto";
+    header.style.cursor = "grabbing";
+    // Route the whole gesture to the header even when the pointer outruns the
+    // panel (jsdom has neither pointerId nor setPointerCapture -- skip there).
+    if (typeof header.setPointerCapture === "function" && typeof e.pointerId === "number") {
+      header.setPointerCapture(e.pointerId);
+    }
+    const onMove = (ev: PointerEvent): void => moveTo(ev.clientX - offsetX, ev.clientY - offsetY);
+    const stopDrag = (): void => {
+      header.removeEventListener("pointermove", onMove);
+      header.removeEventListener("pointerup", stopDrag);
+      header.removeEventListener("pointercancel", stopDrag);
+      header.style.cursor = "grab";
+    };
+    header.addEventListener("pointermove", onMove);
+    header.addEventListener("pointerup", stopDrag);
+    header.addEventListener("pointercancel", stopDrag);
+    e.preventDefault(); // no text selection while dragging
+  });
+  // A floating panel must stay reachable when the browser window shrinks.
+  const onResize = (): void => {
+    if (!dragged) return;
+    if (!minimized) restoreFloatingHeight();
+    moveTo(parseFloat(panel.style.left) || PANEL_GAP, parseFloat(panel.style.top) || PANEL_GAP);
+  };
   doc().addEventListener("keydown", onKeyDown);
+  DomWindowHelper.getWindow().addEventListener("resize", onResize);
   (container ?? DomDocumentHelper.getBody()).appendChild(panel);
 
   return { body, close, onClose: (h) => closeHandlers.push(h) };

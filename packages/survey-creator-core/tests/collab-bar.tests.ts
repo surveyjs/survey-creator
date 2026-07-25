@@ -214,6 +214,93 @@ test("collab-bar: host-specific elements are hidden without options", async (): 
   }
 });
 
+// jsdom reports all-zero client rects, so the drag offset equals the pointer-down
+// coordinates and the resulting left/top equal the pointer delta.
+function dragHeader(header: HTMLElement, from: { x: number, y: number }, to: Array<{ x: number, y: number }>): void {
+  header.dispatchEvent(new MouseEvent("pointerdown", { clientX: from.x, clientY: from.y, bubbles: true }));
+  for (const p of to) {
+    header.dispatchEvent(new MouseEvent("pointermove", { clientX: p.x, clientY: p.y, bubbles: true }));
+  }
+  header.dispatchEvent(new MouseEvent("pointerup", { bubbles: true }));
+}
+
+test("collab-bar: version history panel drags by its header and clamps to the viewport", async (): Promise<any> => {
+  const { bar, cleanup } = setup();
+  try {
+    await tick();
+    bar.setHistory([]);
+    barButton(bar, "Show Version History")!.click();
+    const panel = <HTMLElement>document.body.querySelector(".collab-version-panel");
+    const header = <HTMLElement>panel.querySelector(".collab-version-header");
+    expect(header).toBeTruthy();
+
+    header.dispatchEvent(new MouseEvent("pointerdown", { clientX: 100, clientY: 20, bubbles: true }));
+    header.dispatchEvent(new MouseEvent("pointermove", { clientX: 160, clientY: 100, bubbles: true }));
+    // Undocked at the pointer delta.
+    expect(panel.style.left).toBe("60px");
+    expect(panel.style.top).toBe("80px");
+    expect(panel.style.right).toBe("auto");
+    expect(panel.style.bottom).toBe("auto");
+    // Dragging past the top-left corner clamps to the 12px viewport inset.
+    header.dispatchEvent(new MouseEvent("pointermove", { clientX: 0, clientY: 0, bubbles: true }));
+    expect(panel.style.left).toBe("12px");
+    expect(panel.style.top).toBe("12px");
+    header.dispatchEvent(new MouseEvent("pointerup", { bubbles: true }));
+    // The gesture ended: further moves must not drag the panel.
+    header.dispatchEvent(new MouseEvent("pointermove", { clientX: 300, clientY: 300, bubbles: true }));
+    expect(panel.style.left).toBe("12px");
+    expect(panel.style.top).toBe("12px");
+  } finally {
+    cleanup();
+  }
+});
+
+test("collab-bar: header buttons do not start a drag", async (): Promise<any> => {
+  const { bar, cleanup } = setup();
+  try {
+    await tick();
+    bar.setHistory([]);
+    barButton(bar, "Show Version History")!.click();
+    const panel = <HTMLElement>document.body.querySelector(".collab-version-panel");
+    const closeBtn = <HTMLElement>panel.querySelector("button[aria-label='Close']");
+    closeBtn.dispatchEvent(new MouseEvent("pointerdown", { clientX: 100, clientY: 20, bubbles: true }));
+    closeBtn.dispatchEvent(new MouseEvent("pointermove", { clientX: 160, clientY: 100, bubbles: true }));
+    // Still docked: pointer-down on a button is not a drag.
+    expect(panel.style.left).toBe("");
+    expect(panel.style.right).toBe("12px");
+  } finally {
+    cleanup();
+  }
+});
+
+test("collab-bar: dragged panel minimizes to its header and restores floating in place", async (): Promise<any> => {
+  const { bar, cleanup } = setup();
+  try {
+    await tick();
+    bar.setHistory([]);
+    barButton(bar, "Show Version History")!.click();
+    const panel = <HTMLElement>document.body.querySelector(".collab-version-panel");
+    const header = <HTMLElement>panel.querySelector(".collab-version-header");
+    dragHeader(header, { x: 100, y: 20 }, [{ x: 160, y: 100 }]);
+    expect(panel.style.left).toBe("60px");
+
+    const minimizeBtn = <HTMLButtonElement>panel.querySelector("button[aria-label='Minimize']");
+    minimizeBtn.click();
+    // Floating + minimized: collapsed to the header, still undocked.
+    expect(panel.style.height).toBe("auto");
+    expect(panel.style.bottom).toBe("auto");
+    minimizeBtn.click();
+    // Restored floating: keeps left, gets an explicit height fitted to the
+    // viewport (jsdom: 768 - 2*12); the top is pulled up to make it fit.
+    expect(panel.style.left).toBe("60px");
+    expect(panel.style.bottom).toBe("auto");
+    expect(panel.style.top).toBe("12px");
+    expect(panel.style.height).toBe("744px");
+  } finally {
+    cleanup();
+  }
+});
+
 test("collab-bar: dispose removes the strip and any open windows", async (): Promise<any> => {
   const { bar, presence, root, cleanup } = setup();
   try {
