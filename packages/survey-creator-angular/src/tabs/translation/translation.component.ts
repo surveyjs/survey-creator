@@ -20,8 +20,8 @@ export class TranslationTabComponent extends BaseAngular<Translation> {
   @ViewChild("sourceScrollContainer") set sourceScrollContainer(ref: ElementRef<HTMLElement> | undefined) {
     this.sideBySideModel?.setSourceScrollElement(ref ? ref.nativeElement : undefined as any);
   }
-  @ViewChild("destinationScrollContainer") set destinationScrollContainer(ref: ElementRef<HTMLElement> | undefined) {
-    this.sideBySideModel?.setDestinationScrollElement(ref ? ref.nativeElement : undefined as any);
+  @ViewChild("targetScrollContainer") set targetScrollContainer(ref: ElementRef<HTMLElement> | undefined) {
+    this.sideBySideModel?.setTargetScrollElement(ref ? ref.nativeElement : undefined as any);
   }
   // The strings-grid model: the tab model itself in the default mode and in the side-by-side grid view.
   public get stringsModel(): Translation | undefined {

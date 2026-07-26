@@ -1,33 +1,41 @@
 import {
-  Base, ILocalizableString, ItemValue, LocalizableString,
+  Base, ILocalizableString, ItemValue, LocalizableString, QuestionDropdownModel,
   Serializer, SurveyModel, property, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
+import { editorLocalization } from "../../editorLocalization";
 import { editableStringRendererName } from "../../creator-base";
+import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
+import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { IUndoRedoAction, UndoRedoLocaleTextAction } from "../../plugins/undo-redo/undo-redo-manager";
 import { Translation, TranslationGroup, TranslationItem } from "./translation";
+
+// The default locale is stored as "" on the model; the settings survey dropdowns need a
+// non-empty value for it (an empty dropdown value would render as "no selection").
+const defaultLocaleSettingValue = "default";
 
 export class TranslationSideBySide extends Translation {
   @property() selectedPageName: string;
   @property() sourceSurvey: SurveyModel;
-  @property() destinationSurvey: SurveyModel;
+  @property() targetSurvey: SurveyModel;
   // The editing surface of the side-by-side mode: "forms" - two design-mode survey copies
-  // rendered side by side, "grid" - the strings grid with a source and a destination column.
+  // rendered side by side, "grid" - the strings grid with a source and a target column.
   // Changing it rebuilds the surface in place on the same model, so the locales chosen in
-  // the toolbar survive the switch.
+  // the property grid survive the switch.
   @property({ defaultValue: "forms" }) view: "forms" | "grid";
   // Wired by TabTranslationPlugin to record the action in the creator's undo/redo stack.
   public doUndoableAction: (action: IUndoRedoAction, title: string) => void = (action) => action.apply();
 
-  private byDstLocStr = new Map<ILocalizableString, TranslationItem>();
+  private byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
   private byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
   protected _syncing: boolean = false;
+  private _updatingSettingsSurvey: boolean = false;
 
   constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms") {
     super(survey, options, true);
     // Directly: applyView is for later view switches, the plugin resets the fresh model itself.
     this.setPropertyValueDirectly("view", view);
-    this.useSourceDestinationColumns = this.isSideBySideGrid;
+    this.useSourceTargetColumns = this.isSideBySideGrid;
     // The forms view maps every localizable string of the survey copies; the grid view keeps
     // the default ("used strings only") and lets the user switch via the toolbar dropdown.
     if (!this.isSideBySideGrid) {
@@ -45,16 +53,114 @@ export class TranslationSideBySide extends Translation {
   protected get hasStringsSurveyUI(): boolean {
     return this.isSideBySideGrid;
   }
+  // The side-by-side property grid: a form/grid view switcher plus the source and target
+  // language dropdowns (the standard mode shows the languages matrix instead).
+  protected createSettingsSurvey(): SurveyModel {
+    const json = this.getSideBySideSettingsSurveyJSON();
+    setSurveyJSONForPropertyGrid(json);
+    const res = this.options.createSurvey(json, "translation_settings", this, (survey: SurveyModel): void => {
+      survey.css = propertyGridCss;
+      survey.css.root += " st-properties";
+      survey.rootCss += " st-properties";
+    });
+    res.onValueChanged.add((sender, options) => {
+      if (this._updatingSettingsSurvey || this.isDisposed) return;
+      if (options.name === "viewMode") {
+        this.view = options.value === "grid" ? "grid" : "forms";
+      }
+      if (options.name === "sourceLocale") {
+        this.sourceLocale = this.getLocaleFromSettingValue(options.value);
+      }
+      if (options.name === "targetLocale") {
+        this.targetLocale = this.getLocaleFromSettingValue(options.value);
+      }
+    });
+    return res;
+  }
+  private getSideBySideSettingsSurveyJSON(): any {
+    return {
+      elements: [
+        {
+          type: "buttongroup",
+          name: "viewMode",
+          titleLocation: "hidden",
+          choices: [
+            { value: "forms", text: editorLocalization.getString("ed.translationSideBySideViewForms") },
+            { value: "grid", text: editorLocalization.getString("ed.translationSideBySideViewGrid") }
+          ]
+        },
+        {
+          type: "dropdown",
+          name: "sourceLocale",
+          title: editorLocalization.getString("ed.translationSourceLanguage"),
+          allowClear: false
+        },
+        {
+          type: "dropdown",
+          name: "targetLocale",
+          title: editorLocalization.getString("ed.translationTargetLanguage"),
+          allowClear: false
+        }
+      ]
+    };
+  }
+  // Pushes the model state (view, locales and the locale choice lists) into the settings survey.
+  // Called on activation and on every related model property change.
+  public updateSettingsSurveyValues(): void {
+    const survey = this.settingsSurvey;
+    if (!survey || this.isDisposed) return;
+    this._updatingSettingsSurvey = true;
+    try {
+      const locales = this.getSideBySideLocales();
+      const source = this.sourceLocale || "";
+      const target = this.targetLocale || "";
+      this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("sourceLocale"), locales, source, target);
+      this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("targetLocale"), locales, target, source);
+      const viewQuestion = survey.getQuestionByName("viewMode");
+      if (!!viewQuestion) viewQuestion.value = this.view;
+    } finally {
+      this._updatingSettingsSurvey = false;
+    }
+  }
+  // Each dropdown's list hides the locale currently selected in the other one, except its own
+  // selection - by default both sides can be the default language.
+  private updateLocaleQuestion(question: QuestionDropdownModel, locales: Array<string>, selected: string, excluded: string): void {
+    if (!question) return;
+    question.choices = locales.filter(loc => loc !== excluded || loc === selected)
+      .map(loc => new ItemValue(this.toLocaleSettingValue(loc), this.getLocaleName(loc)));
+    question.value = this.toLocaleSettingValue(selected);
+  }
+  // The default locale is represented by "" everywhere in this mode; its explicit name
+  // (surveyLocalization.defaultLocale, e.g. "en") is filtered out to avoid a duplicated entry.
+  public getSideBySideLocales(): Array<string> {
+    const res: Array<string> = [""];
+    const add = (loc: string): void => {
+      if (!!loc && loc !== surveyLocalization.defaultLocale && res.indexOf(loc) < 0) res.push(loc);
+    };
+    this.getSurveyLocales()[0].forEach((item: ItemValue) => add(item.value));
+    if (!!this.survey) {
+      this.survey.getUsedLocales().forEach(loc => add(loc));
+    }
+    return res;
+  }
+  private toLocaleSettingValue(locale: string): string {
+    return locale || defaultLocaleSettingValue;
+  }
+  private getLocaleFromSettingValue(value: any): string {
+    return !value || value === defaultLocaleSettingValue ? "" : <string>value;
+  }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "view") {
       this.applyView();
+      this.updateSettingsSurveyValues();
     }
-    if (name === "sourceLocale" || name === "destinationLocale") {
-      if (name === "destinationLocale") {
+    if (name === "sourceLocale" || name === "targetLocale") {
+      if (name === "targetLocale") {
         this.updateSurveyLocale();
       }
       this.updateInstanceLocales();
+      this.updateSettingsSurveyValues();
     }
     if (name === "selectedPageName") {
       this.updateInstancePages();
@@ -64,7 +170,7 @@ export class TranslationSideBySide extends Translation {
   // over the current survey, the forms view builds the two survey copies.
   private applyView(): void {
     if (this.isDisposed) return;
-    this.useSourceDestinationColumns = this.isSideBySideGrid;
+    this.useSourceTargetColumns = this.isSideBySideGrid;
     if (this.isSideBySideGrid) {
       this.disposeInstances();
       if (this.showAllStrings) {
@@ -98,9 +204,9 @@ export class TranslationSideBySide extends Translation {
       }
       const json = this.survey.toJSON();
       this.sourceSurvey = this.createInstance(json, "translation_source");
-      this.destinationSurvey = this.createInstance(json, "translation_target");
+      this.targetSurvey = this.createInstance(json, "translation_target");
       this.setupSourceSurvey(this.sourceSurvey);
-      this.setupDestinationSurvey(this.destinationSurvey);
+      this.setupTargetSurvey(this.targetSurvey);
       this.buildMappings();
       this.updateInstanceLocales();
       this.updateInstancePages();
@@ -127,7 +233,7 @@ export class TranslationSideBySide extends Translation {
       this.updateStringsSurveyData();
       return;
     }
-    if (!this.destinationSurvey) return;
+    if (!this.targetSurvey) return;
     const realLocStr = this.getLocStrByName(obj, propName);
     const copies = !!realLocStr ? this.byRealLocStr.get(realLocStr) : undefined;
     if (!copies) {
@@ -142,13 +248,13 @@ export class TranslationSideBySide extends Translation {
       this._syncing = false;
     }
   }
-  // The destination copy's onPropertyValueChangedCallback: forwards inline edits to the real survey.
-  public forwardDestinationChange(name: string, sender: Base): void {
+  // The target copy's onPropertyValueChangedCallback: forwards inline edits to the real survey.
+  public forwardTargetChange(name: string, sender: Base): void {
     if (this._syncing || this.isDisposed) return;
     const copyLocStr = this.getLocStrByName(sender, name);
     if (!copyLocStr) return;
-    const item = this.byDstLocStr.get(copyLocStr);
-    const locale = this.destinationLocale || "";
+    const item = this.byTargetLocStr.get(copyLocStr);
+    const locale = this.targetLocale || "";
     if (!item) {
       // An editable string the mapping does not know about - the trees drifted, self-heal.
       // The value typed into the copy cannot be forwarded reliably, so it is dropped with the rebuild.
@@ -210,7 +316,7 @@ export class TranslationSideBySide extends Translation {
   public setSourceScrollElement(element: HTMLElement): void {
     this.setScrollElement(0, element);
   }
-  public setDestinationScrollElement(element: HTMLElement): void {
+  public setTargetScrollElement(element: HTMLElement): void {
     this.setScrollElement(1, element);
   }
   private scrollElements: Array<HTMLElement> = [undefined, undefined];
@@ -236,7 +342,7 @@ export class TranslationSideBySide extends Translation {
   }
   public dispose(): void {
     this.setSourceScrollElement(undefined);
-    this.setDestinationScrollElement(undefined);
+    this.setTargetScrollElement(undefined);
     this.disposeInstances();
     this.doUndoableAction = undefined;
     super.dispose();
@@ -258,14 +364,14 @@ export class TranslationSideBySide extends Translation {
     survey.getRendererForString = (): string => undefined;
     // Completing or previewing the copy would swap the pane away from the translation surface.
     this.suppressNavigationActions(survey, ["sv-nav-preview", "sv-nav-complete"]);
-    // Prev/Next/Start navigate the source copy for real; the destination pane and the page
+    // Prev/Next/Start navigate the source copy for real; the target pane and the page
     // dropdown follow through the selectedPageName observer.
     survey.onCurrentPageChanged.add((sender: SurveyModel): void => {
       if (this.isDisposed || !sender.currentPage) return;
       this.selectedPageName = sender.currentPage.name;
     });
   }
-  private setupDestinationSurvey(survey: SurveyModel): void {
+  private setupTargetSurvey(survey: SurveyModel): void {
     const creator = this.creatorModel;
     if (!!creator) {
       survey.getRendererForString = (element: Base, name: string, item?: ItemValue): string => {
@@ -279,9 +385,9 @@ export class TranslationSideBySide extends Translation {
       };
     }
     survey.onPropertyValueChangedCallback = (name: string, oldValue: any, newValue: any, sender: Base): void => {
-      this.forwardDestinationChange(name, sender);
+      this.forwardTargetChange(name, sender);
     };
-    // Clicking a destination nav button means "edit this caption" - it must never navigate,
+    // Clicking a target nav button means "edit this caption" - it must never navigate,
     // preview or complete. Page changes reach this pane only through selectedPageName.
     this.suppressNavigationActions(survey,
       ["sv-nav-start", "sv-nav-prev", "sv-nav-next", "sv-nav-preview", "sv-nav-complete"]);
@@ -299,7 +405,7 @@ export class TranslationSideBySide extends Translation {
     return !!options && typeof options.isStringInplacelyEditable === "function" ? options : undefined;
   }
   private disposeInstances(): void {
-    [this.sourceSurvey, this.destinationSurvey].forEach(survey => {
+    [this.sourceSurvey, this.targetSurvey].forEach(survey => {
       if (!survey) return;
       survey.getRendererForString = undefined;
       survey.getRendererContextForString = undefined;
@@ -308,16 +414,16 @@ export class TranslationSideBySide extends Translation {
       survey.dispose();
     });
     this.sourceSurvey = undefined;
-    this.destinationSurvey = undefined;
-    this.byDstLocStr = new Map<ILocalizableString, TranslationItem>();
+    this.targetSurvey = undefined;
+    this.byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
     this.byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
   }
   // Keeps the real survey's locale in sync with the language being translated. An empty
-  // destination means the default language; an explicit default-locale name on the survey
+  // target means the default language; an explicit default-locale name on the survey
   // ("en") is the same language, so it is left untouched in that case.
   private updateSurveyLocale(): void {
     if (!this.survey || this.isDisposed) return;
-    const locale = this.destinationLocale || "";
+    const locale = this.targetLocale || "";
     const current = this.survey.locale || "";
     if (current === locale || (!locale && current === surveyLocalization.defaultLocale)) return;
     const wasSyncing = this._syncing;
@@ -331,11 +437,11 @@ export class TranslationSideBySide extends Translation {
   private updateInstanceLocales(): void {
     const wasSyncing = this._syncing;
     // Changing the locale fires strChanged on every localizable string of the copy;
-    // the flag keeps that cascade out of forwardDestinationChange.
+    // the flag keeps that cascade out of forwardTargetChange.
     this._syncing = true;
     try {
       if (!!this.sourceSurvey)this.sourceSurvey.locale = this.sourceLocale || "";
-      if (!!this.destinationSurvey)this.destinationSurvey.locale = this.destinationLocale || "";
+      if (!!this.targetSurvey)this.targetSurvey.locale = this.targetLocale || "";
     } finally {
       this._syncing = wasSyncing;
     }
@@ -343,24 +449,24 @@ export class TranslationSideBySide extends Translation {
   private updateInstancePages(): void {
     const name = this.selectedPageName;
     if (!name) return;
-    [this.sourceSurvey, this.destinationSurvey].forEach(survey => {
+    [this.sourceSurvey, this.targetSurvey].forEach(survey => {
       if (!survey) return;
       const page = survey.getPageByName(name);
       if (!!page) survey.currentPage = page;
     });
   }
   private buildMappings(): void {
-    this.byDstLocStr = new Map<ILocalizableString, TranslationItem>();
+    this.byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
     this.byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
     const realItems = this.collectItems(this.root, new Map<string, TranslationItem>());
-    const dstItems = this.collectItems(this.createCopyRoot(this.destinationSurvey), new Map<string, TranslationItem>());
+    const targetItems = this.collectItems(this.createCopyRoot(this.targetSurvey), new Map<string, TranslationItem>());
     const srcItems = this.collectItems(this.createCopyRoot(this.sourceSurvey), new Map<string, TranslationItem>());
     realItems.forEach((item: TranslationItem, key: string) => {
       const copies = new Array<ILocalizableString>();
-      const dstItem = dstItems.get(key);
-      if (!!dstItem) {
-        this.byDstLocStr.set(dstItem.locString, item);
-        copies.push(dstItem.locString);
+      const targetItem = targetItems.get(key);
+      if (!!targetItem) {
+        this.byTargetLocStr.set(targetItem.locString, item);
+        copies.push(targetItem.locString);
       }
       const srcItem = srcItems.get(key);
       if (!!srcItem) {
@@ -388,7 +494,7 @@ export class TranslationSideBySide extends Translation {
   // An external survey.locale change (an undo/redo rollback) - follow it instead of rebuilding.
   protected followSurveyLocale(): void {
     const locale = this.survey.locale;
-    this.destinationLocale = !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
+    this.targetLocale = !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
   }
   protected getLocStrByName(obj: Base, name: string): ILocalizableString {
     if (!obj) return undefined;
@@ -413,7 +519,7 @@ export class TranslationSideBySide extends Translation {
 }
 
 // The grid alternative of the side-by-side mode: instead of two rendered survey panes it shows
-// the strings grid of the base Translation class with a source and a destination locale column.
+// the strings grid of the base Translation class with a source and a target locale column.
 // Page filtering (filteredPage) and the all/used strings filter work as in the standard mode.
 // Kept as a constructor shortcut - the behavior lives in TranslationSideBySide's "grid" view.
 export class TranslationSideBySideGrid extends TranslationSideBySide {

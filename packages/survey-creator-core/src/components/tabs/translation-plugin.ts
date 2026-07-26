@@ -1,4 +1,4 @@
-import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel, ComputedUpdater, surveyLocalization, ItemValue } from "survey-core";
+import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel, ComputedUpdater, surveyLocalization } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
@@ -13,9 +13,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private mergeLocaleWithDefaultAction: Action;
   private importCsvAction: Action;
   private exportCsvAction: Action;
-  private sourceLocaleAction: Action;
-  private destinationLocaleAction: Action;
-  private sideBySideViewAction: Action;
   private machineTranslationAction: Action;
   private sidebarTab: SidebarPageModel;
   private _showOneCategoryInPropertyGrid: boolean = true;
@@ -148,13 +145,17 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         action.apply();
       }
     };
-    this.sidebarTab.visible = false;
-    this.creator.sidebar.hideSideBarVisibilityControlActions = true;
+    // The property grid hosts the view switcher and the source/target language dropdowns.
+    this.updateSettingsSurvey();
+    this.sidebarTab.componentData = model.settingsSurvey;
+    this.sidebarTab.componentName = "survey-widget";
+    this.creator.sidebar.activePage = this.sidebarTab.id;
 
     model.reset();
 
     model.sourceLocale = "";
-    model.destinationLocale = this.calcDefaultDestinationLocale();
+    model.targetLocale = this.calcDefaultTargetLocale();
+    model.updateSettingsSurveyValues();
 
     this.filterPageAction.visible = true;
     if (this.isSideBySideGrid) {
@@ -169,18 +170,13 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       model.rebuildInstances();
       this.updateSideBySidePagesAction();
     }
-    this.sourceLocaleAction.visible = true;
-    this.destinationLocaleAction.visible = true;
-    this.updateLocaleActions();
-    this.sideBySideViewAction.visible = true;
-    this.updateSideBySideViewAction();
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
     this.machineTranslationAction.visible = this.creator.getHasMachineTranslation();
 
     model.onPropertyChanged.add((sender, options) => {
-      if (options.name === "sourceLocale" || options.name === "destinationLocale") {
-        this.updateLocaleActions();
+      if (options.name === "view") {
+        this.onSideBySideViewChanged();
       }
       if (options.name === "selectedPageName") {
         this.updateSideBySidePagesAction();
@@ -192,6 +188,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         this.updateFilterStrigsAction();
       }
     });
+    this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
+    this.updateTabControl();
   }
   public update(): void {
     if (!this.model) return;
@@ -202,12 +200,12 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       model.selectedPageName = pages.length > 0 ? pages[0].name : "";
       model.rebuildInstances();
       this.updateSideBySidePagesAction();
-      this.updateLocaleActions();
+      model.updateSettingsSurveyValues();
     } else if (this.isSideBySideGrid) {
       this.model.filteredPage = null;
       this.setFilterPageActionItems();
       this.updateFilterPageAction(true);
-      this.updateLocaleActions();
+      (<TranslationSideBySide>this.model).updateSettingsSurveyValues();
     } else {
       this.model.filteredPage = null;
       this.updateFilterPageAction(true);
@@ -227,9 +225,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
-    this.sourceLocaleAction.visible = false;
-    this.destinationLocaleAction.visible = false;
-    this.sideBySideViewAction.visible = false;
     this.machineTranslationAction.visible = false;
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     this.creator.sidebar.header.reset();
@@ -309,18 +304,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.createFilterStringsAction();
     items.push(this.filterStringsAction);
 
-    this.sourceLocaleAction = this.createLocaleDropdownAction("svc-translation-source-locale", "ed.translationSourceLanguage", (locale: string) => {
-      (<TranslationSideBySide>this.model).sourceLocale = locale;
-    });
-    items.push(this.sourceLocaleAction);
-    this.destinationLocaleAction = this.createLocaleDropdownAction("svc-translation-destination-locale", "ed.translationDestinationLanguage", (locale: string) => {
-      (<TranslationSideBySide>this.model).destinationLocale = locale;
-    });
-    items.push(this.destinationLocaleAction);
-
-    this.createSideBySideViewAction();
-    items.push(this.sideBySideViewAction);
-
     this.mergeLocaleWithDefaultAction = new Action({
       id: "svd-translation-merge_locale_withdefault",
       visible: false,
@@ -397,32 +380,12 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       cssClass: "svc-creator-popup",
     }, this.creator);
   }
-  private createSideBySideViewAction() {
-    this.sideBySideViewAction = createDropdownActionModel({
-      id: "svc-translation-side-by-side-view",
-      title: this.getSideBySideViewActionTitle(),
-      visible: false,
-      mode: "small",
-    }, {
-      items: [
-        { id: "forms", locTitleName: "ed.translationSideBySideViewForms" },
-        { id: "grid", locTitleName: "ed.translationSideBySideViewGrid" }
-      ],
-      allowSelection: true,
-      onSelectionChanged: (item: IAction) => {
-        this.setSideBySideView(<"forms" | "grid">item.id);
-      },
-      horizontalPosition: "center",
-      cssClass: "svc-creator-popup",
-    }, this.creator);
-  }
-  // Switches the side-by-side model to the newly selected view. The model rebuilds its editing
-  // surface in place, so the locales chosen in the toolbar survive the switch.
-  private setSideBySideView(view: "forms" | "grid"): void {
-    if (!this.isSideBySide || this.creator.translationSideBySideView === view || !this.model) return;
-    this.creator.translationSideBySideView = view;
+  // The view switcher lives in the property grid; the model changed its view property -
+  // sync the creator option and the toolbar filters that differ between the two views.
+  private onSideBySideViewChanged(): void {
+    if (!this.isSideBySide || !this.model) return;
     const model = <TranslationSideBySide>this.model;
-    model.view = view;
+    this.creator.translationSideBySideView = model.view;
     if (this.isSideBySideGrid) {
       // The page and strings filters work exactly as in the default mode.
       this.setFilterPageActionItems();
@@ -435,33 +398,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       model.selectedPageName = pages.length > 0 ? pages[0].name : "";
       this.updateSideBySidePagesAction();
     }
-    this.updateSideBySideViewAction();
-  }
-  private updateSideBySideViewAction(): void {
-    const id = this.creator.translationSideBySideView === "grid" ? "grid" : "forms";
-    const list = <ListModel>this.sideBySideViewAction.data;
-    list.selectedItem = list.actions.filter((el: IAction) => el.id === id)[0];
-    this.sideBySideViewAction.title = this.getSideBySideViewActionTitle();
-  }
-  private getSideBySideViewActionTitle(): string {
-    const name = this.creator.translationSideBySideView === "grid" ? "Grid" : "Forms";
-    return editorLocalization.getString("ed.translationSideBySideView" + name);
-  }
-  private createLocaleDropdownAction(id: string, tooltipName: string, onSelected: (locale: string) => void): Action {
-    return createDropdownActionModel({
-      id: id,
-      tooltip: editorLocalization.getString(tooltipName),
-      visible: false,
-      mode: "small",
-    }, {
-      items: [],
-      allowSelection: true,
-      onSelectionChanged: (item: IAction) => {
-        onSelected(<string>item.id || "");
-      },
-      horizontalPosition: "center",
-      cssClass: "svc-creator-popup",
-    }, this.creator);
   }
   // The pages dropdown of the forms view: real pages only, no "All Pages" - the panes always
   // show a concrete page. The grid view uses the standard items set by setFilterPageActionItems.
@@ -487,49 +423,17 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       }))
     ), false);
   }
-  private updateLocaleActions(): void {
-    const model = <TranslationSideBySide>this.model;
-    if (!model || !model.isSideBySide) return;
-    const locales = this.getSideBySideLocales(model);
-    const source = model.sourceLocale || "";
-    const destination = model.destinationLocale || "";
-    this.updateLocaleAction(this.sourceLocaleAction, model, locales, source, destination);
-    this.updateLocaleAction(this.destinationLocaleAction, model, locales, destination, source);
-  }
-  // Each dropdown's list hides the locale currently selected in the other one, except its own
-  // selection - by default both sides can be the default language.
-  private updateLocaleAction(action: Action, model: TranslationSideBySide, locales: Array<string>, selected: string, excluded: string): void {
-    const items = locales.filter(loc => loc !== excluded || loc === selected).map(loc => (<IAction>{
-      id: loc || null,
-      title: model.getLocaleName(loc)
-    }));
-    const list = <ListModel>action.data;
-    list.setItems(items, false);
-    const selectedId = selected || null;
-    list.selectedItem = list.actions.filter((el: IAction) => el.id === selectedId)[0];
-    action.title = model.getLocaleName(selected);
-  }
-  // The default locale is represented by "" everywhere in this mode; its explicit name
-  // (surveyLocalization.defaultLocale, e.g. "en") is filtered out to avoid a duplicated entry.
-  private getSideBySideLocales(model: TranslationSideBySide): Array<string> {
-    const res: Array<string> = [""];
-    model.getSurveyLocales()[0].forEach((item: ItemValue) => {
-      const loc = item.value;
-      if (!!loc && loc !== surveyLocalization.defaultLocale && res.indexOf(loc) < 0) res.push(loc);
-    });
-    return res;
-  }
-  // The default destination is survey.locale (the model keeps them in sync while the tab is
+  // The default target is survey.locale (the model keeps them in sync while the tab is
   // active); when it is empty (or the explicit name of the default locale) it is the default
   // language, which may be equal to the source language.
-  private calcDefaultDestinationLocale(): string {
+  private calcDefaultTargetLocale(): string {
     const locale = this.creator.survey.locale;
     return !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
   }
   private showSideBySideMachineTranslation(): void {
     const model = <TranslationSideBySide>this.model;
     if (!model) return;
-    const editor = model.createTranslationEditor(model.destinationLocale || "");
+    const editor = model.createTranslationEditor(model.targetLocale || "");
     editor.onApply = () => {
       model.reset();
       model.rebuildInstances();

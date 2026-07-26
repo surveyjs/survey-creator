@@ -15,8 +15,8 @@
       <div class="st-side-by-side__source" :key="sideBySideModel.sourceSurvey?.elementIdPrefix" :ref="setSourceScrollElement">
         <SurveyComponent :model="sideBySideModel.sourceSurvey"></SurveyComponent>
       </div>
-      <div class="st-side-by-side__target" :key="sideBySideModel.destinationSurvey?.elementIdPrefix" :ref="setDestinationScrollElement">
-        <SurveyComponent :model="sideBySideModel.destinationSurvey"></SurveyComponent>
+      <div class="st-side-by-side__target" :key="sideBySideModel.targetSurvey?.elementIdPrefix" :ref="setTargetScrollElement">
+        <SurveyComponent :model="sideBySideModel.targetSurvey"></SurveyComponent>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@ const stringsModel = computed<Translation | undefined>(() =>
 const setSourceScrollElement = (el: unknown) => {
   sideBySideModel.value?.setSourceScrollElement(el as HTMLElement);
 };
-const setDestinationScrollElement = (el: unknown) => {
-  sideBySideModel.value?.setDestinationScrollElement(el as HTMLElement);
+const setTargetScrollElement = (el: unknown) => {
+  sideBySideModel.value?.setTargetScrollElement(el as HTMLElement);
 };
 </script>

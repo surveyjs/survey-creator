@@ -37,11 +37,10 @@ test.describe(title, () => {
     await page.goto(url);
   });
 
-  test("layout: strings grid with source and destination columns, no panes", async ({ page }) => {
+  test("layout: strings grid with source and target columns, no panes", async ({ page }) => {
     await openGridTranslation(page);
     await expect(page.locator(".st-side-by-side__source")).toHaveCount(0);
     await expect(page.locator(".st-side-by-side__target")).toHaveCount(0);
-    await expect(page.locator(".svc-side-bar .svc-flex-column.svc-side-bar__wrapper")).toHaveCount(0);
 
     const headerColumns = page.locator(".st-strings-header table tr").first().locator("th");
     await expect(headerColumns).toHaveCount(2);
@@ -56,15 +55,16 @@ test.describe(title, () => {
     await expect(targetCell).toHaveValue("Frage 1");
     await expect(targetCell).toBeEditable();
 
-    // The shared side-by-side toolbar plus the all/used strings filter; the page dropdown
-    // defaults to "All Pages", as in the standard mode.
+    // The all/used strings filter in the toolbar; the page dropdown defaults to "All Pages",
+    // as in the standard mode. The language dropdowns live in the property grid.
     await expect(getBarItemByTitle(page, "Used Strings Only")).toBeVisible();
     await expect(getBarItemByTitle(page, "All Pages")).toBeVisible();
-    await expect(getBarItemByTitle(page, "Default (English)")).toBeVisible();
-    await expect(getBarItemByTitle(page, "Deutsch")).toBeVisible();
+    const sidebar = page.locator(".svc-side-bar");
+    await expect(sidebar.locator(".spg-question[data-name=sourceLocale]")).toContainText("Default (English)");
+    await expect(sidebar.locator(".spg-question[data-name=targetLocale]")).toContainText("Deutsch");
   });
 
-  test("editing a destination cell updates the JSON translation and is undoable", async ({ page }) => {
+  test("editing a target cell updates the JSON translation and is undoable", async ({ page }) => {
     await openGridTranslation(page);
     const targetCell = getTitleRow(page).locator("textarea").nth(1);
     await targetCell.fill("Frage 1 neu");
@@ -86,21 +86,21 @@ test.describe(title, () => {
     expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1 neu");
   });
 
-  test("view switcher: the toolbar dropdown switches between the grid and the forms views", async ({ page }) => {
+  test("view switcher: the property grid button group switches between the grid and the forms views", async ({ page }) => {
     await openGridTranslation(page);
-    await expect(getBarItemByTitle(page, "Grid View")).toBeVisible();
+    const viewSwitcher = page.locator(".svc-side-bar .spg-question[data-name=viewMode]");
+    await expect(viewSwitcher).toBeVisible();
 
-    await getBarItemByTitle(page, "Grid View").click();
-    await getListItemByText(page, "Form View").click();
+    await viewSwitcher.getByText("Form View").click();
     await expect(page.locator(".st-side-by-side__source")).toBeVisible();
     await expect(page.locator(".st-side-by-side__target")).toBeVisible();
     await expect(page.locator(".st-strings")).toHaveCount(0);
-    // The locales chosen in the toolbar survive the switch.
-    await expect(getBarItemByTitle(page, "Default (English)")).toBeVisible();
-    await expect(getBarItemByTitle(page, "Deutsch")).toBeVisible();
+    // The locales chosen in the property grid survive the switch.
+    const sidebar = page.locator(".svc-side-bar");
+    await expect(sidebar.locator(".spg-question[data-name=sourceLocale]")).toContainText("Default (English)");
+    await expect(sidebar.locator(".spg-question[data-name=targetLocale]")).toContainText("Deutsch");
 
-    await getBarItemByTitle(page, "Form View").click();
-    await getListItemByText(page, "Grid View").click();
+    await viewSwitcher.getByText("Grid View").click();
     await expect(page.locator(".st-strings")).toBeVisible();
     await expect(page.locator(".st-side-by-side__source")).toHaveCount(0);
   });

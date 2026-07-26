@@ -58,7 +58,7 @@ function getItemKeys(model: Translation): Array<string> {
   });
 }
 
-test("grid view: activate creates the grid model, no survey copies, toolbar composition", () => {
+test("grid view: activate creates the grid model, no survey copies, toolbar and property grid composition", () => {
   const creator = createGridCreator();
   const model = getModel(creator);
   expect(model).toBeTruthy();
@@ -67,19 +67,23 @@ test("grid view: activate creates the grid model, no survey copies, toolbar comp
   expect(model.stringsSurvey).toBeTruthy();
   expect(model.stringsHeaderSurvey).toBeTruthy();
   expect(model.sourceSurvey).toBeFalsy();
-  expect(model.destinationSurvey).toBeFalsy();
+  expect(model.targetSurvey).toBeFalsy();
   expect(model.showAllStrings).toBeFalsy();
   const sidebarPage = creator.sidebar.pages.filter(page => page.id === "translation")[0];
-  expect(sidebarPage.visible).toBeFalsy();
+  expect(sidebarPage.visible).toBeTruthy();
+  expect(sidebarPage.componentData).toBe(model.settingsSurvey);
+  expect(model.settingsSurvey.getQuestionByName("viewMode").value).toBe("grid");
+  expect(model.settingsSurvey.getQuestionByName("sourceLocale").value).toBe("default");
+  expect(model.settingsSurvey.getQuestionByName("targetLocale").value).toBe("de");
   expect(creator.toolbar.getActionById("svc-translation-filter-page").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeTruthy();
-  expect(creator.toolbar.getActionById("svc-translation-source-locale").visible).toBeTruthy();
-  expect(creator.toolbar.getActionById("svc-translation-destination-locale").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svc-translation-import").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svc-translation-export").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svd-translation-merge_locale_withdefault").visible).toBeFalsy();
-  expect(creator.toolbar.getActionById("svc-translation-side-by-side-view").visible).toBeTruthy();
-  expect(creator.toolbar.getActionById("svc-translation-side-by-side-view").title).toBe("Grid View");
+  // The locale selectors and the view switcher live in the property grid, not in the toolbar.
+  expect(creator.toolbar.getActionById("svc-translation-source-locale")).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-destination-locale")).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-side-by-side-view")).toBeFalsy();
 });
 
 test("grid view: the creator option defaults to the forms view", () => {
@@ -92,7 +96,7 @@ test("grid view: the creator option defaults to the forms view", () => {
   expect(model.stringsSurvey).toBeFalsy();
 });
 
-test("grid view: a source column and a destination column, both editable", () => {
+test("grid view: a source column and a target column, both editable", () => {
   const creator = createGridCreator();
   const model = getModel(creator);
   const matrix = findMatrix(model, "q1", "title");
@@ -103,11 +107,11 @@ test("grid view: a source column and a destination column, both editable", () =>
   expect(matrix.columns[1].name).toBe("de");
   expect(matrix.columns[1].readOnly).toBeFalsy();
   const sourceCell = <QuestionCommentModel>matrix.visibleRows[0].cells[0].question;
-  const destinationCell = <QuestionCommentModel>matrix.visibleRows[0].cells[1].question;
+  const targetCell = <QuestionCommentModel>matrix.visibleRows[0].cells[1].question;
   expect(sourceCell.isReadOnly).toBeFalsy();
   expect(sourceCell.value).toBe("Question 1");
-  expect(destinationCell.isReadOnly).toBeFalsy();
-  expect(destinationCell.value).toBe("Frage 1");
+  expect(targetCell.isReadOnly).toBeFalsy();
+  expect(targetCell.value).toBe("Frage 1");
 
   const header = <QuestionMatrixDropdownModel>model.stringsHeaderSurvey.getQuestionByName("stringsHeader");
   expect(header.columns).toHaveLength(2);
@@ -115,13 +119,13 @@ test("grid view: a source column and a destination column, both editable", () =>
   expect(header.columns[1].title.indexOf("Target: ")).toBe(0);
 });
 
-test("grid view: a single editable column when source and destination locales are equal", () => {
+test("grid view: a single editable column when source and target locales are equal", () => {
   const json = JSON.parse(JSON.stringify(gridJSON));
   delete json.locale;
   const creator = createGridCreator(json);
   const model = getModel(creator);
   expect(model.sourceLocale || "").toBe("");
-  expect(model.destinationLocale || "").toBe("");
+  expect(model.targetLocale || "").toBe("");
   const matrix = findMatrix(model, "q1", "title");
   expect(matrix.columns).toHaveLength(1);
   expect(matrix.columns[0].name).toBe(getDefaultLocaleName());
@@ -161,7 +165,7 @@ test("grid view: the page dropdown shows All Pages plus the pages and scopes the
   expect(getItemKeys(model).indexOf("q1.title")).toBeGreaterThan(-1);
 });
 
-test("grid view: destination cell edits are undoable and write the destination locale", () => {
+test("grid view: target cell edits are undoable and write the target locale", () => {
   const creator = createGridCreator();
   const model = getModel(creator);
   const matrix = findMatrix(model, "q1", "title");
@@ -189,11 +193,11 @@ test("grid view: onTranslationItemChanging applies to grid edits", () => {
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu!");
 });
 
-test("grid view: changing the destination locale re-runs the column setup and keeps values", () => {
+test("grid view: changing the target locale re-runs the column setup and keeps values", () => {
   const creator = createGridCreator();
   const model = getModel(creator);
   const stringsSurvey = model.stringsSurvey;
-  model.destinationLocale = "fr";
+  model.targetLocale = "fr";
   expect(creator.survey.locale).toBe("fr");
   // The strings survey is kept, only its columns and data are updated.
   expect(model.stringsSurvey).toBe(stringsSurvey);
@@ -201,7 +205,7 @@ test("grid view: changing the destination locale re-runs the column setup and ke
   expect(matrix.columns).toHaveLength(2);
   expect(matrix.columns[1].name).toBe("fr");
   expect(matrix.visibleRows[0].cells[1].question.value).toBeFalsy();
-  model.destinationLocale = "de";
+  model.targetLocale = "de";
   matrix = findMatrix(model, "q1", "title");
   expect(matrix.columns[1].name).toBe("de");
   expect(matrix.visibleRows[0].cells[1].question.value).toBe("Frage 1");
@@ -230,28 +234,25 @@ test("grid view: CSV export covers the whole survey regardless of the page scope
 test("grid view: the machine-translation editor operates on the whole survey", () => {
   const creator = createGridCreator();
   const model = getModel(creator);
-  const editor = model.createTranslationEditor(model.destinationLocale);
+  const editor = model.createTranslationEditor(model.targetLocale);
   const contexts = editor.translation.root.allLocItems.map(item => (!!item.context ? item.context.name : ""));
   // q4 (page2, no "de" text yet) must be offered although the grid shows page1 only.
   expect(contexts.indexOf("q4")).toBeGreaterThan(-1);
   editor.dispose();
 });
 
-test("view switcher: the toolbar action switches between the forms and grid views keeping locales", () => {
+test("view switcher: the property grid button group switches between the forms and grid views keeping locales", () => {
   const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
   creator.JSON = JSON.parse(JSON.stringify(gridJSON));
   creator.activeTab = "translation";
-  const action = creator.toolbar.getActionById("svc-translation-side-by-side-view");
-  expect(action.visible).toBeTruthy();
-  expect(action.title).toBe("Form View");
   const formsModel = <TranslationSideBySide>getPlugin(creator).model;
+  const viewQuestion = formsModel.settingsSurvey.getQuestionByName("viewMode");
+  expect(viewQuestion.value).toBe("forms");
   expect(formsModel.isSideBySideGrid).toBeFalsy();
   formsModel.sourceLocale = "fr";
 
-  const list = <ListModel>action.data;
-  list.onItemClick(list.actions.filter(item => item.id === "grid")[0]);
+  viewQuestion.value = "grid";
   expect(creator.translationSideBySideView).toBe("grid");
-  expect(action.title).toBe("Grid View");
   // The same model rebuilds its editing surface in place.
   expect(getPlugin(creator).model).toBe(formsModel);
   expect(formsModel.isSideBySideGrid).toBeTruthy();
@@ -259,34 +260,39 @@ test("view switcher: the toolbar action switches between the forms and grid view
   expect(formsModel.sourceSurvey).toBeFalsy();
   expect(formsModel.showAllStrings).toBeFalsy();
   expect(formsModel.sourceLocale).toBe("fr");
-  expect(formsModel.destinationLocale).toBe("de");
+  expect(formsModel.targetLocale).toBe("de");
+  expect(formsModel.settingsSurvey.getQuestionByName("sourceLocale").value).toBe("fr");
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeTruthy();
 
-  list.onItemClick(list.actions.filter(item => item.id === "forms")[0]);
+  viewQuestion.value = "forms";
   expect(creator.translationSideBySideView).toBe("forms");
-  expect(action.title).toBe("Form View");
   expect(getPlugin(creator).model).toBe(formsModel);
   expect(formsModel.isSideBySideGrid).toBeFalsy();
   expect(formsModel.sourceSurvey).toBeTruthy();
-  expect(formsModel.destinationSurvey).toBeTruthy();
+  expect(formsModel.targetSurvey).toBeTruthy();
   expect(formsModel.showAllStrings).toBeTruthy();
   expect(formsModel.sourceLocale).toBe("fr");
-  expect(formsModel.destinationLocale).toBe("de");
+  expect(formsModel.targetLocale).toBe("de");
   // The all/used strings filter belongs to the grid view only.
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeFalsy();
 });
 
-test("view switcher: hidden in the default translation mode and after leaving the tab", () => {
+test("view switcher: absent in the default translation mode, present in the side-by-side property grid", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
   creator.JSON = JSON.parse(JSON.stringify(gridJSON));
   creator.activeTab = "translation";
-  expect(creator.toolbar.getActionById("svc-translation-side-by-side-view").visible).toBeFalsy();
+  const model = getPlugin(creator).model;
+  // The default mode shows the languages matrix; no view switcher, no locale dropdowns.
+  expect(model.settingsSurvey.getQuestionByName("locales")).toBeTruthy();
+  expect(model.settingsSurvey.getQuestionByName("viewMode")).toBeFalsy();
+  expect(model.settingsSurvey.getQuestionByName("sourceLocale")).toBeFalsy();
 
   const sideBySideCreator = createGridCreator();
-  const action = sideBySideCreator.toolbar.getActionById("svc-translation-side-by-side-view");
-  expect(action.visible).toBeTruthy();
-  sideBySideCreator.activeTab = "designer";
-  expect(action.visible).toBeFalsy();
+  const sideBySideModel = getModel(sideBySideCreator);
+  expect(sideBySideModel.settingsSurvey.getQuestionByName("locales")).toBeFalsy();
+  expect(sideBySideModel.settingsSurvey.getQuestionByName("viewMode")).toBeTruthy();
+  expect(sideBySideModel.settingsSurvey.getQuestionByName("sourceLocale")).toBeTruthy();
+  expect(sideBySideModel.settingsSurvey.getQuestionByName("targetLocale")).toBeTruthy();
 });
 
 test("grid view: replacing the survey rebuilds the grid for the new survey", () => {

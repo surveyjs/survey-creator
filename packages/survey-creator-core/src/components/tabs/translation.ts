@@ -711,12 +711,12 @@ export class Translation extends Base implements ITranslationLocales {
     return this.isSideBySide && !this.isSideBySideGrid;
   }
   @propertyArray() locales: Array<string>;
-  // When true, the strings grid shows exactly two columns - sourceLocale and destinationLocale -
+  // When true, the strings grid shows exactly two columns - sourceLocale and targetLocale -
   // instead of a column per selected locale, and updates them (keeping the entered values)
   // whenever one of the two locales changes.
-  @property({ defaultValue: false }) useSourceDestinationColumns: boolean;
+  @property({ defaultValue: false }) useSourceTargetColumns: boolean;
   @property() sourceLocale: string;
-  @property() destinationLocale: string;
+  @property() targetLocale: string;
   @property() canMergeLocaleWithDefault: boolean;
   @property() mergeLocaleWithDefaultText: string;
   @property({
@@ -860,6 +860,9 @@ export class Translation extends Base implements ITranslationLocales {
   }
 
   private updateLocales() {
+    // The side-by-side settings survey has no locales question - the locale columns are driven
+    // by sourceLocale/targetLocale there, not by this list.
+    if (!this.localesQuestion) return;
     // Ordered list of the locales (including the default one represented as "") that are shown as columns.
     const selected = this.getOrderedLocales(true);
     // Persist the full order (including the default locale and its position) so it can be restored on reset.
@@ -1088,12 +1091,12 @@ export class Translation extends Base implements ITranslationLocales {
     return editorLocalization.getString("ed." + strName) + this.getLocaleName(locale);
   }
   protected addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
-    if (this.useSourceDestinationColumns) {
-      const destination = this.destinationLocale || "";
-      matrix.addColumn(this.getLocaleColumnName(destination), this.getLocaleName(destination));
-      this.updateMatrixSourceColumn(matrix, this.sourceLocale, destination);
+    if (this.useSourceTargetColumns) {
+      const target = this.targetLocale || "";
+      matrix.addColumn(this.getLocaleColumnName(target), this.getLocaleName(target));
+      this.updateMatrixSourceColumn(matrix, this.sourceLocale, target);
       if (matrix.name === "stringsHeader") {
-        this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, destination);
+        this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, target);
       }
       return;
     }
@@ -1217,8 +1220,8 @@ export class Translation extends Base implements ITranslationLocales {
       this.updateHeaderStringsSurveyColumns();
       this.updateStringsSurveyColumns();
     }
-    if (name === "useSourceDestinationColumns" ||
-      (this.useSourceDestinationColumns && (name === "sourceLocale" || name === "destinationLocale"))) {
+    if (name === "useSourceTargetColumns" ||
+      (this.useSourceTargetColumns && (name === "sourceLocale" || name === "targetLocale"))) {
       this.updateStringsSurveyColumnsAndData();
     }
   }
@@ -1257,9 +1260,11 @@ export class Translation extends Base implements ITranslationLocales {
     this.updateChooseLanguageActions();
   }
   private updateReadOnly(): void {
+    if (this.settingsSurvey) {
+      this.settingsSurvey.readOnly = this.readOnly;
+    }
     if (this.stringsSurvey) {
       this.stringsSurvey.readOnly = this.readOnly;
-      this.settingsSurvey.readOnly = this.readOnly;
     }
   }
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {

@@ -208,7 +208,7 @@ export class SurveyCreatorModel extends Base
    * Accepted values:
    *
    * - `"default"` - A grid of translatable strings with a column per language.
-   * - `"sideBySide"` - Two design-mode instances of the edited survey rendered side by side: a read-only source language on the left and an inline-editable destination language on the right.
+   * - `"sideBySide"` - Two design-mode instances of the edited survey rendered side by side: a read-only source language on the left and an inline-editable target language on the right.
    *
    * Default value: `"default"`
    * @see showTranslationTab
@@ -216,8 +216,8 @@ export class SurveyCreatorModel extends Base
   public translationMode: "default" | "sideBySide" = "default";
   // How the side-by-side Translation tab renders its editing surface; applies only if
   // translationMode is "sideBySide": "forms" - two design-mode survey instances side by side,
-  // "grid" - a translation grid with a source and a destination locale column. Users can
-  // switch the view with a Translation toolbar dropdown, which updates this property.
+  // "grid" - a translation grid with a source and a target locale column. Users can
+  // switch the view with a button group in the Translation property grid, which updates this property.
   public translationSideBySideView: "forms" | "grid" = "forms";
   /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.

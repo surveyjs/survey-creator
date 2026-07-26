@@ -25,8 +25,8 @@
             <survey-content [model]="s"></survey-content>
           </ng-container>
         </div>
-        <div class="st-side-by-side__target" #destinationScrollContainer>
-          <ng-container *ngFor="let s of [sideBySideModel.destinationSurvey]; trackBy: trackStringsSurveyBy">
+        <div class="st-side-by-side__target" #targetScrollContainer>
+          <ng-container *ngFor="let s of [sideBySideModel.targetSurvey]; trackBy: trackStringsSurveyBy">
             <survey-content [model]="s"></survey-content>
           </ng-container>
         </div>

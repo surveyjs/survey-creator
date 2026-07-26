@@ -139,7 +139,7 @@ export var enStrings = {
     translationSource: "Source: ",
     translationTarget: "Target: ",
     translationSourceLanguage: "Source language",
-    translationDestinationLanguage: "Destination language",
+    translationTargetLanguage: "Target language",
     translationSideBySideViewForms: "Form View",
     translationSideBySideViewGrid: "Grid View",
     translationSurveyStrings: "Survey Strings",

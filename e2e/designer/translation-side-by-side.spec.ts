@@ -33,10 +33,14 @@ test.describe(title, () => {
     await page.goto(url);
   });
 
-  test("layout: two ~50% panes, no sidebar, no strings grid", async ({ page }) => {
+  test("layout: two ~50% panes, settings in the property grid, no strings grid", async ({ page }) => {
     await openSideBySideTranslation(page);
     await expect(page.locator(".st-strings")).toHaveCount(0);
-    await expect(page.locator(".svc-side-bar .svc-flex-column.svc-side-bar__wrapper")).toHaveCount(0);
+    // The property grid hosts the view switcher and the language dropdowns.
+    const sidebar = page.locator(".svc-side-bar");
+    await expect(sidebar.locator(".spg-question[data-name=viewMode]")).toBeVisible();
+    await expect(sidebar.locator(".spg-question[data-name=sourceLocale]")).toBeVisible();
+    await expect(sidebar.locator(".spg-question[data-name=targetLocale]")).toBeVisible();
     const sourceBox = await page.locator(".st-side-by-side__source").boundingBox();
     const targetBox = await page.locator(".st-side-by-side__target").boundingBox();
     expect(Math.abs(sourceBox!.width - targetBox!.width)).toBeLessThanOrEqual(2);
@@ -44,12 +48,13 @@ test.describe(title, () => {
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
   });
 
-  test("toolbar: pages dropdown holds real pages only; source/destination dropdowns show defaults", async ({ page }) => {
+  test("toolbar: pages dropdown holds real pages only; property grid dropdowns show default languages", async ({ page }) => {
     await openSideBySideTranslation(page);
     await expect(getBarItemByTitle(page, "All Pages")).toHaveCount(0);
     await expect(getBarItemByTitle(page, "page1")).toBeVisible();
-    await expect(getBarItemByTitle(page, "Default (English)")).toBeVisible();
-    await expect(getBarItemByTitle(page, "Deutsch")).toBeVisible();
+    const sidebar = page.locator(".svc-side-bar");
+    await expect(sidebar.locator(".spg-question[data-name=sourceLocale]")).toContainText("Default (English)");
+    await expect(sidebar.locator(".spg-question[data-name=targetLocale]")).toContainText("Deutsch");
     await getBarItemByTitle(page, "page1").click();
     await expect(getListItemByText(page, "page2")).toBeVisible();
     await expect(getListItemByText(page, "Survey Strings")).toHaveCount(0);
@@ -72,7 +77,7 @@ test.describe(title, () => {
 
   test("source pane is read-only", async ({ page }) => {
     await openSideBySideTranslation(page);
-    // The destination pane renders inline string editors; the source pane suppresses them entirely.
+    // The target pane renders inline string editors; the source pane suppresses them entirely.
     await expect(page.locator(".st-side-by-side__target .svc-string-editor .sv-string-editor").filter({ visible: true }).first()).toBeVisible();
     await expect(page.locator(".st-side-by-side__source .svc-string-editor")).toHaveCount(0);
     await expect(page.locator(".st-side-by-side__source .sv-string-editor")).toHaveCount(0);
@@ -111,7 +116,7 @@ test.describe(title, () => {
     expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1 neu");
   });
 
-  test("navigation buttons: rendered in both panes, source navigates, destination edits captions", async ({ page }) => {
+  test("navigation buttons: rendered in both panes, source navigates, target edits captions", async ({ page }) => {
     const navJson = JSON.parse(JSON.stringify(json));
     navJson.pageNextText = { default: "Next", de: "Weiter" };
     navJson.pagePrevText = { default: "Back", de: "Zurueck" };
@@ -123,11 +128,11 @@ test.describe(title, () => {
     const target = page.locator(".st-side-by-side__target");
 
     // Both panes render a navigation bar: read-only source captions in the source locale,
-    // destination captions in the destination locale inside inline string editors.
+    // target captions in the target locale inside inline string editors.
     await expect(source.getByRole("button", { name: "Next" })).toBeVisible();
     await expect(target.locator("button .sv-string-editor").getByText("Weiter")).toBeVisible();
 
-    // A destination nav button is an edit surface only - clicking it must not navigate.
+    // A target nav button is an edit surface only - clicking it must not navigate.
     await target.locator("button .sv-string-editor").getByText("Weiter").click();
     await expect(source.getByText("Question 1")).toBeVisible();
     await expect(target.locator(".sv-string-editor").getByText("Frage 1")).toBeVisible();
@@ -142,7 +147,7 @@ test.describe(title, () => {
     await source.getByRole("button", { name: "Done" }).click();
     await expect(source.getByText("Question 4")).toBeVisible();
 
-    // Typing into a destination nav caption writes the destination locale into the JSON.
+    // Typing into a target nav caption writes the target locale into the JSON.
     await target.locator("button .sv-string-editor").getByText("Fertig").click();
     await page.keyboard.press("Control+a");
     await page.keyboard.type("Fertig!");
@@ -157,15 +162,16 @@ test.describe(title, () => {
     await expect(target.locator(".sv-string-editor").getByText("Frage 1")).toBeVisible();
   });
 
-  test("destination locale switch re-renders target pane strings", async ({ page }) => {
+  test("target locale switch re-renders target pane strings", async ({ page }) => {
     // Keep the locale dropdowns short so every item is rendered in the popup list.
     await page.evaluate(() => {
       (window as any).Survey.surveyLocalization.supportedLocales = ["de", "it"];
     });
     await openSideBySideTranslation(page);
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
-    await getBarItemByTitle(page, "Deutsch").click();
-    await getListItemByText(page, "Italiano").click();
+    // Click the dropdown wrapper: the input itself sits under the prefix-icon wrapper.
+    await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Target language" }) }).click();
+    await page.locator(".sv-popup").filter({ visible: true }).getByText("Italiano", { exact: true }).click();
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toHaveCount(0);
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Question 1")).toBeVisible();
 

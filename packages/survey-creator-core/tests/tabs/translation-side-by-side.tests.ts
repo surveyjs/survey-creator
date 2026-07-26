@@ -1,4 +1,4 @@
-import { ItemValue, ListModel, QuestionCheckboxModel, QuestionMatrixDropdownModel, QuestionTextModel } from "survey-core";
+import { ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionTextModel } from "survey-core";
 import { TranslationSideBySide } from "../../src/components/tabs/translation-side-by-side";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { CreatorTester } from "../creator-tester";
@@ -48,8 +48,14 @@ function getSelectedListItem(creator: CreatorTester, actionId: string): any {
   const action = creator.toolbar.getActionById(actionId);
   return (<ListModel>action.data).selectedItem;
 }
+function getSettingsQuestion(creator: CreatorTester, name: string): QuestionDropdownModel {
+  return <QuestionDropdownModel>getModel(creator).settingsSurvey.getQuestionByName(name);
+}
+function getChoiceValues(creator: CreatorTester, name: string): Array<any> {
+  return getSettingsQuestion(creator, name).choices.map((item: ItemValue) => item.value);
+}
 
-test("activate creates side-by-side model, no strings surveys, sidebar hidden", () => {
+test("activate creates side-by-side model, no strings surveys, settings shown in the property grid", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   expect(model).toBeTruthy();
@@ -57,10 +63,15 @@ test("activate creates side-by-side model, no strings surveys, sidebar hidden", 
   expect(model.stringsSurvey).toBeFalsy();
   expect(model.stringsHeaderSurvey).toBeFalsy();
   const sidebarPage = creator.sidebar.pages.filter(page => page.id === "translation")[0];
-  expect(sidebarPage.visible).toBeFalsy();
+  expect(sidebarPage.visible).toBeTruthy();
+  expect(sidebarPage.componentName).toBe("survey-widget");
+  expect(sidebarPage.componentData).toBe(model.settingsSurvey);
+  expect(getSettingsQuestion(creator, "viewMode").value).toBe("forms");
+  expect(getSettingsQuestion(creator, "sourceLocale").value).toBe("default");
+  expect(getSettingsQuestion(creator, "targetLocale").value).toBe("de");
 });
 
-test("pages dropdown: no 'All Pages', real pages only, first page preselected; strings filter & merge actions hidden", () => {
+test("pages dropdown: no 'All Pages', real pages only, first page preselected; strings filter, merge and locale actions hidden", () => {
   const creator = createSideBySideCreator();
   const filterPageAction = creator.toolbar.getActionById("svc-translation-filter-page");
   expect(filterPageAction.visible).toBeTruthy();
@@ -71,23 +82,27 @@ test("pages dropdown: no 'All Pages', real pages only, first page preselected; s
   expect(creator.toolbar.getActionById("svd-translation-merge_locale_withdefault").visible).toBeFalsy();
   expect(creator.toolbar.getActionById("svc-translation-import").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svc-translation-export").visible).toBeTruthy();
+  // The locale selectors and the view switcher live in the property grid, not in the toolbar.
+  expect(creator.toolbar.getActionById("svc-translation-source-locale")).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-destination-locale")).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-side-by-side-view")).toBeFalsy();
 });
 
 test("instances are design-mode copies with correct locales/page", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   expect(model.sourceSurvey).toBeTruthy();
-  expect(model.destinationSurvey).toBeTruthy();
+  expect(model.targetSurvey).toBeTruthy();
   expect(model.sourceSurvey.isDesignMode).toBeTruthy();
-  expect(model.destinationSurvey.isDesignMode).toBeTruthy();
+  expect(model.targetSurvey.isDesignMode).toBeTruthy();
   expect(model.sourceSurvey).not.toBe(creator.survey);
-  expect(model.destinationSurvey).not.toBe(creator.survey);
+  expect(model.targetSurvey).not.toBe(creator.survey);
   expect(model.sourceLocale).toBeFalsy();
   expect(model.sourceSurvey.locale).toBeFalsy();
-  expect(model.destinationLocale).toBe("de");
-  expect(model.destinationSurvey.locale).toBe("de");
+  expect(model.targetLocale).toBe("de");
+  expect(model.targetSurvey.locale).toBe("de");
   expect(model.sourceSurvey.currentPage.name).toBe("page1");
-  expect(model.destinationSurvey.currentPage.name).toBe("page1");
+  expect(model.targetSurvey.currentPage.name).toBe("page1");
 });
 
 test("start page preselected when firstPageIsStartPage is true", () => {
@@ -96,103 +111,103 @@ test("start page preselected when firstPageIsStartPage is true", () => {
   const model = getModel(creator);
   expect(model.selectedPageName).toBe("page1");
   expect(model.sourceSurvey.currentPage.name).toBe("page1");
-  expect(model.destinationSurvey.currentPage.name).toBe("page1");
+  expect(model.targetSurvey.currentPage.name).toBe("page1");
   expect(getSelectedListItem(creator, "svc-translation-filter-page").id).toBe("page1");
 });
 
-test("renderers: destination getRendererForString is 'svc-string-editor', source is undefined", () => {
+test("renderers: target getRendererForString is 'svc-string-editor', source is undefined", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   const srcQuestion = model.sourceSurvey.getQuestionByName("q1");
-  const dstQuestion = model.destinationSurvey.getQuestionByName("q1");
+  const targetQuestion = model.targetSurvey.getQuestionByName("q1");
   expect(model.sourceSurvey.getRendererForString(srcQuestion, "title", undefined)).toBeFalsy();
-  expect(model.destinationSurvey.getRendererForString(dstQuestion, "title", undefined)).toBe("svc-string-editor");
+  expect(model.targetSurvey.getRendererForString(targetQuestion, "title", undefined)).toBe("svc-string-editor");
 });
 
-test("editing destination copy writes destination locale into creator.survey", () => {
+test("editing target copy writes target locale into creator.survey", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const dstQuestion = model.destinationSurvey.getQuestionByName("q1");
-  dstQuestion.locTitle.text = "Frage 1 neu";
+  const targetQuestion = model.targetSurvey.getQuestionByName("q1");
+  targetQuestion.locTitle.text = "Frage 1 neu";
   const realQuestion = creator.survey.getQuestionByName("q1");
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
 });
 
-test("undo restores only destination-locale text and re-syncs the copy; redo reapplies", () => {
+test("undo restores only target-locale text and re-syncs the copy; redo reapplies", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const dstQuestion = model.destinationSurvey.getQuestionByName("q1");
-  dstQuestion.locTitle.text = "Frage 1 neu";
+  const targetQuestion = model.targetSurvey.getQuestionByName("q1");
+  targetQuestion.locTitle.text = "Frage 1 neu";
   const realQuestion = creator.survey.getQuestionByName("q1");
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
   creator.undo();
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
-  expect(dstQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");
+  expect(targetQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");
   creator.redo();
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
-  expect(dstQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
+  expect(targetQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
 });
 
 test("choice item and matrix column titles sync by path mapping", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const dstCheckbox = <QuestionCheckboxModel>model.destinationSurvey.getQuestionByName("q2");
-  const dstItem = <ItemValue>dstCheckbox.choices[0];
-  dstItem.locText.text = "Element 1";
+  const targetCheckbox = <QuestionCheckboxModel>model.targetSurvey.getQuestionByName("q2");
+  const targetItem = <ItemValue>targetCheckbox.choices[0];
+  targetItem.locText.text = "Element 1";
   const realCheckbox = <QuestionCheckboxModel>creator.survey.getQuestionByName("q2");
   expect((<ItemValue>realCheckbox.choices[0]).locText.getLocaleText("de")).toBe("Element 1");
   expect((<ItemValue>realCheckbox.choices[0]).locText.getLocaleText("")).toBe("Item 1");
 
-  const dstMatrix = <QuestionMatrixDropdownModel>model.destinationSurvey.getQuestionByName("q3");
-  dstMatrix.columns[0].locTitle.text = "Spalte 1";
+  const targetMatrix = <QuestionMatrixDropdownModel>model.targetSurvey.getQuestionByName("q3");
+  targetMatrix.columns[0].locTitle.text = "Spalte 1";
   const realMatrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q3");
   expect(realMatrix.columns[0].locTitle.getLocaleText("de")).toBe("Spalte 1");
   expect(realMatrix.columns[0].locTitle.getLocaleText("")).toBe("Column 1");
 });
 
-test("changing destinationLocale switches copy locale without recreating instances; edits land in the new locale", () => {
+test("changing targetLocale switches copy locale without recreating instances; edits land in the new locale", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const dstSurvey = model.destinationSurvey;
-  model.destinationLocale = "fr";
-  expect(model.destinationSurvey).toBe(dstSurvey);
-  expect(dstSurvey.locale).toBe("fr");
-  const dstQuestion = dstSurvey.getQuestionByName("q1");
-  dstQuestion.locTitle.text = "Question 1 fr";
+  const targetSurvey = model.targetSurvey;
+  model.targetLocale = "fr";
+  expect(model.targetSurvey).toBe(targetSurvey);
+  expect(targetSurvey.locale).toBe("fr");
+  const targetQuestion = targetSurvey.getQuestionByName("q1");
+  targetQuestion.locTitle.text = "Question 1 fr";
   const realQuestion = creator.survey.getQuestionByName("q1");
   expect(realQuestion.locTitle.getLocaleText("fr")).toBe("Question 1 fr");
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
 });
 
-test("changing destinationLocale updates survey.locale; undo/redo keeps them in sync", () => {
+test("changing targetLocale updates survey.locale; undo/redo keeps them in sync", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   expect(creator.survey.locale).toBe("de");
-  model.destinationLocale = "fr";
+  model.targetLocale = "fr";
   expect(creator.survey.locale).toBe("fr");
   creator.undo();
   expect(creator.survey.locale).toBe("de");
-  expect(model.destinationLocale).toBe("de");
-  expect(model.destinationSurvey.locale).toBe("de");
+  expect(model.targetLocale).toBe("de");
+  expect(model.targetSurvey.locale).toBe("de");
   creator.redo();
   expect(creator.survey.locale).toBe("fr");
-  expect(model.destinationLocale).toBe("fr");
-  expect(model.destinationSurvey.locale).toBe("fr");
+  expect(model.targetLocale).toBe("fr");
+  expect(model.targetSurvey.locale).toBe("fr");
 });
 
-test("destination locale choice persists via survey.locale across tab switches", () => {
+test("target locale choice persists via survey.locale across tab switches", () => {
   const creator = createSideBySideCreator();
-  getModel(creator).destinationLocale = "fr";
+  getModel(creator).targetLocale = "fr";
   expect(creator.survey.locale).toBe("fr");
   creator.activeTab = "designer";
   creator.activeTab = "translation";
   const model = getModel(creator);
-  expect(model.destinationLocale).toBe("fr");
-  expect(model.destinationSurvey.locale).toBe("fr");
+  expect(model.targetLocale).toBe("fr");
+  expect(model.targetSurvey.locale).toBe("fr");
 });
 
 test("activating the tab does not modify the survey locale, no undo step is created", () => {
@@ -202,56 +217,72 @@ test("activating the tab does not modify the survey locale, no undo step is crea
   const json = JSON.parse(JSON.stringify(sideBySideJSON));
   json.locale = "en";
   const enCreator = createSideBySideCreator(json);
-  expect(getModel(enCreator).destinationLocale || "").toBe("");
+  expect(getModel(enCreator).targetLocale || "").toBe("");
   expect(enCreator.survey.locale || "").toBe("");
   expect(enCreator.undoRedoManager.canUndo()).toBeFalsy();
 });
 
-test("locale dropdowns exclude each other's selection", () => {
+test("settings survey locale dropdowns exclude each other's selection", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   expect(model.sourceLocale || "").toBe("");
-  expect(model.destinationLocale).toBe("de");
-  const sourceIds = getListItems(creator, "svc-translation-source-locale").map(item => item.id);
-  const destinationIds = getListItems(creator, "svc-translation-destination-locale").map(item => item.id);
-  expect(sourceIds.indexOf("de")).toBe(-1);
-  expect(sourceIds.indexOf(null)).toBeGreaterThan(-1);
-  expect(destinationIds.indexOf(null)).toBe(-1);
-  expect(destinationIds.indexOf("de")).toBeGreaterThan(-1);
-  expect(getSelectedListItem(creator, "svc-translation-destination-locale").id).toBe("de");
+  expect(model.targetLocale).toBe("de");
+  const sourceValues = getChoiceValues(creator, "sourceLocale");
+  const targetValues = getChoiceValues(creator, "targetLocale");
+  expect(sourceValues.indexOf("de")).toBe(-1);
+  expect(sourceValues.indexOf("default")).toBeGreaterThan(-1);
+  expect(targetValues.indexOf("default")).toBe(-1);
+  expect(targetValues.indexOf("de")).toBeGreaterThan(-1);
+  expect(getSettingsQuestion(creator, "targetLocale").value).toBe("de");
 });
 
-test("destination locale defaults to survey.locale, not to the first locale in the list", () => {
+test("settings survey dropdowns drive the source and target locales", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  getSettingsQuestion(creator, "targetLocale").value = "fr";
+  expect(model.targetLocale).toBe("fr");
+  expect(creator.survey.locale).toBe("fr");
+  expect(model.targetSurvey.locale).toBe("fr");
+  getSettingsQuestion(creator, "sourceLocale").value = "de";
+  expect(model.sourceLocale).toBe("de");
+  expect(model.sourceSurvey.locale).toBe("de");
+  // Selecting the default entry maps back to the empty locale.
+  getSettingsQuestion(creator, "sourceLocale").value = "default";
+  expect(model.sourceLocale || "").toBe("");
+  expect(model.sourceSurvey.locale || "").toBe("");
+});
+
+test("target locale defaults to survey.locale, not to the first locale in the list", () => {
   const json = JSON.parse(JSON.stringify(sideBySideJSON));
   json.locale = "fr";
   json.pages[0].elements[0].title.fr = "Question 1 fr";
   const creator = createSideBySideCreator(json);
   const model = getModel(creator);
-  expect(model.destinationLocale).toBe("fr");
-  expect(model.destinationSurvey.locale).toBe("fr");
-  expect(getSelectedListItem(creator, "svc-translation-destination-locale").id).toBe("fr");
+  expect(model.targetLocale).toBe("fr");
+  expect(model.targetSurvey.locale).toBe("fr");
+  expect(getSettingsQuestion(creator, "targetLocale").value).toBe("fr");
 });
 
-test("destination locale defaults to the default language when survey.locale is empty, it equals the source language", () => {
+test("target locale defaults to the default language when survey.locale is empty, it equals the source language", () => {
   const json = JSON.parse(JSON.stringify(sideBySideJSON));
   delete json.locale;
   const creator = createSideBySideCreator(json);
   const model = getModel(creator);
   expect(model.sourceLocale || "").toBe("");
-  expect(model.destinationLocale || "").toBe("");
-  expect(model.destinationSurvey.locale).toBeFalsy();
-  const destinationIds = getListItems(creator, "svc-translation-destination-locale").map(item => item.id);
-  expect(destinationIds.indexOf(null)).toBeGreaterThan(-1);
-  expect(getSelectedListItem(creator, "svc-translation-destination-locale").id).toBe(null);
-  expect(getSelectedListItem(creator, "svc-translation-source-locale").id).toBe(null);
+  expect(model.targetLocale || "").toBe("");
+  expect(model.targetSurvey.locale).toBeFalsy();
+  const targetValues = getChoiceValues(creator, "targetLocale");
+  expect(targetValues.indexOf("default")).toBeGreaterThan(-1);
+  expect(getSettingsQuestion(creator, "targetLocale").value).toBe("default");
+  expect(getSettingsQuestion(creator, "sourceLocale").value).toBe("default");
 });
 
-test("destination locale defaults to the default language when survey.locale equals the default locale name", () => {
+test("target locale defaults to the default language when survey.locale equals the default locale name", () => {
   const json = JSON.parse(JSON.stringify(sideBySideJSON));
   json.locale = "en";
   const creator = createSideBySideCreator(json);
   const model = getModel(creator);
-  expect(model.destinationLocale || "").toBe("");
+  expect(model.targetLocale || "").toBe("");
 });
 
 test("structural undo rebuilds instances", () => {
@@ -262,12 +293,12 @@ test("structural undo rebuilds instances", () => {
   expect(creator.survey.getQuestionByName("q4")).toBeFalsy();
   creator.activeTab = "translation";
   const model = getModel(creator);
-  expect(model.destinationSurvey.getQuestionByName("q4")).toBeFalsy();
-  const oldDestination = model.destinationSurvey;
+  expect(model.targetSurvey.getQuestionByName("q4")).toBeFalsy();
+  const oldTarget = model.targetSurvey;
   creator.undo();
   expect(creator.survey.getQuestionByName("q4")).toBeTruthy();
-  expect(model.destinationSurvey).not.toBe(oldDestination);
-  expect(model.destinationSurvey.getQuestionByName("q4")).toBeTruthy();
+  expect(model.targetSurvey).not.toBe(oldTarget);
+  expect(model.targetSurvey.getQuestionByName("q4")).toBeTruthy();
 });
 
 test("onTranslationItemChanging applies to forwarded edits", () => {
@@ -276,47 +307,47 @@ test("onTranslationItemChanging applies to forwarded edits", () => {
     options.newText = options.newText + "!";
   });
   const model = getModel(creator);
-  const dstQuestion = model.destinationSurvey.getQuestionByName("q1");
-  dstQuestion.locTitle.text = "Frage 1 neu";
+  const targetQuestion = model.targetSurvey.getQuestionByName("q1");
+  targetQuestion.locTitle.text = "Frage 1 neu";
   const realQuestion = creator.survey.getQuestionByName("q1");
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu!");
-  expect(dstQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu!");
+  expect(targetQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu!");
 });
 
-test("source and destination panes keep their scrollbars in sync", () => {
+test("source and target panes keep their scrollbars in sync", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   const source = document.createElement("div");
-  const destination = document.createElement("div");
+  const target = document.createElement("div");
   model.setSourceScrollElement(source);
-  model.setDestinationScrollElement(destination);
+  model.setTargetScrollElement(target);
 
   source.scrollTop = 100;
   source.dispatchEvent(new Event("scroll"));
-  expect(destination.scrollTop).toBe(100);
+  expect(target.scrollTop).toBe(100);
 
-  destination.scrollTop = 40;
-  destination.dispatchEvent(new Event("scroll"));
+  target.scrollTop = 40;
+  target.dispatchEvent(new Event("scroll"));
   expect(source.scrollTop).toBe(40);
 
   // Unmounting a pane (element set to undefined) detaches the sync.
   model.setSourceScrollElement(undefined);
-  destination.scrollTop = 70;
-  destination.dispatchEvent(new Event("scroll"));
+  target.scrollTop = 70;
+  target.dispatchEvent(new Event("scroll"));
   expect(source.scrollTop).toBe(40);
 
   // Re-attaching a new element (a rebuilt pane) restores the sync.
   const newSource = document.createElement("div");
   model.setSourceScrollElement(newSource);
-  destination.scrollTop = 25;
-  destination.dispatchEvent(new Event("scroll"));
+  target.scrollTop = 25;
+  target.dispatchEvent(new Event("scroll"));
   expect(newSource.scrollTop).toBe(25);
 
   // dispose() detaches everything; firing scroll on old elements must not throw.
   creator.activeTab = "designer";
   expect(() => {
-    destination.scrollTop = 10;
-    destination.dispatchEvent(new Event("scroll"));
+    target.scrollTop = 10;
+    target.dispatchEvent(new Event("scroll"));
   }).not.toThrow();
   expect(newSource.scrollTop).toBe(25);
 });
@@ -331,7 +362,7 @@ test("navigation bar shows on both panes, honors navigationButtonsLocation, desi
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   expect(model.sourceSurvey.isNavigationButtonsShowing).toBe("bottom");
-  expect(model.destinationSurvey.isNavigationButtonsShowing).toBe("bottom");
+  expect(model.targetSurvey.isNavigationButtonsShowing).toBe("bottom");
   expect(creator.survey.isNavigationButtonsShowing).toBe("none");
 
   const json = JSON.parse(JSON.stringify(sideBySideJSON));
@@ -339,18 +370,18 @@ test("navigation bar shows on both panes, honors navigationButtonsLocation, desi
   const creatorTop = createSideBySideCreator(json);
   const modelTop = getModel(creatorTop);
   expect(modelTop.sourceSurvey.isNavigationButtonsShowing).toBe("top");
-  expect(modelTop.destinationSurvey.isNavigationButtonsShowing).toBe("top");
+  expect(modelTop.targetSurvey.isNavigationButtonsShowing).toBe("top");
 });
 
-test("nav caption properties are mapped: destination edits write the destination locale, undo restores, JSON round-trips", () => {
+test("nav caption properties are mapped: target edits write the target locale, undo restores, JSON round-trips", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const dst = model.destinationSurvey;
+  const target = model.targetSurvey;
   navCaptionProps.forEach(name => {
-    (<any>dst).getLocalizableString(name).text = name + "-de";
+    (<any>target).getLocalizableString(name).text = name + "-de";
   });
   // Every property was known to the mapping - no self-heal rebuild happened.
-  expect(model.destinationSurvey).toBe(dst);
+  expect(model.targetSurvey).toBe(target);
   navCaptionProps.forEach(name => {
     expect((<any>creator.survey).getLocalizableString(name).getLocaleText("de")).toBe(name + "-de");
   });
@@ -362,7 +393,7 @@ test("nav caption properties are mapped: destination edits write the destination
   expect((<any>creator.survey).getLocalizableString("startSurveyText").getLocaleText("de")).toBe("startSurveyText-de");
 });
 
-test("source pane Next/Prev navigate and sync destination pane and the page dropdown", () => {
+test("source pane Next/Prev navigate and sync target pane and the page dropdown", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   const next = getNavAction(model.sourceSurvey, "sv-nav-next");
@@ -370,14 +401,14 @@ test("source pane Next/Prev navigate and sync destination pane and the page drop
   next.action();
   expect(model.sourceSurvey.currentPage.name).toBe("page2");
   expect(model.selectedPageName).toBe("page2");
-  expect(model.destinationSurvey.currentPage.name).toBe("page2");
+  expect(model.targetSurvey.currentPage.name).toBe("page2");
   expect(getSelectedListItem(creator, "svc-translation-filter-page").id).toBe("page2");
   const prev = getNavAction(model.sourceSurvey, "sv-nav-prev");
   expect(prev.visible).toBeTruthy();
   prev.action();
   expect(model.sourceSurvey.currentPage.name).toBe("page1");
   expect(model.selectedPageName).toBe("page1");
-  expect(model.destinationSurvey.currentPage.name).toBe("page1");
+  expect(model.targetSurvey.currentPage.name).toBe("page1");
 });
 
 test("source pane Next is not blocked by required questions on the design-mode copy", () => {
@@ -403,17 +434,17 @@ test("source pane Complete and Preview never leave the running state", () => {
   expect(model.sourceSurvey.currentPage.name).toBe("page2");
 });
 
-test("destination pane nav buttons never navigate, preview or complete", () => {
+test("target pane nav buttons never navigate, preview or complete", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const dst = model.destinationSurvey;
+  const target = model.targetSurvey;
   navActionIds.forEach(id => {
-    const action = getNavAction(dst, id);
+    const action = getNavAction(target, id);
     expect(action).toBeTruthy();
     action.action();
   });
-  expect(dst.state).toBe("running");
-  expect(dst.currentPage.name).toBe("page1");
+  expect(target.state).toBe("running");
+  expect(target.currentPage.name).toBe("page1");
   expect(model.selectedPageName).toBe("page1");
 });
 
@@ -422,14 +453,14 @@ test("button visibility follows runtime rules and updates when the page dropdown
   json.showPreviewBeforeComplete = true;
   const creator = createSideBySideCreator(json);
   const model = getModel(creator);
-  [model.sourceSurvey, model.destinationSurvey].forEach(survey => {
+  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
     expect(getNavAction(survey, "sv-nav-prev").visible).toBeFalsy();
     expect(getNavAction(survey, "sv-nav-next").visible).toBeTruthy();
     expect(getNavAction(survey, "sv-nav-preview").visible).toBeFalsy();
     expect(getNavAction(survey, "sv-nav-complete").visible).toBeFalsy();
   });
   model.selectedPageName = "page2";
-  [model.sourceSurvey, model.destinationSurvey].forEach(survey => {
+  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
     expect(getNavAction(survey, "sv-nav-prev").visible).toBeTruthy();
     expect(getNavAction(survey, "sv-nav-next").visible).toBeFalsy();
     expect(getNavAction(survey, "sv-nav-preview").visible).toBeTruthy();
@@ -443,22 +474,22 @@ test("nav captions follow the pane locales and refresh on a locale switch", () =
   const creator = createSideBySideCreator(json);
   const model = getModel(creator);
   expect(getNavAction(model.sourceSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Done");
-  expect(getNavAction(model.destinationSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Fertig");
-  model.destinationLocale = "fr";
-  expect(getNavAction(model.destinationSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Done");
-  model.destinationLocale = "de";
-  expect(getNavAction(model.destinationSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Fertig");
+  expect(getNavAction(model.targetSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Fertig");
+  model.targetLocale = "fr";
+  expect(getNavAction(model.targetSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Done");
+  model.targetLocale = "de";
+  expect(getNavAction(model.targetSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Fertig");
 });
 
 test("deactivate detaches copies", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const dstSurvey = model.destinationSurvey;
-  const dstQuestion = <QuestionTextModel>dstSurvey.getQuestionByName("q1");
+  const targetSurvey = model.targetSurvey;
+  const targetQuestion = <QuestionTextModel>targetSurvey.getQuestionByName("q1");
   creator.activeTab = "designer";
   expect(getPlugin(creator).model).toBeFalsy();
   expect(() => {
-    dstQuestion.locTitle.text = "after deactivate";
+    targetQuestion.locTitle.text = "after deactivate";
   }).not.toThrow();
   const realQuestion = creator.survey.getQuestionByName("q1");
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");

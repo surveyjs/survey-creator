@@ -528,7 +528,7 @@ test("Actions mode small", () => {
   const creator = new CreatorTester();
   const tabTranslation = new TabTranslationPlugin(creator);
   const actions = tabTranslation.createActions();
-  expect(actions.length).toBe(9);
+  expect(actions.length).toBe(6);
   actions.forEach(action => expect(action.mode).toBe("small"));
 });
 

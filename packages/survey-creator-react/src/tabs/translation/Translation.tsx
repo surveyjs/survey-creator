@@ -54,9 +54,9 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
           ref={(el) => { model.setSourceScrollElement(el); }}>
           <Survey model={model.sourceSurvey}></Survey>
         </div>
-        <div key={model.destinationSurvey?.elementIdPrefix} className="st-side-by-side__target"
-          ref={(el) => { model.setDestinationScrollElement(el); }}>
-          <Survey model={model.destinationSurvey}></Survey>
+        <div key={model.targetSurvey?.elementIdPrefix} className="st-side-by-side__target"
+          ref={(el) => { model.setTargetScrollElement(el); }}>
+          <Survey model={model.targetSurvey}></Survey>
         </div>
       </div>
     );
