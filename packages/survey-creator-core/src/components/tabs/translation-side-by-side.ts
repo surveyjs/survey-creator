@@ -58,11 +58,13 @@ export class TranslationSideBySide extends Translation {
   // language dropdowns (the standard mode shows the languages matrix instead).
   protected createSettingsSurvey(): SurveyModel {
     const json = this.getSideBySideSettingsSurveyJSON();
-    setSurveyJSONForPropertyGrid(json);
+    // titleLocationLeft = false: the language dropdown titles sit on top of the editors,
+    // as in the designer's property grid.
+    setSurveyJSONForPropertyGrid(json, true, false);
     const res = this.options.createSurvey(json, "translation_settings", this, (survey: SurveyModel): void => {
       survey.css = propertyGridCss;
-      survey.css.root += " st-properties";
-      survey.rootCss += " st-properties";
+      // The page plays the role of a property grid category content, as in the designer.
+      survey.css.page.root += " spg-panel__content";
     });
     res.onValueChanged.add((sender, options) => {
       if (this._updatingSettingsSurvey || this.isDisposed) return;
