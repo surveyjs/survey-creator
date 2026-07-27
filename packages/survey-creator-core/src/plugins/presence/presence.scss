@@ -51,6 +51,14 @@
   box-shadow: inset 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused));
 }
 
+// The cell's textarea starts at the cell edge with an opaque background
+// (translation.scss .st-formbox__input) and would paint over the inset ring -
+// keep it transparent while the peer decoration is shown (same :focus-within
+// guard as the ring itself).
+.st-table__cell[data-collab-focus="on"]:not(:focus-within) .st-formbox__input {
+  background-color: transparent;
+}
+
 // Questions nested inside a panel draw the native ring INSET on the ::after
 // pseudo-element while the content node itself has box-shadow: none (see the
 // .sd-panel block in question.scss) - mirror both parts of that technique.
