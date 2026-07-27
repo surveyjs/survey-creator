@@ -31,8 +31,6 @@ export class TranslationSideBySide extends Translation {
   // a cell of the strings grid or an inline string editor of the forms target pane. Used to
   // restore the selection (or at least the page) when the view changes.
   private selectedLocString: ILocalizableString;
-  // Whether the grid was scoped to a single page when the user left it for the forms view.
-  private gridWasPageScoped: boolean = false;
 
   constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms") {
     super(survey, options, true);
@@ -176,19 +174,16 @@ export class TranslationSideBySide extends Translation {
     this.useSourceTargetColumns = this.isSideBySideGrid;
     if (this.isSideBySideGrid) {
       this.disposeInstances();
-      const restorePageScope = this.gridWasPageScoped;
-      this.gridWasPageScoped = false;
       if (this.showAllStrings) {
         this.showAllStrings = false; // its reset builds the grid
       } else {
         this.reset();
       }
-      this.applySelectionToGrid(restorePageScope);
+      this.applySelectionToGrid();
     } else {
       this.applySelectedPageToForms();
       // The page scope is a grid-view concept: a scoped root would cut the string mappings
-      // and the CSV export down to one page. Cleared here and restored on the way back.
-      this.gridWasPageScoped = !!this.filteredPage;
+      // and the CSV export down to one page. Cleared here and re-applied on the way back.
       if (!!this.filteredPage) {
         this.filteredPage = null;
       }
@@ -197,16 +192,20 @@ export class TranslationSideBySide extends Translation {
       this.activateSelectedStringEditor();
     }
   }
-  // forms -> grid: a page-scoped grid moves its scope to the page the panes showed, then the
-  // grid cell of the last focused string (when its row is present) gets the input focus.
-  private applySelectionToGrid(restorePageScope: boolean): void {
-    if ((!!this.filteredPage || restorePageScope) && !!this.selectedPageName &&
-      (!this.filteredPage || this.filteredPage.name !== this.selectedPageName)) {
-      const page = this.survey.getPageByName(this.selectedPageName);
-      if (!!page)this.filteredPage = page; // the property's onSet rebuilds the grid
-    }
+  // forms -> grid: the grid opens scoped to the page the panes showed (the selected string's
+  // page when one is known), then the grid cell of the last focused string (when its row is
+  // present) gets the input focus.
+  private applySelectionToGrid(): void {
+    // The scope was cleared on entering the forms view, so the root covers the whole survey here.
     const info = this.findSelectedItemInfo();
-    if (!!info)this.focusGridCell(info.item);
+    const pageName = !!info && !!info.pageName ? info.pageName : this.selectedPageName;
+    const page = !!pageName ? this.survey.getPageByName(pageName) : undefined;
+    if (!!page && this.filteredPage !== page) {
+      this.filteredPage = page; // the property's onSet rebuilds the grid
+    }
+    // Re-resolved: the scoping above rebuilt the root tree and the strings survey.
+    const scopedInfo = this.findSelectedItemInfo();
+    if (!!scopedInfo)this.focusGridCell(scopedInfo.item);
   }
   // grid -> forms: the panes open on the page of the last focused string (or on the grid's
   // page scope). Called before the instances are rebuilt, while root is still the grid tree.

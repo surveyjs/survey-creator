@@ -328,8 +328,9 @@ test("selection sync: the string focused in the forms view gets the input focus 
   } finally {
     tracker.restore();
   }
-  // The grid showed all pages - no page scope is forced by the switch.
-  expect(model.filteredPage).toBeFalsy();
+  // The grid opens scoped to the selected string's page; the page selector shows it.
+  expect(model.filteredPage.name).toBe("page2");
+  expect(creator.toolbar.getActionById("svc-translation-filter-page").title).toBe("page2");
 });
 
 test("selection sync: StringEditorViewModelBase.onFocus reports the focused string to the creator", () => {
@@ -347,6 +348,7 @@ test("selection sync: StringEditorViewModelBase.onFocus reports the focused stri
   } finally {
     tracker.restore();
   }
+  expect(model.filteredPage.name).toBe("page1");
   editor.dispose();
 });
 
@@ -391,19 +393,20 @@ test("selection sync: without a focused string the views keep the same page", ()
   switchView(creator, "forms");
   // The forms view opens on the page the grid was scoped to.
   expect(model.selectedPageName).toBe("page2");
-  // Navigating the panes to another page moves the page-scoped grid there on the way back.
+  // Navigating the panes to another page moves the grid scope there on the way back.
   model.selectedPageName = "page1";
   switchView(creator, "grid");
   expect(model.filteredPage.name).toBe("page1");
-  // The forms page survives a round trip over an "All Pages" grid, which never gets a scope forced on it.
+  expect(creator.toolbar.getActionById("svc-translation-filter-page").title).toBe("page1");
   switchView(creator, "forms");
   expect(model.selectedPageName).toBe("page1");
+  // Even an "All Pages" grid reopens scoped to the page the panes showed.
   switchView(creator, "grid");
   model.filteredPage = null;
   switchView(creator, "forms");
   expect(model.selectedPageName).toBe("page1");
   switchView(creator, "grid");
-  expect(model.filteredPage).toBeFalsy();
+  expect(model.filteredPage.name).toBe("page1");
 });
 
 test("grid view: replacing the survey rebuilds the grid for the new survey", () => {
