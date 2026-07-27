@@ -38,6 +38,19 @@
     0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-bg-brand-primary));
 }
 
+// A peer is editing a Translations-tab cell: ring the table cell (td). The
+// cells are opaque flex blocks touching each other, so an outer shadow would
+// be painted over by the next cell - the ring is INSET, matching the Figma
+// spec where the frame sits inside the cell bounds.
+// Local focus wins: while the local caret is inside the cell the peer
+// decoration gets out of the way. The :focus-within guard kills the ring the
+// same instant the caret lands; the overlay drops the whole decoration
+// (including the name badge) on its next tick - without that JS part the
+// badge would keep floating under a ringless cell.
+.st-table__cell[data-collab-focus="on"]:not(:focus-within) {
+  box-shadow: inset 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused));
+}
+
 // Questions nested inside a panel draw the native ring INSET on the ::after
 // pseudo-element while the content node itself has box-shadow: none (see the
 // .sd-panel block in question.scss) - mirror both parts of that technique.

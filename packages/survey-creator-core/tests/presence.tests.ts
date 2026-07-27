@@ -824,6 +824,212 @@ test("presence: designer name badge hides under the flyout panel, pg badge does 
   }
 });
 
+/** Creator with the Translations tab active; q1 has a default+de title. */
+function createTranslationCreator(): { creator: CreatorTester, plugin: PresencePlugin, matrix: any, stringsSurvey: any } {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = {
+    pages: [{
+      name: "page1",
+      elements: [{ type: "text", name: "q1", title: { default: "Question title", de: "Titel" } }]
+    }]
+  };
+  const plugin = new PresencePlugin(creator);
+  creator.addPlugin("presence", plugin);
+  creator.makeNewViewActive("translation");
+  const stringsSurvey = (<any>creator.getPlugin("translation")).model.stringsSurvey;
+  const matrix = stringsSurvey.getAllQuestions().find((q: any) => {
+    const item = q.rows?.[0]?.["translationData"];
+    return item && item.name === "title" && item.context?.name === "q1";
+  });
+  return { creator, plugin, matrix, stringsSurvey };
+}
+
+/** Fake translation-tab DOM: a matrix row with a row-text cell + one td per locale. */
+function buildTranslationRow(matrixName: string, cellCount = 2): HTMLElement {
+  const container = document.createElement("div");
+  container.id = "scrollableDiv-translation";
+  const row = document.createElement("div");
+  row.setAttribute("data-name", matrixName);
+  const rowText = document.createElement("td");
+  rowText.className = "st-table__cell st-table__cell--row-text";
+  row.appendChild(rowText);
+  for (let i = 0; i < cellCount; i++) {
+    const cell = document.createElement("td");
+    cell.className = "st-table__cell";
+    cell.appendChild(document.createElement("textarea"));
+    row.appendChild(cell);
+  }
+  container.appendChild(row);
+  document.body.appendChild(container);
+  return container;
+}
+
+test("presence: focusing a translation cell emits trCell; tab switch clears it", (): any => {
+  const { creator, plugin, matrix, stringsSurvey } = createTranslationCreator();
+  try {
+    expect(matrix).toBeTruthy();
+    const cellQ = matrix.visibleRows[0].cells[0].question;
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: cellQ });
+    expect(plugin.getState().trCell).toEqual({
+      m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title"
+    });
+    // Another locale column of the same row re-emits with the new column.
+    const deCellQ = matrix.visibleRows[0].cells[1].question;
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: deCellQ });
+    expect(plugin.getState().trCell.l).toEqual("de");
+    // Leaving the tab clears the focus - the table model does not survive it.
+    creator.makeNewViewActive("designer");
+    expect(plugin.getState().trCell).toBeNull();
+  } finally {
+    plugin.dispose();
+  }
+});
+
+test("presence: trCell is cleared after blur with no follow-up focus", async (): Promise<any> => {
+  const { plugin, matrix, stringsSurvey } = createTranslationCreator();
+  const container = buildTranslationRow(matrix.name);
+  try {
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[0].question });
+    expect(plugin.getState().trCell).toBeTruthy();
+    const textarea = <HTMLElement>container.querySelector("textarea");
+    textarea.dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
+    textarea.dispatchEvent(new FocusEvent("focusout", { bubbles: true }));
+    await new Promise((resolve) => setTimeout(resolve, 350));
+    expect(plugin.getState().trCell).toBeNull();
+  } finally {
+    container.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: remote trCell decorates the right cell; unknown locale does not", (): any => {
+  const { plugin, matrix } = createTranslationCreator();
+  const container = buildTranslationRow(matrix.name);
+  const boxes = container.querySelectorAll(".st-table__cell:not(.st-table__cell--row-text)");
+  const trState = (trCell: any): any =>
+    ({ tab: "translation", tabId: "translation", sel: null, pgFocus: null, edit: null, trCell, cur: null });
+  const trCell = { m: matrix.name, l: "de", loc: "/pages/page1/elements/q1", p: "title" };
+  try {
+    plugin.upsertPeer(peerEntry("c1", { state: trState(trCell) }));
+    (<any>plugin.overlay).render();
+    expect((<HTMLElement>boxes[1]).getAttribute("data-collab-focus")).toEqual("on");
+    expect((<HTMLElement>boxes[1]).style.getPropertyValue("--collab-peer-color")).toEqual("#e91e63");
+    expect((<HTMLElement>boxes[0]).hasAttribute("data-collab-focus")).toBeFalsy();
+
+    // A peer's matrix name that does not exist locally (different filters)
+    // still resolves through the locator + property identity scan.
+    plugin.upsertPeer(peerEntry("c1", { state: trState({ ...trCell, m: "nope" }) }));
+    (<any>plugin.overlay).render();
+    expect((<HTMLElement>boxes[1]).getAttribute("data-collab-focus")).toEqual("on");
+
+    // A locale not visible locally has no honest cell to ring.
+    plugin.upsertPeer(peerEntry("c1", { state: trState({ ...trCell, l: "fr" }) }));
+    (<any>plugin.overlay).render();
+    expect(container.querySelectorAll("[data-collab-focus]").length).toEqual(0);
+
+    plugin.upsertPeer(peerEntry("c1", { state: trState(trCell) }));
+    (<any>plugin.overlay).render();
+    expect((<HTMLElement>boxes[1]).getAttribute("data-collab-focus")).toEqual("on");
+    plugin.removePeer("c1");
+    (<any>plugin.overlay).render();
+    expect((<HTMLElement>boxes[1]).hasAttribute("data-collab-focus")).toBeFalsy();
+    expect((<HTMLElement>boxes[1]).style.getPropertyValue("--collab-peer-color")).toEqual("");
+  } finally {
+    container.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: a hidden tab releases its translation cell and re-claims it on return", (): any => {
+  const { plugin, matrix, stringsSurvey } = createTranslationCreator();
+  const container = buildTranslationRow(matrix.name);
+  const textarea = <HTMLTextAreaElement>container.querySelector("textarea");
+  const setVisibility = (v: string): void => {
+    Object.defineProperty(document, "visibilityState", { value: v, configurable: true });
+    document.dispatchEvent(new Event("visibilitychange"));
+  };
+  try {
+    textarea.focus();
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[0].question });
+    expect(plugin.getState().trCell).toBeTruthy();
+
+    // Tab switch: no blur fires, but a backgrounded client must not keep
+    // claiming the cell - peers would see a ring for an absent user.
+    setVisibility("hidden");
+    expect(plugin.getState().trCell).toBeNull();
+
+    // Back with the caret still in the cell: the claim returns.
+    setVisibility("visible");
+    expect(plugin.getState().trCell).toEqual({
+      m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title"
+    });
+
+    // Back with the caret gone: the stale claim is dropped for good.
+    setVisibility("hidden");
+    expect(plugin.getState().trCell).toBeNull();
+    textarea.blur();
+    setVisibility("visible");
+    expect(plugin.getState().trCell).toBeNull();
+  } finally {
+    setVisibility("visible");
+    container.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: a locally focused translation cell drops the peer decoration entirely", (): any => {
+  const { plugin, matrix } = createTranslationCreator();
+  const container = buildTranslationRow(matrix.name);
+  const box = <HTMLElement>container.querySelector(".st-table__cell:not(.st-table__cell--row-text)");
+  const textarea = <HTMLTextAreaElement>box.querySelector("textarea");
+  const trState: any = {
+    tab: "translation", tabId: "translation", sel: null, pgFocus: null, edit: null,
+    trCell: { m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title" }, cur: null
+  };
+  try {
+    plugin.upsertPeer(peerEntry("c1", { state: trState }));
+    (<any>plugin.overlay).render();
+    expect(box.getAttribute("data-collab-focus")).toEqual("on");
+    expect(document.body.querySelector(".collab-presence-badge")).toBeTruthy();
+
+    // The local caret enters the cell: ring attribute AND badge must go -
+    // a badge floating under a ringless cell reads as a broken highlight.
+    textarea.focus();
+    (<any>plugin.overlay).render();
+    expect(box.hasAttribute("data-collab-focus")).toBeFalsy();
+    expect(document.body.querySelector(".collab-presence-badge")).toBeFalsy();
+
+    // The caret leaves: the peer still holds the cell - decoration returns.
+    textarea.blur();
+    (<any>plugin.overlay).render();
+    expect(box.getAttribute("data-collab-focus")).toEqual("on");
+    expect(document.body.querySelector(".collab-presence-badge")).toBeTruthy();
+  } finally {
+    container.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: first peer wins a contested translation cell", (): any => {
+  const { plugin, matrix } = createTranslationCreator();
+  const container = buildTranslationRow(matrix.name);
+  const box = <HTMLElement>container.querySelector(".st-table__cell:not(.st-table__cell--row-text)");
+  const trState: any = {
+    tab: "translation", tabId: "translation", sel: null, pgFocus: null, edit: null,
+    trCell: { m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title" }, cur: null
+  };
+  try {
+    plugin.upsertPeer(peerEntry("c1", { state: trState }));
+    plugin.upsertPeer(peerEntry("c2", { state: trState, color: "#2196f3" }));
+    (<any>plugin.overlay).render();
+    expect(box.getAttribute("data-collab-focus")).toEqual("on");
+    expect(box.style.getPropertyValue("--collab-peer-color")).toEqual("#e91e63");
+  } finally {
+    container.remove();
+    plugin.dispose();
+  }
+});
+
 test("presence: dispose stops capturing", (): any => {
   const { creator, plugin, states } = createCreator();
   plugin.dispose();

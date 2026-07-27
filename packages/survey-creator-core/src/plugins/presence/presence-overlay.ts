@@ -93,6 +93,10 @@ export class PresenceOverlay {
     DomDocumentHelper.getBody().appendChild(this.layer);
 
     this.doc.addEventListener("scroll", this.onScroll, true);
+    // Local focus moves decorations (a locally focused translation cell is
+    // undecorated) but mutates no observed DOM - repaint on focus changes.
+    this.doc.addEventListener("focusin", this.onFocusChange, true);
+    this.doc.addEventListener("focusout", this.onFocusChange, true);
     DomWindowHelper.addEventListener("resize", this.onResize);
     this.fallbackTimer = setInterval(() => this.refresh(), FALLBACK_TICK_MS);
     this.rootPoll = this.raf(this.attachObservers);
@@ -115,6 +119,8 @@ export class PresenceOverlay {
     this.cancelRaf(this.rootPoll);
     clearInterval(this.fallbackTimer);
     this.doc.removeEventListener("scroll", this.onScroll, true);
+    this.doc.removeEventListener("focusin", this.onFocusChange, true);
+    this.doc.removeEventListener("focusout", this.onFocusChange, true);
     DomWindowHelper.removeEventListener("resize", this.onResize);
     this.resizeObserver?.disconnect();
     this.mutationObserver?.disconnect();
@@ -132,6 +138,7 @@ export class PresenceOverlay {
 
   private onScroll = (): void => this.refresh();
   private onResize = (): void => this.refresh();
+  private onFocusChange = (): void => this.refresh();
 
   // rootElement appears only after the framework renders the creator.
   private attachObservers = (): void => {
@@ -240,6 +247,59 @@ export class PresenceOverlay {
     if (anchor.hasAttribute("data-sv-drop-target-survey-page")) return anchor;
     return anchor.querySelector(":scope > .svc-question__content") ??
       anchor.querySelector(":scope > .svc-page__content");
+  }
+
+  /**
+   * trCell -> the local stringsSurvey matrix name. Matrix names diverge when
+   * peers use different showAllStrings/page-filter settings, so identity is
+   * established by the owning element's locator + the property name, with the
+   * sender's name kept as the same-view fast path. Cached per stringsSurvey
+   * instance - the getAllQuestions scan runs once per peer state change, not
+   * per rAF tick (the survey is recreated on every locale/filter change,
+   * which also invalidates the cache).
+   */
+  private trMatrixCache: { survey: unknown, byKey: Map<string, string | null> } | null = null;
+
+  private resolveTrMatrixName(tr: NonNullable<IPresenceState["trCell"]>, survey: any): string | null {
+    if (this.trMatrixCache?.survey !== survey)this.trMatrixCache = { survey, byKey: new Map() };
+    const key = `${tr.loc ?? ""}|${tr.p}|${tr.m}`;
+    const cached = this.trMatrixCache.byKey.get(key);
+    if (cached !== undefined) return cached;
+    let name: string | null = null;
+    if (typeof tr.loc === "string") {
+      let target: any = null;
+      try {
+        target = resolveLocator(tr.loc, this.creator.survey);
+      } catch{ /* fall through to the name match */ }
+      if (target) {
+        const hit = survey.getAllQuestions().find((mx: any) => {
+          const item = mx.rows?.[0]?.["translationData"];
+          return item && item.name === tr.p && item.context === target;
+        });
+        name = hit?.name ?? null;
+      }
+    }
+    if (!name && survey.getQuestionByName?.(tr.m)) name = tr.m;
+    this.trMatrixCache.byKey.set(key, name);
+    return name;
+  }
+
+  /**
+   * trCell -> the cell's td node. The column index comes from the LOCAL
+   * matrix columns (peers may show different locale sets); the row-text cell
+   * is excluded by the selector, so locale-cell order matches the column
+   * order. A locale not visible locally, or a lazily-skipped (skeleton) row,
+   * resolves to null - the next tick retries like any other missing anchor.
+   */
+  private resolveTranslationCell(tr: NonNullable<IPresenceState["trCell"]>, survey: any, container: Element): Element | null {
+    const matrixName = this.resolveTrMatrixName(tr, survey);
+    const matrix = matrixName ? survey.getQuestionByName(matrixName) : null;
+    if (!matrix) return null;
+    const colIdx = (matrix.columns ?? []).findIndex((c: any) => c.name === tr.l);
+    if (colIdx < 0) return null;
+    const row = container.querySelector(PRESENCE_SELECTORS.dataName(matrixName));
+    const boxes = row?.querySelectorAll(PRESENCE_SELECTORS.translationCell);
+    return boxes && colIdx < boxes.length ? boxes[colIdx] : null;
   }
 
   /**
@@ -407,6 +467,11 @@ export class PresenceOverlay {
     const occluder: IRect | undefined = panel && panel.width > 0 && panel.height > 0 ? panel : undefined;
     const designer = localTab === "designer" ? this.designerContainer() : null;
     const designerRect = designer?.getBoundingClientRect();
+    const translation = localTab === "translation"
+      ? this.doc.querySelector(PRESENCE_SELECTORS.tabContent("translation")) : null;
+    const translationRect = translation?.getBoundingClientRect();
+    const stringsSurvey = translation
+      ? (this.creator.getPlugin("translation", false) as any)?.model?.stringsSurvey : null;
     // Desired decorations this tick; first peer to claim a node wins.
     const wanted = new Map<HTMLElement, IDecoration>();
 
@@ -452,6 +517,22 @@ export class PresenceOverlay {
           if (target instanceof HTMLElement && !wanted.has(target)) {
             wanted.set(target, { mode: "on", color, name: peer.name, clip: sidebarRect });
           }
+        }
+      }
+
+      // 2b) translation-cell ring - the mode is always "on": the capture side
+      // clears trCell atomically with the tab change (the peer's table model
+      // is disposed on deactivate), so unlike `sel` an "away" state cannot
+      // occur. Rendering is gated on the LOCAL tab like the designer rings.
+      // A cell the local user is editing is not decorated at all - the ring
+      // is also killed instantly by the :focus-within guard in the CSS, and
+      // skipping here removes the badge with it (a badge under a ringless
+      // cell reads as a broken highlight).
+      if (state.trCell && translation && stringsSurvey) {
+        const cell = this.resolveTranslationCell(state.trCell, stringsSurvey, translation);
+        const locallyFocused = !!cell && cell.contains(this.doc.activeElement);
+        if (cell instanceof HTMLElement && !locallyFocused && !wanted.has(cell)) {
+          wanted.set(cell, { mode: "on", color, name: peer.name, clip: translationRect, avoid: occluder });
         }
       }
 

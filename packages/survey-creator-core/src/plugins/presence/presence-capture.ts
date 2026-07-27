@@ -23,10 +23,11 @@ const cancelRaf = (id: any): void => {
  */
 export class PresenceCapture {
   public onStateChanged: EventBase<PresenceCapture, { state: IPresenceState }> = new EventBase();
-  private state: IPresenceState = { tab: "", tabId: "", sel: null, pgFocus: null, edit: null, cur: null };
+  private state: IPresenceState = { tab: "", tabId: "", sel: null, pgFocus: null, edit: null, trCell: null, cur: null };
   private disposed = false;
   private blurTimer: ReturnType<typeof setTimeout> | undefined;
   private editBlurTimer: ReturnType<typeof setTimeout> | undefined;
+  private trBlurTimer: ReturnType<typeof setTimeout> | undefined;
   private mouseTimer: ReturnType<typeof setTimeout> | undefined;
   private pendingMouse: MouseEvent | null = null;
   private lastCurKey = "";
@@ -69,6 +70,7 @@ export class PresenceCapture {
     }
     if (this.blurTimer !== undefined) clearTimeout(this.blurTimer);
     if (this.editBlurTimer !== undefined) clearTimeout(this.editBlurTimer);
+    if (this.trBlurTimer !== undefined) clearTimeout(this.trBlurTimer);
     if (this.mouseTimer !== undefined) clearTimeout(this.mouseTimer);
   }
 
@@ -84,7 +86,8 @@ export class PresenceCapture {
     // The dedupe key must reset too: cur went null outside sendCur, so the
     // next capture has to go through even if it repeats the last key.
     this.lastCurKey = "";
-    this.emit({ tab: this.creator.activeTab ?? "", tabId: this.creator.activeTabId ?? "", cur: null, edit: null });
+    this.hiddenTrCell = null;
+    this.emit({ tab: this.creator.activeTab ?? "", tabId: this.creator.activeTabId ?? "", cur: null, edit: null, trCell: null });
   }
   private onTabChanged = (): void => this.sendTab();
 
@@ -119,6 +122,10 @@ export class PresenceCapture {
   // change - the exact mechanism PropertyGridModel uses internally.
 
   private onSurveyInstanceCreated = (_: unknown, options: any): void => {
+    if (options?.area === "translation-tab:table") {
+      this.trackTranslationSurvey(options.survey);
+      return;
+    }
     const grid = options?.area === "property-grid" ? "main"
       : options?.area === "theme-tab:property-grid" ? "theme"
         : null;
@@ -136,6 +143,42 @@ export class PresenceCapture {
     });
   };
 
+  // --- translation-cell focus ----------------------------------------------------
+  // The Translations tab is a generated survey: one matrixdropdown (comment
+  // cells) per translatable string, one row (the property), one column per
+  // locale. Hooking at instance creation survives the table being rebuilt on
+  // every locale/filter change - the same mechanism as the property grid.
+  // The auto-translate dialog reports a different area and is never tracked.
+
+  private trackTranslationSurvey(survey: any): void {
+    if (!survey?.onFocusInQuestion) return;
+    survey.onFocusInQuestion.add((_s: unknown, o: any) => {
+      if (this.disposed || !o?.question) return;
+      const matrix = o.question.parentQuestion;
+      const item = matrix?.rows?.[0]?.["translationData"];
+      if (!matrix?.name || !item) return;
+      // Cell questions are named after their column (the locale); scan the
+      // row's cells as a fallback should that convention ever change.
+      const locale = o.question.name ||
+        matrix.visibleRows?.[0]?.cells?.find((c: any) => c.question === o.question)?.column?.name;
+      if (!locale) return;
+      let loc: string | null = null;
+      try {
+        loc = buildLocator(item.context, this.creator.survey);
+      } catch{ /* receivers fall back to the matrix-name match */ }
+      const prev = this.state.trCell;
+      if (!prev || prev.m !== matrix.name || prev.l !== locale) {
+        this.emit({ trCell: { m: matrix.name, l: locale, loc, p: String(item.name) } });
+      }
+    });
+  }
+
+  private inTranslationCell(node: EventTarget | null): boolean {
+    return node instanceof Element &&
+      !!node.closest(PRESENCE_SELECTORS.tabContent("translation")) &&
+      !!node.closest(PRESENCE_SELECTORS.translationCell);
+  }
+
   // Clear pgFocus when keyboard focus leaves the sidebar (survey-core has no
   // focus-out event, so this is DOM-level). Debounced: re-focusing another
   // grid field within the window keeps the state alive.
@@ -148,10 +191,24 @@ export class PresenceCapture {
       clearTimeout(this.blurTimer);
       this.blurTimer = undefined;
     }
+    // Re-focusing another translation cell within the debounce window keeps
+    // trCell alive (the model event re-emits the new cell); focus landing
+    // elsewhere lets the pending clear go through.
+    if (this.inTranslationCell(ev.target) && this.trBlurTimer !== undefined) {
+      clearTimeout(this.trBlurTimer);
+      this.trBlurTimer = undefined;
+    }
     this.trackEditFocusIn(ev.target);
   };
   private onFocusOut = (ev: FocusEvent): void => {
     this.trackEditFocusOut(ev.target);
+    if (this.inTranslationCell(ev.target)) {
+      if (this.trBlurTimer !== undefined) clearTimeout(this.trBlurTimer);
+      this.trBlurTimer = setTimeout(() => {
+        this.trBlurTimer = undefined;
+        if (!this.disposed && this.state.trCell)this.emit({ trCell: null });
+      }, PG_BLUR_DEBOUNCE_MS);
+    }
     if (!this.inSidebar(ev.target)) return;
     if (this.blurTimer !== undefined) clearTimeout(this.blurTimer);
     this.blurTimer = setTimeout(() => {
@@ -262,8 +319,28 @@ export class PresenceCapture {
     }, MOUSE_THROTTLE_MS);
   };
   private hideCursor = (): void => this.sendCur(null, "");
+  /**
+   * A hidden tab keeps its DOM focus (the browser fires no blur on tab
+   * switch), so without this a backgrounded client would claim its
+   * translation cell forever - peers would see a ring for a user who is not
+   * even looking at the page. Release the claim on hide and re-claim on
+   * return, when the caret is in fact still inside the cell.
+   */
+  private hiddenTrCell: IPresenceState["trCell"] = null;
   private onVisibility = (): void => {
-    if (this.doc?.visibilityState === "hidden")this.hideCursor();
+    if (this.doc?.visibilityState === "hidden") {
+      this.hideCursor();
+      if (this.state.trCell) {
+        this.hiddenTrCell = this.state.trCell;
+        this.emit({ trCell: null });
+      }
+    } else {
+      const claim = this.hiddenTrCell;
+      this.hiddenTrCell = null;
+      if (claim && this.inTranslationCell(this.doc?.activeElement ?? null)) {
+        this.emit({ trCell: claim });
+      }
+    }
   };
 
   private attachToRoot = (): void => {

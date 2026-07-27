@@ -69,6 +69,21 @@ export interface IPresenceState {
     /** Index of the `.svc-string-editor` within the owner (document order). */
     idx: number,
   };
+  /**
+   * Focused Translations-tab cell (a comment textarea in the strings table),
+   * or null. Cleared on tab switch - the tab's model (and the focus with it)
+   * does not survive deactivation, so unlike `sel` there is no "away" state.
+   */
+  trCell?: null | {
+    /** Sender's stringsSurvey matrix name - fast path when both peers see the same table. */
+    m: string,
+    /** Column name: the locale code, or "default" for the default locale. */
+    l: string,
+    /** Locator of the owning element (TranslationItem.context); null when not encodable. */
+    loc: string | null,
+    /** Property name (TranslationItem.name), e.g. "title". */
+    p: string,
+  };
   /** Mouse cursor, or null when the mouse left the creator. */
   cur: null | {
     /** tabId the cursor was captured on. */
@@ -142,6 +157,8 @@ export const PRESENCE_SELECTORS = {
   pgBooleanRow: "spg-question--boolean",
   pgCheckbox: ".sd-checkbox__decorator",
   stringEditor: ".svc-string-editor",
+  /** Translations strings-table locale cell (td) - one per locale column. */
+  translationCell: ".st-table__cell:not(.st-table__cell--row-text)",
   designerHeader: ".svc-designer-header",
   tabItem: (tabId: string): string => `#${cssEsc(`tab-${tabId}`)}`,
   tabContent: (tabId: string): string => `#${cssEsc(`scrollableDiv-${tabId}`)}`,
