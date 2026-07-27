@@ -222,11 +222,14 @@ export class PresenceOverlay {
   /**
    * The node that carries the native selection ring for an adorner: the page
    * anchor IS its `.svc-page__content`; a question/panel adorner has the
-   * `.svc-question__content` as a direct child.
+   * `.svc-question__content` as a direct child, a page wrapper (`.svc-page`,
+   * matched by name via its `data-sv-drop-target-survey-element` attribute)
+   * has the `.svc-page__content`.
    */
   private ringNode(anchor: Element): Element | null {
     if (anchor.hasAttribute("data-sv-drop-target-survey-page")) return anchor;
-    return anchor.querySelector(":scope > .svc-question__content");
+    return anchor.querySelector(":scope > .svc-question__content") ??
+      anchor.querySelector(":scope > .svc-page__content");
   }
 
   /** Locator of the locally selected object - gate for property-grid decorations. */

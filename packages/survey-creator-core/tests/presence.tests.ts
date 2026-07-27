@@ -171,6 +171,38 @@ test("presence: remote selection decorates the native ring node", (): any => {
   }
 });
 
+test("presence: remote page selection decorates the page content node", (): any => {
+  const { plugin } = createCreator();
+  const designer = document.createElement("div");
+  designer.id = "scrollableDiv-designer";
+  // The real designer DOM: the page wrapper reuses the *element* drop-target
+  // attribute with the page name; the ring CSS targets .svc-page__content.
+  designer.innerHTML =
+    "<div data-sv-drop-target-survey-element=\"page1\" data-sv-drop-target-page=\"page1\">" +
+    "<div class=\"svc-page__content\" data-sv-drop-target-survey-page=\"page1\"></div></div>";
+  document.body.appendChild(designer);
+  const content = <HTMLElement>designer.querySelector(".svc-page__content");
+  try {
+    plugin.upsertPeer(peerEntry("c1", {
+      state: {
+        tab: "designer", tabId: "designer",
+        sel: { loc: "/pages/page1", name: "page1", kind: "page", title: "page1" },
+        pgFocus: null, edit: null, cur: null
+      }
+    }));
+    (<any>plugin.overlay).render();
+    expect(content.getAttribute("data-collab-focus")).toEqual("on");
+    expect(content.style.getPropertyValue("--collab-peer-color")).toEqual("#e91e63");
+
+    plugin.removePeer("c1");
+    (<any>plugin.overlay).render();
+    expect(content.hasAttribute("data-collab-focus")).toBeFalsy();
+  } finally {
+    designer.remove();
+    plugin.dispose();
+  }
+});
+
 test("presence: name badge sits under the ring's bottom-right corner and dims when away", (): any => {
   const { plugin } = createCreator();
   const designer = document.createElement("div");
