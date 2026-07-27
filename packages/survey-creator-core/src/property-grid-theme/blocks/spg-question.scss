@@ -230,7 +230,6 @@ sv-question-error {
     box-shadow: inset 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-fg-basic-primary-muted);
   }
 
-  .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
     outline: var(--sjs2-border-width-x200) solid var(--sjs2-color-fg-basic-primary-muted);
     outline-offset: calc(-1 * var(--sjs2-border-width-x200));
@@ -246,10 +245,10 @@ sv-question-error {
   }
 
   .sv-button-group {
-    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted, 0 0 0 2px #1c1b20 inset);
+    box-shadow: inset 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-fg-basic-primary-muted);
   }
 
-  .spg-checkbox__control + .spg-checkbox__rectangle {
+  .sd-checkbox__control + .sd-checkbox__decorator {
     outline: var(--sjs2-border-width-x200) solid var(--sjs2-color-fg-basic-primary-muted);
     outline-offset: calc(-1 * var(--sjs2-border-width-x200));
   }
