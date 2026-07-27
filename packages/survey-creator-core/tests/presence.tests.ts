@@ -1,5 +1,5 @@
 import { CreatorTester } from "./creator-tester";
-import { IPresencePeerEntry, IPresenceState, PresencePlugin } from "../src/plugins/presence";
+import { getCanvasElement, IPresencePeer, IPresencePeerEntry, IPresenceState, mapOffset, PresenceOverlay, PresencePlugin } from "../src/plugins/presence";
 
 const initialJSON = {
   pages: [
@@ -459,8 +459,184 @@ test("presence: mouse is tracked only inside the main content block", async (): 
     const content = <HTMLElement>root.querySelector(".svc-tab-designer_content");
     content.getBoundingClientRect = () => (<any>{ left: 100, top: 0, width: 400, height: 200 });
     await move(content, 200, 50);
-    expect(plugin.getState().cur).toEqual(expect.objectContaining({ a: { s: "surface" }, x: 0.25, y: 0.25 }));
+    // Surface cursors carry canvas px offsets besides the legacy fractions;
+    // the empty content is its own canvas block here.
+    expect(plugin.getState().cur).toEqual(expect.objectContaining(
+      { a: { s: "surface" }, x: 0.25, y: 0.25, px: 100, py: 50, w: 400, h: 200 }));
+    // Element anchors stay fraction-only.
+    await move(adorner, 50, 25);
+    expect(plugin.getState().cur.px).toBeUndefined();
   } finally {
+    root.remove();
+    plugin.dispose();
+  }
+});
+
+/** Designer-like DOM: tab content > surface > content > canvas block (header + page). */
+function buildSurfaceRoot(): HTMLElement {
+  const root = document.createElement("div");
+  root.innerHTML =
+    "<div id=\"scrollableDiv-designer\">" +
+    "<div class=\"svc-tab-designer\">" +
+    "<div class=\"svc-tab-designer_content\">" +
+    "<div class=\"svc-designer-surface sd-container-modern\">" +
+    "<div class=\"svc-designer-header\"></div>" +
+    "<div data-sv-drop-target-survey-page=\"page1\"></div>" +
+    "</div></div></div></div>";
+  document.body.appendChild(root);
+  return root;
+}
+
+const mockRect = (el: Element, left: number, top: number, width: number, height: number): void => {
+  (<HTMLElement>el).getBoundingClientRect = () => (<any>{ left, top, width, height });
+};
+
+test("presence: getCanvasElement finds the survey block, falls back to the content", (): any => {
+  const root = buildSurfaceRoot();
+  try {
+    const content = root.querySelector(".svc-tab-designer_content");
+    const block = root.querySelector(".svc-designer-surface");
+    expect(getCanvasElement(content)).toBe(block);
+    // Class gone (renamed upstream) - structural fallback via the header.
+    block.removeAttribute("class");
+    expect(getCanvasElement(content)).toBe(block);
+    // No header (showSurveyHeader: false) - the page adorner's parent.
+    root.querySelector(".svc-designer-header").remove();
+    expect(getCanvasElement(content)).toBe(block);
+    // Placeholder-like markup with no recognizable block - the content itself.
+    block.remove();
+    expect(getCanvasElement(content)).toBe(content);
+  } finally {
+    root.remove();
+  }
+});
+
+test("presence: mapOffset - exact px on equal boxes, edge-preserving otherwise", (): any => {
+  // Equal boxes: identity, including outside offsets.
+  expect(mapOffset(345, 800, 800)).toEqual(345);
+  expect(mapOffset(-20, 800, 800)).toEqual(-20);
+  // Near edges: px distance from that edge survives the width change.
+  expect(mapOffset(20, 800, 500)).toEqual(20);
+  expect(mapOffset(770, 800, 500)).toEqual(470);
+  // Signed offsets (gutters) keep their distance beyond the box.
+  expect(mapOffset(-50, 800, 500)).toEqual(-50);
+  expect(mapOffset(840, 800, 500)).toEqual(540);
+  // Continuity at the zone borders (E = 120 here) and monotonic middle.
+  expect(mapOffset(120, 800, 500)).toEqual(120);
+  expect(mapOffset(680, 800, 500)).toEqual(380);
+  const mid = mapOffset(400, 800, 500);
+  expect(mid).toBeGreaterThan(120);
+  expect(mid).toBeLessThan(380);
+  // Small boxes: E collapses to half the smaller box, no division by zero.
+  expect(mapOffset(30, 60, 400)).toEqual(30);
+  expect(mapOffset(50, 60, 400)).toEqual(390);
+  expect(Number.isFinite(mapOffset(100, 300, 200))).toBeTruthy();
+});
+
+test("presence: surface px offsets are normalized by the sender's zoom", async (): Promise<any> => {
+  const { creator, plugin } = createCreator();
+  const root = buildSurfaceRoot();
+  creator.setRootElement(root);
+  const content = <HTMLElement>root.querySelector(".svc-tab-designer_content");
+  mockRect(content, 100, 0, 600, 300);
+  mockRect(root.querySelector(".svc-designer-surface"), 150, 10, 500, 280);
+  const move = (el: HTMLElement, clientX: number, clientY: number): Promise<void> => {
+    el.dispatchEvent(new MouseEvent("mousemove", { bubbles: true, clientX, clientY }));
+    return new Promise((resolve) => setTimeout(resolve, 70));
+  };
+  try {
+    await move(content, 250, 60);
+    expect(plugin.getState().cur).toEqual(expect.objectContaining(
+      { a: { s: "surface" }, px: 100, py: 50, w: 500, h: 280 }));
+    creator.survey.widthScale = 150;
+    await move(content, 251, 61);
+    expect(plugin.getState().cur).toEqual(expect.objectContaining(
+      { px: Math.round(101 / 1.5), py: 34, w: Math.round(500 / 1.5), h: Math.round(280 / 1.5) }));
+  } finally {
+    root.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: integer px moves are not swallowed by the 3-decimal fraction dedupe", async (): Promise<any> => {
+  const { creator, plugin, states } = createCreator();
+  const root = buildSurfaceRoot();
+  creator.setRootElement(root);
+  const content = <HTMLElement>root.querySelector(".svc-tab-designer_content");
+  mockRect(content, 100, 0, 3000, 300);
+  mockRect(root.querySelector(".svc-designer-surface"), 150, 0, 2900, 300);
+  const move = (clientX: number, clientY: number): Promise<void> => {
+    content.dispatchEvent(new MouseEvent("mousemove", { bubbles: true, clientX, clientY }));
+    return new Promise((resolve) => setTimeout(resolve, 70));
+  };
+  try {
+    await move(1000, 50);
+    const before = states.length;
+    // Same 3-decimal fractions of the 3000px box, different px - must emit.
+    await move(1001, 50);
+    expect(states.length).toEqual(before + 1);
+    expect(plugin.getState().cur.px).toEqual(851);
+  } finally {
+    root.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: overlay maps surface px onto the local canvas, fractions for old senders", (): any => {
+  const { creator, plugin } = createCreator();
+  const root = buildSurfaceRoot();
+  creator.setRootElement(root);
+  const container = <HTMLElement>root.querySelector("#scrollableDiv-designer");
+  const content = <HTMLElement>root.querySelector(".svc-tab-designer_content");
+  mockRect(container, 0, 0, 900, 700);
+  // The designer column (between the toolbox and the sidebar) clips/pins
+  // offset-mapped cursor points.
+  mockRect(root.querySelector(".svc-tab-designer"), 150, 0, 700, 700);
+  mockRect(content, 200, 0, 600, 400);
+  mockRect(root.querySelector(".svc-designer-surface"), 300, 10, 500, 380);
+  const peers = new Map<string, IPresencePeer>();
+  const overlay = new PresenceOverlay(creator, () => peers);
+  const cur = (extra: any): IPresenceState["cur"] =>
+    ({ tab: creator.activeTabId, a: { s: "surface" }, x: 0.5, y: 0.5, t: Date.now(), ...extra });
+  const setCur = (c: IPresenceState["cur"]): void => {
+    peers.set("c1", <IPresencePeer>{
+      clientId: "c1", name: "User c1", color: "#e91e63", lastSeen: Date.now(),
+      state: { tab: "designer", tabId: creator.activeTabId, sel: null, pgFocus: null, edit: null, cur: c }
+    });
+    (<any>overlay).render();
+  };
+  // Scoped to THIS overlay's layer - earlier tests leave their own layers behind.
+  const cursorEl = (): HTMLElement => (<any>overlay).layer.querySelector(".collab-presence-cursor");
+  try {
+    // px path: sender canvas 800x600, offsets in the near-edge zones map 1:1.
+    setCur(cur({ px: 20, py: 30, w: 800, h: 600 }));
+    expect(cursorEl().style.left).toEqual("320px");
+    expect(cursorEl().style.top).toEqual("40px");
+    // Signed gutter offset: 15px left of the canvas block.
+    setCur(cur({ px: -15, py: 30, w: 800, h: 600, t: Date.now() + 1 }));
+    expect(cursorEl().style.left).toEqual("285px");
+    // Old sender without px: legacy fraction of the CONTENT box.
+    setCur(cur({ t: Date.now() + 2 }));
+    expect(cursorEl().style.left).toEqual("500px");
+    expect(cursorEl().style.top).toEqual("200px");
+    // A gutter point beyond the local designer column must NOT sit over the
+    // toolbox (left of column x=150) - it pins to the column's edge.
+    setCur(cur({ px: -160, py: 30, w: 800, h: 600, t: Date.now() + 3 }));
+    expect(cursorEl().style.display).toEqual("block");
+    expect(cursorEl().style.left).toEqual("152px");
+    // Same on the right: never over the sidebar, pinned to the column edge.
+    setCur(cur({ px: 2000, py: 30, w: 800, h: 600, t: Date.now() + 4 }));
+    expect(cursorEl().style.left).toEqual("848px");
+    // A point scrolled far below the visible column hides.
+    setCur(cur({ px: 20, py: 3000, w: 800, h: 600, t: Date.now() + 5 }));
+    expect(cursorEl().style.display).toEqual("none");
+    // Receiver zoom: at widthScale 200 the same normalized offset doubles.
+    creator.survey.widthScale = 200;
+    setCur(cur({ px: 20, py: 30, w: Math.round(500 / 2), h: 190, t: Date.now() + 6 }));
+    expect(cursorEl().style.left).toEqual("340px");
+    expect(cursorEl().style.top).toEqual("70px");
+  } finally {
+    overlay.dispose();
     root.remove();
     plugin.dispose();
   }

@@ -1,7 +1,7 @@
 import { DomDocumentHelper, DomWindowHelper, EventBase } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { buildLocator } from "../journal/journal-locator";
-import { encodeAnchor, encodeEditFocus, IPresenceState, PRESENCE_SELECTORS } from "./presence-state";
+import { encodeAnchor, encodeEditFocus, getCanvasElement, IPresenceState, PRESENCE_SELECTORS } from "./presence-state";
 
 /** Mouse updates are throttled to this interval (trailing edge). */
 const MOUSE_THROTTLE_MS = 50;
@@ -226,7 +226,26 @@ export class PresenceCapture {
     const clamp = (v: number): number => Math.round(Math.min(1, Math.max(0, v)) * 1000) / 1000;
     const x = clamp((ev.clientX - rect.left) / rect.width);
     const y = clamp((ev.clientY - rect.top) / rect.height);
-    this.sendCur({ tab: tabId, a: encoded.a, x, y, t: Date.now() }, `${encoded.a.s}|${encoded.a.n ?? ""}|${x}|${y}|${tabId}`);
+    const cur: IPresenceState["cur"] = { tab: tabId, a: encoded.a, x, y, t: Date.now() };
+    let key = `${encoded.a.s}|${encoded.a.n ?? ""}|${x}|${y}|${tabId}`;
+    if (encoded.a.s === "surface") {
+      // The content box stretches with the peer's window, so fractions of it
+      // misplace the cursor between differently-sized windows. Send px
+      // offsets from the survey canvas block instead, normalized by the
+      // local zoom; the fractions above stay in the state for old receivers.
+      const scale = (this.creator.survey?.widthScale || 100) / 100;
+      const canvasRect = getCanvasElement(encoded.el).getBoundingClientRect();
+      if (canvasRect.width > 0 && canvasRect.height > 0) {
+        cur.px = Math.round((ev.clientX - canvasRect.left) / scale);
+        cur.py = Math.round((ev.clientY - canvasRect.top) / scale);
+        cur.w = Math.round(canvasRect.width / scale);
+        cur.h = Math.round(canvasRect.height / scale);
+        // Integer px is finer than the 3-decimal fractions on a wide box, and
+        // w/h re-send the state after a sender-side resize on the next move.
+        key = `${encoded.a.s}|${cur.px}|${cur.py}|${cur.w}|${cur.h}|${tabId}`;
+      }
+    }
+    this.sendCur(cur, key);
   }
   private sendCur(cur: IPresenceState["cur"], key: string): void {
     if (key === this.lastCurKey) return;

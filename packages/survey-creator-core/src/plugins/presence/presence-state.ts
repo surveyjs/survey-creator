@@ -77,6 +77,19 @@ export interface IPresenceState {
     /** Position inside the anchor's border box, fractions 0..1. */
     x: number,
     y: number,
+    /**
+     * "surface" anchors only: SIGNED offsets from the survey canvas block's
+     * top-left corner (see `getCanvasElement`) in zoom-normalized px - the
+     * on-screen distance divided by the sender's `survey.widthScale / 100`.
+     * May be negative or exceed `w`/`h` when the cursor hovers the gutters
+     * around the canvas. Integers. Receivers prefer these over the x/y
+     * fractions (see `mapOffset`); the fractions stay for older receivers.
+     */
+    px?: number,
+    py?: number,
+    /** Zoom-normalized size of the sender's canvas block, integer px. */
+    w?: number,
+    h?: number,
     /** Sender epoch ms of the last move. Dedupe only - never compare to local clocks. */
     t: number,
   };
@@ -120,6 +133,7 @@ export const PRESENCE_SELECTORS = {
   toolbox: ".svc-toolbox",
   designerSurface: ".svc-tab-designer",
   designerSurfaceContent: ".svc-tab-designer_content",
+  designerCanvasBlock: ".svc-designer-surface",
   dataName: (name: string): string => `[data-name="${cssEsc(name)}"]`,
   pgQuestionContent: ".spg-question__content",
   pgBooleanRow: "spg-question--boolean",
@@ -242,6 +256,58 @@ export function resolveAnchor(a: IAnchorRef, tabId: string, root: ParentNode): E
     case "root": return root.querySelector(PRESENCE_SELECTORS.tabContent(tabId));
     default: return null;
   }
+}
+
+/**
+ * The survey canvas block inside the designer content box: the node that
+ * wraps the survey header and the page adorners. Unlike the content box it
+ * honors the survey's width (`maxWidth = survey.renderedWidth`) and centers
+ * via `margin: auto`, so it lays out identically on every peer whenever the
+ * survey width is fixed - which makes it the reference corner for the
+ * px-offset cursor encoding. Falls back to `content` itself (placeholder
+ * mode, or markup this codec doesn't recognize).
+ */
+export function getCanvasElement(content: Element): Element {
+  const block = content.querySelector(PRESENCE_SELECTORS.designerCanvasBlock);
+  if (block) return block;
+  // Structural fallbacks in case the class ever changes: the block is the
+  // node wrapping the survey header / the page adorners.
+  const header = content.querySelector(PRESENCE_SELECTORS.designerHeader);
+  if (header && header.parentElement && header.parentElement !== content) return header.parentElement;
+  const page = content.querySelector("[data-sv-drop-target-survey-page]");
+  if (page && page.parentElement && page.parentElement !== content) return page.parentElement;
+  return content;
+}
+
+/**
+ * Width of the near-edge zones treated as fixed-offset layout: covers the
+ * canvas paddings and the header title indent on the left, and the per-element
+ * action buttons on the right.
+ */
+const EDGE_PX = 120;
+
+/**
+ * Map a zoom-normalized offset captured inside a sender box of size `ws` onto
+ * a receiver box of size `wr` (one axis; used for both). Equal boxes (fixed
+ * survey width, equal windows) pass px through untouched - exact mapping.
+ * Differing boxes (responsive survey width) preserve px distance from the
+ * nearest edge, where layout sits at fixed offsets, and interpolate
+ * proportionally across the stretchy middle; the piecewise branches agree at
+ * the zone borders, so the mapped cursor never jumps. Signed offsets (the
+ * gutters around the canvas) keep their distance beyond the box edges.
+ *
+ * Known limitation: RTL locales are right-anchored, so the left zone there is
+ * as approximate as the right one is in LTR - no worse than the fraction
+ * mapping this replaces.
+ */
+export function mapOffset(d: number, ws: number, wr: number): number {
+  if (ws === wr) return d;
+  if (d < 0) return d;
+  if (d > ws) return wr + (d - ws);
+  const edge = Math.min(EDGE_PX, ws / 2, wr / 2);
+  if (d <= edge) return d;
+  if (ws - d <= edge) return wr - (ws - d);
+  return edge + (d - edge) * (wr - 2 * edge) / (ws - 2 * edge);
 }
 
 // ---------------------------------------------------------------------------

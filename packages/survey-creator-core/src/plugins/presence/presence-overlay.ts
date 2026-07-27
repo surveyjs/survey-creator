@@ -1,13 +1,18 @@
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { buildLocator, resolveLocator } from "../journal/journal-locator";
-import { IPresencePeer, IPresenceState, PRESENCE_SELECTORS, resolveAnchor, resolveEditFocus } from "./presence-state";
+import { getCanvasElement, IPresencePeer, IPresenceState, mapOffset, PRESENCE_SELECTORS, resolveAnchor, resolveEditFocus } from "./presence-state";
 import "./presence.scss";
 
 /** Above the creator content; below survey-core popups is acceptable (cosmetic). */
 const OVERLAY_Z_INDEX = 1100;
 /** A cursor that hasn't moved for this long fades out. */
 const CURSOR_IDLE_MS = 30_000;
+/** An offset-mapped cursor point may scroll out of the designer column by
+ * this much vertically before it is hidden. */
+const CURSOR_POINT_SLACK = 16;
+/** A pinned cursor sits this far inside the designer column's edge. */
+const CURSOR_EDGE_INSET = 2;
 /** Safety tick for changes no observer catches (animations, scrollIntoView). */
 const FALLBACK_TICK_MS = 500;
 /** The peer ring is a 2px (--sjs2-border-width-x200) box-shadow outside the node. */
@@ -232,6 +237,54 @@ export class PresenceOverlay {
       anchor.querySelector(":scope > .svc-page__content");
   }
 
+  /**
+   * Viewport point for a peer's cursor. "surface" cursors carrying px offsets
+   * are mapped from the sender's zoom-normalized canvas box onto the local one
+   * (`mapOffset` per axis, rescaled by the local zoom) - the canvas block lays
+   * out identically across peers, unlike the window-wide content box the
+   * legacy fractions are relative to. Everything else - other scopes and old
+   * senders without px - keeps the fraction mapping.
+   */
+  private cursorPoint(cur: NonNullable<IPresenceState["cur"]>, node: Element):
+    { x: number, y: number, byOffset: boolean } | null {
+    if (cur.a.s === "surface" &&
+      typeof cur.px === "number" && typeof cur.py === "number" &&
+      typeof cur.w === "number" && cur.w > 0 && typeof cur.h === "number" && cur.h > 0) {
+      const scale = (this.creator.survey?.widthScale || 100) / 100;
+      const r = getCanvasElement(node).getBoundingClientRect();
+      if (r.width > 0 && r.height > 0) {
+        return {
+          x: r.left + mapOffset(cur.px, cur.w, r.width / scale) * scale,
+          y: r.top + mapOffset(cur.py, cur.h, r.height / scale) * scale,
+          byOffset: true,
+        };
+      }
+    }
+    const r = node.getBoundingClientRect();
+    if (r.width <= 0 || r.height <= 0) return null;
+    return { x: r.left + cur.x * r.width, y: r.top + cur.y * r.height, byOffset: false };
+  }
+
+  /**
+   * Fit an offset-mapped cursor point into the designer column (the area
+   * between the toolbox and the sidebar). A peer with a wider window has
+   * wider gutters around the canvas, so their gutter point can map beyond the
+   * local column - onto the toolbox or the sidebar, where it would read as
+   * pointing at a panel item. Pin it to the column's edge instead: "just off
+   * the canvas at this height" survives the width difference, the lie does
+   * not. Vertically the point scrolls with the canvas, so outside the visible
+   * column it hides like any scrolled-away anchor. Mutates `p`; returns
+   * whether the cursor should be shown.
+   */
+  private fitSurfacePoint(p: { x: number, y: number }, node: Element, container: IRect): boolean {
+    const column = node.closest(PRESENCE_SELECTORS.designerSurface)?.getBoundingClientRect();
+    const area = column ?? container;
+    if (p.y < area.top - CURSOR_POINT_SLACK || p.y > area.top + area.height + CURSOR_POINT_SLACK) return false;
+    p.x = Math.min(Math.max(p.x, area.left + CURSOR_EDGE_INSET), area.left + area.width - CURSOR_EDGE_INSET);
+    p.y = Math.min(Math.max(p.y, area.top), area.top + area.height);
+    return true;
+  }
+
   /** Locator of the locally selected object - gate for property-grid decorations. */
   private localSelectionLoc(): string | null {
     if (!this.creator.selectedElement) return null;
@@ -387,15 +440,23 @@ export class PresenceOverlay {
         (cur.a.s === "tabbar" || cur.tab === localTabId)) {
         const node = resolveAnchor(cur.a, cur.tab, this.doc);
         if (node) {
-          const r = node.getBoundingClientRect();
           const container = cur.a.s === "pg" ? sidebarRect
             : cur.a.s === "tabbar" ? undefined
               : this.doc.querySelector(PRESENCE_SELECTORS.tabContent(cur.tab))?.getBoundingClientRect();
-          if (container === undefined || (container && intersects(r, container))) {
-            const x = r.left + cur.x * r.width;
-            const y = r.top + cur.y * r.height;
-            this.place(a.cursor, x, y);
-            this.place(a.cursorName, x + 12, y + 14);
+          const p = this.cursorPoint(cur, node);
+          // Offset-mapped points are fitted themselves (their anchor - the
+          // whole canvas - is always partly visible, so an anchor-rect test
+          // would keep cursors shown over the toolbox after a scroll);
+          // fraction points keep the anchor-rect visibility test.
+          let visible = !!p;
+          if (p && container !== undefined) {
+            visible = !container ? false
+              : p.byOffset ? this.fitSurfacePoint(p, node, container)
+                : intersects(node.getBoundingClientRect(), container);
+          }
+          if (p && visible) {
+            this.place(a.cursor, p.x, p.y);
+            this.place(a.cursorName, p.x + 12, p.y + 14);
             a.cursorName.textContent = peer.name;
             cursorShown = true;
           }
