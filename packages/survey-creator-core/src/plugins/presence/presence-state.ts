@@ -130,6 +130,9 @@ export const PRESENCE_SELECTORS = {
   element: (name: string): string => `[data-sv-drop-target-survey-element="${cssEsc(name)}"]`,
   page: (name: string): string => `[data-sv-drop-target-survey-page="${cssEsc(name)}"]`,
   sidebar: ".svc-side-bar",
+  sidebarPanel: ".svc-side-bar__container",
+  /** Sidebar modes whose panel floats OVER the tab content (z-index 1000). */
+  sidebarOverlaying: ".svc-side-bar--flyout, .svc-side-bar--mobile",
   toolbox: ".svc-toolbox",
   designerSurface: ".svc-tab-designer",
   designerSurfaceContent: ".svc-tab-designer_content",

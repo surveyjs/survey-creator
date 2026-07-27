@@ -642,6 +642,188 @@ test("presence: overlay maps surface px onto the local canvas, fractions for old
   }
 });
 
+test("presence: cursors hide under the flyout/mobile sidebar panel, docked does not occlude", (): any => {
+  const { creator, plugin } = createCreator();
+  const root = buildSurfaceRoot();
+  creator.setRootElement(root);
+  mockRect(root.querySelector("#scrollableDiv-designer"), 0, 0, 900, 700);
+  mockRect(root.querySelector(".svc-tab-designer"), 150, 0, 700, 700);
+  mockRect(root.querySelector(".svc-tab-designer_content"), 200, 0, 600, 400);
+  mockRect(root.querySelector(".svc-designer-surface"), 300, 10, 500, 380);
+  const sidebar = document.createElement("div");
+  sidebar.className = "svc-side-bar svc-side-bar--flyout";
+  sidebar.innerHTML = "<div class=\"svc-side-bar__container\"></div>";
+  root.appendChild(sidebar);
+  const panel = <HTMLElement>sidebar.querySelector(".svc-side-bar__container");
+  mockRect(panel, 550, 0, 300, 700);
+  const peers = new Map<string, IPresencePeer>();
+  const overlay = new PresenceOverlay(creator, () => peers);
+  let stamp = Date.now();
+  const setCur = (extra: any): void => {
+    peers.set("c1", <IPresencePeer>{
+      clientId: "c1", name: "User c1", color: "#e91e63", lastSeen: Date.now(),
+      state: {
+        tab: "designer", tabId: creator.activeTabId, sel: null, pgFocus: null, edit: null,
+        cur: { tab: creator.activeTabId, a: { s: "surface" }, x: 0.5, y: 0.5, t: ++stamp, ...extra }
+      }
+    });
+    (<any>overlay).render();
+  };
+  const cursorEl = (): HTMLElement => (<any>overlay).layer.querySelector(".collab-presence-cursor");
+  try {
+    // Left of the panel (x=320): visible as before.
+    setCur({ px: 20, py: 30, w: 800, h: 600 });
+    expect(cursorEl().style.display).toEqual("block");
+    expect(cursorEl().style.left).toEqual("320px");
+    // Inside the designer column but under the flyout panel (x=770): hidden.
+    setCur({ px: 770, py: 30, w: 800, h: 600 });
+    expect(cursorEl().style.display).toEqual("none");
+    // A gutter point pinned to the column edge (848) now lands under the panel.
+    setCur({ px: 2000, py: 30, w: 800, h: 600 });
+    expect(cursorEl().style.display).toEqual("none");
+    // Docked sidebar (no overlaying class): same point shows again.
+    sidebar.className = "svc-side-bar";
+    setCur({ px: 770, py: 30, w: 800, h: 600 });
+    expect(cursorEl().style.display).toEqual("block");
+    expect(cursorEl().style.left).toEqual("770px");
+    // Mobile mode, panel covers the whole content: everything hides.
+    sidebar.className = "svc-side-bar svc-side-bar--mobile";
+    mockRect(panel, 0, 0, 900, 700);
+    setCur({ px: 20, py: 30, w: 800, h: 600 });
+    expect(cursorEl().style.display).toEqual("none");
+    // Collapsed flyout renders no container - nothing occludes.
+    sidebar.className = "svc-side-bar svc-side-bar--flyout";
+    panel.remove();
+    setCur({ px: 770, py: 30, w: 800, h: 600 });
+    expect(cursorEl().style.display).toEqual("block");
+  } finally {
+    overlay.dispose();
+    root.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: fraction-anchored cursor points hide under the flyout panel too", (): any => {
+  const { creator, plugin } = createCreator();
+  const root = buildSurfaceRoot();
+  creator.setRootElement(root);
+  mockRect(root.querySelector("#scrollableDiv-designer"), 0, 0, 900, 700);
+  const anchor = document.createElement("div");
+  anchor.setAttribute("data-sv-drop-target-survey-element", "q1");
+  root.querySelector(".svc-designer-surface").appendChild(anchor);
+  mockRect(anchor, 300, 100, 400, 50);
+  const sidebar = document.createElement("div");
+  sidebar.className = "svc-side-bar svc-side-bar--flyout";
+  sidebar.innerHTML = "<div class=\"svc-side-bar__container\"></div>";
+  root.appendChild(sidebar);
+  mockRect(sidebar.querySelector(".svc-side-bar__container"), 550, 0, 300, 700);
+  const peers = new Map<string, IPresencePeer>();
+  const overlay = new PresenceOverlay(creator, () => peers);
+  let stamp = Date.now();
+  const setCur = (x: number, y: number): void => {
+    peers.set("c1", <IPresencePeer>{
+      clientId: "c1", name: "User c1", color: "#e91e63", lastSeen: Date.now(),
+      state: {
+        tab: "designer", tabId: creator.activeTabId, sel: null, pgFocus: null, edit: null,
+        cur: { tab: creator.activeTabId, a: { s: "el", n: "q1" }, x, y, t: ++stamp }
+      }
+    });
+    (<any>overlay).render();
+  };
+  const cursorEl = (): HTMLElement => (<any>overlay).layer.querySelector(".collab-presence-cursor");
+  try {
+    // Point at x=400 - left of the panel, anchor visible: shown.
+    setCur(0.25, 0.5);
+    expect(cursorEl().style.display).toEqual("block");
+    expect(cursorEl().style.left).toEqual("400px");
+    // Point at x=600 - anchor still intersects the tab content, but the
+    // point itself is under the panel: hidden.
+    setCur(0.75, 0.5);
+    expect(cursorEl().style.display).toEqual("none");
+  } finally {
+    overlay.dispose();
+    root.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: pg cursors keep drawing over the flyout panel", (): any => {
+  const { creator, plugin } = createCreator();
+  const root = buildSurfaceRoot();
+  creator.setRootElement(root);
+  const sidebar = document.createElement("div");
+  sidebar.className = "svc-side-bar svc-side-bar--flyout";
+  sidebar.innerHTML =
+    "<div class=\"svc-side-bar__container\"><div data-name=\"title\"></div></div>";
+  root.appendChild(sidebar);
+  mockRect(sidebar.querySelector(".svc-side-bar__container"), 550, 0, 300, 700);
+  mockRect(sidebar.querySelector("[data-name='title']"), 600, 100, 200, 30);
+  const peers = new Map<string, IPresencePeer>();
+  const overlay = new PresenceOverlay(creator, () => peers);
+  peers.set("c1", <IPresencePeer>{
+    clientId: "c1", name: "User c1", color: "#e91e63", lastSeen: Date.now(),
+    state: {
+      tab: "designer", tabId: creator.activeTabId, sel: null, pgFocus: null, edit: null,
+      cur: { tab: creator.activeTabId, a: { s: "pg", n: "title" }, x: 0.5, y: 0.5, t: Date.now() }
+    }
+  });
+  const cursorEl = (): HTMLElement => (<any>overlay).layer.querySelector(".collab-presence-cursor");
+  try {
+    (<any>overlay).render();
+    // The point (700, 115) is inside the panel, but pg cursors target the
+    // panel itself and are exempt from the occlusion test.
+    expect(cursorEl().style.display).toEqual("block");
+    expect(cursorEl().style.left).toEqual("700px");
+  } finally {
+    overlay.dispose();
+    root.remove();
+    plugin.dispose();
+  }
+});
+
+test("presence: designer name badge hides under the flyout panel, pg badge does not", (): any => {
+  const { plugin } = createCreator();
+  const designer = document.createElement("div");
+  designer.id = "scrollableDiv-designer";
+  designer.innerHTML =
+    "<div data-sv-drop-target-survey-element=\"q1\"><div class=\"svc-question__content\"></div></div>";
+  document.body.appendChild(designer);
+  mockRect(designer, 0, 0, 900, 700);
+  const content = <HTMLElement>designer.querySelector(".svc-question__content");
+  // Ring node placed so the badge anchor point (bottom-right) falls well
+  // inside the panel; in jsdom the badge measures 0x0, so the point must be
+  // strictly inside for `intersects` to detect it.
+  mockRect(content, 400, 100, 300, 50);
+  const sidebar = document.createElement("div");
+  sidebar.className = "svc-side-bar svc-side-bar--flyout";
+  sidebar.innerHTML = "<div class=\"svc-side-bar__container\"></div>";
+  document.body.appendChild(sidebar);
+  mockRect(sidebar.querySelector(".svc-side-bar__container"), 550, 0, 300, 700);
+  const badgeEl = (): HTMLElement => (<any>plugin.overlay).layer.querySelector(".collab-presence-badge");
+  try {
+    plugin.upsertPeer(peerEntry("c1", {
+      state: {
+        tab: "designer", tabId: "designer",
+        sel: { loc: "/pages/page1/elements/q1", name: "q1", kind: "text", title: "q1" },
+        pgFocus: null, edit: null, cur: null
+      }
+    }));
+    (<any>plugin.overlay).render();
+    // Ring is decorated natively (correctly covered by the panel), but the
+    // badge is a layer artifact and must hide instead of painting on top.
+    expect(content.getAttribute("data-collab-focus")).toEqual("on");
+    expect(badgeEl().style.display).toEqual("none");
+    // Docked sidebar: badge shows.
+    sidebar.className = "svc-side-bar";
+    (<any>plugin.overlay).render();
+    expect(badgeEl().style.display).toEqual("block");
+  } finally {
+    designer.remove();
+    sidebar.remove();
+    plugin.dispose();
+  }
+});
+
 test("presence: dispose stops capturing", (): any => {
   const { creator, plugin, states } = createCreator();
   plugin.dispose();

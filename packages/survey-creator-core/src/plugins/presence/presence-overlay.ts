@@ -28,6 +28,9 @@ const intersects = (a: IRect, b: IRect): boolean =>
   a.left < b.left + b.width && a.left + a.width > b.left &&
   a.top < b.top + b.height && a.top + a.height > b.top;
 
+const containsPoint = (r: IRect, x: number, y: number): boolean =>
+  x >= r.left && x <= r.left + r.width && y >= r.top && y <= r.top + r.height;
+
 /** A native decoration wanted on a node this tick, plus its name-badge data. */
 interface IDecoration {
   mode: "on" | "away";
@@ -36,6 +39,8 @@ interface IDecoration {
   name: string;
   /** Visible area of the node's scroll container - the badge hides outside it. */
   clip?: IRect;
+  /** Overlaying panel rect the badge must not draw over (flyout/mobile sidebar). */
+  avoid?: IRect;
 }
 
 /** Per-peer DOM artifacts, created lazily and repositioned every tick. */
@@ -357,7 +362,16 @@ export class PresenceOverlay {
     const rightEdge = Math.max(
       r.left + r.width + RING_WIDTH - BADGE_INSET,
       r.left - RING_WIDTH + badge.offsetWidth);
-    this.place(badge, rightEdge, r.top + r.height + RING_WIDTH + BADGE_GAP);
+    const top = r.top + r.height + RING_WIDTH + BADGE_GAP;
+    // The badge is a layer artifact, so unlike its ring it would paint over
+    // an overlaying sidebar panel - hide it there instead.
+    if (dec.avoid && intersects(
+      { left: rightEdge - badge.offsetWidth, top, width: badge.offsetWidth, height: badge.offsetHeight },
+      dec.avoid)) {
+      this.hide(badge);
+      return;
+    }
+    this.place(badge, rightEdge, top);
   }
 
   // --- per-tick render -----------------------------------------------------------
@@ -378,7 +392,19 @@ export class PresenceOverlay {
     // In flyout/mobile mode the .svc-side-bar box shrinks to the tabs strip
     // while the visible panel is positioned absolutely outside of it (see
     // side-bar.scss) - measure the panel, not the host box.
-    const sidebarRect = (sidebar?.querySelector(".svc-side-bar__container") ?? sidebar)?.getBoundingClientRect();
+    const sidebarRect = (sidebar?.querySelector(PRESENCE_SELECTORS.sidebarPanel) ?? sidebar)?.getBoundingClientRect();
+    // In flyout/mobile mode the panel floats OVER the tab content (z-index
+    // 1000, side-bar.scss) while the underlying column keeps its full layout
+    // width, so neither the column clamp nor the anchor-rect test notices it -
+    // and the fixed layer (z-index 1100) paints over the panel. Cursor points
+    // and badges landing under it must hide instead of drawing on top. No
+    // `?? sidebar` fallback here: a collapsed flyout renders no container and
+    // must not occlude. (If the expanded toolbox ever needs the same
+    // treatment, generalize to an occluders[] list.)
+    const panel = sidebar?.matches(PRESENCE_SELECTORS.sidebarOverlaying)
+      ? sidebar.querySelector(PRESENCE_SELECTORS.sidebarPanel)?.getBoundingClientRect()
+      : undefined;
+    const occluder: IRect | undefined = panel && panel.width > 0 && panel.height > 0 ? panel : undefined;
     const designer = localTab === "designer" ? this.designerContainer() : null;
     const designerRect = designer?.getBoundingClientRect();
     // Desired decorations this tick; first peer to claim a node wins.
@@ -398,13 +424,13 @@ export class PresenceOverlay {
           const target = anchor ? this.ringNode(anchor) : null;
           if (target instanceof HTMLElement && !wanted.has(target)) {
             const mode = state.tab === "designer" ? "on" : "away";
-            wanted.set(target, { mode, color, name: peer.name, clip: designerRect });
+            wanted.set(target, { mode, color, name: peer.name, clip: designerRect, avoid: occluder });
           }
         }
         if (state.edit) {
           const editor = resolveEditFocus(state.edit, designer);
           if (editor instanceof HTMLElement && !wanted.has(editor)) {
-            wanted.set(editor, { mode: "on", color, name: peer.name, clip: designerRect });
+            wanted.set(editor, { mode: "on", color, name: peer.name, clip: designerRect, avoid: occluder });
           }
         }
       }
@@ -453,6 +479,10 @@ export class PresenceOverlay {
             visible = !container ? false
               : p.byOffset ? this.fitSurfacePoint(p, node, container)
                 : intersects(node.getBoundingClientRect(), container);
+            // pg cursors target the panel itself and must keep drawing over it.
+            if (visible && occluder && cur.a.s !== "pg") {
+              visible = !containsPoint(occluder, p.x, p.y);
+            }
           }
           if (p && visible) {
             this.place(a.cursor, p.x, p.y);
