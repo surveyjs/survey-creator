@@ -1,7 +1,8 @@
-import { ListModel, QuestionCommentModel, QuestionMatrixDropdownModel } from "survey-core";
+import { ListModel, Question, QuestionCommentModel, QuestionMatrixDropdownModel } from "survey-core";
 import { TranslationSideBySide, TranslationSideBySideGrid } from "../../src/components/tabs/translation-side-by-side";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
+import { StringEditorConnector, StringEditorViewModelBase } from "../../src/components/string-editor";
 import { getDefaultLocaleName } from "../../src/survey-helper";
 import { CreatorTester } from "../creator-tester";
 import "survey-core/survey.i18n";
@@ -293,6 +294,116 @@ test("view switcher: absent in the default translation mode, present in the side
   expect(sideBySideModel.settingsSurvey.getQuestionByName("viewMode")).toBeTruthy();
   expect(sideBySideModel.settingsSurvey.getQuestionByName("sourceLocale")).toBeTruthy();
   expect(sideBySideModel.settingsSurvey.getQuestionByName("targetLocale")).toBeTruthy();
+});
+
+function createFormsCreator(json: any = gridJSON): CreatorTester {
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+  creator.JSON = JSON.parse(JSON.stringify(json));
+  creator.activeTab = "translation";
+  return creator;
+}
+function switchView(creator: CreatorTester, view: string): void {
+  getModel(creator).settingsSurvey.getQuestionByName("viewMode").value = view;
+}
+// Records the grid cell questions whose input focus is requested during the callback.
+function trackCommentFocus(): { focused: Array<Question>, restore: () => void } {
+  const focused: Array<Question> = [];
+  const origFocus = QuestionCommentModel.prototype.focus;
+  QuestionCommentModel.prototype.focus = function (this: any): void { focused.push(this); };
+  return { focused, restore: () => { QuestionCommentModel.prototype.focus = origFocus; } };
+}
+
+test("selection sync: the string focused in the forms view gets the input focus in the grid view", () => {
+  const creator = createFormsCreator();
+  const model = <TranslationSideBySide>getPlugin(creator).model;
+  // The inline string editors of the target pane report their focus through this callback.
+  creator.onStringEditorFocusedCallback(model.targetSurvey.getQuestionByName("q4").locTitle);
+  const tracker = trackCommentFocus();
+  try {
+    switchView(creator, "grid");
+    const matrix = findMatrix(model, "q4", "title");
+    const targetCell = matrix.visibleRows[0].cells[matrix.columns.length - 1].question;
+    expect(tracker.focused).toHaveLength(1);
+    expect(tracker.focused[0]).toBe(targetCell);
+  } finally {
+    tracker.restore();
+  }
+  // The grid showed all pages - no page scope is forced by the switch.
+  expect(model.filteredPage).toBeFalsy();
+});
+
+test("selection sync: StringEditorViewModelBase.onFocus reports the focused string to the creator", () => {
+  const creator = createFormsCreator();
+  const model = <TranslationSideBySide>getPlugin(creator).model;
+  const copyLocStr = model.targetSurvey.getQuestionByName("q1").locTitle;
+  const editor = new StringEditorViewModelBase(copyLocStr, creator);
+  editor.onFocus({ target: { innerText: "Frage 1", parentElement: { click: (): void => { } } } });
+  const tracker = trackCommentFocus();
+  try {
+    switchView(creator, "grid");
+    const matrix = findMatrix(model, "q1", "title");
+    expect(tracker.focused).toHaveLength(1);
+    expect(tracker.focused[0]).toBe(matrix.visibleRows[0].cells[1].question);
+  } finally {
+    tracker.restore();
+  }
+  editor.dispose();
+});
+
+test("selection sync: the grid cell focus drives the forms page and auto-focuses the same string's editor", () => {
+  const creator = createGridCreator();
+  const model = getModel(creator);
+  const matrix = findMatrix(model, "q4", "title");
+  // The UI reports the DOM focus of a grid cell through the survey.
+  model.stringsSurvey.whenQuestionFocusIn(<Question>matrix.visibleRows[0].cells[1].question);
+  switchView(creator, "forms");
+  expect(model.selectedPageName).toBe("page2");
+  expect(model.sourceSurvey.currentPage.name).toBe("page2");
+  expect(model.targetSurvey.currentPage.name).toBe("page2");
+  expect(creator.toolbar.getActionById("svc-translation-filter-page").title).toBe("page2");
+  const copyLocStr = model.targetSurvey.getQuestionByName("q4").locTitle;
+  expect(StringEditorConnector.get(copyLocStr).focusOnEditor).toBeTruthy();
+});
+
+test("selection sync: a page-scoped grid follows the string focused in the forms view", () => {
+  const creator = createGridCreator();
+  const model = getModel(creator);
+  model.filteredPage = creator.survey.getPageByName("page1");
+  switchView(creator, "forms");
+  model.selectedPageName = "page2";
+  creator.onStringEditorFocusedCallback(model.targetSurvey.getQuestionByName("q4").locTitle);
+  const tracker = trackCommentFocus();
+  try {
+    switchView(creator, "grid");
+    expect(model.filteredPage.name).toBe("page2");
+    const matrix = findMatrix(model, "q4", "title");
+    expect(tracker.focused).toHaveLength(1);
+    expect(tracker.focused[0]).toBe(matrix.visibleRows[0].cells[1].question);
+  } finally {
+    tracker.restore();
+  }
+});
+
+test("selection sync: without a focused string the views keep the same page", () => {
+  const creator = createGridCreator();
+  const model = getModel(creator);
+  model.filteredPage = creator.survey.getPageByName("page2");
+  switchView(creator, "forms");
+  // The forms view opens on the page the grid was scoped to.
+  expect(model.selectedPageName).toBe("page2");
+  // Navigating the panes to another page moves the page-scoped grid there on the way back.
+  model.selectedPageName = "page1";
+  switchView(creator, "grid");
+  expect(model.filteredPage.name).toBe("page1");
+  // The forms page survives a round trip over an "All Pages" grid, which never gets a scope forced on it.
+  switchView(creator, "forms");
+  expect(model.selectedPageName).toBe("page1");
+  switchView(creator, "grid");
+  model.filteredPage = null;
+  switchView(creator, "forms");
+  expect(model.selectedPageName).toBe("page1");
+  switchView(creator, "grid");
+  expect(model.filteredPage).toBeFalsy();
 });
 
 test("grid view: replacing the survey rebuilds the grid for the new survey", () => {

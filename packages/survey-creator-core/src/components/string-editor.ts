@@ -341,6 +341,9 @@ export class StringEditorViewModelBase extends Base {
     }
     if (this.creator) {
       this.creator.selectFromStringEditor = true;
+      if (!!this.creator.onStringEditorFocusedCallback) {
+        this.creator.onStringEditorFocusedCallback(this.locString);
+      }
     }
 
     if (this.locString.hasHtml && this.editAsText) {

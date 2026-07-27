@@ -1,12 +1,13 @@
 import {
   Base, ILocalizableString, ItemValue, LocalizableString, QuestionDropdownModel,
-  SurveyModel, property, surveyLocalization
+  QuestionMatrixDropdownModel, SurveyModel, property, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { editableStringRendererName } from "../../creator-base";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
+import { StringEditorConnector } from "../string-editor";
 import { Translation, TranslationGroup, TranslationItem } from "./translation";
 
 // The default locale is stored as "" on the model; the settings survey dropdowns need a
@@ -26,6 +27,12 @@ export class TranslationSideBySide extends Translation {
   private byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
   private byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
   private _updatingSettingsSurvey: boolean = false;
+  // The real survey's localizable string behind the editable string the user focused last -
+  // a cell of the strings grid or an inline string editor of the forms target pane. Used to
+  // restore the selection (or at least the page) when the view changes.
+  private selectedLocString: ILocalizableString;
+  // Whether the grid was scoped to a single page when the user left it for the forms view.
+  private gridWasPageScoped: boolean = false;
 
   constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms") {
     super(survey, options, true);
@@ -169,15 +176,102 @@ export class TranslationSideBySide extends Translation {
     this.useSourceTargetColumns = this.isSideBySideGrid;
     if (this.isSideBySideGrid) {
       this.disposeInstances();
+      const restorePageScope = this.gridWasPageScoped;
+      this.gridWasPageScoped = false;
       if (this.showAllStrings) {
         this.showAllStrings = false; // its reset builds the grid
       } else {
         this.reset();
       }
+      this.applySelectionToGrid(restorePageScope);
     } else {
+      this.applySelectedPageToForms();
+      // The page scope is a grid-view concept: a scoped root would cut the string mappings
+      // and the CSV export down to one page. Cleared here and restored on the way back.
+      this.gridWasPageScoped = !!this.filteredPage;
+      if (!!this.filteredPage) {
+        this.filteredPage = null;
+      }
       this.showAllStrings = true;
       this.rebuildInstances();
+      this.activateSelectedStringEditor();
     }
+  }
+  // forms -> grid: a page-scoped grid moves its scope to the page the panes showed, then the
+  // grid cell of the last focused string (when its row is present) gets the input focus.
+  private applySelectionToGrid(restorePageScope: boolean): void {
+    if ((!!this.filteredPage || restorePageScope) && !!this.selectedPageName &&
+      (!this.filteredPage || this.filteredPage.name !== this.selectedPageName)) {
+      const page = this.survey.getPageByName(this.selectedPageName);
+      if (!!page)this.filteredPage = page; // the property's onSet rebuilds the grid
+    }
+    const info = this.findSelectedItemInfo();
+    if (!!info)this.focusGridCell(info.item);
+  }
+  // grid -> forms: the panes open on the page of the last focused string (or on the grid's
+  // page scope). Called before the instances are rebuilt, while root is still the grid tree.
+  private applySelectedPageToForms(): void {
+    const info = this.findSelectedItemInfo();
+    let pageName = !!info ? info.pageName : "";
+    if (!pageName && !!this.filteredPage) pageName = this.filteredPage.name;
+    if (!!pageName && !!this.survey.getPageByName(pageName)) {
+      this.selectedPageName = pageName;
+    }
+  }
+  // Focuses the fresh target-pane editor of the selected string once it is rendered.
+  private activateSelectedStringEditor(): void {
+    const copies = !!this.selectedLocString ? this.byRealLocStr.get(this.selectedLocString) : undefined;
+    const copyLocStr = !!copies ? copies.filter(copy => this.byTargetLocStr.has(copy))[0] : undefined;
+    if (!copyLocStr) return;
+    const connector = StringEditorConnector.get(<LocalizableString>copyLocStr);
+    connector.setAutoFocus();
+    connector.activateEditor();
+  }
+  // The selected string's translation item in the current root tree along with the name of
+  // the survey page it belongs to ("" for survey-level strings).
+  private findSelectedItemInfo(): { item: TranslationItem, pageName: string } {
+    if (!this.selectedLocString || !this.root) return undefined;
+    let res: { item: TranslationItem, pageName: string };
+    const search = (group: TranslationGroup, pageName: string): boolean => {
+      const obj = group.obj;
+      if (!!obj && !!obj.isPage) pageName = obj.name;
+      const items = group.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].isGroup) {
+          if (search(<TranslationGroup>items[i], pageName)) return true;
+        } else if ((<TranslationItem>items[i]).locString === this.selectedLocString) {
+          res = { item: <TranslationItem>items[i], pageName: pageName };
+          return true;
+        }
+      }
+      return false;
+    };
+    search(this.root, "");
+    return res;
+  }
+  private focusGridCell(item: TranslationItem): void {
+    const survey = this.stringsSurvey;
+    if (!survey) return;
+    const questions = survey.getAllQuestions();
+    for (let i = 0; i < questions.length; i++) {
+      const matrix = <QuestionMatrixDropdownModel>questions[i];
+      const rows = matrix.rows;
+      if (Array.isArray(rows) && rows.length > 0 && rows[0]["translationData"] === item) {
+        const cells = matrix.visibleRows[0].cells;
+        cells[cells.length - 1].question.focus(); // the target locale column is the last one
+        return;
+      }
+    }
+  }
+  // Remembers the string behind the focused grid cell for the selection sync with the forms view.
+  protected onSurveyStringsCreated(survey: SurveyModel): void {
+    super.onSurveyStringsCreated(survey);
+    survey.onFocusInQuestion.add((sender, options) => {
+      const matrix = <QuestionMatrixDropdownModel>options.question.parentQuestion;
+      const rows = !!matrix ? matrix.rows : undefined;
+      const item = <TranslationItem>(Array.isArray(rows) && rows.length > 0 ? rows[0]["translationData"] : undefined);
+      if (!!item)this.selectedLocString = item.locString;
+    });
   }
   public rebuildInstances(): void {
     if (this.isDisposed) return;
@@ -315,6 +409,7 @@ export class TranslationSideBySide extends Translation {
     this.setSourceScrollElement(undefined);
     this.setTargetScrollElement(undefined);
     this.disposeInstances();
+    this.selectedLocString = undefined;
     super.dispose();
   }
   private createInstance(json: any, reason: string): SurveyModel {
@@ -353,6 +448,12 @@ export class TranslationSideBySide extends Translation {
         }
         return <any>locStr;
       };
+      // Remembers the string behind the focused inline editor for the selection sync with the grid view.
+      creator.onStringEditorFocusedCallback = (locStr: LocalizableString): void => {
+        if (this.isDisposed) return;
+        const item = this.byTargetLocStr.get(locStr);
+        if (!!item)this.selectedLocString = item.locString;
+      };
     }
     survey.onPropertyValueChangedCallback = (name: string, oldValue: any, newValue: any, sender: Base): void => {
       this.forwardTargetChange(name, sender);
@@ -375,6 +476,8 @@ export class TranslationSideBySide extends Translation {
     return !!options && typeof options.isStringInplacelyEditable === "function" ? options : undefined;
   }
   private disposeInstances(): void {
+    const creator = this.creatorModel;
+    if (!!creator)creator.onStringEditorFocusedCallback = undefined;
     [this.sourceSurvey, this.targetSurvey].forEach(survey => {
       if (!survey) return;
       survey.getRendererForString = undefined;

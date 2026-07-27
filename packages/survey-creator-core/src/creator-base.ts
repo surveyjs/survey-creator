@@ -4977,6 +4977,9 @@ export class SurveyCreatorModel extends Base
   expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
+  // Set by the translation side-by-side forms view to learn which editable string got the focus;
+  // the inline string editors call it on every focus while it is assigned.
+  onStringEditorFocusedCallback: (locStr: LocalizableString) => void;
 
   @property({
     defaultValue: false, onSet: (newValue: boolean, target: SurveyCreatorModel) => {

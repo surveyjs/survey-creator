@@ -394,8 +394,12 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       this.updateFilterStrigsAction(true);
     } else {
       this.filterStringsAction.visible = false;
-      const pages = this.creator.survey.pages;
-      model.selectedPageName = pages.length > 0 ? pages[0].name : "";
+      // The model synced the page from the grid selection while applying the view change -
+      // fall back to the first page only when it holds no valid page.
+      if (!model.selectedPageName || !this.creator.survey.getPageByName(model.selectedPageName)) {
+        const pages = this.creator.survey.pages;
+        model.selectedPageName = pages.length > 0 ? pages[0].name : "";
+      }
       this.updateSideBySidePagesAction();
     }
   }
