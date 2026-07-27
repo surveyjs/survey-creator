@@ -24,6 +24,7 @@ import { SurveyElementActionContainer } from "../action-container-view-model";
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
 import { getActualLocaleName } from "../../utils/creator-locstrings";
+import { IUndoRedoAction, UndoRedoLocaleTextAction } from "../../plugins/undo-redo/undo-redo-manager";
 
 let isLocaleEnableIfExecuting: boolean;
 function localeEnableIf(params: any): boolean {
@@ -163,7 +164,11 @@ export class TranslationItem extends TranslationItemBase {
     const itemStr = this.values(locale);
     const text = itemStr?.getLocText(locale);
     if (!!text) {
-      this.setLocText(locale, text);
+      if (!!this.translation && !!this.translation.performItemLocTextAction) {
+        this.translation.performItemLocTextAction(this, locale, text);
+      } else {
+        this.setLocText(locale, text);
+      }
     }
   }
   public values(loc: string): TranslationItemString {
@@ -227,11 +232,25 @@ export class TranslationItem extends TranslationItemBase {
   public mergeLocaleWithDefault(loc: string): void {
     var locText = this.locString.getLocaleText(loc);
     if (!locText) return;
-    this.locString.setLocaleText("", locText);
-    this.locString.setLocaleText(loc, null);
+    // Through the locale-aware undoable actions - a plain generic rollback would write the
+    // merged locale's text into the current locale instead of restoring both locales.
+    // The locale text is cleared first: writing the default text first would auto-delete the
+    // then-equal locale text as a duplicate before its undo action could capture it.
+    if (!!this.translation && !!this.translation.performItemLocTextAction) {
+      this.translation.performItemLocTextAction(this, loc, undefined);
+      this.translation.performItemLocTextAction(this, "", locText);
+    } else {
+      this.locString.setLocaleText("", locText);
+      this.locString.setLocaleText(loc, null);
+    }
   }
   public deleteLocaleStrings(locale: string): void {
-    this.setLocText(locale, undefined);
+    // Through the locale-aware undoable action - undo must restore the deleted texts.
+    if (!!this.translation && !!this.translation.performItemLocTextAction) {
+      this.translation.performItemLocTextAction(this, locale, undefined);
+    } else {
+      this.setLocText(locale, undefined);
+    }
   }
   public getDefaultLocaleText(ignorePlaceHolder: boolean = false): string {
     let res = this.locString.getLocaleText("");
@@ -305,6 +324,7 @@ export interface ITranslationLocales {
   getEditLocale(): string;
   readonly isEditMode: boolean;
   getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string, context: any): string;
+  performItemLocTextAction?(item: TranslationItem, locale: string, newText: string): void;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -668,6 +688,11 @@ export class Translation extends Base implements ITranslationLocales {
   public localeInitialVisibleCallback: (locale: string) => boolean;
   public getMachineTranslationFromLocale?: () => string | undefined;
   public setMachineTranslationFromLocale?: (locale: string) => void;
+  // Wired by TabTranslationPlugin to record the action in the creator's undo/redo stack.
+  public doUndoableAction: (action: IUndoRedoAction, title: string) => void = (action) => action.apply();
+  // Suppresses the reaction on the real survey's property-change notifications while the model
+  // itself is writing into it (the grid edit's own echo must not refresh/rebuild the grid).
+  protected _syncing: boolean = false;
   private surveyValue: SurveyModel;
   private settingsSurveyValue: SurveyModel;
   private onBaseObjCreatingCallback: (obj: Base) => void;
@@ -753,7 +778,24 @@ export class Translation extends Base implements ITranslationLocales {
   public get isEditMode(): boolean { return this.editModeValue; }
   public applyEditLocale(): void {
     if (!this.isEditMode || !this.root) return;
-    this.root.applyEditLocale(this.editLocale);
+    // One undoable transaction over the locale-aware item actions.
+    this.options.startUndoRedoTransaction("Apply translations");
+    try {
+      this.root.applyEditLocale(this.editLocale);
+    } finally {
+      this.options.stopUndoRedoTransaction();
+    }
+  }
+  // Suppresses the model's reaction on the real survey's property-change notifications
+  // while fn runs bulk writes; callers rebuild/refresh the grid themselves afterwards.
+  public runWithoutSurveyReaction(fn: () => void): void {
+    const wasSyncing = this._syncing;
+    this._syncing = true;
+    try {
+      fn();
+    } finally {
+      this._syncing = wasSyncing;
+    }
   }
 
   public makeObservable(onBaseObjCreating: (obj: Base) => void) {
@@ -778,11 +820,17 @@ export class Translation extends Base implements ITranslationLocales {
       this.reset();
     }
     if (!this.root) return;
-    this.options.startUndoRedoTransaction("Delete strings for locale: " + locale);
-    this.root.deleteLocaleStrings(locale);
+    // The reaction on the own writes is suppressed - the grid is rebuilt by the reset below.
+    this.runWithoutSurveyReaction(() => {
+      this.options.startUndoRedoTransaction("Delete strings for locale: " + locale);
+      try {
+        this.root.deleteLocaleStrings(locale);
+      } finally {
+        this.options.stopUndoRedoTransaction();
+      }
+    });
     this.removeLocale(locale);
     this.reset();
-    this.options.stopUndoRedoTransaction();
   }
   private removingLocale: string;
   protected createSettingsSurvey(): SurveyModel {
@@ -1005,8 +1053,76 @@ export class Translation extends Base implements ITranslationLocales {
   private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
     cellQuestion.placeholder = item.getPlaceholder(locale);
   }
+  // Routes a translation item edit on the real survey through the locale-aware undoable action.
+  public performItemLocTextAction(item: TranslationItem, locale: string, newText: string): void {
+    const current = item.locString.getLocaleText(locale) || "";
+    if (newText === undefined || newText === null) {
+      // Clearing. getLocaleText normalizes an absent entry and a stored empty string to "" -
+      // check the stored keys so a stored empty string is still removed.
+      if (!current && item.locString.getLocales().indexOf(locale) < 0) return;
+    } else if ((newText || "") === current) return;
+    this.doUndoableAction(new UndoRedoLocaleTextAction(item, locale, newText), "translation changed");
+  }
   protected setItemLocText(item: TranslationItem, locale: string, text: string): void {
-    item.setLocText(locale, text);
+    this._syncing = true;
+    try {
+      this.performItemLocTextAction(item, locale, text);
+    } finally {
+      this._syncing = false;
+    }
+  }
+  // Called (through the plugin's onDesignerSurveyPropertyChanged hook) when the real survey changes
+  // while the tab is active: undo/redo rollbacks or any external modification.
+  public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
+    if (this._syncing || this.isDisposed) return;
+    const locStr = this.getLocStrByName(obj, propName);
+    if (!locStr) {
+      // Not a localizable string - a structural change (element added/removed by undo/redo, etc.).
+      if (!!this.filteredPage && this.survey.pages.indexOf(this.filteredPage) < 0) {
+        this.filteredPage = null; // the property's onSet rebuilds the grid
+        return;
+      }
+      this.reset();
+      return;
+    }
+    // The change brought back a locale the model does not track (an undo of a merge or of a
+    // locale deletion) - a full rebuild re-derives the locale list from the survey strings.
+    if (this.hasNewLocales(locStr)) {
+      this.reset();
+      return;
+    }
+    // A localizable string changed on the real survey (an undo/redo rollback or an external
+    // edit): refresh the grid cells.
+    this.updateStringsSurveyData();
+  }
+  private hasNewLocales(locStr: ILocalizableString): boolean {
+    // The side-by-side mode has no locales list - its source/target dropdowns pick up
+    // restored locales from the survey on their own.
+    if (!this.localesQuestion) return false;
+    const known = this.getVisibleLocales();
+    const locs = locStr.getLocales();
+    for (let i = 0; i < locs.length; i++) {
+      const loc = locs[i];
+      // The default-locale name ("en") counts: an undo of a merge restores strings under it.
+      if (!!loc && loc !== LocalizableString.defaultLocale && known.indexOf(loc) < 0) return true;
+    }
+    return false;
+  }
+  // Resolves the localizable string a property change refers to. Some objects report the change
+  // themselves while the string lives on a nested object (a matrix column's title is stored on its
+  // template question), so the serialization metadata is used when the own-strings hash has no entry.
+  protected getLocStrByName(obj: Base, name: string): ILocalizableString {
+    if (!obj) return undefined;
+    if (typeof (<any>obj).getLocalizableString === "function") {
+      const res = (<any>obj).getLocalizableString(name);
+      if (!!res) return res;
+    }
+    if (typeof obj.getType !== "function") return undefined;
+    const prop = Serializer.findProperty(obj.getType(), name);
+    if (!!prop && !!prop.serializationProperty) {
+      return <ILocalizableString>(<any>obj)[prop.serializationProperty];
+    }
+    return undefined;
   }
   private createStringsHeaderSurvey() {
     let json = {};
@@ -1472,12 +1588,21 @@ export class Translation extends Base implements ITranslationLocales {
     translation.showAllStrings = true;
     let itemsHash = <HashTable<TranslationItem>>{};
     this.fillItemsHash("", translation.root, itemsHash);
-    rows.forEach((row) => {
-      let name = row.shift().trim();
-      if (!name) return;
-      let item = itemsHash[name];
-      if (!item) return;
-      this.updateItemWithStrings(name, item, row, locales);
+    // One undoable transaction over the locale-aware item actions; the reaction on the own
+    // writes is suppressed - the grid is rebuilt by the reset below.
+    this.runWithoutSurveyReaction(() => {
+      this.options.startUndoRedoTransaction("Import translations");
+      try {
+        rows.forEach((row) => {
+          let name = row.shift().trim();
+          if (!name) return;
+          let item = itemsHash[name];
+          if (!item) return;
+          this.updateItemWithStrings(name, item, row, locales);
+        });
+      } finally {
+        this.options.stopUndoRedoTransaction();
+      }
     });
     this.reset();
     if (this.importFinishedCallback)this.importFinishedCallback();
@@ -1511,7 +1636,16 @@ export class Translation extends Base implements ITranslationLocales {
   public mergeLocaleWithDefault() {
     this.reset(false);
     if (!this.hasLocale(this.defaultLocale)) return;
-    this.root.mergeLocaleWithDefault(this.defaultLocale);
+    // One undoable transaction over the locale-aware item actions; the reaction on the own
+    // writes is suppressed - the grid is rebuilt by the reset below.
+    this.runWithoutSurveyReaction(() => {
+      this.options.startUndoRedoTransaction("Merge locale with default");
+      try {
+        this.root.mergeLocaleWithDefault(this.defaultLocale);
+      } finally {
+        this.options.stopUndoRedoTransaction();
+      }
+    });
     this.setVisibleLocales([]);
     this.setSelectedLocales([]);
     this.reset();
@@ -1554,7 +1688,9 @@ export class Translation extends Base implements ITranslationLocales {
         val = this.importItemCallback(name, locales[i], val);
       }
       if (!!val) {
-        item.values(locales[i]).text = val;
+        // Through the locale-aware undoable action; the grid is rebuilt after the import,
+        // so the TranslationItemString caches are not updated here.
+        this.performItemLocTextAction(item, locales[i], val);
       }
     }
   }
@@ -1586,6 +1722,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.importFinishedCallback = undefined;
     this.availableTranlationsChangedCallback = undefined;
     this.tranlationChangedCallback = undefined;
+    this.doUndoableAction = undefined;
     super.dispose();
   }
 }
@@ -1620,6 +1757,16 @@ export class TranslationEditor {
     this.translationValue = new TranslationForEditor(this.survey, this.options, (survey: SurveyModel) => {
       this.setupNavigationButtons(survey);
     });
+    // Record the applied texts into the creator's undo/redo stack through the tab model's wiring.
+    if (!!translationTab) {
+      this.translationValue.doUndoableAction = (action, title) => {
+        if (!!translationTab.doUndoableAction) {
+          translationTab.doUndoableAction(action, title);
+        } else {
+          action.apply();
+        }
+      };
+    }
     this.translationValue.translationStringVisibilityCallback = translationStringVisibilityCallback;
     this.translation.setEditMode(this.locale);
     this.translation.reset();
@@ -1704,7 +1851,12 @@ export class TranslationEditor {
     this.options.doMachineTranslation(fromLocale, toLocale, strings, callback);
   }
   public apply(): void {
-    this.translation.applyEditLocale();
+    // The tab model's per-string reaction is suppressed - onApply rebuilds its grid in one go.
+    if (!!this.translationTab) {
+      this.translationTab.runWithoutSurveyReaction(() => this.translation.applyEditLocale());
+    } else {
+      this.translation.applyEditLocale();
+    }
     if (this.onApply) {
       this.onApply();
     }

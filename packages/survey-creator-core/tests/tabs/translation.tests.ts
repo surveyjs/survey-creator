@@ -2885,3 +2885,183 @@ test("Import after creating TranslationEditor should not throw error, Issue#7790
   expect(translation.root).toBeDefined();
   expect(translation.stringsHeaderSurvey).toBeDefined();
 });
+
+const undoModeJSON = {
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+        { type: "text", name: "q2", title: { default: "Question 2", de: "Frage 2" } }
+      ]
+    }
+  ]
+};
+function createUndoModeCreator(json: any = undoModeJSON): CreatorTester {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  // The survey takes ownership of the loaded JSON object, so pass a copy to keep tests independent.
+  creator.JSON = JSON.parse(JSON.stringify(json));
+  creator.activeTab = "translation";
+  return creator;
+}
+function getUndoModeModel(creator: CreatorTester): Translation {
+  return (<TabTranslationPlugin>creator.getPlugin("translation")).model;
+}
+// The matrix showing the given translation item (one item per matrix, matched by owner object name).
+function findUndoModeMatrix(model: Translation, contextName: string, itemName: string): QuestionMatrixDropdownModel {
+  return <QuestionMatrixDropdownModel>model.stringsSurvey.getAllQuestions().filter((matrix: any) => {
+    const item = <TranslationItem>(matrix.rows[0] && matrix.rows[0]["translationData"]);
+    return !!item && item.name === itemName && !!item.context && item.context.name === contextName;
+  })[0];
+}
+function getUndoModeCellQuestion(matrix: QuestionMatrixDropdownModel, columnName: string): QuestionCommentModel {
+  const index = matrix.columns.map(column => column.name).indexOf(columnName);
+  return <QuestionCommentModel>matrix.visibleRows[0].cells[index].question;
+}
+
+test("default mode: undo/redo toolbar actions are visible in the translation tab", () => {
+  const creator = createUndoModeCreator();
+  expect(creator.activeTab).toBe("translation");
+  expect(creator.toolbar.getActionById("action-undo").visible).toBeTruthy();
+  expect(creator.toolbar.getActionById("action-redo").visible).toBeTruthy();
+});
+
+test("default mode: grid cell edits are undoable, undo restores only the edited locale and refreshes the grid", () => {
+  const creator = createUndoModeCreator();
+  const model = getUndoModeModel(creator);
+  const matrix = findUndoModeMatrix(model, "q1", "title");
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  getUndoModeCellQuestion(matrix, "de").value = "Frage 1 neu";
+  const realQuestion = creator.survey.getQuestionByName("q1");
+  expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
+  expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  creator.undo();
+  expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");
+  expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
+  expect(getUndoModeCellQuestion(matrix, "de").value).toBe("Frage 1");
+  creator.redo();
+  expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
+  expect(getUndoModeCellQuestion(matrix, "de").value).toBe("Frage 1 neu");
+});
+
+test("default mode: merge locale with default is a single undo step restoring both locales", () => {
+  const creator = createUndoModeCreator({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "text", name: "q1", title: { default: "Question 1", en: "Question 1 EN" } },
+          { type: "text", name: "q2", title: { default: "Question 2", en: "Question 2 EN" } }
+        ]
+      }
+    ]
+  });
+  const model = getUndoModeModel(creator);
+  expect(model.canMergeLocaleWithDefault).toBeTruthy();
+  model.mergeLocaleWithDefault();
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  expect(q1.locTitle.getLocaleText("")).toBe("Question 1 EN");
+  expect(q1.locTitle.getLocaleText("en")).toBeFalsy();
+  expect(q2.locTitle.getLocaleText("")).toBe("Question 2 EN");
+  creator.undo();
+  expect(q1.locTitle.getLocaleText("")).toBe("Question 1");
+  expect(q1.locTitle.getLocaleText("en")).toBe("Question 1 EN");
+  expect(q2.locTitle.getLocaleText("")).toBe("Question 2");
+  expect(q2.locTitle.getLocaleText("en")).toBe("Question 2 EN");
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  // The model re-derived the restored locale from the survey strings.
+  expect(getUndoModeModel(creator).getVisibleLocales().indexOf("en") > -1).toBeTruthy();
+  creator.redo();
+  expect(q1.locTitle.getLocaleText("")).toBe("Question 1 EN");
+  expect(q1.locTitle.getLocaleText("en")).toBeFalsy();
+});
+
+test("default mode: removing a language is a single undo step restoring its strings", () => {
+  const creator = createUndoModeCreator();
+  const model = getUndoModeModel(creator);
+  // Remove the language through the languages list, as the UI does.
+  expect(model.localesQuestion.visibleRows).toHaveLength(2);
+  model.localesQuestion.removeRow(1, false);
+  const q1 = creator.survey.getQuestionByName("q1");
+  expect(q1.locTitle.getLocaleText("de")).toBeFalsy();
+  expect(model.getVisibleLocales().indexOf("de")).toBe(-1);
+  creator.undo();
+  expect(q1.locTitle.getLocaleText("de")).toBe("Frage 1");
+  expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBe("Frage 2");
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(getUndoModeModel(creator).getVisibleLocales().indexOf("de") > -1).toBeTruthy();
+});
+
+test("default mode: CSV import is a single undo step", () => {
+  const creator = createUndoModeCreator();
+  const model = getUndoModeModel(creator);
+  model.importFromNestedArray([
+    ["description ↓ - language →", "default", "de"], // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    ["survey.page1.q1.title", "Question 1", "Frage 1 importiert"],
+    ["survey.page1.q2.title", "Question 2", "Frage 2 importiert"]
+  ]);
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  expect(q1.locTitle.getLocaleText("de")).toBe("Frage 1 importiert");
+  expect(q2.locTitle.getLocaleText("de")).toBe("Frage 2 importiert");
+  creator.undo();
+  expect(q1.locTitle.getLocaleText("de")).toBe("Frage 1");
+  expect(q2.locTitle.getLocaleText("de")).toBe("Frage 2");
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  creator.redo();
+  expect(q1.locTitle.getLocaleText("de")).toBe("Frage 1 importiert");
+  expect(q2.locTitle.getLocaleText("de")).toBe("Frage 2 importiert");
+});
+
+test("default mode: machine translation dialog apply is a single undo step", () => {
+  const creator = createUndoModeCreator({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "text", name: "q1", title: "Question 1" },
+          { type: "text", name: "q2", title: "Question 2" }
+        ]
+      }
+    ]
+  });
+  const model = getUndoModeModel(creator);
+  const editor = model.createTranslationEditor("de");
+  const dialogModel = editor.translation;
+  const findDialogItem = (contextName: string): TranslationItem => {
+    return <TranslationItem>dialogModel.root.allLocItems.filter(
+      item => item.name === "title" && !!item.context && item.context.name === contextName)[0];
+  };
+  // Machine translation fills the temporary per-item values; they reach the survey on apply only.
+  findDialogItem("q1").values("de").text = "Frage 1 uebersetzt";
+  findDialogItem("q2").values("de").text = "Frage 2 uebersetzt";
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  expect(q1.locTitle.getLocaleText("de")).toBeFalsy();
+  editor.apply();
+  expect(q1.locTitle.getLocaleText("de")).toBe("Frage 1 uebersetzt");
+  expect(q2.locTitle.getLocaleText("de")).toBe("Frage 2 uebersetzt");
+  creator.undo();
+  expect(q1.locTitle.getLocaleText("de")).toBeFalsy();
+  expect(q2.locTitle.getLocaleText("de")).toBeFalsy();
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  creator.redo();
+  expect(q1.locTitle.getLocaleText("de")).toBe("Frage 1 uebersetzt");
+  expect(q2.locTitle.getLocaleText("de")).toBe("Frage 2 uebersetzt");
+});
+
+test("default mode: a structural undo (page removal) rebuilds the strings grid", () => {
+  const creator = createUndoModeCreator();
+  creator.activeTab = "designer";
+  creator.survey.addNewPage("page2");
+  creator.survey.pages[1].addNewQuestion("text", "q3");
+  creator.activeTab = "translation";
+  const model = getUndoModeModel(creator);
+  expect(findUndoModeMatrix(model, "q3", "title")).toBeTruthy();
+  creator.undo(); // rolls the added question back
+  const updatedModel = getUndoModeModel(creator);
+  expect(findUndoModeMatrix(updatedModel, "q3", "title")).toBeFalsy();
+  expect(findUndoModeMatrix(updatedModel, "q1", "title")).toBeTruthy();
+});

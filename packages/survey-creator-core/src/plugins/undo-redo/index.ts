@@ -41,9 +41,7 @@ export class UndoRedoPlugin implements ICreatorPlugin {
       macOsHotkey: {
         keyCode: 90,
       },
-      execute: () => {
-        if (creator.translationMode === "sideBySide")this.model.undo();
-      }
+      execute: () => this.model.undo()
     });
     creator.registerShortcut("redo_translation", {
       name: "redo",
@@ -55,9 +53,7 @@ export class UndoRedoPlugin implements ICreatorPlugin {
       macOsHotkey: {
         keyCode: 89,
       },
-      execute: () => {
-        if (creator.translationMode === "sideBySide")this.model.redo();
-      }
+      execute: () => this.model.redo()
     });
   }
   public model: any = undefined;

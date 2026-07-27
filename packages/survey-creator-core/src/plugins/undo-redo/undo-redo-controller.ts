@@ -161,7 +161,7 @@ export class UndoRedoController extends Base {
 
   private isUndoRedoVisibleInTab(): boolean {
     const activeTab = this.creator.activeTab;
-    return activeTab === "designer" || (activeTab === "translation" && this.creator.translationMode === "sideBySide");
+    return activeTab === "designer" || activeTab === "translation";
   }
   public createActions() {
     const items: Array<Action> = [];

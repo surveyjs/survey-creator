@@ -58,6 +58,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   private wireModelCallbacks(model: Translation): void {
+    model.doUndoableAction = (action, title) => {
+      const manager = this.creator.undoRedoManager;
+      if (!!manager) {
+        manager.performAction(action, title);
+      } else {
+        action.apply();
+      }
+    };
     model.getMachineTranslationFromLocale = () => this._machineTranslationFromLocale;
     model.setMachineTranslationFromLocale = (locale: string) => {
       this._machineTranslationFromLocale = locale;
@@ -136,14 +144,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     model.importFinishedCallback = (): void => {
       this.creator.onTranslationImported.fire(this.creator, {});
       model.rebuildInstances();
-    };
-    model.doUndoableAction = (action, title) => {
-      const manager = this.creator.undoRedoManager;
-      if (!!manager) {
-        manager.performAction(action, title);
-      } else {
-        action.apply();
-      }
     };
     // The property grid hosts the view switcher and the source/target language dropdowns.
     this.updateSettingsSurvey();
@@ -231,8 +231,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     return true;
   }
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
-    if (this.isSideBySide && !!this.model) {
-      (<TranslationSideBySide>this.model).onCreatorSurveyPropertyChanged(obj, propName);
+    if (!!this.model) {
+      this.model.onCreatorSurveyPropertyChanged(obj, propName);
     }
   }
   private updateTabControl() {

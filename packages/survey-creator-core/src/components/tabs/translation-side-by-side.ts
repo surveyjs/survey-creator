@@ -1,13 +1,12 @@
 import {
   Base, ILocalizableString, ItemValue, LocalizableString, QuestionDropdownModel,
-  Serializer, SurveyModel, property, surveyLocalization
+  SurveyModel, property, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { editableStringRendererName } from "../../creator-base";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
-import { IUndoRedoAction, UndoRedoLocaleTextAction } from "../../plugins/undo-redo/undo-redo-manager";
 import { Translation, TranslationGroup, TranslationItem } from "./translation";
 
 // The default locale is stored as "" on the model; the settings survey dropdowns need a
@@ -23,12 +22,9 @@ export class TranslationSideBySide extends Translation {
   // Changing it rebuilds the surface in place on the same model, so the locales chosen in
   // the property grid survive the switch.
   @property({ defaultValue: "forms" }) view: "forms" | "grid";
-  // Wired by TabTranslationPlugin to record the action in the creator's undo/redo stack.
-  public doUndoableAction: (action: IUndoRedoAction, title: string) => void = (action) => action.apply();
 
   private byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
   private byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
-  protected _syncing: boolean = false;
   private _updatingSettingsSurvey: boolean = false;
 
   constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms") {
@@ -223,14 +219,9 @@ export class TranslationSideBySide extends Translation {
       return;
     }
     if (this.isSideBySideGrid) {
-      if (!this.getLocStrByName(obj, propName)) {
-        // Not a localizable string - a structural change (element added/removed by undo/redo, etc.).
-        this.rebuildInstances();
-        return;
-      }
-      // A localizable string changed on the real survey (an undo/redo rollback or an external
-      // edit): refresh the grid cells.
-      this.updateStringsSurveyData();
+      // The base implementation refreshes the grid cells on a localizable string change and
+      // rebuilds the grid on a structural one.
+      super.onCreatorSurveyPropertyChanged(obj, propName);
       return;
     }
     if (!this.targetSurvey) return;
@@ -267,32 +258,12 @@ export class TranslationSideBySide extends Translation {
     if (processed === current) return;
     this._syncing = true;
     try {
-      this.doUndoableAction(new UndoRedoLocaleTextAction(item, locale, processed), "translation changed");
+      this.performItemLocTextAction(item, locale, processed);
       if (processed !== stored) {
         // The options hook rewrote the text - reflect the processed value back into the copies.
         const copies = this.byRealLocStr.get(item.locString);
         if (!!copies)this.mirrorLocStrIntoCopies(item.locString, copies);
       }
-    } finally {
-      this._syncing = false;
-    }
-  }
-  // Routes a translation item edit on the real survey through the locale-aware undoable action.
-  public performItemLocTextAction(item: TranslationItem, locale: string, newText: string): void {
-    const current = item.locString.getLocaleText(locale) || "";
-    if ((newText || "") === current) return;
-    this.doUndoableAction(new UndoRedoLocaleTextAction(item, locale, newText), "translation changed");
-  }
-  // Routes grid edits through the creator's undo/redo stack - the base implementation writes
-  // directly into the localizable string and would bypass it.
-  protected setItemLocText(item: TranslationItem, locale: string, text: string): void {
-    if (!this.isSideBySideGrid) {
-      super.setItemLocText(item, locale, text);
-      return;
-    }
-    this._syncing = true;
-    try {
-      this.performItemLocTextAction(item, locale, text);
     } finally {
       this._syncing = false;
     }
@@ -344,7 +315,6 @@ export class TranslationSideBySide extends Translation {
     this.setSourceScrollElement(undefined);
     this.setTargetScrollElement(undefined);
     this.disposeInstances();
-    this.doUndoableAction = undefined;
     super.dispose();
   }
   private createInstance(json: any, reason: string): SurveyModel {
@@ -488,26 +458,10 @@ export class TranslationSideBySide extends Translation {
     group.groups.forEach(child => this.collectItems(child, items));
     return items;
   }
-  // Resolves the localizable string a property change refers to. Some objects report the change
-  // themselves while the string lives on a nested object (a matrix column's title is stored on its
-  // template question), so the serialization metadata is used when the own-strings hash has no entry.
   // An external survey.locale change (an undo/redo rollback) - follow it instead of rebuilding.
   protected followSurveyLocale(): void {
     const locale = this.survey.locale;
     this.targetLocale = !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
-  }
-  protected getLocStrByName(obj: Base, name: string): ILocalizableString {
-    if (!obj) return undefined;
-    if (typeof (<any>obj).getLocalizableString === "function") {
-      const res = (<any>obj).getLocalizableString(name);
-      if (!!res) return res;
-    }
-    if (typeof obj.getType !== "function") return undefined;
-    const prop = Serializer.findProperty(obj.getType(), name);
-    if (!!prop && !!prop.serializationProperty) {
-      return <ILocalizableString>(<any>obj)[prop.serializationProperty];
-    }
-    return undefined;
   }
   private mirrorLocStrIntoCopies(realLocStr: ILocalizableString, copies: Array<ILocalizableString>): void {
     const json = (<LocalizableString>realLocStr).getJson();

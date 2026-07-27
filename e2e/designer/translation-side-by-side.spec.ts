@@ -171,7 +171,7 @@ test.describe(title, () => {
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
     // Click the dropdown wrapper: the input itself sits under the prefix-icon wrapper.
     await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Target language" }) }).click();
-    await page.locator(".sv-popup").filter({ visible: true }).getByText("Italiano", { exact: true }).click();
+    await page.getByRole("option", { name: "Italiano" }).click();
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toHaveCount(0);
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Question 1")).toBeVisible();
 
