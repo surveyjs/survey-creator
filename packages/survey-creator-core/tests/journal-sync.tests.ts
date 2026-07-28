@@ -1,6 +1,9 @@
 import { CreatorTester } from "./creator-tester";
 import { JournalPlugin } from "../src/plugins/journal";
 import { IJournalRecord, JournalOp } from "../src/plugins/journal/journal-record";
+// Registers the survey-core locale codes: the translation-tab refresher only
+// treats a record target's trailing segment as a locale when the code is known.
+import "survey-core/survey.i18n";
 
 // Replicates the creator-synchronization scenarios of the UndoRedoSyncPlugin
 // test suite (feature/undo-redo-sync branch) on top of the JournalPlugin.
@@ -24,9 +27,9 @@ function wire(from: JournalPlugin, to: JournalPlugin): void {
   from.onRecordChanged.add(send);
 }
 
-function makeCreators(json: any = { pages: [{ name: "page1" }] }) {
-  const creatorA = new CreatorTester();
-  const creatorB = new CreatorTester();
+function makeCreators(json: any = { pages: [{ name: "page1" }] }, options: any = {}) {
+  const creatorA = new CreatorTester(options);
+  const creatorB = new CreatorTester(options);
   creatorA.JSON = json;
   creatorB.JSON = json;
   const pluginA = new JournalPlugin(creatorA);
@@ -557,6 +560,37 @@ test("journal-sync: editing a non-active locale via the translation tab propagat
   // text must remain "question2".
   expect(qB.locTitle.getLocaleText("en")).toEqual("question1");
   expect(qB.locTitle.getLocaleText("es")).toEqual("question2");
+});
+
+test("journal-sync: checking a peer-added locale shows the peer's already-made translations", () => {
+  const { creatorA, creatorB } = makeCreators(
+    { pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Q1 title" }] }] },
+    { showTranslationTab: true }
+  );
+  // B has the Translations tab open - the refresher only touches the active
+  // tab's model.
+  creatorB.activeTab = "translation";
+  const translationB: any = (<any>creatorB.getPlugin("translation")).model;
+  expect(translationB).toBeTruthy();
+
+  // A introduces "fr" with a translation (how the Translation tab commits a
+  // cell). On B the applier writes it into the live LocalizableString and the
+  // refresher registers the locale as a visible but UNCHECKED row.
+  const qA: any = creatorA.survey.getQuestionByName("q1");
+  qA.locTitle.setLocaleText("fr", "Bonjour");
+
+  const qB: any = creatorB.survey.getQuestionByName("q1");
+  expect(qB.locTitle.getLocaleText("fr")).toEqual("Bonjour");
+  expect(translationB.getVisibleLocales()).toContain("fr");
+  expect(translationB.getSelectedLocales()).not.toContain("fr");
+  const matrixB: any = translationB.stringsSurvey.getAllQuestions()[0];
+  expect(matrixB.columns).toHaveLength(1);
+
+  // B opts in: the new column must carry A's translation, not render empty.
+  translationB.setSelectedLocales(["fr"]);
+  expect(matrixB.columns).toHaveLength(2);
+  const frCell = matrixB.visibleRows[0].cells.filter((cell: any) => cell.column.name === "fr")[0];
+  expect(frCell.question.value).toEqual("Bonjour");
 });
 
 test("journal-sync: paneldynamic - adding a question to the template propagates to the peer", () => {

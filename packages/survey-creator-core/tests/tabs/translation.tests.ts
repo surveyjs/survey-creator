@@ -2889,3 +2889,32 @@ test("Import after creating TranslationEditor should not throw error, Issue#7790
   expect(translation.root).toBeDefined();
   expect(translation.stringsHeaderSurvey).toBeDefined();
 });
+
+test("checking a locale shows texts applied to the survey while it was unchecked", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: { default: "title-en", de: "title-de" }
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  const matrix = <QuestionMatrixDropdownModel>translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.columns).toHaveLength(2);
+
+  translation.setSelectedLocales([]);
+  expect(matrix.columns).toHaveLength(1);
+
+  // The survey gets a new "de" text while the locale is unchecked (this is how
+  // a collaborative peer's translation lands in the model).
+  survey.getQuestionByName("question1").locTitle.setLocaleText("de", "title-de-2");
+
+  // Re-checking the locale must show the fresh text, not an empty column.
+  translation.setSelectedLocales(["de"]);
+  expect(matrix.columns).toHaveLength(2);
+  const deCell = matrix.visibleRows[0].cells.filter((cell) => cell.column.name === "de")[0];
+  expect(deCell.question.value).toEqual("title-de-2");
+});

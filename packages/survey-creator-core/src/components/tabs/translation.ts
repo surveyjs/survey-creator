@@ -1155,6 +1155,12 @@ export class Translation extends Base implements ITranslationLocales {
     if (name === "locales") {
       this.updateHeaderStringsSurveyColumns();
       this.updateStringsSurveyColumns();
+      // A newly selected locale may hold texts the matrix value has never seen
+      // (e.g. translations applied to the survey while the locale was
+      // unchecked) - re-read the data so the rebuilt columns are populated.
+      if (!this.isEditMode) {
+        this.updateStringsSurveyData();
+      }
     }
   }
   private getMergeLocaleWithDefaultText(): string {
