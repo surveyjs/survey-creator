@@ -61,3 +61,4 @@ packages/survey-creator-core/.vscode/launch.json
 packages/survey-creator-core/junit.presets.xml
 packages/survey-creator-core/.claude/
 packages/survey-creator-core/promts/
+promts/
