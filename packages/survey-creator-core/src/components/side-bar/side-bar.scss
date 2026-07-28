@@ -24,6 +24,13 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   }
 }
 
+.svc-side-bar--compact {
+  .svc-side-bar__container {
+    width: calc(var(--sjs2-base-unit-size) * 36);
+    min-width: calc(var(--sjs2-base-unit-size) * 36);
+  }
+}
+
 .svc-side-bar__wrapper {
   height: 100%;
 }

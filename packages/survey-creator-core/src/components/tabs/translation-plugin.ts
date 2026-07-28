@@ -91,6 +91,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     };
   }
   public activate(): void {
+    // The side-by-side property grid hosts the view switcher and the source/target language
+    // dropdowns only, so it is shown 40% narrower. The default mode shows the languages
+    // matrix and needs the standard width.
+    this.creator.sidebar.compactMode = this.isSideBySide;
     if (this.isSideBySide) {
       this.activateSideBySide();
       return;
@@ -227,6 +231,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.exportCsvAction.visible = false;
     this.machineTranslationAction.visible = false;
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
+    this.creator.sidebar.compactMode = false;
     this.creator.sidebar.header.reset();
     return true;
   }

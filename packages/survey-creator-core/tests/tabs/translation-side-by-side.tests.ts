@@ -400,6 +400,15 @@ test("changing the source pane page syncs the target pane and the page dropdown"
   expect(model.targetSurvey.currentPage.name).toBe("page1");
 });
 
+test("forms view property grid is compact, restored on leaving the tab", () => {
+  const creator = createSideBySideCreator();
+  expect(creator.sidebar.compactMode).toBeTruthy();
+  expect(creator.sidebar.rootCss).toContain("svc-side-bar--compact");
+  creator.activeTab = "designer";
+  expect(creator.sidebar.compactMode).toBeFalsy();
+  expect(creator.sidebar.rootCss).not.toContain("svc-side-bar--compact");
+});
+
 test("deactivate detaches copies", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);

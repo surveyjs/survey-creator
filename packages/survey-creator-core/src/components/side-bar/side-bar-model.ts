@@ -25,6 +25,8 @@ export class SidebarModel extends Base {
   @property() hasVisiblePages: boolean;
   @property({ defaultValue: false }) flyoutMode: boolean;
   @property({ defaultValue: false }) narrowMode: boolean;
+  // Shrinks the default panel width by 40%; used by tabs whose property grid holds a few controls only
+  @property({ defaultValue: false }) compactMode: boolean;
   @property() hideSideBarVisibilityControlActions: boolean;
 
   @property() sideAreaComponentName: string;
@@ -36,6 +38,7 @@ export class SidebarModel extends Base {
       .append("svc-side-bar")
       .append("svc-side-bar--flyout", this.flyoutPanelMode)
       .append("svc-side-bar--narrow", this.narrowMode)
+      .append("svc-side-bar--compact", this.compactMode)
       .append("svc-side-bar--mobile", this.creator.isMobileView)
       .append("svc-side-bar--side-area", !!this.sideAreaComponentName)
       .toString();
