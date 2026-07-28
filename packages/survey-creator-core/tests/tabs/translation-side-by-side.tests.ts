@@ -352,25 +352,13 @@ test("source and target panes keep their scrollbars in sync", () => {
   expect(newSource.scrollTop).toBe(25);
 });
 
-function getNavAction(survey: any, id: string): any {
-  return survey.navigationBar.getActionById(id);
-}
-const navActionIds = ["sv-nav-start", "sv-nav-prev", "sv-nav-next", "sv-nav-preview", "sv-nav-complete"];
 const navCaptionProps = ["pagePrevText", "pageNextText", "completeText", "previewText", "startSurveyText"];
 
-test("navigation bar shows on both panes, honors navigationButtonsLocation, designer survey unaffected", () => {
+test("navigation bar is not shown on the panes", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  expect(model.sourceSurvey.isNavigationButtonsShowing).toBe("bottom");
-  expect(model.targetSurvey.isNavigationButtonsShowing).toBe("bottom");
-  expect(creator.survey.isNavigationButtonsShowing).toBe("none");
-
-  const json = JSON.parse(JSON.stringify(sideBySideJSON));
-  json.navigationButtonsLocation = "top";
-  const creatorTop = createSideBySideCreator(json);
-  const modelTop = getModel(creatorTop);
-  expect(modelTop.sourceSurvey.isNavigationButtonsShowing).toBe("top");
-  expect(modelTop.targetSurvey.isNavigationButtonsShowing).toBe("top");
+  expect(model.sourceSurvey.isNavigationButtonsShowing).toBe("none");
+  expect(model.targetSurvey.isNavigationButtonsShowing).toBe("none");
 });
 
 test("nav caption properties are mapped: target edits write the target locale, undo restores, JSON round-trips", () => {
@@ -393,92 +381,16 @@ test("nav caption properties are mapped: target edits write the target locale, u
   expect((<any>creator.survey).getLocalizableString("startSurveyText").getLocaleText("de")).toBe("startSurveyText-de");
 });
 
-test("source pane Next/Prev navigate and sync target pane and the page dropdown", () => {
+test("changing the source pane page syncs the target pane and the page dropdown", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const next = getNavAction(model.sourceSurvey, "sv-nav-next");
-  expect(next.visible).toBeTruthy();
-  next.action();
-  expect(model.sourceSurvey.currentPage.name).toBe("page2");
+  model.sourceSurvey.currentPage = model.sourceSurvey.getPageByName("page2");
   expect(model.selectedPageName).toBe("page2");
   expect(model.targetSurvey.currentPage.name).toBe("page2");
   expect(getSelectedListItem(creator, "svc-translation-filter-page").id).toBe("page2");
-  const prev = getNavAction(model.sourceSurvey, "sv-nav-prev");
-  expect(prev.visible).toBeTruthy();
-  prev.action();
-  expect(model.sourceSurvey.currentPage.name).toBe("page1");
+  model.sourceSurvey.currentPage = model.sourceSurvey.getPageByName("page1");
   expect(model.selectedPageName).toBe("page1");
   expect(model.targetSurvey.currentPage.name).toBe("page1");
-});
-
-test("source pane Next is not blocked by required questions on the design-mode copy", () => {
-  const json = JSON.parse(JSON.stringify(sideBySideJSON));
-  json.pages[0].elements[0].isRequired = true;
-  const creator = createSideBySideCreator(json);
-  const model = getModel(creator);
-  getNavAction(model.sourceSurvey, "sv-nav-next").action();
-  expect(model.sourceSurvey.currentPage.name).toBe("page2");
-});
-
-test("source pane Complete and Preview never leave the running state", () => {
-  const json = JSON.parse(JSON.stringify(sideBySideJSON));
-  json.showPreviewBeforeComplete = true;
-  const creator = createSideBySideCreator(json);
-  const model = getModel(creator);
-  model.selectedPageName = "page2";
-  getNavAction(model.sourceSurvey, "sv-nav-complete").action();
-  expect(model.sourceSurvey.state).toBe("running");
-  expect(model.sourceSurvey.currentPage.name).toBe("page2");
-  getNavAction(model.sourceSurvey, "sv-nav-preview").action();
-  expect(model.sourceSurvey.state).toBe("running");
-  expect(model.sourceSurvey.currentPage.name).toBe("page2");
-});
-
-test("target pane nav buttons never navigate, preview or complete", () => {
-  const creator = createSideBySideCreator();
-  const model = getModel(creator);
-  const target = model.targetSurvey;
-  navActionIds.forEach(id => {
-    const action = getNavAction(target, id);
-    expect(action).toBeTruthy();
-    action.action();
-  });
-  expect(target.state).toBe("running");
-  expect(target.currentPage.name).toBe("page1");
-  expect(model.selectedPageName).toBe("page1");
-});
-
-test("button visibility follows runtime rules and updates when the page dropdown changes the page", () => {
-  const json = JSON.parse(JSON.stringify(sideBySideJSON));
-  json.showPreviewBeforeComplete = true;
-  const creator = createSideBySideCreator(json);
-  const model = getModel(creator);
-  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
-    expect(getNavAction(survey, "sv-nav-prev").visible).toBeFalsy();
-    expect(getNavAction(survey, "sv-nav-next").visible).toBeTruthy();
-    expect(getNavAction(survey, "sv-nav-preview").visible).toBeFalsy();
-    expect(getNavAction(survey, "sv-nav-complete").visible).toBeFalsy();
-  });
-  model.selectedPageName = "page2";
-  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
-    expect(getNavAction(survey, "sv-nav-prev").visible).toBeTruthy();
-    expect(getNavAction(survey, "sv-nav-next").visible).toBeFalsy();
-    expect(getNavAction(survey, "sv-nav-preview").visible).toBeTruthy();
-    expect(getNavAction(survey, "sv-nav-complete").visible).toBeFalsy();
-  });
-});
-
-test("nav captions follow the pane locales and refresh on a locale switch", () => {
-  const json = JSON.parse(JSON.stringify(sideBySideJSON));
-  json.completeText = { default: "Done", de: "Fertig" };
-  const creator = createSideBySideCreator(json);
-  const model = getModel(creator);
-  expect(getNavAction(model.sourceSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Done");
-  expect(getNavAction(model.targetSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Fertig");
-  model.targetLocale = "fr";
-  expect(getNavAction(model.targetSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Done");
-  model.targetLocale = "de";
-  expect(getNavAction(model.targetSurvey, "sv-nav-complete").locTitle.renderedHtml).toBe("Fertig");
 });
 
 test("deactivate detaches copies", () => {
