@@ -296,14 +296,37 @@ telSubitem.json["maskSettings"] = { "pattern": "+1(999)999-99-99" };
 
 ### Remove Subitems
 
-To remove a specific subitem, call the [`removeSubitem(subitem)`](/survey-creator/documentation/api-reference/questiontoolboxitem#removeSubitem) method on a toolbox item instance. You can also remove all subitems of a toolbox item by calling the [`clearSubitems()`](/survey-creator/documentation/api-reference/questiontoolboxitem#clearSubitems) method:
+To remove a subitem, call the [`removeSubitem(subitem)`](/survey-creator/documentation/api-reference/questiontoolboxitem#removeSubitem) method on a toolbox item instance. The following list contains the predefined subitems available by default:
+
+- [Rating Scale](/form-library/examples/rating-scale/):
+  - `"labels"`
+  - `"stars"`
+  - `"smileys"`
+- [Single Line-Input](/form-library/examples/text-entry-question/):
+  - `"color"`
+  - `"date"`
+  - `"datetime-local"`
+  - `"email"`
+  - `"month"`
+  - `"number"`
+  - `"password"`
+  - `"range"`
+  - `"tel"`
+  - `"text"`
+  - `"time"`
+  - `"url"`
+  - `"week"`
 
 ```js
-// Remove the Labels subitem of the Rating Scale toolbox item
+// Remove the Labels subitem from the Rating Scale toolbox item
 const ratingScaleItem = creator.toolbox.getItemByName("rating");
 ratingScaleItem.removeSubitem("labels");
+```
 
-// Remove all subitems of the Single-Line Input toolbox item
+You can also remove all subitems from a toolbox item by calling the [`clearSubitems()`](/survey-creator/documentation/api-reference/questiontoolboxitem#clearSubitems) method:
+
+```js
+// Remove all subitems from the Single-Line Input toolbox item
 const singleLineInputItem = creator.toolbox.getItemByName("text");
 singleLineInputItem.clearSubitems();
 ```
