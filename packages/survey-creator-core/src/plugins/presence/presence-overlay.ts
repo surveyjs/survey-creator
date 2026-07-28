@@ -1,7 +1,7 @@
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { buildLocator, resolveLocator } from "../journal/journal-locator";
-import { getCanvasElement, IPresencePeer, IPresenceState, mapOffset, PRESENCE_SELECTORS, resolveAnchor, resolveEditFocus } from "./presence-state";
+import { getCanvasElement, IPresenceFocus, IPresencePeer, IPresenceState, mapOffset, PRESENCE_SELECTORS, resolveAnchor, resolveEditFocus } from "./presence-state";
 import "./presence.scss";
 
 /** Above the creator content; below survey-core popups is acceptable (cosmetic). */
@@ -33,7 +33,6 @@ const containsPoint = (r: IRect, x: number, y: number): boolean =>
 
 /** A native decoration wanted on a node this tick, plus its name-badge data. */
 interface IDecoration {
-  mode: "on" | "away";
   color: string;
   /** Peer name shown on the badge under the ring. */
   name: string;
@@ -49,7 +48,8 @@ interface IPeerArtifacts {
   cursorName: HTMLElement;
   /** Receiver-side time of the last observed cursor change (staleness). */
   curChangedAt: number;
-  lastCurStamp: number | undefined;
+  /** Serialized last cursor - the change detector behind the idle fade. */
+  lastCurSig: string | undefined;
 }
 
 /**
@@ -70,7 +70,7 @@ export class PresenceOverlay {
   private disposed = false;
   private layer: HTMLElement;
   private artifacts = new Map<string, IPeerArtifacts>();
-  /** Nodes currently carrying a decoration -> the applied "mode|color". */
+  /** Nodes currently carrying a decoration -> the applied peer color. */
   private decorated = new Map<HTMLElement, string>();
   /** Name badge (a layer artifact) per decorated node. */
   private badges = new Map<HTMLElement, HTMLElement>();
@@ -176,7 +176,7 @@ export class PresenceOverlay {
       cursor: this.el("collab-presence-cursor", "width:0;height:0;"),
       cursorName: this.el("collab-presence-cursor-name", `padding:2px 7px;border-radius:10px;background:${color};color:#fff;white-space:nowrap;`),
       curChangedAt: 0,
-      lastCurStamp: undefined
+      lastCurSig: undefined
     };
     a.cursor.innerHTML =
       "<svg width=\"16\" height=\"18\" viewBox=\"0 0 16 18\" style=\"display:block\">" +
@@ -250,17 +250,17 @@ export class PresenceOverlay {
   }
 
   /**
-   * trCell -> the local stringsSurvey matrix name. Matrix names diverge when
-   * peers use different showAllStrings/page-filter settings, so identity is
-   * established by the owning element's locator + the property name, with the
-   * sender's name kept as the same-view fast path. Cached per stringsSurvey
-   * instance - the getAllQuestions scan runs once per peer state change, not
-   * per rAF tick (the survey is recreated on every locale/filter change,
-   * which also invalidates the cache).
+   * tr focus -> the local stringsSurvey matrix name. Matrix names diverge
+   * when peers use different showAllStrings/page-filter settings, so identity
+   * is established by the owning element's locator + the property name, with
+   * the sender's name kept as the same-view fast path. Cached per
+   * stringsSurvey instance - the getAllQuestions scan runs once per peer
+   * state change, not per rAF tick (the survey is recreated on every
+   * locale/filter change, which also invalidates the cache).
    */
   private trMatrixCache: { survey: unknown, byKey: Map<string, string | null> } | null = null;
 
-  private resolveTrMatrixName(tr: NonNullable<IPresenceState["trCell"]>, survey: any): string | null {
+  private resolveTrMatrixName(tr: Extract<IPresenceFocus, { area: "tr" }>, survey: any): string | null {
     if (this.trMatrixCache?.survey !== survey)this.trMatrixCache = { survey, byKey: new Map() };
     const key = `${tr.loc ?? ""}|${tr.p}|${tr.m}`;
     const cached = this.trMatrixCache.byKey.get(key);
@@ -285,13 +285,13 @@ export class PresenceOverlay {
   }
 
   /**
-   * trCell -> the cell's td node. The column index comes from the LOCAL
+   * tr focus -> the cell's td node. The column index comes from the LOCAL
    * matrix columns (peers may show different locale sets); the row-text cell
    * is excluded by the selector, so locale-cell order matches the column
    * order. A locale not visible locally, or a lazily-skipped (skeleton) row,
    * resolves to null - the next tick retries like any other missing anchor.
    */
-  private resolveTranslationCell(tr: NonNullable<IPresenceState["trCell"]>, survey: any, container: Element): Element | null {
+  private resolveTranslationCell(tr: Extract<IPresenceFocus, { area: "tr" }>, survey: any, container: Element): Element | null {
     const matrixName = this.resolveTrMatrixName(tr, survey);
     const matrix = matrixName ? survey.getQuestionByName(matrixName) : null;
     if (!matrix) return null;
@@ -307,8 +307,9 @@ export class PresenceOverlay {
    * are mapped from the sender's zoom-normalized canvas box onto the local one
    * (`mapOffset` per axis, rescaled by the local zoom) - the canvas block lays
    * out identically across peers, unlike the window-wide content box the
-   * legacy fractions are relative to. Everything else - other scopes and old
-   * senders without px - keeps the fraction mapping.
+   * fractions are relative to. Everything else - other scopes, and surface
+   * cursors captured while the canvas block had no size - keeps the fraction
+   * mapping; null (cursor hidden) when neither encoding is usable locally.
    */
   private cursorPoint(cur: NonNullable<IPresenceState["cur"]>, node: Element):
     { x: number, y: number, byOffset: boolean } | null {
@@ -325,6 +326,7 @@ export class PresenceOverlay {
         };
       }
     }
+    if (typeof cur.x !== "number" || typeof cur.y !== "number") return null;
     const r = node.getBoundingClientRect();
     if (r.width <= 0 || r.height <= 0) return null;
     return { x: r.left + cur.x * r.width, y: r.top + cur.y * r.height, byOffset: false };
@@ -376,11 +378,10 @@ export class PresenceOverlay {
       this.badges.delete(node);
     });
     wanted.forEach((dec, node) => {
-      const value = `${dec.mode}|${dec.color}`;
-      if (this.decorated.get(node) !== value) {
-        node.setAttribute("data-collab-focus", dec.mode);
+      if (this.decorated.get(node) !== dec.color) {
+        node.setAttribute("data-collab-focus", "on");
         node.style.setProperty("--collab-peer-color", dec.color);
-        this.decorated.set(node, value);
+        this.decorated.set(node, dec.color);
       }
       this.placeBadge(node, dec);
     });
@@ -415,7 +416,6 @@ export class PresenceOverlay {
     }
     badge.textContent = dec.name;
     badge.style.background = dec.color;
-    badge.style.opacity = dec.mode === "away" ? "0.5" : "1";
     badge.style.display = "block"; // measurable before placing
     // On a node narrower than the badge (a checkbox) don't hang out past the
     // ring's left edge - grow rightwards from it instead.
@@ -483,30 +483,36 @@ export class PresenceOverlay {
       // 1) element focus ring - decorate the real node; independently, a
       // focused inline string editor lights up its native focus border
       // (mirrors what the peer sees locally: selection ring + editor border).
+      // A non-null channel implies the peer's tab renders it (the capture
+      // clears every channel atomically with a tab switch), so rendering is
+      // gated on the LOCAL view only.
       if (designer) {
         if (state.sel) {
           const anchor = this.resolveSelectionNode(state.sel, designer);
           const target = anchor ? this.ringNode(anchor) : null;
           if (target instanceof HTMLElement && !wanted.has(target)) {
-            const mode = state.tab === "designer" ? "on" : "away";
-            wanted.set(target, { mode, color, name: peer.name, clip: designerRect, avoid: occluder });
+            wanted.set(target, { color, name: peer.name, clip: designerRect, avoid: occluder });
           }
         }
-        if (state.edit) {
-          const editor = resolveEditFocus(state.edit, designer);
+        if (state.focus?.area === "edit") {
+          const editor = resolveEditFocus(state.focus, designer);
           if (editor instanceof HTMLElement && !wanted.has(editor)) {
-            wanted.set(editor, { mode: "on", color, name: peer.name, clip: designerRect, avoid: occluder });
+            wanted.set(editor, { color, name: peer.name, clip: designerRect, avoid: occluder });
           }
         }
       }
 
-      // 2) property-grid field ring - only when the local grid shows the same content
-      if (state.pgFocus && sidebar) {
-        const sameContent = state.pgFocus.grid === "theme"
+      // 2) property-grid field ring - only when the local grid shows the same
+      // content. The grid flavor derives from the peer's tab (focus dies with
+      // every tab switch, so they cannot disagree); the main grid always
+      // shows the SELECTED object, so "same content" means the peer's
+      // selection is the local one.
+      if (state.focus?.area === "pg" && sidebar) {
+        const sameContent = state.tab === "theme"
           ? localTab === "theme"
-          : state.pgFocus.objLoc !== null && state.pgFocus.objLoc === localSelLoc;
+          : localTab === "designer" && !!state.sel && state.sel.loc === localSelLoc;
         if (sameContent) {
-          const field = sidebar.querySelector(PRESENCE_SELECTORS.dataName(state.pgFocus.prop));
+          const field = sidebar.querySelector(PRESENCE_SELECTORS.dataName(state.focus.prop));
           // The [data-name] node spans the whole row incl. its title; the
           // native focus only outlines the input area, so decorate the
           // question content when present. A boolean row's content spans the
@@ -515,41 +521,45 @@ export class PresenceOverlay {
             ? field.querySelector(PRESENCE_SELECTORS.pgCheckbox) : null) ??
             field?.querySelector(PRESENCE_SELECTORS.pgQuestionContent) ?? field;
           if (target instanceof HTMLElement && !wanted.has(target)) {
-            wanted.set(target, { mode: "on", color, name: peer.name, clip: sidebarRect });
+            wanted.set(target, { color, name: peer.name, clip: sidebarRect });
           }
         }
       }
 
-      // 2b) translation-cell ring - the mode is always "on": the capture side
-      // clears trCell atomically with the tab change (the peer's table model
-      // is disposed on deactivate), so unlike `sel` an "away" state cannot
-      // occur. Rendering is gated on the LOCAL tab like the designer rings.
-      // A cell the local user is editing is not decorated at all - the ring
-      // is also killed instantly by the :focus-within guard in the CSS, and
-      // skipping here removes the badge with it (a badge under a ringless
-      // cell reads as a broken highlight).
-      if (state.trCell && translation && stringsSurvey) {
-        const cell = this.resolveTranslationCell(state.trCell, stringsSurvey, translation);
+      // 2b) translation-cell ring. A cell the local user is editing is not
+      // decorated at all - the ring is also killed instantly by the
+      // :focus-within guard in the CSS, and skipping here removes the badge
+      // with it (a badge under a ringless cell reads as a broken highlight).
+      if (state.focus?.area === "tr" && translation && stringsSurvey) {
+        const cell = this.resolveTranslationCell(state.focus, stringsSurvey, translation);
         const locallyFocused = !!cell && cell.contains(this.doc.activeElement);
         if (cell instanceof HTMLElement && !locallyFocused && !wanted.has(cell)) {
-          wanted.set(cell, { mode: "on", color, name: peer.name, clip: translationRect, avoid: occluder });
+          wanted.set(cell, { color, name: peer.name, clip: translationRect, avoid: occluder });
         }
       }
 
-      // 3) cursor - same tab only (tab strip cursors are global), idle fade
-      if (state.cur && state.cur.t !== a.lastCurStamp) {
-        a.lastCurStamp = state.cur.t;
-        a.curChangedAt = now;
+      // 3) cursor - same view only (tab strip cursors are global), idle fade.
+      // Movement is detected by content: the sender dedupes identical
+      // consecutive cursors, so changed content IS a move, while unchanged
+      // content only re-arrives when some other state field was resent and
+      // must not reset the fade.
+      const cur = state.cur;
+      const curSig = cur ? JSON.stringify(cur) : undefined;
+      if (curSig !== a.lastCurSig) {
+        a.lastCurSig = curSig;
+        if (cur) a.curChangedAt = now;
       }
       let cursorShown = false;
-      const cur = state.cur;
+      // After the same-view gate the peer's anchors live in the LOCAL active
+      // tab's container, so the DOM key is the local activeTabId - it never
+      // travels on the wire.
       if (cur && now - a.curChangedAt < CURSOR_IDLE_MS &&
-        (cur.a.s === "tabbar" || cur.tab === localTabId)) {
-        const node = resolveAnchor(cur.a, cur.tab, this.doc);
+        (cur.a.s === "tabbar" || state.tab === localTab)) {
+        const node = resolveAnchor(cur.a, localTabId, this.doc);
         if (node) {
           const container = cur.a.s === "pg" ? sidebarRect
             : cur.a.s === "tabbar" ? undefined
-              : this.doc.querySelector(PRESENCE_SELECTORS.tabContent(cur.tab))?.getBoundingClientRect();
+              : this.doc.querySelector(PRESENCE_SELECTORS.tabContent(localTabId))?.getBoundingClientRect();
           const p = this.cursorPoint(cur, node);
           // Offset-mapped points are fitted themselves (their anchor - the
           // whole canvas - is always partly visible, so an anchor-rect test

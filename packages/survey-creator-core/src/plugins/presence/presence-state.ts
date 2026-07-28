@@ -26,55 +26,38 @@ export interface IAnchorRef {
 }
 
 /**
- * The local participant's ephemeral state as captured by `PresenceCapture`.
- * Identity (name/color) is NOT part of the state - the transport layer is
- * expected to attach it to the envelope (the collaboration server stamps
- * `clientId`, `name` and `color` onto every relayed peer entry).
+ * The peer's keyboard focus - at most one per participant (the caret is
+ * singular; the type encodes that invariant), discriminated by the UI area
+ * it lives in:
+ *  - "pg"   a property-grid field. The grid flavor derives from `tab`
+ *           ("theme" -> the theme grid, anything else -> the main grid);
+ *           the main grid always shows the SELECTED object, so the target
+ *           object is the one in `sel`.
+ *  - "edit" an inline string editor on the designer surface (question/page/
+ *           survey title or description, a choice text, ...), addressed by
+ *           its owner plus the editor's document-order index inside it -
+ *           see `encodeEditFocus`/`resolveEditFocus`.
+ *  - "tr"   a Translations-tab cell (a comment textarea in the strings
+ *           table); `loc`+`p` are the portable identity, `m` is the sender's
+ *           matrix name kept as the same-view fast path.
  */
-export interface IPresenceState {
-  /** creator.activeTab (viewType): designer|test|theme|logic|translation|editor. */
-  tab: string;
-  /** creator.activeTabId - the key of the #tab-{id} / #scrollableDiv-{id} anchors. */
-  tabId: string;
-  /** Selected element, or null when nothing is selected. */
-  sel: null | {
-    /** JournalLocator JSON pointer; "" = the survey itself. */
-    loc: string,
-    /** element.name - direct DOM anchor; null for non-anchorable objects. */
-    name: string | null,
-    /** element.getType(). */
-    kind: string,
-    /** Human-readable label for badges/tooltips. */
-    title: string,
-  };
-  /** Focused property-grid field, or null. */
-  pgFocus: null | {
-    grid: "main" | "theme",
+export type IPresenceFocus =
+  | {
+    area: "pg",
     /** Question name in the grid survey == property name. */
     prop: string,
-    /** Locator of the object the grid shows (null for the theme grid). */
-    objLoc: string | null,
-  };
-  /**
-   * Focused inline string editor on the designer surface (question/page/survey
-   * title or description, a choice text, a matrix cell, ...), or null.
-   * Anchored by the owner node plus the editor's document-order index inside
-   * it - see `encodeEditFocus`/`resolveEditFocus`.
-   */
-  edit: null | {
+  }
+  | {
+    area: "edit",
     /** Owner kind: an element adorner, a page adorner, or the survey header. */
     scope: "el" | "page" | "survey",
     /** Element/page name for el/page scopes; "" for the survey scope. */
     name: string,
     /** Index of the `.svc-string-editor` within the owner (document order). */
     idx: number,
-  };
-  /**
-   * Focused Translations-tab cell (a comment textarea in the strings table),
-   * or null. Cleared on tab switch - the tab's model (and the focus with it)
-   * does not survive deactivation, so unlike `sel` there is no "away" state.
-   */
-  trCell?: null | {
+  }
+  | {
+    area: "tr",
     /** Sender's stringsSurvey matrix name - fast path when both peers see the same table. */
     m: string,
     /** Column name: the locale code, or "default" for the default locale. */
@@ -84,53 +67,88 @@ export interface IPresenceState {
     /** Property name (TranslationItem.name), e.g. "title". */
     p: string,
   };
-  /** Mouse cursor, or null when the mouse left the creator. */
+
+/**
+ * The local participant's ephemeral state as captured by `PresenceCapture`.
+ * Identity (name/color) is NOT part of the state - the transport layer is
+ * expected to attach it to the envelope (the collaboration server stamps
+ * `clientId`, `name` and `color` onto every relayed peer entry).
+ *
+ * Protocol invariant: everything below describes what the peer does NOW on
+ * `tab`. A tab switch resets every channel atomically in one update (and
+ * re-announces the selection when the designer returns), so receivers never
+ * see a channel that outlived its tab.
+ */
+export interface IPresenceState {
+  /**
+   * creator.activeTab (viewType): designer|preview|theme|json|logic|translation.
+   * Receivers compare it with their own activeTab to gate cursors. The DOM
+   * container key (activeTabId) is deliberately NOT sent: after a same-view
+   * check the peer's anchors resolve inside the receiver's own active tab
+   * container, so each side uses its local activeTabId.
+   */
+  tab: string;
+  /**
+   * Selected element, or null when nothing is selected. Shared only while
+   * the sender is on the designer tab (cleared on leave, re-announced from
+   * the model on return) - the ring receivers draw is always a ring the
+   * sender is really looking at.
+   */
+  sel: null | {
+    /** JournalLocator JSON pointer; "" = the survey itself. */
+    loc: string,
+    /** element.name - direct DOM anchor; null for non-anchorable objects. */
+    name: string | null,
+  };
+  /** Keyboard focus, or null - see `IPresenceFocus`. */
+  focus: null | IPresenceFocus;
+  /**
+   * Mouse cursor, or null when the mouse left the creator. Always captured on
+   * the active tab, so `tab` above is the view the cursor belongs to. Carries
+   * no change stamp: the sender dedupes identical consecutive cursors, so
+   * receivers treat changed content as a move (see the overlay's idle fade).
+   */
   cur: null | {
-    /** tabId the cursor was captured on. */
-    tab: string,
     a: IAnchorRef,
-    /** Position inside the anchor's border box, fractions 0..1. */
-    x: number,
-    y: number,
+    /**
+     * Position inside the anchor's border box, fractions 0..1. Omitted for
+     * "surface" anchors when the px offsets below were computed; kept as the
+     * fallback for the rare capture where the canvas block had no size.
+     */
+    x?: number,
+    y?: number,
     /**
      * "surface" anchors only: SIGNED offsets from the survey canvas block's
      * top-left corner (see `getCanvasElement`) in zoom-normalized px - the
      * on-screen distance divided by the sender's `survey.widthScale / 100`.
      * May be negative or exceed `w`/`h` when the cursor hovers the gutters
      * around the canvas. Integers. Receivers prefer these over the x/y
-     * fractions (see `mapOffset`); the fractions stay for older receivers.
+     * fractions (see `mapOffset`).
      */
     px?: number,
     py?: number,
     /** Zoom-normalized size of the sender's canvas block, integer px. */
     w?: number,
     h?: number,
-    /** Sender epoch ms of the last move. Dedupe only - never compare to local clocks. */
-    t: number,
   };
-  /** Reserved for tab-specific extras. Keep the serialized state small. */
-  detail?: Record<string, unknown>;
 }
 
-/** A remote participant; `name` and `color` come from the server envelope. */
-export interface IPresencePeer {
+/** What the transport feeds into `PresencePlugin.upsertPeer`/`setPeers`. */
+export interface IPresencePeerEntry {
   clientId: string;
   /** Display name, stamped by the server from the connection URL. */
   name: string;
   /** Server-assigned hex color. */
   color: string;
   state: IPresenceState;
-  /** Local receive time (ms) of the last update - used for staleness. */
-  lastSeen: number;
 }
 
-/** What the transport feeds into `PresencePlugin.upsertPeer`/`setPeers`. */
-export interface IPresencePeerEntry {
-  clientId: string;
-  name: string;
-  color: string;
-  state: IPresenceState;
-}
+/**
+ * A remote participant as stored in the roster. Identity (`name`/`color`)
+ * comes from the server envelope; liveness is the server's job, so the
+ * roster keeps nothing beyond what the transport delivered.
+ */
+export type IPresencePeer = IPresencePeerEntry;
 
 // ---------------------------------------------------------------------------
 // Centralized selectors
@@ -220,7 +238,7 @@ export function encodeAnchor(target: Element, activeTabId: string): { a: IAnchor
  * designer DOM is generated from the same survey model on every client, so
  * the index is stable across peers.
  */
-export function encodeEditFocus(target: Element): NonNullable<IPresenceState["edit"]> | null {
+export function encodeEditFocus(target: Element): Extract<IPresenceFocus, { area: "edit" }> | null {
   const editor = target.closest(PRESENCE_SELECTORS.stringEditor);
   if (!editor) return null;
   let scope: "el" | "page" | "survey" = "el";
@@ -240,13 +258,13 @@ export function encodeEditFocus(target: Element): NonNullable<IPresenceState["ed
   if (scope !== "survey" && (!name || GHOST_ELEMENT_NAMES.has(name))) return null;
   const editors = owner.querySelectorAll(PRESENCE_SELECTORS.stringEditor);
   for (let i = 0; i < editors.length; i++) {
-    if (editors[i] === editor) return { scope, name, idx: i };
+    if (editors[i] === editor) return { area: "edit", scope, name, idx: i };
   }
   return null;
 }
 
 /** Resolve an edit-focus anchor back to its `.svc-string-editor` node. */
-export function resolveEditFocus(edit: NonNullable<IPresenceState["edit"]>, root: ParentNode): Element | null {
+export function resolveEditFocus(edit: Extract<IPresenceFocus, { area: "edit" }>, root: ParentNode): Element | null {
   const owner = edit.scope === "el" ? root.querySelector(PRESENCE_SELECTORS.element(edit.name))
     : edit.scope === "page" ? root.querySelector(PRESENCE_SELECTORS.page(edit.name))
       : root.querySelector(PRESENCE_SELECTORS.designerHeader);

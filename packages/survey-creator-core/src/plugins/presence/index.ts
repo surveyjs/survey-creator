@@ -78,25 +78,13 @@ export class PresencePlugin implements ICreatorPlugin {
     this.peersMap.clear();
     this.peersChanged();
   }
-  /** Drop peers not updated for `olderThanMs` - a staleness backstop for missed leaves. */
-  public dropStalePeers(olderThanMs: number): void {
-    const cutoff = Date.now() - olderThanMs;
-    const stale: Array<string> = [];
-    this.peersMap.forEach((peer, id) => {
-      if (peer.lastSeen < cutoff) stale.push(id);
-    });
-    stale.forEach((id) => this.peersMap.delete(id));
-    if (stale.length > 0)this.peersChanged();
-  }
-
   private addPeer(entry: IPresencePeerEntry): boolean {
     if (!entry || !entry.clientId || !entry.state) return false;
     this.peersMap.set(entry.clientId, {
       clientId: entry.clientId,
       name: entry.name ?? "",
       color: entry.color ?? "",
-      state: entry.state,
-      lastSeen: Date.now()
+      state: entry.state
     });
     return true;
   }

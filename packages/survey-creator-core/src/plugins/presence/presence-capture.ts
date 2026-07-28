@@ -1,12 +1,12 @@
 import { DomDocumentHelper, DomWindowHelper, EventBase } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { buildLocator } from "../journal/journal-locator";
-import { encodeAnchor, encodeEditFocus, getCanvasElement, IPresenceState, PRESENCE_SELECTORS } from "./presence-state";
+import { encodeAnchor, encodeEditFocus, getCanvasElement, IPresenceFocus, IPresenceState, PRESENCE_SELECTORS } from "./presence-state";
 
 /** Mouse updates are throttled to this interval (trailing edge). */
 const MOUSE_THROTTLE_MS = 50;
-/** How long after focus leaves the sidebar before pgFocus is cleared. */
-const PG_BLUR_DEBOUNCE_MS = 300;
+/** How long after a focusout before the keyboard focus is cleared. */
+const FOCUS_BLUR_DEBOUNCE_MS = 300;
 
 const raf = (cb: () => void): any =>
   DomWindowHelper.isAvailable() ? DomWindowHelper.requestAnimationFrame(cb) : setTimeout(cb, 16);
@@ -16,18 +16,16 @@ const cancelRaf = (id: any): void => {
 };
 
 /**
- * Watches the local creator (active tab, selected element, property-grid
- * focus, mouse) and maintains the full presence state, firing `onStateChanged`
+ * Watches the local creator (active tab, selected element, keyboard focus,
+ * mouse) and maintains the full presence state, firing `onStateChanged`
  * with the complete state after every change. The state carries no user
  * identity - the transport/server is expected to attach it to the envelope.
  */
 export class PresenceCapture {
   public onStateChanged: EventBase<PresenceCapture, { state: IPresenceState }> = new EventBase();
-  private state: IPresenceState = { tab: "", tabId: "", sel: null, pgFocus: null, edit: null, trCell: null, cur: null };
+  private state: IPresenceState = { tab: "", sel: null, focus: null, cur: null };
   private disposed = false;
-  private blurTimer: ReturnType<typeof setTimeout> | undefined;
-  private editBlurTimer: ReturnType<typeof setTimeout> | undefined;
-  private trBlurTimer: ReturnType<typeof setTimeout> | undefined;
+  private focusBlurTimer: ReturnType<typeof setTimeout> | undefined;
   private mouseTimer: ReturnType<typeof setTimeout> | undefined;
   private pendingMouse: MouseEvent | null = null;
   private lastCurKey = "";
@@ -68,9 +66,7 @@ export class PresenceCapture {
       this.doc.removeEventListener("visibilitychange", this.onVisibility);
       this.leaveTarget?.removeEventListener("mouseleave", this.hideCursor);
     }
-    if (this.blurTimer !== undefined) clearTimeout(this.blurTimer);
-    if (this.editBlurTimer !== undefined) clearTimeout(this.editBlurTimer);
-    if (this.trBlurTimer !== undefined) clearTimeout(this.trBlurTimer);
+    this.cancelFocusClear();
     if (this.mouseTimer !== undefined) clearTimeout(this.mouseTimer);
   }
 
@@ -82,39 +78,79 @@ export class PresenceCapture {
   // --- tab -------------------------------------------------------------------
 
   private sendTab(): void {
-    // Cursor/editor focus are meaningless on the new tab until re-established.
-    // The dedupe key must reset too: cur went null outside sendCur, so the
-    // next capture has to go through even if it repeats the last key.
+    // Everything in the state is scoped to the active tab: the cursor, the
+    // keyboard focus and the shared selection reset atomically with `tab`,
+    // and the selection is re-announced from the model when the designer
+    // returns. The cur dedupe key must reset too: cur went null outside
+    // sendCur, so the next capture has to go through even if it repeats the
+    // last key.
     this.lastCurKey = "";
-    this.hiddenTrCell = null;
-    this.emit({ tab: this.creator.activeTab ?? "", tabId: this.creator.activeTabId ?? "", cur: null, edit: null, trCell: null });
+    this.hiddenFocus = null;
+    this.cancelFocusClear();
+    const tab = this.creator.activeTab ?? "";
+    this.emit({
+      tab,
+      sel: tab === "designer" ? this.encodeSel(this.creator.selectedElement) : null,
+      focus: null,
+      cur: null
+    });
   }
   private onTabChanged = (): void => this.sendTab();
 
   // --- selection ---------------------------------------------------------------
 
-  private sendSelection(element: any): void {
-    if (!element) {
-      this.emit({ sel: null });
-      return;
-    }
+  private encodeSel(element: any): IPresenceState["sel"] {
+    if (!element) return null;
     let loc: string | null = null;
     try {
       loc = buildLocator(element, this.creator.survey);
     } catch{
       loc = null;
     }
-    if (loc === null) {
-      // Objects outside the survey tree (e.g. creator settings) aren't shareable.
-      this.emit({ sel: null });
-      return;
-    }
+    // Objects outside the survey tree (e.g. creator settings) aren't shareable.
+    if (loc === null) return null;
     const name = typeof element.name === "string" && element.name ? element.name : null;
-    const kind = typeof element.getType === "function" ? element.getType() : "";
-    const title = String(element.title || element.name || kind || "survey");
-    this.emit({ sel: { loc, name, kind, title } });
+    return { loc, name };
+  }
+  private sendSelection(element: any): void {
+    // Selection is shared only while the designer (the view that renders it)
+    // is the sender's active tab; sendTab re-announces it on return.
+    this.emit({ sel: this.creator.activeTab === "designer" ? this.encodeSel(element) : null });
   }
   private onElementSelected = (_: unknown, options: any): void => this.sendSelection(options?.element);
+
+  // --- keyboard focus ------------------------------------------------------------
+  // At most one focus per participant (the caret is singular). Every source
+  // funnels into setFocus, and one debounced clear channel replaces per-area
+  // blur timers - the type carries the invariant the timers used to guard.
+
+  private setFocus(focus: IPresenceFocus | null): void {
+    this.cancelFocusClear();
+    if (JSON.stringify(this.state.focus) !== JSON.stringify(focus)) {
+      this.emit({ focus });
+    }
+  }
+  /**
+   * Arm the debounced clear. Re-focusing the same area within the window
+   * keeps the focus alive (the area's model event re-emits the new target),
+   * focus settling in another area replaces it via setFocus, and a blur to a
+   * non-focusable node (a plain canvas click fires no focusin) lets the
+   * timer clear the stale claim - the area check guards against clearing a
+   * focus that already moved on.
+   */
+  private scheduleFocusClear(area: IPresenceFocus["area"]): void {
+    this.cancelFocusClear();
+    this.focusBlurTimer = setTimeout(() => {
+      this.focusBlurTimer = undefined;
+      if (!this.disposed && this.state.focus?.area === area)this.emit({ focus: null });
+    }, FOCUS_BLUR_DEBOUNCE_MS);
+  }
+  private cancelFocusClear(): void {
+    if (this.focusBlurTimer !== undefined) {
+      clearTimeout(this.focusBlurTimer);
+      this.focusBlurTimer = undefined;
+    }
+  }
 
   // --- property-grid focus -------------------------------------------------------
   // The grid is a generated survey; question name == property name. Hooking
@@ -126,20 +162,14 @@ export class PresenceCapture {
       this.trackTranslationSurvey(options.survey);
       return;
     }
-    const grid = options?.area === "property-grid" ? "main"
-      : options?.area === "theme-tab:property-grid" ? "theme"
-        : null;
-    if (!grid || !options.survey?.onFocusInQuestion) return;
-    const gridObj = options.obj;
+    // Both grid flavors report the same way: receivers derive the flavor
+    // from `tab` ("theme" -> the theme grid, else the main grid), and the
+    // main grid's target object is by construction the selected one (`sel`).
+    const isGrid = options?.area === "property-grid" || options?.area === "theme-tab:property-grid";
+    if (!isGrid || !options.survey?.onFocusInQuestion) return;
     options.survey.onFocusInQuestion.add((_s: unknown, o: any) => {
       if (this.disposed || !o?.question?.name) return;
-      let objLoc: string | null = null;
-      if (grid === "main" && gridObj) {
-        try {
-          objLoc = buildLocator(gridObj, this.creator.survey);
-        } catch{ /* non-survey object - marker still useful without objLoc */ }
-      }
-      this.emit({ pgFocus: { grid, prop: o.question.name, objLoc } });
+      this.setFocus({ area: "pg", prop: o.question.name });
     });
   };
 
@@ -166,10 +196,7 @@ export class PresenceCapture {
       try {
         loc = buildLocator(item.context, this.creator.survey);
       } catch{ /* receivers fall back to the matrix-name match */ }
-      const prev = this.state.trCell;
-      if (!prev || prev.m !== matrix.name || prev.l !== locale) {
-        this.emit({ trCell: { m: matrix.name, l: locale, loc, p: String(item.name) } });
-      }
+      this.setFocus({ area: "tr", m: matrix.name, l: locale, loc, p: String(item.name) });
     });
   }
 
@@ -179,42 +206,24 @@ export class PresenceCapture {
       !!node.closest(PRESENCE_SELECTORS.translationCell);
   }
 
-  // Clear pgFocus when keyboard focus leaves the sidebar (survey-core has no
-  // focus-out event, so this is DOM-level). Debounced: re-focusing another
-  // grid field within the window keeps the state alive.
+  // DOM-level blur tracking (survey-core has no focus-out event): a focusout
+  // of an area arms the shared debounced clear, a focusin back into the same
+  // area cancels it.
 
   private inSidebar(node: EventTarget | null): boolean {
     return node instanceof Element && !!node.closest(".svc-side-bar");
   }
   private onFocusIn = (ev: FocusEvent): void => {
-    if (this.inSidebar(ev.target) && this.blurTimer !== undefined) {
-      clearTimeout(this.blurTimer);
-      this.blurTimer = undefined;
-    }
-    // Re-focusing another translation cell within the debounce window keeps
-    // trCell alive (the model event re-emits the new cell); focus landing
-    // elsewhere lets the pending clear go through.
-    if (this.inTranslationCell(ev.target) && this.trBlurTimer !== undefined) {
-      clearTimeout(this.trBlurTimer);
-      this.trBlurTimer = undefined;
-    }
+    // Re-focusing inside the same area within the debounce window keeps the
+    // focus alive (the area's model event re-emits the new target); focus
+    // landing elsewhere replaces or clears it through setFocus.
+    if (this.inSidebar(ev.target) || this.inTranslationCell(ev.target))this.cancelFocusClear();
     this.trackEditFocusIn(ev.target);
   };
   private onFocusOut = (ev: FocusEvent): void => {
     this.trackEditFocusOut(ev.target);
-    if (this.inTranslationCell(ev.target)) {
-      if (this.trBlurTimer !== undefined) clearTimeout(this.trBlurTimer);
-      this.trBlurTimer = setTimeout(() => {
-        this.trBlurTimer = undefined;
-        if (!this.disposed && this.state.trCell)this.emit({ trCell: null });
-      }, PG_BLUR_DEBOUNCE_MS);
-    }
-    if (!this.inSidebar(ev.target)) return;
-    if (this.blurTimer !== undefined) clearTimeout(this.blurTimer);
-    this.blurTimer = setTimeout(() => {
-      this.blurTimer = undefined;
-      if (!this.disposed)this.emit({ pgFocus: null });
-    }, PG_BLUR_DEBOUNCE_MS);
+    if (this.inTranslationCell(ev.target))this.scheduleFocusClear("tr");
+    else if (this.inSidebar(ev.target))this.scheduleFocusClear("pg");
   };
 
   // --- inline string-editor focus ----------------------------------------------
@@ -230,28 +239,16 @@ export class PresenceCapture {
     // editors of their own private models.
     const focus = this.creator.activeTab === "designer" ? encodeEditFocus(target) : null;
     if (focus) {
-      if (this.editBlurTimer !== undefined) {
-        clearTimeout(this.editBlurTimer);
-        this.editBlurTimer = undefined;
-      }
-      const prev = this.state.edit;
-      if (!prev || prev.scope !== focus.scope || prev.name !== focus.name || prev.idx !== focus.idx) {
-        this.emit({ edit: focus });
-      }
-    } else if (this.state.edit) {
-      // Keyboard focus moved somewhere that is not an inline editor.
-      this.emit({ edit: null });
+      this.setFocus(focus);
+    } else if (this.state.focus?.area === "edit") {
+      // Keyboard focus moved somewhere that is not an inline editor; other
+      // areas release their claims through their own model/blur signals.
+      this.setFocus(null);
     }
   }
   private trackEditFocusOut(target: EventTarget | null): void {
     if (!(target instanceof Element) || !target.closest(PRESENCE_SELECTORS.stringEditor)) return;
-    // Debounced like pgFocus: a blur to a non-focusable node (plain click on
-    // the canvas) fires no focusin, so this is the only clear signal there.
-    if (this.editBlurTimer !== undefined) clearTimeout(this.editBlurTimer);
-    this.editBlurTimer = setTimeout(() => {
-      this.editBlurTimer = undefined;
-      if (!this.disposed && this.state.edit)this.emit({ edit: null });
-    }, PG_BLUR_DEBOUNCE_MS);
+    this.scheduleFocusClear("edit");
   }
 
   // --- mouse -------------------------------------------------------------------
@@ -283,13 +280,13 @@ export class PresenceCapture {
     const clamp = (v: number): number => Math.round(Math.min(1, Math.max(0, v)) * 1000) / 1000;
     const x = clamp((ev.clientX - rect.left) / rect.width);
     const y = clamp((ev.clientY - rect.top) / rect.height);
-    const cur: IPresenceState["cur"] = { tab: tabId, a: encoded.a, x, y, t: Date.now() };
+    const cur: IPresenceState["cur"] = { a: encoded.a };
     let key = `${encoded.a.s}|${encoded.a.n ?? ""}|${x}|${y}|${tabId}`;
     if (encoded.a.s === "surface") {
       // The content box stretches with the peer's window, so fractions of it
       // misplace the cursor between differently-sized windows. Send px
       // offsets from the survey canvas block instead, normalized by the
-      // local zoom; the fractions above stay in the state for old receivers.
+      // local zoom.
       const scale = (this.creator.survey?.widthScale || 100) / 100;
       const canvasRect = getCanvasElement(encoded.el).getBoundingClientRect();
       if (canvasRect.width > 0 && canvasRect.height > 0) {
@@ -301,6 +298,12 @@ export class PresenceCapture {
         // w/h re-send the state after a sender-side resize on the next move.
         key = `${encoded.a.s}|${cur.px}|${cur.py}|${cur.w}|${cur.h}|${tabId}`;
       }
+    }
+    if (cur.px === undefined) {
+      // Fraction encoding: non-surface anchors, plus the rare surface capture
+      // where the canvas block has no size yet.
+      cur.x = x;
+      cur.y = y;
     }
     this.sendCur(cur, key);
   }
@@ -326,19 +329,19 @@ export class PresenceCapture {
    * even looking at the page. Release the claim on hide and re-claim on
    * return, when the caret is in fact still inside the cell.
    */
-  private hiddenTrCell: IPresenceState["trCell"] = null;
+  private hiddenFocus: IPresenceFocus | null = null;
   private onVisibility = (): void => {
     if (this.doc?.visibilityState === "hidden") {
       this.hideCursor();
-      if (this.state.trCell) {
-        this.hiddenTrCell = this.state.trCell;
-        this.emit({ trCell: null });
+      if (this.state.focus?.area === "tr") {
+        this.hiddenFocus = this.state.focus;
+        this.emit({ focus: null });
       }
     } else {
-      const claim = this.hiddenTrCell;
-      this.hiddenTrCell = null;
+      const claim = this.hiddenFocus;
+      this.hiddenFocus = null;
       if (claim && this.inTranslationCell(this.doc?.activeElement ?? null)) {
-        this.emit({ trCell: claim });
+        this.emit({ focus: claim });
       }
     }
   };
@@ -349,9 +352,9 @@ export class PresenceCapture {
     if (root) {
       this.leaveTarget = root;
       root.addEventListener("mouseleave", this.hideCursor);
-      // The tab is already active by now - (re)announce the initial state.
+      // The tab is already active by now - (re)announce the initial state
+      // (sendTab also announces the current selection on the designer).
       this.sendTab();
-      this.sendSelection(this.creator.selectedElement);
     } else {
       this.rootPoll = raf(this.attachToRoot);
     }

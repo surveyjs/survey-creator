@@ -50,7 +50,7 @@ const peerEntry = (clientId: string, tab: string): IPresencePeerEntry => ({
   clientId,
   name: `User ${clientId}`,
   color: "#e91e63",
-  state: { tab, tabId: tab, sel: null, pgFocus: null, edit: null, cur: null }
+  state: { tab, sel: null, focus: null, cur: null }
 });
 
 const barButton = (bar: CollabBarPlugin, label: string): HTMLButtonElement | undefined =>

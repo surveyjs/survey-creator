@@ -27,7 +27,7 @@ const peerEntry = (clientId: string, overrides: Partial<IPresencePeerEntry> = {}
   clientId,
   name: `User ${clientId}`,
   color: "#e91e63",
-  state: { tab: "designer", tabId: "designer", sel: null, pgFocus: null, edit: null, cur: null },
+  state: { tab: "designer", sel: null, focus: null, cur: null },
   ...overrides
 });
 
@@ -56,7 +56,6 @@ test("presence: selection is captured with a locator and no user identity", (): 
   expect(state.sel).toBeTruthy();
   expect(state.sel.loc).toEqual("/pages/page1/elements/q1");
   expect(state.sel.name).toEqual("q1");
-  expect(state.sel.kind).toEqual("text");
   expect("name" in state).toBeFalsy();
 });
 
@@ -65,19 +64,26 @@ test("presence: selecting the survey after a question", (): any => {
   creator.selectElement(creator.survey.getQuestionByName("q1"));
   creator.selectElement(creator.survey);
   const sel = plugin.getState().sel;
+  expect(sel).toBeTruthy();
   expect(sel.loc).toEqual("");
-  expect(sel.kind).toEqual("survey");
 });
 
-test("presence: tab change updates tab and resets cursor", (): any => {
+test("presence: tab change resets every channel; selection is re-announced on return", (): any => {
   const { creator, plugin } = createCreator();
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  expect(plugin.getState().sel).toBeTruthy();
   creator.makeNewViewActive("test");
   const state = plugin.getState();
   expect(state.tab).toEqual(creator.activeTab);
   expect(state.tab.length).toBeGreaterThan(0);
   expect(state.tab).not.toEqual("designer");
-  expect(state.tabId).toEqual(creator.activeTabId);
   expect(state.cur).toBeNull();
+  expect(state.focus).toBeNull();
+  // Selection is shared only while the designer renders it...
+  expect(state.sel).toBeNull();
+  // ...and re-announced from the model when the peer returns.
+  creator.makeNewViewActive("designer");
+  expect(plugin.getState().sel).toEqual({ loc: "/pages/page1/elements/q1", name: "q1" });
 });
 
 test("presence: peers roster ingress", (): any => {
@@ -90,7 +96,6 @@ test("presence: peers roster ingress", (): any => {
   expect(peersChanged).toEqual(1);
   expect(plugin.peers.get("c1").name).toEqual("User c1");
   expect(plugin.peers.get("c1").color).toEqual("#e91e63");
-  expect(plugin.peers.get("c1").lastSeen).toBeGreaterThan(0);
 
   plugin.upsertPeer(peerEntry("c3"));
   expect(plugin.peers.size).toEqual(3);
@@ -117,20 +122,6 @@ test("presence: invalid peer entries are ignored", (): any => {
   expect(plugin.peers.size).toEqual(0);
 });
 
-test("presence: dropStalePeers removes only silent peers", (): any => {
-  const { plugin } = createCreator();
-  plugin.setPeers([peerEntry("c1"), peerEntry("c2")]);
-  (<any>plugin.peers.get("c1")).lastSeen = Date.now() - 60_000;
-  let peersChanged = 0;
-  plugin.onPeersChanged.add(() => peersChanged++);
-  plugin.dropStalePeers(45_000);
-  expect(plugin.peers.size).toEqual(1);
-  expect(plugin.peers.has("c2")).toBeTruthy();
-  expect(peersChanged).toEqual(1);
-  plugin.dropStalePeers(45_000);
-  expect(peersChanged).toEqual(1);
-});
-
 test("presence: overlay layer lifecycle", (): any => {
   const before = document.body.querySelectorAll(".collab-presence-layer").length;
   const { plugin } = createCreator();
@@ -147,19 +138,25 @@ test("presence: remote selection decorates the native ring node", (): any => {
     "<div data-sv-drop-target-survey-element=\"q1\"><div class=\"svc-question__content\"></div></div>";
   document.body.appendChild(designer);
   const content = <HTMLElement>designer.querySelector(".svc-question__content");
-  const selState = (tab: string): any => ({
-    tab, tabId: tab, sel: { loc: "/pages/page1/elements/q1", name: "q1", kind: "text", title: "q1" },
-    pgFocus: null, edit: null, cur: null
-  });
+  const selState: any = {
+    tab: "designer", sel: { loc: "/pages/page1/elements/q1", name: "q1" },
+    focus: null, cur: null
+  };
   try {
-    plugin.upsertPeer(peerEntry("c1", { state: selState("designer") }));
+    plugin.upsertPeer(peerEntry("c1", { state: selState }));
     (<any>plugin.overlay).render();
     expect(content.getAttribute("data-collab-focus")).toEqual("on");
     expect(content.style.getPropertyValue("--collab-peer-color")).toEqual("#e91e63");
 
-    plugin.upsertPeer(peerEntry("c1", { state: selState("test") }));
+    // The peer walks to another tab: the capture clears sel with the tab
+    // change, so the ring disappears instead of lingering.
+    plugin.upsertPeer(peerEntry("c1", { state: { tab: "test", sel: null, focus: null, cur: null } }));
     (<any>plugin.overlay).render();
-    expect(content.getAttribute("data-collab-focus")).toEqual("away");
+    expect(content.hasAttribute("data-collab-focus")).toBeFalsy();
+
+    plugin.upsertPeer(peerEntry("c1", { state: selState }));
+    (<any>plugin.overlay).render();
+    expect(content.getAttribute("data-collab-focus")).toEqual("on");
 
     plugin.removePeer("c1");
     (<any>plugin.overlay).render();
@@ -185,9 +182,9 @@ test("presence: remote page selection decorates the page content node", (): any 
   try {
     plugin.upsertPeer(peerEntry("c1", {
       state: {
-        tab: "designer", tabId: "designer",
-        sel: { loc: "/pages/page1", name: "page1", kind: "page", title: "page1" },
-        pgFocus: null, edit: null, cur: null
+        tab: "designer",
+        sel: { loc: "/pages/page1", name: "page1" },
+        focus: null, cur: null
       }
     }));
     (<any>plugin.overlay).render();
@@ -203,7 +200,7 @@ test("presence: remote page selection decorates the page content node", (): any 
   }
 });
 
-test("presence: name badge sits under the ring's bottom-right corner and dims when away", (): any => {
+test("presence: name badge sits under the ring's bottom-right corner", (): any => {
   const { plugin } = createCreator();
   const designer = document.createElement("div");
   designer.id = "scrollableDiv-designer";
@@ -213,12 +210,12 @@ test("presence: name badge sits under the ring's bottom-right corner and dims wh
   designer.getBoundingClientRect = () => (<any>{ left: 0, top: 0, width: 800, height: 600 });
   const content = <HTMLElement>designer.querySelector(".svc-question__content");
   content.getBoundingClientRect = () => (<any>{ left: 100, top: 50, width: 300, height: 80 });
-  const selState = (tab: string): any => ({
-    tab, tabId: tab, sel: { loc: "/pages/page1/elements/q1", name: "q1", kind: "text", title: "q1" },
-    pgFocus: null, edit: null, cur: null
-  });
+  const selState: any = {
+    tab: "designer", sel: { loc: "/pages/page1/elements/q1", name: "q1" },
+    focus: null, cur: null
+  };
   try {
-    plugin.upsertPeer(peerEntry("c1", { state: selState("designer") }));
+    plugin.upsertPeer(peerEntry("c1", { state: selState }));
     (<any>plugin.overlay).render();
     const badge = <HTMLElement>document.body.querySelector(".collab-presence-badge");
     expect(badge).toBeTruthy();
@@ -228,17 +225,19 @@ test("presence: name badge sits under the ring's bottom-right corner and dims wh
     // via translateX(-100%)); top hangs 4px below the 2px ring (130 + 2 + 4).
     expect(badge.style.left).toEqual("394px");
     expect(badge.style.top).toEqual("136px");
-    expect(badge.style.opacity).toEqual("1");
 
-    // The peer walks to another tab: dimmed like the ring.
-    plugin.upsertPeer(peerEntry("c1", { state: selState("test") }));
+    // The peer walks to another tab: sel clears, badge goes with the ring.
+    plugin.upsertPeer(peerEntry("c1", { state: { tab: "test", sel: null, focus: null, cur: null } }));
     (<any>plugin.overlay).render();
-    expect(badge.style.opacity).toEqual("0.5");
+    expect(document.body.querySelector(".collab-presence-badge")).toBeFalsy();
 
-    // The node scrolls out of the designer viewport: the badge hides.
+    // Back on the designer: the badge returns; a node scrolled out of the
+    // designer viewport hides it.
+    plugin.upsertPeer(peerEntry("c1", { state: selState }));
     content.getBoundingClientRect = () => (<any>{ left: 100, top: 900, width: 300, height: 80 });
     (<any>plugin.overlay).render();
-    expect(badge.style.display).toEqual("none");
+    const badge2 = <HTMLElement>document.body.querySelector(".collab-presence-badge");
+    expect(badge2.style.display).toEqual("none");
 
     plugin.removePeer("c1");
     (<any>plugin.overlay).render();
@@ -266,8 +265,8 @@ test("presence: editor badge anchors to the inflated focus border, not the edito
   try {
     plugin.upsertPeer(peerEntry("c1", {
       state: {
-        tab: "designer", tabId: "designer", sel: null, pgFocus: null,
-        edit: { scope: "el", name: "q1", idx: 0 }, cur: null
+        tab: "designer", sel: null,
+        focus: { area: "edit", scope: "el", name: "q1", idx: 0 }, cur: null
       }
     }));
     (<any>plugin.overlay).render();
@@ -296,8 +295,8 @@ test("presence: remote editor focus decorates the string editor; dispose cleans 
   try {
     plugin.upsertPeer(peerEntry("c1", {
       state: {
-        tab: "designer", tabId: "designer", sel: null, pgFocus: null,
-        edit: { scope: "el", name: "q1", idx: 1 }, cur: null
+        tab: "designer", sel: null,
+        focus: { area: "edit", scope: "el", name: "q1", idx: 1 }, cur: null
       }
     }));
     (<any>plugin.overlay).render();
@@ -307,8 +306,8 @@ test("presence: remote editor focus decorates the string editor; dispose cleans 
     // Survey-header scope resolves against .svc-designer-header.
     plugin.upsertPeer(peerEntry("c1", {
       state: {
-        tab: "designer", tabId: "designer", sel: null, pgFocus: null,
-        edit: { scope: "survey", name: "", idx: 0 }, cur: null
+        tab: "designer", sel: null,
+        focus: { area: "edit", scope: "survey", name: "", idx: 0 }, cur: null
       }
     }));
     (<any>plugin.overlay).render();
@@ -333,11 +332,12 @@ test("presence: remote property-grid focus decorates the input area, not the who
   const row = <HTMLElement>sidebar.querySelector("[data-name]");
   const field = <HTMLElement>sidebar.querySelector(".spg-question__content");
   try {
-    // The local creator has the survey selected (loc ""), matching objLoc "".
+    // The local creator has the survey selected (loc ""); the peer's sel
+    // matches it, so the local grid shows the same object.
     plugin.upsertPeer(peerEntry("c1", {
       state: {
-        tab: "designer", tabId: "designer", sel: null,
-        pgFocus: { grid: "main", prop: "title", objLoc: "" }, edit: null, cur: null
+        tab: "designer", sel: { loc: "", name: null },
+        focus: { area: "pg", prop: "title" }, cur: null
       }
     }));
     (<any>plugin.overlay).render();
@@ -365,8 +365,8 @@ test("presence: boolean property row rings just the checkbox decorator", (): any
   try {
     plugin.upsertPeer(peerEntry("c1", {
       state: {
-        tab: "designer", tabId: "designer", sel: null,
-        pgFocus: { grid: "main", prop: "showTitle", objLoc: "" }, edit: null, cur: null
+        tab: "designer", sel: { loc: "", name: null },
+        focus: { area: "pg", prop: "showTitle" }, cur: null
       }
     }));
     (<any>plugin.overlay).render();
@@ -378,36 +378,36 @@ test("presence: boolean property row rings just the checkbox decorator", (): any
   }
 });
 
-test("presence: focusing an inline string editor emits edit", (): any => {
+test("presence: focusing an inline string editor claims the focus channel", (): any => {
   const { creator, plugin } = createCreator();
   const adorner = focusFakeEditor("q2", 2, 1);
   try {
-    expect(plugin.getState().edit).toEqual({ scope: "el", name: "q2", idx: 1 });
+    expect(plugin.getState().focus).toEqual({ area: "edit", scope: "el", name: "q2", idx: 1 });
     // Focus moving to a non-editor node clears it at once.
     const outside = document.createElement("input");
     document.body.appendChild(outside);
     outside.dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
-    expect(plugin.getState().edit).toBeNull();
+    expect(plugin.getState().focus).toBeNull();
     outside.remove();
     // Tab switch also clears a re-established focus.
     focusFakeEditor("q3").remove();
-    expect(plugin.getState().edit).toEqual({ scope: "el", name: "q3", idx: 0 });
+    expect(plugin.getState().focus).toEqual({ area: "edit", scope: "el", name: "q3", idx: 0 });
     creator.makeNewViewActive("test");
-    expect(plugin.getState().edit).toBeNull();
+    expect(plugin.getState().focus).toBeNull();
   } finally {
     adorner.remove();
     plugin.dispose();
   }
 });
 
-test("presence: edit is cleared after blur with no follow-up focus", async (): Promise<any> => {
+test("presence: editor focus is cleared after blur with no follow-up focus", async (): Promise<any> => {
   const { plugin } = createCreator();
   const adorner = focusFakeEditor("q2");
   try {
-    expect(plugin.getState().edit).toBeTruthy();
+    expect(plugin.getState().focus).toBeTruthy();
     (<HTMLElement>adorner.querySelector("input")).dispatchEvent(new FocusEvent("focusout", { bubbles: true }));
     await new Promise((resolve) => setTimeout(resolve, 350));
-    expect(plugin.getState().edit).toBeNull();
+    expect(plugin.getState().focus).toBeNull();
   } finally {
     adorner.remove();
     plugin.dispose();
@@ -459,10 +459,12 @@ test("presence: mouse is tracked only inside the main content block", async (): 
     const content = <HTMLElement>root.querySelector(".svc-tab-designer_content");
     content.getBoundingClientRect = () => (<any>{ left: 100, top: 0, width: 400, height: 200 });
     await move(content, 200, 50);
-    // Surface cursors carry canvas px offsets besides the legacy fractions;
+    // Surface cursors carry canvas px offsets instead of the fractions;
     // the empty content is its own canvas block here.
     expect(plugin.getState().cur).toEqual(expect.objectContaining(
-      { a: { s: "surface" }, x: 0.25, y: 0.25, px: 100, py: 50, w: 400, h: 200 }));
+      { a: { s: "surface" }, px: 100, py: 50, w: 400, h: 200 }));
+    expect(plugin.getState().cur.x).toBeUndefined();
+    expect(plugin.getState().cur.y).toBeUndefined();
     // Element anchors stay fraction-only.
     await move(adorner, 50, 25);
     expect(plugin.getState().cur.px).toBeUndefined();
@@ -597,11 +599,11 @@ test("presence: overlay maps surface px onto the local canvas, fractions for old
   const peers = new Map<string, IPresencePeer>();
   const overlay = new PresenceOverlay(creator, () => peers);
   const cur = (extra: any): IPresenceState["cur"] =>
-    ({ tab: creator.activeTabId, a: { s: "surface" }, x: 0.5, y: 0.5, t: Date.now(), ...extra });
+    ({ a: { s: "surface" }, ...extra });
   const setCur = (c: IPresenceState["cur"]): void => {
     peers.set("c1", <IPresencePeer>{
-      clientId: "c1", name: "User c1", color: "#e91e63", lastSeen: Date.now(),
-      state: { tab: "designer", tabId: creator.activeTabId, sel: null, pgFocus: null, edit: null, cur: c }
+      clientId: "c1", name: "User c1", color: "#e91e63",
+      state: { tab: "designer", sel: null, focus: null, cur: c }
     });
     (<any>overlay).render();
   };
@@ -613,26 +615,26 @@ test("presence: overlay maps surface px onto the local canvas, fractions for old
     expect(cursorEl().style.left).toEqual("320px");
     expect(cursorEl().style.top).toEqual("40px");
     // Signed gutter offset: 15px left of the canvas block.
-    setCur(cur({ px: -15, py: 30, w: 800, h: 600, t: Date.now() + 1 }));
+    setCur(cur({ px: -15, py: 30, w: 800, h: 600 }));
     expect(cursorEl().style.left).toEqual("285px");
-    // Old sender without px: legacy fraction of the CONTENT box.
-    setCur(cur({ t: Date.now() + 2 }));
+    // No px (canvas block had no size at capture): fraction of the CONTENT box.
+    setCur(cur({ x: 0.5, y: 0.5 }));
     expect(cursorEl().style.left).toEqual("500px");
     expect(cursorEl().style.top).toEqual("200px");
     // A gutter point beyond the local designer column must NOT sit over the
     // toolbox (left of column x=150) - it pins to the column's edge.
-    setCur(cur({ px: -160, py: 30, w: 800, h: 600, t: Date.now() + 3 }));
+    setCur(cur({ px: -160, py: 30, w: 800, h: 600 }));
     expect(cursorEl().style.display).toEqual("block");
     expect(cursorEl().style.left).toEqual("152px");
     // Same on the right: never over the sidebar, pinned to the column edge.
-    setCur(cur({ px: 2000, py: 30, w: 800, h: 600, t: Date.now() + 4 }));
+    setCur(cur({ px: 2000, py: 30, w: 800, h: 600 }));
     expect(cursorEl().style.left).toEqual("848px");
     // A point scrolled far below the visible column hides.
-    setCur(cur({ px: 20, py: 3000, w: 800, h: 600, t: Date.now() + 5 }));
+    setCur(cur({ px: 20, py: 3000, w: 800, h: 600 }));
     expect(cursorEl().style.display).toEqual("none");
     // Receiver zoom: at widthScale 200 the same normalized offset doubles.
     creator.survey.widthScale = 200;
-    setCur(cur({ px: 20, py: 30, w: Math.round(500 / 2), h: 190, t: Date.now() + 6 }));
+    setCur(cur({ px: 20, py: 30, w: Math.round(500 / 2), h: 190 }));
     expect(cursorEl().style.left).toEqual("340px");
     expect(cursorEl().style.top).toEqual("70px");
   } finally {
@@ -658,13 +660,12 @@ test("presence: cursors hide under the flyout/mobile sidebar panel, docked does 
   mockRect(panel, 550, 0, 300, 700);
   const peers = new Map<string, IPresencePeer>();
   const overlay = new PresenceOverlay(creator, () => peers);
-  let stamp = Date.now();
   const setCur = (extra: any): void => {
     peers.set("c1", <IPresencePeer>{
-      clientId: "c1", name: "User c1", color: "#e91e63", lastSeen: Date.now(),
+      clientId: "c1", name: "User c1", color: "#e91e63",
       state: {
-        tab: "designer", tabId: creator.activeTabId, sel: null, pgFocus: null, edit: null,
-        cur: { tab: creator.activeTabId, a: { s: "surface" }, x: 0.5, y: 0.5, t: ++stamp, ...extra }
+        tab: "designer", sel: null, focus: null,
+        cur: { a: { s: "surface" }, ...extra }
       }
     });
     (<any>overlay).render();
@@ -719,13 +720,12 @@ test("presence: fraction-anchored cursor points hide under the flyout panel too"
   mockRect(sidebar.querySelector(".svc-side-bar__container"), 550, 0, 300, 700);
   const peers = new Map<string, IPresencePeer>();
   const overlay = new PresenceOverlay(creator, () => peers);
-  let stamp = Date.now();
   const setCur = (x: number, y: number): void => {
     peers.set("c1", <IPresencePeer>{
-      clientId: "c1", name: "User c1", color: "#e91e63", lastSeen: Date.now(),
+      clientId: "c1", name: "User c1", color: "#e91e63",
       state: {
-        tab: "designer", tabId: creator.activeTabId, sel: null, pgFocus: null, edit: null,
-        cur: { tab: creator.activeTabId, a: { s: "el", n: "q1" }, x, y, t: ++stamp }
+        tab: "designer", sel: null, focus: null,
+        cur: { a: { s: "el", n: "q1" }, x, y }
       }
     });
     (<any>overlay).render();
@@ -761,10 +761,10 @@ test("presence: pg cursors keep drawing over the flyout panel", (): any => {
   const peers = new Map<string, IPresencePeer>();
   const overlay = new PresenceOverlay(creator, () => peers);
   peers.set("c1", <IPresencePeer>{
-    clientId: "c1", name: "User c1", color: "#e91e63", lastSeen: Date.now(),
+    clientId: "c1", name: "User c1", color: "#e91e63",
     state: {
-      tab: "designer", tabId: creator.activeTabId, sel: null, pgFocus: null, edit: null,
-      cur: { tab: creator.activeTabId, a: { s: "pg", n: "title" }, x: 0.5, y: 0.5, t: Date.now() }
+      tab: "designer", sel: null, focus: null,
+      cur: { a: { s: "pg", n: "title" }, x: 0.5, y: 0.5 }
     }
   });
   const cursorEl = (): HTMLElement => (<any>overlay).layer.querySelector(".collab-presence-cursor");
@@ -803,9 +803,9 @@ test("presence: designer name badge hides under the flyout panel, pg badge does 
   try {
     plugin.upsertPeer(peerEntry("c1", {
       state: {
-        tab: "designer", tabId: "designer",
-        sel: { loc: "/pages/page1/elements/q1", name: "q1", kind: "text", title: "q1" },
-        pgFocus: null, edit: null, cur: null
+        tab: "designer",
+        sel: { loc: "/pages/page1/elements/q1", name: "q1" },
+        focus: null, cur: null
       }
     }));
     (<any>plugin.overlay).render();
@@ -864,50 +864,50 @@ function buildTranslationRow(matrixName: string, cellCount = 2): HTMLElement {
   return container;
 }
 
-test("presence: focusing a translation cell emits trCell; tab switch clears it", (): any => {
+test("presence: focusing a translation cell claims the focus channel; tab switch clears it", (): any => {
   const { creator, plugin, matrix, stringsSurvey } = createTranslationCreator();
   try {
     expect(matrix).toBeTruthy();
     const cellQ = matrix.visibleRows[0].cells[0].question;
     stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: cellQ });
-    expect(plugin.getState().trCell).toEqual({
-      m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title"
+    expect(plugin.getState().focus).toEqual({
+      area: "tr", m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title"
     });
     // Another locale column of the same row re-emits with the new column.
     const deCellQ = matrix.visibleRows[0].cells[1].question;
     stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: deCellQ });
-    expect(plugin.getState().trCell.l).toEqual("de");
+    expect((<any>plugin.getState().focus).l).toEqual("de");
     // Leaving the tab clears the focus - the table model does not survive it.
     creator.makeNewViewActive("designer");
-    expect(plugin.getState().trCell).toBeNull();
+    expect(plugin.getState().focus).toBeNull();
   } finally {
     plugin.dispose();
   }
 });
 
-test("presence: trCell is cleared after blur with no follow-up focus", async (): Promise<any> => {
+test("presence: translation focus is cleared after blur with no follow-up focus", async (): Promise<any> => {
   const { plugin, matrix, stringsSurvey } = createTranslationCreator();
   const container = buildTranslationRow(matrix.name);
   try {
     stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[0].question });
-    expect(plugin.getState().trCell).toBeTruthy();
+    expect(plugin.getState().focus).toBeTruthy();
     const textarea = <HTMLElement>container.querySelector("textarea");
     textarea.dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
     textarea.dispatchEvent(new FocusEvent("focusout", { bubbles: true }));
     await new Promise((resolve) => setTimeout(resolve, 350));
-    expect(plugin.getState().trCell).toBeNull();
+    expect(plugin.getState().focus).toBeNull();
   } finally {
     container.remove();
     plugin.dispose();
   }
 });
 
-test("presence: remote trCell decorates the right cell; unknown locale does not", (): any => {
+test("presence: remote translation focus decorates the right cell; unknown locale does not", (): any => {
   const { plugin, matrix } = createTranslationCreator();
   const container = buildTranslationRow(matrix.name);
   const boxes = container.querySelectorAll(".st-table__cell:not(.st-table__cell--row-text)");
   const trState = (trCell: any): any =>
-    ({ tab: "translation", tabId: "translation", sel: null, pgFocus: null, edit: null, trCell, cur: null });
+    ({ tab: "translation", sel: null, focus: { area: "tr", ...trCell }, cur: null });
   const trCell = { m: matrix.name, l: "de", loc: "/pages/page1/elements/q1", p: "title" };
   try {
     plugin.upsertPeer(peerEntry("c1", { state: trState(trCell) }));
@@ -951,25 +951,25 @@ test("presence: a hidden tab releases its translation cell and re-claims it on r
   try {
     textarea.focus();
     stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[0].question });
-    expect(plugin.getState().trCell).toBeTruthy();
+    expect(plugin.getState().focus).toBeTruthy();
 
     // Tab switch: no blur fires, but a backgrounded client must not keep
     // claiming the cell - peers would see a ring for an absent user.
     setVisibility("hidden");
-    expect(plugin.getState().trCell).toBeNull();
+    expect(plugin.getState().focus).toBeNull();
 
     // Back with the caret still in the cell: the claim returns.
     setVisibility("visible");
-    expect(plugin.getState().trCell).toEqual({
-      m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title"
+    expect(plugin.getState().focus).toEqual({
+      area: "tr", m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title"
     });
 
     // Back with the caret gone: the stale claim is dropped for good.
     setVisibility("hidden");
-    expect(plugin.getState().trCell).toBeNull();
+    expect(plugin.getState().focus).toBeNull();
     textarea.blur();
     setVisibility("visible");
-    expect(plugin.getState().trCell).toBeNull();
+    expect(plugin.getState().focus).toBeNull();
   } finally {
     setVisibility("visible");
     container.remove();
@@ -983,8 +983,8 @@ test("presence: a locally focused translation cell drops the peer decoration ent
   const box = <HTMLElement>container.querySelector(".st-table__cell:not(.st-table__cell--row-text)");
   const textarea = <HTMLTextAreaElement>box.querySelector("textarea");
   const trState: any = {
-    tab: "translation", tabId: "translation", sel: null, pgFocus: null, edit: null,
-    trCell: { m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title" }, cur: null
+    tab: "translation", sel: null,
+    focus: { area: "tr", m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title" }, cur: null
   };
   try {
     plugin.upsertPeer(peerEntry("c1", { state: trState }));
@@ -1015,8 +1015,8 @@ test("presence: first peer wins a contested translation cell", (): any => {
   const container = buildTranslationRow(matrix.name);
   const box = <HTMLElement>container.querySelector(".st-table__cell:not(.st-table__cell--row-text)");
   const trState: any = {
-    tab: "translation", tabId: "translation", sel: null, pgFocus: null, edit: null,
-    trCell: { m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title" }, cur: null
+    tab: "translation", sel: null,
+    focus: { area: "tr", m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title" }, cur: null
   };
   try {
     plugin.upsertPeer(peerEntry("c1", { state: trState }));
