@@ -116,52 +116,6 @@ test.describe(title, () => {
     expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1 neu");
   });
 
-  test("navigation buttons: rendered in both panes, source navigates, target edits captions", async ({ page }) => {
-    const navJson = JSON.parse(JSON.stringify(json));
-    navJson.pageNextText = { default: "Next", de: "Weiter" };
-    navJson.pagePrevText = { default: "Back", de: "Zurueck" };
-    navJson.completeText = { default: "Done", de: "Fertig" };
-    await setJSON(page, navJson);
-    await setCreatorProp(page, "translationMode", "sideBySide");
-    await getTabbedMenuItemByText(page, "Translation").click();
-    const source = page.locator(".st-side-by-side__source");
-    const target = page.locator(".st-side-by-side__target");
-
-    // Both panes render a navigation bar: read-only source captions in the source locale,
-    // target captions in the target locale inside inline string editors.
-    await expect(source.getByRole("button", { name: "Next" })).toBeVisible();
-    await expect(target.locator("button .sv-string-editor").getByText("Weiter")).toBeVisible();
-
-    // A target nav button is an edit surface only - clicking it must not navigate.
-    await target.locator("button .sv-string-editor").getByText("Weiter").click();
-    await expect(source.getByText("Question 1")).toBeVisible();
-    await expect(target.locator(".sv-string-editor").getByText("Frage 1")).toBeVisible();
-
-    // Next on the source pane navigates both panes and moves the page dropdown.
-    await source.getByRole("button", { name: "Next" }).click();
-    await expect(source.getByText("Question 4")).toBeVisible();
-    await expect(target.locator(".sv-string-editor").getByText("Question 4")).toBeVisible();
-    await expect(getBarItemByTitle(page, "page2")).toBeVisible();
-
-    // Complete on the source pane must not complete the survey copy.
-    await source.getByRole("button", { name: "Done" }).click();
-    await expect(source.getByText("Question 4")).toBeVisible();
-
-    // Typing into a target nav caption writes the target locale into the JSON.
-    await target.locator("button .sv-string-editor").getByText("Fertig").click();
-    await page.keyboard.press("Control+a");
-    await page.keyboard.type("Fertig!");
-    await page.keyboard.press("Control+Enter");
-    const resultJson = await getJSON(page);
-    expect(resultJson.completeText.de).toEqual("Fertig!");
-    expect(resultJson.completeText.default).toEqual("Done");
-
-    // Back on the source pane returns both panes to the first page.
-    await source.getByRole("button", { name: "Back" }).click();
-    await expect(source.getByText("Question 1")).toBeVisible();
-    await expect(target.locator(".sv-string-editor").getByText("Frage 1")).toBeVisible();
-  });
-
   test("target locale switch re-renders target pane strings", async ({ page }) => {
     // Keep the locale dropdowns short so every item is rendered in the popup list.
     await page.evaluate(() => {

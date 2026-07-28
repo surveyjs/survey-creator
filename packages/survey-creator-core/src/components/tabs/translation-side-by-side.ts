@@ -418,8 +418,11 @@ export class TranslationSideBySide extends Translation {
       this.makeSurveyIdSpaceUnique(survey);
       survey.setDesignMode(true);
       survey.lazyRenderEnabled = true;
-      // The panes are page-driven by the page dropdown; the runtime navigation bar is not shown.
+      // The panes are page-driven by the page dropdown; the runtime navigation UI
+      // (navigation bar, progress bar, TOC) is not shown.
       survey.showNavigationButtons = false;
+      survey.showProgressBar = false;
+      survey.showTOC = false;
     });
   }
   private setupSourceSurvey(survey: SurveyModel): void {

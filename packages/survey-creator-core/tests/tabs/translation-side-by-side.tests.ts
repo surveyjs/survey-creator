@@ -354,11 +354,18 @@ test("source and target panes keep their scrollbars in sync", () => {
 
 const navCaptionProps = ["pagePrevText", "pageNextText", "completeText", "previewText", "startSurveyText"];
 
-test("navigation bar is not shown on the panes", () => {
-  const creator = createSideBySideCreator();
+test("navigation bar, progress bar and TOC are not shown on the panes", () => {
+  // Enabled on the real survey to prove the panes drop them despite copying its JSON.
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  json.showProgressBar = true;
+  json.showTOC = true;
+  const creator = createSideBySideCreator(json);
   const model = getModel(creator);
-  expect(model.sourceSurvey.isNavigationButtonsShowing).toBe("none");
-  expect(model.targetSurvey.isNavigationButtonsShowing).toBe("none");
+  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
+    expect(survey.isNavigationButtonsShowing).toBe("none");
+    expect(survey.showProgressBar).toBeFalsy();
+    expect(survey.showTOC).toBeFalsy();
+  });
 });
 
 test("nav caption properties are mapped: target edits write the target locale, undo restores, JSON round-trips", () => {
