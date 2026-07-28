@@ -423,6 +423,28 @@ export class TranslationSideBySide extends Translation {
       survey.showNavigationButtons = false;
       survey.showProgressBar = false;
       survey.showTOC = false;
+      this.restoreRunnerElementStyles(survey);
+    });
+  }
+  // Design-mode surveys get neither the "with frame" nor the "nested" css classes: the designer
+  // draws its own question boxes over frameless elements, and the default theme keeps all
+  // element spacing on these classes. The panes render without the designer surface, so the
+  // runtime classes are restored here - otherwise elements would be flat, without paddings.
+  private restoreRunnerElementStyles(survey: SurveyModel): void {
+    const appendRunnerClass = (element: any, cssClasses: any, rootName: string): void => {
+      const parent = element.parent;
+      const hasFrame = !!parent && (parent.isPage || parent.showPanelAsPage);
+      const runnerClass = hasFrame ? cssClasses.withFrame : cssClasses.nested;
+      if (!!runnerClass && !!cssClasses[rootName]) {
+        cssClasses[rootName] += " " + runnerClass;
+      }
+    };
+    survey.onUpdateQuestionCssClasses.add((sender, options) => {
+      appendRunnerClass(options.question, options.cssClasses, "mainRoot");
+    });
+    survey.onUpdatePanelCssClasses.add((sender, options) => {
+      // The panel event passes the full classes structure, the panel's own classes are inside.
+      appendRunnerClass(options.panel, options.cssClasses.panel, "container");
     });
   }
   private setupSourceSurvey(survey: SurveyModel): void {

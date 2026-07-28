@@ -115,6 +115,29 @@ test("start page preselected when firstPageIsStartPage is true", () => {
   expect(getSelectedListItem(creator, "svc-translation-filter-page").id).toBe("page1");
 });
 
+test("instances restore the runtime frame/nested css classes suppressed in design mode", () => {
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "panel", name: "panel1", elements: [{ type: "text", name: "q2" }] }
+        ]
+      }
+    ]
+  };
+  const creator = createSideBySideCreator(json);
+  const model = getModel(creator);
+  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
+    expect(survey.getQuestionByName("q1").cssRoot).toContain("sd-element--with-frame");
+    const panel = survey.getPanelByName("panel1");
+    expect(panel.getContainerCss()).toContain("sd-element--with-frame");
+    expect(survey.getQuestionByName("q2").cssRoot).toContain("sd-element--nested");
+    expect(survey.getQuestionByName("q2").cssRoot).not.toContain("sd-element--with-frame");
+  });
+});
+
 test("renderers: target getRendererForString is 'svc-string-editor', source is undefined", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
