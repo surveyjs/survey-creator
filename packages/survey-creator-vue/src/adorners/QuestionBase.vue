@@ -8,7 +8,6 @@
     v-on:mouseover="(e) => model.hover(e, e.currentTarget)"
     v-on:mouseleave="(e) => model.hover(e, e.currentTarget)"
     :data-sv-drop-target-survey-element="model.element.name || null"
-    data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
   >
     <div v-if="model.showHiddenTitle" :class="model.cssCollapsedHiddenHeader">
       <SvComponent
