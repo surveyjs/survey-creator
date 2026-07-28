@@ -10,10 +10,10 @@
 
   .svc-question__content:not(.svc-question__content--composite-question) {
     .sd-question__content {
-      margin-left: var(--sjs2-spacing-negative-x300);
-      margin-right: var(--sjs2-spacing-negative-x300);
-      padding-left: var(--sjs2-spacing-x300);
-      padding-right: var(--sjs2-spacing-x300);
+      // margin-left: var(--sjs2-spacing-negative-x300);
+      // margin-right: var(--sjs2-spacing-negative-x300);
+      // padding-left: var(--sjs2-spacing-x300);
+      // padding-right: var(--sjs2-spacing-x300);
 
       .sd-selectbase__column {
         max-width: initial;
@@ -51,6 +51,10 @@
     padding-left: 0;
     padding-right: 0;
     border: 0;
+
+    .sd-page__header {
+      row-gap: 0;
+    }
 
     .sd-page__title {
       margin: 0;

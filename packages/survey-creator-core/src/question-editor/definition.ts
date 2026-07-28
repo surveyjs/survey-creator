@@ -321,10 +321,10 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   ranking: {
     properties: [
-      "selectToRankEmptyRankedAreaText",
-      "selectToRankEmptyUnrankedAreaText",
       { name: "selectToRankEnabled" },
       { name: "selectToRankAreasLayout" },
+      "selectToRankEmptyRankedAreaText",
+      "selectToRankEmptyUnrankedAreaText",
       { name: "minSelectedChoices", tab: "choices" },
       { name: "maxSelectedChoices", tab: "choices" },
     ]

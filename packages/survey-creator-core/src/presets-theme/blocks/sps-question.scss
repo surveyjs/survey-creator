@@ -2,6 +2,10 @@
 
 .sps-question {
   background: var(--sjs2-color-bg-basic-primary, #fff);
+  .sd-question__header-and-content-container {
+    padding: 0;
+    gap: 0;
+  }
 }
 
 .sps-question--main {

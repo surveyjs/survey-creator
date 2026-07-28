@@ -6,6 +6,9 @@
   align-items: flex-start;
   padding: 0px;
   border-radius: var(--sjs2-radius-x075);
+  & > .sd-question__container {
+    width: 100%;
+  }
 }
 
 .spg-question__content {
@@ -100,6 +103,15 @@
 }
 
 .spg-question--location--left {
+  & > .sd-question__container {
+    & > .sd-question__header-and-content-container {
+      display: flex;
+      flex-direction: row;
+      vertical-align: middle;
+      align-items: stretch;
+      gap: var(--sjs2-layout-component-formbox-medium-gap);
+    }
+  }
   flex-direction: row;
   flex-wrap: wrap;
   line-height: var(--sjs2-line-height-x600);
@@ -212,29 +224,37 @@ sv-question-error {
   margin-top: var(--sjs2-spacing-x100);
 }
 
-.spg-restfull,
-.spg-masksettings {
-  .spg-panel__content {
-    gap: var(--sjs2-spacing-x200);
+// .spg-restfull,
+// .spg-masksettings {
+//   .spg-panel__content {
+//     gap: var(--sjs2-spacing-x200);
 
-    .spg-row {
-      margin-top: 0;
-    }
-  }
-}
+//     .spg-row {
+//       margin-top: 0;
+//     }
+//   }
+// }
 
 .spg-question--highlighted {
   .sd-formbox,
   .spg-question--location--left,
   .spg-table__cell:not(.spg-table__cell--detail-panel) .sd-formbox {
-    box-shadow: inset 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-fg-basic-primary-muted);
+    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted);
+
+    .sd-formbox {
+      box-shadow: none;
+    }
   }
 
-  .spg-checkbox__control:focus + .spg-checkbox__rectangle,
   .spg-matrixdynamic__content.spg-text__content {
-    outline: var(--sjs2-border-width-x200) solid var(--sjs2-color-fg-basic-primary-muted);
-    outline-offset: calc(-1 * var(--sjs2-border-width-x200));
-    border-radius: var(--sjs2-radius-x075);
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: var(--sjs2-radius-x075);
+      box-shadow: var(--sjs2-border-effect-component-formbox-highlighted);
+    }
 
     .sd-formbox {
       box-shadow: none;
@@ -242,15 +262,25 @@ sv-question-error {
   }
 
   .svc-action-button {
-    border: var(--sjs2-border-width-x200) solid var(--sjs2-color-fg-basic-primary-muted);
+    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted);
   }
 
   .sv-button-group {
-    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted, 0 0 0 2px #1c1b20 inset);
+    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted);
   }
 
-  .spg-checkbox__control + .spg-checkbox__rectangle {
-    outline: var(--sjs2-border-width-x200) solid var(--sjs2-color-fg-basic-primary-muted);
-    outline-offset: calc(-1 * var(--sjs2-border-width-x200));
+  .sd-checkbox__control + .sd-checkbox__decorator {
+    box-shadow: var(--sjs2-border-effect-component-formbox-highlighted);
   }
+}
+
+.spg-question {
+  .sd-question__header-and-content-container {
+    padding: 0;
+    gap: 0;
+  }
+}
+
+.spg-question__header.sd-question__header--complex {
+  padding: 0;
 }
