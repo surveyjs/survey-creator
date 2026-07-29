@@ -191,6 +191,10 @@
   }
 }
 
+html[dir="rtl"] .svc-preview-pager-item__icon {
+  transform: rotate(180deg);
+}
+
 .svc-preview-pager-item__title {
   @include ctrSmallBoldFont;
   @include textEllipsis;
