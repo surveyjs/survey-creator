@@ -986,7 +986,8 @@ export var enStrings = {
     clearIfInvisible: {
       none: "Never"
     },
-    radio: "Radio Buttons",
+    segmented: "Segmented toggle",
+    radio: "Radio buttons",
     inputType: {
       color: "Color",
       date: "Date",
