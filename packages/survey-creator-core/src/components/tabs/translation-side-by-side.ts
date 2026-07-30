@@ -11,6 +11,7 @@ import { ITranslationDropdownOwner, translationDropdownComponentName } from "./t
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { StringEditorConnector } from "../string-editor";
+import { QuestionLinkValueModel } from "../link-value";
 import { Translation, TranslationGroup, TranslationItem } from "./translation";
 
 // The default locale is stored as "" on the model; the settings survey dropdowns need a
@@ -85,6 +86,11 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
         this.targetLocale = this.getLocaleFromSettingValue(options.value);
       }
     });
+    const machineTranslation = <QuestionLinkValueModel>res.getQuestionByName("machineTranslation");
+    // The constructor derives a "Set <title>" text from the JSON - replace it with the action
+    // title. No iconName: a linkvalue button with an icon renders icon-only, without the text.
+    machineTranslation.linkValueText = editorLocalization.getString("ed.translateUsigAI");
+    machineTranslation.linkClickCallback = () => this.showMachineTranslationEditor();
     return res;
   }
   private getSideBySideSettingsSurveyJSON(): any {
@@ -101,6 +107,15 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
           name: "targetLocale",
           title: editorLocalization.getString("ed.translationTargetLanguage"),
           allowClear: false
+        },
+        // The auto-translate button under the target language dropdown. Hidden until the
+        // machine translation makes sense (see updateMachineTranslationButton).
+        {
+          type: "linkvalue",
+          name: "machineTranslation",
+          titleLocation: "hidden",
+          showValueInLink: false,
+          visible: false
         }
       ]
     };
@@ -117,9 +132,29 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       const target = this.targetLocale || "";
       this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("sourceLocale"), locales, source, target);
       this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("targetLocale"), locales, target, source);
+      this.updateMachineTranslationButton(survey);
     } finally {
       this._updatingSettingsSurvey = false;
     }
+  }
+  // The button shows only when there is something to translate into: an explicit target
+  // language different from the source one (and a machine translation service is plugged in).
+  private updateMachineTranslationButton(survey: SurveyModel): void {
+    const question = <QuestionLinkValueModel>survey.getQuestionByName("machineTranslation");
+    if (!question) return;
+    const target = this.targetLocale || "";
+    question.visible = this.options.getHasMachineTranslation() && !!target && target !== (this.sourceLocale || "");
+  }
+  // Opens the auto-translate dialog (the TranslationEditor popup) over the source/target
+  // language pair; applying rebuilds the editing surface with the translated strings.
+  public showMachineTranslationEditor(): void {
+    const editor = this.createTranslationEditor(this.targetLocale || "");
+    editor.onApply = () => {
+      this.reset();
+      this.rebuildInstances();
+    };
+    editor.setFromLocale(this.sourceLocale || "");
+    editor.showDialog();
   }
   // Each dropdown's list hides the locale currently selected in the other one, except its own
   // selection - by default both sides can be the default language.
