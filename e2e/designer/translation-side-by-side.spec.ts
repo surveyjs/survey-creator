@@ -139,3 +139,128 @@ test.describe(title, () => {
     expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1");
   });
 });
+
+const choicesJson = {
+  locale: "de",
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+        {
+          type: "dropdown", name: "q5",
+          choices: [{ value: "A", text: "AA" }, "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
+        },
+        { type: "tagbox", name: "q6", choices: ["t1", "t2"] },
+        {
+          type: "matrixdropdown",
+          name: "q3",
+          columns: [{ name: "col1", cellType: "dropdown", title: "Column 1", choices: [{ value: "A", text: "AA" }, "B"] }],
+          rows: [{ value: "row1", text: "Row 1" }]
+        }
+      ]
+    }
+  ]
+};
+
+async function openSideBySideWithChoices(page) {
+  await setJSON(page, choicesJson);
+  await setCreatorProp(page, "translationMode", "sideBySide");
+  await getTabbedMenuItemByText(page, "Translation").click();
+  await expect(page.locator(".st-side-by-side__source")).toBeVisible();
+  await expect(page.locator(".st-side-by-side__target")).toBeVisible();
+}
+
+test.describe(title + " choices", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto(url);
+  });
+
+  test("dropdown and tagbox choices render as flattened lists in both panes; show more expands both", async ({ page }) => {
+    await openSideBySideWithChoices(page);
+    const sourceChoices = page.locator(".st-side-by-side__source [data-name=q5] .svc-question__dropdown-choice");
+    const targetChoices = page.locator(".st-side-by-side__target [data-name=q5] .svc-question__dropdown-choice");
+    // 12 choices collapse to maxVisibleChoices (10) in both panes.
+    await expect(sourceChoices).toHaveCount(10);
+    await expect(targetChoices).toHaveCount(10);
+    await expect(page.locator(".st-side-by-side__source [data-name=q6] .svc-question__dropdown-choice")).toHaveCount(2);
+    await expect(page.locator(".st-side-by-side__target [data-name=q6] .svc-question__dropdown-choice")).toHaveCount(2);
+
+    // Expanding the list in the target pane expands the source pane too - the rows stay aligned.
+    await page.locator(".st-side-by-side__target [data-name=q5]").getByRole("button", { name: "Show more" }).click();
+    await expect(targetChoices).toHaveCount(12);
+    await expect(sourceChoices).toHaveCount(12);
+    await page.locator(".st-side-by-side__target [data-name=q5]").getByRole("button", { name: "Show less" }).click();
+    await expect(targetChoices).toHaveCount(10);
+    await expect(sourceChoices).toHaveCount(10);
+  });
+
+  test("editing a dropdown choice in the target pane updates the JSON translation; source pane read-only", async ({ page }) => {
+    await openSideBySideWithChoices(page);
+    // The source pane renders the same list without string editors.
+    await expect(page.locator(".st-side-by-side__source [data-name=q5]").getByText("AA")).toBeVisible();
+    await expect(page.locator(".st-side-by-side__source [data-name=q5] .svc-string-editor")).toHaveCount(0);
+
+    const targetChoice = page.locator(".st-side-by-side__target [data-name=q5] .sv-string-editor").getByText("AA");
+    await targetChoice.click();
+    await page.keyboard.press("Control+a");
+    await page.keyboard.type("AA de");
+    await page.keyboard.press("Control+Enter");
+    const resultJson = await getJSON(page);
+    expect(resultJson.pages[0].elements[1].choices[0].text.de).toEqual("AA de");
+    expect(resultJson.pages[0].elements[1].choices[0].text.default).toEqual("AA");
+    await expect(page.locator(".st-side-by-side__source [data-name=q5]").getByText("AA", { exact: true })).toBeVisible();
+  });
+
+  test("question strings dialog: used/all filter, read-only source column, target edit updates the column choice translation", async ({ page }) => {
+    await openSideBySideWithChoices(page);
+    // The panes render lazily - scroll the matrix into the view before using its title action.
+    await page.locator(".st-side-by-side__target").evaluate(el => { el.scrollTop = el.scrollHeight; });
+    await page.locator(".st-side-by-side__target [data-name=q3]").getByRole("button", { name: "Translate question strings" }).click();
+    const dialog = page.locator(".st-translation-dialog");
+    await expect(dialog).toBeVisible();
+
+    // The used/all strings switcher sits on top; Used Strings Only is the default mode,
+    // so empty strings (the matrix has no description) are hidden until All Strings is chosen.
+    await expect(dialog.getByText("Used Strings Only")).toBeVisible();
+    await expect(dialog.locator("table tr").filter({ hasText: "Question description" })).toHaveCount(0);
+
+    // The one-row matrix of the col1 "A" choice: source holds the default text, target is editable.
+    // Edited in the compact used-strings mode - the grid renders lazily and the short list fits.
+    const choiceRow = dialog.locator("table tr").filter({ has: page.getByText("A", { exact: true }) });
+    await expect(choiceRow.locator("textarea").nth(0)).toHaveValue("AA");
+    await expect(choiceRow.locator("textarea").nth(0)).not.toBeEditable();
+    const targetCell = choiceRow.locator("textarea").nth(1);
+    await targetCell.fill("AA de");
+    await page.keyboard.press("Tab");
+
+    // Switching to All Strings adds the empty strings; the description row sits on top.
+    await dialog.getByText("All Strings").click();
+    await expect(dialog.locator("table tr").filter({ hasText: "Question description" }).first()).toBeVisible();
+
+    await page.getByRole("button", { name: "Done" }).click();
+    await expect(dialog).toHaveCount(0);
+    const resultJson = await getJSON(page);
+    expect(resultJson.pages[0].elements[3].columns[0].choices[0].text.de).toEqual("AA de");
+    expect(resultJson.pages[0].elements[3].columns[0].choices[0].text.default).toEqual("AA");
+  });
+
+  test("question strings dialog: available for a plain question, edits its title translation", async ({ page }) => {
+    await openSideBySideWithChoices(page);
+    await page.locator(".st-side-by-side__target [data-name=q1]").getByRole("button", { name: "Translate question strings" }).click();
+    const dialog = page.locator(".st-translation-dialog");
+    await expect(dialog).toBeVisible();
+    const titleRow = dialog.locator("table tr").filter({ hasText: "Question title" });
+    await expect(titleRow.locator("textarea").nth(0)).toHaveValue("Question 1");
+    const targetCell = titleRow.locator("textarea").nth(1);
+    await expect(targetCell).toHaveValue("Frage 1");
+    await targetCell.fill("Frage 1 dialog");
+    await page.keyboard.press("Tab");
+    await page.getByRole("button", { name: "Done" }).click();
+    const resultJson = await getJSON(page);
+    expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1 dialog");
+    // The live edit mirrored into the target pane.
+    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1 dialog")).toBeVisible();
+  });
+});

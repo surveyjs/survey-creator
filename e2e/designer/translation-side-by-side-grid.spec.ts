@@ -90,8 +90,14 @@ test.describe(title, () => {
     await openGridTranslation(page);
     const viewSwitcher = page.locator(".svc-side-bar .spg-question[data-name=viewMode]");
     await expect(viewSwitcher).toBeVisible();
+    // The side-by-side property grid is narrow, so the button group question renders
+    // in its compact mode - as a dropdown; switch the view through its popup list.
+    const switchView = async (viewName: string) => {
+      await viewSwitcher.click();
+      await page.getByRole("option", { name: viewName }).click();
+    };
 
-    await viewSwitcher.getByText("Form View").click();
+    await switchView("Form View");
     await expect(page.locator(".st-side-by-side__source")).toBeVisible();
     await expect(page.locator(".st-side-by-side__target")).toBeVisible();
     await expect(page.locator(".st-strings")).toHaveCount(0);
@@ -100,7 +106,7 @@ test.describe(title, () => {
     await expect(sidebar.locator(".spg-question[data-name=sourceLocale]")).toContainText("Default (English)");
     await expect(sidebar.locator(".spg-question[data-name=targetLocale]")).toContainText("Deutsch");
 
-    await viewSwitcher.getByText("Grid View").click();
+    await switchView("Grid View");
     await expect(page.locator(".st-strings")).toBeVisible();
     await expect(page.locator(".st-side-by-side__source")).toHaveCount(0);
   });

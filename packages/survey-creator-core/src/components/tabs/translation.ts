@@ -1206,11 +1206,16 @@ export class Translation extends Base implements ITranslationLocales {
   private getSourceTargetHeaderTitle(strName: string, locale: string): string {
     return editorLocalization.getString("ed." + strName) + this.getLocaleName(locale);
   }
+  // The side-by-side grid keeps its source column editable (like any locale column); the
+  // matrix strings popup makes it read-only.
+  protected get isSourceColumnReadOnly(): boolean {
+    return false;
+  }
   protected addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
     if (this.useSourceTargetColumns) {
       const target = this.targetLocale || "";
       matrix.addColumn(this.getLocaleColumnName(target), this.getLocaleName(target));
-      this.updateMatrixSourceColumn(matrix, this.sourceLocale, target);
+      this.updateMatrixSourceColumn(matrix, this.sourceLocale, target, this.isSourceColumnReadOnly);
       if (matrix.name === "stringsHeader") {
         this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, target);
       }
@@ -1361,11 +1366,17 @@ export class Translation extends Base implements ITranslationLocales {
     this.setVisibleLocales([]);
     this.reset();
   }
+  // The object the translation tree is built over. Overridden to scope the strings grid
+  // to a single element (the side-by-side matrix strings popup).
+  protected getRootTranslationObj(): { obj: Base, name: string } {
+    return !!this.filteredPage ? { obj: this.filteredPage, name: this.filteredPage.name } : { obj: this.survey, name: "survey" };
+  }
   public reset(alwaysReset: boolean = true): void {
     if (!alwaysReset && !!this.root) return;
     const prevVisibleLocales = this.getVisibleLocales();
-    var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
-    var rootName = !!this.filteredPage ? rootObj["name"] : "survey";
+    const rootInfo = this.getRootTranslationObj();
+    const rootObj = rootInfo.obj;
+    const rootName = rootInfo.name;
     this.root = new TranslationGroup(rootName, rootObj, this);
     this.root.setAsRoot();
     this.root.reset();

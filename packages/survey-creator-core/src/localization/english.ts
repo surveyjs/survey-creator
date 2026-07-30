@@ -142,6 +142,7 @@ export var enStrings = {
     translationTargetLanguage: "Target language",
     translationSideBySideViewForms: "Form View",
     translationSideBySideViewGrid: "Grid View",
+    translationQuestionStrings: "Translate question strings",
     translationSurveyStrings: "Survey Strings",
     translationYouTubeNotSupported: "YouTube links are not supported.",
     themeExportButton: "Export",

@@ -80,6 +80,7 @@ import PageNavigator from "./page-navigator/PageNavigator.vue";
 import PageNavigatorItem from "./page-navigator/PageNavigatorItem.vue";
 import Dropdown from "./adorners/Dropdown.vue";
 import QuestionDropdown from "./adorners/QuestionDropdown.vue";
+import TranslationDropdownQuestion from "./adorners/TranslationDropdownQuestion.vue";
 import CellQuestionDropdownVue from "./adorners/CellQuestionDropdown.vue";
 import CustomWidget from "./adorners/CustomWidget.vue";
 import QuestionBanner from "./adorners/QuestionBanner.vue";
@@ -185,6 +186,7 @@ function registerComponents(
   registerComponent("svc-image-item-drag-action", ImageItemDragAction);
   registerComponent("svc-dropdown-question", QuestionDropdown);
   registerComponent("svc-dropdown-question-adorner", Dropdown);
+  registerComponent("svc-translation-dropdown-question", TranslationDropdownQuestion);
   registerComponent("svc-widget-question", CustomWidget);
   registerComponent("svc-question-banner", QuestionBanner);
   registerComponent("sv-spinedit-button", SpinEditorButton);

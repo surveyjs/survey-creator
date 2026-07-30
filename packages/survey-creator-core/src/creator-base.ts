@@ -5255,7 +5255,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
   model.locDescription.placeholder = "pe.surveyDescriptionPlaceholder";
 }
 
-function isContentElement(element: any) {
+export function isContentElement(element: any) {
   let current = element;
   while(!!current) {
     if (current.isContentElement) {

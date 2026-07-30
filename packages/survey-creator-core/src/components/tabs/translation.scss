@@ -178,6 +178,10 @@ td.st-table__cell:first-of-type {
   padding: 0;
 }
 
+.st-formbox--readonly .st-formbox__input {
+  cursor: default;
+}
+
 .sd-translation-line-skeleton {
   min-height: var(--sjs2-size-x500);
   background-color: var(--sjs2-color-bg-basic-secondary);
@@ -262,5 +266,22 @@ td.st-table__cell:first-of-type {
   .sd-page__content {
     row-gap: 0;
     padding: 0;
+  }
+}
+
+// The flattened dropdown/tagbox choice list of the side-by-side panes. The item rows reuse
+// the svc-question__dropdown-choice classes, so the designer's collapse fade rules apply.
+.st-dropdown-choices--wrapper {
+  margin-top: var(--sjs2-spacing-x200);
+
+  .svc-question__dropdown-choice {
+    // The rows are display-only; typing goes into the string editor over the choice text.
+    input {
+      pointer-events: none;
+    }
+  }
+
+  .svc-question__dropdown-collapse-button {
+    margin-top: var(--sjs2-spacing-x100);
   }
 }

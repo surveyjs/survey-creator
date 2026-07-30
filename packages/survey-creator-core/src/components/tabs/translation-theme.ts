@@ -157,6 +157,8 @@ export var translationCss = {
   },
   text: {
     root: "st-formbox st-text",
+    // The default sd-formbox--readonly draws a bordered box - the grid cells stay borderless.
+    rootReadOnly: "st-formbox--readonly",
     control: "st-formbox__input",
     small: "st-row__question--small",
     controlDisabled: "st-input--disabled",
@@ -261,6 +263,9 @@ export var translationCss = {
   },
   comment: {
     root: "st-formbox st-comment",
+    // The default sd-formbox--readonly draws a bordered box - the read-only source cells of
+    // the question strings dialog (and the read-only grid) stay borderless like the editable ones.
+    rootReadOnly: "st-formbox--readonly",
     control: "st-formbox__input",
     small: "st-row__question--small"
   },

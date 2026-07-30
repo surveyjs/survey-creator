@@ -1,6 +1,8 @@
 import { ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionTextModel } from "survey-core";
 import { TranslationSideBySide } from "../../src/components/tabs/translation-side-by-side";
+import { TranslationDropdownViewModel, translationDropdownComponentName } from "../../src/components/tabs/translation-dropdown";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
+import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
 import "survey-core/survey.i18n";
 
@@ -445,4 +447,174 @@ test("deactivate detaches copies", () => {
   const realQuestion = creator.survey.getQuestionByName("q1");
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
+});
+
+const dropdownChoicesJSON = {
+  locale: "de",
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        { type: "text", name: "q1", title: "Question 1" },
+        {
+          type: "dropdown", name: "q5",
+          choices: [{ value: "A", text: "AA" }, "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
+        },
+        { type: "tagbox", name: "q6", choices: ["t1", "t2"] },
+        {
+          type: "matrixdropdown",
+          name: "q3",
+          columns: [{ name: "col1", cellType: "dropdown", title: "Column 1", choices: [{ value: "A", text: "AA" }, "B"] }],
+          rows: [{ value: "row1", text: "Row 1" }]
+        }
+      ]
+    }
+  ]
+};
+
+test("flattened choices wrapper: dropdown and tagbox in both panes, other questions and matrix cell content excluded", () => {
+  const creator = createSideBySideCreator(dropdownChoicesJSON);
+  const model = getModel(creator);
+  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
+    const q5 = survey.getQuestionByName("q5");
+    expect(survey.getQuestionContentWrapperComponentName(q5)).toBe(translationDropdownComponentName);
+    expect(survey.getQuestionContentWrapperComponentName(survey.getQuestionByName("q6"))).toBe(translationDropdownComponentName);
+    expect(survey.getQuestionContentWrapperComponentName(survey.getQuestionByName("q1"))).not.toBe(translationDropdownComponentName);
+    // A dropdown cell of a matrix renders over copies of the column data - never flattened/edited inline.
+    const cellTemplateQuestion = (<any>(<QuestionMatrixDropdownModel>survey.getQuestionByName("q3")).columns[0]).templateQuestion;
+    expect(survey.getQuestionContentWrapperComponentName(cellTemplateQuestion)).not.toBe(translationDropdownComponentName);
+    // The wrapper components reach the model through the content wrapper's data request.
+    expect((<any>survey.getElementWrapperComponentData(q5)).translation).toBe(model);
+  });
+});
+
+test("TranslationDropdownViewModel: item components, collapse behavior and shared collapse state between the panes", () => {
+  const creator = createSideBySideCreator(dropdownChoicesJSON);
+  const model = getModel(creator);
+  const targetQ5 = <QuestionDropdownModel>model.targetSurvey.getQuestionByName("q5");
+  const sourceQ5 = <QuestionDropdownModel>model.sourceSurvey.getQuestionByName("q5");
+  const targetVM = new TranslationDropdownViewModel(targetQ5, model);
+  const sourceVM = new TranslationDropdownViewModel(sourceQ5, model);
+  expect(targetVM.itemComponent).toBe("survey-radiogroup-item");
+  expect(targetVM.needToCollapse).toBeTruthy();
+  expect(targetVM.isCollapseView).toBeTruthy();
+  // creator.maxVisibleChoices default is 10
+  expect(targetVM.getRenderedItems()).toHaveLength(10);
+  expect(sourceVM.getRenderedItems()).toHaveLength(10);
+  targetVM.switchCollapse();
+  expect(targetVM.isCollapseView).toBeFalsy();
+  expect(sourceVM.isCollapseView).toBeFalsy();
+  expect(sourceVM.getRenderedItems()).toHaveLength(12);
+  targetVM.collapseAction.action();
+  expect(targetVM.isCollapseView).toBeTruthy();
+  expect(sourceVM.isCollapseView).toBeTruthy();
+  sourceVM.dispose();
+  targetVM.switchCollapse();
+  // The disposed view model no longer follows the shared state.
+  expect(sourceVM.isCollapseView).toBeTruthy();
+  targetVM.dispose();
+
+  const tagboxVM = new TranslationDropdownViewModel(<any>model.targetSurvey.getQuestionByName("q6"), model);
+  expect(tagboxVM.itemComponent).toBe("survey-checkbox-item");
+  expect(tagboxVM.needToCollapse).toBeFalsy();
+  expect(tagboxVM.getRenderedItems()).toHaveLength(2);
+  tagboxVM.dispose();
+});
+
+test("dropdown choice strings: editable in the target pane only, edits forward to the real survey and are undoable", () => {
+  const creator = createSideBySideCreator(dropdownChoicesJSON);
+  const model = getModel(creator);
+  const targetQ5 = <QuestionDropdownModel>model.targetSurvey.getQuestionByName("q5");
+  const sourceQ5 = <QuestionDropdownModel>model.sourceSurvey.getQuestionByName("q5");
+  expect((<any>targetQ5.choices[0].locText).renderAs).toBe("svc-string-editor");
+  expect((<any>sourceQ5.choices[0].locText).renderAs).not.toBe("svc-string-editor");
+  targetQ5.choices[0].locText.text = "AA-de";
+  const realQ5 = <QuestionDropdownModel>creator.survey.getQuestionByName("q5");
+  expect(realQ5.choices[0].locText.getLocaleText("de")).toBe("AA-de");
+  expect(realQ5.choices[0].locText.getLocaleText("")).toBe("AA");
+  creator.undo();
+  expect(realQ5.choices[0].locText.getLocaleText("de")).toBeFalsy();
+  expect(targetQ5.choices[0].locText.getLocaleText("de")).toBeFalsy();
+});
+
+test("inplaceEditChoiceValues does not apply to the pane copies' choice strings", () => {
+  const creator = createSideBySideCreator(dropdownChoicesJSON);
+  creator.inplaceEditChoiceValues = true;
+  const model = getModel(creator);
+  const paneChoice = (<QuestionDropdownModel>model.targetSurvey.getQuestionByName("q5")).choices[0];
+  const paneEditor = new StringEditorViewModelBase(<any>paneChoice.locText, creator);
+  expect((<any>paneEditor).isInplaceForEditValues).toBeFalsy();
+  const designerChoice = (<QuestionDropdownModel>creator.survey.getQuestionByName("q5")).choices[0];
+  const designerEditor = new StringEditorViewModelBase(<any>designerChoice.locText, creator);
+  expect((<any>designerEditor).isInplaceForEditValues).toBeTruthy();
+});
+
+test("question strings dialog model: source/target grid over the real question, read-only source, undoable edits that mirror into the panes", () => {
+  const creator = createSideBySideCreator(dropdownChoicesJSON);
+  const model = getModel(creator);
+  const realMatrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q3");
+  const grid = model.createQuestionStringsModel(realMatrix);
+  expect(grid.stringsSurvey).toBeTruthy();
+  expect(grid.showAllStrings).toBeFalsy();
+  const realChoiceLocText = (<any>realMatrix.columns[0]).templateQuestion.choices[0].locText;
+  let choiceMatrix: QuestionMatrixDropdownModel = undefined;
+  grid.stringsSurvey.getAllQuestions().forEach((question: any) => {
+    const rows = question.rows;
+    if (Array.isArray(rows) && rows.length > 0 && !!rows[0]["translationData"] &&
+      rows[0]["translationData"].locString === realChoiceLocText) {
+      choiceMatrix = question;
+    }
+  });
+  expect(choiceMatrix).toBeTruthy();
+  expect(choiceMatrix.columns).toHaveLength(2);
+  expect(choiceMatrix.columns[0].readOnly).toBeTruthy();
+  expect(choiceMatrix.columns[1].readOnly).toBeFalsy();
+  // The read-only source cell keeps the borderless grid look - no default readonly formbox.
+  const sourceCell = choiceMatrix.visibleRows[0].cells[0].question;
+  expect(sourceCell.isReadOnly).toBeTruthy();
+  expect(sourceCell.getRootClass()).toContain("st-formbox--readonly");
+  expect(sourceCell.getRootClass()).not.toContain("sd-formbox--readonly");
+  choiceMatrix.visibleRows[0].cells[1].question.value = "AA-de";
+  expect(realChoiceLocText.getLocaleText("de")).toBe("AA-de");
+  const targetMatrix = <QuestionMatrixDropdownModel>model.targetSurvey.getQuestionByName("q3");
+  expect((<any>targetMatrix.columns[0]).templateQuestion.choices[0].locText.getLocaleText("de")).toBe("AA-de");
+  creator.undo();
+  expect(realChoiceLocText.getLocaleText("de")).toBeFalsy();
+  grid.dispose();
+});
+
+test("question strings title action: present on every target pane question, absent in the source pane", () => {
+  const creator = createSideBySideCreator(dropdownChoicesJSON);
+  const model = getModel(creator);
+  const actionsOf = (survey: any, name: string) =>
+    survey.getQuestionByName(name).getTitleActions().filter((action: any) => action.id === "svc-translate-question");
+  expect(actionsOf(model.targetSurvey, "q3")).toHaveLength(1);
+  expect(actionsOf(model.targetSurvey, "q5")).toHaveLength(1);
+  expect(actionsOf(model.targetSurvey, "q1")).toHaveLength(1);
+  expect(actionsOf(model.sourceSurvey, "q3")).toHaveLength(0);
+  // Without a dialog host (settings.showDialog) the action is a no-op, not a crash.
+  expect(() => model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q3"))).not.toThrow();
+});
+
+test("question strings dialog model: the used/all strings filter on top of the header survey", () => {
+  const creator = createSideBySideCreator(dropdownChoicesJSON);
+  const model = getModel(creator);
+  const realQ5 = creator.survey.getQuestionByName("q5");
+  const grid = model.createQuestionStringsModel(realQ5);
+  // Used Strings Only is the default mode.
+  expect(grid.showAllStrings).toBeFalsy();
+  const filter = grid.stringsHeaderSurvey.getQuestionByName("stringsFilter");
+  expect(filter).toBeTruthy();
+  expect(filter.getType()).toBe("buttongroup");
+  expect(filter.value).toBe("used");
+  // The all-strings mode adds the empty localizable properties (description etc.) as rows.
+  const usedCount = grid.stringsSurvey.getAllQuestions().length;
+  filter.value = "all";
+  expect(grid.showAllStrings).toBeTruthy();
+  // The switch rebuilt both surveys; the fresh filter question keeps the chosen mode.
+  const newFilter = grid.stringsHeaderSurvey.getQuestionByName("stringsFilter");
+  expect(newFilter).not.toBe(filter);
+  expect(newFilter.value).toBe("all");
+  expect(grid.stringsSurvey.getAllQuestions().length).toBeGreaterThan(usedCount);
+  grid.dispose();
 });
