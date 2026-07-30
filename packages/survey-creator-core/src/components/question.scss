@@ -1,7 +1,8 @@
 @use "../variables" as *;
 @use "./carry-forward-panel.scss" as *;
 
-$drop-indicator-position: calc(calc(var(--sjs2-spacing-x200, 16px) + var(--sjs2-border-width-x200, 2px)) / -2);
+$drop-indicator-position-vertical: calc(calc(var(--sjs2-layout-component-page-content-area-gap-vertical) + var(--sjs2-border-width-x200, 2px)) / -2);
+$drop-indicator-position-horizontal: calc(calc(var(--sjs2-layout-component-page-content-area-gap-horizontal) + var(--sjs2-border-width-x200, 2px)) / -2);
 
 svc-question {
   display: block;
@@ -43,10 +44,10 @@ svc-question {
     content: "";
     width: 100%;
     height: 100%;
-    margin-top: var(--sjs2-spacing-negative-x200, -16px);
-    padding-top: var(--sjs2-spacing-x200, 16px);
-    margin-left: var(--sjs2-spacing-negative-x200, -16px);
-    padding-left: var(--sjs2-spacing-x200, 16px);
+    margin-top: calc(-1 * var(--sjs2-layout-component-page-content-area-gap-vertical));
+    padding-top: var(--sjs2-layout-component-page-content-area-gap-vertical);
+    margin-left: calc(-1 * var(--sjs2-layout-component-page-content-area-gap-horizontal));
+    padding-left: var(--sjs2-layout-component-page-content-area-gap-horizontal);
     bottom: 0;
     right: 0;
     box-sizing: content-box;
@@ -511,19 +512,19 @@ svc-question {
 }
 
 .svc-question__drop-indicator--left {
-  left: $drop-indicator-position;
+  left: $drop-indicator-position-horizontal;
 }
 
 .svc-question__drop-indicator--right {
-  right: $drop-indicator-position;
+  right: $drop-indicator-position-horizontal;
 }
 
 .svc-question__drop-indicator--top {
-  top: $drop-indicator-position;
+  top: $drop-indicator-position-vertical;
 }
 
 .svc-question__drop-indicator--bottom {
-  bottom: $drop-indicator-position;
+  bottom: $drop-indicator-position-vertical;
 }
 
 .svc-question__content--drag-over-left {
