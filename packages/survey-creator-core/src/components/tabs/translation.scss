@@ -262,6 +262,15 @@ td.st-table__cell:first-of-type {
   border-right: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
 }
 
+// The signature pad placeholder is click-through in the default theme (the user draws on the
+// canvas beneath it). The target pane renders a string editor inside it, so clicks must reach it.
+.st-side-by-side__target {
+  .sjs_sp_placeholder {
+    user-select: all;
+    pointer-events: all;
+  }
+}
+
 .st-page {
   .sd-page__content {
     row-gap: 0;

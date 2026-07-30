@@ -116,6 +116,31 @@ test.describe(title, () => {
     expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1 neu");
   });
 
+  test("signature pad placeholder is editable in the target pane", async ({ page }) => {
+    await setJSON(page, {
+      locale: "de",
+      elements: [{ type: "signaturepad", name: "q1" }]
+    });
+    await setCreatorProp(page, "translationMode", "sideBySide");
+    await getTabbedMenuItemByText(page, "Translation").click();
+    // The source pane shows the placeholder as plain text.
+    await expect(page.locator(".st-side-by-side__source .sjs_sp_placeholder").getByText("Sign here")).toBeVisible();
+    await expect(page.locator(".st-side-by-side__source .sjs_sp_placeholder .sv-string-editor")).toHaveCount(0);
+
+    // The placeholder overlay is click-through in the default theme (pointer-events: none);
+    // the target pane re-enables it, so the click below reaches the string editor.
+    // "Bitte hier signieren" on purpose: the built-in German default is "Hier unterschreiben",
+    // and typing a text equal to the locale default is treated as "no change" and not stored.
+    const placeholder = page.locator(".st-side-by-side__target .sjs_sp_placeholder .sv-string-editor");
+    await placeholder.click();
+    await page.keyboard.press("Control+a");
+    await page.keyboard.type("Bitte hier signieren");
+    await page.keyboard.press("Control+Enter");
+    const resultJson = await getJSON(page);
+    expect(resultJson.pages[0].elements[0].placeholder.de).toEqual("Bitte hier signieren");
+    await expect(page.locator(".st-side-by-side__target .sjs_sp_placeholder").getByText("Bitte hier signieren")).toBeVisible();
+  });
+
   test("target locale switch re-renders target pane strings", async ({ page }) => {
     // Keep the locale dropdowns short so every item is rendered in the popup list.
     await page.evaluate(() => {
