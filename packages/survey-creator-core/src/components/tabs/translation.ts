@@ -321,6 +321,7 @@ export interface ITranslationLocales {
   fireOnObjCreating(obj: Base);
   removeLocale(loc: string): void;
   canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean): boolean;
+  canShowElementGroup?(obj: Base): boolean;
   getEditLocale(): string;
   readonly isEditMode: boolean;
   getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string, context: any): string;
@@ -609,6 +610,7 @@ export class TranslationGroup extends TranslationItemBase {
     for (let i = 0; i < value.length; i++) {
       const obj = value[i];
       if (!!obj && obj.getType) {
+        if (!!this.translation && !!this.translation.canShowElementGroup && !this.translation.canShowElementGroup(obj)) continue;
         let name = obj["name"];
         let text = name;
         if (!name) {

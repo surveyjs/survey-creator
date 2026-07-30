@@ -577,7 +577,7 @@ test("question strings dialog model: source/target grid over the real question, 
   const creator = createSideBySideCreator(dropdownChoicesJSON);
   const model = getModel(creator);
   const realMatrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q3");
-  const grid = model.createQuestionStringsModel(realMatrix);
+  const grid = model.createElementStringsModel(realMatrix);
   expect(grid.stringsSurvey).toBeTruthy();
   expect(grid.showAllStrings).toBeFalsy();
   const realChoiceLocText = (<any>realMatrix.columns[0]).templateQuestion.choices[0].locText;
@@ -624,7 +624,7 @@ test("question strings dialog model: the used/all strings filter on top of the h
   const creator = createSideBySideCreator(dropdownChoicesJSON);
   const model = getModel(creator);
   const realQ5 = creator.survey.getQuestionByName("q5");
-  const grid = model.createQuestionStringsModel(realQ5);
+  const grid = model.createElementStringsModel(realQ5);
   // Used Strings Only is the default mode.
   expect(grid.showAllStrings).toBeFalsy();
   const filter = grid.stringsHeaderSurvey.getQuestionByName("stringsFilter");
@@ -640,5 +640,118 @@ test("question strings dialog model: the used/all strings filter on top of the h
   expect(newFilter).not.toBe(filter);
   expect(newFilter.value).toBe("all");
   expect(grid.stringsSurvey.getAllQuestions().length).toBeGreaterThan(usedCount);
+  grid.dispose();
+});
+
+const containersJSON = {
+  locale: "de",
+  title: { default: "Survey title", de: "Umfragetitel" },
+  pages: [
+    {
+      name: "page1",
+      title: "Page 1 title",
+      elements: [
+        { type: "panel", name: "panel1", title: "Panel 1", elements: [{ type: "text", name: "q1" }] },
+        { type: "panel", name: "panel2", description: "Panel 2 description", elements: [{ type: "text", name: "q2" }] },
+        { type: "panel", name: "panel3", elements: [{ type: "text", name: "q3" }] }
+      ]
+    },
+    { name: "page2", elements: [{ type: "text", name: "q4" }] }
+  ]
+};
+
+test("survey, page and panel translate actions: target pane only, a panel without strings is ignored", () => {
+  const creator = createSideBySideCreator(containersJSON);
+  const model = getModel(creator);
+  const pageActions = (survey: any, name: string) =>
+    survey.getPageByName(name).getTitleActions().filter((action: any) => action.id === "svc-translate-page");
+  expect(pageActions(model.targetSurvey, "page1")).toHaveLength(1);
+  expect(pageActions(model.targetSurvey, "page2")).toHaveLength(1);
+  expect(pageActions(model.sourceSurvey, "page1")).toHaveLength(0);
+  const panelActions = (survey: any, name: string) =>
+    survey.getPanelByName(name).getTitleActions().filter((action: any) => action.id === "svc-translate-panel");
+  expect(panelActions(model.targetSurvey, "panel1")).toHaveLength(1);
+  expect(panelActions(model.targetSurvey, "panel2")).toHaveLength(1);
+  expect(panelActions(model.targetSurvey, "panel3")).toHaveLength(0);
+  expect(panelActions(model.sourceSurvey, "panel1")).toHaveLength(0);
+  // The survey header hosts the translate action through the title toolbar contract members
+  // set on the target pane instance.
+  expect((<any>model.targetSurvey).hasTitleActions).toBeTruthy();
+  expect(model.targetSurvey.getTitleToolbar().actions.map(action => action.id)).toContain("svc-translate-survey");
+  expect((<any>model.sourceSurvey).hasTitleActions).toBeFalsy();
+  // Without a dialog host (settings.showDialog) the actions are no-ops, not crashes.
+  expect(() => model.showSurveyStringsDialog()).not.toThrow();
+  expect(() => model.showPageStringsDialog(model.targetSurvey.pages[0])).not.toThrow();
+  expect(() => model.showPanelStringsDialog(<any>model.targetSurvey.getPanelByName("panel1"))).not.toThrow();
+});
+
+test("title placeholders: survey and pages always, a panel only when it has translatable strings", () => {
+  const creator = createSideBySideCreator(containersJSON);
+  const model = getModel(creator);
+  expect((<any>model.targetSurvey.locTitle).placeholder).toBe("pe.surveyTitlePlaceholder");
+  expect((<any>model.sourceSurvey.locTitle).placeholder).toBe("pe.surveyTitlePlaceholder");
+  expect((<any>model.targetSurvey.getPageByName("page2").locTitle).placeholder).toBe("pe.pageTitlePlaceholder");
+  // panel2 has a description but no title - the title row is forced in both panes to stay aligned.
+  const targetPanel2 = <any>model.targetSurvey.getPanelByName("panel2");
+  const sourcePanel2 = <any>model.sourceSurvey.getPanelByName("panel2");
+  expect(targetPanel2.hasTitle).toBeTruthy();
+  expect(sourcePanel2.hasTitle).toBeTruthy();
+  expect((<any>targetPanel2.locTitle).placeholder).toBe("pe.panelTitlePlaceholder");
+  // panel1 shows its own title text, panel3 has no strings at all - no row, no placeholder.
+  expect((<any>model.targetSurvey.getPanelByName("panel1")).hasTitle).toBeTruthy();
+  const targetPanel3 = <any>model.targetSurvey.getPanelByName("panel3");
+  expect(targetPanel3.hasTitle).toBeFalsy();
+  expect((<any>targetPanel3.locTitle).placeholder).toBeFalsy();
+});
+
+test("element strings dialog models: survey/page/panel grids cover own strings only, without nested elements", () => {
+  const creator = createSideBySideCreator(containersJSON);
+  const model = getModel(creator);
+  const surveyGrid = model.createElementStringsModel(creator.survey);
+  expect(surveyGrid.root.groups).toHaveLength(0);
+  expect(surveyGrid.root.locItems.map(item => item.name)).toContain("title");
+  surveyGrid.dispose();
+  const pageGrid = model.createElementStringsModel(creator.survey.pages[0]);
+  expect(pageGrid.root.groups).toHaveLength(0);
+  expect(pageGrid.root.locItems.map(item => item.name)).toContain("title");
+  // page1 stores a title - the dialog keeps the used-only default and both filter options.
+  expect(pageGrid.showAllStrings).toBeFalsy();
+  const pageFilter = pageGrid.stringsHeaderSurvey.getQuestionByName("stringsFilter");
+  expect(ItemValue.getItemByValue(pageFilter.choices, "used").isEnabled).toBeTruthy();
+  pageGrid.dispose();
+  // page2 stores no strings - the used-only mode would show the "no strings" placeholder
+  // (hiding the filter switcher with the grid), so the dialog falls back to all strings
+  // and disables the used-only option.
+  const emptyPageGrid = model.createElementStringsModel(creator.survey.pages[1]);
+  expect(emptyPageGrid.showAllStrings).toBeTruthy();
+  expect(emptyPageGrid.root.locItems.map(item => item.name)).toContain("title");
+  const emptyFilter = emptyPageGrid.stringsHeaderSurvey.getQuestionByName("stringsFilter");
+  expect(emptyFilter.value).toBe("all");
+  expect(ItemValue.getItemByValue(emptyFilter.choices, "used").isEnabled).toBeFalsy();
+  emptyPageGrid.dispose();
+  const panelGrid = model.createElementStringsModel(creator.survey.getPanelByName("panel2"));
+  expect(panelGrid.root.groups).toHaveLength(0);
+  expect(panelGrid.root.locItems.map(item => item.name)).toContain("description");
+  panelGrid.dispose();
+});
+
+test("survey strings dialog model: undoable edits that mirror into the panes", () => {
+  const creator = createSideBySideCreator(containersJSON);
+  const model = getModel(creator);
+  const grid = model.createElementStringsModel(creator.survey);
+  let titleMatrix: QuestionMatrixDropdownModel = undefined;
+  grid.stringsSurvey.getAllQuestions().forEach((question: any) => {
+    const rows = question.rows;
+    if (Array.isArray(rows) && rows.length > 0 && !!rows[0]["translationData"] &&
+      rows[0]["translationData"].locString === creator.survey.locTitle) {
+      titleMatrix = question;
+    }
+  });
+  expect(titleMatrix).toBeTruthy();
+  titleMatrix.visibleRows[0].cells[1].question.value = "Umfragetitel neu";
+  expect(creator.survey.locTitle.getLocaleText("de")).toBe("Umfragetitel neu");
+  expect(model.targetSurvey.locTitle.getLocaleText("de")).toBe("Umfragetitel neu");
+  creator.undo();
+  expect(creator.survey.locTitle.getLocaleText("de")).toBe("Umfragetitel");
   grid.dispose();
 });

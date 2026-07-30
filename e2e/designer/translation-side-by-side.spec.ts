@@ -314,3 +314,107 @@ test.describe(title + " choices", () => {
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1 dialog")).toBeVisible();
   });
 });
+
+const containersJson = {
+  locale: "de",
+  description: "Survey description",
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        { type: "panel", name: "panel1", description: "Panel 1 description", elements: [{ type: "text", name: "q1", title: "Question 1" }] },
+        { type: "panel", name: "panel2", elements: [{ type: "text", name: "q2" }] }
+      ]
+    },
+    { name: "page2", title: "Page 2 title", elements: [{ type: "text", name: "q3" }] }
+  ]
+};
+
+async function openSideBySideContainers(page) {
+  await setJSON(page, containersJson);
+  await setCreatorProp(page, "translationMode", "sideBySide");
+  await getTabbedMenuItemByText(page, "Translation").click();
+  await expect(page.locator(".st-side-by-side__source")).toBeVisible();
+  await expect(page.locator(".st-side-by-side__target")).toBeVisible();
+}
+
+test.describe(title + " containers", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto(url);
+  });
+
+  test("empty survey and page titles show placeholders with translate actions; a panel without strings is ignored", async ({ page }) => {
+    await openSideBySideContainers(page);
+    const target = page.locator(".st-side-by-side__target");
+    // The survey has no title - the placeholder hosts the translate action.
+    await expect(target.locator("[aria-placeholder='Survey Title']")).toBeVisible();
+    await expect(target.getByRole("button", { name: "Translate survey strings" })).toBeVisible();
+    // page1 has no title either.
+    await expect(target.locator("[aria-placeholder='Page 1']")).toBeVisible();
+    await expect(target.getByRole("button", { name: "Translate page strings" })).toBeVisible();
+    // panel1 (description only) gets a forced title row with a placeholder and the action;
+    // panel2 has neither a title nor a description - no placeholder, no action.
+    await expect(target.locator("[aria-placeholder='Panel Title']")).toHaveCount(1);
+    await expect(target.getByRole("button", { name: "Translate panel strings" })).toHaveCount(1);
+    // The source pane gets no translate actions.
+    const source = page.locator(".st-side-by-side__source");
+    await expect(source.getByRole("button", { name: "Translate survey strings" })).toHaveCount(0);
+    await expect(source.getByRole("button", { name: "Translate page strings" })).toHaveCount(0);
+    await expect(source.getByRole("button", { name: "Translate panel strings" })).toHaveCount(0);
+  });
+
+  test("survey strings dialog: own strings only, edits the description translation", async ({ page }) => {
+    await openSideBySideContainers(page);
+    await page.locator(".st-side-by-side__target").getByRole("button", { name: "Translate survey strings" }).click();
+    const dialog = page.locator(".st-translation-dialog");
+    await expect(dialog).toBeVisible();
+    // The dialog is scoped to the survey-level strings - no rows of the nested elements.
+    await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
+    const row = dialog.locator("table tr").filter({ hasText: "Survey description" });
+    await expect(row.locator("textarea").nth(0)).toHaveValue("Survey description");
+    await row.locator("textarea").nth(1).fill("Umfragebeschreibung");
+    await page.keyboard.press("Tab");
+    await page.getByRole("button", { name: "Done" }).click();
+    const resultJson = await getJSON(page);
+    expect(resultJson.description.de).toEqual("Umfragebeschreibung");
+    // The live edit mirrored into the target pane.
+    await expect(page.locator(".st-side-by-side__target").getByText("Umfragebeschreibung")).toBeVisible();
+  });
+
+  test("page strings dialog: an empty page falls back to the all-strings mode and edits the title", async ({ page }) => {
+    await openSideBySideContainers(page);
+    await page.locator(".st-side-by-side__target").getByRole("button", { name: "Translate page strings" }).click();
+    const dialog = page.locator(".st-translation-dialog");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
+    // page1 stores no strings, so the used-only default would show the "no strings"
+    // placeholder without the filter switcher - the dialog opens in the all-strings mode
+    // and the used-only option cannot bring the empty grid back.
+    await expect(dialog.getByRole("radio", { name: "All Strings" })).toBeChecked();
+    await expect(dialog.getByRole("radio", { name: "Used Strings Only" })).toBeDisabled();
+    const titleRow = dialog.locator("table tr").filter({ hasText: "Page title" });
+    await titleRow.locator("textarea").nth(1).fill("Seite 1");
+    await page.keyboard.press("Tab");
+    await page.getByRole("button", { name: "Done" }).click();
+    const resultJson = await getJSON(page);
+    expect(resultJson.pages[0].title.de).toEqual("Seite 1");
+    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Seite 1")).toBeVisible();
+  });
+
+  test("panel strings dialog: available through the forced title row, edits the description translation", async ({ page }) => {
+    await openSideBySideContainers(page);
+    await page.locator(".st-side-by-side__target").getByRole("button", { name: "Translate panel strings" }).click();
+    const dialog = page.locator(".st-translation-dialog");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
+    const row = dialog.locator("table tr").filter({ hasText: "Panel description" });
+    await expect(row.locator("textarea").nth(0)).toHaveValue("Panel 1 description");
+    await row.locator("textarea").nth(1).fill("Panelbeschreibung");
+    await page.keyboard.press("Tab");
+    await page.getByRole("button", { name: "Done" }).click();
+    const resultJson = await getJSON(page);
+    expect(resultJson.pages[0].elements[0].description.de).toEqual("Panelbeschreibung");
+    await expect(page.locator(".st-side-by-side__target").getByText("Panelbeschreibung")).toBeVisible();
+  });
+});

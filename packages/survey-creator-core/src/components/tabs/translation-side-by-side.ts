@@ -1,7 +1,8 @@
 import {
-  Action, Base, EventBase, IDialogOptions, ILocalizableString, ItemValue, LocalizableString,
-  PopupBaseViewModel, Question, QuestionButtonGroupModel, QuestionDropdownModel,
-  QuestionMatrixDropdownModel, SurveyModel, property, settings as surveySettings, surveyLocalization
+  Action, AdaptiveActionContainer, Base, EventBase, IDialogOptions, ILocalizableString, ItemValue,
+  LocalizableString, PageModel, PanelModel, PopupBaseViewModel, Question, QuestionButtonGroupModel,
+  QuestionDropdownModel, QuestionMatrixDropdownModel, SurveyModel, property,
+  settings as surveySettings, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
@@ -454,6 +455,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       // Marks the pane for the string editor: choice edits always go into the locale text,
       // never into the choice value (creator.inplaceEditChoiceValues does not apply here).
       (<any>survey).isTranslationSurface = true;
+      this.setupTitlePlaceholders(survey);
       // Both panes flatten dropdown/tagbox choices - identical layout keeps the rows of the
       // two panes aligned; the source pane stays read-only through its string renderer.
       survey.onElementWrapperComponentName.add((_, opt) => {
@@ -487,6 +489,29 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     };
     updateFlag();
     survey.onCurrentPageChanged.add(updateFlag);
+  }
+  // Empty titles must still host the translate actions. The survey and page title rows always
+  // render in design mode, so they only get a placeholder text (shown by the target pane's
+  // string editor). A panel renders its title row only when the title has a text: a panel with
+  // translatable strings (a title in another locale or a description) gets the row forced in
+  // both panes to keep them aligned; a panel without any strings is left alone - no row,
+  // no placeholder and no translate action.
+  private setupTitlePlaceholders(survey: SurveyModel): void {
+    (<any>survey.locTitle).placeholder = "pe.surveyTitlePlaceholder";
+    survey.pages.forEach(page => {
+      (<any>page.locTitle).placeholder = "pe.pageTitlePlaceholder";
+    });
+    survey.getAllPanels().forEach(panelObj => {
+      const panel = <PanelModel>panelObj;
+      if (!this.panelHasTranslatableStrings(panel)) return;
+      (<any>panel.locTitle).placeholder = "pe.panelTitlePlaceholder";
+      if (!panel.hasTitle) {
+        panel.setPropertyValue("hasTextInTitle", true);
+      }
+    });
+  }
+  private panelHasTranslatableStrings(panel: PanelModel): boolean {
+    return !panel.locTitle.isEmpty || !panel.locDescription.isEmpty;
   }
   // Design-mode surveys get neither the "with frame" nor the "nested" css classes: the designer
   // draws its own question boxes over frameless elements, and the default theme keeps all
@@ -543,24 +568,58 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     };
     survey.onGetQuestionTitleActions.add((_, options) => {
       if (isContentElement(options.question)) return;
-      options.actions.push(new Action({
-        id: "svc-translate-question",
-        iconName: "icon-language",
-        iconSize: "auto",
-        tooltip: editorLocalization.getString("ed.translationQuestionStrings"),
-        title: editorLocalization.getString("ed.translationQuestionStrings"),
-        showTitle: false,
-        action: () => this.showQuestionStringsDialog(options.question)
-      }));
+      options.actions.push(this.createTranslateAction("svc-translate-question", "ed.translationQuestionStrings",
+        () => this.showQuestionStringsDialog(options.question)));
+    });
+    survey.onGetPageTitleActions.add((_, options) => {
+      options.actions.push(this.createTranslateAction("svc-translate-page", "ed.translationPageStrings",
+        () => this.showPageStringsDialog(options.page)));
+    });
+    survey.onGetPanelTitleActions.add((_, options) => {
+      if (isContentElement(options.panel)) return;
+      if (!this.panelHasTranslatableStrings(options.panel)) return;
+      options.actions.push(this.createTranslateAction("svc-translate-panel", "ed.translationPanelStrings",
+        () => this.showPanelStringsDialog(options.panel)));
+    });
+    this.addSurveyTitleTranslateAction(survey);
+  }
+  private createTranslateAction(id: string, localeStrName: string, doAction: () => void): Action {
+    const title = editorLocalization.getString(localeStrName);
+    return new Action({
+      id: id,
+      iconName: "icon-language",
+      iconSize: "auto",
+      tooltip: title,
+      title: title,
+      showTitle: false,
+      action: doAction
     });
   }
-  // The title action of every target-pane question opens a dialog with a source/target strings
-  // grid built over the real survey's question, so the edits go through the regular undoable
-  // translation item path (and mirror into the panes). It covers the strings that cannot be
-  // edited inline - above all the choices of matrix dropdown columns, whose cells render over
-  // copies of the column data.
-  public createQuestionStringsModel(realQuestion: Question): Translation {
-    const model = new TranslationQuestionStrings(this.survey, realQuestion, this.options);
+  // The survey header has no title-actions support of its own (SurveyModel is not a
+  // SurveyElement), so the target pane instance gets the title toolbar contract members
+  // directly; the title UI components of every framework read them off the element.
+  private surveyTitleToolbar: AdaptiveActionContainer;
+  private addSurveyTitleTranslateAction(survey: SurveyModel): void {
+    const toolbar = new AdaptiveActionContainer();
+    const actionBarCss = survey.getCss().actionBar;
+    if (!!actionBarCss) toolbar.cssClasses = actionBarCss;
+    toolbar.setActionsAppearance({ style: "neutral", size: "small", mode: "secondary" });
+    toolbar.locOwner = survey;
+    toolbar.containerCss = "sv-action-title-bar";
+    toolbar.setItems([this.createTranslateAction("svc-translate-survey", "ed.translationSurveyStringsAction",
+      () => this.showSurveyStringsDialog())]);
+    toolbar.flushUpdates();
+    this.surveyTitleToolbar = toolbar;
+    Object.defineProperty(survey, "hasTitleActions", { get: (): boolean => true, configurable: true });
+    survey.getTitleToolbar = (): AdaptiveActionContainer => toolbar;
+  }
+  // The translate title action of a target-pane element opens a dialog with a source/target
+  // strings grid built over the real survey's element, so the edits go through the regular
+  // undoable translation item path (and mirror into the panes). It covers the strings that
+  // cannot be edited inline - the choices of matrix dropdown columns (whose cells render over
+  // copies of the column data), survey-level strings, page/panel strings of other locales etc.
+  public createElementStringsModel(realObj: Base): Translation {
+    const model = new TranslationElementStrings(this.survey, realObj, this.options);
     model.doUndoableAction = (action, title) => this.doUndoableAction(action, title);
     model.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
     model.readOnly = this.readOnly;
@@ -568,14 +627,33 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     model.sourceLocale = this.sourceLocale;
     model.targetLocale = this.targetLocale;
     // The dialog opens in the "used strings only" mode (showAllStrings is false by default);
-    // its grid holds a filter switcher (see TranslationQuestionStrings).
+    // its grid holds a filter switcher (see TranslationElementStrings).
     model.reset();
+    // An element without stored strings (e.g. a page with an empty title) would show the
+    // "no strings" placeholder, which hides the grid along with the filter switcher -
+    // fall back to all strings so the dialog is never a dead end. The used-only option
+    // is disabled: choosing it would bring the empty grid back.
+    if (model.isEmpty) {
+      model.hasUsedStrings = false;
+      model.showAllStrings = true;
+    }
     return model;
   }
   public showQuestionStringsDialog(paneQuestion: Question): void {
-    const realQuestion = !!this.survey ? this.survey.getQuestionByName(paneQuestion.name) : undefined;
-    if (!realQuestion || !surveySettings.showDialog) return;
-    const model = this.createQuestionStringsModel(realQuestion);
+    this.showElementStringsDialog(!!this.survey ? this.survey.getQuestionByName(paneQuestion.name) : undefined);
+  }
+  public showPageStringsDialog(panePage: PageModel): void {
+    this.showElementStringsDialog(!!this.survey ? this.survey.getPageByName(panePage.name) : undefined);
+  }
+  public showPanelStringsDialog(panePanel: PanelModel): void {
+    this.showElementStringsDialog(!!this.survey ? this.survey.getPanelByName(panePanel.name) : undefined);
+  }
+  public showSurveyStringsDialog(): void {
+    this.showElementStringsDialog(this.survey);
+  }
+  public showElementStringsDialog(realObj: Base): void {
+    if (!realObj || !surveySettings.showDialog) return;
+    const model = this.createElementStringsModel(realObj);
     const prevLocale = surveyLocalization.currentLocale;
     surveyLocalization.currentLocale = editorLocalization.currentLocale;
     const popup: PopupBaseViewModel = surveySettings.showDialog(<IDialogOptions>{
@@ -584,7 +662,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       onApply: (): boolean => true,
       onHide: () => model.dispose(),
       cssClass: "svc-property-editor st-translation-dialog svc-creator-popup",
-      title: realQuestion.title,
+      title: this.getElementStringsDialogTitle(realObj),
       displayMode: this.options.isMobileView ? "overlay" : "popup"
     }, this.options.rootElement);
     // The grid edits apply immediately (and are undoable), so the dialog gets a single
@@ -595,6 +673,13 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     popup.locale = editorLocalization.locale;
     surveyLocalization.currentLocale = prevLocale;
   }
+  private getElementStringsDialogTitle(obj: Base): string {
+    if (obj === <Base>this.survey) {
+      return this.survey.title || editorLocalization.getString("ed.surveyTypeName");
+    }
+    // A question's title falls back to its name by itself; pages and panels need the explicit one.
+    return (<any>obj).title || (<any>obj).name;
+  }
   // The creator instance when the model is created by the translation plugin. The options object
   // is checked structurally so the model stays constructible with EmptySurveyCreatorOptions in tests.
   private get creatorModel(): any {
@@ -604,6 +689,10 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   private disposeInstances(): void {
     const creator = this.creatorModel;
     if (!!creator)creator.onStringEditorFocusedCallback = undefined;
+    if (!!this.surveyTitleToolbar) {
+      this.surveyTitleToolbar.dispose();
+      this.surveyTitleToolbar = undefined;
+    }
     [this.sourceSurvey, this.targetSurvey].forEach(survey => {
       if (!survey) return;
       survey.getRendererForString = undefined;
@@ -711,15 +800,24 @@ export class TranslationSideBySideGrid extends TranslationSideBySide {
   }
 }
 
-// The model of the question strings dialog: a Translation scoped to a single question of the
-// real survey. The grid rows bind to the real localizable strings (a column's choices are
-// the column templateQuestion's own items), never to the pane copies.
-export class TranslationQuestionStrings extends Translation {
-  constructor(survey: SurveyModel, private questionValue: Question, options: ISurveyCreatorOptions = null) {
+// The model of the element strings dialog: a Translation scoped to a single element of the
+// real survey - the survey itself, a page, a panel or a question. The grid rows bind to the
+// real localizable strings (a column's choices are the column templateQuestion's own items),
+// never to the pane copies.
+export class TranslationElementStrings extends Translation {
+  constructor(survey: SurveyModel, private elementValue: Base, options: ISurveyCreatorOptions = null) {
     super(survey, options, true);
   }
   protected getRootTranslationObj(): { obj: Base, name: string } {
-    return { obj: this.questionValue, name: this.questionValue.name };
+    return { obj: this.elementValue, name: (<any>this.elementValue).name || "survey" };
+  }
+  // The survey/page/panel dialogs cover only the element's own strings - the nested survey
+  // elements carry translate actions of their own. The question dialog keeps its whole
+  // subtree (column choices, template elements): those strings cannot be reached elsewhere.
+  public canShowElementGroup(obj: Base): boolean {
+    if ((<any>this.elementValue).isQuestion) return true;
+    const el = <any>obj;
+    return !el.isPage && !el.isPanel && !el.isQuestion;
   }
   protected get isSourceColumnReadOnly(): boolean {
     return true;
@@ -727,6 +825,9 @@ export class TranslationQuestionStrings extends Translation {
   protected getSurveyStringsArea(): string {
     return "translation-tab:question-popup-editor";
   }
+  // Cleared when the element has no stored strings and the dialog fell back to the
+  // all-strings mode (see createElementStringsModel).
+  public hasUsedStrings: boolean = true;
   // The all/used strings filter of the dialog: the toolbar dropdown of the translation tab is
   // not available there, so the switcher sits on top of the strings grid, in the header survey.
   protected onSurveyStringsHeaderCreated(survey: SurveyModel): void {
@@ -734,8 +835,13 @@ export class TranslationQuestionStrings extends Translation {
     const filter = new QuestionButtonGroupModel("stringsFilter");
     filter.titleLocation = "hidden";
     filter.allowClear = false;
+    const usedItem = new ItemValue("used", editorLocalization.getString("ed.translationShowUsedStringsOnly"));
+    if (!this.hasUsedStrings) {
+      // Via the expression, not setIsEnabled: the survey's condition runs reset the direct value.
+      usedItem.enableIf = "false";
+    }
     filter.choices = [
-      new ItemValue("used", editorLocalization.getString("ed.translationShowUsedStringsOnly")),
+      usedItem,
       new ItemValue("all", editorLocalization.getString("ed.translationShowAllStrings"))
     ];
     survey.pages[0].addQuestion(filter, 0);
