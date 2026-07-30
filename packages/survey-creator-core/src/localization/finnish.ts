@@ -1862,8 +1862,8 @@ export var fiStrings = {
       // [Auto-translated] "Never"
       none: "Ei koskaan"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Valintanapit",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radiopainikkeet",
     inputType: {
       // [Auto-translated] "Color"
       color: "Väri",
@@ -2141,9 +2141,9 @@ export var fiStrings = {
       buttons: "Painikkeet",
       // [Auto-translated] "Dropdown"
       dropdown: "Avattava valikko",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentoitu",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentoitu kytkin",
+      // [Auto-translated] "Radio buttons"
       radio: "Radiopainikkeet",
       // [Auto-translated] "Checkbox"
       checkbox: "Valintaruutu",

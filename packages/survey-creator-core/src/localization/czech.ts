@@ -1862,8 +1862,8 @@ export var czStrings = {
       // [Auto-translated] "Never"
       none: "Nikdy"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Přepínače",
+    // [Auto-translated] "Radio buttons"
+    radio: "Tlačítka rádia",
     inputType: {
       // "Color"
       color: "Barva",
@@ -2141,9 +2141,9 @@ export var czStrings = {
       buttons: "Tlačítka",
       // "Dropdown"
       dropdown: "Rozbalovací nabídka",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentované",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentovaný přepínač",
+      // [Auto-translated] "Radio buttons"
       radio: "Tlačítka rádia",
       // [Auto-translated] "Checkbox"
       checkbox: "Zaškrtávací políčko",

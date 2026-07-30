@@ -1862,7 +1862,7 @@ export var hrStrings = {
       // [Auto-translated] "Never"
       none: "Nikada"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "Radio tipke",
     inputType: {
       // [Auto-translated] "Color"
@@ -2141,9 +2141,9 @@ export var hrStrings = {
       buttons: "Gumbe",
       // [Auto-translated] "Dropdown"
       dropdown: "Padajući izbornik",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentirani",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentirani prekidač",
+      // [Auto-translated] "Radio buttons"
       radio: "Radio tipke",
       // [Auto-translated] "Checkbox"
       checkbox: "Kvačica",

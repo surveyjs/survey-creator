@@ -1862,8 +1862,8 @@ export var arStrings = {
       // [Auto-translated] "Never"
       none: "أبدا"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "ازرار",
+    // [Auto-translated] "Radio buttons"
+    radio: "أزرار الراديو",
     inputType: {
       // [Auto-translated] "Color"
       color: "لون",
@@ -2141,9 +2141,9 @@ export var arStrings = {
       buttons: "ازرار",
       // [Auto-translated] "Dropdown"
       dropdown: "القائمة المنسدلة",
-      // [Auto-translated] "Segmented"
-      segmented: "مقسم",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "تبديل مجزأ",
+      // [Auto-translated] "Radio buttons"
       radio: "أزرار الراديو",
       // [Auto-translated] "Checkbox"
       checkbox: "صندوق الاختيار",

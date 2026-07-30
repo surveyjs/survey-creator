@@ -1862,8 +1862,8 @@ export var germanTranslation = {
       // [Auto-translated] "Never"
       none: "Nie"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Optionsfelder",
+    // [Auto-translated] "Radio buttons"
+    radio: "Funktasten",
     inputType: {
       // "Color"
       color: "Farbe",
@@ -2141,10 +2141,10 @@ export var germanTranslation = {
       buttons: "Tasten",
       // [Auto-translated] "Dropdown"
       dropdown: "Dropdown-Liste",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentiert",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Funkknöpfe",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentierter Schalter",
+      // [Auto-translated] "Radio buttons"
+      radio: "Funktasten",
       // [Auto-translated] "Checkbox"
       checkbox: "Checkkästchen",
       // [Auto-translated] "Switch"

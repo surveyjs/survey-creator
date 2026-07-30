@@ -1862,8 +1862,8 @@ export var indonesianStrings = {
       // [Auto-translated] "Never"
       none: "Tidak pernah"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Tombol Radio",
+    // [Auto-translated] "Radio buttons"
+    radio: "Tombol radio",
     inputType: {
       // [Auto-translated] "Color"
       color: "Warna",
@@ -2141,10 +2141,10 @@ export var indonesianStrings = {
       buttons: "Tombol",
       // [Auto-translated] "Dropdown"
       dropdown: "Tarik-turun",
-      // [Auto-translated] "Segmented"
-      segmented: "Tersegmentasi",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Tombol Radio",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Toggle tersegmentasi",
+      // [Auto-translated] "Radio buttons"
+      radio: "Tombol radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Kotak centang",
       // [Auto-translated] "Switch"

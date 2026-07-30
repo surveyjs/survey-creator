@@ -1862,8 +1862,8 @@ export var nlStrings = {
       // [Auto-translated] "Never"
       none: "Nooit"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Keuzerondjes",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radioknoppen",
     inputType: {
       // [Auto-translated] "Color"
       color: "Kleur",
@@ -2141,9 +2141,9 @@ export var nlStrings = {
       buttons: "Knopen",
       // [Auto-translated] "Dropdown"
       dropdown: "Vervolgkeuzemenu",
-      // [Auto-translated] "Segmented"
-      segmented: "Gesegmenteerd",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Gesegmenteerde schakelaar",
+      // [Auto-translated] "Radio buttons"
       radio: "Radioknoppen",
       // [Auto-translated] "Checkbox"
       checkbox: "Selectievakje",

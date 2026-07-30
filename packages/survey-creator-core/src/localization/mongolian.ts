@@ -1862,8 +1862,8 @@ export var mnStrings = {
       // [Auto-translated] "Never"
       none: "Хэзээ ч"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Радио товчлуур",
+    // [Auto-translated] "Radio buttons"
+    radio: "Радио товчлуурууд",
     inputType: {
       // [Auto-translated] "Color"
       color: "Өнгө",
@@ -2141,10 +2141,10 @@ export var mnStrings = {
       buttons: "Товчнууд",
       // "Dropdown"
       dropdown: "Доош задрах",
-      // [Auto-translated] "Segmented"
-      segmented: "Сегментчилсэн",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Радио Товчлуурууд",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Сегментчилсэн унтраалга",
+      // [Auto-translated] "Radio buttons"
+      radio: "Радио товчлуурууд",
       // [Auto-translated] "Checkbox"
       checkbox: "Шалгах хуудас",
       // [Auto-translated] "Switch"

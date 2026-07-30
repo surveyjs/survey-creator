@@ -1863,7 +1863,7 @@ export var koreanStrings = {
       // [Auto-translated] "Never"
       none: "결코"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "라디오 버튼",
     inputType: {
       // [Auto-translated] "Color"
@@ -2142,9 +2142,9 @@ export var koreanStrings = {
       buttons: "단추",
       // [Auto-translated] "Dropdown"
       dropdown: "드롭다운(Dropdown)",
-      // [Auto-translated] "Segmented"
-      segmented: "분할",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "분할 토글",
+      // [Auto-translated] "Radio buttons"
       radio: "라디오 버튼",
       // [Auto-translated] "Checkbox"
       checkbox: "체크박스",

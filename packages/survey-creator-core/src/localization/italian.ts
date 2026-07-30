@@ -1862,8 +1862,8 @@ export var italianTranslation = {
       // [Auto-translated] "Never"
       none: "Mai"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Pulsanti",
+    // [Auto-translated] "Radio buttons"
+    radio: "Pulsanti radio",
     inputType: {
       // [Auto-translated] "Color"
       color: "Colore",
@@ -2141,9 +2141,9 @@ export var italianTranslation = {
       buttons: "Pulsanti",
       // [Auto-translated] "Dropdown"
       dropdown: "Menù a discesa",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentato",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Toggle segmentato",
+      // [Auto-translated] "Radio buttons"
       radio: "Pulsanti radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Casella da spuntare",

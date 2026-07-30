@@ -1862,8 +1862,8 @@ export var ruStrings = {
       // [Auto-translated] "Never"
       none: "Никогда"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Переключатели",
+    // [Auto-translated] "Radio buttons"
+    radio: "Кнопки радио",
     inputType: {
       // [Auto-translated] "Color"
       color: "Цвет",
@@ -2141,10 +2141,10 @@ export var ruStrings = {
       buttons: "Кнопки",
       // [Auto-translated] "Dropdown"
       dropdown: "Выпадающий список",
-      // [Auto-translated] "Segmented"
-      segmented: "Сегментированная",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Радиокнопки",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Сегментированный переключатель",
+      // [Auto-translated] "Radio buttons"
+      radio: "Кнопки радио",
       // [Auto-translated] "Checkbox"
       checkbox: "Чекбокс",
       // [Auto-translated] "Switch"

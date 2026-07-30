@@ -1862,8 +1862,8 @@ export var turkishStrings = {
       // [Auto-translated] "Never"
       none: "Hiç"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Radyo Düğmeleri",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radyo düğmeleri",
     inputType: {
       // [Auto-translated] "Color"
       color: "Renk",
@@ -2141,10 +2141,10 @@ export var turkishStrings = {
       buttons: "Düğme",
       // [Auto-translated] "Dropdown"
       dropdown: "Açılır menü",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentli",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Radyo Düğmeleri",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentli anahtar",
+      // [Auto-translated] "Radio buttons"
+      radio: "Radyo düğmeleri",
       // [Auto-translated] "Checkbox"
       checkbox: "Kontrol kutusu",
       // [Auto-translated] "Switch"

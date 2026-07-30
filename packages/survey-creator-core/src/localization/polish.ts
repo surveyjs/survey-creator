@@ -1863,8 +1863,8 @@ export var polishStrings = {
       // [Auto-translated] "Never"
       none: "Nigdy"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Przycisków",
+    // [Auto-translated] "Radio buttons"
+    radio: "Przyciski radiowe",
     inputType: {
       // [Auto-translated] "Color"
       color: "Kolor",
@@ -2142,9 +2142,9 @@ export var polishStrings = {
       buttons: "Przyciski",
       // [Auto-translated] "Dropdown"
       dropdown: "Lista rozwijana",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentowane",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Przełącznik segmentowany",
+      // [Auto-translated] "Radio buttons"
       radio: "Przyciski radiowe",
       // [Auto-translated] "Checkbox"
       checkbox: "Pole do odhaczenia",

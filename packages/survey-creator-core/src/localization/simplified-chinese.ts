@@ -1862,7 +1862,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Never"
       none: "从不"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "单选按钮",
     inputType: {
       // [Auto-translated] "Color"
@@ -2141,10 +2141,10 @@ export var simplifiedChineseTranslation = {
       buttons: "按钮",
       // [Auto-translated] "Dropdown"
       dropdown: "下拉列表",
-      // [Auto-translated] "Segmented"
-      segmented: "分段式",
-      // [Auto-translated] "Radio Buttons"
-      radio: "无线电按钮",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "分段切换",
+      // [Auto-translated] "Radio buttons"
+      radio: "单选按钮",
       // [Auto-translated] "Checkbox"
       checkbox: "复选框",
       // [Auto-translated] "Switch"

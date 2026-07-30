@@ -1862,8 +1862,8 @@ export const thStrings = {
       // "Never"
       none: "ไม่เคย"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "ปุ่มตัวเลือก",
+    // [Auto-translated] "Radio buttons"
+    radio: "ปุ่มวิทยุ",
     inputType: {
       // "Color"
       color: "สี",
@@ -2141,10 +2141,10 @@ export const thStrings = {
       buttons: "ปุ่ม",
       // "Dropdown"
       dropdown: "ดรอปดาวน์",
-      // [Auto-translated] "Segmented"
-      segmented: "แบ่งกลุ่ม",
-      // [Auto-translated] "Radio Buttons"
-      radio: "ปุ่มตัวเลือก",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "สวิตช์แบบแบ่งส่วน",
+      // [Auto-translated] "Radio buttons"
+      radio: "ปุ่มวิทยุ",
       // [Auto-translated] "Checkbox"
       checkbox: "ช่องทําเครื่องหมาย",
       // [Auto-translated] "Switch"

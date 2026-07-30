@@ -1862,7 +1862,7 @@ export var bgStrings = {
       // [Auto-translated] "Never"
       none: "Никога"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "Радио бутони",
     inputType: {
       // "Color"
@@ -2141,9 +2141,9 @@ export var bgStrings = {
       buttons: "Бутони",
       // "Dropdown"
       dropdown: "Падащо меню",
-      // [Auto-translated] "Segmented"
-      segmented: "Сегментирани",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Сегментиран превключвател",
+      // [Auto-translated] "Radio buttons"
       radio: "Радио бутони",
       // [Auto-translated] "Checkbox"
       checkbox: "Отметка",

@@ -1862,7 +1862,7 @@ export var frenchTranslation = {
       // [Auto-translated] "Never"
       none: "Jamais"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "Boutons radio",
     inputType: {
       // [Auto-translated] "Color"
@@ -2141,9 +2141,9 @@ export var frenchTranslation = {
       buttons: "Boutons",
       // [Auto-translated] "Dropdown"
       dropdown: "Liste déroulante",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmenté",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Bascule segmenté",
+      // [Auto-translated] "Radio buttons"
       radio: "Boutons radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Case à cocher",

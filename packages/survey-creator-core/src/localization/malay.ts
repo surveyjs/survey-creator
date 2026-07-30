@@ -1862,8 +1862,8 @@ export var msStrings = {
       // [Auto-translated] "Never"
       none: "Tidak pernah"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Butang Radio",
+    // [Auto-translated] "Radio buttons"
+    radio: "Butang radio",
     inputType: {
       // [Auto-translated] "Color"
       color: "Warna",
@@ -2141,10 +2141,10 @@ export var msStrings = {
       buttons: "Butang",
       // [Auto-translated] "Dropdown"
       dropdown: "Dropdown",
-      // [Auto-translated] "Segmented"
-      segmented: "Bersegmen",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Butang Radio",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Togol bersegmen",
+      // [Auto-translated] "Radio buttons"
+      radio: "Butang radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Kotak semak",
       // [Auto-translated] "Switch"

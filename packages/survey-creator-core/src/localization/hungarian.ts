@@ -1862,8 +1862,8 @@ export var huStrings = {
       // [Auto-translated] "Never"
       none: "Soha"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Választógombokkal",
+    // [Auto-translated] "Radio buttons"
+    radio: "Rádiógombok",
     inputType: {
       // [Auto-translated] "Color"
       color: "Szín",
@@ -2141,9 +2141,9 @@ export var huStrings = {
       buttons: "Gombok",
       // [Auto-translated] "Dropdown"
       dropdown: "Legördülő menü",
-      // [Auto-translated] "Segmented"
-      segmented: "Szegmentált",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Szegmentált kapcsoló",
+      // [Auto-translated] "Radio buttons"
       radio: "Rádiógombok",
       // [Auto-translated] "Checkbox"
       checkbox: "Jelölőnégyzet",
