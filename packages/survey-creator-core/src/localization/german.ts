@@ -146,10 +146,10 @@ export var germanTranslation = {
     undo: "Rückgängig",
     // "Redo"
     redo: "Wiederherstellen",
-    // [Auto-translated] "Expand"
-    expandTooltip: "Erweitern",
-    // [Auto-translated] "Collapse"
-    collapseTooltip: "Zusammenbruch",
+    // "Expand"
+    expandTooltip: "Ausklappen",
+    // "Collapse"
+    collapseTooltip: "Zusammenklappen",
     // "Expand All"
     expandAllTooltip: "Alle aufklappen",
     // "Collapse All"
