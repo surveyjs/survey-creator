@@ -61,8 +61,8 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   protected get hasStringsSurveyUI(): boolean {
     return this.isSideBySideGrid;
   }
-  // The side-by-side property grid: a form/grid view switcher plus the source and target
-  // language dropdowns (the standard mode shows the languages matrix instead).
+  // The side-by-side property grid: the source and target language dropdowns
+  // (the standard mode shows the languages matrix instead).
   protected createSettingsSurvey(): SurveyModel {
     const json = this.getSideBySideSettingsSurveyJSON();
     // titleLocationLeft = false: the language dropdown titles sit on top of the editors,
@@ -75,9 +75,6 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     });
     res.onValueChanged.add((sender, options) => {
       if (this._updatingSettingsSurvey || this.isDisposed) return;
-      if (options.name === "viewMode") {
-        this.view = options.value === "grid" ? "grid" : "forms";
-      }
       if (options.name === "sourceLocale") {
         this.sourceLocale = this.getLocaleFromSettingValue(options.value);
       }
@@ -90,15 +87,6 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   private getSideBySideSettingsSurveyJSON(): any {
     return {
       elements: [
-        {
-          type: "buttongroup",
-          name: "viewMode",
-          titleLocation: "hidden",
-          choices: [
-            { value: "forms", text: editorLocalization.getString("ed.translationSideBySideViewForms") },
-            { value: "grid", text: editorLocalization.getString("ed.translationSideBySideViewGrid") }
-          ]
-        },
         {
           type: "dropdown",
           name: "sourceLocale",
@@ -114,7 +102,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       ]
     };
   }
-  // Pushes the model state (view, locales and the locale choice lists) into the settings survey.
+  // Pushes the model state (locales and the locale choice lists) into the settings survey.
   // Called on activation and on every related model property change.
   public updateSettingsSurveyValues(): void {
     const survey = this.settingsSurvey;
@@ -126,8 +114,6 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       const target = this.targetLocale || "";
       this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("sourceLocale"), locales, source, target);
       this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("targetLocale"), locales, target, source);
-      const viewQuestion = survey.getQuestionByName("viewMode");
-      if (!!viewQuestion) viewQuestion.value = this.view;
     } finally {
       this._updatingSettingsSurvey = false;
     }
@@ -163,7 +149,6 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "view") {
       this.applyView();
-      this.updateSettingsSurveyValues();
     }
     if (name === "sourceLocale" || name === "targetLocale") {
       if (name === "targetLocale") {

@@ -385,8 +385,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       cssClass: "svc-creator-popup",
     }, this.creator);
   }
-  // The view switcher lives in the property grid; the model changed its view property -
-  // sync the creator option and the toolbar filters that differ between the two views.
+  // The model changed its view property - sync the creator option and the toolbar
+  // filters that differ between the two views.
   private onSideBySideViewChanged(): void {
     if (!this.isSideBySide || !this.model) return;
     const model = <TranslationSideBySide>this.model;

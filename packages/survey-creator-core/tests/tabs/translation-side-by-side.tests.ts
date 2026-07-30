@@ -68,7 +68,7 @@ test("activate creates side-by-side model, no strings surveys, settings shown in
   expect(sidebarPage.visible).toBeTruthy();
   expect(sidebarPage.componentName).toBe("survey-widget");
   expect(sidebarPage.componentData).toBe(model.settingsSurvey);
-  expect(getSettingsQuestion(creator, "viewMode").value).toBe("forms");
+  expect(model.settingsSurvey.getQuestionByName("viewMode")).toBeFalsy();
   expect(getSettingsQuestion(creator, "sourceLocale").value).toBe("default");
   expect(getSettingsQuestion(creator, "targetLocale").value).toBe("de");
 });
@@ -84,7 +84,7 @@ test("pages dropdown: no 'All Pages', real pages only, first page preselected; s
   expect(creator.toolbar.getActionById("svd-translation-merge_locale_withdefault").visible).toBeFalsy();
   expect(creator.toolbar.getActionById("svc-translation-import").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svc-translation-export").visible).toBeTruthy();
-  // The locale selectors and the view switcher live in the property grid, not in the toolbar.
+  // The locale selectors live in the property grid, not in the toolbar.
   expect(creator.toolbar.getActionById("svc-translation-source-locale")).toBeFalsy();
   expect(creator.toolbar.getActionById("svc-translation-destination-locale")).toBeFalsy();
   expect(creator.toolbar.getActionById("svc-translation-side-by-side-view")).toBeFalsy();
