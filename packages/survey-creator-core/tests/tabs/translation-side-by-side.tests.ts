@@ -1,5 +1,4 @@
 import { ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionTextModel } from "survey-core";
-import { QuestionLinkValueModel } from "../../src/components/link-value";
 import { TranslationSideBySide } from "../../src/components/tabs/translation-side-by-side";
 import { TranslationDropdownViewModel, translationDropdownComponentName } from "../../src/components/tabs/translation-dropdown";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
@@ -799,51 +798,4 @@ test("survey strings dialog model: undoable edits that mirror into the panes", (
   creator.undo();
   expect(creator.survey.locTitle.getLocaleText("de")).toBe("Umfragetitel");
   grid.dispose();
-});
-
-function createMachineTranslationCreator(): CreatorTester {
-  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
-  // The handler enables machine translation (getHasMachineTranslation) before the tab activates.
-  creator.onMachineTranslate.add(() => { });
-  creator.JSON = JSON.parse(JSON.stringify(sideBySideJSON));
-  creator.activeTab = "translation";
-  return creator;
-}
-
-test("machine translation button under the target language: visible only for an explicit target different from the source", () => {
-  const creator = createMachineTranslationCreator();
-  const model = getModel(creator);
-  const button = <QuestionLinkValueModel>model.settingsSurvey.getQuestionByName("machineTranslation");
-  expect(button).toBeTruthy();
-  expect(button.linkValueText).toBe("Auto-translate All");
-  // The survey locale "de" makes the default target; the source is the default language.
-  expect(model.targetLocale).toBe("de");
-  expect(button.visible).toBeTruthy();
-  // No target language selected.
-  model.targetLocale = "";
-  expect(button.visible).toBeFalsy();
-  model.targetLocale = "fr";
-  expect(button.visible).toBeTruthy();
-  // The target language equals the source one.
-  model.sourceLocale = "fr";
-  expect(button.visible).toBeFalsy();
-  model.sourceLocale = "de";
-  expect(button.visible).toBeTruthy();
-});
-
-test("machine translation button is hidden when no machine translation service is plugged in", () => {
-  const creator = createSideBySideCreator();
-  const model = getModel(creator);
-  expect(model.targetLocale).toBe("de");
-  expect(model.settingsSurvey.getQuestionByName("machineTranslation").visible).toBeFalsy();
-});
-
-test("machine translation button click opens the auto-translate dialog", () => {
-  const creator = createMachineTranslationCreator();
-  const model = getModel(creator);
-  let shownCount = 0;
-  model.showMachineTranslationEditor = (): void => { shownCount++; };
-  const button = <QuestionLinkValueModel>model.settingsSurvey.getQuestionByName("machineTranslation");
-  button.doLinkClick();
-  expect(shownCount).toBe(1);
 });

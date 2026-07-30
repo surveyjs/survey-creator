@@ -442,7 +442,13 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private showSideBySideMachineTranslation(): void {
     const model = <TranslationSideBySide>this.model;
     if (!model) return;
-    model.showMachineTranslationEditor();
+    const editor = model.createTranslationEditor(model.targetLocale || "");
+    editor.onApply = () => {
+      model.reset();
+      model.rebuildInstances();
+    };
+    editor.setFromLocale(model.sourceLocale || "");
+    editor.showDialog();
   }
   private updateFilterStrigsAction(updateSelectedItem: boolean = false) {
     const title = this.getFilterStringsActionTitle();
