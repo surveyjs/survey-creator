@@ -799,3 +799,40 @@ test("survey strings dialog model: undoable edits that mirror into the panes", (
   expect(creator.survey.locTitle.getLocaleText("de")).toBe("Umfragetitel");
   grid.dispose();
 });
+
+test("Auto-translate All action is disabled while the target language is empty or equals the source language", () => {
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+  // The handler enables machine translation (getHasMachineTranslation) before the tab activates.
+  creator.onMachineTranslate.add(() => { });
+  creator.JSON = JSON.parse(JSON.stringify(sideBySideJSON));
+  creator.activeTab = "translation";
+  const model = getModel(creator);
+  const action = creator.toolbar.getActionById("svc-translation-machine");
+  expect(action.visible).toBeTruthy();
+  // The survey locale "de" makes the default target; the source is the default language.
+  expect(model.targetLocale).toBe("de");
+  expect(action.enabled).toBeTruthy();
+  // No target language selected.
+  model.targetLocale = "";
+  expect(action.enabled).toBeFalsy();
+  model.targetLocale = "fr";
+  expect(action.enabled).toBeTruthy();
+  // The target language equals the source one.
+  model.sourceLocale = "fr";
+  expect(action.enabled).toBeFalsy();
+  model.sourceLocale = "";
+  expect(action.enabled).toBeTruthy();
+  creator.readOnly = true;
+  expect(action.enabled).toBeFalsy();
+  creator.readOnly = false;
+  expect(action.enabled).toBeTruthy();
+  // Re-activation creates a new model; the action must follow the new model's locales.
+  creator.activeTab = "designer";
+  creator.activeTab = "translation";
+  const newModel = getModel(creator);
+  expect(newModel).not.toBe(model);
+  expect(newModel.targetLocale).toBe("fr");
+  expect(action.enabled).toBeTruthy();
+  newModel.targetLocale = "";
+  expect(action.enabled).toBeFalsy();
+});

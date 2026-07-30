@@ -177,6 +177,16 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
     this.machineTranslationAction.visible = this.creator.getHasMachineTranslation();
+    // A fresh updater on every activation: it must track the locales of the model created
+    // above - the previous model was disposed with the tab and no longer notifies.
+    // Assigning a new ComputedUpdater disposes the previous one (see processComputedUpdater).
+    this.machineTranslationAction.enabled = <any>(new ComputedUpdater(() => {
+      if (this.creator.readOnly) return false;
+      // There must be something to translate into: an explicit target language that
+      // differs from the source one.
+      const target = model.targetLocale || "";
+      return !!target && target !== (model.sourceLocale || "");
+    }));
 
     model.onPropertyChanged.add((sender, options) => {
       if (options.name === "view") {
