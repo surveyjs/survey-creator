@@ -16,6 +16,9 @@ import { Translation, TranslationGroup, TranslationItem } from "./translation";
 // The default locale is stored as "" on the model; the settings survey dropdowns need a
 // non-empty value for it (an empty dropdown value would render as "no selection").
 const defaultLocaleSettingValue = "default";
+// A non-breaking space: rendered instead of an empty header string of the source pane to keep
+// the row one text line high (see setupSourceEmptySpaces).
+const emptySpaceText = "\u00A0";
 
 export class TranslationSideBySide extends Translation implements ITranslationDropdownOwner {
   @property() selectedPageName: string;
@@ -290,6 +293,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       this.targetSurvey = this.createInstance(json, "translation_target");
       this.setupSourceSurvey(this.sourceSurvey);
       this.setupTargetSurvey(this.targetSurvey);
+      this.setupSourceEmptySpaces();
       this.buildMappings();
       this.updateInstanceLocales();
       this.updateInstancePages();
@@ -498,6 +502,43 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   private panelHasTranslatableStrings(panel: PanelModel): boolean {
     return !panel.locTitle.isEmpty || !panel.locDescription.isEmpty;
   }
+  // The target pane keeps a visible header row even for an empty string: an empty title shows
+  // the placeholder in its string editor, a description shows the target-locale text when one
+  // is stored. The source pane renders plain strings, so the same rows would collapse to zero
+  // height and pull the panes out of vertical alignment - an empty source header string renders
+  // a blank space instead while its target counterpart has content. Covers the survey, the
+  // pages and the panels whose title row is forced (see setupTitlePlaceholders).
+  private sourceEmptySpaceStrings: Array<LocalizableString> = [];
+  private setupSourceEmptySpaces(): void {
+    this.sourceEmptySpaceStrings = [];
+    const addEmptySpace = (source: ILocalizableString, target: ILocalizableString): void => {
+      const locStr = <LocalizableString>source;
+      locStr.onGetTextCallback = (text: string): string => {
+        if (!!text) return text;
+        const targetHasContent = !!(<any>target).placeholder || !!(<LocalizableString>target).pureText;
+        return targetHasContent ? emptySpaceText : "";
+      };
+      this.sourceEmptySpaceStrings.push(locStr);
+    };
+    addEmptySpace(this.sourceSurvey.locTitle, this.targetSurvey.locTitle);
+    addEmptySpace(this.sourceSurvey.locDescription, this.targetSurvey.locDescription);
+    this.sourceSurvey.pages.forEach(page => {
+      const targetPage = this.targetSurvey.getPageByName(page.name);
+      if (!targetPage) return;
+      addEmptySpace(page.locTitle, targetPage.locTitle);
+      addEmptySpace(page.locDescription, targetPage.locDescription);
+    });
+    this.sourceSurvey.getAllPanels().forEach(panelObj => {
+      const panel = <PanelModel>panelObj;
+      // Only panels with a title row: a panel without translatable strings renders no row in
+      // either pane, and a blank space would force one (hasTitle checks the rendered text).
+      if (!(<any>panel.locTitle).placeholder) return;
+      const targetPanel = <PanelModel>this.targetSurvey.getPanelByName(panel.name);
+      if (!targetPanel) return;
+      addEmptySpace(panel.locTitle, targetPanel.locTitle);
+      addEmptySpace(panel.locDescription, targetPanel.locDescription);
+    });
+  }
   // Design-mode surveys get neither the "with frame" nor the "nested" css classes: the designer
   // draws its own question boxes over frameless elements, and the default theme keeps all
   // element spacing on these classes. The panes render without the designer surface, so the
@@ -687,6 +728,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     });
     this.sourceSurvey = undefined;
     this.targetSurvey = undefined;
+    this.sourceEmptySpaceStrings = [];
     this.byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
     this.byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
     this.choicesCollapsedState = {};
@@ -715,6 +757,9 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     try {
       if (!!this.sourceSurvey)this.sourceSurvey.locale = this.sourceLocale || "";
       if (!!this.targetSurvey)this.targetSurvey.locale = this.targetLocale || "";
+      // A target locale change does not touch the source instance's strings, but it can change
+      // whether an empty source header string keeps its row height (see setupSourceEmptySpaces).
+      this.sourceEmptySpaceStrings.forEach(locStr => locStr.strChanged());
     } finally {
       this._syncing = wasSyncing;
     }

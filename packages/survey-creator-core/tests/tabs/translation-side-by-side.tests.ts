@@ -704,6 +704,50 @@ test("title placeholders: survey and pages always, a panel only when it has tran
   expect((<any>targetPanel3.locTitle).placeholder).toBeFalsy();
 });
 
+const emptySpace = "\u00A0";
+
+test("source pane renders an empty space for empty survey and page titles to keep the panes aligned", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  // The target pane shows a placeholder editor under an empty title; the plain-rendered source
+  // pane keeps the row height with a blank space. The stored values stay empty.
+  expect(model.sourceSurvey.locTitle.renderedHtml).toBe(emptySpace);
+  expect(model.sourceSurvey.pages[0].locTitle.renderedHtml).toBe(emptySpace);
+  expect(model.sourceSurvey.locTitle.isEmpty).toBeTruthy();
+  expect(model.sourceSurvey.locTitle.text).toBe("");
+  // The target pane strings are left alone - its string editors render the placeholders.
+  expect(model.targetSurvey.locTitle.renderedHtml).toBe("");
+  // An empty description has no target row either (no placeholder) - no extra space.
+  expect(model.sourceSurvey.locDescription.renderedHtml).toBe("");
+  expect(model.sourceSurvey.pages[0].locDescription.renderedHtml).toBe("");
+});
+
+test("source pane renders an empty space for a description stored only in the target locale", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  expect(model.sourceSurvey.locDescription.renderedHtml).toBe("");
+  creator.survey.locDescription.setLocaleText("de", "Umfragebeschreibung");
+  // The real survey change mirrors into the pane copies; the source language has no text of its
+  // own to show, so the source pane keeps the row height with a blank space.
+  expect(model.targetSurvey.locDescription.renderedHtml).toBe("Umfragebeschreibung");
+  expect(model.sourceSurvey.locDescription.renderedHtml).toBe(emptySpace);
+  // The row collapses again for a target language without a description.
+  model.targetLocale = "fr";
+  expect(model.sourceSurvey.locDescription.renderedHtml).toBe("");
+  model.targetLocale = "de";
+  expect(model.sourceSurvey.locDescription.renderedHtml).toBe(emptySpace);
+});
+
+test("source pane empty space for titles with a text: shown as-is, no blank space", () => {
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  json.title = "Survey title";
+  json.pages[0].title = "Page 1 title";
+  const creator = createSideBySideCreator(json);
+  const model = getModel(creator);
+  expect(model.sourceSurvey.locTitle.renderedHtml).toBe("Survey title");
+  expect(model.sourceSurvey.pages[0].locTitle.renderedHtml).toBe("Page 1 title");
+});
+
 test("element strings dialog models: survey/page/panel grids cover own strings only, without nested elements", () => {
   const creator = createSideBySideCreator(containersJSON);
   const model = getModel(creator);
