@@ -83,6 +83,31 @@ test.describe(title, () => {
     await expect(page.locator(".st-side-by-side__source .sv-string-editor")).toHaveCount(0);
   });
 
+  test("survey title and description are shown on the first page only", async ({ page }) => {
+    await setJSON(page, {
+      title: { default: "Survey title", de: "Umfragetitel" },
+      description: "Survey description",
+      ...json
+    });
+    await setCreatorProp(page, "translationMode", "sideBySide");
+    await getTabbedMenuItemByText(page, "Translation").click();
+    await expect(page.locator(".st-side-by-side__source").getByText("Survey title")).toBeVisible();
+    await expect(page.locator(".st-side-by-side__source").getByText("Survey description")).toBeVisible();
+    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Umfragetitel")).toBeVisible();
+
+    await getBarItemByTitle(page, "page1").click();
+    await getListItemByText(page, "page2").click();
+    await expect(page.locator(".st-side-by-side__source").getByText("Question 4")).toBeVisible();
+    await expect(page.locator(".st-side-by-side__source").getByText("Survey title")).toHaveCount(0);
+    await expect(page.locator(".st-side-by-side__source").getByText("Survey description")).toHaveCount(0);
+    await expect(page.locator(".st-side-by-side__target").getByText("Umfragetitel")).toHaveCount(0);
+
+    await getBarItemByTitle(page, "page2").click();
+    await getListItemByText(page, "page1").click();
+    await expect(page.locator(".st-side-by-side__source").getByText("Survey title")).toBeVisible();
+    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Umfragetitel")).toBeVisible();
+  });
+
   test("page dropdown switches both panes", async ({ page }) => {
     await openSideBySideTranslation(page);
     await getBarItemByTitle(page, "page1").click();

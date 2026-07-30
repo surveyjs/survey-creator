@@ -425,6 +425,30 @@ test("changing the source pane page syncs the target pane and the page dropdown"
   expect(model.targetSurvey.currentPage.name).toBe("page1");
 });
 
+test("survey header (title, description, logo) is shown on the first page only", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
+    expect(survey.renderedHasHeader).toBeTruthy();
+    expect(survey.renderedHasTitle).toBeTruthy();
+    expect(survey.renderedHasDescription).toBeTruthy();
+    expect(survey.renderedHasLogo).toBeTruthy();
+  });
+  model.sourceSurvey.currentPage = model.sourceSurvey.getPageByName("page2");
+  // The target pane follows the source page change through the model.
+  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
+    expect(survey.currentPage.name).toBe("page2");
+    expect(survey.renderedHasHeader).toBeFalsy();
+    expect(survey.renderedHasTitle).toBeFalsy();
+    expect(survey.renderedHasDescription).toBeFalsy();
+    expect(survey.renderedHasLogo).toBeFalsy();
+  });
+  model.sourceSurvey.currentPage = model.sourceSurvey.getPageByName("page1");
+  [model.sourceSurvey, model.targetSurvey].forEach(survey => {
+    expect(survey.renderedHasHeader).toBeTruthy();
+  });
+});
+
 test("forms view property grid is compact, restored on leaving the tab", () => {
   const creator = createSideBySideCreator();
   expect(creator.sidebar.compactMode).toBeTruthy();

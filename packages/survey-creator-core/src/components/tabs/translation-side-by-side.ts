@@ -448,6 +448,9 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       survey.showNavigationButtons = false;
       survey.showProgressBar = false;
       survey.showTOC = false;
+      // The survey header (title, description, logo) is survey-level content, not page
+      // content - the panes show it above the first page only instead of on every page.
+      this.showSurveyHeaderOnFirstPageOnly(survey);
       // Marks the pane for the string editor: choice edits always go into the locale text,
       // never into the choice value (creator.inplaceEditChoiceValues does not apply here).
       (<any>survey).isTranslationSurface = true;
@@ -467,6 +470,23 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       });
       this.restoreRunnerElementStyles(survey);
     });
+  }
+  // The panes are design-mode surveys, so the header parts render whenever the corresponding
+  // survey property is visible (see renderedHasTitle/renderedHasDescription/renderedHasLogo).
+  // Route those checks through a page-driven flag; it is read via getPropertyValue, so the
+  // UI bindings of every framework re-evaluate the header when the flag changes.
+  private showSurveyHeaderOnFirstPageOnly(survey: SurveyModel): void {
+    const headerProperties = ["title", "description", "logo"];
+    const basePropertyVisible = survey.isPropertyVisible.bind(survey);
+    survey.isPropertyVisible = (propName: string): boolean => {
+      if (headerProperties.indexOf(propName) >= 0 && !survey.getPropertyValue("showSurveyHeader")) return false;
+      return basePropertyVisible(propName);
+    };
+    const updateFlag = (): void => {
+      survey.setPropertyValue("showSurveyHeader", survey.pages.indexOf(survey.currentPage) <= 0);
+    };
+    updateFlag();
+    survey.onCurrentPageChanged.add(updateFlag);
   }
   // Design-mode surveys get neither the "with frame" nor the "nested" css classes: the designer
   // draws its own question boxes over frameless elements, and the default theme keeps all
