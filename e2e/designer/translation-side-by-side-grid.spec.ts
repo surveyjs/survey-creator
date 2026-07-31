@@ -90,11 +90,10 @@ test.describe(title, () => {
     await openGridTranslation(page);
     const viewSwitcher = page.locator(".svc-side-bar .spg-question[data-name=viewMode]");
     await expect(viewSwitcher).toBeVisible();
-    // The side-by-side property grid is narrow, so the button group question renders
-    // in its compact mode - as a dropdown; switch the view through its popup list.
+    // The standard-width property grid fits the button group, so the views are
+    // plain buttons - no compact dropdown rendering.
     const switchView = async (viewName: string) => {
-      await viewSwitcher.click();
-      await page.getByRole("option", { name: viewName }).click();
+      await viewSwitcher.getByText(viewName).click();
     };
 
     await switchView("Form View");

@@ -73,7 +73,7 @@ test("grid view: activate creates the grid model, no survey copies, toolbar and 
   const sidebarPage = creator.sidebar.pages.filter(page => page.id === "translation")[0];
   expect(sidebarPage.visible).toBeTruthy();
   expect(sidebarPage.componentData).toBe(model.settingsSurvey);
-  expect(model.settingsSurvey.getQuestionByName("viewMode")).toBeFalsy();
+  expect(model.settingsSurvey.getQuestionByName("viewMode").value).toBe("grid");
   expect(model.settingsSurvey.getQuestionByName("sourceLocale").value).toBe("default");
   expect(model.settingsSurvey.getQuestionByName("targetLocale").value).toBe("de");
   expect(creator.toolbar.getActionById("svc-translation-filter-page").visible).toBeTruthy();
@@ -81,7 +81,7 @@ test("grid view: activate creates the grid model, no survey copies, toolbar and 
   expect(creator.toolbar.getActionById("svc-translation-import").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svc-translation-export").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svd-translation-merge_locale_withdefault").visible).toBeFalsy();
-  // The locale selectors live in the property grid, not in the toolbar.
+  // The locale selectors and the view switcher live in the property grid, not in the toolbar.
   expect(creator.toolbar.getActionById("svc-translation-source-locale")).toBeFalsy();
   expect(creator.toolbar.getActionById("svc-translation-destination-locale")).toBeFalsy();
   expect(creator.toolbar.getActionById("svc-translation-side-by-side-view")).toBeFalsy();
@@ -242,16 +242,17 @@ test("grid view: the machine-translation editor operates on the whole survey", (
   editor.dispose();
 });
 
-test("view switching: the view property switches between the forms and grid views keeping locales", () => {
+test("view switcher: the property grid button group switches between the forms and grid views keeping locales", () => {
   const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
   creator.JSON = JSON.parse(JSON.stringify(gridJSON));
   creator.activeTab = "translation";
   const formsModel = <TranslationSideBySide>getPlugin(creator).model;
-  expect(formsModel.view).toBe("forms");
+  const viewQuestion = formsModel.settingsSurvey.getQuestionByName("viewMode");
+  expect(viewQuestion.value).toBe("forms");
   expect(formsModel.isSideBySideGrid).toBeFalsy();
   formsModel.sourceLocale = "fr";
 
-  formsModel.view = "grid";
+  viewQuestion.value = "grid";
   expect(creator.translationSideBySideView).toBe("grid");
   // The same model rebuilds its editing surface in place.
   expect(getPlugin(creator).model).toBe(formsModel);
@@ -264,7 +265,7 @@ test("view switching: the view property switches between the forms and grid view
   expect(formsModel.settingsSurvey.getQuestionByName("sourceLocale").value).toBe("fr");
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeTruthy();
 
-  formsModel.view = "forms";
+  viewQuestion.value = "forms";
   expect(creator.translationSideBySideView).toBe("forms");
   expect(getPlugin(creator).model).toBe(formsModel);
   expect(formsModel.isSideBySideGrid).toBeFalsy();
@@ -277,16 +278,16 @@ test("view switching: the view property switches between the forms and grid view
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeFalsy();
 });
 
-test("property grid is compact in the side-by-side mode (both views), standard width in the default mode", () => {
+test("property grid keeps the standard width in the side-by-side mode (both views) and in the default mode", () => {
   const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
   creator.JSON = JSON.parse(JSON.stringify(gridJSON));
   creator.activeTab = "translation";
-  expect(creator.sidebar.compactMode).toBeTruthy();
+  expect(creator.sidebar.compactMode).toBeFalsy();
   switchView(creator, "grid");
-  expect(creator.sidebar.compactMode).toBeTruthy();
+  expect(creator.sidebar.compactMode).toBeFalsy();
 
   const gridCreator = createGridCreator();
-  expect(gridCreator.sidebar.compactMode).toBeTruthy();
+  expect(gridCreator.sidebar.compactMode).toBeFalsy();
 
   const defaultCreator = new CreatorTester({ showTranslationTab: true });
   defaultCreator.JSON = JSON.parse(JSON.stringify(gridJSON));
@@ -297,18 +298,20 @@ test("property grid is compact in the side-by-side mode (both views), standard w
   expect(defaultCreator.sidebar.compactMode).toBeFalsy();
 });
 
-test("locale dropdowns: absent in the default translation mode, present in the side-by-side property grid", () => {
+test("view switcher: absent in the default translation mode, present in the side-by-side property grid", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
   creator.JSON = JSON.parse(JSON.stringify(gridJSON));
   creator.activeTab = "translation";
   const model = getPlugin(creator).model;
-  // The default mode shows the languages matrix; no locale dropdowns.
+  // The default mode shows the languages matrix; no view switcher, no locale dropdowns.
   expect(model.settingsSurvey.getQuestionByName("locales")).toBeTruthy();
+  expect(model.settingsSurvey.getQuestionByName("viewMode")).toBeFalsy();
   expect(model.settingsSurvey.getQuestionByName("sourceLocale")).toBeFalsy();
 
   const sideBySideCreator = createGridCreator();
   const sideBySideModel = getModel(sideBySideCreator);
   expect(sideBySideModel.settingsSurvey.getQuestionByName("locales")).toBeFalsy();
+  expect(sideBySideModel.settingsSurvey.getQuestionByName("viewMode")).toBeTruthy();
   expect(sideBySideModel.settingsSurvey.getQuestionByName("sourceLocale")).toBeTruthy();
   expect(sideBySideModel.settingsSurvey.getQuestionByName("targetLocale")).toBeTruthy();
 });
@@ -319,8 +322,8 @@ function createFormsCreator(json: any = gridJSON): CreatorTester {
   creator.activeTab = "translation";
   return creator;
 }
-function switchView(creator: CreatorTester, view: "forms" | "grid"): void {
-  getModel(creator).view = view;
+function switchView(creator: CreatorTester, view: string): void {
+  getModel(creator).settingsSurvey.getQuestionByName("viewMode").value = view;
 }
 // Records the grid cell questions whose input focus is requested during the callback.
 function trackCommentFocus(): { focused: Array<Question>, restore: () => void } {
