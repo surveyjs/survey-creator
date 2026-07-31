@@ -13,7 +13,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private mergeLocaleWithDefaultAction: Action;
   private importCsvAction: Action;
   private exportCsvAction: Action;
-  private machineTranslationAction: Action;
+  private translateStringsAction: Action;
   private sidebarTab: SidebarPageModel;
   private _showOneCategoryInPropertyGrid: boolean = true;
   private tabControlModel: TabControlModel;
@@ -174,11 +174,13 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     }
     this.importCsvAction.visible = true;
     this.exportCsvAction.visible = true;
-    this.machineTranslationAction.visible = this.creator.getHasMachineTranslation();
+    // The dialog is useful even without a machine-translation handler: it lists the strings
+    // left to translate and hosts the CSV import/export actions.
+    this.translateStringsAction.visible = true;
     // A fresh updater on every activation: it must track the locales of the model created
     // above - the previous model was disposed with the tab and no longer notifies.
     // Assigning a new ComputedUpdater disposes the previous one (see processComputedUpdater).
-    this.machineTranslationAction.enabled = <any>(new ComputedUpdater(() => {
+    this.translateStringsAction.enabled = <any>(new ComputedUpdater(() => {
       if (this.creator.readOnly) return false;
       // There must be something to translate into: an explicit target language that
       // differs from the source one.
@@ -237,7 +239,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.visible = false;
     this.importCsvAction.visible = false;
     this.exportCsvAction.visible = false;
-    this.machineTranslationAction.visible = false;
+    this.translateStringsAction.visible = false;
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     this.creator.sidebar.header.reset();
     return true;
@@ -337,21 +339,21 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.exportCsvAction.visible = false;
     items.push(this.exportCsvAction);
 
-    this.machineTranslationAction = new Action({
-      id: "svc-translation-machine",
+    this.translateStringsAction = new Action({
+      id: "svc-translation-dialog",
       iconName: "icon-language",
       iconSize: "auto",
-      locTitleName: "ed.translateUsigAI",
-      locTooltipName: "ed.translateUsigAI",
+      locTitleName: "ed.translateRemainingStrings",
+      locTooltipName: "ed.translateRemainingStrings",
       visible: false,
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
-        this.showSideBySideMachineTranslation();
+        this.showTranslateStringsDialog();
       }
     });
-    this.machineTranslationAction.enabled = <any>(new ComputedUpdater(() => !this.creator.readOnly));
-    items.push(this.machineTranslationAction);
+    this.translateStringsAction.enabled = <any>(new ComputedUpdater(() => !this.creator.readOnly));
+    items.push(this.translateStringsAction);
 
     return items;
   }
@@ -446,7 +448,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     const locale = this.creator.survey.locale;
     return !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
   }
-  private showSideBySideMachineTranslation(): void {
+  private showTranslateStringsDialog(): void {
     const model = <TranslationSideBySide>this.model;
     if (!model) return;
     const editor = model.createTranslationEditor(model.targetLocale || "");

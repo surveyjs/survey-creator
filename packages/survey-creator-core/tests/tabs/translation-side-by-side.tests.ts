@@ -828,14 +828,12 @@ test("survey strings dialog model: undoable edits that mirror into the panes", (
   grid.dispose();
 });
 
-test("Auto-translate All action is disabled while the target language is empty or equals the source language", () => {
-  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
-  // The handler enables machine translation (getHasMachineTranslation) before the tab activates.
-  creator.onMachineTranslate.add(() => { });
-  creator.JSON = JSON.parse(JSON.stringify(sideBySideJSON));
-  creator.activeTab = "translation";
+test("Translate remaining strings action is disabled while the target language is empty or equals the source language", () => {
+  // No machine-translation handler: the action opens the dialog anyway, so it is shown and
+  // follows the same enabled rule.
+  const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const action = creator.toolbar.getActionById("svc-translation-machine");
+  const action = creator.toolbar.getActionById("svc-translation-dialog");
   expect(action.visible).toBeTruthy();
   // The survey locale "de" makes the default target; the source is the default language.
   expect(model.targetLocale).toBe("de");
@@ -863,4 +861,30 @@ test("Auto-translate All action is disabled while the target language is empty o
   expect(action.enabled).toBeTruthy();
   newModel.targetLocale = "";
   expect(action.enabled).toBeFalsy();
+});
+
+test("Translate remaining strings action without a machine-translation handler: dialog has no machine item, keeps from-locale and CSV actions", () => {
+  const creator = createSideBySideCreator();
+  expect(creator.getHasMachineTranslation()).toBeFalsy();
+  const action = creator.toolbar.getActionById("svc-translation-dialog");
+  expect(action.visible).toBeTruthy();
+  const model = getModel(creator);
+  const editor = model.createTranslationEditor(model.targetLocale);
+  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  expect(actions.map(item => item.id)).toEqual(["svc-translation-fromlocale", "svc-translation-import", "svc-translation-export"]);
+  editor.dispose();
+});
+
+test("Translate remaining strings action with a machine-translation handler: dialog has the machine item", () => {
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+  creator.onMachineTranslate.add(() => { });
+  creator.JSON = JSON.parse(JSON.stringify(sideBySideJSON));
+  creator.activeTab = "translation";
+  const action = creator.toolbar.getActionById("svc-translation-dialog");
+  expect(action.visible).toBeTruthy();
+  const model = getModel(creator);
+  const editor = model.createTranslationEditor(model.targetLocale);
+  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  expect(actions.map(item => item.id)).toEqual(["svc-translation-fromlocale", "svc-translation-machine", "svc-translation-import", "svc-translation-export"]);
+  editor.dispose();
 });
