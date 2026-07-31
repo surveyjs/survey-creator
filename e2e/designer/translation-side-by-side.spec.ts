@@ -418,3 +418,55 @@ test.describe(title + " containers", () => {
     await expect(page.locator(".st-side-by-side__target").getByText("Panelbeschreibung")).toBeVisible();
   });
 });
+
+test.describe(title + " languages matrix", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto(url);
+  });
+
+  test("click a language in the matrix to switch the target; the dropdown follows", async ({ page }) => {
+    await openSideBySideTranslation(page);
+    const matrix = page.locator(".svc-side-bar [data-name=languages]");
+    await expect(matrix).toBeVisible();
+    // The default row shows the total only; a language row shows its translated/total progress.
+    await expect(matrix.locator("tr").filter({ hasText: "Default (English)" })).toContainText(/\d+ strings/);
+    await expect(matrix.locator("tr").filter({ hasText: "Deutsch" })).toContainText(/1\/\d+/);
+    // The target pane currently shows the German strings.
+    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
+    // Clicking the default language retargets the editor and syncs the target dropdown.
+    await matrix.getByRole("button", { name: "Default (English)" }).click();
+    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Question 1")).toBeVisible();
+    await expect(page.locator(".svc-side-bar .spg-question[data-name=targetLocale]")).toContainText("Default (English)");
+    // And back to German through its row link.
+    await matrix.getByRole("button", { name: "Deutsch" }).click();
+    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
+    await expect(page.locator(".svc-side-bar .spg-question[data-name=targetLocale]")).toContainText("Deutsch");
+  });
+
+  test("delete a language with confirmation", async ({ page }) => {
+    await openSideBySideTranslation(page);
+    const matrix = page.locator(".svc-side-bar [data-name=languages]");
+    const deRow = matrix.locator("tr").filter({ hasText: "Deutsch" });
+    await expect(deRow).toBeVisible();
+    await deRow.hover();
+    await deRow.getByRole("button", { name: "Delete" }).click();
+    const dialog = page.locator(".svc-creator-confirm-dialog");
+    await expect(dialog).toBeVisible();
+    await expect(dialog).toContainText("Deutsch");
+    // Cancel keeps the language and its strings.
+    await dialog.getByRole("button", { name: "Cancel" }).click();
+    await expect(dialog).toHaveCount(0);
+    await expect(deRow).toBeVisible();
+    expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1");
+    // Apply removes the strings and retargets the editor to the default language.
+    await deRow.hover();
+    await deRow.getByRole("button", { name: "Delete" }).click();
+    await page.locator(".svc-creator-confirm-dialog").getByRole("button", { name: "Delete" }).click();
+    await expect(matrix.locator("tr").filter({ hasText: "Deutsch" })).toHaveCount(0);
+    await expect(page.locator(".svc-side-bar .spg-question[data-name=targetLocale]")).toContainText("Default (English)");
+    const resultJson = await getJSON(page);
+    expect(resultJson.pages[0].elements[0].title.de).toBeUndefined();
+    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Question 1")).toBeVisible();
+  });
+});

@@ -1,7 +1,8 @@
 import {
   Action, AdaptiveActionContainer, Base, EventBase, IDialogOptions, ILocalizableString, ItemValue,
-  LocalizableString, PageModel, PanelModel, PopupBaseViewModel, Question, QuestionButtonGroupModel,
-  QuestionDropdownModel, QuestionMatrixDropdownModel, SurveyModel, property,
+  JsonObjectProperty, LocalizableString, PageModel, PanelModel, PopupBaseViewModel, Question,
+  QuestionButtonGroupModel, QuestionDropdownModel, QuestionMatrixDropdownModel,
+  QuestionMatrixDynamicModel, SurveyModel, property,
   settings as surveySettings, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
@@ -11,7 +12,10 @@ import { ITranslationDropdownOwner, translationDropdownComponentName } from "./t
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { StringEditorConnector } from "../string-editor";
-import { Translation, TranslationGroup, TranslationItem } from "./translation";
+import { QuestionLinkValueModel } from "../link-value";
+import { showConfirmDialog } from "../../utils/confirm-dialog";
+import { updateMatixActionsAppearance } from "../../utils/actions";
+import { ITranslationLocales, Translation, TranslationGroup, TranslationItem } from "./translation";
 
 // The default locale is stored as "" on the model; the settings survey dropdowns need a
 // non-empty value for it (an empty dropdown value would render as "no selection").
@@ -19,6 +23,31 @@ const defaultLocaleSettingValue = "default";
 // A non-breaking space: rendered instead of an empty header string of the source pane to keep
 // the row one text line high (see setupSourceEmptySpaces).
 const emptySpaceText = "\u00A0";
+
+// The owner of the progress-counting tree of the languages matrix: the whole-survey
+// used-strings filter (showAllStrings = false) of the base class. A separate owner is needed
+// because the side-by-side model's own root uses different filters - all strings in the forms
+// view, an optional single-page scope in the grid view.
+class TranslationUsedStringsOwner implements ITranslationLocales {
+  constructor(private owner: TranslationSideBySide) { }
+  public get locales(): Array<string> { return []; }
+  public get showAllStrings(): boolean { return false; }
+  public get readOnly(): boolean { return true; }
+  public getLocaleName(loc: string): string { return this.owner.getLocaleName(loc); }
+  public availableTranlationsChangedCallback: () => void;
+  public tranlationChangedCallback: (locale: string, name: string, value: string, context: any) => void;
+  public translateItemAfterRender(): void { }
+  public fireOnObjCreating(): void { }
+  public removeLocale(): void { }
+  public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean): boolean {
+    return this.owner.canShowProperty(obj, prop, isEmpty, isShowing);
+  }
+  public getEditLocale(): string { return ""; }
+  public get isEditMode(): boolean { return false; }
+  public getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string): string {
+    return newValue;
+  }
+}
 
 export class TranslationSideBySide extends Translation implements ITranslationDropdownOwner {
   @property() selectedPageName: string;
@@ -88,6 +117,40 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
         this.targetLocale = this.getLocaleFromSettingValue(options.value);
       }
     });
+    res.onMatrixCellCreated.add((sender, options) => {
+      if (options.question.name !== "languages" || options.column.name !== "displayName") return;
+      const cellQuestion = <QuestionLinkValueModel>options.cell.question;
+      cellQuestion.allowClear = false;
+      cellQuestion.showClear = false;
+      const matrix = <QuestionMatrixDynamicModel>options.question;
+      const row = options.row;
+      cellQuestion.linkClickCallback = () => {
+        // Resolved at click time: a row can be reused for a different locale after a refresh.
+        const locale = this.getLanguagesRowLocale(matrix, row);
+        if (locale !== undefined)this.selectLanguage(locale);
+      };
+    });
+    res.onGetMatrixRowActions.add((sender, options) => {
+      if (options.question.name !== "languages") return;
+      const matrix = <QuestionMatrixDynamicModel>options.question;
+      const row = options.row;
+      const locale = this.getLanguagesRowLocale(matrix, row);
+      // The default language is the reference every translation is measured against - no delete.
+      if (!locale || this.readOnly) return;
+      options.actions.push(new Action({
+        id: "delete-language",
+        iconName: "icon-delete",
+        iconSize: "auto",
+        tooltip: editorLocalization.getString("pe.delete"),
+        showTitle: false,
+        location: "end",
+        action: () => {
+          const currentLocale = this.getLanguagesRowLocale(matrix, row);
+          if (!!currentLocale)this.deleteLanguage(currentLocale);
+        }
+      }));
+      updateMatixActionsAppearance(options.actions);
+    });
     return res;
   }
   private getSideBySideSettingsSurveyJSON(): any {
@@ -113,6 +176,20 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
           name: "targetLocale",
           title: editorLocalization.getString("ed.translationTargetLanguage"),
           allowClear: false
+        },
+        {
+          type: "matrixdynamic",
+          name: "languages",
+          title: editorLocalization.getString("ed.translationLanguages"),
+          titleLocation: "top",
+          columns: [
+            { name: "displayName", cellType: "linkvalue" },
+            { name: "progress", cellType: "expression", expression: "{row.progress}" }
+          ],
+          showHeader: false,
+          allowAddRows: false,
+          allowRemoveRows: false,
+          rowCount: 0
         }
       ]
     };
@@ -131,9 +208,159 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("targetLocale"), locales, target, source);
       const viewQuestion = survey.getQuestionByName("viewMode");
       if (!!viewQuestion) viewQuestion.value = this.view;
+      this.updateLanguagesMatrixSelection();
     } finally {
       this._updatingSettingsSurvey = false;
     }
+  }
+  public get languagesQuestion(): QuestionMatrixDynamicModel {
+    const survey = this.settingsSurvey;
+    return !!survey ? <QuestionMatrixDynamicModel>survey.getQuestionByName("languages") : undefined;
+  }
+  // The matrix row set: the default locale ("") first, then every locale with at least one
+  // stored string. No synthetic rows - a freshly targeted language appears only once its
+  // first string is stored (the target dropdown already shows what is being translated).
+  public getLanguages(): Array<string> {
+    const res: Array<string> = [""];
+    if (!this.survey) return res;
+    this.survey.getUsedLocales().forEach(loc => {
+      if (!loc || loc === surveyLocalization.defaultLocale || res.indexOf(loc) >= 0) return;
+      if (!!this.localeInitialVisibleCallback && !this.localeInitialVisibleCallback(loc)) return;
+      res.push(loc);
+    });
+    return res;
+  }
+  // The whole-survey used-strings items: the progress denominator of the languages matrix.
+  // Never scoped by the grid view's page filter and independent of the view's strings filter.
+  public getUsedStringsItems(): Array<TranslationItem> {
+    const root = new TranslationGroup("survey", this.survey, new TranslationUsedStringsOwner(this));
+    root.setAsRoot();
+    root.reset();
+    return root.allLocItems;
+  }
+  public isItemTranslated(item: TranslationItem, locale: string): boolean {
+    return !!item.locString.getLocaleText(locale);
+  }
+  public getTranslationProgress(locale: string, items?: Array<TranslationItem>): { translated: number, total: number } {
+    const usedItems = items || this.getUsedStringsItems();
+    let translated = 0;
+    usedItems.forEach(item => {
+      if (this.isItemTranslated(item, locale)) translated++;
+    });
+    return { translated: translated, total: usedItems.length };
+  }
+  public updateLanguagesMatrix(): void {
+    const question = this.languagesQuestion;
+    if (!question || this.isDisposed || !this.survey) return;
+    const items = this.getUsedStringsItems();
+    question.value = this.getLanguages().map(loc => {
+      return {
+        name: loc,
+        displayName: this.getLocaleName(loc),
+        progress: this.getLanguageProgressText(loc, items)
+      };
+    });
+    this.updateLanguagesMatrixSelection();
+  }
+  // The default language is the reference - a progress value is meaningless there, it shows
+  // the total only.
+  private getLanguageProgressText(locale: string, items: Array<TranslationItem>): string {
+    if (!locale) {
+      return editorLocalization.getString("ed.translationStringsCount")["format"](items.length);
+    }
+    const progress = this.getTranslationProgress(locale, items);
+    return progress.translated + "/" + progress.total;
+  }
+  // The current target's row shows as selected (the linkvalue cell's isSelected drives the css).
+  private updateLanguagesMatrixSelection(): void {
+    const question = this.languagesQuestion;
+    if (!question) return;
+    const val = question.value;
+    if (!Array.isArray(val) || val.length === 0) return;
+    const target = this.targetLocale || "";
+    const rows = question.visibleRows;
+    for (let i = 0; i < rows.length && i < val.length; i++) {
+      const cellQuestion = <QuestionLinkValueModel>rows[i].cells[0].question;
+      if (!!cellQuestion && cellQuestion.getType() === "linkvalue") {
+        cellQuestion.isSelected = (val[i].name || "") === target;
+      }
+    }
+  }
+  private getLanguagesRowLocale(matrix: QuestionMatrixDynamicModel, row: any): string {
+    const index = matrix.visibleRows.indexOf(row);
+    const val = matrix.value;
+    if (index < 0 || !Array.isArray(val) || index >= val.length || !val[index]) return undefined;
+    return val[index].name || "";
+  }
+  // A matrix language click behaves exactly like picking the language in the target dropdown;
+  // per the dropdowns' mutual-exclusion rule, taking over the source's language resets the
+  // source to the default one.
+  public selectLanguage(locale: string): void {
+    if (this.isDisposed) return;
+    if (!!locale && (this.sourceLocale || "") === locale) {
+      this.sourceLocale = "";
+    }
+    this.targetLocale = locale;
+  }
+  public deleteLanguage(locale: string): void {
+    if (!locale || this.isDisposed || !surveySettings.showDialog) return;
+    showConfirmDialog(<any>this.options, {
+      title: editorLocalization.getString("ed.translationDeleteLanguageTitle"),
+      message: editorLocalization.getString("ed.translationDeleteLanguageMessage")["format"](this.getLocaleName(locale)),
+      iconName: "icon-warning-24x24",
+      category: "danger",
+      showCloseButton: false,
+      applyText: editorLocalization.getString("pe.delete"),
+      cancelText: surveyLocalization.getString("cancel"),
+      onApply: () => {
+        this.deleteLanguageCore(locale);
+        return true;
+      },
+      onCancel: () => { }
+    });
+  }
+  private deleteLanguageCore(locale: string): void {
+    // The deletion always covers the whole survey; the grid view's root can be scoped to a
+    // single page, so it goes through a temporary unscoped model then (like the CSV export).
+    if (!!this.filteredPage) {
+      this.runWithoutSurveyReaction(() => {
+        const translation = new Translation(this.survey, this.options, false);
+        translation.doUndoableAction = (action, title) => this.doUndoableAction(action, title);
+        translation.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
+        translation.deleteLocaleStrings(locale);
+        translation.dispose();
+      });
+      this.reset();
+    } else {
+      this.deleteLocaleStrings(locale);
+    }
+    if ((this.targetLocale || "") === locale) {
+      this.targetLocale = "";
+    }
+    if (!this.isSideBySideGrid) {
+      this.rebuildInstances();
+    }
+  }
+  // Bulk write operations (CSV import, apply-translations, locale deletion) run through
+  // runWithoutSurveyReaction and refresh the languages matrix once via the reset that follows;
+  // a single string edit refreshes it immediately.
+  private _bulkTextAction: boolean = false;
+  public runWithoutSurveyReaction(fn: () => void): void {
+    const wasBulk = this._bulkTextAction;
+    this._bulkTextAction = true;
+    try {
+      super.runWithoutSurveyReaction(fn);
+    } finally {
+      this._bulkTextAction = wasBulk;
+    }
+  }
+  public performItemLocTextAction(item: TranslationItem, locale: string, newText: string): void {
+    super.performItemLocTextAction(item, locale, newText);
+    if (!this._bulkTextAction)this.updateLanguagesMatrix();
+  }
+  public reset(alwaysReset: boolean = true): void {
+    super.reset(alwaysReset);
+    this.updateLanguagesMatrix();
   }
   // Each dropdown's list hides the locale currently selected in the other one, except its own
   // selection - by default both sides can be the default language.
@@ -320,6 +547,12 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   // undo/redo rollbacks or any external modification.
   public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
     if (this._syncing || this.isDisposed) return;
+    this.onCreatorSurveyPropertyChangedCore(obj, propName);
+    // Any real-survey change can move the counters, change the denominator (structural
+    // changes) or add/remove a locale row (an undo restoring/removing the last string).
+    this.updateLanguagesMatrix();
+  }
+  private onCreatorSurveyPropertyChangedCore(obj: Base, propName: string): void {
     if (obj === this.survey && propName === "locale") {
       this.followSurveyLocale();
       return;
