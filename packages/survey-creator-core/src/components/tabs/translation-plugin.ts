@@ -91,8 +91,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     };
   }
   public activate(): void {
-    // The property grid keeps its standard width in both modes; compactMode is never
-    // touched by this tab.
     if (this.isSideBySide) {
       this.activateSideBySide();
       return;

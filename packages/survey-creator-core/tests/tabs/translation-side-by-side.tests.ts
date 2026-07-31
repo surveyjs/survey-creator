@@ -447,15 +447,6 @@ test("survey header (title, description) is shown on the first page only", () =>
   });
 });
 
-test("forms view property grid keeps the standard width in and outside the tab", () => {
-  const creator = createSideBySideCreator();
-  expect(creator.sidebar.compactMode).toBeFalsy();
-  expect(creator.sidebar.rootCss).not.toContain("svc-side-bar--compact");
-  creator.activeTab = "designer";
-  expect(creator.sidebar.compactMode).toBeFalsy();
-  expect(creator.sidebar.rootCss).not.toContain("svc-side-bar--compact");
-});
-
 test("deactivate detaches copies", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);

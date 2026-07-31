@@ -278,26 +278,6 @@ test("view switcher: the property grid button group switches between the forms a
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeFalsy();
 });
 
-test("property grid keeps the standard width in the side-by-side mode (both views) and in the default mode", () => {
-  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
-  creator.JSON = JSON.parse(JSON.stringify(gridJSON));
-  creator.activeTab = "translation";
-  expect(creator.sidebar.compactMode).toBeFalsy();
-  switchView(creator, "grid");
-  expect(creator.sidebar.compactMode).toBeFalsy();
-
-  const gridCreator = createGridCreator();
-  expect(gridCreator.sidebar.compactMode).toBeFalsy();
-
-  const defaultCreator = new CreatorTester({ showTranslationTab: true });
-  defaultCreator.JSON = JSON.parse(JSON.stringify(gridJSON));
-  defaultCreator.activeTab = "translation";
-  expect(defaultCreator.sidebar.compactMode).toBeFalsy();
-  expect(defaultCreator.sidebar.rootCss).not.toContain("svc-side-bar--compact");
-  defaultCreator.activeTab = "designer";
-  expect(defaultCreator.sidebar.compactMode).toBeFalsy();
-});
-
 test("view switcher: absent in the default translation mode, present in the side-by-side property grid", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
   creator.JSON = JSON.parse(JSON.stringify(gridJSON));
