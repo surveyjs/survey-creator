@@ -438,6 +438,10 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       survey.showNavigationButtons = false;
       survey.showProgressBar = false;
       survey.showTOC = false;
+      // The advanced header is a visual cover whose cells shrink-wrap the title, leaving
+      // no room for the survey translate action next to it. The panes always render the
+      // basic header - the cover design is not what is being translated.
+      survey.headerView = "basic";
       // The survey header (title, description, logo) is survey-level content, not page
       // content - the panes show it above the first page only instead of on every page.
       this.showSurveyHeaderOnFirstPageOnly(survey);
@@ -471,6 +475,12 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     const basePropertyVisible = survey.isPropertyVisible.bind(survey);
     survey.isPropertyVisible = (propName: string): boolean => {
       if (headerProperties.indexOf(propName) >= 0 && !survey.getPropertyValue("showSurveyHeader")) return false;
+      // The logo is an image, not an inline-editable string (its per-locale URL is edited
+      // through the survey strings dialog), and in design mode an empty logo would even
+      // render as a src-less placeholder image. The panes never show it: this keeps the
+      // full title row for the title text and its translate action, which sits at the
+      // pane's right edge as in the page/question title rows.
+      if (propName === "logo") return false;
       return basePropertyVisible(propName);
     };
     const updateFlag = (): void => {

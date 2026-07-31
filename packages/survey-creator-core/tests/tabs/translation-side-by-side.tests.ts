@@ -425,14 +425,13 @@ test("changing the source pane page syncs the target pane and the page dropdown"
   expect(model.targetSurvey.currentPage.name).toBe("page1");
 });
 
-test("survey header (title, description, logo) is shown on the first page only", () => {
+test("survey header (title, description) is shown on the first page only", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   [model.sourceSurvey, model.targetSurvey].forEach(survey => {
     expect(survey.renderedHasHeader).toBeTruthy();
     expect(survey.renderedHasTitle).toBeTruthy();
     expect(survey.renderedHasDescription).toBeTruthy();
-    expect(survey.renderedHasLogo).toBeTruthy();
   });
   model.sourceSurvey.currentPage = model.sourceSurvey.getPageByName("page2");
   // The target pane follows the source page change through the model.
@@ -441,7 +440,6 @@ test("survey header (title, description, logo) is shown on the first page only",
     expect(survey.renderedHasHeader).toBeFalsy();
     expect(survey.renderedHasTitle).toBeFalsy();
     expect(survey.renderedHasDescription).toBeFalsy();
-    expect(survey.renderedHasLogo).toBeFalsy();
   });
   model.sourceSurvey.currentPage = model.sourceSurvey.getPageByName("page1");
   [model.sourceSurvey, model.targetSurvey].forEach(survey => {
@@ -746,6 +744,36 @@ test("source pane empty space for titles with a text: shown as-is, no blank spac
   const model = getModel(creator);
   expect(model.sourceSurvey.locTitle.renderedHtml).toBe("Survey title");
   expect(model.sourceSurvey.pages[0].locTitle.renderedHtml).toBe("Page 1 title");
+});
+
+test("panes always render the basic survey header", () => {
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  json.headerView = "advanced";
+  const creator = createSideBySideCreator(json);
+  const model = getModel(creator);
+  // The advanced header cover shrink-wraps the title, leaving no room for the survey
+  // translate action; the real survey keeps its header view.
+  expect(model.sourceSurvey.findLayoutElement("advanced-header")).toBeFalsy();
+  expect(model.targetSurvey.findLayoutElement("advanced-header")).toBeFalsy();
+  expect(creator.survey.findLayoutElement("advanced-header")).toBeTruthy();
+});
+
+test("panes never render the survey logo", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  // Without a logo the design-mode survey would still render it as the designer's
+  // placeholder area - a broken src-less image in the panes.
+  expect(model.sourceSurvey.renderedHasLogo).toBeFalsy();
+  expect(model.targetSurvey.renderedHasLogo).toBeFalsy();
+  // With a logo it would squeeze the title row and push the survey translate action away
+  // from the pane's right edge. The logo URL is still translatable through the survey
+  // strings dialog - the panes just do not display the image.
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  json.logo = "https://example.com/logo.png";
+  const creatorWithLogo = createSideBySideCreator(json);
+  const modelWithLogo = getModel(creatorWithLogo);
+  expect(modelWithLogo.sourceSurvey.renderedHasLogo).toBeFalsy();
+  expect(modelWithLogo.targetSurvey.renderedHasLogo).toBeFalsy();
 });
 
 test("element strings dialog models: survey/page/panel grids cover own strings only, without nested elements", () => {

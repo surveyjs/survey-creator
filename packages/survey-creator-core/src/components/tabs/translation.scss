@@ -262,6 +262,43 @@ td.st-table__cell:first-of-type {
   border-right: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
 }
 
+// The survey title row of the target pane: the translate action sits at the pane's right
+// edge, on the first title line - like the page/question translate actions - instead of
+// right after the title text, where a growing title would run into it. The action bar takes
+// the row space left of the title and pins the action at its far end.
+.st-side-by-side {
+  .sd-header__text .sv-title-actions {
+    align-items: flex-start;
+
+    .sv-title-actions__title {
+      flex: 0 1 auto;
+    }
+
+    .sv-action-title-bar {
+      flex: 1 1 auto;
+      justify-content: flex-end;
+    }
+  }
+}
+
+// A translated string can hold a long unbreakable word (a URL, an identifier). Title rows size
+// to their content, so such a word would expand the row beyond the pane, which clips it - and
+// the translate action rendered after the title text ends up outside the visible area.
+// "anywhere" (unlike "break-word") also shrinks the min-content size, so the word cannot
+// propagate its width up the flex chain of the survey header.
+.st-side-by-side {
+  .sd-title,
+  .sd-description {
+    overflow-wrap: anywhere;
+
+    // The browser default stylesheet gives [contenteditable] elements (the target pane's
+    // string editor) an overflow-wrap of its own, which blocks the inherited value.
+    .sv-string-editor {
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
 // The signature pad placeholder is click-through in the default theme (the user draws on the
 // canvas beneath it). The target pane renders a string editor inside it, so clicks must reach it.
 .st-side-by-side__target {
