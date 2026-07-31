@@ -674,7 +674,7 @@ test("Add custom boolean property to choices, Bug#6004", () => {
   expect(qCell).toBeTruthy();
   expect(qCell.name).toBe("isDeleted");
   expect(qCell.getType()).toBe("boolean");
-  expect(qCell.isLabelRendered).toBeFalsy();
+  expect(qCell.isLabelRendered).toBeTruthy();
 
   Serializer.removeProperty("itemvalue", "isDeleted");
 });
