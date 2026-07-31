@@ -49,6 +49,11 @@ class TranslationUsedStringsOwner implements ITranslationLocales {
   }
 }
 
+// The translation state of a target-pane element for the current target language:
+// "none" - no used strings with a stored text (nothing to translate), "untranslated" - at
+// least one used string has no stored target-locale text, "translated" - all of them do.
+export type TranslationElementState = "none" | "untranslated" | "translated";
+
 export class TranslationSideBySide extends Translation implements ITranslationDropdownOwner {
   @property() selectedPageName: string;
   @property() sourceSurvey: SurveyModel;
@@ -233,10 +238,13 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   // The whole-survey used-strings items: the progress denominator of the languages matrix.
   // Never scoped by the grid view's page filter and independent of the view's strings filter.
   public getUsedStringsItems(): Array<TranslationItem> {
+    return this.createUsedStringsRoot().allLocItems;
+  }
+  private createUsedStringsRoot(): TranslationGroup {
     const root = new TranslationGroup("survey", this.survey, new TranslationUsedStringsOwner(this));
     root.setAsRoot();
     root.reset();
-    return root.allLocItems;
+    return root;
   }
   public isItemTranslated(item: TranslationItem, locale: string): boolean {
     return !!item.locString.getLocaleText(locale);
@@ -356,11 +364,94 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   }
   public performItemLocTextAction(item: TranslationItem, locale: string, newText: string): void {
     super.performItemLocTextAction(item, locale, newText);
-    if (!this._bulkTextAction)this.updateLanguagesMatrix();
+    if (!this._bulkTextAction) {
+      this.updateLanguagesMatrix();
+      this.updateElementTranslationStates();
+    }
   }
   public reset(alwaysReset: boolean = true): void {
     super.reset(alwaysReset);
     this.updateLanguagesMatrix();
+    this.updateElementTranslationStates();
+  }
+  // The forms view's per-element indicator: every target-pane element with a title row (the
+  // survey, pages, panels with strings, questions) shows the translation state of the strings
+  // its translate action covers - the element's own strings, including the ones reachable
+  // only through its strings dialog (matrix column choices, validators, survey-level strings),
+  // but not the nested elements, which show indicators of their own. States are keyed by the
+  // element type and name, so a pane copy and its real-survey element resolve to the same entry.
+  private elementStates: { [key: string]: TranslationElementState } = {};
+  private elementStateActions: { [key: string]: Action } = {};
+  public getElementTranslationState(element: Base): TranslationElementState {
+    const key = this.getElementStateKey(element);
+    return (!!key ? this.elementStates[key] : undefined) || "none";
+  }
+  private getElementStateKey(element: any): string {
+    if (!element) return undefined;
+    if (element instanceof SurveyModel) return "survey";
+    if (element.isPage) return "page:" + element.name;
+    if (element.isPanel) return "panel:" + element.name;
+    if (element.isQuestion) return "question:" + element.name;
+    return undefined;
+  }
+  public updateElementTranslationStates(): void {
+    if (this.isDisposed || this.isSideBySideGrid || !this.survey) return;
+    this.elementStates = this.computeElementStates();
+    for (const key in this.elementStateActions) {
+      this.applyElementStateToAction(this.elementStateActions[key], this.elementStates[key] || "none");
+    }
+  }
+  // Only the used strings with a stored text count: an element whose items exist merely
+  // through value/name fallbacks (a freshly added question with no texts) has nothing to
+  // translate. An element's state covers exactly the strings its dialog edits: its own
+  // strings plus the non-element groups below it (matrix column choices, validators, ...).
+  // Nested pages, panels and questions carry indicators of their own, so their counts do
+  // not roll up into the parent.
+  private computeElementStates(): { [key: string]: TranslationElementState } {
+    const states: { [key: string]: TranslationElementState } = {};
+    const locale = this.targetLocale || "";
+    const calc = (group: TranslationGroup): { translated: number, total: number } => {
+      const counts = { translated: 0, total: 0 };
+      group.locItems.forEach(item => {
+        if ((<LocalizableString>item.locString).isEmpty) return;
+        counts.total++;
+        if (this.isItemTranslated(item, locale)) counts.translated++;
+      });
+      group.groups.forEach(child => {
+        const childCounts = calc(child);
+        if (!this.getElementStateKey(child.obj)) {
+          counts.translated += childCounts.translated;
+          counts.total += childCounts.total;
+        }
+      });
+      const key = this.getElementStateKey(group.obj);
+      if (!!key) {
+        states[key] = this.getStateFromCounts(counts);
+      }
+      return counts;
+    };
+    calc(this.createUsedStringsRoot());
+    return states;
+  }
+  private getStateFromCounts(counts: { translated: number, total: number }): TranslationElementState {
+    if (counts.total === 0) return "none";
+    // With the default language as the target every used string has a text by definition -
+    // the warning state is meaningless there.
+    if (!!this.targetLocale && counts.translated < counts.total) return "untranslated";
+    return "translated";
+  }
+  private static elementStateAppearance = {
+    none: { iconName: "icon-remove_16x16", tooltip: "ed.translationStateNothingToTranslate" },
+    untranslated: { iconName: "icon-warning-24x24", tooltip: "ed.translationStateHasUntranslated" },
+    translated: { iconName: "icon-check-16x16", tooltip: "ed.translationStateAllTranslated" }
+  };
+  // The state icon replaces the translate action's language icon; the action title stays the
+  // stable part of the tooltip (and of the accessible name), the state text is appended.
+  private applyElementStateToAction(action: Action, state: TranslationElementState): void {
+    const info = TranslationSideBySide.elementStateAppearance[state];
+    action.iconName = info.iconName;
+    action.tooltip = action.title + " - " + editorLocalization.getString(info.tooltip);
+    action.css = "svc-translation-state svc-translation-state--" + state;
   }
   // Each dropdown's list hides the locale currently selected in the other one, except its own
   // selection - by default both sides can be the default language.
@@ -401,6 +492,9 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       }
       this.updateInstanceLocales();
       this.updateSettingsSurveyValues();
+      if (name === "targetLocale") {
+        this.updateElementTranslationStates();
+      }
     }
     if (name === "selectedPageName") {
       this.updateInstancePages();
@@ -530,6 +624,9 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       if (!this.root) {
         this.reset();
       }
+      // The indicator actions of the fresh copies read the per-element states at creation
+      // time - compute them before the title actions are set up.
+      this.updateElementTranslationStates();
       const json = this.survey.toJSON();
       this.sourceSurvey = this.createInstance(json, "translation_source");
       this.targetSurvey = this.createInstance(json, "translation_target");
@@ -551,6 +648,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     // Any real-survey change can move the counters, change the denominator (structural
     // changes) or add/remove a locale row (an undo restoring/removing the last string).
     this.updateLanguagesMatrix();
+    this.updateElementTranslationStates();
   }
   private onCreatorSurveyPropertyChangedCore(obj: Base, propName: string): void {
     if (obj === this.survey && propName === "locale") {
@@ -853,23 +951,25 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     survey.onGetQuestionTitleActions.add((_, options) => {
       if (isContentElement(options.question)) return;
       options.actions.push(this.createTranslateAction("svc-translate-question", "ed.translationQuestionStrings",
-        () => this.showQuestionStringsDialog(options.question)));
+        () => this.showQuestionStringsDialog(options.question), options.question));
     });
     survey.onGetPageTitleActions.add((_, options) => {
       options.actions.push(this.createTranslateAction("svc-translate-page", "ed.translationPageStrings",
-        () => this.showPageStringsDialog(options.page)));
+        () => this.showPageStringsDialog(options.page), options.page));
     });
     survey.onGetPanelTitleActions.add((_, options) => {
       if (isContentElement(options.panel)) return;
       if (!this.panelHasTranslatableStrings(options.panel)) return;
       options.actions.push(this.createTranslateAction("svc-translate-panel", "ed.translationPanelStrings",
-        () => this.showPanelStringsDialog(options.panel)));
+        () => this.showPanelStringsDialog(options.panel), options.panel));
     });
     this.addSurveyTitleTranslateAction(survey);
   }
-  private createTranslateAction(id: string, localeStrName: string, doAction: () => void): Action {
+  // The translate action doubles as the element's translation state indicator: its icon,
+  // css modifier and tooltip suffix follow the state of the element's string subtree.
+  private createTranslateAction(id: string, localeStrName: string, doAction: () => void, paneElement: Base): Action {
     const title = editorLocalization.getString(localeStrName);
-    return new Action({
+    const action = new Action({
       id: id,
       iconName: "icon-language",
       iconSize: "auto",
@@ -878,6 +978,12 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       showTitle: false,
       action: doAction
     });
+    const key = this.getElementStateKey(paneElement);
+    if (!!key) {
+      this.elementStateActions[key] = action;
+      this.applyElementStateToAction(action, this.elementStates[key] || "none");
+    }
+    return action;
   }
   // The survey header has no title-actions support of its own (SurveyModel is not a
   // SurveyElement), so the target pane instance gets the title toolbar contract members
@@ -891,7 +997,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     toolbar.locOwner = survey;
     toolbar.containerCss = "sv-action-title-bar";
     toolbar.setItems([this.createTranslateAction("svc-translate-survey", "ed.translationSurveyStringsAction",
-      () => this.showSurveyStringsDialog())]);
+      () => this.showSurveyStringsDialog(), survey)]);
     toolbar.flushUpdates();
     this.surveyTitleToolbar = toolbar;
     Object.defineProperty(survey, "hasTitleActions", { get: (): boolean => true, configurable: true });
@@ -990,6 +1096,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     this.byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
     this.byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
     this.choicesCollapsedState = {};
+    this.elementStateActions = {};
   }
   // Keeps the real survey's locale in sync with the language being translated. An empty
   // target means the default language; an explicit default-locale name on the survey

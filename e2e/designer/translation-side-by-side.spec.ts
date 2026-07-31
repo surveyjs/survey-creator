@@ -166,6 +166,55 @@ test.describe(title, () => {
     await expect(page.locator(".st-side-by-side__target .sjs_sp_placeholder").getByText("Bitte hier signieren")).toBeVisible();
   });
 
+  test("element state indicator flips to translated after typing into an inline editor", async ({ page }) => {
+    // A single page keeps the survey header visible while typing. Every element's indicator
+    // covers its own strings only, so each flips exactly on its own translation.
+    await setJSON(page, {
+      locale: "de",
+      title: "Survey title",
+      pages: [
+        {
+          name: "page1",
+          title: "Page 1 title",
+          elements: [
+            { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+            { type: "text", name: "q2" },
+            { type: "text", name: "q3", title: "Question 3" }
+          ]
+        }
+      ]
+    });
+    await setCreatorProp(page, "translationMode", "sideBySide");
+    await getTabbedMenuItemByText(page, "Translation").click();
+    const target = page.locator(".st-side-by-side__target");
+    // q1 is translated into German, q2 has no stored strings, q3 is untranslated.
+    await expect(target.locator("[data-name=q1] .svc-translation-state--translated")).toBeVisible();
+    await expect(target.locator("[data-name=q2] .svc-translation-state--none")).toBeVisible();
+    await expect(target.locator("[data-name=q3] .svc-translation-state--untranslated")).toBeVisible();
+    await expect(target.locator(".sd-page__title .svc-translation-state--untranslated")).toBeVisible();
+    await expect(target.locator(".sd-header__text .svc-translation-state--untranslated")).toBeVisible();
+
+    const type = async (locator, text: string) => {
+      await locator.click();
+      await page.keyboard.press("Control+a");
+      await page.keyboard.type(text);
+      await page.keyboard.press("Control+Enter");
+    };
+    await type(target.locator("[data-name=q3] .sv-string-editor").getByText("Question 3"), "Frage 3");
+    await expect(target.locator("[data-name=q3] .svc-translation-state--translated")).toBeVisible();
+    // The question states do not roll up - the page and survey indicators are unchanged.
+    await expect(target.locator(".sd-page__title .svc-translation-state--untranslated")).toBeVisible();
+    await expect(target.locator(".sd-header__text .svc-translation-state--untranslated")).toBeVisible();
+
+    // Typing the page title translation flips the page indicator.
+    await type(target.locator(".sd-page__title .sv-string-editor").getByText("Page 1 title"), "Seite 1");
+    await expect(target.locator(".sd-page__title .svc-translation-state--translated")).toBeVisible();
+
+    // Typing the survey title translation flips the survey indicator.
+    await type(target.locator(".sd-header__text .sv-string-editor").getByText("Survey title"), "Umfragetitel");
+    await expect(target.locator(".sd-header__text .svc-translation-state--translated")).toBeVisible();
+  });
+
   test("target locale switch re-renders target pane strings", async ({ page }) => {
     // Keep the locale dropdowns short so every item is rendered in the popup list.
     await page.evaluate(() => {

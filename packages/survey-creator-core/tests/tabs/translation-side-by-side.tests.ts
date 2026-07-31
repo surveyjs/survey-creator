@@ -875,6 +875,199 @@ test("Translate remaining strings action without a machine-translation handler: 
   editor.dispose();
 });
 
+const stateJSON = {
+  locale: "de",
+  completedHtml: "Thank you",
+  pages: [
+    {
+      name: "page1",
+      title: "Page 1 title",
+      elements: [
+        { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+        { type: "text", name: "q2", title: "Question 2" },
+        { type: "text", name: "q3" }
+      ]
+    },
+    {
+      name: "page2",
+      title: { default: "Page 2 title", de: "Seite 2" },
+      elements: [{ type: "text", name: "q4", title: { default: "Question 4", de: "Frage 4" } }]
+    }
+  ]
+};
+
+// The translate title action doubles as the state indicator - resolve it by its state css.
+function getStateAction(element: any): any {
+  return element.getTitleActions().filter((action: any) =>
+    !!action.css && action.css.indexOf("svc-translation-state") >= 0)[0];
+}
+
+test("element state indicator: question states for translated / untranslated / no strings", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  const model = getModel(creator);
+  const target = model.targetSurvey;
+  expect(model.getElementTranslationState(target.getQuestionByName("q1"))).toBe("translated");
+  expect(model.getElementTranslationState(target.getQuestionByName("q2"))).toBe("untranslated");
+  expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("none");
+  // The real-survey elements resolve to the same states as the pane copies.
+  expect(model.getElementTranslationState(creator.survey.getQuestionByName("q2"))).toBe("untranslated");
+  // The translate action itself carries the state icon, css modifier and tooltip suffix.
+  const translatedAction = getStateAction(target.getQuestionByName("q1"));
+  expect(translatedAction).toBeTruthy();
+  expect(translatedAction.id).toBe("svc-translate-question");
+  expect(translatedAction.iconName).toBe("icon-check-16x16");
+  expect(translatedAction.css).toContain("svc-translation-state--translated");
+  expect(translatedAction.tooltip).toBe("Translate question strings - All strings are translated");
+  const untranslatedAction = getStateAction(target.getQuestionByName("q2"));
+  expect(untranslatedAction.iconName).toBe("icon-warning-24x24");
+  expect(untranslatedAction.css).toContain("svc-translation-state--untranslated");
+  expect(untranslatedAction.tooltip).toBe("Translate question strings - Contains untranslated strings");
+  const noneAction = getStateAction(target.getQuestionByName("q3"));
+  expect(noneAction.iconName).toBe("icon-remove_16x16");
+  expect(noneAction.css).toContain("svc-translation-state--none");
+  expect(noneAction.tooltip).toBe("Translate question strings - No strings to translate");
+  // The action still opens the strings dialog and keeps its stable title.
+  expect(noneAction.title).toBe("Translate question strings");
+  // The state is carried by the target pane's actions only.
+  expect(getStateAction(target.getPageByName("page1"))).toBeTruthy();
+  expect(getStateAction(model.sourceSurvey.getQuestionByName("q1"))).toBeFalsy();
+  expect(getStateAction(model.sourceSurvey.getPageByName("page1"))).toBeFalsy();
+});
+
+test("element state indicator: dialog-only strings count - untranslated matrix column choices keep the warning", () => {
+  const creator = createSideBySideCreator({
+    locale: "de",
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "matrixdropdown",
+            name: "m1",
+            title: { default: "Matrix", de: "Matrix de" },
+            columns: [{
+              name: "col1",
+              title: { default: "Column 1", de: "Spalte 1" },
+              cellType: "dropdown",
+              choices: [{ value: "A", text: "AA" }]
+            }],
+            rows: [{ value: "row1", text: { default: "Row 1", de: "Zeile 1" } }]
+          }
+        ]
+      }
+    ]
+  });
+  const model = getModel(creator);
+  // Every visible string is translated; the column choice text "AA" is reachable only through
+  // the strings dialog and still blocks the "all translated" state.
+  expect(model.getElementTranslationState(model.targetSurvey.getQuestionByName("m1"))).toBe("untranslated");
+  const realMatrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("m1");
+  (<any>realMatrix.columns[0]).templateQuestion.choices[0].locText.setLocaleText("de", "AA de");
+  expect(model.getElementTranslationState(model.targetSurvey.getQuestionByName("m1"))).toBe("translated");
+  // The page has no strings of its own - the question states never roll up into it.
+  expect(model.getElementTranslationState(model.targetSurvey.getPageByName("page1"))).toBe("none");
+});
+
+test("element state indicator: page and survey states cover their own strings, not the nested questions", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  const model = getModel(creator);
+  const target = model.targetSurvey;
+  // page1's own title is untranslated, page2's is translated - the question states never
+  // roll up: every question shows an indicator of its own.
+  expect(model.getElementTranslationState(target.getPageByName("page1"))).toBe("untranslated");
+  expect(model.getElementTranslationState(target.getPageByName("page2"))).toBe("translated");
+  const pageAction = getStateAction(target.getPageByName("page1"));
+  // Translating the page title completes the page even though q2 is still untranslated.
+  target.getPageByName("page1").locTitle.text = "Seite 1";
+  expect(model.getElementTranslationState(target.getPageByName("page1"))).toBe("translated");
+  expect(pageAction.css).toContain("svc-translation-state--translated");
+  expect(model.getElementTranslationState(target.getQuestionByName("q2"))).toBe("untranslated");
+  // The survey state covers the survey-level strings only: completedHtml is untranslated.
+  const surveyAction = target.getTitleToolbar().getActionById("svc-translate-survey");
+  expect(surveyAction).toBeTruthy();
+  expect(model.getElementTranslationState(target)).toBe("untranslated");
+  expect(surveyAction.css).toContain("svc-translation-state--untranslated");
+  creator.survey.getLocalizableString("completedHtml").setLocaleText("de", "Danke");
+  expect(model.getElementTranslationState(target)).toBe("translated");
+  expect(surveyAction.iconName).toBe("icon-check-16x16");
+  expect(surveyAction.css).toContain("svc-translation-state--translated");
+});
+
+test("element state indicator: survey state includes nested survey-level strings, e.g. completedHtmlOnCondition", () => {
+  const creator = createSideBySideCreator({
+    locale: "de",
+    completedHtml: { default: "Thank you", de: "Danke" },
+    completedHtmlOnCondition: [{ expression: "{q1} = 1", html: "Special thanks" }],
+    pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Question 1" }] }]
+  });
+  const model = getModel(creator);
+  // The nested condition html is untranslated - the survey shows the warning although
+  // completedHtml itself is translated; the untranslated q1 plays no role.
+  expect(model.getElementTranslationState(model.targetSurvey)).toBe("untranslated");
+  creator.survey.completedHtmlOnCondition[0].locHtml.setLocaleText("de", "Besonderen Dank");
+  expect(model.getElementTranslationState(model.targetSurvey)).toBe("translated");
+  expect(model.getElementTranslationState(model.targetSurvey.getQuestionByName("q1"))).toBe("untranslated");
+});
+
+test("element state indicator: page state includes its own non-title strings, e.g. navigationTitle", () => {
+  const creator = createSideBySideCreator({
+    locale: "de",
+    pages: [{
+      name: "page1",
+      title: { default: "Page 1 title", de: "Seite 1" },
+      navigationTitle: "Nav 1",
+      elements: [{ type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } }]
+    }]
+  });
+  const model = getModel(creator);
+  // The untranslated navigationTitle keeps the page warning although the title is translated.
+  expect(model.getElementTranslationState(model.targetSurvey.getPageByName("page1"))).toBe("untranslated");
+  creator.survey.pages[0].locNavigationTitle.setLocaleText("de", "Nav 1 de");
+  expect(model.getElementTranslationState(model.targetSurvey.getPageByName("page1"))).toBe("translated");
+});
+
+test("element state indicator: transitions on typing, undo and target locale switch", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  const model = getModel(creator);
+  const target = model.targetSurvey;
+  const questionAction = getStateAction(target.getQuestionByName("q2"));
+  const pageAction = getStateAction(target.getPageByName("page1"));
+  expect(questionAction.css).toContain("svc-translation-state--untranslated");
+  expect(pageAction.css).toContain("svc-translation-state--untranslated");
+  // Typing flips the question in place; the page state follows its own title only.
+  target.getQuestionByName("q2").locTitle.text = "Frage 2";
+  expect(questionAction.iconName).toBe("icon-check-16x16");
+  expect(questionAction.css).toContain("svc-translation-state--translated");
+  expect(pageAction.css).toContain("svc-translation-state--untranslated");
+  creator.undo();
+  expect(questionAction.iconName).toBe("icon-warning-24x24");
+  expect(questionAction.css).toContain("svc-translation-state--untranslated");
+  // Typing the page title flips the page; undo flips it back.
+  target.getPageByName("page1").locTitle.text = "Seite 1";
+  expect(pageAction.css).toContain("svc-translation-state--translated");
+  creator.undo();
+  expect(pageAction.css).toContain("svc-translation-state--untranslated");
+  // A target locale switch recomputes every state: nothing is translated into French.
+  model.targetLocale = "fr";
+  expect(getStateAction(target.getQuestionByName("q1")).css).toContain("svc-translation-state--untranslated");
+  expect(model.getElementTranslationState(target.getPageByName("page2"))).toBe("untranslated");
+  expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("none");
+});
+
+test("element state indicator: the default language as target shows no warning state", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  const model = getModel(creator);
+  // A string stored only in a non-default locale must not produce a warning either.
+  creator.survey.getLocalizableString("description").setLocaleText("de", "Umfragebeschreibung");
+  model.targetLocale = "";
+  const target = model.targetSurvey;
+  expect(model.getElementTranslationState(target.getQuestionByName("q1"))).toBe("translated");
+  expect(model.getElementTranslationState(target.getQuestionByName("q2"))).toBe("translated");
+  expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("none");
+  expect(model.getElementTranslationState(target.getPageByName("page1"))).toBe("translated");
+  expect(model.getElementTranslationState(target)).toBe("translated");
+});
+
 test("Translate remaining strings action with a machine-translation handler: dialog has the machine item", () => {
   const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
   creator.onMachineTranslate.add(() => { });

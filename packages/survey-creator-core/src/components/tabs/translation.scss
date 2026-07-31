@@ -315,6 +315,23 @@ td.st-table__cell:first-of-type {
   }
 }
 
+// The per-element translation state of the target pane, shown by the translate title action
+// itself: its icon follows the element's state (see applyElementStateToAction). The svg
+// selector outweighs the theme's action-icon fill rules.
+.svc-translation-state {
+  svg use {
+    fill: var(--sjs2-color-fg-basic-primary-muted);
+  }
+
+  &.svc-translation-state--untranslated svg use {
+    fill: var(--sjs2-color-fg-warning-primary);
+  }
+
+  &.svc-translation-state--translated svg use {
+    fill: var(--sjs2-color-fg-positive-primary);
+  }
+}
+
 // The flattened dropdown/tagbox choice list of the side-by-side panes. The item rows reuse
 // the svc-question__dropdown-choice classes, so the designer's collapse fade rules apply.
 .st-dropdown-choices--wrapper {
