@@ -440,17 +440,19 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     if (!!this.targetLocale && counts.translated < counts.total) return "untranslated";
     return "translated";
   }
+  // The untranslated state is the one where the button is a genuine call to action, so its
+  // tooltip is the action title itself - the warning icon already carries the state.
   private static elementStateAppearance = {
     none: { iconName: "icon-remove_16x16", tooltip: "ed.translationStateNothingToTranslate" },
-    untranslated: { iconName: "icon-warning-24x24", tooltip: "ed.translationStateHasUntranslated" },
+    untranslated: { iconName: "icon-warning-24x24", tooltip: "ed.translateStrings" },
     translated: { iconName: "icon-check-16x16", tooltip: "ed.translationStateAllTranslated" }
   };
-  // The state icon replaces the translate action's language icon; the action title stays the
-  // stable part of the tooltip (and of the accessible name), the state text is appended.
+  // The state icon replaces the translate action's language icon and the state text becomes
+  // the whole tooltip; the title keeps the stable accessible name in every state.
   private applyElementStateToAction(action: Action, state: TranslationElementState): void {
     const info = TranslationSideBySide.elementStateAppearance[state];
     action.iconName = info.iconName;
-    action.tooltip = action.title + " - " + editorLocalization.getString(info.tooltip);
+    action.tooltip = editorLocalization.getString(info.tooltip);
     action.css = "svc-translation-state svc-translation-state--" + state;
   }
   // Each dropdown's list hides the locale currently selected in the other one, except its own
@@ -950,25 +952,26 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     };
     survey.onGetQuestionTitleActions.add((_, options) => {
       if (isContentElement(options.question)) return;
-      options.actions.push(this.createTranslateAction("svc-translate-question", "ed.translationQuestionStrings",
+      options.actions.push(this.createTranslateAction("svc-translate-question",
         () => this.showQuestionStringsDialog(options.question), options.question));
     });
     survey.onGetPageTitleActions.add((_, options) => {
-      options.actions.push(this.createTranslateAction("svc-translate-page", "ed.translationPageStrings",
+      options.actions.push(this.createTranslateAction("svc-translate-page",
         () => this.showPageStringsDialog(options.page), options.page));
     });
     survey.onGetPanelTitleActions.add((_, options) => {
       if (isContentElement(options.panel)) return;
       if (!this.panelHasTranslatableStrings(options.panel)) return;
-      options.actions.push(this.createTranslateAction("svc-translate-panel", "ed.translationPanelStrings",
+      options.actions.push(this.createTranslateAction("svc-translate-panel",
         () => this.showPanelStringsDialog(options.panel), options.panel));
     });
     this.addSurveyTitleTranslateAction(survey);
   }
   // The translate action doubles as the element's translation state indicator: its icon,
-  // css modifier and tooltip suffix follow the state of the element's string subtree.
-  private createTranslateAction(id: string, localeStrName: string, doAction: () => void, paneElement: Base): Action {
-    const title = editorLocalization.getString(localeStrName);
+  // css modifier and tooltip follow the state of the element's string subtree. The title
+  // is the same for every element type - the action sits on the element's own title row.
+  private createTranslateAction(id: string, doAction: () => void, paneElement: Base): Action {
+    const title = editorLocalization.getString("ed.translateStrings");
     const action = new Action({
       id: id,
       iconName: "icon-language",
@@ -996,7 +999,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     toolbar.setActionsAppearance({ style: "neutral", size: "small", mode: "secondary" });
     toolbar.locOwner = survey;
     toolbar.containerCss = "sv-action-title-bar";
-    toolbar.setItems([this.createTranslateAction("svc-translate-survey", "ed.translationSurveyStringsAction",
+    toolbar.setItems([this.createTranslateAction("svc-translate-survey",
       () => this.showSurveyStringsDialog(), survey)]);
     toolbar.flushUpdates();
     this.surveyTitleToolbar = toolbar;

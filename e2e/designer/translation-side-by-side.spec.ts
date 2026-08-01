@@ -316,7 +316,7 @@ test.describe(title + " choices", () => {
     await openSideBySideWithChoices(page);
     // The panes render lazily - scroll the matrix into the view before using its title action.
     await page.locator(".st-side-by-side__target").evaluate(el => { el.scrollTop = el.scrollHeight; });
-    await page.locator(".st-side-by-side__target [data-name=q3]").getByRole("button", { name: "Translate question strings" }).click();
+    await page.locator(".st-side-by-side__target [data-name=q3]").getByRole("button", { name: "Translate strings" }).click();
     const dialog = page.locator(".st-translation-dialog");
     await expect(dialog).toBeVisible();
 
@@ -347,7 +347,7 @@ test.describe(title + " choices", () => {
 
   test("question strings dialog: available for a plain question, edits its title translation", async ({ page }) => {
     await openSideBySideWithChoices(page);
-    await page.locator(".st-side-by-side__target [data-name=q1]").getByRole("button", { name: "Translate question strings" }).click();
+    await page.locator(".st-side-by-side__target [data-name=q1]").getByRole("button", { name: "Translate strings" }).click();
     const dialog = page.locator(".st-translation-dialog");
     await expect(dialog).toBeVisible();
     const titleRow = dialog.locator("table tr").filter({ hasText: "Question title" });
@@ -396,26 +396,26 @@ test.describe(title + " containers", () => {
   test("empty survey and page titles show placeholders with translate actions; a panel without strings is ignored", async ({ page }) => {
     await openSideBySideContainers(page);
     const target = page.locator(".st-side-by-side__target");
-    // The survey has no title - the placeholder hosts the translate action.
+    // The action title is the same for every element type, so the assertions scope it
+    // through the hosting title row. The survey has no title - the placeholder hosts
+    // the translate action.
     await expect(target.locator("[aria-placeholder='Survey Title']")).toBeVisible();
-    await expect(target.getByRole("button", { name: "Translate survey strings" })).toBeVisible();
+    await expect(target.locator(".sd-container-modern__title").getByRole("button", { name: "Translate strings" })).toBeVisible();
     // page1 has no title either.
     await expect(target.locator("[aria-placeholder='Page 1']")).toBeVisible();
-    await expect(target.getByRole("button", { name: "Translate page strings" })).toBeVisible();
+    await expect(target.locator(".sd-page__title").getByRole("button", { name: "Translate strings" })).toBeVisible();
     // panel1 (description only) gets a forced title row with a placeholder and the action;
     // panel2 has neither a title nor a description - no placeholder, no action.
     await expect(target.locator("[aria-placeholder='Panel Title']")).toHaveCount(1);
-    await expect(target.getByRole("button", { name: "Translate panel strings" })).toHaveCount(1);
-    // The source pane gets no translate actions.
+    await expect(target.locator(".sd-panel__title").getByRole("button", { name: "Translate strings" })).toHaveCount(1);
+    // The source pane gets no translate actions at all.
     const source = page.locator(".st-side-by-side__source");
-    await expect(source.getByRole("button", { name: "Translate survey strings" })).toHaveCount(0);
-    await expect(source.getByRole("button", { name: "Translate page strings" })).toHaveCount(0);
-    await expect(source.getByRole("button", { name: "Translate panel strings" })).toHaveCount(0);
+    await expect(source.getByRole("button", { name: "Translate strings" })).toHaveCount(0);
   });
 
   test("survey strings dialog: own strings only, edits the description translation", async ({ page }) => {
     await openSideBySideContainers(page);
-    await page.locator(".st-side-by-side__target").getByRole("button", { name: "Translate survey strings" }).click();
+    await page.locator(".st-side-by-side__target .sd-container-modern__title").getByRole("button", { name: "Translate strings" }).click();
     const dialog = page.locator(".st-translation-dialog");
     await expect(dialog).toBeVisible();
     // The dialog is scoped to the survey-level strings - no rows of the nested elements.
@@ -433,7 +433,7 @@ test.describe(title + " containers", () => {
 
   test("page strings dialog: an empty page falls back to the all-strings mode and edits the title", async ({ page }) => {
     await openSideBySideContainers(page);
-    await page.locator(".st-side-by-side__target").getByRole("button", { name: "Translate page strings" }).click();
+    await page.locator(".st-side-by-side__target .sd-page__title").getByRole("button", { name: "Translate strings" }).click();
     const dialog = page.locator(".st-translation-dialog");
     await expect(dialog).toBeVisible();
     await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
@@ -453,7 +453,7 @@ test.describe(title + " containers", () => {
 
   test("panel strings dialog: available through the forced title row, edits the description translation", async ({ page }) => {
     await openSideBySideContainers(page);
-    await page.locator(".st-side-by-side__target").getByRole("button", { name: "Translate panel strings" }).click();
+    await page.locator(".st-side-by-side__target .sd-panel__title").getByRole("button", { name: "Translate strings" }).click();
     const dialog = page.locator(".st-translation-dialog");
     await expect(dialog).toBeVisible();
     await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);

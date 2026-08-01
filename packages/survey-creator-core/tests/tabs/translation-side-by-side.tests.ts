@@ -902,23 +902,24 @@ test("element state indicator: question states for translated / untranslated / n
   expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("none");
   // The real-survey elements resolve to the same states as the pane copies.
   expect(model.getElementTranslationState(creator.survey.getQuestionByName("q2"))).toBe("untranslated");
-  // The translate action itself carries the state icon, css modifier and tooltip suffix.
+  // The translate action itself carries the state icon, css modifier and state tooltip;
+  // in the untranslated state the tooltip is the action title itself.
   const translatedAction = getStateAction(target.getQuestionByName("q1"));
   expect(translatedAction).toBeTruthy();
   expect(translatedAction.id).toBe("svc-translate-question");
   expect(translatedAction.iconName).toBe("icon-check-16x16");
   expect(translatedAction.css).toContain("svc-translation-state--translated");
-  expect(translatedAction.tooltip).toBe("Translate question strings - All strings are translated");
+  expect(translatedAction.tooltip).toBe("All strings are translated");
   const untranslatedAction = getStateAction(target.getQuestionByName("q2"));
   expect(untranslatedAction.iconName).toBe("icon-warning-24x24");
   expect(untranslatedAction.css).toContain("svc-translation-state--untranslated");
-  expect(untranslatedAction.tooltip).toBe("Translate question strings - Contains untranslated strings");
+  expect(untranslatedAction.tooltip).toBe("Translate strings");
   const noneAction = getStateAction(target.getQuestionByName("q3"));
   expect(noneAction.iconName).toBe("icon-remove_16x16");
   expect(noneAction.css).toContain("svc-translation-state--none");
-  expect(noneAction.tooltip).toBe("Translate question strings - No strings to translate");
+  expect(noneAction.tooltip).toBe("No strings to translate");
   // The action still opens the strings dialog and keeps its stable title.
-  expect(noneAction.title).toBe("Translate question strings");
+  expect(noneAction.title).toBe("Translate strings");
   // The state is carried by the target pane's actions only.
   expect(getStateAction(target.getPageByName("page1"))).toBeTruthy();
   expect(getStateAction(model.sourceSurvey.getQuestionByName("q1"))).toBeFalsy();
