@@ -159,10 +159,6 @@ export class UndoRedoController extends Base {
     this.undoRedoManager && this.undoRedoManager.stopTransaction();
   }
 
-  private isUndoRedoVisibleInTab(): boolean {
-    const activeTab = this.creator.activeTab;
-    return activeTab === "designer" || activeTab === "translation";
-  }
   public createActions() {
     const items: Array<Action> = [];
     this.undoAction = new Action({
@@ -172,7 +168,7 @@ export class UndoRedoController extends Base {
       iconSize: "auto",
       locTitleName: "ed.undo",
       showTitle: false,
-      visible: <any>new ComputedUpdater(() => this.isUndoRedoVisibleInTab()),
+      visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
@@ -185,7 +181,7 @@ export class UndoRedoController extends Base {
       iconSize: "auto",
       locTitleName: "ed.redo",
       showTitle: false,
-      visible: <any>new ComputedUpdater(() => this.isUndoRedoVisibleInTab()),
+      visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),
       action: () => this.redo()
     });
     items.push(this.undoAction);

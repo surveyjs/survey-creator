@@ -116,31 +116,6 @@ test.describe(title, () => {
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Question 4")).toBeVisible();
   });
 
-  test("Ctrl+Z / Ctrl+Y", async ({ page }) => {
-    await openSideBySideTranslation(page);
-    const targetTitle = page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1");
-    await targetTitle.click();
-    await page.keyboard.press("Control+a");
-    await page.keyboard.type("Frage 1 neu");
-    await page.keyboard.press("Control+Enter");
-    expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1 neu");
-
-    // The shortcut listener sits on the creator root element, so focus must be inside it:
-    // focus a toolbar button (open + close the pages dropdown) before pressing the hotkeys.
-    await getBarItemByTitle(page, "page1").click();
-    await page.keyboard.press("Escape");
-    await page.keyboard.press("Control+z");
-    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
-    expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1");
-
-    // Undo re-selects an element, which moves focus out of the toolbar - refocus before redo.
-    await getBarItemByTitle(page, "page1").click();
-    await page.keyboard.press("Escape");
-    await page.keyboard.press("Control+y");
-    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1 neu")).toBeVisible();
-    expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1 neu");
-  });
-
   test("signature pad placeholder is editable in the target pane", async ({ page }) => {
     await setJSON(page, {
       locale: "de",

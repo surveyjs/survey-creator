@@ -166,7 +166,7 @@ test("grid view: the page dropdown shows All Pages plus the pages and scopes the
   expect(getItemKeys(model).indexOf("q1.title")).toBeGreaterThan(-1);
 });
 
-test("grid view: target cell edits are undoable and write the target locale", () => {
+test("grid view: target cell edits write the target locale", () => {
   const creator = createGridCreator();
   const model = getModel(creator);
   const matrix = findMatrix(model, "q1", "title");
@@ -174,12 +174,6 @@ test("grid view: target cell edits are undoable and write the target locale", ()
   const realQuestion = creator.survey.getQuestionByName("q1");
   expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
-  creator.undo();
-  expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");
-  expect(matrix.visibleRows[0].cells[1].question.value).toBe("Frage 1");
-  creator.redo();
-  expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
-  expect(matrix.visibleRows[0].cells[1].question.value).toBe("Frage 1 neu");
 });
 
 test("grid view: onTranslationItemChanging applies to grid edits", () => {

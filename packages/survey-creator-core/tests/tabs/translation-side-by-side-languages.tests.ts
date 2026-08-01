@@ -87,7 +87,7 @@ test("default language row has no delete action, other rows have one", () => {
   expect(getDeleteAction(creator, 1)).toBeTruthy();
 });
 
-test("a row appears with the first stored string of a new target and disappears on undo", () => {
+test("a row appears with the first stored string of a new target and disappears when it is cleared", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   model.targetLocale = "fr";
@@ -96,7 +96,7 @@ test("a row appears with the first stored string of a new target and disappears 
   const rows = getRows(creator);
   expect(rows.map(row => row.name)).toEqual(["", "de", "fr"]);
   expect(rows[2].progress).toBe("1/2");
-  creator.undo();
+  model.targetSurvey.getQuestionByName("q2").locTitle.text = "";
   expect(getRows(creator).map(row => row.name)).toEqual(["", "de"]);
 });
 
@@ -134,13 +134,13 @@ test("clicking the source's language takes it over as the target and resets the 
   expect(getTargetDropdown(creator).value).toBe("de");
 });
 
-test("counts update immediately on an inline edit, roll back on undo and follow a CSV import", () => {
+test("counts update immediately on an inline edit and follow a CSV import", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   expect(getRows(creator)[1].progress).toBe("1/2");
   model.targetSurvey.getQuestionByName("q2").locTitle.text = "Frage 2";
   expect(getRows(creator)[1].progress).toBe("2/2");
-  creator.undo();
+  model.targetSurvey.getQuestionByName("q2").locTitle.text = "";
   expect(getRows(creator)[1].progress).toBe("1/2");
   model.importFromNestedArray([
     ["description", "fr"],
@@ -151,7 +151,7 @@ test("counts update immediately on an inline edit, roll back on undo and follow 
   expect(rows[2].progress).toBe("1/2");
 });
 
-test("delete language: confirm dialog, cancel keeps the locale, apply removes it undoably and retargets to default", () => {
+test("delete language: confirm dialog, cancel keeps the locale, apply removes it and retargets to default", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   mockConfirmDialog((getOptions) => {
@@ -170,14 +170,6 @@ test("delete language: confirm dialog, cancel keeps the locale, apply removes it
     expect(model.targetLocale || "").toBe("");
     expect(getTargetDropdown(creator).value).toBe("default");
     expect(creator.survey.locale || "").toBe("");
-    // Undo restores the retarget first, then the strings transaction brings the row back.
-    creator.undo();
-    expect(model.targetLocale).toBe("de");
-    creator.undo();
-    expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("Frage 1");
-    const rows = getRows(creator);
-    expect(rows.map(row => row.name)).toEqual(["", "de"]);
-    expect(rows[1].progress).toBe("1/2");
   });
 });
 
@@ -202,10 +194,5 @@ test("grid view: counts ignore the page scope and delete covers the whole survey
     expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBeFalsy();
     expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBeFalsy();
     expect(getRows(creator).map(row => row.name)).toEqual([""]);
-    creator.undo(); // the retarget
-    creator.undo(); // the strings transaction
-    expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("F1");
-    expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBe("F2");
-    expect(getRows(creator).map(row => row.name)).toEqual(["", "de"]);
   });
 });

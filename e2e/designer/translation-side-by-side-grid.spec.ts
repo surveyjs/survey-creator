@@ -64,26 +64,14 @@ test.describe(title, () => {
     await expect(sidebar.locator(".spg-question[data-name=targetLocale]")).toContainText("Deutsch");
   });
 
-  test("editing a target cell updates the JSON translation and is undoable", async ({ page }) => {
+  test("editing a target cell updates the JSON translation", async ({ page }) => {
     await openGridTranslation(page);
     const targetCell = getTitleRow(page).locator("textarea").nth(1);
     await targetCell.fill("Frage 1 neu");
     await page.keyboard.press("Tab");
-    let resultJson = await getJSON(page);
+    const resultJson = await getJSON(page);
     expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1 neu");
     expect(resultJson.pages[0].elements[0].title.default).toEqual("Question 1");
-
-    // Undo through the creator toolbar button (the Ctrl+Z hotkey would additionally trigger the
-    // browser's own textarea undo - the creator's shortcut handler does not preventDefault).
-    await page.getByRole("button", { name: "Undo" }).filter({ visible: true }).first().click();
-    await expect(getTitleRow(page).locator("textarea").nth(1)).toHaveValue("Frage 1");
-    resultJson = await getJSON(page);
-    expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1");
-
-    await page.getByRole("button", { name: "Redo" }).filter({ visible: true }).first().click();
-    await expect(getTitleRow(page).locator("textarea").nth(1)).toHaveValue("Frage 1 neu");
-    resultJson = await getJSON(page);
-    expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1 neu");
   });
 
   test("view switcher: the property grid button group switches between the grid and the forms views", async ({ page }) => {

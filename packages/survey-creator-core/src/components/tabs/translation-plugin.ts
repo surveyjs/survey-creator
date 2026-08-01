@@ -58,14 +58,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
   private wireModelCallbacks(model: Translation): void {
-    model.doUndoableAction = (action, title) => {
-      const manager = this.creator.undoRedoManager;
-      if (!!manager) {
-        manager.performAction(action, title);
-      } else {
-        action.apply();
-      }
-    };
     model.getMachineTranslationFromLocale = () => this._machineTranslationFromLocale;
     model.setMachineTranslationFromLocale = (locale: string) => {
       this._machineTranslationFromLocale = locale;

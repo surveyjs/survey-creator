@@ -159,21 +159,14 @@ test("editing target copy writes target locale into creator.survey", () => {
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
 });
 
-test("undo restores only target-locale text and re-syncs the copy; redo reapplies", () => {
+test("an external localizable string change re-syncs the copy", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   const targetQuestion = model.targetSurvey.getQuestionByName("q1");
-  targetQuestion.locTitle.text = "Frage 1 neu";
   const realQuestion = creator.survey.getQuestionByName("q1");
-  expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
-  creator.undo();
-  expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");
-  expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
-  expect(targetQuestion.locTitle.getLocaleText("de")).toBe("Frage 1");
-  creator.redo();
-  expect(realQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
-  expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
+  realQuestion.locTitle.setLocaleText("de", "Frage 1 neu");
   expect(targetQuestion.locTitle.getLocaleText("de")).toBe("Frage 1 neu");
+  expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
 });
 
 test("choice item and matrix column titles sync by path mapping", () => {
@@ -208,20 +201,15 @@ test("changing targetLocale switches copy locale without recreating instances; e
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
 });
 
-test("changing targetLocale updates survey.locale; undo/redo keeps them in sync", () => {
+test("changing targetLocale updates survey.locale; an external survey.locale change is followed", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   expect(creator.survey.locale).toBe("de");
   model.targetLocale = "fr";
   expect(creator.survey.locale).toBe("fr");
-  creator.undo();
-  expect(creator.survey.locale).toBe("de");
+  creator.survey.locale = "de";
   expect(model.targetLocale).toBe("de");
   expect(model.targetSurvey.locale).toBe("de");
-  creator.redo();
-  expect(creator.survey.locale).toBe("fr");
-  expect(model.targetLocale).toBe("fr");
-  expect(model.targetSurvey.locale).toBe("fr");
 });
 
 test("target locale choice persists via survey.locale across tab switches", () => {
@@ -310,20 +298,15 @@ test("target locale defaults to the default language when survey.locale equals t
   expect(model.targetLocale || "").toBe("");
 });
 
-test("structural undo rebuilds instances", () => {
+test("an external structural change rebuilds instances", () => {
   const creator = createSideBySideCreator();
-  creator.activeTab = "designer";
-  const question = creator.survey.getQuestionByName("q4");
-  creator.deleteElement(question);
-  expect(creator.survey.getQuestionByName("q4")).toBeFalsy();
-  creator.activeTab = "translation";
   const model = getModel(creator);
-  expect(model.targetSurvey.getQuestionByName("q4")).toBeFalsy();
   const oldTarget = model.targetSurvey;
-  creator.undo();
-  expect(creator.survey.getQuestionByName("q4")).toBeTruthy();
+  const question = creator.survey.getQuestionByName("q1");
+  question.delete();
+  expect(creator.survey.getQuestionByName("q1")).toBeFalsy();
   expect(model.targetSurvey).not.toBe(oldTarget);
-  expect(model.targetSurvey.getQuestionByName("q4")).toBeTruthy();
+  expect(model.targetSurvey.getQuestionByName("q1")).toBeFalsy();
 });
 
 test("onTranslationItemChanging applies to forwarded edits", () => {
@@ -393,7 +376,7 @@ test("navigation bar, progress bar and TOC are not shown on the panes", () => {
   });
 });
 
-test("nav caption properties are mapped: target edits write the target locale, undo restores, JSON round-trips", () => {
+test("nav caption properties are mapped: target edits write the target locale, JSON round-trips", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   const target = model.targetSurvey;
@@ -406,11 +389,6 @@ test("nav caption properties are mapped: target edits write the target locale, u
     expect((<any>creator.survey).getLocalizableString(name).getLocaleText("de")).toBe(name + "-de");
   });
   expect(creator.JSON.completeText).toEqual({ de: "completeText-de" });
-  creator.undo();
-  expect((<any>creator.survey).getLocalizableString("startSurveyText").getLocaleText("de")).toBeFalsy();
-  expect((<any>creator.survey).getLocalizableString("completeText").getLocaleText("de")).toBe("completeText-de");
-  creator.redo();
-  expect((<any>creator.survey).getLocalizableString("startSurveyText").getLocaleText("de")).toBe("startSurveyText-de");
 });
 
 test("changing the source pane page syncs the target pane and the page dropdown", () => {
@@ -534,7 +512,7 @@ test("TranslationDropdownViewModel: item components, collapse behavior and share
   tagboxVM.dispose();
 });
 
-test("dropdown choice strings: editable in the target pane only, edits forward to the real survey and are undoable", () => {
+test("dropdown choice strings: editable in the target pane only, edits forward to the real survey", () => {
   const creator = createSideBySideCreator(dropdownChoicesJSON);
   const model = getModel(creator);
   const targetQ5 = <QuestionDropdownModel>model.targetSurvey.getQuestionByName("q5");
@@ -545,9 +523,6 @@ test("dropdown choice strings: editable in the target pane only, edits forward t
   const realQ5 = <QuestionDropdownModel>creator.survey.getQuestionByName("q5");
   expect(realQ5.choices[0].locText.getLocaleText("de")).toBe("AA-de");
   expect(realQ5.choices[0].locText.getLocaleText("")).toBe("AA");
-  creator.undo();
-  expect(realQ5.choices[0].locText.getLocaleText("de")).toBeFalsy();
-  expect(targetQ5.choices[0].locText.getLocaleText("de")).toBeFalsy();
 });
 
 test("inplaceEditChoiceValues does not apply to the pane copies' choice strings", () => {
@@ -562,7 +537,7 @@ test("inplaceEditChoiceValues does not apply to the pane copies' choice strings"
   expect((<any>designerEditor).isInplaceForEditValues).toBeTruthy();
 });
 
-test("question strings dialog model: source/target grid over the real question, read-only source, undoable edits that mirror into the panes", () => {
+test("question strings dialog model: source/target grid over the real question, read-only source, edits that mirror into the panes", () => {
   const creator = createSideBySideCreator(dropdownChoicesJSON);
   const model = getModel(creator);
   const realMatrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q3");
@@ -591,8 +566,6 @@ test("question strings dialog model: source/target grid over the real question, 
   expect(realChoiceLocText.getLocaleText("de")).toBe("AA-de");
   const targetMatrix = <QuestionMatrixDropdownModel>model.targetSurvey.getQuestionByName("q3");
   expect((<any>targetMatrix.columns[0]).templateQuestion.choices[0].locText.getLocaleText("de")).toBe("AA-de");
-  creator.undo();
-  expect(realChoiceLocText.getLocaleText("de")).toBeFalsy();
   grid.dispose();
 });
 
@@ -798,7 +771,7 @@ test("element strings dialog models: survey/page/panel grids cover own strings o
   panelGrid.dispose();
 });
 
-test("survey strings dialog model: undoable edits that mirror into the panes", () => {
+test("survey strings dialog model: edits that mirror into the panes", () => {
   const creator = createSideBySideCreator(containersJSON);
   const model = getModel(creator);
   const grid = model.createElementStringsModel(creator.survey);
@@ -814,8 +787,6 @@ test("survey strings dialog model: undoable edits that mirror into the panes", (
   titleMatrix.visibleRows[0].cells[1].question.value = "Umfragetitel neu";
   expect(creator.survey.locTitle.getLocaleText("de")).toBe("Umfragetitel neu");
   expect(model.targetSurvey.locTitle.getLocaleText("de")).toBe("Umfragetitel neu");
-  creator.undo();
-  expect(creator.survey.locTitle.getLocaleText("de")).toBe("Umfragetitel");
   grid.dispose();
 });
 
@@ -1018,7 +989,7 @@ test("element state indicator: page state includes its own non-title strings, e.
   expect(model.getElementTranslationState(model.targetSurvey.getPageByName("page1"))).toBe("translated");
 });
 
-test("element state indicator: transitions on typing, undo and target locale switch", () => {
+test("element state indicator: transitions on typing and target locale switch", () => {
   const creator = createSideBySideCreator(stateJSON);
   const model = getModel(creator);
   const target = model.targetSurvey;
@@ -1031,14 +1002,13 @@ test("element state indicator: transitions on typing, undo and target locale swi
   expect(questionAction.iconName).toBe("icon-check-16x16");
   expect(questionAction.css).toContain("svc-translation-state--translated");
   expect(pageAction.css).toContain("svc-translation-state--untranslated");
-  creator.undo();
+  // Clearing the text flips it back.
+  target.getQuestionByName("q2").locTitle.text = "";
   expect(questionAction.iconName).toBe("icon-warning-24x24");
   expect(questionAction.css).toContain("svc-translation-state--untranslated");
-  // Typing the page title flips the page; undo flips it back.
+  // Typing the page title flips the page.
   target.getPageByName("page1").locTitle.text = "Seite 1";
   expect(pageAction.css).toContain("svc-translation-state--translated");
-  creator.undo();
-  expect(pageAction.css).toContain("svc-translation-state--untranslated");
   // A target locale switch recomputes every state: nothing is translated into French.
   model.targetLocale = "fr";
   expect(getStateAction(target.getQuestionByName("q1")).css).toContain("svc-translation-state--untranslated");
@@ -1127,7 +1097,7 @@ test("element strings dialog: auto-translate button is disabled when all used st
   grid.dispose();
 });
 
-test("element strings dialog: auto-translate fills only the empty target texts of the used strings, in one undo step", () => {
+test("element strings dialog: auto-translate fills only the empty target texts of the used strings", () => {
   const creator = createSideBySideCreator(autoTranslateJSON);
   let fromLocale = "";
   let toLocale = "";
@@ -1156,11 +1126,6 @@ test("element strings dialog: auto-translate fills only the empty target texts o
   expect(model.getElementTranslationState(model.targetSurvey.getQuestionByName("q1"))).toBe("translated");
   // Everything is translated now.
   expect(action.enabled).toBeFalsy();
-  // The whole auto-translation is one undo step.
-  creator.undo();
-  expect(realQ1.locTitle.getLocaleText("de")).toBeFalsy();
-  expect(realQ1.locDescription.getLocaleText("de")).toBeFalsy();
-  expect(ItemValue.getItemByValue(realQ1.choices, "item2").locText.getLocaleText("de")).toBeFalsy();
   grid.dispose();
 });
 

@@ -341,7 +341,6 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     if (!!this.filteredPage) {
       this.runWithoutSurveyReaction(() => {
         const translation = new Translation(this.survey, this.options, false);
-        translation.doUndoableAction = (action, title) => this.doUndoableAction(action, title);
         translation.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
         translation.deleteLocaleStrings(locale);
         translation.dispose();
@@ -620,7 +619,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     if (this.isDisposed) return;
     if (this.isSideBySideGrid) {
       // No survey copies to rebuild - re-create the grid over the current survey, dropping
-      // a page filter that no longer belongs to it (survey replaced, structural undo).
+      // a page filter that no longer belongs to it (survey replaced, page removed).
       if (!!this.filteredPage && this.survey.pages.indexOf(this.filteredPage) < 0) {
         this.filteredPage = null; // the property's onSet rebuilds the grid
         return;
@@ -652,12 +651,12 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     }
   }
   // Called (through the plugin's onDesignerSurveyPropertyChanged hook) when the real survey changes:
-  // undo/redo rollbacks or any external modification.
+  // the element strings dialogs write to it, and external code can too.
   public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
     if (this._syncing || this.isDisposed) return;
     this.onCreatorSurveyPropertyChangedCore(obj, propName);
     // Any real-survey change can move the counters, change the denominator (structural
-    // changes) or add/remove a locale row (an undo restoring/removing the last string).
+    // changes) or add/remove a locale row (a change restoring/removing the last string).
     this.updateLanguagesMatrix();
     this.updateElementTranslationStates();
   }
@@ -1017,12 +1016,11 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   }
   // The translate title action of a target-pane element opens a dialog with a source/target
   // strings grid built over the real survey's element, so the edits go through the regular
-  // undoable translation item path (and mirror into the panes). It covers the strings that
+  // translation item path (and mirror into the panes). It covers the strings that
   // cannot be edited inline - the choices of matrix dropdown columns (whose cells render over
   // copies of the column data), survey-level strings, page/panel strings of other locales etc.
   public createElementStringsModel(realObj: Base): Translation {
     const model = new TranslationElementStrings(this.survey, realObj, this.options);
-    model.doUndoableAction = (action, title) => this.doUndoableAction(action, title);
     model.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
     model.readOnly = this.readOnly;
     model.useSourceTargetColumns = true;
@@ -1067,8 +1065,8 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
       title: this.getElementStringsDialogTitle(realObj),
       displayMode: this.options.isMobileView ? "overlay" : "popup"
     }, this.options.rootElement);
-    // The grid edits apply immediately (and are undoable), so the dialog gets a single
-    // closing button instead of the apply/cancel pair.
+    // The grid edits apply immediately, so the dialog gets a single closing button
+    // instead of the apply/cancel pair.
     const actions = popup.footerToolbar.actions;
     actions.splice(1, actions.length - 1);
     actions[0].title = editorLocalization.getString("pe.doneEditing");
@@ -1183,7 +1181,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     group.groups.forEach(child => this.collectItems(child, items));
     return items;
   }
-  // An external survey.locale change (an undo/redo rollback) - follow it instead of rebuilding.
+  // An external survey.locale change - follow it instead of rebuilding.
   protected followSurveyLocale(): void {
     const locale = this.survey.locale;
     this.targetLocale = !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
@@ -1295,17 +1293,11 @@ export class TranslationElementStrings extends Translation {
     const toLocale = this.targetLocale || "";
     const callback = (translated: Array<string>): void => {
       if (!Array.isArray(translated) || this.isDisposed) return;
-      // One undoable transaction over the locale-aware item actions; the grid cells are
-      // refreshed from the updated strings in one go below.
-      this.options.startUndoRedoTransaction("Translate to " + getActualLocaleName(toLocale));
-      try {
-        for (let i = 0; i < Math.min(items.length, translated.length); i++) {
-          if (!!translated[i]) {
-            this.setItemLocText(items[i], toLocale, translated[i]);
-          }
+      // The grid cells are refreshed from the updated strings in one go below.
+      for (let i = 0; i < Math.min(items.length, translated.length); i++) {
+        if (!!translated[i]) {
+          this.setItemLocText(items[i], toLocale, translated[i]);
         }
-      } finally {
-        this.options.stopUndoRedoTransaction();
       }
       this.updateStringsSurveyData();
     };
