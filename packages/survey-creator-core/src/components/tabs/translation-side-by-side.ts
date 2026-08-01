@@ -15,6 +15,8 @@ import { StringEditorConnector } from "../string-editor";
 import { QuestionLinkValueModel } from "../link-value";
 import { showConfirmDialog } from "../../utils/confirm-dialog";
 import { updateMatixActionsAppearance } from "../../utils/actions";
+import { SurveyElementActionContainer } from "../action-container-view-model";
+import { getActualLocaleName } from "../../utils/creator-locstrings";
 import { ITranslationLocales, Translation, TranslationGroup, TranslationItem } from "./translation";
 
 // The default locale is stored as "" on the model; the settings survey dropdowns need a
@@ -29,7 +31,7 @@ const emptySpaceText = "\u00A0";
 // because the side-by-side model's own root uses different filters - all strings in the forms
 // view, an optional single-page scope in the grid view.
 class TranslationUsedStringsOwner implements ITranslationLocales {
-  constructor(private owner: TranslationSideBySide) { }
+  constructor(private owner: Translation) { }
   public get locales(): Array<string> { return []; }
   public get showAllStrings(): boolean { return false; }
   public get readOnly(): boolean { return true; }
@@ -41,6 +43,12 @@ class TranslationUsedStringsOwner implements ITranslationLocales {
   public removeLocale(): void { }
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean): boolean {
     return this.owner.canShowProperty(obj, prop, isEmpty, isShowing);
+  }
+  // The element strings dialog scopes its tree via canShowElementGroup - the used-strings
+  // tree built over the same owner must stay within the same scope.
+  public canShowElementGroup(obj: Base): boolean {
+    const owner = <ITranslationLocales>this.owner;
+    return !owner.canShowElementGroup || owner.canShowElementGroup(obj);
   }
   public getEditLocale(): string { return ""; }
   public get isEditMode(): boolean { return false; }
@@ -1230,6 +1238,7 @@ export class TranslationElementStrings extends Translation {
   // not available there, so the switcher sits on top of the strings grid, in the header survey.
   protected onSurveyStringsHeaderCreated(survey: SurveyModel): void {
     super.onSurveyStringsHeaderCreated(survey);
+    this.setupMachineTranslationButton(survey);
     const filter = new QuestionButtonGroupModel("stringsFilter");
     filter.titleLocation = "hidden";
     filter.allowClear = false;
@@ -1251,5 +1260,96 @@ export class TranslationElementStrings extends Translation {
         this.showAllStrings = options.value === "all";
       }
     });
+  }
+  // The auto-translate button on top of the strings grid, as in the whole-survey
+  // machine-translation dialog (see TranslationEditor.setupNavigationButtons). It covers
+  // the used strings only, whatever the current all/used filter is, and fills the empty
+  // target texts only, so it is disabled once every used string has a target text.
+  private machineTranslationAction: Action;
+  private setupMachineTranslationButton(survey: SurveyModel): void {
+    if (!this.options.getHasMachineTranslation() || this.readOnly) return;
+    const navigationBar = new SurveyElementActionContainer();
+    survey.createNavigationBarCallback = () => navigationBar;
+    survey.showCompleteButton = false;
+    survey.showNavigationButtons = true;
+    survey.navigationButtonsLocation = "top";
+    navigationBar.allowResponsiveness();
+    navigationBar.setActionsAppearance({ style: "brand", mode: "tertiary", size: "small" });
+    this.machineTranslationAction = new Action({
+      id: "svc-translation-machine",
+      iconName: "icon-language",
+      iconSize: "auto",
+      css: "svc-action-bar-item--right",
+      locTitleName: "ed.translateUsigAI",
+      component: "sv-action-bar-item",
+      enabled: this.getStringsToTranslate().length > 0,
+      action: () => this.doMachineTranslation()
+    });
+    survey.addNavigationItem(this.machineTranslationAction);
+  }
+  public doMachineTranslation(): void {
+    const items = this.getStringsToTranslate();
+    if (items.length === 0) return;
+    const strings = items.map(item => this.getSourceTextToTranslate(item));
+    const toLocale = this.targetLocale || "";
+    const callback = (translated: Array<string>): void => {
+      if (!Array.isArray(translated) || this.isDisposed) return;
+      // One undoable transaction over the locale-aware item actions; the grid cells are
+      // refreshed from the updated strings in one go below.
+      this.options.startUndoRedoTransaction("Translate to " + getActualLocaleName(toLocale));
+      try {
+        for (let i = 0; i < Math.min(items.length, translated.length); i++) {
+          if (!!translated[i]) {
+            this.setItemLocText(items[i], toLocale, translated[i]);
+          }
+        }
+      } finally {
+        this.options.stopUndoRedoTransaction();
+      }
+      this.updateStringsSurveyData();
+    };
+    this.options.doMachineTranslation(getActualLocaleName(this.sourceLocale), getActualLocaleName(toLocale), strings, callback);
+  }
+  // The strings the auto-translate button fills: the element's used strings with a stored
+  // text (a fresh element whose rows exist merely through value/name fallbacks has nothing
+  // to translate, matching the element state indicator) that have a source text and no
+  // target text yet. Collected over a used-strings tree, so the set does not depend on the
+  // dialog's current all/used filter.
+  public getStringsToTranslate(): Array<TranslationItem> {
+    const res = new Array<TranslationItem>();
+    const targetLoc = this.targetLocale || "";
+    if ((this.sourceLocale || "") === targetLoc) return res;
+    this.createUsedStringsRoot().allLocItems.forEach(item => {
+      if ((<LocalizableString>item.locString).isEmpty) return;
+      if (!item.getLocText(targetLoc) && !!this.getSourceTextToTranslate(item)) {
+        res.push(item);
+      }
+    });
+    return res;
+  }
+  private createUsedStringsRoot(): TranslationGroup {
+    const rootInfo = this.getRootTranslationObj();
+    const root = new TranslationGroup(rootInfo.name, rootInfo.obj, new TranslationUsedStringsOwner(this));
+    root.setAsRoot();
+    root.reset();
+    return root;
+  }
+  // A used string without a stored source text falls back to the value/name the grid shows in
+  // its source cell (a question's name, a choice's value), as the whole-survey dialog does.
+  private getSourceTextToTranslate(item: TranslationItem): string {
+    const loc = this.sourceLocale || "";
+    let res = item.getLocText(loc);
+    if (!res && !loc) {
+      res = item.getDefaultLocaleText(true);
+    }
+    return res;
+  }
+  // Grid edits and the auto-translate writes go through here - the button follows the
+  // remaining untranslated strings.
+  public performItemLocTextAction(item: TranslationItem, locale: string, newText: string): void {
+    super.performItemLocTextAction(item, locale, newText);
+    if (!!this.machineTranslationAction && !this.isDisposed) {
+      this.machineTranslationAction.enabled = this.getStringsToTranslate().length > 0;
+    }
   }
 }

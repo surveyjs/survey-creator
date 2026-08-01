@@ -1073,3 +1073,111 @@ test("Translate remaining strings action with a machine-translation handler: dia
   expect(actions.map(item => item.id)).toEqual(["svc-translation-fromlocale", "svc-translation-machine", "svc-translation-import", "svc-translation-export"]);
   editor.dispose();
 });
+
+const autoTranslateJSON = {
+  locale: "de",
+  pages: [{
+    name: "page1",
+    elements: [{
+      type: "checkbox",
+      name: "q1",
+      title: "Q1 title",
+      description: "Q1 desc",
+      choices: [
+        { value: "item1", text: { default: "Item 1", de: "Element 1" } },
+        { value: "item2", text: "Item 2" },
+        "item3",
+        3
+      ]
+    }]
+  }]
+};
+
+test("element strings dialog: auto-translate button is shown only when machine translation is available", () => {
+  const creator = createSideBySideCreator(autoTranslateJSON);
+  const model = getModel(creator);
+  const realQ1 = creator.survey.getQuestionByName("q1");
+  let grid = model.createElementStringsModel(realQ1);
+  expect(grid.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-machine")).toBeFalsy();
+  grid.dispose();
+  creator.onMachineTranslate.add((_, options) => { options.callback(options.strings.map(str => "de: " + str)); });
+  grid = model.createElementStringsModel(realQ1);
+  const action = grid.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-machine");
+  expect(action).toBeTruthy();
+  expect(action.enabled).toBeTruthy();
+  grid.dispose();
+});
+
+test("element strings dialog: auto-translate button is disabled when all used strings are translated or there is nothing to translate", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  creator.onMachineTranslate.add((_, options) => { options.callback(options.strings.map(str => "de: " + str)); });
+  const model = getModel(creator);
+  // q1's only used string already has a de text.
+  let grid = model.createElementStringsModel(creator.survey.getQuestionByName("q1"));
+  expect(grid.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-machine").enabled).toBeFalsy();
+  grid.dispose();
+  // q3 has no stored strings - its title row exists through the name fallback only,
+  // matching the "No strings to translate" element state.
+  grid = model.createElementStringsModel(creator.survey.getQuestionByName("q3"));
+  expect(grid.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-machine").enabled).toBeFalsy();
+  grid.dispose();
+  // q2's title is untranslated.
+  grid = model.createElementStringsModel(creator.survey.getQuestionByName("q2"));
+  expect(grid.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-machine").enabled).toBeTruthy();
+  grid.dispose();
+});
+
+test("element strings dialog: auto-translate fills only the empty target texts of the used strings, in one undo step", () => {
+  const creator = createSideBySideCreator(autoTranslateJSON);
+  let fromLocale = "";
+  let toLocale = "";
+  let passedStrings: Array<string> = [];
+  creator.onMachineTranslate.add((_, options) => {
+    fromLocale = options.fromLocale;
+    toLocale = options.toLocale;
+    passedStrings = options.strings;
+    options.callback(options.strings.map(str => "de: " + str));
+  });
+  const model = getModel(creator);
+  const realQ1 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
+  const grid = model.createElementStringsModel(realQ1);
+  const action = grid.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-machine");
+  action.action();
+  expect(fromLocale).toBe("en");
+  expect(toLocale).toBe("de");
+  // The already translated "item1" is kept; the value-only and numeric choices are not sent.
+  expect(passedStrings).toEqual(["Q1 title", "Q1 desc", "Item 2"]);
+  expect(realQ1.locTitle.getLocaleText("de")).toBe("de: Q1 title");
+  expect(realQ1.locDescription.getLocaleText("de")).toBe("de: Q1 desc");
+  expect(ItemValue.getItemByValue(realQ1.choices, "item1").locText.getLocaleText("de")).toBe("Element 1");
+  expect(ItemValue.getItemByValue(realQ1.choices, "item2").locText.getLocaleText("de")).toBe("de: Item 2");
+  expect(ItemValue.getItemByValue(realQ1.choices, "item3").locText.getLocaleText("de")).toBeFalsy();
+  // The writes mirror into the target pane and complete the element state.
+  expect(model.getElementTranslationState(model.targetSurvey.getQuestionByName("q1"))).toBe("translated");
+  // Everything is translated now.
+  expect(action.enabled).toBeFalsy();
+  // The whole auto-translation is one undo step.
+  creator.undo();
+  expect(realQ1.locTitle.getLocaleText("de")).toBeFalsy();
+  expect(realQ1.locDescription.getLocaleText("de")).toBeFalsy();
+  expect(ItemValue.getItemByValue(realQ1.choices, "item2").locText.getLocaleText("de")).toBeFalsy();
+  grid.dispose();
+});
+
+test("element strings dialog: auto-translate covers the used strings only, whatever the current filter is", () => {
+  const creator = createSideBySideCreator(autoTranslateJSON);
+  let passedStrings: Array<string> = [];
+  creator.onMachineTranslate.add((_, options) => {
+    passedStrings = options.strings;
+    options.callback(options.strings.map(str => "de: " + str));
+  });
+  const model = getModel(creator);
+  const grid = model.createElementStringsModel(creator.survey.getQuestionByName("q1"));
+  grid.stringsHeaderSurvey.getQuestionByName("stringsFilter").value = "all";
+  // The filter switch recreated the header survey along with the button.
+  const action = grid.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-machine");
+  expect(action).toBeTruthy();
+  action.action();
+  expect(passedStrings).toEqual(["Q1 title", "Q1 desc", "Item 2"]);
+  grid.dispose();
+});
