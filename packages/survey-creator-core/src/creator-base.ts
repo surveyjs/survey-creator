@@ -202,18 +202,11 @@ export class SurveyCreatorModel extends Base
    * @see clearTranslationsOnSourceTextChange
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
-  /**
-   * Specifies how the [Translation](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#translation-tab) tab edits translations.
-   *
-   * Accepted values:
-   *
-   * - `"default"` - A grid of translatable strings with a column per language.
-   * - `"sideBySide"` - Two design-mode instances of the edited survey rendered side by side: a read-only source language on the left and an inline-editable target language on the right.
-   *
-   * Default value: `"default"`
-   * @see showTranslationTab
-   */
-  public translationMode: "default" | "sideBySide" = "default";
+  // Specifies how the Translation tab edits translations:
+  // "allLanguages" - a grid of translatable strings with a column per language,
+  // "sideBySide" - two design-mode instances of the edited survey rendered side by side:
+  // a read-only source language on the left and an inline-editable target language on the right.
+  public translationMode: "allLanguages" | "sideBySide" = "allLanguages";
   // How the side-by-side Translation tab renders its editing surface; applies only if
   // translationMode is "sideBySide": "forms" - two design-mode survey instances side by side,
   // "grid" - a translation grid with a source and a target locale column. Users can
