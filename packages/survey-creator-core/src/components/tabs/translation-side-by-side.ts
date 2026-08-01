@@ -456,7 +456,8 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     translated: { iconName: "icon-check-16x16", tooltip: "ed.translationStateAllTranslated" }
   };
   // The state icon replaces the translate action's language icon and the state text becomes
-  // the whole tooltip; the title keeps the stable accessible name in every state.
+  // the whole tooltip. The button renders without a visible title, so the tooltip is also
+  // its accessible name - it changes with the state.
   private applyElementStateToAction(action: Action, state: TranslationElementState): void {
     const info = TranslationSideBySide.elementStateAppearance[state];
     action.iconName = info.iconName;
