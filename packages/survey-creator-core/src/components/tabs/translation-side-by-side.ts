@@ -15,9 +15,10 @@ import { StringEditorConnector } from "../string-editor";
 import { QuestionLinkValueModel } from "../link-value";
 import { showConfirmDialog } from "../../utils/confirm-dialog";
 import { updateMatixActionsAppearance } from "../../utils/actions";
-import { SurveyElementActionContainer } from "../action-container-view-model";
-import { getActualLocaleName } from "../../utils/creator-locstrings";
-import { ITranslationLocales, TranslationBase, TranslationEditor, TranslationGroup, TranslationItem } from "./translation";
+import {
+  ITranslationLocales, TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
+  createMachineTranslationAction, createStringsHeaderNavigationBar, runItemsMachineTranslation
+} from "./translation";
 
 // The default locale is stored as "" on the model; the settings survey dropdowns need a
 // non-empty value for it (an empty dropdown value would render as "no selection").
@@ -1276,41 +1277,20 @@ export class TranslationElementStrings extends TranslationBase {
   private machineTranslationAction: Action;
   private setupMachineTranslationButton(survey: SurveyModel): void {
     if (!this.options.getHasMachineTranslation() || this.readOnly) return;
-    const navigationBar = new SurveyElementActionContainer();
-    survey.createNavigationBarCallback = () => navigationBar;
-    survey.showCompleteButton = false;
-    survey.showNavigationButtons = true;
-    survey.navigationButtonsLocation = "top";
-    navigationBar.allowResponsiveness();
-    navigationBar.setActionsAppearance({ style: "brand", mode: "tertiary", size: "small" });
-    this.machineTranslationAction = new Action({
-      id: "svc-translation-machine",
-      iconName: "icon-language",
-      iconSize: "auto",
-      css: "svc-action-bar-item--right",
-      locTitleName: "ed.translateUsigAI",
-      component: "sv-action-bar-item",
-      enabled: this.getStringsToTranslate().length > 0,
-      action: () => this.doMachineTranslation()
-    });
+    createStringsHeaderNavigationBar(survey);
+    this.machineTranslationAction = createMachineTranslationAction(() => this.doMachineTranslation());
+    this.machineTranslationAction.enabled = this.getStringsToTranslate().length > 0;
     survey.addNavigationItem(this.machineTranslationAction);
   }
   public doMachineTranslation(): void {
-    const items = this.getStringsToTranslate();
-    if (items.length === 0) return;
-    const strings = items.map(item => this.getSourceTextToTranslate(item));
-    const toLocale = this.targetLocale || "";
-    const callback = (translated: Array<string>): void => {
-      if (!Array.isArray(translated) || this.isDisposed) return;
-      // The grid cells are refreshed from the updated strings in one go below.
-      for (let i = 0; i < Math.min(items.length, translated.length); i++) {
-        if (!!translated[i]) {
-          this.setItemLocText(items[i], toLocale, translated[i]);
-        }
-      }
-      this.updateStringsSurveyData();
-    };
-    this.options.doMachineTranslation(getActualLocaleName(this.sourceLocale), getActualLocaleName(toLocale), strings, callback);
+    // The results go into the real survey directly; the grid cells are refreshed in one go after.
+    runItemsMachineTranslation(this.options, this.getStringsToTranslate(), this.sourceLocale, this.targetLocale || "",
+      (item: TranslationItem, text: string): void => {
+        if (!this.isDisposed)this.setItemLocText(item, this.targetLocale || "", text);
+      },
+      (): void => {
+        if (!this.isDisposed)this.updateStringsSurveyData();
+      });
   }
   // The strings the auto-translate button fills: the element's used strings with a stored
   // text (a fresh element whose rows exist merely through value/name fallbacks has nothing
@@ -1323,7 +1303,7 @@ export class TranslationElementStrings extends TranslationBase {
     if ((this.sourceLocale || "") === targetLoc) return res;
     this.createUsedStringsRoot().allLocItems.forEach(item => {
       if ((<LocalizableString>item.locString).isEmpty) return;
-      if (!item.getLocText(targetLoc) && !!this.getSourceTextToTranslate(item)) {
+      if (!item.getLocText(targetLoc) && !!item.getTextToTranslateFrom(this.sourceLocale)) {
         res.push(item);
       }
     });
@@ -1335,16 +1315,6 @@ export class TranslationElementStrings extends TranslationBase {
     root.setAsRoot();
     root.reset();
     return root;
-  }
-  // A used string without a stored source text falls back to the value/name the grid shows in
-  // its source cell (a question's name, a choice's value), as the whole-survey dialog does.
-  private getSourceTextToTranslate(item: TranslationItem): string {
-    const loc = this.sourceLocale || "";
-    let res = item.getLocText(loc);
-    if (!res && !loc) {
-      res = item.getDefaultLocaleText(true);
-    }
-    return res;
   }
   // Grid edits and the auto-translate writes go through here - the button follows the
   // remaining untranslated strings.

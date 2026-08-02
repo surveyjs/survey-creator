@@ -14,9 +14,10 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import "./translation.scss";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
-import { SurveyElementActionContainer } from "../action-container-view-model";
-import { getActualLocaleName } from "../../utils/creator-locstrings";
-import { TranslationBase, TranslationItem } from "./translation-base";
+import {
+  TranslationBase, TranslationItem, createMachineTranslationAction,
+  createStringsHeaderNavigationBar, runItemsMachineTranslation
+} from "./translation-base";
 
 export * from "./translation-base";
 
@@ -544,21 +545,12 @@ export class TranslationEditor {
     popupModel.locale = editorLocalization.locale;
   }
   public doMachineTranslation(): void {
-    const items = this.createStringsToTranslate();
-    const strings = new Array<string>();
-    items.forEach(item => {
-      strings.push(this.getTextToTranslate(item));
-    });
-    const callback = (translatedStrings: Array<string>): void => {
-      if (!Array.isArray(translatedStrings)) return;
-      for (let i = 0; i < Math.min(items.length, translatedStrings.length); i++) {
-        items[i].values(this.locale).text = translatedStrings[i];
-      }
-      this.translation.updateStringsSurveyData();
-    };
-    const fromLocale = getActualLocaleName(this.fromLocale);
-    const toLocale = getActualLocaleName(this.locale);
-    this.options.doMachineTranslation(fromLocale, toLocale, strings, callback);
+    // The results go into the dialog's working copy; they reach the real survey on apply.
+    runItemsMachineTranslation(this.options, this.createStringsToTranslate(), this.fromLocale, this.locale,
+      (item: TranslationItem, text: string): void => {
+        item.values(this.locale).text = text;
+      },
+      (): void => this.translation.updateStringsSurveyData());
   }
   public apply(): void {
     // The tab model's per-string reaction is suppressed - onApply rebuilds its grid in one go.
@@ -612,25 +604,11 @@ export class TranslationEditor {
     });
   }
   private setupNavigationButtons(survey: SurveyModel): void {
-    const navigationBar = new SurveyElementActionContainer();
-    survey.createNavigationBarCallback = () => navigationBar;
-    survey.showCompleteButton = false;
-    survey.showNavigationButtons = true;
-    survey.navigationButtonsLocation = "top";
-    navigationBar.allowResponsiveness();
-    navigationBar.setActionsAppearance({ style: "brand", mode: "tertiary", size: "small" });
+    const navigationBar = createStringsHeaderNavigationBar(survey);
     navigationBar.addAction(this.createLocaleFromAction());
     const actionCss = "svc-action-bar-item--right";
     if (this.options.getHasMachineTranslation()) {
-      survey.addNavigationItem(new Action({
-        id: "svc-translation-machine",
-        iconName: "icon-language",
-        iconSize: "auto",
-        css: actionCss,
-        locTitleName: "ed.translateUsigAI",
-        component: "sv-action-bar-item",
-        action: () => { this.doMachineTranslation(); }
-      }));
+      survey.addNavigationItem(createMachineTranslationAction(() => { this.doMachineTranslation(); }));
     }
     const importAction = createImportCSVAction(() => { this.translation.importFromCSVFileDOM(); }, false, true);
     importAction.css = actionCss;
@@ -641,20 +619,11 @@ export class TranslationEditor {
   }
   private createStringsToTranslate(): Array<TranslationItem> {
     const res = new Array<TranslationItem>();
-    const loc = this.fromLocale || "";
     this.translation.root.allLocItems.forEach(item => {
-      if (this.getTextToTranslate(item)) {
+      if (item.getTextToTranslateFrom(this.fromLocale)) {
         res.push(item);
       }
     });
-    return res;
-  }
-  private getTextToTranslate(item: TranslationItem): string {
-    const loc = this.fromLocale || "";
-    let res = item.getLocText(loc);
-    if (!res && !loc) {
-      res = item.getDefaultLocaleText(true);
-    }
     return res;
   }
   private get isDefaultLocaleTarget(): boolean {

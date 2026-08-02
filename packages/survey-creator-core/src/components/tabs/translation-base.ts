@@ -1,6 +1,6 @@
 import {
   property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty,
-  Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue,
+  Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, Action,
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, QuestionCommentModel,
   Helpers, settings as surveySettings,
   MatrixDropdownColumn,
@@ -8,6 +8,8 @@ import {
   QuestionMatrixModel,
   DomDocumentHelper, DomWindowHelper
 } from "survey-core";
+import { SurveyElementActionContainer } from "../action-container-view-model";
+import { getActualLocaleName } from "../../utils/creator-locstrings";
 import { unparse, parse } from "papaparse";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
@@ -195,6 +197,17 @@ export class TranslationItem extends TranslationItemBase {
     let res = this.locString.getLocaleText("");
     if (!res) {
       res = this.getPlaceholder("", ignorePlaceHolder);
+    }
+    return res;
+  }
+  // The text the machine translation translates from: the stored text of the source locale,
+  // falling back to the value/name the grid shows in its cell (a question's name, a choice's
+  // value) when the source is the default locale.
+  public getTextToTranslateFrom(locale: string): string {
+    const loc = locale || "";
+    let res = this.getLocText(loc);
+    if (!res && !loc) {
+      res = this.getDefaultLocaleText(true);
     }
     return res;
   }
@@ -1344,4 +1357,55 @@ export class TranslationBase extends Base implements ITranslationLocales {
     this.tranlationChangedCallback = undefined;
     super.dispose();
   }
+}
+
+// The top navigation bar of a strings-grid header survey: hosts the machine-translation
+// button and the other dialog actions in the machine-translation and element strings dialogs.
+export function createStringsHeaderNavigationBar(survey: SurveyModel): SurveyElementActionContainer {
+  const navigationBar = new SurveyElementActionContainer();
+  survey.createNavigationBarCallback = () => navigationBar;
+  survey.showCompleteButton = false;
+  survey.showNavigationButtons = true;
+  survey.navigationButtonsLocation = "top";
+  navigationBar.allowResponsiveness();
+  navigationBar.setActionsAppearance({ style: "brand", mode: "tertiary", size: "small" });
+  return navigationBar;
+}
+
+export function createMachineTranslationAction(doAction: () => void): Action {
+  return new Action({
+    id: "svc-translation-machine",
+    iconName: "icon-language",
+    iconSize: "auto",
+    css: "svc-action-bar-item--right",
+    locTitleName: "ed.translateUsigAI",
+    component: "sv-action-bar-item",
+    action: doAction
+  });
+}
+
+// Sends the items' source texts to the machine-translation handler and applies the results
+// item by item; empty results are skipped, so they never overwrite an existing text.
+// applyTranslation decides where the translated text goes: the real survey (the element
+// strings dialog) or the dialog's working copy (the machine-translation dialog).
+export function runItemsMachineTranslation(
+  options: ISurveyCreatorOptions,
+  items: Array<TranslationItem>,
+  fromLocale: string,
+  toLocale: string,
+  applyTranslation: (item: TranslationItem, text: string) => void,
+  onCompleted: () => void
+): void {
+  if (items.length === 0) return;
+  const strings = items.map(item => item.getTextToTranslateFrom(fromLocale));
+  const callback = (translated: Array<string>): void => {
+    if (!Array.isArray(translated)) return;
+    for (let i = 0; i < Math.min(items.length, translated.length); i++) {
+      if (!!translated[i]) {
+        applyTranslation(items[i], translated[i]);
+      }
+    }
+    onCompleted();
+  };
+  options.doMachineTranslation(getActualLocaleName(fromLocale), getActualLocaleName(toLocale), strings, callback);
 }
