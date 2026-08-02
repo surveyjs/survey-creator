@@ -17,7 +17,7 @@ import { showConfirmDialog } from "../../utils/confirm-dialog";
 import { updateMatixActionsAppearance } from "../../utils/actions";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import { getActualLocaleName } from "../../utils/creator-locstrings";
-import { ITranslationLocales, Translation, TranslationGroup, TranslationItem } from "./translation";
+import { ITranslationLocales, TranslationBase, TranslationEditor, TranslationGroup, TranslationItem } from "./translation";
 
 // The default locale is stored as "" on the model; the settings survey dropdowns need a
 // non-empty value for it (an empty dropdown value would render as "no selection").
@@ -31,7 +31,7 @@ const emptySpaceText = "\u00A0";
 // because the side-by-side model's own root uses different filters - all strings in the forms
 // view, an optional single-page scope in the grid view.
 class TranslationUsedStringsOwner implements ITranslationLocales {
-  constructor(private owner: Translation) { }
+  constructor(private owner: TranslationBase) { }
   public get locales(): Array<string> { return []; }
   public get showAllStrings(): boolean { return false; }
   public get readOnly(): boolean { return true; }
@@ -62,7 +62,7 @@ class TranslationUsedStringsOwner implements ITranslationLocales {
 // least one used string has no stored target-locale text, "translated" - all of them do.
 export type TranslationElementState = "none" | "untranslated" | "translated";
 
-export class TranslationSideBySide extends Translation implements ITranslationDropdownOwner {
+export class TranslationSideBySide extends TranslationBase implements ITranslationDropdownOwner {
   @property() selectedPageName: string;
   @property() sourceSurvey: SurveyModel;
   @property() targetSurvey: SurveyModel;
@@ -340,7 +340,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     // single page, so it goes through a temporary unscoped model then (like the CSV export).
     if (!!this.filteredPage) {
       this.runWithoutSurveyReaction(() => {
-        const translation = new Translation(this.survey, this.options, false);
+        const translation = this.createHeadlessTranslation();
         translation.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
         translation.deleteLocaleStrings(locale);
         translation.dispose();
@@ -719,7 +719,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   // exactly like the forms view does.
   public exportToCSV(): string {
     if (!this.isSideBySideGrid) return super.exportToCSV();
-    const translation = new Translation(this.survey, this.options, false);
+    const translation = this.createHeadlessTranslation();
     translation.showAllStrings = true;
     translation.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
     translation.localeInitialVisibleCallback = this.localeInitialVisibleCallback;
@@ -728,6 +728,15 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
     } finally {
       translation.dispose();
     }
+  }
+  // The "Translate remaining strings" dialog of the side-by-side mode: the same machine
+  // translation editor the all-languages mode opens from its languages matrix.
+  public createTranslationEditor(locale: string): TranslationEditor {
+    const res = new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback, this);
+    res.onApply = () => {
+      this.reset();
+    };
+    return res;
   }
   // Keeps the vertical scrollbars of the two panes in sync. The UI components pass their
   // scrollable containers here; passing null/undefined (on unmount) detaches the listener.
@@ -1019,7 +1028,7 @@ export class TranslationSideBySide extends Translation implements ITranslationDr
   // translation item path (and mirror into the panes). It covers the strings that
   // cannot be edited inline - the choices of matrix dropdown columns (whose cells render over
   // copies of the column data), survey-level strings, page/panel strings of other locales etc.
-  public createElementStringsModel(realObj: Base): Translation {
+  public createElementStringsModel(realObj: Base): TranslationElementStrings {
     const model = new TranslationElementStrings(this.survey, realObj, this.options);
     model.translationStringVisibilityCallback = this.translationStringVisibilityCallback;
     model.readOnly = this.readOnly;
@@ -1209,7 +1218,7 @@ export class TranslationSideBySideGrid extends TranslationSideBySide {
 // real survey - the survey itself, a page, a panel or a question. The grid rows bind to the
 // real localizable strings (a column's choices are the column templateQuestion's own items),
 // never to the pane copies.
-export class TranslationElementStrings extends Translation {
+export class TranslationElementStrings extends TranslationBase {
   constructor(survey: SurveyModel, private elementValue: Base, options: ISurveyCreatorOptions = null) {
     super(survey, options, true);
   }

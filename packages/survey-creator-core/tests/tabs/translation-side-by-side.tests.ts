@@ -1,5 +1,6 @@
 import { ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionTextModel } from "survey-core";
 import { TranslationSideBySide } from "../../src/components/tabs/translation-side-by-side";
+import { Translation, TranslationBase } from "../../src/components/tabs/translation";
 import { TranslationDropdownViewModel, translationDropdownComponentName } from "../../src/components/tabs/translation-dropdown";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
@@ -1144,5 +1145,49 @@ test("element strings dialog: auto-translate covers the used strings only, whate
   expect(action).toBeTruthy();
   action.action();
   expect(passedStrings).toEqual(["Q1 title", "Q1 desc", "Item 2"]);
+  grid.dispose();
+});
+
+test("forms view CSV export includes all used locale columns", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  expect(model.view).toBe("forms");
+  const rows = model.exportToCSV().split("\n");
+  const header = rows[0].split(",");
+  expect(header[0]).toContain("language"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(header).toContain("default");
+  expect(header).toContain("de");
+  const q1Row = rows.filter(row => row.indexOf("q1.title") >= 0)[0];
+  expect(q1Row).toBeTruthy();
+  expect(q1Row).toContain("Question 1");
+  expect(q1Row).toContain("Frage 1");
+});
+
+test("grid view CSV export covers the whole survey even when the grid is scoped to a page", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  model.view = "grid";
+  model.filteredPage = creator.survey.getPageByName("page2");
+  const csv = model.exportToCSV();
+  expect(csv.split("\n")[0].split(",")).toContain("de");
+  // Strings of the filtered-out page are still exported.
+  expect(csv).toContain("q1.title");
+  expect(csv).toContain("Frage 1");
+  expect(csv).toContain("q4.title");
+});
+
+test("side-by-side model carries no all-languages machinery", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  expect(model instanceof TranslationBase).toBeTruthy();
+  expect(model instanceof Translation).toBeFalsy();
+  // No locales matrix, no add-language dropdown - the languages live in the side-by-side settings survey.
+  expect((<any>model).localesQuestion).toBeUndefined();
+  expect((<any>model).addLanguageAction).toBeUndefined();
+  expect((<any>model).chooseLanguageActions).toBeUndefined();
+  expect(model.settingsSurvey.getQuestionByName("locales")).toBeFalsy();
+  // The element strings dialog model is a bare grid - it builds no settings survey at all.
+  const grid = model.createElementStringsModel(creator.survey.getQuestionByName("q1"));
+  expect(grid.settingsSurvey).toBeUndefined();
   grid.dispose();
 });

@@ -5,11 +5,11 @@ import {
   SurveyElementBase,
   Survey
 } from "survey-react-ui";
-import { Translation, TranslationSideBySide } from "survey-creator-core";
+import { TranslationBase, TranslationSideBySide } from "survey-creator-core";
 import { SurfacePlaceholder } from "../../components/SurfacePlaceholder";
 
 export class TabTranslationComponent extends SurveyElementBase<any, any> {
-  private get model(): Translation {
+  private get model(): TranslationBase {
     return this.props.data || this.props.model;
   }
   protected getStateElement(): Base {
@@ -33,7 +33,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     // The side-by-side grid view reuses the default strings-grid markup.
     return this.renderStringsContent(this.model);
   }
-  renderStringsContent(model: Translation): React.JSX.Element {
+  renderStringsContent(model: TranslationBase): React.JSX.Element {
     return (
       <div className="st-content">
         <div className="svc-flex-column st-strings-wrapper">

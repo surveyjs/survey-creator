@@ -1,16 +1,16 @@
 import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
-import { Translation, TranslationSideBySide } from "survey-creator-core";
+import { TranslationBase, TranslationSideBySide } from "survey-creator-core";
 
 @Component({
   selector: "svc-tab-translation",
   templateUrl: "./translation.component.html",
   styles: [":host { display: none; }"]
 })
-export class TranslationTabComponent extends BaseAngular<Translation> {
-  @Input() model!: Translation;
+export class TranslationTabComponent extends BaseAngular<TranslationBase> {
+  @Input() model!: TranslationBase;
 
-  protected getModel(): Translation {
+  protected getModel(): TranslationBase {
     return this.model;
   }
   public get sideBySideModel(): TranslationSideBySide | undefined {
@@ -24,7 +24,7 @@ export class TranslationTabComponent extends BaseAngular<Translation> {
     this.sideBySideModel?.setTargetScrollElement(ref ? ref.nativeElement : undefined as any);
   }
   // The strings-grid model: the tab model itself in the default mode and in the side-by-side grid view.
-  public get stringsModel(): Translation | undefined {
+  public get stringsModel(): TranslationBase | undefined {
     return this.sideBySideModel ? undefined : this.model;
   }
   // The strings survey is fully recreated on reset(). Its elements keep deterministic ids across

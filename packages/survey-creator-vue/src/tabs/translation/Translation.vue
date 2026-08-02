@@ -23,17 +23,17 @@
 </template>
 
 <script lang="ts" setup>
-import type { Translation, TranslationSideBySide } from "survey-creator-core";
+import type { TranslationBase, TranslationSideBySide } from "survey-creator-core";
 import { computed } from "vue";
 import { useBase, SurveyComponent } from "survey-vue3-ui";
 import SurfacePlaceholder from "../../components/SurfacePlaceholder.vue";
-const props = defineProps<{ model: Translation }>();
+const props = defineProps<{ model: TranslationBase }>();
 useBase(() => props.model);
 const sideBySideModel = computed<TranslationSideBySide | undefined>(() =>
   props.model.isSideBySideForms ? (props.model as TranslationSideBySide) : undefined
 );
 // The strings-grid model: the tab model itself in the default mode and in the side-by-side grid view.
-const stringsModel = computed<Translation | undefined>(() =>
+const stringsModel = computed<TranslationBase | undefined>(() =>
   sideBySideModel.value ? undefined : props.model
 );
 const setSourceScrollElement = (el: unknown) => {

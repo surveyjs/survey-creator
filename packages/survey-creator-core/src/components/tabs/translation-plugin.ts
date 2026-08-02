@@ -3,7 +3,7 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
-import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";
+import { Translation, TranslationBase, createImportCSVAction, createExportCSVAction } from "./translation";
 import { TranslationSideBySide } from "./translation-side-by-side";
 import { TabControlModel } from "../side-bar/tab-control-model";
 
@@ -18,7 +18,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private _showOneCategoryInPropertyGrid: boolean = true;
   private tabControlModel: TabControlModel;
 
-  public model: Translation;
+  public model: TranslationBase;
   public static iconName = "icon-language";
   private _machineTranslationFromLocale: string | undefined;
   public get machineTranslationFromLocale(): string | undefined {
@@ -57,7 +57,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.sidebarTab.locTitleName = "ed.translationPropertyGridTitle";
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
-  private wireModelCallbacks(model: Translation): void {
+  private wireModelCallbacks(model: TranslationBase): void {
     model.getMachineTranslationFromLocale = () => this._machineTranslationFromLocale;
     model.setMachineTranslationFromLocale = (locale: string) => {
       this._machineTranslationFromLocale = locale;
@@ -87,16 +87,17 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       this.activateSideBySide();
       return;
     }
-    this.model = new Translation(this.creator.survey, this.creator);
-    this.wireModelCallbacks(this.model);
+    const model = new Translation(this.creator.survey, this.creator);
+    this.model = model;
+    this.wireModelCallbacks(model);
     this.updateSettingsSurvey();
-    this.sidebarTab.componentData = this.model.settingsSurvey;
+    this.sidebarTab.componentData = model.settingsSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activePage = this.sidebarTab.id;
 
     this.mergeLocaleWithDefaultAction.title = this.createMergeLocaleWithDefaultActionTitleUpdater();
     this.mergeLocaleWithDefaultAction.tooltip = this.createMergeLocaleWithDefaultActionTitleUpdater();
-    this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
+    this.mergeLocaleWithDefaultAction.visible = model.canMergeLocaleWithDefault;
 
     this.filterPageAction.visible = this.creator.survey.pageCount > 1;
     this.updateFilterPageAction(true);
@@ -109,7 +110,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     this.setFilterPageActionItems();
 
-    this.model.onPropertyChanged.add((sender, options) => {
+    model.onPropertyChanged.add((sender, options) => {
       if (options.name === "filteredPage") {
         this.updateFilterPageAction();
       }
@@ -117,15 +118,15 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         this.updateFilterStrigsAction();
       }
       if (options.name === "canMergeLocaleWithDefault") {
-        this.mergeLocaleWithDefaultAction.visible = this.model.canMergeLocaleWithDefault;
+        this.mergeLocaleWithDefaultAction.visible = model.canMergeLocaleWithDefault;
       }
       if (options.name === "mergeLocaleWithDefaultText") {
-        this.mergeLocaleWithDefaultAction.title = this.model.mergeLocaleWithDefaultText;
-        this.mergeLocaleWithDefaultAction.tooltip = this.model.mergeLocaleWithDefaultText;
+        this.mergeLocaleWithDefaultAction.title = model.mergeLocaleWithDefaultText;
+        this.mergeLocaleWithDefaultAction.tooltip = model.mergeLocaleWithDefaultText;
       }
     });
 
-    this.model.reset();
+    model.reset();
     this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.updateTabControl();
   }
@@ -315,7 +316,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       mode: "small",
       needSeparator: true,
       action: () => {
-        this.model.mergeLocaleWithDefault();
+        // The action is visible in the all-languages mode only.
+        (<Translation>this.model).mergeLocaleWithDefault();
       }
     });
     items.push(this.mergeLocaleWithDefaultAction);
