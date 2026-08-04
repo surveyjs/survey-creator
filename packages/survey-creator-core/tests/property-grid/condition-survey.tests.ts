@@ -2355,7 +2355,7 @@ test("expression validation with multiple errors", () => {
       {
         "type": "text",
         "name": "q1",
-        "visibleIf": "{q2} = {q2} = {q3}",
+        "visibleIf": "{q11} = {q12} = {q13}",
         "requiredIf": "foo() = foo() = bar()",
         "enableIf": "foo({q2}) = foo({q2}) = bar({q2})",
       }
@@ -2369,7 +2369,7 @@ test("expression validation with multiple errors", () => {
 
   const visibleIfQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
   expect(visibleIfQuestion.errors).toHaveLength(1);
-  expect(visibleIfQuestion.errors[0].text).toBe("Unknown variables: \"q2, q3\".");
+  expect(visibleIfQuestion.errors[0].text).toBe("Unknown variables: \"q11, q12, q13\".");
 
   const requiredIfQuestion = propertyGrid.survey.getQuestionByName("requiredIf");
   expect(requiredIfQuestion.errors).toHaveLength(1);
