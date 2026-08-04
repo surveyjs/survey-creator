@@ -2854,7 +2854,7 @@ export var mmStrings = {
 
     }
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "အရာ 1" }, { value: "item2", text: "အရာ 2" }, { value: "item3", text: "အရာ 3" }],
     columns: [{ value: "column1", text: "ကော်လံ 1" }, { value: "column2", text: "ကော်လံ 2" }, { value: "column3", text: "ကော်လံ 3" }],

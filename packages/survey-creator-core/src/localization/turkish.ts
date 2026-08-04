@@ -3302,7 +3302,7 @@ export var turkishStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Ön ayar uygulandı"
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "Madde 1" }, { value: "item2", text: "Madde 2" }, { value: "item3", text: "Madde 3" }],
     columns: [{ value: "column1", text: "Sütun 1" }, { value: "column2", text: "Sütun 2" }, { value: "column3", text: "Sütun 3" }],

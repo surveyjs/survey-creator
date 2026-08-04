@@ -3302,7 +3302,7 @@ export var hebrewStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "פריסט מוחל"
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "פריט 1" }, { value: "item2", text: "פריט 2" }, { value: "item3", text: "פריט 3" }],
     columns: [{ value: "column1", text: "טור 1" }, { value: "column2", text: "טור 2" }, { value: "column3", text: "טור 3" }],

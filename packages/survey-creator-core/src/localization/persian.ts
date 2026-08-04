@@ -3302,7 +3302,7 @@ export var persianStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "پریست اعمال شده"
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "مورد 1" }, { value: "item2", text: "مورد 2" }, { value: "item3", text: "مورد 3" }],
     columns: [{ value: "column1", text: "ستون 1" }, { value: "column2", text: "ستون 2" }, { value: "column3", text: "ستون 3" }],

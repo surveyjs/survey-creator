@@ -3302,7 +3302,7 @@ export var bgStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Приложена предварителна настройка"
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "Елемент 1" }, { value: "item2", text: "Елемент 2" }, { value: "item3", text: "Елемент 3" }],
     columns: [{ value: "column1", text: "Колона 1" }, { value: "column2", text: "Колона 2" }, { value: "column3", text: "Колона 3" }],

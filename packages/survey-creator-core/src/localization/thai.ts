@@ -3302,7 +3302,7 @@ export const thStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "ใช้ค่าที่ตั้งไว้ล่วงหน้า"
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "รายการ 1" }, { value: "item2", text: "รายการ 2" }, { value: "item3", text: "รายการ 3" }],
     columns: [{ value: "column1", text: "คอลัมน์ 1" }, { value: "column2", text: "คอลัมน์ 2" }, { value: "column3", text: "คอลัมน์ 3" }],

@@ -3302,7 +3302,7 @@ export const roStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Presetare aplicată"
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "Element 1" }, { value: "item2", text: "Element 2" }, { value: "item3", text: "Element 3" }],
     columns: [{ value: "column1", text: "Coloană 1" }, { value: "column2", text: "Coloană 2" }, { value: "column3", text: "Coloană 3" }],

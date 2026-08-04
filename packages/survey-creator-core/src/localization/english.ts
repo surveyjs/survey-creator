@@ -1795,7 +1795,7 @@ export var enStrings = {
     },
     presetApplied: "Preset applied",
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "Item 1" }, { value: "item2", text: "Item 2" }, { value: "item3", text: "Item 3" }],
     columns: [{ value: "column1", text: "Column 1" }, { value: "column2", text: "Column 2" }, { value: "column3", text: "Column 3" }],

@@ -3302,7 +3302,7 @@ export var mnStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Урьдчилсан тохируулга хэрэглээ"
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "Хэсэг 1" }, { value: "item2", text: "Хэсэг 2" }, { value: "item3", text: "Хэсэг 3" }],
     columns: [{ value: "column1", text: "Column 1" }, { value: "column2", text: "Column 2" }, { value: "column3", text: "Column 3" }],

@@ -3302,7 +3302,7 @@ export var msStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Pratetap digunakan"
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "Perkara 1" }, { value: "item2", text: "Perkara 2" }, { value: "item3", text: "Perkara 3" }],
     columns: [{ value: "column1", text: "Lajur 1" }, { value: "column2", text: "Lajur 2" }, { value: "column3", text: "Lajur 3" }],

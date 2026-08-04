@@ -3302,7 +3302,7 @@ export var nlStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset toegepast"
   },
-  // The default JSON for new questions, see settings.toolbox.defaultJSON
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "Item 1" }, { value: "item2", text: "Item 2" }, { value: "item3", text: "Item 3" }],
     columns: [{ value: "column1", text: "Kolom 1" }, { value: "column2", text: "Kolom 2" }, { value: "column3", text: "Kolom 3" }],
