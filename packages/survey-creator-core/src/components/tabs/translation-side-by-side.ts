@@ -1,6 +1,6 @@
 import {
   Action, AdaptiveActionContainer, Base, EventBase, IDialogOptions, ILocalizableString, ItemValue,
-  JsonObjectProperty, LocalizableString, PageModel, PanelModel, PopupBaseViewModel, Question,
+  LocalizableString, PageModel, PanelModel, PopupBaseViewModel, Question,
   QuestionButtonGroupModel, QuestionDropdownModel, QuestionMatrixDropdownModel,
   QuestionMatrixDynamicModel, SurveyModel, property,
   settings as surveySettings, surveyLocalization
@@ -16,7 +16,7 @@ import { QuestionLinkValueModel } from "../link-value";
 import { showConfirmDialog } from "../../utils/confirm-dialog";
 import { updateMatixActionsAppearance } from "../../utils/actions";
 import {
-  ITranslationLocales, TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
+  TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
   createMachineTranslationAction, createStringsHeaderNavigationBar, runItemsMachineTranslation
 } from "./translation";
 
@@ -26,37 +26,6 @@ const defaultLocaleSettingValue = "default";
 // A non-breaking space: rendered instead of an empty header string of the source pane to keep
 // the row one text line high (see setupSourceEmptySpaces).
 const emptySpaceText = "\u00A0";
-
-// The owner of the progress-counting tree of the languages matrix: the whole-survey
-// used-strings filter (showAllStrings = false) of the base class. A separate owner is needed
-// because the side-by-side model's own root uses different filters - all strings in the forms
-// view, an optional single-page scope in the grid view.
-class TranslationUsedStringsOwner implements ITranslationLocales {
-  constructor(private owner: TranslationBase) { }
-  public get locales(): Array<string> { return []; }
-  public get showAllStrings(): boolean { return false; }
-  public get readOnly(): boolean { return true; }
-  public getLocaleName(loc: string): string { return this.owner.getLocaleName(loc); }
-  public availableTranlationsChangedCallback: () => void;
-  public tranlationChangedCallback: (locale: string, name: string, value: string, context: any) => void;
-  public translateItemAfterRender(): void { }
-  public fireOnObjCreating(): void { }
-  public removeLocale(): void { }
-  public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean): boolean {
-    return this.owner.canShowProperty(obj, prop, isEmpty, isShowing);
-  }
-  // The element strings dialog scopes its tree via canShowElementGroup - the used-strings
-  // tree built over the same owner must stay within the same scope.
-  public canShowElementGroup(obj: Base): boolean {
-    const owner = <ITranslationLocales>this.owner;
-    return !owner.canShowElementGroup || owner.canShowElementGroup(obj);
-  }
-  public getEditLocale(): string { return ""; }
-  public get isEditMode(): boolean { return false; }
-  public getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string): string {
-    return newValue;
-  }
-}
 
 // The translation state of a target-pane element for the current target language:
 // "none" - no used strings with a stored text (nothing to translate), "untranslated" - at
@@ -248,12 +217,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // Never scoped by the grid view's page filter and independent of the view's strings filter.
   public getUsedStringsItems(): Array<TranslationItem> {
     return this.createUsedStringsRoot().allLocItems;
-  }
-  private createUsedStringsRoot(): TranslationGroup {
-    const root = new TranslationGroup("survey", this.survey, new TranslationUsedStringsOwner(this));
-    root.setAsRoot();
-    root.reset();
-    return root;
   }
   public isItemTranslated(item: TranslationItem, locale: string): boolean {
     return !!item.locString.getLocaleText(locale);
@@ -1301,20 +1264,14 @@ export class TranslationElementStrings extends TranslationBase {
     const res = new Array<TranslationItem>();
     const targetLoc = this.targetLocale || "";
     if ((this.sourceLocale || "") === targetLoc) return res;
-    this.createUsedStringsRoot().allLocItems.forEach(item => {
+    // The dialog's tree covers the element only (see getRootTranslationObj).
+    this.createUsedStringsRoot(this.getRootTranslationObj()).allLocItems.forEach(item => {
       if ((<LocalizableString>item.locString).isEmpty) return;
       if (!item.getLocText(targetLoc) && !!item.getTextToTranslateFrom(this.sourceLocale)) {
         res.push(item);
       }
     });
     return res;
-  }
-  private createUsedStringsRoot(): TranslationGroup {
-    const rootInfo = this.getRootTranslationObj();
-    const root = new TranslationGroup(rootInfo.name, rootInfo.obj, new TranslationUsedStringsOwner(this));
-    root.setAsRoot();
-    root.reset();
-    return root;
   }
   // Grid edits and the auto-translate writes go through here - the button follows the
   // remaining untranslated strings.

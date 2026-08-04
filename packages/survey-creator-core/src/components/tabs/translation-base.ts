@@ -618,6 +618,37 @@ export class TranslationGroup extends TranslationItemBase {
   }
 }
 
+// The owner of a used-strings tree (see TranslationBase.createUsedStringsRoot): a read-only
+// used-strings filter (showAllStrings = false) independent of the owner model's own filters.
+// The visibility rules (canShowProperty, canShowElementGroup) still delegate to the owner,
+// so the tree covers exactly the strings the owner's surface can show.
+class TranslationUsedStringsOwner implements ITranslationLocales {
+  constructor(private owner: TranslationBase) { }
+  public get locales(): Array<string> { return []; }
+  public get showAllStrings(): boolean { return false; }
+  public get readOnly(): boolean { return true; }
+  public getLocaleName(loc: string): string { return this.owner.getLocaleName(loc); }
+  public availableTranlationsChangedCallback: () => void;
+  public tranlationChangedCallback: (locale: string, name: string, value: string, context: any) => void;
+  public translateItemAfterRender(): void { }
+  public fireOnObjCreating(): void { }
+  public removeLocale(): void { }
+  public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean): boolean {
+    return this.owner.canShowProperty(obj, prop, isEmpty, isShowing);
+  }
+  // The element strings dialog scopes its tree via canShowElementGroup - the used-strings
+  // tree built over the same owner must stay within the same scope.
+  public canShowElementGroup(obj: Base): boolean {
+    const owner = <ITranslationLocales>this.owner;
+    return !owner.canShowElementGroup || owner.canShowElementGroup(obj);
+  }
+  public getEditLocale(): string { return ""; }
+  public get isEditMode(): boolean { return false; }
+  public getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string): string {
+    return newValue;
+  }
+}
+
 // The shared core of every translation model: the tab in both modes (all-languages and
 // side-by-side), the machine-translation dialog and the element strings dialog. It owns the
 // translation tree, the strings grid surveys, the CSV import/export and the write path to the
@@ -1204,6 +1235,17 @@ export class TranslationBase extends Base implements ITranslationLocales {
   // deletion, export from a page-scoped grid).
   protected createHeadlessTranslation(): TranslationBase {
     return new TranslationBase(this.survey, this.options, false);
+  }
+  // A tree over the used strings with stored texts, independent of the model's own filters
+  // (showAllStrings, the grid's page scope): the progress denominators of the side-by-side
+  // languages matrix and element indicators, and the auto-translate string sets. Covers the
+  // whole survey unless rootInfo narrows it to an element.
+  protected createUsedStringsRoot(rootInfo?: { obj: Base, name: string }): TranslationGroup {
+    const info = rootInfo || { obj: this.survey, name: "survey" };
+    const root = new TranslationGroup(info.name, info.obj, new TranslationUsedStringsOwner(this));
+    root.setAsRoot();
+    root.reset();
+    return root;
   }
   public exportToCSV(): string {
     if (!this.root) {
