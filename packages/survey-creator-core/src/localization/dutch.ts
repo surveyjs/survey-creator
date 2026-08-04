@@ -146,10 +146,10 @@ export var nlStrings = {
     undo: "Ongedaan maken",
     // "Redo"
     redo: "Opnieuw uitvoeren",
-    // [Auto-translated] "Expand"
-    expandTooltip: "Uitbreiden",
+    // "Expand"
+    expandTooltip: "Uitklappen",
     // [Auto-translated] "Collapse"
-    collapseTooltip: "Instorting",
+    collapseTooltip: "Inklappen",
     // "Expand All"
     expandAllTooltip: "Alles uitvouwen",
     // "Collapse All"
