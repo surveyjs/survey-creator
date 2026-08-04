@@ -122,10 +122,18 @@ export class SurveyHelper {
     return "unknown";
   }
 
+  public static isColumnObj(obj: any): boolean {
+    if (SurveyHelper.getObjectType(obj) === ObjType.Column) return true;
+    //A question that edits a column, see MatrixCellWrapperEditSurvey
+    const ownerObj = !!obj ? obj["ownerObj"] : undefined;
+    return !!ownerObj && SurveyHelper.getObjectType(ownerObj) === ObjType.Column;
+  }
   public static getObjectName(obj: any, showObjectTitle = false): string {
     var objType = SurveyHelper.getObjectType(obj);
     if (objType === ObjType.Survey)
       return editorLocalization.getString("ed.surveyTypeName");
+    //A column is displayed by its title in the designer, while its name is a technical identifier
+    if (SurveyHelper.isColumnObj(obj) && obj["title"]) return obj["title"];
     if (showObjectTitle && obj["title"]) return obj["title"];
     if (showObjectTitle && obj["text"]) return obj["text"];
     if (obj["name"]) return obj["name"];

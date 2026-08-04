@@ -19,6 +19,12 @@ import {
 } from "../helper";
 
 const title = "Drag Drop";
+//The default choices for a new question, see settings.toolbox.defaultJSON
+const defaultChoices = [
+  { value: "item1", text: "Item 1" },
+  { value: "item2", text: "Item 2" },
+  { value: "item3", text: "Item 3" }
+];
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
@@ -337,7 +343,7 @@ test.describe(title, () => {
           name: "panel1",
           elements: [
             { type: "text", name: "q1" },
-            { type: "radiogroup", name: "question1", choices: ["Item 1", "Item 2", "Item 3"] },
+            { type: "radiogroup", name: "question1", choices: defaultChoices },
           ],
         }],
       }],
@@ -457,7 +463,7 @@ test.describe(title, () => {
         name: "page1",
         elements: [
           { type: "panel", name: "panel1", elements: [{ type: "text", name: "q1" }] },
-          { type: "radiogroup", name: "question1", choices: ["Item 1", "Item 2", "Item 3"] },
+          { type: "radiogroup", name: "question1", choices: defaultChoices },
         ],
       }],
     };
