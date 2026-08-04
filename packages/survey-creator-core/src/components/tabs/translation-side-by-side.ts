@@ -109,7 +109,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       const row = options.row;
       cellQuestion.linkClickCallback = () => {
         // Resolved at click time: a row can be reused for a different locale after a refresh.
-        const locale = this.getLanguagesRowLocale(matrix, row);
+        const locale = this.getLocaleByMatrixRow(matrix, row);
         if (locale !== undefined)this.selectLanguage(locale);
       };
     });
@@ -117,7 +117,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       if (options.question.name !== "languages") return;
       const matrix = <QuestionMatrixDynamicModel>options.question;
       const row = options.row;
-      const locale = this.getLanguagesRowLocale(matrix, row);
+      const locale = this.getLocaleByMatrixRow(matrix, row);
       // The default language is the reference every translation is measured against - no delete.
       if (!locale || this.readOnly) return;
       options.actions.push(new Action({
@@ -128,7 +128,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         showTitle: false,
         location: "end",
         action: () => {
-          const currentLocale = this.getLanguagesRowLocale(matrix, row);
+          const currentLocale = this.getLocaleByMatrixRow(matrix, row);
           if (!!currentLocale)this.deleteLanguage(currentLocale);
         }
       }));
@@ -265,12 +265,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         cellQuestion.isSelected = (val[i].name || "") === target;
       }
     }
-  }
-  private getLanguagesRowLocale(matrix: QuestionMatrixDynamicModel, row: any): string {
-    const index = matrix.visibleRows.indexOf(row);
-    const val = matrix.value;
-    if (index < 0 || !Array.isArray(val) || index >= val.length || !val[index]) return undefined;
-    return val[index].name || "";
   }
   // A matrix language click behaves exactly like picking the language in the target dropdown;
   // per the dropdowns' mutual-exclusion rule, taking over the source's language resets the

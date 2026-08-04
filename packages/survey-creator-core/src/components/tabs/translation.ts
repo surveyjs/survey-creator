@@ -130,13 +130,7 @@ export class Translation extends TranslationBase {
     });
     res.onGetMatrixRowActions.add((sender, options) => {
       const q = options.question;
-      let locale: string | undefined = undefined;
-      if (Array.isArray(q.value)) {
-        const rowIndex = q.visibleRows.indexOf(options.row);
-        if (rowIndex >= 0 && rowIndex < q.value.length) {
-          locale = q.value[rowIndex].name;
-        }
-      }
+      const locale = this.getLocaleByMatrixRow(<QuestionMatrixDynamicModel>q, options.row);
       // The default locale's remove action is already suppressed by onMatrixRenderRemoveButton, so this is a no-op for it.
       updateMatrixRemoveAction(<QuestionMatrixDynamicModel>q, options.actions, <MatrixDynamicRowModel>options.row);
       if (this.options.getHasMachineTranslation() && locale !== undefined) {
@@ -437,11 +431,8 @@ export class Translation extends TranslationBase {
     this.reset();
   }
   public createTranslationEditor(locale: string): TranslationEditor {
-    const res = new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback, this);
-    res.onApply = () => {
-      this.reset();
-    };
-    return res;
+    return this.setupTranslationEditor(
+      new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback, this));
   }
   public showTranslationEditor(locale: string): void {
     this.createTranslationEditor(locale).showDialog();

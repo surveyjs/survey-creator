@@ -1,7 +1,7 @@
 import {
   property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty,
   Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, Action,
-  PanelModelBase, QuestionMatrixDropdownModel, PanelModel, QuestionCommentModel,
+  PanelModelBase, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel, PanelModel, QuestionCommentModel,
   Helpers, settings as surveySettings,
   MatrixDropdownColumn,
   MatrixCells,
@@ -798,6 +798,16 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected createSettingsSurvey(): SurveyModel {
     return undefined;
   }
+  // The locale a row of a settings survey matrix stands for (the languages matrices of both
+  // modes): the matrix value is a plain array following the visible rows order, and the default
+  // locale is stored as "" there. Undefined when the row is not in the value - it is resolved at
+  // click time, and a row can be reused for a different locale after a refresh.
+  protected getLocaleByMatrixRow(matrix: QuestionMatrixDynamicModel, row: any): string {
+    const index = matrix.visibleRows.indexOf(row);
+    const val = matrix.value;
+    if (index < 0 || !Array.isArray(val) || index >= val.length || !val[index]) return undefined;
+    return val[index].name || "";
+  }
   public getSurveyLocales() {
     const usedLocales = new Array<ItemValue>();
     var sLocales = surveyLocalization.supportedLocales;
@@ -1235,6 +1245,15 @@ export class TranslationBase extends Base implements ITranslationLocales {
   // deletion, export from a page-scoped grid).
   protected createHeadlessTranslation(): TranslationBase {
     return new TranslationBase(this.survey, this.options, false);
+  }
+  // The applied machine translation reaches the real survey directly, so the model rebuilds its
+  // surface afterwards. The editor class lives in translation.ts, which imports this module -
+  // the instance is passed in so the dependency stays one-way.
+  protected setupTranslationEditor<T extends { onApply: () => void }>(editor: T): T {
+    editor.onApply = () => {
+      this.reset();
+    };
+    return editor;
   }
   // A tree over the used strings with stored texts, independent of the model's own filters
   // (showAllStrings, the grid's page scope): the progress denominators of the side-by-side
