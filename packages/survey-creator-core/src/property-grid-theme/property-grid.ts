@@ -48,6 +48,7 @@ export var propertyGridCss = {
     mainRoot: "spg-question spg-row__question",
     root: "spg-paneldynamic",
     navigation: "spg-paneldynamic__navigation",
+    header: "spg-question__header",
     title: "spg-title spg-question__title",
     button: "",
     buttonRemove: "",
@@ -76,6 +77,7 @@ export var propertyGridCss = {
   page: {
     root: "spg-page spg-body__page",
     title: "spg-title spg-page__title",
+    content: "spg-page__content",
     description: "spg-description spg-page__description"
   },
   pageTitle: "spg-title spg-page__title",
@@ -181,8 +183,10 @@ export var propertyGridCss = {
     other: "spg-comment spg-question__other"
   },
   matrix: {
+    mainRoot: "spg-question spg-row__question",
     tableWrapper: "spg-matrix spg-table-wrapper",
     root: "spg-table",
+    header: "spg-question__header",
     rowError: "spg-matrix__row--error",
     cell: "spg-table__cell spg-matrix__cell",
     headerCell: "spg-table__cell spg-table__cell--header",
@@ -198,8 +202,10 @@ export var propertyGridCss = {
     cellTextReadOnly: "spg-matrix__text--disabled",
   },
   matrixdropdown: {
+    mainRoot: "spg-question spg-row__question",
     tableWrapper: "spg-table-wrapper",
     root: "spg-table",
+    header: "spg-question__header",
     cell: "spg-table__cell",
     headerCell: "spg-table__cell spg-table__cell--header",
     emptyCell: "spg-table__cell--empty",
@@ -207,8 +213,10 @@ export var propertyGridCss = {
     rowLeave: "spg-table__row--leave",
   },
   matrixdynamic: {
+    mainRoot: "spg-question spg-row__question",
     tableWrapper: "spg-table-wrapper",
     root: "spg-table spg-matrixdynamic",
+    header: "spg-question__header",
     content: "spg-matrixdynamic__content spg-text__content",
     cell: "spg-table__cell",
     row: "spg-table__row",

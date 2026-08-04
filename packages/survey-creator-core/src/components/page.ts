@@ -365,7 +365,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   protected getInnerAnimatedElements() {
     const cssClasses = this.surveyElement.cssClasses;
-    if (cssClasses.pageRow) return [].slice.call(this.rootElement?.querySelectorAll(`:scope .svc-page__footer, :scope .svc-page__placeholder_frame, :scope ${classesToSelector(this.surveyElement.cssRoot)} > .svc-row`));
+    if (cssClasses.pageRow) return [].slice.call(this.rootElement?.querySelectorAll(`:scope .svc-page__footer, :scope .svc-page__placeholder_frame, :scope ${classesToSelector(this.surveyElement.cssContent)} > .svc-row`));
     return null;
   }
   public onPageSelected() { }

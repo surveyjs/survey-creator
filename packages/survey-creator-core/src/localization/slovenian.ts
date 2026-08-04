@@ -1862,8 +1862,8 @@ export var slStrings = {
       // "Never"
       none: "Nikoli"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Izbirni gumbi",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radijski gumbi",
     inputType: {
       // "Color"
       color: "Barva",
@@ -2141,9 +2141,9 @@ export var slStrings = {
       buttons: "Tlačítka",
       // "Dropdown"
       dropdown: "Rozbalovací nabídka",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentirani",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentirani stikalo",
+      // [Auto-translated] "Radio buttons"
       radio: "Radijski gumbi",
       // [Auto-translated] "Checkbox"
       checkbox: "Potrditveno polje",

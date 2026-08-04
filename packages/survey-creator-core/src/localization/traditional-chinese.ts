@@ -1863,7 +1863,7 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Never"
       none: "從不"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "單選按鈕",
     inputType: {
       // [Auto-translated] "Color"
@@ -2142,10 +2142,10 @@ export var traditionalChineseTranslation = {
       buttons: "按鈕",
       // [Auto-translated] "Dropdown"
       dropdown: "下拉清單",
-      // [Auto-translated] "Segmented"
-      segmented: "分段式",
-      // [Auto-translated] "Radio Buttons"
-      radio: "無線電按鈕",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "分段切換",
+      // [Auto-translated] "Radio buttons"
+      radio: "單選按鈕",
       // [Auto-translated] "Checkbox"
       checkbox: "勾選框",
       // [Auto-translated] "Switch"

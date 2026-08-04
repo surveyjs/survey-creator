@@ -4178,7 +4178,7 @@ test("Single matrix cellType property editor", () => {
   expect(questionCellType.choices).toHaveLength(2);
   expect(questionCellType.choices[0].value).toBe("radio");
   expect(questionCellType.choices[1].value).toBe("checkbox");
-  expect(questionCellType.choices[0].text).toBe("Radio Buttons");
+  expect(questionCellType.choices[0].text).toBe("Radio buttons");
   expect(questionCellType.choices[1].text).toBe("Checkboxes");
 });
 test("The progressBarLocation property values appear unlocalized when applying a custom locale, Bug#7110", () => {

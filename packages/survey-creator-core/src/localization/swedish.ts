@@ -1863,8 +1863,8 @@ export let svStrings = {
       // [Auto-translated] "Never"
       none: "Aldrig"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Alternativknappar",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radioknappar",
     inputType: {
       // [Auto-translated] "Color"
       color: "Färg",
@@ -2142,9 +2142,9 @@ export let svStrings = {
       buttons: "Knappar",
       // [Auto-translated] "Dropdown"
       dropdown: "Rullgardinsmeny",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmenterad",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmenterad växling",
+      // [Auto-translated] "Radio buttons"
       radio: "Radioknappar",
       // [Auto-translated] "Checkbox"
       checkbox: "Kryssruta",

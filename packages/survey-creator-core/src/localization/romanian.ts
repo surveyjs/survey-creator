@@ -1862,7 +1862,7 @@ export const roStrings = {
       // "Never"
       none: "Niciodată"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "Butoane radio",
     inputType: {
       // "Color"
@@ -2141,9 +2141,9 @@ export const roStrings = {
       buttons: "Butoane",
       // [Auto-translated] "Dropdown"
       dropdown: "Derulare",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentat",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Comutator segmentat",
+      // [Auto-translated] "Radio buttons"
       radio: "Butoane radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Bifă",

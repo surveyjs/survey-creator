@@ -1862,8 +1862,8 @@ export var nbStrings = {
       // [Auto-translated] "Never"
       none: "Aldri"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Alternativknapper",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radioknapper",
     inputType: {
       // [Auto-translated] "Color"
       color: "Farge",
@@ -2141,9 +2141,9 @@ export var nbStrings = {
       buttons: "Knapper",
       // [Auto-translated] "Dropdown"
       dropdown: "Rullegardinmeny",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentert",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentert bryter",
+      // [Auto-translated] "Radio buttons"
       radio: "Radioknapper",
       // [Auto-translated] "Checkbox"
       checkbox: "Avkrysningsboks",

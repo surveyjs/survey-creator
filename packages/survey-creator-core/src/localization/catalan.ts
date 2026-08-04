@@ -1862,8 +1862,8 @@ export var catalanTranslation = {
       // [Auto-translated] "Never"
       none: "Nunca"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Botones de radio",
+    // [Auto-translated] "Radio buttons"
+    radio: "Botons de ràdio",
     inputType: {
       // [Auto-translated] "Color"
       color: "Color",
@@ -2141,9 +2141,9 @@ export var catalanTranslation = {
       buttons: "Botomes",
       // [Auto-translated] "Dropdown"
       dropdown: "Menú desplegable",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentat",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Interruptor segmentat",
+      // [Auto-translated] "Radio buttons"
       radio: "Botons de ràdio",
       // [Auto-translated] "Checkbox"
       checkbox: "Casella de marcar",

@@ -1862,7 +1862,7 @@ export var jaStrings = {
       // [Auto-translated] "Never"
       none: "一度もない"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "ラジオボタン",
     inputType: {
       // [Auto-translated] "Color"
@@ -2141,9 +2141,9 @@ export var jaStrings = {
       buttons: "ボタン",
       // [Auto-translated] "Dropdown"
       dropdown: "ドロップダウン",
-      // [Auto-translated] "Segmented"
-      segmented: "セグメント化",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "セグメントトグル",
+      // [Auto-translated] "Radio buttons"
       radio: "ラジオボタン",
       // [Auto-translated] "Checkbox"
       checkbox: "チェックボックス",

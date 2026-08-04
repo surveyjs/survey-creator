@@ -1862,8 +1862,8 @@ export var hebrewStrings = {
       // [Auto-translated] "Never"
       none: "אף פעם"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "לחצני בחירה",
+    // [Auto-translated] "Radio buttons"
+    radio: "כפתורי רדיו",
     inputType: {
       // "Color"
       color: "צבע",
@@ -2141,9 +2141,9 @@ export var hebrewStrings = {
       buttons: "כפתורים",
       // "Dropdown"
       dropdown: "רשימה נפתחת",
-      // [Auto-translated] "Segmented"
-      segmented: "מקוטע",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "מתג מקוטע",
+      // [Auto-translated] "Radio buttons"
       radio: "כפתורי רדיו",
       // [Auto-translated] "Checkbox"
       checkbox: "תיבת סימון",

@@ -1862,7 +1862,7 @@ export var spanishTranslation = {
       // [Auto-translated] "Never"
       none: "Nunca"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "Botones de radio",
     inputType: {
       // [Auto-translated] "Color"
@@ -2141,9 +2141,9 @@ export var spanishTranslation = {
       buttons: "Botomes",
       // [Auto-translated] "Dropdown"
       dropdown: "Menú desplegable",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentado",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Palanca segmentada",
+      // [Auto-translated] "Radio buttons"
       radio: "Botones de radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Casilla para marcar",

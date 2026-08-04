@@ -1862,7 +1862,7 @@ export var htStrings = {
       // "Never"
       none: "Pa janm"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "Bouton radyo",
     inputType: {
       // "Color"
@@ -2141,9 +2141,9 @@ export var htStrings = {
       buttons: "Bouton",
       // "Dropdown"
       dropdown: "depoze",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmente",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmented baskile",
+      // [Auto-translated] "Radio buttons"
       radio: "Bouton radyo",
       // [Auto-translated] "Checkbox"
       checkbox: "Kaz chèk",

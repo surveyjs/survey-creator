@@ -1862,7 +1862,7 @@ export var persianStrings = {
       // [Auto-translated] "Never"
       none: "هرگز"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "دکمه های رادیویی",
     inputType: {
       // [Auto-translated] "Color"
@@ -2141,9 +2141,9 @@ export var persianStrings = {
       buttons: "دکمه",
       // [Auto-translated] "Dropdown"
       dropdown: "کشویی",
-      // [Auto-translated] "Segmented"
-      segmented: "بخش بندی شده",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "تغییر وضعیت بخش بندی شده",
+      // [Auto-translated] "Radio buttons"
       radio: "دکمه های رادیویی",
       // [Auto-translated] "Checkbox"
       checkbox: "چک باکس",

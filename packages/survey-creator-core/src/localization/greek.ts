@@ -1862,8 +1862,8 @@ export var grStrings = {
       // "Never"
       none: "Ποτέ"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Κουμπιά",
+    // [Auto-translated] "Radio buttons"
+    radio: "Κουμπιά επιλογής",
     inputType: {
       // "Color"
       color: "Χρώμα",
@@ -2141,9 +2141,9 @@ export var grStrings = {
       buttons: "Κουμπιά",
       // "Dropdown"
       dropdown: "Αναπτυσσόμενο μενού",
-      // [Auto-translated] "Segmented"
-      segmented: "Τμηματοποιημένο",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Τμηματοποιημένη εναλλαγή",
+      // [Auto-translated] "Radio buttons"
       radio: "Κουμπιά επιλογής",
       // [Auto-translated] "Checkbox"
       checkbox: "Πλαίσιο ελέγχου",

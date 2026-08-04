@@ -1862,8 +1862,8 @@ export var skStrings = {
       // [Auto-translated] "Never"
       none: "Nikdy"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Prepínače",
+    // [Auto-translated] "Radio buttons"
+    radio: "Tlačidlá rádia",
     inputType: {
       // [Auto-translated] "Color"
       color: "Farba",
@@ -2141,9 +2141,9 @@ export var skStrings = {
       buttons: "Tlačidlá",
       // [Auto-translated] "Dropdown"
       dropdown: "Rozbaľovací zoznam",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentované",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentovaný prepínač",
+      // [Auto-translated] "Radio buttons"
       radio: "Tlačidlá rádia",
       // [Auto-translated] "Checkbox"
       checkbox: "Zaškrtávacie políčko",

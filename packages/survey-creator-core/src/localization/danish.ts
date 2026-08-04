@@ -1863,8 +1863,8 @@ export var danishStrings = {
       // [Auto-translated] "Never"
       none: "Aldrig"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Alternativknapper",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radioknapper",
     inputType: {
       // [Auto-translated] "Color"
       color: "Farve",
@@ -2142,9 +2142,9 @@ export var danishStrings = {
       buttons: "Knapper",
       // [Auto-translated] "Dropdown"
       dropdown: "Rullemenu",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmenteret",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmenteret toggle",
+      // [Auto-translated] "Radio buttons"
       radio: "Radioknapper",
       // [Auto-translated] "Checkbox"
       checkbox: "Afkrydsningsboks",

@@ -50,6 +50,9 @@
     color: var(--sjs2-color-fg-basic-primary, #1c1b20);
     @include sjs2--typography--default-strong;
   }
+  .sd-question.sd-question--table > .sd-question__container > .sd-question__header-and-content-container {
+    overflow: visible;
+  }
 }
 
 .sps-matrixdynamic__content {
@@ -176,6 +179,11 @@
       var(--sjs2-spacing-x250, 20px);
     border-bottom: var(--sjs2-border-width-x100, 1px) solid var(--sjs2-color-border-basic-secondary, #d4d4d4);
     box-sizing: border-box;
+  }
+  .sd-question__header-and-content-container {
+    hr {
+      display: none;
+    }
   }
 }
 

@@ -124,9 +124,10 @@ export var presetsCss = {
     content: "sps-question__content sps-question__content--dropdown",
   },
   matrixdynamic: {
-    mainRoot: "sps-question sps-question--matrixdynamic sd-element sd-question sd-row__question sd-element--complex sd-question--complex sd-question--table",
+    mainRoot: "sps-question sps-question--matrixdynamic sd-element sd-question sd-row__question sd-element--complex sd-question--complex",
     tableWrapper: "sps-table-wrapper",
     root: "sps-table sps-matrixdynamic",
+    header: "sps-question__header",
     content: "sps-matrixdynamic__content sps-text__content",
     cell: "sps-table__cell",
     row: "sps-table__row",
