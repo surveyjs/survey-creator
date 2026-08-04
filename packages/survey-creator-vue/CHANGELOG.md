@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ## 3.0.0-beta.8 (2026-07-01)
+### 2.5.37 (2026-08-04)
+
 ### 2.5.36 (2026-07-28)
 
 ### 2.5.35 (2026-07-21)
