@@ -61,12 +61,14 @@ function getTargetDropdown(creator: CreatorTester): QuestionDropdownModel {
 function getSourceDropdown(creator: CreatorTester): QuestionDropdownModel {
   return <QuestionDropdownModel>getModel(creator).settingsSurvey.getQuestionByName("sourceLocale");
 }
+// The matrix confirms a row removal through the library's confirm dialog (settings.showDialog):
+// the mock captures its options so a test can apply or cancel it.
 function mockConfirmDialog(run: (getOptions: () => any) => void): void {
   const prevShowDialog = surveySettings.showDialog;
   let confirmOptions: any = undefined;
   surveySettings.showDialog = <any>((options: any) => {
     confirmOptions = options;
-    return { footerToolbar: { getActionById: (id: string) => new Action({ id: id }) } };
+    return { footerToolbar: { getActionById: (id: string) => new Action({ id: id }), setActionsAppearance: () => { } } };
   });
   try {
     run(() => confirmOptions);
@@ -167,8 +169,8 @@ test("delete language: confirm dialog, cancel keeps the locale, apply removes it
   const model = getModel(creator);
   mockConfirmDialog((getOptions) => {
     removeRow(creator, 1);
+    // The matrix removes nothing until its confirmation is applied.
     expect(getOptions()).toBeTruthy();
-    // The matrix itself never removes the row - the confirm dialog decides.
     expect(getRows(creator).map(row => row.name)).toEqual(["", "de"]);
     // Cancel keeps the language and its strings.
     getOptions().onCancel();
@@ -200,7 +202,7 @@ test("grid view: counts ignore the page scope and delete covers the whole survey
   // The denominator is the whole survey, never the grid's page scope.
   expect(getRows(creator)[1].progress).toBe("2/2");
   mockConfirmDialog((getOptions) => {
-    model.deleteLanguage("de");
+    removeRow(creator, 1);
     getOptions().onApply();
     expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBeFalsy();
     expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBeFalsy();

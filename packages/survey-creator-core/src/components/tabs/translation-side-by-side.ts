@@ -13,7 +13,6 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { StringEditorConnector } from "../string-editor";
 import { QuestionLinkValueModel } from "../link-value";
-import { showConfirmDialog } from "../../utils/confirm-dialog";
 import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
 import { getDefaultLocaleName } from "../../survey-helper";
 import { TranslationCopiesMap } from "./translation-copies-map";
@@ -52,6 +51,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // ITranslationDropdownOwner: the shared collapse state of the flattened dropdown/tagbox
   // choice lists, keyed by the question name - the panes must expand/collapse together.
   private choicesCollapsedState: { [questionName: string]: boolean } = {};
+  // The locale of the languages matrix row being removed - see the row removal events.
+  private removingLocale: string = "";
   public onChoicesCollapsedChanged = new EventBase<Base, any>();
 
   constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms") {
@@ -119,12 +120,16 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       // The default language is the reference every translation is measured against - no delete.
       options.allow = !!locale;
     });
+    // The matrix asks for the confirmation itself (confirmDelete); the row is gone by the time
+    // the strings are deleted, so the locale is remembered before the removal.
     res.onMatrixRowRemoving.add((sender, options) => {
       if (options.question.name !== "languages") return;
-      // The matrix never removes the row itself: the deletion goes through the creator's confirm
-      // dialog and the matrix is refilled from the model once the locale strings are gone.
-      options.allow = false;
-      const locale = this.getLocaleByMatrixRow(<QuestionMatrixDynamicModel>options.question, options.row);
+      this.removingLocale = this.getLocaleByMatrixRow(<QuestionMatrixDynamicModel>options.question, options.row);
+    });
+    res.onMatrixRowRemoved.add((sender, options) => {
+      if (options.question.name !== "languages") return;
+      const locale = this.removingLocale;
+      this.removingLocale = "";
       if (!!locale)this.deleteLanguage(locale);
     });
     // The library's remove action renders as a titled button outside the runtime themes; both
@@ -171,6 +176,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
           ],
           showHeader: false,
           allowAddRows: false,
+          confirmDelete: true,
+          confirmDeleteText: editorLocalization.getString("ed.translationDeleteLanguage"),
           rowCount: 0
         }
       ]
@@ -275,24 +282,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
     this.targetLocale = locale;
   }
+  // The languages matrix asks for a confirmation itself (confirmDelete), so this is the plain
+  // deletion - it removes the locale strings of the whole survey.
   public deleteLanguage(locale: string): void {
-    if (!locale || this.isDisposed || !surveySettings.showDialog) return;
-    showConfirmDialog(<any>this.options, {
-      title: editorLocalization.getString("ed.translationDeleteLanguageTitle"),
-      message: editorLocalization.getString("ed.translationDeleteLanguageMessage")["format"](this.getLocaleName(locale)),
-      iconName: "icon-warning-24x24",
-      category: "danger",
-      showCloseButton: false,
-      applyText: editorLocalization.getString("pe.delete"),
-      cancelText: surveyLocalization.getString("cancel"),
-      onApply: () => {
-        this.deleteLanguageCore(locale);
-        return true;
-      },
-      onCancel: () => { }
-    });
-  }
-  private deleteLanguageCore(locale: string): void {
+    if (!locale || this.isDisposed) return;
     // The deletion always covers the whole survey; the grid view's root can be scoped to a
     // single page, so it goes through a temporary unscoped model then (like the CSV export).
     if (!!this.filteredPage) {
