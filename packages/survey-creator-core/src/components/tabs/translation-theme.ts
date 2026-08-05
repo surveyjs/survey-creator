@@ -226,6 +226,7 @@ export var translationCss = {
   matrixdropdown: {
     mainRoot: "st-question st-row__question st-scrollable",
     root: "st-table",
+    tableWrapper: "st-table-wrapper",
     noHeader: "st-table--no-header",
     cell: "st-table__cell",
     headerCell: "st-table__cell st-table__cell--header",
@@ -236,6 +237,7 @@ export var translationCss = {
     root: "st-table st-matrixdynamic",
     noHeader: "st-table--no-header",
     cell: "st-table__cell",
+    tableWrapper: "st-table-wrapper",
     headerCell: "st-table__cell st-table__cell--header",
     rowTextCell: "st-table__cell st-table__cell--row-text",
     button: "st-btn",

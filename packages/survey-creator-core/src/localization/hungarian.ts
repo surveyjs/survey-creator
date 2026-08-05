@@ -1862,8 +1862,8 @@ export var huStrings = {
       // [Auto-translated] "Never"
       none: "Soha"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Választógombokkal",
+    // [Auto-translated] "Radio buttons"
+    radio: "Rádiógombok",
     inputType: {
       // [Auto-translated] "Color"
       color: "Szín",
@@ -2141,9 +2141,9 @@ export var huStrings = {
       buttons: "Gombok",
       // [Auto-translated] "Dropdown"
       dropdown: "Legördülő menü",
-      // [Auto-translated] "Segmented"
-      segmented: "Szegmentált",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Szegmentált kapcsoló",
+      // [Auto-translated] "Radio buttons"
       radio: "Rádiógombok",
       // [Auto-translated] "Checkbox"
       checkbox: "Jelölőnégyzet",
@@ -3301,6 +3301,13 @@ export var huStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Előbeállítás alkalmazása"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Cikk 1" }, { value: "item2", text: "Cikk 2" }, { value: "item3", text: "Cikk 3" }],
+    columns: [{ value: "column1", text: "Oszlop 1" }, { value: "column2", text: "Oszlop 2" }, { value: "column3", text: "Oszlop 3" }],
+    rows: [{ value: "row1", text: "Sor 1" }, { value: "row2", text: "Sor 2" }],
+    matrixColumns: [{ name: "column1", title: "Oszlop 1" }, { name: "column2", title: "Oszlop 2" }, { name: "column3", title: "Oszlop 3" }]
   }
 };
 setupLocale({ localeCode: "hu", strings: huStrings });

@@ -1862,7 +1862,7 @@ export var bgStrings = {
       // [Auto-translated] "Never"
       none: "Никога"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "Радио бутони",
     inputType: {
       // "Color"
@@ -2141,9 +2141,9 @@ export var bgStrings = {
       buttons: "Бутони",
       // "Dropdown"
       dropdown: "Падащо меню",
-      // [Auto-translated] "Segmented"
-      segmented: "Сегментирани",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Сегментиран превключвател",
+      // [Auto-translated] "Radio buttons"
       radio: "Радио бутони",
       // [Auto-translated] "Checkbox"
       checkbox: "Отметка",
@@ -3301,6 +3301,13 @@ export var bgStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Приложена предварителна настройка"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Елемент 1" }, { value: "item2", text: "Елемент 2" }, { value: "item3", text: "Елемент 3" }],
+    columns: [{ value: "column1", text: "Колона 1" }, { value: "column2", text: "Колона 2" }, { value: "column3", text: "Колона 3" }],
+    rows: [{ value: "row1", text: "Ред 1" }, { value: "row2", text: "Ред 2" }],
+    matrixColumns: [{ name: "column1", title: "Колона 1" }, { name: "column2", title: "Колона 2" }, { name: "column3", title: "Колона 3" }]
   }
 };
 

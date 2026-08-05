@@ -1862,7 +1862,7 @@ export const roStrings = {
       // "Never"
       none: "Niciodată"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "Butoane radio",
     inputType: {
       // "Color"
@@ -2141,9 +2141,9 @@ export const roStrings = {
       buttons: "Butoane",
       // [Auto-translated] "Dropdown"
       dropdown: "Derulare",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentat",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Comutator segmentat",
+      // [Auto-translated] "Radio buttons"
       radio: "Butoane radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Bifă",
@@ -3301,6 +3301,13 @@ export const roStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Presetare aplicată"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Element 1" }, { value: "item2", text: "Element 2" }, { value: "item3", text: "Element 3" }],
+    columns: [{ value: "column1", text: "Coloană 1" }, { value: "column2", text: "Coloană 2" }, { value: "column3", text: "Coloană 3" }],
+    rows: [{ value: "row1", text: "Rând 1" }, { value: "row2", text: "Rând 2" }],
+    matrixColumns: [{ name: "column1", title: "Coloană 1" }, { name: "column2", title: "Coloană 2" }, { name: "column3", title: "Coloană 3" }]
   }
 };
 

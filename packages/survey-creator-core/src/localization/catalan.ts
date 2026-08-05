@@ -1862,8 +1862,8 @@ export var catalanTranslation = {
       // [Auto-translated] "Never"
       none: "Nunca"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Botones de radio",
+    // [Auto-translated] "Radio buttons"
+    radio: "Botons de ràdio",
     inputType: {
       // [Auto-translated] "Color"
       color: "Color",
@@ -2141,9 +2141,9 @@ export var catalanTranslation = {
       buttons: "Botomes",
       // [Auto-translated] "Dropdown"
       dropdown: "Menú desplegable",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentat",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Interruptor segmentat",
+      // [Auto-translated] "Radio buttons"
       radio: "Botons de ràdio",
       // [Auto-translated] "Checkbox"
       checkbox: "Casella de marcar",
@@ -3301,6 +3301,13 @@ export var catalanTranslation = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset aplicat"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Artículo 1" }, { value: "item2", text: "Artículo 2" }, { value: "item3", text: "Artículo 3" }],
+    columns: [{ value: "column1", text: "Columna 1" }, { value: "column2", text: "Columna 2" }, { value: "column3", text: "Columna 3" }],
+    rows: [{ value: "row1", text: "Filera 1" }, { value: "row2", text: "Filera 2" }],
+    matrixColumns: [{ name: "column1", title: "Columna 1" }, { name: "column2", title: "Columna 2" }, { name: "column3", title: "Columna 3" }]
   }
 };
 

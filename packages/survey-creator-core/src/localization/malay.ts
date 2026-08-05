@@ -1862,8 +1862,8 @@ export var msStrings = {
       // [Auto-translated] "Never"
       none: "Tidak pernah"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Butang Radio",
+    // [Auto-translated] "Radio buttons"
+    radio: "Butang radio",
     inputType: {
       // [Auto-translated] "Color"
       color: "Warna",
@@ -2141,10 +2141,10 @@ export var msStrings = {
       buttons: "Butang",
       // [Auto-translated] "Dropdown"
       dropdown: "Dropdown",
-      // [Auto-translated] "Segmented"
-      segmented: "Bersegmen",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Butang Radio",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Togol bersegmen",
+      // [Auto-translated] "Radio buttons"
+      radio: "Butang radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Kotak semak",
       // [Auto-translated] "Switch"
@@ -3301,6 +3301,13 @@ export var msStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Pratetap digunakan"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Perkara 1" }, { value: "item2", text: "Perkara 2" }, { value: "item3", text: "Perkara 3" }],
+    columns: [{ value: "column1", text: "Lajur 1" }, { value: "column2", text: "Lajur 2" }, { value: "column3", text: "Lajur 3" }],
+    rows: [{ value: "row1", text: "Baris 1" }, { value: "row2", text: "Baris 2" }],
+    matrixColumns: [{ name: "column1", title: "Lajur 1" }, { name: "column2", title: "Lajur 2" }, { name: "column3", title: "Lajur 3" }]
   }
 };
 

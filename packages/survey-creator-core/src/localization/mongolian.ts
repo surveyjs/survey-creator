@@ -1862,8 +1862,8 @@ export var mnStrings = {
       // [Auto-translated] "Never"
       none: "Хэзээ ч"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Радио товчлуур",
+    // [Auto-translated] "Radio buttons"
+    radio: "Радио товчлуурууд",
     inputType: {
       // [Auto-translated] "Color"
       color: "Өнгө",
@@ -2141,10 +2141,10 @@ export var mnStrings = {
       buttons: "Товчнууд",
       // "Dropdown"
       dropdown: "Доош задрах",
-      // [Auto-translated] "Segmented"
-      segmented: "Сегментчилсэн",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Радио Товчлуурууд",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Сегментчилсэн унтраалга",
+      // [Auto-translated] "Radio buttons"
+      radio: "Радио товчлуурууд",
       // [Auto-translated] "Checkbox"
       checkbox: "Шалгах хуудас",
       // [Auto-translated] "Switch"
@@ -3301,6 +3301,13 @@ export var mnStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Урьдчилсан тохируулга хэрэглээ"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Хэсэг 1" }, { value: "item2", text: "Хэсэг 2" }, { value: "item3", text: "Хэсэг 3" }],
+    columns: [{ value: "column1", text: "Column 1" }, { value: "column2", text: "Column 2" }, { value: "column3", text: "Column 3" }],
+    rows: [{ value: "row1", text: "Row 1" }, { value: "row2", text: "Row 2" }],
+    matrixColumns: [{ name: "column1", title: "Column 1" }, { name: "column2", title: "Column 2" }, { name: "column3", title: "Column 3" }]
   }
 };
 

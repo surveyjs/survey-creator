@@ -1863,8 +1863,8 @@ export var polishStrings = {
       // [Auto-translated] "Never"
       none: "Nigdy"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Przycisków",
+    // [Auto-translated] "Radio buttons"
+    radio: "Przyciski radiowe",
     inputType: {
       // [Auto-translated] "Color"
       color: "Kolor",
@@ -2142,9 +2142,9 @@ export var polishStrings = {
       buttons: "Przyciski",
       // [Auto-translated] "Dropdown"
       dropdown: "Lista rozwijana",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentowane",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Przełącznik segmentowany",
+      // [Auto-translated] "Radio buttons"
       radio: "Przyciski radiowe",
       // [Auto-translated] "Checkbox"
       checkbox: "Pole do odhaczenia",
@@ -3302,6 +3302,13 @@ export var polishStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Zastosowano preset"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Przedmiot 1" }, { value: "item2", text: "Przedmiot 2" }, { value: "item3", text: "Przedmiot 3" }],
+    columns: [{ value: "column1", text: "Kolumna 1" }, { value: "column2", text: "Kolumna 2" }, { value: "column3", text: "Kolumna 3" }],
+    rows: [{ value: "row1", text: "Wiersz 1" }, { value: "row2", text: "Wiersz 2" }],
+    matrixColumns: [{ name: "column1", title: "Kolumna 1" }, { name: "column2", title: "Kolumna 2" }, { name: "column3", title: "Kolumna 3" }]
   }
 };
 

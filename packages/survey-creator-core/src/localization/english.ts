@@ -999,7 +999,7 @@ export var enStrings = {
     clearIfInvisible: {
       none: "Never"
     },
-    radio: "Radio Buttons",
+    radio: "Radio buttons",
     inputType: {
       color: "Color",
       date: "Date",
@@ -1153,8 +1153,8 @@ export var enStrings = {
     displayMode: {
       buttons: "Buttons",
       dropdown: "Dropdown",
-      segmented: "Segmented",
-      radio: "Radio Buttons",
+      segmented: "Segmented toggle",
+      radio: "Radio buttons",
       checkbox: "Checkbox",
       switch: "Switch",
       custom: "Custom",
@@ -1807,6 +1807,13 @@ export var enStrings = {
       expert: "Expert",
     },
     presetApplied: "Preset applied",
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Item 1" }, { value: "item2", text: "Item 2" }, { value: "item3", text: "Item 3" }],
+    columns: [{ value: "column1", text: "Column 1" }, { value: "column2", text: "Column 2" }, { value: "column3", text: "Column 3" }],
+    rows: [{ value: "row1", text: "Row 1" }, { value: "row2", text: "Row 2" }],
+    matrixColumns: [{ name: "column1", title: "Column 1" }, { name: "column2", title: "Column 2" }, { name: "column3", title: "Column 3" }]
   }
 };
 

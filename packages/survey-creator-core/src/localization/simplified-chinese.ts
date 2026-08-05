@@ -1862,7 +1862,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Never"
       none: "从不"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "单选按钮",
     inputType: {
       // [Auto-translated] "Color"
@@ -2141,10 +2141,10 @@ export var simplifiedChineseTranslation = {
       buttons: "按钮",
       // [Auto-translated] "Dropdown"
       dropdown: "下拉列表",
-      // [Auto-translated] "Segmented"
-      segmented: "分段式",
-      // [Auto-translated] "Radio Buttons"
-      radio: "无线电按钮",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "分段切换",
+      // [Auto-translated] "Radio buttons"
+      radio: "单选按钮",
       // [Auto-translated] "Checkbox"
       checkbox: "复选框",
       // [Auto-translated] "Switch"
@@ -3301,6 +3301,13 @@ export var simplifiedChineseTranslation = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "预设应用"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "项目1" }, { value: "item2", text: "项目2" }, { value: "item3", text: "项目3" }],
+    columns: [{ value: "column1", text: "列 1" }, { value: "column2", text: "列 2" }, { value: "column3", text: "列 3" }],
+    rows: [{ value: "row1", text: "行 1" }, { value: "row2", text: "行 2" }],
+    matrixColumns: [{ name: "column1", title: "列 1" }, { name: "column2", title: "列 2" }, { name: "column3", title: "列 3" }]
   }
 };
 

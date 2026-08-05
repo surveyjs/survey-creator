@@ -146,10 +146,10 @@ export var germanTranslation = {
     undo: "Rückgängig",
     // "Redo"
     redo: "Wiederherstellen",
-    // [Auto-translated] "Expand"
-    expandTooltip: "Erweitern",
-    // [Auto-translated] "Collapse"
-    collapseTooltip: "Zusammenbruch",
+    // "Expand"
+    expandTooltip: "Ausklappen",
+    // "Collapse"
+    collapseTooltip: "Zusammenklappen",
     // "Expand All"
     expandAllTooltip: "Alle aufklappen",
     // "Collapse All"
@@ -1862,8 +1862,8 @@ export var germanTranslation = {
       // [Auto-translated] "Never"
       none: "Nie"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Optionsfelder",
+    // [Auto-translated] "Radio buttons"
+    radio: "Funktasten",
     inputType: {
       // "Color"
       color: "Farbe",
@@ -2141,10 +2141,10 @@ export var germanTranslation = {
       buttons: "Tasten",
       // [Auto-translated] "Dropdown"
       dropdown: "Dropdown-Liste",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentiert",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Funkknöpfe",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentierter Schalter",
+      // [Auto-translated] "Radio buttons"
+      radio: "Funktasten",
       // [Auto-translated] "Checkbox"
       checkbox: "Checkkästchen",
       // [Auto-translated] "Switch"
@@ -3301,6 +3301,13 @@ export var germanTranslation = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset angewendet"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Artikel 1" }, { value: "item2", text: "Artikel 2" }, { value: "item3", text: "Artikel 3" }],
+    columns: [{ value: "column1", text: "Spalte 1" }, { value: "column2", text: "Spalte 2" }, { value: "column3", text: "Spalte 3" }],
+    rows: [{ value: "row1", text: "Zeile 1" }, { value: "row2", text: "Zeile 2" }],
+    matrixColumns: [{ name: "column1", title: "Spalte 1" }, { name: "column2", title: "Spalte 2" }, { name: "column3", title: "Spalte 3" }]
   }
 };
 
