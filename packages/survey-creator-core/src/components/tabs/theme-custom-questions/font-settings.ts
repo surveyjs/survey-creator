@@ -133,6 +133,12 @@ const INPUT_VALUE_COLOR_VAR = "--sjs2-color-component-input-default-value";
 type FontSettingKey = "family" | "weight" | "size" | "lineHeight" | "color" | "placeholdercolor";
 
 function toComponentName(propertyName: string, color = false): string {
+  if (propertyName === "headerTitle") {
+    return color ? "survey-header-default-title" : "survey-header-title";
+  }
+  if (propertyName === "headerDescription") {
+    return color ? "survey-header-default-description" : "survey-header-description";
+  }
   return propertyName.replace(/([a-z])([A-Z])/g, color ? "$1-default-$2" : "$1-$2").toLowerCase();
 }
 
