@@ -15,14 +15,12 @@ import { StringEditorConnector } from "../string-editor";
 import { QuestionLinkValueModel } from "../link-value";
 import { showConfirmDialog } from "../../utils/confirm-dialog";
 import { updateMatixActionsAppearance } from "../../utils/actions";
+import { getDefaultLocaleName } from "../../survey-helper";
 import {
   TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
   createMachineTranslationAction, createStringsHeaderNavigationBar, runItemsMachineTranslation
 } from "./translation";
 
-// The default locale is stored as "" on the model; the settings survey dropdowns need a
-// non-empty value for it (an empty dropdown value would render as "no selection").
-const defaultLocaleSettingValue = "default";
 // A non-breaking space: rendered instead of an empty header string of the source pane to keep
 // the row one text line high (see setupSourceEmptySpaces).
 const emptySpaceText = "\u00A0";
@@ -442,11 +440,13 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
     return res;
   }
+  // The default locale is stored as "" on the model; the settings survey dropdowns need a
+  // non-empty value for it (an empty dropdown value would render as "no selection").
   private toLocaleSettingValue(locale: string): string {
-    return locale || defaultLocaleSettingValue;
+    return locale || getDefaultLocaleName();
   }
   private getLocaleFromSettingValue(value: any): string {
-    return !value || value === defaultLocaleSettingValue ? "" : <string>value;
+    return !value || value === getDefaultLocaleName() ? "" : <string>value;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
