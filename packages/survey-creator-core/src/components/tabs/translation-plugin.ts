@@ -6,6 +6,7 @@ import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { Translation, TranslationBase, createImportCSVAction, createExportCSVAction } from "./translation";
 import { TranslationSideBySide } from "./translation-side-by-side";
 import { TabControlModel } from "../side-bar/tab-control-model";
+import { isDefaultLocale } from "../../survey-helper";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
   private filterStringsAction: Action;
@@ -438,7 +439,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   // language, which may be equal to the source language.
   private calcDefaultTargetLocale(): string {
     const locale = this.creator.survey.locale;
-    return !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
+    return isDefaultLocale(locale) ? "" : locale;
   }
   private showTranslateStringsDialog(): void {
     const model = <TranslationSideBySide>this.model;

@@ -14,7 +14,7 @@ import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { StringEditorConnector } from "../string-editor";
 import { QuestionLinkValueModel } from "../link-value";
 import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
-import { getDefaultLocaleName } from "../../survey-helper";
+import { getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { TranslationCopiesMap } from "./translation-copies-map";
 import {
   TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
@@ -213,7 +213,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     const res: Array<string> = [""];
     if (!this.survey) return res;
     this.survey.getUsedLocales().forEach(loc => {
-      if (!loc || loc === surveyLocalization.defaultLocale || res.indexOf(loc) >= 0) return;
+      if (isDefaultLocale(loc) || res.indexOf(loc) >= 0) return;
       if (!!this.localeInitialVisibleCallback && !this.localeInitialVisibleCallback(loc)) return;
       res.push(loc);
     });
@@ -357,7 +357,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       // The default language is what every row counts against and a language with no row yet needs
       // one. Any other edit moves the progress of the edited language alone - including a cleared
       // text: the language keeps its row showing no progress until the next full refresh drops it.
-      if (!row || !locale || locale === surveyLocalization.defaultLocale) {
+      if (!row || isDefaultLocale(locale)) {
         this.updateLanguagesMatrix();
       } else {
         this.updateLanguageProgress(locale);
@@ -477,7 +477,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   public getSideBySideLocales(): Array<string> {
     const res: Array<string> = [""];
     const add = (loc: string): void => {
-      if (!!loc && loc !== surveyLocalization.defaultLocale && res.indexOf(loc) < 0) res.push(loc);
+      if (!isDefaultLocale(loc) && res.indexOf(loc) < 0) res.push(loc);
     };
     this.getSurveyLocales()[0].forEach((item: ItemValue) => add(item.value));
     if (!!this.survey) {
@@ -1132,7 +1132,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (!this.survey || this.isDisposed) return;
     const locale = this.targetLocale || "";
     const current = this.survey.locale || "";
-    if (current === locale || (!locale && current === surveyLocalization.defaultLocale)) return;
+    if (current === locale || (!locale && isDefaultLocale(current))) return;
     const wasSyncing = this._syncing;
     this._syncing = true;
     try {
@@ -1177,7 +1177,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // An external survey.locale change - follow it instead of rebuilding.
   protected followSurveyLocale(): void {
     const locale = this.survey.locale;
-    this.targetLocale = !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
+    this.targetLocale = isDefaultLocale(locale) ? "" : locale;
   }
 }
 

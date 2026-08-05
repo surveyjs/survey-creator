@@ -11,6 +11,7 @@ import {
   PanelModel,
   PanelModelBase,
   settings,
+  surveyLocalization,
   IElement
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
@@ -24,6 +25,12 @@ export function getItemValueSeparator(): string {
 
 export function getDefaultLocaleName(): string {
   return settings.localization.defaultLocaleName || "default";
+}
+
+// The default language is stored as an empty locale, but it can also be referred to by its
+// explicit name (surveyLocalization.defaultLocale, e.g. "en") - both mean the same language.
+export function isDefaultLocale(locale: string): boolean {
+  return !locale || locale === surveyLocalization.defaultLocale;
 }
 
 export enum ObjType {

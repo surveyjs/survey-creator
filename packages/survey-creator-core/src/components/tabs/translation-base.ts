@@ -14,7 +14,7 @@ import { unparse, parse } from "papaparse";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
-import { SurveyHelper, getDefaultLocaleName } from "../../survey-helper";
+import { SurveyHelper, getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { translationCss } from "./translation-theme";
 import { CreatorDomHelper } from "../../dom-helper";
 
@@ -249,7 +249,7 @@ export class TranslationItem extends TranslationItemBase {
     const index = loc.indexOf("-");
     if (index < 0) return "";
     loc = loc.substring(0, index);
-    return loc === surveyLocalization.defaultLocale ? "" : loc;
+    return isDefaultLocale(loc) ? "" : loc;
   }
   private getItemValuePlaceholderText(): string {
     const val = this.context.value;

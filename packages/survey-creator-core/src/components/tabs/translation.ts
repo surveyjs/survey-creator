@@ -1,5 +1,5 @@
 import {
-  property, Base, SurveyModel, LocalizableString, surveyLocalization, ILocalizableString,
+  property, Base, SurveyModel, LocalizableString, ILocalizableString,
   ItemValue, FunctionFactory, Action, IAction,
   ComputedUpdater, createDropdownActionModel, QuestionMatrixDynamicModel,
   QuestionMatrixDropdownModel,
@@ -14,6 +14,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import "./translation.scss";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
+import { isDefaultLocale } from "../../survey-helper";
 import {
   TranslationBase, TranslationItem, createMachineTranslationAction,
   createStringsHeaderNavigationBar, runItemsMachineTranslation
@@ -222,7 +223,7 @@ export class Translation extends TranslationBase {
     }
   }
   private isLocaleVisible(locales: string[], locale: string): boolean {
-    return locale !== surveyLocalization.defaultLocale && locales.indexOf(locale) < 0;
+    return !isDefaultLocale(locale) && locales.indexOf(locale) < 0;
   }
   private setupToolbarItems() {
     this.chooseLanguageActions = this.getSurveyLocales()[0].map((locale: ItemValue) => (
