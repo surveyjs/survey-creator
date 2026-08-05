@@ -1,7 +1,7 @@
 import {
   Action, AdaptiveActionContainer, Base, EventBase, IDialogOptions, ILocalizableString, ItemValue,
   LocalizableString, PageModel, PanelModel, PopupBaseViewModel, Question,
-  QuestionButtonGroupModel, QuestionDropdownModel, QuestionMatrixDropdownModel,
+  MatrixDynamicRowModel, QuestionButtonGroupModel, QuestionDropdownModel, QuestionMatrixDropdownModel,
   QuestionMatrixDynamicModel, SurveyModel, property,
   settings as surveySettings, surveyLocalization
 } from "survey-core";
@@ -14,8 +14,9 @@ import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { StringEditorConnector } from "../string-editor";
 import { QuestionLinkValueModel } from "../link-value";
 import { showConfirmDialog } from "../../utils/confirm-dialog";
-import { updateMatixActionsAppearance } from "../../utils/actions";
+import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
 import { getDefaultLocaleName } from "../../survey-helper";
+import { TranslationCopiesMap } from "./translation-copies-map";
 import {
   TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
   createMachineTranslationAction, createStringsHeaderNavigationBar, runItemsMachineTranslation
@@ -40,8 +41,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // the property grid survive the switch.
   @property({ defaultValue: "forms" }) view: "forms" | "grid";
 
-  private byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
-  private byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
+  // The bridge between the real survey strings and their copies in the two panes; the target
+  // copy is the editable one.
+  private copiesMap = new TranslationCopiesMap();
   private _updatingSettingsSurvey: boolean = false;
   // The real survey's localizable string behind the editable string the user focused last -
   // a cell of the strings grid or an inline string editor of the forms target pane. Used to
@@ -111,25 +113,25 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         if (locale !== undefined)this.selectLanguage(locale);
       };
     });
+    res.onMatrixRenderRemoveButton.add((sender, options) => {
+      if (options.question.name !== "languages") return;
+      const locale = this.getLocaleByMatrixRow(<QuestionMatrixDynamicModel>options.question, options.row);
+      // The default language is the reference every translation is measured against - no delete.
+      options.allow = !!locale;
+    });
+    res.onMatrixRowRemoving.add((sender, options) => {
+      if (options.question.name !== "languages") return;
+      // The matrix never removes the row itself: the deletion goes through the creator's confirm
+      // dialog and the matrix is refilled from the model once the locale strings are gone.
+      options.allow = false;
+      const locale = this.getLocaleByMatrixRow(<QuestionMatrixDynamicModel>options.question, options.row);
+      if (!!locale)this.deleteLanguage(locale);
+    });
+    // The library's remove action renders as a titled button outside the runtime themes; both
+    // helpers turn it into the icon button of the creator's property grid matrices.
     res.onGetMatrixRowActions.add((sender, options) => {
       if (options.question.name !== "languages") return;
-      const matrix = <QuestionMatrixDynamicModel>options.question;
-      const row = options.row;
-      const locale = this.getLocaleByMatrixRow(matrix, row);
-      // The default language is the reference every translation is measured against - no delete.
-      if (!locale || this.readOnly) return;
-      options.actions.push(new Action({
-        id: "delete-language",
-        iconName: "icon-delete",
-        iconSize: "auto",
-        tooltip: editorLocalization.getString("pe.delete"),
-        showTitle: false,
-        location: "end",
-        action: () => {
-          const currentLocale = this.getLocaleByMatrixRow(matrix, row);
-          if (!!currentLocale)this.deleteLanguage(currentLocale);
-        }
-      }));
+      updateMatrixRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);
       updateMatixActionsAppearance(options.actions);
     });
     return res;
@@ -169,7 +171,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
           ],
           showHeader: false,
           allowAddRows: false,
-          allowRemoveRows: false,
           rowCount: 0
         }
       ]
@@ -520,8 +521,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   }
   // Focuses the fresh target-pane editor of the selected string once it is rendered.
   private activateSelectedStringEditor(): void {
-    const copies = !!this.selectedLocString ? this.byRealLocStr.get(this.selectedLocString) : undefined;
-    const copyLocStr = !!copies ? copies.filter(copy => this.byTargetLocStr.has(copy))[0] : undefined;
+    const copyLocStr = this.copiesMap.getEditableCopy(this.selectedLocString);
     if (!copyLocStr) return;
     const connector = StringEditorConnector.get(<LocalizableString>copyLocStr);
     connector.setAutoFocus();
@@ -631,15 +631,14 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
     if (!this.targetSurvey) return;
     const realLocStr = this.getLocStrByName(obj, propName);
-    const copies = !!realLocStr ? this.byRealLocStr.get(realLocStr) : undefined;
-    if (!copies) {
+    if (!this.copiesMap.hasReal(realLocStr)) {
       // Not a mapped localizable string - a structural change (element added/removed, etc.).
       this.rebuildInstances();
       return;
     }
     this._syncing = true;
     try {
-      this.mirrorLocStrIntoCopies(realLocStr, copies);
+      this.copiesMap.mirrorIntoCopies(realLocStr);
     } finally {
       this._syncing = false;
     }
@@ -649,7 +648,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (this._syncing || this.isDisposed) return;
     const copyLocStr = this.getLocStrByName(sender, name);
     if (!copyLocStr) return;
-    const item = this.byTargetLocStr.get(copyLocStr);
+    const item = this.copiesMap.getItemByEditableCopy(copyLocStr);
     const locale = this.targetLocale || "";
     if (!item) {
       // An editable string the mapping does not know about - the trees drifted, self-heal.
@@ -666,8 +665,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.performItemLocTextAction(item, locale, processed);
       if (processed !== stored) {
         // The options hook rewrote the text - reflect the processed value back into the copies.
-        const copies = this.byRealLocStr.get(item.locString);
-        if (!!copies)this.mirrorLocStrIntoCopies(item.locString, copies);
+        this.copiesMap.mirrorIntoCopies(item.locString);
       }
     } finally {
       this._syncing = false;
@@ -918,7 +916,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       // Remembers the string behind the focused inline editor for the selection sync with the grid view.
       creator.onStringEditorFocusedCallback = (locStr: LocalizableString): void => {
         if (this.isDisposed) return;
-        const item = this.byTargetLocStr.get(locStr);
+        const item = this.copiesMap.getItemByEditableCopy(locStr);
         if (!!item)this.selectedLocString = item.locString;
       };
     }
@@ -1070,8 +1068,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.sourceSurvey = undefined;
     this.targetSurvey = undefined;
     this.sourceEmptySpaceStrings = [];
-    this.byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
-    this.byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
+    this.copiesMap.clear();
     this.choicesCollapsedState = {};
     this.elementStateActions = {};
   }
@@ -1116,26 +1113,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
   }
   private buildMappings(): void {
-    this.byTargetLocStr = new Map<ILocalizableString, TranslationItem>();
-    this.byRealLocStr = new Map<ILocalizableString, Array<ILocalizableString>>();
-    const realItems = this.collectItems(this.root, new Map<string, TranslationItem>());
-    const targetItems = this.collectItems(this.createCopyRoot(this.targetSurvey), new Map<string, TranslationItem>());
-    const srcItems = this.collectItems(this.createCopyRoot(this.sourceSurvey), new Map<string, TranslationItem>());
-    realItems.forEach((item: TranslationItem, key: string) => {
-      const copies = new Array<ILocalizableString>();
-      const targetItem = targetItems.get(key);
-      if (!!targetItem) {
-        this.byTargetLocStr.set(targetItem.locString, item);
-        copies.push(targetItem.locString);
-      }
-      const srcItem = srcItems.get(key);
-      if (!!srcItem) {
-        copies.push(srcItem.locString);
-      }
-      if (copies.length > 0) {
-        this.byRealLocStr.set(item.locString, copies);
-      }
-    });
+    this.copiesMap.build(this.root, this.createCopyRoot(this.targetSurvey), this.createCopyRoot(this.sourceSurvey));
   }
   private createCopyRoot(survey: SurveyModel): TranslationGroup {
     const root = new TranslationGroup("survey", survey, this);
@@ -1143,22 +1121,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     root.reset();
     return root;
   }
-  private collectItems(group: TranslationGroup, items: Map<string, TranslationItem>): Map<string, TranslationItem> {
-    group.locItems.forEach(item => items.set(group.fullName + "." + item.name, item));
-    group.groups.forEach(child => this.collectItems(child, items));
-    return items;
-  }
   // An external survey.locale change - follow it instead of rebuilding.
   protected followSurveyLocale(): void {
     const locale = this.survey.locale;
     this.targetLocale = !!locale && locale !== surveyLocalization.defaultLocale ? locale : "";
-  }
-  private mirrorLocStrIntoCopies(realLocStr: ILocalizableString, copies: Array<ILocalizableString>): void {
-    const json = (<LocalizableString>realLocStr).getJson();
-    copies.forEach(copy => {
-      (<LocalizableString>copy).setJson(json);
-      (<LocalizableString>copy).strChanged();
-    });
   }
 }
 

@@ -40,13 +40,20 @@ function getRows(creator: CreatorTester): Array<any> {
 function getRowLink(creator: CreatorTester, index: number): QuestionLinkValueModel {
   return <QuestionLinkValueModel>getLanguagesQuestion(creator).visibleRows[index].cells[0].question;
 }
-function getRowActions(creator: CreatorTester, index: number): Array<IAction> {
+// The matrix builds the "remove-row" action itself for the rows it may remove (canRemoveRow),
+// so the actions of an existing row are the default ones passed through the creator's hook.
+function getRowActions(creator: CreatorTester, index: number, actions: Array<IAction>): Array<IAction> {
   const matrix = getLanguagesQuestion(creator);
   const row = matrix.visibleRows[index];
-  return getModel(creator).settingsSurvey.getUpdatedMatrixRowActions(matrix, row, []);
+  return getModel(creator).settingsSurvey.getUpdatedMatrixRowActions(matrix, row, actions);
 }
-function getDeleteAction(creator: CreatorTester, index: number): IAction {
-  return getRowActions(creator, index).filter(action => action.id === "delete-language")[0];
+function canRemoveRow(creator: CreatorTester, index: number): boolean {
+  const matrix = getLanguagesQuestion(creator);
+  return matrix.canRemoveRows && matrix.canRemoveRow(matrix.visibleRows[index]);
+}
+function removeRow(creator: CreatorTester, index: number): void {
+  const matrix = getLanguagesQuestion(creator);
+  matrix.removeRowUI(matrix.visibleRows[index]);
 }
 function getTargetDropdown(creator: CreatorTester): QuestionDropdownModel {
   return <QuestionDropdownModel>getModel(creator).settingsSurvey.getQuestionByName("targetLocale");
@@ -81,10 +88,14 @@ test("languages matrix rows: default row first with total only, used locales onl
   expect(getRows(creator).map(row => row.name)).toEqual(["", "de"]);
 });
 
-test("default language row has no delete action, other rows have one", () => {
+test("default language row can't be removed, other rows can and get the creator's remove action", () => {
   const creator = createSideBySideCreator();
-  expect(getDeleteAction(creator, 0)).toBeFalsy();
-  expect(getDeleteAction(creator, 1)).toBeTruthy();
+  expect(canRemoveRow(creator, 0)).toBeFalsy();
+  expect(canRemoveRow(creator, 1)).toBeTruthy();
+  const action = <Action>getRowActions(creator, 1, [new Action({ id: "remove-row" })])[0];
+  expect(action.iconName).toBe("icon-delete");
+  expect(action.showTitle).toBeFalsy();
+  expect(action.appearance.style).toBe("alert");
 });
 
 test("a row appears with the first stored string of a new target and disappears when it is cleared", () => {
@@ -155,10 +166,10 @@ test("delete language: confirm dialog, cancel keeps the locale, apply removes it
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   mockConfirmDialog((getOptions) => {
-    const deleteAction = getDeleteAction(creator, 1);
-    expect(deleteAction).toBeTruthy();
-    (<Action>deleteAction).action();
+    removeRow(creator, 1);
     expect(getOptions()).toBeTruthy();
+    // The matrix itself never removes the row - the confirm dialog decides.
+    expect(getRows(creator).map(row => row.name)).toEqual(["", "de"]);
     // Cancel keeps the language and its strings.
     getOptions().onCancel();
     expect(getRows(creator).map(row => row.name)).toEqual(["", "de"]);
