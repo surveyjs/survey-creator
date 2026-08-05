@@ -15,7 +15,12 @@ export default defineConfig({
     url: "http://localhost:8080"
   },
   snapshotPathTemplate: "{testDir}/{testFilePath}-snapshots/{arg}{ext}",
-  reporter: [["line"], ["junit", { outputFile: `test-results/e2e-junit-${shardIndex}.xml` }], ["html", { open: "never", printSteps: false }]],
+  reporter: [
+    ["line"],
+    ["junit", { outputFile: `test-results/e2e-junit-${shardIndex}.xml` }],
+    ["json", { outputFile: "test-results/results.json" }],
+    ["html", { open: "never", printSteps: false }]
+  ],
   use: {
     launchOptions: {
       ignoreDefaultArgs: ["--hide-scrollbars"],
