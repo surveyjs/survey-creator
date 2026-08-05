@@ -219,10 +219,34 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
     return res;
   }
-  // The whole-survey used-strings items: the progress denominator of the languages matrix.
-  // Never scoped by the grid view's page filter and independent of the view's strings filter.
+  // The whole-survey used-strings tree: the progress denominator of the languages matrix and the
+  // source of the element indicator states. Never scoped by the grid view's page filter and
+  // independent of the view's strings filter.
+  //
+  // Building it instantiates a TranslationGroup per object and a TranslationItem per string of
+  // the survey, so it is kept between edits - every text edit refreshes both the matrix and the
+  // indicators, and rebuilding it twice per keystroke is what a large survey feels. It is dropped
+  // by every full refresh of the matrix (updateLanguagesMatrix, so also by a reset) and by a
+  // structural change of the survey (see onCreatorSurveyPropertyChanged). A text edit keeps it:
+  // a string that has no text in any language yet is not in the tree, so its first translation
+  // moves no counter until the next full refresh.
+  private usedStringsRootValue: TranslationGroup;
+  private usedStringsItemsValue: Array<TranslationItem>;
+  private resetUsedStringsCache(): void {
+    this.usedStringsRootValue = undefined;
+    this.usedStringsItemsValue = undefined;
+  }
+  protected getUsedStringsRoot(): TranslationGroup {
+    if (!this.usedStringsRootValue) {
+      this.usedStringsRootValue = this.createUsedStringsRoot();
+    }
+    return this.usedStringsRootValue;
+  }
   public getUsedStringsItems(): Array<TranslationItem> {
-    return this.createUsedStringsRoot().allLocItems;
+    if (!this.usedStringsItemsValue) {
+      this.usedStringsItemsValue = this.getUsedStringsRoot().allLocItems;
+    }
+    return this.usedStringsItemsValue;
   }
   public isItemTranslated(item: TranslationItem, locale: string): boolean {
     return !!item.locString.getLocaleText(locale);
@@ -235,7 +259,14 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
     return { translated: translated, total: usedItems.length };
   }
+  // The full refresh: the used strings may differ from the cached tree, so it is dropped first.
   public updateLanguagesMatrix(): void {
+    this.resetUsedStringsCache();
+    this.updateLanguagesMatrixCore();
+  }
+  // Refills the rows from the current used-strings tree. The row set follows getLanguages(), so a
+  // language that has just got its first string gets a row here as well.
+  private updateLanguagesMatrixCore(): void {
     const question = this.languagesQuestion;
     if (!question || this.isDisposed || !this.survey) return;
     const items = this.getUsedStringsItems();
@@ -322,9 +353,29 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   public performItemLocTextAction(item: TranslationItem, locale: string, newText: string): void {
     super.performItemLocTextAction(item, locale, newText);
     if (!this._bulkTextAction) {
-      this.updateLanguagesMatrix();
+      const row = this.getMatrixRowByLocale(this.languagesQuestion, locale);
+      // The default language is what every row counts against and a language with no row yet needs
+      // one. Any other edit moves the progress of the edited language alone - including a cleared
+      // text: the language keeps its row showing no progress until the next full refresh drops it.
+      if (!row || !locale || locale === surveyLocalization.defaultLocale) {
+        this.updateLanguagesMatrix();
+      } else {
+        this.updateLanguageProgress(locale);
+      }
       this.updateElementTranslationStates();
     }
+  }
+  // Rewrites the progress text of one language, leaving the other rows untouched: the used
+  // strings are counted for that language only and the text goes into its own cell.
+  private updateLanguageProgress(locale: string): void {
+    const row = this.getMatrixRowByLocale(this.languagesQuestion, locale);
+    const progressQuestion = !!row ? row.getQuestionByName("progress") : undefined;
+    if (!progressQuestion) {
+      // The tree still describes the survey here - only the row could not be resolved.
+      this.updateLanguagesMatrixCore();
+      return;
+    }
+    progressQuestion.value = this.getLanguageProgressText(locale, this.getUsedStringsItems());
   }
   public reset(alwaysReset: boolean = true): void {
     super.reset(alwaysReset);
@@ -387,7 +438,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       }
       return counts;
     };
-    calc(this.createUsedStringsRoot());
+    calc(this.getUsedStringsRoot());
     return states;
   }
   private getStateFromCounts(counts: { translated: number, total: number }): TranslationElementState {
@@ -605,10 +656,18 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // the element strings dialogs write to it, and external code can too.
   public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
     if (this._syncing || this.isDisposed) return;
+    // The element strings dialogs write into the real survey string by string, so this runs per
+    // edit there as well: a text change keeps the used-strings tree, a structural one rebuilds it.
+    // Dropped here and not through updateLanguagesMatrix below, because the pane rebuild of a
+    // structural change computes the indicator states of the fresh copies on its way (see
+    // rebuildInstances).
+    if (!this.getLocStrByName(obj, propName)) {
+      this.resetUsedStringsCache();
+    }
     this.onCreatorSurveyPropertyChangedCore(obj, propName);
     // Any real-survey change can move the counters, change the denominator (structural
     // changes) or add/remove a locale row (a change restoring/removing the last string).
-    this.updateLanguagesMatrix();
+    this.updateLanguagesMatrixCore();
     this.updateElementTranslationStates();
   }
   private onCreatorSurveyPropertyChangedCore(obj: Base, propName: string): void {
@@ -721,6 +780,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.setTargetScrollElement(undefined);
     this.disposeInstances();
     this.selectedLocString = undefined;
+    this.resetUsedStringsCache();
     super.dispose();
   }
   public get maxVisibleChoices(): number {

@@ -100,7 +100,7 @@ test("default language row can't be removed, other rows can and get the creator'
   expect(action.appearance.style).toBe("alert");
 });
 
-test("a row appears with the first stored string of a new target and disappears when it is cleared", () => {
+test("a row appears with the first stored string of a new target and survives until the next full refresh when it is cleared", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   model.targetLocale = "fr";
@@ -109,8 +109,16 @@ test("a row appears with the first stored string of a new target and disappears 
   const rows = getRows(creator);
   expect(rows.map(row => row.name)).toEqual(["", "de", "fr"]);
   expect(rows[2].progress).toBe("1/2");
+  // Clearing the strings of a language does not refill the matrix - the row stays with no
+  // progress instead, which is what a language being worked on looks like anyway.
   model.targetSurvey.getQuestionByName("q2").locTitle.text = "";
-  expect(getRows(creator).map(row => row.name)).toEqual(["", "de"]);
+  const clearedRows = getRows(creator);
+  expect(clearedRows.map(row => row.name)).toEqual(["", "de", "fr"]);
+  expect(clearedRows[2].progress).toBe("0/2");
+  // The next full refresh - here the first string of another language - drops it.
+  model.targetLocale = "it";
+  model.targetSurvey.getQuestionByName("q2").locTitle.text = "Question 2 it";
+  expect(getRows(creator).map(row => row.name)).toEqual(["", "de", "it"]);
 });
 
 test("clicking a language retargets: model, survey locale, target dropdown and row marking", () => {
