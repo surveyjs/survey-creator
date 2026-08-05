@@ -476,19 +476,19 @@ test.describe(title + " languages matrix", () => {
     const deRow = matrix.locator("tr").filter({ hasText: "Deutsch" });
     await expect(deRow).toBeVisible();
     await deRow.hover();
-    await deRow.getByRole("button", { name: "Delete" }).click();
-    const dialog = page.locator(".svc-creator-confirm-dialog");
+    await deRow.getByRole("button", { name: "Remove" }).click();
+    const dialog = page.locator(".spg-popup--confirm");
     await expect(dialog).toBeVisible();
-    await expect(dialog).toContainText("Deutsch");
+    await expect(dialog).toContainText("Are you certain you wish to delete all strings for this language?");
     // Cancel keeps the language and its strings.
     await dialog.getByRole("button", { name: "Cancel" }).click();
-    await expect(dialog).toHaveCount(0);
+    await expect(dialog).toBeHidden();
     await expect(deRow).toBeVisible();
     expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1");
     // Apply removes the strings and retargets the editor to the default language.
     await deRow.hover();
-    await deRow.getByRole("button", { name: "Delete" }).click();
-    await page.locator(".svc-creator-confirm-dialog").getByRole("button", { name: "Delete" }).click();
+    await deRow.getByRole("button", { name: "Remove" }).click();
+    await page.locator(".spg-popup--confirm").getByRole("button", { name: "OK" }).click();
     await expect(matrix.locator("tr").filter({ hasText: "Deutsch" })).toHaveCount(0);
     await expect(page.locator(".svc-side-bar .spg-question[data-name=targetLocale]")).toContainText("Default (English)");
     const resultJson = await getJSON(page);
