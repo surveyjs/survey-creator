@@ -73,6 +73,18 @@
   .sd-dropdown {
     width: max-content;
     min-height: auto;
+    .sd-dropdown__filter-string-input {
+      position: absolute;
+    }
+    .sd-dropdown__input-prefix-wrapper {
+      & > span {
+        position: static;
+        width: auto;
+      }
+    }
+    .sd-dropdown__hint-suffix {
+      position: static;
+    }
   }
 
   .spg-dropdown_chevron-button {
