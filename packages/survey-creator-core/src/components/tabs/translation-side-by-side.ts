@@ -190,7 +190,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (!survey || this.isDisposed) return;
     this._updatingSettingsSurvey = true;
     try {
-      const locales = this.getSideBySideLocales();
+      const locales = this.getSelectableLocales();
       const source = this.sourceLocale || "";
       const target = this.targetLocale || "";
       this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("sourceLocale"), locales, source, target);
@@ -206,10 +206,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     const survey = this.settingsSurvey;
     return !!survey ? <QuestionMatrixDynamicModel>survey.getQuestionByName("languages") : undefined;
   }
-  // The matrix row set: the default locale ("") first, then every locale with at least one
-  // stored string. No synthetic rows - a freshly targeted language appears only once its
-  // first string is stored (the target dropdown already shows what is being translated).
-  public getLanguages(): Array<string> {
+  // The matrix row set - the languages the survey has translations for: the default locale ("")
+  // first, then every locale with at least one stored string. No synthetic rows - a freshly
+  // targeted language appears only once its first string is stored (the target dropdown already
+  // shows what is being translated). The pickable set is wider, see getSelectableLocales.
+  private getMatrixLanguages(): Array<string> {
     const res: Array<string> = [""];
     if (!this.survey) return res;
     this.survey.getUsedLocales().forEach(loc => {
@@ -264,13 +265,13 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.resetUsedStringsCache();
     this.updateLanguagesMatrixCore();
   }
-  // Refills the rows from the current used-strings tree. The row set follows getLanguages(), so a
-  // language that has just got its first string gets a row here as well.
+  // Refills the rows from the current used-strings tree. The row set follows getMatrixLanguages(),
+  // so a language that has just got its first string gets a row here as well.
   private updateLanguagesMatrixCore(): void {
     const question = this.languagesQuestion;
     if (!question || this.isDisposed || !this.survey) return;
     const items = this.getUsedStringsItems();
-    question.value = this.getLanguages().map(loc => {
+    question.value = this.getMatrixLanguages().map(loc => {
       return {
         name: loc,
         displayName: this.getLocaleName(loc),
@@ -472,9 +473,12 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       .map(loc => new ItemValue(this.toLocaleSettingValue(loc), this.getLocaleName(loc)));
     question.value = this.toLocaleSettingValue(selected);
   }
+  // The choice list of the source/target dropdowns - every language that can be picked: the
+  // supported locales plus the ones the survey already uses, so a translation can be started
+  // for a language with no strings yet (unlike the matrix rows, see getMatrixLanguages).
   // The default locale is represented by "" everywhere in this mode; its explicit name
   // (surveyLocalization.defaultLocale, e.g. "en") is filtered out to avoid a duplicated entry.
-  public getSideBySideLocales(): Array<string> {
+  private getSelectableLocales(): Array<string> {
     const res: Array<string> = [""];
     const add = (loc: string): void => {
       if (!isDefaultLocale(loc) && res.indexOf(loc) < 0) res.push(loc);
