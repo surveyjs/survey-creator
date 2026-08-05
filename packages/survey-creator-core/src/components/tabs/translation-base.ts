@@ -808,6 +808,19 @@ export class TranslationBase extends Base implements ITranslationLocales {
     if (index < 0 || !Array.isArray(val) || index >= val.length || !val[index]) return undefined;
     return val[index].name || "";
   }
+  // The opposite lookup: the row standing for a locale ("" for the default one). Undefined when
+  // the matrix has no row for it - a locale can be targeted before it has a single stored string.
+  protected getMatrixRowByLocale(matrix: QuestionMatrixDynamicModel, locale: string): any {
+    if (!matrix) return undefined;
+    const val = matrix.value;
+    if (!Array.isArray(val)) return undefined;
+    const loc = locale || "";
+    const rows = matrix.visibleRows;
+    for (let i = 0; i < rows.length && i < val.length; i++) {
+      if (!!val[i] && (val[i].name || "") === loc) return rows[i];
+    }
+    return undefined;
+  }
   public getSurveyLocales() {
     const usedLocales = new Array<ItemValue>();
     var sLocales = surveyLocalization.supportedLocales;

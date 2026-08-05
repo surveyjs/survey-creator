@@ -112,13 +112,13 @@ export class Translation extends TranslationBase {
       }
     });
     res.onMatrixRenderRemoveButton.add((sender, options) => {
-      const val = options.question.value;
-      if (Array.isArray(val) && options.rowIndex >= 0 && options.rowIndex < val.length && !val[options.rowIndex].name) {
+      const locale = this.getLocaleByMatrixRow(<QuestionMatrixDynamicModel>options.question, options.row);
+      if (locale === "") {
         options.allow = false; // the default locale can't be removed
       }
     });
     res.onMatrixRowRemoving.add((sender, options) => {
-      this.removingLocale = options.question.value[options.rowIndex].name;
+      this.removingLocale = this.getLocaleByMatrixRow(<QuestionMatrixDynamicModel>options.question, options.row);
     });
     res.onMatrixRowRemoved.add((sender, options) => {
       if (!!this.removingLocale) {

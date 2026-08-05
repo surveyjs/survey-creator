@@ -254,16 +254,16 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private updateLanguagesMatrixSelection(): void {
     const question = this.languagesQuestion;
     if (!question) return;
-    const val = question.value;
-    if (!Array.isArray(val) || val.length === 0) return;
-    const target = this.targetLocale || "";
-    const rows = question.visibleRows;
-    for (let i = 0; i < rows.length && i < val.length; i++) {
-      const cellQuestion = <QuestionLinkValueModel>rows[i].cells[0].question;
-      if (!!cellQuestion && cellQuestion.getType() === "linkvalue") {
-        cellQuestion.isSelected = (val[i].name || "") === target;
-      }
-    }
+    const selectedRow = this.getMatrixRowByLocale(question, this.targetLocale);
+    question.visibleRows.forEach(row => {
+      const cellQuestion = this.getLanguageCellQuestion(row);
+      if (!!cellQuestion) cellQuestion.isSelected = row === selectedRow;
+    });
+  }
+  // The language cell of a languages matrix row - the linkvalue the user clicks to retarget.
+  private getLanguageCellQuestion(row: any): QuestionLinkValueModel {
+    const cellQuestion = !!row && !!row.cells[0] ? row.cells[0].question : undefined;
+    return !!cellQuestion && cellQuestion.getType() === "linkvalue" ? <QuestionLinkValueModel>cellQuestion : undefined;
   }
   // A matrix language click behaves exactly like picking the language in the target dropdown;
   // per the dropdowns' mutual-exclusion rule, taking over the source's language resets the
