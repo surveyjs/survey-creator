@@ -23,7 +23,7 @@ const cancelRaf = (id: any): void => {
  */
 export class PresenceCapture {
   public onStateChanged: EventBase<PresenceCapture, { state: IPresenceState }> = new EventBase();
-  private state: IPresenceState = { tab: "", sel: null, focus: null, cur: null };
+  private state: IPresenceState = { tab: "", sel: null, focus: null, trLoc: null, cur: null };
   private disposed = false;
   private focusBlurTimer: ReturnType<typeof setTimeout> | undefined;
   private mouseTimer: ReturnType<typeof setTimeout> | undefined;
@@ -92,6 +92,7 @@ export class PresenceCapture {
       tab,
       sel: tab === "designer" ? this.encodeSel(this.creator.selectedElement) : null,
       focus: null,
+      trLoc: null,
       cur: null
     });
   }
@@ -196,6 +197,11 @@ export class PresenceCapture {
       try {
         loc = buildLocator(item.context, this.creator.survey);
       } catch{ /* receivers fall back to the matrix-name match */ }
+      // The sticky locale claim outlives the cell blur (unlike `focus`): it
+      // marks the locale the user works on for as long as they stay on the
+      // tab, and only sendTab releases it. A user working exclusively inside
+      // the auto-translate dialog never sets it - that area isn't tracked.
+      if (this.state.trLoc !== locale)this.emit({ trLoc: locale });
       this.setFocus({ area: "tr", m: matrix.name, l: locale, loc, p: String(item.name) });
     });
   }

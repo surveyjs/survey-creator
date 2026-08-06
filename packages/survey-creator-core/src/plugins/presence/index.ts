@@ -4,9 +4,11 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { IPresencePeer, IPresencePeerEntry, IPresenceState } from "./presence-state";
 import { PresenceCapture } from "./presence-capture";
 import { PresenceOverlay } from "./presence-overlay";
+import { TranslationDeleteGuard } from "./translation-guard";
 
 export { PresenceCapture } from "./presence-capture";
 export { PresenceOverlay } from "./presence-overlay";
+export { TranslationDeleteGuard } from "./translation-guard";
 export * from "./presence-state";
 
 /**
@@ -34,10 +36,12 @@ export class PresencePlugin implements ICreatorPlugin {
   public overlay: PresenceOverlay;
   public onPeersChanged: EventBase<PresencePlugin, { peers: ReadonlyMap<string, IPresencePeer> }> = new EventBase();
   private peersMap = new Map<string, IPresencePeer>();
+  private translationGuard: TranslationDeleteGuard;
 
   constructor(creator: SurveyCreatorModel) {
     this.capture = new PresenceCapture(creator);
     this.overlay = new PresenceOverlay(creator, () => this.peersMap);
+    this.translationGuard = new TranslationDeleteGuard(creator, () => this.peersMap);
   }
   public activate(): void { }
   public deactivate(): boolean {
@@ -46,6 +50,7 @@ export class PresencePlugin implements ICreatorPlugin {
   public dispose(): void {
     this.capture.dispose();
     this.overlay.dispose();
+    this.translationGuard.dispose();
   }
 
   public get onStateChanged(): EventBase<PresenceCapture, { state: IPresenceState }> {

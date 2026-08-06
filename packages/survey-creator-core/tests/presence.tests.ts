@@ -933,6 +933,32 @@ test("presence: translation focus is cleared after blur with no follow-up focus"
   }
 });
 
+test("presence: sticky translation locale survives blur, resets on tab switch", async (): Promise<any> => {
+  const { creator, plugin, matrix, stringsSurvey } = createTranslationCreator();
+  const container = buildTranslationRow(matrix.name);
+  try {
+    // The default-locale column claims "default", same encoding as focus.l.
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[0].question });
+    expect(plugin.getState().trLoc).toEqual("default");
+    // Moving to the de column re-claims it.
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[1].question });
+    expect(plugin.getState().trLoc).toEqual("de");
+    // Blur clears the focus channel but NOT the sticky locale.
+    const textarea = <HTMLElement>container.querySelector("textarea");
+    textarea.dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
+    textarea.dispatchEvent(new FocusEvent("focusout", { bubbles: true }));
+    await new Promise((resolve) => setTimeout(resolve, 350));
+    expect(plugin.getState().focus).toBeNull();
+    expect(plugin.getState().trLoc).toEqual("de");
+    // Leaving the tab releases the claim atomically with the tab reset.
+    creator.makeNewViewActive("designer");
+    expect(plugin.getState().trLoc).toBeNull();
+  } finally {
+    container.remove();
+    plugin.dispose();
+  }
+});
+
 test("presence: remote translation focus decorates the right cell; unknown locale does not", (): any => {
   const { plugin, matrix } = createTranslationCreator();
   const container = buildTranslationRow(matrix.name);

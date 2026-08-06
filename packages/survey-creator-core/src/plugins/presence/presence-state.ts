@@ -103,6 +103,15 @@ export interface IPresenceState {
   /** Keyboard focus, or null - see `IPresenceFocus`. */
   focus: null | IPresenceFocus;
   /**
+   * Sticky Translations-tab locale: the last locale column whose cell the
+   * user focused. Unlike `focus` it survives the cell blur and stays while
+   * the user remains on the Translations tab; it resets atomically with the
+   * tab switch, like every other channel. "default" = the default locale
+   * (same encoding as the "tr" focus `l`). Optional for wire compatibility
+   * with older senders - readers must treat absence as null.
+   */
+  trLoc?: string | null;
+  /**
    * Mouse cursor, or null when the mouse left the creator. Always captured on
    * the active tab, so `tab` above is the view the cursor belongs to. Carries
    * no change stamp: the sender dedupes identical consecutive cursors, so
