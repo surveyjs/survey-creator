@@ -474,6 +474,37 @@ test("presence: mouse is tracked only inside the main content block", async (): 
   }
 });
 
+test("presence: cursor is not broadcast from the Preview tab", async (): Promise<any> => {
+  const { creator, plugin } = createCreator();
+  const root = document.createElement("div");
+  root.innerHTML =
+    "<div id=\"scrollableDiv-designer\"><div data-name=\"q1\"></div></div>";
+  document.body.appendChild(root);
+  creator.setRootElement(root);
+  const anchor = <HTMLElement>root.querySelector("[data-name]");
+  anchor.getBoundingClientRect = () => (<any>{ left: 0, top: 0, width: 200, height: 100 });
+  const move = (el: HTMLElement): Promise<void> => {
+    el.dispatchEvent(new MouseEvent("mousemove", { bubbles: true, clientX: 50, clientY: 25 }));
+    return new Promise((resolve) => setTimeout(resolve, 70));
+  };
+  try {
+    // Sanity: the very same anchor shape is shareable from the designer.
+    await move(anchor);
+    expect(plugin.getState().cur).toEqual(expect.objectContaining({ a: { s: "q", n: "q1" } }));
+    // Preview runs a private survey instance per participant - the cursor
+    // channel stays silent there even over an otherwise valid anchor.
+    creator.makeNewViewActive("test");
+    expect(creator.activeTab).toEqual("preview");
+    const container = <HTMLElement>root.querySelector("#scrollableDiv-designer");
+    container.id = `scrollableDiv-${creator.activeTabId}`;
+    await move(anchor);
+    expect(plugin.getState().cur).toBeNull();
+  } finally {
+    root.remove();
+    plugin.dispose();
+  }
+});
+
 /** Designer-like DOM: tab content > surface > content > canvas block (header + page). */
 function buildSurfaceRoot(): HTMLElement {
   const root = document.createElement("div");

@@ -254,6 +254,13 @@ export class PresenceCapture {
   // --- mouse -------------------------------------------------------------------
 
   private captureMouse(ev: MouseEvent): void {
+    // The Preview tab runs each participant's own survey instance (answers,
+    // page position and visibility diverge between peers), so a broadcast
+    // cursor cannot land on anything meaningful there - don't share it.
+    if (this.creator.activeTab === "preview") {
+      this.sendCur(null, "");
+      return;
+    }
     const root = this.creator.rootElement;
     const target = ev.target;
     if (!root || !(target instanceof Element) || !root.contains(target)) return;
