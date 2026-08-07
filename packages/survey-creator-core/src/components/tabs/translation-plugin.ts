@@ -434,9 +434,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       }))
     ), false);
   }
-  // The default target is survey.locale (the model keeps them in sync while the tab is
-  // active); when it is empty (or the explicit name of the default locale) it is the default
-  // language, which may be equal to the source language.
+  // The initial target language is taken from survey.locale, and only from it: the model does not
+  // write the survey locale back and does not follow its later changes. An empty survey locale
+  // (or the explicit name of the default one) means the default language, which is never a
+  // translation target - the tab opens with no target selected then.
   private calcDefaultTargetLocale(): string {
     const locale = this.creator.survey.locale;
     return isDefaultLocale(locale) ? "" : locale;

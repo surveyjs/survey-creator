@@ -114,12 +114,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         if (locale !== undefined)this.selectLanguage(locale);
       };
     });
-    res.onMatrixRenderRemoveButton.add((sender, options) => {
-      if (options.question.name !== "languages") return;
-      const locale = this.getLocaleByMatrixRow(<QuestionMatrixDynamicModel>options.question, options.row);
-      // The default language is the reference every translation is measured against - no delete.
-      options.allow = !!locale;
-    });
     // The matrix asks for the confirmation itself (confirmDelete); the row is gone by the time
     // the strings are deleted, so the locale is remembered before the removal.
     res.onMatrixRowRemoving.add((sender, options) => {
@@ -163,7 +157,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
           type: "dropdown",
           name: "targetLocale",
           title: editorLocalization.getString("ed.translationTargetLanguage"),
-          allowClear: false
+          // The target language is optional: clearing it stops the translation editing
+          // (no target pane, no target column).
+          allowClear: true
         },
         {
           type: "matrixdynamic",
@@ -190,11 +186,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (!survey || this.isDisposed) return;
     this._updatingSettingsSurvey = true;
     try {
-      const locales = this.getSelectableLocales();
       const source = this.sourceLocale || "";
       const target = this.targetLocale || "";
-      this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("sourceLocale"), locales, source, target);
-      this.updateLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("targetLocale"), locales, target, source);
+      this.updateSourceLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("sourceLocale"), source, target);
+      this.updateTargetLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("targetLocale"), target, source);
       const viewQuestion = survey.getQuestionByName("viewMode");
       if (!!viewQuestion) viewQuestion.value = this.view;
       this.updateLanguagesMatrixSelection();
@@ -206,12 +201,13 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     const survey = this.settingsSurvey;
     return !!survey ? <QuestionMatrixDynamicModel>survey.getQuestionByName("languages") : undefined;
   }
-  // The matrix row set - the languages the survey has translations for: the default locale ("")
-  // first, then every locale with at least one stored string. No synthetic rows - a freshly
-  // targeted language appears only once its first string is stored (the target dropdown already
-  // shows what is being translated). The pickable set is wider, see getSelectableLocales.
+  // The matrix row set - the languages the survey has translations for: every locale with at least
+  // one stored string. The default language is not one of them - it is what the translations are
+  // measured against, not a translation. No synthetic rows either - a freshly targeted language
+  // appears only once its first string is stored (the target dropdown already shows what is being
+  // translated). The pickable set is wider, see getTargetLocales.
   private getMatrixLanguages(): Array<string> {
-    const res: Array<string> = [""];
+    const res: Array<string> = [];
     if (!this.survey) return res;
     this.survey.getUsedLocales().forEach(loc => {
       if (isDefaultLocale(loc) || res.indexOf(loc) >= 0) return;
@@ -266,26 +262,24 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.updateLanguagesMatrixCore();
   }
   // Refills the rows from the current used-strings tree. The row set follows getMatrixLanguages(),
-  // so a language that has just got its first string gets a row here as well.
+  // so a language that has just got its first string gets a row here as well. A survey without
+  // translations has no rows at all - the matrix is hidden then, an empty one says nothing.
   private updateLanguagesMatrixCore(): void {
     const question = this.languagesQuestion;
     if (!question || this.isDisposed || !this.survey) return;
     const items = this.getUsedStringsItems();
-    question.value = this.getMatrixLanguages().map(loc => {
+    const locales = this.getMatrixLanguages();
+    question.value = locales.map(loc => {
       return {
         name: loc,
         displayName: this.getLocaleName(loc),
         progress: this.getLanguageProgressText(loc, items)
       };
     });
+    question.visible = locales.length > 0;
     this.updateLanguagesMatrixSelection();
   }
-  // The default language is the reference - a progress value is meaningless there, it shows
-  // the total only.
   private getLanguageProgressText(locale: string, items: Array<TranslationItem>): string {
-    if (!locale) {
-      return editorLocalization.getString("ed.translationStringsCount")["format"](items.length);
-    }
     const progress = this.getTranslationProgress(locale, items);
     return progress.translated + "/" + progress.total;
   }
@@ -331,6 +325,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     } else {
       this.deleteLocaleStrings(locale);
     }
+    // The deleted language has no strings and no matrix row left - neither dropdown may keep
+    // pointing at it.
+    if ((this.sourceLocale || "") === locale) {
+      this.sourceLocale = "";
+    }
     if ((this.targetLocale || "") === locale) {
       this.targetLocale = "";
     }
@@ -355,9 +354,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     super.performItemLocTextAction(item, locale, newText);
     if (!this._bulkTextAction) {
       const row = this.getMatrixRowByLocale(this.languagesQuestion, locale);
-      // The default language is what every row counts against and a language with no row yet needs
-      // one. Any other edit moves the progress of the edited language alone - including a cleared
-      // text: the language keeps its row showing no progress until the next full refresh drops it.
+      // A default-language edit moves the denominator of every row (it can add a used string), and
+      // a language with no row yet needs one. Any other edit moves the progress of the edited
+      // language alone - including a cleared text: the language keeps its row showing no progress
+      // until the next full refresh drops it.
       if (!row || isDefaultLocale(locale)) {
         this.updateLanguagesMatrix();
       } else {
@@ -405,6 +405,12 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   }
   public updateElementTranslationStates(): void {
     if (this.isDisposed || this.isSideBySideGrid || !this.survey) return;
+    // The indicators live on the target pane's title actions - with no target language there is
+    // no pane to carry them and no language to measure the strings against.
+    if (!this.targetLocale) {
+      this.elementStates = {};
+      return;
+    }
     this.elementStates = this.computeElementStates();
     for (const key in this.elementStateActions) {
       this.applyElementStateToAction(this.elementStateActions[key], this.elementStates[key] || "none");
@@ -444,9 +450,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   }
   private getStateFromCounts(counts: { translated: number, total: number }): TranslationElementState {
     if (counts.total === 0) return "none";
-    // With the default language as the target every used string has a text by definition -
-    // the warning state is meaningless there.
-    if (!!this.targetLocale && counts.translated < counts.total) return "untranslated";
+    if (counts.translated < counts.total) return "untranslated";
     return "translated";
   }
   // The untranslated state is the one where the button is a genuine call to action, so its
@@ -465,21 +469,47 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     action.tooltip = editorLocalization.getString(info.tooltip);
     action.css = "svc-translation-state svc-translation-state--" + state;
   }
-  // Each dropdown's list hides the locale currently selected in the other one, except its own
-  // selection - by default both sides can be the default language.
-  private updateLocaleQuestion(question: QuestionDropdownModel, locales: Array<string>, selected: string, excluded: string): void {
+  private updateSourceLocaleQuestion(question: QuestionDropdownModel, selected: string, excluded: string): void {
     if (!question) return;
-    question.choices = locales.filter(loc => loc !== excluded || loc === selected)
-      .map(loc => new ItemValue(this.toLocaleSettingValue(loc), this.getLocaleName(loc)));
+    question.choices = this.createLocaleChoices(this.getSourceLocales(), selected, excluded);
     question.value = this.toLocaleSettingValue(selected);
   }
-  // The choice list of the source/target dropdowns - every language that can be picked: the
-  // supported locales plus the ones the survey already uses, so a translation can be started
-  // for a language with no strings yet (unlike the matrix rows, see getMatrixLanguages).
-  // The default locale is represented by "" everywhere in this mode; its explicit name
-  // (surveyLocalization.defaultLocale, e.g. "en") is filtered out to avoid a duplicated entry.
-  private getSelectableLocales(): Array<string> {
+  private updateTargetLocaleQuestion(question: QuestionDropdownModel, selected: string, excluded: string): void {
+    if (!question) return;
+    question.choices = this.createLocaleChoices(this.getTargetLocales(), selected, excluded);
+    // No target language selected: the dropdown holds no value and renders its placeholder.
+    if (!selected) {
+      question.clearValue();
+    } else {
+      question.value = selected;
+    }
+  }
+  // Each dropdown's list hides the language selected in the other one, except its own selection.
+  // An empty locale excludes nothing: the default language is a source-only entry, and an empty
+  // target is not a language at all.
+  private createLocaleChoices(locales: Array<string>, selected: string, excluded: string): Array<ItemValue> {
+    return locales.filter(loc => !excluded || loc !== excluded || loc === selected)
+      .map(loc => new ItemValue(this.toLocaleSettingValue(loc), this.getLocaleName(loc)));
+  }
+  // The choice list of the source dropdown - the languages that have something to translate from:
+  // the default language first, then the ones the survey stores strings for (the matrix rows).
+  // The currently selected source is kept even when it loses its last string (an undo, a CSV
+  // import), so the dropdown never holds a value without a matching choice.
+  private getSourceLocales(): Array<string> {
     const res: Array<string> = [""];
+    const add = (loc: string): void => {
+      if (!isDefaultLocale(loc) && res.indexOf(loc) < 0) res.push(loc);
+    };
+    this.getMatrixLanguages().forEach(loc => add(loc));
+    add(this.sourceLocale);
+    return res;
+  }
+  // The choice list of the target dropdown - every language that can be translated into: the
+  // supported locales plus the ones the survey already uses, so a translation can be started for
+  // a language with no strings yet (unlike the matrix rows, see getMatrixLanguages). The default
+  // language is never a target: it is the reference the translations are measured against.
+  private getTargetLocales(): Array<string> {
+    const res: Array<string> = [];
     const add = (loc: string): void => {
       if (!isDefaultLocale(loc) && res.indexOf(loc) < 0) res.push(loc);
     };
@@ -504,10 +534,15 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.updateSettingsSurveyValues();
     }
     if (name === "sourceLocale" || name === "targetLocale") {
-      if (name === "targetLocale") {
-        this.updateSurveyLocale();
+      // The target pane exists only while a language is being translated, so a change that flips
+      // the presence of a target creates or drops it - along with the copies mapping, which knows
+      // which strings are editable. A switch between two languages only re-locales the copies.
+      // The instances may not be built yet (the plugin sets the locales before it builds them).
+      if (name === "targetLocale" && !oldValue !== !newValue && this.isSideBySideForms && !!this.sourceSurvey) {
+        this.rebuildInstances();
+      } else {
+        this.updateInstanceLocales();
       }
-      this.updateInstanceLocales();
       this.updateSettingsSurveyValues();
       if (name === "targetLocale") {
         this.updateElementTranslationStates();
@@ -606,7 +641,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       const rows = matrix.rows;
       if (Array.isArray(rows) && rows.length > 0 && rows[0]["translationData"] === item) {
         const cells = matrix.visibleRows[0].cells;
-        cells[cells.length - 1].question.focus(); // the target locale column is the last one
+        // The target locale column is the last one - and the only one when no target is selected.
+        cells[cells.length - 1].question.focus();
         return;
       }
     }
@@ -645,10 +681,14 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.updateElementTranslationStates();
       const json = this.survey.toJSON();
       this.sourceSurvey = this.createInstance(json, "translation_source");
-      this.targetSurvey = this.createInstance(json, "translation_target");
       this.setupSourceSurvey(this.sourceSurvey);
-      this.setupTargetSurvey(this.targetSurvey);
-      this.setupSourceEmptySpaces();
+      // With no target language selected there is nothing to edit: the target pane is not
+      // rendered, so its copy is not created either and the source pane is the whole surface.
+      if (!!this.targetLocale) {
+        this.targetSurvey = this.createInstance(json, "translation_target");
+        this.setupTargetSurvey(this.targetSurvey);
+        this.setupSourceEmptySpaces();
+      }
       this.buildMappings();
       this.updateInstanceLocales();
       this.updateInstancePages();
@@ -660,6 +700,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // the element strings dialogs write to it, and external code can too.
   public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
     if (this._syncing || this.isDisposed) return;
+    // The survey locale is read once, on activation, to preselect the target language - the tab
+    // does not follow it afterwards, and the locale itself changes no string and no counter.
+    if (obj === this.survey && propName === "locale") return;
     // The element strings dialogs write into the real survey string by string, so this runs per
     // edit there as well: a text change keeps the used-strings tree, a structural one rebuilds it.
     // Dropped here and not through updateLanguagesMatrix below, because the pane rebuild of a
@@ -675,17 +718,14 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.updateElementTranslationStates();
   }
   private onCreatorSurveyPropertyChangedCore(obj: Base, propName: string): void {
-    if (obj === this.survey && propName === "locale") {
-      this.followSurveyLocale();
-      return;
-    }
     if (this.isSideBySideGrid) {
       // The base implementation refreshes the grid cells on a localizable string change and
       // rebuilds the grid on a structural one.
       super.onCreatorSurveyPropertyChanged(obj, propName);
       return;
     }
-    if (!this.targetSurvey) return;
+    // The source pane is mapped as well, and it is the only pane when no target is selected.
+    if (!this.sourceSurvey) return;
     const realLocStr = this.getLocStrByName(obj, propName);
     if (!this.copiesMap.hasReal(realLocStr)) {
       // Not a mapped localizable string - a structural change (element added/removed, etc.).
@@ -899,6 +939,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private sourceEmptySpaceStrings: Array<LocalizableString> = [];
   private setupSourceEmptySpaces(): void {
     this.sourceEmptySpaceStrings = [];
+    // Nothing to align to when the target pane is not rendered (no target language).
+    if (!this.sourceSurvey || !this.targetSurvey) return;
     const addEmptySpace = (source: ILocalizableString, target: ILocalizableString): void => {
       const locStr = <LocalizableString>source;
       locStr.onGetTextCallback = (text: string): string => {
@@ -1129,22 +1171,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.choicesCollapsedState = {};
     this.elementStateActions = {};
   }
-  // Keeps the real survey's locale in sync with the language being translated. An empty
-  // target means the default language; an explicit default-locale name on the survey
-  // ("en") is the same language, so it is left untouched in that case.
-  private updateSurveyLocale(): void {
-    if (!this.survey || this.isDisposed) return;
-    const locale = this.targetLocale || "";
-    const current = this.survey.locale || "";
-    if (current === locale || (!locale && isDefaultLocale(current))) return;
-    const wasSyncing = this._syncing;
-    this._syncing = true;
-    try {
-      this.survey.locale = locale;
-    } finally {
-      this._syncing = wasSyncing;
-    }
-  }
   private updateInstanceLocales(): void {
     const wasSyncing = this._syncing;
     // Changing the locale fires strChanged on every localizable string of the copy;
@@ -1169,19 +1195,17 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       if (!!page) survey.currentPage = page;
     });
   }
+  // Without a target pane no copy is editable - the mapping is built with the source copy alone,
+  // so the real survey's changes still mirror into it.
   private buildMappings(): void {
-    this.copiesMap.build(this.root, this.createCopyRoot(this.targetSurvey), this.createCopyRoot(this.sourceSurvey));
+    const editableRoot = !!this.targetSurvey ? this.createCopyRoot(this.targetSurvey) : null;
+    this.copiesMap.build(this.root, editableRoot, this.createCopyRoot(this.sourceSurvey));
   }
   private createCopyRoot(survey: SurveyModel): TranslationGroup {
     const root = new TranslationGroup("survey", survey, this);
     root.setAsRoot();
     root.reset();
     return root;
-  }
-  // An external survey.locale change - follow it instead of rebuilding.
-  protected followSurveyLocale(): void {
-    const locale = this.survey.locale;
-    this.targetLocale = isDefaultLocale(locale) ? "" : locale;
   }
 }
 

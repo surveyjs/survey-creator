@@ -120,7 +120,7 @@ test("grid view: a source column and a target column, both editable", () => {
   expect(header.columns[1].title.indexOf("Target: ")).toBe(0);
 });
 
-test("grid view: a single editable column when source and target locales are equal", () => {
+test("grid view: a single source column when no target language is selected", () => {
   const json = JSON.parse(JSON.stringify(gridJSON));
   delete json.locale;
   const creator = createGridCreator(json);
@@ -133,7 +133,32 @@ test("grid view: a single editable column when source and target locales are equ
   expect(matrix.columns[0].readOnly).toBeFalsy();
   const header = <QuestionMatrixDropdownModel>model.stringsHeaderSurvey.getQuestionByName("stringsHeader");
   expect(header.columns).toHaveLength(1);
-  expect(header.columns[0].title.indexOf("Target: ")).toBe(0);
+  expect(header.columns[0].title.indexOf("Source: ")).toBe(0);
+});
+
+test("grid view: clearing the target language drops the target column, selecting one restores it", () => {
+  const creator = createGridCreator();
+  const model = getModel(creator);
+  expect(findMatrix(model, "q1", "title").columns).toHaveLength(2);
+
+  model.targetLocale = "";
+  let matrix = findMatrix(model, "q1", "title");
+  expect(matrix.columns).toHaveLength(1);
+  expect(matrix.columns[0].name).toBe(getDefaultLocaleName());
+  expect(matrix.visibleRows[0].cells[0].question.value).toBe("Question 1");
+  let header = <QuestionMatrixDropdownModel>model.stringsHeaderSurvey.getQuestionByName("stringsHeader");
+  expect(header.columns).toHaveLength(1);
+  expect(header.columns[0].title.indexOf("Source: ")).toBe(0);
+
+  model.targetLocale = "de";
+  matrix = findMatrix(model, "q1", "title");
+  expect(matrix.columns).toHaveLength(2);
+  expect(matrix.columns[1].name).toBe("de");
+  expect(matrix.visibleRows[0].cells[1].question.value).toBe("Frage 1");
+  header = <QuestionMatrixDropdownModel>model.stringsHeaderSurvey.getQuestionByName("stringsHeader");
+  expect(header.columns).toHaveLength(2);
+  expect(header.columns[0].title.indexOf("Source: ")).toBe(0);
+  expect(header.columns[1].title.indexOf("Target: ")).toBe(0);
 });
 
 test("grid view: used strings only by default, the toolbar dropdown switches to all strings", () => {
@@ -193,7 +218,6 @@ test("grid view: changing the target locale re-runs the column setup and keeps v
   const model = getModel(creator);
   const stringsSurvey = model.stringsSurvey;
   model.targetLocale = "fr";
-  expect(creator.survey.locale).toBe("fr");
   // The strings survey is kept, only its columns and data are updated.
   expect(model.stringsSurvey).toBe(stringsSurvey);
   let matrix = findMatrix(model, "q1", "title");

@@ -26,6 +26,11 @@ async function openSideBySideTranslation(page) {
   await expect(page.locator(".st-side-by-side__source")).toBeVisible();
   await expect(page.locator(".st-side-by-side__target")).toBeVisible();
 }
+// The property grid dropdown: the input itself sits under the prefix-icon wrapper, so the
+// wrapper is what gets clicked to open the list.
+async function openLocaleDropdown(page, title: string) {
+  await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: title }) }).click();
+}
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
@@ -60,6 +65,51 @@ test.describe(title, () => {
     await expect(getListItemByText(page, "Survey Strings")).toHaveCount(0);
     await expect(getListItemByText(page, "All Pages")).toHaveCount(0);
     await page.keyboard.press("Escape");
+  });
+
+  test("language dropdowns: the source lists the survey's languages, the target every language but the default one", async ({ page }) => {
+    await openSideBySideTranslation(page);
+    // German is the only translation the survey has, and it is the current target - the source
+    // dropdown holds the default language alone.
+    await openLocaleDropdown(page, "Source language");
+    await expect(page.getByRole("option")).toHaveText(["Default (English)"]);
+    await page.keyboard.press("Escape");
+    // The target offers every language to start a translation - except the default one.
+    await openLocaleDropdown(page, "Target language");
+    await expect(page.getByRole("option", { name: "Default (English)" })).toHaveCount(0);
+    await expect(page.getByRole("option", { name: "Deutsch" })).toBeVisible();
+    await expect(page.getByRole("option", { name: "Italiano" })).toBeVisible();
+    // Translating into Italian frees German as a source; a language the survey does not use
+    // (French) is offered as a target only.
+    await page.getByRole("option", { name: "Italiano" }).click();
+    await openLocaleDropdown(page, "Source language");
+    await expect(page.getByRole("option")).toHaveText(["Default (English)", "Deutsch"]);
+    await page.keyboard.press("Escape");
+  });
+
+  test("clearing the target language hides the target pane and disables the translate action", async ({ page }) => {
+    await openSideBySideTranslation(page);
+    const sidebar = page.locator(".svc-side-bar");
+    await sidebar.locator(".spg-question[data-name=targetLocale]").getByRole("button", { name: "Clear" }).click();
+
+    await expect(page.locator(".st-side-by-side__target")).toHaveCount(0);
+    await expect(page.locator(".st-side-by-side--no-target")).toBeVisible();
+    // The source pane, alone, takes the whole surface.
+    const contentBox = await page.locator(".st-side-by-side").boundingBox();
+    const sourceBox = await page.locator(".st-side-by-side__source").boundingBox();
+    expect(Math.abs(sourceBox!.width - contentBox!.width)).toBeLessThanOrEqual(2);
+    await expect(getBarItemByTitle(page, "Translate remaining strings")).toBeDisabled();
+
+    // Selecting a language again brings the pane back with its inline editors.
+    await openLocaleDropdown(page, "Target language");
+    await page.getByRole("option", { name: "Deutsch" }).click();
+    await expect(page.locator(".st-side-by-side__target")).toBeVisible();
+    const targetTitle = page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1");
+    await targetTitle.click();
+    await page.keyboard.press("Control+a");
+    await page.keyboard.type("Frage 1 neu");
+    await page.keyboard.press("Control+Enter");
+    expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1 neu");
   });
 
   test("inline edit in target pane updates the JSON translation; source pane unchanged", async ({ page }) => {
@@ -197,8 +247,7 @@ test.describe(title, () => {
     });
     await openSideBySideTranslation(page);
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
-    // Click the dropdown wrapper: the input itself sits under the prefix-icon wrapper.
-    await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Target language" }) }).click();
+    await openLocaleDropdown(page, "Target language");
     await page.getByRole("option", { name: "Italiano" }).click();
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toHaveCount(0);
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Question 1")).toBeVisible();
@@ -211,6 +260,8 @@ test.describe(title, () => {
     const resultJson = await getJSON(page);
     expect(resultJson.pages[0].elements[0].title.it).toEqual("Question 1 it");
     expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1");
+    // The survey locale is the initial hint of the target language, never written back.
+    expect(resultJson.locale).toEqual("de");
   });
 });
 
@@ -451,23 +502,21 @@ test.describe(title + " languages matrix", () => {
     await page.goto(url);
   });
 
-  test("click a language in the matrix to switch the target; the dropdown follows", async ({ page }) => {
+  test("click a language in the matrix to switch the target", async ({ page }) => {
     await openSideBySideTranslation(page);
     const matrix = page.locator(".svc-side-bar [data-name=languages]");
     await expect(matrix).toBeVisible();
-    // The default row shows the total only; a language row shows its translated/total progress.
-    await expect(matrix.locator("tr").filter({ hasText: "Default (English)" })).toContainText(/\d+ strings/);
+    // The matrix lists the survey's translation languages - the default one is not a translation.
+    await expect(matrix.locator("tbody tr")).toHaveCount(1);
     await expect(matrix.locator("tr").filter({ hasText: "Deutsch" })).toContainText(/1\/\d+/);
+    await expect(matrix.getByRole("button", { name: "Default (English)" })).toHaveCount(0);
     // The target pane currently shows the German strings.
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
-    // Clicking the default language retargets the editor and syncs the target dropdown.
-    await matrix.getByRole("button", { name: "Default (English)" }).click();
-    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Question 1")).toBeVisible();
-    await expect(page.locator(".svc-side-bar .spg-question[data-name=targetLocale]")).toContainText("Default (English)");
-    // And back to German through its row link.
+    await page.locator(".svc-side-bar .spg-question[data-name=targetLocale]").getByRole("button", { name: "Clear" }).click();
+    await expect(page.locator(".st-side-by-side__target")).toHaveCount(0);
+    // Clicking the row link starts translating that language again.
     await matrix.getByRole("button", { name: "Deutsch" }).click();
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
-    await expect(page.locator(".svc-side-bar .spg-question[data-name=targetLocale]")).toContainText("Deutsch");
   });
 
   test("delete a language with confirmation", async ({ page }) => {
@@ -485,14 +534,18 @@ test.describe(title + " languages matrix", () => {
     await expect(dialog).toBeHidden();
     await expect(deRow).toBeVisible();
     expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1");
-    // Apply removes the strings and retargets the editor to the default language.
+    // Apply removes the strings; the survey has no translation left, so the matrix is hidden and
+    // no language is being translated any more.
     await deRow.hover();
     await deRow.getByRole("button", { name: "Remove" }).click();
     await page.locator(".spg-popup--confirm").getByRole("button", { name: "OK" }).click();
-    await expect(matrix.locator("tr").filter({ hasText: "Deutsch" })).toHaveCount(0);
-    await expect(page.locator(".svc-side-bar .spg-question[data-name=targetLocale]")).toContainText("Default (English)");
+    await expect(matrix).toHaveCount(0);
+    await expect(page.locator(".svc-side-bar .spg-question[data-name=targetLocale]")).not.toContainText("Deutsch");
+    await expect(page.locator(".st-side-by-side__target")).toHaveCount(0);
     const resultJson = await getJSON(page);
     expect(resultJson.pages[0].elements[0].title.de).toBeUndefined();
-    await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Question 1")).toBeVisible();
+    // The survey keeps the locale it was loaded with.
+    expect(resultJson.locale).toEqual("de");
+    await expect(page.locator(".st-side-by-side__source").getByText("Question 1")).toBeVisible();
   });
 });

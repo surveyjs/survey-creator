@@ -262,6 +262,16 @@ td.st-table__cell:first-of-type {
   border-right: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
 }
 
+// No target language selected: the target pane is not rendered and the source pane, read-only,
+// is the whole surface.
+.st-side-by-side--no-target {
+  .st-side-by-side__source {
+    flex: 1 1 100%;
+    width: 100%;
+    border-right: none;
+  }
+}
+
 // The survey title row of the target pane: the translate action sits at the pane's right
 // edge, on the first title line - like the page/question translate actions - instead of
 // right after the title text, where a growing title would run into it. The action bar takes

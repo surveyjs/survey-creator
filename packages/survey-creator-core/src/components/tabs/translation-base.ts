@@ -1053,14 +1053,17 @@ export class TranslationBase extends Base implements ITranslationLocales {
     column.readOnly = isReadOnly;
     matrix.columns.splice(0, 0, column);
   }
-  // Columns are [Source, Target] (or [Target] only when the locales are equal).
-  public updateSourceTargetHeaderColumns(matrix: QuestionMatrixDropdownModel, sourceLoc: string, targetLoc: string): void {
+  // Columns are [Source, Target], or a single column: the target one when the locales are equal,
+  // the source one when there is no target language at all (hasTarget = false).
+  public updateSourceTargetHeaderColumns(matrix: QuestionMatrixDropdownModel, sourceLoc: string, targetLoc: string, hasTarget: boolean = true): void {
     const cols = matrix.columns;
     if (cols.length > 1) {
       cols[0].title = this.getSourceTargetHeaderTitle("translationSource", sourceLoc || "");
       cols[1].title = this.getSourceTargetHeaderTitle("translationTarget", targetLoc);
     } else {
-      cols[0].title = this.getSourceTargetHeaderTitle("translationTarget", targetLoc);
+      cols[0].title = hasTarget
+        ? this.getSourceTargetHeaderTitle("translationTarget", targetLoc)
+        : this.getSourceTargetHeaderTitle("translationSource", sourceLoc || "");
     }
   }
   private getSourceTargetHeaderTitle(strName: string, locale: string): string {
@@ -1074,10 +1077,18 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
     if (this.useSourceTargetColumns) {
       const target = this.targetLocale || "";
-      matrix.addColumn(this.getLocaleColumnName(target), this.getLocaleName(target));
-      this.updateMatrixSourceColumn(matrix, this.sourceLocale, target, this.isSourceColumnReadOnly);
+      // No target language selected - nothing is being translated, so the grid holds the source
+      // column alone (editable, exactly as it is next to a target column).
+      const hasTarget = !!target;
+      const loc = hasTarget ? target : (this.sourceLocale || "");
+      const column = matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
+      if (hasTarget) {
+        this.updateMatrixSourceColumn(matrix, this.sourceLocale, target, this.isSourceColumnReadOnly);
+      } else {
+        column.readOnly = this.isSourceColumnReadOnly;
+      }
       if (matrix.name === "stringsHeader") {
-        this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, target);
+        this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, target, hasTarget);
       }
       return;
     }

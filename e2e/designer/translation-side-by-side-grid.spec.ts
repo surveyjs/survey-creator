@@ -98,6 +98,26 @@ test.describe(title, () => {
     await expect(page.locator(".st-side-by-side__source")).toHaveCount(0);
   });
 
+  test("clearing the target language leaves the source column alone", async ({ page }) => {
+    await openGridTranslation(page);
+    const headerColumns = page.locator(".st-strings-header table tr").first().locator("th");
+    await expect(headerColumns).toHaveCount(2);
+
+    await page.locator(".svc-side-bar .spg-question[data-name=targetLocale]").getByRole("button", { name: "Clear" }).click();
+    await expect(headerColumns).toHaveCount(1);
+    await expect(headerColumns.nth(0)).toContainText("Source: Default (English)");
+    const titleRow = getTitleRow(page);
+    await expect(titleRow.locator("textarea")).toHaveCount(1);
+    await expect(titleRow.locator("textarea").nth(0)).toHaveValue("Question 1");
+
+    // Selecting a language restores the two-column layout with the stored translation.
+    await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Target language" }) }).click();
+    await page.getByRole("option", { name: "Deutsch" }).click();
+    await expect(headerColumns).toHaveCount(2);
+    await expect(headerColumns.nth(1)).toContainText("Target: Deutsch");
+    await expect(getTitleRow(page).locator("textarea").nth(1)).toHaveValue("Frage 1");
+  });
+
   test("page dropdown: All Pages by default, selecting a page scopes the grid", async ({ page }) => {
     await openGridTranslation(page);
     // All Pages: the first "Title" row belongs to q1 from page1.

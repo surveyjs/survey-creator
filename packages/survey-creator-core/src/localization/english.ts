@@ -147,7 +147,6 @@ export var enStrings = {
     translationSurveyStrings: "Survey Strings",
     translationStateNothingToTranslate: "No strings to translate",
     translationStateAllTranslated: "All strings are translated",
-    translationStringsCount: "{0} strings",
     translationYouTubeNotSupported: "YouTube links are not supported.",
     themeExportButton: "Export",
     themeImportButton: "Import",

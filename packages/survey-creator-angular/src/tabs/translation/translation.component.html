@@ -19,13 +19,14 @@
           </div>
         </div>
       </div>
-      <div *ngIf="sideBySideModel" class="st-side-by-side">
+      <div *ngIf="sideBySideModel" class="st-side-by-side"
+        [class]="sideBySideModel.targetSurvey ? '' : 'st-side-by-side--no-target'">
         <div class="st-side-by-side__source" #sourceScrollContainer>
           <ng-container *ngFor="let s of [sideBySideModel.sourceSurvey]; trackBy: trackStringsSurveyBy">
             <survey-content [model]="s"></survey-content>
           </ng-container>
         </div>
-        <div class="st-side-by-side__target" #targetScrollContainer>
+        <div *ngIf="sideBySideModel.targetSurvey" class="st-side-by-side__target" #targetScrollContainer>
           <ng-container *ngFor="let s of [sideBySideModel.targetSurvey]; trackBy: trackStringsSurveyBy">
             <survey-content [model]="s"></survey-content>
           </ng-container>

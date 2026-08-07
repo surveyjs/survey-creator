@@ -120,6 +120,7 @@ test("start page preselected when firstPageIsStartPage is true", () => {
 
 test("instances restore the runtime frame/nested css classes suppressed in design mode", () => {
   const json = {
+    locale: "de",
     pages: [
       {
         name: "page1",
@@ -202,26 +203,40 @@ test("changing targetLocale switches copy locale without recreating instances; e
   expect(realQuestion.locTitle.getLocaleText("")).toBe("Question 1");
 });
 
-test("changing targetLocale updates survey.locale; an external survey.locale change is followed", () => {
+test("the survey locale is not written by a target change and not followed when it changes", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   expect(creator.survey.locale).toBe("de");
+  // Every way of retargeting leaves the survey locale alone.
   model.targetLocale = "fr";
-  expect(creator.survey.locale).toBe("fr");
-  creator.survey.locale = "de";
-  expect(model.targetLocale).toBe("de");
-  expect(model.targetSurvey.locale).toBe("de");
+  expect(creator.survey.locale).toBe("de");
+  getSettingsQuestion(creator, "targetLocale").value = "it";
+  expect(creator.survey.locale).toBe("de");
+  model.targetLocale = "";
+  expect(creator.survey.locale).toBe("de");
+
+  // And an external survey locale change moves neither the target nor the panes.
+  model.targetLocale = "fr";
+  const targetSurvey = model.targetSurvey;
+  creator.survey.locale = "it";
+  expect(model.targetLocale).toBe("fr");
+  expect(getSettingsQuestion(creator, "targetLocale").value).toBe("fr");
+  expect(model.targetSurvey).toBe(targetSurvey);
+  expect(targetSurvey.locale).toBe("fr");
+  creator.survey.locale = "";
+  expect(model.targetLocale).toBe("fr");
+  expect(model.targetSurvey).toBe(targetSurvey);
 });
 
-test("target locale choice persists via survey.locale across tab switches", () => {
+test("the target locale is taken from survey.locale on every activation", () => {
   const creator = createSideBySideCreator();
   getModel(creator).targetLocale = "fr";
-  expect(creator.survey.locale).toBe("fr");
   creator.activeTab = "designer";
   creator.activeTab = "translation";
   const model = getModel(creator);
-  expect(model.targetLocale).toBe("fr");
-  expect(model.targetSurvey.locale).toBe("fr");
+  // The survey locale is the only source of the initial target - the previous choice is not stored.
+  expect(model.targetLocale).toBe("de");
+  expect(model.targetSurvey.locale).toBe("de");
 });
 
 test("activating the tab does not modify the survey locale, no undo step is created", () => {
@@ -255,7 +270,6 @@ test("settings survey dropdowns drive the source and target locales", () => {
   const model = getModel(creator);
   getSettingsQuestion(creator, "targetLocale").value = "fr";
   expect(model.targetLocale).toBe("fr");
-  expect(creator.survey.locale).toBe("fr");
   expect(model.targetSurvey.locale).toBe("fr");
   getSettingsQuestion(creator, "sourceLocale").value = "de";
   expect(model.sourceLocale).toBe("de");
@@ -277,26 +291,103 @@ test("target locale defaults to survey.locale, not to the first locale in the li
   expect(getSettingsQuestion(creator, "targetLocale").value).toBe("fr");
 });
 
-test("target locale defaults to the default language when survey.locale is empty, it equals the source language", () => {
+test("no target language is selected when survey.locale is empty: no target pane, empty target dropdown", () => {
   const json = JSON.parse(JSON.stringify(sideBySideJSON));
   delete json.locale;
   const creator = createSideBySideCreator(json);
   const model = getModel(creator);
   expect(model.sourceLocale || "").toBe("");
   expect(model.targetLocale || "").toBe("");
-  expect(model.targetSurvey.locale).toBeFalsy();
+  // The default language is not a translation target - nothing is selected instead.
+  expect(model.targetSurvey).toBeFalsy();
+  expect(model.sourceSurvey).toBeTruthy();
   const targetValues = getChoiceValues(creator, "targetLocale");
-  expect(targetValues.indexOf("default")).toBeGreaterThan(-1);
-  expect(getSettingsQuestion(creator, "targetLocale").value).toBe("default");
+  expect(targetValues.indexOf("default")).toBe(-1);
+  expect(getSettingsQuestion(creator, "targetLocale").isEmpty()).toBeTruthy();
   expect(getSettingsQuestion(creator, "sourceLocale").value).toBe("default");
 });
 
-test("target locale defaults to the default language when survey.locale equals the default locale name", () => {
+test("the source dropdown lists the survey's languages only, the target dropdown every available one", () => {
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  // An explicit default-locale text: it is the default language, not a language of its own.
+  json.pages[0].elements[0].title.en = "Question 1 en";
+  const creator = createSideBySideCreator(json);
+  const model = getModel(creator);
+  model.targetLocale = "fr";
+  expect(getChoiceValues(creator, "sourceLocale")).toEqual(["default", "de"]);
+  const targetValues = getChoiceValues(creator, "targetLocale");
+  expect(targetValues.indexOf("default")).toBe(-1);
+  expect(targetValues.indexOf("fr")).toBeGreaterThan(-1);
+  // A supported language the survey does not use is a target, never a source.
+  expect(targetValues.indexOf("it")).toBeGreaterThan(-1);
+  // It becomes a source as soon as it stores its first string.
+  model.targetSurvey.getQuestionByName("q4").locTitle.text = "Question 4 fr";
+  model.targetLocale = "it";
+  expect(getChoiceValues(creator, "sourceLocale")).toEqual(["default", "de", "fr"]);
+});
+
+test("the selected source language stays in the list after it loses its last string", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  model.targetLocale = "it";
+  model.sourceLocale = "de";
+  expect(getChoiceValues(creator, "sourceLocale")).toEqual(["default", "de"]);
+  // Removing the last German string (an undo, a CSV import) drops its matrix row, but the
+  // dropdown must not lose the value it holds.
+  creator.survey.getQuestionByName("q1").locTitle.setLocaleText("de", "");
+  expect(model.languagesQuestion.visible).toBeFalsy();
+  expect(getChoiceValues(creator, "sourceLocale")).toEqual(["default", "de"]);
+  expect(getSettingsQuestion(creator, "sourceLocale").value).toBe("de");
+});
+
+test("onTranslationLocaleInitiallySelected filters the source dropdown as it filters the matrix rows", () => {
+  const json = JSON.parse(JSON.stringify(sideBySideJSON));
+  json.pages[1].elements[0].title = { default: "Question 4", fr: "Question 4 fr" };
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+  creator.onTranslationLocaleInitiallySelected.add((sender, options) => {
+    options.isSelected = options.locale !== "fr";
+  });
+  creator.JSON = json;
+  creator.activeTab = "translation";
+  const model = getModel(creator);
+  model.targetLocale = "it";
+  expect(model.languagesQuestion.value.map(row => row.name)).toEqual(["de"]);
+  expect(getChoiceValues(creator, "sourceLocale")).toEqual(["default", "de"]);
+});
+
+test("no target language is selected when survey.locale equals the default locale name", () => {
   const json = JSON.parse(JSON.stringify(sideBySideJSON));
   json.locale = "en";
   const creator = createSideBySideCreator(json);
   const model = getModel(creator);
   expect(model.targetLocale || "").toBe("");
+  expect(model.targetSurvey).toBeFalsy();
+});
+
+test("clearing and re-selecting the target language drops and restores the target pane", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  const sourceSurvey = model.sourceSurvey;
+  expect(model.targetSurvey).toBeTruthy();
+
+  // Clearing the target dropdown stops the translation editing.
+  getSettingsQuestion(creator, "targetLocale").clearValue();
+  expect(model.targetLocale || "").toBe("");
+  expect(model.targetSurvey).toBeFalsy();
+  // The source pane is rebuilt with the mapping and keeps following the real survey.
+  expect(model.sourceSurvey).not.toBe(sourceSurvey);
+  creator.survey.getQuestionByName("q1").locTitle.setLocaleText("", "Question 1 new");
+  expect(model.sourceSurvey.getQuestionByName("q1").locTitle.getLocaleText("")).toBe("Question 1 new");
+  // No target language, no element indicator states.
+  expect(model.getElementTranslationState(model.sourceSurvey.getQuestionByName("q1"))).toBe("none");
+
+  // Selecting a language brings the pane back, and its edits are forwarded again.
+  model.targetLocale = "de";
+  expect(model.targetSurvey).toBeTruthy();
+  expect(model.targetSurvey.locale).toBe("de");
+  model.targetSurvey.getQuestionByName("q1").locTitle.text = "Frage 1 neu";
+  expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("Frage 1 neu");
+  expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("")).toBe("Question 1 new");
 });
 
 test("an external structural change rebuilds instances", () => {
@@ -820,7 +911,7 @@ test("Translate remaining strings action is disabled while the target language i
   creator.activeTab = "translation";
   const newModel = getModel(creator);
   expect(newModel).not.toBe(model);
-  expect(newModel.targetLocale).toBe("fr");
+  expect(newModel.targetLocale).toBe("de");
   expect(action.enabled).toBeTruthy();
   newModel.targetLocale = "";
   expect(action.enabled).toBeFalsy();
@@ -1017,18 +1108,17 @@ test("element state indicator: transitions on typing and target locale switch", 
   expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("none");
 });
 
-test("element state indicator: the default language as target shows no warning state", () => {
+test("element state indicator: no target language, no states and no indicator actions", () => {
   const creator = createSideBySideCreator(stateJSON);
   const model = getModel(creator);
-  // A string stored only in a non-default locale must not produce a warning either.
-  creator.survey.getLocalizableString("description").setLocaleText("de", "Umfragebeschreibung");
+  const question = model.targetSurvey.getQuestionByName("q2");
+  expect(model.getElementTranslationState(question)).toBe("untranslated");
   model.targetLocale = "";
-  const target = model.targetSurvey;
-  expect(model.getElementTranslationState(target.getQuestionByName("q1"))).toBe("translated");
-  expect(model.getElementTranslationState(target.getQuestionByName("q2"))).toBe("translated");
-  expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("none");
-  expect(model.getElementTranslationState(target.getPageByName("page1"))).toBe("translated");
-  expect(model.getElementTranslationState(target)).toBe("translated");
+  // The target pane is gone with its title actions - the source pane carries no indicators.
+  expect(model.targetSurvey).toBeFalsy();
+  expect(model.getElementTranslationState(model.sourceSurvey.getQuestionByName("q2"))).toBe("none");
+  expect(model.getElementTranslationState(model.sourceSurvey.getPageByName("page1"))).toBe("none");
+  expect(model.getElementTranslationState(model.sourceSurvey)).toBe("none");
 });
 
 test("Translate remaining strings action with a machine-translation handler: dialog has the machine item", () => {

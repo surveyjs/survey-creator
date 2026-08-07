@@ -48,16 +48,20 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     );
   }
   renderSideBySideContent(model: TranslationSideBySide): React.JSX.Element {
+    // No target language selected: the target pane is not rendered and the source pane takes
+    // the whole surface.
+    const targetSurvey = model.targetSurvey;
     return (
-      <div className="st-side-by-side">
+      <div className={"st-side-by-side" + (!targetSurvey ? " st-side-by-side--no-target" : "")}>
         <div key={model.sourceSurvey?.elementIdPrefix} className="st-side-by-side__source"
           ref={(el) => { model.setSourceScrollElement(el); }}>
           <Survey model={model.sourceSurvey}></Survey>
         </div>
-        <div key={model.targetSurvey?.elementIdPrefix} className="st-side-by-side__target"
-          ref={(el) => { model.setTargetScrollElement(el); }}>
-          <Survey model={model.targetSurvey}></Survey>
-        </div>
+        {!!targetSurvey ?
+          <div key={targetSurvey.elementIdPrefix} className="st-side-by-side__target"
+            ref={(el) => { model.setTargetScrollElement(el); }}>
+            <Survey model={targetSurvey}></Survey>
+          </div> : null}
       </div>
     );
   }
