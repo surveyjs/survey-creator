@@ -131,10 +131,17 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.updateTabControl();
   }
+  // The all/used strings mode of the element strings blocks. The tab model is disposed with the
+  // tab, so the user's choice is kept here, next to the machine-translation source locale.
+  private showAllElementStrings: boolean = false;
   private activateSideBySide(): void {
     const model = new TranslationSideBySide(this.creator.survey, this.creator, this.creator.translationSideBySideView);
     this.model = model;
     this.wireModelCallbacks(model);
+    model.showAllElementStrings = this.showAllElementStrings;
+    model.onShowAllElementStringsChanged = (value: boolean): void => {
+      this.showAllElementStrings = value;
+    };
     model.importFinishedCallback = (): void => {
       this.creator.onTranslationImported.fire(this.creator, {});
       model.rebuildInstances();

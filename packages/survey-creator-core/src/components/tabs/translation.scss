@@ -326,19 +326,61 @@ td.st-table__cell:first-of-type {
 }
 
 // The per-element translation state of the target pane, shown by the translate title action
-// itself: its icon follows the element's state (see applyElementStateToAction). The svg
+// itself: the number of untranslated strings (nothing when there are none) and a chevron
+// pointing at the state of its inline strings block (see applyElementStateToAction). Nothing
+// to translate and all translated look the same - both mean "nothing for you here". The svg
 // selector outweighs the theme's action-icon fill rules.
-.svc-translation-state {
+@mixin translationStateColor($color) {
+  --sd-action-title-color: #{$color};
+  --sd-action-hover-title-color: #{$color};
+  --sd-action-icon-color: #{$color};
+
   svg use {
-    fill: var(--sjs2-color-fg-basic-primary-muted);
+    fill: $color;
   }
 
-  &.svc-translation-state--untranslated svg use {
-    fill: var(--sjs2-color-fg-warning-primary);
+  .sd-action__title {
+    color: $color;
+  }
+}
+
+.svc-translation-state {
+  @include translationStateColor(var(--sjs2-color-fg-basic-primary-muted));
+
+  &.svc-translation-state--untranslated {
+    @include translationStateColor(var(--sjs2-color-fg-warning-primary));
   }
 
-  &.svc-translation-state--translated svg use {
-    fill: var(--sjs2-color-fg-positive-primary);
+  // The open block: the chevron points up and the button stands out from both other states.
+  &.svc-translation-state--expanded {
+    @include translationStateColor(var(--sjs2-color-fg-brand-primary));
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// The inline strings block of the expanded element: the strings matrix added to the target pane
+// (its title row is the block's caption and its title actions are the caption's buttons) and,
+// at the same position in the source pane, an empty question as high as the matrix.
+.st-element-strings-host {
+  // The closing action ends the caption row, at the pane's right edge.
+  .st-element-strings__close {
+    margin-left: auto;
+  }
+}
+
+// Nothing of the question chrome may add to the spacer's height - it is set to the measured
+// height of the block in the target pane (see setElementStringsHeight).
+.st-side-by-side__source .st-element-strings-host {
+  .sd-question__header {
+    display: none;
+  }
+
+  .sd-question__header-and-content-container,
+  .sd-question__content {
+    padding: 0;
   }
 }
 
