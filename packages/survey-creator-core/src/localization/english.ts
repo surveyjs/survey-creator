@@ -450,6 +450,8 @@ export var enStrings = {
     addItem: "Click to add an item...",
     removeItem: "Click to remove the item...",
     dragItem: "Drag the item",
+    expandNestedChoices: "Expand nested choices",
+    collapseNestedChoices: "Collapse nested choices",
     edit: "Edit",
     doneEditing: "Done",
     emptyValue: "Value is empty",

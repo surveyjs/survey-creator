@@ -78,28 +78,28 @@ test("set headerViewContainer basic", (): any => {
   const header = themeModel.header as HeaderModel;
 
   let currentThemeCssVariables = themeModel.cssVariables;
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-description"]).toBeUndefined();
 
   header.headerTitle = { family: "Courier New", weight: "400", size: 41, lineHeight: 53 };
   header.headerDescription = { family: "Trebuchet MS", weight: "800", size: 21, lineHeight: 34 };
   header["logoPosition"] = "right";
 
   currentThemeCssVariables = themeModel.cssVariables;
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBe("Courier New");
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBe("400");
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBe("41px");
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBe("53px");
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-description"]).toBe("Trebuchet MS");
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-description"]).toBe("800");
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-description"]).toBe("21px");
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-description"]).toBe("34px");
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBe("Courier New");
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBe("400");
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBe("41px");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-title"]).toBe("53px");
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-description"]).toBe("Trebuchet MS");
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-description"]).toBe("800");
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-description"]).toBe("21px");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-description"]).toBe("34px");
 
   const result = themeModel.toJSON();
   expect(result.header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
@@ -111,17 +111,17 @@ test("set headerViewContainer advanced", (): any => {
   const header = themeModel.header as HeaderModel;
 
   let currentThemeCssVariables = themeModel.cssVariables;
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-bg"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
 
   header["headerView"] = "advanced";
   header.height = 300;
@@ -162,17 +162,17 @@ test("set headerViewContainer advanced", (): any => {
   });
 
   currentThemeCssVariables = themeModel.cssVariables;
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBe("Georgia");
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBe("400");
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBe("51px");
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBe("#FBFF24");
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBe("39px");
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-description"]).toBe("Verdana");
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-description"]).toBe("800");
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-description"]).toBe("29px");
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-description"]).toBe("rgba(50, 16, 218, 0.45)");
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-description"]).toBe("19px");
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-bg"]).toBe("#5094ed");
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBe("Georgia");
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBe("400");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-title"]).toBe("51px");
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBe("#FBFF24");
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBe("39px");
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-description"]).toBe("Verdana");
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-description"]).toBe("800");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-description"]).toBe("29px");
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-description"]).toBe("rgba(50, 16, 218, 0.45)");
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-description"]).toBe("19px");
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-bg"]).toBe("#5094ed");
 });
 
 test("headerViewContainer survey title & description", (): any => {
@@ -181,18 +181,18 @@ test("headerViewContainer survey title & description", (): any => {
   const header = themeModel.header as HeaderModel;
 
   let currentThemeCssVariables = themeModel.cssVariables;
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-description"]).toBeUndefined();
 
   header["headerView"] = "advanced";
   header.headerTitle = { family: settings.themeEditor.defaultFontFamily, weight: "700", size: 32, lineHeight: 40, color: "rgba(255, 255, 255, 1)" };
   header.headerDescription = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16, lineHeight: 24, color: "rgba(255, 255, 255, 1)" };
 
   currentThemeCssVariables = themeModel.cssVariables || {};
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBe("rgba(255, 255, 255, 1)");
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-description"]).toBe("rgba(255, 255, 255, 1)");
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBe("40px");
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-description"]).toBe("24px");
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBe("rgba(255, 255, 255, 1)");
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-description"]).toBe("rgba(255, 255, 255, 1)");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-title"]).toBe("40px");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-description"]).toBe("24px");
 });
 
 test("headerViewContainer get color values from theme", (): any => {
@@ -200,8 +200,8 @@ test("headerViewContainer get color values from theme", (): any => {
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {
-      "--sjs2-color-component-header-default-title": "rgba(219, 15, 15, 0.91)",
-      "--sjs2-color-component-header-default-description": "rgba(50, 16, 218, 0.45)",
+      "--sjs2-color-component-survey-header-default-title": "rgba(219, 15, 15, 0.91)",
+      "--sjs2-color-component-survey-header-default-description": "rgba(50, 16, 218, 0.45)",
     },
     "header": {
       "backgroundImage": "",
@@ -247,7 +247,7 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   header["backgroundColor"] = "#ff0000";
 
   creator.activeTab = "designer";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe("#ff0000");
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBe("#ff0000");
 
   creator.activeTab = "theme";
   header = themeModel.header as HeaderModel;
@@ -266,16 +266,16 @@ test("headerViewContainer: background color", (): any => {
   let header = themeModel.header as HeaderModel;
 
   expect(header["backgroundColorSwitch"]).toBe("none");
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
 
   header["backgroundColorSwitch"] = "custom";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe("transparent");
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBe("transparent");
 
   header["backgroundColor"] = "#5094ed";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe("#5094ed");
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBe("#5094ed");
 
   header["backgroundColorSwitch"] = "none";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
 });
 
 test("headerViewContainer: background color reset #5940", (): any => {
@@ -288,17 +288,17 @@ test("headerViewContainer: background color reset #5940", (): any => {
   let header = themeModel.header as HeaderModel;
 
   expect(header["backgroundColorSwitch"]).toBe("none");
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs2-color-component-header-default-bg"]).toBeUndefined();
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
 
   header["backgroundColorSwitch"] = "none";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs2-color-component-header-default-bg"]).toBeUndefined();
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
 
   creator.activeTab = "designer";
   creator.activeTab = "theme";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBeUndefined();
-  expect(themeModel.cssVariables["--sjs2-color-component-header-default-bg"]).toBeUndefined();
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
+  expect(themeModel.cssVariables["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
 });
 
 test("header custom background color and theme changes", (): any => {
@@ -323,14 +323,14 @@ test("header custom background color and theme changes", (): any => {
   header["backgroundColor"] = "#ff0000";
 
   creator.activeTab = "designer";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe("#ff0000");
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBe("#ff0000");
 
   creator.activeTab = "theme";
   propertyGridSurvey = themePlugin.propertyGrid.survey;
   themeChooser = propertyGridSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   primaryBackColor = propertyGridSurvey.getQuestionByName("--sjs2-color-project-brand-600");
 
-  expect(themeModel.themeCssCustomizations["--sjs2-color-component-header-default-bg"]).toBe("#ff0000");
+  expect(themeModel.themeCssCustomizations["--sjs2-color-component-survey-header-default-bg"]).toBe("#ff0000");
   expect(themeChooser.value).toEqual("default");
   expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
   expect(header["backgroundColorSwitch"]).toEqual("custom");
@@ -338,13 +338,13 @@ test("header custom background color and theme changes", (): any => {
 
   themeModel.selectTheme("contrast");
   expect(themeChooser.value).toEqual("contrast");
-  expect(themeModel.themeCssCustomizations["--sjs2-color-component-header-default-bg"]).toBe("#ff0000");
+  expect(themeModel.themeCssCustomizations["--sjs2-color-component-survey-header-default-bg"]).toBe("#ff0000");
   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
   expect(header["backgroundColorSwitch"]).toEqual("custom");
   expect(header["backgroundColor"]).toBe("#ff0000");
 
   creator.activeTab = "designer";
-  expect((creator.theme.cssVariables || {})["--sjs2-color-component-header-default-bg"]).toBe("#ff0000");
+  expect((creator.theme.cssVariables || {})["--sjs2-color-component-survey-header-default-bg"]).toBe("#ff0000");
 
   creator.activeTab = "theme";
   propertyGridSurvey = themePlugin.propertyGrid.survey;

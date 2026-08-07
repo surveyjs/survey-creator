@@ -410,10 +410,10 @@ export class ThemeModel extends Base implements ITheme {
   }
 
   public setTheme(theme: ITheme) {
-    const headerBackgroundColorValue = this.themeCssVariablesChanges["--sjs2-color-component-header-default-bg"];
+    const headerBackgroundColorValue = this.themeCssVariablesChanges["--sjs2-color-component-survey-header-default-bg"];
     this.themeCssVariablesChanges = {};
     if (headerBackgroundColorValue !== undefined) {
-      this.themeCssVariablesChanges["--sjs2-color-component-header-default-bg"] = headerBackgroundColorValue;
+      this.themeCssVariablesChanges["--sjs2-color-component-survey-header-default-bg"] = headerBackgroundColorValue;
     }
 
     try {

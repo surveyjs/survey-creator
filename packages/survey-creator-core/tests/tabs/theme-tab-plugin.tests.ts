@@ -1421,8 +1421,8 @@ test("Theme builder switch custom theme", (): any => {
       "--sjs2-typography-font-size-component-question-description": "13px",
       "--sjs2-typography-font-size-component-input-content": "14px",
       "--sjs2-typography-font-family-component-input-content": "Arial, sans-serif",
-      "--sjs2-color-component-header-default-title": "rgba(255, 255, 255, 1)",
-      "--sjs2-color-component-header-default-description": "rgba(255, 255, 255, 1)"
+      "--sjs2-color-component-survey-header-default-title": "rgba(255, 255, 255, 1)",
+      "--sjs2-color-component-survey-header-default-description": "rgba(255, 255, 255, 1)"
     },
     "themeName": "custom",
     "colorPalette": "light",

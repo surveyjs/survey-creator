@@ -1080,7 +1080,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     if (question.name === "questionValue" || question.isContentElement) {
       assignDefaultClasses(cssClasses, question.getType());
-      cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
+      cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame sd-question--with-frame";
       cssClasses.error.root = "svc-logic-operator__error";
       cssClasses.errorsContainer = "";
       cssClasses.errorsContainerTop = "";

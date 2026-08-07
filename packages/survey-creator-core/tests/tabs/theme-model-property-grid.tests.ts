@@ -24,8 +24,8 @@ const cssVariables = DefaultTheme.cssVariables;
 beforeEach(() => {
   mockGetRGBaColorIdentity();
   mockDomWindowGetComputedStyleFromInlineStyles({
-    "--sjs2-color-component-header-default-title": "rgba(0, 0, 0, 0.91)",
-    "--sjs2-color-component-header-default-description": "rgba(0, 0, 0, 0.45)",
+    "--sjs2-color-component-survey-header-default-title": "rgba(0, 0, 0, 0.91)",
+    "--sjs2-color-component-survey-header-default-description": "rgba(0, 0, 0, 0.45)",
   });
   Themes["default-light"] = DefaultLight;
   Themes["contrast-light"] = ContrastLight;
@@ -944,17 +944,17 @@ test("set headerViewContainer advanced", (): any => {
   expect(creator.theme.header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
 
   let currentThemeCssVariables = creator.theme.cssVariables || {};
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-description"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-bg"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-description"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-bg"]).toBeUndefined();
 
   headerViewContainer.getElementByName("logoPosition").value = "right";
   headerViewContainer.getElementByName("headerView").value = "advanced";
@@ -1002,17 +1002,17 @@ test("set headerViewContainer advanced", (): any => {
   });
 
   currentThemeCssVariables = creator.theme.cssVariables || {};
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBe("Georgia");
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBe("400");
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBe("51px");
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBe("#FBFF24");
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBe("39px");
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-description"]).toBe("Verdana");
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-description"]).toBe("800");
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-description"]).toBe("29px");
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-description"]).toBe("rgba(50, 16, 218, 0.45)");
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-description"]).toBe("19px");
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-bg"]).toBe("#5094ed");
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBe("Georgia");
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBe("400");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-title"]).toBe("51px");
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBe("#FBFF24");
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBe("39px");
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-description"]).toBe("Verdana");
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-description"]).toBe("800");
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-description"]).toBe("29px");
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-description"]).toBe("rgba(50, 16, 218, 0.45)");
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-description"]).toBe("19px");
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-bg"]).toBe("#5094ed");
 });
 
 test("restore basic headerViewContainer values", (): any => {
@@ -1026,17 +1026,17 @@ test("restore basic headerViewContainer values", (): any => {
       "--sjs2-base-unit-radius": "20px",
       "--sjs2-base-unit-size": "9.6px",
       "--sjs2-base-unit-font-size": "17.6px",
-      "--sjs2-color-component-header-default-bg": "#5094ed",
-      "--sjs2-color-component-header-default-title": "rgba(219, 15, 15, 0.91)",
-      "--sjs2-color-component-header-default-description": "rgba(50, 16, 218, 0.45)",
-      "--sjs2-typography-font-family-component-header-title": "Georgia",
-      "--sjs2-typography-font-weight-component-header-title": "800",
-      "--sjs2-typography-font-size-component-header-title": "39px",
-      "--sjs2-typography-line-height-component-header-title": "51px",
-      "--sjs2-typography-line-height-component-header-description": "29px",
-      "--sjs2-typography-font-family-component-header-description": "Verdana",
-      "--sjs2-typography-font-weight-component-header-description": "800",
-      "--sjs2-typography-font-size-component-header-description": "19px"
+      "--sjs2-color-component-survey-header-default-bg": "#5094ed",
+      "--sjs2-color-component-survey-header-default-title": "rgba(219, 15, 15, 0.91)",
+      "--sjs2-color-component-survey-header-default-description": "rgba(50, 16, 218, 0.45)",
+      "--sjs2-typography-font-family-component-survey-header-title": "Georgia",
+      "--sjs2-typography-font-weight-component-survey-header-title": "800",
+      "--sjs2-typography-font-size-component-survey-header-title": "39px",
+      "--sjs2-typography-line-height-component-survey-header-title": "51px",
+      "--sjs2-typography-line-height-component-survey-header-description": "29px",
+      "--sjs2-typography-font-family-component-survey-header-description": "Verdana",
+      "--sjs2-typography-font-weight-component-survey-header-description": "800",
+      "--sjs2-typography-font-size-component-survey-header-description": "19px"
     },
     "header": {
       "height": 300,
@@ -1102,17 +1102,17 @@ test("restore advanced headerViewContainer values", (): any => {
       "--sjs2-base-unit-radius": "20px",
       "--sjs2-base-unit-size": "9.6px",
       "--sjs2-base-unit-font-size": "17.6px",
-      "--sjs2-color-component-header-default-bg": "#5094ed",
-      "--sjs2-color-component-header-default-title": "rgba(219, 15, 15, 0.91)",
-      "--sjs2-color-component-header-default-description": "rgba(50, 16, 218, 0.45)",
-      "--sjs2-typography-font-family-component-header-title": "Georgia",
-      "--sjs2-typography-font-weight-component-header-title": "800",
-      "--sjs2-typography-font-size-component-header-title": "39px",
-      "--sjs2-typography-line-height-component-header-title": "51px",
-      "--sjs2-typography-font-family-component-header-description": "Verdana",
-      "--sjs2-typography-font-weight-component-header-description": "800",
-      "--sjs2-typography-font-size-component-header-description": "19px",
-      "--sjs2-typography-line-height-component-header-description": "29px",
+      "--sjs2-color-component-survey-header-default-bg": "#5094ed",
+      "--sjs2-color-component-survey-header-default-title": "rgba(219, 15, 15, 0.91)",
+      "--sjs2-color-component-survey-header-default-description": "rgba(50, 16, 218, 0.45)",
+      "--sjs2-typography-font-family-component-survey-header-title": "Georgia",
+      "--sjs2-typography-font-weight-component-survey-header-title": "800",
+      "--sjs2-typography-font-size-component-survey-header-title": "39px",
+      "--sjs2-typography-line-height-component-survey-header-title": "51px",
+      "--sjs2-typography-font-family-component-survey-header-description": "Verdana",
+      "--sjs2-typography-font-weight-component-survey-header-description": "800",
+      "--sjs2-typography-font-size-component-survey-header-description": "19px",
+      "--sjs2-typography-line-height-component-survey-header-description": "29px",
     },
     "header": {
       "height": 300,
@@ -1318,20 +1318,20 @@ test("header survey title font color changed", (): any => {
   expect(creator.theme.header).toEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
 
   let currentThemeCssVariables = creator.theme.cssVariables || {};
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBeUndefined();
 
   headerViewContainer.getElementByName("headerView").value = "advanced";
 
   currentThemeCssVariables = creator.theme.cssVariables || {};
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-line-height-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBeUndefined();
 
   // headerTitleQuestion.contentPanel.getQuestionByName("color").value = "#FBFF24";
   // headerTitleQuestion.contentPanel.getQuestionByName("weight").value = "400";
@@ -1339,14 +1339,14 @@ test("header survey title font color changed", (): any => {
   // headerTitleQuestion.contentPanel.getQuestionByName("family").value = "Georgia";
 
   currentThemeCssVariables = creator.theme.cssVariables || {};
-  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBeUndefined();
-  // expect(currentThemeCssVariables["--sjs2-typography-font-family-component-header-title"]).toBe("Georgia");
-  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBeUndefined();
-  // expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-header-title"]).toBe("400");
-  // expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBeUndefined();
-  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-header-title"]).toBe("39px");
-  expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBeUndefined();
-  // expect(currentThemeCssVariables["--sjs2-color-component-header-default-title"]).toBe("#FBFF24");
+  expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBeUndefined();
+  // expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBe("Georgia");
+  expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBeUndefined();
+  // expect(currentThemeCssVariables["--sjs2-typography-font-weight-component-survey-header-title"]).toBe("400");
+  // expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs2-typography-font-size-component-survey-header-title"]).toBe("39px");
+  expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBeUndefined();
+  // expect(currentThemeCssVariables["--sjs2-color-component-survey-header-default-title"]).toBe("#FBFF24");
 });
 
 test("header editable after theme changed", (): any => {
