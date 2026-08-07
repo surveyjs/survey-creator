@@ -28,6 +28,8 @@ const emptySpaceText = "\u00A0";
 // keeps the source pane the same height. They live in two different surveys (the panes), so the
 // name is unique where it matters, and it is not a name a real survey question can have.
 const stringsHostName = "svc-translation-strings-host";
+// The id of the layout element the survey's own block is added under (see addStringsHost).
+const stringsLayoutElementId = "svc-translation-strings";
 
 // The translation state of a target-pane element for the current target language:
 // "none" - no used strings with a stored text (nothing to translate), "untranslated" - at
@@ -1216,6 +1218,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   @property({ defaultValue: 0 }) elementStringsHeight: number;
   private expandedElementKey: string;
   private stringsHosts: Array<Question> = [];
+  // The surveys the survey block travels in - one per pane (see addStringsHost).
+  private stringsHostSurveys: Array<SurveyModel> = [];
   public isElementStringsExpanded(element: Base): boolean {
     const key = this.getElementStateKey(element);
     return !!key && key === this.expandedElementKey;
@@ -1267,6 +1271,12 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       host.dispose();
     });
     this.stringsHosts = [];
+    // The survey block travels in a survey of its own, in the panes' contentTop container.
+    [this.sourceSurvey, this.targetSurvey].forEach(pane => {
+      if (!!pane) pane.removeLayoutElement(stringsLayoutElementId);
+    });
+    this.stringsHostSurveys.forEach(hostSurvey => hostSurvey.dispose());
+    this.stringsHostSurveys = [];
     this.sourceStringsSpacer = undefined;
     this.expandedElementKey = undefined;
     this.elementStringsModel = undefined;
@@ -1318,32 +1328,67 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // as a plain matrix question with the caption as its title. The source pane gets an empty
   // html question as high as the matrix, so the two panes keep the same rows.
   private addStringsHost(survey: SurveyModel, realObj: Base, isTarget: boolean): void {
-    const position = this.getStringsHostPosition(survey, realObj);
-    if (!position || !position.parent) return;
-    let host: Question;
-    if (isTarget) {
-      host = this.elementStringsModel.createStringsMatrix(stringsHostName);
-      this.elementStringsModel.setupStringsMatrix(survey);
-    } else {
-      const spacer = new QuestionHtmlModel(stringsHostName);
-      spacer.titleLocation = "hidden";
-      this.sourceStringsSpacer = spacer;
-      host = spacer;
-    }
+    const host = isTarget ? this.elementStringsModel.createStringsMatrix(stringsHostName) : this.createSourceSpacer();
     host.startWithNewLine = true;
     (<any>host).isTranslationStringsHost = true;
+    // The survey's own strings belong under the survey header, which is not part of any page:
+    // put the block at the top of the first page and it reads as the page's, below the page
+    // title and description. The contentTop layout container renders exactly between the header
+    // and the page, and it takes a component with a model - the creator's "survey-widget", which
+    // renders a survey, is registered under that name in every framework. So the block travels
+    // there inside a survey of its own: one page, one question.
+    if (realObj === <Base>this.survey) {
+      const hostSurvey = this.createStringsHostSurvey(host, isTarget);
+      survey.addLayoutElement({
+        id: stringsLayoutElementId,
+        container: "contentTop",
+        component: "survey-widget",
+        data: hostSurvey
+      });
+      this.stringsHostSurveys.push(hostSurvey);
+      if (isTarget)this.elementStringsModel.setupStringsMatrix(hostSurvey);
+      return;
+    }
+    const position = this.getStringsHostPosition(survey, realObj);
+    if (!position || !position.parent) return;
+    if (isTarget)this.elementStringsModel.setupStringsMatrix(survey);
     position.parent.addElement(host, position.index);
     this.stringsHosts.push(host);
   }
-  // Where the block goes, resolved against the real element and applied to the pane copy:
-  // below the clicked question (below its whole row when the question shares one), at the top
-  // of a clicked page or panel, and at the top of the first page for the survey itself - the
-  // panes render the survey header above the first page only (showSurveyHeaderOnFirstPageOnly).
+  private createSourceSpacer(): QuestionHtmlModel {
+    const spacer = new QuestionHtmlModel(stringsHostName);
+    spacer.titleLocation = "hidden";
+    this.sourceStringsSpacer = spacer;
+    return spacer;
+  }
+  // The survey block's own survey: a plain runtime survey holding the block's question alone.
+  // Runtime, unlike the panes: its cells are editable without the design-mode workarounds, and
+  // its content reports to no pane callback at all.
+  private createStringsHostSurvey(host: Question, isTarget: boolean): SurveyModel {
+    return this.options.createSurvey({}, "translation_element_strings", this, (survey: SurveyModel): void => {
+      this.makeSurveyIdSpaceUnique(survey);
+      survey.showNavigationButtons = false;
+      survey.showProgressBar = false;
+      survey.showTOC = false;
+      survey.addNewPage("page");
+      survey.pages[0].addElement(host);
+      if (isTarget) {
+        survey.onGetQuestionTitleActions.add((_, options) => {
+          if (!!this.elementStringsModel && options.question === host) {
+            options.actions.push(...this.elementStringsModel.captionActions);
+          }
+        });
+        survey.onAfterRenderQuestion.add((_, options) => {
+          if (options.question === host)this.observeStringsHost(options.htmlElement);
+        });
+      }
+    });
+  }
+  // Where the block goes when it is not the survey's own (see addStringsHost), resolved against
+  // the real element and applied to the pane copy: below the clicked question (below its whole
+  // row when the question shares one) and at the top of a clicked page or panel.
   private getStringsHostPosition(survey: SurveyModel, realObj: any): { parent: PanelModelBase, index: number } {
     if (!survey) return undefined;
-    if (realObj === <any>this.survey) {
-      return { parent: survey.pages[0], index: 0 };
-    }
     if (realObj.isPage) {
       return { parent: survey.getPageByName(realObj.name), index: 0 };
     }

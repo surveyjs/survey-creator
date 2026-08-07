@@ -629,9 +629,16 @@ test("inplaceEditChoiceValues does not apply to the pane copies' choice strings"
   expect((<any>designerEditor).isInplaceForEditValues).toBeTruthy();
 });
 
-// The strings matrix the block adds to the target pane, and the row bound to a real string.
+// The survey block travels in a survey of its own, in the pane's contentTop layout container;
+// every other block is a question of the pane page.
+function getBlockSurvey(paneSurvey: any): any {
+  const layoutElement = !!paneSurvey ? paneSurvey.findLayoutElement("svc-translation-strings") : undefined;
+  return !!layoutElement ? layoutElement.data : undefined;
+}
+// The strings matrix of the open block, wherever it is hosted, and the row bound to a real string.
 function getStringsMatrix(model: TranslationSideBySide): QuestionMatrixDropdownModel {
-  return <QuestionMatrixDropdownModel>model.targetSurvey.getAllQuestions(false, false, true)
+  const survey = getBlockSurvey(model.targetSurvey) || model.targetSurvey;
+  return <QuestionMatrixDropdownModel>survey.getAllQuestions(false, false, true)
     .filter((question: any) => !!question.isTranslationStringsHost && !question.parentQuestion)[0];
 }
 function getStringsRow(matrix: QuestionMatrixDropdownModel, locStr: any): any {
@@ -1375,12 +1382,28 @@ test("element strings block: page, panel and survey open at the top of their con
   expect(getHostIndex(model, model.targetSurvey, "page2")).toBe(0);
   expect(getHostIndex(model, model.sourceSurvey, "page2")).toBe(0);
   expect(model.elementStringsModel.element).toBe(creator.survey.pages[1]);
-  // The survey block goes right below the survey header - the top of the first page, which is
-  // the only page the panes render the header above.
+  // The survey block is not page content: it goes into the contentTop layout container, which
+  // renders between the survey header and the page - not below the page title and description.
   model.toggleSurveyStrings();
-  expect(getHostIndex(model, model.targetSurvey, "page1")).toBe(0);
-  expect(getHostIndex(model, model.sourceSurvey, "page1")).toBe(0);
   expect(model.elementStringsModel.element).toBe(<any>creator.survey);
+  expect(getHosts(model.targetSurvey)).toHaveLength(0);
+  expect(getHosts(model.sourceSurvey)).toHaveLength(0);
+  const targetBlockSurvey = getBlockSurvey(model.targetSurvey);
+  const sourceBlockSurvey = getBlockSurvey(model.sourceSurvey);
+  expect(targetBlockSurvey).toBeTruthy();
+  expect(sourceBlockSurvey).toBeTruthy();
+  // One page, one question: the matrix in the target pane, the spacer in the source one.
+  expect(targetBlockSurvey.pages).toHaveLength(1);
+  expect(targetBlockSurvey.getAllQuestions()).toHaveLength(1);
+  expect(getStringsMatrix(model).getType()).toBe("matrixdropdown");
+  expect(sourceBlockSurvey.getAllQuestions()[0].getType()).toBe("html");
+  // The caption actions are the matrix's title actions there as well.
+  expect(getStringsMatrix(model).getTitleActions().map((action: any) => action.id))
+    .toContain("svc-translation-strings-close");
+  // Closing takes the layout element away from both panes.
+  model.hideElementStrings();
+  expect(getBlockSurvey(model.targetSurvey)).toBeFalsy();
+  expect(getBlockSurvey(model.sourceSurvey)).toBeFalsy();
 });
 
 test("element strings block: only one element is expanded at a time", () => {

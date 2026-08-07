@@ -384,6 +384,27 @@ td.st-table__cell:first-of-type {
   }
 }
 
+// The survey's own block: a survey of one page and one question, rendered in the pane's
+// contentTop container - between the survey header and the page (see addStringsHost). It is the
+// block, not a survey of its own, so it drops the runtime survey's own frame and paddings.
+.st-side-by-side .sv-components-container-contentTop {
+  .sd-root-modern,
+  .sd-container-modern,
+  .sd-body,
+  .sd-body__page,
+  .sd-page {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+  }
+
+  .sd-page__content {
+    padding: 0;
+  }
+}
+
 // The flattened dropdown/tagbox choice list of the side-by-side panes. The item rows reuse
 // the svc-question__dropdown-choice classes, so the designer's collapse fade rules apply.
 .st-dropdown-choices--wrapper {

@@ -453,8 +453,15 @@ test.describe(title + " containers", () => {
     await openSideBySideContainers(page);
     const target = page.locator(".st-side-by-side__target");
     await target.locator(".sd-container-modern__title").getByRole("button", { name: "1 strings are not translated" }).click();
-    const block = target.locator("[data-name='svc-translation-strings-host']");
+    // The survey block is not page content: it renders in the contentTop container, between the
+    // survey header and the page - above the page title, not below it.
+    const block = target.locator(".sv-components-container-contentTop [data-name='svc-translation-strings-host']");
     await expect(block).toBeVisible();
+    const blockBox = await block.boundingBox();
+    const pageTitleBox = await target.locator(".sd-page__title").first().boundingBox();
+    expect(blockBox!.y).toBeLessThan(pageTitleBox!.y);
+    // The source pane holds its spacer in the same place, so the panes keep their rows.
+    await expect(page.locator(".st-side-by-side__source .sv-components-container-contentTop")).toBeVisible();
     // Scoped to the survey-level strings - no rows of the nested elements.
     await expect(block.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
     const row = block.locator("table tr").filter({ hasText: "Survey description" });
