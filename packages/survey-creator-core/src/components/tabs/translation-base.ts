@@ -1074,6 +1074,11 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected get isSourceColumnReadOnly(): boolean {
     return false;
   }
+  // Whether the source locale gets a column of its own. The element strings block shows the
+  // source text in its row titles instead, so the target editor gets the freed width.
+  protected get hasSourceColumn(): boolean {
+    return true;
+  }
   protected addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
     if (this.useSourceTargetColumns) {
       const target = this.targetLocale || "";
@@ -1083,7 +1088,9 @@ export class TranslationBase extends Base implements ITranslationLocales {
       const loc = hasTarget ? target : (this.sourceLocale || "");
       const column = matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
       if (hasTarget) {
-        this.updateMatrixSourceColumn(matrix, this.sourceLocale, target, this.isSourceColumnReadOnly);
+        if (this.hasSourceColumn) {
+          this.updateMatrixSourceColumn(matrix, this.sourceLocale, target, this.isSourceColumnReadOnly);
+        }
       } else {
         column.readOnly = this.isSourceColumnReadOnly;
       }

@@ -5,7 +5,7 @@ import {
   QuestionMatrixDropdownModel, QuestionMatrixDynamicModel, Serializer, SurveyModel, property
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
-import { editorLocalization } from "../../editorLocalization";
+import { applyCreatorUiLocaleToAction, editorLocalization } from "../../editorLocalization";
 import { editableStringRendererName, isContentElement } from "../../creator-base";
 import { ITranslationDropdownOwner, translationDropdownComponentName } from "./translation-dropdown";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
@@ -30,6 +30,30 @@ const emptySpaceText = "\u00A0";
 const stringsHostName = "svc-translation-strings-host";
 // The id of the layout element the survey's own block is added under (see addStringsHost).
 const stringsLayoutElementId = "svc-translation-strings";
+
+// The element strings matrix has no source column of its own: a row title carries the string
+// name and its source-locale text, joined by this separator and turned into html by the matrix
+// (see createStringsMatrix / getRowTitleHtml). A character no survey string can contain.
+const rowSourceSeparator = "\u0000";
+
+function escapeHtmlText(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// The list item of the target language dropdown: the language name and, at the right edge, how
+// much of the survey is already translated into it. Set on the choices themselves and not as the
+// question's itemComponent - the collapsed dropdown reads that one too (see
+// QuestionDropdownModel.inputFieldComponentName) and it shows the language name alone.
+export const translationLocaleItemComponentName = "svc-translation-locale-item";
+// The precomputed "14 / 56" of a language choice, absent when nothing is translated yet. Held as
+// a reactive property of the choice, not a plain field: a recount usually leaves the choice list
+// value-equal, so the question keeps the very ItemValues it already has and only their property
+// change can reach the rendered list.
+export const translationLocaleProgressName = "translationProgress";
+export function getTranslationLocaleProgress(item: any): string {
+  return !!item && typeof item.getPropertyValue === "function"
+    ? item.getPropertyValue(translationLocaleProgressName) : undefined;
+}
 
 // The translation state of a target-pane element for the current target language:
 // "none" - no used strings with a stored text (nothing to translate), "untranslated" - at
@@ -284,6 +308,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
     question.visible = locales.length > 0;
     this.updateLanguagesMatrixSelection();
+    // The target dropdown counts the same used strings the matrix rows do, so it follows every
+    // full refresh of the matrix.
+    this.refreshTargetLocaleChoices();
   }
   private getLanguageProgressText(locale: string, items: Array<TranslationItem>): string {
     const progress = this.getTranslationProgress(locale, items);
@@ -368,6 +395,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         this.updateLanguagesMatrix();
       } else {
         this.updateLanguageProgress(locale);
+        this.updateTargetLocaleProgress(locale);
       }
       this.updateElementTranslationStates();
     }
@@ -492,13 +520,90 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   }
   private updateTargetLocaleQuestion(question: QuestionDropdownModel, selected: string, excluded: string): void {
     if (!question) return;
-    question.choices = this.createLocaleChoices(this.getTargetLocales(), selected, excluded);
+    this.updateTargetLocaleChoices(question, selected, excluded);
     // No target language selected: the dropdown holds no value and renders its placeholder.
     if (!selected) {
       question.clearValue();
     } else {
       question.value = selected;
     }
+  }
+  // The choice list of the target dropdown: every pickable language with the share of the survey
+  // already translated into it - the same numbers the languages matrix shows, counted over the
+  // same whole-survey used strings. Counted here, once for the whole list (the item component only
+  // renders the text), and the list opens with the languages that have something translated first.
+  private updateTargetLocaleChoices(question: QuestionDropdownModel, selected: string, excluded: string): void {
+    if (!question) return;
+    const items = this.getUsedStringsItems();
+    const progressTexts: { [key: string]: string } = {};
+    const choices = this.getTargetLocales()
+      // Same rule as createLocaleChoices: the language the source dropdown holds is not pickable
+      // here, unless it is the current selection.
+      .filter(loc => !excluded || loc !== excluded || loc === selected)
+      .map(loc => {
+        const choice = new ItemValue(this.toLocaleSettingValue(loc), this.getLocaleName(loc));
+        const progress = this.getTranslationProgress(loc, items);
+        // Nothing translated yet - no numbers at all, "0 / 56" is noise on a language the user
+        // has not started.
+        if (progress.translated > 0) {
+          progressTexts[choice.value] = progress.translated + " / " + progress.total;
+        }
+        return choice;
+      });
+    choices.sort((a: ItemValue, b: ItemValue) => {
+      const aStarted = !!progressTexts[a.value];
+      const bStarted = !!progressTexts[b.value];
+      if (aStarted !== bStarted) return aStarted ? -1 : 1;
+      return (a.text || "").localeCompare(b.text || "");
+    });
+    // The list is replaced only when the languages themselves change - a recount alone must keep
+    // the very ItemValues the dropdown renders. Assigning an equivalent list would build fresh
+    // ItemValues, and the question would still render the old ones: it keeps its visibleChoices
+    // when the new list is value-equal to them (updateVisibleChoices), and the counter is not
+    // part of a choice's value. The counters reach the list as a property change of those items.
+    if (this.getLocaleChoicesKey(choices) !== this.getLocaleChoicesKey(question.choices)) {
+      question.choices = choices;
+    }
+    question.choices.forEach((choice: ItemValue) => {
+      choice.setPropertyValue(translationLocaleProgressName, progressTexts[choice.value]);
+      choice.component = translationLocaleItemComponentName;
+    });
+  }
+  private getLocaleChoicesKey(choices: Array<ItemValue>): string {
+    return (choices || []).map((choice: ItemValue) => choice.value + "|" + choice.text).join("\n");
+  }
+  // The counts and the order are kept current as the survey is translated - not recomputed when
+  // the list opens: a dropdown locks its visible choices while its popup is shown
+  // (isLockVisibleChoices), so a refresh made on opening would never reach the rendered list.
+  public refreshTargetLocaleChoices(): void {
+    const question = this.targetLocaleQuestion;
+    if (!question || this.isDisposed) return;
+    this._updatingSettingsSurvey = true;
+    try {
+      this.updateTargetLocaleChoices(question, this.targetLocale || "", this.sourceLocale || "");
+    } finally {
+      this._updatingSettingsSurvey = false;
+    }
+  }
+  private get targetLocaleQuestion(): QuestionDropdownModel {
+    const survey = this.settingsSurvey;
+    return !!survey ? <QuestionDropdownModel>survey.getQuestionByName("targetLocale") : undefined;
+  }
+  // The single-language counterpart of the refresh above, for an edit that can only move one
+  // language's counter - the same split the languages matrix makes.
+  private updateTargetLocaleProgress(locale: string): void {
+    const question = this.targetLocaleQuestion;
+    if (!question || this.isDisposed) return;
+    const choice = ItemValue.getItemByValue(question.choices, this.toLocaleSettingValue(locale));
+    const progress = this.getTranslationProgress(locale, this.getUsedStringsItems());
+    const text = progress.translated > 0 ? progress.translated + " / " + progress.total : undefined;
+    // A language that has just got its first translation (or lost its last one) moves between
+    // the two groups of the list, so the whole list is rebuilt then.
+    if (!choice || !getTranslationLocaleProgress(choice) !== !text) {
+      this.refreshTargetLocaleChoices();
+      return;
+    }
+    choice.setPropertyValue(translationLocaleProgressName, text);
   }
   // Each dropdown's list hides the language selected in the other one, except its own selection.
   // An empty locale excludes nothing: the default language is a source-only entry, and an empty
@@ -558,6 +663,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         this.rebuildInstances();
       } else {
         this.updateInstanceLocales();
+        // The block survives a switch between two languages along with the panes it lives in.
+        if (!!this.elementStringsModel) {
+          this.elementStringsModel.updateLocales(this.sourceLocale, this.targetLocale);
+        }
       }
       this.updateSettingsSurveyValues();
       if (name === "targetLocale") {
@@ -812,6 +921,13 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       if (processed !== stored) {
         // The options hook rewrote the text - reflect the processed value back into the copies.
         this.copiesMap.mirrorIntoCopies(item.locString);
+      }
+      // The open block edits the same strings as the panes, and its usual refresh funnel
+      // (onCreatorSurveyPropertyChanged) is closed here - it bails on the _syncing flag this
+      // method holds. So an inline editor edit of a string the block lists is pushed into its
+      // cells from here; an edit belonging to another element leaves the block alone.
+      if (!!this.elementStringsModel && this.elementStringsModel.hasLocString(item.locString)) {
+        this.elementStringsModel.updateMatrixData();
       }
     } finally {
       this._syncing = false;
@@ -1117,6 +1233,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // The translate action doubles as the element's translation state indicator and as the
   // expander of its inline strings matrix: the chevron shows whether the matrix is open, the
   // title shows how many strings are left to translate (see applyElementStateToAction).
+  // Its texts are assigned imperatively from editorLocalization, which is what keeps them in the
+  // creator UI locale: the target pane runs in the target locale, so a locTitleName/locTooltipName
+  // added here would be resolved in the language being translated into
+  // (see applyCreatorUiLocaleToAction).
   private createTranslateAction(id: string, doAction: () => void, paneElement: Base): Action {
     const action = new Action({
       id: id,
@@ -1520,7 +1640,10 @@ export class TranslationElementStrings extends TranslationBase {
     if (!this.captionActionsValue) {
       this.captionActionsValue = [];
       if (this.options.getHasMachineTranslation() && !this.readOnly) {
-        this.machineTranslationAction = createMachineTranslationAction(() => this.doMachineTranslation());
+        // The caption of a question/page/panel block is a title row of the target pane, and that
+        // pane survey runs in the target locale - an action resolving a localizationName there
+        // would show its creator string in the language being translated into.
+        this.machineTranslationAction = applyCreatorUiLocaleToAction(createMachineTranslationAction(() => this.doMachineTranslation()));
         this.machineTranslationAction.enabled = this.getStringsToTranslate().length > 0;
         this.captionActionsValue.push(this.machineTranslationAction);
       }
@@ -1538,7 +1661,7 @@ export class TranslationElementStrings extends TranslationBase {
       });
       this.updateStringsFilterAction();
       this.captionActionsValue.push(this.stringsFilterAction);
-      this.captionActionsValue.push(new Action({
+      this.captionActionsValue.push(applyCreatorUiLocaleToAction(new Action({
         id: "svc-translation-strings-close",
         iconName: "icon-clear_16x16",
         iconSize: "auto",
@@ -1549,7 +1672,7 @@ export class TranslationElementStrings extends TranslationBase {
         action: () => {
           if (!!this.onClose)this.onClose();
         }
-      }));
+      })));
     }
     return this.captionActionsValue;
   }
@@ -1573,10 +1696,45 @@ export class TranslationElementStrings extends TranslationBase {
     matrix.titleLocation = "top";
     matrix.locTitle.onGetTextCallback = (): string => "";
     matrix.showHeader = false;
+    // The row titles carry the source text (see getRowTitleText), so the matrix holds the target
+    // column alone and the merged first cell takes the width the source column had.
+    matrix.rowTitleWidth = "50%";
+    // A row title is a plain text; the two lines it holds become html here. Overridden on the
+    // matrix instead of through the host survey's onTextMarkdown: the rows are read as soon as
+    // they are assigned, before the matrix belongs to any survey, and a row title has no html
+    // then - the empty result would be cached for the block's lifetime.
+    matrix.getMarkdownHtml = (text: string, name: string, item?: any): string => this.getRowTitleHtml(text, item);
     this.addLocaleColumns(matrix);
     this.stringsMatrix = matrix;
     this.fillStringsMatrix();
     return matrix;
+  }
+  // The merged first cell of a row: the string name, and the source-locale text below it when
+  // the source language has one. Not a source column - it is read-only context for the one
+  // editor of the row, and the target editor gets the width it saves.
+  private getRowTitleText(path: string, item: TranslationItem): string {
+    const name = (!!path ? path + ": " : "") + item.text;
+    const source = item.getLocText(this.sourceLocale || "") || "";
+    return !!source ? name + rowSourceSeparator + source : name;
+  }
+  private getRowTitleHtml(text: string, item: any): string {
+    // Only the row titles: the matrix's own title (emptied above) and anything else that reaches
+    // this owner keeps the plain rendering.
+    if (!text || !item || !item["translationData"]) return undefined;
+    const index = text.indexOf(rowSourceSeparator);
+    const name = index < 0 ? text : text.substring(0, index);
+    const source = index < 0 ? "" : text.substring(index + rowSourceSeparator.length);
+    let res = "<span class=\"st-element-strings__row-name\">" + escapeHtmlText(name) + "</span>";
+    if (!!source) {
+      res += "<span class=\"st-element-strings__row-source\">" + escapeHtmlText(source) + "</span>";
+    }
+    return res;
+  }
+  // The row title of a matrix row is also the accessible name of its cell (through
+  // MatrixDropdownRowModelBase.getAccessbilityText, which reads the rendered html) - the two
+  // lines read as one sentence there instead of as the markup that draws them.
+  private getRowTitlePlainText(text: string): string {
+    return (text || "").split(rowSourceSeparator).filter(part => !!part).join(", ");
   }
   private stringsMatrix: QuestionMatrixDropdownModel;
   // Rows are rebuilt in place on a filter switch: the matrix is a pane question, so replacing
@@ -1590,7 +1748,7 @@ export class TranslationElementStrings extends TranslationBase {
     // path goes into the row text instead.
     const addGroup = (group: TranslationGroup, path: string): void => {
       group.locItems.forEach(item => {
-        const row = new ItemValue("row" + rows.length, (!!path ? path + ": " : "") + item.text);
+        const row = new ItemValue("row" + rows.length, this.getRowTitleText(path, item));
         row["translationData"] = item;
         rows.push(row);
       });
@@ -1628,8 +1786,11 @@ export class TranslationElementStrings extends TranslationBase {
     });
     this.updateMatrix(() => { matrix.value = data; });
   }
+  private getMatrixItemValue(row: any): ItemValue {
+    return !!this.stringsMatrix && !!row ? ItemValue.getItemByValue(this.stringsMatrix.rows, row.name) : undefined;
+  }
   private getMatrixItem(row: any): TranslationItem {
-    const itemValue = !!this.stringsMatrix && !!row ? ItemValue.getItemByValue(this.stringsMatrix.rows, row.name) : undefined;
+    const itemValue = this.getMatrixItemValue(row);
     return !!itemValue ? itemValue["translationData"] : undefined;
   }
   // The pane the matrix is rendered in drives the cells; the handlers are removed with the
@@ -1652,6 +1813,13 @@ export class TranslationElementStrings extends TranslationBase {
     // translation cells are the one place in it where the user types into an input.
     cellQuestion.forceIsInputReadOnly = false;
     Object.defineProperty(cellQuestion, "isDisabledAttr", { get: (): boolean => false, configurable: true });
+    // The cell's accessible name is built from the row's rendered title, which is the html of the
+    // merged first cell here - the row reports the plain text of the same two lines instead.
+    const rowItemValue = this.getMatrixItemValue(options.row);
+    if (!!rowItemValue && !!options.row) {
+      const plainTitle = this.getRowTitlePlainText(rowItemValue.locText.calculatedText);
+      options.row.getAccessbilityText = (): string => plainTitle;
+    }
     if (!(cellQuestion instanceof QuestionCommentModel)) return;
     const item = this.getMatrixItem(options.row);
     cellQuestion.autoGrow = true;
@@ -1702,8 +1870,10 @@ export class TranslationElementStrings extends TranslationBase {
     const el = <any>obj;
     return !el.isPage && !el.isPanel && !el.isQuestion;
   }
-  protected get isSourceColumnReadOnly(): boolean {
-    return true;
+  // The source text is merged into the row titles (see getRowTitleText), so the matrix has the
+  // target locale column alone - and nothing in the block is read-only but that merged cell.
+  protected get hasSourceColumn(): boolean {
+    return false;
   }
   // The block renders its own matrix in the target pane - the strings grid surveys of the base
   // class (and their header survey) are never built for it.
@@ -1759,6 +1929,26 @@ export class TranslationElementStrings extends TranslationBase {
   // the matrix cells right away - the block and the panes edit the same strings.
   public updateMatrixData(): void {
     this.updateStringsMatrixData();
+  }
+  // A locale switch does not rebuild the panes (as long as a target language stays selected), so
+  // the open block follows it here: the target locale is the matrix's only column, and the source
+  // one is what the row titles show.
+  public updateLocales(sourceLocale: string, targetLocale: string): void {
+    if (this.isDisposed) return;
+    const sourceChanged = (this.sourceLocale || "") !== (sourceLocale || "");
+    const targetChanged = (this.targetLocale || "") !== (targetLocale || "");
+    if (!sourceChanged && !targetChanged) return;
+    this.sourceLocale = sourceLocale;
+    this.targetLocale = targetLocale;
+    const matrix = this.stringsMatrix;
+    if (!matrix) return;
+    if (targetChanged) {
+      this.updateMatrix(() => {
+        matrix.columns = [];
+        this.addLocaleColumns(matrix);
+      });
+    }
+    this.fillStringsMatrix();
   }
   // Whether the block's matrix covers the string - the owner asks before it treats an unmapped
   // string change as a structural one (see onCreatorSurveyPropertyChangedCore).

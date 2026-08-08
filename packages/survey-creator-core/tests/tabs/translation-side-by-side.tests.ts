@@ -1,5 +1,8 @@
 import { ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionTextModel } from "survey-core";
-import { TranslationSideBySide } from "../../src/components/tabs/translation-side-by-side";
+import {
+  TranslationSideBySide, getTranslationLocaleProgress, translationLocaleItemComponentName
+} from "../../src/components/tabs/translation-side-by-side";
+import { editorLocalization } from "../../src/editorLocalization";
 import { Translation, TranslationBase } from "../../src/components/tabs/translation";
 import { TranslationDropdownViewModel, translationDropdownComponentName } from "../../src/components/tabs/translation-dropdown";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
@@ -663,21 +666,20 @@ test("element strings block: a source/target matrix over the real question, read
   expect(stringsMatrix.locTitle.renderedHtml).toBe("");
   expect(stringsMatrix.hasTitle).toBeTruthy();
   expect(stringsMatrix.showHeader).toBeFalsy();
-  expect(stringsMatrix.columns).toHaveLength(2);
-  expect(stringsMatrix.columns[0].readOnly).toBeTruthy();
-  expect(stringsMatrix.columns[1].readOnly).toBeFalsy();
+  // One column, the target locale: the source text is merged into the row titles, so the editor
+  // gets the width the source column had.
+  expect(stringsMatrix.columns).toHaveLength(1);
+  expect(stringsMatrix.columns[0].name).toBe("de");
+  expect(stringsMatrix.columns[0].readOnly).toBeFalsy();
   // The column choices are reachable through the block only - they are rows of the same matrix,
   // labelled with the path to the string.
   const realChoiceLocText = (<any>realMatrix.columns[0]).templateQuestion.choices[0].locText;
   const choiceRow = getStringsRow(stringsMatrix, realChoiceLocText);
   expect(choiceRow).toBeTruthy();
   expect(choiceRow.item.text).toContain("Choices");
-  // The source column shows the text to translate from - it is never edited here.
-  const sourceCell = choiceRow.cells[0].question;
-  expect(sourceCell.isReadOnly).toBeTruthy();
   // The target cell is the editor - the pane is a design-mode survey, where every other input
   // renders read-only and disabled.
-  const targetCell = choiceRow.cells[1].question;
+  const targetCell = choiceRow.cells[0].question;
   expect(targetCell.isInputReadOnly).toBeFalsy();
   expect(targetCell.isDisabledAttr).toBeFalsy();
   // The text area passes the flag to the rendered element in every framework.
@@ -947,7 +949,7 @@ test("element strings block: survey strings edits mirror into the panes", () => 
   model.toggleSurveyStrings();
   const titleRow = getStringsRow(getStringsMatrix(model), creator.survey.locTitle);
   expect(titleRow).toBeTruthy();
-  titleRow.cells[1].question.value = "Umfragetitel neu";
+  titleRow.cells[0].question.value = "Umfragetitel neu";
   expect(creator.survey.locTitle.getLocaleText("de")).toBe("Umfragetitel neu");
   expect(model.targetSurvey.locTitle.getLocaleText("de")).toBe("Umfragetitel neu");
 });
@@ -1502,7 +1504,7 @@ test("element strings block: a dialog-only string edited in the matrix does not 
   const realChoiceLocText = (<any>realMatrix.columns[0]).templateQuestion.choices[0].locText;
   // The column choice is not rendered by the panes, so it is not a mapped string - and it is
   // still a text change, not a structural one: the panes stay, and so does the open block.
-  getStringsRow(stringsMatrix, realChoiceLocText).cells[1].question.value = "AA-de";
+  getStringsRow(stringsMatrix, realChoiceLocText).cells[0].question.value = "AA-de";
   expect(model.targetSurvey).toBe(targetPane);
   expect(model.elementStringsModel).toBeTruthy();
   expect(getStringsMatrix(model)).toBe(stringsMatrix);
@@ -1561,4 +1563,211 @@ test("side-by-side model carries no all-languages machinery", () => {
   const grid = model.createElementStringsModel(creator.survey.getQuestionByName("q1"));
   expect(grid.settingsSurvey).toBeUndefined();
   grid.dispose();
+});
+
+// The caption actions get their loc owner when the block's title toolbar is built - that is where
+// the strings of a title action would be resolved in the pane's (i.e. the target) locale.
+function renderCaption(model: TranslationSideBySide): void {
+  const host = getStringsMatrix(model);
+  host.getTitleToolbar();
+  host.locStrsChanged();
+}
+
+test("element strings block: caption actions follow the creator UI locale, not the target language", () => {
+  const creator = createSideBySideCreator(inlineBlockJSON);
+  creator.onMachineTranslate.add((_, options) => { options.callback(options.strings.map(str => "de: " + str)); });
+  const model = getModel(creator);
+  const machineTitle = editorLocalization.getString("ed.translateUsigAI");
+  const closeTooltip = editorLocalization.getString("ed.translationElementStringsClose");
+  const captionOf = (): Array<any> => model.elementStringsModel.captionActions;
+  const idOf = (actions: Array<any>, id: string): any => actions.filter(action => action.id === id)[0];
+  // The target language has creator strings of its own - that is what the panes would resolve
+  // the caption actions with.
+  const savedDeStrings = editorLocalization.locales["de"];
+  editorLocalization.locales["de"] = {
+    ed: { translateUsigAI: "de: auto-translate", translationElementStringsClose: "de: close" }
+  };
+  try {
+    // A question block lives in the target pane, and that pane survey runs in the target locale.
+    // The actions re-read their strings whenever the pane does (a render, a locale change) - and
+    // they are hosted in a question's title toolbar, so that is where the locale would come from.
+    model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+    expect(model.targetSurvey.locale).toBe("de");
+    renderCaption(model);
+    expect(idOf(captionOf(), "svc-translation-machine").title).toBe(machineTitle);
+    expect(idOf(captionOf(), "svc-translation-strings-close").tooltip).toBe(closeTooltip);
+    // The survey block is hosted in a survey of its own, without a locale - same result.
+    model.toggleSurveyStrings();
+    renderCaption(model);
+    expect(idOf(captionOf(), "svc-translation-machine").title).toBe(machineTitle);
+    expect(idOf(captionOf(), "svc-translation-strings-close").tooltip).toBe(closeTooltip);
+    // The creator UI locale is what they do follow.
+    editorLocalization.currentLocale = "de";
+    model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q2"));
+    renderCaption(model);
+    expect(idOf(captionOf(), "svc-translation-machine").title).toBe("de: auto-translate");
+    expect(idOf(captionOf(), "svc-translation-strings-close").tooltip).toBe("de: close");
+  } finally {
+    editorLocalization.currentLocale = "";
+    if (savedDeStrings === undefined) {
+      delete editorLocalization.locales["de"];
+    } else {
+      editorLocalization.locales["de"] = savedDeStrings;
+    }
+  }
+});
+
+test("element strings block: an inline editor edit lands in the open matrix", () => {
+  const creator = createSideBySideCreator(inlineBlockJSON);
+  const model = getModel(creator);
+  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  const stringsMatrix = getStringsMatrix(model);
+  const realQ1 = creator.survey.getQuestionByName("q1");
+  expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBeFalsy();
+  // The inline editor of the target pane writes into the copy, which forwards the text to the
+  // real survey - the funnel that refreshes the block is closed on that path.
+  model.targetSurvey.getQuestionByName("q1").locTitle.text = "Frage 1";
+  expect(realQ1.locTitle.getLocaleText("de")).toBe("Frage 1");
+  expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBe("Frage 1");
+  // An edit of another element leaves the open block alone.
+  const matrixValue = stringsMatrix.value;
+  model.targetSurvey.getQuestionByName("q2").locTitle.text = "Frage 2";
+  expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBe("Frage 2");
+  expect(stringsMatrix.value).toEqual(matrixValue);
+  // No self-heal rebuild: the panes and the block are the same objects.
+  expect(model.elementStringsModel).toBeTruthy();
+  expect(getStringsMatrix(model)).toBe(stringsMatrix);
+});
+
+// The row ItemValue behind a real localizable string - its title is the block's merged first cell.
+function getStringsRowItem(matrix: QuestionMatrixDropdownModel, locStr: any): any {
+  return matrix.rows.filter(row => (<any>row)["translationData"].locString === locStr)[0];
+}
+
+test("element strings block: the row title merges the string name and its source text", () => {
+  const creator = createSideBySideCreator(inlineBlockJSON);
+  const model = getModel(creator);
+  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  const titleRow = getStringsRowItem(getStringsMatrix(model), creator.survey.getQuestionByName("q1").locTitle);
+  expect(titleRow).toBeTruthy();
+  expect(titleRow.locText.hasHtml).toBeTruthy();
+  expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-name");
+  expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-source");
+  expect(titleRow.locText.renderedHtml).toContain("Question 1");
+  // The cell's accessible name is built from the row title - the two lines read as one sentence
+  // there, never as the markup that draws them.
+  const cellRow = getStringsRow(getStringsMatrix(model), creator.survey.getQuestionByName("q1").locTitle);
+  expect(cellRow.getAccessbilityText()).toBe("Question title, Question 1");
+  expect(cellRow.cells[0].question.a11y_input_ariaLabel).toContain("Question title, Question 1");
+  expect(cellRow.cells[0].question.a11y_input_ariaLabel).not.toContain("<span");
+});
+
+test("element strings block: a string with no source text renders the name alone, and html is escaped", () => {
+  const creator = createSideBySideCreator({
+    locale: "de",
+    pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "<b>Q1</b>" }] }]
+  });
+  const model = getModel(creator);
+  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  const realQ1 = creator.survey.getQuestionByName("q1");
+  const titleRow = getStringsRowItem(getStringsMatrix(model), realQ1.locTitle);
+  expect(titleRow.locText.renderedHtml).toContain("&lt;b&gt;Q1&lt;/b&gt;");
+  expect(titleRow.locText.renderedHtml).not.toContain("<b>Q1</b>");
+  // A string the source language has nothing for renders its name alone - no empty second line.
+  model.elementStringsModel.showAllElementStrings = true;
+  const descriptionRow = getStringsRowItem(getStringsMatrix(model), realQ1.locDescription);
+  expect(descriptionRow).toBeTruthy();
+  expect(descriptionRow.locText.renderedHtml).toContain("st-element-strings__row-name");
+  expect(descriptionRow.locText.renderedHtml).not.toContain("st-element-strings__row-source");
+});
+
+test("element strings block: the open matrix follows a locale switch", () => {
+  const creator = createSideBySideCreator(inlineBlockJSON);
+  const model = getModel(creator);
+  const realQ1 = creator.survey.getQuestionByName("q1");
+  realQ1.locTitle.setLocaleText("fr", "Question 1 fr");
+  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  const stringsMatrix = getStringsMatrix(model);
+  expect(stringsMatrix.columns[0].name).toBe("de");
+  model.targetLocale = "fr";
+  // The panes are not rebuilt for a switch between two languages, and neither is the block.
+  expect(model.elementStringsModel).toBeTruthy();
+  expect(getStringsMatrix(model)).toBe(stringsMatrix);
+  expect(stringsMatrix.columns).toHaveLength(1);
+  expect(stringsMatrix.columns[0].name).toBe("fr");
+  expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBe("Question 1 fr");
+  // The source language drives the text of the merged first cell.
+  model.sourceLocale = "fr";
+  model.targetLocale = "de";
+  expect(getStringsRowItem(getStringsMatrix(model), realQ1.locTitle).locText.renderedHtml).toContain("Question 1 fr");
+});
+
+// The target language dropdown of the settings survey and its precomputed counters.
+function getTargetChoices(creator: CreatorTester): Array<any> {
+  return getSettingsQuestion(creator, "targetLocale").choices;
+}
+function getTargetProgress(creator: CreatorTester, locale: string): string {
+  const choice = getTargetChoices(creator).filter((item: ItemValue) => item.value === locale)[0];
+  return !!choice ? getTranslationLocaleProgress(choice) : undefined;
+}
+
+test("target language dropdown: every choice carries the translated/total counts of its language", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  const model = getModel(creator);
+  const total = model.getUsedStringsItems().length;
+  expect(total).toBeGreaterThan(0);
+  const deProgress = model.getTranslationProgress("de");
+  expect(deProgress.translated).toBeGreaterThan(0);
+  expect(getTargetProgress(creator, "de")).toBe(deProgress.translated + " / " + total);
+  // A language with nothing translated shows no numbers at all - not "0 / n".
+  expect(getTargetProgress(creator, "fr")).toBeFalsy();
+  // The counters are precomputed on the choices, and the item component renders them; the
+  // collapsed dropdown keeps the plain language name.
+  expect(getTargetChoices(creator).every((item: ItemValue) => item.component === translationLocaleItemComponentName)).toBeTruthy();
+  expect(getSettingsQuestion(creator, "targetLocale").itemComponent).toBeFalsy();
+  // The source dropdown carries neither.
+  expect(getSettingsQuestion(creator, "sourceLocale").choices
+    .every((item: ItemValue) => !item.component && !getTranslationLocaleProgress(item))).toBeTruthy();
+});
+
+test("target language dropdown: the languages with translations come first, each group alphabetically", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  const model = getModel(creator);
+  creator.survey.getQuestionByName("q2").locTitle.setLocaleText("es", "Pregunta 2");
+  model.refreshTargetLocaleChoices();
+  const choices = getTargetChoices(creator);
+  const started = choices.filter((item: ItemValue) => !!getTranslationLocaleProgress(item));
+  const notStarted = choices.filter((item: ItemValue) => !getTranslationLocaleProgress(item));
+  expect(started.map((item: ItemValue) => item.value)).toEqual(["de", "es"]);
+  // The two groups are not interleaved: every started language comes before every other one.
+  expect(choices.indexOf(started[started.length - 1])).toBeLessThan(choices.indexOf(notStarted[0]));
+  const isSorted = (items: Array<ItemValue>): boolean =>
+    items.every((item, index) => index === 0 || items[index - 1].text.localeCompare(item.text) <= 0);
+  expect(isSorted(started)).toBeTruthy();
+  expect(isSorted(notStarted)).toBeTruthy();
+});
+
+test("target language dropdown: the counts follow the edits, so the list is current when it opens", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  const model = getModel(creator);
+  const total = model.getUsedStringsItems().length;
+  const before = model.getTranslationProgress("de").translated;
+  expect(getTargetProgress(creator, "de")).toBe(before + " / " + total);
+  // A dropdown locks its visible choices while its popup is shown, so the counts cannot be
+  // recomputed on opening - they follow every edit instead. An inline editor edit of the pane...
+  const targetSurvey = model.targetSurvey;
+  model.targetSurvey.getQuestionByName("q2").locTitle.text = "Frage 2";
+  expect(getTargetProgress(creator, "de")).toBe((before + 1) + " / " + total);
+  // ...and an edit made anywhere else in the survey.
+  creator.survey.getQuestionByName("q3").locTitle.setLocaleText("de", "Frage 3");
+  expect(getTargetProgress(creator, "de")).toBe((before + 2) + " / " + total);
+  // The dropdown keeps its value and the panes are untouched.
+  expect(getSettingsQuestion(creator, "targetLocale").value).toBe("de");
+  expect(model.targetLocale).toBe("de");
+  expect(model.targetSurvey).toBe(targetSurvey);
+  // A language that gets its first translation joins the front group of the list.
+  expect(getTargetProgress(creator, "es")).toBeFalsy();
+  creator.survey.getQuestionByName("q2").locTitle.setLocaleText("es", "Pregunta 2");
+  expect(getTargetProgress(creator, "es")).toBe("1 / " + total);
+  expect(getTargetChoices(creator).slice(0, 2).map((item: ItemValue) => item.value)).toEqual(["de", "es"]);
 });

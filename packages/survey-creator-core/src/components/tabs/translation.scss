@@ -369,6 +369,26 @@ td.st-table__cell:first-of-type {
   .st-element-strings__close {
     margin-left: auto;
   }
+
+  // The merged first cell: the string name and, below it, its source-locale text. The matrix has
+  // no source column - this cell is the source side of the block, and the target editor takes the
+  // rest of the width (see createStringsMatrix).
+  .st-element-strings__row-name,
+  .st-element-strings__row-source {
+    display: block;
+    overflow-wrap: anywhere;
+  }
+
+  .st-element-strings__row-name {
+    font-size: var(--sjs2-font-size-s, 12px);
+    line-height: var(--sjs2-line-height-s, 16px);
+    color: var(--sjs2-color-fg-basic-primary-muted);
+  }
+
+  .st-element-strings__row-source {
+    // The source text is read-only, but it is what the user copies from.
+    user-select: text;
+  }
 }
 
 // Nothing of the question chrome may add to the spacer's height - it is set to the measured
@@ -420,4 +440,27 @@ td.st-table__cell:first-of-type {
   .svc-question__dropdown-collapse-button {
     margin-top: var(--sjs2-spacing-x100);
   }
+}
+
+// An item of the target language dropdown list: the language name and, at the right edge, the
+// share of the survey already translated into it (nothing when the language has no translations).
+.svc-translation-locale-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sjs2-spacing-x100);
+  width: 100%;
+  min-width: 0;
+}
+
+.svc-translation-locale-item__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.svc-translation-locale-item__progress {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--sjs2-color-fg-basic-primary-muted);
 }

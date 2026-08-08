@@ -41,13 +41,14 @@ import LinkValue from "./questions/LinkValue.vue";
 import Translation from "./tabs/translation/Translation.vue";
 import TranslationLineSkeleton from "./tabs/translation/TranslationLineSkeleton.vue";
 import TranslateFromAction from "./tabs/translation/TranslateFromAction.vue";
+import TranslationLocaleItem from "./tabs/translation/TranslationLocaleItem.vue";
 
 import Theme from "./tabs/theme/Theme.vue";
 import Color from "./custom-questions/Color.vue";
 import ColorItem from "./custom-questions/ColorItem.vue";
 import File from "./custom-questions/File.vue";
 import SpinEditor from "./custom-questions/SpinEditor.vue";
-import { editableStringRendererName } from "survey-creator-core";
+import { editableStringRendererName, translationLocaleItemComponentName } from "survey-creator-core";
 
 import StringEditor from "./StringEditor.vue";
 import AdaptiveToolbox from "./toolbox/AdaptiveToolbox.vue";
@@ -145,6 +146,7 @@ function registerComponents(
   registerComponent("svc-tab-translation", Translation);
   registerComponent("sd-translation-line-skeleton", TranslationLineSkeleton);
   registerComponent("svc-translate-from-action", TranslateFromAction);
+  registerComponent(translationLocaleItemComponentName, TranslationLocaleItem);
 
   registerComponent("svc-tab-logic", Logic);
 

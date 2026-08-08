@@ -58,6 +58,7 @@ export * from "../tabs/Preview";
 export * from "../side-bar/PropertyGridPlaceholder";
 export * from "../tabs/Theme";
 export * from "../tabs/translation/Translation";
+export * from "../tabs/translation/TranslationLocaleItem";
 export * from "../tabs/SurveySimulator";
 
 export * from "../events";
