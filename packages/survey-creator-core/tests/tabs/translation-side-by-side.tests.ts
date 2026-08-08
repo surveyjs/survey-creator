@@ -1127,6 +1127,27 @@ test("element state indicator: page and survey states cover their own strings, n
   expect(surveyAction.css).toContain("svc-translation-state--translated");
 });
 
+test("element state indicator: a target locale switch refreshes the indicators and keeps the panes", () => {
+  const creator = createSideBySideCreator({
+    locale: "de",
+    completedHtml: { default: "Thank you", de: "Danke" },
+    pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } }] }]
+  });
+  const model = getModel(creator);
+  const target = model.targetSurvey;
+  const surveyAction = target.getTitleToolbar().getActionById("svc-translate-survey");
+  expect(surveyAction.css).toContain("svc-translation-state--translated");
+  expect(surveyAction.showTitle).toBeFalsy();
+  // The indicator actions report their own text changes through the pane survey, like every
+  // other element of it, and they are not mapped string copies - forwarding them would read as
+  // a drifted mapping and rebuild the panes in the middle of the indicator refresh.
+  model.targetLocale = "it";
+  expect(model.targetSurvey).toBe(target);
+  expect(surveyAction.css).toContain("svc-translation-state--untranslated");
+  expect(surveyAction.title).toBe("1");
+  expect(model.getElementTranslationState(target.getQuestionByName("q1"))).toBe("untranslated");
+});
+
 test("element state indicator: survey state includes nested survey-level strings, e.g. completedHtmlOnCondition", () => {
   const creator = createSideBySideCreator({
     locale: "de",

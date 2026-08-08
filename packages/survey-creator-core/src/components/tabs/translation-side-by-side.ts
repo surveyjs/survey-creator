@@ -898,6 +898,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // The target copy's onPropertyValueChangedCallback: forwards inline edits to the real survey.
   public forwardTargetChange(name: string, sender: Base): void {
     if (this._syncing || this.isDisposed) return;
+    // The title actions of the pane elements (the translation state indicators, the block's
+    // caption buttons) report through the pane survey as well, and their own texts are never
+    // mapped copies - forwarding them would read as a drifted mapping below and rebuild the
+    // panes on every indicator refresh.
+    if (sender instanceof Action) return;
     // The strings host is not a mapped copy: its own localizable html property would read as
     // a drifted mapping below and rebuild the panes, closing the block that was just opened.
     if (this.isStringsHost(sender)) return;
