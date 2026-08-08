@@ -2,10 +2,11 @@ import {
   Action, AdaptiveActionContainer, Base, EventBase, Helpers, ILocalizableString, ItemValue,
   LocalizableString, PageModel, PanelModel, PanelModelBase, Question,
   MatrixDynamicRowModel, QuestionCommentModel, QuestionDropdownModel, QuestionHtmlModel,
-  QuestionMatrixDropdownModel, QuestionMatrixDynamicModel, Serializer, SurveyModel, property
+  QuestionMatrixDropdownModel, QuestionMatrixDynamicModel, Serializer, SurveyModel, property,
+  settings as surveySettings
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
-import { applyCreatorUiLocaleToAction, editorLocalization } from "../../editorLocalization";
+import { applyCreatorUiLocaleToAction, editorLocalization, getLocString } from "../../editorLocalization";
 import { editableStringRendererName, isContentElement } from "../../creator-base";
 import { ITranslationDropdownOwner, translationDropdownComponentName } from "./translation-dropdown";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
@@ -54,6 +55,10 @@ export function getTranslationLocaleProgress(item: any): string {
   return !!item && typeof item.getPropertyValue === "function"
     ? item.getPropertyValue(translationLocaleProgressName) : undefined;
 }
+
+// The link question below the target language dropdown: how much of the survey is translated
+// into the selected language, and the way to the next string that is not.
+const translationProgressQuestionName = "translationProgress";
 
 // The translation state of a target-pane element for the current target language:
 // "none" - no used strings with a stored text (nothing to translate), "untranslated" - at
@@ -163,7 +168,21 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       updateMatrixRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);
       updateMatixActionsAppearance(options.actions);
     });
+    this.setupTranslationProgressQuestion(res);
     return res;
+  }
+  // The progress link below the target dropdown: its text, its value and its clickability follow
+  // the counts (see updateTranslationProgress); the link goes to the next string that has no
+  // translation yet and the clear button drops the language's translations.
+  private setupTranslationProgressQuestion(survey: SurveyModel): void {
+    const question = <QuestionLinkValueModel>survey.getQuestionByName(translationProgressQuestionName);
+    if (!question) return;
+    // The clear button is shown by the model, not derived from "the value is not empty": the
+    // value here is a count, and it is the counts that decide what the question offers.
+    question.allowClear = false;
+    question.showClear = true;
+    question.linkClickCallback = (): void => this.selectFirstUntranslatedString();
+    (<any>question).clearClickCallback = (): void => this.clearTargetLocaleStrings();
   }
   private getSideBySideSettingsSurveyJSON(): any {
     return {
@@ -190,6 +209,17 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
           // The target language is optional: clearing it stops the translation editing
           // (no target pane, no target column).
           allowClear: true
+        },
+        {
+          type: "linkvalue",
+          name: translationProgressQuestionName,
+          titleLocation: "hidden",
+          // Shown by updateTranslationProgress, which is also what fills it - until then it
+          // would render the empty-value text of a link question.
+          visible: false,
+          // The link renders the progress text this model assigns (see updateTranslationProgress),
+          // not the question's own value - the value is the number of translated strings.
+          showValueInLink: true
         },
         {
           type: "matrixdynamic",
@@ -223,6 +253,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       const viewQuestion = survey.getQuestionByName("viewMode");
       if (!!viewQuestion) viewQuestion.value = this.view;
       this.updateLanguagesMatrixSelection();
+      this.updateTranslationProgress();
     } finally {
       this._updatingSettingsSurvey = false;
     }
@@ -308,9 +339,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
     question.visible = locales.length > 0;
     this.updateLanguagesMatrixSelection();
-    // The target dropdown counts the same used strings the matrix rows do, so it follows every
-    // full refresh of the matrix.
+    // The target dropdown and the progress link count the same used strings the matrix rows do,
+    // so they follow every full refresh of the matrix.
     this.refreshTargetLocaleChoices();
+    this.updateTranslationProgress();
   }
   private getLanguageProgressText(locale: string, items: Array<TranslationItem>): string {
     const progress = this.getTranslationProgress(locale, items);
@@ -345,6 +377,20 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // deletion - it removes the locale strings of the whole survey.
   public deleteLanguage(locale: string): void {
     if (!locale || this.isDisposed) return;
+    this.deleteSurveyLocaleStrings(locale);
+    // The deleted language has no strings and no matrix row left - neither dropdown may keep
+    // pointing at it.
+    if ((this.sourceLocale || "") === locale) {
+      this.sourceLocale = "";
+    }
+    if ((this.targetLocale || "") === locale) {
+      this.targetLocale = "";
+    }
+    if (!this.isSideBySideGrid) {
+      this.rebuildInstances();
+    }
+  }
+  private deleteSurveyLocaleStrings(locale: string): void {
     // The deletion always covers the whole survey; the grid view's root can be scoped to a
     // single page, so it goes through a temporary unscoped model then (like the CSV export).
     if (!!this.filteredPage) {
@@ -358,17 +404,27 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     } else {
       this.deleteLocaleStrings(locale);
     }
-    // The deleted language has no strings and no matrix row left - neither dropdown may keep
-    // pointing at it.
-    if ((this.sourceLocale || "") === locale) {
-      this.sourceLocale = "";
-    }
-    if ((this.targetLocale || "") === locale) {
-      this.targetLocale = "";
-    }
-    if (!this.isSideBySideGrid) {
-      this.rebuildInstances();
-    }
+  }
+  // The clear button of the progress link: unlike the languages matrix removal, the language
+  // keeps being translated - it loses its texts and starts from zero. The confirmation is asked
+  // here (the matrix asks its own through confirmDelete).
+  public clearTargetLocaleStrings(): void {
+    const locale = this.targetLocale || "";
+    if (!locale || this.isDisposed || this.readOnly) return;
+    const creator = this.creatorModel;
+    surveySettings.confirmActionAsync(getLocString("ed.translationClearProgress"), (confirm: boolean) => {
+      if (!confirm || this.isDisposed || (this.targetLocale || "") !== locale) return;
+      this.deleteSurveyLocaleStrings(locale);
+      // The target language stays selected, so the panes keep editing it - they are rebuilt
+      // over the survey that has no texts for it anymore.
+      if (!this.isSideBySideGrid) {
+        this.rebuildInstances();
+      }
+    }, {
+      locale: editorLocalization.currentLocale,
+      cssClass: "sv-popup--confirm svc-creator-popup",
+      rootElement: !!creator ? creator.rootElement : undefined
+    });
   }
   // Bulk write operations (CSV import, apply-translations, locale deletion) run through
   // runWithoutSurveyReaction and refresh the languages matrix once via the reset that follows;
@@ -396,6 +452,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       } else {
         this.updateLanguageProgress(locale);
         this.updateTargetLocaleProgress(locale);
+        if ((this.targetLocale || "") === locale) {
+          this.updateTranslationProgress();
+        }
       }
       this.updateElementTranslationStates();
     }
@@ -411,6 +470,94 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       return;
     }
     progressQuestion.value = this.getLanguageProgressText(locale, this.getUsedStringsItems());
+  }
+  private get translationProgressQuestion(): QuestionLinkValueModel {
+    const survey = this.settingsSurvey;
+    return !!survey ? <QuestionLinkValueModel>survey.getQuestionByName(translationProgressQuestionName) : undefined;
+  }
+  // The progress link of the target language: how many of the survey's used strings it already
+  // has a text for. It says nothing without a target language, so it is hidden then.
+  public updateTranslationProgress(): void {
+    const question = this.translationProgressQuestion;
+    if (!question || this.isDisposed) return;
+    const locale = this.targetLocale || "";
+    question.visible = !!locale;
+    if (!locale) return;
+    const progress = this.getTranslationProgress(locale);
+    // The value goes in first: the question rewrites its link text and its clickability from
+    // every value it gets, and both are set from the counts right below.
+    question.value = progress.translated;
+    question.linkValueText = editorLocalization.getString("ed.translationProgress")
+      .replace("{0}", progress.translated.toString())
+      .replace("{1}", progress.total.toString());
+    question.showClear = true;
+    // Nothing left to go to - the link stops being a button.
+    question.isClickable = progress.translated < progress.total;
+  }
+  // The progress link's action: the next string with no text in the target language - the first
+  // one of the page the user is on, or, when that page is fully translated, the first one of the
+  // next page that is not.
+  public selectFirstUntranslatedString(): void {
+    if (this.isDisposed) return;
+    const infos = this.getUntranslatedStringInfos();
+    if (infos.length === 0) return;
+    const pageName = this.currentPageName;
+    const info = (!!pageName ? infos.filter(item => item.pageName === pageName)[0] : undefined) || infos[0];
+    this.selectTranslationItem(info);
+  }
+  // The page the editing surface is on: the page the panes show, or the page the grid is scoped
+  // to ("" - the grid lists every page, so no page is preferred over another).
+  private get currentPageName(): string {
+    if (this.isSideBySideGrid) return !!this.filteredPage ? this.filteredPage.name : "";
+    return this.selectedPageName || "";
+  }
+  // The untranslated used strings in the order the used-strings tree lists them, each with the
+  // page it belongs to and the element that carries it. The survey's own strings are counted
+  // with the first page: that is where the panes render the survey header.
+  private getUntranslatedStringInfos(): Array<{ item: TranslationItem, pageName: string, element: Base }> {
+    const res: Array<{ item: TranslationItem, pageName: string, element: Base }> = [];
+    const locale = this.targetLocale || "";
+    if (!locale || !this.survey) return res;
+    const fill = (group: TranslationGroup, pageName: string, element: Base): void => {
+      const obj = group.obj;
+      if (!!this.getElementStateKey(obj)) {
+        element = obj;
+        if ((<any>obj).isPage) pageName = (<any>obj).name;
+      }
+      group.locItems.forEach(item => {
+        if (!this.isItemTranslated(item, locale)) {
+          res.push({ item: item, pageName: pageName, element: element });
+        }
+      });
+      group.groups.forEach(child => fill(child, pageName, element));
+    };
+    const firstPage = this.survey.pages[0];
+    fill(this.getUsedStringsRoot(), !!firstPage ? firstPage.name : "", this.survey);
+    return res;
+  }
+  private selectTranslationItem(info: { item: TranslationItem, pageName: string, element: Base }): void {
+    const locStr = info.item.locString;
+    this.selectedLocString = locStr;
+    const page = !!this.survey ? this.survey.getPageByName(info.pageName) : undefined;
+    if (this.isSideBySideGrid) {
+      // A grid scoped to another page is re-scoped first - the property's onSet rebuilds the
+      // grid, so the cell is resolved afterwards.
+      if (!!page && !!this.filteredPage && this.filteredPage !== page) {
+        this.filteredPage = page;
+      }
+      this.focusGridCell(locStr);
+      return;
+    }
+    if (!!page) {
+      this.selectedPageName = page.name;
+    }
+    // The strings block of the owning element, not the inline editor of the pane: the pane
+    // renders only a part of an element's strings (a title, a description, the choices of a
+    // rendered list), and the block is the one surface that holds every one of them.
+    this.showElementStrings(info.element);
+    if (!!this.elementStringsModel) {
+      this.elementStringsModel.focusItem(locStr);
+    }
   }
   public reset(alwaysReset: boolean = true): void {
     super.reset(alwaysReset);
@@ -715,7 +862,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
     // Re-resolved: the scoping above rebuilt the root tree and the strings survey.
     const scopedInfo = this.findSelectedItemInfo();
-    if (!!scopedInfo)this.focusGridCell(scopedInfo.item);
+    if (!!scopedInfo)this.focusGridCell(scopedInfo.item.locString);
   }
   // grid -> forms: the panes open on the page of the last focused string (or on the grid's
   // page scope). Called before the instances are rebuilt, while root is still the grid tree.
@@ -757,14 +904,18 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     search(this.root, "");
     return res;
   }
-  private focusGridCell(item: TranslationItem): void {
+  // Resolved by the survey's localizable string, not by the translation item: the grid holds a
+  // tree of its own, so an item found in another one (the used-strings tree) is not the item
+  // its rows carry.
+  private focusGridCell(locStr: ILocalizableString): void {
     const survey = this.stringsSurvey;
     if (!survey) return;
     const questions = survey.getAllQuestions();
     for (let i = 0; i < questions.length; i++) {
       const matrix = <QuestionMatrixDropdownModel>questions[i];
       const rows = matrix.rows;
-      if (Array.isArray(rows) && rows.length > 0 && rows[0]["translationData"] === item) {
+      const rowItem = Array.isArray(rows) && rows.length > 0 ? <TranslationItem>rows[0]["translationData"] : undefined;
+      if (!!rowItem && rowItem.locString === locStr) {
         const cells = matrix.visibleRows[0].cells;
         // The target locale column is the last one - and the only one when no target is selected.
         cells[cells.length - 1].question.focus();
@@ -1792,6 +1943,21 @@ export class TranslationElementStrings extends TranslationBase {
       }
     });
     this.updateMatrix(() => { matrix.value = data; });
+  }
+  // Puts the input focus into the block's editor of a string - the row's only cell is the
+  // target locale one (see createStringsMatrix).
+  public focusItem(locStr: ILocalizableString): void {
+    const matrix = this.stringsMatrix;
+    if (!matrix || !locStr) return;
+    const rows = matrix.visibleRows;
+    for (let i = 0; i < rows.length; i++) {
+      const item = this.getMatrixItem(rows[i]);
+      if (!!item && item.locString === locStr) {
+        const cells = rows[i].cells;
+        cells[cells.length - 1].question.focus();
+        return;
+      }
+    }
   }
   private getMatrixItemValue(row: any): ItemValue {
     return !!this.stringsMatrix && !!row ? ItemValue.getItemByValue(this.stringsMatrix.rows, row.name) : undefined;

@@ -144,6 +144,34 @@ test.describe(title, () => {
     expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1 neu");
   });
 
+  test("progress link: the target language counts, the way to the next untranslated string and the clear button", async ({ page }) => {
+    await openSideBySideTranslation(page);
+    const progress = page.locator(".svc-side-bar .spg-question[data-name=translationProgress]");
+    const progressLink = progress.getByRole("button", { name: /strings translated/ });
+    await expect(progressLink).toHaveText(/^\d+ of \d+ strings translated$/);
+    const before = await progressLink.textContent();
+
+    // The click opens the strings block of the first element that has an untranslated string,
+    // with the input focus in its editor - translating there moves the counts.
+    await progressLink.click();
+    const block = page.locator(".st-side-by-side__target [data-name='svc-translation-strings-host']");
+    await expect(block).toBeVisible();
+    await expect(block.locator("textarea:focus")).toHaveCount(1);
+    await block.locator("textarea:focus").fill("Uebersetzt");
+    await page.keyboard.press("Tab");
+    await expect(progressLink).not.toHaveText(before!);
+
+    // The clear button drops the language's texts after a confirmation; the language stays the
+    // one being translated, so the target pane is still there and the progress starts over.
+    await progress.getByRole("button", { name: "Clear" }).click();
+    const dialog = page.locator(".sv-popup--confirm");
+    await expect(dialog).toBeVisible();
+    await dialog.getByRole("button", { name: "OK" }).click();
+    await expect(progressLink).toHaveText(/^0 of \d+ strings translated$/);
+    await expect(page.locator(".st-side-by-side__target")).toBeVisible();
+    expect((await getJSON(page)).pages[0].elements[0].title.de).toBeUndefined();
+  });
+
   test("inline edit in target pane updates the JSON translation; source pane unchanged", async ({ page }) => {
     await openSideBySideTranslation(page);
     const targetTitle = page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1");

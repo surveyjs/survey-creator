@@ -1,4 +1,8 @@
-import { ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionTextModel } from "survey-core";
+import {
+  ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDropdownModel,
+  QuestionTextModel, settings as surveySettings
+} from "survey-core";
+import { QuestionLinkValueModel } from "../../src/components/link-value";
 import {
   TranslationSideBySide, getTranslationLocaleProgress, translationLocaleItemComponentName
 } from "../../src/components/tabs/translation-side-by-side";
@@ -1817,4 +1821,116 @@ test("element strings block: a string the library localizes itself shows its sou
   realB1.locLabelTrue.setLocaleText("fr", "Oui");
   model.sourceLocale = "fr";
   expect(getStringsRowItem(getStringsMatrix(model), realB1.locLabelTrue).locText.renderedHtml).toContain("Oui");
+});
+
+// The progress link of the settings survey: the counts of the target language, the way to the
+// next untranslated string and the clear button.
+function getProgressQuestion(creator: CreatorTester): QuestionLinkValueModel {
+  return <QuestionLinkValueModel>getModel(creator).settingsSurvey.getQuestionByName("translationProgress");
+}
+
+test("progress link: shows the target language counts, and nothing without a target language", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  const model = getModel(creator);
+  const question = getProgressQuestion(creator);
+  const progress = model.getTranslationProgress("de");
+  expect(progress.translated).toBeGreaterThan(0);
+  expect(progress.translated).toBeLessThan(progress.total);
+  expect(question.visible).toBeTruthy();
+  // The value is the number of translated strings; the link text says it in words.
+  expect(question.value).toBe(progress.translated);
+  expect(question.linkValueText).toBe(progress.translated + " of " + progress.total + " strings translated");
+  expect(question.showClear).toBeTruthy();
+  expect(question.isClickable).toBeTruthy();
+  // No target language - no progress to show.
+  model.targetLocale = "";
+  expect(question.visible).toBeFalsy();
+});
+
+test("progress link: the counts follow every edit, and a fully translated language is not clickable", () => {
+  const creator = createSideBySideCreator(stateJSON);
+  const model = getModel(creator);
+  const question = getProgressQuestion(creator);
+  const total = model.getTranslationProgress("de").total;
+  const before = model.getTranslationProgress("de").translated;
+  // An inline editor edit of the target pane...
+  model.targetSurvey.getQuestionByName("q2").locTitle.text = "Frage 2";
+  expect(question.value).toBe(before + 1);
+  expect(question.linkValueText).toBe((before + 1) + " of " + total + " strings translated");
+  // ...and an edit made anywhere else in the survey.
+  creator.survey.pages[0].locTitle.setLocaleText("de", "Seite 1");
+  expect(question.value).toBe(before + 2);
+  // Nothing left to go to.
+  model.getUsedStringsItems().forEach(item => item.locString.setLocaleText("de", "de text"));
+  model.updateTranslationProgress();
+  expect(question.value).toBe(total);
+  expect(question.isClickable).toBeFalsy();
+});
+
+test("progress link: goes to the first untranslated string of the current page, then to the next page that has one", () => {
+  const creator = createSideBySideCreator({
+    locale: "de",
+    pages: [
+      {
+        name: "page1",
+        title: { default: "Page 1 title", de: "Seite 1" },
+        elements: [
+          { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+          { type: "text", name: "q2", title: "Question 2" }
+        ]
+      },
+      {
+        name: "page2",
+        title: "Page 2 title",
+        elements: [{ type: "text", name: "q3", title: "Question 3" }]
+      }
+    ]
+  });
+  const model = getModel(creator);
+  expect(model.selectedPageName).toBe("page1");
+  // q2 is the only string of page1 with no German text - the click opens its strings block and
+  // stays on the page.
+  model.selectFirstUntranslatedString();
+  expect(model.selectedPageName).toBe("page1");
+  expect(model.elementStringsModel).toBeTruthy();
+  expect(model.elementStringsModel.element).toBe(creator.survey.getQuestionByName("q2"));
+  // With page1 translated, the click moves to the next page that still has a string left - its
+  // title comes before its questions.
+  creator.survey.getQuestionByName("q2").locTitle.setLocaleText("de", "Frage 2");
+  model.selectFirstUntranslatedString();
+  expect(model.selectedPageName).toBe("page2");
+  expect(model.elementStringsModel.element).toBe(creator.survey.getPageByName("page2"));
+});
+
+test("progress link: the clear button drops the language strings after a confirmation and keeps translating it", () => {
+  const originalCallback = surveySettings.confirmActionAsync;
+  let message = "";
+  let confirmResult = false;
+  surveySettings.confirmActionAsync = (text, callback) => {
+    message = text;
+    callback(confirmResult);
+    return true;
+  };
+  try {
+    const creator = createSideBySideCreator(stateJSON);
+    const model = getModel(creator);
+    const question = getProgressQuestion(creator);
+    const translated = model.getTranslationProgress("de").translated;
+    expect(translated).toBeGreaterThan(0);
+    // Cancelled - the language keeps its strings.
+    question.doClearClick();
+    expect(message).toBe("Are you certain you wish to delete all translated strings for the selected language?");
+    expect(question.value).toBe(translated);
+    expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("Frage 1");
+    // Confirmed - the strings are gone and the language is still the one being translated.
+    confirmResult = true;
+    question.doClearClick();
+    expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBeFalsy();
+    expect(model.targetLocale).toBe("de");
+    expect(question.visible).toBeTruthy();
+    expect(question.value).toBe(0);
+    expect(model.targetSurvey).toBeTruthy();
+  } finally {
+    surveySettings.confirmActionAsync = originalCallback;
+  }
 });
