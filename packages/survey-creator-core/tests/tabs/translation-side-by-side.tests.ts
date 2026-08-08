@@ -1771,3 +1771,29 @@ test("target language dropdown: the counts follow the edits, so the list is curr
   expect(getTargetProgress(creator, "es")).toBe("1 / " + total);
   expect(getTargetChoices(creator).slice(0, 2).map((item: ItemValue) => item.value)).toEqual(["de", "es"]);
 });
+
+test("element strings block: a string the library localizes itself shows its source text and its target placeholder", () => {
+  const creator = createSideBySideCreator({
+    locale: "de",
+    pages: [{ name: "page1", elements: [{ type: "boolean", name: "b1" }] }]
+  });
+  const model = getModel(creator);
+  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("b1"));
+  // labelTrue stores nothing in any locale, so it is one of the "all strings" rows.
+  model.elementStringsModel.showAllElementStrings = true;
+  const stringsMatrix = getStringsMatrix(model);
+  const realB1 = <any>creator.survey.getQuestionByName("b1");
+  const titleRow = getStringsRowItem(stringsMatrix, realB1.locLabelTrue);
+  expect(titleRow).toBeTruthy();
+  // The merged first cell shows the source-locale text the library gives the string...
+  expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-source");
+  expect(titleRow.locText.renderedHtml).toContain("Yes");
+  // ... and the target editor offers the target-locale one as its placeholder.
+  const cellRow = getStringsRow(stringsMatrix, realB1.locLabelTrue);
+  expect(cellRow.cells[0].question.value).toBeFalsy();
+  expect(cellRow.cells[0].question.placeholder).toBe("Ja");
+  // The source language drives the first cell, as it does for a stored text.
+  realB1.locLabelTrue.setLocaleText("fr", "Oui");
+  model.sourceLocale = "fr";
+  expect(getStringsRowItem(getStringsMatrix(model), realB1.locLabelTrue).locText.renderedHtml).toContain("Oui");
+});

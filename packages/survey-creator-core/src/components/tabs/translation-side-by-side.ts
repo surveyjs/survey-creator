@@ -1714,7 +1714,9 @@ export class TranslationElementStrings extends TranslationBase {
   // editor of the row, and the target editor gets the width it saves.
   private getRowTitleText(path: string, item: TranslationItem): string {
     const name = (!!path ? path + ": " : "") + item.text;
-    const source = item.getLocText(this.sourceLocale || "") || "";
+    // A string with nothing stored still has a source text when the library localizes it
+    // itself - the row would carry its name alone otherwise (see getSourceText).
+    const source = item.getSourceText(this.sourceLocale || "") || "";
     return !!source ? name + rowSourceSeparator + source : name;
   }
   private getRowTitleHtml(text: string, item: any): string {

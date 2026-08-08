@@ -18,6 +18,17 @@ import { SurveyHelper, getDefaultLocaleName, isDefaultLocale } from "../../surve
 import { translationCss } from "./translation-theme";
 import { CreatorDomHelper } from "../../dom-helper";
 
+// The library localizes a few strings outside their localizable string: the property itself stays
+// empty and the text the survey renders comes from the error class that falls back to it (see
+// error.ts in survey-core). Their survey-core string names are listed here, keyed by the property
+// name, so the grid can show them like any other string the library localizes itself. Entries take
+// precedence over the string's own localizationName - otherErrorText carries one that names no
+// string at all.
+const localizationNameByProperty: { [key: string]: string | ((obj: any) => string) } = {
+  requiredErrorText: (obj: any): string => !!obj && (obj.isPanel || obj.isPage) ? "requiredErrorInPanel" : "requiredError",
+  otherErrorText: "otherRequiredError"
+};
+
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
     super();
@@ -212,13 +223,41 @@ export class TranslationItem extends TranslationItemBase {
     return res;
   }
   public getPlaceholder(locale: string, ignorePlaceHolder: boolean = false): string {
-    const textLocale = !!locale && locale !== getDefaultLocaleName() ? locale : surveyLocalization.defaultLocale;
-    const placeholderText = !ignorePlaceHolder ? editorLocalization.getString("ed.translationPlaceHolder", textLocale) : "";
+    const placeholderText = !ignorePlaceHolder ? editorLocalization.getString("ed.translationPlaceHolder", this.getTextLocale(locale)) : "";
     return this.getPlaceHolderCore(locale) || placeholderText;
+  }
+  // The text a string that stores nothing of its own still renders: the library resolves it from
+  // its own string table by the string's localization name (a question's "Other" caption, the
+  // survey's navigation buttons, the boolean labels, ...). Such a string is empty in every locale,
+  // so without this its row would show no text at all - neither a source nor a placeholder.
+  public getLocalizationText(locale: string): string {
+    const name = this.getLocalizationStringName();
+    return !!name ? surveyLocalization.getString(name, this.getTextLocale(locale)) || "" : "";
+  }
+  private getLocalizationStringName(): string {
+    const byProperty = localizationNameByProperty[this.name];
+    if (!!byProperty) {
+      return typeof byProperty === "function" ? byProperty(this.context) : byProperty;
+    }
+    const locStr = <LocalizableString>this.locString;
+    if (!locStr) return undefined;
+    return !!locStr.sharedData ? locStr.sharedData.localizationName : locStr.localizationName;
+  }
+  // The text the source side of a translation shows: the text stored for the locale, falling back
+  // to the built-in localized text of a string that stores none.
+  public getSourceText(locale: string): string {
+    return this.getLocText(locale || "") || this.getLocalizationText(locale);
+  }
+  // The locale a text is looked up in: the grid column names the default locale explicitly
+  // (see getLocaleColumnName), the string tables know it as the current default one.
+  private getTextLocale(locale: string): string {
+    return !!locale && locale !== getDefaultLocaleName() ? locale : surveyLocalization.defaultLocale;
   }
   private getPlaceHolderCore(locale: string): string {
     const res = this.getPlaceholderText(locale);
     if (!!res) return res;
+    const localizationText = this.getLocalizationText(locale);
+    if (!!localizationText) return localizationText;
     if (this.context instanceof SurveyModel) {
       return surveyLocalization.getString(this.name, locale);
     }
