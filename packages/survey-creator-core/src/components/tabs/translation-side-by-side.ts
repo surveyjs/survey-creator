@@ -1,6 +1,6 @@
 import {
-  Action, AdaptiveActionContainer, Base, EventBase, Helpers, ILocalizableString, ItemValue,
-  LocalizableString, PageModel, PanelModel, PanelModelBase, Question,
+  Action, AdaptiveActionContainer, Base, DomDocumentHelper, EventBase, Helpers, ILocalizableString,
+  ItemValue, LocalizableString, PageModel, PanelModel, PanelModelBase, Question,
   QuestionCommentModel, QuestionDropdownModel, QuestionHtmlModel,
   QuestionMatrixDropdownModel, Serializer, SurveyModel, property,
   settings as surveySettings
@@ -30,6 +30,12 @@ const emptySpaceText = "\u00A0";
 const stringsHostName = "svc-translation-strings-host";
 // The id of the layout element the survey's own block is added under (see addStringsHost).
 const stringsLayoutElementId = "svc-translation-strings";
+
+// How long the strings block keeps trying to put the focus into the editor it was asked to open
+// (see TranslationElementStrings.focusItem): a rendered pane serves the request at once, and a
+// slow one within a few frames - after a second of waiting the string is not being rendered at all.
+const focusCellAttemptDelay = 50;
+const focusCellMaxAttempts = 20;
 
 // The element strings matrix has no source column of its own: a row title carries the string
 // name and its source-locale text, joined by this separator and turned into html by the matrix
@@ -1859,21 +1865,78 @@ export class TranslationElementStrings extends TranslationBase {
   // Puts the input focus into the block's editor of a string - the row's only cell is the
   // target locale one (see createStringsMatrix).
   public focusItem(locStr: ILocalizableString): void {
+    const question = this.getItemCellQuestion(locStr);
+    if (!question || this.isDisposed) return;
+    // The cell is usually not in the DOM yet: the block is created and focused in one step, and
+    // the panes render it afterwards. The request is kept until the input has the focus - every
+    // framework whose matrix cells report themselves as rendered (react/vue/angular, see their
+    // MatrixDropdownCell components) tries it again as soon as the cell is there, and the
+    // retries below cover the ones that report nothing and a cell that renders later still.
+    if (this.focusCell !== question) {
+      this.stopFocusCell();
+      this.focusCell = question;
+      question.onAfterRenderElement.add(this.onFocusCellRendered);
+    }
+    this.focusCellAttempts = focusCellMaxAttempts;
+    this.focusCellInput();
+  }
+  // The cell whose input is still owed the focus, and what is left of the waiting for it.
+  private focusCell: Question;
+  private focusCellAttempts: number = 0;
+  private focusCellTimer: any;
+  private onFocusCellRendered = (sender: any): void => {
+    if (sender === this.focusCell) {
+      this.focusCellInput();
+    }
+  };
+  private focusCellInput(): void {
+    const question = this.focusCell;
+    if (!question || this.isDisposed) return;
+    // The input itself, not question.focus(): the block usually renders inside a pane, and a
+    // question of a design-mode survey focuses nothing at all (see Question.focus). The block's
+    // cells are the one input of that survey the user types into, and they are made editable
+    // for that (see onMatrixCellCreated).
+    question.focusInputElement(false);
+    // Served, or given up on: a cell that never renders must not keep the timer alive.
+    if (this.isFocusCellFocused() || this.focusCellAttempts-- <= 0) {
+      this.stopFocusCell();
+      return;
+    }
+    if (!this.focusCellTimer) {
+      this.focusCellTimer = setTimeout(() => {
+        this.focusCellTimer = undefined;
+        this.focusCellInput();
+      }, focusCellAttemptDelay);
+    }
+  }
+  private isFocusCellFocused(): boolean {
+    const question = this.focusCell;
+    if (!question) return false;
+    const root: any = (<any>question.survey)?.rootElement?.getRootNode() || DomDocumentHelper.getDocument();
+    const active = !!root ? root.activeElement : undefined;
+    return !!active && active.id === question.inputId;
+  }
+  private stopFocusCell(): void {
+    if (!!this.focusCellTimer) {
+      clearTimeout(this.focusCellTimer);
+      this.focusCellTimer = undefined;
+    }
+    if (!this.focusCell) return;
+    this.focusCell.onAfterRenderElement.remove(this.onFocusCellRendered);
+    this.focusCell = undefined;
+  }
+  private getItemCellQuestion(locStr: ILocalizableString): Question {
     const matrix = this.stringsMatrix;
-    if (!matrix || !locStr) return;
+    if (!matrix || !locStr) return undefined;
     const rows = matrix.visibleRows;
     for (let i = 0; i < rows.length; i++) {
       const item = this.getMatrixItem(rows[i]);
       if (!!item && item.locString === locStr) {
         const cells = rows[i].cells;
-        // The input itself, not question.focus(): the block usually renders inside a pane, and
-        // a question of a design-mode survey focuses nothing at all (see Question.focus). The
-        // block's cells are the one input of that survey the user types into, and they are made
-        // editable for that (see onMatrixCellCreated).
-        cells[cells.length - 1].question.focusInputElement(false);
-        return;
+        return cells[cells.length - 1].question;
       }
     }
+    return undefined;
   }
   private getMatrixItemValue(row: any): ItemValue {
     return !!this.stringsMatrix && !!row ? ItemValue.getItemByValue(this.stringsMatrix.rows, row.name) : undefined;
@@ -2087,6 +2150,7 @@ export class TranslationElementStrings extends TranslationBase {
     }
   }
   public dispose(): void {
+    this.stopFocusCell();
     this.disposeStringsMatrix();
     if (!!this.captionActionsValue) {
       this.captionActionsValue.forEach(action => action.dispose());

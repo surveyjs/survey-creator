@@ -2053,6 +2053,8 @@ test("progress link: puts the input focus into the block's editor of the string 
   const row = getStringsRow(getStringsMatrix(model), realQ2.locTitle);
   expect(row).toBeTruthy();
   expect(focused).toEqual([row.cells[row.cells.length - 1].question]);
+  // Nothing is rendered here, so the block keeps retrying - closing it drops the request.
+  model.hideElementStrings();
 });
 
 test("progress link: the clear button drops the language strings after a confirmation and keeps translating it", () => {
