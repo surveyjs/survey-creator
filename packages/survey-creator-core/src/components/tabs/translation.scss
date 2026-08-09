@@ -91,6 +91,15 @@
 //   margin-top: var(--sjs2-spacing-x200);
 // }
 
+// The side-by-side language settings survey: its page is a property grid category
+// (see createSettingsSurvey), so its rows keep the row spacing of the designer's property
+// grid categories. Without it the title-less progress link sits right against the target
+// language dropdown - the other questions get their air from the padding of their titles.
+.st-language-settings__content {
+  row-gap: var(--sjs2-spacing-x200);
+  column-gap: var(--sjs2-spacing-x200);
+}
+
 .st-strings-header {
   .st-table__cell {
     background: none;

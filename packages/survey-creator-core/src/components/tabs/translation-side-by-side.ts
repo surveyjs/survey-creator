@@ -121,6 +121,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       survey.css = propertyGridCss;
       // The page plays the role of a property grid category content, as in the designer.
       survey.css.page.root += " spg-panel__content";
+      // The rows are children of the page content, not of the page root, so the gap between
+      // them belongs there - the designer's property grid spaces its category rows the same
+      // way (see .spg-container--multi-page .spg-page__content).
+      survey.css.page.content += " st-language-settings__content";
     });
     res.onValueChanged.add((sender, options) => {
       if (this._updatingSettingsSurvey || this.isDisposed) return;
