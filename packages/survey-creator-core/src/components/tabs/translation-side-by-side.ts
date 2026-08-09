@@ -148,9 +148,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     const question = <QuestionLinkValueModel>survey.getQuestionByName(translationProgressQuestionName);
     if (!question) return;
     // The clear button is shown by the model, not derived from "the value is not empty": the
-    // value here is a count, and it is the counts that decide what the question offers.
+    // value here is a count, and 0 is not an empty value - it is the counts that decide what
+    // the question offers (see updateTranslationProgress).
     question.allowClear = false;
-    question.showClear = true;
+    question.showClear = false;
     question.linkClickCallback = (): void => this.selectFirstUntranslatedString();
     (<any>question).clearClickCallback = (): void => this.clearTargetLocaleStrings();
   }
@@ -362,7 +363,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     question.linkValueText = editorLocalization.getString("ed.translationProgress")
       .replace("{0}", progress.translated.toString())
       .replace("{1}", progress.total.toString());
-    question.showClear = true;
+    // Nothing to clear - the language has no text of its own yet.
+    question.showClear = progress.translated > 0;
     // Nothing left to go to - the link stops being a button.
     question.isClickable = progress.translated < progress.total;
   }

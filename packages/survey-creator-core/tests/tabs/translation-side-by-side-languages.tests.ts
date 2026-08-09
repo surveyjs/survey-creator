@@ -105,14 +105,18 @@ test("a survey without translations: no counters, and the progress link appears 
   model.targetLocale = "de";
   expect(getProgressQuestion(creator).visible).toBeTruthy();
   expect(getProgressQuestion(creator).value).toBe(0);
+  // Nothing is stored for the language - there is nothing the clear button could drop.
+  expect(getProgressQuestion(creator).showClear).toBeFalsy();
   expect(getTargetProgress(creator, "de")).toBeFalsy();
   // The first stored string makes it a translation the survey has.
   model.targetSurvey.getQuestionByName("q1").locTitle.text = "Frage 1";
   expect(getProgressQuestion(creator).value).toBe(1);
+  expect(getProgressQuestion(creator).showClear).toBeTruthy();
   expect(getTargetProgress(creator, "de")).toBe("1 / 1");
   // And clearing the language's strings takes it back to where it started.
   mockConfirmDialog(() => model.clearTargetLocaleStrings());
   expect(getProgressQuestion(creator).value).toBe(0);
+  expect(getProgressQuestion(creator).showClear).toBeFalsy();
   expect(getTargetProgress(creator, "de")).toBeFalsy();
 });
 

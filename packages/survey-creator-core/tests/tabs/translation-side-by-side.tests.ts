@@ -1851,6 +1851,12 @@ test("progress link: shows the target language counts, and nothing without a tar
   expect(question.linkValueText).toBe(progress.translated + " of " + progress.total + " strings translated");
   expect(question.showClear).toBeTruthy();
   expect(question.isClickable).toBeTruthy();
+  // A language nothing is translated into: the counts are shown, but there is nothing to clear -
+  // 0 is a value like any other for a link question, so it is the counts that hide the button.
+  model.targetLocale = "fr";
+  expect(question.visible).toBeTruthy();
+  expect(question.value).toBe(0);
+  expect(question.showClear).toBeFalsy();
   // No target language - no progress to show.
   model.targetLocale = "";
   expect(question.visible).toBeFalsy();
@@ -1938,6 +1944,8 @@ test("progress link: the clear button drops the language strings after a confirm
     expect(model.targetLocale).toBe("de");
     expect(question.visible).toBeTruthy();
     expect(question.value).toBe(0);
+    // Nothing left to clear.
+    expect(question.showClear).toBeFalsy();
     expect(model.targetSurvey).toBeTruthy();
   } finally {
     surveySettings.confirmActionAsync = originalCallback;
