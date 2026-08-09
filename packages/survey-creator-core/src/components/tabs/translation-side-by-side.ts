@@ -1,8 +1,8 @@
 import {
   Action, AdaptiveActionContainer, Base, EventBase, Helpers, ILocalizableString, ItemValue,
   LocalizableString, PageModel, PanelModel, PanelModelBase, Question,
-  MatrixDynamicRowModel, QuestionCommentModel, QuestionDropdownModel, QuestionHtmlModel,
-  QuestionMatrixDropdownModel, QuestionMatrixDynamicModel, Serializer, SurveyModel, property,
+  QuestionCommentModel, QuestionDropdownModel, QuestionHtmlModel,
+  QuestionMatrixDropdownModel, Serializer, SurveyModel, property,
   settings as surveySettings
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
@@ -13,7 +13,6 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { StringEditorConnector } from "../string-editor";
 import { QuestionLinkValueModel } from "../link-value";
-import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
 import { getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { TranslationCopiesMap } from "./translation-copies-map";
 import {
@@ -86,8 +85,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // ITranslationDropdownOwner: the shared collapse state of the flattened dropdown/tagbox
   // choice lists, keyed by the question name - the panes must expand/collapse together.
   private choicesCollapsedState: { [questionName: string]: boolean } = {};
-  // The locale of the languages matrix row being removed - see the row removal events.
-  private removingLocale: string = "";
   public onChoicesCollapsedChanged = new EventBase<Base, any>();
 
   constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms") {
@@ -112,8 +109,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   protected get hasStringsSurveyUI(): boolean {
     return this.isSideBySideGrid;
   }
-  // The side-by-side property grid: a form/grid view switcher plus the source and target
-  // language dropdowns (the standard mode shows the languages matrix instead).
+  // The side-by-side property grid: a form/grid view switcher, the source and target language
+  // dropdowns and the progress link of the target language (the standard mode shows its
+  // locales matrix instead).
   protected createSettingsSurvey(): SurveyModel {
     const json = this.getSideBySideSettingsSurveyJSON();
     // titleLocationLeft = false: the language dropdown titles sit on top of the editors,
@@ -135,38 +133,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       if (options.name === "targetLocale") {
         this.targetLocale = this.getLocaleFromSettingValue(options.value);
       }
-    });
-    res.onMatrixCellCreated.add((sender, options) => {
-      if (options.question.name !== "languages" || options.column.name !== "displayName") return;
-      const cellQuestion = <QuestionLinkValueModel>options.cell.question;
-      cellQuestion.allowClear = false;
-      cellQuestion.showClear = false;
-      const matrix = <QuestionMatrixDynamicModel>options.question;
-      const row = options.row;
-      cellQuestion.linkClickCallback = () => {
-        // Resolved at click time: a row can be reused for a different locale after a refresh.
-        const locale = this.getLocaleByMatrixRow(matrix, row);
-        if (locale !== undefined)this.selectLanguage(locale);
-      };
-    });
-    // The matrix asks for the confirmation itself (confirmDelete); the row is gone by the time
-    // the strings are deleted, so the locale is remembered before the removal.
-    res.onMatrixRowRemoving.add((sender, options) => {
-      if (options.question.name !== "languages") return;
-      this.removingLocale = this.getLocaleByMatrixRow(<QuestionMatrixDynamicModel>options.question, options.row);
-    });
-    res.onMatrixRowRemoved.add((sender, options) => {
-      if (options.question.name !== "languages") return;
-      const locale = this.removingLocale;
-      this.removingLocale = "";
-      if (!!locale)this.deleteLanguage(locale);
-    });
-    // The library's remove action renders as a titled button outside the runtime themes; both
-    // helpers turn it into the icon button of the creator's property grid matrices.
-    res.onGetMatrixRowActions.add((sender, options) => {
-      if (options.question.name !== "languages") return;
-      updateMatrixRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);
-      updateMatixActionsAppearance(options.actions);
     });
     this.setupTranslationProgressQuestion(res);
     return res;
@@ -220,21 +186,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
           // The link renders the progress text this model assigns (see updateTranslationProgress),
           // not the question's own value - the value is the number of translated strings.
           showValueInLink: true
-        },
-        {
-          type: "matrixdynamic",
-          name: "languages",
-          title: editorLocalization.getString("ed.translationLanguages"),
-          titleLocation: "top",
-          columns: [
-            { name: "displayName", cellType: "linkvalue" },
-            { name: "progress", cellType: "expression", expression: "{row.progress}" }
-          ],
-          showHeader: false,
-          allowAddRows: false,
-          confirmDelete: true,
-          confirmDeleteText: editorLocalization.getString("ed.translationDeleteLanguage"),
-          rowCount: 0
         }
       ]
     };
@@ -252,22 +203,16 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.updateTargetLocaleQuestion(<QuestionDropdownModel>survey.getQuestionByName("targetLocale"), target, source);
       const viewQuestion = survey.getQuestionByName("viewMode");
       if (!!viewQuestion) viewQuestion.value = this.view;
-      this.updateLanguagesMatrixSelection();
       this.updateTranslationProgress();
     } finally {
       this._updatingSettingsSurvey = false;
     }
   }
-  public get languagesQuestion(): QuestionMatrixDynamicModel {
-    const survey = this.settingsSurvey;
-    return !!survey ? <QuestionMatrixDynamicModel>survey.getQuestionByName("languages") : undefined;
-  }
-  // The matrix row set - the languages the survey has translations for: every locale with at least
-  // one stored string. The default language is not one of them - it is what the translations are
-  // measured against, not a translation. No synthetic rows either - a freshly targeted language
-  // appears only once its first string is stored (the target dropdown already shows what is being
-  // translated). The pickable set is wider, see getTargetLocales.
-  private getMatrixLanguages(): Array<string> {
+  // The languages the survey has translations for: every locale with at least one stored string.
+  // The default language is not one of them - it is what the translations are measured against,
+  // not a translation. The set of languages that can be translated into is wider, see
+  // getTargetLocales.
+  private getTranslatedLocales(): Array<string> {
     const res: Array<string> = [];
     if (!this.survey) return res;
     this.survey.getUsedLocales().forEach(loc => {
@@ -277,14 +222,14 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
     return res;
   }
-  // The whole-survey used-strings tree: the progress denominator of the languages matrix and the
+  // The whole-survey used-strings tree: the progress denominator of the language counts and the
   // source of the element indicator states. Never scoped by the grid view's page filter and
   // independent of the view's strings filter.
   //
   // Building it instantiates a TranslationGroup per object and a TranslationItem per string of
-  // the survey, so it is kept between edits - every text edit refreshes both the matrix and the
+  // the survey, so it is kept between edits - every text edit refreshes both the counts and the
   // indicators, and rebuilding it twice per keystroke is what a large survey feels. It is dropped
-  // by every full refresh of the matrix (updateLanguagesMatrix, so also by a reset) and by a
+  // by every full counts refresh (resetTranslationCounters, so also by a reset) and by a
   // structural change of the survey (see onCreatorSurveyPropertyChanged). A text edit keeps it:
   // a string that has no text in any language yet is not in the tree, so its first translation
   // moves no counter until the next full refresh.
@@ -318,77 +263,16 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     return { translated: translated, total: usedItems.length };
   }
   // The full refresh: the used strings may differ from the cached tree, so it is dropped first.
-  public updateLanguagesMatrix(): void {
+  public resetTranslationCounters(): void {
     this.resetUsedStringsCache();
-    this.updateLanguagesMatrixCore();
+    this.updateTranslationCounters();
   }
-  // Refills the rows from the current used-strings tree. The row set follows getMatrixLanguages(),
-  // so a language that has just got its first string gets a row here as well. A survey without
-  // translations has no rows at all - the matrix is hidden then, an empty one says nothing.
-  private updateLanguagesMatrixCore(): void {
-    const question = this.languagesQuestion;
-    if (!question || this.isDisposed || !this.survey) return;
-    const items = this.getUsedStringsItems();
-    const locales = this.getMatrixLanguages();
-    question.value = locales.map(loc => {
-      return {
-        name: loc,
-        displayName: this.getLocaleName(loc),
-        progress: this.getLanguageProgressText(loc, items)
-      };
-    });
-    question.visible = locales.length > 0;
-    this.updateLanguagesMatrixSelection();
-    // The target dropdown and the progress link count the same used strings the matrix rows do,
-    // so they follow every full refresh of the matrix.
+  // Everything counted over the used strings: the per-language counters of the target dropdown
+  // and the progress link of the current target language.
+  private updateTranslationCounters(): void {
+    if (this.isDisposed || !this.survey) return;
     this.refreshTargetLocaleChoices();
     this.updateTranslationProgress();
-  }
-  private getLanguageProgressText(locale: string, items: Array<TranslationItem>): string {
-    const progress = this.getTranslationProgress(locale, items);
-    return progress.translated + "/" + progress.total;
-  }
-  // The current target's row shows as selected (the linkvalue cell's isSelected drives the css).
-  private updateLanguagesMatrixSelection(): void {
-    const question = this.languagesQuestion;
-    if (!question) return;
-    const selectedRow = this.getMatrixRowByLocale(question, this.targetLocale);
-    question.visibleRows.forEach(row => {
-      const cellQuestion = this.getLanguageCellQuestion(row);
-      if (!!cellQuestion) cellQuestion.isSelected = row === selectedRow;
-    });
-  }
-  // The language cell of a languages matrix row - the linkvalue the user clicks to retarget.
-  private getLanguageCellQuestion(row: any): QuestionLinkValueModel {
-    const cellQuestion = !!row && !!row.cells[0] ? row.cells[0].question : undefined;
-    return !!cellQuestion && cellQuestion.getType() === "linkvalue" ? <QuestionLinkValueModel>cellQuestion : undefined;
-  }
-  // A matrix language click behaves exactly like picking the language in the target dropdown;
-  // per the dropdowns' mutual-exclusion rule, taking over the source's language resets the
-  // source to the default one.
-  public selectLanguage(locale: string): void {
-    if (this.isDisposed) return;
-    if (!!locale && (this.sourceLocale || "") === locale) {
-      this.sourceLocale = "";
-    }
-    this.targetLocale = locale;
-  }
-  // The languages matrix asks for a confirmation itself (confirmDelete), so this is the plain
-  // deletion - it removes the locale strings of the whole survey.
-  public deleteLanguage(locale: string): void {
-    if (!locale || this.isDisposed) return;
-    this.deleteSurveyLocaleStrings(locale);
-    // The deleted language has no strings and no matrix row left - neither dropdown may keep
-    // pointing at it.
-    if ((this.sourceLocale || "") === locale) {
-      this.sourceLocale = "";
-    }
-    if ((this.targetLocale || "") === locale) {
-      this.targetLocale = "";
-    }
-    if (!this.isSideBySideGrid) {
-      this.rebuildInstances();
-    }
   }
   private deleteSurveyLocaleStrings(locale: string): void {
     // The deletion always covers the whole survey; the grid view's root can be scoped to a
@@ -405,9 +289,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.deleteLocaleStrings(locale);
     }
   }
-  // The clear button of the progress link: unlike the languages matrix removal, the language
-  // keeps being translated - it loses its texts and starts from zero. The confirmation is asked
-  // here (the matrix asks its own through confirmDelete).
+  // The clear button of the progress link: the language keeps being translated - it loses its
+  // texts and starts from zero.
   public clearTargetLocaleStrings(): void {
     const locale = this.targetLocale || "";
     if (!locale || this.isDisposed || this.readOnly) return;
@@ -427,8 +310,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
   }
   // Bulk write operations (CSV import, apply-translations, locale deletion) run through
-  // runWithoutSurveyReaction and refresh the languages matrix once via the reset that follows;
-  // a single string edit refreshes it immediately.
+  // runWithoutSurveyReaction and refresh the counters once via the reset that follows;
+  // a single string edit refreshes them immediately.
   private _bulkTextAction: boolean = false;
   public runWithoutSurveyReaction(fn: () => void): void {
     const wasBulk = this._bulkTextAction;
@@ -442,15 +325,12 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   public performItemLocTextAction(item: TranslationItem, locale: string, newText: string): void {
     super.performItemLocTextAction(item, locale, newText);
     if (!this._bulkTextAction) {
-      const row = this.getMatrixRowByLocale(this.languagesQuestion, locale);
-      // A default-language edit moves the denominator of every row (it can add a used string), and
-      // a language with no row yet needs one. Any other edit moves the progress of the edited
-      // language alone - including a cleared text: the language keeps its row showing no progress
-      // until the next full refresh drops it.
-      if (!row || isDefaultLocale(locale)) {
-        this.updateLanguagesMatrix();
+      // A default-language edit moves the denominator of every count (it can add a used string),
+      // so the tree is rebuilt then. Any other edit moves the counters of the edited language
+      // alone, over the tree that is already there.
+      if (isDefaultLocale(locale)) {
+        this.resetTranslationCounters();
       } else {
-        this.updateLanguageProgress(locale);
         this.updateTargetLocaleProgress(locale);
         if ((this.targetLocale || "") === locale) {
           this.updateTranslationProgress();
@@ -458,18 +338,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       }
       this.updateElementTranslationStates();
     }
-  }
-  // Rewrites the progress text of one language, leaving the other rows untouched: the used
-  // strings are counted for that language only and the text goes into its own cell.
-  private updateLanguageProgress(locale: string): void {
-    const row = this.getMatrixRowByLocale(this.languagesQuestion, locale);
-    const progressQuestion = !!row ? row.getQuestionByName("progress") : undefined;
-    if (!progressQuestion) {
-      // The tree still describes the survey here - only the row could not be resolved.
-      this.updateLanguagesMatrixCore();
-      return;
-    }
-    progressQuestion.value = this.getLanguageProgressText(locale, this.getUsedStringsItems());
   }
   private get translationProgressQuestion(): QuestionLinkValueModel {
     const survey = this.settingsSurvey;
@@ -561,7 +429,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   }
   public reset(alwaysReset: boolean = true): void {
     super.reset(alwaysReset);
-    this.updateLanguagesMatrix();
+    this.resetTranslationCounters();
     this.updateElementTranslationStates();
   }
   // The forms view's per-element indicator: every target-pane element with a title row (the
@@ -676,9 +544,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
   }
   // The choice list of the target dropdown: every pickable language with the share of the survey
-  // already translated into it - the same numbers the languages matrix shows, counted over the
-  // same whole-survey used strings. Counted here, once for the whole list (the item component only
-  // renders the text), and the list opens with the languages that have something translated first.
+  // already translated into it, counted over the whole-survey used strings. Counted here, once
+  // for the whole list (the item component only renders the text), and the list opens with the
+  // languages that have something translated first.
   private updateTargetLocaleChoices(question: QuestionDropdownModel, selected: string, excluded: string): void {
     if (!question) return;
     const items = this.getUsedStringsItems();
@@ -737,7 +605,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     return !!survey ? <QuestionDropdownModel>survey.getQuestionByName("targetLocale") : undefined;
   }
   // The single-language counterpart of the refresh above, for an edit that can only move one
-  // language's counter - the same split the languages matrix makes.
+  // language's counter.
   private updateTargetLocaleProgress(locale: string): void {
     const question = this.targetLocaleQuestion;
     if (!question || this.isDisposed) return;
@@ -760,22 +628,22 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       .map(loc => new ItemValue(this.toLocaleSettingValue(loc), this.getLocaleName(loc)));
   }
   // The choice list of the source dropdown - the languages that have something to translate from:
-  // the default language first, then the ones the survey stores strings for (the matrix rows).
-  // The currently selected source is kept even when it loses its last string (an undo, a CSV
-  // import), so the dropdown never holds a value without a matching choice.
+  // the default language first, then the ones the survey stores strings for. The currently
+  // selected source is kept even when it loses its last string (an undo, a CSV import), so the
+  // dropdown never holds a value without a matching choice.
   private getSourceLocales(): Array<string> {
     const res: Array<string> = [""];
     const add = (loc: string): void => {
       if (!isDefaultLocale(loc) && res.indexOf(loc) < 0) res.push(loc);
     };
-    this.getMatrixLanguages().forEach(loc => add(loc));
+    this.getTranslatedLocales().forEach(loc => add(loc));
     add(this.sourceLocale);
     return res;
   }
   // The choice list of the target dropdown - every language that can be translated into: the
   // supported locales plus the ones the survey already uses, so a translation can be started for
-  // a language with no strings yet (unlike the matrix rows, see getMatrixLanguages). The default
-  // language is never a target: it is the reference the translations are measured against.
+  // a language with no strings yet (unlike getTranslatedLocales). The default language is never
+  // a target: it is the reference the translations are measured against.
   private getTargetLocales(): Array<string> {
     const res: Array<string> = [];
     const add = (loc: string): void => {
@@ -1002,16 +870,15 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (obj === this.survey && propName === "locale") return;
     // The element strings dialogs write into the real survey string by string, so this runs per
     // edit there as well: a text change keeps the used-strings tree, a structural one rebuilds it.
-    // Dropped here and not through updateLanguagesMatrix below, because the pane rebuild of a
+    // Dropped here and not through resetTranslationCounters below, because the pane rebuild of a
     // structural change computes the indicator states of the fresh copies on its way (see
     // rebuildInstances).
     if (!this.getLocStrByName(obj, propName)) {
       this.resetUsedStringsCache();
     }
     this.onCreatorSurveyPropertyChangedCore(obj, propName);
-    // Any real-survey change can move the counters, change the denominator (structural
-    // changes) or add/remove a locale row (a change restoring/removing the last string).
-    this.updateLanguagesMatrixCore();
+    // Any real-survey change can move the counters, and a structural one their denominator.
+    this.updateTranslationCounters();
     this.updateElementTranslationStates();
     // The open block edits the same strings as the panes - a change made elsewhere (an inline
     // editor, undo/redo, the machine translation) shows up in its cells. A structural change

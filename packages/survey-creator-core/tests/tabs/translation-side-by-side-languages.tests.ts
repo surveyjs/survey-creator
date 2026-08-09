@@ -1,5 +1,5 @@
-import { Action, IAction, QuestionDropdownModel, QuestionMatrixDynamicModel, settings as surveySettings } from "survey-core";
-import { TranslationSideBySide } from "../../src/components/tabs/translation-side-by-side";
+import { ItemValue, QuestionDropdownModel, settings as surveySettings } from "survey-core";
+import { TranslationSideBySide, getTranslationLocaleProgress } from "../../src/components/tabs/translation-side-by-side";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
 import { CreatorTester } from "../creator-tester";
@@ -31,212 +31,127 @@ function createSideBySideCreator(json: any = languagesJSON, view?: "forms" | "gr
 function getModel(creator: CreatorTester): TranslationSideBySide {
   return <TranslationSideBySide>(<TabTranslationPlugin>creator.getPlugin("translation")).model;
 }
-function getLanguagesQuestion(creator: CreatorTester): QuestionMatrixDynamicModel {
-  return getModel(creator).languagesQuestion;
-}
-function getRows(creator: CreatorTester): Array<any> {
-  return getLanguagesQuestion(creator).value || [];
-}
-function getRowLink(creator: CreatorTester, index: number): QuestionLinkValueModel {
-  return <QuestionLinkValueModel>getLanguagesQuestion(creator).visibleRows[index].cells[0].question;
-}
-// The matrix builds the "remove-row" action itself for the rows it may remove (canRemoveRow),
-// so the actions of an existing row are the default ones passed through the creator's hook.
-function getRowActions(creator: CreatorTester, index: number, actions: Array<IAction>): Array<IAction> {
-  const matrix = getLanguagesQuestion(creator);
-  const row = matrix.visibleRows[index];
-  return getModel(creator).settingsSurvey.getUpdatedMatrixRowActions(matrix, row, actions);
-}
-function canRemoveRow(creator: CreatorTester, index: number): boolean {
-  const matrix = getLanguagesQuestion(creator);
-  return matrix.canRemoveRows && matrix.canRemoveRow(matrix.visibleRows[index]);
-}
-function removeRow(creator: CreatorTester, index: number): void {
-  const matrix = getLanguagesQuestion(creator);
-  matrix.removeRowUI(matrix.visibleRows[index]);
-}
 function getTargetDropdown(creator: CreatorTester): QuestionDropdownModel {
   return <QuestionDropdownModel>getModel(creator).settingsSurvey.getQuestionByName("targetLocale");
 }
 function getSourceDropdown(creator: CreatorTester): QuestionDropdownModel {
   return <QuestionDropdownModel>getModel(creator).settingsSurvey.getQuestionByName("sourceLocale");
 }
-// The matrix confirms a row removal through the library's confirm dialog (settings.showDialog):
-// the mock captures its options so a test can apply or cancel it.
-function mockConfirmDialog(run: (getOptions: () => any) => void): void {
-  const prevShowDialog = surveySettings.showDialog;
-  let confirmOptions: any = undefined;
-  surveySettings.showDialog = <any>((options: any) => {
-    confirmOptions = options;
-    return { footerToolbar: { getActionById: (id: string) => new Action({ id: id }), setActionsAppearance: () => { } } };
-  });
+function getProgressQuestion(creator: CreatorTester): QuestionLinkValueModel {
+  return <QuestionLinkValueModel>getModel(creator).settingsSurvey.getQuestionByName("translationProgress");
+}
+// The share of the survey translated into a language, as the target dropdown list shows it -
+// absent for a language nothing is translated into.
+function getTargetProgress(creator: CreatorTester, locale: string): string {
+  const choice = getTargetDropdown(creator).choices.filter((item: ItemValue) => item.value === locale)[0];
+  return !!choice ? getTranslationLocaleProgress(choice) : undefined;
+}
+function getChoiceValues(question: QuestionDropdownModel): Array<any> {
+  return question.choices.map((item: ItemValue) => item.value);
+}
+function mockConfirmDialog(run: () => void): void {
+  const originalCallback = surveySettings.confirmActionAsync;
+  surveySettings.confirmActionAsync = (text, callback) => {
+    callback(true);
+    return true;
+  };
   try {
-    run(() => confirmOptions);
+    run();
   } finally {
-    surveySettings.showDialog = prevShowDialog;
+    surveySettings.confirmActionAsync = originalCallback;
   }
 }
 
-test("languages matrix rows: the survey's translation languages only, no default row, no row for a strings-less target", () => {
+test("translation languages: the ones the survey stores strings for, never a language without them", () => {
   const creator = createSideBySideCreator();
-  const rows = getRows(creator);
-  expect(rows.map(row => row.name)).toEqual(["de"]);
-  expect(rows[0].progress).toBe("1/2");
-  // Picking a language without stored strings in the target dropdown adds no row - the row
-  // appears only when the first string is stored for it.
+  // German is the survey's only translation - the target dropdown shows how much of the survey
+  // it covers, and it is what the source dropdown offers next to the default language (not
+  // while it is the target itself: the two dropdowns never hold the same language).
+  expect(getTargetProgress(creator, "de")).toBe("1 / 2");
+  expect(getChoiceValues(getSourceDropdown(creator))).toEqual(["default"]);
+  // Picking a language without stored strings makes it the target, but not a translation the
+  // survey has: no counter of its own, and nothing to translate from.
   getTargetDropdown(creator).value = "fr";
   expect(getModel(creator).targetLocale).toBe("fr");
-  expect(getRows(creator).map(row => row.name)).toEqual(["de"]);
+  expect(getTargetProgress(creator, "fr")).toBeFalsy();
+  expect(getChoiceValues(getSourceDropdown(creator))).toEqual(["default", "de"]);
 });
 
-test("the default language is never a row, whatever the survey locale is", () => {
+test("the default language is never a translation language, whatever the survey locale is", () => {
   ["de", "en", ""].forEach(locale => {
     const json = JSON.parse(JSON.stringify(languagesJSON));
     json.locale = locale;
     const creator = createSideBySideCreator(json);
-    expect(getRows(creator).map(row => row.name)).toEqual(["de"]);
+    getModel(creator).targetLocale = "it";
+    // It is the reference the translations are measured against: it is offered as a source
+    // (as "default"), never as a target and never with a counter of its own.
+    expect(getChoiceValues(getSourceDropdown(creator))).toEqual(["default", "de"]);
+    expect(getChoiceValues(getTargetDropdown(creator)).indexOf("default")).toBe(-1);
+    expect(getTargetProgress(creator, "en")).toBeFalsy();
   });
 });
 
-test("the matrix is hidden while the survey has no translations", () => {
+test("a survey without translations: no counters, and the progress link appears with the target language", () => {
   const creator = createSideBySideCreator({
     pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Question 1" }] }]
   });
   const model = getModel(creator);
-  expect(getRows(creator)).toHaveLength(0);
-  expect(getLanguagesQuestion(creator).visible).toBeFalsy();
-  // Targeting a language shows nothing yet - the row (and the matrix) appears with its first string.
+  expect(getChoiceValues(getSourceDropdown(creator))).toEqual(["default"]);
+  expect(getTargetDropdown(creator).choices.every((item: ItemValue) => !getTranslationLocaleProgress(item))).toBeTruthy();
+  // No language is being translated - the progress link says nothing.
+  expect(model.targetLocale || "").toBe("");
+  expect(getProgressQuestion(creator).visible).toBeFalsy();
+  // Targeting a language shows the progress of a translation that has not started yet.
   model.targetLocale = "de";
-  expect(getLanguagesQuestion(creator).visible).toBeFalsy();
+  expect(getProgressQuestion(creator).visible).toBeTruthy();
+  expect(getProgressQuestion(creator).value).toBe(0);
+  expect(getTargetProgress(creator, "de")).toBeFalsy();
+  // The first stored string makes it a translation the survey has.
   model.targetSurvey.getQuestionByName("q1").locTitle.text = "Frage 1";
-  expect(getRows(creator).map(row => row.name)).toEqual(["de"]);
-  expect(getLanguagesQuestion(creator).visible).toBeTruthy();
-  // And it is hidden again when the last language is deleted.
-  mockConfirmDialog((getOptions) => {
-    removeRow(creator, 0);
-    getOptions().onApply();
-    expect(getRows(creator)).toHaveLength(0);
-    expect(getLanguagesQuestion(creator).visible).toBeFalsy();
-  });
+  expect(getProgressQuestion(creator).value).toBe(1);
+  expect(getTargetProgress(creator, "de")).toBe("1 / 1");
+  // And clearing the language's strings takes it back to where it started.
+  mockConfirmDialog(() => model.clearTargetLocaleStrings());
+  expect(getProgressQuestion(creator).value).toBe(0);
+  expect(getTargetProgress(creator, "de")).toBeFalsy();
 });
 
-test("every row can be removed and gets the creator's remove action", () => {
-  const creator = createSideBySideCreator();
-  expect(canRemoveRow(creator, 0)).toBeTruthy();
-  const action = <Action>getRowActions(creator, 0, [new Action({ id: "remove-row" })])[0];
-  expect(action.iconName).toBe("icon-delete");
-  expect(action.showTitle).toBeFalsy();
-  expect(action.appearance.style).toBe("alert");
-});
-
-test("a row appears with the first stored string of a new target and survives until the next full refresh when it is cleared", () => {
+test("a language joins the translations with its first stored string and leaves them when it is cleared", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   model.targetLocale = "fr";
-  expect(getRows(creator).map(row => row.name)).toEqual(["de"]);
+  expect(getTargetProgress(creator, "fr")).toBeFalsy();
   model.targetSurvey.getQuestionByName("q2").locTitle.text = "Question 2 fr";
-  const rows = getRows(creator);
-  expect(rows.map(row => row.name)).toEqual(["de", "fr"]);
-  expect(rows[1].progress).toBe("1/2");
-  // Clearing the strings of a language does not refill the matrix - the row stays with no
-  // progress instead, which is what a language being worked on looks like anyway.
-  model.targetSurvey.getQuestionByName("q2").locTitle.text = "";
-  const clearedRows = getRows(creator);
-  expect(clearedRows.map(row => row.name)).toEqual(["de", "fr"]);
-  expect(clearedRows[1].progress).toBe("0/2");
-  // The next full refresh - here the first string of another language - drops it.
+  expect(getTargetProgress(creator, "fr")).toBe("1 / 2");
+  // The source dropdown follows on the next language switch - it lists what can be translated from.
   model.targetLocale = "it";
-  model.targetSurvey.getQuestionByName("q2").locTitle.text = "Question 2 it";
-  expect(getRows(creator).map(row => row.name)).toEqual(["de", "it"]);
-});
-
-test("clicking a language retargets: model, target dropdown and row marking; the survey locale is untouched", () => {
-  const creator = createSideBySideCreator();
-  const model = getModel(creator);
-  expect(model.targetLocale).toBe("de");
-  expect(getRowLink(creator, 0).isSelected).toBeTruthy();
-  // No row is marked while no language is being translated.
-  model.targetLocale = "";
-  expect(getRowLink(creator, 0).isSelected).toBeFalsy();
-  getRowLink(creator, 0).doLinkClick();
-  expect(model.targetLocale).toBe("de");
-  expect(getTargetDropdown(creator).value).toBe("de");
-  expect(model.targetSurvey.locale).toBe("de");
-  expect(getRowLink(creator, 0).isSelected).toBeTruthy();
-  // The survey locale is the initial hint only - retargeting never writes it.
-  expect(creator.survey.locale).toBe("de");
-});
-
-test("clicking the source's language takes it over as the target and resets the source to default", () => {
-  const creator = createSideBySideCreator();
-  const model = getModel(creator);
+  expect(getChoiceValues(getSourceDropdown(creator))).toEqual(["default", "de", "fr"]);
+  // Clearing the only French string drops the counter, and French is not a source any more.
+  creator.survey.getQuestionByName("q2").locTitle.setLocaleText("fr", "");
+  expect(getTargetProgress(creator, "fr")).toBeFalsy();
   model.targetLocale = "fr";
-  model.sourceLocale = "de";
-  expect(getSourceDropdown(creator).value).toBe("de");
-  const deIndex = getRows(creator).map(row => row.name).indexOf("de");
-  getRowLink(creator, deIndex).doLinkClick();
-  expect(model.targetLocale).toBe("de");
-  expect(model.sourceLocale || "").toBe("");
-  expect(getSourceDropdown(creator).value).toBe("default");
-  expect(getTargetDropdown(creator).value).toBe("de");
+  expect(getChoiceValues(getSourceDropdown(creator))).toEqual(["default", "de"]);
 });
 
 test("counts update immediately on an inline edit and follow a CSV import", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  expect(getRows(creator)[0].progress).toBe("1/2");
+  const progress = getProgressQuestion(creator);
+  expect(progress.value).toBe(1);
+  expect(getTargetProgress(creator, "de")).toBe("1 / 2");
   model.targetSurvey.getQuestionByName("q2").locTitle.text = "Frage 2";
-  expect(getRows(creator)[0].progress).toBe("2/2");
+  expect(progress.value).toBe(2);
+  expect(getTargetProgress(creator, "de")).toBe("2 / 2");
   model.targetSurvey.getQuestionByName("q2").locTitle.text = "";
-  expect(getRows(creator)[0].progress).toBe("1/2");
+  expect(progress.value).toBe(1);
+  expect(getTargetProgress(creator, "de")).toBe("1 / 2");
+  // A bulk write refreshes the counts once, through the reset that follows it.
   model.importFromNestedArray([
     ["description", "fr"],
     ["survey.page1.q1.title", "Question 1 fr"]
   ]);
-  const rows = getRows(creator);
-  expect(rows.map(row => row.name)).toEqual(["de", "fr"]);
-  expect(rows[1].progress).toBe("1/2");
-});
-
-test("delete language: confirm dialog, cancel keeps the locale, apply removes it and clears the target", () => {
-  const creator = createSideBySideCreator();
-  const model = getModel(creator);
-  mockConfirmDialog((getOptions) => {
-    removeRow(creator, 0);
-    // The matrix removes nothing until its confirmation is applied.
-    expect(getOptions()).toBeTruthy();
-    expect(getRows(creator).map(row => row.name)).toEqual(["de"]);
-    // Cancel keeps the language and its strings.
-    getOptions().onCancel();
-    expect(getRows(creator).map(row => row.name)).toEqual(["de"]);
-    expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("Frage 1");
-    // Apply removes the strings, leaves no language to translate and hides the matrix.
-    getOptions().onApply();
-    expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBeFalsy();
-    expect(getRows(creator)).toHaveLength(0);
-    expect(getLanguagesQuestion(creator).visible).toBeFalsy();
-    expect(model.targetLocale || "").toBe("");
-    expect(getTargetDropdown(creator).isEmpty()).toBeTruthy();
-    expect(model.targetSurvey).toBeFalsy();
-    // The survey keeps the locale it was loaded with - the tab never writes it.
-    expect(creator.survey.locale).toBe("de");
-  });
-});
-
-test("delete language: the source dropdown falls back to the default language", () => {
-  const creator = createSideBySideCreator();
-  const model = getModel(creator);
-  model.targetLocale = "fr";
-  model.sourceLocale = "de";
-  mockConfirmDialog((getOptions) => {
-    removeRow(creator, 0);
-    getOptions().onApply();
-    expect(model.sourceLocale || "").toBe("");
-    expect(getSourceDropdown(creator).value).toBe("default");
-    expect(model.sourceSurvey.locale).toBeFalsy();
-    // The target was another language - it is kept.
-    expect(model.targetLocale).toBe("fr");
-  });
+  expect(getTargetProgress(creator, "de")).toBe("1 / 2");
+  expect(getTargetProgress(creator, "fr")).toBe("1 / 2");
 });
 
 const twoPagesJSON = {
@@ -247,19 +162,20 @@ const twoPagesJSON = {
   ]
 };
 
-test("grid view: counts ignore the page scope and delete covers the whole survey", () => {
+test("grid view: counts ignore the page scope and clearing the language covers the whole survey", () => {
   const creator = createSideBySideCreator(twoPagesJSON, "grid");
   const model = getModel(creator);
   expect(model.isSideBySideGrid).toBeTruthy();
   model.filteredPage = creator.survey.pages[0];
   // The denominator is the whole survey, never the grid's page scope.
-  expect(getRows(creator)[0].progress).toBe("2/2");
-  mockConfirmDialog((getOptions) => {
-    removeRow(creator, 0);
-    getOptions().onApply();
-    expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBeFalsy();
-    expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBeFalsy();
-    expect(getRows(creator)).toHaveLength(0);
-    expect(getLanguagesQuestion(creator).visible).toBeFalsy();
-  });
+  const progress = getProgressQuestion(creator);
+  expect(progress.value).toBe(2);
+  expect(progress.linkValueText).toBe("2 of 2 strings translated");
+  expect(getTargetProgress(creator, "de")).toBe("2 / 2");
+  // And so is the deletion.
+  mockConfirmDialog(() => progress.doClearClick());
+  expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBeFalsy();
+  expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBeFalsy();
+  expect(getProgressQuestion(creator).value).toBe(0);
+  expect(getTargetProgress(creator, "de")).toBeFalsy();
 });

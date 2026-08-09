@@ -339,15 +339,14 @@ test("the selected source language stays in the list after it loses its last str
   model.targetLocale = "it";
   model.sourceLocale = "de";
   expect(getChoiceValues(creator, "sourceLocale")).toEqual(["default", "de"]);
-  // Removing the last German string (an undo, a CSV import) drops its matrix row, but the
-  // dropdown must not lose the value it holds.
+  // Removing the last German string (an undo, a CSV import) leaves the survey without any
+  // translation, but the dropdown must not lose the value it holds.
   creator.survey.getQuestionByName("q1").locTitle.setLocaleText("de", "");
-  expect(model.languagesQuestion.visible).toBeFalsy();
   expect(getChoiceValues(creator, "sourceLocale")).toEqual(["default", "de"]);
   expect(getSettingsQuestion(creator, "sourceLocale").value).toBe("de");
 });
 
-test("onTranslationLocaleInitiallySelected filters the source dropdown as it filters the matrix rows", () => {
+test("onTranslationLocaleInitiallySelected filters the source dropdown", () => {
   const json = JSON.parse(JSON.stringify(sideBySideJSON));
   json.pages[1].elements[0].title = { default: "Question 4", fr: "Question 4 fr" };
   const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
@@ -358,7 +357,6 @@ test("onTranslationLocaleInitiallySelected filters the source dropdown as it fil
   creator.activeTab = "translation";
   const model = getModel(creator);
   model.targetLocale = "it";
-  expect(model.languagesQuestion.value.map(row => row.name)).toEqual(["de"]);
   expect(getChoiceValues(creator, "sourceLocale")).toEqual(["default", "de"]);
 });
 
