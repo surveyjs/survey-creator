@@ -1754,10 +1754,8 @@ export class TranslationElementStrings extends TranslationBase {
     // A string with nothing stored still has a source text when the library localizes it
     // itself - the row would carry its name alone otherwise (see getSourceText).
     const source = item.getSourceText(locale) || "";
-    // Such a string is shown by its text alone: its name is not a name of a text the survey
-    // has, it describes where the library uses the text ("Start Survey" button text), and the
-    // text right below it says the same thing.
-    if (!!source && !item.getLocText(locale)) return rowSourceSeparator + source;
+    // The name is always there, whether the text below it is the survey's own or the one the
+    // library falls back to: the row is named by the property it edits.
     const name = (!!path ? path + ": " : "") + item.text;
     return !!source ? name + rowSourceSeparator + source : name;
   }
@@ -1768,8 +1766,7 @@ export class TranslationElementStrings extends TranslationBase {
     const index = text.indexOf(rowSourceSeparator);
     const name = index < 0 ? text : text.substring(0, index);
     const source = index < 0 ? "" : text.substring(index + rowSourceSeparator.length);
-    // A row of a library-localized string carries its text alone (see getRowTitleText).
-    let res = !!name ? "<span class=\"st-element-strings__row-name\">" + escapeHtmlText(name) + "</span>" : "";
+    let res = "<span class=\"st-element-strings__row-name\">" + escapeHtmlText(name) + "</span>";
     if (!!source) {
       res += "<span class=\"st-element-strings__row-source\">" + escapeHtmlText(source) + "</span>";
     }

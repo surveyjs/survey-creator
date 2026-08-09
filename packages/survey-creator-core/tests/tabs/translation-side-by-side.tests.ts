@@ -1812,24 +1812,65 @@ test("element strings block: a string the library localizes itself shows its sou
   const realB1 = <any>creator.survey.getQuestionByName("b1");
   const titleRow = getStringsRowItem(stringsMatrix, realB1.locLabelTrue);
   expect(titleRow).toBeTruthy();
-  // The merged first cell shows the source-locale text the library gives the string, and it
-  // shows it alone: the string's name describes where the library uses that very text.
+  // The merged first cell shows the property name, as every row does, and the source-locale
+  // text the library gives the string below it.
+  const labelTrueName = editorLocalization.getPropertyNameInEditor("boolean", "labelTrue");
+  expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-name");
+  expect(titleRow.locText.renderedHtml).toContain(labelTrueName);
   expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-source");
   expect(titleRow.locText.renderedHtml).toContain("Yes");
-  expect(titleRow.locText.renderedHtml).not.toContain("st-element-strings__row-name");
-  // The cell's accessible name is the text alone as well.
-  expect(getStringsRow(stringsMatrix, realB1.locLabelTrue).getAccessbilityText()).toBe("Yes");
+  // The cell's accessible name reads the two lines as one sentence.
+  expect(getStringsRow(stringsMatrix, realB1.locLabelTrue).getAccessbilityText()).toBe(labelTrueName + ", Yes");
   // ... and the target editor offers the target-locale one as its placeholder.
   const cellRow = getStringsRow(stringsMatrix, realB1.locLabelTrue);
   expect(cellRow.cells[0].question.value).toBeFalsy();
   expect(cellRow.cells[0].question.placeholder).toBe("Ja");
-  // The source language drives the first cell, as it does for a stored text - and a text the
-  // survey stores itself is named by its row, the library's own is not.
+  // The source language drives the first cell, as it does for a stored text.
   realB1.locLabelTrue.setLocaleText("fr", "Oui");
   model.sourceLocale = "fr";
   const frRow = getStringsRowItem(getStringsMatrix(model), realB1.locLabelTrue);
   expect(frRow.locText.renderedHtml).toContain("Oui");
-  expect(frRow.locText.renderedHtml).toContain("st-element-strings__row-name");
+  expect(frRow.locText.renderedHtml).toContain(labelTrueName);
+});
+
+test("element strings block: every row is named by its property, on a question, a page, a panel and the survey", () => {
+  const creator = createSideBySideCreator({
+    locale: "de",
+    pages: [{
+      name: "page1",
+      elements: [{ type: "panel", name: "panel1", elements: [{ type: "boolean", name: "b1" }] }]
+    }]
+  });
+  const model = getModel(creator);
+  // The name of the first cell of every row of the open block, source text dropped.
+  const getRowNames = (): Array<string> => getStringsMatrix(model).rows.map((row: any) => {
+    const html = row.locText.renderedHtml;
+    const index = html.indexOf("</span>");
+    return index < 0 ? "" : html.substring(html.indexOf(">") + 1, index);
+  });
+  const survey = creator.survey;
+  const panel = survey.getPanelByName("panel1");
+  // The strings the library localizes itself are the "all strings" ones - an element shows them
+  // with the filter on, and they are named by their property like a stored string is.
+  [survey, survey.pages[0], panel, <any>survey.getQuestionByName("b1")].forEach((element: any) => {
+    model.toggleElementStrings(element);
+    model.elementStringsModel.showAllElementStrings = true;
+    const names = getRowNames();
+    expect(names.length).toBeGreaterThan(0);
+    expect(names.filter(name => !name)).toHaveLength(0);
+    model.hideElementStrings();
+  });
+  // Spot checks, one string of the library's own per element kind.
+  const expectName = (element: any, type: string, propertyName: string): void => {
+    model.toggleElementStrings(element);
+    model.elementStringsModel.showAllElementStrings = true;
+    expect(getRowNames()).toContain(editorLocalization.getPropertyNameInEditor(type, propertyName));
+    model.hideElementStrings();
+  };
+  expectName(survey, "survey", "completeText");
+  expectName(survey.pages[0], "page", "navigationTitle");
+  expectName(panel, "panel", "requiredErrorText");
+  expectName(survey.getQuestionByName("b1"), "boolean", "labelFalse");
 });
 
 // The progress link of the settings survey: the counts of the target language, the way to the
