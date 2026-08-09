@@ -1519,6 +1519,14 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       survey.showTOC = false;
       survey.addNewPage("page");
       survey.pages[0].addElement(host);
+      // The block's own styles are scoped to the host question's class, which the panes add
+      // through their css hook (see restoreRunnerElementStyles) - the survey block is not a
+      // pane question, so this survey adds it itself.
+      survey.onUpdateQuestionCssClasses.add((_, options) => {
+        if (this.isStringsHost(options.question)) {
+          options.cssClasses.mainRoot += " st-element-strings-host";
+        }
+      });
       if (isTarget) {
         survey.onGetQuestionTitleActions.add((_, options) => {
           if (!!this.elementStringsModel && options.question === host) {
@@ -1740,10 +1748,15 @@ export class TranslationElementStrings extends TranslationBase {
   // the source language has one. Not a source column - it is read-only context for the one
   // editor of the row, and the target editor gets the width it saves.
   private getRowTitleText(path: string, item: TranslationItem): string {
-    const name = (!!path ? path + ": " : "") + item.text;
+    const locale = this.sourceLocale || "";
     // A string with nothing stored still has a source text when the library localizes it
     // itself - the row would carry its name alone otherwise (see getSourceText).
-    const source = item.getSourceText(this.sourceLocale || "") || "";
+    const source = item.getSourceText(locale) || "";
+    // Such a string is shown by its text alone: its name is not a name of a text the survey
+    // has, it describes where the library uses the text ("Start Survey" button text), and the
+    // text right below it says the same thing.
+    if (!!source && !item.getLocText(locale)) return rowSourceSeparator + source;
+    const name = (!!path ? path + ": " : "") + item.text;
     return !!source ? name + rowSourceSeparator + source : name;
   }
   private getRowTitleHtml(text: string, item: any): string {
@@ -1753,7 +1766,8 @@ export class TranslationElementStrings extends TranslationBase {
     const index = text.indexOf(rowSourceSeparator);
     const name = index < 0 ? text : text.substring(0, index);
     const source = index < 0 ? "" : text.substring(index + rowSourceSeparator.length);
-    let res = "<span class=\"st-element-strings__row-name\">" + escapeHtmlText(name) + "</span>";
+    // A row of a library-localized string carries its text alone (see getRowTitleText).
+    let res = !!name ? "<span class=\"st-element-strings__row-name\">" + escapeHtmlText(name) + "</span>" : "";
     if (!!source) {
       res += "<span class=\"st-element-strings__row-source\">" + escapeHtmlText(source) + "</span>";
     }

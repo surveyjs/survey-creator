@@ -1425,6 +1425,10 @@ test("element strings block: page, panel and survey open at the top of their con
   // The caption actions are the matrix's title actions there as well.
   expect(getStringsMatrix(model).getTitleActions().map((action: any) => action.id))
     .toContain("svc-translation-strings-close");
+  // The block's styles are scoped to the host class - this survey carries it like the panes do,
+  // in both of them: the row titles are drawn by it, and so is the spacer's zero padding.
+  expect(getStringsMatrix(model).cssClasses.mainRoot).toContain("st-element-strings-host");
+  expect(sourceBlockSurvey.getAllQuestions()[0].cssClasses.mainRoot).toContain("st-element-strings-host");
   // Closing takes the layout element away from both panes.
   model.hideElementStrings();
   expect(getBlockSurvey(model.targetSurvey)).toBeFalsy();
@@ -1808,17 +1812,24 @@ test("element strings block: a string the library localizes itself shows its sou
   const realB1 = <any>creator.survey.getQuestionByName("b1");
   const titleRow = getStringsRowItem(stringsMatrix, realB1.locLabelTrue);
   expect(titleRow).toBeTruthy();
-  // The merged first cell shows the source-locale text the library gives the string...
+  // The merged first cell shows the source-locale text the library gives the string, and it
+  // shows it alone: the string's name describes where the library uses that very text.
   expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-source");
   expect(titleRow.locText.renderedHtml).toContain("Yes");
+  expect(titleRow.locText.renderedHtml).not.toContain("st-element-strings__row-name");
+  // The cell's accessible name is the text alone as well.
+  expect(getStringsRow(stringsMatrix, realB1.locLabelTrue).getAccessbilityText()).toBe("Yes");
   // ... and the target editor offers the target-locale one as its placeholder.
   const cellRow = getStringsRow(stringsMatrix, realB1.locLabelTrue);
   expect(cellRow.cells[0].question.value).toBeFalsy();
   expect(cellRow.cells[0].question.placeholder).toBe("Ja");
-  // The source language drives the first cell, as it does for a stored text.
+  // The source language drives the first cell, as it does for a stored text - and a text the
+  // survey stores itself is named by its row, the library's own is not.
   realB1.locLabelTrue.setLocaleText("fr", "Oui");
   model.sourceLocale = "fr";
-  expect(getStringsRowItem(getStringsMatrix(model), realB1.locLabelTrue).locText.renderedHtml).toContain("Oui");
+  const frRow = getStringsRowItem(getStringsMatrix(model), realB1.locLabelTrue);
+  expect(frRow.locText.renderedHtml).toContain("Oui");
+  expect(frRow.locText.renderedHtml).toContain("st-element-strings__row-name");
 });
 
 // The progress link of the settings survey: the counts of the target language, the way to the
