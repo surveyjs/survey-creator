@@ -480,19 +480,22 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.applyElementStateToAction(this.elementStateActions[key], key);
     }
   }
-  // Only the used strings with a stored text count: an element whose items exist merely
-  // through value/name fallbacks (a freshly added question with no texts) has nothing to
-  // translate. An element's state covers exactly the strings its dialog edits: its own
-  // strings plus the non-element groups below it (matrix column choices, validators, ...).
-  // Nested pages, panels and questions carry indicators of their own, so their counts do
-  // not roll up into the parent.
+  // Every used string counts - exactly the ones the element's strings block lists and the ones
+  // the survey progress is measured against. A string without a stored text of its own is one
+  // of them when it has a text to translate from anyway: a choice with no text is displayed
+  // (and translated) by its value, a question with no title by its name; the used-strings tree
+  // keeps those and drops the rest (see TranslationGroup.createTranslationItem and
+  // createItemValuesLocale). Counting less here would leave the progress link pointing at
+  // elements whose button says there is nothing to translate.
+  // An element's state covers exactly the strings its block edits: its own strings plus the
+  // non-element groups below it (matrix column choices, validators, ...). Nested pages, panels
+  // and questions carry indicators of their own, so their counts do not roll up into the parent.
   private computeElementCounts(): { [key: string]: { translated: number, total: number } } {
     const states: { [key: string]: { translated: number, total: number } } = {};
     const locale = this.targetLocale || "";
     const calc = (group: TranslationGroup): { translated: number, total: number } => {
       const counts = { translated: 0, total: 0 };
       group.locItems.forEach(item => {
-        if ((<LocalizableString>item.locString).isEmpty) return;
         counts.total++;
         if (this.isItemTranslated(item, locale)) counts.translated++;
       });
@@ -1272,6 +1275,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       iconName: "icon-chevron_16x16",
       iconSize: "auto",
       showTitle: false,
+      // The number of untranslated strings is the point of the button, and a title row has
+      // little room for actions - a narrow element (a question that shares its row, a pane
+      // resized down) makes its title bar shrink its actions, and a shrunk action renders as
+      // its icon alone (see Action.hasTitle). The row wraps its text instead.
+      disableShrink: true,
       appearance: { style: "neutral", mode: "secondary", size: "small" },
       action: doAction
     });
@@ -2028,18 +2036,18 @@ export class TranslationElementStrings extends TranslationBase {
         if (!this.isDisposed)this.updateStringsMatrixData();
       });
   }
-  // The strings the auto-translate button fills: the element's used strings with a stored
-  // text (a fresh element whose rows exist merely through value/name fallbacks has nothing
-  // to translate, matching the element state indicator) that have a source text and no
-  // target text yet. Collected over a used-strings tree, so the set does not depend on the
-  // dialog's current all/used filter.
+  // The strings the auto-translate button fills: the element's used strings that have a source
+  // text and no target text yet - the ones its state indicator counts as untranslated. A string
+  // that stores nothing of its own is translated from the text it is displayed by (a choice's
+  // value, a question's name), which is what the all-languages dialog sends as well (see
+  // TranslationEditor.createStringsToTranslate). Collected over a used-strings tree, so the set
+  // does not depend on the dialog's current all/used filter.
   public getStringsToTranslate(): Array<TranslationItem> {
     const res = new Array<TranslationItem>();
     const targetLoc = this.targetLocale || "";
     if ((this.sourceLocale || "") === targetLoc) return res;
     // The dialog's tree covers the element only (see getRootTranslationObj).
     this.createUsedStringsRoot(this.getRootTranslationObj()).allLocItems.forEach(item => {
-      if ((<LocalizableString>item.locString).isEmpty) return;
       if (!item.getLocText(targetLoc) && !!item.getTextToTranslateFrom(this.sourceLocale)) {
         res.push(item);
       }

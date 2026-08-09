@@ -1,6 +1,6 @@
 import {
-  ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel, QuestionMatrixDropdownModel,
-  QuestionTextModel, settings as surveySettings
+  AdaptiveActionContainer, ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel,
+  QuestionMatrixDropdownModel, QuestionTextModel, settings as surveySettings
 } from "survey-core";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
 import {
@@ -1036,7 +1036,10 @@ test("element state indicator: question states for translated / untranslated / n
   const target = model.targetSurvey;
   expect(model.getElementTranslationState(target.getQuestionByName("q1"))).toBe("translated");
   expect(model.getElementTranslationState(target.getQuestionByName("q2"))).toBe("untranslated");
-  expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("none");
+  // q3 has no title of its own, so it is displayed - and translated - by its name: one string,
+  // exactly the row its strings block lists.
+  expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("untranslated");
+  expect(model.getElementUntranslatedCount(target.getQuestionByName("q3"))).toBe(1);
   // The real-survey elements resolve to the same states as the pane copies.
   expect(model.getElementTranslationState(creator.survey.getQuestionByName("q2"))).toBe("untranslated");
   // The button carries the css modifier, the state tooltip and - in the untranslated state
@@ -1056,11 +1059,18 @@ test("element state indicator: question states for translated / untranslated / n
   expect(untranslatedAction.showTitle).toBeTruthy();
   expect(untranslatedAction.title).toBe("1");
   expect(model.getElementUntranslatedCount(target.getQuestionByName("q2"))).toBe(1);
-  const noneAction = getStateAction(target.getQuestionByName("q3"));
+  // "Nothing to translate" is the state of an element without strings of its own - a page with
+  // neither a title nor a description (a question always has its title, name fallback included).
+  const noneModel = getModel(createSideBySideCreator({
+    locale: "de",
+    pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } }] }]
+  }));
+  const nonePage = noneModel.targetSurvey.getPageByName("page1");
+  const noneAction = getStateAction(nonePage);
   expect(noneAction.css).toContain("svc-translation-state--none");
   expect(noneAction.tooltip).toBe("No strings to translate");
   expect(noneAction.showTitle).toBeFalsy();
-  expect(model.getElementUntranslatedCount(target.getQuestionByName("q3"))).toBe(0);
+  expect(noneModel.getElementUntranslatedCount(nonePage)).toBe(0);
   // No block is open - no button shows the expanded modifier.
   expect(translatedAction.css).not.toContain("svc-translation-state--expanded");
   expect(untranslatedAction.css).not.toContain("svc-translation-state--expanded");
@@ -1068,6 +1078,60 @@ test("element state indicator: question states for translated / untranslated / n
   expect(getStateAction(target.getPageByName("page1"))).toBeTruthy();
   expect(getStateAction(model.sourceSurvey.getQuestionByName("q1"))).toBeFalsy();
   expect(getStateAction(model.sourceSurvey.getPageByName("page1"))).toBeFalsy();
+});
+
+test("element state indicator: the untranslated count survives a shrinking title bar", () => {
+  const creator = createSideBySideCreator({
+    pages: [{
+      name: "page1",
+      elements: [
+        { type: "text", name: "q1", title: "Name" },
+        {
+          type: "radiogroup", name: "q2", startWithNewLine: false, title: "Sex assigned at birth",
+          choices: [{ value: "f", text: "Female" }, { value: "m", text: "Male" }]
+        }
+      ]
+    }]
+  });
+  const model = getModel(creator);
+  model.targetLocale = "de";
+  const question = model.targetSurvey.getQuestionByName("q2");
+  // The title and the two choice texts.
+  expect(model.getElementUntranslatedCount(question)).toBe(3);
+  const action = getStateAction(question);
+  expect(action.title).toBe("3");
+  // The question shares its row, so its title bar has little room and shrinks its actions -
+  // the count must stay visible instead of leaving the chevron alone.
+  const toolbar = <AdaptiveActionContainer>question.getTitleToolbar();
+  toolbar.setActionsMode("small");
+  expect(action.mode).toBe("large");
+  expect(action.hasTitle).toBeTruthy();
+});
+
+test("element state indicator: choices without a text of their own count - they are displayed by their value", () => {
+  const creator = createSideBySideCreator({
+    pages: [{
+      name: "page1",
+      elements: [{
+        type: "dropdown", name: "preferredContact", title: "Preferred contact method",
+        choices: ["Phone", "Email", "Text message"]
+      }]
+    }]
+  });
+  const model = getModel(creator);
+  model.targetLocale = "de";
+  const question = model.targetSurvey.getQuestionByName("preferredContact");
+  // The title and the three choices - the rows the element strings block lists.
+  expect(model.getElementUntranslatedCount(question)).toBe(4);
+  expect(getStateAction(question).title).toBe("4");
+  // The same strings the whole-survey progress is measured against.
+  expect(model.getTranslationProgress("de")).toEqual({ translated: 0, total: 4 });
+  model.showElementStrings(creator.survey.getQuestionByName("preferredContact"));
+  expect(model.elementStringsModel.root.allLocItems).toHaveLength(4);
+  // Translating a choice moves the count.
+  ItemValue.getItemByValue((<QuestionDropdownModel>creator.survey.getQuestionByName("preferredContact")).choices, "Phone")
+    .locText.setLocaleText("de", "Telefon");
+  expect(model.getElementUntranslatedCount(question)).toBe(3);
 });
 
 test("element state indicator: dialog-only strings count - untranslated matrix column choices keep the warning", () => {
@@ -1207,7 +1271,7 @@ test("element state indicator: transitions on typing and target locale switch", 
   model.targetLocale = "fr";
   expect(getStateAction(target.getQuestionByName("q1")).css).toContain("svc-translation-state--untranslated");
   expect(model.getElementTranslationState(target.getPageByName("page2"))).toBe("untranslated");
-  expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("none");
+  expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("untranslated");
 });
 
 test("element state indicator: no target language, no states and no indicator actions", () => {
@@ -1290,10 +1354,10 @@ test("element strings block: auto-translate button is disabled when all used str
   let grid = model.createElementStringsModel(creator.survey.getQuestionByName("q1"));
   expect(getMachineAction(grid).enabled).toBeFalsy();
   grid.dispose();
-  // q3 has no stored strings - its title row exists through the name fallback only,
-  // matching the "No strings to translate" element state.
+  // q3's title row exists through the name fallback - the name is what it is translated from,
+  // as in the all-languages dialog.
   grid = model.createElementStringsModel(creator.survey.getQuestionByName("q3"));
-  expect(getMachineAction(grid).enabled).toBeFalsy();
+  expect(getMachineAction(grid).enabled).toBeTruthy();
   grid.dispose();
   // q2's title is untranslated.
   grid = model.createElementStringsModel(creator.survey.getQuestionByName("q2"));
@@ -1319,13 +1383,15 @@ test("element strings block: auto-translate fills only the empty target texts of
   action.action();
   expect(fromLocale).toBe("en");
   expect(toLocale).toBe("de");
-  // The already translated "item1" is kept; the value-only and numeric choices are not sent.
-  expect(passedStrings).toEqual(["Q1 title", "Q1 desc", "Item 2"]);
+  // The already translated "item1" is kept; "item3" has no text of its own and is translated
+  // from the value it is displayed by; the numeric choice is not a used string at all.
+  expect(passedStrings).toEqual(["Q1 title", "Q1 desc", "Item 2", "item3"]);
   expect(realQ1.locTitle.getLocaleText("de")).toBe("de: Q1 title");
   expect(realQ1.locDescription.getLocaleText("de")).toBe("de: Q1 desc");
   expect(ItemValue.getItemByValue(realQ1.choices, "item1").locText.getLocaleText("de")).toBe("Element 1");
   expect(ItemValue.getItemByValue(realQ1.choices, "item2").locText.getLocaleText("de")).toBe("de: Item 2");
-  expect(ItemValue.getItemByValue(realQ1.choices, "item3").locText.getLocaleText("de")).toBeFalsy();
+  expect(ItemValue.getItemByValue(realQ1.choices, "item3").locText.getLocaleText("de")).toBe("de: item3");
+  expect(ItemValue.getItemByValue(realQ1.choices, 3).locText.getLocaleText("de")).toBeFalsy();
   // The writes mirror into the target pane and complete the element state.
   expect(model.getElementTranslationState(model.targetSurvey.getQuestionByName("q1"))).toBe("translated");
   // Everything is translated now.
@@ -1347,7 +1413,7 @@ test("element strings block: auto-translate covers the used strings only, whatev
   const action = getMachineAction(grid);
   expect(action).toBeTruthy();
   action.action();
-  expect(passedStrings).toEqual(["Q1 title", "Q1 desc", "Item 2"]);
+  expect(passedStrings).toEqual(["Q1 title", "Q1 desc", "Item 2", "item3"]);
   grid.dispose();
 });
 
