@@ -429,6 +429,22 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     // renders only a part of an element's strings (a title, a description, the choices of a
     // rendered list), and the block is the one surface that holds every one of them.
     this.showElementStrings(info.element);
+    this.focusElementStringsItem(locStr);
+  }
+  // The string the block is asked to focus while its matrix is not in the DOM yet: the block is
+  // built here, and the panes render it with their next render. The request is kept until the
+  // host question reports it is rendered (see observeStringsHost) - the immediate attempt below
+  // covers a framework that renders the pane synchronously.
+  private focusedStringsItem: ILocalizableString;
+  private focusElementStringsItem(locStr: ILocalizableString): void {
+    if (!locStr || !this.elementStringsModel) return;
+    this.focusedStringsItem = locStr;
+    this.elementStringsModel.focusItem(locStr);
+  }
+  private applyFocusedStringsItem(): void {
+    const locStr = this.focusedStringsItem;
+    if (!locStr) return;
+    this.focusedStringsItem = undefined;
     if (!!this.elementStringsModel) {
       this.elementStringsModel.focusItem(locStr);
     }
@@ -1421,6 +1437,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // states is the caller's business (the fresh actions read them at creation time).
   private closeElementStrings(): void {
     const model = this.elementStringsModel;
+    // A focus request that was never served belonged to the block being closed here.
+    this.focusedStringsItem = undefined;
     this.observeStringsHost(undefined);
     this.stringsHosts.forEach(host => {
       const parent = <PanelModelBase>host.parent;
@@ -1460,6 +1478,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
     if (!element) return;
     this.setElementStringsHeight(element.offsetHeight);
+    // The block is in the DOM now - a focus request made while it was being built can be served.
+    this.applyFocusedStringsItem();
     // No ResizeObserver (jsdom, older browsers): the spacer keeps the height measured once.
     if (typeof ResizeObserver === "undefined") return;
     this.stringsHostObserver = new ResizeObserver(() => this.setElementStringsHeight(element.offsetHeight));
@@ -1846,7 +1866,11 @@ export class TranslationElementStrings extends TranslationBase {
       const item = this.getMatrixItem(rows[i]);
       if (!!item && item.locString === locStr) {
         const cells = rows[i].cells;
-        cells[cells.length - 1].question.focus();
+        // The input itself, not question.focus(): the block usually renders inside a pane, and
+        // a question of a design-mode survey focuses nothing at all (see Question.focus). The
+        // block's cells are the one input of that survey the user types into, and they are made
+        // editable for that (see onMatrixCellCreated).
+        cells[cells.length - 1].question.focusInputElement(false);
         return;
       }
     }

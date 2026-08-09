@@ -1,6 +1,6 @@
 import {
-  AdaptiveActionContainer, ItemValue, ListModel, QuestionCheckboxModel, QuestionDropdownModel,
-  QuestionMatrixDropdownModel, QuestionTextModel, settings as surveySettings
+  AdaptiveActionContainer, ItemValue, ListModel, QuestionCheckboxModel, QuestionCommentModel,
+  QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionTextModel, settings as surveySettings
 } from "survey-core";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
 import {
@@ -2022,6 +2022,37 @@ test("progress link: goes to the first untranslated string of the current page, 
   model.selectFirstUntranslatedString();
   expect(model.selectedPageName).toBe("page2");
   expect(model.elementStringsModel.element).toBe(creator.survey.getPageByName("page2"));
+});
+
+test("progress link: puts the input focus into the block's editor of the string it goes to", () => {
+  const creator = createSideBySideCreator({
+    locale: "de",
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+          { type: "text", name: "q2", title: "Question 2" }
+        ]
+      }
+    ]
+  });
+  const model = getModel(creator);
+  const realQ2 = creator.survey.getQuestionByName("q2");
+  const focused: Array<any> = [];
+  // The cells of a block hosted by a pane are focused through their input: the panes are
+  // design-mode surveys, where a question focuses nothing at all (see Question.focus).
+  const originFocusInput = QuestionCommentModel.prototype.focusInputElement;
+  QuestionCommentModel.prototype.focusInputElement = function (this: any): void { focused.push(this); };
+  try {
+    model.selectFirstUntranslatedString();
+  } finally {
+    QuestionCommentModel.prototype.focusInputElement = originFocusInput;
+  }
+  expect(model.elementStringsModel.element).toBe(realQ2);
+  const row = getStringsRow(getStringsMatrix(model), realQ2.locTitle);
+  expect(row).toBeTruthy();
+  expect(focused).toEqual([row.cells[row.cells.length - 1].question]);
 });
 
 test("progress link: the clear button drops the language strings after a confirmation and keeps translating it", () => {
