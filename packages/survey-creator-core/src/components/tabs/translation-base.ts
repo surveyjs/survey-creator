@@ -675,11 +675,11 @@ class TranslationUsedStringsOwner implements ITranslationLocales {
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean): boolean {
     return this.owner.canShowProperty(obj, prop, isEmpty, isShowing);
   }
-  // The element strings dialog scopes its tree via canShowElementGroup - the used-strings
-  // tree built over the same owner must stay within the same scope.
+  // The element strings dialog scopes its tree to an element - the used-strings tree built over
+  // the same owner must stay within the same scope. The grid's page scope is not applied here:
+  // the tree covers the whole survey by design (see createUsedStringsRoot).
   public canShowElementGroup(obj: Base): boolean {
-    const owner = <ITranslationLocales>this.owner;
-    return !owner.canShowElementGroup || owner.canShowElementGroup(obj);
+    return this.owner.canShowElementGroupCore(obj);
   }
   public getEditLocale(): string { return ""; }
   public get isEditMode(): boolean { return false; }
@@ -1232,7 +1232,26 @@ export class TranslationBase extends Base implements ITranslationLocales {
   // The object the translation tree is built over. Overridden to scope the strings grid
   // to a single element (the side-by-side matrix strings popup).
   protected getRootTranslationObj(): { obj: Base, name: string } {
-    return !!this.filteredPage ? { obj: this.filteredPage, name: this.filteredPage.name } : { obj: this.survey, name: "survey" };
+    // The survey's own strings belong to the first page - a grid scoped to it is rooted on the
+    // survey, so they are shown there, and the other pages are cut out by canShowElementGroup.
+    if (!!this.filteredPage && !this.isFirstPageFiltered) return { obj: this.filteredPage, name: this.filteredPage.name };
+    return { obj: this.survey, name: "survey" };
+  }
+  protected get isFirstPageFiltered(): boolean {
+    return !!this.filteredPage && !!this.survey && this.survey.pages[0] === this.filteredPage;
+  }
+  // The element scope of a model (see TranslationElementStrings): unlike the page scope below,
+  // it narrows the used-strings tree as well.
+  public canShowElementGroupCore(obj: Base): boolean {
+    return true;
+  }
+  public canShowElementGroup(obj: Base): boolean {
+    if (!this.canShowElementGroupCore(obj)) return false;
+    if (!this.isFirstPageFiltered) return true;
+    // The tree is rooted on the survey while the grid is scoped to the first page - every other
+    // page is left out of it.
+    const el = <any>obj;
+    return !el.isPage || el === this.filteredPage;
   }
   public reset(alwaysReset: boolean = true): void {
     if (!alwaysReset && !!this.root) return;

@@ -1925,7 +1925,7 @@ export class TranslationElementStrings extends TranslationBase {
   // The survey/page/panel dialogs cover only the element's own strings - the nested survey
   // elements carry translate actions of their own. The question dialog keeps its whole
   // subtree (column choices, template elements): those strings cannot be reached elsewhere.
-  public canShowElementGroup(obj: Base): boolean {
+  public canShowElementGroupCore(obj: Base): boolean {
     if ((<any>this.elementValue).isQuestion) return true;
     const el = <any>obj;
     return !el.isPage && !el.isPanel && !el.isQuestion;

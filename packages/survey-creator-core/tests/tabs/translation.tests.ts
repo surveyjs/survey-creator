@@ -347,6 +347,26 @@ test("stringsSurvey and filterPage + one page", () => {
   translation.filteredPage = survey.pages[0];
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
 });
+test("filterPage by the first page shows the survey strings", () => {
+  const survey = new SurveyModel({
+    title: "Survey Title",
+    completedHtml: "Completed",
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "question1", title: "Question 1" }] },
+      { name: "page2", elements: [{ type: "text", name: "question2", title: "Question 2" }] }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  const getNames = (): Array<string> => translation.root.allLocItems.map(item => (!!item.context && !!item.context["name"] ? item.context["name"] : "survey") + "." + item.name);
+  expect(getNames()).toEqual(["survey.title", "survey.completedHtml", "question1.title", "question2.title"]);
+  translation.filteredPage = survey.pages[0];
+  expect(translation.root.obj).toBe(survey);
+  expect(getNames()).toEqual(["survey.title", "survey.completedHtml", "question1.title"]);
+  translation.filteredPage = survey.pages[1];
+  expect(translation.root.obj).toBe(survey.pages[1]);
+  expect(getNames()).toEqual(["question2.title"]);
+});
 test("Translation show All strings and property visibility, #1", () => {
   const creator = new CreatorTester();
   creator.JSON = {

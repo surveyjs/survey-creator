@@ -240,11 +240,27 @@ test("grid view: survey-level strings show up under All Pages once they get a va
   expect(getItemKeys(model).indexOf(".title")).toBeGreaterThan(-1);
 });
 
+test("grid view: the first page scope keeps the survey strings, the other pages drop them", () => {
+  const creator = createGridCreator();
+  const model = getModel(creator);
+  creator.survey.title = "My Survey";
+  model.reset();
+  model.filteredPage = creator.survey.getPageByName("page1");
+  expect(model.root.obj).toBe(creator.survey);
+  expect(getItemKeys(model).indexOf(".title")).toBeGreaterThan(-1);
+  expect(getItemKeys(model).indexOf("q1.title")).toBeGreaterThan(-1);
+  expect(getItemKeys(model).indexOf("q4.title")).toBe(-1);
+  model.filteredPage = creator.survey.getPageByName("page2");
+  expect(model.root.obj.name).toBe("page2");
+  expect(getItemKeys(model).indexOf(".title")).toBe(-1);
+  expect(getItemKeys(model).indexOf("q4.title")).toBeGreaterThan(-1);
+});
+
 test("grid view: CSV export covers the whole survey regardless of the page scope", () => {
   const creator = createGridCreator();
   const model = getModel(creator);
   model.filteredPage = creator.survey.getPageByName("page1");
-  expect(model.root.obj.name).toBe("page1");
+  expect(model.root.obj).toBe(creator.survey);
   const csv = model.exportToCSV();
   expect(csv.indexOf("q1.title")).toBeGreaterThan(-1);
   expect(csv.indexOf("q4.title")).toBeGreaterThan(-1);
