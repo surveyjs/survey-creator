@@ -59,6 +59,7 @@
           :size="'auto'"
           :title="question.chooseButtonCaption"
         ></SvComponent>
+        <span class="sv-visuallyhidden">{{ question.chooseButtonCaption }}</span>
       </label>
     </div>
   </div>

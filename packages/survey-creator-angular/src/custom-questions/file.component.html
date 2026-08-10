@@ -17,6 +17,7 @@
       (click)="model.chooseFiles($event)" [key2click]>
       <svg [iconName]="model.cssClasses.chooseButtonIcon" size="'auto'" [title]="model.chooseButtonCaption"
         sv-ng-svg-icon></svg>
+      <span class="sv-visuallyhidden">{{ model.chooseButtonCaption }}</span>
     </label>
   </div>
 </div>
