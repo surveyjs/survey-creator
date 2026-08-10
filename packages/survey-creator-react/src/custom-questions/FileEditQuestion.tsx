@@ -73,6 +73,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
           htmlFor={this.questionFile.inputId}
           aria-label={this.questionFile.chooseButtonCaption}>
           <SvgIcon iconName={this.questionFile.cssClasses.chooseButtonIcon} size={"auto"} title={this.questionFile.chooseButtonCaption}></SvgIcon>
+          <span className="sv-visuallyhidden">{this.questionFile.chooseButtonCaption}</span>
         </label>
       )
     );
