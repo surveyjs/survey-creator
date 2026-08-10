@@ -43,8 +43,6 @@ Embed the form builder in your application, connect it to any backend, and let u
     <a href="https://surveyjs.io/licensing">Licensing</a>
     ·
     <a href="https://github.com/surveyjs/survey-creator/issues/new">Report a Bug</a>
-    ·
-    <a href="https://twitter.com/SurveyJS">Twitter</a>
   </p>
 <br>
 
