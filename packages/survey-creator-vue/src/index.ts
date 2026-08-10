@@ -1,5 +1,5 @@
 import type { App } from "vue";
-import { SurveyComponent, ComponentFactory } from "survey-vue3-ui";
+import { ComponentFactory } from "survey-vue3-ui";
 import SurveyCreatorComponent from "./Creator.vue";
 
 import TabbedMenu from "./tabbed-menu/TabbedMenu.vue";
@@ -22,6 +22,7 @@ import ActionButton from "./components/ActionButton.vue";
 import Switcher from "./components/Switcher.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import ComponentContainer from "./components/ComponentContainer.vue";
+import SurveyWidget from "./components/SurveyWidget.vue";
 import Test from "./tabs/preview/Test.vue";
 import ContainerTab from "./tabs/ContainerTab.vue";
 
@@ -133,7 +134,7 @@ function registerComponents(
   registerComponent("color-item", ColorItem);
   registerComponent("survey-fileedit", File);
   registerComponent("survey-spinedit", SpinEditor);
-  registerComponent("survey-widget", SurveyComponent);
+  registerComponent("survey-widget", SurveyWidget);
   registerComponent("survey-simulator", Simulator);
   registerComponent("svc-tab-preview", Test);
   registerComponent("survey-results", SurveyResults);
