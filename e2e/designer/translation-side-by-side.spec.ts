@@ -272,9 +272,11 @@ test.describe(title, () => {
     await setCreatorProp(page, "translationMode", "sideBySide");
     await getTabbedMenuItemByText(page, "Translation").click();
     const target = page.locator(".st-side-by-side__target");
-    // q1 is translated into German, q2 has no stored strings, q3 is untranslated.
+    // q1 is translated into German, q3 is untranslated. q2 stores no string of its own and is
+    // untranslated as well: a question is displayed - and translated - by its title, the name
+    // fallback of a title-less one included, so it always has that one string to translate.
     await expect(target.locator("[data-name=q1] .svc-translation-state--translated")).toBeVisible();
-    await expect(target.locator("[data-name=q2] .svc-translation-state--none")).toBeVisible();
+    await expect(target.locator("[data-name=q2] .svc-translation-state--untranslated")).toContainText("1");
     await expect(target.locator("[data-name=q3] .svc-translation-state--untranslated")).toBeVisible();
     await expect(target.locator(".sd-page__title .svc-translation-state--untranslated")).toBeVisible();
     await expect(target.locator(".sd-header__text .svc-translation-state--untranslated")).toBeVisible();
