@@ -1,5 +1,5 @@
 import {
-  Action, AdaptiveActionContainer, Base, DomDocumentHelper, EventBase, Helpers, ILocalizableString,
+  Action, AdaptiveActionContainer, Base, DomDocumentHelper, EventBase, Helpers, IElement, ILocalizableString,
   ItemValue, LocalizableString, PageModel, PanelModel, PanelModelBase, Question,
   QuestionCommentModel, QuestionDropdownModel, QuestionHtmlModel,
   QuestionMatrixDropdownModel, Serializer, SurveyModel, property,
@@ -1452,6 +1452,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       host.dispose();
     });
     this.stringsHosts = [];
+    this.restoreStringsHostRows();
     // The survey block travels in a survey of its own, in the panes' contentTop container.
     [this.sourceSurvey, this.targetSurvey].forEach(pane => {
       if (!!pane) pane.removeLayoutElement(stringsLayoutElementId);
@@ -1535,8 +1536,26 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     const position = this.getStringsHostPosition(survey, realObj);
     if (!position || !position.parent) return;
     if (isTarget)this.elementStringsModel.setupStringsMatrix(survey);
+    // The block takes a row of its own right below the question it belongs to, so the element
+    // that shared the row with that question must start the next row while the block is open
+    // (a row starts at every element with startWithNewLine, see QuestionRowModel).
+    this.splitStringsHostRow(position.parent.elements[position.index]);
     position.parent.addElement(host, position.index);
     this.stringsHosts.push(host);
+  }
+  // The pane elements whose startWithNewLine the open block has turned on - restored when it
+  // closes (see closeElementStrings). A pane copy property, so the real survey is untouched.
+  private stringsHostRowSplits: Array<IElement> = [];
+  private splitStringsHostRow(next: IElement): void {
+    if (!next || next.startWithNewLine) return;
+    next.startWithNewLine = true;
+    this.stringsHostRowSplits.push(next);
+  }
+  private restoreStringsHostRows(): void {
+    this.stringsHostRowSplits.forEach(element => {
+      if (!(<Base><any>element).isDisposed) element.startWithNewLine = false;
+    });
+    this.stringsHostRowSplits = [];
   }
   private createSourceSpacer(): QuestionHtmlModel {
     const spacer = new QuestionHtmlModel(stringsHostName);
@@ -1576,8 +1595,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
   }
   // Where the block goes when it is not the survey's own (see addStringsHost), resolved against
-  // the real element and applied to the pane copy: below the clicked question (below its whole
-  // row when the question shares one) and at the top of a clicked page or panel.
+  // the real element and applied to the pane copy: right below the clicked question and at the
+  // top of a clicked page or panel. Directly below the question and not below its whole row: a
+  // row of a half-width pane rarely fits its questions on one line, and the block of the first
+  // question of such a row would be pages away from it.
   private getStringsHostPosition(survey: SurveyModel, realObj: any): { parent: PanelModelBase, index: number } {
     if (!survey) return undefined;
     if (realObj.isPage) {
@@ -1589,14 +1610,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     const question = survey.getQuestionByName(realObj.name);
     const parent = !!question ? <PanelModelBase>question.parent : undefined;
     if (!parent) return undefined;
-    const elements = parent.elements;
-    let index = elements.indexOf(question) + 1;
-    // The elements that follow on the same row (startWithNewLine = false) belong to the
-    // question's row - the block goes below the row, not into it.
-    while(index < elements.length && !elements[index].startWithNewLine) {
-      index++;
-    }
-    return { parent: parent, index: index };
+    return { parent: parent, index: parent.elements.indexOf(question) + 1 };
   }
   // The creator instance when the model is created by the translation plugin. The options object
   // is checked structurally so the model stays constructible with EmptySurveyCreatorOptions in tests.

@@ -1446,20 +1446,35 @@ function getHostIndex(model: TranslationSideBySide, survey: any, containerName: 
     ? container.elements.indexOf(getHosts(survey)[0]) : -1;
 }
 
-test("element strings block: opens below the clicked question's row, in both panes", () => {
+test("element strings block: opens right below the clicked question, in both panes", () => {
   const creator = createSideBySideCreator(inlineBlockJSON);
   const model = getModel(creator);
   model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
   expect(model.elementStringsModel).toBeTruthy();
   expect(model.elementStringsModel.element).toBe(creator.survey.getQuestionByName("q1"));
-  // q2 shares the row with q1 (startWithNewLine = false) - the block goes below the whole row.
+  // q2 shares the row with q1 (startWithNewLine = false), and the block still goes directly
+  // below q1 - the row is split so that the block gets a row of its own and q2 opens the next one.
   expect(getHosts(model.targetSurvey)).toHaveLength(1);
   expect(getHosts(model.sourceSurvey)).toHaveLength(1);
-  expect(getHostIndex(model, model.targetSurvey, "page1")).toBe(2);
-  expect(getHostIndex(model, model.sourceSurvey, "page1")).toBe(2);
+  expect(getHostIndex(model, model.targetSurvey, "page1")).toBe(1);
+  expect(getHostIndex(model, model.sourceSurvey, "page1")).toBe(1);
+  [model.targetSurvey, model.sourceSurvey].forEach(pane => {
+    const page = pane.getPageByName("page1");
+    expect(pane.getQuestionByName("q2").startWithNewLine).toBeTruthy();
+    expect(page.rows.map(row => row.elements.map(element => element.name).join(","))).toStrictEqual([
+      "q1", "svc-translation-strings-host", "q2", "panel1"
+    ]);
+  });
   // The host carries no translate action of its own.
   expect(getHosts(model.targetSurvey)[0].getTitleActions()
     .filter((action: any) => action.id === "svc-translate-question")).toHaveLength(0);
+  // Closing the block gives q2 its row back.
+  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  [model.targetSurvey, model.sourceSurvey].forEach(pane => {
+    expect(pane.getQuestionByName("q2").startWithNewLine).toBeFalsy();
+    expect(pane.getPageByName("page1").rows.map(row => row.elements.map(element => element.name).join(",")))
+      .toStrictEqual(["q1,q2", "panel1"]);
+  });
 });
 
 test("element strings block: page, panel and survey open at the top of their container", () => {
