@@ -3,6 +3,7 @@
     <label [class]="model.getActionBarItemCss()" [attr.for]="question.inputId" [attr.aria-label]="question.chooseButtonCaption"
       (click)="question.chooseFiles($event)" [key2click]>
       <svg [iconName]="model.iconName" size="'auto'" [title]="model.title" [class]="model.cssClasses.itemIcon" sv-ng-svg-icon></svg>
+      <span class="sv-visuallyhidden">{{ question.chooseButtonCaption }}</span>
     </label>
     <input type="file" [disabled]="model.disabled" [class]="question.cssClasses.fileInput" [attr.id]="question.inputId"
         [attr.aria-required]="question.ariaRequired" [attr.aria-label]="question.ariaLabel"
