@@ -43,7 +43,7 @@
         "husky": "^9.1.7",
         "lint-staged": "^15.4.3",
         "playwright": "1.60.0",
-        "postcss": "^8.5.8",
+        "postcss": "^8.5.25",
         "postcss-banner": "^4.0.1",
         "postcss-calc": "^10.1.1",
         "postcss-discard-comments": "^7.0.7",

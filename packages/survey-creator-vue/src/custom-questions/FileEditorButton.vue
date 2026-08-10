@@ -14,6 +14,7 @@
             :size="'auto'"
             :title="item.title"
         ></SvComponent>
+        <span class="sv-visuallyhidden">{{ question.chooseButtonCaption }}</span>
         </label>
         <input
           type="file"

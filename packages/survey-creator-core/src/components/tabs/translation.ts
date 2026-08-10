@@ -19,7 +19,7 @@ import "./translation.scss";
 import { SurveyHelper, getDefaultLocaleName } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
-import { updateMatrixRemoveAction, updateMatixActionsAppearance, findAction } from "../../utils/actions";
+import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
