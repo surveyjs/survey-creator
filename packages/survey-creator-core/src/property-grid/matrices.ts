@@ -3,7 +3,7 @@ import {
   JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase,
   MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase,
   QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel,
-  renamedIcons, Serializer, SurveyElement
+  renamedIcons, Serializer, surveyLocalization, SurveyElement
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
@@ -496,8 +496,12 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       column.isVisible &&
       !column.readOnly &&
       !this.hasMultipleLanguage(items) &&
-      !editorLocalization.currentLocale
+      !this.isNonDefaultSurveyLocale(obj)
     );
+  }
+  private isNonDefaultSurveyLocale(obj: Base): boolean {
+    const locale = obj?.getSurvey()?.getLocale();
+    return !!locale && locale !== surveyLocalization.defaultLocale;
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
   public createPropertyEditorSetup(
