@@ -49,13 +49,14 @@
 
 .svc-item-value-controls {
   display: flex;
-  margin: var(--sjs2-spacing-x100) 0;
   height: var(--sjs2-size-x400);
   box-sizing: border-box;
   flex-shrink: 0;
   min-width: var(--sjs2-size-x900);
   justify-content: flex-end;
   align-self: flex-start;
+  line-height: var(--sjs2-typography-line-height-component-label-content);
+  margin: calc(var(--sjs2-spacing-x150) - 0.5 * var(--sjs2-size-x400) + 0.5 * max(var(--sjs2-size-component-radio-box), 1lh)) 0;
 }
 
 .svc-item-value-controls__drag .svc-item-value-controls__drag-icon {
