@@ -169,7 +169,7 @@ export function createUmdConfig(options) {
 
 export function createEsmConfig(options) {
 
-  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
+  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, esbuildTarget, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
 
   return {
     context: "this",
@@ -187,7 +187,9 @@ export function createEsmConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
+        // esbuild reads `target` from tsconfig (es5); pass esbuildTarget to keep the
+        // fesm bundle at ES6 the way the tsc branch below does via target: "ES6".
+        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap, target: esbuildTarget })
         : typescript({
           noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
