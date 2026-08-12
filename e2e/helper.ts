@@ -11,6 +11,7 @@ export const urlNoLicense = "http://127.0.0.1:8080/test-pages/no-license";
 export const urlWidget = "http://127.0.0.1:8080/test-pages/widget";
 export const urlThemeTab = "http://127.0.0.1:8080/test-pages/theme-tab";
 export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages/creator-themes";
+export const urlPresets = "http://127.0.0.1:8080/test-pages/presets";
 
 export async function compareScreenshot(
   page: Page,
@@ -87,10 +88,24 @@ export const setJSON = async (page: Page, json: object) => {
   }, json);
 };
 
+export const setToolboxItemJSON = async (page: Page, itemName: string, json: object) => {
+  await page.waitForFunction(() => !!window["creator"]);
+  await page.evaluate(({ itemName, json }) => {
+    window["creator"].toolbox.getItemByName(itemName).json = { type: itemName, ...json };
+  }, { itemName, json });
+};
+
 export const setSurveyProp = async (page: Page, propName: string, value: unknown) => {
   await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate(({ propName, value }) => {
     window["creator"].survey[propName] = value;
+  }, { propName, value });
+};
+
+export const setCreatorProp = async (page: Page, propName: string, value: unknown) => {
+  await page.waitForFunction(() => !!window["creator"]);
+  await page.evaluate(({ propName, value }) => {
+    window["creator"][propName] = value;
   }, { propName, value });
 };
 
@@ -130,7 +145,11 @@ export async function doDragDrop({ page, element, target, options }: { page: Pag
 }
 
 export async function showCreatorSettings(page) {
-  await page.locator(".svc-sidebar-tabs__bottom-container .svc-menu-action__button").click();
+  await page.locator(".svc-sidebar-tabs__bottom-container .sd-action").click();
+}
+export async function showPresets(page) {
+  await showCreatorSettings(page);
+  await page.locator(".spg-launch__card").click();
 }
 
 export const creatorTabDesignerName = "Designer";
@@ -142,6 +161,8 @@ export const creatorTabThemeName = "Themes";
 export const generalGroupName = "General";
 export const logicGroupName = "Conditions";
 export const inputMaskSettingsGroupName = "Input Mask Settings";
+
+export const objectSelectorButton = (page) => page.locator(".svc-side-bar__container-header .sv-action--object-selector .sd-action");
 
 export function getTabbedMenuItemByText(page: Page, text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes"): Locator {
   return page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").getByText(text).or(page.locator(".svc-tabbed-menu-item-container").filter({ has: page.locator("title").getByText(text) })).filter({ visible: true });
@@ -164,15 +185,22 @@ export const recreateCreatorWithOptions = async (page: Page, creatorOptions: Rec
 };
 
 export function getBarItemByTitle(page: Page, text: string): Locator {
-  return page.locator(".sv-action-bar-item[title=\"" + text + "\"]");
+  return page.getByRole("button", { name: text }).and(page.locator(".sd-action"));
 }
 
 export function getQuestionBarItemByTitle(page: Page, text: string): Locator {
-  return page.locator(".svc-survey-element-toolbar__item[title=\"" + text + "\"]");
+  const role = text === "Required" ? "checkbox" : "button";
+  return page.locator(".svc-question__content-actions").getByRole(role, { name: text });
 }
 
 export function getListItemByText(page: Page, text: string): Locator {
-  return page.locator(".sv-popup__content .svc-list .svc-list__item").getByText(text, { exact: true }).filter({ visible: true });
+  return page.locator(".sv-popup__content .sd-menu-list .sd-menu-item").getByText(text, { exact: true }).filter({ visible: true });
+}
+
+export function getVisibleSelectListItemByText(page: Page, text: string): Locator {
+  return page.locator(".sv-popup__container .sd-selectlist__item", {
+    has: page.getByText(text, { exact: true })
+  }).filter({ visible: true });
 }
 
 export function getMenuItemByText(page: Page, text: string): Locator {
@@ -194,6 +222,9 @@ export const explicitErrorHandler = async (page: Page) => {
   });
 };
 
+export function getButtonByText(locator: Locator | Page, text: string) {
+  return locator.getByRole("button", { name: text });
+}
 export async function patchDragDropToDisableDrop(page: Page) {
   await page.evaluate(() => {
     const c = (window as any).creator;
@@ -294,15 +325,15 @@ export async function handleShiftEnter(page: Page, selector: string) {
   }, selector);
 }
 
-export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
+export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sd-action__title";
 
 export async function addQuestionByAddQuestionButton(page: Page, text: string) {
-  await page.locator(".svc-element__add-new-question .svc-element__question-type-selector").click();
-  await page.locator(".svc-list__item span").getByText(text, { exact: true }).filter({ visible: true }).click();
+  await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
+  await page.locator(".sd-menu-item span").getByText(text, { exact: true }).filter({ visible: true }).click();
 }
 
 export function getAddNewQuestionButton(page: Page): Locator {
-  return page.locator(".svc-element__add-new-question > span").getByText("Add Question");
+  return page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn > span").getByText("Add Question");
 }
 
 export function getToolboxItemByText(page: Page, text: string): Locator {
@@ -311,6 +342,66 @@ export function getToolboxItemByText(page: Page, text: string): Locator {
 
 export function getSubToolboxItemByText(page: Page, text: string): Locator {
   return page.locator(".svc-toolbox__item-subtype").getByText(text, { exact: true });
+}
+
+export async function hideElement(page: Page, selector: string) {
+  await page.locator(selector).evaluate((element) => {
+    element.style.visibility = "hidden";
+  });
+}
+
+const HIDE_CONTENT_BEHIND_POPUP_STYLE_ID = "hide-content-behind-popup-style";
+const HIDE_CONTENT_BEHIND_POPUP_CSS = `
+  .svc-creator, .sps-body { visibility: hidden !important; }
+  .sv-popup, .sv-popup *, .sv-dropdown-popup, .sv-dropdown-popup * { visibility: visible !important; }
+`;
+
+export async function hideContentBehindPopup(page: Page) {
+  await page.evaluate(({ styleId, css }) => {
+    const roots: Array<Document | ShadowRoot> = [];
+    const addRoot = (root: Document | ShadowRoot | null | undefined) => {
+      if (root && !roots.includes(root)) {
+        roots.push(root);
+      }
+    };
+
+    const creator = (window as any).creator;
+    addRoot(creator?.rootElement?.getRootNode?.());
+    addRoot(document.getElementById("survey-creator")?.shadowRoot ?? null);
+    addRoot(document);
+
+    for (const root of roots) {
+      const host = root === document ? document.head : root;
+      if (host.querySelector(`#${styleId}`)) {
+        continue;
+      }
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.textContent = css;
+      host.appendChild(style);
+    }
+  }, { styleId: HIDE_CONTENT_BEHIND_POPUP_STYLE_ID, css: HIDE_CONTENT_BEHIND_POPUP_CSS });
+}
+
+export async function showContentBehindPopup(page: Page) {
+  await page.evaluate((styleId) => {
+    const roots: Array<Document | ShadowRoot> = [];
+    const addRoot = (root: Document | ShadowRoot | null | undefined) => {
+      if (root && !roots.includes(root)) {
+        roots.push(root);
+      }
+    };
+
+    const creator = (window as any).creator;
+    addRoot(creator?.rootElement?.getRootNode?.());
+    addRoot(document.getElementById("survey-creator")?.shadowRoot ?? null);
+    addRoot(document);
+
+    for (const root of roots) {
+      const host = root === document ? document.head : root;
+      host.querySelector(`#${styleId}`)?.remove();
+    }
+  }, HIDE_CONTENT_BEHIND_POPUP_STYLE_ID);
 }
 
 export { expect };

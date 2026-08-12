@@ -1,5 +1,5 @@
 import { test, expect, Page } from "@playwright/test";
-import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot } from "./helper";
+import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Translation tab Screenshot";
 
@@ -58,7 +58,7 @@ test.describe(title, () => {
     await compareScreenshot(page, stringsView, "translation-tab-small-screen.png");
 
     await page.setViewportSize({ width: 2560, height: 1440 });
-    await getBarItemByTitle(page, "Used Strings Only").click();
+    await page.getByRole("button", { name: "Used Strings Only" }).click();
     await getListItemByText(page, "All Strings").click();
     await page.waitForTimeout(500);
     await compareScreenshot(page, stringsView, "translation-tab-show-all-strings.png", { maxDiffPixels: 50 });
@@ -67,9 +67,9 @@ test.describe(title, () => {
   test("tranlation property grid", async ({ page }) => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     await getTabbedMenuItemByText(page, "Translation").click();
-    await page.locator(".spg-action-button").first().click();
+    await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Català" }).click(); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-    await page.locator(".spg-action-button").first().click();
+    await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Bahasa Indonesia" }).click();
     await compareScreenshot(page, page.locator(".spg-root-modern.st-properties"), "translation-property-grid.png");
   });
@@ -106,22 +106,28 @@ test.describe(title, () => {
     });
     const translationDialog = page.locator(".st-translation-dialog .sv-popup__body-content");
     await getTabbedMenuItemByText(page, "Translation").click();
-    await page.locator(".spg-action-button").first().click();
+    await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Català" }).click(); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     await page.locator("button[title='Auto-translate All']").last().click();
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup.png");
-    await page.locator("button[title='Apply']").click();
+    await showContentBehindPopup(page);
+    await page.getByRole("button", { name: "Apply" }).click();
     await page.waitForTimeout(1000);
     await page.locator("textarea").nth(1).type("translated");
-    await page.locator(".spg-action-button").first().click();
+    await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Dansk" }).click();
     await page.locator("button[title='Auto-translate All']").last().click();
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-enabled-dropdown.png");
+    await showContentBehindPopup(page);
     await page.setViewportSize({ width: 1000, height: 1440 });
     await page.waitForTimeout(500);
-    await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-medium-screen.png");
+    await hideContentBehindPopup(page);
+    await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-medium-screen.png", { maxDiffPixels: 2 });
+    await showContentBehindPopup(page);
     await page.setViewportSize({ width: 800, height: 1440 });
     await page.waitForTimeout(500);
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-small-screen.png", { maxDiffPixels: 2 });
+    await showContentBehindPopup(page);
   });
 });

@@ -28,54 +28,7 @@
         <div v-if="!adorner.isNew" class="svc-image-item-value__item">
           <SvComponent :is="componentName" v-bind="componentData"></SvComponent>
         </div>
-        <span
-          v-if="adorner.isDraggable && adorner.canRenderControls"
-          class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
-          @pointerdown="adorner.onPointerDown($event)"
-          :title="undefined"
-          :aria-label="undefined"
-        >
-          <SvComponent
-            :is="'sv-svg-icon'"
-            :iconName="'icon-drag-24x24'"
-            :size="'auto'"
-          ></SvComponent>
-        </span>
-        <div
-          v-if="adorner.canRenderControls"
-          class="svc-context-container svc-image-item-value-controls"
-        >
-          <span
-            class="svc-context-button"
-            @click="adorner.chooseFile(adorner)"
-            v-key2click
-            :title="undefined"
-            :aria-label="undefined"
-          >
-            <SvComponent
-              :is="'sv-svg-icon'"
-              role="button"
-              :iconName="'icon-choosefile'"
-              :size="'auto'"
-              :title="adorner.selectFileTitle"
-            ></SvComponent>
-          </span>
-          <span
-            class="svc-context-button svc-context-button--danger"
-            @click="adorner.remove(adorner)"
-            v-key2click
-            :title="undefined"
-            :aria-label="undefined"
-          >
-            <SvComponent
-              :is="'sv-svg-icon'"
-              role="button"
-              :iconName="'icon-delete'"
-              :size="'auto'"
-              :title="adorner.removeFileTitle"
-            ></SvComponent>
-          </span>
-        </div>
+        <SvComponent :is="'sv-action-bar'" :model="adorner.topActionsContainer" v-if="adorner.canRenderControls"></SvComponent>
       </template>
       <template v-else>
         <div
@@ -101,16 +54,7 @@
           v-if="adorner.allowAdd && !adorner.isUploading"
         >
           <span class="svc-image-item-value__placeholder" v-if="adorner.showPlaceholder">{{adorner.placeholderText}}</span>
-          <span :class="adorner.addButtonCss" @click="adorner.chooseNewFile(adorner)" v-key2click>
-              <SvComponent
-                :is="'sv-svg-icon'"
-                :iconName="'icon-add-lg'"
-                :size="'auto'"
-                :title="adorner.addFileTitle"
-                v-if="adorner.showChooseButtonAsIcon"
-              />
-              <span v-else>{{adorner.chooseImageText}}</span>
-          </span>
+          <SvComponent :is="'sv-action-bar'" :model="adorner.actionsContainer"></SvComponent>
         </div>
       </template>
     </div>
@@ -118,7 +62,6 @@
 </template>
 <script lang="ts" setup>
 import { SvComponent } from "survey-vue3-ui";
-import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { useCreatorModel } from "@/creator-model";
 import type { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import {

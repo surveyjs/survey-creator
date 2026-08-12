@@ -3,7 +3,7 @@ import {
   QuestionAdornerViewModel
 } from "survey-creator-core";
 import * as React from "react";
-import { attachKey2click, LoadingIndicatorComponent, ReactElementFactory, ReactQuestionFactory, SvgIcon } from "survey-react-ui";
+import { attachKey2click, LoadingIndicatorComponent, ReactElementFactory, ReactQuestionFactory, SurveyActionBar, SvgIcon } from "survey-react-ui";
 import {
   QuestionAdornerComponent,
   QuestionAdornerComponentProps
@@ -48,14 +48,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
     </div>);
   }
   renderChooseButton(): React.JSX.Element {
-    return (<div className="svc-image-question-controls">
-      {this.model.allowEdit ? attachKey2click(<span
-        className="svc-context-button"
-        onClick={() => this.imageModel.chooseFile(this.imageModel)}
-      >
-        <SvgIcon size={"auto"} iconName={"icon-choosefile"}></SvgIcon>
-      </span>) : null}
-    </div>);
+    return <SurveyActionBar model={this.imageModel.imageActionsContainer}></SurveyActionBar>;
   }
   renderElementPlaceholder(): React.JSX.Element {
     return this.imageModel.isUploading ? this.renderLoadingPlaceholder() : this.renderChooseButton();

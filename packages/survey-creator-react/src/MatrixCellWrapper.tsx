@@ -54,12 +54,11 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
     let controls = null;
     if (!!this.model.isSupportCellEditor) {
       controls = <div className="svc-matrix-cell__question-controls">
-        {attachKey2click(<span className="svc-matrix-cell__question-controls-button svc-context-button" onClick={(event: any) => this.model.editQuestion(this.model, event)}>
-          <SvgIcon size={"auto"} iconName={"icon-edit"}></SvgIcon>
-        </span>)}
+        {ReactElementFactory.Instance.createElement("sv-action-bar-item", {
+          item: this.model.editAction,
+        })}
       </div>;
     }
-
     return (
       <div
         className={"svc-matrix-cell"}

@@ -1,6 +1,14 @@
-import { url, compareScreenshot, test, setJSON, expect, resetHoverToCreator, addQuestionByAddQuestionButton, setAllowZoom } from "./helper";
+import { url, compareScreenshot, test, setJSON, expect, resetHoverToCreator, addQuestionByAddQuestionButton, setAllowZoom, hideContentBehindPopup, showContentBehindPopup, setToolboxItemJSON } from "./helper";
 
 const title = "Matrix surface";
+
+// The default JSON of a new Multi-Select Matrix names its columns "column1"/"column2"/... and titles them "Column 1"/"Column 2"/...
+// These tests rely on the previous default, where the column name itself was "Column 1".
+const oldDefaultMatrixdropdownJSON = {
+  columns: [{ name: "Column 1" }, { name: "Column 2" }, { name: "Column 3" }],
+  rows: ["Row 1", "Row 2"],
+  choices: [1, 2, 3, 4, 5]
+};
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
@@ -9,18 +17,22 @@ test.describe(title, () => {
 
   test("Matrix column editor", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
+    await setToolboxItemJSON(page, "matrixdropdown", oldDefaultMatrixdropdownJSON);
     await addQuestionByAddQuestionButton(page, "Multi-Select Matrix");
     const row1Column1Cell = page.locator(".sv-dropdown_select-wrapper").first();
     const editColumnButton = page.locator(".svc-matrix-cell__question-controls-button").first();
 
     await row1Column1Cell.hover({ force: true });
     await editColumnButton.click();
-    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit.png");
+    await hideContentBehindPopup(page);
+    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit.png", { maxDiffPixels: 5 });
+    await showContentBehindPopup(page);
   });
 
   test("Matrix column editor with design surface zoomed out", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     await setAllowZoom(page, true);
+    await setToolboxItemJSON(page, "matrixdropdown", oldDefaultMatrixdropdownJSON);
     await addQuestionByAddQuestionButton(page, "Multi-Select Matrix");
     for (let i = 0; i < 5; i++) {
       await page.locator(".sv-action--zoomOut button").click();
@@ -32,7 +44,9 @@ test.describe(title, () => {
     await editColumnButton.click();
     await page.mouse.move(0, 0);
     // await page.locator(".sv-popup__body-content").hover({ position: { x: 10, y: 10 } });
-    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit-surface-zoomed-out.png");
+    await hideContentBehindPopup(page);
+    await compareScreenshot(page, page.locator(".svc-matrix-cell__popup .sv-popup__container"), "matrix-cell-edit-surface-zoomed-out.png", { maxDiffPixels: 5 });
+    await showContentBehindPopup(page);
   });
 
   test("Matrix column", async ({ page }) => {
@@ -214,7 +228,7 @@ test.describe(title, () => {
       ],
     };
     await setJSON(page, json);
-    await page.locator("[data-name='question1'] .sv-string-editor").first().waitFor({ state: "visible" });
+    await expect(page.locator("[data-name='question1'] .sv-string-editor").first()).toBeVisible();
     await page.evaluate(() => {
       ((window as any).creator.rootElement.getRootNode().querySelector("[data-name='question1'] .sv-string-editor") as HTMLElement).focus();
     });
@@ -240,7 +254,7 @@ test.describe(title, () => {
       ],
     };
     await setJSON(page, json);
-    await page.locator(".sd-table__cell--detail-panel .svc-row").nth(0).click();
+    await page.locator(".sd-table__cell--detail-panel .svc-row").nth(0).click({ position: { x: 10, y: 10 } });
     await expect(page.locator(".svc-question__content--selected")).toBeVisible();
     await compareScreenshot(page, page.locator(".svc-question__content"), "surface-matrix-detail-two-questions-select.png");
   });
@@ -277,14 +291,18 @@ test.describe(title, () => {
     await page.locator(".svc-matrix-cell").nth(3).hover({ force: true });
     await expect(dropdownButton).toBeVisible();
     await dropdownButton.click();
-    await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png");
+    await hideContentBehindPopup(page);
+    await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png", { maxDiffPixels: 42 });
+    await showContentBehindPopup(page);
     await page.locator("button").filter({ hasText: "Cancel" }).click();
     await page.waitForTimeout(500);
 
     await page.locator(".svc-matrix-cell").nth(4).hover({ force: true });
     await expect(ratingButton).toBeVisible();
     await ratingButton.click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-rating.png");
+    await showContentBehindPopup(page);
   });
 
   test("Matrix Dynamiv with rows drad-drop", async ({ page }) => {

@@ -2,12 +2,11 @@ export let Version: string;
 Version = `${process.env.VERSION}`;
 
 //should be loaded before other styles for easier override
-import "../utils/context-button.scss";
-
 export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings, getLocaleStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
 export * from "../creator-settings";
+export * from "../localizable-json";
 export { ICreatorOptions } from "../creator-options";
 
 export * from "../creator-events-api";
@@ -39,6 +38,7 @@ export * from "../components/tabs/designer-plugin";
 export * from "../components/tabs/logic-ui";
 export * from "../components/tabs/logic-plugin";
 export * from "../components/tabs/logic-theme";
+export * from "../components/tabs/container-tab";
 
 export * from "../components/toolbox/toolbox-tool";
 export * from "../components/toolbox/toolbox-search-manager";
@@ -46,6 +46,7 @@ export * from "../components/page-navigator/page-navigator";
 export * from "../components/page";
 export * from "../components/row";
 export * from "../components/question";
+export * from "../components/panel";
 export * from "../components/question-dropdown";
 export * from "../components/question-image";
 export * from "../components/question-rating";
@@ -59,7 +60,6 @@ export * from "../components/string-editor";
 export * from "../components/embedded-survey";
 export * from "../components/link-value";
 export * from "../components/search-manager";
-export * from "../components/list-theme";
 export * from "../editorLocalization";
 export * from "../json5";
 
@@ -67,7 +67,6 @@ export * from "../json5";
 export * from "../custom-questions/question-spin-editor";
 export * from "../custom-questions/question-color";
 export * from "../custom-questions/question-file";
-export * from "../custom-questions/question-text-with-reset";
 
 export * from "../property-grid";
 export * from "../property-grid/condition";
@@ -81,6 +80,7 @@ export * from "../property-grid/values";
 export * from "../property-grid/search-manager";
 export * from "../property-grid/maskSettings";
 export * from "../property-grid/header-settings";
+export * from "../property-grid/boolean-display-mode";
 export { propertyGridCss } from "../property-grid-theme/property-grid";
 export * from "../questionconverter";
 export * from "../svgbundle";
@@ -97,7 +97,7 @@ export * from "../utils/utils";
 export * from "../utils/html-element-utils";
 export * from "../utils/color-utils";
 export * from "../utils/creator-utils";
-export { MenuButton } from "../utils/actions";
+export * from "../utils/confirm-dialog";
 export * from "../question-editor/definition";
 export * from "../question-editor/properties";
 export * from "../survey-helper";
@@ -108,10 +108,16 @@ export * from "../pages-controller";
 export * from "../creator-theme/creator-themes";
 export * from "../creator-theme/creator-theme-model-definition";
 export * from "../creator-theme/creator-theme-model";
+export * from "../ui-presets-creator/presets-base";
+export * from "../ui-presets-creator/presets";
+export * from "../ui-presets-creator/presets-properties";
+export * from "../ui-presets-creator/presets-tabs";
+export * from "../ui-presets-creator/presets-toolbox";
 export * from "../dragdrop-survey-elements";
 
 import "../components/search.scss";
 import "../components/component-container/component-container.scss";
+import "../components/icon-item.scss";
 import "../components/property-panel/property-panel-item.scss";
 import "../components/property-panel/property-panel.scss";
 import "../components/tabbed-menu/tabbed-menu-item.scss";
@@ -126,7 +132,9 @@ import "../components/side-bar/side-bar.scss";
 import "../components/side-bar/tab-control.scss";
 import "../property-grid-theme/property-grid.scss";
 import "../utils/layout.scss";
-import "../custom-questions/boolean-switch.scss";
+import "../utils/confirmation.scss";
+
+import "../presets-theme/presets.scss";
 
 import { settings, checkLibraryVersion } from "survey-core";
 

@@ -1,5 +1,4 @@
 import { defaultActionBarCss } from "survey-core";
-import { listComponentCss } from "../list-theme";
 
 export var logicCss = {
   root: "",
@@ -59,6 +58,7 @@ export var logicCss = {
     separator: "sv-hidden",
     panelWrapper: "sl-panel-wrapper",
     content: "sl-paneldynamic__content",
+    footer: "sl-paneldynamic__footer",
     panelsContainer: "",
     panelWrapperList: "sl-panel-wrapper--list",
     panelWrapperInRow: "sl-panel-wrapper--in-row",
@@ -94,7 +94,7 @@ export var logicCss = {
     headerBottom: "",
     content: "",
     contentLeft: "",
-    titleLeftRoot: "",
+    titleLeftRoot: "sl-question--header-left",
     titleOnAnswer: "",
     titleOnError: "",
     enter: "sl-element-wrapper--enter",
@@ -288,7 +288,7 @@ export var logicCss = {
   },
   comment: {
     mainRoot: "",
-    root: "spg-input spg-comment sl-comment",
+    root: "sd-formbox sd-comment sl-comment",
     small: ""
   },
   expression: "",
@@ -335,7 +335,6 @@ export var logicCss = {
       buttonCollapsed: ""
     }
   },
-  list: JSON.parse(JSON.stringify(listComponentCss)),
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
   },

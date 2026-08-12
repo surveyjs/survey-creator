@@ -7,7 +7,6 @@ import {
 import { imageMimeTypes } from "../../src/utils/utils";
 import { SurveyCreatorModel } from "../../src/creator-base";
 import { CreatorTester } from "../creator-tester";
-export * from "../../src/custom-questions/question-text-with-reset";
 
 test("Check file editor value", () => {
   const question = new QuestionFileEditorModel("q1");

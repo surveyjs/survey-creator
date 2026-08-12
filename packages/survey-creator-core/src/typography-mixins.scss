@@ -60,3 +60,16 @@
   font-size: var(--sjs2-typography-font-size-small);
   line-height: var(--sjs2-typography-line-height-small);
 }
+
+@mixin sjs2--typography--component-caption-content {
+  font-family: var(--sjs2-typography-font-family-component-caption-content);
+  font-size: var(--sjs2-typography-font-size-component-caption-content);
+  font-weight: var(--sjs2-typography-font-weight-component-caption-content);
+  line-height: var(--sjs2-typography-line-height-component-caption-content);
+}
+@mixin sjs2--typography--component-caption-hint {
+  font-family: var(--sjs2-typography-font-family-component-caption-hint);
+  font-size: var(--sjs2-typography-font-size-component-caption-hint);
+  font-weight: var(--sjs2-typography-font-weight-component-caption-hint);
+  line-height: var(--sjs2-typography-line-height-component-caption-hint);
+}

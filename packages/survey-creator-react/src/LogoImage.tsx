@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Base } from "survey-core";
-import { ReactElementFactory, LogoImage, SvgIcon, attachKey2click, LoadingIndicatorComponent } from "survey-react-ui";
+import { ReactElementFactory, LogoImage, SvgIcon, attachKey2click, LoadingIndicatorComponent, SurveyActionBar } from "survey-react-ui";
 import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
 import { CreatorModelElement } from "./ModelElement";
 
@@ -32,27 +32,8 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
     super.componentDidMount();
     this.model.root = this.rootRef.current;
   }
-  renderChooseButton() {
-    return attachKey2click(<span
-      className="svc-context-button"
-      onClick={() => this.model.chooseFile(this.model)}
-    >
-      <SvgIcon size={"auto"} iconName={"icon-choosefile"}></SvgIcon>
-    </span>);
-  }
-  renderClearButton() {
-    return attachKey2click(<span
-      className="svc-context-button svc-context-button--danger"
-      onClick={() => this.model.remove(this.model)}
-    >
-      <SvgIcon size={"auto"} iconName={"icon-clear"}></SvgIcon>
-    </span>);
-  }
   renderButtons() {
-    return (<div className="svc-context-container svc-logo-image-controls">
-      {this.renderChooseButton()}
-      {this.renderClearButton()}
-    </div>);
+    return <SurveyActionBar model={this.model.actionsContainer} />;
   }
   renderImage() {
     return <div className={this.model.containerCss}>

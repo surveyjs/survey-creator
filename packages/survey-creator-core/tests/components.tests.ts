@@ -619,14 +619,16 @@ test("QuestionRatingAdornerViewModel button styles", () => {
     question,
     <any>{}
   );
-  expect(ratingAdorner.addClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__add");
-  expect(ratingAdorner.removeClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__remove");
+  const addAction = ratingAdorner.rateActionsContainer.getActionById("add");
+  const removeAction = ratingAdorner.rateActionsContainer.getActionById("remove");
+  expect(addAction.enabled).toBeTruthy();
+  expect(removeAction.enabled).toBeTruthy();
   question.rateMax = 2;
-  expect(ratingAdorner.addClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__add");
-  expect(ratingAdorner.removeClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__button--disabled svc-item-value-controls__remove");
+  expect(addAction.enabled).toBeTruthy();
+  expect(removeAction.enabled).toBeFalsy();
   question.rateMax = 4;
-  expect(ratingAdorner.addClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__button--disabled svc-item-value-controls__add");
-  expect(ratingAdorner.removeClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__remove");
+  expect(addAction.enabled).toBeFalsy();
+  expect(removeAction.enabled).toBeTruthy();
 });
 
 test("QuestionRatingAdornerViewModel controlsClassNames", () => {
@@ -1208,8 +1210,10 @@ test("Show/hide choiceitem panel based on creator.maxChoiceContentNestingLevel",
   const creator = new CreatorTester();
   creator.maxChoiceContentNestingLevel = 2;
   creator.JSON = {
-    elements: [{ type: "checkbox", name: "q1",
-      choices: [{ value: 1, elements: [{ type: "checkbox", name: "q2", choices: [1, 2, 3] }] }, 2, 3] }]
+    elements: [{
+      type: "checkbox", name: "q1",
+      choices: [{ value: 1, elements: [{ type: "checkbox", name: "q2", choices: [1, 2, 3] }] }, 2, 3]
+    }]
   };
   const q1 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
   const q2 = <QuestionDropdownModel>creator.survey.getQuestionByName("q2");
@@ -1233,8 +1237,10 @@ test("Do not collapse choice panel on adding a new question into empty panel", (
   const creator = new CreatorTester();
   creator.maxChoiceContentNestingLevel = 1;
   creator.JSON = {
-    elements: [{ type: "checkbox", name: "q1",
-      choices: [1, 2, 3] }]
+    elements: [{
+      type: "checkbox", name: "q1",
+      choices: [1, 2, 3]
+    }]
   };
   const q1 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
   const itemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
@@ -1250,8 +1256,10 @@ test("ExpandCollapseManager for choice item panel", (): any => {
   const creator = new CreatorTester();
   creator.maxChoiceContentNestingLevel = 1;
   creator.JSON = {
-    elements: [{ type: "checkbox", name: "q1",
-      choices: [1, 2, 3] }]
+    elements: [{
+      type: "checkbox", name: "q1",
+      choices: [1, 2, 3]
+    }]
   };
   const manager = creator.expandCollapseManager;
   const question = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
@@ -1298,8 +1306,10 @@ test("Adorner should react on calling function of choiceItem", (): any => {
   const creator = new CreatorTester();
   creator.maxChoiceContentNestingLevel = 1;
   creator.JSON = {
-    elements: [{ type: "checkbox", name: "q1",
-      choices: [1, 2, 3] }]
+    elements: [{
+      type: "checkbox", name: "q1",
+      choices: [1, 2, 3]
+    }]
   };
   const question = <QuestionCheckboxModel>creator.survey.getQuestionByName("q1");
   const choiceItem = <ChoiceItem>question.choices[0];

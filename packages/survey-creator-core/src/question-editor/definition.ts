@@ -106,7 +106,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showPreview" },
       "allowImagesPreview",
       "waitForUpload",
-      "needConfirmRemoveFile",
+      "confirmDelete",
       { name: "storeDataAsText" },
       "allowCameraAccess",
       "acceptedCategories",
@@ -426,6 +426,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   boolean: {
     properties: [
+      "displayMode",
       "label",
       "labelTrue",
       "labelFalse",
@@ -835,7 +836,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showProgressBar", tab: "navigation" },
       { name: "progressBarType", tab: "navigation" },
       { name: "progressBarLocation", tab: "navigation" },
-      { name: "progressBarShowPageTitles", tab: "navigation" },
+      { name: "progressBarShowNavigationText", tab: "navigation" },
+      { name: "progressBarNavigationTextLocation", tab: "navigation" },
       { name: "progressBarShowPageNumbers", tab: "navigation" },
       { name: "progressBarInheritWidthFrom", tab: "navigation" },
       { name: "showTOC", tab: "navigation" },

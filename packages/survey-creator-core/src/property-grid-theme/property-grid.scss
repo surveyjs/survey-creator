@@ -1,9 +1,7 @@
 @use "../variables" as *;
 @use "blocks/spg-action-bar.scss";
 @use "blocks/spg-question.scss";
-@use "blocks/spg-input.scss";
 @use "blocks/spg-dropdown.scss";
-@use "blocks/spg-tagbox.scss";
 @use "blocks/spg-comment.scss";
 @use "blocks/spg-panel.scss";
 @use "blocks/spg-checkbox.scss";
@@ -16,19 +14,26 @@
 @use "blocks/spg-theme-builder.scss";
 @use "blocks/spg-overriding.scss";
 @use "blocks/spg-search-editor.scss";
-@use "blocks/spg-buttongroup.scss";
+@use "blocks/spg-launch.scss";
 
 .spg-root-modern {
   position: relative;
   width: 100%;
   border-inline-end: 1px solid transparent;
-  background: var(--ctr-property-grid-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background: var(--sjs2-color-bg-basic-primary);
   box-sizing: border-box;
   height: 0;
   flex-grow: 1;
-  /* disable library transition animations */
-  --sjs-transition-duration: 0ms;
   @include disableLibraryAnimations;
+}
+
+.spg-page__content {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sjs2-layout-component-page-content-area-padding-vertical)
+    var(--sjs2-layout-component-page-content-area-padding-horizontal);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .spg-container {
@@ -38,9 +43,16 @@
   flex-direction: column;
 }
 
+.spg-container--multi-page {
+  .spg-page__content {
+    row-gap: var(--sjs2-spacing-x200);
+    column-gap: var(--sjs2-spacing-x200);
+  }
+}
+
 .spg-root-modern.spg-root--one-category {
   border-inline-end: unset;
-  background-color: var(--ctr-property-grid-form-background-color, var(--sjs-layer-1-background-500, #ffffffff));
+  background-color: var(--sjs2-color-utility-property-grid);
 
   .spg-page.spg-body__page {
     box-shadow: unset;
@@ -59,6 +71,9 @@
 
     .sd-root-modern {
       background-color: transparent;
+      &:before {
+        background-color: transparent;
+      }
     }
 
     .sd-page {
@@ -67,7 +82,7 @@
     }
 
     .sv-components-column--expandable {
-      min-width: calcSize(78);
+      min-width: calc(var(--sjs2-base-unit-size) * 78);
     }
   }
 
@@ -77,7 +92,7 @@
 
   .sd-body,
   .sl-body {
-    min-width: calcSize(78);
+    min-width: calc(var(--sjs2-base-unit-size) * 78);
     padding: 0;
   }
 }
@@ -87,8 +102,8 @@
 }
 
 .svc-object-selector .sv-popup__container {
-  margin-left: calcSize(1);
-  margin-right: calcSize(1);
+  margin-left: var(--sjs2-spacing-x100);
+  margin-right: var(--sjs2-spacing-x100);
 }
 
 .svc-object-selector__content {
@@ -97,11 +112,6 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-}
-
-.spg-action-title-bar {
-  margin-inline-end: var(--ctr-data-table-border-width, var(--sjs-stroke-x1));
-  padding-inline-end: var(--ctr-caption-with-actions-actionbar-padding-right, calcSize(0.5));
 }
 
 .spg-body {
@@ -120,49 +130,13 @@
   color: var(--sjs2-color-fg-basic-secondary, rgba(28, 27, 32, 0.6));
   text-align: center;
 
-  /* sjs2/typography/default */
-  font-family: var(--sjs2-typography-font-family-default, "Open Sans");
-  font-size: var(--sjs2-typography-font-size-default, 16px);
-  font-style: normal;
-  font-weight: 400;
-  line-height: var(--sjs2-typography-line-height-default, 24px); /* 150% */
+  @include sjs2--typography--default;
 }
 
 .spg-title-toolbar--single-help-action {
   justify-content: flex-start;
-  padding-left: calcSize(0.5);
-
-  // flex-grow: 0;
-  // margin-left: 0;
-  // padding-left: 0;
 
   .spg-help-action {
     margin-inline-end: auto;
-
-    .spg-action-button--icon {
-      padding: var(--ctr-actionbar-button-padding-top-small-icon, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-right-small-icon, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-bottom-small-icon, var(--sjs-spacing-x05))
-        var(--ctr-actionbar-button-padding-left-small-icon, var(--sjs-spacing-x05));
-      opacity: var(--ctr-actionbar-button-opacity-muted, 0.35);
-    }
-
-    .spg-action-button--icon:focus,
-    .spg-action-button--icon:hover {
-      opacity: 1;
-    }
-
-    .spg-action-button:active {
-      opacity: var(--ctr-actionbar-button-opacity-pressed, 0.5);
-    }
-
-    .spg-action-button__icon {
-      width: var(--ctr-actionbar-button-icon-width-small, var(--sjs-font-size-x2));
-      height: var(--ctr-actionbar-button-icon-height-small, var(--sjs-font-size-x2));
-    }
-
-    svg {
-      fill: var(--ctr-actionbar-button-icon-color, var(--sjs-layer-1-foreground-75, #000000bf));
-    }
   }
 }

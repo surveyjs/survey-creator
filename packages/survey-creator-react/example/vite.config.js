@@ -23,11 +23,10 @@ export default defineConfig({
   },
   build: {
     commonjsOptions: {
-      include: [/survey-creator-core\/build\/themes\/test/, /node_modules/],
+      include: [/node_modules/],
     },
   },
   optimizeDeps: {
-    include: ["survey-creator-core/themes/test"],
     esbuildOptions: {
       define: {
         global: 'globalThis',

@@ -362,6 +362,10 @@ test("All properties should be in English translation", () => {
       }
     });
   });
+  if (errors.length > 0) {
+    //eslint-disable-next-line no-console
+    console.log("error ", errors[0]);
+  }
   expect(errors).toHaveLength(0);
 });
 test("getLocaleStrings function, Bug#6754", () => {

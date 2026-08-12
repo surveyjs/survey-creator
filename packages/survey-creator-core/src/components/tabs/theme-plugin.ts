@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase, CurrentPageChangedEvent } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase, PanelModel, QuestionHtmlModel, QuestionFileModel, QuestionDropdownModel, QuestionCompositeModel, ItemValue, QuestionSelectBase, CurrentPageChangedEvent, IActionAppearance } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -15,7 +15,6 @@ import { Switcher } from "../switcher/switcher";
 import { themeModelPropertyGridDefinition } from "./theme-model-definition";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { TabControlModel } from "../side-bar/tab-control-model";
-import { MenuButton } from "../../utils/actions";
 import { CreatorDomHelper } from "../../dom-helper";
 /**
  * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
@@ -181,9 +180,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private setCoverPropertiesFromSurvey(panel, survey) {
     this._setPGEditorPropertyValue(panel.getQuestionByName("headerView"), "value", survey.headerView);
     this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "value", survey.logoPosition);
-
-    this._setPGEditorPropertyValue(panel.getQuestionByName("surveyTitle"), "readOnly", !survey.hasTitle);
-    this._setPGEditorPropertyValue(panel.getQuestionByName("surveyDescription"), "readOnly", !survey.hasDescription);
 
     this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !survey.hasTitle);
     this._setPGEditorPropertyValue(panel.getQuestionByName("headerDescription"), "readOnly", !survey.hasDescription);
@@ -374,13 +370,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private updateTabControlActions() {
     if (this.showOneCategoryInPropertyGrid) {
       const pgTabs = this.propertyGrid.survey.pages.map(p => {
-        const action = new MenuButton({
+        const action = new Action({
           id: p.name,
           tooltip: p.title,
           iconName: p["iconName"],
           iconSize: "auto",
           active: p.name === this.propertyGrid.survey.currentPage.name,
-          pressed: false,
           action: () => {
             this.creator.sidebar.expandSidebar();
             this.propertyGrid.survey.currentPage = p;
@@ -450,7 +445,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
     this.themeModel.onThemePropertyChanged.add((sender, options) => {
       this.syncTheme(this.themeModel.toJSON());
-      if (options.name == "--sjs-base-unit") {
+      if (options.name == "--sjs2-base-unit-size" || options.name == "--sjs2-base-unit-font-size" || options.name == "--sjs2-base-unit-radius") {
         this.model.survey.triggerResponsiveness(true);
       }
       if (options.name == "logoPosition") {
@@ -543,11 +538,14 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       iconName: "icon-arrow-left_16x16",
       title: getLocString("ts.prevPage"),
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       iconSize: "auto",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
-      visible: false
+      visible: false,
     });
 
     this.nextPageAction = new Action({
@@ -555,6 +553,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       css: "sv-action--nextPage",
       iconName: "icon-arrow-right_16x16",
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       title: getLocString("ts.nextPage"),
       iconSize: "auto",
       visible: false
@@ -576,6 +577,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       id: "testSurveyAgain",
       visible: false,
       iconSize: "auto",
+      appearance: { mode: "tertiary-surface", size: "large", style: "brand", showBorder: true },
       locTitleName: "ed.testSurveyAgain",
       action: () => {
         this.model.testAgain();
@@ -670,7 +672,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         return this.creator.activeTab === "theme" && (isMobileView || !isShowOneCategoryInPropertyGrid);
       }),
       active: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
-      pressed: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
       locTitleName: "ed.themeSettings",
       locTooltipName: "ed.themeSettingsTooltip",
       showTitle: false
@@ -914,6 +915,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public getThemeChanges() {
     const themeModel = new ThemeModel();
+    themeModel.baseThemeVariables = this.themeModel.baseThemeVariables;
     themeModel.fromJSON(this.creator.theme);
     const theme = themeModel.toJSON({ storeDefaults: false });
     return getThemeChanges(theme);
@@ -995,12 +997,13 @@ export function updateThemeEditorsDefaultFontFamily() {
   const getPropertyUpdater = className => propertyName => {
     const property = Serializer.getProperty(className, propertyName);
     if (property) {
+      if (!property.defaultValue) property.defaultValue = {};
       property.defaultValue.family = settings.themeEditor.defaultFontFamily;
     }
   };
-  ["surveyTitle", "headerTitle", "surveyDescription", "headerDescription"].forEach(getPropertyUpdater("header"));
-  ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "editorFont"].forEach(getPropertyUpdater("theme"));
-  const fontFamilyProperty = Serializer.getProperty("theme", "--sjs-font-family");
+  ["surveyDescription", "headerDescription"].forEach(getPropertyUpdater("header"));
+  ["pageTitle", "pageDescription", "questionTitle", "questionDescription", "inputContent"].forEach(getPropertyUpdater("theme"));
+  const fontFamilyProperty = Serializer.getProperty("theme", "--sjs2-typography-font-family-text");
   if (fontFamilyProperty) {
     fontFamilyProperty.defaultValue = settings.themeEditor.defaultFontFamily;
   }

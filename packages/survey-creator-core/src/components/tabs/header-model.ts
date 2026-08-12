@@ -1,11 +1,28 @@
-import { Base, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, Serializer, HorizontalAlignment, VerticalAlignment } from "survey-core";
-import { settings } from "../../creator-settings";
+import { Base, IHeader, IJsonPropertyInfo, ILoadFromJSONOptions, ISaveToJSONOptions, ISurvey, ITheme, Serializer, HorizontalAlignment, VerticalAlignment, property } from "survey-core";
 import { fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { assign } from "../../utils/utils";
 
 export class HeaderModel extends Base implements IHeader {
   static primaryColorStr = "var(--sjs-primary-backcolor)";
+  static defaultTitleSettings = {
+    color: "--sjs2-color-component-survey-header-default-title",
+    weight: "--sjs2-typography-font-weight-component-survey-header-title",
+    size: "--sjs2-typography-font-size-component-survey-header-title",
+    lineHeight: "--sjs2-typography-line-height-component-survey-header-title",
+  };
+  static defaultDescriptionSettings = {
+    color: "--sjs2-color-component-survey-header-default-description",
+    size: "--sjs2-typography-font-size-component-survey-header-description",
+    weight: "--sjs2-typography-font-weight-component-survey-header-description",
+    lineHeight: "--sjs2-typography-line-height-component-survey-header-description",
+  };
+  static getDefaultVars() {
+    const titleVars = Object.keys(this.defaultTitleSettings).map(key => this.defaultTitleSettings[key as keyof typeof this.defaultTitleSettings]);
+    const descriptionVars = Object.keys(this.defaultDescriptionSettings).map(key => this.defaultDescriptionSettings[key as keyof typeof this.defaultDescriptionSettings]);
+    return [...titleVars, ...descriptionVars];
+  }
 
+  public baseThemeVariables: { [index: string]: string } = {};
   height: number;
   mobileHeight: number;
   inheritWidthFrom: "survey" | "container";
@@ -22,6 +39,9 @@ export class HeaderModel extends Base implements IHeader {
   descriptionPositionY: VerticalAlignment;
   public owner: ITheme;
 
+  @property() headerTitle;
+  @property() headerDescription;
+
   public getSurvey(live: boolean = false): ISurvey {
     return this.owner as any;
   }
@@ -33,13 +53,12 @@ export class HeaderModel extends Base implements IHeader {
 
   public setCssVariables(cssVariables?: { [index: string]: string }) {
     if (cssVariables) {
-      this["surveyTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyTitle"), cssVariables);
-      this["surveyDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("surveyDescription"), cssVariables);
-      this["headerTitle"] = fontsettingsFromCssVariable(this.getPropertyByName("headerTitle"), cssVariables);
-      this["headerDescription"] = fontsettingsFromCssVariable(this.getPropertyByName("headerDescription"), cssVariables);
+      ["headerTitle", "headerDescription"].forEach(propertyName => {
+        this[propertyName] = fontsettingsFromCssVariable(this.getPropertyByName(propertyName), cssVariables, this.baseThemeVariables);
+      });
     }
 
-    const backgroundColorValue = cssVariables["--sjs-header-backcolor"];
+    const backgroundColorValue = cssVariables["--sjs2-color-component-survey-header-default-bg"];
     if (!!backgroundColorValue) {
       this["backgroundColorSwitch"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
       this["backgroundColor"] = this["backgroundColorSwitch"] === "custom" ? backgroundColorValue : undefined;
@@ -61,7 +80,7 @@ export class HeaderModel extends Base implements IHeader {
       if (typeof result[key] === "object") {
         const property = this.getPropertyByName(key);
         if (property.type === "font") {
-          fontsettingsToCssVariable(result[key], property, cssVariables);
+          fontsettingsToCssVariable(result[key], property, cssVariables, this.baseThemeVariables);
           delete result[key];
         }
 
@@ -87,16 +106,13 @@ export class HeaderModel extends Base implements IHeader {
 
   private setHeaderBackgroundColorCssVariable(cssVariables: any) {
     if (this["backgroundColorSwitch"] === "none") {
-      cssVariables["--sjs-header-backcolor"] = undefined;
+      cssVariables["--sjs2-color-component-survey-header-default-bg"] = undefined;
     } else if (this["backgroundColorSwitch"] === "custom") {
-      cssVariables["--sjs-header-backcolor"] = this["backgroundColor"] ?? "transparent";
-    } else {
-      cssVariables["--sjs-header-backcolor"] = HeaderModel.primaryColorStr;
+      cssVariables["--sjs2-color-component-survey-header-default-bg"] = this["backgroundColor"] ?? "transparent";
     }
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (backgroundColor === HeaderModel.primaryColorStr) return "accentColor";
     if (!backgroundColor || backgroundColor === "transparent") return "none";
     return "custom";
   }
@@ -104,19 +120,6 @@ export class HeaderModel extends Base implements IHeader {
   public getType(): string {
     return "header";
   }
-}
-
-function getDefaultTitleSetting() {
-  const result = { family: settings.themeEditor.defaultFontFamily, weight: "700", size: 32 };
-  return result;
-}
-
-function getDefaultDescriptionSetting(isAdvanced?: boolean) {
-  const result = { family: settings.themeEditor.defaultFontFamily, weight: "400", size: 16 };
-  if (isAdvanced) {
-    result["size"] = 20;
-  }
-  return result;
 }
 
 function getHorizontalAlignment(questionName: string): IJsonPropertyInfo {
@@ -223,7 +226,6 @@ Serializer.addClass(
       default: "none",
       choices: [
         { value: "none" },
-        { value: "accentColor" },
         { value: "custom" },
       ],
     },
@@ -313,21 +315,7 @@ Serializer.addClass(
 Serializer.addProperties("header", [
   {
     type: "font",
-    name: "surveyTitle",
-    visibleIf: (obj) => obj.headerView === "basic",
-    default: getDefaultTitleSetting(),
-  },
-  {
-    type: "font",
-    name: "surveyDescription",
-    visibleIf: (obj) => obj.headerView === "basic",
-    default: getDefaultDescriptionSetting(),
-  },
-  {
-    type: "font",
     name: "headerTitle",
-    default: getDefaultTitleSetting(),
-    visibleIf: (obj) => obj.headerView === "advanced",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;
@@ -337,8 +325,6 @@ Serializer.addProperties("header", [
   {
     type: "font",
     name: "headerDescription",
-    default: getDefaultDescriptionSetting(true),
-    visibleIf: (obj) => obj.headerView === "advanced",
     onPropertyEditorUpdate: function (obj: any, editor: any) {
       if (!!editor) {
         editor.allowEmptyColorValue = true;

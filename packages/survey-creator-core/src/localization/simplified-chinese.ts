@@ -1262,8 +1262,6 @@ export var simplifiedChineseTranslation = {
     acceptedTypes: "附加文件扩展名",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "等待上传完成",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "确认文件删除",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "行详细信息对齐方式",
     // [Auto-translated] "Minimum row count"
@@ -1396,7 +1394,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Image height"
       imageHeight: "图像高度",
       // [Auto-translated] "Image width"
-      imageWidth: "图像宽度"
+      imageWidth: "图像宽度",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "确认文件删除"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "如果没有选择，则隐藏问题",
@@ -1454,6 +1454,10 @@ export var simplifiedChineseTranslation = {
     choiceTextsFromQuestion: "使用以下矩阵、列或面板问题中的值作为选择文本",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "在进度条中显示页面标题",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "在进度栏中显示导航文字",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "导航文本对齐",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "在进度条中显示页码",
     // [Auto-translated] "Add a comment box"
@@ -1681,25 +1685,25 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "描述字体",
       // [Auto-translated] "Font"
-      editorFont: "字体",
+      inputContent: "字体",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "不透明度", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "调查字体系列",
+      "--sjs2-typography-font-family-text": "调查字体家族",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "背景颜色",
+      "--sjs2-color-utility-surface-survey": "背景色",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "强调背景色",
+      "--sjs2-color-project-brand-600": "点缀背景色",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "强调前景色",
+      "--sjs2-color-fg-brand-on-primary": "强调前景色",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "错误消息颜色",
+      "--sjs2-color-bg-alert-primary": "错误消息颜色",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "阴影效果",
+      "--sjs2-border-effect-surface-default": "阴影效应",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "阴影效果",
+      "--sjs2-border-effect-component-formbox-default": "阴影效应",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "颜色"
+      "--sjs2-color-component-input-default-line": "颜色"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -1858,7 +1862,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Never"
       none: "从不"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "单选按钮",
     inputType: {
       // [Auto-translated] "Color"
@@ -2136,7 +2140,17 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Buttons"
       buttons: "按钮",
       // [Auto-translated] "Dropdown"
-      dropdown: "下拉列表"
+      dropdown: "下拉列表",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "分段切换",
+      // [Auto-translated] "Radio buttons"
+      radio: "单选按钮",
+      // [Auto-translated] "Checkbox"
+      checkbox: "复选框",
+      // [Auto-translated] "Switch"
+      switch: "切换",
+      // [Auto-translated] "Custom"
+      custom: "习俗"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
@@ -2574,7 +2588,9 @@ export var simplifiedChineseTranslation = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "指定预览中上传图像的显示宽度以及使用相机拍摄的图像的实际宽度。在单个文件上传模式下，显示宽度受预览区域限制;在多文件上传模式下，它受缩略图区域限制。",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "尽可能显示已上传文件的缩略图预览。取消选择是否要显示文件图标。"
+      allowImagesPreview: "尽可能显示已上传文件的缩略图预览。取消选择是否要显示文件图标。",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "触发一个提示，要求确认文件删除。"
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -2845,8 +2861,6 @@ export var simplifiedChineseTranslation = {
     valueFalse: "当受访者给出否定答案时保存在调查结果中的值。",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "不建议禁用此选项，因为它会覆盖预览图像，并使用户难以了解文件是否已上传。",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "触发提示，要求确认文件删除。",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "启用此选项可仅对选定的选项进行排名。用户将从选项列表中拖动所选项目，以在排名区域内对它们进行排序。",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -2930,8 +2944,8 @@ export var simplifiedChineseTranslation = {
       questionBackgroundTransparency: "调整输入元素相对于调查背景的透明度。",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "设置所有矩形元素的圆角半径。如果要为输入元素或面板和问题框设置单独的角半径值，请启用高级模式。",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "设置调查的主要背景颜色。"
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "设定调查的主要背景色。"
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3208,6 +3222,8 @@ export var simplifiedChineseTranslation = {
     placeholderColor: "占位符颜色",
     // [Auto-translated] "Size"
     size: "大小",
+    // [Auto-translated] "Line height"
+    lineHeight: "线路高度",
     // [Auto-translated] "Opacity"
     opacity: "不透明度",
     // [Auto-translated] "X"
@@ -3227,24 +3243,20 @@ export var simplifiedChineseTranslation = {
     names: {
       // [Auto-translated] "Default"
       default: "违约",
-      // [Auto-translated] "Sharp"
-      sharp: "锋利",
+      // [Auto-translated] "Contrast"
+      contrast: "反差",
       // [Auto-translated] "Borderless"
       borderless: "无国界",
       // [Auto-translated] "Flat"
       flat: "平",
       // [Auto-translated] "Plain"
       plain: "平原",
-      // [Auto-translated] "Double Border"
-      doubleborder: "双边框",
-      // [Auto-translated] "Layered"
-      layered: "分层的",
-      // [Auto-translated] "Solid"
-      solid: "固体",
+      // [Auto-translated] "Soft"
+      soft: "软",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "反差"
+      // [Auto-translated] "Monochrome"
+      monochrome: "单色"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3275,15 +3287,27 @@ export var simplifiedChineseTranslation = {
     // [Auto-translated] "Font"
     fontScale: "字体",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "调查创建者 2020",
-      // [Auto-translated] "Light"
-      "default-light": "光",
-      // [Auto-translated] "Dark"
-      "default-dark": "黑暗",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "反差"
+
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "基础",
+      // [Auto-translated] "Advanced"
+      advanced: "高级",
+      // [Auto-translated] "Expert"
+      expert: "专家"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "预设应用"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "项目1" }, { value: "item2", text: "项目2" }, { value: "item3", text: "项目3" }],
+    columns: [{ value: "column1", text: "列 1" }, { value: "column2", text: "列 2" }, { value: "column3", text: "列 3" }],
+    rows: [{ value: "row1", text: "行 1" }, { value: "row2", text: "行 2" }],
+    matrixColumns: [{ name: "column1", title: "列 1" }, { name: "column2", title: "列 2" }, { name: "column3", title: "列 3" }]
   }
 };
 

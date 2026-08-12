@@ -21,7 +21,6 @@ export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/theme-settings";
-export * from "../../src/custom-questions/question-text-with-reset";
 
 test("Validators property editor, v2", () => {
   var question = new QuestionTextModel("q1");

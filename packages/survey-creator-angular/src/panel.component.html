@@ -27,34 +27,14 @@
         <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame-wrapper">
           <div class="svc-panel__placeholder_frame">
             <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
-            <div *ngIf="adorner.showAddQuestionButton" class="svc-panel__add-new-question svc-action-button" [key2click]
-              (click)="addNewQuestion($event)">
-              <svg class="svc-panel__add-new-question-icon" [iconName]="('icon-add_24x24')" [size]="'auto'"
-                sv-ng-svg-icon></svg>
-              <span class="svc-add-new-item-button__text">
-                {{ adorner.addNewQuestionText }}
-              </span>
-            </div>
+            <sv-action-bar *ngIf="adorner.showAddQuestionButton" [model]="adorner.addQuestionActionsContainer"></sv-action-bar>
           </div>
         </div>
 
         <ng-template *ngIf="adornerComponent && adorner.element.isInteractiveDesignElement"
           [component]="{ name: adornerComponent, data: { adorner: adorner, question: model } }">
         </ng-template>
-
-        <div *ngIf="!adorner.isEmptyElement && adorner.showAddQuestionButton"
-          class="svc-panel__add-new-question-container">
-          <div class="svc-panel__question-type-selector-popup"> <sv-ng-popup
-              [popupModel]="adorner.questionTypeSelectorModel.popupModel"></sv-ng-popup>
-          </div>
-
-          <div class="svc-panel__add-new-question-wrapper">
-            <ng-template
-              [component]="{ name: 'svc-add-new-question-btn', data: { model: { data: adorner }, buttonClass: 'svc-action-button', renderPopup: false } }">
-            </ng-template>
-          </div>
-        </div>
-
+        <sv-action-bar *ngIf="!adorner.isEmptyElement &&adorner.showAddQuestionButton" [model]="adorner.addQuestionActionsContainer"></sv-action-bar>
         <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content-actions"
           (focusin)="adorner.select(adorner, $event)">
           <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>

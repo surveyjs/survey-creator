@@ -12,8 +12,8 @@ test.describe(title, () => {
     const languagesSelector = page.locator(".spg-checkbox");
     const languageDefaultText = page.locator(".spg-table__question-wrapper").getByText("Default (English)");
     const languageDeText = page.locator(".spg-table__question-wrapper").getByText("Deutsch");
-    const checkedClassName = "spg-checkbox--checked";
-    const disabledClassName = "spg-checkbox--disabled";
+    const checkedClassName = "sd-checkbox--checked";
+    const disabledClassName = "sd-checkbox--readonly";
 
     const json = {
       elements: [

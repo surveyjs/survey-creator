@@ -441,6 +441,8 @@ export var enStrings = {
     addItem: "Click to add an item...",
     removeItem: "Click to remove the item...",
     dragItem: "Drag the item",
+    expandNestedChoices: "Expand nested choices",
+    collapseNestedChoices: "Collapse nested choices",
     edit: "Edit",
     doneEditing: "Done",
     emptyValue: "Value is empty",
@@ -667,7 +669,6 @@ export var enStrings = {
     acceptedCategories: "Accepted file categories",
     acceptedTypes: "Additional file extensions",
     waitForUpload: "Wait for upload to complete",
-    needConfirmRemoveFile: "Confirm file deletion",
     detailPanelMode: "Row details alignment",
     minRowCount: "Minimum row count",
     maxRowCount: "Maximum row count",
@@ -741,7 +742,8 @@ export var enStrings = {
     },
     file: {
       imageHeight: "Image height",
-      imageWidth: "Image width"
+      imageWidth: "Image width",
+      confirmDelete: "Confirm file deletion"
     },
     hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width",
@@ -771,6 +773,8 @@ export var enStrings = {
     choiceValuesFromQuestion: "Use values from the following matrix column or panel question as choice IDs",
     choiceTextsFromQuestion: "Use values from the following matrix column or panel question as choice texts",
     progressBarShowPageTitles: "Display page titles in the progress bar",
+    progressBarShowNavigationText: "Display navigation text in the progress bar",
+    progressBarNavigationTextLocation: "Navigation text alignment",
     progressBarShowPageNumbers: "Display page numbers in the progress bar",
     showCommentArea: "Add a comment box",
     commentPlaceholder: "Placeholder text for the comment box",
@@ -890,16 +894,16 @@ export var enStrings = {
       pageDescription: "Description font",
       questionTitle: "Title font",
       questionDescription: "Description font",
-      editorFont: "Font",
+      inputContent: "Font",
       backgroundOpacity: "Opacity", // Auto-generated string
-      "--sjs-font-family": "Survey font family",
-      "--sjs-general-backcolor-dim": "Background color",
-      "--sjs-primary-backcolor": "Accent background colors",
-      "--sjs-primary-forecolor": "Accent foreground colors",
-      "--sjs-special-red": "Error message colors",
-      "--sjs-shadow-small": "Shadow effects",
-      "--sjs-shadow-inner": "Shadow effects",
-      "--sjs-border-default": "Colors"
+      "--sjs2-typography-font-family-text": "Survey font family",
+      "--sjs2-color-utility-surface-survey": "Background color",
+      "--sjs2-color-project-brand-600": "Accent background colors",
+      "--sjs2-color-fg-brand-on-primary": "Accent foreground colors",
+      "--sjs2-color-bg-alert-primary": "Error message colors",
+      "--sjs2-border-effect-surface-default": "Shadow effects",
+      "--sjs2-border-effect-component-formbox-default": "Shadow effects",
+      "--sjs2-color-component-input-default-line": "Colors"
     },
     "header@header": {
       headerView: "View",
@@ -984,7 +988,7 @@ export var enStrings = {
     clearIfInvisible: {
       none: "Never"
     },
-    radio: "Radio Buttons",
+    radio: "Radio buttons",
     inputType: {
       color: "Color",
       date: "Date",
@@ -1137,7 +1141,12 @@ export var enStrings = {
     },
     displayMode: {
       buttons: "Buttons",
-      dropdown: "Dropdown"
+      dropdown: "Dropdown",
+      segmented: "Segmented toggle",
+      radio: "Radio buttons",
+      checkbox: "Checkbox",
+      switch: "Switch",
+      custom: "Custom",
     },
     rateColorMode: {
       default: "Default",
@@ -1400,7 +1409,8 @@ export var enStrings = {
     file: {
       imageHeight: "Specifies the display height of uploaded images in the preview and the actual height of images taken with the camera. In single file upload mode, the display height is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
       imageWidth: "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area.",
-      allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
+      allowImagesPreview: "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead.",
+      confirmDelete: "Triggers a prompt asking to confirm the file deletion."
     },
     image: {
       contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -1549,7 +1559,6 @@ export var enStrings = {
     valueTrue: "A value to save in survey results when respondents give a positive answer.",
     valueFalse: "A value to save in survey results when respondents give a negative answer.",
     showPreview: "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded.",
-    needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion.",
     selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area.",
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
     inputSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
@@ -1599,7 +1608,7 @@ export var enStrings = {
       panelBackgroundTransparency: "Adjusts the transparency of panels and question boxes relative to the survey background.",
       questionBackgroundTransparency: "Adjusts the transparency of input elements relative to the survey background.",
       cornerRadius: "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes.",
-      "--sjs-general-backcolor-dim": "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Sets the main background color of the survey."
     },
     header: {
       inheritWidthFrom: "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in.",
@@ -1743,6 +1752,7 @@ export var enStrings = {
     color: "Color",
     placeholderColor: "Placeholder color",
     size: "Size",
+    lineHeight: "Line height",
     opacity: "Opacity",
     boxShadowX: "X",
     boxShadowY: "Y",
@@ -1753,15 +1763,13 @@ export var enStrings = {
     boxShadowInner: "Inner",
     names: {
       default: "Default",
-      sharp: "Sharp",
+      contrast: "Contrast",
       borderless: "Borderless",
       flat: "Flat",
       plain: "Plain",
-      doubleborder: "Double Border",
-      layered: "Layered",
-      solid: "Solid",
+      soft: "Soft",
       threedimensional: "3D",
-      contrast: "Contrast"
+      monochrome: "Monochrome",
     },
     colors: {
       teal: "Teal",
@@ -1779,13 +1787,23 @@ export var enStrings = {
     "--sjs-secondary-background-500": "Secondary",
     userInterfaceBaseUnit: "UI elements",
     fontScale: "Font",
-    names: {
-      sc2020: "Survey Creator 2020",
-      "default-light": "Light",
-      "default-dark": "Dark",
-      "default-contrast": "Contrast"
-    }
+    names: { }
   },
+  preset: {
+    names: {
+      basic: "Basic",
+      advanced: "Advanced",
+      expert: "Expert",
+    },
+    presetApplied: "Preset applied",
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Item 1" }, { value: "item2", text: "Item 2" }, { value: "item3", text: "Item 3" }],
+    columns: [{ value: "column1", text: "Column 1" }, { value: "column2", text: "Column 2" }, { value: "column3", text: "Column 3" }],
+    rows: [{ value: "row1", text: "Row 1" }, { value: "row2", text: "Row 2" }],
+    matrixColumns: [{ name: "column1", title: "Column 1" }, { name: "column2", title: "Column 2" }, { name: "column3", title: "Column 3" }]
+  }
 };
 
 /*

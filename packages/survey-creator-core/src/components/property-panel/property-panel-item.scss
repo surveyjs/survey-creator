@@ -1,6 +1,6 @@
 @use "../../variables" as *;
 
 .svc-property-panel__item {
-  margin: calcSize(2) 0;
+  margin: var(--sjs2-spacing-x200) 0;
   width: 100%;
 }

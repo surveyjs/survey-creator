@@ -264,7 +264,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
     if (question.isContentElement || this.isSetValueInternalQuestion(question)) {
       assignDefaultClasses(cssClasses, question.getType());
-      cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
+      cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame sd-question--with-frame";
     }
     const parentName = question.parent?.name;
     if (selectorsNames.indexOf(question.name) < 0 && (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel")) {
@@ -276,7 +276,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       }
       const els = question.parent.elements.filter(el => selectorsNames.indexOf(el.name) < 0 && el.name !== "expression");
       if ((question.name !== "runExpression" && qType !== "comment") || (Array.isArray(els) && els.length > 1)) {
-        cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
+        cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame sd-question--with-frame";
       }
     }
     if (question.name === "removeAction") {

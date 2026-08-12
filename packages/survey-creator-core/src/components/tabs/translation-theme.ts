@@ -10,8 +10,6 @@ export var translationCss = {
   logo: "st-logo",
   logoImage: "st-logo__image",
   headerText: "st-header__text",
-  navigationButton: "",
-  bodyNavigationButton: "st-navigation-btn",
   completedPage: "st-completedpage",
   navigation: {
     complete: "st-btn st-footer__complete-btn",
@@ -158,7 +156,8 @@ export var translationCss = {
     slider: "st-boolean__thumb"
   },
   text: {
-    root: "st-input st-text",
+    root: "st-formbox st-text",
+    control: "st-formbox__input",
     small: "st-row__question--small",
     controlDisabled: "st-input--disabled",
     onError: "st-input--error"
@@ -225,6 +224,7 @@ export var translationCss = {
   matrixdropdown: {
     mainRoot: "st-question st-row__question st-scrollable",
     root: "st-table",
+    tableWrapper: "st-table-wrapper",
     noHeader: "st-table--no-header",
     cell: "st-table__cell",
     headerCell: "st-table__cell st-table__cell--header",
@@ -235,6 +235,7 @@ export var translationCss = {
     root: "st-table st-matrixdynamic",
     noHeader: "st-table--no-header",
     cell: "st-table__cell",
+    tableWrapper: "st-table-wrapper",
     headerCell: "st-table__cell st-table__cell--header",
     rowTextCell: "st-table__cell st-table__cell--row-text",
     button: "st-btn",
@@ -261,7 +262,8 @@ export var translationCss = {
     itemDisabled: "st-rating__item--disabled"
   },
   comment: {
-    root: "st-comment",
+    root: "st-formbox st-comment",
+    control: "st-formbox__input",
     small: "st-row__question--small"
   },
   expression: "",

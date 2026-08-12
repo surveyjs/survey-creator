@@ -79,6 +79,7 @@ export interface ICreatorOptions {
   autoSaveEnabled?: boolean;
   /**
    * @deprecated Use the [`autoSaveEnabled`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#autoSaveEnabled) property instead.
+   * @hidden
    */
   isAutoSave?: boolean;
   /**
@@ -96,6 +97,7 @@ export interface ICreatorOptions {
   showSurveyHeader?: boolean;
   /**
    * @deprecated Use the [`showSurveyHeader`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showSurveyHeader) property instead.
+   * @hidden
    */
   showSurveyTitle?: boolean;
   /**
@@ -111,6 +113,7 @@ export interface ICreatorOptions {
   logicAllowTextEditExpressions?: boolean;
   /**
    * @deprecated Use the [`logicAllowTextEditExpressions`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicAllowTextEditExpressions) property instead.
+   * @hidden
    */
   allowEditExpressionsInTextEditor?: boolean;
   /**
@@ -151,15 +154,17 @@ export interface ICreatorOptions {
   previewAllowSelectPage?: boolean;
   /**
    * @deprecated Use the [`previewAllowSelectPage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectPage) property instead.
+   * @hidden
    */
   showPagesInPreviewTab?: boolean;
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
-   * @since 2.0.0
+   * @hidden
    */
   previewTheme?: string;
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
+   * @hidden
    */
   themeForPreview?: string;
   /**
@@ -171,6 +176,7 @@ export interface ICreatorOptions {
   previewAllowSimulateDevices?: boolean;
   /**
    * @deprecated Use the [`previewAllowSimulateDevices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSimulateDevices) property instead.
+   * @hidden
    */
   showSimulatorInPreviewTab?: boolean;
   /**
@@ -196,6 +202,7 @@ export interface ICreatorOptions {
   previewAllowSelectLanguage?: boolean | string;
   /**
    * @deprecated Use the [`previewAllowSelectLanguage`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowSelectLanguage) property instead.
+   * @hidden
    */
   showDefaultLanguageInPreviewTab?: boolean | string;
   /**
@@ -207,14 +214,17 @@ export interface ICreatorOptions {
   previewAllowHiddenElements?: boolean;
   /**
    * @deprecated Use the [`previewAllowHiddenElements`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#previewAllowHiddenElements) property instead.
+   * @hidden
    */
   showInvisibleElementsInPreviewTab?: boolean;
   /**
    * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
+   * @hidden
    */
   showObjectTitles?: boolean;
   /**
    * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#useElementTitles) property instead.
+   * @hidden
    */
   showTitlesInExpressions?: boolean;
   /**
@@ -283,22 +293,27 @@ export interface ICreatorOptions {
   maxRateValues?: number;
   /**
    * @deprecated Use the [`maxColumns`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxColumns) property instead.
+   * @hidden
    */
   maximumColumnsCount?: number;
   /**
    * @deprecated Use the [`minChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#minChoices) property instead.
+   * @hidden
    */
   minimumChoicesCount?: number;
   /**
    * @deprecated Use the [`maxChoices`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxChoices) property instead.
+   * @hidden
    */
   maximumChoicesCount?: number;
   /**
    * @deprecated Use the [`maxRows`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxRows) property instead.
+   * @hidden
    */
   maximumRowsCount?: number;
   /**
    * @deprecated Use the [`maxRateValues`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxRateValues) property instead.
+   * @hidden
    */
   maximumRateValues?: number;
 
@@ -311,6 +326,7 @@ export interface ICreatorOptions {
   logicMaxItemsInCondition?: number;
   /**
    * @deprecated Use the [`logicMaxItemsInCondition`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#logicMaxItemsInCondition) property instead.
+   * @hidden
    */
   maxLogicItemsInCondition?: number;
 
@@ -367,11 +383,12 @@ export interface ICreatorOptions {
 
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
-   * @since 2.0.0
+   * @hidden
    */
   previewAllowSelectTheme?: boolean;
   /**
    * @deprecated Survey Creator no longer supports switching between UI themes in the Preview tab.
+   * @hidden
    */
   allowChangeThemeInPreview?: boolean;
   /**
@@ -532,11 +549,11 @@ export interface ICreatorOptions {
   /**
    * Specifies how deeply choice options in Radio Button Group and Checkboxes questions can contain nested survey content such as questions or panels.
    *
-   * - 0 - Disables content nesting for choice options (default).
+   * - 0 - Disables content nesting for choice options.
    * - 1 - Allows first-level choice options to contain survey elements.
-   * - 2 - Allows first- and second-level choice options to contain survey elements, and so on.
+   * - 2 - Allows first- and second-level choice options to contain survey elements, and so on (default).
    *
-   * Default value: 0
+   * Default value: 2
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
    * @since 2.3.11

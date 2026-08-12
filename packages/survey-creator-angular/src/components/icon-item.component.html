@@ -1,0 +1,6 @@
+<ng-template #template>
+<div *ngIf="model" class="svc-icon-item">
+  <svg [iconName]="model.value" class="svc-icon-item__icon" size="auto" sv-ng-svg-icon></svg>
+  <span class="svc-icon-item__text">{{ model.title }}</span>
+</div>
+</ng-template>

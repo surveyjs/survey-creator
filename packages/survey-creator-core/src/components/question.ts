@@ -21,7 +21,8 @@ import {
   classesToSelector,
   QuestionFactory,
   PopupModel,
-  QuestionCompositeModel
+  QuestionCompositeModel,
+  defaultActionBarCss
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -35,7 +36,6 @@ import { StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
-import { listComponentCss } from "./list-theme";
 import { SurveyHelper } from "../survey-helper";
 import { DomDocumentHelper } from "survey-core";
 
@@ -108,7 +108,17 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   css() {
     const isInsideCollapsed = this.dropIndicatorPosition === DropIndicatorPosition.Inside && this.collapsed;
 
-    if (!this.surveyElement.isInteractiveDesignElement) return "";
+    if (!this.surveyElement.isInteractiveDesignElement) {
+      // Non-interactive nested elements (e.g. a choice content panel) don't render the full
+      // adorner chrome, but they still act as drop targets. Emit the drag-over classes so the
+      // drop highlight appears when an element is dragged over them.
+      return new CssClassBuilder()
+        .append("svc-question__content--collapsed-drag-over-inside", isInsideCollapsed)
+        .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed)
+        .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
+        .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
+        .toString();
+    }
 
     if (isInsideCollapsed) {
       this.dragIn();
@@ -307,19 +317,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   protected createActionContainer(): SurveyElementActionContainer {
     const actionContainer = super.createActionContainer();
+
     const defaultCssClasses = {
-      root: "svc-survey-element-toolbar sv-action-bar",
-      item: "svc-survey-element-toolbar__item",
-      itemWithTitle: "svc-survey-element-toolbar__item--with-text",
-      itemAsIcon: "svc-survey-element-toolbar__item--icon",
-      itemActive: "svc-survey-element-toolbar__item--active",
-      itemPressed: "svc-survey-element-toolbar__item--pressed",
-      itemIcon: "svc-survey-element-toolbar-item__icon",
-      itemTitle: "svc-survey-element-toolbar-item__title",
-      itemTitleWithIcon: "svc-survey-element-toolbar-item__title--with-icon",
+      ...defaultActionBarCss,
+      root: "svc-survey-element-toolbar " + defaultActionBarCss.root,
     };
 
     actionContainer.sizeMode = "small";
+    actionContainer.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
     actionContainer.cssClasses = defaultCssClasses;
     (<SurveyElementActionContainer>actionContainer).dotsItem.css += " svc-survey-element-toolbar__dots-item";
     return actionContainer;
@@ -598,7 +603,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           subactions.unshift(defaultSubaction);
           if (selectedAction == action && !selectedSubactionLocal) selectedSubactionLocal = defaultSubaction;
         }
-        action.setSubItems({ items: subactions, cssClasses: listComponentCss });
+        action.setSubItems({ items: subactions });
         if (selectedSubactionLocal) {
           selectedAction = action;
           selectedSubaction = selectedSubactionLocal;
@@ -629,7 +634,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     const listModel = new ListModel({
       items: [],
-      cssClasses: listComponentCss,
     });
     this.updateQuestionTypeOrSubtypeListModel(listModel, true);
     const propName = QuestionToolbox.getSubTypePropertyName(this.surveyElement.getType());
@@ -681,7 +685,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       allowSelection: true,
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
     }, this.creator);
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
       if (opt.isVisible) {

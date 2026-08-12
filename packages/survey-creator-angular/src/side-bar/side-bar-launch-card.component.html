@@ -1,0 +1,17 @@
+<ng-template #template>
+<div *ngIf="model" class="spg-launch">
+  <button class="spg-launch__card" (click)="model.onClick()">
+    <div class="spg-launch__container">
+      <div class="spg-launch__text">{{model.title}}</div>
+      <div class="spg-launch__text2">{{model.description}}</div>
+    </div>
+    <div class="spg-launch__icon">
+      <div class="spg-launch__chevron-right-16-x-16">
+        <div class="spg-launch__icon2">
+          <svg size="auto" iconName="chevrondown-24x24" sv-ng-svg-icon></svg>
+        </div>
+      </div>
+    </div>
+  </button>
+</div>
+</ng-template>

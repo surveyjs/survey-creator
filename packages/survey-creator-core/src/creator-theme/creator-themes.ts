@@ -1,16 +1,33 @@
-import { CreatorStylesManager } from "./styles-manager";
-import DefaultLight from "../themes/default-light";
+import { DefaultLight } from "survey-core/themes";
 import { registerConfig, ConfigsHash, sortDefaultConfigs } from "../utils/configs";
+import { ITheme } from "survey-core";
+import { getThemeFullName } from "../components/tabs/theme-model";
+import { editorLocalization, getLocString } from "../editorLocalization";
 
-export interface ICreatorTheme {
-  themeName?: string;
-  iconSet?: string;
+export interface ICreatorTheme extends ITheme {
   isLight?: boolean;
-  cssVariables?: { [index: string]: string | any };
 }
 
-export const PredefinedCreatorThemes: string[] = ["default-light"];
-export const defaultCreatorThemesOrder = ["default-light", "default-contrast", "default-dark", "sc2020"];
+export const PredefinedCreatorThemes: string[] = ["default"];
+export const defaultCreatorThemesOrder = [
+  "default",
+  "contrast",
+  "borderless",
+  "flat",
+  "plain",
+  "threedimensional",
+  "soft",
+  "monochrome"
+];
+
+export function getLocalizedCreatorThemeName(theme: string): string {
+  const key = (editorLocalization.hasString("creatortheme.names." + theme) ? "creatortheme" : "theme") + ".names." + theme;
+  return getLocString(key);
+}
+
+export function getPredefinedCreatorThemeChoices(): Array<{ value: string, text: string }> {
+  return PredefinedCreatorThemes.map(theme => ({ value: theme, text: getLocalizedCreatorThemeName(theme) }));
+}
 
 /**
  * Registers Survey Creator themes to make them available for customization in the Survey Creator UI.
@@ -19,12 +36,18 @@ export const defaultCreatorThemesOrder = ["default-light", "default-contrast", "
  * @param themes One or more Survey Creator theme configuations separated by commas, or an object containing multiple configurations.
  */
 export function registerCreatorTheme(...themes: Array<ConfigsHash<ICreatorTheme> | ICreatorTheme>) {
-  const importedThemeNames = [];
+  const importedBaseThemeNames: string[] = [];
   registerConfig((theme: ICreatorTheme) => {
-    CreatorThemes[theme.themeName] = theme;
-    importedThemeNames.push(theme.themeName);
+    if (theme.isPanelless) return;
+    const themeName = theme.themeName;
+    if (!themeName) return;
+    const fullname = getThemeFullName(theme);
+    CreatorThemes[fullname] = theme;
+    if (importedBaseThemeNames.indexOf(themeName) === -1) {
+      importedBaseThemeNames.push(themeName);
+    }
   }, ...themes);
-  sortDefaultConfigs(defaultCreatorThemesOrder, importedThemeNames, PredefinedCreatorThemes);
+  sortDefaultConfigs(defaultCreatorThemesOrder, importedBaseThemeNames, PredefinedCreatorThemes);
 }
 
 // const defaultVariables = {

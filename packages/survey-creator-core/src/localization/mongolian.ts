@@ -1262,8 +1262,6 @@ export var mnStrings = {
     acceptedTypes: "Нэмэлт файлын өргөтгөлүүд",
     // "Wait for upload to complete"
     waitForUpload: "Файл байршуулж дуустал хүлээх",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Файл устгахыг батлах",
     // "Row details alignment"
     detailPanelMode: "Нарийвчилсан панелийн байршил",
     // "Minimum row count"
@@ -1396,7 +1394,9 @@ export var mnStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Зургийн өндөр",
       // [Auto-translated] "Image width"
-      imageWidth: "Зургийн өргөн"
+      imageWidth: "Зургийн өргөн",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Файл устгахыг баталгаажуулна"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Сонголтгүй бол асуултыг нуух",
@@ -1454,6 +1454,10 @@ export var mnStrings = {
     choiceTextsFromQuestion: "Дараах матрицын багана эсвэл панелийн асуултын үнэт зүйлсийг сонголтын текст болгон ашигла",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Явцын самбар дээр хуудасны гарчгийг харуул",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Навигацийн текстийг явцын самбар дээр харуулна уу",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Навигацийн текстийн тэнцвэржүүлэлт",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Явцын самбар дээр хуудасны дугаарыг харуул",
     // "Add a comment box"
@@ -1681,25 +1685,25 @@ export var mnStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Тайлбар фонт",
       // [Auto-translated] "Font"
-      editorFont: "Фонт",
+      inputContent: "Фонт",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Бүдүүлэг байдал", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Судалгааны фонтын гэр бүл",
+      "--sjs2-typography-font-family-text": "Судалгааны фонтын гэр бүл",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Ар талын өнгө",
+      "--sjs2-color-utility-surface-survey": "Арын өнгө",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Фон өнгөнүүдийг акцентлах",
+      "--sjs2-color-project-brand-600": "Акцент арын өнгө",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Урд талын өнгүүдийг тодруулах",
+      "--sjs2-color-fg-brand-on-primary": "Акцент урд өнгүүд",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Алдаа мэйсийн өнгө",
+      "--sjs2-color-bg-alert-primary": "Алдааны мессежийн өнгө",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Сүүдрийн нөлөө",
+      "--sjs2-border-effect-surface-default": "Сүүдрийн эффектүүд",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Сүүдрийн нөлөө",
+      "--sjs2-border-effect-component-formbox-default": "Сүүдрийн эффектүүд",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Өнгө"
+      "--sjs2-color-component-input-default-line": "Өнгө"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -1858,8 +1862,8 @@ export var mnStrings = {
       // [Auto-translated] "Never"
       none: "Хэзээ ч"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Радио товчлуур",
+    // [Auto-translated] "Radio buttons"
+    radio: "Радио товчлуурууд",
     inputType: {
       // [Auto-translated] "Color"
       color: "Өнгө",
@@ -2136,7 +2140,17 @@ export var mnStrings = {
       // "Buttons"
       buttons: "Товчнууд",
       // "Dropdown"
-      dropdown: "Доош задрах"
+      dropdown: "Доош задрах",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Сегментчилсэн унтраалга",
+      // [Auto-translated] "Radio buttons"
+      radio: "Радио товчлуурууд",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Шалгах хуудас",
+      // [Auto-translated] "Switch"
+      switch: "Шилж",
+      // [Auto-translated] "Custom"
+      custom: "Custom"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
@@ -2574,7 +2588,9 @@ export var mnStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Урьдчилан харах хэсэгт оруулсан зургуудын дэлгэцийн өргөнийг болон камераар авсан зургуудын бодит өргөнийг тодорхойлно. Нэг файл upload mode-д дэлгэцийн өргөнийг урьдчилан харах талбайгаар хязгаарладаг. Multiple file upload mode-д thumbnail хэсгээр хязгаарлагддаг.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй."
+      allowImagesPreview: "Боломжтой бол татаж авсан файлуудад зориулсан эрхий хурууны урьдчилсан үзүүлэлтийг үзүүлнэ. Оронд нь файлын зургуудыг үзүүлэхийг хүсвэл сонгогдоогүй.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Файл устгахыг баталгаажуулах хүсэлт үүсдэг."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -2845,8 +2861,6 @@ export var mnStrings = {
     valueFalse: "Судалгаанд оролцогчдын сөрөг хариулт өгөхөд судалгааны үр дүнг хадгалах үнэ цэнэ.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Энэ сонголтыг унтраахыг зөвлөхгүй. Учир нь энэ нь Preview зургийг давамгайлж, файлуудыг оруулсан эсэхийг ойлгоход хэрэглэгчдэд хэцүү болгодог.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Файлын устгалыг батлахыг хүссэн өдөөлтийг өдөөж байна.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Зөвхөн сонгосон сонголтуудыг зэрэгцүүлэх боломжийг олгоно. Хэрэглэгчид сонгосон зүйлсийг сонгосон жагсаалтаас чирч, зэрэглэлийн бүс дотор тушаана.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -2930,8 +2944,8 @@ export var mnStrings = {
       questionBackgroundTransparency: "Судалгааны нөхцөлтэй харьцуулахад оруулах элементүүдийн ил тод байдлыг тохируулна.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Бүх тэгш өнцөгт элементүүдэд булангийн радиусыг тогтооно. Оролтын элементүүд эсвэл панел, асуултын хайрцгуудад зориулсан хувь хүний булангийн радиус үнэт зүйлсийг тогтоохыг хүсвэл Advanced Mode-г боломжтой болго.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Судалгааны үндсэн нөхцөл байдлын өнгийг тогтооно."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Судалгааны үндсэн арын өнгийг тогтоодог."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3208,6 +3222,8 @@ export var mnStrings = {
     placeholderColor: "Газар эзэмшигчийн өнгө",
     // [Auto-translated] "Size"
     size: "Хэмжээ",
+    // [Auto-translated] "Line height"
+    lineHeight: "Шугамын өндөр",
     // [Auto-translated] "Opacity"
     opacity: "Бүдүүлэг байдал",
     // [Auto-translated] "X"
@@ -3227,24 +3243,20 @@ export var mnStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Дефолт",
-      // [Auto-translated] "Sharp"
-      sharp: "Хурц",
+      // [Auto-translated] "Contrast"
+      contrast: "Эсрэг тэсрэг",
       // [Auto-translated] "Borderless"
       borderless: "Хил хязгааргүй",
       // [Auto-translated] "Flat"
       flat: "Хавтгай",
       // [Auto-translated] "Plain"
       plain: "Энгийн",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Хоёр хил",
-      // [Auto-translated] "Layered"
-      layered: "Давхарласан",
-      // [Auto-translated] "Solid"
-      solid: "Бат бөх",
+      // [Auto-translated] "Soft"
+      soft: "Зөөлөн",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Эсрэг тэсрэг"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Хар цагаан"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3275,15 +3287,27 @@ export var mnStrings = {
     // [Auto-translated] "Font"
     fontScale: "Фонт",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Судалгаа зохион байгуулагч 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Гэрэл",
-      // [Auto-translated] "Dark"
-      "default-dark": "Харанхуй",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Эсрэг тэсрэг байдал"
+
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Үндсэн",
+      // [Auto-translated] "Advanced"
+      advanced: "Дэвшилтэт",
+      // [Auto-translated] "Expert"
+      expert: "Мэргэжилтэн"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Урьдчилсан тохируулга хэрэглээ"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Хэсэг 1" }, { value: "item2", text: "Хэсэг 2" }, { value: "item3", text: "Хэсэг 3" }],
+    columns: [{ value: "column1", text: "Column 1" }, { value: "column2", text: "Column 2" }, { value: "column3", text: "Column 3" }],
+    rows: [{ value: "row1", text: "Row 1" }, { value: "row2", text: "Row 2" }],
+    matrixColumns: [{ name: "column1", title: "Column 1" }, { name: "column2", title: "Column 2" }, { name: "column3", title: "Column 3" }]
   }
 };
 

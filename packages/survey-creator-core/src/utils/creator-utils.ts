@@ -112,9 +112,15 @@ export function getQuestionFromObj(obj: SurveyElement): Question {
 }
 
 export function scrollElementIntoView(elementId: string, surveyRootElement: HTMLElement) {
-  const root = surveyRootElement?.getRootNode() || surveySettings.environment.root;
-  if (typeof Document === "undefined" || !(root instanceof Document || root instanceof ShadowRoot) || !elementId) return;
-  const el = root.getElementById(elementId);
+  if (typeof Document === "undefined" || !elementId) return;
+  let el: Element | null = null;
+  if (surveyRootElement) {
+    el = surveyRootElement.querySelector(`[id="${elementId}"]`);
+  } else {
+    const root = surveySettings.environment.root;
+    if (!(root instanceof Document || root instanceof ShadowRoot)) return;
+    el = root.getElementById(elementId);
+  }
   if (!el) return;
   el.scrollIntoView({ behavior: "smooth", block: "center", inline: "start" });
 }

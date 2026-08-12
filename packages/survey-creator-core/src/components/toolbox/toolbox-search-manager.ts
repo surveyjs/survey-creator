@@ -6,6 +6,12 @@ import { SearchManager } from "../search-manager";
 
 export class SearchManagerToolbox extends SearchManager {
   @property() toolbox: QuestionToolbox;
+
+  initActionBar() {
+    super.initActionBar();
+    this.searchActionBar.getActionById("svd-grid-search-close").appearance = { style: "alert", mode: "quaternary", size: "xx-small" };
+  }
+
   protected getFilterStringPlaceholder(): string { return getLocString("ed.toolboxFilteredTextPlaceholder"); }
   protected setFiterString(newValue: string, oldValue: string) {
     this.toolbox.showSeparators = !newValue;

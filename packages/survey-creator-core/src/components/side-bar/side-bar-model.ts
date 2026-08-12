@@ -145,6 +145,7 @@ export class SidebarModel extends Base {
       }
     });
     this.header.toolbar.actions.push(this._collapseAction);
+    this.header.toolbar.setActionsAppearance({ style: "neutral", mode: "tertiary", size: "small" });
     if (this.creator.allowCollapseSidebar) {
       this._expandAction = new Action({
         id: "svd-grid-expand",

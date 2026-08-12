@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON, getListItemByText, getPropertyGridCategory } from "../helper";
+import { url, test, expect, setJSON, getPropertyGridCategory, getVisibleSelectListItemByText } from "../helper";
 
 const title = "Property Grid";
 
@@ -35,7 +35,7 @@ test.describe(title, () => {
     const editVisibleIf = page.getByRole("button", { name: "Bearbeiten" });
     const popup = page.locator(".sv-popup__body-content");
     const chooseQuestion = popup.locator(".sl-dropdown__value");
-    const question2Text = popup.locator(".sd-input");
+    const question2Text = popup.locator(".sd-formbox__input");
     const applyBtn = page.getByRole("button", { name: "Anwenden" });
 
     await question1.click();
@@ -43,7 +43,7 @@ test.describe(title, () => {
     await logicTab.click();
     await editVisibleIf.first().click();
     await chooseQuestion.first().click();
-    await getListItemByText(page, "question2").click();
+    await getVisibleSelectListItemByText(page, "question2").click();
     await question2Text.fill("val1");
     await applyBtn.first().click();
   });

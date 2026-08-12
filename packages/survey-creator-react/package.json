@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "2.5.38",
+  "version": "3.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/surveyjs/survey-creator.git"
@@ -17,8 +17,7 @@
     "doc:update": "chmod +x docupdate_npm.sh && ./docupdate_npm.sh",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
-    "build:main": "rollup -c rollup.config.mjs --environment emitMinified,emitNonSourceFiles",
-    "build": "npm run build:main",
+    "build": "rollup -c rollup.config.mjs --environment emitMinified,emitNonSourceFiles",
     "watch:dev": "rollup -c rollup.config.mjs -w",
     "watch:prod": "rollup -c rollup.config.mjs -w --environment emitMinified",
     "lint": "eslint . --max-warnings=0",

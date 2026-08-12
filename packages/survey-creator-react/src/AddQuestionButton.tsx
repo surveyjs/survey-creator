@@ -11,56 +11,34 @@ import {
 } from "survey-react-ui";
 import { ReactMouseEvent } from "./events";
 
-export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action, buttonClass?: string, renderPopup?: boolean }, any> {
+export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action }, any> {
   public get model() {
-    return this.props.item.data;
+    return this.item.data;
+  }
+  public get item() {
+    return this.props.item;
+  }
+  protected getStateElement() {
+    return this.item;
   }
   protected renderTypeSelector(): React.JSX.Element {
-    const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
-    return attachKey2click(<button
-      type="button"
-      onClick={(e) => {
-        e.stopPropagation();
-        questionTypeSelectorModel.action();
-      }}
-      className="svc-element__question-type-selector"
-      title={this.model.addNewQuestionText}
-      role="button"
-    >
-      <span className="svc-element__question-type-selector-icon">
-        <SvgIcon
-          iconName={questionTypeSelectorModel.iconName}
-          size={"auto"}
-          title={this.model.addNewQuestionText}
-        ></SvgIcon>
-      </span>
-      {this.props.renderPopup === undefined || this.props.renderPopup ?
-        <Popup model={questionTypeSelectorModel.popupModel}></Popup>
-        : null}
-    </button>);
+    return <div className={this.item.cssClasses.itemTypeSelector}>{ReactElementFactory.Instance.createElement("sv-action-bar-item-dropdown", { item: this.model.questionTypeSelectorModel })}</div>;
   }
   protected renderElement(): React.JSX.Element {
-    const addButtonClass = this.props.buttonClass || "svc-btn";
     return <>
       {attachKey2click(<div
-        className={"svc-element__add-new-question " + addButtonClass}
+        className={this.item.getActionBarItemCss()}
         onClick={(e) => {
           e.stopPropagation();
           this.model.addNewQuestion(this.model, new ReactMouseEvent(e));
         }}
         onMouseOver={(e) => this.model.hoverStopper && this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
       >
-        <SvgIcon
-          className={"svc-panel__add-new-question-icon"}
-          iconName={"icon-add_24x24"}
-          size={"auto"}
-        ></SvgIcon>
-        <span className="svc-add-new-item-button__text">
+        <span className={this.item.getActionBarItemTitleCss()}>
           {this.model.addNewQuestionText}
         </span>
-        {this.props.renderPopup !== false ? this.renderTypeSelector() : null}
+        {this.renderTypeSelector()}
       </div>)}
-      {this.props.renderPopup === false ? this.renderTypeSelector() : null}
     </>;
   }
 }

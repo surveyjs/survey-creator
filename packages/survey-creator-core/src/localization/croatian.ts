@@ -1262,8 +1262,6 @@ export var hrStrings = {
     acceptedTypes: "Dodatne ekstenzije datoteka",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Pričekajte da se prijenos dovrši",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Potvrda brisanja datoteke",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Poravnanje pojedinosti retka",
     // [Auto-translated] "Minimum row count"
@@ -1396,7 +1394,9 @@ export var hrStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Visina slike",
       // [Auto-translated] "Image width"
-      imageWidth: "Širina slike"
+      imageWidth: "Širina slike",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Potvrdi brisanje datoteke"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Sakrij pitanje ako nema izbora",
@@ -1454,6 +1454,10 @@ export var hrStrings = {
     choiceTextsFromQuestion: "Koristite vrijednosti iz sljedećeg stupca matrice ili pitanja na ploči kao tekstove izbora",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Prikaz naslova stranica na traci napretka",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Prikaži tekst navigacije u traci napretka",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Poravnanje navigacijskog teksta",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Prikaz brojeva stranica na traci napretka",
     // [Auto-translated] "Add a comment box"
@@ -1681,25 +1685,25 @@ export var hrStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Opisni font",
       // [Auto-translated] "Font"
-      editorFont: "Krstionica",
+      inputContent: "Krstionica",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Neprozirnost", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Obitelj fontova upitnika",
+      "--sjs2-typography-font-family-text": "Obitelj fontova za pregled",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Boja pozadine",
+      "--sjs2-color-utility-surface-survey": "Boja pozadine",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Naglašavajuće boje pozadine",
+      "--sjs2-color-project-brand-600": "Akcentne boje pozadine",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Naglašene boje prednjeg plana",
+      "--sjs2-color-fg-brand-on-primary": "Akcentne boje u prvom planu",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Boje poruka o pogrešci",
+      "--sjs2-color-bg-alert-primary": "Boje poruka o pogrešci",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Efekti sjene",
+      "--sjs2-border-effect-surface-default": "Efekti sjene",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Efekti sjene",
+      "--sjs2-border-effect-component-formbox-default": "Efekti sjene",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Boje"
+      "--sjs2-color-component-input-default-line": "Boje"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -1858,7 +1862,7 @@ export var hrStrings = {
       // [Auto-translated] "Never"
       none: "Nikada"
     },
-    // [Auto-translated] "Radio Buttons"
+    // [Auto-translated] "Radio buttons"
     radio: "Radio tipke",
     inputType: {
       // [Auto-translated] "Color"
@@ -2136,7 +2140,17 @@ export var hrStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Gumbe",
       // [Auto-translated] "Dropdown"
-      dropdown: "Padajući izbornik"
+      dropdown: "Padajući izbornik",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentirani prekidač",
+      // [Auto-translated] "Radio buttons"
+      radio: "Radio tipke",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Kvačica",
+      // [Auto-translated] "Switch"
+      switch: "Prekidač",
+      // [Auto-translated] "Custom"
+      custom: "Običaj"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
@@ -2574,7 +2588,9 @@ export var hrStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Određuje širinu prikaza prenesenih slika u pregledu i stvarnu širinu slika snimljenih fotoaparatom. U načinu prijenosa jedne datoteke, širina prikaza ograničena je područjem pregleda; U načinu prijenosa više datoteka ograničen je područjem sličica.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Prikazuje pretpreglede minijatura za prenesene datoteke kada je to moguće. Poništite odabir želite li umjesto toga prikazati ikone datoteka."
+      allowImagesPreview: "Prikazuje pretpreglede minijatura za prenesene datoteke kada je to moguće. Poništite odabir želite li umjesto toga prikazati ikone datoteka.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Pokreće upit koji traži potvrdu brisanja datoteke."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -2845,8 +2861,6 @@ export var hrStrings = {
     valueFalse: "Vrijednost koju treba spremiti u rezultatima ankete kada ispitanici daju negativan odgovor.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Ne preporučuje se da onemogućite ovu opciju jer ona nadjačava sliku pretpregleda i otežava korisniku da shvati jesu li datoteke prenesene.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Pokreće upit u kojem se traži potvrda brisanja datoteke.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Omogućite rangiranje samo odabranih odabira. Korisnici će povući odabrane stavke s popisa izbora kako bi ih naručili unutar područja rangiranja.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -2930,8 +2944,8 @@ export var hrStrings = {
       questionBackgroundTransparency: "Prilagođava prozirnost ulaznih elemenata u odnosu na pozadinu upitnika.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Postavlja polumjer kuta za sve pravokutne elemente. Omogućite napredni način rada ako želite postaviti pojedinačne vrijednosti radijusa kuta za ulazne elemente ili ploče i okvire s pitanjima.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Postavlja glavnu boju pozadine upitnika."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Postavlja glavnu pozadinsku boju ankete."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3208,6 +3222,8 @@ export var hrStrings = {
     placeholderColor: "Boja rezerviranog mjesta",
     // [Auto-translated] "Size"
     size: "Veličina",
+    // [Auto-translated] "Line height"
+    lineHeight: "Visina pruge",
     // [Auto-translated] "Opacity"
     opacity: "Neprozirnost",
     // [Auto-translated] "X"
@@ -3227,24 +3243,20 @@ export var hrStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Propust",
-      // [Auto-translated] "Sharp"
-      sharp: "Oštar",
+      // [Auto-translated] "Contrast"
+      contrast: "Razlika",
       // [Auto-translated] "Borderless"
       borderless: "Bez obruba",
       // [Auto-translated] "Flat"
       flat: "Stan",
       // [Auto-translated] "Plain"
       plain: "Ravnica",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Dvostruki obrub",
-      // [Auto-translated] "Layered"
-      layered: "Slojevita",
-      // [Auto-translated] "Solid"
-      solid: "Solidan",
+      // [Auto-translated] "Soft"
+      soft: "Mekano",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Razlika"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monokromatski"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3275,15 +3287,27 @@ export var hrStrings = {
     // [Auto-translated] "Font"
     fontScale: "Krstionica",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Kreator ankete 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Svjetlo",
-      // [Auto-translated] "Dark"
-      "default-dark": "Mračan",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Razlika"
+
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Osnovno",
+      // [Auto-translated] "Advanced"
+      advanced: "Napredno",
+      // [Auto-translated] "Expert"
+      expert: "Stručnjak"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Primijenjen predpostavka"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Stavka 1" }, { value: "item2", text: "Stavka 2" }, { value: "item3", text: "Stavka 3" }],
+    columns: [{ value: "column1", text: "Stupca 1" }, { value: "column2", text: "Stupca 2" }, { value: "column3", text: "Stupca 3" }],
+    rows: [{ value: "row1", text: "Redak 1" }, { value: "row2", text: "Redak 2" }],
+    matrixColumns: [{ name: "column1", title: "Stupca 1" }, { name: "column2", title: "Stupca 2" }, { name: "column3", title: "Stupca 3" }]
   }
 };
 setupLocale({ localeCode: "hr", strings: hrStrings });

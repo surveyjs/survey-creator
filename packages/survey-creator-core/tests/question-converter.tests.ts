@@ -21,6 +21,7 @@ import {
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
 import { QuestionConvertMode, settings } from "../src/creator-settings";
+import { QuestionToolbox } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 
@@ -164,8 +165,8 @@ test("Convert text and radio question to image picker", () => {
   const q4 = <QuestionRadiogroupModel>page.addNewQuestion("radiogroup");
   q2.choices = ["item1", "item2"];
   q4.choices = [];
-  const defaultJSON = settings.toolbox.defaultJSON.imagepicker;
-  const defaultObjJSON = settings.toolbox.defaultJSON.radiogroup;
+  const defaultJSON = QuestionToolbox.getQuestionDefaultSettings("imagepicker");
+  const defaultObjJSON = QuestionToolbox.getQuestionDefaultSettings("radiogroup");
   q3.choices = defaultObjJSON.choices;
   QuestionConverter.convertObject(q1, "imagepicker", QuestionConverter.getObjJSON(q1, undefined), defaultJSON);
   QuestionConverter.convertObject(q2, "imagepicker", QuestionConverter.getObjJSON(q2, defaultObjJSON), defaultJSON);

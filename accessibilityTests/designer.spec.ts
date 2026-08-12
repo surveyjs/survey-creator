@@ -42,7 +42,7 @@ test.describe("designer a11y", () => {
   });
   test("Check sidebar header", async ({ page }) => {
     await setJSON(page, jsonWithMultiplePages);
-    await page.click(".svc-sidebar__header-content .svc-menu-action__button");
+    await page.click(".svc-sidebar__header-content .svc-sidebar__header-object-selector");
     await checkA11y(page, ["#survey-creator", ".svc-sidebar__header"], { axeOptions });
   });
   test("Check radiogroup, rating and checkbox questions", async ({ page }) => {

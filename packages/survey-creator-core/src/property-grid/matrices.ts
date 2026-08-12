@@ -16,7 +16,7 @@ import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
 } from "./index";
-import { updateMatixActionsClasses, updateMatrixRemoveAction } from "../utils/actions";
+import { updateMatixActionsAppearance, updateMatrixRemoveAction } from "../utils/actions";
 import { QuestionRatingAdornerViewModel } from "../components/question-rating";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { SurveyHelper } from "../survey-helper";
@@ -132,7 +132,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         showDetailAction.ariaExpanded = row.isDetailPanelShowing;
       };
     }
-    updateMatixActionsClasses(actions);
+    updateMatixActionsAppearance(actions);
   }
   private showHideDetailPanel(row: MatrixDynamicRowModel, options: ISurveyCreatorOptions) {
     const hasDetail = !!row.detailPanel;

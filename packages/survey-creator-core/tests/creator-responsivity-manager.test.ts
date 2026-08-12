@@ -1,9 +1,11 @@
-import { expect, test, vi } from "vitest";
+﻿import { DomWindowHelper } from "survey-core";
+import { expect, test, afterEach, beforeEach, vi } from "vitest";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { SurveyCreatorModel, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { CreatorTester } from "./creator-tester";
+import { mockDomWindowGetComputedStyleFromInlineStyles, mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "./tabs/theme-test-mocks";
 
 class SimpleContainer {
   clientRects = [{ x: 0, y: 0, height: 20, width: 20 }];
@@ -18,6 +20,15 @@ class SimpleContainer {
     return this.clientRects;
   }
 }
+
+beforeEach(() => {
+  mockGetRGBaColorIdentity();
+  mockDomWindowGetComputedStyleFromInlineStyles();
+});
+afterEach(() => {
+  restoreGetRGBaColorMock();
+  (DomWindowHelper.getWindow as any).mockRestore?.();
+});
 
 test("CreatorResponsivityManager getScreenWidth", (): any => {
   const container: SimpleContainer = new SimpleContainer({});

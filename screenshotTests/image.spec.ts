@@ -111,7 +111,7 @@ test("Check image loading indicator", async ({ page }) => {
 
   const root = page.locator(".svc-question__content--image");
   await root.click({ position: { x: 5, y: 5 } });
-  await page.locator(".svc-question__content--image .svc-context-button").click();
+  await page.locator(".svc-image-question-controls .sd-action").click();
 
   await page.evaluate(() => {
     (<HTMLElement>(window as any).creator.rootElement.getRootNode().querySelector(".sd-loading-indicator .sv-svg-icon")).style.animation = "none";

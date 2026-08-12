@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 import { registerCreatorTheme, SurveyCreatorModel } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
-import SurveyCreatorTheme from "survey-creator-core/themes";
+import SurveyTheme from "survey-core/themes";
 
-registerCreatorTheme(SurveyCreatorTheme);
+registerCreatorTheme(SurveyTheme);
 
 @Component({
   selector: "creator-themes-preview",

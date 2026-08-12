@@ -77,7 +77,7 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
     if (this.item.css) {
       css += " " + this.item.css;
     }
-    css += (!this.item.isVisible ? " sv-action--hidden" : "");
+    css += (!this.item.isVisible ? " svc-tabbed-menu-item-container--hidden" : "");
 
     const component = ReactElementFactory.Instance.createElement(
       this.item.component || "svc-tabbed-menu-item",
@@ -86,7 +86,7 @@ class TabbedMenuItemWrapper extends SurveyElementBase<
 
     return (
       <span key={this.item.id} className={css} ref={this.ref}>
-        <div className="sv-action__content">
+        <div className="svc-tabbed-menu-item-container__content">
           {component}
         </div>
       </span>
