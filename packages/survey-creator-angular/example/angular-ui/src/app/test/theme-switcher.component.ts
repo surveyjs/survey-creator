@@ -1,8 +1,6 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
-import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
-
 @Component({
   selector: "test-theme-switcher",
   templateUrl: "./test.component.html",
@@ -14,6 +12,5 @@ export class TestThemeSwitcherComponent extends TestDefaultComponent {
     this.creator = new SurveyCreatorModel({});
     this.creator.showOneCategoryInPropertyGrid = false;
     this.creator.allowZoom = false;
-    this.creator.applyCreatorTheme(SurveyCreatorTestTheme);
   }
 }

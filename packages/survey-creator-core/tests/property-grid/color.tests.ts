@@ -1,6 +1,15 @@
 import { ItemValue, ListModel, PageModel, QuestionSignaturePadModel, SurveyModel, _setIsTouch } from "survey-core";
 import { QuestionColorModel } from "../../src/custom-questions/question-color";
 import { PropertyGridModelTester } from "./property-grid.base";
+import { mockGetRGBaColorIdentity, restoreGetRGBaColorMock } from "../tabs/theme-test-mocks";
+import { afterEach, beforeEach } from "vitest";
+
+beforeEach(() => {
+  mockGetRGBaColorIdentity();
+});
+afterEach(() => {
+  restoreGetRGBaColorMock();
+});
 
 test("Check custom color question", () => {
   const question = new QuestionColorModel("q1");
@@ -127,14 +136,13 @@ test("Check custom color question popup", () => {
       choices: ["#f1b505", "#359ba7", "#6a3bff"]
     }]
   });
-  survey.css = { color: { colorDropdownIcon: "colorDropdownIconTest", colorDropdown: "colorDropdownTest" } };
+  survey.css = { color: { colorDropdownIcon: "colorDropdownIconTest" } };
   const question = <QuestionColorModel>survey.getAllQuestions()[0];
   question.cssClasses;
   const dropdownAction = question.dropdownAction;
   const popupModel = dropdownAction.popupModel;
   const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
 
-  expect(dropdownAction.cssClasses.item).toBe("colorDropdownTest");
   expect(dropdownAction.iconName).toBe("colorDropdownIconTest");
   expect(popupModel.setWidthByTarget).toBeTruthy();
   expect(popupModel.positionMode).toBe("fixed");

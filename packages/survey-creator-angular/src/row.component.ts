@@ -6,7 +6,8 @@ import { AngularComponentFactory } from "survey-angular-ui";
 
 @Component({
   selector: "svc-row",
-  templateUrl: "./row.component.html"
+  templateUrl: "./row.component.html",
+  styles: [":host { display: none; }"]
 })
 export class CreatorRowComponent extends CreatorModelComponent<RowViewModel> {
   @Input() componentData!: { creator: SurveyCreatorModel, row: QuestionRowModel };

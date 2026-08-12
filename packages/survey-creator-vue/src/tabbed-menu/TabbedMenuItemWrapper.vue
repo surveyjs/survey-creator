@@ -1,10 +1,10 @@
 <template>
   <span
     class="svc-tabbed-menu-item-container"
-    :class="[!item.isVisible ? 'sv-action--hidden' : '', item.css]"
+    :class="[!item.isVisible ? 'svc-tabbed-menu-item-container--hidden' : '', item.css]"
     ref="root"
   >
-    <div class="sv-action__content">
+    <div class="svc-tabbed-menu-item-container__content">
       <SvComponent
         :is="item.component || 'svc-tabbed-menu-item'"
         :item="item"

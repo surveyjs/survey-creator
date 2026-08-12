@@ -1262,8 +1262,6 @@ export var portugueseTranslation = {
     acceptedTypes: "Extensões adicionais de arquivo",
     // "Wait for upload to complete"
     waitForUpload: "Aguarde a conclusão do upload",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Confirme a eliminação do ficheiro",
     // "Row details alignment"
     detailPanelMode: "Localização do painel de detalhes",
     // "Minimum row count"
@@ -1396,7 +1394,9 @@ export var portugueseTranslation = {
       // [Auto-translated] "Image height"
       imageHeight: "Altura da imagem",
       // [Auto-translated] "Image width"
-      imageWidth: "Largura da imagem"
+      imageWidth: "Largura da imagem",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Confirmar exclusão de arquivo"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Oculte a pergunta se ela não contiver opções",
@@ -1454,6 +1454,10 @@ export var portugueseTranslation = {
     choiceTextsFromQuestion: "Use valores da seguinte coluna de matriz ou pergunta de painel como textos de escolha",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Exibir títulos de página na barra de progresso",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Exibir o texto da navegação na barra de progresso",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Alinhamento do texto de navegação",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Exibir números de página na barra de progresso",
     // "Add a comment box"
@@ -1681,25 +1685,25 @@ export var portugueseTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Fonte da descrição",
       // [Auto-translated] "Font"
-      editorFont: "Fonte",
+      inputContent: "Fonte",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Opacidade", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Família de fontes de levantamento topográfico",
+      "--sjs2-typography-font-family-text": "Família de fontes de levantamento",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Cor de fundo",
+      "--sjs2-color-utility-surface-survey": "Cor de fundo",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Cores de fundo de destaque",
+      "--sjs2-color-project-brand-600": "Cores de fundo de destaque",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Cores de destaque em primeiro plano",
+      "--sjs2-color-fg-brand-on-primary": "Cores de destaque em primeiro plano",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Cores da mensagem de erro",
+      "--sjs2-color-bg-alert-primary": "Cores da mensagem de erro",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Efeitos de sombra",
+      "--sjs2-border-effect-surface-default": "Efeitos de sombra",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Efeitos de sombra",
+      "--sjs2-border-effect-component-formbox-default": "Efeitos de sombra",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Cores"
+      "--sjs2-color-component-input-default-line": "Cores"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -1858,8 +1862,8 @@ export var portugueseTranslation = {
       // [Auto-translated] "Never"
       none: "Nunca"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Botões",
+    // [Auto-translated] "Radio buttons"
+    radio: "Botões de rádio",
     inputType: {
       // [Auto-translated] "Color"
       color: "Cor",
@@ -2136,7 +2140,17 @@ export var portugueseTranslation = {
       // "Buttons"
       buttons: "Botões",
       // "Dropdown"
-      dropdown: "Suspenso"
+      dropdown: "Suspenso",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Alavanca segmentada",
+      // [Auto-translated] "Radio buttons"
+      radio: "Botões de rádio",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Caixa de seleção",
+      // [Auto-translated] "Switch"
+      switch: "Troca",
+      // [Auto-translated] "Custom"
+      custom: "Costume"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
@@ -2574,7 +2588,9 @@ export var portugueseTranslation = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Especifica a largura de exibição das imagens carregadas na visualização e a largura real das imagens tiradas com a câmera. No modo de upload de arquivo único, a largura da tela é limitada pela área de visualização; No modo de upload de vários arquivos, ele é limitado pela área de miniaturas.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo."
+      allowImagesPreview: "Exibe visualizações em miniatura para arquivos carregados quando possível. Desmarque se quiser mostrar ícones de arquivo.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Dispara um prompt pedindo para confirmar a exclusão do arquivo."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -2845,8 +2861,6 @@ export var portugueseTranslation = {
     valueFalse: "Um valor a guardar nos resultados do inquérito quando os inquiridos dão uma resposta negativa.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Não é recomendável desabilitar essa opção, pois ela substitui a imagem de visualização e torna difícil para o usuário entender se os arquivos foram carregados.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Aciona um prompt pedindo para confirmar a exclusão do arquivo.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Habilite para classificar apenas as opções selecionadas. Os usuários arrastarão os itens selecionados da lista de opções para ordená-los dentro da área de classificação.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -2930,8 +2944,8 @@ export var portugueseTranslation = {
       questionBackgroundTransparency: "Ajusta a transparência dos elementos de entrada em relação ao plano de fundo do questionário.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Define o raio do canto para todos os elementos retangulares. Ative o Modo Avançado se quiser definir valores de raio de canto individuais para elementos de entrada ou painéis e caixas de perguntas.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Define a cor de fundo principal da pesquisa."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Define a cor principal de fundo da pesquisa."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3208,6 +3222,8 @@ export var portugueseTranslation = {
     placeholderColor: "Cor do espaço reservado",
     // [Auto-translated] "Size"
     size: "Tamanho",
+    // [Auto-translated] "Line height"
+    lineHeight: "Altura da linha",
     // [Auto-translated] "Opacity"
     opacity: "Opacidade",
     // [Auto-translated] "X"
@@ -3227,24 +3243,20 @@ export var portugueseTranslation = {
     names: {
       // [Auto-translated] "Default"
       default: "Inadimplência",
-      // [Auto-translated] "Sharp"
-      sharp: "Afiado",
+      // [Auto-translated] "Contrast"
+      contrast: "Contraste",
       // [Auto-translated] "Borderless"
       borderless: "Sem fronteiras",
       // [Auto-translated] "Flat"
       flat: "Plano",
       // [Auto-translated] "Plain"
       plain: "Planície",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Borda Dupla",
-      // [Auto-translated] "Layered"
-      layered: "Camadas",
-      // [Auto-translated] "Solid"
-      solid: "Sólido",
+      // [Auto-translated] "Soft"
+      soft: "Suave",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Contraste"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monocromático"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3275,15 +3287,27 @@ export var portugueseTranslation = {
     // [Auto-translated] "Font"
     fontScale: "Fonte",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Criador de pesquisas 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Luz",
-      // [Auto-translated] "Dark"
-      "default-dark": "Escuro",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Contraste"
+
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Básico",
+      // [Auto-translated] "Advanced"
+      advanced: "Avançado",
+      // [Auto-translated] "Expert"
+      expert: "Especialista"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Pré-definição aplicada"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Item 1" }, { value: "item2", text: "Item 2" }, { value: "item3", text: "Item 3" }],
+    columns: [{ value: "column1", text: "Coluna 1" }, { value: "column2", text: "Coluna 2" }, { value: "column3", text: "Coluna 3" }],
+    rows: [{ value: "row1", text: "Linha 1" }, { value: "row2", text: "Linha 2" }],
+    matrixColumns: [{ name: "column1", title: "Coluna 1" }, { name: "column2", title: "Coluna 2" }, { name: "column3", title: "Coluna 3" }]
   }
 };
 

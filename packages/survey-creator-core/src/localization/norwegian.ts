@@ -1262,8 +1262,6 @@ export var nbStrings = {
     acceptedTypes: "Ytterligere filendelser",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Vent til opplastingen er fullført",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Bekreft sletting av fil",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Justering av raddetaljer",
     // [Auto-translated] "Minimum row count"
@@ -1396,7 +1394,9 @@ export var nbStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Høyde på bildet",
       // [Auto-translated] "Image width"
-      imageWidth: "Bildets bredde"
+      imageWidth: "Bildets bredde",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Bekreft sletting av filer"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Skjul spørsmålet hvis det ikke har noen valg",
@@ -1454,6 +1454,10 @@ export var nbStrings = {
     choiceTextsFromQuestion: "Bruk verdier fra følgende matrisekolonne eller paneloppgave som valgtekster",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Vise sidetitler i fremdriftslinjen",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Vis navigasjonstekst i fremdriftslinjen",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Navigasjonstekstjustering",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Vise sidetall i fremdriftslinjen",
     // [Auto-translated] "Add a comment box"
@@ -1681,25 +1685,25 @@ export var nbStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Beskrivelse skrift",
       // [Auto-translated] "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Ugjennomsiktighet", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Skriftfamilie for undersøkelser",
+      "--sjs2-typography-font-family-text": "Oppmålingsfontfamilie",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Bakgrunnsfarge",
+      "--sjs2-color-utility-surface-survey": "Bakgrunnsfarge",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Bakgrunnsfarger for aksentfarge",
+      "--sjs2-color-project-brand-600": "Aksentbakgrunnsfarger",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Aksentfarger i forgrunnen",
+      "--sjs2-color-fg-brand-on-primary": "Aksentfarger i forgrunnen",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Farger på feilmeldinger",
+      "--sjs2-color-bg-alert-primary": "Feilmeldingsfarger",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Skygge effekter",
+      "--sjs2-border-effect-surface-default": "Skyggeeffekter",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Skygge effekter",
+      "--sjs2-border-effect-component-formbox-default": "Skyggeeffekter",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Farger"
+      "--sjs2-color-component-input-default-line": "Farger"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -1858,8 +1862,8 @@ export var nbStrings = {
       // [Auto-translated] "Never"
       none: "Aldri"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Alternativknapper",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radioknapper",
     inputType: {
       // [Auto-translated] "Color"
       color: "Farge",
@@ -2136,7 +2140,17 @@ export var nbStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Knapper",
       // [Auto-translated] "Dropdown"
-      dropdown: "Rullegardinmeny"
+      dropdown: "Rullegardinmeny",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentert bryter",
+      // [Auto-translated] "Radio buttons"
+      radio: "Radioknapper",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Avkrysningsboks",
+      // [Auto-translated] "Switch"
+      switch: "Bytte",
+      // [Auto-translated] "Custom"
+      custom: "Skikk"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
@@ -2574,7 +2588,9 @@ export var nbStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Angir visningsbredden på opplastede bilder i forhåndsvisningen og den faktiske bredden på bilder som er tatt med kameraet. I enkeltfilopplastingsmodus er visningsbredden begrenset av forhåndsvisningsområdet; I modus for opplasting av flere filer er den begrenset av miniatyrbildeområdet.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet."
+      allowImagesPreview: "Viser miniatyrforhåndsvisninger for opplastede filer når det er mulig. Fjern merket hvis du vil vise filikoner i stedet.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Utløser en prompt som ber om å bekrefte slettingen av filen."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -2845,8 +2861,6 @@ export var nbStrings = {
     valueFalse: "En verdi å lagre i undersøkelsesresultater når respondentene gir et negativt svar.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Det anbefales ikke at du deaktiverer dette alternativet, da det overstyrer forhåndsvisningsbildet og gjør det vanskelig for en bruker å forstå om filene er lastet opp.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Utløser en melding som ber om å bekrefte slettingen av filen.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Aktiver for å rangere bare valgte valg. Brukere vil dra valgte elementer fra valglisten for å sortere dem innenfor rangeringsområdet.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -2930,8 +2944,8 @@ export var nbStrings = {
       questionBackgroundTransparency: "Justerer gjennomsiktigheten til inndataelementer i forhold til evalueringsbakgrunnen.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Angir hjørneradiusen for alle rektangulære elementer. Aktiver avansert modus hvis du vil angi individuelle hjørneradiusverdier for inndataelementer eller paneler og spørsmålsbokser.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Angir hovedbakgrunnsfargen for undersøkelsen."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Setter hovedfargen på bakgrunnen i undersøkelsen."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3208,6 +3222,8 @@ export var nbStrings = {
     placeholderColor: "Plassholderfarge",
     // [Auto-translated] "Size"
     size: "Størrelse",
+    // [Auto-translated] "Line height"
+    lineHeight: "Linjehøyde",
     // [Auto-translated] "Opacity"
     opacity: "Ugjennomsiktighet",
     // [Auto-translated] "X"
@@ -3227,24 +3243,20 @@ export var nbStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Standard",
-      // [Auto-translated] "Sharp"
-      sharp: "Skarp",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontrast",
       // [Auto-translated] "Borderless"
       borderless: "Kantløse",
       // [Auto-translated] "Flat"
       flat: "Flat",
       // [Auto-translated] "Plain"
       plain: "Slette",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Dobbel kantlinje",
-      // [Auto-translated] "Layered"
-      layered: "Lagdelte",
-      // [Auto-translated] "Solid"
-      solid: "Solid",
+      // [Auto-translated] "Soft"
+      soft: "Myk",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontrast"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monokrom"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3275,15 +3287,27 @@ export var nbStrings = {
     // [Auto-translated] "Font"
     fontScale: "Font",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Skaperen av spørreundersøkelsen 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Lys",
-      // [Auto-translated] "Dark"
-      "default-dark": "Mørk",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontrast"
+
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Grunnleggende",
+      // [Auto-translated] "Advanced"
+      advanced: "Avansert",
+      // [Auto-translated] "Expert"
+      expert: "Ekspert"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Forhåndsinnstilling anvendt"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Vare 1" }, { value: "item2", text: "Vare 2" }, { value: "item3", text: "Vare 3" }],
+    columns: [{ value: "column1", text: "Kolonne 1" }, { value: "column2", text: "Kolonne 2" }, { value: "column3", text: "Kolonne 3" }],
+    rows: [{ value: "row1", text: "Rad 1" }, { value: "row2", text: "Rad 2" }],
+    matrixColumns: [{ name: "column1", title: "Kolonne 1" }, { name: "column2", title: "Kolonne 2" }, { name: "column3", title: "Kolonne 3" }]
   }
 };
 

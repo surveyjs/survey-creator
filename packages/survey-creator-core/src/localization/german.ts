@@ -1262,8 +1262,6 @@ export var germanTranslation = {
     acceptedTypes: "Zusätzliche Dateierweiterungen",
     // "Wait for upload to complete"
     waitForUpload: "Warten bis der Upload abgeschlossen ist",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Löschen der Datei bestätigen",
     // "Row details alignment"
     detailPanelMode: "Position des Detailbereichs",
     // "Minimum row count"
@@ -1396,7 +1394,9 @@ export var germanTranslation = {
       // [Auto-translated] "Image height"
       imageHeight: "Bildhöhe",
       // [Auto-translated] "Image width"
-      imageWidth: "Breite des Bildes"
+      imageWidth: "Breite des Bildes",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Dateilöschung bestätigen"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Verstecken Sie die Frage, wenn es keine Wahlmöglichkeiten hat",
@@ -1454,6 +1454,10 @@ export var germanTranslation = {
     choiceTextsFromQuestion: "Verwenden Sie Werte aus der folgenden Matrixspalte oder Panelfrage als Auswahltexte",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Seitentitel in der Fortschrittsleiste anzeigen",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Anzeige von Navigationstext in der Fortschrittsleiste",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Ausrichtung des Navigationstextes",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Seitenzahlen in der Fortschrittsleiste anzeigen",
     // [Auto-translated] "Add a comment box"
@@ -1681,25 +1685,25 @@ export var germanTranslation = {
       // [Auto-translated] "Description font"
       questionDescription: "Beschreibung Schriftart",
       // [Auto-translated] "Font"
-      editorFont: "Schriftart",
+      inputContent: "Schriftart",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Undurchsichtigkeit", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Survey-Schriftfamilie",
+      "--sjs2-typography-font-family-text": "Vermessungsschriftenfamilie",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Hintergrundfarbe",
+      "--sjs2-color-utility-surface-survey": "Hintergrundfarbe",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Hintergrundfarben für Akzente",
+      "--sjs2-color-project-brand-600": "Akzent-Hintergrundfarben",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Akzentfarben im Vordergrund setzen",
+      "--sjs2-color-fg-brand-on-primary": "Akzentfarben im Vordergrund",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Farben der Fehlermeldung",
+      "--sjs2-color-bg-alert-primary": "Farben der Fehlermeldung",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Schatten-Effekte",
+      "--sjs2-border-effect-surface-default": "Schatteneffekte",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Schatten-Effekte",
+      "--sjs2-border-effect-component-formbox-default": "Schatteneffekte",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Farben"
+      "--sjs2-color-component-input-default-line": "Farben"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -1858,8 +1862,8 @@ export var germanTranslation = {
       // [Auto-translated] "Never"
       none: "Nie"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Optionsfelder",
+    // [Auto-translated] "Radio buttons"
+    radio: "Funktasten",
     inputType: {
       // "Color"
       color: "Farbe",
@@ -2136,7 +2140,17 @@ export var germanTranslation = {
       // [Auto-translated] "Buttons"
       buttons: "Tasten",
       // [Auto-translated] "Dropdown"
-      dropdown: "Dropdown-Liste"
+      dropdown: "Dropdown-Liste",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentierter Schalter",
+      // [Auto-translated] "Radio buttons"
+      radio: "Funktasten",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Checkkästchen",
+      // [Auto-translated] "Switch"
+      switch: "Wechsel",
+      // [Auto-translated] "Custom"
+      custom: "Gepflogenheit"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
@@ -2574,7 +2588,9 @@ export var germanTranslation = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Gibt die Anzeigebreite hochgeladener Bilder in der Vorschau und die tatsächliche Breite von Bildern an, die mit der Kamera aufgenommen wurden. Im Modus zum Hochladen einzelner Dateien wird die Anzeigebreite durch den Vorschaubereich begrenzt. Im Modus zum Hochladen mehrerer Dateien ist es durch den Miniaturansichtsbereich begrenzt.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Zeigt nach Möglichkeit Miniaturansichten für hochgeladene Dateien an. Deaktivieren Sie diese Option, wenn Sie stattdessen Dateisymbole anzeigen möchten."
+      allowImagesPreview: "Zeigt nach Möglichkeit Miniaturansichten für hochgeladene Dateien an. Deaktivieren Sie diese Option, wenn Sie stattdessen Dateisymbole anzeigen möchten.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Es wird eine Aufforderung ausgelöst, die die Dateilöschung bestätigen soll."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -2845,8 +2861,6 @@ export var germanTranslation = {
     valueFalse: "Ein Wert, der in den Umfrageergebnissen gespeichert werden soll, wenn die Befragten eine negative Antwort geben.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Es wird nicht empfohlen, diese Option zu deaktivieren, da sie das Vorschaubild überschreibt und es für einen Benutzer schwierig macht, zu verstehen, ob die Dateien hochgeladen wurden.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Löst eine Eingabeaufforderung aus, in der Sie aufgefordert werden, das Löschen der Datei zu bestätigen.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Aktivieren Sie diese Option, um nur ausgewählte Auswahlmöglichkeiten in eine Rangfolge zu bringen. Benutzer ziehen ausgewählte Elemente aus der Auswahlliste, um sie innerhalb des Ranking-Bereichs zu sortieren.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -2930,8 +2944,8 @@ export var germanTranslation = {
       questionBackgroundTransparency: "Passt die Transparenz der Eingabeelemente relativ zum Umfragehintergrund an.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Legt den Eckradius für alle rechteckigen Elemente fest. Aktivieren Sie den erweiterten Modus, wenn Sie individuelle Eckenradiuswerte für Eingabeelemente oder Panels und Fragefelder festlegen möchten.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Legt die Haupthintergrundfarbe der Umfrage fest."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Legt die Haupthintergrundfarbe der Umfrage fest."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3208,6 +3222,8 @@ export var germanTranslation = {
     placeholderColor: "Platzhalterfarbe",
     // [Auto-translated] "Size"
     size: "Größe",
+    // [Auto-translated] "Line height"
+    lineHeight: "Streckenhöhe",
     // [Auto-translated] "Opacity"
     opacity: "Undurchsichtigkeit",
     // [Auto-translated] "X"
@@ -3227,24 +3243,20 @@ export var germanTranslation = {
     names: {
       // [Auto-translated] "Default"
       default: "Default",
-      // [Auto-translated] "Sharp"
-      sharp: "Scharf",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontrast",
       // [Auto-translated] "Borderless"
       borderless: "Ohne Rand",
       // [Auto-translated] "Flat"
       flat: "Flach",
       // [Auto-translated] "Plain"
       plain: "Einfach",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Doppelter Rand",
-      // [Auto-translated] "Layered"
-      layered: "Stufig",
-      // [Auto-translated] "Solid"
-      solid: "Fest",
+      // [Auto-translated] "Soft"
+      soft: "Weich",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontrast"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Monochrom"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3275,15 +3287,27 @@ export var germanTranslation = {
     // [Auto-translated] "Font"
     fontScale: "Schriftart",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Ersteller von Umfragen 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Licht",
-      // [Auto-translated] "Dark"
-      "default-dark": "Dunkel",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontrast"
+
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Grundlegend",
+      // [Auto-translated] "Advanced"
+      advanced: "Fortgeschritten",
+      // [Auto-translated] "Expert"
+      expert: "Experte"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Preset angewendet"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Artikel 1" }, { value: "item2", text: "Artikel 2" }, { value: "item3", text: "Artikel 3" }],
+    columns: [{ value: "column1", text: "Spalte 1" }, { value: "column2", text: "Spalte 2" }, { value: "column3", text: "Spalte 3" }],
+    rows: [{ value: "row1", text: "Zeile 1" }, { value: "row2", text: "Zeile 2" }],
+    matrixColumns: [{ name: "column1", title: "Spalte 1" }, { name: "column2", title: "Spalte 2" }, { name: "column3", title: "Spalte 3" }]
   }
 };
 

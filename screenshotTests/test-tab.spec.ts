@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler } from "./helper";
+import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Test tab Screenshot";
 
@@ -33,7 +33,7 @@ test.describe(title, () => {
 
     await page.waitForTimeout(300);
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await compareScreenshot(page, page.locator(".svc-test-tab__content .sv-action-bar--pages"), "test-tab-toolbar.png");
+    await compareScreenshot(page, page.locator(".svc-test-tab__content .svc-pages-toolbar"), "test-tab-toolbar.png");
 
     await page.setViewportSize({ width: 380, height: 600 });
     await page.waitForTimeout(300);
@@ -226,7 +226,7 @@ test.describe(title, () => {
     // Remove timer animation and disable timer start
     await page.addStyleTag({ content: ".sd-timer__progress--animation { transition: none !important; }" });
     await page.evaluate(() => {
-      (window as any).Survey.SurveyTimer.instance.start = () => {};
+      (window as any).Survey.SurveyTimer.instance.start = () => { };
     });
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
@@ -266,8 +266,7 @@ test.describe(title, () => {
               "type": "comment",
               "name": "disappointing-experience",
               "visible": false,
-              "visibleIf": "{nps-score} <= 5",
-              "maxLength": 300
+              "visibleIf": "{nps-score} <= 5"
             }
           ]
         }
@@ -277,7 +276,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.setViewportSize({ width: 800, height: 800 });
     await page.locator('[data-name="nps-score"]').click();
-    await page.locator("li.sd-list__item span", { hasText: "2" }).click();
+    await getVisibleSelectListItemByText(page, "2").click();
     await page.locator('[data-name="nps-score"]').click();
     await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-opened-dropdown.png");
   });
@@ -314,7 +313,7 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.locator('[title="Select device type"]').click();
     await page.locator("span", { hasText: "iPhone SE" }).click();
-    await getBarItemByTitle(page, "Switch to portrait orientation").click();
+    await page.getByRole("button", { name: "Switch to portrait orientation" }).click();
     await page.locator('[data-name="nps-score"]').click();
     await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-opened-dropdown-mobile.png");
   });
@@ -348,7 +347,7 @@ test.describe(title, () => {
       };
     });
     await page.locator(".svc-tabbed-menu-item", { hasText: "Preview" }).click();
-    await page.locator('input[title="Complete"]').click();
+    await getButtonByText(page, "Complete").click();
     await compareScreenshot(page, page.locator(".svc-creator-tab"), "test-tab-background-image.png");
   });
 
@@ -392,7 +391,9 @@ test.describe(title, () => {
     const pageSelectorButton = page.locator(".svc-page-selector");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await pageSelectorButton.click();
+    await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".svc-page-selector .sv-popup__container"), "test-tab-page-selector-witn-invisible-page.png");
+    await showContentBehindPopup(page);
   });
   test("Page selector & markdown", async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
@@ -425,7 +426,7 @@ test.describe(title, () => {
       ]
     });
     const pageSelectorButton = page.locator(".svc-page-selector");
-    const pageSelectorMenu = page.locator(".svc-list__container");
+    const pageSelectorMenu = page.locator(".sd-menu-list__container");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await compareScreenshot(page, pageSelectorButton, "test-tab-page-selector-markdown-button-first.png");
     await pageSelectorButton.click();
@@ -451,7 +452,7 @@ test.describe(title, () => {
       ]
     });
 
-    const questionTagbox = page.locator(".sd-input.sd-tagbox");
+    const questionTagbox = page.locator(".sd-formbox.sd-tagbox");
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await questionTagbox.click();
     await compareScreenshot(page, page.locator(".sv-popup__container"), "test-tab-tagbox-style.png");

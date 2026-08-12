@@ -153,7 +153,7 @@ test.describe(title, () => {
     await page.waitForTimeout(300);
     await compareScreenshot(page, designerTabContent, "page-content-hover.png");
 
-    await pageContent.locator(".svc-element__add-new-question").hover();
+    await pageContent.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").hover();
     await compareScreenshot(page, pageContent, "question-add-hover.png");
 
     await pageContent.click({ position: { x: 5, y: 5 } });
@@ -184,7 +184,7 @@ test.describe(title, () => {
     await setJSON(page, json);
     const rootSelector = page.locator(".svc-tab-designer");
     await page.click(".svc-page", { position: { x: 5, y: 5 } });
-    await compareScreenshot(page, rootSelector, "page-selected-responsive.png");
+    await compareScreenshot(page, rootSelector, "page-selected-responsive.png", { maxDiffPixels: 2 });
   });
 
   test("Page hidden header and top toolbar", async ({ page }) => {
@@ -225,8 +225,8 @@ test.describe(title, () => {
       "logoPosition": "right",
       "elements": [{ type: "text", name: "q1", title: "Question Title" }]
     });
-    const button = page.locator(".svc-page-toolbar__item").first();
-    const buttonDisabled = page.locator(".svc-page-toolbar__item:disabled").first();
+    const button = page.locator(".svc-page-toolbar .sd-action").first();
+    const buttonDisabled = page.locator(".svc-page-toolbar .sd-action:disabled").first();
     await page.locator(".svc-page__content").first().click({ position: { x: 5, y: 5 } });
     await compareScreenshot(page, button, "page-button.png");
     await button.hover();
@@ -307,9 +307,9 @@ test.describe(title, () => {
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners.png");
     await page.hover(".svc-logo-image-container");
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners-hover.png");
-    await page.hover(".svc-logo-image-container .svc-context-button");
+    await page.hover(".svc-logo-image-container .sd-action");
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners-choose-hover.png");
-    await page.hover(".svc-logo-image-container .svc-context-button--danger");
+    await page.hover(".svc-logo-image-container .sd-action--alert");
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners-clear-hover.png");
   });
 

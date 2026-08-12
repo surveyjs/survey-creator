@@ -79,7 +79,7 @@ export const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide
 export const surveySettingsButtonSelector = Selector(".sv-action-bar-item[title=\"Survey settings\"]");
 export const themeSettingsButtonSelector = Selector(".sv-action-bar-item[title=\"Theme settings\"]");
 export const propertyGridSelector = Selector(".svc-side-bar__container");
-export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item");
+export const objectSelectorButton = Selector(".svc-side-bar__container-header .sv-action--object-selector .sd-action");
 export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .svc-list__container");
 export const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sv-action-bar-item__title";
 

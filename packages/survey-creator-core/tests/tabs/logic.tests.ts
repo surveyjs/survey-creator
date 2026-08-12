@@ -37,7 +37,6 @@ import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyLogicType } from "../../src/components/tabs/logic-types";
 
 export * from "../../src/components/link-value";
-export * from "../../src/custom-questions/question-text-with-reset";
 
 function setDoubleBraces() {
   surveySettings.expressionVariableDelimiters = { start: "{{", end: "}}" };
@@ -45,7 +44,6 @@ function setDoubleBraces() {
 function resetBraces() {
   surveySettings.expressionVariableDelimiters = { start: "{", end: "}" };
 }
-import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
 
 const questionLogicTypeLength = 5;
@@ -1186,7 +1184,6 @@ test("LogicItemEditorUI: check remove row action", () => {
   const actions = <AdaptiveActionContainer>cell.item.value;
   expect(actions.actions).toHaveLength(1);
   const action = actions.actions[0];
-  expect(action.component).toEqual("sv-action-bar-item");
   expect(action.iconName).toEqual("icon-delete");
   expect(action.title).toEqual("Remove");
   expect(action.showTitle).toBeFalsy();
@@ -3671,13 +3668,13 @@ test("Custom trigger in logic", () => {
   const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
   const targetCounterQuestion = triggerEditorPanel.getQuestionByName("targetCounter");
   expect(targetCounterQuestion.value).toBe("q2");
-  const initialNumberQuestion = <QuestionTextWithResetModel>triggerEditorPanel.getQuestionByName("initialNumber");
+  const initialNumberQuestion = triggerEditorPanel.getQuestionByName("initialNumber");
   expect(initialNumberQuestion.value).toBe(21);
 
-  expect(targetCounterQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
-  expect(targetCounterQuestion.getControlClass().indexOf("sd-dropdown")).toBeTruthy();
-  expect(initialNumberQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
-  expect(initialNumberQuestion.getControlClass().indexOf("spg-input-container__input")).toBeTruthy();
+  expect(targetCounterQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeGreaterThanOrEqual(0);
+  expect(targetCounterQuestion.getControlClass().indexOf("sd-dropdown")).toBeGreaterThanOrEqual(0);
+  expect(initialNumberQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeGreaterThanOrEqual(0);
+  expect(initialNumberQuestion.getControlClass().indexOf("sd-formbox__input")).toBeGreaterThanOrEqual(0);
 
   delete SurveyLogic.types["increment_counter"];
   Serializer.removeClass("incrementcountertrigger");

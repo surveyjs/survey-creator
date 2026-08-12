@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { url, setJSON, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, compareScreenshot, doDrag, doDragDrop } from "./helper";
+import { url, setJSON, setOptions, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, compareScreenshot, doDrag, doDragDrop } from "./helper";
 import { downArrowImageLink, upArrowImageLink } from "../resources/base64images";
 
 const title = "DragDrop Screenshot";
@@ -157,6 +157,7 @@ test.describe(title, () => {
           elements: [
             {
               "type": "ranking",
+              "titleLocation": "hidden",
               "name": "question1",
               "choices": [
                 "Item 1",
@@ -169,7 +170,8 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const qRoot = page.locator(".svc-question__adorner .sd-question__content").first();
+    const qRoot = page.locator(".svc-question__adorner .svc-question__content").first();
+    await qRoot.click({ position: { x: 5, y: 5 } });
     const firstItem = qRoot.locator(".svc-item-value-wrapper").first();
 
     await compareScreenshot(page, qRoot, "drag-drop-item-values-ranking.png");
@@ -185,6 +187,7 @@ test.describe(title, () => {
 
   test("Choices: Mobile", async ({ page }) => {
     await hideAllAdornerActions(page);
+    await setOptions(page, { maxChoiceContentNestingLevel: 0 });
     await page.setViewportSize({ width: 390, height: 844 });
 
     const json = {
@@ -640,7 +643,7 @@ test.describe(title, () => {
     await panel.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.filter({ visible: true }).first().click();
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: panel });
     await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-page__content"), "drag-drop-in-collapsed-panel.png");
@@ -683,7 +686,7 @@ test.describe(title, () => {
     await pageElement.hover({ position: { x: 5, y: 5 } });
     await qCollapseButton.click();
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: pageElement });
     await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-tab-designer_content"), "drag-drop-in-collapsed-page.png");

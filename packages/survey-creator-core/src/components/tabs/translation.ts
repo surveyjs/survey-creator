@@ -19,9 +19,8 @@ import "./translation.scss";
 import { SurveyHelper, getDefaultLocaleName } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
-import { updateMatrixRemoveAction, updateMatixActionsClasses } from "../../utils/actions";
+import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
 import { SurveyElementActionContainer } from "../action-container-view-model";
-import { listComponentCss } from "../list-theme";
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
 import { getActualLocaleName } from "../../utils/creator-locstrings";
@@ -721,6 +720,10 @@ export class Translation extends Base implements ITranslationLocales {
   }) filteredPage: PageModel;
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
+  private stringsSurveyInstanceId = 0;
+  private makeSurveyIdSpaceUnique(survey: SurveyModel): void {
+    survey.elementIdPrefix = (survey.elementIdPrefix || "") + (++this.stringsSurveyInstanceId) + "-";
+  }
   @property({ defaultValue: true }) isEmpty: boolean;
   private editLocale: string;
   private editModeValue: boolean = false;
@@ -822,7 +825,7 @@ export class Translation extends Base implements ITranslationLocales {
           action: () => this.showTranslationEditor(locale)
         }));
       }
-      updateMatixActionsClasses(options.actions);
+      updateMatixActionsAppearance(options.actions);
     });
     return res;
   }
@@ -917,6 +920,7 @@ export class Translation extends Base implements ITranslationLocales {
     var json = { autoGrowComment: true, allowResizeComment: false };
     setSurveyJSONForPropertyGrid(json, false);
     const survey: SurveyModel = this.options.createSurvey(json, "translation_strings", this, (survey: SurveyModel): void => {
+      this.makeSurveyIdSpaceUnique(survey);
       survey.lazyRenderEnabled = true;
       survey.skeletonComponentName = "sd-translation-line-skeleton";
       survey.startLoadingFromJson();
@@ -980,6 +984,7 @@ export class Translation extends Base implements ITranslationLocales {
     let json = {};
     setSurveyJSONForPropertyGrid(json, false);
     const survey: SurveyModel = this.options.createSurvey(json, "translation_strings_header", this, (survey: SurveyModel): void => {
+      this.makeSurveyIdSpaceUnique(survey);
       survey.css = translationCss;
       const newPage = survey.addNewPage("page");
 
@@ -1137,7 +1142,6 @@ export class Translation extends Base implements ITranslationLocales {
       items: this.chooseLanguageActions,
       allowSelection: false,
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
       onSelectionChanged: (item: IAction) => {
         this.addLocale(item.id);
       }
@@ -1583,7 +1587,6 @@ export class TranslationEditor {
         data: { model: locStr },
         onApply: (): boolean => { return true; },
         cssClass: "svc-creator-popup",
-        cssClasses: listComponentCss,
         title: dialogTitle,
         displayMode: "popup"
       }, this.options.rootElement);
@@ -1701,6 +1704,7 @@ export class TranslationEditor {
     survey.showNavigationButtons = true;
     survey.navigationButtonsLocation = "top";
     navigationBar.allowResponsiveness();
+    navigationBar.setActionsAppearance({ style: "brand", mode: "tertiary", size: "small" });
     navigationBar.addAction(this.createLocaleFromAction());
     const actionCss = "svc-action-bar-item--right";
     if (this.options.getHasMachineTranslation()) {
@@ -1764,7 +1768,6 @@ export class TranslationEditor {
         this.setFromLocale(id);
         action.title = this.getActionTranslateFromText(id);
       },
-      cssClasses: listComponentCss,
       allowSelection: true,
       locOwner: this.options as any
     }, {

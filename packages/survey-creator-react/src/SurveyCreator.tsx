@@ -140,7 +140,8 @@ export class SurveyCreatorComponent extends SurveyElementBase<
       : ReactElementFactory.Instance.createElement(tab.componentContent, {
         creator: creator,
         survey: creator.survey,
-        data: tab.data.model
+        data: tab.data.model,
+        model: tab.data.model
       });
     const className = "svc-creator-tab" + (creator.toolboxLocation == "right" ? " svc-creator__toolbox--right" : "");
     return (

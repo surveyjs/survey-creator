@@ -28,7 +28,7 @@ export class TabThemeSurveyComponent extends SurveyElementBase<any, any> {
     </div>);
   }
   renderElement(): React.JSX.Element {
-    const tabContentClassName = "svc-creator-tab__content svc-test-tab__content" + (this.model.isPageToolbarVisible ? " svc-creator-tab__content--with-toolbar" : "");
+    const tabContentClassName = "svc-creator-tab__content svc-test-tab__content " + this.model.tabContentAdditionalCss;
     return (
       <div className={tabContentClassName}>
         {this.model.simulator.survey.isEmpty ? this.renderPlaceholder() : this.renderSimulator()}

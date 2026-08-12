@@ -8,9 +8,9 @@
           </ng-template>
         </div>
       </div>
-      <svc-action-button *ngIf="adorner.needToCollapse" [text]="adorner.getButtonText()"
-        [click]="adorner.switchCollapse.bind(adorner)" [allowBubble]="true">
-      </svc-action-button>
+      <ng-container *ngIf="adorner.needToCollapse">
+        <ng-template [component]="{ name: 'sv-action-bar-item', data: { model: adorner.collapseAction } }"></ng-template>
+      </ng-container>
     </div>
   </div>
 </ng-template>

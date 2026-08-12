@@ -26,9 +26,9 @@ import {
 import { SurveyCreatorModel, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
 import { settings } from "./creator-settings";
+import { resolveLocalizableJSON } from "./localizable-json";
 import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { SearchManagerToolbox } from "./components/toolbox/toolbox-search-manager";
-import { listComponentCss } from "./components/list-theme";
 
 export type overflowBehaviorType = "hideInMenu" | "scroll";
 
@@ -187,7 +187,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
         .append("svc-toolbox__tool--has-icon", !!this.iconName)
         .append("svc-toolbox__tool--has-subitems", !!(this.items?.length > 0))
         .append("svc-toolbox__tool--disabled", this.enabled === false)
-        .append("sv-action--hidden", !this.isVisible)
+        .append("svc-toolbox__tool--hidden", !this.isVisible)
         .toString();
     }) as any;
   }
@@ -375,6 +375,9 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public get subitemsButtonIcon() {
     return "icon-next_16x16";
   }
+  public getTooltip(): string {
+    return this.tooltip || this.title;
+  }
 }
 
 /**
@@ -418,6 +421,8 @@ export class QuestionToolbox
   ];
   private _containerElementValue: HTMLElement;
   private _rootElementValue: HTMLElement;
+  //The JSON that has been generated for the default toolbox items, see updateDefaultJson
+  private generatedJsonHash: { [index: string]: any } = {};
   public presetDefaultItems: Array<IQuestionToolboxItem>;
 
   public get itemSelector(): string {
@@ -428,9 +433,11 @@ export class QuestionToolbox
   }
 
   public static defaultQuestionJsonCache: { [name: string]: any } | undefined;
-  public static getQuestionDefaultSettings(questionType: string): any {
+  public static getQuestionDefaultSettings(questionType: string, locale?: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
-    return settings.toolbox.defaultJSON[questionType];
+    const json = settings.toolbox.defaultJSON[questionType];
+    if (!json) return undefined;
+    return resolveLocalizableJSON(json, locale);
   }
   public static getSubTypePropertyName(questionType: string): string {
     let propertyName = "";
@@ -612,6 +619,9 @@ export class QuestionToolbox
     this.subItemsShowDelay = 0;
     this.searchManager.isVisible = this.searchEnabled;
     this.searchManager.toolbox = this;
+    this.cssClasses = {
+      containerItemHidden: "svc-toolbox__tool--hidden",
+    };
     this.searchItem = new Action({
       id: "searchItem-id",
       css: "svc-toolbox__tool svc-toolbox__search-button",
@@ -619,6 +629,7 @@ export class QuestionToolbox
       iconName: "icon-search",
       iconSize: "auto",
       component: "sv-action-bar-item",
+      appearance: { mode: "quaternary", style: "neutral" },
       title: surveyLocalization.getString("ed.toolboxSearch"),
       showTitle: false,
       action: () => {
@@ -638,9 +649,10 @@ export class QuestionToolbox
     this.dotsItem.css = new ComputedUpdater(() => {
       return new CssClassBuilder()
         .append("svc-toolbox__tool svc-toolbox__tool--dots")
-        .append("sv-action--hidden", !this.dotsItem.isVisible)
+        .append("svc-toolbox__tool--hidden", !this.dotsItem.isVisible)
         .toString();
     }) as any;
+    this.dotsItem.appearance = { style: "brand", mode: "quaternary" };
 
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
@@ -658,7 +670,6 @@ export class QuestionToolbox
     };
     this.dotsItem.popupModel.cssClass += " svc-toolbox-popup svc-creator-popup";
     this.dotsItem.data.locOwner = this.creator;
-    this.hiddenItemsListModel.cssClasses = listComponentCss;
   }
   private getDefaultQuestionCategories() {
     const questionCategoryMap = {};
@@ -824,6 +835,9 @@ export class QuestionToolbox
       const newJson = { ...parentItem.json };
       newJson[propName] = ch;
       const newId = parentItem.id != ch ? ch : parentItem.id + "-default";
+      if (this.isGeneratedJson(parentItem)) {
+        this.generatedJsonHash[newId] = newJson;
+      }
 
       const item = new QuestionToolboxItem({
         id: newId,
@@ -979,7 +993,11 @@ export class QuestionToolbox
     this.showCategoryTitlesValue = val;
     this.updateCategoriesState();
   }
-  public updateTitles(): void {
+  public updateLocalizedStrings(): void {
+    this.updateTitles();
+    this.updateDefaultJson();
+  }
+  private updateTitles(): void {
     this.actions.forEach(action => {
       action.locStrsChanged();
     });
@@ -1348,25 +1366,9 @@ export class QuestionToolbox
     const questions = this.getQuestionTypes(supportedQuestions);
     const defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
 
-    const jsonCache = QuestionToolbox.defaultQuestionJsonCache;
     for (var i = 0; i < questions.length; i++) {
       const name = questions[i];
-      const defaultJson = QuestionToolbox.getQuestionDefaultSettings(name);
-      let json: any;
-      if (jsonCache && !defaultJson && name in jsonCache) {
-        json = { ...jsonCache[name] };
-      } else {
-        let question = (!defaultJson ? <Question>ElementFactory.Instance.createElement(name, "q1") : undefined) || Serializer.createClass(name);
-        if (!!defaultJson) {
-          question.fromJSON(defaultJson);
-        }
-        json = question.toJSON();
-        json.type = name;
-        delete json.name;
-        if (jsonCache && !defaultJson) {
-          jsonCache[name] = { ...json };
-        }
-      }
+      const json = this.createDefaultQuestionJson(name);
       const iconName = "icon-" + name;
       const item: IQuestionToolboxItem = {
         id: name,
@@ -1380,6 +1382,58 @@ export class QuestionToolbox
       res.push(this.getOrCreateToolboxItem(item));
     }
     return res;
+  }
+  private createDefaultQuestionJson(name: string): any {
+    const defaultJson = QuestionToolbox.getQuestionDefaultSettings(name);
+    const jsonCache = QuestionToolbox.defaultQuestionJsonCache;
+    let json: any;
+    if (jsonCache && !defaultJson && name in jsonCache) {
+      json = { ...jsonCache[name] };
+    } else {
+      const question = (!defaultJson ? <Question>ElementFactory.Instance.createElement(name, "q1") : undefined) || Serializer.createClass(name);
+      if (!!defaultJson) {
+        question.fromJSON(defaultJson);
+      }
+      json = question.toJSON();
+      json.type = name;
+      delete json.name;
+      if (jsonCache && !defaultJson) {
+        jsonCache[name] = { ...json };
+      }
+    }
+    this.generatedJsonHash[name] = json;
+    return json;
+  }
+  //Recreates the JSON of the default toolbox items for the current Creator UI locale, see localizableJSON.
+  //The JSON of the items that were modified, for example by a UI preset, is not recreated.
+  private updateDefaultJson(): void {
+    //The generated JSON depends on the locale, e.g. multipletext item names
+    if (!!QuestionToolbox.defaultQuestionJsonCache) {
+      QuestionToolbox.defaultQuestionJsonCache = {};
+    }
+    const types = ElementFactory.Instance.getAllTypes();
+    this.actions.forEach(item => {
+      if (item.isCopied || types.indexOf(item.name) < 0) return;
+      if (!this.isGeneratedJson(item)) return;
+      item.json = this.createDefaultQuestionJson(item.name);
+      this.updateSubTypesJson(item);
+    });
+  }
+  private isGeneratedJson(item: QuestionToolboxItem): boolean {
+    return this.generatedJsonHash[item.id] === item.json;
+  }
+  private updateSubTypesJson(item: QuestionToolboxItem): void {
+    const subItems = item.items;
+    if (!Array.isArray(subItems)) return;
+    subItems.forEach((subItem: QuestionToolboxItem) => {
+      if (!this.isGeneratedJson(subItem)) return;
+      const json = { ...item.json };
+      if (!!subItem.propName) {
+        json[subItem.propName] = subItem.propValue;
+      }
+      subItem.json = json;
+      this.generatedJsonHash[subItem.id] = json;
+    });
   }
   private getRegisterComponentQuestions(): Array<QuestionToolboxItem> {
     const res = [];

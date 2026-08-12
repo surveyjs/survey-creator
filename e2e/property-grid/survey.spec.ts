@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON, getPropertyGridCategory, generalGroupName, logicGroupName } from "../helper";
+import { url, test, expect, setJSON, getPropertyGridCategory, generalGroupName, logicGroupName, getButtonByText } from "../helper";
 
 const title = "Property Grid";
 
@@ -25,7 +25,7 @@ test.describe(title, () => {
   });
 
   test("Delete second page", async ({ page }) => {
-    const deleteButtons = page.locator("div[data-name=pages]").locator("button[title=Remove]");
+    const deleteButtons = page.locator("div[data-name=pages]").getByRole("button", { name: "Remove" });
     await setJSON(page, json);
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Pages").click();
@@ -35,7 +35,7 @@ test.describe(title, () => {
   });
 
   test("Add calculated values", async ({ page }) => {
-    const addButton = page.locator("div[data-name=calculatedValues]").locator("button[title='Add new variable']");
+    const addButton = getButtonByText(page.locator("div[data-name=calculatedValues]"), "Add new variable").first();
     const rows = page.locator("div[data-name=calculatedValues]").locator("tbody").locator("tr");
 
     await setJSON(page, json);
@@ -62,7 +62,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
     const question = page.locator(".sv-string-editor").getByText("Question 1");
-    const edit = page.locator("button[title='Edit']");
+    const edit = page.locator(".spg-table__cell").getByRole("button", { name: "Edit" });
     const showInMultiple = page.locator("input[name='showInMultipleColumns']").locator("..");
     const radioMatrixCell = page.locator("td:nth-of-type(2) .svc-matrix-cell");
     const controlButton = radioMatrixCell.locator(".svc-matrix-cell__question-controls");
@@ -80,7 +80,7 @@ test.describe(title, () => {
   test("Merge undo/redo transcactioins for text", async ({ page }) => {
     const question = page.locator("[data-name=\"q1\"]");
     const titleEditor = page.locator("[data-name='title']").locator("textarea");
-    const undoAction = page.locator("button[title=Undo]");
+    const undoAction = page.getByRole("button", { name: "Undo" });
     const getQuestionTitle = async () => {
       return await page.evaluate(() => {
         return window["creator"].survey.getQuestionByName("q1").title;
@@ -149,7 +149,7 @@ test.describe(title, () => {
     const dataGroup = getPropertyGridCategory(page, "Data");
     await dataGroup.click();
     const panel = page.locator(".spg-panel.sd-element--expanded").first();
-    const dropdown = panel.locator(".spg-dropdown").first();
+    const dropdown = panel.locator(".sd-dropdown").first();
     const popupContainer = page.locator(".sv-popup__container").filter({ visible: true }).first();
 
     const clientRectWidth = await dropdown.boundingBox();
@@ -222,7 +222,7 @@ test.describe(title, () => {
       "showTimer": true,
       "headerView": "advanced"
     });
-    const input = page.locator("[data-name='timeLimit'] .spg-input");
+    const input = page.locator("[data-name='timeLimit'] .sd-formbox__input");
     const helpButton = page.locator("[data-name='timeLimit'] .spg-help-action");
     await getPropertyGridCategory(page, "Quiz Mode").click();
     await input.click();

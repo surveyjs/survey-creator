@@ -1,4 +1,8 @@
 <ng-template #template>
-  <span class="spg-color-editor__color-swatch" [style]="getStyle()"></span>
-  <sv-ng-string [model]="model.locTitle"></sv-ng-string>
+  <div class="sd-color-swatch-item">
+    <div class="sd-color-swatch-item__label">
+      <sv-ng-string [model]="model.locTitle"></sv-ng-string>
+    </div>
+    <svc-swatch [color]="model.value"></svc-swatch>
+  </div>
 </ng-template>

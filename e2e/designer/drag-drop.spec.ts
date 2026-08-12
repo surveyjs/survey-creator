@@ -19,6 +19,12 @@ import {
 } from "../helper";
 
 const title = "Drag Drop";
+//The default choices for a new question, see settings.toolbox.defaultJSON
+const defaultChoices = [
+  { value: "item1", text: "Item 1" },
+  { value: "item2", text: "Item 2" },
+  { value: "item3", text: "Item 3" }
+];
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
@@ -227,9 +233,9 @@ test.describe(title, () => {
     const tabbedMenuItemSelector = page.locator(".svc-toolbox .svc-toolbox__tool:nth-of-type(18)").first();
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.waitForTimeout(150);
-    await expect(tabbedMenuItemSelector).not.toHaveClass(/sv-action--hidden/);
+    await expect(tabbedMenuItemSelector).not.toHaveClass(/svc-toolbox__tool--hidden/);
     await page.setViewportSize({ width: 970, height: 632 });
-    await expect(tabbedMenuItemSelector).toHaveClass(/sv-action--hidden/);
+    await expect(tabbedMenuItemSelector).toHaveClass(/svc-toolbox__tool--hidden/);
     await page.locator(".svc-toolbox__tool--dots").filter({ visible: true }).first().click();
 
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
@@ -337,7 +343,7 @@ test.describe(title, () => {
           name: "panel1",
           elements: [
             { type: "text", name: "q1" },
-            { type: "radiogroup", name: "question1", choices: ["Item 1", "Item 2", "Item 3"] },
+            { type: "radiogroup", name: "question1", choices: defaultChoices },
           ],
         }],
       }],
@@ -347,7 +353,7 @@ test.describe(title, () => {
     await qCollapseButton.click();
 
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
 
     await doDrag({ page, element: toolboxToolAction, target: Panel, options: { steps: 25 } });
     await expect(Panel.locator(".svc-question__content--collapsed-drag-over-inside")).toBeVisible({ timeout: 15000 });
@@ -384,7 +390,7 @@ test.describe(title, () => {
     await qCollapseButton.click();
 
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
 
     await Panel.click({ position: { x: 1, y: 1 } });
     await doDrag({ page, element: toolboxToolAction, target: Panel,
@@ -418,7 +424,7 @@ test.describe(title, () => {
     await qCollapseButton.click();
 
     const Panel = page.locator("[data-sv-drop-target-survey-element=\"panel1\"]").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     await toolboxToolAction.hover();
     await page.mouse.down();
     await Panel.scrollIntoViewIfNeeded();
@@ -451,13 +457,13 @@ test.describe(title, () => {
     await pCollapseButton.click();
 
     const Page = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     const expectedJson = {
       pages: [{
         name: "page1",
         elements: [
           { type: "panel", name: "panel1", elements: [{ type: "text", name: "q1" }] },
-          { type: "radiogroup", name: "question1", choices: ["Item 1", "Item 2", "Item 3"] },
+          { type: "radiogroup", name: "question1", choices: defaultChoices },
         ],
       }],
     };
@@ -947,7 +953,7 @@ test.describe(title, () => {
     await setJSON(page, json);
 
     await page.locator("[data-name=\"question1\"]").filter({ visible: true }).first().click();
-    const ChoicesTab = page.locator("div[id$=ariaTitle][id^=sp]").getByText("Choice Options", { exact: true }).filter({ visible: true }).first();
+    const ChoicesTab = page.locator("div[id$=ariaTitle][id^=pg-sp]").getByText("Choice Options", { exact: true }).filter({ visible: true }).first();
     await ChoicesTab.click();
 
     const Item1 = page.locator("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
@@ -995,7 +1001,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const PagesTab = page.locator("div[id$=ariaTitle][id^=sp]").getByText("Pages", { exact: true }).filter({ visible: true }).first();
+    const PagesTab = page.locator("div[id$=ariaTitle][id^=pg-sp]").getByText("Pages", { exact: true }).filter({ visible: true }).first();
     await getBarItemByTitle(page, "Survey settings").click();
     await PagesTab.click();
 
@@ -1207,7 +1213,7 @@ test.describe(title, () => {
   test("Drag Drop to new page and Undo", async ({ page }) => {
     const newGhostPagePage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']").filter({ visible: true }).first();
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
-    const undoAction = page.locator("button[title=Undo]").filter({ visible: true }).first();
+    const undoAction = page.getByRole("button", { name: "Undo" }).filter({ visible: true }).first();
     const SingleInputToolboxItem = page.locator("[aria-label='Single-Line Input']").filter({ visible: true }).first();
     await setJSON(page, { pages: [{ name: "page1" }] });
 
@@ -1373,7 +1379,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     const rows = page.locator(".svc-row").filter({ visible: true });
 
     const adorner0 = rows.nth(0).locator(".svc-question__adorner").first();
@@ -1434,7 +1440,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const toolboxToolAction = page.locator(".svc-toolbox__tool > .sv-action__content").filter({ visible: true }).first();
+    const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").filter({ visible: true }).first();
     await expect(page.locator(".svc-question__adorner").first()).toBeVisible({ timeout: 15000 });
 
     const adorner = page.locator(".svc-question__adorner").first().filter({ visible: true }).first();
@@ -1579,10 +1585,10 @@ test.describe(title, () => {
     await page.waitForTimeout(500);
     await expect(page.locator(".svc-page__content--collapsed")).toHaveCount(0);
 
-    await page.locator(".svc-element__add-new-question").nth(2).filter({ visible: true }).scrollIntoViewIfNeeded();
-    await expect(page.locator(".svc-element__add-new-question").nth(3)).toHaveCount(0);
-    await page.locator(".svc-element__add-new-question").nth(2).filter({ visible: true }).click();
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(2).filter({ visible: true }).scrollIntoViewIfNeeded();
+    await expect(page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(3)).toHaveCount(0);
+    await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(2).filter({ visible: true }).click();
     expect(await getJSON(page)).toEqual(expectedJson);
-    await expect(page.locator(".svc-element__add-new-question").nth(3)).toBeVisible({ timeout: 15000 });
+    await expect(page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").nth(3)).toBeVisible({ timeout: 15000 });
   });
 });

@@ -4,7 +4,7 @@
   .spg-row {
     margin-top: 0;
     &:not(:first-of-type) {
-      margin-top: calcSize(1);
+      margin-top: var(--sjs2-spacing-x100);
     }
   }
 }

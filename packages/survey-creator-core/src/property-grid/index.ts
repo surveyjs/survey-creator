@@ -21,7 +21,9 @@ import {
   QuestionTextBase,
   IDialogOptions,
   PageModel,
-  GetMatrixRowActionsEvent
+  GetMatrixRowActionsEvent,
+  QuestionTextModel,
+  IAction
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -407,14 +409,14 @@ export class PropertyGridTitleActionsCreator {
     property: JsonObjectProperty,
     question: Question,
     enabled: boolean
-  ): any {
+  ): IAction {
     return {
       id: "property-grid-clear",
       title: getLocString("pe.clear"),
       showTitle: false,
       iconName: "icon-clear",
       iconSize: "auto",
-      innerCss: "spg-action-button--danger",
+      appearance: { style: "alert", mode: "tertiary-muted" },
       enabled: enabled,
       visible: <any>new ComputedUpdater<boolean>(() => {
         const propertyValue = (<any>question).obj[property.name];
@@ -463,6 +465,7 @@ export class PropertyGridTitleActionsCreator {
       id: "property-grid-help",
       iconName: this.getHelpActionIconName(question),
       iconSize: "auto",
+      appearance: { size: "xx-small", mode: "quaternary", style: "neutral" },
       css: "spg-help-action",
       showTitle: false,
       disableHide: true,
@@ -953,6 +956,10 @@ export class PropertyGridModel {
       this.onGetQuestionTitleActions(options, this.options);
       const q = options.question;
       this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.actions);
+      options.actions.forEach(action => {
+        if (!action.appearance)
+          action.appearance = { style: "neutral", mode: "tertiary", size: "small" };
+      });
     });
     this.survey.onGetPanelTitleActions.add((sender, options) => {
       options.actions.splice(0, options.actions.length);
@@ -1685,13 +1692,6 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     }
     return json;
   }
-  protected updateType(prop: JsonObjectProperty, obj: Base, json: any) {
-    if (!json.maxLength && obj.hasDefaultPropertyValue(prop.name)) {
-      json.type = `${json.type}withreset`;
-      json.renderAs = json.type;
-    }
-    return json;
-  }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
     if (question instanceof QuestionTextBase) {
       question.onKeyDownPreprocess = (event: KeyboardEvent) => {
@@ -1712,17 +1712,40 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     if (prop.name === "title") {
       question.allowSpaceAsAnswer = true;
     }
-    if (question.getType() == "textwithreset" || question.getType() == "commentwithreset") {
-      question.resetValueAdorner.resetValueCallback = () => {
-        obj.resetPropertyValue(prop.name);
-      };
-      question.resetValueAdorner.caption = editorLocalization.getString("pe.resetToDefaultCaption");
-      const isDefaultValue = () => !prop.isDefaultValueByObj(obj, prop.getValue(obj));
-      question.resetValueAdorner.allowResetValue = isDefaultValue();
-      obj.registerFunctionOnPropertyValueChanged(prop.name, () => {
-        question.resetValueAdorner.allowResetValue = isDefaultValue();
-      });
+    if (question.getType() == "text" || question.getType() == "comment") {
+      const textQuestion = question as QuestionTextBase;
+      if (!textQuestion.getMaxLength() && obj.hasDefaultPropertyValue(prop.name)) {
+        this.setupDefaultValuePlaceholder(obj, textQuestion, prop);
+        const isDefaultValue = () => prop.isDefaultValueByObj(obj, prop.getValue(obj));
+        const action = new Action({
+          id: "reset",
+          title: editorLocalization.getString("pe.resetToDefaultCaption"),
+          showTitle: false,
+          iconName: "icon-reset",
+          action: () => {
+            obj.resetPropertyValue(prop.name);
+          },
+          enabled: !isDefaultValue()
+        });
+        obj.registerFunctionOnPropertyValueChanged(prop.name, () => {
+          action.enabled = !isDefaultValue();
+        });
+        textQuestion.inputActionsContainer.addAction(action);
+      }
     }
+  }
+  //Show the default property value as the placeholder. It is based on the edited object locale and doesn't depend on the creator locale.
+  private setupDefaultValuePlaceholder(obj: Base, question: QuestionTextBase, prop: JsonObjectProperty): void {
+    Object.defineProperty(question, "renderedPlaceholder", {
+      configurable: true,
+      get: (): string => {
+        if (question.isReadOnly) return "";
+        if (!!question.placeholder) return question.placeholder;
+        const locStr = obj.getLocalizableString(prop.name);
+        const res = !!locStr ? locStr.getPlaceholder() : "";
+        return res || obj.getDefaultPropertyValue(prop.name) || "";
+      }
+    });
   }
 }
 export class PropertyGridEditorString extends PropertyGridEditorStringBase {
@@ -1737,7 +1760,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    const json = this.updateType(prop, obj, this.updateMaxLength(prop, { type: "text" }));
+    const json = this.updateMaxLength(prop, { type: "text" });
     if (prop.isRequired) {
       json.textUpdateMode = "onBlur";
     }
@@ -1911,10 +1934,10 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return this.updateType(prop, obj, this.updateMaxLength(prop, {
+    return this.updateMaxLength(prop, {
       type: "comment",
       rows: 2
-    }));
+    });
   }
 }
 export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {

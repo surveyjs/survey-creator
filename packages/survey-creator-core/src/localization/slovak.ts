@@ -1262,8 +1262,6 @@ export var skStrings = {
     acceptedTypes: "Ďalšie prípony súboru",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Počkajte na dokončenie nahrávania",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Potvrďte odstránenie súboru",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Zarovnanie detailov riadkov",
     // [Auto-translated] "Minimum row count"
@@ -1396,7 +1394,9 @@ export var skStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Výška obrázka",
       // [Auto-translated] "Image width"
-      imageWidth: "Šírka obrázka"
+      imageWidth: "Šírka obrázka",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Potvrďte vymazanie súboru"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Skryť otázku, ak nemá na výber",
@@ -1454,6 +1454,10 @@ export var skStrings = {
     choiceTextsFromQuestion: "Ako texty výberu použite hodnoty z nasledujúceho stĺpca matice alebo panelovej otázky",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Zobrazenie názvov strán na indikátore priebehu",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Zobraziť navigačný text v priebežnom paneli",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Zarovnanie navigačného textu",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Zobrazenie čísel strán na indikátore priebehu",
     // [Auto-translated] "Add a comment box"
@@ -1681,25 +1685,25 @@ export var skStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Písmo popisu",
       // [Auto-translated] "Font"
-      editorFont: "Písmo",
+      inputContent: "Písmo",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Neprehľadnosť", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Skupina písiem prieskumu",
+      "--sjs2-typography-font-family-text": "Rodina prieskumných fontov",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Farba pozadia",
+      "--sjs2-color-utility-surface-survey": "Farba pozadia",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Farby zvýraznenia pozadia",
+      "--sjs2-color-project-brand-600": "Akcentové farby pozadia",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Akcentové farby popredia",
+      "--sjs2-color-fg-brand-on-primary": "Akcentové farby popredia",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Farby chybových hlásení",
+      "--sjs2-color-bg-alert-primary": "Farby chybových hlásení",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Efekty tieňov",
+      "--sjs2-border-effect-surface-default": "Tieňové efekty",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Efekty tieňov",
+      "--sjs2-border-effect-component-formbox-default": "Tieňové efekty",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Farby"
+      "--sjs2-color-component-input-default-line": "Farby"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -1858,8 +1862,8 @@ export var skStrings = {
       // [Auto-translated] "Never"
       none: "Nikdy"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Prepínače",
+    // [Auto-translated] "Radio buttons"
+    radio: "Tlačidlá rádia",
     inputType: {
       // [Auto-translated] "Color"
       color: "Farba",
@@ -2136,7 +2140,17 @@ export var skStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Tlačidlá",
       // [Auto-translated] "Dropdown"
-      dropdown: "Rozbaľovací zoznam"
+      dropdown: "Rozbaľovací zoznam",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmentovaný prepínač",
+      // [Auto-translated] "Radio buttons"
+      radio: "Tlačidlá rádia",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Zaškrtávacie políčko",
+      // [Auto-translated] "Switch"
+      switch: "Prepínač",
+      // [Auto-translated] "Custom"
+      custom: "Zvyk"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
@@ -2574,7 +2588,9 @@ export var skStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Určuje šírku zobrazenia nahraných snímok v náhľade a skutočnú šírku snímok zhotovených fotoaparátom. V režime nahrávania jedného súboru je šírka zobrazenia obmedzená oblasťou ukážky. V režime nahrávania viacerých súborov je obmedzený oblasťou miniatúr.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov."
+      allowImagesPreview: "Ak je to možné, zobrazí náhľady miniatúr nahraných súborov. Zrušte výber, ak chcete namiesto toho zobraziť ikony súborov.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Spustí sa výzva na potvrdenie vymazania súboru."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -2845,8 +2861,6 @@ export var skStrings = {
     valueFalse: "Hodnota, ktorú je potrebné uložiť do výsledkov prieskumu, keď respondenti poskytnú zápornú odpoveď.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Neodporúča sa vypnúť túto možnosť, pretože prepíše obrázok ukážky a používateľovi sťaží pochopenie, či boli súbory nahrané.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Spustí výzvu na potvrdenie odstránenia súboru.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Povoľte zoradiť iba vybrané možnosti. Používatelia presunú vybrané položky zo zoznamu možností a zoradia ich v oblasti poradia.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -2930,8 +2944,8 @@ export var skStrings = {
       questionBackgroundTransparency: "Upraví priehľadnosť vstupných prvkov vzhľadom na pozadie prieskumu.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Nastaví polomer rohu pre všetky obdĺžnikové prvky. Povoľte Rozšírený režim, ak chcete nastaviť jednotlivé hodnoty polomeru rohu pre vstupné prvky alebo panely a polia otázok.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Nastaví hlavnú farbu pozadia prieskumu."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Nastavuje hlavnú farbu pozadia prieskumu."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3208,6 +3222,8 @@ export var skStrings = {
     placeholderColor: "Farba zástupného symbolu",
     // [Auto-translated] "Size"
     size: "Veľkosť",
+    // [Auto-translated] "Line height"
+    lineHeight: "Výška trate",
     // [Auto-translated] "Opacity"
     opacity: "Neprehľadnosť",
     // [Auto-translated] "X"
@@ -3227,24 +3243,20 @@ export var skStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "Predvolený",
-      // [Auto-translated] "Sharp"
-      sharp: "Ostrý",
+      // [Auto-translated] "Contrast"
+      contrast: "Kontrast",
       // [Auto-translated] "Borderless"
       borderless: "Bez okrajov",
       // [Auto-translated] "Flat"
       flat: "Plochý",
       // [Auto-translated] "Plain"
       plain: "Obyčajný",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Dvojité ohraničenie",
-      // [Auto-translated] "Layered"
-      layered: "Vrstvené",
-      // [Auto-translated] "Solid"
-      solid: "Pevný",
+      // [Auto-translated] "Soft"
+      soft: "Soft",
       // [Auto-translated] "3D"
       threedimensional: ".3D",
-      // [Auto-translated] "Contrast"
-      contrast: "Kontrast"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Čiernobiela"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3275,15 +3287,27 @@ export var skStrings = {
     // [Auto-translated] "Font"
     fontScale: "Písmo",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Tvorca prieskumu 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Svetlo",
-      // [Auto-translated] "Dark"
-      "default-dark": "Tmavý",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Kontrast"
+
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Základné",
+      // [Auto-translated] "Advanced"
+      advanced: "Pokročilé",
+      // [Auto-translated] "Expert"
+      expert: "Expert"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Použitá predsada"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Položka 1" }, { value: "item2", text: "Položka 2" }, { value: "item3", text: "Položka 3" }],
+    columns: [{ value: "column1", text: "Stĺpec 1" }, { value: "column2", text: "Stĺpec 2" }, { value: "column3", text: "Stĺpec 3" }],
+    rows: [{ value: "row1", text: "Riadok 1" }, { value: "row2", text: "Riadok 2" }],
+    matrixColumns: [{ name: "column1", title: "Stĺpec 1" }, { name: "column2", title: "Stĺpec 2" }, { name: "column3", title: "Stĺpec 3" }]
   }
 };
 

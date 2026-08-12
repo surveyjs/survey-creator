@@ -4,7 +4,27 @@ import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { QuestionToolboxItem } from "../src/toolbox";
+import { DropIndicatorPosition } from "../src/drag-drop-enums";
 
+test("Collapse action updates when the adorner is re-attached after expandCollapseButtonVisibility changes", (): any => {
+  const creator = new CreatorTester();
+  creator.expandCollapseButtonVisibility = "never";
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  // Force the (lazily built, cached) top action container to be created while the button is off.
+  adorner.topActionContainer;
+  expect(adorner.getActionById("collapse")?.visible).toBeFalsy();
+
+  // The button becomes visible and the same adorner model is reused for another element - as a
+  // React component now is, because element ids are deterministic across a JSON reload.
+  creator.expandCollapseButtonVisibility = "onhover";
+  creator.JSON = { elements: [{ type: "text", name: "q2" }] };
+  const q2 = creator.survey.getQuestionByName("q2");
+  adorner.attachToUI(q2);
+
+  expect(adorner.getActionById("collapse").visible).toBe(true);
+});
 test("Check required action", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -453,12 +473,12 @@ test("Check question converter selected item for customized subitems (json)", ()
   // create subitems from new items (the same type, different json)
   const booleans = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
   booleans.addSubitem(<any>{ name: "booleandefault", json: { type: "boolean" }, title: "Slider" });
-  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", renderAs: "radio" }, title: "Radio" });
-  booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", renderAs: "checkbox" }, title: "Checkbox" });
+  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", displayMode: "radio" }, title: "Radio" });
+  booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", displayMode: "checkbox" }, title: "Checkbox" });
 
   creator.JSON = {
     elements: [
-      { type: "boolean", name: "q1", renderAs: "radio" },
+      { type: "boolean", name: "q1", displayMode: "radio" },
     ]
   };
   const question = creator.survey.getQuestionByName("q1");
@@ -753,13 +773,13 @@ test("Check question converter with subitems (json)", (): any => {
 
   // create subitems from new items (the same type, different json)
   const booleans = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
-  booleans.addSubitem(<any>{ name: "booleandefault", json: { type: "boolean" }, title: "Slider" });
-  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", renderAs: "radio" }, title: "Radio" });
-  booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", renderAs: "checkbox" }, title: "Checkbox" });
+  booleans.addSubitem(<any>{ name: "booleansegmented", json: { type: "boolean" }, title: "Slider" });
+  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", displayMode: "radio" }, title: "Radio" });
+  booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", displayMode: "checkbox" }, title: "Checkbox" });
 
   creator.JSON = {
     elements: [
-      { type: "boolean", name: "q1", renderAs: "radio" },
+      { type: "boolean", name: "q1", displayMode: "radio" },
     ]
   };
   const question = creator.survey.getQuestionByName("q1");
@@ -774,17 +794,22 @@ test("Check question converter with subitems (json)", (): any => {
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   popup.show();
   const list = popup.contentComponentData.model;
+  const q1 = creator.survey.getQuestionByName("q1");
+  expect(q1.displayMode).toBe("radio");
+  expect(q1.renderAs).toBe("default");
 
   const booleanAction = list.getActionById("boolean");
   const booleanCheckAction = booleanAction.items[2];
   booleanCheckAction.action();
   const questionConverted = creator.survey.getQuestionByName("q1");
-  expect(questionConverted.renderAs).toBe("checkbox");
+  expect(questionConverted.displayMode).toBe("checkbox");
+  expect(questionConverted.renderAs).toBe("default");
 
   popup.show();
   const booleanCheckAction2 = booleanAction.items[0];
   booleanCheckAction2.action();
   const questionConverted2 = creator.survey.getQuestionByName("q1");
+  expect(questionConverted2.displayMode).toBe("segmented");
   expect(questionConverted2.renderAs).toBe("default");
 
   surveySettings.animationEnabled = true;
@@ -927,12 +952,12 @@ test("Check question converter with subitems (types)", (): any => {
   // create subitems from new items (the same type, different json)
   const booleans = creator.toolbox.getItemByName("boolean") as QuestionToolboxItem;
   booleans.addSubitem(<any>{ name: "booleandefault", json: { type: "boolean" }, title: "Slider" });
-  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", renderAs: "radio" }, title: "Radio" });
+  booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", displayMode: "radio" }, title: "Radio" });
   booleans.addSubitem(<any>{ name: "radio", json: { type: "radiogroup" }, title: "Radiogroup" });
 
   creator.JSON = {
     elements: [
-      { type: "boolean", name: "q1", renderAs: "radio" },
+      { type: "boolean", name: "q1", displayMode: "radio" },
     ]
   };
   const question = creator.survey.getQuestionByName("q1");
@@ -1006,7 +1031,7 @@ test("Check question converter with single subitem (json)", (): any => {
 
   creator.JSON = {
     elements: [
-      { type: "boolean", name: "q1", renderAs: "radio" },
+      { type: "boolean", name: "q1", displayMode: "radio" },
     ]
   };
 
@@ -1474,4 +1499,23 @@ test("Test showHiddenTitle functionality", (): any => {
   const dPanel = panel.getQuestionByName("question4") as QuestionPanelDynamicModel;
   const question5 = dPanel.panels[0].getQuestionByName("question5") as QuestionTextModel;
   expect(new QuestionAdornerViewModel(creator, question5, <any>undefined).showHiddenTitle).toBeTruthy();
+});
+
+test("Nested choice content panel shows the drop-over highlight while dragging over it", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
+  const panel = (question.choices[0] as any).panel;
+  // The choice content panel is a non-interactive nested element, but it still acts as a drop target.
+  expect(panel.isInteractiveDesignElement).toBeFalsy();
+
+  const panelAdorner = new QuestionAdornerViewModel(creator, panel, <any>undefined);
+  expect(panelAdorner.css().indexOf("svc-question__content--drag-over-inside")).toBe(-1);
+
+  panelAdorner.dropIndicatorPosition = DropIndicatorPosition.Inside;
+  expect(panelAdorner.css().indexOf("svc-question__content--drag-over-inside")).not.toBe(-1);
 });

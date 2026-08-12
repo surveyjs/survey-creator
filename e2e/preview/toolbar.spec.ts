@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON, creatorTabPreviewName, getTabbedMenuItemByText, getBarItemByTitle, explicitErrorHandler, getMenuItemByText } from "../helper";
+import { url, test, expect, setJSON, creatorTabPreviewName, getTabbedMenuItemByText, getBarItemByTitle, explicitErrorHandler, getMenuItemByText, getButtonByText } from "../helper";
 
 const title = "Preview tab";
 
@@ -66,7 +66,7 @@ test.describe(title, () => {
 
   test("Page switcher", async ({ page }) => {
     await setJSON(page, json2);
-    const selectedClassName = /svc-list__item--selected/;
+    const selectedClassName = /sd-menu-item--selected/;
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await expect(page.locator(".sd-question__title").getByText("string_editor")).toBeVisible();
@@ -86,7 +86,7 @@ test.describe(title, () => {
     await expect(page.locator(".sv-action--prevPage button")).not.toHaveAttribute("disabled", "");
     await expect(page.locator(".sv-action--nextPage button")).toHaveAttribute("disabled", "");
 
-    await page.locator(".svc-preview-pager__item[title='Page 3']").click();
+    await page.locator(".svc-pages-toolbar").getByRole("button", { name: "Page 3" }).click();
     await expect(getMenuItemByText(page, "Second page")).toBeVisible();
     await expect(getMenuItemByText(page, "First page")).not.toHaveClass(selectedClassName);
     await expect(getMenuItemByText(page, "Second page")).not.toHaveClass(selectedClassName);
@@ -96,7 +96,7 @@ test.describe(title, () => {
     await expect(page.locator(".svc-page-selector")).toContainText("Second page");
     await expect(page.locator(".sv-action--prevPage button")).not.toHaveAttribute("disabled", "");
     await expect(page.locator(".sv-action--nextPage button")).not.toHaveAttribute("disabled", "");
-    await page.locator(".svc-preview-pager__item[title='Second page']").click();
+    await page.locator(".svc-pages-toolbar").getByRole("button", { name: "Second page" }).click();
     await expect(getMenuItemByText(page, "First page")).not.toHaveClass(selectedClassName);
     await expect(getMenuItemByText(page, "Second page")).toHaveClass(selectedClassName);
     await expect(getMenuItemByText(page, "Page 3")).not.toHaveClass(selectedClassName);
@@ -110,9 +110,9 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.locator(".sv-action--nextPage").click();
     await page.locator(".sv-action--nextPage").click();
-    await page.locator("input[value='Complete']").click();
+    await getButtonByText(page, "Complete").click();
     await expect(page.locator(".sd-completedpage").getByText("Thank you for completing the survey")).toBeVisible();
-    await page.locator(".svc-preview__test-again span").getByText(restartSurveyButtonText).click();
+    await page.locator(".sd-action").getByText(restartSurveyButtonText).click();
     await expect(page.locator(".sd-question__title").getByText("string_editor")).toBeVisible();
   });
 
@@ -131,7 +131,7 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await setJSON(page, json);
 
-    const orientationAction = page.locator(".sv-action--orientationSelector .sv-action-bar-item");
+    const orientationAction = page.locator(".sv-action--orientationSelector .sd-action");
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await expect(orientationAction).toHaveAttribute("disabled", "");
@@ -158,10 +158,10 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await setJSON(page, json);
 
-    const orientationAction = page.locator(".sv-action--orientationSelector .sv-action-bar-item");
+    const orientationAction = page.locator(".sv-action--orientationSelector .sd-action");
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await expect(page.locator(".svc-top-bar .sv-action-bar-item").filter({ visible: true })).toHaveCount(3);
+    await expect(page.locator(".svc-top-bar .sd-action").filter({ visible: true })).toHaveCount(3);
     await expect(orientationAction).toHaveAttribute("disabled", "");
     await expect(getBarItemByTitle(page, "Show invisible elements")).toBeVisible();
 
@@ -169,15 +169,15 @@ test.describe(title, () => {
     await expect(getMenuItemByText(page, "iPad Air")).toBeVisible();
 
     await getMenuItemByText(page, "iPad Air").click();
-    await page.locator("input[value='Complete']").click();
+    await getButtonByText(page, "Complete").click();
     await expect(orientationAction).not.toHaveAttribute("disabled", "");
-    await expect(page.locator(".svc-preview__test-again span").getByText(restartSurveyButtonText)).toBeVisible();
+    await expect(page.locator(".sd-action").getByText(restartSurveyButtonText)).toBeVisible();
 
     await getBarItemByTitle(page, "Select device type").click();
     await expect(getMenuItemByText(page, "Desktop")).toBeVisible();
 
     await getMenuItemByText(page, "Desktop").click();
-    await page.locator(".svc-preview__test-again span").getByText(restartSurveyButtonText).click();
+    await page.locator(".sd-action").getByText(restartSurveyButtonText).click();
     await expect(orientationAction).toHaveAttribute("disabled", "");
     await expect(getBarItemByTitle(page, "Show invisible elements")).toBeVisible();
 
@@ -189,10 +189,10 @@ test.describe(title, () => {
     await explicitErrorHandler(page);
     await setJSON(page, json);
 
-    const orientationAction = page.locator(".sv-action--orientationSelector .sv-action-bar-item");
+    const orientationAction = page.locator(".sv-action--orientationSelector .sd-action");
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await expect(page.locator(".svc-top-bar .sv-action-bar-item").filter({ visible: true })).toHaveCount(3);
+    await expect(page.locator(".svc-top-bar .sd-action").filter({ visible: true })).toHaveCount(3);
     await expect(orientationAction).toHaveAttribute("disabled", "");
     await expect(getBarItemByTitle(page, "Show invisible elements")).toBeVisible();
 

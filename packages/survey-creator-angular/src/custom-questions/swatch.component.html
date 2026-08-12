@@ -1,0 +1,26 @@
+<ng-container [ngSwitch]="isPicker">
+  <label *ngSwitchCase="true" [class]="rootClassName">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </label>
+  <div *ngSwitchDefault [class]="rootClassName">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </div>
+</ng-container>
+
+<ng-template #content>
+  <div class="sd-color-swatch__content" [style]="rootStyle">
+    <svg *ngIf="showIcon" [iconName]="iconName" [class]="iconClass" [size]="'auto'" sv-ng-svg-icon></svg>
+    <input *ngIf="isPicker"
+      type="color"
+      [disabled]="inputDisabled"
+      [value]="colorInputValue"
+      [class]="colorInputClassName"
+      tabindex="-1"
+      [attr.aria-required]="arias?.['aria-required']"
+      [attr.aria-labelledby]="arias?.['aria-labelledby']"
+      [attr.aria-label]="arias?.['aria-label']"
+      [attr.aria-invalid]="arias?.['aria-invalid']"
+      [attr.aria-describedby]="arias?.['aria-describedby']"
+      (change)="colorInputChange!($event)" />
+  </div>
+</ng-template>

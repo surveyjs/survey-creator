@@ -1262,8 +1262,6 @@ export var ruStrings = {
     acceptedTypes: "Дополнительные расширения файлов",
     // [Auto-translated] "Wait for upload to complete"
     waitForUpload: "Дождитесь завершения загрузки",
-    // [Auto-translated] "Confirm file deletion"
-    needConfirmRemoveFile: "Подтвердите удаление файла",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Выравнивание сведений о строке",
     // [Auto-translated] "Minimum row count"
@@ -1396,7 +1394,9 @@ export var ruStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Высота изображения",
       // [Auto-translated] "Image width"
-      imageWidth: "Ширина изображения"
+      imageWidth: "Ширина изображения",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Подтвердить удаление файла"
     },
     // [Auto-translated] "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Скройте вопрос, если у него нет вариантов",
@@ -1454,6 +1454,10 @@ export var ruStrings = {
     choiceTextsFromQuestion: "Используйте значения из следующего столбца матрицы или панельного вопроса в качестве текстов для выбора",
     // [Auto-translated] "Display page titles in the progress bar"
     progressBarShowPageTitles: "Отображение заголовков страниц в индикаторе выполнения",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Отобразите навигационный текст в шкале прогресса",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Выравнивание навигационного текста",
     // [Auto-translated] "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Отображение номеров страниц в индикаторе выполнения",
     // [Auto-translated] "Add a comment box"
@@ -1681,25 +1685,25 @@ export var ruStrings = {
       // [Auto-translated] "Description font"
       questionDescription: "Описание шрифта",
       // [Auto-translated] "Font"
-      editorFont: "Шрифт",
+      inputContent: "Шрифт",
       // [Auto-translated] "Opacity"
       backgroundOpacity: "Непрозрачность", // Auto-generated string
       // [Auto-translated] "Survey font family"
-      "--sjs-font-family": "Семейство шрифтов Survey",
+      "--sjs2-typography-font-family-text": "Семейство обзорных шрифтов",
       // [Auto-translated] "Background color"
-      "--sjs-general-backcolor-dim": "Цвет фона",
+      "--sjs2-color-utility-surface-survey": "Цвет фона",
       // [Auto-translated] "Accent background colors"
-      "--sjs-primary-backcolor": "Акцентные цвета фона",
+      "--sjs2-color-project-brand-600": "Акцентные цвета фона",
       // [Auto-translated] "Accent foreground colors"
-      "--sjs-primary-forecolor": "Акцентные цвета переднего плана",
+      "--sjs2-color-fg-brand-on-primary": "Акцентные цвета переднего плана",
       // [Auto-translated] "Error message colors"
-      "--sjs-special-red": "Цвета сообщений об ошибках",
+      "--sjs2-color-bg-alert-primary": "Цвета сообщений об ошибках",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-small": "Эффекты теней",
+      "--sjs2-border-effect-surface-default": "Эффекты теней",
       // [Auto-translated] "Shadow effects"
-      "--sjs-shadow-inner": "Эффекты теней",
+      "--sjs2-border-effect-component-formbox-default": "Эффекты теней",
       // [Auto-translated] "Colors"
-      "--sjs-border-default": "Знамя"
+      "--sjs2-color-component-input-default-line": "Цвета"
     },
     "header@header": {
       // [Auto-translated] "View"
@@ -1858,8 +1862,8 @@ export var ruStrings = {
       // [Auto-translated] "Never"
       none: "Никогда"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Переключатели",
+    // [Auto-translated] "Radio buttons"
+    radio: "Кнопки радио",
     inputType: {
       // [Auto-translated] "Color"
       color: "Цвет",
@@ -2136,7 +2140,17 @@ export var ruStrings = {
       // [Auto-translated] "Buttons"
       buttons: "Кнопки",
       // [Auto-translated] "Dropdown"
-      dropdown: "Выпадающий список"
+      dropdown: "Выпадающий список",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Сегментированный переключатель",
+      // [Auto-translated] "Radio buttons"
+      radio: "Кнопки радио",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Чекбокс",
+      // [Auto-translated] "Switch"
+      switch: "Переключатель",
+      // [Auto-translated] "Custom"
+      custom: "Обычай"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
@@ -2574,7 +2588,9 @@ export var ruStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Указывает ширину отображения загруженных изображений в окне предварительного просмотра и фактическую ширину изображений, сделанных камерой. В режиме загрузки одного файла ширина отображения ограничена областью предварительного просмотра; В режиме загрузки нескольких файлов он ограничен областью эскизов.",
       // [Auto-translated] "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов."
+      allowImagesPreview: "Отображает предварительный просмотр миниатюр для загруженных файлов, когда это возможно. Снимите флажок, если вместо этого вы хотите отображать значки файлов.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Появляется запрос подтвердить удаление файла."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -2845,8 +2861,6 @@ export var ruStrings = {
     valueFalse: "Значение, сохраняемое в результатах опроса, когда респонденты дают отрицательный ответ.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Не рекомендуется отключать эту опцию, так как она переопределяет изображение предварительного просмотра и затрудняет понимание пользователем того, были ли файлы загружены.",
-    // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Запускает запрос на подтверждение удаления файла.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Включите этот параметр, чтобы ранжировать только выбранные варианты. Пользователи будут перетаскивать выбранные элементы из списка вариантов, чтобы упорядочить их в области ранжирования.",
     // [Auto-translated] "Enter a list of choices that will be suggested to the respondent during input."
@@ -2930,8 +2944,8 @@ export var ruStrings = {
       questionBackgroundTransparency: "Настройка прозрачности входных элементов относительно фона опроса.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Задает радиус угла для всех прямоугольных элементов. Включите расширенный режим, если вы хотите задать индивидуальные значения углового радиуса для элементов ввода или панелей и полей вопросов.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Задает основной цвет фона опроса."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Задаёт основной цвет фона опроса."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3208,6 +3222,8 @@ export var ruStrings = {
     placeholderColor: "Цвет заполнителя",
     // [Auto-translated] "Size"
     size: "Размер",
+    // [Auto-translated] "Line height"
+    lineHeight: "Высота линии",
     // [Auto-translated] "Opacity"
     opacity: "Непрозрачность",
     // [Auto-translated] "X"
@@ -3227,24 +3243,20 @@ export var ruStrings = {
     names: {
       // [Auto-translated] "Default"
       default: "По умолчанию",
-      // [Auto-translated] "Sharp"
-      sharp: "Чёткая",
+      // [Auto-translated] "Contrast"
+      contrast: "Контрастная",
       // [Auto-translated] "Borderless"
       borderless: "Без границ",
       // [Auto-translated] "Flat"
       flat: "Плоская",
       // [Auto-translated] "Plain"
       plain: "Простая",
-      // [Auto-translated] "Double Border"
-      doubleborder: "Удвоенные границы",
-      // [Auto-translated] "Layered"
-      layered: "Многослойная",
-      // [Auto-translated] "Solid"
-      solid: "Монолитная",
+      // [Auto-translated] "Soft"
+      soft: "Мягкий",
       // [Auto-translated] "3D"
       threedimensional: "Трёхмерная",
-      // [Auto-translated] "Contrast"
-      contrast: "Контрастная"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Монохром"
     },
     colors: {
       // [Auto-translated] "Teal"
@@ -3275,15 +3287,27 @@ export var ruStrings = {
     // [Auto-translated] "Font"
     fontScale: "Шрифт",
     names: {
-      // [Auto-translated] "Survey Creator 2020"
-      sc2020: "Создатель опросов 2020",
-      // [Auto-translated] "Light"
-      "default-light": "Свет",
-      // [Auto-translated] "Dark"
-      "default-dark": "Темный",
-      // [Auto-translated] "Contrast"
-      "default-contrast": "Контраст"
+
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Основы",
+      // [Auto-translated] "Advanced"
+      advanced: "Продвинутый",
+      // [Auto-translated] "Expert"
+      expert: "Эксперт"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Применённый пресет"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Пункт 1" }, { value: "item2", text: "Пункт 2" }, { value: "item3", text: "Пункт 3" }],
+    columns: [{ value: "column1", text: "Колонка 1" }, { value: "column2", text: "Колонка 2" }, { value: "column3", text: "Колонка 3" }],
+    rows: [{ value: "row1", text: "Строка 1" }, { value: "row2", text: "Строка 2" }],
+    matrixColumns: [{ name: "column1", title: "Колонка 1" }, { name: "column2", title: "Колонка 2" }, { name: "column3", title: "Колонка 3" }]
   }
 };
 

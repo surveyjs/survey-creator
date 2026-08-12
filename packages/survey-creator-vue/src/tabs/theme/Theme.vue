@@ -1,9 +1,7 @@
 <template>
   <div
     class="svc-creator-tab__content svc-test-tab__content"
-    :class="{
-      'svc-creator-tab__content--with-toolbar': model.isPageToolbarVisible,
-    }"
+    :class="model.tabContentAdditionalCss"
   >
     <SurfacePlaceholder v-if="model.survey.isEmpty" :name="'theme'" :placeholderTitleText="model.placeholderTitleText" :placeholderDescriptionText="model.placeholderDescriptionText" />
     <div v-if="!model.survey.isEmpty" class="svc-plugin-tab__content">

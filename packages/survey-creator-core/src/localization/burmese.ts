@@ -1171,8 +1171,6 @@ export var mmStrings = {
     acceptedTypes: "လက်ခံနိုင်သောဖိုင်အမျိုးအစားများ",
     // "Wait for upload to complete"
     waitForUpload: "တင်ပို့မှုပြီးစီးရန်စောင့်ပါ",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "ဖိုင်ဖျက်မှုကိုအတည်ပြုပါ",
     // "Row details alignment"
     detailPanelMode: "အတန်းချဲ့မှုတည်နေရာ",
     // "Minimum row count"
@@ -1477,25 +1475,9 @@ export var mmStrings = {
       // "Description font"
       questionDescription: "မေးခွန်းဖော်ပြချက် font",
       // "Font"
-      editorFont: "Font",
+      inputContent: "Font",
       // "Opacity"
-      backgroundOpacity: "Transparency", // Auto-generated string
-      // "Survey font family"
-      "--sjs-font-family": "စစ်တမ်း font မျိုးစုံ",
-      // "Background color"
-      "--sjs-general-backcolor-dim": "နောက်ခံအရောင်",
-      // "Accent background colors"
-      "--sjs-primary-backcolor": "အထင်ကြီးသောနောက်ခံအရောင်များ",
-      // "Accent foreground colors"
-      "--sjs-primary-forecolor": "အထင်ကြီးသောနောက်ဆုံးအရောင်များ",
-      // "Error message colors"
-      "--sjs-special-red": "အမှားစာတန်းအရောင်များ",
-      // "Shadow effects"
-      "--sjs-shadow-small": "အရိပ်သက်ရောက်မှုများ",
-      // "Shadow effects"
-      "--sjs-shadow-inner": "အရိပ်သက်ရောက်မှုများ",
-      // "Colors"
-      "--sjs-border-default": "အရောင်များ"
+      backgroundOpacity: "Transparency" // Auto-generated string
     },
     "header@header": {
       // "View"
@@ -2469,8 +2451,6 @@ export var mmStrings = {
     valueFalse: "တုံ့ပြန်သူများ Negative ဖြေဆိုမှုအတွက် Results တွင် သိမ်းဆည်းရန်တန်ဖိုးကို ထည့်သွင်းပါ။",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Preview Image ကို Override လုပ်ပြီး Files မတင်ရသေးမူကို ခွဲခြားရန်မလွယ်ကူစေပါ။",
-    // "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "ဖိုင်ဖျက်ပစ်မှုကို အတည်ပြုရန် Prompt ကို ဖော်ပြပါ။",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "ရွေးချယ်ထားသောရွေးချယ်မှုများကိုသာ Rank ပြုလုပ်ရန် Enable လုပ်ပါ။",
     // "Enter a list of choices that will be suggested to the respondent during input."
@@ -2831,24 +2811,16 @@ export var mmStrings = {
     names: {
       // "Default"
       default: "ပုံမှန်",
-      // "Sharp"
-      sharp: "ထက်သော",
+      // "Contrast"
+      contrast: "Contrast",
       // "Borderless"
       borderless: "Borderless",
       // "Flat"
       flat: "Flat",
       // "Plain"
       plain: "ရိုးရိုး",
-      // "Double Border"
-      doubleborder: "Double Border",
-      // "Layered"
-      layered: "Layered",
-      // "Solid"
-      solid: "Solid",
       // "3D"
-      threedimensional: "3D",
-      // "Contrast"
-      contrast: "Contrast"
+      threedimensional: "3D"
     },
     colors: {
       // "Teal"
@@ -2879,15 +2851,15 @@ export var mmStrings = {
     // "Font"
     fontScale: "ဖောင့်",
     names: {
-      // "Survey Creator 2020"
-      sc2020: "Survey Creator 2020",
-      // "Light"
-      "default-light": "အလင်း",
-      // "Dark"
-      "default-dark": "မှောင်",
-      // "Contrast"
-      "default-contrast": "Contrast"
+
     }
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "အရာ 1" }, { value: "item2", text: "အရာ 2" }, { value: "item3", text: "အရာ 3" }],
+    columns: [{ value: "column1", text: "ကော်လံ 1" }, { value: "column2", text: "ကော်လံ 2" }, { value: "column3", text: "ကော်လံ 3" }],
+    rows: [{ value: "row1", text: "တန်း 1" }, { value: "row2", text: "တန်း 2" }],
+    matrixColumns: [{ name: "column1", title: "ကော်လံ 1" }, { name: "column2", title: "ကော်လံ 2" }, { name: "column3", title: "ကော်လံ 3" }]
   }
 };
 

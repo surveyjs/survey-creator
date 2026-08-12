@@ -61,12 +61,9 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
             )}
           </div>
           {this.dropdownModel.needToCollapse ?
-            <ActionButton
-              click={this.dropdownModel.switchCollapse}
-              text={this.dropdownModel.getButtonText()}
-              allowBubble={true}
-            ></ActionButton> :
-            null
+            ReactElementFactory.Instance.createElement("sv-action-bar-item", {
+              item: this.dropdownModel.collapseAction,
+            }) : null
           }
         </div>
       </div>

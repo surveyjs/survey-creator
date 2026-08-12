@@ -1,11 +1,10 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultThemeName, IAction, ListModel, PopupModel, surveyLocalization } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultThemeName, IAction, ListModel, PopupModel, surveyLocalization, IActionAppearance } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
-import { listComponentCss } from "../list-theme";
 
 export class TabTestPlugin implements ICreatorPlugin {
   private languageSelectorAction: Action;
@@ -141,6 +140,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.testAgainAction = new Action({
       id: "testSurveyAgain",
       visible: false,
+      appearance: { mode: "tertiary-surface", size: "large", style: "brand", showBorder: true },
       locTitleName: "ed.testSurveyAgain",
       action: () => {
         this.model.testAgain();
@@ -166,7 +166,6 @@ export class TabTestPlugin implements ICreatorPlugin {
         onSelectionChanged: (item: any) => { this.setDevice(item.id); },
         horizontalPosition: "center",
         cssClass: "svc-creator-popup",
-        cssClasses: listComponentCss,
         onHide: () => { this.deviceSelectorAction.enabled = true; },
         onShow: () => { this.deviceSelectorAction.enabled = false; }
       }, this.creator);
@@ -202,7 +201,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         visible: false,
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.active = !this.invisibleToggleAction.active;
+          this.invisibleToggleAction.active = this.model.showInvisibleElements;
           this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });
@@ -226,7 +225,6 @@ export class TabTestPlugin implements ICreatorPlugin {
       },
       horizontalPosition: "center",
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
       onHide: () => { this.languageSelectorAction.enabled = true; },
       onShow: () => { this.languageSelectorAction.enabled = false; }
     }, this.creator);
@@ -262,6 +260,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       iconSize: "auto",
       title: getLocString("ts.prevPage"),
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
         return this.creator.isMobileView;
       }),
@@ -275,6 +276,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       iconSize: "auto",
       title: getLocString("ts.nextPage"),
       showTitle: false,
+      appearance: new ComputedUpdater<IActionAppearance>(() => {
+        return { style: "neutral", mode: "tertiary", size: this.creator.isMobileView ? "small" : "x-small" };
+      }) as unknown as IActionAppearance,
       visible: false
     });
     return items;

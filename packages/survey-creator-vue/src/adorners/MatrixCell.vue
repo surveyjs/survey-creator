@@ -15,22 +15,11 @@
       v-if="adorner?.isSupportCellEditor"
       class="svc-matrix-cell__question-controls"
     >
-      <span
-        class="svc-matrix-cell__question-controls-button svc-context-button"
-        @click="adorner.editQuestion(adorner, $event)"
-        v-key2click
-      >
-        <SvComponent
-          :is="'sv-svg-icon'"
-          :iconName="'icon-edit'"
-          :size="'auto'"
-        ></SvComponent>
-      </span>
+      <SvComponent :is="'sv-action-bar-item'" :item="adorner.editAction"></SvComponent>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { SvComponent } from "survey-vue3-ui";
 import {
   SurveyCreatorModel,

@@ -1,5 +1,26 @@
 <ng-template #template>
-  <div [class]="model.cssClass" >
-    <ng-template *ngFor="let element of model.elements" [component]="{ name: element.componentName, data: element.componentData }"></ng-template>
-  </div>
+  <ng-template #elementsTemplate>
+    <ng-template *ngFor="let element of model.elements"
+      [component]="{ name: element.componentName, data: element.componentData }"></ng-template>
+  </ng-template>
+
+  <ng-container *ngIf="model.wrapped; else unwrappedTemplate">
+    <div [class]="model.cssClass">
+      <sv-scroll *ngIf="model.scrollable; else wrappedPlainTemplate">
+        <ng-container *ngTemplateOutlet="elementsTemplate"></ng-container>
+      </sv-scroll>
+      <ng-template #wrappedPlainTemplate>
+        <ng-container *ngTemplateOutlet="elementsTemplate"></ng-container>
+      </ng-template>
+    </div>
+  </ng-container>
+
+  <ng-template #unwrappedTemplate>
+    <sv-scroll *ngIf="model.scrollable; else unwrappedPlainTemplate">
+      <ng-container *ngTemplateOutlet="elementsTemplate"></ng-container>
+    </sv-scroll>
+    <ng-template #unwrappedPlainTemplate>
+      <ng-container *ngTemplateOutlet="elementsTemplate"></ng-container>
+    </ng-template>
+  </ng-template>
 </ng-template>

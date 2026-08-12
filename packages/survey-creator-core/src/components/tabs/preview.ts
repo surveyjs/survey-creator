@@ -1,10 +1,9 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString, CssClassBuilder } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
 import { findSuitableTheme, isThemeEmpty } from "./theme-model";
-import { listComponentCss } from "../list-theme";
 
 export class PreviewViewModel extends Base {
   public enableInvisiblePages: boolean = true;
@@ -67,20 +66,27 @@ export class PreviewViewModel extends Base {
   public get pageActions(): Array<Action> {
     return this.pages.actions;
   }
-  @property({}) isPageToolbarVisible = new ComputedUpdater(() => notShortCircuitAnd(!this.pages.isEmpty, !this.surveyProvider.isMobileView));
+
+  @property() isPageToolbarVisible: boolean;
+  @property() tabContentAdditionalCss: string;
 
   constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultCss) {
     super();
     this.simulator = new SurveySimulatorModel(surveyProvider);
-    this.pages.cssClasses = {
-      root: "sv-action-bar svc-pages-toolbar",
-      item: "svc-preview-pager__item",
-      itemActive: "svc-preview-pager__item--active",
-      itemPressed: "svc-preview-pager__item--pressed",
-      itemAsIcon: "svc-preview-pager__item--icon",
-      itemIcon: "svc-preview-pager-item__icon",
-      itemTitle: "svc-preview-pager-item__title",
-    };
+    this.pages.setActionsAppearance({ style: "neutral", mode: "tertiary", size: "x-small" });
+    this.pages.containerCss = "svc-pages-toolbar";
+
+    this.isPageToolbarVisible = new ComputedUpdater<boolean>(() => notShortCircuitAnd(!this.pages.isEmpty, !this.surveyProvider.isMobileView)) as any as boolean;
+    this.tabContentAdditionalCss = new ComputedUpdater<string>(() => {
+      const self = this;
+      const hasSimulatorFrame = self.simulator.hasFrame;
+      const surveyIsEmpty = !!self.survey?.isEmpty;
+      return new CssClassBuilder()
+        .append("svc-test-tab--empty", surveyIsEmpty)
+        .append("svc-test-tab--with-simulator-frame", hasSimulatorFrame)
+        .append("svc-creator-tab__content--with-toolbar", !!self.isPageToolbarVisible)
+        .toString();
+    }) as any as string;
   }
 
   public get isMobileView() {
@@ -88,6 +94,26 @@ export class PreviewViewModel extends Base {
   }
   public get showResults() {
     return this.getShowResults();
+  }
+
+  protected createContentActions(): Array<Action> {
+    return [this.testAgainAction];
+  }
+
+  protected createContentActionsContainer(): ActionContainer {
+    const container = new ActionContainer();
+    container.containerCss = "svc-preview__content-actions";
+    container.setActionsAppearance({ mode: "tertiary-surface", size: "large", style: "brand", showBorder: true });
+    container.setItems(this.createContentActions());
+    return container;
+  }
+
+  private contentActionsContainerValue: ActionContainer;
+  public get contentActionsContainer(): ActionContainer {
+    if (!this.contentActionsContainerValue) {
+      this.contentActionsContainerValue = this.createContentActionsContainer();
+    }
+    return this.contentActionsContainerValue;
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
@@ -102,8 +128,8 @@ export class PreviewViewModel extends Base {
       survey.addLayoutElement({
         id: "complete-customization",
         container: "completePage" as any,
-        component: "svc-complete-page",
-        data: this
+        component: "sv-action-bar",
+        data: this.contentActionsContainer
       });
     });
     const hasSurveyBefore = !!this.simulator.survey;
@@ -291,7 +317,6 @@ export class PreviewViewModel extends Base {
         listModel.selectedItem = this.getCurrentPageItem();
       },
       cssClass: "svc-creator-popup",
-      cssClasses: listComponentCss,
       verticalPosition: "top",
       horizontalPosition: "center"
     }, this.surveyProvider);
@@ -313,7 +338,6 @@ export class PreviewViewModel extends Base {
       pageActions.push(this.nextPageAction);
     }
     this.pages.actions = pageActions;
-    this.pages.containerCss = "sv-action-bar--pages";
     this.updatePrevNextPageActionState();
   }
   private setActivePageItem(page: PageModel, val: boolean) {

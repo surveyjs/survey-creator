@@ -1,5 +1,5 @@
 
-import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, CssClassBuilder, ItemValue } from "survey-core";
+import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, CssClassBuilder, ItemValue, Action, ComputedUpdater } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { editorLocalization } from "../editorLocalization";
@@ -83,5 +83,17 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
     }
     super.detachElement(surveyElement);
   }
-
+  private collapseActionValue?: Action;
+  public get collapseAction(): Action {
+    if (!this.collapseActionValue) {
+      this.collapseActionValue = new Action({
+        id: "collapse",
+        innerCss: "svc-question__dropdown-collapse-button",
+        title: new ComputedUpdater<string>(() => this.getButtonText()) as unknown as string,
+        appearance: { style: "brand", mode: "tertiary", size: "small" },
+        action: this.switchCollapse
+      });
+    }
+    return this.collapseActionValue;
+  }
 }

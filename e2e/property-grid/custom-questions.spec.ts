@@ -33,16 +33,16 @@ test.describe(title, () => {
     });
     await setJSON(page, {});
     await getPropertyGridCategory(page, generalGroupName).click();
-    await page.locator(".spg-input-container__input").first().click();
+    await page.locator(".sd-formbox__input").first().click();
     await page.keyboard.press("Tab");
     const activeElementTagName = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement?.tagName);
     expect(activeElementTagName).toEqual("INPUT");
-    const isActiveElementFontColor2 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement == (window as any).creator.rootElement.getRootNode().querySelector("[data-name='fontColor2'] .spg-input-container__input"));
+    const isActiveElementFontColor2 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement == (window as any).creator.rootElement.getRootNode().querySelector("[data-name='fontColor2'] .sd-formbox__input"));
     expect(isActiveElementFontColor2).toBeTruthy();
     await page.keyboard.press("Shift+Tab");
     const activeElementTagName2 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement?.tagName);
     expect(activeElementTagName2).toEqual("INPUT");
-    const isActiveElementFontColor1 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement == (window as any).creator.rootElement.getRootNode().querySelector("[data-name='fontColor1'] .spg-input-container__input"));
+    const isActiveElementFontColor1 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement == (window as any).creator.rootElement.getRootNode().querySelector("[data-name='fontColor1'] .sd-formbox__input"));
     expect(isActiveElementFontColor1).toBeTruthy();
     await expect(page.locator("div[data-name='fontColor1'] .sv-popup")).not.toBeVisible();
     await page.keyboard.press("ArrowDown");
@@ -51,7 +51,7 @@ test.describe(title, () => {
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("Enter");
-    await expect(page.locator("div[data-name='fontColor1'] .spg-input-container__input")).toHaveValue("#55B534");
+    await expect(page.locator("div[data-name='fontColor1'] .sd-formbox__input")).toHaveValue("#55B534");
   });
 
   test("Check spinedit editor key navigation", async ({ page }) => {
@@ -81,9 +81,9 @@ test.describe(title, () => {
       });
     });
     await setJSON(page, {});
-    const firstSpinInputSelector = page.locator("[data-name='fontSize1'] .spg-input-container__input");
+    const firstSpinInputSelector = page.locator("[data-name='fontSize1'] .sd-formbox__input");
     await getPropertyGridCategory(page, generalGroupName).click();
-    await page.locator(".spg-input-container__input").first().click();
+    await page.locator(".sd-formbox__input").first().click();
     const selectionStart = await page.evaluate(() => (<HTMLInputElement>(window as any).creator.rootElement.getRootNode().activeElement).selectionStart);
     const selectionEnd = await page.evaluate(() => (<HTMLInputElement>(window as any).creator.rootElement.getRootNode().activeElement).selectionEnd);
     expect(selectionStart).toEqual(2);
@@ -91,7 +91,7 @@ test.describe(title, () => {
     await page.keyboard.press("Tab");
     const activeElementTagName = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement?.tagName);
     expect(activeElementTagName).toEqual("INPUT");
-    const isActiveElementFontSize2 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement == (window as any).creator.rootElement.getRootNode().querySelector("[data-name='fontSize2'] .spg-input-container__input"));
+    const isActiveElementFontSize2 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement == (window as any).creator.rootElement.getRootNode().querySelector("[data-name='fontSize2'] .sd-formbox__input"));
     expect(isActiveElementFontSize2).toBeTruthy();
     const selectionStart2 = await page.evaluate(() => (<HTMLInputElement>(window as any).creator.rootElement.getRootNode().activeElement).selectionStart);
     const selectionEnd2 = await page.evaluate(() => (<HTMLInputElement>(window as any).creator.rootElement.getRootNode().activeElement).selectionEnd);
@@ -100,7 +100,7 @@ test.describe(title, () => {
     await page.keyboard.press("Shift+Tab");
     const activeElementTagName2 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement?.tagName);
     expect(activeElementTagName2).toEqual("INPUT");
-    const isActiveElementFontSize1 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement == (window as any).creator.rootElement.getRootNode().querySelector("[data-name='fontSize1'] .spg-input-container__input"));
+    const isActiveElementFontSize1 = await page.evaluate(() => (window as any).creator.rootElement.getRootNode().activeElement == (window as any).creator.rootElement.getRootNode().querySelector("[data-name='fontSize1'] .sd-formbox__input"));
     expect(isActiveElementFontSize1).toBeTruthy();
     const selectionStart3 = await page.evaluate(() => (<HTMLInputElement>(window as any).creator.rootElement.getRootNode().activeElement).selectionStart);
     const selectionEnd3 = await page.evaluate(() => (<HTMLInputElement>(window as any).creator.rootElement.getRootNode().activeElement).selectionEnd);
@@ -130,7 +130,7 @@ test.describe(title, () => {
         }
       });
     });
-    const colorInputSelector = page.locator("div[data-name='image'] .spg-input-container__input");
+    const colorInputSelector = page.locator("div[data-name='image'] .sd-formbox__input");
     await setJSON(page, {});
     await getPropertyGridCategory(page, generalGroupName).click();
     await colorInputSelector.click();

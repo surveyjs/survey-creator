@@ -5,21 +5,19 @@
 </template>
 <script lang="ts" setup>
 import { slk } from "survey-core";
-import { registerSurveyTheme, registerCreatorTheme, SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
+import { registerSurveyTheme, SurveyCreatorModel, registerCreatorTheme, type ICreatorOptions } from "survey-creator-core";
 import SurveyThemes from "survey-core/themes";
-import SurveyCreatorTestTheme from "survey-creator-core/themes/test";
 registerSurveyTheme(SurveyThemes);
-registerCreatorTheme(SurveyCreatorTestTheme);
+registerCreatorTheme(SurveyThemes);
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
 import { shallowRef } from "vue";
 import { SurveyCreatorComponent } from "survey-creator-vue";
-const props = defineProps<{options: ICreatorOptions, useSlk: boolean}>()
+const props = defineProps<{options: ICreatorOptions, useSlk: boolean, useOriginalTheme?: boolean}>()
 if (props.useSlk) {
   slk("ZG9tYWluczoxMjcuMC4wLjE7MT0yMDM2LTAzLTE5LDI9MjAzNi0wMy0xOSw0PTIwMzYtMDMtMTksOD0yMDM2LTAzLTE5");
 }
 const creator = shallowRef(new SurveyCreatorModel(props.options));
-creator.value.applyCreatorTheme(SurveyCreatorTestTheme);
 (window as any).creator = creator.value;
 creator.value.tabResponsivenessMode = "menu";
 creator.value["animationEnabled"] = false;
@@ -32,7 +30,6 @@ creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.
   const newCreator = new SurveyCreatorModel(options);
   newCreator.JSON = json;
   creator.value = newCreator;
-  creator.value.applyCreatorTheme(SurveyCreatorTestTheme);
   creator.value.tabResponsivenessMode = "menu";
   creator.value["animationEnabled"] = false;
   if(props.options.propertyGridNavigationMode != 'buttons') {

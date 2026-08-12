@@ -153,7 +153,7 @@ test.describe(title, () => {
     // eslint-disable-next-line no-console
     console.log("Open question selector duration: " + duration.toString() + "ms");
     expect(duration).toBeLessThan(timeLimit * 2); // TODO: fix long dropdown opening
-    await page.locator(".svc-object-selector .svc-list__container > .svc-list__filter").click();
+    await page.locator(".svc-object-selector .sd-menu-list__container > .sd-menu-filter").click();
     start = performance.now();
     await page.locator(".sv-action--object-selector").getByRole("textbox", { name: "Type to search..." }).fill("q3978");
     end = performance.now();

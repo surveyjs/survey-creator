@@ -1262,8 +1262,6 @@ export var grStrings = {
     acceptedTypes: "Πρόσθετες επεκτάσεις αρχείων",
     // "Wait for upload to complete"
     waitForUpload: "Περιμένετε για να ολοκληρωθεί η αποστολή",
-    // "Confirm file deletion"
-    needConfirmRemoveFile: "Επιβεβαίωση διαγραφής αρχείου",
     // "Row details alignment"
     detailPanelMode: "Στοίχιση επέκτασης σειράς",
     // "Minimum row count"
@@ -1396,7 +1394,9 @@ export var grStrings = {
       // [Auto-translated] "Image height"
       imageHeight: "Ύψος εικόνας",
       // [Auto-translated] "Image width"
-      imageWidth: "Πλάτος εικόνας"
+      imageWidth: "Πλάτος εικόνας",
+      // [Auto-translated] "Confirm file deletion"
+      confirmDelete: "Επιβεβαιώστε τη διαγραφή του αρχείου"
     },
     // "Hide the question if it has no choices"
     hideIfChoicesEmpty: "Απόκρυψη ερώτησης αν δεν υπάρχουν επιλογές",
@@ -1454,6 +1454,10 @@ export var grStrings = {
     choiceTextsFromQuestion: "Χρήση τιμών από την εξής στήλη πίνακα ή ερώτηση πάνελ ως κείμενα επιλογών",
     // "Display page titles in the progress bar"
     progressBarShowPageTitles: "Εμφάνιση τίτλων σελίδων στη γραμμή προόδου",
+    // [Auto-translated] "Display navigation text in the progress bar"
+    progressBarShowNavigationText: "Εμφάνιση κειμένου περιήγησης στη γραμμή προόδου",
+    // [Auto-translated] "Navigation text alignment"
+    progressBarNavigationTextLocation: "Στοίχιση κειμένου πλοήγησης",
     // "Display page numbers in the progress bar"
     progressBarShowPageNumbers: "Εμφάνιση αριθμών σελίδων στη γραμμή προόδου",
     // "Add a comment box"
@@ -1681,25 +1685,25 @@ export var grStrings = {
       // "Description font"
       questionDescription: "Γραμματοσειρά περιγραφής ερώτησης",
       // "Font"
-      editorFont: "Γραμματοσειρά επεξεργαστή",
+      inputContent: "Γραμματοσειρά επεξεργαστή",
       // "Opacity"
       backgroundOpacity: "Διαφάνεια", // Auto-generated string
-      // "Survey font family"
-      "--sjs-font-family": "Γραμματοσειρά έρευνας",
-      // "Background color"
-      "--sjs-general-backcolor-dim": "Χρώμα φόντου",
-      // "Accent background colors"
-      "--sjs-primary-backcolor": "Χρώματα φόντου αντίθεσης",
-      // "Accent foreground colors"
-      "--sjs-primary-forecolor": "Χρώματα προεξοχής αντίθεσης",
-      // "Error message colors"
-      "--sjs-special-red": "Χρώματα μηνυμάτων σφάλματος",
-      // "Shadow effects"
-      "--sjs-shadow-small": "Εφέ σκιάς",
-      // "Shadow effects"
-      "--sjs-shadow-inner": "Εφέ σκιάς",
-      // "Colors"
-      "--sjs-border-default": "Χρώματα"
+      // [Auto-translated] "Survey font family"
+      "--sjs2-typography-font-family-text": "Οικογένεια γραμματοσειρών έρευνας",
+      // [Auto-translated] "Background color"
+      "--sjs2-color-utility-surface-survey": "Χρώμα φόντου",
+      // [Auto-translated] "Accent background colors"
+      "--sjs2-color-project-brand-600": "Χρώματα φόντου έμφασης",
+      // [Auto-translated] "Accent foreground colors"
+      "--sjs2-color-fg-brand-on-primary": "Έμφαση στα χρώματα προσκηνίου",
+      // [Auto-translated] "Error message colors"
+      "--sjs2-color-bg-alert-primary": "Χρώματα μηνύματος σφάλματος",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-surface-default": "Εφέ σκιάς",
+      // [Auto-translated] "Shadow effects"
+      "--sjs2-border-effect-component-formbox-default": "Εφέ σκιάς",
+      // [Auto-translated] "Colors"
+      "--sjs2-color-component-input-default-line": "Χρωματιστά"
     },
     "header@header": {
       // "View"
@@ -1858,8 +1862,8 @@ export var grStrings = {
       // "Never"
       none: "Ποτέ"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Κουμπιά",
+    // [Auto-translated] "Radio buttons"
+    radio: "Κουμπιά επιλογής",
     inputType: {
       // "Color"
       color: "Χρώμα",
@@ -2136,7 +2140,17 @@ export var grStrings = {
       // "Buttons"
       buttons: "Κουμπιά",
       // "Dropdown"
-      dropdown: "Αναπτυσσόμενο μενού"
+      dropdown: "Αναπτυσσόμενο μενού",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Τμηματοποιημένη εναλλαγή",
+      // [Auto-translated] "Radio buttons"
+      radio: "Κουμπιά επιλογής",
+      // [Auto-translated] "Checkbox"
+      checkbox: "Πλαίσιο ελέγχου",
+      // [Auto-translated] "Switch"
+      switch: "Διακόπτης",
+      // [Auto-translated] "Custom"
+      custom: "Εθιμο"
     },
     rateColorMode: {
       // "Default"
@@ -2574,7 +2588,9 @@ export var grStrings = {
       // "Specifies the display width of uploaded images in the preview and the actual width of images taken with the camera. In single file upload mode, the display width is limited by the preview area; in multiple file upload mode, it is limited by the thumbnail area."
       imageWidth: "Καθορίζει το πλάτος εμφάνισης των μεταφορτωμένων εικόνων στην προεπισκόπηση και το πραγματικό πλάτος των εικόνων που λαμβάνονται με την κάμερα. Στη λειτουργία μεταφόρτωσης ενός αρχείου, το πλάτος της οθόνης περιορίζεται από την περιοχή προεπισκόπησης. Στη λειτουργία μεταφόρτωσης πολλαπλών αρχείων, περιορίζεται από την περιοχή μικρογραφιών.",
       // "Displays thumbnail previews for uploaded files when possible. Unselect if you want to show file icons instead."
-      allowImagesPreview: "Εμφανίζει προεπισκοπήσεις μικρογραφιών για ανεβασμένα αρχεία όταν είναι δυνατόν. Αποεπιλέξτε αν θέλετε να εμφανίζονται τα εικονίδια αρχείων αντ' αυτού."
+      allowImagesPreview: "Εμφανίζει προεπισκοπήσεις μικρογραφιών για ανεβασμένα αρχεία όταν είναι δυνατόν. Αποεπιλέξτε αν θέλετε να εμφανίζονται τα εικονίδια αρχείων αντ' αυτού.",
+      // [Auto-translated] "Triggers a prompt asking to confirm the file deletion."
+      confirmDelete: "Ενεργοποιεί ένα μήνυμα που ζητά να επιβεβαιώσετε τη διαγραφή του αρχείου."
     },
     image: {
       // "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided."
@@ -2845,8 +2861,6 @@ export var grStrings = {
     valueFalse: "Μια τιμή που αποθηκεύεται στα αποτελέσματα της έρευνας όταν οι συμμετέχοντες δίνουν αρνητική απάντηση.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Δεν συνιστάται να απενεργοποιήσετε αυτήν την επιλογή, καθώς παρακάμπτει την εικόνα προεπισκόπησης και καθιστά δύσκολο για έναν χρήστη να καταλάβει αν τα αρχεία έχουν ανέβει.",
-    // "Triggers a prompt asking to confirm the file deletion."
-    needConfirmRemoveFile: "Προκαλεί ένα μήνυμα που ζητά επιβεβαίωση για τη διαγραφή του αρχείου.",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
     selectToRankEnabled: "Ενεργοποιήστε για να κατατάξετε μόνο τις επιλεγμένες επιλογές. Οι χρήστες θα σύρουν τα επιλεγμένα στοιχεία από τη λίστα επιλογών για να τα κατατάξουν στην περιοχή κατάταξης.",
     // "Enter a list of choices that will be suggested to the respondent during input."
@@ -2930,8 +2944,8 @@ export var grStrings = {
       questionBackgroundTransparency: "Ρυθμίζει τη διαφάνεια των στοιχείων εισαγωγής σε σχέση με το φόντο της έρευνας.",
       // "Sets the corner radius for all rectangular elements. Enable the Advanced Mode if you want to set individual corner radius values for input elements or panels and question boxes."
       cornerRadius: "Ορίζει την ακτίνα των γωνιών για όλα τα ορθογώνια στοιχεία. Ενεργοποιήστε τη Λειτουργία για Προχωρημένους αν θέλετε να ορίσετε μεμονωμένες τιμές ακτίνας για τα στοιχεία εισαγωγής ή τα πάνελ και τα κουτιά ερωτήσεων.",
-      // "Sets the main background color of the survey."
-      "--sjs-general-backcolor-dim": "Ορίζει το κύριο χρώμα φόντου της έρευνας."
+      // [Auto-translated] "Sets the main background color of the survey."
+      "--sjs2-color-utility-surface-survey": "Ορίζει το κύριο χρώμα φόντου της έρευνας."
     },
     header: {
       // "The \"Same as container\" option auto-adjusts the header content area width to fit into the HTML element the survey is placed in."
@@ -3208,6 +3222,8 @@ export var grStrings = {
     placeholderColor: "Χρώμα κειμένου πλακίδας",
     // "Size"
     size: "Μέγεθος",
+    // [Auto-translated] "Line height"
+    lineHeight: "Ύψος γραμμής",
     // "Opacity"
     opacity: "Διαφάνεια",
     // [Auto-translated] "X"
@@ -3227,24 +3243,20 @@ export var grStrings = {
     names: {
       // "Default"
       default: "Προεπιλογή",
-      // "Sharp"
-      sharp: "Αιχμηρό",
+      // "Contrast"
+      contrast: "Αντίθεση",
       // "Borderless"
       borderless: "Χωρίς όρια",
       // "Flat"
       flat: "Επίπεδο",
       // "Plain"
       plain: "Απλό",
-      // "Double Border"
-      doubleborder: "Διπλό όριο",
-      // "Layered"
-      layered: "Με στρώματα",
-      // "Solid"
-      solid: "Στερεό",
+      // [Auto-translated] "Soft"
+      soft: "Μαλακός",
       // [Auto-translated] "3D"
       threedimensional: "3Δ",
-      // "Contrast"
-      contrast: "Αντίθεση"
+      // [Auto-translated] "Monochrome"
+      monochrome: "Μονόχρωμος"
     },
     colors: {
       // "Teal"
@@ -3275,15 +3287,27 @@ export var grStrings = {
     // "Font"
     fontScale: "Γραμματοσειρά",
     names: {
-      // "Survey Creator 2020"
-      sc2020: "Δημιουργός Έρευνας 2020",
-      // "Light"
-      "default-light": "Φωτεινό",
-      // "Dark"
-      "default-dark": "Σκοτεινό",
-      // "Contrast"
-      "default-contrast": "Αντίθεση"
+
     }
+  },
+  preset: {
+    names: {
+      // [Auto-translated] "Basic"
+      basic: "Βασικό",
+      // [Auto-translated] "Advanced"
+      advanced: "Προηγμένη",
+      // [Auto-translated] "Expert"
+      expert: "Εμπειρογνώμονας"
+    },
+    // [Auto-translated] "Preset applied"
+    presetApplied: "Εφαρμόστηκε προεπιλογή"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Στοιχείο 1" }, { value: "item2", text: "Στοιχείο 2" }, { value: "item3", text: "Στοιχείο 3" }],
+    columns: [{ value: "column1", text: "Στήλη 1" }, { value: "column2", text: "Στήλη 2" }, { value: "column3", text: "Στήλη 3" }],
+    rows: [{ value: "row1", text: "Γραμμή 1" }, { value: "row2", text: "Γραμμή 2" }],
+    matrixColumns: [{ name: "column1", title: "Στήλη 1" }, { name: "column2", title: "Στήλη 2" }, { name: "column3", title: "Στήλη 3" }]
   }
 };
 

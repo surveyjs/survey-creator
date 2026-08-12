@@ -1,6 +1,7 @@
 import * as React from "react";
 import { QuestionColorModel } from "survey-creator-core";
-import { ReactElementFactory, ReactQuestionFactory, SurveyQuestionText, SvgIcon, Popup } from "survey-react-ui";
+import { ReactQuestionFactory, SurveyQuestionText, SurveyActionBar } from "survey-react-ui";
+import { Swatch } from "./Swatch";
 
 export class SurveyQuestionColor extends SurveyQuestionText {
   constructor(props: any) {
@@ -34,10 +35,12 @@ export class SurveyQuestionColor extends SurveyQuestionText {
   }
   protected renderElement(): React.JSX.Element {
     return (
-      <div className={this.question.cssClasses.root} onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
-        {this.renderColorSwatch()}
-        {this.renderInput()}
-        {this.question.showDropdownAction ? this.renderDropdownAction() : null}
+      <div className={this.question.cssClasses.rootWrapper}>
+        <div className={this.question.cssClasses.root} onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
+          {this.renderColorSwatch()}
+          {this.renderInput()}
+          {this.renderButtons()}
+        </div>
       </div>
     );
   }
@@ -45,33 +48,32 @@ export class SurveyQuestionColor extends SurveyQuestionText {
     return this.question.renderedValue;
   }
   protected renderColorSwatch(): React.JSX.Element {
-    return <label className={this.question.getSwatchCss()} style={this.question.getSwatchStyle()}>
-      <SvgIcon iconName={this.question.cssClasses.swatchIcon} size={"auto"}></SvgIcon>
-      <input type="color"
-        disabled={this.isDisplayMode}
-        value={this.question.renderedColorValue}
-        className={this.question.cssClasses.colorInput}
-        onChange={(event) => this.question.onColorInputChange(event.nativeEvent)}
-        tabIndex={-1}
-        aria-required={this.question.a11y_input_ariaRequired}
-        aria-labelledby={this.question.a11y_input_ariaLabelledBy}
-        aria-label={this.question.a11y_input_ariaLabel}
-        aria-invalid={this.question.a11y_input_ariaInvalid}
-        aria-describedby={this.question.a11y_input_ariaDescribedBy} />
-    </label>;
-  }
-  protected renderDropdownAction(): React.JSX.Element {
+    const question = this.question;
     return (
-      <>
-        <div aria-hidden="true" className={this.question.cssClasses.choicesButtonWrapper}>
-          {ReactElementFactory.Instance.createElement("sv-action-bar-item", { item: this.question.dropdownAction })}
-        </div>
-        {this.renderPopup()}
-      </>
+      <div className={question.cssClasses.colorSwatch}>
+        <Swatch
+          className={question.getSwatchCss()}
+          swatchIcon={question.cssClasses.swatchIcon}
+          iconClassName={question.cssClasses.iconClassName}
+          color={question.renderedValue}
+          showIcon={true}
+          colorInputValue={question.renderedColorValue}
+          colorInputClassName={question.cssClasses.colorInput}
+          inputDisabled={this.isDisplayMode}
+          onColorInputChange={(event) => question.onColorInputChange(event.nativeEvent)}
+          arias={{
+            "aria-required": question.a11y_input_ariaRequired,
+            "aria-labelledby": question.a11y_input_ariaLabelledBy,
+            "aria-label": question.a11y_input_ariaLabel,
+            "aria-invalid": question.a11y_input_ariaInvalid,
+            "aria-describedby": question.a11y_input_ariaDescribedBy,
+          }}
+        />
+      </div>
     );
   }
-  protected renderPopup(): React.JSX.Element {
-    return <Popup model={this.question.dropdownAction.popupModel}></Popup>;
+  protected renderButtons(): React.JSX.Element {
+    return this.question.hasVisibleInputActions ? <SurveyActionBar model={this.question.inputActionsContainer}></SurveyActionBar> : null;
   }
 }
 

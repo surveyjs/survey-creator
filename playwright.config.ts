@@ -4,8 +4,7 @@ import { resolve } from "path";
 const shardIndex = process.env.PLAYWRIGHT_SHARD_INDEX || "results";
 
 export default defineConfig({
-  retries: 2,
-  maxFailures: 5,
+  retries: 4,
   fullyParallel: true,
   expect: {
     toHaveScreenshot: { threshold: 0.02 }

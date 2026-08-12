@@ -8,13 +8,15 @@ import "survey-creator-core/survey-creator-core.i18n"
 
 // Import SurveyCreator and related modules
 import { SurveyCreator } from "survey-creator-js"
-import { registerSurveyTheme, registerCreatorTheme } from "survey-creator-core"
+import { registerSurveyTheme, registerCreatorTheme, registerUIPreset } from "survey-creator-core"
 import SurveyThemes from "survey-core/themes"
-import SurveyCreatorTheme from "survey-creator-core/themes"
+import SurveyCreatorPresets from "survey-creator-core/ui-presets"
+import { UIPresetEditor } from "survey-creator-core/ui-preset-editor"
 
 // Register themes
 registerSurveyTheme(SurveyThemes)
-registerCreatorTheme(SurveyCreatorTheme)
+registerCreatorTheme(SurveyThemes)
+registerUIPreset(SurveyCreatorPresets)
 
 // Create SurveyCreator instance
 const creator = new SurveyCreator({
@@ -24,11 +26,12 @@ const creator = new SurveyCreator({
   showJSONEditorTab: false
 })
 
-// Apply theme
-creator.applyCreatorTheme(SurveyCreatorTheme)
 
 // Store creator instance globally
 window.creator = creator
+
+// Initialize UIPresetEditor
+new UIPresetEditor(creator)
 
 // Render SurveyCreator
 creator.render(document.getElementById("root"))

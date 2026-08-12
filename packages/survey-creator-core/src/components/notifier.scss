@@ -2,22 +2,22 @@
 
 .svc-notifier.svc-notifier--shown {
   visibility: visible;
-  opacity: var(--ctr-notification-opacity, 0.75);
+  opacity: var(--sjs2-opacity-x075);
 }
 
 .svc-notifier {
-  @include ctrSmallBoldFont;
+  @include sjs2--typography--small-strong;
 
   position: absolute;
-  bottom: calcSize(1);
-  left: calcSize(1);
-  background: var(--ctr-notification-background-color, var(--sjs-layer-1-background-500, #ffffffff));
-  opacity: 0;
-  padding: calcSize(1) calcSize(2);
-  box-shadow: 0px 2px 6px 0px var(--ctr-shadow-medium-color, var(--sjs-special-glow, #004c441a));
-  border-radius: calcSize(0.5);
-  color: var(--ctr-notification-text-color, var(--sjs-layer-1-foreground-100, #000000e6));
-  min-width: calcSize(30);
+  bottom: var(--sjs2-spacing-x100);
+  left: var(--sjs2-spacing-x100);
+  background: var(--sjs2-color-bg-basic-primary);
+  opacity: var(--sjs2-opacity-hidden);
+  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x200);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+  border-radius: var(--sjs2-radius-x050);
+  color: var(--sjs2-color-fg-basic-primary);
+  min-width: calc(var(--sjs2-base-unit-size) * 30);
   text-align: center;
   z-index: 1600; //todo: should overlap popup
 
@@ -25,18 +25,18 @@
 }
 
 .svc-notifier.svc-notifier--error {
-  background-color: var(--ctr-notification-background-color-error, var(--sjs-semantic-red-background-500, #e50a3eff));
-  color: var(--ctr-notification-text-color-error, var(--sjs-semantic-red-foreground-100, #ffffffff));
-  opacity: var(--ctr-notification-opacity-error, 1);
+  background-color: var(--sjs2-color-bg-alert-primary);
+  color: var(--sjs2-color-fg-alert-on-primary);
+  opacity: var(--sjs2-opacity-visible);
 }
 
 .svc-creator--mobile {
   .svc-notifier {
     left: 0;
-    bottom: calcSize(6);
+    bottom: var(--sjs2-spacing-x600);
     width: 100%;
     box-sizing: border-box;
-    opacity: 1;
+    opacity: var(--sjs2-opacity-visible);
     z-index: 1000;
   }
 }
