@@ -12,6 +12,10 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
   ) {
     super(options, false);
     this.setupSurvey();
+    const locale = !!this.editQuestion.survey ? this.editQuestion.survey.locale : "";
+    if (!!locale) {
+      this.editSurvey.locale = locale;
+    }
     const oldValue = this.getQuestionValue();
     if(oldValue !== undefined) {
       this.question.value = oldValue;

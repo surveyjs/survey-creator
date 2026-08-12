@@ -1,4 +1,5 @@
 import {
+  QuestionCheckboxModel,
   QuestionDropdownModel,
   QuestionMatrixDynamicModel,
   QuestionExpressionModel,
@@ -278,4 +279,132 @@ test("Default Editor Value for panel dynamic with preset panel count", () => {
   expect(panel.value).toStrictEqual([{}, {}]);
   panel.panels[0].getQuestionByName("q2").value = 1;
   expect(panel.panels).toHaveLength(2);
+});
+test("DefaultValueEditor, use survey locale, Bug#7945", () => {
+  const survey = new SurveyModel({
+    locale: "de",
+    elements: [
+      {
+        type: "dropdown",
+        name: "q1",
+        title: { default: "Question 1", de: "Frage 1" },
+        choices: [
+          { value: 1, text: { default: "Item 1", de: "Punkt 1" } },
+          { value: 2, text: { default: "Item 2", de: "Punkt 2" } }
+        ]
+      }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  const editor = new DefaultValueEditor(question, "defaultValue");
+  expect(editor.editSurvey.locale).toEqual("de");
+  const editorQuestion = <QuestionDropdownModel>editor.question;
+  expect(editorQuestion.title).toEqual("Frage 1");
+  expect(editorQuestion.choices).toHaveLength(2);
+  expect(editorQuestion.choices[0].text).toEqual("Punkt 1");
+  expect(editorQuestion.choices[1].text).toEqual("Punkt 2");
+  editorQuestion.value = 2;
+  editor.apply();
+  expect(question.defaultValue).toEqual(2);
+});
+test("DefaultValueEditor for correctAnswer, use survey locale, Bug#7945", () => {
+  const survey = new SurveyModel({
+    locale: "de",
+    elements: [
+      {
+        type: "checkbox",
+        name: "q1",
+        choices: [
+          { value: 1, text: { default: "Item 1", de: "Punkt 1" } },
+          { value: 2, text: { default: "Item 2", de: "Punkt 2" } }
+        ]
+      }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  const editor = new DefaultValueEditor(question, "correctAnswer");
+  expect(editor.editSurvey.locale).toEqual("de");
+  const editorQuestion = <QuestionCheckboxModel>editor.question;
+  expect(editorQuestion.choices[0].text).toEqual("Punkt 1");
+  expect(editorQuestion.choices[1].text).toEqual("Punkt 2");
+  editorQuestion.value = [1];
+  editor.apply();
+  expect(question.correctAnswer).toHaveLength(1);
+  expect(question.correctAnswer[0]).toEqual(1);
+});
+test("DefaultValueEditor, use default locale if survey locale is empty, Bug#7945", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "dropdown",
+        name: "q1",
+        choices: [
+          { value: 1, text: { default: "Item 1", de: "Punkt 1" } },
+          { value: 2, text: { default: "Item 2", de: "Punkt 2" } }
+        ]
+      }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  const editor = new DefaultValueEditor(question, "defaultValue");
+  const editorQuestion = <QuestionDropdownModel>editor.question;
+  expect(editorQuestion.choices[0].text).toEqual("Item 1");
+  expect(editorQuestion.choices[1].text).toEqual("Item 2");
+});
+test("DefaultMatrixRowValueEditor, use survey locale, Bug#7945", () => {
+  const survey = new SurveyModel({
+    locale: "de",
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "q1",
+        columns: [
+          {
+            cellType: "dropdown",
+            name: "col1",
+            title: { default: "Column 1", de: "Spalte 1" },
+            choices: [
+              { value: 1, text: { default: "Item 1", de: "Punkt 1" } },
+              { value: 2, text: { default: "Item 2", de: "Punkt 2" } }
+            ]
+          }
+        ]
+      }
+    ]
+  });
+  const question = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
+  const editor = new DefaultMatrixRowValueEditor(question, "defaultRowValue");
+  expect(editor.editSurvey.locale).toEqual("de");
+  const editorQuestion = <QuestionMatrixDynamicModel>editor.question;
+  expect(editorQuestion.columns).toHaveLength(1);
+  expect(editorQuestion.columns[0].title).toEqual("Spalte 1");
+  const cellQuestion = <QuestionDropdownModel>editorQuestion.visibleRows[0].cells[0].question;
+  expect(cellQuestion.choices[0].text).toEqual("Punkt 1");
+  expect(cellQuestion.choices[1].text).toEqual("Punkt 2");
+});
+test("TriggerValueEditor, use survey locale, Bug#7945", () => {
+  const survey = new SurveyModel({
+    locale: "de",
+    elements: [
+      {
+        type: "dropdown",
+        name: "q1",
+        choices: [
+          { value: 1, text: { default: "Item 1", de: "Punkt 1" } },
+          { value: 2, text: { default: "Item 2", de: "Punkt 2" } }
+        ]
+      },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      { type: "setvalue", expression: "{q2} = 1", setToName: "q1", setValue: 1 }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  const trigger = <SurveyTriggerSetValue>survey.triggers[0];
+  const editor = new TriggerValueEditor(question, trigger, "setValue");
+  expect(editor.editSurvey.locale).toEqual("de");
+  const editorQuestion = <QuestionDropdownModel>editor.question;
+  expect(editorQuestion.choices[0].text).toEqual("Punkt 1");
+  expect(editorQuestion.value).toEqual(1);
 });
