@@ -1,9 +1,9 @@
 import {
-  Action, AdaptiveActionContainer, Base, DomDocumentHelper, EventBase, Helpers, IElement, ILocalizableString,
-  ItemValue, LocalizableString, PageModel, PanelModel, PanelModelBase, Question,
-  QuestionCommentModel, QuestionDropdownModel, QuestionHtmlModel,
+  Action, AdaptiveActionContainer, Base, DomDocumentHelper, EventBase, Helpers, IDialogOptions, ILocalizableString,
+  ItemValue, LocalizableString, PageModel, PanelModel, PopupBaseViewModel, Question,
+  QuestionCommentModel, QuestionDropdownModel,
   QuestionMatrixDropdownModel, Serializer, SurveyModel, property,
-  settings as surveySettings
+  settings as surveySettings, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
 import { applyCreatorUiLocaleToAction, editorLocalization, getLocString } from "../../editorLocalization";
@@ -24,15 +24,13 @@ import {
 // the row one text line high (see setupSourceEmptySpaces).
 const emptySpaceText = "\u00A0";
 
-// The name of both host questions - the strings matrix in the target pane and the spacer that
-// keeps the source pane the same height. They live in two different surveys (the panes), so the
-// name is unique where it matters, and it is not a name a real survey question can have.
-const stringsHostName = "svc-translation-strings-host";
-// The id of the layout element the survey's own block is added under (see addStringsHost).
-const stringsLayoutElementId = "svc-translation-strings";
+// The name of the strings matrix of the element dialog. It is the only question of the dialog's
+// own survey, so the name matters nowhere - but a matrix without one falls back to rendering its
+// name as the title, and this is not a name a real survey question can have.
+const stringsMatrixName = "svc-translation-strings";
 
-// How long the strings block keeps trying to put the focus into the editor it was asked to open
-// (see TranslationElementStrings.focusItem): a rendered pane serves the request at once, and a
+// How long the strings dialog keeps trying to put the focus into the editor it was asked to open
+// (see TranslationElementStrings.focusItem): a rendered dialog serves the request at once, and a
 // slow one within a few frames - after a second of waiting the string is not being rendered at all.
 const focusCellAttemptDelay = 50;
 const focusCellMaxAttempts = 20;
@@ -431,16 +429,16 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (!!page) {
       this.selectedPageName = page.name;
     }
-    // The strings block of the owning element, not the inline editor of the pane: the pane
+    // The strings dialog of the owning element, not the inline editor of the pane: the pane
     // renders only a part of an element's strings (a title, a description, the choices of a
-    // rendered list), and the block is the one surface that holds every one of them.
-    this.showElementStrings(info.element);
+    // rendered list), and the dialog is the one surface that holds every one of them.
+    this.showElementStringsDialog(info.element);
     this.focusElementStringsItem(locStr);
   }
-  // The string the block is asked to focus while its matrix is not in the DOM yet: the block is
-  // built here, and the panes render it with their next render. The request is kept until the
-  // host question reports it is rendered (see observeStringsHost) - the immediate attempt below
-  // covers a framework that renders the pane synchronously.
+  // The string the dialog is asked to focus while its matrix is not in the DOM yet: the model is
+  // built here, and the dialog renders it with its next render. The request is kept until the
+  // matrix reports it is rendered (see createStringsHostSurvey) - the immediate attempt below
+  // covers a framework that renders the dialog synchronously.
   private focusedStringsItem: ILocalizableString;
   private focusElementStringsItem(locStr: ILocalizableString): void {
     if (!locStr || !this.elementStringsModel) return;
@@ -463,7 +461,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // The forms view's per-element indicator: every target-pane element with a title row (the
   // survey, pages, panels with strings, questions) shows the translation state of the strings
   // its translate action covers - the element's own strings, including the ones reachable
-  // only through its inline strings matrix (matrix column choices, validators, survey-level
+  // only through its strings dialog (matrix column choices, validators, survey-level
   // strings), but not the nested elements, which show indicators of their own. Counts are keyed
   // by the element type and name, so a pane copy and its real-survey element resolve to the
   // same entry.
@@ -543,21 +541,19 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     return "translated";
   }
   // The button carries the element's state itself: the number of untranslated strings when
-  // there is one (and nothing but the chevron otherwise), a css modifier per state and the
-  // chevron direction of its inline strings matrix. It renders without a visible title in two
-  // of the three states, so the tooltip is also its accessible name - it follows the state.
+  // there is one (and nothing but the language icon otherwise) and a css modifier per state.
+  // It renders without a visible title in two of the three states, so the tooltip is also its
+  // accessible name - it follows the state.
   private applyElementStateToAction(action: Action, key: string): void {
     const counts = this.elementCounts[key];
     const state = this.getStateFromCounts(counts);
     const untranslated = !!counts ? counts.total - counts.translated : 0;
-    const expanded = !!key && key === this.expandedElementKey;
     action.title = untranslated > 0 ? untranslated.toString() : "";
     action.showTitle = untranslated > 0;
     action.tooltip = untranslated > 0
       ? editorLocalization.getString("ed.translationStateUntranslated").replace("{0}", untranslated.toString())
       : editorLocalization.getString(state === "translated" ? "ed.translationStateAllTranslated" : "ed.translationStateNothingToTranslate");
-    action.css = "svc-translation-state svc-translation-state--" + state +
-      (expanded ? " svc-translation-state--expanded" : "");
+    action.css = "svc-translation-state svc-translation-state--" + state;
   }
   private updateSourceLocaleQuestion(question: QuestionDropdownModel, selected: string, excluded: string): void {
     if (!question) return;
@@ -709,13 +705,18 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         this.rebuildInstances();
       } else {
         this.updateInstanceLocales();
-        // The block survives a switch between two languages along with the panes it lives in.
+        // The dialog survives a switch between two languages: it edits the real survey, and its
+        // matrix follows the new locales.
         if (!!this.elementStringsModel) {
           this.elementStringsModel.updateLocales(this.sourceLocale, this.targetLocale);
         }
       }
       this.updateSettingsSurveyValues();
       if (name === "targetLocale") {
+        // Nothing left to translate into - the open dialog has no target column anymore.
+        if (!newValue) {
+          this.hideElementStringsDialog();
+        }
         this.updateElementTranslationStates();
       }
     }
@@ -846,10 +847,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
     const wasSyncing = this._syncing;
     this._syncing = true;
-    // The panes are recreated below, so the open block goes with them - it is restored on the
-    // fresh copies afterwards. A rebuild is not something the user asks for (it follows a
-    // structural change, a locale switch, a self-heal), and it must not take their block away.
-    const expandedKey = this.expandedElementKey;
     try {
       this.disposeInstances();
       if (!this.root) {
@@ -859,23 +856,18 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       // time - compute them before the title actions are set up.
       this.updateElementTranslationStates();
       const json = this.survey.toJSON();
-      this.sourceSurvey = this.createInstance(json, "translation_source", false);
+      this.sourceSurvey = this.createInstance(json, "translation_source");
       this.setupSourceSurvey(this.sourceSurvey);
       // With no target language selected there is nothing to edit: the target pane is not
       // rendered, so its copy is not created either and the source pane is the whole surface.
       if (!!this.targetLocale) {
-        this.targetSurvey = this.createInstance(json, "translation_target", true);
+        this.targetSurvey = this.createInstance(json, "translation_target");
         this.setupTargetSurvey(this.targetSurvey);
         this.setupSourceEmptySpaces();
       }
       this.buildMappings();
       this.updateInstanceLocales();
       this.updateInstancePages();
-      // The element may be gone with the change that caused the rebuild - then there is
-      // nothing to restore, and showElementStrings resolves that to "no block".
-      if (!!expandedKey) {
-        this.showElementStrings(this.getRealObjByStateKey(expandedKey));
-      }
     } finally {
       this._syncing = wasSyncing;
     }
@@ -893,13 +885,13 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     return this.survey.getQuestionByName(name);
   }
   // Called (through the plugin's onDesignerSurveyPropertyChanged hook) when the real survey changes:
-  // the element strings dialogs write to it, and external code can too.
+  // the element strings dialog writes to it, and external code can too.
   public onCreatorSurveyPropertyChanged(obj: Base, propName: string): void {
     if (this._syncing || this.isDisposed) return;
     // The survey locale is read once, on activation, to preselect the target language - the tab
     // does not follow it afterwards, and the locale itself changes no string and no counter.
     if (obj === this.survey && propName === "locale") return;
-    // The element strings dialogs write into the real survey string by string, so this runs per
+    // The element strings dialog writes into the real survey string by string, so this runs per
     // edit there as well: a text change keeps the used-strings tree, a structural one rebuilds it.
     // Dropped here and not through resetTranslationCounters below, because the pane rebuild of a
     // structural change computes the indicator states of the fresh copies on its way (see
@@ -911,11 +903,23 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     // Any real-survey change can move the counters, and a structural one their denominator.
     this.updateTranslationCounters();
     this.updateElementTranslationStates();
-    // The open block edits the same strings as the panes - a change made elsewhere (an inline
-    // editor, undo/redo, the machine translation) shows up in its cells. A structural change
-    // has closed it above (the pane rebuild), so there is nothing to refresh then.
+    // The dialog is over the real survey, so a pane rebuild leaves it alone - but a change that
+    // took its element away leaves it nothing to edit.
+    this.closeElementStringsDialogIfElementGone();
+    // The open dialog edits the same strings as the panes - a change made elsewhere (an inline
+    // editor, undo/redo, the machine translation) shows up in its cells.
     if (!!this.elementStringsModel) {
       this.elementStringsModel.updateMatrixData();
+    }
+  }
+  // The dialog edits one element of the real survey; a change that removed or replaced it (a
+  // deletion, an undo, a JSON reload) closes it. Resolved by name, like the indicator states.
+  private closeElementStringsDialogIfElementGone(): void {
+    const model = this.elementStringsModel;
+    if (!model) return;
+    const key = this.getElementStateKey(model.element);
+    if (!key || this.getRealObjByStateKey(key) !== model.element) {
+      this.hideElementStringsDialog();
     }
   }
   private onCreatorSurveyPropertyChangedCore(obj: Base, propName: string): void {
@@ -929,9 +933,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (!this.sourceSurvey) return;
     const realLocStr = this.getLocStrByName(obj, propName);
     if (!this.copiesMap.hasReal(realLocStr)) {
-      // A string of the open block that the panes do not render (a matrix column choice, a
+      // A string of the open dialog that the panes do not render (a matrix column choice, a
       // validator text): it is a text change like any other, not the structural change the
-      // rebuild below is for. Rebuilding here would drop the block the user is typing in.
+      // rebuild below is for.
       if (!!realLocStr && !!this.elementStringsModel && this.elementStringsModel.hasLocString(realLocStr)) return;
       // Not a mapped localizable string - a structural change (element added/removed, etc.).
       this.rebuildInstances();
@@ -952,9 +956,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     // mapped copies - forwarding them would read as a drifted mapping below and rebuild the
     // panes on every indicator refresh.
     if (sender instanceof Action) return;
-    // The strings host is not a mapped copy: its own localizable html property would read as
-    // a drifted mapping below and rebuild the panes, closing the block that was just opened.
-    if (this.isStringsHost(sender)) return;
     const copyLocStr = this.getLocStrByName(sender, name);
     if (!copyLocStr) return;
     const item = this.copiesMap.getItemByEditableCopy(copyLocStr);
@@ -976,10 +977,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         // The options hook rewrote the text - reflect the processed value back into the copies.
         this.copiesMap.mirrorIntoCopies(item.locString);
       }
-      // The open block edits the same strings as the panes, and its usual refresh funnel
+      // The open dialog edits the same strings as the panes, and its usual refresh funnel
       // (onCreatorSurveyPropertyChanged) is closed here - it bails on the _syncing flag this
-      // method holds. So an inline editor edit of a string the block lists is pushed into its
-      // cells from here; an edit belonging to another element leaves the block alone.
+      // method holds. So an inline editor edit of a string the dialog lists is pushed into its
+      // cells from here; an edit belonging to another element leaves the dialog alone.
       if (!!this.elementStringsModel && this.elementStringsModel.hasLocString(item.locString)) {
         this.elementStringsModel.updateMatrixData();
       }
@@ -1042,6 +1043,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   public dispose(): void {
     this.setSourceScrollElement(undefined);
     this.setTargetScrollElement(undefined);
+    this.hideElementStringsDialog();
     this.disposeInstances();
     this.selectedLocString = undefined;
     this.resetUsedStringsCache();
@@ -1066,7 +1068,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     return element instanceof Question && !isContentElement(element) &&
       (element.isDescendantOf("dropdown") || element.isDescendantOf("tagbox"));
   }
-  private createInstance(json: any, reason: string, isTarget: boolean): SurveyModel {
+  private createInstance(json: any, reason: string): SurveyModel {
     return this.options.createSurvey(json, reason, this, (survey: SurveyModel): void => {
       this.makeSurveyIdSpaceUnique(survey);
       survey.setDesignMode(true);
@@ -1101,13 +1103,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
           opt.data = { translation: this };
         }
       });
-      // The rendered height of the strings matrix is known to the DOM only - the source pane's
-      // spacer follows it (see setElementStringsHeight).
-      if (isTarget) {
-        survey.onAfterRenderQuestion.add((_, opt) => {
-          if (this.isStringsHost(opt.question))this.observeStringsHost(opt.htmlElement);
-        });
-      }
       this.restoreRunnerElementStyles(survey);
     });
   }
@@ -1210,12 +1205,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       }
     };
     survey.onUpdateQuestionCssClasses.add((sender, options) => {
-      // The strings host is not survey content: it renders the block (or its spacer) alone,
-      // without the question paddings that would push the two panes out of alignment.
-      if (this.isStringsHost(options.question)) {
-        options.cssClasses.mainRoot += " st-element-strings-host";
-        return;
-      }
       appendRunnerClass(options.question, options.cssClasses, "mainRoot");
     });
     survey.onUpdatePanelCssClasses.add((sender, options) => {
@@ -1236,14 +1225,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private setupTargetSurvey(survey: SurveyModel): void {
     const creator = this.creatorModel;
     if (!!creator) {
-      // The strings matrix is not survey content: its caption and row labels are plain texts,
-      // and its cells are the editors - none of them is an inplace-editable survey string.
       survey.getRendererForString = (element: Base, name: string, item?: ItemValue): string => {
-        if (this.isStringsHost(element)) return undefined;
         return creator.isStringInplacelyEditable(element, name, item) ? editableStringRendererName : undefined;
       };
       survey.getRendererContextForString = (element: Base, locStr: LocalizableString, item?: ItemValue): any => {
-        if (!this.isStringsHost(element) && creator.isStringInplacelyEditable(element, locStr.name, item)) {
+        if (creator.isStringInplacelyEditable(element, locStr.name, item)) {
           return { creator: creator, element: element, locStr: locStr };
         }
         return <any>locStr;
@@ -1259,34 +1245,25 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.forwardTargetChange(name, sender);
     };
     survey.onGetQuestionTitleActions.add((_, options) => {
-      // The strings matrix is a pane question of its own: its title is the block's caption and
-      // its title actions are the caption's buttons (auto-translate, all/used strings, close).
-      // Its cells carry the same mark but no caption of their own.
-      if (this.isStringsHost(options.question)) {
-        if (!!this.elementStringsModel && !options.question.parentQuestion) {
-          options.actions.push(...this.elementStringsModel.captionActions);
-        }
-        return;
-      }
       if (isContentElement(options.question)) return;
       options.actions.push(this.createTranslateAction("svc-translate-question",
-        () => this.toggleQuestionStrings(options.question), options.question));
+        () => this.showQuestionStringsDialog(options.question), options.question));
     });
     survey.onGetPageTitleActions.add((_, options) => {
       options.actions.push(this.createTranslateAction("svc-translate-page",
-        () => this.togglePageStrings(options.page), options.page));
+        () => this.showPageStringsDialog(options.page), options.page));
     });
     survey.onGetPanelTitleActions.add((_, options) => {
       if (isContentElement(options.panel)) return;
       if (!this.panelHasTranslatableStrings(options.panel)) return;
       options.actions.push(this.createTranslateAction("svc-translate-panel",
-        () => this.togglePanelStrings(options.panel), options.panel));
+        () => this.showPanelStringsDialog(options.panel), options.panel));
     });
     this.addSurveyTitleTranslateAction(survey);
   }
-  // The translate action doubles as the element's translation state indicator and as the
-  // expander of its inline strings matrix: the chevron shows whether the matrix is open, the
-  // title shows how many strings are left to translate (see applyElementStateToAction).
+  // The translate action doubles as the element's translation state indicator: it opens the
+  // element's strings dialog, and its title shows how many strings are left to translate
+  // (see applyElementStateToAction).
   // Its texts are assigned imperatively from editorLocalization, which is what keeps them in the
   // creator UI locale: the target pane runs in the target locale, so a locTitleName/locTooltipName
   // added here would be resolved in the language being translated into
@@ -1294,7 +1271,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private createTranslateAction(id: string, doAction: () => void, paneElement: Base): Action {
     const action = new Action({
       id: id,
-      iconName: "icon-chevron_16x16",
+      iconName: "icon-language",
       iconSize: "auto",
       showTitle: false,
       // The number of untranslated strings is the point of the button, and a title row has
@@ -1324,13 +1301,13 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     toolbar.locOwner = survey;
     toolbar.containerCss = "sv-action-title-bar";
     toolbar.setItems([this.createTranslateAction("svc-translate-survey",
-      () => this.toggleSurveyStrings(), survey)]);
+      () => this.showSurveyStringsDialog(), survey)]);
     toolbar.flushUpdates();
     this.surveyTitleToolbar = toolbar;
     Object.defineProperty(survey, "hasTitleActions", { get: (): boolean => true, configurable: true });
     survey.getTitleToolbar = (): AdaptiveActionContainer => toolbar;
   }
-  // The translate title action of a target-pane element opens a source/target strings grid
+  // The translate title action of a target-pane element opens a dialog with a strings matrix
   // built over the real survey's element, so the edits go through the regular translation item
   // path (and mirror into the panes). It covers the strings that cannot be edited inline - the
   // choices of matrix dropdown columns (whose cells render over copies of the column data),
@@ -1342,12 +1319,12 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     model.useSourceTargetColumns = true;
     model.sourceLocale = this.sourceLocale;
     model.targetLocale = this.targetLocale;
-    // The block opens in the mode the user chose the last time (the caption's filter action);
+    // The dialog opens in the mode the user chose the last time (the caption's filter action);
     // "used strings only" - the strings that have something to translate - is the default.
     model.showAllElementStrings = this.showAllElementStrings;
     model.reset();
     // An element without stored strings (e.g. a page with an empty title) would show an empty
-    // matrix - fall back to all strings so the block is never a dead end. The fallback is not
+    // matrix - fall back to all strings so the dialog is never a dead end. The fallback is not
     // the user's choice: it is not stored, and the filter action cannot switch back, since
     // choosing the used strings would bring the empty matrix back.
     if (model.isEmpty) {
@@ -1357,260 +1334,140 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.showAllElementStrings = value;
       if (!!this.onShowAllElementStringsChanged)this.onShowAllElementStringsChanged(value);
     };
-    // Building and refilling the matrix is the block's business alone - the panes must not react
-    // to it at all. Everything inside the matrix (its rows, its cells) reports to the target
-    // pane's property callback, where a single unrecognized string would rebuild both panes.
-    model.runWithoutPaneReaction = (fn: () => void): void => {
-      const wasSyncing = this._syncing;
-      this._syncing = true;
-      try {
-        fn();
-      } finally {
-        this._syncing = wasSyncing;
-      }
-    };
     return model;
   }
-  // The all/used strings mode of the element blocks: chosen by the filter action in a block's
+  // The all/used strings mode of the element dialogs: chosen by the filter action in a dialog's
   // caption and kept for the next element. A plain field, not a survey property - nothing
   // renders it, it only seeds the next matrix. The plugin follows the callback to carry it
   // over a tab switch, which the tab model itself does not survive.
   public showAllElementStrings: boolean = false;
   public onShowAllElementStringsChanged: (value: boolean) => void;
-  public toggleQuestionStrings(paneQuestion: Question): void {
-    this.toggleElementStrings(!!this.survey ? this.survey.getQuestionByName(paneQuestion.name) : undefined);
+  public showQuestionStringsDialog(paneQuestion: Question): void {
+    this.showElementStringsDialog(!!this.survey ? this.survey.getQuestionByName(paneQuestion.name) : undefined);
   }
-  public togglePageStrings(panePage: PageModel): void {
-    this.toggleElementStrings(!!this.survey ? this.survey.getPageByName(panePage.name) : undefined);
+  public showPageStringsDialog(panePage: PageModel): void {
+    this.showElementStringsDialog(!!this.survey ? this.survey.getPageByName(panePage.name) : undefined);
   }
-  public togglePanelStrings(panePanel: PanelModel): void {
-    this.toggleElementStrings(!!this.survey ? this.survey.getPanelByName(panePanel.name) : undefined);
+  public showPanelStringsDialog(panePanel: PanelModel): void {
+    this.showElementStringsDialog(!!this.survey ? this.survey.getPanelByName(panePanel.name) : undefined);
   }
-  public toggleSurveyStrings(): void {
-    this.toggleElementStrings(this.survey);
+  public showSurveyStringsDialog(): void {
+    this.showElementStringsDialog(this.survey);
   }
-  // The strings matrix of the element whose button is expanded, or undefined while no element
-  // is expanded. The panes' host questions render it (see addStringsHost).
+  // The strings model of the element whose dialog is open, or undefined while no dialog is shown.
   @property() elementStringsModel: TranslationElementStrings;
-  // The rendered height of the open strings block, reported by its UI component - the source
-  // pane's spacer is drawn that high to keep the two panes row-aligned (see setElementStringsHeight).
-  @property({ defaultValue: 0 }) elementStringsHeight: number;
-  private expandedElementKey: string;
-  private stringsHosts: Array<Question> = [];
-  // The surveys the survey block travels in - one per pane (see addStringsHost).
-  private stringsHostSurveys: Array<SurveyModel> = [];
-  public isElementStringsExpanded(element: Base): boolean {
-    const key = this.getElementStateKey(element);
-    return !!key && key === this.expandedElementKey;
+  private elementStringsSurveyValue: SurveyModel;
+  private elementStringsPopup: PopupBaseViewModel;
+  // The survey the dialog renders - the strings matrix alone (see createStringsHostSurvey).
+  public get elementStringsSurvey(): SurveyModel {
+    return this.elementStringsSurveyValue;
   }
-  public toggleElementStrings(realObj: Base): void {
-    if (!realObj || this.isDisposed) return;
-    if (this.isElementStringsExpanded(realObj)) {
-      this.hideElementStrings();
-    } else {
-      this.showElementStrings(realObj);
+  // Only one element's strings are open at a time: the dialog is modal, and a dialog opened
+  // through the progress link while another one is up replaces it.
+  public showElementStringsDialog(realObj: Base): void {
+    if (!realObj || this.isDisposed || this.isSideBySideGrid || !this.targetSurvey) return;
+    if (!this.getElementStateKey(realObj)) return;
+    this.hideElementStringsDialog();
+    const model = this.createElementStringsModel(realObj);
+    this.elementStringsModel = model;
+    this.elementStringsSurveyValue = this.createStringsHostSurvey(model);
+    // No dialog implementation at all (a headless environment): the model is still the open
+    // one, so the tab keeps working through its API.
+    if (!surveySettings.showDialog) return;
+    // The dialog is creator UI, not survey content: it is built while the library's current
+    // locale is the creator's one, so its own strings (the footer button, the close icon)
+    // are not resolved in the language being translated into.
+    const prevLocale = surveyLocalization.currentLocale;
+    surveyLocalization.currentLocale = editorLocalization.currentLocale;
+    const popup: PopupBaseViewModel = surveySettings.showDialog(<IDialogOptions>{
+      componentName: "survey-widget",
+      data: { model: this.elementStringsSurveyValue },
+      onApply: (): boolean => true,
+      onHide: () => this.onElementStringsDialogHidden(model),
+      cssClass: "svc-property-editor st-translation-dialog st-element-strings-dialog svc-creator-popup",
+      title: this.getElementStringsDialogTitle(realObj),
+      displayMode: this.options.isMobileView ? "overlay" : "popup"
+    }, this.options.rootElement);
+    this.elementStringsPopup = popup;
+    // The matrix edits apply immediately, so the dialog gets a single closing button instead
+    // of the apply/cancel pair.
+    const actions = popup.footerToolbar.actions;
+    actions.splice(1, actions.length - 1);
+    actions[0].title = editorLocalization.getString("pe.doneEditing");
+    popup.locale = editorLocalization.locale;
+    surveyLocalization.currentLocale = prevLocale;
+  }
+  private getElementStringsDialogTitle(obj: Base): string {
+    if (obj === <Base>this.survey) {
+      return this.survey.title || editorLocalization.getString("ed.surveyTypeName");
     }
+    // A question's title falls back to its name by itself; pages and panels need the explicit one.
+    return (<any>obj).title || (<any>obj).name;
   }
-  // Only one element's strings are open at a time: the block of the previous element is
-  // removed from both panes before this one is added.
-  private _showingElementStrings: boolean = false;
-  public showElementStrings(realObj: Base): void {
-    // Building the block reads the real survey; should that ever report a change of its own,
-    // the pane rebuild it triggers would restore the block and land back here.
-    if (this._showingElementStrings) return;
-    this._showingElementStrings = true;
-    try {
-      this.closeElementStrings();
-      const key = this.getElementStateKey(realObj);
-      if (!key || this.isDisposed || this.isSideBySideGrid || !this.targetSurvey) return;
-      const model = this.createElementStringsModel(realObj);
-      model.onClose = (): void => this.hideElementStrings();
-      this.elementStringsModel = model;
-      this.expandedElementKey = key;
-      this.addStringsHost(this.targetSurvey, realObj, true);
-      this.addStringsHost(this.sourceSurvey, realObj, false);
-      this.updateElementTranslationStates();
-    } finally {
-      this._showingElementStrings = false;
-    }
+  // The dialog is gone - by its own button or because the model closed it. A dialog that has
+  // already been replaced by a newer one reports here as well, and its model is not the open one.
+  private onElementStringsDialogHidden(model: TranslationElementStrings): void {
+    if (this.elementStringsModel !== model) return;
+    this.elementStringsPopup = undefined;
+    this.disposeElementStringsModel();
   }
-  public hideElementStrings(): void {
-    this.closeElementStrings();
+  public hideElementStringsDialog(): void {
+    const popup = this.elementStringsPopup;
+    this.elementStringsPopup = undefined;
+    // Hiding reports back through onHide, which disposes the model; the call below is what
+    // closes a model shown without a dialog at all.
+    if (!!popup) popup.model.hide();
+    this.disposeElementStringsModel();
+  }
+  private disposeElementStringsModel(): void {
+    const model = this.elementStringsModel;
+    if (!model) return;
+    // A focus request that was never served belonged to the model being closed here.
+    this.focusedStringsItem = undefined;
+    this.elementStringsModel = undefined;
+    const hostSurvey = this.elementStringsSurveyValue;
+    this.elementStringsSurveyValue = undefined;
+    if (!!hostSurvey) hostSurvey.dispose();
+    model.dispose();
     // The user has usually just translated something - the freed button shows the new count.
     this.updateElementTranslationStates();
   }
-  // The removal itself: also the way a pane rebuild drops the block, where recomputing the
-  // states is the caller's business (the fresh actions read them at creation time).
-  private closeElementStrings(): void {
-    const model = this.elementStringsModel;
-    // A focus request that was never served belonged to the block being closed here.
-    this.focusedStringsItem = undefined;
-    this.observeStringsHost(undefined);
-    this.stringsHosts.forEach(host => {
-      const parent = <PanelModelBase>host.parent;
-      if (!!parent) parent.removeElement(host);
-      host.dispose();
-    });
-    this.stringsHosts = [];
-    this.restoreStringsHostRows();
-    // The survey block travels in a survey of its own, in the panes' contentTop container.
-    [this.sourceSurvey, this.targetSurvey].forEach(pane => {
-      if (!!pane) pane.removeLayoutElement(stringsLayoutElementId);
-    });
-    this.stringsHostSurveys.forEach(hostSurvey => hostSurvey.dispose());
-    this.stringsHostSurveys = [];
-    this.sourceStringsSpacer = undefined;
-    this.expandedElementKey = undefined;
-    this.elementStringsModel = undefined;
-    this.elementStringsHeight = 0;
-    if (!!model) model.dispose();
-  }
-  // The height of the rendered strings matrix; the source pane's spacer follows it. Repeated
-  // identical values are dropped - the reporter is a resize observer, and the spacer's own
-  // re-render must not feed it back.
-  public setElementStringsHeight(height: number): void {
-    const value = Math.round(height || 0);
-    if (this.isDisposed || this.elementStringsHeight === value) return;
-    this.elementStringsHeight = value;
-    if (!!this.sourceStringsSpacer) {
-      this.sourceStringsSpacer.html = "<div style=\"height:" + value + "px\"></div>";
-    }
-  }
-  private sourceStringsSpacer: QuestionHtmlModel;
-  private stringsHostObserver: any;
-  private observeStringsHost(element?: HTMLElement): void {
-    if (!!this.stringsHostObserver) {
-      this.stringsHostObserver.disconnect();
-      this.stringsHostObserver = undefined;
-    }
-    if (!element) return;
-    this.setElementStringsHeight(element.offsetHeight);
-    // The block is in the DOM now - a focus request made while it was being built can be served.
-    this.applyFocusedStringsItem();
-    // No ResizeObserver (jsdom, older browsers): the spacer keeps the height measured once.
-    if (typeof ResizeObserver === "undefined") return;
-    this.stringsHostObserver = new ResizeObserver(() => this.setElementStringsHeight(element.offsetHeight));
-    this.stringsHostObserver.observe(element);
-  }
-  // Whether the object belongs to a strings block: the host questions themselves and everything
-  // inside the matrix - its row items, its rendered rows and its cell questions. They all report
-  // their property changes to the pane survey (see Base.doPropertyValueChangedCallback), where
-  // an unknown string reads as a drifted mapping and rebuilds the panes - the block's own
-  // content must never be taken for that.
-  public isStringsHost(element: Base): boolean {
-    let obj: any = element;
-    // The owner chains are short; the counter is a guard against a cycle, not a depth limit.
-    for (let i = 0; !!obj && i < 10; i++) {
-      if (!!obj.isTranslationStringsHost) return true;
-      obj = obj.parentQuestion || obj.locOwner || obj.owner || obj.data;
-    }
-    return false;
-  }
-  // The host questions are added to the pane copies after the mappings are built and removed
-  // before they are rebuilt, so they never enter the copy trees (see buildMappings). The target
-  // pane gets the element's strings matrix - the same source/target grid the grid view renders,
-  // as a plain matrix question with the caption as its title. The source pane gets an empty
-  // html question as high as the matrix, so the two panes keep the same rows.
-  private addStringsHost(survey: SurveyModel, realObj: Base, isTarget: boolean): void {
-    const host = isTarget ? this.elementStringsModel.createStringsMatrix(stringsHostName) : this.createSourceSpacer();
-    host.startWithNewLine = true;
-    (<any>host).isTranslationStringsHost = true;
-    // The survey's own strings belong under the survey header, which is not part of any page:
-    // put the block at the top of the first page and it reads as the page's, below the page
-    // title and description. The contentTop layout container renders exactly between the header
-    // and the page, and it takes a component with a model - the creator's "survey-widget", which
-    // renders a survey, is registered under that name in every framework. So the block travels
-    // there inside a survey of its own: one page, one question.
-    if (realObj === <Base>this.survey) {
-      const hostSurvey = this.createStringsHostSurvey(host, isTarget);
-      survey.addLayoutElement({
-        id: stringsLayoutElementId,
-        container: "contentTop",
-        component: "survey-widget",
-        data: hostSurvey
-      });
-      this.stringsHostSurveys.push(hostSurvey);
-      if (isTarget)this.elementStringsModel.setupStringsMatrix(hostSurvey);
-      return;
-    }
-    const position = this.getStringsHostPosition(survey, realObj);
-    if (!position || !position.parent) return;
-    if (isTarget)this.elementStringsModel.setupStringsMatrix(survey);
-    // The block takes a row of its own right below the question it belongs to, so the element
-    // that shared the row with that question must start the next row while the block is open
-    // (a row starts at every element with startWithNewLine, see QuestionRowModel).
-    this.splitStringsHostRow(position.parent.elements[position.index]);
-    position.parent.addElement(host, position.index);
-    this.stringsHosts.push(host);
-  }
-  // The pane elements whose startWithNewLine the open block has turned on - restored when it
-  // closes (see closeElementStrings). A pane copy property, so the real survey is untouched.
-  private stringsHostRowSplits: Array<IElement> = [];
-  private splitStringsHostRow(next: IElement): void {
-    if (!next || next.startWithNewLine) return;
-    next.startWithNewLine = true;
-    this.stringsHostRowSplits.push(next);
-  }
-  private restoreStringsHostRows(): void {
-    this.stringsHostRowSplits.forEach(element => {
-      if (!(<Base><any>element).isDisposed) element.startWithNewLine = false;
-    });
-    this.stringsHostRowSplits = [];
-  }
-  private createSourceSpacer(): QuestionHtmlModel {
-    const spacer = new QuestionHtmlModel(stringsHostName);
-    spacer.titleLocation = "hidden";
-    this.sourceStringsSpacer = spacer;
-    return spacer;
-  }
-  // The survey block's own survey: a plain runtime survey holding the block's question alone.
-  // Runtime, unlike the panes: its cells are editable without the design-mode workarounds, and
-  // its content reports to no pane callback at all.
-  private createStringsHostSurvey(host: Question, isTarget: boolean): SurveyModel {
+  // The dialog's own survey: a plain runtime survey holding the strings matrix alone. Runtime,
+  // unlike the panes: its cells are editable without the design-mode workarounds, and its
+  // content reports to no pane callback at all. It is rendered by the "survey-widget"
+  // component, which every UI package registers - the dialog needs none of its own.
+  private createStringsHostSurvey(model: TranslationElementStrings): SurveyModel {
     return this.options.createSurvey({}, "translation_element_strings", this, (survey: SurveyModel): void => {
       this.makeSurveyIdSpaceUnique(survey);
       survey.showNavigationButtons = false;
       survey.showProgressBar = false;
       survey.showTOC = false;
       survey.addNewPage("page");
-      survey.pages[0].addElement(host);
-      // The block's own styles are scoped to the host question's class, which the panes add
-      // through their css hook (see restoreRunnerElementStyles) - the survey block is not a
-      // pane question, so this survey adds it itself.
+      const matrix = model.createStringsMatrix(stringsMatrixName);
+      model.setupStringsMatrix(survey);
+      survey.pages[0].addElement(matrix);
+      // The matrix is filled on creation, before it belongs to any survey - and a question
+      // joining a survey re-reads its value from that survey's data (see Question.onSetData),
+      // which is empty here. The texts are put back once the matrix is where they survive.
+      model.updateMatrixData();
+      // The matrix's own styles (the merged first cell, the caption row) are scoped to this class.
       survey.onUpdateQuestionCssClasses.add((_, options) => {
-        if (this.isStringsHost(options.question)) {
-          options.cssClasses.mainRoot += " st-element-strings-host";
+        if (options.question === matrix) {
+          options.cssClasses.mainRoot += " st-element-strings";
         }
       });
-      if (isTarget) {
-        survey.onGetQuestionTitleActions.add((_, options) => {
-          if (!!this.elementStringsModel && options.question === host) {
-            options.actions.push(...this.elementStringsModel.captionActions);
-          }
-        });
-        survey.onAfterRenderQuestion.add((_, options) => {
-          if (options.question === host)this.observeStringsHost(options.htmlElement);
-        });
-      }
+      // The matrix title row is the dialog's caption row: it carries the auto-translate button
+      // and the all/used strings filter.
+      survey.onGetQuestionTitleActions.add((_, options) => {
+        if (options.question === matrix) {
+          options.actions.push(...model.captionActions);
+        }
+      });
+      // The matrix is in the DOM now - a focus request made while it was being built can be served.
+      survey.onAfterRenderQuestion.add((_, options) => {
+        if (options.question === matrix)this.applyFocusedStringsItem();
+      });
     });
-  }
-  // Where the block goes when it is not the survey's own (see addStringsHost), resolved against
-  // the real element and applied to the pane copy: right below the clicked question and at the
-  // top of a clicked page or panel. Directly below the question and not below its whole row: a
-  // row of a half-width pane rarely fits its questions on one line, and the block of the first
-  // question of such a row would be pages away from it.
-  private getStringsHostPosition(survey: SurveyModel, realObj: any): { parent: PanelModelBase, index: number } {
-    if (!survey) return undefined;
-    if (realObj.isPage) {
-      return { parent: survey.getPageByName(realObj.name), index: 0 };
-    }
-    if (realObj.isPanel) {
-      return { parent: <PanelModelBase>survey.getPanelByName(realObj.name), index: 0 };
-    }
-    const question = survey.getQuestionByName(realObj.name);
-    const parent = !!question ? <PanelModelBase>question.parent : undefined;
-    if (!parent) return undefined;
-    return { parent: parent, index: parent.elements.indexOf(question) + 1 };
   }
   // The creator instance when the model is created by the translation plugin. The options object
   // is checked structurally so the model stays constructible with EmptySurveyCreatorOptions in tests.
@@ -1619,9 +1476,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     return !!options && typeof options.isStringInplacelyEditable === "function" ? options : undefined;
   }
   private disposeInstances(): void {
-    // The block's host questions live in the panes that are about to go, and a pane copy
-    // holding one must never be mapped again - the strings block does not survive a rebuild.
-    this.closeElementStrings();
     const creator = this.creatorModel;
     if (!!creator)creator.onStringEditorFocusedCallback = undefined;
     if (!!this.surveyTitleToolbar) {
@@ -1690,7 +1544,7 @@ export class TranslationSideBySideGrid extends TranslationSideBySide {
   }
 }
 
-// The model of the inline element strings block: a Translation scoped to a single element of
+// The model of the element strings dialog: a Translation scoped to a single element of
 // the real survey - the survey itself, a page, a panel or a question. The grid rows bind to the
 // real localizable strings (a column's choices are the column templateQuestion's own items),
 // never to the pane copies.
@@ -1701,33 +1555,20 @@ export class TranslationElementStrings extends TranslationBase {
   public get element(): Base {
     return this.elementValue;
   }
-  // Set by the owner - the close action of the caption row and the element's own button do
-  // the same thing.
-  public onClose: () => void;
   // Set by the owner - the all/used strings choice is kept for the next element.
   public onShowAllStringsChanged: (value: boolean) => void;
-  // Set by the owner - runs the matrix updates with the panes' reaction to their own content
-  // suppressed (see createElementStringsModel).
-  public runWithoutPaneReaction: (fn: () => void) => void;
-  private updateMatrix(fn: () => void): void {
-    if (!this.runWithoutPaneReaction) {
-      fn();
-    } else {
-      this.runWithoutPaneReaction(fn);
-    }
-  }
   // The caption row's actions - the title actions of the strings matrix: auto-translate (when
-  // machine translation is available), the all/used strings filter and the closing button,
-  // which the css pins to the right edge of the row.
+  // machine translation is available) and the all/used strings filter. The dialog is closed by
+  // its own footer button, so the caption row carries no closing action.
   private captionActionsValue: Array<Action>;
   private stringsFilterAction: Action;
   public get captionActions(): Array<Action> {
     if (!this.captionActionsValue) {
       this.captionActionsValue = [];
       if (this.options.getHasMachineTranslation() && !this.readOnly) {
-        // The caption of a question/page/panel block is a title row of the target pane, and that
-        // pane survey runs in the target locale - an action resolving a localizationName there
-        // would show its creator string in the language being translated into.
+        // The dialog's survey has no locale of its own, but the actions are read whenever their
+        // owner is - an action resolving a localizationName would follow whatever locale it is
+        // rendered in, and never the creator UI one.
         this.machineTranslationAction = applyCreatorUiLocaleToAction(createMachineTranslationAction(() => this.doMachineTranslation()));
         this.machineTranslationAction.enabled = this.getStringsToTranslate().length > 0;
         this.captionActionsValue.push(this.machineTranslationAction);
@@ -1746,18 +1587,6 @@ export class TranslationElementStrings extends TranslationBase {
       });
       this.updateStringsFilterAction();
       this.captionActionsValue.push(this.stringsFilterAction);
-      this.captionActionsValue.push(applyCreatorUiLocaleToAction(new Action({
-        id: "svc-translation-strings-close",
-        iconName: "icon-clear_16x16",
-        iconSize: "auto",
-        showTitle: false,
-        css: "st-element-strings__close",
-        appearance: { style: "neutral", mode: "secondary", size: "small" },
-        locTooltipName: "ed.translationElementStringsClose",
-        action: () => {
-          if (!!this.onClose)this.onClose();
-        }
-      })));
     }
     return this.captionActionsValue;
   }
@@ -1767,17 +1596,16 @@ export class TranslationElementStrings extends TranslationBase {
     this.stringsFilterAction.title = editorLocalization.getString(
       this.showAllStrings ? "ed.translationShowUsedStringsOnly" : "ed.translationShowAllStrings");
   }
-  // The block renders one matrix instead of the grid view's survey of matrices: an element has
-  // few strings, and a single question fits into the pane as any other question does. Rows are
-  // the element's translation items, columns the source and the target locale.
+  // The dialog renders one matrix instead of the grid view's survey of matrices: an element has
+  // few strings, and one question is all the dialog holds. Rows are the element's translation
+  // items, the column is the target locale.
   public createStringsMatrix(name: string): QuestionMatrixDropdownModel {
     const matrix = <QuestionMatrixDropdownModel>Serializer.createClass("matrixdropdown");
     matrix.name = name;
     matrix.cellType = "comment";
-    // The block has no caption text: it is rendered at the element it belongs to, and its two
-    // columns are the source and the target pane the user is already looking at. The title row
-    // itself stays - it is what carries the caption's actions - but it renders empty, without
-    // the question name a title-less question would fall back to.
+    // The matrix has no caption text: the dialog's own title names the element it belongs to.
+    // The title row itself stays - it is what carries the caption's actions - but it renders
+    // empty, without the question name a title-less question would fall back to.
     matrix.titleLocation = "top";
     matrix.locTitle.onGetTextCallback = (): string => "";
     matrix.showHeader = false;
@@ -1787,7 +1615,7 @@ export class TranslationElementStrings extends TranslationBase {
     // A row title is a plain text; the two lines it holds become html here. Overridden on the
     // matrix instead of through the host survey's onTextMarkdown: the rows are read as soon as
     // they are assigned, before the matrix belongs to any survey, and a row title has no html
-    // then - the empty result would be cached for the block's lifetime.
+    // then - the empty result would be cached for the dialog's lifetime.
     matrix.getMarkdownHtml = (text: string, name: string, item?: any): string => this.getRowTitleHtml(text, item);
     this.addLocaleColumns(matrix);
     this.stringsMatrix = matrix;
@@ -1827,8 +1655,8 @@ export class TranslationElementStrings extends TranslationBase {
     return (text || "").split(rowSourceSeparator).filter(part => !!part).join(", ");
   }
   private stringsMatrix: QuestionMatrixDropdownModel;
-  // Rows are rebuilt in place on a filter switch: the matrix is a pane question, so replacing
-  // it would take the block's title actions and its rendered position with it.
+  // Rows are rebuilt in place on a filter switch: replacing the matrix would take the caption
+  // row and its actions - the very button that switched the filter - with it.
   private fillStringsMatrix(): void {
     const matrix = this.stringsMatrix;
     if (!matrix || this.isDisposed) return;
@@ -1852,14 +1680,9 @@ export class TranslationElementStrings extends TranslationBase {
     // re-attached by row value.
     const items: { [key: string]: TranslationItem } = {};
     rows.forEach(row => { items[row.value] = <TranslationItem>row["translationData"]; });
-    this.updateMatrix(() => {
-      matrix.rows = rows;
-      matrix.rows.forEach((row: ItemValue) => {
-        row["translationData"] = items[row.value];
-        // The rows report their own strings to the pane survey - marked, so the pane knows
-        // they are the block's content and not a survey string of its own.
-        (<any>row).isTranslationStringsHost = true;
-      });
+    matrix.rows = rows;
+    matrix.rows.forEach((row: ItemValue) => {
+      row["translationData"] = items[row.value];
     });
     this.updateStringsMatrixData();
   }
@@ -1874,15 +1697,15 @@ export class TranslationElementStrings extends TranslationBase {
         data[row.value] = value;
       }
     });
-    this.updateMatrix(() => { matrix.value = data; });
+    matrix.value = data;
   }
-  // Puts the input focus into the block's editor of a string - the row's only cell is the
+  // Puts the input focus into the dialog's editor of a string - the row's only cell is the
   // target locale one (see createStringsMatrix).
   public focusItem(locStr: ILocalizableString): void {
     const question = this.getItemCellQuestion(locStr);
     if (!question || this.isDisposed) return;
-    // The cell is usually not in the DOM yet: the block is created and focused in one step, and
-    // the panes render it afterwards. The request is kept until the input has the focus - every
+    // The cell is usually not in the DOM yet: the model is created and focused in one step, and
+    // the dialog renders it afterwards. The request is kept until the input has the focus - every
     // framework whose matrix cells report themselves as rendered (react/vue/angular, see their
     // MatrixDropdownCell components) tries it again as soon as the cell is there, and the
     // retries below cover the ones that report nothing and a cell that renders later still.
@@ -1959,11 +1782,11 @@ export class TranslationElementStrings extends TranslationBase {
     const itemValue = this.getMatrixItemValue(row);
     return !!itemValue ? itemValue["translationData"] : undefined;
   }
-  // The pane the matrix is rendered in drives the cells; the handlers are removed with the
-  // block, so a pane that outlives it keeps none of them.
-  private paneSurvey: SurveyModel;
+  // The survey the matrix is rendered in drives the cells; the handlers are removed with the
+  // model, so a survey that outlives it keeps none of them.
+  private hostSurvey: SurveyModel;
   public setupStringsMatrix(survey: SurveyModel): void {
-    this.paneSurvey = survey;
+    this.hostSurvey = survey;
     survey.onMatrixCellCreated.add(this.onMatrixCellCreated);
     survey.onMatrixCellValueChanging.add(this.onMatrixCellValueChanging);
     survey.onMatrixCellValueChanged.add(this.onMatrixCellValueChanged);
@@ -1971,14 +1794,6 @@ export class TranslationElementStrings extends TranslationBase {
   private onMatrixCellCreated = (_: SurveyModel, options: any): void => {
     if (options.question !== this.stringsMatrix) return;
     const cellQuestion = options.cell.question;
-    // The cells report their strings to the pane survey like any other question there - marked,
-    // so the pane knows they are the block's content (see isStringsHost).
-    cellQuestion.isTranslationStringsHost = true;
-    // The pane is a design-mode survey, where every input renders read-only (isInputReadOnly)
-    // and disabled (isDisabledAttr, which the text area passes to the DOM element) - the
-    // translation cells are the one place in it where the user types into an input.
-    cellQuestion.forceIsInputReadOnly = false;
-    Object.defineProperty(cellQuestion, "isDisabledAttr", { get: (): boolean => false, configurable: true });
     // The cell's accessible name is built from the row's rendered title, which is the html of the
     // merged first cell here - the row reports the plain text of the same two lines instead.
     const rowItemValue = this.getMatrixItemValue(options.row);
@@ -2017,11 +1832,11 @@ export class TranslationElementStrings extends TranslationBase {
     }
   };
   private disposeStringsMatrix(): void {
-    if (!!this.paneSurvey) {
-      this.paneSurvey.onMatrixCellCreated.remove(this.onMatrixCellCreated);
-      this.paneSurvey.onMatrixCellValueChanging.remove(this.onMatrixCellValueChanging);
-      this.paneSurvey.onMatrixCellValueChanged.remove(this.onMatrixCellValueChanged);
-      this.paneSurvey = undefined;
+    if (!!this.hostSurvey) {
+      this.hostSurvey.onMatrixCellCreated.remove(this.onMatrixCellCreated);
+      this.hostSurvey.onMatrixCellValueChanging.remove(this.onMatrixCellValueChanging);
+      this.hostSurvey.onMatrixCellValueChanged.remove(this.onMatrixCellValueChanged);
+      this.hostSurvey = undefined;
     }
     this.stringsMatrix = undefined;
   }
@@ -2037,19 +1852,19 @@ export class TranslationElementStrings extends TranslationBase {
     return !el.isPage && !el.isPanel && !el.isQuestion;
   }
   // The source text is merged into the row titles (see getRowTitleText), so the matrix has the
-  // target locale column alone - and nothing in the block is read-only but that merged cell.
+  // target locale column alone - and nothing in the dialog is read-only but that merged cell.
   protected get hasSourceColumn(): boolean {
     return false;
   }
-  // The block renders its own matrix in the target pane - the strings grid surveys of the base
-  // class (and their header survey) are never built for it.
+  // The dialog renders this model's own matrix - the strings grid surveys of the base class
+  // (and their header survey) are never built for it.
   protected get hasStringsSurveyUI(): boolean {
     return false;
   }
-  // Cleared when the element has no stored strings and the block fell back to the
+  // Cleared when the element has no stored strings and the dialog fell back to the
   // all-strings mode (see createElementStringsModel).
   public hasUsedStrings: boolean = true;
-  // The all/used strings filter of the element blocks - deliberately not the base
+  // The all/used strings filter of the element dialogs - deliberately not the base
   // showAllStrings, which is the strings grid's own reactive filter (the tab toolbar drives it,
   // and its onSet resets the model behind the caller's back). This one belongs to the element
   // matrices alone: it is a plain field, it applies the change itself in one step, and its
@@ -2060,9 +1875,8 @@ export class TranslationElementStrings extends TranslationBase {
   }
   public set showAllElementStrings(val: boolean) {
     if (this.showAllElementStringsValue === val) return;
-    // The owner is told first: it stores the choice, so that a pane rebuild - should anything
-    // still cause one - restores the block in the mode the user has just chosen, not the one
-    // before it.
+    // The owner is told first: it stores the choice, and the next element's dialog opens in the
+    // mode the user has just chosen.
     if (!!this.onShowAllStringsChanged)this.onShowAllStringsChanged(val);
     this.applyShowAllElementStrings(val);
   }
@@ -2091,13 +1905,13 @@ export class TranslationElementStrings extends TranslationBase {
     this.updateStringsFilterAction();
     this.fillStringsMatrix();
   }
-  // A real-survey string edited elsewhere (the pane's inline editor, undo/redo) shows up in
-  // the matrix cells right away - the block and the panes edit the same strings.
+  // A real-survey string edited elsewhere (the machine translation, undo/redo) shows up in
+  // the matrix cells right away - the dialog and the panes edit the same strings.
   public updateMatrixData(): void {
     this.updateStringsMatrixData();
   }
   // A locale switch does not rebuild the panes (as long as a target language stays selected), so
-  // the open block follows it here: the target locale is the matrix's only column, and the source
+  // the open dialog follows it here: the target locale is the matrix's only column, and the source
   // one is what the row titles show.
   public updateLocales(sourceLocale: string, targetLocale: string): void {
     if (this.isDisposed) return;
@@ -2109,14 +1923,12 @@ export class TranslationElementStrings extends TranslationBase {
     const matrix = this.stringsMatrix;
     if (!matrix) return;
     if (targetChanged) {
-      this.updateMatrix(() => {
-        matrix.columns = [];
-        this.addLocaleColumns(matrix);
-      });
+      matrix.columns = [];
+      this.addLocaleColumns(matrix);
     }
     this.fillStringsMatrix();
   }
-  // Whether the block's matrix covers the string - the owner asks before it treats an unmapped
+  // Whether the dialog's matrix covers the string - the owner asks before it treats an unmapped
   // string change as a structural one (see onCreatorSurveyPropertyChangedCore).
   public hasLocString(locStr: ILocalizableString): boolean {
     if (!locStr || !this.root) return false;
@@ -2172,7 +1984,6 @@ export class TranslationElementStrings extends TranslationBase {
     }
     this.machineTranslationAction = undefined;
     this.stringsFilterAction = undefined;
-    this.onClose = undefined;
     super.dispose();
   }
 }

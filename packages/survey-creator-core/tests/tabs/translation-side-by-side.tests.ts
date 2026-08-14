@@ -634,53 +634,50 @@ test("inplaceEditChoiceValues does not apply to the pane copies' choice strings"
   expect((<any>designerEditor).isInplaceForEditValues).toBeTruthy();
 });
 
-// The survey block travels in a survey of its own, in the pane's contentTop layout container;
-// every other block is a question of the pane page.
-function getBlockSurvey(paneSurvey: any): any {
-  const layoutElement = !!paneSurvey ? paneSurvey.findLayoutElement("svc-translation-strings") : undefined;
-  return !!layoutElement ? layoutElement.data : undefined;
-}
-// The strings matrix of the open block, wherever it is hosted, and the row bound to a real string.
+// The strings matrix of the open dialog - the only question of the dialog's own survey - and
+// the row bound to a real string.
 function getStringsMatrix(model: TranslationSideBySide): QuestionMatrixDropdownModel {
-  const survey = getBlockSurvey(model.targetSurvey) || model.targetSurvey;
-  return <QuestionMatrixDropdownModel>survey.getAllQuestions(false, false, true)
-    .filter((question: any) => !!question.isTranslationStringsHost && !question.parentQuestion)[0];
+  const survey = model.elementStringsSurvey;
+  return !!survey ? <QuestionMatrixDropdownModel>survey.getAllQuestions()[0] : undefined;
 }
 function getStringsRow(matrix: QuestionMatrixDropdownModel, locStr: any): any {
   const itemValue = matrix.rows.filter(row => row["translationData"].locString === locStr)[0];
   return !!itemValue ? matrix.visibleRows.filter(row => row.name === itemValue.value)[0] : undefined;
 }
 
-test("element strings block: a source/target matrix over the real question, read-only source, edits that mirror into the panes", () => {
+test("element strings dialog: a matrix over the real question, its own survey, edits that mirror into the panes", () => {
   const creator = createSideBySideCreator(dropdownChoicesJSON);
   const model = getModel(creator);
   const realMatrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q3");
-  model.toggleElementStrings(realMatrix);
+  model.showElementStringsDialog(realMatrix);
   const grid = model.elementStringsModel;
   expect(grid.showAllElementStrings).toBeFalsy();
-  // No nested surveys: the block is one matrix question rendered by the pane itself.
+  // No strings grid: the dialog is one matrix question in a survey of its own.
   expect(grid.stringsSurvey).toBeFalsy();
   expect(grid.stringsHeaderSurvey).toBeFalsy();
+  expect(model.elementStringsSurvey.pages).toHaveLength(1);
+  expect(model.elementStringsSurvey.getAllQuestions()).toHaveLength(1);
   const stringsMatrix = getStringsMatrix(model);
   expect(stringsMatrix.getType()).toBe("matrixdropdown");
-  // No caption text and no column header: the block is rendered at the element it belongs to,
-  // in the target pane. The title row itself stays - it carries the caption's actions.
+  // No caption text and no column header: the dialog's own title names the element. The title
+  // row itself stays - it carries the caption's actions.
   expect(stringsMatrix.locTitle.renderedHtml).toBe("");
   expect(stringsMatrix.hasTitle).toBeTruthy();
   expect(stringsMatrix.showHeader).toBeFalsy();
+  // The matrix's styles are scoped to its own class.
+  expect(stringsMatrix.cssClasses.mainRoot).toContain("st-element-strings");
   // One column, the target locale: the source text is merged into the row titles, so the editor
   // gets the width the source column had.
   expect(stringsMatrix.columns).toHaveLength(1);
   expect(stringsMatrix.columns[0].name).toBe("de");
   expect(stringsMatrix.columns[0].readOnly).toBeFalsy();
-  // The column choices are reachable through the block only - they are rows of the same matrix,
+  // The column choices are reachable through the dialog only - they are rows of the same matrix,
   // labelled with the path to the string.
   const realChoiceLocText = (<any>realMatrix.columns[0]).templateQuestion.choices[0].locText;
   const choiceRow = getStringsRow(stringsMatrix, realChoiceLocText);
   expect(choiceRow).toBeTruthy();
   expect(choiceRow.item.text).toContain("Choices");
-  // The target cell is the editor - the pane is a design-mode survey, where every other input
-  // renders read-only and disabled.
+  // The cell is a plain runtime editor - the dialog's survey is not a design-mode one.
   const targetCell = choiceRow.cells[0].question;
   expect(targetCell.isInputReadOnly).toBeFalsy();
   expect(targetCell.isDisabledAttr).toBeFalsy();
@@ -701,18 +698,19 @@ test("question strings title action: present on every target pane question, abse
   expect(actionsOf(model.targetSurvey, "q5")).toHaveLength(1);
   expect(actionsOf(model.targetSurvey, "q1")).toHaveLength(1);
   expect(actionsOf(model.sourceSurvey, "q3")).toHaveLength(0);
-  // The action opens the question's inline strings block and closes it again.
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q3"));
+  // The action opens the question's strings dialog over the real question.
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q3"));
   expect(model.elementStringsModel).toBeTruthy();
   expect(model.elementStringsModel.element).toBe(creator.survey.getQuestionByName("q3"));
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q3"));
+  model.hideElementStringsDialog();
   expect(model.elementStringsModel).toBeFalsy();
+  expect(model.elementStringsSurvey).toBeFalsy();
 });
 
-test("element strings block: the used/all strings filter is a caption action", () => {
+test("element strings dialog: the used/all strings filter is a caption action", () => {
   const creator = createSideBySideCreator(dropdownChoicesJSON);
   const model = getModel(creator);
-  model.toggleElementStrings(creator.survey.getQuestionByName("q5"));
+  model.showElementStringsDialog(creator.survey.getQuestionByName("q5"));
   const grid = model.elementStringsModel;
   // Used Strings Only is the default mode; the action offers the mode it switches to.
   expect(grid.showAllElementStrings).toBeFalsy();
@@ -726,18 +724,17 @@ test("element strings block: the used/all strings filter is a caption action", (
   const usedRenderedTable = stringsMatrix.renderedTable;
   const targetPane = model.targetSurvey;
   const sourcePane = model.sourceSurvey;
-  // Rendered: the rows and their cells report to the pane survey from here on.
   stringsMatrix.visibleRows.forEach(row => row.cells.forEach(cell => cell.question.getType()));
   filter.action();
-  // Only the matrix is updated - the panes are neither rebuilt nor re-created, and the block
-  // is the same one, not a restored copy of itself.
+  // Only the matrix is updated - the panes are neither rebuilt nor re-created, and the dialog
+  // is the same one, not a re-opened copy of itself.
   expect(model.targetSurvey).toBe(targetPane);
   expect(model.sourceSurvey).toBe(sourcePane);
   expect(model.elementStringsModel).toBe(grid);
   expect(grid.showAllElementStrings).toBeTruthy();
   expect(filter.title).toBe("Used Strings Only");
   // The all-strings mode adds the empty localizable properties (description etc.) as rows -
-  // into the same matrix, which keeps its place and its title actions in the pane.
+  // into the same matrix, which keeps its place and its title actions.
   expect(getStringsMatrix(model)).toBe(stringsMatrix);
   expect(stringsMatrix.rows.length).toBeGreaterThan(usedCount);
   // The very first click shows them: the rendered table follows the rows in the same step, and
@@ -757,7 +754,7 @@ test("element strings block: the used/all strings filter is a caption action", (
   // The chosen mode is stored: the next element opens with it, and so does the next model
   // (the plugin carries it over a tab switch).
   expect(model.showAllElementStrings).toBeTruthy();
-  model.toggleElementStrings(creator.survey.getQuestionByName("q1"));
+  model.showElementStringsDialog(creator.survey.getQuestionByName("q1"));
   expect(model.elementStringsModel.showAllElementStrings).toBeTruthy();
   expect(model.elementStringsModel.captionActions
     .filter(action => action.id === "svc-translation-strings-filter")[0].title).toBe("Used Strings Only");
@@ -766,17 +763,17 @@ test("element strings block: the used/all strings filter is a caption action", (
   expect(getModel(creator).showAllElementStrings).toBeTruthy();
 });
 
-test("element strings block: the empty-element fallback to all strings is not stored", () => {
+test("element strings dialog: the empty-element fallback to all strings is not stored", () => {
   const creator = createSideBySideCreator(containersJSON);
   const model = getModel(creator);
-  // page2 has no stored strings - its block shows all of them and cannot switch back.
-  model.togglePageStrings(model.targetSurvey.getPageByName("page2"));
+  // page2 has no stored strings - its dialog shows all of them and cannot switch back.
+  model.showPageStringsDialog(model.targetSurvey.getPageByName("page2"));
   expect(model.elementStringsModel.showAllElementStrings).toBeTruthy();
   expect(model.elementStringsModel.captionActions
     .filter(action => action.id === "svc-translation-strings-filter")[0].enabled).toBeFalsy();
   expect(model.showAllElementStrings).toBeFalsy();
   // The next element opens in the used-strings mode the user never left.
-  model.togglePageStrings(model.targetSurvey.getPageByName("page1"));
+  model.showPageStringsDialog(model.targetSurvey.getPageByName("page1"));
   expect(model.elementStringsModel.showAllElementStrings).toBeFalsy();
 });
 
@@ -816,12 +813,12 @@ test("survey, page and panel translate actions: target pane only, a panel withou
   expect((<any>model.targetSurvey).hasTitleActions).toBeTruthy();
   expect(model.targetSurvey.getTitleToolbar().actions.map(action => action.id)).toContain("svc-translate-survey");
   expect((<any>model.sourceSurvey).hasTitleActions).toBeFalsy();
-  // Every action opens the inline strings block of its own element.
-  model.toggleSurveyStrings();
+  // Every action opens the strings dialog of its own element.
+  model.showSurveyStringsDialog();
   expect(model.elementStringsModel.element).toBe(<any>creator.survey);
-  model.togglePageStrings(model.targetSurvey.pages[0]);
+  model.showPageStringsDialog(model.targetSurvey.pages[0]);
   expect(model.elementStringsModel.element).toBe(creator.survey.pages[0]);
-  model.togglePanelStrings(<any>model.targetSurvey.getPanelByName("panel1"));
+  model.showPanelStringsDialog(<any>model.targetSurvey.getPanelByName("panel1"));
   expect(model.elementStringsModel.element).toBe(creator.survey.getPanelByName("panel1"));
 });
 
@@ -928,11 +925,11 @@ test("element strings models: survey/page/panel grids cover own strings only, wi
   const pageGrid = model.createElementStringsModel(creator.survey.pages[0]);
   expect(pageGrid.root.groups).toHaveLength(0);
   expect(pageGrid.root.locItems.map(item => item.name)).toContain("title");
-  // page1 stores a title - the block keeps the used-only default and an enabled filter action.
+  // page1 stores a title - the dialog keeps the used-only default and an enabled filter action.
   expect(pageGrid.showAllElementStrings).toBeFalsy();
   expect(pageGrid.captionActions.filter(action => action.id === "svc-translation-strings-filter")[0].enabled).toBeTruthy();
   pageGrid.dispose();
-  // page2 stores no strings - the used-only mode would show an empty matrix, so the block
+  // page2 stores no strings - the used-only mode would show an empty matrix, so the dialog
   // falls back to all strings and the filter action cannot switch back.
   const emptyPageGrid = model.createElementStringsModel(creator.survey.pages[1]);
   expect(emptyPageGrid.showAllElementStrings).toBeTruthy();
@@ -945,10 +942,10 @@ test("element strings models: survey/page/panel grids cover own strings only, wi
   panelGrid.dispose();
 });
 
-test("element strings block: survey strings edits mirror into the panes", () => {
+test("element strings dialog: survey strings edits mirror into the panes", () => {
   const creator = createSideBySideCreator(containersJSON);
   const model = getModel(creator);
-  model.toggleSurveyStrings();
+  model.showSurveyStringsDialog();
   const titleRow = getStringsRow(getStringsMatrix(model), creator.survey.locTitle);
   expect(titleRow).toBeTruthy();
   titleRow.cells[0].question.value = "Umfragetitel neu";
@@ -1037,23 +1034,23 @@ test("element state indicator: question states for translated / untranslated / n
   expect(model.getElementTranslationState(target.getQuestionByName("q1"))).toBe("translated");
   expect(model.getElementTranslationState(target.getQuestionByName("q2"))).toBe("untranslated");
   // q3 has no title of its own, so it is displayed - and translated - by its name: one string,
-  // exactly the row its strings block lists.
+  // exactly the row its strings dialog lists.
   expect(model.getElementTranslationState(target.getQuestionByName("q3"))).toBe("untranslated");
   expect(model.getElementUntranslatedCount(target.getQuestionByName("q3"))).toBe(1);
   // The real-survey elements resolve to the same states as the pane copies.
   expect(model.getElementTranslationState(creator.survey.getQuestionByName("q2"))).toBe("untranslated");
   // The button carries the css modifier, the state tooltip and - in the untranslated state
-  // only - the number of strings left to translate. The chevron is its only icon.
+  // only - the number of strings left to translate. The language icon is its only icon.
   const translatedAction = getStateAction(target.getQuestionByName("q1"));
   expect(translatedAction).toBeTruthy();
   expect(translatedAction.id).toBe("svc-translate-question");
-  expect(translatedAction.iconName).toBe("icon-chevron_16x16");
+  expect(translatedAction.iconName).toBe("icon-language");
   expect(translatedAction.css).toContain("svc-translation-state--translated");
   expect(translatedAction.tooltip).toBe("All strings are translated");
   expect(translatedAction.showTitle).toBeFalsy();
   expect(translatedAction.title).toBe("");
   const untranslatedAction = getStateAction(target.getQuestionByName("q2"));
-  expect(untranslatedAction.iconName).toBe("icon-chevron_16x16");
+  expect(untranslatedAction.iconName).toBe("icon-language");
   expect(untranslatedAction.css).toContain("svc-translation-state--untranslated");
   expect(untranslatedAction.tooltip).toBe("1 strings are not translated");
   expect(untranslatedAction.showTitle).toBeTruthy();
@@ -1071,9 +1068,6 @@ test("element state indicator: question states for translated / untranslated / n
   expect(noneAction.tooltip).toBe("No strings to translate");
   expect(noneAction.showTitle).toBeFalsy();
   expect(noneModel.getElementUntranslatedCount(nonePage)).toBe(0);
-  // No block is open - no button shows the expanded modifier.
-  expect(translatedAction.css).not.toContain("svc-translation-state--expanded");
-  expect(untranslatedAction.css).not.toContain("svc-translation-state--expanded");
   // The state is carried by the target pane's actions only.
   expect(getStateAction(target.getPageByName("page1"))).toBeTruthy();
   expect(getStateAction(model.sourceSurvey.getQuestionByName("q1"))).toBeFalsy();
@@ -1121,12 +1115,12 @@ test("element state indicator: choices without a text of their own count - they 
   const model = getModel(creator);
   model.targetLocale = "de";
   const question = model.targetSurvey.getQuestionByName("preferredContact");
-  // The title and the three choices - the rows the element strings block lists.
+  // The title and the three choices - the rows the element strings dialog lists.
   expect(model.getElementUntranslatedCount(question)).toBe(4);
   expect(getStateAction(question).title).toBe("4");
   // The same strings the whole-survey progress is measured against.
   expect(model.getTranslationProgress("de")).toEqual({ translated: 0, total: 4 });
-  model.showElementStrings(creator.survey.getQuestionByName("preferredContact"));
+  model.showElementStringsDialog(creator.survey.getQuestionByName("preferredContact"));
   expect(model.elementStringsModel.root.allLocItems).toHaveLength(4);
   // Translating a choice moves the count.
   ItemValue.getItemByValue((<QuestionDropdownModel>creator.survey.getQuestionByName("preferredContact")).choices, "Phone")
@@ -1320,21 +1314,21 @@ const autoTranslateJSON = {
   }]
 };
 
-// The auto-translate button of the block's caption row.
+// The auto-translate button of the dialog's caption row.
 function getMachineAction(grid: any): any {
   return grid.captionActions.filter((action: any) => action.id === "svc-translation-machine")[0];
 }
 
-test("element strings block: auto-translate button is shown only when machine translation is available", () => {
+test("element strings dialog: auto-translate button is shown only when machine translation is available", () => {
   const creator = createSideBySideCreator(autoTranslateJSON);
   const model = getModel(creator);
   const realQ1 = creator.survey.getQuestionByName("q1");
   let grid = model.createElementStringsModel(realQ1);
   expect(getMachineAction(grid)).toBeFalsy();
-  // The filter and the closing button are always there; the closing one goes last, at the
-  // right edge of the caption.
+  // The filter is always there; the dialog is closed by its own footer button, so the caption
+  // row carries no closing action.
   expect(grid.captionActions.map((action: any) => action.id))
-    .toEqual(["svc-translation-strings-filter", "svc-translation-strings-close"]);
+    .toEqual(["svc-translation-strings-filter"]);
   grid.dispose();
   creator.onMachineTranslate.add((_, options) => { options.callback(options.strings.map(str => "de: " + str)); });
   grid = model.createElementStringsModel(realQ1);
@@ -1342,11 +1336,11 @@ test("element strings block: auto-translate button is shown only when machine tr
   expect(action).toBeTruthy();
   expect(action.enabled).toBeTruthy();
   expect(grid.captionActions.map((item: any) => item.id))
-    .toEqual(["svc-translation-machine", "svc-translation-strings-filter", "svc-translation-strings-close"]);
+    .toEqual(["svc-translation-machine", "svc-translation-strings-filter"]);
   grid.dispose();
 });
 
-test("element strings block: auto-translate button is disabled when all used strings are translated or there is nothing to translate", () => {
+test("element strings dialog: auto-translate button is disabled when all used strings are translated or there is nothing to translate", () => {
   const creator = createSideBySideCreator(stateJSON);
   creator.onMachineTranslate.add((_, options) => { options.callback(options.strings.map(str => "de: " + str)); });
   const model = getModel(creator);
@@ -1365,7 +1359,7 @@ test("element strings block: auto-translate button is disabled when all used str
   grid.dispose();
 });
 
-test("element strings block: auto-translate fills only the empty target texts of the used strings", () => {
+test("element strings dialog: auto-translate fills only the empty target texts of the used strings", () => {
   const creator = createSideBySideCreator(autoTranslateJSON);
   let fromLocale = "";
   let toLocale = "";
@@ -1399,7 +1393,7 @@ test("element strings block: auto-translate fills only the empty target texts of
   grid.dispose();
 });
 
-test("element strings block: auto-translate covers the used strings only, whatever the current filter is", () => {
+test("element strings dialog: auto-translate covers the used strings only, whatever the current filter is", () => {
   const creator = createSideBySideCreator(autoTranslateJSON);
   let passedStrings: Array<string> = [];
   creator.onMachineTranslate.add((_, options) => {
@@ -1434,199 +1428,151 @@ const inlineBlockJSON = {
   ]
 };
 
-// The host questions of the open block: the same element in both panes, at the same index.
-function getHosts(survey: any): Array<any> {
-  // The host questions themselves - the matrix cells inside them carry the same mark.
-  return survey.getAllQuestions(false, false, true)
-    .filter((question: any) => !!question.isTranslationStringsHost && !question.parentQuestion);
+// The dialog options the model passes to settings.showDialog, captured instead of shown.
+function withDialog(fn: (dialogs: Array<any>) => void): void {
+  const origin = surveySettings.showDialog;
+  const dialogs: Array<any> = [];
+  surveySettings.showDialog = (options: any): any => {
+    const popup = {
+      options: options,
+      locale: "",
+      footerToolbar: { actions: [{ title: "Apply" }, { title: "Cancel" }] },
+      model: { hide: (): void => { options.onHide(); } }
+    };
+    dialogs.push(popup);
+    return popup;
+  };
+  try {
+    fn(dialogs);
+  } finally {
+    surveySettings.showDialog = origin;
+  }
 }
-function getHostIndex(model: TranslationSideBySide, survey: any, containerName: string): number {
-  const container = survey.getPageByName(containerName) || survey.getPanelByName(containerName);
-  return container.elements.filter((element: any) => !!element.isTranslationStringsHost).length > 0
-    ? container.elements.indexOf(getHosts(survey)[0]) : -1;
-}
 
-test("element strings block: opens right below the clicked question, in both panes", () => {
-  const creator = createSideBySideCreator(inlineBlockJSON);
-  const model = getModel(creator);
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
-  expect(model.elementStringsModel).toBeTruthy();
-  expect(model.elementStringsModel.element).toBe(creator.survey.getQuestionByName("q1"));
-  // q2 shares the row with q1 (startWithNewLine = false), and the block still goes directly
-  // below q1 - the row is split so that the block gets a row of its own and q2 opens the next one.
-  expect(getHosts(model.targetSurvey)).toHaveLength(1);
-  expect(getHosts(model.sourceSurvey)).toHaveLength(1);
-  expect(getHostIndex(model, model.targetSurvey, "page1")).toBe(1);
-  expect(getHostIndex(model, model.sourceSurvey, "page1")).toBe(1);
-  [model.targetSurvey, model.sourceSurvey].forEach(pane => {
-    const page = pane.getPageByName("page1");
-    expect(pane.getQuestionByName("q2").startWithNewLine).toBeTruthy();
-    expect(page.rows.map(row => row.elements.map(element => element.name).join(","))).toStrictEqual([
-      "q1", "svc-translation-strings-host", "q2", "panel1"
-    ]);
-  });
-  // The host carries no translate action of its own.
-  expect(getHosts(model.targetSurvey)[0].getTitleActions()
-    .filter((action: any) => action.id === "svc-translate-question")).toHaveLength(0);
-  // Closing the block gives q2 its row back.
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
-  [model.targetSurvey, model.sourceSurvey].forEach(pane => {
-    expect(pane.getQuestionByName("q2").startWithNewLine).toBeFalsy();
-    expect(pane.getPageByName("page1").rows.map(row => row.elements.map(element => element.name).join(",")))
-      .toStrictEqual(["q1,q2", "panel1"]);
+test("element strings dialog: shown as a modal over the element's own survey, with a single closing button", () => {
+  withDialog(dialogs => {
+    const creator = createSideBySideCreator(inlineBlockJSON);
+    const model = getModel(creator);
+    model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
+    expect(dialogs).toHaveLength(1);
+    const options = dialogs[0].options;
+    // The dialog renders the model's own survey through the component every UI package registers.
+    expect(options.componentName).toBe("survey-widget");
+    expect(options.data.model).toBe(model.elementStringsSurvey);
+    expect(options.title).toBe("Question 1");
+    expect(options.cssClass).toContain("st-element-strings-dialog");
+    // The edits apply immediately: the apply/cancel pair is replaced by one closing button.
+    expect(dialogs[0].footerToolbar.actions).toHaveLength(1);
+    expect(dialogs[0].footerToolbar.actions[0].title).toBe("Done");
+    // Closing it disposes the model and the survey it was rendered in.
+    const stringsModel = model.elementStringsModel;
+    const stringsSurvey = model.elementStringsSurvey;
+    options.onHide();
+    expect(model.elementStringsModel).toBeFalsy();
+    expect(model.elementStringsSurvey).toBeFalsy();
+    expect(stringsModel.isDisposed).toBeTruthy();
+    expect(stringsSurvey.isDisposed).toBeTruthy();
+    // The pages, the panels and the survey itself are named by their title as well.
+    model.showPageStringsDialog(model.targetSurvey.getPageByName("page2"));
+    expect(dialogs[1].options.title).toBe("Page 2 title");
+    model.showPanelStringsDialog(<any>model.targetSurvey.getPanelByName("panel1"));
+    expect(dialogs[2].options.title).toBe("Panel 1");
+    model.showSurveyStringsDialog();
+    expect(dialogs[3].options.title).toBe("Survey title");
   });
 });
 
-test("element strings block: page, panel and survey open at the top of their container", () => {
-  const creator = createSideBySideCreator(inlineBlockJSON);
-  const model = getModel(creator);
-  model.togglePanelStrings(<any>model.targetSurvey.getPanelByName("panel1"));
-  expect(getHostIndex(model, model.targetSurvey, "panel1")).toBe(0);
-  expect(getHostIndex(model, model.sourceSurvey, "panel1")).toBe(0);
-  expect(model.elementStringsModel.element).toBe(creator.survey.getPanelByName("panel1"));
-  model.togglePageStrings(model.targetSurvey.getPageByName("page2"));
-  expect(getHostIndex(model, model.targetSurvey, "page2")).toBe(0);
-  expect(getHostIndex(model, model.sourceSurvey, "page2")).toBe(0);
-  expect(model.elementStringsModel.element).toBe(creator.survey.pages[1]);
-  // The survey block is not page content: it goes into the contentTop layout container, which
-  // renders between the survey header and the page - not below the page title and description.
-  model.toggleSurveyStrings();
-  expect(model.elementStringsModel.element).toBe(<any>creator.survey);
-  expect(getHosts(model.targetSurvey)).toHaveLength(0);
-  expect(getHosts(model.sourceSurvey)).toHaveLength(0);
-  const targetBlockSurvey = getBlockSurvey(model.targetSurvey);
-  const sourceBlockSurvey = getBlockSurvey(model.sourceSurvey);
-  expect(targetBlockSurvey).toBeTruthy();
-  expect(sourceBlockSurvey).toBeTruthy();
-  // One page, one question: the matrix in the target pane, the spacer in the source one.
-  expect(targetBlockSurvey.pages).toHaveLength(1);
-  expect(targetBlockSurvey.getAllQuestions()).toHaveLength(1);
-  expect(getStringsMatrix(model).getType()).toBe("matrixdropdown");
-  expect(sourceBlockSurvey.getAllQuestions()[0].getType()).toBe("html");
-  // The caption actions are the matrix's title actions there as well.
-  expect(getStringsMatrix(model).getTitleActions().map((action: any) => action.id))
-    .toContain("svc-translation-strings-close");
-  // The block's styles are scoped to the host class - this survey carries it like the panes do,
-  // in both of them: the row titles are drawn by it, and so is the spacer's zero padding.
-  expect(getStringsMatrix(model).cssClasses.mainRoot).toContain("st-element-strings-host");
-  expect(sourceBlockSurvey.getAllQuestions()[0].cssClasses.mainRoot).toContain("st-element-strings-host");
-  // Closing takes the layout element away from both panes.
-  model.hideElementStrings();
-  expect(getBlockSurvey(model.targetSurvey)).toBeFalsy();
-  expect(getBlockSurvey(model.sourceSurvey)).toBeFalsy();
+test("element strings dialog: opening another element closes the dialog that is up", () => {
+  withDialog(dialogs => {
+    const creator = createSideBySideCreator(inlineBlockJSON);
+    const model = getModel(creator);
+    model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
+    const firstModel = model.elementStringsModel;
+    model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q4"));
+    expect(dialogs).toHaveLength(2);
+    expect(model.elementStringsModel).not.toBe(firstModel);
+    expect(firstModel.isDisposed).toBeTruthy();
+    expect(model.elementStringsModel.element).toBe(creator.survey.getQuestionByName("q4"));
+    // The dialog that was replaced reports its hiding afterwards - it must not take the
+    // current model with it.
+    dialogs[0].options.onHide();
+    expect(model.elementStringsModel).toBeTruthy();
+    expect(model.elementStringsModel.element).toBe(creator.survey.getQuestionByName("q4"));
+  });
 });
 
-test("element strings block: only one element is expanded at a time", () => {
-  const creator = createSideBySideCreator(inlineBlockJSON);
-  const model = getModel(creator);
-  const q1Action = getStateAction(model.targetSurvey.getQuestionByName("q1"));
-  const q4Action = getStateAction(model.targetSurvey.getQuestionByName("q4"));
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
-  const firstModel = model.elementStringsModel;
-  expect(model.isElementStringsExpanded(creator.survey.getQuestionByName("q1"))).toBeTruthy();
-  expect(q1Action.css).toContain("svc-translation-state--expanded");
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q4"));
-  expect(getHosts(model.targetSurvey)).toHaveLength(1);
-  expect(getHosts(model.sourceSurvey)).toHaveLength(1);
-  expect(model.elementStringsModel).not.toBe(firstModel);
-  expect(firstModel.isDisposed).toBeTruthy();
-  expect(model.isElementStringsExpanded(creator.survey.getQuestionByName("q1"))).toBeFalsy();
-  expect(model.isElementStringsExpanded(creator.survey.getQuestionByName("q4"))).toBeTruthy();
-  expect(q1Action.css).not.toContain("svc-translation-state--expanded");
-  expect(q4Action.css).toContain("svc-translation-state--expanded");
-});
-
-test("element strings block: the button toggles it and the count is recomputed on closing", () => {
+test("element strings dialog: the count of the element button is recomputed on closing", () => {
   const creator = createSideBySideCreator(inlineBlockJSON);
   const model = getModel(creator);
   const action = getStateAction(model.targetSurvey.getQuestionByName("q1"));
   expect(action.title).toBe("1");
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  expect(action.iconName).toBe("icon-language");
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const stringsModel = model.elementStringsModel;
-  // The closing action of the caption row does what the element's own button does.
-  const closeAction = stringsModel.captionActions.filter(item => item.id === "svc-translation-strings-close")[0];
   creator.survey.getQuestionByName("q1").locTitle.setLocaleText("de", "Frage 1");
-  closeAction.action();
+  model.hideElementStringsDialog();
   expect(model.elementStringsModel).toBeFalsy();
   expect(stringsModel.isDisposed).toBeTruthy();
-  expect(getHosts(model.targetSurvey)).toHaveLength(0);
-  expect(getHosts(model.sourceSurvey)).toHaveLength(0);
-  expect(action.css).not.toContain("svc-translation-state--expanded");
   expect(action.css).toContain("svc-translation-state--translated");
   expect(action.showTitle).toBeFalsy();
 });
 
-test("element strings block: a grid edit updates the button count and mirrors into the target pane", () => {
+test("element strings dialog: a matrix edit updates the button count and mirrors into the target pane", () => {
   const creator = createSideBySideCreator(inlineBlockJSON);
   const model = getModel(creator);
   const action = getStateAction(model.targetSurvey.getQuestionByName("q1"));
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const item = model.elementStringsModel.root.allLocItems
     .filter(locItem => locItem.locString === creator.survey.getQuestionByName("q1").locTitle)[0];
   expect(item).toBeTruthy();
   model.elementStringsModel.setItemLocText(item, "de", "Frage 1");
   expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("Frage 1");
   expect(model.targetSurvey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("Frage 1");
-  // The block stays open - the edit is not a structural change of the survey.
+  // The dialog stays open - the edit is not a structural change of the survey.
   expect(model.elementStringsModel).toBeTruthy();
-  expect(getHosts(model.targetSurvey)).toHaveLength(1);
   expect(action.css).toContain("svc-translation-state--translated");
   expect(action.showTitle).toBeFalsy();
 });
 
-test("element strings block: survives a pane rebuild, closes with the target language and with its element", () => {
+test("element strings dialog: survives a pane rebuild, closes with the target language and with its element", () => {
   const creator = createSideBySideCreator(inlineBlockJSON);
   const model = getModel(creator);
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
-  expect(getHosts(model.targetSurvey)).toHaveLength(1);
-  // A structural change of the real survey rebuilds the panes - the block is restored on the
-  // fresh copies, on the same element and at one host per pane.
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
+  const stringsModel = model.elementStringsModel;
+  // A structural change of the real survey rebuilds the panes - the dialog is over the real
+  // survey, so it is not one of the objects that go with them.
   creator.survey.pages[0].addNewQuestion("text", "q5");
-  expect(model.elementStringsModel).toBeTruthy();
+  expect(model.elementStringsModel).toBe(stringsModel);
   expect(model.elementStringsModel.element).toBe(creator.survey.getQuestionByName("q1"));
-  expect(getHosts(model.targetSurvey)).toHaveLength(1);
-  expect(getHosts(model.sourceSurvey)).toHaveLength(1);
-  // The hosts stay out of the string mapping the rebuild built - the panes keep mirroring.
+  // The fresh copies keep mirroring.
   creator.survey.getQuestionByName("q1").locTitle.setLocaleText("de", "Frage 1");
   expect(model.targetSurvey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("Frage 1");
-  // The element itself is gone: there is nothing to restore the block on.
+  // The element itself is gone: there is nothing left to edit.
   creator.survey.pages[0].removeElement(creator.survey.getQuestionByName("q1"));
   expect(model.elementStringsModel).toBeFalsy();
-  expect(getHosts(model.targetSurvey)).toHaveLength(0);
-  expect(getHosts(model.sourceSurvey)).toHaveLength(0);
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q4"));
-  expect(getHosts(model.targetSurvey)).toHaveLength(1);
+  expect(stringsModel.isDisposed).toBeTruthy();
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q4"));
+  expect(model.elementStringsModel).toBeTruthy();
+  // No target language - no column to translate into.
   model.targetLocale = "";
   expect(model.targetSurvey).toBeFalsy();
   expect(model.elementStringsModel).toBeFalsy();
-  expect(getHosts(model.sourceSurvey)).toHaveLength(0);
 });
 
-test("element strings block: a dialog-only string edited in the matrix does not rebuild the panes", () => {
+test("element strings dialog: a dialog-only string edited in the matrix does not rebuild the panes", () => {
   const creator = createSideBySideCreator(dropdownChoicesJSON);
   const model = getModel(creator);
   const realMatrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q3");
-  model.toggleElementStrings(realMatrix);
+  model.showElementStringsDialog(realMatrix);
   const stringsMatrix = getStringsMatrix(model);
   const targetPane = model.targetSurvey;
   const realChoiceLocText = (<any>realMatrix.columns[0]).templateQuestion.choices[0].locText;
   // The column choice is not rendered by the panes, so it is not a mapped string - and it is
-  // still a text change, not a structural one: the panes stay, and so does the open block.
+  // still a text change, not a structural one: the panes stay, and so does the open dialog.
   getStringsRow(stringsMatrix, realChoiceLocText).cells[0].question.value = "AA-de";
   expect(model.targetSurvey).toBe(targetPane);
   expect(model.elementStringsModel).toBeTruthy();
   expect(getStringsMatrix(model)).toBe(stringsMatrix);
-});
-
-test("element strings block: the source spacer follows the block height reported by the UI", () => {
-  const creator = createSideBySideCreator(inlineBlockJSON);
-  const model = getModel(creator);
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
-  expect(model.elementStringsHeight).toBe(0);
-  model.setElementStringsHeight(240.4);
-  expect(model.elementStringsHeight).toBe(240);
-  model.hideElementStrings();
-  expect(model.elementStringsHeight).toBe(0);
 });
 
 test("forms view CSV export includes all used locale columns", () => {
@@ -1673,48 +1619,43 @@ test("side-by-side model carries no all-languages machinery", () => {
   grid.dispose();
 });
 
-// The caption actions get their loc owner when the block's title toolbar is built - that is where
-// the strings of a title action would be resolved in the pane's (i.e. the target) locale.
+// The caption actions get their loc owner when the matrix's title toolbar is built - that is
+// where the strings of a title action would be resolved in the locale of whatever renders them.
 function renderCaption(model: TranslationSideBySide): void {
   const host = getStringsMatrix(model);
   host.getTitleToolbar();
   host.locStrsChanged();
 }
 
-test("element strings block: caption actions follow the creator UI locale, not the target language", () => {
+test("element strings dialog: caption actions follow the creator UI locale, not the target language", () => {
   const creator = createSideBySideCreator(inlineBlockJSON);
   creator.onMachineTranslate.add((_, options) => { options.callback(options.strings.map(str => "de: " + str)); });
   const model = getModel(creator);
   const machineTitle = editorLocalization.getString("ed.translateUsigAI");
-  const closeTooltip = editorLocalization.getString("ed.translationElementStringsClose");
+  const filterTitle = editorLocalization.getString("ed.translationShowAllStrings");
   const captionOf = (): Array<any> => model.elementStringsModel.captionActions;
   const idOf = (actions: Array<any>, id: string): any => actions.filter(action => action.id === id)[0];
-  // The target language has creator strings of its own - that is what the panes would resolve
-  // the caption actions with.
+  // The target language has creator strings of its own - that is what an action resolving a
+  // localization name in the language being translated into would show.
   const savedDeStrings = editorLocalization.locales["de"];
   editorLocalization.locales["de"] = {
-    ed: { translateUsigAI: "de: auto-translate", translationElementStringsClose: "de: close" }
+    ed: { translateUsigAI: "de: auto-translate", translationShowAllStrings: "de: all strings" }
   };
   try {
-    // A question block lives in the target pane, and that pane survey runs in the target locale.
-    // The actions re-read their strings whenever the pane does (a render, a locale change) - and
-    // they are hosted in a question's title toolbar, so that is where the locale would come from.
-    model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+    model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
     expect(model.targetSurvey.locale).toBe("de");
     renderCaption(model);
     expect(idOf(captionOf(), "svc-translation-machine").title).toBe(machineTitle);
-    expect(idOf(captionOf(), "svc-translation-strings-close").tooltip).toBe(closeTooltip);
-    // The survey block is hosted in a survey of its own, without a locale - same result.
-    model.toggleSurveyStrings();
+    expect(idOf(captionOf(), "svc-translation-strings-filter").title).toBe(filterTitle);
+    model.showSurveyStringsDialog();
     renderCaption(model);
     expect(idOf(captionOf(), "svc-translation-machine").title).toBe(machineTitle);
-    expect(idOf(captionOf(), "svc-translation-strings-close").tooltip).toBe(closeTooltip);
     // The creator UI locale is what they do follow.
     editorLocalization.currentLocale = "de";
-    model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q2"));
+    model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q2"));
     renderCaption(model);
     expect(idOf(captionOf(), "svc-translation-machine").title).toBe("de: auto-translate");
-    expect(idOf(captionOf(), "svc-translation-strings-close").tooltip).toBe("de: close");
+    expect(idOf(captionOf(), "svc-translation-strings-filter").title).toBe("de: all strings");
   } finally {
     editorLocalization.currentLocale = "";
     if (savedDeStrings === undefined) {
@@ -1725,37 +1666,56 @@ test("element strings block: caption actions follow the creator UI locale, not t
   }
 });
 
-test("element strings block: an inline editor edit lands in the open matrix", () => {
+test("element strings dialog: an inline editor edit lands in the open matrix", () => {
   const creator = createSideBySideCreator(inlineBlockJSON);
   const model = getModel(creator);
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const stringsMatrix = getStringsMatrix(model);
   const realQ1 = creator.survey.getQuestionByName("q1");
   expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBeFalsy();
   // The inline editor of the target pane writes into the copy, which forwards the text to the
-  // real survey - the funnel that refreshes the block is closed on that path.
+  // real survey - the funnel that refreshes the dialog is closed on that path.
   model.targetSurvey.getQuestionByName("q1").locTitle.text = "Frage 1";
   expect(realQ1.locTitle.getLocaleText("de")).toBe("Frage 1");
   expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBe("Frage 1");
-  // An edit of another element leaves the open block alone.
+  // An edit of another element leaves the open dialog alone.
   const matrixValue = stringsMatrix.value;
   model.targetSurvey.getQuestionByName("q2").locTitle.text = "Frage 2";
   expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBe("Frage 2");
   expect(stringsMatrix.value).toEqual(matrixValue);
-  // No self-heal rebuild: the panes and the block are the same objects.
+  // No self-heal rebuild: the panes and the dialog are the same objects.
   expect(model.elementStringsModel).toBeTruthy();
   expect(getStringsMatrix(model)).toBe(stringsMatrix);
 });
 
-// The row ItemValue behind a real localizable string - its title is the block's merged first cell.
+// The row ItemValue behind a real localizable string - its title is the row's merged first cell.
 function getStringsRowItem(matrix: QuestionMatrixDropdownModel, locStr: any): any {
   return matrix.rows.filter(row => (<any>row)["translationData"].locString === locStr)[0];
 }
 
-test("element strings block: the row title merges the string name and its source text", () => {
+test("element strings dialog: the cells open with the stored target texts", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
+  const stringsMatrix = getStringsMatrix(model);
+  const realQ1 = creator.survey.getQuestionByName("q1");
+  // The matrix is filled before it joins the dialog's survey, and a question joining one takes
+  // its value from that survey's data - the texts must be there anyway, on the very first render.
+  expect(stringsMatrix.value).toBeTruthy();
+  expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBe("Frage 1");
+  // The source text is what the untranslated cells offer as their placeholder.
+  const emptyRow = getStringsRow(stringsMatrix, creator.survey.getQuestionByName("q4").locTitle);
+  expect(emptyRow).toBeFalsy();
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q4"));
+  const q4Row = getStringsRow(getStringsMatrix(model), creator.survey.getQuestionByName("q4").locTitle);
+  expect(q4Row.cells[0].question.value).toBeFalsy();
+  expect(q4Row.cells[0].question.placeholder).toBe("Question 4");
+});
+
+test("element strings dialog: the row title merges the string name and its source text", () => {
   const creator = createSideBySideCreator(inlineBlockJSON);
   const model = getModel(creator);
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const titleRow = getStringsRowItem(getStringsMatrix(model), creator.survey.getQuestionByName("q1").locTitle);
   expect(titleRow).toBeTruthy();
   expect(titleRow.locText.hasHtml).toBeTruthy();
@@ -1770,13 +1730,13 @@ test("element strings block: the row title merges the string name and its source
   expect(cellRow.cells[0].question.a11y_input_ariaLabel).not.toContain("<span");
 });
 
-test("element strings block: a string with no source text renders the name alone, and html is escaped", () => {
+test("element strings dialog: a string with no source text renders the name alone, and html is escaped", () => {
   const creator = createSideBySideCreator({
     locale: "de",
     pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "<b>Q1</b>" }] }]
   });
   const model = getModel(creator);
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const realQ1 = creator.survey.getQuestionByName("q1");
   const titleRow = getStringsRowItem(getStringsMatrix(model), realQ1.locTitle);
   expect(titleRow.locText.renderedHtml).toContain("&lt;b&gt;Q1&lt;/b&gt;");
@@ -1789,16 +1749,16 @@ test("element strings block: a string with no source text renders the name alone
   expect(descriptionRow.locText.renderedHtml).not.toContain("st-element-strings__row-source");
 });
 
-test("element strings block: the open matrix follows a locale switch", () => {
+test("element strings dialog: the open matrix follows a locale switch", () => {
   const creator = createSideBySideCreator(inlineBlockJSON);
   const model = getModel(creator);
   const realQ1 = creator.survey.getQuestionByName("q1");
   realQ1.locTitle.setLocaleText("fr", "Question 1 fr");
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("q1"));
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const stringsMatrix = getStringsMatrix(model);
   expect(stringsMatrix.columns[0].name).toBe("de");
   model.targetLocale = "fr";
-  // The panes are not rebuilt for a switch between two languages, and neither is the block.
+  // The panes are not rebuilt for a switch between two languages, and neither is the dialog.
   expect(model.elementStringsModel).toBeTruthy();
   expect(getStringsMatrix(model)).toBe(stringsMatrix);
   expect(stringsMatrix.columns).toHaveLength(1);
@@ -1880,13 +1840,13 @@ test("target language dropdown: the counts follow the edits, so the list is curr
   expect(getTargetChoices(creator).slice(0, 2).map((item: ItemValue) => item.value)).toEqual(["de", "es"]);
 });
 
-test("element strings block: a string the library localizes itself shows its source text and its target placeholder", () => {
+test("element strings dialog: a string the library localizes itself shows its source text and its target placeholder", () => {
   const creator = createSideBySideCreator({
     locale: "de",
     pages: [{ name: "page1", elements: [{ type: "boolean", name: "b1" }] }]
   });
   const model = getModel(creator);
-  model.toggleQuestionStrings(model.targetSurvey.getQuestionByName("b1"));
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("b1"));
   // labelTrue stores nothing in any locale, so it is one of the "all strings" rows.
   model.elementStringsModel.showAllElementStrings = true;
   const stringsMatrix = getStringsMatrix(model);
@@ -1914,7 +1874,7 @@ test("element strings block: a string the library localizes itself shows its sou
   expect(frRow.locText.renderedHtml).toContain(labelTrueName);
 });
 
-test("element strings block: every row is named by its property, on a question, a page, a panel and the survey", () => {
+test("element strings dialog: every row is named by its property, on a question, a page, a panel and the survey", () => {
   const creator = createSideBySideCreator({
     locale: "de",
     pages: [{
@@ -1923,7 +1883,7 @@ test("element strings block: every row is named by its property, on a question, 
     }]
   });
   const model = getModel(creator);
-  // The name of the first cell of every row of the open block, source text dropped.
+  // The name of the first cell of every row of the open dialog, source text dropped.
   const getRowNames = (): Array<string> => getStringsMatrix(model).rows.map((row: any) => {
     const html = row.locText.renderedHtml;
     const index = html.indexOf("</span>");
@@ -1934,19 +1894,19 @@ test("element strings block: every row is named by its property, on a question, 
   // The strings the library localizes itself are the "all strings" ones - an element shows them
   // with the filter on, and they are named by their property like a stored string is.
   [survey, survey.pages[0], panel, <any>survey.getQuestionByName("b1")].forEach((element: any) => {
-    model.toggleElementStrings(element);
+    model.showElementStringsDialog(element);
     model.elementStringsModel.showAllElementStrings = true;
     const names = getRowNames();
     expect(names.length).toBeGreaterThan(0);
     expect(names.filter(name => !name)).toHaveLength(0);
-    model.hideElementStrings();
+    model.hideElementStringsDialog();
   });
   // Spot checks, one string of the library's own per element kind.
   const expectName = (element: any, type: string, propertyName: string): void => {
-    model.toggleElementStrings(element);
+    model.showElementStringsDialog(element);
     model.elementStringsModel.showAllElementStrings = true;
     expect(getRowNames()).toContain(editorLocalization.getPropertyNameInEditor(type, propertyName));
-    model.hideElementStrings();
+    model.hideElementStringsDialog();
   };
   expectName(survey, "survey", "completeText");
   expectName(survey.pages[0], "page", "navigationTitle");
@@ -2025,7 +1985,7 @@ test("progress link: goes to the first untranslated string of the current page, 
   });
   const model = getModel(creator);
   expect(model.selectedPageName).toBe("page1");
-  // q2 is the only string of page1 with no German text - the click opens its strings block and
+  // q2 is the only string of page1 with no German text - the click opens its strings dialog and
   // stays on the page.
   model.selectFirstUntranslatedString();
   expect(model.selectedPageName).toBe("page1");
@@ -2039,7 +1999,7 @@ test("progress link: goes to the first untranslated string of the current page, 
   expect(model.elementStringsModel.element).toBe(creator.survey.getPageByName("page2"));
 });
 
-test("progress link: puts the input focus into the block's editor of the string it goes to", () => {
+test("progress link: puts the input focus into the dialog's editor of the string it goes to", () => {
   const creator = createSideBySideCreator({
     locale: "de",
     pages: [
@@ -2055,8 +2015,8 @@ test("progress link: puts the input focus into the block's editor of the string 
   const model = getModel(creator);
   const realQ2 = creator.survey.getQuestionByName("q2");
   const focused: Array<any> = [];
-  // The cells of a block hosted by a pane are focused through their input: the panes are
-  // design-mode surveys, where a question focuses nothing at all (see Question.focus).
+  // The cells are focused through their input: focus() is a no-op on a question whose
+  // survey is not rendered (see Question.focus).
   const originFocusInput = QuestionCommentModel.prototype.focusInputElement;
   QuestionCommentModel.prototype.focusInputElement = function (this: any): void { focused.push(this); };
   try {
@@ -2068,8 +2028,8 @@ test("progress link: puts the input focus into the block's editor of the string 
   const row = getStringsRow(getStringsMatrix(model), realQ2.locTitle);
   expect(row).toBeTruthy();
   expect(focused).toEqual([row.cells[row.cells.length - 1].question]);
-  // Nothing is rendered here, so the block keeps retrying - closing it drops the request.
-  model.hideElementStrings();
+  // Nothing is rendered here, so the model keeps retrying - closing it drops the request.
+  model.hideElementStringsDialog();
 });
 
 test("progress link: the clear button drops the language strings after a confirmation and keeps translating it", () => {

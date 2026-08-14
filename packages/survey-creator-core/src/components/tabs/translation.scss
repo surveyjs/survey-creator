@@ -370,17 +370,37 @@ td.st-table__cell:first-of-type {
   }
 }
 
-// The inline strings block of the expanded element: the strings matrix added to the target pane
-// (its title row is the block's caption and its title actions are the caption's buttons) and,
-// at the same position in the source pane, an empty question as high as the matrix.
-.st-element-strings-host {
-  // The closing action ends the caption row, at the pane's right edge.
-  .st-element-strings__close {
+// The element strings dialog: the strings matrix of one element, in a survey of its own (see
+// createStringsHostSurvey). It is the dialog's content, not a survey the user fills in, so the
+// runtime survey's own frame and paddings are dropped.
+.st-element-strings-dialog {
+  .sd-root-modern,
+  .sd-container-modern,
+  .sd-body,
+  .sd-body__page,
+  .sd-page {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+  }
+
+  .sd-page__content {
+    padding: 0;
+  }
+}
+
+// The strings matrix of the dialog: its title row is the caption row, and its title actions are
+// the caption's buttons (auto-translate, all/used strings).
+.st-element-strings {
+  // The caption row holds no text - its buttons end it, at the dialog's right edge.
+  .sd-action-title-bar {
     margin-left: auto;
   }
 
   // The merged first cell: the string name and, below it, its source-locale text. The matrix has
-  // no source column - this cell is the source side of the block, and the target editor takes the
+  // no source column - this cell is the source side of the row, and the target editor takes the
   // rest of the width (see createStringsMatrix).
   .st-element-strings__row-name,
   .st-element-strings__row-source {
@@ -397,40 +417,6 @@ td.st-table__cell:first-of-type {
   .st-element-strings__row-source {
     // The source text is read-only, but it is what the user copies from.
     user-select: text;
-  }
-}
-
-// Nothing of the question chrome may add to the spacer's height - it is set to the measured
-// height of the block in the target pane (see setElementStringsHeight).
-.st-side-by-side__source .st-element-strings-host {
-  .sd-question__header {
-    display: none;
-  }
-
-  .sd-question__header-and-content-container,
-  .sd-question__content {
-    padding: 0;
-  }
-}
-
-// The survey's own block: a survey of one page and one question, rendered in the pane's
-// contentTop container - between the survey header and the page (see addStringsHost). It is the
-// block, not a survey of its own, so it drops the runtime survey's own frame and paddings.
-.st-side-by-side .sv-components-container-contentTop {
-  .sd-root-modern,
-  .sd-container-modern,
-  .sd-body,
-  .sd-body__page,
-  .sd-page {
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    max-width: none;
-  }
-
-  .sd-page__content {
-    padding: 0;
   }
 }
 

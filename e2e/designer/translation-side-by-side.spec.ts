@@ -31,6 +31,14 @@ async function openSideBySideTranslation(page) {
 async function openLocaleDropdown(page, title: string) {
   await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: title }) }).click();
 }
+// The element strings dialog: the strings matrix of one element, in a modal of its own.
+function getStringsDialog(page) {
+  return page.locator(".sv-popup.st-element-strings-dialog");
+}
+async function closeStringsDialog(page) {
+  await getStringsDialog(page).locator(".sv-popup__body-footer button").click();
+  await expect(getStringsDialog(page)).toHaveCount(0);
+}
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
@@ -151,15 +159,16 @@ test.describe(title, () => {
     await expect(progressLink).toHaveText(/^\d+ of \d+ strings translated$/);
     const before = await progressLink.textContent();
 
-    // The click opens the strings block of the first element that has an untranslated string,
+    // The click opens the strings dialog of the first element that has an untranslated string,
     // with the input focus in its editor - translating there moves the counts.
     await progressLink.click();
-    const block = page.locator(".st-side-by-side__target [data-name='svc-translation-strings-host']");
-    await expect(block).toBeVisible();
-    await expect(block.locator("textarea:focus")).toHaveCount(1);
-    await block.locator("textarea:focus").fill("Uebersetzt");
+    const stringsDialog = getStringsDialog(page);
+    await expect(stringsDialog).toBeVisible();
+    await expect(stringsDialog.locator("textarea:focus")).toHaveCount(1);
+    await stringsDialog.locator("textarea:focus").fill("Uebersetzt");
     await page.keyboard.press("Tab");
     await expect(progressLink).not.toHaveText(before!);
+    await closeStringsDialog(page);
 
     // The clear button drops the language's texts after a confirmation; the language stays the
     // one being translated, so the target pane is still there and the progress starts over.
@@ -400,74 +409,65 @@ test.describe(title + " choices", () => {
     await expect(page.locator(".st-side-by-side__source [data-name=q5]").getByText("AA", { exact: true })).toBeVisible();
   });
 
-  test("question strings block: used/all filter, read-only source column, target edit updates the column choice translation", async ({ page }) => {
+  test("question strings dialog: used/all filter, merged source cell, target edit updates the column choice translation", async ({ page }) => {
     await openSideBySideWithChoices(page);
     // The panes render lazily - scroll the matrix into the view before using its title action.
     await page.locator(".st-side-by-side__target").evaluate(el => { el.scrollTop = el.scrollHeight; });
     await page.locator(".st-side-by-side__target [data-name=q3] .svc-translation-state").click();
-    const block = page.locator(".st-side-by-side__target [data-name='svc-translation-strings-host']");
-    await expect(block).toBeVisible();
-    // The source pane holds a spacer of the same height instead, so the panes keep their rows.
-    await expect(page.locator(".st-side-by-side__source [data-name='svc-translation-strings-host']")).toHaveCount(1);
+    const dialog = getStringsDialog(page);
+    await expect(dialog).toBeVisible();
+    // The dialog is named by the element it translates.
+    await expect(dialog.locator(".sv-popup__body-header")).toHaveText("q3");
 
     // The used/all strings action offers the mode it switches to; Used Strings Only is the
     // default, so empty strings (the matrix has no description) are hidden until then.
-    await expect(block.getByRole("button", { name: "All Strings" })).toBeVisible();
-    await expect(block.locator("table tr").filter({ hasText: "Question description" })).toHaveCount(0);
+    await expect(dialog.getByRole("button", { name: "All Strings" })).toBeVisible();
+    await expect(dialog.locator("table tr").filter({ hasText: "Question description" })).toHaveCount(0);
 
     // The col1 "A" choice row: the merged first cell holds the string name and its source text,
     // and the row's only editor is the target one.
-    const choiceRow = block.locator("table tr").filter({ hasText: "Choices" }).first();
+    const choiceRow = dialog.locator("table tr").filter({ hasText: "Choices" }).first();
     await expect(choiceRow.locator(".st-element-strings__row-source")).toHaveText("AA");
     await expect(choiceRow.locator("textarea")).toHaveCount(1);
-    const targetCell = choiceRow.locator("textarea").nth(0);
-    await targetCell.fill("AA de");
+    await choiceRow.locator("textarea").nth(0).fill("AA de");
     await page.keyboard.press("Tab");
 
     // Switching to All Strings adds the empty strings into the same matrix.
-    await block.getByRole("button", { name: "All Strings" }).click();
-    await expect(block.locator("table tr").filter({ hasText: "Question description" }).first()).toBeVisible();
-    await expect(block.getByRole("button", { name: "Used Strings Only" })).toBeVisible();
+    await dialog.getByRole("button", { name: "All Strings" }).click();
+    await expect(dialog.locator("table tr").filter({ hasText: "Question description" }).first()).toBeVisible();
+    await expect(dialog.getByRole("button", { name: "Used Strings Only" })).toBeVisible();
 
-    // The closing action of the caption removes the block from both panes.
-    await block.getByRole("button", { name: "Close translation strings" }).click();
-    await expect(block).toHaveCount(0);
-    await expect(page.locator(".st-side-by-side__source [data-name='svc-translation-strings-host']")).toHaveCount(0);
+    // The edits apply immediately - the footer holds a single closing button.
+    await expect(dialog.locator(".sv-popup__body-footer button")).toHaveCount(1);
+    await closeStringsDialog(page);
     const resultJson = await getJSON(page);
     expect(resultJson.pages[0].elements[3].columns[0].choices[0].text.de).toEqual("AA de");
     expect(resultJson.pages[0].elements[3].columns[0].choices[0].text.default).toEqual("AA");
   });
 
-  test("question strings block: opens below the question, only one at a time, edits the title translation", async ({ page }) => {
+  test("question strings dialog: edits the title translation and opens the next element on its own", async ({ page }) => {
     await openSideBySideWithChoices(page);
     const target = page.locator(".st-side-by-side__target");
     // q1's title already has a de translation, so its button shows no count.
     await target.locator("[data-name=q1]").getByRole("button", { name: "All strings are translated" }).click();
-    const block = target.locator("[data-name='svc-translation-strings-host']");
-    await expect(block).toBeVisible();
-    const titleRow = block.locator("table tr").filter({ hasText: "Question title" });
+    const dialog = getStringsDialog(page);
+    await expect(dialog).toBeVisible();
+    const titleRow = dialog.locator("table tr").filter({ hasText: "Question title" });
     await expect(titleRow.locator(".st-element-strings__row-source")).toHaveText("Question 1");
     const targetCell = titleRow.locator("textarea").nth(0);
     await expect(targetCell).toHaveValue("Frage 1");
-    await targetCell.fill("Frage 1 inline");
+    await targetCell.fill("Frage 1 dialog");
     await page.keyboard.press("Tab");
     const resultJson = await getJSON(page);
-    expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1 inline");
-    // The live edit mirrored into the target pane.
-    await expect(target.locator(".sv-string-editor").getByText("Frage 1 inline")).toBeVisible();
-    // ...and an inline edit of the pane goes the other way, into the open matrix.
-    const inlineTitle = target.locator("[data-name=q1] .sv-string-editor").getByText("Frage 1 inline");
-    await inlineTitle.click();
-    await page.keyboard.press("Control+a");
-    await page.keyboard.type("Frage 1 pane");
-    await page.keyboard.press("Control+Enter");
-    await expect(titleRow.locator("textarea").nth(0)).toHaveValue("Frage 1 pane");
-    // Opening another element's block removes this one - only one is shown at a time.
+    expect(resultJson.pages[0].elements[0].title.de).toEqual("Frage 1 dialog");
+    // The edit mirrored into the target pane behind the dialog.
+    await closeStringsDialog(page);
+    await expect(target.locator(".sv-string-editor").getByText("Frage 1 dialog")).toBeVisible();
+    // The next element opens a dialog of its own - one element at a time.
     await target.locator("[data-name=q5] .svc-translation-state").click();
-    await expect(block).toHaveCount(1);
-    // The block is q5's now - its choices are there and q1's strings are gone.
-    await expect(block.locator("table tr").filter({ hasText: "Choices: A" })).toHaveCount(1);
-    await expect(block.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
+    await expect(dialog).toHaveCount(1);
+    await expect(dialog.locator("table tr").filter({ hasText: "Choices: A" })).toHaveCount(1);
+    await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
   });
 });
 
@@ -521,64 +521,62 @@ test.describe(title + " containers", () => {
     await expect(source.locator(".svc-translation-state")).toHaveCount(0);
   });
 
-  test("survey strings block: own strings only, opens below the header, edits the description translation", async ({ page }) => {
+  test("survey strings dialog: own strings only, edits the description translation", async ({ page }) => {
     await openSideBySideContainers(page);
     const target = page.locator(".st-side-by-side__target");
     await target.locator(".sd-container-modern__title").locator(".svc-translation-state--untranslated").click();
-    // The survey block is not page content: it renders in the contentTop container, between the
-    // survey header and the page - above the page title, not below it.
-    const block = target.locator(".sv-components-container-contentTop [data-name='svc-translation-strings-host']");
-    await expect(block).toBeVisible();
-    const blockBox = await block.boundingBox();
-    const pageTitleBox = await target.locator(".sd-page__title").first().boundingBox();
-    expect(blockBox!.y).toBeLessThan(pageTitleBox!.y);
-    // The source pane holds its spacer in the same place, so the panes keep their rows.
-    await expect(page.locator(".st-side-by-side__source .sv-components-container-contentTop")).toBeVisible();
+    const dialog = getStringsDialog(page);
+    await expect(dialog).toBeVisible();
+    // A survey without a title is named by the type name.
+    await expect(dialog.locator(".sv-popup__body-header")).toHaveText("Survey");
     // Scoped to the survey-level strings - no rows of the nested elements.
-    await expect(block.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
-    const row = block.locator("table tr").filter({ hasText: "Survey description" });
+    await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
+    const row = dialog.locator("table tr").filter({ hasText: "Survey description" });
     await expect(row.locator(".st-element-strings__row-source")).toHaveText("Survey description");
     await row.locator("textarea").nth(0).fill("Umfragebeschreibung");
     await page.keyboard.press("Tab");
     const resultJson = await getJSON(page);
     expect(resultJson.description.de).toEqual("Umfragebeschreibung");
-    // The live edit mirrored into the target pane, and the button of the completed element
-    // lost its count.
+    // The edit mirrored into the target pane, and the button of the completed element lost
+    // its count.
+    await closeStringsDialog(page);
     await expect(target.locator(".sv-string-editor").getByText("Umfragebeschreibung")).toBeVisible();
     await expect(target.locator(".sd-container-modern__title .svc-translation-state--translated")).toBeVisible();
   });
 
-  test("page strings block: an empty page falls back to the all-strings mode and edits the title", async ({ page }) => {
+  test("page strings dialog: an empty page falls back to the all-strings mode and edits the title", async ({ page }) => {
     await openSideBySideContainers(page);
     const target = page.locator(".st-side-by-side__target");
     await target.locator(".sd-page__title").getByRole("button", { name: "No strings to translate" }).click();
-    const block = target.locator("[data-name='svc-translation-strings-host']");
-    await expect(block).toBeVisible();
-    await expect(block.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
-    // page1 stores no strings, so the used-only default would show an empty matrix - the block
+    const dialog = getStringsDialog(page);
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
+    // page1 stores no strings, so the used-only default would show an empty matrix - the dialog
     // opens in the all-strings mode and the filter action cannot bring the empty matrix back.
-    await expect(block.getByRole("button", { name: "Used Strings Only" })).toBeDisabled();
-    const titleRow = block.locator("table tr").filter({ hasText: "Page title" });
+    await expect(dialog.getByRole("button", { name: "Used Strings Only" })).toBeDisabled();
+    const titleRow = dialog.locator("table tr").filter({ hasText: "Page title" });
     await titleRow.locator("textarea").nth(0).fill("Seite 1");
     await page.keyboard.press("Tab");
     const resultJson = await getJSON(page);
     expect(resultJson.pages[0].title.de).toEqual("Seite 1");
+    await closeStringsDialog(page);
     await expect(target.locator(".sv-string-editor").getByText("Seite 1")).toBeVisible();
   });
 
-  test("panel strings block: available through the forced title row, edits the description translation", async ({ page }) => {
+  test("panel strings dialog: available through the forced title row, edits the description translation", async ({ page }) => {
     await openSideBySideContainers(page);
     const target = page.locator(".st-side-by-side__target");
     await target.locator(".sd-panel__title").locator(".svc-translation-state--untranslated").click();
-    const block = target.locator("[data-name='svc-translation-strings-host']");
-    await expect(block).toBeVisible();
-    await expect(block.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
-    const row = block.locator("table tr").filter({ hasText: "Panel description" });
+    const dialog = getStringsDialog(page);
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
+    const row = dialog.locator("table tr").filter({ hasText: "Panel description" });
     await expect(row.locator(".st-element-strings__row-source")).toHaveText("Panel 1 description");
     await row.locator("textarea").nth(0).fill("Panelbeschreibung");
     await page.keyboard.press("Tab");
     const resultJson = await getJSON(page);
     expect(resultJson.pages[0].elements[0].description.de).toEqual("Panelbeschreibung");
+    await closeStringsDialog(page);
     await expect(target.getByText("Panelbeschreibung")).toBeVisible();
   });
 });

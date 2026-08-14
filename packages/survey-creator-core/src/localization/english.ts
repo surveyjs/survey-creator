@@ -150,7 +150,6 @@ export var enStrings = {
     translationStateNothingToTranslate: "No strings to translate",
     translationStateAllTranslated: "All strings are translated",
     translationStateUntranslated: "{0} strings are not translated",
-    translationElementStringsClose: "Close translation strings",
     translationYouTubeNotSupported: "YouTube links are not supported.",
     themeExportButton: "Export",
     themeImportButton: "Import",
