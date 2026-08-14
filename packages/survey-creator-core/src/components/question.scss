@@ -1,8 +1,12 @@
 @use "../variables" as *;
 @use "./carry-forward-panel.scss" as *;
 
-$drop-indicator-position-vertical: calc(calc(var(--sjs2-layout-component-page-content-area-gap-vertical) + var(--sjs2-border-width-x200, 2px)) / -2);
-$drop-indicator-position-horizontal: calc(calc(var(--sjs2-layout-component-page-content-area-gap-horizontal) + var(--sjs2-border-width-x200, 2px)) / -2);
+$drop-indicator-position-vertical: calc(
+  calc(var(--sjs2-layout-component-page-content-area-gap-vertical) + var(--sjs2-border-width-x200, 2px)) / -2
+);
+$drop-indicator-position-horizontal: calc(
+  calc(var(--sjs2-layout-component-page-content-area-gap-horizontal) + var(--sjs2-border-width-x200, 2px)) / -2
+);
 
 svc-question {
   display: block;
@@ -696,6 +700,10 @@ svc-question,
     opacity: var(--sjs2-opacity-hidden);
     transition: opacity 150ms;
   }
+}
+.svc-element__header--hidden {
+  --sd-panel-title-color: var(--sjs2-color-component-panel-nested-default-title);
+  --sd-question-title-color: var(--sjs2-color-component-question-default-title);
 }
 .svc-element__header--lazy,
 .svc-element__header--hidden.sd-question__header--location--left {
