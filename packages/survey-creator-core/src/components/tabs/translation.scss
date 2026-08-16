@@ -391,6 +391,19 @@ td.st-table__cell:first-of-type {
   }
 }
 
+// The dialog's own width. Its matrix holds a source and a target editor next to the string
+// names, so it needs far more room than the property editor dialogs this one is styled as -
+// their min-width is what the extra classes here are for (see .svc-property-editor in
+// property-grid.scss, whose selector is just as specific). All the width goes to the editors:
+// the string names keep their share of it (see stringsRowTitleWidthPercent). Capped by the
+// viewport, so a narrow screen scrolls the table instead of the page.
+.sv-popup--modal-popup.svc-property-editor.st-element-strings-dialog .sv-popup__container {
+  .sd-body,
+  .sv-components-column--expandable {
+    min-width: min(calc(var(--sjs2-base-unit-size) * 106), 80vw);
+  }
+}
+
 // The strings matrix of the dialog: its title row is the caption row, and its title actions are
 // the caption's buttons (auto-translate, all/used strings).
 .st-element-strings {
@@ -399,24 +412,20 @@ td.st-table__cell:first-of-type {
     margin-left: auto;
   }
 
-  // The merged first cell: the string name and, below it, its source-locale text. The matrix has
-  // no source column - this cell is the source side of the row, and the target editor takes the
-  // rest of the width (see createStringsMatrix).
-  .st-element-strings__row-name,
-  .st-element-strings__row-source {
-    display: block;
-    overflow-wrap: anywhere;
+  // The language headers start where their editors do, as the grid view's header row does -
+  // the runtime matrix centers its column titles.
+  .sd-table__cell--header {
+    text-align: left;
   }
 
-  .st-element-strings__row-name {
+  // The first column: the name of the string a row edits, next to the two locale editors
+  // (see createStringsMatrix). A property name is not a text the user reads through - it stays
+  // at the muted weight of a label and wraps instead of stretching the column.
+  .sd-table__cell--row-text {
     font-size: var(--sjs2-font-size-s, 12px);
     line-height: var(--sjs2-line-height-s, 16px);
     color: var(--sjs2-color-fg-basic-primary-muted);
-  }
-
-  .st-element-strings__row-source {
-    // The source text is read-only, but it is what the user copies from.
-    user-select: text;
+    overflow-wrap: anywhere;
   }
 }
 

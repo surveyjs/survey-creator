@@ -644,6 +644,14 @@ function getStringsRow(matrix: QuestionMatrixDropdownModel, locStr: any): any {
   const itemValue = matrix.rows.filter(row => row["translationData"].locString === locStr)[0];
   return !!itemValue ? matrix.visibleRows.filter(row => row.name === itemValue.value)[0] : undefined;
 }
+// The two editors of a row: the source column comes first, the target one is the last cell
+// (and the only one when the two languages are the same).
+function getSourceCell(row: any): any {
+  return row.cells[0].question;
+}
+function getTargetCell(row: any): any {
+  return row.cells[row.cells.length - 1].question;
+}
 
 test("element strings dialog: a matrix over the real question, its own survey, edits that mirror into the panes", () => {
   const creator = createSideBySideCreator(dropdownChoicesJSON);
@@ -659,26 +667,35 @@ test("element strings dialog: a matrix over the real question, its own survey, e
   expect(model.elementStringsSurvey.getAllQuestions()).toHaveLength(1);
   const stringsMatrix = getStringsMatrix(model);
   expect(stringsMatrix.getType()).toBe("matrixdropdown");
-  // No caption text and no column header: the dialog's own title names the element. The title
-  // row itself stays - it carries the caption's actions.
+  // No caption text: the dialog's own title names the element. The title row itself stays -
+  // it carries the caption's actions.
   expect(stringsMatrix.locTitle.renderedHtml).toBe("");
   expect(stringsMatrix.hasTitle).toBeTruthy();
-  expect(stringsMatrix.showHeader).toBeFalsy();
   // The matrix's styles are scoped to its own class.
   expect(stringsMatrix.cssClasses.mainRoot).toContain("st-element-strings");
-  // One column, the target locale: the source text is merged into the row titles, so the editor
-  // gets the width the source column had.
-  expect(stringsMatrix.columns).toHaveLength(1);
-  expect(stringsMatrix.columns[0].name).toBe("de");
+  // The grid view's layout for one element: the string names, the source column and the target
+  // column, under a header row naming the two languages.
+  expect(stringsMatrix.showHeader).toBeTruthy();
+  expect(stringsMatrix.columns).toHaveLength(2);
+  expect(stringsMatrix.columns[0].name).toBe("default");
   expect(stringsMatrix.columns[0].readOnly).toBeFalsy();
+  expect(stringsMatrix.columns[0].title).toBe("Source: Default (English)");
+  expect(stringsMatrix.columns[1].name).toBe("de");
+  expect(stringsMatrix.columns[1].readOnly).toBeFalsy();
+  expect(stringsMatrix.columns[1].title).toBe("Target: Deutsch"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   // The column choices are reachable through the dialog only - they are rows of the same matrix,
   // labelled with the path to the string.
   const realChoiceLocText = (<any>realMatrix.columns[0]).templateQuestion.choices[0].locText;
   const choiceRow = getStringsRow(stringsMatrix, realChoiceLocText);
   expect(choiceRow).toBeTruthy();
   expect(choiceRow.item.text).toContain("Choices");
+  // The source cell holds the source-locale text of the same string, and it is editable, as
+  // the grid view's source column is.
+  const sourceCell = getSourceCell(choiceRow);
+  expect(sourceCell.value).toBe("AA");
+  expect(sourceCell.isInputReadOnly).toBeFalsy();
   // The cell is a plain runtime editor - the dialog's survey is not a design-mode one.
-  const targetCell = choiceRow.cells[0].question;
+  const targetCell = getTargetCell(choiceRow);
   expect(targetCell.isInputReadOnly).toBeFalsy();
   expect(targetCell.isDisabledAttr).toBeFalsy();
   // The text area passes the flag to the rendered element in every framework.
@@ -948,7 +965,7 @@ test("element strings dialog: survey strings edits mirror into the panes", () =>
   model.showSurveyStringsDialog();
   const titleRow = getStringsRow(getStringsMatrix(model), creator.survey.locTitle);
   expect(titleRow).toBeTruthy();
-  titleRow.cells[0].question.value = "Umfragetitel neu";
+  getTargetCell(titleRow).value = "Umfragetitel neu";
   expect(creator.survey.locTitle.getLocaleText("de")).toBe("Umfragetitel neu");
   expect(model.targetSurvey.locTitle.getLocaleText("de")).toBe("Umfragetitel neu");
 });
@@ -1569,7 +1586,7 @@ test("element strings dialog: a dialog-only string edited in the matrix does not
   const realChoiceLocText = (<any>realMatrix.columns[0]).templateQuestion.choices[0].locText;
   // The column choice is not rendered by the panes, so it is not a mapped string - and it is
   // still a text change, not a structural one: the panes stay, and so does the open dialog.
-  getStringsRow(stringsMatrix, realChoiceLocText).cells[0].question.value = "AA-de";
+  getTargetCell(getStringsRow(stringsMatrix, realChoiceLocText)).value = "AA-de";
   expect(model.targetSurvey).toBe(targetPane);
   expect(model.elementStringsModel).toBeTruthy();
   expect(getStringsMatrix(model)).toBe(stringsMatrix);
@@ -1672,12 +1689,12 @@ test("element strings dialog: an inline editor edit lands in the open matrix", (
   model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const stringsMatrix = getStringsMatrix(model);
   const realQ1 = creator.survey.getQuestionByName("q1");
-  expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBeFalsy();
+  expect(getTargetCell(getStringsRow(stringsMatrix, realQ1.locTitle)).value).toBeFalsy();
   // The inline editor of the target pane writes into the copy, which forwards the text to the
   // real survey - the funnel that refreshes the dialog is closed on that path.
   model.targetSurvey.getQuestionByName("q1").locTitle.text = "Frage 1";
   expect(realQ1.locTitle.getLocaleText("de")).toBe("Frage 1");
-  expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBe("Frage 1");
+  expect(getTargetCell(getStringsRow(stringsMatrix, realQ1.locTitle)).value).toBe("Frage 1");
   // An edit of another element leaves the open dialog alone.
   const matrixValue = stringsMatrix.value;
   model.targetSurvey.getQuestionByName("q2").locTitle.text = "Frage 2";
@@ -1688,7 +1705,7 @@ test("element strings dialog: an inline editor edit lands in the open matrix", (
   expect(getStringsMatrix(model)).toBe(stringsMatrix);
 });
 
-// The row ItemValue behind a real localizable string - its title is the row's merged first cell.
+// The row ItemValue behind a real localizable string - its title is the row's first cell.
 function getStringsRowItem(matrix: QuestionMatrixDropdownModel, locStr: any): any {
   return matrix.rows.filter(row => (<any>row)["translationData"].locString === locStr)[0];
 }
@@ -1702,35 +1719,34 @@ test("element strings dialog: the cells open with the stored target texts", () =
   // The matrix is filled before it joins the dialog's survey, and a question joining one takes
   // its value from that survey's data - the texts must be there anyway, on the very first render.
   expect(stringsMatrix.value).toBeTruthy();
-  expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBe("Frage 1");
+  expect(getTargetCell(getStringsRow(stringsMatrix, realQ1.locTitle)).value).toBe("Frage 1");
   // The source text is what the untranslated cells offer as their placeholder.
   const emptyRow = getStringsRow(stringsMatrix, creator.survey.getQuestionByName("q4").locTitle);
   expect(emptyRow).toBeFalsy();
   model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q4"));
   const q4Row = getStringsRow(getStringsMatrix(model), creator.survey.getQuestionByName("q4").locTitle);
-  expect(q4Row.cells[0].question.value).toBeFalsy();
-  expect(q4Row.cells[0].question.placeholder).toBe("Question 4");
+  expect(getTargetCell(q4Row).value).toBeFalsy();
+  expect(getTargetCell(q4Row).placeholder).toBe("Question 4");
+  // ... and the source column holds the text it is translated from.
+  expect(getSourceCell(q4Row).value).toBe("Question 4");
 });
 
-test("element strings dialog: the row title merges the string name and its source text", () => {
+test("element strings dialog: the first column names the string, the source column holds its source text", () => {
   const creator = createSideBySideCreator(inlineBlockJSON);
   const model = getModel(creator);
   model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const titleRow = getStringsRowItem(getStringsMatrix(model), creator.survey.getQuestionByName("q1").locTitle);
   expect(titleRow).toBeTruthy();
-  expect(titleRow.locText.hasHtml).toBeTruthy();
-  expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-name");
-  expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-source");
-  expect(titleRow.locText.renderedHtml).toContain("Question 1");
-  // The cell's accessible name is built from the row title - the two lines read as one sentence
-  // there, never as the markup that draws them.
+  // A plain property name, as the grid view's rows carry - the source text is a cell of its own.
+  expect(titleRow.locText.hasHtml).toBeFalsy();
+  expect(titleRow.text).toBe("Question title");
   const cellRow = getStringsRow(getStringsMatrix(model), creator.survey.getQuestionByName("q1").locTitle);
-  expect(cellRow.getAccessbilityText()).toBe("Question title, Question 1");
-  expect(cellRow.cells[0].question.a11y_input_ariaLabel).toContain("Question title, Question 1");
-  expect(cellRow.cells[0].question.a11y_input_ariaLabel).not.toContain("<span");
+  expect(getSourceCell(cellRow).value).toBe("Question 1");
+  // The cell's accessible name is the row title, as in any matrix.
+  expect(getTargetCell(cellRow).a11y_input_ariaLabel).toContain("Question title");
 });
 
-test("element strings dialog: a string with no source text renders the name alone, and html is escaped", () => {
+test("element strings dialog: a string the source language has nothing for keeps its name and an empty source cell", () => {
   const creator = createSideBySideCreator({
     locale: "de",
     pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "<b>Q1</b>" }] }]
@@ -1738,15 +1754,14 @@ test("element strings dialog: a string with no source text renders the name alon
   const model = getModel(creator);
   model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const realQ1 = creator.survey.getQuestionByName("q1");
-  const titleRow = getStringsRowItem(getStringsMatrix(model), realQ1.locTitle);
-  expect(titleRow.locText.renderedHtml).toContain("&lt;b&gt;Q1&lt;/b&gt;");
-  expect(titleRow.locText.renderedHtml).not.toContain("<b>Q1</b>");
-  // A string the source language has nothing for renders its name alone - no empty second line.
+  const titleRow = getStringsRow(getStringsMatrix(model), realQ1.locTitle);
+  // The source text is a cell value, never markup - it is not turned into html anywhere.
+  expect(getSourceCell(titleRow).value).toBe("<b>Q1</b>");
   model.elementStringsModel.showAllElementStrings = true;
-  const descriptionRow = getStringsRowItem(getStringsMatrix(model), realQ1.locDescription);
+  const descriptionRow = getStringsRow(getStringsMatrix(model), realQ1.locDescription);
   expect(descriptionRow).toBeTruthy();
-  expect(descriptionRow.locText.renderedHtml).toContain("st-element-strings__row-name");
-  expect(descriptionRow.locText.renderedHtml).not.toContain("st-element-strings__row-source");
+  expect(getStringsRowItem(getStringsMatrix(model), realQ1.locDescription).text).toBe("Question description");
+  expect(getSourceCell(descriptionRow).value).toBeFalsy();
 });
 
 test("element strings dialog: the open matrix follows a locale switch", () => {
@@ -1756,18 +1771,20 @@ test("element strings dialog: the open matrix follows a locale switch", () => {
   realQ1.locTitle.setLocaleText("fr", "Question 1 fr");
   model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
   const stringsMatrix = getStringsMatrix(model);
-  expect(stringsMatrix.columns[0].name).toBe("de");
+  expect(stringsMatrix.columns.map(column => column.name)).toEqual(["default", "de"]);
   model.targetLocale = "fr";
   // The panes are not rebuilt for a switch between two languages, and neither is the dialog.
   expect(model.elementStringsModel).toBeTruthy();
   expect(getStringsMatrix(model)).toBe(stringsMatrix);
-  expect(stringsMatrix.columns).toHaveLength(1);
-  expect(stringsMatrix.columns[0].name).toBe("fr");
-  expect(getStringsRow(stringsMatrix, realQ1.locTitle).cells[0].question.value).toBe("Question 1 fr");
-  // The source language drives the text of the merged first cell.
+  expect(stringsMatrix.columns.map(column => column.name)).toEqual(["default", "fr"]);
+  expect(getTargetCell(getStringsRow(stringsMatrix, realQ1.locTitle)).value).toBe("Question 1 fr");
+  // The source language is a column of its own, so a source switch rebuilds the columns too.
   model.sourceLocale = "fr";
   model.targetLocale = "de";
-  expect(getStringsRowItem(getStringsMatrix(model), realQ1.locTitle).locText.renderedHtml).toContain("Question 1 fr");
+  expect(stringsMatrix.columns.map(column => column.name)).toEqual(["fr", "de"]);
+  expect(stringsMatrix.columns[0].title).toBe("Source: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(stringsMatrix.columns[1].title).toBe("Target: Deutsch"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(getSourceCell(getStringsRow(stringsMatrix, realQ1.locTitle)).value).toBe("Question 1 fr");
 });
 
 // The target language dropdown of the settings survey and its precomputed counters.
@@ -1853,25 +1870,21 @@ test("element strings dialog: a string the library localizes itself shows its so
   const realB1 = <any>creator.survey.getQuestionByName("b1");
   const titleRow = getStringsRowItem(stringsMatrix, realB1.locLabelTrue);
   expect(titleRow).toBeTruthy();
-  // The merged first cell shows the property name, as every row does, and the source-locale
-  // text the library gives the string below it.
+  // The first column names the string by its property, as every row does...
   const labelTrueName = editorLocalization.getPropertyNameInEditor("boolean", "labelTrue");
-  expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-name");
-  expect(titleRow.locText.renderedHtml).toContain(labelTrueName);
-  expect(titleRow.locText.renderedHtml).toContain("st-element-strings__row-source");
-  expect(titleRow.locText.renderedHtml).toContain("Yes");
-  // The cell's accessible name reads the two lines as one sentence.
-  expect(getStringsRow(stringsMatrix, realB1.locLabelTrue).getAccessbilityText()).toBe(labelTrueName + ", Yes");
-  // ... and the target editor offers the target-locale one as its placeholder.
+  expect(titleRow.text).toBe(labelTrueName);
+  // ... the source column offers the text the library gives the string (stored nowhere, so it
+  // is a placeholder, exactly as it is in the grid view) ...
   const cellRow = getStringsRow(stringsMatrix, realB1.locLabelTrue);
-  expect(cellRow.cells[0].question.value).toBeFalsy();
-  expect(cellRow.cells[0].question.placeholder).toBe("Ja");
-  // The source language drives the first cell, as it does for a stored text.
+  expect(getSourceCell(cellRow).value).toBeFalsy();
+  expect(getSourceCell(cellRow).placeholder).toBe("Yes");
+  // ... and the target editor offers the target-locale one as its placeholder.
+  expect(getTargetCell(cellRow).value).toBeFalsy();
+  expect(getTargetCell(cellRow).placeholder).toBe("Ja");
+  // The source column follows the source language, as it does for a stored text.
   realB1.locLabelTrue.setLocaleText("fr", "Oui");
   model.sourceLocale = "fr";
-  const frRow = getStringsRowItem(getStringsMatrix(model), realB1.locLabelTrue);
-  expect(frRow.locText.renderedHtml).toContain("Oui");
-  expect(frRow.locText.renderedHtml).toContain(labelTrueName);
+  expect(getSourceCell(getStringsRow(getStringsMatrix(model), realB1.locLabelTrue)).value).toBe("Oui");
 });
 
 test("element strings dialog: every row is named by its property, on a question, a page, a panel and the survey", () => {
@@ -1883,12 +1896,8 @@ test("element strings dialog: every row is named by its property, on a question,
     }]
   });
   const model = getModel(creator);
-  // The name of the first cell of every row of the open dialog, source text dropped.
-  const getRowNames = (): Array<string> => getStringsMatrix(model).rows.map((row: any) => {
-    const html = row.locText.renderedHtml;
-    const index = html.indexOf("</span>");
-    return index < 0 ? "" : html.substring(html.indexOf(">") + 1, index);
-  });
+  // The first cell of every row of the open dialog - the name of the string it edits.
+  const getRowNames = (): Array<string> => getStringsMatrix(model).rows.map((row: any) => row.text);
   const survey = creator.survey;
   const panel = survey.getPanelByName("panel1");
   // The strings the library localizes itself are the "all strings" ones - an element shows them

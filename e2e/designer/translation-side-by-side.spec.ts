@@ -409,7 +409,7 @@ test.describe(title + " choices", () => {
     await expect(page.locator(".st-side-by-side__source [data-name=q5]").getByText("AA", { exact: true })).toBeVisible();
   });
 
-  test("question strings dialog: used/all filter, merged source cell, target edit updates the column choice translation", async ({ page }) => {
+  test("question strings dialog: used/all filter, source column, target edit updates the column choice translation", async ({ page }) => {
     await openSideBySideWithChoices(page);
     // The panes render lazily - scroll the matrix into the view before using its title action.
     await page.locator(".st-side-by-side__target").evaluate(el => { el.scrollTop = el.scrollHeight; });
@@ -424,12 +424,17 @@ test.describe(title + " choices", () => {
     await expect(dialog.getByRole("button", { name: "All Strings" })).toBeVisible();
     await expect(dialog.locator("table tr").filter({ hasText: "Question description" })).toHaveCount(0);
 
-    // The col1 "A" choice row: the merged first cell holds the string name and its source text,
-    // and the row's only editor is the target one.
+    // The header row names the two languages the columns edit; the column of the string names
+    // has no title, so it is not one of the header cells.
+    await expect(dialog.locator("table thead th")).toHaveCount(2);
+    await expect(dialog.locator("table thead th").nth(0)).toHaveText("Source: Default (English)");
+    await expect(dialog.locator("table thead th").nth(1)).toHaveText("Target: Deutsch"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+
+    // The col1 "A" choice row: the string name, its source text and the target editor.
     const choiceRow = dialog.locator("table tr").filter({ hasText: "Choices" }).first();
-    await expect(choiceRow.locator(".st-element-strings__row-source")).toHaveText("AA");
-    await expect(choiceRow.locator("textarea")).toHaveCount(1);
-    await choiceRow.locator("textarea").nth(0).fill("AA de");
+    await expect(choiceRow.locator("textarea")).toHaveCount(2);
+    await expect(choiceRow.locator("textarea").nth(0)).toHaveValue("AA");
+    await choiceRow.locator("textarea").nth(1).fill("AA de");
     await page.keyboard.press("Tab");
 
     // Switching to All Strings adds the empty strings into the same matrix.
@@ -453,8 +458,8 @@ test.describe(title + " choices", () => {
     const dialog = getStringsDialog(page);
     await expect(dialog).toBeVisible();
     const titleRow = dialog.locator("table tr").filter({ hasText: "Question title" });
-    await expect(titleRow.locator(".st-element-strings__row-source")).toHaveText("Question 1");
-    const targetCell = titleRow.locator("textarea").nth(0);
+    await expect(titleRow.locator("textarea").nth(0)).toHaveValue("Question 1");
+    const targetCell = titleRow.locator("textarea").nth(1);
     await expect(targetCell).toHaveValue("Frage 1");
     await targetCell.fill("Frage 1 dialog");
     await page.keyboard.press("Tab");
@@ -532,8 +537,8 @@ test.describe(title + " containers", () => {
     // Scoped to the survey-level strings - no rows of the nested elements.
     await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
     const row = dialog.locator("table tr").filter({ hasText: "Survey description" });
-    await expect(row.locator(".st-element-strings__row-source")).toHaveText("Survey description");
-    await row.locator("textarea").nth(0).fill("Umfragebeschreibung");
+    await expect(row.locator("textarea").nth(0)).toHaveValue("Survey description");
+    await row.locator("textarea").nth(1).fill("Umfragebeschreibung");
     await page.keyboard.press("Tab");
     const resultJson = await getJSON(page);
     expect(resultJson.description.de).toEqual("Umfragebeschreibung");
@@ -555,7 +560,7 @@ test.describe(title + " containers", () => {
     // opens in the all-strings mode and the filter action cannot bring the empty matrix back.
     await expect(dialog.getByRole("button", { name: "Used Strings Only" })).toBeDisabled();
     const titleRow = dialog.locator("table tr").filter({ hasText: "Page title" });
-    await titleRow.locator("textarea").nth(0).fill("Seite 1");
+    await titleRow.locator("textarea").nth(1).fill("Seite 1");
     await page.keyboard.press("Tab");
     const resultJson = await getJSON(page);
     expect(resultJson.pages[0].title.de).toEqual("Seite 1");
@@ -571,8 +576,8 @@ test.describe(title + " containers", () => {
     await expect(dialog).toBeVisible();
     await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
     const row = dialog.locator("table tr").filter({ hasText: "Panel description" });
-    await expect(row.locator(".st-element-strings__row-source")).toHaveText("Panel 1 description");
-    await row.locator("textarea").nth(0).fill("Panelbeschreibung");
+    await expect(row.locator("textarea").nth(0)).toHaveValue("Panel 1 description");
+    await row.locator("textarea").nth(1).fill("Panelbeschreibung");
     await page.keyboard.press("Tab");
     const resultJson = await getJSON(page);
     expect(resultJson.pages[0].elements[0].description.de).toEqual("Panelbeschreibung");

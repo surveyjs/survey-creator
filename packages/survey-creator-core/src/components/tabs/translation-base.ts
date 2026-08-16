@@ -1108,16 +1108,6 @@ export class TranslationBase extends Base implements ITranslationLocales {
   private getSourceTargetHeaderTitle(strName: string, locale: string): string {
     return editorLocalization.getString("ed." + strName) + this.getLocaleName(locale);
   }
-  // The side-by-side grid keeps its source column editable (like any locale column); the
-  // matrix strings popup makes it read-only.
-  protected get isSourceColumnReadOnly(): boolean {
-    return false;
-  }
-  // Whether the source locale gets a column of its own. The element strings block shows the
-  // source text in its row titles instead, so the target editor gets the freed width.
-  protected get hasSourceColumn(): boolean {
-    return true;
-  }
   protected addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
     if (this.useSourceTargetColumns) {
       const target = this.targetLocale || "";
@@ -1125,13 +1115,9 @@ export class TranslationBase extends Base implements ITranslationLocales {
       // column alone (editable, exactly as it is next to a target column).
       const hasTarget = !!target;
       const loc = hasTarget ? target : (this.sourceLocale || "");
-      const column = matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
+      matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
       if (hasTarget) {
-        if (this.hasSourceColumn) {
-          this.updateMatrixSourceColumn(matrix, this.sourceLocale, target, this.isSourceColumnReadOnly);
-        }
-      } else {
-        column.readOnly = this.isSourceColumnReadOnly;
+        this.updateMatrixSourceColumn(matrix, this.sourceLocale, target);
       }
       if (matrix.name === "stringsHeader") {
         this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, target, hasTarget);

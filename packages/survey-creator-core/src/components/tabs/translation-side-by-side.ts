@@ -35,14 +35,11 @@ const stringsMatrixName = "svc-translation-strings";
 const focusCellAttemptDelay = 50;
 const focusCellMaxAttempts = 20;
 
-// The element strings matrix has no source column of its own: a row title carries the string
-// name and its source-locale text, joined by this separator and turned into html by the matrix
-// (see createStringsMatrix / getRowTitleHtml). A character no survey string can contain.
-const rowSourceSeparator = "\u0000";
-
-function escapeHtmlText(text: string): string {
-  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
+// The share of the element strings matrix its first column - the string names - takes; the
+// locale columns split the rest (see createStringsMatrix / addStringsMatrixColumns). A string
+// name is a short label, so it keeps its width as the dialog grows and the editors take the
+// room that adds (see the dialog's min-width in translation.scss).
+const stringsRowTitleWidthPercent = 18;
 
 // The list item of the target language dropdown: the language name and, at the right edge, how
 // much of the survey is already translated into it. Set on the choices themselves and not as the
@@ -1598,7 +1595,8 @@ export class TranslationElementStrings extends TranslationBase {
   }
   // The dialog renders one matrix instead of the grid view's survey of matrices: an element has
   // few strings, and one question is all the dialog holds. Rows are the element's translation
-  // items, the column is the target locale.
+  // items, the columns are the source and the target locale - the grid view's layout, scoped
+  // to a single element.
   public createStringsMatrix(name: string): QuestionMatrixDropdownModel {
     const matrix = <QuestionMatrixDropdownModel>Serializer.createClass("matrixdropdown");
     matrix.name = name;
@@ -1608,51 +1606,31 @@ export class TranslationElementStrings extends TranslationBase {
     // empty, without the question name a title-less question would fall back to.
     matrix.titleLocation = "top";
     matrix.locTitle.onGetTextCallback = (): string => "";
-    matrix.showHeader = false;
-    // The row titles carry the source text (see getRowTitleText), so the matrix holds the target
-    // column alone and the merged first cell takes the width the source column had.
-    matrix.rowTitleWidth = "50%";
-    // A row title is a plain text; the two lines it holds become html here. Overridden on the
-    // matrix instead of through the host survey's onTextMarkdown: the rows are read as soon as
-    // they are assigned, before the matrix belongs to any survey, and a row title has no html
-    // then - the empty result would be cached for the dialog's lifetime.
-    matrix.getMarkdownHtml = (text: string, name: string, item?: any): string => this.getRowTitleHtml(text, item);
-    this.addLocaleColumns(matrix);
+    // The header row names the two languages the columns edit, as the grid view's header row
+    // does; the column of the string names has no header there either.
+    matrix.showHeader = true;
+    matrix.rowTitleWidth = stringsRowTitleWidthPercent + "%";
+    this.addStringsMatrixColumns(matrix);
     this.stringsMatrix = matrix;
     this.fillStringsMatrix();
     return matrix;
   }
-  // The merged first cell of a row: the string name, and the source-locale text below it when
-  // the source language has one. Not a source column - it is read-only context for the one
-  // editor of the row, and the target editor gets the width it saves.
+  // The locale columns of the dialog's matrix: the source/target pair of the grid view, with the
+  // header titles the grid keeps in a header survey of its own - the dialog has a single matrix,
+  // so its own header row carries them.
+  private addStringsMatrixColumns(matrix: QuestionMatrixDropdownModel): void {
+    this.addLocaleColumns(matrix);
+    this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, this.targetLocale || "", !!this.targetLocale);
+    // A column width reaches the rendered table through the header cells alone (see
+    // QuestionMatrixDropdownRenderedTable.createHeaderCell), so the locale columns share what
+    // the string names leave over there instead of being sized by their content.
+    const width = Math.floor((100 - stringsRowTitleWidthPercent) / matrix.columns.length) + "%";
+    matrix.columns.forEach(column => { column.width = width; });
+  }
+  // The first cell of a row: the name of the string the row edits - the property name, prefixed
+  // with the path of the group it belongs to (a matrix column's choices, a validator).
   private getRowTitleText(path: string, item: TranslationItem): string {
-    const locale = this.sourceLocale || "";
-    // A string with nothing stored still has a source text when the library localizes it
-    // itself - the row would carry its name alone otherwise (see getSourceText).
-    const source = item.getSourceText(locale) || "";
-    // The name is always there, whether the text below it is the survey's own or the one the
-    // library falls back to: the row is named by the property it edits.
-    const name = (!!path ? path + ": " : "") + item.text;
-    return !!source ? name + rowSourceSeparator + source : name;
-  }
-  private getRowTitleHtml(text: string, item: any): string {
-    // Only the row titles: the matrix's own title (emptied above) and anything else that reaches
-    // this owner keeps the plain rendering.
-    if (!text || !item || !item["translationData"]) return undefined;
-    const index = text.indexOf(rowSourceSeparator);
-    const name = index < 0 ? text : text.substring(0, index);
-    const source = index < 0 ? "" : text.substring(index + rowSourceSeparator.length);
-    let res = "<span class=\"st-element-strings__row-name\">" + escapeHtmlText(name) + "</span>";
-    if (!!source) {
-      res += "<span class=\"st-element-strings__row-source\">" + escapeHtmlText(source) + "</span>";
-    }
-    return res;
-  }
-  // The row title of a matrix row is also the accessible name of its cell (through
-  // MatrixDropdownRowModelBase.getAccessbilityText, which reads the rendered html) - the two
-  // lines read as one sentence there instead of as the markup that draws them.
-  private getRowTitlePlainText(text: string): string {
-    return (text || "").split(rowSourceSeparator).filter(part => !!part).join(", ");
+    return (!!path ? path + ": " : "") + item.text;
   }
   private stringsMatrix: QuestionMatrixDropdownModel;
   // Rows are rebuilt in place on a filter switch: replacing the matrix would take the caption
@@ -1794,13 +1772,6 @@ export class TranslationElementStrings extends TranslationBase {
   private onMatrixCellCreated = (_: SurveyModel, options: any): void => {
     if (options.question !== this.stringsMatrix) return;
     const cellQuestion = options.cell.question;
-    // The cell's accessible name is built from the row's rendered title, which is the html of the
-    // merged first cell here - the row reports the plain text of the same two lines instead.
-    const rowItemValue = this.getMatrixItemValue(options.row);
-    if (!!rowItemValue && !!options.row) {
-      const plainTitle = this.getRowTitlePlainText(rowItemValue.locText.calculatedText);
-      options.row.getAccessbilityText = (): string => plainTitle;
-    }
     if (!(cellQuestion instanceof QuestionCommentModel)) return;
     const item = this.getMatrixItem(options.row);
     cellQuestion.autoGrow = true;
@@ -1850,11 +1821,6 @@ export class TranslationElementStrings extends TranslationBase {
     if ((<any>this.elementValue).isQuestion) return true;
     const el = <any>obj;
     return !el.isPage && !el.isPanel && !el.isQuestion;
-  }
-  // The source text is merged into the row titles (see getRowTitleText), so the matrix has the
-  // target locale column alone - and nothing in the dialog is read-only but that merged cell.
-  protected get hasSourceColumn(): boolean {
-    return false;
   }
   // The dialog renders this model's own matrix - the strings grid surveys of the base class
   // (and their header survey) are never built for it.
@@ -1911,22 +1877,18 @@ export class TranslationElementStrings extends TranslationBase {
     this.updateStringsMatrixData();
   }
   // A locale switch does not rebuild the panes (as long as a target language stays selected), so
-  // the open dialog follows it here: the target locale is the matrix's only column, and the source
-  // one is what the row titles show.
+  // the open dialog follows it here: both locales have a column of their own, so either change
+  // rebuilds the columns - the rows are the element's strings and belong to no language.
   public updateLocales(sourceLocale: string, targetLocale: string): void {
     if (this.isDisposed) return;
-    const sourceChanged = (this.sourceLocale || "") !== (sourceLocale || "");
-    const targetChanged = (this.targetLocale || "") !== (targetLocale || "");
-    if (!sourceChanged && !targetChanged) return;
+    if ((this.sourceLocale || "") === (sourceLocale || "") && (this.targetLocale || "") === (targetLocale || "")) return;
     this.sourceLocale = sourceLocale;
     this.targetLocale = targetLocale;
     const matrix = this.stringsMatrix;
     if (!matrix) return;
-    if (targetChanged) {
-      matrix.columns = [];
-      this.addLocaleColumns(matrix);
-    }
-    this.fillStringsMatrix();
+    matrix.columns = [];
+    this.addStringsMatrixColumns(matrix);
+    this.updateStringsMatrixData();
   }
   // Whether the dialog's matrix covers the string - the owner asks before it treats an unmapped
   // string change as a structural one (see onCreatorSurveyPropertyChangedCore).
