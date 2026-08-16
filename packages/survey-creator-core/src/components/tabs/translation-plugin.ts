@@ -202,6 +202,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       }
     });
     this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
+    // The language settings take little space - give the strings the rest of the tab.
+    this.creator.sidebar.useMinWidth = true;
     this.updateTabControl();
   }
   public update(): void {
@@ -240,6 +242,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.exportCsvAction.visible = false;
     this.translateStringsAction.visible = false;
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
+    this.creator.sidebar.useMinWidth = false;
     this.creator.sidebar.header.reset();
     return true;
   }

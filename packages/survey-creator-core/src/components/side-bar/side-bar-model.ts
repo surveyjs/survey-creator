@@ -26,6 +26,9 @@ export class SidebarModel extends Base {
   @property({ defaultValue: false }) flyoutMode: boolean;
   @property({ defaultValue: false }) narrowMode: boolean;
   @property() hideSideBarVisibilityControlActions: boolean;
+  // A tab may ask for the narrowest possible sidebar (the css sets width to 0, so the
+  // container falls back to its min-width). The user can still resize it afterwards.
+  @property({ defaultValue: false }) useMinWidth: boolean;
 
   @property() sideAreaComponentName: string;
   @property() sideAreaComponentData: any;
@@ -38,6 +41,7 @@ export class SidebarModel extends Base {
       .append("svc-side-bar--narrow", this.narrowMode)
       .append("svc-side-bar--mobile", this.creator.isMobileView)
       .append("svc-side-bar--side-area", !!this.sideAreaComponentName)
+      .append("svc-side-bar--min-width", this.useMinWidth)
       .toString();
   }
   public get renderRoot(): boolean {
