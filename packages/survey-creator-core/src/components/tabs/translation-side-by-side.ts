@@ -1004,11 +1004,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // The "Translate remaining strings" dialog of the side-by-side mode: the same machine
   // translation editor the all-languages mode opens from its languages matrix.
   public createTranslationEditor(locale: string): TranslationEditor {
-    const res = new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback, this);
-    res.onApply = () => {
-      this.reset();
-    };
-    return res;
+    return this.setupTranslationEditor(
+      new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback, this));
   }
   // Keeps the vertical scrollbars of the two panes in sync. The UI components pass their
   // scrollable containers here; passing null/undefined (on unmount) detaches the listener.
