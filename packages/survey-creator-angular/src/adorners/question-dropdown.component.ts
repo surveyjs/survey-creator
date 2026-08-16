@@ -27,7 +27,7 @@ AngularComponentFactory.Instance.registerComponent("svc-dropdown-question", Ques
   styles: [":host { display: none; }"]
 })
 export class QuestionDropdownAdornerDesignerComponent extends EmbeddedViewContentComponent {
-  @Input() adorner!: any;
+  @Input() adorner!: QuestionDropdownAdornerViewModel;
   @Input() question!: any;
   public getItemValueComponentName(item: ItemValue): string {
     return this.question.getItemValueWrapperComponentName(item) || "sv-ng-selectbase-item";
@@ -38,7 +38,7 @@ export class QuestionDropdownAdornerDesignerComponent extends EmbeddedViewConten
       componentData: {
         question: this.question,
         model: item,
-        inputType: "radio",
+        inputType: this.adorner.itemInputType,
         data: this.question.getItemValueWrapperComponentData(item)
       }
     };

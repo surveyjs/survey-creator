@@ -21,9 +21,6 @@ export class TranslationDropdownQuestionComponent extends CreatorModelComponent<
   public get question(): QuestionSelectBase {
     return this.componentData.model;
   }
-  public get itemInputType(): string {
-    return this.question.isDescendantOf("dropdown") ? "radio" : "checkbox";
-  }
   protected createModel(): void {
     if (this.componentData) {
       if (!!this.adorner) {

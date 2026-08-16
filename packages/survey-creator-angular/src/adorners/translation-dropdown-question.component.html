@@ -4,7 +4,7 @@
     <div class="svc-question__dropdown-choices">
       <div *ngFor="let item of adorner.getRenderedItems()" [class]="adorner.getChoiceCss()">
         <ng-template
-          [component]="{ name: 'sv-ng-selectbase-item', data: { question: question, model: item, inputType: itemInputType } }">
+          [component]="{ name: 'sv-ng-selectbase-item', data: { question: question, model: item, inputType: adorner.itemInputType } }">
         </ng-template>
       </div>
     </div>
