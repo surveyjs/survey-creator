@@ -102,6 +102,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   public get isSideBySide(): boolean {
     return true;
   }
+  // In the grid view the page filtering (filteredPage) and the all/used strings filter work
+  // as in the standard mode.
   public get isSideBySideGrid(): boolean {
     return this.view === "grid";
   }
@@ -1528,16 +1530,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     root.setAsRoot();
     root.reset();
     return root;
-  }
-}
-
-// The grid alternative of the side-by-side mode: instead of two rendered survey panes it shows
-// the strings grid of the base Translation class with a source and a target locale column.
-// Page filtering (filteredPage) and the all/used strings filter work as in the standard mode.
-// Kept as a constructor shortcut - the behavior lives in TranslationSideBySide's "grid" view.
-export class TranslationSideBySideGrid extends TranslationSideBySide {
-  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null) {
-    super(survey, options, "grid");
   }
 }
 

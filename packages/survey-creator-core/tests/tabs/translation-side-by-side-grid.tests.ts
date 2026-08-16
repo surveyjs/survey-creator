@@ -1,5 +1,5 @@
 import { ListModel, Question, QuestionCommentModel, QuestionMatrixDropdownModel } from "survey-core";
-import { TranslationSideBySide, TranslationSideBySideGrid } from "../../src/components/tabs/translation-side-by-side";
+import { TranslationSideBySide } from "../../src/components/tabs/translation-side-by-side";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { StringEditorConnector, StringEditorViewModelBase } from "../../src/components/string-editor";
@@ -34,8 +34,8 @@ function createGridCreator(json: any = gridJSON): CreatorTester {
 function getPlugin(creator: CreatorTester): TabTranslationPlugin {
   return <TabTranslationPlugin>creator.getPlugin("translation");
 }
-function getModel(creator: CreatorTester): TranslationSideBySideGrid {
-  return <TranslationSideBySideGrid>getPlugin(creator).model;
+function getModel(creator: CreatorTester): TranslationSideBySide {
+  return <TranslationSideBySide>getPlugin(creator).model;
 }
 function getListItems(creator: CreatorTester, actionId: string): Array<any> {
   const action = creator.toolbar.getActionById(actionId);
