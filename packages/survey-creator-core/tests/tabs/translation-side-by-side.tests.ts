@@ -780,6 +780,36 @@ test("element strings dialog: the used/all strings filter is a caption action", 
   expect(getModel(creator).showAllElementStrings).toBeTruthy();
 });
 
+test("element strings dialog: the used/all strings switch keeps the cell placeholders", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
+  const realQ1 = creator.survey.getQuestionByName("q1");
+  // Reading a row renders the matrix - its rows and their cells are generated before the switch,
+  // as they are in an open dialog.
+  const titleRow = getStringsRow(getStringsMatrix(model), realQ1.locTitle);
+  expect(getSourceCell(titleRow).placeholder).toBe("q1");
+  expect(getTargetCell(titleRow).placeholder).toBe("Question 1");
+  model.elementStringsModel.showAllElementStrings = true;
+  // The switch replaces the rows, and the cells of the fresh ones are built while the rows are
+  // being assigned - the row of a cell must lead to its string by then, or the cell opens with
+  // no placeholder and none of the string's own editor settings.
+  const allTitleRow = getStringsRow(getStringsMatrix(model), realQ1.locTitle);
+  expect(getSourceCell(allTitleRow).placeholder).toBe("q1");
+  expect(getTargetCell(allTitleRow).placeholder).toBe("Question 1");
+  // A single-line string keeps its one-row editor as well.
+  expect(getTargetCell(allTitleRow).rows).toBe(1);
+  // ... and so do the rows of every switch that follows.
+  model.elementStringsModel.showAllElementStrings = false;
+  const usedTitleRow = getStringsRow(getStringsMatrix(model), realQ1.locTitle);
+  expect(getSourceCell(usedTitleRow).placeholder).toBe("q1");
+  expect(getTargetCell(usedTitleRow).placeholder).toBe("Question 1");
+  model.elementStringsModel.showAllElementStrings = true;
+  const allTitleRowAgain = getStringsRow(getStringsMatrix(model), realQ1.locTitle);
+  expect(getSourceCell(allTitleRowAgain).placeholder).toBe("q1");
+  expect(getTargetCell(allTitleRowAgain).placeholder).toBe("Question 1");
+});
+
 test("element strings dialog: the empty-element fallback to all strings is not stored", () => {
   const creator = createSideBySideCreator(containersJSON);
   const model = getModel(creator);

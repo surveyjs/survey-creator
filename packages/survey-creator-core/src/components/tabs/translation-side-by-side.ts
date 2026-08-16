@@ -1628,26 +1628,31 @@ export class TranslationElementStrings extends TranslationBase {
     const matrix = this.stringsMatrix;
     if (!matrix || this.isDisposed) return;
     const rows: Array<ItemValue> = [];
+    const items: { [key: string]: TranslationItem } = {};
     // The items of the whole scoped tree, the nested groups (matrix column choices, validators)
     // included: their names repeat across groups, so the row value is a position and the group
     // path goes into the row text instead.
     const addGroup = (group: TranslationGroup, path: string): void => {
       group.locItems.forEach(item => {
-        const row = new ItemValue("row" + rows.length, this.getRowTitleText(path, item));
-        row["translationData"] = item;
-        rows.push(row);
+        const value = "row" + rows.length;
+        rows.push(new ItemValue(value, this.getRowTitleText(path, item)));
+        items[value] = item;
       });
       group.groups.forEach(child => addGroup(child, (!!path ? path + ": " : "") + child.text));
     };
     if (!!this.root) addGroup(this.root, "");
+    // The items are keyed by the row value and not carried on the row ItemValues themselves: the
+    // assignment below re-creates the rows from their json (dropping anything attached to them)
+    // and builds the cells of a rendered matrix on its way, so the item of a row must already be
+    // resolvable when the cell setup asks for it (see onMatrixCellCreated - a row whose item it
+    // cannot find gets no placeholder and no length/line settings).
+    this.rowItems = items;
     // Replaced in one assignment, never pushed row by row: a single-row push takes the matrix's
     // incremental update path (tryUpdateRowsIncrementally), so N pushes are N row updates of the
-    // rendered table; the assignment is one change, and the table is rebuilt once. It rebuilds
-    // the ItemValues from their json and drops everything else, so the translation items are
-    // re-attached by row value.
-    const items: { [key: string]: TranslationItem } = {};
-    rows.forEach(row => { items[row.value] = <TranslationItem>row["translationData"]; });
+    // rendered table; the assignment is one change, and the table is rebuilt once.
     matrix.rows = rows;
+    // The matrix holds copies of the rows above, so each of them is annotated with its item as
+    // well - a row of the matrix leads to the string it edits, as the grid view's rows do.
     matrix.rows.forEach((row: ItemValue) => {
       row["translationData"] = items[row.value];
     });
@@ -1658,7 +1663,7 @@ export class TranslationElementStrings extends TranslationBase {
     if (!matrix || this.isDisposed) return;
     const data = {};
     matrix.rows.forEach((row: ItemValue) => {
-      const item = <TranslationItem>row["translationData"];
+      const item = this.rowItems[row.value];
       const value = !!item ? item.toJSON() : undefined;
       if (!Helpers.isValueEmpty(value)) {
         data[row.value] = value;
@@ -1742,12 +1747,11 @@ export class TranslationElementStrings extends TranslationBase {
     }
     return undefined;
   }
-  private getMatrixItemValue(row: any): ItemValue {
-    return !!this.stringsMatrix && !!row ? ItemValue.getItemByValue(this.stringsMatrix.rows, row.name) : undefined;
-  }
+  // The translation items of the current rows, keyed by the row value (see fillStringsMatrix).
+  private rowItems: { [key: string]: TranslationItem } = {};
   private getMatrixItem(row: any): TranslationItem {
-    const itemValue = this.getMatrixItemValue(row);
-    return !!itemValue ? itemValue["translationData"] : undefined;
+    // A generated matrix row is named by the value of the ItemValue it was built from.
+    return !!row ? this.rowItems[row.name] : undefined;
   }
   // The survey the matrix is rendered in drives the cells; the handlers are removed with the
   // model, so a survey that outlives it keeps none of them.
@@ -1799,6 +1803,7 @@ export class TranslationElementStrings extends TranslationBase {
       this.hostSurvey = undefined;
     }
     this.stringsMatrix = undefined;
+    this.rowItems = {};
   }
   protected getRootTranslationObj(): { obj: Base, name: string } {
     return { obj: this.elementValue, name: (<any>this.elementValue).name || "survey" };
