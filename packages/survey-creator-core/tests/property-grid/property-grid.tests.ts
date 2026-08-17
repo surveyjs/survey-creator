@@ -1629,7 +1629,7 @@ test("property-grid-setup disable for multiple", () => {
   expect(action).toBeTruthy();
   expect(action.enabled).toBeFalsy();
 });
-test("property-grid-setup disable for non-default locale", () => {
+test("property-grid-setup is not disabled by the editor locale, Bug#7935", () => {
   const question1 = new QuestionDropdownModel("q1");
   question1.choices = [1, 2, 3];
   const propertyGrid = new PropertyGridModelTester(question1);
@@ -1641,14 +1641,53 @@ test("property-grid-setup disable for non-default locale", () => {
   expect(action.enabled).toBeTruthy();
 
   editorLocalization.currentLocale = "de";
-  const propertyGrid2 = new PropertyGridModelTester(question1);
-  const choicesQuestion2 = <QuestionMatrixDynamicModel>(
-    propertyGrid2.survey.getQuestionByName("choices")
-  );
+  try {
+    const propertyGrid2 = new PropertyGridModelTester(question1);
+    const choicesQuestion2 = <QuestionMatrixDynamicModel>(
+      propertyGrid2.survey.getQuestionByName("choices")
+    );
+    const action2 = choicesQuestion2.getTitleToolbar().getActionById("property-grid-setup");
+    expect(action2).toBeTruthy();
+    expect(action2.enabled).toBeTruthy();
+  } finally {
+    editorLocalization.currentLocale = "";
+  }
+});
+test("property-grid-setup should not be disabled by the Creator UI locale, Bug#7935", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "dropdown", name: "q1", choices: [1, 2, 3] }]
+  };
+  creator.locale = "de";
+  try {
+    creator.selectQuestionByName("q1");
+    const choicesQuestion = <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("choices");
+    expect(choicesQuestion).toBeTruthy();
+    const action = choicesQuestion.getTitleToolbar().getActionById("property-grid-setup");
+    expect(action).toBeTruthy();
+    expect(creator.survey.locale).toBeFalsy();
+    expect(action.enabled).toBeTruthy();
+  } finally {
+    creator.locale = "";
+  }
+});
+test("property-grid-setup should be disabled for a non-default survey locale, Bug#7935", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "dropdown", name: "q1", choices: [1, 2, 3] }]
+  };
+  creator.selectQuestionByName("q1");
+  const choicesQuestion = <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("choices");
+  expect(choicesQuestion.getTitleToolbar().getActionById("property-grid-setup").enabled).toBeTruthy();
+
+  creator.survey.locale = "de";
+  //re-create the property grid to make sure the action state is re-calculated
+  creator.selectElement(creator.survey);
+  creator.selectQuestionByName("q1");
+  const choicesQuestion2 = <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("choices");
   const action2 = choicesQuestion2.getTitleToolbar().getActionById("property-grid-setup");
   expect(action2).toBeTruthy();
   expect(action2.enabled).toBeFalsy();
-  editorLocalization.currentLocale = "";
 });
 test("options.onSetPropertyEditorOptionsCallback - allowBatchEdit", () => {
   const options = new EmptySurveyCreatorOptions();
