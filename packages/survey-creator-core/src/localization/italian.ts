@@ -1862,8 +1862,8 @@ export var italianTranslation = {
       // [Auto-translated] "Never"
       none: "Mai"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Pulsanti",
+    // [Auto-translated] "Radio buttons"
+    radio: "Pulsanti radio",
     inputType: {
       // [Auto-translated] "Color"
       color: "Colore",
@@ -2141,9 +2141,9 @@ export var italianTranslation = {
       buttons: "Pulsanti",
       // [Auto-translated] "Dropdown"
       dropdown: "Menù a discesa",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmentato",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Toggle segmentato",
+      // [Auto-translated] "Radio buttons"
       radio: "Pulsanti radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Casella da spuntare",
@@ -3301,6 +3301,13 @@ export var italianTranslation = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Presetto applicato"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Articolo 1" }, { value: "item2", text: "Articolo 2" }, { value: "item3", text: "Articolo 3" }],
+    columns: [{ value: "column1", text: "Colonna 1" }, { value: "column2", text: "Colonna 2" }, { value: "column3", text: "Colonna 3" }],
+    rows: [{ value: "row1", text: "Riga 1" }, { value: "row2", text: "Riga 2" }],
+    matrixColumns: [{ name: "column1", title: "Colonna 1" }, { name: "column2", title: "Colonna 2" }, { name: "column3", title: "Colonna 3" }]
   }
 };
 

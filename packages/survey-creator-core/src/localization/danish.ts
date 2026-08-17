@@ -1863,8 +1863,8 @@ export var danishStrings = {
       // [Auto-translated] "Never"
       none: "Aldrig"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Alternativknapper",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radioknapper",
     inputType: {
       // [Auto-translated] "Color"
       color: "Farve",
@@ -2142,9 +2142,9 @@ export var danishStrings = {
       buttons: "Knapper",
       // [Auto-translated] "Dropdown"
       dropdown: "Rullemenu",
-      // [Auto-translated] "Segmented"
-      segmented: "Segmenteret",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Segmenteret toggle",
+      // [Auto-translated] "Radio buttons"
       radio: "Radioknapper",
       // [Auto-translated] "Checkbox"
       checkbox: "Afkrydsningsboks",
@@ -3302,6 +3302,13 @@ export var danishStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Forudindstilling anvendt"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Vare 1" }, { value: "item2", text: "Vare 2" }, { value: "item3", text: "Vare 3" }],
+    columns: [{ value: "column1", text: "Kolonne 1" }, { value: "column2", text: "Kolonne 2" }, { value: "column3", text: "Kolonne 3" }],
+    rows: [{ value: "row1", text: "Række 1" }, { value: "row2", text: "Række 2" }],
+    matrixColumns: [{ name: "column1", title: "Kolonne 1" }, { name: "column2", title: "Kolonne 2" }, { name: "column3", title: "Kolonne 3" }]
   }
 };
 setupLocale({ localeCode: "da", strings: danishStrings });

@@ -36,7 +36,7 @@ svc-tab-designer {
 }
 
 .svc-designer-header .svc-surface-header {
-  background-color: var(--sjs2-color-component-header-default-bg, transparent);
+  background-color: var(--sjs2-color-component-survey-header-default-bg, transparent);
   display: flex;
   padding-block-start: var(--sjs2-spacing-x200, 16px);
   padding-inline-end: var(--sjs2-spacing-x300, 24px);
@@ -54,13 +54,13 @@ svc-tab-designer {
 .svc-surface-header {
   .sd-title .sv-string-editor {
     &[aria-placeholder]:empty:before {
-      color: var(--sjs2-color-component-header-default-title-placeholder, rgba(28, 27, 32, 0.6));
+      color: var(--sjs2-color-component-survey-header-default-title-placeholder, rgba(28, 27, 32, 0.6));
     }
   }
 
   .sd-description .sv-string-editor {
     &[aria-placeholder]:empty:before {
-      color: var(--sjs2-color-component-header-default-description-placeholder, rgba(28, 27, 32, 0.4));
+      color: var(--sjs2-color-component-survey-header-default-description-placeholder, rgba(28, 27, 32, 0.4));
     }
   }
 }

@@ -5,16 +5,16 @@ import { assign } from "../../utils/utils";
 export class HeaderModel extends Base implements IHeader {
   static primaryColorStr = "var(--sjs-primary-backcolor)";
   static defaultTitleSettings = {
-    color: "--sjs2-color-component-header-default-title",
-    weight: "--sjs2-typography-font-weight-component-header-title",
-    size: "--sjs2-typography-font-size-component-header-title",
-    lineHeight: "--sjs2-typography-line-height-component-header-title",
+    color: "--sjs2-color-component-survey-header-default-title",
+    weight: "--sjs2-typography-font-weight-component-survey-header-title",
+    size: "--sjs2-typography-font-size-component-survey-header-title",
+    lineHeight: "--sjs2-typography-line-height-component-survey-header-title",
   };
   static defaultDescriptionSettings = {
-    color: "--sjs2-color-component-header-default-description",
-    size: "--sjs2-typography-font-size-component-header-description",
-    weight: "--sjs2-typography-font-weight-component-header-description",
-    lineHeight: "--sjs2-typography-line-height-component-header-description",
+    color: "--sjs2-color-component-survey-header-default-description",
+    size: "--sjs2-typography-font-size-component-survey-header-description",
+    weight: "--sjs2-typography-font-weight-component-survey-header-description",
+    lineHeight: "--sjs2-typography-line-height-component-survey-header-description",
   };
   static getDefaultVars() {
     const titleVars = Object.keys(this.defaultTitleSettings).map(key => this.defaultTitleSettings[key as keyof typeof this.defaultTitleSettings]);
@@ -58,7 +58,7 @@ export class HeaderModel extends Base implements IHeader {
       });
     }
 
-    const backgroundColorValue = cssVariables["--sjs2-color-component-header-default-bg"];
+    const backgroundColorValue = cssVariables["--sjs2-color-component-survey-header-default-bg"];
     if (!!backgroundColorValue) {
       this["backgroundColorSwitch"] = this.getBackgroundColorSwitchByValue(backgroundColorValue);
       this["backgroundColor"] = this["backgroundColorSwitch"] === "custom" ? backgroundColorValue : undefined;
@@ -106,9 +106,9 @@ export class HeaderModel extends Base implements IHeader {
 
   private setHeaderBackgroundColorCssVariable(cssVariables: any) {
     if (this["backgroundColorSwitch"] === "none") {
-      cssVariables["--sjs2-color-component-header-default-bg"] = undefined;
+      cssVariables["--sjs2-color-component-survey-header-default-bg"] = undefined;
     } else if (this["backgroundColorSwitch"] === "custom") {
-      cssVariables["--sjs2-color-component-header-default-bg"] = this["backgroundColor"] ?? "transparent";
+      cssVariables["--sjs2-color-component-survey-header-default-bg"] = this["backgroundColor"] ?? "transparent";
     }
   }
 

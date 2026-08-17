@@ -311,7 +311,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         innerCss: "svc-item-value-controls__button svc-item-value-controls__add svc-choice-elements-button",
         appearance: { style: "brand", size: "x-small", mode: "tertiary" },
         iconSize: "auto",
-        title: new ComputedUpdater(() => this.dragTooltip) as unknown as string,
+        title: new ComputedUpdater(() => this.expandPanelTooltip) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
@@ -335,6 +335,9 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
   get dragTooltip() {
     return getLocString("pe.dragItem");
+  }
+  get expandPanelTooltip() {
+    return getLocString(this.showPanel ? "pe.collapseNestedChoices" : "pe.expandNestedChoices");
   }
   get allowAdd() {
     const isNew = !this.question.isItemInList(this.item);

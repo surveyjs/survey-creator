@@ -1,6 +1,14 @@
-import { url, compareScreenshot, test, setJSON, expect, resetHoverToCreator, addQuestionByAddQuestionButton, setAllowZoom, hideContentBehindPopup, showContentBehindPopup } from "./helper";
+import { url, compareScreenshot, test, setJSON, expect, resetHoverToCreator, addQuestionByAddQuestionButton, setAllowZoom, hideContentBehindPopup, showContentBehindPopup, setToolboxItemJSON } from "./helper";
 
 const title = "Matrix surface";
+
+// The default JSON of a new Multi-Select Matrix names its columns "column1"/"column2"/... and titles them "Column 1"/"Column 2"/...
+// These tests rely on the previous default, where the column name itself was "Column 1".
+const oldDefaultMatrixdropdownJSON = {
+  columns: [{ name: "Column 1" }, { name: "Column 2" }, { name: "Column 3" }],
+  rows: ["Row 1", "Row 2"],
+  choices: [1, 2, 3, 4, 5]
+};
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
@@ -9,6 +17,7 @@ test.describe(title, () => {
 
   test("Matrix column editor", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
+    await setToolboxItemJSON(page, "matrixdropdown", oldDefaultMatrixdropdownJSON);
     await addQuestionByAddQuestionButton(page, "Multi-Select Matrix");
     const row1Column1Cell = page.locator(".sv-dropdown_select-wrapper").first();
     const editColumnButton = page.locator(".svc-matrix-cell__question-controls-button").first();
@@ -23,6 +32,7 @@ test.describe(title, () => {
   test("Matrix column editor with design surface zoomed out", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     await setAllowZoom(page, true);
+    await setToolboxItemJSON(page, "matrixdropdown", oldDefaultMatrixdropdownJSON);
     await addQuestionByAddQuestionButton(page, "Multi-Select Matrix");
     for (let i = 0; i < 5; i++) {
       await page.locator(".sv-action--zoomOut button").click();

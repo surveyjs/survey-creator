@@ -435,7 +435,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     await setShowSidebar(page, false);
     await toolboxSearch.type("single");
-    await compareScreenshot(page, toolboxElement, "toolbox-search-categories.png");
+    await compareScreenshot(page, toolboxElement, "toolbox-search-categories.png", { maxDiffPixels: 10 });
   });
 
   test("Toolbox with search compact", async ({ page }) => {

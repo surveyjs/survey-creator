@@ -146,10 +146,10 @@ export var nlStrings = {
     undo: "Ongedaan maken",
     // "Redo"
     redo: "Opnieuw uitvoeren",
-    // [Auto-translated] "Expand"
-    expandTooltip: "Uitbreiden",
+    // "Expand"
+    expandTooltip: "Uitklappen",
     // [Auto-translated] "Collapse"
-    collapseTooltip: "Instorting",
+    collapseTooltip: "Inklappen",
     // "Expand All"
     expandAllTooltip: "Alles uitvouwen",
     // "Collapse All"
@@ -1862,8 +1862,8 @@ export var nlStrings = {
       // [Auto-translated] "Never"
       none: "Nooit"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Keuzerondjes",
+    // [Auto-translated] "Radio buttons"
+    radio: "Radioknoppen",
     inputType: {
       // [Auto-translated] "Color"
       color: "Kleur",
@@ -2141,9 +2141,9 @@ export var nlStrings = {
       buttons: "Knopen",
       // [Auto-translated] "Dropdown"
       dropdown: "Vervolgkeuzemenu",
-      // [Auto-translated] "Segmented"
-      segmented: "Gesegmenteerd",
-      // [Auto-translated] "Radio Buttons"
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Gesegmenteerde schakelaar",
+      // [Auto-translated] "Radio buttons"
       radio: "Radioknoppen",
       // [Auto-translated] "Checkbox"
       checkbox: "Selectievakje",
@@ -3301,6 +3301,13 @@ export var nlStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset toegepast"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Item 1" }, { value: "item2", text: "Item 2" }, { value: "item3", text: "Item 3" }],
+    columns: [{ value: "column1", text: "Kolom 1" }, { value: "column2", text: "Kolom 2" }, { value: "column3", text: "Kolom 3" }],
+    rows: [{ value: "row1", text: "Rij 1" }, { value: "row2", text: "Rij 2" }],
+    matrixColumns: [{ name: "column1", title: "Kolom 1" }, { name: "column2", title: "Kolom 2" }, { name: "column3", title: "Kolom 3" }]
   }
 };
 setupLocale({ localeCode: "nl", strings: nlStrings });

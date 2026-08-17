@@ -2,7 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.0.0 (2026-08-11)
+
+## 3.0.0-beta.9 (2026-08-07)
+
 ## 3.0.0-beta.8 (2026-07-01)
+### 2.5.37 (2026-08-04)
+
+### 2.5.36 (2026-07-28)
+
+### 2.5.35 (2026-07-21)
+
 ### 2.5.34 (2026-07-14)
 
 ### 2.5.33 (2026-07-08)
@@ -11,6 +21,14 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 * Update placeholder handling for empty descriptions in the in-place editor ([#7859](https://github.com/surveyjs/survey-creator/issues/7859)) ([eac2c1e](https://github.com/surveyjs/survey-creator/commit/eac2c1ed31bd39305b218d142ca66a3fe89fea64))
+
+### [2.5.32](https://github.com/surveyjs/survey-creator/compare/v2.5.31...v2.5.32) (2026-07-01)
+
+### 2.5.31 (2026-06-30)
+
+### 2.5.30 (2026-06-24)
+
+### 2.5.29 (2026-06-17)
 
 ### [2.5.32](https://github.com/surveyjs/survey-creator/compare/v2.5.31...v2.5.32) (2026-07-01)
 

@@ -4,8 +4,9 @@ import {
   SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner, LocalizableString,
   settings as surveyLibSettings
 } from "survey-core";
+import { localizableJSON } from "./localizable-json";
 
-/**
+/*
  * List available question convert modes
  */
 export enum QuestionConvertMode {
@@ -19,11 +20,11 @@ export var settings = {
     sortByName: false,
     //Set it to \xef\xbb\xbf; to tell system that it is UTF8 file. You can use other prefix as well
     exportPrefix: "",
-    /**
+    /*
      * The maximum number of locales that user can select at once for translation
      */
     maximumSelectedLocales: 7,
-    /**
+    /*
      * The name of the translation export file in csv format
      */
     exportFileName: "survey_translation.csv"
@@ -49,11 +50,11 @@ export var settings = {
   },
   defaultNewSurveyJSON: {},
   designer: {
-    /**
+    /*
      * The default question type on clicking Add Question button.
      */
     defaultAddQuestionType: "text",
-    /**
+    /*
      * Set this property to false, to hide "Add Question" button on designer surface
      */
     showAddQuestionButton: true
@@ -75,7 +76,7 @@ export var settings = {
     set openBracket(val: string) { openBracketValue = val; },
     get closeBracket(): string { return closeBracketValue || surveyLibSettings.expressionVariableDelimiters.end; },
     set closeBracket(val: string) { closeBracketValue = val; },
-    /**
+    /*
      * Set these properties to false if you don't want to update expressions on changing question and column names and on changing choices values
      */
     updateExpressionsOnChanging: {
@@ -83,14 +84,14 @@ export var settings = {
       columnName: true,
       choiceValue: true
     },
-    /**
+    /*
      * Set these properties to false if you don't want to update expressions on deleting question
      */
     updateExpressionsOnDeleting: {
       question: true
     }
   },
-  /**
+  /*
    * Determines which types of questions the conversion will be available for.
    */
   questionConvertMode: QuestionConvertMode.AllTypes,
@@ -114,24 +115,28 @@ export var settings = {
     allowExpandMultipleCategories: false
   },
   toolbox: {
-    /**
+    /*
      * Use it to change the default question JSON on dropping it into designer or converting questions
+     *
+     * A part of the JSON can be localizable. Mark it with the `localizableJSON` function and it is replaced
+     * with the JSON from the localization dictionary of the current Creator UI locale, `defaultJson.choices`
+     * in the example below, when the question is created.
      */
     defaultJSON: <{ [index: string]: any }>{
       dropdown: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       tagbox: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       checkbox: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       radiogroup: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       ranking: {
-        choices: ["Item 1", "Item 2", "Item 3"]
+        choices: localizableJSON("defaultJson.choices")
       },
       imagepicker: {
         imageFit: "cover"
@@ -140,29 +145,42 @@ export var settings = {
         imageFit: "cover",
         imageHeight: "auto",
         imageWidth: "100%"
+      },
+      matrix: {
+        columns: localizableJSON("defaultJson.columns"),
+        rows: localizableJSON("defaultJson.rows")
+      },
+      matrixdropdown: {
+        columns: localizableJSON("defaultJson.matrixColumns"),
+        rows: localizableJSON("defaultJson.rows"),
+        choices: [1, 2, 3, 4, 5]
+      },
+      matrixdynamic: {
+        columns: localizableJSON("defaultJson.matrixColumns"),
+        choices: [1, 2, 3, 4, 5]
       }
     }
   },
-  /**
+  /*
    * Notification settings
    */
   notifications: {
     lifetime: 2000
   },
-  /**
+  /*
    * Auto save parameters
    */
   autoSave: {
     delay: 500
   },
-  /**
+  /*
    * Drag Drop Settings
    */
   dragDrop: {
     restrictDragQuestionBetweenPages: false,
     allowDragToTheSameLine: true
   },
-  /**
+  /*
    * Creator layout settings
    */
   layout: {

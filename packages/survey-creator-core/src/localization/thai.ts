@@ -1862,8 +1862,8 @@ export const thStrings = {
       // "Never"
       none: "ไม่เคย"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "ปุ่มตัวเลือก",
+    // [Auto-translated] "Radio buttons"
+    radio: "ปุ่มวิทยุ",
     inputType: {
       // "Color"
       color: "สี",
@@ -2141,10 +2141,10 @@ export const thStrings = {
       buttons: "ปุ่ม",
       // "Dropdown"
       dropdown: "ดรอปดาวน์",
-      // [Auto-translated] "Segmented"
-      segmented: "แบ่งกลุ่ม",
-      // [Auto-translated] "Radio Buttons"
-      radio: "ปุ่มตัวเลือก",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "สวิตช์แบบแบ่งส่วน",
+      // [Auto-translated] "Radio buttons"
+      radio: "ปุ่มวิทยุ",
       // [Auto-translated] "Checkbox"
       checkbox: "ช่องทําเครื่องหมาย",
       // [Auto-translated] "Switch"
@@ -3301,6 +3301,13 @@ export const thStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "ใช้ค่าที่ตั้งไว้ล่วงหน้า"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "รายการ 1" }, { value: "item2", text: "รายการ 2" }, { value: "item3", text: "รายการ 3" }],
+    columns: [{ value: "column1", text: "คอลัมน์ 1" }, { value: "column2", text: "คอลัมน์ 2" }, { value: "column3", text: "คอลัมน์ 3" }],
+    rows: [{ value: "row1", text: "แถว 1" }, { value: "row2", text: "แถว 2" }],
+    matrixColumns: [{ name: "column1", title: "คอลัมน์ 1" }, { name: "column2", title: "คอลัมน์ 2" }, { name: "column3", title: "คอลัมน์ 3" }]
   }
 };
 

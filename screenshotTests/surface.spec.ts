@@ -1220,14 +1220,14 @@ test.describe(title, () => {
             {
               "type": "panel",
               "name": "question1",
-              "maxWidth": "200px",
-              "minWidth": "200px"
+              "maxWidth": "208px",
+              "minWidth": "208px"
             },
             {
               "type": "panel",
               "name": "panel1z",
-              "maxWidth": "200px",
-              "minWidth": "200px",
+              "maxWidth": "208px",
+              "minWidth": "208px",
               "title": "Title",
               "startWithNewLine": false,
               "isRequired": true
@@ -1235,36 +1235,36 @@ test.describe(title, () => {
             {
               "type": "paneldynamic",
               "name": "panel1",
-              "maxWidth": "200px",
-              "minWidth": "200px",
+              "maxWidth": "208px",
+              "minWidth": "208px",
               "startWithNewLine": false,
               "isRequired": true
             },
             {
               "type": "html",
               "name": "question2",
-              "maxWidth": "200px",
-              "minWidth": "200px",
+              "maxWidth": "208px",
+              "minWidth": "208px",
               "startWithNewLine": false
             },
             {
               "type": "image",
               "name": "question3",
-              "maxWidth": "200px",
-              "minWidth": "200px",
+              "maxWidth": "208px",
+              "minWidth": "208px",
               "startWithNewLine": false
             },
             {
               "type": "panel",
               "name": "question1",
-              "maxWidth": "400px",
-              "minWidth": "400px"
+              "maxWidth": "408px",
+              "minWidth": "408px"
             },
             {
               "type": "panel",
               "name": "panel11",
-              "maxWidth": "400px",
-              "minWidth": "400px",
+              "maxWidth": "408px",
+              "minWidth": "408px",
               "title": "Title",
               "startWithNewLine": false,
               "isRequired": true
@@ -1272,23 +1272,23 @@ test.describe(title, () => {
             {
               "type": "paneldynamic",
               "name": "panel1",
-              "maxWidth": "400px",
-              "minWidth": "400px",
+              "maxWidth": "408px",
+              "minWidth": "408px",
               "startWithNewLine": false,
               "isRequired": true
             },
             {
               "type": "html",
               "name": "question2",
-              "maxWidth": "400px",
-              "minWidth": "400px",
+              "maxWidth": "408px",
+              "minWidth": "408px",
               "startWithNewLine": false
             },
             {
               "type": "image",
               "name": "question3",
-              "maxWidth": "400px",
-              "minWidth": "400px",
+              "maxWidth": "408px",
+              "minWidth": "408px",
               "startWithNewLine": false
             }
           ]
@@ -1337,14 +1337,14 @@ test.describe(title, () => {
                   "title": "Q1"
                 }
               ],
-              "minWidth": "200px",
-              "maxWidth": "250px"
+              "minWidth": "208px",
+              "maxWidth": "258px"
             },
             {
               "type": "paneldynamic",
               "name": "panel2",
-              "minWidth": "200px",
-              "maxWidth": "250px",
+              "minWidth": "208px",
+              "maxWidth": "258px",
               "startWithNewLine": false,
               "templateElements": [
                 {

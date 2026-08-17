@@ -1862,8 +1862,8 @@ export var ruStrings = {
       // [Auto-translated] "Never"
       none: "Никогда"
     },
-    // [Auto-translated] "Radio Buttons"
-    radio: "Переключатели",
+    // [Auto-translated] "Radio buttons"
+    radio: "Кнопки радио",
     inputType: {
       // [Auto-translated] "Color"
       color: "Цвет",
@@ -2141,10 +2141,10 @@ export var ruStrings = {
       buttons: "Кнопки",
       // [Auto-translated] "Dropdown"
       dropdown: "Выпадающий список",
-      // [Auto-translated] "Segmented"
-      segmented: "Сегментированная",
-      // [Auto-translated] "Radio Buttons"
-      radio: "Радиокнопки",
+      // [Auto-translated] "Segmented toggle"
+      segmented: "Сегментированный переключатель",
+      // [Auto-translated] "Radio buttons"
+      radio: "Кнопки радио",
       // [Auto-translated] "Checkbox"
       checkbox: "Чекбокс",
       // [Auto-translated] "Switch"
@@ -3301,6 +3301,13 @@ export var ruStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Применённый пресет"
+  },
+  // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
+  defaultJson: {
+    choices: [{ value: "item1", text: "Пункт 1" }, { value: "item2", text: "Пункт 2" }, { value: "item3", text: "Пункт 3" }],
+    columns: [{ value: "column1", text: "Колонка 1" }, { value: "column2", text: "Колонка 2" }, { value: "column3", text: "Колонка 3" }],
+    rows: [{ value: "row1", text: "Строка 1" }, { value: "row2", text: "Строка 2" }],
+    matrixColumns: [{ name: "column1", title: "Колонка 1" }, { name: "column2", title: "Колонка 2" }, { name: "column3", title: "Колонка 3" }]
   }
 };
 
