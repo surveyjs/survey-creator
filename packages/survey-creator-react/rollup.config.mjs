@@ -20,7 +20,7 @@ const buildPlatformJson = {
   "keywords": [
     "react",
     "react-component",
-    "react-builder",
+    "react-form-builder",
     "survey",
     "form",
     "surveyjs",
