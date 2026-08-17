@@ -12,7 +12,8 @@ import {
   QuestionPanelDynamicModel,
   ChoiceItem,
   patchLegacyCSSVariables,
-  ensureBaseThemeStyles
+  ensureBaseThemeStyles,
+  IConfirmDialogOptions
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
@@ -5187,6 +5188,9 @@ export class SurveyCreatorModel extends Base
     const options = { element, item, propertyName: stringName, allow: !this.readOnly && !!isStringEditable(element, stringName) };
     this.onAllowInplaceEdit.fire(this, options);
     return options.allow;
+  }
+  public confirmActionAsync(message: string, callback: (res: boolean) => void, options?: IConfirmDialogOptions): void {
+    SurveySettings.confirmActionAsync(message, callback, { rootElement: this.rootElement, ...options });
   }
 }
 
