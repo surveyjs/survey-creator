@@ -1273,16 +1273,16 @@ test("survey confirmActionAsync", () => {
     rootElement = options?.rootElement;
   };
   const creator = new CreatorTester();
-  creator["_rootElementValue"] = "survey_root_element" as any;
+  creator["_rootElementValue"] = "creator_root_element" as any;
   creator.confirmActionAsync("message_test", () => { });
-  expect(rootElement).toBe("survey_root_element");
+  expect(rootElement).toBe("creator_root_element");
 
   creator.confirmActionAsync("message_test", () => { }, { rootElement: "document_root_element" as any });
   expect(rootElement).toBe("document_root_element");
 
   const options: IConfirmDialogOptions = {};
   creator.confirmActionAsync("message_test", () => { }, options);
-  expect(rootElement).toBe("survey_root_element");
+  expect(rootElement).toBe("creator_root_element");
   expect(options.rootElement).toBeUndefined();
   surveySettings.confirmActionAsync = oldSettingsFunc;
 });
