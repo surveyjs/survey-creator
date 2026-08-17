@@ -69,16 +69,17 @@ Pass the `creator` instance to the component from your UI package to render it �
 
 ## Themes
 
-This package ships the Survey Creator UI style sheets. `survey-creator-core/survey-creator-core.css` applies the default UI theme; `survey-creator-core.min.css` is the minified build. A creator theme is registered with `registerCreatorTheme(theme)` and applied to the model with `applyCreatorTheme(theme)`:
+`survey-creator-core/survey-creator-core.css` applies the Light UI theme; `survey-creator-core.min.css` is the minified build. The Dark, Contrast, and Survey Creator 2020 themes are imported from `survey-creator-core/themes` and applied with `creator.applyCreatorTheme(theme)`:
 
 ```js
-import { registerCreatorTheme } from "survey-creator-core";
+import { DefaultDark } from "survey-creator-core/themes";
 
-registerCreatorTheme(myCreatorTheme);
-creator.applyCreatorTheme(myCreatorTheme);
+creator.applyCreatorTheme(DefaultDark);
 ```
 
-Because both the style sheets and `applyCreatorTheme` live in this package, UI theming works the same way in every framework — the UI package you pair with `survey-creator-core` adds nothing to it.
+Because both the style sheets and `applyCreatorTheme` live in this package, UI theming works identically in every framework — the UI package you pair with `survey-creator-core` adds nothing to it.
+
+To make a custom creator theme available for selection in the Survey Creator UI, register it with `registerCreatorTheme(theme)`. See [Dynamic UI Customization](https://surveyjs.io/survey-creator/examples/dynamic-ui-customization/reactjs).
 
 The UI theme styles the builder itself. The look of the forms it produces is edited in the built-in Theme tab and stored in the survey theme JSON. See [Themes & Styles](https://surveyjs.io/survey-creator/documentation/survey-creator-interface-themes) and [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor).
 
