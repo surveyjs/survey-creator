@@ -3,11 +3,9 @@ import { CreatorTester } from "./creator-tester";
 import { editorLocalization } from "../src/editorLocalization";
 import { IPresencePeerEntry, IPresenceState, PresencePlugin } from "../src/plugins/presence";
 
-/**
- * TranslationDeleteGuard: deleting a locale row in the Translations-tab
- * language list is vetoed with a danger dialog while a remote peer claims
- * that locale (sticky trLoc, or a live tr focus from an older sender).
- */
+// TranslationDeleteGuard: deleting a locale row in the Translations-tab
+// language list is vetoed with a danger dialog while a remote peer claims
+// that locale (sticky trLoc, or a live tr focus from an older sender).
 
 const peerEntry = (clientId: string, state: Partial<IPresenceState>): IPresencePeerEntry => ({
   clientId,
@@ -38,7 +36,7 @@ function localeRowIndex(locales: any, name: string): number {
   return value.findIndex((row: any) => row?.name === name);
 }
 
-/** Stub the dialog host; returns captured showDialog options via a getter. */
+// Stub the dialog host; returns captured showDialog options via a getter.
 function stubShowDialog(): { restore: () => void, captured: () => any, count: () => number } {
   const prev = libSettings.showDialog;
   let captured: any = undefined;

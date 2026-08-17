@@ -3,24 +3,22 @@ import { editorLocalization } from "../../editorLocalization";
 import { showConfirmDialog } from "../../utils/confirm-dialog";
 import { IPresencePeer } from "./presence-state";
 
-/**
- * Guards the Translations-tab language list against deleting a locale that a
- * remote participant is currently working on. A peer "works on" a locale when
- * their presence claims it: the sticky `trLoc` while they stay on the
- * Translations tab, or a live `tr` focus for older senders that predate the
- * sticky field. On conflict the removal is vetoed and a danger dialog names
- * the peers; confirming re-runs the removal through the regular pipeline
- * (translation.ts row handlers -> deleteLocaleStrings -> undo transaction ->
- * journal records), so nothing is duplicated here.
- *
- * Known gaps, both deliberate:
- *  - `SurveyCreatorModel.deleteLocaleStrings` builds its own throwaway
- *    Translation and never touches the language-list survey - programmatic
- *    deletions bypass this guard.
- *  - A peer typing into a cell of a locale that was deleted anyway re-creates
- *    the locale with their next keystroke (journal records resurrect it) -
- *    tracked as a separate task.
- */
+// Guards the Translations-tab language list against deleting a locale that a
+// remote participant is currently working on. A peer "works on" a locale when
+// their presence claims it: the sticky `trLoc` while they stay on the
+// Translations tab, or a live `tr` focus for older senders that predate the
+// sticky field. On conflict the removal is vetoed and a danger dialog names
+// the peers; confirming re-runs the removal through the regular pipeline
+// (translation.ts row handlers -> deleteLocaleStrings -> undo transaction ->
+// journal records), so nothing is duplicated here.
+//
+// Known gaps, both deliberate:
+//  - `SurveyCreatorModel.deleteLocaleStrings` builds its own throwaway
+//    Translation and never touches the language-list survey - programmatic
+//    deletions bypass this guard.
+//  - A peer typing into a cell of a locale that was deleted anyway re-creates
+//    the locale with their next keystroke (journal records resurrect it) -
+//    tracked as a separate task.
 export class TranslationDeleteGuard {
   private bypass = false;
 

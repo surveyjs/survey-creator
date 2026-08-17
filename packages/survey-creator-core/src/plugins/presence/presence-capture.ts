@@ -3,9 +3,9 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { buildLocator } from "../journal/journal-locator";
 import { encodeAnchor, encodeEditFocus, getCanvasElement, IPresenceFocus, IPresenceState, PRESENCE_SELECTORS } from "./presence-state";
 
-/** Mouse updates are throttled to this interval (trailing edge). */
+// Mouse updates are throttled to this interval (trailing edge).
 const MOUSE_THROTTLE_MS = 50;
-/** How long after a focusout before the keyboard focus is cleared. */
+// How long after a focusout before the keyboard focus is cleared.
 const FOCUS_BLUR_DEBOUNCE_MS = 300;
 
 const raf = (cb: () => void): any =>
@@ -15,12 +15,10 @@ const cancelRaf = (id: any): void => {
   else clearTimeout(id);
 };
 
-/**
- * Watches the local creator (active tab, selected element, keyboard focus,
- * mouse) and maintains the full presence state, firing `onStateChanged`
- * with the complete state after every change. The state carries no user
- * identity - the transport/server is expected to attach it to the envelope.
- */
+// Watches the local creator (active tab, selected element, keyboard focus,
+// mouse) and maintains the full presence state, firing `onStateChanged`
+// with the complete state after every change. The state carries no user
+// identity - the transport/server is expected to attach it to the envelope.
 export class PresenceCapture {
   public onStateChanged: EventBase<PresenceCapture, { state: IPresenceState }> = new EventBase();
   private state: IPresenceState = { tab: "", sel: null, focus: null, trLoc: null, cur: null };
@@ -131,14 +129,12 @@ export class PresenceCapture {
       this.emit({ focus });
     }
   }
-  /**
-   * Arm the debounced clear. Re-focusing the same area within the window
-   * keeps the focus alive (the area's model event re-emits the new target),
-   * focus settling in another area replaces it via setFocus, and a blur to a
-   * non-focusable node (a plain canvas click fires no focusin) lets the
-   * timer clear the stale claim - the area check guards against clearing a
-   * focus that already moved on.
-   */
+  // Arm the debounced clear. Re-focusing the same area within the window
+  // keeps the focus alive (the area's model event re-emits the new target),
+  // focus settling in another area replaces it via setFocus, and a blur to a
+  // non-focusable node (a plain canvas click fires no focusin) lets the
+  // timer clear the stale claim - the area check guards against clearing a
+  // focus that already moved on.
   private scheduleFocusClear(area: IPresenceFocus["area"]): void {
     this.cancelFocusClear();
     this.focusBlurTimer = setTimeout(() => {
@@ -335,13 +331,11 @@ export class PresenceCapture {
     }, MOUSE_THROTTLE_MS);
   };
   private hideCursor = (): void => this.sendCur(null, "");
-  /**
-   * A hidden tab keeps its DOM focus (the browser fires no blur on tab
-   * switch), so without this a backgrounded client would claim its
-   * translation cell forever - peers would see a ring for a user who is not
-   * even looking at the page. Release the claim on hide and re-claim on
-   * return, when the caret is in fact still inside the cell.
-   */
+  // A hidden tab keeps its DOM focus (the browser fires no blur on tab
+  // switch), so without this a backgrounded client would claim its
+  // translation cell forever - peers would see a ring for a user who is not
+  // even looking at the page. Release the claim on hide and re-claim on
+  // return, when the caret is in fact still inside the cell.
   private hiddenFocus: IPresenceFocus | null = null;
   private onVisibility = (): void => {
     if (this.doc?.visibilityState === "hidden") {

@@ -153,13 +153,11 @@ export class UndoRedoManager {
     this.canUndoRedoCallback();
     this.notifyChangesFinished(nextTransaction);
   }
-  /**
-   * Optional validity gate consulted before a transaction is undone/redone.
-   * When it returns `false`, undo()/redo() consumes the transaction without
-   * executing it (and without notifying changesFinishedCallback) instead of
-   * rolling it back / re-applying it. Undefined means every transaction is
-   * valid (single-creator behavior is unchanged).
-   */
+  // Optional validity gate consulted before a transaction is undone/redone.
+  // When it returns `false`, undo()/redo() consumes the transaction without
+  // executing it (and without notifying changesFinishedCallback) instead of
+  // rolling it back / re-applying it. Undefined means every transaction is
+  // valid (single-creator behavior is unchanged).
   public isTransactionValidCallback: (transaction: Transaction, isUndo: boolean) => boolean;
   private _dropInvalidTransactions(isUndo: boolean): boolean {
     if (!this.isTransactionValidCallback) return false;

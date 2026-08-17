@@ -4,21 +4,21 @@ import { buildLocator, resolveLocator } from "../journal/journal-locator";
 import { getCanvasElement, IPresenceFocus, IPresencePeer, IPresenceState, mapOffset, PRESENCE_SELECTORS, resolveAnchor, resolveEditFocus } from "./presence-state";
 import "./presence.scss";
 
-/** Above the creator content; below survey-core popups is acceptable (cosmetic). */
+// Above the creator content; below survey-core popups is acceptable (cosmetic).
 const OVERLAY_Z_INDEX = 1100;
-/** A cursor that hasn't moved for this long fades out. */
+// A cursor that hasn't moved for this long fades out.
 const CURSOR_IDLE_MS = 30_000;
-/** An offset-mapped cursor point may scroll out of the designer column by
- * this much vertically before it is hidden. */
+// An offset-mapped cursor point may scroll out of the designer column by
+// this much vertically before it is hidden.
 const CURSOR_POINT_SLACK = 16;
-/** A pinned cursor sits this far inside the designer column's edge. */
+// A pinned cursor sits this far inside the designer column's edge.
 const CURSOR_EDGE_INSET = 2;
-/** Safety tick for changes no observer catches (animations, scrollIntoView). */
+// Safety tick for changes no observer catches (animations, scrollIntoView).
 const FALLBACK_TICK_MS = 500;
-/** The peer ring is a 2px (--sjs2-border-width-x200) box-shadow outside the node. */
+// The peer ring is a 2px (--sjs2-border-width-x200) box-shadow outside the node.
 const RING_WIDTH = 2;
-/** Badge offsets from the ring's OUTER edges (Figma node 102:20059): the
- * badge hangs 4px below the ring, its right edge 8px inside the ring's. */
+// Badge offsets from the ring's OUTER edges (Figma node 102:20059): the
+// badge hangs 4px below the ring, its right edge 8px inside the ring's.
 const BADGE_GAP = 4;
 const BADGE_INSET = 8;
 
@@ -31,48 +31,46 @@ const intersects = (a: IRect, b: IRect): boolean =>
 const containsPoint = (r: IRect, x: number, y: number): boolean =>
   x >= r.left && x <= r.left + r.width && y >= r.top && y <= r.top + r.height;
 
-/** A native decoration wanted on a node this tick, plus its name-badge data. */
+// A native decoration wanted on a node this tick, plus its name-badge data.
 interface IDecoration {
   color: string;
-  /** Peer name shown on the badge under the ring. */
+  // Peer name shown on the badge under the ring.
   name: string;
-  /** Visible area of the node's scroll container - the badge hides outside it. */
+  // Visible area of the node's scroll container - the badge hides outside it.
   clip?: IRect;
-  /** Overlaying panel rect the badge must not draw over (flyout/mobile sidebar). */
+  // Overlaying panel rect the badge must not draw over (flyout/mobile sidebar).
   avoid?: IRect;
 }
 
-/** Per-peer DOM artifacts, created lazily and repositioned every tick. */
+// Per-peer DOM artifacts, created lazily and repositioned every tick.
 interface IPeerArtifacts {
   cursor: HTMLElement;
   cursorName: HTMLElement;
-  /** Receiver-side time of the last observed cursor change (staleness). */
+  // Receiver-side time of the last observed cursor change (staleness).
   curChangedAt: number;
-  /** Serialized last cursor - the change detector behind the idle fade. */
+  // Serialized last cursor - the change detector behind the idle fade.
   lastCurSig: string | undefined;
 }
 
-/**
- * Renders remote participants.
- *
- * Element focus (selection ring, focused choice row, property-grid field) is
- * drawn NATIVELY: the renderer stamps a `data-collab-focus` attribute plus an
- * inline `--collab-peer-color` CSS variable onto the real creator nodes, and
- * presence.scss draws the same box-shadow ring the built-in selection uses -
- * so it scrolls, clips and layers like the native one. Inline styles and
- * unknown attributes survive framework re-renders; a re-CREATED node loses
- * them, but the MutationObserver tick below re-applies on the next pass.
- *
- * Only the mouse cursors and the name badges, which cannot be expressed as
- * element decorations, live in a fixed pointer-transparent layer.
- */
+// Renders remote participants.
+//
+// Element focus (selection ring, focused choice row, property-grid field) is
+// drawn NATIVELY: the renderer stamps a `data-collab-focus` attribute plus an
+// inline `--collab-peer-color` CSS variable onto the real creator nodes, and
+// presence.scss draws the same box-shadow ring the built-in selection uses -
+// so it scrolls, clips and layers like the native one. Inline styles and
+// unknown attributes survive framework re-renders; a re-CREATED node loses
+// them, but the MutationObserver tick below re-applies on the next pass.
+//
+// Only the mouse cursors and the name badges, which cannot be expressed as
+// element decorations, live in a fixed pointer-transparent layer.
 export class PresenceOverlay {
   private disposed = false;
   private layer: HTMLElement;
   private artifacts = new Map<string, IPeerArtifacts>();
-  /** Nodes currently carrying a decoration -> the applied peer color. */
+  // Nodes currently carrying a decoration -> the applied peer color.
   private decorated = new Map<HTMLElement, string>();
-  /** Name badge (a layer artifact) per decorated node. */
+  // Name badge (a layer artifact) per decorated node.
   private badges = new Map<HTMLElement, HTMLElement>();
   private rafId: any = 0;
   private scheduled = false;
@@ -102,7 +100,7 @@ export class PresenceOverlay {
     this.rootPoll = this.raf(this.attachObservers);
   }
 
-  /** Mark the overlay dirty - repaints on the next animation frame. */
+  // Mark the overlay dirty - repaints on the next animation frame.
   public refresh = (): void => {
     if (this.scheduled || this.disposed || !this.layer) return;
     this.scheduled = true;
@@ -208,7 +206,7 @@ export class PresenceOverlay {
     return this.doc.querySelector(PRESENCE_SELECTORS.tabContent("designer"));
   }
 
-  /** Selection -> the adorner node: direct name anchor, else locator + owner-chain walk. */
+  // Selection -> the adorner node: direct name anchor, else locator + owner-chain walk.
   private resolveSelectionNode(sel: NonNullable<IPresenceState["sel"]>, container: Element): Element | null {
     const byName = (name: string): Element | null =>
       container.querySelector(PRESENCE_SELECTORS.element(name)) ??
@@ -236,28 +234,24 @@ export class PresenceOverlay {
     return null;
   }
 
-  /**
-   * The node that carries the native selection ring for an adorner: the page
-   * anchor IS its `.svc-page__content`; a question/panel adorner has the
-   * `.svc-question__content` as a direct child, a page wrapper (`.svc-page`,
-   * matched by name via its `data-sv-drop-target-survey-element` attribute)
-   * has the `.svc-page__content`.
-   */
+  // The node that carries the native selection ring for an adorner: the page
+  // anchor IS its `.svc-page__content`; a question/panel adorner has the
+  // `.svc-question__content` as a direct child, a page wrapper (`.svc-page`,
+  // matched by name via its `data-sv-drop-target-survey-element` attribute)
+  // has the `.svc-page__content`.
   private ringNode(anchor: Element): Element | null {
     if (anchor.hasAttribute("data-sv-drop-target-survey-page")) return anchor;
     return anchor.querySelector(":scope > .svc-question__content") ??
       anchor.querySelector(":scope > .svc-page__content");
   }
 
-  /**
-   * tr focus -> the local stringsSurvey matrix name. Matrix names diverge
-   * when peers use different showAllStrings/page-filter settings, so identity
-   * is established by the owning element's locator + the property name, with
-   * the sender's name kept as the same-view fast path. Cached per
-   * stringsSurvey instance - the getAllQuestions scan runs once per peer
-   * state change, not per rAF tick (the survey is recreated on every
-   * locale/filter change, which also invalidates the cache).
-   */
+  // tr focus -> the local stringsSurvey matrix name. Matrix names diverge
+  // when peers use different showAllStrings/page-filter settings, so identity
+  // is established by the owning element's locator + the property name, with
+  // the sender's name kept as the same-view fast path. Cached per
+  // stringsSurvey instance - the getAllQuestions scan runs once per peer
+  // state change, not per rAF tick (the survey is recreated on every
+  // locale/filter change, which also invalidates the cache).
   private trMatrixCache: { survey: unknown, byKey: Map<string, string | null> } | null = null;
 
   private resolveTrMatrixName(tr: Extract<IPresenceFocus, { area: "tr" }>, survey: any): string | null {
@@ -284,13 +278,11 @@ export class PresenceOverlay {
     return name;
   }
 
-  /**
-   * tr focus -> the cell's td node. The column index comes from the LOCAL
-   * matrix columns (peers may show different locale sets); the row-text cell
-   * is excluded by the selector, so locale-cell order matches the column
-   * order. A locale not visible locally, or a lazily-skipped (skeleton) row,
-   * resolves to null - the next tick retries like any other missing anchor.
-   */
+  // tr focus -> the cell's td node. The column index comes from the LOCAL
+  // matrix columns (peers may show different locale sets); the row-text cell
+  // is excluded by the selector, so locale-cell order matches the column
+  // order. A locale not visible locally, or a lazily-skipped (skeleton) row,
+  // resolves to null - the next tick retries like any other missing anchor.
   private resolveTranslationCell(tr: Extract<IPresenceFocus, { area: "tr" }>, survey: any, container: Element): Element | null {
     const matrixName = this.resolveTrMatrixName(tr, survey);
     const matrix = matrixName ? survey.getQuestionByName(matrixName) : null;
@@ -302,15 +294,13 @@ export class PresenceOverlay {
     return boxes && colIdx < boxes.length ? boxes[colIdx] : null;
   }
 
-  /**
-   * Viewport point for a peer's cursor. "surface" cursors carrying px offsets
-   * are mapped from the sender's zoom-normalized canvas box onto the local one
-   * (`mapOffset` per axis, rescaled by the local zoom) - the canvas block lays
-   * out identically across peers, unlike the window-wide content box the
-   * fractions are relative to. Everything else - other scopes, and surface
-   * cursors captured while the canvas block had no size - keeps the fraction
-   * mapping; null (cursor hidden) when neither encoding is usable locally.
-   */
+  // Viewport point for a peer's cursor. "surface" cursors carrying px offsets
+  // are mapped from the sender's zoom-normalized canvas box onto the local one
+  // (`mapOffset` per axis, rescaled by the local zoom) - the canvas block lays
+  // out identically across peers, unlike the window-wide content box the
+  // fractions are relative to. Everything else - other scopes, and surface
+  // cursors captured while the canvas block had no size - keeps the fraction
+  // mapping; null (cursor hidden) when neither encoding is usable locally.
   private cursorPoint(cur: NonNullable<IPresenceState["cur"]>, node: Element):
     { x: number, y: number, byOffset: boolean } | null {
     if (cur.a.s === "surface" &&
@@ -332,17 +322,15 @@ export class PresenceOverlay {
     return { x: r.left + cur.x * r.width, y: r.top + cur.y * r.height, byOffset: false };
   }
 
-  /**
-   * Fit an offset-mapped cursor point into the designer column (the area
-   * between the toolbox and the sidebar). A peer with a wider window has
-   * wider gutters around the canvas, so their gutter point can map beyond the
-   * local column - onto the toolbox or the sidebar, where it would read as
-   * pointing at a panel item. Pin it to the column's edge instead: "just off
-   * the canvas at this height" survives the width difference, the lie does
-   * not. Vertically the point scrolls with the canvas, so outside the visible
-   * column it hides like any scrolled-away anchor. Mutates `p`; returns
-   * whether the cursor should be shown.
-   */
+  // Fit an offset-mapped cursor point into the designer column (the area
+  // between the toolbox and the sidebar). A peer with a wider window has
+  // wider gutters around the canvas, so their gutter point can map beyond the
+  // local column - onto the toolbox or the sidebar, where it would read as
+  // pointing at a panel item. Pin it to the column's edge instead: "just off
+  // the canvas at this height" survives the width difference, the lie does
+  // not. Vertically the point scrolls with the canvas, so outside the visible
+  // column it hides like any scrolled-away anchor. Mutates `p`; returns
+  // whether the cursor should be shown.
   private fitSurfacePoint(p: { x: number, y: number }, node: Element, container: IRect): boolean {
     const column = node.closest(PRESENCE_SELECTORS.designerSurface)?.getBoundingClientRect();
     const area = column ?? container;
@@ -352,7 +340,7 @@ export class PresenceOverlay {
     return true;
   }
 
-  /** Locator of the locally selected object - gate for property-grid decorations. */
+  // Locator of the locally selected object - gate for property-grid decorations.
   private localSelectionLoc(): string | null {
     if (!this.creator.selectedElement) return null;
     try {
@@ -364,7 +352,7 @@ export class PresenceOverlay {
 
   // --- native decorations (data-collab-focus + --collab-peer-color) -------------
 
-  /** Sync the decorated-node set (attributes + name badges) to `wanted`. */
+  // Sync the decorated-node set (attributes + name badges) to `wanted`.
   private applyDecorations(wanted: Map<HTMLElement, IDecoration>): void {
     const stale: Array<HTMLElement> = [];
     this.decorated.forEach((_, node) => {
@@ -387,11 +375,9 @@ export class PresenceOverlay {
     });
   }
 
-  /**
-   * Name badge hugging the ring's bottom-right corner (per the Figma spec).
-   * Like the cursors it cannot be expressed as a node decoration, so it lives
-   * in the layer and is repositioned from the node's rect every tick.
-   */
+  // Name badge hugging the ring's bottom-right corner (per the Figma spec).
+  // Like the cursors it cannot be expressed as a node decoration, so it lives
+  // in the layer and is repositioned from the node's rect every tick.
   private placeBadge(node: HTMLElement, dec: IDecoration): void {
     let badge = this.badges.get(node);
     if (!badge) {

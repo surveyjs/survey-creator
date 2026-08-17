@@ -4,44 +4,40 @@ import { describeRecord } from "../journal/journal-describe";
 import { presenceInitials } from "../presence/presence-state";
 import { CollabBarStatus, ICollabChange, ICollabParticipant } from "./collab-bar-types";
 
-/**
- * Pure-DOM view of the collaboration bar: the "Collaboration" menu and the
- * connection plate on the left, participant avatars and the "Invite" button on
- * the right, plus the right-docked Version History panel.
- *
- * All widget styling is inline `cssText`. Colors come from the SJS2 theme
- * variables that `ensureBaseThemeStyles` defines on the creator root (the
- * action tokens live under the `neutral`/`brand` families -- there is no
- * `style-*` family), so the bar follows the active creator theme; the
- * fallbacks mirror the default light theme for the rare out-of-root render.
- * Windows mount into `getRootElement()` (falling back to the document body)
- * for the same reason: the theme variables live on the creator root.
- */
+// Pure-DOM view of the collaboration bar: the "Collaboration" menu and the
+// connection plate on the left, participant avatars and the "Invite" button on
+// the right, plus the right-docked Version History panel.
+//
+// All widget styling is inline `cssText`. Colors come from the SJS2 theme
+// variables that `ensureBaseThemeStyles` defines on the creator root (the
+// action tokens live under the `neutral`/`brand` families -- there is no
+// `style-*` family), so the bar follows the active creator theme; the
+// fallbacks mirror the default light theme for the rare out-of-root render.
+// Windows mount into `getRootElement()` (falling back to the document body)
+// for the same reason: the theme variables live on the creator root.
 export interface ICollabBarViewOptions {
-  /** Shown in the menu "Room" row; the row is hidden when absent. */
+  // Shown in the menu "Room" row; the row is hidden when absent.
   roomId?: string;
-  /** Shown in the menu "Framework" row; the row is hidden when absent. */
+  // Shown in the menu "Framework" row; the row is hidden when absent.
   framework?: string;
-  /** The "Invite" button copies this link; the button is hidden when absent. */
+  // The "Invite" button copies this link; the button is hidden when absent.
   getInviteLink?: () => string;
-  /** The "Back to lobby" menu item; the item is hidden when absent. */
+  // The "Back to lobby" menu item; the item is hidden when absent.
   onBack?: () => void;
-  /** A participant chip/row was clicked: follow them to their tab. */
+  // A participant chip/row was clicked: follow them to their tab.
   onGoToParticipant?: (user: ICollabParticipant) => void;
-  /**
-   * The creator root that carries the theme CSS variables; windows mount
-   * there so they follow the active theme. Absent (or not yet rendered) ->
-   * the document body.
-   */
+  // The creator root that carries the theme CSS variables; windows mount
+  // there so they follow the active theme. Absent (or not yet rendered) ->
+  // the document body.
   getRootElement?: () => HTMLElement | undefined;
 }
 
 const doc = (): Document => DomDocumentHelper.getDocument();
 
-/** Avatars beyond this count are reachable only through the overflow popover. */
+// Avatars beyond this count are reachable only through the overflow popover.
 const MAX_AVATARS = 8;
 
-/** SJS2 theme tokens; fallbacks mirror the default light theme values. */
+// SJS2 theme tokens; fallbacks mirror the default light theme values.
 const C = {
   barBg: "var(--sjs2-color-bg-basic-secondary, #f5f5f5)",
   border: "var(--sjs2-color-border-basic-secondary, #d4d4d4)",
@@ -63,10 +59,10 @@ const FONT = "600 12px/16px 'Open Sans', system-ui, sans-serif";
 const FONT_TEXT = "400 16px/24px 'Open Sans', system-ui, sans-serif";
 const FONT_TEXT_STRONG = "600 16px/24px 'Open Sans', system-ui, sans-serif";
 
-/** Above the creator's flyout sidebar (z-index 1000, later in the DOM). */
+// Above the creator's flyout sidebar (z-index 1000, later in the DOM).
 const POPOVER_Z_INDEX = 1100;
 
-/** Inset of the docked Version History panel from the viewport edges, px. */
+// Inset of the docked Version History panel from the viewport edges, px.
 const PANEL_GAP = 12;
 
 const STATUS_COLORS: Record<CollabBarStatus, string> = {
@@ -127,7 +123,7 @@ const ICON_CLOUD_UPLOAD =
   "stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>";
 
 export class CollabBarView {
-  /** The bar strip; the plugin inserts it into the creator root. */
+  // The bar strip; the plugin inserts it into the creator root.
   public readonly element: HTMLElement;
 
   // Latest room change log; the history window re-reads it and live-refreshes
@@ -272,13 +268,13 @@ export class CollabBarView {
     this.statusText.textContent = STATUS_LABELS[status];
   }
 
-  /** Feed the room change log to the "Show Version History" window. */
+  // Feed the room change log to the "Show Version History" window.
   public setHistory(changes: ReadonlyArray<ICollabChange>): void {
     this.historyChanges = changes;
     this.refreshHistoryWindow?.();
   }
 
-  /** Render remote participants as colored initial avatars. */
+  // Render remote participants as colored initial avatars.
   public setParticipants(users: Array<ICollabParticipant>): void {
     // Presence updates fire on every remote cursor move / selection, but
     // the bar only shows id/name/color/tab. Skip the rebuild when none of
@@ -313,7 +309,7 @@ export class CollabBarView {
     this.renderOverflowMenu(users);
   }
 
-  /** Remove the strip and any open window; drop document-level listeners. */
+  // Remove the strip and any open window; drop document-level listeners.
   public dispose(): void {
     if (this.disposed) return;
     this.disposed = true;
@@ -399,7 +395,7 @@ export class CollabBarView {
     panel.onClose(() => { this.refreshHistoryWindow = undefined; });
   }
 
-  /** Track an open window so dispose() can close it. */
+  // Track an open window so dispose() can close it.
   private trackWindow(win: IWindow): IWindow {
     this.openWindows.add(win);
     win.onClose(() => this.openWindows.delete(win));
@@ -407,7 +403,7 @@ export class CollabBarView {
   }
 }
 
-/** Absolute popover panel used by the app menu and the participants list. */
+// Absolute popover panel used by the app menu and the participants list.
 function createPopover(align: "left" | "right"): HTMLDivElement {
   const el = doc().createElement("div");
   el.style.cssText =
@@ -417,11 +413,9 @@ function createPopover(align: "left" | "right"): HTMLDivElement {
   return el;
 }
 
-/**
- * Wraps a trigger + popover in a relative container and wires open/close.
- * Reports its close function through `registerCloser` so the owner can drop
- * the document-level listeners on dispose.
- */
+// Wraps a trigger + popover in a relative container and wires open/close.
+// Reports its close function through `registerCloser` so the owner can drop
+// the document-level listeners on dispose.
 function withPopover(trigger: HTMLElement, popover: HTMLDivElement, registerCloser: (close: () => void) => void): HTMLElement {
   const wrap = doc().createElement("div");
   wrap.style.cssText = "position:relative;display:inline-flex;";
@@ -489,21 +483,19 @@ function escapeHtml(s: string): string {
 }
 
 interface IWindow {
-  /** Content container to append the window body into. */
+  // Content container to append the window body into.
   body: HTMLDivElement;
   close(): void;
-  /** Register a callback fired once when the window closes (any route). */
+  // Register a callback fired once when the window closes (any route).
   onClose(handler: () => void): void;
 }
 
-/**
- * Right-docked floating panel for Version History. Closes on X or Escape; the
- * minimize button collapses it to just the header; dragging the header tears
- * the panel off the dock and floats it (clamped to the viewport). No backdrop
- * -- the Creator stays usable alongside it. Mounts into `container` (the
- * themed creator root) when given, else the body; position:fixed keeps the
- * viewport geometry either way.
- */
+// Right-docked floating panel for Version History. Closes on X or Escape; the
+// minimize button collapses it to just the header; dragging the header tears
+// the panel off the dock and floats it (clamped to the viewport). No backdrop
+// -- the Creator stays usable alongside it. Mounts into `container` (the
+// themed creator root) when given, else the body; position:fixed keeps the
+// viewport geometry either way.
 function createPanel(title: string, container?: HTMLElement): IWindow {
   const panel = doc().createElement("div");
   panel.className = "collab-version-panel";
@@ -652,15 +644,13 @@ type TimelineNode =
   | { type: "named", change: ICollabChange }
   | { type: "group", changes: Array<ICollabChange> };
 
-/** A saved (named) version = a FullSnapshot carrying a non-empty label. */
+// A saved (named) version = a FullSnapshot carrying a non-empty label.
 function isNamedVersion(c: ICollabChange): boolean {
   return c.op === JournalOp.FullSnapshot && !!c.payload && typeof c.payload.label === "string" && c.payload.label !== "";
 }
 
-/**
- * Partition the room change log (oldest to newest) into named versions and
- * runs of "autosaved" edits (everything else) between them.
- */
+// Partition the room change log (oldest to newest) into named versions and
+// runs of "autosaved" edits (everything else) between them.
 function buildTimeline(changes: ReadonlyArray<ICollabChange>): Array<TimelineNode> {
   const nodes: Array<TimelineNode> = [];
   let group: { type: "group", changes: Array<ICollabChange> } | null = null;
@@ -679,12 +669,10 @@ function buildTimeline(changes: ReadonlyArray<ICollabChange>): Array<TimelineNod
   return nodes;
 }
 
-/**
- * Stable per-render key for a group (its first change), to preserve expansion.
- * Keyed by `seq` only: the recorder coalesces rapid edits by rewriting the
- * last record (including its timestamp) in place, and a timestamp-based key
- * would reset the group's expanded state on such a live refresh.
- */
+// Stable per-render key for a group (its first change), to preserve expansion.
+// Keyed by `seq` only: the recorder coalesces rapid edits by rewriting the
+// last record (including its timestamp) in place, and a timestamp-based key
+// would reset the group's expanded state on such a live refresh.
 function groupKey(node: TimelineNode): string {
   if (node.type !== "group" || node.changes.length === 0) return "";
   return String(node.changes[0].seq);
@@ -697,7 +685,7 @@ function circleIcon(): HTMLElement {
   return span;
 }
 
-/** The highlighted top row representing the live current state. */
+// The highlighted top row representing the live current state.
 function currentVersionRow(): HTMLElement {
   const row = doc().createElement("div");
   row.className = "collab-version-current";
@@ -711,7 +699,7 @@ function currentVersionRow(): HTMLElement {
   return row;
 }
 
-/** A named version or the base "Document created" row (icon + title + time). */
+// A named version or the base "Document created" row (icon + title + time).
 function versionItem(className: string, title: string, time: string): HTMLElement {
   const row = doc().createElement("div");
   row.className = className;
@@ -751,7 +739,7 @@ function documentCreatedRow(): HTMLElement {
   return versionItem("collab-version-base", "Document created", "");
 }
 
-/** Collapsible "N autosaved versions" header. */
+// Collapsible "N autosaved versions" header.
 function groupHeaderRow(count: number, expanded: boolean, onToggle: () => void): HTMLElement {
   const btn = doc().createElement("button");
   btn.type = "button";
@@ -772,10 +760,8 @@ function groupHeaderRow(count: number, expanded: boolean, onToggle: () => void):
   return btn;
 }
 
-/**
- * Expanded body of an autosaved group: what happened + when, per change,
- * with a left connector line.
- */
+// Expanded body of an autosaved group: what happened + when, per change,
+// with a left connector line.
 function autosavedGroupBody(changes: Array<ICollabChange>): HTMLElement {
   const wrap = doc().createElement("div");
   wrap.style.cssText = "position:relative;";
@@ -801,7 +787,7 @@ function autosavedGroupBody(changes: Array<ICollabChange>): HTMLElement {
   return wrap;
 }
 
-/** Absolute date + 24h time, e.g. "Jul 10, 19:30". */
+// Absolute date + 24h time, e.g. "Jul 10, 19:30".
 function formatVersionTime(ts: number): string {
   if (typeof ts !== "number" || !isFinite(ts)) return "";
   const d = new Date(ts);

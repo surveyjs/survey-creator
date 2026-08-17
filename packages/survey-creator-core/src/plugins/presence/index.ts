@@ -11,25 +11,23 @@ export { PresenceOverlay } from "./presence-overlay";
 export { TranslationDeleteGuard } from "./translation-guard";
 export * from "./presence-state";
 
-/**
- * A background (non-tab) creator plugin that tracks the local user's presence
- * (active tab, selected element, property-grid focus, mouse cursor) and
- * renders remote participants' presence over the creator (selection outlines,
- * property-grid markers, cursors).
- *
- * Like `JournalPlugin`, it has no transport of its own: the outbound side is
- * the `onStateChanged` event with the full local state, the inbound side is
- * the peer-roster ingress (`setPeers`/`upsertPeer`/`removePeer`/...). User
- * identity (name/color) is not part of the state - the transport/server is
- * expected to stamp it onto each relayed peer entry.
- *
- * ```ts
- * const presence = new PresencePlugin(creator);
- * creator.addPlugin("presence", presence);
- * presence.onStateChanged.add(() => sendThrottled({ type: "presence", state: presence.getState() }));
- * socket.onmessage = (msg) => presence.upsertPeer(msg.peer); // {clientId, name, color, state}
- * ```
- */
+// A background (non-tab) creator plugin that tracks the local user's presence
+// (active tab, selected element, property-grid focus, mouse cursor) and
+// renders remote participants' presence over the creator (selection outlines,
+// property-grid markers, cursors).
+//
+// Like `JournalPlugin`, it has no transport of its own: the outbound side is
+// the `onStateChanged` event with the full local state, the inbound side is
+// the peer-roster ingress (`setPeers`/`upsertPeer`/`removePeer`/...). User
+// identity (name/color) is not part of the state - the transport/server is
+// expected to stamp it onto each relayed peer entry.
+//
+// ```ts
+// const presence = new PresencePlugin(creator);
+// creator.addPlugin("presence", presence);
+// presence.onStateChanged.add(() => sendThrottled({ type: "presence", state: presence.getState() }));
+// socket.onmessage = (msg) => presence.upsertPeer(msg.peer); // {clientId, name, color, state}
+// ```
 export class PresencePlugin implements ICreatorPlugin {
   public model: any = undefined;
   public capture: PresenceCapture;
@@ -63,13 +61,13 @@ export class PresencePlugin implements ICreatorPlugin {
   public get peers(): ReadonlyMap<string, IPresencePeer> {
     return this.peersMap;
   }
-  /** Replace the whole roster (from a `presence-sync`). Filter out self before calling. */
+  // Replace the whole roster (from a `presence-sync`). Filter out self before calling.
   public setPeers(entries: Array<IPresencePeerEntry>): void {
     this.peersMap.clear();
     for (const entry of entries)this.addPeer(entry);
     this.peersChanged();
   }
-  /** Add or update one peer (from a relayed `presence` message). */
+  // Add or update one peer (from a relayed `presence` message).
   public upsertPeer(entry: IPresencePeerEntry): void {
     if (!this.addPeer(entry)) return;
     this.peersChanged();

@@ -3,22 +3,20 @@ import { editorLocalization } from "../../editorLocalization";
 import { JournalOp } from "./journal-record";
 import { splitPointer } from "./journal-locator";
 
-/**
- * Produces a short human-readable description of a journal record for
- * history/timeline UIs, e.g. `Question "question2" added`,
- * `Property "title" changed on "q1"`, `Question "q1" changed to Radio Button
- * Group`. The parameter is structural (`op` + `payload`) so both
- * `IJournalRecord` and transport mirrors of it (e.g. the collab bar's
- * `ICollabChange`) can be passed directly.
- *
- * Known approximations (the payload carries no more detail):
- * - a non-default-locale edit (`.../title/de`) reads the locale code as the
- *   property name;
- * - `ElementRemoved` payloads carry no element type, so a removed panel is
- *   described as a question.
- *
- * Never throws: unknown ops and malformed payloads degrade to `"Edited"`.
- */
+// Produces a short human-readable description of a journal record for
+// history/timeline UIs, e.g. `Question "question2" added`,
+// `Property "title" changed on "q1"`, `Question "q1" changed to Radio Button
+// Group`. The parameter is structural (`op` + `payload`) so both
+// `IJournalRecord` and transport mirrors of it (e.g. the collab bar's
+// `ICollabChange`) can be passed directly.
+//
+// Known approximations (the payload carries no more detail):
+// - a non-default-locale edit (`.../title/de`) reads the locale code as the
+//   property name;
+// - `ElementRemoved` payloads carry no element type, so a removed panel is
+//   described as a question.
+//
+// Never throws: unknown ops and malformed payloads degrade to `"Edited"`.
 export function describeRecord(change: { op: number, payload?: any }): string {
   try {
     return describeCore(change.op, change.payload);
@@ -85,7 +83,7 @@ function describeCore(op: number, payload: any): string {
   }
 }
 
-/** The last `count` unescaped segments of a locator path, left-padded with "". */
+// The last `count` unescaped segments of a locator path, left-padded with "".
 function tailSegments(path: any, count: number): Array<string> {
   const res: Array<string> = [];
   let rest = typeof path === "string" ? path : "";
@@ -98,7 +96,7 @@ function tailSegments(path: any, count: number): Array<string> {
   return res;
 }
 
-/** `Property "title" changed on "q1"`; an empty owner means the survey itself. */
+// `Property "title" changed on "q1"`; an empty owner means the survey itself.
 function propertyChanged(prop: string, owner: string): string {
   return owner ? `Property "${prop}" changed on "${owner}"` : `Survey property "${prop}" changed`;
 }
@@ -107,7 +105,7 @@ function withName(noun: string, name: string, verb: string): string {
   return name ? `${noun} "${name}" ${verb}` : `${noun} ${verb}`;
 }
 
-/** Noun for an item of the given array property, e.g. `elements` -> Question. */
+// Noun for an item of the given array property, e.g. `elements` -> Question.
 function elementNoun(arrayProp: string, itemType?: string): string {
   switch(arrayProp) {
     case "pages": return "Page";
@@ -133,7 +131,7 @@ function isPanelType(type: string): boolean {
   }
 }
 
-/** Identity of an added array item: element name, itemvalue value, or "". */
+// Identity of an added array item: element name, itemvalue value, or "".
 function itemName(item: any): string {
   if (item === null || item === undefined) return "";
   if (typeof item !== "object") return String(item);
@@ -147,7 +145,7 @@ function itemName(item: any): string {
   return "";
 }
 
-/** Friendly question type name ("radiogroup" -> "Radio Button Group"). */
+// Friendly question type name ("radiogroup" -> "Radio Button Group").
 function typeDisplayName(type: string): string {
   // getString falls back to the last path segment, i.e. the raw type name.
   return editorLocalization.getString("qt." + type);

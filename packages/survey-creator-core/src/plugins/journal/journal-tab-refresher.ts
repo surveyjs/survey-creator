@@ -2,33 +2,29 @@ import { Serializer, surveyLocalization } from "survey-core";
 import { IJournalPropertyChangedPayload, IJournalRecord, JournalOp } from "./journal-record";
 import { resolveLocator, splitPointer } from "./journal-locator";
 
-/**
- * The refresh work the Translations tab needs after remote journal records were
- * applied to the live survey:
- *   - "rebuild": a structural change - rebuild the whole tab model (`reset()`).
- *   - "update": the records are purely locale-text edits. `newLocales` are
- *     locales the receiver does not list yet and should be added as *unchecked*
- *     rows (so the strings-table columns stay unchanged). The executor always
- *     also refreshes the snapshot data.
- */
+// The refresh work the Translations tab needs after remote journal records were
+// applied to the live survey:
+//   - "rebuild": a structural change - rebuild the whole tab model (`reset()`).
+//   - "update": the records are purely locale-text edits. `newLocales` are
+//     locales the receiver does not list yet and should be added as *unchecked*
+//     rows (so the strings-table columns stay unchanged). The executor always
+//     also refreshes the snapshot data.
 export type TranslationRefreshPlan =
   | { kind: "rebuild" }
   | { kind: "update", newLocales: string[] };
 
-/**
- * Decide the cheapest correct refresh for freshly-applied journal records.
- *
- * Kept pure (no survey access) so it is trivially unit-testable: the caller
- * passes the locales the receiver already lists, the registered locale codes
- * and a callback that says whether a propertyChanged target is a localizable
- * property (a default-locale text edit).
- *
- * @param ctx.visible             locales already in the language list (checked
- *                                or not; excludes the "" default).
- * @param ctx.localeCodes         registered locale codes (`surveyLocalization.getLocales()`).
- * @param ctx.isLocalizableTarget whether the propertyChanged target addresses a
- *                                localizable property (default-locale edit).
- */
+// Decide the cheapest correct refresh for freshly-applied journal records.
+//
+// Kept pure (no survey access) so it is trivially unit-testable: the caller
+// passes the locales the receiver already lists, the registered locale codes
+// and a callback that says whether a propertyChanged target is a localizable
+// property (a default-locale text edit).
+//
+// ctx.visible             locales already in the language list (checked or
+//                         not; excludes the "" default).
+// ctx.localeCodes         registered locale codes (`surveyLocalization.getLocales()`).
+// ctx.isLocalizableTarget whether the propertyChanged target addresses a
+//                         localizable property (default-locale edit).
 export function planTranslationRefresh(
   records: Array<IJournalRecord>,
   ctx: {
@@ -63,10 +59,8 @@ export function planTranslationRefresh(
   return { kind: "update", newLocales: Array.from(newLocales) };
 }
 
-/**
- * Apply a plan to a live `Translation` model. Extracted (and exported) so it
- * can be exercised by an integration test against a real model.
- */
+// Apply a plan to a live `Translation` model. Extracted (and exported) so it
+// can be exercised by an integration test against a real model.
 export function applyTranslationRefresh(model: any, plan: TranslationRefreshPlan): void {
   if (plan.kind === "rebuild") {
     model.reset?.();
@@ -81,16 +75,14 @@ export function applyTranslationRefresh(model: any, plan: TranslationRefreshPlan
   softUpdateStringsSurveyData(model);
 }
 
-/**
- * Re-read the strings-table snapshot from the LocalizableStrings, writing ONLY
- * the cells whose text actually changed.
- *
- * The model's own `updateStringsSurveyData()` assigns the whole
- * `stringsSurvey.data`, which re-renders every cell - stealing focus from (and
- * wiping the uncommitted text of) the cell the local user is editing when a
- * peer's edit arrives. A per-cell diff touches only the changed cells, so the
- * cell mid-edit keeps its DOM state.
- */
+// Re-read the strings-table snapshot from the LocalizableStrings, writing ONLY
+// the cells whose text actually changed.
+//
+// The model's own `updateStringsSurveyData()` assigns the whole
+// `stringsSurvey.data`, which re-renders every cell - stealing focus from (and
+// wiping the uncommitted text of) the cell the local user is editing when a
+// peer's edit arrives. A per-cell diff touches only the changed cells, so the
+// cell mid-edit keeps its DOM state.
 function softUpdateStringsSurveyData(model: any): void {
   const survey = model.stringsSurvey;
   if (!survey || typeof survey.getAllQuestions !== "function") {
@@ -126,23 +118,21 @@ function softUpdateStringsSurveyData(model: any): void {
   }
 }
 
-/**
- * The refresh work the Logic tab needs after remote records were applied:
- *   - "rebuild": rebuild the whole tab model now (`model.update()`).
- *   - "defer": the local user is currently inside the modal logic-item editor
- *     (mode !== "view"). A `model.update()` would destroy their in-progress
- *     (unsaved) rule, so we postpone the rebuild until they return to the list.
- *
- * Unlike the Translations tab (an always-live inline matrix with a public
- * soft-refresh) the Logic tab edits ONE item at a time in a detail editor and
- * exposes only the full `update()`. So the "don't clobber the local edit"
- * invariant is satisfied by deferring the rebuild, not by a soft merge.
- *
- * Correctness over cheapness: any applied record can change the rules the tab
- * lists or their display text, so in view mode we always rebuild. We
- * deliberately do NOT filter by locator - an incomplete allowlist would leave
- * the list stale (worse than a redundant rebuild).
- */
+// The refresh work the Logic tab needs after remote records were applied:
+//   - "rebuild": rebuild the whole tab model now (`model.update()`).
+//   - "defer": the local user is currently inside the modal logic-item editor
+//     (mode !== "view"). A `model.update()` would destroy their in-progress
+//     (unsaved) rule, so we postpone the rebuild until they return to the list.
+//
+// Unlike the Translations tab (an always-live inline matrix with a public
+// soft-refresh) the Logic tab edits ONE item at a time in a detail editor and
+// exposes only the full `update()`. So the "don't clobber the local edit"
+// invariant is satisfied by deferring the rebuild, not by a soft merge.
+//
+// Correctness over cheapness: any applied record can change the rules the tab
+// lists or their display text, so in view mode we always rebuild. We
+// deliberately do NOT filter by locator - an incomplete allowlist would leave
+// the list stale (worse than a redundant rebuild).
 export type LogicRefreshPlan =
   | { kind: "rebuild" }
   | { kind: "defer" };
@@ -151,11 +141,9 @@ export function planLogicRefresh(ctx: { isEditing: boolean }): LogicRefreshPlan 
   return ctx.isEditing ? { kind: "defer" } : { kind: "rebuild" };
 }
 
-/**
- * Apply a plan to a live `SurveyLogicUI` model. Returns `true` when the rebuild
- * was deferred, so the caller can remember to flush it once the user leaves the
- * editor (mode -> "view").
- */
+// Apply a plan to a live `SurveyLogicUI` model. Returns `true` when the rebuild
+// was deferred, so the caller can remember to flush it once the user leaves the
+// editor (mode -> "view").
 export function applyLogicRefresh(model: any, plan: LogicRefreshPlan): boolean {
   if (plan.kind === "rebuild") {
     model.update?.();
@@ -164,32 +152,30 @@ export function applyLogicRefresh(model: any, plan: LogicRefreshPlan): boolean {
   return true; // deferred
 }
 
-/**
- * Wire a "flush the deferred rebuild" trigger that fires the moment the local
- * user LEAVES the detail editor - whether they SAVE the rule (Done) or CANCEL
- * it (collapse the panel). Returns an unbind function.
- *
- * Why not just the public `onLogicItemSaved` event? It fires on save only.
- * Consider the case this exists for: A starts a *new* rule (mode "new"), a
- * remote insert from B arrives and is deferred, then A *cancels*. No save event
- * ever fires, so a flush bound to `onLogicItemSaved` alone would never run and
- * B's rule would stay missing from A's list until the tab is re-activated.
- *
- * The one model signal common to BOTH exits is the `mode -> "view"` transition.
- * `mode` bypasses survey-core's property tracking (its setter writes a backing
- * field directly), so it cannot be observed via
- * registerFunctionOnPropertyValueChanged. The setter does, however, call the
- * model's `onEndEditing()` on every new|edit -> view transition. We wrap that
- * method: run the model's own teardown first, then our flush. By then `mode` is
- * already "view" and (on save) the new item is already committed to `items`, so
- * a `model.update()` inside the flush rebuilds a consistent list and is
- * re-entrancy-safe because update()'s own `mode = "view"` is a guarded no-op
- * (view -> view) at that point.
- *
- * `flush` MUST be idempotent: on save it can be invoked twice (once by the
- * caller's `onLogicItemSaved` handler, once here), so it should clear its own
- * "pending" flag and no-op when nothing is pending.
- */
+// Wire a "flush the deferred rebuild" trigger that fires the moment the local
+// user LEAVES the detail editor - whether they SAVE the rule (Done) or CANCEL
+// it (collapse the panel). Returns an unbind function.
+//
+// Why not just the public `onLogicItemSaved` event? It fires on save only.
+// Consider the case this exists for: A starts a *new* rule (mode "new"), a
+// remote insert from B arrives and is deferred, then A *cancels*. No save event
+// ever fires, so a flush bound to `onLogicItemSaved` alone would never run and
+// B's rule would stay missing from A's list until the tab is re-activated.
+//
+// The one model signal common to BOTH exits is the `mode -> "view"` transition.
+// `mode` bypasses survey-core's property tracking (its setter writes a backing
+// field directly), so it cannot be observed via
+// registerFunctionOnPropertyValueChanged. The setter does, however, call the
+// model's `onEndEditing()` on every new|edit -> view transition. We wrap that
+// method: run the model's own teardown first, then our flush. By then `mode` is
+// already "view" and (on save) the new item is already committed to `items`, so
+// a `model.update()` inside the flush rebuilds a consistent list and is
+// re-entrancy-safe because update()'s own `mode = "view"` is a guarded no-op
+// (view -> view) at that point.
+//
+// `flush` MUST be idempotent: on save it can be invoked twice (once by the
+// caller's `onLogicItemSaved` handler, once here), so it should clear its own
+// "pending" flag and no-op when nothing is pending.
 export function bindLogicEditEndFlush(model: any, flush: () => void): () => void {
   const original: (() => void) | undefined =
     typeof model?.onEndEditing === "function" ? model.onEndEditing.bind(model) : undefined;
@@ -215,18 +201,16 @@ export interface IRefreshableCreator {
   getPlugin(name: string, create?: boolean): any;
 }
 
-/**
- * Keeps the Translation and Logic tab snapshot models in sync after remote
- * journal records were applied to the live survey in place.
- *
- * The Designer and Preview tabs bind to `creator.survey` directly and react to
- * in-place mutations on their own. Translation and Logic, by contrast, build a
- * private snapshot model (a TranslationGroup tree + a `stringsSurvey` matrix;
- * a list of logic rules) only on activation, so they must be refreshed
- * explicitly when a peer's edit lands underneath them.
- *
- * Owned by `JournalPlugin`, which calls `refresh()` after every `apply()`.
- */
+// Keeps the Translation and Logic tab snapshot models in sync after remote
+// journal records were applied to the live survey in place.
+//
+// The Designer and Preview tabs bind to `creator.survey` directly and react to
+// in-place mutations on their own. Translation and Logic, by contrast, build a
+// private snapshot model (a TranslationGroup tree + a `stringsSurvey` matrix;
+// a list of logic rules) only on activation, so they must be refreshed
+// explicitly when a peer's edit lands underneath them.
+//
+// Owned by `JournalPlugin`, which calls `refresh()` after every `apply()`.
 export class JournalTabRefresher {
   // A remote refresh that arrived while the Logic tab's detail editor was open
   // is deferred; this remembers to rebuild once the user returns to the list.
@@ -265,7 +249,7 @@ export class JournalTabRefresher {
     applyTranslationRefresh(model, plan);
   }
 
-  /** Does the propertyChanged target address a localizable property (a default-locale text edit)? */
+  // Does the propertyChanged target address a localizable property (a default-locale text edit)?
   private isLocalizableTarget(target: string): boolean {
     const outer = splitPointer(target);
     const obj: any = resolveLocator(outer.container, this.creator.survey);

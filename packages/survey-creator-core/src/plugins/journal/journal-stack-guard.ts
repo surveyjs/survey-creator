@@ -2,44 +2,40 @@ import { Helpers, Serializer } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { Transaction, UndoRedoAction, UndoRedoArrayAction } from "../undo-redo/undo-redo-manager";
 
-/**
- * Keeps the LOCAL undo/redo stack sane under collaboration.
- *
- * Undo stacks are strictly per-client (only the author of a change can undo
- * it), so a later remote record can invalidate an entry that is still sitting
- * in the local stack. Executing such an entry would corrupt the shared state:
- * undoing a conversion of a question a peer has deleted would resurrect it on
- * every client, and undoing a property change on a dead object makes the
- * recorder fall back to a full snapshot broadcast (it cannot address the
- * target anymore), resetting everyone's history.
- *
- * The guard is the journal's validity predicate for the undo-redo manager
- * (`isTransactionValidCallback`): a transaction is skipped as a no-op - the
- * key press visibly does nothing and the entry is consumed - when
- *   - it references an object destroyed by an applied remote record
- *     (the applier reports them via `markRemoved`), or
- *   - it is a scalar change whose value was overwritten since (last write
- *     wins): undo is valid only while the property still holds the value this
- *     entry has put there, and redo only while it holds the value the entry
- *     had removed.
- *
- * Array actions get only the destroyed-object check: the undo-redo manager
- * compensates disposed senders/items by re-creating them from JSON
- * (`getSenderElement`/`getItemsToAdd`), which legitimately breaks identity in
- * purely local undo chains, so a stricter compare-and-swap on arrays would
- * misfire there.
- */
+// Keeps the LOCAL undo/redo stack sane under collaboration.
+//
+// Undo stacks are strictly per-client (only the author of a change can undo
+// it), so a later remote record can invalidate an entry that is still sitting
+// in the local stack. Executing such an entry would corrupt the shared state:
+// undoing a conversion of a question a peer has deleted would resurrect it on
+// every client, and undoing a property change on a dead object makes the
+// recorder fall back to a full snapshot broadcast (it cannot address the
+// target anymore), resetting everyone's history.
+//
+// The guard is the journal's validity predicate for the undo-redo manager
+// (`isTransactionValidCallback`): a transaction is skipped as a no-op - the
+// key press visibly does nothing and the entry is consumed - when
+//   - it references an object destroyed by an applied remote record
+//     (the applier reports them via `markRemoved`), or
+//   - it is a scalar change whose value was overwritten since (last write
+//     wins): undo is valid only while the property still holds the value this
+//     entry has put there, and redo only while it holds the value the entry
+//     had removed.
+//
+// Array actions get only the destroyed-object check: the undo-redo manager
+// compensates disposed senders/items by re-creating them from JSON
+// (`getSenderElement`/`getItemsToAdd`), which legitimately breaks identity in
+// purely local undo chains, so a stricter compare-and-swap on arrays would
+// misfire there.
 export class JournalStackGuard {
   private removedObjects: WeakSet<any> = new WeakSet<any>();
 
   constructor(private creator: SurveyCreatorModel) { }
 
-  /**
-   * (Re)register the guard on the creator's current undo-redo manager. Called
-   * before every journal apply: the manager is replaced whenever the survey is
-   * rebuilt (fullSnapshot), and a fresh manager starts with an empty stack, so
-   * lazy re-attachment is sufficient.
-   */
+  // (Re)register the guard on the creator's current undo-redo manager. Called
+  // before every journal apply: the manager is replaced whenever the survey is
+  // rebuilt (fullSnapshot), and a fresh manager starts with an empty stack, so
+  // lazy re-attachment is sufficient.
   public attach(): void {
     const manager = this.creator.undoRedoManager;
     if (!!manager) {
@@ -47,7 +43,7 @@ export class JournalStackGuard {
     }
   }
 
-  /** Report an object destroyed by an applied remote record (plus its element subtree). */
+  // Report an object destroyed by an applied remote record (plus its element subtree).
   public markRemoved(obj: any): void {
     this.markRemovedCore(obj, 0);
   }

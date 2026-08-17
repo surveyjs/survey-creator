@@ -12,11 +12,11 @@ export function escapeSegment(segment: string): string {
 export function unescapeSegment(segment: string): string {
   return segment.replace(/~1/g, "/").replace(/~0/g, "~");
 }
-/** Appends a property/identity segment to a JSON Pointer path. */
+// Appends a property/identity segment to a JSON Pointer path.
 export function appendSegment(path: string, segment: string): string {
   return path + "/" + escapeSegment(String(segment));
 }
-/** Splits a path into the container path and its last (unescaped) segment. */
+// Splits a path into the container path and its last (unescaped) segment.
 export function splitPointer(path: string): { container: string, key: string } {
   const slash = path.lastIndexOf("/");
   return { container: path.substring(0, slash), key: unescapeSegment(path.substring(slash + 1)) };
@@ -69,17 +69,15 @@ export function findStep(owner: any, child: any): { property: string, index: num
   return null;
 }
 
-/**
- * Builds a JSON-Pointer-style path (RFC 6901 syntax) for a survey object, or
- * returns `null` when the object cannot be addressed (the caller should
- * degrade to a whole-property value or a full snapshot).
- *
- * Array segments hold the element's identity (question/page/panel `name`,
- * item value) rather than its index, so paths stay valid when element order
- * differs: `/pages/page1/elements/q2/choices/item1`. The empty string
- * addresses the survey itself. Elements without an identity are addressed by
- * index.
- */
+// Builds a JSON-Pointer-style path (RFC 6901 syntax) for a survey object, or
+// returns `null` when the object cannot be addressed (the caller should
+// degrade to a whole-property value or a full snapshot).
+//
+// Array segments hold the element's identity (question/page/panel `name`,
+// item value) rather than its index, so paths stay valid when element order
+// differs: `/pages/page1/elements/q2/choices/item1`. The empty string
+// addresses the survey itself. Elements without an identity are addressed by
+// index.
 export function buildLocator(obj: any, survey: SurveyModel): JournalLocator {
   if (!obj || !survey) return null;
   if (isSurveyObj(obj, survey)) return "";
@@ -108,12 +106,10 @@ export function buildLocator(obj: any, survey: SurveyModel): JournalLocator {
   return null;
 }
 
-/**
- * Resolves a locator path against the given survey. Walks segment by segment:
- * a segment after an array-valued property selects the element by identity
- * (with a numeric-index fallback), any other segment is a property access.
- * Returns `null` when the referenced object no longer exists.
- */
+// Resolves a locator path against the given survey. Walks segment by segment:
+// a segment after an array-valued property selects the element by identity
+// (with a numeric-index fallback), any other segment is a property access.
+// Returns `null` when the referenced object no longer exists.
 export function resolveLocator(locator: JournalLocator, survey: SurveyModel): any {
   if (typeof locator !== "string" || !survey) return null;
   if (locator === "") return survey;
@@ -151,11 +147,9 @@ export function isSerializedSurveyObj(value: any): value is ISerializedSurveyObj
   return !!value && typeof value === "object" && typeof value.type === "string" && value.json !== undefined;
 }
 
-/**
- * Converts a captured property value into a pure JSON form: survey-core objects
- * become `{ type, json }`, plain objects/arrays are deep-cloned, primitives
- * pass through.
- */
+// Converts a captured property value into a pure JSON form: survey-core objects
+// become `{ type, json }`, plain objects/arrays are deep-cloned, primitives
+// pass through.
 export function serializeValue(value: any): any {
   if (value === undefined) return null;
   if (value === null || typeof value !== "object") return value;

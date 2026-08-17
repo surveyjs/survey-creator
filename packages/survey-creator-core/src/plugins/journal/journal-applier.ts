@@ -19,26 +19,22 @@ import { JournalRecorder } from "./journal-recorder";
 import { JournalStackGuard } from "./journal-stack-guard";
 
 export interface IJournalApplyOptions {
-  /**
-   * When `true`, `apply` throws on the first failed record instead of
-   * collecting per-record errors. Default is `false`.
-   */
+  // When `true`, `apply` throws on the first failed record instead of
+  // collecting per-record errors. Default is `false`.
   strict?: boolean;
 }
 
-/**
- * Applies journal records produced by a `JournalRecorder` of another creator
- * instance to this creator's survey. Application is idempotent. Undo stacks
- * are strictly local: applied records bypass this creator's undo-redo
- * entirely (the whole batch runs under the controller's `ignoreChanges`), so
- * only the author of a change can undo it - a local undo travels to peers as
- * an ordinary inverse record. The bypass also keeps remote values from
- * merging into a local typing transaction and from triggering local-edit side
- * effects (modified state, autosave). Echo into the journal itself is
- * suppressed via `recorder.isApplying` - still required, because some
- * `onModified` paths are driven by survey events outside the suppressed
- * pipeline (e.g. PAGE_ADDED).
- */
+// Applies journal records produced by a `JournalRecorder` of another creator
+// instance to this creator's survey. Application is idempotent. Undo stacks
+// are strictly local: applied records bypass this creator's undo-redo
+// entirely (the whole batch runs under the controller's `ignoreChanges`), so
+// only the author of a change can undo it - a local undo travels to peers as
+// an ordinary inverse record. The bypass also keeps remote values from
+// merging into a local typing transaction and from triggering local-edit side
+// effects (modified state, autosave). Echo into the journal itself is
+// suppressed via `recorder.isApplying` - still required, because some
+// `onModified` paths are driven by survey events outside the suppressed
+// pipeline (e.g. PAGE_ADDED).
 export class JournalApplier {
   constructor(private creator: SurveyCreatorModel, private recorder: JournalRecorder, private guard?: JournalStackGuard) { }
 

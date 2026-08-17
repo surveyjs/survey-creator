@@ -31,7 +31,7 @@ const peerEntry = (clientId: string, overrides: Partial<IPresencePeerEntry> = {}
   ...overrides
 });
 
-/** Build a designer-like adorner holding N string editors; focus one of them. */
+// Build a designer-like adorner holding N string editors; focus one of them.
 function focusFakeEditor(questionName: string, editorCount = 1, focusIdx = 0): HTMLElement {
   const adorner = document.createElement("div");
   adorner.setAttribute("data-sv-drop-target-survey-element", questionName);
@@ -505,7 +505,7 @@ test("presence: cursor is not broadcast from the Preview tab", async (): Promise
   }
 });
 
-/** Designer-like DOM: tab content > surface > content > canvas block (header + page). */
+// Designer-like DOM: tab content > surface > content > canvas block (header + page).
 function buildSurfaceRoot(): HTMLElement {
   const root = document.createElement("div");
   root.innerHTML =
@@ -855,7 +855,7 @@ test("presence: designer name badge hides under the flyout panel, pg badge does 
   }
 });
 
-/** Creator with the Translations tab active; q1 has a default+de title. */
+// Creator with the Translations tab active; q1 has a default+de title.
 function createTranslationCreator(): { creator: CreatorTester, plugin: PresencePlugin, matrix: any, stringsSurvey: any } {
   const creator = new CreatorTester({ showTranslationTab: true });
   creator.JSON = {
@@ -875,7 +875,7 @@ function createTranslationCreator(): { creator: CreatorTester, plugin: PresenceP
   return { creator, plugin, matrix, stringsSurvey };
 }
 
-/** Fake translation-tab DOM: a matrix row with a row-text cell + one td per locale. */
+// Fake translation-tab DOM: a matrix row with a row-text cell + one td per locale.
 function buildTranslationRow(matrixName: string, cellCount = 2): HTMLElement {
   const container = document.createElement("div");
   container.id = "scrollableDiv-translation";

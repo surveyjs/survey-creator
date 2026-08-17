@@ -10,54 +10,46 @@ import "./collab-bar.scss";
 export * from "./collab-bar-types";
 export * from "./collab-bar-view";
 
-/** Self-heal cadence: catches the creator root being re-created (re-render). */
+// Self-heal cadence: catches the creator root being re-created (re-render).
 const MOUNT_TICK_MS = 500;
 
 export interface ICollabBarOptions {
-  /** Shown in the "Collaboration" menu "Room" row; the row is hidden when absent. */
+  // Shown in the "Collaboration" menu "Room" row; the row is hidden when absent.
   roomId?: string;
-  /** Shown in the menu "Framework" row; the row is hidden when absent. */
+  // Shown in the menu "Framework" row; the row is hidden when absent.
   framework?: string;
-  /**
-   * The "Invite" button copies this link to the clipboard; the button is
-   * hidden when absent. The host owns the link format (e.g. its lobby URL).
-   */
+  // The "Invite" button copies this link to the clipboard; the button is
+  // hidden when absent. The host owns the link format (e.g. its lobby URL).
   getInviteLink?: () => string;
-  /** The "Back to lobby" menu item action; the item is hidden when absent. */
+  // The "Back to lobby" menu item action; the item is hidden when absent.
   onBack?: () => void;
-  /**
-   * A participant chip/row was clicked. Default: follow them to their tab
-   * (`creator.activeTab = user.tab`).
-   */
+  // A participant chip/row was clicked. Default: follow them to their tab
+  // (`creator.activeTab = user.tab`).
   onGoToParticipant?: (user: ICollabParticipant) => void;
-  /**
-   * Roster source for the avatar strip. Default: the creator's registered
-   * PresencePlugin ("presence"), resolved lazily so registration order does
-   * not matter. Without one, feed the roster via `setParticipants`.
-   */
+  // Roster source for the avatar strip. Default: the creator's registered
+  // PresencePlugin ("presence"), resolved lazily so registration order does
+  // not matter. Without one, feed the roster via `setParticipants`.
   presence?: PresencePlugin;
 }
 
-/**
- * A background (non-tab) creator plugin that renders the collaboration bar as
- * a full-width strip INSIDE the creator root, above the tabbed menu -- in every
- * UI framework, since it is plain DOM (same approach as `PresenceOverlay`).
- *
- * Data flow: participants come from the PresencePlugin roster automatically;
- * connection status and the room change log are transport state, so the host
- * pushes them in (`setStatus` / `setHistory`). Host-specific concerns (invite
- * link, lobby navigation, labels) are options -- absent option, hidden element.
- *
- * ```ts
- * const bar = new CollabBarPlugin(creator, {
- *   roomId, framework: "React",
- *   getInviteLink: () => `${location.origin}/?room=${encodeURIComponent(roomId)}`,
- *   onBack: () => { location.href = "/"; }
- * });
- * creator.addPlugin("collabBar", bar);
- * // transport: onStatus -> bar.setStatus, onHistoryChanged -> bar.setHistory
- * ```
- */
+// A background (non-tab) creator plugin that renders the collaboration bar as
+// a full-width strip INSIDE the creator root, above the tabbed menu -- in every
+// UI framework, since it is plain DOM (same approach as `PresenceOverlay`).
+//
+// Data flow: participants come from the PresencePlugin roster automatically;
+// connection status and the room change log are transport state, so the host
+// pushes them in (`setStatus` / `setHistory`). Host-specific concerns (invite
+// link, lobby navigation, labels) are options -- absent option, hidden element.
+//
+// ```ts
+// const bar = new CollabBarPlugin(creator, {
+//   roomId, framework: "React",
+//   getInviteLink: () => `${location.origin}/?room=${encodeURIComponent(roomId)}`,
+//   onBack: () => { location.href = "/"; }
+// });
+// creator.addPlugin("collabBar", bar);
+// // transport: onStatus -> bar.setStatus, onHistoryChanged -> bar.setHistory
+// ```
 export class CollabBarPlugin implements ICreatorPlugin {
   public model: any = undefined;
   private view: CollabBarView | undefined;
@@ -107,19 +99,19 @@ export class CollabBarPlugin implements ICreatorPlugin {
     this.view?.dispose();
   }
 
-  /** Connection state (pushed by the host transport). */
+  // Connection state (pushed by the host transport).
   public setStatus(status: CollabBarStatus): void {
     this.view?.setStatus(status);
   }
-  /** The room change log backing "Show Version History" (pushed by the host transport). */
+  // The room change log backing "Show Version History" (pushed by the host transport).
   public setHistory(changes: ReadonlyArray<ICollabChange>): void {
     this.view?.setHistory(changes);
   }
-  /** Manual roster override for hosts without a PresencePlugin. */
+  // Manual roster override for hosts without a PresencePlugin.
   public setParticipants(users: Array<ICollabParticipant>): void {
     this.view?.setParticipants(users);
   }
-  /** The bar strip element (tests / host tweaks); undefined without a DOM. */
+  // The bar strip element (tests / host tweaks); undefined without a DOM.
   public get element(): HTMLElement | undefined {
     return this.view?.element;
   }
@@ -167,7 +159,7 @@ export class CollabBarPlugin implements ICreatorPlugin {
     this.observeRoot(root as HTMLElement);
   };
 
-  /** Watch the current root's direct children to restore the strip instantly. */
+  // Watch the current root's direct children to restore the strip instantly.
   private observeRoot(root: HTMLElement): void {
     if (this.observedRoot === root) return;
     this.mutationObserver?.disconnect();
@@ -181,7 +173,7 @@ export class CollabBarPlugin implements ICreatorPlugin {
     }
   }
 
-  /** Lazy one-time subscription to the presence roster (order-independent). */
+  // Lazy one-time subscription to the presence roster (order-independent).
   private hookPresence(): void {
     if (this.presencePlugin) return;
     const presence = this.options.presence ?? this.creator.getPlugin<PresencePlugin>("presence", false);
@@ -195,7 +187,7 @@ export class CollabBarPlugin implements ICreatorPlugin {
   }
 }
 
-/** The PresencePlugin roster -> the avatar strip input. */
+// The PresencePlugin roster -> the avatar strip input.
 function peersToParticipants(peers: ReadonlyMap<string, IPresencePeer>): Array<ICollabParticipant> {
   return Array.from(peers.values()).map((peer) => ({
     id: peer.clientId,

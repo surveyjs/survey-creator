@@ -19,24 +19,20 @@ interface IAddedElementEntry {
   added: IJournalArrayItemAdded;
 }
 
-/**
- * Records survey modifications reported by `creator.onModified` as serializable
- * journal records. See `JournalPlugin` for the public facade.
- *
- * Requires the creator's undo-redo plugin: its controller is the creator's
- * only subscriber to survey-core mutations (`survey.onPropertyValueChangedCallback`)
- * and the source of the `onModified` notifications this recorder consumes.
- * The plugin is registered unconditionally by the creator today; the constructor
- * check exists so that a future opt-out fails loudly instead of silently
- * recording nothing.
- */
+// Records survey modifications reported by `creator.onModified` as serializable
+// journal records. See `JournalPlugin` for the public facade.
+//
+// Requires the creator's undo-redo plugin: its controller is the creator's
+// only subscriber to survey-core mutations (`survey.onPropertyValueChangedCallback`)
+// and the source of the `onModified` notifications this recorder consumes.
+// The plugin is registered unconditionally by the creator today; the constructor
+// check exists so that a future opt-out fails loudly instead of silently
+// recording nothing.
 export class JournalRecorder {
   public onRecordAdded: EventBase<JournalRecorder, { record: IJournalRecord }> = new EventBase<JournalRecorder, { record: IJournalRecord }>();
   public onRecordChanged: EventBase<JournalRecorder, { record: IJournalRecord }> = new EventBase<JournalRecorder, { record: IJournalRecord }>();
-  /**
-   * Set by `JournalApplier` while remote records are being applied so that
-   * they are not recorded again (echo suppression).
-   */
+  // Set by `JournalApplier` while remote records are being applied so that
+  // they are not recorded again (echo suppression).
   public isApplying: boolean = false;
 
   public coalesceInterval: number;
@@ -83,11 +79,9 @@ export class JournalRecorder {
   public toText(): string {
     return JSON.stringify(this.recordsValue);
   }
-  /**
-   * Manually records a full-survey snapshot. Call it to bootstrap a receiver or
-   * after a programmatic `creator.JSON = ...` / `creator.changeText()`, which do
-   * not fire `onModified`. Pass `label` to tag it as a named version.
-   */
+  // Manually records a full-survey snapshot. Call it to bootstrap a receiver or
+  // after a programmatic `creator.JSON = ...` / `creator.changeText()`, which do
+  // not fire `onModified`. Pass `label` to tag it as a named version.
   public snapshot(label?: string): IJournalRecord {
     const payload: IJournalFullSnapshotPayload = { json: this.creator.JSON };
     if (label !== undefined) payload.label = label;
