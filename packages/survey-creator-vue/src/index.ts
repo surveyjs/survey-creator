@@ -1,5 +1,5 @@
 import type { App } from "vue";
-import { SurveyComponent, ComponentFactory } from "survey-vue3-ui";
+import { ComponentFactory } from "survey-vue3-ui";
 import SurveyCreatorComponent from "./Creator.vue";
 
 import TabbedMenu from "./tabbed-menu/TabbedMenu.vue";
@@ -22,6 +22,7 @@ import ActionButton from "./components/ActionButton.vue";
 import Switcher from "./components/Switcher.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import ComponentContainer from "./components/ComponentContainer.vue";
+import SurveyWidget from "./components/SurveyWidget.vue";
 import Test from "./tabs/preview/Test.vue";
 import ContainerTab from "./tabs/ContainerTab.vue";
 
@@ -41,13 +42,14 @@ import LinkValue from "./questions/LinkValue.vue";
 import Translation from "./tabs/translation/Translation.vue";
 import TranslationLineSkeleton from "./tabs/translation/TranslationLineSkeleton.vue";
 import TranslateFromAction from "./tabs/translation/TranslateFromAction.vue";
+import TranslationLocaleItem from "./tabs/translation/TranslationLocaleItem.vue";
 
 import Theme from "./tabs/theme/Theme.vue";
 import Color from "./custom-questions/Color.vue";
 import ColorItem from "./custom-questions/ColorItem.vue";
 import File from "./custom-questions/File.vue";
 import SpinEditor from "./custom-questions/SpinEditor.vue";
-import { editableStringRendererName } from "survey-creator-core";
+import { editableStringRendererName, translationLocaleItemComponentName } from "survey-creator-core";
 
 import StringEditor from "./StringEditor.vue";
 import AdaptiveToolbox from "./toolbox/AdaptiveToolbox.vue";
@@ -80,6 +82,7 @@ import PageNavigator from "./page-navigator/PageNavigator.vue";
 import PageNavigatorItem from "./page-navigator/PageNavigatorItem.vue";
 import Dropdown from "./adorners/Dropdown.vue";
 import QuestionDropdown from "./adorners/QuestionDropdown.vue";
+import TranslationDropdownQuestion from "./adorners/TranslationDropdownQuestion.vue";
 import CellQuestionDropdownVue from "./adorners/CellQuestionDropdown.vue";
 import CustomWidget from "./adorners/CustomWidget.vue";
 import QuestionBanner from "./adorners/QuestionBanner.vue";
@@ -131,7 +134,7 @@ function registerComponents(
   registerComponent("color-item", ColorItem);
   registerComponent("survey-fileedit", File);
   registerComponent("survey-spinedit", SpinEditor);
-  registerComponent("survey-widget", SurveyComponent);
+  registerComponent("survey-widget", SurveyWidget);
   registerComponent("survey-simulator", Simulator);
   registerComponent("svc-tab-preview", Test);
   registerComponent("survey-results", SurveyResults);
@@ -144,6 +147,7 @@ function registerComponents(
   registerComponent("svc-tab-translation", Translation);
   registerComponent("sd-translation-line-skeleton", TranslationLineSkeleton);
   registerComponent("svc-translate-from-action", TranslateFromAction);
+  registerComponent(translationLocaleItemComponentName, TranslationLocaleItem);
 
   registerComponent("svc-tab-logic", Logic);
 
@@ -185,6 +189,7 @@ function registerComponents(
   registerComponent("svc-image-item-drag-action", ImageItemDragAction);
   registerComponent("svc-dropdown-question", QuestionDropdown);
   registerComponent("svc-dropdown-question-adorner", Dropdown);
+  registerComponent("svc-translation-dropdown-question", TranslationDropdownQuestion);
   registerComponent("svc-widget-question", CustomWidget);
   registerComponent("svc-question-banner", QuestionBanner);
   registerComponent("sv-spinedit-button", SpinEditorButton);

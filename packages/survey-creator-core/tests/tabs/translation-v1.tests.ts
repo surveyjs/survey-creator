@@ -290,8 +290,11 @@ test("Filter by Page", () => {
   translation.reset();
   expect(translation.root.groups).toHaveLength(2);
   translation.filteredPage = survey.pages[0];
-  expect(translation.root.obj.name).toEqual("Page 1");
-  expect(translation.root.groups).toHaveLength(0);
+  // The survey's own strings are shown with the first page: the root stays the survey and the
+  // other pages are filtered out of it.
+  expect(translation.root.obj).toEqual(survey);
+  expect(translation.root.groups).toHaveLength(1);
+  expect(translation.root.groups[0].obj.name).toEqual("Page 1");
   translation.filteredPage = survey.pages[1];
   expect(translation.root.obj.name).toEqual("Page 2");
   translation.filteredPage = null;
@@ -308,7 +311,7 @@ test("MultipleText question", () => {
   survey.pages[0].addQuestion(question);
   const translation: Translation = new Translation(survey);
   translation.filteredPage = survey.pages[0];
-  const qGroup: TranslationGroup = translation.root.groups[0];
+  const qGroup: TranslationGroup = translation.root.groups[0].groups[0];
   expect(qGroup).toBeTruthy();
   expect(qGroup.groups).toHaveLength(2);
   expect(qGroup.groups[0].items[0].name).toEqual("title");

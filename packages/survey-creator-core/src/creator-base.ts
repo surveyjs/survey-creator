@@ -202,6 +202,16 @@ export class SurveyCreatorModel extends Base
    * @see clearTranslationsOnSourceTextChange
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
+  // Specifies how the Translation tab edits translations:
+  // "allLanguages" - a grid of translatable strings with a column per language,
+  // "sideBySide" - two design-mode instances of the edited survey rendered side by side:
+  // a read-only source language on the left and an inline-editable target language on the right.
+  public translationMode: "allLanguages" | "sideBySide" = "allLanguages";
+  // How the side-by-side Translation tab renders its editing surface; applies only if
+  // translationMode is "sideBySide": "forms" - two design-mode survey instances side by side,
+  // "grid" - a translation grid with a source and a target locale column. Users can
+  // switch the view with a button group in the Translation property grid, which updates this property.
+  public translationSideBySideView: "forms" | "grid" = "forms";
   /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *
@@ -3008,6 +3018,8 @@ export class SurveyCreatorModel extends Base
     hash["translation_settings"] = "translation-tab:language-list";
     hash["translation_strings"] = "translation-tab:table";
     hash["translation_strings_header"] = "translation-tab:table-header";
+    hash["translation_source"] = "translation-tab:source-survey";
+    hash["translation_target"] = "translation-tab:target-survey";
     hash["cells-editor"] = "matrix-cell-values-popup-editor";
     hash["fast-entry"] = "table-values-popup-editor";
     hash["modal-question-editor"] = "matrix-cell-question-popup-editor";
@@ -4958,6 +4970,9 @@ export class SurveyCreatorModel extends Base
   expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
+  // Set by the translation side-by-side forms view to learn which editable string got the focus;
+  // the inline string editors call it on every focus while it is assigned.
+  onStringEditorFocusedCallback: (locStr: LocalizableString) => void;
 
   @property({
     defaultValue: false, onSet: (newValue: boolean, target: SurveyCreatorModel) => {
@@ -5233,7 +5248,7 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
   model.locDescription.placeholder = "pe.surveyDescriptionPlaceholder";
 }
 
-function isContentElement(element: any) {
+export function isContentElement(element: any) {
   let current = element;
   while(!!current) {
     if (current.isContentElement) {

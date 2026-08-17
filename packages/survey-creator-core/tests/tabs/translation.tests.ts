@@ -347,6 +347,26 @@ test("stringsSurvey and filterPage + one page", () => {
   translation.filteredPage = survey.pages[0];
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
 });
+test("filterPage by the first page shows the survey strings", () => {
+  const survey = new SurveyModel({
+    title: "Survey Title",
+    completedHtml: "Completed",
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "question1", title: "Question 1" }] },
+      { name: "page2", elements: [{ type: "text", name: "question2", title: "Question 2" }] }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  const getNames = (): Array<string> => translation.root.allLocItems.map(item => (!!item.context && !!item.context["name"] ? item.context["name"] : "survey") + "." + item.name);
+  expect(getNames()).toEqual(["survey.title", "survey.completedHtml", "question1.title", "question2.title"]);
+  translation.filteredPage = survey.pages[0];
+  expect(translation.root.obj).toBe(survey);
+  expect(getNames()).toEqual(["survey.title", "survey.completedHtml", "question1.title"]);
+  translation.filteredPage = survey.pages[1];
+  expect(translation.root.obj).toBe(survey.pages[1]);
+  expect(getNames()).toEqual(["question2.title"]);
+});
 test("Translation show All strings and property visibility, #1", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -528,12 +548,8 @@ test("Actions mode small", () => {
   const creator = new CreatorTester();
   const tabTranslation = new TabTranslationPlugin(creator);
   const actions = tabTranslation.createActions();
-  expect(actions.length).toBe(5);
-  expect(actions[0].mode).toBe("small");
-  expect(actions[1].mode).toBe("small");
-  expect(actions[2].mode).toBe("small");
-  expect(actions[3].mode).toBe("small");
-  expect(actions[4].mode).toBe("small");
+  expect(actions.length).toBe(6);
+  actions.forEach(action => expect(action.mode).toBe("small"));
 });
 
 test("Make invisible locales in language selector, that has been already choosen", () => {
@@ -2890,6 +2906,57 @@ test("Import after creating TranslationEditor should not throw error, Issue#7790
   expect(translation.stringsHeaderSurvey).toBeDefined();
 });
 
+const externalChangeJSON = {
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+        { type: "text", name: "q2", title: { default: "Question 2", de: "Frage 2" } }
+      ]
+    }
+  ]
+};
+function createTranslationTabCreator(json: any = externalChangeJSON): CreatorTester {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  // The survey takes ownership of the loaded JSON object, so pass a copy to keep tests independent.
+  creator.JSON = JSON.parse(JSON.stringify(json));
+  creator.activeTab = "translation";
+  return creator;
+}
+function getTranslationTabModel(creator: CreatorTester): Translation {
+  return (<TabTranslationPlugin>creator.getPlugin("translation")).model;
+}
+// The matrix showing the given translation item (one item per matrix, matched by owner object name).
+function findStringsMatrix(model: Translation, contextName: string, itemName: string): QuestionMatrixDropdownModel {
+  return <QuestionMatrixDropdownModel>model.stringsSurvey.getAllQuestions().filter((matrix: any) => {
+    const item = <TranslationItem>(matrix.rows[0] && matrix.rows[0]["translationData"]);
+    return !!item && item.name === itemName && !!item.context && item.context.name === contextName;
+  })[0];
+}
+function getStringsCellQuestion(matrix: QuestionMatrixDropdownModel, columnName: string): QuestionCommentModel {
+  const index = matrix.columns.map(column => column.name).indexOf(columnName);
+  return <QuestionCommentModel>matrix.visibleRows[0].cells[index].question;
+}
+
+test("default mode: an external localizable string change refreshes the grid cells", () => {
+  const creator = createTranslationTabCreator();
+  const model = getTranslationTabModel(creator);
+  const matrix = findStringsMatrix(model, "q1", "title");
+  creator.survey.getQuestionByName("q1").locTitle.setLocaleText("de", "Frage 1 neu");
+  expect(getStringsCellQuestion(matrix, "de").value).toBe("Frage 1 neu");
+});
+
+test("default mode: an external structural change rebuilds the strings grid", () => {
+  const creator = createTranslationTabCreator();
+  const model = getTranslationTabModel(creator);
+  expect(findStringsMatrix(model, "q3", "title")).toBeFalsy();
+  creator.survey.pages[0].addNewQuestion("text", "q3");
+  const updatedModel = getTranslationTabModel(creator);
+  expect(findStringsMatrix(updatedModel, "q3", "title")).toBeTruthy();
+  expect(findStringsMatrix(updatedModel, "q1", "title")).toBeTruthy();
+});
+
 test("Do not remove a just added locale on removing another locale, Bug#7904", () => {
   const oldMaximumSelectedLocales = settings.translation.maximumSelectedLocales;
   settings.translation.maximumSelectedLocales = 4;
@@ -2966,4 +3033,72 @@ test("Keep locales selection on removing a locale, Bug#7904", () => {
   expect(translation.getSelectedLocales()).toStrictEqual(["fr", "it", "es", "pt"]);
   expect([...translation.locales]).toStrictEqual(["", "fr", "it", "es", "pt"]);
   settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
+});
+
+test("Translation: strings the library localizes itself show their localized text as a cell placeholder", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "boolean", name: "b1" },
+      { type: "checkbox", name: "q1", showOtherItem: true, choices: ["item1"] }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.showAllStrings = true;
+  translation.addLocale("de");
+  const getItem = (name: string): TranslationItem => {
+    return translation.root.allLocItems.filter(item => item.name === name)[0];
+  };
+  // A string with nothing stored in any locale, whose text comes from the library's own string
+  // table: the source side shows that text and every locale cell offers it as its placeholder.
+  const labelTrue = getItem("labelTrue");
+  expect(labelTrue).toBeTruthy();
+  expect(labelTrue.locString.getLocaleText("")).toBeFalsy();
+  expect(labelTrue.getSourceText("")).toBe("Yes");
+  expect(labelTrue.getPlaceholder("default")).toBe("Yes");
+  expect(labelTrue.getPlaceholder("de")).toBe("Ja");
+  const otherText = getItem("otherText");
+  expect(otherText.getSourceText("")).toBe("Other (describe)");
+  expect(otherText.getPlaceholder("de")).toBe("Sonstiges (Bitte angeben)");
+  // A survey string is localized by its own name in the string table (completedHtml is stored
+  // there as "completingSurvey"), so the name is not what the text is looked up by.
+  expect(getItem("completedHtml").getSourceText("")).toBe("Thank you for completing the survey");
+  // A string the library does not localize keeps the generic placeholder.
+  expect(getItem("description").getSourceText("")).toBe("");
+  expect(getItem("description").getPlaceholder("de")).toBe(editorLocalization.getString("ed.translationPlaceHolder", "de"));
+  // The grid cells of both locale columns render the placeholders.
+  const getMatrix = (name: string): QuestionMatrixDropdownModel => {
+    return <QuestionMatrixDropdownModel>translation.stringsSurvey.getAllQuestions().filter(
+      q => (<QuestionMatrixDropdownModel>q).rows[0].value === name)[0];
+  };
+  const labelTrueMatrix = getMatrix("labelTrue");
+  expect(labelTrueMatrix.columns.map(col => col.name)).toStrictEqual(["default", "de"]);
+  expect(labelTrueMatrix.visibleRows[0].cells[0].question.placeholder).toBe("Yes");
+  expect(labelTrueMatrix.visibleRows[0].cells[1].question.placeholder).toBe("Ja");
+});
+
+test("Translation: strings the library localizes through its error classes show the error text", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "panel", name: "panel1", elements: [{ type: "text", name: "q1" }] },
+      { type: "checkbox", name: "q2", showOtherItem: true, choices: ["item1"] }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.showAllStrings = true;
+  const getItem = (name: string, type: string): TranslationItem => {
+    return translation.root.allLocItems.filter(
+      item => item.name === name && item.context.getType() === type)[0];
+  };
+  // requiredErrorText and otherErrorText store nothing and carry no usable localization name of
+  // their own - the text the survey shows comes from the error class that falls back to them.
+  const questionRequired = getItem("requiredErrorText", "text");
+  expect(questionRequired.getSourceText("")).toBe("Response required.");
+  expect(questionRequired.getPlaceholder("de")).toBe("Bitte beantworten Sie diese Frage.");
+  // A panel is validated as a whole, so its error text is a different string.
+  const panelRequired = getItem("requiredErrorText", "panel");
+  expect(panelRequired.getSourceText("")).toBe("Response required: answer at least one question.");
+  expect(panelRequired.getPlaceholder("de")).toBe("Bitte beantworten Sie mindestens eine Frage.");
+  const otherError = getItem("otherErrorText", "checkbox");
+  expect(otherError.getSourceText("")).toBe("Response required: enter another value.");
+  expect(otherError.getPlaceholder("de")).toBe("Bitte geben Sie einen Wert an.");
 });

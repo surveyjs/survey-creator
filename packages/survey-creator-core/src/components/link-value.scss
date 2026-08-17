@@ -11,6 +11,11 @@
 .svc-link-value-button {
   margin-inline-start: var(--sjs2-spacing-negative-x200);
 }
+// In a matrix cell (the side-by-side languages matrix) the cell's left padding is smaller
+// than the button's negative margin, which would pull the selection border past the table edge.
+.spg-table__question-wrapper .svc-link-value-button {
+  margin-inline-start: 0;
+}
 .svc-question-link__clear-button {
   color: var(--sjs2-color-bg-alert-primary);
   cursor: pointer;

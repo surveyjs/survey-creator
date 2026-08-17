@@ -1,14 +1,15 @@
 
-import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, CssClassBuilder, ItemValue, Action, ComputedUpdater } from "survey-core";
+import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, property, ItemValue, Action } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
-import { editorLocalization } from "../editorLocalization";
+import { DropdownChoicesViewModel, IDropdownChoicesHost } from "./dropdown-choices";
 
 import "./question-dropdown.scss";
 
-export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
-  @property({ defaultValue: true }) private isCollapsed: boolean;
+export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel implements IDropdownChoicesHost {
+  @property({ defaultValue: true }) private isCollapsedValue: boolean;
   @property({ defaultValue: -1 }) private visibleCount: number;
+  private choicesModel: DropdownChoicesViewModel;
 
   constructor(
     creator: SurveyCreatorModel,
@@ -17,56 +18,66 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
   ) {
     super(creator, surveyElement, templateData);
     this.visibleCount = creator.maxVisibleChoices;
-    this.isCollapsed = this.isCollapsed && this.needToCollapse;
+    this.choicesModel = new DropdownChoicesViewModel(this);
   }
 
   get question(): QuestionDropdownModel {
     return this.surveyElement as QuestionDropdownModel;
   }
 
+  // IDropdownChoicesHost: the collapsed flag stays a property of the adorner itself, so that the
+  // framework views re-render on it - they track the adorner, not the choices model.
+  public get maxVisibleChoices(): number {
+    return this.visibleCount;
+  }
+  public isCollapsed(): boolean {
+    return this.isCollapsedValue;
+  }
+  public setCollapsed(value: boolean): void {
+    this.isCollapsedValue = value;
+  }
+
   get itemComponent(): string {
-    if (this.surveyElement.isDescendantOf("dropdown")) {
-      return "survey-radiogroup-item";
-    }
-    return "survey-checkbox-item";
+    return this.choicesModel.itemComponent;
+  }
+
+  get itemInputType(): string {
+    return this.choicesModel.itemInputType;
   }
 
   get needToCollapse(): boolean {
-    return this.visibleCount > 0 && this.question.visibleChoices.length > this.visibleCount;
+    return this.choicesModel.needToCollapse;
   }
 
   get isCollapseView(): boolean {
-    return this.isCollapsed;
+    return this.choicesModel.isCollapseView;
   }
 
   public leftFocus(): void {
-    if (!this.creator.isElementSelected(this.surveyElement) && !this.isCollapsed) {
-      this.isCollapsed = this.needToCollapse;
+    if (!this.creator.isElementSelected(this.surveyElement) && !this.isCollapsedValue) {
+      this.isCollapsedValue = this.needToCollapse;
     }
   }
 
   public getChoiceCss(): string {
-    return new CssClassBuilder()
-      .append("svc-question__dropdown-choice")
-      .append("svc-question__dropdown-choice--collapsed", this.isCollapsed && this.needToCollapse)
-      .toString();
+    return this.choicesModel.getChoiceCss();
   }
 
   public getRenderedItems(): ItemValue[] {
-    return this.isCollapsed ?
-      this.question.renderedChoices.slice(0, this.visibleCount) :
-      this.question.renderedChoices;
+    return this.choicesModel.getRenderedItems();
   }
 
   public getButtonText(): string {
-    return !this.isCollapsed ?
-      editorLocalization.getString("ed.showLessChoices") :
-      editorLocalization.getString("ed.showMoreChoices");
+    return this.choicesModel.getButtonText();
   }
 
   public switchCollapse = (): void => {
-    this.isCollapsed = !this.isCollapsed;
+    this.choicesModel.switchCollapse();
   };
+
+  public get collapseAction(): Action {
+    return this.choicesModel.collapseAction;
+  }
 
   public attachElement(surveyElement: SurveyElement) {
     super.attachElement(surveyElement);
@@ -83,17 +94,10 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
     }
     super.detachElement(surveyElement);
   }
-  private collapseActionValue?: Action;
-  public get collapseAction(): Action {
-    if (!this.collapseActionValue) {
-      this.collapseActionValue = new Action({
-        id: "collapse",
-        innerCss: "svc-question__dropdown-collapse-button",
-        title: new ComputedUpdater<string>(() => this.getButtonText()) as unknown as string,
-        appearance: { style: "brand", mode: "tertiary", size: "small" },
-        action: this.switchCollapse
-      });
+  public dispose(): void {
+    if (!!this.choicesModel) {
+      this.choicesModel.dispose();
     }
-    return this.collapseActionValue;
+    super.dispose();
   }
 }
