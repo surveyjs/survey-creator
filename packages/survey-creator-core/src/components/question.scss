@@ -123,7 +123,7 @@ svc-question {
 }
 
 .svc-question__content {
-  .sd-selectbase:not(.sd-imagepicker) {
+  .sd-selectbase:not(.sd-imagepicker, .sd-boolean-fieldset) {
     padding-left: var(--sjs2-spacing-x500, 40px);
     margin-left: var(--sjs2-spacing-negative-x500, -40px);
     padding-right: var(--sjs2-spacing-x500, 40px);
@@ -131,7 +131,7 @@ svc-question {
     overflow-x: auto;
   }
 
-  .sd-table .sd-selectbase:not(.sd-imagepicker) {
+  .sd-table .sd-selectbase:not(.sd-imagepicker, .sd-boolean-fieldset) {
     overflow-x: visible;
     padding-left: 0;
     margin-left: 0;
