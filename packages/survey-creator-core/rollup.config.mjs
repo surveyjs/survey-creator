@@ -15,7 +15,7 @@ const buildPath = resolve(__dirname, "build");
 const buildPlatformJson = {
   name: pkg.name,
   version: pkg.version,
-  description: "Framework-independent model behind SurveyJS Survey Creator: a drag-and-drop form builder that generates JSON schemas with validation, conditional logic, localization, and theming. Pair with survey-creator-react, survey-creator-angular, survey-creator-vue, or survey-creator-js to render.",
+  description: "Drag-and-drop form builder core: design forms visually and generate JSON schemas with validation, conditional logic, localization, and theming. Framework-independent; pair with survey-creator-react, survey-creator-angular, survey-creator-vue, or survey-creator-js to render.",
   homepage: "https://surveyjs.io/",
   license: "SEE LICENSE IN LICENSE",
   licenseUrl: "https://surveyjs.io/licensing",
@@ -32,9 +32,12 @@ const buildPlatformJson = {
     "drag-and-drop-form-builder",
     "no-code-form-builder",
     "dynamic-form-builder",
-    "json-schema",
-    "schema-form",
     "form-designer",
+    "survey-designer",
+    "form-editor",
+    "wysiwyg",
+    "low-code",
+    "no-code",
     "form-validation",
     "conditional-logic",
     "questionnaire",
@@ -43,17 +46,12 @@ const buildPlatformJson = {
     "data-collection",
     "localization",
     "theming",
-    "design-tokens",
-    "css-variables",
     "bootstrap",
     "bootswatch",
     "mui",
     "material-ui",
     "shadcn",
-    "shadcn-ui",
-    "tailwind",
-    "javascript",
-    "typescript"
+    "shadcn-ui"
   ],
   files: [
     "**/*"

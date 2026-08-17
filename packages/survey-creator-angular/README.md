@@ -1,4 +1,4 @@
-# survey-creator-angular
+# Survey Creator for Angular — Drag-and-Drop Form Builder
 
 [![SurveyJS Survey Creator](https://github.com/user-attachments/assets/1801367a-47fb-486b-8355-4c92e449755b)](https://surveyjs.io/create-free-survey)
 
@@ -8,7 +8,7 @@
 [![Open Issues](https://img.shields.io/github/issues/surveyjs/survey-creator.svg)](https://github.com/surveyjs/survey-creator/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed/surveyjs/survey-creator.svg)](https://github.com/surveyjs/survey-creator/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+)
 
-`survey-creator-angular` renders [Survey Creator](https://surveyjs.io/survey-creator) — the drag-and-drop form builder for [SurveyJS Form Library](https://surveyjs.io/form-library) — in Angular applications. It is the Angular view layer over [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core), the platform-independent model that holds the design surface, toolbox, property grid, and the logic, translation, and theme editors. Installing `survey-creator-angular` brings `survey-creator-core` with it — you configure a builder instance with `survey-creator-core` and bind it to this package's `<survey-creator>` component to display.
+`survey-creator-angular` renders [Survey Creator](https://surveyjs.io/survey-creator) — the drag-and-drop form builder for [SurveyJS Form Library](https://surveyjs.io/form-library) — in Angular applications. It is the Angular view layer over [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core), the platform-independent model that holds the design surface, toolbox, property grid, and the logic, translation, and theme editors. Installing `survey-creator-angular` brings `survey-creator-core` with it — you configure a builder instance with `survey-creator-core` and bind it to this package's `<survey-creator>` component through its `model` input: `<survey-creator [model]="surveyCreatorModel"></survey-creator>`.
 
 Users design forms visually; the builder produces a survey JSON schema that [`survey-angular-ui`](https://www.npmjs.com/package/survey-angular-ui) renders as a working form.
 
@@ -24,6 +24,18 @@ npm install @angular/cdk@^12.0.0 --save
 ```
 
 > Angular v8&ndash;v11 are supported by the legacy [`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout) package, which depends on Knockout and is obsolete. See [Add Survey Creator to an Angular v8&ndash;v11 Application](https://github.com/surveyjs/code-examples/tree/main/legacy-angular/survey-creator).
+
+## License key
+
+Survey Creator displays an alert banner until you activate a [purchased commercial license](https://surveyjs.io/licensing). Activate your key with `setLicenseKey` from `survey-core`:
+
+```ts
+import { setLicenseKey } from "survey-core";
+
+setLicenseKey("your-license-key-goes-here");
+```
+
+Call it once at module bootstrap — in `app.module.ts` alongside the `SurveyCreatorModule` import, or in `main.ts` before `bootstrapModule`. Your key and step-by-step setup instructions are on the [How to Remove the Alert Banner](https://surveyjs.io/remove-alert-banner) page in your SurveyJS account.
 
 ## Usage
 
@@ -136,7 +148,7 @@ Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatc
 - [Get Started with Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular)
 - [API Reference](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator)
 - [Live Examples](https://surveyjs.io/survey-creator/examples/free-nps-survey-template/angular)
-- [What's New](https://surveyjs.io/WhatsNew)
+- [What's New](https://surveyjs.io/stay-updated/major-updates/2025-2026)
 
 For AI coding agents: [https://surveyjs.io/llms.txt](https://surveyjs.io/llms.txt) indexes the documentation. Any documentation page is also available as raw Markdown — append `.md` to its URL, for example [https://surveyjs.io/survey-creator/documentation/get-started-angular.md](https://surveyjs.io/survey-creator/documentation/get-started-angular.md).
 
@@ -204,4 +216,4 @@ This monorepo does **not** use npm workspaces: each package installs independent
 
 ## Licensing
 
-Survey Creator is **not available for free commercial usage**. If you want to integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/licensing). However, you can [use Survey Creator online](https://surveyjs.io/create-free-survey) to produce survey JSON schemas and run them with [SurveyJS Form Library](https://surveyjs.io/form-library/documentation/overview) in your application free of charge.
+You can install Survey Creator and evaluate its full functionality right away — no license is needed to prototype, test, or build a proof of concept. Production use requires a [commercial license](https://surveyjs.io/licensing) for each developer who works with the SurveyJS APIs or implements the integration, and activating a [license key](#license-key) removes the alert banner. The forms Survey Creator produces are rendered by [SurveyJS Form Library](https://surveyjs.io/form-library/documentation/overview), which is MIT-licensed and runs free of charge.
