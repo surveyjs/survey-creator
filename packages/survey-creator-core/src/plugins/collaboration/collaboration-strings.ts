@@ -11,6 +11,7 @@
 // names) are still read through editorLocalization at their call sites - those
 // keys exist in core with or without this feature.
 export const collaborationStrings: { [index: string]: string } = {
+  collabLicense: "To use Collaborative Form Editing in your application, you need to add this feature to your existing SurveyJS license. <a href='https://surveyjs.io/pricing#collaboration' target='_blank'>View pricing</a> for details or contact us at <a href='mailto:info@surveyjs.io'>info@surveyjs.io</a> to get access.",
   collabMenu: "Collaboration",
   collabShowVersionHistory: "Show Version History",
   collabRoom: "Room: {0}",

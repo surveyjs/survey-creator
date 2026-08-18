@@ -21,6 +21,17 @@ for (const iconPath of await fg.glob(iconsPattern)) {
 }
 const virtualModules = { "collaborationIcons": `export default ${JSON.stringify(icons)}` };
 
+// Consumers compiled with "moduleResolution": "node" (survey-creator-react,
+// survey-creator-js) never read the package "exports" map: they resolve
+// "survey-creator-core/collaboration" as a directory lookup, which requires an
+// index.d.ts at the folder root - the same contract themes/ and ui-presets/
+// satisfy. The declarations below are generated from src/entries/collaboration.ts
+// and keep the source layout (entries/, plugins/), so the root stub is written
+// by hand here.
+const typingsPath = resolve(buildPath, "collaboration");
+fs.mkdirSync(typingsPath, { recursive: true });
+fs.writeFileSync(resolve(typingsPath, "index.d.ts"), "export * from \"./entries/collaboration\";\n", "utf8");
+
 // Collaboration is bundled apart from the main entry so a creator that does not
 // use it ships neither its JS nor its CSS. `survey-creator-core` is external:
 // the plugin must share the creator's class identities (the journal's stack

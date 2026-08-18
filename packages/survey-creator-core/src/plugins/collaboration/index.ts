@@ -1,4 +1,4 @@
-import { EventBase } from "survey-core";
+import { EventBase, hasLicense } from "survey-core";
 import { ICreatorPlugin, SurveyCreatorModel } from "survey-creator-core";
 import { JournalController } from "./journal";
 import { IJournalApplyOptions } from "./journal/journal-applier";
@@ -9,6 +9,7 @@ import { PresenceCapture } from "./presence/presence-capture";
 import { emptyPresenceState, IPresencePeer, IPresencePeerEntry, IPresenceState } from "./presence/presence-state";
 import { CollabBarModel } from "./bar/bar-model";
 import { CollabBarStatus, ICollabBarOptions, ICollabChange, ICollabParticipant } from "./bar/bar-types";
+import { getCollabString } from "./collaboration-strings";
 
 // Registers the feature's own icons; see svgbundle.ts.
 import "./svgbundle";
@@ -102,6 +103,15 @@ export class CollaborationPlugin implements ICreatorPlugin {
   public activate(): void { }
   public deactivate(): boolean {
     return true;
+  }
+
+  // Collaboration ships as a separate SurveyJS product (index 9). A creator
+  // license alone does not unlock it: without product 9 addPlugin picks up
+  // this text and creator renders a single generic banner. Functionality is
+  // not blocked.
+  public getLicenseText(_hasCreatorLicense: boolean, _creatorLicenseDateString: string): string {
+    if (hasLicense?.(9)) return "";
+    return getCollabString("collabLicense");
   }
 
   public dispose(): void {
