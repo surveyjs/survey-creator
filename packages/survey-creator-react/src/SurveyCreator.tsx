@@ -129,12 +129,13 @@ export class SurveyCreatorComponent extends SurveyElementBase<
       </div>
     );
   }
-  // Looked up through the factory so this file stays free of a hard dependency
-  // on the collaboration plugin.
+  // The strip is a plain ComponentContainerModel, so the generic container
+  // component draws it. `collabBar` is typed as Base in creator-core to keep the
+  // creator free of a dependency on the collaboration plugin, hence the cast.
   renderCollabBar() {
-    const model = this.creator.collabBar;
-    if (!model) return null;
-    return ReactElementFactory.Instance.createElement("svc-collab-bar", { model: model });
+    const bar: any = this.creator.collabBar;
+    if (!bar) return null;
+    return ReactElementFactory.Instance.createElement("svc-component-container", { model: bar.container });
   }
   renderActiveTab() {
     const creator: SurveyCreatorModel = this.props.creator;

@@ -269,3 +269,144 @@ test("floating-panel: a panel without a title renders an empty header caption", 
 
 // The panel registers itself nowhere: its owner (the collaboration bar) holds
 // the instance and renders it. Ownership is covered by bar.tests.ts.
+
+// --- DOM handover ------------------------------------------------------------
+// A framework view only hands its root node over (setComponentElement, the same
+// contract survey-core's popup views use) and forwards the header's raw
+// pointerdown. Everything below used to live in three copies inside the views,
+// where none of it was covered.
+
+function attachedPanel(options: any = {}): { panel: FloatingPanelModel, root: HTMLElement, header: HTMLElement } {
+  const panel = makePanel(options);
+  const root = document.createElement("div");
+  // jsdom lays nothing out, so the panel's measured box is stubbed.
+  root.getBoundingClientRect = (): any => DOCKED_RECT;
+  const header = document.createElement("div");
+  root.appendChild(header);
+  document.body.appendChild(root);
+  panel.show();
+  panel.setComponentElement(root);
+  return { panel, root, header };
+}
+
+function detach(panel: FloatingPanelModel, root: HTMLElement): void {
+  panel.resetComponentElement();
+  root.remove();
+}
+
+const headerPointerDown = (target: any, x: number, y: number): any =>
+  ({ button: 0, clientX: x, clientY: y, target: target, preventDefault: () => { } });
+
+const dispatchPointer = (type: string, x: number, y: number): void => {
+  document.dispatchEvent(new MouseEvent(type, { clientX: x, clientY: y, bubbles: true }));
+};
+
+test("floating-panel: setComponentElement reads the viewport from the window", () => {
+  const panel = makePanel();
+  panel.updateViewport({ width: 1, height: 1 });
+  const root = document.createElement("div");
+  panel.setComponentElement(root);
+  expect(panel.viewport).toEqual({ width: window.innerWidth, height: window.innerHeight });
+  detach(panel, root);
+});
+
+test("floating-panel: the header pointerdown starts a drag the document carries", () => {
+  const { panel, root, header } = attachedPanel();
+  panel.onPointerDown(headerPointerDown(header, 700, 30));
+  expect(panel.isDragging).toBeTruthy();
+  expect(panel.isDocked).toBeFalsy();
+
+  // The view takes no part in the move - no pointer capture, no handlers.
+  dispatchPointer("pointermove", 500, 100);
+  expect(panel.left).toEqual(452);
+  expect(panel.top).toEqual(12);
+
+  dispatchPointer("pointerup", 500, 100);
+  expect(panel.isDragging).toBeFalsy();
+
+  // The move listeners went with the drag.
+  dispatchPointer("pointermove", 100, 400);
+  expect(panel.left).toEqual(452);
+  detach(panel, root);
+});
+
+test("floating-panel: pointercancel ends the drag like pointerup", () => {
+  const { panel, root, header } = attachedPanel();
+  panel.onPointerDown(headerPointerDown(header, 700, 30));
+  document.dispatchEvent(new MouseEvent("pointercancel", { bubbles: true }));
+  expect(panel.isDragging).toBeFalsy();
+  detach(panel, root);
+});
+
+test("floating-panel: a press on a header button is not a drag", () => {
+  const { panel, root, header } = attachedPanel();
+  const button = document.createElement("button");
+  header.appendChild(button);
+  panel.onPointerDown(headerPointerDown(button, 700, 30));
+  expect(panel.isDragging).toBeFalsy();
+  expect(panel.isDocked).toBeTruthy();
+  detach(panel, root);
+});
+
+test("floating-panel: a non-primary button does not drag, nor does a disallowed one", () => {
+  const { panel, root, header } = attachedPanel();
+  panel.onPointerDown({ button: 2, clientX: 700, clientY: 30, target: header, preventDefault: () => { } } as any);
+  expect(panel.isDragging).toBeFalsy();
+  detach(panel, root);
+
+  const fixed = attachedPanel({ allowDrag: false });
+  fixed.panel.onPointerDown(headerPointerDown(fixed.header, 700, 30));
+  expect(fixed.panel.isDragging).toBeFalsy();
+  detach(fixed.panel, fixed.root);
+});
+
+test("floating-panel: Escape closes the panel from anywhere on the document", () => {
+  const { panel, root } = attachedPanel();
+  expect(panel.visible).toBeTruthy();
+  document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  expect(panel.visible).toBeFalsy();
+  detach(panel, root);
+});
+
+test("floating-panel: a window resize re-clamps a floating panel", () => {
+  const { panel, root, header } = attachedPanel();
+  panel.onPointerDown(headerPointerDown(header, 700, 30));
+  dispatchPointer("pointermove", 900, 400);
+  dispatchPointer("pointerup", 900, 400);
+
+  (<any>window).innerWidth = 500;
+  window.dispatchEvent(new Event("resize"));
+  expect(panel.viewport.width).toEqual(500);
+  expect(panel.left + panel.width).toBeLessThanOrEqual(500 - panel.gap + 1);
+
+  (<any>window).innerWidth = 1024;
+  detach(panel, root);
+});
+
+test("floating-panel: resetComponentElement releases every listener", () => {
+  const { panel, root, header } = attachedPanel();
+  panel.onPointerDown(headerPointerDown(header, 700, 30));
+  const left = panel.left;
+  panel.resetComponentElement();
+
+  // A drag in flight is dropped, and nothing on the document reaches the panel.
+  dispatchPointer("pointermove", 100, 400);
+  expect(panel.left).toEqual(left);
+  document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  expect(panel.visible).toBeTruthy();
+
+  (<any>window).innerWidth = 640;
+  window.dispatchEvent(new Event("resize"));
+  expect(panel.viewport.width).toEqual(1024);
+  (<any>window).innerWidth = 1024;
+  root.remove();
+});
+
+test("floating-panel: style hides the root instead of the view unmounting it", () => {
+  const panel = makePanel();
+  expect(panel.style.display).toEqual("none");
+  panel.show();
+  expect(panel.style.display).toBeUndefined();
+  panel.hide();
+  expect(panel.style.display).toEqual("none");
+});

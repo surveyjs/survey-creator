@@ -3,7 +3,7 @@ import { Action, ListModel, PopupDropdownViewModel } from "survey-core";
 import { CreatorTester } from "../tests/creator-tester";
 import { JournalOp } from "../src/plugins/collaboration/journal";
 import { IPresencePeerEntry } from "../src/plugins/collaboration/presence";
-import { CollabParticipantAction, ICollabChange } from "../src/plugins/collaboration/bar";
+import { CollabRowAction, ICollabChange } from "../src/plugins/collaboration/bar";
 import { CollaborationPlugin, ICollaborationOptions } from "../src/plugins/collaboration";
 
 const initialJSON = {
@@ -101,35 +101,38 @@ test("collab-bar: picking a menu item does not rename the Collaboration trigger"
 
 test("collab-bar: the status plate shows only while the connection has a problem", () => {
   const { collab, cleanup } = setup();
+  const status = collab.bar.statusRow;
   collab.setStatus("connecting");
-  expect(collab.bar.statusVisible).toBeTruthy();
-  expect(collab.bar.statusText).toEqual("Connecting...");
-  expect(collab.bar.getStatusCss()).toContain("svc-collab-bar__status--connecting");
+  expect(status.visible).toBeTruthy();
+  expect(status.title).toEqual("Connecting...");
+  expect(status.rowCss).toContain("svc-collab-bar__status--connecting");
+  // Not an action-bar item, so it can carry a live region.
+  expect(status.rowRole).toEqual("status");
 
   collab.setStatus("closed");
-  expect(collab.bar.statusVisible).toBeTruthy();
-  expect(collab.bar.statusText).toEqual("Disconnected");
+  expect(status.visible).toBeTruthy();
+  expect(status.title).toEqual("Disconnected");
 
   collab.setStatus("connected");
-  expect(collab.bar.statusVisible).toBeFalsy();
+  expect(status.visible).toBeFalsy();
   cleanup();
 });
 
-test("collab-bar: presence peers become avatar actions", () => {
+test("collab-bar: presence peers become avatar chips", () => {
   const { collab, cleanup } = setup();
   collab.upsertPeer(peerEntry("a", "theme"));
 
-  const actions = collab.bar.participantActions.actions as Array<CollabParticipantAction>;
+  const actions = collab.bar.participantActions.actions;
   expect(actions.length).toEqual(1);
-  expect(actions[0].title).toEqual("User a");
-  expect(actions[0].initials).toEqual("UA");
-  expect(actions[0].component).toEqual("svc-collab-bar-avatar");
+  // A plain Action: the action bar draws the button and the avatar classes ride
+  // on it through innerCss, so the chip needs no component of its own.
+  expect(actions[0].component).toBeFalsy();
+  expect(actions[0].title).toEqual("UA");
   // The tab name is localized through the shared tabs.* keys.
   expect(actions[0].tooltip).toEqual("User a on Themes");
   // A theme color slot, not the raw transport hex.
-  expect(actions[0].colorIndex).toBeGreaterThanOrEqual(0);
-  expect(actions[0].colorIndex).toBeLessThanOrEqual(9);
-  expect(actions[0].getAvatarCss()).toContain("svc-collab-bar__avatar--color-" + actions[0].colorIndex);
+  expect(actions[0].innerCss).toContain("svc-collab-bar__avatar--color-");
+  expect(actions[0].innerCss).toContain("svc-collab-bar__participant");
 
   collab.removePeer("a");
   expect(collab.bar.participantActions.actions.length).toEqual(0);
@@ -203,11 +206,15 @@ test("collab-bar: the roster popup lists every participant as its own instance",
   collab.upsertPeer(peerEntry("b", "theme"));
 
   const list = openList(collab.bar.toolActions.getActionById("collabParticipants"));
-  const items = list.actions as Array<CollabParticipantAction>;
+  const items = list.actions as Array<CollabRowAction>;
   expect(items.length).toEqual(2);
-  expect(items[0].component).toEqual("svc-collab-bar-avatar");
-  expect(items[0].isListItem).toBeTruthy();
-  expect(items[0].showTitle).toBeTruthy();
+  // Per-item override, so the "no participants" placeholder keeps the list's
+  // own label markup.
+  expect(items[0].component).toEqual("svc-collab-row");
+  expect(items[0].title).toEqual("User a");
+  expect(items[0].markerText).toEqual("UA");
+  expect(items[0].markerCss).toContain("svc-collab-bar__avatar--list");
+  expect(items[0].rowCss).toEqual("svc-collab-bar__roster-item");
   // The list container rewrites cssClasses/owner on what it is given, so the
   // roster rows must never be the same objects as the strip's chips.
   const chips = collab.bar.participantActions.actions;

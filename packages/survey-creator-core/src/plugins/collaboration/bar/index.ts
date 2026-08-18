@@ -8,5 +8,5 @@ export * from "./floating-panel/floating-panel-geometry";
 export * from "./floating-panel/floating-panel-model";
 export * from "./bar-types";
 export * from "./bar-model";
-export * from "./participant-action";
+export * from "./collab-row-action";
 export * from "./version-history-model";

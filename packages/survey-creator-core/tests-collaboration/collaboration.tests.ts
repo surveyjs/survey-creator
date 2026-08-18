@@ -105,7 +105,9 @@ test("collaboration: presence off still feeds the strip through setParticipants"
   const collab = new CollaborationPlugin(creator, { presence: false });
   collab.setParticipants([{ id: "a", name: "Ann Lee", color: "#123456", tab: "designer" }]);
   expect(collab.bar.participantActions.actions.length).toEqual(1);
-  expect(collab.bar.participantActions.actions[0].title).toEqual("Ann Lee");
+  // The chip shows initials; the full name is the tooltip.
+  expect(collab.bar.participantActions.actions[0].title).toEqual("AL");
+  expect(collab.bar.participantActions.actions[0].tooltip).toContain("Ann Lee");
   collab.dispose();
 });
 

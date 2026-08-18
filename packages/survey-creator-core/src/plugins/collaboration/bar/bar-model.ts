@@ -1,10 +1,10 @@
-import { Action, ActionContainer, Base, CssClassBuilder, IAction, ListModel, createDropdownActionModel, property } from "survey-core";
-import { SurveyCreatorModel, applyCreatorUiLocaleToPopup, editorLocalization } from "survey-creator-core";
+import { Action, ActionContainer, Base, IAction, ListModel, createDropdownActionModel, property } from "survey-core";
+import { ComponentContainerModel, SurveyCreatorModel, applyCreatorUiLocaleToPopup, editorLocalization } from "survey-creator-core";
 import { getCollabString } from "../collaboration-strings";
 import { FloatingPanelModel } from "./floating-panel/floating-panel-model";
 import { presenceColorSlot, presenceInitials } from "../presence/presence-state";
 import { CollabBarStatus, ICollabBarOptions, ICollabChange, ICollabParticipant } from "./bar-types";
-import { CollabParticipantAction } from "./participant-action";
+import { CollabRowAction } from "./collab-row-action";
 import { VersionHistoryModel } from "./version-history-model";
 
 import "./bar.scss";
@@ -22,8 +22,10 @@ const STATUS_ICONS: { [index: string]: string } = {
 // plate on the left, participant avatars and "Invite" on the right, plus the
 // Version History panel it opens.
 //
-// Everything visible is either an Action in one of the three containers or a
-// reactive property the strip template binds - the model never touches the DOM.
+// Everything visible is an Action in one of the three containers, and the strip
+// itself is a ComponentContainerModel assembled from components the renderers
+// already know - so the feature contributes no strip component of its own. The
+// model never touches the DOM.
 export class CollabBarModel extends Base {
   // Left group: the "Collaboration" dropdown.
   public actions: ActionContainer = new ActionContainer();
@@ -33,21 +35,25 @@ export class CollabBarModel extends Base {
   public participantActions: ActionContainer = new ActionContainer();
 
   @property({ defaultValue: "connecting" }) status: CollabBarStatus;
-  @property({ defaultValue: false }) statusVisible: boolean;
-  @property() statusText: string;
-  @property() statusIconName: string;
-  @property() statusModifier: string;
   @property({ defaultValue: 8 }) maxVisibleParticipants: number;
-  // Reactive: the strip's view renders the Version History window, so
-  // creating it must trigger a re-render.
-  @property() historyPanel: FloatingPanelModel;
+
+  // The connection plate. A row action rather than a handful of loose
+  // properties: everything inside the container has to be a model that some
+  // registered component can render.
+  public statusRow: CollabRowAction;
+  // The Version History window and its content model. Built eagerly: the
+  // container reads `elements` once (see createContainer), so a lazily created
+  // panel would never be rendered. Neither costs anything until shown.
+  public versionHistory: VersionHistoryModel;
+  public historyPanel: FloatingPanelModel;
+  // What the creator shell renders in its collaboration slot.
+  public container: ComponentContainerModel;
 
   private participants: Array<ICollabParticipant> = [];
   // Signature of the last rendered roster: presence fires on every remote
   // cursor move, and only these four fields affect what the bar shows.
   private participantsSig: string | undefined;
   private changes: ReadonlyArray<ICollabChange> = [];
-  private versionHistoryValue: VersionHistoryModel;
   private inviteTimer: any;
 
   constructor(private creator: SurveyCreatorModel, private options: ICollabBarOptions = {}) {
@@ -62,22 +68,59 @@ export class CollabBarModel extends Base {
     this.toolActions.containerCss = "svc-collab-bar__tools";
 
     this.participantActions.containerCss = "svc-collab-bar__participants";
+
+    this.statusRow = new CollabRowAction({ id: "collabStatus" });
+    // Announce reconnects to screen readers; the plate is not clickable, which
+    // is why it is a row and not an action-bar item.
+    this.statusRow.rowRole = "status";
     this.updateStatus();
+
+    this.versionHistory = new VersionHistoryModel();
+    this.historyPanel = new FloatingPanelModel({
+      id: "collabVersionHistory",
+      title: getCollabString("collabVersionHistory"),
+      contentComponentName: "sv-list",
+      contentComponentData: { model: this.versionHistory.list }
+    });
+
+    this.container = this.createContainer();
+  }
+
+  // The strip's markup, assembled from models the renderers already know - the
+  // same way the UI Preset Editor builds its tab (see presets-plugin.ts).
+  //
+  // ComponentContainerModel is NOT a Base, so `elements` is read once and
+  // everything referenced here must already exist. Reactivity lives in the
+  // leaves instead: each sv-action-bar / svc-collab-row / sv-list subscribes to
+  // its own model.
+  private createContainer(): ComponentContainerModel {
+    // The row travels under both names: sv-list calls it `model` in Angular and
+    // `item` in React/Vue, so the renderers disagree - see CollabRowComponent.
+    const statusData = { item: this.statusRow, model: this.statusRow };
+    const group = (cssClass: string, elements: Array<any>): any => ({
+      componentName: "svc-component-container",
+      componentData: { model: new ComponentContainerModel({ cssClass, elements }) }
+    });
+    return new ComponentContainerModel({
+      cssClass: "svc-collab-bar",
+      elements: [
+        group("svc-collab-bar__left", [
+          { componentName: "sv-action-bar", componentData: { model: this.actions } },
+          { componentName: "svc-collab-row", componentData: statusData }
+        ]),
+        group("svc-collab-bar__right", [
+          { componentName: "sv-action-bar", componentData: { model: this.participantActions } },
+          { componentName: "sv-action-bar", componentData: { model: this.toolActions } }
+        ]),
+        // position: fixed, so the window costs the strip no layout while staying
+        // inside the themed creator root where the --sjs2-* variables live.
+        { componentName: "svc-floating-panel", componentData: { model: this.historyPanel } }
+      ]
+    });
   }
 
   public getType(): string {
     return "collabbar";
-  }
-
-  public get versionHistory(): VersionHistoryModel {
-    return this.versionHistoryValue;
-  }
-
-  public getStatusCss(): string {
-    return new CssClassBuilder()
-      .append("svc-collab-bar__status")
-      .append("svc-collab-bar__status--" + this.statusModifier, !!this.statusModifier)
-      .toString();
   }
 
   public setStatus(status: CollabBarStatus): void {
@@ -87,9 +130,7 @@ export class CollabBarModel extends Base {
 
   public setHistory(changes: ReadonlyArray<ICollabChange>): void {
     this.changes = changes || [];
-    // Only push into the model when the panel exists; otherwise the rows are
-    // built on first open.
-    if (!!this.versionHistoryValue)this.versionHistoryValue.setChanges(this.changes);
+    this.versionHistory.setChanges(this.changes);
   }
 
   public setParticipants(users: Array<ICollabParticipant>): void {
@@ -100,7 +141,7 @@ export class CollabBarModel extends Base {
     this.participants = list;
 
     const shown = list.slice(0, this.maxVisibleParticipants);
-    this.participantActions.setItems(shown.map((user) => this.createParticipantAction(user, false)));
+    this.participantActions.setItems(shown.map((user) => this.createParticipantChip(user)));
 
     const overflow = this.toolActions.getActionById("collabParticipants");
     if (!!overflow) {
@@ -114,20 +155,7 @@ export class CollabBarModel extends Base {
   }
 
   public showVersionHistory(): void {
-    if (!this.versionHistoryValue) {
-      this.versionHistoryValue = new VersionHistoryModel();
-    }
-    this.versionHistoryValue.setChanges(this.changes);
-    if (!this.historyPanel) {
-      // The bar owns the panel and the strip's view renders it - the creator
-      // knows nothing about floating windows.
-      this.historyPanel = new FloatingPanelModel({
-        id: "collabVersionHistory",
-        title: getCollabString("collabVersionHistory"),
-        contentComponentName: "svc-version-history",
-        contentComponentData: { model: this.versionHistoryValue }
-      });
-    }
+    this.versionHistory.setChanges(this.changes);
     this.historyPanel.show();
   }
 
@@ -136,24 +164,21 @@ export class CollabBarModel extends Base {
     this.actions.dispose();
     this.toolActions.dispose();
     this.participantActions.dispose();
-    if (!!this.historyPanel) {
-      this.historyPanel.dispose();
-      this.historyPanel = undefined;
-    }
-    if (!!this.versionHistoryValue) {
-      this.versionHistoryValue.dispose();
-      this.versionHistoryValue = undefined;
-    }
+    this.historyPanel.dispose();
+    this.historyPanel = undefined;
+    this.versionHistory.dispose();
+    this.versionHistory = undefined;
     super.dispose();
   }
 
   private updateStatus(): void {
     const status = this.status || "connecting";
+    const row = this.statusRow;
     // The plate is only worth screen space while something is wrong.
-    this.statusVisible = status !== "connected";
-    this.statusModifier = status;
-    this.statusIconName = STATUS_ICONS[status];
-    this.statusText = getCollabString("collabStatus" + status.charAt(0).toUpperCase() + status.substring(1));
+    row.visible = status !== "connected";
+    row.rowCss = "svc-collab-bar__status svc-collab-bar__status--" + status;
+    row.markerIconName = STATUS_ICONS[status];
+    row.title = getCollabString("collabStatus" + status.charAt(0).toUpperCase() + status.substring(1));
   }
 
   private getPopupList(action: Action): ListModel {
@@ -266,22 +291,41 @@ export class CollabBarModel extends Base {
     }
     // Fresh clones every time: the list container rewrites cssClasses/owner on
     // the actions it is given, which would corrupt the strip's chips.
-    return this.participants.map((user) => this.createParticipantAction(user, true));
+    return this.participants.map((user) => this.createParticipantRow(user));
   }
 
-  private createParticipantAction(user: ICollabParticipant, isListItem: boolean): CollabParticipantAction {
-    const action = new CollabParticipantAction({
+  // A chip in the strip: a PLAIN Action, so the action bar supplies the button,
+  // key2click, the tooltip and the overflow behavior. `innerCss` lands on that
+  // button (Action.getActionBarItemCss), which is what turns it into the avatar
+  // circle - no avatar component per framework needed.
+  private createParticipantChip(user: ICollabParticipant): Action {
+    const action = new Action({
+      id: user.id,
+      title: presenceInitials(user.name),
+      showTitle: true,
+      tooltip: this.getParticipantTooltip(user),
+      action: () => this.goToParticipant(user)
+    });
+    action.innerCss = "svc-collab-bar__participant " + avatarCss(colorIndexOf(user));
+    return action;
+  }
+
+  // A row in the overflow roster: the avatar is a marker inside the row and the
+  // <li> that sv-list draws around it owns the click. `component` overrides the
+  // list's default item renderer for this item only, so the "no participants"
+  // placeholder keeps its own label markup.
+  private createParticipantRow(user: ICollabParticipant): CollabRowAction {
+    const row = new CollabRowAction({
       id: user.id,
       title: user.name,
       tooltip: this.getParticipantTooltip(user),
-      component: "svc-collab-bar-avatar",
-      showTitle: isListItem,
+      component: "svc-collab-row",
       action: () => this.goToParticipant(user)
     });
-    action.colorIndex = typeof user.colorIndex === "number" ? user.colorIndex : presenceColorSlot(user.id);
-    action.initials = presenceInitials(user.name);
-    action.isListItem = isListItem;
-    return action;
+    row.rowCss = "svc-collab-bar__roster-item";
+    row.markerText = presenceInitials(user.name);
+    row.markerCss = avatarCss(colorIndexOf(user)) + " svc-collab-bar__avatar--list";
+    return row;
   }
 
   private getParticipantTooltip(user: ICollabParticipant): string {
@@ -328,4 +372,16 @@ export class CollabBarModel extends Base {
       action.title = getCollabString("collabInvite");
     }, INVITE_COPIED_MS);
   }
+}
+
+// The avatar circle: the base shape plus the theme's user-color slot. Used for
+// the strip chip (on the action-bar button) and for the roster marker.
+function avatarCss(colorIndex: number): string {
+  return "svc-collab-bar__avatar svc-collab-bar__avatar--color-" + colorIndex;
+}
+
+// The transport may stamp the slot itself; otherwise every client derives the
+// same one from the id (see presenceColorSlot).
+function colorIndexOf(user: ICollabParticipant): number {
+  return typeof user.colorIndex === "number" ? user.colorIndex : presenceColorSlot(user.id);
 }

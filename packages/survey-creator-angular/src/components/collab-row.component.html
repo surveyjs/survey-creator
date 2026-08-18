@@ -1,0 +1,11 @@
+<ng-template #template>
+  <div *ngIf="model.visible" [class]="model.rowCss" [attr.role]="model.rowRole || null"
+    [attr.aria-expanded]="model.ariaExpanded">
+    <span *ngIf="model.hasMarkerText" [class]="model.markerCss">{{ model.markerText }}</span>
+    <span *ngIf="!model.hasMarkerText && model.hasMarkerIcon" class="svc-collab-row__icon">
+      <svg [iconName]="model.markerIconName" [size]="model.markerIconSize" sv-ng-svg-icon></svg>
+    </span>
+    <span class="svc-collab-row__title">{{ model.title }}</span>
+    <span *ngIf="model.hasSubtitle" class="svc-collab-row__subtitle">{{ model.subtitle }}</span>
+  </div>
+</ng-template>

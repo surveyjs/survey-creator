@@ -1,0 +1,21 @@
+@use "../../../variables" as *;
+
+// The inner parts of every "svc-collab-row". The ROOT class comes from the model
+// (CollabRowAction.rowCss) and differs per place - the connection plate, a roster
+// entry, a Version History row, so it is styled where that place is styled.
+
+.svc-collab-row__icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.svc-collab-row__title {
+  @include textEllipsis;
+}
+
+.svc-collab-row__subtitle {
+  color: var(--sjs2-color-fg-basic-tertiary);
+
+  @include sjs2--typography--small;
+  @include textEllipsis;
+}

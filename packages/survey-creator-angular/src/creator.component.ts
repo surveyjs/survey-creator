@@ -20,6 +20,13 @@ export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements
   public get creator(): SurveyCreatorModel {
     return this.model;
   }
+  // The collaboration strip is a ComponentContainerModel contributed by the
+  // plugin. `collabBar` is typed as Base in creator-core to keep the creator
+  // free of a dependency on the plugin, hence the cast.
+  public get collabBarContainer(): any {
+    const bar: any = this.model.collabBar;
+    return !!bar ? bar.container : undefined;
+  }
   protected override getShouldReattachChangeDetector(): boolean {
     return false;
   }

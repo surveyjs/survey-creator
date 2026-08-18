@@ -33,8 +33,8 @@
   gap: var(--sjs2-spacing-x300);
 }
 
-// Connection plate. Rendered inline rather than as an action: an action-bar
-// item is always a button, and a status is not clickable.
+// Connection plate. A row rather than an action-bar item: an action-bar item is
+// always a button, and a status is not clickable - it carries role="status".
 .svc-collab-bar__status {
   display: inline-flex;
   align-items: center;
@@ -56,8 +56,8 @@
   color: var(--sjs2-color-fg-alert-primary);
 }
 
-.svc-collab-bar__status-text {
-  @include textEllipsis;
+.svc-collab-bar__status .svc-collab-row__title {
+  @include sjs2--typography--small-strong;
 }
 
 // Avatars overlap by a negative margin; positioned siblings paint in DOM order,
@@ -70,6 +70,18 @@
 .svc-collab-bar__participant {
   position: relative;
   margin-inline-end: calc(-1 * var(--sjs2-spacing-x050));
+}
+
+// The chip IS the action-bar's <button> (Action.innerCss puts the avatar classes
+// on it), so the action's own box has to give way to the circle. Scoped by the
+// container: two classes beat survey-core's single-class rules whatever the
+// stylesheet order turns out to be.
+.svc-collab-bar__participants .svc-collab-bar__participant {
+  min-width: auto;
+  padding: 0;
+  border: none;
+  gap: 0;
+  overflow: hidden;
 }
 
 .svc-collab-bar__avatar {
@@ -116,6 +128,6 @@
   @include sjs2--typography--default;
 }
 
-.svc-collab-bar__roster-name {
-  @include textEllipsis;
+.svc-collab-bar__roster-item .svc-collab-row__title {
+  @include sjs2--typography--default;
 }

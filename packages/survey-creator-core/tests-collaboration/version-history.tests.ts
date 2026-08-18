@@ -55,8 +55,8 @@ test("version-history: only the newest group is expanded by default", () => {
   const groups = rows.filter((r) => r.kind === "group");
   expect(groups.length).toEqual(2);
   // Newest group first in render order.
-  expect(groups[0].expanded).toBeTruthy();
-  expect(groups[1].expanded).toBeFalsy();
+  expect(groups[0].ariaExpanded).toBeTruthy();
+  expect(groups[1].ariaExpanded).toBeFalsy();
   expect(rows.filter((r) => r.kind === "change").length).toEqual(2);
 });
 
@@ -72,13 +72,13 @@ test("version-history: an expanded group lists its changes newest first, describ
     "Property \"title\" changed on \"q2\"",
     "Property \"title\" changed on \"q1\""
   ]);
-  expect(changes[0].time).toEqual(formatVersionTime(BASE_TS + 2000));
+  expect(changes[0].subtitle).toEqual(formatVersionTime(BASE_TS + 2000));
 });
 
 test("version-history: a collapsed group hides its changes", () => {
   const rows = buildVersionRows([edit(1), edit(2)], new Map([["1", false]]));
   expect(rows.filter((r) => r.kind === "change").length).toEqual(0);
-  expect(rows.filter((r) => r.kind === "group")[0].expanded).toBeFalsy();
+  expect(rows.filter((r) => r.kind === "group")[0].ariaExpanded).toBeFalsy();
 });
 
 test("version-history: a named version without a label falls back to a generic caption", () => {
@@ -102,9 +102,9 @@ test("version-history: formatVersionTime degrades on a bad timestamp", () => {
 test("version-history: css carries the kind and the expanded state", () => {
   const rows = buildVersionRows([edit(1)], new Map([["1", true]]));
   const group = rows.filter((r) => r.kind === "group")[0];
-  expect(group.css).toContain("svc-version-history__row--group");
-  expect(group.css).toContain("svc-version-history__row--expanded");
-  expect(rows[0].css).toContain("svc-version-history__row--current");
+  expect(group.rowCss).toContain("svc-version-history__row--group");
+  expect(group.rowCss).toContain("svc-version-history__row--expanded");
+  expect(rows[0].rowCss).toContain("svc-version-history__row--current");
 });
 
 test("version-history model: toggleGroup flips one group and leaves the others", () => {
@@ -114,30 +114,30 @@ test("version-history model: toggleGroup flips one group and leaves the others",
   const newKey = "3";
   const byKey = (key: string) => model.rows.filter((r) => r.groupKey === key)[0];
 
-  expect(byKey(newKey).expanded).toBeTruthy();
-  expect(byKey(oldKey).expanded).toBeFalsy();
+  expect(byKey(newKey).ariaExpanded).toBeTruthy();
+  expect(byKey(oldKey).ariaExpanded).toBeFalsy();
 
   model.toggleGroup(oldKey);
-  expect(byKey(oldKey).expanded).toBeTruthy();
-  expect(byKey(newKey).expanded).toBeTruthy();
+  expect(byKey(oldKey).ariaExpanded).toBeTruthy();
+  expect(byKey(newKey).ariaExpanded).toBeTruthy();
 
   model.toggleGroup(newKey);
-  expect(byKey(newKey).expanded).toBeFalsy();
-  expect(byKey(oldKey).expanded).toBeTruthy();
+  expect(byKey(newKey).ariaExpanded).toBeFalsy();
+  expect(byKey(oldKey).ariaExpanded).toBeTruthy();
 });
 
 test("version-history model: expansion survives a coalesced live refresh", () => {
   const model = new VersionHistoryModel();
   model.setChanges([edit(1), edit(2)]);
   model.toggleGroup("1");
-  expect(model.rows.filter((r) => r.groupKey === "1")[0].expanded).toBeFalsy();
+  expect(model.rows.filter((r) => r.groupKey === "1")[0].ariaExpanded).toBeFalsy();
 
   // The recorder coalesces rapid typing by rewriting the LAST record in place,
   // timestamp included - which is exactly why the group key is seq-only.
   const coalesced = edit(2);
   coalesced.timestamp = BASE_TS + 999999;
   model.setChanges([edit(1), coalesced]);
-  expect(model.rows.filter((r) => r.groupKey === "1")[0].expanded).toBeFalsy();
+  expect(model.rows.filter((r) => r.groupKey === "1")[0].ariaExpanded).toBeFalsy();
 });
 
 test("version-history model: setChanges rebuilds the rows", () => {
