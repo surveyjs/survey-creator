@@ -22,6 +22,9 @@
       "survey-creator-core": [
         "./node_modules/survey-creator-core"
       ],
+      "survey-creator-core/*": [
+        "./node_modules/survey-creator-core/*"
+      ],
       "survey-react-ui": [
         "./node_modules/survey-js-ui"
       ],
