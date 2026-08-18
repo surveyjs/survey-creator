@@ -70,6 +70,13 @@
   display: inline-flex;
   color: var(--sjs2-color-fg-basic-tertiary);
   pointer-events: none;
+
+  // The SvgIcon uses size="auto", so CSS must size the <svg>. Without this
+  // the browser falls back to the default 300x150 for replaced elements.
+  > svg {
+    width: 24px;
+    height: 16px;
+  }
 }
 
 .svc-floating-panel__actions {
