@@ -91,11 +91,11 @@ onMounted(() => {
   DomWindowHelper.addEventListener("resize", updateViewport);
   props.model.onVisibleChanged.add(onVisibleChanged);
   doc = DomDocumentHelper.isAvailable() ? DomDocumentHelper.getDocument() : undefined;
-  if (!!doc) doc.addEventListener("keydown", onDocumentKeyDown);
+  if (doc) doc.addEventListener("keydown", onDocumentKeyDown);
 });
 onUnmounted(() => {
   DomWindowHelper.removeEventListener("resize", updateViewport);
   props.model.onVisibleChanged.remove(onVisibleChanged);
-  if (!!doc) doc.removeEventListener("keydown", onDocumentKeyDown);
+  if (doc) doc.removeEventListener("keydown", onDocumentKeyDown);
 });
 </script>
