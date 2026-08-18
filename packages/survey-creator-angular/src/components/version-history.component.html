@@ -1,0 +1,21 @@
+<ng-template #template>
+  <div class="svc-version-history">
+    <ng-container *ngFor="let row of model.rows; trackBy: trackByRowId">
+      <!-- The group header is the only interactive row. -->
+      <button *ngIf="row.kind === 'group'; else plain" type="button" [class]="row.css"
+        [attr.aria-expanded]="row.expanded" (click)="model.toggleGroup(row.groupKey)">
+        <span class="svc-version-history__icon">
+          <svg [iconName]="row.expanded ? 'icon-chevrondown-16x16' : 'icon-chevronright-16x16'" [size]="16"
+            sv-ng-svg-icon></svg>
+        </span>
+        <span class="svc-version-history__title">{{ row.title }}</span>
+      </button>
+      <ng-template #plain>
+        <div [class]="row.css">
+          <span class="svc-version-history__title">{{ row.title }}</span>
+          <span *ngIf="row.time" class="svc-version-history__time">{{ row.time }}</span>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</ng-template>

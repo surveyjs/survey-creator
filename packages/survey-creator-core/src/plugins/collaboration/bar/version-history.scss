@@ -1,0 +1,91 @@
+@use "../../../variables" as *;
+
+.svc-version-history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sjs2-spacing-x025);
+}
+
+.svc-version-history__row {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: var(--sjs2-spacing-x075);
+  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x100) var(--sjs2-spacing-x100) var(--sjs2-spacing-x150);
+  border-radius: var(--sjs2-radius-x200);
+  text-align: start;
+  width: 100%;
+}
+
+.svc-version-history__row--current {
+  background: var(--sjs2-color-component-action-brand-primary-default-bg);
+  color: var(--sjs2-color-component-action-brand-primary-default-label);
+  margin-bottom: var(--sjs2-spacing-x025);
+}
+
+.svc-version-history__row--named:hover,
+.svc-version-history__row--base:hover,
+.svc-version-history__row--change:hover {
+  background: var(--sjs2-color-bg-basic-secondary);
+}
+
+// The group header is the only interactive row.
+.svc-version-history__row--group {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sjs2-spacing-x100);
+  background: transparent;
+  color: var(--sjs2-color-fg-basic-primary);
+  cursor: pointer;
+
+  @include sjs2--typography--small-strong;
+  @include defaultActionButtonSettings;
+
+  &:hover {
+    background: var(--sjs2-color-bg-basic-secondary);
+  }
+}
+
+// Autosaved entries are indented under their group header and joined by a
+// connector line - a pseudo-element, not a positioned node.
+.svc-version-history__row--change {
+  position: relative;
+  padding-inline-start: var(--sjs2-spacing-x600);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: var(--sjs2-spacing-x300);
+    top: 0;
+    bottom: 0;
+    width: var(--sjs2-border-width-x100);
+    background: var(--sjs2-color-border-basic-secondary);
+  }
+}
+
+.svc-version-history__title {
+  @include sjs2--typography--default;
+  @include textEllipsis;
+}
+
+.svc-version-history__row--named .svc-version-history__title,
+.svc-version-history__row--current .svc-version-history__title,
+.svc-version-history__row--base .svc-version-history__title {
+  @include sjs2--typography--default-strong;
+}
+
+.svc-version-history__time {
+  color: var(--sjs2-color-fg-basic-tertiary);
+
+  @include sjs2--typography--small;
+  @include textEllipsis;
+}
+
+.svc-version-history__row--current .svc-version-history__time {
+  color: inherit;
+}
+
+.svc-version-history__icon {
+  display: inline-flex;
+  flex: none;
+}

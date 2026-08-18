@@ -94,6 +94,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         <SvgBundleComponent></SvgBundleComponent>
         <PopupModal></PopupModal>
         <div className={areaClassName}>
+          {this.renderCollabBar()}
           <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
               <div className="svc-top-bar">
@@ -127,6 +128,13 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         </div>
       </div>
     );
+  }
+  // Looked up through the factory so this file stays free of a hard dependency
+  // on the collaboration plugin.
+  renderCollabBar() {
+    const model = this.creator.collabBar;
+    if (!model) return null;
+    return ReactElementFactory.Instance.createElement("svc-collab-bar", { model: model });
   }
   renderActiveTab() {
     const creator: SurveyCreatorModel = this.props.creator;

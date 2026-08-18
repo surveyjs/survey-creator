@@ -104,9 +104,9 @@ export * from "../survey-helper";
 export * from "../utils/resizer";
 export * from "../plugins/undo-redo";
 export * from "../plugins/undo-redo/undo-redo-manager";
-export * from "../plugins/journal";
-export * from "../plugins/presence";
-export * from "../plugins/collab-bar";
+// Collaboration ships separately - see src/entries/collaboration.ts and the
+// "survey-creator-core/collaboration" export. Keeping it out of this entry is
+// what keeps its JS and SCSS out of the default bundle.
 export * from "../pages-controller";
 export * from "../creator-theme/creator-themes";
 export * from "../creator-theme/creator-theme-model-definition";

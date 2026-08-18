@@ -6,8 +6,9 @@
     "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "scripts": {
-    "build": "npm run build:main && npm run build:presets",
+    "build": "npm run build:main && npm run build:collaboration && npm run build:presets",
     "build:main": "rollup -c rollup.config.mjs --environment emitMinified,emitNonSourceFiles",
+    "build:collaboration": "rollup -c rollup.collaboration.config.mjs --environment emitMinified",
     "build:i18n": "rollup -c rollup.i18n.config.mjs --environment emitMinified",
     "build:all": "npm run build && npm run build:i18n && npm run build:i18n:presets && npm run build:doc",
     "build:themes": "echo 'build:themes is deprecated'",

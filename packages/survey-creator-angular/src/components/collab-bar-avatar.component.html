@@ -1,0 +1,15 @@
+<ng-template #template>
+  <!-- Inside the roster popup the list item owns the click, so the avatar is a
+       plain marker there; in the strip it is the clickable chip. -->
+  <div *ngIf="model.isListItem; else chip" class="svc-collab-bar__roster-item">
+    <span [class]="model.getAvatarCss()">{{ model.initials }}</span>
+    <span class="svc-collab-bar__roster-name">{{ model.title }}</span>
+  </div>
+  <ng-template #chip>
+    <button type="button" (click)="model.action(model, model.getIsTrusted($event))"
+      [key2click]="{ processEsc: false, disableTabStop: model.disableTabStop }" [class]="model.getActionBarItemCss()"
+      [attr.title]="model.tooltip || model.title">
+      <span [class]="model.getAvatarCss()">{{ model.initials }}</span>
+    </button>
+  </ng-template>
+</ng-template>

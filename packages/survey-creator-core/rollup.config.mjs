@@ -110,6 +110,11 @@ const buildPlatformJson = {
       "types": "./ui-presets/*.d.ts",
       "default": "./ui-presets/*.js",
     },
+    "./collaboration": {
+      "types": "./collaboration/entries/collaboration.d.ts",
+      "import": "./fesm/collaboration.mjs",
+      "require": "./collaboration.js"
+    },
     "./ui-preset-editor": {
       "types": "./ui-preset-editor/index.d.ts",
       "import": "./fesm/ui-preset-editor.mjs",

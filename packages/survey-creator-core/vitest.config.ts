@@ -53,9 +53,12 @@ const sharedAliases = [
   { find: /^svgbundle$/, replacement: resolve(root, "tests/empty-module.js") },
 ];
 
-// Per-suite alias for survey-creator-core differs between the two suites:
-// - tests/        -> src/editorLocalization.ts
-// - tests-presets -> src/entries/index.ts
+// Per-suite alias for survey-creator-core differs between the suites:
+// - tests/              -> src/editorLocalization.ts
+// - tests-presets       -> src/entries/index.ts
+// - tests-collaboration -> src/entries/index.ts (the collaboration sources
+//   import the creator by package name so their separate bundle can mark it
+//   external, so their tests need the full entry behind that name)
 const coreSuiteAliases = [
   ...sharedAliases,
   { find: /^survey-creator-core$/, replacement: resolve(root, "src/editorLocalization.ts") },
@@ -63,6 +66,12 @@ const coreSuiteAliases = [
 
 const presetsSuiteAliases = [
   ...sharedAliases,
+  { find: /^survey-creator-core$/, replacement: resolve(root, "src/entries/index.ts") },
+];
+
+const collaborationSuiteAliases = [
+  ...sharedAliases,
+  { find: /^survey-creator-core\/collaboration$/, replacement: resolve(root, "src/entries/collaboration.ts") },
   { find: /^survey-creator-core$/, replacement: resolve(root, "src/entries/index.ts") },
 ];
 
@@ -132,6 +141,21 @@ export default defineConfig({
           // fresh DOM has been swapped in. Under Jest these threw silently;
           // Vitest surfaces them as "unhandled errors" and fails the run.
           // Treat them as benign timer leaks until source-side cleanup lands.
+          dangerouslyIgnoreUnhandledErrors: true,
+          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+        },
+      },
+      {
+        plugins: [stubAssets],
+        oxc: oxcLegacyDecorators,
+        resolve: { alias: collaborationSuiteAliases },
+        test: {
+          name: "collaboration",
+          include: ["tests-collaboration/**/*.{test,tests,spec}.{ts,tsx}"],
+          environment: "jsdom",
+          globals: true,
+          testTimeout: 30000,
+          hookTimeout: 30000,
           dangerouslyIgnoreUnhandledErrors: true,
           setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },

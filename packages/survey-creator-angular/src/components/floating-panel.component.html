@@ -1,0 +1,19 @@
+<ng-template #template>
+  <!-- position:fixed, so the panel contributes nothing to the creator layout
+       while still living inside the themed root. All geometry is model.style. -->
+  <div *ngIf="model.visible" #root [class]="model.rootCss" [ngStyle]="model.style" role="dialog"
+    [attr.aria-modal]="false" [attr.aria-labelledby]="model.titleId" tabindex="-1"
+    (pointerdown)="model.bringToFront()">
+    <div [class]="model.headerCss" (pointerdown)="onPointerDown($event)" (pointermove)="onPointerMove($event)"
+      (pointerup)="onPointerUp()" (pointercancel)="onPointerUp()">
+      <span [id]="model.titleId" class="svc-floating-panel__title">{{ model.titleText }}</span>
+      <span class="svc-floating-panel__drag" aria-hidden="true">
+        <svg [iconName]="'icon-draghorizontal-24x16'" [size]="'auto'" sv-ng-svg-icon></svg>
+      </span>
+      <sv-action-bar [model]="model.headerToolbar"></sv-action-bar>
+    </div>
+    <div [class]="model.bodyCss">
+      <ng-template [component]="{ name: model.contentComponentName, data: model.contentComponentData }"></ng-template>
+    </div>
+  </div>
+</ng-template>

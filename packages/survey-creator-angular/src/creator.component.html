@@ -6,6 +6,7 @@
     </div>
     <div class="svc-full-container svc-creator__area svc-flex-column"
       [class.svc-creator__area--with-banner]="!creator.haveCommercialLicense">
+      <svc-collab-bar [model]="creator.collabBar" *ngIf="creator.collabBar"></svc-collab-bar>
       <div class="svc-flex-row svc-full-container"
         [class.svc-creator__side-bar--left]="creator.sidebarLocation == 'left'">
         <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">

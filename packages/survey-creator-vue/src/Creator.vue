@@ -11,6 +11,11 @@
           'svc-creator__area--with-banner': !model.haveCommercialLicense,
         }"
       >
+        <SvComponent
+          :is="'svc-collab-bar'"
+          :model="model.collabBar"
+          v-if="model.collabBar"
+        ></SvComponent>
         <div
           class="svc-flex-row svc-full-container"
           :class="{
