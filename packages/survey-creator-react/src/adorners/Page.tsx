@@ -45,10 +45,13 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
   protected createModel(props: ICreatorSurveyPageComponentProps): void {
     if (this.model) {
-      this.model.attachToUI(props.page, this.rootRef.current);
+      this.model.dispose();
     }
     this.model = this.createPageAdorner(props.creator, props.page);
     this.model.isGhost = this.props.isGhost;
+    if (!!this.rootRef?.current) {
+      this.model.attachToUI(props.page, this.rootRef.current);
+    }
   }
   protected createPageAdorner(creator: SurveyCreatorModel, page: PageModel): PageAdorner {
     return new PageAdorner(creator, page);
@@ -62,6 +65,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
   public componentDidUpdate(prevProps: any, prevState: any): void {
     super.componentDidUpdate(prevProps, prevState);
+    this.model.attachToUI(this.props.page, this.rootRef.current);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "page"];

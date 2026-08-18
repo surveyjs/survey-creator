@@ -510,6 +510,7 @@ export class SurveyCreatorModel extends Base
     return this.pageEditModeValue;
   }
   public set pageEditMode(val: "standard" | "single" | "bypage") {
+    const oldValue = this.pageEditModeValue;
     this.pageEditModeValue = val;
     const allowModifyPages = this.pageEditModeValue !== "single";
     this.changePageModifications(allowModifyPages);
@@ -517,6 +518,9 @@ export class SurveyCreatorModel extends Base
     SurveySettings.designMode.showEmptyDescriptions = allowModifyPages;
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
+    }
+    if (oldValue !== val) {
+      this.onPropertyChanged.fire(this, { name: "pageEditMode", oldValue: oldValue, newValue: val });
     }
   }
 

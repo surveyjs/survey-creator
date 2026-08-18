@@ -87,8 +87,13 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
       }
-      this.needRenderContent = this.isGhost || this.creator.pageEditMode !== "standard" || !surveyElement.survey || surveyElement.survey.pages.length <= 5;
+      this.needRenderContent = this.calcNeedRenderContent(surveyElement);
     }
+  }
+  private calcNeedRenderContent(surveyElement: PageModel): boolean {
+    if (!settings.pageContentLazyRendering || this.isGhost) return true;
+    if (this.creator.pageEditMode !== "standard") return true;
+    return !surveyElement || !surveyElement.survey || surveyElement.survey.pages.length <= 5;
   }
 
   protected detachElement(surveyElement: PageModel): void {
@@ -106,9 +111,29 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
   }
 
-  private visibilityObserver: IntersectionObserver;
+  private visibilityObserver?: IntersectionObserver;
+  private disposeVisibilityObserver(): void {
+    if (!!this.visibilityObserver) {
+      if (!!this.rootElement) {
+        this.visibilityObserver.unobserve(this.rootElement);
+      }
+      this.visibilityObserver.disconnect();
+      this.visibilityObserver = undefined;
+    }
+  }
   public setRootElement(rootElement: HTMLElement) {
+    // The UI layer may call it repeatedly (on every change detection cycle in Angular, on re-attach
+    // in React/Vue). Keep the existing observer for the same element, otherwise every call leaks one.
+    if (this.rootElement === rootElement && !!this.visibilityObserver) return;
+    this.disposeVisibilityObserver();
     this.rootElement = rootElement;
+    if (!rootElement) return;
+    if (typeof IntersectionObserver === "undefined") {
+      // There is no way to detect whether the page becomes visible, render the content at once
+      // instead of showing the loading placeholder forever.
+      this.needRenderContent = true;
+      return;
+    }
     this.visibilityObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -140,11 +165,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   public detachFromUI() {
     this.isVisibleInViewPort = false;
-    if (!!this.visibilityObserver) {
-      this.visibilityObserver.unobserve(this.rootElement);
-      this.visibilityObserver.disconnect();
-      this.visibilityObserver = null;
-    }
+    this.disposeVisibilityObserver();
     super.detachFromUI();
     this.needRenderContent = false;
   }
@@ -316,6 +337,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   private creatorPropertyChanged = (sender, options) => {
     if (options.name === "isMobileView" && this.isActionContainerCreated) {
       this.actionContainer.alwaysShrink = options.newValue;
+    }
+    // Only turn the content on. The already rendered content should never fall back to the loading
+    // placeholder: the intersection observer reports changes only and may not fire again.
+    if (options.name === "pageEditMode" && !this.needRenderContent && this.calcNeedRenderContent(this.surveyElement)) {
+      this.needRenderContent = true;
     }
   };
   public hoverStopper(event: MouseEvent, element: HTMLElement | any) {
