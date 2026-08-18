@@ -123,7 +123,7 @@ watch(
 );
 onUpdated(() => {
   if (root.value && model.value) {
-    model.value.rootElement = root.value;
+    model.value.setRootElement(root.value);
   }
 });
 onMounted(() => {
