@@ -1,0 +1,15 @@
+<ng-template #template>
+  <ng-container *ngTemplateOutlet="contentTempl"></ng-container>
+  <div class="st-dropdown-choices--wrapper">
+    <div class="svc-question__dropdown-choices">
+      <div *ngFor="let item of adorner.getRenderedItems()" [class]="adorner.getChoiceCss()">
+        <ng-template
+          [component]="{ name: 'sv-ng-selectbase-item', data: { question: question, model: item, inputType: adorner.itemInputType } }">
+        </ng-template>
+      </div>
+    </div>
+    <ng-container *ngIf="adorner.needToCollapse">
+      <ng-template [component]="{ name: 'sv-action-bar-item', data: { model: adorner.collapseAction } }"></ng-template>
+    </ng-container>
+  </div>
+</ng-template>

@@ -91,6 +91,15 @@
 //   margin-top: var(--sjs2-spacing-x200);
 // }
 
+// The side-by-side language settings survey: its page is a property grid category
+// (see createSettingsSurvey), so its rows keep the row spacing of the designer's property
+// grid categories. Without it the title-less progress link sits right against the target
+// language dropdown - the other questions get their air from the padding of their titles.
+.st-language-settings__content {
+  row-gap: var(--sjs2-spacing-x200);
+  column-gap: var(--sjs2-spacing-x200);
+}
+
 .st-strings-header {
   .st-table__cell {
     background: none;
@@ -178,6 +187,10 @@ td.st-table__cell:first-of-type {
   padding: 0;
 }
 
+.st-formbox--readonly .st-formbox__input {
+  cursor: default;
+}
+
 .sd-translation-line-skeleton {
   min-height: var(--sjs2-size-x500);
   background-color: var(--sjs2-color-bg-basic-secondary);
@@ -232,12 +245,6 @@ td.st-table__cell:first-of-type {
   @include disableLibraryAnimations;
 }
 
-.st-page {
-  .sd-page__content {
-    row-gap: 0;
-    padding: 0;
-  }
-}
 .st-panel {
   .sd-panel__header {
     padding: 0;
@@ -245,4 +252,219 @@ td.st-table__cell:first-of-type {
 }
 .st-row .sd-question__header-and-content-container {
   padding: 0;
+}
+
+.st-side-by-side {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.st-side-by-side__source,
+.st-side-by-side__target {
+  flex: 1 1 50%;
+  width: 50%;
+  overflow-y: auto;
+}
+
+.st-side-by-side__source {
+  border-right: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+}
+
+// No target language selected: the target pane is not rendered and the source pane, read-only,
+// is the whole surface.
+.st-side-by-side--no-target {
+  .st-side-by-side__source {
+    flex: 1 1 100%;
+    width: 100%;
+    border-right: none;
+  }
+}
+
+// The survey title row of the target pane: the translate action sits at the pane's right
+// edge, on the first title line - like the page/question translate actions - instead of
+// right after the title text, where a growing title would run into it. The action bar takes
+// the row space left of the title and pins the action at its far end.
+.st-side-by-side {
+  .sd-header__text .sv-title-actions {
+    align-items: flex-start;
+
+    .sv-title-actions__title {
+      flex: 0 1 auto;
+    }
+
+    .sv-action-title-bar {
+      flex: 1 1 auto;
+      justify-content: flex-end;
+    }
+  }
+}
+
+// A translated string can hold a long unbreakable word (a URL, an identifier). Title rows size
+// to their content, so such a word would expand the row beyond the pane, which clips it - and
+// the translate action rendered after the title text ends up outside the visible area.
+// "anywhere" (unlike "break-word") also shrinks the min-content size, so the word cannot
+// propagate its width up the flex chain of the survey header.
+.st-side-by-side {
+  .sd-title,
+  .sd-description {
+    overflow-wrap: anywhere;
+
+    // The browser default stylesheet gives [contenteditable] elements (the target pane's
+    // string editor) an overflow-wrap of its own, which blocks the inherited value.
+    .sv-string-editor {
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
+// The signature pad placeholder is click-through in the default theme (the user draws on the
+// canvas beneath it). The target pane renders a string editor inside it, so clicks must reach it.
+.st-side-by-side__target {
+  .sjs_sp_placeholder {
+    user-select: all;
+    pointer-events: all;
+  }
+}
+
+.st-page {
+  .sd-page__content {
+    row-gap: 0;
+    padding: 0;
+  }
+}
+
+// The per-element translation state of the target pane, shown by the translate title action
+// itself: the number of untranslated strings (nothing when there are none) and a chevron
+// pointing at the state of its inline strings block (see applyElementStateToAction). Nothing
+// to translate and all translated look the same - both mean "nothing for you here". The svg
+// selector outweighs the theme's action-icon fill rules.
+@mixin translationStateColor($color) {
+  --sd-action-title-color: #{$color};
+  --sd-action-hover-title-color: #{$color};
+  --sd-action-icon-color: #{$color};
+
+  svg use {
+    fill: $color;
+  }
+
+  .sd-action__title {
+    color: $color;
+  }
+}
+
+.svc-translation-state {
+  @include translationStateColor(var(--sjs2-color-fg-basic-primary-muted));
+
+  &.svc-translation-state--untranslated {
+    @include translationStateColor(var(--sjs2-color-fg-warning-primary));
+  }
+
+  // The open block: the chevron points up and the button stands out from both other states.
+  &.svc-translation-state--expanded {
+    @include translationStateColor(var(--sjs2-color-fg-brand-primary));
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// The element strings dialog: the strings matrix of one element, in a survey of its own (see
+// createStringsHostSurvey). It is the dialog's content, not a survey the user fills in, so the
+// runtime survey's own frame and paddings are dropped.
+.st-element-strings-dialog {
+  .sd-root-modern,
+  .sd-container-modern,
+  .sd-body,
+  .sd-body__page,
+  .sd-page {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+  }
+
+  .sd-page__content {
+    padding: 0;
+  }
+}
+
+// The dialog's own width. Its matrix holds a source and a target editor next to the string
+// names, so it needs far more room than the property editor dialogs this one is styled as -
+// their min-width is what the extra classes here are for (see .svc-property-editor in
+// property-grid.scss, whose selector is just as specific). All the width goes to the editors:
+// the string names keep their share of it (see stringsRowTitleWidthPercent). Capped by the
+// viewport, so a narrow screen scrolls the table instead of the page.
+.sv-popup--modal-popup.svc-property-editor.st-element-strings-dialog .sv-popup__container {
+  .sd-body,
+  .sv-components-column--expandable {
+    min-width: min(calc(var(--sjs2-base-unit-size) * 106), 80vw);
+  }
+}
+
+// The strings matrix of the dialog: its title row is the caption row, and its title actions are
+// the caption's buttons (auto-translate, all/used strings).
+.st-element-strings {
+  // The caption row holds no text - its buttons end it, at the dialog's right edge.
+  .sd-action-title-bar {
+    margin-left: auto;
+  }
+
+  // The language headers start where their editors do, as the grid view's header row does -
+  // the runtime matrix centers its column titles.
+  .sd-table__cell--header {
+    text-align: left;
+  }
+
+  // The first column: the name of the string a row edits, next to the two locale editors
+  // (see createStringsMatrix). A property name is not a text the user reads through - it stays
+  // at the muted weight of a label and wraps instead of stretching the column.
+  .sd-table__cell--row-text {
+    font-size: var(--sjs2-font-size-s, 12px);
+    line-height: var(--sjs2-line-height-s, 16px);
+    color: var(--sjs2-color-fg-basic-primary-muted);
+    overflow-wrap: anywhere;
+  }
+}
+
+// The flattened dropdown/tagbox choice list of the side-by-side panes. The item rows reuse
+// the svc-question__dropdown-choice classes, so the designer's collapse fade rules apply.
+.st-dropdown-choices--wrapper {
+  margin-top: var(--sjs2-spacing-x200);
+
+  .svc-question__dropdown-choice {
+    // The rows are display-only; typing goes into the string editor over the choice text.
+    input {
+      pointer-events: none;
+    }
+  }
+
+  .svc-question__dropdown-collapse-button {
+    margin-top: var(--sjs2-spacing-x100);
+  }
+}
+
+// An item of the target language dropdown list: the language name and, at the right edge, the
+// share of the survey already translated into it (nothing when the language has no translations).
+.svc-translation-locale-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sjs2-spacing-x100);
+  width: 100%;
+  min-width: 0;
+}
+
+.svc-translation-locale-item__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.svc-translation-locale-item__progress {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--sjs2-color-fg-basic-primary-muted);
 }

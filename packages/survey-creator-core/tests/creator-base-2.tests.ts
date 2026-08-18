@@ -28,6 +28,7 @@ import {
   SurveyElement,
   hasLicense,
   surveyLocalization,
+  IConfirmDialogOptions
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -1264,5 +1265,25 @@ test("Do not count non  questions elements as unique, Bug#7398", () => {
   questionName.value = "q2";
   expect(questionName.hasErrors()).toBeTruthy();
   expect(question.name).toEqual("item2");
+});
+test("survey confirmActionAsync", () => {
+  const oldSettingsFunc = surveySettings.confirmActionAsync;
+  let rootElement = undefined;
+  surveySettings.confirmActionAsync = (message: string, callback: (res: boolean) => void, options?: IConfirmDialogOptions) => {
+    rootElement = options?.rootElement;
+  };
+  const creator = new CreatorTester();
+  creator["_rootElementValue"] = "creator_root_element" as any;
+  creator.confirmActionAsync("message_test", () => { });
+  expect(rootElement).toBe("creator_root_element");
+
+  creator.confirmActionAsync("message_test", () => { }, { rootElement: "document_root_element" as any });
+  expect(rootElement).toBe("document_root_element");
+
+  const options: IConfirmDialogOptions = {};
+  creator.confirmActionAsync("message_test", () => { }, options);
+  expect(rootElement).toBe("creator_root_element");
+  expect(options.rootElement).toBeUndefined();
+  surveySettings.confirmActionAsync = oldSettingsFunc;
 });
 

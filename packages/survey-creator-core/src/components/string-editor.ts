@@ -343,6 +343,9 @@ export class StringEditorViewModelBase extends Base {
     }
     if (this.creator) {
       this.creator.selectFromStringEditor = true;
+      if (!!this.creator.onStringEditorFocusedCallback) {
+        this.creator.onStringEditorFocusedCallback(this.locString);
+      }
     }
 
     if (this.locString.hasHtml && this.editAsText) {
@@ -494,8 +497,15 @@ export class StringEditorViewModelBase extends Base {
   private get isInplaceForEditValues(): boolean {
     return !!this.creator && this.creator.inplaceEditChoiceValues &&
       this.locString.owner instanceof ItemValue &&
-      this.creator.inplaceEditChoiceValues &&
+      !this.isTranslationSurfaceString &&
       ["noneText", "otherText", "selectAllText"].indexOf(this.locString.name) === -1;
+  }
+  // True for a string of a translation side-by-side pane copy: an edit there is always a
+  // locale-text edit, never a choice-value one, whatever creator.inplaceEditChoiceValues says.
+  private get isTranslationSurfaceString(): boolean {
+    const owner = <any>this.locString.owner;
+    const survey = !!owner && !!owner.locOwner ? owner.locOwner.survey : undefined;
+    return !!survey && !!survey.isTranslationSurface;
   }
   private setValueIntoLocStr(clearedText: any, target: HTMLElement): void {
     if (this.isInplaceForEditValues) {

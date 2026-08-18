@@ -39,6 +39,7 @@ export * from "./questions/question-embedded-survey.component";
 export * from "./tabs/translation/translation.component";
 export * from "./tabs/translation/translation-line-skeleton.component";
 export * from "./tabs/translation/translate-from-action.component";
+export * from "./tabs/translation/translation-locale-item.component";
 export * from "./tabs/preview/simulator.component";
 export * from "./tabs/preview/survey-results.component";
 export * from "./tabs/preview/survey-results-row.component";
@@ -72,6 +73,7 @@ export * from "./tabs/designer/designer-survey.component";
 export * from "./adorners/cell-question.component";
 export * from "./question-widget.component";
 export * from "./adorners/question-rating.component";
+export * from "./adorners/translation-dropdown-question.component";
 export * from "./header/logo-image.component";
 export * from "./tabs/json/json-error-item.component";
 

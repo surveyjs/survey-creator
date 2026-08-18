@@ -1,0 +1,8 @@
+<ng-template #template>
+  <div class="svc-translation-locale-item">
+    <span class="svc-translation-locale-item__name">
+      <sv-ng-string [model]="model.locTitle"></sv-ng-string>
+    </span>
+    <span *ngIf="!!progress" class="svc-translation-locale-item__progress">{{ progress }}</span>
+  </div>
+</ng-template>

@@ -1,6 +1,6 @@
 import { enStrings } from "./localization/english";
 import { capitalize } from "./utils/utils";
-import { surveyLocalization, Serializer, ILocalizableOwner } from "survey-core";
+import { surveyLocalization, Serializer, ILocalizableOwner, Action } from "survey-core";
 
 const renamedKeys = {};
 renamedKeys["tabs.preview"] = "ed.testSurvey";
@@ -327,6 +327,17 @@ surveyLocalization.onGetExternalString = (name: string, locale: string): string 
 
 export function getLocString(strName: string, locale: string = null) {
   return editorLocalization.getString(strName, locale);
+}
+
+// An action hosted in a survey that runs in a translated locale (the side-by-side translation
+// panes) would resolve its localizationName in that locale - the action's own getLocale is what
+// its locTitle and its locTooltipName are read with, so creator strings follow the creator UI
+// locale, and they still follow a change of it (unlike an imperatively assigned title).
+export function applyCreatorUiLocaleToAction(action: Action): Action {
+  action.getLocale = (): string => editorLocalization.locale;
+  // The texts were resolved once already, in the constructor - re-read them through the locale above.
+  action.locStrsChanged();
+  return action;
 }
 
 export function applyCreatorUiLocaleToPopup(popup: { locale?: string, contentComponentData?: any }, locOwner: ILocalizableOwner): void {

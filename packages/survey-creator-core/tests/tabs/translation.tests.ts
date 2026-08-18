@@ -347,6 +347,26 @@ test("stringsSurvey and filterPage + one page", () => {
   translation.filteredPage = survey.pages[0];
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
 });
+test("filterPage by the first page shows the survey strings", () => {
+  const survey = new SurveyModel({
+    title: "Survey Title",
+    completedHtml: "Completed",
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "question1", title: "Question 1" }] },
+      { name: "page2", elements: [{ type: "text", name: "question2", title: "Question 2" }] }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  const getNames = (): Array<string> => translation.root.allLocItems.map(item => (!!item.context && !!item.context["name"] ? item.context["name"] : "survey") + "." + item.name);
+  expect(getNames()).toEqual(["survey.title", "survey.completedHtml", "question1.title", "question2.title"]);
+  translation.filteredPage = survey.pages[0];
+  expect(translation.root.obj).toBe(survey);
+  expect(getNames()).toEqual(["survey.title", "survey.completedHtml", "question1.title"]);
+  translation.filteredPage = survey.pages[1];
+  expect(translation.root.obj).toBe(survey.pages[1]);
+  expect(getNames()).toEqual(["question2.title"]);
+});
 test("Translation show All strings and property visibility, #1", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -528,12 +548,8 @@ test("Actions mode small", () => {
   const creator = new CreatorTester();
   const tabTranslation = new TabTranslationPlugin(creator);
   const actions = tabTranslation.createActions();
-  expect(actions.length).toBe(5);
-  expect(actions[0].mode).toBe("small");
-  expect(actions[1].mode).toBe("small");
-  expect(actions[2].mode).toBe("small");
-  expect(actions[3].mode).toBe("small");
-  expect(actions[4].mode).toBe("small");
+  expect(actions.length).toBe(6);
+  actions.forEach(action => expect(action.mode).toBe("small"));
 });
 
 test("Make invisible locales in language selector, that has been already choosen", () => {
@@ -2888,6 +2904,57 @@ test("Import after creating TranslationEditor should not throw error, Issue#7790
 
   expect(translation.root).toBeDefined();
   expect(translation.stringsHeaderSurvey).toBeDefined();
+});
+
+const externalChangeJSON = {
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+        { type: "text", name: "q2", title: { default: "Question 2", de: "Frage 2" } }
+      ]
+    }
+  ]
+};
+function createTranslationTabCreator(json: any = externalChangeJSON): CreatorTester {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  // The survey takes ownership of the loaded JSON object, so pass a copy to keep tests independent.
+  creator.JSON = JSON.parse(JSON.stringify(json));
+  creator.activeTab = "translation";
+  return creator;
+}
+function getTranslationTabModel(creator: CreatorTester): Translation {
+  return (<TabTranslationPlugin>creator.getPlugin("translation")).model;
+}
+// The matrix showing the given translation item (one item per matrix, matched by owner object name).
+function findStringsMatrix(model: Translation, contextName: string, itemName: string): QuestionMatrixDropdownModel {
+  return <QuestionMatrixDropdownModel>model.stringsSurvey.getAllQuestions().filter((matrix: any) => {
+    const item = <TranslationItem>(matrix.rows[0] && matrix.rows[0]["translationData"]);
+    return !!item && item.name === itemName && !!item.context && item.context.name === contextName;
+  })[0];
+}
+function getStringsCellQuestion(matrix: QuestionMatrixDropdownModel, columnName: string): QuestionCommentModel {
+  const index = matrix.columns.map(column => column.name).indexOf(columnName);
+  return <QuestionCommentModel>matrix.visibleRows[0].cells[index].question;
+}
+
+test("default mode: an external localizable string change refreshes the grid cells", () => {
+  const creator = createTranslationTabCreator();
+  const model = getTranslationTabModel(creator);
+  const matrix = findStringsMatrix(model, "q1", "title");
+  creator.survey.getQuestionByName("q1").locTitle.setLocaleText("de", "Frage 1 neu");
+  expect(getStringsCellQuestion(matrix, "de").value).toBe("Frage 1 neu");
+});
+
+test("default mode: an external structural change rebuilds the strings grid", () => {
+  const creator = createTranslationTabCreator();
+  const model = getTranslationTabModel(creator);
+  expect(findStringsMatrix(model, "q3", "title")).toBeFalsy();
+  creator.survey.pages[0].addNewQuestion("text", "q3");
+  const updatedModel = getTranslationTabModel(creator);
+  expect(findStringsMatrix(updatedModel, "q3", "title")).toBeTruthy();
+  expect(findStringsMatrix(updatedModel, "q1", "title")).toBeTruthy();
 });
 
 test("Do not remove a just added locale on removing another locale, Bug#7904", () => {
