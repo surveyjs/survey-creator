@@ -970,7 +970,18 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         json.type = "checkbox";
       }
     }
+    this.deleteCommentProperties(json);
     return json;
+  }
+  private deleteCommentProperties(json: any): void {
+    delete json.showCommentArea;
+    if (Array.isArray(json.choices)) {
+      json.choices.forEach(choice => {
+        if (!!choice && typeof choice === "object") {
+          delete choice.showCommentArea;
+        }
+      });
+    }
   }
   private updateChoicesFromQuestion(json: any): void {
     const question = this.getConditionQuestion(json.choicesFromQuestion);

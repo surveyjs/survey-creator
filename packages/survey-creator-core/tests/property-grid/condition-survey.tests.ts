@@ -2567,3 +2567,29 @@ test("questionValue title is invisible on selecting a calculated value, Bug#7862
   expect(calcQuestionValue.hasTitle).toBe(false);
   expect(calcQuestionValue.placeholder).toBe("Enter a value...");
 });
+test("Condition value for a choice question with showCommentArea in choices, Bug#7955", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "checkbox",
+        name: "equipment",
+        choices: [
+          "Desktop computer",
+          { value: "Laptop", showCommentArea: true },
+          "Docking station"
+        ]
+      },
+      { type: "dropdown", name: "building", choices: ["A building", "B building"] }
+    ]
+  });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("building"), new EmptySurveyCreatorOptions(), "visibleIf");
+  const panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "equipment-unwrapped";
+  panel.getQuestionByName("operator").value = "anyof";
+  const questionValue = <QuestionCheckboxModel>panel.getQuestionByName("questionValue");
+  expect(questionValue.getType()).toEqual("checkbox");
+  questionValue.selectItem(questionValue.choices[0], true);
+  questionValue.selectItem(questionValue.choices[1], true);
+  expect(JSON.stringify(questionValue.value)).toEqual(JSON.stringify(["Desktop computer", "Laptop"]));
+  expect(editor.text).toEqual("{equipment-unwrapped} anyof ['Desktop computer', 'Laptop']");
+});
