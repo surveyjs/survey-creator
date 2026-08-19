@@ -11,6 +11,11 @@
           'svc-creator__area--with-banner': !model.haveCommercialLicense,
         }"
       >
+        <SvComponent
+          :is="'svc-component-container'"
+          :model="collabBarContainer"
+          v-if="collabBarContainer"
+        ></SvComponent>
         <div
           class="svc-flex-row svc-full-container"
           :class="{
@@ -101,6 +106,13 @@ const model = computed(() => {
   return toRaw(props.model);
 });
 const root = ref<HTMLDivElement>();
+// The collaboration strip is a ComponentContainerModel contributed by the
+// plugin. `collabBar` is typed as Base in creator-core to keep the creator free
+// of a dependency on the plugin, hence the cast.
+const collabBarContainer = computed(() => {
+  const bar: any = model.value.collabBar;
+  return bar ? bar.container : undefined;
+});
 useBase(
   () => model.value,
   (newValue, oldValue) => {

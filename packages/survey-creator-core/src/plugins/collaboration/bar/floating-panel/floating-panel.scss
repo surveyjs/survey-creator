@@ -1,0 +1,95 @@
+@use "../../../../variables" as *;
+
+// A non-modal window. Docked placement is expressed here and parameterized by
+// the two custom properties the model emits; the floating box comes from the
+// model as inline left/top/height.
+.svc-floating-panel {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: var(--svc-floating-panel-width);
+  max-width: calc(100vw - 2 * var(--svc-floating-panel-gap));
+  background: var(--sjs2-color-utility-sheet);
+  color: var(--sjs2-color-fg-basic-primary);
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  border-radius: var(--sjs2-radius-x300);
+  box-shadow: var(--sjs2-color-utility-shadow-floating-default);
+
+  @include sjs2--typography--default;
+}
+
+.svc-floating-panel--docked {
+  top: var(--svc-floating-panel-gap);
+  right: var(--svc-floating-panel-gap);
+  bottom: var(--svc-floating-panel-gap);
+}
+
+// Minimized: the body is gone, so the box must stop stretching to the bottom.
+.svc-floating-panel--docked.svc-floating-panel--minimized {
+  bottom: auto;
+}
+
+.svc-floating-panel--dragging {
+  user-select: none;
+}
+
+.svc-floating-panel__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: var(--sjs2-spacing-x050);
+  padding: var(--sjs2-spacing-x150);
+  border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  cursor: grab;
+  touch-action: none;
+
+  @include disableUserSelect;
+}
+
+.svc-floating-panel__header--dragging {
+  cursor: grabbing;
+}
+
+.svc-floating-panel__title {
+  flex: 1 0 0;
+  min-width: 0;
+
+  @include sjs2--typography--default-strong;
+  @include textEllipsis;
+}
+
+// Centered drag affordance; purely decorative, the whole header is the handle.
+.svc-floating-panel__drag {
+  position: absolute;
+  left: 50%;
+  top: var(--sjs2-spacing-x050);
+  transform: translateX(-50%);
+  display: inline-flex;
+  color: var(--sjs2-color-fg-basic-tertiary);
+  pointer-events: none;
+
+  // The SvgIcon uses size="auto", so CSS must size the <svg>. Without this
+  // the browser falls back to the default 300x150 for replaced elements.
+  > svg {
+    width: 24px;
+    height: 16px;
+  }
+}
+
+.svc-floating-panel__actions {
+  flex: none;
+}
+
+.svc-floating-panel__body {
+  flex: 1 0 0;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--sjs2-spacing-x100);
+}
+
+.svc-floating-panel--minimized .svc-floating-panel__body {
+  display: none;
+}

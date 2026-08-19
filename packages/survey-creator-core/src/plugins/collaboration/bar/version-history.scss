@@ -1,0 +1,104 @@
+@use "../../../variables" as *;
+
+// The timeline is a stock `sv-list` whose items are rendered by
+// "svc-collab-row" (see version-history-model.ts). `.svc-version-history` is
+// merged into the list's root class, so everything below is scoped by it.
+
+.svc-version-history .sv-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sjs2-spacing-x025);
+}
+
+// The list's <li> and item body bring their own box, hover and pointer cursor.
+// Each row owns all three instead, so the list chrome is flattened here. Two
+// classes per selector, which beats survey-core's single-class rules whatever
+// the stylesheet order turns out to be.
+.svc-version-history .sv-list__item {
+  cursor: default;
+  overflow: visible;
+  white-space: normal;
+}
+
+.svc-version-history .sv-list__item-body {
+  padding: 0;
+  background: transparent;
+}
+
+.svc-version-history .sv-list__item--hovered > .sv-list__item-body {
+  background: transparent;
+}
+
+.svc-version-history__row {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: var(--sjs2-spacing-x075);
+  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x100) var(--sjs2-spacing-x100) var(--sjs2-spacing-x150);
+  border-radius: var(--sjs2-radius-x200);
+  text-align: start;
+  width: 100%;
+}
+
+.svc-version-history__row--current {
+  background: var(--sjs2-color-component-action-brand-primary-default-bg);
+  color: var(--sjs2-color-component-action-brand-primary-default-label);
+  margin-bottom: var(--sjs2-spacing-x025);
+}
+
+.svc-version-history__row--named:hover,
+.svc-version-history__row--base:hover,
+.svc-version-history__row--change:hover {
+  background: var(--sjs2-color-bg-basic-secondary);
+}
+
+// The group header is the only interactive row.
+.svc-version-history__row--group {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sjs2-spacing-x100);
+  background: transparent;
+  color: var(--sjs2-color-fg-basic-primary);
+  cursor: pointer;
+
+  @include sjs2--typography--small-strong;
+
+  &:hover {
+    background: var(--sjs2-color-bg-basic-secondary);
+  }
+}
+
+// Autosaved entries are indented under their group header and joined by a
+// connector line - a pseudo-element, not a positioned node.
+.svc-version-history__row--change {
+  position: relative;
+  padding-inline-start: var(--sjs2-spacing-x600);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: var(--sjs2-spacing-x300);
+    top: 0;
+    bottom: 0;
+    width: var(--sjs2-border-width-x100);
+    background: var(--sjs2-color-border-basic-secondary);
+  }
+}
+
+.svc-version-history__row .svc-collab-row__title {
+  @include sjs2--typography--default;
+}
+
+.svc-version-history__row--named .svc-collab-row__title,
+.svc-version-history__row--current .svc-collab-row__title,
+.svc-version-history__row--base .svc-collab-row__title {
+  @include sjs2--typography--default-strong;
+}
+
+.svc-version-history__row--group .svc-collab-row__title {
+  @include sjs2--typography--small-strong;
+}
+
+.svc-version-history__row--current .svc-collab-row__subtitle {
+  color: inherit;
+}

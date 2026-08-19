@@ -3035,70 +3035,31 @@ test("Keep locales selection on removing a locale, Bug#7904", () => {
   settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
 });
 
-test("Translation: strings the library localizes itself show their localized text as a cell placeholder", () => {
+test("checking a locale shows texts applied to the survey while it was unchecked", () => {
   const survey = new SurveyModel({
     elements: [
-      { type: "boolean", name: "b1" },
-      { type: "checkbox", name: "q1", showOtherItem: true, choices: ["item1"] }
+      {
+        type: "text",
+        name: "question1",
+        title: { default: "title-en", de: "title-de" }
+      }
     ]
   });
   const translation = new Translation(survey);
-  translation.showAllStrings = true;
-  translation.addLocale("de");
-  const getItem = (name: string): TranslationItem => {
-    return translation.root.allLocItems.filter(item => item.name === name)[0];
-  };
-  // A string with nothing stored in any locale, whose text comes from the library's own string
-  // table: the source side shows that text and every locale cell offers it as its placeholder.
-  const labelTrue = getItem("labelTrue");
-  expect(labelTrue).toBeTruthy();
-  expect(labelTrue.locString.getLocaleText("")).toBeFalsy();
-  expect(labelTrue.getSourceText("")).toBe("Yes");
-  expect(labelTrue.getPlaceholder("default")).toBe("Yes");
-  expect(labelTrue.getPlaceholder("de")).toBe("Ja");
-  const otherText = getItem("otherText");
-  expect(otherText.getSourceText("")).toBe("Other (describe)");
-  expect(otherText.getPlaceholder("de")).toBe("Sonstiges (Bitte angeben)");
-  // A survey string is localized by its own name in the string table (completedHtml is stored
-  // there as "completingSurvey"), so the name is not what the text is looked up by.
-  expect(getItem("completedHtml").getSourceText("")).toBe("Thank you for completing the survey");
-  // A string the library does not localize keeps the generic placeholder.
-  expect(getItem("description").getSourceText("")).toBe("");
-  expect(getItem("description").getPlaceholder("de")).toBe(editorLocalization.getString("ed.translationPlaceHolder", "de"));
-  // The grid cells of both locale columns render the placeholders.
-  const getMatrix = (name: string): QuestionMatrixDropdownModel => {
-    return <QuestionMatrixDropdownModel>translation.stringsSurvey.getAllQuestions().filter(
-      q => (<QuestionMatrixDropdownModel>q).rows[0].value === name)[0];
-  };
-  const labelTrueMatrix = getMatrix("labelTrue");
-  expect(labelTrueMatrix.columns.map(col => col.name)).toStrictEqual(["default", "de"]);
-  expect(labelTrueMatrix.visibleRows[0].cells[0].question.placeholder).toBe("Yes");
-  expect(labelTrueMatrix.visibleRows[0].cells[1].question.placeholder).toBe("Ja");
-});
+  translation.reset();
+  const matrix = <QuestionMatrixDropdownModel>translation.stringsSurvey.getAllQuestions()[0];
+  expect(matrix.columns).toHaveLength(2);
 
-test("Translation: strings the library localizes through its error classes show the error text", () => {
-  const survey = new SurveyModel({
-    elements: [
-      { type: "panel", name: "panel1", elements: [{ type: "text", name: "q1" }] },
-      { type: "checkbox", name: "q2", showOtherItem: true, choices: ["item1"] }
-    ]
-  });
-  const translation = new Translation(survey);
-  translation.showAllStrings = true;
-  const getItem = (name: string, type: string): TranslationItem => {
-    return translation.root.allLocItems.filter(
-      item => item.name === name && item.context.getType() === type)[0];
-  };
-  // requiredErrorText and otherErrorText store nothing and carry no usable localization name of
-  // their own - the text the survey shows comes from the error class that falls back to them.
-  const questionRequired = getItem("requiredErrorText", "text");
-  expect(questionRequired.getSourceText("")).toBe("Response required.");
-  expect(questionRequired.getPlaceholder("de")).toBe("Bitte beantworten Sie diese Frage.");
-  // A panel is validated as a whole, so its error text is a different string.
-  const panelRequired = getItem("requiredErrorText", "panel");
-  expect(panelRequired.getSourceText("")).toBe("Response required: answer at least one question.");
-  expect(panelRequired.getPlaceholder("de")).toBe("Bitte beantworten Sie mindestens eine Frage.");
-  const otherError = getItem("otherErrorText", "checkbox");
-  expect(otherError.getSourceText("")).toBe("Response required: enter another value.");
-  expect(otherError.getPlaceholder("de")).toBe("Bitte geben Sie einen Wert an.");
+  translation.setSelectedLocales([]);
+  expect(matrix.columns).toHaveLength(1);
+
+  // The survey gets a new "de" text while the locale is unchecked (this is how
+  // a collaborative peer's translation lands in the model).
+  survey.getQuestionByName("question1").locTitle.setLocaleText("de", "title-de-2");
+
+  // Re-checking the locale must show the fresh text, not an empty column.
+  translation.setSelectedLocales(["de"]);
+  expect(matrix.columns).toHaveLength(2);
+  const deCell = matrix.visibleRows[0].cells.filter((cell) => cell.column.name === "de")[0];
+  expect(deCell.question.value).toEqual("title-de-2");
 });

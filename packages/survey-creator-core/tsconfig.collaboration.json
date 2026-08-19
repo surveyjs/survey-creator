@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./build/collaboration",
+    "paths": {
+      "survey-creator-core": [
+        "./build"
+      ]
+    }
+  },
+  "include": [
+    "./src/entries/collaboration.ts"
+  ]
+}

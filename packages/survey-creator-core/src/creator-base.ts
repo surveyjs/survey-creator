@@ -4916,6 +4916,12 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
 
+  // The collaboration strip's model, contributed by CollaborationPlugin. A
+  // reactive slot rather than a constructor-time field so that registering the
+  // plugin after the creator has been rendered still shows the strip. Typed as
+  // Base to keep creator-base free of a dependency on the plugin.
+  @property() collabBar: Base;
+
   /**
    * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.
    *

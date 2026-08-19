@@ -68,6 +68,8 @@ export * from "../components/Search";
 export * from "../components/ComponentContainer";
 export * from "../components/IconItem";
 export * from "../Switcher";
+export * from "../CollabRow";
+export * from "../FloatingPanel";
 
 export * from "../tabs/JsonErrorItem";
 export * from "../tabs/ContainerTab";

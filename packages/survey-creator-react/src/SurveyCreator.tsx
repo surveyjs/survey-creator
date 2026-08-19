@@ -94,6 +94,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         <SvgBundleComponent></SvgBundleComponent>
         <PopupModal></PopupModal>
         <div className={areaClassName}>
+          {this.renderCollabBar()}
           <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
               <div className="svc-top-bar">
@@ -127,6 +128,14 @@ export class SurveyCreatorComponent extends SurveyElementBase<
         </div>
       </div>
     );
+  }
+  // The strip is a plain ComponentContainerModel, so the generic container
+  // component draws it. `collabBar` is typed as Base in creator-core to keep the
+  // creator free of a dependency on the collaboration plugin, hence the cast.
+  renderCollabBar() {
+    const bar: any = this.creator.collabBar;
+    if (!bar) return null;
+    return ReactElementFactory.Instance.createElement("svc-component-container", { model: bar.container });
   }
   renderActiveTab() {
     const creator: SurveyCreatorModel = this.props.creator;

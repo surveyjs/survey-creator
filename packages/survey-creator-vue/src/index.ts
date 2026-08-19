@@ -20,6 +20,8 @@ import SideBarPropertyGridHeader from "./side-bar/SideBarPropertyGridHeader.vue"
 import QuestionError from "./components/QuestionError.vue";
 import ActionButton from "./components/ActionButton.vue";
 import Switcher from "./components/Switcher.vue";
+import CollabRow from "./components/CollabRow.vue";
+import FloatingPanel from "./components/FloatingPanel.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import ComponentContainer from "./components/ComponentContainer.vue";
 import SurveyWidget from "./components/SurveyWidget.vue";
@@ -122,6 +124,8 @@ function registerComponents(
   registerComponent("svc-object-selector", ObjectSelector);
   registerComponent("svc-search", Search);
   registerComponent("svc-switcher", Switcher);
+  registerComponent("svc-collab-row", CollabRow);
+  registerComponent("svc-floating-panel", FloatingPanel);
 
   registerComponent("svc-action-button", ActionButton);
   registerComponent("svc-question-error", QuestionError);

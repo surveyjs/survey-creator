@@ -1,0 +1,133 @@
+@use "../../../variables" as *;
+
+// The collaboration strip: first child of .svc-creator__area, above the tab
+// strip. The area is a flex column whose row child grows, so `flex: none` is
+// the whole layout contract.
+.svc-collab-bar {
+  display: flex;
+  align-items: center;
+  flex: none;
+  box-sizing: border-box;
+  gap: var(--sjs2-spacing-x200);
+  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x200);
+  background: var(--sjs2-color-utility-tabs);
+  color: var(--sjs2-color-fg-basic-primary);
+  box-shadow: inset 0 calc(-1 * var(--sjs2-border-width-x100)) 0 var(--sjs2-color-border-basic-secondary);
+
+  @include sjs2--typography--small-strong;
+}
+
+.svc-collab-bar__left {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--sjs2-spacing-x300);
+}
+
+.svc-collab-bar__right {
+  display: flex;
+  align-items: center;
+  flex: none;
+  justify-content: flex-end;
+  gap: var(--sjs2-spacing-x300);
+}
+
+// Connection plate. A row rather than an action-bar item: an action-bar item is
+// always a button, and a status is not clickable - it carries role="status".
+.svc-collab-bar__status {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--sjs2-spacing-x075);
+
+  @include textEllipsis;
+}
+
+.svc-collab-bar__status--connecting {
+  color: var(--sjs2-color-fg-warning-primary);
+}
+
+.svc-collab-bar__status--connected {
+  color: var(--sjs2-color-fg-positive-primary);
+}
+
+.svc-collab-bar__status--closed {
+  color: var(--sjs2-color-fg-alert-primary);
+}
+
+.svc-collab-bar__status .svc-collab-row__title {
+  @include sjs2--typography--small-strong;
+}
+
+// Avatars overlap by a negative margin; positioned siblings paint in DOM order,
+// so later avatars sit on top without any z-index bookkeeping.
+.svc-collab-bar__participants {
+  display: flex;
+  align-items: center;
+}
+
+.svc-collab-bar__participant {
+  position: relative;
+  margin-inline-end: calc(-1 * var(--sjs2-spacing-x050));
+}
+
+// The chip IS the action-bar's <button> (Action.innerCss puts the avatar classes
+// on it), so the action's own box has to give way to the circle. Scoped by the
+// container: two classes beat survey-core's single-class rules whatever the
+// stylesheet order turns out to be.
+.svc-collab-bar__participants .svc-collab-bar__participant {
+  min-width: auto;
+  padding: 0;
+  border: none;
+  gap: 0;
+  overflow: hidden;
+}
+
+.svc-collab-bar__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex: none;
+  width: var(--sjs2-size-x350);
+  height: var(--sjs2-size-x350);
+  border-radius: var(--sjs2-radius-x800);
+  background: var(--sjs2-color-utility-user-bg-color-0);
+  color: var(--sjs2-color-utility-user-fg-on-color-0);
+  // Separator ring as an OUTSET shadow, so it neither shrinks the fill nor
+  // grows the layout box.
+  box-shadow: 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-utility-tabs);
+
+  @include sjs2--typography--small-strong;
+  @include defaultActionButtonSettings;
+}
+
+@for $i from 0 through 9 {
+  .svc-collab-bar__avatar--color-#{$i} {
+    background: var(--sjs2-color-utility-user-bg-color-#{$i});
+    color: var(--sjs2-color-utility-user-fg-on-color-#{$i});
+  }
+}
+
+// Inside the roster popup the avatar is a plain marker: smaller, no ring, and
+// the surrounding list item owns the click.
+.svc-collab-bar__avatar--list {
+  width: var(--sjs2-size-x250);
+  height: var(--sjs2-size-x250);
+  box-shadow: none;
+  cursor: inherit;
+}
+
+.svc-collab-bar__roster-item {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--sjs2-spacing-x100);
+
+  @include sjs2--typography--default;
+}
+
+.svc-collab-bar__roster-item .svc-collab-row__title {
+  @include sjs2--typography--default;
+}
