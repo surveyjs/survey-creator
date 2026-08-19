@@ -121,6 +121,6 @@ export class TabJsonEditorAcePlugin
   }
   public static hasAceEditor(): boolean {
     const window = DomWindowHelper.getWindow();
-    return typeof window !== "undefined" && typeof window["ace"] !== "undefined";
+    return !!window && typeof window["ace"] !== "undefined";
   }
 }
