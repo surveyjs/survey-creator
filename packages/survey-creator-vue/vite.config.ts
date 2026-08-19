@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
         plugins: [
           copy({
             hook: "writeBundle",
-            targets: [{ src: "./README.md", dest: "./build" }],
+            targets: [{ src: "./README.md", dest: "./build" }, { src: "./LICENSE", dest: "./build" }],
           }),
           generatePackageJson({
             inputFolder: "publish",

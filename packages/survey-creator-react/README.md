@@ -15,21 +15,21 @@
 
 Survey Creator for React is an embeddable drag-and-drop form builder for creating and editing dynamic, JSON-based forms and surveys in React applications.
 
-The `survey-creator-react` package provides the React rendering layer for SurveyJS Creator. It works with the framework-independent [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package, which manages the form builder model, editor state, form-editing logic, Toolbox, Property Grid, tabs, actions, and other core behavior. Installing `survey-creator-react` also installs `survey-creator-core`. You configure a builder instance with `survey-creator-core` and hand it to this package's `SurveyCreatorComponent` through its `creator` prop: `<SurveyCreatorComponent creator={creator} />`.
+The `survey-creator-react` package provides the React rendering layer for SurveyJS Creator. It works with the framework-independent [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package, which manages the form builder model, editor state, form-editing logic, Toolbox, Property Grid, tabs, actions, and other core behavior. `survey-creator-core` is a peer dependency: npm 7 and later install it automatically; with pnpm or Yarn 1, add it explicitly. You configure a builder instance with `survey-creator-core` and hand it to this package's `SurveyCreatorComponent` through its `creator` prop: `<SurveyCreatorComponent creator={creator} />`.
 
-Use Survey Creator to build multi-page forms, surveys, quizzes, assessments, and other data-entry tools, configure conditional logic and validation, and customize the form builder UI. Survey Creator generates SurveyJS JSON form definitions that you can [save in your own backend](https://surveyjs.io/documentation/backend-integration) and render with [SurveyJS React Form Library](https://github.com/surveyjs/survey-library/tree/master/packages/survey-react-ui).
+Use Survey Creator to build multi-page forms, surveys, quizzes, assessments, and other data-entry tools, configure conditional logic and validation, and customize the form builder UI. Survey Creator generates SurveyJS JSON form definitions that you can [save in your own backend](https://surveyjs.io/survey-creator/documentation/integration-with-backend) and render with [SurveyJS React Form Library](https://github.com/surveyjs/survey-library/tree/master/packages/survey-react-ui).
 
 </div>
 
 [Try Survey Creator for React](https://surveyjs.io/create-free-survey)
 
-## Installation
+## Install
 
 ```sh
 npm install survey-creator-react --save
 ```
 
-## License Key
+## License key
 
 Survey Creator displays an alert banner until you activate a [purchased commercial license](https://surveyjs.io/licensing). Activate your key with `setLicenseKey` from `survey-core`:
 
@@ -88,7 +88,7 @@ creator.applyCreatorTheme(DefaultDark);
 
 The UI theme styles the builder itself. The look of the forms it produces is edited in the built-in Theme tab and stored in the survey theme JSON. See [Themes & Styles](https://surveyjs.io/survey-creator/documentation/survey-creator-interface-themes) and [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor).
 
-## Theme Adapters
+## Theme adapters
 
 A theme adapter maps an existing design system's CSS variables onto SurveyJS design tokens, so a survey inherits the look of the host application. Survey Creator supports adapters: the form on the design surface and in the Preview tab is a real survey, so it picks up whichever adapter the page loads. Adapters ship with `survey-core` as plain CSS — import one after the base style sheets:
 
@@ -100,7 +100,7 @@ import "survey-core/themes/adapters/shadcn-default.css";
 
 Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatch variants), [Material UI](https://mui.com), and [shadcn/ui](https://ui.shadcn.com), with matching icon sets (`survey-core/themes/adapters/icons/lucide`, `.../icons/mui`). See [Theme Adapters](https://surveyjs.io/themes/theme-adapters).
 
-## Key Features
+## Key features
 
 ### React Integration
 
@@ -128,14 +128,14 @@ Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatc
 
 - Built-in themes and custom branding
 - Shared design token system based on CSS variables
-- [Theme Adapters for Bootstrap, Material UI, and shadcn/ui](https://surveyjs.io/documentation/theme-adapters)
+- [Theme Adapters for Bootstrap, Material UI, and shadcn/ui](https://surveyjs.io/themes/theme-adapters)
 - Localization and right-to-left language support
 
-## Related Packages
+## Related packages
 
 | Package | Purpose |
 | --- | --- |
-| [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) | Platform-independent Survey Creator model (installed automatically) |
+| [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) | Platform-independent Survey Creator model (peer dependency) |
 | [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular) | Angular renderer |
 | [`survey-creator-vue`](https://www.npmjs.com/package/survey-creator-vue) | Vue 3 renderer |
 | [`survey-creator-js`](https://www.npmjs.com/package/survey-creator-js) | HTML/CSS/JavaScript renderer |
@@ -152,7 +152,7 @@ Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatc
 
 For AI coding agents: [https://surveyjs.io/llms.txt](https://surveyjs.io/llms.txt) indexes the documentation. Any documentation page is also available as raw Markdown — append `.md` to its URL, for example [https://surveyjs.io/survey-creator/documentation/get-started-react.md](https://surveyjs.io/survey-creator/documentation/get-started-react.md).
 
-## SurveyJS Ecosystem
+## SurveyJS ecosystem
 
 | Product | Purpose | License |
 | --- | --- | --- |
@@ -162,7 +162,7 @@ For AI coding agents: [https://surveyjs.io/llms.txt](https://surveyjs.io/llms.tx
 | [PDF Generator](https://surveyjs.io/pdf-generator) | Render forms and responses as PDF | Commercial |
 | [AI Form Response Extractor](https://surveyjs.io/documentation/combine-paper-and-online-survey-form-data) | Extract responses from paper forms, PDFs, and images into a SurveyJS schema (`ai-form-response-extractor`) | MIT |
 
-## Build from Source
+## Build from sources
 
 This monorepo does **not** use npm workspaces: each package installs independently, but a root install is still required for the shared tooling (linting, Playwright).
 

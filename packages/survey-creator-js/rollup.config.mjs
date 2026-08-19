@@ -12,7 +12,7 @@ const buildPath = resolve(__dirname, "build");
 const buildPlatformJson = {
   name: pkg.name,
   version: pkg.version,
-  description: "Embeddable drag-and-drop form builder for JSON-based forms in plain JavaScript applications (without frontend frameworks). Create dynamic surveys, polls, quizzes, and other forms, configure conditional logic and validation, and customize the editor UI.",
+  description: "Embeddable SurveyJS drag-and-drop form builder for JSON-based forms in plain JavaScript applications (without frontend frameworks). Create dynamic surveys, polls, quizzes, and other forms, configure conditional logic and validation, and customize the editor UI.",
   author: "DevSoft Baltic OU <info@devsoftbaltic.com>",
   homepage: "https://surveyjs.io/",
   license: "SEE LICENSE IN LICENSE",
@@ -27,6 +27,7 @@ const buildPlatformJson = {
     "survey",
     "form",
     "surveyjs",
+    "survey-creator",
     "survey-builder",
     "survey-editor",
     "form-builder",
@@ -40,6 +41,8 @@ const buildPlatformJson = {
     "dynamic-form-builder",
     "conditional-logic",
     "embeddable",
+    "questionnaire",
+    "data-collection",
     "bootstrap",
     "bootswatch",
     "mui",
@@ -93,6 +96,7 @@ const buildPlatformJson = {
 if (process.env.emitNonSourceFiles === "true") {
   fs.mkdirSync(buildPath, { recursive: true });
   fs.copyFileSync("./README.md", resolve(buildPath, "README.md"));
+  fs.copyFileSync("./LICENSE", resolve(buildPath, "LICENSE"));
   fs.copyFileSync("./index.html", resolve(buildPath, "index.html"));
   fs.writeFileSync(
     resolve(buildPath, "package.json"),

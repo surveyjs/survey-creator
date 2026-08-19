@@ -15,14 +15,16 @@ const buildPath = resolve(__dirname, "build");
 const buildPlatformJson = {
   name: pkg.name,
   version: pkg.version,
-  description: "Framework-independent core for SurveyJS Survey Creator, an embeddable drag-and-drop form builder. It contains the editor model and core behavior, while packages such as survey-creator-react, survey-creator-angular, survey-creator-vue, and survey-creator-js render that editor in a specific frontend framework.",
+  description: "Framework-independent core of SurveyJS Survey Creator, an embeddable drag-and-drop form builder. Holds the editor model, design surface, toolbox, property grid, and logic/theme editors. Pair it with survey-creator-react, -angular, -vue, or -js to render.",
+  author: "DevSoft Baltic OU <info@devsoftbaltic.com>",
   homepage: "https://surveyjs.io/",
   license: "SEE LICENSE IN LICENSE",
   licenseUrl: "https://surveyjs.io/licensing",
-  "keywords": [
+  keywords: [
     "survey",
     "form",
     "surveyjs",
+    "survey-creator",
     "survey-builder",
     "survey-editor",
     "form-builder",
@@ -36,6 +38,8 @@ const buildPlatformJson = {
     "dynamic-form-builder",
     "conditional-logic",
     "embeddable",
+    "questionnaire",
+    "data-collection",
     "bootstrap",
     "bootswatch",
     "mui",
@@ -134,6 +138,7 @@ const buildPlatformJson = {
 if (process.env.emitNonSourceFiles === "true") {
   fs.mkdirSync(buildPath, { recursive: true });
   fs.copyFileSync("./README.md", resolve(buildPath, "README.md"));
+  fs.copyFileSync("./LICENSE", resolve(buildPath, "LICENSE"));
   fs.writeFileSync(
     resolve(buildPath, "package.json"),
     JSON.stringify(buildPlatformJson, null, 2),

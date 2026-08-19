@@ -15,26 +15,26 @@
 
 Survey Creator for Angular is an embeddable drag-and-drop form builder for creating and editing dynamic, JSON-based forms and surveys in Angular applications.
 
-The `survey-creator-angular` package provides the Angular rendering layer for SurveyJS Creator. It works with the framework-independent [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package, which manages the form builder model, editor state, form-editing logic, Toolbox, Property Grid, tabs, actions, and other core behavior. Installing `survey-creator-angular` also installs `survey-creator-core`. You configure a builder instance with `survey-creator-core` and bind it to this package's `<survey-creator>` component through its `model` input: `<survey-creator [model]="surveyCreatorModel"></survey-creator>`.
+The `survey-creator-angular` package provides the Angular rendering layer for SurveyJS Creator. It works with the framework-independent [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package, which manages the form builder model, editor state, form-editing logic, Toolbox, Property Grid, tabs, actions, and other core behavior. `survey-creator-core` is a peer dependency: npm 7 and later install it automatically; with pnpm or Yarn 1, add it explicitly. You configure a builder instance with `survey-creator-core` and bind it to this package's `<survey-creator>` component through its `model` input: `<survey-creator [model]="surveyCreatorModel"></survey-creator>`.
 
-Use Survey Creator to build multi-page forms, surveys, quizzes, assessments, and other data-entry tools, configure conditional logic and validation, and customize the form builder UI. Survey Creator generates SurveyJS JSON form definitions that you can [save in your own backend](https://surveyjs.io/documentation/backend-integration) and render with [SurveyJS Angular Form Library](https://github.com/surveyjs/survey-library/tree/master/packages/survey-angular-ui).
+Use Survey Creator to build multi-page forms, surveys, quizzes, assessments, and other data-entry tools, configure conditional logic and validation, and customize the form builder UI. Survey Creator generates SurveyJS JSON form definitions that you can [save in your own backend](https://surveyjs.io/survey-creator/documentation/integration-with-backend) and render with [SurveyJS Angular Form Library](https://github.com/surveyjs/survey-library/tree/master/packages/survey-angular-ui).
 
 </div>
 
 [Try Survey Creator for Angular](https://surveyjs.io/create-free-survey)
 
-## Installation
+## Install
 
-Requires **Angular v12.0.0 or newer** and the `@angular/cdk` package:
+Requires **Angular v12.0.0 or newer** and the `@angular/cdk` package (install the CDK version that matches your Angular version):
 
 ```sh
 npm install survey-creator-angular --save
-npm install @angular/cdk@^12.0.0 --save
+npm install @angular/cdk --save
 ```
 
 > Angular v8&ndash;v11 are supported by the legacy [`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout) package, which depends on Knockout and is obsolete. See [Add Survey Creator to an Angular v8&ndash;v11 Application](https://github.com/surveyjs/code-examples/tree/main/legacy-angular/survey-creator).
 
-## License Key
+## License key
 
 Survey Creator displays an alert banner until you activate a [purchased commercial license](https://surveyjs.io/licensing). Activate your key with `setLicenseKey` from `survey-core`:
 
@@ -126,7 +126,7 @@ this.surveyCreatorModel.applyCreatorTheme(DefaultDark);
 
 The UI theme styles the builder itself. The look of the forms it produces is edited in the built-in Theme tab and stored in the survey theme JSON. See [Themes & Styles](https://surveyjs.io/survey-creator/documentation/survey-creator-interface-themes) and [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor).
 
-## Theme Adapters
+## Theme adapters
 
 A theme adapter maps an existing design system's CSS variables onto SurveyJS design tokens, so a survey inherits the look of the host application. Survey Creator supports adapters: the form on the design surface and in the Preview tab is a real survey, so it picks up whichever adapter the page loads. Adapters ship with `survey-core` as plain CSS — load one after the base style sheets:
 
@@ -140,7 +140,7 @@ A theme adapter maps an existing design system's CSS variables onto SurveyJS des
 
 Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatch variants), [Material UI](https://mui.com), and [shadcn/ui](https://ui.shadcn.com), with matching icon sets (`survey-core/themes/adapters/icons/lucide`, `.../icons/mui`). See [Theme Adapters](https://surveyjs.io/themes/theme-adapters).
 
-## Key Features
+## Key features
 
 ### Angular Integration
 
@@ -168,14 +168,14 @@ Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatc
 
 - Built-in themes and custom branding
 - Shared design token system based on CSS variables
-- [Theme Adapters for Bootstrap, Material UI, and shadcn/ui](https://surveyjs.io/documentation/theme-adapters)
+- [Theme Adapters for Bootstrap, Material UI, and shadcn/ui](https://surveyjs.io/themes/theme-adapters)
 - Localization and right-to-left language support
 
-## Related Packages
+## Related packages
 
 | Package | Purpose |
 | --- | --- |
-| [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) | Platform-independent Survey Creator model (installed automatically) |
+| [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) | Platform-independent Survey Creator model (peer dependency) |
 | [`survey-creator-react`](https://www.npmjs.com/package/survey-creator-react) | React renderer |
 | [`survey-creator-vue`](https://www.npmjs.com/package/survey-creator-vue) | Vue 3 renderer |
 | [`survey-creator-js`](https://www.npmjs.com/package/survey-creator-js) | HTML/CSS/JavaScript renderer |
@@ -192,7 +192,7 @@ Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatc
 
 For AI coding agents: [https://surveyjs.io/llms.txt](https://surveyjs.io/llms.txt) indexes the documentation. Any documentation page is also available as raw Markdown — append `.md` to its URL, for example [https://surveyjs.io/survey-creator/documentation/get-started-angular.md](https://surveyjs.io/survey-creator/documentation/get-started-angular.md).
 
-## SurveyJS Ecosystem
+## SurveyJS ecosystem
 
 | Product | Purpose | License |
 | --- | --- | --- |
@@ -202,7 +202,7 @@ For AI coding agents: [https://surveyjs.io/llms.txt](https://surveyjs.io/llms.tx
 | [PDF Generator](https://surveyjs.io/pdf-generator) | Render forms and responses as PDF | Commercial |
 | [AI Form Response Extractor](https://surveyjs.io/documentation/combine-paper-and-online-survey-form-data) | Extract responses from paper forms, PDFs, and images into a SurveyJS schema (`ai-form-response-extractor`) | MIT |
 
-## Build from Source
+## Build from sources
 
 This monorepo does **not** use npm workspaces: each package installs independently, but a root install is still required for the shared tooling (linting, Playwright).
 

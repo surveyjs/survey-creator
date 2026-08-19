@@ -1,4 +1,4 @@
-# Survey Creator for HTML/CSS/JavaScript — Drag-and-Drop Form Builder
+# SurveyJS Survey Creator for HTML/CSS/JavaScript — Drag-and-Drop Form Builder
 
 [![SurveyJS Survey Creator](https://github.com/user-attachments/assets/1801367a-47fb-486b-8355-4c92e449755b)](https://surveyjs.io/create-free-survey)
 
@@ -116,11 +116,43 @@ A *theme adapter* maps an existing design system's CSS variables onto SurveyJS d
 
 Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatch variants), [Material UI](https://mui.com), and [shadcn/ui](https://ui.shadcn.com), with matching icon sets (`survey-core/themes/adapters/icons/lucide`, `.../icons/mui`). See [Theme Adapters](https://surveyjs.io/themes/theme-adapters).
 
+## Key features
+
+### HTML/CSS/JavaScript Integration
+
+- Framework-free rendering package for SurveyJS Creator, powered internally by Preact
+- Framework-independent editor model through `survey-creator-core`
+- Mounts into any DOM element with `creator.render(container)`; jQuery plugin included
+- TypeScript support
+- Client-side form editing without a required SurveyJS backend
+
+### Visual Form Editing
+
+- Drag-and-drop form builder UI
+- Multi-page forms and form wizards
+- Conditional visibility, branching, validation, and calculated values
+- Dedicated Logic and JSON Editor interfaces
+- Form preview before publication
+
+### Customizable Editor UI
+
+- Configure the Toolbox, Property Grid, tabs, actions, and editor behavior
+- [Create reusable configurations with the UI Preset Editor](https://surveyjs.io/survey-creator/documentation/ui-preset-editor)
+- [Add custom question types and reusable components](https://surveyjs.io/survey-creator/documentation/customize-question-types)
+- Configure different editor experiences for roles, tenants, or subscription plans
+
+### Appearance Customization
+
+- Built-in themes and custom branding
+- Shared design token system based on CSS variables
+- [Theme Adapters for Bootstrap, Material UI, and shadcn/ui](https://surveyjs.io/themes/theme-adapters)
+- Localization and right-to-left language support
+
 ## Related packages
 
 | Package | Purpose |
 | --- | --- |
-| [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) | Platform-independent Survey Creator model (installed automatically) |
+| [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) | Platform-independent Survey Creator model (peer dependency) |
 | [`survey-creator-react`](https://www.npmjs.com/package/survey-creator-react) | React renderer |
 | [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular) | Angular renderer |
 | [`survey-creator-vue`](https://www.npmjs.com/package/survey-creator-vue) | Vue 3 renderer |

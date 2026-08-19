@@ -16,7 +16,7 @@ Survey Creator produces survey JSON schemas that [SurveyJS Form Library](https:/
 
 ## Install
 
-Install the UI package for your framework — `survey-creator-core` comes with it as a dependency:
+Install the UI package for your framework. `survey-creator-core` is a peer dependency of each one: npm 7 and later install it automatically; with pnpm or Yarn 1, add it explicitly:
 
 ```sh
 npm install survey-creator-react   # React
@@ -100,6 +100,38 @@ import "survey-core/themes/adapters/icons/lucide"; // or ".../icons/mui"
 ```
 
 Adapters are framework-independent and require no extra markup or configuration. They restyle the survey; the Survey Creator UI around it is styled by the creator UI themes described above. See [Theme Adapters](https://surveyjs.io/themes/theme-adapters).
+
+## Key features
+
+### Editor Model
+
+- Framework-independent editor model shared by every Survey Creator UI package
+- Tab and plugin system, design surface, Toolbox, Property Grid, and logic, translation, and theme editors
+- Undo-redo, localization, and the UI style sheets
+- TypeScript support
+- Client-side form editing without a required SurveyJS backend
+
+### Visual Form Editing
+
+- Drag-and-drop form builder UI
+- Multi-page forms and form wizards
+- Conditional visibility, branching, validation, and calculated values
+- Dedicated Logic and JSON Editor interfaces
+- Form preview before publication
+
+### Customizable Editor UI
+
+- Configure the Toolbox, Property Grid, tabs, actions, and editor behavior
+- [Create reusable configurations with the UI Preset Editor](https://surveyjs.io/survey-creator/documentation/ui-preset-editor)
+- [Add custom question types and reusable components](https://surveyjs.io/survey-creator/documentation/customize-question-types)
+- Configure different editor experiences for roles, tenants, or subscription plans
+
+### Appearance Customization
+
+- Built-in themes and custom branding
+- Shared design token system based on CSS variables
+- [Theme Adapters for Bootstrap, Material UI, and shadcn/ui](https://surveyjs.io/themes/theme-adapters)
+- Localization and right-to-left language support
 
 ## Related packages
 

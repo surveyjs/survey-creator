@@ -1,4 +1,4 @@
-# Survey Creator for Vue 3 — Drag-and-Drop Form Builder
+# SurveyJS Survey Creator for Vue 3 — Drag-and-Drop Form Builder
 
 [![SurveyJS Survey Creator](https://github.com/user-attachments/assets/1801367a-47fb-486b-8355-4c92e449755b)](https://surveyjs.io/create-free-survey)
 
@@ -8,7 +8,7 @@
 [![Open Issues](https://img.shields.io/github/issues/surveyjs/survey-creator.svg)](https://github.com/surveyjs/survey-creator/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed/surveyjs/survey-creator.svg)](https://github.com/surveyjs/survey-creator/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+)
 
-`survey-creator-vue` renders [Survey Creator](https://surveyjs.io/survey-creator) — the drag-and-drop form builder for [SurveyJS Form Library](https://surveyjs.io/form-library) — in Vue 3 applications. It is the Vue view layer over [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core), the platform-independent model that holds the design surface, toolbox, property grid, and the logic, translation, and theme editors. Installing `survey-creator-vue` brings `survey-creator-core` with it — you configure a builder instance with `survey-creator-core` and pass it to this package's `SurveyCreatorComponent` through its `model` prop: `<SurveyCreatorComponent :model="creator" />`.
+`survey-creator-vue` renders [Survey Creator](https://surveyjs.io/survey-creator) — the drag-and-drop form builder for [SurveyJS Form Library](https://surveyjs.io/form-library) — in Vue 3 applications. It is the Vue view layer over [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core), the platform-independent model that holds the design surface, toolbox, property grid, and the logic, translation, and theme editors. `survey-creator-core` is a peer dependency: npm 7 and later install it automatically; with pnpm or Yarn 1, add it explicitly. You configure a builder instance with `survey-creator-core` and pass it to this package's `SurveyCreatorComponent` through its `model` prop: `<SurveyCreatorComponent :model="creator" />`.
 
 Users design forms visually; the builder produces a survey JSON schema that [`survey-vue3-ui`](https://www.npmjs.com/package/survey-vue3-ui) renders as a working form.
 
@@ -102,11 +102,42 @@ import 'survey-core/themes/adapters/shadcn-default.css';
 
 Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatch variants), [Material UI](https://mui.com), and [shadcn/ui](https://ui.shadcn.com), with matching icon sets (`survey-core/themes/adapters/icons/lucide`, `.../icons/mui`). See [Theme Adapters](https://surveyjs.io/themes/theme-adapters).
 
+## Key features
+
+### Vue 3 Integration
+
+- Vue 3 rendering package for SurveyJS Creator
+- Framework-independent editor model through `survey-creator-core`
+- TypeScript support
+- Client-side form editing without a required SurveyJS backend
+
+### Visual Form Editing
+
+- Drag-and-drop form builder UI
+- Multi-page forms and form wizards
+- Conditional visibility, branching, validation, and calculated values
+- Dedicated Logic and JSON Editor interfaces
+- Form preview before publication
+
+### Customizable Editor UI
+
+- Configure the Toolbox, Property Grid, tabs, actions, and editor behavior
+- [Create reusable configurations with the UI Preset Editor](https://surveyjs.io/survey-creator/documentation/ui-preset-editor)
+- [Add custom question types and reusable components](https://surveyjs.io/survey-creator/documentation/customize-question-types)
+- Configure different editor experiences for roles, tenants, or subscription plans
+
+### Appearance Customization
+
+- Built-in themes and custom branding
+- Shared design token system based on CSS variables
+- [Theme Adapters for Bootstrap, Material UI, and shadcn/ui](https://surveyjs.io/themes/theme-adapters)
+- Localization and right-to-left language support
+
 ## Related packages
 
 | Package | Purpose |
 | --- | --- |
-| [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) | Platform-independent Survey Creator model (installed automatically) |
+| [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) | Platform-independent Survey Creator model (peer dependency) |
 | [`survey-creator-react`](https://www.npmjs.com/package/survey-creator-react) | React renderer |
 | [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular) | Angular renderer |
 | [`survey-creator-js`](https://www.npmjs.com/package/survey-creator-js) | HTML/CSS/JavaScript renderer |
