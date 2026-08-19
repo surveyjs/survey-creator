@@ -39,7 +39,7 @@ export class ResizeManager {
     return parseFloat(window.getComputedStyle(element).getPropertyValue(style).replace("px", ""));
   }
   private isEventSupported(eventName: string) {
-    let el = DomDocumentHelper.getDocument().createElement("div");
+    let el = DomDocumentHelper.createElement("div");
     eventName = "on" + eventName;
     let isSupported = (eventName in el);
     if (!isSupported) {
@@ -104,7 +104,7 @@ export class ResizeManager {
     container.appendChild(this.eastResizer);
   }
   private createrResizerElement(className: string) {
-    const resizer = DomDocumentHelper.getDocument().createElement("div");
+    const resizer = DomDocumentHelper.createElement("div");
     resizer.className = className;
     resizer.addEventListener(this.getMouseEvent("mousedown"), this.onMouseDownListener);
     return resizer;

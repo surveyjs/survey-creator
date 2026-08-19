@@ -34,14 +34,14 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   public init(aceEditor: any): void {
     const window = DomWindowHelper.getWindow();
     this.aceEditor = aceEditor;
-    const aceModules = (window["ace"] as any)?.define?.modules;
+    const aceModules = (window?.["ace"] as any)?.define?.modules;
     if (!(aceModules && aceModules["ace/ext/searchbox"])) {
       this.aceEditor.commands["removeCommand"]("find");
     }
     this.aceEditor.setReadOnly(this.readOnly);
     if (AceJsonEditorModel.aceBasePath) {
       try {
-        window["ace"]["config"].set("basePath", AceJsonEditorModel.aceBasePath);
+        window?.["ace"]["config"].set("basePath", AceJsonEditorModel.aceBasePath);
         this.aceEditor.session.setMode("ace/mode/json");
       } catch{ }
     }

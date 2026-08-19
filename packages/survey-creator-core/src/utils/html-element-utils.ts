@@ -110,7 +110,7 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
 export function select(element: any) {
   const window = DomWindowHelper.getWindow();
   const document = DomDocumentHelper.getDocument();
-  if (!window) return;
+  if (!window || !document) return;
   var range, selection;
   if (window.getSelection && document.createRange) {
     selection = window.getSelection();
@@ -128,7 +128,7 @@ export function select(element: any) {
 export function saveToFileHandler(fileName: string, blob: Blob) {
   const window = DomWindowHelper.getWindow();
   const document = DomDocumentHelper.getDocument();
-  if (!window) return;
+  if (!window || !document) return;
   if (window.navigator["msSaveOrOpenBlob"]) {
     window.navigator["msSaveBlob"](blob, fileName);
   } else {

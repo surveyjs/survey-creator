@@ -284,6 +284,7 @@ export class CreatorPresetEditorModel extends Base implements ICreatorPresetEdit
   }
   public downloadJsonFile(text?: string): void {
     const document = DomDocumentHelper.getDocument();
+    if (!document) return;
     if (!text) text = this.jsonText;
     const jsonBlob = new Blob([text], { type: "application/json" });
     const elem = document.createElement("a");
