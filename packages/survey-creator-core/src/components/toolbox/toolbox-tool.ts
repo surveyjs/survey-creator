@@ -16,9 +16,10 @@ export class ToolboxToolViewModel extends Base {
     if (!this.isDotsItem()) {
       const popup = item.popupModel as PopupModel;
       if (!!popup) {
+        const currentClasses = (popup.cssClass || "").split(" ");
         const className = new CssClassBuilder()
           .append(popup.cssClass)
-          .append("svc-toolbox-subtypes")
+          .append("svc-toolbox-subtypes", currentClasses.indexOf("svc-toolbox-subtypes") < 0)
           .toString();
 
         popup.cssClass = className;
