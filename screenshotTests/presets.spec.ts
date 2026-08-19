@@ -16,6 +16,15 @@ test.describe(title, () => {
     const root = page.locator(".svc-side-bar__container-content").nth(0);
     await compareScreenshot(page, root, "presets-launch-button.png");
   });
+  test("Check presets launch button mobile", async ({ page }) => {
+    await changeToolboxScrolling(page, false);
+    await changeToolboxSearchEnabled(page, false);
+    await page.setViewportSize({ width: 510, height: 900 });
+    await page.getByRole("button", { name: "Survey settings" }).click();
+    await showCreatorSettings(page);
+    const root = page.locator(".svc-side-bar__container-content").nth(0);
+    await compareScreenshot(page, root, "presets-launch-button-mobile.png");
+  });
 });
 
 test.describe(title, () => {
