@@ -304,7 +304,7 @@ Specifies how deeply choice options in Radio Button Group and Checkboxes questio
 - 1 - Allows first-level choice options to contain survey elements.
 - 2 - Allows first- and second-level choice options to contain survey elements, and so on.
 
-Default value: 0
+Default value: 2
 
 [View Demo](https://surveyjs.io/survey-creator/examples/nest-sub-questions-within-choice-options/ (linkStyle))
 
