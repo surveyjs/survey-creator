@@ -6,7 +6,7 @@ export class CreatorStylesManager {
 
   static findSheet(styleSheetId: string): any {
     const document = DomDocumentHelper.getDocument();
-    if (!DomDocumentHelper.isAvailable()) return null;
+    if (!document) return null;
     for (let i = 0; i < document.styleSheets.length; i++) {
       if (!!document.styleSheets[i].ownerNode && (<any>document).styleSheets[i].ownerNode["id"] === styleSheetId) {
         return <CSSStyleSheet>document.styleSheets[i];
@@ -16,11 +16,12 @@ export class CreatorStylesManager {
   }
 
   static createSheet(styleSheetId: string): any {
-    if (!DomDocumentHelper.isAvailable()) return null;
+    const document = DomDocumentHelper.getDocument();
+    if (!document) return null;
     let style = DomDocumentHelper.createElement("style") as HTMLStyleElement;
     style.id = styleSheetId;
     style.appendChild(new Text(""));
-    DomDocumentHelper.getDocument().head.appendChild(style);
+    document.head.appendChild(style);
     return <CSSStyleSheet>style.sheet;
   }
 

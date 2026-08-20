@@ -11,7 +11,8 @@ const FOCUS_BLUR_DEBOUNCE_MS = 300;
 const raf = (cb: () => void): any =>
   DomWindowHelper.isAvailable() ? DomWindowHelper.requestAnimationFrame(cb) : setTimeout(cb, 16);
 const cancelRaf = (id: any): void => {
-  if (DomWindowHelper.isAvailable()) DomWindowHelper.getWindow().cancelAnimationFrame(id);
+  const window = DomWindowHelper.getWindow();
+  if (!!window) window.cancelAnimationFrame(id);
   else clearTimeout(id);
 };
 

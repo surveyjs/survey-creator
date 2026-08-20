@@ -16,9 +16,10 @@ export class ToolboxToolViewModel extends Base {
     if (!this.isDotsItem()) {
       const popup = item.popupModel as PopupModel;
       if (!!popup) {
+        const currentClasses = (popup.cssClass || "").split(" ");
         const className = new CssClassBuilder()
           .append(popup.cssClass)
-          .append("svc-toolbox-subtypes")
+          .append("svc-toolbox-subtypes", currentClasses.indexOf("svc-toolbox-subtypes") < 0)
           .toString();
 
         popup.cssClass = className;
@@ -71,14 +72,14 @@ export class ToolboxToolViewModel extends Base {
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
 
     this.toolboxItem.isPressed = true;
-    DomDocumentHelper.getDocument().addEventListener("pointerup", this.onPointerUp);
+    DomDocumentHelper.addEventListener("pointerup", this.onPointerUp);
     this.creator?.onDragDropItemStart();
   }
 
   private onPointerUp = (pointerUpEvent) => {
     this.hidePopup();
     this.toolboxItem.isPressed = false;
-    DomDocumentHelper.getDocument().removeEventListener("pointerup", this.onPointerUp);
+    DomDocumentHelper.removeEventListener("pointerup", this.onPointerUp);
   };
 
   private startDragToolboxItem = (pointerDownEvent: PointerEvent) => {

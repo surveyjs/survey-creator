@@ -5,7 +5,7 @@ export class CreatorDomHelper {
   public static openFileDialog(callback: (file: File) => void, accept: string = ""): void {
     if (!DomDocumentHelper.isAvailable) return;
     if (!this.inputFileElement) {
-      this.inputFileElement = DomDocumentHelper.getDocument().createElement("input");
+      this.inputFileElement = DomDocumentHelper.createElement("input") as HTMLInputElement;
       this.inputFileElement.type = "file";
       this.inputFileElement.style.display = "none";
       this.inputFileElement.onchange = () => {

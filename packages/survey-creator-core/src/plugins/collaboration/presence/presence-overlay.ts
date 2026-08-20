@@ -88,7 +88,8 @@ export class PresenceOverlay {
     this.layer.style.cssText =
       `position:fixed;inset:0;pointer-events:none;z-index:${OVERLAY_Z_INDEX};` +
       "font:11px system-ui,sans-serif;overflow:hidden;";
-    DomDocumentHelper.getBody().appendChild(this.layer);
+    const body = DomDocumentHelper.getBody();
+    if (!!body) body.appendChild(this.layer);
 
     this.doc.addEventListener("scroll", this.onScroll, true);
     // Local focus moves decorations (a locally focused translation cell is
@@ -130,7 +131,8 @@ export class PresenceOverlay {
     return DomWindowHelper.isAvailable() ? DomWindowHelper.requestAnimationFrame(cb) : setTimeout(cb, 16);
   }
   private cancelRaf(id: any): void {
-    if (DomWindowHelper.isAvailable()) DomWindowHelper.getWindow().cancelAnimationFrame(id);
+    const window = DomWindowHelper.getWindow();
+    if (!!window) window.cancelAnimationFrame(id);
     else clearTimeout(id);
   }
 

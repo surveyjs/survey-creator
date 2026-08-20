@@ -1407,7 +1407,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
   public exportToSCVFile(fileName: string) {
     const window = DomWindowHelper.getWindow();
     const document = DomDocumentHelper.getDocument();
-    if (!window) return;
+    if (!window || !document) return;
     var data = this.exportToCSV();
     var blob = new Blob([data], { type: "text/csv" });
     if (window.navigator["msSaveOrOpenBlob"]) {

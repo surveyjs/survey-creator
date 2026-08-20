@@ -20,7 +20,8 @@ export function calculateThemeVariables(
   let themeCopyCssVariables = JSON.parse(JSON.stringify(cssVariables)) as { [key: string]: string };
 
   const body = rootElement || DomDocumentHelper.getBody();
-  if (themeCopyCssVariables && typeof DomWindowHelper.getWindow() !== "undefined") {
+  const window = DomWindowHelper.getWindow();
+  if (themeCopyCssVariables && !!window && !!body) {
     const div = DomDocumentHelper.createElement("div");
     for (const key of Object.keys(themeCopyCssVariables)) {
       div.style.setProperty(key, themeCopyCssVariables[key] as string);
@@ -28,7 +29,7 @@ export function calculateThemeVariables(
     div.classList.add("sd-theme-root");
     body.appendChild(div);
 
-    const computed = DomWindowHelper.getWindow().getComputedStyle(div);
+    const computed = window.getComputedStyle(div);
 
     const newCssVariables: { [key: string]: string } = {};
     const calcProxySizeProperty = "width";
@@ -136,8 +137,9 @@ export function assign(...inputs: Array<any>) {
   }
 }
 
-export function getOS(): "Mac OS" | "iOS" | "Windows" | "Android" | "Linux" {
+export function getOS(): "Mac OS" | "iOS" | "Windows" | "Android" | "Linux" | null {
   const window = DomWindowHelper.getWindow();
+  if (!window) return null;
   const userAgent = window.navigator.userAgent,
     platform = (window.navigator as any)?.userAgentData?.platform || window.navigator.platform,
     macosPlatforms = ["macOS", "Macintosh", "MacIntel", "MacPPC", "Mac68K"],
