@@ -140,6 +140,7 @@ export default async (options) => {
         "survey-creator-core",
         "survey-react-ui"
       ],
+      useEsbuild: true,
       noEmitOnError: !options.watch,
     })
   ];
