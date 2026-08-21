@@ -223,6 +223,7 @@ export default async (options) => {
         "iconsV2": imagesV2
       },
       emitCss: false,
+      useEsbuild: true,
       noEmitOnError: !options.watch
     })
   ];

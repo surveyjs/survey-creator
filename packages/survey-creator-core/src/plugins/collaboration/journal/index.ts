@@ -7,7 +7,8 @@ import { JournalTabRefresher } from "./journal-tab-refresher";
 import { JournalStackGuard } from "./journal-stack-guard";
 
 export { JournalRecorder } from "./journal-recorder";
-export { JournalApplier, IJournalApplyOptions } from "./journal-applier";
+export { JournalApplier } from "./journal-applier";
+export type { IJournalApplyOptions } from "./journal-applier";
 export { JournalStackGuard } from "./journal-stack-guard";
 export * from "./journal-record";
 export * from "./journal-tab-refresher";

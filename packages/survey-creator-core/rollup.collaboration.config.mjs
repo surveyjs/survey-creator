@@ -44,7 +44,8 @@ export default () => {
       external: ["survey-core", "survey-creator-core"],
       tsconfig: resolve(__dirname, "tsconfig.collaboration.json"),
       virtualModules: virtualModules,
-      version: pkg.version
+      version: pkg.version,
+      useEsbuild: true
     }),
     createUmdConfig({
       input: { "collaboration": resolve(__dirname, "./src/entries/collaboration.ts") },
