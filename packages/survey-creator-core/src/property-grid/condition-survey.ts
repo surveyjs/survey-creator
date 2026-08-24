@@ -1,6 +1,7 @@
 import {
   SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue,
-  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel, surveyLocalization
+  PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel, surveyLocalization,
+  settings as surveyCoreSettings
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization, applyCreatorUiLocaleToPopup } from "../editorLocalization";
@@ -11,6 +12,19 @@ import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
 
+// survey-core keeps the "-unwrapped" postfix (settings.expressionVariables.unwrapPostfix) only for
+// backward compatibility: the plain {name} already resolves to the unwrapped value. The condition
+// editor doesn't add the postfix into the question list, so it disappears from an existing expression
+// as soon as the user selects a question. Expressions that are not edited are kept as they are.
+function removeUnwrapPostfix(name: string): string {
+  const postfix = surveyCoreSettings.expressionVariables.unwrapPostfix;
+  if (!name || !postfix) return name;
+  const index = name.indexOf(postfix);
+  if (index < 0) return name;
+  const nextCh = name[index + postfix.length];
+  if (nextCh !== undefined && nextCh !== "." && nextCh !== "[") return name;
+  return name.substring(0, index) + name.substring(index + postfix.length);
+}
 export class ConditionEditorItem {
   public conjunction: string = "and";
   public questionName: string;
@@ -700,6 +714,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     sortOrder = this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res, variableNames);
 
     for (let i = 0; i < res.length; i++) {
+      res[i].name = removeUnwrapPostfix(res[i].name);
       res[i].value = res[i].name;
       let question = !!res[i].question ? res[i].question : res[i];
       if (!this.options.useElementTitles) {
@@ -708,8 +723,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         if (!!valueName && name.indexOf(valueName) == 0) {
           name = name.replace(valueName, question.name);
         }
-        const unwrappedValueText = "-unwrapped";
-        name = name.replace(unwrappedValueText, "");
         res[i].text = this.getConditionQuestionText(question, name);
       }
       const hashKey = res[i].name;
@@ -930,7 +943,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return false;
   }
   private getConditionQuestion(name: string): Question {
-    const question = <Question>this.addConditionQuestionsHash[name];
+    const question = <Question>this.addConditionQuestionsHash[name] || <Question>this.addConditionQuestionsHash[removeUnwrapPostfix(name)];
     if (question && question.name !== name) {
       const directQuestion = <Question>this.survey.getQuestionByName(name);
       if (directQuestion) return directQuestion;
