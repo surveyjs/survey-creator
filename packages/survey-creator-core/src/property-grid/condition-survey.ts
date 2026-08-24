@@ -12,10 +12,9 @@ import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
 
-// survey-core keeps the "-unwrapped" postfix (settings.expressionVariables.unwrapPostfix) only for
-// backward compatibility: the plain {name} already resolves to the unwrapped value. The condition
-// editor doesn't add the postfix into the question list, so it disappears from an existing expression
-// as soon as the user selects a question. Expressions that are not edited are kept as they are.
+// survey-core doesn't add the "-unwrapped" postfix (settings.expressionVariables.unwrapPostfix) into
+// question names any more - the plain {name} resolves to the unwrapped value. The postfix is still
+// supported in existing expressions, so the editor has to find a question by the postfixed name.
 function removeUnwrapPostfix(name: string): string {
   const postfix = surveyCoreSettings.expressionVariables.unwrapPostfix;
   if (!name || !postfix) return name;
@@ -714,7 +713,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     sortOrder = this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res, variableNames);
 
     for (let i = 0; i < res.length; i++) {
-      res[i].name = removeUnwrapPostfix(res[i].name);
       res[i].value = res[i].name;
       let question = !!res[i].question ? res[i].question : res[i];
       if (!this.options.useElementTitles) {
