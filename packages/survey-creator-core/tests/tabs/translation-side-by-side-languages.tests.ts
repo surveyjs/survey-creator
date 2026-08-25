@@ -18,7 +18,7 @@ const languagesJSON = {
   ]
 };
 
-function createSideBySideCreator(json: any = languagesJSON, view?: "forms" | "grid"): CreatorTester {
+function createSideBySideCreator(json: any = languagesJSON, view?: "form" | "grid"): CreatorTester {
   const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
   if (!!view) {
     creator.translationSideBySideView = view;

@@ -69,15 +69,15 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   @property() selectedPageName: string;
   @property() sourceSurvey: SurveyModel;
   @property() targetSurvey: SurveyModel;
-  // The editing surface of the side-by-side mode: "forms" - two design-mode survey copies
+  // The editing surface of the side-by-side mode: "form" - two design-mode survey copies
   // rendered side by side, "grid" - the strings grid with a source and a target column.
   // Changing it rebuilds the surface in place on the same model, so the locales chosen in
   // the property grid survive the switch.
-  @property({ defaultValue: "forms" }) view: "forms" | "grid";
+  @property({ defaultValue: "form" }) view: "form" | "grid";
 
-  // How the two panes of the forms view are arranged: "horizontal" - the source pane left of
+  // How the two panes of the form view are arranged: "horizontal" - the source pane left of
   // the target pane, "vertical" - the source pane above the target pane. Follows the creator's
-  // translationSideBySideOrientation option; the grid view ignores it.
+  // translationFormViewOrientation option; the grid view ignores it.
   @property({ defaultValue: "horizontal" }) orientation: "horizontal" | "vertical";
 
   // The bridge between the real survey strings and their copies in the two panes; the target
@@ -85,7 +85,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private copiesMap = new TranslationCopiesMap();
   private _updatingSettingsSurvey: boolean = false;
   // The real survey's localizable string behind the editable string the user focused last -
-  // a cell of the strings grid or an inline string editor of the forms target pane. Used to
+  // a cell of the strings grid or an inline string editor of the form view's target pane. Used to
   // restore the selection (or at least the page) when the view changes.
   private selectedLocString: ILocalizableString;
   // ITranslationDropdownOwner: the shared collapse state of the flattened dropdown/tagbox
@@ -93,14 +93,14 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private choicesCollapsedState: { [questionName: string]: boolean } = {};
   public onChoicesCollapsedChanged = new EventBase<Base, any>();
 
-  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms",
+  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "form" | "grid" = "form",
     orientation: "horizontal" | "vertical" = "horizontal") {
     super(survey, options, true);
     // Directly: applyView is for later view switches, the plugin resets the fresh model itself.
     this.setPropertyValueDirectly("view", view);
     this.orientation = orientation;
     this.useSourceTargetColumns = this.isSideBySideGrid;
-    // The forms view maps every localizable string of the survey copies; the grid view keeps
+    // The form view maps every localizable string of the survey copies; the grid view keeps
     // the default ("used strings only") and lets the user switch via the toolbar dropdown.
     if (!this.isSideBySideGrid) {
       this.showAllStrings = true;
@@ -122,7 +122,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   public get isSideBySideGrid(): boolean {
     return this.view === "grid";
   }
-  // The strings grid of the base class is the grid view's surface; the forms view renders
+  // The strings grid of the base class is the grid view's surface; the form view renders
   // the survey copies instead.
   protected get hasStringsSurveyUI(): boolean {
     return this.isSideBySideGrid;
@@ -147,7 +147,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     res.onValueChanged.add((sender, options) => {
       if (this._updatingSettingsSurvey || this.isDisposed) return;
       if (options.name === "viewMode") {
-        this.view = options.value === "grid" ? "grid" : "forms";
+        this.view = options.value === "grid" ? "grid" : "form";
       }
       if (options.name === "sourceLocale") {
         this.sourceLocale = this.getLocaleFromSettingValue(options.value);
@@ -181,7 +181,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
           name: "viewMode",
           titleLocation: "hidden",
           choices: [
-            { value: "forms", text: editorLocalization.getString("ed.translationSideBySideViewForms") },
+            { value: "form", text: editorLocalization.getString("ed.translationSideBySideViewForm") },
             { value: "grid", text: editorLocalization.getString("ed.translationSideBySideViewGrid") }
           ]
         },
@@ -472,7 +472,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.resetTranslationCounters();
     this.updateElementTranslationStates();
   }
-  // The forms view's per-element indicator: every target-pane element with a title row (the
+  // The form view's per-element indicator: every target-pane element with a title row (the
   // survey, pages, panels with strings, questions) shows the translation state of the strings
   // its translate action covers - the element's own strings, including the ones reachable
   // only through its strings dialog (matrix column choices, validators, survey-level
@@ -715,7 +715,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       // the presence of a target creates or drops it - along with the copies mapping, which knows
       // which strings are editable. A switch between two languages only re-locales the copies.
       // The instances may not be built yet (the plugin sets the locales before it builds them).
-      if (name === "targetLocale" && !oldValue !== !newValue && this.isSideBySideForms && !!this.sourceSurvey) {
+      if (name === "targetLocale" && !oldValue !== !newValue && this.isSideBySideForm && !!this.sourceSurvey) {
         this.rebuildInstances();
       } else {
         this.updateInstanceLocales();
@@ -739,7 +739,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
   }
   // Rebuilds the editing surface after a view change: the grid view builds the strings grid
-  // over the current survey, the forms view builds the two survey copies.
+  // over the current survey, the form view builds the two survey copies.
   private applyView(): void {
     if (this.isDisposed) return;
     this.useSourceTargetColumns = this.isSideBySideGrid;
@@ -752,7 +752,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       }
       this.applySelectionToGrid();
     } else {
-      this.applySelectedPageToForms();
+      this.applySelectedPageToForm();
       // The page scope is a grid-view concept: a scoped root would cut the string mappings
       // and the CSV export down to one page. Cleared here and re-applied on the way back.
       if (!!this.filteredPage) {
@@ -763,11 +763,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.activateSelectedStringEditor();
     }
   }
-  // forms -> grid: the grid opens scoped to the page the panes showed (the selected string's
+  // form -> grid: the grid opens scoped to the page the panes showed (the selected string's
   // page when one is known), then the grid cell of the last focused string (when its row is
   // present) gets the input focus.
   private applySelectionToGrid(): void {
-    // The scope was cleared on entering the forms view, so the root covers the whole survey here.
+    // The scope was cleared on entering the form view, so the root covers the whole survey here.
     const info = this.findSelectedItemInfo();
     const pageName = !!info && !!info.pageName ? info.pageName : this.selectedPageName;
     const page = !!pageName ? this.survey.getPageByName(pageName) : undefined;
@@ -778,9 +778,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     const scopedInfo = this.findSelectedItemInfo();
     if (!!scopedInfo)this.focusGridCell(scopedInfo.item.locString);
   }
-  // grid -> forms: the panes open on the page of the last focused string (or on the grid's
+  // grid -> form: the panes open on the page of the last focused string (or on the grid's
   // page scope). Called before the instances are rebuilt, while root is still the grid tree.
-  private applySelectedPageToForms(): void {
+  private applySelectedPageToForm(): void {
     const info = this.findSelectedItemInfo();
     let pageName = !!info ? info.pageName : "";
     if (!pageName && !!this.filteredPage) pageName = this.filteredPage.name;
@@ -837,7 +837,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       }
     }
   }
-  // Remembers the string behind the focused grid cell for the selection sync with the forms view.
+  // Remembers the string behind the focused grid cell for the selection sync with the form view.
   protected onSurveyStringsCreated(survey: SurveyModel): void {
     super.onSurveyStringsCreated(survey);
     survey.onFocusInQuestion.add((sender, options) => {
@@ -1003,7 +1003,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
   }
   // The grid can be scoped to a single page; CSV export must still cover the whole survey,
-  // exactly like the forms view does.
+  // exactly like the form view does.
   public exportToCSV(): string {
     if (!this.isSideBySideGrid) return super.exportToCSV();
     const translation = this.createHeadlessTranslation();
@@ -1017,7 +1017,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
   }
   // The "Translate remaining strings" dialog of the side-by-side mode: the same machine
-  // translation editor the all-languages mode opens from its languages matrix.
+  // translation editor the multiple-languages mode opens from its languages matrix.
   public createTranslationEditor(locale: string): TranslationEditor {
     return this.setupTranslationEditor(
       new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback, this));
@@ -1923,7 +1923,7 @@ export class TranslationElementStrings extends TranslationBase {
   // The strings the auto-translate button fills: the element's used strings that have a source
   // text and no target text yet - the ones its state indicator counts as untranslated. A string
   // that stores nothing of its own is translated from the text it is displayed by (a choice's
-  // value, a question's name), which is what the all-languages dialog sends as well (see
+  // value, a question's name), which is what the multiple-languages dialog sends as well (see
   // TranslationEditor.createStringsToTranslate). Collected over a used-strings tree, so the set
   // does not depend on the dialog's current all/used filter.
   public getStringsToTranslate(): Array<TranslationItem> {

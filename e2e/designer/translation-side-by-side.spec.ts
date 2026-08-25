@@ -64,7 +64,7 @@ test.describe(title, () => {
   test("vertical orientation: the source pane above the target pane, each half the surface", async ({ page }) => {
     await setJSON(page, json);
     await setCreatorProp(page, "translationMode", "sideBySide");
-    await setCreatorProp(page, "translationSideBySideOrientation", "vertical");
+    await setCreatorProp(page, "translationFormViewOrientation", "vertical");
     await getTabbedMenuItemByText(page, "Translation").click();
     await expect(page.locator(".st-side-by-side--vertical")).toBeVisible();
     const contentBox = (await page.locator(".st-side-by-side").boundingBox())!;

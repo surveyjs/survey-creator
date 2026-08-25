@@ -48,19 +48,19 @@ export interface ICreatorOptions {
    */
   showTranslationTab?: boolean;
   // Specifies how the Translation tab edits translations:
-  // "allLanguages" - a grid of translatable strings with a column per language,
+  // "multipleLanguages" - a grid of translatable strings with a column per selected language,
   // "sideBySide" - two design-mode instances of the edited survey rendered side by side:
   // a read-only source language on the left and an inline-editable target language on the right.
-  translationMode?: "allLanguages" | "sideBySide";
+  translationMode?: "multipleLanguages" | "sideBySide";
   // How the side-by-side Translation tab renders its editing surface; applies only if
-  // translationMode is "sideBySide": "forms" - two design-mode survey instances side by side,
+  // translationMode is "sideBySide": "form" - two design-mode survey instances side by side,
   // "grid" - a translation grid with a source and a target locale column.
-  translationSideBySideView?: "forms" | "grid";
-  // How the two panes of the side-by-side Translation tab are arranged; applies only if
-  // translationMode is "sideBySide" and translationSideBySideView is "forms":
+  translationSideBySideView?: "form" | "grid";
+  // How the two panes of the form view are arranged; applies only if translationMode is
+  // "sideBySide" and translationSideBySideView is "form":
   // "horizontal" - the source pane left of the target pane, "vertical" - the source pane
   // above the target pane. Default value: "horizontal".
-  translationSideBySideOrientation?: "horizontal" | "vertical";
+  translationFormViewOrientation?: "horizontal" | "vertical";
   /**
    * Specifies whether to display the [Themes](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#themes-tab) tab.
    *

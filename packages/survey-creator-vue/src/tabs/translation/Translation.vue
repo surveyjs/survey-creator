@@ -30,7 +30,7 @@ import SurfacePlaceholder from "../../components/SurfacePlaceholder.vue";
 const props = defineProps<{ model: TranslationBase }>();
 useBase(() => props.model);
 const sideBySideModel = computed<TranslationSideBySide | undefined>(() =>
-  props.model.isSideBySideForms ? (props.model as TranslationSideBySide) : undefined
+  props.model.isSideBySideForm ? (props.model as TranslationSideBySide) : undefined
 );
 // The strings-grid model: the tab model itself in the default mode and in the side-by-side grid view.
 const stringsModel = computed<TranslationBase | undefined>(() =>

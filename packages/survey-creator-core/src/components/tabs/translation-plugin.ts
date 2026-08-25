@@ -136,7 +136,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private showAllElementStrings: boolean = false;
   private activateSideBySide(): void {
     const model = new TranslationSideBySide(this.creator.survey, this.creator,
-      this.creator.translationSideBySideView, this.creator.translationSideBySideOrientation);
+      this.creator.translationSideBySideView, this.creator.translationFormViewOrientation);
     this.model = model;
     this.wireModelCallbacks(model);
     model.showAllElementStrings = this.showAllElementStrings;
@@ -328,7 +328,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       mode: "small",
       needSeparator: true,
       action: () => {
-        // The action is visible in the all-languages mode only.
+        // The action is visible in the multiple-languages mode only.
         (<Translation>this.model).mergeLocaleWithDefault();
       }
     });
@@ -421,11 +421,11 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       this.updateSideBySidePagesAction();
     }
   }
-  // The pages dropdown of the forms view: real pages only, no "All Pages" - the panes always
+  // The pages dropdown of the form view: real pages only, no "All Pages" - the panes always
   // show a concrete page. The grid view uses the standard items set by setFilterPageActionItems.
   private updateSideBySidePagesAction(): void {
     const model = <TranslationSideBySide>this.model;
-    if (!model || !model.isSideBySideForms) return;
+    if (!model || !model.isSideBySideForm) return;
     const items: Array<IAction> = this.creator.survey.pages.map((page) => (<IAction>{
       id: page.name,
       title: this.getPageDisplayText(page)

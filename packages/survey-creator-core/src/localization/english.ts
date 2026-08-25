@@ -143,7 +143,7 @@ export var enStrings = {
     translationTargetLanguage: "Target language",
     translationProgress: "{0} of {1} strings translated",
     translationClearProgress: "Are you certain you wish to delete all translated strings for the selected language?",
-    translationSideBySideViewForms: "Form View",
+    translationSideBySideViewForm: "Form View",
     translationSideBySideViewGrid: "Grid View",
     translateStrings: "Translate strings",
     translationSurveyStrings: "Survey Strings",
