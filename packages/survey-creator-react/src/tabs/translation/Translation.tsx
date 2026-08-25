@@ -27,7 +27,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     if (this.model.isEmpty) {
       return <SurfacePlaceholder name={"translation"} placeholderTitleText={this.model.placeholderTitleText} placeholderDescriptionText={this.model.placeholderDescriptionText} />;
     }
-    if (this.model.isSideBySideForms) {
+    if (this.model.isSideBySideForm) {
       return this.renderSideBySideContent(this.model as TranslationSideBySide);
     }
     // The side-by-side grid view reuses the default strings-grid markup.
@@ -52,7 +52,7 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     // the whole surface.
     const targetSurvey = model.targetSurvey;
     return (
-      <div className={"st-side-by-side" + (!targetSurvey ? " st-side-by-side--no-target" : "")}>
+      <div className={model.sideBySideRootCss}>
         <div key={model.sourceSurvey?.elementIdPrefix} className="st-side-by-side__source"
           ref={(el) => { model.setSourceScrollElement(el); }}>
           <Survey model={model.sourceSurvey}></Survey>
