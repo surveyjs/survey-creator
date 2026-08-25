@@ -1905,7 +1905,7 @@ test("Change the default operator", () => {
   expect(panel.getQuestionByName("operator").value).toEqual("anyof");
   settings.logic.defaultOperator = "equal";
 });
-test("Add unwrapped value if checkbox valuePropertyName is set", () => {
+test("Do not add the '-unwrapped' postfix if checkbox valuePropertyName is set", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "checkbox", name: "q1", choices: ["apple", "banana", "orange"], valuePropertyName: "fruit" },
@@ -1919,7 +1919,7 @@ test("Add unwrapped value if checkbox valuePropertyName is set", () => {
   expect(panel.getQuestionByName("operator").value).toEqual("allof");
   const qName = <QuestionCheckboxModel>panel.getQuestionByName("questionName");
   expect(qName.choices).toHaveLength(1);
-  expect(qName.choices[0].value).toBe("q1-unwrapped");
+  expect(qName.choices[0].value).toBe("q1");
   expect(qName.choices[0].text).toBe("q1");
   const qValue = <QuestionCheckboxModel>panel.getQuestionByName("questionValue");
   expect(qValue.valuePropertyName).toBeFalsy();
@@ -1929,6 +1929,10 @@ test("Add unwrapped value if checkbox valuePropertyName is set", () => {
   qValue.renderedValue = ["banana"];
   editor.apply();
   expect(q2.visibleIf).toBe("{q1-unwrapped} allof ['banana']");
+  qName.value = "q1";
+  (<QuestionCheckboxModel>panel.getQuestionByName("questionValue")).renderedValue = ["apple"];
+  editor.apply();
+  expect(q2.visibleIf).toBe("{q1} allof ['apple']");
 });
 test("Condition editor and question value cssClasses", () => {
   ComponentCollection.Instance.add({ name: "comp1", questionJSON: { "type": "dropdown", name: "q", choices: [1, 2, 3] } });
@@ -2584,12 +2588,12 @@ test("Condition value for a choice question with showCommentArea in choices, Bug
   });
   const editor = new ConditionEditor(survey, survey.getQuestionByName("building"), new EmptySurveyCreatorOptions(), "visibleIf");
   const panel = editor.panel.panels[0];
-  panel.getQuestionByName("questionName").value = "equipment-unwrapped";
+  panel.getQuestionByName("questionName").value = "equipment";
   panel.getQuestionByName("operator").value = "anyof";
   const questionValue = <QuestionCheckboxModel>panel.getQuestionByName("questionValue");
   expect(questionValue.getType()).toEqual("checkbox");
   questionValue.selectItem(questionValue.choices[0], true);
   questionValue.selectItem(questionValue.choices[1], true);
   expect(JSON.stringify(questionValue.value)).toEqual(JSON.stringify(["Desktop computer", "Laptop"]));
-  expect(editor.text).toEqual("{equipment-unwrapped} anyof ['Desktop computer', 'Laptop']");
+  expect(editor.text).toEqual("{equipment} anyof ['Desktop computer', 'Laptop']");
 });
