@@ -135,7 +135,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   // tab, so the user's choice is kept here, next to the machine-translation source locale.
   private showAllElementStrings: boolean = false;
   private activateSideBySide(): void {
-    const model = new TranslationSideBySide(this.creator.survey, this.creator, this.creator.translationSideBySideView);
+    const model = new TranslationSideBySide(this.creator.survey, this.creator,
+      this.creator.translationSideBySideView, this.creator.translationSideBySideOrientation);
     this.model = model;
     this.wireModelCallbacks(model);
     model.showAllElementStrings = this.showAllElementStrings;

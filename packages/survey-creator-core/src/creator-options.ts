@@ -56,6 +56,11 @@ export interface ICreatorOptions {
   // translationMode is "sideBySide": "forms" - two design-mode survey instances side by side,
   // "grid" - a translation grid with a source and a target locale column.
   translationSideBySideView?: "forms" | "grid";
+  // How the two panes of the side-by-side Translation tab are arranged; applies only if
+  // translationMode is "sideBySide" and translationSideBySideView is "forms":
+  // "horizontal" - the source pane left of the target pane, "vertical" - the source pane
+  // above the target pane. Default value: "horizontal".
+  translationSideBySideOrientation?: "horizontal" | "vertical";
   /**
    * Specifies whether to display the [Themes](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#themes-tab) tab.
    *

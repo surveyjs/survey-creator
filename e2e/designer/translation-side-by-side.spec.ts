@@ -61,6 +61,36 @@ test.describe(title, () => {
     await expect(page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1")).toBeVisible();
   });
 
+  test("vertical orientation: the source pane above the target pane, each half the surface", async ({ page }) => {
+    await setJSON(page, json);
+    await setCreatorProp(page, "translationMode", "sideBySide");
+    await setCreatorProp(page, "translationSideBySideOrientation", "vertical");
+    await getTabbedMenuItemByText(page, "Translation").click();
+    await expect(page.locator(".st-side-by-side--vertical")).toBeVisible();
+    const contentBox = (await page.locator(".st-side-by-side").boundingBox())!;
+    const sourceBox = (await page.locator(".st-side-by-side__source").boundingBox())!;
+    const targetBox = (await page.locator(".st-side-by-side__target").boundingBox())!;
+    // Both panes are as wide as the surface and split its height.
+    expect(Math.abs(sourceBox.width - contentBox.width)).toBeLessThanOrEqual(2);
+    expect(Math.abs(targetBox.width - contentBox.width)).toBeLessThanOrEqual(2);
+    expect(Math.abs(sourceBox.height - targetBox.height)).toBeLessThanOrEqual(2);
+    // The source pane is the upper one; the target starts where it ends.
+    expect(Math.abs(targetBox.y - (sourceBox.y + sourceBox.height))).toBeLessThanOrEqual(2);
+    // Both panes work as they do in the horizontal arrangement.
+    await expect(page.locator(".st-side-by-side__source").getByText("Question 1")).toBeVisible();
+    await page.locator(".st-side-by-side__target .sv-string-editor").getByText("Frage 1").click();
+    await page.keyboard.press("Control+a");
+    await page.keyboard.type("Frage 1 neu");
+    await page.keyboard.press("Control+Enter");
+    expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1 neu");
+
+    // No target language: the source pane, alone, takes the whole height.
+    await page.locator(".svc-side-bar .spg-question[data-name=targetLocale]").getByRole("button", { name: "Clear" }).click();
+    await expect(page.locator(".st-side-by-side__target")).toHaveCount(0);
+    const fullBox = (await page.locator(".st-side-by-side__source").boundingBox())!;
+    expect(Math.abs(fullBox.height - contentBox.height)).toBeLessThanOrEqual(2);
+  });
+
   test("toolbar: pages dropdown holds real pages only; property grid dropdowns show default languages", async ({ page }) => {
     await openSideBySideTranslation(page);
     await expect(getBarItemByTitle(page, "All Pages")).toHaveCount(0);

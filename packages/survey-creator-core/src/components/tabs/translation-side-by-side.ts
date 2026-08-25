@@ -75,6 +75,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // the property grid survive the switch.
   @property({ defaultValue: "forms" }) view: "forms" | "grid";
 
+  // How the two panes of the forms view are arranged: "horizontal" - the source pane left of
+  // the target pane, "vertical" - the source pane above the target pane. Follows the creator's
+  // translationSideBySideOrientation option; the grid view ignores it.
+  @property({ defaultValue: "horizontal" }) orientation: "horizontal" | "vertical";
+
   // The bridge between the real survey strings and their copies in the two panes; the target
   // copy is the editable one.
   private copiesMap = new TranslationCopiesMap();
@@ -88,10 +93,12 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private choicesCollapsedState: { [questionName: string]: boolean } = {};
   public onChoicesCollapsedChanged = new EventBase<Base, any>();
 
-  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms") {
+  constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "forms" | "grid" = "forms",
+    orientation: "horizontal" | "vertical" = "horizontal") {
     super(survey, options, true);
     // Directly: applyView is for later view switches, the plugin resets the fresh model itself.
     this.setPropertyValueDirectly("view", view);
+    this.orientation = orientation;
     this.useSourceTargetColumns = this.isSideBySideGrid;
     // The forms view maps every localizable string of the survey copies; the grid view keeps
     // the default ("used strings only") and lets the user switch via the toolbar dropdown.
@@ -101,6 +108,14 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   }
   public get isSideBySide(): boolean {
     return true;
+  }
+  // The class of the element the two panes live in: their arrangement and, when no target
+  // language is selected, the source-pane-only layout.
+  public get sideBySideRootCss(): string {
+    let css = "st-side-by-side";
+    if (this.orientation === "vertical") css += " st-side-by-side--vertical";
+    if (!this.targetSurvey) css += " st-side-by-side--no-target";
+    return css;
   }
   // In the grid view the page filtering (filteredPage) and the all/used strings filter work
   // as in the standard mode.

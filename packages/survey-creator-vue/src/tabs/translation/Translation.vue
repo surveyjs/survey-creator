@@ -11,8 +11,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!model.isEmpty && sideBySideModel" class="st-side-by-side"
-      :class="sideBySideModel.targetSurvey ? '' : 'st-side-by-side--no-target'">
+    <div v-if="!model.isEmpty && sideBySideModel" :class="sideBySideModel.sideBySideRootCss">
       <div class="st-side-by-side__source" :key="sideBySideModel.sourceSurvey?.elementIdPrefix" :ref="setSourceScrollElement">
         <SurveyComponent :model="sideBySideModel.sourceSurvey"></SurveyComponent>
       </div>

@@ -2105,3 +2105,23 @@ test("progress link: the clear button drops the language strings after a confirm
     surveySettings.confirmActionAsync = originalCallback;
   }
 });
+
+test("orientation: the panes are arranged horizontally by default and vertically on demand", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  expect(model.orientation).toBe("horizontal");
+  expect(model.sideBySideRootCss).toBe("st-side-by-side");
+
+  const verticalCreator = new CreatorTester({
+    showTranslationTab: true, translationMode: "sideBySide", translationSideBySideOrientation: "vertical"
+  });
+  verticalCreator.JSON = JSON.parse(JSON.stringify(sideBySideJSON));
+  verticalCreator.activeTab = "translation";
+  const verticalModel = getModel(verticalCreator);
+  expect(verticalModel.orientation).toBe("vertical");
+  expect(verticalModel.sideBySideRootCss).toBe("st-side-by-side st-side-by-side--vertical");
+  // No target language - the source pane takes the whole surface in both arrangements.
+  verticalModel.targetLocale = "";
+  expect(verticalModel.targetSurvey).toBeFalsy();
+  expect(verticalModel.sideBySideRootCss).toBe("st-side-by-side st-side-by-side--vertical st-side-by-side--no-target");
+});

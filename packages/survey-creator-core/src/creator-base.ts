@@ -213,6 +213,11 @@ export class SurveyCreatorModel extends Base
   // "grid" - a translation grid with a source and a target locale column. Users can
   // switch the view with a button group in the Translation property grid, which updates this property.
   public translationSideBySideView: "forms" | "grid" = "forms";
+  // How the two panes of the side-by-side Translation tab are arranged; applies only if
+  // translationMode is "sideBySide" and translationSideBySideView is "forms":
+  // "horizontal" - the source pane left of the target pane, "vertical" - the source pane
+  // above the target pane. Default value: "horizontal".
+  public translationSideBySideOrientation: "horizontal" | "vertical" = "horizontal";
   /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *
