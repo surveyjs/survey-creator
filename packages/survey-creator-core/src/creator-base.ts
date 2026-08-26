@@ -3376,11 +3376,13 @@ export class SurveyCreatorModel extends Base
       panel.elements.forEach(el => this.setNewNamesCore(el));
     } else {
       this.newQuestions.push(element);
-      const els = Array.isArray(element["templateElements"]) ? element["templateElements"] :
-        (Array.isArray(element["detailElements"]) ? element["detailElements"] : undefined);
-      if (els) {
-        els.forEach(el => this.setNewNamesCore(el));
-      }
+      //Nested elements: a dynamic panel template, a matrix detail panel or questions inside choices.
+      //Columns and multiple text items are filtered out - they are not questions/panels and keep their names.
+      SurveyHelper.getElements(element).forEach(el => {
+        if (SurveyHelper.isPanelOrQuestion(el)) {
+          this.setNewNamesCore(el);
+        }
+      });
     }
   }
   public createNewElement(json: any): IElement {
