@@ -15,13 +15,13 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 
 ## Link Resources
 
-Survey Creator consists of two parts: `survey-creator-core` (platform-independent code) and `survey-creator-js` (view models). Each part includes style sheets and scripts. Insert links to these resources within the `<head>` tag on your HTML page as shown below. Survey Creator also requires [SurveyJS Form Library resources](/form-library/documentation/get-started-html-css-javascript#link-surveyjs-resources) and a script with predefined theme configurations (if you are going to use [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor)). Link them _before_ the Survey Creator resources:
+Survey Creator consists of two parts: `survey-creator-core` (platform-independent code) and `survey-creator-js` (view models). Each part includes stylesheets and scripts. Insert links to these resources within the `<head>` tag on your HTML page as shown below. Survey Creator also requires [SurveyJS Form Library resources](/form-library/documentation/get-started-html-css-javascript#link-surveyjs-resources) and a script with [predefined theme configurations](/documentation/themes-and-custom-styles) (if you are going to use [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor) or [runtime UI customization](/survey-creator/documentation/runtime-theme-customization)). Link them _before_ the Survey Creator resources:
 
 ```html
 <head>
     <!-- ... -->
     <!-- SurveyJS Form Library resources -->
-    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
 
@@ -29,7 +29,7 @@ Survey Creator consists of two parts: `survey-creator-core` (platform-independen
     <script src="https://unpkg.com/survey-core/themes/index.min.js"></script>
     
     <!-- Survey Creator resources -->
-    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
     <script src="https://unpkg.com/survey-creator-js/survey-creator-js.min.js"></script>
     <!-- ... -->
@@ -68,15 +68,15 @@ const creator = new SurveyCreator.SurveyCreator(creatorOptions);
 <head>
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
-    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
     
-    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
     <script src="https://unpkg.com/survey-creator-js/survey-creator-js.min.js"></script>
 
-    <script type="text/javascript" src="index.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
 
@@ -129,15 +129,15 @@ $(function() {
 <head>
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
-    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
     
-    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
     <script src="https://unpkg.com/survey-creator-js/survey-creator-js.min.js"></script>
 
-    <script type="text/javascript" src="index.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
     <div id="surveyCreator" style="height: 100vh;"></div>
@@ -268,15 +268,15 @@ creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defa
 <head>
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
-    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
     
-    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
     <script src="https://unpkg.com/survey-creator-js/survey-creator-js.min.js"></script>
 
-    <script type="text/javascript" src="index.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
     <div id="surveyCreator" style="height: 100vh;"></div>
@@ -384,15 +384,15 @@ creator.onUploadFile.add((_, options) => {
 <head>
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
-    <link  href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
     <script src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
     
-    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">
+    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
     <script src="https://unpkg.com/survey-creator-js/survey-creator-js.min.js"></script>
 
-    <script type="text/javascript" src="index.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
     <div id="surveyCreator" style="height: 100vh;"></div>

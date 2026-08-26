@@ -26,13 +26,13 @@ If you are looking for a quick-start application that includes all SurveyJS comp
 Survey Creator for Angular consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular) (rendering code). Run the following command to install `survey-creator-angular`. The `survey-creator-core` package will be installed automatically as a dependency.
 
 ```cmd
-npm install survey-creator-angular --save
+npm install survey-creator-angular
 ```
 
 > SurveyJS for Angular requires Angular v12.0.0 or newer and depends on the `@angular/cdk` package. If your project does not include it yet, run the following command:
 >
 > ```cmd
-> npm install @angular/cdk@^12.0.0 --save
+> npm install @angular/cdk@^12.0.0
 > ```
 >
 > Earlier Angular versions are supported by the [`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout) package. It depends on Knockout and is now obsolete. However, you can use it in your Angular v8&ndash;v11 projects. Refer to the following examples on GitHub for more information:
@@ -42,7 +42,7 @@ npm install survey-creator-angular --save
 
 ## Configure Styles
 
-Open the `angular.json` file and reference Survey Creator and SurveyJS Form Library style sheets:
+Open the `angular.json` file and reference Survey Creator and SurveyJS Form Library stylesheets:
 
 ```js
 {
@@ -59,8 +59,8 @@ Open the `angular.json` file and reference Survey Creator and SurveyJS Form Libr
             // ...
             "styles": [
               "src/styles.css",
-              "node_modules/survey-core/survey-core.min.css",
-              "node_modules/survey-creator-core/survey-creator-core.min.css"
+              "node_modules/survey-core/survey-core.css",
+              "node_modules/survey-creator-core/survey-creator-core.css"
             ],
             // ...
           }
@@ -71,13 +71,21 @@ Open the `angular.json` file and reference Survey Creator and SurveyJS Form Libr
 }
 ```
 
-When [using standalone components](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular-standalone-components), import the style sheets directly in the component file:
+When [using standalone components](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular-standalone-components), import the stylesheets directly in the component file:
 
 ```js
 // survey-creator.component.ts
-import "survey-core/survey-core.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
 ```
+
+This configuration applies the Default Light theme. Survey Creator also supports multiple predefined UI themes and the ability to create custom themes. For more information, refer to the following help topic:
+
+[Themes](/documentation/themes-and-custom-styles (linkStyle))
+
+In addition, Survey Creator allows users to switch between UI themes and customize them at runtime. To enable runtime UI customization, refer to the following help topic:
+
+[Runtime UI Theming](https://surveyjs.io/survey-creator/documentation/runtime-theme-customization (linkStyle))
 
 ## Configure Survey Creator
 
@@ -685,7 +693,7 @@ export class AppModule { }
 The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Install the <a href="https://www.npmjs.com/package/ace-builds" target="_blank">`ace-builds`</a> package to add Ace to your project:
 
 ```sh
-npm install ace-builds --save
+npm install ace-builds
 ```
 
 Import Ace and required extensions in an Angular component that renders Survey Creator. For instance, the following example imports the extensions that enable the Find/Replace dialog in Ace and add support for the dark theme:

@@ -15,7 +15,13 @@ description: SurveyJS Form Builder for Vue is an open-source client-side compone
 
 [View Full Code](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue3 (linkStyle))
 
-If you are looking for a quick-start application that includes all SurveyJS components, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_vue3_quickstart" target="_blank">SurveyJS + Vue 3 Quickstart Template</a>.
+If you are looking for a quick-start application that includes all SurveyJS components, refer to the following GitHub repositories:
+
+- <a href="https://github.com/surveyjs/surveyjs_vue3_quickstart" target="_blank">SurveyJS + Vue 3</a>
+- <a href="https://github.com/surveyjs/surveyjs-nuxtjs" target="_blank">SurveyJS + Nuxt</a>
+- <a href="https://github.com/surveyjs/surveyjs-vike" target="_blank">SurveyJS + Vike</a>
+- <a href="https://github.com/surveyjs/surveyjs-astro" target="_blank">SurveyJS + Astro</a>
+- <a href="https://github.com/surveyjs/surveyjs-quasar" target="_blank">SurveyJS + Quasar</a>
 
 > In this guide, the terms "Form Builder" and "Survey Creator" are used interchangeably and both refer to the SurveyJS form building component for Vue.js.
 
@@ -26,12 +32,12 @@ If you are looking for a quick-start application that includes all SurveyJS comp
 Survey Creator for Vue 3 consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-vue`](https://www.npmjs.com/package/survey-creator-vue) (rendering code). Run the following command to install `survey-creator-vue`. The `survey-creator-core` package will be installed automatically as a dependency.
 
 ```cmd
-npm install survey-creator-vue --save
+npm install survey-creator-vue
 ```
 
 ## Configure Styles
 
-Import Survey Creator and SurveyJS Form Library style sheets in the Vue 3 component that will render Survey Creator:
+Import Survey Creator and SurveyJS Form Library stylesheets in the Vue 3 component that will render Survey Creator:
 
 ```html
 <script setup lang="ts">
@@ -43,6 +49,14 @@ import "survey-creator-core/survey-creator-core.css";
   <!-- ... -->
 </template>
 ```
+
+This configuration applies the Default Light theme. Survey Creator also supports multiple predefined UI themes and the ability to create custom themes. For more information, refer to the following help topic:
+
+[Themes](/documentation/themes-and-custom-styles (linkStyle))
+
+In addition, Survey Creator allows users to switch between UI themes and customize them at runtime. To enable runtime UI customization, refer to the following help topic:
+
+[Runtime UI Theming](https://surveyjs.io/survey-creator/documentation/runtime-theme-customization (linkStyle))
 
 ## Configure Survey Creator
 
@@ -486,7 +500,7 @@ creator.saveSurveyFunc = (saveNo: number, callback: Function) => {
 The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Install the <a href="https://www.npmjs.com/package/ace-builds" target="_blank">`ace-builds`</a> package to add Ace to your project:
 
 ```sh
-npm install ace-builds --save
+npm install ace-builds
 ```
 
 Import Ace and required extensions in a Vue component that renders Survey Creator. For instance, the following code imports the extensions that enable the Find/Replace dialog in Ace and add support for the dark theme:
