@@ -4722,7 +4722,7 @@ test("Panel and inner fields contain original names when a panel which is locate
   const q5 = panel4.elements[0];
   expect(q5.name).toEqual("question2");
 });
-test("Questions nested into choices should get new names on copying a question, Bug#11758", (): any => {
+test("Questions nested into choices should get new names on copying a question, Bug#7963", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
