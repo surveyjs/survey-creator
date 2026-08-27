@@ -108,7 +108,7 @@ npm install survey-creator-js
 - Embed the form builder in React, Angular, Vue, or plain JavaScript applications.
 - Run the editor entirely in the browser.
 - Connect it to any server, database, or authentication system.
-- [Store form definitions and submitted data in your own backend](https://surveyjs.io/survey-creator/documentation/integration-with-backend).
+- [Store form definitions and submitted data in your own backend](https://surveyjs.io/documentation/backend-integration).
 - Add the editor to single-tenant or multi-tenant SaaS applications.
 
 ### Visual Form Editing
@@ -150,8 +150,8 @@ npm install survey-creator-js
 - [Survey Creator](https://surveyjs.io/survey-creator/documentation/overview) - A self-hosted drag-and-drop form builder that automatically generates JSON definition (schemas) of your forms in real time. Try out a [free full-featured demo](https://surveyjs.io/create-free-survey) to evaluate its capabilities.
 -  [Dashboard](https://surveyjs.io/dashboard/documentation/overview) - Simplifies survey data visualization and analysis with interactive and customizable charts and tables.
 -  [PDF Generator](https://surveyjs.io/pdf-generator/documentation/overview) - A commercially licensed JavaScript library that renders SurveyJS surveys and forms as PDF files in a browser. With PDF Generator you can save an unlimited number of custom-built forms to PDF (both editable and read-only).
--  [AI Form Response Extractor](https://surveyjs.io/documentation/combine-paper-and-online-survey-form-data) - An MIT-licensed library that extracts responses from paper forms, PDFs, and images into a SurveyJS schema (`ai-form-response-extractor`).
+-  [AI Form Response Extractor](https://surveyjs.io/documentation/combine-paper-and-online-survey-form-data) - A free and open-source MIT-licensed JavaScript library that extracts responses from paper forms, PDFs, and images, maps them to the SurveyJS schema, and produces a unified response object that can be stored and processed alongside online submissions. (`ai-form-response-extractor`).
 
 ## Licensing
 
-You can install Survey Creator and evaluate its full functionality right away - no license is needed to prototype, test, or build a proof of concept. Production use requires a [commercial license](https://surveyjs.io/licensing) for each software developer who works with the SurveyJS APIs or implements the integration, and activating a license key removes the alert banner. [SurveyJS Form Library](https://github.com/surveyjs/survey-library), which renders the forms Survey Creator produces, is available under the MIT license and runs free of charge.
+SurveyJS Survey Creator requires a [commercial license](https://surveyjs.io/licensing) for each software developer who works with the SurveyJS APIs or implements the integration. You can integrate the Survey Creator component to build a proof of concept and evaluate its full functionality without a license. A developer license is only required for production use. [SurveyJS Form Library](https://github.com/surveyjs/survey-library), which renders forms created with Survey Creator, is available under the MIT license.

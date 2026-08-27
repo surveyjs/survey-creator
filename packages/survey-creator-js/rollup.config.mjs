@@ -149,6 +149,7 @@ export default async (options) => {
         "react-dom": "survey-js-ui",
         "survey-react-ui": "survey-js-ui",
       },
+      useEsbuild: true,
       noEmitOnError: !options.watch,
     })
   ];

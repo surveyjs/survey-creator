@@ -14,7 +14,7 @@ export class TranslationTabComponent extends BaseAngular<TranslationBase> {
     return this.model;
   }
   public get sideBySideModel(): TranslationSideBySide | undefined {
-    return this.model.isSideBySideForms ? <TranslationSideBySide>this.model : undefined;
+    return this.model.isSideBySideForm ? <TranslationSideBySide>this.model : undefined;
   }
   // The setters also fire with undefined when *ngIf removes the panes, which detaches the listeners.
   @ViewChild("sourceScrollContainer") set sourceScrollContainer(ref: ElementRef<HTMLElement> | undefined) {

@@ -31,10 +31,6 @@
       ]
     },
     {
-      "Name": "survey-creator-interface-themes",
-      "Title": "Themes & Styles"
-    },
-    {
       "Name": "property-grid-customization",
       "Title": "Property Grid Customization"
     },
@@ -47,8 +43,16 @@
       "Title": "Survey Customization"
     },
     {
+      "Name": "ui-preset-editor",
+      "Title": "UI Preset Editor"
+    },
+    {
       "Name": "theme-editor",
       "Title": "Theme Editor"
+    },
+    {
+      "Name": "runtime-theme-customization",
+      "Title": "Runtime UI Theming"
     },
     {
       "Name": "survey-localization-translate-surveys-to-different-languages",
@@ -90,6 +94,22 @@
         {
           "Name": "themetabplugin",
           "Title": "ThemeTabPlugin"
+        },
+        {
+          "Name": "uipreseteditor",
+          "Title": "UIPresetEditor"
+        },
+        {
+          "Name": "uipreset",
+          "Title": "UIPreset"
+        },
+        {
+          "Name": "ipreset",
+          "Title": "IPreset"
+        },
+        {
+          "Name": "ipresetlistitem",
+          "Title": "IPresetListItem"
         }
       ]
     }

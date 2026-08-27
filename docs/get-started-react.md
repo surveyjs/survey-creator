@@ -17,8 +17,8 @@ description: SurveyJS Form Builder for React is an open-source client-side compo
 
 If you are looking for a quick-start application that includes all SurveyJS components, refer to the following GitHub repositories:
 
-- <a href="https://github.com/surveyjs/surveyjs-nextjs" target="_blank">SurveyJS + Next.js Quickstart Template</a>
-- <a href="https://github.com/surveyjs/surveyjs-remix" target="_blank">SurveyJS + Remix Quickstart Template</a>
+- <a href="https://github.com/surveyjs/surveyjs-nextjs" target="_blank">SurveyJS + Next.js</a>
+- <a href="https://github.com/surveyjs/surveyjs-remix" target="_blank">SurveyJS + Remix</a>
 
 > In this guide, the terms "Form Builder" and "Survey Creator" are used interchangeably and both refer to the SurveyJS form building component for React.
 
@@ -29,12 +29,12 @@ If you are looking for a quick-start application that includes all SurveyJS comp
 Survey Creator for React consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-react`](https://www.npmjs.com/package/survey-creator-react) (rendering code). Run the following command to install `survey-creator-react`. The `survey-creator-core` package will be installed automatically as a dependency.
 
 ```cmd
-npm install survey-creator-react --save
+npm install survey-creator-react
 ```
 
 ## Configure Styles
 
-Create a React component that will render Survey Creator and import Survey Creator and SurveyJS Form Library style sheets as shown below:
+Create a React component that will render Survey Creator and import Survey Creator and SurveyJS Form Library stylesheets as shown below:
 
 ```js
 // components/SurveyCreator.tsx
@@ -42,9 +42,13 @@ import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 ```
 
-Survey Creator allows users to customize its interface at runtime using UI themes. Four themes are available out-of-the-box: Light, Dark, Contrast, and Survey Creator 2020. The configuration above applies the Light theme. If you want to apply a different predefined theme or create a custom theme, refer to the following help topic for detailed instructions:
+This configuration applies the Default Light theme. Survey Creator also supports multiple predefined UI themes and the ability to create custom themes. For more information, refer to the following help topic:
 
-[Themes & Styles](https://surveyjs.io/survey-creator/documentation/survey-creator-interface-themes (linkStyle))
+[Themes](/documentation/themes-and-custom-styles (linkStyle))
+
+In addition, Survey Creator allows users to switch between UI themes and customize them at runtime. To enable runtime UI customization, refer to the following help topic:
+
+[Runtime UI Theming](https://surveyjs.io/survey-creator/documentation/runtime-theme-customization (linkStyle))
 
 ## Configure Survey Creator
 
@@ -122,7 +126,7 @@ export default function SurveyCreatorWidget(props: { json?: Object, options?: IC
 
 To render Survey Creator, import the `SurveyCreatorComponent`, add it to the template, and pass the instance you created in the previous step to the component's `creator` attribute, as shown below.
 
-SurveyJS components do not support server-side rendering (SSR). If you are using [Next.js](https://nextjs.org) or another framework that has adopted React Server Components, you need to explicitly mark the React component that renders a SurveyJS component as client code using the ['use client'](https://react.dev/reference/react/use-client) directive.
+> SurveyJS components are client-side components. Explicitly mark the React component that renders a SurveyJS component as client code using the ['use client'](https://react.dev/reference/react/use-client) directive.
 
 ```js
 // components/SurveyCreator.tsx
@@ -599,7 +603,7 @@ export default function SurveyCreator() {
 The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Install the <a href="https://www.npmjs.com/package/ace-builds" target="_blank">`ace-builds`</a> package to add Ace to your project:
 
 ```sh
-npm install ace-builds --save
+npm install ace-builds
 ```
 
 Import Ace and required extensions in a React component that renders Survey Creator. For instance, the following code imports the extensions that enable the Find/Replace dialog in Ace and add support for the dark theme:

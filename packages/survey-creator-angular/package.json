@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-angular",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "Embeddable SurveyJS drag-and-drop form builder for JSON-based forms in Angular. Create dynamic surveys, polls, quizzes, and other forms, configure conditional logic and validation, and customize the editor UI.",
   "author": "DevSoft Baltic OU <info@devsoftbaltic.com>",
   "homepage": "https://surveyjs.io/",

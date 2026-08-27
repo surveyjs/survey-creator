@@ -1,39 +1,114 @@
 ---
-title: Introduction to the Survey Creator Docs | Javascript Library
-description: Survey Creator is a powerful and extensible JS component for creating a secure and self-hosted form management system that allows easy drag-and-drop form creation.
+title: Survey Creator Overview | Embeddable JavaScript Form Builder
+description: Learn how to embed Survey Creator in React, Angular, Vue, or plain JavaScript applications, generate JSON form definitions, connect your own backend, and customize the form builder UI.
 ---
-# Survey Creator / Form Builder Overview
+# Survey Creator Overview
 
-Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Form Library](/Documentation/Library) to display a survey or form in your application.
+Survey Creator is an embeddable drag-and-drop form builder for React, Angular, Vue, and plain JavaScript applications. It runs in the browser and generates SurveyJS JSON form definitions that describe form content, layout, validation, logic, navigation, and appearance. You can connect it to your own backend, database, authentication system, and deployment environment.
 
-<img src="images/survey-creator-overview.png" alt="Survey Creator / Form Builder by SurveyJS" width="1544" height="826">
+<img src="images/survey-creator-overview.png" alt="Survey Creator embedded form builder UI" width="1544" height="860">
 
-[Try Survey Creator / Form Builder](https://surveyjs.io/create-survey (linkStyle))
+## How Survey Creator Works
 
-## Features
+The typical workflow is as follows:
 
-- Native support for React, Angular, Vue.js, and Vanilla JavaScript
-- Integration of the Vanilla JS version into jQuery applications
-- [CSS-based Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor)
+1. Create a new SurveyJS JSON form definition or load an existing one.
+2. Edit the form in Survey Creator.
+3. Save the updated definition to your backend or database.
+4. Render the form with [SurveyJS Form Library](/form-library/documentation/overview).
+5. Store submitted responses in your own infrastructure.
+
+Survey Creator can be adapted to different users and workflows. You can control which question types appear in the Toolbox, which settings are available in the Property Grid, which tabs and actions are visible, and which languages users can select.
+
+Use the [UI Preset Editor](/survey-creator/documentation/ui-preset-editor) to configure these options visually and export them as a reusable JSON preset. To customize the appearance, you can apply a built-in theme, create a custom theme, or use [theme adapters for Bootstrap, Material UI, and shadcn/ui](/documentation/theme-adapters) to align Survey Creator with the visual language of the host application.
+
+[Try Survey Creator](/create-survey (linkStyle))
+
+## Key Features
+
+### Visual Form Editing
+
+- Drag-and-drop form editing
+- Multi-page forms and form wizards
+- Conditional visibility, branching, validation, and calculated values
+- Dedicated Logic and JSON Editor tabs
+- Form preview before publication
+
+### Framework and Backend Integration
+
+- Native packages for React, Angular, Vue, and plain JavaScript
+- Framework-independent `survey-creator-core` package
 - TypeScript support
-- [Community-supported UI localization to 25+ languages](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
-- [Integration with any backend framework](https://surveyjs.io/Documentation/Survey-Creator?id=integration-with-backend) (examples for PHP, NodeJS, and ASP.NET included)
-- Survey JSON schemas can be stored in any database
-- [Third-party component integration](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
+- Integration with any backend, API, database, or authentication system
+- [Backend examples for PHP, Node.js, and ASP.NET Core](/documentation/backend-integration#examples)
 
-## Get Started
+### JSON-Based Form Definitions
 
-- [Angular](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-angular)
-- [Vue](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue)
-- [React](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-react)
-- [HTML/CSS/JavaScript](/survey-creator/documentation/get-started-html-css-javascript)
+- Generate a JSON form definition as users edit a form
+- Load existing definitions back into the editor
+- Save, version, copy, and reuse form definitions
+- Render completed forms with SurveyJS Form Library
+- Use the same form definition across web forms, PDF generation, and analytics workflows
 
-We also include over [40 demo examples](https://surveyjs.io/Examples/Survey-Creator) that allow you to edit and copy code.
+### UI and Appearance Customization
 
-## What's New
+- Configure the Toolbox, Property Grid, tabs, actions, languages, and editor behavior
+- Use the [UI Preset Editor](/survey-creator/documentation/ui-preset-editor) to create reusable JSON UI presets
+- Customize form themes with the [Theme Editor](/survey-creator/documentation/theme-editor)
+- Use [theme adapters](/themes/theme-adapters) for Bootstrap, Material UI, and shadcn/ui
+- [Add custom question types and reusable components](/survey-creator/documentation/customize-question-types)
+- Configure different UI presets for roles, tenants, or subscription plans
 
-Visit our [What's New page](https://surveyjs.io/WhatsNew) for information on new features, recent bug fixes, and latest additions. If you want to migrate from the old version of Survey Creator, refer to the [Migration Guide](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2).
+### Localization
+
+- [Localize the Survey Creator UI](/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages)
+- Restrict the languages available to form authors
+- Support right-to-left languages
+- Create and manage multilingual forms
+
+Explore [interactive demos](/survey-creator/examples/) that include editable source code for common Survey Creator configurations and customization scenarios.
+
+## Installation
+
+Choose the package for your framework to get started:
+
+### React
+
+```
+npm install survey-creator-react
+```
+[Get Started with Survey Creator for React](/survey-creator/documentation/get-started-react (linkStyle))
+
+### Angular
+
+```
+npm install survey-creator-angular
+```
+[Get Started with Survey Creator for Angular](/survey-creator/documentation/get-started-angular (linkStyle))
+
+### Vue.js
+
+```
+npm install survey-creator-vue
+```
+[Get Started with Survey Creator for Vue.js](/survey-creator/documentation/get-started-vue (linkStyle))
+
+### Plain JavaScript
+
+```
+npm install survey-creator-js
+```
+[Get Started with Survey Creator for Plain JavaScript](/survey-creator/documentation/get-started-html-css-javascript (linkStyle))
+
+## Releases and Migration
+
+Visit our [Major Updates](/stay-updated/major-updates/2025-2026) page and [Release Notes](/stay-updated/release-notes) for recent features, fixes, and package updates. 
+
+For major-version upgrades, refer to the relevant migration guide:
+
+- [Migrate from Survey Creator v1 to v2](/stay-updated/release-notes/v2.0.0#how-to-upgrade-to-surveyjs-v2.0)
+- [Migrate from Survey Creator v2 to v3](/stay-updated/release-notes/v3.0.0#how-to-upgrade-to-surveyjs-v3.0)
 
 ## Licensing
 
-Survey Creator is **not available for free commercial usage**. If you want to integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/Licenses#SurveyCreator). However, you can use [online Survey Creator](https://surveyjs.io/create-survey) to produce JSON survey configurations and use them with SurveyJS in your application free of charge.
+SurveyJS Survey Creator requires a [commercial license](/licensing) for each software developer who works with the SurveyJS APIs or implements the integration. [SurveyJS Form Library](https://github.com/surveyjs/survey-library), which renders forms created with Survey Creator, is available under the MIT license.

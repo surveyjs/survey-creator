@@ -688,7 +688,7 @@ class TranslationUsedStringsOwner implements ITranslationLocales {
   }
 }
 
-// The shared core of every translation model: the tab in both modes (all-languages and
+// The shared core of every translation model: the tab in both modes (multiple-languages and
 // side-by-side), the machine-translation dialog and the element strings dialog. It owns the
 // translation tree, the strings grid surveys, the CSV import/export and the write path to the
 // real survey. It knows nothing about the property grid - each mode builds its own settings
@@ -754,7 +754,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
   }
   // True when the side-by-side mode shows its two rendered survey panes (the UI components'
   // single switch between the panes and the strings-grid markup).
-  public get isSideBySideForms(): boolean {
+  public get isSideBySideForm(): boolean {
     return this.isSideBySide && !this.isSideBySideGrid;
   }
   @propertyArray() locales: Array<string>;
@@ -833,7 +833,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     this.reset();
   }
   // The property grid content of the tab. The base model has none - each mode builds its own
-  // settings survey (the all-languages locales matrix, the side-by-side language dropdowns).
+  // settings survey (the multiple-languages locales matrix, the side-by-side language dropdowns).
   protected createSettingsSurvey(): SurveyModel {
     return undefined;
   }
@@ -1003,7 +1003,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
   }
   // Whether the change brought in a locale the model does not track yet, forcing a full rebuild.
   // The base model derives its locales from the survey strings on every reset, so nothing is new
-  // by definition; the all-languages mode checks against its visible-locales list.
+  // by definition; the multiple-languages mode checks against its visible-locales list.
   protected hasNewLocales(locStr: ILocalizableString): boolean {
     return false;
   }
@@ -1129,7 +1129,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     });
   }
   // The locale columns of the strings grid when the source/target pair is not used. The
-  // all-languages mode shows its ordered selected locales (or the single edit locale in the
+  // multiple-languages mode shows its ordered selected locales (or the single edit locale in the
   // machine-translation dialog).
   protected getColumnLocales(): Array<string> {
     return [""];
@@ -1254,7 +1254,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     this.resetStringsSurvey();
   }
   // Called between the tree rebuild and the strings-grid rebuild, so a mode can refresh its
-  // locale bookkeeping (the all-languages settings survey) before the grid columns are built.
+  // locale bookkeeping (the multiple-languages settings survey) before the grid columns are built.
   protected updateLocalesOnReset(prevVisibleLocales: Array<string>): void { }
   private updateReadOnly(): void {
     if (this.settingsSurvey) {
@@ -1285,7 +1285,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
   public hasLocale(locale: string): boolean {
     return this.locales.indexOf(locale) > -1;
   }
-  // The visible-locales bookkeeping belongs to the all-languages mode (its locales matrix);
+  // The visible-locales bookkeeping belongs to the multiple-languages mode (its locales matrix);
   // the base model derives everything from the survey strings on reset.
   public resetLocales(): void { }
   public getVisibleLocales(): Array<string> {
@@ -1306,7 +1306,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     return getLocString("ed.translationsPlaceholderDescription");
   }
   // The locale columns of the CSV export: every locale with a stored string, the default one
-  // first, filtered by localeInitialVisibleCallback. The all-languages mode overrides this with
+  // first, filtered by localeInitialVisibleCallback. The multiple-languages mode overrides this with
   // its ordered visible-locales list.
   protected getExportLocales(): Array<string> {
     const res: Array<string> = [""];

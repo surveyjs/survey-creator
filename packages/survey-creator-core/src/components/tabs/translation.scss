@@ -281,6 +281,31 @@ td.st-table__cell:first-of-type {
   }
 }
 
+// The vertical arrangement: the source pane above the target pane, each half the surface high.
+.st-side-by-side--vertical {
+  flex-direction: column;
+
+  .st-side-by-side__source,
+  .st-side-by-side__target {
+    flex: 1 1 50%;
+    width: 100%;
+    height: 50%;
+  }
+
+  .st-side-by-side__source {
+    border-right: none;
+    border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  }
+
+  &.st-side-by-side--no-target {
+    .st-side-by-side__source {
+      flex: 1 1 100%;
+      height: 100%;
+      border-bottom: none;
+    }
+  }
+}
+
 // The survey title row of the target pane: the translate action sits at the pane's right
 // edge, on the first title line - like the page/question translate actions - instead of
 // right after the title text, where a growing title would run into it. The action bar takes

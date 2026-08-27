@@ -204,15 +204,20 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
   // Specifies how the Translation tab edits translations:
-  // "allLanguages" - a grid of translatable strings with a column per language,
+  // "multipleLanguages" - a grid of translatable strings with a column per selected language,
   // "sideBySide" - two design-mode instances of the edited survey rendered side by side:
   // a read-only source language on the left and an inline-editable target language on the right.
-  public translationMode: "allLanguages" | "sideBySide" = "allLanguages";
+  public translationMode: "multipleLanguages" | "sideBySide" = "multipleLanguages";
   // How the side-by-side Translation tab renders its editing surface; applies only if
-  // translationMode is "sideBySide": "forms" - two design-mode survey instances side by side,
+  // translationMode is "sideBySide": "form" - two design-mode survey instances side by side,
   // "grid" - a translation grid with a source and a target locale column. Users can
   // switch the view with a button group in the Translation property grid, which updates this property.
-  public translationSideBySideView: "forms" | "grid" = "forms";
+  public translationSideBySideView: "form" | "grid" = "form";
+  // How the two panes of the form view are arranged; applies only if translationMode is
+  // "sideBySide" and translationSideBySideView is "form":
+  // "horizontal" - the source pane left of the target pane, "vertical" - the source pane
+  // above the target pane. Default value: "horizontal".
+  public translationFormViewOrientation: "horizontal" | "vertical" = "horizontal";
   /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *
@@ -3371,11 +3376,13 @@ export class SurveyCreatorModel extends Base
       panel.elements.forEach(el => this.setNewNamesCore(el));
     } else {
       this.newQuestions.push(element);
-      const els = Array.isArray(element["templateElements"]) ? element["templateElements"] :
-        (Array.isArray(element["detailElements"]) ? element["detailElements"] : undefined);
-      if (els) {
-        els.forEach(el => this.setNewNamesCore(el));
-      }
+      //Nested elements: a dynamic panel template, a matrix detail panel or questions inside choices.
+      //Columns and multiple text items are filtered out - they are not questions/panels and keep their names.
+      SurveyHelper.getElements(element).forEach(el => {
+        if (SurveyHelper.isPanelOrQuestion(el)) {
+          this.setNewNamesCore(el);
+        }
+      });
     }
   }
   public createNewElement(json: any): IElement {
@@ -4981,7 +4988,7 @@ export class SurveyCreatorModel extends Base
   expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
-  // Set by the translation side-by-side forms view to learn which editable string got the focus;
+  // Set by the translation side-by-side form view to learn which editable string got the focus;
   // the inline string editors call it on every focus while it is assigned.
   onStringEditorFocusedCallback: (locStr: LocalizableString) => void;
 
