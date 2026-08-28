@@ -9,6 +9,7 @@ module.exports = {
         "src/**/*.ts"
       ],
       "rules": {
+        "surveyjs/no-unguarded-dom-helper": 2,
         "no-restricted-properties": [
           "error",
           {

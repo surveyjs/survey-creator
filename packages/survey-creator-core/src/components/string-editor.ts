@@ -378,7 +378,7 @@ export class StringEditorViewModelBase extends Base {
     if (!this.compostionInProgress && this.maxLength > 0) {
       const currentValue = event.target.innerText;
       const insertedData = event.data || "";
-      const selectionLength = window.getSelection().toString().length;
+      const selectionLength = window?.getSelection()?.toString().length || 0;
       const newValueLength = currentValue.length + insertedData.length - selectionLength;
       if (newValueLength > this.maxLength) {
         event.preventDefault();
@@ -539,6 +539,7 @@ export class StringEditorViewModelBase extends Base {
       const window = DomWindowHelper.getWindow();
       const document = DomDocumentHelper.getDocument();
       event.preventDefault();
+      if (!window || !document) return;
       // get text representation of clipboard
       let text = event.clipboardData.getData("text/plain");
       if (!this.locString.allowLineBreaks && !this.connector?.allowLineBreaksOnEdit) text = clearNewLines(text);
@@ -547,7 +548,7 @@ export class StringEditorViewModelBase extends Base {
       const rootNode = (event.target as HTMLElement).getRootNode() as Document | ShadowRoot;
       const isShadowDom = rootNode instanceof ShadowRoot;
       const selection = isShadowDom ? (rootNode as any).getSelection() : window.getSelection();
-      if (!selection.rangeCount) return;
+      if (!selection || !selection.rangeCount) return;
       selection.deleteFromDocument();
       selection.getRangeAt(0).insertNode(document.createTextNode(text));
       selection.collapseToEnd();
