@@ -514,6 +514,190 @@ test("A value a conversion reaches is not reported at all", () => {
   expect(editor.linter.findings.filter(f => f.ruleId === "value/not-a-choice")).toHaveLength(0);
 });
 
+// --- the rules survey-core added after the first version of the panel ---------------------
+
+test("Row and panel counts that contradict their own limits name both properties", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "matrixdynamic", name: "m1", minRowCount: 5, maxRowCount: 2, columns: [{ name: "c1" }] }
+    ] }]
+  }, "element/count-contradiction")).toBe(
+    "The minRowCount of \"m1\" is 5, above its maxRowCount of 2" +
+    " - the run time silently adjusts one of them.");
+});
+
+test("A count outside its bounds says which side it falls off", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "matrixdynamic", name: "m1", rowCount: 1, minRowCount: 3, columns: [{ name: "c1" }] }
+    ] }]
+  }, "element/count-contradiction")).toBe(
+    "The rowCount of \"m1\" is 1, below its minRowCount of 3 - the run time clamps it.");
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "paneldynamic", name: "pd", panelCount: 9, maxPanelCount: 4,
+        templateElements: [{ type: "text", name: "t1" }] }
+    ] }]
+  }, "element/count-contradiction")).toBe(
+    "The panelCount of \"pd\" is 9, above its maxPanelCount of 4 - the run time clamps it.");
+});
+
+test("An expression that writes the value it reads names the properties it is built from", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "text", name: "q1", setValueIf: "{q1} = 1", setValueExpression: "{q1} + 1" }
+    ] }]
+  }, "cycle/value-write")).toBe(
+    "The q1.setValueIf/setValueExpression reads the value it writes itself" +
+    " - it runs only when another value changes, so it never runs at all.");
+});
+
+test("A write loop across domains lists its members in order", () => {
+  expect(textOf({
+    calculatedValues: [{ name: "cv", expression: "{q1} + 1" }],
+    pages: [{ name: "p1", elements: [
+      { type: "text", name: "q1", setValueIf: "{cv} > 0", setValueExpression: "{cv} + 1" }
+    ] }]
+  }, "cycle/value-write")).toBe(
+    "Values are written in a loop: calculatedValue \"cv\" -> q1.setValueIf/setValueExpression." +
+    " Each write reruns the expressions that read it, so the final values depend on the order" +
+    " the questions are answered in.");
+});
+
+test("A loop through a defaultValueExpression says how long it applies", () => {
+  expect(textOf({
+    calculatedValues: [{ name: "cv", expression: "{q1} + 1" }],
+    pages: [{ name: "p1", elements: [
+      { type: "text", name: "q1", defaultValueExpression: "{cv} + 1" }
+    ] }]
+  }, "cycle/value-write")).toBe(
+    "Values are written in a loop: calculatedValue \"cv\" -> q1.defaultValueExpression." +
+    " Each write reruns the expressions that read it, so the final values depend on the order" +
+    " the questions are answered in." +
+    " A defaultValueExpression applies only until its question is answered.");
+});
+
+test("An element dead through the cascade names the questions it waits for", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "text", name: "q1", visibleIf: "1 = 2" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 'a'" }
+    ] }]
+  }, "element/never-visible")).toBe(
+    "\"q2\" can never become visible: its visibleIf reads {q1}, which is never visible and" +
+    " never receives a value, so the condition never holds. In expression: {q1} = 'a'");
+});
+
+test("Several dead dependencies read as a plural", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "text", name: "q1", visibleIf: "1 = 2" },
+      { type: "text", name: "qb", visibleIf: "1 = 2" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 'a' and {qb} = 'b'" }
+    ] }]
+  }, "element/never-visible")).toBe(
+    "\"q2\" can never become visible: its visibleIf reads {q1}, {qb}, which are never visible" +
+    " and never receive a value, so the condition never holds." +
+    " In expression: {q1} = 'a' and {qb} = 'b'");
+});
+
+test("A keyName naming nothing takes its noun from the container type", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "matrixdynamic", name: "m1", keyName: "colum1",
+        columns: [{ name: "column1" }, { name: "other" }] }
+    ] }]
+  }, "reference/unknown")).toBe(
+    "The keyName of \"m1\" names \"colum1\" - \"m1\" has no column with that name," +
+    " so duplicate-key validation never runs. Did you mean \"column1\"?");
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "paneldynamic", name: "pd", keyName: "zzz",
+        templateElements: [{ type: "text", name: "t1" }] }
+    ] }]
+  }, "reference/unknown")).toBe(
+    "The keyName of \"pd\" names \"zzz\" - \"pd\" has no template question with that name," +
+    " so duplicate-key validation never runs.");
+});
+
+test("A row or panel default outside the allowed set names the cell it fills", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "matrixdynamic", name: "m1", defaultRowValue: { c1: "zzz" },
+        columns: [{ name: "c1", cellType: "dropdown", choices: ["a", "b"] }] }
+    ] }]
+  }, "value/not-a-choice")).toBe(
+    "The default row value sets \"c1\" to \"zzz\", which it can never hold. Allowed: \"a\", \"b\".");
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "paneldynamic", name: "pd", defaultPanelValue: { t1: "zzz" },
+        templateElements: [{ type: "dropdown", name: "t1", choices: ["a", "b"] }] }
+    ] }]
+  }, "value/not-a-choice")).toBe(
+    "The default panel value sets \"t1\" to \"zzz\", which it can never hold." +
+    " Allowed: \"a\", \"b\".");
+});
+
+test("A composite default naming no row, column or template question says which is missing", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "matrixdynamic", name: "m1", defaultRowValue: { cc: "a" },
+        columns: [{ name: "c1", cellType: "dropdown", choices: ["a", "b"] }] }
+    ] }]
+  }, "value/not-a-choice")).toBe(
+    "The defaultRowValue of \"m1\" names \"cc\" - no such column. Available: \"c1\"." +
+    " Did you mean \"c1\"?");
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "matrixdropdown", name: "md", defaultValue: { rowX: { c1: "a" } },
+        rows: ["row1", "row2"],
+        columns: [{ name: "c1", cellType: "dropdown", choices: ["a", "b"] }] }
+    ] }]
+  }, "value/not-a-choice")).toBe(
+    "The defaultValue of \"md\" names \"rowX\" - no such row. Available: \"row1\", \"row2\"." +
+    " Did you mean \"row1\"?");
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "paneldynamic", name: "pd", defaultPanelValue: { nope: 1 },
+        templateElements: [{ type: "dropdown", name: "t1", choices: ["a", "b"] }] }
+    ] }]
+  }, "value/not-a-choice")).toBe(
+    "The defaultPanelValue of \"pd\" names \"nope\" - no such template question." +
+    " Available: \"t1\".");
+});
+
+test("A copyvalue trigger between incompatible ends says what each side holds", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "checkbox", name: "multi", choices: ["a", "b"] },
+      { type: "dropdown", name: "single", choices: ["a", "b"] }
+    ] }],
+    triggers: [{ type: "copyvalue", expression: "{multi} notempty", fromName: "multi", setToName: "single" }]
+  }, "value/not-a-choice")).toBe(
+    "The copyvalue trigger copies \"multi\" into \"single\", but \"multi\" holds an array of" +
+    " selected values and \"single\" holds a single value.");
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "dropdown", name: "src", choices: ["a", "b"] },
+      { type: "dropdown", name: "dst", choices: ["x", "y"] }
+    ] }],
+    triggers: [{ type: "copyvalue", expression: "{src} notempty", fromName: "src", setToName: "dst" }]
+  }, "value/not-a-choice")).toBe(
+    "The copyvalue trigger copies \"src\" into \"dst\", but no value of \"src\" is among the" +
+    " values \"dst\" can hold. Allowed: \"x\", \"y\".");
+});
+
+test("Detail elements left behind a default detailPanelMode are reported", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "matrixdropdown", name: "md", rows: ["r1"], columns: [{ name: "c1" }],
+        detailElements: [{ type: "text", name: "d1" }] }
+    ] }]
+  }, "page/empty")).toBe(
+    "The detail elements of \"md\" are never shown: its detailPanelMode is \"none\"," +
+    " which is the default.");
+});
+
 test("Every rule has a localized name, a description and a message per reason", () => {
   const missing: Array<string> = [];
   getRules().forEach(rule => {

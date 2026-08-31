@@ -219,6 +219,25 @@ export class JsonEditorLinterModel extends Base {
     if (finding.ruleId === "page/empty") {
       params.kindText = getTerm("containerKind", data.kind);
     }
+    // a keyName names a column of a matrix or a question of a dynamic panel template
+    if (finding.reason === "keyNameNotFound") {
+      params.keyNoun = getTerm("segmentNoun", data.questionType);
+    }
+    if (finding.ruleId === "element/count-contradiction") {
+      params.direction = getLinterString(
+        "terms.countDirection." + (data.count < data.bound ? "below" : "above"));
+    }
+    if (finding.ruleId === "element/never-visible") {
+      const dependsOn: Array<string> = Array.isArray(data.dependsOn) ? data.dependsOn : [];
+      params.reads = dependsOn.map(name => "{" + name + "}").join(", ");
+      params.deadClause = getLinterString(
+        "terms.deadValueClause." + (dependsOn.length > 1 ? "many" : "one"));
+    }
+    if (finding.ruleId === "cycle/value-write") {
+      const labels: Array<string> = Array.isArray(data.labels) ? data.labels : [];
+      params.label = labels[0];
+      params.chain = labels.join(" -> ");
+    }
     if (finding.ruleId === "expression/contradiction" ||
       finding.ruleId === "expression/meaningless-condition") {
       params.facts = buildFacts(data);
@@ -226,6 +245,9 @@ export class JsonEditorLinterModel extends Base {
     if (finding.ruleId === "value/not-a-choice") {
       params.valuesText = quoteList(data.values);
       params.availableText = quoteList(data.available);
+      params.sourceValuesText = quoteList(data.sourceValues);
+      params.sourceShapeText = getTerm("copyShape", data.sourceShape);
+      params.targetShapeText = getTerm("copyShape", data.targetShape);
     }
     return params;
   }
@@ -243,6 +265,12 @@ export class JsonEditorLinterModel extends Base {
       res.push(suffix("inScope", data.scope));
     }
     if (finding.ruleId === "cycle/trigger") res.push(suffix("loopMayBeUnreachable"));
+    // a member of the loop is a defaultValueExpression: it stops applying once the question is
+    // answered, so the loop may be shorter-lived than it reads
+    if (finding.ruleId === "cycle/value-write" && Array.isArray(data.labels) &&
+      data.labels.some((label: string) => label.indexOf("defaultValueExpression") > -1)) {
+      res.push(suffix("defaultValueExpressionNote"));
+    }
     if (!!finding.suggestion) {
       // for one rule the suggestion is prose rather than a name, and carries its own reason
       const suggestionReason = data.suggestionReason;

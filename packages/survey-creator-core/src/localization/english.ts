@@ -1835,6 +1835,7 @@ export var enStrings = {
       "expression/unknown-function": "Unknown functions",
       "cycle/calculated-value": "Calculated value cycles",
       "cycle/trigger": "Trigger cycles",
+      "cycle/value-write": "Value write cycles",
       "expression/unknown-choice": "Unreachable choice comparisons",
       "expression/type-mismatch": "Value type mismatches",
       "expression/contradiction": "Contradictory conditions",
@@ -1843,6 +1844,8 @@ export var enStrings = {
       "choices/dead-source": "Dead choice sources",
       "trigger/unknown-target": "Unknown trigger targets",
       "trigger/unknown-type": "Unknown trigger types",
+      "element/count-contradiction": "Contradictory row and panel counts",
+      "element/never-visible": "Elements that never become visible",
       "page/empty": "Empty pages and panels",
     },
     ruleDescriptions: {
@@ -1854,6 +1857,7 @@ export var enStrings = {
       "expression/unknown-function": "Finds calls to a function that is not registered.",
       "cycle/calculated-value": "Finds calculated values that reference themselves or form a loop.",
       "cycle/trigger": "Finds triggers that form a loop through the values they set.",
+      "cycle/value-write": "Finds expressions, triggers and calculated values that write each other's values in a loop.",
       "expression/unknown-choice": "Finds conditions that compare a question to a value none of its choices can match.",
       "expression/type-mismatch": "Finds operators that cannot hold for the value type of the question.",
       "expression/contradiction": "Finds conditions that can never hold, so the element they guard is never shown.",
@@ -1862,6 +1866,8 @@ export var enStrings = {
       "choices/dead-source": "Finds choices copied from a question that is missing or provides no values.",
       "trigger/unknown-target": "Finds triggers that target an element that does not exist.",
       "trigger/unknown-type": "Finds triggers with a missing or unknown type.",
+      "element/count-contradiction": "Finds row and panel counts that contradict their own limits, which the run time silently adjusts.",
+      "element/never-visible": "Finds elements whose condition depends on a question that never becomes visible.",
       "page/empty": "Finds pages and panels with no element that can ever render.",
     },
     messages: {
@@ -1872,6 +1878,7 @@ export var enStrings = {
         notFound: "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists.",
         inContainer: "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name}).",
         scopedUnknown: "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name}).",
+        keyNameNotFound: "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs.",
       },
       "reference/self": {
         selfReference: "The {prop} of \"{name}\" references the element itself (reference: {reference}).",
@@ -1894,6 +1901,10 @@ export var enStrings = {
       "cycle/trigger": {
         self: "The trigger reacts to the value it sets itself (\"{setToName}\").",
         loop: "Triggers form a loop through the values they set: {setRoots}.",
+      },
+      "cycle/value-write": {
+        self: "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all.",
+        loop: "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in.",
       },
       "expression/unknown-choice": {
         notAmongChoices: "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}.",
@@ -1925,6 +1936,13 @@ export var enStrings = {
         defaultValue: "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}.",
         correctAnswer: "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}.",
         triggerSetValue: "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}.",
+        defaultRowValue: "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}.",
+        defaultPanelValue: "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}.",
+        unknownRowKey: "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}.",
+        unknownColumnKey: "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}.",
+        unknownQuestionKey: "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}.",
+        copyValueShape: "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}.",
+        copyValueNoOverlap: "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}.",
       },
       "choices/dead-source": {
         missing: "\"{name}\" copies its choices from \"{source}\", but no question with that name exists.",
@@ -1941,10 +1959,18 @@ export var enStrings = {
         unknownType: "The trigger type \"{type}\" is not known.",
         noType: "The trigger has no type.",
       },
+      "element/count-contradiction": {
+        minAboveMax: "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them.",
+        countOutOfBounds: "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it.",
+      },
+      "element/never-visible": {
+        dependsOnDeadValue: "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds.",
+      },
       "page/empty": {
         emptyTemplate: "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render.",
         noElements: "The {kindText} \"{name}\" has no elements.",
         noRenderableElements: "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty.",
+        detailElementsHidden: "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default.",
       },
     },
     // Clauses appended to a base message, in this order
@@ -1958,6 +1984,7 @@ export var enStrings = {
       triggerTypeDroppedHint: "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks.",
       knownVariablesHint: "If it is a variable set at run time, list it in the linter options.",
       loopMayBeUnreachable: "The loop may be unreachable if the trigger conditions never hold together - verify the expressions.",
+      defaultValueExpressionNote: "A defaultValueExpression applies only until its question is answered.",
       inExpression: "In expression: {0}", // {0} the expression the defect was found in
       inBindings: "Referenced in bindings.",
       inChoicesByUrl: "Referenced in the choicesByUrl URL.",
@@ -2006,6 +2033,22 @@ export var enStrings = {
       valueShape: {
         array: "an array",
         object: "an object",
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        array: "an array of selected values",
+        scalar: "a single value",
+        default: "a value",
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        below: "below",
+        above: "above",
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        one: "is never visible and never receives a value",
+        many: "are never visible and never receive a value",
       },
       targetKind: {
         question: "question",
