@@ -1810,6 +1810,241 @@ export var enStrings = {
     },
     presetApplied: "Preset applied",
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  // linter.messages.<ruleId>.<reason> from the frozen tables the linter exports; the optional
+  // clauses under "suffixes" and "hints" are appended to a base message the same way the
+  // English of the linter itself does it. Placeholders are named after the keys of
+  // finding.messageData.
+  linter: {
+    panelTitle: "Checks",
+    waitingForValidJson: "Waiting for valid JSON",
+    resultPassed: "All checks passed",
+    resultIssues: "{0} issues found", // {0} total count
+    lineNumber: "Line: {0}. ", // {0} 1-based line number, prefixes an entry of the error list
+    severity: {
+      error: "Error",
+      warning: "Warning",
+      info: "Info",
+    },
+    rules: {
+      "expression/syntax": "Expression syntax",
+      "reference/unknown": "Unknown references",
+      "reference/self": "Self-referencing conditions",
+      "name/duplicate": "Duplicate names",
+      "element/unknown-type": "Unknown element types",
+      "expression/unknown-function": "Unknown functions",
+      "cycle/calculated-value": "Calculated value cycles",
+      "cycle/trigger": "Trigger cycles",
+      "expression/unknown-choice": "Unreachable choice comparisons",
+      "expression/type-mismatch": "Value type mismatches",
+      "expression/contradiction": "Contradictory conditions",
+      "expression/meaningless-condition": "Meaningless conditions",
+      "value/not-a-choice": "Values outside the allowed set",
+      "choices/dead-source": "Dead choice sources",
+      "trigger/unknown-target": "Unknown trigger targets",
+      "trigger/unknown-type": "Unknown trigger types",
+      "page/empty": "Empty pages and panels",
+    },
+    ruleDescriptions: {
+      "expression/syntax": "Finds expressions that cannot be parsed.",
+      "reference/unknown": "Finds references to a question, panel, page, calculated value or variable that does not exist.",
+      "reference/self": "Finds a visibleIf, enableIf or requiredIf that references its own element.",
+      "name/duplicate": "Finds elements and calculated values that share a name.",
+      "element/unknown-type": "Finds questions whose type is not registered.",
+      "expression/unknown-function": "Finds calls to a function that is not registered.",
+      "cycle/calculated-value": "Finds calculated values that reference themselves or form a loop.",
+      "cycle/trigger": "Finds triggers that form a loop through the values they set.",
+      "expression/unknown-choice": "Finds conditions that compare a question to a value none of its choices can match.",
+      "expression/type-mismatch": "Finds operators that cannot hold for the value type of the question.",
+      "expression/contradiction": "Finds conditions that can never hold, so the element they guard is never shown.",
+      "expression/meaningless-condition": "Finds conditions whose result is known before the survey runs.",
+      "value/not-a-choice": "Finds values written next to a question that the question can never hold.",
+      "choices/dead-source": "Finds choices copied from a question that is missing or provides no values.",
+      "trigger/unknown-target": "Finds triggers that target an element that does not exist.",
+      "trigger/unknown-type": "Finds triggers with a missing or unknown type.",
+      "page/empty": "Finds pages and panels with no element that can ever render.",
+    },
+    messages: {
+      "expression/syntax": {
+        unparsable: "The expression \"{expression}\" cannot be parsed.",
+      },
+      "reference/unknown": {
+        notFound: "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists.",
+        inContainer: "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name}).",
+        scopedUnknown: "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name}).",
+      },
+      "reference/self": {
+        selfReference: "The {prop} of \"{name}\" references the element itself (reference: {reference}).",
+      },
+      "name/duplicate": {
+        elementNames: "The name \"{name}\" is used by {count} elements ({kinds}) - element names must be unique.",
+        calculatedValueNames: "The calculated value name \"{name}\" is already used by another calculated value.",
+        calculatedValueShadowsElement: "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other.",
+      },
+      "element/unknown-type": {
+        unknownType: "\"{name}\" has an unknown type \"{type}\".",
+      },
+      "expression/unknown-function": {
+        notRegistered: "The function \"{functionName}\" is not registered.",
+      },
+      "cycle/calculated-value": {
+        self: "The calculated value \"{names}\" references itself in its own expression.",
+        loop: "Calculated values {names} depend on each other.",
+      },
+      "cycle/trigger": {
+        self: "The trigger reacts to the value it sets itself (\"{setToName}\").",
+        loop: "Triggers form a loop through the values they set: {setRoots}.",
+      },
+      "expression/unknown-choice": {
+        notAmongChoices: "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}.",
+        noChoiceContains: "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}.",
+      },
+      "expression/type-mismatch": {
+        "no-value": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare.",
+        "non-scalar": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it.",
+        "boolean-ordering": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it.",
+        "text-ordering": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion.",
+        "date-vs-number": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold.",
+        "number-vs-string": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold.",
+        "array-vs-scalar": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array.",
+        "boolean-vs-const": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold.",
+      },
+      "expression/contradiction": {
+        alwaysFalse: "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown.",
+        alwaysFalseViaConstants: "The {prop} \"{expression}\" never holds, because {facts}.",
+        outOfRange: "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}.",
+        unsatisfiable: "The {prop} \"{expression}\" contradicts itself: {facts}.",
+      },
+      "expression/meaningless-condition": {
+        alwaysTrue: "The {prop} \"{expression}\" is always true, so it decides nothing.",
+        notABoolean: "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no.",
+        meaninglessFragment: "Part of the {prop} \"{expression}\" has a result that is known upfront.",
+        alwaysTrueViaConstants: "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing.",
+      },
+      "value/not-a-choice": {
+        defaultValue: "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}.",
+        correctAnswer: "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}.",
+        triggerSetValue: "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}.",
+      },
+      "choices/dead-source": {
+        missing: "\"{name}\" copies its choices from \"{source}\", but no question with that name exists.",
+        self: "\"{name}\" copies its choices from itself.",
+        "not-a-source": "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values.",
+        "missing-field": "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}.",
+      },
+      "trigger/unknown-target": {
+        pageNotFound: "The {trigger} trigger targets page \"{name}\", which does not exist.",
+        segmentNotFound: "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\".",
+        rootNotFound: "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists.",
+      },
+      "trigger/unknown-type": {
+        unknownType: "The trigger type \"{type}\" is not known.",
+        noType: "The trigger has no type.",
+      },
+      "page/empty": {
+        emptyTemplate: "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render.",
+        noElements: "The {kindText} \"{name}\" has no elements.",
+        noRenderableElements: "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty.",
+      },
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      atPosition: "Position: {0}.", // {0} character offset
+      fromLegacyTrigger: "It was built from the legacy name, operator and value properties of the trigger.",
+      inScope: "Inside: {0}.", // {0} name of the namespace
+      didYouMean: "Did you mean \"{0}\"?",
+      customComponentHint: "If it is a custom component, pass its definition to the linter to enable full analysis.",
+      registerFunctionHint: "Register the function before linting, or list it in the linter options.",
+      triggerTypeDroppedHint: "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks.",
+      knownVariablesHint: "If it is a variable set at run time, list it in the linter options.",
+      loopMayBeUnreachable: "The loop may be unreachable if the trigger conditions never hold together - verify the expressions.",
+      inExpression: "In expression: {0}", // {0} the expression the defect was found in
+      inBindings: "Referenced in bindings.",
+      inChoicesByUrl: "Referenced in the choicesByUrl URL.",
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    // "{q1}", so that the reader finds it in the condition.
+    facts: {
+      separator: ", ",
+      and: " and ",
+      constant: "{ref} is always {value}",
+      range: "{ref} is {bounds}",
+      atLeast: "at least {0}",
+      atMost: "at most {0}",
+      conflict: {
+        equalValues: "{ref} cannot be both {values}",
+        equalAndNotEqual: "{ref} cannot be {value} and not be it",
+        emptyAndValue: "{ref} cannot be empty and be {value}",
+        emptyAndNotEmpty: "{ref} cannot be empty and not empty",
+        impossibleBounds: "{ref} cannot be above {min} and below {max}",
+        emptySet: "{ref} is asked to be one of no value at all",
+      },
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      rowScopePrefix: "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel.",
+      rowScopeStandalone: "\"{0}\" is only available inside a matrix cell or a matrix detail panel.",
+      panelScopePrefix: "\"{0}.\" references are only available inside a dynamic panel or a panel container.",
+      panelSiblingPrefix: "\"{0}.\" references are only available inside a dynamic panel.",
+      panelStandalone: "\"{0}\" is only available inside a dynamic panel.",
+      itemScope: "\"{0}\" is only available inside choice, row and column conditions.",
+      compositeScopePrefix: "\"{0}.\" references are only available inside a composite question.",
+      matrixColumn: "\"{0}\" is a column of this matrix - reference it with the row prefix.",
+      panelQuestion: "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix.",
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      setNumberInputType: "Set inputType: \"number\" on \"{0}\" if it collects numbers.",
+      useContainsOrAnyof: "Use \"contains\" or \"anyof\" for multi-select values.",
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        page: "page",
+        panel: "panel",
+      },
+      valueShape: {
+        array: "an array",
+        object: "an object",
+      },
+      targetKind: {
+        question: "question",
+        questionvalue: "question or variable",
+        page: "page",
+      },
+      triggerVerb: {
+        fromName: "reads",
+        gotoName: "navigates to",
+        default: "sets",
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      // which the author recognizes better than a translation of it
+      // the noun for the missing field of a carry-forward source
+      sourceField: {
+        paneldynamic: "template question",
+        default: "column",
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        paneldynamic: "template question",
+        matrixdynamic: "column",
+        multipletext: "item",
+        matrix: "row",
+        matrixdropdownRow: "row",
+        matrixdropdownColumn: "column",
+        default: "field",
+      },
+    },
+    // What the reproduction steps of a finding demonstrate
+    repro: {
+      selfReference: "Answering \"{0}\" re-evaluates its own condition; if the element becomes hidden its value is cleared, which flips the condition again.",
+      calculatedValueCycle: "The cycle never settles: each value re-triggers the others.",
+      triggerCycle: "This fires the first trigger; each trigger in the cycle sets a value the next one reacts to.",
+      noChoiceEquals: "No selectable choice of \"{0}\" equals the compared value.",
+      noChoiceContains: "No selectable choice of \"{0}\" contains the compared value.",
+      missingTriggerTarget: "This fires the trigger, which then targets the missing element \"{0}\".",
+    },
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
     choices: [{ value: "item1", text: "Item 1" }, { value: "item2", text: "Item 2" }, { value: "item3", text: "Item 3" }],

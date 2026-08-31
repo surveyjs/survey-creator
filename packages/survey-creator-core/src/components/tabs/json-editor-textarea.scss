@@ -43,6 +43,15 @@ svc-tab-json-editor-textarea {
   background: var(--sjs2-color-bg-alert-secondary);
 }
 
+// A linter finding is advisory: it must not read as a blocking error
+.svc-json-errors__item--warning {
+  background: var(--sjs2-color-bg-warning-secondary);
+
+  .svc-json-error__icon {
+    fill: var(--sjs2-color-bg-warning-primary);
+  }
+}
+
 .svc-json-error {
   @include sjs2--typography--default;
   padding: var(--sjs2-spacing-x100)

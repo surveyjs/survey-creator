@@ -26,7 +26,8 @@ test("JsonEditor & showErrors/errorList", () => {
 });
 
 test("JsonEditor & fixError action", () => {
-  const creator = new CreatorTester();
+  // the linter reports the duplicate too - this test is about the JSON error and its fix
+  const creator = new CreatorTester({ showLinterPanel: false });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = "{}";
   editor.processErrors(editor.text);
@@ -132,7 +133,8 @@ test("JsonEditor & error question unique in panel dynamic, #2", () => {
   });
 });
 test("JsonEditor & fixError action with object to array", () => {
-  const creator = new CreatorTester();
+  // the linter reports the duplicate too - this test is about the JSON error and its fix
+  const creator = new CreatorTester({ showLinterPanel: false });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
     pages: [{
@@ -329,7 +331,8 @@ test("We should have one SurveyTextWorker.fromJSON/toJSON", () => {
   SurveyTextWorker.onProcessJson = undefined;
 });
 test("JsonEditor & duplicated errors in matrices columns", () => {
-  const creator = new CreatorTester();
+  // the linter reports the duplicate too - this test is about the JSON error and its fix
+  const creator = new CreatorTester({ showLinterPanel: false });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
     elements: [

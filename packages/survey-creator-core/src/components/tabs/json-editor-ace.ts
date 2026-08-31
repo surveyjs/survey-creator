@@ -94,8 +94,9 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     }
     return annotations;
   }
-  protected setErrors(errors: any[]): void {
-    super.setErrors(errors);
+  protected setErrors(errors: any[], findings?: any[]): void {
+    super.setErrors(errors, findings);
+    // only the blocking errors are annotated in the gutter - the linter findings are not
     this.aceEditor.getSession().setAnnotations(this.createAnnotations(errors));
     setTimeout(() => this.aceEditor.resize());
   }

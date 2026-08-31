@@ -1,0 +1,100 @@
+@use "../../variables" as *;
+
+.svc-json-linter {
+  display: flex;
+  flex-direction: column;
+  padding: calc(0.5 * var(--sjs2-spacing-x200)) 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.svc-json-linter__item {
+  list-style-type: none;
+}
+
+.svc-json-linter__item-body {
+  @include sjs2--typography--default;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sjs2-spacing-x200);
+  padding: calc(0.5 * var(--sjs2-spacing-x100)) var(--sjs2-spacing-x200);
+  color: var(--sjs2-color-fg-basic-primary);
+  // only a finding that can be navigated to gets a pointer, below
+  cursor: default;
+}
+
+// Same size as the icon of the bottom error list, .svc-json-error__icon: the two lists sit on
+// one screen, so the size is kept in step deliberately.
+.svc-json-linter__icon {
+  line-height: var(--sjs2-line-height-x200);
+  width: 1lh;
+  height: 1lh;
+  flex: 0 0 auto;
+  // the row aligns to flex-start for a finding that wraps over several lines; the icon of a
+  // rule row is a single line, so it centres itself against the title
+  align-self: center;
+  box-sizing: border-box;
+  display: block;
+}
+
+// The status colours are the ones the bottom error list uses: the "primary" of a family fills
+// the icon, its "secondary" tints the row.
+.svc-json-linter__rule--passed .svc-json-linter__icon {
+  fill: var(--sjs2-color-bg-positive-primary);
+}
+
+.svc-json-linter__rule--error .svc-json-linter__icon {
+  fill: var(--sjs2-color-bg-alert-primary);
+}
+
+.svc-json-linter__rule--warning .svc-json-linter__icon {
+  fill: var(--sjs2-color-bg-warning-primary);
+}
+
+.svc-json-linter__rule--error .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__rule--error,
+.svc-json-linter__rule--warning .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__rule--warning {
+  @include sjs2--typography--default-strong;
+}
+
+.svc-json-linter__finding .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__finding {
+  padding-inline-start: var(--sjs2-spacing-x600);
+  color: var(--sjs2-color-fg-basic-secondary);
+}
+
+.svc-json-linter__finding--error .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__finding--error {
+  background: var(--sjs2-color-bg-alert-secondary);
+}
+
+.svc-json-linter__finding--warning .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__finding--warning {
+  background: var(--sjs2-color-bg-warning-secondary);
+}
+
+// The affordance covers the whole row, which is what the list makes clickable. The bottom list
+// instead kills pointer events on the row and revives them on the text - that cannot be copied
+// here, because a rule row carries the description of its check in a native tooltip, and a
+// tooltip needs the hover the killed events would take away.
+.svc-json-linter__finding--navigable .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__finding--navigable {
+  cursor: pointer;
+
+  &:hover {
+    color: var(--sjs2-color-fg-basic-primary);
+
+    .sv-string-viewer {
+      text-decoration: underline;
+    }
+  }
+}
+
+.svc-json-linter__summary .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__summary {
+  border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  margin-top: calc(0.5 * var(--sjs2-spacing-x200));
+  padding-top: var(--sjs2-spacing-x200);
+  color: var(--sjs2-color-fg-basic-secondary);
+}
