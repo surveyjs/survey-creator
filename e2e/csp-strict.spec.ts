@@ -123,6 +123,17 @@ function switchTab(page: Page, tabName: string, step: (name: string, action: () 
 }
 
 test.describe("CSP strict policy diagnostics", () => {
+  // The csp-strict page is a static test page and exists only in the packages that
+  // serve test-pages/ statically (js, react). Vue/angular serve an SPA example whose
+  // router has no such route - and their servers answer unknown paths with the SPA
+  // fallback (200 + index.html), so availability is detected by the page's own
+  // marker, not by the status code.
+  test.beforeEach(async ({ page }) => {
+    const response = await page.request.get(urlCspStrict).catch(() => null);
+    const available = !!response && response.ok() && (await response.text()).indexOf("__cspViolations") !== -1;
+    test.skip(!available, "the csp-strict test page is not served for this framework");
+  });
+
   test("inventory with a populated survey (imagemap, property grid, standalone survey)", async ({ page }, testInfo) => {
     test.setTimeout(180000);
     const consoleCspMessages = trackCspConsole(page);
@@ -187,9 +198,12 @@ test.describe("CSP strict policy diagnostics", () => {
     await expect(page.locator(".svc-creator").first()).toBeVisible();
 
     // The document stylesheet cannot cross the shadow boundary, so the variables come
-    // from the injected <style> - which must be nonced and must actually apply.
+    // from the injected <style> - which must be nonced and must actually apply. The
+    // injection sets only the IDL property (never the content attribute, so the nonce
+    // stays out of reach of CSS attribute selectors), hence the evaluate.
     const injected = page.locator("style[data-survey-base-theme-variables]").first();
-    await expect(injected).toHaveAttribute("nonce", "testNonce123");
+    await expect(injected).toBeAttached();
+    expect(await injected.evaluate((el) => (el as any).nonce || "")).toBe("testNonce123");
     // Locators pierce the shadow boundary, so the computed value is read without
     // reaching for the shadow root by hand.
     const unitSize = await page.locator(".svc-creator").first()
