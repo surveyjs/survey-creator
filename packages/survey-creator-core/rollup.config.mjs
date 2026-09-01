@@ -78,6 +78,8 @@ const buildPlatformJson = {
       "require": "./survey-creator-core.js"
     },
     "./*.css": "./*.css",
+    "./fonts/*": "./fonts/*",
+    "./images/*": "./images/*",
     "./survey-creator-core.i18n": {
       "import": "./fesm/survey-creator-core.i18n.mjs",
       "require": "./survey-creator-core.i18n.js"
@@ -139,6 +141,24 @@ const buildPlatformJson = {
   },
   devDependencies: {},
 };
+
+// The stylesheets reference these as url(fonts/...) / url(images/...) instead of
+// inlining them, so the files have to sit next to the emitted CSS. Copied
+// unconditionally: a dev build needs them just as much as a release one. The Open Sans
+// subsets ship with their license; only the raster images are copied from src/images,
+// the svg icons there go through svg-inline-loader instead.
+function copyStyleAssets() {
+  fs.mkdirSync(resolve(buildPath, "fonts"), { recursive: true });
+  for (const name of fs.readdirSync(resolve(__dirname, "src/fonts"))) {
+    fs.copyFileSync(resolve(__dirname, "src/fonts", name), resolve(buildPath, "fonts", name));
+  }
+  fs.mkdirSync(resolve(buildPath, "images"), { recursive: true });
+  for (const name of fs.readdirSync(resolve(__dirname, "src/images"))) {
+    if (!name.endsWith(".png")) continue;
+    fs.copyFileSync(resolve(__dirname, "src/images", name), resolve(buildPath, "images", name));
+  }
+}
+copyStyleAssets();
 
 if (process.env.emitNonSourceFiles === "true") {
   fs.mkdirSync(buildPath, { recursive: true });

@@ -11,12 +11,27 @@ import postcssUrl from "postcss-url";
 import postcssBanner from "postcss-banner";
 import postcssDiscardComments from "postcss-discard-comments";
 
-import { resolve, parse, format } from "node:path";
+import { resolve, parse, format, basename } from "node:path";
 import rollupEsbuild from "rollup-plugin-esbuild";
 
 import postcss from "postcss";
 import cssnano from "cssnano";
 import { minify } from "terser";
+
+// Fonts and raster images are referenced as files instead of being inlined as data:
+// URIs: a `data:` background is refused under `img-src 'self'`, and the fonts used to
+// come from fonts.gstatic.com, which `font-src 'self'` refuses too.
+// The url is rewritten by hand rather than with postcss-url's "copy" mode, which
+// silently skips assets whose url escapes the stylesheet folder with "../". The files
+// themselves are copied by the package's rollup config (see copyStyleAssets).
+// Filters are regexps, not globs, for the same "../" reason.
+const rewriteAssetUrl = (folder) => (asset) => folder + "/" + basename(asset.pathname || asset.url);
+
+const postcssUrlRules = [
+  { filter: /\.woff2(\?.*)?$/, url: rewriteAssetUrl("fonts") },
+  { filter: /\.png(\?.*)?$/, url: rewriteAssetUrl("images") },
+  { url: "inline" },
+];
 
 function getOwnBanner(version) {
   return [
@@ -133,6 +148,9 @@ export function createUmdConfig(options) {
           extract: emitCss,
           minimize: false,
           sourceMap: sourceMap,
+          // postcss-url resolves "copy" destinations against `to`; without it the
+          // assets would be copied next to the source scss, not into the build folder.
+          to: typeof emitCss === "string" ? emitCss : undefined,
           use: {
             sass: {
               api: "modern",
@@ -140,7 +158,7 @@ export function createUmdConfig(options) {
             }
           },
           plugins: [
-            postcssUrl({ url: "inline" }),
+            postcssUrl(postcssUrlRules),
             postcssBanner({ banner: getOwnBanner(version), important: true }),
           ],
         })
@@ -205,6 +223,9 @@ export function createEsmConfig(options) {
           extract: emitCss,
           minimize: false,
           sourceMap: sourceMap,
+          // postcss-url resolves "copy" destinations against `to`; without it the
+          // assets would be copied next to the source scss, not into the build folder.
+          to: typeof emitCss === "string" ? emitCss : undefined,
           use: {
             sass: {
               api: "modern",
@@ -212,7 +233,7 @@ export function createEsmConfig(options) {
             }
           },
           plugins: [
-            postcssUrl({ url: "inline" }),
+            postcssUrl(postcssUrlRules),
             postcssBanner({ banner: getOwnBanner(version), important: true }),
           ],
         })
@@ -266,6 +287,9 @@ export function createCssConfig(options) {
         extract: true,
         minimize: false,
         sourceMap: true,
+        // postcss-url resolves "copy" destinations against `to`; without it the assets
+        // would be copied next to the source scss instead of into the build folder.
+        to: resolve(dir, `${name}.css`),
         use: {
           sass: {
             api: "modern",
@@ -273,7 +297,7 @@ export function createCssConfig(options) {
           }
         },
         plugins: [
-          postcssUrl({ url: "inline" }),
+          postcssUrl(postcssUrlRules),
           postcssBanner({ banner: getOwnBanner(version), important: true }),
         ],
       }),

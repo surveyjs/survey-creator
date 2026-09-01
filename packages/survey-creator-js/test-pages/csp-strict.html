@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Strict CSP mirroring a customer policy: nonce-based style-src, self-only fonts/images.
+       Meta CSP does not support report-uri, so violations are collected via the
+       securitypolicyviolation event (see the first inline script below). -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'nonce-testNonce123' 'report-sample'; style-src 'self' 'nonce-testNonce123' 'report-sample'; font-src 'self'; img-src 'self'" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script nonce="testNonce123">
+    // Must be registered before any bundle loads so that violations raised while
+    // parsing vendor CSS / running vendor JS are captured.
+    window.__cspViolations = [];
+    // The test sets __cspPhase before each interaction so every violation can be
+    // attributed to the step that triggered it.
+    window.__cspPhase = "page load";
+    document.addEventListener("securitypolicyviolation", function (e) {
+      window.__cspViolations.push({
+        phase: window.__cspPhase,
+        directive: e.effectiveDirective,
+        blocked: (e.blockedURI || "").substring(0, 120),
+        source: (e.sourceFile || "") + ":" + e.lineNumber,
+        sample: (e.sample || "").substring(0, 200)
+      });
+    });
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/survey-core.css" />
+  <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
+
+  <style nonce="testNonce123">
+    *,
+    ::after,
+    ::before {
+      box-sizing: border-box;
+    }
+
+    #survey-creator {
+      height: 70vh;
+    }
+
+    #standalone-survey {
+      margin-top: 16px;
+    }
+  </style>
+
+  <script src="../node_modules/survey-core/survey.core.js"></script>
+  <script src="../node_modules/survey-core/survey.i18n.js"></script>
+  <script src="../node_modules/survey-core/themes/index.js"></script>
+  <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
+  <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
+  <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
+  <script src="../build/survey-creator-js.js"></script>
+</head>
+
+<body spellcheck="false">
+  <div id="survey-creator"></div>
+  <!-- A plain survey rendered outside the creator: the creator disables
+       generateStylesheet on its own surveys, so the framework wrapper's
+       <style>{themeStyle}</style> path is only reachable here. -->
+  <div id="standalone-survey"></div>
+</body>
+<script nonce="testNonce123">
+  window.surveyJSFramework = "react";
+  SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+  SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
+
+  const creator = new SurveyCreator.SurveyCreator({
+    expandCollapseButtonVisibility: "never",
+    showLogicTab: true,
+    showTranslationTab: true,
+    showThemeTab: true
+  });
+  creator.tabResponsivenessMode = "menu";
+  creator["animationEnabled"] = false;
+  creator.allowZoom = false;
+  const query = new URLSearchParams(location.search);
+  // ?empty=1 leaves the survey without elements so that the empty-state
+  // placeholder illustrations (background: url(data:image/png)) render on every tab.
+  window.__cspEmptyMode = query.get("empty") === "1";
+  // ?shadow=1 mounts the creator inside a shadow root with its own stylesheet links,
+  // the setup documented for shadow-DOM consumers. The document-level stylesheet does
+  // not reach inside, so this exercises the fallback that injects the variables.
+  window.__cspShadowMode = query.get("shadow") === "1";
+  creator.JSON = window.__cspEmptyMode ? {} : {
+    elements: [
+      { type: "text", name: "q1", title: "Text question" },
+      {
+        // imagemap writes CSS variables via setAttribute("style", ...) on its SVG,
+        // which a nonce-based style-src blocks (style-src-attr).
+        type: "imagemap",
+        name: "q2",
+        imageLink: "./imagemap-test.png",
+        idleFillColor: "#ff0000",
+        hoverFillColor: "#00ff00",
+        areas: [{ value: "a1", shape: "rect", coords: "10,10,100,100" }]
+      }
+    ]
+  };
+  window.creator = creator;
+  const creatorContainer = document.getElementById("survey-creator");
+  if (window.__cspShadowMode) {
+    // Deliberately no stylesheet inside the shadow root: the document-level one cannot
+    // reach in, so the variables must come from the runtime fallback injection - which
+    // has to pick up the page nonce to survive this policy.
+    const shadowRoot = creatorContainer.attachShadow({ mode: "open" });
+    const shadowHost = document.createElement("div");
+    shadowHost.style.height = "70vh";
+    shadowRoot.appendChild(shadowHost);
+    SurveyCreator.renderSurveyCreator(creator, shadowHost);
+  } else {
+    SurveyCreator.renderSurveyCreator(creator, creatorContainer);
+  }
+
+  if (!window.__cspEmptyMode) {
+    const standaloneSurvey = new Survey.Model({
+      elements: [{ type: "text", name: "s1", title: "Standalone survey question" }]
+    });
+    standaloneSurvey.applyTheme(SurveyTheme.FlatLight);
+    window.standaloneSurvey = standaloneSurvey;
+    SurveyUI.renderSurvey(standaloneSurvey, document.getElementById("standalone-survey"));
+  }
+</script>
+
+</html>
