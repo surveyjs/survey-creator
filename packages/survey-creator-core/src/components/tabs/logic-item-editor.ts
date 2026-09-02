@@ -482,10 +482,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       text = el.locTitle.renderedHtml;
     }
     if (!text) text = el.name;
-    if (el.isQuestion) {
-      text = this.options.getObjectDisplayName(el, "logic-tab:question-selector", "condition", text);
-    }
-    return text;
+    return this.options.getObjectDisplayName(el, "logic-tab:question-selector", "condition", text);
   }
 
   private getSelectorChoices(logicType: SurveyLogicType): Array<ItemValue> {

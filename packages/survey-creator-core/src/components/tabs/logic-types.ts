@@ -196,6 +196,9 @@ export class SurveyLogicType {
     if (!res) {
       res = element["name"] || "";
     }
+    if (!!this.options) {
+      res = this.options.getObjectDisplayName(element, "logic-tab:rule-action", "logic-action", res);
+    }
     return wrapTextByCurlyBraces(res);
   }
   private getElementByName(name: string): Base {

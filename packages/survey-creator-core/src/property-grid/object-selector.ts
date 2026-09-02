@@ -124,10 +124,13 @@ export class ObjectSelector {
     return item;
   }
   private getText(obj: Base): string {
-    var text = !!this.getObjectDisplayName
-      ? this.getObjectDisplayName(obj, "property-grid-header:element-list", "property-grid", undefined)
-      : SurveyHelper.getObjectName(obj, false);
-    return text;
+    if (!!this.getObjectDisplayName) {
+      return this.getObjectDisplayName(obj, "property-grid-header:element-list", "property-grid", undefined);
+    }
+    if (!!this.creator) {
+      return this.creator.getObjectDisplayName(obj, "property-grid-header:element-list", "property-grid", undefined);
+    }
+    return SurveyHelper.getObjectName(obj, false);
   }
 }
 export class ObjectSelectorModel extends Base {

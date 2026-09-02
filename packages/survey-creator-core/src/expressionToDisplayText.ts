@@ -29,7 +29,7 @@ export class ExpressionToDisplayText {
     var strFunc = function (op: Survey.Operand): string {
       var locIsRoot = isRoot;
       isRoot = false;
-      if (self.showTitles && op.getType() == "variable") {
+      if (op.getType() == "variable") {
         return self.getQuestionText(<Survey.Variable>op);
       }
       if (self.showTitles && op.getType() == "const") {
@@ -51,9 +51,16 @@ export class ExpressionToDisplayText {
     return node.toString(strFunc);
   }
   private getQuestionText(op: Survey.Variable): string {
-    var question = this.getQuestionByName(op.variable);
-    if (!question || !question.title) return op.variable;
-    return wrapTextByCurlyBraces(question.title);
+    const question = this.getQuestionByName(op.variable);
+    //Let the operand render itself, so a variable that is not a question keeps its original text
+    if (!question) return undefined;
+    let text = this.showTitles ? question.title : "";
+    if (!text) text = op.variable;
+    if (!!this.options && !!this.options.getObjectDisplayName) {
+      text = this.options.getObjectDisplayName(question, "logic-tab:rule-condition", "condition", text);
+    }
+    if (text === op.variable) return undefined;
+    return wrapTextByCurlyBraces(text);
   }
   private getDisplayText(op: Survey.Const): string {
     if (!this.currentQuestion) return undefined;
