@@ -1,12 +1,12 @@
 import { Action, ActionContainer, Base, ListModel, property, propertyArray } from "survey-core";
 import type { ISurveyTestCheckResult, ISurveyTestStep } from "survey-core/tester";
 import type { LiveStatus, LiveTest } from "../core/liveRun";
+import { testerText } from "../localization";
 import { sameMembers } from "./arrays";
 import { buildCheckView, buildIssueView } from "./checkView";
 import type { CheckView, IssueView } from "./checkView";
 import { runnerActionBarCss, runnerListCss } from "./runnerCss";
-import type { PanelTest, TestRowActions } from "./runnerHost";
-import type { StepCursor } from "./runnerApi";
+import type { ITesterPanelTest, ITesterRowActions, StepCursor } from "./runnerApi";
 import { isFailure, tone } from "./statusTone";
 import { TesterStepRowModel, describeWhere } from "./stepRowModel";
 import type { IStepRowOwner } from "./stepRowModel";
@@ -43,6 +43,10 @@ export interface TestRowRunState {
   // choice of mode on the screen and one place to make it - so the row's button only says which mode it
   // will use and never overrides it.
   runModeName: string;
+  // This row's Edit was pressed and the run it has to stop first is still unwinding. Only ever true of
+  // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  // one row - the one that was pressed - so the verb that says "Stopping…" is the verb that is waiting.
+  editPending?: boolean;
 }
 
 export class TesterTestRowModel extends Base implements IStepRowOwner {
@@ -57,6 +61,7 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
   @property({ defaultValue: true }) selected!: boolean;
   // Written here by the runner, not read from it: see the note at the top of this file.
   @property({ defaultValue: false }) locked!: boolean;
+  @property({ defaultValue: false }) editPending!: boolean;
   @property({ defaultValue: "" }) runModeName!: string;
   // The rename box and why it was refused.
   @property({ defaultValue: "" }) nameDraft!: string;
@@ -93,7 +98,7 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
   private caseSteps: Array<ISurveyTestStep> = EMPTY_STEPS;
   private live?: LiveTest;
   private siblingNames: Array<string> = [];
-  private actions?: TestRowActions;
+  private actions?: ITesterRowActions;
   private reveal?: { onCase(path: string): void, onSurvey(jsonPath: string): void };
   private owner?: ITestRowOwner;
   // The positions the case holds, the end-of-case line, and the two of them as one list.
@@ -134,7 +139,7 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
     unnamed: boolean,
     steps: Array<ISurveyTestStep>,
     siblingNames: Array<string>,
-    actions: TestRowActions,
+    actions: ITesterRowActions,
     owner: ITestRowOwner,
     // The two journeys into the JSON editors. They are on the row rather than on the runner because a
     // row component subscribes to one model, and the issue lines it prints carry both of them.
@@ -183,7 +188,9 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
     this.live = live;
     this.status = !!live ? live.status : undefined;
     this.locked = state.locked;
+    this.editPending = state.editPending === true;
     this.runModeName = state.runModeName;
+    this.updateEditAction();
     this.durationText = formatDuration(live, state.elapsedMs);
     // Until a person has decided about this row, a failed one opens itself - and stops doing so the
     // moment they close it.
@@ -201,15 +208,17 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
     const stopped = !!cursor && cursor.at < cursor.count ? cursor : undefined;
     // A verdict on a case that stopped part-way is a verdict on that part, and saying so on the line is
     // the difference between "this test passes" and "the first three steps of it do".
-    this.cursorText = !stopped ? "" : "stopped before step " + stopped.at + " of " + stopped.count;
+    this.cursorText = !stopped ? "" : testerText("row.cursorText", stopped.at, stopped.count);
     this.stepsWhereText = describeWhere(count, at, held);
     this.droppedText = !cursor || !cursor.dropped
       ? ""
-      : "The model was not kept: " + cursor.dropped + ". The next run starts from the first step.";
+      : testerText("row.droppedText", cursor.dropped);
     // Nothing says "not run yet": the step list says it per step, and it says it about the case rather
     // than about the row.
     this.hintText = !!live && !live.steps.length && !count
-      ? (this.status === "skipped" ? "Disabled: no step ran." : "No step ran.")
+      ? (this.status === "skipped"
+        ? testerText("row.disabledNoStepRan")
+        : testerText("row.noStepRan"))
       : "";
 
     // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
@@ -217,7 +226,9 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
     // for a part of it as for the whole.
     const offered = !this.disabled;
     this.legendVisible = offered && count > 0;
-    const refusal = !state.canRun ? (state.blockedReason || "The documents do not run.") : undefined;
+    const refusal = !state.canRun
+      ? (state.blockedReason || testerText("row.documentsDoNotRun"))
+      : undefined;
     const liveSteps = !!live ? live.steps : [];
     this.stepRows.forEach(row => row.update({
       step: row.isEnd ? undefined : this.caseSteps[row.index],
@@ -239,20 +250,24 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
   public get rowCss(): string {
     return "svt-test-row" + (this.isFailure ? " svt-test-row--failed" : "") + (this.disabled ? " svt-test-row--disabled" : "");
   }
-  public get displayName(): string { return this.unnamed ? "(unnamed)" : this.name; }
-  public get statusTitle(): string { return this.status || "not run"; }
+  public get displayName(): string { return this.unnamed ? testerText("common.unnamed") : this.name; }
+  public get statusTitle(): string { return this.status || testerText("common.notRun"); }
   public get stateText(): string { return this.isFailure ? (this.status as string) : ""; }
-  public get disabledNote(): string { return this.disabled ? "disabled in the suite" : ""; }
+  public get disabledNote(): string {
+    return this.disabled ? testerText("row.disabledInSuite") : "";
+  }
   public get runDisabled(): boolean { return this.locked || this.disabled; }
   public get runTitle(): string {
-    return this.disabled ? "disabled in the suite" : "Run this test — " + this.runModeName; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    return this.disabled
+      ? testerText("row.disabledInSuite")
+      : testerText("row.runTitle", this.runModeName);
   }
   public get runAriaLabel(): string {
-    return "run " + this.name + " now, in " + this.runModeName + " mode";
+    return testerText("row.runAriaLabel", this.name, this.runModeName);
   }
-  public get selectAriaLabel(): string { return "run " + this.name; }
+  public get selectAriaLabel(): string { return testerText("row.selectAriaLabel", this.name); }
   public get toggleAriaLabel(): string {
-    return (this.expanded ? "collapse " : "expand ") + this.name;
+    return testerText("row.toggleAriaLabel", this.name, this.expanded);
   }
   public get selectDisabled(): boolean { return this.locked || this.disabled; }
   // The issues of the test and of every step of it, in the order the panel prints them. One flat list,
@@ -284,7 +299,7 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
 
   // The flat description of this test the host's verbs are handed. A screen that edits the suite reads
   // the test it is editing, not the model that draws it.
-  public toPanelTest(): PanelTest {
+  public toPanelTest(): ITesterPanelTest {
     return {
       name: this.name,
       index: this.index,
@@ -302,9 +317,9 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
   // A name is refused while it is typed against its siblings; the commit is still what decides.
   public get nameTypedProblem(): string | undefined {
     const trimmed = this.nameTrimmed;
-    if (!trimmed) return "A test must have a name: the session is addressed by it and not by an index.";
+    if (!trimmed) return testerText("row.nameRequired");
     return this.siblingNames.filter(name => name !== this.name).indexOf(trimmed) > -1
-      ? "The suite already has a test named \"" + trimmed + "\"."
+      ? testerText("row.nameTaken", trimmed)
       : undefined;
   }
   public get nameProblem(): string | undefined { return this.nameRefusal || this.nameTypedProblem; }
@@ -372,7 +387,7 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
   }
 
   private updateVerbs(): void {
-    const actions = this.actions as TestRowActions;
+    const actions = this.actions as ITesterRowActions;
     // Rebuilt only when the set of supplied verbs changes: the container holds what the host gave, and
     // what it gave is the same on every render of a screen.
     const supplied = (!!actions.onEdit ? "e" : "") + "j" + (!!actions.onDelete ? "d" : "");
@@ -382,7 +397,7 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
       if (!!actions.onEdit) {
         items.push(new Action({
           id: "edit", enabled: true,
-          title: "Edit",
+          title: testerText("row.edit"),
           css: "svt-test-row__verb",
           innerCss: "svt-button",
           action: () => {
@@ -393,7 +408,7 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
       }
       items.push(new Action({
         id: "json", enabled: true,
-        title: "JSON",
+        title: testerText("row.json"),
         css: "svt-test-row__verb",
         innerCss: "svt-button",
         action: () => { if (!!this.actions)this.actions.onJson(this.toPanelTest()); },
@@ -401,7 +416,7 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
       if (!!actions.onDelete) {
         items.push(new Action({
           id: "delete", enabled: true,
-          title: "Delete",
+          title: testerText("row.delete"),
           css: "svt-test-row__verb",
           innerCss: "svt-button svt-test-row__delete",
           action: () => {
@@ -412,11 +427,18 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
       }
       this.verbs.setItems(items);
     }
+    this.updateEditAction();
+  }
+
+  // Entering the recorder never fails because something was running: it stops it, and the verb that was
+  // pressed says so while the stop unwinds. The title is written here rather than read off the widget
+  // root because a row component subscribes to the row and to nothing else.
+  private updateEditAction(): void {
     const edit = this.verbs.getActionById("edit");
-    if (!!edit) {
-      edit.enabled = !this.editDisabledReason;
-      edit.tooltip = this.editDisabledReason || "";
-    }
+    if (!edit) return;
+    edit.title = this.editPending ? testerText("row.editStopping") : testerText("row.edit");
+    edit.enabled = !this.editDisabledReason && !this.editPending;
+    edit.tooltip = this.editDisabledReason || "";
   }
 
   // The rows are the document's positions, plus one for the end of the case. They are reconciled rather

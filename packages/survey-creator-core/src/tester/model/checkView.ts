@@ -3,6 +3,7 @@ import type {
   ISurveyTestCheckResult, ISurveyTestExpressionTrace, ISurveyTestIssue,
 } from "survey-core/tester";
 import { formatValue } from "../core/stepInfo";
+import { testerText } from "../localization";
 
 // Why a check did not hold, and where in the two documents to look - said once, as data a view loops
 // over.
@@ -90,10 +91,11 @@ export function buildCheckView(check: ISurveyTestCheckResult, key: string, showT
   if (!!expression) {
     lines.push({
       key: "expression",
-      label: "expression",
+      label: testerText("why.expressionLabel"),
       parts: [
         code(expression.expression),
-        text("read " + formatValue(expression.values, 90) + " → " + formatValue(expression.result, 30)), // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        text(testerText("why.expressionRead", formatValue(expression.values, 90),
+          formatValue(expression.result, 30))),
       ],
       notes: describeUnknownNames(expression),
     });
@@ -103,9 +105,9 @@ export function buildCheckView(check: ISurveyTestCheckResult, key: string, showT
   if (!!blocked) {
     lines.push({
       key: "blocked",
-      label: "blocked",
+      label: testerText("why.blockedLabel"),
       parts: [
-        text("\"" + blocked.command + "\" did not leave the page"),
+        text(testerText("why.blockedBy", blocked.command)),
         code(blocked.page),
       ],
       notes: blocked.questions.map(question => ({
@@ -114,7 +116,9 @@ export function buildCheckView(check: ISurveyTestCheckResult, key: string, showT
           code(question.name),
           text(question.errors.length
             ? question.errors.join("; ")
-            : question.isRequired && question.isEmpty ? "is required and empty" : "held it"),
+            : question.isRequired && question.isEmpty
+              ? testerText("why.questionRequired")
+              : testerText("why.questionHeld")),
         ],
         jsonPath: question.jsonPath,
       })),
@@ -124,12 +128,12 @@ export function buildCheckView(check: ISurveyTestCheckResult, key: string, showT
   (details.triggers || []).forEach((trace, at) => {
     lines.push({
       key: "trigger-" + at,
-      label: "trigger",
+      label: testerText("why.triggerLabel"),
       parts: [
         code(trace.triggerType),
-        text("fired on"),
+        text(testerText("why.triggerFiredOn")),
         code(trace.expression),
-        text("in step " + trace.stepIndex),
+        text(testerText("why.triggerInStep", trace.stepIndex)),
       ],
       jsonPath: trace.jsonPath,
       notes: [],
@@ -140,10 +144,10 @@ export function buildCheckView(check: ISurveyTestCheckResult, key: string, showT
   if (!!cleared) {
     lines.push({
       key: "cleared",
-      label: "cleared",
+      label: testerText("why.clearedLabel"),
       parts: [
         code(cleared.name),
-        text("was dropped in step " + cleared.stepIndex + "; the effective clearInvisibleValues is"),
+        text(testerText("why.clearedIn", cleared.stepIndex)),
         code(String(cleared.clearInvisibleValues)),
       ],
       jsonPath: cleared.jsonPath,
@@ -154,7 +158,7 @@ export function buildCheckView(check: ISurveyTestCheckResult, key: string, showT
   if (details.rowIndex !== undefined) {
     lines.push({
       key: "row",
-      label: "row",
+      label: testerText("why.rowLabel"),
       parts: [text(String(details.rowIndex))],
       notes: [],
     });
@@ -163,7 +167,8 @@ export function buildCheckView(check: ISurveyTestCheckResult, key: string, showT
   return {
     key: key,
     target: showTarget ? check.target + "." + check.check : undefined,
-    summary: "expected " + formatValue(check.expected, 120) + ", got " + formatValue(check.actual, 120),
+    summary: testerText("why.checkSummary", formatValue(check.expected, 120),
+      formatValue(check.actual, 120)),
     jsonPath: check.jsonPath,
     why: lines,
     unknownJson: getUnknownDetails(check.details, details),
@@ -176,9 +181,9 @@ function describeUnknownNames(trace: ISurveyTestExpressionTrace): Array<WhyNote>
   if (!names.length) return [];
   const listed = names.map(name => {
     const closest = !!trace.suggestions ? trace.suggestions[name] : undefined;
-    return name + (!!closest ? " (did you mean " + closest + "?)" : "");
+    return testerText("why.didYouMean", name, closest || "");
   }).join(", ");
-  return [{ key: "unknown", parts: [text(listed + " resolve to nothing.")] }];
+  return [{ key: "unknown", parts: [text(testerText("why.unknownNames", listed))] }];
 }
 
 function getUnknownDetails(details: any, known: { [name: string]: any }): string {

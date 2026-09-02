@@ -1,13 +1,14 @@
 import { findNodeAtLocation, parseTree } from "jsonc-parser";
 import { SurveyTestValidator } from "survey-core/tester";
 import type { ISurveyTestIssue } from "survey-core/tester";
+import { testerText } from "../localization";
 
 // Editor-time diagnostics. The same validator the runner uses, so what the Tests tab underlines is
 // exactly what would stop a run - nothing is reimplemented here.
 
 export function validateSuite(suite: any): Array<ISurveyTestIssue> {
   if (!suite || typeof suite !== "object") {
-    return [{ severity: "error", code: "notAnObject", message: "A test suite must be a JSON object." }];
+    return [{ severity: "error", code: "notAnObject", message: testerText("validate.notAnObject") }];
   }
   try {
     return new SurveyTestValidator().validate(suite);
@@ -15,8 +16,8 @@ export function validateSuite(suite: any): Array<ISurveyTestIssue> {
     return [{
       severity: "error",
       code: "unexpectedError",
-      message: "The validator failed on this document: " +
-        (!!error && (error as any).message ? (error as any).message : String(error)),
+      message: testerText("validate.unexpectedError",
+        !!error && (error as any).message ? (error as any).message : String(error)),
     }];
   }
 }

@@ -9,14 +9,14 @@ import { sample as failingSuite } from "../samples/12-failing-suite";
 import { SETUP_SURVEY_ID_PREFIX } from "../../src/tester/core/elementIds";
 import { defaultHostOptions, defaultTestOptions } from "../../src/tester/core/hostOptions";
 
-import { SetupModel } from "../../src/tester/model/setupSurvey";
+import { TesterSettingsModel } from "../../src/tester/model/settingsModel";
 import { TesterRunnerModel } from "../../src/tester/model/runnerModel";
-import type { RunnerEnvironment, TestsPanelExtras } from "../../src/tester/model/runnerHost";
+import type { ITesterPanelExtras, ITesterRunnerEnvironment } from "../../src/tester/model/runnerApi";
 import type { TesterTestRowModel } from "../../src/tester/model/testRowModel";
 
 // A screen around the model, with every callback a spy. It is what RunView pushes in on every render.
-function environment(over: Partial<RunnerEnvironment> = {}): RunnerEnvironment {
-  const extras: TestsPanelExtras = {
+function environment(over: Partial<ITesterRunnerEnvironment> = {}): ITesterRunnerEnvironment {
+  const extras: ITesterPanelExtras = {
     rowActions: {
       onRunOne: () => undefined,
       onRunTo: () => undefined,
@@ -318,7 +318,7 @@ describe("the test list", () => {
 describe("the Setup tab's survey", () => {
   it("carries its element id prefix, and edits the two option objects", () => {
     const seen: Array<any> = [];
-    const setup = new SetupModel({
+    const setup = new TesterSettingsModel({
       onTestOptions: next => seen.push(["test", next]),
       onHostOptions: next => seen.push(["host", next]),
     });

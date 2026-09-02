@@ -20,13 +20,15 @@ import {
 import type { StepSegment } from "../core/segmentRun";
 import { getSuiteTests } from "../core/stepInfo";
 import { copyToClipboard } from "../core/json";
+import { testerText } from "../localization";
 import { sameMembers } from "./arrays";
 import { buildIssueView } from "./checkView";
 import type { IssueView } from "./checkView";
 import { TesterConsoleModel } from "./consoleModel";
 import { runnerActionBarCss, runnerListCss, runnerMenuCss } from "./runnerCss";
-import type { RunnerApi, StartParams, StepCursor, StepRunParams } from "./runnerApi";
-import type { RunnerEnvironment } from "./runnerHost";
+import type {
+  ITesterPanelExtras, ITesterRunnerEnvironment, RunnerApi, StartParams, StepCursor, StepRunParams,
+} from "./runnerApi";
 import { TesterTestRowModel } from "./testRowModel";
 
 // The whole of the Tests tab's list screen, said once and without a framework.
@@ -46,15 +48,18 @@ import { TesterTestRowModel } from "./testRowModel";
 const MAX_ROWS = 4000;
 
 // One button for what the run does and one for how it is watched, because a person presses the first
-// far more often than they change the second.
-export const RUN_MODES: Array<{ id: RunMode, name: string, note: string }> = [
-  { id: "ui", name: "UI", note: "drives the model on screen, at the delay set below" },
-  { id: "console", name: "Console", note: "no model rendered and nothing waited for — a unit-test run" }, // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-];
+// far more often than they change the second. The two words and the two notes moved into the string
+// table with everything else the widget says, so this is the order they are offered in and nothing more.
+export const RUN_MODES: Array<RunMode> = ["ui", "console"];
 
+// Keyed by the mode, which is a closed set of two: localization.test.ts enumerates RUN_MODES against
+// the table rather than grepping for a literal path.
 export function getRunModeName(mode: RunMode): string {
-  const found = RUN_MODES.filter(entry => entry.id === mode)[0];
-  return !!found ? found.name : mode;
+  return testerText("runner.modeName." + mode);
+}
+
+export function getRunModeNote(mode: RunMode): string {
+  return testerText("runner.modeNote." + mode);
 }
 
 export function clampDelay(raw: string | number): number {
@@ -78,7 +83,9 @@ export class TesterRunnerModel extends Base implements RunnerApi {
   @property({ defaultValue: "idle" }) phase!: RunPhase;
   @property({ defaultValue: false }) isPaused!: boolean;
   @property({ defaultValue: 0 }) elapsedMs!: number;
-  @property({ defaultValue: "not run yet" }) summaryText!: string;
+  // Written in the constructor rather than as a decorator default: a default is evaluated when the
+  // class is defined, which is before a host can have said which locale it wants.
+  @property({ defaultValue: "" }) summaryText!: string;
   // Bumped once per painted frame. It is what a view keys a repaint off when the thing that changed is
   // inside the live tree rather than a property of its own.
   @property({ defaultValue: 0 }) version!: number;
@@ -161,8 +168,12 @@ export class TesterRunnerModel extends Base implements RunnerApi {
   // some other way - a test with a stubbed runner, a shell with an engine of its own - hands one in,
   // and then the verbs go there and the run state is read back from it in readSource().
   private source?: RunnerApi;
-  private environment?: RunnerEnvironment;
+  private environment?: ITesterRunnerEnvironment;
   private rowModels: Array<TesterTestRowModel> = [];
+  // The test whose Edit is waiting for a run to unwind. One at a time, by name, because the verb that
+  // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  // reads "Stopping…" has to be the verb that was pressed.
+  private editPendingName?: string;
   // "No selection has been applied yet", as a key no real one can equal: "*" is every test and any
   // other value is a join of names. The prototype wrote the NUL as a raw byte, which makes the file
   // binary to grep and to half the tooling that reads it; the escape is the same string.
@@ -173,6 +184,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     this.source = source;
     this.run = createEmptyRun();
     this.rows = [];
+    this.summaryText = testerText("runner.summary.notRunYet");
     this.console = new TesterConsoleModel({
       onClear: () => this.clearConsole(),
       getTranscript: () => this.getTranscript(),
@@ -184,7 +196,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
       // step list, so it is a list of rows and it says so.
       listRole: "list",
       listItemRole: "listitem",
-      listAriaLabel: "the tests of the suite",
+      listAriaLabel: testerText("runner.listAriaLabel"),
       // Available and deliberately not wired: a suite large enough to want a search box gets one later
       // by setting one property.
       searchEnabled: false,
@@ -199,11 +211,11 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     this.listHead = new ActionContainer();
     this.listHead.setCssClasses(runnerActionBarCss, false);
     this.fixJson = new Action({
-      id: "fix-json", title: "Fix it in the JSON", css: "svt-link", enabled: true,
+      id: "fix-json", title: testerText("runner.fixJson"), css: "svt-link", enabled: true,
       action: () => this.callExtra(extras => extras.onFixJson),
     });
     this.dismissNotice = new Action({
-      id: "dismiss", title: "Dismiss", css: "svt-link", enabled: true,
+      id: "dismiss", title: testerText("runner.dismiss"), css: "svt-link", enabled: true,
       action: () => this.callExtra(extras => extras.onDismissNotice),
     });
     this.buildToolbar();
@@ -215,7 +227,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
 
   // Everything the model does not own, pushed in on the render that will show it. A projection that
   // lagged one render behind would draw the suite as it was.
-  public refresh(environment: RunnerEnvironment): void {
+  public refresh(environment: ITesterRunnerEnvironment): void {
     if (this.gone) return;
     this.environment = environment;
     if (!!this.source)this.readSource();
@@ -223,6 +235,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     this.blockedReason = environment.blockedReason || "";
     this.runNotice = environment.canRun ? (environment.runNotice || "") : "";
     this.transitionNotice = environment.extras.notice || "";
+    this.editPendingName = environment.extras.editPendingName;
     this.mode = environment.mode;
     this.activeMode = environment.activeMode;
     this.stepDelayMs = environment.hostOptions.stepDelayMs;
@@ -316,6 +329,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
         canRun: this.canRun,
         blockedReason: this.blockedReason,
         runModeName: modeName,
+        editPending: !!this.editPendingName && this.editPendingName === row.name,
       });
       (!!live ? live.steps : []).forEach(step => step.checks.forEach(check => {
         total += 1;
@@ -351,38 +365,40 @@ export class TesterRunnerModel extends Base implements RunnerApi {
   public get canDismissNotice(): boolean {
     return !!this.environment && !!this.environment.extras.onDismissNotice;
   }
+  public get canOpenSettings(): boolean {
+    return !!this.environment && !!this.environment.extras.onSettings;
+  }
   public get canToggleLog(): boolean {
     return !!this.environment && this.environment.canToggleLog;
   }
   // A console run has no model to watch, so the pane it would have filled shows the run itself, and the
   // full log is read in that same place.
   public get consoleOnLeft(): boolean { return this.activeMode === "console" || this.logOnLeft; }
-  public get logToggleTitle(): string { return this.logOnLeft ? "← the model" : "full log →"; } // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  public get logToggleTitle(): string {
+    return this.logOnLeft ? testerText("runner.logToModel") : testerText("runner.logToFull");
+  }
   public get checkFootText(): string {
-    return this.checkTotal + " check" + (this.checkTotal === 1 ? "" : "s") +
-      (this.checkFailed > 0 ? ", " + this.checkFailed + " failed" : "");
+    return testerText("runner.checkFoot", this.checkTotal, this.checkFailed);
   }
   // What the picker used to say at the bottom of its list. A session is addressed by name, so a test
   // without one cannot be recorded into - and it is said where the name can be given.
   public get unnamedNote(): string {
     const count = this.unnamedCount;
     if (!count || !this.environment || !this.environment.extras.rowActions.onRename) return "";
-    return count + " " + (count === 1 ? "test has" : "tests have") + " no name and cannot be recorded" +
-      " into. Expand " + (count === 1 ? "its" : "their") + " row and give " +
-      (count === 1 ? "it" : "them") + " one.";
+    return testerText("runner.unnamedNote", count);
   }
 
   // What the pane on the left is showing, in one line. A failed test leaves its model exactly where
   // the failing check found it, and that is the whole reason the pane stays on screen after the run.
   public get surveyPaneTitle(): string {
     const test = this.currentTest;
-    return !!test && !!test.name ? test.name : "(test)";
+    return !!test && !!test.name ? test.name : testerText("runner.paneTitle");
   }
   public get surveyPaneNote(): string {
-    if (this.isRunning) return "driven by the tester, input disabled";
+    if (this.isRunning) return testerText("runner.paneNoteRunning");
     const status = !!this.currentTest ? this.currentTest.status : undefined;
-    if (status === "failed" || status === "error") return "model at the failing step, input disabled";
-    return "model of the last test, input disabled";
+    if (status === "failed" || status === "error") return testerText("runner.paneNoteFailed");
+    return testerText("runner.paneNoteLast");
   }
   // Whether the question a command is about to write into should be outlined at all: the Setup tab
   // says so, and a run that has ended points at nothing.
@@ -421,7 +437,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     this.selectedCount = count;
     const run = this.toolbar.getActionById("run");
     if (!!run) {
-      run.title = "Run " + count + " test" + (count === 1 ? "" : "s");
+      run.title = testerText("runner.run", count);
       run.enabled = this.canRun && !this.isRunning && count > 0;
       run.tooltip = this.blockedReason;
     }
@@ -519,7 +535,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     if (!this.environment) return;
     this.environment.onHostOptions({ ...this.environment.hostOptions, ...patch });
   }
-  private callExtra(pick: (extras: RunnerEnvironment["extras"]) => (() => void) | undefined): void {
+  private callExtra(pick: (extras: ITesterPanelExtras) => (() => void) | undefined): void {
     if (!this.environment) return;
     const handler = pick(this.environment.extras);
     if (!!handler) handler();
@@ -538,7 +554,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
         title: getRunModeName(this.mode),
       },
       {
-        items: RUN_MODES.map(entry => ({ id: entry.id, title: entry.name, tooltip: entry.note })),
+        items: RUN_MODES.map(id => ({ id: id, title: getRunModeName(id), tooltip: getRunModeNote(id) })),
         allowSelection: true,
         searchEnabled: false,
         selectedItem: { id: this.mode, title: getRunModeName(this.mode) },
@@ -551,37 +567,47 @@ export class TesterRunnerModel extends Base implements RunnerApi {
         horizontalPosition: "center",
       },
     );
-    mode.tooltip = "how the run is watched";
+    mode.tooltip = testerText("runner.modeTooltip");
     // createDropdownActionModel stamps the library's own menu classes onto the list it builds, so the
     // menu is dressed after the fact. Action.data is that ListModel - dropdown-action.ts sets it.
     (mode.data as ListModel).setCssClasses(runnerMenuCss, false);
     this.toolbar.setItems([
       new Action({
-        id: "run", title: "Run 0 tests", css: "svt-tests__action svt-tests__action--run",
+        id: "run", title: testerText("runner.run", 0), css: "svt-tests__action svt-tests__action--run",
         innerCss: "svt-button svt-button--primary", enabled: false,
         action: () => this.runSelected(),
       }),
       mode,
       new Action({
-        id: "stop", title: "Stop", css: "svt-tests__action", innerCss: "svt-button", enabled: false,
+        id: "stop", title: testerText("runner.stop"), css: "svt-tests__action", innerCss: "svt-button",
+        enabled: false,
         action: () => this.stop(),
       }),
       new Action({
-        id: "resume", title: "Resume", css: "svt-tests__action", innerCss: "svt-button svt-button--primary",
+        id: "resume", title: testerText("runner.resume"), css: "svt-tests__action",
+        innerCss: "svt-button svt-button--primary",
         visible: false, enabled: true,
         action: () => this.resume(),
+      }),
+      // The host options, as the form they are - opened over this bar by the widget root, which owns
+      // the popup. See settingsModel.ts.
+      new Action({
+        id: "settings", title: testerText("runner.settings"), tooltip: testerText("runner.settingsTooltip"),
+        css: "svt-tests__action", innerCss: "svt-button", enabled: true, visible: false,
+        action: () => this.callExtra(extras => extras.onSettings),
       }),
     ]);
   }
 
   private buildListHead(): void {
     this.listHead.setItems([
-      new Action({ id: "all", title: "All", css: "svt-tests__link", innerCss: "svt-link", enabled: true, action: () => this.selectAll() }),
-      new Action({ id: "none", title: "None", css: "svt-tests__link", innerCss: "svt-link", enabled: true, action: () => this.selectNone() }),
-      new Action({ id: "failing", title: "Failing", css: "svt-tests__link", innerCss: "svt-link", enabled: true, action: () => this.selectFailing() }),
-      new Action({ id: "copy-log", title: "Copy log", css: "svt-tests__link", innerCss: "svt-link", enabled: true, action: () => this.copyLog() }),
+      new Action({ id: "all", title: testerText("runner.all"), css: "svt-tests__link", innerCss: "svt-link", enabled: true, action: () => this.selectAll() }),
+      new Action({ id: "none", title: testerText("runner.none"), css: "svt-tests__link", innerCss: "svt-link", enabled: true, action: () => this.selectNone() }),
+      new Action({ id: "failing", title: testerText("runner.failing"), css: "svt-tests__link", innerCss: "svt-link", enabled: true, action: () => this.selectFailing() }),
+      new Action({ id: "copy-log", title: testerText("runner.copyLog"), css: "svt-tests__link", innerCss: "svt-link", enabled: true, action: () => this.copyLog() }),
       new Action({
-        id: "new-test", title: "New test", css: "svt-tests__link", innerCss: "svt-link svt-link--strong",
+        id: "new-test", title: testerText("runner.newTest"), css: "svt-tests__link",
+        innerCss: "svt-link svt-link--strong",
         visible: false, enabled: true,
         action: () => this.toggleNaming(),
       }),
@@ -606,41 +632,44 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     const newTest = this.listHead.getActionById("new-test");
     if (!!newTest) {
       newTest.visible = this.canCreateTest;
-      newTest.title = this.naming ? "Cancel" : "New test";
+      newTest.title = this.naming ? testerText("runner.cancel") : testerText("runner.newTest");
     }
+    const settings = this.toolbar.getActionById("settings");
+    if (!!settings) settings.visible = this.canOpenSettings;
   }
 
   // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
   // "3 passed · 2.9s". Anything that is zero is left out: a run says what happened, not what did not.
   private describeRun(): string {
     const run = this.run;
-    if (run.phase === "idle") return "not run yet";
-    const seconds = (run.elapsedMs / 1000).toFixed(1) + "s";
+    if (run.phase === "idle") return testerText("runner.summary.notRunYet");
+    const seconds = testerText("runner.summary.seconds", run.elapsedMs);
     const summary = run.summary;
     const counts: Array<string> = [];
     if (!!summary) {
-      if (summary.passed) counts.push(summary.passed + " passed");
-      if (summary.failed) counts.push(summary.failed + " failed");
-      if (summary.errored) counts.push(summary.errored + " errored");
-      if (summary.skipped) counts.push(summary.skipped + " skipped");
-      if (summary.canceled) counts.push(summary.canceled + " canceled");
+      if (summary.passed) counts.push(testerText("runner.summary.passed", summary.passed));
+      if (summary.failed) counts.push(testerText("runner.summary.failed", summary.failed));
+      if (summary.errored) counts.push(testerText("runner.summary.errored", summary.errored));
+      if (summary.skipped) counts.push(testerText("runner.summary.skipped", summary.skipped));
+      if (summary.canceled) counts.push(testerText("runner.summary.canceled", summary.canceled));
     } else {
       const done = run.tests.filter(test => test.status !== "running").length;
-      counts.push(done + "/" + run.plannedTests + " tests");
+      counts.push(testerText("runner.summary.progress", done, run.plannedTests));
     }
-    if (!counts.length) counts.push("no test ran");
+    if (!counts.length) counts.push(testerText("runner.summary.noTestRan"));
     // A part-run says which part it was: "1 passed" about three steps of a seven-step case is true of
     // the three and of nothing else.
     const cursor = this.cursor;
     const part = !!cursor && !!cursor.ran
-      ? " · " + describeSegment(cursor.ran) + " of \"" + cursor.testName + "\"" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+      ? testerText("runner.summary.part", describeSegment(cursor.ran), cursor.testName)
       : "";
     const state = this.isPaused
-      ? " · paused on a failing check" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+      ? testerText("runner.summary.paused")
       : run.phase === "canceling"
-        ? " · stopping" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-        : run.phase === "running" ? " · running" : ""; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-    return counts.join(" · ") + part + " · " + seconds + state; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        ? testerText("runner.summary.stopping")
+        : run.phase === "running" ? testerText("runner.summary.running") : "";
+    return testerText("runner.summary.line",
+      counts.join(testerText("runner.summary.join")), part, seconds, state);
   }
 
   // ---- the run itself -----------------------------------------------------------------------------
@@ -679,10 +708,10 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     // that instead: a name is warned about when it repeats, so it is not an identity.
     const testFilter: SurveyTestFilter | undefined = !selected
       ? undefined : (test: ISurveyTest) => selected.indexOf(test.name) > -1;
-    this.log("info", "run requested — " + (!selected ? "every test" : selected.length + " of " + // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-      getSuiteTests(params.suite).length + " tests") + ", delay " + params.hostOptions.stepDelayMs +
-      " ms per " + params.hostOptions.delayGranularity +
-      (params.hostOptions.attachServerValidation ? ", server validation handler attached" : ""));
+    this.log("info", testerText("runner.log.runRequested",
+      !selected ? undefined : selected.length, getSuiteTests(params.suite).length,
+      params.hostOptions.stepDelayMs, params.hostOptions.delayGranularity,
+      params.hostOptions.attachServerValidation));
     this.flush(true);
 
     void (async() => {
@@ -708,11 +737,11 @@ export class TesterRunnerModel extends Base implements RunnerApi {
         // be a bug in this host or in the tester, so it is shown instead of smoothed over.
         const mismatches = reconcile(this.draft, outcome.result);
         this.draft.mismatches = mismatches;
-        mismatches.forEach(text => this.log("error", "the live tree and the result disagree: " + text));
+        mismatches.forEach(text => this.log("error", testerText("runner.log.disagree", text)));
         if (!this.gone)this.result = outcome.result;
       } catch(error) {
         // run() does not reject: it reports everything as an issue. Reaching this is a host bug.
-        this.log("error", "the run threw: " + describeError(error));
+        this.log("error", testerText("runner.log.threw", describeError(error)));
       } finally {
         this.draft.phase = "done";
         this.controller = undefined;
@@ -778,12 +807,8 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     const segment: StepSegment = {
       testIndex: params.testIndex, testName: params.testName, from: from, to: to, count: count,
     };
-    this.log("info", "run requested — " + describeSegment(segment) + " of \"" + params.testName + "\", " + // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-      (continued
-        ? "on the model the last run stopped on"
-        : from === to
-          ? "which builds the model and runs no step"
-          : "on a model built for it"));
+    this.log("info", testerText("runner.log.segmentRequested", describeSegment(segment), params.testName,
+      continued ? "continued" : from === to ? "empty" : "fresh"));
     this.flush(true);
 
     void (async() => {
@@ -814,7 +839,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
         this.draft.elapsedMs = outcome.elapsedMs;
         const mismatches = reconcileSegment(this.draft, resolved, segment);
         this.draft.mismatches = mismatches;
-        mismatches.forEach(text => this.log("error", "the live tree and the result disagree: " + text));
+        mismatches.forEach(text => this.log("error", testerText("runner.log.disagree", text)));
         if (!this.gone)this.result = resolved;
 
         // Where the case actually stopped. It is the number of steps the result reports and not the "to"
@@ -825,18 +850,17 @@ export class TesterRunnerModel extends Base implements RunnerApi {
         // cancellation stops in the middle of a command, and what the model holds then is nobody's
         // description of anything - so it is dropped and the next run starts from the first step.
         const dropped = !testResult
-          ? "the run produced no result for the test"
+          ? testerText("runner.dropped.noResult")
           : !model
-            ? "no model reached this application"
+            ? testerText("runner.dropped.noModel")
             : testResult.status === "error" || testResult.status === "canceled"
-              ? "the run ended as " + testResult.status + " — a step that did not finish leaves the model" + // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-                " in a state the case does not describe"
+              ? testerText("runner.dropped.unfinished", testResult.status)
               : undefined;
         this.held = !!dropped ? undefined : {
           testName: params.testName, testIndex: params.testIndex, survey: model as SurveyModel,
           at: ranTo, signature: segmentSignature({ ...inputs, at: ranTo }),
         };
-        if (!!dropped)this.log("warn", "the model was not kept: " + dropped);
+        if (!!dropped)this.log("warn", testerText("runner.log.modelNotKept", dropped));
         if (!this.gone) {
           this.cursor = {
             testName: params.testName, testIndex: params.testIndex, at: !dropped ? ranTo : 0,
@@ -845,7 +869,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
         }
       } catch(error) {
         // run() does not reject: it reports everything as an issue. Reaching this is a host bug.
-        this.log("error", "the run threw: " + describeError(error));
+        this.log("error", testerText("runner.log.threw", describeError(error)));
         this.held = undefined;
         if (!this.gone)this.cursor = undefined;
       } finally {
@@ -863,7 +887,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     if (!!this.source) { this.source.stop(); return; }
     if (!this.controller) return;
     this.draft.phase = "canceling";
-    this.log("warn", "Stop pressed. The run ends at the next boundary; what is already running finishes.");
+    this.log("warn", testerText("runner.log.stopPressed"));
     // Both waits of this host end on the signal, so the effect is immediate even mid-pause.
     this.controller.abort();
     this.pause.resume();
@@ -958,7 +982,7 @@ export class TesterRunnerModel extends Base implements RunnerApi {
         this.rowId += 1;
         this.rowsDraft.unshift({
           id: this.rowId, atMs: 0, level: "warn", source: "host", indent: 0,
-          text: "The console keeps the last " + MAX_ROWS + " rows. Download the transcript for the whole run.",
+          text: testerText("runner.log.truncated", MAX_ROWS),
         });
       }
     }
@@ -1018,7 +1042,7 @@ function isNamed(test: any): boolean {
 }
 
 function readName(test: any): string {
-  return isNamed(test) ? test.name : "(unnamed)";
+  return isNamed(test) ? test.name : testerText("common.unnamed");
 }
 
 // The tester reports no duration, so the host times a test between the two events that frame it. This

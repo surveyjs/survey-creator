@@ -63,10 +63,78 @@ registered component names are prefixed `svt-`, the way the preset editor owns `
 exception and deliberately so: it exports functions and interfaces that keep the names they had in the
 prototype, because that is what makes the port diffable.
 
-Two names in layer 1 are still the prototype's on purpose, and prompt 03 settles both when it writes the
-host contract: `SetupModel` (`model/setupSurvey.ts`) and the `RunnerEnvironment` / `TestsPanelExtras` /
-`TestRowActions` interfaces of `model/runnerHost.ts`. They describe what the *host* hands the widget, and
-renaming them here and again there would be two renames of one thing.
+Prompt 03 settled the two names prompt 02 had deliberately left as the prototype's, because they were
+about the host contract and renaming them twice would have been one rename too many. `SetupModel` is
+`TesterSettingsModel` (`model/settingsModel.ts`), and the interfaces of the deleted `model/runnerHost.ts`
+moved into `model/runnerApi.ts` as `ITesterPanelTest`, `ITesterRowActions`, `ITesterNewTestParams`,
+`ITesterNewTestSupport`, `ITesterPanelExtras` and `ITesterRunnerEnvironment`.
+
+`model/runnerApi.ts`'s older members — `StartParams`, `StepRunParams`, `StepCursor`, `RunnerApi` — keep
+the prototype's names. They describe what a *run* is asked for and reports back rather than anything a
+host implements, prompt 02 ported them unchanged on purpose, and nothing since has asked them to move.
+
+## The host contract — the widget owns no documents
+
+`ITesterHost` (`model/testerHost.ts`) is the whole of what a host implements:
+
+```ts
+interface ITesterHost {
+  getSurveyJson(): any;                 // the definition. Read-only to the widget, always.
+  getTestsText(): string;               // the suite document, as TEXT — the source of truth
+  setTestsText(text: string): void;     // every widget edit, immediately; no Apply, no staging
+  options?: ITesterOptions;             // host defaults for run/recorder options, a locale, a mode
+}
+```
+
+Standalone usage is `new SurveyTesterModel(host)` plus one framework component rendering it. The Creator
+plugin tab, when it comes, implements this over `creator.text` and adds a tab — nothing else.
+
+* The host calls `updateFromHost()` when either document changed outside the widget. The widget calls it
+  on itself after its own `setTestsText`, so there is one reconciliation path and not two: re-validate,
+  reconcile the runner's rows, refresh the JSON screen, close a session whose test disappeared, clamp the
+  recorder's cursor, and stop a run whose survey definition changed underneath it.
+* UI state that should survive a reload is one serializable object — `getState()` / `setState(state)` —
+  and persisting it is the host's business. The widget never touches `localStorage`.
+* The host's `options` are **defaults**. What a person changes afterwards goes into the widget state and
+  is never written back, so a host that later ships different defaults is not overruled by a state object
+  that had repeated the old ones.
+
+## The three screens, and the machine between them
+
+`SurveyTesterModel.screen` is `"runner" | "json" | "recorder"`, and the transitions are methods on the
+root model. Three rules travel with them:
+
+* **The JSON screen is never blocked.** It is the bench the document is repaired on; the other screens'
+  blocked banners carry a "Fix it in the JSON" action that leads to it.
+* **Entering the recorder never fails because something was running.** It stops the run, waits for the
+  runner's `phase` to reach `"done"` — the widget's observable proxy for "the tester has unwound and
+  every model it built is released" — and the Edit verb that was pressed reads "Stopping…" meanwhile.
+  `transition` is `"none" | "stopping" | "opening"` so a view can render the in-between without owning it.
+* **One live model, one owner.** Starting a run while a session is open flushes and closes the session
+  first, with a notice saying that nothing was lost because what was recorded is already in the document.
+
+A test is addressed **by name** everywhere; an index is only ever a position in the document being
+edited. The vanished-test fallback is the **recorder's** rule alone: the JSON screen reads
+`activeTestName` once, on entry, to reveal the test's start, and then lets go — so renaming or deleting
+the very test you arrived from never closes the editor it is being typed in.
+
+## Localization
+
+`localization/english.ts` holds every person-readable string the widget says, and `localization/index.ts`
+exposes `testerLocalization` — current locale, `getString(path)`, an english fallback, a `locales`
+registry — shaped like `editorLocalization` so that a translated bundle is mechanical, and sharing not one
+line with it because rule 1 forbids the import. `testerText(path, ...values)` is the accessor every call
+site uses.
+
+A leaf of the table may be a **function**, which is the one difference from `editorLocalization`: almost
+every string here has a number or a name in it, and a table of fragments the caller glues together is a
+table no translator can use. The sentence lives in the table whole.
+
+After the sweep of prompt 03, a hard-coded UI string anywhere under `src/tester/` is a bug, and
+`tests-tester/model/localization.test.ts` says so: it walks the table against the accessor calls in the
+source in both directions, and it is also why `english.ts` is the only file under `src/tester/` whose
+string literals carry non-ASCII — the console transcript's typography and the status marks live there
+now, which is what removed the per-line lint escapes the port had carried for them.
 
 ## The class-name mapping — the one renaming pass
 
@@ -181,10 +249,10 @@ touched:
 | `src/model/checkView.ts` | `model/checkView.ts` — why a check did not hold, as data a view loops over |
 | `src/model/statusTone.ts` | `model/statusTone.ts` |
 | `src/model/runnerCss.ts` | `model/runnerCss.ts` — the `css` maps the reused chrome models are dressed with |
-| `src/model/runnerApi.ts` | `model/runnerApi.ts` — `StartParams`, `StepRunParams`, `StepCursor`, `RunnerApi` |
-| `src/model/runnerHost.ts` | `model/runnerHost.ts` — `RunnerEnvironment` and the row verbs; folded into `ITesterHost` in prompt 03 |
+| `src/model/runnerApi.ts` | `model/runnerApi.ts` — `StartParams`, `StepRunParams`, `StepCursor`, `RunnerApi`, and (since prompt 03) the row verbs of the deleted `runnerHost.ts` |
+| `src/model/runnerHost.ts` | gone; its interfaces are in `model/runnerApi.ts` under `ITester…` names |
 | `src/model/arrays.ts` | `model/arrays.ts` |
-| `src/model/setupSurvey.ts` | `model/setupSurvey.ts` — the host-options survey |
+| `src/model/setupSurvey.ts` | `model/setupSurvey.ts` — the host-options survey definition |
 | `src/model/decorators.test.ts` | `tests-tester/model/decorators.test.ts` |
 | `src/model/runnerModel.test.ts` | `tests-tester/model/runnerModel.test.ts` |
 | `scripts/check-layers.mjs` | `tests-tester/checkLayers.ts` — a test helper here, because this package runs its fences from vitest |
@@ -192,5 +260,18 @@ touched:
 `src/model/checkListModel.ts` is the recorder's check menu and arrives with prompt 05; `src/store/useRunner.ts`
 is React's ownership shim and is not ported at all — prompt 07 writes its equivalent where React lives.
 
-Still to arrive: `recorder/` (prompt 04), the widget root and the recorder models in `model/`
-(prompts 03, 04, 05), `localization/` (prompt 03), `theme/` and `index.ts` (prompt 06).
+The widget shell, ported in prompt 03. Its sources are the prototype's `components/test/TestTab.tsx`,
+`components/test/JsonScreen.tsx`, the half of `App.tsx` the Test tab needed, and `SetupTab`:
+
+| Prototype | Here |
+|---|---|
+| `src/components/test/TestTab.tsx` + the Test-tab half of `src/App.tsx` | `model/testerModel.ts` — `SurveyTesterModel`: the documents, the screens, the transitions, the state |
+| — (new) | `model/testerHost.ts` — `ITesterHost`, `ITesterOptions`, `ITesterState` |
+| `src/components/test/JsonScreen.tsx` + `src/components/TestsJsonEditor.tsx` | `model/jsonModel.ts` — `TesterJsonModel` |
+| `src/views/react/SetupTab.tsx` + `SetupModel` | `model/settingsModel.ts` — `TesterSettingsModel`, the setup survey in a popup |
+| `src/store/useRecorder.ts` | `model/recorderModel.ts` — a typed stub until prompt 04 |
+| — (new) | `localization/english.ts`, `localization/index.ts` |
+| `src/store/usePersistentState.ts` | **not ported**: the host owns persistence, and `getState`/`setState` is what replaces it |
+
+Still to arrive: `recorder/` and the real `TesterRecorderModel` (prompt 04), the recorder's presentation
+models (prompt 05), `theme/` and `index.ts` (prompt 06).

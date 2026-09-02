@@ -1,5 +1,6 @@
 import { SurveyModel } from "survey-core";
 import { SurveyTestTargets, SurveyTestSurveyTargetName } from "survey-core/tester";
+import { testerText } from "../localization";
 
 // The names a case may address, read off a throwaway model built from the Survey JSON tab. It is for
 // introspection only and is disposed immediately: the model a test runs on is created by the runner,
@@ -24,8 +25,6 @@ export interface TargetsResult {
   reservedNameUsed: boolean;
 }
 
-const UNADDRESSABLE = "no name a case can address";
-
 interface Collector {
   survey: SurveyModel;
   targets: Array<TargetInfo>;
@@ -45,7 +44,7 @@ export function getSurveyTargets(surveyJson: any): TargetsResult {
       collect(collector, (page as any).elements || []);
     });
     (survey.calculatedValues || []).forEach(item => {
-      add(collector, item, "calculatedValue", "calculated value");
+      add(collector, item, "calculatedValue", testerText("targets.calculatedValue"));
     });
     return { targets: collector.targets, reservedNameUsed: collector.reservedNameUsed };
   } catch(error) {
@@ -70,7 +69,7 @@ function add(collector: Collector, obj: any, kind: TargetInfo["kind"], note: str
     return;
   }
   if (!own) return;
-  collector.targets.push({ name: own, kind: kind, note: note + " · " + UNADDRESSABLE }); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  collector.targets.push({ name: own, kind: kind, note: testerText("targets.unaddressable", note) });
 }
 
 function collect(collector: Collector, elements: Array<any>): void {
@@ -97,13 +96,13 @@ function collectRows(collector: Collector, element: any): void {
     // Only a dynamic matrix has rows a case addresses by index and can start without any. A matrix with
     // declared rows and no rows declared has no cell to address at all, so nothing is offered for it.
     if (typeof element.rowCount === "number") {
-      hint(collector, element, element.columns, "row this definition does not create");
+      hint(collector, element, element.columns, testerText("targets.rowNotCreated"));
     }
     return;
   }
   (row.cells || []).forEach((cell: any) => {
     const question = !!cell ? cell.question : undefined;
-    if (!!question) add(collector, question, "cell", "cell of " + element.name);
+    if (!!question) add(collector, question, "cell", testerText("targets.cellOf", element.name));
   });
 }
 
@@ -113,13 +112,13 @@ function collectPanels(collector: Collector, element: any): void {
   const panel = element.panels[0];
   if (!panel) {
     if (typeof element.panelCount === "number") {
-      hint(collector, element, element.templateElements || [], "panel this definition does not create");
+      hint(collector, element, element.templateElements || [], testerText("targets.panelNotCreated"));
     }
     return;
   }
-  add(collector, panel, "panel", "panel of " + element.name);
+  add(collector, panel, "panel", testerText("targets.panelOf", element.name));
   (panel.questions || []).forEach((question: any) => {
-    add(collector, question, "cell", "question of " + element.name);
+    add(collector, question, "cell", testerText("targets.questionOf", element.name));
   });
 }
 

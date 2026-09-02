@@ -1,4 +1,5 @@
 import type { SurveyTestExecutionEvent } from "survey-core/tester";
+import { testerText } from "../localization";
 import type { ConsoleVerbosity } from "./hostOptions";
 import { formatValue, getStepCommandName, getStepTargets, getSuiteTests } from "./stepInfo";
 
@@ -42,49 +43,58 @@ export function describeEvent(event: SurveyTestExecutionEvent): RowDraft | undef
     case "runStarted": {
       const tests = getSuiteTests(event.tests);
       const enabled = tests.filter(test => !test.disabled).length;
-      const name = !!event.tests && event.tests.name ? " \"" + event.tests.name + "\"" : "";
+      const name = !!event.tests && event.tests.name ? event.tests.name : "";
       return {
         level: "info",
         indent: 0,
-        text: "run started — suite" + name + ", " + enabled + " of " + tests.length + " tests to run", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        text: testerText("console.runStarted", name, enabled, tests.length),
       };
     }
     case "testStarted":
       return {
         level: "info",
         indent: 0,
-        text: "test " + formatIndex(event.testIndex) + " \"" + safeName(event.test) + "\"",
+        text: testerText("console.testStarted", formatIndex(event.testIndex), safeName(event.test)),
       };
     case "surveyCreated":
       return {
         level: "muted",
         indent: 1,
-        text: "survey model created — this is the model the commands of this test run on", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        text: testerText("console.surveyCreated"),
       };
     case "stepStarted": {
       const command = getStepCommandName(event.step);
       const targets = getStepTargets(event.step, command);
-      const stepName = !!event.step && typeof event.step.name === "string" ? " — " + event.step.name : ""; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+      const stepName = !!event.step && typeof event.step.name === "string"
+        ? testerText("console.stepName", event.step.name) : "";
       return {
         level: "info",
         indent: 1,
-        text: "step " + event.stepIndex + ": " + command + " → " + (targets.join(", ") || "(no target)") + stepName, // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        text: testerText("console.stepStarted", event.stepIndex, command,
+          targets.join(", ") || testerText("common.noTarget"), stepName),
       };
     }
     case "targetStarted":
-      return { level: "muted", indent: 2, text: event.command + " → " + event.target }; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+      return {
+        level: "muted", indent: 2,
+        text: testerText("console.targetStarted", event.command, event.target),
+      };
     case "targetCompleted":
-      return { level: "muted", indent: 2, text: event.command + " → " + event.target + " done" }; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+      return {
+        level: "muted", indent: 2,
+        text: testerText("console.targetCompleted", event.command, event.target),
+      };
     case "checkCompleted": {
       const result = event.result;
       const head = result.target + "." + result.check;
       const detail = result.passed
         ? undefined
-        : "expected " + formatValue(result.expected, 200) + ", actual " + formatValue(result.actual, 200);
+        : testerText("console.checkDetail", formatValue(result.expected, 200),
+          formatValue(result.actual, 200));
       return {
         level: result.passed ? "pass" : "fail",
         indent: 2,
-        text: (result.passed ? "✓ " : "✗ ") + head + (result.message ? " — " + result.message : ""), // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+        text: testerText("console.checkText", result.passed, head, result.message || ""),
         detail: detail,
       };
     }
@@ -94,33 +104,30 @@ export function describeEvent(event: SurveyTestExecutionEvent): RowDraft | undef
       return {
         level: issue.severity === "error" ? "error" : "warn",
         indent: 2,
-        text: issue.severity + ": " + issue.code + where + " — " + issue.message, // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-        detail: [issue.suggestion, issue.path ? "at " + issue.path : undefined].filter(Boolean).join("  ") || undefined,
+        text: testerText("console.issueText", issue.severity, issue.code, where, issue.message),
+        detail: [issue.suggestion, issue.path ? testerText("console.issueAt", issue.path) : undefined]
+          .filter(Boolean).join("  ") || undefined,
       };
     }
     case "stepCompleted":
       return {
         level: statusLevel[event.result.status] || "info",
         indent: 1,
-        text: "step " + event.stepIndex + " " + event.result.status +
-          (event.result.checks.length ? " (" + event.result.checks.length + " checks)" : ""),
+        text: testerText("console.stepCompleted", event.stepIndex, event.result.status,
+          event.result.checks.length),
       };
     case "testCompleted":
       return {
         level: statusLevel[event.result.status] || "info",
         indent: 0,
-        text: "test \"" + event.result.name + "\" " + event.result.status,
+        text: testerText("console.testCompleted", event.result.name, event.result.status),
       };
-    case "runCompleted": {
-      const s = event.result.summary;
+    case "runCompleted":
       return {
         level: statusLevel[event.result.status] || "info",
         indent: 0,
-        text: "run " + event.result.status + " — " + s.passed + " passed, " + s.failed + " failed, " + // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-          s.errored + " errored, " + s.skipped + " skipped, " + s.canceled + " canceled; " +
-          s.checks + " checks (" + s.failedChecks + " failed), " + s.warnings + " warnings",
+        text: testerText("console.runCompleted", event.result.status, event.result.summary),
       };
-    }
   }
   return undefined;
 }
@@ -145,7 +152,7 @@ function formatIndex(index: number | undefined): string {
 }
 
 function safeName(test: any): string {
-  return !!test && typeof test.name === "string" ? test.name : "(unnamed)";
+  return !!test && typeof test.name === "string" ? test.name : testerText("common.unnamed");
 }
 
 // The flat run log as text, in the order the runner emitted it. The console copy button and the

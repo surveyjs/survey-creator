@@ -13,13 +13,13 @@ import { buildIssueView } from "../../src/tester/model/checkView";
 import { checkListCss, runnerActionBarCss, runnerListCss, runnerMenuCss } from "../../src/tester/model/runnerCss";
 import { defaultHostOptions } from "../../src/tester/core/hostOptions";
 import { TesterRunnerModel } from "../../src/tester/model/runnerModel";
-import type { RunnerEnvironment } from "../../src/tester/model/runnerHost";
+import type { ITesterRunnerEnvironment } from "../../src/tester/model/runnerApi";
 
 // The prototype's own namespaces. "step" is listed as a whole word because "svt-step-row" is the
 // renamed spelling and must not be caught by the rule that forbids the old one.
 const FORBIDDEN = ["trow", "tdot", "steplist", "tests__", "svtr-", "checkrow", "checks__", "runbutton"];
 
-function environment(suite: any): RunnerEnvironment {
+function environment(suite: any): ITesterRunnerEnvironment {
   return {
     suite: suite,
     canRun: true,

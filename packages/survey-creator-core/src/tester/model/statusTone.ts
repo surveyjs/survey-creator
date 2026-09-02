@@ -1,4 +1,5 @@
 import type { LiveStatus } from "../core/liveRun";
+import { testerText } from "../localization";
 
 // How a status is drawn, in one place, because the dot of a test row and the mark of a step row are the
 // same statement about the same kind of thing.
@@ -16,11 +17,11 @@ export function tone(status?: LiveStatus): string {
   return "idle";
 }
 
+// The glyph, not the class: it is a person-readable character and it lives in the string table with
+// everything else the widget says. The path is keyed by the tone above, which is a closed set of four -
+// localization.test.ts enumerates it rather than grepping for it.
 export function mark(status?: LiveStatus): string {
-  if (status === "passed") return "✓"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  if (status === "failed" || status === "error") return "✕"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  if (status === "running") return "…"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  return "·"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  return testerText("marks." + tone(status));
 }
 
 export function isFailure(status?: LiveStatus): boolean {

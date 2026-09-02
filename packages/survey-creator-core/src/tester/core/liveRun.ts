@@ -2,6 +2,7 @@ import type {
   ISurveyTestCheckResult, ISurveyTestIssue, ISurveyTestOptions, ISurveyTestsResult, ISurveyTestStart,
   SurveyTestExecutionEvent, SurveyTestStatus,
 } from "survey-core/tester";
+import { testerText } from "../localization";
 import { getStepCommandName, getStepTargets } from "./stepInfo";
 
 // The tree the Tests tab renders, grown from the lifecycle events so that the presentation is
@@ -217,19 +218,17 @@ function rollUpStatus(test: LiveTest, reported: SurveyTestStatus): SurveyTestSta
 export function reconcile(run: LiveRun, result: ISurveyTestsResult): Array<string> {
   const problems: Array<string> = [];
   if (run.tests.length !== result.tests.length) {
-    problems.push("the event stream produced " + run.tests.length + " test rows, the result holds " +
-      result.tests.length);
+    problems.push(testerText("mismatch.testCount", run.tests.length, result.tests.length));
   }
   result.tests.forEach((testResult, i) => {
     const live = run.tests[i];
     if (!live) return;
     if (live.status !== testResult.status) {
-      problems.push("test \"" + testResult.name + "\": the events said " + live.status +
-        ", the result says " + testResult.status);
+      problems.push(testerText("mismatch.testStatus", testResult.name, live.status, testResult.status));
     }
     if (live.steps.length !== testResult.steps.length) {
-      problems.push("test \"" + testResult.name + "\": " + live.steps.length + " step rows against " +
-        testResult.steps.length + " step results");
+      problems.push(testerText("mismatch.stepCount", testResult.name, live.steps.length,
+        testResult.steps.length));
     }
   });
   return problems;
@@ -243,20 +242,18 @@ export function reconcileSegment(
 ): Array<string> {
   const testResult = result.tests[0];
   if (!testResult || result.tests.length !== 1) {
-    return ["the run of a part of \"" + segment.testName + "\" produced " + result.tests.length +
-      " test results, and a segment is one test"];
+    return [testerText("mismatch.segmentTestCount", segment.testName, result.tests.length)];
   }
   const live = run.tests.find(test => test.index === segment.testIndex);
-  if (!live) return ["the tree holds no row for \"" + segment.testName + "\", which is the test that ran"];
+  if (!live) return [testerText("mismatch.segmentNoRow", segment.testName)];
   const problems: Array<string> = [];
   if (live.status !== testResult.status && !isWorse(live.status, testResult.status)) {
-    problems.push("test \"" + testResult.name + "\": the events said " + live.status +
-      ", the result says " + testResult.status);
+    problems.push(testerText("mismatch.testStatus", testResult.name, live.status, testResult.status));
   }
   const ran = live.steps.filter(step => step.index >= segment.from);
   if (ran.length !== testResult.steps.length) {
-    problems.push("test \"" + testResult.name + "\": " + ran.length + " step rows from step " +
-      segment.from + " on, against " + testResult.steps.length + " step results");
+    problems.push(testerText("mismatch.segmentStepCount", testResult.name, ran.length, segment.from,
+      testResult.steps.length));
   }
   return problems;
 }

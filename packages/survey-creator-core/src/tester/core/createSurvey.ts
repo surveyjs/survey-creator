@@ -1,5 +1,6 @@
 import { SurveyModel } from "survey-core";
 import type { ISurveyTestModelFactoryContext } from "survey-core/tester";
+import { testerText } from "../localization";
 
 // The demo model factory. It exists to show the one thing a host cannot express in JSON: runtime
 // behaviour attached to the model a test runs on. Here it is server validation, because that is the
@@ -29,7 +30,7 @@ export function createSurveyWithServerValidation(surveyJson: any,
     setTimeout(() => {
       const email = options.data["email"];
       if (typeof email === "string" && email.toLowerCase() === REJECTED_EMAIL) {
-        options.errors["email"] = "This address is already registered (checked on the server).";
+        options.errors["email"] = testerText("demo.serverValidationError");
       }
       options.complete();
     }, SERVER_LATENCY_MS);

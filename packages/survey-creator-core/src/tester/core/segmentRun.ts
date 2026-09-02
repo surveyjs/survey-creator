@@ -2,6 +2,7 @@ import type {
   ISurveyTestCheckResult, ISurveyTestIssue, ISurveyTestOptions, ISurveyTestResult, ISurveyTests,
   ISurveyTestsResult, ISurveyTestStep, ISurveyTestStepResult, SurveyTestExecutionEvent,
 } from "survey-core/tester";
+import { testerText } from "../localization";
 import { getSuiteTests } from "./stepInfo";
 
 // Running a part of one test - "everything before step 5, and no further".
@@ -45,9 +46,9 @@ export interface StepSegment {
 // panel's own line - so the two never describe the same run differently.
 export function describeSegment(segment: { from: number, to: number }): string {
   const last = segment.to - 1;
-  if (segment.to <= segment.from) return "no step";
-  if (last === segment.from) return "step " + segment.from;
-  return "steps " + segment.from + "–" + last; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  if (segment.to <= segment.from) return testerText("segment.none");
+  if (last === segment.from) return testerText("segment.one", segment.from);
+  return testerText("segment.range", segment.from, last);
 }
 
 export function getSegmentSteps(suite: any, testIndex: number): Array<ISurveyTestStep> {

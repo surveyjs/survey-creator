@@ -4,6 +4,7 @@ import type {
   ISurveyTestOptions, ISurveyTests, ISurveyTestsResult, SurveyTestExecutionEvent, SurveyTestFilter,
   SurveyTestModelFactory,
 } from "survey-core/tester";
+import { testerText } from "../localization";
 import { createSurveyWithServerValidation } from "./createSurvey";
 import { applyElementIdPrefix, TESTED_MODEL_ID_PREFIX } from "./elementIds";
 import { delay, PauseGate } from "./delay";
@@ -61,7 +62,7 @@ export async function runSuite(request: RunSuiteRequest): Promise<RunSuiteOutcom
         request.onSurveyCreated(event.survey);
       }
       if (event.type === "checkCompleted" && !event.result.passed && hostOptions.pauseOnFailure) {
-        request.onLog("warn", "Paused on a failing check. Press Resume to continue or Stop to end the run.");
+        request.onLog("warn", testerText("run.paused"));
         request.onPausedChanged(true);
         await pause.hold(signal);
         request.onPausedChanged(false);
@@ -73,8 +74,8 @@ export async function runSuite(request: RunSuiteRequest): Promise<RunSuiteOutcom
         await delay(ms, signal);
       }
     } catch(error) {
-      request.onLog("error", "The host observer failed: " + describeError(error),
-        "This is a bug in this application, not in the test case. The run continues.");
+      request.onLog("error", testerText("run.observerFailed", describeError(error)),
+        testerText("run.observerFailedDetail"));
     }
   };
 

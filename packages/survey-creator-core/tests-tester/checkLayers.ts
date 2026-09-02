@@ -27,13 +27,17 @@ const packageRoot = resolve(__dirname, "..");
 // this narrow is for. Prompt 05 adds the two names in the commit that adds the model that hands them
 // out, and the rename they use is already decided (see src/tester/README.md).
 export const ALLOWED_COMPONENTS = [
-  "svt-test-row", "svt-step-row",
+  "svt-test-row", "svt-step-row", "svt-settings",
 ];
 
 // A component name is a string the model puts in a component slot - what an Action or a ListModel
 // hands to whichever element factory is asking. Those slots are the whole surface, so they are what is
 // matched: a CSS class or a getType() of the same shape is not one, and never reaches a factory.
 const COMPONENT_SLOT = /\b(?:component|itemComponent|componentName|contentComponentName)\s*[:=]\s*"([^"]*)"/g;
+// PopupModel takes its content component as the first positional argument rather than as a named slot,
+// so the pattern above cannot see it. The settings popup of prompt 03 is the first of those, and a
+// second one written the same way has to be caught the same way.
+const POSITIONAL_COMPONENT = /new\s+PopupModel(?:<[^>]*>)?\s*\(\s*"([^"]*)"/g;
 // The prototype spelled the Angular decorator "@Component" inside this alternation, where the leading
 // \b made it unmatchable; it is a separate pattern here so the check it intended actually runs.
 const FRAMEWORK_WORDS =
@@ -56,17 +60,23 @@ export function findLayerViolations(dir = "src/tester/model"): Array<string> {
     const text = readFileSync(path, "utf8");
     // Comments are prose about the design and name plenty of things the code may not: the check is
     // about what the code says, so they come out first.
-    const code = text.replace(/\/\*[\s\S]*?\*\//g, "").split("\n")
+    //
+    // The carriage returns go first, and they have to: these files are checked out with CRLF, and a
+    // "//.*$" applied line by line then never matches - "$" sits after the "\r" that "." will not
+    // cross - so every comment would be read as code.
+    const code = text.replace(/\r/g, "").replace(/\/\*[\s\S]*?\*\//g, "").split("\n")
       .map(line => line.replace(/(^|[^:])\/\/.*$/, "$1")).join("\n");
     const relative = path.substring(packageRoot.length + 1).replace(/\\/g, "/");
-    const slots = code.matchAll(COMPONENT_SLOT);
-    for (const match of slots) {
-      const name = match[1];
-      if (ALLOWED_COMPONENTS.indexOf(name) < 0) {
-        problems.push(relative + ": names the component \"" + name + "\". Layer 1 may name only " +
-          ALLOWED_COMPONENTS.map(one => "\"" + one + "\"").join(" and ") + ".");
+    [COMPONENT_SLOT, POSITIONAL_COMPONENT].forEach(pattern => {
+      pattern.lastIndex = 0;
+      for (const match of code.matchAll(pattern)) {
+        const name = match[1];
+        if (ALLOWED_COMPONENTS.indexOf(name) < 0) {
+          problems.push(relative + ": names the component \"" + name + "\". Layer 1 may name only " +
+            ALLOWED_COMPONENTS.map(one => "\"" + one + "\"").join(" and ") + ".");
+        }
       }
-    }
+    });
     const framework = FRAMEWORK_WORDS.exec(code) || FRAMEWORK_DECORATOR.exec(code);
     if (!!framework) {
       problems.push(relative + ": mentions " + framework[0] + ". Layer 1 is framework-free.");

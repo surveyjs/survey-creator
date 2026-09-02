@@ -2,6 +2,7 @@ import { Action, ActionContainer, Base, property } from "survey-core";
 import type { ConsoleRow } from "../core/consoleLog";
 import { formatRowsAsText } from "../core/consoleLog";
 import { copyToClipboard, download } from "../core/json";
+import { testerText } from "../localization";
 import { runnerActionBarCss } from "./runnerCss";
 
 // The console is a transcript of the event stream: one row per event, in the order the runner emitted
@@ -11,6 +12,10 @@ import { runnerActionBarCss } from "./runnerCss";
 // searchable transcript with expandable event JSON, so the pane itself is markup. That is exactly why
 // this model carries everything the pane shows - the search, the filter, the rows behind it and the
 // count in the footer are decisions, and none of them belong in a template.
+
+// Not a person-readable string: it is the name the browser saves the file under, and a translated one
+// would break whatever reads it back.
+const TRANSCRIPT_FILE_NAME = "tester-transcript.json";
 
 export class TesterConsoleModel extends Base {
   // Named "searchValue" and not "searchText": Base already declares searchText(text, founded) as a
@@ -39,14 +44,18 @@ export class TesterConsoleModel extends Base {
     this.head = new ActionContainer();
     this.head.setCssClasses(runnerActionBarCss, false);
     this.head.setItems([
-      new Action({ id: "clear", title: "clear", css: "svt-console__verb", innerCss: "svt-link", enabled: true, action: () => this.clear() }),
       new Action({
-        id: "copy", title: "copy", css: "svt-console__verb", innerCss: "svt-link", enabled: true,
-        action: () => copyToClipboard(formatRowsAsText(this.rowsValue)),
+        id: "clear", title: testerText("console.clear"), css: "svt-console__verb", innerCss: "svt-link",
+        enabled: true, action: () => this.clear(),
       }),
       new Action({
-        id: "download", title: "download", css: "svt-console__verb", innerCss: "svt-link", enabled: true,
-        action: () => download("tester-transcript.json", this.getTranscript()),
+        id: "copy", title: testerText("console.copy"), css: "svt-console__verb", innerCss: "svt-link",
+        enabled: true, action: () => copyToClipboard(formatRowsAsText(this.rowsValue)),
+      }),
+      new Action({
+        id: "download", title: testerText("console.download"), css: "svt-console__verb",
+        innerCss: "svt-link", enabled: true,
+        action: () => download(TRANSCRIPT_FILE_NAME, this.getTranscript()),
       }),
     ]);
   }
@@ -75,9 +84,7 @@ export class TesterConsoleModel extends Base {
 
   // "48 rows" / "48 rows, 12 shown".
   public get footText(): string {
-    const shown = this.visibleRows.length;
-    const total = this.rowsValue.length;
-    return total + " rows" + (shown !== total ? ", " + shown + " shown" : "");
+    return testerText("console.foot", this.rowsValue.length, this.visibleRows.length);
   }
   // "hasNoRows" and not "isEmpty": Base declares isEmpty() as a method.
   public get hasNoRows(): boolean { return !this.visibleRows.length; }

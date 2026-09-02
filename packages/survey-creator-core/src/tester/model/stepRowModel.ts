@@ -3,6 +3,7 @@ import { SurveyTestCheckCommandName } from "survey-core/tester";
 import type { ISurveyTestStep } from "survey-core/tester";
 import type { LiveStatus, LiveStep } from "../core/liveRun";
 import { formatValue, getStepCommandName, getStepParams, getStepTargets } from "../core/stepInfo";
+import { testerText } from "../localization";
 import { mark, tone } from "./statusTone";
 
 // One line of the case, and the one place a part of a test is run from.
@@ -68,7 +69,7 @@ export class TesterStepRowModel extends Base {
     this.owner = owner;
     this.index = index;
     this.isEnd = isEnd;
-    if (isEnd)this.text = "Last step";
+    if (isEnd)this.text = testerText("step.lastStep");
   }
   public getType(): string { return "svt-step-row"; }
 
@@ -93,7 +94,7 @@ export class TesterStepRowModel extends Base {
       : !!state.refusal
         ? state.refusal
         : stopped
-          ? (this.isEnd ? "The whole case has run." : "The run is already stopped here.")
+          ? (this.isEnd ? testerText("step.wholeCaseHasRun") : testerText("step.alreadyStoppedHere"))
           : this.isEnd
             ? describeRunToEnd(state.count, at, held)
             : describeRunTo(this.index, at, held);
@@ -105,11 +106,13 @@ export class TesterStepRowModel extends Base {
       (this.isEnd ? " svt-step--end" : "");
   }
   public get numText(): string {
-    return (this.isNext ? "▸" : "") + (this.isEnd ? "" : String(this.index)); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    return (this.isNext ? testerText("marks.next") : "") + (this.isEnd ? "" : String(this.index));
   }
   public get markText(): string { return this.isEnd ? "" : mark(this.status); }
   public get runAriaLabel(): string {
-    return this.isEnd ? "run this test to the end" : "run this test up to step " + this.index;
+    return this.isEnd
+      ? testerText("step.runToEndAriaLabel")
+      : testerText("step.runToAriaLabel", this.index);
   }
   public get rawJson(): string {
     return !this.liveStep ? "" : stringifyStep(this.liveStep);
@@ -126,18 +129,17 @@ export class TesterStepRowModel extends Base {
 // "▸ step 3 of 7 runs next · the model is held". The whole state of a part-run in one line.
 export function describeWhere(count: number, at: number | undefined, held: boolean): string {
   if (at === undefined) return "";
-  if (at >= count) return "the whole case has run";
-  return "▸ step " + at + " of " + count + " runs next" + // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-    (held ? " · the model is held" : " · from the first step"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  if (at >= count) return testerText("step.whereDone");
+  return testerText("step.where", at, count, held);
 }
 
 function describeRunTo(index: number, at: number | undefined, held: boolean): string {
-  if (index === 0) return "Build the model again and run no step.";
-  return describeRunFrom(index, at, held) + ", and stops with step " + index + " next.";
+  if (index === 0) return testerText("step.buildOnly");
+  return testerText("step.stopsBefore", describeRunFrom(index, at, held), index);
 }
 
 function describeRunToEnd(count: number, at: number | undefined, held: boolean): string {
-  return describeRunFrom(count, at, held) + ", and finishes the case.";
+  return testerText("step.finishes", describeRunFrom(count, at, held));
 }
 
 // eslint-disable-next-line surveyjs/eslint-plugin-i18n/only-english-or-code
@@ -145,17 +147,19 @@ function describeRunToEnd(count: number, at: number | undefined, held: boolean):
 // that is not held is not carried forward, so then it is the whole of the case in front of that step.
 function describeRunFrom(index: number, at: number | undefined, held: boolean): string {
   const start = held && at !== undefined && at < index ? at : 0;
-  return start === index - 1 ? "Runs step " + start : "Runs steps " + start + "–" + (index - 1); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  return start === index - 1
+    ? testerText("step.runsOne", start)
+    : testerText("step.runsRange", start, index - 1);
 }
 
 // "expect ageNow.value = 73": the command, then what it asserted. A step that carries no check is
 // described by what it addressed instead.
 export function describeLiveStep(step: LiveStep): string {
   const subject = step.checks.length
-    ? step.checks.map(check => check.target + "." + check.check +
-      (check.expected === undefined ? "" : " = " + formatValue(check.expected, 40))).join(", ")
-    : step.targets.join(", ") || "(no target)";
-  return step.command + " " + subject + (!!step.name ? " — " + step.name : ""); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+    ? step.checks.map(check => testerText("step.checkSubject", check.target, check.check,
+      check.expected === undefined ? undefined : formatValue(check.expected, 40))).join(", ")
+    : step.targets.join(", ") || testerText("common.noTarget");
+  return testerText("step.describe", step.command, subject, step.name || "");
 }
 
 // The same sentence about a step that has not run, and it is the case that says it rather than a result:
@@ -163,10 +167,11 @@ export function describeLiveStep(step: LiveStep): string {
 export function describeCaseStep(step: ISurveyTestStep): string {
   const command = getStepCommandName(step);
   const targets = getStepTargets(step, command);
-  const name = !!step && typeof step.name === "string" ? " — " + step.name : ""; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  const name = !!step && typeof step.name === "string" ? step.name : "";
   const params: any = getStepParams(step, command);
   if (command !== SurveyTestCheckCommandName || !params) {
-    return command + " " + (targets.join(", ") || "(no target)") + name;
+    return testerText("step.describe", command, targets.join(", ") || testerText("common.noTarget"),
+      name);
   }
   const checks: Array<string> = [];
   targets.forEach(target => {
@@ -176,10 +181,10 @@ export function describeCaseStep(step: ISurveyTestStep): string {
       return;
     }
     Object.keys(map).forEach(check => {
-      checks.push(target + "." + check + " = " + formatValue(map[check], 40));
+      checks.push(testerText("step.checkSubject", target, check, formatValue(map[check], 40)));
     });
   });
-  return command + " " + (checks.join(", ") || "(no check)") + name;
+  return testerText("step.describe", command, checks.join(", ") || testerText("common.noCheck"), name);
 }
 
 export function stringifyStep(step: LiveStep): string {

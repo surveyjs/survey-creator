@@ -1,4 +1,5 @@
 import { DomDocumentHelper } from "survey-core";
+import { testerText } from "../localization";
 
 // The JSON text helpers of the widget: parsing a document a person is editing, and putting one back in
 // the shape an editor shows it in. Ported from the prototype's src/util/json.ts.
@@ -14,7 +15,7 @@ export interface ParsedJson<T = any> {
 }
 
 export function parseJson<T = any>(text: string): ParsedJson<T> {
-  if (!text.trim()) return { error: "The document is empty." };
+  if (!text.trim()) return { error: testerText("json.emptyDocument") };
   try {
     return { value: JSON.parse(text) as T };
   } catch(error) {

@@ -1,5 +1,6 @@
 import { parseSurveyTestStep } from "survey-core/tester";
 import type { ISurveyTestStep } from "survey-core/tester";
+import { testerText } from "../localization";
 
 // One command per step, and the tester parses it: metadata keys never count as one, and a step that
 // holds none or several is reported as what it is rather than as one of them. Everything below reads the
@@ -33,7 +34,7 @@ export function formatValue(value: any, maxLength = 80): string {
     text = String(value);
   }
   if (text === undefined) text = String(value);
-  return text.length > maxLength ? text.substring(0, maxLength - 1) + "…" : text; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  return text.length > maxLength ? testerText("common.truncated", text.substring(0, maxLength - 1)) : text;
 }
 
 export function getSuiteTests(suite: any): Array<any> {
