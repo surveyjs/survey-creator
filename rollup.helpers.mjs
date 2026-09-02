@@ -131,7 +131,11 @@ export function createUmdConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
+        // rollup-plugin-esbuild takes a tsconfig file NAME and searches for it upward
+        // from each source file; an absolute path silently matches nothing, so esbuild
+        // gets no tsconfigRaw and compiles decorators with standard (TC39) semantics,
+        // which survey-core's legacy property() decorators crash on at runtime.
+        ? rollupEsbuild({ tsconfig: tsconfig ? basename(tsconfig) : undefined, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
@@ -205,7 +209,11 @@ export function createEsmConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
+        // rollup-plugin-esbuild takes a tsconfig file NAME and searches for it upward
+        // from each source file; an absolute path silently matches nothing, so esbuild
+        // gets no tsconfigRaw and compiles decorators with standard (TC39) semantics,
+        // which survey-core's legacy property() decorators crash on at runtime.
+        ? rollupEsbuild({ tsconfig: tsconfig ? basename(tsconfig) : undefined, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
