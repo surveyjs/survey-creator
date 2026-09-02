@@ -16,13 +16,9 @@ type CspViolation = {
 // nothing is refused. The inventory is still printed, grouped by directive and by the
 // interaction that triggered each violation, so a regression names its own source.
 //
-// One violation is knowingly allowed: TimerCircle.svg sets CSS variables through an
-// inline style attribute on a <circle>, and the icon reaches the DOM inside a <use>
-// shadow tree that external CSS cannot target. Removing it means restructuring how the
-// timer icon is rendered in every renderer, which is tracked separately.
-const knownViolations = [
-  { directive: "style-src-attr", sample: "stroke:var(--sd-timer-stroke-background-" },
-];
+// If a violation ever has to be tolerated, list it here as
+// { directive, sample-prefix } - the empty list means zero tolerance.
+const knownViolations: Array<{ directive: string, sample: string }> = [];
 
 function isKnownViolation(violation: CspViolation): boolean {
   return knownViolations.some((known) =>
@@ -158,8 +154,8 @@ test.describe("CSP strict policy diagnostics", () => {
       await switchTab(page, tabName, step);
     }
 
-    // The standalone survey below the creator exercises the framework wrapper's
-    // <style>{themeStyle}</style> path, which is disabled inside the creator.
+    // The standalone survey below the creator checks that a plain survey renders
+    // cleanly under the same policy, next to the creator.
     await step("standalone survey", async () => {
       await expect(page.locator("#standalone-survey .sd-root-modern")).toBeVisible({ timeout: 10000 });
     });
@@ -188,7 +184,7 @@ test.describe("CSP strict policy diagnostics", () => {
     expect(violations.filter((v) => !isKnownViolation(v))).toEqual([]);
   });
 
-  test("inventory with the creator in a shadow root (fallback injection carries the nonce)", async ({ page }, testInfo) => {
+  test("inventory with the creator in a shadow root (the variables are adopted onto the shadow root)", async ({ page }, testInfo) => {
     test.setTimeout(180000);
     const consoleCspMessages = trackCspConsole(page);
     const stepErrors: Array<string> = [];
@@ -198,12 +194,13 @@ test.describe("CSP strict policy diagnostics", () => {
     await expect(page.locator(".svc-creator").first()).toBeVisible();
 
     // The document stylesheet cannot cross the shadow boundary, so the variables come
-    // from the injected <style> - which must be nonced and must actually apply. The
-    // injection sets only the IDL property (never the content attribute, so the nonce
-    // stays out of reach of CSS attribute selectors), hence the evaluate.
-    const injected = page.locator("style[data-survey-base-theme-variables]").first();
-    await expect(injected).toBeAttached();
-    expect(await injected.evaluate((el) => (el as any).nonce || "")).toBe("testNonce123");
+    // from an adopted stylesheet on the shadow root - CSSOM delivery that a strict
+    // `style-src` does not police, so no <style> element and no nonce are involved.
+    expect(await page.evaluate(() => {
+      // eslint-disable-next-line surveyjs/eslint-plugin-i18n/allowed-in-shadow-dom
+      const shadowRoot = document.getElementById("survey-creator")!.shadowRoot!;
+      return !shadowRoot.querySelector("style") && shadowRoot.adoptedStyleSheets.length > 0;
+    })).toBeTruthy();
     // Locators pierce the shadow boundary, so the computed value is read without
     // reaching for the shadow root by hand.
     const unitSize = await page.locator(".svc-creator").first()
