@@ -729,9 +729,11 @@ test("Question property editor should support getObjectDisplayName", () => {
   });
   const trigger = survey.triggers[0];
   const options = new EmptySurveyCreatorOptions();
+  const getDefaultDisplayName = options.getObjectDisplayName.bind(options);
   options.getObjectDisplayName = (obj: Base, area: string, reason: string, displayName: string): string => {
-    if (reason === "property-editor" && area === "property-grid:property-editor") return (survey.getAllQuestions().indexOf(<Question>obj) + 1).toString() + ". " + displayName;
-    return displayName;
+    const text = getDefaultDisplayName(obj, area, reason, displayName);
+    if (reason === "property-editor" && area === "property-grid:property-editor") return (survey.getAllQuestions().indexOf(<Question>obj) + 1).toString() + ". " + text;
+    return text;
   };
   const propertyGrid = new PropertyGridModelTester(trigger, options);
   const gotoNamePropEd = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("gotoName");

@@ -5,6 +5,7 @@ import {
   settings as surveyLibSettings
 } from "survey-core";
 import { localizableJSON } from "./localizable-json";
+import { SurveyHelper } from "./survey-helper";
 
 /*
  * List available question convert modes
@@ -400,8 +401,10 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
   showOneCategoryInPropertyGrid: boolean;
   trimValues: boolean;
 
+  //An empty displayName means the caller has no better text than the default one,
+  //so the default is derived here and not in every calling place
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
-    return displayName;
+    return displayName || SurveyHelper.getObjectName(obj, this.useElementTitles);
   }
   onCanShowPropertyCallback(
     object: any,

@@ -54,6 +54,8 @@ export class ExpressionToDisplayText {
     const question = this.getQuestionByName(op.variable);
     //Let the operand render itself, so a variable that is not a question keeps its original text
     if (!question) return undefined;
+    //A variable is found by its valueName, that may differ from the question name, so the default
+    //text is taken from the expression and not derived from the question
     let text = this.showTitles ? question.title : "";
     if (!text) text = op.variable;
     if (!!this.options && !!this.options.getObjectDisplayName) {
