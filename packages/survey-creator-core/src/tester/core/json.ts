@@ -1,11 +1,12 @@
+import { DomDocumentHelper } from "survey-core";
+
 // The JSON text helpers of the widget: parsing a document a person is editing, and putting one back in
 // the shape an editor shows it in. Ported from the prototype's src/util/json.ts.
 //
-// Two of its functions did not come along. readFile() opens a file picker, which is the host
+// One of its functions did not come along: readFile() opens a file picker, which is the host
 // application's furniture and never the widget's (overview section 4: the host owns both documents).
-// download() is the console's "save the transcript" action and arrives with the console model in
-// prompt 02 - it writes to the DOM, and this package forbids the bare `document` global, so it needs
-// DomDocumentHelper rather than the prototype's document.createElement.
+// download() did, with the console model of prompt 02 - through DomDocumentHelper, because this
+// package forbids the bare `document` global that the prototype's document.createElement used.
 
 export interface ParsedJson<T = any> {
   value?: T;
@@ -32,4 +33,18 @@ export function reformat(text: string): string {
 
 export function copyToClipboard(text: string): void {
   void navigator.clipboard.writeText(text);
+}
+
+// The console's "download" verb. The anchor is created through DomDocumentHelper rather than through
+// document.createElement, which this package's lint forbids: in a host with no document - a server
+// render, a unit test - the helper answers with null and the download is simply not offered.
+export function download(fileName: string, content: string, type = "application/json"): void {
+  const link = DomDocumentHelper.createElement("a") as HTMLAnchorElement | null;
+  if (!link) return;
+  const blob = new Blob([content], { type: type });
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.download = fileName;
+  link.click();
+  URL.revokeObjectURL(url);
 }
