@@ -192,7 +192,7 @@ export class SurveyLogicType {
   private getElementDisplayName(element: Base): string {
     if (!element) return "";
     const res = !!this.options
-      ? this.options.getObjectDisplayName(element, "logic-tab:rule-action", "logic-action", undefined)
+      ? this.options.getObjectDisplayName(element, "logic-tab:rule-action", "logic-action")
       : element["name"] || "";
     return wrapTextByCurlyBraces(res);
   }

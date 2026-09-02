@@ -249,7 +249,7 @@ export interface ISurveyCreatorOptions {
   previewShowResults: boolean;
   showOneCategoryInPropertyGrid: boolean;
   trimValues: boolean;
-  getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
+  getObjectDisplayName(obj: Base, area: string, reason: string, displayName?: string): string;
   getElementAddornerCssCallback(obj: Base, className: string): string;
   onCanShowPropertyCallback(
     object: any,
@@ -403,7 +403,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocali
 
   //An empty displayName means the caller has no better text than the default one,
   //so the default is derived here and not in every calling place
-  getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
+  getObjectDisplayName(obj: Base, area: string, reason: string, displayName?: string): string {
     return displayName || SurveyHelper.getObjectName(obj, this.useElementTitles);
   }
   onCanShowPropertyCallback(

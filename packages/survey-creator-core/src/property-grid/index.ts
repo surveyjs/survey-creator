@@ -2184,7 +2184,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     if (!questions) questions = [];
     var qItems = questions.map((q) => {
       let text = !!options
-        ? options.getObjectDisplayName(q, "property-grid:property-editor", "property-editor", undefined)
+        ? options.getObjectDisplayName(q, "property-grid:property-editor", "property-editor")
         : q.name;
       let value = this.getItemValue(<any>q);
       return { value: value, text: text };

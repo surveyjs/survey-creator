@@ -2947,8 +2947,8 @@ export class SurveyCreatorModel extends Base
   public getObjectDisplayName(
     obj: Base,
     area: string,
-    reason: string = undefined,
-    displayName: string = undefined
+    reason?: string,
+    displayName?: string
   ): string {
     if (!displayName) {
       displayName = SurveyHelper.getObjectName(obj, this.useElementTitles);

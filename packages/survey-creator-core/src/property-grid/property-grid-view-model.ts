@@ -117,7 +117,7 @@ export class PropertyGridViewModel extends Base {
   private getTitle(): string {
     var obj = this.getSelectedObj();
     if (!obj) return "";
-    return this.propertyGridModel.options.getObjectDisplayName(obj, "property-grid-header:selected-element", "property-grid-title", undefined);
+    return this.propertyGridModel.options.getObjectDisplayName(obj, "property-grid-header:selected-element", "property-grid-title");
   }
   private getSelectedObj(): any {
     return this.propertyGridModel.obj;

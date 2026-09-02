@@ -477,7 +477,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     return editorLocalization.getString(name);
   }
   private getElementText(el: SurveyElement): string {
-    return this.options.getObjectDisplayName(el, "logic-tab:question-selector", "condition", undefined);
+    return this.options.getObjectDisplayName(el, "logic-tab:question-selector", "condition");
   }
 
   private getSelectorChoices(logicType: SurveyLogicType): Array<ItemValue> {
