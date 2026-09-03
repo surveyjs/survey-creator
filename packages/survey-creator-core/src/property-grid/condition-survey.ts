@@ -715,14 +715,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     for (let i = 0; i < res.length; i++) {
       res[i].value = res[i].name;
       let question = !!res[i].question ? res[i].question : res[i];
+      let text = res[i].text;
+      //An item is a path to a question ("matrix.row1.col1"), not the question itself, so the default
+      //text cannot be derived from the question. Both the name and the title path are built already
       if (!this.options.useElementTitles) {
-        let name = res[i].name;
+        text = res[i].name;
         let valueName = question.valueName;
-        if (!!valueName && name.indexOf(valueName) == 0) {
-          name = name.replace(valueName, question.name);
+        if (!!valueName && text.indexOf(valueName) == 0) {
+          text = text.replace(valueName, question.name);
         }
-        res[i].text = this.getConditionQuestionText(question, name);
       }
+      res[i].text = this.getConditionQuestionText(question, text);
       const hashKey = res[i].name;
       if (!this.addConditionQuestionsHash[hashKey] || question.name === hashKey) {
         this.addConditionQuestionsHash[hashKey] = question;
