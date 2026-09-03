@@ -43,6 +43,15 @@ svc-tab-json-editor-textarea {
   background: var(--sjs2-color-bg-alert-secondary);
 }
 
+// A linter finding is advisory: it must not read as a blocking error
+.svc-json-errors__item--warning {
+  background: var(--sjs2-color-bg-warning-secondary);
+
+  .svc-json-error__icon {
+    fill: var(--sjs2-color-bg-warning-primary);
+  }
+}
+
 .svc-json-error {
   @include sjs2--typography--default;
   padding: var(--sjs2-spacing-x100)
@@ -68,6 +77,9 @@ svc-tab-json-editor-textarea {
   line-height: var(--sjs2-line-height-x200);
   width: 1lh;
   height: 1lh;
+  // an svg has no automatic minimum size, so a flex row squeezes it as soon as the text next
+  // to it runs out of room - the same guard the panel icon carries, .svc-json-linter__icon
+  flex: 0 0 auto;
   box-sizing: border-box;
   display: block;
 }
@@ -75,6 +87,9 @@ svc-tab-json-editor-textarea {
 .svc-json-error__container {
   display: flex;
   gap: var(--sjs2-spacing-x200);
+  flex: 1 1 auto;
+  // the text wraps instead of pushing the row wider than the list
+  min-width: 0;
 }
 
 .svc-json-error__title {

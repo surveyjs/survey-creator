@@ -3,6 +3,7 @@ import { SurveyHelper } from "./survey-helper";
 import { SurveyJSON5 } from "./json5";
 import { settings } from "./creator-settings";
 import { levenshteinDistance } from "./utils/utils";
+import { ILintFinding } from "survey-core/linter";
 
 class SurveyForTextWorker extends SurveyModel {
   private isRunEndLoadingFromJson: boolean;
@@ -52,6 +53,19 @@ export abstract class SurveyTextWorkerError {
 
 export class SurveyTextWorkerParserError extends SurveyTextWorkerError {
   public getErrorType(): string { return "parseerror"; }
+}
+
+// A finding of survey-core/linter, carried through the same list as the JSON errors so the
+// existing error list and its click-to-line navigation work on it unchanged. Never fixable:
+// the linter reports logic defects, not malformed JSON.
+export class SurveyTextWorkerLinterFinding extends SurveyTextWorkerError {
+  public constructor(at: number, text: string, public finding: ILintFinding) {
+    super(at, text);
+  }
+  public getErrorType(): string { return "linterfinding"; }
+  public get severity(): string { return this.finding.severity; }
+  public get ruleId(): string { return this.finding.ruleId; }
+  public get isFixable(): boolean { return false; }
 }
 
 class SurveyTextWorkerJsonErrorFixer extends SurveyTextWorkerJsonErrorFixerBase {
@@ -239,6 +253,11 @@ export class SurveyTextWorker {
   public get survey(): SurveyModel {
     return this.surveyValue;
   }
+  // The JSON as authored, with the SurveyJSON5 position markers on every object literal.
+  // Undefined while the text does not parse.
+  public get json(): any {
+    return this.jsonValue;
+  }
   public get isJsonCorrect(): boolean {
     return !!this.surveyValue;
   }
@@ -282,6 +301,77 @@ export class SurveyTextWorker {
         this.updateJsonPositions(obj);
       }
     }
+  }
+  // Resolves a linter path ("pages[0].elements[1].visibleIf") to a position in the text.
+  // SurveyJSON5(1) marks every object literal with { start, end }, so the object the path names
+  // is found by walking it; arrays carry no marker of their own, but their object items do.
+  // The last segment is usually a property, not an object - it is located by searching for its
+  // key inside the owning object's range, the way the error fixers do.
+  public getPositionByPath(path: string): { at: number, rowAt: number, columnAt: number } {
+    const notFound = { at: -1, rowAt: -1, columnAt: -1 };
+    if (!path || !this.jsonValue) return notFound;
+    const segments = this.parsePath(path);
+    if (segments.length === 0) return notFound;
+    let obj: any = this.jsonValue;
+    let owner: any = this.jsonValue;
+    let lastKey: string = undefined;
+    let resolved: number = 0;
+    for (let i = 0; i < segments.length; i++) {
+      // a path may address something the text has no place of its own for - the condition an
+      // inArray function carries inside an expression, for one. The deepest segment that did
+      // resolve is still where the author looks for it, so the walk stops instead of giving up.
+      if (obj === null || typeof obj !== "object") break;
+      const segment = segments[i];
+      const next = obj[segment];
+      if (next === undefined) break;
+      resolved++;
+      if (next !== null && typeof next === "object") {
+        if (!Array.isArray(next) && !!next["pos"]) {
+          owner = next;
+          lastKey = undefined;
+        }
+      } else {
+        // a primitive: the owning object is where its key is searched for
+        lastKey = typeof segment === "string" ? segment : undefined;
+      }
+      obj = next;
+    }
+    // a path whose very first segment names nothing addresses another survey, not this text
+    if (resolved === 0) return notFound;
+    const pos = owner["pos"];
+    if (!pos || typeof pos.start !== "number") return notFound;
+    let at = pos.start;
+    if (!!lastKey) {
+      // JSON5 allows an unquoted key, so try both forms
+      const end = typeof pos.end === "number" ? pos.end : -1;
+      let keyAt = this.getIndexInRange("\"" + lastKey + "\"", at, end);
+      if (keyAt < 0) keyAt = this.getIndexInRange(lastKey + ":", at, end);
+      if (keyAt > -1) at = keyAt;
+    }
+    const position = this.getPostionByChartAt({ row: 0, column: 0 }, 0, at);
+    return { at: at, rowAt: position.row, columnAt: position.column };
+  }
+  private getIndexInRange(findText: string, at: number, end: number): number {
+    const index = this.text.indexOf(findText, at);
+    if (index > -1 && (end < 0 || index < end)) return index;
+    return -1;
+  }
+  // "pages[0].elements[1].visibleIf" -> ["pages", 0, "elements", 1, "visibleIf"]
+  private parsePath(path: string): Array<string | number> {
+    const res: Array<string | number> = [];
+    path.split(".").forEach(part => {
+      if (!part) return;
+      const bracket = part.indexOf("[");
+      if (bracket < 0) {
+        res.push(part);
+        return;
+      }
+      const name = part.substring(0, bracket);
+      if (!!name) res.push(name);
+      const indexes = part.substring(bracket).match(/\[(\d+)\]/g) || [];
+      indexes.forEach(entry => res.push(parseInt(entry.substring(1, entry.length - 1), 10)));
+    });
+    return res;
   }
   private setErrorsPositionByChartAt() {
     if (this.errors.length === 0) return;

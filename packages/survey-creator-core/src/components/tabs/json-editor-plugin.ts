@@ -1,7 +1,10 @@
 import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
-import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
+import { SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding } from "../../textWorker";
+import { ComponentContainerModel } from "../component-container/component-container";
+import { SidebarPageModel } from "../side-bar/side-bar-page-model";
+import { getFindingSeverityKind, getLinterString, JsonEditorLinterModel } from "./json-editor-linter";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { settings } from "../../creator-settings";
 import { DomWindowHelper } from "survey-core";
@@ -14,6 +17,15 @@ export abstract class JsonEditorBaseModel extends Base {
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
   @property() hasErrors: boolean;
+
+  private linterValue: JsonEditorLinterModel;
+  public get linter(): JsonEditorLinterModel {
+    if (!this.linterValue) {
+      this.linterValue = new JsonEditorLinterModel(this.creator,
+        (at: number, row: number, column: number) => this.gotoError(at, row, column));
+    }
+    return this.linterValue;
+  }
 
   constructor(protected creator: SurveyCreatorModel) {
     super();
@@ -72,34 +84,46 @@ export abstract class JsonEditorBaseModel extends Base {
     return this.errorListValue;
   }
 
-  protected setErrors(errors: Array<SurveyTextWorkerError>): void {
-    let hasErrors = errors.length > 0;
-    if (hasErrors) {
-      const actions = [];
-      this.createErrorActions(errors).forEach(action => actions.push(action));
-      this.errorList.setItems(actions);
+  protected setErrors(errors: Array<SurveyTextWorkerError>,
+    findings?: Array<SurveyTextWorkerLinterFinding>): void {
+    const actions = this.createErrorActions(errors);
+    // the linter warnings follow the syntax and schema errors, and never replace them
+    if (Array.isArray(findings)) {
+      this.createErrorActions(findings).forEach(action => actions.push(action));
     }
-    this.hasErrors = hasErrors;
+    // setItems unconditionally: skipping it on an empty list leaves the previous entries in it
+    this.errorList.setItems(actions);
+    this.hasErrors = actions.length > 0;
   }
   protected gotoError(at: number, row: number, column: number): void { }
+  private errorActionCounter: number = 1;
   private createErrorActions(errors: Array<SurveyTextWorkerError>): Array<Action> {
     const res = [];
-    let counter = 1;
     errors.forEach(error => {
-      const line = error.rowAt > -1 ? "Line: " + (error.rowAt + 1) + ". " : "";
+      const isFinding = error instanceof SurveyTextWorkerLinterFinding;
+      const line = error.rowAt > -1
+        ? (<any>getLinterString("lineNumber"))["format"](error.rowAt + 1)
+        : "";
       let title = error.text;
       if (title.length > maxErrorLength + 3) {
         title = title.substring(0, maxErrorLength) + "...";
       }
       title = line + title;
-      const at = error.at;
+      // a finding is shown by its own severity, the way the check list shows it: the two lists
+      // sit on one screen, and an error that reads as a warning in one of them reads as two
+      // different verdicts on one defect. A JSON error is an error by nature.
+      const kind = isFinding
+        ? getFindingSeverityKind((<SurveyTextWorkerLinterFinding>error).severity)
+        : "error";
       res.push(new Action({
-        id: "error_" + counter++,
+        id: (isFinding ? "linterfinding_" : "error_") + this.errorActionCounter++,
         component: "json-error-item",
         title: title,
         tooltip: error.text,
-        iconName: "icon-error",
+        iconName: kind === "error" ? "icon-error" : "icon-warning-24x24",
         iconSize: "auto",
+        // the base item already carries the alert colours an error needs
+        css: kind === "warning" ? "svc-json-errors__item--warning" : undefined,
         data: {
           error: error,
           showFixButton: error.isFixable,
@@ -115,8 +139,29 @@ export abstract class JsonEditorBaseModel extends Base {
     return res;
   }
   public processErrors(text: string): void {
+    this.errorActionCounter = 1;
     const textWorker: SurveyTextWorker = this.createTextWorker();
-    this.setErrors(textWorker.errors);
+    let findings: Array<SurveyTextWorkerLinterFinding> = undefined;
+    if (this.creator.showLinterPanel) {
+      // only on valid JSON: while the text does not parse there is no model to analyse, and the
+      // panel keeps its previous result
+      if (textWorker.isJsonCorrect) {
+        this.linter.run(textWorker);
+        // the linter sorts by JSON path, the error list reads top to bottom: a path sort puts
+        // "elements[10]" before "elements[3]", so the lines would jump around
+        findings = this.linter.findings.slice().sort((el1, el2) => {
+          if (el1.at === el2.at) return 0;
+          if (el1.at < 0) return 1;
+          if (el2.at < 0) return -1;
+          return el1.at < el2.at ? -1 : 1;
+        });
+      } else {
+        // the panel keeps its last result, but the error list does not: the positions of those
+        // findings belong to the text they were computed from
+        this.linter.setWaitingForValidJson();
+      }
+    }
+    this.setErrors(textWorker.errors, findings);
   }
   public allowingDeactivate(): boolean {
     const textWorker: SurveyTextWorker = this.createTextWorker();
@@ -140,8 +185,12 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
 
   public static iconName = "icon-codeeditor-24x24";
 
+  private linterPage: SidebarPageModel;
+
   constructor(private creator: SurveyCreatorModel) {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
+    this.linterPage = creator.sidebar.addPage("linter", "svc-component-container");
+    this.linterPage.locTitleName = "linter.panelTitle";
   }
 
   public saveToFileHandler = saveToFileHandler;
@@ -225,6 +274,14 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   public model: JsonEditorBaseModel;
   public activate(): void {
     this.model = this.createModel(this.creator);
+    if (this.creator.showLinterPanel) {
+      // the list is built by the model, the page only hosts it
+      this.linterPage.componentData = new ComponentContainerModel({
+        elements: [{ componentName: "sv-list", componentData: { model: this.model.linter.checkList } }]
+      });
+      this.creator.sidebar.activePage = this.linterPage.id;
+      this.linterPage.visible = true;
+    }
   }
   public deactivate(): boolean {
     if (this.model) {
@@ -237,6 +294,9 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       this.model.dispose();
       this.model = undefined;
     }
+    this.linterPage.visible = false;
+    this.linterPage.componentData = undefined;
+    this.creator.sidebar.header.reset();
     return true;
   }
   public defaultAllowingDeactivate(): boolean {
