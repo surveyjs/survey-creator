@@ -20,14 +20,11 @@ const packageRoot = resolve(__dirname, "..");
 
 // The strings of overview section 3.3, and the only component names layer 1 may hold.
 //
-// It lists what this layer actually draws today and not what it will draw eventually. The prototype's
-// version carried the recorder's "svt-check-menu" and "svt-check-row" as well, because there the whole
-// model layer already existed; here the check menu arrives in prompt 05, and a list that allowed it now
-// would let an early dependency on the recorder through in silence - which is the one thing a fence
-// this narrow is for. Prompt 05 adds the two names in the commit that adds the model that hands them
-// out, and the rename they use is already decided (see src/tester/README.md).
+// It lists what this layer actually draws today and not what it will draw eventually. Prompt 05 added
+// the last two, in the commit that added the model that hands them out: "svt-check-menu" is what the
+// adorner's popup renders as its content, and "svt-check-row" is one row of the list inside it.
 export const ALLOWED_COMPONENTS = [
-  "svt-test-row", "svt-step-row", "svt-settings",
+  "svt-test-row", "svt-step-row", "svt-settings", "svt-check-menu", "svt-check-row",
 ];
 
 // A component name is a string the model puts in a component slot - what an Action or a ListModel

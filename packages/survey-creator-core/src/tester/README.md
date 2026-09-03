@@ -30,8 +30,10 @@ survey-creator-react/src/tester         layer 2   markup. The only layer that ma
    must not grow by a byte. The Creator plugin tab, when it comes, will import the *built*
    `survey-creator-core/tester` the way `presets-plugin.ts` imports `survey-creator-core`, and it will
    be an adapter that owns nothing.
-3. **Layer 1 may not name a framework and may not name a component**, beyond handing out the two
-   `svt-*-row` strings on `Action.component`.
+3. **Layer 1 may not name a framework and may not name a component**, beyond the five strings
+   `tests-tester/checkLayers.ts` allows: `svt-test-row`, `svt-step-row`, `svt-settings`,
+   `svt-check-menu` and `svt-check-row`. Each is a slot a survey-core model hands to whichever element
+   factory is asking, and what draws it is each renderer's business.
 4. **One model per component** — everything a view renders is readable off the one model it subscribes
    to, because `BaseAngular` subscribes to exactly one.
 
@@ -144,8 +146,8 @@ namespace **once**, at the moment the model layer arrived, so that the SCSS of p
 of prompt 07 are written against final names and no later prompt invents another rename.
 
 The mapping is complete for the runner: everything the models hand out, and everything the prototype's
-`src/views/runner.css` styles. The recorder's own sheet arrives with prompt 05 and follows the same two
-rules — every class is `svt-` prefixed, and BEM shape and tone modifiers (`--passed`, `--failed`,
+`src/views/runner.css` styles. Prompt 05 added the recorder's own names to it under the same two rules
+— every class is `svt-` prefixed, and BEM shape and tone modifiers (`--passed`, `--failed`,
 `--running`, `--idle`) are kept exactly.
 
 Library classes are **not** in this table and are never restyled: `sv-list__item`, `sv-action-bar__item`,
@@ -173,6 +175,12 @@ property set instead (that is what `model/runnerCss.ts` is).
 | `button`, `button--primary` | `svt-button`, `svt-button--primary` |
 | `link`, `link--strong` | `svt-link`, `svt-link--strong` |
 | `diff`, `diff--error`, `diff--warning` | `svt-diff`, `svt-diff--error`, `svt-diff--warning` |
+| `steps` (the step list) | `svt-steps` |
+| `steprow--new`/`--ok`/`--failed`/`--error`/`--saved`, `steprow--cursor` | `svt-steps__row--new` … `svt-steps__row--errored`, `svt-steps__row--cursor` — keyed by the state's own code, never by the word the cell prints |
+| `steps__start`, `steps__cell--<column>`, `steps__cursor` | `svt-steps__start`, `svt-steps__cell--<column>`, `svt-steps__cursor`, and `svt-steps__json` for the row's way into the document |
+| `checkrow--on`, `checkrow--picking` | `svt-check-row--on`, `svt-check-row--picking` |
+| `checks__popup` | `svt-checks__popup` |
+| — (new) | `svt-recorder__action`, `svt-recorder__popup` — the session bar's verbs and its options menu |
 
 `tests-tester/model/css-naming.test.ts` walks a built `TesterRunnerModel` and asserts that every class
 string it or its rows hand out carries the `svt-` prefix and none carries a prototype one — the rename
@@ -257,8 +265,9 @@ touched:
 | `src/model/runnerModel.test.ts` | `tests-tester/model/runnerModel.test.ts` |
 | `scripts/check-layers.mjs` | `tests-tester/checkLayers.ts` — a test helper here, because this package runs its fences from vitest |
 
-`src/model/checkListModel.ts` is the recorder's check menu and arrives with prompt 05; `src/store/useRunner.ts`
-is React's ownership shim and is not ported at all — prompt 07 writes its equivalent where React lives.
+`src/model/checkListModel.ts` is the recorder's check menu and came over in prompt 05 as
+`model/checkMenuModel.ts`; `src/store/useRunner.ts` is React's ownership shim and is not ported at all —
+prompt 07 writes its equivalent where React lives.
 
 The widget shell, ported in prompt 03. Its sources are the prototype's `components/test/TestTab.tsx`,
 `components/test/JsonScreen.tsx`, the half of `App.tsx` the Test tab needed, and `SetupTab`:
@@ -300,5 +309,30 @@ Three things changed in that port and are worth knowing:
   reported a commented document as broken, so the "a hand-formatted, commented suite survives being
   recorded into" promise could never be kept however careful the edits were.
 
-Still to arrive: the recorder's presentation models — the steps survey, the check menu, the adorner
-data, the session bar (prompt 05) — and `theme/` and `index.ts` (prompt 06).
+The recorder's screens, ported in prompt 05. The prototype's React components are not ported as files:
+their render logic is prompt 07's, and every decision they held moved into a model here.
+
+| Prototype | Here |
+|---|---|
+| the steps-survey construction in `src/components/recorder/StepGrid.tsx` | `model/stepsSurvey.ts` — `TesterStepsModel`: the matrix, the cursor note, the two option panels |
+| `src/model/checkListModel.ts` + `CheckMenuView` / `CheckRowView`'s decisions | `model/checkMenuModel.ts` — `TesterCheckMenuModel`, `TesterCheckRowModel` |
+| `src/components/recorder/adorners.tsx` — the *decisions* only | `model/adornerModel.ts` — `TesterAdornersModel`, `TesterAdornerModel`, `rendersHeader` |
+| `src/components/recorder/RecordStep.tsx` — its header, banners and session bar | properties and containers on `TesterRecorderModel` (`bar`, `statusText`, `badgeText`, `failNote`, `staleNotice`, `zoom`) |
+| `src/components/recorder/zoom.ts` | `model/zoom.ts`, unchanged |
+| `src/components/recorder/stepGrid.test.ts`, `zoom.test.ts` | `tests-tester/model/stepsSurvey.test.ts`, `.../zoom.test.ts` |
+| the model-level half of `src/components/recorder/recorderTab.test.tsx` | `tests-tester/model/checkMenuModel.test.ts`, `.../adornerModel.test.ts`, `.../recorderScreen.test.ts` |
+| `RecorderTab.tsx`, `FormPane.tsx`, `StaticForm.tsx`, `CheckPanel.tsx` | **not ported** — markup, prompt 07 |
+
+Four things changed on the way, each with an entry in `promts/creator-tester-notes.md`:
+
+* the prototype's `handlers` ref **dissolved**. Its survey was built in a `useMemo`, so every action stored
+  on it closed over one render's props; here the survey is built over the session, and a model has no
+  renders. That is why the model layer owns the survey (note 21);
+* the check menu's "abandon a half-made check when the menu closes" hangs off `onVisibilityChanged` and
+  not off `PopupModel`'s `onHide`, which only the view calls (note 22);
+* `ElementRegistry` grew `list()` and one `onChanged` callback, because the adorner list is that map read
+  the other way round (note 23);
+* the step row's classes are keyed by the row's own `stateCode` / `atCursor` rather than by the words a
+  cell prints, so a translated State column cannot rename a class (note 24).
+
+Still to arrive: `theme/` and `index.ts` (prompt 06), and the React rendering (prompt 07).

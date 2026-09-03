@@ -133,6 +133,19 @@ describe("the string table", () => {
     reasons.forEach(reason => {
       expect(testerLocalization.hasString("recorder.reason." + reason), reason).toBe(true);
     });
+    // The State column of the step list. It is keyed by the row state's own code, which is also what
+    // the class on the row is keyed by, so a translated word can never rename a class.
+    const rowStates = ["new", "ok", "failed", "errored", "saved"];
+    rowStates.forEach(state => {
+      expect(testerLocalization.hasString("recorder.steps.state." + state), state).toBe(true);
+    });
+    // The session options the bar's menu offers as one press each, and the panel under the list shows
+    // in full. One title and one note per member of RecorderOptions.
+    const options = ["coalesceSets", "coalesceIdleMs", "mergeAdjacentSets", "autoCheckAfterCommand"];
+    options.forEach(option => {
+      expect(testerLocalization.hasString("recorder.option." + option), option).toBe(true);
+      expect(testerLocalization.hasString("recorder.option." + option + "Note"), option).toBe(true);
+    });
   });
 
   it("resolves a leaf, calls a leaf that takes values, and answers a missing path with itself", () => {

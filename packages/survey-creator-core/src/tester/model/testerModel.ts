@@ -104,6 +104,12 @@ export class SurveyTesterModel extends Base {
       // reaches the next replay of an open session without anything being pushed at it.
       getTestOptions: () => this.testOptions,
       getHostOptions: () => this.hostOptions,
+      // The two journeys out of the recorder screen. A screen change is not a session's to make, so
+      // the session is handed the transitions rather than reaching for them: the way out of the step
+      // list's title bar and the Discard button both land here.
+      onGoToRunner: () => this.goToRunnerFromRecorder(),
+      onFixJson: () => this.openJson(this.activeTestName),
+      onRevealCase: path => this.revealCase(path),
     });
     this.recorder.setOptions(options.recorderOptions);
     this.settings = new TesterSettingsModel({

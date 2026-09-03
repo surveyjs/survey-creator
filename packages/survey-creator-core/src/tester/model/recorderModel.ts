@@ -1,12 +1,15 @@
-import { Base, property, propertyArray } from "survey-core";
+import {
+  Action, ActionContainer, Base, ListModel, createDropdownActionModel, property, propertyArray,
+} from "survey-core";
 import type { SurveyModel } from "survey-core";
 import { getSurveyTestCheckDetails, SurveyTestCheckCommandName } from "survey-core/tester";
 import type {
   ISurveyTestCheckResult, ISurveyTestIssue, ISurveyTestOptions, SurveyTestPayloadType,
 } from "survey-core/tester";
 import type { HostOptions } from "../core/hostOptions";
+import { defaultTestOptions } from "../core/hostOptions";
 import { parseJson } from "../core/json";
-import { getSuiteTests } from "../core/stepInfo";
+import { formatValue, getSuiteTests } from "../core/stepInfo";
 import { getSuiteLevelErrors, validateSuite } from "../core/validate";
 import { testerText } from "../localization";
 import { RecorderCapture } from "../recorder/capture";
@@ -22,7 +25,13 @@ import { autoStepName, defaultRecorderOptions } from "../recorder/options";
 import type { RecorderOptions } from "../recorder/options";
 import { getBlockingIssues, silentRun } from "../recorder/silentRun";
 import type { SilentRunOutcome } from "../recorder/silentRun";
+import { TesterAdornersModel } from "./adornerModel";
+import type { ITesterAdornersOwner } from "./adornerModel";
+import { clampZoom, canZoomIn, canZoomOut, zoomBy, ZOOM_DEFAULT } from "./zoom";
 import type { ITesterNewTestParams } from "./runnerApi";
+import { runnerActionBarCss, runnerMenuCss } from "./runnerCss";
+import { TesterStepsModel, TESTER_INLINE_START } from "./stepsSurvey";
+import type { ITesterStepsOwner, ITesterTestFields, TesterRowState } from "./stepsSurvey";
 import type { ITesterRecorderOptions, ITesterRecorderState } from "./testerHost";
 
 // The recording session, as a model.
@@ -94,11 +103,19 @@ export interface ITesterRecorderHost {
   // and they are read at the moment a run is built, so a change to either reaches the next replay.
   getTestOptions(): ISurveyTestOptions;
   getHostOptions(): HostOptions;
+  // The two journeys out of this screen. Both belong to the widget root - a screen change is not a
+  // session's to make - and a host that supplies neither simply has a session bar with two fewer
+  // buttons, which is the same "what is not given is not rendered" rule the runner's row verbs follow.
+  onGoToRunner?(): void;
+  onFixJson?(): void;
+  // Reveals a node of the suite document in the JSON screen: "tests[0].steps[2]".
+  onRevealCase?(path: string): void;
 }
 
 // The sentinel a "start" of "the answers the form holds now" is asked for by. It is not a start name:
-// the panel cannot write the data itself, because the model that holds it is this one's.
-export const TESTER_INLINE_START = "@inline";
+// the panel that offers it cannot write the data itself, because the model that holds it is this one's.
+// Declared beside the panel (model/stepsSurvey.ts) and re-exported here, where it is resolved.
+export { TESTER_INLINE_START };
 
 const MAX_UNDO = 50;
 // A replay is milliseconds of work and there is nothing to watch it. Beyond this it is worth saying
@@ -107,8 +124,12 @@ const MAX_UNDO = 50;
 const REPLAY_INDICATION_MS = 300;
 // How many ignored changes the strip keeps. It is a running commentary on a session, not a log.
 const MAX_IGNORED = 50;
+// The session options the bar's menu offers as one press each. The idle window is a number and is
+// asked for in the panel under the step list, where there is a box to type it into.
+const TOGGLE_OPTIONS = ["coalesceSets", "mergeAdjacentSets", "autoCheckAfterCommand"];
 
-export class TesterRecorderModel extends Base {
+export class TesterRecorderModel extends Base
+  implements ITesterStepsOwner, ITesterAdornersOwner {
   @property({ defaultValue: false }) isOpen!: boolean;
   @property() testName!: string | undefined;
   // A position between steps, 0..steps.length. Everything recorded is inserted at it and it advances
@@ -124,6 +145,11 @@ export class TesterRecorderModel extends Base {
   @property({ defaultValue: "" }) notice!: string;
   @property({ defaultValue: "" }) noticeDetail!: string;
   @property({ defaultValue: "idle" }) replayState!: TesterReplayState;
+  // A replay or a confirming run is in flight. It is true from the moment the work is asked for, not
+  // from the moment a spinner is worth showing: the form pane, the step list and the adorners are
+  // frozen on it, and a freeze that arrived 300 ms late would let a keystroke land on a model that is
+  // about to be thrown away. replayState is the *indication* and stays delayed; this is the *fact*.
+  @property({ defaultValue: false }) busy!: boolean;
   // The model the tester handed over, and what the form pane renders. It is replaced once, when a new
   // one is ready: the previous one stays on screen for the length of a replay so the pane does not
   // flash (PROMPT-recorder.md section 7).
@@ -142,7 +168,39 @@ export class TesterRecorderModel extends Base {
   @propertyArray() stepStates!: Array<TesterStepState>;
   @property() verifyOutcome!: ITesterVerifyOutcome | undefined;
 
+  // ---- the screen's own chrome (prompt 05 section 5) ------------------------------------------------
+  // The resolved options this session records under, the start in force, and the pinned clock. Always
+  // visible, because a case recorded against the wrong "now" is a case that fails in a year and nobody
+  // can see why (PROMPT-recorder.md section 2 and rule 9).
+  @property({ defaultValue: "" }) statusText!: string;
+  // What the form pane's badge says: recording, or paused and recording nothing.
+  @property({ defaultValue: "" }) badgeText!: string;
+  // What the quiet verify behind the last change has against the case, when it has anything. The State
+  // column marks the row; this says the words. There is no button behind it: every change re-runs the
+  // whole case headlessly, so what stands here is always about the case as it is now.
+  @property({ defaultValue: "" }) failNote!: string;
+  // The third alert channel, and the only one with a verb beside it: the tail was left unverified by an
+  // insert, a delete or an edit from outside, and Verify is one press away.
+  @property({ defaultValue: "" }) staleNotice!: string;
+  // How large the form under the header is drawn. It is a way of looking at the model and not a fact
+  // about the case: nothing about it is written into the suite, and a replay - which builds a new model
+  // on every step - leaves it exactly where it was, because what carries it is this property.
+  @property({ defaultValue: ZOOM_DEFAULT }) zoom!: number;
+
   public options: RecorderOptions = { ...defaultRecorderOptions };
+
+  // The step list, as a survey of its own (model/stepsSurvey.ts), and the adorners the form offers
+  // (model/adornerModel.ts). Both are views over what this model holds: the list over the document, the
+  // adorners over the elements the model on screen has rendered.
+  public readonly steps: TesterStepsModel;
+  public readonly adorners: TesterAdornersModel;
+  // Record/Pause, Verify, Rewind to start, Discard session, and the options menu.
+  public readonly bar: ActionContainer;
+  // The two verbs that stand in a banner rather than on the bar: the way out of a blocked session, and
+  // the Verify the stale-tail banner offers. Standalone Actions for the same reason the runner's are -
+  // they are drawn where the sentence is, not where the toolbar is.
+  public readonly fixJson: Action;
+  public readonly verifyStale: Action;
 
   private host: ITesterRecorderHost;
   private capture = new RecorderCapture();
@@ -159,8 +217,14 @@ export class TesterRecorderModel extends Base {
   private chain: Promise<void> = Promise.resolve();
   private token = 0;
   private indicateTimer: any = undefined;
+  private busyCount = 0;
   private quietQueued = false;
-  private undoStack: Array<{ text: string, cursor: number }> = [];
+  private undoStack: Array<{ text: string, cursor: number, recorded: Array<boolean> }> = [];
+  // Which positions of the case this session wrote, one flag per step, kept in step with every edit.
+  // It is what the "new" mark in the step list means, and it has to be per step rather than "everything
+  // past the count at open": a step inserted in the middle is new, and the old step it pushed down is
+  // not.
+  private recorded: Array<boolean> = [];
   // The last step this session wrote, for the coalescing rules of section 4.4.
   private lastRecorded: { index: number, command: string, target: string, at: number } | undefined;
   // What the document said about this test the last time it was read, so that section 7's rule - the
@@ -180,6 +244,26 @@ export class TesterRecorderModel extends Base {
     this.host = host;
     this.ignoredChanges = [];
     this.stepStates = [];
+    this.steps = new TesterStepsModel(this);
+    this.adorners = new TesterAdornersModel(this);
+    this.bar = new ActionContainer();
+    this.bar.setCssClasses(runnerActionBarCss, false);
+    this.fixJson = new Action({
+      id: "fix-json", title: testerText("runner.fixJson"), css: "svt-link", enabled: true,
+      action: () => { if (!!this.host.onFixJson)this.host.onFixJson(); },
+    });
+    this.verifyStale = new Action({
+      id: "verify-stale", title: testerText("recorder.bar.verify"), css: "svt-link", enabled: true,
+      action: () => { void this.verify(); },
+    });
+    this.buildBar();
+    // One subscription instead of a call at the end of every method that changes one of these: the
+    // screen is a projection of the session, and everything below writes the session.
+    this.registerFunctionOnPropertiesValueChanged(
+      ["isOpen", "cursor", "isRecording", "replayState", "busy", "blockedReason", "notice", "stale",
+        "liveSurvey", "baselineCount", "stepStates", "verifyOutcome", "zoom"],
+      () => this.refreshScreen(), "svt-recorder-screen");
+    this.refreshScreen();
   }
   public getType(): string { return "svt-recorder"; }
 
@@ -208,6 +292,8 @@ export class TesterRecorderModel extends Base {
     const suite = this.getSuite();
     const steps = getTestSteps(suite, findTestIndex(suite, testName));
     this.baselineCount = steps.length;
+    // Nothing is new yet: "new" means "this session wrote it", and the session has just begun.
+    this.recorded = steps.map(() => false);
     await this.replay(testName, cursor === undefined ? steps.length : cursor);
     if (this.isStale(session)) return;
     // The verdict starts truthful: what the case does now, not what it did when it was last open.
@@ -226,6 +312,7 @@ export class TesterRecorderModel extends Base {
     this.capture.flush();
     this.capture.detach();
     this.registry.detach();
+    this.adorners.detach();
     this.cancelIndication();
     this.isOpen = false;
     this.testName = undefined;
@@ -242,6 +329,7 @@ export class TesterRecorderModel extends Base {
     this.undoStack = [];
     this.canUndo = false;
     this.lastRecorded = undefined;
+    this.recorded = [];
   }
 
   // Settles what a person is half-way through typing. The run-start transition of the widget root is
@@ -321,6 +409,9 @@ export class TesterRecorderModel extends Base {
     }
     const steps = getTestSteps(suite, index);
     const kept = steps.length === this.lastCount && signatureOf(steps[this.cursor]) === this.lastAtCursor;
+    // The same rule for what is "new": a case that still matches keeps its marks, and one that does not
+    // has no step this session can vouch for any more.
+    if (!kept)this.recorded = steps.map(() => false);
     this.stale = true;
     this.verifyOutcome = undefined;
     // The document is what is verified, wherever the edit came from.
@@ -388,7 +479,10 @@ export class TesterRecorderModel extends Base {
     }
 
     const step = createCommandStep(command.command, command.target, command.payload, stepName);
-    this.applyText(insertStep(this.host.getTestsText(), testIndex, at, step));
+    // The mark first: everything from here on projects the screen, and the screen reads the marks.
+    const marks = this.recorded.slice();
+    this.recorded.splice(at, 0, true);
+    this.applyText(insertStep(this.host.getTestsText(), testIndex, at, step), false, marks);
     this.lastRecorded = { index: at, command: command.command, target: command.target, at: Date.now() };
     this.cursor = at + 1;
     this.stepStates = insertState(this.stepStates, at);
@@ -410,8 +504,22 @@ export class TesterRecorderModel extends Base {
     // A value typed before the adorner was clicked is the earlier step.
     this.capture.flush();
     const session = this.session;
+    // Frozen from here, not from inside the queued work: the form pane is inert for the length of the
+    // confirming run, so nothing can land on the model while the check about it is being proved.
+    this.beginBusy();
     return this.enqueue(async() => {
-      if (this.isStale(session)) return;
+      try {
+        if (this.isStale(session)) return;
+        await this.confirmChecks(session, name, target, checks);
+      } finally {
+        this.endBusy();
+      }
+    });
+  }
+
+  private async confirmChecks(session: number, name: string, target: string,
+    checks: Array<ITesterCheckRequest>): Promise<void> {
+    {
       const suite = this.getSuite();
       const testIndex = findTestIndex(suite, name);
       if (testIndex < 0) return;
@@ -426,8 +534,24 @@ export class TesterRecorderModel extends Base {
             : getProvisionalExpected(check.payloadType, check.keys);
       });
       const candidate = createExpectStep(target, provisional);
+      const prefix = signatureOf(steps.slice(0, at));
       const outcome = await this.runSilently(suite, testIndex, steps.slice(0, at).concat([candidate]));
       if (this.isStale(session)) return;
+      // The run proved the check at one position over one prefix. Everything about the document is
+      // re-read after the await, because the await is a window: a step recorded meanwhile, a test
+      // reordered in the JSON screen, a document edited outside. If the cursor moved or the prefix is
+      // not the prefix that was run, the proof is about a case that no longer exists and the check is
+      // not written - a check written into the wrong place is worse than one that has to be pressed
+      // again.
+      const freshSuite = this.getSuite();
+      const freshIndex = findTestIndex(freshSuite, name);
+      if (freshIndex < 0) return;
+      const freshSteps = getTestSteps(freshSuite, freshIndex);
+      if (this.cursor !== at || signatureOf(freshSteps.slice(0, at)) !== prefix) {
+        this.setNotice(testerText("recorder.session.nothingRecorded",
+          testerText("recorder.session.caseMovedDuringCheck")));
+        return;
+      }
       const testResult = outcome.testResult;
       const stepResult = !!testResult && testResult.steps.length
         ? testResult.steps[testResult.steps.length - 1] : undefined;
@@ -448,8 +572,8 @@ export class TesterRecorderModel extends Base {
         return;
       }
       const previousIndex = at - 1;
-      const previous: any = previousIndex >= 0 && previousIndex < steps.length
-        ? steps[previousIndex] : undefined;
+      const previous: any = previousIndex >= 0 && previousIndex < freshSteps.length
+        ? freshSteps[previousIndex] : undefined;
       const last = this.lastRecorded;
       // Checks added one after another, with no command in between, belong in the same "expect": one
       // step, one entry per target, which is the shape the format is for.
@@ -463,27 +587,29 @@ export class TesterRecorderModel extends Base {
             [target]: { ...(previous.expect[target] || {}), ...resolved.checks },
           },
         };
-        this.applyText(replaceStep(this.host.getTestsText(), testIndex, previousIndex, merged));
+        this.applyText(replaceStep(this.host.getTestsText(), freshIndex, previousIndex, merged));
         this.lastRecorded = {
           index: previousIndex, command: SurveyTestCheckCommandName, target: target, at: Date.now(),
         };
       } else {
         const step = createExpectStep(target, resolved.checks,
           autoStepName(SurveyTestCheckCommandName, target));
-        this.applyText(insertStep(this.host.getTestsText(), testIndex, at, step));
+        const marks = this.recorded.slice();
+        this.recorded.splice(at, 0, true);
+        this.applyText(insertStep(this.host.getTestsText(), freshIndex, at, step), false, marks);
         this.lastRecorded = {
           index: at, command: SurveyTestCheckCommandName, target: target, at: Date.now(),
         };
         this.cursor = at + 1;
         this.stepStates = insertState(this.stepStates, at);
-        if (at < steps.length)this.stale = true;
+        if (at < freshSteps.length)this.stale = true;
       }
       if (resolved.problems.length) {
         this.setNotice(resolved.problems.join(testerText("recorder.problem.join")));
       } else {
         this.clearNotice();
       }
-    });
+    }
   }
 
   // Unticking. The step it touches is the one immediately before the cursor: that is the "expect" the
@@ -514,7 +640,9 @@ export class TesterRecorderModel extends Base {
     if (!Object.keys(forTarget).length) delete expect[target];
     else expect[target] = forTarget;
     if (!Object.keys(expect).length) {
-      this.applyText(deleteStepText(this.host.getTestsText(), testIndex, last));
+      const marks = this.recorded.slice();
+      this.recorded.splice(last, 1);
+      this.applyText(deleteStepText(this.host.getTestsText(), testIndex, last), false, marks);
       // "expect" reads the model, it never changes it, so the model on screen is still the right one
       // and no replay is owed. Only the cursor and the per-step states follow the shorter case.
       this.cursor = last;
@@ -545,7 +673,9 @@ export class TesterRecorderModel extends Base {
     const suite = this.getSuite();
     const testIndex = findTestIndex(suite, name);
     if (testIndex < 0) return Promise.resolve();
-    this.applyText(deleteStepText(this.host.getTestsText(), testIndex, index));
+    const marks = this.recorded.slice();
+    this.recorded.splice(index, 1);
+    this.applyText(deleteStepText(this.host.getTestsText(), testIndex, index), false, marks);
     this.stale = true;
     this.verifyOutcome = undefined;
     const at = this.cursor;
@@ -563,7 +693,11 @@ export class TesterRecorderModel extends Base {
     const steps = getTestSteps(suite, testIndex);
     const to = index + delta;
     if (to < 0 || to >= steps.length) return Promise.resolve();
-    this.applyText(moveStepText(this.host.getTestsText(), testIndex, index, to, steps[index]));
+    // The mark travels with the step it is about.
+    const marks = this.recorded.slice();
+    const moved = this.recorded.splice(index, 1)[0];
+    this.recorded.splice(to, 0, moved === true);
+    this.applyText(moveStepText(this.host.getTestsText(), testIndex, index, to, steps[index]), false, marks);
     this.stale = true;
     this.verifyOutcome = undefined;
     return this.replay(name, this.cursor);
@@ -588,7 +722,9 @@ export class TesterRecorderModel extends Base {
     const testIndex = findTestIndex(suite, name);
     if (testIndex < 0) return Promise.resolve();
     const steps = getTestSteps(suite, testIndex);
-    this.applyText(deleteStepsFrom(this.host.getTestsText(), testIndex, index, steps.length));
+    const marks = this.recorded.slice();
+    this.recorded = this.recorded.slice(0, index);
+    this.applyText(deleteStepsFrom(this.host.getTestsText(), testIndex, index, steps.length), false, marks);
     this.stale = false;
     this.verifyOutcome = undefined;
     return this.replay(name, index, testerText("recorder.session.truncated", index));
@@ -646,6 +782,7 @@ export class TesterRecorderModel extends Base {
     if (!entry) return;
     this.capture.flush();
     this.pushedText = entry.text;
+    this.recorded = entry.recorded;
     this.host.setTestsText(entry.text);
     this.lastRecorded = undefined;
     this.verifyOutcome = undefined;
@@ -701,8 +838,22 @@ export class TesterRecorderModel extends Base {
   // "now" are applied by the same code that will apply them when the case runs for real.
   private replay(name: string, position: number, note?: string): Promise<void> {
     const session = this.session;
+    // Frozen from the call and not from the start of the queued work: the list, the adorners and the
+    // form are about a model that is about to be abandoned, and a press that landed between the call
+    // and the work would land on it.
+    this.beginBusy();
     return this.enqueue(async() => {
-      if (this.isStale(session)) return;
+      try {
+        if (this.isStale(session)) return;
+        await this.replayNow(session, name, position, note);
+      } finally {
+        this.endBusy();
+      }
+    });
+  }
+
+  private async replayNow(session: number, name: string, position: number, note?: string): Promise<void> {
+    {
       const mine = ++this.token;
       const suite = this.getSuite();
       const testIndex = findTestIndex(suite, name);
@@ -717,9 +868,11 @@ export class TesterRecorderModel extends Base {
       const steps = getTestSteps(suite, testIndex);
       const at = Math.max(0, Math.min(position, steps.length));
       // The model that is being abandoned stops being recorded onto now; what is on screen stays there
-      // until the new one is ready, which is what keeps the pane from flashing.
+      // until the new one is ready, which is what keeps the pane from flashing. Its adorners go with
+      // it: they are about elements of a model nothing will render again.
       this.capture.detach();
       this.registry.detach();
+      this.adorners.detach();
       this.beginIndication();
       const outcome = await this.runSilently(suite, testIndex, steps.slice(0, at));
       this.cancelIndication();
@@ -730,6 +883,7 @@ export class TesterRecorderModel extends Base {
       this.lastRecorded = undefined;
       this.rememberDocument(steps, at);
       this.stepStates = buildStepStates(outcome, steps.length);
+      this.fitRecorded(steps.length);
       this.failedStepIndex = -1;
       if (!!outcome.error) {
         this.replayState = "failed";
@@ -758,6 +912,10 @@ export class TesterRecorderModel extends Base {
         onIgnored: (note2, reason, target) => this.noteIgnored(note2, reason, target),
       });
       this.capture.setContainer(this.pane);
+      // The adorner list is built from the same registry, so an element appears in it when it renders.
+      // Nothing in the recording depends on it: rule 10 of PROMPT-recorder.md section 11 says an
+      // adorner that cannot be drawn interrupts nothing, and this is on the far side of that line.
+      this.adorners.attach(outcome.survey, this.registry);
       // One swap, once the model is ready. The element id prefix it carries was set by the silent run
       // (core/elementIds.ts): the recorder screen is the one place two surveys share a page.
       this.liveSurvey = outcome.survey;
@@ -774,7 +932,25 @@ export class TesterRecorderModel extends Base {
       } else {
         this.clearNotice();
       }
-    });
+    }
+  }
+
+  // The freeze, counted: a replay queued behind a confirming run is two things in flight and one fact.
+  private beginBusy(): void {
+    this.busyCount += 1;
+    if (!this.gone && !this.busy)this.busy = true;
+  }
+
+  private endBusy(): void {
+    this.busyCount = Math.max(0, this.busyCount - 1);
+    if (!this.gone && this.busyCount === 0 && this.busy)this.busy = false;
+  }
+
+  // The marks, made to fit the case after a replay. A position the case gained without this session
+  // writing it is not new; one it lost takes its mark with it.
+  private fitRecorded(count: number): void {
+    while(this.recorded.length > count)this.recorded.pop();
+    while(this.recorded.length < count)this.recorded.push(false);
   }
 
   private runSilently(suite: any, testIndex: number, steps: Array<any>): Promise<SilentRunOutcome> {
@@ -841,18 +1017,324 @@ export class TesterRecorderModel extends Base {
     this.registry.detach();
     this.isOpen = false;
     this.liveSurvey = undefined;
+    this.adorners.dispose();
+    this.steps.dispose();
+    this.bar.dispose();
+    this.fixJson.dispose();
+    this.verifyStale.dispose();
     super.dispose();
+  }
+
+  // ---- the screen: the step list, the adorners, the session bar --------------------------------------
+
+  // ITesterStepsOwner. The list is frozen while a replay is in flight rather than made read-only:
+  // `readOnly` stops survey-core evaluating a question's conditions, and every cell of a row but the
+  // name is an expression (NOTES-test-tab.md section 7). What a view does with this is `inert`, which
+  // the browser enforces - no focus, no pointer, no keystroke - and which changes nothing about the
+  // model.
+  //
+  // It is the synchronous fact and not the delayed indication: a replay that takes five milliseconds
+  // still locks the list for those five, because the press it would have taken was about a model that
+  // is gone. What is delayed is the spinner (replayState), never the freeze.
+  public get stepsLocked(): boolean {
+    return !this.isOpen || this.busy || !!this.blockedReason;
+  }
+  // The form pane's own freeze, the same fact seen from the other pane: inert for the length of a replay
+  // or a confirming run, so a keystroke cannot land on the model that is being replaced or proved on.
+  public get formLocked(): boolean { return this.busy; }
+  public get stepCount(): number {
+    const name = this.testName;
+    if (!name) return 0;
+    const suite = this.getSuite();
+    return getTestSteps(suite, findTestIndex(suite, name)).length;
+  }
+  // The list reports a drag as the pair it moved between; the session moves steps by a delta.
+  public moveStepTo(from: number, to: number): void { void this.moveStep(from, to - from); }
+  public startFrom(index: number): void { void this.setCursor(index); }
+  // The way out, in the title bar of the list of what was recorded. It is the widget root's transition:
+  // flush the capture, close the session, and land on the runner with this test selected.
+  public goToRunner(): void {
+    if (!!this.host.onGoToRunner)this.host.onGoToRunner();
+  }
+  public get canOpenStepJson(): boolean { return !!this.host.onRevealCase; }
+  // The row's way into the document. The position is the row's; which test it belongs to is resolved
+  // by name here, because an index is only ever a position in the document being edited.
+  public openStepJson(index: number): void {
+    const name = this.testName;
+    const reveal = this.host.onRevealCase;
+    if (!name || !reveal) return;
+    const testIndex = findTestIndex(this.getSuite(), name);
+    if (testIndex < 0) return;
+    reveal("tests[" + testIndex + "].steps[" + index + "]");
+  }
+  // A recorder option is widget state with a default, so what comes back from its panel is coerced to
+  // the type the option holds and never left empty.
+  public setRecorderOption(name: string, value: any): void {
+    const options: any = { ...this.options };
+    options[name] = name === "coalesceIdleMs"
+      ? Number(value) || defaultRecorderOptions.coalesceIdleMs
+      : value === true;
+    this.options = options;
+    this.refreshScreen();
+  }
+
+  // ITesterAdornersOwner. Adorners are the check affordance, so they are spent for exactly as long as
+  // the session cannot answer a press: the confirming run behind a tick takes a few hundred
+  // milliseconds, and a second press during it would race it. And they are spent while the session is
+  // paused: a check is a recording like any other, and the badge says nothing is being recorded.
+  public get adornersBusy(): boolean {
+    return !this.isOpen || !this.isRecording || this.busy || this.replayState !== "idle" ||
+      !!this.blockedReason;
+  }
+  // What the trailing "expect" step holds, by target. It is the step immediately before the cursor -
+  // the one addChecks writes into and merges into - and never the last step of the case: after a
+  // rewind those are different steps, and a menu about the middle of a case must not report the end
+  // of it.
+  //
+  // The whole map at once, because answering it costs a parse of the document and the adorner list
+  // asks for every target it holds in one go.
+  public tickedTargets(): { [target: string]: Array<string> } {
+    const res: { [target: string]: Array<string> } = {};
+    const name = this.testName;
+    if (!name) return res;
+    const suite = this.getSuite();
+    const steps = getTestSteps(suite, findTestIndex(suite, name));
+    const at = this.cursor - 1;
+    const step: any = at >= 0 && at < steps.length ? steps[at] : undefined;
+    const expect: any = !!step && !!step.expect && typeof step.expect === "object"
+      ? step.expect : undefined;
+    if (!expect) return res;
+    Object.keys(expect).forEach(target => {
+      const checks = expect[target];
+      if (!!checks && typeof checks === "object") res[target] = Object.keys(checks);
+    });
+    return res;
+  }
+
+  // Whether this session wrote the step at a position. It is what "new" in the State column means.
+  public isRecordedHere(index: number): boolean { return this.recorded[index] === true; }
+
+  public tickedFor(target: string): Array<string> {
+    return this.tickedTargets()[target] || [];
+  }
+
+  // ---- the zoom ------------------------------------------------------------------------------------
+
+  public get canZoomIn(): boolean { return canZoomIn(this.zoom); }
+  public get canZoomOut(): boolean { return canZoomOut(this.zoom); }
+  public get isZoomDefault(): boolean { return this.zoom === ZOOM_DEFAULT; }
+  public get zoomText(): string { return testerText("recorder.zoom.reading", this.zoom); }
+  // The factor a stylesheet multiplies the theme's base units by, the way the designer's own zoom does.
+  public get zoomFactor(): number { return this.zoom / 100; }
+  public zoomBy(steps: number): void { this.zoom = zoomBy(this.zoom, steps); }
+  public setZoom(percent: number): void { this.zoom = clampZoom(percent); }
+  public resetZoom(): void { this.zoom = ZOOM_DEFAULT; }
+
+  // ---- the session bar -----------------------------------------------------------------------------
+
+  private buildBar(): void {
+    // The same dropdown Action the runner's mode picker is: an Action with a PopupModel over a
+    // ListModel, which is the library's own menu - the click-away layer, the positioning and the roles
+    // included. The three toggles it holds are the same options the panel under the step list edits;
+    // both write through setRecorderOption, so there is one owner of them and two ways to reach it.
+    const options = createDropdownActionModel(
+      {
+        id: "options", title: testerText("recorder.bar.options"),
+        tooltip: testerText("recorder.bar.optionsTooltip"),
+        css: "svt-recorder__action", innerCss: "svt-button",
+      },
+      {
+        items: TOGGLE_OPTIONS.map(name => ({ id: name, title: testerText("recorder.option." + name) })),
+        allowSelection: false,
+        searchEnabled: false,
+        onSelectionChanged: (item: any) => this.toggleRecorderOption(String(item.id)),
+        cssClass: "svt-recorder__popup",
+        verticalPosition: "bottom",
+        horizontalPosition: "center",
+      },
+    );
+    (options.data as ListModel).setCssClasses(runnerMenuCss, false);
+    this.bar.setItems([
+      new Action({
+        id: "record", title: testerText("recorder.bar.record"), css: "svt-recorder__action",
+        innerCss: "svt-button svt-button--primary", enabled: true,
+        action: () => { this.isRecording = !this.isRecording; },
+      }),
+      new Action({
+        id: "verify", title: testerText("recorder.bar.verify"),
+        tooltip: testerText("recorder.bar.verifyTooltip"),
+        css: "svt-recorder__action", innerCss: "svt-button", enabled: true,
+        action: () => { void this.verify(); },
+      }),
+      new Action({
+        id: "rewind", title: testerText("recorder.bar.rewind"),
+        tooltip: testerText("recorder.bar.rewindTooltip"),
+        css: "svt-recorder__action", innerCss: "svt-button", enabled: false,
+        action: () => { void this.setCursor(0); },
+      }),
+      // It only closes the session: what was recorded is the document, and nothing here deletes it.
+      new Action({
+        id: "discard", title: testerText("recorder.bar.discard"),
+        tooltip: testerText("recorder.bar.discardTooltip"),
+        css: "svt-recorder__action", innerCss: "svt-button", enabled: true, visible: false,
+        action: () => this.goToRunner(),
+      }),
+      options,
+    ]);
+  }
+
+  private updateBar(): void {
+    const open = this.isOpen;
+    const blocked = !!this.blockedReason;
+    const record = this.bar.getActionById("record");
+    if (!!record) {
+      record.title = this.isRecording
+        ? testerText("recorder.bar.pause")
+        : testerText("recorder.bar.record");
+      record.tooltip = this.isRecording
+        ? testerText("recorder.bar.pauseTooltip")
+        : testerText("recorder.bar.recordTooltip");
+      record.enabled = open && !blocked;
+    }
+    const verify = this.bar.getActionById("verify");
+    if (!!verify) verify.enabled = open && !blocked;
+    const rewind = this.bar.getActionById("rewind");
+    if (!!rewind) rewind.enabled = open && !blocked && this.cursor > 0;
+    const discard = this.bar.getActionById("discard");
+    if (!!discard) {
+      discard.visible = !!this.host.onGoToRunner;
+      discard.enabled = open;
+    }
+    const options = this.bar.getActionById("options");
+    if (!!options && options.data instanceof ListModel) {
+      (options.data as ListModel).actions.forEach(item => {
+        const name = String(item.id);
+        item.title = testerText("recorder.bar.optionState",
+          testerText("recorder.option." + name), (this.options as any)[name] === true);
+      });
+    }
+    this.fixJson.visible = !!this.host.onFixJson;
+  }
+
+  private toggleRecorderOption(name: string): void {
+    if (TOGGLE_OPTIONS.indexOf(name) < 0) return;
+    this.setRecorderOption(name, (this.options as any)[name] !== true);
+  }
+
+  // ---- the projection ------------------------------------------------------------------------------
+
+  // Everything the screen shows, written from what the session holds. It runs on any change to the
+  // properties the constructor subscribed to and after every document edit, and it reads the document
+  // once for all of it - which is also why it stops at the top when no session is open: a parse and a
+  // validation of the whole suite is not free, and there is nothing to project onto.
+  private refreshScreen(): void {
+    if (this.gone) return;
+    this.updateBar();
+    const name = this.testName;
+    if (!this.isOpen || !name) {
+      this.statusText = "";
+      this.badgeText = "";
+      this.failNote = "";
+      this.staleNotice = "";
+      return;
+    }
+    const suite = this.getSuite();
+    const testIndex = findTestIndex(suite, name);
+    const test: any = testIndex < 0 ? undefined : getSuiteTests(suite)[testIndex];
+    const steps = getTestSteps(suite, testIndex);
+    this.steps.update({
+      steps: steps,
+      states: this.rowStates(steps.length),
+      cursor: this.cursor,
+      recording: this.isCapturing(),
+      // The test's own options override - tests[i].options, not the resolved set the run reports.
+      testOptions: !!test && !!test.options ? test.options : {},
+      testFields: readTestFields(test),
+      startNames: readStartNames(suite),
+      recorderOptions: this.options,
+    });
+    this.adorners.update();
+    this.statusText = this.describeStatus(suite, test);
+    this.badgeText = this.describeBadge();
+    this.failNote = this.describeFailNote();
+    this.staleNotice = this.stale ? testerText("recorder.bar.staleNotice") : "";
+  }
+
+  // What the State column of each row says. What this session captured is "new"; what the last quiet
+  // verify found overrides it, and only while that verdict is still about the case as it stands.
+  private rowStates(count: number): Array<TesterRowState> {
+    const verified = this.verifyOutcome;
+    const states: Array<TesterRowState> = [];
+    for (let index = 0; index < count; index++) {
+      const found = !!verified && !this.stale ? verified.states[index] : undefined;
+      states.push(found === "ok" || found === "failed" || found === "errored"
+        ? found
+        : this.recorded[index] === true ? "new" : "saved");
+    }
+    return states;
+  }
+
+  // The resolved options, the start in force and the pinned clock. The clock is the point of the line:
+  // a case recorded against the real date is a case that fails in a year, so the date the tester pins
+  // is shown wherever a person can see it (rule 9).
+  private describeStatus(suite: any, test: any): string {
+    const resolved: any = {
+      ...defaultTestOptions,
+      ...this.host.getTestOptions(),
+      ...(!!suite && !!suite.options ? suite.options : {}),
+      ...(!!test && !!test.options ? test.options : {}),
+    };
+    const optionsText = Object.keys(resolved)
+      .filter(key => resolved[key] !== undefined && resolved[key] !== "")
+      .map(key => testerText("recorder.bar.statusOption", key, formatValue(resolved[key], 24)))
+      .join(testerText("recorder.bar.statusJoin"));
+    const start = !!test ? test.start : undefined;
+    const startText = typeof start === "string"
+      ? testerText("recorder.bar.statusStartNamed", start)
+      : !!start && typeof start === "object"
+        ? testerText("recorder.bar.statusStartInline")
+        : testerText("recorder.bar.statusStartNone");
+    return testerText("recorder.bar.status", testerText("recorder.bar.statusOptions", optionsText),
+      startText, testerText("recorder.bar.statusClock", String(resolved.now)));
+  }
+
+  private describeBadge(): string {
+    if (!!this.blockedReason || this.replayState === "failed") {
+      return testerText("recorder.bar.badgeBlocked");
+    }
+    return this.isRecording
+      ? testerText("recorder.bar.badgeRecording")
+      : testerText("recorder.bar.badgePaused");
+  }
+
+  private describeFailNote(): string {
+    const verified = this.verifyOutcome;
+    if (!verified || this.stale) return "";
+    const first = verified.firstFailure;
+    if (verified.failed > 0) {
+      return testerText("recorder.verdict.checksFail", verified.failed,
+        !!first ? testerText("recorder.verdict.atStep", first.stepIndex + 1, first.text) : "");
+    }
+    if (verified.status === "passed") return "";
+    return !!first
+      ? testerText("recorder.verdict.errored", first.stepIndex + 1, first.text)
+      : testerText("recorder.verdict.doesNotRun", verified.status);
   }
 
   // ---- the inside ----------------------------------------------------------------------------------
 
   // Rule 5. Every edit goes out through the host at once - there is no Apply and no staging buffer -
   // and every write re-verifies the whole case quietly, so there is no edit the state column misses.
-  private applyText(next: string, coalesced?: boolean): void {
+  private applyText(next: string, coalesced?: boolean, marksBefore?: Array<boolean>): void {
     // The undo stack is the recorder's own, and it holds only what the recorder wrote. A coalesced write
-    // adds no entry: it rewrites the step the entry on top already undoes.
+    // adds no entry: it rewrites the step the entry on top already undoes. The marks it stores are the
+    // ones from before the edit, handed in by the edits that move them - they move before the write,
+    // because the write projects the screen and the screen reads them.
     if (!coalesced || !this.undoStack.length) {
-      this.undoStack.push({ text: this.host.getTestsText(), cursor: this.cursor });
+      this.undoStack.push({
+        text: this.host.getTestsText(), cursor: this.cursor,
+        recorded: !!marksBefore ? marksBefore : this.recorded.slice(),
+      });
       if (this.undoStack.length > MAX_UNDO)this.undoStack.shift();
       this.canUndo = true;
     }
@@ -860,6 +1342,9 @@ export class TesterRecorderModel extends Base {
     this.host.setTestsText(next);
     this.rememberDocument();
     this.quietVerify();
+    // The list is a view over the document, and a rename or a moved step changes the document without
+    // changing a property of this model - so the projection is asked for here as well.
+    this.refreshScreen();
   }
 
   private getSuite(): any { return parseJson(this.host.getTestsText()).value; }
@@ -877,8 +1362,8 @@ export class TesterRecorderModel extends Base {
   }
 
   private isCapturing(): boolean {
-    return this.isOpen && this.isRecording && !!this.liveSurvey && this.replayState !== "failed" &&
-      !this.blockedReason;
+    return this.isOpen && this.isRecording && !!this.liveSurvey && !this.busy &&
+      this.replayState !== "failed" && !this.blockedReason;
   }
 
   private noteIgnored(note: string, reason: IgnoredReason, target?: string): void {
@@ -1060,6 +1545,25 @@ function insertState(states: Array<TesterStepState>, index: number): Array<Teste
   const next = states.slice();
   next.splice(index, 0, "ok");
   return next;
+}
+
+// The rest of what the test carries, read straight out of the document: the panel under the step list
+// edits these, and the New test form used to ask for them before there was a test to describe.
+function readTestFields(test: any): ITesterTestFields {
+  if (!test) return {};
+  return {
+    description: typeof test.description === "string" ? test.description : undefined,
+    start: test.start,
+    variables: test.variables,
+  };
+}
+
+// The suite's named starts, offered by name. The one this test can inline is added by the panel: it is
+// not a start of the suite's, it is an instruction to take the answers the form holds now.
+function readStartNames(suite: any): Array<string> {
+  const starts = !!suite && Array.isArray(suite.starts) ? suite.starts : [];
+  return starts.filter((start: any) => !!start && typeof start.name === "string")
+    .map((start: any) => start.name as string);
 }
 
 function parseObjectText(text: string | undefined): { value?: any, error?: string } {

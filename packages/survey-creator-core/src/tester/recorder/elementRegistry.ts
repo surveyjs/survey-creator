@@ -7,9 +7,11 @@ import type { SurveyModel } from "survey-core";
 // Walking up from the event target to the nearest registered node is how a keystroke is attributed to a
 // question and a click on the navigation is recognised as not belonging to one at all.
 //
-// It is not where the adorners come from. Those are rendered inside the elements themselves (see
-// adorners.tsx): a check button that was placed by a measurement taken from this map would be standing
-// where its element used to be the moment the pane scrolled.
+// It is also what the adorner list is built from (model/adornerModel.ts): the elements that have
+// rendered are the elements there is somewhere to put a check button on. What it is *not* is where an
+// adorner is placed - a button positioned by a measurement taken from this map would be standing where
+// its element used to be the moment the pane scrolled, which is why the button is a child of the
+// element and the overlay is the view's business (prompt 07).
 
 export type RegisteredKind = "question" | "cell" | "panel" | "page";
 
@@ -25,6 +27,10 @@ export interface RegisteredElement {
 }
 
 export class ElementRegistry {
+  // Whoever wants to know that the set of rendered elements moved. It is one callback and not an event
+  // list because there is one reader of it - the adorner list - and layer 0 owns no survey-core model.
+  public onChanged?: () => void;
+
   private byNode: Map<HTMLElement, RegisteredElement> = new Map();
   private handlers: Array<{ event: any, handler: any }> = [];
 
@@ -55,7 +61,23 @@ export class ElementRegistry {
       try { entry.event.remove(entry.handler); } catch{ /* a model already torn down */ }
     });
     this.handlers = [];
+    const had = this.byNode.size > 0;
     this.byNode.clear();
+    if (had)this.raiseChanged();
+  }
+
+  // What has rendered, in the order it rendered, minus what the renderer has since replaced. The sweep
+  // is the same one resolve() does on the way past a stale node, done here for the whole map so that a
+  // list built from this does not carry an element that is no longer on the page.
+  public list(): Array<RegisteredElement> {
+    const alive: Array<RegisteredElement> = [];
+    const stale: Array<HTMLElement> = [];
+    this.byNode.forEach((entry, node) => {
+      if (node.isConnected) alive.push(entry);
+      else stale.push(node);
+    });
+    stale.forEach(node => this.byNode.delete(node));
+    return alive;
   }
 
   // The nearest registered ancestor of a DOM node, so the innermost element wins: the input of a matrix
@@ -84,6 +106,17 @@ export class ElementRegistry {
 
   private add(entry: RegisteredElement): void {
     if (!entry.node || !(entry.node instanceof HTMLElement)) return;
+    const known = this.byNode.get(entry.node);
     this.byNode.set(entry.node, entry);
+    if (!known || known.obj !== entry.obj)this.raiseChanged();
+  }
+
+  // A handler of somebody else's, called from inside a render event of survey-core: it may not take the
+  // render down with it, for the same reason the recorder's observer may not throw.
+  private raiseChanged(): void {
+    if (!this.onChanged) return;
+    try {
+      this.onChanged();
+    } catch{ /* an adorner list is cosmetic; a failure to rebuild it interrupts nothing */ }
   }
 }

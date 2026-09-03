@@ -419,6 +419,178 @@ export const enTesterStrings = {
     notAnObject: "it must be an object.",
     noModelForStart: "There is no model on screen to take the data from.",
 
+    // The step list: the matrix, its columns, its two row verbs and the note under it. The list is a
+    // view over tests[i].steps and holds nothing of its own, so every word here is about a position in
+    // that array or about what the last run made of it.
+    steps: {
+      title: "Steps",
+      surveyTarget: "survey",
+      addRow: "Record at the end",
+      removeRow: "Delete",
+      noRows: "No steps yet. What you do in the form appears here.",
+      columnNum: "#",
+      columnName: "Name",
+      columnState: "State",
+      detailAction: "Action",
+      detailTarget: "Target",
+      goToRunner: "Go to Runner",
+      startHere: "▶",
+      startHereTooltip: "Start here: replay everything above and record from this position",
+      openJson: "JSON",
+      openJsonTooltip: "Show this step in the suite document",
+      actionDetail: (detail: string): string => " · " + detail,
+      targetJoin: ", ",
+      cursorAtEnd: "The next step is added at the end.",
+      cursorInsert: (position: number): string =>
+        "The next step is inserted into position " + position + ", above the step marked ▸.",
+      cursorRecording: (text: string): string => "Recording. " + text,
+      // Keyed by the state's own code, which is a closed set: localization.test.ts walks it rather than
+      // grepping for these paths, and the class on the row is keyed by the code and not by the word.
+      state: {
+        new: "new",
+        ok: "OK",
+        failed: "failed",
+        errored: "error",
+        saved: "saved",
+      },
+    },
+
+    // Everything the test carries besides its name and its steps, asked for under the list of those
+    // steps - at the one moment there is something to describe.
+    testPanel: {
+      title: "Test options",
+      description: "Everything this test carries besides its name and its steps. Saved into the test" +
+        " itself; the options below merge over the suite options per key, and empty means no override.",
+      inherited: "(inherited)",
+      descriptionTitle: "Description",
+      descriptionPlaceholder: "What does this test prove?",
+      descriptionNote: "Metadata the tester never reads. It is what a person scanning the suite reads.",
+      startTitle: "Start",
+      startPlaceholder: "(none)",
+      startNote: "The state the case begins from. A start does not merge: a test either references one" +
+        " of the suite's by name or inlines one of its own.",
+      startInline: "inline the form's answers as they are now",
+      variablesTitle: "Variables",
+      variablesPlaceholder: "{ \"region\": \"us\" }",
+      variablesNote: "A JSON object, merged over the suite's variables per name. They are applied" +
+        " before the start data, so a defaultValueExpression that reads one sees it.",
+      localeTitle: "Locale",
+      localePlaceholder: "(default)",
+      localeNote: "Empty means the library default.",
+      nowTitle: "Now",
+      nowPlaceholder: "2024-01-01T00:00:00",
+      nowNote: "The clock the test reads: today(), currentDate(), currentYear() and age().",
+      randomSeedTitle: "Random seed",
+      randomSeedPlaceholder: "1",
+      randomSeedNote: "Default 1.",
+      clearInvisibleValuesTitle: "Clear invisible values",
+      clearInvisibleValuesNote: "Decides whether a hidden answer survives into the result data.",
+      checkErrorsModeTitle: "Check errors mode",
+      checkErrorsModeNote: "When the survey computes its errors.",
+      stopOnFirstFailureTitle: "Stop on first failure",
+      stopOnFirstFailureNote: "Ends the test at its first failing check. A suite run never stops at one.",
+      booleanTrue: "yes",
+      booleanFalse: "no",
+      asyncTimeoutTitle: "Async timeout (ms)",
+      asyncTimeoutPlaceholder: "5000",
+      asyncTimeoutNote: "How long a step waits for an asynchronous survey operation. Default 5000;" +
+        " zero waits for nothing.",
+      notValidJson: (message: string): string => "Not valid JSON: " + message,
+      variablesNotMap: "Variables are a JSON object that maps a name to a value.",
+    },
+
+    // The recorder's own settings. None of this travels with a suite, which is why the panel says so.
+    optionsPanel: {
+      title: "Recorder options",
+      description: "Local to this widget, never saved into a suite.",
+    },
+    // One entry per member of RecorderOptions. The panel under the step list shows all four; the
+    // session bar's menu offers the three that are toggles as one press each.
+    option: {
+      coalesceSets: "Coalesce keystrokes",
+      coalesceSetsNote: "Consecutive edits of the same question become one step. Without it every" +
+        " keystroke is a step.",
+      coalesceIdleMs: "Coalescing idle window (ms)",
+      coalesceIdleMsNote: "After this long, the next edit of the same question starts a new step.",
+      mergeAdjacentSets: "Merge adjacent sets into one step",
+      mergeAdjacentSetsNote: "Equivalent — the targets run in key order — but harder to read back," +
+        " which is why it is off.",
+      autoCheckAfterCommand: "Check the value after every answer",
+      autoCheckAfterCommandNote: "Off by default: a case that asserts everything asserts nothing.",
+    },
+
+    // The check menu an adorner opens: the rows the tester's registry produced, and the picker under
+    // them for a check that is not complete until something is chosen.
+    menu: {
+      ariaLabel: (target: string): string => "Checks for " + target,
+      markTicked: "✓",
+      markPicker: "…",
+      tooltipTicked: "The case asserts this. Press to take it back out.",
+      tooltipPicker: "Press to choose what this check covers.",
+      tooltipAdd: "Press to add this check.",
+      pickerNote: (check: string): string =>
+        "Choose what \"" + check + "\" covers. Everything it holds now is ticked; unticking one" +
+        " narrows the expectation deliberately.",
+      pickerAdd: "Add this check",
+      pickerCancel: "Cancel",
+      pickerChoicesEmpty: "This question shows no choices right now.",
+      pickerEmpty: "There is nothing to pick here yet.",
+      nowNoValues: "the names that hold nothing",
+      nowVariables: "the variables in force",
+    },
+
+    // The session bar: what the session is doing, what it records under, and the four verbs.
+    bar: {
+      record: "Record",
+      recordTooltip: "Resume recording. What you do in the form becomes steps again.",
+      pause: "Pause",
+      pauseTooltip: "Stop recording without closing the session. Nothing you do is written down.",
+      verify: "Verify",
+      verifyTooltip: "Run the whole case headlessly and say what it does.",
+      rewind: "Rewind to start",
+      rewindTooltip: "Move the cursor to the beginning and replay nothing.",
+      discard: "Discard session",
+      discardTooltip: "Closes the session only. Nothing is deleted: what was recorded is the document.",
+      options: "…",
+      optionsTooltip: "Session options",
+      optionState: (title: string, on: boolean): string => title + (on ? " ✓" : ""),
+      status: (options: string, start: string, clock: string): string =>
+        options + " · " + start + " · " + clock,
+      statusOptions: (text: string): string => "records under " + text,
+      statusOption: (key: string, value: string): string => key + "=" + value,
+      statusJoin: ", ",
+      statusStartNamed: (name: string): string => "start \"" + name + "\"",
+      statusStartInline: "start: data inlined in the test",
+      statusStartNone: "no start",
+      statusClock: (now: string): string =>
+        "today() is " + now + " — the recording is machine-independent",
+      badgeRecording: "recording — your input becomes steps",
+      badgePaused: "paused — nothing you do is recorded",
+      badgeBlocked: "not recording — the session has nothing to record onto",
+      staleNotice: "The tail of the case has not run since the last edit.",
+    },
+
+    // What the quiet run behind every write has against the case, in words. The State column marks the
+    // row; this is the sentence beside the list.
+    verdict: {
+      checksFail: (count: number, at: string): string =>
+        count + (count === 1 ? " check fails" : " checks fail") + at,
+      atStep: (stepNumber: number, text: string): string => " — step " + stepNumber + ": " + text,
+      errored: (stepNumber: number, text: string): string =>
+        "The case errors — step " + stepNumber + ": " + text,
+      doesNotRun: (status: string): string =>
+        "The case does not run: the last headless run ended as \"" + status + "\".",
+    },
+
+    // The zoom of the form pane. It is a way of looking at the model and not a fact about the case.
+    zoom: {
+      label: "Zoom",
+      in: "Zoom in",
+      out: "Zoom out",
+      reset: "Back to 100%",
+      reading: (percent: number): string => percent + "%",
+    },
+
     // What the capture says a person did. The same sentence names a recorded step and, when the two
     // signals disagreed, the row of the ignored strip that says it was not recorded.
     did: {
@@ -507,6 +679,8 @@ export const enTesterStrings = {
       // A check that did not hold, where it has no message of its own to print.
       checkSubject: (target: string, check: string): string => target + " · " + check,
       noCheckResult: "the confirming run produced no result.",
+      caseMovedDuringCheck: "the case changed while the check was being confirmed, so the check was" +
+        " not written. Press it again.",
       nothingRecorded: (problem: string): string => "Nothing was recorded: " + problem,
       nothingRecordedProblems: (problems: string): string => "Nothing was recorded. " + problems,
       truncated: (index: number): string =>

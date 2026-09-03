@@ -186,6 +186,105 @@ describe("a scripted recording session, with no DOM in the room", () => {
   }, 60000);
 });
 
+// The acceptance walk of PROMPT-recorder.md section 12, in model terms: sample 1's first test recorded
+// from an empty case through the adorner list and the check menus, and the JSON that comes out is the
+// sample's own. Nothing here reads a value off the model and writes it as an expectation - every one of
+// them is the confirming run's `actual`, which is the whole of rule 2.
+describe("the acceptance walk of the recorder, through the models that draw it", () => {
+  it("records sample 1's first test and produces the sample's own JSON", async() => {
+    const host = new TesterHostStub(conditional.surveyJson,
+      formatSuite({ name: "Insurance", options: { clearInvisibleValues: "onComplete" }, tests: [] }));
+    const model = new SurveyTesterModel(host);
+    open.push(model);
+
+    expect(model.createTest({ name: "Declining insurance skips the provider question" })).toBe(undefined);
+    await whenRecorder(model);
+    const recorder = model.recorder;
+    const survey: any = recorder.liveSurvey;
+
+    // The elements the form drew. The registry is fed by the model's own render events, so this is
+    // exactly what a renderer produces - and it is the only reason an adorner exists at all.
+    render(model, survey.getQuestionByName("hasInsurance"));
+    render(model, survey.getQuestionByName("insuranceProvider"));
+    expect(recorder.adorners.adorners.map(one => one.target))
+      .toEqual(["survey", "hasInsurance", "insuranceProvider"]);
+
+    // 1. answer hasInsurance: "no". The model takes the answer, and the step is the one the capture
+    //    would have reported for it.
+    survey.setValue("hasInsurance", "no");
+    recorder.recordStep({ command: "set", target: "hasInsurance", payload: "no", description: "" });
+
+    // 2. two checks on the provider question, through its own adorner's menu. It is invisible now, so
+    //    the value the row shows and the value the case gets are both the tester's.
+    const provider = menuOf(model, "insuranceProvider");
+    await tick(model, provider, "visible");
+    await tick(model, provider, "required");
+
+    // 3. press Complete.
+    survey.tryComplete();
+    expect(survey.state).toBe("completed");
+    recorder.recordStep({ command: "complete", target: "survey", payload: true, description: "" });
+
+    // 4. the survey's own adorner: state, then the two pickers. Recording the whole data blob is what
+    //    the pickers exist to refuse (README section 1.5), so each of them writes the keys it ticked.
+    const whole = menuOf(model, "survey");
+    await tick(model, whole, "state");
+    await pick(model, whole, "values");
+    await pick(model, whole, "noValues");
+
+    await recorder.verify();
+    expect(recorder.verifyOutcome?.status, "the recorded case does not pass").toBe("passed");
+    expect(recorder.verifyOutcome?.failed).toBe(0);
+
+    // And what it wrote is the sample's own first test. The names are the recorder's - every step is
+    // named after what it does, and the tester reads none of them - so they come off before the two
+    // are compared.
+    const recorded = JSON.parse(host.text).tests[0].steps.map((step: any) => {
+      const copy = { ...step };
+      delete copy.name;
+      return copy;
+    });
+    expect(recorded).toEqual(conditional.tests.tests[0].steps);
+  }, 60000);
+});
+
+// What survey-react-ui does after it has drawn a question, which is how the registry behind the adorner
+// list is fed.
+function render(model: SurveyTesterModel, question: any): void {
+  const element = document.createElement("div");
+  document.body.appendChild(element);
+  (model.recorder.liveSurvey as any).onAfterRenderQuestion
+    .fire(model.recorder.liveSurvey, { question: question, htmlElement: element });
+}
+
+function menuOf(model: SurveyTesterModel, target: string): any {
+  const adorner: any = model.recorder.adorners.find(target);
+  expect(adorner, "no adorner for \"" + target + "\"").toBeTruthy();
+  model.recorder.adorners.toggle(target);
+  return adorner.menu;
+}
+
+// A press on a row of the menu, and the quiet run behind it settling.
+async function tick(model: SurveyTesterModel, menu: any, check: string): Promise<void> {
+  menu.update(model.recorder.tickedFor(menu.target), false);
+  const row = menu.rowModels.filter((one: any) => one.name === check)[0];
+  expect(row, "the menu of \"" + menu.target + "\" offers no \"" + check + "\"").toBeTruthy();
+  menu.toggle(row);
+  await model.recorder.verify();
+}
+
+// A check that is not complete until its keys are chosen: the first press opens the picker, and what it
+// starts with is what the check can assert right now.
+async function pick(model: SurveyTesterModel, menu: any, check: string): Promise<void> {
+  menu.update(model.recorder.tickedFor(menu.target), false);
+  const row = menu.rowModels.filter((one: any) => one.name === check)[0];
+  expect(row, "the survey menu offers no \"" + check + "\"").toBeTruthy();
+  menu.toggle(row);
+  expect(menu.pending, "\"" + check + "\" opened no picker").toBe(row);
+  menu.addPending();
+  await model.recorder.verify();
+}
+
 function whenRecorder(model: SurveyTesterModel): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     const until = Date.now() + 20000;
