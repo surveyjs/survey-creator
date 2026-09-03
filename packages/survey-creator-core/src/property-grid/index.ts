@@ -2159,10 +2159,10 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
     if (!survey) return [];
     var questions = this.getQuestions(survey, obj);
     if (!questions) questions = [];
-    var showTitles = !!options && options.useElementTitles;
     var qItems = questions.map((q) => {
-      let text = showTitles ? (<any>q).locTitle.renderedHtml : q.name;
-      if (!!options) text = options.getObjectDisplayName(q, "property-grid:property-editor", "property-editor", text);
+      let text = !!options
+        ? options.getObjectDisplayName(q, "property-grid:property-editor", "property-editor")
+        : q.name;
       let value = this.getItemValue(<any>q);
       return { value: value, text: text };
     });
