@@ -4,7 +4,7 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding } from "../../textWorker";
 import { ComponentContainerModel } from "../component-container/component-container";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
-import { getLinterString, JsonEditorLinterModel } from "./json-editor-linter";
+import { getFindingSeverityKind, getLinterString, JsonEditorLinterModel } from "./json-editor-linter";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { settings } from "../../creator-settings";
 import { DomWindowHelper } from "survey-core";
@@ -109,16 +109,21 @@ export abstract class JsonEditorBaseModel extends Base {
         title = title.substring(0, maxErrorLength) + "...";
       }
       title = line + title;
+      // a finding is shown by its own severity, the way the check list shows it: the two lists
+      // sit on one screen, and an error that reads as a warning in one of them reads as two
+      // different verdicts on one defect. A JSON error is an error by nature.
+      const kind = isFinding
+        ? getFindingSeverityKind((<SurveyTextWorkerLinterFinding>error).severity)
+        : "error";
       res.push(new Action({
         id: (isFinding ? "linterfinding_" : "error_") + this.errorActionCounter++,
         component: "json-error-item",
         title: title,
         tooltip: error.text,
-        // a linter finding never blocks anything, so it shows as a warning whatever its own
-        // severity is - the error icon and the alert colours belong to what does block
-        iconName: isFinding ? "icon-warning-24x24" : "icon-error",
+        iconName: kind === "error" ? "icon-error" : "icon-warning-24x24",
         iconSize: "auto",
-        css: isFinding ? "svc-json-errors__item--warning" : undefined,
+        // the base item already carries the alert colours an error needs
+        css: kind === "warning" ? "svc-json-errors__item--warning" : undefined,
         data: {
           error: error,
           showFixButton: error.isFixable,

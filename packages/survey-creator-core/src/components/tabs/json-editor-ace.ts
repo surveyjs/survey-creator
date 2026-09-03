@@ -102,8 +102,11 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   }
   protected gotoError(at: number, row: number, column: number): void {
     this.aceEditor.focus();
-    this.aceEditor.renderer.scrollCursorIntoView({ row: row + 1, column: column + 1 }, 0.5);
-    this.aceEditor.gotoLine(row + 1, column + 1);
+    // gotoLine takes a 1-based line and a 0-based column, and centres the line itself when it
+    // is not fully visible. scrollCursorIntoView reads a 0-based position, and null means the
+    // current cursor - the one gotoLine has just moved, so it runs after it and not before.
+    this.aceEditor.gotoLine(row + 1, column);
+    this.aceEditor.renderer.scrollCursorIntoView(null, 0.5);
   }
   public onEditorActivated(): void {
     this.aceEditor.getSession().getUndoManager().markClean();

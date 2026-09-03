@@ -11,6 +11,13 @@ export function getLinterString(name: string): string {
   return editorLocalization.getString("linter." + name);
 }
 
+// How a finding looks, in the check list and in the error list of the editor alike: the two
+// lists sit on one screen, so one severity may not read as two different things. Info shares
+// the warning look, as the icon set has no separate info icon.
+export function getFindingSeverityKind(severity: string): string {
+  return severity === "error" ? "error" : "warning";
+}
+
 // Undefined when the key is missing, instead of the last path segment getString falls back to.
 // Not usable for the terms: a term whose text equals its key ("page": "page") reads as missing.
 function getTemplate(name: string): string {
@@ -408,8 +415,7 @@ export class JsonEditorLinterModel extends Base {
   private getRuleStatus(found: Array<SurveyTextWorkerLinterFinding>): string {
     if (!this.result) return undefined;
     if (found.length === 0) return "passed";
-    if (found.some(item => item.severity === "error")) return "error";
-    // info shares the warning status: the icon set has no separate info icon
+    if (found.some(item => getFindingSeverityKind(item.severity) === "error")) return "error";
     return "warning";
   }
 
@@ -440,8 +446,7 @@ export class JsonEditorLinterModel extends Base {
   private createFindingAction(rule: ILintRuleInfo, item: SurveyTextWorkerLinterFinding,
     index: number): Action {
     const css = ["svc-json-linter__finding"];
-    // info shares the warning colours, as it shares the warning icon
-    css.push("svc-json-linter__finding--" + (item.severity === "error" ? "error" : "warning"));
+    css.push("svc-json-linter__finding--" + getFindingSeverityKind(item.severity));
     // a finding whose path did not resolve cannot be navigated to, so it must not look clickable
     if (item.at > -1) css.push("svc-json-linter__finding--navigable");
     return new Action({

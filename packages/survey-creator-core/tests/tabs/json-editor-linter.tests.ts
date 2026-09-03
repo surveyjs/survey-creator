@@ -1,6 +1,6 @@
 import { getRules, SurveyLintHintReasons, SurveyLintReasons } from "survey-core/linter";
 import { TextareaJsonEditorModel, TabJsonEditorTextareaPlugin } from "../../src/components/tabs/json-editor-textarea";
-import { formatNamed, JsonEditorLinterModel } from "../../src/components/tabs/json-editor-linter";
+import { formatNamed, getFindingSeverityKind, JsonEditorLinterModel } from "../../src/components/tabs/json-editor-linter";
 import { CreatorTester } from "../creator-tester";
 import { SurveyTextWorker } from "../../src/textWorker";
 import { editorLocalization } from "../../src/editorLocalization";
@@ -48,11 +48,39 @@ test("Linter findings are merged into the error list after the JSON errors", () 
   expect(actions[2].id.indexOf("linterfinding_")).toBe(0);
 });
 
-test("A linter finding shows as a warning whatever its severity is", () => {
+test("A finding looks the same in the error list and in the check list", () => {
   const editor = createEditor(badReference);
-  const action = editor.errorList.actions[0];
   expect(editor.linter.findings[0].severity).toBe("error");
-  expect(action.iconName).toBe("icon-warning-24x24");
+  const listed = editor.errorList.actions[0];
+  expect(listed.iconName).toBe("icon-error");
+  expect(listed.css).toBeUndefined();
+  const checked = editor.linter.checkList.actions.filter(
+    a => a.id.indexOf("linter-finding-") === 0)[0];
+  expect(checked.css).toContain("svc-json-linter__finding--error");
+});
+
+test("A warning finding keeps the warning look in both lists", () => {
+  const editor = createEditor(JSON.stringify({
+    pages: [{ name: "p1", elements: [{ type: "text", name: "q1" }] }, { name: "p2" }]
+  }, null, 2));
+  const finding = editor.linter.findings.filter(f => f.ruleId === "page/empty")[0];
+  expect(finding.severity).toBe("warning");
+  const listed = editor.errorList.actions.filter(
+    a => a.data.error === finding)[0];
+  expect(listed.iconName).toBe("icon-warning-24x24");
+  expect(listed.css).toBe("svc-json-errors__item--warning");
+  const checked = editor.linter.checkList.actions.filter(
+    a => a.data?.error === finding)[0];
+  expect(checked.css).toContain("svc-json-linter__finding--warning");
+});
+
+test("getFindingSeverityKind gives info the warning look", () => {
+  expect(getFindingSeverityKind("error")).toBe("error");
+  expect(getFindingSeverityKind("warning")).toBe("warning");
+  // the icon set has no separate info icon, and a severity this version does not know
+  // is advisory until proven otherwise
+  expect(getFindingSeverityKind("info")).toBe("warning");
+  expect(getFindingSeverityKind(undefined)).toBe("warning");
 });
 
 test("The error list is cleared once the JSON is fixed", () => {
