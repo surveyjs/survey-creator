@@ -140,6 +140,18 @@ test.describe("CSP strict policy diagnostics", () => {
     await expect(getTabbedMenuItemByText(page, creatorTabDesignerName)).toBeVisible();
     await expect(page.locator(".svc-question__content").first()).toBeVisible();
 
+    // The creator ships no fonts of its own: the Open Sans faces come from survey-core's
+    // stylesheet, which has to be enough under `font-src 'self'`. The faces are loaded
+    // by hand because they load lazily - and `fonts.check()` is no guard here, it
+    // answers true for a family nothing declares at all.
+    const openSans = await page.evaluate(async() => {
+      const faces = Array.from((document as any).fonts).filter((face: any) => face.family === "Open Sans");
+      await Promise.all(faces.map((face: any) => face.load().catch(() => undefined)));
+      return { declared: faces.length, loaded: faces.filter((face: any) => face.status === "loaded").length };
+    });
+    expect(openSans.declared).toBeGreaterThan(0);
+    expect(openSans.loaded).toBe(openSans.declared);
+
     // Select a question through the model rather than a click: it fills the
     // property grid without depending on the (possibly broken) layout.
     await step("select imagemap question", async () => {

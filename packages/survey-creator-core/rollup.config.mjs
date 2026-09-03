@@ -7,7 +7,7 @@ import svgLoader from "svg-inline-loader";
 
 import process from "process";
 import pkg from "./package.json" with { type: "json" };
-import { createEsmConfig, createUmdConfig, createCssConfig } from "../../rollup.helpers.mjs";
+import { createEsmConfig, createUmdConfig } from "../../rollup.helpers.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const buildPath = resolve(__dirname, "build");
@@ -78,7 +78,6 @@ const buildPlatformJson = {
       "require": "./survey-creator-core.js"
     },
     "./*.css": "./*.css",
-    "./fonts/*": "./fonts/*",
     "./images/*": "./images/*",
     "./survey-creator-core.i18n": {
       "import": "./fesm/survey-creator-core.i18n.mjs",
@@ -142,16 +141,13 @@ const buildPlatformJson = {
   devDependencies: {},
 };
 
-// The stylesheets reference these as url(fonts/...) / url(images/...) instead of
-// inlining them, so the files have to sit next to the emitted CSS. Copied
-// unconditionally: a dev build needs them just as much as a release one. The Open Sans
-// subsets ship with their license; only the raster images are copied from src/images,
-// the svg icons there go through svg-inline-loader instead.
+// The stylesheets reference these as url(images/...) instead of inlining them, so the
+// files have to sit next to the emitted CSS. Copied unconditionally: a dev build needs
+// them just as much as a release one. Only the raster images are copied from src/images,
+// the svg icons there go through svg-inline-loader instead. No fonts are copied: the
+// @font-face rules and the woff2 files they point at come from survey-core, whose
+// stylesheet always accompanies the creator's own.
 function copyStyleAssets() {
-  fs.mkdirSync(resolve(buildPath, "fonts"), { recursive: true });
-  for (const name of fs.readdirSync(resolve(__dirname, "src/fonts"))) {
-    fs.copyFileSync(resolve(__dirname, "src/fonts", name), resolve(buildPath, "fonts", name));
-  }
   fs.mkdirSync(resolve(buildPath, "images"), { recursive: true });
   for (const name of fs.readdirSync(resolve(__dirname, "src/images"))) {
     if (!name.endsWith(".png")) continue;
@@ -201,36 +197,21 @@ export default async (options) => {
         "iconsV1": imagesV1,
         "iconsV2": imagesV2
       },
-      emitCss: resolve(buildPath, "survey-creator-core.fontless.css"),
-      noEmitOnError: !options.watch
-    }),
-    createCssConfig({
-      input: {
-        "fonts.fontless": resolve(__dirname, "./src/entries/fonts.scss")
+      emitCss: resolve(buildPath, "survey-creator-core.css"),
+      // survey-creator-core.fontless.css was the same stylesheet minus the @font-face
+      // rules. The creator declares none any more - they come from survey-core - so the
+      // two files are identical and the name is kept as an alias for consumers that
+      // already reference it.
+      onCloseBundle: () => {
+        const suffixes = process.env.emitMinified === "true" ? [".css", ".min.css"] : [".css"];
+        for (const suffix of suffixes) {
+          const emitted = resolve(buildPath, `survey-creator-core${suffix}`);
+          if (fs.existsSync(emitted)) {
+            fs.copyFileSync(emitted, resolve(buildPath, `survey-creator-core.fontless${suffix}`));
+          }
+        }
       },
-      dir: buildPath,
-      emitMinified: process.env.emitMinified === "true",
-      version: pkg.version,
-      watchFiles: [resolve(buildPath, "survey-creator-core.fontless.css")],
-      onCloseBundle: async() => {
-        for (const path of [resolve(buildPath, "survey-creator-core.css"), resolve(buildPath, "survey-creator-core.min.css")]) {
-          if (fs.existsSync(path)) {
-            fs.unlinkSync(path);
-          }
-        }
-        for (const name of ["fonts.fontless", "survey-creator-core.fontless"]) {
-          fs.appendFileSync(
-            resolve(buildPath, "survey-creator-core.css"),
-            fs.readFileSync(resolve(buildPath, `${name}.css`))
-          );
-          if (process.env.emitMinified === "true") {
-            fs.appendFileSync(
-              resolve(buildPath, "survey-creator-core.min.css"),
-              fs.readFileSync(resolve(buildPath, `${name}.min.css`))
-            );
-          }
-        }
-      }
+      noEmitOnError: !options.watch
     }),
     createEsmConfig({
       version: pkg.version,

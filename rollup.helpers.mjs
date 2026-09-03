@@ -18,9 +18,11 @@ import postcss from "postcss";
 import cssnano from "cssnano";
 import { minify } from "terser";
 
-// Fonts and raster images are referenced as files instead of being inlined as data:
-// URIs: a `data:` background is refused under `img-src 'self'`, and the fonts used to
-// come from fonts.gstatic.com, which `font-src 'self'` refuses too.
+// Raster images are referenced as files instead of being inlined as data: URIs: a
+// `data:` background is refused under `img-src 'self'`. The creator itself ships no
+// fonts - the Open Sans subsets and their @font-face rules come from survey-core, whose
+// stylesheet always accompanies the creator's own - but the woff2 rule stays as a guard:
+// an inlined font is refused under `font-src 'self'` just the same.
 // The url is rewritten by hand rather than with postcss-url's "copy" mode, which
 // silently skips assets whose url escapes the stylesheet folder with "../". The files
 // themselves are copied by the package's rollup config (see copyStyleAssets).
@@ -110,7 +112,7 @@ function pluginIgnoreStyles() {
 
 export function createUmdConfig(options) {
 
-  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
+  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, onCloseBundle, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
 
   if (Object.keys(input).length > 1) throw Error("umd config accepts only one input");
 
@@ -174,6 +176,9 @@ export function createUmdConfig(options) {
         }
       }),
       emitMinified && pluginMinify(),
+      onCloseBundle && {
+        closeBundle: onCloseBundle,
+      },
     ],
     output: [
       {
