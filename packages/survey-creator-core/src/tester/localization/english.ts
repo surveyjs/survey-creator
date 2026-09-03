@@ -234,6 +234,7 @@ export const enTesterStrings = {
     disabledNoStepRan: "Disabled: no step ran.",
     nameRequired: "A test must have a name: the session is addressed by it and not by an index.",
     nameTaken: (name: string): string => "The suite already has a test named \"" + name + "\".",
+    testGone: (name: string): string => "The test \"" + name + "\" is no longer in the suite.",
     documentsDoNotRun: "The documents do not run.",
     editDisabledUnnamed: "A session is addressed by name, so a test without one cannot be recorded" +
       " into. Give it a name in the box below.",
@@ -298,6 +299,8 @@ export const enTesterStrings = {
       name + " · " + steps + (steps === 1 ? " step" : " steps") + " · tests[" + index + "]",
     headerMissing: (name: string): string => name + " · not in the suite as it stands",
     parseError: (message: string): string => "The document does not parse: " + message,
+    // What jsonc-parser says went wrong, and where. The code is its own word for it.
+    parseErrorAt: (code: string, offset: number): string => code + " at character " + offset,
     issueCount: (errors: number, warnings: number): string =>
       !errors && !warnings
         ? "no issue"
@@ -391,15 +394,143 @@ export const enTesterStrings = {
         " Everything it recorded is in the Tests JSON: press Edit to carry on.",
       surveyChanged: "The survey definition changed while a run was in flight, so the run was stopped:" +
         " the model it was driving is a model of the definition before the edit.",
+      renamedSessionClosed: (next: string): string =>
+        "The test was renamed to \"" + next + "\", so the recording session was closed. Everything it" +
+        " recorded is in the Tests JSON.",
+      renamed: (next: string): string =>
+        "Renamed to \"" + next + "\". The last run's verdict does not follow a name, so the row reads" +
+        " \"not run\" until it runs again.",
+      deleted: (name: string, wasRecorded: boolean): string =>
+        "The test \"" + name + "\" was deleted" +
+        (wasRecorded ? ", and the recording session that was open on it was closed." : ".") +
+        " Undo it in the JSON screen, where the document holds the edit.",
     },
   },
 
-  // The recorder. Everything but the two document refusals arrives with prompt 04; the placeholder is
-  // what the screen says until then, so the state machine can be complete before the screen is.
+  // The recorder: the session, what it recorded, what it refused to record, and why.
   recorder: {
-    placeholder: "recorder — prompt 04",
     nameRequired: "A test must have a name: the session is addressed by it and not by an index.",
     noSuite: "The Tests JSON does not hold a suite with a \"tests\" array.",
     nameTaken: (name: string): string => "The suite already has a test named \"" + name + "\".",
+    optionsNotObject: (message: string): string =>
+      "The options override is not a JSON object: " + message,
+    variablesNotObject: (message: string): string =>
+      "The variables override is not a JSON object: " + message,
+    notAnObject: "it must be an object.",
+    noModelForStart: "There is no model on screen to take the data from.",
+
+    // What the capture says a person did. The same sentence names a recorded step and, when the two
+    // signals disagreed, the row of the ignored strip that says it was not recorded.
+    did: {
+      set: (target: string): string => "answered " + target,
+      clear: (target: string): string => "cleared " + target,
+      setComment: (target: string): string => "wrote the comment of " + target,
+      addRow: (subject: string): string => "added a row to " + subject,
+      removeRow: (subject: string): string => "removed a row from " + subject,
+      addPanel: (subject: string): string => "added a panel to " + subject,
+      removePanel: (subject: string): string => "removed a panel from " + subject,
+      startSurvey: "pressed Start",
+      prevPage: "pressed Previous",
+      nextPage: "pressed Next",
+      showPreview: "pressed Preview",
+      cancelPreview: "pressed Edit on the preview",
+      complete: "pressed Complete",
+    },
+    // The same movement, made by the survey itself: goNextPageAutomatic, a completetrigger, an
+    // auto-complete. A replay reproduces all three, so recording the press would press twice.
+    moved: {
+      startSurvey: "the survey moved on: Start",
+      prevPage: "the survey moved on: Previous",
+      nextPage: "the survey moved on: Next",
+      showPreview: "the survey moved on: Preview",
+      cancelPreview: "the survey moved on: Edit on the preview",
+      complete: "the survey moved on: Complete",
+    },
+    ignored: {
+      byTrigger: (value: string): string => "set to " + value + " by a trigger",
+      byExpression: (value: string): string => "recalculated to " + value + " by the survey",
+      byVariable: (value: string): string => "recalculated to " + value + " by an expression",
+      noGesture: (value: string): string =>
+        "changed to " + value + " with nothing the person did behind it",
+      unaddressable: (question: string): string => question + " has no name a case can address",
+    },
+    // The word the ignored strip prints beside a row. Keyed by IgnoredReason, which is a closed enum:
+    // localization.test.ts walks it rather than grepping for these paths.
+    reason: {
+      trigger: "trigger",
+      expression: "expression",
+      noGesture: "no gesture",
+      paused: "paused",
+      automatic: "automatic",
+      notAddressable: "not addressable",
+    },
+
+    // What a step of the case says, in the words a tester would use. Keyed by the command name, which
+    // is why a command this widget has never heard of has no entry here and is shown as it was written.
+    action: {
+      set: "Set answer",
+      clear: "Clear the answer",
+      setComment: "Write the comment",
+      expect: (what: string): string => "Check " + what,
+      properties: "properties",
+      checkDetail: (count: number, names: string): string =>
+        count + (count === 1 ? " check · " : " checks · ") + names,
+      payloadJoin: (parts: Array<string>): string => parts.join(" · "),
+      nextPage: "Go to the next page",
+      prevPage: "Go back a page",
+      complete: "Complete the survey",
+      startSurvey: "Start the survey",
+      showPreview: "Show the preview",
+      cancelPreview: "Go back to editing",
+      addRow: "Add a row",
+      removeRow: "Remove a row",
+      addPanel: "Add a panel",
+      removePanel: "Remove a panel",
+    },
+
+    // The session's own line: what the replay made of the case, and what an edit did to it.
+    session: {
+      testGone: (name: string): string =>
+        "The test \"" + name + "\" is no longer in the suite, so the session is closed.",
+      replayFailed: (message: string): string => "The replay failed: " + message,
+      replayFailedDetail: "run() reports everything as an issue instead of rejecting, so this is a bug" +
+        " in this application.",
+      replayStopped: (code: string, message: string): string =>
+        "The replay stopped: " + code + " — " + message,
+      replayNoModel: "The replay produced no model, so there is nothing to record on.",
+      prefixFailed: (count: number, stepNumber: number, text: string): string =>
+        count + (count === 1 ? " step of the prefix no longer holds" : " steps of the prefix no longer" +
+          " hold") + " — step " + stepNumber + ": " + text,
+      prefixFailedDetail: "Replaying is not verifying: the prefix was applied to the end anyway, and" +
+        " the model is in the state it produced.",
+      issueText: (code: string, message: string): string => code + " — " + message,
+      // A check that did not hold, where it has no message of its own to print.
+      checkSubject: (target: string, check: string): string => target + " · " + check,
+      noCheckResult: "the confirming run produced no result.",
+      nothingRecorded: (problem: string): string => "Nothing was recorded: " + problem,
+      nothingRecordedProblems: (problems: string): string => "Nothing was recorded. " + problems,
+      truncated: (index: number): string =>
+        "The case now ends at step " + index + ", and recording continues from there.",
+      documentChanged: "The Tests JSON changed outside the Recorder, so the session was replayed onto" +
+        " the new document.",
+      cursorClamped: "The document changed underneath the session, so the cursor moved to the end of" +
+        " the case.",
+      undone: "The last recorded change was undone.",
+    },
+
+    // Why a check the menu asked for was not written as it was asked for. Every one of them is about
+    // the confirming run: what this widget writes is the tester's own actual, never a value it read.
+    problem: {
+      noResult: (check: string): string =>
+        "The check \"" + check + "\" produced no result and was not written.",
+      overrideFails: (check: string): string =>
+        "\"" + check + "\" was recorded with a value the survey does not hold now: it will fail.",
+      presentKey: (key: string): string =>
+        "\"" + key + "\" holds a value and was left out of \"noValues\".",
+      invalidPayload: (check: string, actual: string): string =>
+        "The check \"" + check + "\" reads " + actual + ", which is not a valid payload for it, so" +
+        " nothing was written.",
+      join: " ",
+    },
   },
 };

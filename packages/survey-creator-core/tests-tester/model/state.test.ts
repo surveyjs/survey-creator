@@ -6,6 +6,7 @@
 // usePersistentState is what this replaces and it was not ported.
 import { afterEach, describe, expect, it } from "vitest";
 import { defaultHostOptions } from "../../src/tester/core/hostOptions";
+import { defaultRecorderOptions } from "../../src/tester/recorder/options";
 import { SurveyTesterModel } from "../../src/tester/model/testerModel";
 import { formatSuite, TesterHostStub } from "./testerHostStub";
 
@@ -33,6 +34,22 @@ afterEach(() => {
   open.forEach(model => model.dispose());
   open = [];
 });
+
+// setState starts the transition it restores and does not wait for it: restoring a recorder screen
+// replays the prefix of the case, which is a run of the tester. The open session is the end of it.
+function whenOpen(model: SurveyTesterModel): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    const until = Date.now() + 10000;
+    const tick = (): void => {
+      // The screen and not the session: a session is open from the first line of open(), and the
+      // prefix it replays to is what the cursor is restored by.
+      if (model.screen === "recorder" && model.recorder.isOpen) resolve();
+      else if (Date.now() > until) reject(new Error("recorder"));
+      else setTimeout(tick, 5);
+    };
+    tick();
+  });
+}
 
 describe("the round trip", () => {
   it("restores the screen, the selection and the options a person changed", () => {
@@ -72,18 +89,18 @@ describe("the round trip", () => {
     const first = build();
     await first.model.openRecorder("long");
     expect(first.model.recorder.cursor, "a session opens at the end of the case").toBe(3);
-    // Rewound into the middle of the case, which is what prompt 04's setCursor will do.
-    first.model.recorder.cursor = 1;
+    // Rewound into the middle of the case: the prefix is replayed to there, and that is the cursor
+    // the state has to carry.
+    await first.model.recorder.setCursor(1);
 
     const state = first.model.getState();
     expect(state.screen).toBe("recorder");
     expect(state.activeTestName).toBe("long");
-    expect(state.recorder).toEqual({ cursor: 1, options: {} });
+    expect(state.recorder).toEqual({ cursor: 1, options: defaultRecorderOptions });
 
     const second = build();
     second.model.setState(state);
-    await Promise.resolve();
-    await Promise.resolve();
+    await whenOpen(second.model);
     expect(second.model.screen).toBe("recorder");
     expect(second.model.recorder.testName).toBe("long");
     expect(second.model.recorder.isOpen).toBe(true);
@@ -95,8 +112,7 @@ describe("the round trip", () => {
   it("clamps a restored cursor to the case as it now stands", async() => {
     const { model } = build();
     model.setState({ screen: "recorder", activeTestName: "two", recorder: { cursor: 9 } });
-    await Promise.resolve();
-    await Promise.resolve();
+    await whenOpen(model);
     expect(model.recorder.isOpen).toBe(true);
     expect(model.recorder.cursor).toBe(1);
   });

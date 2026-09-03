@@ -269,9 +269,36 @@ The widget shell, ported in prompt 03. Its sources are the prototype's `componen
 | — (new) | `model/testerHost.ts` — `ITesterHost`, `ITesterOptions`, `ITesterState` |
 | `src/components/test/JsonScreen.tsx` + `src/components/TestsJsonEditor.tsx` | `model/jsonModel.ts` — `TesterJsonModel` |
 | `src/views/react/SetupTab.tsx` + `SetupModel` | `model/settingsModel.ts` — `TesterSettingsModel`, the setup survey in a popup |
-| `src/store/useRecorder.ts` | `model/recorderModel.ts` — a typed stub until prompt 04 |
 | — (new) | `localization/english.ts`, `localization/index.ts` |
 | `src/store/usePersistentState.ts` | **not ported**: the host owns persistence, and `getState`/`setState` is what replaces it |
 
-Still to arrive: `recorder/` and the real `TesterRecorderModel` (prompt 04), the recorder's presentation
-models (prompt 05), `theme/` and `index.ts` (prompt 06).
+The recorder's engine, ported in prompt 04. Layer 0 came over as it was; the hook became a model.
+
+| Prototype | Here |
+|---|---|
+| `src/tester/recorder/capture.ts` | `recorder/capture.ts` — the two-signal attribution: the gesture window, `ValueChangedEvent.reason`, coalescing, `flush()` |
+| `src/tester/recorder/caseEdit.ts` | `recorder/caseEdit.ts` — every document edit, as `modify` + `applyEdits` at `tests[i]…` |
+| `src/tester/recorder/checks.ts` | `recorder/checks.ts` — what an adorner offers, and a provisional expectation of each |
+| `src/tester/recorder/elementRegistry.ts` | `recorder/elementRegistry.ts` — element to rendered node, fed by the model's `onAfterRender*` events |
+| `src/tester/recorder/silentRun.ts` | `recorder/silentRun.ts` — the zero-delay headless prefix run; blocking-issue extraction |
+| `src/tester/recorder/stepText.ts` | `recorder/stepText.ts` — step summaries for grids and menus |
+| `src/tester/recorder/targetName.ts` | `recorder/targetName.ts` — a thin adapter over `SurveyTestTargets.nameOf` |
+| `src/tester/recorder/options.ts` | `recorder/options.ts` — `RecorderOptions`, `autoStepName` |
+| `src/store/useRecorder.ts` | `model/recorderModel.ts` — `TesterRecorderModel`: the session as a `Base` model |
+| `src/tester/recorder/capture.test.ts`, `recorder.test.ts` | `tests-tester/recorder/*` |
+| the behaviour half of `src/components/recorder/recorderTab.test.tsx` | `tests-tester/model/recorderModel.test.ts` |
+
+Three things changed in that port and are worth knowing:
+
+* `IgnoredReason` is spelled in codes (`noGesture`, `notAddressable`, `paused` — the prototype's "not
+  recording") rather than in sentences, because every person-readable word belongs to the string table.
+  What the strip prints is `recorder.reason.<code>`.
+* `capture.ts`'s listener set is put on a node by `TesterRecorderModel.attachTo(pane)` / `detach()`.
+  That is the **only** DOM seam of the model layer; a session that was never attached still records
+  every model-driven step, which is what the model tests drive.
+* `core/json.ts` reads the suite with `jsonc-parser` now. A widget whose only reader was `JSON.parse`
+  reported a commented document as broken, so the "a hand-formatted, commented suite survives being
+  recorded into" promise could never be kept however careful the edits were.
+
+Still to arrive: the recorder's presentation models — the steps survey, the check menu, the adorner
+data, the session bar (prompt 05) — and `theme/` and `index.ts` (prompt 06).

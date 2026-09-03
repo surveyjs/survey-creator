@@ -1,5 +1,6 @@
 import type { ISurveyTestOptions } from "survey-core/tester";
 import type { HostOptions, RunMode } from "../core/hostOptions";
+import type { RecorderOptions } from "../recorder/options";
 
 // The one contract a host implements, and the reason the Creator plugin tab will be an adapter instead
 // of a rewrite.
@@ -25,12 +26,12 @@ export interface ITesterHost {
   options?: ITesterOptions;
 }
 
-// The recorder's own options. A typed placeholder until prompt 04 fills it in: it is declared now so
-// that ITesterOptions and ITesterState have their final shape before the recorder arrives, and a host
-// written against this prompt does not have to change for the next one.
-export interface ITesterRecorderOptions {
-  [name: string]: any;
-}
+// The recorder's own options, as a host may set them: coalescing and its idle window, merging adjacent
+// sets, the automatic check after a command. They are RecorderOptions (src/tester/recorder/options.ts)
+// and they exist only in this widget - the tester has no notion of a keystroke or a cursor, and none of
+// this travels with a suite. Partial, because everything is a default: what a host does not name keeps
+// the widget's own value, and what a person changes afterwards belongs to the widget's state.
+export type ITesterRecorderOptions = Partial<RecorderOptions>;
 
 // What a host may set up front. Everything is a default: what a person changes afterwards belongs to
 // the widget's state (getState / setState) and is never written back here.

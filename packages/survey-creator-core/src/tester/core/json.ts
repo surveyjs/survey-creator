@@ -1,3 +1,5 @@
+import { parse as parseJsonc, printParseErrorCode } from "jsonc-parser";
+import type { ParseError } from "jsonc-parser";
 import { DomDocumentHelper } from "survey-core";
 import { testerText } from "../localization";
 
@@ -14,13 +16,23 @@ export interface ParsedJson<T = any> {
   error?: string;
 }
 
+// The document is read with jsonc-parser rather than with JSON.parse, and it is the same reader that
+// every edit goes back out through. It has to be: overview section 4 promises that a hand-formatted,
+// commented suite survives being recorded into, and a widget whose only reader refused a "//" would
+// report such a document as broken and block every screen but the editor - so the promise could never
+// be kept, however carefully the edits preserved the comments (prompt 04; see
+// promts/creator-tester-notes.md).
+//
+// What this widens is exactly JSONC: comments and a trailing comma. Everything else is an error, and
+// the first one is reported with the offset it sits at, which is what an editor needs anyway.
 export function parseJson<T = any>(text: string): ParsedJson<T> {
   if (!text.trim()) return { error: testerText("json.emptyDocument") };
-  try {
-    return { value: JSON.parse(text) as T };
-  } catch(error) {
-    return { error: !!error && (error as any).message ? (error as any).message : String(error) };
+  const errors: Array<ParseError> = [];
+  const value = parseJsonc(text, errors, { allowTrailingComma: true }) as T;
+  if (errors.length > 0) {
+    return { error: testerText("json.parseErrorAt", printParseErrorCode(errors[0].error), errors[0].offset) };
   }
+  return { value: value };
 }
 
 export function formatJson(value: any): string {

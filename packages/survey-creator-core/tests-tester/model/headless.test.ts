@@ -124,6 +124,84 @@ describe("a scripted session, with no DOM in the room", () => {
   }, 60000);
 });
 
+// The same session, carried on into the recorder: prompt 04 section 7. A test is created, three steps
+// and two checks are recorded into it through model calls, the cursor is rewound and a step is inserted
+// in the middle, and the verdict that comes back is the honest one.
+//
+// Nothing here touches the DOM. The recorder's one DOM seam is attachTo(), which a view calls with the
+// element the form pane rendered into; a session that was never attached still records every step the
+// model reports, and these are exactly those.
+describe("a scripted recording session, with no DOM in the room", () => {
+  it("creates a test, records into it, rewinds, inserts and reads the verdict", async() => {
+    const host = new TesterHostStub(conditional.surveyJson,
+      formatSuite({ name: "recorded", options: { clearInvisibleValues: "onComplete" }, tests: [] }));
+    const model = new SurveyTesterModel(host);
+    open.push(model);
+
+    // Creating a test is the act of starting to record it: one call, and the widget is on the recorder.
+    expect(model.createTest({ name: "accepting insurance" })).toBe(undefined);
+    await whenRecorder(model);
+    expect(model.screen).toBe("recorder");
+    expect(model.recorder.testName).toBe("accepting insurance");
+    expect(model.recorder.cursor).toBe(0);
+    expect(model.recorder.liveSurvey, "the session opened without a model").toBeTruthy();
+
+    // Three steps and two checks. The steps are what the capture would hand over; the checks go
+    // through the confirming run, which is where every expected value comes from.
+    const recorder = model.recorder;
+    recorder.recordStep({ command: "set", target: "hasInsurance", payload: "yes", description: "" });
+    await recorder.addChecks("insuranceProvider", [
+      { name: "visible", payloadType: "boolean" }, { name: "empty", payloadType: "boolean" },
+    ]);
+    recorder.recordStep({
+      command: "set", target: "insuranceProvider", payload: "Allianz", description: "",
+    });
+    recorder.recordStep({ command: "complete", target: "survey", payload: true, description: "" });
+    await recorder.verify();
+    expect(steps(host).length).toBe(4);
+    expect(recorder.verifyOutcome?.status).toBe("passed");
+
+    // Rewind to step 1 and insert there. The tail is not touched, and the case now says something the
+    // tail contradicts - which is exactly what the verdict has to say out loud.
+    await recorder.setCursor(1);
+    expect(recorder.cursor).toBe(1);
+    expect((recorder.liveSurvey as any).getValue("hasInsurance")).toBe("yes");
+    recorder.recordStep({ command: "set", target: "hasInsurance", payload: "no", description: "" });
+    await recorder.verify();
+    expect(steps(host).length).toBe(5);
+    expect(steps(host)[1]).toEqual({ name: "set-hasInsurance", set: { hasInsurance: "no" } });
+    // Honest, and honest about all of it: the provider question is invisible now, so the check that
+    // followed no longer holds and the step that fills the question in cannot run at all - which is an
+    // errored test and not merely a failed one.
+    expect(recorder.verifyOutcome?.status).toBe("error");
+    expect(recorder.verifyOutcome?.failed).toBeGreaterThan(0);
+    expect(recorder.verifyOutcome?.firstFailure?.stepIndex).toBe(2);
+    expect(recorder.stepStates.slice()).toEqual(["ok", "ok", "failed", "errored", "unrun"]);
+
+    // And the way back: the step that was inserted goes, and the case is green again.
+    await recorder.deleteStep(1);
+    await recorder.verify();
+    expect(recorder.verifyOutcome?.status).toBe("passed");
+    expect(recorder.verifyOutcome?.failed).toBe(0);
+  }, 60000);
+});
+
+function whenRecorder(model: SurveyTesterModel): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    const until = Date.now() + 20000;
+    const tick = (): void => {
+      if (model.screen === "recorder" && model.recorder.isOpen) resolve();
+      else if (Date.now() > until) reject(new Error("recorder"));
+      else setTimeout(tick, 5);
+    };
+    tick();
+  });
+}
+
+function steps(host: TesterHostStub): Array<any> {
+  return JSON.parse(host.text).tests[0].steps;
+}
+
 function replaceLast(text: string, find: string, next: string): string {
   const at = text.lastIndexOf(find);
   return at < 0 ? text : text.substring(0, at) + next + text.substring(at + find.length);

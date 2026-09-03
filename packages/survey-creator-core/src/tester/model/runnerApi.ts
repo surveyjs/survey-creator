@@ -130,7 +130,8 @@ export interface ITesterRowActions {
   onJson(test: ITesterPanelTest): void;
   // The three that edit the suite. A verb that is not given is not rendered, which is what keeps a row
   // that only reads a test from growing a way to rewrite one - and it is why the rename and the delete
-  // can arrive with the recorder's document editing in prompt 04 without this shape changing.
+  // could arrive with the recorder's document editing without this shape changing. They are given now;
+  // the confirmation a delete deserves is the view's, because a model cannot ask a question.
   onEdit?(test: ITesterPanelTest): void;
   onDelete?(test: ITesterPanelTest): void;
   // A message means "refused, and why". The input keeps the focus and the text.

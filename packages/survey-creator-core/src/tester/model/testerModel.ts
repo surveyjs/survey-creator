@@ -6,6 +6,7 @@ import { defaultHostOptions, defaultTestOptions, toConsoleOptions } from "../cor
 import { getSuiteTests } from "../core/stepInfo";
 import { getBrokenTestCount, getSuiteLevelErrors, validateSuite } from "../core/validate";
 import { testerLocalization, testerText } from "../localization";
+import { deleteTest as deleteTestText, setTestName as setTestNameText } from "../recorder/caseEdit";
 import { TesterJsonModel } from "./jsonModel";
 import { TesterRecorderModel } from "./recorderModel";
 import { TesterRunnerModel } from "./runnerModel";
@@ -99,8 +100,12 @@ export class SurveyTesterModel extends Base {
       getTestsText: () => this.host.getTestsText(),
       setTestsText: text => this.setTestsText(text),
       getSurveyJson: () => this.host.getSurveyJson(),
+      // Read at the moment a silent run is built, never captured: a change made in the settings form
+      // reaches the next replay of an open session without anything being pushed at it.
+      getTestOptions: () => this.testOptions,
+      getHostOptions: () => this.hostOptions,
     });
-    if (!!options.recorderOptions)this.recorder.options = options.recorderOptions;
+    this.recorder.setOptions(options.recorderOptions);
     this.settings = new TesterSettingsModel({
       onTestOptions: next => this.setTestOptions(next),
       onHostOptions: next => this.setHostOptions(next),
@@ -202,9 +207,11 @@ export class SurveyTesterModel extends Base {
         editDisabledReason: test => !!test.unnamed
           ? testerText("row.editDisabledUnnamed")
           : undefined,
-        // onRename and onDelete are deliberately absent, and a verb that is not given is not rendered:
-        // both are edits of the document through jsonc-parser, which is the recorder's caseEdit.ts and
-        // arrives with prompt 04. Adding them is additive - this is the shape they slot into.
+        // The two edits of the suite itself. They arrived with the recorder's caseEdit.ts, which is what
+        // keeps a hand-formatted document formatted through them, and the shape they slot into is the
+        // one prompt 03 left: a verb that is not given is not rendered.
+        onRename: (test, next) => this.renameTest(test, next),
+        onDelete: test => this.deleteTest(test),
       },
       newTest: { onCreate: params => this.createTest(params) },
       onFixJson: () => this.openJson(this.activeTestName),
@@ -370,6 +377,14 @@ export class SurveyTesterModel extends Base {
     await this.recorder.open(testName, cursor);
     if (this.gone) return;
     this.transition = "none";
+    // open() replays the prefix, and a session can end inside that await: a run started over it, the
+    // test left the document, another Edit claimed the screen. Whoever ended it has already said so and
+    // put the screen where it belongs, so this one only stands down - switching to the recorder here
+    // would show a session that is no longer open.
+    if (!this.recorder.isOpen || this.recorder.testName !== testName) {
+      this.refreshRunner();
+      return;
+    }
     this.activeTestName = testName;
     this.screen = "recorder";
     this.refreshRunner();
@@ -391,6 +406,55 @@ export class SurveyTesterModel extends Base {
     if (!!problem) return problem;
     void this.openRecorder((params.name || "").trim());
     return undefined;
+  }
+
+  // Renaming a test is one edit at tests[i].name, and everything else that holds the name moves with it
+  // here and now: a name that is stale in one of the four places is a bug that reads as a UI glitch.
+  // Refused before the document is touched - a rename that half-happened is worse than one that did not.
+  public renameTest(test: ITesterPanelTest, next: string): string | undefined {
+    const wanted = (next || "").trim();
+    if (!wanted) return testerText("row.nameRequired");
+    const index = this.indexOf(test);
+    if (index < 0) return testerText("row.testGone", test.name);
+    const clash = getSuiteTests(this.suite)
+      .some((other, at) => at !== index && !!other && other.name === wanted);
+    if (clash) return testerText("row.nameTaken", wanted);
+    // Read before the write: the edit lands through updateFromHost, and the vanished-test fallback
+    // closes a session whose test no longer answers to its name before this line is reached again.
+    const wasRecorded = this.recorder.isOpen && this.recorder.testName === test.name && !test.unnamed;
+    this.setTestsText(setTestNameText(this.host.getTestsText(), index, wanted));
+    if (!!this.selectedTestNames) {
+      this.setSelectedNames(this.selectedTestNames.map(name => name === test.name ? wanted : name));
+    }
+    if (this.activeTestName === test.name)this.activeTestName = wanted;
+    // The cursor and the prefix replay of an open session are about a case addressed by the old name,
+    // so the session ends rather than following silently. What it recorded is in the document.
+    if (wasRecorded) {
+      if (this.recorder.isOpen)this.recorder.close();
+      if (this.screen === "recorder")this.screen = "runner";
+      this.setNotice(testerText("tester.notice.renamedSessionClosed", wanted));
+    } else {
+      // A finished run cannot be rewritten, so the row has no result under its new name. Said out loud:
+      // a green dot on a test that has not run under that name would be a lie.
+      this.setNotice(testerText("tester.notice.renamed", wanted));
+    }
+    return undefined;
+  }
+
+  // And deleting one is the same edit with no value. There is no confirmation here and there cannot be:
+  // asking is a view's business, and a model that opened a dialog would be naming a framework.
+  public deleteTest(test: ITesterPanelTest): void {
+    const index = this.indexOf(test);
+    if (index < 0) return;
+    // Read before the write: the vanished-test fallback of updateFromHost closes the session as the
+    // edit lands, so afterwards there is nothing left to ask.
+    const wasRecorded = this.recorder.isOpen && this.recorder.testName === test.name && !test.unnamed;
+    this.setTestsText(deleteTestText(this.host.getTestsText(), index));
+    if (!!this.selectedTestNames) {
+      this.setSelectedNames(this.selectedTestNames.filter(name => name !== test.name));
+    }
+    if (this.activeTestName === test.name)this.activeTestName = undefined;
+    this.setNotice(testerText("tester.notice.deleted", test.name, wasRecorded));
   }
 
   public setSelectedNames(names: Array<string> | undefined): void {

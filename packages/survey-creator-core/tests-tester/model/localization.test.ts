@@ -116,6 +116,23 @@ describe("the string table", () => {
     tones.forEach(status => {
       expect(testerLocalization.hasString("marks." + tone(status as any)), String(status)).toBe(true);
     });
+    // The recorder's three. Every command the capture can produce is said twice - as a press and as a
+    // movement the survey made by itself - every step of a case is named by its command, and every
+    // reason a change was not recorded has a word.
+    const commands = ["set", "clear", "setComment", "nextPage", "prevPage", "complete", "startSurvey",
+      "showPreview", "cancelPreview", "addRow", "removeRow", "addPanel", "removePanel"];
+    const navigation = ["nextPage", "prevPage", "complete", "startSurvey", "showPreview", "cancelPreview"];
+    commands.forEach(command => {
+      expect(testerLocalization.hasString("recorder.did." + command), command).toBe(true);
+      expect(testerLocalization.hasString("recorder.action." + command), command).toBe(true);
+    });
+    navigation.forEach(command => {
+      expect(testerLocalization.hasString("recorder.moved." + command), command).toBe(true);
+    });
+    const reasons = ["trigger", "expression", "noGesture", "paused", "automatic", "notAddressable"];
+    reasons.forEach(reason => {
+      expect(testerLocalization.hasString("recorder.reason." + reason), reason).toBe(true);
+    });
   });
 
   it("resolves a leaf, calls a leaf that takes values, and answers a missing path with itself", () => {

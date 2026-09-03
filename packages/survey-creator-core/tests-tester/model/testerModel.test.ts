@@ -43,6 +43,20 @@ afterEach(() => {
   open = [];
 });
 
+// A transition that was started without being awaited - createTest hands over to the recorder on its
+// own - and the screen is the observable end of it.
+function whenScreen(model: SurveyTesterModel, screen: string): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    const until = Date.now() + 10000;
+    const tick = (): void => {
+      if (model.screen === screen) resolve();
+      else if (Date.now() > until) reject(new Error(screen));
+      else setTimeout(tick, 5);
+    };
+    tick();
+  });
+}
+
 describe("the three screens", () => {
   it("starts on the runner with the suite reconciled into rows", () => {
     const { model } = build();
@@ -100,9 +114,9 @@ describe("the three screens", () => {
     // rest of the document is untouched.
     expect(JSON.parse(host.text).tests.map((test: any) => test.name)).toEqual(["one", "two", "three"]);
     expect(host.writes.length).toBe(1);
-    // The handover is asynchronous only because entering the recorder always is.
-    await Promise.resolve();
-    await Promise.resolve();
+    // The handover is asynchronous because entering the recorder always is: the session replays the
+    // prefix of the case it opens on, and an empty case is a case the tester runs.
+    await whenScreen(model, "recorder");
     expect(model.screen).toBe("recorder");
     expect(model.recorder.testName).toBe("three");
     expect(model.recorder.cursor).toBe(0);
@@ -119,18 +133,71 @@ describe("the three screens", () => {
   });
 
   // recorder --Go to Runner--> runner: flush, close, and keep the test selected so the run button reads
-  // "Run 1 test".
-  it("leaves the recorder with the test selected and the capture flushed", async() => {
+  // "Run 1 test". That the close is a flush first - a half-typed answer is recorded and not dropped -
+  // is asserted where the capture is, in recorderModel.test.ts.
+  it("leaves the recorder with the test selected", async() => {
     const { model } = build();
     track(model);
     await model.openRecorder("two");
-    const flushes = model.recorder.flushCount;
     model.goToRunnerFromRecorder();
-    expect(model.recorder.flushCount).toBe(flushes + 1);
     expect(model.recorder.isOpen).toBe(false);
     expect(model.screen).toBe("runner");
     expect(model.runner.selectedCount).toBe(1);
     expect((model.runner.toolbar.getActionById("run") as any).title).toBe("Run 1 test");
+  });
+});
+
+// The two edits of the suite itself. They are the row's verbs, they go through the recorder's
+// caseEdit.ts, and what has to move with a name is everything else that holds one.
+describe("renaming and deleting a test", () => {
+  function rowOf(model: SurveyTesterModel, name: string): any {
+    return (model.runner.rowModelList.find(row => row.name === name) as any).toPanelTest();
+  }
+
+  it("renames the test in the document and everywhere the name is held", () => {
+    const { model, host } = build();
+    track(model);
+    model.setSelectedNames(["two"]);
+    expect(model.renameTest(rowOf(model, "two"), "renamed")).toBe(undefined);
+    expect(JSON.parse(host.text).tests.map((test: any) => test.name)).toEqual(["one", "renamed"]);
+    expect(model.runner.selectedNames).toEqual(["renamed"]);
+    expect(model.notice.indexOf("Renamed to \"renamed\"")).toBe(0);
+  });
+
+  it("refuses a rename before the document is touched", () => {
+    const { model, host } = build();
+    track(model);
+    expect(model.renameTest(rowOf(model, "two"), "one"))
+      .toBe("The suite already has a test named \"one\".");
+    expect(model.renameTest(rowOf(model, "two"), "  "))
+      .toBe("A test must have a name: the session is addressed by it and not by an index.");
+    expect(host.writes).toEqual([]);
+  });
+
+  // A session is addressed by name, so the case it is about stops existing under the old one. What it
+  // recorded is in the document, which is what the notice says.
+  it("closes an open session when the test it is on is renamed", async() => {
+    const { model } = build();
+    track(model);
+    await model.openRecorder("two");
+    model.renameTest(rowOf(model, "two"), "renamed");
+    expect(model.recorder.isOpen).toBe(false);
+    expect(model.screen).toBe("runner");
+    expect(model.notice.indexOf("The test was renamed to \"renamed\"")).toBe(0);
+  });
+
+  it("deletes the test, drops it from the selection and says so", () => {
+    const { model, host } = build();
+    track(model);
+    model.setSelectedNames(["one", "two"]);
+    model.deleteTest(rowOf(model, "one"));
+    expect(JSON.parse(host.text).tests.map((test: any) => test.name)).toEqual(["two"]);
+    expect(model.runner.rowModelList.map(row => row.name)).toEqual(["two"]);
+    // The test that went is out of the selection, and what is left is every test there is - which is
+    // what the run boundary spells as undefined.
+    expect(model.runner.selectedCount).toBe(1);
+    expect(model.runner.selectedNames).toBe(undefined);
+    expect(model.notice.indexOf("The test \"one\" was deleted.")).toBe(0);
   });
 });
 
@@ -169,10 +236,7 @@ describe("the two asynchronous transitions", () => {
     const { model } = build();
     track(model);
     await model.openRecorder("one");
-    const flushes = model.recorder.flushCount;
     model.startRun(["one"]);
-    expect(model.recorder.flushCount, "the capture was not flushed before the session closed")
-      .toBe(flushes + 1);
     expect(model.recorder.isOpen).toBe(false);
     expect(model.screen).toBe("runner");
     expect(model.notice).toBe("The recording session on \"one\" was closed so this run could drive its" +
