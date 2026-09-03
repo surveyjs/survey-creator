@@ -101,6 +101,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   file: {
     properties: [
       "sourceType",
+      { name: "cameraFacingMode" },
       "allowMultiple",
       "maxFiles",
       { name: "showPreview" },

@@ -1031,6 +1031,11 @@ export var enStrings = {
       warning: "Warning",
       info: "Informational"
     },
+    cameraFacingMode: {
+      auto: "Auto",
+      user: "Front",
+      environment: "Rear"
+    },
     acceptedCategories: {
       image: "Images",
       video: "Videos",
@@ -1644,6 +1649,7 @@ export var enStrings = {
     value: "Value",
     tabAlign: "Tab alignment",
     sourceType: "File source type",
+    cameraFacingMode: "Default camera",
     fitToContainer: "Fit to container",
     setValueExpression: "Set value expression",
     description: "Description", // Auto-generated string
