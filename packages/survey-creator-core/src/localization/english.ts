@@ -1032,7 +1032,6 @@ export var enStrings = {
       info: "Informational"
     },
     cameraFacingMode: {
-      auto: "Auto",
       user: "Front",
       environment: "Rear"
     },
