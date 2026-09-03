@@ -101,13 +101,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   file: {
     properties: [
       "sourceType",
+      "cameraFacingMode",
       "allowMultiple",
       "maxFiles",
-      { name: "showPreview" },
+      "showPreview",
       "allowImagesPreview",
       "waitForUpload",
       "confirmDelete",
-      { name: "storeDataAsText" },
+      "storeDataAsText",
       "allowCameraAccess",
       "acceptedCategories",
       "acceptedTypes",
