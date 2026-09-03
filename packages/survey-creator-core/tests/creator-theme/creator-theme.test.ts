@@ -56,7 +56,9 @@ test("registerCreatorTheme function", (): any => {
     themeChooser.value = customThemeFamily;
     expect(creator.creatorTheme.themeName).toBe(customThemeFamily);
     expect(creator.creatorTheme.colorPalette).toBeUndefined();
-    expect(creator.themeVariables).toStrictEqual({ ...customCssVariables });
+    // themeVariables always carries the static box-shadow reset variables on top
+    // of the applied theme, so only the theme's own keys are asserted here.
+    expect(creator.themeVariables).toMatchObject({ ...customCssVariables });
   } finally {
     PredefinedCreatorThemes.splice(PredefinedCreatorThemes.indexOf(customThemeFamily), 1);
     delete CreatorThemes[customThemeFullName];

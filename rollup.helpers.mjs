@@ -11,12 +11,29 @@ import postcssUrl from "postcss-url";
 import postcssBanner from "postcss-banner";
 import postcssDiscardComments from "postcss-discard-comments";
 
-import { resolve, parse, format } from "node:path";
+import { resolve, parse, format, basename } from "node:path";
 import rollupEsbuild from "rollup-plugin-esbuild";
 
 import postcss from "postcss";
 import cssnano from "cssnano";
 import { minify } from "terser";
+
+// Raster images are referenced as files instead of being inlined as data: URIs: a
+// `data:` background is refused under `img-src 'self'`. The creator itself ships no
+// fonts - the Open Sans subsets and their @font-face rules come from survey-core, whose
+// stylesheet always accompanies the creator's own - but the woff2 rule stays as a guard:
+// an inlined font is refused under `font-src 'self'` just the same.
+// The url is rewritten by hand rather than with postcss-url's "copy" mode, which
+// silently skips assets whose url escapes the stylesheet folder with "../". The files
+// themselves are copied by the package's rollup config (see copyStyleAssets).
+// Filters are regexps, not globs, for the same "../" reason.
+const rewriteAssetUrl = (folder) => (asset) => folder + "/" + basename(asset.pathname || asset.url);
+
+const postcssUrlRules = [
+  { filter: /\.woff2(\?.*)?$/, url: rewriteAssetUrl("fonts") },
+  { filter: /\.png(\?.*)?$/, url: rewriteAssetUrl("images") },
+  { url: "inline" },
+];
 
 function getOwnBanner(version) {
   return [
@@ -95,7 +112,7 @@ function pluginIgnoreStyles() {
 
 export function createUmdConfig(options) {
 
-  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
+  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, onCloseBundle, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
 
   if (Object.keys(input).length > 1) throw Error("umd config accepts only one input");
 
@@ -116,7 +133,11 @@ export function createUmdConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
+        // rollup-plugin-esbuild takes a tsconfig file NAME and searches for it upward
+        // from each source file; an absolute path silently matches nothing, so esbuild
+        // gets no tsconfigRaw and compiles decorators with standard (TC39) semantics,
+        // which survey-core's legacy property() decorators crash on at runtime.
+        ? rollupEsbuild({ tsconfig: tsconfig ? basename(tsconfig) : undefined, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
@@ -133,6 +154,9 @@ export function createUmdConfig(options) {
           extract: emitCss,
           minimize: false,
           sourceMap: sourceMap,
+          // postcss-url resolves "copy" destinations against `to`; without it the
+          // assets would be copied next to the source scss, not into the build folder.
+          to: typeof emitCss === "string" ? emitCss : undefined,
           use: {
             sass: {
               api: "modern",
@@ -140,7 +164,7 @@ export function createUmdConfig(options) {
             }
           },
           plugins: [
-            postcssUrl({ url: "inline" }),
+            postcssUrl(postcssUrlRules),
             postcssBanner({ banner: getOwnBanner(version), important: true }),
           ],
         })
@@ -152,6 +176,9 @@ export function createUmdConfig(options) {
         }
       }),
       emitMinified && pluginMinify(),
+      onCloseBundle && {
+        closeBundle: onCloseBundle,
+      },
     ],
     output: [
       {
@@ -187,7 +214,11 @@ export function createEsmConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
+        // rollup-plugin-esbuild takes a tsconfig file NAME and searches for it upward
+        // from each source file; an absolute path silently matches nothing, so esbuild
+        // gets no tsconfigRaw and compiles decorators with standard (TC39) semantics,
+        // which survey-core's legacy property() decorators crash on at runtime.
+        ? rollupEsbuild({ tsconfig: tsconfig ? basename(tsconfig) : undefined, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
@@ -205,6 +236,9 @@ export function createEsmConfig(options) {
           extract: emitCss,
           minimize: false,
           sourceMap: sourceMap,
+          // postcss-url resolves "copy" destinations against `to`; without it the
+          // assets would be copied next to the source scss, not into the build folder.
+          to: typeof emitCss === "string" ? emitCss : undefined,
           use: {
             sass: {
               api: "modern",
@@ -212,7 +246,7 @@ export function createEsmConfig(options) {
             }
           },
           plugins: [
-            postcssUrl({ url: "inline" }),
+            postcssUrl(postcssUrlRules),
             postcssBanner({ banner: getOwnBanner(version), important: true }),
           ],
         })
@@ -266,6 +300,9 @@ export function createCssConfig(options) {
         extract: true,
         minimize: false,
         sourceMap: true,
+        // postcss-url resolves "copy" destinations against `to`; without it the assets
+        // would be copied next to the source scss instead of into the build folder.
+        to: resolve(dir, `${name}.css`),
         use: {
           sass: {
             api: "modern",
@@ -273,7 +310,7 @@ export function createCssConfig(options) {
           }
         },
         plugins: [
-          postcssUrl({ url: "inline" }),
+          postcssUrl(postcssUrlRules),
           postcssBanner({ banner: getOwnBanner(version), important: true }),
         ],
       }),

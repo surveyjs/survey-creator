@@ -13,6 +13,7 @@ import {
   ChoiceItem,
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
+  createBoxShadowResetVariables,
   IConfirmDialogOptions
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
@@ -5026,7 +5027,19 @@ export class SurveyCreatorModel extends Base
       .toString();
   }
 
-  @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
+  @property({ defaultValue: {} }) private creatorCssVariables: { [index: string]: string } = {};
+  // The box-shadow reset variables travel inside the style binding itself: anything
+  // set imperatively on the root element's style is wiped whenever a renderer
+  // re-renders the attribute from themeVariables (angular writes [attr.style]
+  // wholesale on every theme change). The resets are static - creator themes never
+  // override the composite border-effect variables, and the reset's color stays a
+  // live var() reference - so they track the active theme without being recomputed.
+  public get themeVariables(): { [index: string]: string } {
+    return Object.assign({}, createBoxShadowResetVariables(), this.creatorCssVariables);
+  }
+  public set themeVariables(val: { [index: string]: string }) {
+    this.creatorCssVariables = val;
+  }
   /**
    * A theme for the Survey Creator UI.
    *
