@@ -123,6 +123,19 @@ function getTerm(group: string, key: string): string {
   return getLinterString("terms." + group + "." + (hasTerm(group, key) ? key : "default"));
 }
 
+// The owner of a property, the way the core's own message names it: a named element by its
+// name, the survey and a nameless element by their class.
+function getOwnerText(name: string, className: string): string {
+  if (!!name) return "\"" + name + "\"";
+  if (className === "survey") return getLinterString("terms.owner.survey");
+  return formatTemplate("terms.owner.className", className);
+}
+
+// The allowed range of a property, written the way the core writes it: "0..100", "1..", "..10".
+function getRangeText(min: any, max: any): string {
+  return (typeof min === "number" ? min : "") + ".." + (typeof max === "number" ? max : "");
+}
+
 // The container level an unknown trigger-target segment belongs to. matrixdropdown addresses
 // a row first and a column second, so its noun depends on how deep the segment is.
 function getSegmentNoun(containerType: string, segmentIndex: number): string {
@@ -223,9 +236,40 @@ export class JsonEditorLinterModel extends Base {
     if (finding.reason === "keyNameNotFound") {
       params.keyNoun = getTerm("segmentNoun", data.questionType);
     }
-    if (finding.ruleId === "element/count-contradiction") {
+    // only the count reasons have a direction; the bound and step ones carry no count at all
+    if (finding.reason === "countOutOfBounds") {
       params.direction = getLinterString(
         "terms.countDirection." + (data.count < data.bound ? "below" : "above"));
+    }
+    if (finding.ruleId === "property/unknown" || finding.ruleId === "property/dead" ||
+      finding.ruleId === "property/invalid-value") {
+      params.ownerText = getOwnerText(data.name, data.className);
+    }
+    if (finding.ruleId === "property/invalid-value") {
+      params.valueText = quoteValue(data.value);
+      params.allowedText = quoteList(data.allowed);
+      params.rangeText = getRangeText(data.min, data.max);
+      if (typeof data.valueName === "string") {
+        params.rootKey = data.valueName.split(".")[0];
+      }
+    }
+    if (finding.ruleId === "name/shadowing") {
+      params.nameKindText = getTerm("nameKind", data.nameKind);
+      // a calculated value is not an element, and its elementType is a serializer class name
+      params.ownerText = data.nameKind === "calculatedValue"
+        ? getTerm("nameOwner", "calculatedValue")
+        : (finding.elementType || getTerm("nameOwner", undefined));
+    }
+    if (finding.ruleId === "choices/duplicate") {
+      params.valueText = quoteValue(data.value);
+      // an item this version has no word for is named by its own key rather than mislabelled
+      params.specialItemText = hasTerm("specialItem", data.specialItem)
+        ? getTerm("specialItem", data.specialItem)
+        : data.specialItem;
+    }
+    if (finding.ruleId === "validator/dead") {
+      params.effectText = getTerm("deadValidatorEffect", data.effect);
+      params.causeText = getTerm("deadValidatorCause", data.cause);
     }
     if (finding.ruleId === "element/never-visible") {
       const dependsOn: Array<string> = Array.isArray(data.dependsOn) ? data.dependsOn : [];
@@ -257,6 +301,13 @@ export class JsonEditorLinterModel extends Base {
     const res: Array<string> = [];
     const suffix = (name: string, ...args: Array<any>): string =>
       formatTemplate.apply(undefined, ["suffixes." + name].concat(args));
+    // one reason, two shapes: a name read from every entry of the container the call reads,
+    // or one the function resolves against the survey
+    if (finding.reason === "functionArgNotFound") {
+      res.push(!!data.containerName
+        ? suffix("functionArgInContainer", data.functionName, data.containerType, data.containerName)
+        : suffix("functionArgStandalone", data.functionName));
+    }
     if (finding.ruleId === "expression/syntax") {
       if (typeof data.at === "number") res.push(suffix("atPosition", data.at));
       if (data.synthesized) res.push(suffix("fromLegacyTrigger"));
@@ -283,6 +334,18 @@ export class JsonEditorLinterModel extends Base {
       if (finding.ruleId === "element/unknown-type") res.push(suffix("customComponentHint"));
       if (finding.ruleId === "expression/unknown-function") res.push(suffix("registerFunctionHint"));
       if (finding.ruleId === "trigger/unknown-type") res.push(suffix("triggerTypeDroppedHint"));
+      if (finding.ruleId === "property/unknown") res.push(suffix("deserializerDropsKey"));
+      if (finding.ruleId === "validator/unknown-type") res.push(suffix("validatorDroppedHint"));
+    }
+    // the element is worth naming only where it is not the data key itself, which it is
+    // unless a valueName renamed it
+    if ((finding.reason === "commentKeyCollision" || finding.reason === "totalKeyCollision") &&
+      !!data.name && data.name !== data.dataName) {
+      res.push(suffix("dataKeyOwner", data.name));
+    }
+    // the answer shape a dead validator was judged by depends on the inputType of a text question
+    if (finding.ruleId === "validator/dead" && !!data.inputType) {
+      res.push(suffix("validatorInputType", data.inputType));
     }
     if (finding.ruleId === "trigger/unknown-target" && data.kind === "questionvalue" &&
       finding.reason === "rootNotFound") {
@@ -294,7 +357,9 @@ export class JsonEditorLinterModel extends Base {
     if (finding.ruleId === "reference/unknown" && data.refKind === "binding") {
       res.push(suffix("inBindings"));
     } else if (finding.ruleId === "reference/unknown" && data.refKind === "choicesByUrlVariable") {
-      res.push(suffix("inChoicesByUrl"));
+      res.push(suffix("inChoicesByUrl", data.prop));
+    } else if (finding.ruleId === "reference/unknown" && data.refKind === "textPiping") {
+      res.push(suffix("inText", data.prop));
     } else if (!!data.expression && template.indexOf("{expression}") < 0) {
       // a template that quotes the expression itself needs no trailing "In expression: ..."
       res.push(suffix("inExpression", data.expression));

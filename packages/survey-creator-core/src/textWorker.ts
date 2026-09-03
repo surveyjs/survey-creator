@@ -315,11 +315,16 @@ export class SurveyTextWorker {
     let obj: any = this.jsonValue;
     let owner: any = this.jsonValue;
     let lastKey: string = undefined;
+    let resolved: number = 0;
     for (let i = 0; i < segments.length; i++) {
-      if (obj === null || typeof obj !== "object") return notFound;
+      // a path may address something the text has no place of its own for - the condition an
+      // inArray function carries inside an expression, for one. The deepest segment that did
+      // resolve is still where the author looks for it, so the walk stops instead of giving up.
+      if (obj === null || typeof obj !== "object") break;
       const segment = segments[i];
       const next = obj[segment];
-      if (next === undefined) return notFound;
+      if (next === undefined) break;
+      resolved++;
       if (next !== null && typeof next === "object") {
         if (!Array.isArray(next) && !!next["pos"]) {
           owner = next;
@@ -331,6 +336,8 @@ export class SurveyTextWorker {
       }
       obj = next;
     }
+    // a path whose very first segment names nothing addresses another survey, not this text
+    if (resolved === 0) return notFound;
     const pos = owner["pos"];
     if (!pos || typeof pos.start !== "number") return notFound;
     let at = pos.start;

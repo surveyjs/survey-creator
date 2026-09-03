@@ -40,10 +40,12 @@ test("Linter findings are merged into the error list after the JSON errors", () 
   const editor = createEditor(text);
   expect(editor.hasErrors).toBeTruthy();
   const actions = editor.errorList.actions;
-  expect(actions).toHaveLength(2);
+  // the JSON error first, then the two findings: an unknown property and an unknown reference
+  expect(actions).toHaveLength(3);
   expect(actions[0].id.indexOf("error_")).toBe(0);
   expect(actions[1].id.indexOf("linterfinding_")).toBe(0);
   expect(actions[1].data.showFixButton).toBeFalsy();
+  expect(actions[2].id.indexOf("linterfinding_")).toBe(0);
 });
 
 test("A linter finding shows as a warning whatever its severity is", () => {
@@ -221,12 +223,23 @@ test("getPositionByPath walks arrays and refines to the property key", () => {
   expect(element.rowAt).toBe(4);
 });
 
-test("getPositionByPath reports -1 for a path it cannot resolve", () => {
+test("getPositionByPath reports -1 for a path that resolves to nothing at all", () => {
   const worker = new SurveyTextWorker("{ \"elements\": [{ \"type\": \"text\", \"name\": \"q1\" }] }");
-  expect(worker.getPositionByPath("elements[0].nosuchprop").at).toBe(-1);
   expect(worker.getPositionByPath("nosuch[3].path").at).toBe(-1);
   expect(worker.getPositionByPath("").at).toBe(-1);
   expect(worker.getPositionByPath(undefined).at).toBe(-1);
+});
+
+test("getPositionByPath falls back to the deepest segment it did resolve", () => {
+  const text = "{ \"elements\": [{ \"type\": \"text\", \"name\": \"q1\", \"visibleIf\": \"{q2} = 1\" }] }";
+  const worker = new SurveyTextWorker(text);
+  // the condition of an inArray call is a site of its own, and the text has no place for it
+  const inArray = worker.getPositionByPath("elements[0].visibleIf.inArray[0]");
+  expect(text.substring(inArray.at, inArray.at + 11)).toBe("\"visibleIf\"");
+  // a property the JSON does not state at all still points at the element it belongs to
+  const element = worker.getPositionByPath("elements[0].nosuchprop");
+  expect(text.charAt(element.at)).toBe("{");
+  expect(element.at).toBeGreaterThan(0);
 });
 
 test("A message is composed from (ruleId, reason) and messageData, not from the English text", () => {
@@ -696,6 +709,253 @@ test("Detail elements left behind a default detailPanelMode are reported", () =>
   }, "page/empty")).toBe(
     "The detail elements of \"md\" are never shown: its detailPanelMode is \"none\"," +
     " which is the default.");
+});
+
+test("A name the survey answers itself says which built-in wins", () => {
+  expect(textOf({ elements: [{ type: "text", name: "pageno" }] }, "name/shadowing")).toBe(
+    "The name \"pageno\" of this text is also the built-in survey variable {pageno}" +
+    " - the survey answers {pageno} first, so this one is unreachable in expressions.");
+  expect(textOf({
+    elements: [{ type: "text", name: "q1" }],
+    calculatedValues: [{ name: "locale", expression: "1" }]
+  }, "name/shadowing")).toBe(
+    "The name \"locale\" of this calculated value is also the built-in survey variable {locale}" +
+    " - the survey answers {locale} first, so this one is unreachable in expressions.");
+});
+
+test("A data key two elements write says what collides with what", () => {
+  expect(textOf({
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2", valueName: "q1" }]
+  }, "name/shadowing")).toBe(
+    "The valueName \"q1\" of \"q2\" is also the name of question \"q1\"" +
+    " - both store their answer under the data key \"q1\".");
+  expect(textOf({
+    elements: [
+      { type: "text", name: "q1", showCommentArea: true },
+      { type: "text", name: "q1-Comment" }
+    ]
+  }, "name/shadowing")).toBe(
+    "The data key \"q1-Comment\" is also the comment key of \"q1\" (its data key plus" +
+    " \"-Comment\") - one write silently overwrites the other.");
+  // the element is named only where a valueName made it something else than the data key
+  expect(textOf({
+    elements: [
+      { type: "text", name: "q1", showCommentArea: true },
+      { type: "text", name: "q2", valueName: "q1-Comment" }
+    ]
+  }, "name/shadowing")).toBe(
+    "The data key \"q1-Comment\" is also the comment key of \"q1\" (its data key plus" +
+    " \"-Comment\") - one write silently overwrites the other. It is the data key of \"q2\".");
+  expect(textOf({
+    elements: [
+      {
+        type: "matrixdynamic", name: "m1",
+        columns: [{ name: "c1", cellType: "text", inputType: "number", totalType: "sum" }]
+      },
+      { type: "text", name: "m1-total" }
+    ]
+  }, "name/shadowing")).toBe(
+    "The data key \"m1-total\" is also the totals key of \"m1\" (its data key plus \"-total\")" +
+    " - one write silently overwrites the other.");
+  expect(textOf({
+    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
+    triggers: [{
+      type: "setvalue", expression: "{q2} notempty", setToName: "q1", isVariable: true, setValue: 1
+    }]
+  }, "name/shadowing")).toBe(
+    "The setvalue trigger sets the variable \"q1\", which is also the data key of question" +
+    " \"q1\" - the variable answers {q1} from then on, not the question.");
+});
+
+test("A key that matches no property names the class it was written on", () => {
+  expect(textOf({ elements: [{ type: "text", name: "q1", nosuchprop: 1 }] }, "property/unknown")).toBe(
+    "\"nosuchprop\" is not a property of \"q1\" (text)." +
+    " The deserializer drops a key it does not know.");
+  // a nameless owner is named by its class, and the survey by itself
+  expect(textOf({ nosuchprop: 1, elements: [{ type: "text", name: "q1" }] }, "property/unknown")).toBe(
+    "\"nosuchprop\" is not a property of the survey (survey)." +
+    " The deserializer drops a key it does not know.");
+  // a misspelling carries the closest property instead of the hint
+  expect(textOf({ elements: [{ type: "text", name: "q1", titl: "a" }] }, "property/unknown")).toBe(
+    "\"titl\" is not a property of \"q1\" (text). Did you mean \"title\"?");
+});
+
+test("A property the run time does not keep says what happens to it", () => {
+  expect(textOf({ mode: "display", elements: [{ type: "text", name: "q1" }] }, "property/dead")).toBe(
+    "\"mode\" of the survey is not serializable - it takes effect on load, and is dropped" +
+    " from the JSON whenever the survey is saved again.");
+  expect(textOf({
+    elements: [{ type: "checkbox", name: "q1", choices: ["a"], showOtherItem: true, hasOther: false }]
+  }, "property/dead")).toBe(
+    "\"showOtherItem\" and \"hasOther\" of \"q1\" are two names of one property - the run time" +
+    " applies them in the order the JSON writes them, so \"hasOther\" wins.");
+  expect(textOf({ elements: [{ type: "text", name: "q1", min: 1 }] }, "property/dead")).toBe(
+    "\"min\" is set on \"q1\", but inputType \"text\" has no bounds - the run time ignores it.");
+});
+
+test("A value the property cannot hold lists what it can", () => {
+  expect(textOf({
+    elements: [{ type: "text", name: "q1", titleLocation: "nosuch" }]
+  }, "property/invalid-value")).toBe(
+    "The titleLocation of \"q1\" is \"nosuch\" - not one of the allowed values" +
+    " (\"default\", \"top\", \"bottom\", \"left\", \"hidden\").");
+  expect(textOf({
+    backgroundOpacity: 5, elements: [{ type: "text", name: "q1" }]
+  }, "property/invalid-value")).toBe(
+    "The backgroundOpacity of the survey is 5, outside its allowed range 0..1.");
+  expect(textOf({
+    elements: [{ type: "text", name: "q1", valueName: "a.b" }]
+  }, "property/invalid-value")).toBe(
+    "The valueName \"a.b\" of \"q1\" contains a \".\" - expressions read {a.b} as a path into" +
+    " \"a\", so the data key itself can never be addressed.");
+});
+
+test("A duplicate choice item says which array it is in", () => {
+  expect(textOf({
+    elements: [{ type: "dropdown", name: "q1", choices: ["a", "a"] }]
+  }, "choices/duplicate")).toBe(
+    "Another item of the choices of \"q1\" already has the value \"a\"" +
+    " - the run time keeps both items.");
+  expect(textOf({
+    elements: [{ type: "dropdown", name: "q1", choices: ["a", "none"], showNoneItem: true }]
+  }, "choices/duplicate")).toBe(
+    "The choices of \"q1\" contain \"none\" while showNoneItem is on - it collides with the" +
+    " built-in None item.");
+});
+
+test("A validator the deserializer drops says that nothing validates", () => {
+  expect(textOf({
+    elements: [{ type: "text", name: "q1", validators: [{ type: "nosuch" }] }]
+  }, "validator/unknown-type")).toBe(
+    "The validator type \"nosuch\" of \"q1\" is not known. The deserializer drops a validator" +
+    " it cannot resolve, so nothing validates.");
+  expect(textOf({
+    elements: [{ type: "text", name: "q1", validators: [{ minValue: 1 }] }]
+  }, "validator/unknown-type")).toBe(
+    "A validator of \"q1\" has no type. The deserializer drops a validator it cannot resolve," +
+    " so nothing validates.");
+});
+
+test("A dead validator says what the answer's shape does to it", () => {
+  expect(textOf({
+    elements: [{
+      type: "text", name: "q1", inputType: "number", validators: [{ type: "text", minLength: 2 }]
+    }]
+  }, "validator/dead")).toBe(
+    "The text validator of \"q1\" never fires: a length is read off a text value, and this" +
+    " answer has none (text). The inputType is \"number\".");
+  expect(textOf({
+    elements: [{
+      type: "radiogroup", name: "q1", choices: ["a"],
+      validators: [{ type: "answercount", minCount: 1 }]
+    }]
+  }, "validator/dead")).toBe(
+    "The answercount validator of \"q1\" never fires: the answer is not a list of values" +
+    " (radiogroup).");
+  expect(textOf({
+    elements: [{
+      type: "text", name: "q1", inputType: "number",
+      validators: [{ type: "numeric", minValue: 100, maxValue: 10 }]
+    }]
+  }, "validator/dead")).toBe(
+    "The numeric validator of \"q1\" requires at least 100 and at most 10" +
+    " - no answer satisfies it.");
+  expect(textOf({
+    elements: [{
+      type: "checkbox", name: "q1", choices: ["a", "b"],
+      validators: [{ type: "answercount", minCount: 3 }]
+    }]
+  }, "validator/dead")).toBe(
+    "The answercount validator of \"q1\" requires at least 3 answers, above the 2 choices that" +
+    " can be selected together.");
+  expect(textOf({
+    elements: [{ type: "text", name: "q1", validators: [{ type: "expression" }] }]
+  }, "validator/dead")).toBe(
+    "The expression validator of \"q1\" has no expression, so it always passes.");
+});
+
+test("A mask the run time resolves differently says what it does instead", () => {
+  expect(textOf({ elements: [{ type: "text", name: "q1", maskType: "nosuch" }] }, "mask/mismatch")).toBe(
+    "The maskType \"nosuch\" of \"q1\" is not a known mask - the run time falls back to no" +
+    " mask at all.");
+  expect(textOf({
+    elements: [{ type: "text", name: "q1", maskType: "numeric", maskSettings: { nosuchkey: 1 } }]
+  }, "mask/mismatch")).toBe(
+    "The maskSettings of \"q1\" set \"nosuchkey\", which is not a property of the \"numeric\"" +
+    " mask - the run time drops it silently.");
+  expect(textOf({
+    elements: [{ type: "text", name: "q1", maskSettings: { pattern: "999" } }]
+  }, "mask/mismatch")).toBe(
+    "The maskSettings of \"q1\" are set without a maskType - the run time keeps only" +
+    " \"saveMaskedValue\" and drops the rest.");
+  expect(textOf({
+    elements: [{
+      type: "text", name: "q1", inputType: "email", maskType: "pattern",
+      maskSettings: { pattern: "999" }
+    }]
+  }, "mask/mismatch")).toBe(
+    "The pattern mask of \"q1\" applies to no input: inputType \"email\" is masked only for" +
+    " text and tel.");
+  expect(textOf({
+    elements: [{
+      type: "text", name: "q1", maskType: "datetime",
+      maskSettings: { min: "2020-01-01", max: "2021-01-01" }
+    }]
+  }, "mask/mismatch")).toBe(
+    "The datetime mask of \"q1\" sets min/max without a pattern - the bounds apply to the" +
+    " pattern's date parts, so without one they do nothing.");
+  expect(textOf({
+    elements: [{ type: "text", name: "q1", maskType: "numeric", maskSettings: { min: 10, max: 1 } }]
+  }, "mask/mismatch")).toBe(
+    "The numeric mask of \"q1\" allows at least 10 and at most 1 - no value satisfies it.");
+});
+
+// the JSON the linter is given is the one SurveyJSON5 parsed, which marks every object with
+// its position in the text - a marker no rule may report as an authored setting
+test("The position markers of the parsed JSON are not reported as properties", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [{
+      type: "text", name: "q1", maskType: "numeric", maskSettings: { precision: 2 }
+    }]
+  }, null, 2));
+  expect(editor.linter.findings).toHaveLength(0);
+});
+
+test("A step and a selection minimum wider than what they allow are reported", () => {
+  expect(textOf({
+    elements: [{ type: "rating", name: "r1", rateMin: 1, rateMax: 4, rateStep: 10 }]
+  }, "element/count-contradiction")).toBe(
+    "The rateStep of \"r1\" is 10, but the range it steps through (rateMin..rateMax) spans" +
+    " only 3 - the run time clamps it.");
+  expect(textOf({
+    elements: [{ type: "checkbox", name: "q1", choices: ["a", "b"], minSelectedChoices: 5 }]
+  }, "element/count-contradiction")).toBe(
+    "The minSelectedChoices of \"q1\" is 5, above the 2 choices that can be selected together" +
+    " - the question can never be answered.");
+});
+
+test("A name a function takes as a string says where the function reads it", () => {
+  expect(textOf({
+    elements: [
+      { type: "matrixdynamic", name: "m", columns: [{ name: "col1", cellType: "text" }] },
+      { type: "expression", name: "e1", expression: "sumInArray({m}, 'nosuchcol')" }
+    ]
+  }, "reference/unknown")).toBe(
+    "\"nosuchcol\" is not found. sumInArray() reads that name from every entry of" +
+    " matrixdynamic \"m\". In expression: sumInArray({m}, 'nosuchcol')");
+});
+
+test("A reference outside an expression says which text it was piped into", () => {
+  expect(textOf({
+    elements: [{ type: "text", name: "q1", title: "Hello {q9}" }]
+  }, "reference/unknown")).toBe(
+    "\"q9\" is not found - no question, panel, page, calculated value, or variable with that" +
+    " name exists. Did you mean \"q1\"? Referenced in the \"title\" text.");
+  expect(textOf({
+    elements: [{ type: "dropdown", name: "q1", choicesByUrl: { url: "http://x/1", path: "{q9}" } }]
+  }, "reference/unknown")).toBe(
+    "\"q9\" is not found - no question, panel, page, calculated value, or variable with that" +
+    " name exists. Did you mean \"q1\"? Referenced in the choicesByUrl path.");
 });
 
 test("Every rule has a localized name, a description and a message per reason", () => {

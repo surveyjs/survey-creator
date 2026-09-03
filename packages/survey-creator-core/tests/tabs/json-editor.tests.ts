@@ -4,7 +4,8 @@ import { settings } from "../../src/creator-settings";
 import { SurveyTextWorker } from "../../src/textWorker";
 
 test("JsonEditor & showErrors/errorList", () => {
-  const creator = new CreatorTester();
+  // the linter reports the unknown property too - this test is about the JSON error list
+  const creator = new CreatorTester({ showLinterPanel: false });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = "{}";
   editor.processErrors(editor.text);
@@ -162,8 +163,10 @@ test("JsonEditor & fixError action with object to array", () => {
   });
 });
 test("JsonEditor & fixError action incorrect properties value, Issue#7335", () => {
+  // the linter reports the same value - this test is about the JSON error and its fix
   const creator = new CreatorTester({
-    validateJsonPropertyValues: true
+    validateJsonPropertyValues: true,
+    showLinterPanel: false
   });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
@@ -194,8 +197,10 @@ test("JsonEditor & fixError action incorrect properties value, Issue#7335", () =
   });
 });
 test("JsonEditor & fixError better fix suggestions, Issue#7417", () => {
+  // the linter reports the same value - this test is about the JSON error and its fix
   const creator = new CreatorTester({
-    validateJsonPropertyValues: true
+    validateJsonPropertyValues: true,
+    showLinterPanel: false
   });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({

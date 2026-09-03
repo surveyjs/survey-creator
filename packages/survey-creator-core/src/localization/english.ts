@@ -1831,7 +1831,11 @@ export var enStrings = {
       "reference/unknown": "Unknown references",
       "reference/self": "Self-referencing conditions",
       "name/duplicate": "Duplicate names",
+      "name/shadowing": "Shadowed names",
       "element/unknown-type": "Unknown element types",
+      "property/unknown": "Unknown properties",
+      "property/dead": "Dropped properties",
+      "property/invalid-value": "Invalid property values",
       "expression/unknown-function": "Unknown functions",
       "cycle/calculated-value": "Calculated value cycles",
       "cycle/trigger": "Trigger cycles",
@@ -1842,10 +1846,14 @@ export var enStrings = {
       "expression/meaningless-condition": "Meaningless conditions",
       "value/not-a-choice": "Values outside the allowed set",
       "choices/dead-source": "Dead choice sources",
+      "choices/duplicate": "Duplicate choice items",
       "trigger/unknown-target": "Unknown trigger targets",
       "trigger/unknown-type": "Unknown trigger types",
+      "validator/unknown-type": "Unknown validator types",
+      "validator/dead": "Dead validators",
       "element/count-contradiction": "Contradictory row and panel counts",
       "element/never-visible": "Elements that never become visible",
+      "mask/mismatch": "Input mask mismatches",
       "page/empty": "Empty pages and panels",
     },
     ruleDescriptions: {
@@ -1853,7 +1861,11 @@ export var enStrings = {
       "reference/unknown": "Finds references to a question, panel, page, calculated value or variable that does not exist.",
       "reference/self": "Finds a visibleIf, enableIf or requiredIf that references its own element.",
       "name/duplicate": "Finds elements and calculated values that share a name.",
+      "name/shadowing": "Finds names that answer somewhere else than the JSON suggests.",
       "element/unknown-type": "Finds questions whose type is not registered.",
+      "property/unknown": "Finds keys that match no property of their class, so the setting never takes effect.",
+      "property/dead": "Finds properties the run time does not keep.",
+      "property/invalid-value": "Finds values outside the set or the range their property allows.",
       "expression/unknown-function": "Finds calls to a function that is not registered.",
       "cycle/calculated-value": "Finds calculated values that reference themselves or form a loop.",
       "cycle/trigger": "Finds triggers that form a loop through the values they set.",
@@ -1864,10 +1876,14 @@ export var enStrings = {
       "expression/meaningless-condition": "Finds conditions whose result is known before the survey runs.",
       "value/not-a-choice": "Finds values written next to a question that the question can never hold.",
       "choices/dead-source": "Finds choices copied from a question that is missing or provides no values.",
+      "choices/duplicate": "Finds choice items that hold the same value or collide with a built-in item.",
       "trigger/unknown-target": "Finds triggers that target an element that does not exist.",
       "trigger/unknown-type": "Finds triggers with a missing or unknown type.",
+      "validator/unknown-type": "Finds validators with a missing or unknown type, so nothing validates.",
+      "validator/dead": "Finds validators that never fire or reject every answer.",
       "element/count-contradiction": "Finds row and panel counts that contradict their own limits, which the run time silently adjusts.",
       "element/never-visible": "Finds elements whose condition depends on a question that never becomes visible.",
+      "mask/mismatch": "Finds input masks the run time resolves differently than the JSON describes.",
       "page/empty": "Finds pages and panels with no element that can ever render.",
     },
     messages: {
@@ -1879,6 +1895,7 @@ export var enStrings = {
         inContainer: "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name}).",
         scopedUnknown: "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name}).",
         keyNameNotFound: "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs.",
+        functionArgNotFound: "\"{name}\" is not found.",
       },
       "reference/self": {
         selfReference: "The {prop} of \"{name}\" references the element itself (reference: {reference}).",
@@ -1888,8 +1905,28 @@ export var enStrings = {
         calculatedValueNames: "The calculated value name \"{name}\" is already used by another calculated value.",
         calculatedValueShadowsElement: "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other.",
       },
+      "name/shadowing": {
+        builtInVariable: "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions.",
+        valueNameShadowsElement: "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\".",
+        commentKeyCollision: "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
+        totalKeyCollision: "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
+        variableShadowsQuestion: "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question.",
+      },
       "element/unknown-type": {
         unknownType: "\"{name}\" has an unknown type \"{type}\".",
+      },
+      "property/unknown": {
+        unknownProperty: "\"{key}\" is not a property of {ownerText} ({className}).",
+      },
+      "property/dead": {
+        notSerializable: "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again.",
+        aliasDuplicate: "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins.",
+        inertMinMax: "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it.",
+      },
+      "property/invalid-value": {
+        notInChoices: "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText}).",
+        outOfRange: "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}.",
+        valueNameDotted: "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed.",
       },
       "expression/unknown-function": {
         notRegistered: "The function \"{functionName}\" is not registered.",
@@ -1950,6 +1987,10 @@ export var enStrings = {
         "not-a-source": "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values.",
         "missing-field": "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}.",
       },
+      "choices/duplicate": {
+        duplicateValue: "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items.",
+        specialItemCollision: "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item.",
+      },
       "trigger/unknown-target": {
         pageNotFound: "The {trigger} trigger targets page \"{name}\", which does not exist.",
         segmentNotFound: "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\".",
@@ -1959,12 +2000,33 @@ export var enStrings = {
         unknownType: "The trigger type \"{type}\" is not known.",
         noType: "The trigger has no type.",
       },
+      "validator/unknown-type": {
+        unknownType: "The validator type \"{type}\" of \"{name}\" is not known.",
+        noType: "A validator of \"{name}\" has no type.",
+      },
+      "validator/dead": {
+        wrongValueShape: "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType}).",
+        minAboveMax: "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it.",
+        minCountAboveChoices: "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together.",
+        invalidRegex: "The regex validator of \"{name}\" has a pattern the engine rejects: {error}.",
+        emptyExpression: "The expression validator of \"{name}\" has no expression, so it always passes.",
+      },
       "element/count-contradiction": {
         minAboveMax: "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them.",
         countOutOfBounds: "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it.",
+        stepAboveRange: "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it.",
+        minAboveChoicesCount: "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered.",
       },
       "element/never-visible": {
         dependsOnDeadValue: "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds.",
+      },
+      "mask/mismatch": {
+        unknownMaskType: "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all.",
+        unknownSettingsKey: "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently.",
+        settingsWithoutMask: "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest.",
+        maskInertForInputType: "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel.",
+        minMaxWithoutPattern: "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing.",
+        minAboveMax: "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it.",
       },
       "page/empty": {
         emptyTemplate: "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render.",
@@ -1987,7 +2049,16 @@ export var enStrings = {
       defaultValueExpressionNote: "A defaultValueExpression applies only until its question is answered.",
       inExpression: "In expression: {0}", // {0} the expression the defect was found in
       inBindings: "Referenced in bindings.",
-      inChoicesByUrl: "Referenced in the choicesByUrl URL.",
+      inChoicesByUrl: "Referenced in the choicesByUrl {0}.", // {0} the url or the path property
+      inText: "Referenced in the \"{0}\" text.", // {0} the localizable property the text belongs to
+      // the two branches of reference/unknown.functionArgNotFound: a name read from every entry
+      // of a container, or one the function resolves against the survey
+      functionArgInContainer: "{0}() reads that name from every entry of {1} \"{2}\".",
+      functionArgStandalone: "The {0}() argument names no question, panel or page.",
+      deserializerDropsKey: "The deserializer drops a key it does not know.",
+      validatorDroppedHint: "The deserializer drops a validator it cannot resolve, so nothing validates.",
+      validatorInputType: "The inputType is \"{0}\".",
+      dataKeyOwner: "It is the data key of \"{0}\".", // {0} the element that answers under it
     },
     // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
     // "{q1}", so that the reader finds it in the condition.
@@ -2029,6 +2100,42 @@ export var enStrings = {
       containerKind: {
         page: "page",
         panel: "panel",
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        name: "name",
+        valueName: "valueName",
+        calculatedValue: "name",
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        calculatedValue: "calculated value",
+        default: "element",
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        survey: "the survey",
+        className: "the {0}",
+      },
+      specialItem: {
+        other: "Other",
+        none: "None",
+        refuse: "Refuse to answer",
+        dontknow: "Don't know",
+      },
+      deadValidatorEffect: {
+        neverFires: "never fires",
+        rejectsEveryAnswer: "rejects every answer",
+        default: "cannot validate",
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        noAnswer: "the question holds no answer to validate",
+        textLength: "a length is read off a text value, and this answer has none",
+        notANumber: "the answer is not a number and never can be",
+        numberVsEmail: "a number never matches an e-mail address",
+        notAList: "the answer is not a list of values",
+        default: "the answer is not a value it can check",
       },
       valueShape: {
         array: "an array",
