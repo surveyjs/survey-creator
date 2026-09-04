@@ -1,7 +1,8 @@
 import {
-  Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
+  Base, EventBase, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
   PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme
 } from "survey-core";
+import type { ISurveyLintResult } from "survey-core/linter";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
@@ -853,6 +854,12 @@ export interface NotifyEvent {
    * A notification type: `"info"` or `"error"`.
    */
   type: string;
+  // When true, the notification stays until the user acts on it. Set for a message the user
+  // must be able to read at their own pace, such as a save that went through with errors.
+  persistent?: boolean;
+  // Actions to show next to the message. A persistent notification always carries at least
+  // one of them, since the toast itself has no close button.
+  actions?: Array<IAction>;
 }
 
 export interface ElementFocusingEvent {
@@ -1222,4 +1229,40 @@ export interface AllowInplaceEditEvent {
    * @since 2.3.7
    */
   allow: boolean;
+}
+// survey-core's EventAsync is not re-exported from its public entry, so the shape the creator
+// relies on is declared here: an event whose fire() waits for the promises its handlers return.
+export interface ICreatorAsyncEvent<Sender, Options> extends EventBase<Sender, Options> {
+  fire(sender: Sender, options: Options, onComplete?: () => void, onFirstAsync?: () => void): void;
+}
+
+export interface SurveySavingEvent {
+  // What started this save attempt. "manual" - the Save button; "api" - creator.saveSurvey(),
+  // save() or doSave(); "auto" - auto-save. Only "auto" changes what the creator itself shows.
+  reason: "manual" | "api" | "auto";
+  // The JSON that is about to be persisted, serialized once for the whole attempt.
+  json: any;
+  // The linter verdict on options.json. undefined when lintOnSaveEnabled is false, on an
+  // auto-save with no valid cached result while settings.linter.lintOnAutoSave is false, or
+  // when the JSON could not be analysed at all.
+  lintResult?: ISurveyLintResult;
+  // Set it to false to cancel the save: saveSurveyFunc is not called and the creator stays
+  // "modified". Handlers compose by veto - never set it back to true.
+  allow: boolean;
+  // Displayed as a notification after the decision: as an error when the save was cancelled,
+  // as an info message when it was allowed.
+  message?: string;
+  // Whether the creator may offer "Save anyway" when it reports a cancelled save. Set it to
+  // false for a policy the user must not be able to override from the Creator UI.
+  allowOverride?: boolean;
+}
+
+export interface SurveyLintedEvent {
+  // Which run asked for the analysis. "editor" - the JSON tab's own debounced run over the
+  // authored text, which can carry defects the serialized JSON cannot; "save" - a save
+  // attempt; "api" - creator.lintSurvey().
+  reason: "editor" | "save" | "api";
+  // The JSON that was analysed.
+  json: any;
+  result: ISurveyLintResult;
 }

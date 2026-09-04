@@ -1,5 +1,8 @@
 import { Base, SurveyModel, Action, ComputedUpdater, CurrentPageChangedEvent, PageVisibleChangedEvent, QuestionDropdownModel, ActionContainer } from "survey-core";
 import { notShortCircuitAnd } from "../../utils/utils";
+import { getSeverityIcon } from "../../linter/linter-issue-list";
+import { getLinterString } from "../../linter/linter-messages";
+import { getIssuesSummaryText } from "../../linter/linter-notifications";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { PropertyGridModel } from "../../property-grid";
@@ -31,6 +34,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private settingsPropertyGridTab: SidebarPageModel;
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
+  private lintStatusAction: Action;
+  private lintErrorCount: number = 0;
+  private lintPulseTimer: any = undefined;
   public previewAction: Action;
   private designerAction: Action;
   public designerStateManager: DesignerStateManager;
@@ -539,6 +545,22 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       showTitle: false,
     });
 
+    this.lintStatusAction = new Action({
+      id: "svd-lint-status",
+      iconSize: "auto",
+      css: "svc-lint-status",
+      visible: false,
+      showTitle: !this.creator.isMobileView,
+      action: () => this.creator.showLintIssues()
+    });
+    const updateLintStatus = () => this.updateLintStatusAction();
+    this.creator.linter.onPropertyChanged.add(updateLintStatus);
+    this.creator.onPropertyChanged.add((sender: any, options: any) => {
+      if (options.name === "showLinterPanel") updateLintStatus();
+    });
+    updateLintStatus();
+
+    items.push(this.lintStatusAction);
     items.push(this.saveSurveyAction);
     items.push(toolboxAction);
     items.push(this.surveySettingsAction);
@@ -549,6 +571,52 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       this.surveySettingsAction.active = this.isSettingsActive;
     });
     return items;
+  }
+  // The linter status next to the save state: with auto-save on there is no Save button to
+  // mark, so the count needs a place of its own. The Save button gets the severity marker as
+  // well, for the configuration where it is visible.
+  private updateLintStatusAction(): void {
+    if (!this.lintStatusAction) return;
+    const linter = this.creator.linter;
+    const hasIssues = this.creator.showLinterPanel && linter.issueCount > 0;
+    this.lintStatusAction.visible = hasIssues;
+    if (hasIssues) {
+      const summary = getIssuesSummaryText(linter.result);
+      const kind = linter.errorCount > 0 ? "error" : "warning";
+      this.lintStatusAction.css = "svc-lint-status svc-lint-status--" + kind;
+      this.lintStatusAction.iconName = getSeverityIcon(kind);
+      // the design system tints the icon and the title from the action's own style rather than
+      // from a fill of ours: an error reads in the alert family, a warning in the neutral one
+      this.lintStatusAction.appearance = {
+        style: kind === "error" ? "alert" : "neutral", mode: "tertiary", size: "small"
+      };
+      this.lintStatusAction.title = summary;
+      this.lintStatusAction.tooltip = (<any>getLinterString("statusTooltip"))["format"](summary);
+    }
+    // only the step into a worse state is worth an animation: a count going from three errors
+    // to four is not news, and a defect the user is still typing must not pull at their eye
+    if (hasIssues && this.lintErrorCount === 0 && linter.errorCount > 0) {
+      this.pulseLintStatusAction();
+    }
+    this.lintErrorCount = linter.errorCount;
+    if (!!this.saveSurveyAction) {
+      this.saveSurveyAction.markerIconName = hasIssues
+        ? getSeverityIcon(linter.errorCount > 0 ? "error" : "warning")
+        : undefined;
+    }
+  }
+  // The class is dropped again so the animation runs once rather than on every render of the
+  // action. There is no animationend to listen to from here, hence the timer.
+  private pulseLintStatusAction(): void {
+    const css = this.lintStatusAction.css;
+    this.lintStatusAction.css = css + " svc-lint-status--pulse";
+    if (!!this.lintPulseTimer) clearTimeout(this.lintPulseTimer);
+    this.lintPulseTimer = setTimeout(() => {
+      this.lintPulseTimer = undefined;
+      if (!!this.lintStatusAction && !this.lintStatusAction.isDisposed) {
+        this.lintStatusAction.css = css;
+      }
+    }, 1000);
   }
   public selectSurvey() {
     if (!this.creator.showSidebar) {

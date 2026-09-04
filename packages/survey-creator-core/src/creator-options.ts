@@ -33,11 +33,24 @@ export interface ICreatorOptions {
    */
   showJSONEditorTab?: boolean;
   /**
-   * Specifies whether to run the survey linter in the JSON Editor tab and show its results.
+   * Specifies whether to show the survey linter results in the UI: the Checks panel and the
+   * error list of the JSON Editor tab.
    *
    * Default value: `true`
    */
   showLinterPanel?: boolean;
+  /**
+   * Specifies whether a save attempt is analyzed by the survey linter and the result is passed
+   * to the [`onSurveySaving`](#onSurveySaving) event.
+   *
+   * Default value: `true`
+   */
+  lintOnSaveEnabled?: boolean;
+  /**
+   * Options for every survey linter run: rule severities, suppressions, and the variables and
+   * functions that the host application supplies at runtime.
+   */
+  lintOptions?: any;
   /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *

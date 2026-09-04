@@ -174,6 +174,15 @@ export var settings = {
     delay: 500
   },
   /*
+   * Linter parameters
+   */
+  linter: {
+    // Whether an auto-save runs the linter. Off by default: auto-save fires once per edit
+    // burst, and a full analysis per burst is work the user never sees. An auto-save still
+    // passes a result that is already cached.
+    lintOnAutoSave: false
+  },
+  /*
    * Drag Drop Settings
    */
   dragDrop: {

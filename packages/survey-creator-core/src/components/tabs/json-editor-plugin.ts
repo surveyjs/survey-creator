@@ -2,8 +2,6 @@ import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core"
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding } from "../../textWorker";
-import { ComponentContainerModel } from "../component-container/component-container";
-import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { getFindingSeverityKind, getLinterString, JsonEditorLinterModel } from "./json-editor-linter";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { settings } from "../../creator-settings";
@@ -146,7 +144,7 @@ export abstract class JsonEditorBaseModel extends Base {
       // only on valid JSON: while the text does not parse there is no model to analyse, and the
       // panel keeps its previous result
       if (textWorker.isJsonCorrect) {
-        this.linter.run(textWorker);
+        this.linter.run(textWorker, textWorker.text);
         // the linter sorts by JSON path, the error list reads top to bottom: a path sort puts
         // "elements[10]" before "elements[3]", so the lines would jump around
         findings = this.linter.findings.slice().sort((el1, el2) => {
@@ -185,12 +183,8 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
 
   public static iconName = "icon-codeeditor-24x24";
 
-  private linterPage: SidebarPageModel;
-
   constructor(private creator: SurveyCreatorModel) {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
-    this.linterPage = creator.sidebar.addPage("linter", "svc-component-container");
-    this.linterPage.locTitleName = "linter.panelTitle";
   }
 
   public saveToFileHandler = saveToFileHandler;
@@ -275,12 +269,9 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = this.createModel(this.creator);
     if (this.creator.showLinterPanel) {
-      // the list is built by the model, the page only hosts it
-      this.linterPage.componentData = new ComponentContainerModel({
-        elements: [{ componentName: "sv-list", componentData: { model: this.model.linter.checkList } }]
-      });
-      this.creator.sidebar.activePage = this.linterPage.id;
-      this.linterPage.visible = true;
+      // the panel belongs to the creator - the designer shows the same page with its own list.
+      // Here the list is built by the model, whose rows navigate to a position in the text.
+      this.creator.linterPanel.showList(this.model.linter.checkList);
     }
   }
   public deactivate(): boolean {
@@ -294,8 +285,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       this.model.dispose();
       this.model = undefined;
     }
-    this.linterPage.visible = false;
-    this.linterPage.componentData = undefined;
+    this.creator.linterPanel.hide();
     this.creator.sidebar.header.reset();
     return true;
   }

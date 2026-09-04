@@ -44,6 +44,10 @@ import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
+import { SurveyLinterService } from "./linter/linter-service";
+import { LinterPanelController } from "./linter/linter-panel";
+import { reportCancelledSave, reportSavedWithIssues } from "./linter/linter-notifications";
+import type { ISurveyLintOptions, ISurveyLintResult } from "survey-core/linter";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
@@ -73,6 +77,9 @@ import {
   DefineElementMenuItemsEvent,
   CreatorThemePropertyChangedEvent,
   CreatorThemeSelectedEvent,
+  ICreatorAsyncEvent,
+  SurveyLintedEvent,
+  SurveySavingEvent,
   AllowInplaceEditEvent,
   AllowAddElementEvent,
   CollectionItemDeletingEvent
@@ -154,8 +161,9 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: true }) showJSONEditorTab: boolean;
 
-  // Runs survey-core/linter on the edited JSON and shows its results in the JSON tab.
-  // false switches the whole feature off: the linter does not run at all.
+  // Shows the linter results in the UI: the Checks panel and the findings in the error list
+  // of the JSON tab. It governs the UI only - whether a save attempt is analysed is
+  // lintOnSaveEnabled, so a host can have one without the other.
   @property({ defaultValue: true }) showLinterPanel: boolean;
 
   @property({ defaultValue: true }) showTestSurveyTab: boolean;
@@ -1918,6 +1926,11 @@ export class SurveyCreatorModel extends Base
   public addCreatorEvent<SurveyCreatorModel, T>(): EventBase<SurveyCreatorModel, T> {
     return this.addEvent<SurveyCreatorModel, T>();
   }
+  // An event whose fire() waits for the promises its handlers return, so a handler declared
+  // async can take its time before the creator acts on the decision.
+  public addCreatorAsyncEvent<SurveyCreatorModel, T>(): ICreatorAsyncEvent<SurveyCreatorModel, T> {
+    return this.addAsyncEvent<SurveyCreatorModel, T>();
+  }
   public updateToolboxIsCompact(newVal?: boolean) {
     if (!this.toolbox) return;
     const hasValue = newVal != undefined && newVal != null;
@@ -3082,6 +3095,13 @@ export class SurveyCreatorModel extends Base
     }
   }
   public onStateChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  // Raised before a save attempt reaches saveSurveyFunc, with the linter verdict on the JSON
+  // that is about to be persisted. Set options.allow to false to cancel the save; declare the
+  // handler async to decide asynchronously. With no handler attached nothing is analysed and
+  // the save proceeds exactly as it did before.
+  public onSurveySaving: ICreatorAsyncEvent<SurveyCreatorModel, SurveySavingEvent> = this.addCreatorAsyncEvent<SurveyCreatorModel, SurveySavingEvent>();
+  // Raised after every lint run the creator performs, whoever asked for it.
+  public onSurveyLinted: EventBase<SurveyCreatorModel, SurveyLintedEvent> = this.addCreatorEvent<SurveyCreatorModel, SurveyLintedEvent>();
 
   public expandCollapseManager = new ExpandCollapseManager(this);
 
@@ -3096,6 +3116,9 @@ export class SurveyCreatorModel extends Base
   });
 
   public setModified(options: any = null): void {
+    // the survey changed, so a result computed for the previous JSON no longer answers for it.
+    // The service is not created just to be invalidated.
+    !!this.linterValue && this.linterValue.invalidate();
     this.setState("modified");
     this.onModified.fire(this, options);
     this.doOnElementsChanged(options.type);
@@ -3173,12 +3196,19 @@ export class SurveyCreatorModel extends Base
    * @param message A message to display.
    * @param type A notification type: `"info"` (default) or `"error"`.
    */
-  public notify(message: string, type: "info" | "error" = "info") {
+  public notify(message: string, type: "info" | "error" = "info",
+    options?: { persistent?: boolean, actions?: Array<IAction> }) {
+    const persistent = !!options && !!options.persistent;
+    const actions = !!options && Array.isArray(options.actions) ? options.actions : [];
     if (this.onNotify.isEmpty) {
-      this.notifier.notify(message, type);
+      // the notifier keeps the actions it was given, so every message rebuilds them: the
+      // buttons of the previous message must not survive into the next one
+      this.notifier.actionBar.setItems([]);
+      actions.forEach(action => this.notifier.addAction(action, type));
+      this.notifier.notify(message, type, persistent);
       // alert(message);
     } else {
-      this.onNotify.fire(this, { message, type });
+      this.onNotify.fire(this, { message, type, persistent: persistent, actions: actions });
     }
   }
 
@@ -4452,6 +4482,66 @@ export class SurveyCreatorModel extends Base
     if (!this.getHasMachineTranslation()) return;
     doMachineStringsTranslation(this.survey, this, locales);
   }
+  // Whether a save attempt is analysed by the linter and the verdict passed to
+  // onSurveySaving. Inert without a handler for that event: with nobody to read the verdict
+  // the creator does not spend the analysis.
+  @property({ defaultValue: true }) lintOnSaveEnabled: boolean;
+
+  // The options every lint run uses: rule severities, suppressions, the variables and
+  // functions the host supplies at runtime. Custom question types and functions registered in
+  // the Serializer and in FunctionFactory need no entry here - the linter shares the module
+  // closure with them.
+  public lintOptions: ISurveyLintOptions;
+
+  // Replaces the built-in survey-core/linter run. Called with the JSON to analyse and the
+  // merged lint options; pass the result to the callback, synchronously or not. A linter that
+  // runs on the server goes here.
+  public lintSurveyFunc: (json: any, options: ISurveyLintOptions,
+    callback: (result: ISurveyLintResult) => void) => void;
+
+  private linterValue: SurveyLinterService;
+  public get linter(): SurveyLinterService {
+    if (!this.linterValue) {
+      this.linterValue = new SurveyLinterService(this);
+    }
+    return this.linterValue;
+  }
+
+  // The verdict for the JSON as it is now, or undefined when nothing has analysed it yet.
+  public get lintResult(): ISurveyLintResult {
+    return this.linter.result;
+  }
+
+  private linterPanelValue: LinterPanelController;
+  public get linterPanel(): LinterPanelController {
+    if (!this.linterPanelValue) {
+      this.linterPanelValue = new LinterPanelController(this);
+    }
+    return this.linterPanelValue;
+  }
+
+  // Opens the linter panel on the findings of the survey being designed.
+  public showLintIssues(): void {
+    this.linterPanel.show();
+  }
+
+  private reportSavedWithIssues(options: SurveySavingEvent): void {
+    if (!this.showLinterPanel) return;
+    reportSavedWithIssues(this, options);
+  }
+
+  private reportCancelledSave(options: SurveySavingEvent): void {
+    if (!this.showLinterPanel) return;
+    reportCancelledSave(this, options);
+  }
+
+  // Saves the survey although a handler of onSurveySaving cancelled the attempt. Reachable
+  // only from the message that reports the cancelled save, and only while the handler allows
+  // the override.
+  public saveSurveyAnyway(): void {
+    this._doSaveCore(undefined, "manual", true);
+  }
+
   /**
    * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`autoSaveEnabled`](#autoSaveEnabled) property is `true`.
    *
@@ -4462,7 +4552,7 @@ export class SurveyCreatorModel extends Base
   public autoSaveDelay: number = settings.autoSave.delay;
   private autoSaveTimerId = null;
   protected doAutoSave() {
-    const saveFunc = () => this.doSave();
+    const saveFunc = () => this._doSaveCore(undefined, "auto");
     if (this.autoSaveDelay <= 0) {
       saveFunc();
       return;
@@ -4478,14 +4568,70 @@ export class SurveyCreatorModel extends Base
     }, this.autoSaveDelay);
   }
   saveNo: number = 0;
-  private _doSaveCore(onSaveComplete?: () => void) {
-    this.setState("saving");
-    if (this.saveSurveyFunc) {
+  // Analyses a survey JSON and returns the verdict. Defaults to the JSON of the survey being
+  // edited, and always runs the built-in linter.
+  public lintSurvey(json?: any, options?: ISurveyLintOptions): ISurveyLintResult {
+    return this.linter.runSync(json, options);
+  }
+  private getLintResultForSave(reason: SurveySavingEvent["reason"], json: any,
+    onDone: (result: ISurveyLintResult) => void): void {
+    if (!this.lintOnSaveEnabled) {
+      onDone(undefined);
+      return;
+    }
+    // auto-save fires once per edit burst, and a full analysis per burst is work nobody sees:
+    // it reuses a result that is still valid and otherwise reports none
+    if (reason === "auto" && !settings.linter.lintOnAutoSave) {
+      onDone(this.linter.isStale ? undefined : this.linter.result);
+      return;
+    }
+    this.linter.run({ json: json, reason: "save" }, onDone);
+  }
+  private checkSurveySaving(reason: SurveySavingEvent["reason"], skipGate: boolean,
+    onDecided: (options: SurveySavingEvent) => void): void {
+    if (skipGate || this.onSurveySaving.isEmpty) {
+      onDecided({ reason: reason, json: undefined, allow: true });
+      return;
+    }
+    // serialized once for the whole attempt: the linter and the handler read the same object,
+    // and a handler that persists it does not serialize a second time
+    const json = this.JSON;
+    this.getLintResultForSave(reason, json, (lintResult: ISurveyLintResult) => {
+      const options: SurveySavingEvent = {
+        reason: reason,
+        json: json,
+        lintResult: lintResult,
+        allow: true,
+        allowOverride: true
+      };
+      this.onSurveySaving.fire(this, options, () => {
+        this.setIsSavePending(false);
+        if (!!options.message) {
+          this.notify(options.message, options.allow ? "info" : "error");
+        }
+        onDecided(options);
+      }, () => this.setIsSavePending(true));
+    });
+  }
+  private _doSaveCore(onSaveComplete?: () => void,
+    reason: SurveySavingEvent["reason"] = "api", skipGate: boolean = false) {
+    // the state is claimed only once the save is actually going to happen: setState("saving")
+    // without a saveSurveyFunc used to park the creator at "saving" with nothing to leave it
+    if (!this.saveSurveyFunc || this.isSavePending) return;
+    this.checkSurveySaving(reason, skipGate, (savingOptions: SurveySavingEvent) => {
+      if (!savingOptions.allow) {
+        // nothing was claimed: the state, saveNo and onSaveComplete all stay untouched, so a
+        // cancelled save cannot re-arm the auto-save timer it came from
+        this.reportCancelledSave(savingOptions);
+        return;
+      }
+      this.setState("saving");
       this.saveNo++;
       this.saveSurveyFunc(this.saveNo, (no: number, isSuccess: boolean) => {
         if (this.saveNo !== no) return;
         if (isSuccess) {
           this.setState("saved");
+          this.reportSavedWithIssues(savingOptions);
         } else {
           this.setState("modified");
           if (this.showErrorOnFailedSave) {
@@ -4494,7 +4640,7 @@ export class SurveyCreatorModel extends Base
         }
         onSaveComplete && onSaveComplete();
       });
-    }
+    });
   }
   /**
    * Calls the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) function to save the survey JSON schema.
@@ -4509,17 +4655,26 @@ export class SurveyCreatorModel extends Base
   }
   public saveSurveyActionHandler() {
     if (this.syncSaveButtons) {
-      this.save();
+      this.saveCore("manual");
     } else {
-      this.saveSurvey();
+      this._doSaveCore(undefined, "manual");
     }
   }
 
+  // True while a save attempt waits for an asynchronous onSurveySaving handler or an
+  // asynchronous lintSurveyFunc. The Save buttons are disabled for exactly that time.
+  public get isSavePending(): boolean {
+    return this.getPropertyValue("isSavePending", false);
+  }
+  private setIsSavePending(val: boolean): void {
+    this.setPropertyValue("isSavePending", val);
+    this._updateSaveActions();
+  }
   private _updateSaveActions() {
     const action = this._findAction("svd-save");
     if (action) {
-      action.enabled = this.state === "modified";
-      action.active = this.state === "modified";
+      action.enabled = this.state === "modified" && !this.isSavePending;
+      action.active = action.enabled;
     }
     if (this.syncSaveButtons) {
       const action = this._findAction("svd-save-theme");
@@ -4536,6 +4691,9 @@ export class SurveyCreatorModel extends Base
    * @see saveTheme
    */
   public save() {
+    this.saveCore("api");
+  }
+  private saveCore(reason: SurveySavingEvent["reason"]) {
     const themeSaveHandler = () => {
       if (this.hasPendingThemeChanges) {
         this._doSaveThemeCore(() => {
@@ -4544,9 +4702,11 @@ export class SurveyCreatorModel extends Base
       }
     };
     if (this.state === "modified") {
+      // the theme save is chained behind the survey save, so cancelling "Save" cancels the
+      // whole action rather than half of it
       this._doSaveCore(() => {
         themeSaveHandler();
-      });
+      }, reason);
     } else themeSaveHandler();
   }
 

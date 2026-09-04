@@ -98,3 +98,54 @@
   padding-top: var(--sjs2-spacing-x200);
   color: var(--sjs2-color-fg-basic-secondary);
 }
+
+// A check whose defect cannot exist in what the designer saves: the serializer drops it while
+// loading, so the check never ran against anything. Neither passed nor failed, and no icon.
+.svc-json-linter__rule--notApplicable .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__rule--notApplicable {
+  color: var(--sjs2-color-fg-basic-secondary);
+}
+
+// The severity groups of the Issues view. A header names a severity in words, which is what
+// keeps the view readable where the icon set gives info and warning the same icon.
+.svc-json-linter__group .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__group {
+  @include sjs2--typography--default-strong;
+  color: var(--sjs2-color-fg-basic-secondary);
+  padding-top: var(--sjs2-spacing-x200);
+  cursor: default;
+}
+
+.svc-json-linter__group--error .svc-json-linter__item-body,
+.svc-json-linter__item-body.svc-json-linter__group--error {
+  color: var(--sjs2-color-fg-alert-primary, var(--sjs2-color-bg-alert-primary));
+}
+
+// The linter status in the toolbar. It is the only indicator with auto-save on, where there is
+// no Save button to carry the marker.
+.svc-lint-status {
+  .sd-action__icon,
+  .sv-action-bar-item__icon {
+    fill: var(--sjs2-color-bg-warning-primary);
+  }
+
+  &.svc-lint-status--error {
+    .sd-action__icon,
+    .sv-action-bar-item__icon {
+      fill: var(--sjs2-color-bg-alert-primary);
+    }
+  }
+}
+
+// One cycle when errors appear where there were none. Applied by the designer plugin and taken
+// off again, so it never replays on a re-render.
+.svc-lint-status--pulse {
+  animation: svc-lint-status-pulse 0.6s ease-in-out 1;
+}
+
+@keyframes svc-lint-status-pulse {
+  0% { opacity: 1; }
+  35% { opacity: 0.35; }
+  70% { opacity: 1; }
+  100% { opacity: 1; }
+}

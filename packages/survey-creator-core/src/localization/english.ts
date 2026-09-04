@@ -1821,6 +1821,27 @@ export var enStrings = {
     resultPassed: "All checks passed",
     resultIssues: "{0} issues found", // {0} total count
     lineNumber: "Line: {0}. ", // {0} 1-based line number, prefixes an entry of the error list
+    noIssues: "No issues found",
+    resultNotApplicable: "Not checked: this check reads the JSON as authored, and the designer saves what the serializer produced",
+    findingContext: "{0} - {1}", // {0} element display name, {1} page display name
+    findingLocation: "at {0}", // {0} the JSON path the linter reported
+    // the save flow
+    issuesSummary: "{0} errors, {1} warnings", // {0} error count, {1} warning count
+    issuesSummaryErrors: "{0} errors", // {0} error count, used when there are no warnings
+    issuesSummaryWarnings: "{0} warnings", // {0} warning count, used when there are no errors
+    issuesSummaryInfo: "{0} info messages", // {0} info count, used when that is all there is
+    savedWithIssues: "Saved with issues: {0}", // {0} one of the summaries above
+    saveBlockedTitle: "The form was not saved",
+    saveBlockedText: "{0} must be fixed before this form can be saved.", // {0} one of the summaries above
+    saveBlockedTextNoDetails: "This form was not saved.",
+    reviewIssues: "Review issues",
+    saveAnyway: "Save anyway",
+    closeDialog: "Close",
+    dismiss: "Dismiss",
+    statusTooltip: "{0}. Click to review.", // {0} one of the summaries above
+    groupError: "Errors ({0})", // {0} count in the group
+    groupWarning: "Warnings ({0})", // {0} count in the group
+    groupInfo: "Info ({0})", // {0} count in the group
     severity: {
       error: "Error",
       warning: "Warning",

@@ -134,9 +134,9 @@ test("showLinterPanel false does not run the linter and shows no sidebar page", 
   expect(plugin.model.linter.findings).toHaveLength(0);
   expect(plugin.model.linter.isWaitingForValidJson).toBeTruthy();
   expect(plugin.model.errorList.actions).toHaveLength(0);
-  const page = creator.sidebar.getPageById("linter");
-  expect(page).toBeDefined();
-  expect(page.visible).toBeFalsy();
+  // the page belongs to the creator and is created on first use, so with the feature off it
+  // does not exist at all
+  expect(creator.sidebar.getPageById("linter")).toBeUndefined();
 });
 
 test("The sidebar page holds the check list while the JSON tab is active", () => {

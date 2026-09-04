@@ -3,7 +3,9 @@ import { SurveyHelper } from "./survey-helper";
 import { SurveyJSON5 } from "./json5";
 import { settings } from "./creator-settings";
 import { levenshteinDistance } from "./utils/utils";
-import { ILintFinding } from "survey-core/linter";
+// types only: the runtime import of the linter lives in src/linter/linter-service.ts alone
+import type { ILintFinding } from "survey-core/linter";
+import { parseLintPath } from "./linter/lint-path";
 
 class SurveyForTextWorker extends SurveyModel {
   private isRunEndLoadingFromJson: boolean;
@@ -310,7 +312,7 @@ export class SurveyTextWorker {
   public getPositionByPath(path: string): { at: number, rowAt: number, columnAt: number } {
     const notFound = { at: -1, rowAt: -1, columnAt: -1 };
     if (!path || !this.jsonValue) return notFound;
-    const segments = this.parsePath(path);
+    const segments = parseLintPath(path);
     if (segments.length === 0) return notFound;
     let obj: any = this.jsonValue;
     let owner: any = this.jsonValue;
@@ -355,23 +357,6 @@ export class SurveyTextWorker {
     const index = this.text.indexOf(findText, at);
     if (index > -1 && (end < 0 || index < end)) return index;
     return -1;
-  }
-  // "pages[0].elements[1].visibleIf" -> ["pages", 0, "elements", 1, "visibleIf"]
-  private parsePath(path: string): Array<string | number> {
-    const res: Array<string | number> = [];
-    path.split(".").forEach(part => {
-      if (!part) return;
-      const bracket = part.indexOf("[");
-      if (bracket < 0) {
-        res.push(part);
-        return;
-      }
-      const name = part.substring(0, bracket);
-      if (!!name) res.push(name);
-      const indexes = part.substring(bracket).match(/\[(\d+)\]/g) || [];
-      indexes.forEach(entry => res.push(parseInt(entry.substring(1, entry.length - 1), 10)));
-    });
-    return res;
   }
   private setErrorsPositionByChartAt() {
     if (this.errors.length === 0) return;
