@@ -197,7 +197,7 @@ is complete, not partial, and it stays that way.
 | `dot`, `dot--passed`/`--failed`/`--error`/`--skipped`/`--canceled`/`--running` | `svt-status-dot`, `svt-status-dot--…` |
 | `status`, `status--passed`/`--failed`/`--error`/`--running`/`--canceled` | `svt-status`, `svt-status--…` |
 | `steplist`, `steplist__head`, `steplist__where`, `steplist__empty`, `steplist__note`, `steplist__legend` | `svt-step-list`, `svt-step-list__…` |
-| `steps` | `svt-steps` |
+| `steps` (runner.css — the lines of a run) | `svt-step-list__steps` |
 | `step__num`, `step__mark`, `step__text`, `step__line`, `step__aside`, `step__run`, `step__json` | `svt-step__num`, `svt-step__…` |
 | `console`, `console__head`, `console__rows`, `console__foot`, `console__empty`, `console__toggle` | `svt-console`, `svt-console__…` |
 | `row`, `row__time`, `row__body`, `row__text`, `row__detail`, `row__host`, `row--indent1`, `row--indent2`, `row--pass`, `row--fail`, `row--error`, `row--warn`, `row--muted` | `svt-console-row`, `svt-console-row__…`, `svt-console-row--…` |
@@ -212,10 +212,135 @@ is complete, not partial, and it stays that way.
 | `code`, `code--tiny`, `mono` | `svt-code`, `svt-code--tiny`, `svt-mono` |
 | `link--danger`, `link--tiny` | `svt-link--danger`, `svt-link--tiny` |
 
-Three of those rows are more than a prefix, and each is a collision the prefix alone would have created:
+Four of those rows are more than a prefix, and each is a collision the prefix alone would have created:
 `tdot` and `dot` are two different dots (a row's tone dot and the shared status dot), so they become
 `svt-dot` and `svt-status-dot`; `row` is the console's transcript line and is far too generic to hold a
 whole namespace's `svt-row`, so it becomes `svt-console-row`.
+
+The fourth is `steps`, and the prototype had it wrong: the runner's list of the lines of a run and the
+recorder's steps grid were both `.steps`, in two files where one `@import`ed the other, so the grid's
+`display: block` silently won over the list's `display: flex`. Here the grid keeps the name — it is
+`TesterStepsModel.getType()` and the stem of every `svt-steps__*` class that model hands out — and the
+runner's list, which lives inside `svt-step-list` anyway, is `svt-step-list__steps`.
+
+### Drawn by the views — the recorder screen and the JSON screen (prompt 06)
+
+Prompt 05 put the recorder's *model-handed* names in the first table. These are the rest: what the
+prototype's React drew for itself, translated by the SCSS of prompt 06 so that prompt 07 writes markup
+against final names. The sources are `src/styles.css`'s recorder half and its editor chrome.
+
+| Prototype | Here |
+|---|---|
+| `recorder` (the palette and the taller controls) and `rec` (the screen inside it) | `svt-recorder` — one block |
+| `rec__head`, `rec__name`, `rec__count`, `rec__acts`, `rec__body`, `rec__col` | `svt-recorder__head`, `svt-recorder__…` |
+| `btn`, `btn--primary`, `btn--link`, `btn--quiet` | `svt-button`, `svt-button--primary`, `svt-button--link`, `svt-button--quiet` |
+| `field-input`, `field-input--small` | `svt-input`, `svt-input--small` |
+| `pill`, `pill__dot`, `pill--on`/`--new`/`--ok`/`--failed`/`--errored`/`--saved`/`--idle`/`--rec`/`--warn` | `svt-pill`, `svt-pill__dot`, `svt-pill--…` |
+| `note`, `note--info`, `note--warn`, `note--bad` | `svt-note`, `svt-note--…` |
+| `card`, `card__head`, `card__count`, `card__foot`, `card__foot--split`, `card__note`, `card__note--bad`, `card__empty`, `card__hint` | `svt-card`, `svt-card__…` |
+| `form`, `form--empty`, `form--frozen` | `svt-form`, `svt-form--empty`, `svt-form--frozen` |
+| `zoom`, `zoom__label`, `zoom__btn`, `zoom__now` | `svt-zoom`, `svt-zoom__…` |
+| `staticform`, `staticform__where`, `staticform__empty`, `staticform__list`, `staticform__submit` | `svt-static-form`, `svt-static-form__…` |
+| `staticfield`, `staticfield__title`, `staticfield__name`, `staticfield__value` | `svt-static-field`, `svt-static-field__…` |
+| `adorned`, `adorned--question`/`--panel`/`--page` | `svt-adorned`, `svt-adorned--…` |
+| `adorner-slot`, `adorner-slot--cell`/`--page`/`--survey`/`--open`, `adorners` | `svt-adorner-slot`, `svt-adorner-slot--…`, `svt-adorners` |
+| `adorner`, `adorner--counted`/`--survey`/`--open`, `adorner__mark`, `adorner__count` | `svt-adorner`, `svt-adorner--…`, `svt-adorner__…` |
+| `checks`, `checks__popup` | `svt-checks`, `svt-checks__popup` |
+| `checkrow__box`, `checkrow__name`, `checkrow__more`, `checkrow__value`, `checkrow__reason`, `checkrow__pending`, `checkrow__confirm` | `svt-check-row__box`, `svt-check-row__…` |
+| `picker`, `picker__hit`, `picker__text` | `svt-picker`, `svt-picker__…` |
+| `steps--frozen`, `steps--at-end` | `svt-steps--frozen`, `svt-steps--at-end` |
+| `toolbar`, `toolbar__spacer`, `toolbar__title`, `toolbar__note` | `svt-toolbar`, `svt-toolbar__…` |
+| `editor`, `editor-host`, `editor-host__area` | `svt-editor`, `svt-editor__host`, `svt-editor__area` |
+| `footer`, `footer--error`, `footer__error` | `svt-footer`, `svt-footer--error`, `svt-footer__error` |
+| `alert--ok` | `svt-alert--ok` |
+| — (new) | `svt-settings` — the content of the settings popup the model already names |
+
+Two of those are more than a prefix, and both are the same decision made twice: the prototype's two
+button vocabularies — the runner's small `.button` and the recorder's 44px `.btn` — are one
+`svt-button` here, and its two input vocabularies (`.input`, `.field-input`) are one `svt-input`,
+because that is what the model layer already decided: `TesterRecorderModel` and `TesterRunnerModel`
+both set `innerCss: "svt-button"` on their Actions. Both looks survive: the taller targets are the
+block-scoped rules under `.svt-recorder`, which is exactly where the prototype put them too.
+
+## The theme
+
+`theme/tester.scss` is the whole of the widget's styling, and `rollup.tester.config.mjs` emits it as
+`build/tester.css` beside the bundle (the `emitCss` route `collaboration.css` takes). It is authored
+from the prototype's `src/views/runner.css` and the recorder half of `src/styles.css`, translated
+through the two tables above; the look is the prototype's, and aligning it with the Creator's visual
+language is a named follow-up in `promts/creator-tester-notes.md` rather than something to do by hand.
+
+```
+theme/tester.scss             the blocks, and the palette on the roots
+theme/_palette.scss           the custom properties, as a mixin
+theme/blocks/svt-base.scss    buttons, links, fields, badges, alerts, dots, pills, status, diff
+theme/blocks/svt-chrome.scss  the reused survey-core models: the bars, the lists, the two menu cards
+theme/blocks/svt-runner.scss  the runner screen, the tests panel, a test row, the steps of a run
+theme/blocks/svt-console.scss the transcript pane
+theme/blocks/svt-json.scss    the JSON screen
+theme/blocks/svt-recorder.scss the recorder screen, the form pane, the zoom, the static form
+theme/blocks/svt-steps.scss   the steps grid — fitting a rendered matrix into a card
+theme/blocks/svt-checks.scss  the check menu popup and its rows
+theme/blocks/svt-adorners.scss the adorners, inside the elements they are about
+```
+
+Three things about it are worth knowing before editing it:
+
+* **Every custom property is `svt-` prefixed too.** The prototype declared its palette on `:root`; this
+  one is a guest in somebody else's application and declares nothing outside its own blocks. The
+  palette is a mixin, and it is included on `.svt-tester`, `.svt-runner`, `.svt-recorder`, `.svt-checks`
+  and `.svt-menu` — the last two because a survey-core popup is not always drawn inside the subtree it
+  was opened from, which is the same reason those two cards carry their own font and box-sizing.
+  No block holds a colour of its own — every hex and every shadow ink is a property of
+  `_palette.scss` — so re-pointing the widget at the Creator's tokens is one file.
+* **`--svt-zoom`** is the one custom property a view sets: the recorder's form pane puts it in an
+  inline style and `.svt-form .sd-root-modern` turns it into the theme's six base units. `model/zoom.ts`
+  owns the arithmetic and points here for the lever.
+* **Two blocks name library classes** — `svt-steps` and `svt-checks__popup` — and both do it from
+  inside an `svt-` block, about fitting a rendered survey or a popup into a box this stylesheet drew.
+  Everywhere else a reused component that looks wrong is fixed through its `css` map
+  (`model/runnerCss.ts`), never by out-specifying an `sv-*` selector.
+
+No `theme/svgbundle.ts` exists, and none is needed: nothing under `src/tester/` names an `iconName`,
+and the only icons on screen are the ones survey-core's own components register for themselves.
+
+## Consuming the widget
+
+The widget is published from this package as the `survey-creator-core/tester` entry — its own bundle,
+its own stylesheet, its own typings — and it is the entry the future Creator plugin tab will import,
+the way `presets-plugin.ts` imports `survey-creator-core`.
+
+```ts
+import { SurveyTesterModel, ITesterHost } from "survey-creator-core/tester";
+import "survey-creator-core/tester.css";
+```
+
+```ts
+// The whole of what a host implements. It owns both documents and all persistence.
+const host: ITesterHost = {
+  getSurveyJson: () => surveyJson,
+  getTestsText: () => suiteText,
+  setTestsText: text => { suiteText = text; },      // every widget edit, immediately
+  options: { locale: "", mode: "ui" },              // defaults only
+};
+
+const model = new SurveyTesterModel(host);
+model.startRun(undefined);                          // every test in the suite
+// …and when the documents change outside the widget:
+model.updateFromHost();
+// …and when the host wants to persist where the person was:
+localStorage.setItem("tester", JSON.stringify(model.getState()));
+```
+
+Then one framework component renders `model` — `survey-creator-react/tester` from prompt 07 onwards.
+Nothing else is installed: `survey-core` (with its `survey-core/tester` entry) is the only external of
+the bundle, and `jsonc-parser` is bundled into it under its MIT notice, which rides in the bundle's own
+banner.
+
+The i18n bundle is **deferred**. `testerLocalization` registers locales at runtime already
+(`registerTesterLocale`), and english ships inside the bundle; there is nothing yet for a
+`rollup.i18n.tester.config.mjs` to emit but an empty index and a duplicate of the in-bundle english, so
+the config arrives with the first translated locale. See `promts/creator-tester-notes.md`.
 
 ## Tests
 
@@ -335,4 +460,28 @@ Four things changed on the way, each with an entry in `promts/creator-tester-not
 * the step row's classes are keyed by the row's own `stateCode` / `atCursor` rather than by the words a
   cell prints, so a translated State column cannot rename a class (note 24).
 
-Still to arrive: `theme/` and `index.ts` (prompt 06), and the React rendering (prompt 07).
+The entry, the bundle and the theme, added in prompt 06. Nothing was ported here: `index.ts` is a
+surface written for this package, and `theme/` is the prototype's two stylesheets translated through
+the tables above.
+
+| Prototype | Here |
+|---|---|
+| — (new) | `index.ts` — the public surface; `rollup.tester.config.mjs` and `tsconfig.tester.json` beside it |
+| `src/views/runner.css` | `theme/blocks/svt-base.scss`, `svt-chrome.scss`, `svt-runner.scss`, `svt-console.scss` |
+| the recorder half of `src/styles.css` | `theme/blocks/svt-recorder.scss`, `svt-steps.scss`, `svt-checks.scss`, `svt-adorners.scss` |
+| the editor chrome of `src/styles.css` | `theme/blocks/svt-json.scss` |
+| `src/styles.css`'s `:root` and `.recorder` palettes | `theme/_palette.scss`, merged and `svt-` prefixed |
+| the application shell, the tabs, the samples grid, the setup columns, the targets list | **not ported** — host furniture, and the widget is not the page |
+
+Two guards came with them, and both read the built file because no source-level check can see a rollup
+mistake: `tests-tester/bundle.test.ts` asserts that `build/tester.js` names no creator code, requires
+`survey-core` and `survey-core/tester` by name and inlines neither, carries jsonc-parser under its
+notice, and emits a stylesheet whose classes are the mapping table's; and the same file then constructs
+`SurveyTesterModel` **through the built bundle** and runs a test headlessly, which is the widget being
+used exactly the way prompt 07 will use it. Both skip when `build/` has never been built.
+
+The first build's sizes are recorded in `promts/creator-tester-notes.md` (note 34), which is the
+baseline the next prompt is judged against. They live there and not here: a number in two files is a
+number that goes stale in one of them.
+
+Still to arrive: the React rendering (prompt 07).
