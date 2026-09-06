@@ -23,6 +23,9 @@ export class HeaderModel extends Base implements IHeader {
   }
 
   public baseThemeVariables: { [index: string]: string } = {};
+  // Keep it in sync with the "headerView" property default value in the "header" serializer class:
+  // the property grid does not write a value that already equals the editor default.
+  headerView: "advanced" | "basic" = "advanced";
   height: number;
   mobileHeight: number;
   inheritWidthFrom: "survey" | "container";

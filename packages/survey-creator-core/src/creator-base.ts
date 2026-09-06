@@ -2486,9 +2486,6 @@ export class SurveyCreatorModel extends Base
    */
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
     this.expandCollapseManager.clearExpandChoicesStates();
-    if (!json) {
-      json = { "headerView": "advanced" };
-    }
     this.existingPages = {};
     const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
       survey.skeletonHeight = 188;
