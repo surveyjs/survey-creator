@@ -379,7 +379,7 @@ export class PresetsManager {
         ...propertyGridCss.matrixdynamic,
         actionsCell: propertyGridCss.matrixdynamic.actionsCell + " sps-table__cell--actions",
         buttonAdd: presetsCss.matrixdynamic.buttonAdd,
-        footer: presetsCss.matrixdynamic.footer + " sps-matrixdynamic__footer--in-dialog",
+        footer: presetsCss.matrixdynamic.toolbar + " sps-matrixdynamic__footer--in-dialog",
       }
     };
     const popupModel = settings.showDialog?.(<IDialogOptions>{
