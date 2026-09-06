@@ -1713,9 +1713,12 @@ A survey element (survey, page, question, or panel) whose name has been requeste
 - `options.area`: `string`  
 A Survey Creator UI element that requests the display name. Contains one of the following values:
   - `"page-selector"` - Page selector on the design surface.
+  - `"designer-tab:carry-forward-banner"` - Banner that references the question whose choices are copied, on the design surface.
   - `"condition-editor"` - Condition pop-up window or drop-down menus that allow users to select questions in the Logic tab.
   - `"logic-tab:question-filter"` - Question filter in the Logic tab.
   - `"logic-tab:question-selector"` - Question selector on editing actions in the Logic tab.
+  - `"logic-tab:rule-condition"` - Survey elements within a rule condition in the list of logic rules.
+  - `"logic-tab:rule-action"` - Survey elements within a rule action in the list of logic rules.
   - `"preview-tab:page-list"` - Page list in the Preview tab.
   - `"preview-tab:selected-page"` - Selected page name in the Preview tab.
   - `"property-grid:property-editor"` - Property editors in the Property Grid.
