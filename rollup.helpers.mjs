@@ -104,6 +104,25 @@ function pluginIgnoreStyles() {
   };
 }
 
+// The two compiler options esbuild has to be told about, stated here rather than read from a
+// tsconfig.
+//
+// rollup-plugin-esbuild hands its `tsconfig` option to get-tsconfig as a file *name* to search for on
+// the way up from each source file, and every call below passes an absolute path - which matches no
+// file anywhere, so the lookup returns nothing and esbuild falls back to its own defaults. Since
+// esbuild 0.21 that default is JS standard decorators, and survey-core's @property/@propertyArray are
+// legacy TypeScript decorators: a class field compiled the standard way calls the decorator with no
+// target at all ("Object.defineProperty called on non-object" on import) and, where it does not throw,
+// writes an own undefined over the accessor the decorator installed. The UMD outputs are compiled by
+// rollup-plugin-typescript2, which reads the tsconfig properly, so the mismatch showed up in the .mjs
+// bundles only.
+//
+// useDefineForClassFields is the second half of the same rule and is set for the same reason
+// survey-core sets it: define semantics on a class field overwrite the prototype accessor.
+const esbuildTsconfigRaw = {
+  compilerOptions: { experimentalDecorators: true, useDefineForClassFields: false },
+};
+
 export function createUmdConfig(options) {
 
   const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true, notices } = options;
@@ -127,7 +146,7 @@ export function createUmdConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
+        ? rollupEsbuild({ tsconfig: tsconfig, tsconfigRaw: esbuildTsconfigRaw, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
@@ -198,7 +217,7 @@ export function createEsmConfig(options) {
         }
       }),
       useEsbuild
-        ? rollupEsbuild({ tsconfig: tsconfig, charset: "utf8", sourceMap: sourceMap })
+        ? rollupEsbuild({ tsconfig: tsconfig, tsconfigRaw: esbuildTsconfigRaw, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
