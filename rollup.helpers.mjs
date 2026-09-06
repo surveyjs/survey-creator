@@ -35,13 +35,24 @@ const postcssUrlRules = [
   { url: "inline" },
 ];
 
-function getOwnBanner(version) {
-  return [
+// `notices` is for a bundle that inlines a third-party dependency whose own header comment does not
+// survive minification. Terser keeps a comment that opens with "!" or names a licence and drops the
+// rest, which is why papaparse's header is still in survey-creator-core.min.js and why jsonc-parser's
+// would not be in tester.min.js - it opens with a rule of dashes. A bundle that inlines such a
+// dependency passes its notice here and it rides along in the banner, which is emitted as an
+// "ignored" comment and is therefore kept by both outputs.
+function getOwnBanner(version, notices) {
+  const lines = [
     "SurveyJS Creator v" + version,
     "(c) 2015-" + new Date().getFullYear() + " Devsoft Baltic OÜ - http://surveyjs.io/", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     "Github: https://github.com/surveyjs/survey-creator",
     "License: https://surveyjs.io/Licenses#SurveyCreator",
-  ].join("\n");
+  ];
+  if (!!notices && notices.length > 0) {
+    lines.push("");
+    notices.forEach(notice => lines.push(notice));
+  }
+  return lines.join("\n");
 }
 
 async function minifyCSS(code) {
@@ -110,9 +121,17 @@ function pluginIgnoreStyles() {
   };
 }
 
+// rollup-plugin-esbuild searches upward for a tsconfig file name, so callers below pass basename()
+// instead of an absolute path. Keep the decorator semantics explicit as well: survey-core's
+// @property/@propertyArray use legacy TypeScript decorators, and define semantics on a class field
+// would overwrite the prototype accessor they install.
+const esbuildTsconfigRaw = {
+  compilerOptions: { experimentalDecorators: true, useDefineForClassFields: false },
+};
+
 export function createUmdConfig(options) {
 
-  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, onCloseBundle, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
+  const { input, globalName, external, globals, dir, tsconfig, declarationDir = null, emitMinified, exports, useEsbuild, version, emitCss, onCloseBundle, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true, notices } = options;
 
   if (Object.keys(input).length > 1) throw Error("umd config accepts only one input");
 
@@ -133,11 +152,7 @@ export function createUmdConfig(options) {
         }
       }),
       useEsbuild
-        // rollup-plugin-esbuild takes a tsconfig file NAME and searches for it upward
-        // from each source file; an absolute path silently matches nothing, so esbuild
-        // gets no tsconfigRaw and compiles decorators with standard (TC39) semantics,
-        // which survey-core's legacy property() decorators crash on at runtime.
-        ? rollupEsbuild({ tsconfig: tsconfig ? basename(tsconfig) : undefined, charset: "utf8", sourceMap: sourceMap })
+        ? rollupEsbuild({ tsconfig: tsconfig ? basename(tsconfig) : undefined, tsconfigRaw: esbuildTsconfigRaw, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
@@ -171,7 +186,7 @@ export function createUmdConfig(options) {
         : pluginIgnoreStyles(),
       bannerPlugin({
         banner: {
-          content: getOwnBanner(version),
+          content: getOwnBanner(version, notices),
           commentStyle: "ignored",
         }
       }),
@@ -196,7 +211,7 @@ export function createUmdConfig(options) {
 
 export function createEsmConfig(options) {
 
-  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true } = options;
+  const { input, external, dir, tsconfig, sharedFileName, useEsbuild, version, emitCss, virtualModules, aliases, resolve, sourceMap = true, noEmitOnError = true, notices } = options;
 
   return {
     context: "this",
@@ -214,11 +229,7 @@ export function createEsmConfig(options) {
         }
       }),
       useEsbuild
-        // rollup-plugin-esbuild takes a tsconfig file NAME and searches for it upward
-        // from each source file; an absolute path silently matches nothing, so esbuild
-        // gets no tsconfigRaw and compiles decorators with standard (TC39) semantics,
-        // which survey-core's legacy property() decorators crash on at runtime.
-        ? rollupEsbuild({ tsconfig: tsconfig ? basename(tsconfig) : undefined, charset: "utf8", sourceMap: sourceMap })
+        ? rollupEsbuild({ tsconfig: tsconfig ? basename(tsconfig) : undefined, tsconfigRaw: esbuildTsconfigRaw, charset: "utf8", sourceMap: sourceMap })
         : typescript({
           noEmitOnError: noEmitOnError,
           tsconfig: tsconfig,
@@ -253,7 +264,7 @@ export function createEsmConfig(options) {
         : pluginIgnoreStyles(),
       bannerPlugin({
         banner: {
-          content: getOwnBanner(version),
+          content: getOwnBanner(version, notices),
           commentStyle: "ignored",
         }
       })

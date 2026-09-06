@@ -1,0 +1,122 @@
+// The console pane: the transcript of a run, in the left pane where the spectator survey would be.
+//
+// `svt-console-row` and not `svt-row`: the prototype called a transcript line `.row`, which is far too
+// generic a word to hold a whole namespace, so this is one of the three names in the mapping table
+// that are more than a prefix.
+
+.svt-console {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background: var(--svt-card);
+  color: var(--svt-ink-1);
+}
+
+.svt-console__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--svt-divider);
+  font-size: 12px;
+}
+
+.svt-console__toggle {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--svt-ink-3);
+}
+
+.svt-console__rows {
+  flex: 1;
+  overflow: auto;
+  padding: 8px 12px;
+  font-family: var(--svt-mono);
+  font-size: 12px;
+}
+
+.svt-console__empty {
+  color: var(--svt-ink-3);
+}
+
+.svt-console__foot {
+  padding: 6px 12px;
+  border-top: 1px solid var(--svt-divider);
+  font-size: 12px;
+  color: var(--svt-ink-3);
+}
+
+// The head's three verbs - clear, copy, download - are Actions, so the wrapper is what this names and
+// the button inside it carries `svt-link`.
+.svt-console__verb {
+  display: inline-flex;
+}
+
+.svt-console-row {
+  display: flex;
+  gap: 8px;
+  padding: 1px 0;
+  align-items: baseline;
+  font-family: var(--svt-mono);
+}
+
+.svt-console-row__time {
+  color: var(--svt-ink-3);
+  flex: 0 0 44px;
+  text-align: right;
+}
+
+.svt-console-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.svt-console-row__text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--svt-ink-2);
+}
+
+.svt-console-row__detail {
+  display: block;
+  color: var(--svt-ink-3);
+  padding-left: 12px;
+}
+
+// What the host application did while the tester was waiting on it - a stubbed request, a timer.
+.svt-console-row__host {
+  color: var(--svt-amber-800);
+  margin-right: 6px;
+}
+
+.svt-console-row--indent1 .svt-console-row__body {
+  padding-left: 12px;
+}
+
+.svt-console-row--indent2 .svt-console-row__body {
+  padding-left: 26px;
+}
+
+.svt-console-row--pass .svt-console-row__text {
+  color: var(--svt-green-700);
+}
+
+.svt-console-row--fail .svt-console-row__text {
+  color: var(--svt-bad-ink);
+}
+
+.svt-console-row--error .svt-console-row__text {
+  color: var(--svt-bad-ink);
+  font-weight: 600;
+}
+
+.svt-console-row--warn .svt-console-row__text {
+  color: var(--svt-amber-800);
+}
+
+.svt-console-row--muted .svt-console-row__text {
+  color: var(--svt-ink-3);
+}
