@@ -182,6 +182,12 @@ property set instead (that is what `model/runnerCss.ts` is).
 | `checks__popup` | `svt-checks__popup` |
 | — (new) | `svt-recorder__action`, `svt-recorder__popup` — the session bar's verbs and its options menu |
 
+Nine component names travel the same way and are **not** classes: `svt-test-row`, `svt-step-row`,
+`svt-settings`, `svt-check-menu`, `svt-check-row` and the four `svt-adorned-*` wrappers
+`TesterAdornersModel` installs on the survey it is handed. They are the widget's whole per-framework
+surface — every renderer registers those nine and writes nothing else — and `tests-tester/checkLayers.ts`
+is the list that keeps layer 1 from naming a tenth.
+
 `tests-tester/model/css-naming.test.ts` walks a built `TesterRunnerModel` and asserts that every class
 string it or its rows hand out carries the `svt-` prefix and none carries a prototype one — the rename
 is complete, not partial, and it stays that way.
@@ -332,7 +338,15 @@ model.updateFromHost();
 localStorage.setItem("tester", JSON.stringify(model.getState()));
 ```
 
-Then one framework component renders `model` — `survey-creator-react/tester` from prompt 07 onwards.
+```tsx
+import { SurveyTester } from "survey-creator-react/tester";   // React >= 18.1
+
+<SurveyTester model={model} />
+```
+
+That component is the whole of the React rendering: eight files, nine registered components and no
+css of its own (see that package's README). Vue and Angular are the named follow-ups of
+`promts/creator-tester-notes.md`, and they register the same nine names against the same models.
 Nothing else is installed: `survey-core` (with its `survey-core/tester` entry) is the only external of
 the bundle, and `jsonc-parser` is bundled into it under its MIT notice, which rides in the bundle's own
 banner.
@@ -484,4 +498,6 @@ The first build's sizes are recorded in `promts/creator-tester-notes.md` (note 3
 baseline the next prompt is judged against. They live there and not here: a number in two files is a
 number that goes stale in one of them.
 
-Still to arrive: the React rendering (prompt 07).
+The React rendering has arrived (prompt 07): `survey-creator-react/src/tester`, with its own Jest
+project on React 18 and a `surface.test.ts` that counts the per-framework surface from the other
+side of the seam this directory defines. Note 42 records what it weighs.

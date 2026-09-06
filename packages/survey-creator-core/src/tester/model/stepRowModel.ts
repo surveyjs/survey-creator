@@ -117,6 +117,12 @@ export class TesterStepRowModel extends Base {
   public get rawJson(): string {
     return !this.liveStep ? "" : stringifyStep(this.liveStep);
   }
+  // What the button behind the raw payload says. It is a statement about this row's own state, so
+  // it is a property of the row rather than a condition in three templates.
+  public get runMark(): string { return testerText("common.runMark"); }
+  public get rawToggleText(): string {
+    return this.rawOpen ? testerText("step.hideRaw") : testerText("step.raw");
+  }
 
   public toggleRaw(): void { this.rawOpen = !this.rawOpen; }
   public runTo(): void {

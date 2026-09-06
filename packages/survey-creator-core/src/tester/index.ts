@@ -38,10 +38,17 @@ export { TesterStepsModel } from "./model/stepsSurvey";
 // renders these; rendersHeader is the one question about a survey element the DOM half has to ask.
 export { TesterCheckMenuModel, TesterCheckRowModel } from "./model/checkMenuModel";
 export { TesterAdornersModel, TesterAdornerModel, rendersHeader } from "./model/adornerModel";
+// The four names a renderer registers a wrapper under. Which element gets which of them is decided
+// in the model - TesterAdornersModel.attach installs the answer on the survey it is handed - so a
+// renderer registers the four and draws each element's own markup inside the adorned box.
+export {
+  TESTER_ADORNED_QUESTION, TESTER_ADORNED_PANEL, TESTER_ADORNED_CELL, TESTER_ADORNED_PAGE,
+} from "./model/adornerModel";
 
 // What those models hand a view to loop over.
 export type { ITesterNewTestParams, ITesterPanelTest, ITesterRowActions } from "./model/runnerApi";
 export type { ITesterJsonIssueRow } from "./model/jsonModel";
+export type { ITesterStaticField, ITesterStaticForm } from "./model/recorderModel";
 export type { CheckView, IssueView, WhyLine, WhyNote, WhyPart } from "./model/checkView";
 export type { ITesterCheckPickItem } from "./model/checkMenuModel";
 export type { TesterAdornerPlace } from "./model/adornerModel";
@@ -69,6 +76,7 @@ export type { ITesterStrings, TesterStringValue } from "./localization";
 // option shapes are what makes an ITesterOptions typeable at the call site.
 export { validateSuite, getSuiteLevelErrors, getBrokenTestCount } from "./core/validate";
 export { defaultHostOptions, defaultTestOptions } from "./core/hostOptions";
+export { DELAY_GRANULARITIES } from "./core/hostOptions";
 export type {
   HostOptions, RunMode, ConsoleVerbosity, DelayGranularity,
 } from "./core/hostOptions";

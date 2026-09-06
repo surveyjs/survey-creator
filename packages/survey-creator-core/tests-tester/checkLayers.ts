@@ -20,11 +20,21 @@ const packageRoot = resolve(__dirname, "..");
 
 // The strings of overview section 3.3, and the only component names layer 1 may hold.
 //
+// Prompt 07 added the four wrapper names on the second line. They were the prototype's view code and
+// are a model decision here: which wrapper an element gets follows from what the element is - it is
+// addressable, or it is chrome the grammar has no name for - so the answer is given once, in
+// TesterAdornersModel, and every renderer registers the same four names against it.
+//
 // It lists what this layer actually draws today and not what it will draw eventually. Prompt 05 added
 // the last two, in the commit that added the model that hands them out: "svt-check-menu" is what the
 // adorner's popup renders as its content, and "svt-check-row" is one row of the list inside it.
 export const ALLOWED_COMPONENTS = [
   "svt-test-row", "svt-step-row", "svt-settings", "svt-check-menu", "svt-check-row",
+  "svt-adorned-question", "svt-adorned-panel", "svt-adorned-cell", "svt-adorned-page",
+  // The one name on this list that is not ours. It is survey-core's own dropdown action item, which
+  // every renderer of the family registers, and it is how an Action carrying a popup gets that popup
+  // drawn hanging from its own button. Naming it decides nothing about which framework is asking.
+  "sv-action-bar-item-dropdown",
 ];
 
 // A component name is a string the model puts in a component slot - what an Action or a ListModel

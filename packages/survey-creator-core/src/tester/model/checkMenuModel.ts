@@ -293,6 +293,24 @@ export class TesterCheckMenuModel extends Base {
   public get pickerNote(): string {
     return !this.pending ? "" : testerText("recorder.menu.pickerNote", this.pending.name);
   }
+  public get pickerAddText(): string { return testerText("recorder.menu.pickerAdd"); }
+  public get pickerCancelText(): string { return testerText("recorder.menu.pickerCancel"); }
+
+  // "Show choices" (PROMPT-recorder.md section 5.5, and note 26): while the picker of the
+  // `choices` check is open, the question's own dropdown is held open beside it, so the person ticks
+  // against the list they can see rather than against a row of formatted values.
+  //
+  // Which popup that is is decided here and the holding is the view's, because a dropdownListModel
+  // exists only once the question has been rendered - there is no such thing in a session driven
+  // with no DOM, and this getter answers undefined there, which is the whole of what the model layer
+  // has to say about it. Opening it records nothing: the capture reports what a person did to the
+  // form, and this is not that.
+  public get choicesPopup(): PopupModel | undefined {
+    if (this.pickerKind !== "choices") return undefined;
+    const list: any = (this.params.obj || {}).dropdownListModel;
+    const popup = !!list ? list.popupModel : undefined;
+    return popup instanceof PopupModel ? popup : undefined;
+  }
   public isPicked(value: any): boolean {
     return this.picked.some(one => one === value);
   }

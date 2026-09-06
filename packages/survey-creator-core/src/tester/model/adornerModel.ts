@@ -6,7 +6,7 @@ import { testerText } from "../localization";
 import { ElementRegistry } from "../recorder/elementRegistry";
 import type { RegisteredElement } from "../recorder/elementRegistry";
 import {
-  getPageTargetName, getPanelTargetName, getQuestionTargetName, targetContextOf,
+  getPageTargetName, getPanelTargetName, getQuestionTargetName, getTargetKind, targetContextOf,
 } from "../recorder/targetName";
 import { TesterCheckMenuModel } from "./checkMenuModel";
 import type { ITesterCheckMenuOwner } from "./checkMenuModel";
@@ -33,6 +33,16 @@ import type { ITesterCheckMenuOwner } from "./checkMenuModel";
 // element, and the corners of a page, a panel, a question and a cell are a padding apart - but it is
 // decided here, because it follows from what the element *is* and not from how it looks.
 export type TesterAdornerPlace = "question" | "panel" | "page" | "cell" | "survey";
+
+// The four components the renderer asks the model for by name, and what this file adds to the widget's
+// per-framework surface (tests-tester/checkLayers.ts holds the whole list). Which wrapper an element
+// gets follows from what the element *is* - it is addressable, or it is a piece of chrome the grammar
+// has no name for - so it is decided here and every renderer gets the same answer; what a wrapper
+// draws is the renderer's business.
+export const TESTER_ADORNED_QUESTION = "svt-adorned-question";
+export const TESTER_ADORNED_PANEL = "svt-adorned-panel";
+export const TESTER_ADORNED_CELL = "svt-adorned-cell";
+export const TESTER_ADORNED_PAGE = "svt-adorned-page";
 
 // What the adorners need from the session. Three of them are about the case as it stands, and the two
 // of ITesterCheckMenuOwner are what a menu press does.
@@ -86,6 +96,9 @@ export class TesterAdornerModel extends Base {
   // the single most common reason a hand-written matrix case fails with unknownTarget.
   public get ariaLabel(): string { return testerText("recorder.menu.ariaLabel", this.target); }
   public get hasChecks(): boolean { return this.tickedCount > 0; }
+  // The tick on the button. It is the same mark the menu prints against a check the case already
+  // asserts, which is the point: one glyph for "this is checked", said in one place.
+  public get markText(): string { return testerText("recorder.menu.markTicked"); }
 
   public get menu(): TesterCheckMenuModel {
     if (!this.menuValue) {
@@ -138,6 +151,12 @@ export class TesterAdornersModel extends Base {
   private owner: ITesterAdornersOwner;
   private registry?: ElementRegistry;
   private survey?: SurveyModel;
+  // The survey the wrapper names are installed on, and the handler that answers them. Held so that a
+  // detach leaves the model exactly as it was handed over: the widget does not own the survey the
+  // tester built, and a replay throws it away with two subscriptions of ours still on it otherwise.
+  private wrapped?: SurveyModel;
+  private wrapperHandler?: (sender: any, options: any) => void;
+  private previousPageComponent?: string;
   private gone = false;
 
   constructor(owner: ITesterAdornersOwner) {
@@ -155,15 +174,54 @@ export class TesterAdornersModel extends Base {
     this.survey = survey;
     this.registry = registry;
     if (!!registry) registry.onChanged = () => this.refresh();
+    this.installWrappers(survey);
     this.refresh();
   }
 
   public detach(): void {
     if (!!this.registry && this.registry.onChanged)this.registry.onChanged = undefined;
     this.registry = undefined;
+    this.removeWrappers();
     this.survey = undefined;
     this.openTarget = undefined;
     this.clear();
+  }
+
+  // Which component wraps an element, told to the model once, before the renderer reaches a page.
+  // Nothing here is recorded into a case and the tester never reads any of it: a wrapper name only
+  // decides which component the renderer builds, and an element the grammar cannot address is left
+  // exactly as the renderer would have built it.
+  //
+  // It is a model decision and not a view's, for the same reason the Creator sets the same event in
+  // creator-base.ts: it follows from what the element is. React, Vue and Angular register the four
+  // names of TESTER_ADORNED_* and get these answers without restating any of them - which is the only
+  // way three renderers cannot come to disagree about which questions are checkable.
+  private installWrappers(survey: SurveyModel | undefined): void {
+    if (!survey) return;
+    const anySurvey: any = survey;
+    if (!anySurvey.onElementWrapperComponentName ||
+      typeof anySurvey.onElementWrapperComponentName.add !== "function") return;
+    this.previousPageComponent = anySurvey.pageComponent;
+    anySurvey.pageComponent = TESTER_ADORNED_PAGE;
+    this.wrapperHandler = (_sender: any, options: any) => {
+      if (options.wrapperName !== "component") return;
+      const name = wrapperComponentFor(options.element, options.reason);
+      if (!!name)options.componentName = name;
+    };
+    anySurvey.onElementWrapperComponentName.add(this.wrapperHandler);
+    this.wrapped = survey;
+  }
+
+  private removeWrappers(): void {
+    const survey: any = this.wrapped;
+    this.wrapped = undefined;
+    if (!survey) return;
+    try {
+      survey.pageComponent = this.previousPageComponent;
+      if (!!this.wrapperHandler)survey.onElementWrapperComponentName.remove(this.wrapperHandler);
+    } catch{ /* a model already torn down */ }
+    this.wrapperHandler = undefined;
+    this.previousPageComponent = undefined;
   }
 
   // Rebuilt from the registry, reusing what is still there. An adorner is reused rather than replaced
@@ -230,6 +288,36 @@ export class TesterAdornersModel extends Base {
     return this.adorners.filter(adorner => adorner.target === target)[0];
   }
 
+  // The survey's own adorner, which is the one with no element anywhere on the page: a view stands
+  // it in the corner of the pane. Asked for by name here rather than by the target string, because
+  // what the survey is called is the tester's business and not a renderer's.
+  public get surveyAdorner(): TesterAdornerModel | undefined {
+    return this.find(SurveyTestSurveyTargetName);
+  }
+
+  // The adorner of a rendered element, by the element itself. A wrapper component is handed the
+  // question, the panel, the page or the cell the renderer is drawing and nothing else - it does not
+  // know the target name, and it must not work one out, because the grammar is the tester's and
+  // resolving it twice is how two answers to "what is this called" get into one screen. So the
+  // lookup is by identity, which is also what makes it right after a matrix row was removed and added
+  // again: same name, different question.
+  //
+  // Nothing until the element has rendered, and that is correct rather than a race: the list is built
+  // from the render events, an element that has not rendered has no adorner (note 23), and the list
+  // raises a change when it grows one.
+  public forElement(obj: any): TesterAdornerModel | undefined {
+    if (!obj) return undefined;
+    return this.adorners.filter(adorner => adorner.obj === obj)[0];
+  }
+
+  // The cell variant. The renderer hands a cell over as its own object - the matrix and the row travel
+  // with it - and what carries the target is the question inside it, which is the object the registry
+  // holds. A cell with no question of its own (a detail panel, a drag handle, the row actions) has
+  // none, and gets no adorner.
+  public forCell(cell: any): TesterAdornerModel | undefined {
+    return this.forElement(getCellQuestion(cell));
+  }
+
   // Opening one closes the other. The menu is a popup, so it also closes itself - a press outside it,
   // Escape, a scroll of anything the button sits in - and a view tells this model when that happened.
   public setOpen(target: string | undefined): void {
@@ -256,6 +344,61 @@ export class TesterAdornersModel extends Base {
     this.adorners.forEach(adorner => adorner.dispose());
     if (this.adorners.length)this.adorners = [];
   }
+}
+
+// Which wrapper an element gets, and whether it gets one at all.
+//
+// The prototype's overlay drew one absolutely placed layer over the form and measured every element
+// into it. A measurement is a photograph: the moment the pane scrolls, a row is added or an error
+// message appears, every button in the layer is standing where its element used to be. So the buttons
+// are not placed over the form - they are rendered inside the element they are about, exactly the way
+// the Creator adorns a question in the designer, and nothing is measured so nothing can drift.
+//
+// An element the grammar cannot address - a question with no name, a static panel nested inside the
+// panel of a dynamic panel - is left exactly as the renderer built it: there is no adorner to draw, so
+// there is no reason to put a box around it. A panel of a dynamic panel is addressable ("contacts[1]")
+// and is wrapped like any other panel; a panel that draws no header is addressable and still not
+// wrapped, for the reason rendersHeader() gives below - it has no corner of its own to stand a button
+// in.
+//
+// A page has no wrapper event of its own: `pageComponent` is one name for every page, so the page
+// component is installed unconditionally and asks forElement() whether this page has an adorner.
+export function wrapperComponentFor(element: any, reason?: string): string | undefined {
+  if (reason === "cell") {
+    const question = getCellQuestion(element);
+    if (!question) return undefined;
+    return !!getQuestionTargetName(question, cellContextOf(element))
+      ? TESTER_ADORNED_CELL
+      : undefined;
+  }
+  // Every other reason is a part of the chrome the recorder has no target for: a logo, a column
+  // header, the header of a matrix row, the footer of a total row.
+  if (!!reason) return undefined;
+  const kind = getTargetKind(element);
+  if (kind === "panel") {
+    return !!getPanelTargetName(element) && rendersHeader(element, "panel")
+      ? TESTER_ADORNED_PANEL
+      : undefined;
+  }
+  if (kind === "question") {
+    return !!getQuestionTargetName(element) ? TESTER_ADORNED_QUESTION : undefined;
+  }
+  return undefined;
+}
+
+// The row context of a rendered matrix cell. The renderer hands the cell over with the matrix and the
+// row it belongs to, and the tester takes that pair for the cells whose row the question alone cannot
+// name.
+export function cellContextOf(cell: any): ReturnType<typeof targetContextOf> {
+  return !!cell ? targetContextOf(cell.matrix, cell.row) : undefined;
+}
+
+// The question a rendered matrix cell holds, if it holds one. A cell that carries a detail panel, a
+// drag handle or the row actions carries no target.
+export function getCellQuestion(cell: any): any {
+  if (!cell || !!cell.hasPanel) return undefined;
+  const question = cell.question;
+  return !!question && typeof question.getType === "function" ? question : undefined;
 }
 
 // What one registered element is offered, or nothing. An element the grammar cannot address - a

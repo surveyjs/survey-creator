@@ -6,7 +6,10 @@
 // so these tests fire those events with real nodes, which is exactly what a renderer does. An element
 // that has not rendered has no adorner, and that is the point: an adorner is a place to put a button.
 import { afterEach, describe, expect, it } from "vitest";
-import { TesterAdornersModel, describeEntry, rendersHeader } from "../../src/tester/model/adornerModel";
+import {
+  TesterAdornersModel, describeEntry, rendersHeader, wrapperComponentFor,
+  TESTER_ADORNED_CELL, TESTER_ADORNED_PAGE, TESTER_ADORNED_PANEL, TESTER_ADORNED_QUESTION,
+} from "../../src/tester/model/adornerModel";
 import { SurveyTesterModel } from "../../src/tester/model/testerModel";
 import { sample as conditional } from "../samples/01-conditional-visibility";
 import { sample as matrix } from "../samples/05-dynamic-matrix";
@@ -243,4 +246,88 @@ describe("the adorner list", () => {
       adorners.dispose();
     }
   });
+});
+
+// Which wrapper an element gets. It is a model decision - it follows from what the element is - so
+// the answers are asserted here, once, and React, Vue and Angular register the four names against
+// them rather than each restating the rule. What a wrapper draws is the renderer's business and is
+// not asked about anywhere in this file.
+describe("the wrapper names", () => {
+  it("answers a name for a named question, a headed panel, a cell and a page, and nothing else", async() => {
+    const model = await session({
+      pages: [{
+        name: "page1",
+        title: "About you",
+        elements: [
+          { type: "text", name: "city" },
+          { type: "panel", name: "named", title: "Where you live", elements: [{ type: "text", name: "street" }] },
+          { type: "panel", name: "bare", elements: [{ type: "text", name: "note" }] },
+        ],
+      }],
+    });
+    const survey: any = model.recorder.liveSurvey;
+
+    // attach() is what installs the answers on the model the tester built: the page component for
+    // every page, and the wrapper event for everything else.
+    expect(survey.pageComponent).toBe(TESTER_ADORNED_PAGE);
+    expect(survey.getElementWrapperComponentName(survey.getQuestionByName("city")))
+      .toBe(TESTER_ADORNED_QUESTION);
+    expect(survey.getElementWrapperComponentName(survey.getPanelByName("named")))
+      .toBe(TESTER_ADORNED_PANEL);
+
+    // A panel that draws no header has no corner of its own to stand a button in, so it is left
+    // exactly as the renderer built it - and so is every piece of chrome the grammar has no name
+    // for: a logo, a column header, the header of a matrix row, the footer of a total row.
+    const bare = survey.getPanelByName("bare");
+    expect(survey.getElementWrapperComponentName(bare)).not.toBe(TESTER_ADORNED_PANEL);
+    expect(wrapperComponentFor(survey.getQuestionByName("city"), "logo-image")).toBe(undefined);
+    expect(wrapperComponentFor(survey.getQuestionByName("city"), "row-header")).toBe(undefined);
+
+    // A question with no name is not addressable, so it is not wrapped either.
+    const nameless: any = survey.getQuestionByName("city");
+    nameless.name = "";
+    expect(wrapperComponentFor(nameless)).toBe(undefined);
+  }, 60000);
+
+  it("wraps a matrix cell that carries a question and leaves the rest of the row alone", async() => {
+    const model = await session(matrix.surveyJson);
+    const survey: any = model.recorder.liveSurvey;
+    const grid: any = survey.getAllQuestions().filter((one: any) => one.getType() === "matrixdynamic")[0];
+    expect(grid, "the sample has no matrix to render").toBeTruthy();
+    if (grid.rowCount === 0) grid.addRow();
+    const row = grid.visibleRows[0];
+    const cellQuestion = row.cells[0].question;
+
+    expect(wrapperComponentFor({ question: cellQuestion, matrix: grid, row: row }, "cell"))
+      .toBe(TESTER_ADORNED_CELL);
+    // A cell that carries a detail panel, a drag handle or the row actions carries no target.
+    expect(wrapperComponentFor({ hasPanel: true, question: cellQuestion }, "cell")).toBe(undefined);
+    expect(wrapperComponentFor({}, "cell")).toBe(undefined);
+  }, 60000);
+
+  // The other direction, and the one a wrapper component uses: it is handed the element the renderer
+  // is drawing and nothing else, so the lookup is by identity and never by a target name resolved a
+  // second time.
+  it("finds the adorner of a rendered element by the element itself", async() => {
+    const model = await session(conditional.surveyJson);
+    const survey: any = model.recorder.liveSurvey;
+    const question = survey.getQuestionByName("hasInsurance");
+    expect(model.recorder.adorners.forElement(question)).toBe(undefined);
+    renderQuestion(model, question);
+    const adorner = model.recorder.adorners.forElement(question);
+    expect(adorner, "a rendered question has no adorner").toBeTruthy();
+    expect((adorner as any).target).toBe("hasInsurance");
+    expect(model.recorder.adorners.forElement(undefined)).toBe(undefined);
+  }, 60000);
+
+  // Detaching leaves the survey exactly as it was handed over: the widget does not own the model the
+  // tester built, and a replay throws it away with our two subscriptions still on it otherwise.
+  it("takes the wrapper names back off the model it let go of", async() => {
+    const model = await session(conditional.surveyJson);
+    const survey: any = model.recorder.liveSurvey;
+    model.recorder.adorners.detach();
+    expect(survey.pageComponent).toBe(undefined);
+    expect(survey.getElementWrapperComponentName(survey.getQuestionByName("hasInsurance")))
+      .not.toBe(TESTER_ADORNED_QUESTION);
+  }, 60000);
 });

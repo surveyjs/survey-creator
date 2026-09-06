@@ -1,6 +1,6 @@
 import { Action, ActionContainer, Base, property } from "survey-core";
 import type { ConsoleRow } from "../core/consoleLog";
-import { formatRowsAsText } from "../core/consoleLog";
+import { formatRowsAsText, formatTimestamp } from "../core/consoleLog";
 import { copyToClipboard, download } from "../core/json";
 import { testerText } from "../localization";
 import { runnerActionBarCss } from "./runnerCss";
@@ -88,6 +88,30 @@ export class TesterConsoleModel extends Base {
   }
   // "hasNoRows" and not "isEmpty": Base declares isEmpty() as a method.
   public get hasNoRows(): boolean { return !this.visibleRows.length; }
+
+  // The pane's own chrome. The three verbs are Actions and the stock bar draws them; these are the
+  // heading, the two inputs and the line a filtered-out transcript leaves behind - and they are
+  // here for the same reason every other sentence is on a model: a view that spelled them would be
+  // three views spelling them, and none of the three could be translated.
+  public get title(): string { return testerText("console.title"); }
+  public get searchPlaceholder(): string {
+    return testerText("console.searchPlaceholder");
+  }
+  public get failuresLabel(): string { return testerText("console.failures"); }
+  public get emptyText(): string { return testerText("console.empty"); }
+  // What the button behind one row's raw event says, which depends on that row and not on the pane.
+  public rawToggleText(rowId: number): string {
+    return this.isRawOpen(rowId) ? testerText("console.hideRaw") : testerText("console.raw");
+  }
+  // The class on a transcript line: its level and how deep the event was nested. Both are facts
+  // about the row, so they are said here rather than assembled in a template.
+  public rowCss(row: ConsoleRow): string {
+    return "svt-console-row svt-console-row--" + row.level + " svt-console-row--indent" + row.indent;
+  }
+  public timeText(row: ConsoleRow): string { return formatTimestamp(row.atMs); }
+  // The event behind a row, as the text the pane opens under it. surveyCreated carries a live
+  // SurveyModel, which is circular and is not data, so it is named rather than serialised.
+  public rawJson(row: ConsoleRow): string { return stringifyEvent(row.event); }
 
   public clear(): void { this.onClear(); }
   public getTranscript(): string { return this.transcript(); }

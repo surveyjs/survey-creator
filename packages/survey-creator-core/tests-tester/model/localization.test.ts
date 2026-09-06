@@ -9,6 +9,7 @@ import { describe, expect, it } from "vitest";
 import { readdirSync, readFileSync, statSync } from "fs";
 import { join, resolve } from "path";
 import { enTesterStrings, testerLocalization } from "../../src/tester/localization";
+import { DELAY_GRANULARITIES } from "../../src/tester/core/hostOptions";
 import { RUN_MODES } from "../../src/tester/model/runnerModel";
 import { tone } from "../../src/tester/model/statusTone";
 
@@ -111,6 +112,11 @@ describe("the string table", () => {
     RUN_MODES.forEach(mode => {
       expect(testerLocalization.hasString("runner.modeName." + mode), mode).toBe(true);
       expect(testerLocalization.hasString("runner.modeNote." + mode), mode).toBe(true);
+    });
+    // The picker beside the delay is built from the same list the option itself is typed by.
+    DELAY_GRANULARITIES.forEach(granularity => {
+      expect(testerLocalization.hasString("runner.granularity." + granularity), granularity)
+        .toBe(true);
     });
     const tones = ["passed", "failed", "error", "running", "skipped", "canceled", undefined];
     tones.forEach(status => {

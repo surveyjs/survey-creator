@@ -48,6 +48,7 @@ export interface CheckView {
   unknownJson: string;
   // The check result whole, `details` and all: the tester built it, and nothing here picks it apart.
   rawJson: string;
+  inSurveyText: string;
 }
 
 // Every issue the tester produces - the validator's and the runner's alike - carries the node of the
@@ -62,6 +63,9 @@ export interface IssueView {
   suggestion?: string;
   casePath?: string;
   jsonPath?: string;
+  // What the two links say. A sentence a person reads, so it is composed here with the rest of them
+  // rather than spelled in whichever renderer draws the line.
+  inSurveyText: string;
 }
 
 const text = (value: string): WhyPart => ({ kind: "text", value: value });
@@ -78,6 +82,7 @@ export function buildIssueView(issue: ISurveyTestIssue, key: string): IssueView 
     suggestion: issue.suggestion,
     casePath: issue.path,
     jsonPath: issue.jsonPath,
+    inSurveyText: testerText("why.inTheSurvey"),
   };
 }
 
@@ -173,6 +178,7 @@ export function buildCheckView(check: ISurveyTestCheckResult, key: string, showT
     why: lines,
     unknownJson: getUnknownDetails(check.details, details),
     rawJson: stringify(check),
+    inSurveyText: testerText("why.inTheSurvey"),
   };
 }
 

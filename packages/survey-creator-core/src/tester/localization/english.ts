@@ -23,6 +23,15 @@ export const enTesterStrings = {
     noCheck: "(no check)",
     notRun: "not run",
     truncated: (head: string): string => head + "…",
+    // The glyphs the markup used to spell. They are here for the same reason every sentence is: a
+    // renderer that wrote them would be three renderers writing them, and the run mark of a test row
+    // and of a step of it would be free to drift apart.
+    runMark: "▶",
+    collapsedMark: "▾",
+    expandedMark: "▴",
+    zoomInMark: "+",
+    zoomOutMark: "−",
+    noteJoin: "— ",
   },
 
   // How a status is drawn. Keyed by what statusTone.ts reduces a LiveStatus to, plus the caret the
@@ -66,6 +75,14 @@ export const enTesterStrings = {
     clear: "clear",
     copy: "copy",
     download: "download",
+    // The pane's own chrome. The three verbs above are Actions; these are the labels of the two
+    // inputs, the heading and the line a filtered-out transcript leaves behind.
+    title: "Console",
+    searchPlaceholder: "search",
+    failures: "failures",
+    empty: "Nothing yet.",
+    raw: "raw",
+    hideRaw: "hide",
     foot: (total: number, shown: number): string =>
       total + " rows" + (shown !== total ? ", " + shown + " shown" : ""),
   },
@@ -166,6 +183,34 @@ export const enTesterStrings = {
     paneNoteRunning: "driven by the tester, input disabled",
     paneNoteFailed: "model at the failing step, input disabled",
     paneNoteLast: "model of the last test, input disabled",
+    paneEmpty: "The model of the running test appears here. It is created by the runner, once per" +
+      " test, and announced by surveyCreated.",
+    paneHeadless: "Rendering the model is switched off in the settings, so the run happens" +
+      " headless.",
+    spectatorAriaLabel: "the model the tester is driving",
+    // The list, its head and the two lines under it.
+    testsTitle: (count: number): string => "Tests " + count,
+    emptySuite: "This suite holds no test.",
+    emptySuiteCreate: " Press New test above: creating one is the act of starting to record it.",
+    delayLabel: "delay",
+    delayUnit: "ms per",
+    granularity: {
+      step: "step",
+      target: "target",
+      check: "check",
+    },
+    mismatchTitle: "the live rows and the result disagree",
+    mismatchNote: "The result is the canonical one, so this is a bug in this host or in the" +
+      " tester.",
+    // The New test form: one question and one button. Everything else a test carries is asked for on
+    // the recorder screen, where there is something to describe.
+    newTestForm: {
+      placeholder: "What does this test prove?",
+      ariaLabel: "the name of the new test",
+      create: "Create",
+      hint: "Create writes an empty case and opens it for recording. There is no second button to" +
+        " press, and the rest of what the test carries is in the Test options panel there.",
+    },
     summary: {
       notRunYet: "not run yet",
       passed: (count: number): string => count + " passed",
@@ -238,6 +283,19 @@ export const enTesterStrings = {
     documentsDoNotRun: "The documents do not run.",
     editDisabledUnnamed: "A session is addressed by name, so a test without one cannot be recorded" +
       " into. Give it a name in the box below.",
+    // The rename box, the expander and the head of the step list inside a row.
+    nameLabel: "Name",
+    namePlaceholder: "What does this test prove?",
+    save: "Save",
+    saveClean: "The name is what the document already holds.",
+    expand: "Expand",
+    collapse: "Collapse",
+    stepsHead: (count: number): string => "Steps " + count,
+    stepsEmpty: "This test holds no step.",
+    stepsLegend: "▶ runs every step in front of the one it is on and stops there, so that step is" +
+      " the one that runs next — and on the last line, which is the end of the case, it runs" +
+      " everything that is left. Going further into the case carries on from where the last run" +
+      " stopped; going back builds the model again and replays from the first step.",
   },
 
   // One line of a case, and the one place a part of a test is run from.
@@ -252,6 +310,9 @@ export const enTesterStrings = {
       runs + ", and stops with step " + index + " next.",
     finishes: (runs: string): string => runs + ", and finishes the case.",
     runToEndAriaLabel: "run this test to the end",
+    // The raw payload of what ran, behind the line.
+    raw: "raw..",
+    hideRaw: "hide",
     runToAriaLabel: (index: number): string => "run this test up to step " + index,
     whereDone: "the whole case has run",
     where: (at: number, count: number, held: boolean): string =>
@@ -265,6 +326,10 @@ export const enTesterStrings = {
 
   // Why a check did not hold, as the lines that draw it.
   why: {
+    // The way into the survey definition an issue line and a check line both offer. The widget does
+    // not edit the definition - the host owns it - so what the link does is the host's; what it says
+    // is this.
+    inTheSurvey: "in the survey",
     expressionLabel: "expression",
     expressionRead: (values: string, result: string): string =>
       "read " + values + " → " + result,
@@ -294,6 +359,9 @@ export const enTesterStrings = {
     format: "Format",
     copy: "Copy",
     ariaLabel: "Tests JSON",
+    badgeNotValid: "not valid JSON",
+    badgeCounts: (errors: number, warnings: number): string =>
+      errors + " errors, " + warnings + " warnings",
     headerSuite: "the suite",
     headerTest: (name: string, steps: number, index: number): string =>
       name + " · " + steps + (steps === 1 ? " step" : " steps") + " · tests[" + index + "]",
@@ -418,6 +486,31 @@ export const enTesterStrings = {
       "The variables override is not a JSON object: " + message,
     notAnObject: "it must be an object.",
     noModelForStart: "There is no model on screen to take the data from.",
+    // The screen's own header, and the two things the form pane says when it is not a live form.
+    noTest: "(no test)",
+    stepCount: (count: number): string =>
+      count + (count === 1 ? " step" : " steps") + " recorded",
+    backToTests: "Back to tests",
+    formEmpty: "No model yet. The Recorder never builds one: it runs the steps recorded so far" +
+      " through the tester and keeps the model that surveyCreated handed over.",
+
+    // The form when the session cannot record: not the survey with its inputs disabled - the survey
+    // is not rendered at all, and what stands here is a reading of the same model. There is no
+    // control to type into, so a blocked session cannot take an answer that nothing would record.
+    static: {
+      ariaLabel: "The form, read only",
+      whereBlocked: "The replay stopped, so this is as far as the case got.",
+      whereCompleted: "The survey is completed.",
+      wherePreview: "The survey is showing its preview.",
+      whereStarting: "The survey is on its start page.",
+      wherePage: (name: string): string => "Page " + name + ", as the recorded steps left it.",
+      whereNone: "The survey has no page on screen.",
+      empty: "There is no question to read on this page.",
+      noAnswer: "no answer",
+      submitCompleted: "Completed",
+      submitNext: "Next",
+      submitComplete: "Complete",
+    },
 
     // The step list: the matrix, its columns, its two row verbs and the note under it. The list is a
     // view over tests[i].steps and holds nothing of its own, so every word here is about a position in
@@ -588,6 +681,7 @@ export const enTesterStrings = {
       in: "Zoom in",
       out: "Zoom out",
       reset: "Back to 100%",
+      group: "Zoom the form",
       reading: (percent: number): string => percent + "%",
     },
 

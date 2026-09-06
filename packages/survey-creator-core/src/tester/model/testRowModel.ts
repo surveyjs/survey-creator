@@ -270,6 +270,28 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
     return testerText("row.toggleAriaLabel", this.name, this.expanded);
   }
   public get selectDisabled(): boolean { return this.locked || this.disabled; }
+  // The expander's tooltip, the rename box's two labels and the head of the step list inside the
+  // row. They live here for the same reason the rest of the row's sentences do: a row component
+  // subscribes to this model and to nothing else, and nothing it prints is spelled in three
+  // renderers.
+  public get runMark(): string { return testerText("common.runMark"); }
+  public get toggleMark(): string {
+    return this.expanded ? testerText("common.expandedMark") : testerText("common.collapsedMark");
+  }
+  public get toggleTitle(): string {
+    return this.expanded ? testerText("row.collapse") : testerText("row.expand");
+  }
+  public get nameLabel(): string { return testerText("row.nameLabel"); }
+  public get namePlaceholder(): string { return testerText("row.namePlaceholder"); }
+  public get saveText(): string { return testerText("row.save"); }
+  // A name that is what the document already holds is not a rename, and the button says why.
+  public get saveTooltip(): string {
+    return this.nameDirty ? "" : testerText("row.saveClean");
+  }
+  public get canSaveName(): boolean { return !this.nameTypedProblem && this.nameDirty; }
+  public get stepsHeadText(): string { return testerText("row.stepsHead", this.stepCount); }
+  public get stepsEmptyText(): string { return testerText("row.stepsEmpty"); }
+  public get legendText(): string { return testerText("row.stepsLegend"); }
   // The issues of the test and of every step of it, in the order the panel prints them. One flat list,
   // already carrying the class each of them draws under, so a view walks it rather than nesting two
   // maps and deciding what a warning looks like.
@@ -290,6 +312,9 @@ export class TesterTestRowModel extends Base implements IStepRowOwner {
     return checks.map((check, at) => buildCheckView(check, String(at), checks.length > 1));
   }
   public isCheckOpen(key: string): boolean { return this.openChecks.indexOf(key) > -1; }
+  public checkRawToggleText(key: string): string {
+    return this.isCheckOpen(key) ? testerText("step.hideRaw") : testerText("step.raw");
+  }
   public toggleCheck(key: string): void {
     const at = this.openChecks.indexOf(key);
     if (at > -1)this.openChecks.splice(at, 1);

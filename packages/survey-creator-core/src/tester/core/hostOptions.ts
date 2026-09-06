@@ -11,6 +11,9 @@ import type { ISurveyTestOptions } from "survey-core/tester";
 // pacing and presentation lives here and never leaks into the suite JSON.
 
 export type DelayGranularity = "step" | "target" | "check";
+// The same three, as a list. The picker beside the delay is built from it and localization.test.ts
+// walks it, so a fourth granularity is one edit and not three.
+export const DELAY_GRANULARITIES: Array<DelayGranularity> = ["step", "target", "check"];
 export type ConsoleVerbosity = "all" | "steps" | "failures";
 
 export interface HostOptions {

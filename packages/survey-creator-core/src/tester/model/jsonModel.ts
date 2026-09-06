@@ -96,6 +96,20 @@ export class TesterJsonModel extends Base {
     const errors = this.issues.filter(row => row.severity === "error").length;
     return testerText("json.issueCount", errors, this.issues.length - errors);
   }
+  // What the validator makes of the document as it stands, in three words and a colour. It is the
+  // same verdict the other screens' blocked banner is about, said once here rather than assembled
+  // from the issue list by whichever renderer is drawing the toolbar.
+  public get badgeText(): string {
+    if (!!this.parseError) return testerText("json.badgeNotValid");
+    const errors = this.issues.filter(row => row.severity === "error").length;
+    return testerText("json.badgeCounts", errors, this.issues.length - errors);
+  }
+  public get badgeCss(): string {
+    if (!!this.parseError) return "svt-badge svt-badge--error";
+    const errors = this.issues.filter(row => row.severity === "error").length;
+    if (errors > 0) return "svt-badge svt-badge--error";
+    return this.issues.length > 0 ? "svt-badge svt-badge--warning" : "svt-badge svt-badge--ok";
+  }
 
   // ---- what the widget root pushes in ---------------------------------------------------------------
 

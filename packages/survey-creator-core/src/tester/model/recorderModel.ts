@@ -66,6 +66,24 @@ export type TesterStepState = "ok" | "failed" | "errored" | "unrun";
 // A change the survey made that the case does not hold, and why. It is shown, greyed, under the grid:
 // section 4.3 of PROMPT-recorder.md is the feature's main promise, and a promise nobody can see kept
 // reads as a bug.
+// One question of the static form: what it is called, what it holds, and the name a case addresses
+// it by. It is data and not a model - there is one of these per visible question on one page, and
+// nothing about it is subscribed to on its own.
+export interface ITesterStaticField {
+  key: string;
+  title: string;
+  value: string;
+  name: string;
+}
+
+export interface ITesterStaticForm {
+  ariaLabel: string;
+  whereText: string;
+  emptyText: string;
+  fields: Array<ITesterStaticField>;
+  submitText: string;
+}
+
 export interface ITesterIgnoredChange {
   note: string;
   reason: IgnoredReason;
@@ -1118,12 +1136,91 @@ export class TesterRecorderModel extends Base
     return this.tickedTargets()[target] || [];
   }
 
+  // ---- what the screen draws -----------------------------------------------------------------------
+
+  // The header of the recorder screen. Arriving here is a transition the widget made and not the act
+  // of choosing a test, so the screen has to say which test it is about.
+  public get nameText(): string { return this.testName || testerText("recorder.noTest"); }
+  public get stepCountText(): string {
+    return testerText("recorder.stepCount", this.stepCount);
+  }
+  public get zoomGroupLabel(): string { return testerText("recorder.zoom.group"); }
+  public get backToTestsText(): string { return testerText("recorder.backToTests"); }
+  public get formEmptyText(): string { return testerText("recorder.formEmpty"); }
+  // Which of the two forms the pane draws. A live form is the model the tester built, rendered by
+  // the renderer with the input left alone - a case must describe what a respondent can actually do.
+  // When the session cannot record, the real form is not rendered at all and the reading below takes
+  // its place: a blocked session cannot take a keystroke, because there is no control to take one.
+  public get rendersLiveForm(): boolean {
+    return !!this.liveSurvey && !this.blockedReason && this.replayState !== "failed";
+  }
+  public get formBlocked(): boolean {
+    return !!this.blockedReason || this.replayState === "failed";
+  }
+  // The badge over the form, and the tone of it: recording, paused, or with nothing to record onto.
+  public get badgeCss(): string {
+    if (this.formBlocked) return "svt-pill svt-pill--warn";
+    return this.isRecording ? "svt-pill svt-pill--rec" : "svt-pill svt-pill--idle";
+  }
+
+  // The form as a reading rather than as a form. Not the survey with its inputs disabled - the
+  // survey is not rendered at all, so nothing on the page can take an answer that nothing would
+  // record, and a calculated value cannot move under a tester who is not recording and does not know
+  // it. What a view does with this is a list; every sentence in it is decided here.
+  public get staticForm(): ITesterStaticForm {
+    const survey: any = this.liveSurvey;
+    const page: any = !!survey ? survey.currentPage : undefined;
+    const questions: Array<any> = !!page && Array.isArray(page.questions)
+      ? page.questions.filter((question: any) => question.isVisible)
+      : [];
+    const state: string = !!survey && typeof survey.state === "string" ? survey.state : "";
+    return {
+      ariaLabel: testerText("recorder.static.ariaLabel"),
+      whereText: this.describeStaticWhere(page, state),
+      emptyText: !questions.length ? testerText("recorder.static.empty") : "",
+      fields: questions.map((question: any, at: number) => ({
+        key: String(question.name || at),
+        title: staticTitleOf(question),
+        value: staticAnswerOf(question),
+        name: String(question.name || ""),
+      })),
+      submitText: this.describeStaticSubmit(survey, state),
+    };
+  }
+
+  private describeStaticWhere(page: any, state: string): string {
+    if (this.formBlocked) return testerText("recorder.static.whereBlocked");
+    if (state === "completed") return testerText("recorder.static.whereCompleted");
+    if (state === "preview") return testerText("recorder.static.wherePreview");
+    if (state === "starting") return testerText("recorder.static.whereStarting");
+    if (!page) return testerText("recorder.static.whereNone");
+    return testerText("recorder.static.wherePage", page.name || "");
+  }
+
+  // Not a button anywhere: a view draws the shape the control left behind, so the page keeps its
+  // shape across the switch and nothing on it can be pressed.
+  private describeStaticSubmit(survey: any, state: string): string {
+    if (state === "completed") return testerText("recorder.static.submitCompleted");
+    return !!survey && survey.isLastPage === false
+      ? testerText("recorder.static.submitNext")
+      : testerText("recorder.static.submitComplete");
+  }
+
   // ---- the zoom ------------------------------------------------------------------------------------
 
   public get canZoomIn(): boolean { return canZoomIn(this.zoom); }
   public get canZoomOut(): boolean { return canZoomOut(this.zoom); }
   public get isZoomDefault(): boolean { return this.zoom === ZOOM_DEFAULT; }
   public get zoomText(): string { return testerText("recorder.zoom.reading", this.zoom); }
+  // The three buttons say what they do, and the group says what it is about. All four are here for
+  // the same reason as every other sentence: a renderer that spelled them would be three renderers
+  // spelling them.
+  public get zoomLabel(): string { return testerText("recorder.zoom.label"); }
+  public get zoomInLabel(): string { return testerText("recorder.zoom.in"); }
+  public get zoomInMark(): string { return testerText("common.zoomInMark"); }
+  public get zoomOutMark(): string { return testerText("common.zoomOutMark"); }
+  public get zoomOutLabel(): string { return testerText("recorder.zoom.out"); }
+  public get zoomResetLabel(): string { return testerText("recorder.zoom.reset"); }
   // The factor a stylesheet multiplies the theme's base units by, the way the designer's own zoom does.
   public get zoomFactor(): number { return this.zoom / 100; }
   public zoomBy(steps: number): void { this.zoom = zoomBy(this.zoom, steps); }
@@ -1588,3 +1685,27 @@ function signatureOf(step: any): string {
 }
 
 export type { RecorderOptions };
+
+// The title a person reads, in the survey's own words: the rendered one when there is one, because a
+// title with piping in it is what is on the screen and what the reading has to say.
+function staticTitleOf(question: any): string {
+  try {
+    const title = !!question.locTitle && typeof question.locTitle.renderedHtml === "string"
+      ? question.locTitle.renderedHtml
+      : question.title;
+    return typeof title === "string" && !!title ? title : String(question.name || "");
+  } catch{
+    return String(question.name || "");
+  }
+}
+
+function staticAnswerOf(question: any): string {
+  try {
+    if (typeof question.isEmpty === "function" && question.isEmpty()) {
+      return testerText("recorder.static.noAnswer");
+    }
+    return formatValue(question.value, 80);
+  } catch{
+    return testerText("recorder.static.noAnswer");
+  }
+}

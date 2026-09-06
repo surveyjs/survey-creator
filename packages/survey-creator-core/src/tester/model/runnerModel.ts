@@ -9,6 +9,7 @@ import type {
 import type { ConsoleLevel, ConsoleRow } from "../core/consoleLog";
 import { describeEvent, formatRowsAsText, isVisibleAtVerbosity } from "../core/consoleLog";
 import { PauseGate } from "../core/delay";
+import { DELAY_GRANULARITIES } from "../core/hostOptions";
 import type { DelayGranularity, HostOptions, RunMode } from "../core/hostOptions";
 import { applyEvent, createEmptyRun, reconcile, reconcileSegment } from "../core/liveRun";
 import type { LiveRun, LiveTest, RunPhase } from "../core/liveRun";
@@ -115,6 +116,13 @@ export class TesterRunnerModel extends Base implements RunnerApi {
   @property({ defaultValue: false }) canRun!: boolean;
   // Whether the "New test" form is open.
   @property({ defaultValue: false }) naming!: boolean;
+  // What is typed into it, and what a refused Create said. They are properties of this model and not
+  // state of a component for the same reason the rename box is a property of a row: the form is one
+  // question and a button, but what it holds has to survive a repaint of the list under it, and the
+  // sentence a refusal prints has to be the one createTest() returned rather than a second opinion
+  // about names formed in a view.
+  @property({ defaultValue: "" }) newTestName!: string;
+  @property() newTestRefusal!: string | undefined;
 
   // ---- what the list adds up to -------------------------------------------------------------------
   @property({ defaultValue: 0 }) testCount!: number;
@@ -356,6 +364,68 @@ export class TesterRunnerModel extends Base implements RunnerApi {
   public get rowModelList(): Array<TesterTestRowModel> { return this.rowModels; }
   public get hasSuiteIssues(): boolean { return !!this.suiteIssues.length || !!this.mismatchText; }
   public get hasNoTests(): boolean { return !this.rowModels.length; }
+  // The sentences the screen prints around the list. Every one of them is here rather than in a
+  // view, so that three renderers cannot come to word the same screen differently.
+  public get testsTitleText(): string { return testerText("runner.testsTitle", this.testCount); }
+  public get emptyText(): string {
+    return testerText("runner.emptySuite") +
+      (this.canCreateTest ? testerText("runner.emptySuiteCreate") : "");
+  }
+  public get delayLabel(): string { return testerText("runner.delayLabel"); }
+  public get delayUnit(): string { return testerText("runner.delayUnit"); }
+  // The three granularities, as the choices of the select beside the delay. A list and not three
+  // options spelled in a template: the values are the closed enum DelayGranularity is.
+  public get granularityChoices(): Array<{ value: DelayGranularity, text: string }> {
+    return DELAY_GRANULARITIES.map(value => ({
+      value: value, text: testerText("runner.granularity." + value),
+    }));
+  }
+  public get mismatchTitle(): string { return testerText("runner.mismatchTitle"); }
+  public get mismatchNote(): string { return testerText("runner.mismatchNote"); }
+  public get paneEmptyText(): string { return testerText("runner.paneEmpty"); }
+  public get paneHeadlessText(): string { return testerText("runner.paneHeadless"); }
+  public get spectatorAriaLabel(): string {
+    return testerText("runner.spectatorAriaLabel");
+  }
+
+  // ---- the New test form ------------------------------------------------------------------------
+  // One question and one button. Everything else a test can carry - its description, its start, its
+  // options and its variables - is asked for on the recorder screen, in the Test options panel under
+  // the step list, where there is something to describe and something to start from.
+  public get newTestPlaceholder(): string { return testerText("runner.newTestForm.placeholder"); }
+  public get newTestAriaLabel(): string { return testerText("runner.newTestForm.ariaLabel"); }
+  public get newTestCreateText(): string { return testerText("runner.newTestForm.create"); }
+  public get newTestCancelText(): string { return testerText("runner.cancel"); }
+  public get newTestHint(): string { return testerText("runner.newTestForm.hint"); }
+  // A name is refused while it is typed, against the names the list already holds; the create is
+  // still what decides, and what it returns is what newTestRefusal shows.
+  public get newTestTypedProblem(): string | undefined {
+    const trimmed = this.newTestName.trim();
+    if (!trimmed) return testerText("row.nameRequired");
+    return this.rowModels.some(row => row.name === trimmed)
+      ? testerText("row.nameTaken", trimmed)
+      : undefined;
+  }
+  public get newTestProblem(): string | undefined {
+    return this.newTestRefusal || this.newTestTypedProblem;
+  }
+  public get canConfirmNewTest(): boolean { return !this.newTestTypedProblem; }
+  public setNewTestName(text: string): void {
+    this.newTestName = text;
+    this.newTestRefusal = undefined;
+  }
+  // createTest is still the one place that builds a test object, and the string it returns is what
+  // the form shows: nothing here re-implements what it checks.
+  public confirmNewTest(): void {
+    if (!this.canConfirmNewTest) return;
+    const refusal = this.createTest({ name: this.newTestName.trim() });
+    if (!!refusal) {
+      this.newTestRefusal = refusal;
+      return;
+    }
+    this.toggleNaming();
+  }
+
   public get canCreateTest(): boolean {
     return !!this.environment && !!this.environment.extras.newTest;
   }
@@ -394,6 +464,9 @@ export class TesterRunnerModel extends Base implements RunnerApi {
     const test = this.currentTest;
     return !!test && !!test.name ? test.name : testerText("runner.paneTitle");
   }
+  // The badge over the spectator pane is a name and a sentence, and the dash between them is part of
+  // the sentence rather than punctuation a template adds.
+  public get surveyPaneNoteJoin(): string { return testerText("common.noteJoin"); }
   public get surveyPaneNote(): string {
     if (this.isRunning) return testerText("runner.paneNoteRunning");
     const status = !!this.currentTest ? this.currentTest.status : undefined;
@@ -510,7 +583,13 @@ export class TesterRunnerModel extends Base implements RunnerApi {
   public setStepDelayMs(next: number): void { this.patchHost({ stepDelayMs: clampDelay(next) }); }
   public setDelayGranularity(next: DelayGranularity): void { this.patchHost({ delayGranularity: next }); }
   public toggleLog(): void { this.logOnLeft = !this.logOnLeft; }
-  public toggleNaming(): void { this.naming = !this.naming; }
+  // Opening or closing the form empties it: a name half typed and abandoned is not an answer the
+  // next opening should offer back.
+  public toggleNaming(): void {
+    this.naming = !this.naming;
+    this.newTestName = "";
+    this.newTestRefusal = undefined;
+  }
   public copyLog(): void { copyToClipboard(formatRowsAsText(this.rows)); }
   public dismiss(): void { this.callExtra(extras => extras.onDismissNotice); }
   public revealCase(path: string): void {
@@ -594,6 +673,12 @@ export class TesterRunnerModel extends Base implements RunnerApi {
       new Action({
         id: "settings", title: testerText("runner.settings"), tooltip: testerText("runner.settingsTooltip"),
         css: "svt-tests__action", innerCss: "svt-button", enabled: true, visible: false,
+        // The bar draws its own popup for an item whose component says so, and every renderer of the
+        // family registers that component (react's action-bar-item-dropdown.tsx, vue's index.ts,
+        // angular's action-bar-item-dropdown.component.ts). It is a survey-core name and not one of
+        // ours: the popup then hangs from this button rather than from wherever a screen happened to
+        // draw it. SurveyTesterModel is what puts the settings popup on it.
+        component: "sv-action-bar-item-dropdown",
         action: () => this.callExtra(extras => extras.onSettings),
       }),
     ]);
