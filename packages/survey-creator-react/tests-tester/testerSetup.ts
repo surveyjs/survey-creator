@@ -41,8 +41,8 @@ export async function unmount(mounted: Mounted): Promise<void> {
   mounted.container.remove();
 }
 
-// A repaint, and whatever the widget scheduled with it. The model layer publishes on a microtask (see
-// useModel.ts) and a run resolves on promises, so a test that pressed something waits for both.
+// A repaint, and whatever the widget scheduled with it. Adorner subscriptions defer render-event
+// updates to a microtask (see useModel.ts), and a run resolves on promises, so wait for both.
 export async function settle(times = 3): Promise<void> {
   for (let at = 0; at < times; at++) {
     await act(async() => { await Promise.resolve(); });

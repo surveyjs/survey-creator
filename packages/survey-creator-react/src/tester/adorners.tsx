@@ -49,7 +49,7 @@ function Adorned(props: {
   place: "question" | "panel" | "cell" | "page",
 }): React.JSX.Element {
   const adorners = useContext(AdornerContext);
-  useModelUpdates(adorners);
+  useModelUpdates(adorners, true);
   const adorner = !!adorners ? adorners.forElement(props.obj) : undefined;
   return (
     <div className={"svt-adorned svt-adorned--" + props.place}>
@@ -68,7 +68,7 @@ export function Adorner(props: {
   owner: TesterAdornersModel,
 }): React.JSX.Element {
   const { model, owner } = props;
-  useModelUpdates(model);
+  useModelUpdates(model, true);
 
   // The other direction of "is this menu open". The popup closes itself for three reasons this
   // component never hears about - a press outside it, Escape, and a scroll of any parent of the button
@@ -121,7 +121,7 @@ export function Adorner(props: {
 // it is exported rather than registered.
 export function SurveyAdorner(props: { model: TesterAdornersModel }): React.JSX.Element | null {
   const { model } = props;
-  useModelUpdates(model);
+  useModelUpdates(model, true);
   const adorner = model.surveyAdorner;
   if (!adorner) return null;
   return <Adorner model={adorner} owner={model} />;
@@ -144,7 +144,7 @@ ReactElementFactory.Instance.registerElement(TESTER_ADORNED_CELL, (props: any) =
 
 function CellAdorned(props: any): React.JSX.Element {
   const adorners = useContext(AdornerContext);
-  useModelUpdates(adorners);
+  useModelUpdates(adorners, true);
   const adorner = !!adorners ? adorners.forCell(props.cell) : undefined;
   return (
     <div className="svt-adorned svt-adorned--cell">
@@ -163,7 +163,7 @@ ReactElementFactory.Instance.registerElement(TESTER_ADORNED_PAGE, (props: any) =
 
 function PageAdorned(props: any): React.JSX.Element {
   const adorners = useContext(AdornerContext);
-  useModelUpdates(adorners);
+  useModelUpdates(adorners, true);
   const adorner = !!adorners ? adorners.forElement(props.page) : undefined;
   if (!adorner || !adorners) return <SurveyPage {...props} />;
   return (

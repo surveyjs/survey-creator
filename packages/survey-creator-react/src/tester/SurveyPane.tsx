@@ -10,8 +10,8 @@ import { useModelUpdates } from "./useModel";
 //
 // On the runner it is nothing. The model handed over by surveyCreated is live and the tester is driving
 // it, so a keystroke from a person would change the state the next check reads. It is a spectator view:
-// input is blocked by the stylesheet rather than by putting the model into a read-only mode, which
-// would change what the case tests.
+// pointer input is blocked by the stylesheet, and DOM capture listeners block keyboard edits and
+// activation. The model remains editable so commands exercise its normal behavior.
 //
 // On the recorder it is everything. The model is not put into a read-only mode and no pointer events
 // are blocked, because a case must describe what a respondent can actually do - and what a person does
@@ -114,6 +114,15 @@ function cssEscape(value: string): string {
   return value.replace(/["\\]/g, "\\$&");
 }
 
+// Focus still identifies the current target to assistive technology. Tab must be able to leave it,
+// and copying is harmless; editing or activating a focused control would interfere with the run.
+function blockSpectatorInput(event: Event): void {
+  if (event instanceof KeyboardEvent && (event.key === "Tab" ||
+    ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "c"))) return;
+  event.preventDefault();
+  event.stopPropagation();
+}
+
 // The runner's pane: the model of the running test, watched.
 export function SpectatorPane(props: { model: TesterRunnerModel }): React.JSX.Element {
   const { model } = props;
@@ -131,6 +140,15 @@ export function SpectatorPane(props: { model: TesterRunnerModel }): React.JSX.El
     return () => held.release();
   }, []);
 
+  useLayoutEffect(() => {
+    const pane = host.current;
+    if (!pane) return undefined;
+    // Native beforeinput also covers edits that come from mobile keyboards and composition.
+    const events = ["keydown", "keypress", "keyup", "beforeinput", "paste", "cut", "drop", "click"];
+    events.forEach(name => pane.addEventListener(name, blockSpectatorInput, true));
+    return () => events.forEach(name => pane.removeEventListener(name, blockSpectatorInput, true));
+  }, [model.survey]);
+
   if (!model.survey) {
     return (
       <div className="svt-survey-pane svt-survey-pane--empty">
@@ -147,7 +165,7 @@ export function SpectatorPane(props: { model: TesterRunnerModel }): React.JSX.El
       </div>
       {/* Not aria-hidden: focus moves into this pane on every target, and hiding a branch that holds
           the focused element from assistive technology is both a lie and a browser violation. Input
-          stays blocked by pointer-events, which is what keeps a person from corrupting the case. */}
+          is blocked by both the pointer stylesheet and the capture listeners above. */}
       <div className="svt-spectator" ref={host} role="group" aria-label={model.spectatorAriaLabel}>
         <Survey model={model.survey} />
       </div>

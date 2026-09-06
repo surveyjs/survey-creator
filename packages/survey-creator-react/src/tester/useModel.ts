@@ -11,36 +11,38 @@ import type { Base } from "survey-core";
 
 // Repaint when the model changes.
 //
-// The update is scheduled out of the current task rather than applied inside it. A model property is
-// written from two places: an event handler, where a synchronous setState is exactly right, and a
-// render event of survey-core - the element registry feeds the adorner list from onAfterRenderQuestion,
-// which fires inside a commit. A setState raised from inside another component's render is the one
-// thing React asks not to do, and deferring by a microtask makes both cases the ordinary case. Several
-// writes in one task collapse into one repaint, which is also what the runner's own batching wants.
+// Input changes must schedule their repaint inside the event handler. Deferring it lets React restore
+// the previous controlled value first, so the later replacement moves a text input's caret to the end.
+// The adorners opt into deferral: their registry changes during survey render events, and they draw
+// buttons rather than editable text. Several such writes collapse into one repaint.
 //
 // The subscription is made in a layout effect rather than a passive one so that it is in place before
 // the browser paints the first frame of the component that made it.
-export function useModelUpdates(model: Base | undefined): void {
+export function useModelUpdates(model: Base | undefined, deferred = false): void {
   const [, bump] = useState(0);
-  const pending = useRef(false);
-  const alive = useRef(true);
   useLayoutEffect(() => {
-    alive.current = true;
     if (!model) return undefined;
+    let alive = true;
+    let pending = false;
     const onChanged = (): void => {
-      if (pending.current || !alive.current) return;
-      pending.current = true;
+      if (!alive) return;
+      if (!deferred) {
+        bump(count => count + 1);
+        return;
+      }
+      if (pending) return;
+      pending = true;
       queueMicrotask(() => {
-        pending.current = false;
-        if (alive.current) bump(count => count + 1);
+        pending = false;
+        if (alive) bump(count => count + 1);
       });
     };
     model.onPropertyChanged.add(onChanged);
     return () => {
-      alive.current = false;
+      alive = false;
       model.onPropertyChanged.remove(onChanged);
     };
-  }, [model]);
+  }, [model, deferred]);
 }
 
 // Dispose a model the component owns when the component goes - and only then.
@@ -57,18 +59,20 @@ export function useModelUpdates(model: Base | undefined): void {
 // disposal that was never a real unmount. A real unmount has nothing to cancel it, and the model is
 // disposed a tick later, which is soon enough for an AbortController and a scheduled frame.
 export function useOwnedModel<T extends Base>(model: T | undefined): T | undefined {
-  const pending = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  // Cancel only a disposal for the instance being remounted. Replacing A with B must still dispose A.
+  const pending = useRef(new Map<T, ReturnType<typeof setTimeout>>());
   useLayoutEffect(() => {
-    if (pending.current !== undefined) {
-      clearTimeout(pending.current);
-      pending.current = undefined;
-    }
     if (!model) return undefined;
+    const timer = pending.current.get(model);
+    if (timer !== undefined) {
+      clearTimeout(timer);
+      pending.current.delete(model);
+    }
     return () => {
-      pending.current = setTimeout(() => {
-        pending.current = undefined;
+      pending.current.set(model, setTimeout(() => {
+        pending.current.delete(model);
         model.dispose();
-      }, 0);
+      }, 0));
     };
   }, [model]);
   return model;

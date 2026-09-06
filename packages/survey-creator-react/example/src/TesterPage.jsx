@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SurveyTesterModel } from "survey-creator-core/tester";
 import { SurveyTester } from "survey-creator-react/tester";
 import { findSample, formatSuite, samples } from "./testerSamples";
@@ -41,11 +41,14 @@ function write(key, value) {
 export default function TesterPage() {
   const [sampleId, setSampleId] = useState(() => read(SAMPLE_KEY) || samples[0].id);
   const sample = findSample(sampleId);
+  const [model, setModel] = useState(null);
 
   // The host. It is built once per sample, because the two documents it owns are the sample's - and
   // `getTestsText`/`setTestsText` are a pull and a push over the very same string, which is the whole
   // of the contract.
-  const model = useMemo(() => {
+  // Construct in the effect so every setup owns its model, including StrictMode's second setup.
+  // Starting a restored recorder from useMemo would also start work in a render React may discard.
+  useEffect(() => {
     const stored = read(TESTS_KEY + ":" + sample.id);
     let testsText = stored || formatSuite(sample.tests);
     const host = {
@@ -73,23 +76,41 @@ export default function TesterPage() {
       // eslint-disable-next-line no-console
       console.log("the survey definition, at " + path);
     };
-    return built;
-  }, [sample]);
-
-  // The state is persisted on every change of it, which is what makes the reload work. The widget
-  // raises a property change for every screen, selection and cursor move, so one subscription is
-  // enough - there is nothing to poll and no save button anywhere.
-  useEffect(() => {
-    const save = () => write(STATE_KEY + ":" + sample.id, JSON.stringify(model.getState()));
-    model.onPropertyChanged.add(save);
-    save();
+    // Child changes do not bubble to the root. Save after their callbacks finish, when selection,
+    // option values and recorder state have all reached getState(). Skip intermediate restores:
+    // setState starts the recorder replay asynchronously, leaving screen at runner until it finishes.
+    const observed = [built, built.runner, built.settings, built.settings.survey, built.recorder];
+    let active = true;
+    let pending = false;
+    let lastSaved;
+    const save = () => {
+      if (built.transition !== "none") return;
+      const next = JSON.stringify(built.getState());
+      if (next === lastSaved) return;
+      write(STATE_KEY + ":" + sample.id, next);
+      lastSaved = next;
+    };
+    const scheduleSave = () => {
+      if (pending) return;
+      pending = true;
+      queueMicrotask(() => {
+        pending = false;
+        if (active) save();
+      });
+    };
+    observed.forEach(source => source.onPropertyChanged.add(scheduleSave));
+    window.addEventListener("pagehide", save);
+    scheduleSave();
+    setModel(built);
     return () => {
       save();
-      model.onPropertyChanged.remove(save);
+      active = false;
+      observed.forEach(source => source.onPropertyChanged.remove(scheduleSave));
+      window.removeEventListener("pagehide", save);
+      built.dispose();
     };
-  }, [model, sample.id]);
+  }, [sample]);
 
-  useEffect(() => () => model.dispose(), [model]);
   useEffect(() => write(SAMPLE_KEY, sampleId), [sampleId]);
 
   return (
@@ -108,7 +129,7 @@ export default function TesterPage() {
         <a href="#creator" style={linkStyle}>Creator →</a>
       </header>
       <div style={{ flex: 1, minHeight: 0 }}>
-        <SurveyTester model={model} />
+        {!!model && <SurveyTester model={model} />}
       </div>
     </div>
   );
