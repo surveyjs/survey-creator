@@ -3,6 +3,9 @@ import { PropertyGridModelTester } from "./property-grid.base";
 import { CreatorTester } from "../creator-tester";
 import { editorLocalization } from "../../src/editorLocalization";
 
+const euro = "\u20AC"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+const pound = "\u00A3"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+
 export * from "../../src/property-grid/region-options";
 
 function getRegionOptionsPanel(propertyGrid: PropertyGridModelTester): PanelModel {
@@ -26,7 +29,8 @@ test("Region options are shown in their own category", () => {
     "timePattern",
     "decimalSeparator",
     "thousandsSeparator",
-    "currencyPattern"
+    "currencyPattern",
+    "currencySymbol"
   ]);
 });
 
@@ -87,7 +91,7 @@ test("Show a rendered example in the currency pattern placeholder", () => {
   const propertyGrid = new PropertyGridModelTester(survey);
   const panel = getRegionOptionsPanel(propertyGrid);
   const currencyPattern = <QuestionTextModel>panel.getQuestionByName("currencyPattern");
-  //the sign token of the pattern is rendered as the symbol the region reads money in
+  //the sign token of the pattern is rendered as the symbol survey-core curates for the region
   expect(currencyPattern.placeholder).toEqual("\u00A4# ($1,234.56)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   panel.getQuestionByName("locale").value = "de";
@@ -98,10 +102,27 @@ test("Show a rendered example in the currency pattern placeholder", () => {
   //the negative subpattern is not a part of the example
   panel.getQuestionByName("locale").value = "nl";
   expect(currencyPattern.placeholder).toEqual("\u00A4\u00A0#;\u00A4\u00A0-# (\u20AC\u00A01.234,56)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+});
 
-  //a separator authored in the region options outranks the one of the region
+test("Show the inherited currency symbol and let an authored one into the example", () => {
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const panel = getRegionOptionsPanel(propertyGrid);
+  const currencySymbol = <QuestionTextModel>panel.getQuestionByName("currencySymbol");
+  const currencyPattern = <QuestionTextModel>panel.getQuestionByName("currencyPattern");
+  expect(currencySymbol.placeholder).toEqual("$");
+  panel.getQuestionByName("locale").value = "de";
+  expect(currencySymbol.placeholder).toEqual(euro);
+
+  //a symbol authored in the region options outranks the curated one, as it does on a mask
+  currencySymbol.value = pound;
+  expect(currencyPattern.placeholder).toEqual("#\u00A0\u00A4 (1.234,56\u00A0" + pound + ")"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  //an authored separator outranks the one of the region as well
   panel.getQuestionByName("thousandsSeparator").value = " ";
-  expect(currencyPattern.placeholder).toEqual("\u00A4\u00A0#;\u00A4\u00A0-# (\u20AC\u00A01 234,56)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(currencyPattern.placeholder).toEqual("#\u00A0\u00A4 (1 234,56\u00A0" + pound + ")"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  //an override survey-core would reject falls through to the curated symbol, as it does there
+  currencySymbol.value = "12";
+  expect(currencyPattern.placeholder).toEqual("#\u00A0\u00A4 (1 234,56\u00A0" + euro + ")"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 });
 
 test("Resolve the currency symbol of the example through the language subtag", () => {
@@ -149,6 +170,9 @@ test("Region options property names and descriptions", () => {
   const panel = getRegionOptionsPanel(propertyGrid);
   expect(panel.getQuestionByName("locale").title).toEqual("Region");
   expect(panel.getQuestionByName("currencyPattern").title).toEqual("Currency pattern");
+  expect(panel.getQuestionByName("currencySymbol").title).toEqual("Currency symbol");
   expect(panel.getQuestionByName("locale").description)
     .toEqual(editorLocalization.getString("pehelp.regionoptions.locale"));
+  expect(panel.getQuestionByName("currencySymbol").description)
+    .toEqual(editorLocalization.getString("pehelp.regionoptions.currencySymbol"));
 });

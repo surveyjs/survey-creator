@@ -420,7 +420,8 @@ export var enStrings = {
       timePattern: "Time pattern",
       decimalSeparator: "Decimal separator",
       thousandsSeparator: "Thousands separator",
-      currencyPattern: "Currency pattern"
+      currencyPattern: "Currency pattern",
+      currencySymbol: "Currency symbol"
     },
     patternmask: {
       pattern: "Value pattern"
@@ -1693,7 +1694,8 @@ export var enStrings = {
       timePattern: "Overrides the time format that the region uses. The pattern can contain separator characters and the `HH`, `hh`, `MM`, `ss`, and `TT` placeholders. Ex.: hh:MM TT",
       decimalSeparator: "Overrides the symbol that the region uses to separate the fractional part from the integer part of a displayed number.",
       thousandsSeparator: "Overrides the symbol that the region uses to separate the digits of a large number into groups of three.",
-      currencyPattern: "Overrides the placement of the currency symbol that the region uses. In the pattern, `¤` stands for the currency symbol, `#` for the number, and `-` for the minus sign. Ex.: ¤#"
+      currencyPattern: "Overrides the placement of the currency symbol that the region uses. In the pattern, `¤` stands for the currency symbol, `#` for the number, and `-` for the minus sign. Ex.: ¤#",
+      currencySymbol: "Overrides the currency symbol that the region uses. The `currencySymbol` property of an individual input mask overrides this value in turn."
     },
     patternmask: {
       pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."

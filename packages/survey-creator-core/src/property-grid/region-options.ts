@@ -12,7 +12,10 @@ import {
   SurveyModel,
   getLocaleDataLocales,
   getLocaleDataValue,
-  surveyLocalization
+  isValidCurrencyPattern,
+  isValidCurrencySymbol,
+  isValidDecimalSeparator,
+  isValidThousandsSeparator
 } from "survey-core";
 import {
   PropertyGridEditorCollection,
@@ -44,7 +47,8 @@ const regionOptionsFormatFields: Array<keyof ILocaleData> = [
   "timePattern",
   "decimalSeparator",
   "thousandsSeparator",
-  "currencyPattern"
+  "currencyPattern",
+  "currencySymbol"
 ];
 
 // survey-core marks every region options property with the "regionOptions" category, which the
@@ -65,37 +69,15 @@ const regionOptionsPropertyGridDefinition: ISurveyPropertyGridDefinition = {
 // The token a currency pattern writes the currency symbol as.
 const currencySignToken = "¤"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
-// The currency symbol is not locale data - a survey in German may collect dollars, and the symbol
-// a mask renders is its own currencySymbol - so these are read to render the example in the
-// currency pattern placeholder and nowhere else. Each is the symbol of the currency of the region
-// the locale stands for, written the way a respondent of that region reads it; where that symbol
-// is written right to left or is a bare letter that would not read as money next to the number,
-// the ISO code stands in for it. A locale an application adds to localeData has no entry here and
-// resolves through its language subtag to "en", the walk that resolves the pattern itself.
-/* eslint-disable surveyjs/eslint-plugin-i18n/only-english-or-code */
-const regionCurrencySymbols: { [locale: string]: string } = {
-  "ar": "EGP", "bg": "лв.", "ca": "€", "cs": "Kč", "cy": "£", "da": "kr.", "de": "€", "el": "€",
-  "en": "$", "en-au": "$", "en-ca": "$", "en-gb": "£", "en-ie": "€", "en-in": "₹", "en-nz": "$",
-  "en-za": "R", "es": "€", "et": "€", "eu": "€", "fa": "IRR", "fi": "€", "fil": "₱", "fr": "€",
-  "fr-ca": "$", "fr-ch": "CHF", "he": "₪", "hi": "₹", "hr": "€", "ht": "HTG", "hu": "Ft",
-  "id": "Rp", "is": "kr.", "it": "€", "ja": "¥", "ka": "₾", "kk": "₸", "ko": "₩", "lt": "€",
-  "lv": "€", "mk": "ден", "mm": "MMK", "ms": "RM", "nl": "€", "nl-be": "€", "no": "kr",
-  "pl": "zł", "pt": "€", "pt-br": "R$", "ro": "lei", "ru": "₽", "sk": "€", "sl": "€",
-  "sr": "дин.", "sv": "kr", "sw": "KSh", "tel": "₹", "tg": "сом", "th": "฿", "tr": "₺",
-  "uk": "₴", "ur": "Rs", "vi": "₫", "zh": "¥", "zh-cn": "¥", "zh-tw": "NT$"
+// The validator a format field resolves through, the one the mask applies. An override the mask
+// would reject falls through to the curated value there and has to do the same here, or the
+// example would show what the survey does not render.
+const regionOptionsFormatValidators: { [name: string]: (value: string) => boolean } = {
+  "decimalSeparator": isValidDecimalSeparator,
+  "thousandsSeparator": isValidThousandsSeparator,
+  "currencyPattern": isValidCurrencyPattern,
+  "currencySymbol": isValidCurrencySymbol
 };
-/* eslint-enable surveyjs/eslint-plugin-i18n/only-english-or-code */
-
-function getRegionCurrencySymbol(locale: string): string {
-  let loc = surveyLocalization.getCorrectLocaleName(locale || "").toLowerCase();
-  while(!!loc) {
-    const res = regionCurrencySymbols[loc];
-    if (!!res) return res;
-    const index = loc.lastIndexOf("-");
-    loc = index > 0 ? loc.substring(0, index) : "";
-  }
-  return regionCurrencySymbols["en"];
-}
 
 // A region locale is not a survey language: a curated region ("en-gb", "pt-br") has no survey
 // dictionary of its own, so its name comes from the Creator localization. An unknown locale -
@@ -159,15 +141,14 @@ export class PropertyGridEditorQuestionRegionOptions extends PropertyGridEditor 
   }
   // Currency patterns differ between regions only in where the abstract currency sign sits, so
   // the inherited pattern on its own reads the same in almost every region. The sample amount
-  // that follows it makes the difference visible and shows what the pattern produces. The
-  // example is what the pattern renders for the region, so the sign token is resolved as well;
-  // the symbol is the one the region reads money in, not one the survey will use by itself -
-  // that is the currencySymbol of the mask.
+  // that follows it makes the difference visible and shows what the pattern produces. The sign
+  // token is resolved with it: the example renders what a mask of the survey renders, down to
+  // the symbol the region is curated with and any override authored above it.
   private getCurrencyPlaceholder(obj: Base, locale: string, pattern: string): string {
     const decimal = this.getFormatValue(obj, locale, "decimalSeparator") || "";
     const thousands = this.getFormatValue(obj, locale, "thousandsSeparator") || "";
     const amount = "1" + thousands + "234" + decimal + "56";
-    const symbol = getRegionCurrencySymbol(locale);
+    const symbol = this.getFormatValue(obj, locale, "currencySymbol");
     // the negative subpattern repeats the positive one with the minus sign, so the example
     // renders the positive one only. The replacements are functions: a symbol carries a $ that
     // String.replace would otherwise read as a pattern of its own.
@@ -180,9 +161,11 @@ export class PropertyGridEditorQuestionRegionOptions extends PropertyGridEditor 
   // the curated locale default, the order the mask resolves them in.
   private getFormatValue(obj: Base, locale: string, field: keyof ILocaleData): string {
     const survey = <SurveyModel>obj;
+    const isValid = regionOptionsFormatValidators[field];
     const res = !!survey && typeof survey.getRegionOptionValue === "function"
       ? survey.getRegionOptionValue(field) : undefined;
-    return res !== undefined && res !== null ? res : getLocaleDataValue(locale, field);
+    if (res !== undefined && res !== null && (!isValid || isValid(res))) return res;
+    return getLocaleDataValue(locale, field, isValid);
   }
   private getFormatLocale(obj: Base): string {
     const survey = <SurveyModel>obj;
