@@ -1,8 +1,9 @@
 import * as React from "react";
-import { act, StrictMode } from "react";
+import { StrictMode } from "react";
+import { act } from "react-dom/test-utils";
 import { Base } from "survey-core";
 import { useOwnedModel } from "../src/tester/useModel";
-import { mount, prepareEnvironment, unmount } from "./testerSetup";
+import { mount, prepareEnvironment, rerender, unmount } from "./testerSetup";
 
 beforeAll(() => prepareEnvironment());
 
@@ -36,11 +37,11 @@ it("disposes replaced models, including when the new model is undefined", async(
   const disposeSecond = jest.spyOn(second, "dispose");
   const one = await mount(<Owner model={first} />);
   try {
-    await act(async() => { one.root.render(<Owner model={second} />); });
+    await rerender(one, <Owner model={second} />);
     await flushDisposals();
     expect(disposeFirst).toHaveBeenCalledTimes(1);
     expect(disposeSecond).not.toHaveBeenCalled();
-    await act(async() => { one.root.render(<Owner />); });
+    await rerender(one, <Owner />);
     await flushDisposals();
     expect(disposeSecond).toHaveBeenCalledTimes(1);
   } finally {

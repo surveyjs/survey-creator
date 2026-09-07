@@ -1,16 +1,20 @@
-import { act } from "react";
-import { createRoot } from "react-dom/client";
-import type { Root } from "react-dom/client";
+// The package targets React 17, so ReactDOM.render is the API to mount into a real DOM node here.
+/* eslint-disable react/no-deprecated */
+import * as ReactDOM from "react-dom";
+import { act } from "react-dom/test-utils";
 
 // What every test in this project needs before it can mount anything, and what it needs to take it
 // down again. It is here rather than in each file because there are five of them and the ceremony is
 // identical.
 //
+// Mounting is ReactDOM.render into a container of the test's own, and `act` is react-dom/test-utils',
+// because this project runs on the React the package develops against (17) - there is no createRoot
+// and no `act` on the react package there.
+//
 // The two environment stubs are jsdom's gaps, not the widget's: jsdom lays nothing out, so it has no
 // ResizeObserver for the survey's scroll wrapper to ask for and nothing for scrollIntoView to do.
 // Stubbing them keeps the test on the same code path a browser takes rather than on an error path.
 export function prepareEnvironment(): void {
-  (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
   if (typeof (globalThis as any).ResizeObserver !== "function") {
     (globalThis as any).ResizeObserver = class {
       public observe(): void { /* no layout in jsdom */ }
@@ -25,19 +29,23 @@ export function prepareEnvironment(): void {
 
 export interface Mounted {
   container: HTMLElement;
-  root: Root;
 }
 
 export async function mount(element: React.ReactElement): Promise<Mounted> {
   const container = document.createElement("div");
   document.body.appendChild(container);
-  const root = createRoot(container);
-  await act(async() => { root.render(element); });
-  return { container: container, root: root };
+  await act(async() => { ReactDOM.render(element, container); });
+  return { container: container };
+}
+
+// Render something else into the same container: React reconciles it against what is there, which
+// is how a test replaces a prop on a mounted component.
+export async function rerender(mounted: Mounted, element: React.ReactElement): Promise<void> {
+  await act(async() => { ReactDOM.render(element, mounted.container); });
 }
 
 export async function unmount(mounted: Mounted): Promise<void> {
-  await act(async() => { mounted.root.unmount(); });
+  await act(async() => { ReactDOM.unmountComponentAtNode(mounted.container); });
   mounted.container.remove();
 }
 
@@ -72,13 +80,3 @@ export async function waitFor(check: () => boolean, timeoutMs = 30000): Promise<
   }
   await settle();
 }
-
-// Why there is no "press this control the way a person would" helper here.
-//
-// The capture's first rule is `if (!event.isTrusted) return`, because a synthetic event is the
-// application talking to itself and only a person opens a gesture. jsdom marks everything a script
-// dispatches as untrusted and defines the flag as a non-configurable own property of every event, so
-// there is no honest way to forge one - and a test that patched the rule out would be testing a
-// capture that does not exist. What a person does to the form is therefore pinned where it can be:
-// in survey-creator-core's recorder tests, which drive the model directly. What is pinned from here
-// is the seam - that the pane hands its node to attachTo() on mount and calls detach() on unmount.

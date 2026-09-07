@@ -1,5 +1,5 @@
 import * as React from "react";
-import { act } from "react";
+import { act } from "react-dom/test-utils";
 import { SurveyTesterModel } from "survey-creator-core/tester";
 import { SurveyTester } from "../src/tester/SurveyTester";
 import { formatSuite, TesterHostStub } from "./testerHostStub";

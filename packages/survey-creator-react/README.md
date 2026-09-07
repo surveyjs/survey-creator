@@ -155,13 +155,11 @@ const model = new SurveyTesterModel({
 <SurveyTester model={model} />
 ```
 
-**React 18.1 or newer.** This entry declares a peer range of its own — `react >= 18.1` — and the main
-bundle is untouched by it and keeps its 16.5 floor. Two reasons, and both are about being honest rather
-than about taste: the widget's subscription and disposal helpers are hooks, so this entry could not
-serve 16.5 whatever its manifest said; and the lifecycle it depends on is the teardown-and-remount that
-React 18's `StrictMode` performs, which React 17's does not do at all (17 double-invokes render, not
-effects). Its test project therefore runs on React 18, installed beside the package's own 17 as
-`react18` / `react18-dom`.
+**React 16.8 or newer.** The widget's subscription and disposal helpers are hooks, so this entry cannot
+serve the main bundle's 16.5 floor; the main bundle is untouched by it. Its test project runs on the
+React the package develops against (17), mounting under `StrictMode` so that the rehearsal 17 performs
+(a double-invoked render) is exercised; the effect teardown-and-remount that later Reacts add is what
+`useOwnedModel`'s deferred dispose exists for, and it is pinned on 17's own effect lifecycle.
 
 The stylesheet is the model package's and this one adds none: `survey-creator-core/tester.css` is
 emitted beside `survey-creator-core/tester`, and an unstyled widget means that import is missing.
@@ -242,14 +240,14 @@ This monorepo does **not** use npm workspaces: each package installs independent
 
     ```sh
     npm run test                        # whole suite (both Jest projects)
-    npm run test:tester                 # only the Tests widget's, on React 18
+    npm run test:tester                 # only the Tests widget's
     npm run test:dev                    # watch mode
     npm run test:update                 # update snapshots
     ```
 
     There are two Jest projects. `jest.config.js` runs `tests/` on the React the package develops
     against (17); `jest.tester.config.js` runs `tests-tester/` — the Tests widget's React surface — on
-    React 18, which is the floor `survey-creator-react/tester` declares.
+    the same React.
 
 5. **Run end-to-end tests**
 

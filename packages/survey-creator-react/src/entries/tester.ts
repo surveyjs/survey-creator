@@ -9,8 +9,8 @@
 // src/ outside src/tester/ imports any of it and the main survey-creator-react bundle does not grow by
 // a byte. The ESLint fences in .eslintrc.js say so in both directions.
 //
-// React >= 18.1, and this entry alone. The main bundle keeps its 16.5 floor; this one uses hooks and
-// its lifecycle is pinned by a StrictMode test that is only honest on 18 - see the README.
+// React >= 16.8, and this entry alone. The main bundle keeps its 16.5 floor; this one uses hooks, and
+// its lifecycle is pinned by StrictMode tests that run on the 17 this package develops against.
 
 import { checkLibraryVersion } from "survey-core";
 
@@ -30,7 +30,7 @@ export { StepRowView } from "../tester/StepRowView";
 export { Adorner, AdornerContext, CheckMenuView, CheckRowView, SurveyAdorner } from "../tester/adorners";
 
 // The two hooks this bundle is built on. A host writing a component of its own over one of the
-// widget's models needs the first; the second is what makes a model survive React 18's StrictMode
+// widget's models needs the first; the second is what makes a model survive a StrictMode
 // rehearsal.
 export { useModelUpdates, useOwnedModel } from "../tester/useModel";
 

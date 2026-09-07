@@ -1,5 +1,5 @@
 import * as React from "react";
-import { act } from "react";
+import { act } from "react-dom/test-utils";
 import { Model } from "survey-core";
 import { SurveyTesterModel } from "survey-creator-core/tester";
 import { JsonEditorView } from "../src/tester/JsonEditorView";
@@ -21,12 +21,14 @@ it("preserves the JSON caret when typing in the middle of the document", async()
     const area = one.container.querySelector("textarea") as HTMLTextAreaElement;
     area.focus();
     const wanted = area.value.slice(0, 5) + "x" + area.value.slice(5);
-    await act(async() => {
-      // Use the native setter to reproduce a browser edit without updating React's value tracker.
-      Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value")!.set!.call(area, wanted);
-      area.setSelectionRange(6, 6);
-      area.dispatchEvent(new Event("input", { bubbles: true }));
-    });
+    // Use the native setter to reproduce a browser edit without updating React's value tracker. The
+    // event is dispatched outside act on purpose: a discrete event React handles itself commits the
+    // repaint synchronously before it restores the controlled value, which is what a browser does.
+    // Inside act that flush is held back, so React 17 would first put the previous value back - and
+    // the caret at the end - which is not the sequence a person typing ever sees.
+    Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value")!.set!.call(area, wanted);
+    area.setSelectionRange(6, 6);
+    area.dispatchEvent(new Event("input", { bubbles: true }));
     await settle();
     expect(model.json.text).toBe(wanted);
     expect(area.value).toBe(wanted);

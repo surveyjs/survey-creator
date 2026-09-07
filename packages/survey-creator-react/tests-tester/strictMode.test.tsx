@@ -1,6 +1,9 @@
+// The package targets React 17, so ReactDOM.render is the API to mount into a real DOM node here.
+/* eslint-disable react/no-deprecated */
 import * as React from "react";
-import { StrictMode, act } from "react";
-import { createRoot } from "react-dom/client";
+import { StrictMode } from "react";
+import * as ReactDOM from "react-dom";
+import { act } from "react-dom/test-utils";
 import { SurveyTesterModel } from "survey-creator-core/tester";
 import { SurveyTester } from "../src/tester/SurveyTester";
 import { formatSuite, insuranceSurvey, TesterHostStub } from "./testerHostStub";
@@ -8,17 +11,17 @@ import { prepareEnvironment, settle, waitFor } from "./testerSetup";
 
 // StrictMode, which is how a React application mounts in development.
 //
-// React 18 mounts every component, tears it down and mounts it again - all in one commit - to prove
-// that a component survives it. What useMemo and useState hold survives that rehearsal, so a model
-// disposed in the teardown comes back from it dead and the remount then draws it. That is not a quiet
-// failure: survey-react-ui's dropdown reads question.dropdownListModel in componentDidMount, a disposed
-// question has none, and the settings form throws before it can paint. It only ever happens in
-// development, because a production build does not double-invoke - which is exactly why it is asserted
-// here.
+// On the React this project runs on (17), StrictMode double-invokes render - and with it every
+// useState and useMemo initialiser - to prove that a render is pure; effects run once, so there is no
+// teardown-and-remount here. What a rehearsed render must not do is start work the discarded copy
+// would then undo: a model built in an initialiser and disposed by the copy React throws away would
+// come back dead, survey-react-ui's dropdown reads question.dropdownListModel in componentDidMount,
+// and the settings form would throw before it could paint. It only ever happens in development,
+// because a production build does not double-invoke - which is exactly why it is asserted here.
 //
-// This is also the test that decides the bundle's React floor. React 17's StrictMode double-invokes
-// render and not effects, so under 17 this file would pass without exercising the teardown at all.
-// `survey-creator-react/tester` therefore declares React >= 18.1, and this project runs on 18.
+// Later Reacts add an effect teardown-and-remount to the rehearsal. useOwnedModel's deferred dispose
+// is what carries the widget through that one, and useModel.test.tsx pins it on the effect lifecycle
+// 17 does have: a real unmount disposes, a replaced model disposes, and nothing else does.
 
 describe("mounted the way a React application mounts it", () => {
   beforeAll(() => prepareEnvironment());
@@ -38,7 +41,6 @@ describe("mounted the way a React application mounts it", () => {
 
     const container = document.createElement("div");
     document.body.appendChild(container);
-    const root = createRoot(container);
 
     // A throw inside componentDidMount reaches React, not this test, so it is caught through the window
     // the way the prototype's own strict-mode test does: without that, a regression would read as an
@@ -48,10 +50,11 @@ describe("mounted the way a React application mounts it", () => {
     window.addEventListener("error", onError);
     try {
       await act(async() => {
-        root.render(
+        ReactDOM.render(
           <StrictMode>
             <SurveyTester model={model} />
           </StrictMode>,
+          container,
         );
       });
       await settle();
@@ -70,18 +73,17 @@ describe("mounted the way a React application mounts it", () => {
       const form = container.querySelector(".svt-form") as HTMLElement;
       expect(form).toBeTruthy();
       // The survey pane still draws a live survey after the rehearsal - which is precisely what a model
-      // disposed by the teardown would have stopped doing.
+      // disposed by a discarded render would have stopped doing.
       expect(form.querySelector(".sd-root-modern")).toBeTruthy();
       expect(form.querySelectorAll("input[type=radio]").length).toBe(2);
-      // One real mount, one attachTo. StrictMode's rehearsal runs the effect twice, and the second one
-      // is the one the session keeps - the node is the same either way, and the last word is the live
-      // pane's.
+      // One real mount, one attachTo: the rehearsal re-runs render, not the layout effect that hands
+      // the node over, and the last word is the live pane's.
       expect(attached.length).toBeGreaterThan(0);
       expect(attached[attached.length - 1]).toBe(form);
       expect(recorder.pane).toBe(form);
     } finally {
       window.removeEventListener("error", onError);
-      await act(async() => { root.unmount(); });
+      await act(async() => { ReactDOM.unmountComponentAtNode(container); });
       container.remove();
       model.dispose();
     }

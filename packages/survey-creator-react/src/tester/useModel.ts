@@ -6,8 +6,8 @@ import type { Base } from "survey-core";
 //
 // Everything else in src/tester/ is markup. These two are here because they are the only pieces of the
 // widget that are about React itself rather than about the Tests widget, and because both of them are
-// pinned by strictMode.test.tsx - which is the reason this bundle declares React >= 18.1 rather than
-// inheriting the main bundle's 16.5 floor.
+// pinned by strictMode.test.tsx and useModel.test.tsx - and hooks are the reason this bundle needs
+// React >= 16.8 rather than inheriting the main bundle's 16.5 floor.
 
 // Repaint when the model changes.
 //
@@ -47,7 +47,7 @@ export function useModelUpdates(model: Base | undefined, deferred = false): void
 
 // Dispose a model the component owns when the component goes - and only then.
 //
-// The disposal waits for the end of the task, and that is not a flourish. React 18's StrictMode mounts
+// The disposal waits for the end of the task, and that is not a flourish. From 18 on, StrictMode mounts
 // every component, tears it down and mounts it again, in one commit, in development, to prove that a
 // component survives it. What useMemo and useState hold survives that rehearsal: the model handed in
 // here is the same object before and after. So a model disposed in the teardown comes back from the

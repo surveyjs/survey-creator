@@ -1,5 +1,6 @@
 import * as React from "react";
-import { act, StrictMode } from "react";
+import { StrictMode } from "react";
+import { act } from "react-dom/test-utils";
 import type { SurveyTesterModel } from "survey-creator-core/tester";
 import { mount, prepareEnvironment, settle, unmount, waitFor } from "./testerSetup";
 import { samples } from "../example/src/testerSamples";
