@@ -1,4 +1,4 @@
-import { QuestionTextModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionMatrixDropdownModel, Helpers, Serializer } from "survey-core";
+import { QuestionTextModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionMatrixDropdownModel, Helpers, Serializer, matrixDropdownColumnTypes } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { ISurveyPropertyGridDefinition } from "../../src/question-editor/definition";
 
@@ -226,4 +226,76 @@ test("Incorrect order in general tab with preset indeces", () => {
   expect(generalQuestions[2].name).toBe("description");
   expect(generalQuestions[3].name).toBe("inputType");
   expect(generalQuestions[4].name).toBe("maxLength");
+});
+const columnTypeProperties: ISurveyPropertyGridDefinition = {
+  generateOtherTab: false,
+  classes: {
+    question: {
+      properties: [
+        "name",
+        "title",
+        { name: "visibleIf", tab: "logic" }
+      ],
+      tabs: [
+        { name: "logic", index: 15 }
+      ]
+    },
+    file: {
+      properties: [
+        "allowMultiple",
+        { name: "maxSize", tab: "fileSettings" }
+      ],
+      tabs: [
+        { name: "fileSettings", index: 30 }
+      ]
+    },
+    "matrixdropdowncolumn@default": {
+      properties: [
+        "name",
+        "title",
+        "cellType",
+        { name: "visibleIf", tab: "logic" }
+      ],
+      tabs: [
+        { name: "general", index: 5 },
+        { name: "logic", index: 20 }
+      ]
+    }
+  }
+};
+test("Use the standalone question type definition if there is no matrixdropdowncolumn@<type> one, Bug#7976", () => {
+  matrixDropdownColumnTypes["file"] = {};
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const column = matrix.addColumn("col1");
+    column.cellType = "file";
+    const propertyGrid = new PropertyGridModelTester(column, undefined, columnTypeProperties);
+    const panels = propertyGrid.survey.getAllPanels();
+    expect(panels.map(panel => panel.name)).toStrictEqual(["general", "logic", "fileSettings"]);
+    expect(panels[0].elements.map(el => el.name)).toStrictEqual(["name", "title", "cellType", "allowMultiple"]);
+    expect(panels[1].elements.map(el => el.name)).toStrictEqual(["visibleIf"]);
+    expect(panels[2].elements.map(el => el.name)).toStrictEqual(["maxSize"]);
+  } finally {
+    delete matrixDropdownColumnTypes["file"];
+  }
+});
+test("Do not use the standalone question type definition if matrixdropdowncolumn@<type> is defined, Bug#7976", () => {
+  matrixDropdownColumnTypes["file"] = {};
+  const properties = Helpers.createCopy(columnTypeProperties);
+  properties.classes["matrixdropdowncolumn@file"] = {
+    properties: [{ name: "maxSize", tab: "fileSettings" }],
+    tabs: [{ name: "fileSettings", index: 30 }]
+  };
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const column = matrix.addColumn("col1");
+    column.cellType = "file";
+    const propertyGrid = new PropertyGridModelTester(column, undefined, properties);
+    const panels = propertyGrid.survey.getAllPanels();
+    expect(panels.map(panel => panel.name)).toStrictEqual(["general", "logic", "fileSettings"]);
+    expect(panels[0].elements.map(el => el.name)).toStrictEqual(["name", "title", "cellType"]);
+    expect(panels[2].elements.map(el => el.name)).toStrictEqual(["maxSize"]);
+  } finally {
+    delete matrixDropdownColumnTypes["file"];
+  }
 });

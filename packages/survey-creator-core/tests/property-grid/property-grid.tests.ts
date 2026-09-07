@@ -36,7 +36,8 @@ import {
   QuestionBooleanModel,
   QuestionRadiogroupModel,
   PageModel,
-  ActionContainer
+  ActionContainer,
+  matrixDropdownColumnTypes
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -4317,4 +4318,29 @@ test("Move a property into another category by changing the category property if
 
   defaultPropertyGridDefinition.generateOtherTab = true;
   requiredTextProp.category = "";
+});
+test("Use the standalone question type definition for a cell type added into matrixDropdownColumnTypes, Bug#7976", () => {
+  matrixDropdownColumnTypes["file"] = {};
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const column = matrix.addColumn("col1");
+    column.cellType = "file";
+    const propertyGrid = new PropertyGridModelTester(column);
+    const panels = propertyGrid.survey.getAllPanels();
+    expect(panels.map(panel => panel.name)).toStrictEqual(["general", "logic", "data", "totals", "validation"]);
+
+    const generalNames = panels[0].elements.map(el => el.name);
+    expect(generalNames.indexOf("cellType")).toBe(2);
+    ["sourceType", "allowMultiple", "maxFiles", "acceptedTypes", "maxSize"].forEach(name => {
+      expect(generalNames.indexOf(name)).toBeGreaterThan(-1);
+    });
+    ["page", "titleLocation", "startWithNewLine", "indent"].forEach(name => {
+      expect(generalNames.indexOf(name)).toBe(-1);
+    });
+    expect(panels[1].elements.map(el => el.name)).toStrictEqual(["visibleIf", "enableIf", "requiredIf",
+      "defaultValueExpression", "resetValueIf", "setValueIf", "setValueExpression"]);
+    expect(panels[4].elements.map(el => el.name)).toStrictEqual(["validators", "requiredErrorText"]);
+  } finally {
+    delete matrixDropdownColumnTypes["file"];
+  }
 });
