@@ -34,7 +34,7 @@ test("Preset edit model, property grid, setup", () => {
   const propGridCategories = survey.getQuestionByName("propertyGrid_categories");
   expect(propGridCategories).toBeTruthy();
   const categories = propGridCategories.value;
-  expect(categories).toHaveLength(10);
+  expect(categories).toHaveLength(11);
   expect(categories[0].category).toEqual("general");
 });
 test("Preset edit model, property grid, apply", () => {

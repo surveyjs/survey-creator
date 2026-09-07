@@ -874,6 +874,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showPageNumbers", tab: "pages" },
       { name: "gridLayoutEnabled", tab: "pages" },
 
+      { name: "regionOptions", tab: "regionOptions" },
+
       { name: "calculatedValues", tab: "logic" },
       { name: "triggers", tab: "logic" },
 
@@ -911,6 +913,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "navigation", index: 100 },
       { name: "question", index: 200 },
       { name: "pages", index: 250 },
+      { name: "regionOptions", index: 260 },
       { name: "logic", index: 300 },
       { name: "data", index: 400 },
       { name: "validation", index: 500 },
