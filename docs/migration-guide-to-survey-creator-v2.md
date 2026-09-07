@@ -23,7 +23,7 @@ To migrate to the new Survey Creator, uninstall `survey-creator` and install the
 
 ```cmd
 npm uninstall survey-creator
-npm install survey-creator-react --save
+npm install survey-creator-react
 ```
 
 Most of the imports will break after this operation. Run your application and fix import errors shown in the console. As a result, the Survey Creator code should look as follows:
@@ -72,7 +72,7 @@ Survey Creator versions for jQuery and Vue 2 continue to use the Knockout engine
 
 ```cmd
 npm uninstall survey-creator
-npm install survey-creator-knockout --save
+npm install survey-creator-knockout
 ```
 
 ```js
@@ -91,7 +91,7 @@ import "survey-creator-core/survey-creator-core.min.css";
 <!-- <script src="https://unpkg.com/survey-knockout/survey.ko.min.css"></script> -->
 <!-- <script src="https://unpkg.com/survey-knockout/survey.ko.min.js"></script> -->
 
-<!-- <link  href="https://unpkg.com/survey-creator/survey-creator.css" type="text/css" rel="stylesheet"> -->
+<!-- <link  href="https://unpkg.com/survey-creator/survey-creator.css" rel="stylesheet"> -->
 <!-- <script src="https://unpkg.com/survey-creator/survey-creator.min.js"></script> -->
 ```
 
@@ -101,7 +101,7 @@ import "survey-creator-core/survey-creator-core.min.css";
 <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
 <script src="https://unpkg.com/survey-knockout-ui/survey-knockout-ui.min.js"></script>
 
-<link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">
+<link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" rel="stylesheet">
 <script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
 <script src="https://unpkg.com/survey-creator-knockout/survey-creator-knockout.min.js"></script>
 ```

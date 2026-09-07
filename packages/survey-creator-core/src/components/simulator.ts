@@ -92,11 +92,13 @@ export class SurveySimulatorModel extends Base {
   }
   public activateZoom = () => {
     const document = DomDocumentHelper.getDocument();
+    if (!document) return;
     document.addEventListener("keydown", this.listenTryToZoom);
     document.addEventListener("wheel", this.listenTryToZoomWithWheel, { passive: false });
   };
   public deactivateZoom = () => {
     const document = DomDocumentHelper.getDocument();
+    if (!document) return;
     document.removeEventListener("keydown", this.listenTryToZoom);
     document.removeEventListener("wheel", this.listenTryToZoomWithWheel);
   };
@@ -239,7 +241,7 @@ export class SurveySimulatorModel extends Base {
   }
 }
 
-export var DEFAULT_MONITOR_DPI = (typeof DomWindowHelper.getWindow() !== "undefined" ? DomWindowHelper.getWindow().devicePixelRatio : 1) * 96;
+export var DEFAULT_MONITOR_DPI = (DomWindowHelper.getWindow()?.devicePixelRatio || 1) * 96;
 export var simulatorDevices: {
   [index: string]: {
     cssPixelRatio?: number,

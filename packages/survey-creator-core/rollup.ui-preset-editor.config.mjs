@@ -14,7 +14,8 @@ export default () => {
       dir: resolve(buildPath, "fesm"),
       external: ["survey-core", "survey-creator-core"],
       tsconfig: resolve(__dirname, "tsconfig.ui-preset-editor.json"),
-      version: pkg.version
+      version: pkg.version,
+      useEsbuild: true
     }),
     createUmdConfig({
       input: { "ui-preset-editor": resolve(__dirname, "./src/ui-preset-editor/index.ts") },

@@ -4,6 +4,12 @@
 @use "./surface-placeholder.scss";
 @use "../ctr-colors.scss";
 
+// The @font-face rules for this stack come from survey-core.css: the creator always
+// loads it next to its own stylesheet, so the faces are not duplicated here.
+:root, :host {
+  --sjs2-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 survey-creator,
 .svc-creator {
   display: flex;

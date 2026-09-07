@@ -9,10 +9,10 @@ In many use cases, Survey Creator communicates with a remote storage. Use the fo
 
 | Backend Framework | GitHub Repository | Demo Site |
 | ----------------- | ----------------- | --------- |
-| PHP | [SurveyJS + PHP](https://github.com/surveyjs/surveyjs-php) | [Run Demo](https://surveyjs-php.azurewebsites.net/) |
-| ASP.NET Core | [SurveyJS + .NET Core](https://github.com/surveyjs/surveyjs-aspnet-mvc) | [Run Demo](https://surveyjs-aspnet-core.azurewebsites.net/) |
-| NodeJS | [SurveyJS + NodeJS](https://github.com/surveyjs/surveyjs-nodejs)<br>[SurveyJS + NodeJS + PostgreSQL](https://github.com/surveyjs/surveyjs-nodejs-postgresql)<br>[SurveyJS + NodeJS + MongoDB](https://github.com/surveyjs/surveyjs-nodejs-mongodb) | [Run Demo](https://surveyjs-nodejs.azurewebsites.net/) |
-| Python | [SurveyJS + Python](https://github.com/surveyjs/surveyjs-python-flask) | [Run Demo](https://surveyjs-flask.azurewebsites.net/) |
+| PHP | [SurveyJS + PHP](https://github.com/surveyjs/surveyjs-php) | [Run Demo](https://surveyjs-php.demos.surveyjs.io/) |
+| ASP.NET Core | [SurveyJS + .NET Core](https://github.com/surveyjs/surveyjs-aspnet-mvc) | [Run Demo](https://surveyjs-aspnet-mvc.demos.surveyjs.io/) |
+| NodeJS | [SurveyJS + NodeJS](https://github.com/surveyjs/surveyjs-nodejs)<br>[SurveyJS + NodeJS + PostgreSQL](https://github.com/surveyjs/surveyjs-nodejs-postgresql)<br>[SurveyJS + NodeJS + MongoDB](https://github.com/surveyjs/surveyjs-nodejs-mongodb) | [Run Demo](https://surveyjs-nodejs.demos.surveyjs.io/)<br>[Run Demo](https://surveyjs-nodejs-postgresql.demos.surveyjs.io/)<br>[Run Demo](https://surveyjs-nodejs-mongodb.demos.surveyjs.io/) |
+| Python | [SurveyJS + Python](https://github.com/surveyjs/surveyjs-python-flask) | [Run Demo](https://surveyjs-python-flask.demos.surveyjs.io/) |
 
 We also created a plugin for WordPress. You can use it as is or modify it to integrate SurveyJS Form Library and Survey Creator into another CMS:
 

@@ -76,7 +76,7 @@ test("activate creates side-by-side model, no strings surveys, settings shown in
   expect(sidebarPage.visible).toBeTruthy();
   expect(sidebarPage.componentName).toBe("survey-widget");
   expect(sidebarPage.componentData).toBe(model.settingsSurvey);
-  expect(getSettingsQuestion(creator, "viewMode").value).toBe("forms");
+  expect(getSettingsQuestion(creator, "viewMode").value).toBe("form");
   expect(getSettingsQuestion(creator, "sourceLocale").value).toBe("default");
   expect(getSettingsQuestion(creator, "targetLocale").value).toBe("de");
 });
@@ -1396,7 +1396,7 @@ test("element strings dialog: auto-translate button is disabled when all used st
   expect(getMachineAction(grid).enabled).toBeFalsy();
   grid.dispose();
   // q3's title row exists through the name fallback - the name is what it is translated from,
-  // as in the all-languages dialog.
+  // as in the multiple-languages dialog.
   grid = model.createElementStringsModel(creator.survey.getQuestionByName("q3"));
   expect(getMachineAction(grid).enabled).toBeTruthy();
   grid.dispose();
@@ -1622,10 +1622,10 @@ test("element strings dialog: a dialog-only string edited in the matrix does not
   expect(getStringsMatrix(model)).toBe(stringsMatrix);
 });
 
-test("forms view CSV export includes all used locale columns", () => {
+test("form view CSV export includes all used locale columns", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  expect(model.view).toBe("forms");
+  expect(model.view).toBe("form");
   const rows = model.exportToCSV().split("\n");
   const header = rows[0].split(",");
   expect(header[0]).toContain("language"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
@@ -1650,7 +1650,7 @@ test("grid view CSV export covers the whole survey even when the grid is scoped 
   expect(csv).toContain("q4.title");
 });
 
-test("side-by-side model carries no all-languages machinery", () => {
+test("side-by-side model carries no multiple-languages machinery", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
   expect(model instanceof TranslationBase).toBeTruthy();
@@ -2104,4 +2104,24 @@ test("progress link: the clear button drops the language strings after a confirm
   } finally {
     surveySettings.confirmActionAsync = originalCallback;
   }
+});
+
+test("orientation: the panes are arranged horizontally by default and vertically on demand", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  expect(model.orientation).toBe("horizontal");
+  expect(model.sideBySideRootCss).toBe("st-side-by-side");
+
+  const verticalCreator = new CreatorTester({
+    showTranslationTab: true, translationMode: "sideBySide", translationFormViewOrientation: "vertical"
+  });
+  verticalCreator.JSON = JSON.parse(JSON.stringify(sideBySideJSON));
+  verticalCreator.activeTab = "translation";
+  const verticalModel = getModel(verticalCreator);
+  expect(verticalModel.orientation).toBe("vertical");
+  expect(verticalModel.sideBySideRootCss).toBe("st-side-by-side st-side-by-side--vertical");
+  // No target language - the source pane takes the whole surface in both arrangements.
+  verticalModel.targetLocale = "";
+  expect(verticalModel.targetSurvey).toBeFalsy();
+  expect(verticalModel.sideBySideRootCss).toBe("st-side-by-side st-side-by-side--vertical st-side-by-side--no-target");
 });

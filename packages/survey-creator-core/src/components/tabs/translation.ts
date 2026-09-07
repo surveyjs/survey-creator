@@ -55,7 +55,7 @@ function localeEnableIf(params: any): boolean {
 
 FunctionFactory.Instance.register("localeEnableIf", localeEnableIf);
 
-// The all-languages mode of the Translation tab: the strings grid shows a column per selected
+// The multiple-languages mode of the Translation tab: the strings grid shows a column per selected
 // locale, the property grid hosts the languages matrix with visibility checkboxes and the
 // add-language dropdown. Also the base of the machine-translation dialog model (see
 // TranslationForEditor), whose single-locale edit mode stores its state in the same matrix.

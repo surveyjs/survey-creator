@@ -92,7 +92,8 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     this.updateRenderedValue(newValue);
   }
   public onInputChange(event: Event) {
-    if (event.target !== DomDocumentHelper.getDocument().activeElement) {
+    const document = DomDocumentHelper.getDocument();
+    if (!!document && event.target !== document.activeElement) {
       this.updateValueFromInputEvent(event);
     }
   }

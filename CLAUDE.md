@@ -39,8 +39,9 @@ If you change survey-core or a renderer in the survey-library repo, rebuild it t
 
 ```bash
 # survey-creator-core (run from packages/survey-creator-core) — build this before building/testing any UI package
-npm run build          # main JS bundle + non-source files
-npm run build:all      # build + i18n (build:i18n) + themes (build:themes)
+npm run build          # main bundle, then collaboration + ui-presets + ui-preset-editor in parallel
+npm run build:all      # build + i18n + i18n:presets + doc, all four in parallel
+                       # build:themes is a deprecated no-op and is not part of build:all
 
 # UI packages (run from the package dir)
 npm run build          # react / js (rollup) · vue (vite build) · angular (ng build)

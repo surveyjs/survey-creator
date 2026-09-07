@@ -46,10 +46,9 @@ export class CreatorResponsivityManager {
 
   private findCorrectParent(container: HTMLElement) {
     const _window = DomWindowHelper.getWindow();
-    if (!!_window?.getComputedStyle) {
-      if (_window.getComputedStyle(container.parentElement).display === "inline") {
-        return this.findCorrectParent(container.parentElement);
-      }
+    if (!!_window && !!_window.getComputedStyle &&
+      _window.getComputedStyle(container.parentElement).display === "inline") {
+      return this.findCorrectParent(container.parentElement);
     }
     return container.parentElement;
   }

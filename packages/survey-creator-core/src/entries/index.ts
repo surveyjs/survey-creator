@@ -7,7 +7,8 @@ export { editorLocalization, defaultStrings, getLocaleStrings } from "../editorL
 export { editorLocalization as localization } from "../editorLocalization";
 export * from "../creator-settings";
 export * from "../localizable-json";
-export { ICreatorOptions } from "../creator-options";
+
+export type { ICreatorOptions } from "../creator-options";
 
 export * from "../creator-events-api";
 export * from "../creator-base";

@@ -3866,7 +3866,7 @@ test("get survey JSON with pageEditModeValue=single #2711", (): any => {
   try {
     let creator = new CreatorTester({ pageEditMode: "single" });
     creator.text = "";
-    expect(creator.JSON).toStrictEqual({ "headerView": "advanced" });
+    expect(creator.JSON).toStrictEqual({});
   } finally {
     surveySettings.designMode.showEmptyTitles = true;
     surveySettings.designMode.showEmptyDescriptions = true;
@@ -4721,6 +4721,39 @@ test("Panel and inner fields contain original names when a panel which is locate
   expect(panel4.elements).toHaveLength(1);
   const q5 = panel4.elements[0];
   expect(q5.name).toEqual("question2");
+});
+test("Questions nested into choices should get new names on copying a question, Bug#7963", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "checkbox",
+        name: "aiUsage",
+        choices: [
+          {
+            value: "used",
+            text: "I used AI",
+            elements: [
+              { type: "text", name: "aiTool" },
+              { type: "text", name: "aiPurpose" }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("aiUsage");
+  creator.copyQuestion(question);
+  expect(creator.survey.pages[0].questions).toHaveLength(2);
+  const copy = <QuestionCheckboxModel>creator.survey.pages[0].questions[1];
+  expect(copy.name).toEqual("question1");
+  const elements = copy.choices[0].elements;
+  expect(elements).toHaveLength(2);
+  expect(elements[0].name).toEqual("question2");
+  expect(elements[1].name).toEqual("question3");
+  const names = creator.survey.getAllQuestions(false, false, true).map(q => q.name);
+  expect(names).toHaveLength(6);
+  expect(new Set(names).size).toEqual(6);
 });
 test("Do not focus title on mobile", (): any => {
   const creator = new CreatorTester();

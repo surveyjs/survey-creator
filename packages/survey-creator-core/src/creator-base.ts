@@ -13,6 +13,7 @@ import {
   ChoiceItem,
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
+  createBoxShadowResetVariables,
   IConfirmDialogOptions
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
@@ -204,15 +205,20 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
   // Specifies how the Translation tab edits translations:
-  // "allLanguages" - a grid of translatable strings with a column per language,
+  // "multipleLanguages" - a grid of translatable strings with a column per selected language,
   // "sideBySide" - two design-mode instances of the edited survey rendered side by side:
   // a read-only source language on the left and an inline-editable target language on the right.
-  public translationMode: "allLanguages" | "sideBySide" = "allLanguages";
+  public translationMode: "multipleLanguages" | "sideBySide" = "multipleLanguages";
   // How the side-by-side Translation tab renders its editing surface; applies only if
-  // translationMode is "sideBySide": "forms" - two design-mode survey instances side by side,
+  // translationMode is "sideBySide": "form" - two design-mode survey instances side by side,
   // "grid" - a translation grid with a source and a target locale column. Users can
   // switch the view with a button group in the Translation property grid, which updates this property.
-  public translationSideBySideView: "forms" | "grid" = "forms";
+  public translationSideBySideView: "form" | "grid" = "form";
+  // How the two panes of the form view are arranged; applies only if translationMode is
+  // "sideBySide" and translationSideBySideView is "form":
+  // "horizontal" - the source pane left of the target pane, "vertical" - the source pane
+  // above the target pane. Default value: "horizontal".
+  public translationFormViewOrientation: "horizontal" | "vertical" = "horizontal";
   /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *
@@ -2480,9 +2486,6 @@ export class SurveyCreatorModel extends Base
    */
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
     this.expandCollapseManager.clearExpandChoicesStates();
-    if (!json) {
-      json = { "headerView": "advanced" };
-    }
     this.existingPages = {};
     const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
       survey.skeletonHeight = 188;
@@ -2942,8 +2945,8 @@ export class SurveyCreatorModel extends Base
   public getObjectDisplayName(
     obj: Base,
     area: string,
-    reason: string = undefined,
-    displayName: string = undefined
+    reason?: string,
+    displayName?: string
   ): string {
     if (!displayName) {
       displayName = SurveyHelper.getObjectName(obj, this.useElementTitles);
@@ -3371,11 +3374,13 @@ export class SurveyCreatorModel extends Base
       panel.elements.forEach(el => this.setNewNamesCore(el));
     } else {
       this.newQuestions.push(element);
-      const els = Array.isArray(element["templateElements"]) ? element["templateElements"] :
-        (Array.isArray(element["detailElements"]) ? element["detailElements"] : undefined);
-      if (els) {
-        els.forEach(el => this.setNewNamesCore(el));
-      }
+      //Nested elements: a dynamic panel template, a matrix detail panel or questions inside choices.
+      //Columns and multiple text items are filtered out - they are not questions/panels and keep their names.
+      SurveyHelper.getElements(element).forEach(el => {
+        if (SurveyHelper.isPanelOrQuestion(el)) {
+          this.setNewNamesCore(el);
+        }
+      });
     }
   }
   public createNewElement(json: any): IElement {
@@ -4981,7 +4986,7 @@ export class SurveyCreatorModel extends Base
   expandOnDragTimeOut: number = 1000;
 
   selectFromStringEditor: boolean;
-  // Set by the translation side-by-side forms view to learn which editable string got the focus;
+  // Set by the translation side-by-side form view to learn which editable string got the focus;
   // the inline string editors call it on every focus while it is assigned.
   onStringEditorFocusedCallback: (locStr: LocalizableString) => void;
 
@@ -5019,7 +5024,19 @@ export class SurveyCreatorModel extends Base
       .toString();
   }
 
-  @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
+  @property({ defaultValue: {} }) private creatorCssVariables: { [index: string]: string } = {};
+  // The box-shadow reset variables travel inside the style binding itself: anything
+  // set imperatively on the root element's style is wiped whenever a renderer
+  // re-renders the attribute from themeVariables (angular writes [attr.style]
+  // wholesale on every theme change). The resets are static - creator themes never
+  // override the composite border-effect variables, and the reset's color stays a
+  // live var() reference - so they track the active theme without being recomputed.
+  public get themeVariables(): { [index: string]: string } {
+    return Object.assign({}, createBoxShadowResetVariables(), this.creatorCssVariables);
+  }
+  public set themeVariables(val: { [index: string]: string }) {
+    this.creatorCssVariables = val;
+  }
   /**
    * A theme for the Survey Creator UI.
    *

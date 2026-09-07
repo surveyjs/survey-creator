@@ -11,8 +11,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!model.isEmpty && sideBySideModel" class="st-side-by-side"
-      :class="sideBySideModel.targetSurvey ? '' : 'st-side-by-side--no-target'">
+    <div v-if="!model.isEmpty && sideBySideModel" :class="sideBySideModel.sideBySideRootCss">
       <div class="st-side-by-side__source" :key="sideBySideModel.sourceSurvey?.elementIdPrefix" :ref="setSourceScrollElement">
         <SurveyComponent :model="sideBySideModel.sourceSurvey"></SurveyComponent>
       </div>
@@ -31,7 +30,7 @@ import SurfacePlaceholder from "../../components/SurfacePlaceholder.vue";
 const props = defineProps<{ model: TranslationBase }>();
 useBase(() => props.model);
 const sideBySideModel = computed<TranslationSideBySide | undefined>(() =>
-  props.model.isSideBySideForms ? (props.model as TranslationSideBySide) : undefined
+  props.model.isSideBySideForm ? (props.model as TranslationSideBySide) : undefined
 );
 // The strings-grid model: the tab model itself in the default mode and in the side-by-side grid view.
 const stringsModel = computed<TranslationBase | undefined>(() =>

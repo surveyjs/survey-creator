@@ -143,7 +143,7 @@ export var enStrings = {
     translationTargetLanguage: "Target language",
     translationProgress: "{0} of {1} strings translated",
     translationClearProgress: "Are you certain you wish to delete all translated strings for the selected language?",
-    translationSideBySideViewForms: "Form View",
+    translationSideBySideViewForm: "Form View",
     translationSideBySideViewGrid: "Grid View",
     translateStrings: "Translate strings",
     translationSurveyStrings: "Survey Strings",
@@ -685,11 +685,13 @@ export var enStrings = {
     detailPanelMode: "Row details alignment",
     minRowCount: "Minimum row count",
     maxRowCount: "Maximum row count",
+    rowCountExpression: "Row count expression",
     confirmDelete: "Confirm row removal",
     confirmDeleteText: "Confirmation message",
     panelCount: "Initial number of entries",
     minPanelCount: "Minimum number of entries",
     maxPanelCount: "Maximum number of entries",
+    panelCountExpression: "Entry count expression",
     panelsState: "Initial entry state",
     prevPanelText: "\"Previous Entry\" button text",
     nextPanelText: "\"Next Entry\" button text",
@@ -1030,6 +1032,10 @@ export var enStrings = {
       error: "Error",
       warning: "Warning",
       info: "Informational"
+    },
+    cameraFacingMode: {
+      user: "Front",
+      environment: "Rear"
     },
     acceptedCategories: {
       image: "Images",
@@ -1378,9 +1384,11 @@ export var enStrings = {
       copyDefaultValueFromLastEntry: "Duplicates answers from the last entry and assigns them to the next added entry.",
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
       confirmDelete: "Triggers a confirmation prompt before removing an entry.",
+      panelCountExpression: "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually.",
       showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
+      rowCountExpression: "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually.",
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
       detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix."
     },
@@ -1644,6 +1652,7 @@ export var enStrings = {
     value: "Value",
     tabAlign: "Tab alignment",
     sourceType: "File source type",
+    cameraFacingMode: "Default camera",
     fitToContainer: "Fit to container",
     setValueExpression: "Set value expression",
     description: "Description", // Auto-generated string

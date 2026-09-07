@@ -14,7 +14,8 @@ export default () => {
       dir: resolve(buildPath, "fesm/ui-presets"),
       external: [],
       tsconfig: resolve(__dirname, "tsconfig.ui-presets.json"),
-      version: pkg.version
+      version: pkg.version,
+      useEsbuild: true
     }),
     ...[
       { filename: "basic", path: resolve(__dirname, "./src/ui-presets/basic.ts"), globalName: "SurveyCreatorUIPreset.Basic" },

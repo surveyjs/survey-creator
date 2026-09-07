@@ -74,7 +74,7 @@ test.describe(title, () => {
     expect(resultJson.pages[0].elements[0].title.default).toEqual("Question 1");
   });
 
-  test("view switcher: the property grid button group switches between the grid and the forms views", async ({ page }) => {
+  test("view switcher: the property grid button group switches between the grid and the form views", async ({ page }) => {
     await openGridTranslation(page);
     const viewSwitcher = page.locator(".svc-side-bar .spg-question[data-name=viewMode]");
     await expect(viewSwitcher).toBeVisible();

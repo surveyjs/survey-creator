@@ -84,7 +84,7 @@ export { settings } from "survey-creator-core";
 export { svgBundle } from "survey-creator-core";
 export { SurveyLogic, SurveyLogicUI } from "survey-creator-core";
 export { SurveyQuestionEditorDefinition } from "survey-creator-core";
-export { ISurveyCreatorOptions, IPropertyGridEditor } from "survey-creator-core";
+export type { ISurveyCreatorOptions, IPropertyGridEditor } from "survey-creator-core";
 export { ToolboxToolViewModel, PropertyGridEditorCollection } from "survey-creator-core";
 
 import { checkLibraryVersion } from "survey-core";
