@@ -82,6 +82,41 @@ test("Show the inherited format as a placeholder", () => {
   expect(decimalSeparator.placeholder).toEqual(",");
 });
 
+test("Show a rendered example in the currency pattern placeholder", () => {
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const panel = getRegionOptionsPanel(propertyGrid);
+  const currencyPattern = <QuestionTextModel>panel.getQuestionByName("currencyPattern");
+  //the sign token of the pattern is rendered as the symbol the region reads money in
+  expect(currencyPattern.placeholder).toEqual("\u00A4# ($1,234.56)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+
+  panel.getQuestionByName("locale").value = "de";
+  expect(currencyPattern.placeholder).toEqual("#\u00A0\u00A4 (1.234,56\u00A0\u20AC)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  //the example carries the separators of the region as well as the placement of the symbol
+  panel.getQuestionByName("locale").value = "sv";
+  expect(currencyPattern.placeholder).toEqual("#\u00A0\u00A4 (1\u00A0234,56\u00A0kr)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  //the negative subpattern is not a part of the example
+  panel.getQuestionByName("locale").value = "nl";
+  expect(currencyPattern.placeholder).toEqual("\u00A4\u00A0#;\u00A4\u00A0-# (\u20AC\u00A01.234,56)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+
+  //a separator authored in the region options outranks the one of the region
+  panel.getQuestionByName("thousandsSeparator").value = " ";
+  expect(currencyPattern.placeholder).toEqual("\u00A4\u00A0#;\u00A4\u00A0-# (\u20AC\u00A01 234,56)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+});
+
+test("Resolve the currency symbol of the example through the language subtag", () => {
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const panel = getRegionOptionsPanel(propertyGrid);
+  const currencyPattern = <QuestionTextModel>panel.getQuestionByName("currencyPattern");
+  //a locale with no curated entry of its own resolves the same way the pattern does
+  survey.locale = "de-AT";
+  expect(currencyPattern.placeholder).toEqual("#\u00A0\u00A4 (1.234,56\u00A0\u20AC)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  //an alias of a curated locale reaches its entry
+  survey.locale = "ua";
+  expect(currencyPattern.placeholder).toEqual("#\u00A0\u00A4 (1\u00A0234,56\u00A0\u20B4)"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+});
+
 test("Update the placeholders on changing the survey locale", () => {
   const survey = new SurveyModel();
   const propertyGrid = new PropertyGridModelTester(survey);
