@@ -3866,7 +3866,7 @@ test("get survey JSON with pageEditModeValue=single #2711", (): any => {
   try {
     let creator = new CreatorTester({ pageEditMode: "single" });
     creator.text = "";
-    expect(creator.JSON).toStrictEqual({ "headerView": "advanced" });
+    expect(creator.JSON).toStrictEqual({});
   } finally {
     surveySettings.designMode.showEmptyTitles = true;
     surveySettings.designMode.showEmptyDescriptions = true;
