@@ -222,7 +222,7 @@ test("Icon change", () => {
   const tabs = (survey.getQuestionByName("tabs_items") as QuestionMatrixDynamicModel);
   const row = tabs.visibleRows.filter(r => r.value.name == "designer")[0];
   const renderedRow = tabs.renderedTable.rows.filter(r => r.row == row)[0];
-  const iconAction = renderedRow.cells[1].item.value.actions[0];
+  const iconAction = renderedRow.cells[0].item.value.actions[1];
   expect(iconAction.id).toBe("icon-action");
   expect(iconAction.iconName).toBe("icon-config");
 
@@ -239,7 +239,7 @@ test("Icon default", () => {
   matrix.addRow();
 
   const renderedRow = matrix.renderedTable.rows.filter(r => r.row == matrix.visibleRows[0])[0];
-  const iconAction = renderedRow.cells[1].item.value.actions[0];
+  const iconAction = renderedRow.cells[0].item.value.actions[1];
   expect(iconAction.id).toBe("icon-action");
   expect(iconAction.iconName).toBe("square-dashed-24x24");
 });
