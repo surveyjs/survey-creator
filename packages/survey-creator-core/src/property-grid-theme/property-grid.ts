@@ -239,6 +239,8 @@ export var propertyGridCss = {
     iconDragElement: "icon-drag-24x24",
     iconDrag: "spg-matrixdynamic__drag-element",
     toolbar: "",
+    toolbarTop: "",
+    toolbarBottom: "",
     dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
     noRowsSection: "spg-matrixdynamic__placeholder",

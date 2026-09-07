@@ -152,6 +152,8 @@ export var presetsCss = {
     iconDragElement: "icon-drag-24x24",
     iconDrag: "sps-matrixdynamic__drag-element",
     toolbar: "sps-matrixdynamic__footer",
+    toolbarTop: "",
+    toolbarBottom: "",
     dragDropGhostPositionTop: "sps-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "sps-matrixdynamic__drag-drop-ghost-position-bottom",
     noRowsSection: "sps-matrixdynamic__placeholder",
