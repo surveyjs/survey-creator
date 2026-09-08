@@ -446,8 +446,10 @@ test.describe(title + " choices", () => {
     await page.locator(".st-side-by-side__target [data-name=q3] .svc-translation-state").click();
     const dialog = getStringsDialog(page);
     await expect(dialog).toBeVisible();
-    // The dialog is named by the element it translates.
-    await expect(dialog.locator(".sv-popup__body-header")).toHaveText("q3");
+    // The dialog is named by the element it translates: the caption row of its matrix, the
+    // row that carries the caption actions, and not a header of the dialog itself.
+    await expect(dialog.locator(".sv-popup__body-header")).toHaveCount(0);
+    await expect(dialog.locator(".st-element-strings .sd-question__title").first()).toHaveText(/q3/);
 
     // The used/all strings action offers the mode it switches to; Used Strings Only is the
     // default, so empty strings (the matrix has no description) are hidden until then.

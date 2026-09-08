@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, settings as coreSettings } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, LocalizableString, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, settings as coreSettings } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { EmptySurveyCreatorOptions, settings } from "../../src/creator-settings";
@@ -3094,4 +3094,28 @@ test("Page filter dropdown renders page titles with markdown, as the preview tab
 
   tabTranslationPlugin.model.filteredPage = null;
   expect(filterPageAction.locTitle?.textOrHtml).toEqual("All Pages");
+});
+
+test("Page filter dropdown shows page titles, it does not edit them: no inplace string editor", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "Page 1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "Page 2", elements: [{ type: "text", name: "q2" }] }
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  tabTranslationPlugin.activate();
+  const filterPageAction = tabTranslationPlugin["filterPageAction"];
+  const filterPageList = <ListModel>(filterPageAction.data);
+  // The pages and the survey belong to the designer survey, which renders its own strings with
+  // the inplace editor - the editor replaces the rendered markdown with the source text once
+  // focused.
+  const defaultRenderer = LocalizableString.defaultRenderer;
+  expect(filterPageList.actions.map(item => item.locTitle?.renderAs))
+    .toEqual([defaultRenderer, defaultRenderer, defaultRenderer]);
+  expect(filterPageAction.locTitle?.renderAs).toEqual(defaultRenderer);
+
+  tabTranslationPlugin.model.filteredPage = creator.survey.pages[1];
+  expect(filterPageAction.locTitle?.renderAs).toEqual(defaultRenderer);
 });

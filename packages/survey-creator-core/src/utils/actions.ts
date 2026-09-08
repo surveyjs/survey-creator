@@ -7,7 +7,8 @@ import {
   property,
   CssClassBuilder,
   PageModel,
-  LocalizableString
+  LocalizableString,
+  ILocalizableOwner
 } from "survey-core";
 
 export function findAction(actions: Array<IAction>, id: string): IAction {
@@ -74,12 +75,28 @@ export function updateMatixActionsAppearance(actions: Array<IAction>) {
     removeRowAction.appearance = { style: "alert", mode: "quaternary", size: "small" };
   }
 }
+// A localizable string owned by an element of the edited survey is rendered by the creator's
+// inplace string editor (see getRendererForString in creator-base): the editor swaps the
+// rendered markdown for the source text as soon as it gets the focus, and a string shown in a
+// toolbar or in a dropdown is never edited there. This owner keeps the locale and the markdown
+// of the original owner and renders the string as a usual one.
+class ReadOnlyLocalizableOwner implements ILocalizableOwner {
+  constructor(private owner: ILocalizableOwner) { }
+  getLocale(): string { return this.owner.getLocale(); }
+  getMarkdownHtml(text: string, name: string, item?: any): string { return this.owner.getMarkdownHtml(text, name, item); }
+  getProcessedText(text: string): string { return this.owner.getProcessedText(text); }
+  getRenderer(): string { return undefined; }
+  getRendererContext(locStr: LocalizableString): any { return locStr; }
+}
+export function createReadOnlyLocString(owner: ILocalizableOwner, useMarkdown: boolean = false): LocalizableString {
+  return new LocalizableString(new ReadOnlyLocalizableOwner(owner), useMarkdown);
+}
 // Page titles support markdown, so a page selector item (the preview and the translation tabs)
-// shows its title via a localizable string owned by the page - this is what applies the survey
-// onTextMarkdown callback to the title. getDisplayText converts the title text of the current
-// locale into the text to show, an empty title included.
+// shows its title via a localizable string that takes the markdown of the page - this is what
+// applies the survey onTextMarkdown callback to the title. getDisplayText converts the title
+// text of the current locale into the text to show, an empty title included.
 export function createPageSelectorLocTitle(page: PageModel, getDisplayText: (text: string) => string): LocalizableString {
-  const locTitle = new LocalizableString(page, true);
+  const locTitle = createReadOnlyLocString(page, true);
   locTitle.setJson(page.locTitle.getJson());
   locTitle.onGetTextCallback = (text: string): string => getDisplayText(text);
   return locTitle;
