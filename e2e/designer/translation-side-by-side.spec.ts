@@ -564,8 +564,10 @@ test.describe(title + " containers", () => {
     await target.locator(".sd-container-modern__title").locator(".svc-translation-state--untranslated").click();
     const dialog = getStringsDialog(page);
     await expect(dialog).toBeVisible();
-    // A survey without a title is named by the type name.
-    await expect(dialog.locator(".sv-popup__body-header")).toHaveText("Survey");
+    // A survey without a title is named by the type name, in the caption row of the matrix -
+    // the dialog carries no header of its own.
+    await expect(dialog.locator(".sv-popup__body-header")).toHaveCount(0);
+    await expect(dialog.locator(".st-element-strings .sd-question__title").first()).toHaveText(/Survey/);
     // Scoped to the survey-level strings - no rows of the nested elements.
     await expect(dialog.locator("table tr").filter({ hasText: "Question 1" })).toHaveCount(0);
     const row = dialog.locator("table tr").filter({ hasText: "Survey description" });
