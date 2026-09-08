@@ -3063,3 +3063,35 @@ test("checking a locale shows texts applied to the survey while it was unchecked
   const deCell = matrix.visibleRows[0].cells.filter((cell) => cell.column.name === "de")[0];
   expect(deCell.question.value).toEqual("title-de-2");
 });
+
+test("Page filter dropdown renders page titles with markdown, as the preview tab page selector does", () => {
+  const creator = new CreatorTester();
+  creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
+    if (options.area === "designer-tab") {
+      options.survey.onTextMarkdown.add((_, mdOptions) => {
+        if (mdOptions.text.indexOf("<i>") > -1) {
+          mdOptions.html = mdOptions.text + "#markup";
+        }
+      });
+    }
+  });
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "<i>Page 1</i>", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "<i>Page 2</i>", elements: [{ type: "text", name: "q2" }] }
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  tabTranslationPlugin.activate();
+  const filterPageAction = tabTranslationPlugin["filterPageAction"];
+  const filterPageList = <ListModel>(filterPageAction.data);
+  expect(filterPageList.actions.map(item => item.locTitle?.textOrHtml))
+    .toEqual(["All Pages", "<i>Page 1</i>#markup", "<i>Page 2</i>#markup"]);
+  expect(filterPageAction.locTitle?.textOrHtml).toEqual("All Pages");
+
+  tabTranslationPlugin.model.filteredPage = creator.survey.pages[1];
+  expect(filterPageAction.locTitle?.textOrHtml).toEqual("<i>Page 2</i>#markup");
+
+  tabTranslationPlugin.model.filteredPage = null;
+  expect(filterPageAction.locTitle?.textOrHtml).toEqual("All Pages");
+});

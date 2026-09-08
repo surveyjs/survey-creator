@@ -2125,3 +2125,29 @@ test("orientation: the panes are arranged horizontally by default and vertically
   expect(verticalModel.targetSurvey).toBeFalsy();
   expect(verticalModel.sideBySideRootCss).toBe("st-side-by-side st-side-by-side--vertical st-side-by-side--no-target");
 });
+
+test("pages dropdown renders page titles with markdown, as the preview tab page selector does", () => {
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+  creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
+    if (options.area === "designer-tab") {
+      options.survey.onTextMarkdown.add((_, mdOptions) => {
+        if (mdOptions.text.indexOf("<i>") > -1) {
+          mdOptions.html = mdOptions.text + "#markup";
+        }
+      });
+    }
+  });
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "<i>Page 1</i>", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "<i>Page 2</i>", elements: [{ type: "text", name: "q2" }] }
+    ]
+  };
+  creator.activeTab = "translation";
+  const filterPageAction = creator.toolbar.getActionById("svc-translation-filter-page");
+  const items = getListItems(creator, "svc-translation-filter-page");
+  expect(items.map(item => item.locTitle?.textOrHtml)).toEqual(["<i>Page 1</i>#markup", "<i>Page 2</i>#markup"]);
+  expect(filterPageAction.locTitle?.textOrHtml).toBe("<i>Page 1</i>#markup");
+  getModel(creator).selectedPageName = "page2";
+  expect(filterPageAction.locTitle?.textOrHtml).toBe("<i>Page 2</i>#markup");
+});
