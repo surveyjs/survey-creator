@@ -1073,6 +1073,9 @@ svc-question,
   //     }
   //   }
   // }
+  .sd-table-wrapper {
+    --sd-question-container-background: var(--sjs2-color-component-panel-default-bg);
+  }
 
   .sd-table__row-disabled > .sd-table__cell {
     opacity: var(--sjs2-opacity-visible);
