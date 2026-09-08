@@ -5,7 +5,9 @@ import {
   MatrixDropdownRowModelBase,
   Action,
   property,
-  CssClassBuilder
+  CssClassBuilder,
+  PageModel,
+  LocalizableString
 } from "survey-core";
 
 export function findAction(actions: Array<IAction>, id: string): IAction {
@@ -71,4 +73,14 @@ export function updateMatixActionsAppearance(actions: Array<IAction>) {
   if (removeRowAction) {
     removeRowAction.appearance = { style: "alert", mode: "quaternary", size: "small" };
   }
+}
+// Page titles support markdown, so a page selector item (the preview and the translation tabs)
+// shows its title via a localizable string owned by the page - this is what applies the survey
+// onTextMarkdown callback to the title. getDisplayText converts the title text of the current
+// locale into the text to show, an empty title included.
+export function createPageSelectorLocTitle(page: PageModel, getDisplayText: (text: string) => string): LocalizableString {
+  const locTitle = new LocalizableString(page, true);
+  locTitle.setJson(page.locTitle.getJson());
+  locTitle.onGetTextCallback = (text: string): string => getDisplayText(text);
+  return locTitle;
 }
