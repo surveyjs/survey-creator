@@ -79,7 +79,7 @@
 
 .svc-question__content {
   .sd-table__cell--detail-panel {
-    padding-left: var(--sjs2-spacing-x700);
+    padding-left: calc(var(--sjs2-spacing-x100) * 12.5);
   }
 }
 
