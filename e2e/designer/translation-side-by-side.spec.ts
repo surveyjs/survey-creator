@@ -442,7 +442,8 @@ test.describe(title + " choices", () => {
   test("question strings dialog: used/all filter, source column, target edit updates the column choice translation", async ({ page }) => {
     await openSideBySideWithChoices(page);
     // The panes render lazily - scroll the matrix into the view before using its title action.
-    await page.locator(".st-side-by-side__target").evaluate(el => { el.scrollTop = el.scrollHeight; });
+    // The panes share one scroll container in the horizontal arrangement.
+    await page.locator(".st-side-by-side").evaluate(el => { el.scrollTop = el.scrollHeight; });
     await page.locator(".st-side-by-side__target [data-name=q3] .svc-translation-state").click();
     const dialog = getStringsDialog(page);
     await expect(dialog).toBeVisible();
