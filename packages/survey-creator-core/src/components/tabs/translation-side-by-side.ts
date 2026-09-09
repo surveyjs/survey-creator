@@ -1,8 +1,8 @@
 import {
-  Action, AdaptiveActionContainer, Base, DomDocumentHelper, EventBase, Helpers, IDialogOptions, ILocalizableString,
-  ItemValue, LocalizableString, PageModel, PanelModel, PopupBaseViewModel, Question,
-  QuestionCommentModel, QuestionDropdownModel,
-  QuestionMatrixDropdownModel, Serializer, SurveyModel, property,
+  Action, AdaptiveActionContainer, Base, DomDocumentHelper, DomWindowHelper, EventBase, Helpers, IDialogOptions, ILocalizableString,
+  ItemValue, LocalizableString, PageModel, PanelModel, PanelModelBase, PopupBaseViewModel, Question,
+  QuestionCommentModel, QuestionDropdownModel, QuestionRowModel,
+  QuestionMatrixDropdownModel, Serializer, SurveyElement, SurveyModel, property,
   settings as surveySettings, surveyLocalization
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
@@ -15,6 +15,7 @@ import { StringEditorConnector } from "../string-editor";
 import { QuestionLinkValueModel } from "../link-value";
 import { getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { TranslationCopiesMap } from "./translation-copies-map";
+import { TranslationRowEqualizer, equalizerSourceSide, equalizerTargetSide } from "./translation-row-equalizer";
 import {
   TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
   createMachineTranslationAction, runItemsMachineTranslation
@@ -23,6 +24,13 @@ import {
 // A non-breaking space: rendered instead of an empty header string of the source pane to keep
 // the row one text line high (see setupSourceEmptySpaces).
 const emptySpaceText = "\u00A0";
+
+// The key of the isNeedRender subscriptions that pair the lazily rendered rows of the two
+// panes (see TranslationSideBySide.setupLazyRowPairs).
+const lazyRowPairKey = "svc-translation-lazy-rows";
+// How many frames the scroll to an element is repeated while the lazily rendered rows above it
+// materialize (see TranslationSideBySide.keepElementInView).
+const scrollFollowUpFrames = 30;
 
 // The name of the strings matrix of the element dialog. It is the only question of the dialog's
 // own survey, so the name matters nowhere - but a matrix without one falls back to rendering its
@@ -92,6 +100,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // choice lists, keyed by the question name - the panes must expand/collapse together.
   private choicesCollapsedState: { [questionName: string]: boolean } = {};
   public onChoicesCollapsedChanged = new EventBase<Base, any>();
+  // Keeps the paired rows of the two panes the same height (see setupRowEqualization).
+  public readonly rowEqualizer = new TranslationRowEqualizer();
+  // The rows of the two survey copies paired for the lazy rendering (see setupLazyRowPairs).
+  private lazyRowPairs: Array<Array<QuestionRowModel>> = [];
 
   constructor(survey: SurveyModel, options: ISurveyCreatorOptions = null, view: "form" | "grid" = "form",
     orientation: "horizontal" | "vertical" = "horizontal") {
@@ -443,11 +455,53 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (!!page) {
       this.selectedPageName = page.name;
     }
+    // The panes show where the string lives: the owning element is scrolled into the view
+    // (the source counterpart sits at the same offset - the rows are equalized).
+    this.scrollTargetElementIntoView(info.element);
     // The strings dialog of the owning element, not the inline editor of the pane: the pane
     // renders only a part of an element's strings (a title, a description, the choices of a
     // rendered list), and the dialog is the one surface that holds every one of them.
     this.showElementStringsDialog(info.element);
     this.focusElementStringsItem(locStr);
+  }
+  // Scrolls the target pane's copy of a real-survey element into the view. A survey-level string
+  // lives in the header, the top of the pane; a lazily rendered element is forced to render by
+  // the survey's own scroll (see SurveyModel.scrollElementToTop).
+  private scrollTargetElementIntoView(element: Base): void {
+    const survey = this.targetSurvey;
+    if (!survey || !element) return;
+    if (element === this.survey) {
+      const root = survey.rootElement;
+      if (!!root && typeof root.scrollIntoView === "function") root.scrollIntoView({ block: "start" });
+      return;
+    }
+    const key = this.getElementStateKey(element);
+    const copy = !!key ? this.getSurveyObjByStateKey(survey, key) : undefined;
+    if (!copy) return;
+    const question = (<any>copy).isQuestion ? <Question>copy : undefined;
+    const page = (<any>copy).isPage ? <PageModel>copy : <PageModel>(<any>copy).page;
+    const id = (<any>copy).id;
+    survey.scrollElementToTop(<any>copy, question, page, id, false, undefined, undefined,
+      () => this.keepElementInView(survey, id, scrollFollowUpFrames));
+  }
+  // The rows above the scrolled element are skeletons that render as they come into the view
+  // and grow to their real heights, which pushes the element down again - so the scroll is
+  // repeated over the next frames until the element stays in the view.
+  private keepElementInView(survey: SurveyModel, id: string, attempts: number): void {
+    if (attempts <= 0 || this.isDisposed || !DomWindowHelper.isAvailable()) return;
+    DomWindowHelper.requestAnimationFrame(() => {
+      if (this.isDisposed || this.targetSurvey !== survey) return;
+      const root = survey.rootElement;
+      const element = !!root && typeof root.querySelector === "function" ? root.querySelector("#" + id) : undefined;
+      if (!element || typeof element.getBoundingClientRect !== "function" || typeof element.scrollIntoView !== "function") return;
+      // The whole row, not only its top line, has to be in the view (the survey's own check
+      // is satisfied by a row whose top is still on the screen).
+      const rect = element.getBoundingClientRect();
+      const viewHeight = DomWindowHelper.getInnerHeight();
+      const isCut = rect.top < 0 || (viewHeight > 0 && rect.bottom > viewHeight && rect.height <= viewHeight);
+      if (isCut) element.scrollIntoView({ block: "start" });
+      this.keepElementInView(survey, id, attempts - 1);
+    });
   }
   // The string the dialog is asked to focus while its matrix is not in the DOM yet: the model is
   // built here, and the dialog renders it with its next render. The request is kept until the
@@ -736,6 +790,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     }
     if (name === "selectedPageName") {
       this.updateInstancePages();
+      // The rows of the previous page leave the DOM - their pairs are dropped.
+      this.rowEqualizer.scheduleUpdate();
+    }
+    if (name === "orientation") {
+      this.updateScrollMirror();
     }
   }
   // Rebuilds the editing surface after a view change: the grid view builds the strings grid
@@ -882,6 +941,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.buildMappings();
       this.updateInstanceLocales();
       this.updateInstancePages();
+      this.setupLazyRowPairs();
     } finally {
       this._syncing = wasSyncing;
     }
@@ -889,14 +949,17 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // The real-survey element an element state key stands for. Resolved by name, so the entry
   // survives a change that replaced the object (an undo, a JSON reload).
   private getRealObjByStateKey(key: string): Base {
-    if (!key || !this.survey) return undefined;
-    if (key === "survey") return this.survey;
+    return this.getSurveyObjByStateKey(this.survey, key);
+  }
+  private getSurveyObjByStateKey(survey: SurveyModel, key: string): Base {
+    if (!key || !survey) return undefined;
+    if (key === "survey") return survey;
     const index = key.indexOf(":");
     const type = key.substring(0, index);
     const name = key.substring(index + 1);
-    if (type === "page") return this.survey.getPageByName(name);
-    if (type === "panel") return this.survey.getPanelByName(name);
-    return this.survey.getQuestionByName(name);
+    if (type === "page") return survey.getPageByName(name);
+    if (type === "panel") return survey.getPanelByName(name);
+    return survey.getQuestionByName(name);
   }
   // Called (through the plugin's onDesignerSurveyPropertyChanged hook) when the real survey changes:
   // the element strings dialog writes to it, and external code can too.
@@ -961,6 +1024,13 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     } finally {
       this._syncing = false;
     }
+    this.onPaneTextChanged();
+  }
+  // A text of a pane changed its length. The equalizer's observer sees a row that grows, but
+  // not one whose text got shorter - the row is held at the pair's min-height and its box does
+  // not change - so every text change asks for a recomputation explicitly.
+  private onPaneTextChanged(): void {
+    this.rowEqualizer.scheduleUpdate();
   }
   // The target copy's onPropertyValueChangedCallback: forwards inline edits to the real survey.
   public forwardTargetChange(name: string, sender: Base): void {
@@ -1001,6 +1071,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     } finally {
       this._syncing = false;
     }
+    this.onPaneTextChanged();
   }
   // The grid can be scoped to a single page; CSV export must still cover the whole survey,
   // exactly like the form view does.
@@ -1022,8 +1093,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     return this.setupTranslationEditor(
       new TranslationEditor(this.survey, locale, this.options, this.translationStringVisibilityCallback, this));
   }
-  // Keeps the vertical scrollbars of the two panes in sync. The UI components pass their
-  // scrollable containers here; passing null/undefined (on unmount) detaches the listener.
+  // The vertical arrangement gives each pane its own scrollbar and keeps them in sync by
+  // mirroring scrollTop. The UI components pass their pane elements here in every arrangement;
+  // passing null/undefined (on unmount) detaches the listener. In the horizontal arrangement
+  // the panes share one scroll container (see translation.scss) and do not scroll on their
+  // own, so no listener is attached there.
   public setSourceScrollElement(element: HTMLElement): void {
     this.setScrollElement(0, element);
   }
@@ -1032,16 +1106,35 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   }
   private scrollElements: Array<HTMLElement> = [undefined, undefined];
   private scrollHandlers: Array<() => void> = [undefined, undefined];
+  public get isScrollMirrorEnabled(): boolean {
+    return this.orientation === "vertical";
+  }
   private setScrollElement(index: number, element: HTMLElement): void {
     const prev = this.scrollElements[index];
     if (prev === element) return;
-    if (!!prev) prev.removeEventListener("scroll", this.scrollHandlers[index]);
+    this.detachScrollHandler(index);
     this.scrollElements[index] = element || undefined;
-    this.scrollHandlers[index] = undefined;
-    if (!element) return;
+    this.attachScrollHandler(index);
+  }
+  private attachScrollHandler(index: number): void {
+    const element = this.scrollElements[index];
+    if (!element || !this.isScrollMirrorEnabled || !!this.scrollHandlers[index]) return;
     const handler = (): void => this.syncScroll(index);
     this.scrollHandlers[index] = handler;
     element.addEventListener("scroll", handler);
+  }
+  private detachScrollHandler(index: number): void {
+    const element = this.scrollElements[index];
+    const handler = this.scrollHandlers[index];
+    if (!!element && !!handler) element.removeEventListener("scroll", handler);
+    this.scrollHandlers[index] = undefined;
+  }
+  // An orientation change: the mirror follows it on the elements already registered.
+  private updateScrollMirror(): void {
+    [0, 1].forEach(index => {
+      this.detachScrollHandler(index);
+      this.attachScrollHandler(index);
+    });
   }
   // Mirrors scrollTop into the other pane. The mirrored pane's echo scroll event finds the
   // values already equal and stops, so no re-entrancy flag is needed.
@@ -1051,9 +1144,98 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (!from || !to || to.scrollTop === from.scrollTop) return;
     to.scrollTop = from.scrollTop;
   }
+  // The rows of the two panes are equalized pair by pair: a question root, and the title and
+  // description rows of the survey header, of a page and of a panel. Containers (pages, panels,
+  // the rows of the flow layout) are never equalized - padding a panel and its children would
+  // double-pad; leaf rows only, the parent heights follow. The nodes come from the surveys' own
+  // render hooks and are paired by the element name / row name, which are the same in both
+  // copies - and a row rendered on one side only (a panel without a title row) has no pair.
+  private setupRowEqualization(survey: SurveyModel, side: number): void {
+    survey.onAfterRenderQuestion.add((_, options) => {
+      if (isContentElement(options.question)) return;
+      this.rowEqualizer.setNode("question:" + options.question.name, side, options.htmlElement);
+    });
+    survey.onAfterRenderHeader.add((_, options) => {
+      this.setHeaderRowNodes("survey", side, options.htmlElement, ".sd-title", ".sd-description", undefined);
+    });
+    survey.onAfterRenderPage.add((_, options) => {
+      this.setHeaderRowNodes("page:" + options.page.name, side, options.htmlElement, ".sd-page__title", ".sd-page__description", ".sd-page");
+    });
+    survey.onAfterRenderPanel.add((_, options) => {
+      if (isContentElement(options.panel)) return;
+      this.setHeaderRowNodes("panel:" + options.panel.name, side, options.htmlElement, ".sd-panel__title", ".sd-panel__description", ".sd-panel");
+    });
+  }
+  private setHeaderRowNodes(key: string, side: number, root: HTMLElement, titleSelector: string,
+    descriptionSelector: string, containerSelector: string): void {
+    if (!root || typeof root.querySelectorAll !== "function") return;
+    const title = this.findOwnRowNode(root, titleSelector, containerSelector);
+    const description = this.findOwnRowNode(root, descriptionSelector, containerSelector);
+    if (!!title)this.rowEqualizer.setNode(key + ":title", side, title);
+    if (!!description)this.rowEqualizer.setNode(key + ":description", side, description);
+  }
+  // The row of the container itself, not of a nested one (a panel inside a panel).
+  private findOwnRowNode(root: HTMLElement, selector: string, containerSelector: string): HTMLElement {
+    const nodes = root.querySelectorAll(selector);
+    for (let i = 0; i < nodes.length; i++) {
+      const node = <HTMLElement>nodes[i];
+      if (!containerSelector || typeof node.closest !== "function" || node.closest(containerSelector) === root) return node;
+    }
+    return undefined;
+  }
+  // The lazy rendering decides row by row whether a row is rendered or still a skeleton, from
+  // the row's own position - and a skeleton has no question root to pair, so a row rendered in
+  // one pane facing a skeleton in the other is a mismatch the equalizer cannot see. The rows of
+  // the two copies are paired here (the same JSON, the same row set) and a row that renders
+  // makes its counterpart render too.
+  private setupLazyRowPairs(): void {
+    this.clearLazyRowPairs();
+    const source = this.sourceSurvey;
+    const target = this.targetSurvey;
+    if (!source || !target) return;
+    const pairRows = (sourceContainer: PanelModelBase, targetContainer: PanelModelBase): void => {
+      const sourceRows = sourceContainer.rows;
+      const targetRows = targetContainer.rows;
+      const count = Math.min(sourceRows.length, targetRows.length);
+      for (let i = 0; i < count; i++) {
+        this.pairLazyRows(sourceRows[i], targetRows[i]);
+      }
+    };
+    source.pages.forEach(page => {
+      const targetPage = target.getPageByName(page.name);
+      if (!!targetPage) pairRows(page, targetPage);
+    });
+    source.getAllPanels().forEach(panelObj => {
+      const panel = <PanelModel>panelObj;
+      if (isContentElement(panel)) return;
+      const targetPanel = <PanelModel>target.getPanelByName(panel.name);
+      if (!!targetPanel) pairRows(panel, targetPanel);
+    });
+  }
+  private pairLazyRows(sourceRow: QuestionRowModel, targetRow: QuestionRowModel): void {
+    const link = (from: QuestionRowModel, to: QuestionRowModel): void => {
+      from.registerFunctionOnPropertyValueChanged("isNeedRender", () => {
+        if (from.isNeedRender && !to.isNeedRender) to.isNeedRender = true;
+      }, lazyRowPairKey);
+    };
+    link(sourceRow, targetRow);
+    link(targetRow, sourceRow);
+    if (sourceRow.isNeedRender !== targetRow.isNeedRender) {
+      sourceRow.isNeedRender = true;
+      targetRow.isNeedRender = true;
+    }
+    this.lazyRowPairs.push([sourceRow, targetRow]);
+  }
+  private clearLazyRowPairs(): void {
+    this.lazyRowPairs.forEach(pair => pair.forEach(row => {
+      row.unRegisterFunctionOnPropertyValueChanged("isNeedRender", lazyRowPairKey);
+    }));
+    this.lazyRowPairs = [];
+  }
   public dispose(): void {
     this.setSourceScrollElement(undefined);
     this.setTargetScrollElement(undefined);
+    this.rowEqualizer.dispose();
     this.hideElementStringsDialog();
     this.disposeInstances();
     this.selectedLocString = undefined;
@@ -1071,6 +1253,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   public setChoicesCollapsed(questionName: string, value: boolean): void {
     this.choicesCollapsedState[questionName] = value;
     this.onChoicesCollapsedChanged.fire(this, { questionName: questionName, collapsed: value });
+    // A collapsed list is a shorter row (see onPaneTextChanged).
+    this.rowEqualizer.scheduleUpdate();
   }
   // Dropdown/tagbox choices live in a popup that never opens in design mode, so the panes
   // flatten them into a rendered list; matrix cells and other template content are excluded -
@@ -1224,6 +1408,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
   }
   private setupSourceSurvey(survey: SurveyModel): void {
+    this.setupRowEqualization(survey, equalizerSourceSide);
     // No renderer at all: suppresses the built-in design-mode string editor, the source pane is read-only.
     survey.getRendererForString = (): string => undefined;
     // The target pane and the page dropdown follow a source page change through the
@@ -1234,6 +1419,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     });
   }
   private setupTargetSurvey(survey: SurveyModel): void {
+    this.setupRowEqualization(survey, equalizerTargetSide);
     const creator = this.creatorModel;
     if (!!creator) {
       survey.getRendererForString = (element: Base, name: string, item?: ItemValue): string => {
@@ -1489,6 +1675,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private disposeInstances(): void {
     const creator = this.creatorModel;
     if (!!creator)creator.onStringEditorFocusedCallback = undefined;
+    // The rendered rows of the disposed copies leave the DOM - no pairs, natural heights.
+    this.clearLazyRowPairs();
+    this.rowEqualizer.clear();
     if (!!this.surveyTitleToolbar) {
       this.surveyTitleToolbar.dispose();
       this.surveyTitleToolbar = undefined;
@@ -1521,6 +1710,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     } finally {
       this._syncing = wasSyncing;
     }
+    // The texts of the target pane changed their length - the pairs are re-measured.
+    this.rowEqualizer.scheduleUpdate();
   }
   private updateInstancePages(): void {
     const name = this.selectedPageName;

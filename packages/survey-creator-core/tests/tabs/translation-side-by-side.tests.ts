@@ -420,8 +420,13 @@ test("onTranslationItemChanging applies to forwarded edits", () => {
 });
 
 test("source and target panes keep their scrollbars in sync", () => {
-  const creator = createSideBySideCreator();
+  // The vertical arrangement: each pane has a scrollbar of its own, mirrored by the model.
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide", translationFormViewOrientation: "vertical" });
+  creator.JSON = JSON.parse(JSON.stringify(sideBySideJSON));
+  creator.activeTab = "translation";
   const model = getModel(creator);
+  expect(model.orientation).toBe("vertical");
+  expect(model.isScrollMirrorEnabled).toBe(true);
   const source = document.createElement("div");
   const target = document.createElement("div");
   model.setSourceScrollElement(source);
@@ -2126,6 +2131,293 @@ test("orientation: the panes are arranged horizontally by default and vertically
   expect(verticalModel.sideBySideRootCss).toBe("st-side-by-side st-side-by-side--vertical st-side-by-side--no-target");
 });
 
+test("horizontal orientation attaches no scroll mirror; the vertical one does", () => {
+  const creator = createSideBySideCreator();
+  const model = getModel(creator);
+  expect(model.orientation).toBe("horizontal");
+  expect(model.isScrollMirrorEnabled).toBe(false);
+  const source = document.createElement("div");
+  const target = document.createElement("div");
+  model.setSourceScrollElement(source);
+  model.setTargetScrollElement(target);
+  source.scrollTop = 100;
+  source.dispatchEvent(new Event("scroll"));
+  expect(target.scrollTop).toBe(0);
+  target.scrollTop = 40;
+  target.dispatchEvent(new Event("scroll"));
+  expect(source.scrollTop).toBe(100);
+
+  // Switching the arrangement attaches the mirror to the registered elements - and detaches it again.
+  model.orientation = "vertical";
+  expect(model.isScrollMirrorEnabled).toBe(true);
+  source.scrollTop = 70;
+  source.dispatchEvent(new Event("scroll"));
+  expect(target.scrollTop).toBe(70);
+  model.orientation = "horizontal";
+  source.scrollTop = 20;
+  source.dispatchEvent(new Event("scroll"));
+  expect(target.scrollTop).toBe(70);
+  creator.activeTab = "designer";
+});
+
+// The survey the row-height tests render: a panel with a title row, a panel without
+// translatable strings (no title row in either pane) and enough questions for lazy rows.
+const rowPairsJSON = {
+  locale: "de",
+  title: { default: "Survey", de: "Umfrage" },
+  description: "Survey description",
+  pages: [
+    {
+      name: "page1",
+      title: "Page 1",
+      elements: [
+        { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+        { type: "text", name: "q2" },
+        { type: "panel", name: "panel1", title: "Panel 1", elements: [{ type: "text", name: "q3" }] },
+        { type: "panel", name: "panel2", elements: [{ type: "text", name: "q4" }] },
+        { type: "text", name: "q5" },
+        { type: "text", name: "q6" },
+        { type: "text", name: "q7" }
+      ]
+    },
+    { name: "page2", elements: [{ type: "text", name: "q8", title: "Question 8" }] }
+  ]
+};
+function createRowNode(className: string, children: Array<string> = []): HTMLElement {
+  const node = document.createElement("div");
+  node.className = className;
+  children.forEach(child => {
+    const childNode = document.createElement("div");
+    childNode.className = child;
+    node.appendChild(childNode);
+  });
+  document.body.appendChild(node);
+  return node;
+}
+// Plays the render hooks of a pane the way a UI package does: every question of the current
+// page, the page itself, the panels and (on the first page) the survey header.
+function renderPane(survey: any): void {
+  const page = survey.currentPage;
+  if (survey.pages.indexOf(page) === 0) {
+    survey.afterRenderHeader(createRowNode("sd-header", ["sd-title", "sd-description"]));
+  }
+  survey.afterRenderPage(createRowNode("sd-page", ["sd-title sd-page__title", "sd-description sd-page__description"]));
+  page.getAllPanels().forEach(panel => {
+    const children = [];
+    if (panel.hasTitle) children.push("sd-title sd-panel__title");
+    if (panel.hasDescription) children.push("sd-description sd-panel__description");
+    survey.afterRenderPanel(panel, createRowNode("sd-panel", children));
+  });
+  page.questions.forEach(question => {
+    survey.afterRenderQuestion(question, createRowNode("sd-question", ["sd-question__container"]));
+  });
+}
+function createRowPairsCreator(): CreatorTester {
+  const creator = createSideBySideCreator(rowPairsJSON);
+  const model = getModel(creator);
+  renderPane(model.sourceSurvey);
+  renderPane(model.targetSurvey);
+  return creator;
+}
+
+test("row pairing: every question and the header rows rendered on both sides are paired", () => {
+  const creator = createRowPairsCreator();
+  const model = getModel(creator);
+  const equalizer = model.rowEqualizer;
+  ["q1", "q2", "q3", "q4", "q5", "q6", "q7"].forEach(name => {
+    expect(equalizer.hasPair("question:" + name)).toBe(true);
+  });
+  expect(equalizer.hasPair("question:q8")).toBe(false); // page2 is not rendered
+  expect(equalizer.hasPair("survey:title")).toBe(true);
+  expect(equalizer.hasPair("survey:description")).toBe(true);
+  expect(equalizer.hasPair("page:page1:title")).toBe(true);
+  expect(equalizer.hasPair("page:page1:description")).toBe(true);
+  expect(equalizer.hasPair("panel:panel1:title")).toBe(true);
+  // A panel without translatable strings renders no title row in either pane.
+  expect(equalizer.hasPair("panel:panel2:title")).toBe(false);
+  expect(equalizer.getKeys().indexOf("panel:panel2:title")).toBe(-1);
+  // The nodes are the rows themselves, not the containers.
+  expect(equalizer.getNode("page:page1:title", 0).className).toBe("sd-title sd-page__title");
+  expect(equalizer.getNode("question:q1", 1).className).toBe("sd-question");
+  creator.activeTab = "designer";
+});
+
+test("row pairing: the survey header rows are paired on the first page only", () => {
+  const creator = createSideBySideCreator(rowPairsJSON);
+  const model = getModel(creator);
+  model.selectedPageName = "page2";
+  renderPane(model.sourceSurvey);
+  renderPane(model.targetSurvey);
+  expect(model.rowEqualizer.hasPair("question:q8")).toBe(true);
+  expect(model.rowEqualizer.hasPair("survey:title")).toBe(false);
+  expect(model.rowEqualizer.hasPair("question:q1")).toBe(false);
+  creator.activeTab = "designer";
+});
+
+test("row equalization: both roots get the larger natural height, shrink back, drop gone nodes, clear on dispose", () => {
+  const creator = createRowPairsCreator();
+  const model = getModel(creator);
+  const equalizer = model.rowEqualizer;
+  // jsdom has no layout and no ResizeObserver - the natural heights are faked per node.
+  expect(equalizer.isObserving).toBe(false);
+  equalizer.measureHeight = (node: HTMLElement): number => (<any>node).naturalHeight || 0;
+  const sourceQ1 = equalizer.getNode("question:q1", 0);
+  const targetQ1 = equalizer.getNode("question:q1", 1);
+  const sourceTitle = equalizer.getNode("survey:title", 0);
+  const targetTitle = equalizer.getNode("survey:title", 1);
+  (<any>sourceQ1).naturalHeight = 40;
+  (<any>targetQ1).naturalHeight = 60;
+  (<any>sourceTitle).naturalHeight = 30;
+  (<any>targetTitle).naturalHeight = 24;
+  equalizer.update();
+  expect(sourceQ1.style.minHeight).toBe("60px");
+  expect(targetQ1.style.minHeight).toBe("60px");
+  expect(sourceQ1.style.boxSizing).toBe("border-box");
+  expect(sourceTitle.style.minHeight).toBe("30px");
+  expect(targetTitle.style.minHeight).toBe("30px");
+  // A row without a natural height (not laid out) gets no min-height.
+  expect(equalizer.getNode("question:q2", 0).style.minHeight).toBe("");
+
+  // The taller side shrinks (an edit removed text): both recompute down.
+  (<any>targetQ1).naturalHeight = 30;
+  equalizer.update();
+  expect(sourceQ1.style.minHeight).toBe("40px");
+  expect(targetQ1.style.minHeight).toBe("40px");
+
+  // A node that left the DOM (a page switch, a re-render) drops out of its pair, and the
+  // remaining side returns to its natural height.
+  targetQ1.parentElement.removeChild(targetQ1);
+  equalizer.update();
+  expect(equalizer.hasPair("question:q1")).toBe(false);
+  expect(sourceQ1.style.minHeight).toBe("");
+  expect(targetQ1.style.minHeight).toBe("");
+  // A re-rendered row (a new node for the same key) pairs again.
+  const newTargetQ1 = createRowNode("sd-question");
+  (<any>newTargetQ1).naturalHeight = 55;
+  model.targetSurvey.afterRenderQuestion(model.targetSurvey.getQuestionByName("q1"), newTargetQ1);
+  equalizer.update();
+  expect(equalizer.getNode("question:q1", 1)).toBe(newTargetQ1);
+  expect(sourceQ1.style.minHeight).toBe("55px");
+  expect(newTargetQ1.style.minHeight).toBe("55px");
+
+  // dispose() clears every inline min-height and drops the pairs.
+  creator.activeTab = "designer";
+  expect(sourceQ1.style.minHeight).toBe("");
+  expect(newTargetQ1.style.minHeight).toBe("");
+  expect(sourceTitle.style.minHeight).toBe("");
+  expect(sourceQ1.style.boxSizing).toBe("");
+  expect(equalizer.getKeys()).toHaveLength(0);
+  // A disposed equalizer ignores late render hooks and explicit updates.
+  equalizer.setNode("question:q1", 0, createRowNode("sd-question"));
+  expect(equalizer.getKeys()).toHaveLength(0);
+  expect(() => equalizer.update()).not.toThrow();
+});
+
+test("row equalization: the observer is optional, and used when the environment has one", () => {
+  // jsdom: no ResizeObserver - the model builds without throwing and works on explicit updates
+  // (the test above). With a ResizeObserver every paired node is observed by the one instance,
+  // and dispose() disconnects it.
+  const observed: Array<HTMLElement> = [];
+  const unobserved: Array<HTMLElement> = [];
+  let instances = 0;
+  let disconnected = 0;
+  class FakeResizeObserver {
+    constructor(public callback: () => void) { instances++; }
+    observe(node: HTMLElement): void { observed.push(node); }
+    unobserve(node: HTMLElement): void { unobserved.push(node); }
+    disconnect(): void { disconnected++; }
+  }
+  (<any>globalThis).ResizeObserver = FakeResizeObserver;
+  try {
+    const creator = createRowPairsCreator();
+    const model = getModel(creator);
+    const equalizer = model.rowEqualizer;
+    expect(equalizer.isObserving).toBe(true);
+    expect(instances).toBe(1);
+    expect(observed.indexOf(equalizer.getNode("question:q1", 0))).toBeGreaterThanOrEqual(0);
+    expect(observed.indexOf(equalizer.getNode("question:q1", 1))).toBeGreaterThanOrEqual(0);
+    const sourceQ1 = equalizer.getNode("question:q1", 0);
+    creator.activeTab = "designer";
+    expect(unobserved.indexOf(sourceQ1)).toBeGreaterThanOrEqual(0);
+    expect(disconnected).toBe(1);
+  } finally {
+    delete (<any>globalThis).ResizeObserver;
+  }
+});
+
+test("row equalization: clearing the target language drops the pairs and the source rows return to their natural heights", () => {
+  const creator = createRowPairsCreator();
+  const model = getModel(creator);
+  const equalizer = model.rowEqualizer;
+  equalizer.measureHeight = (node: HTMLElement): number => (<any>node).naturalHeight || 0;
+  const sourceQ1 = equalizer.getNode("question:q1", 0);
+  (<any>sourceQ1).naturalHeight = 40;
+  (<any>equalizer.getNode("question:q1", 1)).naturalHeight = 60;
+  equalizer.update();
+  expect(sourceQ1.style.minHeight).toBe("60px");
+
+  model.targetLocale = "";
+  expect(model.targetSurvey).toBeFalsy();
+  expect(sourceQ1.style.minHeight).toBe("");
+  expect(equalizer.getKeys()).toHaveLength(0);
+  // The rebuilt source pane renders alone: its rows register, nothing pairs, nothing is padded.
+  renderPane(model.sourceSurvey);
+  equalizer.measureHeight = (): number => 40;
+  equalizer.update();
+  expect(equalizer.getPairedKeys()).toHaveLength(0);
+  expect(equalizer.getNode("question:q1", 0).style.minHeight).toBe("");
+
+  // A target language again: fresh copies, fresh pairs.
+  model.targetLocale = "de";
+  renderPane(model.sourceSurvey);
+  renderPane(model.targetSurvey);
+  expect(equalizer.hasPair("question:q1")).toBe(true);
+  creator.activeTab = "designer";
+});
+
+test("lazy rendering: a row that renders in one pane makes its counterpart render too", () => {
+  const creator = createSideBySideCreator(rowPairsJSON);
+  const model = getModel(creator);
+  const sourceRows = model.sourceSurvey.pages[0].rows;
+  const targetRows = model.targetSurvey.pages[0].rows;
+  expect(sourceRows.length).toBe(targetRows.length);
+  expect(sourceRows.length).toBeGreaterThan(4);
+  // The panes render lazily: the rows beyond the first batch start as skeletons on both sides.
+  expect(model.sourceSurvey.isLazyRendering).toBe(true);
+  const lastIndex = sourceRows.length - 1;
+  expect(sourceRows[lastIndex].isNeedRender).toBe(false);
+  expect(targetRows[lastIndex].isNeedRender).toBe(false);
+  expect(sourceRows[lastIndex - 1].isNeedRender).toBe(false);
+
+  sourceRows[lastIndex].isNeedRender = true;
+  expect(targetRows[lastIndex].isNeedRender).toBe(true);
+  targetRows[lastIndex - 1].isNeedRender = true;
+  expect(sourceRows[lastIndex - 1].isNeedRender).toBe(true);
+  // The rows of a panel are paired as well.
+  const sourcePanelRows = (<any>model.sourceSurvey.getPanelByName("panel1")).rows;
+  const targetPanelRows = (<any>model.targetSurvey.getPanelByName("panel1")).rows;
+  expect(sourcePanelRows.length).toBe(1);
+  targetPanelRows[0].isNeedRender = false;
+  sourcePanelRows[0].isNeedRender = false;
+  sourcePanelRows[0].isNeedRender = true;
+  expect(targetPanelRows[0].isNeedRender).toBe(true);
+
+  // A rebuild pairs the fresh copies; the old rows are let go.
+  const oldSourceRow = sourceRows[lastIndex];
+  model.rebuildInstances();
+  const newSourceRows = model.sourceSurvey.pages[0].rows;
+  const newTargetRows = model.targetSurvey.pages[0].rows;
+  expect(newSourceRows[lastIndex].isNeedRender).toBe(false);
+  newSourceRows[lastIndex].isNeedRender = true;
+  expect(newTargetRows[lastIndex].isNeedRender).toBe(true);
+  oldSourceRow.isNeedRender = false;
+  oldSourceRow.isNeedRender = true;
+  expect(newTargetRows[lastIndex - 1].isNeedRender).toBe(false);
+  // No target pane, nothing to pair with - the source rows render on their own.
+  model.targetLocale = "";
+  expect(() => { model.sourceSurvey.pages[0].rows[lastIndex].isNeedRender = true; }).not.toThrow();
+  creator.activeTab = "designer";
+});
 test("pages dropdown renders page titles with markdown, as the preview tab page selector does", () => {
   const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
   creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
