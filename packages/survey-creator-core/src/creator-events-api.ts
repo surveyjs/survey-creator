@@ -1,6 +1,6 @@
 import {
   Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
-  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme
+  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme, ISurveyVariablePresets
 } from "survey-core";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
@@ -1225,4 +1225,16 @@ export interface AllowInplaceEditEvent {
    * @since 2.3.7
    */
   allow: boolean;
+}
+// Raised when the active variable preset changes or the preset container is edited. Creator has no
+// user-settings layer, so it does not persist the choice itself (issue #7982): a host that wants the
+// selection or the edited presets to survive a reload saves them here and assigns them back on the
+// next construction.
+export interface VariablePresetsChangedEvent {
+  // "select" - the active preset changed; "edit" - the preset list or a preset's values changed.
+  reason: string;
+  // The whole container, as the creator holds it.
+  variablePresets: ISurveyVariablePresets;
+  // The name of the active preset, or an empty string when none is active.
+  active: string;
 }

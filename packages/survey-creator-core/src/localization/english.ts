@@ -273,6 +273,13 @@ export var enStrings = {
       uncompletedRule_cancel: "No, I want to complete the rules"
     }
   },
+  // Host application variables
+  vp: {
+    selectorTitle: "Variables",
+    noPreset: "No variables",
+    view: "View",
+    viewTitle: "Variable values"
+  },
   // Property Editors
   pe: {
     panel: {
