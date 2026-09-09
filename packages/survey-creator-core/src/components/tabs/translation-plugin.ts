@@ -7,7 +7,7 @@ import { Translation, TranslationBase, createImportCSVAction, createExportCSVAct
 import { TranslationSideBySide } from "./translation-side-by-side";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { isDefaultLocale } from "../../survey-helper";
-import { createPageSelectorLocTitle } from "../../utils/actions";
+import { createPageSelectorLocTitle, createReadOnlyLocString } from "../../utils/actions";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
   private filterStringsAction: Action;
@@ -491,7 +491,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.filterPageAction.locTitle = !!page ? this.createPageLocTitle(page) : this.createAllPagesLocTitle();
   }
   private createAllPagesLocTitle(): LocalizableString {
-    const locTitle = new LocalizableString(this.creator.survey);
+    const locTitle = createReadOnlyLocString(this.creator.survey);
     locTitle.onGetTextCallback = (): string => this.showAllPagesText;
     return locTitle;
   }

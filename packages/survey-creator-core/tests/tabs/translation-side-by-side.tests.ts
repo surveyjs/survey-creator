@@ -1,6 +1,6 @@
 import {
   AdaptiveActionContainer, ItemValue, ListModel, QuestionCheckboxModel, QuestionCommentModel,
-  QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionTextModel, settings as surveySettings
+  LocalizableString, QuestionDropdownModel, QuestionMatrixDropdownModel, QuestionTextModel, settings as surveySettings
 } from "survey-core";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
 import {
@@ -13,6 +13,8 @@ import { TabTranslationPlugin } from "../../src/components/tabs/translation-plug
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
 import "survey-core/survey.i18n";
+
+const defaultStringRenderer = LocalizableString.defaultRenderer;
 
 const sideBySideJSON = {
   locale: "de",
@@ -672,9 +674,8 @@ test("element strings dialog: a matrix over the real question, its own survey, e
   expect(model.elementStringsSurvey.getAllQuestions()).toHaveLength(1);
   const stringsMatrix = getStringsMatrix(model);
   expect(stringsMatrix.getType()).toBe("matrixdropdown");
-  // No caption text: the dialog's own title names the element. The title row itself stays -
-  // it carries the caption's actions.
-  expect(stringsMatrix.locTitle.renderedHtml).toBe("");
+  // The caption row names the element the dialog edits, and it carries the caption's actions.
+  expect(stringsMatrix.locTitle.renderedHtml).toBe("q3");
   expect(stringsMatrix.hasTitle).toBeTruthy();
   // The matrix's styles are scoped to its own class.
   expect(stringsMatrix.cssClasses.mainRoot).toContain("st-element-strings");
@@ -1511,7 +1512,10 @@ test("element strings dialog: shown as a modal over the element's own survey, wi
     // The dialog renders the model's own survey through the component every UI package registers.
     expect(options.componentName).toBe("survey-widget");
     expect(options.data.model).toBe(model.elementStringsSurvey);
-    expect(options.title).toBe("Question 1");
+    // The dialog carries no title of its own: the element it edits is named by the caption
+    // row of the strings matrix, which renders it as a survey element title does.
+    expect(options.title).toBeUndefined();
+    expect(getStringsMatrix(model).locTitle.renderedHtml).toBe("Question 1");
     expect(options.cssClass).toContain("st-element-strings-dialog");
     // The edits apply immediately: the apply/cancel pair is replaced by one closing button.
     expect(dialogs[0].footerToolbar.actions).toHaveLength(1);
@@ -1526,11 +1530,11 @@ test("element strings dialog: shown as a modal over the element's own survey, wi
     expect(stringsSurvey.isDisposed).toBeTruthy();
     // The pages, the panels and the survey itself are named by their title as well.
     model.showPageStringsDialog(model.targetSurvey.getPageByName("page2"));
-    expect(dialogs[1].options.title).toBe("Page 2 title");
+    expect(getStringsMatrix(model).locTitle.renderedHtml).toBe("Page 2 title");
     model.showPanelStringsDialog(<any>model.targetSurvey.getPanelByName("panel1"));
-    expect(dialogs[2].options.title).toBe("Panel 1");
+    expect(getStringsMatrix(model).locTitle.renderedHtml).toBe("Panel 1");
     model.showSurveyStringsDialog();
-    expect(dialogs[3].options.title).toBe("Survey title");
+    expect(getStringsMatrix(model).locTitle.renderedHtml).toBe("Survey title");
   });
 });
 
@@ -2442,4 +2446,59 @@ test("pages dropdown renders page titles with markdown, as the preview tab page 
   expect(filterPageAction.locTitle?.textOrHtml).toBe("<i>Page 1</i>#markup");
   getModel(creator).selectedPageName = "page2";
   expect(filterPageAction.locTitle?.textOrHtml).toBe("<i>Page 2</i>#markup");
+});
+
+test("pages dropdown shows page titles, it does not edit them: no inplace string editor", () => {
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "Page 1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "Page 2", elements: [{ type: "text", name: "q2" }] }
+    ]
+  };
+  creator.activeTab = "translation";
+  const filterPageAction = creator.toolbar.getActionById("svc-translation-filter-page");
+  const items = getListItems(creator, "svc-translation-filter-page");
+  // The pages belong to the designer survey, which renders its own strings with the inplace
+  // editor - the editor replaces the rendered markdown with the source text once focused.
+  expect(items.map(item => item.locTitle?.renderAs)).toEqual([defaultStringRenderer, defaultStringRenderer]);
+  expect(filterPageAction.locTitle?.renderAs).toBe(defaultStringRenderer);
+  getModel(creator).selectedPageName = "page2";
+  expect(filterPageAction.locTitle?.renderAs).toBe(defaultStringRenderer);
+});
+
+test("element strings dialog: the caption row names the element, with the markdown of the edited survey", () => {
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+  creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
+    if (options.area === "designer-tab") {
+      options.survey.onTextMarkdown.add((_, mdOptions) => {
+        mdOptions.html = mdOptions.text + "#markup";
+      });
+    }
+  });
+  creator.JSON = {
+    locale: "de",
+    title: "Survey title",
+    pages: [{
+      name: "page1", title: "Page 1",
+      elements: [{ type: "text", name: "q1", title: "Question 1" }, { type: "text", name: "q2" }]
+    }]
+  };
+  creator.activeTab = "translation";
+  const model = getModel(creator);
+  // The dialog has no title of its own: the element it edits is named by the caption row of the
+  // strings matrix, and the markdown comes from the survey being translated - the dialog's own
+  // survey carries no markdown handler of the application.
+  const getCaption = (element: any): string => {
+    model.showElementStringsDialog(element);
+    const caption = getStringsMatrix(model).locTitle.textOrHtml;
+    model.hideElementStringsDialog();
+    return caption;
+  };
+  const survey = creator.survey;
+  expect(getCaption(survey)).toBe("Survey title#markup");
+  expect(getCaption(survey.pages[0])).toBe("Page 1#markup");
+  expect(getCaption(survey.getQuestionByName("q1"))).toBe("Question 1#markup");
+  // A question with no title of its own is named by its name, as it is everywhere else.
+  expect(getCaption(survey.getQuestionByName("q2"))).toBe("q2#markup");
 });

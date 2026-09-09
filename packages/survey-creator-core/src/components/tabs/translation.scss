@@ -455,7 +455,8 @@ td.st-table__cell:first-of-type {
 // The strings matrix of the dialog: its title row is the caption row, and its title actions are
 // the caption's buttons (auto-translate, all/used strings).
 .st-element-strings {
-  // The caption row holds no text - its buttons end it, at the dialog's right edge.
+  // The caption row names the element the dialog edits; its buttons end the row, at the
+  // dialog's right edge.
   .sd-action-title-bar {
     margin-left: auto;
   }

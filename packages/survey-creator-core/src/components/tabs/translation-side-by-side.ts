@@ -1,6 +1,6 @@
 import {
   Action, AdaptiveActionContainer, Base, DomDocumentHelper, DomWindowHelper, EventBase, Helpers, IDialogOptions, ILocalizableString,
-  ItemValue, LocalizableString, PageModel, PanelModel, PanelModelBase, PopupBaseViewModel, Question,
+  ILocalizableOwner, ItemValue, LocalizableString, PageModel, PanelModel, PanelModelBase, PopupBaseViewModel, Question,
   QuestionCommentModel, QuestionDropdownModel, QuestionRowModel,
   QuestionMatrixDropdownModel, Serializer, SurveyElement, SurveyModel, property,
   settings as surveySettings, surveyLocalization
@@ -1582,7 +1582,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       onApply: (): boolean => true,
       onHide: () => this.onElementStringsDialogHidden(model),
       cssClass: "svc-property-editor st-translation-dialog st-element-strings-dialog svc-creator-popup",
-      title: this.getElementStringsDialogTitle(realObj),
+      // No dialog title: the element the dialog edits is named by the caption row of the strings
+      // matrix, which renders it as a survey element title does - markdown included (a dialog
+      // title is a plain text). See createStringsMatrix.
       displayMode: this.options.isMobileView ? "overlay" : "popup"
     }, this.options.rootElement);
     this.elementStringsPopup = popup;
@@ -1593,13 +1595,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     actions[0].title = editorLocalization.getString("pe.doneEditing");
     popup.locale = editorLocalization.locale;
     surveyLocalization.currentLocale = prevLocale;
-  }
-  private getElementStringsDialogTitle(obj: Base): string {
-    if (obj === <Base>this.survey) {
-      return this.survey.title || editorLocalization.getString("ed.surveyTypeName");
-    }
-    // A question's title falls back to its name by itself; pages and panels need the explicit one.
-    return (<any>obj).title || (<any>obj).name;
   }
   // The dialog is gone - by its own button or because the model closed it. A dialog that has
   // already been replaced by a newer one reports here as well, and its model is not the open one.
@@ -1747,6 +1742,16 @@ export class TranslationElementStrings extends TranslationBase {
   public get element(): Base {
     return this.elementValue;
   }
+  // The name the caption row shows: the title of the element the dialog edits, in the language
+  // it is translated from. A question's title falls back to its name by itself; pages and panels
+  // need the explicit one, and the survey falls back to its type name.
+  public get elementTitle(): string {
+    const element = <any>this.element;
+    if (element === <any>this.survey) {
+      return this.survey.title || editorLocalization.getString("ed.surveyTypeName");
+    }
+    return element.title || element.name;
+  }
   // Set by the owner - the all/used strings choice is kept for the next element.
   public onShowAllStringsChanged: (value: boolean) => void;
   // The caption row's actions - the title actions of the strings matrix: auto-translate (when
@@ -1796,11 +1801,11 @@ export class TranslationElementStrings extends TranslationBase {
     const matrix = <QuestionMatrixDropdownModel>Serializer.createClass("matrixdropdown");
     matrix.name = name;
     matrix.cellType = "comment";
-    // The matrix has no caption text: the dialog's own title names the element it belongs to.
-    // The title row itself stays - it is what carries the caption's actions - but it renders
-    // empty, without the question name a title-less question would fall back to.
+    // The title row is the caption row: it names the element the dialog edits and carries the
+    // caption's actions. The name is a survey element title here, so it renders the way the
+    // element's own title does, markdown included (see setupStringsMatrix).
     matrix.titleLocation = "top";
-    matrix.locTitle.onGetTextCallback = (): string => "";
+    matrix.locTitle.onGetTextCallback = (): string => this.elementTitle;
     // The header row names the two languages the columns edit, as the grid view's header row
     // does; the column of the string names has no header there either.
     matrix.showHeader = true;
@@ -1964,6 +1969,16 @@ export class TranslationElementStrings extends TranslationBase {
   private hostSurvey: SurveyModel;
   public setupStringsMatrix(survey: SurveyModel): void {
     this.hostSurvey = survey;
+    // The caption names the element, so it renders as the element's own title does: through the
+    // markdown event of the survey being translated - the one an application registers its
+    // markdown on. The dialog's survey is the creator's own and knows nothing of it.
+    survey.onTextMarkdown.add((_, options) => {
+      if (options.element !== this.stringsMatrix || options.name !== "title") return;
+      const html = (<ILocalizableOwner><any>this.element).getMarkdownHtml(options.text, options.name);
+      if (!!html) {
+        options.html = html;
+      }
+    });
     survey.onMatrixCellCreated.add(this.onMatrixCellCreated);
     survey.onMatrixCellValueChanging.add(this.onMatrixCellValueChanging);
     survey.onMatrixCellValueChanged.add(this.onMatrixCellValueChanged);
