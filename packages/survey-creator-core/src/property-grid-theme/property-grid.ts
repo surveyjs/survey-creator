@@ -1,5 +1,9 @@
 import { defaultCss } from "survey-core";
 
+// The content classes a composite property editor renders its inner panel with: the paddings
+// around it belong to the property grid row, not to the panel nested in it.
+const nopaddingContent = "spg-question__content spg-question__nopadding";
+
 export var propertyGridCss = {
   root: "spg-root-modern",
   rootTheme: "",
@@ -288,26 +292,29 @@ export var propertyGridCss = {
     clearButton: "sjs_sp_clear"
   },
   propertygrid_bindings: {
-    content: "spg-question__content spg-question__nopadding spg-question-group"
+    content: `${nopaddingContent} spg-question-group`
   },
   propertygrid_restfull: {
-    content: "spg-question__content spg-question__nopadding spg-restfull"
+    content: `${nopaddingContent} spg-restfull`
   },
   propertygrid_masksettings: {
-    content: "spg-question__content spg-question__nopadding spg-masksettings"
+    content: `${nopaddingContent} spg-masksettings`
+  },
+  propertygrid_regionoptions: {
+    content: `${nopaddingContent} spg-regionoptions`
   },
   propertygrid_header: {
     mainRoot: "spg-header",
-    content: "spg-question__content spg-question__nopadding"
+    content: nopaddingContent
   },
   coloralpha: {
-    content: "spg-question__content spg-question__nopadding spg-question__content-coloralpha"
+    content: `${nopaddingContent} spg-question__content-coloralpha`
   },
   font: {
-    content: "spg-question__content spg-question__nopadding spg-question-composite__content"
+    content: `${nopaddingContent} spg-question-composite__content`
   },
   backgroundcornerradius: {
-    content: "spg-question__content spg-question__nopadding spg-question-composite__content"
+    content: `${nopaddingContent} spg-question-composite__content`
   },
   saveData: {
     root: "",
