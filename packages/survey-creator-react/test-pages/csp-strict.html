@@ -2,13 +2,16 @@
 <html lang="en">
 
 <head>
-  <!-- Strict CSP mirroring a customer policy: nonce-based style-src, self-only fonts/images.
+  <!-- Strict CSP mirroring a customer policy: nonce-based style-src, self-only images.
+       font-src names fonts.gstatic.com because the font is the page's own: neither
+       survey-core nor survey-creator-core declares an @font-face any more, so the page
+       supplies the Open Sans faces itself (see fonts.css).
        Meta CSP does not support report-uri, so violations are collected via the
        securitypolicyviolation event (see the first inline script below).
        https://esm.sh is allowed in script-src because React 19 ships no UMD build and is
        loaded as an ES module from there, same as the other react test pages. -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'nonce-testNonce123' https://esm.sh 'report-sample'; style-src 'self' 'nonce-testNonce123' 'report-sample'; font-src 'self'; img-src 'self'" />
+    content="default-src 'self'; script-src 'self' 'nonce-testNonce123' https://esm.sh 'report-sample'; style-src 'self' 'nonce-testNonce123' 'report-sample'; font-src 'self' https://fonts.gstatic.com; img-src 'self'" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -39,6 +42,7 @@
     window.ReactDOM = ReactDOM;
   </script>
 
+  <link rel="stylesheet" type="text/css" href="../fonts.css" />
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/survey-core.css" />
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
 
