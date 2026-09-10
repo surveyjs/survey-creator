@@ -79,7 +79,8 @@ import {
   AllowInplaceEditEvent,
   AllowAddElementEvent,
   CollectionItemDeletingEvent,
-  VariablePresetsChangedEvent
+  VariablePresetsChangedEvent,
+  VariablePresetEditingEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
@@ -5032,11 +5033,18 @@ export class SurveyCreatorModel extends Base
     }
     return this.variablePresetsModelValue;
   }
-  // Raised by the Preview plugin when the active preset changes or, later, when the presets are
-  // edited. Creator has no user-settings layer, so it does not persist the choice itself: a host
-  // that wants the selection or the edited presets to survive a reload saves them here and assigns
-  // them back on the next construction.
+  // Raised by the Preview plugin when the active preset changes or when the presets are edited.
+  // Creator has no user-settings layer, so it does not persist the choice itself: a host that wants
+  // the selection or the edited presets to survive a reload saves them here and assigns them back
+  // on the next construction.
   public onVariablePresetsChanged: EventBase<SurveyCreatorModel, VariablePresetsChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetsChangedEvent>();
+  // Raised for every preset the variable preset editor shows, so that a host can allow or refuse
+  // editing and deleting per preset. It is an event and not a field on ISurveyVariablePreset
+  // because that interface is core's document format, and a Creator permission must not enter the
+  // host's document. It is raised in one place only - the Preview plugin's
+  // variablePresets.getPresetOperations(preset), which seeds it from the manager's three flags -
+  // and everything else on this feature lives on that manager rather than on the creator model.
+  public onVariablePresetEditing: EventBase<SurveyCreatorModel, VariablePresetEditingEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetEditingEvent>();
 
   public dispose(): void {
     this.isCreatorDisposed = true;

@@ -411,7 +411,7 @@ export class PreviewViewModel extends Base {
       id: "variablePresetsView",
       css: "svc-variable-presets-view",
       title: getLocString("vp.view"),
-      action: () => this.showVariablesViewDialog()
+      action: () => this.showVariablesDialog()
     });
     pageActions.push(this.viewVariablesAction);
     this.pages.actions = pageActions;
@@ -452,8 +452,26 @@ export class PreviewViewModel extends Base {
     this.viewVariablesAction.visible = <any>new ComputedUpdater<boolean>(() => {
       return notShortCircuitAnd(hasVariables, this.isSurveyRunning());
     });
-    // disabled rather than hidden, so that the bar does not reflow when a preset is chosen
-    this.viewVariablesAction.enabled = !!activeName;
+    // One button, one id: with a definition it opens the preset editor and says Edit, or says View
+    // when nothing may be changed - even then the editor is the structured view, with the
+    // definition's titles and choices, and not raw JSON. Only canEdit picks the title; what the
+    // button opens is decided by the definition alone.
+    const canEditPresets = !!this.variablePresets && this.variablePresets.canEdit;
+    this.viewVariablesAction.title = getLocString(canEditPresets ? "vp.edit" : "vp.view");
+    // disabled rather than hidden, so that the bar does not reflow when a preset is chosen. With a
+    // definition the list is worth opening with nothing active - an empty list is exactly where Add
+    // is the next step - so that rule belongs to the JSON dialog alone.
+    this.viewVariablesAction.enabled = presets.hasDefinition || !!activeName;
+  }
+  // With a definition the button opens the preset editor; without one there is nothing to build a
+  // form from - no variable name, no type, no allowed values - and the read-only JSON below is the
+  // honest answer.
+  private showVariablesDialog(): void {
+    if (!!this.variablePresets && this.surveyProvider.variablePresetsModel.hasDefinition) {
+      this.variablePresets.showEditor();
+    } else {
+      this.showVariablesViewDialog();
+    }
   }
   // A read-only comment question, not the Ace JSON editor: these values are not edited, not
   // validated and never written back, so the editor's completion, worker and bundle size buy

@@ -1,6 +1,6 @@
 import {
   Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
-  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme, ISurveyVariablePresets
+  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme, ISurveyVariablePresets, ISurveyVariablePreset
 } from "survey-core";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
@@ -1237,4 +1237,18 @@ export interface VariablePresetsChangedEvent {
   variablePresets: ISurveyVariablePresets;
   // The name of the active preset, or an empty string when none is active.
   active: string;
+}
+
+// Raised for every preset the variable preset editor shows, so that a host can narrow the manager's
+// three flags per preset - the issue's premise is that a developer ships read-only presets and a
+// user adds their own next to them (issue #7982). It is an event and not a field on
+// ISurveyVariablePreset because that interface is core's document format, shared verbatim with the
+// tester and the linter, and a Creator permission must not enter the host's document.
+export interface VariablePresetEditingEvent {
+  // The preset in question, as the editor's working copy holds it.
+  preset: ISurveyVariablePreset;
+  // In: the manager's allowEdit. Out: the host's answer for this preset.
+  allowEdit: boolean;
+  // In: the manager's allowDelete. Out: the host's answer for this preset.
+  allowDelete: boolean;
 }
