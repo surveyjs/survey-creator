@@ -12,6 +12,7 @@ import { TestSurveyTabViewModel } from "../src/components/tabs/test";
 import { TabThemePlugin } from "../src/components/tabs/theme-plugin";
 import { VariablePresetsManager } from "../src/variable-presets";
 import { getLocString } from "../src/editorLocalization";
+import { ConditionEditor } from "../src/property-grid/condition-survey";
 
 const definition = {
   elements: [
@@ -434,5 +435,48 @@ describe("The variable preset actions in the page toolbar (issue #7982)", () => 
     expect(action).toBeTruthy();
     // tier 02 replaces the title and the action; the id is what this test pins
     expect(action.id).toBe("variablePresetsView");
+  });
+});
+
+describe("The condition editor lists the host variables (issue #7982)", () => {
+  function getConditionNames(creator: CreatorTester): Array<string> {
+    const question = creator.survey.getQuestionByName("gold");
+    const editor = new ConditionEditor(creator.survey, question, creator, "visibleIf");
+    const res = editor.allConditionQuestions.map(item => item.value).sort();
+    editor.dispose();
+    return res;
+  }
+  test("The definition's variables are listed with no active preset", () => {
+    const creator = new CreatorTester({ variablePresets: createContainer() });
+    creator.JSON = surveyJSON;
+    expect(getManager(creator).active).toBe("");
+    expect(creator.survey.getVariableNames()).toHaveLength(0);
+    expect(getConditionNames(creator)).toStrictEqual(["customerTier", "doubled", "q1", "veteran", "yearsInBusiness"]);
+  });
+  test("The same list whichever preset is active", () => {
+    const creator = new CreatorTester({ variablePresets: createContainer() });
+    creator.JSON = surveyJSON;
+    getManager(creator).active = "Tier only";
+    expect(getConditionNames(creator)).toStrictEqual(["customerTier", "doubled", "q1", "veteran", "yearsInBusiness"]);
+  });
+  test("Without a definition the keys of every preset are listed once", () => {
+    const creator = new CreatorTester({ variablePresets: { presets: [
+      { name: "A", variables: { customerTier: "gold", region: "eu" } },
+      { name: "B", variables: { customerTier: "basic", isTrial: true } }
+    ] } });
+    creator.JSON = surveyJSON;
+    expect(getConditionNames(creator)).toStrictEqual(["customerTier", "doubled", "isTrial", "q1", "region", "veteran"]);
+  });
+  test("A variable the design survey already has is not listed twice, whatever its case", () => {
+    const creator = new CreatorTester({ variablePresets: createContainer() });
+    creator.JSON = surveyJSON;
+    creator.survey.setVariable("CustomerTier", "gold");
+    creator.survey.setVariable("fromHost", 1);
+    expect(getConditionNames(creator)).toStrictEqual(["customertier", "doubled", "fromhost", "q1", "veteran", "yearsInBusiness"]);
+  });
+  test("Without a container the list is the survey's own", () => {
+    const creator = new CreatorTester();
+    creator.JSON = surveyJSON;
+    expect(getConditionNames(creator)).toStrictEqual(["doubled", "q1", "veteran"]);
   });
 });

@@ -708,7 +708,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       this.removeEntriesByValueName(res);
     }
 
-    const variableNames = this.survey.getVariableNames();
+    const variableNames = this.getVariableNames();
     this.addSurveyCalculatedValues(variableNames);
     sortOrder = this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res, variableNames);
 
@@ -751,6 +751,37 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private get isItemValueObject(): boolean {
     return this.object && this.object.isDescendantOf("itemvalue");
+  }
+  // The design survey never runs a preset, so the variables a host injects at runtime (issue #7982)
+  // are not on it: they come from the creator's container. The definition names them; a container
+  // with presets and no definition still tells which names the host uses - the keys of every
+  // preset - so those are the fallback. Whichever preset Preview runs, and whether any does, the
+  // designer sees the same set: a rule is written against a variable, not against a value.
+  // The survey's own variables come first, in the lower-cased spelling setVariable gives them, and
+  // a container name that only differs by case is the same variable and is not listed twice.
+  private getVariableNames(): Array<string> {
+    const res = this.survey.getVariableNames();
+    const model = this.options?.variablePresetsModel;
+    if (!model) return res;
+    let names: Array<string> = model.getVariableNames();
+    if (names.length === 0 && !model.hasDefinition) {
+      names = [];
+      model.getPresetNames().forEach(presetName => {
+        const variables = model.getPreset(presetName)?.variables;
+        if (!variables) return;
+        Object.keys(variables).forEach(name => {
+          if (names.indexOf(name) < 0) names.push(name);
+        });
+      });
+    }
+    const known = res.map(name => name.toLowerCase());
+    names.forEach(name => {
+      const key = name.toLowerCase();
+      if (known.indexOf(key) >= 0) return;
+      known.push(key);
+      res.push(name);
+    });
+    return res;
   }
   private addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>) {
     for (let i = 0; i < values.length; i++) {
