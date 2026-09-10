@@ -786,13 +786,28 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>) {
     for (let i = 0; i < values.length; i++) {
       let name = !!values[i].name ? values[i].name : values[i];
-      this.addConditionQuestionsHash[name] = this.getCalculatedValueQuestion();
+      // A host variable the definition describes is edited with the definition's own question - a
+      // dropdown with its choices, a number box with its range - rather than the plain text box a
+      // calculated value gets: the definition is where the host said what values the variable takes.
+      const question = this.getHostVariableQuestion(name) || this.getCalculatedValueQuestion();
+      this.addConditionQuestionsHash[name] = question;
       res.push({
         value: name,
         text: name,
-        question: this.getCalculatedValueQuestion()
+        question: question
       });
     }
+  }
+  private getHostVariableQuestion(name: string): Question {
+    return this.options?.variablePresetsModel?.getVariableQuestion(name);
+  }
+  // The value editor of a variable has no title: the row already names it, and a calculated value
+  // has no title to show anyway. It is the same rule for a host variable - its definition question
+  // has a title, but the row names the variable and the value box needs no second heading.
+  private isVariableQuestion(question: Question): boolean {
+    if (!question) return false;
+    if (question === this.calculatedValueQuestion) return true;
+    return this.getHostVariableQuestion(question.getValueName()) === question;
   }
   private addSurveyCalculatedValues(names: Array<any>) {
     this.survey.calculatedValues.forEach(item => {
@@ -930,7 +945,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       newQuestion.visibleIf = "questionValueVisibleIf({panel.questionName}, {panel.operator})";
       newQuestion.title = title;
       newQuestion.description = "";
-      if (!!question && question === this.calculatedValueQuestion) {
+      if (this.isVariableQuestion(question)) {
         newQuestion.titleLocation = "hidden";
         if (!!newQuestion.getPropertyByName("placeholder")) {
           newQuestion.placeholder = editorLocalization.getString("ed.lg.calculatedValuePlaceholder");

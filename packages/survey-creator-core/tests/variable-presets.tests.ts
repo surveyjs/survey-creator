@@ -5,7 +5,7 @@ import "../src/custom-questions/question-color";
 import "../src/components/tabs/theme-custom-questions/color-alpha";
 import "../src/property-grid/theme-settings";
 import "../src/property-grid/header-settings";
-import { Action, IAction, SurveyModel, SurveyVariablePresets, settings as surveySettings } from "survey-core";
+import { Action, IAction, QuestionDropdownModel, QuestionTextModel, SurveyModel, SurveyVariablePresets, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { TestSurveyTabViewModel } from "../src/components/tabs/test";
@@ -478,5 +478,61 @@ describe("The condition editor lists the host variables (issue #7982)", () => {
     const creator = new CreatorTester();
     creator.JSON = surveyJSON;
     expect(getConditionNames(creator)).toStrictEqual(["doubled", "q1", "veteran"]);
+  });
+});
+
+describe("The condition editor edits a host variable with the definition's question (issue #7982)", () => {
+  function createConditionEditor(creator: CreatorTester): ConditionEditor {
+    const question = creator.survey.getQuestionByName("gold");
+    return new ConditionEditor(creator.survey, question, creator, "visibleIf");
+  }
+  test("A dropdown variable is edited with a dropdown carrying the definition's choices, no title", () => {
+    const creator = new CreatorTester({ variablePresets: createContainer() });
+    creator.JSON = surveyJSON;
+    const editor = createConditionEditor(creator);
+    editor.text = "{customerTier} = 'gold'";
+    const panel = editor.panel.panels[0];
+    expect(panel.getQuestionByName("questionName").value).toBe("customerTier");
+    const valueQuestion = <QuestionDropdownModel>panel.getQuestionByName("questionValue");
+    expect(valueQuestion.getType()).toBe("dropdown");
+    expect(valueQuestion.choices.map(choice => choice.value)).toStrictEqual(["basic", "gold", "platinum"]);
+    expect(valueQuestion.value).toBe("gold");
+    expect(valueQuestion.titleLocation).toBe("hidden");
+    valueQuestion.value = "platinum";
+    expect(editor.text).toBe("{customerTier} = 'platinum'");
+    editor.dispose();
+  });
+  test("A number variable is edited with the definition's number box", () => {
+    const creator = new CreatorTester({ variablePresets: createContainer() });
+    creator.JSON = surveyJSON;
+    const editor = createConditionEditor(creator);
+    editor.text = "{yearsInBusiness} = 12";
+    const valueQuestion = <QuestionTextModel>editor.panel.panels[0].getQuestionByName("questionValue");
+    expect(valueQuestion.getType()).toBe("text");
+    expect(valueQuestion.inputType).toBe("number");
+    expect(valueQuestion.value).toBe(12);
+    editor.dispose();
+  });
+  test("Switching the row to a host variable rebuilds the value editor from the definition", () => {
+    const creator = new CreatorTester({ variablePresets: createContainer() });
+    creator.JSON = surveyJSON;
+    const editor = createConditionEditor(creator);
+    editor.text = "{q1} = 'abc'";
+    const panel = editor.panel.panels[0];
+    expect(panel.getQuestionByName("questionValue").getType()).toBe("text");
+    panel.getQuestionByName("questionName").value = "customerTier";
+    expect(panel.getQuestionByName("questionValue").getType()).toBe("dropdown");
+    editor.dispose();
+  });
+  test("Without a definition a preset variable keeps the plain text box", () => {
+    const creator = new CreatorTester({ variablePresets: { presets: [{ name: "A", variables: { customerTier: "gold" } }] } });
+    creator.JSON = surveyJSON;
+    const editor = createConditionEditor(creator);
+    editor.text = "{customerTier} = 'gold'";
+    const valueQuestion = editor.panel.panels[0].getQuestionByName("questionValue");
+    expect(valueQuestion.getType()).toBe("text");
+    expect(valueQuestion.titleLocation).toBe("hidden");
+    expect(valueQuestion.value).toBe("gold");
+    editor.dispose();
   });
 });
