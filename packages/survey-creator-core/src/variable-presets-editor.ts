@@ -119,6 +119,9 @@ export class VariablePresetsEditor {
     // needs no second pass: every preset in it either came from the host or went through
     // backToList().
     if (this.editingIndexValue >= 0 && !this.backToList()) return false;
+    // Display mode throughout: nothing could have changed, so Apply closes the dialog like Cancel
+    // rather than replacing the host's objects with copies and announcing an edit that never was.
+    if (!this.manager.canEdit) return true;
     const activeName = this.manager.active;
     let name = "";
     if (!!activeName && !!this.getPreset(activeName)) {
@@ -293,7 +296,9 @@ export class VariablePresetsEditor {
     const value = this.presetsValue.map(preset => {
       return { name: preset.name, description: preset.description || "" };
     });
-    if (Helpers.isTwoValueEquals(matrix.value, value)) return;
+    // Case-sensitively and untrimmed: preset names are identifiers, and the survey's default
+    // comparison would take a rename from "Gold" to "gold" for no change at all.
+    if (Helpers.isTwoValueEquals(matrix.value, value, false, true, false)) return;
     matrix.value = value;
   }
   private writeForm(): void {

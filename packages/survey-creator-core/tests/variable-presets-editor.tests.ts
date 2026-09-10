@@ -275,6 +275,21 @@ describe("Variable presets editor: the list (issue #7982)", () => {
     expect(editor.presets[4].name).toBe(getLocString("vp.newPresetName") + " 1");
     editor.dispose();
   });
+  test("A rename that changes only the case shows in the list", () => {
+    // Every row has a description, so the list value survives the round trip through the form
+    // unchanged but for the name - the survey's default comparison ignores case, preset names do not.
+    const creator = new CreatorTester({ variablePresets: {
+      definition: definition,
+      presets: [{ name: "Gold", description: "tier gold", variables: { customerTier: "gold" } }]
+    } });
+    const editor = createEditor(creator);
+    editor.editPreset(0);
+    editor.editSurvey.setValue("variablePresetName", "gold");
+    expect(editor.backToList()).toBeTruthy();
+    expect(editor.presets[0].name).toBe("gold");
+    expect(getListQuestion(editor).value[0].name).toBe("gold");
+    editor.dispose();
+  });
   test("Remove drops the preset and the list stays in step", () => {
     const creator = new CreatorTester({ variablePresets: createContainer() });
     const editor = createEditor(creator);
@@ -515,6 +530,25 @@ describe("Variable presets editor: apply (issue #7982)", () => {
     expect(second.apply()).toBeTruthy();
     expect(container.presets).toHaveLength(0);
     second.dispose();
+  });
+  test("apply writes nothing when nothing may be changed", () => {
+    const container = createContainer();
+    const creator = new CreatorTester({ variablePresets: container });
+    const manager = getManager(creator);
+    manager.allowEdit = false;
+    manager.allowAdd = false;
+    manager.allowDelete = false;
+    const hostPresets = container.presets;
+    const gold = hostPresets[0];
+    let counter = 0;
+    creator.onVariablePresetsChanged.add(() => { counter++; });
+    const editor = createEditor(creator);
+    editor.editPreset(0);
+    expect(editor.apply()).toBeTruthy();
+    expect(container.presets).toBe(hostPresets);
+    expect(container.presets[0]).toBe(gold);
+    expect(counter).toBe(0);
+    editor.dispose();
   });
   test("apply writes through setPresets: the same container, one event, the definition untouched", () => {
     const container = createContainer();
