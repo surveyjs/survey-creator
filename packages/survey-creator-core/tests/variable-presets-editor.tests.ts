@@ -634,3 +634,20 @@ describe("Variable presets editor: apply (issue #7982)", () => {
     expect(model.getVariableQuestion("customerTier")).toBeTruthy();
   });
 });
+
+describe("Variable presets editor: the dialog theme (issue #7982)", () => {
+  test("Borderless and panelless, layout only, with the compact question gap", () => {
+    const creator = new CreatorTester({ variablePresets: createContainer() });
+    const editor = createEditor(creator);
+    const survey = editor.editSurvey;
+    expect(survey.isCompact).toBeTruthy();
+    const variables = survey.cssVariables;
+    expect(variables["--sjs2-border-spread-form-default"]).toBe("var(--sjs2-border-width-x000)");
+    expect(variables["--sjs2-is-panelless"]).toBe("true");
+    expect(variables["--sjs2-layout-component-page-content-area-gap-vertical"]).toBe("var(--sjs2-spacing-medium-vertical)");
+    // the palette is the creator's: no color of the theme reaches the dialog
+    expect(Object.keys(variables).filter(key => key.indexOf("--sjs2-color-") === 0 && key !== "--sjs2-color-component-panel-default-bg" && key !== "--sjs2-color-utility-surface-survey")).toStrictEqual([]);
+    expect(variables["--sjs2-color-utility-surface-survey"]).toBe("var(--sjs2-color-bg-basic-primary)");
+    editor.dispose();
+  });
+});

@@ -1,7 +1,8 @@
 import {
-  Action, Helpers, IAction, IDialogOptions, ISurveyVariablePreset, QuestionMatrixDynamicModel,
+  Action, Helpers, IAction, IDialogOptions, ISurveyVariablePreset, ITheme, QuestionMatrixDynamicModel,
   settings as surveySettings, SurveyModel
 } from "survey-core";
+import { BorderlessLightPanelless } from "survey-core/themes";
 import { SurveyCreatorModel } from "./creator-base";
 import { VariablePresetsManager } from "./variable-presets";
 import { getLocString } from "./editorLocalization";
@@ -41,7 +42,7 @@ export class VariablePresetsEditor {
     this.editSurvey = creator.createSurvey(this.createJson(), "variable-presets-editor", this);
     this.editSurvey.showNavigationButtons = false;
     this.editSurvey.questionErrorLocation = "bottom";
-    this.editSurvey["cssVariables"] = {};
+    this.editSurvey.applyTheme(this.createTheme());
     const matrix = this.listQuestion;
     if (!!matrix) {
       matrix.allowAddRows = this.manager.allowAdd;
@@ -138,6 +139,28 @@ export class VariablePresetsEditor {
     this.presetsValue = [];
     this.creator = undefined;
     this.manager = undefined;
+  }
+  // Borderless and panelless: a form for one preset is a form, not a stack of framed boxes. Only
+  // the theme's layout is taken - its colors are dropped so that the dialog keeps the palette of the
+  // creator it is drawn inside, a dark creator theme included, the way the other creator dialogs
+  // inherit theirs. The theme is inlined into the creator bundle the way DefaultLight is in
+  // creator-base.ts, so no host has to register it.
+  private createTheme(): ITheme {
+    const cssVariables: { [index: string]: string } = {};
+    const source: { [index: string]: string } = BorderlessLightPanelless.cssVariables || {};
+    Object.keys(source).forEach(key => {
+      if (key.indexOf("--sjs2-color-") !== 0) {
+        cssVariables[key] = source[key];
+      }
+    });
+    // Compact: the questions follow one another at the medium gap, not the theme's large one - the
+    // form has a dozen short fields, and the dialog scrolls otherwise.
+    cssVariables["--sjs2-layout-component-page-content-area-gap-vertical"] = "var(--sjs2-spacing-medium-vertical)";
+    // The one color: the survey surface is the dialog's background. Without a panel frame the
+    // matrix's sticky cells paint the surface color, and the creator's surface is a tint that would
+    // show as bands on the dialog's primary background.
+    cssVariables["--sjs2-color-utility-surface-survey"] = "var(--sjs2-color-bg-basic-primary)";
+    return { isPanelless: true, cssVariables: cssVariables };
   }
   private get listQuestion(): QuestionMatrixDynamicModel {
     return <QuestionMatrixDynamicModel>this.editSurvey?.getQuestionByName(this.listKey);
