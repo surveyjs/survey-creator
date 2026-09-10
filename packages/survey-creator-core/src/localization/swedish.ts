@@ -246,6 +246,8 @@ export let svStrings = {
     translateUsigAI: "Översätt alla automatiskt",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Översätt från: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Översätt återstående strängar",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Oöversatta strängar",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export let svStrings = {
     translationSource: "Källa: ",
     // [Auto-translated] "Target: "
     translationTarget: "Mål: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Källspråk",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Målspråket",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} av {1} strängar översatta",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Är du säker på att du vill radera alla översatta strängar för det valda språket?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Formulärvy",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Rutnätsvy",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Översätt strängar",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Undersökningssträngar",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Inga krav att översätta",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Alla strängar översätts",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} strängar översätts inte",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-länkar stöds inte.",
     // [Auto-translated] "Export"
@@ -815,6 +839,10 @@ export let svStrings = {
     removeItem: "Klicka för att ta bort objektet...",
     // [Auto-translated] "Drag the item"
     dragItem: "Dra objektet",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Utöka nästlade val",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Kollapsnästlade val",
     // "Edit"
     edit: "Redigera",
     // [Auto-translated] "Done"
@@ -917,6 +945,8 @@ export let svStrings = {
     surveyTitlePlaceholder: "Undersökningens titel",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "Sida {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Panelens titel",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Startsida",
     // [Auto-translated] "Description"
@@ -1269,6 +1299,8 @@ export let svStrings = {
     minRowCount: "Minsta antal rader",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Maximalt antal rader",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Radräkningsuttryck",
     // "Confirm row removal"
     confirmDelete: "Bekräfta borttagning av rad",
     // [Auto-translated] "Confirmation message"
@@ -1279,6 +1311,8 @@ export let svStrings = {
     minPanelCount: "Minsta antal anmälningar",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maximalt antal anmälningar",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Uttryck för antal poster",
     // [Auto-translated] "Initial entry state"
     panelsState: "Ursprungligt starttillstånd",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1915,6 +1949,12 @@ export let svStrings = {
       // [Auto-translated] "Informational"
       info: "Informativt"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Front",
+      // [Auto-translated] "Rear"
+      environment: "Bakre"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Bilder",
@@ -2510,10 +2550,14 @@ export let svStrings = {
       keyName: "Referera till ett frågenamn för att kräva att en användare anger ett unikt svar för den här frågan i varje panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Utlöser en bekräftelseprompt innan en post tas bort.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Ange ett uttryck som beräknar antalet poster. Detta uttryck åsidosätter inställningen \"Initialt antal poster\" och omvärderas varje gång värdena det refererar till ändras. Resultatet begränsas av inställningarna \"Minsta antal poster\" och \"Maximalt antal poster\". Medan detta uttryck är inställt kan respondenter inte lägga till eller ta bort poster manuellt.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tilldelar nummer till frågor som är kapslade i den dynamiska panelen."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificera ett uttryck som beräknar antalet rader. Detta uttryck åsidosätter inställningen \"Radräkning\" och utvärderas om varje gång värdena det refererar till ändras. Resultatet begränsas av inställningarna \"Minsta radantal\" och \"Maximalt radantal\". Medan detta uttryck är inställt kan respondenter inte lägga till eller ta bort rader manuellt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Utlöser en bekräftelseprompt innan en rad tas bort.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2983,6 +3027,8 @@ export let svStrings = {
     tabAlign: "Justering av tabb",
     // [Auto-translated] "File source type"
     sourceType: "Typ av filkälla",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Standardkamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Passa till behållare",
     // [Auto-translated] "Set value expression"
@@ -3305,10 +3351,69 @@ export let svStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Sak 1" }, { value: "item2", text: "Sak 2" }, { value: "item3", text: "Sak 3" }],
-    columns: [{ value: "column1", text: "Kolumn 1" }, { value: "column2", text: "Kolumn 2" }, { value: "column3", text: "Kolumn 3" }],
-    rows: [{ value: "row1", text: "Rad 1" }, { value: "row2", text: "Rad 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolumn 1" }, { name: "column2", title: "Kolumn 2" }, { name: "column3", title: "Kolumn 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Sak 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Sak 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Sak 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolumn 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolumn 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolumn 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Rad 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Rad 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolumn 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolumn 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolumn 3"
+      }
+    ]
   }
 };
 

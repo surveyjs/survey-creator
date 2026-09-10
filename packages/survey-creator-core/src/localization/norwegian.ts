@@ -246,6 +246,8 @@ export var nbStrings = {
     translateUsigAI: "Oversett alle automatisk",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Oversett fra: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Oversett gjenværende strenger",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Uoversatte strenger",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var nbStrings = {
     translationSource: "Kilde: ",
     // [Auto-translated] "Target: "
     translationTarget: "Mål: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Kildespråk",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Målspråk",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} av {1} strenger oversatt",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Er du sikker på at du ønsker å slette alle oversatte strenger for det valgte språket?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Skjemavisning",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Rutenettvisning",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Oversett strenger",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Undersøkelsesstrenger",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Ingen forpliktelser for å oversette",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Alle strenger oversettes",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} strengene blir ikke oversatt",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-linker støttes ikke.",
     // [Auto-translated] "Export"
@@ -814,6 +838,10 @@ export var nbStrings = {
     removeItem: "Klikk for å fjerne elementet...",
     // [Auto-translated] "Drag the item"
     dragItem: "Dra elementet",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Utvid nestede valg",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Kollaps-nestede valg",
     // "Edit"
     edit: "Rediger",
     // [Auto-translated] "Done"
@@ -916,6 +944,8 @@ export var nbStrings = {
     surveyTitlePlaceholder: "Skriv skjematittel her",
     // "Page {num}"
     pageTitlePlaceholder: "Skriv sidetittel her",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Paneltittel",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Startside",
     // "Description"
@@ -1268,6 +1298,8 @@ export var nbStrings = {
     minRowCount: "Minimum radantall",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Maksimalt radantall",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Radantallsuttrykk",
     // "Confirm row removal"
     confirmDelete: "Bekreft radsletting",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1310,8 @@ export var nbStrings = {
     minPanelCount: "Minimum antall påmeldinger",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maksimalt antall påmeldinger",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Uttrykk for antall oppføringer",
     // [Auto-translated] "Initial entry state"
     panelsState: "Opprinnelig oppføringstilstand",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1914,6 +1948,12 @@ export var nbStrings = {
       // [Auto-translated] "Informational"
       info: "Informativ"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Front",
+      // [Auto-translated] "Rear"
+      environment: "Bak"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Bilder",
@@ -2509,10 +2549,14 @@ export var nbStrings = {
       keyName: "Referer til et spørsmålsnavn for å kreve at en bruker gir et unikt svar på dette spørsmålet i hvert panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en oppføring.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Spesifiser et uttrykk som beregner antall oppføringer. Dette uttrykket overstyrer innstillingen \"Innledende antall oppføringer\" og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene \"Minimum antall oppføringer\" og \"Maksimalt antall oppføringer\". Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne oppføringer manuelt.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tildeler numre til spørsmål som er nestet i det dynamiske panelet."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Spesifiser et uttrykk som beregner antall rader. Dette uttrykket overstyrer innstillingen «Radantall» og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene «Minimum radantall» og «Maksimum radantall». Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne rader manuelt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en rad.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2982,6 +3026,8 @@ export var nbStrings = {
     tabAlign: "Justering av tabulatorer",
     // [Auto-translated] "File source type"
     sourceType: "Type filkilde",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Standardkamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Tilpass til container",
     // [Auto-translated] "Set value expression"
@@ -3304,10 +3350,69 @@ export var nbStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Vare 1" }, { value: "item2", text: "Vare 2" }, { value: "item3", text: "Vare 3" }],
-    columns: [{ value: "column1", text: "Kolonne 1" }, { value: "column2", text: "Kolonne 2" }, { value: "column3", text: "Kolonne 3" }],
-    rows: [{ value: "row1", text: "Rad 1" }, { value: "row2", text: "Rad 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolonne 1" }, { name: "column2", title: "Kolonne 2" }, { name: "column3", title: "Kolonne 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Vare 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Vare 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Vare 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolonne 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolonne 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolonne 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Rad 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Rad 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolonne 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolonne 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolonne 3"
+      }
+    ]
   }
 };
 

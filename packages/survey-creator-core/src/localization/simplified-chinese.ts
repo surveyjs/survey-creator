@@ -246,6 +246,8 @@ export var simplifiedChineseTranslation = {
     translateUsigAI: "自动翻译全部",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "翻译语言组合：",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "翻译剩余字符串",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "未翻译的字符串",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var simplifiedChineseTranslation = {
     translationSource: "源：",
     // [Auto-translated] "Target: "
     translationTarget: "目标：",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "源语言",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "目标语言",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "翻译{1}弦的{0}",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "你确定要删除所选语言的所有翻译字符串吗？",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "表单视图",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "网格视图",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "平译字符串",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "调查字符串",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "无需翻译附加条件",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "所有字符串都经过翻译",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0}字符串不被翻译",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "不支持 YouTube 链接。",
     // [Auto-translated] "Export"
@@ -814,6 +838,10 @@ export var simplifiedChineseTranslation = {
     removeItem: "单击以删除该项目...",
     // [Auto-translated] "Drag the item"
     dragItem: "拖动项目",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "扩展嵌套选项",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "折叠嵌套选择",
     // "Edit"
     edit: "编辑器",
     // [Auto-translated] "Done"
@@ -916,6 +944,8 @@ export var simplifiedChineseTranslation = {
     surveyTitlePlaceholder: "调查标题",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "页数 {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "面板标题",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "起始页",
     // [Auto-translated] "Description"
@@ -1268,6 +1298,8 @@ export var simplifiedChineseTranslation = {
     minRowCount: "最小行数",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "最大行数",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "行计数表达式",
     // "Confirm row removal"
     confirmDelete: "确认删除行",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1310,8 @@ export var simplifiedChineseTranslation = {
     minPanelCount: "最少参赛作品数量",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "最大条目数",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "条目计数表达式",
     // [Auto-translated] "Initial entry state"
     panelsState: "初始进入状态",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1914,6 +1948,12 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Informational"
       info: "信息"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "前方",
+      // [Auto-translated] "Rear"
+      environment: "后部"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "图片",
@@ -2509,10 +2549,14 @@ export var simplifiedChineseTranslation = {
       keyName: "引用问题名称以要求用户在每个面板中为此问题提供唯一的答案。",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "在删除条目之前触发确认提示。",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "指定一个计算条目数量的表达式。该表达式覆盖“初始条目数”设置，并在引用值变化时重新评估。结果受限于“最小条目数”和“最大条目数”设置。在此表达式设置期间，受访者无法手动添加或删除条目。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "为嵌套在动态面板中的问题分配编号。"
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "请指定一个计算行数的表达式。该表达式覆盖“行数”设置，并在引用值变化时重新评估。结果受限于“最小行数”和“最大行数”设置。在此表达式设置期间，受访者无法手动添加或删除行。",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "在删除行之前触发确认提示。",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2982,6 +3026,8 @@ export var simplifiedChineseTranslation = {
     tabAlign: "制表符对齐方式",
     // [Auto-translated] "File source type"
     sourceType: "文件源类型",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "默认相机",
     // [Auto-translated] "Fit to container"
     fitToContainer: "适合容器",
     // [Auto-translated] "Set value expression"
@@ -3304,10 +3350,69 @@ export var simplifiedChineseTranslation = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "项目1" }, { value: "item2", text: "项目2" }, { value: "item3", text: "项目3" }],
-    columns: [{ value: "column1", text: "列 1" }, { value: "column2", text: "列 2" }, { value: "column3", text: "列 3" }],
-    rows: [{ value: "row1", text: "行 1" }, { value: "row2", text: "行 2" }],
-    matrixColumns: [{ name: "column1", title: "列 1" }, { name: "column2", title: "列 2" }, { name: "column3", title: "列 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "项目1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "项目2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "项目3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "列 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "列 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "列 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "行 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "行 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "列 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "列 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "列 3"
+      }
+    ]
   }
 };
 

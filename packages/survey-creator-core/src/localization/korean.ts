@@ -246,6 +246,8 @@ export var koreanStrings = {
     translateUsigAI: "모두 자동 번역",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "언어 선택(원문-번역): ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "남은 문자열을 번역하기",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "번역되지 않은 문자열",
     // [Auto-translated] "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var koreanStrings = {
     translationSource: "근원: ",
     // [Auto-translated] "Target: "
     translationTarget: "과녁: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "원천 언어",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "목표 언어",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "번역된 {1} 줄의 {0}",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "선택한 언어에 대해 모든 번역된 문자열을 삭제하고 싶으신가요?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "폼 뷰",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "격자 뷰",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "문자열 번역",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "조사 연합",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "번역할 조건 없어",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "모든 문자열은 번역됩니다",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} 스트링은 번역되지 않습니다",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube 링크는 지원되지 않습니다.",
     // [Auto-translated] "Export"
@@ -815,6 +839,10 @@ export var koreanStrings = {
     removeItem: "항목을 제거하려면 클릭하세요...",
     // [Auto-translated] "Drag the item"
     dragItem: "항목을 드래그합니다",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "중첩 선택 확장",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "붕괴 중첩 선택",
     // "Edit"
     edit: "편집",
     // [Auto-translated] "Done"
@@ -917,6 +945,8 @@ export var koreanStrings = {
     surveyTitlePlaceholder: "설문조사 제목",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "페이지 {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "패널 제목",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "시작 페이지",
     // [Auto-translated] "Description"
@@ -1269,6 +1299,8 @@ export var koreanStrings = {
     minRowCount: "최소 행 개수",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "최대 행 개수",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "행 수 표현식",
     // "Confirm row removal"
     confirmDelete: "행 삭제 확인",
     // [Auto-translated] "Confirmation message"
@@ -1279,6 +1311,8 @@ export var koreanStrings = {
     minPanelCount: "최소 참가 작가",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "최대 출품작 수",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "항목 수 표현식",
     // [Auto-translated] "Initial entry state"
     panelsState: "초기 진입 상태",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1915,6 +1949,12 @@ export var koreanStrings = {
       // [Auto-translated] "Informational"
       info: "정보"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "전면",
+      // [Auto-translated] "Rear"
+      environment: "후면"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "이미지",
@@ -2510,10 +2550,14 @@ export var koreanStrings = {
       keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "항목 수를 계산하는 표현식을 지정하세요. 이 표현식은 \"초기 항목 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 항목 수\"와 \"최대 항목 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 항목을 추가하거나 제거할 수 없습니다.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "행 수를 계산하는 식을 지정하세요. 이 표현식은 \"행 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 행 수\"와 \"최대 행 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안에는 응답자가 수동으로 행을 추가하거나 제거할 수 없습니다.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "행을 제거하기 전에 확인 프롬프트를 트리거합니다.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2983,6 +3027,8 @@ export var koreanStrings = {
     tabAlign: "탭 정렬",
     // [Auto-translated] "File source type"
     sourceType: "파일 소스 유형",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "기본 카메라",
     // [Auto-translated] "Fit to container"
     fitToContainer: "컨테이너에 맞추기",
     // [Auto-translated] "Set value expression"
@@ -3305,10 +3351,69 @@ export var koreanStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "항목 1" }, { value: "item2", text: "항목 2" }, { value: "item3", text: "항목 3" }],
-    columns: [{ value: "column1", text: "열 1" }, { value: "column2", text: "열 2" }, { value: "column3", text: "열 3" }],
-    rows: [{ value: "row1", text: "행 1" }, { value: "row2", text: "행 2" }],
-    matrixColumns: [{ name: "column1", title: "열 1" }, { name: "column2", title: "열 2" }, { name: "column3", title: "열 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "항목 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "항목 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "항목 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "열 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "열 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "열 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "행 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "행 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "열 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "열 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "열 3"
+      }
+    ]
   }
 };
 setupLocale({ localeCode: "ko", strings: koreanStrings });

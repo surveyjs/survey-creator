@@ -246,6 +246,8 @@ export var jaStrings = {
     translateUsigAI: "すべて自動翻訳",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "言語の選択：",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "残りの文字列を翻訳する",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "未翻訳の文字列",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var jaStrings = {
     translationSource: "源：",
     // [Auto-translated] "Target: "
     translationTarget: "ターゲット：",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "出典言語",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "対象言語",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "翻訳された文字列{1}の音{0}",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "選択した言語の翻訳文字列をすべて削除したいと確信していますか?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "フォームビュー",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "グリッドビュー",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "文字列を翻訳する",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "調査のストリングス",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "翻訳する必要のない条件",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "すべての文字列は翻訳されています",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0}文字列は翻訳されません",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube リンクはサポートされていません。",
     // [Auto-translated] "Export"
@@ -814,6 +838,10 @@ export var jaStrings = {
     removeItem: "クリックしてアイテムを削除します...",
     // [Auto-translated] "Drag the item"
     dragItem: "アイテムをドラッグする",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "ネストされた選択肢を拡大する",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "崩壊入れ子選択",
     // "Edit"
     edit: "編集",
     // [Auto-translated] "Done"
@@ -916,6 +944,8 @@ export var jaStrings = {
     surveyTitlePlaceholder: "調査タイトルを入力",
     // "Page {num}"
     pageTitlePlaceholder: "ページタイトルを入力",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "パネルタイトル",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "スタートページ",
     // "Description"
@@ -1268,6 +1298,8 @@ export var jaStrings = {
     minRowCount: "最小行数",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "最大行数",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "行数の表現",
     // "Confirm row removal"
     confirmDelete: "行の削除を確認する",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1310,8 @@ export var jaStrings = {
     minPanelCount: "最小エントリー数",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "最大エントリー数",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "エントリカウント式",
     // [Auto-translated] "Initial entry state"
     panelsState: "初期エントリ状態",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1914,6 +1948,12 @@ export var jaStrings = {
       // [Auto-translated] "Informational"
       info: "情報"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "正面",
+      // [Auto-translated] "Rear"
+      environment: "後方"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "画像",
@@ -2509,10 +2549,14 @@ export var jaStrings = {
       keyName: "質問名を参照して、各パネルでこの質問に対して一意の回答を提供するようユーザーに要求します。",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "エントリ数を計算する式を指定します。この式は「初期エントリ数」設定を上書きし、参照する値が変わるたびに再評価されます。結果は「最小エントリ数」と「最大エントリ数」設定によって制限されます。この式が設定されている間、回答者は手動でエントリを追加または削除することはできません。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "動的パネル内にネストされた質問に番号を割り当てます。"
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "行数を計算する式を指定します。この式は「行数」設定を上書きし、参照する値が変わるたびに再評価されます。結果は「最小行数」と「最大行数」設定によって制限されます。この式が設定されている間は、回答者が手動で行を追加または削除することはできません。",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "行を削除する前に確認プロンプトをトリガーします。",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2982,6 +3026,8 @@ export var jaStrings = {
     tabAlign: "タブの配置",
     // [Auto-translated] "File source type"
     sourceType: "ファイルソースタイプ",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "デフォルトのカメラ",
     // [Auto-translated] "Fit to container"
     fitToContainer: "コンテナにフィット",
     // [Auto-translated] "Set value expression"
@@ -3304,10 +3350,69 @@ export var jaStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "アイテム1" }, { value: "item2", text: "アイテム2" }, { value: "item3", text: "アイテム3" }],
-    columns: [{ value: "column1", text: "列 1" }, { value: "column2", text: "列 2" }, { value: "column3", text: "列 3" }],
-    rows: [{ value: "row1", text: "行 1" }, { value: "row2", text: "行 2" }],
-    matrixColumns: [{ name: "column1", title: "列 1" }, { name: "column2", title: "列 2" }, { name: "column3", title: "列 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "アイテム1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "アイテム2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "アイテム3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "列 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "列 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "列 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "行 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "行 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "列 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "列 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "列 3"
+      }
+    ]
   }
 };
 

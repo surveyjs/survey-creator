@@ -246,6 +246,8 @@ export var danishStrings = {
     translateUsigAI: "Oversæt automatisk alle",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Oversæt fra: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Oversæt resterende strenge",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Uoversatte strenge",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var danishStrings = {
     translationSource: "Kilde: ",
     // [Auto-translated] "Target: "
     translationTarget: "Mål: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Kildesprog",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Målsprog",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} af {1} strenge oversat",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Er du sikker på, at du ønsker at slette alle oversatte strenge for det valgte sprog?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Formvisning",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Gittervisning",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Oversæt strenge",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Undersøgelsesstrenge",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Ingen bindinger til at oversætte",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Alle strenge er oversat",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} strenge bliver ikke oversat",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-links understøttes ikke.",
     // [Auto-translated] "Export"
@@ -815,6 +839,10 @@ export var danishStrings = {
     removeItem: "Klik for at fjerne elementet...",
     // [Auto-translated] "Drag the item"
     dragItem: "Træk elementet",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Udvid indlejrede valg",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Collapse indlejrede valg",
     // "Edit"
     edit: "Rediger",
     // [Auto-translated] "Done"
@@ -917,6 +945,8 @@ export var danishStrings = {
     surveyTitlePlaceholder: "Undersøgelsens titel",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "Side {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Panelets titel",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Startside",
     // [Auto-translated] "Description"
@@ -1269,6 +1299,8 @@ export var danishStrings = {
     minRowCount: "Mindste antal rækker",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Maksimalt antal rækker",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Rækketælling-udtryk",
     // "Confirm row removal"
     confirmDelete: "Bekræft sletning af række",
     // [Auto-translated] "Confirmation message"
@@ -1279,6 +1311,8 @@ export var danishStrings = {
     minPanelCount: "Mindste antal tilmeldinger",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maksimalt antal tilmeldinger",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Udtryk for antal indgange",
     // [Auto-translated] "Initial entry state"
     panelsState: "Indledende indtastningstilstand",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1915,6 +1949,12 @@ export var danishStrings = {
       // [Auto-translated] "Informational"
       info: "Informative"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Front",
+      // [Auto-translated] "Rear"
+      environment: "Bagende"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Billeder",
@@ -2510,10 +2550,14 @@ export var danishStrings = {
       keyName: "Henvis til et spørgsmålsnavn for at kræve, at en bruger giver et entydigt svar på dette spørgsmål i hvert panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Udløser en bekræftelsesprompt, før en post fjernes.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Angiv et udtryk, der beregner antallet af poster. Dette udtryk tilsidesætter indstillingen \"Initial number of postries\" og revurderes, hver gang de værdier, det refererer til, ændres. Resultatet er begrænset af indstillingerne \"Minimum antal poster\" og \"Maximum antal poster\". Mens dette udtryk er sat, kan respondenter ikke tilføje eller fjerne poster manuelt.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i det dynamiske panel."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Angiv et udtryk, der beregner antallet af rækker. Dette udtryk tilsidesætter indstillingen \"Rækkeantal\" og revurderes, hver gang de værdier, det refererer til, ændres. Resultatet er begrænset af indstillingerne \"Minimum rækkeantal\" og \"Maksimum rækkeantal\". Mens dette udtryk er sat, kan respondenter ikke tilføje eller fjerne rækker manuelt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Udløser en bekræftelsesprompt, før en række fjernes.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2983,6 +3027,8 @@ export var danishStrings = {
     tabAlign: "Tabulatorjustering",
     // [Auto-translated] "File source type"
     sourceType: "Filkilde type",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Standardkamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Passer til beholder",
     // [Auto-translated] "Set value expression"
@@ -3305,10 +3351,69 @@ export var danishStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Vare 1" }, { value: "item2", text: "Vare 2" }, { value: "item3", text: "Vare 3" }],
-    columns: [{ value: "column1", text: "Kolonne 1" }, { value: "column2", text: "Kolonne 2" }, { value: "column3", text: "Kolonne 3" }],
-    rows: [{ value: "row1", text: "Række 1" }, { value: "row2", text: "Række 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolonne 1" }, { name: "column2", title: "Kolonne 2" }, { name: "column3", title: "Kolonne 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Vare 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Vare 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Vare 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolonne 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolonne 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolonne 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Række 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Række 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolonne 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolonne 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolonne 3"
+      }
+    ]
   }
 };
 setupLocale({ localeCode: "da", strings: danishStrings });
