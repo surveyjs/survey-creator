@@ -15,6 +15,8 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 
 ## Link Resources
 
+### Add Scripts and Style Sheets
+
 Survey Creator consists of two parts: `survey-creator-core` (platform-independent code) and `survey-creator-js` (view models). Each part includes stylesheets and scripts. Insert links to these resources within the `<head>` tag on your HTML page as shown below. Survey Creator also requires [SurveyJS Form Library resources](/form-library/documentation/get-started-html-css-javascript#link-surveyjs-resources) and a script with [predefined theme configurations](/documentation/themes-and-custom-styles) (if you are going to use [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor) or [runtime UI customization](/survey-creator/documentation/runtime-theme-customization)). Link them _before_ the Survey Creator resources:
 
 ```html
@@ -32,6 +34,22 @@ Survey Creator consists of two parts: `survey-creator-core` (platform-independen
     <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" rel="stylesheet">
     <script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
     <script src="https://unpkg.com/survey-creator-js/survey-creator-js.min.js"></script>
+    <!-- ... -->
+</head>
+```
+
+### Add Fonts
+
+Starting with SurveyJS v3.1.0, fonts are no longer included in SurveyJS packages. Load Open Sans separately to preserve the default appearance, unless your application already does so. If you use a custom font, load it instead. Otherwise, the browser uses a fallback font, which may affect spacing and layout.
+
+To load Open Sans from Google Fonts, add the following links to the page's `<head>`. You can also host the font files yourself.
+
+```html
+<head>
+    <!-- ... -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- ... -->
 </head>
 ```
@@ -66,6 +84,11 @@ const creator = new SurveyCreator.SurveyCreator(creatorOptions);
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Open Sans font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
     <link  href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
@@ -127,6 +150,11 @@ $(function() {
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Open Sans font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
     <link  href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
@@ -266,6 +294,11 @@ creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defa
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Open Sans font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
     <link  href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
@@ -382,6 +415,11 @@ creator.onUploadFile.add((_, options) => {
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Open Sans font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
     <title>Survey Creator / Form Builder</title>
     <meta charset="utf-8">
     <link  href="https://unpkg.com/survey-core/survey-core.min.css" rel="stylesheet">
