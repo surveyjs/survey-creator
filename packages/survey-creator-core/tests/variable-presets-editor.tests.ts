@@ -615,7 +615,7 @@ describe("Variable presets editor: apply (issue #7982)", () => {
     editor.editSurvey.setValue("variablePresetName", "Newcomer, promoted");
     expect(editor.apply()).toBeTruthy();
     const action = getPresetAction(creator, "variablePresetSelector");
-    const items: Array<IAction> = action.popupModel.contentComponentData.model.items;
+    const items: Array<IAction> = action.popupModel.contentComponentData.model.actions;
     expect(items.map(item => item.id)).toStrictEqual(["Gold customer", "Newcomer, promoted"]);
     expect(manager.active).toBe("Newcomer, promoted");
     expect(model.survey.getQuestionByName("gold").isVisible).toBeTruthy();

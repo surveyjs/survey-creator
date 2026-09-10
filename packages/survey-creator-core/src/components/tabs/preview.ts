@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString, CssClassBuilder, IDialogOptions, settings as surveySettings, Helpers } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString, CssClassBuilder, IDialogOptions, settings as surveySettings, Helpers, ListModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
@@ -401,9 +401,6 @@ export class PreviewViewModel extends Base {
       verticalPosition: "top",
       horizontalPosition: "center"
     }, this.surveyProvider);
-    // The list header of the mock-up. PopupModel.title is not drawn in every display mode; nothing
-    // else depends on it, so it stays a one-liner rather than a component that draws a header.
-    this.selectVariablePresetAction.popupModel.title = getLocString("vp.selectorTitle");
     pageActions.push(this.selectVariablePresetAction);
     // No icon: nothing in the creator's icon set reads as "variable", and drawing one is a design
     // decision rather than an implementation one (issue #7982).
@@ -435,8 +432,11 @@ export class PreviewViewModel extends Base {
     // Preset names are host data and not creator strings: they are shown as they were written, and
     // the list holds nothing but them - no synthetic "no preset" entry.
     const items: Array<IAction> = names.map(name => <IAction>{ id: name, title: name });
-    const listModel = this.selectVariablePresetAction.popupModel.contentComponentData.model;
-    listModel.items = items;
+    // setItems and not a write to a field named items: the list renders its actions, and a
+    // ListModel has no items property - the page selector gets away with that write only because
+    // it is created with its items already in place.
+    const listModel: ListModel = this.selectVariablePresetAction.popupModel.contentComponentData.model;
+    listModel.setItems(items);
     listModel.selectedItem = items.filter(item => item.id === activeName)[0];
     this.selectVariablePresetAction.title = !!activeName
       ? getLocString("vp.selectorTitle") + ": " + activeName

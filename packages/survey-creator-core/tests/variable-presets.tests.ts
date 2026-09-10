@@ -298,7 +298,7 @@ describe("Variable presets in Preview (issue #7982)", () => {
     const model = getPreviewModel(creator);
     const action = getPresetAction(creator, "variablePresetSelector");
     creator.variablePresets = { presets: [{ name: "Other", variables: { customerTier: "basic" } }, { name: "Another", variables: {} }] };
-    const items: Array<IAction> = action.popupModel.contentComponentData.model.items;
+    const items: Array<IAction> = action.popupModel.contentComponentData.model.actions;
     expect(items.map(item => item.id)).toStrictEqual(["Other", "Another"]);
     expect(action.title).toBe(getLocString("vp.noPreset"));
     expect(getManager(creator).active).toBe("");
@@ -350,9 +350,13 @@ describe("The variable preset actions in the page toolbar (issue #7982)", () => 
     const creator = new CreatorTester({ variablePresets: createContainer() });
     creator.JSON = surveyJSON;
     const action = getPresetAction(creator, "variablePresetSelector");
-    const items: Array<IAction> = action.popupModel.contentComponentData.model.items;
+    const items: Array<IAction> = action.popupModel.contentComponentData.model.actions;
     expect(items.map(item => item.id)).toStrictEqual(["Gold customer", "Newcomer", "Tier only"]);
     expect(items.map(item => item.title)).toStrictEqual(["Gold customer", "Newcomer", "Tier only"]);
+    // the popup is the list alone, with no header
+    expect(action.popupModel.title).toBe("");
+    // the list renders its actions, so they must be the same list as the visible items
+    expect(action.popupModel.contentComponentData.model.visibleItems.map((item: IAction) => item.id)).toStrictEqual(["Gold customer", "Newcomer", "Tier only"]);
   });
   test("The title and the selected item follow a name a host assigns while the tab is open", () => {
     const creator = new CreatorTester({ variablePresets: createContainer() });
