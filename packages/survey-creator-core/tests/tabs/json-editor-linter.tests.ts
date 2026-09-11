@@ -1,6 +1,6 @@
 import { getRules, SurveyLintHintReasons, SurveyLintReasons } from "survey-core/linter";
 import { TextareaJsonEditorModel, TabJsonEditorTextareaPlugin } from "../../src/components/tabs/json-editor-textarea";
-import { formatNamed, getFindingSeverityKind, JsonEditorLinterModel } from "../../src/components/tabs/json-editor-linter";
+import { formatNamed, getCreatorLintOptions, getFindingSeverityKind, JsonEditorLinterModel } from "../../src/components/tabs/json-editor-linter";
 import { CreatorTester } from "../creator-tester";
 import { SurveyTextWorker } from "../../src/textWorker";
 import { editorLocalization } from "../../src/editorLocalization";
@@ -1025,6 +1025,49 @@ test("A reference outside an expression says which text it was piped into", () =
   }, "reference/unknown")).toBe(
     "\"q9\" is not found - no question, panel, page, calculated value, or variable with that" +
     " name exists. Did you mean \"q1\"? Referenced in the choicesByUrl path.");
+});
+
+test("getCreatorLintOptions raises the schema rules to error and follows validateJsonPropertyValues", () => {
+  const creator = new CreatorTester();
+  const rules = getCreatorLintOptions(creator).rules;
+  ["property/unknown", "property/required", "property/not-an-array", "element/unknown-type",
+    "trigger/unknown-type", "validator/unknown-type", "property/invalid-value"].forEach(id => {
+    expect(rules[id]).toBe("error");
+  });
+  creator.validateJsonPropertyValues = false;
+  expect(getCreatorLintOptions(creator).rules["property/invalid-value"]).toBe("off");
+});
+
+test("onLintSurvey lets the application tune the linter options", () => {
+  const creator = new CreatorTester();
+  creator.onLintSurvey.add((sender, options) => {
+    expect(sender).toBe(creator);
+    options.lintOptions.rules["reference/unknown"] = "off";
+    options.lintOptions.knownVariables = ["tier"];
+  });
+  const editor = new TextareaJsonEditorModel(creator);
+  editor.text = JSON.stringify({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{frut} = 'apple'" },
+      { type: "text", name: "q2", enableIf: "{tier} = 'gold'" },
+    ]
+  }, null, 2);
+  editor.processErrors(editor.text);
+  expect(editor.linter.findings).toHaveLength(0);
+  expect(editor.errorList.actions).toHaveLength(0);
+  expect(editor.allowingDeactivate()).toBe(true);
+});
+
+test("onLintSurvey can lower a schema rule, and then it no longer blocks", () => {
+  const creator = new CreatorTester();
+  creator.onLintSurvey.add((sender, options) => {
+    options.lintOptions.rules["property/unknown"] = "warning";
+  });
+  const editor = new TextareaJsonEditorModel(creator);
+  editor.text = JSON.stringify({ elements: [{ type: "text", name: "q1", nosuch: 1 }] }, null, 2);
+  editor.processErrors(editor.text);
+  expect(editor.linter.findings.map(f => f.severity)).toEqual(["warning"]);
+  expect(editor.allowingDeactivate()).toBe(true);
 });
 
 test("property/required names the owner the way the deserializer names it", () => {

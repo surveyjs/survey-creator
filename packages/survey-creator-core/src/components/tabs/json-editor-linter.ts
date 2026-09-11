@@ -25,7 +25,10 @@ export function getCreatorLintOptions(creator: SurveyCreatorModel): ISurveyLintO
     "validator/unknown-type": "error",
     "property/invalid-value": creator.validateJsonPropertyValues ? "error" : "off",
   };
-  return { rules: rules };
+  const options = { lintOptions: <ISurveyLintOptions>{ rules: rules } };
+  // the application has the last word
+  creator.onLintSurvey.fire(creator, options);
+  return options.lintOptions;
 }
 
 // How a finding looks, in the check list and in the error list of the editor alike: the two

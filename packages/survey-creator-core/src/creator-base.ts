@@ -58,7 +58,7 @@ import {
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
-  CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
+  CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent, LintSurveyEvent,
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
   ElementGetExpandCollapseStateEventReason,
@@ -1778,6 +1778,10 @@ export class SurveyCreatorModel extends Base
    * @see switchTab
    */
   public onActiveTabChanged: EventBase<SurveyCreatorModel, ActiveTabChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, ActiveTabChangedEvent>();
+  // Raised before the JSON Editor tab lints the survey JSON. options.lintOptions holds the
+  // options the tab is about to lint with: switch a rule off or change its severity, declare
+  // knownVariables or knownFunctions, describe custom components, suppress findings.
+  public onLintSurvey: EventBase<SurveyCreatorModel, LintSurveyEvent> = this.addCreatorEvent<SurveyCreatorModel, LintSurveyEvent>();
   /**
    * Gets or sets the currently displayed tab.
    *
