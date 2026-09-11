@@ -3235,7 +3235,7 @@ test("itemvalue[] property editor + row actions + invisible detail elements", ()
     propertyGrid.survey.getQuestionByName("choices")
   );
   const actions1 = choicesQuestion.renderedTable.rowsActions[0];
-  expect(actions1).toHaveLength(2);
+  expect(actions1).toHaveLength(3);
 
   const oldDefinition = SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs;
   SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = [
@@ -3246,7 +3246,7 @@ test("itemvalue[] property editor + row actions + invisible detail elements", ()
     propertyGrid2.survey.getQuestionByName("choices")
   );
   const actions2 = choicesQuestion2.renderedTable.rowsActions[0];
-  expect(actions2).toHaveLength(1);
+  expect(actions2).toHaveLength(2);
   SurveyQuestionEditorDefinition.definition["choiceitem[]@choices"].tabs = oldDefinition;
 });
 test("choices and onCollectionItemDeleting", () => {

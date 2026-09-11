@@ -131,6 +131,9 @@ svc-question {
     overflow-x: auto;
   }
 
+  .sd-table-wrapper {
+    padding: 0;
+  }
   .sd-table .sd-selectbase:not(.sd-imagepicker, .sd-boolean-fieldset) {
     overflow-x: visible;
     padding-left: 0;
@@ -154,10 +157,8 @@ svc-question {
     > .sd-question__container
     > .sd-question__header-and-content-container
     > .sd-question__content {
-    padding-left: var(--sd-base-padding);
-    padding-right: var(--sd-base-padding);
-    margin-left: calc(-1 * var(--sd-base-padding));
-    margin-right: calc(-1 * var(--sd-base-padding));
+    margin-left: calc(-1 * var(--sjs2-layout-component-matrix-cell-right-padding-right));
+    margin-right: calc(-1 * var(--sjs2-layout-component-matrix-cell-left-padding-left));
     padding-bottom: 0;
     padding-top: var(--sjs2-spacing-x200, 16px);
   }
@@ -864,7 +865,7 @@ svc-question,
       right: 0;
       outline: var(--sjs2-border-width-x100) dashed var(--sjs2-color-border-basic-secondary);
       outline-offset: calc(-1 * var(--sjs2-border-width-x100));
-      z-index: 10;
+      z-index: 12;
     }
   }
 
@@ -1075,6 +1076,9 @@ svc-question,
   //     }
   //   }
   // }
+  .sd-table-wrapper {
+    --sd-question-container-background: var(--sjs2-color-component-panel-default-bg);
+  }
 
   .sd-table__row-disabled > .sd-table__cell {
     opacity: var(--sjs2-opacity-visible);
