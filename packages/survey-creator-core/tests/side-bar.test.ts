@@ -96,7 +96,7 @@ test("showOneCategoryInPropertyGrid: showPlaceholder into property grid if surve
   expect(creator.propertyGrid).toBeTruthy();
   let tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs.length).toBe(11);
-  expect(tabs.map(t => t.id).join(",")).toBe("general,logo,navigation,question,pages,regionOptions,logic,data,validation,showOnCompleted,timer");
+  expect(tabs.map(t => t.id).join(",")).toBe("general,logo,navigation,question,pages,regionalFormat,logic,data,validation,showOnCompleted,timer");
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
 
   creator.clickToolboxItem({ type: "text" });
@@ -162,7 +162,7 @@ test("showOneCategoryInPropertyGrid: tab control", () => {
   expect(designerPlugin.propertyGridViewModel.objectSelectionAction.tooltip).toEqual("Survey");
   const tabs = designerPlugin["tabControlModel"].topToolbar.actions;
   expect(tabs.length).toBe(11);
-  expect(tabs.map(t => t.id).join(",")).toBe("general,logo,navigation,question,pages,regionOptions,logic,data,validation,showOnCompleted,timer");
+  expect(tabs.map(t => t.id).join(",")).toBe("general,logo,navigation,question,pages,regionalFormat,logic,data,validation,showOnCompleted,timer");
   expect(designerPlugin.propertyGridViewModel.survey.currentPage.name).toBe("general");
 });
 

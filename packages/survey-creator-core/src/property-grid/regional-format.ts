@@ -8,7 +8,7 @@ import {
   Question,
   QuestionDropdownModel,
   QuestionTextModel,
-  RegionOptions,
+  RegionalFormat,
   SurveyModel,
   getLocaleDataLocales,
   getLocaleDataValue,
@@ -28,7 +28,7 @@ import { SurveyHelper } from "../survey-helper";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 
 var json = {
-  name: "propertygrid_regionoptions",
+  name: "propertygrid_regionalformat",
   showInToolbox: false,
   internal: true,
   createElements: function (panel) {
@@ -40,46 +40,49 @@ if (!ComponentCollection.Instance.getCustomQuestionByName(json.name)) {
   ComponentCollection.Instance.add(json as any);
 }
 
-// The format fields of the region options. They inherit the value of the format locale, so the
+// The format fields of the regional format. They inherit the value of the format locale, so the
 // editor shows the inherited value as a placeholder instead of writing it into the survey JSON.
-const regionOptionsFormatFields: Array<keyof ILocaleData> = [
+const regionalFormatFormatFields: Array<keyof ILocaleData> = [
   "datePattern",
   "timePattern",
   "decimalSeparator",
   "thousandsSeparator",
-  "currencyPattern",
-  "currencySymbol"
+  "currencySymbol",
+  "currencyPattern"
 ];
 
-// survey-core marks every region options property with the "regionOptions" category, which the
+// survey-core marks every regional format property with the "regionalFormat" category, which the
 // generator would render as a panel inside the panel this editor already creates. The properties
-// are re-declared here in the general category, so that they appear directly under the region
-// options category of the survey settings. The list is explicit: a property that survey-core
+// are re-declared here in the general category, so that they appear directly under the regional
+// format category of the survey settings. The list is explicit: a property that survey-core
 // adds later is shown only after it is added here.
-const regionOptionsPropertyGridDefinition: ISurveyPropertyGridDefinition = {
+const regionalFormatPropertyGridDefinition: ISurveyPropertyGridDefinition = {
   generateOtherTab: false,
   classes: {
-    "regionoptions@regionOptions": {
-      properties: ["locale"].concat(regionOptionsFormatFields)
+    "regionalformat@regionalFormat": {
+      properties: ["locale"].concat(regionalFormatFormatFields)
         .map(name => { return { name: name, tab: creatorSettings.propertyGrid.generalTabName }; })
     }
   }
 };
 
-// The token a currency pattern writes the currency symbol as.
-const currencySignToken = "¤"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+// The tokens of a currency pattern: the number, the currency symbol and the position of the
+// minus sign in negative amounts.
+const currencyNumberToken = "#";
+const currencySignToken = "@";
+const currencyNegativeToken = "-";
 
 // The validator a format field resolves through, the one the mask applies. An override the mask
 // would reject falls through to the curated value there and has to do the same here, or the
 // example would show what the survey does not render.
-const regionOptionsFormatValidators: { [name: string]: (value: string) => boolean } = {
+const regionalFormatFormatValidators: { [name: string]: (value: string) => boolean } = {
   "decimalSeparator": isValidDecimalSeparator,
   "thousandsSeparator": isValidThousandsSeparator,
   "currencyPattern": isValidCurrencyPattern,
   "currencySymbol": isValidCurrencySymbol
 };
 
-// A region locale is not a survey language: a curated region ("en-gb", "pt-br") has no survey
+// A region locale is not a survey language: a curated region ("en-GB", "pt-BR") has no survey
 // dictionary of its own, so its name comes from the Creator localization. An unknown locale -
 // localeData can be extended by an application - falls back to the survey language name.
 export function getRegionLocaleName(locale: string): string {
@@ -88,9 +91,9 @@ export function getRegionLocaleName(locale: string): string {
   return editorLocalization.getLocaleName(locale);
 }
 
-export class PropertyGridEditorQuestionRegionOptions extends PropertyGridEditor {
+export class PropertyGridEditorQuestionRegionalFormat extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "regionoptions";
+    return prop.type == "regionalformat";
   }
   public getJSON(
     obj: Base,
@@ -98,23 +101,23 @@ export class PropertyGridEditorQuestionRegionOptions extends PropertyGridEditor 
     options: ISurveyCreatorOptions
   ): any {
     return {
-      type: "propertygrid_regionoptions",
+      type: "propertygrid_regionalformat",
       titleLocation: "hidden"
     };
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty,
     options: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition): void {
     const panel = <PanelModel>question["contentPanel"];
-    const regionOptions = <RegionOptions>obj[prop.name];
-    new PropertyJSONGenerator(regionOptions, options, obj, prop, regionOptionsPropertyGridDefinition).setupObjPanel(panel, true);
+    const regionalFormat = <RegionalFormat>obj[prop.name];
+    new PropertyJSONGenerator(regionalFormat, options, obj, prop, regionalFormatPropertyGridDefinition).setupObjPanel(panel, true);
     this.updateLocaleQuestion(panel);
     this.updateFormatPlaceholders(obj, panel);
     // the format locale follows the survey locale until a region is selected
     obj.registerFunctionOnPropertyValueChanged("locale",
-      () => { this.updateFormatPlaceholders(obj, panel); }, "regionOptionsPlaceholders");
+      () => { this.updateFormatPlaceholders(obj, panel); }, "regionalFormatPlaceholders");
   }
   onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
-    if (prop.name !== "regionOptions") return;
+    if (prop.name !== "regionalFormat") return;
     // the locale may have changed, and the inherited values shown as placeholders follow it
     this.updateFormatPlaceholders(obj, <PanelModel>question["contentPanel"]);
   }
@@ -128,7 +131,7 @@ export class PropertyGridEditorQuestionRegionOptions extends PropertyGridEditor 
   private updateFormatPlaceholders(obj: Base, panel: PanelModel): void {
     if (!panel) return;
     const locale = this.getFormatLocale(obj);
-    regionOptionsFormatFields.forEach(name => {
+    regionalFormatFormatFields.forEach(name => {
       const question = <QuestionTextModel>panel.getQuestionByName(name);
       if (!question) return;
       const defaultValue = getLocaleDataValue(locale, name);
@@ -148,22 +151,21 @@ export class PropertyGridEditorQuestionRegionOptions extends PropertyGridEditor 
     const decimal = this.getFormatValue(obj, locale, "decimalSeparator") || "";
     const thousands = this.getFormatValue(obj, locale, "thousandsSeparator") || "";
     const amount = "1" + thousands + "234" + decimal + "56";
-    const symbol = this.getFormatValue(obj, locale, "currencySymbol");
-    // the negative subpattern repeats the positive one with the minus sign, so the example
-    // renders the positive one only. The replacements are functions: a symbol carries a $ that
-    // String.replace would otherwise read as a pattern of its own.
-    const example = pattern.split(";")[0]
-      .replace("#", () => amount)
-      .replace(currencySignToken, () => symbol);
+    const symbol = this.getFormatValue(obj, locale, "currencySymbol") || "";
+    // All tokens are replaced in one pass over the pattern: a separator can be "@" and a symbol
+    // can contain "#" or "-", so the text inserted for one token must never be read as another.
+    // The example is a positive amount, so the minus sign position renders nothing.
+    const tokens = { [currencyNumberToken]: amount, [currencySignToken]: symbol, [currencyNegativeToken]: "" };
+    const example = pattern.replace(/[#@-]/g, (token: string): string => tokens[token]);
     return pattern + " (" + example + ")";
   }
-  // The value a format field resolves to: an override authored in the region options outranks
+  // The value a format field resolves to: an override authored in the regional format outranks
   // the curated locale default, the order the mask resolves them in.
   private getFormatValue(obj: Base, locale: string, field: keyof ILocaleData): string {
     const survey = <SurveyModel>obj;
-    const isValid = regionOptionsFormatValidators[field];
-    const res = !!survey && typeof survey.getRegionOptionValue === "function"
-      ? survey.getRegionOptionValue(field) : undefined;
+    const isValid = regionalFormatFormatValidators[field];
+    const res = !!survey && typeof survey.getRegionalFormatValue === "function"
+      ? survey.getRegionalFormatValue(field) : undefined;
     if (res !== undefined && res !== null && (!isValid || isValid(res))) return res;
     return getLocaleDataValue(locale, field, isValid);
   }
@@ -173,4 +175,4 @@ export class PropertyGridEditorQuestionRegionOptions extends PropertyGridEditor 
   }
 }
 
-PropertyGridEditorCollection.register(new PropertyGridEditorQuestionRegionOptions());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionRegionalFormat());

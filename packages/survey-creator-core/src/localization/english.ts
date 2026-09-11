@@ -382,7 +382,7 @@ export var enStrings = {
       title: "Survey title",
       description: "Survey description",
       readOnly: "Make the survey read-only",
-      regionOptions: "Regional formats"
+      regionalFormat: "Regional formats"
     },
     page: {
       name: "Page name",
@@ -414,14 +414,14 @@ export var enStrings = {
     masksettings: {
       saveMaskedValue: "Save masked value in survey results"
     },
-    regionoptions: {
+    regionalformat: {
       locale: "Region",
       datePattern: "Date pattern",
       timePattern: "Time pattern",
       decimalSeparator: "Decimal separator",
       thousandsSeparator: "Thousands separator",
-      currencyPattern: "Currency pattern",
-      currencySymbol: "Currency symbol"
+      currencySymbol: "Currency symbol",
+      currencyPattern: "Currency pattern"
     },
     patternmask: {
       pattern: "Value pattern"
@@ -846,7 +846,7 @@ export var enStrings = {
       navigation: "Navigation",
       question: "Question Settings",
       pages: "Pages",
-      regionOptions: "Regional Formats",
+      regionalFormat: "Regional Formats",
       timer: "Quiz Mode",
       calculatedValues: "Calculated Values",
       triggers: "Triggers",
@@ -1286,7 +1286,7 @@ export var enStrings = {
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
-  // country-specific ("en-gb"), so these names are defined here and not in the survey library.
+  // country-specific ("en-GB"), so these names are defined here and not in the survey library.
   regionLocales: {
     ar: "Arabic",
     bg: "Bulgarian",
@@ -1297,13 +1297,13 @@ export var enStrings = {
     de: "German",
     el: "Greek",
     en: "English",
-    "en-au": "English (Australia)",
-    "en-ca": "English (Canada)",
-    "en-gb": "English (United Kingdom)",
-    "en-ie": "English (Ireland)",
-    "en-in": "English (India)",
-    "en-nz": "English (New Zealand)",
-    "en-za": "English (South Africa)",
+    "en-AU": "English (Australia)",
+    "en-CA": "English (Canada)",
+    "en-GB": "English (United Kingdom)",
+    "en-IE": "English (Ireland)",
+    "en-IN": "English (India)",
+    "en-NZ": "English (New Zealand)",
+    "en-ZA": "English (South Africa)",
     es: "Spanish",
     et: "Estonian",
     eu: "Basque",
@@ -1311,8 +1311,8 @@ export var enStrings = {
     fi: "Finnish",
     fil: "Filipino",
     fr: "French",
-    "fr-ca": "French (Canada)",
-    "fr-ch": "French (Switzerland)",
+    "fr-CA": "French (Canada)",
+    "fr-CH": "French (Switzerland)",
     he: "Hebrew",
     hi: "Hindi",
     hr: "Croatian",
@@ -1331,11 +1331,11 @@ export var enStrings = {
     mm: "Burmese",
     ms: "Malay",
     nl: "Dutch",
-    "nl-be": "Dutch (Belgium)",
+    "nl-BE": "Dutch (Belgium)",
     no: "Norwegian",
     pl: "Polish",
     pt: "Portuguese",
-    "pt-br": "Portuguese (Brazil)",
+    "pt-BR": "Portuguese (Brazil)",
     ro: "Romanian",
     ru: "Russian",
     sk: "Slovak",
@@ -1351,8 +1351,8 @@ export var enStrings = {
     ur: "Urdu",
     vi: "Vietnamese",
     zh: "Chinese",
-    "zh-cn": "Chinese (Simplified)",
-    "zh-tw": "Chinese (Traditional)"
+    "zh-CN": "Chinese (Simplified)",
+    "zh-TW": "Chinese (Traditional)"
   },
   // Operators
   op: {
@@ -1397,7 +1397,7 @@ export var enStrings = {
     visibletrigger: "change visibility (deprecated)"
   },
   peplaceholder: {
-    regionoptions: {
+    regionalformat: {
       locale: "Same as survey language"
     },
     patternmask: {
@@ -1688,14 +1688,14 @@ export var enStrings = {
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
-    regionoptions: {
+    regionalformat: {
       locale: "A region whose formats apply to date, time, numeric, and currency inputs. If not specified, the survey language is used.",
       datePattern: "Overrides the date order and separators that the region uses. The pattern can contain separator characters and the `dd`, `mm`, and `yyyy` placeholders. Ex.: dd/mm/yyyy",
       timePattern: "Overrides the time format that the region uses. The pattern can contain separator characters and the `HH`, `hh`, `MM`, `ss`, and `TT` placeholders. Ex.: hh:MM TT",
       decimalSeparator: "Overrides the symbol that the region uses to separate the fractional part from the integer part of a displayed number.",
       thousandsSeparator: "Overrides the symbol that the region uses to separate the digits of a large number into groups of three.",
-      currencyPattern: "Overrides the placement of the currency symbol that the region uses. In the pattern, `¤` stands for the currency symbol, `#` for the number, and `-` for the minus sign. Ex.: ¤#",
-      currencySymbol: "Overrides the currency symbol that the region uses. The `currencySymbol` property of an individual input mask overrides this value in turn."
+      currencySymbol: "Overrides the currency symbol that the region uses. The `currencySymbol` property of an individual input mask overrides this value in turn.",
+      currencyPattern: "Overrides the placement of the currency symbol that the region uses. In the pattern, `@` stands for the currency symbol, `#` for the number, and `-` for the position of the minus sign in negative amounts (if omitted, the minus sign is placed at the beginning). Ex.: @#"
     },
     patternmask: {
       pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."

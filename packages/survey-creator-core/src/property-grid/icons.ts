@@ -14,7 +14,7 @@ export const pgTabIcons = {
   "pages": "icon-pg-pages-24x24",
   "question": "icon-pg-questiondesign-24x24",
   "questionSettings": "icon-pg-questiondesign-24x24",
-  "regionOptions": "icon-pg-language-24x24",
+  "regionalFormat": "icon-pg-language-24x24",
   "timer": "icon-pg-quiz-24x24",
   "rows": "icon-pg-rows-24x24",
   "specific": "icon-pg-specific-24x24",

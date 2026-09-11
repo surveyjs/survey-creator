@@ -300,8 +300,8 @@ export var propertyGridCss = {
   propertygrid_masksettings: {
     content: `${nopaddingContent} spg-masksettings`
   },
-  propertygrid_regionoptions: {
-    content: `${nopaddingContent} spg-regionoptions`
+  propertygrid_regionalformat: {
+    content: `${nopaddingContent} spg-regionalformat`
   },
   propertygrid_header: {
     mainRoot: "spg-header",
