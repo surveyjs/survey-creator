@@ -484,6 +484,8 @@ export const enTesterStrings = {
       "The options override is not a JSON object: " + message,
     variablesNotObject: (message: string): string =>
       "The variables override is not a JSON object: " + message,
+    variablesAndPresetBothSet: "A test references a variable preset or writes its variables inline," +
+      " never both.",
     notAnObject: "it must be an object.",
     noModelForStart: "There is no model on screen to take the data from.",
     // The screen's own header, and the two things the form pane says when it is not a live form.
@@ -563,10 +565,16 @@ export const enTesterStrings = {
       startNote: "The state the case begins from. A start does not merge: a test either references one" +
         " of the suite's by name or inlines one of its own.",
       startInline: "inline the form's answers as they are now",
+      variablePresetTitle: "Variable preset",
+      variablePresetPlaceholder: "(none)",
+      variablePresetNote: "A named record from the suite's \"variablePresets\". Its values merge over" +
+        " the suite's variables per name, like variables written inline. Choosing one takes the" +
+        " inline variables out of the test: a preset is referenced or the values are written, never both.",
       variablesTitle: "Variables",
       variablesPlaceholder: "{ \"region\": \"us\" }",
       variablesNote: "A JSON object, merged over the suite's variables per name. They are applied" +
-        " before the start data, so a defaultValueExpression that reads one sees it.",
+        " before the start data, so a defaultValueExpression that reads one sees it. Writing them" +
+        " takes the variable preset off the test.",
       localeTitle: "Locale",
       localePlaceholder: "(default)",
       localeNote: "Empty means the library default.",

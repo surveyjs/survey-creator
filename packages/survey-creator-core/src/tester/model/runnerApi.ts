@@ -89,6 +89,8 @@ export interface ITesterNewTestParams {
   start?: string;
   optionsText?: string;
   variablesText?: string;
+  // A name from the suite's "variablePresets.presets", in place of variablesText: never both.
+  variablePreset?: string;
 }
 
 // One representation of a test in the whole widget: this row. The checkbox that selects it, the dot

@@ -16,6 +16,12 @@ describe("an issue path", () => {
     // A url is a key, and it is full of the characters a path is otherwise punctuated with.
     expect(parseJsonPath("web[\"https://api.example.com/cities?country=de\"]"))
       .toEqual(["web", "https://api.example.com/cities?country=de"]);
+    // The variable presets container and the two places a preset is referenced from.
+    expect(parseJsonPath("variablePreset")).toEqual(["variablePreset"]);
+    expect(parseJsonPath("variablePresets.definition")).toEqual(["variablePresets", "definition"]);
+    expect(parseJsonPath("variablePresets.presets[1].variables"))
+      .toEqual(["variablePresets", "presets", 1, "variables"]);
+    expect(parseJsonPath("tests[2].variablePreset")).toEqual(["tests", 2, "variablePreset"]);
   });
 
   it("gives back the part it could read, and never a wrong path", () => {
@@ -44,5 +50,41 @@ describe("an issue path", () => {
       expect(text.substring((range as any).offset, (range as any).offset + (range as any).length))
         .toContain("unknown");
     });
+  });
+
+  // The same promise for the variable presets: every path the validator writes about the container, the
+  // root reference and a test's reference lands on the node it names.
+  it("lands on the node the validator named, for a preset and a reference to one", () => {
+    const text = JSON.stringify({
+      variablePresets: {
+        definition: "not a survey",
+        presets: [
+          { name: "gold", variables: { tier: "gold" } },
+          { name: "gold", variables: "not a record" },
+        ],
+      },
+      variablePreset: "silver",
+      tests: [
+        { name: "both", variablePreset: "gold", variables: { tier: "basic" }, steps: [] },
+        { name: "unknown", variablePreset: "platinum", steps: [] },
+      ],
+    }, null, 2);
+    const issues = new SurveyTestValidator().validate(JSON.parse(text));
+    const byCode: { [code: string]: string } = {};
+    issues.forEach(issue => { byCode[issue.code] = issue.path as string; });
+    expect(byCode.variableDefinitionNotAnObject).toBe("variablePresets.definition");
+    expect(byCode.duplicateVariablePresetName).toBe("variablePresets.presets[1]");
+    expect(byCode.variablesNotAnObject).toBe("variablePresets.presets[1].variables");
+    expect(byCode.variablesAndPresetBothSet).toBe("tests[0].variablePreset");
+    expect(byCode.unknownVariablePresetReference).toBe("tests[1].variablePreset");
+    issues.forEach(issue => {
+      const range = findJsonRange(text, issue.path as string);
+      expect(range, "no place in the document for " + issue.path).toBeTruthy();
+    });
+    // The root reference is a root key, and the marker is the value it names.
+    const root = issues.filter(issue => issue.path === "variablePreset")[0];
+    expect(root, "the root reference to an unknown preset was not reported").toBeTruthy();
+    const range: any = findJsonRange(text, "variablePreset");
+    expect(text.substring(range.offset, range.offset + range.length)).toBe("\"silver\"");
   });
 });

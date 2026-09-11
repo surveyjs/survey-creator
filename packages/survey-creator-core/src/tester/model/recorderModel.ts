@@ -1,5 +1,6 @@
 import {
-  Action, ActionContainer, Base, ListModel, createDropdownActionModel, property, propertyArray,
+  Action, ActionContainer, Base, ListModel, SurveyVariablePresets, createDropdownActionModel, property,
+  propertyArray,
 } from "survey-core";
 import type { SurveyModel } from "survey-core";
 import { getSurveyTestCheckDetails, SurveyTestCheckCommandName } from "survey-core/tester";
@@ -383,7 +384,10 @@ export class TesterRecorderModel extends Base
     if (!!options.value) test.options = options.value;
     const variables = parseObjectText(params.variablesText);
     if (!!variables.error) return testerText("recorder.variablesNotObject", variables.error);
+    // The tester's own rule, refused here before it becomes a structural error of the document.
+    if (!!variables.value && !!params.variablePreset) return testerText("recorder.variablesAndPresetBothSet");
     if (!!variables.value) test.variables = variables.value;
+    if (!!params.variablePreset) test.variablePreset = params.variablePreset;
     if (params.start === TESTER_INLINE_START) {
       // The one value the form cannot write for itself: it is not a start, it is "take the answers the
       // form holds now", and the model that holds them is this one's.
@@ -769,9 +773,14 @@ export class TesterRecorderModel extends Base
     return this.replay(current, this.cursor);
   }
 
-  // The same road at a different path: "description", "start", "variables". A start or a set of
-  // variables changes what the case begins from, so the replay behind it rebuilds the model on screen
-  // from that new beginning.
+  // The same road at a different path: "description", "start", "variablePreset", "variables". A start,
+  // a preset or a set of variables changes what the case begins from, so the replay behind it rebuilds
+  // the model on screen from that new beginning.
+  //
+  // A preset and inline variables are two ways of writing the same thing, and the tester refuses a test
+  // that carries both (variablesAndPresetBothSet). So writing one takes the other out, in the same
+  // document write: the suite never passes through the state the validator rejects, and the replay
+  // behind the write is one replay and not two.
   public setTestField(field: string, value: any): Promise<void> {
     const current = this.testName;
     if (this.gone || !current) return Promise.resolve();
@@ -784,7 +793,12 @@ export class TesterRecorderModel extends Base
       if (!this.liveSurvey) return Promise.resolve();
       next = { data: JSON.parse(JSON.stringify(this.liveSurvey.data)) };
     }
-    this.applyText(setTestFieldText(this.host.getTestsText(), testIndex, field, next));
+    let text = this.host.getTestsText();
+    const other = field === "variablePreset" ? "variables" : field === "variables" ? "variablePreset" : "";
+    if (!!other && next !== undefined) {
+      text = setTestFieldText(text, testIndex, other, undefined);
+    }
+    this.applyText(setTestFieldText(text, testIndex, field, next));
     this.stale = true;
     this.verifyOutcome = undefined;
     return this.replay(current, this.cursor);
@@ -1348,6 +1362,7 @@ export class TesterRecorderModel extends Base
       testOptions: !!test && !!test.options ? test.options : {},
       testFields: readTestFields(test),
       startNames: readStartNames(suite),
+      variablePresetNames: readVariablePresetNames(suite),
       recorderOptions: this.options,
     });
     this.adorners.update();
@@ -1651,8 +1666,18 @@ function readTestFields(test: any): ITesterTestFields {
   return {
     description: typeof test.description === "string" ? test.description : undefined,
     start: test.start,
+    variablePreset: typeof test.variablePreset === "string" ? test.variablePreset : undefined,
     variables: test.variables,
   };
+}
+
+// The suite's variable presets, offered by name. The core companion reads the container, here as in the
+// tester: an entry without a name is no preset, and nothing of the rule is repeated in this widget. It
+// is lazy, so asking it for the names builds no definition model.
+function readVariablePresetNames(suite: any): Array<string> {
+  const source = !!suite && !!suite.variablePresets && typeof suite.variablePresets === "object"
+    ? suite.variablePresets : undefined;
+  return !!source ? new SurveyVariablePresets(source).getPresetNames() : [];
 }
 
 // The suite's named starts, offered by name. The one this test can inline is added by the panel: it is

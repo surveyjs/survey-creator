@@ -21,8 +21,9 @@ import { toRunnerOptions } from "../core/hostOptions";
 
 export interface SilentRunRequest {
   surveyJson: any;
-  // The parsed suite, for its options, variables, starts and stubs: a test may reference a start by
-  // name, and the functions and the urls the survey asks about are answered by the suite.
+  // The parsed suite, for its options, variables, variable presets, starts and stubs: a test may
+  // reference a start or a preset by name, and the functions and the urls the survey asks about are
+  // answered by the suite.
   suite: any;
   test: any;
   steps: Array<ISurveyTestStep>;
@@ -88,6 +89,13 @@ function buildOneTestSuite(request: SilentRunRequest): ISurveyTests {
   const res: any = { name: suite.name, tests: [test] };
   if (!!suite.options) res.options = suite.options;
   if (!!suite.variables) res.variables = suite.variables;
+  // The variable presets are the suite's, not the host's: a test that references a preset by name
+  // resolves it against the container the document carries, and the definition in it is what decides
+  // whether the variables of this recording could ever be injected. A replay without them would open a
+  // session on a model the case does not describe - or refuse to open it, for a reference that is not
+  // unknown at all. The root reference travels for the same reason.
+  if (!!suite.variablePresets) res.variablePresets = suite.variablePresets;
+  if (suite.variablePreset !== undefined) res.variablePreset = suite.variablePreset;
   if (!!suite.starts) res.starts = suite.starts;
   // What the survey takes from outside itself travels with the case, exactly like the starts above it:
   // a recording session drives the same model the run will, and a model whose asynchronous functions

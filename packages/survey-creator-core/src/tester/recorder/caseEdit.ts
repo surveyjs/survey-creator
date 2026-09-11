@@ -114,10 +114,11 @@ export function deleteTest(text: string, testIndex: number): string {
   return edit(text, ["tests", testIndex], undefined);
 }
 
-// A test carries three things beside its options and its steps: a description, a start, and variable
-// overrides. They are siblings of "options" and not members of it - section 4 of the tester README is exact
-// about why: options are flat run configuration that merges per key, variables merge per name, and a
-// start does not merge at all. One edit at tests[i][field], and undefined takes the field out.
+// A test carries four things beside its options and its steps: a description, a start, variable
+// overrides, and the name of a variable preset in place of them. They are siblings of "options" and not
+// members of it - section 4 of the tester README is exact about why: options are flat run configuration
+// that merges per key, variables merge per name, a preset is the other way of writing them, and a start
+// does not merge at all. One edit at tests[i][field], and undefined takes the field out.
 export function setTestField(text: string, testIndex: number, field: string, value: any): string {
   return edit(text, ["tests", testIndex, field], value);
 }

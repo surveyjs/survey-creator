@@ -187,6 +187,19 @@ describe("the model a segment holds", () => {
     served.web = { "https://api.example.com/countries": { response: [] } };
     expect(segmentSignature({ ...inputs, suite: served, at: 2 })).not.toBe(held);
 
+    // Nor the variable presets: a test names a preset, and the values behind the name live in the
+    // container - an edited preset or a switched root reference is a model built on other variables.
+    const presets: any = JSON.parse(JSON.stringify(suite));
+    presets.variablePresets = { presets: [{ name: "gold", variables: { tier: "gold" } }] };
+    const withPresets = segmentSignature({ ...inputs, suite: presets, at: 2 });
+    expect(withPresets).not.toBe(held);
+    const referenced: any = JSON.parse(JSON.stringify(presets));
+    referenced.variablePreset = "gold";
+    expect(segmentSignature({ ...inputs, suite: referenced, at: 2 })).not.toBe(withPresets);
+    const edited: any = JSON.parse(JSON.stringify(presets));
+    edited.variablePresets.presets[0].variables.tier = "silver";
+    expect(segmentSignature({ ...inputs, suite: edited, at: 2 })).not.toBe(withPresets);
+
     // Nor may what the model was built from and configured with.
     expect(segmentSignature({ ...inputs, at: 2, surveyJson: { elements: [] } })).not.toBe(held);
     expect(segmentSignature({ ...inputs, at: 2, testOptions: { locale: "de" } })).not.toBe(held);

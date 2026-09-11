@@ -100,6 +100,15 @@ plugin tab, when it comes, implements this over `creator.text` and adds a tab �
 * The host's `options` are **defaults**. What a person changes afterwards goes into the widget state and
   is never written back, so a host that later ships different defaults is not overruled by a state object
   that had repeated the old ones.
+* **The variable presets live in the suite, never in the host.** The tester's `variablePresets` container
+  — the definition survey of the host variables and the named presets of values for it — is a root key of
+  the Tests JSON, and the widget reads it from nowhere else: the runner, the recorder's replay and the
+  editor-time validation all see the document's own container, so a suite exported from the widget runs
+  unchanged in CI with `runSurveyTests(surveyJson, suite)`. A host that keeps a container of its own (a
+  Creator with `creator.variablePresets`) copies it into the suite text as a document edit; nothing in
+  `ITesterHost` hands it over at run time. A test references a preset by name from the Test options panel
+  (`variablePreset`, next to `variables`), and the session keeps the two exclusive in one document write,
+  because the tester refuses a test that carries both.
 
 ## The three screens, and the machine between them
 

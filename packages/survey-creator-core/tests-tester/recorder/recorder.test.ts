@@ -339,3 +339,70 @@ describe("writing into the Tests JSON buffer", () => {
     expect(text.indexOf(untouched)).toBeGreaterThan(0);
   });
 });
+
+// The variable presets travel with the case exactly as the starts do: the suite is where they live, and a
+// replay that dropped them would open a session on a model the case does not describe - or refuse to
+// open it, for a reference that is not unknown at all.
+describe("the variable presets of the suite, in a replay", () => {
+  const presetsSuite = {
+    name: "presets",
+    variablePresets: {
+      definition: {
+        elements: [
+          { type: "dropdown", name: "tier", choices: ["basic", "gold"], isRequired: true },
+          { type: "text", name: "employees", inputType: "number" },
+        ],
+      },
+      presets: [
+        { name: "gold customer", variables: { tier: "gold", employees: 12 } },
+        { name: "newcomer", variables: { tier: "basic", employees: 1 } },
+      ],
+    },
+    variablePreset: "newcomer",
+    tests: [] as Array<any>,
+  };
+
+  async function runWith(test: any): Promise<ReturnType<typeof silentRun>> {
+    return silentRun({
+      surveyJson: surveyJson,
+      suite: presetsSuite,
+      test: test,
+      steps: [],
+      testOptions: defaultTestOptions,
+      attachServerValidation: false,
+    });
+  }
+
+  it("resolves the preset a test names, over the one the suite names", async() => {
+    const outcome = await runWith({ name: "gold", variablePreset: "gold customer", steps: [] });
+    expect(getBlockingIssues(outcome)).toEqual([]);
+    const survey: any = outcome.survey;
+    expect(survey.getVariable("tier")).toBe("gold");
+    expect(survey.getVariable("employees")).toBe(12);
+    expect(outcome.testResult?.variablePreset).toBe("gold customer");
+  });
+
+  it("applies the suite's own preset to a test that names none", async() => {
+    const outcome = await runWith({ name: "plain", variables: { employees: 3 }, steps: [] });
+    expect(getBlockingIssues(outcome)).toEqual([]);
+    const survey: any = outcome.survey;
+    expect(survey.getVariable("tier")).toBe("basic");
+    expect(survey.getVariable("employees")).toBe(3);
+  });
+
+  it("reports a value the definition rejects as blocking, and builds no model for it", async() => {
+    const outcome = await runWith({ name: "platinum", variables: { tier: "platinum" }, steps: [] });
+    const blocking = getBlockingIssues(outcome);
+    expect(blocking.map(issue => issue.code)).toEqual(["variableInvalid"]);
+    expect(outcome.survey).toBeUndefined();
+  });
+
+  it("does not set a name the definition does not declare, and says so without blocking", async() => {
+    const outcome = await runWith({ name: "region", variables: { region: "eu" }, steps: [] });
+    expect(getBlockingIssues(outcome)).toEqual([]);
+    const survey: any = outcome.survey;
+    expect(survey.getVariable("region")).toBeUndefined();
+    const warnings = (outcome.testResult?.issues || []).map(issue => issue.code);
+    expect(warnings).toContain("variableNotDefined");
+  });
+});

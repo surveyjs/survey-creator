@@ -14,6 +14,7 @@ import { sample as brokenSuite } from "./13-broken-suite";
 import { sample as asyncFunctions } from "./14-async-functions";
 import { sample as webChoices } from "./15-web-choices";
 import { sample as playground } from "./16-playground";
+import { sample as variablePresets } from "./17-variable-presets";
 import type { Sample } from "./types";
 
 export type { Sample } from "./types";
@@ -35,6 +36,7 @@ export const samples: Array<Sample> = [
   asyncFunctions,
   webChoices,
   playground,
+  variablePresets,
 ];
 
 export const defaultSample: Sample = samples[0];

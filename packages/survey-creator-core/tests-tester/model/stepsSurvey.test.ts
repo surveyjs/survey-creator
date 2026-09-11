@@ -326,15 +326,15 @@ describe("the step list", () => {
     expect(calls.testOptions.length).toBe(7);
   });
 
-  // The three things a test carries that are not options - they are siblings of "options" in the
+  // The four things a test carries that are not options - they are siblings of "options" in the
   // document, not members of it, and section 4 of the tester README is exact about why. They sit in the
   // same panel and are told apart by the same rule: the question's name.
   it("routes the test's own fields to tests[i][field], each in its own shape", () => {
     const { survey, calls, filling } = build();
     const names: Array<string> = survey.getPanelByName("testOptions").elements
       .map((element: any) => element.name);
-    expect(names.slice(0, 3), "the three fields are not at the top of the Test options panel")
-      .toEqual(["description", "start", "variables"]);
+    expect(names.slice(0, 4), "the four fields are not at the top of the Test options panel")
+      .toEqual(["description", "start", "variablePreset", "variables"]);
 
     // A description is its text, and an emptied box takes the field out rather than writing "".
     survey.setValue("description", "  proves the provider question hides  ");
@@ -375,14 +375,49 @@ describe("the step list", () => {
     expect(calls.testFields[6]).toEqual({ name: "variables", value: undefined });
     expect(variables.errors.length).toBe(0);
 
+    // A preset is the name of one of the suite's, and an emptied dropdown takes the field out. Keeping
+    // it exclusive with the inline variables is the session's job, not this panel's.
+    survey.setValue("variablePreset", "gold customer");
+    expect(calls.testFields[7]).toEqual({ name: "variablePreset", value: "gold customer" });
+    survey.setValue("variablePreset", "");
+    expect(calls.testFields[8]).toEqual({ name: "variablePreset", value: undefined });
+
     // A fill reports nothing, here as everywhere: it is this model's own writing coming back.
-    fillTestFields(survey, { description: "read back", start: { data: {} }, variables: { a: 1 } },
-      filling);
-    expect(calls.testFields.length).toBe(7);
+    fillTestFields(survey, {
+      description: "read back", start: { data: {} }, variablePreset: "newcomer", variables: { a: 1 },
+    }, filling);
+    expect(calls.testFields.length).toBe(9);
     expect(survey.getValue("description")).toBe("read back");
     // An inlined start has no name to show, so it reads as the sentinel that produced it.
     expect(survey.getValue("start")).toBe("@inline");
+    expect(survey.getValue("variablePreset")).toBe("newcomer");
     expect(survey.getValue("variables")).toBe("{\n  \"a\": 1\n}");
+  });
+
+  // The presets a test can name are a fact about the document, filled into the dropdown the way the
+  // starts are - and through the core companion, so an entry without a name is no preset here either.
+  it("offers the suite's variable presets by name", () => {
+    const { calls, filling } = build();
+    const owner: ITesterStepsOwner = {
+      stepsLocked: false, cursor: 0, stepCount: 0, canOpenStepJson: false,
+      moveStepTo: () => {}, deleteStep: () => {}, startFrom: () => {}, renameStep: () => {},
+      goToRunner: () => {}, openStepJson: () => {}, setTestOption: () => {},
+      setTestField: (field, value) => calls.testFields.push({ name: field, value: value }),
+      setRecorderOption: () => {},
+    };
+    const model = new TesterStepsModel(owner);
+    model.update({
+      steps: [], states: [], cursor: 0, recording: false, testOptions: {},
+      testFields: { variablePreset: "gold customer" }, startNames: [],
+      variablePresetNames: ["gold customer", "newcomer"],
+      recorderOptions: {} as any,
+    });
+    const preset: any = model.survey.getQuestionByName("variablePreset");
+    expect(preset.choices.map((choice: any) => choice.value)).toEqual(["gold customer", "newcomer"]);
+    expect(preset.value).toBe("gold customer");
+    expect(calls.testFields.length, "a fill was reported as an edit").toBe(0);
+    expect(filling.current).toBe(false);
+    model.dispose();
   });
 
   it("finds the one move a drag can have made", () => {
@@ -420,7 +455,7 @@ describe("the step list", () => {
     try {
       const state = {
         steps: steps, states: states, cursor: 1, recording: true,
-        testOptions: {}, testFields: {}, startNames: ["declined"],
+        testOptions: {}, testFields: {}, startNames: ["declined"], variablePresetNames: [],
         recorderOptions: {
           coalesceSets: true, coalesceIdleMs: 700, mergeAdjacentSets: false,
           autoCheckAfterCommand: false,
@@ -433,6 +468,8 @@ describe("the step list", () => {
       // The suite's starts, plus the one this test can inline.
       const start: any = model.survey.getQuestionByName("start");
       expect(start.choices.map((choice: any) => choice.value)).toEqual(["declined", "@inline"]);
+      // A suite with no variable presets offers none.
+      expect(model.survey.getQuestionByName("variablePreset").choices.length).toBe(0);
 
       locked = true;
       model.update({ ...state, cursor: steps.length });

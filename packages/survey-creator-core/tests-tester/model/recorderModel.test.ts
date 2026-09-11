@@ -774,3 +774,80 @@ describe("dispose", () => {
     expect(typeof survey.tryComplete).toBe("function");
   });
 });
+
+// A preset and inline variables are two ways of writing the same thing, and the tester refuses a test
+// that carries both. The session keeps them exclusive in the document itself, in one write, so the suite
+// never passes through the state the validator rejects and the model on screen is rebuilt once.
+describe("a variable preset on the test being recorded", () => {
+  const suite = {
+    name: "presets",
+    variablePresets: {
+      definition: {
+        elements: [{ type: "dropdown", name: "tier", choices: ["basic", "gold"], isRequired: true }],
+      },
+      presets: [
+        { name: "gold customer", variables: { tier: "gold" } },
+        { name: "newcomer", variables: { tier: "basic" } },
+      ],
+    },
+    tests: [{ name: "recorded", variables: { tier: "basic" }, steps: [] }],
+  };
+  const surveyJson = {
+    elements: [
+      { type: "text", name: "company" },
+      { type: "text", name: "discountCode", visibleIf: "{tier} = 'gold'" },
+    ],
+  };
+
+  function testOf(host: RecorderHostStub): any {
+    return parseJson(host.text).value.tests[0];
+  }
+
+  it("takes the inline variables out when a preset is named, and the preset out when they are written", async() => {
+    const { recorder, host } = await start(surveyJson, suite);
+    expect((recorder.liveSurvey as any).getVariable("tier")).toBe("basic");
+
+    const before = host.writes.length;
+    await recorder.setTestField("variablePreset", "gold customer");
+    expect(host.writes.length - before, "one edit became two document writes").toBe(1);
+    expect(testOf(host).variablePreset).toBe("gold customer");
+    expect(testOf(host).variables).toBeUndefined();
+    // The replay behind the write rebuilt the model on the preset's values.
+    expect((recorder.liveSurvey as any).getVariable("tier")).toBe("gold");
+    expect((recorder.liveSurvey as any).getQuestionByName("discountCode").isVisible).toBe(true);
+    // What the validator would refuse is never in the document.
+    expect(new SurveyTestValidator().validate(parseJson(host.text).value)
+      .filter(issue => issue.severity === "error")).toEqual([]);
+
+    await recorder.setTestField("variables", { tier: "basic" });
+    expect(testOf(host).variablePreset).toBeUndefined();
+    expect(testOf(host).variables).toEqual({ tier: "basic" });
+    expect((recorder.liveSurvey as any).getVariable("tier")).toBe("basic");
+
+    // Taking a field out touches nothing beside it.
+    await recorder.setTestField("variables", undefined);
+    expect(testOf(host).variables).toBeUndefined();
+    expect(testOf(host).variablePreset).toBeUndefined();
+  }, 30000);
+
+  it("offers the suite's presets by name in the Test options panel", async() => {
+    const { recorder } = await start(surveyJson, suite);
+    const preset: any = recorder.steps.survey.getQuestionByName("variablePreset");
+    expect(preset.choices.map((choice: any) => choice.value)).toEqual(["gold customer", "newcomer"]);
+    expect(preset.value).toBeUndefined();
+    await recorder.setTestField("variablePreset", "newcomer");
+    expect(preset.value).toBe("newcomer");
+    expect(recorder.steps.survey.getValue("variables")).toBeUndefined();
+  }, 30000);
+
+  it("refuses to create a test that both names a preset and writes variables", async() => {
+    const { recorder, host } = await start(surveyJson, suite);
+    const refused = recorder.createTest({
+      name: "both", variablePreset: "newcomer", variablesText: "{ \"tier\": \"gold\" }",
+    });
+    expect(refused).toContain("never both");
+    expect(parseJson(host.text).value.tests.length).toBe(1);
+    expect(recorder.createTest({ name: "one", variablePreset: "newcomer" })).toBeUndefined();
+    expect(parseJson(host.text).value.tests[1]).toEqual({ name: "one", variablePreset: "newcomer", steps: [] });
+  });
+});

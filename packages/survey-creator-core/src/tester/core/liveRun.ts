@@ -35,6 +35,8 @@ export interface LiveTest {
   issues: Array<ISurveyTestIssue>;
   options?: ISurveyTestOptions;
   variables?: { [name: string]: any };
+  // The preset the test itself referenced, next to the variables it resolved to.
+  variablePreset?: string;
   start?: ISurveyTestStart;
   startName?: string;
   hasModel?: boolean;
@@ -185,6 +187,7 @@ export function applyEvent(run: LiveRun, event: SurveyTestExecutionEvent, contin
         test.status = !continued ? event.result.status : rollUpStatus(test, event.result.status);
         test.options = event.result.options;
         test.variables = event.result.variables;
+        test.variablePreset = event.result.variablePreset;
         // A continuation carries no start - the model it ran on already had one applied - so the row
         // keeps the one the segment that built the model reported.
         if (!continued || event.result.start !== undefined) test.start = event.result.start;

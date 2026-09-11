@@ -58,7 +58,7 @@ export const TEST_OPTION_NAMES = [
 // Everything else the test carries besides its name and its steps. These are siblings of "options" and
 // not members of it - section 4 of the tester README is exact about why - so they are written at
 // tests[i][field] and are told apart from the options by the same rule: the question's name.
-export const TEST_FIELD_NAMES = ["description", "start", "variables"];
+export const TEST_FIELD_NAMES = ["description", "start", "variablePreset", "variables"];
 export const RECORDER_OPTION_NAMES = [
   "coalesceSets", "coalesceIdleMs", "mergeAdjacentSets", "autoCheckAfterCommand",
 ];
@@ -78,11 +78,14 @@ const FALSE_TEXT = "false";
 // panel cannot write the data itself, since the model that holds it is the session's.
 export const TESTER_INLINE_START = "@inline";
 
-// The three fields as the panel reads them. `start` is a name, an object the case inlines, or nothing;
-// `variables` is an object or nothing. Neither is a scalar, which is exactly why they are not options.
+// The four fields as the panel reads them. `start` is a name, an object the case inlines, or nothing;
+// `variables` is an object or nothing; `variablePreset` is the name of one of the suite's presets and
+// the other way of writing the variables - the tester refuses a test that carries both, so the session
+// that writes them keeps them exclusive (TesterRecorderModel.setTestField).
 export interface ITesterTestFields {
   description?: string;
   start?: any;
+  variablePreset?: string;
   variables?: any;
 }
 
@@ -136,6 +139,8 @@ export interface ITesterStepsState {
   testOptions: ISurveyTestOptions;
   testFields: ITesterTestFields;
   startNames: Array<string>;
+  // The names of the suite's "variablePresets.presets", read from the document like the starts.
+  variablePresetNames: Array<string>;
   recorderOptions: RecorderOptions;
 }
 
@@ -184,6 +189,11 @@ export class TesterStepsModel extends Base {
     if (!!start) {
       start.choices = state.startNames.map(name => ({ value: name, text: name }))
         .concat([{ value: TESTER_INLINE_START, text: testerText("recorder.testPanel.startInline") }] as any);
+    }
+    // The presets the suite offers, by name: the same fact about the document, filled the same way.
+    const preset: any = this.survey.getQuestionByName("variablePreset");
+    if (!!preset) {
+      preset.choices = state.variablePresetNames.map(name => ({ value: name, text: name }));
     }
     fillOptionValues(this.survey, TEST_OPTION_NAMES, state.testOptions, this.filling);
     fillOptionValues(this.survey, RECORDER_OPTION_NAMES, state.recorderOptions, this.filling);
@@ -247,9 +257,10 @@ export function fillOptionValues(survey: SurveyModel, names: Array<string>, valu
   }
 }
 
-// Putting the three non-option fields into their questions. Each one is shown as what it is: a
-// description is its text, a start is the name it references or the mark that says it is inlined, and
-// variables are the JSON of the object, laid out so it can be read and edited.
+// Putting the four non-option fields into their questions. Each one is shown as what it is: a
+// description is its text, a start is the name it references or the mark that says it is inlined, a
+// preset is the name it references, and variables are the JSON of the object, laid out so it can be
+// read and edited.
 export function fillTestFields(survey: SurveyModel, fields: ITesterTestFields,
   filling: { current: boolean }): void {
   filling.current = true;
@@ -264,6 +275,12 @@ export function fillTestFields(survey: SurveyModel, fields: ITesterTestFields,
         : !!fields.start && typeof fields.start === "object" ? TESTER_INLINE_START : undefined;
     }
 
+    const preset: any = survey.getQuestionByName("variablePreset");
+    if (!!preset) {
+      preset.value = typeof fields.variablePreset === "string" && !!fields.variablePreset
+        ? fields.variablePreset : undefined;
+    }
+
     const variables: any = survey.getQuestionByName("variables");
     if (!!variables) {
       const text = stringifyObject(fields.variables);
@@ -275,7 +292,7 @@ export function fillTestFields(survey: SurveyModel, fields: ITesterTestFields,
   }
 }
 
-// What a change in one of the three non-option fields means for the document. Each takes a different
+// What a change in one of the four non-option fields means for the document. Each takes a different
 // shape, so each is read differently - and the one that can be typed wrongly says so on its own
 // question instead of writing something the next run would choke on.
 function writeTestField(question: any, field: string, value: any, owner: ITesterStepsOwner): void {
@@ -284,6 +301,12 @@ function writeTestField(question: any, field: string, value: any, owner: ITester
   if (field === "description") {
     const text = typeof value === "string" ? value.trim() : "";
     owner.setTestField(field, text || undefined);
+    return;
+  }
+
+  // A preset is a name of the suite's, and the session takes the inline variables out beside it.
+  if (field === "variablePreset") {
+    owner.setTestField(field, !value ? undefined : value);
     return;
   }
 
@@ -438,7 +461,7 @@ export function createStepsSurvey(owner: ITesterStepsOwner,
     // the same survey rather than markup outside it, so it stands between the matrix and the panels.
     { type: "html", name: "cursorNote", html: "" },
     // Everything the test carries besides its name and its steps, under the list of those steps. All
-    // of it is written into the test and travels with the suite: the three fields at tests[i][field],
+    // of it is written into the test and travels with the suite: the four fields at tests[i][field],
     // and the seven options at tests[i].options, merged over the suite options per key, where empty
     // means "no override". One question per member, in the format's own vocabulary.
     {
@@ -448,7 +471,7 @@ export function createStepsSurvey(owner: ITesterStepsOwner,
       description: testerText("recorder.testPanel.description"),
       state: "collapsed",
       elements: [
-        // The three that are not options. They are asked for here rather than when the test is
+        // The four that are not options. They are asked for here rather than when the test is
         // created, because a test has nothing to describe and nothing to start from until it has
         // steps.
         {
@@ -460,6 +483,15 @@ export function createStepsSurvey(owner: ITesterStepsOwner,
           type: "dropdown", name: "start", title: testerText("recorder.testPanel.startTitle"),
           placeholder: testerText("recorder.testPanel.startPlaceholder"),
           description: testerText("recorder.testPanel.startNote"),
+          choices: [],
+        },
+        // The preset in front of the inline variables: it is the way of writing them a suite with a
+        // container offers first, and the box under it shows what a chosen preset took out.
+        {
+          type: "dropdown", name: "variablePreset",
+          title: testerText("recorder.testPanel.variablePresetTitle"),
+          placeholder: testerText("recorder.testPanel.variablePresetPlaceholder"),
+          description: testerText("recorder.testPanel.variablePresetNote"),
           choices: [],
         },
         {

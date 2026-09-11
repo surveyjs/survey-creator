@@ -192,8 +192,10 @@ export function segmentSignature(request: {
   try {
     return JSON.stringify([
       // The stubs are in here for the same reason the survey JSON is: a model whose function answered
-      // 1.25 is not a model of a case that now says 3, however unchanged its steps are.
-      request.surveyJson, suite.options, suite.variables, suite.starts, suite.functions, suite.web,
+      // 1.25 is not a model of a case that now says 3, however unchanged its steps are. The variable
+      // presets too: the test names a preset, and the values behind that name live in the container.
+      request.surveyJson, suite.options, suite.variables, suite.variablePresets, suite.variablePreset,
+      suite.starts, suite.functions, suite.web,
       request.testIndex, request.testName, test,
       getSegmentSteps(suite, request.testIndex).slice(0, request.at),
       request.testOptions, request.attachServerValidation,
