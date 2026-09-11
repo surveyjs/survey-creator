@@ -320,10 +320,20 @@ export class SurveyQuestionProperties {
   private getAllDefinitionsByClass(className: string): Array<ISurveyQuestionEditorDefinition> {
     const result: Array<ISurveyQuestionEditorDefinition> = [];
     const usedProperties: { [name: string]: boolean } = {};
-    if (className.indexOf("@") > -1 && this.getClassDefinition(className, true)) {
+    if (className.indexOf("@") > -1 && this.hasPrefixedClassDefinition(className)) {
       return this.getDefinitionsForPrefixedClass(className, result, usedProperties);
     }
     return this.getDefinitionsForRegularClass(className, result, usedProperties);
+  }
+  private hasPrefixedClassDefinition(className: string): boolean {
+    if (!!this.getClassDefinition(className, true)) return true;
+    // There is no "<owner>@<questionType>" definition, but the suffix is a registered question type,
+    // for example a type added into matrixDropdownColumnTypes. Use the "<owner>@default" definition
+    // and take the type specific properties from the standalone question type definition.
+    const index = className.indexOf("@");
+    const clName = className.substring(index + 1);
+    if (!Serializer.isDescendantOf(clName, "question")) return false;
+    return !!this.getClassDefinition(className.substring(0, index + 1) + "default");
   }
   private getDefinitionsForPrefixedClass(
     className: string,
@@ -341,13 +351,27 @@ export class SurveyQuestionProperties {
     if (classes.indexOf(className) < 0) {
       classes.unshift(className);
     }
-    if (classes.indexOf(prefix + "default") < 0) {
-      classes.unshift(prefix + "default");
+    const defaultName = prefix + "default";
+    if (classes.indexOf(defaultName) < 0) {
+      classes.unshift(defaultName);
     }
+    let hasTypeDefinition = false;
     for (const cl of classes) {
       const def = this.getClassDefinition(cl);
       if (def) {
+        hasTypeDefinition = hasTypeDefinition || cl !== defaultName;
         result.push(def);
+      }
+    }
+    if (!hasTypeDefinition) {
+      // None of the "<owner>@<questionType>" definitions is defined, take the type specific
+      // properties from the standalone question type definitions instead.
+      for (const cl of classes) {
+        if (cl === defaultName) continue;
+        const def = this.getClassDefinition(cl.substring(prefix.length));
+        if (def) {
+          result.push(def);
+        }
       }
     }
     this.markUsedProperties(result, usedProperties);

@@ -246,6 +246,8 @@ export var bgStrings = {
     translateUsigAI: "Автоматичен превод на всички",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Преведи от: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Превод на останалите низове",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Непреведени низове",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var bgStrings = {
     translationSource: "Източник: ",
     // [Auto-translated] "Target: "
     translationTarget: "Цел: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Изходен език",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Целеви език",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} от {1} струни преведени",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Сигурни ли сте, че искате да изтриете всички преведени низове за избрания език?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Изглед на формата",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Изглед на мрежата",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Превод на низове",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Survey Strings",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Няма струни за превод",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Всички струни са преведени",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} струни не се превеждат",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Връзките в YouTube не се поддържат.",
     // [Auto-translated] "Export"
@@ -808,6 +832,10 @@ export var bgStrings = {
     removeItem: "Кликни за изтриване на елемент...",
     // "Drag the item"
     dragItem: "Плъзни елемента",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Разширете вложените избори",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Вложени избори с колапс",
     // "Edit"
     edit: "Редактиране",
     // "Done"
@@ -910,6 +938,8 @@ export var bgStrings = {
     surveyTitlePlaceholder: "Заглавие на анкетата",
     // "Page {num}"
     pageTitlePlaceholder: "Страница {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Заглавие на панела",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Начална страница",
     // "Description"
@@ -1262,6 +1292,8 @@ export var bgStrings = {
     minRowCount: "Минимален брой редове",
     // "Maximum row count"
     maxRowCount: "Максимален брой редове",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Израз за брой редове",
     // "Confirm row removal"
     confirmDelete: "Потвърждаване изтриването на реда",
     // "Confirmation message"
@@ -1272,6 +1304,8 @@ export var bgStrings = {
     minPanelCount: "Минимален брой панели",
     // "Maximum number of entries"
     maxPanelCount: "Максимален брой панели",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Израз за брой записи",
     // "Initial entry state"
     panelsState: "Разширено състояние на вътрешния панел",
     // "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var bgStrings = {
       // [Auto-translated] "Informational"
       info: "Информационна"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Фронт",
+      // [Auto-translated] "Rear"
+      environment: "Задна част"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Изображения",
@@ -2497,10 +2537,14 @@ export var bgStrings = {
       keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Задайте израз, който изчислява броя на записите. Този израз замества настройката \"Начален брой записи\" и се преоценява всеки път, когато стойностите, към които се позовава, се променят. Резултатът е ограничен от настройките \"Минимален брой записи\" и \"Максимален брой записи\". Докато този израз е зададен, респондентите не могат да добавят или премахват записи ръчно.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присвоява номера на въпроси, вложени в динамичния панел."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Задайте израз, който изчислява броя на редовете. Този израз замества настройката \"Брой редове\" и се преоценява всеки път, когато стойностите, към които се позовава, се променят. Резултатът е ограничен от настройките \"Минимален брой редове\" и \"Максимален брой редове\". Докато този израз е зададен, респондентите не могат да добавят или премахват редове ръчно.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Задейства подкана за потвърждение, преди да премахнете ред.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var bgStrings = {
     tabAlign: "Подравняване на раздели",
     // [Auto-translated] "File source type"
     sourceType: "Тип източник на файлове",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Стандартна камера",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Побиране в контейнера",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var bgStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Елемент 1" }, { value: "item2", text: "Елемент 2" }, { value: "item3", text: "Елемент 3" }],
-    columns: [{ value: "column1", text: "Колона 1" }, { value: "column2", text: "Колона 2" }, { value: "column3", text: "Колона 3" }],
-    rows: [{ value: "row1", text: "Ред 1" }, { value: "row2", text: "Ред 2" }],
-    matrixColumns: [{ name: "column1", title: "Колона 1" }, { name: "column2", title: "Колона 2" }, { name: "column3", title: "Колона 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Елемент 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Елемент 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Елемент 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Колона 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Колона 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Колона 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Ред 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Ред 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Колона 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Колона 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Колона 3"
+      }
+    ]
   }
 };
 

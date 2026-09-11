@@ -246,6 +246,8 @@ export var polishStrings = {
     translateUsigAI: "Automatycznie tłumacz wszystko",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Przetłumacz z: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Przekłóń pozostałe ciągi",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Nieprzetłumaczone ciągi znaków",
     // [Auto-translated] "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var polishStrings = {
     translationSource: "Źródło: ",
     // [Auto-translated] "Target: "
     translationTarget: "Cel: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Język źródłowy",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Język docelowy",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} przetłumaczonych strun",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Czy jesteś pewien, że chcesz usunąć wszystkie przetłumaczone ciągi znaków dla wybranego języka?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Widok formy",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Widok siatki",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Tłumaczenie ciągów znaków",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Stringi pomiarowe",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Brak żadnych strików do tłumaczenia",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Wszystkie ciągi są tłumaczone",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} ciągów nie są tłumaczone",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Linki do YouTube nie są obsługiwane.",
     // [Auto-translated] "Export"
@@ -809,6 +833,10 @@ export var polishStrings = {
     removeItem: "Kliknij, aby usunąć element...",
     // [Auto-translated] "Drag the item"
     dragItem: "Przeciągnij element",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Rozwiń zagnieżdżone wybory",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Wybory zagnieżdżone w upadku",
     // "Edit"
     edit: "Edytuj",
     // [Auto-translated] "Done"
@@ -911,6 +939,8 @@ export var polishStrings = {
     surveyTitlePlaceholder: "Tytuł ankiety",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "Strona {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Tytuł panelu",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Strona startowa",
     // [Auto-translated] "Description"
@@ -1263,6 +1293,8 @@ export var polishStrings = {
     minRowCount: "Minimalna liczba wierszy",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Maksymalna liczba wierszy",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Wyrażenie o liczbie wierszy",
     // "Confirm row removal"
     confirmDelete: "Potwierdź usunięcie wiersza",
     // [Auto-translated] "Confirmation message"
@@ -1273,6 +1305,8 @@ export var polishStrings = {
     minPanelCount: "Minimalna liczba zgłoszeń",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maksymalna liczba wpisów",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Wyrażenie liczby wpisów",
     // [Auto-translated] "Initial entry state"
     panelsState: "Początkowy stan wpisu",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1909,6 +1943,12 @@ export var polishStrings = {
       // [Auto-translated] "Informational"
       info: "Informacyjne"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Front",
+      // [Auto-translated] "Rear"
+      environment: "Tył"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Obrazy",
@@ -2498,10 +2538,14 @@ export var polishStrings = {
       keyName: "Odwołaj się do nazwy pytania, aby wymagać od użytkownika podania unikatowej odpowiedzi na to pytanie w każdym panelu.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem wpisu.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Określ wyrażenie, które oblicza liczbę wpisów. To wyrażenie nadpisuje ustawienie \"Początkowa liczba wpisów\" i jest ponownie oceniane za każdym razem, gdy zmieniają się wartości, do których się odwołuje. Wynik jest ograniczony ustawieniami \"Minimalna liczba wpisów\" i \"Maksymalna liczba wpisów\". Podczas gdy to wyrażenie jest ustawione, respondenci nie mogą ręcznie dodawać ani usuwać wpisów.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w panelu dynamicznym."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Określ wyrażenie, które oblicza liczbę wierszy. To wyrażenie nadpisuje ustawienie \"Liczba wierszy\" i jest ponownie oceniane za każdym razem, gdy zmieniają się wartości, do których się odwołuje. Wynik jest ograniczony ustawieniami \"Minimalna liczba wierszy\" i \"Maksymalna liczba wierszy\". Podczas gdy to wyrażenie jest ustawione, respondenci nie mogą ręcznie dodawać ani usuwać wierszy.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Powoduje wyzwolenie monitu o potwierdzenie przed usunięciem wiersza.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2965,6 +3009,8 @@ export var polishStrings = {
     tabAlign: "Wyrównanie tabulatorów",
     // [Auto-translated] "File source type"
     sourceType: "Typ źródła pliku",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Domyślna kamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Pasuje do pojemnika",
     // [Auto-translated] "Set value expression"
@@ -3287,10 +3333,69 @@ export var polishStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Przedmiot 1" }, { value: "item2", text: "Przedmiot 2" }, { value: "item3", text: "Przedmiot 3" }],
-    columns: [{ value: "column1", text: "Kolumna 1" }, { value: "column2", text: "Kolumna 2" }, { value: "column3", text: "Kolumna 3" }],
-    rows: [{ value: "row1", text: "Wiersz 1" }, { value: "row2", text: "Wiersz 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolumna 1" }, { name: "column2", title: "Kolumna 2" }, { name: "column3", title: "Kolumna 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Przedmiot 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Przedmiot 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Przedmiot 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolumna 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolumna 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolumna 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Wiersz 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Wiersz 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolumna 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolumna 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolumna 3"
+      }
+    ]
   }
 };
 

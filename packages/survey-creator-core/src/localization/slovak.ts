@@ -246,6 +246,8 @@ export var skStrings = {
     translateUsigAI: "Automatický preklad všetkého",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Preložiť z: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Prekladajte zostávajúce reťazce",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Nepreložené reťazce",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var skStrings = {
     translationSource: "Zdroj: ",
     // [Auto-translated] "Target: "
     translationTarget: "Cieľ: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Zdrojový jazyk",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Cieľový jazyk",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} preložených strunov",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Ste si istý, že chcete vymazať všetky preložené reťazce pre vybraný jazyk?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Zobrazenie formulára",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Mriežka",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Prekladajte reťazce",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Prieskumné reťazce",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Žiadne reťazce na preklad",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Všetky reťazce sú preložené",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} reťazce nie sú preložené",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Odkazy na YouTube nie sú podporované.",
     // [Auto-translated] "Export"
@@ -808,6 +832,10 @@ export var skStrings = {
     removeItem: "Kliknutím položku odstránite...",
     // [Auto-translated] "Drag the item"
     dragItem: "Potiahnite položku",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Rozšíriť vnorené voľby",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Collapse vnorené voľby",
     // "Edit"
     edit: "Upraviť",
     // [Auto-translated] "Done"
@@ -910,6 +938,8 @@ export var skStrings = {
     surveyTitlePlaceholder: "Sem vložte titul prieskumu",
     // "Page {num}"
     pageTitlePlaceholder: "Sem zadajte titul stránky",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Názov panelu",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Úvodná stránka",
     // "Description"
@@ -1262,6 +1292,8 @@ export var skStrings = {
     minRowCount: "Minimálny počet riadkov",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Maximálny počet riadkov",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Výraz počtu riadkov",
     // "Confirm row removal"
     confirmDelete: "Potvrdenie odstránenia riadka",
     // [Auto-translated] "Confirmation message"
@@ -1272,6 +1304,8 @@ export var skStrings = {
     minPanelCount: "Minimálny počet záznamov",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maximálny počet záznamov",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Výraz počtu vstupov",
     // [Auto-translated] "Initial entry state"
     panelsState: "Počiatočný stav zadania",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var skStrings = {
       // [Auto-translated] "Informational"
       info: "Informačné"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Predná časť",
+      // [Auto-translated] "Rear"
+      environment: "Zadná časť"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Obrázky",
@@ -2497,10 +2537,14 @@ export var skStrings = {
       keyName: "Odkážte na názov otázky, ak chcete, aby používateľ poskytol jedinečnú odpoveď na túto otázku na každom paneli.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Špecifikujte výraz, ktorý vypočíta počet záznamov. Tento výraz prepíše nastavenie \"Počiatočný počet záznamov\" a je znovu vyhodnocovaný vždy, keď sa zmenia hodnoty, na ktoré odkazuje. Výsledok je obmedzený nastaveniami \"Minimálny počet záznamov\" a \"Maximálny počet záznamov\". Kým je tento výraz nastavený, respondenti nemôžu manuálne pridávať alebo odstraňovať položky.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Priraďuje čísla otázkam vnoreným do dynamického panela."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Špecifikujte výraz, ktorý vypočíta počet riadkov. Tento výraz prepíše nastavenie \"Počet riadkov\" a je znovu vyhodnocovaný vždy, keď sa zmenia hodnoty, na ktoré odkazuje. Výsledok je obmedzený nastaveniami \"Minimálny počet riadkov\" a \"Maximálny počet riadkov\". Kým je tento výraz nastavený, respondenti nemôžu riadky manuálne pridávať alebo odstraňovať.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Spustí výzvu na potvrdenie pred odstránením riadka.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var skStrings = {
     tabAlign: "Zarovnanie tabulátora",
     // [Auto-translated] "File source type"
     sourceType: "Typ zdroja súboru",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Predvolená kamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Vhodné na kontajner",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var skStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Položka 1" }, { value: "item2", text: "Položka 2" }, { value: "item3", text: "Položka 3" }],
-    columns: [{ value: "column1", text: "Stĺpec 1" }, { value: "column2", text: "Stĺpec 2" }, { value: "column3", text: "Stĺpec 3" }],
-    rows: [{ value: "row1", text: "Riadok 1" }, { value: "row2", text: "Riadok 2" }],
-    matrixColumns: [{ name: "column1", title: "Stĺpec 1" }, { name: "column2", title: "Stĺpec 2" }, { name: "column3", title: "Stĺpec 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Položka 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Položka 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Položka 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Stĺpec 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Stĺpec 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Stĺpec 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Riadok 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Riadok 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Stĺpec 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Stĺpec 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Stĺpec 3"
+      }
+    ]
   }
 };
 

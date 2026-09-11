@@ -246,6 +246,8 @@ export var arStrings = {
     translateUsigAI: "ترجمة تلقائية للكل",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "ترجمة من: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "ترجمة السلاسل المتبقية",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "النصوص غير المترجمة",
     // [Auto-translated] "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var arStrings = {
     translationSource: "مصدر: ",
     // [Auto-translated] "Target: "
     translationTarget: "هدف: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "لغة المصدر",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "اللغة المستهدفة",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} الوترية المترجمة",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "هل أنت متأكد أنك ترغب في حذف جميع السلاسل المترجمة للغة المحددة؟",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "عرض النموذج",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "عرض الشبكة",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "ترجمة السلاسل النصية",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "سلاسل المسح",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "لا توجد شرائط للترجمة",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "جميع السلاسل النصية مترجمة",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} السلاسل النصية لا تترجم",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "روابط يوتيوب غير مدعومة.",
     // [Auto-translated] "Export"
@@ -808,6 +832,10 @@ export var arStrings = {
     removeItem: "انقر لإزالة العنصر...",
     // [Auto-translated] "Drag the item"
     dragItem: "سحب العنصر",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "توسيع الخيارات المتداخلة",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "انهيار الخيارات المتداخلة",
     // "Edit"
     edit: "التعديل",
     // "Done"
@@ -910,6 +938,8 @@ export var arStrings = {
     surveyTitlePlaceholder: "أدخل عنوان الإستبيان هنا",
     // "Page {num}"
     pageTitlePlaceholder: "أدخل عنوان الصفحة هنا",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "عنوان اللجنة",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "الصفحة الرئيسية",
     // "Description"
@@ -1262,6 +1292,8 @@ export var arStrings = {
     minRowCount: "الحد الأدنى لعدد الصفوف",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "الحد الأقصى لعدد الصفوف",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "تعبير عدد الصفوف",
     // "Confirm row removal"
     confirmDelete: "تأكيد حذف الصف",
     // [Auto-translated] "Confirmation message"
@@ -1272,6 +1304,8 @@ export var arStrings = {
     minPanelCount: "الحد الأدنى لعدد الإدخالات",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "الحد الأقصى لعدد الإدخالات",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "تعبير عدد المدخلات",
     // [Auto-translated] "Initial entry state"
     panelsState: "حالة الدخول الأولية",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var arStrings = {
       // [Auto-translated] "Informational"
       info: "اعلاميه"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "الواجهة",
+      // [Auto-translated] "Rear"
+      environment: "الخلف"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "الصور",
@@ -2497,10 +2537,14 @@ export var arStrings = {
       keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "حدد تعبيرا يحسب عدد الإدخالات. هذا التعبير يتجاوز إعداد \"العدد الأولي للإدخالات\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الإدخالات\" و\"الحد الأقصى لعدد الإدخالات\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الإدخالات يدويا.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "تعيين أرقام للأسئلة المتداخلة داخل اللوحة الديناميكية."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "حدد تعبيرا يحسب عدد الصفوف. هذا التعبير يتجاوز إعداد \"عدد الصفوف\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الصفوف\" و\"الحد الأقصى لعدد الصفوف\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الصفوف يدويا.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "يؤدي إلى تشغيل مطالبة تأكيد قبل إزالة صف.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var arStrings = {
     tabAlign: "محاذاة علامات التبويب",
     // [Auto-translated] "File source type"
     sourceType: "نوع مصدر الملف",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "الكاميرا الافتراضية",
     // [Auto-translated] "Fit to container"
     fitToContainer: "يصلح للحاوية",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var arStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "بند 1" }, { value: "item2", text: "بند 2" }, { value: "item3", text: "بند 3" }],
-    columns: [{ value: "column1", text: "عمود 1" }, { value: "column2", text: "عمود 2" }, { value: "column3", text: "عمود 3" }],
-    rows: [{ value: "row1", text: "صف 1" }, { value: "row2", text: "صف 2" }],
-    matrixColumns: [{ name: "column1", title: "عمود 1" }, { name: "column2", title: "عمود 2" }, { name: "column3", title: "عمود 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "بند 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "بند 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "بند 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "عمود 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "عمود 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "عمود 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "صف 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "صف 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "عمود 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "عمود 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "عمود 3"
+      }
+    ]
   }
 };
 

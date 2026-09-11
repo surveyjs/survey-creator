@@ -246,6 +246,8 @@ export const roStrings = {
     translateUsigAI: "Traducere automată a tuturor",
     // "Translate from: "
     translateUsigAIFrom: "Traducere din: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Translatează corzile rămase",
     // "Untranslated strings"
     translationDialogTitle: "Șiruri netraduse",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export const roStrings = {
     translationSource: "Sursă: ",
     // "Target: "
     translationTarget: "Țintă: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Limba sursă",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Limba țintă",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} corzi traduse",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Ești sigur că dorești să ștergi toate șirurile traduse pentru limba selectată?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Vizualizarea formularului",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Vizualizare în grilă",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Translatează corzile",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "String de sondaj",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Fără corzi de tradus",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Toate corzile sunt traduse",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} șirurile nu sunt traduse",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Linkurile YouTube nu sunt acceptate.",
     // "Export"
@@ -808,6 +832,10 @@ export const roStrings = {
     removeItem: "Faceți clic pentru a elimina elementul...",
     // "Drag the item"
     dragItem: "Trageți elementul",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Extinde alegerile imbricate",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Colapsul alegerilor imbricate",
     // "Edit"
     edit: "Editează",
     // "Done"
@@ -910,6 +938,8 @@ export const roStrings = {
     surveyTitlePlaceholder: "Titlul chestionarului",
     // "Page {num}"
     pageTitlePlaceholder: "Pagina {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Titlul panelului",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Pagina de pornire",
     // "Description"
@@ -1262,6 +1292,8 @@ export const roStrings = {
     minRowCount: "Număr minim de rânduri",
     // "Maximum row count"
     maxRowCount: "Număr maxim de rânduri",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Expresia numărului de rânduri",
     // "Confirm row removal"
     confirmDelete: "Confirmați ștergerea rândului",
     // "Confirmation message"
@@ -1272,6 +1304,8 @@ export const roStrings = {
     minPanelCount: "Număr minim de panouri",
     // "Maximum number of entries"
     maxPanelCount: "Număr maxim de panouri",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Expresia numărului de intrări",
     // "Initial entry state"
     panelsState: "Starea de colaps a panoului intern",
     // "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export const roStrings = {
       // [Auto-translated] "Informational"
       info: "Informaţionale"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Față",
+      // [Auto-translated] "Rear"
+      environment: "Partea din spate"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Imagini",
@@ -2497,10 +2537,14 @@ export const roStrings = {
       keyName: "Faceți referire la un nume de întrebare pentru a solicita unui utilizator să furnizeze un răspuns unic pentru această întrebare în fiecare panou.",
       // "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Specifică o expresie care calculează numărul de intrări. Această expresie suprascrie setarea \"Număr inițial de intrări\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de intrări\" și \"Număr maxim de intrări\". Deși această expresie este setată, respondenții nu pot adăuga sau elimina manual elementele.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Atribuie numere întrebărilor imbricate în panoul dinamic."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specifică o expresie care calculează numărul de rânduri. Această expresie suprascrie setarea \"Număr de rânduri\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de rânduri\" și \"Număr maxim de rânduri\". Deși această expresie este setată, respondenții nu pot adăuga sau elimina rânduri manual.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un rând.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export const roStrings = {
     tabAlign: "Alinierea tabului",
     // "File source type"
     sourceType: "Tipul sursei de fișier",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Cameră implicită",
     // "Fit to container"
     fitToContainer: "Potrivește în container",
     // "Set value expression"
@@ -3286,10 +3332,69 @@ export const roStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Element 1" }, { value: "item2", text: "Element 2" }, { value: "item3", text: "Element 3" }],
-    columns: [{ value: "column1", text: "Coloană 1" }, { value: "column2", text: "Coloană 2" }, { value: "column3", text: "Coloană 3" }],
-    rows: [{ value: "row1", text: "Rând 1" }, { value: "row2", text: "Rând 2" }],
-    matrixColumns: [{ name: "column1", title: "Coloană 1" }, { name: "column2", title: "Coloană 2" }, { name: "column3", title: "Coloană 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Element 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Element 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Element 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Coloană 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Coloană 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Coloană 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Rând 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Rând 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Coloană 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Coloană 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Coloană 3"
+      }
+    ]
   }
 };
 

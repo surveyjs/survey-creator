@@ -246,6 +246,8 @@ export var indonesianStrings = {
     translateUsigAI: "Terjemahkan otomatis Semua",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Terjemahkan dari: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Terjemahkan string yang tersisa",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "String yang tidak diterjemahkan",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var indonesianStrings = {
     translationSource: "Sumber: ",
     // [Auto-translated] "Target: "
     translationTarget: "Target: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Bahasa sumber",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Bahasa target",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} string {1} diterjemahkan",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Apakah Anda yakin ingin menghapus semua string terjemahan untuk bahasa yang dipilih?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Tampilan Formulir",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Tampilan Grid",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Terjemahkan string",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "String Survei",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Tidak ada string yang harus diterjemahkan",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Semua string diterjemahkan",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} string tidak diterjemahkan",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Tautan YouTube tidak didukung.",
     // [Auto-translated] "Export"
@@ -808,6 +832,10 @@ export var indonesianStrings = {
     removeItem: "Klik untuk menghapus item...",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Perluas pilihan bersarang",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Menggabungkan pilihan bersarang",
     // "Edit"
     edit: "Ubah",
     // [Auto-translated] "Done"
@@ -910,6 +938,8 @@ export var indonesianStrings = {
     surveyTitlePlaceholder: "Judul Survei",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "Halaman {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Judul Panel",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Halaman Awal",
     // [Auto-translated] "Description"
@@ -1262,6 +1292,8 @@ export var indonesianStrings = {
     minRowCount: "Jumlah baris minimum",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Jumlah baris maksimum",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Ekspresi hitungan baris",
     // "Confirm row removal"
     confirmDelete: "Mengonfirmasi penghapusan baris",
     // [Auto-translated] "Confirmation message"
@@ -1272,6 +1304,8 @@ export var indonesianStrings = {
     minPanelCount: "Jumlah minimum entri",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Jumlah maksimum entri",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Ekspresi jumlah entri",
     // [Auto-translated] "Initial entry state"
     panelsState: "Status entri awal",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var indonesianStrings = {
       // [Auto-translated] "Informational"
       info: "Informasi"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Depan",
+      // [Auto-translated] "Rear"
+      environment: "Belakang"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Gambar",
@@ -2497,10 +2537,14 @@ export var indonesianStrings = {
       keyName: "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Tentukan ekspresi yang menghitung jumlah entri. Ekspresi ini menimpa pengaturan \"Jumlah awal entri\" dan dievaluasi ulang setiap kali nilai yang dirujuk berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah minimum entri\" dan \"Jumlah maksimum entri\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus entri secara manual.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Menetapkan nomor ke pertanyaan yang bersarang dalam panel dinamis."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Tentukan ekspresi yang menghitung jumlah baris. Ekspresi ini menimpa pengaturan \"Jumlah baris\" dan dievaluasi ulang setiap kali nilai yang direferensikan berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah baris minimum\" dan \"Jumlah baris maksimum\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus baris secara manual.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Memicu perintah konfirmasi sebelum menghapus baris.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var indonesianStrings = {
     tabAlign: "Perataan tab",
     // [Auto-translated] "File source type"
     sourceType: "Jenis sumber file",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Kamera default",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Sesuai dengan kontainer",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var indonesianStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Benda 1" }, { value: "item2", text: "Benda 2" }, { value: "item3", text: "Benda 3" }],
-    columns: [{ value: "column1", text: "Kolom 1" }, { value: "column2", text: "Kolom 2" }, { value: "column3", text: "Kolom 3" }],
-    rows: [{ value: "row1", text: "Baris 1" }, { value: "row2", text: "Baris 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolom 1" }, { name: "column2", title: "Kolom 2" }, { name: "column3", title: "Kolom 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Benda 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Benda 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Benda 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolom 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolom 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolom 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Baris 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Baris 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolom 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolom 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolom 3"
+      }
+    ]
   }
 };
 

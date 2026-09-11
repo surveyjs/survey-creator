@@ -246,6 +246,8 @@ export var mnStrings = {
     translateUsigAI: "Авто-орчуулга Бүгд",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Аас орчуул: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Үлдсэн мөрүүдийг орчуулах",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Огт орчуулагдаагүй уяанууд",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var mnStrings = {
     translationSource: "Эх сурвалж: ",
     // [Auto-translated] "Target: "
     translationTarget: "Зорилго: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Эх хэл",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Зорилтот хэл",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} утсыг орчуулсан",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Та сонгосон хэлний бүх орчуулсан мөрүүдийг устгахыг хүсэж байгаа гэдэгтээ итгэлтэй байна уу?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Хэлбэрийн үзэмж",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Сүлжээний харагдац",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Strings-ийг орчуулах",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Судалгааны утасны утаснууд",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Орчуулах уяаг байхгүй",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Бүх утсыг орчуулсан",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} утсыг орчуулдаггүй",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-ийн холбоосууд дэмжигдээгүй.",
     // [Auto-translated] "Export"
@@ -808,6 +832,10 @@ export var mnStrings = {
     removeItem: "Хэсэг устгах бол дарах...",
     // "Drag the item"
     dragItem: "Хэсгийг чирэх",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Nested сонголтуудыг өргөжүүлэх",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Уналтад орсон сонголтууд",
     // "Edit"
     edit: "Засах",
     // "Done"
@@ -910,6 +938,8 @@ export var mnStrings = {
     surveyTitlePlaceholder: "Санал асуулгын гарчиг",
     // "Page {num}"
     pageTitlePlaceholder: "Хуудас {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Панелийн гарчиг",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Эхлэх хуудас",
     // "Description"
@@ -1262,6 +1292,8 @@ export var mnStrings = {
     minRowCount: "Хамгийн бага мөрний тоо",
     // "Maximum row count"
     maxRowCount: "Хамгийн их мөрний тоо",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Мөрийн тооны илэрхийлэл",
     // "Confirm row removal"
     confirmDelete: "Мөр устгахыг батлах",
     // "Confirmation message"
@@ -1272,6 +1304,8 @@ export var mnStrings = {
     minPanelCount: "Хамгийн бага панелийн тоо",
     // "Maximum number of entries"
     maxPanelCount: "Хамгийн их панелийн тоо",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Оролт тооны илэрхийлэл",
     // "Initial entry state"
     panelsState: "Дотоод панелийн өргөссөн төлөв",
     // "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var mnStrings = {
       // [Auto-translated] "Informational"
       info: "Мэдээлэл"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Урд тал",
+      // [Auto-translated] "Rear"
+      environment: "Ар тал"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Зургууд",
@@ -2497,10 +2537,14 @@ export var mnStrings = {
       keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Тайлбарыг арилгахаас өмнө баталгааны өдөөлт үүсгэнэ.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Бичлэгийн тоог тооцоолдог илэрхийллийг тодорхойл. Энэ илэрхийлэл нь \"Эхний оролтын тоо\" тохиргоог давж, хамаарах утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага оруулалтын тоо\" болон \"Хамгийн их оруулалтын тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийлэл тохируулсан үед хариуцагчид гараар нэмэх эсвэл хасах боломжгүй.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Динамик панел дотор байрласан асуултуудад дугаар онооно."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Мөрийн тоог тооцох илэрхийллийг тодорхойлно. Энэ илэрхийлэл нь \"Мөрийн тоо\" тохиргоог даван туулж, иш татсан утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага мөрийн тоо\" болон \"Хамгийн их мөрийн тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийллийг тохируулсан үед хариуцагчид мөрүүдийг гараар нэмэх, устгах боломжгүй.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Мөрийг арилгахаас өмнө баталгааны хүсэлтийг өдөөнө.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var mnStrings = {
     tabAlign: "Хавтас байрлуулах",
     // [Auto-translated] "File source type"
     sourceType: "Файлын эх сурвалжийн төрөл",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Анхдагч камер",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Сав баглаа боодолд тохирно",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var mnStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Хэсэг 1" }, { value: "item2", text: "Хэсэг 2" }, { value: "item3", text: "Хэсэг 3" }],
-    columns: [{ value: "column1", text: "Column 1" }, { value: "column2", text: "Column 2" }, { value: "column3", text: "Column 3" }],
-    rows: [{ value: "row1", text: "Row 1" }, { value: "row2", text: "Row 2" }],
-    matrixColumns: [{ name: "column1", title: "Column 1" }, { name: "column2", title: "Column 2" }, { name: "column3", title: "Column 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Хэсэг 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Хэсэг 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Хэсэг 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // [Auto-translated] "Column 1"
+        text: "1-р багана"
+      },
+      {
+        value: "column2",
+        // [Auto-translated] "Column 2"
+        text: "2-р багана"
+      },
+      {
+        value: "column3",
+        // [Auto-translated] "Column 3"
+        text: "3-р багана"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // [Auto-translated] "Row 1"
+        text: "1-р эгнээ"
+      },
+      {
+        value: "row2",
+        // [Auto-translated] "Row 2"
+        text: "2-р мөр"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // [Auto-translated] "Column 1"
+        title: "1-р багана"
+      },
+      {
+        name: "column2",
+        // [Auto-translated] "Column 2"
+        title: "2-р багана"
+      },
+      {
+        name: "column3",
+        // [Auto-translated] "Column 3"
+        title: "3-р багана"
+      }
+    ]
   }
 };
 

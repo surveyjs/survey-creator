@@ -246,6 +246,8 @@ export var huStrings = {
     translateUsigAI: "Összes automatikus fordítása",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Fordítás: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Fordítsd le a maradék húrokat",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Lefordítatlan karakterláncok",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var huStrings = {
     translationSource: "Forrás: ",
     // [Auto-translated] "Target: "
     translationTarget: "Cél: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Forrásnyelv",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Célnyelv",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} húr fordítása",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Biztos vagy benne, hogy törölni szeretnéd az összes lefordított stringet a kiválasztott nyelvhez?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Űrlap nézet",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Rácsnézet",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Fordítás húrok",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Felmérési húrok",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Nincsenek fordítási feltételek",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Minden húr le van fordítva",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} húrok nem vannak fordítva.",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "A YouTube-linkek nem támogatottak.",
     // [Auto-translated] "Export"
@@ -808,6 +832,10 @@ export var huStrings = {
     removeItem: "Kattintson az elem eltávolításához...",
     // [Auto-translated] "Drag the item"
     dragItem: "Húzza az elemet",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Bővítsd a bészkelő lehetőségeket",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Összerakás egymásba helyezett választások",
     // "Edit"
     edit: "Szerkesztés",
     // [Auto-translated] "Done"
@@ -910,6 +938,8 @@ export var huStrings = {
     surveyTitlePlaceholder: "Felmérés címe",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "Oldal {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Panel címe",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Kezdőlap",
     // [Auto-translated] "Description"
@@ -1262,6 +1292,8 @@ export var huStrings = {
     minRowCount: "Sorszám minimális száma",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Sorszám maximális száma",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Sorszámkifejezés",
     // "Confirm row removal"
     confirmDelete: "Sor törlésének megerősítése",
     // [Auto-translated] "Confirmation message"
@@ -1272,6 +1304,8 @@ export var huStrings = {
     minPanelCount: "Minimális nevezési szám",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Bejegyzések maximális száma",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Bejegyzésszám kifejezés",
     // [Auto-translated] "Initial entry state"
     panelsState: "Kezdeti belépési állapot",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var huStrings = {
       // [Auto-translated] "Informational"
       info: "Információs"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Első rész",
+      // [Auto-translated] "Rear"
+      environment: "Hátsó rész"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Képek",
@@ -2497,10 +2537,14 @@ export var huStrings = {
       keyName: "Hivatkozzon egy kérdés nevére, hogy a felhasználónak egyedi választ kell adnia erre a kérdésre minden panelen.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Megerősítő üzenetet indít el a bejegyzés eltávolítása előtt.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Határozz meg egy kifejezést, amely kiszámítja a bejegyzések számát. Ez a kifejezés felülírja a \"Kezdeti bejegyzések száma\" beállítást, és újraértékelik, amikor az adott értékek változnak. Az eredményt a \"Minimum bejegyzések száma\" és \"Maximális bejegyzések száma\" beállítások korlátozzák. Amíg ez az kifejezés be van állítva, a válaszadók nem adhatnak hozzá vagy törölhetnek bejegyzéseket manuálisan.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Számokat rendel a dinamikus panelbe ágyazott kérdésekhez."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Határozz meg egy kifejezést, amely kiszámítja a sorok számát. Ez a kifejezés felülírja a \"Sorszám\" beállítást, és újraértékelik, amikor az általa hivatkozott értékek változnak. Az eredményt a \"Minimum sorszám\" és \"Maximum sorszám\" beállítások korlátozzák. Amíg ez a kifejezés be van állítva, a válaszadók nem adhatnak hozzá vagy távolíthatnak sorokat manuálisan.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Megerősítő kérést indít el a sor eltávolítása előtt.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var huStrings = {
     tabAlign: "Tabulátorigazítás",
     // [Auto-translated] "File source type"
     sourceType: "Fájlforrás típusa",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Alapértelmezett kamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Tárolóhoz igazítás",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var huStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Cikk 1" }, { value: "item2", text: "Cikk 2" }, { value: "item3", text: "Cikk 3" }],
-    columns: [{ value: "column1", text: "Oszlop 1" }, { value: "column2", text: "Oszlop 2" }, { value: "column3", text: "Oszlop 3" }],
-    rows: [{ value: "row1", text: "Sor 1" }, { value: "row2", text: "Sor 2" }],
-    matrixColumns: [{ name: "column1", title: "Oszlop 1" }, { name: "column2", title: "Oszlop 2" }, { name: "column3", title: "Oszlop 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Cikk 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Cikk 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Cikk 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Oszlop 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Oszlop 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Oszlop 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Sor 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Sor 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Oszlop 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Oszlop 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Oszlop 3"
+      }
+    ]
   }
 };
 setupLocale({ localeCode: "hu", strings: huStrings });

@@ -246,6 +246,8 @@ export var italianTranslation = {
     translateUsigAI: "Traduzione automatica di tutto",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Traduci da: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Traslare le stringhe rimanenti",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Stringhe non tradotte",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var italianTranslation = {
     translationSource: "Fonte: ",
     // [Auto-translated] "Target: "
     translationTarget: "Bersaglio: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Lingua di origine",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Lingua di destinazione",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} di {1} corde tradotte",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Sei sicuro di voler eliminare tutte le stringhe tradotte per la lingua selezionata?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Visualizzazione Form",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Visualizzazione a griglia",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Traslazione delle stringhe",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Stringhe di Rilevamento",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Nessuna stringa da tradurre",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Tutte le stringhe sono tradotte",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} stringhe non vengono tradotte",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "I link di YouTube non sono supportati.",
     // [Auto-translated] "Export"
@@ -808,6 +832,10 @@ export var italianTranslation = {
     removeItem: "Clicca per rimuovere un'opzione...",
     // "Drag the item"
     dragItem: "Trascina l'opzione",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Espandi le scelte annidate",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Collasso delle scelte annidate",
     // "Edit"
     edit: "Modifica",
     // "Done"
@@ -910,6 +938,8 @@ export var italianTranslation = {
     surveyTitlePlaceholder: "Titolo del sondaggio",
     // "Page {num}"
     pageTitlePlaceholder: "Pagina {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Titolo della tavola",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Pagina iniziale",
     // "Description"
@@ -1262,6 +1292,8 @@ export var italianTranslation = {
     minRowCount: "Numero minimo di righe",
     // "Maximum row count"
     maxRowCount: "Numero massimo di righe",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Espressione del conteggio delle righe",
     // "Confirm row removal"
     confirmDelete: "Conferma eliminazione della riga",
     // "Confirmation message"
@@ -1272,6 +1304,8 @@ export var italianTranslation = {
     minPanelCount: "Numero minimo di pannelli",
     // "Maximum number of entries"
     maxPanelCount: "Numero massimo di pannelli",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Espressione del conteggio delle voci",
     // "Initial entry state"
     panelsState: "Stato di espansione del pannello interno",
     // "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var italianTranslation = {
       // [Auto-translated] "Informational"
       info: "Informativo"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Anteriore",
+      // [Auto-translated] "Rear"
+      environment: "Retro"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Immagini",
@@ -2497,10 +2537,14 @@ export var italianTranslation = {
       keyName: "Fai riferimento al nome di una domanda per richiedere a un utente di fornire una risposta univoca per questa domanda in ogni pannello.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Attiva una richiesta di conferma prima di rimuovere una voce.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Specifica un'espressione che calcoli il numero di voci. Questa espressione sovrascrive l'impostazione \"Numero iniziale di voci\" e viene rivalutata ogni volta che i valori a cui fa riferimento cambiano. Il risultato è limitato dalle impostazioni \"Numero minimo di voci\" e \"Numero massimo di voci\". Sebbene questa espressione sia impostata, i rispondenti non possono aggiungere o rimuovere voci manualmente.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Assegna numeri alle domande nidificate all'interno del pannello dinamico."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificare un'espressione che calcoli il numero di righe. Questa espressione sovrascrive l'impostazione \"Conteggio righe\" e viene rivalutata ogni volta che cambiano i valori a cui fa riferimento. Il risultato è limitato dalle impostazioni \"Conteggio minimo righe\" e \"Conteggio massimo righe\". Sebbene questa espressione sia impostata, i rispondenti non possono aggiungere o rimuovere righe manualmente.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Attiva una richiesta di conferma prima di rimuovere una riga.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var italianTranslation = {
     tabAlign: "Allineamento delle tabulazioni",
     // [Auto-translated] "File source type"
     sourceType: "Tipo di origine file",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Telecamera predefinita",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Adatto al contenitore",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var italianTranslation = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Articolo 1" }, { value: "item2", text: "Articolo 2" }, { value: "item3", text: "Articolo 3" }],
-    columns: [{ value: "column1", text: "Colonna 1" }, { value: "column2", text: "Colonna 2" }, { value: "column3", text: "Colonna 3" }],
-    rows: [{ value: "row1", text: "Riga 1" }, { value: "row2", text: "Riga 2" }],
-    matrixColumns: [{ name: "column1", title: "Colonna 1" }, { name: "column2", title: "Colonna 2" }, { name: "column3", title: "Colonna 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Articolo 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Articolo 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Articolo 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Colonna 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Colonna 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Colonna 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Riga 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Riga 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Colonna 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Colonna 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Colonna 3"
+      }
+    ]
   }
 };
 

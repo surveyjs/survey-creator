@@ -246,6 +246,8 @@ export var persianStrings = {
     translateUsigAI: "ترجمه خودکار همه",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "ترجمه از: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "ترجمه رشته های باقی مانده",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "رشتههای ترجمهنشده",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var persianStrings = {
     translationSource: "منبع: ",
     // [Auto-translated] "Target: "
     translationTarget: "هدف: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "زبان مبدأ",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "زبان هدف",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} از رشته های {1} ترجمه شده",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "آیا مطمئن هستید که می خواهید تمام رشته های ترجمه شده زبان انتخاب شده را حذف کنید؟",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "نمای فرم",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "نمای شبکه ای",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "رشته های ترجمه",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "رشته های نقشه برداری",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "هیچ رشته ای برای ترجمه وجود ندارد",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "تمام رشته ها ترجمه می شوند",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} رشته ها ترجمه نمی شوند",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "پیوندهای YouTube پشتیبانی نمی شوند.",
     // [Auto-translated] "Export"
@@ -808,6 +832,10 @@ export var persianStrings = {
     removeItem: "فشار دهید تا مورد حذف شود...",
     // [Auto-translated] "Drag the item"
     dragItem: "مورد را بکشید",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "گسترش گزینه های تو در تو",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "انتخاب های تو در تو فروپاشی",
     // "Edit"
     edit: "ویرایش",
     // [Auto-translated] "Done"
@@ -910,6 +938,8 @@ export var persianStrings = {
     surveyTitlePlaceholder: "عنوان نظرسنجی را اینجا وارد کنید",
     // "Page {num}"
     pageTitlePlaceholder: "عنوان صفحه را اینجا وارد کنید",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "عنوان پنل",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "صفحه شروع",
     // "Description"
@@ -1262,6 +1292,8 @@ export var persianStrings = {
     minRowCount: "حداقل تعداد سطرها",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "حداکثر تعداد سطرها",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "عبارت شمارش ردیف",
     // "Confirm row removal"
     confirmDelete: "تایید حذف سطر",
     // [Auto-translated] "Confirmation message"
@@ -1272,6 +1304,8 @@ export var persianStrings = {
     minPanelCount: "حداقل تعداد ورودی ها",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "حداکثر تعداد ورودی ها",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "عبارت شمارش ورودی",
     // [Auto-translated] "Initial entry state"
     panelsState: "حالت ورود اولیه",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var persianStrings = {
       // [Auto-translated] "Informational"
       info: "اطلاعاتی"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "جبهه",
+      // [Auto-translated] "Rear"
+      environment: "عقب"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "تصاویر",
@@ -2497,10 +2537,14 @@ export var persianStrings = {
       keyName: "مرجع یک نام سوال نیاز به یک کاربر برای ارائه یک پاسخ منحصر به فرد برای این سوال در هر پانل.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "قبل از حذف یک ورودی، یک اعلان تأیید را فعال می کند.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "یک عبارت مشخص کنید که تعداد ورودی ها را محاسبه کند. این عبارت تنظیم «تعداد اولیه ورودی» را لغو می کند و هرگاه مقادیر ارجاع داده شده تغییر کنند، مجددا ارزیابی می شود. نتیجه محدود به تنظیمات «حداقل تعداد ورودی» و «حداکثر تعداد ورودی» است. در حالی که این عبارت تنظیم شده است، پاسخ دهندگان نمی توانند ورودی ها را به صورت دستی اضافه یا حذف کنند.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "اعداد را به سؤالات تودرتو در پانل پویا اختصاص می دهد."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "یک عبارت مشخص کنید که تعداد ردیف ها را محاسبه کند. این عبارت تنظیم «تعداد سطر» را لغو می کند و هرگاه مقادیر ارجاع داده شده تغییر کنند، مجددا ارزیابی می شود. نتیجه محدود به تنظیمات «حداقل تعداد سطر» و «حداکثر تعداد سطر» است. در حالی که این عبارت تنظیم شده است، پاسخ دهندگان نمی توانند به صورت دستی ردیف ها را اضافه یا حذف کنند.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "قبل از حذف ردیف، یک اعلان تأیید را فعال می کند.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var persianStrings = {
     tabAlign: "ترازبندی زبانه",
     // [Auto-translated] "File source type"
     sourceType: "نوع منبع فایل",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "دوربین پیش فرض",
     // [Auto-translated] "Fit to container"
     fitToContainer: "مناسب برای ظرف",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var persianStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "مورد 1" }, { value: "item2", text: "مورد 2" }, { value: "item3", text: "مورد 3" }],
-    columns: [{ value: "column1", text: "ستون 1" }, { value: "column2", text: "ستون 2" }, { value: "column3", text: "ستون 3" }],
-    rows: [{ value: "row1", text: "سطر 1" }, { value: "row2", text: "سطر 2" }],
-    matrixColumns: [{ name: "column1", title: "ستون 1" }, { name: "column2", title: "ستون 2" }, { name: "column3", title: "ستون 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "مورد 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "مورد 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "مورد 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "ستون 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "ستون 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "ستون 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "سطر 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "سطر 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "ستون 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "ستون 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "ستون 3"
+      }
+    ]
   }
 };
 

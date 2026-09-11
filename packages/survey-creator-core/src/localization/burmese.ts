@@ -2838,10 +2838,69 @@ export var mmStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "အရာ 1" }, { value: "item2", text: "အရာ 2" }, { value: "item3", text: "အရာ 3" }],
-    columns: [{ value: "column1", text: "ကော်လံ 1" }, { value: "column2", text: "ကော်လံ 2" }, { value: "column3", text: "ကော်လံ 3" }],
-    rows: [{ value: "row1", text: "တန်း 1" }, { value: "row2", text: "တန်း 2" }],
-    matrixColumns: [{ name: "column1", title: "ကော်လံ 1" }, { name: "column2", title: "ကော်လံ 2" }, { name: "column3", title: "ကော်လံ 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "အရာ 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "အရာ 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "အရာ 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "ကော်လံ 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "ကော်လံ 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "ကော်လံ 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "တန်း 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "တန်း 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "ကော်လံ 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "ကော်လံ 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "ကော်လံ 3"
+      }
+    ]
   }
 };
 

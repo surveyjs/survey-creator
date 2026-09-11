@@ -246,6 +246,8 @@ export var hebrewStrings = {
     translateUsigAI: "תרגום אוטומטי של הכל",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "תרגם מ: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "תרגום מחרוזות שנותרו",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "מחרוזות לא מתורגמות",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var hebrewStrings = {
     translationSource: "מקור: ",
     // [Auto-translated] "Target: "
     translationTarget: "יעד: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "שפת המקור",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "שפת היעד",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} המיתרים {1} מתורגמים",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "האם אתה בטוח שאתה רוצה למחוק את כל המחרוזות המתורגמות לשפה שנבחרה?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "תצוגת טופס",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "תצוגת רשת",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "תרגם מחרוזות",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "מחרוזות סקר",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "אין מחרוזות לתרגום",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "כל המחרוזות מתורגמות",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "מחרוזות {0} אינן מתורגמות",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "קישורי YouTube אינם נתמכים.",
     // "Export"
@@ -808,6 +832,10 @@ export var hebrewStrings = {
     removeItem: "לחץ להסרת הפריט...",
     // "Drag the item"
     dragItem: "גרור את הפריט",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "הרחבת אפשרויות מקוננות",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "קריסת בחירות מקוננות",
     // "Edit"
     edit: "ערוך",
     // "Done"
@@ -910,6 +938,8 @@ export var hebrewStrings = {
     surveyTitlePlaceholder: "כותרת הסקר",
     // "Page {num}"
     pageTitlePlaceholder: "עמוד {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "כותרת הפאנל",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "דף פתיחה",
     // "Description"
@@ -1262,6 +1292,8 @@ export var hebrewStrings = {
     minRowCount: "מספר שורות מינימלי",
     // "Maximum row count"
     maxRowCount: "מספר שורות מקסימלי",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "ביטוי ספירת שורות",
     // "Confirm row removal"
     confirmDelete: "אישור מחיקת שורה",
     // "Confirmation message"
@@ -1272,6 +1304,8 @@ export var hebrewStrings = {
     minPanelCount: "מספר פאנלים מינימלי",
     // "Maximum number of entries"
     maxPanelCount: "מספר פאנלים מקסימלי",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "ביטוי ספירת כניסות",
     // "Initial entry state"
     panelsState: "מצב הרחבת הפאנל הפנימי",
     // "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var hebrewStrings = {
       // [Auto-translated] "Informational"
       info: "אינפורמטיבי"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "חזית",
+      // [Auto-translated] "Rear"
+      environment: "אחורי"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "תמונות",
@@ -2497,10 +2537,14 @@ export var hebrewStrings = {
       keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "יש לציין ביטוי שמחשב את מספר הערכים. ביטוי זה גובר על הגדרת \"מספר הרשומות ההתחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של רשומות\" ו\"מספר מקסימלי של כניסות\". בעוד שהביטוי הזה מוגדר, המשיבים אינם יכולים להוסיף או להסיר רשומות ידנית.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בחלונית הדינמית."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "ציין ביטוי שמחשב את מספר השורות. ביטוי זה מחליף את הגדרת \"ספירת שורות\" ומוערך מחדש בכל פעם שהערכים אליהם הוא מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר השורות המינימלי\" ו\"מספר השורות המקסימלי\". בזמן שהביטוי מוגדר, המשיבים אינם יכולים להוסיף או להסיר שורות ידנית.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "מפעיל בקשת אישור לפני הסרת שורה.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var hebrewStrings = {
     tabAlign: "יישור לשונית",
     // [Auto-translated] "File source type"
     sourceType: "סוג מקור הקובץ",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "מצלמה ברירת מחדל",
     // [Auto-translated] "Fit to container"
     fitToContainer: "התאמה למיכל",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var hebrewStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "פריט 1" }, { value: "item2", text: "פריט 2" }, { value: "item3", text: "פריט 3" }],
-    columns: [{ value: "column1", text: "טור 1" }, { value: "column2", text: "טור 2" }, { value: "column3", text: "טור 3" }],
-    rows: [{ value: "row1", text: "שׁוּרָה 1" }, { value: "row2", text: "שׁוּרָה 2" }],
-    matrixColumns: [{ name: "column1", title: "טור 1" }, { name: "column2", title: "טור 2" }, { name: "column3", title: "טור 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "פריט 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "פריט 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "פריט 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "טור 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "טור 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "טור 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "שׁוּרָה 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "שׁוּרָה 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "טור 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "טור 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "טור 3"
+      }
+    ]
   }
 };
 

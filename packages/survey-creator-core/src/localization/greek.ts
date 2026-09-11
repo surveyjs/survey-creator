@@ -246,6 +246,8 @@ export var grStrings = {
     translateUsigAI: "Αυτόματη μετάφραση όλων",
     // "Translate from: "
     translateUsigAIFrom: "Μετάφραση από: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Μετάφραση υπόλοιπων συμβολοσειρών",
     // "Untranslated strings"
     translationDialogTitle: "Αμετάφραστες συμβολοσειρές",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var grStrings = {
     translationSource: "Πηγή: ",
     // "Target: "
     translationTarget: "Προορισμός: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Γλώσσα-πηγή",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Γλώσσα-στόχος",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} μεταφρασμένων συμβολοσειρών {1}",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλες τις μεταφρασμένες συμβολοσειρές για την επιλεγμένη γλώσσα;",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Προβολή φόρμας",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Προβολή πλέγματος",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Μετάφραση συμβολοσειρών",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Συμβολοσειρές έρευνας",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Δεν υπάρχουν συμβολοσειρές για μετάφραση",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Όλες οι συμβολοσειρές μεταφράζονται",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} συμβολοσειρές δεν μεταφράζονται",
     // "YouTube links are not supported."
     translationYouTubeNotSupported: "Οι συνδέσεις YouTube δεν υποστηρίζονται.",
     // "Export"
@@ -808,6 +832,10 @@ export var grStrings = {
     removeItem: "Κλικ για διαγραφή του στοιχείου...",
     // "Drag the item"
     dragItem: "Σύρετε το στοιχείο",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Ανάπτυξη ένθετων επιλογών",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Σύμπτυξη ένθετων επιλογών",
     // "Edit"
     edit: "Επεξεργασία",
     // "Done"
@@ -910,6 +938,8 @@ export var grStrings = {
     surveyTitlePlaceholder: "Τίτλος Ερωτηματολογίου",
     // "Page {num}"
     pageTitlePlaceholder: "Σελίδα {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Τίτλος Πάνελ",
     // "Start Page"
     startPageTitlePlaceholder: "Αρχική Σελίδα",
     // "Description"
@@ -1262,6 +1292,8 @@ export var grStrings = {
     minRowCount: "Ελάχιστος αριθμός σειρών",
     // "Maximum row count"
     maxRowCount: "Μέγιστος αριθμός σειρών",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Παράσταση πλήθους γραμμών",
     // "Confirm row removal"
     confirmDelete: "Επιβεβαίωση διαγραφής σειράς",
     // "Confirmation message"
@@ -1272,6 +1304,8 @@ export var grStrings = {
     minPanelCount: "Ελάχιστος αριθμός πάνελ",
     // "Maximum number of entries"
     maxPanelCount: "Μέγιστος αριθμός πάνελ",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Παράσταση πλήθους καταχωρήσεων",
     // "Initial entry state"
     panelsState: "Κατάσταση κατάρρευσης εσωτερικών πάνελ",
     // "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var grStrings = {
       // [Auto-translated] "Informational"
       info: "Ενημερωτικό"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Εμπρός",
+      // [Auto-translated] "Rear"
+      environment: "Πίσω"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Εικόνες",
@@ -2497,10 +2537,14 @@ export var grStrings = {
       keyName: "Αναφέρετε το όνομα της ερώτησης για να απαιτηθεί από τον χρήστη να παράσχει μοναδική απάντηση για αυτήν την ερώτηση σε κάθε πάνελ.",
       // "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Ενεργοποιεί μια προτροπή επιβεβαίωσης πριν από την κατάργηση ενός πίνακα.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των καταχωρήσεων. Αυτή η έκφραση παρακάμπτει τη ρύθμιση \"Αρχικός αριθμός καταχωρήσεων\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός καταχωρήσεων\" και \"Μέγιστος αριθμός καταχωρήσεων\". Ενώ έχει οριστεί αυτή η έκφραση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν καταχωρήσεις με μη αυτόματο τρόπο.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Αντιστοιχίζει αριθμούς σε ερωτήσεις που είναι ένθετες στον δυναμικό πίνακα."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των γραμμών. Αυτή η παράσταση παρακάμπτει τη ρύθμιση \"Πλήθος γραμμών\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός γραμμών\" και \"Μέγιστος αριθμός γραμμών\". Ενώ έχει οριστεί αυτή η παράσταση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν σειρές με μη αυτόματο τρόπο.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Ενεργοποιεί ένα μήνυμα επιβεβαίωσης πριν από την κατάργηση μιας σειράς.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var grStrings = {
     tabAlign: "Στοίχιση καρτελών",
     // "File source type"
     sourceType: "Τύπος πηγής αρχείου",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Προεπιλεγμένη κάμερα",
     // "Fit to container"
     fitToContainer: "Προσαρμογή στο κοντέινερ",
     // "Set value expression"
@@ -3286,10 +3332,69 @@ export var grStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Στοιχείο 1" }, { value: "item2", text: "Στοιχείο 2" }, { value: "item3", text: "Στοιχείο 3" }],
-    columns: [{ value: "column1", text: "Στήλη 1" }, { value: "column2", text: "Στήλη 2" }, { value: "column3", text: "Στήλη 3" }],
-    rows: [{ value: "row1", text: "Γραμμή 1" }, { value: "row2", text: "Γραμμή 2" }],
-    matrixColumns: [{ name: "column1", title: "Στήλη 1" }, { name: "column2", title: "Στήλη 2" }, { name: "column3", title: "Στήλη 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Στοιχείο 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Στοιχείο 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Στοιχείο 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Στήλη 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Στήλη 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Στήλη 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Γραμμή 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Γραμμή 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Στήλη 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Στήλη 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Στήλη 3"
+      }
+    ]
   }
 };
 

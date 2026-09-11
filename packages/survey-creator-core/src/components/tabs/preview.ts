@@ -3,6 +3,7 @@ import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction,
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
+import { createPageSelectorLocTitle } from "../../utils/actions";
 import { findSuitableTheme, isThemeEmpty } from "./theme-model";
 
 export class PreviewViewModel extends Base {
@@ -221,11 +222,7 @@ export class PreviewViewModel extends Base {
     const pages: Array<IAction> = [];
     for (let i: number = 0; i < this.survey.pages.length; i++) {
       const page: PageModel = this.survey.pages[i];
-      const locTitle = new LocalizableString(page, true);
-      locTitle.setJson(page.locTitle.getJson());
-      locTitle.onGetTextCallback = (text: string): string => {
-        return this.getPageTitle(text, page);
-      };
+      const locTitle = createPageSelectorLocTitle(page, (text: string) => this.getPageTitle(text, page));
       const pageItem: IAction = {
         id: page.name,
         data: page,

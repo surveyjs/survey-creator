@@ -11,10 +11,11 @@ type CspViolation = {
   sample: string,
 };
 
-// The page is served under a strict CSP (style-src 'self' 'nonce-...'; font-src 'self';
-// img-src 'self') and these tests walk through every creator tab, then assert that
-// nothing is refused. The inventory is still printed, grouped by directive and by the
-// interaction that triggered each violation, so a regression names its own source.
+// The page is served under a strict CSP (style-src 'self' 'nonce-...'; font-src 'self'
+// plus the font host the page loads Open Sans from; img-src 'self') and these tests walk
+// through every creator tab, then assert that nothing is refused. The inventory is still
+// printed, grouped by directive and by the interaction that triggered each violation, so
+// a regression names its own source.
 //
 // If a violation ever has to be tolerated, list it here as
 // { directive, sample-prefix } - the empty list means zero tolerance.
@@ -140,9 +141,9 @@ test.describe("CSP strict policy diagnostics", () => {
     await expect(getTabbedMenuItemByText(page, creatorTabDesignerName)).toBeVisible();
     await expect(page.locator(".svc-question__content").first()).toBeVisible();
 
-    // The creator ships no fonts of its own: the Open Sans faces come from survey-core's
-    // stylesheet, which has to be enough under `font-src 'self'`. The faces are loaded
-    // by hand because they load lazily - and `fonts.check()` is no guard here, it
+    // Neither the creator nor survey-core declares an @font-face any more, so the page
+    // supplies the Open Sans faces itself and the policy names the font host. The faces are
+    // loaded by hand because they load lazily - and `fonts.check()` is no guard here, it
     // answers true for a family nothing declares at all.
     const openSans = await page.evaluate(async() => {
       const faces = Array.from((document as any).fonts).filter((face: any) => face.family === "Open Sans");

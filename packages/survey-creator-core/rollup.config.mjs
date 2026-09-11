@@ -199,9 +199,9 @@ export default async (options) => {
       },
       emitCss: resolve(buildPath, "survey-creator-core.css"),
       // survey-creator-core.fontless.css was the same stylesheet minus the @font-face
-      // rules. The creator declares none any more - they come from survey-core - so the
-      // two files are identical and the name is kept as an alias for consumers that
-      // already reference it.
+      // rules. Nobody declares them any more - not the creator and not survey-core, the
+      // host page supplies the faces - so the two files are identical and the name is kept
+      // as an alias for consumers that already reference it.
       onCloseBundle: () => {
         const suffixes = process.env.emitMinified === "true" ? [".css", ".min.css"] : [".css"];
         for (const suffix of suffixes) {

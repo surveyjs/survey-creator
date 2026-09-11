@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, settings as coreSettings } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, LocalizableString, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, settings as coreSettings } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { EmptySurveyCreatorOptions, settings } from "../../src/creator-settings";
@@ -3062,4 +3062,60 @@ test("checking a locale shows texts applied to the survey while it was unchecked
   expect(matrix.columns).toHaveLength(2);
   const deCell = matrix.visibleRows[0].cells.filter((cell) => cell.column.name === "de")[0];
   expect(deCell.question.value).toEqual("title-de-2");
+});
+
+test("Page filter dropdown renders page titles with markdown, as the preview tab page selector does", () => {
+  const creator = new CreatorTester();
+  creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
+    if (options.area === "designer-tab") {
+      options.survey.onTextMarkdown.add((_, mdOptions) => {
+        if (mdOptions.text.indexOf("<i>") > -1) {
+          mdOptions.html = mdOptions.text + "#markup";
+        }
+      });
+    }
+  });
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "<i>Page 1</i>", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "<i>Page 2</i>", elements: [{ type: "text", name: "q2" }] }
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  tabTranslationPlugin.activate();
+  const filterPageAction = tabTranslationPlugin["filterPageAction"];
+  const filterPageList = <ListModel>(filterPageAction.data);
+  expect(filterPageList.actions.map(item => item.locTitle?.textOrHtml))
+    .toEqual(["All Pages", "<i>Page 1</i>#markup", "<i>Page 2</i>#markup"]);
+  expect(filterPageAction.locTitle?.textOrHtml).toEqual("All Pages");
+
+  tabTranslationPlugin.model.filteredPage = creator.survey.pages[1];
+  expect(filterPageAction.locTitle?.textOrHtml).toEqual("<i>Page 2</i>#markup");
+
+  tabTranslationPlugin.model.filteredPage = null;
+  expect(filterPageAction.locTitle?.textOrHtml).toEqual("All Pages");
+});
+
+test("Page filter dropdown shows page titles, it does not edit them: no inplace string editor", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "Page 1", elements: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "Page 2", elements: [{ type: "text", name: "q2" }] }
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  tabTranslationPlugin.activate();
+  const filterPageAction = tabTranslationPlugin["filterPageAction"];
+  const filterPageList = <ListModel>(filterPageAction.data);
+  // The pages and the survey belong to the designer survey, which renders its own strings with
+  // the inplace editor - the editor replaces the rendered markdown with the source text once
+  // focused.
+  const defaultRenderer = LocalizableString.defaultRenderer;
+  expect(filterPageList.actions.map(item => item.locTitle?.renderAs))
+    .toEqual([defaultRenderer, defaultRenderer, defaultRenderer]);
+  expect(filterPageAction.locTitle?.renderAs).toEqual(defaultRenderer);
+
+  tabTranslationPlugin.model.filteredPage = creator.survey.pages[1];
+  expect(filterPageAction.locTitle?.renderAs).toEqual(defaultRenderer);
 });

@@ -246,6 +246,8 @@ export var catalanTranslation = {
     translateUsigAI: "Traducir automáticamente todo",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Traducir de: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Traslladar les cadenes restants",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Cadenas sin traducir",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var catalanTranslation = {
     translationSource: "Fuente: ",
     // [Auto-translated] "Target: "
     translationTarget: "Blanco: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Llengua d'origen",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Llengua objectiu",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} de {1} cordes traduïdes",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Estàs segur que vols eliminar totes les cadenes traduïdes de l'idioma seleccionat?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Vista de formulari",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Vista de quadrícula",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Traducció de cadenes",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Cordes d'enquesta",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "No hi ha cadenes per traduir",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Totes les cordes es tradueixen",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} cadenes no es tradueixen",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Los enlaces de YouTube no son compatibles.",
     // [Auto-translated] "Export"
@@ -808,6 +832,10 @@ export var catalanTranslation = {
     removeItem: "Haga click para eliminar el elemento...",
     // "Drag the item"
     dragItem: "Arrastra el elemento",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Expandeix les opcions anidades",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Col·lapse de les eleccions nidades",
     // "Edit"
     edit: "Editar",
     // "Done"
@@ -910,6 +938,8 @@ export var catalanTranslation = {
     surveyTitlePlaceholder: "Títol de la enquesta de entrada aquí",
     // "Page {num}"
     pageTitlePlaceholder: "Títol de la pàgina de entrada aquí",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Títol del panell",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Pàgina de inicio",
     // "Description"
@@ -1262,6 +1292,8 @@ export var catalanTranslation = {
     minRowCount: "Mínimo número de files",
     // "Maximum row count"
     maxRowCount: "Máximo número de files",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Expressió del recompte de files",
     // "Confirm row removal"
     confirmDelete: "Confirmar borrado de fila",
     // "Confirmation message"
@@ -1272,6 +1304,8 @@ export var catalanTranslation = {
     minPanelCount: "Número mínimo de panells",
     // "Maximum number of entries"
     maxPanelCount: "Número máximo de panells",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Expressió del recompte d'entrades",
     // "Initial entry state"
     panelsState: "Estado de expansión del panell interno",
     // "\"Previous Entry\" button text"
@@ -1908,6 +1942,12 @@ export var catalanTranslation = {
       // [Auto-translated] "Informational"
       info: "Informativo"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Davant",
+      // [Auto-translated] "Rear"
+      environment: "Darrera"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Imágenes",
@@ -2497,10 +2537,14 @@ export var catalanTranslation = {
       keyName: "Haga referencia a un nom de pregunta para requerir que un usuario proporcione una respuesta única para esta pregunta en cada panell.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Especifica una expressió que calculi el nombre d'entrades. Aquesta expressió sobreescriu l'opció \"Nombre inicial d'entrades\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions \"Nombre mínim d'entrades\" i \"Nombre màxim d'entrades\". Mentre aquesta expressió està establerta, els participants no poden afegir o eliminar entrades manualment.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Assigna números a les preguntes anidades dins del panell dinàmic."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Especifica una expressió que calculi el nombre de files. Aquesta expressió sobreescriu l'opció de \"Recompte de files\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions de \"Recompte mínim de files\" i \"Recompte màxim de files\". Mentre aquesta expressió està establerta, els enquestats no poden afegir ni eliminar files manualment.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Desencadena un mensaje de confirmación antes de quitar una fila.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2964,6 +3008,8 @@ export var catalanTranslation = {
     tabAlign: "Alineación de tabulaciones",
     // [Auto-translated] "File source type"
     sourceType: "Tipo de origen de fitxer",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Càmera per defecte",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Ajuste al contenedor",
     // [Auto-translated] "Set value expression"
@@ -3286,10 +3332,69 @@ export var catalanTranslation = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Artículo 1" }, { value: "item2", text: "Artículo 2" }, { value: "item3", text: "Artículo 3" }],
-    columns: [{ value: "column1", text: "Columna 1" }, { value: "column2", text: "Columna 2" }, { value: "column3", text: "Columna 3" }],
-    rows: [{ value: "row1", text: "Filera 1" }, { value: "row2", text: "Filera 2" }],
-    matrixColumns: [{ name: "column1", title: "Columna 1" }, { name: "column2", title: "Columna 2" }, { name: "column3", title: "Columna 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Artículo 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Artículo 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Artículo 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Columna 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Columna 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Columna 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Filera 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Filera 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Columna 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Columna 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Columna 3"
+      }
+    ]
   }
 };
 

@@ -246,6 +246,8 @@ export var traditionalChineseTranslation = {
     translateUsigAI: "自動翻譯全部",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "翻譯語言組合：",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "翻譯剩餘字串",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "未翻譯的字串",
     // [Auto-translated] "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var traditionalChineseTranslation = {
     translationSource: "源：",
     // [Auto-translated] "Target: "
     translationTarget: "目標：",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "原始語言",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "目標語言",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0}{1}字串翻譯",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "你確定要刪除所選語言的所有翻譯字串嗎？",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "形態檢視",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "格狀視圖",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "翻譯字串",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "調查字串",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "無需翻譯任何附加條件",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "所有字串皆被翻譯",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0}字串不會被翻譯",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "不支援YouTube連結。",
     // [Auto-translated] "Export"
@@ -809,6 +833,10 @@ export var traditionalChineseTranslation = {
     removeItem: "按下以刪除該專案...",
     // [Auto-translated] "Drag the item"
     dragItem: "拖動專案",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "擴展巢狀選擇",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "坍縮巢狀選擇",
     // "Edit"
     edit: "編輯器",
     // [Auto-translated] "Done"
@@ -911,6 +939,8 @@ export var traditionalChineseTranslation = {
     surveyTitlePlaceholder: "調查標題",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "頁數 {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "面板標題",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "起始頁",
     // [Auto-translated] "Description"
@@ -1263,6 +1293,8 @@ export var traditionalChineseTranslation = {
     minRowCount: "最小行數",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "最大行數",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "列數表達式",
     // "Confirm row removal"
     confirmDelete: "確認刪除行",
     // [Auto-translated] "Confirmation message"
@@ -1273,6 +1305,8 @@ export var traditionalChineseTranslation = {
     minPanelCount: "最少參賽作品數量",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "最大條目數",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "條目計數表達式",
     // [Auto-translated] "Initial entry state"
     panelsState: "初始進入狀態",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1909,6 +1943,12 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Informational"
       info: "資訊"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "正面",
+      // [Auto-translated] "Rear"
+      environment: "後方"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "圖片",
@@ -2498,10 +2538,14 @@ export var traditionalChineseTranslation = {
       keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "在刪除條目之前觸發確認提示。",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "指定一個計算條目數量的表達式。此表達式覆蓋「初始條目數」設定，且每當參考值改變時會重新評估。結果受限於「最少條目數」與「最大條目數」設定。在此表達式設定期間，受訪者無法手動新增或移除條目。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "將編號指派給巢狀在動態面板中的問題。"
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "指定一個計算列數的表達式。此表達式覆蓋「列數」設定，當參考值變更時會重新評估。結果受限於「最小列數」與「最大列數」設定。在此表達式設定期間，受訪者無法手動新增或移除列數。",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "在刪除行之前觸發確認提示。",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2965,6 +3009,8 @@ export var traditionalChineseTranslation = {
     tabAlign: "製表元對齊方式",
     // [Auto-translated] "File source type"
     sourceType: "檔源類型",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "預設相機",
     // [Auto-translated] "Fit to container"
     fitToContainer: "適合容器",
     // [Auto-translated] "Set value expression"
@@ -3287,10 +3333,69 @@ export var traditionalChineseTranslation = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "專案1" }, { value: "item2", text: "專案2" }, { value: "item3", text: "專案3" }],
-    columns: [{ value: "column1", text: "列 1" }, { value: "column2", text: "列 2" }, { value: "column3", text: "列 3" }],
-    rows: [{ value: "row1", text: "行 1" }, { value: "row2", text: "行 2" }],
-    matrixColumns: [{ name: "column1", title: "列 1" }, { name: "column2", title: "列 2" }, { name: "column3", title: "列 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "專案1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "專案2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "專案3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "列 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "列 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "列 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "行 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "行 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "列 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "列 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "列 3"
+      }
+    ]
   }
 };
 
