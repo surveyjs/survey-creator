@@ -1,4 +1,5 @@
 import { getScrollTopForCaret, TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
+import { AceJsonEditorModel } from "../../src/components/tabs/json-editor-ace";
 import { CreatorTester } from "../creator-tester";
 import { settings } from "../../src/creator-settings";
 import { SurveyTextWorker } from "../../src/textWorker";
@@ -361,6 +362,44 @@ test("The text is linted once per change - allowingDeactivate reuses the last wo
   } finally {
     SurveyTextWorker.onProcessJson = undefined;
   }
+});
+// The few methods the Ace model calls, over a plain string; the gutter annotations are kept so
+// the test can read them back.
+function createAceMock(): any {
+  let value = "";
+  let annotations: Array<any> = [];
+  const undoManager = { reset() { }, markClean() { }, isClean: () => true, hasUndo: () => false, hasRedo: () => false };
+  const session = {
+    on() { }, setUseWorker() { }, setMode() { }, getUndoManager: () => undoManager,
+    setAnnotations(list: Array<any>) { annotations = list; },
+    doc: { getNewLineCharacter: () => "\n" },
+  };
+  return {
+    commands: { removeCommand() { } }, setReadOnly() { }, setShowPrintMargin() { }, setFontSize() { }, setTheme() { },
+    getSession: () => session, session: session,
+    getValue: () => value, setValue(text: string) { value = text; },
+    renderer: { updateFull() { }, scrollCursorIntoView() { } },
+    resize() { }, focus() { }, isFocused: () => false, gotoLine() { },
+    getAnnotations: () => annotations,
+  };
+}
+test("Ace marks only the blocking errors in the gutter", () => {
+  const creator = new CreatorTester();
+  const model = new AceJsonEditorModel(creator);
+  const ace = createAceMock();
+  model.init(ace);
+  model.text = JSON.stringify({
+    pages: [{ name: "p1", elements: [{ type: "text", name: "q1", nosuch: 1 }] }, { name: "p2" }]
+  }, null, 2);
+  // the unknown property blocks, the empty page is a warning
+  const errors = model.errorList.actions.map(a => a.data.error);
+  expect(errors.map(e => e.isBlocking)).toEqual([true, false]);
+  const annotations = ace.getAnnotations();
+  expect(annotations).toHaveLength(1);
+  expect(annotations[0].type).toBe("error");
+  expect(annotations[0].row).toBe(errors[0].rowAt);
+  expect(annotations[0].text).toBe(errors[0].text);
+  model.dispose();
 });
 test("JsonEditor & duplicated errors in matrices columns", () => {
   // the linter reports the duplicate too - this test is about the JSON error and its fix
