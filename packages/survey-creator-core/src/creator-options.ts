@@ -33,6 +33,12 @@ export interface ICreatorOptions {
    */
   showJSONEditorTab?: boolean;
   /**
+   * Specifies whether to run the survey linter in the JSON Editor tab and show its results.
+   *
+   * Default value: `true`
+   */
+  showLinterPanel?: boolean;
+  /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *
    * Default value: `true`

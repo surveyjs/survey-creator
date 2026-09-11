@@ -17,6 +17,7 @@ export * from "../creator-responsivity-manager";
 
 export * from "../dom-helper";
 export * from "../components/tabs/json-editor-ace";
+export * from "../components/tabs/json-editor-linter";
 export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
 export * from "../components/tabs/test";

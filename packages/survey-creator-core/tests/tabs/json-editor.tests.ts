@@ -1,10 +1,11 @@
-import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
+import { getScrollTopForCaret, TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
 import { CreatorTester } from "../creator-tester";
 import { settings } from "../../src/creator-settings";
 import { SurveyTextWorker } from "../../src/textWorker";
 
 test("JsonEditor & showErrors/errorList", () => {
-  const creator = new CreatorTester();
+  // the linter reports the unknown property too - this test is about the JSON error list
+  const creator = new CreatorTester({ showLinterPanel: false });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = "{}";
   editor.processErrors(editor.text);
@@ -26,7 +27,8 @@ test("JsonEditor & showErrors/errorList", () => {
 });
 
 test("JsonEditor & fixError action", () => {
-  const creator = new CreatorTester();
+  // the linter reports the duplicate too - this test is about the JSON error and its fix
+  const creator = new CreatorTester({ showLinterPanel: false });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = "{}";
   editor.processErrors(editor.text);
@@ -132,7 +134,8 @@ test("JsonEditor & error question unique in panel dynamic, #2", () => {
   });
 });
 test("JsonEditor & fixError action with object to array", () => {
-  const creator = new CreatorTester();
+  // the linter reports the duplicate too - this test is about the JSON error and its fix
+  const creator = new CreatorTester({ showLinterPanel: false });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
     pages: [{
@@ -160,8 +163,10 @@ test("JsonEditor & fixError action with object to array", () => {
   });
 });
 test("JsonEditor & fixError action incorrect properties value, Issue#7335", () => {
+  // the linter reports the same value - this test is about the JSON error and its fix
   const creator = new CreatorTester({
-    validateJsonPropertyValues: true
+    validateJsonPropertyValues: true,
+    showLinterPanel: false
   });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
@@ -192,8 +197,10 @@ test("JsonEditor & fixError action incorrect properties value, Issue#7335", () =
   });
 });
 test("JsonEditor & fixError better fix suggestions, Issue#7417", () => {
+  // the linter reports the same value - this test is about the JSON error and its fix
   const creator = new CreatorTester({
-    validateJsonPropertyValues: true
+    validateJsonPropertyValues: true,
+    showLinterPanel: false
   });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
@@ -329,7 +336,8 @@ test("We should have one SurveyTextWorker.fromJSON/toJSON", () => {
   SurveyTextWorker.onProcessJson = undefined;
 });
 test("JsonEditor & duplicated errors in matrices columns", () => {
-  const creator = new CreatorTester();
+  // the linter reports the duplicate too - this test is about the JSON error and its fix
+  const creator = new CreatorTester({ showLinterPanel: false });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
     elements: [
@@ -409,4 +417,115 @@ test("JsonEditor & duplicated errors in multiple text items, Bug#7398", () => {
   editor.processErrors(editor.text);
   expect(editor.hasErrors).toBeTruthy();
   expect(editor.errorList.actions).toHaveLength(1);
+});
+
+test("getScrollTopForCaret keeps the caret line whole in the view", () => {
+  // a 300px view over a 1000px text, 20px lines, standing at the top
+  const scroll = (caretTop: number, scrollTop: number = 0) =>
+    getScrollTopForCaret(caretTop, 20, 300, scrollTop, 1000);
+  // the line is inside the view - nothing to do
+  expect(scroll(0)).toBeUndefined();
+  expect(scroll(280)).toBeUndefined();
+  expect(scroll(400, 300)).toBeUndefined();
+  // the last line that still fits, and the first one that does not
+  expect(scroll(281)).toBe(281 - 140);
+  // below the view: the line is centred
+  expect(scroll(600)).toBe(600 - 140);
+  // above the view: centred as well
+  expect(scroll(300, 500)).toBe(300 - 140);
+  // clamped to the ends of the scroller
+  expect(scroll(60, 400)).toBe(0);
+  expect(scroll(980)).toBe(700);
+});
+
+test("getScrollTopForCaret asks for no scrolling when there is nothing to scroll", () => {
+  // the whole text fits
+  expect(getScrollTopForCaret(100, 20, 300, 0, 300)).toBeUndefined();
+  expect(getScrollTopForCaret(100, 20, 300, 0, 200)).toBeUndefined();
+  // no layout at all: jsdom, a hidden tab, server-side rendering
+  expect(getScrollTopForCaret(100, 20, 0, 0, 0)).toBeUndefined();
+  expect(getScrollTopForCaret(100, 0, 300, 0, 1000)).toBeUndefined();
+});
+
+// The editor is given a textarea with metrics, the way a browser would: jsdom lays nothing out,
+// so clientHeight and scrollHeight are defined by hand.
+function createEditorWithTextarea(text: string, clientHeight: number, scrollHeight: number,
+  options?: any): TextareaJsonEditorModel {
+  const creator = new CreatorTester(options);
+  const editor = new TextareaJsonEditorModel(creator);
+  const el = document.createElement("textarea");
+  document.createElement("div").appendChild(el);
+  Object.defineProperty(el, "clientHeight", { value: clientHeight, configurable: true });
+  Object.defineProperty(el, "scrollHeight", { value: scrollHeight, configurable: true });
+  Object.defineProperty(el, "clientWidth", { value: 600, configurable: true });
+  el.style.lineHeight = "20px";
+  // the caret can only stand inside the value the element holds, which the UI binds for it
+  el.value = text;
+  editor.textElement = el;
+  editor.text = text;
+  editor.processErrors(editor.text);
+  return editor;
+}
+
+// One question per line, so the defect sits far below the top of the text. An unknown property
+// is a JSON error (the bottom list), an unknown reference is a linter finding (the panel).
+function longJson(defectAt: number, count: number, kind: "error" | "finding"): string {
+  const elements = [];
+  for (let i = 0; i < count; i++) {
+    const element: any = { type: "text", name: "q" + i };
+    if (i === defectAt) {
+      if (kind === "error") element.nosuchprop = 1;
+      else element.visibleIf = "{nosuchquestion} = 1";
+    }
+    elements.push(element);
+  }
+  return JSON.stringify({ elements: elements }, null, 2);
+}
+
+test("A click on an error moves the caret to it", () => {
+  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 300, 3000,
+    { showLinterPanel: false });
+  const el = editor.textElement;
+  expect(editor.errorList.actions).toHaveLength(1);
+  const error = editor.errorList.actions[0].data.error;
+  expect(error.at).toBeGreaterThan(0);
+  editor.errorList.onItemClick(<any>editor.errorList.actions[0]);
+  expect(el.selectionStart).toBe(error.at);
+  expect(el.selectionEnd).toBe(error.at);
+  // jsdom renders no text, so the mirror measures 0 and the caret line counts as visible:
+  // here the click must move the caret without throwing
+  expect(el.scrollTop).toBe(0);
+});
+
+test("A click on an error scrolls the caret line to the middle of the view", () => {
+  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 300, 3000,
+    { showLinterPanel: false });
+  const el = editor.textElement;
+  // measuring the rendered text is the browser's part, which jsdom does not do
+  (<any>editor)["measureCaretTop"] = () => 1400;
+  editor.errorList.onItemClick(<any>editor.errorList.actions[0]);
+  expect(el.scrollTop).toBe(getScrollTopForCaret(1400, 20, 300, 0, 3000));
+  expect(el.scrollTop).toBe(1260);
+});
+
+test("A click on a linter finding scrolls the same way", () => {
+  const editor = createEditorWithTextarea(longJson(40, 50, "finding"), 300, 3000);
+  const el = editor.textElement;
+  (<any>editor)["measureCaretTop"] = () => 1400;
+  const finding = editor.linter.checkList.actions.filter(
+    a => a.id.indexOf("linter-finding-") === 0)[0];
+  expect(finding).toBeDefined();
+  editor.linter.checkList.onItemClick(<any>finding);
+  expect(el.selectionStart).toBe(finding.data.error.at);
+  expect(el.scrollTop).toBe(1260);
+});
+
+test("A click on an error does not scroll an editor with no metrics", () => {
+  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 0, 0,
+    { showLinterPanel: false });
+  const el = editor.textElement;
+  (<any>editor)["measureCaretTop"] = () => 1400;
+  editor.errorList.onItemClick(<any>editor.errorList.actions[0]);
+  expect(el.selectionStart).toBe(editor.errorList.actions[0].data.error.at);
+  expect(el.scrollTop).toBe(0);
 });
