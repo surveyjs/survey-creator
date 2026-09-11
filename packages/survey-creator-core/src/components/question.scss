@@ -1035,7 +1035,10 @@ svc-question,
     ~ .sd-question__content
     > .sd-panel
     > .sd-panel__content {
-    padding: 0;
+    row-gap: var(--sd-panel-content-row-gap);
+    column-gap: var(--sd-panel-content-column-gap);
+    padding-block: var(--sd-panel-content-padding-block);
+    padding-block-end: 0;
   }
 }
 .svc-creator--mobile {
