@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "build/typings/"
+  },
+  "include": [
+    "./src/entries/tester.ts"
+  ]
+}

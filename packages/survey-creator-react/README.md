@@ -131,6 +131,46 @@ Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatc
 - [Theme Adapters for Bootstrap, Material UI, and shadcn/ui](https://surveyjs.io/themes/theme-adapters)
 - Localization and right-to-left language support
 
+## The Tests widget — `survey-creator-react/tester`
+
+A second entry of this package, and a bundle of its own: the React rendering of the Tests widget, whose
+model layer is [`survey-creator-core/tester`](../survey-creator-core/src/tester/README.md). It runs a
+suite of tests against a survey definition, shows the model being driven while it runs, and records a
+new test by having the survey filled in. Nothing of the Creator is in it, and importing it does not
+grow the main `survey-creator-react` bundle by a byte.
+
+```ts
+import { SurveyTesterModel } from "survey-creator-core/tester";
+import { SurveyTester } from "survey-creator-react/tester";
+import "survey-creator-core/tester.css";      // the whole of the widget's styling
+
+const model = new SurveyTesterModel({
+  getSurveyJson: () => surveyJson,
+  getTestsText: () => suiteText,
+  setTestsText: text => { suiteText = text; },   // every widget edit, immediately
+});
+```
+
+```tsx
+<SurveyTester model={model} />
+```
+
+**React 16.8 or newer.** The widget's subscription and disposal helpers are hooks, so this entry cannot
+serve the main bundle's 16.5 floor; the main bundle is untouched by it. Its test project runs on the
+React the package develops against (17), mounting under `StrictMode` so that the rehearsal 17 performs
+(a double-invoked render) is exercised; the effect teardown-and-remount that later Reacts add is what
+`useOwnedModel`'s deferred dispose exists for, and it is pinned on 17's own effect lifecycle.
+
+The stylesheet is the model package's and this one adds none: `survey-creator-core/tester.css` is
+emitted beside `survey-creator-core/tester`, and an unstyled widget means that import is missing.
+
+The example app has a page for it — `example/`, at `#tester`. It is the manual QA surface for the
+whole widget: pick one of the three sample suites, run it, watch the spectator pane, press **Edit** on a
+row to record into it, add checks through the adorners on the form, go back to the runner, run one
+test, open the JSON screen at that test — and reload, which comes back on the same screen with the same
+selection. Persistence is the host's job and lives entirely in `example/src/TesterPage.jsx`
+(`localStorage` over `getState()` / `setState()`); the widget stores nothing.
+
 ## Related packages
 
 | Package | Purpose |
@@ -199,10 +239,15 @@ This monorepo does **not** use npm workspaces: each package installs independent
     Unit tests use [Jest](https://jestjs.io/) and live in `tests`.
 
     ```sh
-    npm run test                        # whole suite
+    npm run test                        # whole suite (both Jest projects)
+    npm run test:tester                 # only the Tests widget's
     npm run test:dev                    # watch mode
     npm run test:update                 # update snapshots
     ```
+
+    There are two Jest projects. `jest.config.js` runs `tests/` on the React the package develops
+    against (17); `jest.tester.config.js` runs `tests-tester/` — the Tests widget's React surface — on
+    the same React.
 
 5. **Run end-to-end tests**
 

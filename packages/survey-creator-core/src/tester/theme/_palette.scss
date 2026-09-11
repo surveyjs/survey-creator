@@ -1,0 +1,91 @@
+// The widget's palette, as one mixin rather than as a `:root` block.
+//
+// The prototype declared these on `:root` because it was the whole page. This one is a guest in
+// somebody else's application, so it declares nothing outside its own blocks and every custom
+// property carries the `svt-` prefix the classes carry - a host with its own `--border` is not
+// touched, and does not touch this.
+//
+// The mixin is included on every block that can be the outermost element the widget renders. That is
+// more than the screen roots: a survey-core popup draws its content wherever the library puts the
+// layer, which is not always inside the widget's subtree, so the two popup cards carry the palette
+// themselves. See blocks/svt-checks.scss and the run-mode menu in blocks/svt-chrome.scss.
+//
+// The primitives are the prototype's two scales merged - the runner's semantic names
+// (src/views/runner.css) and the recorder's tailwind-shaped one (src/styles.css) were the same
+// colours under two names, and the aliases below are where the two spellings meet.
+@mixin svt-palette {
+  --svt-gray-100: #f3f4f6;
+  --svt-gray-200: #e5e7eb;
+  --svt-gray-300: #d1d5db;
+  --svt-gray-500: #6b7280;
+  --svt-gray-600: #4b5563;
+  --svt-gray-700: #374151;
+  --svt-gray-900: #111827;
+  --svt-blue-50: #eff6ff;
+  --svt-blue-100: #dbeafe;
+  --svt-blue-200: #bfdbfe;
+  --svt-blue-600: #2563eb;
+  --svt-blue-700: #1d4ed8;
+  --svt-blue-800: #1e40af;
+  --svt-red-50: #fef2f2;
+  --svt-red-100: #fee2e2;
+  --svt-red-200: #fecaca;
+  --svt-red-500: #ef4444;
+  --svt-red-700: #b91c1c;
+  --svt-amber-50: #fffbeb;
+  --svt-amber-300: #fcd34d;
+  --svt-amber-800: #92400e;
+  --svt-yellow-100: #fef9c3;
+  --svt-yellow-800: #854d0e;
+  --svt-green-100: #dcfce7;
+  --svt-green-700: #15803d;
+
+  --svt-bg: #f6f7f9;
+  --svt-panel: #ffffff;
+  --svt-page: #f9fafb;
+  --svt-card: #ffffff;
+  --svt-ink: #1d2330;
+  --svt-ink-soft: #5b6577;
+  --svt-line: #dfe3ea;
+  --svt-border: var(--svt-gray-200);
+  --svt-divider: var(--svt-gray-100);
+  --svt-ink-1: var(--svt-gray-900);
+  --svt-ink-2: var(--svt-gray-700);
+  --svt-ink-3: var(--svt-gray-500);
+  --svt-primary: var(--svt-blue-600);
+  --svt-primary-hover: var(--svt-blue-700);
+  --svt-accent: #19b394;
+  --svt-accent-ink: #0b7a64;
+  --svt-pass: #1f9d55;
+  --svt-pass-strong: #22c55e;
+  --svt-fail: #d0342c;
+  --svt-fail-strong: var(--svt-red-500);
+  --svt-warn: #b5730b;
+  --svt-muted: #8b93a3;
+  --svt-running: #2f6fd0;
+  --svt-bad-bg: var(--svt-red-50);
+  --svt-bad-ink: var(--svt-red-700);
+  // The roles the blocks name. Everything below this line is here because a block wanted a colour:
+  // a hex literal inside a block is a colour that cannot be re-pointed from this file, which is the
+  // one thing this file is for - see the candidate prompt in promts/creator-tester-notes.md, where
+  // the palette becomes the Creator's tokens and the blocks do not move at all.
+  --svt-control: #ffffff;
+  --svt-on-accent: #ffffff;
+  --svt-code-bg: #f2f4f7;
+  --svt-dot-idle: var(--svt-gray-300);
+  // The failed row's hover, a step darker than --svt-bad-bg, which is that row at rest.
+  --svt-bad-bg-hover: #fde8e8;
+  --svt-alert-error-bg: #fdecea;
+  --svt-alert-error-line: #f5c2c0;
+  --svt-alert-warn-bg: #fdf6e3;
+  --svt-alert-warn-line: #f0dda4;
+  --svt-alert-info-bg: var(--svt-blue-50);
+  --svt-alert-info-line: var(--svt-blue-200);
+  --svt-alert-ok-bg: #ecf8f1;
+  --svt-alert-ok-line: #bfe4cf;
+  // The ink of every shadow the widget casts, as channels rather than as a colour: the three depths
+  // that use it are geometry decisions belonging to their blocks, and only the ink is shared.
+  --svt-shadow-ink: 17, 24, 39;
+  --svt-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --svt-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
