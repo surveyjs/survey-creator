@@ -319,21 +319,48 @@ test("Put elements into end of the JSON", () => {
   const titlePos = text.indexOf("title");
   expect(elementsPos > titlePos).toBeTruthy();
 });
-test("We should have one SurveyTextWorker.fromJSON/toJSON", () => {
+test("We should have one SurveyTextWorker per text, from typing it to leaving the tab", () => {
   const json = { requiredMark: "###" };
   const creator = new CreatorTester();
   creator.activeTab = "json";
   const editorPlugin: TabJsonEditorTextareaPlugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
-  editorPlugin.model.text = JSON.stringify(json);
   let counter = 0;
   SurveyTextWorker.onProcessJson = (json: any): void => {
     if (json?.requiredMark === "###") {
       counter++;
     }
   };
-  creator.activeTab = "designer";
-  expect(counter).toBe(1);
-  SurveyTextWorker.onProcessJson = undefined;
+  try {
+    editorPlugin.model.text = JSON.stringify(json);
+    expect(counter).toBe(1);
+    // leaving the tab asks the worker that has just processed this very text
+    creator.activeTab = "designer";
+    expect(counter).toBe(1);
+    expect(creator.survey.requiredMark).toBe("###");
+  } finally {
+    SurveyTextWorker.onProcessJson = undefined;
+  }
+});
+test("The text is linted once per change - allowingDeactivate reuses the last worker", () => {
+  const creator = new CreatorTester();
+  const editor = new TextareaJsonEditorModel(creator);
+  let counter = 0;
+  SurveyTextWorker.onProcessJson = (): void => { counter++; };
+  try {
+    editor.text = JSON.stringify({ elements: [{ type: "text", name: "q1" }] });
+    expect(counter).toBe(1);
+    expect(editor.allowingDeactivate()).toBe(true);
+    expect(counter).toBe(1);
+    editor.processErrors(editor.text);
+    expect(counter).toBe(1);
+    editor.text = JSON.stringify({ elements: [{ type: "text", name: "q1", nosuch: 1 }] });
+    expect(counter).toBe(2);
+    expect(editor.allowingDeactivate()).toBe(false);
+    expect(counter).toBe(2);
+    editor.dispose();
+  } finally {
+    SurveyTextWorker.onProcessJson = undefined;
+  }
 });
 test("JsonEditor & duplicated errors in matrices columns", () => {
   // the linter reports the duplicate too - this test is about the JSON error and its fix

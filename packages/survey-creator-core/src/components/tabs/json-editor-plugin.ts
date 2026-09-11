@@ -147,8 +147,22 @@ export abstract class JsonEditorBaseModel extends Base {
     if (!textWorker.isJsonCorrect) return undefined;
     return !textWorker.isJsonHasErrors;
   }
+  private lastTextWorker: SurveyTextWorker;
+  private lastTextWorkerText: string;
+  // One worker per text: allowingDeactivate asks right after processErrors has linted the same
+  // text, and a lint pass over a large survey is not free
   private createTextWorker(): SurveyTextWorker {
-    return new SurveyTextWorker(this.text, { lintOptions: getCreatorLintOptions(this.creator) });
+    const text = this.text;
+    if (!this.lastTextWorker || this.lastTextWorkerText !== text) {
+      this.lastTextWorker = new SurveyTextWorker(text, { lintOptions: getCreatorLintOptions(this.creator) });
+      this.lastTextWorkerText = text;
+    }
+    return this.lastTextWorker;
+  }
+  public dispose(): void {
+    this.lastTextWorker = undefined;
+    this.lastTextWorkerText = undefined;
+    super.dispose();
   }
   public get readOnly(): boolean {
     return this.creator.readOnly;
