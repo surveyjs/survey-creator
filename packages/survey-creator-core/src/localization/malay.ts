@@ -766,12 +766,6 @@ export var msStrings = {
       // [Auto-translated] "Maximum value"
       max: "Nilai maksimum"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Awalan mata wang",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Akhiran mata wang"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Kosongkan yang lain apabila dipilih",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export var msStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Cth.: mm/dd/yyyy HH:MM:ss"
     },
-    currencymask: {
-      // [Auto-translated] "Ex.: $"
-      prefix: "Cth.: $",
-      // [Auto-translated] "Ex.: USD"
-      suffix: "Cth.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Ex.: 200px"
@@ -2926,12 +2914,6 @@ export var msStrings = {
       thousandsSeparator: "Simbol yang digunakan untuk memisahkan digit nombor besar ke dalam kumpulan tiga.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Hadkan bilangan digit untuk dikekalkan selepas titik perpuluhan bagi nombor yang dipaparkan."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Satu atau beberapa simbol yang akan dipaparkan sebelum nilai.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Satu atau beberapa simbol yang akan dipaparkan selepas nilai."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

@@ -766,12 +766,6 @@ export var indonesianStrings = {
       // [Auto-translated] "Maximum value"
       max: "Nilai maksimum"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Awalan mata uang",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Akhiran mata uang"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Hapus yang lain saat dipilih",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export var indonesianStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Contoh: mm / dd / yyyy HH: MM: ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Contoh.: $",
-      // "Ex.: USD"
-      suffix: "Contoh: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Contoh: 200px"
@@ -2926,12 +2914,6 @@ export var indonesianStrings = {
       thousandsSeparator: "Simbol yang digunakan untuk memisahkan digit angka besar menjadi kelompok tiga.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Satu atau beberapa simbol yang akan ditampilkan sebelum nilai.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Satu atau beberapa simbol yang akan ditampilkan setelah nilai."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

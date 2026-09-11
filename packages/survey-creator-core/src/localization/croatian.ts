@@ -766,12 +766,6 @@ export var hrStrings = {
       // [Auto-translated] "Maximum value"
       max: "Maksimalna vrijednost"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Prefiks valute",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Sufiks valute"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Brisanje drugih kada je odabrano",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export var hrStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Npr.: mm/dd/gggg"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Npr.: $",
-      // "Ex.: USD"
-      suffix: "Npr.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Npr.: 200px"
@@ -2926,12 +2914,6 @@ export var hrStrings = {
       thousandsSeparator: "Simbol koji se koristi za odvajanje znamenki velikog broja u grupe od tri.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Ograničava broj znamenki koje treba zadržati nakon decimalnog zareza za prikazani broj."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Jedan ili više simbola koji će se prikazati prije vrijednosti.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Jedan ili više simbola koji će se prikazati nakon vrijednosti."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

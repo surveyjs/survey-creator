@@ -440,8 +440,7 @@ export var enStrings = {
     },
     currencymask: {
       currencySymbol: "Currency symbol",
-      prefix: "Currency prefix",
-      suffix: "Currency suffix"
+      currencyPattern: "Currency pattern"
     },
     isExclusive: "Clear others when selected",
     showValue: "Display both text and value",
@@ -1406,10 +1405,6 @@ export var enStrings = {
     datetimemask: {
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
     },
-    currencymask: {
-      prefix: "Ex.: $",
-      suffix: "Ex.: USD"
-    },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
     },
@@ -1709,9 +1704,8 @@ export var enStrings = {
       precision: "Limits how many digits to retain after the decimal point for a displayed number."
     },
     currencymask: {
-      currencySymbol: "A symbol that the region's currency format places around the value. Ignored if a currency prefix or suffix is specified.",
-      prefix: "One or several symbols to be displayed before the value.",
-      suffix: "One or several symbols to be displayed after the value."
+      currencySymbol: "The symbol that the currency pattern places around the value. If not specified, the region's symbol is used; leave empty to display no symbol.",
+      currencyPattern: "Defines where the currency symbol and the minus sign are placed. In the pattern, `@` stands for the currency symbol, `#` for the number, and `-` for the position of the minus sign in negative amounts (if omitted, the minus sign is placed at the beginning). If not specified, the regional format's pattern is used."
     },
     theme: {
       isPanelless: "This setting applies only to questions outside of a panel.",

@@ -766,12 +766,6 @@ export var fiStrings = {
       // [Auto-translated] "Maximum value"
       max: "Suurin arvo"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Valuutan etuliite",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Valuutan jälkiliite"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Poista muut, kun se on valittuna",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export var fiStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Esimerkki: kk/pp/v"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Esimerkki: €",
-      // "Ex.: USD"
-      suffix: "Esimerkki: EUR"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Esimerkki: 200px"
@@ -2926,12 +2914,6 @@ export var fiStrings = {
       thousandsSeparator: "Symboli, jota käytetään erottamaan suuren luvun numerot kolmen ryhmiin.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Rajoittaa näytettävän luvun desimaalipilkun jälkeen säilytettävien numeroiden määrää."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Yksi tai useampi symboli, joka näytetään ennen arvoa.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Yksi tai useampi symboli, joka näytetään arvon jälkeen."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

@@ -26,6 +26,7 @@ import { ISurveyCreatorOptions, settings as creatorSettings } from "../creator-s
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
+import { getCurrencyPatternPlaceholder } from "./currency-pattern-placeholder";
 
 var json = {
   name: "propertygrid_regionalformat",
@@ -66,11 +67,7 @@ const regionalFormatPropertyGridDefinition: ISurveyPropertyGridDefinition = {
   }
 };
 
-// The tokens of a currency pattern: the number, the currency symbol and the position of the
-// minus sign in negative amounts.
-const currencyNumberToken = "#";
-const currencySignToken = "@";
-const currencyNegativeToken = "-";
+const regionalFormatPlaceholdersKey = "regionalFormatPlaceholders";
 
 // The validator a format field resolves through, the one the mask applies. An override the mask
 // would reject falls through to the curated value there and has to do the same here, or the
@@ -114,7 +111,10 @@ export class PropertyGridEditorQuestionRegionalFormat extends PropertyGridEditor
     this.updateFormatPlaceholders(obj, panel);
     // the format locale follows the survey locale until a region is selected
     obj.registerFunctionOnPropertyValueChanged("locale",
-      () => { this.updateFormatPlaceholders(obj, panel); }, "regionalFormatPlaceholders");
+      () => { this.updateFormatPlaceholders(obj, panel); }, regionalFormatPlaceholdersKey);
+  }
+  onDisposing(obj: Base, question: Question, prop: JsonObjectProperty): void {
+    obj.unRegisterFunctionOnPropertyValueChanged("locale", regionalFormatPlaceholdersKey);
   }
   onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
     if (prop.name !== "regionalFormat") return;
@@ -142,22 +142,14 @@ export class PropertyGridEditorQuestionRegionalFormat extends PropertyGridEditor
       }
     });
   }
-  // Currency patterns differ between regions only in where the abstract currency sign sits, so
-  // the inherited pattern on its own reads the same in almost every region. The sample amount
-  // that follows it makes the difference visible and shows what the pattern produces. The sign
-  // token is resolved with it: the example renders what a mask of the survey renders, down to
-  // the symbol the region is curated with and any override authored above it.
+  // The example renders what a mask of the survey renders, down to the symbol the region is
+  // curated with and any override authored above it. There is no mask here, so the values are
+  // resolved the way a mask resolves them.
   private getCurrencyPlaceholder(obj: Base, locale: string, pattern: string): string {
-    const decimal = this.getFormatValue(obj, locale, "decimalSeparator") || "";
-    const thousands = this.getFormatValue(obj, locale, "thousandsSeparator") || "";
-    const amount = "1" + thousands + "234" + decimal + "56";
-    const symbol = this.getFormatValue(obj, locale, "currencySymbol") || "";
-    // All tokens are replaced in one pass over the pattern: a separator can be "@" and a symbol
-    // can contain "#" or "-", so the text inserted for one token must never be read as another.
-    // The example is a positive amount, so the minus sign position renders nothing.
-    const tokens = { [currencyNumberToken]: amount, [currencySignToken]: symbol, [currencyNegativeToken]: "" };
-    const example = pattern.replace(/[#@-]/g, (token: string): string => tokens[token]);
-    return pattern + " (" + example + ")";
+    return getCurrencyPatternPlaceholder(pattern,
+      this.getFormatValue(obj, locale, "decimalSeparator"),
+      this.getFormatValue(obj, locale, "thousandsSeparator"),
+      this.getFormatValue(obj, locale, "currencySymbol"));
   }
   // The value a format field resolves to: an override authored in the regional format outranks
   // the curated locale default, the order the mask resolves them in.

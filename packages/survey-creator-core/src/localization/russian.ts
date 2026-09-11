@@ -766,12 +766,6 @@ export var ruStrings = {
       // [Auto-translated] "Maximum value"
       max: "Максимальное значение"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Префикс валюты",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Суффикс валюты"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Удалить другие при выборе",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export var ruStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Пример: мм/дд/гггг чч:мм:сс"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Пример: $",
-      // "Ex.: USD"
-      suffix: "Пример: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Пример: 200px"
@@ -2926,12 +2914,6 @@ export var ruStrings = {
       thousandsSeparator: "Символ, используемый для разделения цифр большого числа на группы по три.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Ограничивает количество цифр, сохраняемых после десятичной запятой для отображаемого числа."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Один или несколько символов, которые будут отображаться перед значением.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Один или несколько символов, которые будут отображаться после значения."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

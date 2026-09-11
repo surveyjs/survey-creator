@@ -766,12 +766,6 @@ export var czStrings = {
       // [Auto-translated] "Maximum value"
       max: "Maximální hodnota"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Předpona měny",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Přípona měny"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymazat ostatní při výběru",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export var czStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Př.: dd/mm/rrrr"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Př.: $",
-      // "Ex.: USD"
-      suffix: "Př.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Př.: 200px"
@@ -2926,12 +2914,6 @@ export var czStrings = {
       thousandsSeparator: "Symbol používaný k oddělení číslic velkého čísla do skupin po třech.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Omezuje, kolik číslic se má zachovat za desetinnou čárkou zobrazeného čísla."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Jeden nebo více symbolů, které mají být zobrazeny před hodnotou.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Jeden nebo více symbolů, které se zobrazí za hodnotou."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

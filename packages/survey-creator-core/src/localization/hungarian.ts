@@ -766,12 +766,6 @@ export var huStrings = {
       // [Auto-translated] "Maximum value"
       max: "Maximális érték"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Pénznem előtag",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Pénznem utótagja"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Mások törlése, ha ki van jelölve",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export var huStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Pl.: éééé/hh/nn"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Pl.: $",
-      // "Ex.: USD"
-      suffix: "Pl.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Pl.: 200px"
@@ -2926,12 +2914,6 @@ export var huStrings = {
       thousandsSeparator: "Egy szimbólum, amely nagy szám számjegyeit három csoportba sorolja.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Korlátozza, hogy hány számjegy maradjon meg a megjelenített szám tizedesvesszője után."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Egy vagy több szimbólum jelenik meg az érték előtt.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Egy vagy több szimbólum jelenik meg az érték után."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

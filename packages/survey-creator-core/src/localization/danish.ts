@@ -767,12 +767,6 @@ export var danishStrings = {
       // [Auto-translated] "Maximum value"
       max: "Maksimal værdi"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Valutapræfiks",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Suffiks for valuta"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Ryd andre, når det er valgt",
     // [Auto-translated] "Display both text and value"
@@ -2407,12 +2401,6 @@ export var danishStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Eks.: mm / dd / åååå HH: MM: ss"
     },
-    currencymask: {
-      // [Auto-translated] "Ex.: $"
-      prefix: "F.eks.: $",
-      // [Auto-translated] "Ex.: USD"
-      suffix: "F.eks.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Eks.: 200px"
@@ -2927,12 +2915,6 @@ export var danishStrings = {
       thousandsSeparator: "Et symbol, der bruges til at adskille cifrene i et stort tal i grupper på tre.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Begrænser, hvor mange cifre der skal bevares efter decimaltegnet for et vist tal."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Et eller flere symboler, der skal vises før værdien.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Et eller flere symboler, der skal vises efter værdien."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

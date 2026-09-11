@@ -766,12 +766,6 @@ export var nlStrings = {
       // [Auto-translated] "Maximum value"
       max: "Maximale waarde"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Valuta voorvoegsel",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Valuta achtervoegsel"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Anderen wissen wanneer geselecteerd",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export var nlStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Bijv.: mm/dd/jjjj"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Bijv.: $",
-      // "Ex.: USD"
-      suffix: "Bijv.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Bijv.: 200px"
@@ -2926,12 +2914,6 @@ export var nlStrings = {
       thousandsSeparator: "Een symbool dat wordt gebruikt om de cijfers van een groot getal in groepen van drie te scheiden.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Hiermee beperkt u het aantal cijfers dat moet worden behouden na de komma voor een weergegeven getal."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Een of meer symbolen die vóór de waarde moeten worden weergegeven.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Een of meer symbolen die na de waarde moeten worden weergegeven."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

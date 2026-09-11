@@ -766,12 +766,6 @@ export const roStrings = {
       // "Maximum value"
       max: "Valoarea maximă"
     },
-    currencymask: {
-      // "Currency prefix"
-      prefix: "Prefix valutar",
-      // "Currency suffix"
-      suffix: "Sufix valutar"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Ștergeți altele când este selectat",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export const roStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
     },
-    currencymask: {
-      // [Auto-translated] "Ex.: $"
-      prefix: "Ex.: $",
-      // [Auto-translated] "Ex.: USD"
-      suffix: "Ex.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Ex.: 200px"
@@ -2926,12 +2914,6 @@ export const roStrings = {
       thousandsSeparator: "Un simbol folosit pentru a separa cifrele unui număr mare în grupuri de câte trei.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Limitează câte cifre să fie reținute după punctul zecimal pentru un număr afișat."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Unul sau mai multe simboluri care să fie afișate înaintea valorii.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Unul sau mai multe simboluri care să fie afișate după valoare."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

@@ -766,12 +766,6 @@ export var turkishStrings = {
       // [Auto-translated] "Maximum value"
       max: "Maksimum değer"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Para birimi öneki",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Para birimi son eki"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Seçildiğinde diğerlerini temizleme",
     // [Auto-translated] "Display both text and value"
@@ -2406,12 +2400,6 @@ export var turkishStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Ör.: aa/gg/yyyy HH:MM:ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Ör.: $",
-      // "Ex.: USD"
-      suffix: "Ör.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Ör.: 200 piksel"
@@ -2926,12 +2914,6 @@ export var turkishStrings = {
       thousandsSeparator: "Büyük bir sayının rakamlarını üçlü gruplara ayırmak için kullanılan bir sembol.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Görüntülenen bir sayı için ondalık virgülden sonra kaç basamak tutulacağını sınırlar."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Değerden önce görüntülenecek bir veya birkaç sembol.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Değerden sonra görüntülenecek bir veya birkaç sembol."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

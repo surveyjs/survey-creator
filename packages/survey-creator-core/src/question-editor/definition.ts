@@ -960,8 +960,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "currencymask@maskSettings": {
     properties: [
-      "prefix",
-      "suffix",
+      "currencySymbol",
+      "currencyPattern",
       "min",
       "max",
       "precision",
@@ -978,7 +978,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: ["pattern"]
   },
   "currencymask": {
-    properties: ["prefix", "suffix"]
+    properties: ["currencySymbol", "currencyPattern"]
   }
 };
 
