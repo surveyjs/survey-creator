@@ -381,7 +381,8 @@ export var enStrings = {
     survey: {
       title: "Survey title",
       description: "Survey description",
-      readOnly: "Make the survey read-only"
+      readOnly: "Make the survey read-only",
+      regionalFormat: "Regional formats"
     },
     page: {
       name: "Page name",
@@ -413,6 +414,15 @@ export var enStrings = {
     masksettings: {
       saveMaskedValue: "Save masked value in survey results"
     },
+    regionalformat: {
+      locale: "Region",
+      datePattern: "Date pattern",
+      timePattern: "Time pattern",
+      decimalSeparator: "Decimal separator",
+      thousandsSeparator: "Thousands separator",
+      currencySymbol: "Currency symbol",
+      currencyPattern: "Currency pattern"
+    },
     patternmask: {
       pattern: "Value pattern"
     },
@@ -429,8 +439,8 @@ export var enStrings = {
       max: "Maximum value"
     },
     currencymask: {
-      prefix: "Currency prefix",
-      suffix: "Currency suffix"
+      currencySymbol: "Currency symbol",
+      currencyPattern: "Currency pattern"
     },
     isExclusive: "Clear others when selected",
     showValue: "Display both text and value",
@@ -837,6 +847,7 @@ export var enStrings = {
       navigation: "Navigation",
       question: "Question Settings",
       pages: "Pages",
+      regionalFormat: "Regional Formats",
       timer: "Quiz Mode",
       calculatedValues: "Calculated Values",
       triggers: "Triggers",
@@ -1275,6 +1286,75 @@ export var enStrings = {
       container: "Same as container"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  // country-specific ("en-GB"), so these names are defined here and not in the survey library.
+  regionLocales: {
+    ar: "Arabic",
+    bg: "Bulgarian",
+    ca: "Catalan",
+    cs: "Czech",
+    cy: "Welsh",
+    da: "Danish",
+    de: "German",
+    el: "Greek",
+    en: "English",
+    "en-AU": "English (Australia)",
+    "en-CA": "English (Canada)",
+    "en-GB": "English (United Kingdom)",
+    "en-IE": "English (Ireland)",
+    "en-IN": "English (India)",
+    "en-NZ": "English (New Zealand)",
+    "en-ZA": "English (South Africa)",
+    es: "Spanish",
+    et: "Estonian",
+    eu: "Basque",
+    fa: "Persian",
+    fi: "Finnish",
+    fil: "Filipino",
+    fr: "French",
+    "fr-CA": "French (Canada)",
+    "fr-CH": "French (Switzerland)",
+    he: "Hebrew",
+    hi: "Hindi",
+    hr: "Croatian",
+    ht: "Haitian Creole",
+    hu: "Hungarian",
+    id: "Indonesian",
+    is: "Icelandic",
+    it: "Italian",
+    ja: "Japanese",
+    ka: "Georgian",
+    kk: "Kazakh",
+    ko: "Korean",
+    lt: "Lithuanian",
+    lv: "Latvian",
+    mk: "Macedonian",
+    mm: "Burmese",
+    ms: "Malay",
+    nl: "Dutch",
+    "nl-BE": "Dutch (Belgium)",
+    no: "Norwegian",
+    pl: "Polish",
+    pt: "Portuguese",
+    "pt-BR": "Portuguese (Brazil)",
+    ro: "Romanian",
+    ru: "Russian",
+    sk: "Slovak",
+    sl: "Slovenian",
+    sr: "Serbian",
+    sv: "Swedish",
+    sw: "Swahili",
+    tel: "Telugu",
+    tg: "Tajik",
+    th: "Thai",
+    tr: "Turkish",
+    uk: "Ukrainian",
+    ur: "Urdu",
+    vi: "Vietnamese",
+    zh: "Chinese",
+    "zh-CN": "Chinese (Simplified)",
+    "zh-TW": "Chinese (Traditional)"
+  },
   // Operators
   op: {
     empty: "Empty",
@@ -1318,15 +1398,14 @@ export var enStrings = {
     visibletrigger: "change visibility (deprecated)"
   },
   peplaceholder: {
+    regionalformat: {
+      locale: "Same as survey language"
+    },
     patternmask: {
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      prefix: "Ex.: $",
-      suffix: "Ex.: USD"
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
@@ -1608,6 +1687,15 @@ export var enStrings = {
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
+    regionalformat: {
+      locale: "A region whose formats apply to date, time, numeric, and currency inputs. If not specified, the survey language is used.",
+      datePattern: "Overrides the date order and separators that the region uses. The pattern can contain separator characters and the `dd`, `mm`, and `yyyy` placeholders. Ex.: dd/mm/yyyy",
+      timePattern: "Overrides the time format that the region uses. The pattern can contain separator characters and the `HH`, `hh`, `MM`, `ss`, and `TT` placeholders. Ex.: hh:MM TT",
+      decimalSeparator: "Overrides the symbol that the region uses to separate the fractional part from the integer part of a displayed number.",
+      thousandsSeparator: "Overrides the symbol that the region uses to separate the digits of a large number into groups of three.",
+      currencySymbol: "Overrides the currency symbol that the region uses. The `currencySymbol` property of an individual input mask overrides this value in turn.",
+      currencyPattern: "Overrides the placement of the currency symbol that the region uses. In the pattern, `@` stands for the currency symbol, `#` for the number, and `-` for the position of the minus sign in negative amounts (if omitted, the minus sign is placed at the beginning). Ex.: @#"
+    },
     patternmask: {
       pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
     },
@@ -1620,8 +1708,8 @@ export var enStrings = {
       precision: "Limits how many digits to retain after the decimal point for a displayed number."
     },
     currencymask: {
-      prefix: "One or several symbols to be displayed before the value.",
-      suffix: "One or several symbols to be displayed after the value."
+      currencySymbol: "The symbol that the currency pattern places around the value. If not specified, the region's symbol is used; leave empty to display no symbol.",
+      currencyPattern: "Defines where the currency symbol and the minus sign are placed. In the pattern, `@` stands for the currency symbol, `#` for the number, and `-` for the position of the minus sign in negative amounts (if omitted, the minus sign is placed at the beginning). If not specified, the regional format's pattern is used."
     },
     theme: {
       isPanelless: "This setting applies only to questions outside of a panel.",

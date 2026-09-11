@@ -790,12 +790,6 @@ export var bgStrings = {
       // [Auto-translated] "Maximum value"
       max: "Максимална стойност"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Валутен префикс",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Валутен суфикс"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Изчистване на другите, когато е избрано",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var bgStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Пример: мм/дд/гггг"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Пример: $",
-      // "Ex.: USD"
-      suffix: "Пример: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Пример: 200px"
@@ -2970,12 +2958,6 @@ export var bgStrings = {
       thousandsSeparator: "Символ, използван за разделяне на цифрите на голямо число в групи от по три.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Ограничава колко цифри да се запазят след десетичната запетая за показваното число."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Един или няколко символа, които трябва да бъдат показани преди стойността.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Един или няколко символа, които трябва да се покажат след стойността."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

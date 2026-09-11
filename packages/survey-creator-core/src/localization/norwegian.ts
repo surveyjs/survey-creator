@@ -790,12 +790,6 @@ export var nbStrings = {
       // [Auto-translated] "Maximum value"
       max: "Maksimumsverdi"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Prefiks for valuta",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Valutasuffiks"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Fjern andre når det er valgt",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var nbStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Eks.: mm/dd/åååå HH:MM:ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Eks.: $",
-      // "Ex.: USD"
-      suffix: "Eks.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Eks.: 200 piksler"
@@ -2970,12 +2958,6 @@ export var nbStrings = {
       thousandsSeparator: "Et symbol som brukes til å skille sifrene i et stort tall i grupper på tre.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Begrenser hvor mange sifre som skal beholdes etter desimaltegnet for et tall som vises."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Ett eller flere symboler som skal vises før verdien.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Ett eller flere symboler som skal vises etter verdien."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

@@ -790,12 +790,6 @@ export var germanTranslation = {
       // [Auto-translated] "Maximum value"
       max: "Maximalwert"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Währungs-Präfix",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Währungs-Suffix"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Andere löschen, wenn ausgewählt",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var germanTranslation = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Bsp.: mm/dd/yyyy HH:MM:ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Bsp.: $",
-      // "Ex.: USD"
-      suffix: "Bsp.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Beispiel: 200px"
@@ -2970,12 +2958,6 @@ export var germanTranslation = {
       thousandsSeparator: "Ein Symbol, das verwendet wird, um die Ziffern einer großen Zahl in Dreiergruppen zu unterteilen.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Schränkt die Anzahl der Nachkommastellen für eine angezeigte Zahl ein."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Ein oder mehrere Symbole, die vor dem Wert angezeigt werden sollen.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Ein oder mehrere Symbole, die nach dem Wert angezeigt werden sollen."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

@@ -790,12 +790,6 @@ export var persianStrings = {
       // [Auto-translated] "Maximum value"
       max: "بیشینه مقدار"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "پیشوند ارز",
-      // [Auto-translated] "Currency suffix"
-      suffix: "پسوند ارز"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "هنگام انتخاب دیگران را پاک کنید",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var persianStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "سابق: mm/dd/yyyyy"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "سابق: $",
-      // "Ex.: USD"
-      suffix: "Ex.: دلار امریکا"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "سابق: 200 پیکسل"
@@ -2970,12 +2958,6 @@ export var persianStrings = {
       thousandsSeparator: "نمادی که برای جدا کردن ارقام یک عدد بزرگ به گروه های سه نفره استفاده می شود.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "محدود کردن تعداد ارقام برای حفظ پس از نقطه اعشار برای یک عدد نمایش داده شده."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "یک یا چند نماد قبل از مقدار نمایش داده می شود.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "یک یا چند نماد بعد از مقدار نمایش داده می شود."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

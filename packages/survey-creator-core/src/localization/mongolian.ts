@@ -790,12 +790,6 @@ export var mnStrings = {
       // [Auto-translated] "Maximum value"
       max: "Хамгийн их үнэ цэнэ"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Валютын ханш",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Валютын suffix"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Сонгогдсон үедээ бусдыг цэвэрлэ",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var mnStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Жишээ нь: мм/дд/гггг ХХ:ММ:сс"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Экс.: $",
-      // "Ex.: USD"
-      suffix: "Экс.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Экс: 200px"
@@ -2970,12 +2958,6 @@ export var mnStrings = {
       thousandsSeparator: "Том тооны тоонуудыг 3 бүлэг болгон салгахад хэрэглэгддэг бэлгэдэл.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Үзүүлсэн дугаарын хувьд decimal цэгийн дараа хэдэн цифрийг хадгалахыг хязгаарлана."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Үнэ цэнийн өмнө үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

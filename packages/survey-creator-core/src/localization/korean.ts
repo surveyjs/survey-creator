@@ -791,12 +791,6 @@ export var koreanStrings = {
       // [Auto-translated] "Maximum value"
       max: "최대값"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "통화 접두사",
-      // [Auto-translated] "Currency suffix"
-      suffix: "통화 접미사"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "선택하면 다른 항목 지우기",
     // [Auto-translated] "Display both text and value"
@@ -2447,12 +2441,6 @@ export var koreanStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "예: mm/dd/yyyy HH:MM:ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "예: $",
-      // "Ex.: USD"
-      suffix: "예.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "예: 200px"
@@ -2971,12 +2959,6 @@ export var koreanStrings = {
       thousandsSeparator: "큰 숫자의 숫자를 3개의 그룹으로 구분하는 데 사용되는 기호입니다.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "값 앞에 표시할 하나 또는 여러 개의 기호입니다.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

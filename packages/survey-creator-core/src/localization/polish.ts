@@ -791,12 +791,6 @@ export var polishStrings = {
       // [Auto-translated] "Maximum value"
       max: "Wartość maksymalna"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Prefiks waluty",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Sufiks waluty"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Wyczyść inne po wybraniu",
     // [Auto-translated] "Display both text and value"
@@ -2447,12 +2441,6 @@ export var polishStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Np.: mm/dd/rrrr"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Przykład: $",
-      // "Ex.: USD"
-      suffix: "Np.: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Przykład: 200 pikseli"
@@ -2971,12 +2959,6 @@ export var polishStrings = {
       thousandsSeparator: "Symbol używany do rozdzielania cyfr dużej liczby na grupy po trzy.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Ogranicza liczbę cyfr, które mają być zachowywane po przecinku dziesiętnym wyświetlanej liczby."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Jeden lub kilka symboli, które mają być wyświetlane przed wartością.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Jeden lub kilka symboli, które mają być wyświetlane po wartości."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

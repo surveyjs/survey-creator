@@ -144,6 +144,9 @@ export interface IPropertyGridEditor {
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
     propGridDefinition?: ISurveyPropertyGridDefinition) => void;
   onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
+  // Called before the property grid survey that holds the question is disposed. An editor
+  // releases here what onCreated subscribed to on the edited object, which outlives the grid.
+  onDisposing?: (obj: Base, question: Question, prop: JsonObjectProperty) => void;
   onAfterSetValue?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any, options: ISurveyCreatorOptions) => string;
   onAfterRenderQuestion?: (
@@ -254,6 +257,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onSetup) {
       res.onSetup(obj, question, prop, options);
+    }
+  },
+  onDisposing(obj: Base, question: Question, prop: JsonObjectProperty): void {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onDisposing) {
+      res.onDisposing(obj, question, prop);
     }
   },
   onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
@@ -918,6 +927,11 @@ export class PropertyGridModel {
     this.createSurveyValue();
   }
   private clearSurveyValue() {
+    this.surveyValue.getAllQuestions().forEach((q: any) => {
+      if (!!q.property && !!q.obj) {
+        PropertyGridEditorCollection.onDisposing(q.obj, q, q.property);
+      }
+    });
     this.surveyValue.onValidateQuestion.clear();
     this.surveyValue.onValueChanging.clear();
     this.surveyValue.onValueChanged.clear();

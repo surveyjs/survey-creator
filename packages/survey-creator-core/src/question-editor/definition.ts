@@ -876,6 +876,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showPageNumbers", tab: "pages" },
       { name: "gridLayoutEnabled", tab: "pages" },
 
+      { name: "regionalFormat", tab: "regionalFormat" },
+
       { name: "calculatedValues", tab: "logic" },
       { name: "triggers", tab: "logic" },
 
@@ -913,6 +915,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "navigation", index: 100 },
       { name: "question", index: 200 },
       { name: "pages", index: 250 },
+      { name: "regionalFormat", index: 260 },
       { name: "logic", index: 300 },
       { name: "data", index: 400 },
       { name: "validation", index: 500 },
@@ -959,8 +962,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "currencymask@maskSettings": {
     properties: [
-      "prefix",
-      "suffix",
+      "currencySymbol",
+      "currencyPattern",
       "min",
       "max",
       "precision",
@@ -977,7 +980,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: ["pattern"]
   },
   "currencymask": {
-    properties: ["prefix", "suffix"]
+    properties: ["currencySymbol", "currencyPattern"]
   }
 };
 

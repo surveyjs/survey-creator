@@ -790,12 +790,6 @@ export var grStrings = {
       // "Maximum value"
       max: "Μέγιστη τιμή"
     },
-    currencymask: {
-      // "Currency prefix"
-      prefix: "Πρόθεμα νομίσματος",
-      // "Currency suffix"
-      suffix: "Επίθεμα νομίσματος"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Απαλοιφή άλλων όταν είναι επιλεγμένο",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var grStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "π.χ.: mm/dd/yyyy HH:MM:ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "π.χ.: $",
-      // "Ex.: USD"
-      suffix: "π.χ.: USD"
-    },
     panelbase: {
       // "Ex.: 200px"
       questionTitleWidth: "π.χ.: 200px"
@@ -2970,12 +2958,6 @@ export var grStrings = {
       thousandsSeparator: "Ένα σύμβολο που χρησιμοποιείται για να χωρίσει τα ψηφία ενός μεγάλου αριθμού σε ομάδες των τριών.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Περιορίζει πόσα ψηφία θα διατηρηθούν μετά την υποδιαστολή για έναν αριθμό που εμφανίζεται."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Ένα ή περισσότερα σύμβολα που θα εμφανιστούν πριν την τιμή.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Ένα ή περισσότερα σύμβολα που θα εμφανιστούν μετά την τιμή."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

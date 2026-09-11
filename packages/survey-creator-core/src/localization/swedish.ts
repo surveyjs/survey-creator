@@ -791,12 +791,6 @@ export let svStrings = {
       // [Auto-translated] "Maximum value"
       max: "Maximalt värde"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Prefix för valuta",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Valutasuffix"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Rensa andra när du väljer det här alternativet",
     // [Auto-translated] "Display both text and value"
@@ -2447,12 +2441,6 @@ export let svStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Ex.: mm/dd/åååå"
     },
-    currencymask: {
-      // [Auto-translated] "Ex.: $"
-      prefix: "Ex.: $",
-      // [Auto-translated] "Ex.: USD"
-      suffix: "Exempel: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Ex.: 200px"
@@ -2971,12 +2959,6 @@ export let svStrings = {
       thousandsSeparator: "En symbol som används för att dela upp siffrorna i ett stort tal i grupper om tre.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Begränsar hur många siffror som ska behållas efter decimaltecknet för ett tal som visas."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "En eller flera symboler som ska visas före värdet.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "En eller flera symboler som ska visas efter värdet."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

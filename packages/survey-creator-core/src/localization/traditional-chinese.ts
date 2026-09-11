@@ -791,12 +791,6 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Maximum value"
       max: "最大值"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "貨幣前綴",
-      // [Auto-translated] "Currency suffix"
-      suffix: "貨幣後綴"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "選中時清除其他",
     // [Auto-translated] "Display both text and value"
@@ -2447,12 +2441,6 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "例如：mm/dd/yyyy HH：MM：ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "例：$",
-      // "Ex.: USD"
-      suffix: "例如：美元"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "例如：200px"
@@ -2971,12 +2959,6 @@ export var traditionalChineseTranslation = {
       thousandsSeparator: "用於將大數的數位分成三組的符號。",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "限制顯示數位的小數點後要保留的位數。"
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "要在值之前顯示的一個或多個符號。",
-      // "One or several symbols to be displayed after the value."
-      suffix: "要在值后顯示的一個或多個符號。"
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

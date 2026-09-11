@@ -790,12 +790,6 @@ export var jaStrings = {
       // [Auto-translated] "Maximum value"
       max: "最大値"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "通貨接頭辞",
-      // [Auto-translated] "Currency suffix"
-      suffix: "通貨の接尾辞"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "選択時に他のユーザーをクリアする",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var jaStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "例:mm / dd / yyyy HH:MM:ss"
     },
-    currencymask: {
-      // [Auto-translated] "Ex.: $"
-      prefix: "例:$",
-      // [Auto-translated] "Ex.: USD"
-      suffix: "例:USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "例:200px"
@@ -2970,12 +2958,6 @@ export var jaStrings = {
       thousandsSeparator: "大きな数字を 3 つのグループに区切るために使用される記号。",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "表示される数値の小数点以下の桁数を制限します。"
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "値の前に表示される 1 つまたは複数のシンボル。",
-      // "One or several symbols to be displayed after the value."
-      suffix: "値の後に表示される 1 つまたは複数の記号。"
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

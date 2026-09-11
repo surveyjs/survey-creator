@@ -790,12 +790,6 @@ export var arStrings = {
       // [Auto-translated] "Maximum value"
       max: "القيمة القصوى"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "بادئة العملة",
-      // [Auto-translated] "Currency suffix"
-      suffix: "لاحقة العملة"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "مسح الآخرين عند تحديده",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var arStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "مثال: مم / يوم / سنة"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "مثال: $",
-      // "Ex.: USD"
-      suffix: "مثال: الدولار الأمريكي"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "مثال: 200 بكسل"
@@ -2970,12 +2958,6 @@ export var arStrings = {
       thousandsSeparator: "رمز يستخدم لفصل أرقام عدد كبير إلى مجموعات من ثلاثة.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "رمز واحد أو عدة رموز ليتم عرضها قبل القيمة.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

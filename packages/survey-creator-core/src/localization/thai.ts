@@ -790,12 +790,6 @@ export const thStrings = {
       // "Maximum value"
       max: "ค่าสูงสุด"
     },
-    currencymask: {
-      // "Currency prefix"
-      prefix: "คำนำหน้าสกุลเงิน",
-      // "Currency suffix"
-      suffix: "คำต่อท้ายสกุลเงิน"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "ล้างรายการอื่นเมื่อเลือก",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export const thStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "ตัวอย่าง: mm/dd/yyyy HH:MM:ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "ตัวอย่าง: $",
-      // "Ex.: USD"
-      suffix: "ตัวอย่าง: USD"
-    },
     panelbase: {
       // "Ex.: 200px"
       questionTitleWidth: "ตัวอย่าง: 200px"
@@ -2970,12 +2958,6 @@ export const thStrings = {
       thousandsSeparator: "สัญลักษณ์ที่ใช้แยกหลักของจำนวนมากเป็นกลุ่มของสาม",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "จำกัดจำนวนหลักที่คงอยู่หลังจุดทศนิยมสำหรับตัวเลขที่แสดง"
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "หนึ่งหรือหลายสัญลักษณ์ที่จะปรากฏก่อนค่า",
-      // "One or several symbols to be displayed after the value."
-      suffix: "หนึ่งหรือหลายสัญลักษณ์ที่จะปรากฏหลังค่า"
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

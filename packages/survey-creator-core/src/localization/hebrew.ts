@@ -790,12 +790,6 @@ export var hebrewStrings = {
       // [Auto-translated] "Maximum value"
       max: "ערך מרבי"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "קידומת מטבע",
-      // [Auto-translated] "Currency suffix"
-      suffix: "סיומת מטבע"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "נקה אחרים כאשר בוחרים באפשרות זו",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var hebrewStrings = {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "לדוגמה: mm/dd/yyyy HH:MM:ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "לדוגמה: $",
-      // "Ex.: USD"
-      suffix: "לדוגמה: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "לדוגמה: 200px"
@@ -2970,12 +2958,6 @@ export var hebrewStrings = {
       thousandsSeparator: "סמל המשמש להפרדת הספרות של מספר גדול לקבוצות של שלושה.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "סימן אחד או יותר שיוצגו לפני הערך.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "סימן אחד או יותר שיוצגו לאחר הערך."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

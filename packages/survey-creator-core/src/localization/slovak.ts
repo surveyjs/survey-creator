@@ -790,12 +790,6 @@ export var skStrings = {
       // [Auto-translated] "Maximum value"
       max: "Maximálna hodnota"
     },
-    currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Predčíslievanie meny",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Prípona meny"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymažte ostatné, keď sú vybraté",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var skStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Napr.: mm/dd/rrrr"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Napr.: $",
-      // "Ex.: USD"
-      suffix: "Napríklad: USD"
-    },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
       questionTitleWidth: "Napríklad: 200px"
@@ -2970,12 +2958,6 @@ export var skStrings = {
       thousandsSeparator: "Symbol používaný na oddelenie číslic veľkého čísla do skupín po troch.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Obmedzuje, koľko číslic sa má zachovať za desatinnou čiarkou pre zobrazené číslo."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Jeden alebo niekoľko symbolov, ktoré sa majú zobraziť pred hodnotou.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Jeden alebo viac symbolov, ktoré sa zobrazia za hodnotou."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

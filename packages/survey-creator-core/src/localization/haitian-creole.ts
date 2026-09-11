@@ -790,12 +790,6 @@ export var htStrings = {
       // "Maximum value"
       max: "Valè maksimòm"
     },
-    currencymask: {
-      // "Currency prefix"
-      prefix: "Prefiks lajan",
-      // "Currency suffix"
-      suffix: "Sifiks lajan"
-    },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Klè lòt moun lè yo chwazi yo",
     // [Auto-translated] "Display both text and value"
@@ -2446,12 +2440,6 @@ export var htStrings = {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Egz.: mm/jj/aaaa HH:MM:ss"
     },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Egz.: $",
-      // "Ex.: USD"
-      suffix: "Egz.: USD"
-    },
     panelbase: {
       // "Ex.: 200px"
       questionTitleWidth: "Egzanp: 200px"
@@ -2970,12 +2958,6 @@ export var htStrings = {
       thousandsSeparator: "Yon senbòl yo itilize pou separe chif yon gwo kantite an gwoup twa.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Limite konbyen chif yo kenbe apre pwen desimal la pou yon nimewo ki parèt."
-    },
-    currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Youn oswa plizyè senbòl yo dwe parèt devan valè a.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Youn oswa plizyè senbòl yo dwe parèt apre valè a."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
