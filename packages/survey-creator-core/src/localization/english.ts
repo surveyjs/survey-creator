@@ -81,6 +81,8 @@ export var enStrings = {
     saveThemeTooltip: "Save Theme",
     jsonHideErrors: "Hide errors",
     jsonShowErrors: "Show errors",
+    jsonFixError: "Fix error",
+    jsonRootNotObject: "The survey JSON must be an object.",
     undo: "Undo",
     redo: "Redo",
     expandTooltip: "Expand",
@@ -1855,6 +1857,10 @@ export var enStrings = {
       "element/never-visible": "Elements that never become visible",
       "mask/mismatch": "Input mask mismatches",
       "page/empty": "Empty pages and panels",
+      "property/required": "Missing required properties",
+      "property/not-an-array": "Single values written for array properties",
+      "variable/collision": "Variables colliding with survey data",
+      "variable/preset": "Variable preset defects",
     },
     ruleDescriptions: {
       "expression/syntax": "Finds expressions that cannot be parsed.",
@@ -1885,6 +1891,10 @@ export var enStrings = {
       "element/never-visible": "Finds elements whose condition depends on a question that never becomes visible.",
       "mask/mismatch": "Finds input masks the run time resolves differently than the JSON describes.",
       "page/empty": "Finds pages and panels with no element that can ever render.",
+      "property/required": "Finds objects that leave out a property their class requires, such as the name of a question.",
+      "property/not-an-array": "Finds a single value written where the property holds an array; the run time wraps it into a one-item array.",
+      "variable/collision": "Finds host variables that write the same data key as a question or a calculated value of the survey.",
+      "variable/preset": "Finds defects of the variable presets: their structure, and values the variable definition rejects.",
     },
     messages: {
       "expression/syntax": {
@@ -1914,6 +1924,7 @@ export var enStrings = {
       },
       "element/unknown-type": {
         unknownType: "\"{name}\" has an unknown type \"{type}\".",
+        missingType: "\"{name}\" has no type - an element without a type is dropped.",
       },
       "property/unknown": {
         unknownProperty: "\"{key}\" is not a property of {ownerText} ({className}).",
@@ -1927,6 +1938,26 @@ export var enStrings = {
         notInChoices: "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText}).",
         outOfRange: "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}.",
         valueNameDotted: "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed.",
+      },
+      "property/required": {
+        missing: "{ownerText} has no \"{key}\" - the property is required for a {className}.",
+      },
+      "property/not-an-array": {
+        notAnArray: "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array.",
+      },
+      "variable/collision": {
+        questionShadowed: "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on.",
+        calculatedValueShadowed: "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins.",
+      },
+      "variable/preset": {
+        definitionNotAnObject: "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked.",
+        presetsNotAnArray: "variablePresets.presets is not an array, so no preset is declared.",
+        presetNotAnObject: "Preset #{index} is not an object.",
+        presetNameMissing: "Preset #{index} has no name, so nothing can reference it.",
+        presetVariablesNotAnObject: "Preset \"{preset}\" carries no variables object, so it sets nothing.",
+        duplicateName: "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one.",
+        unknownVariable: "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare.",
+        invalidValue: "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}",
       },
       "expression/unknown-function": {
         notRegistered: "The function \"{functionName}\" is not registered.",

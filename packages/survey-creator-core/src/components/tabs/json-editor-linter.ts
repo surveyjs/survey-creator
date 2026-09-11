@@ -249,7 +249,8 @@ export class JsonEditorLinterModel extends Base {
         "terms.countDirection." + (data.count < data.bound ? "below" : "above"));
     }
     if (finding.ruleId === "property/unknown" || finding.ruleId === "property/dead" ||
-      finding.ruleId === "property/invalid-value") {
+      finding.ruleId === "property/invalid-value" || finding.ruleId === "property/required" ||
+      finding.ruleId === "property/not-an-array") {
       params.ownerText = getOwnerText(data.name, data.className);
     }
     if (finding.ruleId === "property/invalid-value") {
@@ -338,7 +339,10 @@ export class JsonEditorLinterModel extends Base {
         res.push(suffix("didYouMean", finding.suggestion));
       }
     } else {
-      if (finding.ruleId === "element/unknown-type") res.push(suffix("customComponentHint"));
+      // an element with no type at all has no spelling a component definition could explain
+      if (finding.ruleId === "element/unknown-type" && finding.reason === "unknownType") {
+        res.push(suffix("customComponentHint"));
+      }
       if (finding.ruleId === "expression/unknown-function") res.push(suffix("registerFunctionHint"));
       if (finding.ruleId === "trigger/unknown-type") res.push(suffix("triggerTypeDroppedHint"));
       if (finding.ruleId === "property/unknown") res.push(suffix("deserializerDropsKey"));

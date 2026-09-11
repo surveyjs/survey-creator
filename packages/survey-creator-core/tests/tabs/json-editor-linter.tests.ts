@@ -986,6 +986,36 @@ test("A reference outside an expression says which text it was piped into", () =
     " name exists. Did you mean \"q1\"? Referenced in the choicesByUrl path.");
 });
 
+test("property/required names the owner the way the deserializer names it", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [{ type: "text" }, { type: "matrixdynamic", name: "m1", columns: [{ cellType: "text" }] }],
+  }, null, 2));
+  const texts = editor.linter.findings.filter(f => f.ruleId === "property/required").map(f => f.text);
+  expect(texts).toEqual([
+    "the text has no \"name\" - the property is required for a text.",
+    // a nameless object is named by its class - there is no name to quote
+    "the matrixdropdowncolumn has no \"name\" - the property is required for a matrixdropdowncolumn.",
+  ]);
+});
+
+test("property/not-an-array names the key as written", () => {
+  const editor = createEditor(JSON.stringify({
+    pages: [{ name: "p1", questions: { type: "text", name: "q1" } }],
+  }, null, 2));
+  const finding = editor.linter.findings.filter(f => f.ruleId === "property/not-an-array")[0];
+  expect(finding.text).toBe(
+    "The \"questions\" of \"p1\" is not an array - the property holds a list, and the run time wraps the value into a one-item array.");
+});
+
+test("element/unknown-type without a type gets no component hint", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [{ name: "q1" }, { type: "nosuch", name: "q2" }],
+  }, null, 2));
+  const texts = editor.linter.findings.filter(f => f.ruleId === "element/unknown-type").map(f => f.text);
+  expect(texts[0]).toBe("\"q1\" has no type - an element without a type is dropped.");
+  expect(texts[1]).toContain("If it is a custom component");
+});
+
 test("Every rule has a localized name, a description and a message per reason", () => {
   const missing: Array<string> = [];
   getRules().forEach(rule => {
