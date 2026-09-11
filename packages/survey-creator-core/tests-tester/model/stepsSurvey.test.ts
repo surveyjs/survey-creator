@@ -121,9 +121,10 @@ describe("the step list", () => {
     expect(matrix.visibleRows[0].getQuestionByName("action").getType()).toBe("expression");
     expect(matrix.visibleRows[0].getQuestionByName("action").value).toBe("Set answer · \"Ann\"");
     expect(matrix.visibleRows[0].getQuestionByName("target").value).toBe("who");
-    // And every row has the handle the reorder is dragged by.
-    const dragged = matrix.renderedTable.rows
-      .filter((row: any) => (row.cells || []).some((cell: any) => cell.isDragHandlerCell));
+    // And every row has the handle the reorder is dragged by. Since survey-core's matrix refactor it is
+    // a row action ("drag-drop") in the actions cell rather than a cell of its own.
+    const dragged = [0, 1, 2]
+      .filter(index => rowActions(matrix, index).some(action => action.id === "drag-drop"));
     expect(dragged.length).toBe(3);
   });
 
