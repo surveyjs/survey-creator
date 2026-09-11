@@ -154,8 +154,8 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: true }) showJSONEditorTab: boolean;
 
-  // Runs survey-core/linter on the edited JSON and shows its results in the JSON tab.
-  // false switches the whole feature off: the linter does not run at all.
+  // Shows the Checks panel with the results of survey-core/linter in the JSON tab.
+  // The linter validates the text either way: false only hides the per-rule panel.
   @property({ defaultValue: true }) showLinterPanel: boolean;
 
   @property({ defaultValue: true }) showTestSurveyTab: boolean;
@@ -2904,11 +2904,10 @@ export class SurveyCreatorModel extends Base
     } else {
       let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
       if (!trustJSON) {
-        const textWorker = new SurveyTextWorker(value);
+        // parse only: the text is applied whenever it is a JSON object, whatever the linter says
+        const textWorker = new SurveyTextWorker(value, { lint: false });
         if (textWorker.isJsonCorrect) {
           jsonValue = this.parseJSON(value);
-        } else if (!!textWorker.survey) {
-          jsonValue = textWorker.survey.toJSON();
         }
       }
       if (!!jsonValue) {
@@ -2940,12 +2939,16 @@ export class SurveyCreatorModel extends Base
     if (this.viewType != "json") {
       return new JsonObject().toJsonObject(this.survey);
     }
-    var surveyJsonText = this.text;
-    var textWorker = new SurveyTextWorker(surveyJsonText);
-    if (textWorker.isJsonCorrect) {
-      return new JsonObject().toJsonObject(textWorker.survey);
-    }
-    return null;
+    const textWorker = new SurveyTextWorker(this.text, { lint: false });
+    if (!textWorker.isJsonCorrect) return null;
+    // the text normalized the way the survey saves it - through a model in design mode, so
+    // that loading it runs no expressions and no choicesByUrl requests
+    const survey = new SurveyModel();
+    survey.setDesignMode(true);
+    survey.fromJSON(this.parseJSON(this.text));
+    const res = new JsonObject().toJsonObject(survey);
+    survey.dispose();
+    return res;
   }
 
   public getObjectDisplayName(

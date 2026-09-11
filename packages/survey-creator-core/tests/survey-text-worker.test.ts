@@ -1,8 +1,19 @@
-import { SurveyTextWorker } from "../src/textWorker";
-import { ILoadFromJSONOptions } from "survey-core";
+import { SurveyTextWorker, SurveyTextWorkerLinterFinding } from "../src/textWorker";
+import { ISurveyLintOptions } from "survey-core/linter";
 
-function createTextWorker(json: any, options?: ILoadFromJSONOptions): SurveyTextWorker {
-  return new SurveyTextWorker(JSON.stringify(json, null, 3), options);
+// The rules the JSON tab raises to "error": the checks the deserializer used to report
+const schemaRules = (validateValues: boolean = false): ISurveyLintOptions => ({
+  rules: {
+    "property/unknown": "error",
+    "property/required": "error",
+    "property/not-an-array": "error",
+    "element/unknown-type": "error",
+    "property/invalid-value": validateValues ? "error" : "off",
+  },
+});
+
+function createTextWorker(json: any, validateValues: boolean = false): SurveyTextWorker {
+  return new SurveyTextWorker(JSON.stringify(json, null, 3), { lintOptions: schemaRules(validateValues) });
 }
 
 test("SurveyTextWorker, incorrect property name pos", () => {
@@ -21,8 +32,13 @@ test("SurveyTextWorker, incorrect property name pos", () => {
       }
     ]
   });
+  expect(textWorker.isJsonCorrect).toBeTruthy();
   expect(textWorker.errors).toHaveLength(1);
-  const error = textWorker.errors[0];
+  const error = <SurveyTextWorkerLinterFinding>textWorker.errors[0];
+  expect(error.getErrorType()).toBe("linterfinding");
+  expect(error.ruleId).toBe("property/unknown");
+  expect(error.isBlocking).toBeTruthy();
+  expect(textWorker.isJsonHasErrors).toBeTruthy();
   const propNamePos = 126;
   expect(error.at).toBe(propNamePos);
   expect(textWorker.text.substring(propNamePos, propNamePos + 5)).toBe("incor");
@@ -76,6 +92,20 @@ test("SurveyTextWorker, show duplication name errors", () => {
     name: "question1"
   });
 });
+test("SurveyTextWorker, a duplicated page and panel get names of their own kind", () => {
+  const textWorker = createTextWorker({
+    pages: [
+      { name: "p1", elements: [{ type: "panel", name: "pn1", elements: [{ type: "text", name: "q1" }] }] },
+      { name: "p1", elements: [{ type: "panel", name: "pn1", elements: [{ type: "text", name: "q2" }] }] },
+    ]
+  });
+  const errors = textWorker.errors.filter(e => e.isBlocking);
+  expect(errors.map(e => (<SurveyTextWorkerLinterFinding>e).ruleId)).toEqual(["name/duplicate", "name/duplicate"]);
+  const fixedPage = JSON.parse(errors[0].fixError(textWorker.text));
+  expect(fixedPage.pages[1].name).toBe("page1");
+  const fixedPanel = JSON.parse(errors[1].fixError(textWorker.text));
+  expect(fixedPanel.pages[1].elements[0].name).toBe("panel1");
+});
 test("SurveyTextWorker, required properties", () => {
   const textWorker = createTextWorker({
     pages: [{
@@ -106,6 +136,16 @@ test("SurveyTextWorker, required properties", () => {
   const indent2 = lines[6].split(" ").length - 1;
   expect(indent2).toBe(indent1 + 3);
 });
+test("SurveyTextWorker, a required property other than name is reported but not fixable", () => {
+  const textWorker = createTextWorker({
+    elements: [{ type: "text", name: "q1" }],
+    triggers: [{ type: "setvalue", expression: "{q1} = 1", setValue: 2 }]
+  });
+  expect(textWorker.errors).toHaveLength(1);
+  expect((<SurveyTextWorkerLinterFinding>textWorker.errors[0]).ruleId).toBe("property/required");
+  expect(textWorker.errors[0].isFixable).toBeFalsy();
+  expect(textWorker.text.charAt(textWorker.errors[0].at)).toBe("{");
+});
 test("SurveyTextWorker, validate properties value, Issue#7335", () => {
   const textWorker = createTextWorker({
     elements: [
@@ -114,11 +154,11 @@ test("SurveyTextWorker, validate properties value, Issue#7335", () => {
         clearIfInvisible: "test"
       }
     ]
-  }, { validatePropertyValues: true });
+  }, true);
   expect(textWorker.errors).toHaveLength(1);
   const error = textWorker.errors[0];
-  const propNamePos = 25;
-  expect(error.at).toBe(propNamePos);
+  // the finding points at the property itself, where the deserializer could only name the element
+  expect(error.at).toBe(textWorker.text.indexOf("\"clearIfInvisible\""));
   expect(error.isFixable).toBeTruthy();
   textWorker.text = error.fixError(textWorker.text);
   const newJson = JSON.parse(textWorker.text);
@@ -128,12 +168,141 @@ test("SurveyTextWorker, validate properties value, Issue#7335", () => {
     clearIfInvisible: "default"
   });
 });
+test("SurveyTextWorker, the closest allowed value is chosen, Issue#7417", () => {
+  const textWorker = createTextWorker({
+    elements: [{ type: "text", name: "q1", clearIfInvisible: "cOmPlEtE" }]
+  }, true);
+  expect(textWorker.errors).toHaveLength(1);
+  const newJson = JSON.parse(textWorker.errors[0].fixError(textWorker.text));
+  expect(newJson.elements[0].clearIfInvisible).toBe("onComplete");
+});
+test("SurveyTextWorker, property values are not validated unless asked", () => {
+  const textWorker = createTextWorker({
+    elements: [{ type: "text", name: "q1", clearIfInvisible: "test" }]
+  });
+  expect(textWorker.errors).toHaveLength(0);
+});
 test("SurveyTextWorker, locale 'default' should not produce an error Bug#7541", () => {
   const textWorker = createTextWorker({
     locale: "default",
     elements: [
       { type: "text", name: "q1" }
     ]
-  }, { validatePropertyValues: true });
+  }, true);
   expect(textWorker.errors).toHaveLength(0);
+});
+test("SurveyTextWorker, a single object written for an array is fixed by wrapping it", () => {
+  const textWorker = createTextWorker({
+    pages: [{
+      questions: {
+        type: "text",
+        name: "q1",
+      }
+    }]
+  });
+  expect(textWorker.errors).toHaveLength(1);
+  const error = <SurveyTextWorkerLinterFinding>textWorker.errors[0];
+  expect(error.ruleId).toBe("property/not-an-array");
+  expect(textWorker.text.substring(error.at, error.at + 9)).toBe("questions");
+  expect(error.isFixable).toBeTruthy();
+  expect(JSON.parse(error.fixError(textWorker.text))).toEqual({
+    pages: [{ questions: [{ type: "text", name: "q1" }] }]
+  });
+});
+test("SurveyTextWorker, a scalar written for an array is wrapped too", () => {
+  const textWorker = createTextWorker({
+    elements: [{ type: "checkbox", name: "q1", choices: "a" }]
+  });
+  expect(textWorker.errors).toHaveLength(1);
+  expect(JSON.parse(textWorker.errors[0].fixError(textWorker.text)).elements[0].choices).toEqual(["a"]);
+});
+test("SurveyTextWorker, an element without a type and with an unknown type", () => {
+  const textWorker = createTextWorker({
+    elements: [{ name: "q1" }, { type: "text_custom", name: "q2" }]
+  });
+  expect(textWorker.errors.map(e => (<SurveyTextWorkerLinterFinding>e).reason)).toEqual(["missingType", "unknownType"]);
+  textWorker.errors.forEach(error => {
+    expect(error.isBlocking).toBeTruthy();
+    expect(error.isFixable).toBeFalsy();
+    expect(textWorker.text.charAt(error.at)).toBe("{");
+  });
+});
+test("SurveyTextWorker, a warning is listed but does not block", () => {
+  const textWorker = createTextWorker({
+    pages: [{ name: "p1", elements: [{ type: "text", name: "q1" }] }, { name: "p2" }]
+  });
+  expect(textWorker.errors).toHaveLength(1);
+  const warning = <SurveyTextWorkerLinterFinding>textWorker.errors[0];
+  expect(warning.ruleId).toBe("page/empty");
+  expect(warning.isBlocking).toBeFalsy();
+  expect(textWorker.isJsonHasErrors).toBeFalsy();
+  expect(textWorker.findings).toHaveLength(1);
+  expect(textWorker.lintResult.warningCount).toBe(1);
+});
+test("SurveyTextWorker, errors are sorted by position, unresolved ones last", () => {
+  const textWorker = new SurveyTextWorker(JSON.stringify({
+    elements: [
+      { type: "text", name: "q2", visibleIf: "{nosuch} = 1" },
+      { type: "text", name: "q1", nosuchprop: 1 }
+    ]
+  }, null, 2), { lintOptions: schemaRules() });
+  const ats = textWorker.errors.map(e => e.at);
+  expect(ats.length).toBeGreaterThan(1);
+  const resolved = ats.filter(at => at > -1);
+  expect(resolved).toEqual(resolved.slice().sort((a, b) => a - b));
+  const firstUnresolved = ats.indexOf(-1);
+  if (firstUnresolved > -1) {
+    expect(ats.slice(firstUnresolved).every(at => at === -1)).toBeTruthy();
+  }
+});
+test("SurveyTextWorker, a parse error is the only error of a broken text", () => {
+  const textWorker = new SurveyTextWorker("{ elements: [", { lintOptions: schemaRules() });
+  expect(textWorker.isJsonCorrect).toBeFalsy();
+  expect(textWorker.isJsonHasErrors).toBeTruthy();
+  expect(textWorker.json).toBeUndefined();
+  expect(textWorker.lintResult).toBeUndefined();
+  expect(textWorker.errors).toHaveLength(1);
+  expect(textWorker.errors[0].getErrorType()).toBe("parseerror");
+  expect(textWorker.errors[0].isBlocking).toBeTruthy();
+});
+test("SurveyTextWorker, a text that is not an object is a parse error", () => {
+  ["[]", "5", "\"abc\"", "null"].forEach(text => {
+    const textWorker = new SurveyTextWorker(text, { lintOptions: schemaRules() });
+    expect(textWorker.isJsonCorrect).toBeFalsy();
+    expect(textWorker.errors).toHaveLength(1);
+    expect(textWorker.errors[0].getErrorType()).toBe("parseerror");
+    expect(textWorker.errors[0].text).toBe("The survey JSON must be an object.");
+  });
+  expect(new SurveyTextWorker("", { lintOptions: schemaRules() }).isJsonCorrect).toBeTruthy();
+});
+test("SurveyTextWorker, lint: false only parses", () => {
+  const textWorker = new SurveyTextWorker(JSON.stringify({ elements: [{ type: "text" }] }), { lint: false });
+  expect(textWorker.isJsonCorrect).toBeTruthy();
+  expect(textWorker.errors).toHaveLength(0);
+  expect(textWorker.lintResult).toBeUndefined();
+});
+test("SurveyTextWorker, onProcessJson sees the JSON before it is linted", () => {
+  SurveyTextWorker.onProcessJson = (json: any): void => {
+    json.elements[0].name = "renamed";
+  };
+  try {
+    const textWorker = createTextWorker({ elements: [{ type: "text", name: "q1" }, { type: "text", name: "renamed" }] });
+    expect(textWorker.errors.map(e => (<SurveyTextWorkerLinterFinding>e).ruleId)).toEqual(["name/duplicate"]);
+  } finally {
+    SurveyTextWorker.onProcessJson = undefined;
+  }
+});
+test("SurveyTextWorker, getAllNames and getNodeByPath", () => {
+  const textWorker = createTextWorker({
+    pages: [{ name: "p1", elements: { type: "matrixdynamic", name: "m1", columns: [{ name: "col1" }] } }]
+  });
+  expect(textWorker.getAllNames()).toEqual(["p1", "m1", "col1"]);
+  expect(textWorker.getNodeByPath("pages[0].elements").node.name).toBe("m1");
+  // the linter indexes the wrapped element as [0], which the text has no index for
+  expect(textWorker.getNodeByPath("pages[0].elements[0]").node.name).toBe("m1");
+  const column = textWorker.getNodeByPath("pages[0].elements[0].columns[0]");
+  expect(column.node.name).toBe("col1");
+  expect(column.key).toBe(0);
+  expect(Array.isArray(column.parent)).toBeTruthy();
+  expect(textWorker.getNodeByPath("pages[3]")).toBeUndefined();
 });

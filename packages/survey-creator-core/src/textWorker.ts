@@ -1,93 +1,102 @@
-import { SurveyModel, JsonError, Base, ISurveyElement, ISurveyData, ILoadFromJSONOptions, JsonObjectProperty } from "survey-core";
 import { SurveyHelper } from "./survey-helper";
 import { SurveyJSON5 } from "./json5";
 import { settings } from "./creator-settings";
 import { levenshteinDistance } from "./utils/utils";
-import { ILintFinding } from "survey-core/linter";
+import { editorLocalization } from "./editorLocalization";
+import { ILintFinding, ISurveyLintOptions, ISurveyLintResult, lintSurvey } from "survey-core/linter";
 
-class SurveyForTextWorker extends SurveyModel {
-  private isRunEndLoadingFromJson: boolean;
-  constructor(jsonObj: any, options: ILoadFromJSONOptions) {
-    super();
-    this.setDesignMode(true);
-    this.fromJSON(jsonObj, options);
-  }
-  //Run endLoading before fixing issues with unique names
-  public runEndLoadingFromJson(): void {
-    if (this.isRunEndLoadingFromJson) return;
-    this.isRunEndLoadingFromJson = true;
-    super.endLoadingFromJson();
-  }
-  //Do nothing on end loading
-  endLoadingFromJson(): void { }
-  getSurveyData(): ISurveyData { return null; }
+export interface ISurveyTextWorkerOptions {
+  // false parses only - the way the creator reads the text when it applies it
+  lint?: boolean;
+  lintOptions?: ISurveyLintOptions;
 }
 
-class SurveyTextWorkerJsonErrorFixerBase {
-  public getCorrectAt(text: string, at: number, end: number): number {
-    return at;
-  }
-  public get isFixable(): boolean { return false; }
-  public fixError(text: string, start: number, end: number): string { return text; }
+export interface ISurveyTextWorkerNode {
+  node: any;
+  parent: any;
+  key: string | number;
+}
+
+function isPlainObject(value: any): boolean {
+  return !!value && typeof value === "object" && !Array.isArray(value);
 }
 
 export abstract class SurveyTextWorkerError {
   public rowAt: number = -1;
   public columnAt: number = -1;
-  private fixerValue: SurveyTextWorkerJsonErrorFixerBase;
   public constructor(public at: number, public text: string) {
   }
   public abstract getErrorType(): string;
-  public get isFixable(): boolean { return this.fixer.isFixable; }
+  // whether the error keeps the author from leaving the JSON tab
+  public get isBlocking(): boolean { return true; }
+  public get isFixable(): boolean { return false; }
   public fixError(text: string): string { return text; }
-  protected get fixer(): SurveyTextWorkerJsonErrorFixerBase {
-    if (!this.fixerValue) {
-      this.fixerValue = this.createFixer();
-    }
-    return this.fixerValue;
-  }
-  protected createFixer(): SurveyTextWorkerJsonErrorFixerBase {
-    return new SurveyTextWorkerJsonErrorFixerBase();
-  }
 }
 
 export class SurveyTextWorkerParserError extends SurveyTextWorkerError {
   public getErrorType(): string { return "parseerror"; }
 }
 
-// A finding of survey-core/linter, carried through the same list as the JSON errors so the
-// existing error list and its click-to-line navigation work on it unchanged. Never fixable:
-// the linter reports logic defects, not malformed JSON.
+// A finding of survey-core/linter. One at "error" severity blocks leaving the tab, a warning or
+// an info is advice; the findings of a few rules can be fixed in the text.
 export class SurveyTextWorkerLinterFinding extends SurveyTextWorkerError {
-  public constructor(at: number, text: string, public finding: ILintFinding) {
+  public constructor(at: number, text: string, public finding: ILintFinding,
+    private fixer?: SurveyTextWorkerFixer) {
     super(at, text);
   }
   public getErrorType(): string { return "linterfinding"; }
   public get severity(): string { return this.finding.severity; }
   public get ruleId(): string { return this.finding.ruleId; }
-  public get isFixable(): boolean { return false; }
+  public get reason(): string { return this.finding.reason; }
+  public get isBlocking(): boolean { return this.finding.severity === "error"; }
+  public get isFixable(): boolean { return !!this.fixer && this.fixer.isFixable; }
+  public fixError(text: string): string {
+    return !!this.fixer ? this.fixer.fixError(text) : text;
+  }
 }
 
-class SurveyTextWorkerJsonErrorFixer extends SurveyTextWorkerJsonErrorFixerBase {
-  public constructor(protected element: Base, protected jsonObj: any) {
-    super();
+// "page" for a page, "panel" for a panel, "question" for everything else - a column or an item
+// gets a question name, the way the JSON tab always named them
+function elementKindOf(type: string): string {
+  const lower = (type || "").toLowerCase();
+  if (lower === "page") return "page";
+  if (lower === "panel" || lower === "flowpanel") return "panel";
+  return "question";
+}
+
+// "pages[0].elements" -> { parent: "pages[0]", key: "elements" }
+function splitLastKey(path: string): { parent: string, key: string } {
+  const dot = path.lastIndexOf(".");
+  if (dot < 0) return { parent: "", key: path };
+  return { parent: path.substring(0, dot), key: path.substring(dot + 1) };
+}
+
+// Rewrites one object literal of the text: the slice the parser marked is parsed again on its
+// own, changed, and written back with the editor's indentation.
+abstract class SurveyTextWorkerFixer {
+  public constructor(protected worker: SurveyTextWorker, protected finding: ILintFinding) {
   }
-  protected getNewIndex(text: string, findText: string, at: number, end: number): number {
-    const index = text.indexOf(findText, at);
-    if (index > -1 && (end < 0 || index < end)) {
-      return index;
-    }
-    return -1;
+  public abstract get isFixable(): boolean;
+  // the path of the object literal that is rewritten
+  protected abstract getTargetPath(): string;
+  protected abstract update(json: any): void;
+  public fixError(text: string): string {
+    const target = this.worker.getNodeByPath(this.getTargetPath());
+    const pos = !!target && isPlainObject(target.node) ? target.node["pos"] : undefined;
+    if (!pos || typeof pos.start !== "number" || typeof pos.end !== "number") return text;
+    const json = new SurveyJSON5().parse(text.substring(pos.start, pos.end + 1));
+    this.update(json);
+    return this.replaceJson(text, pos.start, pos.end, json);
   }
-  public fixError(text: string, start: number, end: number): string {
-    const content = text.substring(start, end + 1);
-    const json = new SurveyJSON5().parse(content);
-    this.updatedJsonObjOnFix(json);
-    return this.replaceJson(text, start, end, json);
+  protected get data(): { [key: string]: any } {
+    return this.finding.messageData || {};
   }
-  protected updatedJsonObjOnFix(json: any): void {
+  protected newElementName(kind: string): string {
+    const key = kind === "page" ? "ed.newPageName" : kind === "panel" ? "ed.newPanelName" : "ed.newQuestionName";
+    const taken = this.worker.getAllNames().map(name => ({ name: name }));
+    return SurveyHelper.getNewName(taken, editorLocalization.getString(key));
   }
-  protected replaceJson(text: string, start: number, end: number, json: any): string {
+  private replaceJson(text: string, start: number, end: number, json: any): string {
     let newContent = JSON.stringify(json, null, settings.jsonEditor.indentation);
     newContent = this.addLeftIndentIntoContent(text, newContent, start - 1);
     return text.substring(0, start) + newContent + text.substring(end + 1);
@@ -108,189 +117,171 @@ class SurveyTextWorkerJsonErrorFixer extends SurveyTextWorkerJsonErrorFixerBase 
   }
 }
 
-class SurveyTextWorkerJsonUnknownPropertyErrorFixer extends SurveyTextWorkerJsonErrorFixer {
-  public constructor(protected element: Base, protected jsonObj: any, protected propertyName: string) {
-    super(element, jsonObj);
-  }
-  public getCorrectAt(text: string, at: number, end: number): number {
-    const propName = this.propertyName;
-    if (!propName) return at;
-    return this.getNewIndex(text, this.propertyName, at, end);
+// name/duplicate: the later element gets a fresh name of its own kind
+class SurveyTextWorkerDuplicateNameFixer extends SurveyTextWorkerFixer {
+  public get isFixable(): boolean { return this.finding.reason === "elementNames"; }
+  protected getTargetPath(): string { return this.finding.path; }
+  protected update(json: any): void {
+    json["name"] = this.newElementName(elementKindOf(this.finding.elementType));
   }
 }
-class SurveyTextWorkerJsonArrayPropertyErrorFixer extends SurveyTextWorkerJsonUnknownPropertyErrorFixer {
-  public constructor(protected element: Base, protected jsonObj: any, protected propertyName: string) {
-    super(element, jsonObj, propertyName);
+
+// property/required: only a missing name can be made up
+class SurveyTextWorkerRequiredNameFixer extends SurveyTextWorkerFixer {
+  public get isFixable(): boolean { return this.data.key === "name"; }
+  protected getTargetPath(): string { return this.finding.path; }
+  protected update(json: any): void {
+    json["name"] = this.newElementName(elementKindOf(this.data.className));
   }
+}
+
+// property/not-an-array: the value becomes the one item of the array
+class SurveyTextWorkerNotAnArrayFixer extends SurveyTextWorkerFixer {
   public get isFixable(): boolean { return true; }
-  protected updatedJsonObjOnFix(json: any): void {
-    const obj = json[this.propertyName];
-    if (obj && !Array.isArray(obj)) {
-      json[this.propertyName] = [obj];
+  protected getTargetPath(): string { return splitLastKey(this.finding.path).parent; }
+  protected update(json: any): void {
+    const key = splitLastKey(this.finding.path).key;
+    const value = json[key];
+    if (value !== undefined && !Array.isArray(value)) {
+      json[key] = [value];
     }
   }
 }
-class SurveyTextWorkerJsonDuplicateNameErrorFixer extends SurveyTextWorkerJsonErrorFixer {
-  public get isFixable(): boolean { return true; }
-  public getCorrectAt(text: string, at: number, end: number): number {
-    let newAt = this.getNewIndex(text, "name:", at, end);
-    if (newAt > at) return newAt;
-    return this.getNewIndex(text, "\"name\":", at, end);
-  }
-  protected updatedJsonObjOnFix(json: any): void {
-    const el: any = this.element;
-    if (el.survey?.runEndLoadingFromJson) {
-      el.survey.runEndLoadingFromJson();
-    }
-    json["name"] = SurveyHelper.getNewElementName(el);
-  }
-}
-class SurveyTextWorkerJsonRequiredPropertyErrorFixer extends SurveyTextWorkerJsonErrorFixer {
-  public constructor(protected element: Base, protected jsonObj: any, private propertyName: string) {
-    super(element, jsonObj);
-  }
-  public get isFixable(): boolean { return this.propertyName === "name"; }
-  protected updatedJsonObjOnFix(json: any): void {
-    let name = this.element["name"];
-    if (!name) name = SurveyHelper.getNewElementName(<ISurveyElement><any>this.element);
-    json["name"] = name;
-  }
-}
-class SurveyTextWorkerJsonIncorrectPropertyValueErrorFixer extends SurveyTextWorkerJsonErrorFixer {
-  public constructor(protected element: Base, protected jsonObj: any, private property: JsonObjectProperty) {
-    super(element, jsonObj);
-  }
+
+// property/invalid-value: the allowed value the author most likely meant
+class SurveyTextWorkerInvalidValueFixer extends SurveyTextWorkerFixer {
   public get isFixable(): boolean {
-    return this.getFirstChoice() != null;
+    return this.finding.reason === "notInChoices" && Array.isArray(this.data.allowed) && this.data.allowed.length > 0;
   }
-  protected updatedJsonObjOnFix(json: any): void {
-    let value = this.getClosestChoice(json[this.property.name]) || this.getFirstChoice();
-    if (typeof value !== "string") {
-      value = JSON.stringify(value);
+  protected getTargetPath(): string { return splitLastKey(this.finding.path).parent; }
+  protected update(json: any): void {
+    const key = splitLastKey(this.finding.path).key;
+    json[key] = this.pickValue(json[key]);
+  }
+  private pickValue(value: any): any {
+    const allowed: Array<any> = this.data.allowed;
+    // the linter's suggestion is the spelling that works, as a string - the allowed value keeps its type
+    if (!!this.finding.suggestion) {
+      const suggested = allowed.filter(item => String(item) === this.finding.suggestion);
+      if (suggested.length > 0) return suggested[0];
     }
-    json[this.property.name] = value;
+    return this.getClosestValue(String(value), allowed) ?? allowed[0];
   }
-  private getFirstChoice(): any {
-    const choices = this.property?.choices;
-    if (Array.isArray(choices) && choices.length > 0) return choices[0];
-    return null;
-  }
-  private getClosestChoice(needle: string): any {
-    let closest = { value: null, distance: needle.length };
+  private getClosestValue(needle: string, allowed: Array<any>): any {
+    let closest = { value: undefined, distance: needle.length };
     needle = needle.toUpperCase();
-    for (const choice of (this.property?.choices || [])) {
-      let choiceUpperCase = choice.toUpperCase();
-      if (choiceUpperCase === needle) return choice;
-      const distance = levenshteinDistance(needle, choiceUpperCase);
-      if (distance === 0) return choice;
+    for (const item of allowed) {
+      const distance = levenshteinDistance(needle, String(item).toUpperCase());
+      if (distance === 0) return item;
       if (distance < closest.distance) {
-        closest.distance = distance;
-        closest.value = choice;
+        closest = { value: item, distance: distance };
       }
     }
     return closest.value;
-  }
-}
-export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
-  public elementStart: number;
-  public elementEnd: number;
-  private element: Base;
-  private errorType: string;
-  private propertyName: string;
-  private property: JsonObjectProperty;
-  private jsonObj: any;
-  public constructor(jsonError: JsonError) {
-    super(<number>jsonError.at, jsonError.getFullDescription());
-    this.elementStart = <number>jsonError.at;
-    this.elementEnd = <number>jsonError.end;
-    this.element = jsonError.element;
-    this.errorType = jsonError.type;
-    this.property = jsonError["property"];
-    this.propertyName = jsonError["propertyName"] || this.property?.name;
-    this.jsonObj = jsonError.jsonObj;
-  }
-  protected createFixer(): SurveyTextWorkerJsonErrorFixerBase {
-    if (this.errorType === "unknownproperty")
-      return new SurveyTextWorkerJsonUnknownPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
-    if (this.errorType === "arrayproperty")
-      return new SurveyTextWorkerJsonArrayPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
-    if (this.errorType === "duplicatename")
-      return new SurveyTextWorkerJsonDuplicateNameErrorFixer(this.element, this.jsonObj);
-    if (this.errorType === "requiredproperty")
-      return new SurveyTextWorkerJsonRequiredPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
-    if (this.errorType === "incorrectvalue") {
-      return new SurveyTextWorkerJsonIncorrectPropertyValueErrorFixer(this.element, this.jsonObj, this.property);
-    }
-    return super.createFixer();
-  }
-  public getErrorType(): string { return this.errorType; }
-  public get isFixable(): boolean { return this.fixer.isFixable && this.elementStart > -1 && this.elementEnd > this.elementStart; }
-  public correctAt(text: string): void {
-    const newAt = this.fixer.getCorrectAt(text, this.at, this.elementEnd);
-    if (newAt > -1) {
-      this.at = newAt;
-    }
-  }
-  public fixError(text: string): string {
-    return this.fixer.fixError(text, this.elementStart, this.elementEnd);
   }
 }
 
 export class SurveyTextWorker {
   public static onProcessJson: ((json: any) => void) | undefined;
   public static newLineChar: string = "\n";
-  public errors: Array<SurveyTextWorkerError>;
-  private surveyValue: SurveyModel;
+  // parser errors and linter findings alike, sorted by their position in the text
+  public errors: Array<SurveyTextWorkerError> = [];
+  public findings: Array<SurveyTextWorkerLinterFinding> = [];
+  // undefined while the text does not parse, or when the worker was asked not to lint
+  public lintResult: ISurveyLintResult;
   private jsonValue: any;
 
-  constructor(public text: string, private options?: ILoadFromJSONOptions) {
+  constructor(public text: string, private options?: ISurveyTextWorkerOptions) {
     if (!this.text || this.text.trim() == "") {
       this.text = "{}";
     }
-    this.errors = [];
     this.process();
   }
-  public get survey(): SurveyModel {
-    return this.surveyValue;
-  }
   // The JSON as authored, with the SurveyJSON5 position markers on every object literal.
-  // Undefined while the text does not parse.
+  // Undefined while the text does not parse into an object.
   public get json(): any {
     return this.jsonValue;
   }
   public get isJsonCorrect(): boolean {
-    return !!this.surveyValue;
+    return !!this.jsonValue;
   }
   public get isJsonHasErrors(): boolean {
-    return this.errors.length > 0 || !this.isJsonCorrect;
+    return !this.isJsonCorrect || this.errors.some(error => error.isBlocking);
   }
-  protected process() {
+  protected process(): void {
+    let parsed: any = undefined;
     try {
-      this.jsonValue = new SurveyJSON5(1).parse(this.text);
+      parsed = new SurveyJSON5(1).parse(this.text);
     } catch(error) {
       this.errors.push(new SurveyTextWorkerParserError(error.at, error.message));
     }
-    if (this.jsonValue != null) {
-      this.updateJsonPositions(this.jsonValue);
-      if (!!SurveyTextWorker.onProcessJson) {
-        SurveyTextWorker.onProcessJson(this.jsonValue);
-      }
-      this.surveyValue = new SurveyForTextWorker(this.jsonValue, this.options);
-      const jsonErrors = this.surveyValue.jsonErrors;
-      if (Array.isArray(jsonErrors)) {
-        for (var i = 0; i < jsonErrors.length; i++) {
-          if (this.isIgnorableError(jsonErrors[i])) continue;
-          const error = new SurveyTextWorkerJsonError(jsonErrors[i]);
-          error.correctAt(this.text);
-          this.errors.push(error);
+    if (this.errors.length === 0) {
+      if (!isPlainObject(parsed)) {
+        // the linter takes an object, and so does the survey
+        this.errors.push(new SurveyTextWorkerParserError(0, editorLocalization.getString("ed.jsonRootNotObject")));
+      } else {
+        this.jsonValue = parsed;
+        this.updateJsonPositions(this.jsonValue);
+        if (!!SurveyTextWorker.onProcessJson) {
+          SurveyTextWorker.onProcessJson(this.jsonValue);
+        }
+        if (!this.options || this.options.lint !== false) {
+          this.lint();
         }
       }
-      this.getDuplicatedNamesErrors().forEach(error => this.errors.push(error));
     }
     this.setErrorsPositionByChartAt();
   }
-  private isIgnorableError(jsonError: JsonError): boolean {
-    return jsonError.type === "incorrectvalue" && jsonError["property"]?.name === "locale" && jsonError["value"] === "default";
+  private lint(): void {
+    this.lintResult = lintSurvey(this.jsonValue, !!this.options ? this.options.lintOptions : undefined);
+    this.findings = this.lintResult.findings.map(finding => {
+      const position = this.getFindingPosition(finding);
+      const item = new SurveyTextWorkerLinterFinding(position.at, finding.message, finding, this.createFixer(finding));
+      item.rowAt = position.rowAt;
+      item.columnAt = position.columnAt;
+      return item;
+    });
+    this.findings.forEach(finding => this.errors.push(finding));
+  }
+  private createFixer(finding: ILintFinding): SurveyTextWorkerFixer {
+    if (finding.ruleId === "name/duplicate") return new SurveyTextWorkerDuplicateNameFixer(this, finding);
+    if (finding.ruleId === "property/required") return new SurveyTextWorkerRequiredNameFixer(this, finding);
+    if (finding.ruleId === "property/not-an-array") return new SurveyTextWorkerNotAnArrayFixer(this, finding);
+    if (finding.ruleId === "property/invalid-value") return new SurveyTextWorkerInvalidValueFixer(this, finding);
+    return undefined;
+  }
+  // Where a finding is shown: a duplicate name at its "name" key, a property at the key itself
+  // (the bare name, past the quote, the way the deserializer errors were anchored), everything
+  // else at the start of what the path names.
+  private getFindingPosition(finding: ILintFinding): { at: number, rowAt: number, columnAt: number } {
+    if (finding.ruleId === "name/duplicate" && finding.reason === "elementNames") {
+      return this.getPositionByPath(finding.path + ".name");
+    }
+    if (finding.ruleId === "property/unknown" || finding.ruleId === "property/not-an-array") {
+      const parts = splitLastKey(finding.path);
+      const res = this.getKeyPosition(parts.parent, parts.key);
+      if (res.at > -1) return res;
+    }
+    return this.getPositionByPath(finding.path);
+  }
+  // The key of a property inside the object literal that owns it, past the opening quote when
+  // the key is quoted. The value may be an object of its own, which getPositionByPath would
+  // point at instead of the key.
+  private getKeyPosition(ownerPath: string, key: string): { at: number, rowAt: number, columnAt: number } {
+    const notFound = { at: -1, rowAt: -1, columnAt: -1 };
+    const owner = this.getNodeByPath(ownerPath);
+    const pos = !!owner && isPlainObject(owner.node) ? owner.node["pos"] : undefined;
+    if (!pos || typeof pos.start !== "number") return notFound;
+    const end = typeof pos.end === "number" ? pos.end : -1;
+    let at = this.getIndexInRange("\"" + key + "\"", pos.start, end);
+    if (at > -1) {
+      at++;
+    } else {
+      at = this.getIndexInRange(key + ":", pos.start, end);
+    }
+    if (at < 0) return notFound;
+    const position = this.getPostionByChartAt({ row: 0, column: 0 }, 0, at);
+    return { at: at, rowAt: position.row, columnAt: position.column };
   }
   private updateJsonPositions(jsonObj: any) {
     jsonObj["pos"]["self"] = jsonObj;
@@ -302,11 +293,52 @@ export class SurveyTextWorker {
       }
     }
   }
+  // Every "name" written in the text, in document order - the pool a fixer picks a fresh name from
+  public getAllNames(): Array<string> {
+    const res: Array<string> = [];
+    const visit = (obj: any) => {
+      if (!obj || typeof obj !== "object") return;
+      if (Array.isArray(obj)) {
+        obj.forEach(visit);
+        return;
+      }
+      if (typeof obj["name"] === "string") res.push(obj["name"]);
+      Object.keys(obj).forEach(key => {
+        if (key !== "pos") visit(obj[key]);
+      });
+    };
+    visit(this.jsonValue);
+    return res;
+  }
+  // The parsed value a linter path names, with its parent and the key it sits under. An index
+  // on an object that is no array addresses the object itself: the linter walks a single object
+  // written where an array belongs as its one element, and the text has no index for it.
+  public getNodeByPath(path: string): ISurveyTextWorkerNode | undefined {
+    if (!this.jsonValue || path === undefined || path === null) return undefined;
+    let node: any = this.jsonValue;
+    let parent: any = undefined;
+    let key: string | number = undefined;
+    const segments = this.parsePath(path);
+    for (let i = 0; i < segments.length; i++) {
+      if (node === null || typeof node !== "object") return undefined;
+      const segment = segments[i];
+      if (typeof segment === "number" && !Array.isArray(node)) {
+        if (segment !== 0) return undefined;
+        continue;
+      }
+      const next = node[segment];
+      if (next === undefined) return undefined;
+      parent = node;
+      key = segment;
+      node = next;
+    }
+    return { node: node, parent: parent, key: key };
+  }
   // Resolves a linter path ("pages[0].elements[1].visibleIf") to a position in the text.
   // SurveyJSON5(1) marks every object literal with { start, end }, so the object the path names
   // is found by walking it; arrays carry no marker of their own, but their object items do.
   // The last segment is usually a property, not an object - it is located by searching for its
-  // key inside the owning object's range, the way the error fixers do.
+  // key inside the owning object's range.
   public getPositionByPath(path: string): { at: number, rowAt: number, columnAt: number } {
     const notFound = { at: -1, rowAt: -1, columnAt: -1 };
     if (!path || !this.jsonValue) return notFound;
@@ -373,24 +405,25 @@ export class SurveyTextWorker {
     });
     return res;
   }
+  // Sorts the errors by position - one whose path resolved to no place in the text goes last -
+  // and computes the line and column of each from its offset.
   private setErrorsPositionByChartAt() {
     if (this.errors.length === 0) return;
     this.errors.sort((el1, el2) => {
-      if (el1.at > el2.at) return 1;
-      if (el1.at < el2.at) return -1;
-      return 0;
+      if (el1.at === el2.at) return 0;
+      if (el1.at < 0) return 1;
+      if (el2.at < 0) return -1;
+      return el1.at < el2.at ? -1 : 1;
     });
-    var position = { row: 0, column: 0 };
-    var startAt: number = 0;
-    for (var i = 0; i < this.errors.length; i++) {
-      let at = this.errors[i].at;
-      position = this.getPostionByChartAt(position, startAt, at);
-      var error = this.errors[i];
-      if (at == error.at) {
-        error.columnAt = position.column;
-        error.rowAt = position.row;
-      }
-      startAt = at;
+    let position = { row: 0, column: 0 };
+    let startAt: number = 0;
+    for (let i = 0; i < this.errors.length; i++) {
+      const error = this.errors[i];
+      if (error.at < 0) break;
+      position = this.getPostionByChartAt(position, startAt, error.at);
+      error.rowAt = position.row;
+      error.columnAt = position.column;
+      startAt = error.at;
     }
   }
   private getPostionByChartAt(
@@ -410,52 +443,5 @@ export class SurveyTextWorker {
       curChar++;
     }
     return result;
-  }
-  private getDuplicatedNamesErrors(): Array<SurveyTextWorkerJsonError> {
-    const res = [];
-    this.getDuplicatedElements().forEach(el => {
-      const error = new SurveyTextWorkerJsonError(this.createDuplicatedError(el));
-      error.correctAt(this.text);
-      if (error) res.push(error);
-    });
-
-    return res;
-  }
-  private getDuplicatedElements(): Array<Base> {
-    const res = [];
-    const names = {};
-    this.survey.pages.forEach(p => this.checkDuplicatedElement(p, names, res));
-    SurveyHelper.getAllElements(this.survey, true).forEach(p => this.checkDuplicatedElement(p, names, res));
-    SurveyHelper.getAllElements(this.survey, false).forEach(q => this.checkDuplicatedElement(q, names, res));
-    return res;
-  }
-  private checkDuplicatedElement(el: any, names: any, duplicates: Array<Base>): void {
-    let name = el["name"];
-    if (!name) return;
-    if (!SurveyHelper.isPanelOrQuestion(el)) {
-      const owner = el.getOwner();
-      if (!owner || !owner["name"]) return;
-      name = owner["name"] + "$" + name;
-    }
-    if (names[name]) {
-      duplicates.push(el);
-    } else {
-      names[name] = true;
-    }
-  }
-  private createDuplicatedError(el: Base): JsonError {
-    const pos = el["pos"];
-    if (!pos) return undefined;
-    const error = new JsonError("duplicatename", "The name: '" + el["name"] + "' is duplicated.");
-    error.at = pos.start;
-    error.end = pos.end;
-    error.element = el;
-    return error;
-  }
-}
-export class JsonDuplicateNameError extends JsonError {
-  constructor(el: Base) {
-    super("duplicatename", "The name: '" + el["name"] + "' is duplicated.");
-    this.element = el;
   }
 }

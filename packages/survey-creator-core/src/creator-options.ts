@@ -33,7 +33,7 @@ export interface ICreatorOptions {
    */
   showJSONEditorTab?: boolean;
   /**
-   * Specifies whether to run the survey linter in the JSON Editor tab and show its results.
+   * Specifies whether to show the Checks panel with the survey linter results in the JSON Editor tab. The linter validates the JSON regardless of this setting; its findings are always listed under the editor.
    *
    * Default value: `true`
    */

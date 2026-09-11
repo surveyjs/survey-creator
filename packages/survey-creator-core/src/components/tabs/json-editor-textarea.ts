@@ -139,10 +139,10 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
     this.isJSONChanged = true;
     super.onTextChanged();
   }
-  protected setErrors(errors: any[], findings?: any[]): void {
+  protected setErrors(errors: any[]): void {
     //TODO Remove this line and then the function
     this._errors = errors;
-    super.setErrors(errors, findings);
+    super.setErrors(errors);
   }
 }
 

@@ -4,8 +4,9 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding } from "../../textWorker";
 import { ComponentContainerModel } from "../component-container/component-container";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
-import { getFindingSeverityKind, getLinterString, JsonEditorLinterModel } from "./json-editor-linter";
+import { getCreatorLintOptions, getFindingSeverityKind, getLinterString, JsonEditorLinterModel } from "./json-editor-linter";
 import { saveToFileHandler } from "../../utils/html-element-utils";
+import { getLocString } from "../../editorLocalization";
 import { settings } from "../../creator-settings";
 import { DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
@@ -84,13 +85,8 @@ export abstract class JsonEditorBaseModel extends Base {
     return this.errorListValue;
   }
 
-  protected setErrors(errors: Array<SurveyTextWorkerError>,
-    findings?: Array<SurveyTextWorkerLinterFinding>): void {
+  protected setErrors(errors: Array<SurveyTextWorkerError>): void {
     const actions = this.createErrorActions(errors);
-    // the linter warnings follow the syntax and schema errors, and never replace them
-    if (Array.isArray(findings)) {
-      this.createErrorActions(findings).forEach(action => actions.push(action));
-    }
     // setItems unconditionally: skipping it on an empty list leaves the previous entries in it
     this.errorList.setItems(actions);
     this.hasErrors = actions.length > 0;
@@ -131,8 +127,7 @@ export abstract class JsonEditorBaseModel extends Base {
             this.text = error.fixError(this.text);
           },
           fixButtonIcon: "icon-fix",
-          //todo
-          fixButtonTitle: "Fix error"
+          fixButtonTitle: getLocString("ed.jsonFixError")
         }
       }));
     });
@@ -141,37 +136,19 @@ export abstract class JsonEditorBaseModel extends Base {
   public processErrors(text: string): void {
     this.errorActionCounter = 1;
     const textWorker: SurveyTextWorker = this.createTextWorker();
-    let findings: Array<SurveyTextWorkerLinterFinding> = undefined;
-    if (this.creator.showLinterPanel) {
-      // only on valid JSON: while the text does not parse there is no model to analyse, and the
-      // panel keeps its previous result
-      if (textWorker.isJsonCorrect) {
-        this.linter.run(textWorker);
-        // the linter sorts by JSON path, the error list reads top to bottom: a path sort puts
-        // "elements[10]" before "elements[3]", so the lines would jump around
-        findings = this.linter.findings.slice().sort((el1, el2) => {
-          if (el1.at === el2.at) return 0;
-          if (el1.at < 0) return 1;
-          if (el2.at < 0) return -1;
-          return el1.at < el2.at ? -1 : 1;
-        });
-      } else {
-        // the panel keeps its last result, but the error list does not: the positions of those
-        // findings belong to the text they were computed from
-        this.linter.setWaitingForValidJson();
-      }
-    }
-    this.setErrors(textWorker.errors, findings);
+    // the check list localizes the findings before the error list shows them
+    this.linter.update(textWorker);
+    this.setErrors(textWorker.errors);
   }
+  // undefined: the text does not parse, and nothing may override that. false: a finding at
+  // "error" severity, which onActiveTabChanging may still allow. true: warnings at most.
   public allowingDeactivate(): boolean {
     const textWorker: SurveyTextWorker = this.createTextWorker();
     if (!textWorker.isJsonCorrect) return undefined;
     return !textWorker.isJsonHasErrors;
   }
   private createTextWorker(): SurveyTextWorker {
-    return new SurveyTextWorker(this.text, {
-      validatePropertyValues: this.creator.validateJsonPropertyValues
-    });
+    return new SurveyTextWorker(this.text, { lintOptions: getCreatorLintOptions(this.creator) });
   }
   public get readOnly(): boolean {
     return this.creator.readOnly;

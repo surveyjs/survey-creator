@@ -94,10 +94,10 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     }
     return annotations;
   }
-  protected setErrors(errors: any[], findings?: any[]): void {
-    super.setErrors(errors, findings);
-    // only the blocking errors are annotated in the gutter - the linter findings are not
-    this.aceEditor.getSession().setAnnotations(this.createAnnotations(errors));
+  protected setErrors(errors: any[]): void {
+    super.setErrors(errors);
+    // only the blocking errors are annotated in the gutter - a warning is advice, not a mark
+    this.aceEditor.getSession().setAnnotations(this.createAnnotations(errors.filter(error => error.isBlocking)));
     setTimeout(() => this.aceEditor.resize());
   }
   protected gotoError(at: number, row: number, column: number): void {

@@ -1,6 +1,6 @@
 import { Action, Base, ListModel, property } from "survey-core";
 import {
-  getRules, lintSurvey, ILintFinding, ILintRuleInfo, ISurveyLintResult,
+  getRules, ILintFinding, ILintRuleInfo, ISurveyLintOptions, ISurveyLintResult, LintSeverity,
 } from "survey-core/linter";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
@@ -9,6 +9,23 @@ import "./json-editor-linter.scss";
 
 export function getLinterString(name: string): string {
   return editorLocalization.getString("linter." + name);
+}
+
+// The options the JSON tab lints with. The rules that report what the deserializer used to
+// report - an unknown key, a missing required property, a value the property cannot hold, an
+// element or a trigger or a validator the serializer cannot build - are raised to "error", so
+// they keep blocking the way out of the tab the way the deserializer errors did.
+export function getCreatorLintOptions(creator: SurveyCreatorModel): ISurveyLintOptions {
+  const rules: { [ruleId: string]: LintSeverity } = {
+    "property/unknown": "error",
+    "property/required": "error",
+    "property/not-an-array": "error",
+    "element/unknown-type": "error",
+    "trigger/unknown-type": "error",
+    "validator/unknown-type": "error",
+    "property/invalid-value": creator.validateJsonPropertyValues ? "error" : "off",
+  };
+  return { rules: rules };
 }
 
 // How a finding looks, in the check list and in the error list of the editor alike: the two
@@ -167,18 +184,16 @@ export class JsonEditorLinterModel extends Base {
     this.updateCheckList();
   }
 
-  public run(textWorker: SurveyTextWorker): void {
-    // the linter reads the JSON as authored: the serializer normalizes away the very defects it
-    // looks for, so SurveyTextWorker.survey is not what it is given
-    this.result = lintSurvey(textWorker.json);
-    this.findings = this.result.findings.map(finding => {
-      const position = textWorker.getPositionByPath(finding.path);
-      const item = new SurveyTextWorkerLinterFinding(
-        position.at, this.composeMessage(finding), finding);
-      item.rowAt = position.rowAt;
-      item.columnAt = position.columnAt;
-      return item;
-    });
+  // Takes over the findings the worker collected and gives each its localized text. While the
+  // text does not parse there is nothing to analyse, and the panel keeps its previous result.
+  public update(textWorker: SurveyTextWorker): void {
+    if (!textWorker.isJsonCorrect || !textWorker.lintResult) {
+      this.setWaitingForValidJson();
+      return;
+    }
+    this.result = textWorker.lintResult;
+    this.findings = textWorker.findings;
+    this.findings.forEach(item => { item.text = this.composeMessage(item.finding); });
     this.isWaitingForValidJson = false;
     this.issueCount = this.findings.length;
     this.updateCheckList();

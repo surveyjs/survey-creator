@@ -30,7 +30,7 @@ test("Linter runs on valid JSON and reports the finding", () => {
   expect(finding.isFixable).toBeFalsy();
 });
 
-test("Linter findings are merged into the error list after the JSON errors", () => {
+test("The error list holds the findings in the order of the text", () => {
   const text = JSON.stringify({
     elements: [
       { type: "text", name: "q1", incorrectProp: "abc" },
@@ -40,12 +40,22 @@ test("Linter findings are merged into the error list after the JSON errors", () 
   const editor = createEditor(text);
   expect(editor.hasErrors).toBeTruthy();
   const actions = editor.errorList.actions;
-  // the JSON error first, then the two findings: an unknown property and an unknown reference
-  expect(actions).toHaveLength(3);
+  // the unknown property first, the unknown reference second - one list, sorted by line
+  expect(actions).toHaveLength(2);
+  expect(actions.map(a => a.data.error.ruleId)).toEqual(["property/unknown", "reference/unknown"]);
+  actions.forEach(action => {
+    expect(action.id.indexOf("linterfinding_")).toBe(0);
+    expect(action.data.showFixButton).toBeFalsy();
+  });
+});
+
+test("A parse error is listed as an error and nothing else is", () => {
+  const editor = createEditor("{ elements: [");
+  const actions = editor.errorList.actions;
+  expect(actions).toHaveLength(1);
   expect(actions[0].id.indexOf("error_")).toBe(0);
-  expect(actions[1].id.indexOf("linterfinding_")).toBe(0);
-  expect(actions[1].data.showFixButton).toBeFalsy();
-  expect(actions[2].id.indexOf("linterfinding_")).toBe(0);
+  expect(actions[0].iconName).toBe("icon-error");
+  expect(actions[0].data.error.getErrorType()).toBe("parseerror");
 });
 
 test("A finding looks the same in the error list and in the check list", () => {
@@ -112,28 +122,59 @@ test("The linter does not run while the JSON has a syntax error", () => {
   expect(actions.filter(a => a.id.indexOf("error_") === 0).length).toBeGreaterThan(0);
 });
 
-test("A linter finding never blocks leaving the tab", () => {
+test("An error finding blocks leaving the tab until onActiveTabChanging allows it", () => {
   const creator = new CreatorTester({ showJSONEditorTab: true });
   const plugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   creator.activeTab = "json";
   plugin.model.text = badReference;
   plugin.model.processErrors(plugin.model.text);
   expect(plugin.model.linter.findings).toHaveLength(1);
-  expect(plugin.model.allowingDeactivate()).toBeTruthy();
-  expect(plugin.defaultAllowingDeactivate()).toBeTruthy();
+  expect(plugin.model.linter.findings[0].severity).toBe("error");
+  // false, not undefined: the JSON parses, so the application may still let the author out
+  expect(plugin.model.allowingDeactivate()).toBe(false);
+  expect(plugin.defaultAllowingDeactivate()).toBe(false);
+  expect(creator.switchTab("designer")).toBeFalsy();
+  expect(creator.activeTab).toBe("json");
+  creator.onActiveTabChanging.add((sender, options) => { options.allow = true; });
   expect(creator.switchTab("designer")).toBeTruthy();
   expect(creator.activeTab).toBe("designer");
 });
 
-test("showLinterPanel false does not run the linter and shows no sidebar page", () => {
+test("A warning finding does not block leaving the tab", () => {
+  const creator = new CreatorTester({ showJSONEditorTab: true });
+  const plugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
+  creator.activeTab = "json";
+  plugin.model.text = JSON.stringify({
+    pages: [{ name: "p1", elements: [{ type: "text", name: "q1" }] }, { name: "p2" }]
+  }, null, 2);
+  plugin.model.processErrors(plugin.model.text);
+  expect(plugin.model.linter.findings.map(f => f.ruleId)).toEqual(["page/empty"]);
+  expect(plugin.model.hasErrors).toBeTruthy();
+  expect(plugin.model.allowingDeactivate()).toBe(true);
+  expect(creator.switchTab("designer")).toBeTruthy();
+  expect(creator.activeTab).toBe("designer");
+});
+
+test("A text that does not parse blocks leaving the tab and nothing can allow it", () => {
+  const creator = new CreatorTester({ showJSONEditorTab: true });
+  const plugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
+  creator.activeTab = "json";
+  creator.onActiveTabChanging.add((sender, options) => { options.allow = true; });
+  plugin.model.text = "{ elements: [";
+  expect(plugin.model.allowingDeactivate()).toBeUndefined();
+  expect(creator.switchTab("designer")).toBeFalsy();
+  expect(creator.activeTab).toBe("json");
+});
+
+test("showLinterPanel false hides the sidebar page, the linter still validates the text", () => {
   const creator = new CreatorTester({ showJSONEditorTab: true, showLinterPanel: false });
   const plugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   creator.activeTab = "json";
   plugin.model.text = badReference;
   plugin.model.processErrors(plugin.model.text);
-  expect(plugin.model.linter.findings).toHaveLength(0);
-  expect(plugin.model.linter.isWaitingForValidJson).toBeTruthy();
-  expect(plugin.model.errorList.actions).toHaveLength(0);
+  expect(plugin.model.linter.findings).toHaveLength(1);
+  expect(plugin.model.errorList.actions).toHaveLength(1);
+  expect(plugin.model.allowingDeactivate()).toBe(false);
   const page = creator.sidebar.getPageById("linter");
   expect(page).toBeDefined();
   expect(page.visible).toBeFalsy();
