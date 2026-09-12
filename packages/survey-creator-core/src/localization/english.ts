@@ -273,6 +273,25 @@ export var enStrings = {
       uncompletedRule_cancel: "No, I want to complete the rules"
     }
   },
+  // Host application variables
+  vp: {
+    selectorTitle: "Variables",
+    noPreset: "No variables",
+    view: "View",
+    viewTitle: "Variable values",
+    edit: "Edit",
+    editorTitle: "Variable presets",
+    presetName: "Preset",
+    presetDescription: "Description",
+    addPreset: "Add preset",
+    newPresetName: "New preset",
+    deletePreset: "Delete preset",
+    back: "Back",
+    presetNameIsNotUnique: "A preset with this name already exists",
+    presetNameIsEmpty: "Enter a preset name",
+    listNameColumn: "Preset",
+    listDescriptionColumn: "Description"
+  },
   // Property Editors
   pe: {
     panel: {
