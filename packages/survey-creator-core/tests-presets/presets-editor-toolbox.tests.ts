@@ -14,11 +14,11 @@ test("Preset edit model, toolbox definition page, matrix actions", () => {
   const row = survey.getQuestionByName("toolbox_categories").visibleRows[0];
   row.showDetailPanel();
   const matrixQuestionInner = row.getQuestionByName("items");
-  expect(matrixQuestionInner.renderedTable.rows[1].cells[1].item.getData().actions[0].iconName).toEqual("icon-radiogroup");
+  expect(matrixQuestionInner.renderedTable.rows[1].cells[0].item.getData().actions[1].iconName).toEqual("icon-radiogroup");
 
   survey.setValue("toolbox_mode", "items");
   const matrixQuestion = survey.getQuestionByName("toolbox_items") as QuestionMatrixDynamicModel;
-  expect(matrixQuestion.renderedTable.rows[1].cells[1].item.getData().actions[0].iconName).toEqual("icon-radiogroup");
+  expect(matrixQuestion.renderedTable.rows[1].cells[0].item.getData().actions[1].iconName).toEqual("icon-radiogroup");
 });
 
 test("Preset edit model, custom items, apply", () => {
@@ -59,7 +59,7 @@ test("Preset edit model, toolbox items, default value and apply", () => {
   const defaultItems = new QuestionToolbox().getDefaultItems([], false, true, true);
   expect(question.visibleRows).toHaveLength(defaultItems.length);
   expect(question.value).toHaveLength(defaultItems.length);
-  question.value = question.value.filter(r => ["boolean", "comment", "checkbox"].indexOf(r.name) >= 0).sort((a, b)=>a.name < b.name ? 1 : -1);
+  question.value = question.value.filter(r => ["boolean", "comment", "checkbox"].indexOf(r.name) >= 0).sort((a, b) => a.name < b.name ? 1 : -1);
   const etalon: ICreatorPresetData = {
     toolbox: {
       categories: [],
@@ -761,54 +761,56 @@ test("Change toolbox presets multiple times", () => {
 });
 test("Toolbox import and defaults", () => {
   const editor = new CreatorPresetEditorModel({});
-  editor.json = { toolbox: {
-    "definition": [
-      {
-        "name": "radiogroup"
-      },
-      {
-        "name": "rating",
-        "subitems": [
-          {
-            "name": "labels",
-          },
-          {
-            "name": "stars",
-            "json": {
-              "type": "rating",
-              "rateType": "stars"
+  editor.json = {
+    toolbox: {
+      "definition": [
+        {
+          "name": "radiogroup"
+        },
+        {
+          "name": "rating",
+          "subitems": [
+            {
+              "name": "labels",
+            },
+            {
+              "name": "stars",
+              "json": {
+                "type": "rating",
+                "rateType": "stars"
+              }
             }
-          }
-        ]
-      },
-      {
-        "name": "comment",
-        "iconName": "icon-test"
-      }
-    ],
-    "categories": [
-      {
-        "category": "choice",
-        "items": [
-          "radiogroup",
-          "rating"
-        ]
-      },
-      {
-        "category": "text",
-        "items": [
-          "comment"
-        ]
-      }
-    ]
-  },
-  "localization": {
-    "en": {
-      "qt": {
-        "comment": "Comment"
+          ]
+        },
+        {
+          "name": "comment",
+          "iconName": "icon-test"
+        }
+      ],
+      "categories": [
+        {
+          "category": "choice",
+          "items": [
+            "radiogroup",
+            "rating"
+          ]
+        },
+        {
+          "category": "text",
+          "items": [
+            "comment"
+          ]
+        }
+      ]
+    },
+    "localization": {
+      "en": {
+        "qt": {
+          "comment": "Comment"
+        }
       }
     }
-  } };
+  };
 
   const survey = editor.model;
   const value = survey.getQuestionByName("toolbox_categories").value;
@@ -876,54 +878,56 @@ test("Toolbox import and defaults", () => {
     }
   ]);
 
-  editor.json = { toolbox: {
-    "definition": [
-      {
-        "name": "radiogroup"
-      },
-      {
-        "name": "rating",
-        "subitems": [
-          {
-            "name": "labels",
-          },
-          {
-            "name": "stars",
-            "json": {
-              "type": "rating",
-              "rateType": "stars"
+  editor.json = {
+    toolbox: {
+      "definition": [
+        {
+          "name": "radiogroup"
+        },
+        {
+          "name": "rating",
+          "subitems": [
+            {
+              "name": "labels",
+            },
+            {
+              "name": "stars",
+              "json": {
+                "type": "rating",
+                "rateType": "stars"
+              }
             }
-          }
-        ]
-      },
-      {
-        "name": "comment"
-      }
-    ],
-    "categories": [
-      {
-        "category": "choice",
-        "items": [
-          "radiogroup",
-          "rating"
-        ]
-      },
-      {
-        "category": "text",
-        "items": [
-          "comment",
-          "html"
-        ]
-      }
-    ]
-  },
-  "localization": {
-    "en": {
-      "qt": {
-        "comment": "Comment"
+          ]
+        },
+        {
+          "name": "comment"
+        }
+      ],
+      "categories": [
+        {
+          "category": "choice",
+          "items": [
+            "radiogroup",
+            "rating"
+          ]
+        },
+        {
+          "category": "text",
+          "items": [
+            "comment",
+            "html"
+          ]
+        }
+      ]
+    },
+    "localization": {
+      "en": {
+        "qt": {
+          "comment": "Comment"
+        }
       }
     }
-  } };
+  };
 
   const value2 = survey.getQuestionByName("toolbox_categories").value;
   expect(value2).toEqual([
