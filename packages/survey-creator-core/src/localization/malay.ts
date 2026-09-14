@@ -523,6 +523,41 @@ export var msStrings = {
       uncompletedRule_cancel: "Tidak, saya mahu melengkapkan peraturan"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Pembolehubah",
+    // [Auto-translated] "No variables"
+    noPreset: "Tiada pembolehubah",
+    // [Auto-translated] "View"
+    view: "Lihat",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Nilai pembolehubah",
+    // [Auto-translated] "Edit"
+    edit: "Edit",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Pratetap pembolehubah",
+    // [Auto-translated] "Preset"
+    presetName: "Pratetap",
+    // [Auto-translated] "Description"
+    presetDescription: "Penerangan",
+    // [Auto-translated] "Add preset"
+    addPreset: "Tambah pratetap",
+    // [Auto-translated] "New preset"
+    newPresetName: "Pratetap baru",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Padam pratetap",
+    // [Auto-translated] "Back"
+    back: "Kembali",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Pratetap dengan nama ini sudah wujud",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Masukkan nama pratetap",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Pratetap",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Penerangan"
+  },
   // Property Editors
   pe: {
     panel: {

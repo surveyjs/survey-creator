@@ -523,6 +523,41 @@ export var grStrings = {
       uncompletedRule_cancel: "Όχι, θέλω να ολοκληρώσω τους κανόνες"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Μεταβλητές",
+    // [Auto-translated] "No variables"
+    noPreset: "Καμία μεταβλητή",
+    // [Auto-translated] "View"
+    view: "Προβολή",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Μεταβλητές τιμές",
+    // [Auto-translated] "Edit"
+    edit: "Επεξεργασία",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Μεταβλητές προεπιλογές",
+    // [Auto-translated] "Preset"
+    presetName: "Προεπιλογή",
+    // [Auto-translated] "Description"
+    presetDescription: "Περιγραφή",
+    // [Auto-translated] "Add preset"
+    addPreset: "Προσθήκη προεπιλογής",
+    // [Auto-translated] "New preset"
+    newPresetName: "Νέα προεπιλογή",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Διαγραφή προεπιλογής",
+    // [Auto-translated] "Back"
+    back: "Πίσω",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Υπάρχει ήδη μια προεπιλογή με αυτό το όνομα",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Εισαγάγετε ένα προκαθορισμένο όνομα",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Προεπιλογή",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Περιγραφή"
+  },
   // Property Editors
   pe: {
     panel: {

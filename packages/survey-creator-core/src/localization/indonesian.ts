@@ -523,6 +523,41 @@ export var indonesianStrings = {
       uncompletedRule_cancel: "Tidak, saya ingin menyelesaikan aturan"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Variabel",
+    // [Auto-translated] "No variables"
+    noPreset: "Tidak ada variabel",
+    // [Auto-translated] "View"
+    view: "Lihat",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Nilai variabel",
+    // [Auto-translated] "Edit"
+    edit: "Edit",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Preset variabel",
+    // [Auto-translated] "Preset"
+    presetName: "Prasetel",
+    // [Auto-translated] "Description"
+    presetDescription: "Deskripsi",
+    // [Auto-translated] "Add preset"
+    addPreset: "Tambahkan preset",
+    // [Auto-translated] "New preset"
+    newPresetName: "Preset baru",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Hapus preset",
+    // [Auto-translated] "Back"
+    back: "Kembali",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Preset dengan nama ini sudah ada",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Masukkan nama preset",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Prasetel",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Deskripsi"
+  },
   // Property Editors
   pe: {
     panel: {

@@ -523,6 +523,41 @@ export var persianStrings = {
       uncompletedRule_cancel: "نه، من می خواهم قوانین را تکمیل کنم"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "متغیرها",
+    // [Auto-translated] "No variables"
+    noPreset: "بدون متغیری",
+    // [Auto-translated] "View"
+    view: "نمای",
+    // [Auto-translated] "Variable values"
+    viewTitle: "مقادیر متغیر",
+    // [Auto-translated] "Edit"
+    edit: "ویرایش",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "پیش تنظیم های متغیر",
+    // [Auto-translated] "Preset"
+    presetName: "پیش تنظیم",
+    // [Auto-translated] "Description"
+    presetDescription: "توضیحات",
+    // [Auto-translated] "Add preset"
+    addPreset: "افزودن پیش تنظیم",
+    // [Auto-translated] "New preset"
+    newPresetName: "پیش تنظیم جدید",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "حذف پیش تنظیم",
+    // [Auto-translated] "Back"
+    back: "بازگشت",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "یک پیش تنظیم با این نام قبلا وجود دارد",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "یک نام پیش فرض وارد کنید",
+    // [Auto-translated] "Preset"
+    listNameColumn: "پیش تنظیم",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "توضیحات"
+  },
   // Property Editors
   pe: {
     panel: {

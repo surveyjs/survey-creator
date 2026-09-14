@@ -523,6 +523,41 @@ export const thStrings = {
       uncompletedRule_cancel: "ไม่ ฉันต้องการเสร็จสิ้นกฎ"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "ตัวแปร",
+    // [Auto-translated] "No variables"
+    noPreset: "ไม่มีตัวแปร",
+    // [Auto-translated] "View"
+    view: "ดู",
+    // [Auto-translated] "Variable values"
+    viewTitle: "ค่าตัวแปร",
+    // [Auto-translated] "Edit"
+    edit: "แก้ไข",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "การตั้งค่าล่วงหน้าที่ปรับได้",
+    // [Auto-translated] "Preset"
+    presetName: "พรีเซ็ต",
+    // [Auto-translated] "Description"
+    presetDescription: "คําอธิบาย",
+    // [Auto-translated] "Add preset"
+    addPreset: "เพิ่มการตั้งค่าล่วงหน้า",
+    // [Auto-translated] "New preset"
+    newPresetName: "พรีเซ็ตใหม่",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "ลบการตั้งค่าล่วงหน้า",
+    // [Auto-translated] "Back"
+    back: "ย้อนกลับ",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "มีพรีเซ็ตที่ใช้ชื่อนี้อยู่แล้ว",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "ป้อนชื่อที่ตั้งไว้ล่วงหน้า",
+    // [Auto-translated] "Preset"
+    listNameColumn: "พรีเซ็ต",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "คําอธิบาย"
+  },
   // Property Editors
   pe: {
     panel: {

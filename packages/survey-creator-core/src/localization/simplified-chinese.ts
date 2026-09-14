@@ -523,6 +523,41 @@ export var simplifiedChineseTranslation = {
       uncompletedRule_cancel: "不，我想完成规则"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "变量",
+    // [Auto-translated] "No variables"
+    noPreset: "没有变量",
+    // [Auto-translated] "View"
+    view: "景观",
+    // [Auto-translated] "Variable values"
+    viewTitle: "变量值",
+    // [Auto-translated] "Edit"
+    edit: "编辑",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "可变预设",
+    // [Auto-translated] "Preset"
+    presetName: "预设",
+    // [Auto-translated] "Description"
+    presetDescription: "描述",
+    // [Auto-translated] "Add preset"
+    addPreset: "添加预设",
+    // [Auto-translated] "New preset"
+    newPresetName: "新预设",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "删除预设",
+    // [Auto-translated] "Back"
+    back: "返回",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "已有同名预设存在",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "输入预设名称",
+    // [Auto-translated] "Preset"
+    listNameColumn: "预设",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "描述"
+  },
   // Property Editors
   pe: {
     panel: {

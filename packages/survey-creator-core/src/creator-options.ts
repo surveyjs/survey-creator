@@ -1,3 +1,5 @@
+import { ISurveyVariablePresets } from "survey-core";
+
 /**
  * Survey Creator configuration. Pass it as an argument to the `SurveyCreator`/`SurveyCreatorModel` constructor:
  *
@@ -614,4 +616,9 @@ export interface ICreatorOptions {
    * @since 2.5.19
    */
   useEnglishLanguageNames?: boolean;
+  // Host application variables: an optional definition survey describing them, and the named
+  // presets of values. The container belongs to the host application, not to the survey being
+  // edited, and Creator stores it by reference. The Preview tab runs the survey with the values of
+  // the active preset; see creator.variablePresets.
+  variablePresets?: ISurveyVariablePresets;
 }

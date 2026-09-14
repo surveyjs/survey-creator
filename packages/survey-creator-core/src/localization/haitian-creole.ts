@@ -523,6 +523,41 @@ export var htStrings = {
       uncompletedRule_cancel: "Non, mwen vle ranpli règ yo"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Varyab yo",
+    // [Auto-translated] "No variables"
+    noPreset: "Pa gen varyab",
+    // [Auto-translated] "View"
+    view: "Gade",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Valè varyab yo",
+    // [Auto-translated] "Edit"
+    edit: "modifye",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Prereglaj varyab",
+    // [Auto-translated] "Preset"
+    presetName: "Prereglaj",
+    // [Auto-translated] "Description"
+    presetDescription: "Deskripsyon",
+    // [Auto-translated] "Add preset"
+    addPreset: "Ajoute prereglaj",
+    // [Auto-translated] "New preset"
+    newPresetName: "Nouvo prereglaj",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Efase prereglaj",
+    // [Auto-translated] "Back"
+    back: "Do",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Yon prereglaj ki gen non sa a deja egziste",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Antre yon non prereglaj",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Prereglaj",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Deskripsyon"
+  },
   // Property Editors
   pe: {
     panel: {
