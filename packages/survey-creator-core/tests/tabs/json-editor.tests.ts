@@ -5,8 +5,7 @@ import { settings } from "../../src/creator-settings";
 import { SurveyTextWorker } from "../../src/textWorker";
 
 test("JsonEditor & showErrors/errorList", () => {
-  // the linter reports the unknown property too - this test is about the JSON error list
-  const creator = new CreatorTester({ showLinterPanel: false });
+  const creator = new CreatorTester();
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = "{}";
   editor.processErrors(editor.text);
@@ -28,8 +27,7 @@ test("JsonEditor & showErrors/errorList", () => {
 });
 
 test("JsonEditor & fixError action", () => {
-  // the linter reports the duplicate too - this test is about the JSON error and its fix
-  const creator = new CreatorTester({ showLinterPanel: false });
+  const creator = new CreatorTester();
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = "{}";
   editor.processErrors(editor.text);
@@ -135,8 +133,7 @@ test("JsonEditor & error question unique in panel dynamic, #2", () => {
   });
 });
 test("JsonEditor & fixError action with object to array", () => {
-  // the linter reports the duplicate too - this test is about the JSON error and its fix
-  const creator = new CreatorTester({ showLinterPanel: false });
+  const creator = new CreatorTester();
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
     pages: [{
@@ -164,11 +161,7 @@ test("JsonEditor & fixError action with object to array", () => {
   });
 });
 test("JsonEditor & fixError action incorrect properties value, Issue#7335", () => {
-  // the linter reports the same value - this test is about the JSON error and its fix
-  const creator = new CreatorTester({
-    validateJsonPropertyValues: true,
-    showLinterPanel: false
-  });
+  const creator = new CreatorTester({ validateJsonPropertyValues: true });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
     pages: [{
@@ -198,11 +191,7 @@ test("JsonEditor & fixError action incorrect properties value, Issue#7335", () =
   });
 });
 test("JsonEditor & fixError better fix suggestions, Issue#7417", () => {
-  // the linter reports the same value - this test is about the JSON error and its fix
-  const creator = new CreatorTester({
-    validateJsonPropertyValues: true,
-    showLinterPanel: false
-  });
+  const creator = new CreatorTester({ validateJsonPropertyValues: true });
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
     pages: [{
@@ -402,8 +391,7 @@ test("Ace marks only the blocking errors in the gutter", () => {
   model.dispose();
 });
 test("JsonEditor & duplicated errors in matrices columns", () => {
-  // the linter reports the duplicate too - this test is about the JSON error and its fix
-  const creator = new CreatorTester({ showLinterPanel: false });
+  const creator = new CreatorTester();
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = JSON.stringify({
     elements: [
@@ -549,8 +537,7 @@ function longJson(defectAt: number, count: number, kind: "error" | "finding"): s
 }
 
 test("A click on an error moves the caret to it", () => {
-  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 300, 3000,
-    { showLinterPanel: false });
+  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 300, 3000);
   const el = editor.textElement;
   expect(editor.errorList.actions).toHaveLength(1);
   const error = editor.errorList.actions[0].data.error;
@@ -564,8 +551,7 @@ test("A click on an error moves the caret to it", () => {
 });
 
 test("A click on an error scrolls the caret line to the middle of the view", () => {
-  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 300, 3000,
-    { showLinterPanel: false });
+  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 300, 3000);
   const el = editor.textElement;
   // measuring the rendered text is the browser's part, which jsdom does not do
   (<any>editor)["measureCaretTop"] = () => 1400;
@@ -587,8 +573,7 @@ test("A click on a linter finding scrolls the same way", () => {
 });
 
 test("A click on an error does not scroll an editor with no metrics", () => {
-  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 0, 0,
-    { showLinterPanel: false });
+  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 0, 0);
   const el = editor.textElement;
   (<any>editor)["measureCaretTop"] = () => 1400;
   editor.errorList.onItemClick(<any>editor.errorList.actions[0]);

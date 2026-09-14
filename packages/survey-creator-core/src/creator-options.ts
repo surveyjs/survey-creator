@@ -33,12 +33,6 @@ export interface ICreatorOptions {
    */
   showJSONEditorTab?: boolean;
   /**
-   * Specifies whether to show the Checks panel with the survey linter results in the JSON Editor tab. The linter validates the JSON regardless of this setting; its findings are always listed under the editor.
-   *
-   * Default value: `true`
-   */
-  showLinterPanel?: boolean;
-  /**
    * Specifies whether to display the [Logic](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#logic-tab) tab.
    *
    * Default value: `true`

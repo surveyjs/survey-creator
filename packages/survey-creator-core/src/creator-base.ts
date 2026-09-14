@@ -155,10 +155,6 @@ export class SurveyCreatorModel extends Base
    */
   @property({ defaultValue: true }) showJSONEditorTab: boolean;
 
-  // Shows the Checks panel with the results of survey-core/linter in the JSON tab.
-  // The linter validates the text either way: false only hides the per-rule panel.
-  @property({ defaultValue: true }) showLinterPanel: boolean;
-
   @property({ defaultValue: true }) showTestSurveyTab: boolean;
   /**
    * Specifies whether to display the [Preview](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#preview-tab) tab.
