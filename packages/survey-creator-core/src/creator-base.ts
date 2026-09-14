@@ -14,7 +14,9 @@ import {
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
   createBoxShadowResetVariables,
-  IConfirmDialogOptions
+  IConfirmDialogOptions,
+  ISurveyVariablePresets,
+  SurveyVariablePresets
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
@@ -76,7 +78,9 @@ import {
   CreatorThemeSelectedEvent,
   AllowInplaceEditEvent,
   AllowAddElementEvent,
-  CollectionItemDeletingEvent
+  CollectionItemDeletingEvent,
+  VariablePresetsChangedEvent,
+  VariablePresetEditingEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
@@ -4998,8 +5002,54 @@ export class SurveyCreatorModel extends Base
     }
   }) isCreatorDisposed: boolean;
 
+  private variablePresetsValue: ISurveyVariablePresets;
+  private variablePresetsModelValue: SurveyVariablePresets;
+  // Host application variables (issue #7982): the container a host passes as the `variablePresets`
+  // option, describing the variables it injects with setVariable() and naming sets of values for
+  // them. It belongs to the host application and not to the survey being edited - never written
+  // into the survey JSON, never registered in the Serializer - and it is held by reference, so a
+  // host that persists it in onVariablePresetsChanged serializes its own object. The creator model
+  // only reads it; the Preview plugin owns the active preset and, later, the editing.
+  public get variablePresets(): ISurveyVariablePresets {
+    return this.variablePresetsValue;
+  }
+  public set variablePresets(val: ISurveyVariablePresets) {
+    const oldValue = this.variablePresetsValue;
+    if (val === oldValue) return;
+    this.variablePresetsValue = val;
+    this.variablePresetsModelValue?.dispose();
+    this.variablePresetsModelValue = undefined;
+    // Raised by hand rather than through @property: setPropertyValue skips a value that is
+    // deep-equal to the old one, and the companion would then keep reading the old object while
+    // the Preview tab, which follows this notification, would not know the container changed.
+    this.propertyValueChanged("variablePresets", oldValue, val);
+  }
+  // The survey-core companion over the container: variable names, the definition's questions and
+  // the preset lookup. It is cheap to construct - the definition survey is built inside it on the
+  // first call that needs one - so it is created on demand and thrown away with the container.
+  public get variablePresetsModel(): SurveyVariablePresets {
+    if (!this.variablePresetsModelValue) {
+      this.variablePresetsModelValue = new SurveyVariablePresets(this.variablePresetsValue);
+    }
+    return this.variablePresetsModelValue;
+  }
+  // Raised by the Preview plugin when the active preset changes or when the presets are edited.
+  // Creator has no user-settings layer, so it does not persist the choice itself: a host that wants
+  // the selection or the edited presets to survive a reload saves them here and assigns them back
+  // on the next construction.
+  public onVariablePresetsChanged: EventBase<SurveyCreatorModel, VariablePresetsChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetsChangedEvent>();
+  // Raised for every preset the variable preset editor shows, so that a host can allow or refuse
+  // editing and deleting per preset. It is an event and not a field on ISurveyVariablePreset
+  // because that interface is core's document format, and a Creator permission must not enter the
+  // host's document. It is raised in one place only - the Preview plugin's
+  // variablePresets.getPresetOperations(preset), which seeds it from the manager's three flags -
+  // and everything else on this feature lives on that manager rather than on the creator model.
+  public onVariablePresetEditing: EventBase<SurveyCreatorModel, VariablePresetEditingEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetEditingEvent>();
+
   public dispose(): void {
     this.isCreatorDisposed = true;
+    this.variablePresetsModelValue?.dispose();
+    this.variablePresetsModelValue = undefined;
     this.tabs = [];
     Object.keys(this.plugins).forEach(pluginName => {
       const plugin = this.plugins[pluginName];

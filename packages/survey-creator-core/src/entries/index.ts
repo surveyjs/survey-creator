@@ -11,6 +11,8 @@ export * from "../localizable-json";
 export type { ICreatorOptions } from "../creator-options";
 
 export * from "../creator-events-api";
+export * from "../variable-presets";
+export * from "../variable-presets-editor";
 export * from "../creator-base";
 export * from "../tabbed-menu";
 export * from "../creator-responsivity-manager";

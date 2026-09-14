@@ -2,7 +2,7 @@ import {
   Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
   SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner, LocalizableString,
-  settings as surveyLibSettings
+  settings as surveyLibSettings, SurveyVariablePresets
 } from "survey-core";
 import { localizableJSON } from "./localizable-json";
 import { SurveyHelper } from "./survey-helper";
@@ -337,6 +337,9 @@ export interface ISurveyCreatorOptions {
     list: any[],
     variables: string[]
   ): string;
+  // The read side of the host variables (issue #7982), so that the condition editor can list them.
+  // Optional: only the creator model has a container to read.
+  variablePresetsModel?: SurveyVariablePresets;
   isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean;
   onLogicGetTitleCallback(
     expression: string,

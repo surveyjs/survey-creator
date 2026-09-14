@@ -708,7 +708,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       this.removeEntriesByValueName(res);
     }
 
-    const variableNames = this.survey.getVariableNames();
+    const variableNames = this.getVariableNames();
     this.addSurveyCalculatedValues(variableNames);
     sortOrder = this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res, variableNames);
 
@@ -752,16 +752,62 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private get isItemValueObject(): boolean {
     return this.object && this.object.isDescendantOf("itemvalue");
   }
+  // The design survey never runs a preset, so the variables a host injects at runtime (issue #7982)
+  // are not on it: they come from the creator's container. The definition names them; a container
+  // with presets and no definition still tells which names the host uses - the keys of every
+  // preset - so those are the fallback. Whichever preset Preview runs, and whether any does, the
+  // designer sees the same set: a rule is written against a variable, not against a value.
+  // The survey's own variables come first, in the lower-cased spelling setVariable gives them, and
+  // a container name that only differs by case is the same variable and is not listed twice.
+  private getVariableNames(): Array<string> {
+    const res = this.survey.getVariableNames();
+    const model = this.options?.variablePresetsModel;
+    if (!model) return res;
+    let names: Array<string> = model.getVariableNames();
+    if (names.length === 0 && !model.hasDefinition) {
+      names = [];
+      model.getPresetNames().forEach(presetName => {
+        const variables = model.getPreset(presetName)?.variables;
+        if (!variables) return;
+        Object.keys(variables).forEach(name => {
+          if (names.indexOf(name) < 0) names.push(name);
+        });
+      });
+    }
+    const known = res.map(name => name.toLowerCase());
+    names.forEach(name => {
+      const key = name.toLowerCase();
+      if (known.indexOf(key) >= 0) return;
+      known.push(key);
+      res.push(name);
+    });
+    return res;
+  }
   private addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>) {
     for (let i = 0; i < values.length; i++) {
       let name = !!values[i].name ? values[i].name : values[i];
-      this.addConditionQuestionsHash[name] = this.getCalculatedValueQuestion();
+      // A host variable the definition describes is edited with the definition's own question - a
+      // dropdown with its choices, a number box with its range - rather than the plain text box a
+      // calculated value gets: the definition is where the host said what values the variable takes.
+      const question = this.getHostVariableQuestion(name) || this.getCalculatedValueQuestion();
+      this.addConditionQuestionsHash[name] = question;
       res.push({
         value: name,
         text: name,
-        question: this.getCalculatedValueQuestion()
+        question: question
       });
     }
+  }
+  private getHostVariableQuestion(name: string): Question {
+    return this.options?.variablePresetsModel?.getVariableQuestion(name);
+  }
+  // The value editor of a variable has no title: the row already names it, and a calculated value
+  // has no title to show anyway. It is the same rule for a host variable - its definition question
+  // has a title, but the row names the variable and the value box needs no second heading.
+  private isVariableQuestion(question: Question): boolean {
+    if (!question) return false;
+    if (question === this.calculatedValueQuestion) return true;
+    return this.getHostVariableQuestion(question.getValueName()) === question;
   }
   private addSurveyCalculatedValues(names: Array<any>) {
     this.survey.calculatedValues.forEach(item => {
@@ -899,7 +945,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       newQuestion.visibleIf = "questionValueVisibleIf({panel.questionName}, {panel.operator})";
       newQuestion.title = title;
       newQuestion.description = "";
-      if (!!question && question === this.calculatedValueQuestion) {
+      if (this.isVariableQuestion(question)) {
         newQuestion.titleLocation = "hidden";
         if (!!newQuestion.getPropertyByName("placeholder")) {
           newQuestion.placeholder = editorLocalization.getString("ed.lg.calculatedValuePlaceholder");

@@ -1,0 +1,28 @@
+// The Edit dialog behind the Preview toolbar button (see variable-presets-editor.ts). Only the
+// survey's own layout tokens are narrowed here: the dialog is a short list and a short form, and
+// the theme's spacing is sized for a full-width survey page.
+.svc-variable-presets {
+  .sd-question--table {
+    // The list starts right under the dialog title and ends right above the add button.
+    --sjs2-layout-component-matrix-box-padding-top: var(--sjs2-spacing-x000);
+    --sjs2-layout-component-matrix-box-padding-bottom: var(--sjs2-spacing-x000);
+    // The first column lines up with the dialog title instead of being indented by the page gutter.
+    --sjs2-layout-component-matrix-cell-left-padding-left: var(--sjs2-spacing-x000);
+    --sjs2-layout-component-matrix-cell-right-padding-right: var(--sjs2-spacing-x000);
+    --sjs2-layout-component-matrix-header-cell-left-padding-left: var(--sjs2-spacing-x000);
+    --sjs2-layout-component-matrix-header-cell-right-padding-right: var(--sjs2-spacing-x000);
+    --sjs2-layout-component-matrix-cell-padding-top: var(--sjs2-spacing-x050);
+    --sjs2-layout-component-matrix-cell-padding-bottom: var(--sjs2-spacing-x050);
+    --sjs2-layout-component-matrix-header-cell-padding-top: var(--sjs2-spacing-x100);
+    --sjs2-layout-component-matrix-header-cell-padding-bottom: var(--sjs2-spacing-x100);
+    --sjs2-layout-component-panel-footer-padding-top: var(--sjs2-spacing-x100);
+    --sjs2-layout-component-panel-footer-padding-bottom: var(--sjs2-spacing-x000);
+    --sjs2-layout-component-panel-footer-padding-left: var(--sjs2-spacing-x000);
+    --sjs2-layout-component-panel-footer-padding-right: var(--sjs2-spacing-x000);
+  }
+
+  // Names and descriptions read as text, so they align like text rather than like matrix values.
+  .sd-table__cell:not(.sd-table__cell--actions) {
+    text-align: start;
+  }
+}
