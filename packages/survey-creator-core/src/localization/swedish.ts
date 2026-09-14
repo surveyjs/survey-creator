@@ -523,6 +523,41 @@ export let svStrings = {
       uncompletedRule_cancel: "Nej, jag vill komplettera reglerna"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Variabler",
+    // [Auto-translated] "No variables"
+    noPreset: "Inga variabler",
+    // [Auto-translated] "View"
+    view: "Vy",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Variabelvärden",
+    // [Auto-translated] "Edit"
+    edit: "Redigering",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Variabelförinställningar",
+    // [Auto-translated] "Preset"
+    presetName: "Förinställd",
+    // [Auto-translated] "Description"
+    presetDescription: "Beskrivning",
+    // [Auto-translated] "Add preset"
+    addPreset: "Lägg till förinställning",
+    // [Auto-translated] "New preset"
+    newPresetName: "Ny förinställning",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Ta bort förinställningen",
+    // [Auto-translated] "Back"
+    back: "Tillbaka",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "En förinställning med detta namn finns redan",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Ange ett förinställt namn",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Förinställd",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Beskrivning"
+  },
   // Property Editors
   pe: {
     panel: {

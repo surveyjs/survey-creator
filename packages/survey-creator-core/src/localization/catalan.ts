@@ -523,6 +523,41 @@ export var catalanTranslation = {
       uncompletedRule_cancel: "No, quiero completar las regles"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Variables",
+    // [Auto-translated] "No variables"
+    noPreset: "Sense variables",
+    // [Auto-translated] "View"
+    view: "Vista",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Valors variables",
+    // [Auto-translated] "Edit"
+    edit: "Edita",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Presets de variables",
+    // [Auto-translated] "Preset"
+    presetName: "Preset",
+    // [Auto-translated] "Description"
+    presetDescription: "Descripció",
+    // [Auto-translated] "Add preset"
+    addPreset: "Afegir preset",
+    // [Auto-translated] "New preset"
+    newPresetName: "Nou preset",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Delete preset",
+    // [Auto-translated] "Back"
+    back: "Enrere",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Ja existeix un preset amb aquest nom",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Introdueix un nom predefinit",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Preset",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Descripció"
+  },
   // Property Editors
   pe: {
     panel: {

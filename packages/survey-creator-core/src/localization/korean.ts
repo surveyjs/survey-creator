@@ -523,6 +523,41 @@ export var koreanStrings = {
       uncompletedRule_cancel: "아니요, 규칙을 완료하고 싶습니다."
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "변수들",
+    // [Auto-translated] "No variables"
+    noPreset: "변수는 없습니다",
+    // [Auto-translated] "View"
+    view: "전망",
+    // [Auto-translated] "Variable values"
+    viewTitle: "변수 값",
+    // [Auto-translated] "Edit"
+    edit: "수정",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "가변 프리셋",
+    // [Auto-translated] "Preset"
+    presetName: "프리셋",
+    // [Auto-translated] "Description"
+    presetDescription: "설명",
+    // [Auto-translated] "Add preset"
+    addPreset: "프리셋 추가",
+    // [Auto-translated] "New preset"
+    newPresetName: "새로운 프리셋",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "프리셋 삭제",
+    // [Auto-translated] "Back"
+    back: "뒤로",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "이미 이 이름을 가진 프리셋이 존재합니다",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "미리 설정된 이름을 입력하세요",
+    // [Auto-translated] "Preset"
+    listNameColumn: "프리셋",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "설명"
+  },
   // Property Editors
   pe: {
     panel: {

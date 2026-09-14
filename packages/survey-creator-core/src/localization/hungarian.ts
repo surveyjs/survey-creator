@@ -523,6 +523,41 @@ export var huStrings = {
       uncompletedRule_cancel: "Nem, szeretném kiegészíteni a szabályokat"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Változók",
+    // [Auto-translated] "No variables"
+    noPreset: "Nincsenek változók",
+    // [Auto-translated] "View"
+    view: "Kilátás",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Változóértékek",
+    // [Auto-translated] "Edit"
+    edit: "Szerkesztés",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Változó előbeállítások",
+    // [Auto-translated] "Preset"
+    presetName: "Előbeállítás",
+    // [Auto-translated] "Description"
+    presetDescription: "Leírás",
+    // [Auto-translated] "Add preset"
+    addPreset: "Előbeállítás hozzáadása",
+    // [Auto-translated] "New preset"
+    newPresetName: "Új előbeállítás",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Delete preset",
+    // [Auto-translated] "Back"
+    back: "Hátra",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Már létezik egy előbeállítás ezzel a nevgel",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Írj be egy előbeállított nevet",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Előbeállítás",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Leírás"
+  },
   // Property Editors
   pe: {
     panel: {

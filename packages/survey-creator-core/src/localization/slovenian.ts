@@ -523,6 +523,41 @@ export var slStrings = {
       uncompletedRule_cancel: "Ne, želim dokončati pravila"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Spremenljivke",
+    // [Auto-translated] "No variables"
+    noPreset: "Brez spremenljivk",
+    // [Auto-translated] "View"
+    view: "Pogled",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Vrednosti spremenljivk",
+    // [Auto-translated] "Edit"
+    edit: "Uredi",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Prednastavitve spremenljivk",
+    // [Auto-translated] "Preset"
+    presetName: "Prednastavitev",
+    // [Auto-translated] "Description"
+    presetDescription: "Opis",
+    // [Auto-translated] "Add preset"
+    addPreset: "Dodaj prednastavitev",
+    // [Auto-translated] "New preset"
+    newPresetName: "Nova prednastavitev",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Izbriši prednastavitev",
+    // [Auto-translated] "Back"
+    back: "Nazaj",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Prednastavitev s tem imenom že obstaja",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Vnesite prednastavljeno ime",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Prednastavitev",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Opis"
+  },
   // Property Editors
   pe: {
     panel: {

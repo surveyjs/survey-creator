@@ -523,6 +523,41 @@ export var jaStrings = {
       uncompletedRule_cancel: "いいえ、ルールを完成させたい"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "変数",
+    // [Auto-translated] "No variables"
+    noPreset: "変数なし",
+    // [Auto-translated] "View"
+    view: "眺め",
+    // [Auto-translated] "Variable values"
+    viewTitle: "変数の価値",
+    // [Auto-translated] "Edit"
+    edit: "編集",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "可変プリセット",
+    // [Auto-translated] "Preset"
+    presetName: "プリセット",
+    // [Auto-translated] "Description"
+    presetDescription: "概要",
+    // [Auto-translated] "Add preset"
+    addPreset: "プリセットを追加",
+    // [Auto-translated] "New preset"
+    newPresetName: "新しいプリセット",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "プリセットを削除",
+    // [Auto-translated] "Back"
+    back: "戻る",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "この名前のプリセットはすでに存在します",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "プリセット名を入力してください",
+    // [Auto-translated] "Preset"
+    listNameColumn: "プリセット",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "概要"
+  },
   // Property Editors
   pe: {
     panel: {

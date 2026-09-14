@@ -523,6 +523,41 @@ export var skStrings = {
       uncompletedRule_cancel: "Nie, chcem dokončiť pravidlá"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Premenné",
+    // [Auto-translated] "No variables"
+    noPreset: "Žiadne premenné",
+    // [Auto-translated] "View"
+    view: "Zobraziť",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Hodnoty premenných",
+    // [Auto-translated] "Edit"
+    edit: "Edit",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Prednastavenia premenných",
+    // [Auto-translated] "Preset"
+    presetName: "Prednastavená predsada",
+    // [Auto-translated] "Description"
+    presetDescription: "Popis",
+    // [Auto-translated] "Add preset"
+    addPreset: "Pridať prednastavenie",
+    // [Auto-translated] "New preset"
+    newPresetName: "Nový predvoľb",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Vymazať prednastavenie",
+    // [Auto-translated] "Back"
+    back: "Späť",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Preset s týmto názvom už existuje",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Zadajte prednastavený názov",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Prednastavená predsada",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Popis"
+  },
   // Property Editors
   pe: {
     panel: {

@@ -523,6 +523,41 @@ export var spanishTranslation = {
       uncompletedRule_cancel: "No, quiero completar las reglas"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Variables",
+    // [Auto-translated] "No variables"
+    noPreset: "Sin variables",
+    // [Auto-translated] "View"
+    view: "Vista",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Valores variables",
+    // [Auto-translated] "Edit"
+    edit: "Edición",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Preajustes de variables",
+    // [Auto-translated] "Preset"
+    presetName: "Preset",
+    // [Auto-translated] "Description"
+    presetDescription: "Descripción",
+    // [Auto-translated] "Add preset"
+    addPreset: "Añadir preset",
+    // [Auto-translated] "New preset"
+    newPresetName: "Nuevo preset",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Borrar preajuste",
+    // [Auto-translated] "Back"
+    back: "Atrás",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Ya existe un preset con este nombre",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Introduce un nombre predefinido",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Preset",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Descripción"
+  },
   // Property Editors
   pe: {
     panel: {

@@ -523,6 +523,41 @@ export var arStrings = {
       uncompletedRule_cancel: "لا، أريد إكمال القواعد"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "المتغيرات",
+    // [Auto-translated] "No variables"
+    noPreset: "لا متغيرات",
+    // [Auto-translated] "View"
+    view: "منظر",
+    // [Auto-translated] "Variable values"
+    viewTitle: "قيم المتغيرات",
+    // [Auto-translated] "Edit"
+    edit: "تعديل",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "الإعدادات المسبقة للمتغيرات",
+    // [Auto-translated] "Preset"
+    presetName: "إعداد مسبق",
+    // [Auto-translated] "Description"
+    presetDescription: "الوصف",
+    // [Auto-translated] "Add preset"
+    addPreset: "إضافة إعداد مسبق",
+    // [Auto-translated] "New preset"
+    newPresetName: "إعداد جديد",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "حذف الإعدادات المسبقة",
+    // [Auto-translated] "Back"
+    back: "العودة",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "يوجد بالفعل إعداد مسبق يحمل هذا الاسم",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "أدخل اسما محددا مسبقا",
+    // [Auto-translated] "Preset"
+    listNameColumn: "إعداد مسبق",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "الوصف"
+  },
   // Property Editors
   pe: {
     panel: {

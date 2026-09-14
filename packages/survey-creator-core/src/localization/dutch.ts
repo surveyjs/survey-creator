@@ -523,6 +523,41 @@ export var nlStrings = {
       uncompletedRule_cancel: "Nee, ik wil de regels invullen"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Variabelen",
+    // [Auto-translated] "No variables"
+    noPreset: "Geen variabelen",
+    // [Auto-translated] "View"
+    view: "Uitzicht",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Variabele waarden",
+    // [Auto-translated] "Edit"
+    edit: "Bewerking",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Variabele presets",
+    // [Auto-translated] "Preset"
+    presetName: "Preset",
+    // [Auto-translated] "Description"
+    presetDescription: "Beschrijving",
+    // [Auto-translated] "Add preset"
+    addPreset: "Voeg preset toe",
+    // [Auto-translated] "New preset"
+    newPresetName: "Nieuwe preset",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Verwijder de preset",
+    // [Auto-translated] "Back"
+    back: "Achteruit",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Er bestaat al een preset met deze naam",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Voer een vooraf ingestelde naam in",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Preset",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Beschrijving"
+  },
   // Property Editors
   pe: {
     panel: {

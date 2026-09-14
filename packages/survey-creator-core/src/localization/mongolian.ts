@@ -523,6 +523,41 @@ export var mnStrings = {
       uncompletedRule_cancel: "Үгүй, дүрмийг үргэлжлүүлж бичиж дуусгах."
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Хувьсагчид",
+    // [Auto-translated] "No variables"
+    noPreset: "Хувьсагч байхгүй",
+    // [Auto-translated] "View"
+    view: "Үзэмж",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Хувьсах утгууд",
+    // [Auto-translated] "Edit"
+    edit: "Засварлах",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Хувьсах урьдчилсан тохиргоог",
+    // [Auto-translated] "Preset"
+    presetName: "Урьдчилсан тохиргоо",
+    // [Auto-translated] "Description"
+    presetDescription: "Тайлбар",
+    // [Auto-translated] "Add preset"
+    addPreset: "Урьдчилсан тохиргоо нэмэх",
+    // [Auto-translated] "New preset"
+    newPresetName: "Шинэ preset",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Устгах урьдчилсан төзийг устгах",
+    // [Auto-translated] "Back"
+    back: "Буцах",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Энэ нэртэй урьдчилсан тохиргоо аль хэдийн байдаг",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Урьдчилан тохируулсан нэрийг оруулна",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Урьдчилсан тохиргоо",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Тайлбар"
+  },
   // Property Editors
   pe: {
     panel: {

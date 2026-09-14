@@ -523,6 +523,41 @@ export var danishStrings = {
       uncompletedRule_cancel: "Nej, jeg vil gerne udfylde reglerne"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Variable",
+    // [Auto-translated] "No variables"
+    noPreset: "Ingen variable",
+    // [Auto-translated] "View"
+    view: "Udsigt",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Variable værdier",
+    // [Auto-translated] "Edit"
+    edit: "Redigering",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Variable forudindstillinger",
+    // [Auto-translated] "Preset"
+    presetName: "Preset",
+    // [Auto-translated] "Description"
+    presetDescription: "Beskrivelse",
+    // [Auto-translated] "Add preset"
+    addPreset: "Tilføj forudindstilling",
+    // [Auto-translated] "New preset"
+    newPresetName: "Ny forudindstilling",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Slet forudindstillingen",
+    // [Auto-translated] "Back"
+    back: "Tilbage",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Der findes allerede en forudindstilling med dette navn",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Indtast et forudindstillet navn",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Preset",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Beskrivelse"
+  },
   // Property Editors
   pe: {
     panel: {

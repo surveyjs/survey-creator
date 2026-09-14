@@ -523,6 +523,41 @@ export var hebrewStrings = {
       uncompletedRule_cancel: "לא, אני רוצה להשלים את הכללים"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "משתנים",
+    // [Auto-translated] "No variables"
+    noPreset: "אין משתנים",
+    // [Auto-translated] "View"
+    view: "תצפית",
+    // [Auto-translated] "Variable values"
+    viewTitle: "ערכי משתנים",
+    // [Auto-translated] "Edit"
+    edit: "עריכה",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "פריסטים משתנים",
+    // [Auto-translated] "Preset"
+    presetName: "פריסט",
+    // [Auto-translated] "Description"
+    presetDescription: "תיאור",
+    // [Auto-translated] "Add preset"
+    addPreset: "הוספת פריסט",
+    // [Auto-translated] "New preset"
+    newPresetName: "פריסט חדש",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "מחיקת פריסט",
+    // [Auto-translated] "Back"
+    back: "חזרה",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "כבר קיימת פריסט בשם זה",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "הכנס שם מוגדר מראש",
+    // [Auto-translated] "Preset"
+    listNameColumn: "פריסט",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "תיאור"
+  },
   // Property Editors
   pe: {
     panel: {

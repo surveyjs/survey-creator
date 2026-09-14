@@ -523,6 +523,41 @@ export const roStrings = {
       uncompletedRule_cancel: "Nu, vreau să completez regulile"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Variabile",
+    // [Auto-translated] "No variables"
+    noPreset: "Fără variabile",
+    // [Auto-translated] "View"
+    view: "Vizualizare",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Valori ale variabilelor",
+    // [Auto-translated] "Edit"
+    edit: "Editare",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Presetări variabile",
+    // [Auto-translated] "Preset"
+    presetName: "Presetare",
+    // [Auto-translated] "Description"
+    presetDescription: "Descriere",
+    // [Auto-translated] "Add preset"
+    addPreset: "Adăugă preset",
+    // [Auto-translated] "New preset"
+    newPresetName: "Noua presetare",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Șterge preseta",
+    // [Auto-translated] "Back"
+    back: "Înapoi",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Există deja un preset cu acest nume",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Introduceți un nume presetat",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Presetare",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Descriere"
+  },
   // Property Editors
   pe: {
     panel: {

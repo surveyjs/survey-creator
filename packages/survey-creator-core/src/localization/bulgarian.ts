@@ -523,6 +523,41 @@ export var bgStrings = {
       uncompletedRule_cancel: "Не, искам да попълня правилата."
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Променливи",
+    // [Auto-translated] "No variables"
+    noPreset: "Без променливи",
+    // [Auto-translated] "View"
+    view: "Изглед",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Променливи стойности",
+    // [Auto-translated] "Edit"
+    edit: "Редакция",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Променливи пресети",
+    // [Auto-translated] "Preset"
+    presetName: "Предварително зададен",
+    // [Auto-translated] "Description"
+    presetDescription: "Описание",
+    // [Auto-translated] "Add preset"
+    addPreset: "Добави предварително настроение",
+    // [Auto-translated] "New preset"
+    newPresetName: "Нов предварително сет",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Изтрий предварителния сет",
+    // [Auto-translated] "Back"
+    back: "Назад",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Вече съществува пресет с това име",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Въведете предварително зададено име",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Предварително зададен",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Описание"
+  },
   // Property Editors
   pe: {
     panel: {

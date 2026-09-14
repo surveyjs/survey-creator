@@ -523,6 +523,41 @@ export var ruStrings = {
       uncompletedRule_cancel: "Нет, я хочу дополнить правила"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Переменные",
+    // [Auto-translated] "No variables"
+    noPreset: "Без переменных",
+    // [Auto-translated] "View"
+    view: "Вид",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Значения переменных",
+    // [Auto-translated] "Edit"
+    edit: "Редактирование",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Пресеты переменных",
+    // [Auto-translated] "Preset"
+    presetName: "Пресет",
+    // [Auto-translated] "Description"
+    presetDescription: "Описание",
+    // [Auto-translated] "Add preset"
+    addPreset: "Добавить пресет",
+    // [Auto-translated] "New preset"
+    newPresetName: "Новый пресет",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Удалить пресет",
+    // [Auto-translated] "Back"
+    back: "Назад",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Пресет с таким именем уже существует",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Введите предустановленное имя",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Пресет",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Описание"
+  },
   // Property Editors
   pe: {
     panel: {

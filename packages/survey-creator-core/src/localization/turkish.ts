@@ -523,6 +523,41 @@ export var turkishStrings = {
       uncompletedRule_cancel: "Hayır, kuralları tamamlamak istiyorum"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Değişkenler",
+    // [Auto-translated] "No variables"
+    noPreset: "Değişken yok",
+    // [Auto-translated] "View"
+    view: "Görünüm",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Değişken değerleri",
+    // [Auto-translated] "Edit"
+    edit: "Düzenleme",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Değişken ön ayarlar",
+    // [Auto-translated] "Preset"
+    presetName: "Ön ayar",
+    // [Auto-translated] "Description"
+    presetDescription: "Tanım",
+    // [Auto-translated] "Add preset"
+    addPreset: "Ön ayar ekle",
+    // [Auto-translated] "New preset"
+    newPresetName: "Yeni ön ayar",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Delete preset",
+    // [Auto-translated] "Back"
+    back: "Geri",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Bu isimle bir ön ayar zaten mevcuttur",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Bir ön ayar adı girin",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Ön ayar",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Tanım"
+  },
   // Property Editors
   pe: {
     panel: {

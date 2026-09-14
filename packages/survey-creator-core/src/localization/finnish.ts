@@ -523,6 +523,41 @@ export var fiStrings = {
       uncompletedRule_cancel: "Ei, haluan täyttää säännöt"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variables"
+    selectorTitle: "Muuttujat",
+    // [Auto-translated] "No variables"
+    noPreset: "Ei muuttujia",
+    // [Auto-translated] "View"
+    view: "Näkymä",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Muuttujaarvot",
+    // [Auto-translated] "Edit"
+    edit: "Muokkaus",
+    // [Auto-translated] "Variable presets"
+    editorTitle: "Muuttujapresetit",
+    // [Auto-translated] "Preset"
+    presetName: "Esiasetus",
+    // [Auto-translated] "Description"
+    presetDescription: "Kuvaus",
+    // [Auto-translated] "Add preset"
+    addPreset: "Lisää esiasetus",
+    // [Auto-translated] "New preset"
+    newPresetName: "Uusi esiasetettu",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Poista esiasetus",
+    // [Auto-translated] "Back"
+    back: "Takaisin",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Esiasetus tällä nimellä on jo olemassa",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Syötä esiasetettu nimi",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Esiasetus",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Kuvaus"
+  },
   // Property Editors
   pe: {
     panel: {
