@@ -361,6 +361,32 @@ test("A raw code identifier is rendered through the term table", () => {
   expect(finding.text).toBe("The page \"page1\" has no elements.");
 });
 
+test("A duplicate name is reported without a count and a list of kinds", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q1" },
+      { type: "text", name: "q1" }
+    ]
+  }, null, 2));
+  const findings = editor.linter.findings.filter(f => f.ruleId === "name/duplicate");
+  expect(findings).toHaveLength(2);
+  expect(findings[0].finding.reason).toBe(SurveyLintReasons["name/duplicate"].elementNames);
+  expect(findings[0].text).toBe("The name \"q1\" is duplicated.");
+});
+
+test("A duplicate name inside a namespace keeps the scope clause", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [{
+      type: "matrixdynamic", name: "m1",
+      columns: [{ name: "col1" }, { name: "col1" }]
+    }]
+  }, null, 2));
+  const findings = editor.linter.findings.filter(f => f.ruleId === "name/duplicate");
+  expect(findings).toHaveLength(1);
+  expect(findings[0].text).toBe("The name \"col1\" is duplicated. Inside: matrix \"m1\".");
+});
+
 test("The prose suggestion of type-mismatch is localized through its reason", () => {
   const editor = createEditor(JSON.stringify({
     elements: [

@@ -1920,7 +1920,7 @@ export var enStrings = {
         selfReference: "The {prop} of \"{name}\" references the element itself (reference: {reference}).",
       },
       "name/duplicate": {
-        elementNames: "The name \"{name}\" is used by {count} elements ({kinds}) - element names must be unique.",
+        elementNames: "The name \"{name}\" is duplicated.",
         calculatedValueNames: "The calculated value name \"{name}\" is already used by another calculated value.",
         calculatedValueShadowsElement: "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other.",
       },
