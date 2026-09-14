@@ -166,8 +166,8 @@ test("A text that does not parse blocks leaving the tab and nothing can allow it
   expect(creator.activeTab).toBe("json");
 });
 
-test("showLinterPanel false hides the sidebar page, the linter still validates the text", () => {
-  const creator = new CreatorTester({ showJSONEditorTab: true, showLinterPanel: false });
+test("The linter validates the text of the active JSON tab", () => {
+  const creator = new CreatorTester({ showJSONEditorTab: true });
   const plugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   creator.activeTab = "json";
   plugin.model.text = badReference;
@@ -175,25 +175,12 @@ test("showLinterPanel false hides the sidebar page, the linter still validates t
   expect(plugin.model.linter.findings).toHaveLength(1);
   expect(plugin.model.errorList.actions).toHaveLength(1);
   expect(plugin.model.allowingDeactivate()).toBe(false);
-  const page = creator.sidebar.getPageById("linter");
-  expect(page).toBeDefined();
-  expect(page.visible).toBeFalsy();
 });
 
-test("The sidebar page holds the check list while the JSON tab is active", () => {
+test("The JSON tab adds no sidebar page", () => {
   const creator = new CreatorTester({ showJSONEditorTab: true });
-  const plugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
   creator.activeTab = "json";
-  const page = creator.sidebar.getPageById("linter");
-  expect(page.visible).toBeTruthy();
-  expect(creator.sidebar.activePage).toBe("linter");
-  expect(page.componentName).toBe("svc-component-container");
-  const elements = page.componentData.elements;
-  expect(elements).toHaveLength(1);
-  expect(elements[0].componentName).toBe("sv-list");
-  expect(elements[0].componentData.model).toBe(plugin.model.linter.checkList);
-  creator.activeTab = "designer";
-  expect(page.visible).toBeFalsy();
+  expect(creator.sidebar.getPageById("linter")).toBeUndefined();
 });
 
 test("The check list holds a row per rule, its findings and a summary", () => {

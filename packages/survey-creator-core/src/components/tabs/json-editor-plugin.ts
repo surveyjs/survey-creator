@@ -2,8 +2,6 @@ import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core"
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding } from "../../textWorker";
-import { ComponentContainerModel } from "../component-container/component-container";
-import { SidebarPageModel } from "../side-bar/side-bar-page-model";
 import { getCreatorLintOptions, getFindingSeverityKind, getLinterString, JsonEditorLinterModel } from "./json-editor-linter";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { getLocString } from "../../editorLocalization";
@@ -176,12 +174,8 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
 
   public static iconName = "icon-codeeditor-24x24";
 
-  private linterPage: SidebarPageModel;
-
   constructor(private creator: SurveyCreatorModel) {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
-    this.linterPage = creator.sidebar.addPage("linter", "svc-component-container");
-    this.linterPage.locTitleName = "linter.panelTitle";
   }
 
   public saveToFileHandler = saveToFileHandler;
@@ -265,14 +259,6 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   public model: JsonEditorBaseModel;
   public activate(): void {
     this.model = this.createModel(this.creator);
-    if (this.creator.showLinterPanel) {
-      // the list is built by the model, the page only hosts it
-      this.linterPage.componentData = new ComponentContainerModel({
-        elements: [{ componentName: "sv-list", componentData: { model: this.model.linter.checkList } }]
-      });
-      this.creator.sidebar.activePage = this.linterPage.id;
-      this.linterPage.visible = true;
-    }
   }
   public deactivate(): boolean {
     if (this.model) {
@@ -285,9 +271,6 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       this.model.dispose();
       this.model = undefined;
     }
-    this.linterPage.visible = false;
-    this.linterPage.componentData = undefined;
-    this.creator.sidebar.header.reset();
     return true;
   }
   public defaultAllowingDeactivate(): boolean {
