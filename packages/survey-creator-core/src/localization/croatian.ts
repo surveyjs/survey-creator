@@ -246,6 +246,8 @@ export var hrStrings = {
     translateUsigAI: "Automatski prevedi sve",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Prevedi iz: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Prevedite preostale stringove",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Neprevedeni nizovi",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var hrStrings = {
     translationSource: "Izvor: ",
     // [Auto-translated] "Target: "
     translationTarget: "Cilj: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Izvorni jezik",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Ciljani jezik",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} prevedenih žica",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Jeste li sigurni da želite izbrisati sve prevedene nizove za odabrani jezik?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Prikaz forme",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Prikaz mreže",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Prevedite stringove",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Nizovi pregleda",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Nema niza za prevođenje",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Svi nizovi su prevedeni",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} stringovi se ne prevode",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube veze nisu podržane.",
     // [Auto-translated] "Export"
@@ -814,6 +838,10 @@ export var hrStrings = {
     removeItem: "Kliknite da biste uklonili stavku...",
     // [Auto-translated] "Drag the item"
     dragItem: "Vucite stavku",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Proširi ugniježđene izbore",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Collapse ugnježđeni izbori",
     // "Edit"
     edit: "Uređivanje",
     // [Auto-translated] "Done"
@@ -916,6 +944,8 @@ export var hrStrings = {
     surveyTitlePlaceholder: "Naslov ulazne ankete ovdje",
     // "Page {num}"
     pageTitlePlaceholder: "Naslov ulazne stranice ovdje",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Naslov panela",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Početna stranica",
     // "Description"
@@ -1268,6 +1298,8 @@ export var hrStrings = {
     minRowCount: "Najmanji broj redaka",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Maksimalan broj redaka",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Izraz broja redaka",
     // "Confirm row removal"
     confirmDelete: "Potvrda brisanja retka",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1310,8 @@ export var hrStrings = {
     minPanelCount: "Najmanji broj unosa",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maksimalan broj unosa",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Izraz broja unosa",
     // [Auto-translated] "Initial entry state"
     panelsState: "Početno stanje unosa",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1914,6 +1948,12 @@ export var hrStrings = {
       // [Auto-translated] "Informational"
       info: "Informativan"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Prednji dio",
+      // [Auto-translated] "Rear"
+      environment: "Stražnji dio"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Slike",
@@ -2509,10 +2549,14 @@ export var hrStrings = {
       keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Specificirajte izraz koji izračunava broj unosa. Ovaj izraz nadjačava postavku \"Početni broj unosa\" i ponovno se procjenjuje kad god se vrijednosti na koje se odnosi promijene. Rezultat je ograničen postavkama \"Minimalan broj unosa\" i \"Maksimalan broj unosa\". Dok je ovaj izraz postavljen, ispitanici ne mogu ručno dodavati ili uklanjati unose.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar dinamičke ploče."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificirajte izraz koji izračunava broj redaka. Ovaj izraz nadjačava postavku \"Broj redaka\" i ponovno se procjenjuje kad se vrijednosti na koje se poziva promijene. Rezultat je ograničen postavkama \"Minimalni broj redaka\" i \"Maksimalan broj redaka\". Dok je ovaj izraz postavljen, ispitanici ne mogu ručno dodavati ili uklanjati retke.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Aktivira upit za potvrdu prije uklanjanja retka.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2982,6 +3026,8 @@ export var hrStrings = {
     tabAlign: "Poravnanje tabulatora",
     // [Auto-translated] "File source type"
     sourceType: "Vrsta izvora datoteke",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Zadana kamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Prilagodi spremniku",
     // [Auto-translated] "Set value expression"
@@ -3304,10 +3350,69 @@ export var hrStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Stavka 1" }, { value: "item2", text: "Stavka 2" }, { value: "item3", text: "Stavka 3" }],
-    columns: [{ value: "column1", text: "Stupca 1" }, { value: "column2", text: "Stupca 2" }, { value: "column3", text: "Stupca 3" }],
-    rows: [{ value: "row1", text: "Redak 1" }, { value: "row2", text: "Redak 2" }],
-    matrixColumns: [{ name: "column1", title: "Stupca 1" }, { name: "column2", title: "Stupca 2" }, { name: "column3", title: "Stupca 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Stavka 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Stavka 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Stavka 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Stupca 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Stupca 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Stupca 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Redak 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Redak 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Stupca 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Stupca 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Stupca 3"
+      }
+    ]
   }
 };
 setupLocale({ localeCode: "hr", strings: hrStrings });

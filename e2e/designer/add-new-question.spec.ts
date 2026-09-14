@@ -155,7 +155,6 @@ test.describe(title, () => {
     await expect(questionContentActions.nth(1)).toHaveText("Stars");
 
     let expectedJson = {
-      headerView: "advanced",
       pages: [
         {
           name: "page1",
@@ -184,7 +183,6 @@ test.describe(title, () => {
     await expect(questionContentActions.nth(1)).toHaveText("Password");
 
     expectedJson = {
-      headerView: "advanced",
       pages: [
         {
           name: "page1",
@@ -213,7 +211,6 @@ test.describe(title, () => {
     await expect(questionContentActions.nth(1)).toHaveText("Labels");
 
     expectedJson = {
-      headerView: "advanced",
       pages: [
         {
           name: "page1",

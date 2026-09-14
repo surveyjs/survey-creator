@@ -42,6 +42,8 @@ npm install survey-creator-angular
 
 ## Configure Styles
 
+### Add Themes
+
 Open the `angular.json` file and reference Survey Creator and SurveyJS Form Library stylesheets:
 
 ```js
@@ -86,6 +88,66 @@ This configuration applies the Default Light theme. Survey Creator also supports
 In addition, Survey Creator allows users to switch between UI themes and customize them at runtime. To enable runtime UI customization, refer to the following help topic:
 
 [Runtime UI Theming](https://surveyjs.io/survey-creator/documentation/runtime-theme-customization (linkStyle))
+
+### Add Fonts
+
+Starting with SurveyJS v3.1.0, fonts are no longer included in SurveyJS packages. Load Open Sans separately to preserve the default appearance, unless your application already does so. If you use a custom font, load it instead. Otherwise, the browser uses a fallback font, which may affect spacing and layout.
+
+To add Open Sans using [Fontsource](https://fontsource.org/docs/getting-started/install), run the following command:
+
+```sh
+npm install @fontsource/open-sans
+```
+
+The configuration below includes the font style sheets for weights 400, 600, and 700. Add them once to your application's global styles.
+
+<details>
+    <summary>NgModule-based components</summary>
+
+```js
+// angular.json
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  // ...
+  "projects": {
+    "project-name": {
+      "projectType": "application",
+      // ...
+      "architect": {
+        "build": {
+          // ...
+          "options": {
+            // ...
+            "styles": [
+              "src/styles.css",
+              "node_modules/@fontsource/open-sans/400.css",
+              "node_modules/@fontsource/open-sans/600.css",
+              "node_modules/@fontsource/open-sans/700.css",
+              "node_modules/survey-core/survey-core.css",
+              "node_modules/survey-creator-core/survey-creator-core.css"
+            ],
+            // ...
+          }
+        }
+      }
+    }
+  }
+}
+```
+</details>
+
+<details>
+    <summary>Standalone components</summary>
+
+```js
+// survey-creator.component.ts
+import "@fontsource/open-sans/400.css";
+import "@fontsource/open-sans/600.css";
+import "@fontsource/open-sans/700.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
+```
+</details>
 
 ## Configure Survey Creator
 

@@ -941,7 +941,9 @@ test("set headerViewContainer advanced", (): any => {
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
   const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
 
-  expect(creator.theme.header).toStrictEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
+  // The advanced header view is the default one now, so activating the theme tab does not modify the theme.
+  expect(creator.theme.header).toBeUndefined();
+  expect(themePlugin.themeModel.toJSON().headerView).toBe("advanced");
 
   let currentThemeCssVariables = creator.theme.cssVariables || {};
   expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBeUndefined();
@@ -1315,7 +1317,9 @@ test("header survey title font color changed", (): any => {
   const headerViewContainer = groupHeader.elements[0].contentPanel;
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
 
-  expect(creator.theme.header).toEqual({ "backgroundImageFit": "cover", "backgroundImageOpacity": 100, "descriptionPositionX": "left", "descriptionPositionY": "bottom", "height": 0, "inheritWidthFrom": "survey", "logoPositionX": "left", "logoPositionY": "top", "mobileHeight": 0, "overlapEnabled": false, "textAreaWidth": 0, "titlePositionX": "left", "titlePositionY": "bottom" });
+  // The advanced header view is the default one now, so activating the theme tab does not modify the theme.
+  expect(creator.theme.header).toBeUndefined();
+  expect(themePlugin.themeModel.toJSON().headerView).toBe("advanced");
 
   let currentThemeCssVariables = creator.theme.cssVariables || {};
   expect(currentThemeCssVariables["--sjs2-typography-font-family-component-survey-header-title"]).toBeUndefined();

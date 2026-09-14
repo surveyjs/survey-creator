@@ -246,6 +246,8 @@ export var htStrings = {
     translateUsigAI: "Oto-tradui Tout",
     // "Translate from: "
     translateUsigAIFrom: "Tradui soti nan:",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Tradwi fisèl ki rete yo",
     // "Untranslated strings"
     translationDialogTitle: "Fisèl ki pa tradui",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var htStrings = {
     translationSource: "Sous:",
     // "Target: "
     translationTarget: "Sib:",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Lang sous la",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Lang sib",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} nan {1} strings tradui",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Èske ou sèten ou vle efase tout fisèl tradui pou lang lan chwazi?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Fòm View",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Gade kadriyaj",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Tradwi strings",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Sondaj strings",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Pa gen strings pou tradui",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Tout strings yo tradui",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} strings yo pa tradui",
     // "YouTube links are not supported."
     translationYouTubeNotSupported: "Lyen YouTube yo pa sipòte.",
     // "Export"
@@ -814,6 +838,10 @@ export var htStrings = {
     removeItem: "Klike pou retire atik la...",
     // "Drag the item"
     dragItem: "Trennen atik la",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Elaji chwa imbriqué",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Efondreman chwa enbrike",
     // "Edit"
     edit: "Modifye",
     // "Done"
@@ -916,6 +944,8 @@ export var htStrings = {
     surveyTitlePlaceholder: "Tit Sondaj",
     // "Page {num}"
     pageTitlePlaceholder: "Paj {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Panel",
     // "Start Page"
     startPageTitlePlaceholder: "Kòmanse Paj",
     // "Description"
@@ -1268,6 +1298,8 @@ export var htStrings = {
     minRowCount: "Konte minimòm ranje",
     // "Maximum row count"
     maxRowCount: "Konte maksimòm ranje",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Ekspresyon konte ranje",
     // "Confirm row removal"
     confirmDelete: "Konfime efase ranje",
     // "Confirmation message"
@@ -1278,6 +1310,8 @@ export var htStrings = {
     minPanelCount: "Kantite minimòm panèl",
     // "Maximum number of entries"
     maxPanelCount: "Kantite maksimòm panèl",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Ekspresyon konte antre",
     // "Initial entry state"
     panelsState: "Eta panèl enteryè tonbe",
     // "\"Previous Entry\" button text"
@@ -1914,6 +1948,12 @@ export var htStrings = {
       // [Auto-translated] "Informational"
       info: "Enfòmasyon"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Devan",
+      // [Auto-translated] "Rear"
+      environment: "Dèyè"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Imaj yo",
@@ -2509,10 +2549,14 @@ export var htStrings = {
       keyName: "Referans yon non kesyon pou mande pou yon itilizatè bay yon repons inik pou kesyon sa a nan chak panèl.",
       // "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon panèl.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Espesifye yon ekspresyon ki kalkile kantite antre yo. Ekspresyon sa a depase anviwònman an \"Premye kantite antre\" epi li re-evalye chak fwa valè yo li referans chanje. Rezilta a limite pa \"Kantite minimòm antre yo\" ak \"Maksimòm kantite antre\". Pandan ke ekspresyon sa a mete, moun ki repond yo pa ka ajoute oswa retire antre manyèlman.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Asiyen nimewo nan kesyon ki enbrike nan panèl dinamik la."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Espesifye yon ekspresyon ki kalkile kantite ranje. Ekspresyon sa a depase anviwònman an \"Konte ranje\" epi li re-evalye chak fwa valè yo li referans chanje. Rezilta a limite pa anviwònman \"Kantite ranje minimòm\" ak \"Maksimòm konte ranje\". Pandan ke ekspresyon sa a mete, moun ki repond yo pa ka ajoute oswa retire ranje manyèlman.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon ranje.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2982,6 +3026,8 @@ export var htStrings = {
     tabAlign: "Tab aliyman",
     // "File source type"
     sourceType: "Kalite sous dosye",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Kamera default",
     // "Fit to container"
     fitToContainer: "Anfòm nan veso",
     // "Set value expression"
@@ -3304,10 +3350,69 @@ export var htStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Atik1" }, { value: "item2", text: "Atik2" }, { value: "item3", text: "Atik3" }],
-    columns: [{ value: "column1", text: "Kolòn 1" }, { value: "column2", text: "Kolòn 2" }, { value: "column3", text: "Kolòn 3" }],
-    rows: [{ value: "row1", text: "Ranje 1" }, { value: "row2", text: "Ranje 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolòn 1" }, { name: "column2", title: "Kolòn 2" }, { name: "column3", title: "Kolòn 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Atik1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Atik2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Atik3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolòn 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolòn 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolòn 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Ranje 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Ranje 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolòn 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolòn 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolòn 3"
+      }
+    ]
   }
 };
 

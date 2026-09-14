@@ -476,23 +476,14 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   public getLocString(name: string): string {
     return editorLocalization.getString(name);
   }
-  private getElementText(el: SurveyElement, showTitles: boolean): string {
-    let text = "";
-    if (showTitles) {
-      text = el.locTitle.renderedHtml;
-    }
-    if (!text) text = el.name;
-    if (el.isQuestion) {
-      text = this.options.getObjectDisplayName(el, "logic-tab:question-selector", "condition", text);
-    }
-    return text;
+  private getElementText(el: SurveyElement): string {
+    return this.options.getObjectDisplayName(el, "logic-tab:question-selector", "condition");
   }
 
   private getSelectorChoices(logicType: SurveyLogicType): Array<ItemValue> {
     if (!logicType.hasSelectorChoices) return [];
     const elements = logicType.getSelectorChoices(this.survey, this.context);
     const res = [];
-    const showTitles = this.options.useElementTitles;
     for (let i = 0; i < elements.length; i++) {
       let namePrefix = "";
       let textPrefix = "";
@@ -500,9 +491,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       const owner = <Question>logicType.getParentElement(el);
       if (owner) {
         namePrefix = owner.name + ".";
-        textPrefix = this.getElementText(owner, showTitles) + ".";
+        textPrefix = this.getElementText(owner) + ".";
       }
-      const text = this.getElementText(el, showTitles);
+      const text = this.getElementText(el);
       const value = namePrefix + el.name;
       let itemValue = new ItemValue(value, textPrefix + text);
       this.selectorElementsHash[value] = el;

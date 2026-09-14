@@ -246,6 +246,8 @@ export const thStrings = {
     translateUsigAI: "แปลทั้งหมดอัตโนมัติ",
     // "Translate from: "
     translateUsigAIFrom: "แปลจาก: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "แปลงสตริงที่เหลือ",
     // "Untranslated strings"
     translationDialogTitle: "สตริงที่ยังไม่ได้แปล",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export const thStrings = {
     translationSource: "ต้นทาง: ",
     // "Target: "
     translationTarget: "ปลายทาง: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "ภาษาต้นทาง",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "ภาษาปลายทาง",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0}สตริง{1}ที่แปลแล้ว",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "คุณแน่ใจหรือไม่ว่าต้องการลบสตริงที่แปลทั้งหมดสําหรับภาษาที่เลือก?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "มุมมองฟอร์ม",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "มุมมองกริด",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "แปลสตริง",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "สายสํารวจ",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "ไม่มีสตริงให้แปล",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "สตริงทั้งหมดจะถูกแปล",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "สตริง{0}ไม่ได้รับการแปล",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "ไม่รองรับลิงก์ YouTube",
     // "Export"
@@ -814,6 +838,10 @@ export const thStrings = {
     removeItem: "คลิกเพื่อลบรายการ...",
     // "Drag the item"
     dragItem: "ลากรายการ",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "ขยายตัวเลือกซ้อน",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "ยุบตัวเลือกซ้อน",
     // "Edit"
     edit: "แก้ไข",
     // "Done"
@@ -916,6 +944,8 @@ export const thStrings = {
     surveyTitlePlaceholder: "ชื่อเรื่องแบบสำรวจ",
     // "Page {num}"
     pageTitlePlaceholder: "หน้า {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "ชื่อแผง",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "หน้าเริ่มต้น",
     // "Description"
@@ -1268,6 +1298,8 @@ export const thStrings = {
     minRowCount: "จำนวนแถวขั้นต่ำ",
     // "Maximum row count"
     maxRowCount: "จำนวนแถวสูงสุด",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "นิพจน์จํานวนแถว",
     // "Confirm row removal"
     confirmDelete: "ยืนยันการลบแถว",
     // "Confirmation message"
@@ -1278,6 +1310,8 @@ export const thStrings = {
     minPanelCount: "จำนวนแผงขั้นต่ำ",
     // "Maximum number of entries"
     maxPanelCount: "จำนวนแผงสูงสุด",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "นิพจน์จํานวนรายการ",
     // "Initial entry state"
     panelsState: "สถานะแผงภายใน",
     // "\"Previous Entry\" button text"
@@ -1914,6 +1948,12 @@ export const thStrings = {
       // [Auto-translated] "Informational"
       info: "ข้อมูล"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "ด้านหน้า",
+      // [Auto-translated] "Rear"
+      environment: "ด้านหลัง"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "ภาพ",
@@ -2509,10 +2549,14 @@ export const thStrings = {
       keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง",
       // "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนรายการนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนรายการเริ่มต้น\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดด้วยการตั้งค่า \"จํานวนรายการขั้นต่ํา\" และ \"จํานวนรายการสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบไม่สามารถเพิ่มหรือลบรายการด้วยตนเองได้",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงแบบไดนามิก"
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนแถวนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนแถว\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดโดยการตั้งค่า \"จํานวนแถวขั้นต่ํา\" และ \"จํานวนแถวสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบแบบสอบถามไม่สามารถเพิ่มหรือลบแถวด้วยตนเองได้",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนที่จะลบแถว",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2982,6 +3026,8 @@ export const thStrings = {
     tabAlign: "การจัดเรียงแท็บ",
     // "File source type"
     sourceType: "ประเภทแหล่งไฟล์",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "กล้องเริ่มต้น",
     // "Fit to container"
     fitToContainer: "พอดีกับคอนเทนเนอร์",
     // "Set value expression"
@@ -3304,10 +3350,69 @@ export const thStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "รายการ 1" }, { value: "item2", text: "รายการ 2" }, { value: "item3", text: "รายการ 3" }],
-    columns: [{ value: "column1", text: "คอลัมน์ 1" }, { value: "column2", text: "คอลัมน์ 2" }, { value: "column3", text: "คอลัมน์ 3" }],
-    rows: [{ value: "row1", text: "แถว 1" }, { value: "row2", text: "แถว 2" }],
-    matrixColumns: [{ name: "column1", title: "คอลัมน์ 1" }, { name: "column2", title: "คอลัมน์ 2" }, { name: "column3", title: "คอลัมน์ 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "รายการ 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "รายการ 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "รายการ 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "คอลัมน์ 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "คอลัมน์ 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "คอลัมน์ 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "แถว 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "แถว 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "คอลัมน์ 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "คอลัมน์ 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "คอลัมน์ 3"
+      }
+    ]
   }
 };
 

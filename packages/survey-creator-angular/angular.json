@@ -76,6 +76,7 @@
               "./example/angular-ui/src/assets"
             ],
             "styles": [
+              "./example/angular-ui/src/fonts.css",
               "./node_modules/survey-core/survey-core.css",
               "./node_modules/survey-creator-core/survey-creator-core.css"
             ],

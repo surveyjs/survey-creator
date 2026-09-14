@@ -20,15 +20,17 @@
         </div>
       </div>
       <div *ngIf="sideBySideModel" [class]="sideBySideModel.sideBySideRootCss">
-        <div class="st-side-by-side__source" #sourceScrollContainer>
-          <ng-container *ngFor="let s of [sideBySideModel.sourceSurvey]; trackBy: trackStringsSurveyBy">
-            <survey-content [model]="s"></survey-content>
-          </ng-container>
-        </div>
-        <div *ngIf="sideBySideModel.targetSurvey" class="st-side-by-side__target" #targetScrollContainer>
-          <ng-container *ngFor="let s of [sideBySideModel.targetSurvey]; trackBy: trackStringsSurveyBy">
-            <survey-content [model]="s"></survey-content>
-          </ng-container>
+        <div class="st-side-by-side__panes">
+          <div class="st-side-by-side__source" #sourceScrollContainer>
+            <ng-container *ngFor="let s of [sideBySideModel.sourceSurvey]; trackBy: trackStringsSurveyBy">
+              <survey-content [model]="s"></survey-content>
+            </ng-container>
+          </div>
+          <div *ngIf="sideBySideModel.targetSurvey" class="st-side-by-side__target" #targetScrollContainer>
+            <ng-container *ngFor="let s of [sideBySideModel.targetSurvey]; trackBy: trackStringsSurveyBy">
+              <survey-content [model]="s"></survey-content>
+            </ng-container>
+          </div>
         </div>
       </div>
     </ng-container>

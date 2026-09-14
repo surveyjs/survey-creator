@@ -411,7 +411,6 @@ test.describe(title, () => {
     await expect(toolboxSubTypesPopup).not.toBeVisible();
 
     const expectedJson = {
-      headerView: "advanced",
       pages: [
         {
           name: "page1",
@@ -449,7 +448,6 @@ test.describe(title, () => {
     await expect(toolboxSubTypesPopup).toBeVisible();
 
     const expectedJson = {
-      headerView: "advanced",
       pages: [
         {
           name: "page1",

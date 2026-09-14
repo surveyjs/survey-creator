@@ -125,7 +125,7 @@ test.describe(title, () => {
 
     const root = page.locator(".sps-question--matrixdynamic").first();
     await compareScreenshot(page, root, "presets-items.png");
-    await page.locator(".sd-table__cell--drag").first().hover();
+    await page.locator(".sps-drag-element__svg").first().hover();
     await compareScreenshot(page, root, "presets-items-hover.png");
     await page.locator(".sps-table__row").first().locator(".sd-formbox").hover();
     await compareScreenshot(page, root, "presets-items-text-hover.png");
@@ -146,7 +146,7 @@ test.describe(title, () => {
     await page.locator(".sps-matrixdynamic__add-btn--icon").hover();
     await compareScreenshot(page, root, "presets-categories-new-hover.png");
 
-    await page.locator(".sd-table__cell--drag").first().hover();
+    await page.locator(".sps-drag-element__svg").first().hover();
     await compareScreenshot(page, root, "presets-categories-hover.png");
     await page.locator(".sps-table__row").first().locator(".sd-formbox").hover();
     await compareScreenshot(page, root, "presets-categories-text-hover.png");

@@ -104,6 +104,8 @@ export class SurveyLogicType {
     if (!!this.logicType.showIf) return this.logicType.showIf(this.survey);
     return true;
   }
+  //Element names go through options.getObjectDisplayName(). This flag is left for values only:
+  //it tells whether a choice value should be replaced with its display text
   public get showTitlesInExpression(): boolean {
     return !!this.options && this.options.useElementTitles;
   }
@@ -189,13 +191,9 @@ export class SurveyLogicType {
   }
   private getElementDisplayName(element: Base): string {
     if (!element) return "";
-    let res = "";
-    if (this.showTitlesInExpression) {
-      res = element["title"];
-    }
-    if (!res) {
-      res = element["name"] || "";
-    }
+    const res = !!this.options
+      ? this.options.getObjectDisplayName(element, "logic-tab:rule-action", "logic-action")
+      : element["name"] || "";
     return wrapTextByCurlyBraces(res);
   }
   private getElementByName(name: string): Base {
@@ -212,8 +210,7 @@ export class SurveyLogicType {
     if (!this.showTitlesInExpression || !this.survey) return value;
     const question = <Question>this.survey.getQuestionByName(questionName);
     if (!question) return value;
-    const displayValue = question.getDisplayValue(true, value);
-    return displayValue !== undefined && displayValue !== null ? displayValue : value;
+    return question.getDisplayValue(true, value) || value;
   }
   public formatExpression(expression: string): string {
     return SurveyLogicType.expressionToDisplayText(

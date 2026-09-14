@@ -35,7 +35,7 @@ export class ObjectSelector {
       obj: Base,
       area: string,
       reason: string,
-      displayName: string
+      displayName?: string
     ) => string = undefined
   ) {
     this.surveyValue = survey;
@@ -124,10 +124,13 @@ export class ObjectSelector {
     return item;
   }
   private getText(obj: Base): string {
-    var text = !!this.getObjectDisplayName
-      ? this.getObjectDisplayName(obj, "property-grid-header:element-list", "property-grid", undefined)
-      : SurveyHelper.getObjectName(obj, false);
-    return text;
+    if (!!this.getObjectDisplayName) {
+      return this.getObjectDisplayName(obj, "property-grid-header:element-list", "property-grid");
+    }
+    if (!!this.creator) {
+      return this.creator.getObjectDisplayName(obj, "property-grid-header:element-list", "property-grid");
+    }
+    return SurveyHelper.getObjectName(obj, false);
   }
 }
 export class ObjectSelectorModel extends Base {
@@ -136,7 +139,7 @@ export class ObjectSelectorModel extends Base {
 
   @property() isVisible: boolean;
 
-  constructor(private creator: SurveyCreatorModel, private getObjectDisplayName: (obj: Base, area: string, reason: string, displayName: string) => string = undefined) {
+  constructor(private creator: SurveyCreatorModel, private getObjectDisplayName: (obj: Base, area: string, reason: string, displayName?: string) => string = undefined) {
     super();
   }
   public get list(): ListModel {

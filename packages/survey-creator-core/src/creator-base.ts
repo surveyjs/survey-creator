@@ -13,6 +13,7 @@ import {
   ChoiceItem,
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
+  createBoxShadowResetVariables,
   IConfirmDialogOptions
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
@@ -2493,9 +2494,6 @@ export class SurveyCreatorModel extends Base
    */
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
     this.expandCollapseManager.clearExpandChoicesStates();
-    if (!json) {
-      json = { "headerView": "advanced" };
-    }
     this.existingPages = {};
     const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
       survey.skeletonHeight = 188;
@@ -2958,8 +2956,8 @@ export class SurveyCreatorModel extends Base
   public getObjectDisplayName(
     obj: Base,
     area: string,
-    reason: string = undefined,
-    displayName: string = undefined
+    reason?: string,
+    displayName?: string
   ): string {
     if (!displayName) {
       displayName = SurveyHelper.getObjectName(obj, this.useElementTitles);
@@ -5037,7 +5035,19 @@ export class SurveyCreatorModel extends Base
       .toString();
   }
 
-  @property({ defaultValue: {} }) themeVariables: { [index: string]: string } = {};
+  @property({ defaultValue: {} }) private creatorCssVariables: { [index: string]: string } = {};
+  // The box-shadow reset variables travel inside the style binding itself: anything
+  // set imperatively on the root element's style is wiped whenever a renderer
+  // re-renders the attribute from themeVariables (angular writes [attr.style]
+  // wholesale on every theme change). The resets are static - creator themes never
+  // override the composite border-effect variables, and the reset's color stays a
+  // live var() reference - so they track the active theme without being recomputed.
+  public get themeVariables(): { [index: string]: string } {
+    return Object.assign({}, createBoxShadowResetVariables(), this.creatorCssVariables);
+  }
+  public set themeVariables(val: { [index: string]: string }) {
+    this.creatorCssVariables = val;
+  }
   /**
    * A theme for the Survey Creator UI.
    *

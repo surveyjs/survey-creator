@@ -246,6 +246,8 @@ export var nlStrings = {
     translateUsigAI: "Alles automatisch vertalen",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Vertalen van: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Vertaal de resterende snaren",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Onvertaalde tekenreeksen",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var nlStrings = {
     translationSource: "Bron: ",
     // [Auto-translated] "Target: "
     translationTarget: "Doel: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Brontaal",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Doeltaal",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} van {1} snaren vertaald",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Weet je zeker dat je alle vertaalde strings voor de geselecteerde taal wilt verwijderen?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Formulierweergave",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Rasterweergave",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Vertaal snaren",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Surveystrings",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Geen verplichtingen om te vertalen",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Alle snaren worden vertaald",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} snaren worden niet vertaald",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-links worden niet ondersteund.",
     // [Auto-translated] "Export"
@@ -814,6 +838,10 @@ export var nlStrings = {
     removeItem: "Klik om het item te verwijderen...",
     // [Auto-translated] "Drag the item"
     dragItem: "Sleep het item",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Breid geneste keuzes uit",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Collapse geneste keuzes",
     // "Edit"
     edit: "Bewerk",
     // [Auto-translated] "Done"
@@ -916,6 +944,8 @@ export var nlStrings = {
     surveyTitlePlaceholder: "Voer de enquêtetitel hier in",
     // "Page {num}"
     pageTitlePlaceholder: "Voer hier de paginatitel in",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Paneltitel",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Startpagina",
     // "Description"
@@ -1268,6 +1298,8 @@ export var nlStrings = {
     minRowCount: "Minimaal aantal rijen",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Maximaal aantal rijen",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Rijtelling-expressie",
     // "Confirm row removal"
     confirmDelete: "Rijverwijdering bevestigen",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1310,8 @@ export var nlStrings = {
     minPanelCount: "Minimum aantal inzendingen",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maximaal aantal inzendingen",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Invoertelling-expressie",
     // [Auto-translated] "Initial entry state"
     panelsState: "Status van eerste binnenkomst",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1914,6 +1948,12 @@ export var nlStrings = {
       // [Auto-translated] "Informational"
       info: "Informatieve"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Voorkant",
+      // [Auto-translated] "Rear"
+      environment: "Achterste"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Beelden",
@@ -2509,10 +2549,14 @@ export var nlStrings = {
       keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Activeert een bevestigingsprompt voordat een item wordt verwijderd.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Specificeer een expressie die het aantal vermeldingen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aanstellingen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal vermeldingen\" en \"Maximaal aantal vermeldingen\". Terwijl deze uitdrukking is ingesteld, kunnen respondenten geen vermeldingen handmatig toevoegen of verwijderen.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Wijst nummers toe aan vragen die zijn genest in het dynamische paneel."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificeer een expressie die het aantal rijen berekent. Deze expressie overschrijft de instelling \"Rijaantal\" en wordt opnieuw geëvalueerd telkens wanneer de waarden waarnaar hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal rijen\" en \"Maximaal aantal rijen\". Zolang deze expressie is ingesteld, kunnen respondenten niet handmatig rijen toevoegen of verwijderen.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Activeert een bevestigingsprompt voordat een rij wordt verwijderd.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2982,6 +3026,8 @@ export var nlStrings = {
     tabAlign: "Uitlijning van tabbladen",
     // [Auto-translated] "File source type"
     sourceType: "Type bestandsbron",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Standaardcamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Aanpassen aan container",
     // [Auto-translated] "Set value expression"
@@ -3304,10 +3350,69 @@ export var nlStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Item 1" }, { value: "item2", text: "Item 2" }, { value: "item3", text: "Item 3" }],
-    columns: [{ value: "column1", text: "Kolom 1" }, { value: "column2", text: "Kolom 2" }, { value: "column3", text: "Kolom 3" }],
-    rows: [{ value: "row1", text: "Rij 1" }, { value: "row2", text: "Rij 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolom 1" }, { name: "column2", title: "Kolom 2" }, { name: "column3", title: "Kolom 3" }]
+    choices: [
+      {
+        value: "item1",
+        // [Auto-translated] "Item 1"
+        text: "Punt 1"
+      },
+      {
+        value: "item2",
+        // [Auto-translated] "Item 2"
+        text: "Punt 2"
+      },
+      {
+        value: "item3",
+        // [Auto-translated] "Item 3"
+        text: "Punt 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolom 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolom 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolom 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Rij 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Rij 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolom 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolom 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolom 3"
+      }
+    ]
   }
 };
 setupLocale({ localeCode: "nl", strings: nlStrings });

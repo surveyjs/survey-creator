@@ -254,17 +254,32 @@ td.st-table__cell:first-of-type {
   padding: 0;
 }
 
+// The horizontal arrangement: the two panes share one scroll container - the root scrolls,
+// the panes do not. The rows of the panes are equalized pair by pair (see
+// TranslationRowEqualizer), so the two surveys have the same geometry and one scrollbar moves
+// both. The root is not the flex row itself: a flex container with a fixed height stretches
+// its children to its own box, not to the overflowing content, so the panes live in an inner
+// wrapper that grows with the content and the source pane's right border spans all of it.
 .st-side-by-side {
-  display: flex;
   width: 100%;
   height: 100%;
+  overflow-y: auto;
+}
+
+.st-side-by-side__panes {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 100%;
 }
 
 .st-side-by-side__source,
 .st-side-by-side__target {
   flex: 1 1 50%;
   width: 50%;
-  overflow-y: auto;
+  min-width: 0;
+  height: auto;
+  overflow: visible;
 }
 
 .st-side-by-side__source {
@@ -281,15 +296,23 @@ td.st-table__cell:first-of-type {
   }
 }
 
-// The vertical arrangement: the source pane above the target pane, each half the surface high.
+// The vertical arrangement: the source pane above the target pane, each half the surface high
+// and each with a scrollbar of its own (the model mirrors scrollTop between them).
 .st-side-by-side--vertical {
-  flex-direction: column;
+  overflow: hidden;
+
+  .st-side-by-side__panes {
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+  }
 
   .st-side-by-side__source,
   .st-side-by-side__target {
     flex: 1 1 50%;
     width: 100%;
     height: 50%;
+    overflow-y: auto;
   }
 
   .st-side-by-side__source {
@@ -432,7 +455,8 @@ td.st-table__cell:first-of-type {
 // The strings matrix of the dialog: its title row is the caption row, and its title actions are
 // the caption's buttons (auto-translate, all/used strings).
 .st-element-strings {
-  // The caption row holds no text - its buttons end it, at the dialog's right edge.
+  // The caption row names the element the dialog edits; its buttons end the row, at the
+  // dialog's right edge.
   .sd-action-title-bar {
     margin-left: auto;
   }

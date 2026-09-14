@@ -246,6 +246,8 @@ export var fiStrings = {
     translateUsigAI: "Käännä kaikki automaattisesti",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Käännös: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Käännä jäljellä olevat jouset",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Kääntämättömät merkkijonot",
     // "Merge {0} with default locale"
@@ -256,6 +258,28 @@ export var fiStrings = {
     translationSource: "Lähde: ",
     // [Auto-translated] "Target: "
     translationTarget: "Kohde: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Lähdekieli",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Kohdekieli",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} kieliä käännetty",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Oletko varma, että haluat poistaa kaikki käännetyt merkkijonot valitulta kieleleltä?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Muotonäkymä",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Ruudukkonäkymä",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Käännä merkkijonot",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Survey Strings",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Ei ehtoja käännettäväksi",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Kaikki merkkijonot käännetään",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} kieliä ei käännetä",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-linkkejä ei tueta.",
     // [Auto-translated] "Export"
@@ -814,6 +838,10 @@ export var fiStrings = {
     removeItem: "Poista kohde napsauttamalla...",
     // [Auto-translated] "Drag the item"
     dragItem: "Kohteen vetäminen",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Laajenna sisäkkäisiä valintoja",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Collapse sisäkkäiset valinnat",
     // "Edit"
     edit: "Muokkaa",
     // [Auto-translated] "Done"
@@ -916,6 +944,8 @@ export var fiStrings = {
     surveyTitlePlaceholder: "Syötä kyselyn otsikko tähän",
     // "Page {num}"
     pageTitlePlaceholder: "Syötä sivun otsikko tähän",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Paneelin nimi",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Aloitussivu",
     // "Description"
@@ -1268,6 +1298,8 @@ export var fiStrings = {
     minRowCount: "Rivien vähimmäismäärä",
     // [Auto-translated] "Maximum row count"
     maxRowCount: "Rivien enimmäismäärä",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Rivimäärälauseke",
     // "Confirm row removal"
     confirmDelete: "Vahvista rivin poisto",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1310,8 @@ export var fiStrings = {
     minPanelCount: "Osallistumisten vähimmäismäärä",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Osallistumisten enimmäismäärä",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Osallistumismäärälauseke",
     // [Auto-translated] "Initial entry state"
     panelsState: "Alkuperäinen saapumistila",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1914,6 +1948,12 @@ export var fiStrings = {
       // [Auto-translated] "Informational"
       info: "Tiedottava"
     },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Etuosa",
+      // [Auto-translated] "Rear"
+      environment: "Takaosa"
+    },
     acceptedCategories: {
       // [Auto-translated] "Images"
       image: "Kuvia",
@@ -2509,10 +2549,14 @@ export var fiStrings = {
       keyName: "Viittaa kysymyksen nimeen, jos haluat edellyttää, että käyttäjä antaa yksilöllisen vastauksen tähän kysymykseen kussakin paneelissa.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Käynnistää vahvistuskehotteen ennen merkinnän poistamista.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Määritä lauseke, joka laskee merkintöjen määrän. Tämä lauseke ohittaa \"Alkuperäinen merkintöjen määrä\" -asetuksen ja sitä arvioidaan uudelleen aina, kun viittaavat arvot muuttuvat. Tulos on rajoitettu \"Vähimmäismäärä merkintöjä\" ja \"Suurin määrä merkintöjä\" -asetuksilla. Kun tämä lauseke on asetettu, vastaajat eivät voi lisätä tai poistaa merkintöjä manuaalisesti.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Määrittää numerot kysymyksiin, jotka on sisäkkäin dynaamisessa paneelissa."
     },
     matrixdynamic: {
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Määritä lauseke, joka laskee rivien määrän. Tämä lauseke ohittaa \"Rivimäärä\" -asetuksen ja arvioidaan uudelleen aina, kun viittaavat arvot muuttuvat. Tulos on rajoitettu \"Minimirivimäärä\" ja \"Maksimirivimäärä\" -asetuksilla. Kun tämä lauseke on asetettu, vastaajat eivät voi lisätä tai poistaa rivejä manuaalisesti.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Käynnistää vahvistuskehotteen ennen rivin poistamista.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2982,6 +3026,8 @@ export var fiStrings = {
     tabAlign: "Sarkaimen tasaus",
     // [Auto-translated] "File source type"
     sourceType: "Tiedostolähteen tyyppi",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Oletuskamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Sovita konttiin",
     // [Auto-translated] "Set value expression"
@@ -3304,10 +3350,69 @@ export var fiStrings = {
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Kohta 1" }, { value: "item2", text: "Kohta 2" }, { value: "item3", text: "Kohta 3" }],
-    columns: [{ value: "column1", text: "Sarake 1" }, { value: "column2", text: "Sarake 2" }, { value: "column3", text: "Sarake 3" }],
-    rows: [{ value: "row1", text: "Rivi 1" }, { value: "row2", text: "Rivi 2" }],
-    matrixColumns: [{ name: "column1", title: "Sarake 1" }, { name: "column2", title: "Sarake 2" }, { name: "column3", title: "Sarake 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Kohta 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Kohta 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Kohta 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Sarake 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Sarake 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Sarake 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Rivi 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Rivi 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Sarake 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Sarake 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Sarake 3"
+      }
+    ]
   }
 };
 setupLocale({ localeCode: "fi", strings: fiStrings });

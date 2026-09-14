@@ -1457,6 +1457,38 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".svc-question__adorner"), "composite-question-no-scroll.png");
   });
 
+  test("Composite question - spacing between questions", async ({ page }) => {
+    await page.evaluate(() => {
+      window["Survey"].ComponentCollection.Instance.add({
+        name: "fullname",
+        title: "Full Name",
+        elementsJSON: [
+          {
+            type: "text",
+            name: "firstName",
+            title: "First Name",
+            isRequired: true,
+            minWidth: 200
+          },
+          {
+            type: "text",
+            name: "lastName",
+            title: "Last Name",
+            isRequired: true,
+            minWidth: 200,
+          }
+        ],
+      });
+    });
+    await page.setViewportSize({ width: 1151, height: 900 });
+    await setJSON(page, {
+      showQuestionNumbers: true,
+      "pages": [{ "name": "page1", "elements": [{ "type": "fullname", "name": "question1" }] }]
+    });
+    await page.locator(".svc-question__content--fullname").hover();
+    await compareScreenshot(page, page.locator(".svc-question__adorner"), "composite-question-spacing-between-questions.png");
+  });
+
   test("Check adorner actions responsivity after convert", async ({ page }) => {
     await page.setViewportSize({ width: 1432, height: 900 });
     await setJSON(page, {

@@ -37,6 +37,8 @@ npm install survey-creator-vue
 
 ## Configure Styles
 
+### Add Themes
+
 Import Survey Creator and SurveyJS Form Library stylesheets in the Vue 3 component that will render Survey Creator:
 
 ```html
@@ -57,6 +59,32 @@ This configuration applies the Default Light theme. Survey Creator also supports
 In addition, Survey Creator allows users to switch between UI themes and customize them at runtime. To enable runtime UI customization, refer to the following help topic:
 
 [Runtime UI Theming](https://surveyjs.io/survey-creator/documentation/runtime-theme-customization (linkStyle))
+
+### Add Fonts
+
+Starting with SurveyJS v3.1.0, fonts are no longer included in SurveyJS packages. Load Open Sans separately to preserve the default appearance, unless your application already does so. If you use a custom font, load it instead. Otherwise, the browser uses a fallback font, which may affect spacing and layout.
+
+To add Open Sans using [Fontsource](https://fontsource.org/docs/getting-started/install), run the following command:
+
+```sh
+npm install @fontsource/open-sans
+```
+
+The following example imports font weights 400, 600, and 700 alongside the component style sheets. You can also place the font imports in your application's entry file or root layout to load them once for all SurveyJS components.
+
+```html
+<script setup lang="ts">
+import "@fontsource/open-sans/400.css";
+import "@fontsource/open-sans/600.css";
+import "@fontsource/open-sans/700.css";
+import "survey-core/survey-core.css";
+import "survey-creator-core/survey-creator-core.css";
+</script>
+
+<template>
+  <!-- ... -->
+</template>
+```
 
 ## Configure Survey Creator
 
@@ -96,6 +124,9 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 ```html
 <script setup lang="ts">
+import "@fontsource/open-sans/400.css";
+import "@fontsource/open-sans/600.css";
+import "@fontsource/open-sans/700.css";
 import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 
@@ -151,6 +182,9 @@ createApp(App)
 ```html
 <!-- components/SurveyCreator.vue -->
 <script setup lang="ts">
+import "@fontsource/open-sans/400.css";
+import "@fontsource/open-sans/600.css";
+import "@fontsource/open-sans/700.css";
 import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 
@@ -293,6 +327,9 @@ creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defa
 ```html
 <!-- components/SurveyCreator.vue -->
 <script setup lang="ts">
+import "@fontsource/open-sans/400.css";
+import "@fontsource/open-sans/600.css";
+import "@fontsource/open-sans/700.css";
 import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 
@@ -406,6 +443,9 @@ To view the application, run `npm run dev` in a command line and open [http://lo
 ```html
 <!-- components/SurveyCreator.vue -->
 <script setup lang="ts">
+import "@fontsource/open-sans/400.css";
+import "@fontsource/open-sans/600.css";
+import "@fontsource/open-sans/700.css";
 import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 

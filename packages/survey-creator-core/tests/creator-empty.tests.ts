@@ -218,7 +218,6 @@ test("onQuestionAdded fires correctly when drag drop into new page", () => {
   newPage.addElement(new QuestionTextModel("q1"));
   expect(cnt).toBe(1);
   expect(json).toStrictEqual({
-    "headerView": "advanced",
     "pages": [
       {
         "name": "page1",

@@ -23,6 +23,15 @@ export class TranslationTabComponent extends BaseAngular<TranslationBase> {
   @ViewChild("targetScrollContainer") set targetScrollContainer(ref: ElementRef<HTMLElement> | undefined) {
     this.sideBySideModel?.setTargetScrollElement(ref ? ref.nativeElement : undefined as any);
   }
+  // The template is rendered into an embedded view, and the model-driven updates run change
+  // detection on that view alone (see BaseAngular.detectChanges) - the component's own view,
+  // which owns the @ViewChild queries above, would be refreshed only once, before a target
+  // language is selected and its pane exists. Refreshing it after the embedded view keeps
+  // the queries - and the pane registration - up to date.
+  protected override detectChanges(): void {
+    super.detectChanges();
+    this.changeDetectorRef.detectChanges();
+  }
   // The strings-grid model: the tab model itself in the default mode and in the side-by-side grid view.
   public get stringsModel(): TranslationBase | undefined {
     return this.sideBySideModel ? undefined : this.model;

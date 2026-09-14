@@ -36,7 +36,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   protected updateMatrixRowActions(model: SurveyModel, matrix: QuestionMatrixDynamicModel) {
     matrix.renderedTable.rows.forEach(r => {
       if (!r.row) return;
-      const iconActions = r.cells[1]?.item?.value.actions;
+      const iconActions = r.cells[0]?.item?.value.actions;
       this.updateRowActions(matrix, r.row as MatrixDynamicRowModel, iconActions);
       const actions = r.cells[r.cells.length - 1].item?.value.actions;
       this.updateRowActions(matrix, r.row as MatrixDynamicRowModel, actions);
