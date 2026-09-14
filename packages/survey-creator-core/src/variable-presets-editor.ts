@@ -6,6 +6,7 @@ import { BorderlessLightPanelless } from "survey-core/themes";
 import { SurveyCreatorModel } from "./creator-base";
 import { VariablePresetsManager } from "./variable-presets";
 import { getLocString } from "./editorLocalization";
+import "./variable-presets-editor.scss";
 
 // The Edit dialog behind the Preview toolbar button (issue #7982): one survey with two pages - the
 // preset list, and the definition itself as the form for one preset - shown through
