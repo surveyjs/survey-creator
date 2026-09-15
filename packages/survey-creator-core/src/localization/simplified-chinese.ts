@@ -749,7 +749,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Survey description"
       description: "调查说明",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "将调查设为只读"
+      readOnly: "将调查设为只读",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "地区赛制"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "在调查结果中保存掩码值"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "地区",
+      // [Auto-translated] "Date pattern"
+      datePattern: "日期模式",
+      // [Auto-translated] "Time pattern"
+      timePattern: "时间模式",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "十进制分隔符",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "千分音符",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "货币符号",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "货币模式"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "价值模式"
@@ -824,6 +842,12 @@ export var simplifiedChineseTranslation = {
       min: "最小值",
       // [Auto-translated] "Maximum value"
       max: "最大值"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "货币符号",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "货币模式"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "选中时清除其他",
@@ -1607,6 +1631,8 @@ export var simplifiedChineseTranslation = {
       question: "问题",
       // [Auto-translated] "Pages"
       pages: "页面",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "地区节目格式",
       // "Quiz Mode"
       timer: "问卷计时器",
       // [Auto-translated] "Calculated Values"
@@ -2392,6 +2418,139 @@ export var simplifiedChineseTranslation = {
       container: "与容器相同"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "阿拉伯语",
+    // [Auto-translated] "Bulgarian"
+    bg: "保加利亚语",
+    // [Auto-translated] "Catalan"
+    ca: "加泰罗尼亚语",
+    // [Auto-translated] "Czech"
+    cs: "捷克语",
+    // [Auto-translated] "Welsh"
+    cy: "威尔士语",
+    // [Auto-translated] "Danish"
+    da: "丹麦语",
+    // [Auto-translated] "German"
+    de: "德语",
+    // [Auto-translated] "Greek"
+    el: "希腊语",
+    // [Auto-translated] "English"
+    en: "英语",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "英语（澳大利亚）",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "英语（加拿大）",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "英语（英国）",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "英格兰（爱尔兰）",
+    // [Auto-translated] "English (India)"
+    "en-IN": "英语（印度）",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "英语（新西兰）",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "英语（南非）",
+    // [Auto-translated] "Spanish"
+    es: "西班牙语",
+    // [Auto-translated] "Estonian"
+    et: "爱沙尼亚语",
+    // [Auto-translated] "Basque"
+    eu: "巴士克语",
+    // [Auto-translated] "Persian"
+    fa: "波斯语",
+    // [Auto-translated] "Finnish"
+    fi: "芬兰语",
+    // [Auto-translated] "Filipino"
+    fil: "菲律宾语",
+    // [Auto-translated] "French"
+    fr: "法语",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "法语（加拿大）",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "法语（瑞士）",
+    // [Auto-translated] "Hebrew"
+    he: "希伯来语",
+    // [Auto-translated] "Hindi"
+    hi: "印地语",
+    // [Auto-translated] "Croatian"
+    hr: "克罗地亚语",
+    // [Auto-translated] "Haitian Creole"
+    ht: "海地克里奥尔语",
+    // [Auto-translated] "Hungarian"
+    hu: "匈牙利语",
+    // [Auto-translated] "Indonesian"
+    id: "印尼",
+    // [Auto-translated] "Icelandic"
+    is: "冰岛语",
+    // [Auto-translated] "Italian"
+    it: "意大利语",
+    // [Auto-translated] "Japanese"
+    ja: "日本",
+    // [Auto-translated] "Georgian"
+    ka: "乔治亚语",
+    // [Auto-translated] "Kazakh"
+    kk: "哈萨克语",
+    // [Auto-translated] "Korean"
+    ko: "朝鲜语",
+    // [Auto-translated] "Lithuanian"
+    lt: "立陶宛语",
+    // [Auto-translated] "Latvian"
+    lv: "拉脱维亚语",
+    // [Auto-translated] "Macedonian"
+    mk: "马其顿语",
+    // [Auto-translated] "Burmese"
+    mm: "缅甸语",
+    // [Auto-translated] "Malay"
+    ms: "马来语",
+    // [Auto-translated] "Dutch"
+    nl: "荷兰语",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "荷兰语（比利时）",
+    // [Auto-translated] "Norwegian"
+    no: "挪威语",
+    // [Auto-translated] "Polish"
+    pl: "波兰语",
+    // [Auto-translated] "Portuguese"
+    pt: "葡萄牙语",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "葡萄牙（巴西）",
+    // [Auto-translated] "Romanian"
+    ro: "罗马尼亚语",
+    // [Auto-translated] "Russian"
+    ru: "俄语",
+    // [Auto-translated] "Slovak"
+    sk: "斯洛伐克语",
+    // [Auto-translated] "Slovenian"
+    sl: "斯洛文尼亚语",
+    // [Auto-translated] "Serbian"
+    sr: "塞尔维亚语",
+    // [Auto-translated] "Swedish"
+    sv: "瑞典语",
+    // [Auto-translated] "Swahili"
+    sw: "斯瓦希里语",
+    // [Auto-translated] "Telugu"
+    tel: "泰卢固语",
+    // [Auto-translated] "Tajik"
+    tg: "塔吉克",
+    // [Auto-translated] "Thai"
+    th: "泰语",
+    // [Auto-translated] "Turkish"
+    tr: "土耳其语",
+    // [Auto-translated] "Ukrainian"
+    uk: "乌克兰语",
+    // [Auto-translated] "Urdu"
+    ur: "乌尔都语",
+    // [Auto-translated] "Vietnamese"
+    vi: "越南语",
+    // [Auto-translated] "Chinese"
+    zh: "中文",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "中文（简体）",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "中文（繁体）"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export var simplifiedChineseTranslation = {
     visibletrigger: "修改可见性"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "和调查语言一样"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "例如：+1（999）-999-99-99"
@@ -2978,6 +3141,22 @@ export var simplifiedChineseTranslation = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "选择是否要在调查结果中存储带有应用掩码的问题值。"
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "该区域的格式适用于日期时间、数字和货币输入掩码。如未指定，则使用调查语言。",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "覆盖输入掩码中使用的区域日期格式。模式可包含分隔符和以下占位符：<br>'m' - 月份编号。<br>'mm' - 月份数字，个位数值前置零。<br>'d' - 月份日期。<br>'dd' - 月份日期，个位数值前置零。<br>'yy' - 年份的最后两位数字。<br>'yyyy' - 四位数年份。",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "覆盖输入掩码中使用的区域时间格式。模式可包含分隔符和以下占位符：<br>'H' - 24小时制的小时。<br>'HH' - 24小时制小时，个位数值前置零。<br>'h' - 12小时制小时。<br>'hh' - 12小时制小时，个位数值前置零。<br>'MM' - 分钟。<br>'ss' - 秒。<br>'TT' - 大写12小时制（AM/PM）。<br>'TT' - 12小时制（小写）时钟（am/pm）。",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "覆盖该区域用于在输入掩码中区分分数部分与整数部分的符号。",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "覆盖该区域用于将大量数字数字分成三组的符号，在输入掩码中。",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "覆盖输入掩码中使用的区域货币符号或代码。",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "覆盖输入掩码中使用的区域货币模式。模式可以包含以下占位符：<br>'@' - 货币符号或代码。<br>'#' - 数字。<br>'-' - 负号的位置（如果省略，负号置于开头）。"
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "该模式可以包含字符串文字和以下占位符： '9' - 表示数字;“a” - 表示大写或小写字母;'#' - 表示数字或大写或小写字母。使用反斜杠“\\”转义字符。"
@@ -2993,6 +3172,12 @@ export var simplifiedChineseTranslation = {
       thousandsSeparator: "用于将大数的数字分成三组的符号。",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "限制显示数字的小数点后要保留的位数。"
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "一个货币符号或代码，显示为该数值。默认使用该区域的符号。清除该属性以显示任何符号。",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "指定数字、货币符号和负号的位置。该模式可以包含以下占位符：<br>'@' - 货币符号或代码。<br>'#' - 数字。<br>'-' - 负号在负值中的位置（如果省略，负号放在开头）。"
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

@@ -749,7 +749,9 @@ export var htStrings = {
       // "Survey description"
       description: "Deskripsyon sondaj la",
       // "Make the survey read-only"
-      readOnly: "Fè sondaj la lekti sèlman"
+      readOnly: "Fè sondaj la lekti sèlman",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Fòma rejyonal yo"
     },
     page: {
       // "Page name"
@@ -801,6 +803,22 @@ export var htStrings = {
       // "Save masked value in survey results"
       saveMaskedValue: "Sove valè maske nan rezilta sondaj yo"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Rejyon an",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Modèl dat",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Modèl tan",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Separateur desimal",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Dè milye de separateur",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "senbòl lajan",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Modèl lajan"
+    },
     patternmask: {
       // "Value pattern"
       pattern: "Modèl valè"
@@ -824,6 +842,12 @@ export var htStrings = {
       min: "Valè minimòm",
       // "Maximum value"
       max: "Valè maksimòm"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "senbòl lajan",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Modèl lajan"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Klè lòt moun lè yo chwazi yo",
@@ -1607,6 +1631,8 @@ export var htStrings = {
       question: "Anviwònman kesyon yo",
       // "Pages"
       pages: "Paj",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Fòma Rejyonal yo",
       // "Quiz Mode"
       timer: "Mòd egzamen",
       // "Calculated Values"
@@ -2392,6 +2418,139 @@ export var htStrings = {
       container: "Menm jan ak veso"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "arab",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bilgari",
+    // [Auto-translated] "Catalan"
+    ca: "Catalan",
+    // [Auto-translated] "Czech"
+    cs: "Tchekoslovaki",
+    // [Auto-translated] "Welsh"
+    cy: "Welsh",
+    // [Auto-translated] "Danish"
+    da: "Danwa",
+    // [Auto-translated] "German"
+    de: "Alman",
+    // [Auto-translated] "Greek"
+    el: "Grèk",
+    // [Auto-translated] "English"
+    en: "Angle",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Angle (Ostrali)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Angle (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Angle (Wayòm Ini)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Angle (Iland)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Angle (peyi Zend)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Angle (New Zeland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Angle (Lafrik di sid)",
+    // [Auto-translated] "Spanish"
+    es: "Panyòl",
+    // [Auto-translated] "Estonian"
+    et: "Estonyen",
+    // [Auto-translated] "Basque"
+    eu: "Basque",
+    // [Auto-translated] "Persian"
+    fa: "Pèsik",
+    // [Auto-translated] "Finnish"
+    fi: "Finnish",
+    // [Auto-translated] "Filipino"
+    fil: "Filipin",
+    // [Auto-translated] "French"
+    fr: "Franse",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Franse (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Franse ( Swis )",
+    // [Auto-translated] "Hebrew"
+    he: "Ebre",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Kwoasyen",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Kreyòl Ayisyen",
+    // [Auto-translated] "Hungarian"
+    hu: "Ongwa",
+    // [Auto-translated] "Indonesian"
+    id: "Endonezi",
+    // [Auto-translated] "Icelandic"
+    is: "Islann",
+    // [Auto-translated] "Italian"
+    it: "Italyen",
+    // [Auto-translated] "Japanese"
+    ja: "Japonè",
+    // [Auto-translated] "Georgian"
+    ka: "Jòjyen",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazak",
+    // [Auto-translated] "Korean"
+    ko: "Koreyen",
+    // [Auto-translated] "Lithuanian"
+    lt: "Lityanyen",
+    // [Auto-translated] "Latvian"
+    lv: "Leton",
+    // [Auto-translated] "Macedonian"
+    mk: "Masedwan",
+    // [Auto-translated] "Burmese"
+    mm: "Birman",
+    // [Auto-translated] "Malay"
+    ms: "Malay",
+    // [Auto-translated] "Dutch"
+    nl: "Olandè",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Olandè ( Bèljik )",
+    // [Auto-translated] "Norwegian"
+    no: "Nòvejyen",
+    // [Auto-translated] "Polish"
+    pl: "Polonè",
+    // [Auto-translated] "Portuguese"
+    pt: "Pòtigè",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Pòtigè ( Brezil )",
+    // [Auto-translated] "Romanian"
+    ro: "Romanian",
+    // [Auto-translated] "Russian"
+    ru: "Ris",
+    // [Auto-translated] "Slovak"
+    sk: "Slovak",
+    // [Auto-translated] "Slovenian"
+    sl: "Sloveni",
+    // [Auto-translated] "Serbian"
+    sr: "Sèb",
+    // [Auto-translated] "Swedish"
+    sv: "Swedish",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tajik",
+    // [Auto-translated] "Thai"
+    th: "Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Tik",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ikrenyen",
+    // [Auto-translated] "Urdu"
+    ur: "Oudou",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vyetnamyen",
+    // [Auto-translated] "Chinese"
+    zh: "Chinwa",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Chinwa (Senplifye)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Chinwa (tradisyonèl)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export var htStrings = {
     visibletrigger: "chanje vizibilite (depreche)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Menm jan ak lang sondaj"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Egz.: +1(999)-999-99-99"
@@ -2978,6 +3141,22 @@ export var htStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Chwazi si ou vle estoke valè kesyon an ak yon mask aplike nan rezilta sondaj yo."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Yon rejyon ki gen fòma aplike nan dat-lè, nimerik ak mask opinyon lajan. Si se pa espesifye, yo itilize lang sondaj la.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Ranplase fòma dat rejyon an itilize nan mask opinyon. Modèl la ka gen karaktè séparateur ak placeholder sa yo: <br>'m' - Nimewo mwa.<br> 'mm' - Nimewo mwa, ak yon zewo ki mennen pou yon sèl valè chif. <br>'d' - Jou nan mwa a<br>. 'dd' - Jou nan mwa a, ak yon zewo dirijan pou yon sèl valè chif. <br>'yyy' - De dènye chif nan ane a. <br>'yyyy' - Kat chif ane",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Pase fòma tan rejyon an itilize nan mask opinyon Modèl la ka gen karaktè séparateur ak placeholder sa yo: <br>'H' - èdtan nan fòma 24 èdtan.<br> 'HH' - èdtan nan fòma 24 èdtan, ak yon zewo dirijan pou valè chif sèl. <br>'h' - èdtan nan fòma 12 èdtan. <br>'hh' - èdtan fòma 12 èdtan, ak yon zèwo dirijan pou valè chif sèl. <br>'MM' - Minit <br>'ss' - Segonn <br>'TT' - 12 èdtan revèy peryòd nan majiskil (AM / PM) <br>'TT' - 12 èdtan revèy peryòd nan miniskil (AM / PM)",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Ranplase senbòl rejyon an itilize separe pati fraksyon an soti nan pati a antye nan yon nimewo montre nan mask opinyon.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Ranplase senbòl rejyon an itilize pou separe chif yo nan yon gwo kantite nan gwoup twa nan mask opinyon.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Ranplase senbòl lajan rejyon an oswa kòd yo itilize nan mask opinyon.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Ranplase modèl lajan rejyon an itilize nan mask opinyon. Modèl la ka gen ladan placeholder sa yo: <br>'@' - Senbòl lajan oswa kòd.<br> '#' - Nimewo <br>'-' - Pozisyon nan siy la mwens nan valè negatif (si omis, se siy la mwens mete nan kòmansman an)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Modèl la ka gen ladan literèl fisèl ak espas sa yo: `9` - pou yon chif; `a` - pou yon lèt majiskil oswa miniskil; `#` - pou yon chif oswa yon lèt majiskil oswa miniskil. Sèvi ak backslash `\\` pou sove yon karaktè."
@@ -2993,6 +3172,12 @@ export var htStrings = {
       thousandsSeparator: "Yon senbòl yo itilize pou separe chif yon gwo kantite an gwoup twa.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Limite konbyen chif yo kenbe apre pwen desimal la pou yon nimewo ki parèt."
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Yon senbòl lajan oswa kòd ki montre ak valè a. Senbòl rejyon an itilize pa default. Klè pwopriyete sa a pou montre okenn senbòl.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Espesifye pozisyon yo nan nimewo a, senbòl lajan, ak siy mwens. Modèl la ka gen placeholder sa yo: <br>'@' - Senbòl lajan oswa kòd.<br> '#' - Nimewo <br>'-' - Pozisyon nan siy la mwens nan valè negatif (si omis, se siy la mwens mete nan kòmansman an)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

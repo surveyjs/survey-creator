@@ -749,7 +749,9 @@ export var persianStrings = {
       // [Auto-translated] "Survey description"
       description: "توضیحات نظرسنجی",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "نظرسنجی را فقط خواندنی کنید"
+      readOnly: "نظرسنجی را فقط خواندنی کنید",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "قالب های منطقه ای"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var persianStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "ذخیره مقدار ماسک در نتایج نظرسنجی"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "منطقه",
+      // [Auto-translated] "Date pattern"
+      datePattern: "الگوی تاریخ",
+      // [Auto-translated] "Time pattern"
+      timePattern: "الگوی زمانی",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "جداکننده ده دهی",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "جداکننده هزاران",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "نماد ارز",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "الگوی ارز"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "الگوی ارزش"
@@ -824,6 +842,12 @@ export var persianStrings = {
       min: "حداقل مقدار",
       // [Auto-translated] "Maximum value"
       max: "بیشینه مقدار"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "نماد ارز",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "الگوی ارز"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "هنگام انتخاب دیگران را پاک کنید",
@@ -1607,6 +1631,8 @@ export var persianStrings = {
       question: "سوال",
       // "Pages"
       pages: "صفحات",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "فرمت های منطقه ای",
       // "Quiz Mode"
       timer: "زمان سنج/کوئیز",
       // "Calculated Values"
@@ -2392,6 +2418,139 @@ export var persianStrings = {
       container: "همانند کانتینر"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "عربی",
+    // [Auto-translated] "Bulgarian"
+    bg: "بلغاری",
+    // [Auto-translated] "Catalan"
+    ca: "کاتالان",
+    // [Auto-translated] "Czech"
+    cs: "چکی",
+    // [Auto-translated] "Welsh"
+    cy: "ولزی",
+    // [Auto-translated] "Danish"
+    da: "دانمارکی",
+    // [Auto-translated] "German"
+    de: "آلمانی",
+    // [Auto-translated] "Greek"
+    el: "یونانی",
+    // [Auto-translated] "English"
+    en: "انگلیسی",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "انگلیسی (استرالیا)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "انگلیسی (کانادا)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "انگلیسی (بریتانیا)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "انگلیسی (ایرلند)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "انگلیسی (هند)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "انگلیسی (نیوزیلند)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "انگلیسی (آفریقای جنوبی)",
+    // [Auto-translated] "Spanish"
+    es: "اسپانیایی",
+    // [Auto-translated] "Estonian"
+    et: "استونیایی",
+    // [Auto-translated] "Basque"
+    eu: "باسک",
+    // [Auto-translated] "Persian"
+    fa: "فارسی",
+    // [Auto-translated] "Finnish"
+    fi: "فنلاندی",
+    // [Auto-translated] "Filipino"
+    fil: "فیلیپینی",
+    // [Auto-translated] "French"
+    fr: "فرانسوی",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "فرانسوی (کانادا)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "فرانسوی (سوئیس)",
+    // [Auto-translated] "Hebrew"
+    he: "عبری",
+    // [Auto-translated] "Hindi"
+    hi: "هندی",
+    // [Auto-translated] "Croatian"
+    hr: "کرواتی",
+    // [Auto-translated] "Haitian Creole"
+    ht: "کریول هائیتی",
+    // [Auto-translated] "Hungarian"
+    hu: "مجاری",
+    // [Auto-translated] "Indonesian"
+    id: "اندونزیایی",
+    // [Auto-translated] "Icelandic"
+    is: "ایسلندی",
+    // [Auto-translated] "Italian"
+    it: "ایتالیایی",
+    // [Auto-translated] "Japanese"
+    ja: "ژاپنی",
+    // [Auto-translated] "Georgian"
+    ka: "گرجی",
+    // [Auto-translated] "Kazakh"
+    kk: "قزاقستان",
+    // [Auto-translated] "Korean"
+    ko: "کره ای",
+    // [Auto-translated] "Lithuanian"
+    lt: "لیتوانیایی",
+    // [Auto-translated] "Latvian"
+    lv: "لتونیایی",
+    // [Auto-translated] "Macedonian"
+    mk: "مقدونی",
+    // [Auto-translated] "Burmese"
+    mm: "برمه ای ها",
+    // [Auto-translated] "Malay"
+    ms: "مالایی",
+    // [Auto-translated] "Dutch"
+    nl: "هلندی",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "هلندی (بلژیک)",
+    // [Auto-translated] "Norwegian"
+    no: "نروژی",
+    // [Auto-translated] "Polish"
+    pl: "لهستانی",
+    // [Auto-translated] "Portuguese"
+    pt: "پرتغالی",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "پرتغالی (برزیل)",
+    // [Auto-translated] "Romanian"
+    ro: "رومانیایی",
+    // [Auto-translated] "Russian"
+    ru: "روسی",
+    // [Auto-translated] "Slovak"
+    sk: "اسلواکی",
+    // [Auto-translated] "Slovenian"
+    sl: "اسلوونیایی",
+    // [Auto-translated] "Serbian"
+    sr: "صربی",
+    // [Auto-translated] "Swedish"
+    sv: "سوئدی",
+    // [Auto-translated] "Swahili"
+    sw: "سواحیلی",
+    // [Auto-translated] "Telugu"
+    tel: "تلگو",
+    // [Auto-translated] "Tajik"
+    tg: "تاجیکی",
+    // [Auto-translated] "Thai"
+    th: "تایلندی",
+    // [Auto-translated] "Turkish"
+    tr: "ترکی",
+    // [Auto-translated] "Ukrainian"
+    uk: "اوکراینی",
+    // [Auto-translated] "Urdu"
+    ur: "اردو",
+    // [Auto-translated] "Vietnamese"
+    vi: "ویتنامی ها",
+    // [Auto-translated] "Chinese"
+    zh: "چینی",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "چینی (ساده شده)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "چینی (سنتی)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export var persianStrings = {
     visibletrigger: "تغییر وضعیت دیده شدن"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "همانند زبان نظرسنجی"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "شماره تماس: +1 (999)-999-99-99"
@@ -2978,6 +3141,22 @@ export var persianStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "انتخاب کنید که ایا می خواهید مقدار سؤال را با یک ماسک کاربردی در نتایج نظرسنجی ذخیره کنید."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "منطقه ای که قالب های آن برای ماسک های ورودی تاریخ-زمان، عددی و ارزی اعمال می شود. اگر مشخص نشده باشد، زبان نظرسنجی استفاده می شود.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "فرمت تاریخ منطقه که در ماسک های ورودی استفاده می شود را لغو می کند. الگو می تواند شامل کاراکترهای جداکننده و جایگزین های زیر باشد: <br>'m' - شماره ماه.<br> 'mm' - شماره ماه، با صفر ابتدایی برای مقادیر تک رقمی. <br>'d' - روز ماه. <br>'dd' - روز ماه، با صفر ابتدایی برای مقادیر تک رقمی. <br>'yy' - دو رقم آخر سال. <br>'yyyy' - سال چهار رقمی.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "فرمت زمانی منطقه که در ماسک های ورودی استفاده می شود را لغو می کند. الگو می تواند شامل کاراکترهای جداکننده و جایگزین های زیر باشد: <br>'H' - ساعت ها در قالب 24 ساعته.<br> 'HH' - ساعت ها در قالب 24 ساعته، با صفر ابتدایی برای مقادیر تک رقمی. <br>'h' - ساعت ها در قالب 12 ساعته. <br>'hh' - ساعت ها در قالب 12 ساعت، با صفر ابتدایی برای مقادیر تک رقمی. <br>'MM' - دقیقه. <br>'ss' - ثانیه. <br>'TT' - دوره ساعت ۱۲ ساعته در حروف <br>بزرگ (AM/PM). 'tt' - دوره ساعت ۱۲ ساعته در حروف کوچک (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "نمادی را که ناحیه برای جدا کردن بخش کسری از بخش صحیح عدد نمایش داده شده در ماسک های ورودی استفاده می کند، جایگزین می کند.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "نمادی را که ناحیه برای جدا کردن ارقام عدد بزرگ به گروه های سه تایی در ماسک های ورودی استفاده می کند، جایگزین می کند.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "نماد یا کد ارزی منطقه که در ماسک های ورودی استفاده می شود، جایگزین می شود.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "الگوی ارز منطقه که در ماسک های ورودی استفاده می شود را لغو می کند. این الگو می تواند شامل جایگزین های زیر باشد: <br>'@' - نماد یا کد ارز.<br> '#' - شماره. <br>'-' - موقعیت علامت منفی در مقادیر منفی (اگر حذف شود، علامت منفی در ابتدا قرار می گیرد)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "الگو می تواند شامل literals رشته و متغیرهای زیر باشد: '9' - برای یک رقم؛ 'a' - برای یک حرف بزرگ یا کوچک؛ \"#\" - برای یک رقم یا یک حرف بزرگ یا کوچک. استفاده از backslash '\\' برای فرار از یک شخصیت."
@@ -2993,6 +3172,12 @@ export var persianStrings = {
       thousandsSeparator: "نمادی که برای جدا کردن ارقام یک عدد بزرگ به گروه های سه نفره استفاده می شود.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "محدود کردن تعداد ارقام برای حفظ پس از نقطه اعشار برای یک عدد نمایش داده شده."
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "یک نماد یا کد ارز که همراه با مقدار نمایش داده می شود. نماد منطقه به طور پیش فرض استفاده می شود. این ویژگی را پاک کنید تا هیچ نمادی نمایش داده نشود.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "موقعیت عدد، نماد پول و علامت منفی را مشخص می کند. الگو می تواند شامل جایگزین های زیر باشد: <br>'@' - نماد یا کد ارز.<br> '#' - شماره. <br>'-' - موقعیت علامت منفی در مقادیر منفی (اگر حذف شود، علامت منفی در ابتدای علامت قرار می گیرد)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

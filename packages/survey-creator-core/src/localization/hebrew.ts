@@ -749,7 +749,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Survey description"
       description: "תיאור הסקר",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "הפוך את הסקר לקריאה בלבד"
+      readOnly: "הפוך את הסקר לקריאה בלבד",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "פורמטים אזוריים"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var hebrewStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "שמירת ערך מוסווה בתוצאות הסקר"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "אזור",
+      // [Auto-translated] "Date pattern"
+      datePattern: "דפוס תאריך",
+      // [Auto-translated] "Time pattern"
+      timePattern: "תבנית זמן",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "מפריד עשרוני",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "מפריד אלפים",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "סמל מטבע",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "דפוס המטבע"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "תבנית ערך"
@@ -824,6 +842,12 @@ export var hebrewStrings = {
       min: "ערך מינימלי",
       // [Auto-translated] "Maximum value"
       max: "ערך מרבי"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "סמל מטבע",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "דפוס המטבע"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "נקה אחרים כאשר בוחרים באפשרות זו",
@@ -1607,6 +1631,8 @@ export var hebrewStrings = {
       question: "שאלה",
       // "Pages"
       pages: "עמודים",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "פורמטים אזוריים",
       // "Quiz Mode"
       timer: "שעון/חידון",
       // "Calculated Values"
@@ -2392,6 +2418,139 @@ export var hebrewStrings = {
       container: "זהה למיכל"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "ערבית",
+    // [Auto-translated] "Bulgarian"
+    bg: "בולגרית",
+    // [Auto-translated] "Catalan"
+    ca: "קטלאנית",
+    // [Auto-translated] "Czech"
+    cs: "צ'כית",
+    // [Auto-translated] "Welsh"
+    cy: "וולשית",
+    // [Auto-translated] "Danish"
+    da: "דנית",
+    // [Auto-translated] "German"
+    de: "גרמנית",
+    // [Auto-translated] "Greek"
+    el: "יוונית",
+    // [Auto-translated] "English"
+    en: "אנגלית",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "אנגלית (אוסטרליה)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "אנגלית (קנדה)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "אנגלית (הממלכה המאוחדת)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "אנגלית (אירלנד)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "אנגלית (הודו)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "אנגלית (ניו זילנד)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "אנגלית (דרום אפריקה)",
+    // [Auto-translated] "Spanish"
+    es: "ספרדית",
+    // [Auto-translated] "Estonian"
+    et: "אסטונית",
+    // [Auto-translated] "Basque"
+    eu: "בסקית",
+    // [Auto-translated] "Persian"
+    fa: "פרסית",
+    // [Auto-translated] "Finnish"
+    fi: "פינית",
+    // [Auto-translated] "Filipino"
+    fil: "פיליפינית",
+    // [Auto-translated] "French"
+    fr: "צרפתית",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "צרפתית (קנדה)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "צרפתית (שווייץ)",
+    // [Auto-translated] "Hebrew"
+    he: "עברית",
+    // [Auto-translated] "Hindi"
+    hi: "הינדי",
+    // [Auto-translated] "Croatian"
+    hr: "קרואטית",
+    // [Auto-translated] "Haitian Creole"
+    ht: "קריאולית האיטית",
+    // [Auto-translated] "Hungarian"
+    hu: "הונגרית",
+    // [Auto-translated] "Indonesian"
+    id: "אינדונזי",
+    // [Auto-translated] "Icelandic"
+    is: "איסלנדית",
+    // [Auto-translated] "Italian"
+    it: "איטלקית",
+    // [Auto-translated] "Japanese"
+    ja: "יפנית",
+    // [Auto-translated] "Georgian"
+    ka: "גאורגית",
+    // [Auto-translated] "Kazakh"
+    kk: "קזחית",
+    // [Auto-translated] "Korean"
+    ko: "קוריאנית",
+    // [Auto-translated] "Lithuanian"
+    lt: "ליטאית",
+    // [Auto-translated] "Latvian"
+    lv: "לטבית",
+    // [Auto-translated] "Macedonian"
+    mk: "מקדוני",
+    // [Auto-translated] "Burmese"
+    mm: "בורמזית",
+    // [Auto-translated] "Malay"
+    ms: "מלאית",
+    // [Auto-translated] "Dutch"
+    nl: "הולנדי",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "הולנדית (בלגיה)",
+    // [Auto-translated] "Norwegian"
+    no: "נורווגית",
+    // [Auto-translated] "Polish"
+    pl: "פולנית",
+    // [Auto-translated] "Portuguese"
+    pt: "פורטוגזית",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "פורטוגזית (ברזיל)",
+    // [Auto-translated] "Romanian"
+    ro: "רומני",
+    // [Auto-translated] "Russian"
+    ru: "רוסית",
+    // [Auto-translated] "Slovak"
+    sk: "סלובקית",
+    // [Auto-translated] "Slovenian"
+    sl: "סלובנית",
+    // [Auto-translated] "Serbian"
+    sr: "סרבי",
+    // [Auto-translated] "Swedish"
+    sv: "שוודית",
+    // [Auto-translated] "Swahili"
+    sw: "סווהילית",
+    // [Auto-translated] "Telugu"
+    tel: "טלוגו",
+    // [Auto-translated] "Tajik"
+    tg: "טג'יקית",
+    // [Auto-translated] "Thai"
+    th: "תאילנדי",
+    // [Auto-translated] "Turkish"
+    tr: "טורקית",
+    // [Auto-translated] "Ukrainian"
+    uk: "אוקראינית",
+    // [Auto-translated] "Urdu"
+    ur: "אורדו",
+    // [Auto-translated] "Vietnamese"
+    vi: "וייטנאמים",
+    // [Auto-translated] "Chinese"
+    zh: "סינית",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "סינית (מפושטת)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "סינית (מסורתית)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export var hebrewStrings = {
     visibletrigger: "שנה נראות (לא מומלץ)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "אותו דבר כמו שפת הסקר"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "לדוגמה: +1(999)-999-99-99"
@@ -2978,6 +3141,22 @@ export var hebrewStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "בחר אם ברצונך לאחסן את ערך השאלה עם מסיכה שהוחלה בתוצאות הסקר."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "אזור שהפורמטים שלו חלים על מסכות קלט של זמן-תאריך, מספרי ומטבע. אם לא צוין, משתמשים בשפת הסקר.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "מחליף את פורמט התאריך של האזור המשמש במסכות קלט. התבנית יכולה להכיל תווי מפריד ואת המשאבים הבאים: <br>'m' - מספר חודש.<br> 'mm' - מספר חודש, עם אפס מוביל לערכים חד-ספרתיים. <br>'d' - יום החודש. <br>'dd' - יום החודש, עם אפס מוביל לערכים חד-ספרתיים. <br>'yy' - שתי הספרות האחרונות של השנה. <br>'yyyy' - שנה בת ארבע ספרות.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "מחליף את פורמט הזמן של האזור המשמש במסכות קלט. התבנית יכולה להכיל תווי מפריד ואת המקומות הבאים: <br>'H' - שעות בפורמט 24 שעות.<br> 'HH' - שעות בפורמט 24 שעות, עם אפס מוביל לערכים חד-ספרתיים. <br>'h' - שעות בפורמט של 12 שעות. <br>'hh' - שעות בפורמט של 12 שעות, עם אפס מוביל לערכים חד-ספרתיים. <br>'MM' - דקות. <br>'ss' - שניות. <br>'TT' - תקופת שעון של 12 שעות באותיות גדולות (AM/PM). <br>'tt' - תקופת שעון של 12 שעות באותיות קטנות (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "עוקף את הסמל שבו האזור משתמש כדי להפריד בין החלק השברירי לחלק השלם של מספר מוצג במסכות קלט.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "עוקף את הסמל שבו האזור משתמש כדי להפריד את הספרות של מספר גדול לקבוצות של שלושה במסכות קלט.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "עוקף את סמל המטבע או הקוד של האזור המשמש במסכות קלט.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "עוקף את דפוס המטבע של האזור המשמש במסכות קלט. התבנית יכולה להכיל את המשאבים הבאים: <br>'@' - סמל או קוד מטבע.<br> '#' - מספר. <br>'-' - מיקום סימן מינוס בערכים שליליים (אם מושמט, סימן מינוס ממוקם בתחילת הסימן)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "התבנית יכולה להכיל מילולי מחרוזת ואת מצייני המיקום הבאים: '9' - עבור ספרה; 'a' - עבור אות גדולה או קטנה; '#' - עבור ספרה או אות גדולה או קטנה. השתמש בקו נטוי הפוך '\\' כדי לברוח מתו."
@@ -2993,6 +3172,12 @@ export var hebrewStrings = {
       thousandsSeparator: "סמל המשמש להפרדת הספרות של מספר גדול לקבוצות של שלושה.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג."
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "סמל מטבע או קוד שמוצג עם הערך. סמל האזור משמש כברירת מחדל. נקה תכונה זו כדי שלא יופיע סמל.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "מציין את מיקומי המספר, סמל המטבע וסימן המינוס. הדפוס יכול להכיל את המקומות הבאים: <br>'@' - סמל מטבע או קוד.<br> '#' - מספר. <br>'-' - מיקום סימן מינוס בערכים שליליים (אם מושמט, סימן מינוס ממוקם בתחילת הדרך)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

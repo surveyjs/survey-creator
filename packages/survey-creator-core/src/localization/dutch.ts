@@ -749,7 +749,9 @@ export var nlStrings = {
       // [Auto-translated] "Survey description"
       description: "Beschrijving van de enquête",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "De enquête alleen-lezen maken"
+      readOnly: "De enquête alleen-lezen maken",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionale formats"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var nlStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Gemaskeerde waarde opslaan in enquêteresultaten"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Regio",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Datumpatroon",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Tijdpatroon",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Decimale scheider",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Duizenden scheider",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valutasymbool",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutapatroon"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Waardepatroon"
@@ -824,6 +842,12 @@ export var nlStrings = {
       min: "Minimumwaarde",
       // [Auto-translated] "Maximum value"
       max: "Maximale waarde"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valutasymbool",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutapatroon"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Anderen wissen wanneer geselecteerd",
@@ -1607,6 +1631,8 @@ export var nlStrings = {
       question: "Vraag",
       // "Pages"
       pages: "Pagina's",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionale formaten",
       // "Quiz Mode"
       timer: "Timer/Quiz",
       // "Calculated Values"
@@ -2392,6 +2418,139 @@ export var nlStrings = {
       container: "Zelfde als container"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabisch",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgaars",
+    // [Auto-translated] "Catalan"
+    ca: "Catalaans",
+    // [Auto-translated] "Czech"
+    cs: "Tsjechisch",
+    // [Auto-translated] "Welsh"
+    cy: "Welsh",
+    // [Auto-translated] "Danish"
+    da: "Deens",
+    // [Auto-translated] "German"
+    de: "Duits",
+    // [Auto-translated] "Greek"
+    el: "Grieks",
+    // [Auto-translated] "English"
+    en: "Engels",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Engels (Australië)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Engels (Canada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Engels (Verenigd Koninkrijk)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Engels (Ierland)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Engels (India)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Engels (Nieuw-Zeeland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Engels (Zuid-Afrika)",
+    // [Auto-translated] "Spanish"
+    es: "Spaans",
+    // [Auto-translated] "Estonian"
+    et: "Ests",
+    // [Auto-translated] "Basque"
+    eu: "Baskisch",
+    // [Auto-translated] "Persian"
+    fa: "Perzisch",
+    // [Auto-translated] "Finnish"
+    fi: "Fins",
+    // [Auto-translated] "Filipino"
+    fil: "Filipijns",
+    // [Auto-translated] "French"
+    fr: "Frans",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Frans (Canada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Frans (Zwitserland)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebreeuws",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Kroatisch",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haïtiaans",
+    // [Auto-translated] "Hungarian"
+    hu: "Hongaars",
+    // [Auto-translated] "Indonesian"
+    id: "Indonesisch",
+    // [Auto-translated] "Icelandic"
+    is: "IJslands",
+    // [Auto-translated] "Italian"
+    it: "Italiaans",
+    // [Auto-translated] "Japanese"
+    ja: "Japans",
+    // [Auto-translated] "Georgian"
+    ka: "Georgisch",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazachs",
+    // [Auto-translated] "Korean"
+    ko: "Koreaans",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litouws",
+    // [Auto-translated] "Latvian"
+    lv: "Lets",
+    // [Auto-translated] "Macedonian"
+    mk: "Macedonisch",
+    // [Auto-translated] "Burmese"
+    mm: "Birmaans",
+    // [Auto-translated] "Malay"
+    ms: "Maleis",
+    // [Auto-translated] "Dutch"
+    nl: "Nederlands",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Nederlands (België)",
+    // [Auto-translated] "Norwegian"
+    no: "Noors",
+    // [Auto-translated] "Polish"
+    pl: "Pools",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugees",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugees (Brazilië)",
+    // [Auto-translated] "Romanian"
+    ro: "Roemeens",
+    // [Auto-translated] "Russian"
+    ru: "Russisch",
+    // [Auto-translated] "Slovak"
+    sk: "Slowaaks",
+    // [Auto-translated] "Slovenian"
+    sl: "Sloveens",
+    // [Auto-translated] "Serbian"
+    sr: "Servisch",
+    // [Auto-translated] "Swedish"
+    sv: "Zweeds",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadzjieks",
+    // [Auto-translated] "Thai"
+    th: "Thais",
+    // [Auto-translated] "Turkish"
+    tr: "Turks",
+    // [Auto-translated] "Ukrainian"
+    uk: "Oekraïens",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamees",
+    // [Auto-translated] "Chinese"
+    zh: "Chinees",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Chinees (vereenvoudigd)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Chinees (Traditioneel)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export var nlStrings = {
     visibletrigger: "Zichtbaarheid wijzigen (verouderd)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Hetzelfde als de enquêtetaal"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Vb.: +1(999)-999-99-99"
@@ -2978,6 +3141,22 @@ export var nlStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Selecteer of u de vraagwaarde met een toegepast masker wilt opslaan in enquêteresultaten."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Een regio waarvan de formaten van toepassing zijn op datum-, tijd-, numerieke en valuta-invoermaskers. Indien niet gespecificeerd, wordt de surveytaal gebruikt.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Overschrijft het datumformaat van de regio dat in invoermaskers wordt gebruikt. Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten: <br>'m' - Maandnummer.<br> 'mm' - Maandnummer, met een voorpunt nul voor enkelcijferige waarden. <br>'d' - Dag van de maand. <br>'dd' - Dag van de maand, met een leidende nul voor enkelcijferige waarden. <br>'yy' - De laatste twee cijfers van het jaar. <br>'yyyy' - Viercijferig jaar.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Overschrijft het tijdsformaat van de regio dat in invoermaskers wordt gebruikt. Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten: <br>'H' - Uren in 24-uursformaat.<br> 'HH' - Uren in 24-uursformaat, met een voorste nul voor enkelcijferige waarden. <br>'h' - Uren in 12-uursformaat. <br>'hh' - Uren in 12-uursformaat, met een vooraanstaande nul voor enkelcijferige waarden. <br>'MM' - Minuten. <br>'ss' - Seconden. <br>'TT' - 12-uurs klokperiode in hoofdletters (AM/PM). <br>'tt' - 12-uurs klokperiode in kleine letters (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Overschrijft het symbool dat de regio gebruikt om het fractiedeel te scheiden van het gehele deel van een weergegeven getal in invoermaskers.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Overschrijft het symbool dat de regio gebruikt om de cijfers van een groot getal in groepen van drie te scheiden in invoermaskers.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Overschrijft het muntsymbool of de code van de regio die in invoermaskers wordt gebruikt.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Overschrijft het muntpatroon van de regio dat in invoermaskers wordt gebruikt. Het patroon kan de volgende tijdelijke aanduidingen bevatten: <br>'@' - Valutasymbool of -code.<br> '#' - Nummer. <br>'-' - Positie van het minteken in negatieve waarden (als het wordt weggelaten, wordt het minteken aan het begin geplaatst)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Het patroon kan letterlijke tekenreeksen en de volgende tijdelijke aanduidingen bevatten: '9' - voor een cijfer; \"a\" - voor een hoofdletter of kleine letter; '#' - voor een cijfer of een hoofdletter of kleine letter. Gebruik backslash '\\' om een teken te escapen."
@@ -2993,6 +3172,12 @@ export var nlStrings = {
       thousandsSeparator: "Een symbool dat wordt gebruikt om de cijfers van een groot getal in groepen van drie te scheiden.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Hiermee beperkt u het aantal cijfers dat moet worden behouden na de komma voor een weergegeven getal."
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Een valutasymbool of -code weergegeven met de waarde. Het symbool van de regio wordt standaard gebruikt. Maak deze eigenschap schoon om geen symbool weer te geven.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Specificeert de posities van het getal, het valutasymbool en het minteken. Het patroon kan de volgende tijdelijke aanduidingen bevatten: <br>'@' - Valutasymbool of -code.<br> '#' - Nummer. <br>'-' - Positie van het minteken in negatieve waarden (als het wordt weggelaten, staat het minteken aan het begin)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

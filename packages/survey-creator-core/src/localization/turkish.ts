@@ -749,7 +749,9 @@ export var turkishStrings = {
       // [Auto-translated] "Survey description"
       description: "Anket açıklaması",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Anketi salt okunur hale getirin"
+      readOnly: "Anketi salt okunur hale getirin",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Bölgesel formatlar"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var turkishStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Anket sonuçlarında maskelenmiş değeri kaydetme"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Bölge",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Tarih deseni",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Zaman deseni",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "ondalık ayırıcı",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Binlerce ayırıcı",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Para birimi sembolü",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Para birimi desenleri"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Değer örüntüsü"
@@ -824,6 +842,12 @@ export var turkishStrings = {
       min: "Minimum değer",
       // [Auto-translated] "Maximum value"
       max: "Maksimum değer"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Para birimi sembolü",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Para birimi desenleri"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Seçildiğinde diğerlerini temizleme",
@@ -1607,6 +1631,8 @@ export var turkishStrings = {
       question: "Soru",
       // "Pages"
       pages: "Sayfalar",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Bölgesel Formatlar",
       // "Quiz Mode"
       timer: "Zamanlayıcı / Sınav",
       // "Calculated Values"
@@ -2392,6 +2418,139 @@ export var turkishStrings = {
       container: "Konteyner ile aynı"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arapça",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgarca",
+    // [Auto-translated] "Catalan"
+    ca: "Katalanca",
+    // [Auto-translated] "Czech"
+    cs: "Çekçe",
+    // [Auto-translated] "Welsh"
+    cy: "Galce",
+    // [Auto-translated] "Danish"
+    da: "Danimarkaca",
+    // [Auto-translated] "German"
+    de: "Almanca",
+    // [Auto-translated] "Greek"
+    el: "Yunanca",
+    // [Auto-translated] "English"
+    en: "İngilizce",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "İngilizce (Avustralya)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "İngilizce (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "İngilizce (Birleşik Krallık)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "İngilizce (İrlanda)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "İngilizce (Hindistan)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "İngilizce (Yeni Zelanda)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "İngilizce (Güney Afrika)",
+    // [Auto-translated] "Spanish"
+    es: "İspanyolca",
+    // [Auto-translated] "Estonian"
+    et: "Estonca",
+    // [Auto-translated] "Basque"
+    eu: "Bask",
+    // [Auto-translated] "Persian"
+    fa: "Farsça",
+    // [Auto-translated] "Finnish"
+    fi: "Fince",
+    // [Auto-translated] "Filipino"
+    fil: "Filipinli",
+    // [Auto-translated] "French"
+    fr: "Fransızca",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Fransızca (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Fransızca (İsviçre)",
+    // [Auto-translated] "Hebrew"
+    he: "İbranice",
+    // [Auto-translated] "Hindi"
+    hi: "Hintçe",
+    // [Auto-translated] "Croatian"
+    hr: "Hırvatça",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haiti Kreolu",
+    // [Auto-translated] "Hungarian"
+    hu: "Macarca",
+    // [Auto-translated] "Indonesian"
+    id: "Endonezya",
+    // [Auto-translated] "Icelandic"
+    is: "İzlanda",
+    // [Auto-translated] "Italian"
+    it: "İtalyanca",
+    // [Auto-translated] "Japanese"
+    ja: "Japonca",
+    // [Auto-translated] "Georgian"
+    ka: "Gürcüce",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazakça",
+    // [Auto-translated] "Korean"
+    ko: "Kore",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litvanca",
+    // [Auto-translated] "Latvian"
+    lv: "Letonca",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonca",
+    // [Auto-translated] "Burmese"
+    mm: "Burma",
+    // [Auto-translated] "Malay"
+    ms: "Malay",
+    // [Auto-translated] "Dutch"
+    nl: "Hollandaca'yı",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Hollanda (Belçika)",
+    // [Auto-translated] "Norwegian"
+    no: "Norveççe",
+    // [Auto-translated] "Polish"
+    pl: "Lehçe",
+    // [Auto-translated] "Portuguese"
+    pt: "Portekizce",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portekizce (Brezilya)",
+    // [Auto-translated] "Romanian"
+    ro: "Romanca",
+    // [Auto-translated] "Russian"
+    ru: "Rusça",
+    // [Auto-translated] "Slovak"
+    sk: "Slovakça",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovence",
+    // [Auto-translated] "Serbian"
+    sr: "Sırp",
+    // [Auto-translated] "Swedish"
+    sv: "İsveççe",
+    // [Auto-translated] "Swahili"
+    sw: "Svahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tacik",
+    // [Auto-translated] "Thai"
+    th: "Tay dili",
+    // [Auto-translated] "Turkish"
+    tr: "Türkçe",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukraynaca",
+    // [Auto-translated] "Urdu"
+    ur: "Urduca",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamca",
+    // [Auto-translated] "Chinese"
+    zh: "Çince",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Çince (Basitleştirilmiş)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Çince (Geleneksel)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export var turkishStrings = {
     visibletrigger: "görünürlüğü değiştir (kullanımdan kaldırıldı)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Anket dili ile aynı"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Ör.: +1(999)-999-99-99"
@@ -2978,6 +3141,22 @@ export var turkishStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Soru değerini, anket sonuçlarında uygulanan bir maske ile saklamak istiyorsanız seçin."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Tarih-saat, sayısal ve para birimi giriş maskeleri için formatları uygulanan bir bölge. Belirtilmediyse, anket dili kullanılır.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Giriş maskelerinde kullanılan bölgenin tarih formatını geçersiz kılar. Desen, ayırıcı karakterler ve şu yer tutucuları içerebilir: <br>'m' - Ay numarası.<br> 'mm' - Ay numarası, tek haneli değerler için önde sıfır var. <br>'d' - Ayın günü. <br>'dd' - Ayın günü, tek haneli değerler için önde sıfır ile. <br>'yy' - Yılın son iki rakamlı. <br>'yyyy' - Dört haneli yıl.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Giriş maskelerinde kullanılan bölgenin zaman formatını geçersiz kılar. Desen, ayırıcı karakterler ve aşağıdaki yer tutucuları içerebilir: <br>'H' - 24 saat formatında saatler.<br> 'HH' - 24 saat formatında saatler, tek haneli değerler için önde sıfır işareti var. <br>'h' - 12 saatlik formatta saatler. <br>'hh' - 12 saat formatında saatler, tek haneli değerler için önde sıfır ile gösterilir. <br>'MM' - Dakikalar. <br>'ss' - Saniyeler. <br>'TT' - 12 saatlik saat peridi büyük harfle (/PM). <br>'TT' - 12 saatlik saat peridi küçük harfle (/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Bölgenin giriş maskelerinde gösterilen bir sayının kesirli kısmını tam sayı kısmından ayırmak için kullandığı sembolü geçersiz kılar.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Bölgenin giriş maskelerinde büyük bir sayının rakamlarını üçlü gruplara ayırmak için kullandığı sembolü geçersiz kılar.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Bölgenin para birimi sembolünü veya giriş maskelerinde kullanılan kodunu geçersiz kılanır.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Giriş maskelerinde kullanılan bölgenin para birimi desenini geçersiz kılar. Desen aşağıdaki yer tutucuları içerebilir: <br>'@' - Para birimi sembolü veya kodu.<br> '#' - Sayı. <br>'-' - Eksisi işaretinin negatif değerlerdeki konumu (eksik işareti çıkarılırsa, en işareti başta yer alır)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Desen, dize değişmez değerlerini ve aşağıdaki yer tutucuları içerebilir: '9' - bir rakam için; 'a' - büyük veya küçük harf için; '#' - bir rakam veya büyük veya küçük harf için. Bir karakterden kaçmak için ters eğik çizgi '\\' kullanın."
@@ -2993,6 +3172,12 @@ export var turkishStrings = {
       thousandsSeparator: "Büyük bir sayının rakamlarını üçlü gruplara ayırmak için kullanılan bir sembol.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Görüntülenen bir sayı için ondalık virgülden sonra kaç basamak tutulacağını sınırlar."
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Değerle birlikte gösterilen bir para birimi sembolü veya kodu. Bölgenin sembolü varsayılan olarak kullanılır. Bu özelliği sembol göstermemesi için temizleyin.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Numara, para birimi sembolü ve eksi işaretinin konumlarını belirtir. Desen aşağıdaki yer tutucuları içerebilir: <br>'@' - Para birimi sembolü veya kodu.<br> '#' - Sayı. <br>'-' - eksi işaretinin negatif değerlerdeki konumu (eksik işareti çıkarılırsa, en işareti başta yerleştirilir)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

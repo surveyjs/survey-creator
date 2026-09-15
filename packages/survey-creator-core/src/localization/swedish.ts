@@ -750,7 +750,9 @@ export let svStrings = {
       // [Auto-translated] "Survey description"
       description: "Beskrivning av undersökningen",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Gör undersökningen skrivskyddad"
+      readOnly: "Gör undersökningen skrivskyddad",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionala format"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -802,6 +804,22 @@ export let svStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Spara maskerat värde i undersökningsresultat"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Region",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Datummönster",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Tidsmönster",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Decimalseparator",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Tusentalsseparator",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valutasymbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutamönster"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Värdemönster"
@@ -825,6 +843,12 @@ export let svStrings = {
       min: "Minsta värde",
       // [Auto-translated] "Maximum value"
       max: "Maximalt värde"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valutasymbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutamönster"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Rensa andra när du väljer det här alternativet",
@@ -1608,6 +1632,8 @@ export let svStrings = {
       question: "Fråga",
       // [Auto-translated] "Pages"
       pages: "Sidor",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionala format",
       // "Quiz Mode"
       timer: "Tidtagare/Quiz",
       // [Auto-translated] "Calculated Values"
@@ -2393,6 +2419,139 @@ export let svStrings = {
       container: "Samma som behållare"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabiska",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgariska",
+    // [Auto-translated] "Catalan"
+    ca: "Katalanska",
+    // [Auto-translated] "Czech"
+    cs: "Tjeckiska",
+    // [Auto-translated] "Welsh"
+    cy: "Wales",
+    // [Auto-translated] "Danish"
+    da: "Dansk",
+    // [Auto-translated] "German"
+    de: "Tyska",
+    // [Auto-translated] "Greek"
+    el: "Grekiska",
+    // [Auto-translated] "English"
+    en: "Engelska",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Engelska (Australien)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Engelska (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Engelska (Storbritannien)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Engelska (Irland)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Engelska (Indien)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Engelska (Nya Zeeland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Engelska (Sydafrika)",
+    // [Auto-translated] "Spanish"
+    es: "Spanska",
+    // [Auto-translated] "Estonian"
+    et: "Estniska",
+    // [Auto-translated] "Basque"
+    eu: "Baskiska",
+    // [Auto-translated] "Persian"
+    fa: "Persiska",
+    // [Auto-translated] "Finnish"
+    fi: "Finska",
+    // [Auto-translated] "Filipino"
+    fil: "Filipino",
+    // [Auto-translated] "French"
+    fr: "Franska",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Franska (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Franska (Schweiz)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebreiska",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Kroatisk",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haitisk kreol",
+    // [Auto-translated] "Hungarian"
+    hu: "Ungerskt",
+    // [Auto-translated] "Indonesian"
+    id: "Indonesiska",
+    // [Auto-translated] "Icelandic"
+    is: "Isländska",
+    // [Auto-translated] "Italian"
+    it: "Italienska",
+    // [Auto-translated] "Japanese"
+    ja: "Japanska",
+    // [Auto-translated] "Georgian"
+    ka: "Georgisk",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazakisk",
+    // [Auto-translated] "Korean"
+    ko: "Koreanska",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litauiska",
+    // [Auto-translated] "Latvian"
+    lv: "Lettiska",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonska",
+    // [Auto-translated] "Burmese"
+    mm: "Burmesiska",
+    // [Auto-translated] "Malay"
+    ms: "Malajiska",
+    // [Auto-translated] "Dutch"
+    nl: "Nederländska",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Dutch (Belgien)",
+    // [Auto-translated] "Norwegian"
+    no: "Norska",
+    // [Auto-translated] "Polish"
+    pl: "Polska",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugisiska",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugisiska (Brasilien)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumänska",
+    // [Auto-translated] "Russian"
+    ru: "Ryska",
+    // [Auto-translated] "Slovak"
+    sk: "Slovakiska",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovenska",
+    // [Auto-translated] "Serbian"
+    sr: "Serbiska",
+    // [Auto-translated] "Swedish"
+    sv: "Svenska",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadzjikiska",
+    // [Auto-translated] "Thai"
+    th: "Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Turkiska",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukrainska",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnameser",
+    // [Auto-translated] "Chinese"
+    zh: "Kinesiska",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Kinesiska (förenklat)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Kinesisk (traditionell)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2468,6 +2627,10 @@ export let svStrings = {
     visibletrigger: "Ändra synlighet"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Samma som undersökningsspråk"
+    },
     patternmask: {
       // [Auto-translated] "Ex.: +1(999)-999-99-99"
       pattern: "Ex.: +1(999)-999-99-99"
@@ -2979,6 +3142,22 @@ export let svStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Välj om du vill lagra frågevärdet med en tillämpad mask i undersökningsresultaten."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Ett område vars format gäller för datum-, tid-, numeriska och valutainmatningsmasker. Om det inte specificeras används undersökningsspråket.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Åsidosätter regionens datumformat som används i inmatningsmasker. Mönstret kan innehålla separatortecken och följande platshållare: <br>'m' - Månadsnummer.<br> 'mm' - Månadsnummer, med en inledande nolla för ensiffriga värden. <br>'d' - Månadens dag. <br>'dd' - Månadens dag, med en inledande nolla för ensiffriga värden. <br>'yyy' - De två sista siffrorna i året. <br>'yyyy' - Fyrsiffrigt år.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Överskriver regionens tidsformat som används i inmatningsmasker. Mönstret kan innehålla separatortecken och följande platshållare: <br>'H' - Timmar i 24-timmarsformat.<br> 'HH' - Timmar i 24-timmarsformat, med en inledande nolla för ensiffriga värden. <br>'h' - Timmar i 12-timmarsformat. <br>'hh' - Timmar i 12-timmarsformat, med en inledande nolla för ensiffriga värden. <br>'MM' - Minuter. <br>'ss' - Sekunder. <br>'TT' - 12-timmars klockperiod med versaler (AM/PM). <br>'tt' - 12-timmars klockperiod med liten text (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Åsidosätter symbolen som regionen använder för att separera den bråkdelade delen från heltalsdelen av ett visat tal i inmatningsmasker.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Överskriver symbolen som regionen använder för att dela upp siffrorna i ett stort tal i grupper om tre i inmatningsmasker.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Åsidosätter regionens valutasymbol eller kod som används i inmatningsmasker.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Åsidosätter regionens valutamönster som används i inmatningsmasker. Mönstret kan innehålla följande platshållare: <br>'@' - Valutasymbol eller kod.<br> '#' - Nummer. <br>'-' - Minustecknets position i negativa värden (om det utelämnas placeras minustecknet i början)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Mönstret kan innehålla strängliteraler och följande platshållare: \"9\" – för en siffra; \"a\" - för en stor eller liten bokstav; \"#\" – för en siffra eller en stor eller liten bokstav. Använd omvänt snedstreck \"\\\" för att undvika ett tecken."
@@ -2994,6 +3173,12 @@ export let svStrings = {
       thousandsSeparator: "En symbol som används för att dela upp siffrorna i ett stort tal i grupper om tre.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Begränsar hur många siffror som ska behållas efter decimaltecknet för ett tal som visas."
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "En valutasymbol eller kod visas med värdet. Regionens symbol används som standard. Rensa denna egenskap för att visa ingen symbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Specificerar positionerna för siffran, valutasymbolen och minustecknet. Mönstret kan innehålla följande platshållare: <br>'@' - Valutasymbol eller kod.<br> '#' - Nummer. <br>'-' - Minustecknets position i negativa värden (om det utelämnas placeras minustecknet i början)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

@@ -749,7 +749,9 @@ export const roStrings = {
       // "Survey description"
       description: "Descrierea chestionarului",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Faceți chestionarul doar în citire"
+      readOnly: "Faceți chestionarul doar în citire",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Formate regionale"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export const roStrings = {
       // "Save masked value in survey results"
       saveMaskedValue: "Salvați valoarea mascată în rezultatele chestionarului"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Regiune",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Modelul de date",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Tipar temporal",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Separator zecimal",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Separator de mii",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol valutar",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Modelul monetar"
+    },
     patternmask: {
       // "Value pattern"
       pattern: "Model de valoare"
@@ -824,6 +842,12 @@ export const roStrings = {
       min: "Valoarea minimă",
       // "Maximum value"
       max: "Valoarea maximă"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol valutar",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Modelul monetar"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Ștergeți altele când este selectat",
@@ -1607,6 +1631,8 @@ export const roStrings = {
       question: "Setări întrebare",
       // "Pages"
       pages: "Pagini",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Formate regionale",
       // "Quiz Mode"
       timer: "Modul chestionar",
       // "Calculated Values"
@@ -2392,6 +2418,139 @@ export const roStrings = {
       container: "La fel ca containerul"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabă",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgară",
+    // [Auto-translated] "Catalan"
+    ca: "catalană",
+    // [Auto-translated] "Czech"
+    cs: "Cehă",
+    // [Auto-translated] "Welsh"
+    cy: "Galeză",
+    // [Auto-translated] "Danish"
+    da: "Daneza",
+    // [Auto-translated] "German"
+    de: "Germană",
+    // [Auto-translated] "Greek"
+    el: "Greacă",
+    // [Auto-translated] "English"
+    en: "Engleză",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Engleză (Australia)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Engleză (Canada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Engleză (Regatul Unit)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Engleză (Irlanda)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Engleză (India)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Engleză (Noua Zeelandă)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Engleză (Africa de Sud)",
+    // [Auto-translated] "Spanish"
+    es: "Spaniolă",
+    // [Auto-translated] "Estonian"
+    et: "Estoniană",
+    // [Auto-translated] "Basque"
+    eu: "Basca",
+    // [Auto-translated] "Persian"
+    fa: "Persană",
+    // [Auto-translated] "Finnish"
+    fi: "Finlandeză",
+    // [Auto-translated] "Filipino"
+    fil: "Filipino",
+    // [Auto-translated] "French"
+    fr: "Franceză",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Franceză (Canada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Franceză (Elveția)",
+    // [Auto-translated] "Hebrew"
+    he: "Ebraică",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Croată",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Creolă haitiană",
+    // [Auto-translated] "Hungarian"
+    hu: "Maghiară",
+    // [Auto-translated] "Indonesian"
+    id: "Indoneziană",
+    // [Auto-translated] "Icelandic"
+    is: "Islandeză",
+    // [Auto-translated] "Italian"
+    it: "Italiană",
+    // [Auto-translated] "Japanese"
+    ja: "Japoneză",
+    // [Auto-translated] "Georgian"
+    ka: "Gruzină",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazahă",
+    // [Auto-translated] "Korean"
+    ko: "Coreeană",
+    // [Auto-translated] "Lithuanian"
+    lt: "Lituaniană",
+    // [Auto-translated] "Latvian"
+    lv: "Letonă",
+    // [Auto-translated] "Macedonian"
+    mk: "Macedoneană",
+    // [Auto-translated] "Burmese"
+    mm: "Birmanez",
+    // [Auto-translated] "Malay"
+    ms: "Malay",
+    // [Auto-translated] "Dutch"
+    nl: "Olandeză",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Olandez (Belgia)",
+    // [Auto-translated] "Norwegian"
+    no: "Norvegiană",
+    // [Auto-translated] "Polish"
+    pl: "Poloneză",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugheză",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugheză (Brazilia)",
+    // [Auto-translated] "Romanian"
+    ro: "Româna",
+    // [Auto-translated] "Russian"
+    ru: "Rusă",
+    // [Auto-translated] "Slovak"
+    sk: "Slovaca",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovenă",
+    // [Auto-translated] "Serbian"
+    sr: "Sârbă",
+    // [Auto-translated] "Swedish"
+    sv: "Suedeza",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadjik",
+    // [Auto-translated] "Thai"
+    th: "Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Turcă",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ucraineană",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnameză",
+    // [Auto-translated] "Chinese"
+    zh: "Chineză",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Chineză (Simplificat)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Chineză (tradițională)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export const roStrings = {
     visibletrigger: "schimbare vizibilitate (depreciat)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "La fel ca limbajul sondajului"
+    },
     patternmask: {
       // [Auto-translated] "Ex.: +1(999)-999-99-99"
       pattern: "Ex.: +1(999)-999-99-99"
@@ -2978,6 +3141,22 @@ export const roStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Selectați dacă doriți să stocați valoarea întrebării cu o mască aplicată în rezultatele chestionarului."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "O regiune ale cărei formate se aplică măștilor de intrare de date-oră, numerice și valutare. Dacă nu este specificat, se folosește limbajul sondajului.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Suprascrie formatul de dată al regiunii folosit în măștile de intrare. Modelul poate conține caractere separatoare și următoarele elemente de înlocuire: <br>'m' - Numărul lunii.<br> 'mm' - Numărul lunii, cu zero la început pentru valorile cu o singură cifră. <br>'d' - Ziua lunii. <br>'dd' - Ziua lunii, cu un zero la început pentru valorile cu o singură cifră. <br>'yy' - Ultimele două cifre ale anului. <br>'yyy' - Anul cu patru cifre.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Suprascrie formatul de timp al regiunii folosit în măștile de intrare. Modelul poate conține caractere separatoare și următoarele elemente provizorii: <br>'H' - Ore în format de 24 de ore.<br> 'HH' - Ore în format de 24 de ore, cu un zero la început pentru valorile de o singură cifră. <br>'h' - Ore în format de 12 ore. <br>'hh' - Ore în format de 12 ore, cu un zero la început pentru valorile de o singură cifră. <br>'MM' - Minute. <br>'ss' - Secunde. <br>'TT' - Perioadă de ceas de 12 ore cu majuscule (AM/PM). <br>'TT' - Perioadă de ceas de 12 ore cu litere mici (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Suprascrie simbolul folosit de regiune pentru a separa partea fracționară de partea întreagă a unui număr afișat în măștile de intrare.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Suprascrie simbolul pe care regiunea îl folosește pentru a separa cifrele unui număr mare în grupuri de trei în măștile de intrare.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Suprascrie simbolul sau codul valutar al regiunii folosit în măștile de intrare.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Suprascrie modelul valutar al regiunii folosit în măștile de intrare. Modelul poate conține următoarele poziții provizorii: <br>'@' - Simbol sau cod valutar.<br> '#' - Număr. <br>'-' - Poziția semnului minus în valori negative (dacă este omis, semnul minus este plasat la început)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Modelul poate conține litere de șir și următorii substituenți: `9` - pentru o cifră; `a` - pentru o literă mare sau mică; `#` - pentru o cifră sau o literă mare sau mică. Utilizați backslash `\\` pentru a scăpa un caracter."
@@ -2993,6 +3172,12 @@ export const roStrings = {
       thousandsSeparator: "Un simbol folosit pentru a separa cifrele unui număr mare în grupuri de câte trei.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Limitează câte cifre să fie reținute după punctul zecimal pentru un număr afișat."
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Un simbol sau cod de monedă afișat împreună cu valoarea. Simbolul regiunii este folosit implicit. Șterge această proprietate pentru a nu afișa niciun simbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Specifică pozițiile numărului, simbolului monedei și semnului minus. Modelul poate conține următoarele poziții provizorii: <br>'@' - Simbol sau cod monetar.<br> '#' - Număr. <br>'-' - Poziția semnului minus în valori negative (dacă este omis, semnul minus este plasat la început)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

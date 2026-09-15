@@ -749,7 +749,9 @@ export var hrStrings = {
       // [Auto-translated] "Survey description"
       description: "Opis upitnika",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Neka anketa bude samo za čitanje"
+      readOnly: "Neka anketa bude samo za čitanje",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionalni formati"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var hrStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Spremanje maskirane vrijednosti u rezultate upitnika"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Regija",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Uzorak datuma",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Vremenski obrazac",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Decimalni separator",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Separator tisuća",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol valute",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutni obrazac"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Uzorak vrijednosti"
@@ -824,6 +842,12 @@ export var hrStrings = {
       min: "Minimalna vrijednost",
       // [Auto-translated] "Maximum value"
       max: "Maksimalna vrijednost"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol valute",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutni obrazac"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Brisanje drugih kada je odabrano",
@@ -1607,6 +1631,8 @@ export var hrStrings = {
       question: "Pitanje",
       // "Pages"
       pages: "Stranice",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionalni formati",
       // "Quiz Mode"
       timer: "Timer/Kviz",
       // "Calculated Values"
@@ -2392,6 +2418,139 @@ export var hrStrings = {
       container: "Isto kao spremnik"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arapski",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bugarski",
+    // [Auto-translated] "Catalan"
+    ca: "Katalonski",
+    // [Auto-translated] "Czech"
+    cs: "Češki",
+    // [Auto-translated] "Welsh"
+    cy: "Velški",
+    // [Auto-translated] "Danish"
+    da: "Danski",
+    // [Auto-translated] "German"
+    de: "Njemački",
+    // [Auto-translated] "Greek"
+    el: "Grčki",
+    // [Auto-translated] "English"
+    en: "Engleski",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Engleski (Australija)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Engleski (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Engleski (Ujedinjeno Kraljevstvo)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Engleski (Irska)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Engleski (Indija)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Engleski (Novi Zeland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Engleski (Južna Afrika)",
+    // [Auto-translated] "Spanish"
+    es: "Španjolski",
+    // [Auto-translated] "Estonian"
+    et: "Estonski",
+    // [Auto-translated] "Basque"
+    eu: "Baskijski",
+    // [Auto-translated] "Persian"
+    fa: "Perzijski",
+    // [Auto-translated] "Finnish"
+    fi: "Finski",
+    // [Auto-translated] "Filipino"
+    fil: "Filipinac",
+    // [Auto-translated] "French"
+    fr: "Francuski",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Francuski (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Francuski (Švicarska)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebrejski",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Hrvatski",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haićanski kreolski",
+    // [Auto-translated] "Hungarian"
+    hu: "Mađarski",
+    // [Auto-translated] "Indonesian"
+    id: "Indonezijski",
+    // [Auto-translated] "Icelandic"
+    is: "Islandski",
+    // [Auto-translated] "Italian"
+    it: "Talijanski",
+    // [Auto-translated] "Japanese"
+    ja: "Japanski",
+    // [Auto-translated] "Georgian"
+    ka: "Gruzijski",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazahstanski",
+    // [Auto-translated] "Korean"
+    ko: "Korejski",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litvanski",
+    // [Auto-translated] "Latvian"
+    lv: "Latvijski",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonac",
+    // [Auto-translated] "Burmese"
+    mm: "Burmanski",
+    // [Auto-translated] "Malay"
+    ms: "Malajski",
+    // [Auto-translated] "Dutch"
+    nl: "Nizozemski",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Nizozemski (Belgija)",
+    // [Auto-translated] "Norwegian"
+    no: "Norveški",
+    // [Auto-translated] "Polish"
+    pl: "Poljski",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugalski",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugalski (Brazil)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumunjski",
+    // [Auto-translated] "Russian"
+    ru: "Ruski",
+    // [Auto-translated] "Slovak"
+    sk: "Slovački",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovenski",
+    // [Auto-translated] "Serbian"
+    sr: "Srpski",
+    // [Auto-translated] "Swedish"
+    sv: "Švedski",
+    // [Auto-translated] "Swahili"
+    sw: "Svahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadžik",
+    // [Auto-translated] "Thai"
+    th: "Tajlandski",
+    // [Auto-translated] "Turkish"
+    tr: "Turski",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukrajinski",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vijetnamski",
+    // [Auto-translated] "Chinese"
+    zh: "Kineski",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Kineski (pojednostavljeno)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Kineski (tradicionalni)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export var hrStrings = {
     visibletrigger: "promjena vidljivosti (amortizirati)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Isto kao i geodetski jezik"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Npr.: +1(999)-999-99-99"
@@ -2978,6 +3141,22 @@ export var hrStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Odaberite želite li spremiti vrijednost pitanja s primijenjenom maskom u rezultatima upitnika."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Regija čiji se formati primjenjuju na maske za ulaz datuma, vremena, brojeva i valute. Ako nije specificirano, koristi se jezik ankete.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Nadjačava format datuma regije koji se koristi u ulaznim maskama. Uzorak može sadržavati znakove razdjelnika i sljedeće privremene oznake: <br>'m' - Broj mjeseca.<br> 'mm' - Broj mjeseca, s vodećom nulom za jednoznamenkaste vrijednosti. <br>'d' - Dan u mjesecu. <br>'dd' - Dan u mjesecu, s vodećom nulom za jednoznamenkaste vrijednosti. <br>'yy' - Posljednje dvije znamenke godine. <br>'yyyy' - Četveroznamenkasta godina.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Nadjačava vremenski format regije koji se koristi u ulaznim maskama. Obrazac može sadržavati znakove razdjelnika i sljedeće privremene oznake: <br>'H' - Sati u 24-satnom formatu.<br> 'HH' - Sati u 24-satnom formatu, s vodećom nulom za jednoznamenkaste vrijednosti. <br>'h' - Sati u 12-satnom formatu. <br>'HH' - Sati u 12-satnom formatu, s vodećom nulom za jednoznamenkaste vrijednosti. <br>'MM' - Minute. <br>'ss' - Sekunde. <br>'TT' - 12-satni sat velikim slovima (AM/PM). <br>'TT' - 12-satni sat malim slovima (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Nadjačava simbol koji regija koristi za odvajanje razlomka od cjelobrojnog dijela prikazanog broja u ulaznim maskama.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Nadjačava simbol koji regija koristi za razdvajanje znamenki velikog broja u skupine od tri u ulaznim maskama.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Nadjačava valutni simbol ili kod regije koji se koristi u ulaznim maskama.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Nadjačava valutni obrazac regije koji se koristi u ulaznim maskama. Obrazac može sadržavati sljedeće privremene oznake: <br>'@' - Simbol valute ili kod.<br> '#' - Broj. <br>'-' - Položaj minus znaka u negativnim vrijednostima (ako se izostavi, minus znak se stavlja na početak)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Uzorak može sadržavati slovne dijelove niza i sljedeća rezervirana mjesta: '9' - za znamenku; \"a\" – za veliko ili malo slovo; '#' - za znamenku ili veliko ili malo slovo. Koristite obrnutu kosu crtu '\\' da biste izbjegli znak."
@@ -2993,6 +3172,12 @@ export var hrStrings = {
       thousandsSeparator: "Simbol koji se koristi za odvajanje znamenki velikog broja u grupe od tri.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Ograničava broj znamenki koje treba zadržati nakon decimalnog zareza za prikazani broj."
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Simbol valute ili kod prikazan s vrijednošću. Simbol regije koristi se po zadanim postavkama. Obrišite ovo svojstvo da ne prikazuje simbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Specificira položaje broja, simbola valute i minus znaka. Uzorak može sadržavati sljedeće privremene oznake: <br>'@' - Simbol valute ili kod.<br> '#' - Broj. <br>'-' - Položaj minus znaka u negativnim vrijednostima (ako se izostavi, minus znak se stavlja na početak)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

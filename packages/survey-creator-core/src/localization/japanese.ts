@@ -749,7 +749,9 @@ export var jaStrings = {
       // [Auto-translated] "Survey description"
       description: "調査内容",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "調査を読み取り専用にする"
+      readOnly: "調査を読み取り専用にする",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "地域フォーマット"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var jaStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "アンケート結果にマスクされた値を保存する"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "地域",
+      // [Auto-translated] "Date pattern"
+      datePattern: "日付パターン",
+      // [Auto-translated] "Time pattern"
+      timePattern: "時間パターン",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "十進区分器",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "千区切り記号",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "通貨記号",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "通貨パターン"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "値パターン"
@@ -824,6 +842,12 @@ export var jaStrings = {
       min: "最小値",
       // [Auto-translated] "Maximum value"
       max: "最大値"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "通貨記号",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "通貨パターン"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "選択時に他のユーザーをクリアする",
@@ -1607,6 +1631,8 @@ export var jaStrings = {
       question: "質問",
       // "Pages"
       pages: "ページ",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "地域フォーマット",
       // "Quiz Mode"
       timer: "タイマー/クイズ",
       // "Calculated Values"
@@ -2392,6 +2418,139 @@ export var jaStrings = {
       container: "コンテナと同じ"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "アラビア語",
+    // [Auto-translated] "Bulgarian"
+    bg: "ブルガリア語",
+    // [Auto-translated] "Catalan"
+    ca: "カタルーニャ語",
+    // [Auto-translated] "Czech"
+    cs: "チェコ語",
+    // [Auto-translated] "Welsh"
+    cy: "ウェールズ語",
+    // [Auto-translated] "Danish"
+    da: "デンマーク語",
+    // [Auto-translated] "German"
+    de: "ドイツ語",
+    // [Auto-translated] "Greek"
+    el: "ギリシャ語",
+    // [Auto-translated] "English"
+    en: "英語",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "英語(オーストラリア)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "英語(カナダ)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "英語(イギリス)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "イングランド(アイルランド)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "英語(インド)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "英語(ニュージーランド)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "イングランド(南アフリカ)",
+    // [Auto-translated] "Spanish"
+    es: "スペイン語",
+    // [Auto-translated] "Estonian"
+    et: "エストニア語",
+    // [Auto-translated] "Basque"
+    eu: "バスク語",
+    // [Auto-translated] "Persian"
+    fa: "ペルシア語",
+    // [Auto-translated] "Finnish"
+    fi: "フィンランド語",
+    // [Auto-translated] "Filipino"
+    fil: "フィリピン語",
+    // [Auto-translated] "French"
+    fr: "フランス語",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "フランス語(カナダ)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "フランス(スイス)",
+    // [Auto-translated] "Hebrew"
+    he: "ヘブライ語",
+    // [Auto-translated] "Hindi"
+    hi: "ヒンディー語",
+    // [Auto-translated] "Croatian"
+    hr: "クロアチア語",
+    // [Auto-translated] "Haitian Creole"
+    ht: "ハイチ・クレオール",
+    // [Auto-translated] "Hungarian"
+    hu: "ハンガリー語",
+    // [Auto-translated] "Indonesian"
+    id: "インドネシア語",
+    // [Auto-translated] "Icelandic"
+    is: "アイスランド語",
+    // [Auto-translated] "Italian"
+    it: "イタリア語",
+    // [Auto-translated] "Japanese"
+    ja: "日本語",
+    // [Auto-translated] "Georgian"
+    ka: "グルジア語",
+    // [Auto-translated] "Kazakh"
+    kk: "カザフ語",
+    // [Auto-translated] "Korean"
+    ko: "韓国語",
+    // [Auto-translated] "Lithuanian"
+    lt: "リトアニア語",
+    // [Auto-translated] "Latvian"
+    lv: "ラトビア語",
+    // [Auto-translated] "Macedonian"
+    mk: "マケドニアの",
+    // [Auto-translated] "Burmese"
+    mm: "ビルマ語",
+    // [Auto-translated] "Malay"
+    ms: "マレー語",
+    // [Auto-translated] "Dutch"
+    nl: "オランダ語",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "オランダ語(ベルギー)",
+    // [Auto-translated] "Norwegian"
+    no: "ノルウェー語",
+    // [Auto-translated] "Polish"
+    pl: "ポーランド語",
+    // [Auto-translated] "Portuguese"
+    pt: "ポルトガル語",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "ポルトガル(ブラジル)",
+    // [Auto-translated] "Romanian"
+    ro: "ルーマニア語",
+    // [Auto-translated] "Russian"
+    ru: "ロシア語",
+    // [Auto-translated] "Slovak"
+    sk: "スロバキア語",
+    // [Auto-translated] "Slovenian"
+    sl: "スロベニア語",
+    // [Auto-translated] "Serbian"
+    sr: "セルビア語",
+    // [Auto-translated] "Swedish"
+    sv: "スウェーデン語",
+    // [Auto-translated] "Swahili"
+    sw: "スワヒリ語",
+    // [Auto-translated] "Telugu"
+    tel: "テルグ語",
+    // [Auto-translated] "Tajik"
+    tg: "タジキスタン",
+    // [Auto-translated] "Thai"
+    th: "タイ語",
+    // [Auto-translated] "Turkish"
+    tr: "トルコ語",
+    // [Auto-translated] "Ukrainian"
+    uk: "ウクライナ語",
+    // [Auto-translated] "Urdu"
+    ur: "ウルドゥー語",
+    // [Auto-translated] "Vietnamese"
+    vi: "ベトナム語",
+    // [Auto-translated] "Chinese"
+    zh: "中国語",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "中国語(簡体字)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "中国語(繁体)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export var jaStrings = {
     visibletrigger: "可視性を変更 (非推奨)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "調査の言語と同じです"
+    },
     patternmask: {
       // [Auto-translated] "Ex.: +1(999)-999-99-99"
       pattern: "例:+1(999)-999-99-99"
@@ -2978,6 +3141,22 @@ export var jaStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "マスクを適用した質問値をアンケート結果に保存する場合に選択します。"
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "日付時、数値、通貨入力マスクにフォーマットが適用される地域。指定がない場合は調査言語が使用されます。",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "入力マスクで使われる地域の日付フォーマットを上書きします。パターンには区切り文字と以下のプレースホルダーを含めることができます:<br>'m' - 月番号。<br>'mm' - 月番号で、1桁の値は先頭にゼロ。<br>'d' - 月の<br>日、1桁の値は先頭にゼロ。<br>'yy' - 年の最後の2桁。<br>'yyyy' - 4桁の年。",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "入力マスクで使われる地域の時間フォーマットを上書きします。パターンには区切り文字や以下のプレースホルダーを含めることができます:<br>'H' - 24時間表示の時間。<br>'HH' - 24時間表示の時間で、1桁の値に対して先頭にゼロがあります。<br>'h' - 12時間表示の時間。<br>'hh' - 12時間表示の時間、1桁の値には先頭のゼロがあります。<br>'MM' - 分。<br>'ss' - 秒。<br>'TT' - 大文字の12時間の時計期間(AM/<br>PM)。'TT' - 小文字の12時間時計の期間(AM/PM)。",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "入力マスクで表示された数値の整数部分と分数部分を分離するために領域が使用する記号を上書きします。",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "入力マスクで多くの数字の数字を3つずつのグループに分けるために使う記号を上書きします。",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "入力マスクで使われる地域の通貨記号やコードを上書きします。",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "入力マスクで使われている地域の通貨パターンを上書きします。パターンには以下のプレースホルダーを含めることができます:<br>'@' - 通貨記号またはコード。<br>'#' - 数字。<br>'-' - マイナス記号の負の位置(省略した場合、マイナス記号は冒頭に置かれます)。"
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "パターンには、文字列リテラルと次のプレースホルダーを含めることができます: '9' - 数字の場合。'a' - 大文字または小文字。'#' - 数字または大文字または小文字。文字をエスケープするには、バックスラッシュ '\\' を使用します。"
@@ -2993,6 +3172,12 @@ export var jaStrings = {
       thousandsSeparator: "大きな数字を 3 つのグループに区切るために使用される記号。",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "表示される数値の小数点以下の桁数を制限します。"
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "通貨のシンボルまたはコードが値とともに表示されます。その地域のシンボルがデフォルトで使用されます。このプロパティをクリアしてシンボルが表示されないようにしてください。",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "数字、通貨記号、マイナス記号の位置を指定します。パターンには以下のプレースホルダーを含めることができます:<br>'@' - 通貨記号またはコード。<br>'#' - 数字。<br>'-' - マイナス記号の負の位置(省略した場合、マイナス記号は最初に配置されます)。"
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

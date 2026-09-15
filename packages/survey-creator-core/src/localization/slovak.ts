@@ -749,7 +749,9 @@ export var skStrings = {
       // [Auto-translated] "Survey description"
       description: "Opis prieskumu",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Nastavenie prieskumu iba na čítanie"
+      readOnly: "Nastavenie prieskumu iba na čítanie",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionálne formáty"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var skStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Uložte maskovanú hodnotu do výsledkov prieskumu"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Región",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Dátumový vzor",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Časový vzor",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Desatinný separator",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Tisícový oddeľovač",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Symbol meny",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Menový vzor"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Hodnotový vzor"
@@ -824,6 +842,12 @@ export var skStrings = {
       min: "Minimálna hodnota",
       // [Auto-translated] "Maximum value"
       max: "Maximálna hodnota"
+    },
+    currencymask: {
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Symbol meny",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Menový vzor"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymažte ostatné, keď sú vybraté",
@@ -1607,6 +1631,8 @@ export var skStrings = {
       question: "Otázka",
       // "Pages"
       pages: "Stránky",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionálne formáty",
       // "Quiz Mode"
       timer: "Časovač/kvíz",
       // "Calculated Values"
@@ -2392,6 +2418,139 @@ export var skStrings = {
       container: "Rovnaké ako kontajner"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabčina",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulharčina",
+    // [Auto-translated] "Catalan"
+    ca: "Katalánčina",
+    // [Auto-translated] "Czech"
+    cs: "Čeština",
+    // [Auto-translated] "Welsh"
+    cy: "Waleština",
+    // [Auto-translated] "Danish"
+    da: "Dánsky",
+    // [Auto-translated] "German"
+    de: "Nemčina",
+    // [Auto-translated] "Greek"
+    el: "Gréčtina",
+    // [Auto-translated] "English"
+    en: "Angličtina",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Angličtina (Austrália)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Angličtina (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Angličtina (Spojené kráľovstvo)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Angličtina (Írsko)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Angličtina (India)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Angličtina (Nový Zéland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Angličtina (Južná Afrika)",
+    // [Auto-translated] "Spanish"
+    es: "Španielčina",
+    // [Auto-translated] "Estonian"
+    et: "Estónčina",
+    // [Auto-translated] "Basque"
+    eu: "Baskicko",
+    // [Auto-translated] "Persian"
+    fa: "Perzština",
+    // [Auto-translated] "Finnish"
+    fi: "Fínsky",
+    // [Auto-translated] "Filipino"
+    fil: "Filipínci",
+    // [Auto-translated] "French"
+    fr: "Francúzština",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Francúzština (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Francúzština (Švajčiarsko)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebrejčina",
+    // [Auto-translated] "Hindi"
+    hi: "Hindčina",
+    // [Auto-translated] "Croatian"
+    hr: "Chorvátčina",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haitská kreolčina",
+    // [Auto-translated] "Hungarian"
+    hu: "Maďarčina",
+    // [Auto-translated] "Indonesian"
+    id: "Indonézština",
+    // [Auto-translated] "Icelandic"
+    is: "Islandčina",
+    // [Auto-translated] "Italian"
+    it: "Taliančina",
+    // [Auto-translated] "Japanese"
+    ja: "Japončina",
+    // [Auto-translated] "Georgian"
+    ka: "Gruzínčina",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazachština",
+    // [Auto-translated] "Korean"
+    ko: "Kórejčina",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litovčina",
+    // [Auto-translated] "Latvian"
+    lv: "Lotyščina",
+    // [Auto-translated] "Macedonian"
+    mk: "Macedónčina",
+    // [Auto-translated] "Burmese"
+    mm: "Barmský",
+    // [Auto-translated] "Malay"
+    ms: "Malajčina",
+    // [Auto-translated] "Dutch"
+    nl: "Holanďančina",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Holanďančina (Belgicko)",
+    // [Auto-translated] "Norwegian"
+    no: "Nórčina",
+    // [Auto-translated] "Polish"
+    pl: "Poľsko",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugalčina",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugalčina (Brazília)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumunčina",
+    // [Auto-translated] "Russian"
+    ru: "Ruský",
+    // [Auto-translated] "Slovak"
+    sk: "Slovenčina",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovinčina",
+    // [Auto-translated] "Serbian"
+    sr: "Srbčina",
+    // [Auto-translated] "Swedish"
+    sv: "Švédčina",
+    // [Auto-translated] "Swahili"
+    sw: "Svahilčina",
+    // [Auto-translated] "Telugu"
+    tel: "Telugčina",
+    // [Auto-translated] "Tajik"
+    tg: "Tadžik",
+    // [Auto-translated] "Thai"
+    th: "Thajský jazyk",
+    // [Auto-translated] "Turkish"
+    tr: "Turecko",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukrajinčina",
+    // [Auto-translated] "Urdu"
+    ur: "Urdčina",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamci",
+    // [Auto-translated] "Chinese"
+    zh: "Čínština",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Čínština (zjednodušená)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Čínština (tradičná)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2467,6 +2626,10 @@ export var skStrings = {
     visibletrigger: "zmeniť viditeľnosť (zastarané)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Rovnako ako jazyk prieskumu"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Napríklad: +1(999)-999-99-99"
@@ -2978,6 +3141,22 @@ export var skStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Vyberte, či chcete do výsledkov prieskumu uložiť hodnotu otázky s použitou maskou."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Región, ktorého formáty sa vzťahujú na dátumovo-časové, číselné a menové vstupné masky. Ak nie je špecifikovaný, používa sa jazyk prieskumu.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Prepisuje formát dátumu regiónu používaný v vstupných maskách. Vzor môže obsahovať znaky oddeľovačov a nasledujúce zástupné znaky:<br>'m' - číslo mesiaca.<br> 'mm' - číslo mesiaca, s úvodnou nulou pre jednociferné hodnoty. <br>'d' - Deň v mesiaci. <br>'dd' - Deň v mesiaci, s úvodnou nulou pre jednociferné hodnoty. <br>'yy' - Posledné dve číslice roka. <br>'yyyy' - Štvorciferný rok.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Prepisuje časový formát regiónu používaný v vstupných maskách. Vzor môže obsahovať oddeľovacie znaky a nasledujúce zástupné znaky: <br>'H' - Hodiny v 24-hodinovom formáte.<br> 'HH' - Hodiny v 24-hodinovom formáte, s úvodnou nulou pre jednociferné hodnoty. <br>'H' - Hodiny v 12-hodinovom formáte. <br>'HH' - Hodiny v 12-hodinovom formáte, s úvodnou nulou pre jednociferné hodnoty. <br>'MM' - Minúty. <br>'ss' - <br>Sekundy. 'TT' - 12-hodinové hodinové obdobie veľkými písmenami (AM/PM). <br>'TT' - 12-hodinové hodinové obdobie malými písmenami (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Prepíše symbol, ktorý región používa na oddelenie zlomkovej časti od celočíselnej časti zobrazeného čísla v vstupných maskách.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Prepíše symbol, ktorý región používa na rozdelenie číslic veľkého čísla do skupín po troch v vstupných maskách.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Prepíše menový symbol alebo kód regiónu používaný v vstupných maskách.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Prepisuje menový vzor regiónu používaný v vstupných maskách. Vzor môže obsahovať nasledujúce zástupné znaky: <br>'@' - Symbol meny alebo kód.<br> '#' - Číslo. <br>'-' - Pozícia mínusového znaku v záporných hodnotách (ak je vynechaný, mínus je umiestnený na začiatok)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Vzor môže obsahovať reťazcové literály a nasledujúce zástupné symboly: \"9\" - pre číslicu; \"a\" - pre veľké alebo malé písmeno; '#' - pre číslicu alebo veľké alebo malé písmeno. Použite opačné lomítko \"\\\" na únik z postavy."
@@ -2993,6 +3172,12 @@ export var skStrings = {
       thousandsSeparator: "Symbol používaný na oddelenie číslic veľkého čísla do skupín po troch.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
       precision: "Obmedzuje, koľko číslic sa má zachovať za desatinnou čiarkou pre zobrazené číslo."
+    },
+    currencymask: {
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Symbol meny alebo kód zobrazený s hodnotou. Symbol regiónu sa používa predvolene. Vymažte túto vlastnosť, aby sa nezobrazoval žiadny symbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Určuje pozície čísla, menového symbolu a mínusového znaku. Vzor môže obsahovať nasledujúce zástupné znaky: <br>'@' - Symbol meny alebo kód.<br> '#' - Číslo. <br>'-' - Pozícia mínusového znaku v záporných hodnotách (ak je vynechaný, mínus sa umiestni na začiatok)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
