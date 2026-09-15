@@ -4344,3 +4344,44 @@ test("Use the standalone question type definition for a cell type added into mat
     delete matrixDropdownColumnTypes["file"];
   }
 });
+function getPropertyGridPanelsInfo(obj: Base): Array<{ name: string, elements: Array<string> }> {
+  const propertyGrid = new PropertyGridModelTester(obj);
+  return propertyGrid.survey.getAllPanels().map(panel => ({ name: panel.name, elements: panel.elements.map(el => el.name) }));
+}
+test("Show the wrapped question properties for a specialized question by default, Bug#8001", () => {
+  ComponentCollection.Instance.add({ name: "customfile", inheritBaseProps: true, questionJSON: { type: "file" } });
+  try {
+    const survey = new SurveyModel({ elements: [{ type: "file", name: "q1" }, { type: "customfile", name: "q2" }] });
+    // Compare the properties of the wrapped question type only, the common question properties may differ
+    const getFileProperties = (info: Array<{ name: string, elements: Array<string> }>) =>
+      info.map(panel => ({ name: panel.name, elements: panel.elements.filter(name => !Serializer.findProperty("question", name) && !!Serializer.findProperty("file", name)) }))
+        .filter(panel => panel.elements.length > 0);
+    const fileInfo = getFileProperties(getPropertyGridPanelsInfo(survey.getQuestionByName("q1")));
+    const customInfo = getFileProperties(getPropertyGridPanelsInfo(survey.getQuestionByName("q2")));
+    expect(fileInfo.some(panel => panel.elements.indexOf("allowMultiple") > -1)).toBeTruthy();
+    expect(customInfo).toStrictEqual(fileInfo);
+  } finally {
+    ComponentCollection.Instance.clear();
+  }
+});
+test("Show the wrapped question properties for a specialized question used as a cell type by default, Bug#8001", () => {
+  ComponentCollection.Instance.add({ name: "customfile", inheritBaseProps: true, questionJSON: { type: "file" } });
+  matrixDropdownColumnTypes["file"] = {};
+  matrixDropdownColumnTypes["customfile"] = {};
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const fileColumn = matrix.addColumn("col1");
+    fileColumn.cellType = "file";
+    const customColumn = matrix.addColumn("col2");
+    customColumn.cellType = "customfile";
+    expect(customColumn.templateQuestion.getType()).toBe("customfile");
+    const fileInfo = getPropertyGridPanelsInfo(fileColumn);
+    const customInfo = getPropertyGridPanelsInfo(customColumn);
+    expect(fileInfo[0].elements.indexOf("allowMultiple")).toBeGreaterThan(-1);
+    expect(customInfo).toStrictEqual(fileInfo);
+  } finally {
+    delete matrixDropdownColumnTypes["file"];
+    delete matrixDropdownColumnTypes["customfile"];
+    ComponentCollection.Instance.clear();
+  }
+});

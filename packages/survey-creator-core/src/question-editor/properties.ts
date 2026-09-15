@@ -327,13 +327,48 @@ export class SurveyQuestionProperties {
   }
   private hasPrefixedClassDefinition(className: string): boolean {
     if (!!this.getClassDefinition(className, true)) return true;
+    const index = className.indexOf("@");
+    const prefix = className.substring(0, index + 1);
+    const wrappedType = this.getWrappedQuestionType();
+    if (!!wrappedType && !!this.getClassDefinition(prefix + wrappedType, true)) return true;
     // There is no "<owner>@<questionType>" definition, but the suffix is a registered question type,
     // for example a type added into matrixDropdownColumnTypes. Use the "<owner>@default" definition
     // and take the type specific properties from the standalone question type definition.
-    const index = className.indexOf("@");
     const clName = className.substring(index + 1);
     if (!Serializer.isDescendantOf(clName, "question")) return false;
-    return !!this.getClassDefinition(className.substring(0, index + 1) + "default");
+    return !!this.getClassDefinition(prefix + "default");
+  }
+  // A specialized question type (a custom question that wraps another question) used as a cell type
+  // returns the wrapped question type, for example "file" for a custom type based on the file question.
+  private getWrappedQuestionType(): string {
+    if (!this.isColumnObj) return "";
+    const question = this.obj.templateQuestion;
+    if (!question || typeof question.getDynamicType !== "function") return "";
+    const res = question.getDynamicType();
+    return !!res && res !== "question" && res !== question.getType() ? res : "";
+  }
+  private getPrefixedClassHierarchy(prefix: string, clName: string): Array<string> {
+    const classes: Array<string> = [];
+    let classInfo = Serializer.findClass(clName);
+    while(classInfo && classInfo.name !== "question") {
+      classes.unshift(prefix + classInfo.name);
+      classInfo = classInfo.parentName ? Serializer.findClass(classInfo.parentName) : undefined;
+    }
+    const className = prefix + clName;
+    if (classes.indexOf(className) < 0) {
+      classes.unshift(className);
+    }
+    return classes;
+  }
+  private getExistingClassDefinitions(classes: Array<string>): Array<ISurveyQuestionEditorDefinition> {
+    const res: Array<ISurveyQuestionEditorDefinition> = [];
+    for (const cl of classes) {
+      const def = this.getClassDefinition(cl);
+      if (def) {
+        res.push(def);
+      }
+    }
+    return res;
   }
   private getDefinitionsForPrefixedClass(
     className: string,
@@ -342,36 +377,23 @@ export class SurveyQuestionProperties {
   ): Array<ISurveyQuestionEditorDefinition> {
     const prefix = className.substring(0, className.indexOf("@") + 1);
     const clName = className.substring(prefix.length);
-    const classes: Array<string> = [];
-    let classInfo = Serializer.findClass(clName);
-    while(classInfo && classInfo.name !== "question") {
-      classes.unshift(prefix + classInfo.name);
-      classInfo = classInfo.parentName ? Serializer.findClass(classInfo.parentName) : undefined;
-    }
-    if (classes.indexOf(className) < 0) {
-      classes.unshift(className);
-    }
     const defaultName = prefix + "default";
-    if (classes.indexOf(defaultName) < 0) {
-      classes.unshift(defaultName);
+    const classes = this.getPrefixedClassHierarchy(prefix, clName).filter(cl => cl !== defaultName);
+    const defaultDef = this.getClassDefinition(defaultName);
+    if (defaultDef) {
+      result.push(defaultDef);
     }
-    let hasTypeDefinition = false;
-    for (const cl of classes) {
-      const def = this.getClassDefinition(cl);
-      if (def) {
-        hasTypeDefinition = hasTypeDefinition || cl !== defaultName;
-        result.push(def);
-      }
-    }
-    if (!hasTypeDefinition) {
-      // None of the "<owner>@<questionType>" definitions is defined, take the type specific
-      // properties from the standalone question type definitions instead.
-      for (const cl of classes) {
-        if (cl === defaultName) continue;
-        const def = this.getClassDefinition(cl.substring(prefix.length));
-        if (def) {
-          result.push(def);
-        }
+    const wrappedType = this.getWrappedQuestionType();
+    const wrappedClasses = !!wrappedType ? this.getPrefixedClassHierarchy(prefix, wrappedType).filter(cl => cl !== defaultName) : [];
+    const removePrefix = (names: Array<string>): Array<string> => names.map(cl => cl.substring(prefix.length));
+    // The type specific definitions in priority order, the first existing one is used:
+    // "<owner>@<questionType>", "<owner>@<wrappedType>", "<questionType>", "<wrappedType>".
+    const candidates = [classes, wrappedClasses, removePrefix(classes), removePrefix(wrappedClasses)];
+    for (const names of candidates) {
+      const defs = this.getExistingClassDefinitions(names);
+      if (defs.length > 0) {
+        defs.forEach(def => result.push(def));
+        break;
       }
     }
     this.markUsedProperties(result, usedProperties);
