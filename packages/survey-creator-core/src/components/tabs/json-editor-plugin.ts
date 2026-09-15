@@ -121,15 +121,45 @@ export abstract class JsonEditorBaseModel extends Base {
         data: {
           error: error,
           showFixButton: error.isFixable,
-          fixError: () => {
-            this.text = error.fixError(this.text);
-          },
+          fixError: () => this.applyFix(error),
           fixButtonIcon: "icon-fix",
           fixButtonTitle: getLocString("ed.jsonFixError")
         }
       }));
     });
     return res;
+  }
+  // The list is rebuilt a second after the last keystroke, so a button may still describe the text
+  // as it was before the keystroke, and its error was positioned in that text. The fix is taken
+  // from the worker of the current text: the very same error while the text has not moved on,
+  // otherwise the finding of the same rule at the same path. When the current text has nothing
+  // fixable there any more, the list is brought up to date and nothing else happens.
+  private applyFix(error: SurveyTextWorkerError): void {
+    const text = this.text;
+    const textWorker = this.createTextWorker();
+    const current = textWorker.errors.indexOf(error) > -1 ? error : this.findSameFinding(textWorker, error);
+    if (!current || !current.isFixable) {
+      this.cancelScheduledProcessing();
+      this.processErrors(text);
+      return;
+    }
+    const fixed = current.fixError(text);
+    if (fixed !== text) {
+      this.text = fixed;
+    }
+  }
+  private findSameFinding(textWorker: SurveyTextWorker, error: SurveyTextWorkerError): SurveyTextWorkerError {
+    if (!(error instanceof SurveyTextWorkerLinterFinding)) return undefined;
+    const finding = <SurveyTextWorkerLinterFinding>error;
+    return textWorker.errors.filter(item => item instanceof SurveyTextWorkerLinterFinding && item.isFixable &&
+      item.ruleId === finding.ruleId && item.reason === finding.reason &&
+      item.finding.path === finding.finding.path)[0];
+  }
+  private cancelScheduledProcessing(): void {
+    if (this.jsonEditorChangedTimeoutId !== -1) {
+      clearTimeout(this.jsonEditorChangedTimeoutId);
+      this.jsonEditorChangedTimeoutId = -1;
+    }
   }
   public processErrors(text: string): void {
     this.errorActionCounter = 1;

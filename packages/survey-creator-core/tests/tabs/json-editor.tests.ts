@@ -370,6 +370,8 @@ function createAceMock(): any {
     commands: { removeCommand() { } }, setReadOnly() { }, setShowPrintMargin() { }, setFontSize() { }, setTheme() { },
     getSession: () => session, session: session, undoManager: undoManager,
     getValue: () => value, setValue(text: string) { value = text; onChange(); },
+    // the text a keystroke leaves behind: the "change" it fires rebuilds the list a second later
+    setValueSilently(text: string) { value = text; },
     renderer: { updateFull() { }, scrollCursorIntoView() { } },
     resize() { }, focus() { }, isFocused: () => false, gotoLine() { },
     getAnnotations: () => annotations,
@@ -642,4 +644,61 @@ test("Ace: an edit that was undone and redone reaches the survey on leaving the 
   } finally {
     TabJsonEditorAcePlugin.hasAceEditor = oldFunc;
   }
+});
+
+const duplicateNames = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q1" }] };
+
+test("A fix clicked before the error list caught up with the text fixes the current text", () => {
+  const creator = new CreatorTester();
+  const model = new AceJsonEditorModel(creator);
+  const ace = createAceMock();
+  model.init(ace);
+  model.text = JSON.stringify(duplicateNames, null, 2);
+  const action = model.errorList.actions[0];
+  expect(action.data.showFixButton).toBeTruthy();
+  // a keystroke moves every offset the button was positioned with
+  ace.setValueSilently(JSON.stringify({ title: "Survey", ...duplicateNames }, null, 2));
+  expect(() => action.data.fixError()).not.toThrow();
+  const fixed = JSON.parse(model.text);
+  expect(fixed.title).toBe("Survey");
+  expect(fixed.elements.map((e: any) => e.name)).toEqual(["q1", "question1"]);
+  expect(model.hasErrors).toBeFalsy();
+  model.dispose();
+});
+
+test("A fix clicked after the error was typed away only refreshes the list", () => {
+  const creator = new CreatorTester();
+  const model = new AceJsonEditorModel(creator);
+  const ace = createAceMock();
+  model.init(ace);
+  model.text = JSON.stringify(duplicateNames, null, 2);
+  const action = model.errorList.actions[0];
+  expect(action.data.showFixButton).toBeTruthy();
+  const typedAway = JSON.stringify({ elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] }, null, 2);
+  ace.setValueSilently(typedAway);
+  expect(() => action.data.fixError()).not.toThrow();
+  expect(model.text).toBe(typedAway);
+  expect(model.errorList.actions).toHaveLength(0);
+  expect(model.hasErrors).toBeFalsy();
+  model.dispose();
+});
+
+// allowingDeactivate builds the worker of the current text without rebuilding the list, so the
+// cache being current says nothing about the list being current
+test("A fix clicked after a denied tab switch still applies to the current text", () => {
+  const creator = new CreatorTester();
+  creator.JSON = duplicateNames;
+  creator.activeTab = "json";
+  const model = <TextareaJsonEditorModel>creator.getPlugin("json").model;
+  const action = model.errorList.actions[0];
+  expect(action.data.showFixButton).toBeTruthy();
+  // a keystroke: the list is rebuilt a second later
+  (<any>model)._text = JSON.stringify({ title: "Survey", ...JSON.parse(model.text) }, null, 2);
+  creator.activeTab = "designer";
+  expect(creator.activeTab).toBe("json");
+  expect(() => action.data.fixError()).not.toThrow();
+  const fixed = JSON.parse(model.text);
+  expect(fixed.title).toBe("Survey");
+  expect(fixed.pages[0].elements.map((e: any) => e.name)).toEqual(["q1", "question1"]);
+  expect(model.hasErrors).toBeFalsy();
 });
