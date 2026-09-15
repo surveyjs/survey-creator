@@ -1688,28 +1688,28 @@ export var enStrings = {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
     regionalformat: {
-      locale: "A region whose formats apply to date, time, numeric, and currency inputs. If not specified, the survey language is used.",
-      datePattern: "Overrides the date order and separators that the region uses. The pattern can contain separator characters and the `dd`, `mm`, and `yyyy` placeholders. Ex.: dd/mm/yyyy",
-      timePattern: "Overrides the time format that the region uses. The pattern can contain separator characters and the `HH`, `hh`, `MM`, `ss`, and `TT` placeholders. Ex.: hh:MM TT",
-      decimalSeparator: "Overrides the symbol that the region uses to separate the fractional part from the integer part of a displayed number.",
-      thousandsSeparator: "Overrides the symbol that the region uses to separate the digits of a large number into groups of three.",
-      currencySymbol: "Overrides the currency symbol that the region uses. The `currencySymbol` property of an individual input mask overrides this value in turn.",
-      currencyPattern: "Overrides the placement of the currency symbol that the region uses. In the pattern, `@` stands for the currency symbol, `#` for the number, and `-` for the position of the minus sign in negative amounts (if omitted, the minus sign is placed at the beginning). Ex.: @#"
+      locale: "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used.",
+      datePattern: "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.",
+      timePattern: "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm).",
+      decimalSeparator: "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks.",
+      thousandsSeparator: "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks.",
+      currencySymbol: "Overrides the region's currency symbol or code used in input masks.",
+      currencyPattern: "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
     },
     patternmask: {
-      pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
+      pattern: "The pattern can contain string literals and the following placeholders:<br>`9` - A digit.<br>`a` - An upper- or lowercase letter.<br>`#` - A digit or an upper- or lowercase letter.<br>Use backslash `\\` to escape a character."
     },
     datetimemask: {
-      pattern: "The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in upper case (AM/PM).<br>`tt` - 12-hour clock period in lower case (am/pm)."
+      pattern: "Overrides the region's date and time formats. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
     },
     numericmask: {
-      decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",
-      thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three.",
+      decimalSeparator: "A symbol that separates the fractional part from the integer part of a displayed number. The region's symbol is used by default.",
+      thousandsSeparator: "A symbol that separates the digits of a large number into groups of three. The region's symbol is used by default.",
       precision: "Limits how many digits to retain after the decimal point for a displayed number."
     },
     currencymask: {
-      currencySymbol: "The symbol that the currency pattern places around the value. If not specified, the region's symbol is used; leave empty to display no symbol.",
-      currencyPattern: "Defines where the currency symbol and the minus sign are placed. In the pattern, `@` stands for the currency symbol, `#` for the number, and `-` for the position of the minus sign in negative amounts (if omitted, the minus sign is placed at the beginning). If not specified, the regional format's pattern is used."
+      currencySymbol: "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol.",
+      currencyPattern: "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
     },
     theme: {
       isPanelless: "This setting applies only to questions outside of a panel.",
