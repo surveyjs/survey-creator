@@ -1,10 +1,10 @@
 ---
 title: Angular Form Builder | Generate reactive HTML forms using JSON
-description: SurveyJS Form Builder for Angular is an open-source client-side component that fully integrates into your Angular application and generates form JSON definitions (schemas) behind the scenes. It offers a user-friendly drag-and-drop interface, GUI for form branching, and an integrated theme editor for customizing form design.
+description: SurveyJS Form Builder for Angular is a source-available client-side component that integrates seamlessly into your Angular application and generates form definitions as JSON schemas. It provides a user-friendly drag-and-drop interface and uses theme adapters for Bootstrap, MUI, and shadcn/ui to match the styling of your application.
 ---
 # Angular Form Builder
 
-[SurveyJS Form Builder](https://surveyjs.io/create-free-survey) is an open-source UI component for Angular that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms right in your Angular application. This component generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder features a dedicated GUI for conditional rules and form branching and an integrated CSS theme editor for custom form styling and branding. This step-by-step tutorial will help you get started with the Form Builder component in an Angular application. To add the component to your application, follow the steps below:
+[SurveyJS Form Builder](https://surveyjs.io/create-free-survey) is a source-available UI component for Angular that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms right in your Angular application. This component generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder features a dedicated GUI for conditional rules and form branching and an integrated CSS theme editor for custom form styling and branding. This step-by-step tutorial will help you get started with the Form Builder component in an Angular application. To add the component to your application, follow the steps below:
 
 - [Install the `survey-creator-angular` npm Package](#install-the-survey-creator-angular-npm-package)
 - [Configure Styles](#configure-styles)
@@ -91,7 +91,7 @@ In addition, Survey Creator allows users to switch between UI themes and customi
 
 ### Add Fonts
 
-Starting with SurveyJS v3.1.0, fonts are no longer included in SurveyJS packages. Load Open Sans separately to preserve the default appearance, unless your application already does so. If you use a custom font, load it instead. Otherwise, the browser uses a fallback font, which may affect spacing and layout.
+Starting with SurveyJS v3.0.4, fonts are no longer included in SurveyJS packages. Load Open Sans separately to preserve the default appearance, unless your application already does so. If you use a custom font, load it instead. Otherwise, the browser uses a fallback font, which may affect spacing and layout.
 
 To add Open Sans using [Fontsource](https://fontsource.org/docs/getting-started/install), run the following command:
 

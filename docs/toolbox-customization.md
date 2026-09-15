@@ -1,5 +1,5 @@
 ---
-title: Customize Survey Creator Toolbox | Open-Source JavaScript Form Libraries 
+title: Customize Survey Creator Toolbox | JavaScript Form Builder Libraries 
 description: Learn to switch between full and compact modes, limit available question and panel types, group items by categories, customize predefined Toolbox items, and even add custom elements.
 ---
 
