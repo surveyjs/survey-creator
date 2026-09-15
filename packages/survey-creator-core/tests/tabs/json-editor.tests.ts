@@ -178,13 +178,13 @@ test("JsonEditor & fixError action incorrect properties value, Issue#7335", () =
   expect(editor.errorList.actions[0].data.showFixButton).toBeTruthy();
   editor.errorList.actions[0].data.fixError();
   expect(editor.hasErrors).toBeFalsy();
+  // nothing says which allowed value was meant, so the key goes and the default takes over
   expect(JSON.parse(editor.text)).toEqual({
     pages: [{
       elements: [
         {
           type: "text",
-          name: "q1",
-          clearIfInvisible: "default"
+          name: "q1"
         }
       ]
     }]

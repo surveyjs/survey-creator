@@ -45,8 +45,11 @@ test("The error list holds the findings in the order of the text", () => {
   expect(actions.map(a => a.data.error.ruleId)).toEqual(["property/unknown", "reference/unknown"]);
   actions.forEach(action => {
     expect(action.id.indexOf("linterfinding_")).toBe(0);
-    expect(action.data.showFixButton).toBeFalsy();
   });
+  // a key the deserializer drops can be dropped in the text too; a name that resolves to nothing
+  // and reads like nothing else has no repair to offer
+  expect(actions[0].data.showFixButton).toBeTruthy();
+  expect(actions[1].data.showFixButton).toBeFalsy();
 });
 
 test("A parse error is listed as an error and nothing else is", () => {

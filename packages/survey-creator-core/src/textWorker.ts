@@ -1,9 +1,9 @@
-import { SurveyHelper } from "./survey-helper";
 import { SurveyJSON5 } from "./json5";
 import { settings } from "./creator-settings";
-import { levenshteinDistance } from "./utils/utils";
 import { editorLocalization } from "./editorLocalization";
-import { ILintFinding, ISurveyLintOptions, ISurveyLintResult, lintSurvey } from "survey-core/linter";
+import {
+  ILintFinding, ILintFix, ILintFixEdit, ISurveyLintOptions, ISurveyLintResult, lintSurvey,
+} from "survey-core/linter";
 
 export interface ISurveyTextWorkerOptions {
   // false parses only - the way the creator reads the text when it applies it
@@ -55,15 +55,6 @@ export class SurveyTextWorkerLinterFinding extends SurveyTextWorkerError {
   }
 }
 
-// "page" for a page, "panel" for a panel, "question" for everything else - a column or an item
-// gets a question name, the way the JSON tab always named them
-function elementKindOf(type: string): string {
-  const lower = (type || "").toLowerCase();
-  if (lower === "page") return "page";
-  if (lower === "panel" || lower === "flowpanel") return "panel";
-  return "question";
-}
-
 // "pages[0].elements" -> { parent: "pages[0]", key: "elements" }
 function splitLastKey(path: string): { parent: string, key: string } {
   const dot = path.lastIndexOf(".");
@@ -71,113 +62,179 @@ function splitLastKey(path: string): { parent: string, key: string } {
   return { parent: path.substring(0, dot), key: path.substring(dot + 1) };
 }
 
-// Rewrites one object literal of the text: the slice the parser marked is parsed again on its
-// own, changed, and written back with the editor's indentation.
-abstract class SurveyTextWorkerFixer {
-  public constructor(protected worker: SurveyTextWorker, protected finding: ILintFinding) {
-  }
-  public abstract get isFixable(): boolean;
-  // the path of the object literal that is rewritten
-  protected abstract getTargetPath(): string;
-  protected abstract update(json: any): void;
-  public fixError(text: string): string {
-    const target = this.worker.getNodeByPath(this.getTargetPath());
-    const pos = !!target && isPlainObject(target.node) ? target.node["pos"] : undefined;
-    if (!pos || typeof pos.start !== "number" || typeof pos.end !== "number") return text;
-    const json = new SurveyJSON5().parse(text.substring(pos.start, pos.end + 1));
-    this.update(json);
-    return this.replaceJson(text, pos.start, pos.end, json);
-  }
-  protected get data(): { [key: string]: any } {
-    return this.finding.messageData || {};
-  }
-  protected newElementName(kind: string): string {
-    const key = kind === "page" ? "ed.newPageName" : kind === "panel" ? "ed.newPanelName" : "ed.newQuestionName";
-    const taken = this.worker.getAllNames().map(name => ({ name: name }));
-    return SurveyHelper.getNewName(taken, editorLocalization.getString(key));
-  }
-  private replaceJson(text: string, start: number, end: number, json: any): string {
-    let newContent = JSON.stringify(json, null, settings.jsonEditor.indentation);
-    newContent = this.addLeftIndentIntoContent(text, newContent, start - 1);
-    return text.substring(0, start) + newContent + text.substring(end + 1);
-  }
-  private addLeftIndentIntoContent(text: string, content: string, index: number): string {
-    if (index <= 0) return content;
-    let indent = "";
-    while(index > 0 && (text[index] === " " || text[index] === "\t")) {
-      indent += text[index];
-      index--;
+// "pages[0].elements[1].visibleIf" -> ["pages", 0, "elements", 1, "visibleIf"]
+function parsePath(path: string): Array<string | number> {
+  const res: Array<string | number> = [];
+  if (!path) return res;
+  path.split(".").forEach(part => {
+    if (!part) return;
+    const bracket = part.indexOf("[");
+    if (bracket < 0) {
+      res.push(part);
+      return;
     }
-    if (!indent) return content;
-    const lines = content.split("\n");
-    for (let i = 1; i < lines.length; i++) {
-      lines[i] = indent + lines[i];
+    const name = part.substring(0, bracket);
+    if (!!name) res.push(name);
+    const indexes = part.substring(bracket).match(/\[(\d+)\]/g) || [];
+    indexes.forEach(entry => res.push(parseInt(entry.substring(1, entry.length - 1), 10)));
+  });
+  return res;
+}
+
+function parseJson(text: string, parseType: number): any {
+  try {
+    return new SurveyJSON5(parseType).parse(text);
+  } catch(e) {
+    return undefined;
+  }
+}
+
+// The object literal an edit is rewritten inside, and the way from it down to what the edit
+// names. Only an object literal carries a position marker, so an edit on an array item is
+// written by rewriting the object that holds the array.
+function findOwner(root: any, segments: Array<string | number>):
+  { json: any, rest: Array<string | number> } | undefined {
+  if (!isPlainObject(root) || !root["pos"]) return undefined;
+  let owner: any = root;
+  let rest: Array<string | number> = [];
+  let node: any = root;
+  for (let i = 0; i < segments.length; i++) {
+    const key = segments[i];
+    // the linter reads a single object written where an array belongs as its one element, and
+    // the text has no index for it
+    if (typeof key === "number" && !Array.isArray(node)) {
+      if (key !== 0) return undefined;
+      continue;
     }
-    return lines.join("\n");
-  }
-}
-
-// name/duplicate: the later element gets a fresh name of its own kind
-class SurveyTextWorkerDuplicateNameFixer extends SurveyTextWorkerFixer {
-  public get isFixable(): boolean { return this.finding.reason === "elementNames"; }
-  protected getTargetPath(): string { return this.finding.path; }
-  protected update(json: any): void {
-    json["name"] = this.newElementName(elementKindOf(this.finding.elementType));
-  }
-}
-
-// property/required: only a missing name can be made up
-class SurveyTextWorkerRequiredNameFixer extends SurveyTextWorkerFixer {
-  public get isFixable(): boolean { return this.data.key === "name"; }
-  protected getTargetPath(): string { return this.finding.path; }
-  protected update(json: any): void {
-    json["name"] = this.newElementName(elementKindOf(this.data.className));
-  }
-}
-
-// property/not-an-array: the value becomes the one item of the array
-class SurveyTextWorkerNotAnArrayFixer extends SurveyTextWorkerFixer {
-  public get isFixable(): boolean { return true; }
-  protected getTargetPath(): string { return splitLastKey(this.finding.path).parent; }
-  protected update(json: any): void {
-    const key = splitLastKey(this.finding.path).key;
-    const value = json[key];
-    if (value !== undefined && !Array.isArray(value)) {
-      json[key] = [value];
+    if (typeof key === "string" && Array.isArray(node)) return undefined;
+    rest.push(key);
+    // the last segment names what the edit changes, not a step of the way to it
+    if (i === segments.length - 1) break;
+    const next = node[key];
+    if (next === null || typeof next !== "object") return undefined;
+    node = next;
+    if (isPlainObject(next) && !!next["pos"]) {
+      owner = next;
+      rest = [];
     }
   }
+  return rest.length > 0 ? { json: owner, rest: rest } : undefined;
 }
 
-// property/invalid-value: the allowed value the author most likely meant
-class SurveyTextWorkerInvalidValueFixer extends SurveyTextWorkerFixer {
+// The key keeps its place: deleting it to add it back under another name would move it to the end
+function renameKeyInPlace(node: any, key: string, newKey: string): void {
+  const keys = Object.keys(node);
+  const values: { [name: string]: any } = {};
+  keys.forEach(name => {
+    values[name] = node[name];
+    delete node[name];
+  });
+  keys.forEach(name => {
+    if (name === key) node[newKey] = values[key];
+    else node[name] = values[name];
+  });
+}
+
+function applyOp(node: any, key: string | number, edit: ILintFixEdit): boolean {
+  const has = Array.isArray(node)
+    ? typeof key === "number" && key >= 0 && key < node.length
+    : Object.prototype.hasOwnProperty.call(node, key);
+  if (edit.op === "set") {
+    // the one op that may name a key the object does not have yet: a required property is
+    // missing exactly because nobody wrote it
+    if (Array.isArray(node) && !has) return false;
+    node[key] = edit.value;
+    return true;
+  }
+  if (!has) return false;
+  if (edit.op === "wrap") {
+    node[key] = [node[key]];
+    return true;
+  }
+  if (edit.op === "remove") {
+    if (Array.isArray(node)) {
+      node.splice(<number>key, 1);
+    } else {
+      delete node[key];
+    }
+    return true;
+  }
+  if (edit.op === "rename") {
+    if (Array.isArray(node) || !edit.key) return false;
+    renameKeyInPlace(node, <string>key, edit.key);
+    return true;
+  }
+  return false;
+}
+
+function applyEditToJson(root: any, segments: Array<string | number>, edit: ILintFixEdit): boolean {
+  let node: any = root;
+  for (let i = 0; i < segments.length; i++) {
+    const key = segments[i];
+    if (typeof key === "number" && !Array.isArray(node)) {
+      if (key !== 0) return false;
+      continue;
+    }
+    if (typeof key === "string" && Array.isArray(node)) return false;
+    if (i === segments.length - 1) return applyOp(node, key, edit);
+    const next = node[key];
+    if (next === null || typeof next !== "object") return false;
+    node = next;
+  }
+  return false;
+}
+
+function addLeftIndentIntoContent(text: string, content: string, index: number): string {
+  if (index <= 0) return content;
+  let indent = "";
+  while(index > 0 && (text[index] === " " || text[index] === "\t")) {
+    indent += text[index];
+    index--;
+  }
+  if (!indent) return content;
+  const lines = content.split("\n");
+  for (let i = 1; i < lines.length; i++) {
+    lines[i] = indent + lines[i];
+  }
+  return lines.join("\n");
+}
+
+function replaceJson(text: string, start: number, end: number, json: any): string {
+  let newContent = JSON.stringify(json, null, settings.jsonEditor.indentation);
+  newContent = addLeftIndentIntoContent(text, newContent, start - 1);
+  return text.substring(0, start) + newContent + text.substring(end + 1);
+}
+
+// Applies the edits a finding carries. Which rule found what is no longer the business of this
+// file: the linter decides what to change and names it by a path into the JSON, and the object
+// literal that holds it is located here, parsed on its own, changed, and written back with the
+// editor indentation.
+class SurveyTextWorkerFixer {
+  public constructor(private fix: ILintFix) { }
   public get isFixable(): boolean {
-    return this.finding.reason === "notInChoices" && Array.isArray(this.data.allowed) && this.data.allowed.length > 0;
+    return !!this.fix && Array.isArray(this.fix.edits) && this.fix.edits.length > 0;
   }
-  protected getTargetPath(): string { return splitLastKey(this.finding.path).parent; }
-  protected update(json: any): void {
-    const key = splitLastKey(this.finding.path).key;
-    json[key] = this.pickValue(json[key]);
-  }
-  private pickValue(value: any): any {
-    const allowed: Array<any> = this.data.allowed;
-    // the linter's suggestion is the spelling that works, as a string - the allowed value keeps its type
-    if (!!this.finding.suggestion) {
-      const suggested = allowed.filter(item => String(item) === this.finding.suggestion);
-      if (suggested.length > 0) return suggested[0];
+  public fixError(text: string): string {
+    if (!this.isFixable) return text;
+    let res = text;
+    for (let i = 0; i < this.fix.edits.length; i++) {
+      const next = this.applyEdit(res, this.fix.edits[i]);
+      // an edit that does not apply undoes the whole repair: half of one is worse than none
+      if (next === undefined) return text;
+      res = next;
     }
-    return this.getClosestValue(String(value), allowed) ?? allowed[0];
+    return res;
   }
-  private getClosestValue(needle: string, allowed: Array<any>): any {
-    let closest = { value: undefined, distance: needle.length };
-    needle = needle.toUpperCase();
-    for (const item of allowed) {
-      const distance = levenshteinDistance(needle, String(item).toUpperCase());
-      if (distance === 0) return item;
-      if (distance < closest.distance) {
-        closest = { value: item, distance: distance };
-      }
-    }
-    return closest.value;
+  private applyEdit(text: string, edit: ILintFixEdit): string | undefined {
+    const parsed = parseJson(text, 1);
+    if (!isPlainObject(parsed)) return undefined;
+    const owner = findOwner(parsed, parsePath(edit.path));
+    if (!owner) return undefined;
+    const pos = owner.json["pos"];
+    if (!pos || typeof pos.start !== "number" || typeof pos.end !== "number") return undefined;
+    const json = parseJson(text.substring(pos.start, pos.end + 1), 0);
+    if (!isPlainObject(json) || !applyEditToJson(json, owner.rest, edit)) return undefined;
+    return replaceJson(text, pos.start, pos.end, json);
   }
 }
 
@@ -244,11 +301,7 @@ export class SurveyTextWorker {
     this.findings.forEach(finding => this.errors.push(finding));
   }
   private createFixer(finding: ILintFinding): SurveyTextWorkerFixer {
-    if (finding.ruleId === "name/duplicate") return new SurveyTextWorkerDuplicateNameFixer(this, finding);
-    if (finding.ruleId === "property/required") return new SurveyTextWorkerRequiredNameFixer(this, finding);
-    if (finding.ruleId === "property/not-an-array") return new SurveyTextWorkerNotAnArrayFixer(this, finding);
-    if (finding.ruleId === "property/invalid-value") return new SurveyTextWorkerInvalidValueFixer(this, finding);
-    return undefined;
+    return !!finding.fix ? new SurveyTextWorkerFixer(finding.fix) : undefined;
   }
   // Where a finding is shown: a duplicate name at its "name" key, a property at the key itself
   // (the bare name, past the quote, the way the deserializer errors were anchored), everything
@@ -318,7 +371,7 @@ export class SurveyTextWorker {
     let node: any = this.jsonValue;
     let parent: any = undefined;
     let key: string | number = undefined;
-    const segments = this.parsePath(path);
+    const segments = parsePath(path);
     for (let i = 0; i < segments.length; i++) {
       if (node === null || typeof node !== "object") return undefined;
       const segment = segments[i];
@@ -342,7 +395,7 @@ export class SurveyTextWorker {
   public getPositionByPath(path: string): { at: number, rowAt: number, columnAt: number } {
     const notFound = { at: -1, rowAt: -1, columnAt: -1 };
     if (!path || !this.jsonValue) return notFound;
-    const segments = this.parsePath(path);
+    const segments = parsePath(path);
     if (segments.length === 0) return notFound;
     let obj: any = this.jsonValue;
     let owner: any = this.jsonValue;
@@ -387,23 +440,6 @@ export class SurveyTextWorker {
     const index = this.text.indexOf(findText, at);
     if (index > -1 && (end < 0 || index < end)) return index;
     return -1;
-  }
-  // "pages[0].elements[1].visibleIf" -> ["pages", 0, "elements", 1, "visibleIf"]
-  private parsePath(path: string): Array<string | number> {
-    const res: Array<string | number> = [];
-    path.split(".").forEach(part => {
-      if (!part) return;
-      const bracket = part.indexOf("[");
-      if (bracket < 0) {
-        res.push(part);
-        return;
-      }
-      const name = part.substring(0, bracket);
-      if (!!name) res.push(name);
-      const indexes = part.substring(bracket).match(/\[(\d+)\]/g) || [];
-      indexes.forEach(entry => res.push(parseInt(entry.substring(1, entry.length - 1), 10)));
-    });
-    return res;
   }
   // Sorts the errors by position - one whose path resolved to no place in the text goes last -
   // and computes the line and column of each from its offset.

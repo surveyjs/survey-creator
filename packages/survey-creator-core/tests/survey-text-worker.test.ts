@@ -44,7 +44,10 @@ test("SurveyTextWorker, incorrect property name pos", () => {
   expect(textWorker.text.substring(propNamePos, propNamePos + 5)).toBe("incor");
   expect(error.rowAt).toBe(8);
   expect(error.columnAt).toBe(10);
-  expect(error.isFixable).toBeFalsy();
+  expect(error.isFixable).toBeTruthy();
+  expect(JSON.parse(error.fixError(textWorker.text)).elements[1]).toEqual({
+    type: "text", name: "q2"
+  });
 });
 test("SurveyTextWorker, show duplication name errors", () => {
   const textWorker = createTextWorker({
@@ -79,11 +82,13 @@ test("SurveyTextWorker, show duplication name errors", () => {
   expect(error2.rowAt).toBe(15);
   expect(error2.columnAt).toBe(15);
 
+  // one run names every duplicate it finds, and never twice the same: the second one is
+  // "question2" even when applied on its own
   expect(error2.isFixable).toBeTruthy();
   const newJson2 = JSON.parse(error2.fixError(textWorker.text));
   expect(newJson2.pages[0].elements[2]).toEqual({
     type: "text",
-    name: "question1"
+    name: "question2"
   });
   expect(error1.isFixable).toBeTruthy();
   const newJson1 = JSON.parse(error1.fixError(textWorker.text));
@@ -162,10 +167,10 @@ test("SurveyTextWorker, validate properties value, Issue#7335", () => {
   expect(error.isFixable).toBeTruthy();
   textWorker.text = error.fixError(textWorker.text);
   const newJson = JSON.parse(textWorker.text);
+  // nothing says which allowed value was meant, so the key goes and the default takes over
   expect(newJson.elements[0]).toEqual({
     type: "text",
-    name: "q1",
-    clearIfInvisible: "default"
+    name: "q1"
   });
 });
 test("SurveyTextWorker, the closest allowed value is chosen, Issue#7417", () => {
@@ -305,4 +310,77 @@ test("SurveyTextWorker, getAllNames and getNodeByPath", () => {
   expect(column.key).toBe(0);
   expect(Array.isArray(column.parent)).toBeTruthy();
   expect(textWorker.getNodeByPath("pages[3]")).toBeUndefined();
+});
+
+// The fixes the linter now decides on its own. The text worker no longer knows a rule from a
+// rule: it applies the edits the finding carries.
+function fixableOf(worker: SurveyTextWorker, ruleId: string): SurveyTextWorkerLinterFinding {
+  return <SurveyTextWorkerLinterFinding>worker.errors.filter(error =>
+    error instanceof SurveyTextWorkerLinterFinding &&
+    (<SurveyTextWorkerLinterFinding>error).ruleId === ruleId && error.isFixable)[0];
+}
+
+test("SurveyTextWorker, a misspelled property key is renamed where it stands", () => {
+  const textWorker = createTextWorker({
+    elements: [{ type: "text", name: "q1", titlee: "Hello", description: "d" }],
+  });
+  const error = fixableOf(textWorker, "property/unknown");
+  expect(error).toBeDefined();
+  const fixed = JSON.parse(error.fixError(textWorker.text));
+  expect(Object.keys(fixed.elements[0])).toEqual(["type", "name", "title", "description"]);
+  expect(fixed.elements[0].title).toBe("Hello");
+});
+
+test("SurveyTextWorker, a key nothing is close to is dropped", () => {
+  const textWorker = createTextWorker({
+    elements: [{ type: "text", name: "q1", zzzzzzzzzz: 1 }],
+  });
+  const error = fixableOf(textWorker, "property/unknown");
+  expect(JSON.parse(error.fixError(textWorker.text)).elements[0]).toEqual({ type: "text", name: "q1" });
+});
+
+test("SurveyTextWorker, a repeated choice item is removed from the array", () => {
+  const textWorker = createTextWorker({
+    elements: [{ type: "dropdown", name: "q1", choices: ["a", "b", "a"] }],
+  });
+  const error = fixableOf(textWorker, "choices/duplicate");
+  expect(JSON.parse(error.fixError(textWorker.text)).elements[0].choices).toEqual(["a", "b"]);
+});
+
+test("SurveyTextWorker, a misspelled type is replaced", () => {
+  const textWorker = createTextWorker({ elements: [{ type: "textt", name: "q1" }] });
+  const error = fixableOf(textWorker, "element/unknown-type");
+  expect(JSON.parse(error.fixError(textWorker.text)).elements[0].type).toBe("text");
+});
+
+test("SurveyTextWorker, a reference typo is respelled inside the expression", () => {
+  const textWorker = createTextWorker({
+    elements: [
+      { type: "dropdown", name: "fruit", choices: ["a", "b"] },
+      { type: "text", name: "q2", visibleIf: "{frut} = 'a'" },
+    ],
+  });
+  const error = fixableOf(textWorker, "reference/unknown");
+  expect(JSON.parse(error.fixError(textWorker.text)).elements[1].visibleIf).toBe("{fruit} = 'a'");
+});
+
+test("SurveyTextWorker, a property the runtime drops is removed from the survey itself", () => {
+  const textWorker = createTextWorker({
+    mode: "display", elements: [{ type: "text", name: "q1" }],
+  });
+  const error = fixableOf(textWorker, "property/dead");
+  const fixed = JSON.parse(error.fixError(textWorker.text));
+  expect(fixed.mode).toBeUndefined();
+  expect(fixed.elements[0]).toEqual({ type: "text", name: "q1" });
+});
+
+test("SurveyTextWorker, a finding with no fix is not fixable", () => {
+  const textWorker = createTextWorker({
+    elements: [{ type: "text", name: "q1", visibleIf: "{q1} notempty" }],
+  });
+  const selfRef = textWorker.errors.filter(error =>
+    error instanceof SurveyTextWorkerLinterFinding &&
+    (<SurveyTextWorkerLinterFinding>error).ruleId === "reference/self")[0];
+  expect(selfRef).toBeDefined();
+  expect(selfRef.isFixable).toBeFalsy();
 });
