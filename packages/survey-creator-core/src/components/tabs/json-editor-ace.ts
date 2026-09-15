@@ -70,14 +70,16 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       .getUndoManager();
     this.aceCanUndo = undoManager.hasUndo();
     this.aceCanRedo = undoManager.hasRedo();
-    const isFocused = this.aceEditor.isFocused() === true;
-    const isSearchBoxActive = this.aceEditor?.searchBox?.active === true;
-    if (isFocused || isSearchBoxActive) {
-      this.isJSONChanged = !undoManager.isClean();
-    }
   }
   protected onTextChanged(): void {
     this.updateUndoRedoState();
+    // Every change of the document counts, the way the textarea counts it; the activation resets
+    // the flag itself. It is not read from undoManager.isClean(): Ace syncs its revision after the
+    // "change" of an undo or a redo has fired, so at that moment the manager still describes the
+    // step before, and a redone edit read as clean. Nor does it wait for the focus: the Fix button
+    // activated from the keyboard and a replace from the search box change the text while the
+    // editor is not focused.
+    this.isJSONChanged = true;
     super.onTextChanged();
   }
   private createAnnotations(errors: any[]): any[] {

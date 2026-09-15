@@ -1,5 +1,5 @@
 import { getScrollTopForCaret, TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
-import { AceJsonEditorModel } from "../../src/components/tabs/json-editor-ace";
+import { AceJsonEditorModel, TabJsonEditorAcePlugin } from "../../src/components/tabs/json-editor-ace";
 import { CreatorTester } from "../creator-tester";
 import { settings } from "../../src/creator-settings";
 import { SurveyTextWorker } from "../../src/textWorker";
@@ -353,20 +353,23 @@ test("The text is linted once per change - allowingDeactivate reuses the last wo
   }
 });
 // The few methods the Ace model calls, over a plain string; the gutter annotations are kept so
-// the test can read them back.
+// the test can read them back. setValue fires the "change" the model listens to, the way Ace
+// does; undoManager and isFocused are plain fields a test can replace.
 function createAceMock(): any {
   let value = "";
   let annotations: Array<any> = [];
+  let onChange: () => void = () => { };
   const undoManager = { reset() { }, markClean() { }, isClean: () => true, hasUndo: () => false, hasRedo: () => false };
   const session = {
-    on() { }, setUseWorker() { }, setMode() { }, getUndoManager: () => undoManager,
+    on(name: string, handler: () => void) { if (name === "change") onChange = handler; },
+    setUseWorker() { }, setMode() { }, getUndoManager: () => undoManager,
     setAnnotations(list: Array<any>) { annotations = list; },
     doc: { getNewLineCharacter: () => "\n" },
   };
   return {
     commands: { removeCommand() { } }, setReadOnly() { }, setShowPrintMargin() { }, setFontSize() { }, setTheme() { },
-    getSession: () => session, session: session,
-    getValue: () => value, setValue(text: string) { value = text; },
+    getSession: () => session, session: session, undoManager: undoManager,
+    getValue: () => value, setValue(text: string) { value = text; onChange(); },
     renderer: { updateFull() { }, scrollCursorIntoView() { } },
     resize() { }, focus() { }, isFocused: () => false, gotoLine() { },
     getAnnotations: () => annotations,
@@ -579,4 +582,64 @@ test("A click on an error does not scroll an editor with no metrics", () => {
   editor.errorList.onItemClick(<any>editor.errorList.actions[0]);
   expect(el.selectionStart).toBe(editor.errorList.actions[0].data.error.at);
   expect(el.scrollTop).toBe(0);
+});
+
+// The Fix button is reached with the keyboard (it has tabIndex 0), so the focus is on the button
+// and not in the editor when the text is replaced; a mouse click keeps the focus in the editor,
+// as the list swallows the mousedown.
+test("Ace: a fix applied while the editor is not focused reaches the survey on leaving the tab", () => {
+  const oldFunc = TabJsonEditorAcePlugin.hasAceEditor;
+  TabJsonEditorAcePlugin.hasAceEditor = (): boolean => true;
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q1" }] };
+    creator.activeTab = "json";
+    const plugin = <TabJsonEditorAcePlugin>creator.getPlugin("json");
+    const model = <AceJsonEditorModel>plugin.model;
+    const ace = createAceMock();
+    model.init(ace);
+    expect(model.isJSONChanged).toBeFalsy();
+    const actions = model.errorList.actions;
+    expect(actions.map(a => a.data.showFixButton)).toEqual([true]);
+    actions[0].data.fixError();
+    expect(JSON.parse(model.text).pages[0].elements[1].name).toBe("question1");
+    creator.activeTab = "designer";
+    expect(creator.activeTab).toBe("designer");
+    expect(creator.survey.getAllQuestions().map(q => q.name)).toEqual(["q1", "question1"]);
+  } finally {
+    TabJsonEditorAcePlugin.hasAceEditor = oldFunc;
+  }
+});
+
+// Ace syncs its revision after the "change" of an undo or a redo has fired, so at that moment
+// undoManager.isClean() still describes the step before: after a redo it reads clean.
+test("Ace: an edit that was undone and redone reaches the survey on leaving the tab", () => {
+  const oldFunc = TabJsonEditorAcePlugin.hasAceEditor;
+  TabJsonEditorAcePlugin.hasAceEditor = (): boolean => true;
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
+    creator.activeTab = "json";
+    const plugin = <TabJsonEditorAcePlugin>creator.getPlugin("json");
+    const model = <AceJsonEditorModel>plugin.model;
+    const ace = createAceMock();
+    model.init(ace);
+    ace.isFocused = () => true;
+    const original = model.text;
+    const edited = original.replace("q2", "q2x");
+    // typing: the new revision is recorded before "change" fires
+    ace.undoManager.isClean = () => false;
+    ace.setValue(edited);
+    expect(model.isJSONChanged).toBeTruthy();
+    // undo: "change" fires while the manager still reports the edit
+    ace.setValue(original);
+    // redo: "change" fires while the manager still reports the clean state
+    ace.undoManager.isClean = () => true;
+    ace.setValue(edited);
+    expect(model.text).toBe(edited);
+    creator.activeTab = "designer";
+    expect(creator.survey.getAllQuestions().map(q => q.name)).toEqual(["q1", "q2x"]);
+  } finally {
+    TabJsonEditorAcePlugin.hasAceEditor = oldFunc;
+  }
 });
