@@ -1140,3 +1140,35 @@ test("Every rule has a localized name, a description and a message per reason", 
   });
   expect(missing).toEqual([]);
 });
+
+test("A fix names a new element in the language the creator works in", () => {
+  editorLocalization.setupLocale("zy", {
+    ed: { newQuestionName: "frage", newPageName: "seite", newPanelName: "gruppe" },
+  });
+  const prevLocale = editorLocalization.currentLocale;
+  try {
+    // the locale goes on after the creator is built: building one resets it
+    const creator = new CreatorTester();
+    editorLocalization.currentLocale = "zy";
+    const editor = new TextareaJsonEditorModel(creator);
+    editor.text = JSON.stringify({
+      elements: [{ type: "text", name: "q1" }, { type: "text", name: "q1" }],
+    }, null, 2);
+    editor.processErrors(editor.text);
+    const finding = editor.linter.findings.filter(item => item.ruleId === "name/duplicate")[0];
+    expect(finding.finding.fix.edits[0].value).toBe("frage1");
+    editor.text = finding.fixError(editor.text);
+    expect(JSON.parse(editor.text).elements[1].name).toBe("frage1");
+  } finally {
+    editorLocalization.currentLocale = prevLocale;
+  }
+});
+
+test("getCreatorLintOptions hands the linter a way to name an element", () => {
+  const creator = new CreatorTester();
+  const options = getCreatorLintOptions(creator);
+  expect(typeof options.newElementName).toBe("function");
+  expect(options.newElementName("page", ["page1"])).toBe("page2");
+  expect(options.newElementName("panel", [])).toBe("panel1");
+  expect(options.newElementName("question", ["question1", "question2"])).toBe("question3");
+});

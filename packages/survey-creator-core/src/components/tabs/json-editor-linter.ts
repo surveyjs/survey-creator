@@ -5,6 +5,7 @@ import {
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyTextWorker, SurveyTextWorkerLinterFinding } from "../../textWorker";
+import { SurveyHelper } from "../../survey-helper";
 import "./json-editor-linter.scss";
 
 export function getLinterString(name: string): string {
@@ -15,6 +16,15 @@ export function getLinterString(name: string): string {
 // report - an unknown key, a missing required property, a value the property cannot hold, an
 // element or a trigger or a validator the serializer cannot build - are raised to "error", so
 // they keep blocking the way out of the tab the way the deserializer errors did.
+// The linter knows only the English words for a new element. The creator has the one its user
+// works in, and names a dragged question with it too, so a repaired one reads the same.
+function newElementName(nameKind: string, taken: Array<string>): string {
+  const key = nameKind === "page" ? "ed.newPageName"
+    : nameKind === "panel" ? "ed.newPanelName" : "ed.newQuestionName";
+  return SurveyHelper.getNewName(taken.map(name => ({ name: name })),
+    editorLocalization.getString(key));
+}
+
 export function getCreatorLintOptions(creator: SurveyCreatorModel): ISurveyLintOptions {
   const rules: { [ruleId: string]: LintSeverity } = {
     "property/unknown": "error",
@@ -25,7 +35,9 @@ export function getCreatorLintOptions(creator: SurveyCreatorModel): ISurveyLintO
     "validator/unknown-type": "error",
     "property/invalid-value": creator.validateJsonPropertyValues ? "error" : "off",
   };
-  const options = { lintOptions: <ISurveyLintOptions>{ rules: rules } };
+  const options = {
+    lintOptions: <ISurveyLintOptions>{ rules: rules, newElementName: newElementName },
+  };
   // the application has the last word
   creator.onLintSurvey.fire(creator, options);
   return options.lintOptions;
