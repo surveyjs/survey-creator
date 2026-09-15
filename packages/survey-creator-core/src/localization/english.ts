@@ -400,7 +400,8 @@ export var enStrings = {
     survey: {
       title: "Survey title",
       description: "Survey description",
-      readOnly: "Make the survey read-only"
+      readOnly: "Make the survey read-only",
+      regionalFormat: "Regional formats"
     },
     page: {
       name: "Page name",
@@ -432,6 +433,15 @@ export var enStrings = {
     masksettings: {
       saveMaskedValue: "Save masked value in survey results"
     },
+    regionalformat: {
+      locale: "Region",
+      datePattern: "Date pattern",
+      timePattern: "Time pattern",
+      decimalSeparator: "Decimal separator",
+      thousandsSeparator: "Thousands separator",
+      currencySymbol: "Currency symbol",
+      currencyPattern: "Currency pattern"
+    },
     patternmask: {
       pattern: "Value pattern"
     },
@@ -448,8 +458,8 @@ export var enStrings = {
       max: "Maximum value"
     },
     currencymask: {
-      prefix: "Currency prefix",
-      suffix: "Currency suffix"
+      currencySymbol: "Currency symbol",
+      currencyPattern: "Currency pattern"
     },
     isExclusive: "Clear others when selected",
     showValue: "Display both text and value",
@@ -856,6 +866,7 @@ export var enStrings = {
       navigation: "Navigation",
       question: "Question Settings",
       pages: "Pages",
+      regionalFormat: "Regional Formats",
       timer: "Quiz Mode",
       calculatedValues: "Calculated Values",
       triggers: "Triggers",
@@ -1294,6 +1305,75 @@ export var enStrings = {
       container: "Same as container"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  // country-specific ("en-GB"), so these names are defined here and not in the survey library.
+  regionLocales: {
+    ar: "Arabic",
+    bg: "Bulgarian",
+    ca: "Catalan",
+    cs: "Czech",
+    cy: "Welsh",
+    da: "Danish",
+    de: "German",
+    el: "Greek",
+    en: "English",
+    "en-AU": "English (Australia)",
+    "en-CA": "English (Canada)",
+    "en-GB": "English (United Kingdom)",
+    "en-IE": "English (Ireland)",
+    "en-IN": "English (India)",
+    "en-NZ": "English (New Zealand)",
+    "en-ZA": "English (South Africa)",
+    es: "Spanish",
+    et: "Estonian",
+    eu: "Basque",
+    fa: "Persian",
+    fi: "Finnish",
+    fil: "Filipino",
+    fr: "French",
+    "fr-CA": "French (Canada)",
+    "fr-CH": "French (Switzerland)",
+    he: "Hebrew",
+    hi: "Hindi",
+    hr: "Croatian",
+    ht: "Haitian Creole",
+    hu: "Hungarian",
+    id: "Indonesian",
+    is: "Icelandic",
+    it: "Italian",
+    ja: "Japanese",
+    ka: "Georgian",
+    kk: "Kazakh",
+    ko: "Korean",
+    lt: "Lithuanian",
+    lv: "Latvian",
+    mk: "Macedonian",
+    mm: "Burmese",
+    ms: "Malay",
+    nl: "Dutch",
+    "nl-BE": "Dutch (Belgium)",
+    no: "Norwegian",
+    pl: "Polish",
+    pt: "Portuguese",
+    "pt-BR": "Portuguese (Brazil)",
+    ro: "Romanian",
+    ru: "Russian",
+    sk: "Slovak",
+    sl: "Slovenian",
+    sr: "Serbian",
+    sv: "Swedish",
+    sw: "Swahili",
+    tel: "Telugu",
+    tg: "Tajik",
+    th: "Thai",
+    tr: "Turkish",
+    uk: "Ukrainian",
+    ur: "Urdu",
+    vi: "Vietnamese",
+    zh: "Chinese",
+    "zh-CN": "Chinese (Simplified)",
+    "zh-TW": "Chinese (Traditional)"
+  },
   // Operators
   op: {
     empty: "Empty",
@@ -1337,15 +1417,14 @@ export var enStrings = {
     visibletrigger: "change visibility (deprecated)"
   },
   peplaceholder: {
+    regionalformat: {
+      locale: "Same as survey language"
+    },
     patternmask: {
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      prefix: "Ex.: $",
-      suffix: "Ex.: USD"
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
@@ -1627,20 +1706,29 @@ export var enStrings = {
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
+    regionalformat: {
+      locale: "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used.",
+      datePattern: "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.",
+      timePattern: "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm).",
+      decimalSeparator: "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks.",
+      thousandsSeparator: "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks.",
+      currencySymbol: "Overrides the region's currency symbol or code used in input masks.",
+      currencyPattern: "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+    },
     patternmask: {
-      pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
+      pattern: "The pattern can contain string literals and the following placeholders:<br>`9` - A digit.<br>`a` - An upper- or lowercase letter.<br>`#` - A digit or an upper- or lowercase letter.<br>Use backslash `\\` to escape a character."
     },
     datetimemask: {
-      pattern: "The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in upper case (AM/PM).<br>`tt` - 12-hour clock period in lower case (am/pm)."
+      pattern: "Overrides the region's date and time formats. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
     },
     numericmask: {
-      decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",
-      thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three.",
+      decimalSeparator: "A symbol that separates the fractional part from the integer part of a displayed number. The region's symbol is used by default.",
+      thousandsSeparator: "A symbol that separates the digits of a large number into groups of three. The region's symbol is used by default.",
       precision: "Limits how many digits to retain after the decimal point for a displayed number."
     },
     currencymask: {
-      prefix: "One or several symbols to be displayed before the value.",
-      suffix: "One or several symbols to be displayed after the value."
+      currencySymbol: "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol.",
+      currencyPattern: "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
     },
     theme: {
       isPanelless: "This setting applies only to questions outside of a panel.",
