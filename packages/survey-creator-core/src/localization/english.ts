@@ -1856,6 +1856,33 @@ export var enStrings = {
       warning: "Warning",
       info: "Info",
     },
+    fixes: {
+      "choices/dead-source": { setName: "Use the suggested name" },
+      "choices/duplicate": { removeItem: "Remove the repeated item" },
+      "element/unknown-type": { setType: "Use the suggested type" },
+      "expression/unknown-function": { renameFunction: "Use the suggested function" },
+      "mask/mismatch": { setMaskType: "Use the suggested mask" },
+      "name/duplicate": { renameElement: "Give the element a free name" },
+      "property/dead": { removeKey: "Remove the property" },
+      "property/invalid-value": {
+        clampToRange: "Use the nearest allowed value",
+        removeKey: "Remove the property",
+        useAllowedValue: "Use the suggested value",
+      },
+      "property/not-an-array": { wrapInArray: "Turn the value into a list" },
+      "property/required": { setName: "Give the element a name" },
+      "property/unknown": {
+        removeKey: "Remove the property",
+        renameKey: "Rename the property",
+      },
+      "reference/unknown": {
+        renameReference: "Use the suggested name",
+        setKeyName: "Use the suggested name",
+      },
+      "trigger/unknown-target": { setName: "Use the suggested name" },
+      "trigger/unknown-type": { setType: "Use the suggested type" },
+      "validator/unknown-type": { setType: "Use the suggested type" },
+    },
     rules: {
       "expression/syntax": "Expression syntax",
       "reference/unknown": "Unknown references",

@@ -3,8 +3,10 @@ import {
   getRules, ILintFinding, ILintRuleInfo, ISurveyLintOptions, ISurveyLintResult, LintSeverity,
 } from "survey-core/linter";
 import { SurveyCreatorModel } from "../../creator-base";
-import { editorLocalization } from "../../editorLocalization";
-import { SurveyTextWorker, SurveyTextWorkerLinterFinding } from "../../textWorker";
+import { editorLocalization, getLocString } from "../../editorLocalization";
+import {
+  SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding,
+} from "../../textWorker";
 import { SurveyHelper } from "../../survey-helper";
 import "./json-editor-linter.scss";
 
@@ -41,6 +43,18 @@ export function getCreatorLintOptions(creator: SurveyCreatorModel): ISurveyLintO
   // the application has the last word
   creator.onLintSurvey.fire(creator, options);
   return options.lintOptions;
+}
+
+// What the button offers to do, by the (ruleId, fix.reason) pair the linter names a repair by.
+// A repair this version has no wording for keeps the general title rather than a made-up one.
+export function getFixTitle(error: SurveyTextWorkerError): string {
+  const fallback = getLocString("ed.jsonFixError");
+  if (!(error instanceof SurveyTextWorkerLinterFinding)) return fallback;
+  const finding = <SurveyTextWorkerLinterFinding>error;
+  const fix = finding.finding.fix;
+  if (!fix) return fallback;
+  const res = editorLocalization.getJsonValue("linter.fixes." + finding.ruleId + "." + fix.reason);
+  return res === undefined ? fallback : res;
 }
 
 // How a finding looks, in the check list and in the error list of the editor alike: the two

@@ -2,7 +2,9 @@ import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core"
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding } from "../../textWorker";
-import { getCreatorLintOptions, getFindingSeverityKind, getLinterString, JsonEditorLinterModel } from "./json-editor-linter";
+import {
+  getCreatorLintOptions, getFindingSeverityKind, getFixTitle, getLinterString, JsonEditorLinterModel,
+} from "./json-editor-linter";
 import { saveToFileHandler } from "../../utils/html-element-utils";
 import { getLocString } from "../../editorLocalization";
 import { settings } from "../../creator-settings";
@@ -123,7 +125,7 @@ export abstract class JsonEditorBaseModel extends Base {
           showFixButton: error.isFixable,
           fixError: () => this.applyFix(error),
           fixButtonIcon: "icon-fix",
-          fixButtonTitle: getLocString("ed.jsonFixError")
+          fixButtonTitle: getFixTitle(error)
         }
       }));
     });

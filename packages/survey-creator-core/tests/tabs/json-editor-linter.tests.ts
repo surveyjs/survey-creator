@@ -1,4 +1,6 @@
-import { getRules, SurveyLintHintReasons, SurveyLintReasons } from "survey-core/linter";
+import {
+  getRules, SurveyLintFixReasons, SurveyLintHintReasons, SurveyLintReasons,
+} from "survey-core/linter";
 import { TextareaJsonEditorModel, TabJsonEditorTextareaPlugin } from "../../src/components/tabs/json-editor-textarea";
 import { formatNamed, getCreatorLintOptions, getFindingSeverityKind, JsonEditorLinterModel } from "../../src/components/tabs/json-editor-linter";
 import { CreatorTester } from "../creator-tester";
@@ -1171,4 +1173,45 @@ test("getCreatorLintOptions hands the linter a way to name an element", () => {
   expect(options.newElementName("page", ["page1"])).toBe("page2");
   expect(options.newElementName("panel", [])).toBe("panel1");
   expect(options.newElementName("question", ["question1", "question2"])).toBe("question3");
+});
+
+test("The fix button says what the repair does", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [
+      { type: "text", name: "q1", zzzzzzzzzz: 1 },
+      { type: "dropdown", name: "q2", choices: ["a", "b", "a"] },
+    ],
+  }, null, 2));
+  const titles = editor.errorList.actions
+    .filter(action => action.data.showFixButton)
+    .map(action => action.data.fixButtonTitle);
+  expect(titles).toEqual(["Remove the property", "Remove the repeated item"]);
+});
+
+test("A repair this version has no wording for keeps the general title", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [{ type: "text", name: "q1", zzzzzzzzzz: 1 }],
+  }, null, 2));
+  const en: any = editorLocalization.getLocaleStrings("en");
+  const kept = en.linter.fixes["property/unknown"];
+  try {
+    en.linter.fixes["property/unknown"] = {};
+    editor.processErrors(editor.text);
+    expect(editor.errorList.actions[0].data.fixButtonTitle).toBe("Fix error");
+  } finally {
+    en.linter.fixes["property/unknown"] = kept;
+  }
+});
+
+test("Every fix reason the linter declares has a title", () => {
+  const en: any = editorLocalization.getLocaleStrings("en");
+  const missing: Array<string> = [];
+  Object.keys(SurveyLintFixReasons).forEach(ruleId => {
+    const table: any = (<any>SurveyLintFixReasons)[ruleId];
+    Object.keys(table).forEach(key => {
+      const group = en.linter.fixes[ruleId];
+      if (!group || !group[table[key]]) missing.push(ruleId + "/" + table[key]);
+    });
+  });
+  expect(missing).toEqual([]);
 });
