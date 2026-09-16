@@ -88,7 +88,7 @@ export class VariablePresetsManager extends Base {
     this.setPropertyValue("active", name);
     this.raiseChanged("edit");
   }
-  private raiseChanged(reason: string): void {
+  private raiseChanged(reason: "select" | "edit"): void {
     if (!this.creator) return;
     this.creator.onVariablePresetsChanged.fire(this.creator, {
       reason: reason,
