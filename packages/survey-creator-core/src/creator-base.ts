@@ -1855,10 +1855,10 @@ export class SurveyCreatorModel extends Base
   private get currentPlugin(): ICreatorPlugin {
     return this.getPlugin(this.activeTab);
   }
-  // Applies the edits the active tab still holds in its own editor to the survey - the JSON tab
-  // commits its text. true when nothing was pending or it was applied; false when the pending
-  // text cannot be applied (it does not parse, or it has a blocking error), and the survey is
-  // left as it is.
+  /**
+   * Applies pending changes in the active tab to the survey configuration.
+   * @returns `true` if there are no pending changes or if the changes are applied successfully;  `false` if pending changes cannot be applied.
+   */
   public applyPendingChanges(): boolean {
     const plugin = this.currentPlugin;
     return !plugin || !plugin.applyPendingChanges ? true : plugin.applyPendingChanges();
