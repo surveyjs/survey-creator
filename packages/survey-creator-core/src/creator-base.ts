@@ -1855,6 +1855,14 @@ export class SurveyCreatorModel extends Base
   private get currentPlugin(): ICreatorPlugin {
     return this.getPlugin(this.activeTab);
   }
+  // Applies the edits the active tab still holds in its own editor to the survey - the JSON tab
+  // commits its text. true when nothing was pending or it was applied; false when the pending
+  // text cannot be applied (it does not parse, or it has a blocking error), and the survey is
+  // left as it is.
+  public applyPendingChanges(): boolean {
+    const plugin = this.currentPlugin;
+    return !plugin || !plugin.applyPendingChanges ? true : plugin.applyPendingChanges();
+  }
 
   /**
    * Provides access to the [Toolbox API](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox).
@@ -2928,6 +2936,7 @@ export class SurveyCreatorModel extends Base
     if (!!this.getSurveyJSONTextCallback) {
       return this.getSurveyJSONTextCallback().text;
     }
+    this.applyPendingChanges();
     return this.getSurveyTextFromDesigner();
   }
   public set text(value: string) {
@@ -3228,6 +3237,9 @@ export class SurveyCreatorModel extends Base
    * This property allows you to get or set the JSON schema of a survey being configured. Alternatively, you can use the [`text`](#text) property.
    */
   public get JSON(): any {
+    // the JSON tab may hold text the survey does not have yet: whoever reads the schema while
+    // that tab is open gets the latest text that applies, the way leaving the tab would give it
+    this.applyPendingChanges();
     const json = (<any>this.survey).toJSON();
     return this.singlePageJSON(json);
   }
@@ -4477,6 +4489,11 @@ export class SurveyCreatorModel extends Base
   }
   saveNo: number = 0;
   private _doSaveCore(onSaveComplete?: () => void) {
+    // the save that runs now carries everything the armed auto-save would have carried
+    if (!!this.autoSaveTimerId) {
+      clearTimeout(this.autoSaveTimerId);
+      this.autoSaveTimerId = null;
+    }
     this.setState("saving");
     if (this.saveSurveyFunc) {
       this.saveNo++;
@@ -4500,9 +4517,11 @@ export class SurveyCreatorModel extends Base
    * @see save
    */
   public saveSurvey() {
+    this.applyPendingChanges();
     this._doSaveCore();
   }
   public doSave() {
+    this.applyPendingChanges();
     this._doSaveCore();
   }
   public saveSurveyActionHandler() {
@@ -4534,6 +4553,8 @@ export class SurveyCreatorModel extends Base
    * @see saveTheme
    */
   public save() {
+    // before the state is read: the active tab may hold the very edit that makes it "modified"
+    this.applyPendingChanges();
     const themeSaveHandler = () => {
       if (this.hasPendingThemeChanges) {
         this._doSaveThemeCore(() => {
