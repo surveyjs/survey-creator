@@ -386,7 +386,7 @@ export class PreviewViewModel extends Base {
     this.selectVariablePresetAction = createDropdownActionModel({
       id: "variablePresetSelector",
       css: "svc-variable-preset-selector",
-      title: getLocString("vp.noPreset"),
+      title: getLocString("vp.selectorTitle") + ": " + getLocString("vp.noPreset"),
       visible: false
     }, {
       items: [],
@@ -438,9 +438,8 @@ export class PreviewViewModel extends Base {
     const listModel: ListModel = this.selectVariablePresetAction.popupModel.contentComponentData.model;
     listModel.setItems(items);
     listModel.selectedItem = items.filter(item => item.id === activeName)[0];
-    this.selectVariablePresetAction.title = !!activeName
-      ? getLocString("vp.selectorTitle") + ": " + activeName
-      : getLocString("vp.noPreset");
+    this.selectVariablePresetAction.title = getLocString("vp.selectorTitle") + ": " +
+      (!!activeName ? activeName : getLocString("vp.noPreset"));
     // No manager - the Theme tab inherits this toolbar and does not run presets - means no
     // controls, whatever the creator holds.
     const hasVariables = !!this.variablePresets && (names.length > 0 || presets.hasDefinition);

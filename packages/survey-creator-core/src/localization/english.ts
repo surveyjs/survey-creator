@@ -275,12 +275,12 @@ export var enStrings = {
   },
   // Host application variables
   vp: {
-    selectorTitle: "Variables",
-    noPreset: "No variables",
+    selectorTitle: "Variable preset",
+    noPreset: "None",
     view: "View",
     viewTitle: "Variable values",
-    edit: "Edit",
-    editorTitle: "Variable presets",
+    edit: "Manage presets",
+    editorTitle: "Variable Presets",
     presetName: "Preset",
     presetDescription: "Description",
     addPreset: "Add preset",
