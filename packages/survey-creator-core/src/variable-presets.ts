@@ -93,7 +93,7 @@ export class VariablePresetsManager extends Base {
     this.creator.onVariablePresetsChanged.fire(this.creator, {
       reason: reason,
       variablePresets: this.creator.variablePresets,
-      active: this.active
+      activePresetName: this.active
     });
   }
   public dispose(): void {

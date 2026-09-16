@@ -5004,12 +5004,14 @@ export class SurveyCreatorModel extends Base
 
   private variablePresetsValue: ISurveyVariablePresets;
   private variablePresetsModelValue: SurveyVariablePresets;
-  // Host application variables (issue #7982): the container a host passes as the `variablePresets`
-  // option, describing the variables it injects with setVariable() and naming sets of values for
-  // them. It belongs to the host application and not to the survey being edited - never written
-  // into the survey JSON, never registered in the Serializer - and it is held by reference, so a
-  // host that persists it in onVariablePresetsChanged serializes its own object. The creator model
-  // only reads it; the Preview plugin owns the active preset and, later, the editing.
+  /**
+   * Gets or sets a configuration that defines custom survey variables and named presets of their values.
+   *
+   * For more information, refer to [`ICreatorOptions.variablePresets`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#variablePresets).
+   * @see onVariablePresetsChanged
+   * @see onVariablePresetEditing
+   * @since 3.1.1
+   */
   public get variablePresets(): ISurveyVariablePresets {
     return this.variablePresetsValue;
   }
@@ -5033,17 +5035,15 @@ export class SurveyCreatorModel extends Base
     }
     return this.variablePresetsModelValue;
   }
-  // Raised by the Preview plugin when the active preset changes or when the presets are edited.
-  // Creator has no user-settings layer, so it does not persist the choice itself: a host that wants
-  // the selection or the edited presets to survive a reload saves them here and assigns them back
-  // on the next construction.
+  /**
+   * An event that is raised when the active [variable preset](#variablePresets) changes or when variable presets are edited. Handle this event to store the active preset selection and edited presets.
+   * @since 3.1.1
+   */
   public onVariablePresetsChanged: EventBase<SurveyCreatorModel, VariablePresetsChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetsChangedEvent>();
-  // Raised for every preset the variable preset editor shows, so that a host can allow or refuse
-  // editing and deleting per preset. It is an event and not a field on ISurveyVariablePreset
-  // because that interface is core's document format, and a Creator permission must not enter the
-  // host's document. It is raised in one place only - the Preview plugin's
-  // variablePresets.getPresetOperations(preset), which seeds it from the manager's three flags -
-  // and everything else on this feature lives on that manager rather than on the creator model.
+  /**
+   * An event that is raised for each [preset](#variablePresets) displayed in the variable preset editor. Use this event to control whether users can edit or delete individual presets.
+   * @since 3.1.1
+   */
   public onVariablePresetEditing: EventBase<SurveyCreatorModel, VariablePresetEditingEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetEditingEvent>();
 
   public dispose(): void {

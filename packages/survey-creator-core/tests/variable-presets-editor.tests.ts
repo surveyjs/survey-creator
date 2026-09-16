@@ -143,7 +143,7 @@ describe("Variable presets editor: the manager (issue #7982)", () => {
     manager.setPresets([{ name: "Newcomer", variables: {} }], "Gold customer");
     expect(log).toHaveLength(1);
     expect(log[0].reason).toBe("edit");
-    expect(log[0].active).toBe("");
+    expect(log[0].activePresetName).toBe("");
     expect(manager.active).toBe("");
   });
   test("setPresets re-points the active preset to the name it is given", () => {

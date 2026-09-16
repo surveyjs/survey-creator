@@ -616,9 +616,77 @@ export interface ICreatorOptions {
    * @since 2.5.19
    */
   useEnglishLanguageNames?: boolean;
-  // Host application variables: an optional definition survey describing them, and the named
-  // presets of values. The container belongs to the host application, not to the survey being
-  // edited, and Creator stores it by reference. The Preview tab runs the survey with the values of
-  // the active preset; see creator.variablePresets.
+  /**
+   * Defines custom survey variables and named presets that assign values to them.
+   *
+   * Survey Creator makes the variables available in condition editors. In the Preview tab, users can select a preset to test the survey with the corresponding variable values. If the configuration includes a variable definition, users can also view and edit presets in a structured UI.
+   *
+   * The `variablePresets` object can include the following properties:
+   *
+   * - `definition`: `object`\
+   * A survey JSON schema that configures the preset editor UI. If omitted, users can only view the active preset as a raw JSON object.
+   *
+   * - `presets`: `Array<{ name: string, description: string, variables: object }>`\
+   * An array of predefined variable presets. Presets can be hard-coded in the application or stored on a server and loaded on the client.
+   *
+   * The following example configures `variablePresets` with two variables&mdash;`customerTier` and `yearsAsCustomer`&mdash;and two presets&mdash;"Platinum admin" and "Gold member". In the preset editor UI, `customerTier` is displayed as a dropdown with three choice options, and `yearsAsCustomer` is displayed as a numeric input field.
+   *
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   *
+   * const variablePresets = {
+   *   "definition": {
+   *     "elements": [
+   *       {
+   *         "type": "dropdown",
+   *         "name": "customerTier",
+   *         "title": "Customer tier",
+   *         "isRequired": true,
+   *         "choices": [
+   *           { "value": "basic", "text": "Basic" },
+   *           { "value": "gold", "text": "Gold" },
+   *           { "value": "platinum", "text": "Platinum" }
+   *         ]
+   *       },
+   *       {
+   *         "type": "text",
+   *         "name": "yearsAsCustomer",
+   *         "title": "Years as a customer",
+   *         "inputType": "number",
+   *         "min": 0,
+   *         "max": 50
+   *       }
+   *     ]
+   *   },
+   *   "presets": [
+   *     {
+   *       "name": "Platinum admin",
+   *       "description": "8 years, platinum, administrator",
+   *       "variables": {
+   *         "customerTier": "platinum",
+   *         "yearsAsCustomer": 8
+   *       }
+   *     },
+   *     {
+   *       "name": "Gold member",
+   *       "description": "3 years, gold, member",
+   *       "variables": {
+   *         "customerTier": "gold",
+   *         "yearsAsCustomer": 3
+   *       }
+   *     }
+   *   ]
+   * };
+   *
+   * const creatorOptions = {
+   *   // ...
+   *   variablePresets: variablePresets
+   * };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   * ```
+   * @see [SurveyCreatorModel.onVariablePresetsChanged](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onVariablePresetsChanged)
+   * @see [SurveyCreatorModel.onVariablePresetEditing](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onVariablePresetEditing)
+   * @since 3.1.1
+   */
   variablePresets?: ISurveyVariablePresets;
 }

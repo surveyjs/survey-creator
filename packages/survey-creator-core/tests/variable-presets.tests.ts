@@ -165,13 +165,13 @@ describe("The active variable preset on the Preview plugin (issue #7982)", () =>
     manager.active = "Gold customer";
     expect(log).toHaveLength(1);
     expect(log[0].reason).toBe("select");
-    expect(log[0].active).toBe("Gold customer");
+    expect(log[0].activePresetName).toBe("Gold customer");
     expect(log[0].variablePresets).toBe(creator.variablePresets);
     manager.active = "Gold customer";
     expect(log).toHaveLength(1);
     manager.active = "";
     expect(log).toHaveLength(2);
-    expect(log[1].active).toBe("");
+    expect(log[1].activePresetName).toBe("");
   });
   test("The choice survives a rebuild of the view model", () => {
     const creator = new CreatorTester({ variablePresets: createContainer() });

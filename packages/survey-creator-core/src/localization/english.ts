@@ -277,7 +277,7 @@ export var enStrings = {
   vp: {
     selectorTitle: "Variable preset",
     noPreset: "None",
-    view: "View",
+    view: "View variable values",
     viewTitle: "Variable values",
     edit: "Manage presets",
     editorTitle: "Variable Presets",
