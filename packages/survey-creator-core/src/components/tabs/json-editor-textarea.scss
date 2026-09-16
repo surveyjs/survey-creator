@@ -78,7 +78,7 @@ svc-tab-json-editor-textarea {
   width: 1lh;
   height: 1lh;
   // an svg has no automatic minimum size, so a flex row squeezes it as soon as the text next
-  // to it runs out of room - the same guard the panel icon carries, .svc-json-linter__icon
+  // to it runs out of room
   flex: 0 0 auto;
   box-sizing: border-box;
   display: block;

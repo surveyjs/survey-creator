@@ -569,10 +569,9 @@ test("A click on a linter finding scrolls the same way", () => {
   const editor = createEditorWithTextarea(longJson(40, 50, "finding"), 300, 3000);
   const el = editor.textElement;
   (<any>editor)["measureCaretTop"] = () => 1400;
-  const finding = editor.linter.checkList.actions.filter(
-    a => a.id.indexOf("linter-finding-") === 0)[0];
+  const finding = editor.errorList.actions.filter(a => a.id.indexOf("linterfinding_") === 0)[0];
   expect(finding).toBeDefined();
-  editor.linter.checkList.onItemClick(<any>finding);
+  editor.errorList.onItemClick(<any>finding);
   expect(el.selectionStart).toBe(finding.data.error.at);
   expect(el.scrollTop).toBe(1260);
 });

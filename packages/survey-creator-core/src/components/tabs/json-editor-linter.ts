@@ -1,14 +1,11 @@
-import { Action, Base, ListModel, property } from "survey-core";
-import {
-  getRules, ILintFinding, ILintRuleInfo, ISurveyLintOptions, ISurveyLintResult, LintSeverity,
-} from "survey-core/linter";
+import { Base } from "survey-core";
+import { ILintFinding, ISurveyLintOptions, ISurveyLintResult, LintSeverity } from "survey-core/linter";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import {
   SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding,
 } from "../../textWorker";
 import { SurveyHelper } from "../../survey-helper";
-import "./json-editor-linter.scss";
 
 export function getLinterString(name: string): string {
   return editorLocalization.getString("linter." + name);
@@ -57,9 +54,8 @@ export function getFixTitle(error: SurveyTextWorkerError): string {
   return res === undefined ? fallback : res;
 }
 
-// How a finding looks, in the check list and in the error list of the editor alike: the two
-// lists sit on one screen, so one severity may not read as two different things. Info shares
-// the warning look, as the icon set has no separate info icon.
+// How a finding looks in the error list of the editor. Info shares the warning look, as the icon
+// set has no separate info icon.
 export function getFindingSeverityKind(severity: string): string {
   return severity === "error" ? "error" : "warning";
 }
@@ -95,10 +91,20 @@ export function formatNamed(template: string, data: { [key: string]: any }): str
   });
 }
 
+// The text the worker lints carries a "pos" marker on every object literal (SurveyJSON5), which
+// is no part of what the author wrote.
+function withoutPositions(value: any): any {
+  if (Array.isArray(value)) return value.map(withoutPositions);
+  if (!value || typeof value !== "object") return value;
+  const res: { [key: string]: any } = {};
+  Object.keys(value).forEach(key => { if (key !== "pos") res[key] = withoutPositions(value[key]); });
+  return res;
+}
+
 // The JSON form, like quoteValue in the core: the string "5" and the number 5 are different
 // answers to "which values are allowed", and printing both as 5 hides the very defect.
 function quoteValue(value: any): string {
-  const res = JSON.stringify(value);
+  const res = JSON.stringify(withoutPositions(value));
   return res === undefined ? String(value) : res;
 }
 
@@ -199,47 +205,15 @@ function getSegmentNoun(containerType: string, segmentIndex: number): string {
 }
 
 export class JsonEditorLinterModel extends Base {
-  // "waiting" until the text parses for the first time; the panel keeps its last result while
-  // the JSON has syntax errors.
-  @property({ defaultValue: true }) isWaitingForValidJson: boolean;
-  @property({ defaultValue: 0 }) issueCount: number;
   public result: ISurveyLintResult;
   public findings: Array<SurveyTextWorkerLinterFinding> = [];
-  private rules: Array<ILintRuleInfo> = getRules();
-
-  constructor(private creator: SurveyCreatorModel,
-    private gotoError: (at: number, row: number, column: number) => void) {
-    super();
-    this.updateCheckList();
-  }
 
   // Takes over the findings the worker collected and gives each its localized text. While the
-  // text does not parse there is nothing to analyse, and the panel keeps its previous result.
+  // text does not parse the worker has nothing to analyse, and there are none.
   public update(textWorker: SurveyTextWorker): void {
-    if (!textWorker.isJsonCorrect || !textWorker.lintResult) {
-      this.setWaitingForValidJson();
-      return;
-    }
     this.result = textWorker.lintResult;
     this.findings = textWorker.findings;
     this.findings.forEach(item => { item.text = this.composeMessage(item.finding); });
-    this.isWaitingForValidJson = false;
-    this.issueCount = this.findings.length;
-    this.updateCheckList();
-  }
-
-  public setWaitingForValidJson(): void {
-    this.isWaitingForValidJson = true;
-    // the per-rule rows keep the result of the last run; only the summary changes
-    this.updateCheckList();
-  }
-
-  public reset(): void {
-    this.result = undefined;
-    this.findings = [];
-    this.isWaitingForValidJson = true;
-    this.issueCount = 0;
-    this.updateCheckList();
   }
 
   // The English "message" of a finding is composed from a base sentence plus optional clauses.
@@ -296,6 +270,10 @@ export class JsonEditorLinterModel extends Base {
       finding.ruleId === "property/invalid-value" || finding.ruleId === "property/required" ||
       finding.ruleId === "property/not-an-array") {
       params.ownerText = getOwnerText(data.name, data.className);
+    }
+    // the JSON form, the way the core prints it: an object would otherwise leave the placeholder
+    if (finding.ruleId === "property/required") {
+      params.valueText = quoteValue(data.value);
     }
     if (finding.ruleId === "property/invalid-value") {
       params.valueText = quoteValue(data.value);
@@ -420,109 +398,5 @@ export class JsonEditorLinterModel extends Base {
       res.push(suffix("inExpression", data.expression));
     }
     return res;
-  }
-
-  private checkListValue: ListModel;
-  public get checkList(): ListModel {
-    if (!this.checkListValue) {
-      this.checkListValue = new ListModel({
-        items: [],
-        onSelectionChanged: (action: Action) => {
-          const error: SurveyTextWorkerLinterFinding = action.data?.error;
-          if (!!error && error.at > -1) {
-            this.gotoError(error.at, error.rowAt, error.columnAt);
-          }
-        },
-        allowSelection: false,
-        searchEnabled: false
-      });
-      this.checkListValue.cssClasses = {
-        item: "svc-json-linter__item",
-        itemBody: "svc-json-linter__item-body",
-        itemsContainer: "svc-json-linter",
-        itemIcon: "svc-json-linter__icon"
-      };
-      this.checkListValue.hasVerticalScroller = true;
-    }
-    return this.checkListValue;
-  }
-
-  private updateCheckList(): void {
-    const actions: Array<Action> = [];
-    this.rules.forEach(rule => {
-      const found = this.findings.filter(item => item.ruleId === rule.id);
-      actions.push(this.createRuleAction(rule, found));
-      // a check that found nothing has nothing to expand
-      found.forEach((item, index) => actions.push(this.createFindingAction(rule, item, index)));
-    });
-    actions.push(this.createSummaryAction());
-    this.checkList.setItems(actions);
-  }
-
-  // undefined before the first run: there is no status to show yet
-  private getRuleStatus(found: Array<SurveyTextWorkerLinterFinding>): string {
-    if (!this.result) return undefined;
-    if (found.length === 0) return "passed";
-    if (found.some(item => getFindingSeverityKind(item.severity) === "error")) return "error";
-    return "warning";
-  }
-
-  private getStatusIcon(status: string): string {
-    if (status === "passed") return "icon-check-16x16";
-    if (status === "error") return "icon-error-16x16";
-    if (status === "warning") return "icon-warning-24x24";
-    return undefined;
-  }
-
-  private createRuleAction(rule: ILintRuleInfo,
-    found: Array<SurveyTextWorkerLinterFinding>): Action {
-    const title = getLinterString("rules." + rule.id);
-    const status = this.getRuleStatus(found);
-    const css = ["svc-json-linter__rule"];
-    if (!!status) css.push("svc-json-linter__rule--" + status);
-    return new Action({
-      id: "linter-rule-" + rule.id,
-      title: found.length > 0 ? title + " (" + found.length + ")" : title,
-      tooltip: getLinterString("ruleDescriptions." + rule.id),
-      iconName: this.getStatusIcon(status),
-      iconSize: "auto",
-      css: css.join(" "),
-      data: { ruleId: rule.id }
-    });
-  }
-
-  private createFindingAction(rule: ILintRuleInfo, item: SurveyTextWorkerLinterFinding,
-    index: number): Action {
-    const css = ["svc-json-linter__finding"];
-    css.push("svc-json-linter__finding--" + getFindingSeverityKind(item.severity));
-    // a finding whose path did not resolve cannot be navigated to, so it must not look clickable
-    if (item.at > -1) css.push("svc-json-linter__finding--navigable");
-    return new Action({
-      id: "linter-finding-" + rule.id + "-" + index,
-      component: "json-error-item",
-      title: item.text,
-      tooltip: item.text,
-      css: css.join(" "),
-      data: {
-        error: item,
-        showFixButton: false
-      }
-    });
-  }
-
-  private createSummaryAction(): Action {
-    let title: string;
-    if (this.isWaitingForValidJson) {
-      title = getLinterString("waitingForValidJson");
-    } else if (this.findings.length === 0) {
-      title = getLinterString("resultPassed");
-    } else {
-      title = (<any>getLinterString("resultIssues"))["format"](this.findings.length);
-    }
-    return new Action({
-      id: "linter-summary",
-      title: title,
-      css: "svc-json-linter__summary"
-    });
   }
 }

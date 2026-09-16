@@ -22,8 +22,7 @@ export abstract class JsonEditorBaseModel extends Base {
   private linterValue: JsonEditorLinterModel;
   public get linter(): JsonEditorLinterModel {
     if (!this.linterValue) {
-      this.linterValue = new JsonEditorLinterModel(this.creator,
-        (at: number, row: number, column: number) => this.gotoError(at, row, column));
+      this.linterValue = new JsonEditorLinterModel();
     }
     return this.linterValue;
   }
@@ -105,9 +104,7 @@ export abstract class JsonEditorBaseModel extends Base {
         title = title.substring(0, maxErrorLength) + "...";
       }
       title = line + title;
-      // a finding is shown by its own severity, the way the check list shows it: the two lists
-      // sit on one screen, and an error that reads as a warning in one of them reads as two
-      // different verdicts on one defect. A JSON error is an error by nature.
+      // a finding is shown by its own severity; a JSON error is an error by nature
       const kind = isFinding
         ? getFindingSeverityKind((<SurveyTextWorkerLinterFinding>error).severity)
         : "error";

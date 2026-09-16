@@ -2,7 +2,7 @@ import {
   getRules, SurveyLintFixReasons, SurveyLintHintReasons, SurveyLintReasons,
 } from "survey-core/linter";
 import { TextareaJsonEditorModel, TabJsonEditorTextareaPlugin } from "../../src/components/tabs/json-editor-textarea";
-import { formatNamed, getCreatorLintOptions, getFindingSeverityKind, JsonEditorLinterModel } from "../../src/components/tabs/json-editor-linter";
+import { formatNamed, getCreatorLintOptions, getFindingSeverityKind } from "../../src/components/tabs/json-editor-linter";
 import { CreatorTester } from "../creator-tester";
 import { SurveyTextWorker } from "../../src/textWorker";
 import { editorLocalization } from "../../src/editorLocalization";
@@ -24,7 +24,6 @@ const badReference = JSON.stringify({
 
 test("Linter runs on valid JSON and reports the finding", () => {
   const editor = createEditor(badReference);
-  expect(editor.linter.isWaitingForValidJson).toBeFalsy();
   expect(editor.linter.findings).toHaveLength(1);
   const finding = editor.linter.findings[0];
   expect(finding.ruleId).toBe("reference/unknown");
@@ -63,18 +62,15 @@ test("A parse error is listed as an error and nothing else is", () => {
   expect(actions[0].data.error.getErrorType()).toBe("parseerror");
 });
 
-test("A finding looks the same in the error list and in the check list", () => {
+test("An error finding gets the error look in the error list", () => {
   const editor = createEditor(badReference);
   expect(editor.linter.findings[0].severity).toBe("error");
   const listed = editor.errorList.actions[0];
   expect(listed.iconName).toBe("icon-error");
   expect(listed.css).toBeUndefined();
-  const checked = editor.linter.checkList.actions.filter(
-    a => a.id.indexOf("linter-finding-") === 0)[0];
-  expect(checked.css).toContain("svc-json-linter__finding--error");
 });
 
-test("A warning finding keeps the warning look in both lists", () => {
+test("A warning finding keeps the warning look in the error list", () => {
   const editor = createEditor(JSON.stringify({
     pages: [{ name: "p1", elements: [{ type: "text", name: "q1" }] }, { name: "p2" }]
   }, null, 2));
@@ -84,9 +80,6 @@ test("A warning finding keeps the warning look in both lists", () => {
     a => a.data.error === finding)[0];
   expect(listed.iconName).toBe("icon-warning-24x24");
   expect(listed.css).toBe("svc-json-errors__item--warning");
-  const checked = editor.linter.checkList.actions.filter(
-    a => a.data?.error === finding)[0];
-  expect(checked.css).toContain("svc-json-linter__finding--warning");
 });
 
 test("getFindingSeverityKind gives info the warning look", () => {
@@ -116,12 +109,10 @@ test("The error list is cleared once the JSON is fixed", () => {
 test("The linter does not run while the JSON has a syntax error", () => {
   const editor = createEditor(badReference);
   expect(editor.linter.findings).toHaveLength(1);
-  const previousList = editor.linter.checkList.actions.length;
   editor.text = "{ elements: [";
   editor.processErrors(editor.text);
-  // the panel keeps its previous result, the error list drops the stale positions
-  expect(editor.linter.findings).toHaveLength(1);
-  expect(editor.linter.checkList.actions).toHaveLength(previousList);
+  // nothing to analyse without a parsed JSON: the error list holds the parse error alone
+  expect(editor.linter.findings).toHaveLength(0);
   const actions = editor.errorList.actions;
   expect(actions.filter(a => a.id.indexOf("linterfinding_") === 0)).toHaveLength(0);
   expect(actions.filter(a => a.id.indexOf("error_") === 0).length).toBeGreaterThan(0);
@@ -186,82 +177,6 @@ test("The JSON tab adds no sidebar page", () => {
   const creator = new CreatorTester({ showJSONEditorTab: true });
   creator.activeTab = "json";
   expect(creator.sidebar.getPageById("linter")).toBeUndefined();
-});
-
-test("The check list holds a row per rule, its findings and a summary", () => {
-  const editor = createEditor(badReference);
-  const actions = editor.linter.checkList.actions;
-  const ruleCount = getRules().length;
-  // one row per rule + one finding row + the summary
-  expect(actions).toHaveLength(ruleCount + 2);
-  const failed = actions.filter(a => a.id === "linter-rule-reference/unknown")[0];
-  expect(failed.title).toBe("Unknown references (1)");
-  expect(failed.iconName).toBe("icon-error-16x16");
-  expect(failed.css).toBe("svc-json-linter__rule svc-json-linter__rule--error");
-  const passed = actions.filter(a => a.id === "linter-rule-page/empty")[0];
-  expect(passed.title).toBe("Empty pages and panels");
-  expect(passed.iconName).toBe("icon-check-16x16");
-  expect(passed.css).toBe("svc-json-linter__rule svc-json-linter__rule--passed");
-  const finding = actions.filter(a => a.id.indexOf("linter-finding-") === 0)[0];
-  expect(finding.component).toBe("json-error-item");
-  expect(finding.css).toBe(
-    "svc-json-linter__finding svc-json-linter__finding--error svc-json-linter__finding--navigable");
-  expect(actions[actions.length - 1].id).toBe("linter-summary");
-  expect(actions[actions.length - 1].title).toBe("1 issues found");
-});
-
-test("The summary reports a clean survey and the waiting state", () => {
-  const clean = createEditor(JSON.stringify({ elements: [{ type: "text", name: "q1" }] }, null, 2));
-  const cleanActions = clean.linter.checkList.actions;
-  expect(cleanActions[cleanActions.length - 1].title).toBe("All checks passed");
-  const broken = createEditor("{ elements: [");
-  const brokenActions = broken.linter.checkList.actions;
-  expect(brokenActions[brokenActions.length - 1].title).toBe("Waiting for valid JSON");
-});
-
-test("A rule row carries no status icon and no status class before the first run", () => {
-  const creator = new CreatorTester();
-  const linter = new JsonEditorLinterModel(creator, () => {});
-  const actions = linter.checkList.actions;
-  expect(actions[0].iconName).toBeFalsy();
-  expect(actions[0].css).toBe("svc-json-linter__rule");
-  expect(actions[actions.length - 1].title).toBe("Waiting for valid JSON");
-});
-
-test("A rule whose findings are warnings gets the warning status", () => {
-  const editor = createEditor(JSON.stringify({
-    elements: [
-      { type: "dropdown", name: "fruit", choices: ["apple", "banana"] },
-      { type: "text", name: "q2", visibleIf: "{fruit} = 'zzz'" }
-    ]
-  }, null, 2));
-  const actions = editor.linter.checkList.actions;
-  const rule = actions.filter(a => a.id === "linter-rule-expression/unknown-choice")[0];
-  expect(rule.iconName).toBe("icon-warning-24x24");
-  expect(rule.css).toBe("svc-json-linter__rule svc-json-linter__rule--warning");
-  const finding = actions.filter(a => a.id.indexOf("linter-finding-expression/unknown-choice") === 0)[0];
-  expect(finding.css).toContain("svc-json-linter__finding--warning");
-});
-
-test("A finding whose path did not resolve does not look clickable", () => {
-  const editor = createEditor(badReference);
-  const finding = editor.linter.findings[0];
-  // the path resolves here, so the row is navigable
-  expect(finding.at).toBeGreaterThan(-1);
-  const navigable = editor.linter.checkList.actions
-    .filter(a => a.id.indexOf("linter-finding-") === 0)[0];
-  expect(navigable.css).toContain("svc-json-linter__finding--navigable");
-  // an unresolvable path leaves at at -1, and then the class is absent
-  const unresolved = Object.assign(
-    Object.create(Object.getPrototypeOf(finding)), finding, { at: -1 });
-  const action = (<any>editor.linter)["createFindingAction"](
-    { id: "reference/unknown", defaultSeverity: "error" }, unresolved, 0);
-  expect(action.css).not.toContain("svc-json-linter__finding--navigable");
-});
-
-test("The check list gives the icon a class, so it is sized by CSS", () => {
-  const editor = createEditor(badReference);
-  expect(editor.linter.checkList.cssClasses.itemIcon).toBe("svc-json-linter__icon");
 });
 
 test("Clicking a finding navigates to its line", () => {
@@ -442,20 +357,6 @@ test("The meaningless-condition reasons each get their own text", () => {
     "The visibleIf \"{q1} + 1\" is arithmetic, not a comparison, so it never gives a yes or no.");
   expect(byReason.meaninglessFragment).toBe(
     "Part of the visibleIf \"{q1} = {q1}\" has a result that is known upfront.");
-});
-
-test("The new rules appear in the check list", () => {
-  const editor = createEditor(JSON.stringify({
-    elements: [{ type: "text", name: "q1", visibleIf: "1 = 2" }]
-  }, null, 2));
-  const actions = editor.linter.checkList.actions;
-  const contradiction = actions.filter(a => a.id === "linter-rule-expression/contradiction")[0];
-  expect(contradiction).toBeDefined();
-  expect(contradiction.title).toBe("Contradictory conditions (1)");
-  const meaningless = actions
-    .filter(a => a.id === "linter-rule-expression/meaningless-condition")[0];
-  expect(meaningless).toBeDefined();
-  expect(meaningless.iconName).toBe("icon-check-16x16");
 });
 
 // --- the mechanisms survey-core added on top of the constant condition -------------------
@@ -1118,15 +1019,9 @@ test("element/unknown-type without a type gets no component hint", () => {
   expect(texts[1]).toContain("If it is a custom component");
 });
 
-test("Every rule has a localized name, a description and a message per reason", () => {
+test("Every rule has a localized message per reason, and every hint a text", () => {
   const missing: Array<string> = [];
   getRules().forEach(rule => {
-    if (editorLocalization.getJsonValue("linter.rules." + rule.id) === undefined) {
-      missing.push("rules." + rule.id);
-    }
-    if (editorLocalization.getJsonValue("linter.ruleDescriptions." + rule.id) === undefined) {
-      missing.push("ruleDescriptions." + rule.id);
-    }
     const reasons = SurveyLintReasons[rule.id];
     expect(reasons).toBeDefined();
     Object.keys(reasons).forEach(reason => {
@@ -1214,4 +1109,53 @@ test("Every fix reason the linter declares has a title", () => {
     });
   });
   expect(missing).toEqual([]);
+});
+
+test("A reserved name is reported in the words of the creator, at its name key, and blocks the tab", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [
+      { type: "text", name: "toString" },
+      { type: "matrixdynamic", name: "m1", columns: [{ name: "constructor" }] },
+      { type: "matrix", name: "m2", rows: ["r1", "valueOf"], columns: ["c1"] },
+    ],
+  }, null, 2));
+  const findings = editor.linter.findings.filter(f => f.ruleId === "name/reserved");
+  expect(findings.map(f => f.text)).toEqual([
+    "The name \"toString\" is reserved - a member of Object.prototype.",
+    "The column \"constructor\" of \"m1\" is reserved - a member of Object.prototype.",
+    "The row \"valueOf\" of \"m2\" is reserved - a member of Object.prototype.",
+  ]);
+  // the finding sits at the name key, the way a duplicate name does
+  expect(findings[0].at).toBeGreaterThan(-1);
+  expect(editor.text.substr(findings[0].at, 6)).toBe("\"name\"");
+  expect(findings.every(f => f.isBlocking)).toBe(true);
+});
+
+test("A reserved name is repaired with a free name, and the button says so", () => {
+  const editor = createEditor(JSON.stringify({ elements: [{ type: "text", name: "toString" }] }, null, 2));
+  const action = editor.errorList.actions[0];
+  expect(action.data.showFixButton).toBeTruthy();
+  expect(action.data.fixButtonTitle).toBe("Give the element a free name");
+  editor.text = editor.linter.findings[0].fixError(editor.text);
+  expect(JSON.parse(editor.text).elements[0].name).toBe("question1");
+  editor.processErrors(editor.text);
+  expect(editor.linter.findings).toHaveLength(0);
+});
+
+test("A name that is not a string is reported in the words of the creator, and spelled out by the fix", () => {
+  const editor = createEditor(JSON.stringify({ elements: [{ type: "text", name: 5 }] }, null, 2));
+  const finding = editor.linter.findings.filter(f => f.ruleId === "property/required")[0];
+  expect(finding.text).toBe("The name of the text is 5, not a string - the survey cannot load it.");
+  expect(finding.isBlocking).toBe(true);
+  expect(editor.errorList.actions[0].data.fixButtonTitle).toBe("Give the element a name");
+  editor.text = finding.fixError(editor.text);
+  expect(JSON.parse(editor.text).elements[0].name).toBe("5");
+});
+
+test("A name that is an object is spelled out in the JSON form, not left as a placeholder", () => {
+  const editor = createEditor(JSON.stringify({ elements: [{ type: "text", name: { a: 1 } }] }, null, 2));
+  const finding = editor.linter.findings.filter(f => f.ruleId === "property/required")[0];
+  expect(finding.text).toBe("The name of the text is {\"a\":1}, not a string - the survey cannot load it.");
+  // an object written for a name means nothing in particular, so there is nothing to offer
+  expect(editor.errorList.actions[0].data.showFixButton).toBeFalsy();
 });
