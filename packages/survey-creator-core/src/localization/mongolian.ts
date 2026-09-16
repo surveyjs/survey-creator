@@ -525,18 +525,18 @@ export var mnStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Хувьсагчид",
-    // [Auto-translated] "No variables"
-    noPreset: "Хувьсагч байхгүй",
-    // [Auto-translated] "View"
-    view: "Үзэмж",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Хувьсах урьдчилсан тохиргоо",
+    // [Auto-translated] "None"
+    noPreset: "Байхгүй",
+    // [Auto-translated] "View variable values"
+    view: "Хувьсагчийн утгуудыг үзэх",
     // [Auto-translated] "Variable values"
     viewTitle: "Хувьсах утгууд",
-    // [Auto-translated] "Edit"
-    edit: "Засварлах",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Хувьсах урьдчилсан тохиргоог",
+    // [Auto-translated] "Manage presets"
+    edit: "Урьдчилсан тохиргоог удирдах",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Хувьсах урьдчилсан төхөөрөмжүүд",
     // [Auto-translated] "Preset"
     presetName: "Урьдчилсан тохиргоо",
     // [Auto-translated] "Description"

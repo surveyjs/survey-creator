@@ -525,18 +525,18 @@ export var polishStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Zmienne",
-    // [Auto-translated] "No variables"
-    noPreset: "Bez zmiennych",
-    // [Auto-translated] "View"
-    view: "Zobacz",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Preset zmiennych",
+    // [Auto-translated] "None"
+    noPreset: "Brak",
+    // [Auto-translated] "View variable values"
+    view: "Zobacz wartości zmiennych",
     // [Auto-translated] "Variable values"
     viewTitle: "Wartości zmiennych",
-    // [Auto-translated] "Edit"
-    edit: "Edycja",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Presety zmiennych",
+    // [Auto-translated] "Manage presets"
+    edit: "Zarządzanie presetami",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Zmienne presety",
     // [Auto-translated] "Preset"
     presetName: "Preset",
     // [Auto-translated] "Description"

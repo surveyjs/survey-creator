@@ -525,18 +525,18 @@ export var htStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Varyab yo",
-    // [Auto-translated] "No variables"
-    noPreset: "Pa gen varyab",
-    // [Auto-translated] "View"
-    view: "Gade",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Varyab prereglaj",
+    // [Auto-translated] "None"
+    noPreset: "Pa gen yonn",
+    // [Auto-translated] "View variable values"
+    view: "Gade valè varyab yo",
     // [Auto-translated] "Variable values"
     viewTitle: "Valè varyab yo",
-    // [Auto-translated] "Edit"
-    edit: "modifye",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Prereglaj varyab",
+    // [Auto-translated] "Manage presets"
+    edit: "Jere prereglaj",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Varyab Prereglaj",
     // [Auto-translated] "Preset"
     presetName: "Prereglaj",
     // [Auto-translated] "Description"

@@ -525,17 +525,17 @@ export var portugueseTranslation = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variáveis",
-    // [Auto-translated] "No variables"
-    noPreset: "Sem variáveis",
-    // [Auto-translated] "View"
-    view: "Visão",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Preset variável",
+    // [Auto-translated] "None"
+    noPreset: "Nenhum",
+    // [Auto-translated] "View variable values"
+    view: "Valores de variáveis de visualização",
     // [Auto-translated] "Variable values"
     viewTitle: "Valores das variáveis",
-    // [Auto-translated] "Edit"
-    edit: "Edit",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Presets de gerenciamento",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Presets de variáveis",
     // [Auto-translated] "Preset"
     presetName: "Preset",

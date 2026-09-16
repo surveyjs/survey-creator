@@ -525,17 +525,17 @@ export var czStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Proměnné",
-    // [Auto-translated] "No variables"
-    noPreset: "Žádné proměnné",
-    // [Auto-translated] "View"
-    view: "Zobrazit",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Přednastavení proměnných",
+    // [Auto-translated] "None"
+    noPreset: "Žádné",
+    // [Auto-translated] "View variable values"
+    view: "Zobrazit hodnoty proměnných",
     // [Auto-translated] "Variable values"
     viewTitle: "Hodnoty proměnných",
-    // [Auto-translated] "Edit"
-    edit: "Edit",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Správa přednastavení",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Přednastavení proměnných",
     // [Auto-translated] "Preset"
     presetName: "Přednastavení",

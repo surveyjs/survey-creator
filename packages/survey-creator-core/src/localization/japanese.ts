@@ -525,17 +525,17 @@ export var jaStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "変数",
-    // [Auto-translated] "No variables"
-    noPreset: "変数なし",
-    // [Auto-translated] "View"
-    view: "眺め",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "変数プリセット",
+    // [Auto-translated] "None"
+    noPreset: "全くありません",
+    // [Auto-translated] "View variable values"
+    view: "変数値を見る",
     // [Auto-translated] "Variable values"
     viewTitle: "変数の価値",
-    // [Auto-translated] "Edit"
-    edit: "編集",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "プリセット管理",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "可変プリセット",
     // [Auto-translated] "Preset"
     presetName: "プリセット",

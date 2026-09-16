@@ -525,17 +525,17 @@ export var arStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "المتغيرات",
-    // [Auto-translated] "No variables"
-    noPreset: "لا متغيرات",
-    // [Auto-translated] "View"
-    view: "منظر",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "إعداد المتغيرات",
+    // [Auto-translated] "None"
+    noPreset: "لا شيء",
+    // [Auto-translated] "View variable values"
+    view: "عرض قيم المتغيرات",
     // [Auto-translated] "Variable values"
     viewTitle: "قيم المتغيرات",
-    // [Auto-translated] "Edit"
-    edit: "تعديل",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "إدارة الإعدادات المسبقة",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "الإعدادات المسبقة للمتغيرات",
     // [Auto-translated] "Preset"
     presetName: "إعداد مسبق",

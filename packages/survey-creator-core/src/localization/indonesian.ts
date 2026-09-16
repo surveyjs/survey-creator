@@ -525,18 +525,18 @@ export var indonesianStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variabel",
-    // [Auto-translated] "No variables"
-    noPreset: "Tidak ada variabel",
-    // [Auto-translated] "View"
-    view: "Lihat",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Preset variabel",
+    // [Auto-translated] "None"
+    noPreset: "Tidak ada",
+    // [Auto-translated] "View variable values"
+    view: "Lihat nilai variabel",
     // [Auto-translated] "Variable values"
     viewTitle: "Nilai variabel",
-    // [Auto-translated] "Edit"
-    edit: "Edit",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Preset variabel",
+    // [Auto-translated] "Manage presets"
+    edit: "Kelola preset",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Preset Variabel",
     // [Auto-translated] "Preset"
     presetName: "Prasetel",
     // [Auto-translated] "Description"

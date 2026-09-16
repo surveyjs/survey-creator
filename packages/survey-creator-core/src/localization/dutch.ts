@@ -525,18 +525,18 @@ export var nlStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variabelen",
-    // [Auto-translated] "No variables"
-    noPreset: "Geen variabelen",
-    // [Auto-translated] "View"
-    view: "Uitzicht",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Variabele preset",
+    // [Auto-translated] "None"
+    noPreset: "Geen enkele",
+    // [Auto-translated] "View variable values"
+    view: "Bekijk variabelewaarden",
     // [Auto-translated] "Variable values"
     viewTitle: "Variabele waarden",
-    // [Auto-translated] "Edit"
-    edit: "Bewerking",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Variabele presets",
+    // [Auto-translated] "Manage presets"
+    edit: "Beheer presets",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Variabele voorinstellingen",
     // [Auto-translated] "Preset"
     presetName: "Preset",
     // [Auto-translated] "Description"

@@ -525,17 +525,17 @@ export var danishStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variable",
-    // [Auto-translated] "No variables"
-    noPreset: "Ingen variable",
-    // [Auto-translated] "View"
-    view: "Udsigt",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Variabel forudindstilling",
+    // [Auto-translated] "None"
+    noPreset: "Ingen",
+    // [Auto-translated] "View variable values"
+    view: "Se variable værdier",
     // [Auto-translated] "Variable values"
     viewTitle: "Variable værdier",
-    // [Auto-translated] "Edit"
-    edit: "Redigering",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Administrer presets",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Variable forudindstillinger",
     // [Auto-translated] "Preset"
     presetName: "Preset",

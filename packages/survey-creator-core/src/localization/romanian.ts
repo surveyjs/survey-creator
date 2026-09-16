@@ -525,17 +525,17 @@ export const roStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variabile",
-    // [Auto-translated] "No variables"
-    noPreset: "Fără variabile",
-    // [Auto-translated] "View"
-    view: "Vizualizare",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Presetare variabilă",
+    // [Auto-translated] "None"
+    noPreset: "Niciuna",
+    // [Auto-translated] "View variable values"
+    view: "Vizualizarea valorilor variabilelor",
     // [Auto-translated] "Variable values"
     viewTitle: "Valori ale variabilelor",
-    // [Auto-translated] "Edit"
-    edit: "Editare",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Presetări de gestionare",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Presetări variabile",
     // [Auto-translated] "Preset"
     presetName: "Presetare",

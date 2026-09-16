@@ -525,17 +525,17 @@ export var simplifiedChineseTranslation = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "变量",
-    // [Auto-translated] "No variables"
-    noPreset: "没有变量",
-    // [Auto-translated] "View"
-    view: "景观",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "变量预设",
+    // [Auto-translated] "None"
+    noPreset: "没有",
+    // [Auto-translated] "View variable values"
+    view: "查看变量值",
     // [Auto-translated] "Variable values"
     viewTitle: "变量值",
-    // [Auto-translated] "Edit"
-    edit: "编辑",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "管理预设",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "可变预设",
     // [Auto-translated] "Preset"
     presetName: "预设",

@@ -525,18 +525,18 @@ export var msStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Pembolehubah",
-    // [Auto-translated] "No variables"
-    noPreset: "Tiada pembolehubah",
-    // [Auto-translated] "View"
-    view: "Lihat",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Pratetap pembolehubah",
+    // [Auto-translated] "None"
+    noPreset: "Tiada",
+    // [Auto-translated] "View variable values"
+    view: "Lihat nilai pembolehubah",
     // [Auto-translated] "Variable values"
     viewTitle: "Nilai pembolehubah",
-    // [Auto-translated] "Edit"
-    edit: "Edit",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Pratetap pembolehubah",
+    // [Auto-translated] "Manage presets"
+    edit: "Urus pratetap",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Pratetap Pembolehubah",
     // [Auto-translated] "Preset"
     presetName: "Pratetap",
     // [Auto-translated] "Description"

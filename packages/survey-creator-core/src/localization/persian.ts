@@ -525,17 +525,17 @@ export var persianStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "متغیرها",
-    // [Auto-translated] "No variables"
-    noPreset: "بدون متغیری",
-    // [Auto-translated] "View"
-    view: "نمای",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "پیش تنظیم متغیر",
+    // [Auto-translated] "None"
+    noPreset: "هیچ کدام",
+    // [Auto-translated] "View variable values"
+    view: "مشاهده مقادیر متغیر",
     // [Auto-translated] "Variable values"
     viewTitle: "مقادیر متغیر",
-    // [Auto-translated] "Edit"
-    edit: "ویرایش",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "مدیریت پیش تنظیم ها",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "پیش تنظیم های متغیر",
     // [Auto-translated] "Preset"
     presetName: "پیش تنظیم",

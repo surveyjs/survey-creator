@@ -525,17 +525,17 @@ export var koreanStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "변수들",
-    // [Auto-translated] "No variables"
-    noPreset: "변수는 없습니다",
-    // [Auto-translated] "View"
-    view: "전망",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "변수 프리셋",
+    // [Auto-translated] "None"
+    noPreset: "전혀 없습니다",
+    // [Auto-translated] "View variable values"
+    view: "변수 값 보기",
     // [Auto-translated] "Variable values"
     viewTitle: "변수 값",
-    // [Auto-translated] "Edit"
-    edit: "수정",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "프리셋 관리",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "가변 프리셋",
     // [Auto-translated] "Preset"
     presetName: "프리셋",

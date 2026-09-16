@@ -525,17 +525,17 @@ export var italianTranslation = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variabili",
-    // [Auto-translated] "No variables"
-    noPreset: "Nessuna variabile",
-    // [Auto-translated] "View"
-    view: "Vista",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Preset variabile",
+    // [Auto-translated] "None"
+    noPreset: "Nessuna",
+    // [Auto-translated] "View variable values"
+    view: "Valori delle variabili di visualizzazione",
     // [Auto-translated] "Variable values"
     viewTitle: "Valori variabili",
-    // [Auto-translated] "Edit"
-    edit: "Modifica",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Gestione preset",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Preset variabili",
     // [Auto-translated] "Preset"
     presetName: "Preset",

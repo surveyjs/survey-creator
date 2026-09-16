@@ -525,17 +525,17 @@ export var hrStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Varijable",
-    // [Auto-translated] "No variables"
-    noPreset: "Bez varijabli",
-    // [Auto-translated] "View"
-    view: "Pogled",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Predskup varijabli",
+    // [Auto-translated] "None"
+    noPreset: "Nema",
+    // [Auto-translated] "View variable values"
+    view: "Prikaži vrijednosti varijabli",
     // [Auto-translated] "Variable values"
     viewTitle: "Vrijednosti varijabli",
-    // [Auto-translated] "Edit"
-    edit: "Uređivanje",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Upravljanje presetima",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Predpostavke varijabli",
     // [Auto-translated] "Preset"
     presetName: "Preset",

@@ -525,17 +525,17 @@ export var huStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Változók",
-    // [Auto-translated] "No variables"
-    noPreset: "Nincsenek változók",
-    // [Auto-translated] "View"
-    view: "Kilátás",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Változó előbeállítás",
+    // [Auto-translated] "None"
+    noPreset: "Nincs",
+    // [Auto-translated] "View variable values"
+    view: "Változóértékek megtekintése",
     // [Auto-translated] "Variable values"
     viewTitle: "Változóértékek",
-    // [Auto-translated] "Edit"
-    edit: "Szerkesztés",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Manage presets",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Változó előbeállítások",
     // [Auto-translated] "Preset"
     presetName: "Előbeállítás",

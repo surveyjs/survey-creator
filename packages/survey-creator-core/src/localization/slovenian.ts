@@ -525,17 +525,17 @@ export var slStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Spremenljivke",
-    // [Auto-translated] "No variables"
-    noPreset: "Brez spremenljivk",
-    // [Auto-translated] "View"
-    view: "Pogled",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Prednastavitev spremenljivk",
+    // [Auto-translated] "None"
+    noPreset: "Nobenega",
+    // [Auto-translated] "View variable values"
+    view: "Prikaži vrednosti spremenljivk",
     // [Auto-translated] "Variable values"
     viewTitle: "Vrednosti spremenljivk",
-    // [Auto-translated] "Edit"
-    edit: "Uredi",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Upravljanje prednastavitev",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Prednastavitve spremenljivk",
     // [Auto-translated] "Preset"
     presetName: "Prednastavitev",

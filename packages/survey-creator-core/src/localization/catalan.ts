@@ -525,17 +525,17 @@ export var catalanTranslation = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variables",
-    // [Auto-translated] "No variables"
-    noPreset: "Sense variables",
-    // [Auto-translated] "View"
-    view: "Vista",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Preset de variables",
+    // [Auto-translated] "None"
+    noPreset: "Cap",
+    // [Auto-translated] "View variable values"
+    view: "Veure valors de variables",
     // [Auto-translated] "Variable values"
     viewTitle: "Valors variables",
-    // [Auto-translated] "Edit"
-    edit: "Edita",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Gestionar presets",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Presets de variables",
     // [Auto-translated] "Preset"
     presetName: "Preset",

@@ -525,18 +525,18 @@ export const thStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "ตัวแปร",
-    // [Auto-translated] "No variables"
-    noPreset: "ไม่มีตัวแปร",
-    // [Auto-translated] "View"
-    view: "ดู",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "การตั้งค่าตัวแปรล่วงหน้า",
+    // [Auto-translated] "None"
+    noPreset: "ไม่มี",
+    // [Auto-translated] "View variable values"
+    view: "ดูค่าตัวแปร",
     // [Auto-translated] "Variable values"
     viewTitle: "ค่าตัวแปร",
-    // [Auto-translated] "Edit"
-    edit: "แก้ไข",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "การตั้งค่าล่วงหน้าที่ปรับได้",
+    // [Auto-translated] "Manage presets"
+    edit: "จัดการพรีเซ็ต",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "การตั้งค่าล่วงหน้าแบบแปรผัน",
     // [Auto-translated] "Preset"
     presetName: "พรีเซ็ต",
     // [Auto-translated] "Description"

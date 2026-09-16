@@ -525,17 +525,17 @@ export var bgStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Променливи",
-    // [Auto-translated] "No variables"
-    noPreset: "Без променливи",
-    // [Auto-translated] "View"
-    view: "Изглед",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Пресет за променливи",
+    // [Auto-translated] "None"
+    noPreset: "Няма",
+    // [Auto-translated] "View variable values"
+    view: "Вижте стойностите на променливите",
     // [Auto-translated] "Variable values"
     viewTitle: "Променливи стойности",
-    // [Auto-translated] "Edit"
-    edit: "Редакция",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Управление на предварителни настройки",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Променливи пресети",
     // [Auto-translated] "Preset"
     presetName: "Предварително зададен",

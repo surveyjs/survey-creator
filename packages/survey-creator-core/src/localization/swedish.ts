@@ -525,18 +525,18 @@ export let svStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variabler",
-    // [Auto-translated] "No variables"
-    noPreset: "Inga variabler",
-    // [Auto-translated] "View"
-    view: "Vy",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Variabelförinställning",
+    // [Auto-translated] "None"
+    noPreset: "Inga",
+    // [Auto-translated] "View variable values"
+    view: "Visa variabelvärden",
     // [Auto-translated] "Variable values"
     viewTitle: "Variabelvärden",
-    // [Auto-translated] "Edit"
-    edit: "Redigering",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Variabelförinställningar",
+    // [Auto-translated] "Manage presets"
+    edit: "Hantera förinställningar",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Variabel förinställningar",
     // [Auto-translated] "Preset"
     presetName: "Förinställd",
     // [Auto-translated] "Description"

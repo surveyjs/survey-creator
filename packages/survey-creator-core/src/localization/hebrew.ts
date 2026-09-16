@@ -525,17 +525,17 @@ export var hebrewStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "משתנים",
-    // [Auto-translated] "No variables"
-    noPreset: "אין משתנים",
-    // [Auto-translated] "View"
-    view: "תצפית",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "פריסט משתנה",
+    // [Auto-translated] "None"
+    noPreset: "אין",
+    // [Auto-translated] "View variable values"
+    view: "הצג ערכי משתנה",
     // [Auto-translated] "Variable values"
     viewTitle: "ערכי משתנים",
-    // [Auto-translated] "Edit"
-    edit: "עריכה",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "ניהול פריסטים",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "פריסטים משתנים",
     // [Auto-translated] "Preset"
     presetName: "פריסט",

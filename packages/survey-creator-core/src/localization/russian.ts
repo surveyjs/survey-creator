@@ -525,18 +525,18 @@ export var ruStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Переменные",
-    // [Auto-translated] "No variables"
-    noPreset: "Без переменных",
-    // [Auto-translated] "View"
-    view: "Вид",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Пресет переменных",
+    // [Auto-translated] "None"
+    noPreset: "Нет",
+    // [Auto-translated] "View variable values"
+    view: "Просмотр значений переменных",
     // [Auto-translated] "Variable values"
     viewTitle: "Значения переменных",
-    // [Auto-translated] "Edit"
-    edit: "Редактирование",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Пресеты переменных",
+    // [Auto-translated] "Manage presets"
+    edit: "Управление пресетами",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Переменные пресеты",
     // [Auto-translated] "Preset"
     presetName: "Пресет",
     // [Auto-translated] "Description"

@@ -525,18 +525,18 @@ export var skStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Premenné",
-    // [Auto-translated] "No variables"
-    noPreset: "Žiadne premenné",
-    // [Auto-translated] "View"
-    view: "Zobraziť",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Prednastavenie premenných",
+    // [Auto-translated] "None"
+    noPreset: "Žiadna",
+    // [Auto-translated] "View variable values"
+    view: "Zobraziť hodnoty premenných",
     // [Auto-translated] "Variable values"
     viewTitle: "Hodnoty premenných",
-    // [Auto-translated] "Edit"
-    edit: "Edit",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Prednastavenia premenných",
+    // [Auto-translated] "Manage presets"
+    edit: "Spravovať predvoľby",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Predvojby premenných",
     // [Auto-translated] "Preset"
     presetName: "Prednastavená predsada",
     // [Auto-translated] "Description"

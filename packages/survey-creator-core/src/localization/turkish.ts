@@ -525,18 +525,18 @@ export var turkishStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Değişkenler",
-    // [Auto-translated] "No variables"
-    noPreset: "Değişken yok",
-    // [Auto-translated] "View"
-    view: "Görünüm",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Değişken ön ayar",
+    // [Auto-translated] "None"
+    noPreset: "Hiçbiri yok",
+    // [Auto-translated] "View variable values"
+    view: "Değişken değerlerini görüntüleyin",
     // [Auto-translated] "Variable values"
     viewTitle: "Değişken değerleri",
-    // [Auto-translated] "Edit"
-    edit: "Düzenleme",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Değişken ön ayarlar",
+    // [Auto-translated] "Manage presets"
+    edit: "Manage presetler",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Değişken Ön Ayarlar",
     // [Auto-translated] "Preset"
     presetName: "Ön ayar",
     // [Auto-translated] "Description"

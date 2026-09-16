@@ -525,17 +525,17 @@ export var grStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Μεταβλητές",
-    // [Auto-translated] "No variables"
-    noPreset: "Καμία μεταβλητή",
-    // [Auto-translated] "View"
-    view: "Προβολή",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Μεταβλητή προεπιλογή",
+    // [Auto-translated] "None"
+    noPreset: "Κανένας",
+    // [Auto-translated] "View variable values"
+    view: "Προβολή τιμών μεταβλητών",
     // [Auto-translated] "Variable values"
     viewTitle: "Μεταβλητές τιμές",
-    // [Auto-translated] "Edit"
-    edit: "Επεξεργασία",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Διαχείριση προεπιλογών",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Μεταβλητές προεπιλογές",
     // [Auto-translated] "Preset"
     presetName: "Προεπιλογή",

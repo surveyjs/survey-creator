@@ -525,18 +525,18 @@ export var fiStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Muuttujat",
-    // [Auto-translated] "No variables"
-    noPreset: "Ei muuttujia",
-    // [Auto-translated] "View"
-    view: "Näkymä",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Muuttujan esiasetus",
+    // [Auto-translated] "None"
+    noPreset: "Ei mitään",
+    // [Auto-translated] "View variable values"
+    view: "Katso muuttujan arvot",
     // [Auto-translated] "Variable values"
     viewTitle: "Muuttujaarvot",
-    // [Auto-translated] "Edit"
-    edit: "Muokkaus",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Muuttujapresetit",
+    // [Auto-translated] "Manage presets"
+    edit: "Hallinnoi esiasetuksia",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Muuttuvat esiasetukset",
     // [Auto-translated] "Preset"
     presetName: "Esiasetus",
     // [Auto-translated] "Description"

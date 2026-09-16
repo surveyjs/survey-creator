@@ -525,17 +525,17 @@ export var nbStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variabler",
-    // [Auto-translated] "No variables"
-    noPreset: "Ingen variabler",
-    // [Auto-translated] "View"
-    view: "Utsikt",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Variabel forhåndsinnstilling",
+    // [Auto-translated] "None"
+    noPreset: "Ingen",
+    // [Auto-translated] "View variable values"
+    view: "Vis variableverdier",
     // [Auto-translated] "Variable values"
     viewTitle: "Variable verdier",
-    // [Auto-translated] "Edit"
-    edit: "Redigering",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Administrer forhåndsinnstillinger",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Variable forhåndsinnstillinger",
     // [Auto-translated] "Preset"
     presetName: "Forhåndsinnstilt",
