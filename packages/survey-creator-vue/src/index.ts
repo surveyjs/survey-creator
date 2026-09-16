@@ -24,6 +24,7 @@ import CollabRow from "./components/CollabRow.vue";
 import FloatingPanel from "./components/FloatingPanel.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import ComponentContainer from "./components/ComponentContainer.vue";
+import VariablesViewer from "./components/VariablesViewer.vue";
 import SurveyWidget from "./components/SurveyWidget.vue";
 import Test from "./tabs/preview/Test.vue";
 import ContainerTab from "./tabs/ContainerTab.vue";
@@ -158,6 +159,7 @@ function registerComponents(
   registerComponent("svc-tab-theme", Theme);
 
   registerComponent("svc-component-container", ComponentContainer);
+  registerComponent("svc-variables-viewer", VariablesViewer);
   registerComponent("svc-tab-container", ContainerTab);
 
   registerComponent("svc-toolbox", AdaptiveToolbox);

@@ -11,6 +11,7 @@ import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { TestSurveyTabViewModel } from "../src/components/tabs/test";
 import { TabThemePlugin } from "../src/components/tabs/theme-plugin";
 import { VariablePresetsManager } from "../src/variable-presets";
+import { VariablesViewerModel } from "../src/components/variables-viewer/variables-viewer";
 import { getLocString } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 
@@ -396,7 +397,7 @@ describe("The variable preset actions in the page toolbar (issue #7982)", () => 
     getManager(creator).active = "Gold customer";
     expect(action.enabled).toBeTruthy();
   });
-  test("View shows the active preset's variables in one read-only question", () => {
+  test("View shows the active preset's variables in a read-only text viewer, not a survey", () => {
     const creator = new CreatorTester({ variablePresets: { presets: presets } });
     creator.JSON = surveyJSON;
     getManager(creator).active = "Gold customer";
@@ -411,11 +412,12 @@ describe("The variable preset actions in the page toolbar (issue #7982)", () => 
       surveySettings.showDialog = oldShowDialog;
     }
     expect(callCount).toBe(1);
-    expect(dialogOptions.componentName).toBe("survey");
-    const dialogSurvey: SurveyModel = dialogOptions.data.survey;
-    const question = dialogSurvey.getAllQuestions()[0];
-    expect(question.isReadOnly).toBeTruthy();
-    expect(JSON.parse(question.value)).toStrictEqual({ customerTier: "gold", yearsInBusiness: 12 });
+    expect(dialogOptions.componentName).toBe("svc-variables-viewer");
+    expect(dialogOptions.cssClass).toBe("svc-creator-popup svc-variables-viewer-popup");
+    const viewer: VariablesViewerModel = dialogOptions.data.model;
+    expect(viewer).toBeInstanceOf(VariablesViewerModel);
+    expect(JSON.parse(viewer.text)).toStrictEqual({ customerTier: "gold", yearsInBusiness: 12 });
+    expect(viewer.ariaLabel).toBe(getLocString("vp.viewTitle") + " - Gold customer");
   });
   test("The Theme tab inherits the toolbar but shows no preset controls and runs no presets", () => {
     const creator = new CreatorTester({ showThemeTab: true, variablePresets: createContainer() });

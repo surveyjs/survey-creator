@@ -1,0 +1,53 @@
+@use "../../variables" as *;
+
+// The dialog has a fixed size instead of growing with its content, so that the textarea fills it
+// and scrolls on its own rather than the dialog growing past the viewport.
+.sv-popup--modal-popup.svc-variables-viewer-popup {
+  & > .sv-popup__container {
+    width: min(calc(var(--sjs2-base-unit-size) * 80), 90vw);
+    height: min(calc(var(--sjs2-base-unit-size) * 60), 80vh);
+
+    & > .sv-popup__body-content {
+      height: 100%;
+      min-width: 0;
+    }
+  }
+
+  .sv-popup__content {
+    flex-grow: 1;
+    padding: 0;
+  }
+
+  .sv-popup__scrolling-content {
+    flex-grow: 1;
+    overflow: hidden;
+  }
+}
+
+.svc-variables-viewer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.svc-variables-viewer__text {
+  @include sjs2--typography--default-code;
+  flex-grow: 1;
+  width: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x200);
+  resize: none;
+  overflow: auto;
+  color: var(--sjs2-color-fg-basic-primary);
+  background: var(--sjs2-color-bg-basic-secondary);
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  border-radius: var(--sjs2-radius-x100);
+  outline: none;
+
+  &:focus {
+    border-color: var(--sjs2-color-border-brand-primary);
+  }
+}
