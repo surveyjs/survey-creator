@@ -165,13 +165,13 @@ describe("The active variable preset on the Preview plugin (issue #7982)", () =>
     manager.active = "Gold customer";
     expect(log).toHaveLength(1);
     expect(log[0].reason).toBe("select");
-    expect(log[0].active).toBe("Gold customer");
+    expect(log[0].activePresetName).toBe("Gold customer");
     expect(log[0].variablePresets).toBe(creator.variablePresets);
     manager.active = "Gold customer";
     expect(log).toHaveLength(1);
     manager.active = "";
     expect(log).toHaveLength(2);
-    expect(log[1].active).toBe("");
+    expect(log[1].activePresetName).toBe("");
   });
   test("The choice survives a rebuild of the view model", () => {
     const creator = new CreatorTester({ variablePresets: createContainer() });
@@ -301,7 +301,7 @@ describe("Variable presets in Preview (issue #7982)", () => {
     creator.variablePresets = { presets: [{ name: "Other", variables: { customerTier: "basic" } }, { name: "Another", variables: {} }] };
     const items: Array<IAction> = action.popupModel.contentComponentData.model.actions;
     expect(items.map(item => item.id)).toStrictEqual(["Other", "Another"]);
-    expect(action.title).toBe(getLocString("vp.noPreset"));
+    expect(action.title).toBe(getLocString("vp.selectorTitle") + ": " + getLocString("vp.noPreset"));
     expect(getManager(creator).active).toBe("");
     expect(model.survey.getVariable("customertier")).toBeUndefined();
   });
@@ -363,7 +363,7 @@ describe("The variable preset actions in the page toolbar (issue #7982)", () => 
     const creator = new CreatorTester({ variablePresets: createContainer() });
     creator.JSON = surveyJSON;
     const action = getPresetAction(creator, "variablePresetSelector");
-    expect(action.title).toBe(getLocString("vp.noPreset"));
+    expect(action.title).toBe(getLocString("vp.selectorTitle") + ": " + getLocString("vp.noPreset"));
     getManager(creator).active = "Newcomer";
     expect(action.title).toBe(getLocString("vp.selectorTitle") + ": Newcomer");
     expect(action.popupModel.contentComponentData.model.selectedItem.id).toBe("Newcomer");
