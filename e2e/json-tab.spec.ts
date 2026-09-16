@@ -129,6 +129,51 @@ test.describe(title, () => {
     await expect(getTabbedMenuItemByText(page, creatorTabJsonEditorName)).toBeVisible();
   });
 
+  test("Read creator.JSON without leaving the tab", async ({ page }) => {
+    await setJSON(page, json);
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
+
+    await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 9, 21, 9, 30);
+    await page.keyboard.press("Backspace");
+    await page.keyboard.type("I am changed");
+
+    const state = await page.evaluate(() => {
+      const creator = (window as any).creator;
+      return { title: creator.JSON.pages[0].elements[0].title, activeTab: creator.activeTab };
+    });
+    expect(state.title).toBe("I am changed");
+    expect(state.activeTab).toBe("json");
+  });
+
+  test("Auto-save the text typed into the tab", async ({ page }) => {
+    await setJSON(page, json);
+    await page.evaluate(() => {
+      const creator = (window as any).creator;
+      creator.autoSaveEnabled = true;
+      creator.saveSurveyFunc = (no: number, callback: (num: number, isSuccess: boolean) => void) => {
+        (window as any).savedJson = creator.JSON;
+        callback(no, true);
+      };
+    });
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
+
+    await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 9, 21, 9, 30);
+    await page.keyboard.press("Backspace");
+    await page.keyboard.type("I am saved");
+
+    // the editor waits out a second, then the auto-save delay
+    await page.waitForTimeout(1800);
+    const saved = await page.evaluate(() => {
+      const creator = (window as any).creator;
+      return {
+        title: (window as any).savedJson?.pages[0].elements[0].title,
+        activeTab: creator.activeTab
+      };
+    });
+    expect(saved.title).toBe("I am saved");
+    expect(saved.activeTab).toBe("json");
+  });
+
   test("Check fix error", async ({ page }) => {
     await setJSON(page, {
       elements: [
