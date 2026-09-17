@@ -66,6 +66,7 @@ export * from "../side-bar/ObjectSelector";
 export * from "../side-bar/PropertyGrid";
 export * from "../components/Search";
 export * from "../components/ComponentContainer";
+export * from "../components/VariablesViewer";
 export * from "../components/IconItem";
 export * from "../Switcher";
 export * from "../CollabRow";

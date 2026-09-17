@@ -1,0 +1,66 @@
+@use "../../variables" as *;
+
+// The dialog is sized to the viewport instead of growing with its content, so that the textarea
+// fills it and scrolls on its own. The size goes on the body and not on the container: the popup
+// renderers write width and height inline on the container, and those would win. The extra
+// .svc-creator-popup outranks the padding and gap set in popup.scss.
+.svc-creator-popup.sv-popup--modal-popup.svc-variables-viewer-popup {
+  --svc-variables-viewer-outer-gap: var(--sjs2-spacing-x300);
+  padding: var(--svc-variables-viewer-outer-gap);
+
+  & > .sv-popup__container > .sv-popup__body-content {
+    width: min(calc(var(--sjs2-base-unit-size) * 125), calc(100vw - 2 * var(--svc-variables-viewer-outer-gap)));
+    height: min(calc(var(--sjs2-base-unit-size) * 100), calc(100vh - 2 * var(--svc-variables-viewer-outer-gap)));
+    min-width: 0;
+    max-height: none;
+    padding: var(--sjs2-spacing-x300);
+    gap: var(--sjs2-spacing-x200);
+  }
+
+  .sv-popup__body-header,
+  .sv-popup__body-footer {
+    padding: 0;
+  }
+
+  .sv-popup__content {
+    flex-grow: 1;
+    padding: 0;
+  }
+
+  .sv-popup__scrolling-content {
+    flex-grow: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+.svc-variables-viewer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.svc-variables-viewer__text {
+  @include sjs2--typography--default-code;
+  // The theme's code font is not always loaded; without a generic family the browser falls back to
+  // a serif face.
+  font-family: var(--sjs2-typography-font-family-code), monospace;
+  flex-grow: 1;
+  width: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x150);
+  resize: none;
+  overflow: auto;
+  color: var(--sjs2-color-fg-basic-primary);
+  background: var(--sjs2-color-bg-basic-secondary);
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  border-radius: var(--sjs2-radius-x100);
+  outline: none;
+
+  &:focus {
+    border-color: var(--sjs2-color-border-brand-primary);
+  }
+}
