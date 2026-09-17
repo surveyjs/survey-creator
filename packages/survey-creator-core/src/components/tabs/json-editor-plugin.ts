@@ -10,6 +10,7 @@ import { CreatorDomHelper } from "../../dom-helper";
 const maxErrorLength = 150;
 export abstract class JsonEditorBaseModel extends Base {
   public isJSONChanged: boolean = false;
+  private isApplying: boolean = false;
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
@@ -33,20 +34,29 @@ export abstract class JsonEditorBaseModel extends Base {
     this.isJSONChanged = false;
   }
   protected onTextChanged(): void {
+    this.cancelScheduledProcessing();
+    // setText has validated the text already, synchronously
+    const needProcessErrors = !this.isProcessingImmediately;
+    // with auto-save on, the pause after a keystroke applies the text the way a property change
+    // in the designer does - otherwise the text waits for a read, a save or the tab switch
+    if (!needProcessErrors && !this.creator.autoSaveEnabled) return;
+    const self: JsonEditorBaseModel = this;
+    const window = DomWindowHelper.getWindow();
+    if (!window) return;
+    this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
+      self.jsonEditorChangedTimeoutId = -1;
+      if (needProcessErrors) {
+        self.processErrors(self.text);
+      }
+      if (self.creator.autoSaveEnabled) {
+        self.applyChanges();
+      }
+    }, JsonEditorBaseModel.updateTextTimeout);
+  }
+  private cancelScheduledProcessing(): void {
     if (this.jsonEditorChangedTimeoutId !== -1) {
       clearTimeout(this.jsonEditorChangedTimeoutId);
-    }
-    if (this.isProcessingImmediately) {
       this.jsonEditorChangedTimeoutId = -1;
-    } else {
-      const self: JsonEditorBaseModel = this;
-      const window = DomWindowHelper.getWindow();
-      if (!!window) {
-        this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
-          self.jsonEditorChangedTimeoutId = -1;
-          self.processErrors(self.text);
-        }, JsonEditorBaseModel.updateTextTimeout);
-      }
     }
   }
 
@@ -118,6 +128,30 @@ export abstract class JsonEditorBaseModel extends Base {
     const textWorker: SurveyTextWorker = this.createTextWorker();
     this.setErrors(textWorker.errors);
   }
+  // true: nothing to apply, or applied. false: the text does not parse or has a blocking error,
+  // and the survey is left as it is. Leaving the tab passes ignoreBlockingErrors: the host may
+  // have allowed leaving with errors through onActiveTabChanging.
+  public applyChanges(ignoreBlockingErrors: boolean = false): boolean {
+    if (this.readOnly || !this.isJSONChanged) return true;
+    // a handler of an event the apply itself raises may read creator.JSON, which applies this
+    // very tab again: the apply already under way answers for it
+    if (this.isApplying) return true;
+    if (!ignoreBlockingErrors && this.allowingDeactivate() !== true) return false;
+    this.isApplying = true;
+    try {
+      this.creator.selectedElement = undefined;
+      this.creator.changeText(this.text, false, true);
+      this.creator.selectedElement = this.creator.survey;
+      // reset before setModified: with an auto-save delay of 0 the save runs synchronously, and
+      // the save path applies the active tab again - the flag must already say there is nothing
+      // left to apply
+      this.isJSONChanged = false;
+      this.creator.setModified({ type: "JSON_EDITOR" });
+    } finally {
+      this.isApplying = false;
+    }
+    return true;
+  }
   public allowingDeactivate(): boolean {
     const textWorker: SurveyTextWorker = this.createTextWorker();
     if (!textWorker.isJsonCorrect) return undefined;
@@ -127,6 +161,11 @@ export abstract class JsonEditorBaseModel extends Base {
     return new SurveyTextWorker(this.text, {
       validatePropertyValues: this.creator.validateJsonPropertyValues
     });
+  }
+  public dispose(): void {
+    // the model is disposed as the tab closes: a pause it was waiting out has nothing to apply to
+    this.cancelScheduledProcessing();
+    super.dispose();
   }
   public get readOnly(): boolean {
     return this.creator.readOnly;
@@ -228,16 +267,14 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
-      if (!this.model.readOnly && this.model.isJSONChanged) {
-        this.creator.selectedElement = undefined;
-        this.creator.changeText(this.model.text, false, true);
-        this.creator.selectedElement = this.creator.survey;
-        this.creator.setModified({ type: "JSON_EDITOR" });
-      }
+      this.model.applyChanges(true);
       this.model.dispose();
       this.model = undefined;
     }
     return true;
+  }
+  public applyPendingChanges(): boolean {
+    return !this.model || this.model.applyChanges();
   }
   public defaultAllowingDeactivate(): boolean {
     if (!this.model) return true;
