@@ -624,12 +624,12 @@ export interface ICreatorOptions {
    * The `variablePresets` object can include the following properties:
    *
    * - `definition`: `object`\
-   * A survey JSON schema that configures the preset editor UI. If omitted, users can only view the active preset as a raw JSON object.
+   * A survey JSON definition whose questions describe the variables. Question names identify variables, while question types, choices, and validators configure the preset editor. If omitted, users can only view the active preset as a raw JSON object.
    *
-   * - `presets`: `Array<{ name: string, description: string, variables: object }>`\
-   * An array of predefined variable presets. Presets can be hard-coded in the application or stored on a server and loaded on the client.
+   * - `presets`: `Array<{ name: string, description?: string, variables: object }>`\
+   * An array of named variable presets. Presets can be hard-coded in the application or stored on a server and loaded on the client.
    *
-   * The following example configures `variablePresets` with two variables&mdash;`customerTier` and `yearsAsCustomer`&mdash;and two presets&mdash;"Platinum admin" and "Gold member". In the preset editor UI, `customerTier` is displayed as a dropdown with three choice options, and `yearsAsCustomer` is displayed as a numeric input field.
+   * The following example configures `variablePresets` with two variables&mdash;`customerTier` and `isAccountAdmin`&mdash;and three presets&mdash;"Basic member", "Premium member", and "Premium administrator". In the preset editor UI, `customerTier` is displayed as a dropdown with two choice options, and `isAccountAdmin` is displayed as a Boolean editor.
    *
    * ```js
    * import { SurveyCreatorModel } from "survey-creator-core";
@@ -640,39 +640,50 @@ export interface ICreatorOptions {
    *       {
    *         "type": "dropdown",
    *         "name": "customerTier",
-   *         "title": "Customer tier",
+   *         "title": "Customer plan",
    *         "isRequired": true,
    *         "choices": [
-   *           { "value": "basic", "text": "Basic" },
-   *           { "value": "gold", "text": "Gold" },
-   *           { "value": "platinum", "text": "Platinum" }
+   *           {
+   *             "value": "basic",
+   *             "text": "Basic"
+   *           },
+   *           {
+   *             "value": "premium",
+   *             "text": "Premium"
+   *           }
    *         ]
    *       },
    *       {
-   *         "type": "text",
-   *         "name": "yearsAsCustomer",
-   *         "title": "Years as a customer",
-   *         "inputType": "number",
-   *         "min": 0,
-   *         "max": 50
+   *         "type": "boolean",
+   *         "name": "isAccountAdmin",
+   *         "title": "Account administrator",
+   *         "isRequired": true
    *       }
    *     ]
    *   },
    *   "presets": [
    *     {
-   *       "name": "Platinum admin",
-   *       "description": "8 years, platinum, administrator",
+   *       "name": "Basic member",
+   *       "description": "A Basic customer without access to account billing.",
    *       "variables": {
-   *         "customerTier": "platinum",
-   *         "yearsAsCustomer": 8
+   *         "customerTier": "basic",
+   *         "isAccountAdmin": false
    *       }
    *     },
    *     {
-   *       "name": "Gold member",
-   *       "description": "3 years, gold, member",
+   *       "name": "Premium member",
+   *       "description": "A Premium customer with priority support, but no access to account billing.",
    *       "variables": {
-   *         "customerTier": "gold",
-   *         "yearsAsCustomer": 3
+   *         "customerTier": "premium",
+   *         "isAccountAdmin": false
+   *       }
+   *     },
+   *     {
+   *       "name": "Premium administrator",
+   *       "description": "A Premium customer with priority support and access to account billing.",
+   *       "variables": {
+   *         "customerTier": "premium",
+   *         "isAccountAdmin": true
    *       }
    *     }
    *   ]
@@ -684,6 +695,8 @@ export interface ICreatorOptions {
    * };
    * const creator = new SurveyCreatorModel(creatorOptions);
    * ```
+   *
+   * [Demo: Preview Surveys with Runtime Variables](/survey-creator/examples/test-runtime-dependent-survey-logic/ (linkStyle))
    * @see [SurveyCreatorModel.onVariablePresetsChanged](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onVariablePresetsChanged)
    * @see [SurveyCreatorModel.onVariablePresetEditing](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onVariablePresetEditing)
    * @since 3.1.1
