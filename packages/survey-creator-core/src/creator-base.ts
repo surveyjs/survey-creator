@@ -61,7 +61,7 @@ import {
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
-  CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
+  CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent, LintSurveyEvent,
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
   ElementGetExpandCollapseStateEventReason,
@@ -1779,6 +1779,10 @@ export class SurveyCreatorModel extends Base
    * @see switchTab
    */
   public onActiveTabChanged: EventBase<SurveyCreatorModel, ActiveTabChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, ActiveTabChangedEvent>();
+  // Raised before the JSON Editor tab lints the survey JSON. options.lintOptions holds the
+  // options the tab is about to lint with: switch a rule off or change its severity, declare
+  // knownVariables or knownFunctions, describe custom components, suppress findings.
+  public onLintSurvey: EventBase<SurveyCreatorModel, LintSurveyEvent> = this.addCreatorEvent<SurveyCreatorModel, LintSurveyEvent>();
   /**
    * Gets or sets the currently displayed tab.
    *
@@ -2910,11 +2914,10 @@ export class SurveyCreatorModel extends Base
     } else {
       let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
       if (!trustJSON) {
-        const textWorker = new SurveyTextWorker(value);
+        // parse only: the text is applied whenever it is a JSON object, whatever the linter says
+        const textWorker = new SurveyTextWorker(value, { lint: false });
         if (textWorker.isJsonCorrect) {
           jsonValue = this.parseJSON(value);
-        } else if (!!textWorker.survey) {
-          jsonValue = textWorker.survey.toJSON();
         }
       }
       if (!!jsonValue) {
@@ -2947,12 +2950,16 @@ export class SurveyCreatorModel extends Base
     if (this.viewType != "json") {
       return new JsonObject().toJsonObject(this.survey);
     }
-    var surveyJsonText = this.text;
-    var textWorker = new SurveyTextWorker(surveyJsonText);
-    if (textWorker.isJsonCorrect) {
-      return new JsonObject().toJsonObject(textWorker.survey);
-    }
-    return null;
+    const textWorker = new SurveyTextWorker(this.text, { lint: false });
+    if (!textWorker.isJsonCorrect) return null;
+    // the text normalized the way the survey saves it - through a model in design mode, so
+    // that loading it runs no expressions and no choicesByUrl requests
+    const survey = new SurveyModel();
+    survey.setDesignMode(true);
+    survey.fromJSON(this.parseJSON(this.text));
+    const res = new JsonObject().toJsonObject(survey);
+    survey.dispose();
+    return res;
   }
 
   public getObjectDisplayName(

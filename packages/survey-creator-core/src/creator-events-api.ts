@@ -2,6 +2,7 @@ import {
   Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
   PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme, ISurveyVariablePresets, ISurveyVariablePreset
 } from "survey-core";
+import { ISurveyLintOptions } from "survey-core/linter";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
@@ -1253,4 +1254,10 @@ export interface VariablePresetEditingEvent {
    * A Boolean property that you can set to `false` to prevent users from deleting the preset.
    */
   allowDelete: boolean;
+}
+
+export interface LintSurveyEvent {
+  // The options the JSON Editor tab lints the survey JSON with, prefilled with the creator's
+  // defaults. Change the rules, or add knownVariables, knownFunctions, components or suppress.
+  lintOptions: ISurveyLintOptions;
 }

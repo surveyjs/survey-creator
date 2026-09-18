@@ -1,8 +1,12 @@
 import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
-import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
+import { SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding } from "../../textWorker";
+import {
+  getCreatorLintOptions, getFindingSeverityKind, getFixTitle, getLinterString, JsonEditorLinterModel,
+} from "./json-editor-linter";
 import { saveToFileHandler } from "../../utils/html-element-utils";
+import { getLocString } from "../../editorLocalization";
 import { settings } from "../../creator-settings";
 import { DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
@@ -15,6 +19,14 @@ export abstract class JsonEditorBaseModel extends Base {
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
   @property() hasErrors: boolean;
+
+  private linterValue: JsonEditorLinterModel;
+  public get linter(): JsonEditorLinterModel {
+    if (!this.linterValue) {
+      this.linterValue = new JsonEditorLinterModel();
+    }
+    return this.linterValue;
+  }
 
   constructor(protected creator: SurveyCreatorModel) {
     super();
@@ -83,49 +95,80 @@ export abstract class JsonEditorBaseModel extends Base {
   }
 
   protected setErrors(errors: Array<SurveyTextWorkerError>): void {
-    let hasErrors = errors.length > 0;
-    if (hasErrors) {
-      const actions = [];
-      this.createErrorActions(errors).forEach(action => actions.push(action));
-      this.errorList.setItems(actions);
-    }
-    this.hasErrors = hasErrors;
+    const actions = this.createErrorActions(errors);
+    // setItems unconditionally: skipping it on an empty list leaves the previous entries in it
+    this.errorList.setItems(actions);
+    this.hasErrors = actions.length > 0;
   }
   protected gotoError(at: number, row: number, column: number): void { }
+  private errorActionCounter: number = 1;
   private createErrorActions(errors: Array<SurveyTextWorkerError>): Array<Action> {
     const res = [];
-    let counter = 1;
     errors.forEach(error => {
-      const line = error.rowAt > -1 ? "Line: " + (error.rowAt + 1) + ". " : "";
+      const isFinding = error instanceof SurveyTextWorkerLinterFinding;
+      const line = error.rowAt > -1
+        ? (<any>getLinterString("lineNumber"))["format"](error.rowAt + 1)
+        : "";
       let title = error.text;
       if (title.length > maxErrorLength + 3) {
         title = title.substring(0, maxErrorLength) + "...";
       }
       title = line + title;
-      const at = error.at;
+      // a finding is shown by its own severity; a JSON error is an error by nature
+      const kind = isFinding
+        ? getFindingSeverityKind((<SurveyTextWorkerLinterFinding>error).severity)
+        : "error";
       res.push(new Action({
-        id: "error_" + counter++,
+        id: (isFinding ? "linterfinding_" : "error_") + this.errorActionCounter++,
         component: "json-error-item",
         title: title,
         tooltip: error.text,
-        iconName: "icon-error",
+        iconName: kind === "error" ? "icon-error" : "icon-warning-24x24",
         iconSize: "auto",
+        // the base item already carries the alert colours an error needs
+        css: kind === "warning" ? "svc-json-errors__item--warning" : undefined,
         data: {
           error: error,
           showFixButton: error.isFixable,
-          fixError: () => {
-            this.text = error.fixError(this.text);
-          },
+          fixError: () => this.applyFix(error),
           fixButtonIcon: "icon-fix",
-          //todo
-          fixButtonTitle: "Fix error"
+          fixButtonTitle: getFixTitle(error)
         }
       }));
     });
     return res;
   }
+  // The list is rebuilt a second after the last keystroke, so a button may still describe the text
+  // as it was before the keystroke, and its error was positioned in that text. The fix is taken
+  // from the worker of the current text: the very same error while the text has not moved on,
+  // otherwise the finding of the same rule at the same path. When the current text has nothing
+  // fixable there any more, the list is brought up to date and nothing else happens.
+  private applyFix(error: SurveyTextWorkerError): void {
+    const text = this.text;
+    const textWorker = this.createTextWorker();
+    const current = textWorker.errors.indexOf(error) > -1 ? error : this.findSameFinding(textWorker, error);
+    if (!current || !current.isFixable) {
+      this.cancelScheduledProcessing();
+      this.processErrors(text);
+      return;
+    }
+    const fixed = current.fixError(text);
+    if (fixed !== text) {
+      this.text = fixed;
+    }
+  }
+  private findSameFinding(textWorker: SurveyTextWorker, error: SurveyTextWorkerError): SurveyTextWorkerError {
+    if (!(error instanceof SurveyTextWorkerLinterFinding)) return undefined;
+    const finding = <SurveyTextWorkerLinterFinding>error;
+    return textWorker.errors.filter(item => item instanceof SurveyTextWorkerLinterFinding && item.isFixable &&
+      item.ruleId === finding.ruleId && item.reason === finding.reason &&
+      item.finding.path === finding.finding.path)[0];
+  }
   public processErrors(text: string): void {
+    this.errorActionCounter = 1;
     const textWorker: SurveyTextWorker = this.createTextWorker();
+    // the check list localizes the findings before the error list shows them
+    this.linter.update(textWorker);
     this.setErrors(textWorker.errors);
   }
   // true: nothing to apply, or applied. false: the text does not parse or has a blocking error,
@@ -152,19 +195,30 @@ export abstract class JsonEditorBaseModel extends Base {
     }
     return true;
   }
+  // undefined: the text does not parse, and nothing may override that. false: a finding at
+  // "error" severity, which onActiveTabChanging may still allow. true: warnings at most.
   public allowingDeactivate(): boolean {
     const textWorker: SurveyTextWorker = this.createTextWorker();
     if (!textWorker.isJsonCorrect) return undefined;
     return !textWorker.isJsonHasErrors;
   }
+  private lastTextWorker: SurveyTextWorker;
+  private lastTextWorkerText: string;
+  // One worker per text: allowingDeactivate asks right after processErrors has linted the same
+  // text, and a lint pass over a large survey is not free
   private createTextWorker(): SurveyTextWorker {
-    return new SurveyTextWorker(this.text, {
-      validatePropertyValues: this.creator.validateJsonPropertyValues
-    });
+    const text = this.text;
+    if (!this.lastTextWorker || this.lastTextWorkerText !== text) {
+      this.lastTextWorker = new SurveyTextWorker(text, { lintOptions: getCreatorLintOptions(this.creator) });
+      this.lastTextWorkerText = text;
+    }
+    return this.lastTextWorker;
   }
   public dispose(): void {
     // the model is disposed as the tab closes: a pause it was waiting out has nothing to apply to
     this.cancelScheduledProcessing();
+    this.lastTextWorker = undefined;
+    this.lastTextWorkerText = undefined;
     super.dispose();
   }
   public get readOnly(): boolean {
