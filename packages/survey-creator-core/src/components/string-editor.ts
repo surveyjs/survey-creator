@@ -438,7 +438,10 @@ export class StringEditorViewModelBase extends Base {
 
   private getClearedText(target: HTMLElement): string {
     let html = target.innerHTML;
-    let text = target.innerText;
+    // innerText depends on layout: on blur a single-line editor loses "white-space: pre-wrap" (it is set on :focus-within only)
+    // and the browser drops trailing spaces from innerText. Line breaks are removed from single-line strings anyway,
+    // so read the layout-independent textContent for them.
+    let text = !this.locString.allowLineBreaks && typeof target.textContent === "string" ? target.textContent : target.innerText;
     let mdText = null;
     if (this.creator && this.creator.trimValues && this.isInplaceForEditValues) {
       html = html.trim();
