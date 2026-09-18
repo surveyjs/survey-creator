@@ -1,3 +1,4 @@
+import { ComponentCollection } from "survey-core";
 import { CreatorTester } from "../tests/creator-tester";
 import { CollaborationPlugin } from "../src/plugins/collaboration";
 import { IJournalRecord, JournalOp } from "../src/plugins/collaboration/journal/journal-record";
@@ -927,4 +928,130 @@ test("journal-sync: a transaction is consumed whole when any of its values was o
   expect(qB.description).toEqual("D2");
   expect(qA.title).toEqual("T1");
   expect(qA.description).toEqual("D2");
+});
+
+// A composite question is the case where the missing first rendering is
+// visible: `Page.addElement()` fires `onFirstRendering()` on an already
+// painted page, the applier's bare `elements.splice` does not, and the
+// composite's contentPanel then stays empty (rows === []) while the shell
+// renders.
+const COMPOSITE_TYPE = "testcomposite";
+function registerComposite(): void {
+  ComponentCollection.Instance.add({
+    name: COMPOSITE_TYPE,
+    title: "Test Composite",
+    elementsJSON: [
+      { type: "text", name: "nested1", title: "Nested one" },
+      { type: "text", name: "nested2", title: "Nested two" }
+    ]
+  });
+}
+
+const NESTED_COMPOSITE_TYPE = "testnestedcomposite";
+function registerNestedComposite(): void {
+  registerComposite();
+  ComponentCollection.Instance.add({
+    name: NESTED_COMPOSITE_TYPE,
+    title: "Test Nested Composite",
+    elementsJSON: [
+      { type: "text", name: "outerText", title: "Outer" },
+      { type: COMPOSITE_TYPE, name: "inner" }
+    ]
+  });
+}
+
+function unregisterComposites(): void {
+  ComponentCollection.Instance.remove(NESTED_COMPOSITE_TYPE);
+  ComponentCollection.Instance.remove(COMPOSITE_TYPE);
+}
+
+test("journal-sync: a composite added by the peer arrives with its nested content painted", () => {
+  registerComposite();
+  try {
+    const { creatorA, creatorB } = makeCreators();
+    // The receiving designer has already painted its page - that is the state
+    // in which nothing re-triggers the first rendering of a spliced-in element.
+    creatorB.survey.pages[0].onFirstRendering();
+
+    creatorA.survey.pages[0].addNewQuestion(COMPOSITE_TYPE, "q1");
+
+    const qB: any = creatorB.survey.getQuestionByName("q1");
+    expect(qB).toBeTruthy();
+    expect(qB.getType()).toEqual(COMPOSITE_TYPE);
+    expect(qB.contentPanel.wasRendered).toBeTruthy();
+    expect(qB.contentPanel.rows).toHaveLength(2);
+    expect(qB.contentPanel.getQuestionByName("nested1")).toBeTruthy();
+  } finally {
+    ComponentCollection.Instance.remove(COMPOSITE_TYPE);
+  }
+});
+
+test("journal-sync: converting a question into a composite paints its nested content on the peer", () => {
+  registerComposite();
+  try {
+    const { creatorA, creatorB } = makeCreators();
+    const q1 = creatorA.survey.pages[0].addNewQuestion("text", "q1");
+    creatorB.survey.pages[0].onFirstRendering();
+
+    creatorA.selectElement(q1);
+    creatorA.convertCurrentQuestion(COMPOSITE_TYPE);
+
+    const qB: any = creatorB.survey.getQuestionByName("q1");
+    expect(qB.getType()).toEqual(COMPOSITE_TYPE);
+    expect(qB.contentPanel.wasRendered).toBeTruthy();
+    expect(qB.contentPanel.rows).toHaveLength(2);
+  } finally {
+    ComponentCollection.Instance.remove(COMPOSITE_TYPE);
+  }
+});
+
+// Depth: one `onFirstRendering()` on the inserted element has to reach every
+// level below it (panel -> its elements -> a composite -> its contentPanel), so
+// a composite inside a composite must come out painted too.
+test("journal-sync: a composite nested inside another composite is painted on the peer", () => {
+  registerNestedComposite();
+  try {
+    const { creatorA, creatorB } = makeCreators();
+    creatorB.survey.pages[0].onFirstRendering();
+
+    creatorA.survey.pages[0].addNewQuestion(NESTED_COMPOSITE_TYPE, "q1");
+
+    const qB: any = creatorB.survey.getQuestionByName("q1");
+    expect(qB.getType()).toEqual(NESTED_COMPOSITE_TYPE);
+    expect(qB.contentPanel.wasRendered).toBeTruthy();
+    expect(qB.contentPanel.rows).toHaveLength(2);
+
+    const inner: any = qB.contentPanel.getQuestionByName("inner");
+    expect(inner).toBeTruthy();
+    expect(inner.getType()).toEqual(COMPOSITE_TYPE);
+    expect(inner.contentPanel.wasRendered).toBeTruthy();
+    expect(inner.contentPanel.rows).toHaveLength(2);
+  } finally {
+    unregisterComposites();
+  }
+});
+
+// The container is not always the page: a panel spliced into a painted page has
+// to end up painted itself, or the composite dropped into it afterwards is back
+// to an empty contentPanel.
+test("journal-sync: a composite added into a remotely created panel is painted on the peer", () => {
+  registerComposite();
+  try {
+    const { creatorA, creatorB } = makeCreators();
+    creatorB.survey.pages[0].onFirstRendering();
+
+    const panelA: any = creatorA.survey.pages[0].addNewPanel("panel1");
+    const panelB: any = creatorB.survey.getPanelByName("panel1");
+    expect(panelB).toBeTruthy();
+    expect(panelB.wasRendered).toBeTruthy();
+
+    panelA.addNewQuestion(COMPOSITE_TYPE, "q1");
+
+    const qB: any = creatorB.survey.getQuestionByName("q1");
+    expect(qB.parent).toBe(panelB);
+    expect(qB.contentPanel.wasRendered).toBeTruthy();
+    expect(qB.contentPanel.rows).toHaveLength(2);
+  } finally {
+    ComponentCollection.Instance.remove(COMPOSITE_TYPE);
+  }
 });
