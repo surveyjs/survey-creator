@@ -525,17 +525,17 @@ export var huStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Változók",
-    // [Auto-translated] "No variables"
-    noPreset: "Nincsenek változók",
-    // [Auto-translated] "View"
-    view: "Kilátás",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Változó előbeállítás",
+    // [Auto-translated] "None"
+    noPreset: "Nincs",
+    // [Auto-translated] "View variable values"
+    view: "Változóértékek megtekintése",
     // [Auto-translated] "Variable values"
     viewTitle: "Változóértékek",
-    // [Auto-translated] "Edit"
-    edit: "Szerkesztés",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Manage presets",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Változó előbeállítások",
     // [Auto-translated] "Preset"
     presetName: "Előbeállítás",
@@ -749,7 +749,9 @@ export var huStrings = {
       // [Auto-translated] "Survey description"
       description: "A felmérés leírása",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "A felmérés írásvédetté tétele"
+      readOnly: "A felmérés írásvédetté tétele",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionális formátumok"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var huStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Maszkolt érték mentése a felmérés eredményeiben"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Régió",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Dátummintázat",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Időzítési mintázat",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Tizedelválasztó",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Több ezer elválasztó",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valuta szimbólum",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valuta mintázata"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Értékminta"
@@ -826,10 +844,10 @@ export var huStrings = {
       max: "Maximális érték"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Pénznem előtag",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Pénznem utótagja"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valuta szimbólum",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valuta mintázata"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Mások törlése, ha ki van jelölve",
@@ -1613,6 +1631,8 @@ export var huStrings = {
       question: "Kérdés",
       // [Auto-translated] "Pages"
       pages: "Oldalak",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionális formátumok",
       // "Quiz Mode"
       timer: "Időzítő/Kvíz",
       // [Auto-translated] "Calculated Values"
@@ -2398,6 +2418,139 @@ export var huStrings = {
       container: "Ugyanaz, mint a konténer"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "arab",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bolgár",
+    // [Auto-translated] "Catalan"
+    ca: "Katalán",
+    // [Auto-translated] "Czech"
+    cs: "cseh",
+    // [Auto-translated] "Welsh"
+    cy: "walesi",
+    // [Auto-translated] "Danish"
+    da: "Dán nyelv",
+    // [Auto-translated] "German"
+    de: "Német",
+    // [Auto-translated] "Greek"
+    el: "Görög",
+    // [Auto-translated] "English"
+    en: "angol",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Angol (Ausztrália)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Angol (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Angol (Egyesült Királyság)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Angol (Írország)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Angol (India)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "angol (Új-Zéland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "angol (Dél-Afrika)",
+    // [Auto-translated] "Spanish"
+    es: "spanyol",
+    // [Auto-translated] "Estonian"
+    et: "Észt észt",
+    // [Auto-translated] "Basque"
+    eu: "Baszk",
+    // [Auto-translated] "Persian"
+    fa: "Perzsa",
+    // [Auto-translated] "Finnish"
+    fi: "finn",
+    // [Auto-translated] "Filipino"
+    fil: "Filippínó",
+    // [Auto-translated] "French"
+    fr: "francia",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Francia (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Francia (Svájc)",
+    // [Auto-translated] "Hebrew"
+    he: "héber",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Horvát",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haiti kreol",
+    // [Auto-translated] "Hungarian"
+    hu: "magyar",
+    // [Auto-translated] "Indonesian"
+    id: "Indonéz",
+    // [Auto-translated] "Icelandic"
+    is: "Izlandi",
+    // [Auto-translated] "Italian"
+    it: "Olasz",
+    // [Auto-translated] "Japanese"
+    ja: "Japán",
+    // [Auto-translated] "Georgian"
+    ka: "Grúz",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazak",
+    // [Auto-translated] "Korean"
+    ko: "Koreai",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litván",
+    // [Auto-translated] "Latvian"
+    lv: "Lett",
+    // [Auto-translated] "Macedonian"
+    mk: "Macedón",
+    // [Auto-translated] "Burmese"
+    mm: "Burmai",
+    // [Auto-translated] "Malay"
+    ms: "Maláj",
+    // [Auto-translated] "Dutch"
+    nl: "Holland",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Holland (Belgium)",
+    // [Auto-translated] "Norwegian"
+    no: "Norvég",
+    // [Auto-translated] "Polish"
+    pl: "Lengyel",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugál",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugál (Brazília)",
+    // [Auto-translated] "Romanian"
+    ro: "román",
+    // [Auto-translated] "Russian"
+    ru: "Orosz",
+    // [Auto-translated] "Slovak"
+    sk: "Szlovák",
+    // [Auto-translated] "Slovenian"
+    sl: "Szlovén",
+    // [Auto-translated] "Serbian"
+    sr: "szerb",
+    // [Auto-translated] "Swedish"
+    sv: "Svéd",
+    // [Auto-translated] "Swahili"
+    sw: "Szuahil",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tádzsik",
+    // [Auto-translated] "Thai"
+    th: "thai",
+    // [Auto-translated] "Turkish"
+    tr: "Török",
+    // [Auto-translated] "Ukrainian"
+    uk: "ukrán",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnami",
+    // [Auto-translated] "Chinese"
+    zh: "Kínai",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Kínai (egyszerűsítve)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Kínai (hagyományos)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export var huStrings = {
     visibletrigger: "láthatóság megváltoztatása (már nincs használatban)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Ugyanez a felmérési nyelvhez"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Pl.: +1(999)-999-99-99"
@@ -2480,12 +2637,6 @@ export var huStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Pl.: éééé/hh/nn"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Pl.: $",
-      // "Ex.: USD"
-      suffix: "Pl.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export var huStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Válassza ki, ha a kérdés értékét alkalmazott maszkkal szeretné tárolni a felmérés eredményeiben."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Egy olyan régió, amelynek formátumai a dátum-idő, numerikus és valuta bemeneti maszkokra vonatkoznak. Ha nincs megadva, akkor a felmérési nyelvet használják.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Felülírja a régió dátumformátumát, amelyet bemeneti maszkokban használnak. A minta tartalmazhat elválasztó karaktereket és a következő helykitöltőket: <br>'m' - Hónapszám.<br> 'mm' - Hónapszám, az első nullával az egyjegyű értékekhez. <br>'d' - A hónap napja. <br>'dd' - a hónap napja, az egyjegyű értékek első nullával. <br>'yy' - Az év utolsó két számjegye. <br>'yyyy' - Négyjegyű év.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Felülírja a régió bemeneti maszkokban használt időformátumát. A minta tartalmazhat elválasztó karaktereket és a következő helykitöltőket: <br>'H' - Órák 24 órás formátumban.<br> 'HH' - Órák 24 órás formátumban, egy nulla a vezető számjegyű értékek esetén. <br>'h' - Órák 12 órás formátumban. <br>'hh' - Órák 12 órás formátumban, az egyjegyű értékek előtt nullával. <br>'MM' - Percek. <br>'ss' - Másodpercek. <br>'TT' - 12 órás óraidő nagybetűkkel (AM/PM). <br>'TT' - 12 órás óraidőszak kisbetűkkel (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Felülírja azt a szimbólumot, amellyel a régió a bemeneti maszkokban elválasztja a törtrészt a megjelenített szám egész szám részétől.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Felülírja azt a szimbólumot, amellyel a régió nagy számjegyeket háromfős csoportokra osztja be a bemeneti maszkokban.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Felülírja a régió valutaszimbólumát vagy kódját, amelyet a bemeneti maszkokban használnak.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Felülírja a régió bemeneti maszkokban használt valutamintáját. A minta tartalmazhatja a következő helykitöltőket: <br>'@' - Valutaszimbólum vagy kód.<br> '#' - Szám. <br>'-' - A mínusz jel pozíciója negatív értékekben (ha kihagyják, a mínusz jel az elején kerül elhelyezésre)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "A minta karakterlánc-konstansokat és a következő helyőrzőket tartalmazhatja: \"9\" - egy számjegyhez; \"a\" - kis- vagy nagybetű esetében; '#' - számjegy vagy kis- vagy nagybetű. A fordított perjel használata \"\\\" a karakter elhagyásához."
@@ -3007,10 +3174,10 @@ export var huStrings = {
       precision: "Korlátozza, hogy hány számjegy maradjon meg a megjelenített szám tizedesvesszője után."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Egy vagy több szimbólum jelenik meg az érték előtt.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Egy vagy több szimbólum jelenik meg az érték után."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Egy valutaszimbólum vagy kód, amely az értékkel együtt jelenik meg. A régió szimbóluma alapértelmezettként használatos. Töröld ezt a tulajdonságot, hogy ne jelenítse meg a szimbólumot.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Megadja a szám, a valutaszimbólum és a mínusz jel pozícióit. A minta tartalmazhatja a következő helymeghatározó helyeket: <br>'@' - Valutaszimbólum vagy kód.<br> '#' - Szám. <br>'-' - A mínusz jel helyzete negatív értékekben (ha kihagyják, a mínusz jel az elején kerül elhelyezésre)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

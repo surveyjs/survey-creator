@@ -525,18 +525,18 @@ export const thStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "ตัวแปร",
-    // [Auto-translated] "No variables"
-    noPreset: "ไม่มีตัวแปร",
-    // [Auto-translated] "View"
-    view: "ดู",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "การตั้งค่าตัวแปรล่วงหน้า",
+    // [Auto-translated] "None"
+    noPreset: "ไม่มี",
+    // [Auto-translated] "View variable values"
+    view: "ดูค่าตัวแปร",
     // [Auto-translated] "Variable values"
     viewTitle: "ค่าตัวแปร",
-    // [Auto-translated] "Edit"
-    edit: "แก้ไข",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "การตั้งค่าล่วงหน้าที่ปรับได้",
+    // [Auto-translated] "Manage presets"
+    edit: "จัดการพรีเซ็ต",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "การตั้งค่าล่วงหน้าแบบแปรผัน",
     // [Auto-translated] "Preset"
     presetName: "พรีเซ็ต",
     // [Auto-translated] "Description"
@@ -749,7 +749,9 @@ export const thStrings = {
       // "Survey description"
       description: "คำอธิบายแบบสำรวจ",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
+      readOnly: "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "รูปแบบภูมิภาค"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export const thStrings = {
       // "Save masked value in survey results"
       saveMaskedValue: "บันทึกค่าที่ปิดบังในผลลัพธ์แบบสำรวจ"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "ภูมิภาค",
+      // [Auto-translated] "Date pattern"
+      datePattern: "รูปแบบวันที่",
+      // [Auto-translated] "Time pattern"
+      timePattern: "รูปแบบเวลา",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "ตัวคั่นทศนิยม",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "เครื่องแยกพัน",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "สัญลักษณ์สกุลเงิน",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "รูปแบบสกุลเงิน"
+    },
     patternmask: {
       // "Value pattern"
       pattern: "รูปแบบค่า"
@@ -826,10 +844,10 @@ export const thStrings = {
       max: "ค่าสูงสุด"
     },
     currencymask: {
-      // "Currency prefix"
-      prefix: "คำนำหน้าสกุลเงิน",
-      // "Currency suffix"
-      suffix: "คำต่อท้ายสกุลเงิน"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "สัญลักษณ์สกุลเงิน",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "รูปแบบสกุลเงิน"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "ล้างรายการอื่นเมื่อเลือก",
@@ -1613,6 +1631,8 @@ export const thStrings = {
       question: "การตั้งค่าคำถาม",
       // "Pages"
       pages: "หน้า",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "รูปแบบภูมิภาค",
       // "Quiz Mode"
       timer: "โหมดควิซ",
       // "Calculated Values"
@@ -2398,6 +2418,139 @@ export const thStrings = {
       container: "เหมือนกับคอนเทนเนอร์"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "ภาษาอาหรับ",
+    // [Auto-translated] "Bulgarian"
+    bg: "บัลแกเรีย",
+    // [Auto-translated] "Catalan"
+    ca: "คาตาลัน",
+    // [Auto-translated] "Czech"
+    cs: "เช็ก",
+    // [Auto-translated] "Welsh"
+    cy: "เวลส์",
+    // [Auto-translated] "Danish"
+    da: "ภาษาเดนมาร์ก",
+    // [Auto-translated] "German"
+    de: "เยอรมัน",
+    // [Auto-translated] "Greek"
+    el: "กรีก",
+    // [Auto-translated] "English"
+    en: "อังกฤษ",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "ภาษาอังกฤษ (ออสเตรเลีย)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "ภาษาอังกฤษ (แคนาดา)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "ภาษาอังกฤษ (สหราชอาณาจักร)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "ภาษาอังกฤษ (ไอร์แลนด์)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "ภาษาอังกฤษ (อินเดีย)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "ภาษาอังกฤษ (นิวซีแลนด์)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "ภาษาอังกฤษ (แอฟริกาใต้)",
+    // [Auto-translated] "Spanish"
+    es: "ภาษาสเปน",
+    // [Auto-translated] "Estonian"
+    et: "ชาวเอสโตเนีย",
+    // [Auto-translated] "Basque"
+    eu: "บาสก์",
+    // [Auto-translated] "Persian"
+    fa: "เปอร์เซีย",
+    // [Auto-translated] "Finnish"
+    fi: "ฟินแลนด์",
+    // [Auto-translated] "Filipino"
+    fil: "ฟิลิปปินส์",
+    // [Auto-translated] "French"
+    fr: "ภาษาฝรั่งเศส",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "ภาษาฝรั่งเศส (แคนาดา)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "ภาษาฝรั่งเศส (สวิตเซอร์แลนด์)",
+    // [Auto-translated] "Hebrew"
+    he: "ภาษาฮีบรู",
+    // [Auto-translated] "Hindi"
+    hi: "ภาษาฮินดี",
+    // [Auto-translated] "Croatian"
+    hr: "โครเอเชีย",
+    // [Auto-translated] "Haitian Creole"
+    ht: "ชาวเฮติ",
+    // [Auto-translated] "Hungarian"
+    hu: "ฮังการี",
+    // [Auto-translated] "Indonesian"
+    id: "อินโดนีเซีย",
+    // [Auto-translated] "Icelandic"
+    is: "ไอซ์แลนด์",
+    // [Auto-translated] "Italian"
+    it: "อิตาลี",
+    // [Auto-translated] "Japanese"
+    ja: "ภาษาญี่ปุ่น",
+    // [Auto-translated] "Georgian"
+    ka: "จอร์เจีย",
+    // [Auto-translated] "Kazakh"
+    kk: "คาซัค",
+    // [Auto-translated] "Korean"
+    ko: "เกาหลี",
+    // [Auto-translated] "Lithuanian"
+    lt: "ลิทัวเนีย",
+    // [Auto-translated] "Latvian"
+    lv: "ลัตเวีย",
+    // [Auto-translated] "Macedonian"
+    mk: "มาซิโดเนีย",
+    // [Auto-translated] "Burmese"
+    mm: "ชาวพม่า",
+    // [Auto-translated] "Malay"
+    ms: "มลายู",
+    // [Auto-translated] "Dutch"
+    nl: "ดัตช์",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "ดัตช์ (เบลเยียม)",
+    // [Auto-translated] "Norwegian"
+    no: "นอร์เวย์",
+    // [Auto-translated] "Polish"
+    pl: "โปแลนด์",
+    // [Auto-translated] "Portuguese"
+    pt: "โปรตุเกส",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "โปรตุเกส (บราซิล)",
+    // [Auto-translated] "Romanian"
+    ro: "โรมาเนีย",
+    // [Auto-translated] "Russian"
+    ru: "รัสเซีย",
+    // [Auto-translated] "Slovak"
+    sk: "สโลวัก",
+    // [Auto-translated] "Slovenian"
+    sl: "ชาวสโลวีเนีย",
+    // [Auto-translated] "Serbian"
+    sr: "เซอร์เบีย",
+    // [Auto-translated] "Swedish"
+    sv: "ภาษาสวีเดน",
+    // [Auto-translated] "Swahili"
+    sw: "สวาฮิลี",
+    // [Auto-translated] "Telugu"
+    tel: "เตลูกู",
+    // [Auto-translated] "Tajik"
+    tg: "ทาจิก",
+    // [Auto-translated] "Thai"
+    th: "ภาษาไทย",
+    // [Auto-translated] "Turkish"
+    tr: "ตุรกี",
+    // [Auto-translated] "Ukrainian"
+    uk: "ยูเครน",
+    // [Auto-translated] "Urdu"
+    ur: "อูรดู",
+    // [Auto-translated] "Vietnamese"
+    vi: "เวียดนาม",
+    // [Auto-translated] "Chinese"
+    zh: "ภาษาจีน",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "ภาษาจีน (ตัวย่อ)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "ภาษาจีน (ตัวเต็ม)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export const thStrings = {
     visibletrigger: "เปลี่ยนการมองเห็น (เลิกใช้แล้ว)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "เหมือนกับภาษาสํารวจ"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "ตัวอย่าง: +1(999)-999-99-99"
@@ -2480,12 +2637,6 @@ export const thStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "ตัวอย่าง: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "ตัวอย่าง: $",
-      // "Ex.: USD"
-      suffix: "ตัวอย่าง: USD"
     },
     panelbase: {
       // "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export const thStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "เลือกถ้าคุณต้องการบันทึกค่าคำถามพร้อมหน้ากากในผลลัพธ์แบบสำรวจ"
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "ภูมิภาคที่รูปแบบใช้กับหน้ากากป้อนข้อมูลวันที่-เวลา ตัวเลข และสกุลเงินหากไม่ได้ระบุ จะใช้ภาษาสํารวจ",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "แทนที่รูปแบบวันที่ของภูมิภาคที่ใช้ในหน้ากากอินพุตรูปแบบนี้สามารถประกอบด้วยอักขระคั่นและตัวแทนดังนี้:<br>'m' - หมายเลขเดือน<br>'mm' - หมายเลขเดือน โดยมีเลขศูนย์นําหน้าสําหรับค่าหลักเดียว<br>'d' - วันของเดือน<br>'dd' - วันของเดือน โดยมีเลขศูนย์นําหน้าสําหรับค่าเลขหลักเดียว<br>'yy' - สองหลักสุดท้ายของปี<br>'yyyy' - ปีสี่หลัก",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "แทนที่รูปแบบเวลาของภูมิภาคที่ใช้ในหน้ากากอินพุตรูปแบบนี้สามารถประกอบด้วยตัวคั่นและตัวแทนดังนี้:<br>'H' - ชั่วโมงในรูปแบบ 24 ชั่วโมง<br>'HH' - ชั่วโมงในรูปแบบ 24 ชั่วโมง โดยมีศูนย์นําหน้าสําหรับค่าหลักเดียว<br>'h' - ชั่วโมงในรูปแบบ 12 ชั่วโมง<br>'hh' - ชั่วโมงในรูปแบบ 12 ชั่วโมง โดยมีศูนย์นําหน้าสําหรับค่าหลักเดียว<br>'MM' - นาที<br>'ss' - วินาที<br>'TT' - รอบนาฬิกา 12 ชั่วโมงในตัวพิมพ์ใหญ่ (AM/PM)<br>'tt' - ช่วงเวลานาฬิกา 12 ชั่วโมงในตัวพิมพ์เล็ก (am/pm)",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "แทนที่สัญลักษณ์ที่ภูมิภาคใช้แยกส่วนเศษส่วนออกจากส่วนจํานวนเต็มของตัวเลขที่แสดงในหน้ากากอินพุต",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "แทนที่สัญลักษณ์ที่ภูมิภาคใช้แยกตัวเลขจํานวนมากออกเป็นกลุ่มละสามตัวในหน้ากากอินพุต",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "แทนที่สัญลักษณ์สกุลเงินหรือรหัสของภูมิภาคที่ใช้ในหน้ากากอินพุต",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "แทนที่รูปแบบสกุลเงินของภูมิภาคที่ใช้ในหน้ากากอินพุตรูปแบบนี้สามารถมีตัวแทนดังนี้:<br>'@' - สัญลักษณ์สกุลเงินหรือรหัส<br>'#' - ตัวเลข<br>'-' - ตําแหน่งของเครื่องหมายลบในค่าลบ (ถ้าไม่ใส่ เครื่องหมายลบจะวางไว้ที่จุดเริ่มต้น)"
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "รูปแบบสามารถประกอบด้วยอักษรสตริงและตัวแทนต่อไปนี้: 9 - สำหรับตัวเลข; a - สำหรับตัวอักษรตัวใหญ่หรือตัวเล็ก; # - สำหรับตัวเลขหรือตัวอักษรตัวใหญ่หรือตัวเล็ก ใช้ backslash \\ เพื่อหนีตัวอักษร"
@@ -3007,10 +3174,10 @@ export const thStrings = {
       precision: "จำกัดจำนวนหลักที่คงอยู่หลังจุดทศนิยมสำหรับตัวเลขที่แสดง"
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "หนึ่งหรือหลายสัญลักษณ์ที่จะปรากฏก่อนค่า",
-      // "One or several symbols to be displayed after the value."
-      suffix: "หนึ่งหรือหลายสัญลักษณ์ที่จะปรากฏหลังค่า"
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "สัญลักษณ์สกุลเงินหรือรหัสที่แสดงพร้อมค่าดังกล่าวสัญลักษณ์ของภูมิภาคจะถูกใช้โดยค่าเริ่มต้นล้างคุณสมบัตินี้เพื่อไม่ให้แสดงสัญลักษณ์",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "ระบุตําแหน่งของตัวเลข สัญลักษณ์สกุลเงิน และเครื่องหมายลบรูปแบบนี้สามารถมีตัวแทนตําแหน่งดังนี้:<br>'@' - สัญลักษณ์สกุลเงินหรือรหัส<br>'#' - ตัวเลข<br>'-' - ตําแหน่งของเครื่องหมายลบในค่าลบ (ถ้าไม่ใส่ เครื่องหมายลบจะวางไว้ที่จุดเริ่มต้น)"
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

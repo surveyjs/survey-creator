@@ -525,17 +525,17 @@ export var koreanStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "변수들",
-    // [Auto-translated] "No variables"
-    noPreset: "변수는 없습니다",
-    // [Auto-translated] "View"
-    view: "전망",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "변수 프리셋",
+    // [Auto-translated] "None"
+    noPreset: "전혀 없습니다",
+    // [Auto-translated] "View variable values"
+    view: "변수 값 보기",
     // [Auto-translated] "Variable values"
     viewTitle: "변수 값",
-    // [Auto-translated] "Edit"
-    edit: "수정",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "프리셋 관리",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "가변 프리셋",
     // [Auto-translated] "Preset"
     presetName: "프리셋",
@@ -750,7 +750,9 @@ export var koreanStrings = {
       // [Auto-translated] "Survey description"
       description: "설문조사 설명",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "설문조사를 읽기 전용으로 설정"
+      readOnly: "설문조사를 읽기 전용으로 설정",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "지역 포맷"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -802,6 +804,22 @@ export var koreanStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "설문조사 결과에 마스킹된 값 저장"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "지역",
+      // [Auto-translated] "Date pattern"
+      datePattern: "날짜 패턴",
+      // [Auto-translated] "Time pattern"
+      timePattern: "시간 패턴",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "십진법 구분자",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "천 구분자",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "통화 기호",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "통화 패턴"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "값 패턴"
@@ -827,10 +845,10 @@ export var koreanStrings = {
       max: "최대값"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "통화 접두사",
-      // [Auto-translated] "Currency suffix"
-      suffix: "통화 접미사"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "통화 기호",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "통화 패턴"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "선택하면 다른 항목 지우기",
@@ -1614,6 +1632,8 @@ export var koreanStrings = {
       question: "질문",
       // [Auto-translated] "Pages"
       pages: "페이지",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "지역 포맷",
       // "Quiz Mode"
       timer: "타이머 / 퀴즈",
       // [Auto-translated] "Calculated Values"
@@ -2399,6 +2419,139 @@ export var koreanStrings = {
       container: "컨테이너와 동일"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "아랍어",
+    // [Auto-translated] "Bulgarian"
+    bg: "불가리아어",
+    // [Auto-translated] "Catalan"
+    ca: "카탈루냐어",
+    // [Auto-translated] "Czech"
+    cs: "체코어",
+    // [Auto-translated] "Welsh"
+    cy: "웨일스어",
+    // [Auto-translated] "Danish"
+    da: "덴마크어",
+    // [Auto-translated] "German"
+    de: "독일어",
+    // [Auto-translated] "Greek"
+    el: "그리스어",
+    // [Auto-translated] "English"
+    en: "영어",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "영어 (호주)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "영어 (캐나다)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "영어 (영국)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "잉글랜드 (아일랜드)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "영어 (인도)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "영어 (뉴질랜드)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "영어 (남아프리카)",
+    // [Auto-translated] "Spanish"
+    es: "스페인어",
+    // [Auto-translated] "Estonian"
+    et: "에스토니아어",
+    // [Auto-translated] "Basque"
+    eu: "바스크어",
+    // [Auto-translated] "Persian"
+    fa: "페르시아어",
+    // [Auto-translated] "Finnish"
+    fi: "핀란드어",
+    // [Auto-translated] "Filipino"
+    fil: "필리핀어",
+    // [Auto-translated] "French"
+    fr: "프랑스어",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "프랑스어 (캐나다)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "프랑스 (스위스)",
+    // [Auto-translated] "Hebrew"
+    he: "히브리어",
+    // [Auto-translated] "Hindi"
+    hi: "힌디어",
+    // [Auto-translated] "Croatian"
+    hr: "크로아티아어",
+    // [Auto-translated] "Haitian Creole"
+    ht: "아이티 크리올",
+    // [Auto-translated] "Hungarian"
+    hu: "헝가리어",
+    // [Auto-translated] "Indonesian"
+    id: "인도네시아",
+    // [Auto-translated] "Icelandic"
+    is: "아이슬란드어",
+    // [Auto-translated] "Italian"
+    it: "이탈리아어",
+    // [Auto-translated] "Japanese"
+    ja: "일본어",
+    // [Auto-translated] "Georgian"
+    ka: "그루지야어",
+    // [Auto-translated] "Kazakh"
+    kk: "카자흐",
+    // [Auto-translated] "Korean"
+    ko: "한국어",
+    // [Auto-translated] "Lithuanian"
+    lt: "리투아니아어",
+    // [Auto-translated] "Latvian"
+    lv: "라트비아어",
+    // [Auto-translated] "Macedonian"
+    mk: "마케도니아인",
+    // [Auto-translated] "Burmese"
+    mm: "버마어",
+    // [Auto-translated] "Malay"
+    ms: "말레이어",
+    // [Auto-translated] "Dutch"
+    nl: "네덜란드어",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "네덜란드어 (벨기에)",
+    // [Auto-translated] "Norwegian"
+    no: "노르웨이어",
+    // [Auto-translated] "Polish"
+    pl: "폴란드어",
+    // [Auto-translated] "Portuguese"
+    pt: "포르투갈어",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "포르투갈어 (브라질)",
+    // [Auto-translated] "Romanian"
+    ro: "루마니아어",
+    // [Auto-translated] "Russian"
+    ru: "러시아어",
+    // [Auto-translated] "Slovak"
+    sk: "슬로바키아",
+    // [Auto-translated] "Slovenian"
+    sl: "슬로베니아어",
+    // [Auto-translated] "Serbian"
+    sr: "세르비아어",
+    // [Auto-translated] "Swedish"
+    sv: "스웨덴어",
+    // [Auto-translated] "Swahili"
+    sw: "스와힐리어",
+    // [Auto-translated] "Telugu"
+    tel: "텔루구",
+    // [Auto-translated] "Tajik"
+    tg: "타지크",
+    // [Auto-translated] "Thai"
+    th: "태국어",
+    // [Auto-translated] "Turkish"
+    tr: "터키어",
+    // [Auto-translated] "Ukrainian"
+    uk: "우크라이나어",
+    // [Auto-translated] "Urdu"
+    ur: "우르두어",
+    // [Auto-translated] "Vietnamese"
+    vi: "베트남어",
+    // [Auto-translated] "Chinese"
+    zh: "중국어",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "중국어 (간체)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "중국어 (전통)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2474,6 +2627,10 @@ export var koreanStrings = {
     visibletrigger: "선명도 변경"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "설문조사 언어와 동일합니다"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "예: +1(999)-999-99-99"
@@ -2481,12 +2638,6 @@ export var koreanStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "예: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "예: $",
-      // "Ex.: USD"
-      suffix: "예.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2991,6 +3142,22 @@ export var koreanStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "마스크가 적용된 질문 값을 현장조사 결과에 저장하려면 선택합니다."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "날짜-시간, 숫자, 통화 입력 마스크에 적용되는 형식의 지역입니다. 명시되지 않은 경우, 설문 언어가 사용됩니다.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "입력 마스크에 사용되는 지역의 날짜 형식을 덮어씁니다. 패턴은 구분자 문자와 다음 자리 표시자를 포함할 수 있습니다: <br>'m' - 월 번호.<br> 'mm' - 월 번호, 1자리 값은 0이 있는 월. <br>'d' - 월의 요일<br>. 'dd' - 월의 요일, 1자리 숫자는 0이 있는 날짜. <br>'yy' - 연도의 마지막 두 자리. <br>'yyyy' - 4자리 연도.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "입력 마스크에서 사용되는 지역 시간 형식을 덮어쓴다. 패턴에는 구분자 문자와 다음 자리 표시자가 포함될 수 있다: <br>'H' - 24시간 형식의 시간.<br> 'HH' - 24시간 형식의 시간, 1자리 숫자는 0이 있는 경우. <br>'h' - 12시간 형식의 시간. <br>'hh' - 12시간 형식의 시간, 1자리 숫자는 0이 앞에 붙는 경우. <br>'MM' - 분. <br>'ss' - 초. <br>'TT' - 대문자 12시간 시계 주기 (AM/<br>PM). 'tt' - 소문자 12시간 시계 주기 (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "입력 마스크에서 표시된 숫자의 소수 부분과 정수 부분을 구분하는 영역의 기호를 덮어씁니다.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "입력 마스크에서 많은 숫자의 숫자를 세 개의 그룹으로 분리하는 영역의 기호를 덮어씁니다.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "입력 마스크에 사용되는 지역의 통화 기호나 코드를 덮어씁니다.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "입력 마스크에서 사용되는 지역의 통화 패턴을 덮어씁니다. 패턴에는 다음과 같은 자리 표시자가 포함될 수 있습니다: <br>'@' - 통화 기호 또는 코드.<br> '#' - 숫자. <br>'-' - 음수 값에서 마이너스 부호의 위치(생략 시 마이너스 부호는 처음에 배치됨)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "패턴에는 문자열 리터럴과 다음 자리 표시자가 포함될 수 있습니다. '9' - 숫자의 경우; 'a' - 대문자 또는 소문자의 경우; '#' - 숫자 또는 대문자 또는 소문자의 경우. 백슬래시 '\\'를 사용하여 문자를 이스케이프합니다."
@@ -3008,10 +3175,10 @@ export var koreanStrings = {
       precision: "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "값 앞에 표시할 하나 또는 여러 개의 기호입니다.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "값과 함께 표시되는 화폐 기호 또는 코드. 기본적으로 해당 지역의 기호가 사용됩니다. 이 속성을 지우면 기호가 표시되지 않습니다.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "숫자, 통화 기호, 마이너스 기호의 위치를 지정합니다. 패턴에는 다음과 같은 자리 표시자를 포함할 수 있습니다: <br>'@' - 통화 기호 또는 코드.<br> '#' - 숫자. <br>'-' - 음수 값에서의 마이너스 부호 위치(생략 시 마이너스 부호는 맨 앞에 위치)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

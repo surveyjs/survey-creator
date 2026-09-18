@@ -525,18 +525,18 @@ export var fiStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Muuttujat",
-    // [Auto-translated] "No variables"
-    noPreset: "Ei muuttujia",
-    // [Auto-translated] "View"
-    view: "Näkymä",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Muuttujan esiasetus",
+    // [Auto-translated] "None"
+    noPreset: "Ei mitään",
+    // [Auto-translated] "View variable values"
+    view: "Katso muuttujan arvot",
     // [Auto-translated] "Variable values"
     viewTitle: "Muuttujaarvot",
-    // [Auto-translated] "Edit"
-    edit: "Muokkaus",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Muuttujapresetit",
+    // [Auto-translated] "Manage presets"
+    edit: "Hallinnoi esiasetuksia",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Muuttuvat esiasetukset",
     // [Auto-translated] "Preset"
     presetName: "Esiasetus",
     // [Auto-translated] "Description"
@@ -749,7 +749,9 @@ export var fiStrings = {
       // [Auto-translated] "Survey description"
       description: "Kyselyn kuvaus",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Kyselyn tekeminen vain luku -muotoiseksi"
+      readOnly: "Kyselyn tekeminen vain luku -muotoiseksi",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Alueelliset formaatit"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var fiStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Peitetyn arvon tallentaminen kyselyn tuloksiin"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Alue",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Ajoitusmalli",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Aikakuvio",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Desimaalierotin",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Tuhansien erottelija",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valuuttasymboli",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valuuttamalli"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Arvon kuvio"
@@ -826,10 +844,10 @@ export var fiStrings = {
       max: "Suurin arvo"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Valuutan etuliite",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Valuutan jälkiliite"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valuuttasymboli",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valuuttamalli"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Poista muut, kun se on valittuna",
@@ -1613,6 +1631,8 @@ export var fiStrings = {
       question: "Kysymys",
       // "Pages"
       pages: "Sivut",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Alueelliset formaatit",
       // "Quiz Mode"
       timer: "Ajastin / tietovisa",
       // "Calculated Values"
@@ -2398,6 +2418,139 @@ export var fiStrings = {
       container: "Sama kuin kontti"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabia",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgaria",
+    // [Auto-translated] "Catalan"
+    ca: "Katalaani",
+    // [Auto-translated] "Czech"
+    cs: "Tšekki",
+    // [Auto-translated] "Welsh"
+    cy: "Kymri (Wales)",
+    // [Auto-translated] "Danish"
+    da: "Tanska",
+    // [Auto-translated] "German"
+    de: "Saksa",
+    // [Auto-translated] "Greek"
+    el: "Kreikka",
+    // [Auto-translated] "English"
+    en: "Englanti",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Englanti (Australia)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Englanti (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Englanti (Yhdistynyt kuningaskunta)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Englanti (Irlanti)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Englanti (Intia)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Englanti (Uusi-Seelanti)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Englanti (Etelä-Afrikka)",
+    // [Auto-translated] "Spanish"
+    es: "Espanja",
+    // [Auto-translated] "Estonian"
+    et: "Viro",
+    // [Auto-translated] "Basque"
+    eu: "Baski",
+    // [Auto-translated] "Persian"
+    fa: "Persia",
+    // [Auto-translated] "Finnish"
+    fi: "Suomi",
+    // [Auto-translated] "Filipino"
+    fil: "Filippiini",
+    // [Auto-translated] "French"
+    fr: "Ranska",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Ranska (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Ranska (Sveitsi)",
+    // [Auto-translated] "Hebrew"
+    he: "Heprea",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Kroaatti",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haitin kieli",
+    // [Auto-translated] "Hungarian"
+    hu: "Unkari",
+    // [Auto-translated] "Indonesian"
+    id: "Indonesia",
+    // [Auto-translated] "Icelandic"
+    is: "Islanti",
+    // [Auto-translated] "Italian"
+    it: "Italia",
+    // [Auto-translated] "Japanese"
+    ja: "Japani",
+    // [Auto-translated] "Georgian"
+    ka: "Georgia",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazakki",
+    // [Auto-translated] "Korean"
+    ko: "Korea",
+    // [Auto-translated] "Lithuanian"
+    lt: "Liettua",
+    // [Auto-translated] "Latvian"
+    lv: "Latvia",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonialainen",
+    // [Auto-translated] "Burmese"
+    mm: "Burmalainen",
+    // [Auto-translated] "Malay"
+    ms: "Malaiji",
+    // [Auto-translated] "Dutch"
+    nl: "Hollanti",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Hollanti (Belgia)",
+    // [Auto-translated] "Norwegian"
+    no: "Norja",
+    // [Auto-translated] "Polish"
+    pl: "Puola",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugali",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugali (Brasilia)",
+    // [Auto-translated] "Romanian"
+    ro: "Romania",
+    // [Auto-translated] "Russian"
+    ru: "Venäjä",
+    // [Auto-translated] "Slovak"
+    sk: "Slovakki",
+    // [Auto-translated] "Slovenian"
+    sl: "Sloveeni",
+    // [Auto-translated] "Serbian"
+    sr: "Serbia",
+    // [Auto-translated] "Swedish"
+    sv: "Ruotsi",
+    // [Auto-translated] "Swahili"
+    sw: "Suahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadžikiksi",
+    // [Auto-translated] "Thai"
+    th: "Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Turkki",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukraina",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnam",
+    // [Auto-translated] "Chinese"
+    zh: "Kiina",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Kiina (yksinkertaistettu)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Kiina (perinteinen)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export var fiStrings = {
     visibletrigger: "muuta näkyvyyttä (vanhentunut)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Sama kuin kyselykieli"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Esimerkki: +1(999)-999-99-99"
@@ -2480,12 +2637,6 @@ export var fiStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Esimerkki: kk/pp/v"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Esimerkki: €",
-      // "Ex.: USD"
-      suffix: "Esimerkki: EUR"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export var fiStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Valitse, haluatko tallentaa kyselyn tuloksiin kysymyksen arvon käyttämällä maskia."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Alue, jonka muodot koskevat päivämäärä-, aika-, numeeriset ja valuuttasyötteen maskit. Jos ei ole määritelty, käytetään kyselykieltä.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Korvaa alueen päivämäärämuodon, jota käytetään syötemaskeissa. Kuvio voi sisältää erottelumerkit ja seuraavat paikkamerkit: <br>'m' - Kuukauden numero.<br> 'mm' - Kuukauden numero, jossa yksinumeroisille arvoille on etupuolella nolla. <br>'d' - Kuukauden päivä. <br>'dd' - Kuukauden päivä, jossa yksinumeroisille arvoille on etupuolella nolla. <br>'yy' - Vuoden kaksi viimeistä numeroa. <br>'yyyy' - Nelinumeroinen vuosi.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Korvaa alueen aikamuodon, jota käytetään syötemaskeissa. Kuvio voi sisältää erotinmerkit ja seuraavat paikkamerkit: <br>'H' - Tunnit 24 tunnin muodossa.<br> 'HH' - Tunnit 24 tunnin muodossa, jossa yksinumeroisille arvoille on etunolla. <br>'h' - Tunnit 12 tunnin muodossa. <br>'hh' - Tunnit 12 tunnin muodossa, etunollalla yksinumeroisille arvoille. <br>'MM' - Minuutit. <br>'ss' - Sekuntit. <br>'TT' - 12 tunnin kellojakso isolla kirjaimella (AM/PM). <br>'TT' - 12 tunnin kellojakso pienellä (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Korvaa symbolin, jota alue käyttää erottaakseen murtolukuosan ja kokonaislukuosan näytetystä numerosta syötemaskeissa.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Korvaa symbolin, jolla alue erottaa suuren luvun numerot kolmen ryhmiin syöttömaskeissa.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Korvaa alueen valuuttasymbolin tai koodin, jota käytetään syöttömaskeissa.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Ohittaa alueen valuuttakuvion, jota käytetään syötemaskeissa. Kuvio voi sisältää seuraavat paikkamerkit: <br>'@' - Valuuttasymboli tai koodi.<br> '#' - Numero. <br>'-' - miinusmerkin sijainti negatiivisissa arvoissa (jos se jätetään pois, miinusmerkki asetetaan alkuun)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Kuvio voi sisältää merkkijonoliteraaleja ja seuraavia paikkamerkkejä: '9' - numerolle; \"a\" - isoille tai pienille kirjaimille; '#' - numerolle tai isolle tai pienelle kirjaimelle. Käytä kenoviivaa '\\' paetaksesi hahmoa."
@@ -3007,10 +3174,10 @@ export var fiStrings = {
       precision: "Rajoittaa näytettävän luvun desimaalipilkun jälkeen säilytettävien numeroiden määrää."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Yksi tai useampi symboli, joka näytetään ennen arvoa.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Yksi tai useampi symboli, joka näytetään arvon jälkeen."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Valuuttasymboli tai koodi, joka näytetään arvon kanssa. Alueen symbolia käytetään oletuksena. Tyhjennä tämä ominaisuus, jotta symbolia ei näytetä.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Määrittää numeron, valuuttasymbolin ja miinusmerkin sijainnit. Kuvio voi sisältää seuraavat paikkamerkit: <br>'@' - Valuuttasymboli tai koodi.<br> '#' - Luku. <br>'-' - miinusmerkin sijainti negatiivisissa arvoissa (jos se jätetään pois, miinusmerkki sijoitetaan alkuun)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

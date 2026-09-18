@@ -525,17 +525,17 @@ export var arStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "المتغيرات",
-    // [Auto-translated] "No variables"
-    noPreset: "لا متغيرات",
-    // [Auto-translated] "View"
-    view: "منظر",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "إعداد المتغيرات",
+    // [Auto-translated] "None"
+    noPreset: "لا شيء",
+    // [Auto-translated] "View variable values"
+    view: "عرض قيم المتغيرات",
     // [Auto-translated] "Variable values"
     viewTitle: "قيم المتغيرات",
-    // [Auto-translated] "Edit"
-    edit: "تعديل",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "إدارة الإعدادات المسبقة",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "الإعدادات المسبقة للمتغيرات",
     // [Auto-translated] "Preset"
     presetName: "إعداد مسبق",
@@ -749,7 +749,9 @@ export var arStrings = {
       // [Auto-translated] "Survey description"
       description: "وصف المسح",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "جعل الاستطلاع للقراءة فقط"
+      readOnly: "جعل الاستطلاع للقراءة فقط",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "الصيغ الإقليمية"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var arStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "حفظ القيمة المقنعة في نتائج الاستطلاع"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "المنطقة",
+      // [Auto-translated] "Date pattern"
+      datePattern: "نمط التاريخ",
+      // [Auto-translated] "Time pattern"
+      timePattern: "نمط الزمن",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "الفاصلة العشرية",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "فاصل آلاف",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "رمز العملة",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "نمط العملة"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "نمط القيمة"
@@ -826,10 +844,10 @@ export var arStrings = {
       max: "القيمة القصوى"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "بادئة العملة",
-      // [Auto-translated] "Currency suffix"
-      suffix: "لاحقة العملة"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "رمز العملة",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "نمط العملة"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "مسح الآخرين عند تحديده",
@@ -1613,6 +1631,8 @@ export var arStrings = {
       question: "السؤال",
       // "Pages"
       pages: "الصفحات",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "الصيغ الإقليمية",
       // "Quiz Mode"
       timer: "مؤقت/إختبار قصير",
       // [Auto-translated] "Calculated Values"
@@ -2398,6 +2418,139 @@ export var arStrings = {
       container: "نفس الحاوية"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "العربية",
+    // [Auto-translated] "Bulgarian"
+    bg: "البلغارية",
+    // [Auto-translated] "Catalan"
+    ca: "الكتالونية",
+    // [Auto-translated] "Czech"
+    cs: "التشيك",
+    // [Auto-translated] "Welsh"
+    cy: "الويلزية",
+    // [Auto-translated] "Danish"
+    da: "الدنماركية",
+    // [Auto-translated] "German"
+    de: "الألمانية",
+    // [Auto-translated] "Greek"
+    el: "اليونانية",
+    // [Auto-translated] "English"
+    en: "الإنجليزية",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "الإنجليزية (أستراليا)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "الإنجليزية (كندا)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "الإنجليزية (المملكة المتحدة)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "الإنجليزية (أيرلندا)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "الإنجليزية (الهند)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "الإنجليزية (نيوزيلندا)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "النسخة الإنجليزية (جنوب أفريقيا)",
+    // [Auto-translated] "Spanish"
+    es: "الإسبانية",
+    // [Auto-translated] "Estonian"
+    et: "الإستونية",
+    // [Auto-translated] "Basque"
+    eu: "الباسكية",
+    // [Auto-translated] "Persian"
+    fa: "الفارسية",
+    // [Auto-translated] "Finnish"
+    fi: "الفنلندية",
+    // [Auto-translated] "Filipino"
+    fil: "الفلبيني",
+    // [Auto-translated] "French"
+    fr: "الفرنسية",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "الفرنسية (كندا)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "الفرنسية (سويسرا)",
+    // [Auto-translated] "Hebrew"
+    he: "العبرية",
+    // [Auto-translated] "Hindi"
+    hi: "الهندية",
+    // [Auto-translated] "Croatian"
+    hr: "الكرواتية",
+    // [Auto-translated] "Haitian Creole"
+    ht: "الكريول الهايتي",
+    // [Auto-translated] "Hungarian"
+    hu: "المجرية",
+    // [Auto-translated] "Indonesian"
+    id: "الإندونيسية",
+    // [Auto-translated] "Icelandic"
+    is: "الآيسلندية",
+    // [Auto-translated] "Italian"
+    it: "الإيطالية",
+    // [Auto-translated] "Japanese"
+    ja: "ياباني",
+    // [Auto-translated] "Georgian"
+    ka: "الجورجي",
+    // [Auto-translated] "Kazakh"
+    kk: "الكازاخية",
+    // [Auto-translated] "Korean"
+    ko: "الكورية",
+    // [Auto-translated] "Lithuanian"
+    lt: "الليتوانية",
+    // [Auto-translated] "Latvian"
+    lv: "اللاتفية",
+    // [Auto-translated] "Macedonian"
+    mk: "مقدوني",
+    // [Auto-translated] "Burmese"
+    mm: "البورميون",
+    // [Auto-translated] "Malay"
+    ms: "الماليزية",
+    // [Auto-translated] "Dutch"
+    nl: "هولندية",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "هولندا (بلجيكا)",
+    // [Auto-translated] "Norwegian"
+    no: "النرويجية",
+    // [Auto-translated] "Polish"
+    pl: "البولندية",
+    // [Auto-translated] "Portuguese"
+    pt: "البرتغالية",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "البرتغالية (البرازيل)",
+    // [Auto-translated] "Romanian"
+    ro: "روماني",
+    // [Auto-translated] "Russian"
+    ru: "الروسية",
+    // [Auto-translated] "Slovak"
+    sk: "السلوفاكية",
+    // [Auto-translated] "Slovenian"
+    sl: "السلوفيني",
+    // [Auto-translated] "Serbian"
+    sr: "صربي",
+    // [Auto-translated] "Swedish"
+    sv: "السويدية",
+    // [Auto-translated] "Swahili"
+    sw: "السواحيلية",
+    // [Auto-translated] "Telugu"
+    tel: "التيلجو",
+    // [Auto-translated] "Tajik"
+    tg: "الطاجيكية",
+    // [Auto-translated] "Thai"
+    th: "تايلاندية",
+    // [Auto-translated] "Turkish"
+    tr: "تركية",
+    // [Auto-translated] "Ukrainian"
+    uk: "الأوكرانية",
+    // [Auto-translated] "Urdu"
+    ur: "الأردية",
+    // [Auto-translated] "Vietnamese"
+    vi: "الفيتناميون",
+    // [Auto-translated] "Chinese"
+    zh: "الصينية",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "الصينية (مبسطة)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "الصينية (التقليدية)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export var arStrings = {
     visibletrigger: "تغيير الرؤية (مهمل)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "نفس لغة المسح"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "مثال: +1 (999) -999-99-99"
@@ -2480,12 +2637,6 @@ export var arStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "مثال: مم / يوم / سنة"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "مثال: $",
-      // "Ex.: USD"
-      suffix: "مثال: الدولار الأمريكي"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export var arStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "حدد ما إذا كنت تريد تخزين قيمة السؤال باستخدام قناع مطبق في نتائج الاستطلاع."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "منطقة تنطبق تنسيقاتها على أقنعة إدخال التاريخ والزمن والرقمية والعملة. إذا لم يتم تحديدها، تستخدم لغة المسح.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "يتجاوز تنسيق تاريخ المنطقة المستخدم في أقنعة الإدخال. يمكن أن يحتوي النمط على أحرف فاصلة والرموز التالية: <br>'m' - رقم الشهر.<br> 'mm' - رقم الشهر، مع صفر في البداية للقيم ذات الرقم الواحد. <br>'d' - يوم الشهر. <br>'dd' - يوم الشهر، مع صفر في البداية للقيم أحادية الأرقام. <br>'yy' - آخر رقمين في السنة. <br>'yyyy' - سنة مكونة من أربعة أرقام.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "يتجاوز تنسيق الوقت الخاص بالمنطقة المستخدم في أقنعة الإدخال. يمكن أن يحتوي النمط على أحرف فاصلة والعناصر المؤقتة التالية: <br>'H' - ساعات بصيغة 24 ساعة.<br> 'HH' - ساعات بصيغة 24 ساعة، مع صفر في البداية للقيم ذات الرقم الواحد. <br>'h' - ساعات بصيغة 12 ساعة. <br>'hh' - ساعات بصيغة 12 ساعة، مع صفر في البداية للقيم ذات الرقم الواحد. <br>'MM' - دقائق. <br>'ss' - ثواني. <br>'TT' - فترة ساعة 12 ساعة بحروف كبيرة (AM<br>/PM). 'tt' - فترة ساعة 12 ساعة بحروف صغيرة (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "يتجاوز الرمز الذي تستخدمه المنطقة لفصل الجزء الكسري عن الجزء الصحيح من رقم معروض في أقنعة الإدخال.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "يتجاوز الرمز الذي تستخدمه المنطقة لفصل أرقام رقم كبير إلى مجموعات من ثلاثة في أقنعة الإدخال.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "يتجاوز رمز العملة أو الرمز المستخدم في أقنعة الإدخال.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "يتجاوز نمط العملة الخاص بالمنطقة المستخدم في أقنعة الإدخال. يمكن أن يحتوي النمط على الرموز التالية: <br>'@' - رمز أو رمز العملة.<br> '#' - الرقم. <br>'-' - موقع علامة السالب في القيم السالبة (إذا تم حذفها، توضع علامة سالب في البداية)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "يمكن أن يحتوي النمط على حرفي السلسلة والعناصر النائبة التالية: \"9\" - للرقم ؛ \"a\" - لحرف كبير أو صغير ؛ '#' - لرقم أو حرف كبير أو صغير. استخدم الشرطة المائلة للخلف '\\' للهروب من حرف."
@@ -3007,10 +3174,10 @@ export var arStrings = {
       precision: "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "رمز واحد أو عدة رموز ليتم عرضها قبل القيمة.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "رمز أو رمز عملة يعرض مع القيمة. يستخدم رمز المنطقة بشكل افتراضي. قم بمسح هذه الخاصية لعدم إظهار أي رمز.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "يحدد مواقع الرقم، ورمز العملة، وعلامة السالب. يمكن أن يحتوي النمط على الرموز التالية: <br>'@' - رمز أو رمز العملة.<br> '#' - رقم. <br>'-' - موقع علامة السالب في القيم السالبة (إذا تم حذفها، توضع علامة السالب في البداية)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

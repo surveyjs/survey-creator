@@ -525,18 +525,18 @@ export var msStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Pembolehubah",
-    // [Auto-translated] "No variables"
-    noPreset: "Tiada pembolehubah",
-    // [Auto-translated] "View"
-    view: "Lihat",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Pratetap pembolehubah",
+    // [Auto-translated] "None"
+    noPreset: "Tiada",
+    // [Auto-translated] "View variable values"
+    view: "Lihat nilai pembolehubah",
     // [Auto-translated] "Variable values"
     viewTitle: "Nilai pembolehubah",
-    // [Auto-translated] "Edit"
-    edit: "Edit",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Pratetap pembolehubah",
+    // [Auto-translated] "Manage presets"
+    edit: "Urus pratetap",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Pratetap Pembolehubah",
     // [Auto-translated] "Preset"
     presetName: "Pratetap",
     // [Auto-translated] "Description"
@@ -749,7 +749,9 @@ export var msStrings = {
       // [Auto-translated] "Survey description"
       description: "Penerangan tinjauan",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Jadikan tinjauan baca sahaja"
+      readOnly: "Jadikan tinjauan baca sahaja",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Format serantau"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var msStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Simpan nilai bertopeng dalam hasil tinjauan"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Wilayah",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Corak tarikh",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Corak masa",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Pemisah perpuluhan",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Pemisah ribuan",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol mata wang",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Corak mata wang"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Corak nilai"
@@ -826,10 +844,10 @@ export var msStrings = {
       max: "Nilai maksimum"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Awalan mata wang",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Akhiran mata wang"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol mata wang",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Corak mata wang"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Kosongkan yang lain apabila dipilih",
@@ -1613,6 +1631,8 @@ export var msStrings = {
       question: "Soalan",
       // "Pages"
       pages: "Halaman",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Format Serantau",
       // "Quiz Mode"
       timer: "Pemasa/Kuiz",
       // "Calculated Values"
@@ -2398,6 +2418,139 @@ export var msStrings = {
       container: "Sama seperti bekas"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Bahasa Arab",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bahasa Bulgaria",
+    // [Auto-translated] "Catalan"
+    ca: "Bahasa Catalonia",
+    // [Auto-translated] "Czech"
+    cs: "Bahasa Czech",
+    // [Auto-translated] "Welsh"
+    cy: "Bahasa Welsh",
+    // [Auto-translated] "Danish"
+    da: "Bahasa Denmark",
+    // [Auto-translated] "German"
+    de: "Bahasa Jerman",
+    // [Auto-translated] "Greek"
+    el: "Bahasa Yunani",
+    // [Auto-translated] "English"
+    en: "Bahasa Inggeris",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Bahasa Inggeris (Australia)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Bahasa Inggeris (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Bahasa Inggeris (United Kingdom)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Bahasa Inggeris (Ireland)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Bahasa Inggeris (India)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Bahasa Inggeris (New Zealand)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Bahasa Inggeris (Afrika Selatan)",
+    // [Auto-translated] "Spanish"
+    es: "Bahasa Sepanyol",
+    // [Auto-translated] "Estonian"
+    et: "Bahasa Estonia",
+    // [Auto-translated] "Basque"
+    eu: "Bahasa Basque",
+    // [Auto-translated] "Persian"
+    fa: "Bahasa Parsi",
+    // [Auto-translated] "Finnish"
+    fi: "Bahasa Finland",
+    // [Auto-translated] "Filipino"
+    fil: "Bahasa Filipino",
+    // [Auto-translated] "French"
+    fr: "Bahasa Perancis",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Perancis (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Perancis (Switzerland)",
+    // [Auto-translated] "Hebrew"
+    he: "Bahasa Ibrani",
+    // [Auto-translated] "Hindi"
+    hi: "Bahasa Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Bahasa Croatia",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Bahasa Kreol Haiti",
+    // [Auto-translated] "Hungarian"
+    hu: "Bahasa Hungary",
+    // [Auto-translated] "Indonesian"
+    id: "Bahasa Indonesia",
+    // [Auto-translated] "Icelandic"
+    is: "Bahasa Iceland",
+    // [Auto-translated] "Italian"
+    it: "Bahasa Itali",
+    // [Auto-translated] "Japanese"
+    ja: "Bahasa Jepun",
+    // [Auto-translated] "Georgian"
+    ka: "Bahasa Georgia",
+    // [Auto-translated] "Kazakh"
+    kk: "Bahasa Kazakh",
+    // [Auto-translated] "Korean"
+    ko: "Bahasa Korea",
+    // [Auto-translated] "Lithuanian"
+    lt: "Bahasa Lithuania",
+    // [Auto-translated] "Latvian"
+    lv: "Bahasa Latvia",
+    // [Auto-translated] "Macedonian"
+    mk: "Bahasa  Macedonia",
+    // [Auto-translated] "Burmese"
+    mm: "Burma",
+    // [Auto-translated] "Malay"
+    ms: "Bahasa Melayu",
+    // [Auto-translated] "Dutch"
+    nl: "Bahasa Belanda",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Belanda (Belgium)",
+    // [Auto-translated] "Norwegian"
+    no: "Bahasa Norway",
+    // [Auto-translated] "Polish"
+    pl: "Bahasa Poland",
+    // [Auto-translated] "Portuguese"
+    pt: "Bahasa Portugal",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugis (Brazil)",
+    // [Auto-translated] "Romanian"
+    ro: "Bahasa Romania",
+    // [Auto-translated] "Russian"
+    ru: "Bahasa Rusia",
+    // [Auto-translated] "Slovak"
+    sk: "Bahasa Slovak",
+    // [Auto-translated] "Slovenian"
+    sl: "Bahasa Slovenia",
+    // [Auto-translated] "Serbian"
+    sr: "Bahasa Serbia",
+    // [Auto-translated] "Swedish"
+    sv: "Bahasa Sweden",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Bahasa Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tajik",
+    // [Auto-translated] "Thai"
+    th: "Bahasa Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Bahasa Turki",
+    // [Auto-translated] "Ukrainian"
+    uk: "Bahasa Ukraine",
+    // [Auto-translated] "Urdu"
+    ur: "Bahasa Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Bahasa Vietnam",
+    // [Auto-translated] "Chinese"
+    zh: "Bahasa Cina",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Cina (Dipermudahkan)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Cina (Tradisional)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export var msStrings = {
     visibletrigger: "ubah kebolehlihatan (tidak digunakan lagi)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Sama seperti bahasa tinjauan"
+    },
     patternmask: {
       // [Auto-translated] "Ex.: +1(999)-999-99-99"
       pattern: "Cth.: +1(999)-999-99-99"
@@ -2480,12 +2637,6 @@ export var msStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Cth.: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // [Auto-translated] "Ex.: $"
-      prefix: "Cth.: $",
-      // [Auto-translated] "Ex.: USD"
-      suffix: "Cth.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export var msStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Pilih jika anda ingin menyimpan nilai soalan dengan topeng yang digunakan dalam hasil tinjauan."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Wilayah yang formatnya digunakan untuk topeng tarikh-masa, nombor, dan mata wang. Jika tidak dinyatakan, bahasa tinjauan digunakan.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Mengatasi format tarikh rantau yang digunakan dalam topeng input. Corak boleh mengandungi aksara pemisah dan tempat letak berikut: <br>'m' - Nombor bulan.<br> 'mm' - Nombor bulan, dengan sifar di hadapan untuk nilai satu digit. <br>'d' - Hari dalam bulan. <br>'dd' - Hari dalam bulan, dengan sifar di hadapan untuk nilai satu digit. <br>'yy' - Dua digit terakhir dalam tahun. <br>'yyyy' - Tahun empat digit.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Menggantikan format masa rantau yang digunakan dalam topeng input. Corak ini boleh mengandungi aksara pemisah dan tempat letak berikut: <br>'H' - Jam dalam format 24 jam.<br> 'HH' - Jam dalam format 24 jam, dengan sifar di hadapan untuk nilai satu digit. <br>'h' - Jam dalam format 12 jam. <br>'hh' - Jam dalam format 12 jam, dengan sifar di hadapan untuk nilai satu digit. <br>'MM' - Minit. <br>'ss' - <br>Saat. 'TT' - Tempoh jam 12 jam dalam huruf besar (AM/PM). <br>'tt' - Tempoh jam 12 jam dalam huruf kecil (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Menggantikan simbol yang digunakan oleh wilayah untuk memisahkan bahagian pecahan daripada bahagian integer nombor yang dipaparkan dalam topeng input.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Menggantikan simbol yang digunakan oleh wilayah untuk memisahkan digit nombor besar kepada kumpulan tiga dalam topeng input.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Menggantikan simbol mata wang rantau atau kod yang digunakan dalam topeng input.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Menggantikan corak mata wang rantau yang digunakan dalam topeng input. Corak boleh mengandungi tempat berikut: <br>'@' - Simbol atau kod mata wang.<br> '#' - Nombor. <br>'-' - Kedudukan tanda tolak dalam nilai negatif (jika diabaikan, tanda tolak diletakkan di permulaan)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Corak boleh mengandungi literal rentetan dan ruang letak berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau huruf kecil. Gunakan tindak balas '\\' untuk melarikan diri daripada watak."
@@ -3007,10 +3174,10 @@ export var msStrings = {
       precision: "Hadkan bilangan digit untuk dikekalkan selepas titik perpuluhan bagi nombor yang dipaparkan."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Satu atau beberapa simbol yang akan dipaparkan sebelum nilai.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Satu atau beberapa simbol yang akan dipaparkan selepas nilai."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Simbol mata wang atau kod yang dipaparkan bersama nilai tersebut. Simbol wilayah digunakan secara lalai. Kosongkan sifat ini untuk tidak memaparkan sebarang simbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Menentukan kedudukan nombor, simbol mata wang, dan tanda tolak. Corak boleh mengandungi tempat berikut: <br>'@' - Simbol atau kod mata wang.<br> '#' - Nombor. <br>'-' - Kedudukan tanda tolak dalam nilai negatif (jika diabaikan, tanda tolak diletakkan di permulaan)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

@@ -525,17 +525,17 @@ export var germanTranslation = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Variablen",
-    // [Auto-translated] "No variables"
-    noPreset: "Keine Variablen",
-    // [Auto-translated] "View"
-    view: "Ansicht",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Variablenvoreinstellung",
+    // [Auto-translated] "None"
+    noPreset: "Keine",
+    // [Auto-translated] "View variable values"
+    view: "Variable Werte anzeigen",
     // [Auto-translated] "Variable values"
     viewTitle: "Variable Werte",
-    // [Auto-translated] "Edit"
-    edit: "Bearbeitung",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Presets verwalten",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Variable Presets",
     // [Auto-translated] "Preset"
     presetName: "Preset",
@@ -749,7 +749,9 @@ export var germanTranslation = {
       // [Auto-translated] "Survey description"
       description: "Beschreibung der Umfrage",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Machen Sie die Umfrage schreibgeschützt"
+      readOnly: "Machen Sie die Umfrage schreibgeschützt",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionale Formate"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var germanTranslation = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Maskierte Werte in Umfrageergebnissen speichern"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Region",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Datumsmuster",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Zeitmuster",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Dezimaltrenner",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Tausende-Trenner",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Währungssymbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Währungsmuster"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Werte-Muster"
@@ -826,10 +844,10 @@ export var germanTranslation = {
       max: "Maximalwert"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Währungs-Präfix",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Währungs-Suffix"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Währungssymbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Währungsmuster"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Andere löschen, wenn ausgewählt",
@@ -1613,6 +1631,8 @@ export var germanTranslation = {
       question: "Fragen",
       // "Pages"
       pages: "Seiten",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionale Formate",
       // "Quiz Mode"
       timer: "Timer",
       // "Calculated Values"
@@ -2398,6 +2418,139 @@ export var germanTranslation = {
       container: "Identisch mit Container"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabisch",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgarisch",
+    // [Auto-translated] "Catalan"
+    ca: "Katalanisch",
+    // [Auto-translated] "Czech"
+    cs: "Tschechisch",
+    // [Auto-translated] "Welsh"
+    cy: "Walisisch",
+    // [Auto-translated] "Danish"
+    da: "Dänisch",
+    // [Auto-translated] "German"
+    de: "Deutsch",
+    // [Auto-translated] "Greek"
+    el: "Griechisch",
+    // [Auto-translated] "English"
+    en: "Englisch",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Englisch (Australien)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Englisch (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Englisch (Vereinigtes Königreich)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Englisch (Irland)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Englisch (Indien)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Englisch (Neuseeland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Englisch (Südafrika)",
+    // [Auto-translated] "Spanish"
+    es: "Spanisch",
+    // [Auto-translated] "Estonian"
+    et: "Estnisch",
+    // [Auto-translated] "Basque"
+    eu: "Baskisch",
+    // [Auto-translated] "Persian"
+    fa: "Persisch",
+    // [Auto-translated] "Finnish"
+    fi: "Finnisch",
+    // [Auto-translated] "Filipino"
+    fil: "Philippinisch",
+    // [Auto-translated] "French"
+    fr: "Französisch",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Französisch (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Französisch (Schweiz)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebräisch",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Kroatisch",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haitianisches Kreolisch",
+    // [Auto-translated] "Hungarian"
+    hu: "Ungarisch",
+    // [Auto-translated] "Indonesian"
+    id: "Indonesisch",
+    // [Auto-translated] "Icelandic"
+    is: "Isländisch",
+    // [Auto-translated] "Italian"
+    it: "Italienisch",
+    // [Auto-translated] "Japanese"
+    ja: "Japanisch",
+    // [Auto-translated] "Georgian"
+    ka: "Georgisch",
+    // [Auto-translated] "Kazakh"
+    kk: "Kasachisch",
+    // [Auto-translated] "Korean"
+    ko: "Koreanisch",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litauisch",
+    // [Auto-translated] "Latvian"
+    lv: "Lettisch",
+    // [Auto-translated] "Macedonian"
+    mk: "Mazedonisch",
+    // [Auto-translated] "Burmese"
+    mm: "Birmanisch",
+    // [Auto-translated] "Malay"
+    ms: "Malaiisch",
+    // [Auto-translated] "Dutch"
+    nl: "Niederländisch",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Niederländisch (Belgien)",
+    // [Auto-translated] "Norwegian"
+    no: "Norwegisch",
+    // [Auto-translated] "Polish"
+    pl: "Polnisch",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugiesisch",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugiesisch (Brasilien)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumänisch",
+    // [Auto-translated] "Russian"
+    ru: "Russisch",
+    // [Auto-translated] "Slovak"
+    sk: "Slowakisch",
+    // [Auto-translated] "Slovenian"
+    sl: "Slowenisch",
+    // [Auto-translated] "Serbian"
+    sr: "Serbisch",
+    // [Auto-translated] "Swedish"
+    sv: "Schwedisch",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadschikik",
+    // [Auto-translated] "Thai"
+    th: "Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Türkisch",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukrainisch",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamesen",
+    // [Auto-translated] "Chinese"
+    zh: "Chinesisch",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Chinesisch (vereinfacht)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Chinesisch (Traditionell)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export var germanTranslation = {
     visibletrigger: "Sichtbarkeit ändern (deprecated)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Dasselbe wie die Umfragesprache"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Bsp.: +1(999)-999-99-99"
@@ -2480,12 +2637,6 @@ export var germanTranslation = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Bsp.: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Bsp.: $",
-      // "Ex.: USD"
-      suffix: "Bsp.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export var germanTranslation = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Wählen Sie diese Option aus, wenn Sie den Fragewert mit einer angewendeten Maske in den Umfrageergebnissen speichern möchten."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Eine Region, deren Formate für Datum-, Zeit-, Zahlen- und Währungseingabemasken gelten. Sofern nicht angegeben, wird die Vermessungssprache verwendet.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Überschreibt das Datumsformat der Region, das in Eingabemasken verwendet wird. Das Muster kann Trennzeichen und folgende Platzhalter enthalten: <br>'m' – Monatsnummer.<br> 'mm' – Monatsnummer, mit einer führenden Null für einstellige Werte. <br>'d' – Tag des Monats. <br>'dd' – Tag des Monats, mit einer führenden Null für einstellige Werte. <br>'yy' – Die letzten zwei Ziffern des Jahres. <br>'yyyy' – Vierstelliges Jahr.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Überschreibt das Zeitformat der Region, das in Eingabemasken verwendet wird. Das Muster kann Trennzeichen und folgende Platzhalter enthalten: <br>'H' – Stunden im 24-Stunden-Format.<br> 'HH' – Stunden im 24-Stunden-Format, mit einer führenden Null für einstellige Werte. <br>'h' – Stunden im 12-Stunden-Format. <br>'hh' – Stunden im 12-Stunden-Format, mit einer führenden Null für einstellige Werte. <br>'MM' – Minuten. <br>'ss' – Sekunden. <br>'TT' – 12-Stunden-Taktperiode in Großbuchstaben (AM/PM). <br>'tt' – 12-Stunden-Taktperiode in Kleinbuchstaben (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Überschreibt das Symbol, das der Bereich verwendet, um den Bruchteil vom ganzzahligen Teil einer angezeigten Zahl in Eingabemasken zu trennen.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Überschreibt das Symbol, das die Region verwendet, um die Ziffern einer großen Zahl in Gruppen zu je drei in Eingabemasken zu trennen.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Überschreibt das Währungssymbol oder den Code der Region, der in Eingabemasken verwendet wird.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Überschreibt das Währungsmuster der Region, das in Eingabemasken verwendet wird. Das Muster kann folgende Platzhalter enthalten: <br>'@' – Währungssymbol oder -code.<br> '#' – Zahl. <br>'-' – Position des Minuszeichens bei negativen Werten (wenn weggelassen, steht das Minuszeichen am Anfang)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Das Muster kann Zeichenfolgenliterale und die folgenden Platzhalter enthalten: '9' - für eine Ziffer; \"a\" - für einen Groß- oder Kleinbuchstaben; '#' - für eine Ziffer oder einen Groß- oder Kleinbuchstaben. Verwenden Sie den umgekehrten Schrägstrich '\\', um ein Zeichen mit Escapezeichen zu versehen."
@@ -3007,10 +3174,10 @@ export var germanTranslation = {
       precision: "Schränkt die Anzahl der Nachkommastellen für eine angezeigte Zahl ein."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Ein oder mehrere Symbole, die vor dem Wert angezeigt werden sollen.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Ein oder mehrere Symbole, die nach dem Wert angezeigt werden sollen."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Ein Währungssymbol oder -code, der mit dem Wert angezeigt wird. Das Symbol der Region wird standardmäßig verwendet. Löschen Sie diese Eigenschaft, um kein Symbol anzuzeigen.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Spezifiziert die Positionen der Zahl, des Währungssymbols und des Minuszeichens. Das Muster kann folgende Platzhalter enthalten: <br>'@' – Währungssymbol oder -Code.<br> '#' – Zahl. <br>'-' – Position des Minuszeichens in negativen Werten (bei Weglassen wird das Minuszeichen am Anfang platziert)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

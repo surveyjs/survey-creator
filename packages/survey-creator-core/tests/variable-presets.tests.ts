@@ -11,6 +11,7 @@ import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { TestSurveyTabViewModel } from "../src/components/tabs/test";
 import { TabThemePlugin } from "../src/components/tabs/theme-plugin";
 import { VariablePresetsManager } from "../src/variable-presets";
+import { VariablesViewerModel } from "../src/components/variables-viewer/variables-viewer";
 import { getLocString } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 
@@ -165,13 +166,13 @@ describe("The active variable preset on the Preview plugin (issue #7982)", () =>
     manager.active = "Gold customer";
     expect(log).toHaveLength(1);
     expect(log[0].reason).toBe("select");
-    expect(log[0].active).toBe("Gold customer");
+    expect(log[0].activePresetName).toBe("Gold customer");
     expect(log[0].variablePresets).toBe(creator.variablePresets);
     manager.active = "Gold customer";
     expect(log).toHaveLength(1);
     manager.active = "";
     expect(log).toHaveLength(2);
-    expect(log[1].active).toBe("");
+    expect(log[1].activePresetName).toBe("");
   });
   test("The choice survives a rebuild of the view model", () => {
     const creator = new CreatorTester({ variablePresets: createContainer() });
@@ -301,7 +302,7 @@ describe("Variable presets in Preview (issue #7982)", () => {
     creator.variablePresets = { presets: [{ name: "Other", variables: { customerTier: "basic" } }, { name: "Another", variables: {} }] };
     const items: Array<IAction> = action.popupModel.contentComponentData.model.actions;
     expect(items.map(item => item.id)).toStrictEqual(["Other", "Another"]);
-    expect(action.title).toBe(getLocString("vp.noPreset"));
+    expect(action.title).toBe(getLocString("vp.selectorTitle") + ": " + getLocString("vp.noPreset"));
     expect(getManager(creator).active).toBe("");
     expect(model.survey.getVariable("customertier")).toBeUndefined();
   });
@@ -363,7 +364,7 @@ describe("The variable preset actions in the page toolbar (issue #7982)", () => 
     const creator = new CreatorTester({ variablePresets: createContainer() });
     creator.JSON = surveyJSON;
     const action = getPresetAction(creator, "variablePresetSelector");
-    expect(action.title).toBe(getLocString("vp.noPreset"));
+    expect(action.title).toBe(getLocString("vp.selectorTitle") + ": " + getLocString("vp.noPreset"));
     getManager(creator).active = "Newcomer";
     expect(action.title).toBe(getLocString("vp.selectorTitle") + ": Newcomer");
     expect(action.popupModel.contentComponentData.model.selectedItem.id).toBe("Newcomer");
@@ -396,7 +397,7 @@ describe("The variable preset actions in the page toolbar (issue #7982)", () => 
     getManager(creator).active = "Gold customer";
     expect(action.enabled).toBeTruthy();
   });
-  test("View shows the active preset's variables in one read-only question", () => {
+  test("View shows the active preset's variables in a read-only text viewer, not a survey", () => {
     const creator = new CreatorTester({ variablePresets: { presets: presets } });
     creator.JSON = surveyJSON;
     getManager(creator).active = "Gold customer";
@@ -411,11 +412,12 @@ describe("The variable preset actions in the page toolbar (issue #7982)", () => 
       surveySettings.showDialog = oldShowDialog;
     }
     expect(callCount).toBe(1);
-    expect(dialogOptions.componentName).toBe("survey");
-    const dialogSurvey: SurveyModel = dialogOptions.data.survey;
-    const question = dialogSurvey.getAllQuestions()[0];
-    expect(question.isReadOnly).toBeTruthy();
-    expect(JSON.parse(question.value)).toStrictEqual({ customerTier: "gold", yearsInBusiness: 12 });
+    expect(dialogOptions.componentName).toBe("svc-variables-viewer");
+    expect(dialogOptions.cssClass).toBe("svc-creator-popup svc-variables-viewer-popup");
+    const viewer: VariablesViewerModel = dialogOptions.data.model;
+    expect(viewer).toBeInstanceOf(VariablesViewerModel);
+    expect(JSON.parse(viewer.text)).toStrictEqual({ customerTier: "gold", yearsInBusiness: 12 });
+    expect(viewer.ariaLabel).toBe(getLocString("vp.viewTitle") + " - Gold customer");
   });
   test("The Theme tab inherits the toolbar but shows no preset controls and runs no presets", () => {
     const creator = new CreatorTester({ showThemeTab: true, variablePresets: createContainer() });

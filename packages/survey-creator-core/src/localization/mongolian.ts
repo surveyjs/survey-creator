@@ -525,18 +525,18 @@ export var mnStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Хувьсагчид",
-    // [Auto-translated] "No variables"
-    noPreset: "Хувьсагч байхгүй",
-    // [Auto-translated] "View"
-    view: "Үзэмж",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Хувьсах урьдчилсан тохиргоо",
+    // [Auto-translated] "None"
+    noPreset: "Байхгүй",
+    // [Auto-translated] "View variable values"
+    view: "Хувьсагчийн утгуудыг үзэх",
     // [Auto-translated] "Variable values"
     viewTitle: "Хувьсах утгууд",
-    // [Auto-translated] "Edit"
-    edit: "Засварлах",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Хувьсах урьдчилсан тохиргоог",
+    // [Auto-translated] "Manage presets"
+    edit: "Урьдчилсан тохиргоог удирдах",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Хувьсах урьдчилсан төхөөрөмжүүд",
     // [Auto-translated] "Preset"
     presetName: "Урьдчилсан тохиргоо",
     // [Auto-translated] "Description"
@@ -749,7 +749,9 @@ export var mnStrings = {
       // [Auto-translated] "Survey description"
       description: "Судалгааны тодорхойлолт",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Судалгааг зөвхөн унших хэлбэртэй болго"
+      readOnly: "Судалгааг зөвхөн унших хэлбэртэй болго",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Бүс нутгийн форматууд"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var mnStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Судалгааны үр дүнд багласан үнэ цэнийг хэмнэх"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Бүс нутаг",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Огнооны хэв маяг",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Цагийн хэв маяг",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Арвантын хуваагч",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Мянга салгагч",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Валютын тэмдэг",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валютын хэв маяг"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Үнэ цэнийн загвар"
@@ -826,10 +844,10 @@ export var mnStrings = {
       max: "Хамгийн их үнэ цэнэ"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Валютын ханш",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Валютын suffix"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Валютын тэмдэг",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валютын хэв маяг"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Сонгогдсон үедээ бусдыг цэвэрлэ",
@@ -1613,6 +1631,8 @@ export var mnStrings = {
       question: "Асуулт",
       // "Pages"
       pages: "Хуудас",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Бүс нутгийн форматууд",
       // "Quiz Mode"
       timer: "Тоолуур/Асуулт хариулт",
       // "Calculated Values"
@@ -2398,6 +2418,139 @@ export var mnStrings = {
       container: "Савтай адил"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Араб хэл",
+    // [Auto-translated] "Bulgarian"
+    bg: "Болгар хэл",
+    // [Auto-translated] "Catalan"
+    ca: "Каталан хэл",
+    // [Auto-translated] "Czech"
+    cs: "Чех хэл",
+    // [Auto-translated] "Welsh"
+    cy: "Уэлс хэл",
+    // [Auto-translated] "Danish"
+    da: "Дани хэл",
+    // [Auto-translated] "German"
+    de: "Герман хэл",
+    // [Auto-translated] "Greek"
+    el: "Грек хэл",
+    // [Auto-translated] "English"
+    en: "Англи хэл",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Англи (Австрали)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Англи (Канад)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Англи (Их Британи)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Англи (Ирланд)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Англи (Энэтхэг)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Англи (Шинэ Зеланд)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Англи (Өмнөд Африк)",
+    // [Auto-translated] "Spanish"
+    es: "Испани хэл",
+    // [Auto-translated] "Estonian"
+    et: "Эстон хэл",
+    // [Auto-translated] "Basque"
+    eu: "Бахрейн хэл",
+    // [Auto-translated] "Persian"
+    fa: "Перс",
+    // [Auto-translated] "Finnish"
+    fi: "Финланд хүн",
+    // [Auto-translated] "Filipino"
+    fil: "Филиппин хэл",
+    // [Auto-translated] "French"
+    fr: "Франц хэл",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Франц (Канад)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Франц хэл (Швейцарь)",
+    // [Auto-translated] "Hebrew"
+    he: "Хебри хэл",
+    // [Auto-translated] "Hindi"
+    hi: "Энэтхэг хэл",
+    // [Auto-translated] "Croatian"
+    hr: "Хорват хэл",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Гайтийн Креол хэл",
+    // [Auto-translated] "Hungarian"
+    hu: "Унгар хэл",
+    // [Auto-translated] "Indonesian"
+    id: "Индонез хэл",
+    // [Auto-translated] "Icelandic"
+    is: "Исланд хэл",
+    // [Auto-translated] "Italian"
+    it: "Итали хэл",
+    // [Auto-translated] "Japanese"
+    ja: "Япон хэл",
+    // [Auto-translated] "Georgian"
+    ka: "Гүрж хэл",
+    // [Auto-translated] "Kazakh"
+    kk: "Казах хэл",
+    // [Auto-translated] "Korean"
+    ko: "Солонгос хэл",
+    // [Auto-translated] "Lithuanian"
+    lt: "Литв хэл",
+    // [Auto-translated] "Latvian"
+    lv: "Латви хэл",
+    // [Auto-translated] "Macedonian"
+    mk: "Македони хэл",
+    // [Auto-translated] "Burmese"
+    mm: "Бирмийн хэл",
+    // [Auto-translated] "Malay"
+    ms: "Малай хэл",
+    // [Auto-translated] "Dutch"
+    nl: "Герман хэл",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Датч (Бельги)",
+    // [Auto-translated] "Norwegian"
+    no: "Норвеги хэл",
+    // [Auto-translated] "Polish"
+    pl: "Польш хэл",
+    // [Auto-translated] "Portuguese"
+    pt: "Португали хэл",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Португал хэл (Бразил)",
+    // [Auto-translated] "Romanian"
+    ro: "Румын хэл",
+    // [Auto-translated] "Russian"
+    ru: "Орос хэл",
+    // [Auto-translated] "Slovak"
+    sk: "Словак хэл",
+    // [Auto-translated] "Slovenian"
+    sl: "Словени хэл",
+    // [Auto-translated] "Serbian"
+    sr: "Серби хэл",
+    // [Auto-translated] "Swedish"
+    sv: "Швед хэл",
+    // [Auto-translated] "Swahili"
+    sw: "Свахили",
+    // [Auto-translated] "Telugu"
+    tel: "Телугу хэл",
+    // [Auto-translated] "Tajik"
+    tg: "Тажик хэл",
+    // [Auto-translated] "Thai"
+    th: "Тай хэл",
+    // [Auto-translated] "Turkish"
+    tr: "Турк хэл",
+    // [Auto-translated] "Ukrainian"
+    uk: "Украйн хэл",
+    // [Auto-translated] "Urdu"
+    ur: "Урду хэл",
+    // [Auto-translated] "Vietnamese"
+    vi: "Вьетнам хэл",
+    // [Auto-translated] "Chinese"
+    zh: "Хятад хэл",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Хятад хэл (Хялбаршуулсан)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Хятад (уламжлалт)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export var mnStrings = {
     visibletrigger: "Харагдах байдлыг өөрчлөх"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Судалгааны хэлтэй адил"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Экс.: +1(999)-999-99-99"
@@ -2480,12 +2637,6 @@ export var mnStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Жишээ нь: мм/дд/гггг ХХ:ММ:сс"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Экс.: $",
-      // "Ex.: USD"
-      suffix: "Экс.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export var mnStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Асуултын үнэ цэнийг судалгааны үр дүнд хэрэгжүүлсэн багаар хадгалахыг хүсэж байгаа эсэхээ сонго."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Формат нь огноо-цаг, тоон болон валютын оролт маскад хамаарах бүс. Хэрэв заагдаагүй бол судалгааны хэл ашиглагддаг.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Оролт масканд ашиглагддаг бүс нутгийн огнооны форматыг өөрчилнө. Хээ нь салгагч тэмдэгтүүд болон дараах түргэн тэмдэглэгчдийг агуулж болно: <br>'m' - Сарын дугаар.<br> 'mm' - Сарын дугаар, нэг оронтой утгуудыг эхлүүлсэн тэг. <br>'d' - Сарын өдөр. <br>'dd' - Сарын өдөр, нэг оронтой утгуудыг тэргүүлэгч тэг. <br>'yy' - Жилийн сүүлийн хоёр оронтой. <br>'yyyy' - Дөрвөн оронтой жил.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Оролт масканд ашиглагддаг бүс нутгийн цагийн форматыг давхарладаг. Хээ нь салгагч тэмдэгтүүд болон дараах түргэн тэмдэглэгээтэй байж болно: <br>'H' - 24 цагийн формат дахь цагууд.<br> 'HH' - 24 цагийн формат дахь цагууд, нэг оронтой утгуудыг эхлүүлсэн тэг. <br>'h' - 12 цагийн форматын цагууд. <br>'hh' - 12 цагийн форматын цагууд, нэг оронтой утгуудыг эхлүүлсэн тэг. <br>'MM' - Минутууд. <br>'ss' - Секундууд. <br>'TT' - 12 цагийн цагийн хугацаа том үсгээр (AM/PM). <br>'tt' - жижиг үсгээр 12 цагийн хугацаа (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Оролт маск дахь тооны хуваархай хэсгийг бүхэл тооны бүхэл хэсгээс тусгаарлахад ашигладаг тэмдэгтийг даван туулна.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Оролт маск дахь олон тооны цифруудыг гурван бүлэглэлд хуваахад бүс нутгийн хэрэглэдэг тэмдэгтийг өөрчилдөг.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Оролт масканд ашиглагддаг бүс нутгийн валютын тэмдэг эсвэл кодыг өөрчилдөг.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Оролт масканд ашиглагддаг бүс нутгийн валютын хэв маягийг даван туулна. Загвар дараах товчлолуудыг агуулж болно: <br>'@' - Валютын тэмдэг эсвэл код.<br> '#' - Тоо. <br>'-' - Минус тэмдэгийн сөрөг утгууд дахь байрлал (хассан бол минус тэмдэгийг эхэнд байрлуулна)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Загвар нь уянгын шууд болон дараах байрлагчийг агуулж болно: '9' - тоон хувьд; 'a' - дээд буюу доод талын үсгийн хувьд; '#' - цифр эсвэл дээд, эсвэл доод кейс үсгийн хувьд. Дүрээс зугтахын тулд backslash '\\' ашигла."
@@ -3007,10 +3174,10 @@ export var mnStrings = {
       precision: "Үзүүлсэн дугаарын хувьд decimal цэгийн дараа хэдэн цифрийг хадгалахыг хязгаарлана."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Үнэ цэнийн өмнө үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Валютын тэмдэг эсвэл код, утгаараа илэрхийлэгдсэн. Бүс нутгийн тэмдэг анхдагчаар ашиглагддаг. Энэ шинж чанарыг устгаж, тэмдэг харагдахгүй болно.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Дугаар, валютын тэмдэг, минус тэмдэгний байрлалыг заана. Загвар дараах орлуулалтуудыг агуулж болно: <br>'@' - Валютын тэмдэг эсвэл код.<br> '#' - Тоо. <br>'-' - Минус тэмдэгтийн сөрөг утгууд дахь байрлал (хассан бол минус тэмдэгийг эхэнд байрлуулна)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

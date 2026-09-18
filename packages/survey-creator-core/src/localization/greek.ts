@@ -525,17 +525,17 @@ export var grStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Μεταβλητές",
-    // [Auto-translated] "No variables"
-    noPreset: "Καμία μεταβλητή",
-    // [Auto-translated] "View"
-    view: "Προβολή",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Μεταβλητή προεπιλογή",
+    // [Auto-translated] "None"
+    noPreset: "Κανένας",
+    // [Auto-translated] "View variable values"
+    view: "Προβολή τιμών μεταβλητών",
     // [Auto-translated] "Variable values"
     viewTitle: "Μεταβλητές τιμές",
-    // [Auto-translated] "Edit"
-    edit: "Επεξεργασία",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Διαχείριση προεπιλογών",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Μεταβλητές προεπιλογές",
     // [Auto-translated] "Preset"
     presetName: "Προεπιλογή",
@@ -749,7 +749,9 @@ export var grStrings = {
       // "Survey description"
       description: "Περιγραφή ερωτηματολογίου",
       // "Make the survey read-only"
-      readOnly: "Κάνε το ερωτηματολόγιο μόνο για ανάγνωση"
+      readOnly: "Κάνε το ερωτηματολόγιο μόνο για ανάγνωση",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Τοπικές μορφές"
     },
     page: {
       // "Page name"
@@ -801,6 +803,22 @@ export var grStrings = {
       // "Save masked value in survey results"
       saveMaskedValue: "Αποθήκευση τιμής με μάσκα στα αποτελέσματα του ερωτηματολογίου"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Περιοχή",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Μοτίβο ημερομηνίας",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Μοτίβο χρόνου",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Διαχωριστικό δεκαδικών ψηφίων",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Διαχωριστικό χιλιάδων",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Σύμβολο νομίσματος",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Μοτίβο νομίσματος"
+    },
     patternmask: {
       // "Value pattern"
       pattern: "Μοτίβο τιμής"
@@ -826,10 +844,10 @@ export var grStrings = {
       max: "Μέγιστη τιμή"
     },
     currencymask: {
-      // "Currency prefix"
-      prefix: "Πρόθεμα νομίσματος",
-      // "Currency suffix"
-      suffix: "Επίθεμα νομίσματος"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Σύμβολο νομίσματος",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Μοτίβο νομίσματος"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Απαλοιφή άλλων όταν είναι επιλεγμένο",
@@ -1613,6 +1631,8 @@ export var grStrings = {
       question: "Ρυθμίσεις Ερώτησης",
       // "Pages"
       pages: "Σελίδες",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Τοπικές μορφές",
       // "Quiz Mode"
       timer: "Λειτουργία Κουίζ",
       // "Calculated Values"
@@ -2398,6 +2418,139 @@ export var grStrings = {
       container: "Ίδιο με το κοντέινερ"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Αραβικά",
+    // [Auto-translated] "Bulgarian"
+    bg: "Βουλγαρικά",
+    // [Auto-translated] "Catalan"
+    ca: "Καταλανικά",
+    // [Auto-translated] "Czech"
+    cs: "Τσεχικά",
+    // [Auto-translated] "Welsh"
+    cy: "Ουαλικά",
+    // [Auto-translated] "Danish"
+    da: "Δανέζικα",
+    // [Auto-translated] "German"
+    de: "Γερμανικά",
+    // [Auto-translated] "Greek"
+    el: "Ελληνικά",
+    // [Auto-translated] "English"
+    en: "Αγγλικά",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Αγγλικά (Αυστραλίας)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Αγγλικά (Καναδάς)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Ελληνικά",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Αγγλικά (Ιρλανδία)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Αγγλικά (Ινδίας)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Αγγλικά (Νέας Ζηλανδίας)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Αγγλικά (Νότια Αφρική)",
+    // [Auto-translated] "Spanish"
+    es: "Ισπανικά",
+    // [Auto-translated] "Estonian"
+    et: "Εσθονικά",
+    // [Auto-translated] "Basque"
+    eu: "Βασκικά",
+    // [Auto-translated] "Persian"
+    fa: "Περσικά",
+    // [Auto-translated] "Finnish"
+    fi: "Φινλανδικός",
+    // [Auto-translated] "Filipino"
+    fil: "Φιλιππινέζικα",
+    // [Auto-translated] "French"
+    fr: "γαλλική γλώσσα",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Γαλλικά (Καναδάς)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Γαλλικά (Ελβετίας)",
+    // [Auto-translated] "Hebrew"
+    he: "Εβραϊκά",
+    // [Auto-translated] "Hindi"
+    hi: "Χίντι",
+    // [Auto-translated] "Croatian"
+    hr: "Κροατικά",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Κρεολή της Αϊτής",
+    // [Auto-translated] "Hungarian"
+    hu: "Ουγγρικά",
+    // [Auto-translated] "Indonesian"
+    id: "Ινδονησιακά",
+    // [Auto-translated] "Icelandic"
+    is: "Ισλανδικά",
+    // [Auto-translated] "Italian"
+    it: "ιταλικός",
+    // [Auto-translated] "Japanese"
+    ja: "Ιαπωνικά",
+    // [Auto-translated] "Georgian"
+    ka: "Γεωργιανά",
+    // [Auto-translated] "Kazakh"
+    kk: "Καζακστάν",
+    // [Auto-translated] "Korean"
+    ko: "Κορεάτικα",
+    // [Auto-translated] "Lithuanian"
+    lt: "Λιθουανικά",
+    // [Auto-translated] "Latvian"
+    lv: "Λετονικά",
+    // [Auto-translated] "Macedonian"
+    mk: "Μακεδονικά",
+    // [Auto-translated] "Burmese"
+    mm: "Βιρμανικά",
+    // [Auto-translated] "Malay"
+    ms: "Μαλαϊκά",
+    // [Auto-translated] "Dutch"
+    nl: "Ολλανδικά",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Ολλανδικά (Βέλγιο)",
+    // [Auto-translated] "Norwegian"
+    no: "Νορβηγ",
+    // [Auto-translated] "Polish"
+    pl: "Πολωνικά",
+    // [Auto-translated] "Portuguese"
+    pt: "Πορτογαλικά",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Πορτογαλικά (Βραζιλίας)",
+    // [Auto-translated] "Romanian"
+    ro: "Ρουμανικά",
+    // [Auto-translated] "Russian"
+    ru: "Ρωσικά",
+    // [Auto-translated] "Slovak"
+    sk: "Σλοβακικά",
+    // [Auto-translated] "Slovenian"
+    sl: "Σλοβενικά",
+    // [Auto-translated] "Serbian"
+    sr: "Σερβικά",
+    // [Auto-translated] "Swedish"
+    sv: "Σουηδικά",
+    // [Auto-translated] "Swahili"
+    sw: "Σουαχίλι",
+    // [Auto-translated] "Telugu"
+    tel: "Τελούγκου",
+    // [Auto-translated] "Tajik"
+    tg: "Τατζικιστάν",
+    // [Auto-translated] "Thai"
+    th: "Ταϊλανδικά",
+    // [Auto-translated] "Turkish"
+    tr: "Τούρκικος",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ουκρανικά",
+    // [Auto-translated] "Urdu"
+    ur: "Ουρντού",
+    // [Auto-translated] "Vietnamese"
+    vi: "Βιετναμέζικα",
+    // [Auto-translated] "Chinese"
+    zh: "κινέζικα",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Κινέζικα (Απλοποιημένα)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Κινέζικα (Παραδοσιακά)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export var grStrings = {
     visibletrigger: "Αλλαγή ορατότητας (παρωχημένο)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Το ίδιο με τη γλώσσα της έρευνας"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "π.χ.: +1(999)-999-99-99"
@@ -2480,12 +2637,6 @@ export var grStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "π.χ.: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "π.χ.: $",
-      // "Ex.: USD"
-      suffix: "π.χ.: USD"
     },
     panelbase: {
       // "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export var grStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Επιλέξτε αν θέλετε να αποθηκεύσετε την τιμή της ερώτησης με την εφαρμοσμένη μάσκα στα αποτελέσματα της έρευνας."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Μια περιοχή της οποίας οι μορφές ισχύουν για μάσκες εισαγωγής ημερομηνίας-ώρας, αριθμητικών και νομισματικών μονάδων. Εάν δεν καθορίζεται, χρησιμοποιείται η γλώσσα της έρευνας.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Παρακάμπτει τη μορφή ημερομηνίας της περιοχής που χρησιμοποιείται στις μάσκες εισαγωγής. Το μοτίβο μπορεί να περιέχει διαχωριστικούς χαρακτήρες και τα ακόλουθα σύμβολα κράτησης θέσης: <br>'m' - Αριθμός μήνα.<br> 'mm' - Αριθμός μήνα, με μηδενικό στην αρχή για μονοψήφιες τιμές. <br>'d' - Ημέρα του μήνα. <br>'dd' - Ημέρα του μήνα, με μηδενικό στην αρχή για μονοψήφιες τιμές. <br>'yy' - Τα δύο τελευταία ψηφία του έτους. <br>'yyy' - Τετραψήφιο έτος.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Παρακάμπτει τη μορφή ώρας της περιοχής που χρησιμοποιείται στις μάσκες εισαγωγής. Το μοτίβο μπορεί να περιέχει διαχωριστικούς χαρακτήρες και τα ακόλουθα σύμβολα κράτησης θέσης: <br>'H' - Ώρες σε 24ωρη μορφή.<br> 'HH' - Ώρες σε 24ωρη μορφή, με μηδενικό στην αρχή για μονοψήφιες τιμές. <br>'h' - Ώρες σε 12ωρη μορφή. <br>'hh' - Ώρες σε 12ωρη μορφή, με μηδενικό στην αρχή για μονοψήφιες τιμές. <br>'MM' - Λεπτά. <br>'ss' - Δευτερόλεπτα. <br>'TT' - Περίοδος ρολογιού 12 ωρών με κεφαλαία (ΠΜ/ΜΜ). <br>'TT' - Περίοδος ρολογιού 12 ωρών με πεζά (ΠΜ/ΜΜ).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Παρακάμπτει το σύμβολο που χρησιμοποιεί η περιοχή για να διαχωρίσει το κλασματικό μέρος από το ακέραιο μέρος ενός εμφανιζόμενου αριθμού στις μάσκες εισαγωγής.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Παρακάμπτει το σύμβολο που χρησιμοποιεί η περιοχή για να διαχωρίσει τα ψηφία ενός μεγάλου αριθμού σε ομάδες των τριών στις μάσκες εισαγωγής.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Παρακάμπτει το σύμβολο νομίσματος ή τον κωδικό της περιοχής που χρησιμοποιείται στις μάσκες εισαγωγής.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Παρακάμπτει το μοτίβο νομισματικής μονάδας της περιοχής που χρησιμοποιείται στις μάσκες εισαγωγής. Το μοτίβο μπορεί να περιέχει τα ακόλουθα σύμβολα κράτησης θέσης: <br>'@' - Σύμβολο ή κωδικός νομισματικής μονάδας.<br> '#' - Αριθμός. <br>'-' - Θέση του συμβόλου μείον σε αρνητικές τιμές (εάν παραλειφθεί, το σύμβολο μείον τοποθετείται στην αρχή)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Το μοτίβο μπορεί να περιλαμβάνει κυριολεκτικές συμβολοσειρές και τους ακόλουθους χώρους κράτησης: `9` - για έναν αριθμό; `a` - για ένα γράμμα πεζό ή κεφαλαίο; `#` - για έναν αριθμό ή ένα γράμμα πεζό ή κεφαλαίο. Χρησιμοποιήστε την απόστροφο `\\` για να διαφύγετε ένα χαρακτήρα."
@@ -3007,10 +3174,10 @@ export var grStrings = {
       precision: "Περιορίζει πόσα ψηφία θα διατηρηθούν μετά την υποδιαστολή για έναν αριθμό που εμφανίζεται."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Ένα ή περισσότερα σύμβολα που θα εμφανιστούν πριν την τιμή.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Ένα ή περισσότερα σύμβολα που θα εμφανιστούν μετά την τιμή."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Ένα σύμβολο νομισματικής μονάδας ή ένας κωδικός που εμφανίζεται με την τιμή. Το σύμβολο της περιοχής χρησιμοποιείται από προεπιλογή. Καταργήστε αυτήν την ιδιότητα για να μην εμφανίζεται κανένα σύμβολο.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Καθορίζει τις θέσεις του αριθμού, του συμβόλου νομίσματος και του συμβόλου μείον. Το μοτίβο μπορεί να περιέχει τα ακόλουθα σύμβολα κράτησης θέσης:<br>'@' - Σύμβολο ή κωδικός νομίσματος.<br> '#' - Αριθμός. <br>'-' - Θέση του συμβόλου μείον σε αρνητικές τιμές (εάν παραλειφθεί, το σύμβολο μείον τοποθετείται στην αρχή)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

@@ -6,6 +6,7 @@ import { notShortCircuitAnd } from "../../utils/utils";
 import { createPageSelectorLocTitle } from "../../utils/actions";
 import { findSuitableTheme, isThemeEmpty } from "./theme-model";
 import { VariablePresetsManager } from "../../variable-presets";
+import { VariablesViewerModel } from "../variables-viewer/variables-viewer";
 
 export class PreviewViewModel extends Base {
   public enableInvisiblePages: boolean = true;
@@ -386,7 +387,7 @@ export class PreviewViewModel extends Base {
     this.selectVariablePresetAction = createDropdownActionModel({
       id: "variablePresetSelector",
       css: "svc-variable-preset-selector",
-      title: getLocString("vp.noPreset"),
+      title: getLocString("vp.selectorTitle") + ": " + getLocString("vp.noPreset"),
       visible: false
     }, {
       items: [],
@@ -438,9 +439,8 @@ export class PreviewViewModel extends Base {
     const listModel: ListModel = this.selectVariablePresetAction.popupModel.contentComponentData.model;
     listModel.setItems(items);
     listModel.selectedItem = items.filter(item => item.id === activeName)[0];
-    this.selectVariablePresetAction.title = !!activeName
-      ? getLocString("vp.selectorTitle") + ": " + activeName
-      : getLocString("vp.noPreset");
+    this.selectVariablePresetAction.title = getLocString("vp.selectorTitle") + ": " +
+      (!!activeName ? activeName : getLocString("vp.noPreset"));
     // No manager - the Theme tab inherits this toolbar and does not run presets - means no
     // controls, whatever the creator holds.
     const hasVariables = !!this.variablePresets && (names.length > 0 || presets.hasDefinition);
@@ -473,24 +473,18 @@ export class PreviewViewModel extends Base {
       this.showVariablesViewDialog();
     }
   }
-  // A read-only comment question, not the Ace JSON editor: these values are not edited, not
-  // validated and never written back, so the editor's completion, worker and bundle size buy
-  // nothing here.
+  // A plain read-only textarea that fills the dialog - neither a survey nor the Ace JSON editor:
+  // these values are not edited, not validated and never written back.
   public showVariablesViewDialog(): void {
     const creator = this.surveyProvider;
-    const survey = creator.createSurvey({
-      elements: [{
-        type: "comment", name: "variables", titleLocation: "hidden",
-        readOnly: true, autoGrow: true, rows: 12
-      }]
-    }, "variable-presets-view", this);
-    survey.setValue("variables", JSON.stringify(this.activeVariables, null, 2));
+    const title = getLocString("vp.viewTitle") + " - " + this.activeVariablePreset;
+    const model = new VariablesViewerModel(JSON.stringify(this.activeVariables, null, 2), title);
     const popupModel = surveySettings.showDialog(<IDialogOptions>{
-      componentName: "survey",
-      data: { survey: survey, model: survey },
+      componentName: "svc-variables-viewer",
+      data: { model: model },
       onApply: (): boolean => { return true; },
-      cssClass: "svc-property-editor svc-creator-popup",
-      title: getLocString("vp.viewTitle") + " - " + this.activeVariablePreset,
+      cssClass: "svc-creator-popup svc-variables-viewer-popup",
+      title: title,
       displayMode: "popup"
     }, creator.rootElement);
     if (!!popupModel) {

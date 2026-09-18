@@ -123,4 +123,4 @@ To add an image or video to a form, follow these steps:
 
 ## Limitations
 
-A survey or form created in the [free form builder demo](https://surveyjs.io/create-free-survey) can accept up to 64KB of files in total. If you wish to have an unlimited total size for all uploaded files, including images and videos, we recommend integrating [Survey Creator](https://surveyjs.io/open-source).
+A survey or form created in the [free form builder demo](https://surveyjs.io/create-free-survey) can accept up to 64KB of files in total. If you wish to have an unlimited total size for all uploaded files, including images and videos, we recommend integrating [Survey Creator](https://surveyjs.io/survey-creator).

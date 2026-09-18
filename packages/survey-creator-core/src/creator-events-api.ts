@@ -1227,30 +1227,32 @@ export interface AllowInplaceEditEvent {
    */
   allow: boolean;
 }
-// Raised when the active variable preset changes or the preset container is edited. Creator has no
-// user-settings layer, so it does not persist the choice itself (issue #7982): a host that wants the
-// selection or the edited presets to survive a reload saves them here and assigns them back on the
-// next construction.
 export interface VariablePresetsChangedEvent {
-  // "select" - the active preset changed; "edit" - the preset list or a preset's values changed.
-  reason: string;
-  // The whole container, as the creator holds it.
+  /**
+   * The reason the event was raised: `"select"` if the active preset changed or `"edit"` if the preset list or a preset's variable values changed.
+   */
+  reason: "select" | "edit";
+  /**
+   * The current [variable preset](#variablePresets) configuration.
+   */
   variablePresets: ISurveyVariablePresets;
-  // The name of the active preset, or an empty string when none is active.
-  active: string;
+  /**
+   * The name of the active preset, or an empty string if no preset is active.
+   */
+  activePresetName: string;
 }
-
-// Raised for every preset the variable preset editor shows, so that a host can narrow the manager's
-// three flags per preset - the issue's premise is that a developer ships read-only presets and a
-// user adds their own next to them (issue #7982). It is an event and not a field on
-// ISurveyVariablePreset because that interface is core's document format, shared verbatim with the
-// tester and the linter, and a Creator permission must not enter the host's document.
 export interface VariablePresetEditingEvent {
-  // The preset in question, as the editor's working copy holds it.
+  /**
+   * A variable preset for which Survey Creator obtains permitted operations. The object contains `name`, `description`, and `variables`.
+   */
   preset: ISurveyVariablePreset;
-  // In: the manager's allowEdit. Out: the host's answer for this preset.
+  /**
+   * A Boolean property that you can set to `false` to prevent users from editing the preset.
+   */
   allowEdit: boolean;
-  // In: the manager's allowDelete. Out: the host's answer for this preset.
+  /**
+   * A Boolean property that you can set to `false` to prevent users from deleting the preset.
+   */
   allowDelete: boolean;
 }
 

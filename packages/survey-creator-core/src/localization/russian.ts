@@ -525,18 +525,18 @@ export var ruStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Переменные",
-    // [Auto-translated] "No variables"
-    noPreset: "Без переменных",
-    // [Auto-translated] "View"
-    view: "Вид",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Пресет переменных",
+    // [Auto-translated] "None"
+    noPreset: "Нет",
+    // [Auto-translated] "View variable values"
+    view: "Просмотр значений переменных",
     // [Auto-translated] "Variable values"
     viewTitle: "Значения переменных",
-    // [Auto-translated] "Edit"
-    edit: "Редактирование",
-    // [Auto-translated] "Variable presets"
-    editorTitle: "Пресеты переменных",
+    // [Auto-translated] "Manage presets"
+    edit: "Управление пресетами",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Переменные пресеты",
     // [Auto-translated] "Preset"
     presetName: "Пресет",
     // [Auto-translated] "Description"
@@ -749,7 +749,9 @@ export var ruStrings = {
       // [Auto-translated] "Survey description"
       description: "Описание опроса",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Сделайте опрос доступным только для чтения"
+      readOnly: "Сделайте опрос доступным только для чтения",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Региональные форматы"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var ruStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Сохранение замаскированного значения в результатах опроса"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Регион",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Схема дат",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Временной схема",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Десятичный сепаратор",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Сепаратор тысяч",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Символ валюты",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валютный паттерн"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Шаблон значения"
@@ -826,10 +844,10 @@ export var ruStrings = {
       max: "Максимальное значение"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Префикс валюты",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Суффикс валюты"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Символ валюты",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валютный паттерн"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Удалить другие при выборе",
@@ -1613,6 +1631,8 @@ export var ruStrings = {
       question: "Вопрос",
       // [Auto-translated] "Pages"
       pages: "Страниц",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Региональные форматы",
       // "Quiz Mode"
       timer: "Таймер/Викторина",
       // "Calculated Values"
@@ -2398,6 +2418,139 @@ export var ruStrings = {
       container: "То же, что и контейнер"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Арабский",
+    // [Auto-translated] "Bulgarian"
+    bg: "Болгарский",
+    // [Auto-translated] "Catalan"
+    ca: "Каталонский",
+    // [Auto-translated] "Czech"
+    cs: "Чешская",
+    // [Auto-translated] "Welsh"
+    cy: "Валлийский",
+    // [Auto-translated] "Danish"
+    da: "Датский",
+    // [Auto-translated] "German"
+    de: "Немецкий",
+    // [Auto-translated] "Greek"
+    el: "Греческая",
+    // [Auto-translated] "English"
+    en: "Английский",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Английский (Австралия)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Английский (Канада)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Английский (Великобритания)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Английский (Ирландия)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Английский (Индия)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Английский (Новая Зеландия)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Английский (Южная Африка)",
+    // [Auto-translated] "Spanish"
+    es: "Испанский",
+    // [Auto-translated] "Estonian"
+    et: "Эстонский",
+    // [Auto-translated] "Basque"
+    eu: "Баскский",
+    // [Auto-translated] "Persian"
+    fa: "Персидский",
+    // [Auto-translated] "Finnish"
+    fi: "Финский",
+    // [Auto-translated] "Filipino"
+    fil: "Филиппинцы",
+    // [Auto-translated] "French"
+    fr: "Французский",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Френч (Канада)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Французский (Швейцария)",
+    // [Auto-translated] "Hebrew"
+    he: "Иврит",
+    // [Auto-translated] "Hindi"
+    hi: "Хинди",
+    // [Auto-translated] "Croatian"
+    hr: "Хорватский",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Гаитянский креольский",
+    // [Auto-translated] "Hungarian"
+    hu: "Венгерский",
+    // [Auto-translated] "Indonesian"
+    id: "Индонезийский",
+    // [Auto-translated] "Icelandic"
+    is: "Исландский",
+    // [Auto-translated] "Italian"
+    it: "Итальянский",
+    // [Auto-translated] "Japanese"
+    ja: "Японская",
+    // [Auto-translated] "Georgian"
+    ka: "Грузинская",
+    // [Auto-translated] "Kazakh"
+    kk: "Казахский",
+    // [Auto-translated] "Korean"
+    ko: "Корейская",
+    // [Auto-translated] "Lithuanian"
+    lt: "Литовский",
+    // [Auto-translated] "Latvian"
+    lv: "Латышский",
+    // [Auto-translated] "Macedonian"
+    mk: "Македонец",
+    // [Auto-translated] "Burmese"
+    mm: "Бирманский",
+    // [Auto-translated] "Malay"
+    ms: "Малайский",
+    // [Auto-translated] "Dutch"
+    nl: "Голландский",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Голландцы (Бельгия)",
+    // [Auto-translated] "Norwegian"
+    no: "Норвежский",
+    // [Auto-translated] "Polish"
+    pl: "Польская",
+    // [Auto-translated] "Portuguese"
+    pt: "Португальский",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Португальский (Бразилия)",
+    // [Auto-translated] "Romanian"
+    ro: "Румынский",
+    // [Auto-translated] "Russian"
+    ru: "Русские",
+    // [Auto-translated] "Slovak"
+    sk: "Словацкий",
+    // [Auto-translated] "Slovenian"
+    sl: "словенский",
+    // [Auto-translated] "Serbian"
+    sr: "Сербская",
+    // [Auto-translated] "Swedish"
+    sv: "Шведский",
+    // [Auto-translated] "Swahili"
+    sw: "Суахили",
+    // [Auto-translated] "Telugu"
+    tel: "Телугу",
+    // [Auto-translated] "Tajik"
+    tg: "Таджикский",
+    // [Auto-translated] "Thai"
+    th: "Тайский",
+    // [Auto-translated] "Turkish"
+    tr: "Турецкий",
+    // [Auto-translated] "Ukrainian"
+    uk: "Украинские",
+    // [Auto-translated] "Urdu"
+    ur: "Урду",
+    // [Auto-translated] "Vietnamese"
+    vi: "Вьетнамский",
+    // [Auto-translated] "Chinese"
+    zh: "Китайский",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Китайский (упрощённый)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Китайский (традиционный)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export var ruStrings = {
     visibletrigger: "Изменить видимость (не рекомендуется)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "То же самое, что и язык для опросов"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Пример: +1(999)-999-99-99"
@@ -2480,12 +2637,6 @@ export var ruStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Пример: мм/дд/гггг чч:мм:сс"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Пример: $",
-      // "Ex.: USD"
-      suffix: "Пример: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export var ruStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Выберите, хотите ли вы сохранить значение вопроса с примененной маской в результатах опроса."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Регион, форматы которого применяются к маске ввода даты-времени, числовых и валютных данных. Если не указано, используется язык опроса.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Переопределяет формат даты региона, используемый в входных масках. Узор может содержать разделительные символы и следующие заполнятели: <br>'m' — номер месяца.<br> 'mm' — номер месяца, с началом нуля для однозначных значений. <br>'d' — день месяца. <br>'dd' — день месяца, с ведущим нулём для однозначных значений. <br>'yy' — последние две цифры года. <br>'yyy' — четырёхзначный год.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Переопределяет временной формат региона, используемый в входных масках. Шаблон может содержать разделительные символы и следующие заполняющие значения: <br>'H' — часы в формате 24 часа.<br> 'HH' — часы в формате 24 часа, с ведущим нулём для однозначных значений. <br>'h' — часы в формате 12 часов. <br>'hh' — часы в формате 12 часов, с ведущим нулём для однозначных значений. <br>'MM' — минуты. <br>'ss' — секунды. <br>'TT' — 12-часовой часовой период заглавной буквы (AM/PM). <br>'tt' — 12-часовой период в строчной букве (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Переопределяет символ, который регион использует для отделения дробной части от целой части отображаемого числа в входных масках.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Переопределяет символ, который регион использует для разделения цифр большого числа на группы по три в входных масках.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Переопределяет символ валюты или код региона, используемый в входных масках.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Переопределяет валютный паттерн региона, используемый в входных масках. Паттерн может содержать следующие заполняющие элементы: <br>'@' — символ или код валюты.<br> '#' — число. <br>'-' — положение минуса в отрицательных значениях (если он опущен, минус размещается в начале)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Шаблон может содержать строковые литералы и следующие заполнители: '9' - для цифры; 'a' - для прописной или строчной буквы; '#' - для цифры или прописной или строчной буквы. Используйте обратную косую черту '\\' для экранирования символа."
@@ -3007,10 +3174,10 @@ export var ruStrings = {
       precision: "Ограничивает количество цифр, сохраняемых после десятичной запятой для отображаемого числа."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Один или несколько символов, которые будут отображаться перед значением.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Один или несколько символов, которые будут отображаться после значения."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Валютный символ или код, отображаемый с этим значением. Символ региона используется по умолчанию. Очистите это свойство, чтобы не отображаться символ.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Задаёт позиции числа, валютного символа и минуса. Шаблон может содержать следующие заполняющие элементы: <br>'@' — символ или код валюты.<br> '#' — число. <br>'-' — положение минуса в отрицательных значениях (если он опущен, минус размещается в начале)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

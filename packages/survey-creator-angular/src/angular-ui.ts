@@ -20,6 +20,7 @@ export * from "./side-bar/object-selector.component";
 export * from "./side-bar/property-grid.component";
 
 export * from "./components/component-container.component";
+export * from "./components/variables-viewer.component";
 export * from "./components/icon-item.component";
 export * from "./side-bar/side-bar-launch-card.component";
 export * from "./components/search.component";

@@ -525,17 +525,17 @@ export var czStrings = {
   },
   // Host application variables
   vp: {
-    // [Auto-translated] "Variables"
-    selectorTitle: "Proměnné",
-    // [Auto-translated] "No variables"
-    noPreset: "Žádné proměnné",
-    // [Auto-translated] "View"
-    view: "Zobrazit",
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Přednastavení proměnných",
+    // [Auto-translated] "None"
+    noPreset: "Žádné",
+    // [Auto-translated] "View variable values"
+    view: "Zobrazit hodnoty proměnných",
     // [Auto-translated] "Variable values"
     viewTitle: "Hodnoty proměnných",
-    // [Auto-translated] "Edit"
-    edit: "Edit",
-    // [Auto-translated] "Variable presets"
+    // [Auto-translated] "Manage presets"
+    edit: "Správa přednastavení",
+    // [Auto-translated] "Variable Presets"
     editorTitle: "Přednastavení proměnných",
     // [Auto-translated] "Preset"
     presetName: "Přednastavení",
@@ -749,7 +749,9 @@ export var czStrings = {
       // [Auto-translated] "Survey description"
       description: "Popis průzkumu",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Nastavení průzkumu pouze ke čtení"
+      readOnly: "Nastavení průzkumu pouze ke čtení",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionální formáty"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -801,6 +803,22 @@ export var czStrings = {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Uložit maskovanou hodnotu ve výsledcích průzkumu"
     },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Region",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Vzor dat",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Časový vzor",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Desetinný oddělovač",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Tisícový oddělovač",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Měnový symbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Měnový vzor"
+    },
     patternmask: {
       // [Auto-translated] "Value pattern"
       pattern: "Vzor hodnoty"
@@ -826,10 +844,10 @@ export var czStrings = {
       max: "Maximální hodnota"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Předpona měny",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Přípona měny"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Měnový symbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Měnový vzor"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymazat ostatní při výběru",
@@ -1613,6 +1631,8 @@ export var czStrings = {
       question: "Otázka",
       // "Pages"
       pages: "Stránky",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionální formáty",
       // "Quiz Mode"
       timer: "Časovač/kvíz",
       // "Calculated Values"
@@ -2398,6 +2418,139 @@ export var czStrings = {
       container: "Stejné jako u kontejneru"
     }
   },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabština",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulharsky",
+    // [Auto-translated] "Catalan"
+    ca: "Katalánština",
+    // [Auto-translated] "Czech"
+    cs: "Čeština",
+    // [Auto-translated] "Welsh"
+    cy: "Velšština",
+    // [Auto-translated] "Danish"
+    da: "Dánsky",
+    // [Auto-translated] "German"
+    de: "Němčina",
+    // [Auto-translated] "Greek"
+    el: "Řecky",
+    // [Auto-translated] "English"
+    en: "Angličtina",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Angličtina (Austrálie)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Angličtina (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Angličtina (Spojené království)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Angličtina (Irsko)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Angličtina (Indie)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Angličtina (Nový Zéland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Angličtina (Jihoafrická republika)",
+    // [Auto-translated] "Spanish"
+    es: "Španělština",
+    // [Auto-translated] "Estonian"
+    et: "Estonština",
+    // [Auto-translated] "Basque"
+    eu: "Baskicko",
+    // [Auto-translated] "Persian"
+    fa: "Perština",
+    // [Auto-translated] "Finnish"
+    fi: "Finsko",
+    // [Auto-translated] "Filipino"
+    fil: "Filipínština",
+    // [Auto-translated] "French"
+    fr: "Francouzština",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Francouzština (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Francouzština (Švýcarsko)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebrejsky",
+    // [Auto-translated] "Hindi"
+    hi: "Hindština",
+    // [Auto-translated] "Croatian"
+    hr: "Chorvatština",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haitská kreolština",
+    // [Auto-translated] "Hungarian"
+    hu: "Maďarština",
+    // [Auto-translated] "Indonesian"
+    id: "Indonéština",
+    // [Auto-translated] "Icelandic"
+    is: "Islandština",
+    // [Auto-translated] "Italian"
+    it: "Italsky",
+    // [Auto-translated] "Japanese"
+    ja: "Japonština",
+    // [Auto-translated] "Georgian"
+    ka: "Gruzínština",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazachština",
+    // [Auto-translated] "Korean"
+    ko: "Korejština",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litevština",
+    // [Auto-translated] "Latvian"
+    lv: "Lotyšština",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonci",
+    // [Auto-translated] "Burmese"
+    mm: "Barmská",
+    // [Auto-translated] "Malay"
+    ms: "Malajština",
+    // [Auto-translated] "Dutch"
+    nl: "Holandština",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Nizozemština (Belgie)",
+    // [Auto-translated] "Norwegian"
+    no: "Norská",
+    // [Auto-translated] "Polish"
+    pl: "Polština",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugalština",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugalština (Brazílie)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumunština",
+    // [Auto-translated] "Russian"
+    ru: "Rusky",
+    // [Auto-translated] "Slovak"
+    sk: "Slovenský",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovinský",
+    // [Auto-translated] "Serbian"
+    sr: "Srbština",
+    // [Auto-translated] "Swedish"
+    sv: "Švédština",
+    // [Auto-translated] "Swahili"
+    sw: "Svahilština",
+    // [Auto-translated] "Telugu"
+    tel: "Telugština",
+    // [Auto-translated] "Tajik"
+    tg: "Tádžik",
+    // [Auto-translated] "Thai"
+    th: "Thajská",
+    // [Auto-translated] "Turkish"
+    tr: "Turecky",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukrajinsky",
+    // [Auto-translated] "Urdu"
+    ur: "Urdština",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamci",
+    // [Auto-translated] "Chinese"
+    zh: "Čínština",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Čínština (zjednodušeně)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Čínština (tradiční)"
+  },
   // Operators
   op: {
     // "Empty"
@@ -2473,6 +2626,10 @@ export var czStrings = {
     visibletrigger: "změnit viditelnost (zastaralé)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Stejně jako jazyk průzkumu"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Př.: +1(999)-999-99-99"
@@ -2480,12 +2637,6 @@ export var czStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Př.: dd/mm/rrrr"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Př.: $",
-      // "Ex.: USD"
-      suffix: "Př.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2990,6 +3141,22 @@ export var czStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Vyberte, zda chcete uložit hodnotu otázky s použitou maskou do výsledků průzkumu."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Region, jehož formáty se vztahují na vstupní masky dat-čas, čísel a měn. Pokud není specifikováno, používá se jazyk průzkumu.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Přepisuje formát data daného regionu používaný v vstupních maskách. Vzor může obsahovat oddělovací znaky a následující zástupné znaky: <br>'m' - číslo měsíce.<br> 'mm' - číslo měsíce, s úvodní nulou pro jednociferné hodnoty. <br>'d' - den měsíce. <br>'dd' - den měsíce, s úvodní nulou pro jednociferné hodnoty. <br>'yy' - poslední dvě číslice roku. <br>'yyyy' - čtyřmístný rok.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Přepisuje časový formát regionu používaný v vstupních maskách. Vzor může obsahovat oddělovací znaky a následující zástupce: <br>'H' - Hodiny ve formátu 24 hodin.<br> 'HH' - Hodiny ve formátu 24 hodin, s úvodní nulou pro jednociferné hodnoty. <br>'H' - Hodiny ve formátu 12 hodin. <br>'HH' - Hodiny ve formátu 12 hodin, s úvodní nulou pro jednociferné hodnoty. <br>'MM' - Minuty. <br>'ss' - Sekundy. <br>'TT' - 12hodinové hodiny ve velkém (AM/PM). <br>'TT' - 12hodinové hodinové období malými písmeny (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Přepisuje symbol, který oblast používá k oddělení zlomkové části od celočíselné části zobrazeného čísla ve vstupních maskách.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Přepisuje symbol, který oblast používá k rozdělení číslic velkého čísla do skupin po třech ve vstupních maskách.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Přepisuje měnový symbol nebo kód regionu používaný v vstupních maskách.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Přepisuje měnový vzor regionu používaný v vstupních maskách. Vzor může obsahovat následující zástupce: <br>'@' - Měnový symbol nebo kód.<br> '#' - Číslo. <br>'-' - Pozice záporného znaku v záporných hodnotách (pokud je vynecháno, záporné znaménko je umístěno na začátek)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Vzor může obsahovat řetězcové literály a následující zástupné symboly: \"9\" - pro číslici; \"a\" - pro velké nebo malé písmeno; '#' - pro číslici nebo velké či malé písmeno. Pomocí zpětného lomítka \\ můžete znak uvozovat."
@@ -3007,10 +3174,10 @@ export var czStrings = {
       precision: "Omezuje, kolik číslic se má zachovat za desetinnou čárkou zobrazeného čísla."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Jeden nebo více symbolů, které mají být zobrazeny před hodnotou.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Jeden nebo více symbolů, které se zobrazí za hodnotou."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Symbol měny nebo kód zobrazený s hodnotou. Symbol regionu se používá ve výchozím nastavení. Tuto vlastnost vymažte pro zobrazení bez symbolu.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Specifikuje pozice čísla, měnového symbolu a záporného znaku. Vzor může obsahovat následující zástupce: <br>'@' - měnový symbol nebo kód.<br> '#' - číslo. <br>'-' - Pozice záporného znaku v záporných hodnotách (pokud je vynechán, záporný znak je umístěn na začátek)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."

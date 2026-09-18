@@ -3,6 +3,7 @@ import { AceJsonEditorModel, TabJsonEditorAcePlugin } from "../../src/components
 import { CreatorTester } from "../creator-tester";
 import { settings } from "../../src/creator-settings";
 import { SurveyTextWorker } from "../../src/textWorker";
+import { vi } from "vitest";
 
 test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester();
@@ -476,6 +477,492 @@ test("JsonEditor & duplicated errors in multiple text items, Bug#7398", () => {
   editor.processErrors(editor.text);
   expect(editor.hasErrors).toBeTruthy();
   expect(editor.errorList.actions).toHaveLength(1);
+});
+
+const jsonTabSurveyJson = { elements: [{ type: "text", name: "q1" }] };
+const jsonTabRenamedText = JSON.stringify({ elements: [{ type: "text", name: "q_renamed" }] }, null, 2);
+
+function createJsonTabCreator(options: any = {}): CreatorTester {
+  const creator = new CreatorTester({ showJSONEditorTab: true, ...options });
+  creator.JSON = jsonTabSurveyJson;
+  return creator;
+}
+function getJsonTabModel(creator: CreatorTester): TextareaJsonEditorModel {
+  return <TextareaJsonEditorModel>(<TabJsonEditorTextareaPlugin>creator.getPlugin("json")).model;
+}
+function getQuestionNames(creator: CreatorTester): string {
+  return creator.survey.getAllQuestions().map(q => q.name).join(",");
+}
+
+test("applyPendingChanges applies the text the JSON tab holds", () => {
+  const creator = createJsonTabCreator();
+  let modifiedCount = 0;
+  let modifiedType = "";
+  creator.onModified.add((sender, options) => { modifiedCount++; modifiedType = options.type; });
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = jsonTabRenamedText;
+
+  expect(creator.applyPendingChanges()).toBe(true);
+  expect(getQuestionNames(creator)).toBe("q_renamed");
+  expect(creator.state).toBe("modified");
+  expect(modifiedCount).toBe(1);
+  expect(modifiedType).toBe("JSON_EDITOR");
+  expect(getJsonTabModel(creator).isJSONChanged).toBeFalsy();
+
+  // the tab is still open and there is nothing left to apply
+  expect(creator.applyPendingChanges()).toBe(true);
+  expect(modifiedCount).toBe(1);
+});
+
+test("applyPendingChanges refuses a text that does not parse", () => {
+  const creator = createJsonTabCreator();
+  let modifiedCount = 0;
+  creator.onModified.add(() => { modifiedCount++; });
+  creator.activeTab = "json";
+  const model = getJsonTabModel(creator);
+  model.text = "{a: ";
+
+  expect(creator.applyPendingChanges()).toBe(false);
+  expect(getQuestionNames(creator)).toBe("q1");
+  expect(creator.state).toBe("");
+  expect(modifiedCount).toBe(0);
+  // the text stays in the editor until the author corrects it
+  expect(model.text).toBe("{a: ");
+  expect(model.isJSONChanged).toBeTruthy();
+});
+
+test("applyPendingChanges refuses a text with a blocking error", () => {
+  const creator = createJsonTabCreator();
+  creator.activeTab = "json";
+  const model = getJsonTabModel(creator);
+  model.text = "{ elements: [ { type: \"text\", name: \"q1\", customProp1: \"abc\" } ]}";
+
+  expect(model.hasErrors).toBeTruthy();
+  expect(creator.applyPendingChanges()).toBe(false);
+  expect(getQuestionNames(creator)).toBe("q1");
+});
+
+test("applyPendingChanges has nothing to do outside the JSON tab", () => {
+  const creator = createJsonTabCreator();
+  let modifiedCount = 0;
+  creator.onModified.add(() => { modifiedCount++; });
+
+  expect(creator.activeTab).toBe("designer");
+  expect(creator.applyPendingChanges()).toBe(true);
+  expect(modifiedCount).toBe(0);
+
+  creator.activeTab = "json";
+  // the tab was opened and nothing was typed into it
+  expect(creator.applyPendingChanges()).toBe(true);
+  expect(modifiedCount).toBe(0);
+});
+
+test("a read-only JSON tab applies nothing", () => {
+  const creator = createJsonTabCreator({ readOnly: true });
+  let modifiedCount = 0;
+  creator.onModified.add(() => { modifiedCount++; });
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = jsonTabRenamedText;
+
+  expect(creator.applyPendingChanges()).toBe(true);
+  expect(getQuestionNames(creator)).toBe("q1");
+  expect(modifiedCount).toBe(0);
+});
+
+test("leaving the JSON tab applies a text with errors the host allowed to leave with", () => {
+  const creator = createJsonTabCreator();
+  creator.onActiveTabChanging.add((sender, options) => {
+    if (creator.activeTab === "json") options.allow = true;
+  });
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = "{ elements: [ { type: \"text\", name: \"q_renamed\", customProp1: \"abc\" } ]}";
+
+  creator.activeTab = "designer";
+  expect(creator.activeTab).toBe("designer");
+  expect(getQuestionNames(creator)).toBe("q_renamed");
+});
+
+test("with auto-save off the pending text waits for the tab switch", () => {
+  vi.useFakeTimers();
+  try {
+    const creator = createJsonTabCreator();
+    let modifiedCount = 0;
+    let modifiedType = "";
+    creator.onModified.add((sender, options) => { modifiedCount++; modifiedType = options.type; });
+    creator.activeTab = "json";
+    getJsonTabModel(creator).text = jsonTabRenamedText;
+
+    vi.advanceTimersByTime(1000);
+    expect(getQuestionNames(creator)).toBe("q1");
+    expect(creator.state).toBe("");
+    expect(modifiedCount).toBe(0);
+
+    creator.activeTab = "designer";
+    expect(getQuestionNames(creator)).toBe("q_renamed");
+    expect(modifiedCount).toBe(1);
+    expect(modifiedType).toBe("JSON_EDITOR");
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+test("creator.JSON reads the text the JSON tab holds", () => {
+  const creator = createJsonTabCreator();
+  let modifiedCount = 0;
+  creator.onModified.add(() => { modifiedCount++; });
+  creator.activeTab = "json";
+  const model = getJsonTabModel(creator);
+  model.text = jsonTabRenamedText;
+
+  expect(creator.JSON.pages[0].elements[0].name).toBe("q_renamed");
+  expect(creator.state).toBe("modified");
+  expect(modifiedCount).toBe(1);
+  // the editor keeps the text as it was typed - the caret does not move
+  expect(model.text).toBe(jsonTabRenamedText);
+
+  expect(creator.JSON.pages[0].elements[0].name).toBe("q_renamed");
+  expect(modifiedCount).toBe(1);
+});
+
+test("creator.text reads the text the JSON tab holds", () => {
+  const creator = createJsonTabCreator();
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = jsonTabRenamedText;
+
+  const text = creator.text;
+  expect(text.indexOf("q_renamed") > -1).toBeTruthy();
+  expect(text.indexOf("q1") > -1).toBeFalsy();
+  // the survey as it saves itself, not the text as it was typed
+  expect(text.indexOf("pages") > -1).toBeTruthy();
+});
+
+test("creator.JSON keeps the last valid schema while the JSON tab does not parse", () => {
+  const creator = createJsonTabCreator();
+  let modifiedCount = 0;
+  creator.onModified.add(() => { modifiedCount++; });
+  creator.activeTab = "json";
+  const model = getJsonTabModel(creator);
+  model.text = "{a: ";
+
+  expect(creator.JSON.pages[0].elements[0].name).toBe("q1");
+  expect(modifiedCount).toBe(0);
+  expect(model.text).toBe("{a: ");
+});
+
+test("creator.JSON keeps the last valid schema while the JSON tab has a blocking error", () => {
+  const creator = createJsonTabCreator();
+  let modifiedCount = 0;
+  creator.onModified.add(() => { modifiedCount++; });
+  creator.activeTab = "json";
+  const brokenText = "{ elements: [ { type: \"text\", name: \"q_renamed\", customProp1: \"abc\" } ]}";
+  getJsonTabModel(creator).text = brokenText;
+
+  expect(creator.JSON.pages[0].elements[0].name).toBe("q1");
+  expect(creator.text.indexOf("q1") > -1).toBeTruthy();
+  expect(modifiedCount).toBe(0);
+  expect(getJsonTabModel(creator).text).toBe(brokenText);
+});
+
+test("creator.JSON and creator.text change nothing in the designer tab", () => {
+  const creator = createJsonTabCreator();
+  let modifiedCount = 0;
+  creator.onModified.add(() => { modifiedCount++; });
+
+  expect(creator.JSON.pages[0].elements[0].name).toBe("q1");
+  expect(creator.text.indexOf("q1") > -1).toBeTruthy();
+  expect(creator.state).toBe("");
+  expect(modifiedCount).toBe(0);
+});
+
+test("a handler that reads creator.JSON while the text is being applied does not re-enter", () => {
+  const creator = createJsonTabCreator();
+  let modifiedCount = 0;
+  creator.onModified.add(() => { modifiedCount++; });
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = jsonTabRenamedText;
+
+  let instanceReads = 0;
+  let nameSeenWhileCreating = "";
+  creator.onSurveyInstanceCreated.add(() => {
+    instanceReads++;
+    nameSeenWhileCreating = creator.JSON.pages[0].elements[0].name;
+  });
+
+  expect(creator.JSON.pages[0].elements[0].name).toBe("q_renamed");
+  expect(instanceReads > 0).toBeTruthy();
+  expect(nameSeenWhileCreating).toBeTruthy();
+  // the nested read did not start a second apply - one apply, one notification
+  expect(modifiedCount).toBe(1);
+});
+
+test("a handler that reads creator.JSON from onModified does not re-enter", () => {
+  const creator = createJsonTabCreator();
+  let modifiedCount = 0;
+  let nameSeen = "";
+  creator.onModified.add(() => {
+    modifiedCount++;
+    nameSeen = creator.JSON.pages[0].elements[0].name;
+  });
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = jsonTabRenamedText;
+
+  expect(creator.JSON.pages[0].elements[0].name).toBe("q_renamed");
+  expect(modifiedCount).toBe(1);
+  expect(nameSeen).toBe("q_renamed");
+});
+
+function setupJsonTabSave(creator: CreatorTester, saved: Array<string>): void {
+  creator.saveSurveyFunc = (no: number, callback: (num: number, isSuccess: boolean) => void) => {
+    saved.push(creator.JSON.pages[0].elements[0].name);
+    callback(no, true);
+  };
+}
+
+test("save() applies the text the JSON tab holds before it saves", () => {
+  const creator = createJsonTabCreator();
+  const saved: Array<string> = [];
+  setupJsonTabSave(creator, saved);
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = jsonTabRenamedText;
+
+  creator.save();
+  expect(saved).toEqual(["q_renamed"]);
+  expect(creator.state).toBe("saved");
+});
+
+test("saveSurvey() applies the text the JSON tab holds before it saves", () => {
+  const creator = createJsonTabCreator();
+  const saved: Array<string> = [];
+  setupJsonTabSave(creator, saved);
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = jsonTabRenamedText;
+
+  creator.saveSurvey();
+  expect(saved).toEqual(["q_renamed"]);
+  expect(creator.state).toBe("saved");
+});
+
+test("doSave() applies the text the JSON tab holds before it saves", () => {
+  const creator = createJsonTabCreator();
+  const saved: Array<string> = [];
+  setupJsonTabSave(creator, saved);
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = jsonTabRenamedText;
+
+  creator.doSave();
+  expect(saved).toEqual(["q_renamed"]);
+  expect(creator.state).toBe("saved");
+});
+
+test("save() with a text that does not apply saves the schema the survey has", () => {
+  const creator = createJsonTabCreator();
+  const saved: Array<string> = [];
+  setupJsonTabSave(creator, saved);
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = "{a: ";
+
+  creator.saveSurvey();
+  expect(saved).toEqual(["q1"]);
+  expect(getJsonTabModel(creator).text).toBe("{a: ");
+});
+
+test("a save started by hand does not leave the auto-save timer armed", () => {
+  vi.useFakeTimers();
+  try {
+    const creator = createJsonTabCreator();
+    creator.autoSaveEnabled = true;
+    creator.autoSaveDelay = 100;
+    const saved: Array<string> = [];
+    setupJsonTabSave(creator, saved);
+    creator.activeTab = "json";
+    getJsonTabModel(creator).text = jsonTabRenamedText;
+
+    creator.saveSurvey();
+    expect(saved).toEqual(["q_renamed"]);
+
+    vi.advanceTimersByTime(200);
+    expect(saved).toEqual(["q_renamed"]);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+test("with auto-save on the pause after a keystroke applies the text", () => {
+  vi.useFakeTimers();
+  try {
+    const creator = createJsonTabCreator();
+    creator.autoSaveEnabled = true;
+    const saved: Array<string> = [];
+    setupJsonTabSave(creator, saved);
+    let modifiedCount = 0;
+    creator.onModified.add(() => { modifiedCount++; });
+    creator.activeTab = "json";
+    const model = getJsonTabModel(creator);
+    model.text = jsonTabRenamedText;
+
+    vi.advanceTimersByTime(999);
+    expect(getQuestionNames(creator)).toBe("q1");
+    expect(saved).toEqual([]);
+
+    vi.advanceTimersByTime(1);
+    expect(getQuestionNames(creator)).toBe("q_renamed");
+    expect(saved).toEqual(["q_renamed"]);
+    expect(creator.state).toBe("saved");
+    expect(modifiedCount).toBe(1);
+    expect(model.isJSONChanged).toBeFalsy();
+    expect(model.text).toBe(jsonTabRenamedText);
+
+    creator.activeTab = "designer";
+    expect(modifiedCount).toBe(1);
+    expect(saved).toEqual(["q_renamed"]);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+test("with auto-save on a text that does not parse is applied once it is corrected", () => {
+  vi.useFakeTimers();
+  try {
+    const creator = createJsonTabCreator();
+    creator.autoSaveEnabled = true;
+    const saved: Array<string> = [];
+    setupJsonTabSave(creator, saved);
+    creator.activeTab = "json";
+    const model = getJsonTabModel(creator);
+
+    model.text = "{a: ";
+    vi.advanceTimersByTime(1000);
+    expect(getQuestionNames(creator)).toBe("q1");
+    expect(saved).toEqual([]);
+    expect(model.hasErrors).toBeTruthy();
+
+    model.text = jsonTabRenamedText;
+    vi.advanceTimersByTime(1000);
+    expect(getQuestionNames(creator)).toBe("q_renamed");
+    expect(saved).toEqual(["q_renamed"]);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+test("auto-save switched on while the JSON tab is open applies the next pause", () => {
+  vi.useFakeTimers();
+  try {
+    const creator = createJsonTabCreator();
+    const saved: Array<string> = [];
+    setupJsonTabSave(creator, saved);
+    creator.activeTab = "json";
+    const model = getJsonTabModel(creator);
+
+    model.text = jsonTabRenamedText;
+    vi.advanceTimersByTime(1000);
+    expect(getQuestionNames(creator)).toBe("q1");
+
+    creator.autoSaveEnabled = true;
+    model.text = JSON.stringify({ elements: [{ type: "text", name: "q_typed_again" }] }, null, 2);
+    vi.advanceTimersByTime(1000);
+    expect(getQuestionNames(creator)).toBe("q_typed_again");
+    expect(saved).toEqual(["q_typed_again"]);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+test("leaving the JSON tab cancels the pause the editor was waiting out", () => {
+  vi.useFakeTimers();
+  try {
+    const creator = createJsonTabCreator();
+    creator.autoSaveEnabled = true;
+    const saved: Array<string> = [];
+    setupJsonTabSave(creator, saved);
+    let modifiedCount = 0;
+    creator.onModified.add(() => { modifiedCount++; });
+    creator.activeTab = "json";
+    const model = getJsonTabModel(creator);
+    model.text = jsonTabRenamedText;
+
+    creator.activeTab = "designer";
+    expect(getQuestionNames(creator)).toBe("q_renamed");
+    expect(modifiedCount).toBe(1);
+    expect(model["jsonEditorChangedTimeoutId"]).toBe(-1);
+
+    vi.advanceTimersByTime(1000);
+    expect(modifiedCount).toBe(1);
+    expect(saved).toEqual(["q_renamed"]);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+test("with auto-save on an imported file reaches the survey", async () => {
+  const creator = createJsonTabCreator();
+  creator.autoSaveEnabled = true;
+  const saved: Array<string> = [];
+  setupJsonTabSave(creator, saved);
+  creator.activeTab = "json";
+  const plugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
+  const data = JSON.stringify({
+    elements: [{ type: "text", name: "q_imported_1" }, { type: "text", name: "q_imported_2" }]
+  }, null, 2);
+
+  await new Promise<void>(resolve => {
+    plugin.importFromFile(new Blob([data], { type: "application/json" }) as any, () => resolve());
+  });
+  await new Promise<void>(resolve => { setTimeout(resolve, 1100); });
+
+  expect(getQuestionNames(creator)).toBe("q_imported_1,q_imported_2");
+  expect(saved).toEqual(["q_imported_1"]);
+});
+
+test("with auto-save on a repaired error reaches the survey", () => {
+  vi.useFakeTimers();
+  try {
+    const creator = createJsonTabCreator();
+    creator.autoSaveEnabled = true;
+    const saved: Array<string> = [];
+    setupJsonTabSave(creator, saved);
+    creator.activeTab = "json";
+    const model = getJsonTabModel(creator);
+    model.text = JSON.stringify({
+      elements: [{ type: "text", name: "q1" }, { type: "text", name: "q1" }]
+    }, null, 2);
+
+    expect(model.errorList.actions).toHaveLength(1);
+    model.errorList.actions[0].data.fixError();
+    expect(model.hasErrors).toBeFalsy();
+
+    vi.advanceTimersByTime(1000);
+    expect(getQuestionNames(creator)).toBe("q1,question1");
+    expect(saved).toEqual(["q1"]);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+test("Ace: an edit made while the editor is not focused reaches the survey", () => {
+  const creator = createJsonTabCreator();
+  const model = new AceJsonEditorModel(creator);
+  const ace = createAceMock();
+  model.init(ace);
+  expect(model.isJSONChanged).toBeFalsy();
+
+  // the Fix button and the search box replace change the text with the editor unfocused
+  ace.setValue(jsonTabRenamedText);
+  expect(model.isJSONChanged).toBeTruthy();
+
+  expect(model.applyChanges()).toBe(true);
+  expect(getQuestionNames(creator)).toBe("q_renamed");
+  expect(model.isJSONChanged).toBeFalsy();
+  model.dispose();
+});
+
+test("switching the creator to read-only keeps the text the JSON tab held", () => {
+  const creator = createJsonTabCreator();
+  creator.activeTab = "json";
+  getJsonTabModel(creator).text = jsonTabRenamedText;
+
+  creator.readOnly = true;
+  expect(getQuestionNames(creator)).toBe("q_renamed");
 });
 
 test("getScrollTopForCaret keeps the caret line whole in the view", () => {

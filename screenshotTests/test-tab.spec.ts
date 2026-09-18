@@ -162,7 +162,6 @@ test.describe(title, () => {
     const json = {
       showQuestionNumbers: true,
       headerView: "basic",
-      "autoFocusFirstQuestion": true,
       "title": "American History",
       "showTimer": true,
       "timerLocation": "bottom",

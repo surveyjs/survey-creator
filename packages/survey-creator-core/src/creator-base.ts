@@ -1859,6 +1859,14 @@ export class SurveyCreatorModel extends Base
   private get currentPlugin(): ICreatorPlugin {
     return this.getPlugin(this.activeTab);
   }
+  /**
+   * Applies pending changes in the active tab to the survey configuration.
+   * @returns `true` if there are no pending changes or if the changes are applied successfully;  `false` if pending changes cannot be applied.
+   */
+  public applyPendingChanges(): boolean {
+    const plugin = this.currentPlugin;
+    return !plugin || !plugin.applyPendingChanges ? true : plugin.applyPendingChanges();
+  }
 
   /**
    * Provides access to the [Toolbox API](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox).
@@ -2931,6 +2939,7 @@ export class SurveyCreatorModel extends Base
     if (!!this.getSurveyJSONTextCallback) {
       return this.getSurveyJSONTextCallback().text;
     }
+    this.applyPendingChanges();
     return this.getSurveyTextFromDesigner();
   }
   public set text(value: string) {
@@ -3235,6 +3244,9 @@ export class SurveyCreatorModel extends Base
    * This property allows you to get or set the JSON schema of a survey being configured. Alternatively, you can use the [`text`](#text) property.
    */
   public get JSON(): any {
+    // the JSON tab may hold text the survey does not have yet: whoever reads the schema while
+    // that tab is open gets the latest text that applies, the way leaving the tab would give it
+    this.applyPendingChanges();
     const json = (<any>this.survey).toJSON();
     return this.singlePageJSON(json);
   }
@@ -4484,6 +4496,11 @@ export class SurveyCreatorModel extends Base
   }
   saveNo: number = 0;
   private _doSaveCore(onSaveComplete?: () => void) {
+    // the save that runs now carries everything the armed auto-save would have carried
+    if (!!this.autoSaveTimerId) {
+      clearTimeout(this.autoSaveTimerId);
+      this.autoSaveTimerId = null;
+    }
     this.setState("saving");
     if (this.saveSurveyFunc) {
       this.saveNo++;
@@ -4507,9 +4524,11 @@ export class SurveyCreatorModel extends Base
    * @see save
    */
   public saveSurvey() {
+    this.applyPendingChanges();
     this._doSaveCore();
   }
   public doSave() {
+    this.applyPendingChanges();
     this._doSaveCore();
   }
   public saveSurveyActionHandler() {
@@ -4541,6 +4560,8 @@ export class SurveyCreatorModel extends Base
    * @see saveTheme
    */
   public save() {
+    // before the state is read: the active tab may hold the very edit that makes it "modified"
+    this.applyPendingChanges();
     const themeSaveHandler = () => {
       if (this.hasPendingThemeChanges) {
         this._doSaveThemeCore(() => {
@@ -5011,12 +5032,14 @@ export class SurveyCreatorModel extends Base
 
   private variablePresetsValue: ISurveyVariablePresets;
   private variablePresetsModelValue: SurveyVariablePresets;
-  // Host application variables (issue #7982): the container a host passes as the `variablePresets`
-  // option, describing the variables it injects with setVariable() and naming sets of values for
-  // them. It belongs to the host application and not to the survey being edited - never written
-  // into the survey JSON, never registered in the Serializer - and it is held by reference, so a
-  // host that persists it in onVariablePresetsChanged serializes its own object. The creator model
-  // only reads it; the Preview plugin owns the active preset and, later, the editing.
+  /**
+   * Gets or sets a configuration that defines custom survey variables and named presets of their values.
+   *
+   * For more information, refer to [`ICreatorOptions.variablePresets`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#variablePresets).
+   * @see onVariablePresetsChanged
+   * @see onVariablePresetEditing
+   * @since 3.1.1
+   */
   public get variablePresets(): ISurveyVariablePresets {
     return this.variablePresetsValue;
   }
@@ -5040,17 +5063,15 @@ export class SurveyCreatorModel extends Base
     }
     return this.variablePresetsModelValue;
   }
-  // Raised by the Preview plugin when the active preset changes or when the presets are edited.
-  // Creator has no user-settings layer, so it does not persist the choice itself: a host that wants
-  // the selection or the edited presets to survive a reload saves them here and assigns them back
-  // on the next construction.
+  /**
+   * An event that is raised when the active [variable preset](#variablePresets) changes or when variable presets are edited. Handle this event to store the active preset selection and edited presets.
+   * @since 3.1.1
+   */
   public onVariablePresetsChanged: EventBase<SurveyCreatorModel, VariablePresetsChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetsChangedEvent>();
-  // Raised for every preset the variable preset editor shows, so that a host can allow or refuse
-  // editing and deleting per preset. It is an event and not a field on ISurveyVariablePreset
-  // because that interface is core's document format, and a Creator permission must not enter the
-  // host's document. It is raised in one place only - the Preview plugin's
-  // variablePresets.getPresetOperations(preset), which seeds it from the manager's three flags -
-  // and everything else on this feature lives on that manager rather than on the creator model.
+  /**
+   * An event that is raised for each [preset](#variablePresets) displayed in the variable preset editor. Use this event to control whether users can edit or delete individual presets.
+   * @since 3.1.1
+   */
   public onVariablePresetEditing: EventBase<SurveyCreatorModel, VariablePresetEditingEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetEditingEvent>();
 
   public dispose(): void {
