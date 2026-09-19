@@ -69,6 +69,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.checkActionProperties();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
     StringItemsNavigatorBase.setQuestion(this);
+    this.updateRootStyle();
   }
   protected onElementTypeRestrictionChanged(elType: string): void {
     super.onElementTypeRestrictionChanged(elType);
@@ -93,6 +94,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     creator.selectElement(selEl, undefined, false);
     return true;
   }
+
+  @property() rootStyle: { [index: string]: string | number };
 
   rootCss() {
     const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
@@ -256,6 +259,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       }
       surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["minWidth", "maxWidth"], "adornerRootStyle");
       if (!!surveyElement["setCanShowOptionItemCallback"]) {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
       }
@@ -297,8 +301,23 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           this.updateRequiredAction(requiredAction);
         }
       }, "isRequiredAdorner");
+      surveyElement.registerFunctionOnPropertiesValueChanged(["minWidth", "maxWidth"], () => {
+        this.updateRootStyle();
+      }, "adornerRootStyle");
+      this.updateRootStyle();
       (<any>surveyElement.locDescription).placeholder = "pe.descriptionPlaceholder";
     }
+  }
+  private updateRootStyle(): void {
+    const style = this.surveyElement?.getRootStyle() as { [index: string]: string | number } | undefined;
+    const result: { [index: string]: string | number } = {};
+    if (style?.minWidth) {
+      result.minWidth = style.minWidth;
+    }
+    if (style?.maxWidth) {
+      result.maxWidth = style.maxWidth;
+    }
+    this.rootStyle = result;
   }
   get isDraggable() {
     return true;

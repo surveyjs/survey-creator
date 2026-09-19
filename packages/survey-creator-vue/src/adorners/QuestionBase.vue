@@ -3,6 +3,7 @@
     v-if="model"
     class="svc-question__adorner"
     :class="model.rootCss()"
+    :style="model.rootStyle"
     ref="root"
     @dblclick="(e) => model.dblclick(e)"
     v-on:mouseover="(e) => model.hover(e, e.currentTarget)"

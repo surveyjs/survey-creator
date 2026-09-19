@@ -1,5 +1,5 @@
 <ng-template #template>
-  <div *ngIf="adorner" class="svc-question__adorner" [class]="adorner.rootCss()"
+  <div *ngIf="adorner" class="svc-question__adorner" [class]="adorner.rootCss()" [style]="adorner.rootStyle"
     (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)"
     [attr.data-sv-drop-target-survey-element]="adorner.element.name || null">
     <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content" [class]="adorner.css()"

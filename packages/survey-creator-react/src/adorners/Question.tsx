@@ -71,6 +71,7 @@ export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = Quest
         ref={this.rootRef}
         data-sv-drop-target-survey-element={this.model.element.name || null}
         className={this.model.rootCss()}
+        style={this.model.rootStyle}
         onDoubleClick={e => { allowInteractions && this.model.dblclick(e.nativeEvent); e.stopPropagation(); }}
         onMouseLeave={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}
         onMouseOver={e => allowInteractions && this.model.hover(e.nativeEvent, e.currentTarget)}

@@ -210,7 +210,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const row = page.locator(".sd-row").first();
+    const row = page.locator(".svc-question__content").first();
     await compareScreenshot(page, row, "drag-drop-item-values--mobile.png");
   });
 
@@ -238,7 +238,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const row = page.locator(".sd-row").first();
+    const row = page.locator(".svc-question__content").first();
     await compareScreenshot(page, row, "drag-drop-item-values-ranking--mobile.png");
   });
 
@@ -266,7 +266,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
 
-    const row = page.locator(".sd-row").first();
+    const row = page.locator(".svc-question__content").first();
     await compareScreenshot(page, row, "drag-drop-item-values-dropdown--mobile.png");
   });
 

@@ -1220,12 +1220,14 @@ test.describe(title, () => {
             {
               "type": "panel",
               "name": "question1",
+              "width": "208px",
               "maxWidth": "208px",
               "minWidth": "208px"
             },
             {
               "type": "panel",
               "name": "panel1z",
+              "width": "208px",
               "maxWidth": "208px",
               "minWidth": "208px",
               "title": "Title",
@@ -1235,6 +1237,7 @@ test.describe(title, () => {
             {
               "type": "paneldynamic",
               "name": "panel1",
+              "width": "208px",
               "maxWidth": "208px",
               "minWidth": "208px",
               "startWithNewLine": false,
@@ -1243,6 +1246,7 @@ test.describe(title, () => {
             {
               "type": "html",
               "name": "question2",
+              "width": "208px",
               "maxWidth": "208px",
               "minWidth": "208px",
               "startWithNewLine": false
@@ -1250,6 +1254,7 @@ test.describe(title, () => {
             {
               "type": "image",
               "name": "question3",
+              "width": "208px",
               "maxWidth": "208px",
               "minWidth": "208px",
               "startWithNewLine": false
@@ -1257,12 +1262,14 @@ test.describe(title, () => {
             {
               "type": "panel",
               "name": "question1",
+              "width": "408px",
               "maxWidth": "408px",
               "minWidth": "408px"
             },
             {
               "type": "panel",
               "name": "panel11",
+              "width": "408px",
               "maxWidth": "408px",
               "minWidth": "408px",
               "title": "Title",
@@ -1272,6 +1279,7 @@ test.describe(title, () => {
             {
               "type": "paneldynamic",
               "name": "panel1",
+              "width": "408px",
               "maxWidth": "408px",
               "minWidth": "408px",
               "startWithNewLine": false,
@@ -1280,6 +1288,7 @@ test.describe(title, () => {
             {
               "type": "html",
               "name": "question2",
+              "width": "408px",
               "maxWidth": "408px",
               "minWidth": "408px",
               "startWithNewLine": false
@@ -1287,6 +1296,7 @@ test.describe(title, () => {
             {
               "type": "image",
               "name": "question3",
+              "width": "408px",
               "maxWidth": "408px",
               "minWidth": "408px",
               "startWithNewLine": false

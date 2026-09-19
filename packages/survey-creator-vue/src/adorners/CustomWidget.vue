@@ -3,6 +3,7 @@
     v-if="model"
     class="svc-question__adorner"
     :class="model.rootCss()"
+    :style="model.rootStyle"
     @mouseover="model.hover($event, $event.currentTarget)"
     @mouseleave="model.hover($event, $event.currentTarget)"
     :data-sv-drop-target-survey-element="model.element.name || null"

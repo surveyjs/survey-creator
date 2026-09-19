@@ -91,8 +91,11 @@ svc-question {
   width: 100%;
   height: auto;
   flex-grow: 1;
-
   box-sizing: border-box;
+
+  > .sd-element {
+    width: 100%;
+  }
 
   padding: var(--sjs2-spacing-x400, 32px) var(--sjs2-spacing-x500, 40px) var(--sjs2-spacing-x200, 16px)
     var(--sjs2-spacing-x500, 40px);

@@ -3,6 +3,7 @@
     v-if="adorner && !adorner.isDisposed"
     class="svc-question__adorner"
     :class="adorner.rootCss()"
+    :style="adorner.rootStyle"
     @dblclick="(e) => adorner.dblclick(e)"
     @mouseover="adorner.hover($event, $event.currentTarget)"
     @mouseleave="adorner.hover($event, $event.currentTarget)"

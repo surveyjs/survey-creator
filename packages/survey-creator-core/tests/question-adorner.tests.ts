@@ -1519,3 +1519,28 @@ test("Nested choice content panel shows the drop-over highlight while dragging o
   panelAdorner.dropIndicatorPosition = DropIndicatorPosition.Inside;
   expect(panelAdorner.css().indexOf("svc-question__content--drag-over-inside")).not.toBe(-1);
 });
+
+test("Adorner rootStyle copies minWidth/maxWidth from the element", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", minWidth: "200px", maxWidth: "400px" },
+      { type: "text", name: "q2" }
+    ]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  const adorner1 = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  const adorner2 = new QuestionAdornerViewModel(creator, q2, <any>undefined);
+
+  expect(adorner1.rootStyle).toEqual({
+    minWidth: "min(100%, 200px)",
+    maxWidth: "400px"
+  });
+  expect(adorner2.rootStyle).toEqual({});
+
+  q2.maxWidth = "300px";
+  expect(adorner2.rootStyle).toEqual({
+    maxWidth: "300px"
+  });
+});
