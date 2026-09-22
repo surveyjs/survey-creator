@@ -13,6 +13,17 @@ export const urlThemeTab = "http://127.0.0.1:8080/test-pages/theme-tab";
 export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages/creator-themes";
 export const urlPresets = "http://127.0.0.1:8080/test-pages/presets";
 
+// Serves a choicesByUrl request from the test itself, so no real web service is contacted.
+// Call it before setJSON. The url does not have to exist: the request never leaves the browser.
+export async function mockChoicesByUrl(page: Page, requestUrl: string, response: any): Promise<void> {
+  await page.route(requestUrl, route => route.fulfill({
+    status: 200,
+    contentType: "application/json",
+    headers: { "Access-Control-Allow-Origin": "*" },
+    body: JSON.stringify(response)
+  }));
+}
+
 export async function compareScreenshot(
   page: Page,
   elementSelector: string | Locator | undefined,
