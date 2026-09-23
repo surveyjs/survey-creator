@@ -40,6 +40,18 @@ test("Mask settings updated if change mask type", () => {
   question.maskType = "datetime";
   expect(panel.elements.map(e => e.name)).toStrictEqual(["pattern", "min", "max", "saveMaskedValue", "preview"]);
 
+  question.maskType = "numeric";
+  expect(panel.elements.map(e => e.name)).toStrictEqual([
+    "min",
+    "max",
+    "precision",
+    "showTrailingZeros",
+    "decimalSeparator",
+    "thousandsSeparator",
+    "allowNegativeValues",
+    "saveMaskedValue",
+    "preview"]);
+
   question.maskType = "currency";
   expect(panel.elements.map(e => e.name)).toStrictEqual([
     "currencySymbol",
@@ -47,6 +59,7 @@ test("Mask settings updated if change mask type", () => {
     "min",
     "max",
     "precision",
+    "showTrailingZeros",
     "decimalSeparator",
     "thousandsSeparator",
     "allowNegativeValues",
