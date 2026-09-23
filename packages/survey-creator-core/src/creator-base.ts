@@ -1779,9 +1779,27 @@ export class SurveyCreatorModel extends Base
    * @see switchTab
    */
   public onActiveTabChanged: EventBase<SurveyCreatorModel, ActiveTabChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, ActiveTabChangedEvent>();
-  // Raised before the JSON Editor tab lints the survey JSON. options.lintOptions holds the
-  // options the tab is about to lint with: switch a rule off or change its severity, declare
-  // knownVariables or knownFunctions, describe custom components, suppress findings.
+  /**
+   * An event that is raised before the [JSON Editor tab](/survey-creator/documentation/end-user-guide/user-interface#json-editor-tab) lints the survey JSON schema.
+   *
+   * Use this event to customize linter options, for example, disable individual rules, change their severity, or declare known variables and functions.
+   *
+   * For information on event handler parameters, refer to descriptions within the interface.
+   *
+   * The following code overrides individual [linting rules](/form-library/documentation/survey-json-validation#linter-rules) to report unknown properties as warnings and disable checks for unknown references:
+   *
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   *
+   * const creator = new SurveyCreatorModel();
+   * creator.onLintSurvey.add((_, options) => {
+   *   options.lintOptions.rules["property/unknown"] = "warning";
+   *   options.lintOptions.rules["reference/unknown"] = "off";
+   * });
+   * ```
+   *
+   * [Documentation: Survey JSON Validation](/form-library/documentation/survey-json-validation (linkStyle))
+   */
   public onLintSurvey: EventBase<SurveyCreatorModel, LintSurveyEvent> = this.addCreatorEvent<SurveyCreatorModel, LintSurveyEvent>();
   /**
    * Gets or sets the currently displayed tab.

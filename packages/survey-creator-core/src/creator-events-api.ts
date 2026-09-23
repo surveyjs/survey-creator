@@ -1257,7 +1257,8 @@ export interface VariablePresetEditingEvent {
 }
 
 export interface LintSurveyEvent {
-  // The options the JSON Editor tab lints the survey JSON with, prefilled with the creator's
-  // defaults. Change the rules, or add knownVariables, knownFunctions, components or suppress.
+  /**
+   * Linter options used to validate the survey JSON schema in the JSON Editor tab. This object is initialized with default settings. Modify its properties to [configure rules](/form-library/documentation/survey-json-validation#linter-rules), [declare known variables, functions, and custom components](/form-library/documentation/survey-json-validation#handle-custom-variables-functions-and-components), or [suppress findings](/form-library/documentation/survey-json-validation#configure-suppressed-rules).
+   */
   lintOptions: ISurveyLintOptions;
 }
