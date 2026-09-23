@@ -956,6 +956,39 @@ test("Create setValue trigger in logic", () => {
   expect(getSetToNameQuestion().value).toBeFalsy();
   expect(getSetValueQuestion().value).toBeFalsy();
 });
+test("Create setValue trigger in logic for a composite question, change value via inner question, Bug#8011", () => {
+  ComponentCollection.Instance.add({
+    name: "vanilla_composite",
+    title: "Vanilla Composite",
+    elementsJSON: [{ type: "rating", name: "Answer", rateValues: [1, 2, 3, 4, 5] }],
+  });
+  PropertyGridEditorCollection.register(new PropertyGridTriggerValueInLogicEditor());
+  const survey = new SurveyModel({
+    elements: [
+      { type: "radiogroup", name: "radioGroupQ", choices: ["Item 1"] },
+      { type: "vanilla_composite", name: "vanillaComposite" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  logic.expressionEditor.text = "{radioGroupQ} = 'Item 1'";
+  const panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
+  panel.getQuestionByName("setToName").value = "vanillaComposite";
+
+  const setValueQuestion = <any>panel.getQuestionByName("setValue");
+  expect(setValueQuestion.getType()).toEqual("vanilla_composite");
+  setValueQuestion.contentPanel.getQuestionByName("Answer").value = 3;
+  expect(setValueQuestion.value).toEqual({ Answer: 3 });
+
+  expect(logic.saveEditableItem()).toBeTruthy();
+  expect(survey.triggers).toHaveLength(1);
+  const trigger = <SurveyTriggerSetValue>survey.triggers[0];
+  expect(trigger.setToName).toEqual("vanillaComposite");
+  expect(trigger.setValue).toEqual({ Answer: 3 });
+
+  ComponentCollection.Instance.clear();
+});
 test("Check logicTypeName is always not requred, Bug#6820", () => {
   Serializer.findProperty("question", "isRequired").defaultValue = true;
   const survey = new SurveyModel({

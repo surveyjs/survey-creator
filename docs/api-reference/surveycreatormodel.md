@@ -850,6 +850,18 @@ Default value: `true`
 
 Available since: v2.5.2
 
+### `variablePresets`
+
+**Type**: `ISurveyVariablePresets`
+
+Gets or sets a configuration that defines custom survey variables and named presets of their values.
+
+For more information, refer to [`ICreatorOptions.variablePresets`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#variablePresets).
+
+Available since: v3.1.1
+
+**Related APIs:** [`onVariablePresetsChanged`](#onVariablePresetsChanged), [`onVariablePresetEditing`](#onVariablePresetEditing)
+
 ## Methods
 
 ### `activatePropertyGridCategory()`
@@ -937,6 +949,12 @@ Applies a specified UI theme to Survey Creator.
 | `theme` | `ICreatorTheme` | An `ICreatorTheme` object with theme settings. |
 
 **Related APIs:** [`creatorTheme`](#creatorTheme), [`showCreatorThemeSettings`](#showCreatorThemeSettings)
+
+### `applyPendingChanges()`
+
+**Return value:** `boolean` &ndash; `true` if there are no pending changes or if the changes are applied successfully; `false` if pending changes cannot be applied.
+
+Applies pending changes in the active tab to the survey configuration.
 
 ### `applyTheme()`
 
@@ -2430,3 +2448,37 @@ A callback function that you should call when a file is uploaded successfully or
 [View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))
 
 **Related APIs:** [`uploadFiles`](#uploadFiles)
+
+### `onVariablePresetEditing`
+
+An event that is raised for each [preset](#variablePresets) displayed in the variable preset editor. Use this event to control whether users can edit or delete individual presets.
+
+Parameters:
+
+ - `sender`: `SurveyCreatorModel`  
+A Survey Creator instance that raised the event.
+- `options.preset`: `ISurveyVariablePreset`  
+A variable preset for which Survey Creator obtains permitted operations. The object contains `name`, `description`, and `variables`.
+- `options.allowEdit`: `boolean`  
+A Boolean property that you can set to `false` to prevent users from editing the preset.
+- `options.allowDelete`: `boolean`  
+A Boolean property that you can set to `false` to prevent users from deleting the preset.
+
+Available since: v3.1.1
+
+### `onVariablePresetsChanged`
+
+An event that is raised when the active [variable preset](#variablePresets) changes or when variable presets are edited. Handle this event to store the active preset selection and edited presets.
+
+Parameters:
+
+ - `sender`: `SurveyCreatorModel`  
+A Survey Creator instance that raised the event.
+- `options.reason`: `"select" | "edit"`  
+The reason the event was raised: `"select"` if the active preset changed or `"edit"` if the preset list or a preset's variable values changed.
+- `options.variablePresets`: `ISurveyVariablePresets`  
+The current [variable preset](#variablePresets) configuration.
+- `options.activePresetName`: `string`  
+The name of the active preset, or an empty string if no preset is active.
+
+Available since: v3.1.1

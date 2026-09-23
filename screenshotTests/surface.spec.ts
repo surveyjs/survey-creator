@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup } from "./helper";
+import { url, compareScreenshot, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup, mockChoicesByUrl } from "./helper";
 
 const title = "Design Surface Screenshot";
 
@@ -1013,6 +1013,9 @@ test.describe(title, () => {
 
   test("Restful service banner", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
+    // The url is rendered into the restful-properties.png baseline, so it stays as is and is served by the mock instead.
+    const countriesUrl = "https://surveyjs.io/api/CountriesExample";
+    await mockChoicesByUrl(page, countriesUrl, [{ name: "France" }, { name: "Germany" }, { name: "Italy" }, { name: "Spain" }]);
     await setJSON(page, {
       showQuestionNumbers: true,
       "pages": [
@@ -1025,7 +1028,7 @@ test.describe(title, () => {
               "title": "Select a country",
               "description": "A full list of countries is queried from a RESTful web service.",
               "choicesByUrl": {
-                "url": "https://surveyjs.io/api/CountriesExample",
+                "url": countriesUrl,
                 "valueName": "name"
               }
             }
