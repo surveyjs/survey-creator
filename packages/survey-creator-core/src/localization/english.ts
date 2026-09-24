@@ -454,6 +454,7 @@ export var enStrings = {
       thousandsSeparator: "Thousands separator",
       decimalSeparator: "Decimal separator",
       precision: "Value precision",
+      showTrailingZeros: "Show trailing zeros",
       min: "Minimum value",
       max: "Maximum value"
     },
@@ -1724,7 +1725,8 @@ export var enStrings = {
     numericmask: {
       decimalSeparator: "A symbol that separates the fractional part from the integer part of a displayed number. The region's symbol is used by default.",
       thousandsSeparator: "A symbol that separates the digits of a large number into groups of three. The region's symbol is used by default.",
-      precision: "Limits how many digits to retain after the decimal point for a displayed number."
+      precision: "Limits how many digits to retain after the decimal point for a displayed number.",
+      showTrailingZeros: "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
     },
     currencymask: {
       currencySymbol: "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol.",
