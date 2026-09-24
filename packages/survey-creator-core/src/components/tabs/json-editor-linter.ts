@@ -33,9 +33,16 @@ export function getCreatorLintOptions(creator: SurveyCreatorModel): ISurveyLintO
     "trigger/unknown-type": "error",
     "validator/unknown-type": "error",
     "property/invalid-value": creator.validateJsonPropertyValues ? "error" : "off",
+    // the presets are the host's data and no part of the text this tab edits; the tab checks
+    // only the references the survey makes to the variables they declare
+    "variable/preset": "off",
   };
   const options = {
-    lintOptions: <ISurveyLintOptions>{ rules: rules, newElementName: newElementName },
+    lintOptions: <ISurveyLintOptions>{
+      rules: rules, newElementName: newElementName,
+      // the variable definition declares the variables the host sets at runtime
+      variablePresets: creator.variablePresets,
+    },
   };
   // the application has the last word
   creator.onLintSurvey.fire(creator, options);
