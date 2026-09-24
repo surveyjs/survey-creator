@@ -989,6 +989,57 @@ test("onLintSurvey can lower a schema rule, and then it no longer blocks", () =>
   expect(editor.allowingDeactivate()).toBe(true);
 });
 
+const variableDefinition = {
+  elements: [
+    { type: "dropdown", name: "customerTier", choices: ["basic", "gold", "platinum"] },
+    { type: "text", name: "yearsAsCustomer", inputType: "number" },
+  ]
+};
+
+test("A variable the variable presets declare is not an unknown reference", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [
+      { type: "html", name: "greeting", html: "<p>With us for {yearsAsCustomer} years.</p>" },
+      { type: "text", name: "q1", visibleIf: "{customerTier} = 'gold'" },
+    ]
+  }, null, 2), { variablePresets: { definition: variableDefinition } });
+  expect(editor.linter.findings.filter(f => f.ruleId === "reference/unknown")).toHaveLength(0);
+  expect(editor.allowingDeactivate()).toBe(true);
+});
+
+test("A variable the variable presets do not declare is still an unknown reference", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{customerTier} = 'gold' and {unknownVar} = 1" },
+    ]
+  }, null, 2), { variablePresets: { definition: variableDefinition } });
+  const unknown = editor.linter.findings.filter(f => f.ruleId === "reference/unknown");
+  expect(unknown).toHaveLength(1);
+  expect(unknown[0].finding.messageData.name).toBe("unknownVar");
+});
+
+test("getCreatorLintOptions hands the linter the variable presets of the creator", () => {
+  const variablePresets = { definition: variableDefinition, presets: [] };
+  const creator = new CreatorTester({ variablePresets: variablePresets });
+  expect(getCreatorLintOptions(creator).variablePresets).toBe(variablePresets);
+  expect(getCreatorLintOptions(creator).rules["variable/preset"]).toBe("off");
+});
+
+test("The JSON tab does not check the variable presets themselves", () => {
+  const editor = createEditor(JSON.stringify({
+    elements: [{ type: "text", name: "q1", visibleIf: "{customerTier} = 'gold'" }]
+  }, null, 2), {
+    variablePresets: {
+      definition: variableDefinition,
+      presets: [
+        { name: "gold", variables: { customerTier: "gold", nosuch: 1 } },
+        { name: "gold", variables: { customerTier: "gold" } },
+      ]
+    }
+  });
+  expect(editor.linter.findings.filter(f => f.ruleId === "variable/preset")).toHaveLength(0);
+});
+
 test("property/required names the owner the way the deserializer names it", () => {
   const editor = createEditor(JSON.stringify({
     elements: [{ type: "text" }, { type: "matrixdynamic", name: "m1", columns: [{ cellType: "text" }] }],
