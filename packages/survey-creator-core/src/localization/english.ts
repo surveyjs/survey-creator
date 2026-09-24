@@ -1726,7 +1726,7 @@ export var enStrings = {
       decimalSeparator: "A symbol that separates the fractional part from the integer part of a displayed number. The region's symbol is used by default.",
       thousandsSeparator: "A symbol that separates the digits of a large number into groups of three. The region's symbol is used by default.",
       precision: "Limits how many digits to retain after the decimal point for a displayed number.",
-      showTrailingZeros: "Fills the fractional part with zeros up to the specified precision. For example, with a precision of 2, the input displays 1.50 and 2.00."
+      showTrailingZeros: "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
     },
     currencymask: {
       currencySymbol: "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol.",
