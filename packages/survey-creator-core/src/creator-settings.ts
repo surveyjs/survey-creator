@@ -34,21 +34,10 @@ export var settings = {
     exportFileName: "survey_theme.json",
     defaultFontFamily: "Open Sans",
   },
-  operators: {
-    empty: [],
-    notempty: [],
-    equal: ["!file"],
-    notequal: ["!file"],
-    contains: ["checkbox", "text", "comment"],
-    notcontains: ["checkbox", "text", "comment"],
-    anyof: ["selectbase"],
-    noneof: ["selectbase"],
-    allof: ["checkbox"],
-    greater: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    less: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
-  },
+  // The operator table lives in survey-core now (settings.logic.operators), shared with the Filter
+  // Control. The name stays for existing code and customizations.
+  get operators(): { [operator: string]: Array<string> } { return surveyLibSettings.logic.operators; },
+  set operators(val: { [operator: string]: Array<string> }) { surveyLibSettings.logic.operators = val; },
   defaultNewSurveyJSON: {},
   designer: {
     /*
@@ -62,13 +51,11 @@ export var settings = {
   },
   logic: {
     questionSortOrder: "asc",
-    get defaultOperator(): string { return settings.logic.defaultOperators.default; },
-    set defaultOperator(val: string) { settings.logic.defaultOperators.default = val; },
-    defaultOperators: {
-      default: "equal",
-      checkbox: "allof",
-      tagbox: "allof"
-    },
+    // The defaults live in survey-core now (settings.logic.defaultOperators).
+    get defaultOperator(): string { return surveyLibSettings.logic.defaultOperators.default; },
+    set defaultOperator(val: string) { surveyLibSettings.logic.defaultOperators.default = val; },
+    get defaultOperators(): { [questionType: string]: string } { return surveyLibSettings.logic.defaultOperators; },
+    set defaultOperators(val: { [questionType: string]: string }) { surveyLibSettings.logic.defaultOperators = val; },
     includeComplexQuestions: false,
     visibleActions: new Array<string>(),
     invisibleTriggers: new Array<string>(),
