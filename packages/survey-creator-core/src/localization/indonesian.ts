@@ -838,6 +838,8 @@ export var indonesianStrings = {
       decimalSeparator: "Pemisah desimal",
       // [Auto-translated] "Value precision"
       precision: "Presisi nilai",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Tampilkan nol terlambat",
       // [Auto-translated] "Minimum value"
       min: "Nilai minimum",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var indonesianStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Simbol yang digunakan untuk memisahkan digit angka besar menjadi kelompok tiga.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan."
+      precision: "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Menampilkan nol yang tertinggal pada bagian fraksional hingga presisi yang ditentukan. Misalnya, dengan presisi 2, nilai input 1.2 ditampilkan sebagai 1.20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

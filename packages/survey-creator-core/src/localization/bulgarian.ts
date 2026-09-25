@@ -838,6 +838,8 @@ export var bgStrings = {
       decimalSeparator: "Десетичен разделител",
       // [Auto-translated] "Value precision"
       precision: "Точност на стойността",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Показване на следящи нули",
       // [Auto-translated] "Minimum value"
       min: "Минимална стойност",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var bgStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Символ, използван за разделяне на цифрите на голямо число в групи от по три.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Ограничава колко цифри да се запазят след десетичната запетая за показваното число."
+      precision: "Ограничава колко цифри да се запазят след десетичната запетая за показваното число.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Показва следващи нули в дробната част до зададената прецизност. Например, с точност 2, входна стойност 1.2 се показва като 1.20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

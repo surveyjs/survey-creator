@@ -838,6 +838,8 @@ export var slStrings = {
       decimalSeparator: "Ločevalec decimalk",
       // "Value precision"
       precision: "Natančnost vrednosti",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Pokaži zaključne ničle",
       // "Minimum value"
       min: "Minimalna vrednost",
       // "Maximum value"
@@ -3171,7 +3173,9 @@ export var slStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Simbol, ki se uporablja za ločevanje števk velike številke v skupine po tri.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Omejuje, koliko števk se ohrani po decimalni piki za prikazano številko."
+      precision: "Omejuje, koliko števk se ohrani po decimalni piki za prikazano številko.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Prikazuje zaključne ničle v delnem delu do določene natančnosti. Na primer, z natančnostjo 2 je vhodna vrednost 1,2 prikazana kot 1,20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

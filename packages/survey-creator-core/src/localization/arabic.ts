@@ -838,6 +838,8 @@ export var arStrings = {
       decimalSeparator: "فاصل عشري",
       // [Auto-translated] "Value precision"
       precision: "دقة القيمة",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "الأصفار اللاحقة للعرض",
       // [Auto-translated] "Minimum value"
       min: "الحد الأدنى للقيمة",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var arStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "رمز يستخدم لفصل أرقام عدد كبير إلى مجموعات من ثلاثة.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض."
+      precision: "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "يعرض أصفارا متتالية في الجزء الكسري حتى الدقة المحددة. على سبيل المثال، بدقة 2، يتم عرض قيمة الإدخال 1.2 ك 1.20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

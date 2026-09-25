@@ -838,6 +838,8 @@ export var htStrings = {
       decimalSeparator: "Desimal séparateur",
       // "Value precision"
       precision: "Valè presizyon",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Montre zewo yo dout",
       // "Minimum value"
       min: "Valè minimòm",
       // "Maximum value"
@@ -3171,7 +3173,9 @@ export var htStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Yon senbòl yo itilize pou separe chif yon gwo kantite an gwoup twa.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Limite konbyen chif yo kenbe apre pwen desimal la pou yon nimewo ki parèt."
+      precision: "Limite konbyen chif yo kenbe apre pwen desimal la pou yon nimewo ki parèt.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Montre zewo yo fin nan pati fraksyon jiska presizyon espesifye a. Pou egzanp, ak yon presizyon nan 2, se yon valè opinyon nan 1.2 montre kòm 1.20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

@@ -838,6 +838,8 @@ export const thStrings = {
       decimalSeparator: "ตัวคั่นทศนิยม",
       // "Value precision"
       precision: "ความแม่นยำของค่า",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "แสดงเลขศูนย์ท้ายสุด",
       // "Minimum value"
       min: "ค่าขั้นต่ำ",
       // "Maximum value"
@@ -3171,7 +3173,9 @@ export const thStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "สัญลักษณ์ที่ใช้แยกหลักของจำนวนมากเป็นกลุ่มของสาม",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "จำกัดจำนวนหลักที่คงอยู่หลังจุดทศนิยมสำหรับตัวเลขที่แสดง"
+      precision: "จำกัดจำนวนหลักที่คงอยู่หลังจุดทศนิยมสำหรับตัวเลขที่แสดง",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "แสดงศูนย์ท้ายในส่วนเศษส่วนจนถึงความแม่นยําที่กําหนดตัวอย่างเช่น ด้วยความแม่นยํา 2 ค่าอินพุต 1.2 จะแสดงเป็น 1.20"
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

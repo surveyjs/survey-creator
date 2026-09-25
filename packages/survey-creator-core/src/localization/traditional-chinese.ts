@@ -839,6 +839,8 @@ export var traditionalChineseTranslation = {
       decimalSeparator: "小數點分隔符",
       // [Auto-translated] "Value precision"
       precision: "值精度",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "顯示尾隨零點",
       // [Auto-translated] "Minimum value"
       min: "最小值",
       // [Auto-translated] "Maximum value"
@@ -3172,7 +3174,9 @@ export var traditionalChineseTranslation = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "用於將大數的數位分成三組的符號。",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "限制顯示數位的小數點後要保留的位數。"
+      precision: "限制顯示數位的小數點後要保留的位數。",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "在小數部分顯示尾部零，直到指定精度。例如，當精度為 2 時，輸入值 1.2 會顯示為 1.20。"
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

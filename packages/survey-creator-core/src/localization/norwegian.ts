@@ -838,6 +838,8 @@ export var nbStrings = {
       decimalSeparator: "Desimalskilletegn",
       // [Auto-translated] "Value precision"
       precision: "Prisgunstig presisjon",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Vis etterfølgende nuller",
       // [Auto-translated] "Minimum value"
       min: "Minimumsverdi",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var nbStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Et symbol som brukes til å skille sifrene i et stort tall i grupper på tre.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Begrenser hvor mange sifre som skal beholdes etter desimaltegnet for et tall som vises."
+      precision: "Begrenser hvor mange sifre som skal beholdes etter desimaltegnet for et tall som vises.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Viser etterfølgende nuller i den brøkdelen opp til spesifisert presisjon. For eksempel, med presisjon på 2, vises en inngangsverdi på 1,2 som 1,20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

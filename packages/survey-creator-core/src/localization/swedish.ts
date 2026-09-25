@@ -839,6 +839,8 @@ export let svStrings = {
       decimalSeparator: "Decimaltecknet",
       // [Auto-translated] "Value precision"
       precision: "Värde precision",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Visa efterföljande nollor",
       // [Auto-translated] "Minimum value"
       min: "Minsta värde",
       // [Auto-translated] "Maximum value"
@@ -3172,7 +3174,9 @@ export let svStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "En symbol som används för att dela upp siffrorna i ett stort tal i grupper om tre.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Begränsar hur många siffror som ska behållas efter decimaltecknet för ett tal som visas."
+      precision: "Begränsar hur många siffror som ska behållas efter decimaltecknet för ett tal som visas.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Visar efterföljande nollor i den bråkdelade delen upp till angiven precision. Till exempel, med en precision på 2, visas ett indatavärde på 1,2 som 1,20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

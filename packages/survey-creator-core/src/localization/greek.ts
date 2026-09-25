@@ -838,6 +838,8 @@ export var grStrings = {
       decimalSeparator: "Διαχωριστικό δεκαδικών",
       // "Value precision"
       precision: "Ακρίβεια τιμής",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Εμφάνιση μηδενικών στο τέλος",
       // "Minimum value"
       min: "Ελάχιστη τιμή",
       // "Maximum value"
@@ -3171,7 +3173,9 @@ export var grStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Ένα σύμβολο που χρησιμοποιείται για να χωρίσει τα ψηφία ενός μεγάλου αριθμού σε ομάδες των τριών.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Περιορίζει πόσα ψηφία θα διατηρηθούν μετά την υποδιαστολή για έναν αριθμό που εμφανίζεται."
+      precision: "Περιορίζει πόσα ψηφία θα διατηρηθούν μετά την υποδιαστολή για έναν αριθμό που εμφανίζεται.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Εμφανίζει μηδενικά στο κλασματικό τμήμα μέχρι την καθορισμένη ακρίβεια. Για παράδειγμα, με ακρίβεια 2, μια τιμή εισόδου 1.2 εμφανίζεται ως 1.20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

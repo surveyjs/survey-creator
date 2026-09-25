@@ -838,6 +838,8 @@ export var simplifiedChineseTranslation = {
       decimalSeparator: "小数点分隔符",
       // [Auto-translated] "Value precision"
       precision: "值精度",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "显示尾随零",
       // [Auto-translated] "Minimum value"
       min: "最小值",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var simplifiedChineseTranslation = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "用于将大数的数字分成三组的符号。",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "限制显示数字的小数点后要保留的位数。"
+      precision: "限制显示数字的小数点后要保留的位数。",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "在分数部分显示尾部零，直到指定精度。例如，当精度为2时，输入值1.2会显示为1.20。"
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

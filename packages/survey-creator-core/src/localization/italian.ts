@@ -838,6 +838,8 @@ export var italianTranslation = {
       decimalSeparator: "Separatore decimale",
       // [Auto-translated] "Value precision"
       precision: "Precisione del valore",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Mostra gli zeri di fine",
       // [Auto-translated] "Minimum value"
       min: "Valore minimo",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var italianTranslation = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Simbolo utilizzato per separare le cifre di un numero elevato in gruppi di tre.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Limita il numero di cifre da mantenere dopo la virgola decimale per un numero visualizzato."
+      precision: "Limita il numero di cifre da mantenere dopo la virgola decimale per un numero visualizzato.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Visualizza gli zeri finali nella parte frazionaria fino alla precisione specificata. Ad esempio, con una precisione di 2, un valore di input di 1,2 viene visualizzato come 1,20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

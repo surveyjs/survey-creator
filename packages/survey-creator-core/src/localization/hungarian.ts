@@ -838,6 +838,8 @@ export var huStrings = {
       decimalSeparator: "Tizedeselválasztó",
       // [Auto-translated] "Value precision"
       precision: "Érték pontossága",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "A mögöttes nullák megjelenítése",
       // [Auto-translated] "Minimum value"
       min: "Minimális érték",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var huStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Egy szimbólum, amely nagy szám számjegyeit három csoportba sorolja.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Korlátozza, hogy hány számjegy maradjon meg a megjelenített szám tizedesvesszője után."
+      precision: "Korlátozza, hogy hány számjegy maradjon meg a megjelenített szám tizedesvesszője után.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "A törtrész részében a megadott pontosságig a következő nullákat jeleníti meg. Például 2 pontossággal az 1,2 bemeneti érték 1,20-ként jelenik meg."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

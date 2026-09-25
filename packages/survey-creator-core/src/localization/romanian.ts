@@ -838,6 +838,8 @@ export const roStrings = {
       decimalSeparator: "Separator zecimal",
       // "Value precision"
       precision: "Precizia valorii",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Afișează zerourile de la final",
       // "Minimum value"
       min: "Valoarea minimă",
       // "Maximum value"
@@ -3171,7 +3173,9 @@ export const roStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Un simbol folosit pentru a separa cifrele unui număr mare în grupuri de câte trei.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Limitează câte cifre să fie reținute după punctul zecimal pentru un număr afișat."
+      precision: "Limitează câte cifre să fie reținute după punctul zecimal pentru un număr afișat.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Afișează zerourile din urmă în partea fracționară până la precizia specificată. De exemplu, cu o precizie de 2, o valoare de intrare de 1,2 este afișată ca 1,20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

@@ -838,6 +838,8 @@ export var persianStrings = {
       decimalSeparator: "جداساز دهدهی",
       // [Auto-translated] "Value precision"
       precision: "دقت ارزش",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "نمایش صفرهای دنباله دار",
       // [Auto-translated] "Minimum value"
       min: "حداقل مقدار",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var persianStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "نمادی که برای جدا کردن ارقام یک عدد بزرگ به گروه های سه نفره استفاده می شود.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "محدود کردن تعداد ارقام برای حفظ پس از نقطه اعشار برای یک عدد نمایش داده شده."
+      precision: "محدود کردن تعداد ارقام برای حفظ پس از نقطه اعشار برای یک عدد نمایش داده شده.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "صفرهای انتهایی را در بخش کسری تا دقت مشخص شده نمایش می دهد. برای مثال، با دقت ۲، مقدار ورودی ۱.۲ به صورت ۱.۲۰ نمایش داده می شود."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

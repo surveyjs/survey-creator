@@ -839,6 +839,8 @@ export var danishStrings = {
       decimalSeparator: "Decimalseparator",
       // [Auto-translated] "Value precision"
       precision: "Værdi præcision",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Vis efterfølgende nuller",
       // [Auto-translated] "Minimum value"
       min: "Mindste værdi",
       // [Auto-translated] "Maximum value"
@@ -3172,7 +3174,9 @@ export var danishStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Et symbol, der bruges til at adskille cifrene i et stort tal i grupper på tre.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Begrænser, hvor mange cifre der skal bevares efter decimaltegnet for et vist tal."
+      precision: "Begrænser, hvor mange cifre der skal bevares efter decimaltegnet for et vist tal.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Viser efterfølgende nuller i den brøkdel op til den specificerede præcision. For eksempel vises en inputværdi på 1,2 som 1,20 med en præcision på 2."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

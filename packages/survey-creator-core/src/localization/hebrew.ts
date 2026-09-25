@@ -838,6 +838,8 @@ export var hebrewStrings = {
       decimalSeparator: "מפריד עשרוני",
       // [Auto-translated] "Value precision"
       precision: "דיוק ערך",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "הצגת אפסים עוקבים",
       // [Auto-translated] "Minimum value"
       min: "ערך מינימלי",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var hebrewStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "סמל המשמש להפרדת הספרות של מספר גדול לקבוצות של שלושה.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג."
+      precision: "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "מציג אפסים עוקבים בחלק השברירי עד לדיוק שנקבע. לדוגמה, עם דיוק של 2, ערך קלט של 1.2 מוצג כ-1.20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

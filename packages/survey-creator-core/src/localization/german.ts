@@ -838,6 +838,8 @@ export var germanTranslation = {
       decimalSeparator: "Dezimaltrennzeichen",
       // [Auto-translated] "Value precision"
       precision: "Wertgenauigkeit",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Zeigen Sie nachlaufende Nullen",
       // [Auto-translated] "Minimum value"
       min: "Mindestwert",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var germanTranslation = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Ein Symbol, das verwendet wird, um die Ziffern einer großen Zahl in Dreiergruppen zu unterteilen.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Schränkt die Anzahl der Nachkommastellen für eine angezeigte Zahl ein."
+      precision: "Schränkt die Anzahl der Nachkommastellen für eine angezeigte Zahl ein.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Zeigt nachlaufende Nullen im Bruchteil bis zur angegebenen Genauigkeit an. Zum Beispiel wird bei einer Genauigkeit von 2 ein Eingabewert von 1,2 als 1,20 angezeigt."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

@@ -838,6 +838,8 @@ export var msStrings = {
       decimalSeparator: "Pemisah perpuluhan",
       // [Auto-translated] "Value precision"
       precision: "Ketepatan nilai",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Tunjukkan sifar di belakang",
       // [Auto-translated] "Minimum value"
       min: "Nilai minimum",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var msStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Simbol yang digunakan untuk memisahkan digit nombor besar ke dalam kumpulan tiga.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Hadkan bilangan digit untuk dikekalkan selepas titik perpuluhan bagi nombor yang dipaparkan."
+      precision: "Hadkan bilangan digit untuk dikekalkan selepas titik perpuluhan bagi nombor yang dipaparkan.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Memaparkan sifar di belakang dalam bahagian pecahan sehingga ketepatan yang ditentukan. Sebagai contoh, dengan ketepatan 2, nilai input 1.2 dipaparkan sebagai 1.20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

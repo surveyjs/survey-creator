@@ -838,6 +838,8 @@ export var jaStrings = {
       decimalSeparator: "小数点記号",
       // [Auto-translated] "Value precision"
       precision: "値の精度",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "ゼロの後ろを表示",
       // [Auto-translated] "Minimum value"
       min: "最小値",
       // [Auto-translated] "Maximum value"
@@ -3171,7 +3173,9 @@ export var jaStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "大きな数字を 3 つのグループに区切るために使用される記号。",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "表示される数値の小数点以下の桁数を制限します。"
+      precision: "表示される数値の小数点以下の桁数を制限します。",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "指定された精度まで分数部分の後ろのゼロを表示します。例えば、精度が2の場合、入力値1.2は1.20として表示されます。"
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

@@ -839,6 +839,8 @@ export var koreanStrings = {
       decimalSeparator: "소수 구분 기호",
       // [Auto-translated] "Value precision"
       precision: "값 정밀도",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "0 뒤에 있는 것을 보여줘",
       // [Auto-translated] "Minimum value"
       min: "최솟값",
       // [Auto-translated] "Maximum value"
@@ -3172,7 +3174,9 @@ export var koreanStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "큰 숫자의 숫자를 3개의 그룹으로 구분하는 데 사용되는 기호입니다.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다."
+      precision: "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "명시된 정밀도까지 분수 부분의 뒤쪽 0을 표시합니다. 예를 들어, 정밀도가 2일 때는 입력값 1.2를 1.20으로 표시합니다."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."

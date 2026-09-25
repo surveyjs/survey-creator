@@ -839,6 +839,8 @@ export var polishStrings = {
       decimalSeparator: "Separator dziesiętny",
       // [Auto-translated] "Value precision"
       precision: "Precyzja wartości",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Pokaż zera końcowe",
       // [Auto-translated] "Minimum value"
       min: "Wartość minimalna",
       // [Auto-translated] "Maximum value"
@@ -3172,7 +3174,9 @@ export var polishStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Symbol używany do rozdzielania cyfr dużej liczby na grupy po trzy.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Ogranicza liczbę cyfr, które mają być zachowywane po przecinku dziesiętnym wyświetlanej liczby."
+      precision: "Ogranicza liczbę cyfr, które mają być zachowywane po przecinku dziesiętnym wyświetlanej liczby.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Wyświetla końcowe zera w części ułamkowej do określonej precyzji. Na przykład, przy precyzji 2, wartość wejściowa 1.2 jest wyświetlana jako 1.20."
     },
     currencymask: {
       // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
