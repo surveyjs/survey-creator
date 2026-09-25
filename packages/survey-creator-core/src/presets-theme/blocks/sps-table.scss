@@ -214,13 +214,6 @@
   }
 }
 
-.svc-creator--disable-animations {
-  .sps-table__row--enter,
-  .sps-table__row--leave {
-    animation: none;
-  }
-}
-
 .sps-table__row--empty {
   @include sjs2--typography--default;
   color: var(--sjs2-color-fg-basic-primary, #1c1b20);

@@ -144,14 +144,6 @@
   animation-delay: 0s, $spg-collapse-move-out-delay, $spg-collapse-move-out-delay;
 }
 
-.svc-creator--disable-animations {
-  .spg-row--enter,
-  .spg-row--leave,
-  .spg-panel__content--enter,
-  .spg-panel__content--leave {
-    animation: none;
-  }
-}
 .spg-panel.spg-panel--group {
   & > .spg-panel__content {
     row-gap: var(--sjs2-spacing-x100);

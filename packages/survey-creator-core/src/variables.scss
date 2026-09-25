@@ -78,3 +78,58 @@ $svc-expand-fade-in-delay: var(--sjs-svc-expand-fade-in-delay, 250ms);
 $svc-collapse-fade-out-duration: var(--sjs-svc-collapse-fade-out-duration, 150ms);
 $svc-collapse-move-out-duration: var(--sjs-svc-collapse-move-out-duration, 250ms);
 $svc-collapse-move-out-delay: var(--sjs-svc-collapse-move-out-delay, 100ms);
+
+// Single source for `.svc-creator--disable-animations` and `@media (prefers-reduced-motion: reduce)`.
+// Include it from a stylesheet that loads after the animated rules.
+@mixin disableCreatorAnimations {
+  --sjs-creator-transition-duration: 0ms;
+
+  .svc-row .svc-question--leave,
+  .svc-page--enter,
+  .svc-page--leave,
+  .svc-question--enter,
+  .svc-question--leave,
+  .svc-side-bar--leave,
+  .svc-side-bar--enter,
+  .svc-toolbox__panel--enter,
+  .svc-toolbox__panel--leave,
+  .spg-row--enter,
+  .spg-row--leave,
+  .spg-panel__content--enter,
+  .spg-panel__content--leave,
+  .spg-table__row--enter,
+  .spg-table__row--leave,
+  .sps-table__row--enter,
+  .sps-table__row--leave,
+  .sl-row--enter,
+  .sl-row--leave,
+  .sl-element-wrapper--enter,
+  .sl-element-wrapper--leave,
+  .sl-table__row--enter,
+  .sl-table__row--leave,
+  .sl-panel-wrapper--leave,
+  .sl-panel-wrapper--enter {
+    animation: none;
+  }
+
+  .svc-row {
+    @include disableLibraryAnimations;
+  }
+
+  .svc-page__content {
+    transition: none;
+  }
+
+  .svc-string-editor:hover:not(.svc-string-editor--readonly):not(:focus-within) {
+    .svc-string-editor__border--hover {
+      transition-delay: 0ms;
+    }
+  }
+
+  // The mobile enter rule is as specific as the animation it cancels.
+  &.svc-creator--mobile {
+    .svc-question--enter {
+      animation: none;
+    }
+  }
+}

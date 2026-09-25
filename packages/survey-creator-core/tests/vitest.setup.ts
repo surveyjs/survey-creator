@@ -1,6 +1,6 @@
 // Vitest setup file (ported from tests/jest.setup.js).
-import { beforeEach } from "vitest";
-import { _setIsTouch } from "survey-core";
+import { afterEach, beforeEach } from "vitest";
+import { _setIsTouch, reducedMotionMediaQuery, settings } from "survey-core";
 import { QuestionToolbox } from "../src/toolbox";
 
 (QuestionToolbox as any).defaultQuestionJsonCache = {};
@@ -46,6 +46,51 @@ if (typeof window !== "undefined" && typeof window.getComputedStyle === "functio
   };
 }
 
+// jsdom does not implement matchMedia. The reduced-motion helper reads it, so tests
+// need a registry whose `matches` flag can be flipped and whose listeners fire.
+if (typeof (globalThis as any).matchMedia === "undefined") {
+  const __mqRegistry: Map<string, { matches: boolean, listeners: Set<(e: any) => void> }> = new Map();
+  (globalThis as any).matchMedia = function (query: string) {
+    let entry = __mqRegistry.get(query);
+    if (!entry) {
+      entry = { matches: false, listeners: new Set() };
+      __mqRegistry.set(query, entry);
+    }
+    const captured = entry;
+    return {
+      get matches() { return captured.matches; },
+      media: query,
+      onchange: null,
+      addListener(cb: (e: any) => void) { captured.listeners.add(cb); },
+      removeListener(cb: (e: any) => void) { captured.listeners.delete(cb); },
+      addEventListener(_t: string, cb: (e: any) => void) { captured.listeners.add(cb); },
+      removeEventListener(_t: string, cb: (e: any) => void) { captured.listeners.delete(cb); },
+      dispatchEvent() { return false; },
+    };
+  };
+  (globalThis as any).__setMatchMedia = function (query: string, matches: boolean) {
+    let entry = __mqRegistry.get(query);
+    if (!entry) {
+      entry = { matches, listeners: new Set() };
+      __mqRegistry.set(query, entry);
+      return;
+    }
+    if (entry.matches === matches) return;
+    entry.matches = matches;
+    entry.listeners.forEach((cb) => cb({ matches, media: query }));
+  };
+  if (typeof (globalThis as any).window !== "undefined") {
+    (globalThis as any).window.matchMedia = (globalThis as any).matchMedia;
+  }
+}
+
 beforeEach(() => {
   _setIsTouch(false);
+});
+
+afterEach(() => {
+  settings.respectReducedMotion = true;
+  if (typeof (globalThis as any).__setMatchMedia === "function") {
+    (globalThis as any).__setMatchMedia(reducedMotionMediaQuery, false);
+  }
 });

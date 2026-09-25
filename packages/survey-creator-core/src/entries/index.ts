@@ -146,6 +146,7 @@ import "../utils/layout.scss";
 import "../utils/confirmation.scss";
 
 import "../presets-theme/presets.scss";
+import "../reduced-motion.scss";
 
 import { settings, checkLibraryVersion } from "survey-core";
 

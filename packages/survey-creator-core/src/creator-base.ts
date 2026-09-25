@@ -16,7 +16,10 @@ import {
   createBoxShadowResetVariables,
   IConfirmDialogOptions,
   ISurveyVariablePresets,
-  SurveyVariablePresets
+  SurveyVariablePresets,
+  isAnimationEnabled,
+  isReducedMotionPreferred,
+  subscribeReducedMotionChange
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
@@ -3682,7 +3685,7 @@ export class SurveyCreatorModel extends Base
     }, 50);
   }
   public scrollToElement(elementPage: PageModel, selEl: any, el: HTMLElement) {
-    const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
+    const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled && isAnimationEnabled() ? "smooth" : undefined };
     if (!!elementPage) {
       this.survey.scrollElementToTop({
         element: selEl,
@@ -4006,10 +4009,32 @@ export class SurveyCreatorModel extends Base
     ensureBaseThemeStyles(element);
     this.initKeyboardShortcuts(element);
     this.initResponsivityManager(element as HTMLDivElement);
+    this.subscribeToReducedMotion();
   }
   public unsubscribeRootElement() {
     this.removeKeyboardShortcuts(this._rootElementValue);
     this.resetResponsivityManager();
+    this.unsubscribeFromReducedMotion();
+  }
+  // Read only after mount: a class derived from the OS preference before the root exists
+  // would disagree with the CSS media query that covers the first paint.
+  @property({ defaultValue: false }) private isReducedMotion: boolean;
+  private reducedMotionUnsubscribe: () => void;
+  private updateReducedMotion(): void {
+    this.isReducedMotion = isReducedMotionPreferred();
+  }
+  private subscribeToReducedMotion(): void {
+    this.unsubscribeFromReducedMotion();
+    this.updateReducedMotion();
+    this.reducedMotionUnsubscribe = subscribeReducedMotionChange(() => {
+      if (this.isCreatorDisposed) return;
+      this.updateReducedMotion();
+    });
+  }
+  private unsubscribeFromReducedMotion(): void {
+    if (!this.reducedMotionUnsubscribe) return;
+    this.reducedMotionUnsubscribe();
+    this.reducedMotionUnsubscribe = undefined;
   }
   public initKeyboardShortcuts(rootNode: HTMLElement) {
     if (!!rootNode) {
@@ -5069,6 +5094,7 @@ export class SurveyCreatorModel extends Base
 
   public dispose(): void {
     this.isCreatorDisposed = true;
+    this.unsubscribeFromReducedMotion();
     this.variablePresetsModelValue?.dispose();
     this.variablePresetsModelValue = undefined;
     this.tabs = [];
@@ -5085,13 +5111,16 @@ export class SurveyCreatorModel extends Base
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
   public getRootCss() {
+    // Read up front. Skipping the property while animations are off would leave Vue
+    // unaware of it, so a later OS preference change would not re-render the root.
+    const reducedMotion = this.isReducedMotion;
     return new CssClassBuilder()
       .append("svc-creator")
       .append("sd-theme-root")
       .append("sjs-theme-overrides")
       .append("svc-creator--mobile", this.isMobileView)
       .append("svc-creator--touch", this.isTouch)
-      .append("svc-creator--disable-animations", !this.animationEnabled)
+      .append("svc-creator--disable-animations", reducedMotion || !this.animationEnabled)
       .toString();
   }
 
