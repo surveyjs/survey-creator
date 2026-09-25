@@ -1,13 +1,15 @@
 import {
-  SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue,
+  SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, ItemValue,
   PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel, surveyLocalization,
-  settings as surveyCoreSettings
+  settings as surveyCoreSettings,
+  ConditionEditorItem, SurveyConditionEditorItem, ConditionEditorItemsBuilder,
+  isConditionOperatorEnabled, isQuestionTypeInList, isQuestionClassContains, getConditionOperatorNames, getConditionDefaultOperator
 } from "survey-core";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization, applyCreatorUiLocaleToPopup } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";
-import { assignDefaultClasses, wrapTextByCurlyBraces } from "../utils/creator-utils";
+import { assignDefaultClasses } from "../utils/creator-utils";
 import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
@@ -24,205 +26,9 @@ function removeUnwrapPostfix(name: string): string {
   if (nextCh !== undefined && nextCh !== "." && nextCh !== "[") return name;
   return name.substring(0, index) + name.substring(index + postfix.length);
 }
-export class ConditionEditorItem {
-  public conjunction: string = "and";
-  public questionName: string;
-  public operator: string = settings.logic.defaultOperators.default;
-  public value: any;
-}
-export class SurveyConditionEditorItem extends ConditionEditorItem {
-  public constructor(public survey: SurveyModel) {
-    super();
-  }
-  public getOperatorText(): string {
-    const op = this.operator;
-    if (op == "equal") return "=";
-    if (op == "notequal") return "<>";
-    if (op == "greater") return ">";
-    if (op == "less") return "<";
-    if (op == "greaterorequal") return ">=";
-    if (op == "lessorequal") return "<=";
-    return op;
-  }
-  public getValueText(): string {
-    const val = this.value;
-    if (!val) return val;
-    if (!Array.isArray(val)) return this.valToText(val);
-    let res = "[";
-    for (let i = 0; i < val.length; i++) {
-      res += this.valToText(val[i]);
-      if (i < val.length - 1) res += ", ";
-    }
-    res += "]";
-    return res;
-  }
-  public get isValueRequired(): boolean {
-    return this.operator !== "empty" && this.operator !== "notempty";
-  }
-  public get isReady(): boolean {
-    return (
-      !!this.questionName &&
-      (!this.isValueRequired || !Helpers.isValueEmpty(this.value))
-    );
-  }
-  public toExpression(): string {
-    let text = wrapTextByCurlyBraces(this.getQuestionValueByName()) + " " + this.getOperatorText();
-    if (this.isValueRequired) {
-      text += " " + this.getValueText();
-    }
-    return text;
-  }
-  private getQuestionValueByName(): string {
-    const question = this.survey.getQuestionByName(this.questionName);
-    if (
-      question &&
-      question.name != question.getValueName() &&
-      this.questionName != question.getValueName()
-    ) {
-      return this.questionName.replace(question.name, question.getValueName());
-    }
-    return this.questionName;
-  }
-  private valToText(val: any): string {
-    if (val == "true" || val == "false") return val;
-    if (this.isNumeric(val)) return val;
-    if (val[0] == "[") return val.replace(/(?!^)(['])(?!$)/g, "\\$1");
-    if (!this.isQuote(val)) val = "'" + val + "'";
-    return val.replace(/(?!^)(['"])(?!$)/g, "\\$1");
-  }
-  private isNumeric(val: any): boolean {
-    if (
-      typeof val === "string" &&
-      val.length > 1 &&
-      val[0] === "0" &&
-      val[1] !== "x"
-    )
-      return false;
-    return !isNaN(val);
-  }
-  private isQuote(ch: string): boolean {
-    return ch == "'" || ch == '"';
-  }
-}
-
-export class ConditionEditorItemsBuilder {
-  public constructor(private hasValue: (name: string) => boolean = null) { }
-  public build(text: string): Array<ConditionEditorItem> {
-    if (!text) return [];
-    let operand = null;
-    operand = new ConditionsParser().parseExpression(text);
-    if (!operand) return [];
-    return this.buildEditorItems(operand);
-  }
-  private buildEditorItems(operand: Operand): Array<ConditionEditorItem> {
-    let res = [];
-    if (!this.buildEditorItemsCore(operand, res, "")) {
-      res = [];
-    }
-    return res;
-  }
-  private buildEditorItemsCore(operand: Operand, res: Array<ConditionEditorItem>, parentConjunction: string): boolean {
-    if (operand.getType() == "unary")
-      return this.buildEditorItemsAddUnaryOperand(<UnaryOperand>operand, res);
-    if (operand.getType() !== "binary") return false;
-    const op = <BinaryOperand>operand;
-    if (op.isArithmetic && !op.isConjunction) return false;
-    if (op.isConjunction)
-      return this.buildEditorItemsAddConjunction(op, res, parentConjunction);
-    return this.buildEditorItemsAddBinaryOperand(op, res);
-  }
-  private buildEditorItemsAddConjunction(op: BinaryOperand, res: Array<ConditionEditorItem>, parentConjunction: string): boolean {
-    const conjunction = op.conjunction;
-    if (conjunction == "or" && !!parentConjunction && parentConjunction != conjunction)
-      return false;
-    if (!this.buildEditorItemsCore(op.leftOperand, res, conjunction))
-      return false;
-    const conjunctionIndex = res.length;
-    if (!this.buildEditorItemsCore(op.rightOperand, res, conjunction))
-      return false;
-    res[conjunctionIndex].conjunction = op.conjunction;
-    return true;
-  }
-  private buildEditorItemsAddBinaryOperand(op: BinaryOperand, res: Array<ConditionEditorItem>): boolean {
-    const variableOperand = <Variable>this.getOperandByType(op, "variable");
-    const arrayValue = this.getArrayValueFromOperand(op);
-    const constOperand = !arrayValue ? <Const>this.getOperandByType(op, "const") : null;
-    if (
-      !variableOperand ||
-      (!constOperand && !arrayValue && this.canShowValueByOperator(op.operator))
-    )
-      return false;
-    if (!this.isVariableInSurvey(variableOperand.variable)) return false;
-    const item = new ConditionEditorItem();
-    item.questionName = variableOperand.variable;
-    item.operator = op.leftOperand !== variableOperand ? this.getOppositeOperator(op.operator) : op.operator;
-    if (!!arrayValue) {
-      item.value = arrayValue;
-    }
-    if (!!constOperand) {
-      item.value = constOperand.correctValue;
-    }
-    res.push(item);
-    return true;
-  }
-  private isVariableInSurvey(variable: string): boolean {
-    return !!this.hasValue ? this.hasValue(variable) : true;
-  }
-  private getArrayValueFromOperand(op: BinaryOperand): Array<any> {
-    const arrayOperand = <ArrayOperand>this.getOperandByType(op, "array");
-    if (!arrayOperand || !arrayOperand.values) return null;
-    const valuesOperand = arrayOperand.values;
-    if (!Array.isArray(valuesOperand) || valuesOperand.length == 0) return null;
-    const res = [];
-    for (let i = 0; i < valuesOperand.length; i++) {
-      const opConst = valuesOperand[i];
-      if (!opConst) continue;
-      if (opConst.getType() != "const") return null;
-      res.push((<Const>opConst).correctValue);
-    }
-    if (res.length == 0) return null;
-    return res;
-  }
-  private buildEditorItemsAddUnaryOperand(op: UnaryOperand, res: Array<ConditionEditorItem>): boolean {
-    const operator = op.operator;
-    if (operator !== "empty" && operator != "notempty") return false;
-    const operand = op.expression;
-    if (operand == null || operand.getType() != "variable") return false;
-    const questionName = (<Variable>operand).variable;
-    if (!this.isVariableInSurvey(questionName)) return false;
-    const item = new ConditionEditorItem();
-    item.questionName = questionName;
-    item.operator = operator;
-    res.push(item);
-    return true;
-  }
-  private getOppositeOperator(operator: string): string {
-    if (operator == "less") return "greater";
-    if (operator == "greater") return "less";
-    if (operator == "lessorequal") return "greaterorequal";
-    if (operator == "greaterorequal") return "lessorequal";
-    return operator;
-  }
-  private getOperandByType(op: BinaryOperand, opType: string): Operand {
-    if (!op.rightOperand) return null;
-    if (
-      op.leftOperand.getType() !== opType &&
-      op.rightOperand.getType() !== opType
-    )
-      return null;
-    if (
-      op.leftOperand.getType() == opType &&
-      op.rightOperand.getType() == opType
-    )
-      return null;
-    return op.leftOperand.getType() == opType
-      ? op.leftOperand
-      : op.rightOperand;
-  }
-  private canShowValueByOperator(operator: string) {
-    return operator != "empty" && operator != "notempty";
-  }
-}
+// The rows of a condition, their text and the parsing of text into them live in survey-core now, shared
+// with the Filter Control. Re-exported here for the code that imports them from this module.
+export { ConditionEditorItem, SurveyConditionEditorItem, ConditionEditorItemsBuilder };
 
 function questionValueVisibleIf(params: any): boolean {
   if (params.length !== 2) return false;
@@ -234,37 +40,16 @@ FunctionFactory.Instance.register("questionValueVisibleIf", questionValueVisible
 
 export class ConditionEditor extends PropertyEditorSetupValue {
   public static canParseExpression(text: string): boolean {
-    if (!text) return true;
-    return !!new ConditionsParser().parseExpression(text);
+    return ConditionEditorItemsBuilder.canParseExpression(text);
   }
   public static canBuildExpression(text: string): boolean {
-    if (!text) return true;
-    if (!ConditionEditor.canParseExpression(text)) return false;
-    return new ConditionEditorItemsBuilder().build(text).length > 0;
+    return ConditionEditorItemsBuilder.canBuildExpression(text);
   }
   public static isOperatorEnabled(qType: string, operatorTypes: Array<string>): boolean {
-    if (!qType) return true;
-    if (!operatorTypes || operatorTypes.length == 0) return true;
-    const contains = [];
-    const notContains = [];
-    for (let i = 0; i < operatorTypes.length; i++) {
-      let name = operatorTypes[i];
-      if (name[0] == "!") {
-        notContains.push(name.substring(1));
-      } else {
-        contains.push(name);
-      }
-    }
-    return ConditionEditor.isClassContains(qType, contains, notContains);
+    return isQuestionTypeInList(qType, operatorTypes);
   }
   public static isClassContains(qType: string, contains: Array<string>, notContains: Array<string>): boolean {
-    let classInfo = Serializer.findClass(qType);
-    while(!!classInfo) {
-      if (contains.indexOf(classInfo.name) > -1) return true;
-      if (notContains.indexOf(classInfo.name) > -1) return false;
-      classInfo = !!classInfo.parentName ? Serializer.findClass(classInfo.parentName) : null;
-    }
-    return contains.length == 0;
+    return isQuestionClassContains(qType, contains, notContains);
   }
   private objectValue: Base;
   private surveyValue: SurveyModel;
@@ -535,7 +320,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private isSettingPanelValues = false;
   private getIsOperatorEnabled(qName: string, qType: string, op: string, condQuestion: Question, isContainer: boolean): boolean {
     if (isContainer) return op === "empty" || op === "notempty";
-    let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[op]);
+    let isOperatorEnabled = isConditionOperatorEnabled(qType, op);
     return !!condQuestion ? this.options.isConditionOperatorEnabled(qName, condQuestion, op, isOperatorEnabled) : isOperatorEnabled;
   }
   private isContainerQuestion(questionName: string): boolean {
@@ -621,16 +406,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private getText(): string {
     if (this.textEditor.visible) return this.textEditor.value;
-    let res = "";
-    const items = this.getEditorItems();
-    for (let i = 0; i < items.length; i++) {
-      if (!items[i].isReady) break;
-      if (!!res) {
-        res += " " + items[i].conjunction + " ";
-      }
-      res += items[i].toExpression();
-    }
-    return res;
+    return ConditionEditorItemsBuilder.itemsToExpression(this.getEditorItems());
   }
   private getEditorItems(): Array<SurveyConditionEditorItem> {
     const res = [];
@@ -905,12 +681,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return this.calculatedValueQuestion;
   }
   private getOperators(): Array<ItemValue> {
-    const res = [];
-    const ops = settings.operators;
-    for (const name in ops) {
-      res.push(new ItemValue(name, editorLocalization.getString("op." + name)));
-    }
-    return res;
+    return getConditionOperatorNames().map((name: string): ItemValue => new ItemValue(name, editorLocalization.getString("op." + name)));
   }
   private rebuildQuestionValue(panel: PanelModel) {
     if (!!panel.getQuestionByName("questionValue")) {
@@ -1083,16 +854,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       valueQuestion.width = isValueSameLine ? "35%" : "";
     }
   }
-  private get defaultOperator(): string { return settings.logic.defaultOperators.default; }
+  private get defaultOperator(): string { return getConditionDefaultOperator(); }
   private getDefaultOperatorByQuestionName(questionName: string): string {
     return this.getDefaultOperatorByQuestion(this.getConditionQuestion(questionName));
   }
   private getDefaultOperatorByQuestion(question: Question): string {
-    if (!!question) {
-      const defOps = settings.logic.defaultOperators;
-      if (!!defOps[question.getType()]) return defOps[question.getType()];
-    }
-    return this.defaultOperator;
+    return getConditionDefaultOperator(!!question ? question.getType() : undefined);
   }
   private getFirstEnabledOperator(choices: Array<ItemValue>): string {
     for (let i = 0; i < choices.length; i++) {

@@ -1,5 +1,10 @@
-import { settings as surveySettings } from "survey-core";
+import {
+  settings as surveySettings,
+  ConditionEditorItemsBuilder as CoreItemsBuilder, ConditionEditorItem as CoreItem,
+  SurveyConditionEditorItem as CoreSurveyItem
+} from "survey-core";
 import { settings } from "../../src/creator-settings";
+import { ConditionEditorItemsBuilder, ConditionEditorItem, SurveyConditionEditorItem } from "../../src/property-grid/condition-survey";
 
 test("settings.operators is the survey-core operator table", () => {
   expect(settings.operators).toBe(surveySettings.logic.operators);
@@ -21,4 +26,9 @@ test("settings.logic.defaultOperators and defaultOperator are the survey-core de
   } finally {
     settings.logic.defaultOperator = prev;
   }
+});
+test("the condition rows, their text and their builder come from survey-core", () => {
+  expect(ConditionEditorItemsBuilder).toBe(CoreItemsBuilder);
+  expect(ConditionEditorItem).toBe(CoreItem);
+  expect(SurveyConditionEditorItem).toBe(CoreSurveyItem);
 });
