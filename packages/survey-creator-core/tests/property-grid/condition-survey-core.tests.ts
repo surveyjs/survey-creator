@@ -52,3 +52,11 @@ test("an expression with a null operand opens in the condition editor without th
     { type: "text", name: "q2", visibleIf: "{q1} = 1 and null" }] });
   expect(() => new ConditionEditor(survey, survey.getQuestionByName("q2"), undefined, "visibleIf"), "#2").not.toThrow();
 });
+test("an expression with a null operand stays text in the non-modal condition editor", () => {
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" }] });
+  const editor = new ConditionEditor(survey);
+  editor.isModal = false;
+  editor.text = "{q1} = 1 and null";
+  expect(editor.textEditor.visible, "#1").toBe(true);
+  expect(editor.text, "#2: exactly what was written").toBe("{q1} = 1 and null");
+});
