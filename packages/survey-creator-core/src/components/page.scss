@@ -202,14 +202,6 @@ svc-page {
   }
 }
 
-.svc-creator--disable-animations {
-  .svc-row {
-    .svc-question--leave {
-      animation: none;
-    }
-  }
-}
-
 .svc-page__content--collapse-onhover,
 .svc-page__content--collapse-always {
   outline: var(--sjs2-border-width-x200) transparent dashed;
@@ -411,16 +403,6 @@ $svc-page-move-out-delay: var(--sjs-svc-page-move-out-delay, 100ms);
   transition-property: padding-bottom;
   transition-duration: $svc-page-move-in-duration;
   transition-timing-function: $ease-out;
-}
-
-.svc-creator--disable-animations {
-  .svc-page--enter,
-  .svc-page--leave {
-    animation: none;
-  }
-  .svc-page__content {
-    transition: none;
-  }
 }
 
 .svc-page--enter.svc-page--enter {
