@@ -137,6 +137,13 @@ const buildPlatformJson = {
       "import": "./fesm/ui-preset-editor/i18n/*.mjs",
       "require": "./ui-preset-editor/i18n/*.js"
     },
+    // The Tests widget. Its stylesheet is build/tester.css and is reached through the "./*.css" entry
+    // above, the way collaboration.css is.
+    "./tester": {
+      "types": "./tester/index.d.ts",
+      "import": "./fesm/tester.mjs",
+      "require": "./tester.js"
+    },
   },
   devDependencies: {},
 };
