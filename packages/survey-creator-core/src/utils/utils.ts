@@ -34,7 +34,12 @@ export function calculateThemeVariables(
     const newCssVariables: { [key: string]: string } = {};
     const calcProxySizeProperty = "width";
     const calcProxyBoxShadowProperty = "box-shadow";
-    for (const key of [...Object.keys(themeCopyCssVariables), ...additionalCssVariables]) {
+    // Source variables stay on the element so var() chains resolve. A non-empty
+    // additional list is the only set read back; otherwise every applied variable is resolved.
+    const keysToResolve = additionalCssVariables.length > 0
+      ? additionalCssVariables
+      : Object.keys(themeCopyCssVariables);
+    for (const key of keysToResolve) {
       const sourceValue = themeCopyCssVariables[key];
       let value = computed.getPropertyValue(key);
       if (typeof value === "string" && value.trim() === "") {
