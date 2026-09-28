@@ -5,7 +5,7 @@ import {
   EventBase, hasLicense, slk, glc, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
-  CssClassBuilder,
+  toCssClasses,
   SvgRegistry,
   addIconsToThemeSet,
   SvgThemeSets,
@@ -5110,14 +5110,14 @@ export class SurveyCreatorModel extends Base
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
   public getRootCss() {
-    return new CssClassBuilder()
-      .append("svc-creator")
-      .append("sd-theme-root")
-      .append("sjs-theme-overrides")
-      .append("svc-creator--mobile", this.isMobileView)
-      .append("svc-creator--touch", this.isTouch)
-      .append("svc-creator--disable-animations", !this.animationEnabled)
-      .toString();
+    return toCssClasses(
+      "svc-creator",
+      "sd-theme-root",
+      "sjs-theme-overrides",
+      this.isMobileView && "svc-creator--mobile",
+      this.isTouch && "svc-creator--touch",
+      !this.animationEnabled && "svc-creator--disable-animations"
+    );
   }
 
   @property({ defaultValue: {} }) private creatorCssVariables: { [index: string]: string } = {};

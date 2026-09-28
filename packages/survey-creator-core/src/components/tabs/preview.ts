@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString, CssClassBuilder, IDialogOptions, settings as surveySettings, Helpers, ListModel } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString, toCssClasses, IDialogOptions, settings as surveySettings, Helpers, ListModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
@@ -89,11 +89,11 @@ export class PreviewViewModel extends Base {
       const self = this;
       const hasSimulatorFrame = self.simulator.hasFrame;
       const surveyIsEmpty = !!self.survey?.isEmpty;
-      return new CssClassBuilder()
-        .append("svc-test-tab--empty", surveyIsEmpty)
-        .append("svc-test-tab--with-simulator-frame", hasSimulatorFrame)
-        .append("svc-creator-tab__content--with-toolbar", !!self.isPageToolbarVisible)
-        .toString();
+      return toCssClasses(
+        surveyIsEmpty && "svc-test-tab--empty",
+        hasSimulatorFrame && "svc-test-tab--with-simulator-frame",
+        !!self.isPageToolbarVisible && "svc-creator-tab__content--with-toolbar"
+      );
     }) as any as string;
     // The active preset can change from outside - a host assigning it, or the preset editor - and
     // a host can replace the container; neither is reactive on its own, so the actions and the

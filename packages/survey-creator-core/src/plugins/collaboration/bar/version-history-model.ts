@@ -1,4 +1,4 @@
-import { Base, CssClassBuilder, ListModel } from "survey-core";
+import { Base, toCssClasses, ListModel } from "survey-core";
 import { getCollabString } from "../collaboration-strings";
 import { describeRecord } from "../journal/journal-describe";
 import { JournalOp } from "../journal/journal-record";
@@ -68,11 +68,11 @@ export function formatVersionTime(ts: number): string {
 }
 
 function rowCss(kind: VersionHistoryRowKind, expanded?: boolean): string {
-  return new CssClassBuilder()
-    .append("svc-version-history__row")
-    .append("svc-version-history__row--" + kind)
-    .append("svc-version-history__row--expanded", expanded === true)
-    .toString();
+  return toCssClasses(
+    "svc-version-history__row",
+    "svc-version-history__row--" + kind,
+    expanded === true && "svc-version-history__row--expanded"
+  );
 }
 
 interface IVersionRowOptions {
