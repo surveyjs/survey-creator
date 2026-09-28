@@ -142,6 +142,10 @@ export var huStrings = {
     jsonHideErrors: "Hibák elrejtése",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Hibák megjelenítése",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Hibajavítás",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "A felmérés JSON-nak objektumnak kell lennie.",
     // "Undo"
     undo: "Mégse",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var huStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Előbeállítás alkalmazása"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Vonal: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Használd a javasolt nevet"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Távolítsd el az ismétlődő tételt"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Használd a javasolt típust"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Használd a javasolt függvényt"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Használd a javasolt maszkot"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Adjunk szabad nevet az elemnek"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Adjunk szabad nevet az elemnek"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Távolítsd el az ingatlant"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Használd a legközelebbi engedélyezett értéket",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Távolítsd el az ingatlant",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Használd a javasolt értéket"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Alakítsuk át az értéket listává"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Adjunk nevet az elemnek"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Távolítsd el az ingatlant",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Az ingatlan átnevezése"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Használd a javasolt nevet",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Használd a javasolt nevet"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Használd a javasolt nevet"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Használd a javasolt típust"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Használd a javasolt típust"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "A \"{expression}\" kifejezés nem értelmezhető."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" nem található meg – nincs kérdés, panel, oldal, számított érték vagy változó ilyen néven.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" nem található a {containerType} \"{root}\" (hivatkozás: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "A \"{segment}\" nem található meg a \"{scopePrefix}\" hatótávban (hivatkozás: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "A \"{name}\" kulcsnév \"{key}\" - \"{name}\" néven nincs {keyNoun} ezzel a néven, így a duplikált kulcs validáció soha nem fut el.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" nem található."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "A \"{name}\" {prop} az elemre utal magára az elemre (hivatkozás: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "A \"{name}\" név megduplikált.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "A \"{name}\" nevű számított érték már egy másik számított érték által is használható.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "A kiszámított \"{name}\" érték egy másik elemmel osztja meg a nevét, így az egyik árnyékolja a másikat."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "A {ownerText} {nameKindText} \"{name}\" a beépített felmérési változó {{builtIn}} is – a felmérés először a {{name}} választ adja, így ez a kifejezések számára elérhetetlen.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "A \"{name}\" értéknameje \"{valueName}\" a \"{name}\" kérdés neve is – mindkettő a válaszokat a \"{valueName}\" adatkulcs alatt tárolja.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Az adatkulcs \"{dataName}\" egyben a \"{base}\" (az adatkulcs plusz a \"{suffix}\") kommentkulcsa is – az egyik írás némán felülírja a másikat.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Az adatkulcs \"{dataName}\" egyben a \"{base}\" (az adatkulcs plusz a \"{suffix}\") összesített kulcsa is – az egyik írás némán felülírja a másikat.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "A {trigger} trigger beállítja a \"{name}\" változót, amely egyben a \"{questionName}\" kérdés adatkulcsa is – a változó innentől kezdve a {{name}} választ adja, nem a kérdés."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "A \"{name}\" név fenntartott – az Object.prototype tagja.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "A \"{name}\" értéknameje \"{valueName}\" az Object.prototype tagja lesz.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "A \"{name}\" oszlop a \"{matrixName}\" alatt van fenntartva – az Object.prototype tagja.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "A \"{questionName}\" \"{name}\" tétele az Object.prototype tagja lesz.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "A \"{name}\" sor \"{rowValue}\" az Object.prototype tagja lesz.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "A kiszámított \"{name}\" érték fenntartott – az Object.prototype tagja."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" ismeretlen típusú, \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "A \"{name}\" nem típussal rendelkezik – egy elem, aminek nincs típusa, elhagyják."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" nem a {ownerText} ({className}) tulajdonsága."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "A {ownerText} \"{key}\" nem serializálható – betöltéskor lép életbe, és a JSON-ból eltűnik, amikor a felmérést újra elmentik.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "A {ownerText} \"{key}\" és \"{aliasKey}\" két neve egy tulajdonságnak – a futási idő a JSON írási sorrendjében alkalmazza őket, így a \"{winner}\" nyer.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "a \"{key}\" a \"{name}\"-re van beállítva, de az inputType \"{inputType}\" korlátlanul rendelkezik – a futási idő figyelmen kívül hagyja azt."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "A {ownerText} kulcsa {valueText} – nem az engedélyezett értékek egyike ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "A {ownerText} {kulcsa} {value}, amely kívül esik az engedélyezett tartományán {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "A \"{name}\" értéknameje \"{valueName}\" egy \".\" - kifejezéseket tartalmaz, mint az \"{{valueName}} útvonalat a \"{rootKey}\"-be, így maga az adatkulcs soha nem lehet címezni."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "A {ownerText} nem tartalmaz \"{kulcs}\" – a tulajdonság szükséges egy {className} esetén.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "A {className} neve {valueText}, nem egy string – a felmérés nem tudja betölteni."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "A {ownerText} \"{kulcsa}\" nem tömb – a tulajdonság listát tartalmaz, és a futás idő egy elemes tömbbe csomagolja az értéket."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "A változó definíciója \"{változó}\" kimondja, ami egyben a \"{name}\" kérdés adatkulcsa is – a változó beállítása törli a kulcs alatt tárolt választ, és {{name}} válasza a host értékre onnantól kezdve.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "A változó definíciója a \"{változó}\" kihirdetését jelenti, ami egyben a számított \"{name}\" érték neve is – mindkettő ugyanazt a slotot írja, és az utolsó futás nyer."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "a variablePresets.definition nem survey JSON objektum, így nincs változó deklarálva, és nem lehet ellenőrizni előbeállított értéket.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets nem tömb, így nincs preset beállítva.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "A #{index} előbeállítás nem objektum.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "A #{index} előbeállításnak nincs neve, így semmi sem hivatkozhat rá.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Az \"{preset}\" előbeállítás nem tartalmaz változó objektumot, így semmit sem állít be.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "A \"{preset}\" előbeállítás kétszer van kihirdetve – egy ilyen nevű keresés az elsőt választja.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "A \"{preset}\" előbeállító \"{változó}\" beállítja, amit a változó definíció nem hirdet.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "A \"{preset}\" előbeállítás a \"{változó}\" olyan értéket állít be, amelyet a változó definíciója elutasít: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "A \"{functionName}\" függvény nincs regisztrálva."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "A kiszámított \"{names}\" érték önmagában hivatkozik önkifejezésre.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "A kiszámított értékek {nevek} egymástól függnek."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "A trigger reagál az általa beállított értékre (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "A triggerek hurkot alkotnak az általuk beállított értékeken: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "A {label} olvassa az általa írt értéket – csak akkor fut, amikor egy másik érték változik, tehát soha nem fut.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Az értékek egy hurokban vannak írva: {chain}. Minden írás újra futtatja azokat az kifejezéseket, amelyek olvasták, így a végső értékek attól függnek, hogy milyen sorrendben válaszolnak a kérdésekre."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "A feltétel összehasonlítja a \"{name}\" és {values} kifejezéseket – nem a választásai között. Elérhető: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "A feltétel összehasonlítja a \"{name}\" és {values} – nincs választási érték tartalmazza. Elérhető: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "A feltétel a \"{operator}\" \"{name}\"-re vonatkozik: \"{recordName}\" ({questionType}) nem hasonlítható össze.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "A feltétel a \"{operator}\" ({operátor}\" ({name}\" ({recordName}\" ({recordName} (érték) (értékShapeText} (érték) (érték) (érték a ShapeText}) - a sorrend és az aritmetikai operátorok nem vonatkoznak rá.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "A feltétel a \"{operator}\" \"{name}\"-re vonatkozik: a \"{recordName}\" egy boolean kérdés – a sorrendező operátorok nem vonatkoznak rá.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "A feltétel a \"{operator}\" \"{name}\"-re vonatkozik: a \"{recordName}\" szöveges kérdés – értéke egy string, így a numerikus összehasonlítás implicit átalakításon alapul.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "A feltétel a \"{operator}\" \"{name}\"-re vonatkozik: a \"{recordName}\" dátumláncot tartalmaz – összehasonlítva a {constValue} számmal nem érvényes.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "A feltétel a \"{operator}\" \"{name}\"-re vonatkozik: a \"{recordName}\" numerikus – összehasonlítva a \"{constValue}\" stringrel nem érvényes.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "A feltétel a \"{operator}\" ({operátor}\" ({name}\" ({name}\") a kiválasztott értékek tömbjét tartalmazza, így a \"=\" az egész tömböt összehasonlítja.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "A feltétel a \"{operator}\" \"{name}\"-re vonatkozik: a \"{recordName}\" egy boolean kérdés – összehasonlítva a {constValue}-val, nem érvényes."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "A {prop} \"{expression}\" mindig hamis, így a \"{name}\" sosem jelenik meg.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "A {prop} \"{expression}\" sosem érvényes, mert {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "A {prop} \"{expression}\" sosem érvényes – semmilyen engedélyezett érték nem felel meg: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "A {prop} \"{kifejezés}\" ellentmond önmagának: {tények}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "A {prop} \"{kifejezés}\" mindig igaz, így semmit sem dönt.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "A {prop} \"{kifejezés}\" aritmetikai, nem összehasonlítás, így soha nem ad igent vagy nemet.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "A {prop} \"{expression}\" egy részének olyan eredménye van, amely előre ismert.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "A {prop} \"{expression}\" mindig érvényes, mert {facts} - semmit sem dönt."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "A \"{name}\" alapértelmezett értéke {valuesText}, amelyet soha nem tud tartani. Engedélyezett: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "A \"{name}\" helyes válasza {valuesText}, amit soha nem tud megtartani. Engedélyezett: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "A trigger a \"{name}\" beállította {valuesText}-re, amit soha nem tud tartani. Engedélyezett: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Az alapértelmezett sorérték \"{name}\" beállítása {valuesText}-re, amit soha nem tud megtartani. Engedélyezett: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Az alapértelmezett panel érték a \"{name}\" értéket {valuesText}-re állítja, amit soha nem tud megtartani. Engedélyezett: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "A \"{name}\" {prop} \"{key}\" nevet ad – nincs ilyen sor. Elérhető: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "A \"{name}\" {prop} \"{key}\" nevet ad – nincs ilyen oszlop. Elérhető: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "A \"{name}\" {prop} \"{key}\" nevet ad – nincs ilyen sablonkérdés. Elérhető: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "A copyvalue trigger a \"{fromName}\" szót másolja a \"{setToName}\"-be, de a \"{fromName}\" tartalmazza a {sourceShapeText} és a \"{setToName}\" {targetShapeText}-t.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "A copyvalue trigger a \"{fromName}\" értéket másolja a \"{setToName}\"-be, de a \"{fromName}\" értéke nem tartozik a \"{setToName}\" értékek közül. Engedélyezett: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" lemásolja a választásait a \"{source}\"-ből, de ezzel a névvel kapcsolatban nincs kérdés.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" lemásolja a választásait önmagából.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" másolja a választásait a \"{source}\" ({sourceType}) szóból, amely sem választásokat, sem értéktömböt nem kínál.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" a \"{source}\" ({source}\" ({source}\" ({source}\" ({source}) esetében nincs ilyen {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "A \"{name}\" {prop} egy másik eleme már tartalmazza a {valueText} értéket – a futási idő mindkét elemet megőrzi.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "A \"{name}\" választásai tartalmazzák a {valueText}-t, míg a {toggleProp} bekapcsolva van – ütközik a beépített {specialItemText} elemmel."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "A {trigger} trigger a \"{name}\" oldalt célozza meg, amely nem létezik.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "A {trigger} trigger a \"{name}\" célját célozza meg, de a {containerType} \"{root}\" nem tartalmaz {segmentNoun} \"{segment}\"-t.",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "A {trigger} kiváltja a {ige} \"{name}\"-t, de nincs {kindText} ilyen néven."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "A \"{type}\" trigger típus nem ismert.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "A ravasznak nincs típusa."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "A \"{name}\" validátor típusa \"{type}\" nem ismert.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "A \"{name}\" validátorának nincs típusa."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "A \"{name}\" {effectText} {validatorType} validátora: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "A \"{name}\" {validatorType} validátora legalább {min} és legfeljebb {max} igényli – egyetlen válasz sem kielégíti azt.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "A \"{name}\" válaszszám validátora legalább {minCount} válaszokat igényel, a {választható} választások felett, amelyeket együtt lehet kiválasztani.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "A \"{name}\" regex validátora egy mintát tartalmaz, amit a motor elutasít: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "A \"{name}\" validátorának nincs kifejezése, így mindig átmegy."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "A \"{name}\" {minProp} {min}, a {max} {max} fölött – a futási idő némán állít be egyiket.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "A \"{name}\" {countProp} {count}, {direction} a {boundProp} {bound} - a futási idő rögzíti azt.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "A \"{name}\" {stepProp} {step}, de az a tartomány, amelyen átlép ({minProp}.. {maxProp}) csak {range} lebeg – a futási idő rögzíti azt.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "A \"{name}\" minSelectedChoices {min}, a {választható} opciók fölött áll, amelyeket együtt lehet kiválasztani – a kérdésre soha nem lehet választ adni."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" soha nem válhat láthatóvá: a visibleIf {reads} (olvas} ({deadClause} következik, így a feltétel sosem érvényes."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "A \"{maskType}\" \"{maskType}\" a \"{name}\" maszktípusa nem ismert maszk – a futási idő visszaesik arra, hogy egyáltalán nincs maszk.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "A \"{name}\" maskSettings beállítja a \"{key}\"-t, ami nem a \"{maskType}\" maszk tulajdonsága – a futás idő némán dobja el.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "A \"{name}\" maszkbeállításai maskType nélkül vannak beállítva – a futási idő csak a \"saveMaskedValue\" megőrzi, a többit pedig elveszi.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "A \"{name}\" {maskType} maszkja nincs bemenetre vonatkozik: az inputType \"{inputType}\" csak szövegre és tel-re van lefedve.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "A \"{name}\" dátumidő-maszkja min/maxot állít be minta nélkül – a határok a minta dátumrészeire vonatkoznak, így ha nincs minta, semmit sem csinálnak.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "A \"{name}\" {maskType} maszkja legalább {min} és legfeljebb {max} lehetőséget ad – egyetlen érték sem kielégíti azt."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "A dinamikus \"{name}\" panelnek üres sablonja van – a panelein nincs semmi, amit megjeleníthetnék.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "A {kindText} \"{name}\" elemei vannak.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "A {kindText} \"{name}\" nem tartalmaz olyan elemeket, amelyek valaha megjeleníthetők lennének – minden elem el van rejtve, egy soha nem érvényes feltétel védi, vagy üres.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "A \"{name}\" részletelemei soha nem jelennek meg: a detailPanelMode \"none\", ami az alapértelmezett opció."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Pozíció: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "A trigger régi nevéből, operátorából és értéktulajdonságaiból épült.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Bent: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Azt érted, hogy \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Ha egyedi komponens, add át a definícióját a linternek, hogy teljes elemzést lehessen tenni.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Regisztráld a funkciót a lintálás előtt, vagy listázd fel a linter opciókban.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Egy hibásan írt típus csendben eldobódik a futás idején, és egy egyedi trigger nem fedi le a célpont és a ciklus ellenőrzéseket.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Ha futási időben változó van beállítva, tüntesd fel a linter opciókban.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "A hurok elérhetetlen lehet, ha a trigger feltételek sosem tartanak össze – ellenőrizd a kifejezéseket.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "Az defaultValueExpression csak addig érvényes, amíg a kérdésére választ ad.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Kifejezésben: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Hivatkozás a kötésekben.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Hivatkozva a choicesByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Hivatkozva a \"{0}\" szövegben.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () minden \"{2}\" bejegyzésből olvassa fel ezt a nevet {1} bejegyzésből.",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "A {0}() érv nem nevez meg kérdést, panelt vagy oldalt.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "A deserializátor eldob egy kulcsot, amit nem ismer.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "A deserializátor eldob egy validátort, amit nem tud megoldani, így semmi sem validálja.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "A bemenet típusa \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Ez az \"{0}\" adatkulcsa." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "és",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} mindig {érték}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} az {határok}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Legalább {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "legfeljebb {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} nem lehet mindkét {érték}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} nem lehet {érték} és nem az",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} nem lehet üres és {érték}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} nem lehet üres és nem üres",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} nem lehet {min} felett és alatt {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} azt kérik, hogy egyáltalán értéktelen legyen"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Az \"{0}.\" hivatkozások csak egy mátrix cellán vagy egy mátrix részletpanelen belül érhetők el.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "Az \"{0}\" csak egy mátrix cellán vagy egy mátrix részletpanelen belül érhető el.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Az \"{0}.\" hivatkozások csak dinamikus panelen vagy paneltárolóban találhatók.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Az \"{0}.\" hivatkozások csak dinamikus panelen belül érhetők el.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "A \"{0}\" csak dinamikus panelen belül érhető el.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "Az \"{0}\" csak a választás, sor- és oszlopfeltételek között érhető el.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "Az \"{0}.\" hivatkozások csak összetett kérdésben érhetők el.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "Az \"{0}\" ennek a mátrixnak az oszlopa – hivatkozz rá a sor előtaggal.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "Az \"{0}\" ennek a dinamikus panelnek a kérdése – hivatkoznak rá a panel előtagjával."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Állítsd be az inputType-t: \"number\" a \"{0}\"-re, ha számokat gyűjt.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Használj \"contains\" vagy \"anyof\" opciókat többszörös kiválasztó értékekhez."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "oldal",
+        // [Auto-translated] "panel"
+        panel: "Panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Név",
+        // [Auto-translated] "valueName"
+        valueName: "értéknév",
+        // [Auto-translated] "name"
+        calculatedValue: "Név"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Kiszámított érték",
+        // [Auto-translated] "element"
+        default: "elem"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "A felmérés",
+        // [Auto-translated] "the {0}"
+        className: "a {0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Egyéb",
+        // [Auto-translated] "None"
+        none: "Nincs",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Megtagadd a válaszadást",
+        // [Auto-translated] "Don't know"
+        dontknow: "Nem tudom"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "sosem lő",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "minden választ elutasít",
+        // [Auto-translated] "cannot validate"
+        default: "nem lehet validálni"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "A kérdésre nincs válasz, amit igazolni lehetne",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "egy hosszúságot olvasnak egy szövegértékről, és ennek a válasznak nincs ilyen értéke",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "A válasz nem egy szám, és soha nem is lehet az",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Egy szám soha nem egyezik meg egy e-mail címmel",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "A válasz nem értéklista",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "A válasz nem egy érték, amit ellenőrizni tud"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "egy tömb",
+        // [Auto-translated] "an object"
+        object: "egy tárgy"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "egy kiválasztott értékekből álló tömb",
+        // [Auto-translated] "a single value"
+        scalar: "egyetlen érték",
+        // [Auto-translated] "a value"
+        default: "egy érték"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "alább",
+        // [Auto-translated] "above"
+        above: "fent"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "sosem látható, és soha nem kap értéket",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "sosem láthatóak és soha nem kapnak értéket"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Kérdés",
+        // [Auto-translated] "question or variable"
+        questionvalue: "kérdés vagy változó",
+        // [Auto-translated] "page"
+        page: "oldal"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Olvasmányok",
+        // [Auto-translated] "navigates to"
+        gotoName: "navigál",
+        // [Auto-translated] "sets"
+        default: "Készletek"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Sablon kérdés",
+        // [Auto-translated] "column"
+        default: "oszlop"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Sablon kérdés",
+        // [Auto-translated] "column"
+        matrixdynamic: "oszlop",
+        // [Auto-translated] "item"
+        multipletext: "Tárgy",
+        // [Auto-translated] "row"
+        matrix: "Sor",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Sor",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "oszlop",
+        // [Auto-translated] "field"
+        default: "Mező"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

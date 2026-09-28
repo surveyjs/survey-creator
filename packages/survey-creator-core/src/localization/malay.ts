@@ -142,6 +142,10 @@ export var msStrings = {
     jsonHideErrors: "Sembunyikan ralat",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Tunjukkan ralat",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Betulkan ralat",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "JSON tinjauan mesti menjadi objek.",
     // "Undo"
     undo: "Buat Asal",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var msStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Pratetap digunakan"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Baris: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Gunakan nama yang dicadangkan"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Buang item yang diulang"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Gunakan jenis yang dicadangkan"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Gunakan fungsi yang dicadangkan"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Gunakan topeng yang dicadangkan"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Berikan elemen nama percuma"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Berikan elemen nama percuma"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Buang sifat tersebut"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Gunakan nilai yang dibenarkan terdekat",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Buang sifat tersebut",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Gunakan nilai yang dicadangkan"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Tukar nilai menjadi senarai"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Berikan elemen itu nama"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Buang sifat tersebut",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Tukar nama hartanah"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Gunakan nama yang dicadangkan",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Gunakan nama yang dicadangkan"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Gunakan nama yang dicadangkan"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Gunakan jenis yang dicadangkan"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Gunakan jenis yang dicadangkan"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Ungkapan \"{expression}\" tidak boleh diuraikan."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" tidak ditemui - tiada soalan, panel, halaman, nilai terhitung, atau pembolehubah dengan nama itu wujud.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" tidak ditemui dalam {containerType} \"{root}\" (rujukan: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" tidak terdapat dalam skop \"{scopePrefix}\" (rujukan: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName bagi \"{name}\" menamakan \"{key}\" - \"{name}\" tidak mempunyai {keyNoun} dengan nama itu, jadi pengesahan duplicate-key tidak pernah dijalankan.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" tidak dijumpai."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} dalam \"{name}\" merujuk kepada elemen itu sendiri (rujukan: {rujukan})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Nama \"{name}\" diduplikasi.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Nama nilai terkira \"{name}\" sudah digunakan oleh nilai terkira lain.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Nilai yang dikira \"{name}\" berkongsi namanya dengan elemen lain, jadi salah satu daripadanya membayangi elemen yang lain."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" dalam {ownerText} ini juga merupakan pembolehubah tinjauan terbina dalam {{builtIn}} - tinjauan menjawab {{name}} terlebih dahulu, jadi yang ini tidak boleh dicapai dalam ungkapan.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "ValueName \"{valueName}\" dalam \"{name}\" juga merupakan nama soalan \"{otherName}\" - kedua-duanya menyimpan jawapan mereka di bawah kunci data \"{valueName}\".",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Kunci data \"{dataName}\" juga merupakan kunci komen bagi \"{base}\" (kunci datanya ditambah \"{akhiran}\") - satu penulisan menulis secara senyap menimpa yang lain.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Kunci data \"{dataName}\" juga merupakan kunci jumlah bagi \"{base}\" (kunci datanya ditambah \"{akhiran}\") - satu penulisan menulis secara senyap menimpa yang lain.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Pencetus {trigger} menetapkan pembolehubah \"{name}\", yang juga merupakan kunci data bagi soalan \"{questionName}\" - pembolehubah akan menjawab {{name}} selepas itu, bukan soalan."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Nama \"{name}\" dikhaskan - ahli Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" bagi \"{name}\" adalah terpelihara - ahli Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Lajur \"{name}\" dalam \"{matrixName}\" adalah terpelihara - ahli Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Item \"{name}\" dalam \"{questionName}\" adalah terpelihara - ahli Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Baris \"{rowValue}\" dalam \"{name}\" adalah terpelihara - ahli Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Nilai yang dikira \"{name}\" dikhaskan - ahli Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" mempunyai jenis tidak diketahui \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" tidak mempunyai jenis - elemen tanpa jenis akan dibuang."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" bukan sifat {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" dalam {ownerText} tidak boleh disirikan - ia berkesan semasa dimuatkan, dan akan dibuang dari JSON setiap kali tinjauan disimpan semula.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" dan \"{aliasKey}\" dalam {ownerText} adalah dua nama bagi satu sifat - masa jalan menggunakannya mengikut susunan JSON menulisnya, jadi \"{winner}\" menang.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" ditetapkan pada \"{name}\", tetapi inputType \"{inputType}\" tiada batasan - masa jalan mengabaikannya."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} bagi {ownerText} ialah {valueText} - bukan salah satu nilai yang dibenarkan ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{key} bagi {ownerText} ialah {value}, di luar julat yang dibenarkan {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName \"{valueName}\" dalam \"{name}\" mengandungi \".\" - ungkapan yang dibaca {{valueName}} sebagai laluan ke \"{rootKey}\", jadi kunci data itu sendiri tidak boleh dialamatkan."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} tidak mempunyai \"{key}\" - sifat ini diperlukan untuk {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Nama {className} ialah {valueText}, bukan rentetan - tinjauan tidak boleh memuatkannya."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" dalam {ownerText} bukan array - sifat ini memegang senarai, dan masa jalan membungkus nilai tersebut menjadi array satu item."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Definisi pembolehubah mengisytiharkan \"{pembolehubah}\", yang juga merupakan kunci data bagi soalan \"{name}\" - menetapkan pembolehubah akan memadam jawapan yang disimpan di bawah kunci itu, dan {{name}} menjawab nilai hos selepas itu.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Definisi pembolehubah mengisytiharkan \"{variable}\", yang juga merupakan nama nilai terkira \"{name}\" - kedua-duanya menulis slot yang sama, dan yang terakhir berlari menang."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition bukan objek JSON tinjauan, jadi tiada pembolehubah diisytiharkan dan tiada nilai pratetap boleh diperiksa.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets bukan satu tatasusunan, jadi tiada preset diisytiharkan.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Pratetap #{index} bukan objek.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Pratetap #{index} tiada nama, jadi tiada apa yang boleh merujuknya.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Pratetap \"{preset}\" membawa objek tiada pembolehubah, jadi ia tidak menetapkan apa-apa.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Pratetap \"{preset}\" diisytiharkan dua kali - carian dengan nama itu menjawab dengan yang pertama.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Pratetap \"{preset}\" menetapkan \"{variable}\", yang tidak diisytiharkan oleh definisi pembolehubah.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Praset \"{preset}\" menetapkan \"{variable}\" kepada nilai yang ditolak oleh definisi pembolehubah: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Fungsi \"{functionName}\" tidak didaftarkan."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Nilai yang dikira \"{names}\" merujuk dirinya sendiri dalam ungkapannya sendiri.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Nilai yang dikira {nama} bergantung antara satu sama lain."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Pencetus bertindak balas kepada nilai yang ditetapkan sendiri (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Pencetus membentuk gelung melalui nilai yang mereka tetapkan: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} membaca nilai yang ditulisnya sendiri - ia hanya berjalan apabila nilai lain berubah, jadi ia tidak pernah berjalan langsung.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Nilai-nilai ditulis dalam gelung: {chain}. Setiap penulisan menjalankan semula ungkapan yang membacanya, jadi nilai akhir bergantung pada urutan soalan dijawab."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Syarat ini membandingkan \"{name}\" dengan {values} - bukan antara pilihannya. Tersedia: {tersedia}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Syarat ini membandingkan \"{name}\" dengan {values} - tiada nilai pilihan yang mengandungi syarat tersebut. Tersedia: {tersedia}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Syarat ini menggunakan \"{operator}\" kepada \"{name}\": \"{recordName}\" ({questionType}) tiada nilai untuk dibandingkan.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Syarat ini menggunakan \"{operator}\" kepada \"{name}\": \"{recordName}\" memegang {valueShapeText} - operator susunan dan aritmetik tidak terpakai kepadanya.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Syarat ini terpakai \"{operator}\" kepada \"{name}\": \"{recordName}\" adalah soalan boolean - operator susunan tidak terpakai kepadanya.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Syarat ini menggunakan \"{operator}\" kepada \"{name}\": \"{recordName}\" adalah soalan teks - nilainya adalah rentetan, jadi perbandingan nombor bergantung pada penukaran tersirat.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Syarat ini menggunakan \"{operator}\" kepada \"{name}\": \"{recordName}\" memegang rentetan tarikh - membandingkannya dengan nombor yang tidak dapat dipegang oleh {constValue}.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Syarat ini menggunakan \"{operator}\" kepada \"{name}\": \"{recordName}\" adalah berangka - jika dibandingkan dengan rentetan \"{constValue}\" tidak boleh dipenuhi.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Syarat ini menggunakan \"{operator}\" kepada \"{name}\": \"{recordName}\" memegang tatasusunan nilai yang dipilih, jadi \"=\" membandingkan keseluruhan tatasusunan.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Syarat ini terpakai \"{operator}\" kepada \"{name}\": \"{recordName}\" adalah soalan boolean - membandingkannya dengan {constValue} tidak boleh diterima."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" sentiasa palsu, jadi \"{name}\" tidak pernah dipaparkan.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{ekspresi}\" tidak pernah berlaku, kerana {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{ekspresi}\" tidak pernah sah - tiada nilai yang dibenarkan memenuhinya: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{ekspresi}\" bercanggah dengan dirinya sendiri: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{ekspresi}\" sentiasa benar, jadi ia tidak memutuskan apa-apa.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{ekspresi}\" adalah aritmetik, bukan perbandingan, jadi ia tidak pernah memberikan ya atau tidak.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Sebahagian daripada {prop} \"{ekspresi}\" mempunyai hasil yang diketahui dari awal.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{ekspresi}\" sentiasa berlaku, kerana {facts} - ia tidak menentukan apa-apa."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Nilai lalai \"{name}\" ialah {valuesText}, yang tidak akan pernah dipegang. Dibenarkan: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Jawapan yang betul untuk \"{name}\" ialah {valuesText}, yang mana ia tidak pernah boleh tahan. Dibenarkan: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Pencetus menetapkan \"{name}\" kepada {valuesText}, yang mana ia tidak pernah boleh tahan. Dibenarkan: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Nilai baris lalai menetapkan \"{name}\" kepada {valuesText}, yang tidak pernah boleh dipegang. Dibenarkan: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Nilai panel lalai menetapkan \"{name}\" kepada {valuesText}, yang mana ia tidak pernah boleh tahan. Dibenarkan: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} bagi \"{name}\" menamakan \"{key}\" - tiada baris sedemikian. Tersedia: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} bagi \"{name}\" menamakan \"{key}\" - tiada lajur sedemikian. Tersedia: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} bagi \"{name}\" menamakan \"{key}\" - tiada soalan templat seperti itu. Tersedia: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Pencetus copyvalue menyalin \"{fromName}\" ke dalam \"{setToName}\", tetapi \"{fromName}\" memegang {sourceShapeText} dan \"{setToName}\" memegang {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Pencetus nilai salinan menyalin \"{fromName}\" ke dalam \"{setToName}\", tetapi tiada nilai \"{fromName}\" antara nilai yang boleh dipegang oleh \"{setToName}\". Dibenarkan: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" menyalin pilihannya dari \"{source}\", tetapi tiada soalan dengan nama itu wujud.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" menyalin pilihannya dari dirinya sendiri.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" menyalin pilihannya daripada \"{source}\" ({sourceType}), yang tidak menyediakan pilihan mahupun tatasusunan nilai.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" bermaksud {prop} \"{field}\" daripada \"{source}\", tetapi {sourceType} \"{source}\" tidak mempunyai {fieldNoun} seperti itu."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Satu lagi item dalam {prop} \"{name}\" sudah mempunyai nilai {valueText} - masa jalan mengekalkan kedua-dua item.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Pilihan \"{name}\" mengandungi {valueText} semasa {toggleProp} dihidupkan - ia bertembung dengan item terbina dalam {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Pencetus {trigger} menyasarkan halaman \"{name}\", yang tidak wujud.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Pencetus {trigger} menyasarkan \"{name}\", tetapi {containerType} \"{root}\" tidak mempunyai {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger} mencetuskan {kata kerja} \"{name}\", tetapi tiada {kindText} dengan nama itu wujud."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Jenis pencetus \"{type}\" tidak diketahui.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Pencetus itu tiada jenis."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Jenis validator \"{type}\" bagi \"{name}\" tidak diketahui.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Validator bagi \"{name}\" tidak mempunyai jenis."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "Validator {validatorType} bagi \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Validator {validatorType} bagi \"{name}\" memerlukan sekurang-kurangnya {min} dan paling banyak {max} - tiada jawapan yang memuaskannya.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Validator answercount bagi \"{name}\" memerlukan sekurang-kurangnya jawapan {minCount}, di atas pilihan {selectable} yang boleh dipilih bersama.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Validator regex bagi \"{name}\" mempunyai corak yang ditolak oleh enjin: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Validator ungkapan \"{name}\" tidak mempunyai ungkapan, jadi ia sentiasa dilepaskan."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} bagi \"{name}\" ialah {min}, di atas {maxProp} bagi {max} - masa larian secara senyap melaraskan salah satu daripadanya.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} bagi \"{name}\" ialah {count}, {direction} ialah {boundProp} bagi {bound} - masa larian mengetatnya.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} bagi \"{name}\" ialah {step}, tetapi julat yang dilaluinya ({minProp}.. {maxProp}) hanya merangkumi {julat} - masa larian mengetatnya.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "MinSelectedChoices bagi \"{name}\" ialah {min}, di atas pilihan {selectable} yang boleh dipilih bersama - soalan ini tidak akan pernah dijawab."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" tidak akan pernah menjadi kelihatan: visibleIf membaca {reads}, yang mana {deadClause}, jadi syarat ini tidak pernah berlaku."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Jenis topeng \"{maskType}\" dalam \"{name}\" bukanlah topeng yang diketahui - masa jalan kembali kepada tiada topeng langsung.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "Tetapan masking \"{name}\" menetapkan \"{key}\", yang bukan sifat topeng \"{maskType}\" - masa jalan akan menghilangkannya secara senyap.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Tetapan masking \"{name}\" ditetapkan tanpa maskType - masa jalan hanya mengekalkan \"saveMaskedValue\" dan membuang selebihnya.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Topeng {maskType} bagi \"{name}\" tidak terpakai kepada sebarang input: inputType \"{inputType}\" hanya disembunyikan untuk teks dan tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Topeng datetime bagi \"{name}\" menetapkan min/max tanpa corak - had terpakai kepada bahagian tarikh corak, jadi tanpa satu ia tidak melakukan apa-apa.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Topeng {maskType} bagi \"{name}\" membenarkan sekurang-kurangnya {min} dan paling banyak {max} - tiada nilai yang memuaskannya."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Panel dinamik \"{name}\" mempunyai templat kosong - panelnya tiada apa-apa untuk dipaparkan.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" tidak mempunyai elemen.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" tidak mempunyai elemen yang boleh dipaparkan - setiap elemen tersembunyi, dilindungi oleh syarat yang tidak pernah berlaku, atau kosong.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Elemen perincian \"{name}\" tidak pernah dipaparkan: detailPanelMode adalah \"none\", yang merupakan lalai."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Kedudukan: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Ia dibina daripada nama legasi, operator dan sifat nilai pencetus.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Di dalam: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Maksud kamu \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Jika ia adalah komponen tersuai, serahkan definisinya kepada linter untuk membolehkan analisis penuh.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Daftarkan fungsi sebelum linting, atau senaraikan dalam pilihan linter.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Jenis yang salah eja akan dijatuhkan secara senyap semasa masa jalan, dan pencetus tersuai tidak dilindungi oleh pemeriksaan sasaran dan kitaran.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Jika ia adalah pembolehubah yang ditetapkan semasa masa jalan, senaraikan dalam pilihan linter.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Gelung mungkin tidak dapat dicapai jika syarat pencetus tidak pernah kekal bersama - sahkan ekspresi tersebut.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "DefaultValueExpression hanya terpakai sehingga soalannya dijawab.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Dalam ungkapan: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Dirujuk dalam ikatan.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Dirujuk dalam {0} choicesByUrl.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Dirujuk dalam teks \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () membaca nama itu daripada setiap entri {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argumen {0}() tidak menamakan soalan, panel atau halaman.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializer menjatuhkan kekunci yang tidak dikenali.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializer menjatuhkan validator yang tidak dapat diselesaikan, jadi tiada apa yang disahkan.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "InputType ialah \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Ia adalah kunci data bagi \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "dan",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} sentiasa {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} ialah {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "sekurang-kurangnya {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "paling banyak {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} tidak boleh kedua-duanya {nilai}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} tidak boleh menjadi {value} dan bukan ia",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} tidak boleh kosong dan menjadi {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} tidak boleh kosong dan tidak kosong",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} tidak boleh berada di atas {min} dan di bawah {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} diminta untuk menjadi satu yang tidak bernilai langsung"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Rujukan \"{0}.\" hanya tersedia di dalam sel matriks atau panel perincian matriks.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" hanya tersedia di dalam sel matriks atau panel perincian matriks.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Rujukan \"{0}.\" hanya tersedia di dalam panel dinamik atau bekas panel.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Rujukan \"{0}.\" hanya tersedia di dalam panel dinamik.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" hanya tersedia di dalam panel dinamik.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" hanya tersedia dalam syarat pilihan, baris dan lajur.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "Rujukan \"{0}.\" hanya tersedia dalam soalan komposit.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" ialah lajur dalam matriks ini - rujuknya dengan awalan baris.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" adalah persoalan panel dinamik ini - rujuk dengan awalan panel."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Tetapkan inputType: \"number\" pada \"{0}\" jika ia mengumpul nombor.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Gunakan \"contains\" atau \"anyof\" untuk nilai pemilihan berganda."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "halaman",
+        // [Auto-translated] "panel"
+        panel: "panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "nama",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "nama"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "nilai yang dikira",
+        // [Auto-translated] "element"
+        default: "elemen"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "tinjauan",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Lain-lain",
+        // [Auto-translated] "None"
+        none: "Tiada",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Tolak untuk menjawab",
+        // [Auto-translated] "Don't know"
+        dontknow: "Tak tahu"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "tidak pernah menembak",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "menolak setiap jawapan",
+        // [Auto-translated] "cannot validate"
+        default: "tidak dapat mengesahkan"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Soalan tidak mempunyai jawapan untuk disahkan",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "panjang dibaca daripada nilai teks, dan jawapan ini tiada",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Jawapannya bukan nombor dan tidak pernah boleh menjadi",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "nombor tidak pernah sepadan dengan alamat e-mel",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Jawapannya bukan senarai nilai",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Jawapannya bukan nilai yang boleh diperiksa"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "satu tatasusunan",
+        // [Auto-translated] "an object"
+        object: "sebuah objek"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "satu tatasusunan nilai yang dipilih",
+        // [Auto-translated] "a single value"
+        scalar: "satu nilai tunggal",
+        // [Auto-translated] "a value"
+        default: "nilai"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "di bawah",
+        // [Auto-translated] "above"
+        above: "di atas"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "tidak pernah kelihatan dan tidak pernah menerima nilai",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "tidak pernah kelihatan dan tidak pernah menerima nilai"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "soalan",
+        // [Auto-translated] "question or variable"
+        questionvalue: "soalan atau pembolehubah",
+        // [Auto-translated] "page"
+        page: "halaman"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "membaca",
+        // [Auto-translated] "navigates to"
+        gotoName: "menavigasi ke",
+        // [Auto-translated] "sets"
+        default: "set"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "soalan templat",
+        // [Auto-translated] "column"
+        default: "lajur"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "soalan templat",
+        // [Auto-translated] "column"
+        matrixdynamic: "lajur",
+        // [Auto-translated] "item"
+        multipletext: "item",
+        // [Auto-translated] "row"
+        matrix: "baris",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "baris",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "lajur",
+        // [Auto-translated] "field"
+        default: "medan"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

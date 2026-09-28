@@ -142,6 +142,10 @@ export var hrStrings = {
     jsonHideErrors: "Sakrij pogreške",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Pokaži pogreške",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Ispravak pogreške",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Survey JSON mora biti objekt.",
     // "Undo"
     undo: "Poništiti",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var hrStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Primijenjen predpostavka"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Linija: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Koristite predloženi naziv"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Ukloni ponovljenu stavku"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Koristite preporučeni tip"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Koristite predloženu funkciju"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Koristi predloženu masku"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dajte elementu slobodno ime"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dajte elementu slobodno ime"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Uklonite nekretninu"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Koristite najbližu dopuštenu vrijednost",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Uklonite nekretninu",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Iskoristite predloženu vrijednost"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Pretvorite vrijednost u popis"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Dajte elementu ime"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Uklonite nekretninu",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Preimenovati nekretninu"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Koristite predloženi naziv",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Koristite predloženi naziv"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Koristite predloženi naziv"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Koristite preporučeni tip"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Koristite preporučeni tip"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Izraz \"{expression}\" ne može se parsirati."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" nije pronađen – ne postoji pitanje, panel, stranica, izračunata vrijednost ili varijabla s tim imenom.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" se ne nalazi u {containerType} \"{root}\" (referenca: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" se ne nalazi u opsegu \"{scopePrefix}\" (referenca: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName od \"{name}\" naziva \"{key}\" - \"{name}\" nema {keyNoun} s tim imenom, pa se validacija duplikata ključa nikada ne izvršava.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" nije pronađen."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} u \"{name}\" referira se na sam element (referenca: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Ime \"{name}\" je duplicirano.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Izračunato ime vrijednosti \"{name}\" već koristi druga izračunata vrijednost.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Izračunata vrijednost \"{name}\" dijeli ime s drugim elementom, pa jedan od njih sjenjuje drugi."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" ovog {ownerText} također je ugrađena varijabla ankete {{builtIn}} - anketa odgovara prva {{name}}, pa je ova nedostupna u izrazima.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "valueName \"{valueName}\" od \"{name}\" također je naziv pitanja \"{otherName}\" – oba pohranjuju svoj odgovor pod podatkovnim ključem \"{valueName}\".",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Podatkovni ključ \"{dataName}\" je također komentarni ključ za \"{base}\" (njegov podatkovni ključ plus \"{suffix}\") – jedan zapis tiho prepisuje drugog.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Podatkovni ključ \"{dataName}\" je također ukupni ključ za \"{base}\" (njegov podatkovni ključ plus \"{sufiks}\") – jedan zapis tiho prepisuje drugi.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Okidač {trigger} postavlja varijablu \"{name}\", koja je također podatkovni ključ pitanja \"{questionName}\" – varijabla odgovori {{name}} od tada nadalje, a ne samo pitanje."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Naziv \"{name}\" je rezerviran - član Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" od \"{name}\" je rezerviran - član Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Stupac \"{name}\" u \"{matrixName}\" je rezerviran - član Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Stavka \"{name}\" iz \"{questionName}\" je rezervirana - član Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Redak \"{rowValue}\" od \"{name}\" je rezerviran - član Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Izračunata vrijednost \"{name}\" je rezervirana - član Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" ima nepoznati tip \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" nema tip – element bez tipa se izbacuje."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" nije svojstvo {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" iz {ownerText} nije serijalizirajući – aktivira se pri učitavanju i uklanja se iz JSON-a svaki put kad se anketa ponovno sprema.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" i \"{aliasKey}\" iz {ownerText} su dva imena jednog svojstva – vrijeme izvršavanja ih primjenjuje redoslijedom kojim ih JSON piše, pa \"{winner}\" pobjeđuje.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" je postavljen na \"{name}\", ali inputType \"{inputType}\" nema granica – vrijeme izvršavanja ga ignorira."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} od {ownerText} je {valueText} - nije jedna od dopuštenih vrijednosti ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{key} od {ownerText} je {value}, izvan dopuštenog raspona {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName \"{valueName}\" od \"{name}\" sadrži \".\" - izraz čita {{valueName}} kao put u \"{rootKey}\", tako da se sam podatkovni ključ nikada ne može adresirati."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} nema \"{key}\" - svojstvo je potrebno za {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Naziv {className} je {valueText}, a ne string - anketa ga ne može učitati."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" u {ownerText} nije niz - svojstvo drži listu, a vrijeme izvršavanja umotava vrijednost u niz od jedne stavke."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Definicija varijable deklarira \"{variable}\", što je također podatkovni ključ pitanja \"{name}\" - postavljanje varijable briše odgovor pohranjen pod tim ključem, a {{name}} od tada odgovara na vrijednost domaćina.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Definicija varijable deklarira \"{varijabla}\", što je također naziv izračunate vrijednosti \"{name}\" – oba upisuju isti slot, a onaj koji se zadnji pokrene pobjeđuje."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition nije Survey JSON objekt, pa se ne deklarira varijabla niti se može provjeriti unaprijed postavljena vrijednost.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets nije niz, pa se preset ne deklarira.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Preset #{index} nije objekt.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Preset #{index} nema ime, pa ga ništa ne može referencirati.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Preset \"{preset}\" ne nosi objekt bez varijabli, pa ne postavlja ništa.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Preset \"{preset}\" se deklarira dvaput – pretraga s tim imenom odgovara prvom.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Preset \"{preset}\" postavlja \"{varijabla}\", što definicija varijable ne deklarira.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Preset \"{preset}\" postavlja \"{varijabla}\" na vrijednost koju definicija varijable odbacuje: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Funkcija \"{functionName}\" nije registrirana."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Izračunata vrijednost \"{names}\" referira se sama na sebe u vlastitom izrazu.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Izračunate vrijednosti {imena} ovise jedna o drugoj."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Okidač reagira na vrijednost koju sam sebi postavi (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Okidači tvore petlju kroz vrijednosti koje postave: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} čita vrijednost koju sam zapisuje – pokreće se samo kad se druga vrijednost promijeni, pa se uopće ne pokreće.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Vrijednosti se zapisuju u petlji: {chain}. Svaki zapis ponovno pokreće izraze koji ga čitaju, pa konačne vrijednosti ovise o redoslijedu u kojem se pitanja odgovaraju."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Uvjet uspoređuje \"{name}\" s {values} - nije među njegovim izborima. Dostupno: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Uvjet uspoređuje \"{name}\" s {values} - nijedna vrijednost izbora ga ne sadrži. Dostupno: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" ({questionType}) nema vrijednost za usporedbu.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" drži {valueShapeText} - redoslijed i aritmetički operatori se na njega ne primjenjuju.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" je booleovo pitanje – operatori redoslijeda se na njega ne primjenjuju.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" je tekstualno pitanje - njegova vrijednost je string, pa se numerička usporedba oslanja na implicitnu konverziju.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" sadrži niz datuma – uspoređujući ga s brojem koji {constValue} ne može držati.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" je numerički - usporedba s nizom \"{constValue}\" ne može vrijediti.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" sadrži niz odabranih vrijednosti, pa \"=\" uspoređuje cijeli niz.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" je booleovo pitanje – usporedba s {constValue} ne može vrijediti."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" je uvijek lažan, pa se \"{name}\" nikada ne prikazuje.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{expression}\" nikada ne vrijedi, jer {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" nikada ne vrijedi – nijedna dopuštena vrijednost ga ne zadovoljava: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{expression}\" proturječi sam sebi: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expression}\" je uvijek istinit, pa ne odlučuje o ničemu.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{izraz}\" je aritmetika, a ne usporedba, pa nikad ne daje da ili ne.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Dio {prop} \"{expression}\" ima rezultat koji je poznat unaprijed.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{expression}\" uvijek vrijedi, jer {facts} - ne odlučuje ništa."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Zadana vrijednost \"{name}\" je {valuesText}, koju nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Točan odgovor na \"{name}\" je {valuesText}, koji nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Okidač postavlja \"{name}\" na {valuesText}, što nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Zadana vrijednost retka postavlja \"{name}\" na {valuesText}, što nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Zadana vrijednost panela postavlja \"{name}\" na {valuesText}, što nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} \"{name}\" naziva \"{key}\" - nema takvog retka. Dostupno: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} u \"{name}\" naziva \"{key}\" - nema takvog stupca. Dostupno: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} \"{name}\" naziva \"{key}\" - nema takvog pitanja o predlošku. Dostupno: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Copyvalue okidač kopira \"{fromName}\" u \"{setToName}\", ali \"{fromName}\" drži {sourceShapeText}, a \"{setToName}\" drži {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Copyvalue okidač kopira \"{fromName}\" u \"{setToName}\", ali nijedna vrijednost \"{fromName}\" nije među vrijednostima koje \"{setToName}\" može imati. Dopušteno: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" kopira svoje odluke iz \"{source}\", ali s tim imenom nema dileme.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" kopira svoje izbore od sebe.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopira svoje izbore iz \"{source}\" ({sourceType}), koja ne pruža ni izbore ni niz vrijednosti.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" čita {prop} \"{field}\" iz \"{source}\", ali {sourceType} \"{source}\" nema takav {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Još jedan element {prop} \"{name}\" već ima vrijednost {valueText} - vrijeme izvršavanja zadržava oba elementa.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Izbori \"{name}\" sadrže {valueText} dok je {toggleProp} uključen - to se sudara s ugrađenom stavkom {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Okidač {trigger} cilja stranicu \"{name}\", koja ne postoji.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Okidač {trigger} cilja \"{name}\", ali {containerType} \"{root}\" nema {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "Okidač {verb} \"{name}\", ali ne postoji {kindText} s tim imenom."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Tip okidača \"{tip}\" nije poznat.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Okidač nema tip."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Tip validatora \"{type}\" od \"{name}\" nije poznat.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Validator \"{name}\" nema tip."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType} validator za \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "{validatorType} validator za \"{name}\" zahtijeva barem {min} i najviše {max} - nijedan odgovor ga ne zadovoljava.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Validator broja odgovora za \"{name}\" zahtijeva barem {minCount} odgovora, iznad {selectable} opcija koje se mogu odabrati zajedno.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Regex validator za \"{name}\" ima obrazac koji engine odbacuje: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Izraz validator \"{name}\" nema izraz, pa uvijek prolazi."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} od \"{name}\" je {min}, iznad {maxProp} od {max} - vrijeme izvršavanja tiho prilagođava jedan od njih.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} od \"{name}\" je {count}, {direction} njegov {boundProp} od {bound} - vrijeme izvršavanja ga ograničava.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} od \"{name}\" je {step}, ali raspon kroz koji prolazi ({minProp}.. {maxProp}) obuhvaća samo {range} - vrijeme izvođenja ga ograničava.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices za \"{name}\" je {min}, iznad {selectable} izbora koji se mogu odabrati zajedno – pitanje se nikada ne može odgovoriti."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" nikada ne može postati vidljivo: vidljivo je Ako čita {reads}, što {deadClause}, pa uvjet nikada ne vrijedi."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "MaskType \"{maskType}\" u \"{name}\" nije poznata maska – vrijeme izvođenja se vraća na potpuni nedostatak maske.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "maskPostavke \"{name}\" postavljaju \"{key}\", što nije svojstvo maske \"{maskType}\" - vrijeme izvođenja je tiho odbacuje.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "maskPostavke \"{name}\" su postavljene bez maskType - vrijeme izvršavanja zadržava samo \"saveMaskedValue\" i odbacuje ostatak.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Maska {maskType} za \"{name}\" primjenjuje se bez ulaza: inputType \"{inputType}\" je maskiran samo za tekst i tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Maska datuma \"{name}\" postavlja minimum/maksimum bez obrasca – granice se primjenjuju na dijelove datuma uzorka, pa bez nje ne rade ništa.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Maska {maskType} od \"{name}\" dopušta barem {min}, a najviše {max} - nijedna vrijednost ne zadovoljava tu vrijednost."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Dinamički panel \"{name}\" ima prazan predložak - njegovi paneli nemaju što renderirati.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" nema elemenata.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" nema elemente koji se mogu prikazati – svaki element je skriven, zaštićen uvjetom koji nikada ne vrijedi ili prazan.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Detalji u \"{name}\" nikada nisu prikazani: njegov detailPanelMode je \"none\", što je zadani dio."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Pozicija: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Izgrađen je na temelju naslijeđenog imena, operatora i svojstava vrijednosti okidača.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Unutra: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Jesi li mislio \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Ako je riječ o prilagođenoj komponenti, proslijedite njezinu definiciju linteru kako biste omogućili potpunu analizu.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Registrirajte funkciju prije lintinga ili je navedite u opcijama lintera.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Pogrešno napisana vrsta tiho se odbacuje tijekom izvođenja, a prilagođeni okidač nije pokriven provjerama cilja i ciklusa.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Ako je varijabla postavljena u vrijeme izvođenja, navedite je u linter opcijama.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Petlja može biti nedostižna ako se okidački uvjeti nikada ne podrže - provjerite izraze.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "DefaultValueExpression vrijedi samo dok se ne odgovori na njegovo pitanje.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "U izrazu: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Spomenuto u vezama.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Referencirano u choicesByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Spominje se u tekstu \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () to ime čita iz svakog unosa {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argument {0}() ne navodi pitanje, panel ni stranicu.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializator ispušta ključ koji ne poznaje.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializator ispušta validator koji ne može riješiti, pa se ništa ne validira.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Ulazni tip je \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "To je podatkovni ključ za \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "i",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} je uvijek {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} je {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "barem {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "najviše {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} ne može biti i {vrijednosti}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} ne može biti {value} a ne biti to",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} ne može biti prazan i biti {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} ne može biti prazno i ne prazno",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} ne može biti iznad {min} i ispod {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} se traži da bude osoba bez ikakve vrijednosti"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\" reference dostupne su samo unutar matrične ćelije ili matričnog detaljskog panela.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" je dostupan samo unutar matrične ćelije ili matričnog detaljskog panela.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\" reference dostupne su samo unutar dinamičkog panela ili panel kontejnera.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\" reference dostupne su samo unutar dinamičkog panela.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" je dostupan samo unutar dinamičkog panela.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" je dostupan samo unutar uvjeta izbora, retka i stupca.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" reference dostupne su samo unutar složenog pitanja.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" je stupac ove matrice – referencirajte je prefiksom retka.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" je pitanje ovog dinamičkog panela – referencirajte ga prefiksom panel."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Postavi inputType: \"number\" na \"{0}\" ako skuplja brojeve.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Koristite \"contains\" ili \"anyof\" za višestruke odabire vrijednosti."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "stranica",
+        // [Auto-translated] "panel"
+        panel: "panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Ime",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Ime"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "izračunata vrijednost",
+        // [Auto-translated] "element"
+        default: "element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Popis",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Ostalo",
+        // [Auto-translated] "None"
+        none: "Nema",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Odbij odgovoriti",
+        // [Auto-translated] "Don't know"
+        dontknow: "Ne znam"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Nikad ne puca",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "odbija svaki odgovor",
+        // [Auto-translated] "cannot validate"
+        default: "ne može validirati"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Pitanje ne sadrži odgovor koji bi potvrdio",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "Duljina se očitava s tekstualne vrijednosti, a ovaj odgovor nema nijednu",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Odgovor nije broj i nikada ne može biti",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Broj nikada ne odgovara e-mail adresi",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Odgovor nije popis vrijednosti",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Odgovor nije vrijednost koju može provjeriti"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "niz",
+        // [Auto-translated] "an object"
+        object: "objekt"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "niz odabranih vrijednosti",
+        // [Auto-translated] "a single value"
+        scalar: "Jedna vrijednost",
+        // [Auto-translated] "a value"
+        default: "vrijednost"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "dolje",
+        // [Auto-translated] "above"
+        above: "gore"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "nikada nije vidljiv i nikada ne prima vrijednost",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "nikada nisu vidljivi i nikada ne primaju vrijednost"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Pitanje",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Pitanje ili varijabla",
+        // [Auto-translated] "page"
+        page: "stranica"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "čita",
+        // [Auto-translated] "navigates to"
+        gotoName: "navigira prema",
+        // [Auto-translated] "sets"
+        default: "Setovi"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Pitanje o predlošku",
+        // [Auto-translated] "column"
+        default: "stupac"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Pitanje o predlošku",
+        // [Auto-translated] "column"
+        matrixdynamic: "stupac",
+        // [Auto-translated] "item"
+        multipletext: "Predmet",
+        // [Auto-translated] "row"
+        matrix: "Veslajte",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Veslajte",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "stupac",
+        // [Auto-translated] "field"
+        default: "Polje"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

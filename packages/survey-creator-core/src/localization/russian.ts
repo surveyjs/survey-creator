@@ -142,6 +142,10 @@ export var ruStrings = {
     jsonHideErrors: "Скрыть ошибки",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Показать ошибки",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Исправление ошибки",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Обзор JSON должен быть объектом.",
     // "Undo"
     undo: "Отменить",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var ruStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Применённый пресет"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Реплика: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Используйте предложенное название"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Удалите повторяющийся элемент"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Используйте рекомендованный тип"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Используйте предложенную функцию"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Используйте рекомендованную маску"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Дайте элементу свободное имя"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Дайте элементу свободное имя"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Удалить имущество"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Используйте ближайшее разрешённое значение",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Удалить имущество",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Используйте рекомендуемое значение"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Преобразуйте значение в список"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Дайте элементу имя"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Удалить имущество",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Переименование объекта"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Используйте предложенное название",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Используйте предложенное название"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Используйте предложенное название"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Используйте рекомендованный тип"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Используйте рекомендованный тип"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Выражение «{expression}» невозможно разобрать."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "«{name}» не найдено — не существует ни одного вопроса, панели, страницы, вычислённого значения или переменной с таким именем.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" отсутствует в {containerType} \"{root}\" (ссылка: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "«{segment}» не встречается в области «{scopePrefix}» (ссылка: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName для \"{name}\" имен \"{key}\" - \"{name}\" не имеет {keyNoun} с этим именем, поэтому проверка дубликатов ключа никогда не запускается.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "«{name}» не найден."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} из «{name}» ссылается на сам элемент (ссылка: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Название «{name}» дублируется.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Имя вычислённого значения «{name}» уже используется другим вычисленным значением.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Вычисленное значение «{name}» имеет своё имя с другим элементом, поэтому одно из них следует за другим."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} «{name}» этого {ownerText} также является встроенной переменной опроса {{builtIn}} — опрос отвечает первым на {{name}}, поэтому этот вариант недоступен в выражениях.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "ValueName «{valueName}» из «{name}» также является именем вопроса «{otherName}» — оба хранят ответ под ключом данных «{valueName}».",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Ключ данных «{dataName}» также является ключом комментария к «{base}» (его ключ данных плюс «{suffix}») — одна запись тихо перезаписывает другую.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Ключ данных «{dataName}» также является ключом общего значения для «{base}» (его ключ данных плюс «{suffix}») — одна запись тихо перезаписывает другую.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Триггер {trigger} задаёт переменную «{name}», которая также является ключом данных вопроса «{questionName}» — переменная отвечает на {{name}}, а не на вопрос."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Имя «{name}» зарезервировано — является членом Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" от \"{name}\" зарезервировано — является членом Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Столбец «{name}» в «{matrixName}» зарезервирован — является членом Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Элемент «{name}» из «{questionName}» зарезервирован — является членом Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Строка «{rowValue}» из «{name}» зарезервирована — является членом Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Вычисляемое значение «{name}» зарезервировано — является членом Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "«{name}» имеет неизвестный тип «{type}».",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "«{name}» не имеет типа — элемент без типа отбрасывается."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" не является свойством {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "«{key}» из {ownerText} не сериализуется — он действует при загрузке и удаляется из JSON при повторном сохранении опроса.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" и \"{aliasKey}\" из {ownerText} — два названия одного свойства — время выполнения применяет их в порядке записи JSON, поэтому побеждает \"{winner}\".",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" установлен на \"{name}\", но inputType \"{inputType}\" не имеет ограничений — время выполнения игнорирует его."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} {ownerText} — это {valueText} — не одно из разрешённых значений ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ключ} {ownerText} равен {value}, вне разрешённого диапазона {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName «{valueName}» из «{name}» содержит «.» — выражения читают {{valueName}} как путь к «{rootKey}», поэтому сам ключ данных никогда не может быть адресован."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} не имеет «{key}» — свойство требуется для {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Имя {className} — {valueText}, а не строка — опрос не может его загрузить."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "«{key}» {ownerText} не является массив — свойство содержит список, а время выполнения помещает значение в массив из одного элемента."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Определение переменной объявляет «{variable}», что также является ключом данных вопроса «{name}» — установка переменной удаляет ответ, хранящийся под этим ключом, и {{name}} отвечает на значение хоста.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Определение переменной объявляет «{variable}», что также является названием вычисленного значения «{name}» — обе записывают один и тот же слот, и побеждает тот, кто запущен последним."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition не является объектом обзора JSON, поэтому переменная не объявляется, и значение пресета не может быть проверено.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets не является массивом, поэтому пресет не объявляется.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Пресет #{index} не является объектом.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Пресет #{index} не имеет имени, поэтому ничто не может на него ссылаться.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Пресет «{preset}» не несёт объект переменных, поэтому он ничего не устанавливает.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Пресет «{preset}» объявляется дважды — поиск с таким названием отвечает на первый вариант.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Пресет «{preset}» устанавливает «{variable}», что определение переменной не объявляет.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Пресет «{preset}» устанавливает «{variable}» на значение, которое определение переменной отклоняет: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Функция «{functionName}» не регистрируется."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Вычисленное значение «{names}» ссылается на себя в собственном выражении.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Вычисленные значения {name} зависят друг от друга."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Триггер реагирует на установленное значение («{setToName}»).",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Триггеры образуют петлю через установленные ими значения: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} считывает то значение, которое записывает сам — он запускается только при изменении другого значения, поэтому вообще не запускается.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Значения записываются в цикле: {цепочка}. Каждая запись повторяет выражения, которые его читали, поэтому окончательные значения зависят от порядка ответов на вопросы."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Условие сравнивает «{name}» с {значения} — не входит в число своих вариантов. Доступно: {доступно}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Условие сравнивает «{name}» с {values} — значение выбора не содержит его. Доступно: {доступно}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Условие применяет «{operator}» к «{name}»: «{recordName}» ({questionType}) не имеет значения для сравнения.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Условие применяется как «{operator}» к «{name}»: «{recordName}» содержит {valueShapeText} — к нему не применяются операторы порядка и арифметики.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Условие применяется к «{operator}» к «{name}»: «{recordName}» — булев вопрос, к нему не применяются операторы порядка.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Условие применяется к «{operator}» к «{name}»: «{recordName}» — это текстовый вопрос, его значение является строкой, поэтому числовое сравнение основано на неявном преобразовании.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Условие применяется к «{operator}» к «{name}»: «{recordName}» содержит строку даты — сравнивая её с числом, которое {constValue} не может удержать.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Условие применяется к «{operator}» к «{name}»: «{recordName}» числовое — сравнивать его со строкой «{constValue}» невозможно.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Условие применяется к «{operator}» к «{name}»: «{recordName}» содержит массив выбранных значений, поэтому «=» сравнивает весь массив.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Условие применяется как \"{operator}\" к \"{name}\": \"{recordName}\" — булев вопрос, сравнивать его с {constValue} невозможно."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} «{expression}» всегда ложно, поэтому «{name}» никогда не отображается.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} «{expression}» никогда не выполняется, потому что {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} «{expression}» никогда не выполняется — ни одно допустимое значение его не удовлетворяет: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} «{expression} противоречит сам себе: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} «{expression}» всегда истинно, поэтому оно ничего не решает.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} «{expression}» — это арифметика, а не сравнение, поэтому оно никогда не даёт ни да, ни нет.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Часть {prop} «{expression}» имеет результат, известный заранее.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} «{expression}» всегда выполняется, потому что {facts} — он ничего не решает."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "По умолчанию значение «{name}» — {valuesText}, которое оно никогда не может удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Правильный ответ на «{name}» — {valuesText}, который он никогда не может удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Триггер устанавливает «{name}» в {valuesText}, который он никогда не может удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Значение строки по умолчанию устанавливает «{name}» в {valuesText}, которое никогда не мо��ет удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Значение панели по умолчанию устанавливает «{name}» в {valuesText}, которое никогда не может удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} из «{name}» называет «{key}» — такой строки нет. Доступно: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} из «{name}» называет «{key}» — такой колонки нет. Доступно: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} из «{name}» называет «{key}» — такого шаблонного вопроса нет. Доступно: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Триггер copyvalue копирует «{fromName}» в «{setToName}», но «{fromName}» содержит {sourceShapeText}, а «{setToName}» — {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Триггер copyvalue копирует «{fromName}» в «{setToName}», но ни одно значение «{fromName}» не входит в число значений, которые может сохраняться «{setToName}». Разрешено: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "«{name}» копирует свои выборы из «{source}», но с этим именем нет никаких сомнений.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "«{name}» копирует свои выборы у самого себя.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "«{name}» копирует свои выборы из «{source}» ({sourceType}), который не предоставляет ни выбора, ни массив значений.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" читается как {prop} \"{field}\" от \"{source}\", но {sourceType} \"{source}\" не имеет такого {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Другой элемент {prop} из «{name}» уже имеет значение {valueText} — время выполнения сохраняет оба элемента.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Выбор «{name}» содержит {valueText}, пока {toggleProp} включен — он сталкивается с встроенным элементом {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Триггер {trigger} нацелена на страницу «{name}», которая не существует.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Триггер {trigger} нацелен на «{name}», но {containerType} «{root}» не имеет {segmentNoun} «{segment}».",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{триггер} триггер {глагол} «{name}», но {kindText} с таким именем не существует."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Тип спускового механизма «{type}» неизвестен.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Спусковой крючок не имеет типа."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Тип валидатора «{type}» из «{name}» неизвестен.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Валидатор «{name}» не имеет типа."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "Валидатор {validatorType} для \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Валидатор {validatorType} для «{name}» требует как минимум {min} и максимум {max} — ни один ответ его не удовлетворяет.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Валидатор количества ответов для «{name}» требует как минимум {minCount} ответов, выше {selectable} вариантов, которые можно выбрать вместе.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Валидатор regex для «{name}» имеет шаблон, который движок отклоняет: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Выражение-валидатор «{name}» не имеет выражения, поэтому оно всегда проходит."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} в «{name}» равно {min}, выше {maxProp} от {max} — время выполнения бесшумно корректирует один из них.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} для «{name}» равен {count}, {направление} — {boundProp} от {bound} — время выполнения зажимает его.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} «{name}» равен {step}, но диапазон, через который он проходит ({minProp}.. {maxProp}) охватывает только {диапазон} — время выполнения фиксирует его.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices для «{name}» равен {min}, над {selectable} вариантами, которые можно выбрать вместе — вопрос никогда не может быть ответен."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" никогда не может стать видимым: он visibleIf читает {reads}, что {deadClause}, поэтому условие никогда не выполняется."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "MaskType \"{maskType}\" из \"{name}\" не является известной маской — время работы сокращается к отсутствию маски.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "MaskSettings в \"{name}\" устанавливает \"{key}\", что не является свойством маски \"{maskType}\" — время выполнения бесшумно сбрасывает её.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Настройки maskSettings \"{name}\" устанавливаются без maskType — время выполнения сохраняет только \"saveMaskedValue\" и убирает остальное.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Маска {maskType} «{name}» применяется к отсутствию входа: inputType «{inputType}» маскируется только для текста и tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Маска datetime в «{name}» устанавливает min/max без паттерна — границы применяются к частям даты в шаблоне, так что без неё они ничего не делают.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Маска {maskType} «{name}» допускает как минимум {min} и максимум {max} — ни одно значение не удовлетворяет её."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Динамическая панель \"{name}\" имеет пустой шаблон — её панели не имеют чего рендерить.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} «{name}» не содержит элементов.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} «{name}» не содержит элементов, которые когда-либо могут отображаться — каждый элемент скрыт, охраняется условием, которое никогда не выполняется, или пуст.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Элементы детализации в «{name}» никогда не отображаются: его detailPanelMode — это «none», что является стандартом."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Позиция: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Он был построен на основе устаревших свойств имени, оператора и значения триггера.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Внутри: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Ты имел в виду «{0}»?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Если это пользовательский компонент, передайте его определение в линтер для полного анализа.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Зарегистрируйте функцию перед линтингом или укажите её в настройках линтера.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Ошибочно написанный тип отбрасывается во время запуска, а кастомный триггер не покрывается проверками цели и цикла.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Если это переменная, установленная во время выполнения, укажите её в настройках линтера.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Петля может быть недоступна, если условия триггера никогда не совпадают — проверьте выражения.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpression применяется только до тех пор, пока не получит ответ на свой вопрос.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "В выражении: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Упоминается в переплетах.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Упоминается в выборахByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Упоминается в тексте «{0}».", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () читает это имя во всех записях {1} «{2}».",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Аргумент {0}() не называет ни одного вопроса, панели или страницы.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Десериалайзер роняет ключ, который не знает.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Десериалайзер сбрасывает валидатор, который не может разрешить, поэтому ничего не валидируется.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "InputType — «{0}».",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Это ключ данных «{0}»." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "и",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} всегда является {значение}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} — {границы}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "По крайней мере, {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "максимум {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} не могут быть обе {значения}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} не может быть {значение} и не быть им",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} не может быть пустым и быть {значением}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} не может быть пустым и не пустым",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} не может быть выше {min} и ниже {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} просят быть не имеющим никакой ценности"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "«{0}.» ссылки доступны только внутри матричной ячейки или панели деталей матрицы.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "«{0}» доступна только внутри матричной ячейки или панели деталей матрицы.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "«{0}.» Ссылки доступны только внутри динамической панели или панельного контейнера.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "«{0}.» Ссылки доступны только внутри динамической панели.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "«{0}» доступна только внутри динамической панели.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "«{0}» доступна только внутри условий выбора, строки и столбцов.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "«{0}.» Ссылки доступны только в составном вопросе.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "«{0}» — это столбец этой матрицы, ссылайтесь на неё с префиксом строки.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "«{0}» — это вопрос этой динамической панели — ссылайтесь на неё с префиксом панели."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Установите inputType: «число» на «{0}», если он собирает числа.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Используйте «contains» или «anyof» для множественных выборочных значений."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "страница",
+        // [Auto-translated] "panel"
+        panel: "Панель"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Название",
+        // [Auto-translated] "valueName"
+        valueName: "valueИмя",
+        // [Auto-translated] "name"
+        calculatedValue: "Название"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Рассчитанное значение",
+        // [Auto-translated] "element"
+        default: "элемент"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Обследование",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Прочее",
+        // [Auto-translated] "None"
+        none: "Нет",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Отказывайтесь отвечать",
+        // [Auto-translated] "Don't know"
+        dontknow: "Не знаю"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Никогда не стреляет",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "отвергает все ответы",
+        // [Auto-translated] "cannot validate"
+        default: "не может валидировать"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Вопрос не имеет ответа для подтверждения",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "длина считывается из значения текста, и в этом ответе нет",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Ответ — это не число и никогда не может быть",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Номер никогда не совпадает с адресом электронной почты",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Ответ — это не список значений",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Ответ — это не то значение, которое можно проверить"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "массив",
+        // [Auto-translated] "an object"
+        object: "объект"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "массив выбранных значений",
+        // [Auto-translated] "a single value"
+        scalar: "Одно значение",
+        // [Auto-translated] "a value"
+        default: "ценность"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "ниже",
+        // [Auto-translated] "above"
+        above: "выше"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "никогда не видим и не получает значения",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "никогда не видимы и не получают значения"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Вопрос",
+        // [Auto-translated] "question or variable"
+        questionvalue: "вопрос или переменная",
+        // [Auto-translated] "page"
+        page: "страница"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Чтение",
+        // [Auto-translated] "navigates to"
+        gotoName: "навигация к",
+        // [Auto-translated] "sets"
+        default: "множества"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Шаблонный вопрос",
+        // [Auto-translated] "column"
+        default: "Колонка"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Шаблонный вопрос",
+        // [Auto-translated] "column"
+        matrixdynamic: "Колонка",
+        // [Auto-translated] "item"
+        multipletext: "Предмет",
+        // [Auto-translated] "row"
+        matrix: "Ряд",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Ряд",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Колонка",
+        // [Auto-translated] "field"
+        default: "Поле"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

@@ -142,6 +142,10 @@ export var htStrings = {
     jsonHideErrors: "Kache erè",
     // "Show errors"
     jsonShowErrors: "Montre erè",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Ranje erè",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "JSON sondaj la dwe yon objè.",
     // "Undo"
     undo: "Defèt",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var htStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Prereglaj aplike"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Liy: {0}", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Sèvi ak non sijere a"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Retire atik la repete"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Sèvi ak kalite a sijere"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Sèvi ak sijere fonksyon an"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Sèvi ak mask la sijere"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Bay eleman an yon non gratis"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Bay eleman an yon non gratis"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Retire pwopriyete a"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Sèvi ak valè ki pi pre a pèmèt",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Retire pwopriyete a",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Sèvi ak valè a sijere"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Vire valè a nan yon lis"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Bay eleman an yon non"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Retire pwopriyete a",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Chanje non pwopriyete a"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Sèvi ak non sijere a",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Sèvi ak non sijere a"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Sèvi ak non sijere a"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Sèvi ak kalite a sijere"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Sèvi ak kalite a sijere"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Ekspresyon \"{ekspresyon}\" pa ka analize."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{non}\" pa jwenn - pa gen okenn kesyon, panèl, paj, valè kalkile oswa varyab ak non sa a egziste.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" pa jwenn nan {containerType} \"{root}\" (referans: {non}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" pa jwenn nan sijè ki abòde lan \"{scopePrefix}\" (referans: {non}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName nan \"{non}\" non \"{key}\" - \"{non}\" pa gen okenn {keyNoun} ak non sa a, kidonk validasyon kle kopi pa janm kouri.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{non}\" pa jwenn."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} nan \"{non}\" refere eleman nan tèt li (referans: {referans})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Non \"{non}\" se kopi",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Non valè kalkile \"{non}\" deja itilize pa yon lòt valè kalkile.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Valè kalkile a \"{non}\" pataje non li ak yon lòt eleman, se konsa youn nan yo lonbraj lòt la."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{non}\" nan sa a {ownerText} se tou bati-an sondaj varyab {{builtIn}} - sondaj la reponn {{non}} an premye, se konsa yon sèl sa a se inaccessible nan ekspresyon yo.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "valueName \"{valueName}\" nan \"{non}\" se tou non kesyon \"{otherName}\" - tou de estoke repons yo anba kle done \"{valueName}\".",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Done kle a \"{dataName}\" se tou kle a kòmantè nan \"{baz}\" (kle done li yo plis \"{sifiks}\") - yon ekri an silans ranplase lòt la.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Done kle a \"{dataName}\" se tou kle a total nan \"{baz}\" (kle done li yo plis \"{sifiks}\") - yon ekri an silans remplacé lòt la.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Deklanche a {deklanche} mete varyab la \"{non}\", ki se tou kle a done nan kesyon \"{questionName}\" - repons yo varyab {{non}} soti nan Lè sa a, pa kesyon an."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Non \"{non}\" se rezève - yon manm nan Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "valè Name\"{valueName}\" nan \"{non}\" se rezève - yon manm nan Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Kolòn \"{non}\" nan \"{matrixName}\" se rezève - yon manm nan Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Atik la \"{non}\" nan \"{questionName}\" se rezève - yon manm nan Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Ranje a \"{rowValue}\" nan \"{non}\" se rezève - yon manm nan Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Valè a kalkile \"{non}\" se rezève - yon manm nan Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{non}\" gen yon kalite enkoni \"{tip}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{non}\" pa gen okenn kalite - se yon eleman ki pa gen yon kalite jete."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{kle} se pa yon pwopriyete nan {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{kle}\" nan {ownerText} se pa serializabl - li pran efè sou chaj, epi li tonbe soti nan JSON a chak fwa sondaj la sove ankò.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{kle}\" ak \"{aliasKey}\" nan {ownerText} se de non yon sèl pwopriyete - tan an kouri aplike yo nan lòd la JSON ekri yo, se konsa \"{gayan}\" ranport.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" se mete sou \"{non}\", men inputType \"{inputType}\" pa gen okenn limit - tan an kouri inyore li."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{kle} nan {ownerText} se {valueText} - pa youn nan valè yo pèmèt ({permètText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{kle a} nan {ownerText} se {valè}, deyò ranje pèmèt li yo {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "valueName \"{valueName}\" nan \"{non}\" gen yon \".\" - ekspresyon li {{valueName}} kòm yon chemen nan \"{rootKey}\", se konsa kle done nan tèt li pa janm ka adrese."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} pa gen okenn \"{kle}\" - pwopriyete a oblije pou yon {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Non an nan {className} se {valueText}, pa yon fisèl - sondaj la pa ka chaje li."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{kle} nan {ownerText} se pa yon etalaj - pwopriyete a kenbe yon lis, ak tan an kouri vlope valè a nan yon etalaj yon sèl-atik."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Definisyon varyab la deklare \"{varyab}\", ki se tou kle done kesyon \"{non}\" - mete varyab la efase repons lan ki estoke anba kle sa a, epi {{non}} reponn valè lame a soti nan Lè sa a.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Definisyon varyab la deklare \"{varyab}\", ki se tou non an nan valè kalkile \"{non}\" - tou de ekri plas la menm, ak kèlkeswa sa ki kouri dènye ranport."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition se pa yon objè JSON sondaj, kidonk pa gen okenn varyab deklare epi pa gen valè prereglaj ka tcheke.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets se pa yon etalaj kidonk pa gen okenn prereglaj deklare.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Prereglaj #{endèks} se pa yon objè.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Prereglaj #{endèks} pa gen okenn non, kidonk pa gen anyen ki ka refere li.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Prereglaj \"{prereglaj}\" pa pote okenn objè varyab, kidonk li pa mete anyen.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Prereglaj \"{prereglaj}\" deklare de fwa - yon rechèch pa non sa a reponn ak premye a.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Prereglaj \"{prereglaj}\" mete \"{varyab}\", ke definisyon varyab la pa deklare.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Prereglaj \"{prereglaj}\" mete \"{varyab}\" nan yon valè definisyon varyab rejte: {erè}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Fonksyon \"{functionName}\" pa anrejistre."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Valè kalkile a \"{non}\" referans tèt li nan pwòp ekspresyon li yo.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Valè kalkile {non} depann youn ak lòt."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Deklanche a reyaji nan valè li mete tèt li (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Deklannche fòme yon bouk nan valè yo mete: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{etikèt} li valè li li tèt li - li kouri sèlman lè yon lòt valè chanje, kidonk li pa janm kouri ditou.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Valè yo ekri nan yon bouk: {chèn}. Chak ekri repete ekspresyon yo ki li li, kidonk valè final yo depann sou lòd la kesyon yo reponn nan."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Kondisyon an konpare \"{non}\" ak {valè} - pa nan mitan chwa li yo. Disponib: {disponib}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Kondisyon an konpare \"{non}\" ak {valè} - pa gen okenn valè chwa ki genyen li. Disponib: {disponib}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Kondisyon an aplike \"{operatè}\" nan \"{non}\": \"{recordName}\" ({questionType}) pa gen okenn valè pou konpare.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Kondisyon an aplike \"{operatè}\" nan \"{non}\": \"{recordName}\" kenbe {valueShapeText} - kòmann-nan ak operatè aritmetik pa aplike pou li.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Kondisyon an aplike \"{operatè}\" nan \"{non}\": \"{recordName}\" se yon kesyon boolean - kòmann-nan operatè yo pa aplike nan li.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Kondisyon an aplike \"{operatè}\" nan \"{non}\": \"{recordName}\" se yon kesyon tèks - valè li se yon string, kidonk konparezon nimerik depann sou konvèsyon enplisit.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Kondisyon an aplike \"{operatè}\" nan \"{non}\": \"{recordName}\" kenbe yon kòd dat - konpare li ak nimewo a {constValue} pa ka kenbe.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Kondisyon an aplike \"{operatè}\" nan \"{non}\": \"{recordName}\" se nimerik - konpare li ak fisèl la \"{constValue}\" pa ka kenbe.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Kondisyon an aplike \"{operatè}\" nan \"{non}\": \"{recordName}\" kenbe yon etalaj nan valè chwazi, se konsa \"=\" konpare etalaj la tout antye.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Kondisyon an aplike \"{operatè}\" nan \"{non}\": \"{recordName}\" se yon kesyon boolean - konpare li ak {constValue} pa ka kenbe."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{ekspresyon}\" toujou fo, kidonk \"{non}\" pa janm montre.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{ekspresyon}\" pa janm kenbe, paske {reyalite}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{ekspresyon}\" pa janm kenbe - pa gen okenn valè pèmèt satisfè li: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{ekspresyon}\" a kontredi tèt li: {reyalite}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{ekspresyon}\" toujou vre, kidonk li pa deside anyen.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{ekspresyon}\" la se aritmetik, se pa yon konparezon, donk li pa janm bay yon wi oswa non.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Pati nan {prop} \"{ekspresyon}\" la gen yon rezilta ki se li te ye davans.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{ekspresyon}\" toujou kenbe paske {reyalite} - li pa deside anyen."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Valè default \"{non}\" se {valuesText}, ki li pa janm ka kenbe. Pèmèt: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Repons ki kòrèk la nan \"{non}\" se {valuesText}, ki li pa janm ka kenbe. Pèmèt: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Deklanche a mete \"{non}\" nan {valuesText}, ki li pa ka janm kenbe. Pèmèt: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Valè ranje default la mete \"{non}\" nan {valuesText}, ki li pa janm ka kenbe. Pèmèt: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Valè panèl default la mete \"{non}\" nan {valuesText}, ki li pa janm ka kenbe. Pèmèt: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} nan \"{non}\" non \"{kle}\" - pa gen okenn ranje konsa. Disponib: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} nan \"{non}\" non \"{kle}\" - pa gen kolòn konsa. Disponib: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} nan \"{non}\" non \"{kle}\" - pa gen okenn kesyon modèl sa yo. Disponib: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Deklanche copyvalue kopye \"{fromName}\" nan \"{setToName}\", men \"{fromName}\" kenbe {sourceShapeText} ak \"{setToName}\" kenbe {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Deklanche copyvalue kopye \"{fromName}\" nan \"{setToName}\", men pa gen okenn valè nan \"{fromName}\" se nan mitan valè \"{setToName}\" yo ka kenbe. Pèmèt: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{non}\" kopye chwa li yo nan \"{sous}\", men pa gen okenn kesyon ak non sa a egziste.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{non}\" kopye chwa li yo nan tèt li.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopye chwa li yo soti nan \"{sous}\" ({sourceType}), ki pa bay ni chwa ni etalaj valè.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{non}\" li {prop} \"{jaden}\" soti nan \"{sous}\", men {sourceType} \"{sous}\" pa gen tankou {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Yon lòt atik nan {prop} nan \"{non}\" deja gen valè a {valueText} - tan an kouri kenbe tou de atik yo.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Chwa yo nan \"{non}\" gen {valueText} pandan y ap {toggleProp} se sou - li fè kolizyon ak atik la bati-an {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{deklanche} deklanche sib paj \"{non}\", ki pa egziste.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{deklanche} deklanche sib \"{non}\", men {containerType} \"{rasin}\" pa gen okenn {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{deklanche} deklanche {vèb} \"{non}\", men pa gen okenn {kindText} ki gen non sa a egziste."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Kalite deklanche \"{tip}\" se pa li te ye.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Deklanche a pa gen okenn kalite."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Kalite validatè a \"{tip}\" nan \"{non}\" pa li te ye.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Yon validatè nan \"{non}\" pa gen okenn kalite."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType} validatè nan \"{non}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "{validatorType} validatè nan \"{non}\" mande pou omwen {min} ak maksimòm {max} - pa gen repons satisfè li.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Validatè answercount nan \"{non}\" mande pou omwen {minCount} repons, pi wo a chwa yo {sélectionnabl} ki ka chwazi ansanm.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Validatè a regex nan \"{non}\" gen yon modèl motè rejte: {erè}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Validatè ekspresyon nan \"{non}\" pa gen okenn ekspresyon, kidonk li toujou pase."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} nan \"{non}\" se {min}, pi wo a li yo {maxProp} nan {max} - tan an kouri an silans ajiste youn nan yo.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} nan \"{non}\" se {konte}, {direksyon} li yo {boundProp} nan {bound} - tan an kouri kranpon li.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} nan \"{non}\" se {etap}, men seri a li etap nan ({minProp}.. {maxProp}) spans sèlman {range} - tan an kouri kranpon li.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices nan \"{non}\" se {min}, pi wo a chwa yo {sélectionnabl} ki ka chwazi ansanm - kesyon an pa janm ka reponn."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{non}\" pa janm ka vin vizib: vizib li li {li}, ki {deadClause}, kidonk kondisyon an pa janm kenbe."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Mask la Kalite \"{maskType}\" nan \"{non}\" se pa yon mask li te ye - tan an kouri tonbe tounen nan pa gen mask nan tout.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "maskSettings nan \"{non}\" mete \"{kle}\", ki se pa yon pwopriyete nan mask la \"{maskType}\" - tan an kouri lage li an silans.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "MaskSettings nan \"{non}\" yo mete san yon maskType - tan an kouri kenbe sèlman \"saveMaskedValue\" ak gout rès la.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Mask {maskType} nan \"{non}\" aplike nan pa gen opinyon: inputType \"{inputType}\" se maske sèlman pou tèks ak tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Mask la datetime nan \"{non}\" kouche min / max san yo pa yon modèl - limit yo aplike nan pati dat modèl la, se konsa san yo pa fè anyen.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Mask {maskType} nan \"{non}\" pèmèt omwen {min} ak maksimòm {max} - pa gen valè satisfè li."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Panèl dinamik la \"{non}\" gen yon modèl vid - panno li yo pa gen anyen rann.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{non}\" pa gen okenn eleman.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{non}\" pa gen okenn eleman ki ka janm rann - chak eleman kache, veye pa yon kondisyon ki pa janm kenbe, oswa vid.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Eleman detay yo nan \"{non}\" yo pa janm montre: detailPanelMode li yo se \"okenn\", ki se default la."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Pozisyon: {0}", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Li te bati soti nan non an eritaj, operatè ak pwopriyete valè nan deklanche la.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Andedan: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Eske ou vle di \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Si li se yon eleman koutim, pase definisyon li yo nan linter la pou pèmèt analiz konplè.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Enskri fonksyon an anvan linting, oswa lis li nan opsyon linter yo.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Yon kalite mal ekri an silans tonbe nan kouri tan, ak yon deklanche koutim pa kouvri pa sib la ak chèk sik.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Si li se yon varyab mete nan kouri tan, lis li nan opsyon linter yo.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Loop la ka rive jwenn si kondisyon deklanche yo pa janm kenbe ansanm - verifye ekspresyon yo.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "Yon defaultValueExpression aplike sèlman jiskaske kesyon li yo reponn.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Nan ekspresyon: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Referansye nan lyazon.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Referenced nan choicesByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Refere nan tèks la \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () li non sa a nan chak antre nan {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Agiman {0}() pa nonmen okenn kesyon, panèl oswa paj.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializer a lage yon kle li pa konnen",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializer a lage yon validateur li pa ka rezoud, kidonk pa gen anyen valide.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "A inputType se \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Li se kle a done nan \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "ak",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} se toujou {valè}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} is {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "omwen {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "nan pifò {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} pa ka tou de {valè}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} pa ka {valè} epi yo pa dwe li",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} pa ka vid epi yo dwe {valè}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} pa ka vid epi yo pa vid",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} pa ka pi wo a {min} ak anba {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} yo mande yo dwe youn ki pa gen okenn valè nan tout"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\" Referans yo disponib sèlman andedan yon selil matris oswa yon panèl detay matris.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" se sèlman ki disponib andedan yon selil matris oswa yon panèl detay matris.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\" Referans yo disponib sèlman andedan yon panèl dinamik oswa yon veso panèl.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\" Referans yo disponib sèlman andedan yon panèl dinamik.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" se sèlman ki disponib andedan yon panèl dinamik.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" se sèlman ki disponib andedan chwa, ranje ak kolòn kondisyon.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" Referans yo disponib sèlman andedan yon kesyon konpoze.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" se yon kolòn nan matris sa a - referans li ak ranje prefiks la.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" se yon kesyon nan panèl dinamik sa a - referans li ak prefiks panèl la."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Mete inputType: \"nimewo\" sou \"{0}\" si li kolekte nimewo.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Sèvi ak \"gen ladan\" oswa \"nenpòt de\" pou valè milti-chwazi"
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "paj",
+        // [Auto-translated] "panel"
+        panel: "panèl"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "fe-apel",
+        // [Auto-translated] "valueName"
+        valueName: "valèNon",
+        // [Auto-translated] "name"
+        calculatedValue: "fe-apel"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Valè kalkile",
+        // [Auto-translated] "element"
+        default: "eleman"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Sondaj la",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Lòt",
+        // [Auto-translated] "None"
+        none: "Pa gen yonn",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Refize reponn",
+        // [Auto-translated] "Don't know"
+        dontknow: "Pa konnen"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Pa janm tire",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "rejte tout repons",
+        // [Auto-translated] "cannot validate"
+        default: "pa ka valide"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Kesyon an pa gen okenn repons pou valide",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "Yon longè li sou yon valè tèks e repons sa a pa gen okenn",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Repons lan se pa yon nimewo epi pa janm ka",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Yon nimewo pa janm matche ak yon adrès imèl",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Repons lan se pa yon lis valè",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Repons lan se pa yon valè li ka tcheke"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "yon etalaj",
+        // [Auto-translated] "an object"
+        object: "yon objè"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "Etalaj de valè chwazi",
+        // [Auto-translated] "a single value"
+        scalar: "yon sèl valè",
+        // [Auto-translated] "a value"
+        default: "yon valè"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "Anba",
+        // [Auto-translated] "above"
+        above: "An ro"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "pa janm vizib epi pa janm resevwa yon valè",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "yo pa janm vizib epi yo pa janm resevwa yon valè"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Kesyon",
+        // [Auto-translated] "question or variable"
+        questionvalue: "kesyon oswa varyab",
+        // [Auto-translated] "page"
+        page: "paj"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "li",
+        // [Auto-translated] "navigates to"
+        gotoName: "navige nan",
+        // [Auto-translated] "sets"
+        default: "Ansanm"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Kesyon modèl",
+        // [Auto-translated] "column"
+        default: "kolòn"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Kesyon modèl",
+        // [Auto-translated] "column"
+        matrixdynamic: "kolòn",
+        // [Auto-translated] "item"
+        multipletext: "Atik",
+        // [Auto-translated] "row"
+        matrix: "Ranje",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Ranje",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "kolòn",
+        // [Auto-translated] "field"
+        default: "jaden"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

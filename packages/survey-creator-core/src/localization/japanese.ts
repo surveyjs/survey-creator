@@ -142,6 +142,10 @@ export var jaStrings = {
     jsonHideErrors: "エラーを隠す",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "エラーを表示",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "修正エラー",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "調査JSONはオブジェクトでなければなりません。",
     // "Undo"
     undo: "元に戻す",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var jaStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "プリセット適用"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "ライン:{0}。", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "提案された名前を使ってください"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "繰り返し表示される項目を削除してください"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "推奨されたタイプを使ってください"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "推奨関数を使え"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "推奨されたマスクを使いましょう"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "その要素に自由な名前を付ける"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "その要素に自由な名前を付ける"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "物件を撤去してください"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "最も近い許容値を使います",
+        // [Auto-translated] "Remove the property"
+        removeKey: "物件を撤去してください",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "推奨値を使ってください"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "値をリストに変換します"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "その元素に名前をつける"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "物件を撤去してください",
+        // [Auto-translated] "Rename the property"
+        renameKey: "物件名の変更"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "提案された名前を使ってください",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "提案された名前を使ってください"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "提案された名前を使ってください"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "推奨されたタイプを使ってください"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "推奨されたタイプを使ってください"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "「{expression}」という式は解析できません。"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "「{name}」は見つからず、その名前の質問、パネル、ページ、計算値、変数などは存在しません。",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "「{segment}」は{containerType}「{root}」(参照:{name})には見つかりません。",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "「{segment}」は「{scopePrefix}」スコープ(参照:{name})には含まれていません。",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "「{name}」のキー名は「{key}」と名付けられ、「{name}」にはその名前の{keyNoun}がないため、重複鍵の検証は実行されません。",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "「{name}」は見つかりません。"
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "「{name}」の{prop}は要素自体を参照します(参照:{reference})。"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "「{name}」という名前が重複しています。",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "計算値名「{name}」はすでに別の計算値によって使われています。",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "計算された値「{name}」は別の要素と名前を共有しているため、どちらか一方がもう一方をシャドウします。"
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "この{ownerText}の{nameKindText} 「{name}」は組み込みの調査変数{{builtIn}}でもあります。調査は先に{{name}}に答えるため、この変数は式で到達できません。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "「{name}」のvalueName「{valueName}」は質問「{otherName}」の名前でもあり、どちらも回答はデータキー「{valueName}」の下に保存されます。",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "データキー「{dataName}」は「{base}」のコメントキーでもあり(そのデータキーと「{suffix}」)、一方の書き込みはもう一方を無言で上書きします。",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "データキー「{dataName}」は「{base}」(そのデータキーと「{suffix}」)の合計キーでもあり、書き込みが静かに上書きされます。",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "{trigger}トリガーは変数「{name}」を設定します。これは質問「{questionName}」のデータキーでもあります。以降は変数が質問ではなく{{name}}に答えます。"
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "「{name}」という名前はObject.prototypeのメンバーとして予約されています。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "「{name}」のvalueName「{valueName}」はObject.prototypeのメンバーとして予約されています。",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "「{matrixName}」の「{name}」列はObject.prototypeのメンバーとして予約されています。",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "「{questionName}」の項目「{name}」はObject.prototypeのメンバーとして予約されています。",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "「{name}」の「{rowValue}」行はObject.prototypeのメンバーとして予約されています。",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "計算された値「{name}」はObject.prototypeのメンバーとして予約されています。"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "「{name}」は未知の型「{type}」を持っています。",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "「{name}」には型がありません。型のない要素は省略されます。"
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "「{key}」は{ownerText}({className})のプロパティではありません。"
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "{ownerText}の「{key}」はシリアライズできず、読み込み時に有効となり、アンケートが再度保存されるたびにJSONから削除されます。",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "{ownerText}の「{key}」と「{aliasKey}」は1つのプロパティの名前であり、実行時間はJSONが書く順に適用されるため、「{winner}」が勝ちます。",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "「{key}」は「{name}」に設定されていますが、inputType「{inputType}」には境界がなく、実行時間上は無視されます。"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{ownerText}の{key}は{valueText}であり、許可されている値({allowedText})の一つではありません。",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ownerText}の{key}は{value}であり、許容範囲の{rangeText}を超えています。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "「{name}」のvalueName「{valueName}」には「.」が含まれています。- 式は{{valueName}}を「{rootKey}」へのパスとして読み取るため、データキー自体はアドレスを付けられません。"
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText}には「{key}」はなく、{className}にはこのプロパティが必要です。",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "{className} の名前は文字列ではなく {valueText} です。調査では読み込めません。"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "{ownerText}の「{key}」は配列ではありません。プロパティはリストを保持し、実行時はその値を1項目配列にラップします。"
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "変数定義は「{variable}」を宣言し、これは質問「{name}」のデータキーでもあります。変数を設定するとそのキーで保存された回答が削除され、{{name}}はそれ以降ホスト値に答えます。",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "変数定義は「{variable}」と宣言し、これは計算された値「{name}」の名前でもあります。両者は同じスロットを書き、最後に出した方が勝ちです。"
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definitionはSurvey JSONオブジェクトではないため、変数は宣言されず、プリセット値もチェックできません。",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets は配列ではないため、プリセットは宣言されません。",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "プリセット #{index} はオブジェクトではありません。",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "プリセット #{index} には名前がないため、何も参照できません。",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "プリセット「{preset}」は変数オブジェクトを持たないため、何も設定しません。",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "プリセット「{preset}」は2回宣言され、その名前で検索すると最初の回答が得られます。",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "プリセット「{preset}」は「{variable}」を設定しますが、変数定義はこれを宣言しません。",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "プリセット「{preset}」は「{variable}」を変数定義が拒否する値にします:{errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "「{functionName}」という関数は登録されていません。"
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "計算された値「{names}」は、自身の式で自分自身を参照します。",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "計算された値{names}は互いに依存します。"
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "トリガーは自ら設定した値(「{setToName}」)に反応します。",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "トリガーは設定した値({setRoots})をループします。"
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label}は自分が書き込んだ値を読み込みます。別の数値が変わったときだけ実行されるため、全く実行されません。",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "値はループ形式で書き込まれます:{chain}。各書き込みは読み取った式を繰り返し実行するため、最終的な値は質問の回答順に依存します。"
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "この条件は「{name}」と{values}を比較しますが、選択肢には含まれていません。利用可能:{available}。",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "この条件は「{name}」と{values}を比較します。選択値にはこの名前が含まれていません。利用可能:{available}。"
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "条件は「{operator}」を「{name}」に適用します:「{recordName}」({questionType})は比較できる値を持ちません。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "条件は「{operator}」を「{name}」に適用します:「{recordName}」は{valueShapeText}を保持します。順序や算術演算子は適用されません。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "条件は「{operator}」を「{name}」に適用します:「{recordName}」はブール問題であり、順序演算子は適用されません。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "条件は「{operator}」を「{name}」に適用します。「{recordName}」はテキスト質問であり、その値は文字列であるため、数値比較は暗黙の変換に依存します。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "この条件は「{operator}」を「{name}」に適用します:「{recordName}」は日付文字列を保持しており、{constValue}と比較することはできません。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "条件は「{operator}」を「{name}」に適用します:「{recordName}」は数値であり、「{constValue}」という文字列と比較することはできません。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "条件は「{operator}」を「{name}」に適用します:「{recordName}」は選択した値の配列を保持するため、「=」は配列全体を比較します。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "条件は「{operator}」を「{name}」に適用します:「{recordName}」はブール問題であり、{constValue}と比較することは成り立ちません。"
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} 「{expression}」は常に偽であるため、「{name}」は表示されません。",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} 「{expression}」は成り立ちません。なぜなら {facts} だからです。",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} 「{expression}」は決して成り立たず、許される値が満たさない:{facts}。",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} 「{expression}」は矛盾しています:{facts}。"
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} 「{expression}」は常に真なので、何も決定しません。",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} 「{expression}」は算術であり比較ではないため、イエスかノーを出すことはありません。",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "{prop} 「{expression}」の一部は、事前に知られている結果を持っています。",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} 「{expression}」は常に成り立つ。なぜなら{facts}は何も決定しないからだ。"
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "「{name}」のデフォルト値は{valuesText}であり、保持することはできません。許可:{availableText}。",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "「{name}」の正解は{valuesText}で、保持することはできません。許可:{availableText}。",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "トリガーは「{name}」を{valuesText}に設定し、この値を保持することはできません。許可:{availableText}。",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "デフォルトの行値は「{name}」を{valuesText}に設定し、保持することはできません。許可:{availableText}。",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "デフォルトのパネル値は「{name}」を{valuesText}に設定し、これを保持することはできません。許可:{availableText}。",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "「{name}」の{prop}は「{key}」と名付けていますが、そのような行は存在しません。利用可能:{availableText}。",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "「{name}」の{prop}は「{key}」と名付けており、そのような列は存在しません。利用可能:{availableText}。",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "「{name}」の{prop}は「{key}」と名付けていますが、そのようなテンプレート質問はありません。利用可能:{availableText}。",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "copyvalueトリガーは「{fromName}」を「{setToName}」にコピーしますが、「{fromName}」は{sourceShapeText}を保持し、「{setToName}」は{targetShapeText}を保持します。",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "copyvalueトリガーは「{fromName}」を「{setToName}」にコピーしますが、「{fromName}」の値は「{setToName}」を保持できる値には含まれていません。許可:{availableText}。"
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "「{name}」は「{source}」から選択をコピーしていますが、その名前に疑問はありません。",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "「{name}」は自分自身の選択をコピーします。",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "「{name}」は「{source}」から選択をコピーしますが、後者は選択肢も値の配列も提供しません。",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "「{name}」は「{source}」から{prop} 「{field}」と読み取られますが、{sourceType} 「{source}」にはそのような{fieldNoun}はありません。"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "「{name}」の{prop}の別の項目はすでに{valueText}の値を持ち、実行時間は両方の項目を保持します。",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "「{name}」の選択肢には{valueText}が含まれ、{toggleProp}がオンになっている間に組み込みの{specialItemText}アイテムと衝突します。"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{trigger} トリガーは存在しない「{name}」ページをターゲットにします。",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{trigger} トリガーは「{name}」をターゲットにしますが、{containerType} 「{root}」には {segmentNoun} 「{segment}」がありません。",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger}は動詞「{name}」をトリガーしますが、その名前の{kindText}は存在しません。"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "トリガータイプ「{type}」は不明です。",
+        // [Auto-translated] "The trigger has no type."
+        noType: "トリガーにはタイプがありません。"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "「{name}」のバリデータ型「{type}」は不明です。",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "「{name}」のバリデータには型がありません。"
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType} の「{name}」{effectText}: {causeText} ({questionType}) の検証子です。",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "「{name}」の{validatorType}検証器は最低でも{min}、最大{max}を必要としますが、どの答えも満たしません。",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "「{name}」のanswercount検証器は、{selectable}の選択肢を一緒に選ぶよりも、少なくとも{minCount}の回答を必要とします。",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "「{name}」の正則表現検証器には、エンジンが拒否するパターンがあります:{error}。",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "「{name}」の式バリデータには式がないため、常にパスされます。"
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "「{name}」の{minProp}は{min}であり、{max}の{maxProp}よりも上にあります。実行時間は静かに一方を調整します。",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "「{name}」の{countProp}は{count}、{direction}は{bound}の{boundProp}です。実行時間がそれを固定しています。",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "「{name}」の{stepProp}は{step}ですが、その通過範囲({minProp}..{maxProp})は{range}だけを広げます - 実行時間がそれを制限します。",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "「{name}」のminSelectedChoicesは{min}であり、{selectable}の選択肢の上にあります。この質問は決して答えられません。"
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "「{name}」は決して可視化されません。its visibleIfは{reads}と読み、{deadClause}なので、この条件は成り立ちません。"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "「{name}」のmaskType「{maskType}」は既知のマスクではなく、実行時間はマスクなしに戻されます。",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "「{name}」のmaskSettingsは「{key}」を設定しますが、これは「{maskType}」マスクのプロパティではありません。実行時間上は静かにドロップします。",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "「{name}」のmaskSettingsはmaskTypeなしで設定されており、実行時間は「saveMaskedValue」のみを保持し、残りは削除されます。",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "「{name}」の{maskType}マスクは入力なしに適用されます:inputType「{inputType}」はテキストとtelのみにマスクされます。",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "「{name}」のdatetimeマスクはパターンなしで最小/最大値を設定します。境界はパターンの日付部分に適用されるため、パターンがなければ何もしません。",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "「{name}」の{maskType}マスクは少なくとも{min}、最大{max}までを許容します。どの値も満たしません。"
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "動的パネル「{name}」はテンプレートが空で、そのパネルにはレンダリングするものがありません。",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} 「{name}」には要素がありません。",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} 「{name}」にはレンダリング可能な要素は一切なく、すべての要素は隠されており、成り立たない条件、つまり空の条件で守られています。",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "「{name}」の詳細要素は表示されません。そのdetailPanelModeはデフォルトで「none」です。"
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "ポジション:{0}。", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "これはトリガーのレガシー名、演算子、値プロパティから構築されました。",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "内部:{0}。", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "「{0}」のこと?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "カスタムコンポーネントの場合は、その定義をリンターに渡して完全な解析を可能にします。",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "リントする前に関数を登録するか、リンターオプションにリストアップしてください。",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "誤字のタイプは実行時に静かに削除され、カスタムトリガーはターゲットとサイクル判定でカバーされません。",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "実行時に変数が設定されている場合は、linterオプションにリストアップしてください。",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "トリガー条件がうまく機能しない場合、ループに到達できない場合があります。式を確認しましょう。",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpressionは、その質問に答えられるまでのみ適用されます。",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "表現:{0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "綴じ文で言及されています。",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "choicesByUrl {0}で参照されています。", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "「{0}」テキストで言及されています。", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0}()は「{2}」の項目からその名前{1}読み取られます。",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "{0}()の議論では、質問、パネル、ページの名前は一切ありません。",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "デシリアライザーは知らないキーを落とします。",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "デシリアライザーは解決できないバリデーターをドロップするため、何も検証されません。",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "inputTypeは「{0}」です。",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "これは「{0}」のデータキーです。" // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "および",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} は常に {value} です。",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} は {bounds} です",
+      // [Auto-translated] "at least {0}"
+      atLeast: "少なくとも{0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "せいぜい{0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} は両方の {value} であってはなりません",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} は {value} でありながら it でないはずがない",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} は空で {value} ではありえません",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} は空でありながら空でない",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref}は{min}を上回って{max}より小さいことはできません。",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} は全く価値のないものであることを求められます"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "「{0}.」の参照は、マトリックスセルまたはマトリックスの詳細パネル内でのみ利用可能です。",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "「{0}」はマトリックスセルまたはマトリックスの詳細パネルの中でのみ利用可能です。",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "「{0}.」参照は動的パネル内またはパネルコンテナ内でのみ利用可能です。",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "「{0}」の参照は動的パネル内でのみ利用可能です。",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "「{0}」は動的パネル内でのみ利用可能です。",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "「{0}」は選択肢、行、列の条件の内側のみ利用可能です。",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "「{0}.」の参照は、複合質問の中でのみ利用可能です。",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "「{0}」はこの行列の一列であり、行プレフィックスで参照してください。",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "「{0}」はこの動的パネルの問題で、パネルプレフィックスで参照します。"
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "数値を集める場合は「{0}」にinputType: \"number\"を設定してください。",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "マルチセレクトの値は「contains」や「anyof」を使ってください。"
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "ページ",
+        // [Auto-translated] "panel"
+        panel: "パネル"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "名称",
+        // [Auto-translated] "valueName"
+        valueName: "valueName(価値名)",
+        // [Auto-translated] "name"
+        calculatedValue: "名称"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "計算価値",
+        // [Auto-translated] "element"
+        default: "要素"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "調査",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "その他",
+        // [Auto-translated] "None"
+        none: "全くありません",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "答えるのを拒否してください",
+        // [Auto-translated] "Don't know"
+        dontknow: "わからない"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "決して発射しない",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "すべての答えを拒否する",
+        // [Auto-translated] "cannot validate"
+        default: "検証できません"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "この問いには検証する答えはありません",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "テキスト値から長さを読み取るが、この回答には長さは含まれていない",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "答えは数字ではなく、決して数字になり得ません",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "番号がメールアドレスと一致することは決してありません",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "答えは価値観のリストではありません",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "答えは検証できる値ではありません"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "配列",
+        // [Auto-translated] "an object"
+        object: "物体"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "選択された値の配列",
+        // [Auto-translated] "a single value"
+        scalar: "単一の値",
+        // [Auto-translated] "a value"
+        default: "値"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "下記",
+        // [Auto-translated] "above"
+        above: "上"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "は決して見えず、値も得られません",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "決して見えず、価値も決して受け取らない"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "質問",
+        // [Auto-translated] "question or variable"
+        questionvalue: "質問か変数か",
+        // [Auto-translated] "page"
+        page: "ページ"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "読む",
+        // [Auto-translated] "navigates to"
+        gotoName: "ナビゲート",
+        // [Auto-translated] "sets"
+        default: "集合"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "テンプレートに関する質問",
+        // [Auto-translated] "column"
+        default: "柱"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "テンプレートに関する質問",
+        // [Auto-translated] "column"
+        matrixdynamic: "柱",
+        // [Auto-translated] "item"
+        multipletext: "アイテム",
+        // [Auto-translated] "row"
+        matrix: "ロウ",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "ロウ",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "柱",
+        // [Auto-translated] "field"
+        default: "フィールド"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
