@@ -142,6 +142,10 @@ export var persianStrings = {
     jsonHideErrors: "پنهان کردن خطاها",
     // "Show errors"
     jsonShowErrors: "نمایش خطاها",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "خطای رفع",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "JSON نقشه برداری باید یک شیء باشد.",
     // "Undo"
     undo: "بازگردانی",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var persianStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "پریست اعمال شده"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "خط: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "از نام پیشنهادی استفاده کنید"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "آیتم تکراری را حذف کنید"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "از نوع پیشنهادی استفاده کنید"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "از تابع پیشنهادی استفاده کنید"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "از ماسک پیشنهادی استفاده کنید"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "به عنصر یک نام آزاد بدهید"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "به عنصر یک نام آزاد بدهید"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "حذف ملک"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "از نزدیک ترین مقدار مجاز استفاده کنید",
+        // [Auto-translated] "Remove the property"
+        removeKey: "حذف ملک",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "از مقدار پیشنهادی استفاده کنید"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "مقدار را به یک فهرست تبدیل کنید"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "به عنصر یک نام بدهید"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "حذف ملک",
+        // [Auto-translated] "Rename the property"
+        renameKey: "نام ملک را تغییر دهید"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "از نام پیشنهادی استفاده کنید",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "از نام پیشنهادی استفاده کنید"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "از نام پیشنهادی استفاده کنید"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "از نوع پیشنهادی استفاده کنید"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "از نوع پیشنهادی استفاده کنید"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "عبارت «{expression}» قابل تجزیه نیست."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "«{name}» یافت نمی شود - هیچ سوال، پنل، صفحه، مقدار محاسبه شده یا متغیری با آن نام وجود ندارد.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "«{segment}» در {containerType} «{root}» (مرجع: {name}) یافت نمی شود.",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "«{segment}» در دامنه «{scopePrefix}» یافت نمی شود (ارجاع: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "keyName در \"{name}\" به نام \"{key}\" - \"{name}\" هیچ {keyNoun} با آن نام ندارد، بنابراین اعتبارسنجی کلید تکراری هرگز اجرا نمی شود.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "«{name}» یافت نمی شود."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} عبارت «{name}» به خود عنصر اشاره دارد (ارجاع: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "نام «{name}» تکراری است.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "نام مقدار محاسبه شده «{name}» قبلا توسط مقدار محاسبه شده دیگری استفاده شده است.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "مقدار محاسبه شده «{name}» نام خود را با عنصر دیگری به اشتراک می گذارد، بنابراین یکی از آن ها روی عنصر دیگر سایه می زند."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} «{name}» این {ownerText} همچنین متغیر نظرسنجی داخلی {{builtIn}} است - نظرسنجی ابتدا به {{name}} پاسخ می دهد، بنابراین این گزینه در عبارات قابل دسترسی نیست.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "valueName \"{valueName}\" از \"{name}\" همچنین نام سوال \"{otherName}\" است - هر دو پاسخ خود را زیر کلید داده \"{valueName}\" ذخیره می کنند.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "کلید داده «{dataName}» همچنین کلید نظر «{base}» است (کلید داده آن به علاوه «{suffix}») - یک نوشتن به طور خاموش دیگری را بازنویسی می کند.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "کلید داده «{dataName}» همچنین کلید مجموع «{base}» است (کلید داده آن به علاوه «{suffix}») - یک نوشتن به طور بی صدا دیگری را بازنویسی می کند.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "محرک {trigger} متغیر «{name} را تنظیم می کند که همچنین کلید داده سؤال «{questionName}» است - از آن پس متغیر به {{name}} پاسخ می دهد، نه به سؤال."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "نام «{name}» محفوظ است - عضوی از Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "valueName \"{valueName}\" از \"{name}\" رزرو شده است - عضوی از Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "ستون «{name}» از «{matrixName}» رزرو شده است - عضوی از Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "آیتم \"{name}\" از \"{questionName}\" رزرو شده است - عضوی از Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "سطر \"{rowValue}\" از \"{name}\" رزرو شده است - عضوی از Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "مقدار محاسبه شده \"{name}\" رزرو شده است - عضوی از Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "«{name}» دارای نوع ناشناخته «{type}» است.",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "«{name}» هیچ نوع ندارد - عنصری بدون نوع حذف می شود."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "«{key}» ویژگی {ownerText} ({className}) نیست."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" از {ownerText} قابل سریال سازی نیست - هنگام بارگذاری اثر می گیرد و هرگاه نظرسنجی دوباره ذخیره شود، از JSON حذف می شود.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "«{key}» و «{aliasKey}» از {ownerText} دو نام یک ویژگی هستند - زمان اجرا آن ها را به ترتیبی که JSON می نویسد اعمال می کند، بنابراین «{winner}» برنده است.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "«{key}» روی «{name} تنظیم شده است، اما input Type «{inputType}» هیچ محدودیتی ندارد - زمان اجرا آن را نادیده می گیرد."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} {ownerText} همان {valueText} است - نه یکی از مقادیر مجاز ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{key} {ownerText} برابر است با {value}، خارج از محدوده مجاز {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "valueName \"{valueName}\" از \"{name}\" شامل یک \".\" است - عبارات {{valueName}} را به عنوان مسیری به \"{rootKey}\" می خوانند، بنابراین خود کلید داده هرگز قابل آدرس دهی نیست."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} هیچ «{key}» ندارد - این ویژگی برای {className} لازم است.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "نام {className} {valueText} است، نه رشته - نظرسنجی نمی تواند آن را بارگذاری کند."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "«{key}» در {ownerText} آرایه نیست - این ویژگی یک لیست را نگه می دارد و زمان اجرا مقدار را در یک آرایه تک آیتمی جمع می کند."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "تعریف متغیر «{variable}» را اعلام می کند که همچنین کلید داده سؤال «{name}» است - تنظیم متغیر پاسخ ذخیره شده زیر آن کلید را حذف می کند و {{name}} از آن پس به مقدار میزبان پاسخ می دهد.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "تعریف متغیر «{variable}» را اعلام می کند که همچنین نام مقدار محاسبه شده «{name}» است - هر دو همان اسلات را می نویسند و هر کدام که آخرین بار اجرا شود برنده می شود."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition یک شیء JSON نظرسنجی نیست، بنابراین هیچ متغیری اعلام نمی شود و هیچ مقدار پیش تنظیم شده ای قابل بررسی نیست.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets یک آرایه نیست، بنابراین هیچ پیش تنظیمی اعلام نمی شود.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "پیش تنظیم #{index} یک شیء نیست.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "پیش تنظیم #{index} نامی ندارد، بنابراین هیچ چیزی نمی تواند به آن اشاره کند.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "پیش فرض «{preset}» شیء متغیری ندارد، بنابراین هیچ چیز را تنظیم نمی کند.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "پیش تنظیم «{preset}» دو بار اعلام می شود - یک جستجوی با آن نام با اولین گزینه پاسخ می دهد.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "پیش تنظیم \"{preset}\" مجموعه های \"{variable}\" است که تعریف متغیر آن را اعلام نمی کند.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "پیش تنظیم \"{preset}\" \"{variable}\" را به مقداری که تعریف متغیر رد می کند قرار می دهد: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "تابع «{functionName}» ثبت نشده است."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "مقدار محاسبه شده «{names}» به صورت جداگانه به خود اشاره می کند.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "مقادیر محاسبه شده {names} به یکدیگر وابسته اند."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "تریگر به مقداری که خودش تعیین می کند واکنش نشان می دهد (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "تریگرها یک حلقه از میان مقادیری که تعیین می کنند تشکیل می دهند: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{برچسب} مقداری را که خودش می نویسد می خواند - فقط زمانی اجرا می شود که مقدار دیگری تغییر کند، بنابراین اصلا اجرا نمی شود.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "مقادیر به صورت حلقه ای نوشته می شوند: {chain}. هر نوشتن عباراتی را که آن را می خوانند دوباره اجرا می کند، بنابراین مقادیر نهایی به ترتیب پاسخ دادن به سوالات بستگی دارد."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "شرط «{name}» را با {values} مقایسه می کند - نه در میان گزینه های آن. در دسترس: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "این شرط \"{name}\" را با {values} مقایسه می کند - هیچ مقدار انتخابی شامل آن نیست. در دسترس: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "شرط \"{operator}\" را به \"{name}\" اعمال می کند: \"{recordName}\" ({questionType}) هیچ ارزشی برای مقایسه ندارد.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "شرط «{operator}» را به «{name}» اعمال می کند: «{recordName}» {valueShapeText} را نگه می دارد - عملگرهای ترتیب و حسابی برای آن اعمال نمی شوند.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "این شرط \"{operator}\" را به \"{name}\" اعمال می کند: \"{recordName}\" یک سؤال بولی است - عملگرهای ترتیب دهی روی آن اعمال نمی شوند.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "شرط «{operator}» را به «{name}» اعمال می کند: «{recordName}» یک سؤال متنی است - مقدار آن یک رشته است، بنابراین مقایسه عددی بر تبدیل ضمنی تکیه دارد.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "شرط \"{operator}\" را به \"{name}\" اعمال می کند: \"{recordName}\" یک رشته تاریخ را نگه می دارد - مقایسه آن با عددی که {constValue} نمی تواند برقرار باشد.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "شرط «{operator}» را به «{name}» اعمال می کند: «{recordName}» عددی است - مقایسه آن با رشته «{constValue}» نمی تواند برقرار باشد.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "شرط \"{operator}\" را به \"{name}\" اعمال می کند: \"{recordName}\" آرایه ای از مقادیر انتخاب شده را نگه می دارد، بنابراین \"=\" کل آرایه را مقایسه می کند.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "شرط «{operator}» را به «{name}» اعمال می کند: «{recordName}» یک سؤال بولی است - مقایسه آن با {constValue} نمی تواند درست باشد."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} «{expression}» همیشه نادرست است، بنابراین «{name}» هرگز نشان داده نمی شود.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} «{expression} هرگز درست نیست، چون {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} «{expression}» هرگز برقرار نیست - هیچ مقدار مجاز آن را ارضا نمی کند: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} «{expression}» با خود تناقض دارد: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} «{expression} همیشه درست است، بنابراین هیچ چیز را تعیین نمی کند.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} «{expression} حسابی است، نه مقایسه، بنابراین هرگز بله یا خیر نمی دهد.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "بخشی از «عبارت {prop} «{expression}» نتیجه ای دارد که از ابتدا مشخص است.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} «{expression} همیشه برقرار است، چون {facts} - هیچ چیز را تعیین نمی کند."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "مقدار پیش فرض «{name}» {valuesText} است که هرگز نمی تواند آن را نگه دارد. مجاز: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "پاسخ درست «{name}» {valuesText} است که هرگز نمی تواند آن را نگه دارد. مجاز: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "تریگر \"{name}\" را به {valuesText} تنظیم می کند که هرگز نمی تواند آن را نگه دارد. مجاز: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "مقدار پیش فرض ردیف «{name}» را به {valuesText} تنظیم می کند که هرگز نمی تواند نگه دارد. مجاز: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "مقدار پیش فرض پنل «{name}» را به {valuesText} تنظیم می کند که هرگز نمی تواند آن را نگه دارد. مجاز: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} از «{name}» نام «{key}» را دارد - چنین ردیفی وجود ندارد. در دسترس: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} در «{name}» نام «{key}» را دارد - چنین ستونی وجود ندارد. در دسترس: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} در «{name}» نام «{key}» را ذکر می کند - چنین سؤالی در قالب وجود ندارد. در دسترس: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "تریگر مقدار کپی \"{fromName}\" را به \"{setToName} کپی می کند، اما \"{fromName}\" {sourceShapeText} و \"{setToName}\" {targetShapeText} را نگه می دارد.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "تریگر مقدار کپی \"{fromName}\" را به \"{setToName}\" کپی می کند، اما هیچ مقداری از \"{fromName}\" در میان مقادیری که \"{setToName}\" می تواند داشته باشد، وجود ندارد. مجاز: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "«{name}» انتخاب هایش را از «{source} کپی می کند، اما هیچ شکی درباره این نام وجود ندارد.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "«{name}» انتخاب هایش را از خودش کپی می کند.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "«{name}» انتخاب های خود را از «{source}» ({sourceType}) کپی می کند، که نه انتخاب ارائه می دهد و نه آرایه ای از مقادیر را ارائه می دهد.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "«{name}» {prop} «{field}» را از «{source} می خواند، اما {sourceType} «{source}» چنین {fieldNoun} را ندارد."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "آیتم دیگری از {prop} «{name}» قبلا مقدار {valueText} را دارد - زمان اجرا هر دو آیتم را نگه می دارد.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "گزینه های «{name}» شامل {valueText} هستند در حالی که {toggleProp} فعال است - این با آیتم داخلی {specialItemText} برخورد می کند."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "صفحه هدف گیری {trigger} صفحه «{name} را هدف می گیرد که وجود ندارد.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "تریگر {trigger} هدف \"{name}\" را هدف قرار می دهد، اما {containerType} \"{root}\" هیچ {segmentNoun} \"{segment}\" ندارد.",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "محرک {trigger} {verb} «{name}» را فعال می کند، اما هیچ {kindText} با این نام وجود ندارد."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "نوع ماشه «{type}» مشخص نیست.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "ماشه هیچ نوع خاصی ندارد."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "نوع اعتبارسنج \"{type}\" برای \"{name}\" مشخص نیست.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "اعتبارسنج «{name}» هیچ نوع ندارد."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "اعتبارسنج {validatorType} برای «{name}» {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "اعتبارسنج {validatorType} برای «{name}» حداقل به {min} و حداکثر {max} نیاز دارد - هیچ پاسخی آن را برآورده نمی کند.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "اعتبارسنج تعداد پاسخ های \"{name}\" حداقل به {minCount} پاسخ نیاز دارد، بالاتر از گزینه های {قابل انتخاب} که می توان با هم انتخاب کرد.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "اعتبارسنج regex «{name}» الگویی دارد که موتور آن را رد می کند: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "اعتبارسنج عبارت «{name}» عبارتی ندارد، بنابراین همیشه عبور می کند."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} در «{name}» برابر با {min} است، بالاتر از {maxProp} آن {max} - زمان اجرا به طور بی صدا یکی از آن ها را تنظیم می کند.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} از «{name}» برابر است با {count}، {direction} آن {boundProp} از {bound} - زمان اجرا آن را محدود می کند.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} در «{name}» {step} است، اما بازه ای که از آن عبور می کند ({minProp}.. {maxProp}}) فقط {range} را در بر می گیرد - زمان اجرا آن را محدود می کند.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices در \"{name}\" برابر با {min} است، بالاتر از گزینه های {selectable} که می توان با هم انتخاب کرد - این سؤال هرگز قابل پاسخ نیست."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "«{name}» هرگز نمی تواند قابل مشاهده شود: آن visibleif را {reads} می خواند، که {deadClause} است، بنابراین شرط هرگز برقرار نمی شود."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "نوع ماسک \"{maskType}\" از \"{name}\" یک ماسک شناخته شده نیست - زمان اجرا به هیچ ماسک برمی گردد.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "تنظیمات ماسک در \"{name}\" \"{key}\" را تنظیم می کند که خاصیت ماسک \"{maskType}\" نیست - زمان اجرا آن را به صورت بی صدا رها می کند.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "تنظیمات ماسک در \"{name}\" بدون maskType تنظیم شده اند - زمان اجرا فقط \"saveMaskedValue\" را نگه می دارد و بقیه را حذف می کند.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "ماسک {maskType} «{name}» برای هیچ ورودی اعمال نمی شود: inputType «{inputType}» فقط برای متن و tel ماسک شده است.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "ماسک datetime در «{name}» حداقل و حداکثر را بدون الگو تنظیم می کند - این محدودیت ها روی بخش های تاریخ الگو اعمال می شوند، پس بدون آن هیچ کاری انجام نمی دهند.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "ماسک {maskType} در «{name}» حداقل اجازه می دهد {min} و حداکثر {max} - هیچ مقداری آن را برآورده نمی کند."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "پنل پویا «{name}» قالب خالی دارد - پنل های آن هیچ چیزی برای رندر کردن ندارند.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} «{name}» هیچ عنصری ندارد.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} «{name}» هیچ عنصری ندارد که بتواند رندر شود - هر عنصر پنهان است، توسط شرطی محافظت می شود که هرگز برقرار نمی ماند، یا خالی است.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "عناصر جزئیات «{name}» هرگز نمایش داده نمی شوند: حالت detailPanelMode آن «none» است که حالت پیش فرض است."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "موقعیت: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "این سیستم بر اساس نام قدیمی، اپراتور و ویژگی های مقدار ماشه ساخته شده است.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "داخل: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "منظورت «{0}» بود؟",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "اگر مؤلفه سفارشی باشد، تعریف آن را به لینتر منتقل کنید تا تحلیل کامل ممکن شود.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "قبل از لینتر، عملکرد را ثبت کنید یا آن را در گزینه های لینتر ذکر کنید.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "یک نوع اشتباه املایی به طور بی صدا در زمان اجرا حذف می شود و تریگر سفارشی توسط بررسی های هدف و چرخه پوشش داده نمی شود.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "اگر متغیر در زمان اجرا تنظیم شده است، آن را در گزینه های لینتر ذکر کنید.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "حلقه ممکن است غیرقابل دسترسی باشد اگر شرایط تریگر هرگز کنار هم نماند - عبارات را بررسی کنید.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "یک ValueExpression پیش فرض فقط تا زمانی اعمال می شود که سؤال آن پاسخ داده شود.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "در بیان: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "در صحافی ها به آن اشاره شده است.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "در {0} ChoicesByUrl ارجاع داده شده است.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "در متن «{0}» اشاره شده است.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () این نام را از هر ورودی «{2}» {1} می خواند.",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "استدلال {0}() هیچ سوال، پنل یا صفحه ای را نام نمی برد.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "دستگاه دسریالایزر کلیدی را رها می کند که نمی داند.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "دسریالایزر یک اعتبارسنج را رها می کند که نمی تواند آن را حل کند، پس هیچ اعتباری وجود ندارد.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "نوع ورودی «{0}» است.",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "این کلید داده «{0}» است." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "و",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} همیشه {value} است",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} برابر است با {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "حداقل {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "حداکثر {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} نمی تواند هر دو {مقدار} باشد",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} نمی تواند {value} باشد و آن هم نباشد",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} نمی تواند خالی باشد و {مقدار} باشد",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} نمی تواند خالی باشد و خالی نباشد",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} نمی تواند بالاتر از {min} و زیر {max} باشد",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} به عنوان یکی از بی ارزش ها خواسته می شود"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "ارجاعات «{0}.» فقط در داخل سلول ماتریکس یا پنل جزئیات ماتریکس در دسترس هستند.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "«{0}» فقط در داخل یک سلول ماتریسی یا پنل جزئیات ماتریس موجود است.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "ارجاعات «{0}.» فقط داخل پنل پویا یا کانتینر پنل در دسترس هستند.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "ارجاعات «{0}.» فقط در داخل یک پنل پویا در دسترس هستند.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "«{0}» فقط داخل پنل دینامیک موجود است.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "«{0}» فقط در شرایط انتخاب، ردیف و ستون در دسترس است.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "ارجاعات «{0}.» فقط در داخل یک سؤال ترکیبی موجود است.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "«{0}» ستونی از این ماتریس است - آن را با پیشوند سطر ارجاع دهید.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "«{0}» به این پنل پویا مربوط می شود - با پیشوند پنل به آن مراجعه کنید."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "inputType: \"number\" را روی \"{0}\" تنظیم کنید اگر اعداد جمع آوری می کند.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "برای مقادیر چندانتخابی از \"contains\" یا \"anyof\" استفاده کنید."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "صفحه",
+        // [Auto-translated] "panel"
+        panel: "پنل"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "نام",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "نام"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "مقدار محاسبه شده",
+        // [Auto-translated] "element"
+        default: "عنصر"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "بررسی",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "سایر موارد",
+        // [Auto-translated] "None"
+        none: "هیچ کدام",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "از پاسخ دادن امتناع کن",
+        // [Auto-translated] "Don't know"
+        dontknow: "نمی دانم"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "هرگز آتش نمی زند",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "هر پاسخی را رد می کند",
+        // [Auto-translated] "cannot validate"
+        default: "نمی تواند اعتبارسنجی کند"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "این سؤال پاسخی برای اعتبارسنجی ندارد",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "یک طول از مقدار متنی خوانده می شود و این پاسخ هیچ مقدار ندارد",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "پاسخ عدد نیست و هرگز نمی تواند باشد",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "یک شماره هرگز با آدرس ایمیل مطابقت ندارد",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "پاسخ فهرستی از ارزش ها نیست",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "پاسخ مقداری نیست که بتواند بررسی کند"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "یک آرایه",
+        // [Auto-translated] "an object"
+        object: "یک شیء"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "آرایه ای از مقادیر انتخاب شده",
+        // [Auto-translated] "a single value"
+        scalar: "یک مقدار واحد",
+        // [Auto-translated] "a value"
+        default: "یک مقدار"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "در ادامه",
+        // [Auto-translated] "above"
+        above: "بالا"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "هرگز قابل مشاهده نیست و هرگز مقداری دریافت نمی کند",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "هرگز قابل مشاهده نیستند و هرگز مقداری دریافت نمی کنند"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "سؤال",
+        // [Auto-translated] "question or variable"
+        questionvalue: "سؤال یا متغیر",
+        // [Auto-translated] "page"
+        page: "صفحه"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "خوانده ها",
+        // [Auto-translated] "navigates to"
+        gotoName: "ناوبری می کند تا",
+        // [Auto-translated] "sets"
+        default: "مجموعه ها"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "سؤال قالب",
+        // [Auto-translated] "column"
+        default: "ستون"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "سؤال قالب",
+        // [Auto-translated] "column"
+        matrixdynamic: "ستون",
+        // [Auto-translated] "item"
+        multipletext: "آیتم",
+        // [Auto-translated] "row"
+        matrix: "ردیف",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "ردیف",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "ستون",
+        // [Auto-translated] "field"
+        default: "میدان"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

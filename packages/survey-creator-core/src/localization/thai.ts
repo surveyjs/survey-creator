@@ -142,6 +142,10 @@ export const thStrings = {
     jsonHideErrors: "ซ่อนข้อผิดพลาด",
     // "Show errors"
     jsonShowErrors: "แสดงข้อผิดพลาด",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "แก้ไขข้อผิดพลาด",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "JSON แบบสํารวจต้องเป็นวัตถุ",
     // "Undo"
     undo: "เลิกทำ",
     // "Redo"
@@ -3553,6 +3557,609 @@ export const thStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "ใช้ค่าที่ตั้งไว้ล่วงหน้า"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "สาย: {0}", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "ใช้ชื่อที่แนะนํา"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "ลบรายการซ้ํา"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "ใช้ประเภทที่แนะนํา"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "ใช้ฟังก์ชันที่แนะนํา"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "ใช้หน้ากากที่แนะนํา"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "ตั้งชื่อให้ธาตุฟรี"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "ตั้งชื่อให้ธาตุฟรี"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "ลบคุณสมบัติ"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "ใช้ค่าที่ใกล้เคียงที่สุดที่อนุญาต",
+        // [Auto-translated] "Remove the property"
+        removeKey: "ลบคุณสมบัติ",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "ใช้ค่าที่แนะนํา"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "เปลี่ยนค่าเป็นรายการ"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "ตั้งชื่อให้กับองค์ประกอบ"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "ลบคุณสมบัติ",
+        // [Auto-translated] "Rename the property"
+        renameKey: "เปลี่ยนชื่อคุณสมบัติ"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "ใช้ชื่อที่แนะนํา",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "ใช้ชื่อที่แนะนํา"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "ใช้ชื่อที่แนะนํา"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "ใช้ประเภทที่แนะนํา"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "ใช้ประเภทที่แนะนํา"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "ไม่สามารถแยกวิเคราะห์นิพจน์ \"{expression}\" ได้"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "ไม่พบ \"{name}\" - ไม่มีคําถาม แผง หน้า ค่าคํานวณ หรือตัวแปรที่มีชื่อเดียวกัน",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" ไม่พบใน {containerType} \"{root}\" (อ้างอิง: {name})",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" ไม่พบในขอบเขต \"{scopePrefix}\" (อ้างอิง: {name})",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "keyName ของ \"{name}\" ชื่อ \"{key}\" - \"{name}\" ไม่มี {keyNoun} กับชื่อนั้น ดังนั้นการตรวจสอบ duplicate-key จึงไม่ทํางาน",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "ไม่พบ \"{name}\""
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} ของ \"{name}\" อ้างอิงถึงองค์ประกอบเอง (อ้างอิง: {reference})"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "ชื่อ \"{name}\" ถูกซ้ําซ้อน",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "ชื่อค่าที่คํานวณได้ \"{name}\" ถูกใช้โดยค่าที่คํานวณได้อีกค่าหนึ่งแล้ว",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "ค่าที่คํานวณได้ \"{name}\" จะใช้ชื่อเดียวกันกับองค์ประกอบอื่น ดังนั้นหนึ่งในนั้นจะเงาอีกองค์ประกอบหนึ่ง"
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" ของ {ownerText} นี้ก็เป็นตัวแปรสํารวจในตัว {{builtIn}} เช่นกัน - แบบสํารวจจะตอบ {{name}} ก่อน ดังนั้นแบบสํารวจนี้จึงไม่สามารถเข้าถึงได้ในนิพจน์",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "valueName \"{valueName}\" ของ \"{name}\" ก็เป็นชื่อของคําถาม \"{otherName}\" เช่นกัน - ทั้งสองจะเก็บคําตอบไว้ใต้คีย์ข้อมูล \"{valueName}\"",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "คีย์ข้อมูล \"{dataName}\" ยังเป็นคีย์ความคิดเห็นของ \"{base}\" (คีย์ข้อมูลของมันบวกกับ \"{suffix}\") - การเขียนหนึ่งจะเขียนทับอีกอันโดยไม่เขียน",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "คีย์ข้อมูล \"{dataName}\" ยังเป็นคีย์รวมของ \"{base}\" (คีย์ข้อมูลของมันบวกกับ \"{suffix}\") - การเขียนหนึ่งจะเขียนทับอีกอันแบบเงียบ ๆ",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "ทริกเกอร์ {trigger} จะตั้งค่าตัวแปร \"{name}\" ซึ่งเป็นคีย์ข้อมูลของคําถาม \"{questionName}\" ด้วย - ตัวแปรจะตอบ {{name}} หลังจากนั้น ไม่ใช่คําถาม"
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "ชื่อ \"{name}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "valueName \"{valueName}\" ของ \"{name}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "คอลัมน์ \"{name}\" ของ \"{matrixName}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "รายการ \"{name}\" ของ \"{questionName}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "แถว \"{rowValue}\" ของ \"{name}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "ค่าที่คํานวณได้ \"{name}\" ถูกสงวนไว้ - สมาชิกของ Object.prototype"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" มีชนิดที่ไม่ทราบชื่อ \"{type}\"",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" ไม่มีชนิดข้อมูล - องค์ประกอบที่ไม่มีชนิดจะถูกทิ้ง"
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" ไม่ใช่คุณสมบัติของ {ownerText} ({className})"
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" ของ {ownerText} ไม่สามารถ serializable ได้ - จะมีผลเมื่อโหลด และจะถูกลบออกจาก JSON ทุกครั้งที่สํารวจถูกบันทึกอีกครั้ง",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" และ \"{aliasKey}\" ของ {ownerText} เป็นชื่อสองชื่อของคุณสมบัติเดียวกัน - เวลาทํางานจะนําไปใช้ตามลําดับที่ JSON เขียน ดังนั้น \"{winner}\" จึงชนะ",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" ถูกตั้งค่าเป็น \"{name}\" แต่ inputType \"{inputType}\" ไม่มีขอบเขต - เวลารันจะไม่สนใจ"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} ของ {ownerText} คือ {valueText} - ไม่ใช่หนึ่งในค่าที่อนุญาต ({allowedText})",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{key} ของ {ownerText} คือ {value} อยู่นอกช่วงที่อนุญาต {rangeText}",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "valueName \"{valueName}\" ของ \"{name}\" มี \".\" - expressions จะอ่าน {{valueName}} เป็นเส้นทางเข้าสู่ \"{rootKey}\" ดังนั้นคีย์ข้อมูลเองจึงไม่สามารถระบุที่อยู่ได้"
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} ไม่มี \"{key}\" - คุณสมบัตินี้จําเป็นสําหรับ {className}",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "ชื่อของ {className} คือ {valueText} ไม่ใช่สตริง - แบบสํารวจไม่สามารถโหลดได้"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" ของ {ownerText} ไม่ใช่อาร์เรย์ - คุณสมบัตินี้จะเก็บรายการไว้ และเวลารันจะห่อค่านั้นเป็นอาร์เรย์แบบรายการเดียว"
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "คํานิยามตัวแปรจะประกาศ \"{variable}\" ซึ่งเป็นคีย์ข้อมูลของคําถาม \"{name}\" ด้วย - การตั้งค่าตัวแปรจะลบคําตอบที่เก็บไว้ในคีย์นั้น และ {{name}} จะตอบค่าโฮสต์ตั้งแต่นั้นเป็นต้นไป",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "คํานิยามตัวแปรประกาศ \"{variable}\" ซึ่งเป็นชื่อของค่าที่คํานวณได้ \"{name}\" — ทั้งสองจะเขียนช่องเดียวกัน และใครรันสุดท้ายจะชนะ"
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition ไม่ใช่วัตถุ JSON แบบสํารวจ ดังนั้นจึงไม่มีการประกาศตัวแปรและไม่สามารถตรวจสอบค่าที่ตั้งไว้ล่วงหน้าได้",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets ไม่ใช่อาร์เรย์ ดังนั้นจึงไม่มีการประกาศพรีเซ็ต",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "การตั้งค่าล่วงหน้า #{index} ไม่ใช่วัตถุ",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "preset #{index} ไม่มีชื่อ ดังนั้นไม่มีอะไรสามารถอ้างอิงได้",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "preset \"{preset}\" ไม่มีอ็อบเจ็กต์ variables ดังนั้นมันจึงไม่ตั้งค่าอะไรเลย",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "พรีเซ็ต \"{preset}\" จะถูกประกาศสองครั้ง - การค้นหาด้วยชื่อนี้จะตอบด้วยตัวแรก",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "ค่าพรีเซ็ต \"{preset}\" กําหนด \"{variable}\" ซึ่งคําจํากัดความของตัวแปรไม่ได้ประกาศ",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "พรีเซ็ต \"{preset}\" ตั้งค่า \"{variable}\" เป็นค่าที่คําจํากัดความตัวแปรปฏิเสธ: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "ฟังก์ชัน \"{functionName}\" ไม่ได้ลงทะเบียน"
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "ค่าที่คํานวณได้ \"{names}\" จะอ้างอิงตัวเองในนิพจน์ของตัวเอง",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "ค่าที่คํานวณได้ {names} ขึ้นอยู่กับกันและกัน"
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "ทริกเกอร์จะตอบสนองต่อค่าที่ตั้งไว้เอง (\"{setToName}\")",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "ทริกเกอร์จะสร้างลูปผ่านค่าที่ตั้งไว้: {setRoots}"
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} จะอ่านค่าที่มันเขียนเอง - มันจะทํางานเฉพาะเมื่อมีค่าอื่นเปลี่ยนเท่านั้น ดังนั้นมันจึงไม่ทํางานเลย",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "ค่าจะถูกเขียนเป็นลูป: {chain}แต่ละครั้งที่เขียนจะรันนิพจน์ที่อ่านค่านั้นซ้ํา ดังนั้นค่าสุดท้ายจะขึ้นอยู่กับลําดับการตอบคําถาม"
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "เงื่อนไขเปรียบเทียบ \"{name}\" กับ {values} - ไม่อยู่ในตัวเลือกของเงื่อนไขนี้พร้อมใช้งาน: {available}",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "เงื่อนไขเปรียบเทียบ \"{name}\" กับ {values} - ไม่มีค่าตัวเลือกใดที่มีเงื่อนไขนี้พร้อมใช้งาน: {available}"
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "เงื่อนไขนี้นํา \"{operator}\" มาใช้กับ \"{name}\": \"{recordName}\" ({questionType}) ไม่มีค่าให้เปรียบเทียบ",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "เงื่อนไขนี้ใช้ \"{operator}\" กับ \"{name}\": \"{recordName}\" ถือเป็น {valueShapeText} - โอเปอเรเตอร์การจัดลําดับและเลขคณิตไม่สามารถใช้กับเงื่อนไขนี้ได้",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "เงื่อนไขนี้นํา \"{operator}\" มาใช้กับ \"{name}\": \"{recordName}\" เป็นคําถามแบบบูลีน - ตัวดําเนินการลําดับจะไม่ใช้กับเงื่อนไขนี้",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "เงื่อนไขนี้นํา \"{operator}\" มาใช้กับ \"{name}\": \"{recordName}\" เป็นคําถามแบบข้อความ - ค่าของมันเป็นสตริง ดังนั้นการเปรียบเทียบเชิงตัวเลขจึงขึ้นอยู่กับการแปลงโดยนัย",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "เงื่อนไขนี้ใช้ \"{operator}\" กับ \"{name}\": \"{recordName}\" จะเก็บสตริงวันที่ - เมื่อเปรียบเทียบกับตัวเลข {constValue} ที่ไม่สามารถใช้ได้",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "เงื่อนไขนี้ใช้ \"{operator}\" กับ \"{name}\": \"{recordName}\" เป็นตัวเลข - การเปรียบเทียบกับสตริง \"{constValue}\" จะไม่เป็นจริง",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "เงื่อนไขนี้ใช้ \"{operator}\" กับ \"{name}\": \"{recordName}\" จะเก็บค่าที่เลือกไว้เป็นอาร์เรย์ ดังนั้น \"=\" จะเปรียบเทียบทั้งอาร์เรย์",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "เงื่อนไขนี้นํา \"{operator}\" มาใช้กับ \"{name}\": \"{recordName}\" เป็นคําถามบูลีน - การเปรียบเทียบกับ {constValue} ไม่สามารถใช้ได้"
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" จะเป็นเท็จเสมอ ดังนั้น \"{name}\" จะไม่ปรากฏ",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{expression}\" ไม่เคยเป็นจริง เพราะ {facts}",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" ไม่เคยเป็นจริง - ไม่มีค่าที่อนุญาตใดที่เป็นไปตามมัน: {facts}",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{expression}\" ขัดแย้งกับตัวเอง: {facts}"
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expression}\" เป็นจริงเสมอ ดังนั้นจึงไม่ตัดสินใจอะไร",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{expression}\" เป็นคณิตศาสตร์ ไม่ใช่การเปรียบเทียบ ดังนั้นจึงไม่เคยให้คําตอบว่าใช่หรือไม่ใช่",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "ส่วนหนึ่งของ {prop} \"{expression}\" มีผลลัพธ์ที่ทราบล่วงหน้า",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{expression}\" เป็นจริงเสมอ เพราะ {facts} - มันไม่ได้ตัดสินใจอะไรเลย"
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "ค่าเริ่มต้นของ \"{name}\" คือ {valuesText} ซึ่งไม่สามารถถือไว้ได้อนุญาต: {availableText}",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "คําตอบที่ถูกต้องของ \"{name}\" คือ {valuesText} ซึ่งไม่สามารถถือไว้ได้อนุญาต: {availableText}",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "ทริกเกอร์จะตั้งค่า \"{name}\" เป็น {valuesText} ซึ่งไม่สามารถถือไว้ได้เลยอนุญาต: {availableText}",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "ค่าแถวเริ่มต้นจะตั้งค่า \"{name}\" เป็น {valuesText} ซึ่งไม่สามารถถือไว้ได้อนุญาต: {availableText}",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "ค่าแผงเริ่มต้นตั้งค่า \"{name}\" เป็น {valuesText} ซึ่งไม่สามารถถือไว้ได้อนุญาต: {availableText}",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} ของ \"{name}\" จะตั้งชื่อว่า \"{key}\" - ไม่มีแถวดังกล่าวพร้อมใช้งาน: {availableText}",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} ของ \"{name}\" ตั้งชื่อว่า \"{key}\" - ไม่มีคอลัมน์ดังกล่าวพร้อมใช้งาน: {availableText}",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} ของ \"{name}\" หมายถึง \"{key}\" - ไม่มีคําถามในเทมเพลตดังกล่าวมีให้ใช้งาน: {availableText}",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "ทริกเกอร์ copyvalue จะคัดลอก \"{fromName}\" ไปยัง \"{setToName}\" แต่ \"{fromName}\" จะเก็บ {sourceShapeText} และ \"{setToName}\" จะเก็บ {targetShapeText}",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "ทริกเกอร์ copyvalue จะคัดลอก \"{fromName}\" ไปยัง \"{setToName}\" แต่ไม่มีค่าใด ๆ ของ \"{fromName}\" อยู่ในค่าที่ \"{setToName}\" สามารถถือได้อนุญาต: {availableText}"
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" คัดลอกตัวเลือกจาก \"{source}\" แต่ไม่มีคําถามที่มีชื่อนั้นอยู่จริง",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" คัดลอกตัวเลือกของมันจากตัวเอง",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" คัดลอกตัวเลือกจาก \"{source}\" ({sourceType}) ซึ่งไม่มีตัวเลือกหรืออาร์เรย์ของค่า",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" อ่านเป็น {prop} \"{field}\" จาก \"{source}\" แต่ {sourceType} \"{source}\" ไม่มี {fieldNoun} แบบนั้น"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "อีกรายการหนึ่งของ {prop} ใน \"{name}\" มีค่า {valueText} อยู่แล้ว - เวลารันจะเก็บทั้งสองรายการไว้",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "ตัวเลือกของ \"{name}\" จะมี {valueText} ขณะที่ {toggleProp} เปิดอยู่ - มันจะชนกับรายการ {specialItemText} ที่มีอยู่ในตัว"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "หน้าเป้าหมายทริกเกอร์ {ทริกเกอร์} \"{name}\" ซึ่งไม่มีอยู่จริง",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "ทริกเกอร์ {trigger} จะเลือก \"{name}\" แต่ {containerType} \"{root}\" ไม่มี {segmentNoun} \"{segment}\"",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "ทริกเกอร์ {trigger} คือ {verb} \"{name}\" แต่ไม่มี {kindText} ที่มีชื่อดังกล่าว"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "ประเภททริกเกอร์ \"{type}\" ไม่เป็นที่ทราบแน่ชัด",
+        // [Auto-translated] "The trigger has no type."
+        noType: "ทริกเกอร์ไม่มีชนิด"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "ประเภทตัวตรวจสอบ \"{type}\" ของ \"{name}\" ไม่เป็นที่ทราบแน่ชัด",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "ตัวตรวจสอบของ \"{name}\" ไม่มีชนิดข้อมูล"
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "ตัวตรวจสอบ {validatorType} ของ \"{name}\" {effectText}: {causeText} ({questionType})",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "ตัวตรวจสอบ {validatorType} ของ \"{name}\" ต้องการอย่างน้อย {min} และสูงสุด {max} - ไม่มีคําตอบใดที่ตรงตามเงื่อนไขนี้",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "ตัวตรวจสอบจํานวนคําตอบของ \"{name}\" ต้องการคําตอบอย่างน้อย {minCount} มากกว่าตัวเลือก {selectable} ที่สามารถเลือกพร้อมกันได้",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "ตัวตรวจสอบ regex ของ \"{name}\" มีรูปแบบที่เอนจินปฏิเสธ: {error}",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "ตัวตรวจสอบนิพจน์ของ \"{name}\" ไม่มีนิพจน์ ดังนั้นมันจึงถูกส่งผ่านเสมอ"
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} ของ \"{name}\" คือ {min} เหนือ {maxProp} ของ {max} - เวลารันจะปรับค่าใดค่าหนึ่งอย่างเงียบ ๆ",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} ของ \"{name}\" คือ {count}, {direction} เป็น {boundProp} ของ {bound} - เวลารันจะจํากัดมันไว้",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} ของ \"{name}\" คือ {step} แต่ช่วงที่มันก้าวผ่าน ({minProp}..{maxProp})ครอบคลุมเฉพาะ {range} เท่านั้น - เวลารันจะจํากัดมันไว้",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices ของ \"{name}\" คือ {min} อยู่เหนือตัวเลือก {selectable} ที่สามารถเลือกพร้อมกันได้ - คําถามนี้ไม่มีวันได้รับคําตอบ"
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" จะไม่มีวันปรากฏ: มันมองเห็นได้ถ้าอ่าน {reads} ซึ่ง {deadClause} ดังนั้นเงื่อนไขนี้จึงไม่เป็นจริง"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "maskType \"{maskType}\" ของ \"{name}\" ไม่ใช่ mask ที่รู้จัก - เวลารันจะกลับไปที่ไม่มี mask เลย",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "การตั้งค่าหน้ากากของ \"{name}\" ตั้งค่า \"{key}\" ซึ่งไม่ใช่คุณสมบัติของหน้ากาก \"{maskType}\" - เวลารันจะตัดมันออกอย่างเงียบ ๆ",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "การตั้งค่า mask ของ \"{name}\" ถูกตั้งค่าโดยไม่มี maskType - เวลารันจะเก็บไว้เฉพาะ \"saveMaskedValue\" และตัดส่วนที่เหลือออก",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "หน้ากาก {maskType} ของ \"{name}\" ใช้กับการไม่มีอินพุต: inputType \"{inputType}\" จะถูกปิดเฉพาะข้อความและโทรศัพท์เท่านั้น",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "หน้ากาก datetime ของ \"{name}\" ตั้งค่า min/max โดยไม่มีแพทเทิร์น - ขอบเขตนี้ใช้กับส่วนวันที่ของแพทเทิร์น ดังนั้นถ้าไม่มีก็จะไม่ทําอะไร",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "หน้ากาก {maskType} ของ \"{name}\" อนุญาตให้มีค่าอย่างน้อย {min} และสูงสุด {max} - ไม่มีค่าใดที่ตรงตามเงื่อนไขนี้"
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "แผงไดนามิก \"{name}\" มีเทมเพลตว่างเปล่า - แผงของมันไม่มีอะไรให้แสดงผล",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{name} ของ {kindText} ไม่มีองค์ประกอบใด ๆ",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{name}\" ของ {kindText} ไม่มีองค์ประกอบใดที่สามารถแสดงผลได้เลย - ทุกองค์ประกอบถูกซ่อนไว้ ถูกปกป้องด้วยเงื่อนไขที่ไม่เคยเป็นจริง หรือว่างเปล่า",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "องค์ประกอบรายละเอียดของ \"{name}\" จะไม่แสดง: detailPanelMode ของมันคือ \"none\" ซึ่งเป็นค่าเริ่มต้น"
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "ตําแหน่ง: {0}", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "มันถูกสร้างขึ้นจากชื่อเดิม โอเปอเรเตอร์ และคุณสมบัติค่าของทริกเกอร์",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "ข้างใน: {0}", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "คุณหมายถึง \"{0}\" ใช่ไหม?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "ถ้าเป็นคอมโพเนนต์แบบกําหนดเอง ให้ส่งนิยามของมันไปยัง linter เพื่อให้สามารถวิเคราะห์ได้เต็มรูปแบบ",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "ลงทะเบียนฟังก์ชันก่อน linting หรือแสดงรายการในตัวเลือก linter",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "ประเภทที่สะกดผิดจะถูกตัดออกอย่างเงียบ ๆ ขณะรัน และทริกเกอร์แบบกําหนดเองจะไม่ถูกครอบคลุมโดยการตรวจสอบเป้าหมายและรอบ",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "ถ้าเป็นชุดตัวแปรขณะรันไทม์ ให้แสดงในตัวเลือก linter",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "ลูปอาจไม่สามารถเข้าถึงได้หากเงื่อนไขทริกเกอร์ไม่ตรงกัน - ตรวจสอบนิพจน์",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpression จะใช้ได้เฉพาะจนกว่าคําถามของมันจะได้รับคําตอบ",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "ในการแสดงออก: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "อ้างอิงในชุดผูก",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "อ้างอิงใน {0} choicesByUrl", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "อ้างอิงในข้อความ \"{0}\"", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0}() อ่านชื่อนั้นจากทุกรายการของ{1} \"{2}\"",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "อาร์กิวเมนต์ {0}() จะไม่ระบุคําถาม แผง หรือหน้า",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "ตัวถอดรหัสจะดรอปกุญแจที่ไม่รู้จัก",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "ตัว deserializer จะทิ้งตัวตรวจสอบที่ไม่สามารถแก้ไขได้ ดังนั้นจึงไม่มีอะไรตรวจสอบได้",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "inputType คือ \"{0}\"",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "มันคือคีย์ข้อมูลของ \"{0}\"" // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "และ",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} จะเป็น {value} เสมอ",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} คือ {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "อย่างน้อยก็{0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "อย่างมาก{0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} ไม่สามารถเป็นทั้งสอง {values} ได้",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} ไม่สามารถเป็น {value} และไม่ใช่ it ได้",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} ไม่สามารถเป็น empty และเป็น {value} ได้",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} ไม่สามารถเป็น empty แ���ะไม่ empty ได้",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} ไม่สามารถอยู่เหนือ {min} และต่ํากว่า {max} ได้",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} ถูกขอให้เป็นหนึ่งที่ไม่มีค่าเลย"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "การอ้างอิง \"{0}.\" มีให้เฉพาะภายในเซลล์เมทริกซ์หรือแผงรายละเอียดเมทริกซ์เท่านั้น",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" มีให้เฉพาะในเซลล์เมทริกซ์หรือแผงรายละเอียดเมทริกซ์เท่านั้น",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "การอ้างอิง \"{0}.\" มีให้เฉพาะภายในแผงไดนามิกหรือภาชนะแผงเท่านั้น",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "การอ้างอิง \"{0}.\" จะมีให้เฉพาะภายในแผงไดนามิกเท่านั้น",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" มีให้ใช้งานเฉพาะในแผงไดนามิกเท่านั้น",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" มีให้เฉพาะในเงื่อนไขเลือก แถว และคอลัมน์เท่านั้น",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" อ้างอิงจะมีเฉพาะในคําถามประกอบเท่านั้น",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" คือคอลัมน์ของเมทริกซ์นี้ - อ้างอิงด้วยคํานําหน้าแถว",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" เป็นคําถามเกี่ยวกับแผงไดนามิกนี้ - อ้างอิงด้วยคํานําหน้าแผง"
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "ตั้งค่า inputType: \"number\" บน \"{0}\" หากมันเก็บตัวเลข",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "ใช้ \"contains\" หรือ \"anyof\" สําหรับค่าที่เลือกหลายครั้ง"
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "หน้า",
+        // [Auto-translated] "panel"
+        panel: "แผง"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "ชื่อ",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "ชื่อ"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "ค่าที่คํานวณได้",
+        // [Auto-translated] "element"
+        default: "ธาตุ"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "การสํารวจ",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "อื่น ๆ",
+        // [Auto-translated] "None"
+        none: "ไม่มี",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "ปฏิเสธที่จะตอบ",
+        // [Auto-translated] "Don't know"
+        dontknow: "ไม่รู้"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "ไม่เคยยิง",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "ปฏิเสธทุกคําตอบ",
+        // [Auto-translated] "cannot validate"
+        default: "ไม่สามารถตรวจสอบความถูกต้องได้"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "คําถามนี้ไม่มีคําตอบเพื่อยืนยัน",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "ความยาวจะถูกอ่านจากค่าข้อความ และคําตอบนี้ไม่มีความยาว",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "คําตอบไม่ใช่ตัวเลขและไม่มีวันเป็นได้",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "ตัวเลขไม่เคยตรงกับที่อยู่อีเมล",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "คําตอบไม่ใช่รายการค่า",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "คําตอบไม่ใช่ค่าที่มันสามารถตรวจสอบได้"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "อาร์เรย์",
+        // [Auto-translated] "an object"
+        object: "วัตถุ"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "อาร์เรย์ของค่าที่เลือก",
+        // [Auto-translated] "a single value"
+        scalar: "ค่าหนึ่งเดียว",
+        // [Auto-translated] "a value"
+        default: "ค่า"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "ด้านล่าง",
+        // [Auto-translated] "above"
+        above: "เหนือ"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "ไม่เคยแสดงผลและไม่ได้รับค่าใด ๆ",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "ไม่เคยแสดงผลและไม่ได้รับค่าใด ๆ"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "คําถาม",
+        // [Auto-translated] "question or variable"
+        questionvalue: "คําถามหรือตัวแปร",
+        // [Auto-translated] "page"
+        page: "หน้า"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "อ่าน",
+        // [Auto-translated] "navigates to"
+        gotoName: "นําทางไปยัง",
+        // [Auto-translated] "sets"
+        default: "ชุด"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "คําถามแบบแม่แบบ",
+        // [Auto-translated] "column"
+        default: "เสา"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "คําถามแบบแม่แบบ",
+        // [Auto-translated] "column"
+        matrixdynamic: "เสา",
+        // [Auto-translated] "item"
+        multipletext: "รายการ",
+        // [Auto-translated] "row"
+        matrix: "แถว",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "แถว",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "เสา",
+        // [Auto-translated] "field"
+        default: "ทุ่ง"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

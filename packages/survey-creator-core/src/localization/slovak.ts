@@ -142,6 +142,10 @@ export var skStrings = {
     jsonHideErrors: "Skryť chyby",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Zobraziť chyby",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Oprava chyby",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Survey JSON musí byť objektom.",
     // "Undo"
     undo: "Späť",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var skStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Použitá predsada"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Replika: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Použi navrhovaný názov"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Odstráňte opakovanú položku"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Použite odporúčaný typ"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Použite navrhovanú funkciu"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Použi navrhovanú masku"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dajte prvku voľné meno"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dajte prvku voľné meno"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Odstráňte nehnuteľnosť"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Použite najbližšiu povolenú hodnotu",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Odstráňte nehnuteľnosť",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Použite navrhovanú hodnotu"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Premeňte hodnotu na zoznam"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Dajte prvku meno"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Odstráňte nehnuteľnosť",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Premenujte nehnuteľnosť"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Použi navrhovaný názov",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Použi navrhovaný názov"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Použi navrhovaný názov"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Použite odporúčaný typ"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Použite odporúčaný typ"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Výraz \"{expression}\" nie je možné analyzovať."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" sa nenachádza – neexistuje žiadna otázka, panel, stránka, vypočítaná hodnota ani premenná s týmto názvom.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" sa nenachádza v {containerType} \"{root}\" (referencia: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" sa nenachádza v rozsahu \"{scopePrefix}\" (referencia: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName pre \"{name}\" nazýva \"{key}\" - \"{name}\" nemá {keyNoun} s týmto názvom, takže overovanie duplikátneho kľúča nikdy neprebieha.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" sa nenachádza."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} v \"{name}\" odkazuje na samotný prvok (referencia: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Názov \"{name}\" je zdvojený.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Názov vypočítanej hodnoty \"{name}\" už používa iná vypočítaná hodnota.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Vypočítaná hodnota \"{name}\" má rovnaký názov ako iný prvok, takže jeden z nich tieňuje druhý."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" tohto {ownerText} je zároveň zabudovaná prieskumná premenná {{builtIn}} – prieskum odpovedá ako prvá {{name}}, takže táto je nedosiahnuteľná vo výrazoch.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "valueName \"{valueName}\" z \"{name}\" je zároveň názvom otázky \"{otherName}\" – obe ukladajú svoju odpoveď pod dátový kľúč \"{valueName}\".",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Dátový kľúč \"{dataName}\" je zároveň komentárovým kľúčom \"{base}\" (jeho dátový kľúč plus \"{suffix}\") – jeden zápis ticho prepíše druhý.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Dátový kľúč \"{dataName}\" je zároveň celkovým kľúčom \"{base}\" (jeho dátový kľúč plus \"{suffix}\") – jeden zápis ticho prepíše druhý.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Spúšťač {trigger} nastavuje premennú \"{name}\", ktorá je zároveň dátovým kľúčom otázky \"{questionName}\" – premenná odpovedá odvtedy {{name}}, nie samotná otázka."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Názov \"{name}\" je vyhradený – člen Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" z \"{name}\" je vyhradený – je členom Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Stĺpec \"{name}\" v \"{matrixName}\" je vyhradený – člen Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Položka \"{name}\" v \"{questionName}\" je vyhradená – je členom Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Riadok \"{rowValue}\" v \"{name}\" je vyhradený – je členom Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Vypočítaná hodnota \"{name}\" je rezervovaná – je členom Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" má neznámy typ \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" nemá typ – prvok bez typu sa vynechá."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" nie je vlastnosťou {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" v {ownerText} nie je serializovateľný – pri načítaní sa aktivuje a vždy sa z JSON vymaže vždy, keď sa prieskum opäť uloží.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" a \"{aliasKey}\" z {ownerText} sú dva názvy jednej vlastnosti – za behu ich aplikuje v poradí, v akom ich JSON zapisuje, takže \"{winner}\" vyhráva.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" je nastavený na \"{name}\", ale inputType \"{inputType}\" nemá žiadne hranice – čas behu ho ignoruje."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} v {ownerText} je {valueText} – nie je to jedna z povolených hodnôt ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{key} {ownerText} je {value}, mimo povoleného rozsahu {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName \"{valueName}\" alebo \"{name}\" obsahuje \".\" - výrazy čítajú {{valueName}} ako cestu do \"{rootKey}\", takže samotný dátový kľúč nikdy nemôže byť adresovaný."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} nemá \"{key}\" – vlastnosť je potrebná pre {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Názov {className} je {valueText}, nie reťazec – prieskum ho nemôže načítať."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" v {ownerText} nie je pole – vlastnosť uchováva zoznam a počas behu sa hodnota zabalí do jednoprvkového poľa."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Definícia premennej deklaruje \"{variable}\", čo je zároveň dátový kľúč otázky \"{name}\" – nastavenie premennej maže odpoveď uloženú pod týmto kľúčom a {{name}} odvtedy odpovedá na hodnotu hostiteľa.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Definícia premennej deklaruje \"{variable}\", čo je zároveň názov vypočítanej hodnoty \"{name}\" – obe zapisujú ten istý slot a ten, kto spustí posledný, vyhráva."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition nie je objekt survey JSON, takže sa nedeklaruje žiadna premenná a nie je možné skontrolovať žiadnu prednastavenú hodnotu.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets nie je pole, takže nie je deklarované žiadne preset.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Prednastavenie #{index} nie je objekt.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Prednastavenie #{index} nemá názov, takže naň nič nemôže odkazovať.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Prednastavenie \"{preset}\" nenesie objekt bez premenných, takže nič nenastavuje.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Prednastavenie \"{preset}\" sa deklaruje dvakrát – vyhľadávanie s týmto názvom odpovedá prvým.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Prednastavenie \"{preset}\" nastavuje \"{variable}\", čo definícia premennej nedeklaruje.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Prednastavenie \"{preset}\" nastaví \"{variable}\" na hodnotu, ktorú definícia premennej odmieta: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Funkcia \"{functionName}\" nie je registrovaná."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Vypočítaná hodnota \"{names}\" odkazuje sama na seba vo vlastnom výraze.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Vypočítané hodnoty {names} závisia od seba."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Spúšťač reaguje na nastavenú hodnotu (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Triggery vytvárajú slučku cez nastavené hodnoty: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} číta hodnotu, ktorú si sám zapíše – spustí sa len vtedy, keď sa zmení iná hodnota, takže sa vôbec nespustí.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Hodnoty sa zapisujú v slučke: {chain}. Každý zápis opakovane vykonáva výrazy, ktoré ho čítajú, takže konečné hodnoty závisia od poradia, v akom sú otázky zodpovedané."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Podmienka porovnáva \"{name}\" s {values} – nie je medzi jej možnosťami. Dostupné: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Podmienka porovnáva \"{name}\" s {values} – žiadna voľba ho neobsahuje. Dostupné: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Podmienka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" ({questionType}) nemá hodnotu na porovnanie.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Podmienka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" platí {valueShapeText} – usporiadanie a aritmetické operátory sa naň nevzťahujú.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Podmienka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" je booleovská otázka – operátory usporiadania sa na ňu nevzťahujú.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Podmienka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" je textová otázka – jej hodnota je reťazec, takže číselné porovnanie závisí od implicitnej konverzie.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Podmienka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" obsahuje dátumový reťazec – porovnávame ho s číslom, ktoré {constValue} nemôže obsahovať.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Podmienka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" je číselné – porovnanie s reťazcom \"{constValue}\" nemôže platiť.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Podmienka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" obsahuje pole vybraných hodnôt, takže \"=\" porovnáva celé pole.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Podmienka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" je booleovská otázka – porovnanie s {constValue} nemôže platiť."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "Heslo {prop} \"{expression}\" je vždy nepravdivé, takže \"{name}\" sa nikdy nezobrazí.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "Heslo {prop} \"{expression}\" nikdy neplatí, pretože {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "Heslo {prop} \"{expression}\" nikdy neplatí – žiadna povolená hodnota ho nespĺňa: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{expression}\" si protirečí: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expression}\" je vždy pravdivé, takže nič nerozhoduje.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{výraz}\" je aritmetický, nie porovnanie, takže nikdy nedáva áno alebo nie.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Časť {prop} \"{expression}\" má výsledok, ktorý je známy vopred.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "Heslo {prop} \"{expression}\" vždy platí, pretože {facts} - nič nerozhoduje."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Predvolená hodnota \"{name}\" je {valuesText}, ktorú nikdy nemôže držať. Povolené: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Správna odpoveď na \"{name}\" je {valuesText}, ktorú nikdy nemôže držať. Povolené: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Spúšťač nastaví \"{name}\" na {valuesText}, čo nikdy nemôže udržať. Povolené: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Predvolená hodnota riadku nastaví \"{name}\" na {valuesText}, ktorú nikdy nemôže udržať. Povolené: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Predvolená hodnota panelu nastaví \"{name}\" na {valuesText}, ktorú nikdy nemôže udržať. Povolené: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} z \"{name}\" pomenuje \"{key}\" – takýto riadok neexistuje. Dostupné: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} z \"{name}\" nazýva \"{key}\" – takýto stĺpec neexistuje. Dostupné: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} z \"{name}\" nazýva \"{key}\" – takáto šablónová otázka nie je. Dostupné: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Spúšťač copyvalue kopíruje \"{fromName}\" do \"{setToName}\", ale \"{fromName}\" drží {sourceShapeText} a \"{setToName}\" drží {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Spúšťač copyvalue skopíruje \"{fromName}\" do \"{setToName}\", ale žiadna hodnota \"{fromName}\" nie je medzi hodnotami, ktoré \"{setToName}\" môže obsahovať. Povolené: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" kopíruje svoje voľby z \"{source}\", ale o tomto názve nie je pochýb.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" kopíruje svoje voľby od seba.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopíruje svoje voľby z \"{source}\" ({sourceType}), ktorá neposkytuje ani voľby, ani pole hodnôt.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" číta {prop} \"{field}\" z \"{source}\", ale {sourceType} \"{source}\" nemá takéto {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Ďalšia položka {prop} \"{name}\" už má hodnotu {valueText} – čas behu zachováva obe položky.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Voľby \"{name}\" obsahujú {valueText}, zatiaľ čo {toggleProp} je zapnuté – kolidujú s integrovanou položkou {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Spúšťač {trigger} cieli na stránku \"{name}\", ktorá neexistuje.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Spúšťač {trigger} cieli na \"{name}\", ale {containerType} \"{root}\" nemá {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "Spúšťač {trigger} {verb} \"{name}\", ale žiadny {kindText} s týmto názvom neexistuje."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Typ spúšte \"{typ}\" nie je známy.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Spúšť nemá typ."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Typ validátora \"{type}\" v \"{name}\" nie je známy.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Validátor \"{name}\" nemá typ."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType} validátor pre \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "{validatorType} validátor \"{name}\" vyžaduje aspoň {min} a maximálne {max} – žiadna odpoveď ho neuspokojí.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Validátor počtu odpovedí \"{name}\" vyžaduje aspoň {minCount} odpovedí nad {selectable} možnosti, ktoré je možné vybrať spolu.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Regex validátor \"{name}\" má vzor, ktorý engine odmieta: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Validátor výrazu \"{name}\" nemá žiadny výraz, takže vždy prejde."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} funkcie \"{name}\" je {min}, nad jej {maxProp} {max} – čas behu ticho upravuje jeden z nich.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} z \"{name}\" je {count}, {direction} jeho {boundProp} z {bound} – čas behu ho clampuje.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} v \"{name}\" je {step}, ale rozsah, ktorým prechádza ({minProp}.. {maxProp}) pokrýva iba {rozsah} - čas behu ho obmedzuje.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "MinSelectedChoices v \"{name}\" je {min}, nad {selectable} výbermi, ktoré je možné vybrať spolu – na otázku sa nikdy nedá odpovedať."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" sa nikdy nemôže stať viditeľným: je visibleIf číta {reads}, čo {deadClause}, takže podmienka nikdy neplatí."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Typ masky \"{maskType}\" v \"{name}\" nie je známa maska – čas behu sa vráti k tomu, že maska vôbec neexistuje.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "MaskNastavenia \"{name}\" nastavujú \"{key}\", čo nie je vlastnosť masky \"{maskType}\" – počas behu ju ticho zruší.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Nastavenia masky \"{name}\" sú nastavené bez maskType – čas behu si ponechá iba \"saveMaskedValue\" a zvyšok vynechá.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Maska {maskType} pre \"{name}\" platí pre žiadny vstup: inputType \"{inputType}\" je maskovaný iba pre text a tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Maska dátumového času \"{name}\" nastavuje min/max bez vzoru – hranice platia pre dátumové časti vzoru, takže bez nej sa nič nedeje.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Maska {maskType} \"{name}\" umožňuje aspoň {min} a maximálne {max} - žiadna hodnota ju nespĺňa."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Dynamický panel \"{name}\" má prázdnu šablónu – jeho panely nemajú čo renderovať.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" nemá žiadne prvky.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" nemá žiadne prvky, ktoré by sa mohli vykresliť – každý prvok je skrytý, chránený podmienkou, ktorá nikdy neplatí, alebo prázdny.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Detailné prvky \"{name}\" sa nikdy nezobrazujú: jeho detailPanelMode je \"none\", čo je predvolené."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Pozícia: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Bol postavený z legacy názvu, operátora a hodnotových vlastností spúšťača.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Vo vnútri: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Myslel si \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Ak ide o vlastnú komponentu, odovzdajte jej definíciu linterovi, aby umožnil úplnú analýzu.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Zaregistrujte funkciu pred lintingom alebo ju zapíšte v nastaveniach lintera.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Nesprávne napísaný typ sa počas behu potichu vynechá a vlastný spúšťač nie je pokrytý cieľovými a cyklickými kontrolami.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Ak je to premenná nastavená za behu, uveďte ju v nastaveniach lintera.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Slučka môže byť nedosiahnuteľná, ak sa spúšťacie podmienky nikdy nespoja – overte výrazy.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "DefaultValueExpression platí len dovtedy, kým nie je zodpovedaná jeho otázka.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Výrazom: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Spomínané v bindings.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Spomínané v choicesByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Spomínané v texte \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () číta toto meno z každého zápisu {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argument {0}() neuvádza žiadnu otázku, panel ani stránku.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializátor vyhodí kľúč, ktorý nepozná.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializátor vyhodí validátor, ktorý nedokáže vyriešiť, takže nič sa neoverí.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Vstupný typ je \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Je to dátový kľúč pre \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "a",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} je vždy {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} je {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Aspoň {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "maximálne {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} nemôže byť obe {hodnoty}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} nemôže byť {value} a zároveň nebyť",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} nemôže byť prázdny a byť {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} nemôže byť prázdny ani prázdny",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} nemôže byť nad {min} a pod {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} je požiadaný, aby bol bez akejkoľvek hodnoty"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Odkazy na \"{0}.\" sú dostupné iba v matrixovej bunke alebo v maticovom detailnom paneli.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" je dostupné iba v matrixovej bunke alebo v maticovom detailnom paneli.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Odkazy na \"{0}.\" sú dostupné iba v dynamickom paneli alebo panelovom kontajneri.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Odkazy na \"{0}.\" sú dostupné iba v dynamickom paneli.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" je dostupné iba v dynamickom paneli.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" je dostupné len v podmienkach výberu, riadkov a stĺpcov.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "Odkazy na \"{0}.\" sú dostupné iba v zloženej otázke.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" je stĺpec tejto matice – odkazujte naň s predponou riadku.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" je otázka tohto dynamického panelu – odkazujte naň s predponou panel."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Nastavte vstupType: \"number\" na \"{0}\", ak zbiera čísla.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Použite \"obsahuje\" alebo \"anyof\" pre viacnásobné výberové hodnoty."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "Stránka",
+        // [Auto-translated] "panel"
+        panel: "Panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Názov",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Názov"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "vypočítaná hodnota",
+        // [Auto-translated] "element"
+        default: "Prvok"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Prieskum",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Iné",
+        // [Auto-translated] "None"
+        none: "Žiadna",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Odmietni odpovedať",
+        // [Auto-translated] "Don't know"
+        dontknow: "Neviem"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "nikdy nevystrelí",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "odmieta každú odpoveď",
+        // [Auto-translated] "cannot validate"
+        default: "Nemôže validovať"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Otázka neobsahuje odpoveď na potvrdenie",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "Dĺžka sa číta z textovej hodnoty a táto odpoveď nemá žiadnu",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Odpoveď nie je číslo a nikdy nemôže byť",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Číslo sa nikdy nezhoduje s e-mailovou adresou",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Odpoveď nie je zoznam hodnôt",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Odpoveď nie je hodnota, ktorú môže skontrolovať"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "pole",
+        // [Auto-translated] "an object"
+        object: "objekt"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "pole vybraných hodnôt",
+        // [Auto-translated] "a single value"
+        scalar: "jediná hodnota",
+        // [Auto-translated] "a value"
+        default: "Hodnota"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "nižšie",
+        // [Auto-translated] "above"
+        above: "vyššie"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "nikdy nie je viditeľný a nikdy nedostáva hodnotu",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "nikdy nie sú viditeľné a nikdy nedostávajú hodnotu"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Otázka",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Otázka alebo premenná",
+        // [Auto-translated] "page"
+        page: "Stránka"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "číta",
+        // [Auto-translated] "navigates to"
+        gotoName: "naviguje na",
+        // [Auto-translated] "sets"
+        default: "Súpravy"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Otázka na šablónu",
+        // [Auto-translated] "column"
+        default: "Stĺpec"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Otázka na šablónu",
+        // [Auto-translated] "column"
+        matrixdynamic: "Stĺpec",
+        // [Auto-translated] "item"
+        multipletext: "Položka",
+        // [Auto-translated] "row"
+        matrix: "Rad",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Rad",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Stĺpec",
+        // [Auto-translated] "field"
+        default: "Pole"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

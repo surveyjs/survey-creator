@@ -142,6 +142,10 @@ export var fiStrings = {
     jsonHideErrors: "Piilota virheet",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Näytä virheet",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Korjausvirhe",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Kyselyn JSON on oltava objekti.",
     // "Undo"
     undo: "Kumoa",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var fiStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Esiasetus käytössä"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Repliikki: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Käytä ehdotettua nimeä"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Poista toistuva kohde"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Käytä ehdotettua tyyppiä"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Käytä ehdotettua funktiota"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Käytä ehdotettua maskia"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Anna alkiolle vapaa nimi"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Anna alkiolle vapaa nimi"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Poista kiinteistö"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Käytä lähintä sallittua arvoa",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Poista kiinteistö",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Käytä ehdotettua arvoa"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Muunna arvo listaksi"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Anna alkiolle nimi"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Poista kiinteistö",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Kiinteistön nimi muutetaan"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Käytä ehdotettua nimeä",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Käytä ehdotettua nimeä"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Käytä ehdotettua nimeä"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Käytä ehdotettua tyyppiä"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Käytä ehdotettua tyyppiä"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Ilmaisua \"{expression}\" ei voi jäsentää."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" ei löydy – ei ole olemassa kysymystä, paneelia, sivua, laskettua arvoa tai muuttujaa kyseisellä nimellä.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" ei esiinny tiedostosta {containerType} \"{root}\" (viite: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" ei esiinny \"{scopePrefix}\" -laajuudessa (viite: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "\"{name}\":n keyName nimeää \"{key}\" - \"{name}\" ei sisällä {keyNoun} sillä nimellä, joten kaksoisavaimen validointia ei koskaan suoriteta.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" ei löytynyt."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "Lauseen \"{nimi}\" {prop} viittaa itse alkioon (viite: {viite})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Nimi \"{name}\" on kopioitu.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Laskettu arvonimi \"{name}\" on jo käytössä toisessa lasketussa arvossa.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Laskettu arvo \"{name}\" jakaa nimensä toisen alkion kanssa, joten toinen niistä varjostaa toista."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "Tämän {ownerText}:n {nameKindText} \"{name}\" on myös sisäänrakennettu kyselymuuttuja {{builtIn}} – kysely vastaa ensin {{name}}, joten tämä ei ole saavutettavissa lausekkeissa.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "valueName \"{valueName}\" tai \"{name}\" on myös kysymyksen \"{otherName}\" nimi – molemmat tallentavat vastauksensa avaimen \"{valueName}\" alle.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Dataavain \"{dataName}\" on myös kommenttiavain \"{base}\" (sen data key plus \"{suffix}\") – yksi kirjoitus korvaa hiljaisesti toisen.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Dataavain \"{dataName}\" on myös \"{base}\" (sen dataavain plus \"{suffix}\") kokonaisavain – yksi kirjoitus korvaa hiljaisesti toisen.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "{trigger}-trigger asettaa muuttujan \"{name}\", joka on myös kysymyksen \"{questionName}\" dataavain – muuttuja vastaa siitä eteenpäin {{name}}, ei kysymys."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Nimi \"{name}\" on varattu – se on Object.prototypen jäsen.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "valueName \"{valueName}\" on varattu – jäsen Object.prototype-tiedostoon.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "\"{MatrixName}\" -sarake \"{name}\" on varattu – se on Object.prototype-jäsen.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "\"{questionName}\" -alkio \"{name}\" on varattu – Object.prototype-jäsen.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Rivi \"{rowValue}\" on varattu – se on Object.prototype-jäsen.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Laskettu arvo \"{name}\" on varattu – Object.prototype-jäsen."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" on tuntematon tyyppi \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" ei ole tyyppiä – alkio ilman tyyppiä jätetään pois."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" ei ole {ownerText} ({className}) ominaisuus."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" {ownerText}:stä ei ole sarjoitettavaa – se astuu voimaan latauksessa ja pudotetaan JSON:sta aina, kun kysely tallennetaan uudelleen.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" ja \"{aliasKey}\" {ownerText} ovat yhden ominaisuuden kaksi nimeä – suoritusaika soveltaa niitä siinä järjestyksessä kuin JSON ne kirjoittaa, joten \"{winner}\" voittaa.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" on asetettu \"{name}\", mutta inputType \"{inputType}\" ei rajoita – suoritusaika ei huomioi sitä."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{ownerText}:n {avain} on {valueText} – ei yksi sallituista arvoista ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ownerText}:n {avain} on {value}, sen sallitun alueen {rangeText} ulkopuolella.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "valueName \"{valueName}\" ({name}\" sisältää \".\" - lausekkeet lukevat {{valueName}} reittinä kohti \"{rootKey}\", joten itse dataavainta ei voi koskaan osoittaa."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} ei sisällä \"{key}\" -ominaisuutta – ominaisuus vaaditaan {className}:lle.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "{className}:n nimi on {valueText}, ei merkkijono – kysely ei voi ladata sitä."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "{ownerText}:n \"{key}\" ei ole taulukko – ominaisuus sisältää listan, ja suoritusaika käärii arvon yhdeksi alkioksi."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Muuttujan määritelmä määrittelee \"{muuttuja}\", joka on myös kysymyksen \"{name}\" avain – muuttujan asettaminen poistaa avaimen alle tallennetun vastauksen, ja {{name}} vastaa isäntäarvoon tästä eteenpäin.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Muuttujan määritelmä määrittelee \"{muuttuja}\", joka on myös lasketun arvon \"{name}\" nimi – molemmat kirjoittavat saman slotin, ja viimeinen suoritus voittaa."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition ei ole kyselyn JSON-objekti, joten muuttujaa ei ole ilmoitettu eikä esiasetettua arvoa voi tarkistaa.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets ei ole taulukko, joten esijoukkoa ei ole ilmoitettu.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Esiasetus #{index} ei ole objekti.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Esiasetuksella #{index} ei ole nimeä, joten mikään ei voi viitata siihen.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Esiasetus \"{preset}\" ei kanna muuttujien objektia, joten se ei aseta mitään.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Esiasetus \"{preset}\" julistetaan kahdesti – kyseisen nimen haku vastaa ensimmäisellä hakulla.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Esiasetus \"{preset}\" asettaa \"{muuttuja}\", jota muuttujan määritelmä ei ilmoita.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Preset \"{preset}\" asettaa \"{variable}\" arvoksi, jonka muuttujan määritelmä hylkää: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Funktiota \"{functionName}\" ei rekisteröidy."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Laskettu arvo \"{names}\" viittaa itseensä omassa lausekkeessaan.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Lasketut arvot {nimet} riippuvat toisistaan."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Laukaisija reagoi itselleen asettamaansa arvoon (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Triggerit muodostavat silmukan niiden arvojen läpi: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} lukee itse kirjoittamansa arvon – se käynnistyy vain, kun toinen arvo muuttuu, joten se ei koskaan käynnisty.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Arvot kirjoitetaan silmukassa: {chain}. Jokainen kirjoitus toistaa lausekkeet, jotka sen lukevat, joten lopulliset arvot riippuvat siitä, missä järjestyksessä kysymyksiin vastataan."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Ehto vertaa \"{name}\" ja {values} - ei sen valinnoissa. Saatavilla: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Ehto vertaa \"{name}\" ja {values} – mikään valintaarvo ei sisällä sitä. Saatavilla: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Ehto koskee \"{operator}\" \"{name}\":ään: \"{recordName}\" ({questionType}) ei ole verrattavissa arvoa.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Ehto koskee \"{operator}\" myös \"{name}\":a: \"{recordName}\" sisältää {valueShapeText} – järjestys- ja aritmeettiset operaattorit eivät koske sitä.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Ehto koskee \"{operator}\" myös \"{name}\":a: \"{recordName}\" on totuusarvokysymys – järjestysoperaattorit eivät koske sitä.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Ehto koskee \"{operator}\" myös \"{name}\": \"{recordName}\" on tekstikysymys – sen arvo on merkkijono, joten numeerinen vertailu perustuu implisiittiseen muunnokseen.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Ehto koskee \"{operator}\" myös \"{name}\":a: \"{recordName}\" sisältää päivämääräjonon – verratessa sitä numeroon {constValue} ei voi pitää.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Ehto soveltaa \"{operator}\" \"{name}\":ään: \"{recordName}\" on numeerinen – vertaaminen merkkijonoon \"{constValue}\" ei pidä paikkaansa.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Ehto koskee \"{operator}\" \"{name}\":a: \"{recordName}\" sisältää taulukon valittuja arvoja, joten \"=\" vertaa koko taulukkoa.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Ehto koskee \"{operator}\" myös \"{name}\":ää: \"{recordName}\" on totuusarvokysymys – vertaaminen {constValue}:ään ei pidä paikkaansa."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" on aina epätosi, joten \"{name}\" ei koskaan näytetä.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{Prop} \"{expression}\" ei koskaan päde, koska {faktat}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" ei koskaan päde – mikään sallittu arvo ei täytä sitä: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{expression}\" on ristiriidassa: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{lauseke}\" on aina tosi, joten se ei ratkaise mitään.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{Prop} \"{lauseke}\" on aritmetiikkaa, ei vertailua, joten se ei koskaan anna kyllä tai ei.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Osa {prop} \"{expression}\" -lauseesta saa tuloksen, joka on tiedossa etukäteen.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{Prop} \"{expression}\" pätee aina, koska {faktat} - se ei ratkaise mitään."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "\"{name}\" oletusarvo on {valuesText}, jota se ei koskaan voi pitää. Sallittu: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Oikea vastaus \"{name}\" on {valuesText}, jota se ei koskaan voi pitää. Sallittu: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Laukaisin asettaa \"{name}\" muotoon {valuesText}, jota se ei koskaan voi pitää sisällään. Sallittu: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Oletusriviarvo asettaa \"{name}\" muotoon {valuesText}, jota se ei voi koskaan pitää. Sallittu: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Oletuspaneelin arvo asettaa \"{name}\" muotoon {valuesText}, jota se ei voi koskaan pitää. Sallittu: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "\"{name}\":n {prop} nimeä \"{key}\" – ei tällaista riviä. Saatavilla: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "\"{name}\":n {prop} nimeää \"{key}\" - ei tällaista sarakkeeta. Saatavilla: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "\"{name}\":n {prop} nimeä \"{key}\" – tällaista mallipohjakysymystä ei ole. Saatavilla: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Copyvalue-laukaisija kopioi \"{fromName}\" muotoon \"{setToName}\", mutta \"{fromName}\" sisältää {sourceShapeText} ja \"{setToName}\" sisältää {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Copyvalue-trigger kopioi \"{fromName}\" muotoon \"{setToName}\", mutta mikään \"{fromName}\" -arvo ei kuulu niihin arvoihin, joita \"{setToName}\" voi pitää. Sallittu: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" kopioi valintansa sanasta \"{source}\", mutta kyseisestä nimestä ei ole epäilystäkään.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" kopioi valintansa itseltään.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopioi valintansa \"{source}\" ({sourceType}), joka ei tarjoa vaihtoehtoja eikä arvotaulukkoa.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" lukee {prop} \"{field}\" sanasta \"{source}\", mutta {sourceType} \"{source}\" ei sisällä tällaista {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Toinen {prop}:n alkio \"{name}\" sisältää jo arvon {valueText} – suoritusaika säilyttää molemmat kohteet.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Valinnat \"{name}\" sisältävät {valueText}, kun taas {toggleProp} on päällä – se törmää sisäänrakennettuun {specialItemText} -kohteeseen."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{trigger} kohdistuu sivuun \"{name}\", jota ei ole olemassa.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{trigger} kohdistuu \"{name}\", mutta {containerType} \"{root}\" ei sisällä {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger} laukaisee {verbin} \"{name}\", mutta sillä nimellä ei ole {kindText} tunnettua."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Laukaisutyyppiä \"{type}\" ei tunneta.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Liipaisimella ei ole tyyppiä."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Validointityyppiä \"{type}\" \"{name}\" ei tunneta.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "\"{name}\":n validoijalla ei ole tyyppiä."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{{name}\" {effectText}: {causeText} ({questionType}) {validatorType} validaattori.",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "{validatorType}-validaattori \"{name}\":lle vaatii vähintään {min} ja korkeintaan {max} – mikään vastaus ei täytä sitä.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Answercount-validaattori \"{name}\":lle vaatii vähintään {minCount} vastaukset, enemmän kuin {valittavissa} vaihtoehdot, jotka voidaan valita yhdessä.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Regex-validaattorilla \"{name}\" on kaava, jonka moottori hylkää: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Lausekkeen validaattorilla \"{name}\" ei ole lauseketta, joten se menee aina läpi."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{{name}\":n {minProp} on {min}, sen {maxProp} yläpuolella {max} – suoritusaika säätää hiljaisesti yhtä niistä.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "\"{name}\" {countProp} on {count}, {direction} sen {boundProp} on {bound} - suoritusaika rajoittaa sitä.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "\"{name}\":n {stepProp} on {step}, mutta se alue, jonka läpi se astuu ({minProp}.. {maxProp}) kattaa vain {range} – suoritusaika rajoittaa sitä.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "\"{name}\" minSelectedChoices on {min}, yläpuolella {valittavissa} valinnoissa, jotka voidaan valita yhdessä – kysymykseen ei koskaan voi vastata."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" ei voi koskaan tulla näkyväksi: sen visibleIf lukee {reads}, mikä {deadClause}, joten ehto ei koskaan päde."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Maskityyppi \"{maskType}\" tai \"{name}\" ei ole tunnettu maski – suoritusaika palautuu siihen, ettei maskia ole lainkaan.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "\"{name}\":n mask-asetukset asettavat \"{key}\", joka ei ole \"{maskType}\"-maskin ominaisuus – suoritusaika pudottaa sen hiljaisesti.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "\"{name}\":n maskiasetukset asetetaan ilman maskityyppiä – suoritusaika säilyttää vain \"saveMaskedValue\" ja poistaa loput.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "\"{name}\":n {maskType} maski koskee ei syötettä: inputType \"{inputType}\" on peitetty vain tekstille ja telille.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Datetime-maski \"{name}\" asettaa min/maxin ilman kuviota – rajat koskevat kaavan päivämääräosia, joten ilman sitä ne eivät tee mitään.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "{maskType}-maski \"{name}\" sallii vähintään {min} ja korkeintaan {max} - mikään arvo ei tyydytä sitä."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Dynaamisessa paneelissa \"{name}\" on tyhjä mallipohja – sen paneeleissa ei ole mitään renderöitävää.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" ei sisällä alkioita.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" ei sisällä elementtejä, jotka voisivat koskaan renderöidä – jokainen alkio on piilotettu, suojattu ehdolla, joka ei koskaan päde, tai tyhjä.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "\"{name}\":n yksityiskohtaisia elementtejä ei koskaan näytetä: sen detailPanelMode on \"none\", joka on oletus."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Sijainti: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Se rakennettiin laukaisimen perintönimen, operaattorin ja arvon ominaisuuksista.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Sisällä: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Tarkoititko \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Jos kyseessä on mukautettu komponentti, välitä sen määritelmä linterille täydellisen analyysin mahdollistamiseksi.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Rekisteröi funktio ennen linttausta tai listaa se linter-asetuksiin.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Väärin kirjoitettu tyyppi pudotetaan hiljaisesti ajonhetkellä, eikä mukautettu laukaisin ole kohteen ja syklin tarkistuksissa.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Jos kyseessä on muuttuja, joka on asetettu ajonaikaisesti, listaa se linter-asetuksissa.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Silmukka voi olla saavuttamaton, jos laukaisuehdot eivät koskaan pysy yhdessä – tarkista lausekkeet.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpression pätee vain, kunnes sen kysymykseen on vastattu.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Ilmaisussa: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Viitataan sidoksissa.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Viitataan choicesByUrl-{0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Viitataan \"{0}\"-tekstissä.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () lukee kyseisen nimen jokaisesta {1} \"{2}\"-merkinnästä.",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "{0}() argumentti ei nimeä mitään kysymystä, paneelia tai sivua.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserialisaattori pudottaa avaimen, jota se ei tunne.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserialisaattori pudottaa validaattorin, jota se ei pysty ratkaisemaan, joten mikään ei validoi.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "InputType on \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Se on \"{0}\":n dataavain." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "ja",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} on aina {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} on {rajat}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Vähintään {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "korkeintaan {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} ei voi olla molempia {arvoja}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{viite} ei voi olla {arvo} eikä olla se",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} ei voi olla tyhjä ja olla {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} ei voi olla tyhjä eikä tyhjä",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} ei saa olla yli {min} ja alle {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{viite} pyydetään olemaan täysin arvoton"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\" -viittaukset ovat saatavilla vain matriisisolussa tai matriisiyksityiskohtapaneelissa.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" on saatavilla vain matriisisolun tai matriisiyksityiskohtapaneelin sisällä.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\" -viittaukset ovat saatavilla vain dynaamisessa paneelissa tai paneelisäiliössä.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\" -viittaukset ovat saatavilla vain dynaamisen paneelin sisällä.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" on saatavilla vain dynaamisessa paneelissa.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" on saatavilla vain valinta-, rivi- ja sarakkeehtojen sisällä.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" -viitteet ovat saatavilla vain koostetehtävässä.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" on tämän matriisin sarake – viittaa siihen rivin etuliitteellä.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" on tämän dynaamisen paneelin kysymys – viittaa siihen paneelin etuliitteellä."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Aseta inputType: \"number\" päälle \"{0}\", jos se kerää numeroita.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Käytä \"contains\" tai \"anyof\" monivalintaarvoihin."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "sivu",
+        // [Auto-translated] "panel"
+        panel: "paneeli"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Nimi",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Nimi"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Laskettu arvo",
+        // [Auto-translated] "element"
+        default: "alkio"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Kartoitus",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Muut",
+        // [Auto-translated] "None"
+        none: "Ei mitään",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Kieltäydy vastaamasta",
+        // [Auto-translated] "Don't know"
+        dontknow: "Ei tiedä"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "ei koskaan ammu",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "hylkää kaikki vastaukset",
+        // [Auto-translated] "cannot validate"
+        default: "ei voi validoida"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Kysymykseen ei ole vastausta validoitavaksi",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "tekstiarvosta luetaan pituus, eikä tässä vastauksessa ole mitään",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Vastaus ei ole luku, eikä sitä voi koskaan olla",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "numero ei koskaan vastaa sähköpostiosoitetta",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Vastaus ei ole arvolista",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Vastaus ei ole arvo, jota se voi tarkistaa"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "taulukko",
+        // [Auto-translated] "an object"
+        object: "objekti"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "valikoitujen arvojen taulukko",
+        // [Auto-translated] "a single value"
+        scalar: "Yksi arvo",
+        // [Auto-translated] "a value"
+        default: "arvo"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "alla",
+        // [Auto-translated] "above"
+        above: "yllä"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "ei ole koskaan näkyvissä eikä koskaan saa arvoa",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "eivät koskaan ole näkyviä eivätkä saa arvoa"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Kysymys",
+        // [Auto-translated] "question or variable"
+        questionvalue: "kysymys vai muuttuja",
+        // [Auto-translated] "page"
+        page: "sivu"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "lukee",
+        // [Auto-translated] "navigates to"
+        gotoName: "navigoi kohtaan",
+        // [Auto-translated] "sets"
+        default: "Joukot"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Mallipohjakysymys",
+        // [Auto-translated] "column"
+        default: "Pylväs"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Mallipohjakysymys",
+        // [Auto-translated] "column"
+        matrixdynamic: "Pylväs",
+        // [Auto-translated] "item"
+        multipletext: "Tuote",
+        // [Auto-translated] "row"
+        matrix: "Rivi",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Rivi",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Pylväs",
+        // [Auto-translated] "field"
+        default: "Kenttä"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

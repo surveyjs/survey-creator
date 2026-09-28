@@ -142,6 +142,10 @@ export var nbStrings = {
     jsonHideErrors: "Skjul feil",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Vis feil",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Fiksefeil",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Survey-JSON-en må være et objekt.",
     // "Undo"
     undo: "Angre",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var nbStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Forhåndsinnstilling anvendt"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Linje: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Bruk det foreslåtte navnet"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Fjern det gjentatte elementet"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Bruk den foreslåtte typen"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Bruk den foreslåtte funksjonen"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Bruk den foreslåtte masken"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Gi elementet et fritt navn"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Gi elementet et fritt navn"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Fjern eiendommen"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Bruk nærmeste tillatte verdi",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Fjern eiendommen",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Bruk den foreslåtte verdien"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Gjør verdien om til en liste"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Gi grunnstoffet et navn"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Fjern eiendommen",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Gi eiendommen nytt navn"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Bruk det foreslåtte navnet",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Bruk det foreslåtte navnet"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Bruk det foreslåtte navnet"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Bruk den foreslåtte typen"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Bruk den foreslåtte typen"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Uttrykket \"{uttrykk}\" kan ikke tolkes."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" finnes ikke – ingen spørsmål, rute, side, beregnet verdi eller variabel med det navnet eksisterer.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" finnes ikke i {containerType} \"{root}\" (referanse: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" finnes ikke i \"{scopePrefix}\"-omfanget (referanse: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "Nøkkelnavnet til \"{name}\" nevner \"{key}\" - \"{name}\" har ingen {keyNoun} med det navnet, så validering av duplikatnøkkel kjører aldri.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" finnes ikke."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} i \"{name}\" refererer til selve elementet (referanse: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Navnet \"{name}\" er duplisert.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Det beregnede verdinavnet \"{name}\" brukes allerede av en annen beregnet verdi.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Den beregnede verdien \"{navn}\" deler navn med et annet element, så ett av dem skygger det andre."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" til denne {ownerText} er også den innebygde survey-variabelen {{builtIn}} – surveyen svarer først på {{name}}, så denne er utilgjengelig i uttrykk.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "valueName \"{valueName}\" i \"{name}\" er også navnet på spørsmålet \"{otherName}\" – begge lagrer svaret sitt under datanøkkelen \"{valueName}\".",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Datanøkkelen \"{dataName}\" er også kommentarnøkkelen til \"{base}\" (dens datanøkkel pluss \"{suffix}\") – den ene skrivingen overskriver stille den andre.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Datanøkkelen \"{dataName}\" er også totalnøkkelen til \"{base}\" (dens datanøkkel pluss \"{suffiks}\") – én skriving overskriver stille den andre.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "{trigger}-triggeren setter variabelen «{name}», som også er datanøkkelen til spørsmålet «{questionName}» – variabelen svarer {{name}} fra da av, ikke spørsmålet."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Navnet \"{name}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "valueName \"{valueName}\" til \"{name}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Kolonnen \"{name}\" i \"{matrixName}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Elementet \"{name}\" i \"{questionName}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Raden \"{rowValue}\" i \"{name}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Den beregnede verdien \"{name}\" er reservert – et medlem av Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" har en ukjent type \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{navn}\" har ingen type – et element uten type utelates."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" er ikke en egenskap til {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" i {ownerText} er ikke serialiserbar – den trer i kraft ved lasting, og fjernes fra JSON-filen hver gang undersøkelsen lagres igjen.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" og \"{aliasKey}\" i {ownerText} er to navn på én egenskap – kjøretiden bruker dem i den rekkefølgen JSON-en skriver dem, så \"{winner}\" vinner.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" settes på \"{name}\", men inputType \"{inputType}\" har ingen begrensninger – kjøretiden ignorerer det."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{nøkkel} i {ownerText} er {valueText} – ikke en av de tillatte verdiene ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{nøkkel} i {ownerText} er {value}, utenfor sitt tillatte område {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "valueName \"{valueName}\" av \"{name}\" inneholder en \".\" - uttrykk leses {{valueName}} som en sti inn i \"{rootKey}\", så datanøkkelen kan aldri adresseres."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} har ingen \"{key}\" – egenskapen kreves for en {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Navnet på {className} er {valueText}, ikke en streng – undersøkelsen kan ikke laste den."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" i {ownerText} er ikke et array – egenskapen holder en liste, og kjøretiden pakker verdien inn i et array med ett element."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Variabeldefinisjonen erklærer \"{variabel}\", som også er datanøkkelen for spørsmålet \"{name}\" – å sette variabelen sletter svaret lagret under den nøkkelen, og {{name}} svarer på vertsverdien fra da av.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Variabeldefinisjonen erklærer \"{variabel}\", som også er navnet på den beregnede verdien \"{name}\" – begge skriver samme slot, og den som kjører sist vinner."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition er ikke et survey-JSON-objekt, så ingen variabel er deklarert og ingen preset-verdi kan sjekkes.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets er ikke et array, så ingen preset er deklarert.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Preset #{index} er ikke et objekt.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Preset #{index} har ikke noe navn, så ingenting kan referere til den.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Preset \"{preset}\" bærer ikke noe variabelobjekt, så det setter ingenting.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Preset \"{preset}\" erklæres to ganger – et oppslag med det navnet svarer med det første.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Preset \"{preset}\" setter \"{variabel}\", som variabeldefinisjonen ikke erklærer.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Preset \"{preset}\" setter \"{variable}\" til en verdi variabeldefinisjonen avviser: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Funksjonen \"{functionName}\" er ikke registrert."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Den beregnede verdien \"{names}\" refererer til seg selv i sitt eget uttrykk.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Beregnede verdier {navn} avhenger av hverandre."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Triggeren reagerer på verdien den setter (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Triggere danner en løkke gjennom verdiene de setter: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} leser verdien den skriver selv – den kjører bare når en annen verdi endres, så den kjører aldri i det hele tatt.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Verdiene skrives i en løkke: {chain}. Hver skriving kjører uttrykkene som leser den på nytt, så de endelige verdiene avhenger av rekkefølgen spørsmålene besvares i."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Betingelsen sammenligner \"{navn}\" med {verdier} – ikke blant dens valg. Tilgjengelig: {tilgjengelig}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Betingelsen sammenligner \"{navn}\" med {verdier} – ingen valgverdi inneholder den. Tilgjengelig: {tilgjengelig}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Betingelsen anvender \"{operator}\" på \"{name}\": \"{recordName}\" ({questionType}) har ingen verdi å sammenligne.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" gjelder {valueShapeText} – ordning og aritmetiske operatorer gjelder ikke for den.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" er et boolsk spørsmål – ordningsoperatorer gjelder ikke for den.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" er et tekstspørsmål – verdien er en streng, så numerisk sammenligning bygger på implisitt konvertering.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" holder en datostreng – sammenlignet med tallet {constValue} ikke kan holde.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" er numerisk – sammenligning med strengen \"{constValue}\" kan ikke gjelde.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" inneholder et array av valgte verdier, så \"=\" sammenligner hele arrayet.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" er et boolsk spørsmål – å sammenligne det med {constValue} kan ikke gjelde."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{uttrykk}\" er alltid falskt, så \"{name}\" vises aldri.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{uttrykk}\" gjelder aldri, fordi {fakta}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{uttrykk}\" gjelder aldri – ingen tillatt verdi tilfredsstiller det: {fakta}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{uttrykk}\" motsier seg selv: {fakta}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{uttrykk}\" er alltid sann, så den avgjør ingenting.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{uttrykk}\" er aritmetikk, ikke en sammenligning, så det gir aldri et ja eller nei.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "En del av {prop} \"{uttrykk}\" har et resultat som er kjent på forhånd.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{uttrykk}\" gjelder alltid, fordi {fakta} - det avgjør ingenting."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Standardverdien for \"{name}\" er {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Det riktige svaret på \"{name}\" er {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Triggeren setter \"{name}\" til {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Standard radverdi setter \"{name}\" til {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Standard panelverdi setter \"{name}\" til {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} av \"{name}\" navngir \"{key}\" – ingen slik rad. Tilgjengelig: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} i \"{name}\" navngir \"{key}\" – ingen slik kolonne. Tilgjengelig: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} av \"{name}\" navngir \"{key}\" – ingen slik mal-spørsmål. Tilgjengelig: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Copyvalue-triggeren kopierer \"{fromName}\" til \"{setToName}\", men \"{fromName}\" holder {sourceShapeText} og \"{setToName}\" holder {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Kopiverdi-triggeren kopierer \"{fromName}\" til \"{setToName}\", men ingen verdi av \"{fromName}\" er blant verdiene \"{setToName}\" kan holde. Tillatt: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" kopierer valgene sine fra \"{source}\", men det finnes ingen tvil om det navnet.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" kopierer valgene sine fra seg selv.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopierer sine valg fra \"{source}\" ({sourceType}), som verken gir valg eller et array av verdier.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" leser {prop} \"{field}\" fra \"{source}\", men {sourceType} \"{source}\" har ingen slik {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Et annet element i {prop} i \"{name}\" har allerede verdien {valueText} – kjøretiden beholder begge elementene.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Valgene \"{name}\" inneholder {valueText} mens {toggleProp} er på – den kolliderer med det innebygde {specialItemText}-elementet."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{trigger}-triggeren sikter mot siden \"{name}\", som ikke eksisterer.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{trigger}-triggeren retter seg mot \"{name}\", men {containerType} \"{root}\" har ingen {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger} trigger {verb} \"{name}\", men det finnes ingen {kindText} med det navnet."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Triggertypen \"{type}\" er ikke kjent.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Avtrekkeren har ingen type."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Valideringstypen \"{type}\" til \"{name}\" er ikke kjent.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "En validator av \"{name}\" har ingen type."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType}-validatoren til \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "{validatorType}-validatoren for \"{name}\" krever minst {min} og maksimalt {max} – ingen svar tilfredsstiller den.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Answercount-validatoren for «{name}» krever minst {minCount} svar, over de {selectable} valgene som kan velges sammen.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Regex-validatoren av \"{name}\" har et mønster motoren avviser: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Uttrykksvalidatoren for \"{name}\" har ikke noe uttrykk, så den går alltid gjennom."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} av \"{name}\" er {min}, over {maxProp} av {max} – kjøretiden justerer stille en av dem.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} av \"{name}\" er {count}, {retning} dens {boundProp} av {bound} – kjøretiden klemmer den.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} av \"{name}\" er {step}, men området det går gjennom ({minProp}.. {maxProp}) dekker kun {range} - kjøretiden klemmer det.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices i \"{name}\" er {min}, over de {selectable} valgene som kan velges sammen – spørsmålet kan aldri besvares."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" kan aldri bli synlig: det er synligIf leser {reads}, som {deadClause}, så betingelsen gjelder aldri."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "MaskType \"{maskType}\" av \"{name}\" er ikke en kjent maske – kjøretiden faller tilbake til ingen maske i det hele tatt.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "MaskSettings til \"{name}\" setter \"{key}\", som ikke er en egenskap ved \"{maskType}\"-masken – kjøretiden dropper den stille.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "MaskInnstillinger for \"{name}\" settes uten maskType – kjøretiden beholder bare \"saveMaskedValue\" og dropper resten.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "{maskType}-masken \"{name}\" gjelder ingen input: inputType \"{inputType}\" er kun maskert for tekst og tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Dato-tidsmasken \"{name}\" setter min/max uten mønster – grensene gjelder for mønsterets datodeler, så uten en gjør de ingenting.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "{maskType}-masken \"{name}\" tillater minst {min} og maksimalt {max} – ingen verdi tilfredsstiller den."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Det dynamiske panelet \"{name}\" har en tom mal – panelene har ingenting å gjengi.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" har ingen elementer.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" har ingen elementer som noen gang kan gjengi – hvert element er skjult, beskyttet av en betingelse som aldri gjelder, eller tomt.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Detaljelementene i \"{name}\" vises aldri: detailPanelMode er \"none\", som er standard."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Posisjon: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Den ble bygget ut fra de gamle navn-, operator- og verdiegenskapene til triggeren.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Inne: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Mente du \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Hvis det er en egendefinert komponent, send definisjonen til linteren for å muliggjøre full analyse.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Registrer funksjonen før du linter, eller oppfør den i linter-alternativene.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "En feilstavet type droppes stille under kjøring, og en tilpasset trigger dekkes ikke av mål- og syklussjekkene.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Hvis det er en variabel satt under kjøring, list den i linter-alternativene.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Løkken kan være utilgjengelig hvis triggerbetingelsene aldri holder sammen – verifiser uttrykkene.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "En defaultValueExpression gjelder kun inntil spørsmålet er besvart.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "I uttrykk: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Referert i bindinger.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Referert i valgene ByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Referert i \"{0}\"-teksten.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () leser det navnet fra hver oppføring i {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argumentet {0}() nevner verken spørsmål, panel eller side.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializeren slipper en nøkkel den ikke kjenner.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializeren dropper en validator den ikke kan løse, så ingenting validerer.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "InputType er \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Det er datanøkkelen til \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "og",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} er alltid {verdi}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} er {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "I det minste {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "Høyst {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} kan ikke være begge {verdier}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} kan ikke være {verdi} og ikke være det",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} kan ikke være tom og være {verdi}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} kan verken være tom eller tom",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} kan ikke være over {min} og under {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} blir bedt om å være en som ikke har noen verdi i det hele tatt"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\"-referanser er kun tilgjengelige inne i en matrisecelle eller et matrisedetaljpanel.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" er kun tilgjengelig inne i en matrisecelle eller et matrisedetaljpanel.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\"-referanser er kun tilgjengelige inne i et dynamisk panel eller en panelbeholder.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\"-referanser er kun tilgjengelige inne i et dynamisk panel.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" er kun tilgjengelig inne i et dynamisk panel.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" er kun tilgjengelig innenfor valg-, rad- og kolonneforhold.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" referanser er kun tilgjengelige i et sammensatt spørsmål.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" er en kolonne i denne matrisen – referer til den med radprefikset.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" er et spørsmål om dette dynamiske panelet – referer til det med panelprefikset."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Sett inputType: \"number\" på \"{0}\" hvis den samler tall.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Bruk \"contains\" eller \"anyof\" for multi-select-verdier."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "Side",
+        // [Auto-translated] "panel"
+        panel: "Panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Navn",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Navn"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "beregnet verdi",
+        // [Auto-translated] "element"
+        default: "Element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Undersøkelsen",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Annet",
+        // [Auto-translated] "None"
+        none: "Ingen",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Nekter å svare",
+        // [Auto-translated] "Don't know"
+        dontknow: "Vet ikke"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Skyter aldri",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "avviser alle svar",
+        // [Auto-translated] "cannot validate"
+        default: "kan ikke validere"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Spørsmålet gir ikke noe svar som kan valideres",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "En lengde leses fra en tekstverdi, og dette svaret har ingen",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Svaret er ikke et tall og kan aldri bli det",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "et nummer stemmer aldri overens med en e-postadresse",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Svaret er ikke en liste over verdier",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Svaret er ikke en verdi den kan sjekke"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "et array",
+        // [Auto-translated] "an object"
+        object: "et objekt"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "et array av valgte verdier",
+        // [Auto-translated] "a single value"
+        scalar: "en enkelt verdi",
+        // [Auto-translated] "a value"
+        default: "en verdi"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "Nedenfor",
+        // [Auto-translated] "above"
+        above: "Ovenfor"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "er aldri synlig og mottar aldri en verdi",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "aldri er synlige og mottar aldri en verdi"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Spørsmål",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Spørsmål eller variabel",
+        // [Auto-translated] "page"
+        page: "Side"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Leser",
+        // [Auto-translated] "navigates to"
+        gotoName: "navigerer til",
+        // [Auto-translated] "sets"
+        default: "Mengder"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Malspørsmål",
+        // [Auto-translated] "column"
+        default: "Kolonne"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Malspørsmål",
+        // [Auto-translated] "column"
+        matrixdynamic: "Kolonne",
+        // [Auto-translated] "item"
+        multipletext: "Gjenstand",
+        // [Auto-translated] "row"
+        matrix: "Rad",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Rad",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Kolonne",
+        // [Auto-translated] "field"
+        default: "Felt"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

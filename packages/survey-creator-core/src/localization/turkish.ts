@@ -142,6 +142,10 @@ export var turkishStrings = {
     jsonHideErrors: "Hataları gizleme",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Hataları göster",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Hata düzeltin",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Anket JSON bir nesne olmalı.",
     // "Undo"
     undo: "Geri",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var turkishStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Ön ayar uygulandı"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Hat: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Önerilen ismi kullanın"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Tekrarlanan öğeyi kaldır"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Önerilen tipi kullanın"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Önerilen fonksiyonu kullanın"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Önerilen maskeyi kullanın"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Elemana ücretsiz bir isim verin"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Elemana ücretsiz bir isim verin"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Mülkü kaldırın"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "En yakın izin verilen değeri kullanın",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Mülkü kaldırın",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Önerilen değeri kullanın"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Değeri bir listeye dönüştür"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Elemana bir isim verin"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Mülkü kaldırın",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Mülkün adını değiştirin"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Önerilen ismi kullanın",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Önerilen ismi kullanın"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Önerilen ismi kullanın"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Önerilen tipi kullanın"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Önerilen tipi kullanın"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "\"{expression}\" ifadesi ayrıştırılamaz."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" bulunmuyor - bu isimle ilgili hiçbir soru, panel, sayfa, hesaplanan değer veya değişken bulunmuyor.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" {containerType} \"{root}\" içinde bulunmuyor (referans: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" \"{scopePrefix}\" kapsamında bulunmuyor (referans: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "\"{name}\" anahtarının keyName \"{key}\" - \"{name}\" isimiyle {keyNoun} arasında bir {keyNoun} yoktur, bu yüzden tekrarlanan anahtar doğrulaması asla çalışmaz.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" bulunamadı."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "\"{name}\" kelimesinin {prop} öğesine atıfta bulunur (referans: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "\"{name}\" ismi tekrar edilir.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Hesaplanan değer adı \"{name}\" zaten başka bir hesaplanan değer tarafından kullanılmıştır.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Hesaplanan değer \"{name}\" başka bir elemanla aynı adı paylaşır, böylece biri diğerini gölgeler."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "Bu {ownerText}'in {nameKindText} \"{name}\" aynı zamanda yerleşik anket değişkeni {{builtIn}}'dir - anket önce {{name}}'e cevap verir, bu yüzden bu değişken ifadelerde erişilemez.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "\"{name}\"nin valueName \"{valueName}\" kısmı aynı zamanda \"{otherName}\" sorusunun adıdır - her ikisi de cevablarını \"{valueName}\" veri anahtarı altında saklar.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "\"{dataName}\" veri anahtarı aynı zamanda \"{base}\" (veri anahtarı artı \"{suffix}\") yorum anahtarıdır - bir yazı sessizce diğerinin üzerine yazar.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "\"{dataName}\" veri anahtarı aynı zamanda \"{base}\" (veri anahtarı artı \"{suffix}\") toplamları anahtarıdır - bir yazı sessizce diğerinin üzerine yazar.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "{tetikleyici} tetikleyicisi, \"{name}\" değişkenini ayar, bu aynı zamanda \"{questionName}\" sorusunun veri anahtarıdır - değişken bundan sonra {{name}} soruya cevap verir, soruya değil."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "\"{name}\" adı ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "\"{name}\" için \"{valueName}\" değernamesi ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "\"{matrixName}\" sütunu ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "\"{questionName}\" öğesi ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "\"{name}\" satırı \"{rowValue}\" ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Hesaplanan \"{name}\" değeri ayrılmıştır - Object.prototype üyesidir."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" bilinmeyen bir tipe sahiptir \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" tipi yoktur - tipi olmayan bir eleman düşürülür."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" {ownerText} ({className}) özelliği değildir."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "{ownerText}'in \"{key}\" dosyası serileştirilemez - yükleme sırasında etkisini gösterir ve anket tekrar kaydedildiğinde JSON'dan düşürülür.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "{ownerText}'in \"{key}\" ve \"{aliasKey}\" bir özelliğin iki adıdır - çalışma süresi bunları JSON'un yazdığı sırayla uygular, yani \"{winner}\" kazanır.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" \"{name}\" üzerinde ayarlanır, ancak inputType \"{inputType}\" sınırı yoktur - çalışma zamanı bunu görmezden gelir."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{ownerText}'in {anahtarı} {valueText}'dir - izin verilen değerlerden biri değildir ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ownerText}'in {anahtarı} {value} olup, izin verilen aralığı {rangeText} dışındadır.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "\"{name}\"'nin valueName \"{valueName}\" ifadesi, \"{{valueName}}\" ifadesi \"{{rootKey}\"'e giden bir yol olarak okunur, bu nedenle veri anahtarının kendisi asla adreslenemez."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText}'in \"{key}\" yoktur - bu özellik {className} için gereklidir.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "{className}'in adı {valueText}'dir, bir dizi değildir - anket onu yükleyemez."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "{ownerText}'in \"{key}\" dizisi değildir - özellik bir liste tutar ve çalışma zamanı değeri tek öğeli bir diziye sarar."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Değişken tanımı \"{değişken}\" olarak belirtilir; bu aynı zamanda \"{name}\" sorusunun veri anahtarıdır - değişkeni ayarladığınızda anahtarın altında saklanan cevabı siler ve {{name}} bundan sonra ana değeri yanıtlar.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Değişken tanımı \"{değişken}\" olarak belirtilir; bu aynı zamanda hesaplanan değer \"{name}\"'nin adıdır - her ikisi de aynı slotu yazar ve en son koşan kazanır."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition bir anket JSON nesnesi değildir, bu yüzden hiçbir değişken ilan edilmez ve ön ayar değeri kontrol edilemez.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets bir dizi değildir, bu yüzden ön set ilan edilmez.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Ön ayar #{index} bir nesne değildir.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "#{index} ön ayarının adı yoktur, bu yüzden hiçbir şey ona referans veremez.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "\"{preset}\" ön ayarı değişken nesnesi taşımaz, yani hiçbir şey ayarlamaz.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "\"{preset}\" ön ayarı iki kez ilan edilir - bu isimle yapılan bir arama ilk ayarla yanıtlanır.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "\"{preset}\" ön ayarı, değişken tanımında belirtilmez olan \"{değişken}\"i ayarlar.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Ön ayar \"{preset}\" \"{değişken}\"i değişken tanımının reddettiği bir değere ayar: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "\"{functionName}\" fonksiyonu kayıtlı değildir."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Hesaplanan \"{names}\" değeri kendi ifadesinde kendine referans verir.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Hesaplanan değerler {isimler} birbirine bağlıdır."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Tetikleyici, kendisi belirlediği değere (\"{setToName}\") tepki verir.",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Tetikleyiciler, belirledikleri değerler üzerinden bir döngü oluşturur: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} kendi yazdığı değeri okur - sadece başka bir değer değiştiğinde çalışır, yani hiç çalışmaz.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Değerler bir döngü içinde yazılır: {chain}. Her yazı, onu okuyan ifadeleri tekrar çalıştırır, bu nedenle nihai değerler soruların cevaplandığı sıraya bağlıdır."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Bu koşul, \"{name}\" ile {values} karşılaştırır - seçenekler arasında değil. Erişilebilir: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Bu koşul, \"{name}\" ile {values} karşılaştırır - hiçbir seçim değeri onu içermez. Erişilebilir: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Bu koşul \"{operator}\" ile \"{name}\"'ye uygulanır: \"{recordName}\" ({questionType}) karşılaştırılacak bir değere sahip değildir.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Bu koşul \"{operator}\" için \"{name}\"'ye uygulanır: \"{recordName}\" {valueShapeText} tutar - sıralama ve aritmetik operatörler buna uygulanmaz.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Bu koşul \"{operatör}\" için \"{name}\"ye uygulanır: \"{recordName}\" bir boole sorusudur - sıralama operatörleri ona uygulanmaz.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Bu koşul, \"{operator}\" ile \"{name}\"' için geçerlidir: \"{recordName}\" bir metin sorusudur - değeri bir dizedir, bu yüzden sayısal karşılaştırma örtük dönüşüme dayanır.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Bu koşul \"{operator}\" ile \"{name}\"ye uygulanır: \"{recordName}\" bir tarih dizisi içerir - bunu {constValue} sayısıyla karşılaştırdığınızda geçerli olamaz.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Bu koşul \"{operator}\" ile \"{name}\"'ye uygulanır: \"{recordName}\" sayısaldır - \"{constValue}\" dizesine kıyasla geçerli değildir.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Bu koşul \"{operatör}\" ile \"{name}\"ye uygulanır: \"{recordName}\" seçilmiş değerlerden oluşan bir diziyi tutar, böylece \"=\" tüm diziyi karşılaştırır.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Bu koşul \"{operator}\" ile \"{name}\"'ye uygulanır: \"{recordName}\" bir boolean sorudur - {constValue} ile karşılaştırmak geçerli değildir."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" her zaman yanlıştır, bu yüzden \"{name}\" hiç gösterilmez.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{Prop} \"{expression}\" asla geçerli olmaz, çünkü {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" asla geçerli olmaz - izin verilen bir değer onu karşılamaz: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{ifade}\" kendisiyle çelişiyor: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{ifade}\" her zaman doğrudur, bu yüzden hiçbir şey karar vermez.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{Prop} \"{expression}\" aritmetiktir, karşılaştırma değildir, bu yüzden asla evet ya da hayır vermez.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "{Prop} \"{expression}\"in bir kısmı, önceden bilinen bir sonuca sahiptir.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{Prop} \"{expression}\" her zaman geçerli, çünkü {facts} - hiçbir şey karar vermez."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "\"{name}\" değerinin varsayılan değeri {valuesText}'dir ve bu değeri asla tutamaz. İzin verilir: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "\"{name}\" kelimesinin doğru cevabı {valuesText}'dir ve asla tutamaz. İzin verilen: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Tetikleyici \"{name}\" ile {valuesText} ayarlar ve bu durum asla tutulamaz. İzin verilir: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Varsayılan satır değeri \"{name}\" olarak {valuesText} ayarlar ve bu değeri asla tutamaz. İzin verilir: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Varsayılan panel değeri \"{name}\" olarak {valuesText} olarak ayarlar ve bu değeri asla tutamaz. İzin verilir: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "\"{name}\"'nin {prop}'u \"{key}\" adını verir - böyle bir satır yoktur. Kullanılabilir: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "\"{name}\"nin {prop} kısmı \"{key}\" adını verir - böyle bir sütun yoktur. Erişilebilir: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "\"{name}\"nin {prop} adı \"{key}\" - böyle bir şablon sorusu yok. Erişilebilir: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Copyvalue tetikleyicisi \"{fromName}\" kelimesini \"{setToName}\"'ye kopyalar, ancak \"{fromName}\" {sourceShapeText} ve \"{setToName}\" {targetShapeText}'i tutar.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Copyvalue tetikleyicisi \"{fromName}\" dosyasını \"{setToName}\"'ye kopyalar, ancak \"{setToName}\" değeri arasında \"{setToName}\" değeri yoktur. İzin verilir: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" seçimlerini \"{source}\"'dan kopyalar, ancak bu isimle ilgili bir tartışma yoktur.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" seçimlerini kendisinden kopyalıyor.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" seçimlerini \"{source}\" ({sourceType}) üzerinden kopyalar; bu da ne seçenek ne de bir değer dizisi sunar.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" \"{source}\"'dan {prop} \"{field}\" okunur, ancak {sourceType} \"{source}\" böyle bir {fieldNoun}'a sahip değildir."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "\"{name}\"'nin {prop}'unun başka bir öğesi zaten {valueText} değerine sahiptir - çalışma zamanı her iki öğeyi de korur.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "\"{name}\" seçimleri {valueText} içerirken, {toggleProp} açıkken - dahili {specialItemText} öğesiyle çarpışır."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{tetik} tetikleyici, var olmayan \"{name}\" sayfasını hedef alır.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{tetikleyici} tetikleyicisi \"{name}\"'yi hedefliyor, ancak {containerType} \"{root}\" {segmentNoun} \"{segment}\" içermez.",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{tetikleyici} tetikleyici {fiil} \"{name}\", ancak bu isimle {kindText} yoktur."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "\"{type}\" tetikleme tipi bilinmemektedir.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Tetikleyicinin bir türü yok."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "\"{name}\" doğrulayıcı tipi \"{type}\" bilinmemektedir.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "\"{name}\" doğrulayıcısının türü yoktur."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "\"{name}\" {effectText}: {causeText} ({questionType}) için {validatorType} doğrulayıcısı.",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "\"{name}\" için {validatorType} validatörü en az {min} ve en fazla {max} gerektirir - hiçbir cevap bunu karşılamaz.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "\"{name}\" için answercount validatoru, birlikte seçilebilen {seçilebilir} seçeneklerin üzerinde en az {minCount} cevap gerektirir.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "\"{name}\" için regex validatoru, motorun reddettiği bir desene sahiptir: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "\"{name}\" ifadesinin doğrulayıcısı bir ifade içermez, bu yüzden her zaman geçer."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "\"{name}\"'nin {minProp}'u {min}'dir, {max}'ın üzerinde olan {maxProp}'un üzerinde - çalışma süresi sessizce bunlardan birini ayarlar.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "\"{name}\"'nin {countProp}'ü {count}, {direction} ise {boundProp}'dır - çalışma zamanı onu sıkıştırır.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "\"{name}\"'nin {stepProp}'u {step}'dir, ancak geçtiği aralık ({minProp}.. {maxProp}) sadece {range} sınırlarını kaplar - çalışma zamanı onu sıkıştırır.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "\"{name}\"'nin minSelectedChoices (min}, birlikte seçilebilen {seçilebilir} seçeneklerin üstünde - soru asla cevaplanamaz."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" asla görünür olamaz: visible If {reads} okuyor ki {deadClause} bu da {deadClause} olarak geçerli, bu yüzden koşul asla geçerli olmaz."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "\"{name}\"nin mask tipi \"{maskType}\" bilinen bir maske değildir - çalışma süresi hiç maske olmadan geri döner.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "\"{name}\"'nin maskSettings'i \"{key}\" ayarlar, bu \"{maskType}\" maskesinin bir özelliği değildir - çalıştırma zamanı bunu sessizce bırakır.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "\"{name}\" mask ayarları maskTipi olmadan ayarlanır - çalışma zamanı sadece \"saveMaskedValue\" tutar ve geri kalanını düşürür.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "\"{name}\"nin {maskType} maskesi, girdi yok için geçerlidir: inputType \"{inputType}\" yalnızca metin ve tel için maskelenir.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "\"{name}\"'nin tarih saati maskesi, desen olmadan min/max'i ayarlar - sınırlar desenin tarih parçalarına uygulanır, yani desen olmadan hiçbir şey yapmazlar.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "\"{name}\"'nin {maskType} maskesi en az {min} ve en fazla {max} izin verir - hiçbir değer bunu karşılamaz."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Dinamik panel \"{name}\"de boş bir şablon var - panellerinde render edilecek hiçbir şey yok.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" öğesi yoktur.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" asla render edilebilecek hiçbir öğeye sahip değildir - her eleman gizlidir, asla geçerli olmayan bir koşulla korunur ya da boş.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "\"{name}\"nin detay öğeleri hiç gösterilmez: detay PanelMode varsayılan olan \"none\"dir."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Pozisyon: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Tetikleyicinin eski adı, operatörü ve değer özelliklerinden oluşturulmuştur.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "İçeride: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "\"{0}\" mi demek istediniz?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Eğer özel bir bileşense, tanımını linter'a ileterek tam analiz yapılmasını mümkün kılın.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Fonksiyonu linting'den önce kaydedin veya linter seçeneklerinde listeleyin.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Yanlış yazılmış bir tür çalışma zamanında sessizce bırakılır ve özel tetikleyici hedef ve döngü kontrolleri tarafından kapsanmaz.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Eğer çalışma zamanında değişken seti ise, linter seçeneklerinde listeleyin.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Tetikleme koşulları asla bir arada kalmazsa döngüye ulaşılamaz olabilir - ifadeleri doğrulayın.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "DefaultValueExpression yalnızca sorusu yanıtlanana kadar geçerlidir.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "İfadeyle: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Bağlarda referans gösteriliyor.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "ChoicesByUrl {0}'de referans alındı.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "\"{0}\" metninde referans gösterilmiştir.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () bu ismi {1} \"{2}\" maddesinin her maddesinden okuyordu.",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "{0}() argümanı hiçbir soru, panel veya sayfa olarak adlandırılmıyor.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deseriizer bilmediği bir anahtarı düşürüyor.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deseriizer, çözemediği bir validatörü düşürüyor, yani hiçbir şey doğrulama yapmıyor.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Giriş tipi \"{0}\"dir.",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Bu, \"{0}\"in veri anahtarıdır." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "ve",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} her zaman {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} {sınır}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "En azından {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "en fazla {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} her iki {değer} de olamaz",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} {value} olabilir ve o olmayabilir",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} boş olup {value} olamaz",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} boş ve boş olamaz",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref}, {min} üzerinde ve {max} altında olamaz",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} hiç değeri olmayan bir kişi olması istenir"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\" referansları yalnızca bir matris hücresi veya matris detay paneli içinde bulunabilir.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" yalnızca bir matris hücresi veya matris detay paneli içinde bulunabilir.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\" referansları yalnızca dinamik bir panel veya panel konteyneri içinde bulunabilir.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\" referansları yalnızca dinamik bir panel içinde bulunabilir.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" sadece dinamik bir panel içinde bulunabilir.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" yalnızca seçim, satır ve sütun koşulları içinde kullanılabilir.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" referansları yalnızca bileşik soru içinde bulunabilir.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" bu matrisin bir sütunudur - satır önekiyle referans verin.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" bu dinamik panelin bir sorusudur - panel ön ekiyle referans verin."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Eğer numara topluyorsa, inputType: \"number\" üzerinde \"{0}\" ayarlayın.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Çok seçmeli değerler için \"contains\" veya \"anyof\" kullanın."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "sayfa",
+        // [Auto-translated] "panel"
+        panel: "panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "İsim",
+        // [Auto-translated] "valueName"
+        valueName: "değerName",
+        // [Auto-translated] "name"
+        calculatedValue: "İsim"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "hesaplanan değer",
+        // [Auto-translated] "element"
+        default: "element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Anket",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Diğer",
+        // [Auto-translated] "None"
+        none: "Hiçbiri yok",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Cevap vermeyi reddet",
+        // [Auto-translated] "Don't know"
+        dontknow: "Bilmiyorum"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Asla ateş etmez",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "her cevabı reddeder",
+        // [Auto-translated] "cannot validate"
+        default: "Doğrulayamaz"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Sorunun doğrulanacak bir cevabı yok",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "bir metin değerinden bir uzunluk okunur ve bu cevabın hiç uzunluğu yoktur",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "cevap bir sayı değildir ve asla olamaz.",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Bir numara asla bir e-posta adresiyle eşleşmez",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Cevap bir değer listesi değildir",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Cevap, kontrol edilebilen bir değer değildir"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "bir dizi",
+        // [Auto-translated] "an object"
+        object: "bir nesne"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "seçilmiş değerlerden oluşan bir dizide",
+        // [Auto-translated] "a single value"
+        scalar: "tek bir değer",
+        // [Auto-translated] "a value"
+        default: "bir değer"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "aşağıda",
+        // [Auto-translated] "above"
+        above: "Yukarıda"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "asla görünmez ve değer almaz",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "asla görünmez ve değer almaz"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "soru",
+        // [Auto-translated] "question or variable"
+        questionvalue: "soru veya değişken",
+        // [Auto-translated] "page"
+        page: "sayfa"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Okuyor",
+        // [Auto-translated] "navigates to"
+        gotoName: "Yönlendirir",
+        // [Auto-translated] "sets"
+        default: "setler"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Şablon sorusu",
+        // [Auto-translated] "column"
+        default: "Sütun"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Şablon sorusu",
+        // [Auto-translated] "column"
+        matrixdynamic: "Sütun",
+        // [Auto-translated] "item"
+        multipletext: "Madde",
+        // [Auto-translated] "row"
+        matrix: "Row",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Row",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Sütun",
+        // [Auto-translated] "field"
+        default: "Alan"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

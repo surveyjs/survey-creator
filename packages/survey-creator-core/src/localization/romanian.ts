@@ -142,6 +142,10 @@ export const roStrings = {
     jsonHideErrors: "Ascunde erorile",
     // "Show errors"
     jsonShowErrors: "Afișează erorile",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Eroare de corectare",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "JSON-ul sondajului trebuie să fie un obiect.",
     // "Undo"
     undo: "Anulează",
     // "Redo"
@@ -3553,6 +3557,609 @@ export const roStrings = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Presetare aplicată"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Replică: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Folosește numele sugerat"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Elimină obiectul repetat"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Folosește tipul sugerat"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Folosește funcția sugerată"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Folosește masca sugerată"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dă elementului un nume liber"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dă elementului un nume liber"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Îndepărtați proprietatea"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Folosește cea mai apropiată valoare permisă",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Îndepărtați proprietatea",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Folosește valoarea sugerată"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Transformă valoarea într-o listă"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Dă un nume elementului"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Îndepărtați proprietatea",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Redenumirea proprietății"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Folosește numele sugerat",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Folosește numele sugerat"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Folosește numele sugerat"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Folosește tipul sugerat"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Folosește tipul sugerat"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Expresia \"{expression}\" nu poate fi analizată."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" nu este găsit - nu există nicio întrebare, panou, pagină, valoare calculată sau variabilă cu acel nume.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" nu se găsește în {containerType} \"{root}\" (referință: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" nu se găsește în domeniul \"{scopePrefix}\" (referință: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "Numele cheie al \"{name}\" numește \"{key}\" - \"{name}\" nu are {keyNoun} cu acest nume, astfel încât validarea cheii duplicate nu rulează niciodată.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" nu a fost găsit."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop}-ul \"{name}\" face referire la elementul în sine (referință: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Numele \"{name}\" este duplicat.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Valoarea calculată \"{name}\" este deja folosită de o altă valoare calculată.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Valoarea calculată \"{name}\" își împărtășește numele cu un alt element, astfel încât unul dintre ele îl umbrește pe celălalt."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" al acestui {ownerText} este și variabila de sondaj încorporată {{builtIn}} - sondajul răspunde mai întâi la {{name}}, deci aceasta este inaccesibilă în expresii.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "Numelevalorice \"{numeValori}\" din \"{nume}\" este, de asemenea, numele întrebării \"{altNume}\" – ambele își stochează răspunsul sub cheia de date \"{NumeValori}\".",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Cheia de date \"{dataName}\" este de asemenea cheia de comentariu pentru \"{base}\" (cheia sa de date plus \"{sufix}\") – o scriere suprascrie silențios cealaltă.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Cheia de date \"{dataName}\" este și cheia totalurilor pentru \"{base}\" (cheia sa de date plus \"{sufix}\") – o scriere suprascrie silențios pe cealaltă.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Declanșatorul {trigger} setează variabila \"{name}\", care este și cheia de date a întrebării \"{questionName}\" - variabila răspunde {{name}} de atunci înainte, nu la întrebare."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Numele \"{name}\" este rezervat - un membru al Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" din \"{name}\" este rezervat - un membru al Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Coloana \"{name}\" din \"{matrixName}\" este rezervată - un membru al Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Elementul \"{name}\" din \"{questionName}\" este rezervat - un membru al Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Rândul \"{rowValue}\" din \"{name}\" este rezervat - un membru al Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Valoarea calculată \"{name}\" este rezervată - un membru al Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" are un tip necunoscut \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" nu are tip - un element fără tip este eliminat."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" nu este o proprietate a {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" din {ownerText} nu este serializabilă - are efect la încărcare și este eliminată din JSON ori de câte ori sondajul este salvat din nou.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" și \"{aliasKey}\" din {ownerText} sunt două nume ale unei proprietăți – timpul de rulare le aplică în ordinea în care JSON-ul le scrie, deci \"{winner}\" câștigă.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" este setat pe \"{name}\", dar inputType \"{inputType}\" nu are limite - timpul de execuție îl ignoră."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{Cheia} a {ownerText} este {valueText} - nu una dintre valorile permise ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{Cheia} a {ownerText} este {value}, în afara intervalului său permis {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName \"{valueName}\" din \"{name}\" conține o expresie \".\" - citită {{valueName}} ca o cale către \"{rootKey}\", astfel încât cheia de date în sine nu poate fi niciodată adresată."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} nu are \"{cheie}\" - proprietatea este necesară pentru un {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Numele {className} este {valueText}, nu un șir de șir - sondajul nu îl poate încărca."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{cheia}\" a {ownerText} nu este un tablou - proprietatea conține o listă, iar timpul de execuție încapsulează valoarea într-un tablou de un singur element."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Definiția variabilei declară \"{variabilă}\", care este și cheia de date a întrebării \"{name}\" - setarea variabilei șterge răspunsul stocat sub acea cheie, iar {{name}} răspunde valorii gazdei de atunci înainte.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Definiția variabilei declară \"{variabilă}\", care este și numele valorii calculate \"{name}\" – ambele scriu același slot, iar cel care rulează ultimul câștigă."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition nu este un obiect JSON de sondaj, deci nicio variabilă nu este declarată și nicio valoare presetată nu poate fi verificată.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets nu este un tablou, deci nu este declarat niciun preset.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Presetarea #{index} nu este un obiect.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Presetul #{index} nu are nume, deci nimic nu poate face referință la el.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Presetul \"{preset}\" nu poartă obiectul variabilelor, deci nu setează nimic.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Presetul \"{preset}\" este declarat de două ori - o căutare cu acel nume răspunde cu prima.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Presetarea \"{preset}\" setează \"{variabilă}\", pe care definiția variabilei nu o declară.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Presetarea \"{preset}\" setează \"{variabila}\" la o valoare pe care definiția variabilei o respinge: {erori}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Funcția \"{functionName}\" nu este înregistrată."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Valoarea calculată \"{name}\" se referă la sine însăși în propria sa expresie.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Valorile calculate {names} depind una de cealaltă."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Declanșatorul reacționează la valoarea pe care și-o setează (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Declanșatoarele formează o buclă prin valorile pe care le setează: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{Label} citește valoarea pe care o scrie singură – rulează doar când o altă valoare se schimbă, deci nu rulează deloc.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Valorile sunt scrise într-o buclă: {chain}. Fiecare scriere rerulează expresiile care o citesc, astfel încât valorile finale depind de ordinea în care sunt răspunse la întrebări."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Condiția compară \"{name}\" cu {valori} - nu printre opțiunile sale. Disponibil: {disponibil}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Condiția compară \"{name}\" cu {value} - nicio valoare de alegere nu o conține. Disponibil: {disponibil}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Condiția se aplică \"{operator}\" la \"{name}\": \"{recordName}\" ({questionType}) nu are valoare de comparat.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este {valueShapeText} - operatorii de ordonare și aritmetică nu se aplică acesteia.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este o întrebare booleană - operatorii de ordine nu se aplică acesteia.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este o întrebare de text – valoarea ei este un șir, astfel încât comparația numerică se bazează pe conversia implicită.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" deține un șir de date - compararea cu numărul {constValue} nu poate fi valabil.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este numeric - compararea cu șirul \"{constValue}\" nu poate fi valabilă.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" conține un tablou de valori selectate, astfel încât \"=\" compară întregul tablou.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este o întrebare booleană - compararea ei cu {constValue} nu poate fi valabilă."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expresie}\" este întotdeauna fals, astfel încât \"{name}\" nu este niciodată afișat.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{expresie}\" nu este valabilă niciodată, pentru că {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "Valoarea {prop} \"{{expression}\" nu este niciodată valabilă – nicio valoare permisă nu o satisface: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{{expresie}\" se contrazice: {fapte}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expresie}\" este întotdeauna adevărată, deci nu decide nimic.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{{expresie}\" este aritmetică, nu o comparație, deci nu oferă niciodată un da sau un nu.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "O parte din {prop} \"{expresie}\" are un rezultat cunoscut dinainte.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{Prop} \"{expresie}\" este întotdeauna valabilă, pentru că {faptele} - nu decide nimic."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Valoarea implicită a \"{name}\" este {valuesText}, pe care nu o poate menține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Răspunsul corect la \"{name}\" este {valuesText}, pe care nu îl poate susține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Declanșatorul setează \"{name}\" la {valuesText}, pe care nu îl poate ține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Valoarea implicită a rândului setează \"{name}\" pe {valuesText}, pe care nu o poate menține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Valoarea implicită a panoului setează \"{name}\" la {valuesText}, pe care nu îl poate menține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop}-ul \"{name}\" numește \"{key}\" - nu există o astfel de linie. Disponibil: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop}-ul \"{name}\" denumește \"{cheia}\" - nu există o astfel de coloană. Disponibil: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} din \"{name}\" numește \"{cheie}\" - nu există o astfel de întrebare de șablon. Disponibil: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Declanșatorul copyvalue copiază \"{fromName}\" în \"{setToName}\", dar \"{fromName}\" conține {sourceShapeText}, iar \"{setToName}\" conține {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Declanșatorul copyvalue copiază \"{fromName}\" în \"{setToName}\", dar nicio valoare a \"{fromName}\" nu se numără printre valorile pe care \"{setToName}\" le poate ține. Permis: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" își copiază alegerile din \"{source}\", dar nu există nicio îndoială cu acest nume.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" își copiază alegerile de la sine.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" își copiază alegerile din \"{source}\" ({sourceType}), care nu oferă nici alegeri, nici un tablou de valori.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" citește {prop} \"{field}\" din \"{source}\", dar {sourceType} \"{source}\" nu are un astfel {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Un alt element din {prop} al \"{name}\" are deja valoarea {valueText} - timpul de execuție păstrează ambele elemente.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Alegerile \"{name}\" conțin {valueText} în timp ce {toggleProp} este activat – colizionează cu elementul încorporat {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Declanșatorul {trigger} vizează pagina \"{name}\", care nu există.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Declanșatorul {trigger} țintește \"{name}\", dar {containerType} \"{root}\" nu are {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{declanșator} declanșează {verbul} \"{nume}\", dar nu există niciun {kindText} cu acest nume."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Tipul de declanșator \"{type}\" nu este cunoscut.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Trăgaciul nu are tip."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Tipul de validator \"{type}\" al \"{name}\" nu este cunoscut.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Un validator al \"{name}\" nu are tip."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "Validatorul {validatorType} al \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Validatorul {validatorType} al \"{name}\" necesită cel puțin {min} și cel mult {max} - niciun răspuns nu îl satisface.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Validatorul de număr de răspunsuri pentru \"{name}\" necesită cel puțin {minCount} răspunsuri, deasupra opțiunilor {selectable} care pot fi selectate împreună.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Validatorul regex al \"{name}\" are un tipar pe care motorul îl respinge: {eroare}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Validatorul expresiei \"{name}\" nu are nicio expresie, deci trece întotdeauna."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} al \"{name}\" este {min}, deasupra {maxProp} al său de {max} - timpul de rulare ajustează în tăcere unul dintre ele.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} al \"{name}\" este {count}, {direction} {boundProp} al {bound} - timpul de execuție îl fixează.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} al \"{name}\" este {step}, dar distanța prin care trece ({minProp}.. {maxProp}) acoperă doar {intervalul} - timpul de funcționare îl blochează.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "MinSelectedChoices din \"{name}\" este {min}, deasupra op��iunilor {selectable} care pot fi selectate împreună – întrebarea nu poate fi niciodată răspunsă."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" nu poate deveni niciodată vizibil: este vizibilIf citește {reads}, ceea ce {deadClause}, deci condiția nu este niciodată valabilă."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Tipul mască \"{maskType}\" din \"{name}\" nu este o mască cunoscută – timpul de rulare scade la nicio mască deloc.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "Setările maskSettings ale \"{name}\" setează \"{key}\", care nu este o proprietate a măștii \"{maskType}\" – timpul de rulare îl întrerupe silențios.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Setările maskSettings ale \"{name}\" sunt setate fără un maskType - timpul de execuție păstrează doar \"saveMaskedValue\" și elimină restul.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Masca {maskType} a \"{name}\" nu se aplică niciunui input: inputType \"{inputType}\" este mascată doar pentru text și tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Masca datetime \"{name}\" setează min/max fără un model - limitele se aplică părților de dată ale modelului, deci fără unul nu fac nimic.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Masca {maskType} a \"{name}\" permite cel puțin {min} și cel mult {max} - nicio valoare nu o satisface."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Panoul dinamic \"{name}\" are un șablon gol – panourile sale nu au nimic de randat.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" nu are elemente.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" nu are elemente care să poată fi redate vreodată – fiecare element este ascuns, păzit de o condiție care nu se respectă niciodată, sau gol.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Elementele de detaliu ale \"{name}\" nu sunt niciodată afișate: detaliulPanelMode este \"none\", care este implicit."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Poziție: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "A fost construit din proprietățile moștenite ale numelui, operatorului și valorii declanșatorului.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Înăuntru: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Ai vrut să spui \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Dacă este o componentă personalizată, transmiteți definiția acesteia linter-ului pentru a permite o analiză completă.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Înregistrează funcția înainte de linting sau listează-o în opțiunile linter.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Un tip scris greșit este eliminat silențios la rulare, iar un declanșator personalizat nu este acoperit de verificările țintă și ciclu.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Dacă este o variabilă setată la rulare, listează-o în opțiunile linter.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Bucla poate fi inaccesibilă dacă condițiile de declanșare nu se mențin niciodată – verifică expresiile.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "Un defaultValueExpression se aplică doar până când întrebarea sa este răspunsă.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "În exprimare: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Menționat în legături.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Menționat în opțiunile ByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Menționat în textul \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () citește acest nume din fiecare intrare din {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argumentul {0}() nu numește nicio întrebare, panou sau pagină.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializatorul pierde o cheie pe care nu o cunoaște.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializatorul renunță la un validator pe care nu îl poate rezolva, deci nimic nu validează.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Tipul de intrare este \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Este cheia de date a \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "și",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} este întotdeauna {valoare}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} este {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Cel puțin {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "cel mult {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} nu poate fi ambele {valori}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} nu poate fi {value} și să nu fie el",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} nu poate fi gol și nu poate fi {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} nu poate fi gol și nici gol",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} nu poate fi peste {min} și sub {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} este întrebat să fie unul fără valoare deloc"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unei celule de matrice sau a unui panou de detaliu de matrice.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" este disponibil doar în interiorul unei celule de matrice sau a unui panou de detaliu de matrice.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unui panou dinamic sau al unui container de panouri.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unui panou dinamic.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" este disponibil doar în interiorul unui panou dinamic.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" este disponibil doar în interiorul condițiilor de alegere, rând și coloană.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unei întrebări compozite.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" este o coloană a acestei matrice – refereți-o cu prefixul rândului.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" este o chestiune legată de acest panou dinamic – referă-te la el cu prefixul panoului."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Setează inputType: \"number\" pe \"{0}\" dacă colectează numere.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Folosește \"contains\" sau \"anyof\" pentru valori multi-select."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "Pagină",
+        // [Auto-translated] "panel"
+        panel: "Panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Nume",
+        // [Auto-translated] "valueName"
+        valueName: "Numelevalorice",
+        // [Auto-translated] "name"
+        calculatedValue: "Nume"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Valoare calculată",
+        // [Auto-translated] "element"
+        default: "element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Sondajul",
+        // [Auto-translated] "the {0}"
+        className: "The {0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Altele",
+        // [Auto-translated] "None"
+        none: "Niciuna",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Refuză să răspundă",
+        // [Auto-translated] "Don't know"
+        dontknow: "Nu știu"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "nu trage niciodată",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "respinge orice răspuns",
+        // [Auto-translated] "cannot validate"
+        default: "nu se poate valida"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Întrebarea nu are răspuns pentru validare",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "O lungime este citită dintr-o valoare de text, iar acest răspuns nu are niciun răspuns",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Răspunsul nu este un număr și nu va putea fi niciodată",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Un număr nu corespunde niciodată unei adrese de e-mail",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Răspunsul nu este o listă de valori",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Răspunsul nu este o valoare pe care o poate verifica"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "Un tablou",
+        // [Auto-translated] "an object"
+        object: "un obiect"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "un tablou de valori selectate",
+        // [Auto-translated] "a single value"
+        scalar: "o singură valoare",
+        // [Auto-translated] "a value"
+        default: "o valoare"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "mai jos",
+        // [Auto-translated] "above"
+        above: "mai sus"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "nu este niciodată vizibil și nu primește niciodată o valoare",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "nu sunt niciodată vizibile și nu primesc niciodată o valoare"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Întrebare",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Întrebare sau variabilă",
+        // [Auto-translated] "page"
+        page: "Pagină"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Citește",
+        // [Auto-translated] "navigates to"
+        gotoName: "navighează către",
+        // [Auto-translated] "sets"
+        default: "Seturi"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Întrebare despre șablon",
+        // [Auto-translated] "column"
+        default: "Coloană"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Întrebare despre șablon",
+        // [Auto-translated] "column"
+        matrixdynamic: "Coloană",
+        // [Auto-translated] "item"
+        multipletext: "Punct",
+        // [Auto-translated] "row"
+        matrix: "Rând",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Rând",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Coloană",
+        // [Auto-translated] "field"
+        default: "Teren"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

@@ -142,6 +142,10 @@ export var frenchTranslation = {
     jsonHideErrors: "Masquer les erreurs",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Afficher les erreurs",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Erreur de correction",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Le JSON de l’enquête doit être un objet.",
     // "Undo"
     undo: "Annuler",
     // "Redo"
@@ -3553,6 +3557,609 @@ export var frenchTranslation = {
     },
     // [Auto-translated] "Preset applied"
     presetApplied: "Préréglage appliqué"
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Réplique : {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Utilisez le nom suggéré"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Retirez l’élément répété"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Utilisez le type suggéré"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Utilisez la fonction suggérée"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Utilisez le masque suggéré"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Donner un nom libre à l’élément"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Donner un nom libre à l’élément"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Retirez la propriété"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Utiliser la valeur autorisée la plus proche",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Retirez la propriété",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Utilisez la valeur suggérée"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Transformez la valeur en une liste"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Donner un nom à l’élément"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Retirez la propriété",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Renommer la propriété"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Utilisez le nom suggéré",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Utilisez le nom suggéré"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Utilisez le nom suggéré"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Utilisez le type suggéré"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Utilisez le type suggéré"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "L’expression « {expression} » ne peut pas être analysée."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "« {name} » n’est pas trouvé – aucune question, panneau, page, valeur calculée ou variable portant ce nom n’existe.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "« {segment} » ne se trouve pas dans {containerType} « {root} » (référence : {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "« {segment} » ne se trouve pas dans le champ « {scopePrefix} » (référence : {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "Le nom clé de « {name} » nomme « {key} » - « {name} » n’a pas de {nom clé} portant ce nom, donc la validation des clés dupliquées ne s’exécute jamais.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "« {name} » n’est pas trouvé."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "Le {prop} de « {name} » fait référence à l’élément lui-même (référence : {référence})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Le nom « {name} » est dupliqué.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Le nom de la valeur calculée « {name} » est déjà utilisé par une autre valeur calculée.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "La valeur calculée « {name} » partage son nom avec un autre élément, donc l’un d’eux ombre l’autre."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "Le {nameKindText} « {name} » de ce {ownerText} est aussi la variable d’enquête intégrée {{builtIn}} - l’enquête répond d’abord à {{name}}, donc celle-ci est inaccessible dans les expressions.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
+        valueNameShadowsElement: "Le nom de la valeur « {nomValueName} » de « {name} » est aussi le nom de la question « {autreNomNom} » – les deux stockent leur réponse sous la clé de données « {NomValueName} ».",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "La clé de données « {dataName} » est aussi la clé de commentaire de « {base} » (sa clé de données plus « {suffixe ») – une écriture écrase silencieusement l’autre.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "La clé de données « {dataName} » est aussi la clé des totaux de « {base} » (sa clé de données plus « {suffixe} ») – une écriture écrase silencieusement l’autre.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Le déclencheur {trigger} définit la variable « {name} », qui est aussi la clé de données de la question « {questionName} » – la variable répond à {{name}} à partir de ce moment, pas à la question."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Le nom « {name} » est réservé – un membre d’Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "La valeur « {valueName} » de « {name} » est réservée - un membre d’Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "La colonne « {name} » de « {matrixName} » est réservée - un membre d’Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "L’élément « {name} » de « {questionName} » est réservé - un membre d’Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "La ligne « {rowValue} » de « {name} » est réservée - un membre d’Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "La valeur calculée « {name} » est réservée - un membre d’Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "« {name} » a un type inconnu « {type} ».",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "« {name} » n’a pas de type – un élément sans type est supprimé."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "« {key} » n’est pas une propriété de {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "« {key} » de {ownerText} n’est pas sérialisable – il prend effet au chargement et est supprimé du JSON chaque fois que l’enquête est sauvegardée à nouveau.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "« {key} » et « {aliasKey} » de {ownerText} sont deux noms d’une même propriété – le temps d’exécution les applique dans l’ordre dans lequel le JSON les écrit, donc « {winner} » l’emporte.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "« {key} » est réglé sur « {name} », mais inputType « {inputType} » n’a pas de limites – l’exécution l’ignore."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "La {clé} de {ownerText} est {valueText} - pas l’une des valeurs autorisées ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "La {clé} de {ownerText} est {value}, en dehors de sa plage autorisée {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "Le valueName « {valueName} » de « {name} » contient une expression « . » - lisent {{valueName}} comme un chemin vers « {rootKey} », donc la clé de données elle-même ne peut jamais être adressée."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} n’a pas de « {key} » - la propriété est requise pour un {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Le nom du {className} est {valueText}, pas une chaîne de caractères – le sondage ne peut pas le charger."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "La « {clé} » de {ownerText} n’est pas un tableau – la propriété contient une liste, et l’exécution englobe la valeur dans un tableau d’un seul élément."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "La définition de la variable déclare « {variable} », qui est aussi la clé de données de la question « {name} » – le réglage de la variable supprime la réponse stockée sous cette clé, et {{name}} répond à la valeur hôte à partir de ce moment.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "La définition de la variable déclare « {variable} », qui est aussi le nom de la valeur calculée « {name} » – les deux écrivent le même emplacement, et celui qui exécute en dernier gagne."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition n’est pas un objet JSON d’enquête, donc aucune variable n’est déclarée et aucune valeur prédéfinie ne peut être vérifiée.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets n’est pas un tableau, donc aucun préréglage n’est déclaré.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Le preset #{index} n’est pas un objet.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Le préréglage #{index} n’a pas de nom, donc rien ne peut le référencer.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Le préréglage « {preset} » ne porte aucun objet de variables, donc il ne pose rien.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Le préréglage « {preset} » est déclaré deux fois – une recherche portant ce nom répond par la première.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Le préréglage « {preset} » définit « {variable », que la définition de la variable ne déclare pas.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Le préréglage « {preset} » attribue « {variable} » à une valeur rejetée par la définition de la variable : {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "La fonction « {functionName} » n’est pas enregistrée."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "La valeur calculée « {names} » se réfère à elle-même dans sa propre expression.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Les valeurs {noms} calculées dépendent les unes des autres."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Le déclencheur réagit à la valeur qu’il s’attribue lui-même (« {setToName} »).",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Les déclencheurs forment une boucle à travers les valeurs qu’ils définissent : {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "Le {label} lit la valeur qu’il écrit lui-même – il ne s’exécute que lorsqu’une autre valeur change, donc il ne s’exécute jamais du tout.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Les valeurs sont écrites dans une boucle : {chain}. Chaque écriture relance les expressions qui la lisent, de sorte que les valeurs finales dépendent de l’ordre dans lequel les questions sont résolues."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "La condition compare « {name} » à {values} - pas parmi ses choix. Disponible : {disponible}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "La condition compare « {name} » à {values} - aucune valeur de choix ne la contient. Disponible : {disponible}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "La condition applique « {opérateur} » à « {nom} » : « {nomEnregistrement} » ({typeQuestionType}) n’a aucune valeur à comparer.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "La condition applique « {operator} » à « {name} » : « {recordName} » tient {valueShapeText} - les opérateurs d’ordre et d’arithmétiques ne s’appliquent pas à cette situation.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "La condition applique « {opérateur} » à « {name} » : « {recordName} » est une question booléenne – les opérateurs d’ordre ne s’appliquent pas à celle-ci.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "La condition applique « {opérateur} » à « {name} » : « {recordName} » est une question textuelle – sa valeur est une chaîne, donc la comparaison numérique repose sur une conversion implicite.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "La condition applique « {operator} » à « {name} » : « {recordName} » contient une chaîne de dates – la comparer au nombre {constValue} ne peut pas être tenu.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "La condition applique « {operator} » à « {name} » : « {recordName} » est numérique – la comparaison avec la chaîne « {constValue} » ne peut pas être vérifiée.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "La condition applique « {opérateur} » à « {name} » : « {recordName} » contient un tableau de valeurs sélectionnées, donc « = » compare l’ensemble du tableau.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "La condition applique « {operator} » à « {name} » : « {recordName} » est une question booléenne – la comparer à {constValue} ne peut pas être tenue."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "Le {prop} « {expression} » est toujours faux, donc « {name} » n’est jamais affiché.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "Le {prop} « {expression} » ne tient jamais, car {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "La {prop} « {expression} » ne tient jamais – aucune valeur autorisée ne la satisfait : {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "Le {prop} « {{expression} » se contredit : {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "Le {prop} « {expression} » est toujours vrai, donc il ne décide de rien.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "Le {prop} « {expression} » est arithmétique, pas une comparaison, donc il ne donne jamais de oui ou de non.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Une partie de la {prop} « {expression} » a un résultat connu d’emblée.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "Le {prop} « {expression} » est toujours vrai, car {facts} - il ne décide de rien."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "La valeur par défaut de « {name} » est {valuesText}, qu’elle ne pourra jamais tenir. Autorisé : {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "La bonne réponse à « {name} » est {valuesText}, ce qu’elle ne pourra jamais tenir. Autorisé : {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Le déclencheur règle « {name} » sur {valuesText}, qu’il ne peut jamais tenir. Autorisé : {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "La valeur de ligne par défaut met « {name} » en {valuesText}, qu’elle ne peut jamais tenir. Autorisé : {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "La valeur par défaut du panneau met « {name} » sur {valuesText}, qu’elle ne peut jamais tenir. Autorisé : {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "Le {prop} de « {name} » nomme « {key} » - il n’y a pas de telle ligne. Disponible : {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "Le {prop} de « {name} » nomme « {key} » - pas de telle colonne. Disponible : {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "Le {prop} de « {name} » nomme « {key} » - pas de question de ce type de modèle. Disponible : {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Le déclencheur copyvalue copie « {fromName} » en « {setToName} », mais « {fromName} » contient {sourceShapeText} et « {setToName} » contient {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Le déclencheur copyvalue copie « {fromName} » en « {setToName} », mais aucune valeur de « {fromName} » ne figure parmi les valeurs que « {setToName} » peut tenir. Autorisé : {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "« {name} » copie ses choix de « {source} », mais il n’y a aucun doute sur ce nom.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "« {name} » copie ses choix de lui-même.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "« {name} » copie ses choix de « {source} » ({sourceType}), qui ne fournit ni choix ni tableau de valeurs.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "« {name} » se lit {prop} « {field} » de « {source} », mais {sourceType} « {source} » n’a pas de tel {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Un autre élément du {prop} de « {name} » a déjà la valeur {valueText} - le temps d’exécution conserve les deux éléments.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Les choix « {name} » contiennent {valueText} tandis que {toggleProp} est activé – il entre en collision avec l’élément intégré {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Le déclencheur {trigger} vise la page « {name} », qui n’existe pas.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Le déclencheur {trigger} vise « {name} », mais {containerType} « {root} » n’a pas de {segmentNoun} « {segment} ».",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "Le {trigger} déclenche {verb} « {name} », mais aucun {kindText} portant ce nom n’existe."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Le type de déclenchement « {type} » n’est pas connu.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "La détente n’a pas de type."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Le type de validateur « {type} » de « {name} » n’est pas connu.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Un validateur de « {name} » n’a pas de type."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "Le {validatorType} validateur de « {name} » {effectText} : {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Le validateur {validatorType} de « {name} » nécessite au moins {min} et au maximum {max} - aucune réponse ne le satisfait.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Le validateur de nombre de réponses de « {name} » nécessite au moins {minCount} de réponses, au-dessus des choix {sélectionnables} pouvant être sélectionnés ensemble.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Le validateur régulier de « {name} » a un motif que le moteur rejette : {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Le validateur d’expression de « {name} » n’a pas d’expression, donc il passe toujours."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "Le {minProp} de « {name} » est {min}, au-dessus de son {maxProp} de {max} - le temps d’exécution ajuste silencieusement l’un d’eux.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "Le {countProp} de « {name} » est {count}, {direction} son {boundProp} de {bound} - le temps d’exécution le bloque.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "Le {stepProp} de « {name} » est {step}, mais la portée qu’il traverse ({minProp}.. {maxProp}) ne couvre que {plage} - le temps d’exécution le limite.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "Le minSelectedChoices de « {name} » est {min}, au-dessus des choix {sélectionnables} qui peuvent être sélectionnés ensemble – la question ne peut jamais être répondue."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "« {name} » ne peut jamais devenir visible : il est visible If lit {lis}, ce qui est {deadClause}, donc la condition ne tient jamais."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Le typeType « {masType} » de « {name} » n’est pas un masque connu – le temps d’exécution retombe à aucun masque du tout.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "Les paramètres de masqueSettings de « {name} » définissent « {key} », ce qui n’est pas une propriété du masque « {maskType} » – l’exécution la perd silencieusement.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Les paramètres maskSettings de « {name} » sont définis sans masType - le temps d’exécution ne conserve que « saveMaskedValue » et supprime le reste.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Le masque {maskType} de « {name} » ne s’applique à aucune entrée : inputType « {inputType} » est masqué uniquement pour le texte et le tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Le masque de date et d’heure « {name} » définit le min/max sans motif - les limites s’appliquent aux parties de date du motif, donc sans une date elles ne font rien.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Le masque {mastype} de « {name} » permet au moins {min} et au plus {max} – aucune valeur ne le satisfait."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Le panneau dynamique « {name} » a un modèle vide – ses panneaux n’ont rien à rendre.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "Le {kindText} « {name} » ne comporte aucun élément.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "Le {kindText} « {name} » n’a aucun élément qui puisse jamais être rendu – chaque élément est caché, protégé par une condition qui ne tient jamais, ou vide.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Les éléments de détail de « {name} » ne sont jamais affichés : son detailPanelMode est « none », qui est le défaut."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Position : {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Il a été construit à partir des propriétés héritées du nom, opérateur et valeur du trigger.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "À l’intérieur : {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Tu voulais dire « {0} » ?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "S’il s’agit d’un composant personnalisé, transmettez sa définition au linter pour permettre une analyse complète.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Enregistrez la fonction avant de liner, ou listez-la dans les options de linter.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Un type mal orthographié est silencieusement supprimé à l’exécution, et un déclencheur personnalisé n’est pas couvert par les vérifications cibles et de cycles.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Si c’est une variable définie à l’exécution, listez-la dans les options de linter.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "La boucle peut être inaccessible si les conditions de déclenchement ne tiennent jamais ensemble – vérifiez les expressions.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "Une expressionValueDefault s’applique uniquement jusqu’à ce que sa question soit résolue.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "En termes d’expression : {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Référencés dans les reliures.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Référencé dans la {0} choicesByUrl.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Mentionné dans le texte « {0} ».", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () indique ce nom à partir de chaque entrée de {1} « {2} ».",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "L’argument {0}() ne nomme aucune question, case ou page.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Le désérialiseur laisse tomber une clé qu’il ne connaît pas.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Le désérialiseur laisse tomber un validateur qu’il ne peut pas résoudre, donc rien ne valide.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Le typed’entrée est « {0} ».",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "C’est la clé de données de « {0} »." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "et",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} est toujours {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} est {bornes}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Au moins {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "au plus {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} ne peut pas être à la fois {valeurs}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} ne peut pas être {value} et ne pas être",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} ne peut pas être vide et être {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} ne peut pas être vide et pas vide",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} ne peut pas être au-dessus de {min} et en dessous de {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} est demandé à être une personne sans aucune valeur"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Les références « {0}. » ne sont disponibles qu’à l’intérieur d’une cellule de matrice ou d’un panneau de détail matriciel.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "« {0} » n’est disponible qu’à l’intérieur d’une cellule matricielle ou d’un panneau de détail matriciel.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Les références « {0}. » ne sont disponibles qu’à l’intérieur d’un panneau dynamique ou d’un conteneur à panneau.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Les références « {0}. » ne sont disponibles qu’à l’intérieur d’un panneau dynamique.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "« {0} » n’est disponible qu’à l’intérieur d’un panneau dynamique.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "« {0} » n’est disponible qu’à l’intérieur des conditions de choix, ligne et colonne.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "« {0}. » références ne sont disponibles qu’à l’intérieur d’une question composite.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "« {0} » est une colonne de cette matrice – référencez-la avec le préfixe ligne.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "« {0} » est une question de ce panneau dynamique – il est mentionné par le préfixe du panneau (panneau de passage)."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Définir inputType : « number » sur « {0} » s’il collecte des numbers.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Utilisez « contains » ou « anyof » pour les valeurs multi-sélectionnées."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "Page",
+        // [Auto-translated] "panel"
+        panel: "Panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Nom",
+        // [Auto-translated] "valueName"
+        valueName: "ValueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Nom"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Valeur calculée",
+        // [Auto-translated] "element"
+        default: "élément"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "L’enquête",
+        // [Auto-translated] "the {0}"
+        className: "le {0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Autres",
+        // [Auto-translated] "None"
+        none: "Aucun",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Refuse de répondre",
+        // [Auto-translated] "Don't know"
+        dontknow: "Je ne sais pas"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Ne tire jamais",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "Rejette toutes les réponses",
+        // [Auto-translated] "cannot validate"
+        default: "ne peut pas valider"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "La question ne contient aucune réponse pour valider",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "une longueur est lue à partir d’une valeur textuelle, et cette réponse n’a aucune",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "La réponse n’est pas un chiffre et ne pourra jamais l’être",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Un numéro ne correspond jamais à une adresse e-mail",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "La réponse n’est pas une liste de valeurs",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "La réponse n’est pas une valeur qu’il peut vérifier"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "un réseau",
+        // [Auto-translated] "an object"
+        object: "un objet"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "un tableau de valeurs sélectionnées",
+        // [Auto-translated] "a single value"
+        scalar: "une seule valeur",
+        // [Auto-translated] "a value"
+        default: "une valeur"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "ci-dessous",
+        // [Auto-translated] "above"
+        above: "ci-dessus"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "n’est jamais visible et ne reçoit jamais de valeur",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "ne sont jamais visibles et ne reçoivent jamais de valeur"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "question",
+        // [Auto-translated] "question or variable"
+        questionvalue: "question ou variable",
+        // [Auto-translated] "page"
+        page: "Page"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Lectures",
+        // [Auto-translated] "navigates to"
+        gotoName: "navigue vers",
+        // [Auto-translated] "sets"
+        default: "Ensembles"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Question sur le modèle",
+        // [Auto-translated] "column"
+        default: "Colonne"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Question sur le modèle",
+        // [Auto-translated] "column"
+        matrixdynamic: "Colonne",
+        // [Auto-translated] "item"
+        multipletext: "Item",
+        // [Auto-translated] "row"
+        matrix: "rangée",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "rangée",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Colonne",
+        // [Auto-translated] "field"
+        default: "Champ"
+      }
+    }
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
