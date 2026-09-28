@@ -162,6 +162,23 @@ test("LogicUI: do not reset editing and logic item isModified ", () => {
   logic.mode = "view";
   expect(item.isModified).toBeFalsy();
 });
+test("LogicUI: a rule with a constant on the left is not modified by opening it", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "1 < {q1}" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const item = logic.items[0];
+  logic.editItem(item);
+  expect(logic.expressionEditor.text, "#1").toEqual("1 < {q1}");
+  logic.mode = "view";
+  expect(item.isModified, "#2").toBeFalsy();
+  let leftUI = false;
+  logic.tryLeaveUI((res: boolean): void => { leftUI = res; });
+  expect(leftUI, "#3: nothing to save").toBeTruthy();
+});
 test("LogicUI: isModified for new item", () => {
   const survey = new SurveyModel({
     elements: [
