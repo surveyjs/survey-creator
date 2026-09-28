@@ -61,7 +61,7 @@ import {
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
-  CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
+  CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent, LintSurveyEvent,
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
   ElementGetExpandCollapseStateEventReason,
@@ -1780,6 +1780,28 @@ export class SurveyCreatorModel extends Base
    */
   public onActiveTabChanged: EventBase<SurveyCreatorModel, ActiveTabChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, ActiveTabChangedEvent>();
   /**
+   * An event that is raised before the [JSON Editor tab](/survey-creator/documentation/end-user-guide/user-interface#json-editor-tab) lints the survey JSON schema.
+   *
+   * Use this event to customize linter options, for example, disable individual rules, change their severity, or declare known variables and functions.
+   *
+   * For information on event handler parameters, refer to descriptions within the interface.
+   *
+   * The following code overrides individual [linting rules](/form-library/documentation/survey-json-validation#linter-rules) to report unknown properties as warnings and disable checks for unknown references:
+   *
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   *
+   * const creator = new SurveyCreatorModel();
+   * creator.onLintSurvey.add((_, options) => {
+   *   options.lintOptions.rules["property/unknown"] = "warning";
+   *   options.lintOptions.rules["reference/unknown"] = "off";
+   * });
+   * ```
+   *
+   * [Documentation: Survey JSON Validation](/form-library/documentation/survey-json-validation (linkStyle))
+   */
+  public onLintSurvey: EventBase<SurveyCreatorModel, LintSurveyEvent> = this.addCreatorEvent<SurveyCreatorModel, LintSurveyEvent>();
+  /**
    * Gets or sets the currently displayed tab.
    *
    * Accepted values:
@@ -2910,11 +2932,10 @@ export class SurveyCreatorModel extends Base
     } else {
       let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
       if (!trustJSON) {
-        const textWorker = new SurveyTextWorker(value);
+        // parse only: the text is applied whenever it is a JSON object, whatever the linter says
+        const textWorker = new SurveyTextWorker(value, { lint: false });
         if (textWorker.isJsonCorrect) {
           jsonValue = this.parseJSON(value);
-        } else if (!!textWorker.survey) {
-          jsonValue = textWorker.survey.toJSON();
         }
       }
       if (!!jsonValue) {
@@ -2947,12 +2968,16 @@ export class SurveyCreatorModel extends Base
     if (this.viewType != "json") {
       return new JsonObject().toJsonObject(this.survey);
     }
-    var surveyJsonText = this.text;
-    var textWorker = new SurveyTextWorker(surveyJsonText);
-    if (textWorker.isJsonCorrect) {
-      return new JsonObject().toJsonObject(textWorker.survey);
-    }
-    return null;
+    const textWorker = new SurveyTextWorker(this.text, { lint: false });
+    if (!textWorker.isJsonCorrect) return null;
+    // the text normalized the way the survey saves it - through a model in design mode, so
+    // that loading it runs no expressions and no choicesByUrl requests
+    const survey = new SurveyModel();
+    survey.setDesignMode(true);
+    survey.fromJSON(this.parseJSON(this.text));
+    const res = new JsonObject().toJsonObject(survey);
+    survey.dispose();
+    return res;
   }
 
   public getObjectDisplayName(
