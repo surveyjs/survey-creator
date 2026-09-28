@@ -12,7 +12,7 @@ import {
   Question,
   Serializer,
   DragOrClickHelper,
-  CssClassBuilder,
+  toCssClasses,
   HashTable,
   surveyLocalization,
   ComputedUpdater,
@@ -166,11 +166,11 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   public needDefaultSubitem: boolean = undefined;
   @property() isDisabledByRestriction: boolean;
   static getItemClassNames(iconName?: string): string {
-    return new CssClassBuilder()
-      .append("svc-toolbox__item")
-      .append("svc-toolbox__item--has-icon", !!iconName)
-      .append("svc-toolbox__item--" + iconName, !!iconName)
-      .toString();
+    return toCssClasses(
+      "svc-toolbox__item",
+      !!iconName && "svc-toolbox__item--has-icon",
+      !!iconName && "svc-toolbox__item--" + iconName
+    );
   }
   constructor(private item: IQuestionToolboxItem) {
     super(item);
@@ -179,16 +179,16 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     this.locStrsChanged();
     const originalCss = this.css;
     this.css = new ComputedUpdater(() => {
-      return new CssClassBuilder()
-        .append("svc-toolbox__tool")
-        .append("svc-toolbox__tool--action")
-        .append(originalCss)
-        .append("svc-toolbox__tool--pressed", this.isPressed)
-        .append("svc-toolbox__tool--has-icon", !!this.iconName)
-        .append("svc-toolbox__tool--has-subitems", !!(this.items?.length > 0))
-        .append("svc-toolbox__tool--disabled", this.enabled === false)
-        .append("sv-action--hidden", !this.isVisible)
-        .toString();
+      return toCssClasses(
+        "svc-toolbox__tool",
+        "svc-toolbox__tool--action",
+        originalCss,
+        this.isPressed && "svc-toolbox__tool--pressed",
+        !!this.iconName && "svc-toolbox__tool--has-icon",
+        this.items?.length > 0 && "svc-toolbox__tool--has-subitems",
+        this.enabled === false && "svc-toolbox__tool--disabled",
+        !this.isVisible && "sv-action--hidden"
+      );
     }) as any;
   }
   elementId?: string;
@@ -222,10 +222,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   className: string;
 
   public get renderedCss(): string {
-    return new CssClassBuilder()
-      .append("svc-toolbox__item")
-      .append(this.className)
-      .append("svc-toolbox__item--has-subitems", this.hasSubItems).toString();
+    return toCssClasses("svc-toolbox__item", this.className, this.hasSubItems && "svc-toolbox__item--has-subitems");
   }
   /**
    * An icon name.
@@ -336,7 +333,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
     const newItem: QuestionToolboxItem = new QuestionToolboxItem(subitem);
     newItem.iconName = "";
     if (!newItem.className) newItem.className = QuestionToolboxItem.getItemClassNames(newItem.iconName);
-    newItem.className = new CssClassBuilder().append(newItem.className).append("svc-toolbox__item-subtype").toString();
+    newItem.className = toCssClasses(newItem.className, "svc-toolbox__item-subtype");
     let array: Array<QuestionToolboxItem> = (this.items || []).slice();
     if (index === -1) {
       array.push(newItem);
@@ -636,10 +633,7 @@ export class QuestionToolbox
   private initDotsItem() {
     this.dotsItem.innerCss = "svc-toolbox__item svc-toolbox__item--dots sv-dots__item";
     this.dotsItem.css = new ComputedUpdater(() => {
-      return new CssClassBuilder()
-        .append("svc-toolbox__tool svc-toolbox__tool--dots")
-        .append("sv-action--hidden", !this.dotsItem.isVisible)
-        .toString();
+      return toCssClasses("svc-toolbox__tool svc-toolbox__tool--dots", !this.dotsItem.isVisible && "sv-action--hidden");
     }) as any;
 
     this.dotsItem.popupModel.horizontalPosition = "right";
@@ -711,16 +705,16 @@ export class QuestionToolbox
   public searchItem: IAction;
 
   public get classNames() {
-    return new CssClassBuilder()
-      .append("svc-toolbox")
-      .append("svc-toolbox--searchable", this.searchEnabled)
-      .append("svc-toolbox--no-separators", !this.showSeparators)
-      .append("svc-toolbox--flyout-to-compact-running", this.isFlyoutToCompactRunning)
-      .append("svc-toolbox--compact", this.isCompactRendered)
-      .append("svc-toolbox--flyout", this.isCompact && this.isFocused)
-      .append("svc-toolbox--scrollable", this.overflowBehavior == "scroll")
-      .append("svc-toolbox--disabled", !this.enabled)
-      .toString();
+    return toCssClasses(
+      "svc-toolbox",
+      this.searchEnabled && "svc-toolbox--searchable",
+      !this.showSeparators && "svc-toolbox--no-separators",
+      this.isFlyoutToCompactRunning && "svc-toolbox--flyout-to-compact-running",
+      this.isCompactRendered && "svc-toolbox--compact",
+      this.isCompact && this.isFocused && "svc-toolbox--flyout",
+      this.overflowBehavior == "scroll" && "svc-toolbox--scrollable",
+      !this.enabled && "svc-toolbox--disabled"
+    );
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {

@@ -1,4 +1,4 @@
-import { Base, CssClassBuilder, QuestionCommentModel, QuestionFactory, QuestionTextModel, Serializer, property } from "survey-core";
+import { Base, toCssClasses, QuestionCommentModel, QuestionFactory, QuestionTextModel, Serializer, property } from "survey-core";
 
 //Show the default property value as the placeholder. It is based on the edited object locale and doesn't depend on the creator locale.
 function getRenderedPlaceholder(question: QuestionTextModel | QuestionCommentModel): string {
@@ -45,15 +45,10 @@ export class QuestionTextWithResetModel extends QuestionTextModel {
     return getRenderedPlaceholder(this);
   }
   public getRootClass(): string {
-    return new CssClassBuilder()
-      .append(this.cssClasses.root)
-      .append(this.cssClasses.onError, this.errors.length > 0)
-      .toString();
+    return toCssClasses(this.cssClasses.root, this.errors.length > 0 && this.cssClasses.onError);
   }
   public getControlClass(): string {
-    return new CssClassBuilder()
-      .append(this.cssClasses.control)
-      .toString();
+    return toCssClasses(this.cssClasses.control);
   }
   public get wrappedQuestionTemplate() {
     return "text";
@@ -81,18 +76,15 @@ export class QuestionCommentWithResetModel extends QuestionCommentModel {
     return "textwithreset";
   }
   public getRootClass(): string {
-    return new CssClassBuilder()
-      .append(this.cssClasses.root)
-      .append(this.cssClasses.rootMultiline)
-      .append(this.cssClasses.onError, this.errors.length > 0)
-      .toString();
+    return toCssClasses(
+      this.cssClasses.root,
+      this.cssClasses.rootMultiline,
+      this.errors.length > 0 && this.cssClasses.onError
+    );
   }
 
   public getControlClass(): string {
-    return new CssClassBuilder()
-      .append(this.cssClasses.control)
-      .append(this.cssClasses.controlMultiline)
-      .toString();
+    return toCssClasses(this.cssClasses.control, this.cssClasses.controlMultiline);
   }
   public get wrappedQuestionTemplate() {
     return "comment";

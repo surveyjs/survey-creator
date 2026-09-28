@@ -8,7 +8,7 @@ import {
   ComputedUpdater,
   AnimationBoolean,
   IAnimationConsumer,
-  CssClassBuilder,
+  toCssClasses,
   QuestionPanelDynamicModel
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
@@ -537,6 +537,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.creator.deleteElement(this.surveyElement);
   }
   protected getCss(): string {
-    return new CssClassBuilder().append("svc-hovered svc-hovered-ready", this.isHovered).toString();
+    return toCssClasses(this.isHovered && "svc-hovered svc-hovered-ready");
   }
 }

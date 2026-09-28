@@ -1,5 +1,5 @@
 import { DomDocumentHelper } from "survey-core";
-import { CssClassBuilder, EventBase, Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
+import { toCssClasses, EventBase, Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
 
 export class QuestionFileEditorModel extends QuestionFileModel {
   protected loadedFilesValue: any;
@@ -105,7 +105,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     return !this.value || this.isInputReadOnly;
   }
   public getChooseButtonCss(): string {
-    return new CssClassBuilder().append(this.cssClasses.chooseButton).append(this.cssClasses.chooseButtonDisabled, this.isInputReadOnly).toString();
+    return toCssClasses(this.cssClasses.chooseButton, this.isInputReadOnly && this.cssClasses.chooseButtonDisabled);
   }
   public onKeyDown = (event: KeyboardEvent) => {
     if ((<HTMLElement>event.target).tagName === "INPUT") {

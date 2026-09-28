@@ -1,5 +1,5 @@
 
-import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, CssClassBuilder, ItemValue } from "survey-core";
+import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, toCssClasses, ItemValue } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { editorLocalization } from "../editorLocalization";
@@ -46,10 +46,10 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
   }
 
   public getChoiceCss(): string {
-    return new CssClassBuilder()
-      .append("svc-question__dropdown-choice")
-      .append("svc-question__dropdown-choice--collapsed", this.isCollapsed && this.needToCollapse)
-      .toString();
+    return toCssClasses(
+      "svc-question__dropdown-choice",
+      this.isCollapsed && this.needToCollapse && "svc-question__dropdown-choice--collapsed"
+    );
   }
 
   public getRenderedItems(): ItemValue[] {

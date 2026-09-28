@@ -7,7 +7,7 @@ import {
   settings,
   ItemValue,
   Base,
-  CssClassBuilder,
+  toCssClasses,
   MatrixDropdownColumn
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
@@ -107,10 +107,11 @@ export class QuestionRatingAdornerViewModel extends Base {
     return this.allowAdd && QuestionRatingAdornerViewModel.allowAddForElement(this.element, this.creator.maxRateValues);
   }
   public get addClassNames(): string {
-    return new CssClassBuilder()
-      .append("svc-item-value-controls__button")
-      .append("svc-item-value-controls__button--disabled", !this.enableAdd)
-      .append("svc-item-value-controls__add").toString();
+    return toCssClasses(
+      "svc-item-value-controls__button",
+      !this.enableAdd && "svc-item-value-controls__button--disabled",
+      "svc-item-value-controls__add"
+    );
   }
   public static allowRemoveForElement(element: QuestionRatingModel): boolean {
     return element.rateCount > 2;
@@ -128,10 +129,11 @@ export class QuestionRatingAdornerViewModel extends Base {
     return this.allowRemove && QuestionRatingAdornerViewModel.allowRemoveForElement(this.element);
   }
   public get removeClassNames(): string {
-    return new CssClassBuilder()
-      .append("svc-item-value-controls__button")
-      .append("svc-item-value-controls__button--disabled", !this.enableRemove)
-      .append("svc-item-value-controls__remove").toString();
+    return toCssClasses(
+      "svc-item-value-controls__button",
+      !this.enableRemove && "svc-item-value-controls__button--disabled",
+      "svc-item-value-controls__remove"
+    );
   }
 
   public get hasTopLabel(): boolean {
@@ -140,10 +142,11 @@ export class QuestionRatingAdornerViewModel extends Base {
             !!this.element.minRateDescription;
   }
   public get controlsClassNames(): string {
-    return new CssClassBuilder()
-      .append("svc-rating-question-controls")
-      .append("svc-item-value-controls")
-      .append("svc-rating-question-controls--labels-top", this.hasTopLabel).toString();
+    return toCssClasses(
+      "svc-rating-question-controls",
+      "svc-item-value-controls",
+      this.hasTopLabel && "svc-rating-question-controls--labels-top"
+    );
   }
   get addTooltip() {
     return getLocString("pe.addItem");

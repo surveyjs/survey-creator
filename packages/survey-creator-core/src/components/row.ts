@@ -3,7 +3,7 @@ import {
   SurveyTemplateRendererTemplateData,
   QuestionRowModel,
   property,
-  CssClassBuilder
+  toCssClasses
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import "./row.scss";
@@ -30,12 +30,12 @@ export class RowViewModel extends Base {
     this.row.setPropertyValue(SurveyElementAdornerBase.AdornerValueName, null);
   }
   public get cssClasses() {
-    return new CssClassBuilder()
-      .append("svc-row")
-      .append("svc-row--ghost", this.row.elements.length === 1 && this.row.elements[0].name === "sv-drag-drop-ghost-survey-element-name")
-      .append("svc-row--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
-      .append("svc-row--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
-      .toString();
+    return toCssClasses(
+      "svc-row",
+      this.row.elements.length === 1 && this.row.elements[0].name === "sv-drag-drop-ghost-survey-element-name" && "svc-row--ghost",
+      this.dropIndicatorPosition === DropIndicatorPosition.Top && "svc-row--drag-over-top",
+      this.dropIndicatorPosition === DropIndicatorPosition.Bottom && "svc-row--drag-over-bottom"
+    );
   }
   public dispose() {
     super.dispose();
