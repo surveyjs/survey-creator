@@ -862,6 +862,13 @@ test("Add apostrophes to string value", () => {
   panel.getQuestionByName("questionValue").value = ["item1", 1];
   expect(editor.text).toEqual("{question1} noneof ['item1', 1]");
 });
+test("a constant on the left keeps its place in the text the condition editor gives back", () => {
+  const survey = new SurveyModel({ elements: [{ name: "q1", type: "text" }, { name: "q2", type: "text" }] });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("q2"));
+  editor.text = "1 < {q1}";
+  expect(editor.panel.panels[0].getQuestionByName("operator").value, "the row reads question first").toEqual("greater");
+  expect(editor.text).toEqual("1 < {q1}");
+});
 test("Parse expressions", () => {
   var survey = new SurveyModel({
     elements: [
