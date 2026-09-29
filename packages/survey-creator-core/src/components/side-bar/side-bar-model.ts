@@ -1,4 +1,4 @@
-import { Base, property, Action, ComputedUpdater, propertyArray, AnimationBoolean, IAnimationConsumer, CssClassBuilder } from "survey-core";
+import { Base, property, Action, ComputedUpdater, propertyArray, AnimationBoolean, IAnimationConsumer, toCssClasses } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { SurveyCreatorModel } from "../../creator-base";
 import { SidebarPageModel } from "./side-bar-page-model";
@@ -35,14 +35,14 @@ export class SidebarModel extends Base {
 
   private rootElement: HTMLElement;
   public get rootCss(): string {
-    return new CssClassBuilder()
-      .append("svc-side-bar")
-      .append("svc-side-bar--flyout", this.flyoutPanelMode)
-      .append("svc-side-bar--narrow", this.narrowMode)
-      .append("svc-side-bar--mobile", this.creator.isMobileView)
-      .append("svc-side-bar--side-area", !!this.sideAreaComponentName)
-      .append("svc-side-bar--min-width", this.useMinWidth)
-      .toString();
+    return toCssClasses(
+      "svc-side-bar",
+      this.flyoutPanelMode && "svc-side-bar--flyout",
+      this.narrowMode && "svc-side-bar--narrow",
+      this.creator.isMobileView && "svc-side-bar--mobile",
+      !!this.sideAreaComponentName && "svc-side-bar--side-area",
+      this.useMinWidth && "svc-side-bar--min-width"
+    );
   }
   public get renderRoot(): boolean {
     return this.hasVisiblePages && (!this.creator.isMobileView || this.renderedIsVisible);

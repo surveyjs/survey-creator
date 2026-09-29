@@ -1,4 +1,4 @@
-import { Base, DragOrClickHelper, ActionContainer, ListModel, PopupModel, CssClassBuilder } from "survey-core";
+import { Base, DragOrClickHelper, ActionContainer, ListModel, PopupModel, toCssClasses } from "survey-core";
 import { IQuestionToolboxItem, QuestionToolbox, QuestionToolboxItem } from "../../toolbox";
 import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../dragdrop-survey-elements";
@@ -17,10 +17,7 @@ export class ToolboxToolViewModel extends Base {
       const popup = item.popupModel as PopupModel;
       if (!!popup) {
         const currentClasses = (popup.cssClass || "").split(" ");
-        const className = new CssClassBuilder()
-          .append(popup.cssClass)
-          .append("svc-toolbox-subtypes", currentClasses.indexOf("svc-toolbox-subtypes") < 0)
-          .toString();
+        const className = toCssClasses(popup.cssClass, currentClasses.indexOf("svc-toolbox-subtypes") < 0 && "svc-toolbox-subtypes");
 
         popup.cssClass = className;
         popup.isFocusedContainer = false;

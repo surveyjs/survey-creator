@@ -7,7 +7,7 @@ import {
   settings,
   ItemValue,
   Base,
-  CssClassBuilder,
+  toCssClasses,
   MatrixDropdownColumn,
   Action,
   ComputedUpdater,
@@ -187,10 +187,11 @@ export class QuestionRatingAdornerViewModel extends Base {
       !!this.element.minRateDescription;
   }
   public get controlsClassNames(): string {
-    return new CssClassBuilder()
-      .append("svc-rating-question-controls")
-      .append("svc-item-value-controls")
-      .append("svc-rating-question-controls--labels-top", this.hasTopLabel).toString();
+    return toCssClasses(
+      "svc-rating-question-controls",
+      "svc-item-value-controls",
+      this.hasTopLabel && "svc-rating-question-controls--labels-top"
+    );
   }
   get addTooltip() {
     return getLocString("pe.addItem");

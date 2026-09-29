@@ -1,4 +1,4 @@
-import { Action, ActionContainer, Base, CssClassBuilder, property, Serializer, SurveyModel } from "survey-core";
+import { Action, ActionContainer, Base, toCssClasses, property, Serializer, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getAcceptedTypesByContentMode } from "../../utils/utils";
 import "./logo-image.scss";
@@ -13,9 +13,7 @@ export class LogoImageViewModel extends Base {
     return !this.creator.readOnly && (!property.overridingProperty || !survey[property.overridingProperty]);
   }
   public get containerCss() {
-    return new CssClassBuilder()
-      .append("svc-logo-image-container")
-      .append("svc-logo-image-container--editable", this.allowEdit).toString();
+    return toCssClasses("svc-logo-image-container", this.allowEdit && "svc-logo-image-container--editable");
   }
   @property({ defaultValue: false }) isUploading;
   public get survey(): SurveyModel {

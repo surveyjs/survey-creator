@@ -13,7 +13,7 @@ import {
   DragOrClickHelper,
   QuestionSelectBase,
   createDropdownActionModel,
-  CssClassBuilder,
+  toCssClasses,
   QuestionPanelDynamicModel,
   ListModel,
   Helpers,
@@ -96,13 +96,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   rootCss() {
     const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
-    return new CssClassBuilder()
-      .append(super.getCss())
-      .append("svc-question__adorner")
-      .append("svc-question__adorner--selected", !!this.creator.isElementSelected(this.surveyElement))
-      .append("svc-question__adorner--collapsed", this.renderedCollapsed)
-      .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
-      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true).toString();
+    return toCssClasses(
+      super.getCss(),
+      "svc-question__adorner",
+      !!this.creator.isElementSelected(this.surveyElement) && "svc-question__adorner--selected",
+      this.renderedCollapsed && "svc-question__adorner--collapsed",
+      isStartWithNewLine && "svc-question__adorner--start-with-new-line",
+      "svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility
+    );
   }
 
   css() {
@@ -112,12 +113,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       // Non-interactive nested elements (e.g. a choice content panel) don't render the full
       // adorner chrome, but they still act as drop targets. Emit the drag-over classes so the
       // drop highlight appears when an element is dragged over them.
-      return new CssClassBuilder()
-        .append("svc-question__content--collapsed-drag-over-inside", isInsideCollapsed)
-        .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed)
-        .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
-        .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
-        .toString();
+      return toCssClasses(
+        isInsideCollapsed && "svc-question__content--collapsed-drag-over-inside",
+        this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed && "svc-question__content--drag-over-inside",
+        this.dropIndicatorPosition === DropIndicatorPosition.Top && "svc-question__content--drag-over-top",
+        this.dropIndicatorPosition === DropIndicatorPosition.Bottom && "svc-question__content--drag-over-bottom"
+      );
     }
 
     if (isInsideCollapsed) {
@@ -126,24 +127,24 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       this.dragOut();
     }
 
-    let result: string = new CssClassBuilder()
-      .append("svc-question__content")
-      .append("svc-question__content--composite-question", this.surveyElement instanceof QuestionCompositeModel)
-      .append("svc-question__content--" + this.surveyElement.getType(), typeof this.surveyElement.getType === "function")
-      .append("svc-question__content--selected", !!this.creator.isElementSelected(this.surveyElement))
-      .append("svc-question__content--empty", this.isEmptyElement)
-      .append("svc-question__content--empty-template", this.isEmptyTemplate)
-      .append("svc-question__content--collapsed", this.renderedCollapsed)
-      .append("svc-question__content--title-hidden", !this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden"))
-      .append("svc-question__content--title-bottom", !!(this.surveyElement as Question).hasTitleOnBottom)
-      .append("svc-question__content--dragged", this.isBeingDragged)
-      .append("svc-question__content--collapsed-drag-over-inside", isInsideCollapsed)
-      .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed)
-      .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
-      .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
-      .append("svc-question__content--drag-over-right", this.dropIndicatorPosition === DropIndicatorPosition.Right)
-      .append("svc-question__content--drag-over-left", this.dropIndicatorPosition === DropIndicatorPosition.Left)
-      .toString();
+    let result: string = toCssClasses(
+      "svc-question__content",
+      this.surveyElement instanceof QuestionCompositeModel && "svc-question__content--composite-question",
+      typeof this.surveyElement.getType === "function" && "svc-question__content--" + this.surveyElement.getType(),
+      !!this.creator.isElementSelected(this.surveyElement) && "svc-question__content--selected",
+      this.isEmptyElement && "svc-question__content--empty",
+      this.isEmptyTemplate && "svc-question__content--empty-template",
+      this.renderedCollapsed && "svc-question__content--collapsed",
+      (!this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden")) && "svc-question__content--title-hidden",
+      !!(this.surveyElement as Question).hasTitleOnBottom && "svc-question__content--title-bottom",
+      this.isBeingDragged && "svc-question__content--dragged",
+      isInsideCollapsed && "svc-question__content--collapsed-drag-over-inside",
+      this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed && "svc-question__content--drag-over-inside",
+      this.dropIndicatorPosition === DropIndicatorPosition.Top && "svc-question__content--drag-over-top",
+      this.dropIndicatorPosition === DropIndicatorPosition.Bottom && "svc-question__content--drag-over-bottom",
+      this.dropIndicatorPosition === DropIndicatorPosition.Right && "svc-question__content--drag-over-right",
+      this.dropIndicatorPosition === DropIndicatorPosition.Left && "svc-question__content--drag-over-left"
+    );
 
     if (!isInsideCollapsed && this.creator) {
       result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
@@ -199,11 +200,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
   }
   get cssCollapsedHiddenHeader(): string {
-    const css = new CssClassBuilder()
-      .append((this.element as PanelModel | Question).cssHeader)
-      .append("svc-element__header--hidden")
-      .append("svc-element__header--lazy", !this.needToRenderContent)
-      .toString();
+    const css = toCssClasses(
+      (this.element as PanelModel | Question).cssHeader,
+      "svc-element__header--hidden",
+      !this.needToRenderContent && "svc-element__header--lazy"
+    );
     return css;
   }
   get cssCollapsedHiddenTitle(): string {

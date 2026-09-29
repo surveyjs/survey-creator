@@ -5,7 +5,6 @@ import {
   MatrixDropdownRowModelBase,
   Action,
   property,
-  CssClassBuilder,
   PageModel,
   LocalizableString,
   ILocalizableOwner
