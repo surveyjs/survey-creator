@@ -1,4 +1,4 @@
-import { Action, CssClassBuilder, property } from "survey-core";
+import { Action, toCssClasses, property } from "survey-core";
 
 import "./switcher.scss";
 
@@ -6,10 +6,7 @@ export class Switcher extends Action {
   @property() checked: boolean;
 
   public getSwitcherIconCss(): string {
-    return new CssClassBuilder()
-      .append("svc-switcher__icon")
-      .append("svc-switcher__icon--checked", this.checked)
-      .toString();
+    return toCssClasses("svc-switcher__icon", this.checked && "svc-switcher__icon--checked");
   }
 
   public getActionBarItemCss(): string {

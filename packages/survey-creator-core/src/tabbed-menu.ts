@@ -1,4 +1,4 @@
-import { Action, AdaptiveActionContainer, CssClassBuilder, IAction, property, UpdateResponsivenessMode } from "survey-core";
+import { Action, AdaptiveActionContainer, toCssClasses, IAction, property, UpdateResponsivenessMode } from "survey-core";
 import { CreatorBase } from "./creator-base";
 import { ICreatorPlugin } from "./creator-settings";
 import { listComponentCss } from "./components/list-theme";
@@ -28,20 +28,18 @@ export class TabbedMenuItem extends Action implements ITabbedMenuItem {
   componentContent: string;
   renderTab?: () => any;
   getRootCss(): string {
-    return new CssClassBuilder()
-      .append("svc-tabbed-menu-item")
-      .append("svc-tabbed-menu-item--selected", this.active)
-      .append("svc-tabbed-menu-item--disabled", this.enabled !== undefined && !this.enabled)
-      .append("svc-tabbed-menu-item--icon", this.hasIcon)
-      .toString();
+    return toCssClasses(
+      "svc-tabbed-menu-item",
+      this.active && "svc-tabbed-menu-item--selected",
+      this.enabled !== undefined && !this.enabled && "svc-tabbed-menu-item--disabled",
+      this.hasIcon && "svc-tabbed-menu-item--icon"
+    );
   }
   getTitleCss(): string {
-    return new CssClassBuilder()
-      .append("svc-tabbed-menu-item__text")
-      .toString();
+    return "svc-tabbed-menu-item__text";
   }
   getIconCss(): string {
-    return new CssClassBuilder().append("svc-tabbed-menu-item__icon").toString();
+    return "svc-tabbed-menu-item__icon";
   }
   public get canShrink() {
     return !!this.hasIcon;

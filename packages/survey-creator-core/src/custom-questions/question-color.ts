@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
+import { Action, ComputedUpdater, toCssClasses, IAction, IsTouch, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/color-utils";
 import { listComponentCss } from "../components/list-theme";
 
@@ -76,11 +76,11 @@ export class QuestionColorModel extends QuestionTextModel {
     return this._renderedValue.toUpperCase();
   }
   public getSwatchCss() {
-    return new CssClassBuilder()
-      .append(this.cssClasses.swatch)
-      .append(this.cssClasses.swatchDefault, !this.renderedValue)
-      .append(this.cssClasses.swatchDisabled, this.isInputReadOnly)
-      .toString();
+    return toCssClasses(
+      this.cssClasses.swatch,
+      !this.renderedValue && this.cssClasses.swatchDefault,
+      this.isInputReadOnly && this.cssClasses.swatchDisabled
+    );
   }
   public getSwatchStyle(): {[index: string]: string} {
     return { backgroundColor: this.renderedValue };

@@ -5,7 +5,7 @@ import {
   MatrixDropdownRowModelBase,
   Action,
   property,
-  CssClassBuilder
+  toCssClasses
 } from "survey-core";
 
 export function findAction(actions: Array<IAction>, id: string): IAction {
@@ -69,12 +69,12 @@ export class MenuButton extends Action {
   @property({ defaultValue: "icon" }) contentType: "icon" | "text-description-vertical";
 
   public get buttonClassName(): string {
-    return new CssClassBuilder()
-      .append("svc-menu-action__button")
-      .append("svc-menu-action__button--with-subtitle", this.contentType === "text-description-vertical")
-      .append("svc-menu-action__button--disabled", this.disabled)
-      .append("svc-menu-action__button--pressed", this.pressed)
-      .append("svc-menu-action__button--selected", !!this.active)
-      .toString();
+    return toCssClasses(
+      "svc-menu-action__button",
+      this.contentType === "text-description-vertical" && "svc-menu-action__button--with-subtitle",
+      this.disabled && "svc-menu-action__button--disabled",
+      this.pressed && "svc-menu-action__button--pressed",
+      !!this.active && "svc-menu-action__button--selected"
+    );
   }
 }

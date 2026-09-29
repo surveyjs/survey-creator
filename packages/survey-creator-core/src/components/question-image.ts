@@ -1,5 +1,5 @@
 
-import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder, classesToSelector } from "survey-core";
+import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, toCssClasses, classesToSelector } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -115,8 +115,6 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
 
   }
   public css() {
-    return new CssClassBuilder()
-      .append(super.css())
-      .append("svc-question__content--loading", this.isUploading).toString();
+    return toCssClasses(super.css(), this.isUploading && "svc-question__content--loading");
   }
 }

@@ -1,4 +1,4 @@
-import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
+import { Base, toCssClasses, property, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 
 import "./simulator.scss";
@@ -230,12 +230,12 @@ export class SurveySimulatorModel extends Base {
     };
   }
   public getRootCss(): string {
-    return new CssClassBuilder()
-      .append("svd-simulator-main")
-      .append("svd-simulator-main--frame", this.hasFrame)
-      .append("svd-simulator-main--desktop", this.device === "desktop")
-      .append("svd-simulator-main--running", this.isRunning)
-      .toString();
+    return toCssClasses(
+      "svd-simulator-main",
+      this.hasFrame && "svd-simulator-main--frame",
+      this.device === "desktop" && "svd-simulator-main--desktop",
+      this.isRunning && "svd-simulator-main--running"
+    );
   }
 }
 
