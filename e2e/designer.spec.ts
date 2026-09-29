@@ -76,7 +76,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.evaluate(() => {
       (window as any).creator.animationEnabled = true;
-      (window as any).Survey.settings.respectReducedMotion = false;
+      (window as any).Survey.settings.animation.respectReducedMotion = false;
     });
     await setJSON(page, {
       "pages": [
