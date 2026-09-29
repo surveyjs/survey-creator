@@ -188,7 +188,7 @@ test.describe(title, () => {
     };
     await page.evaluate(() => {
       window["creator"].animationEnabled = true;
-      window["Survey"].settings.respectReducedMotion = false;
+      window["Survey"].settings.animation.respectReducedMotion = false;
     });
     await setJSON(page, json);
     await page.setViewportSize({ width: 1600, height: 600 });

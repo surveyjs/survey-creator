@@ -89,7 +89,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  settings.respectReducedMotion = true;
+  settings.animation.respectReducedMotion = true;
   if (typeof (globalThis as any).__setMatchMedia === "function") {
     (globalThis as any).__setMatchMedia(reducedMotionMediaQuery, false);
   }

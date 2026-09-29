@@ -9,7 +9,7 @@ async function enableCreatorAnimations(page: Page, respectReducedMotion: boolean
     const settings = (window as any).Survey.settings;
     creator.animationEnabled = true;
     settings.animationEnabled = true;
-    settings.respectReducedMotion = respect;
+    settings.animation.respectReducedMotion = respect;
   }, respectReducedMotion);
 }
 
