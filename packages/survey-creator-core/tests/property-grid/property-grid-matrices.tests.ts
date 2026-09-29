@@ -811,3 +811,36 @@ test("choices options.minChoices, Bug#7374, Bug#7375", () => {
   expect(isRowHasRemoveButton(0)).toBe(true);
   expect(isRowHasRemoveButton(2)).toBe(true);
 });
+
+function showDetailAndGetDetailRow(matrix: QuestionMatrixDynamicModel) {
+  const renderedRow = matrix.renderedTable.rows[0];
+  const container = <ActionContainer>renderedRow.cells[renderedRow.cells.length - 1].item.value;
+  container.getActionById("show-detail").action();
+  const detailRows = matrix.renderedTable.rows.filter(r => r.isDetailRow);
+  expect(detailRows).toHaveLength(1);
+  return { rowColSpans: renderedRow.cells.reduce((sum, cell) => sum + cell.colSpans, 0), detailRow: detailRows[0] };
+}
+test("Validators property editor: the detail row renders the detail panel, #8029", () => {
+  const question = new QuestionCheckboxModel("q1");
+  question.fromJSON({ validators: [{ type: "answercount", maxCount: 3 }] });
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("validators");
+  expect(matrix.allowRowReorder).toBe(false);
+  const { rowColSpans, detailRow } = showDetailAndGetDetailRow(matrix);
+  const row = matrix.visibleRows[0];
+  expect(row.detailPanel.getQuestionByName("maxCount").value).toBe(3);
+  expect(detailRow.cells).toHaveLength(1);
+  expect(detailRow.cells[0].panel).toBe(row.detailPanel);
+  expect(detailRow.cells[0].colSpans).toBe(rowColSpans);
+});
+test("Choices property editor: the detail row renders the detail panel, #8029", () => {
+  const question = new QuestionCheckboxModel("q1");
+  question.choices = [1, 2];
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  expect(matrix.allowRowReorder).toBe(true);
+  const { rowColSpans, detailRow } = showDetailAndGetDetailRow(matrix);
+  expect(detailRow.cells).toHaveLength(1);
+  expect(detailRow.cells[0].panel).toBe(matrix.visibleRows[0].detailPanel);
+  expect(detailRow.cells[0].colSpans).toBe(rowColSpans);
+});

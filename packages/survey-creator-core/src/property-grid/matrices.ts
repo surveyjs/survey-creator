@@ -305,8 +305,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     matrix.onCreateDetailPanelRenderedRowCallback = (
       renderedRow: QuestionMatrixDropdownRenderedRow
     ) => {
-      renderedRow.cells = [renderedRow.cells[1]];
-      renderedRow.cells[0].colSpans += 2;
+      // survey-core adds the empty leading cell only when rows have start actions (e.g. the drag handle),
+      // so the panel cell's index varies: find it and let it span the whole row
+      const panelCell = renderedRow.cells.filter(cell => cell.hasPanel)[0];
+      if (!panelCell) return;
+      panelCell.colSpans = renderedRow.cells.reduce((sum, cell) => sum + cell.colSpans, 0);
+      renderedRow.cells = [panelCell];
     };
     const q: any = matrix;
     matrix.onCreateDetailPanelCallback = (
