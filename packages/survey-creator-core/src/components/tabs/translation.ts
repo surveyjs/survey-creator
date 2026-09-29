@@ -4,7 +4,7 @@ import {
   ComputedUpdater, createDropdownActionModel, QuestionMatrixDynamicModel,
   QuestionMatrixDropdownModel,
   PopupBaseViewModel, IDialogOptions, settings as surveySettings,
-  CssClassBuilder,
+  toCssClasses,
   createPopupModelWithListModel,
   MatrixDynamicRowModel
 } from "survey-core";
@@ -689,10 +689,10 @@ export class TranslationEditor {
       action.enabled = this.fromLocales.length > 0;
       action.iconName = action.enabled ? "icon-chevron_16x16" : undefined;
       action.iconSize = "auto";
-      action.data.containerCss = new CssClassBuilder()
-        .append("st-translation-machine-from__container")
-        .append("st-translation-machine-from__container--disabled", !action.enabled)
-        .toString();
+      action.data.containerCss = toCssClasses(
+        "st-translation-machine-from__container",
+        !action.enabled && "st-translation-machine-from__container--disabled"
+      );
       const listModel = action.popupModel && action.popupModel.contentComponentData && action.popupModel.contentComponentData.model;
       if (!!listModel) {
         listModel.setItems(this.getFromLocaleItems());

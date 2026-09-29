@@ -1,4 +1,4 @@
-import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, LocalizableString, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, toCssClasses, IAction, IsTouch, ItemValue, ListModel, LocalizableString, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/color-utils";
 
 const DEFAULT_COLOR: string = "#000000";
@@ -76,10 +76,7 @@ export class QuestionColorModel extends QuestionTextModel {
     return this._renderedValue.toUpperCase();
   }
   public getSwatchCss() {
-    return new CssClassBuilder()
-      .append(this.cssClasses.swatch)
-      .append(this.cssClasses.swatchDisabled, this.isInputReadOnly)
-      .toString();
+    return toCssClasses(this.cssClasses.swatch, this.isInputReadOnly && this.cssClasses.swatchDisabled);
   }
   public getSwatchStyle(): { [index: string]: string } {
     return { backgroundColor: this.renderedValue };

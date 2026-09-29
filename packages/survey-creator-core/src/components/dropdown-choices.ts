@@ -1,4 +1,4 @@
-import { Action, Base, ComputedUpdater, CssClassBuilder, ItemValue, QuestionSelectBase } from "survey-core";
+import { Action, Base, ComputedUpdater, toCssClasses, ItemValue, QuestionSelectBase } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 
 // The state a flattened choice list renders from. The designer adorner keeps the collapsed flag in
@@ -45,10 +45,7 @@ export class DropdownChoicesViewModel extends Base {
       this.question.renderedChoices;
   }
   public getChoiceCss(): string {
-    return new CssClassBuilder()
-      .append("svc-question__dropdown-choice")
-      .append("svc-question__dropdown-choice--collapsed", this.isCollapseView)
-      .toString();
+    return toCssClasses("svc-question__dropdown-choice", this.isCollapseView && "svc-question__dropdown-choice--collapsed");
   }
   public getButtonText(): string {
     return editorLocalization.getString(this.isCollapseView ? "ed.showMoreChoices" : "ed.showLessChoices");

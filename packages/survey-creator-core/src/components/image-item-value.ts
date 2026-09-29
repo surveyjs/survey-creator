@@ -1,4 +1,4 @@
-import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, toCssClasses, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -15,13 +15,14 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   }
 
   getRootCss() {
-    return new CssClassBuilder()
-      .append("svc-image-item-value-wrapper")
-      .append("svc-image-item-value")
-      .append("svc-image-item-value--new", this.isNew || this.isUploading)
-      .append("svc-image-item-value-wrapper--ghost", this.isDragDropGhost)
-      .append("svc-image-item-value--file-dragging", this.isFileDragging)
-      .append("svc-image-item-value--single", this.getIsNewItemSingle()).toString();
+    return toCssClasses(
+      "svc-image-item-value-wrapper",
+      "svc-image-item-value",
+      (this.isNew || this.isUploading) && "svc-image-item-value--new",
+      this.isDragDropGhost && "svc-image-item-value-wrapper--ghost",
+      this.isFileDragging && "svc-image-item-value--file-dragging",
+      this.getIsNewItemSingle() && "svc-image-item-value--single"
+    );
   }
 
   public getIsNewItemSingle() {

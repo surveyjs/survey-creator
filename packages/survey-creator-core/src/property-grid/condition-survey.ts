@@ -191,6 +191,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               visible: false
             },
             {
+              // The row came from "1 < {q1}": the text keeps the value on the left.
+              name: "isValueFirst",
+              type: "boolean",
+              visible: false
+            },
+            {
               name: "placeholder",
               type: "html",
               visible: false,
@@ -381,6 +387,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private setItemToPanel(item: ConditionEditorItem, panel: PanelModel) {
     this.isSettingPanelValues = true;
     panel.getQuestionByName("conjunction").value = item.conjunction;
+    panel.getQuestionByName("isValueFirst").value = item.isValueFirst;
     this.setupConditionOperator(item, panel);
     this.setupConditionQuestionName(item, panel);
     if (!!panel.getQuestionByName("questionValue")) {
@@ -420,6 +427,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     item.conjunction = panel.getQuestionByName("conjunction").value;
     item.questionName = this.getQuestionNameFromPanel(panel.getQuestionByName("questionName").value);
     item.operator = panel.getQuestionByName("operator").value;
+    item.isValueFirst = !!panel.getQuestionByName("isValueFirst").value;
     if (!!panel.getQuestionByName("questionValue")) {
       item.value = panel.getQuestionByName("questionValue").value;
       this.updateSurveyVariable(item);

@@ -862,6 +862,29 @@ test("Add apostrophes to string value", () => {
   panel.getQuestionByName("questionValue").value = ["item1", 1];
   expect(editor.text).toEqual("{question1} noneof ['item1', 1]");
 });
+test("a constant on the left keeps its place in the text the condition editor gives back", () => {
+  const survey = new SurveyModel({ elements: [{ name: "q1", type: "text" }, { name: "q2", type: "text" }] });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("q2"));
+  editor.text = "1 < {q1}";
+  expect(editor.panel.panels[0].getQuestionByName("operator").value, "the row reads question first").toEqual("greater");
+  expect(editor.text).toEqual("1 < {q1}");
+});
+test("opening a constant-on-the-left condition does not modify it", () => {
+  const survey = new SurveyModel({ elements: [{ name: "q1", type: "text" }, { name: "q2", type: "text" }] });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("q2"));
+  editor.text = "1 < {q1}";
+  expect(editor.isModified("1 < {q1}"), "#1").toBe(false);
+  editor.panel.panels[0].getQuestionByName("questionValue").value = 5;
+  expect(editor.text, "#2").toEqual("5 < {q1}");
+  expect(editor.isModified("1 < {q1}"), "#3").toBe(true);
+});
+test("an operator with no mirror puts the question of a constant-on-the-left condition first", () => {
+  const survey = new SurveyModel({ elements: [{ name: "q1", type: "text" }, { name: "q2", type: "text" }] });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("q2"));
+  editor.text = "'a' = {q1}";
+  editor.panel.panels[0].getQuestionByName("operator").value = "contains";
+  expect(editor.text).toEqual("{q1} contains 'a'");
+});
 test("Parse expressions", () => {
   var survey = new SurveyModel({
     elements: [
