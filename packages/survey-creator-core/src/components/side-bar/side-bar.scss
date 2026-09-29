@@ -270,13 +270,6 @@ $tabs-width: calc(var(--sjs2-typography-line-height-default) + var(--sjs2-spacin
   }
 }
 
-.svc-creator--disable-animations {
-  .svc-side-bar--leave,
-  .svc-side-bar--enter {
-    animation: none;
-  }
-}
-
 .sv-action--object-selector {
   max-width: 70%;
 

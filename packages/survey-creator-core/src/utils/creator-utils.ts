@@ -1,4 +1,4 @@
-import { defaultCss, IAction, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
+import { defaultCss, getScrollBehavior, IAction, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
 import { copyCssClasses } from "./utils";
 
 const opositeValues = {
@@ -122,7 +122,7 @@ export function scrollElementIntoView(elementId: string, surveyRootElement: HTML
     el = root.getElementById(elementId);
   }
   if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "center", inline: "start" });
+  el.scrollIntoView({ behavior: getScrollBehavior(), block: "center", inline: "start" });
 }
 
 export function assignDefaultClasses(destination: any, questionType: string) {

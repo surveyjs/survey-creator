@@ -140,14 +140,6 @@
   }
 }
 
-.svc-creator--disable-animations {
-  .svc-string-editor:hover:not(.svc-string-editor--readonly):not(:focus-within) {
-    .svc-string-editor__border--hover {
-      transition-delay: 0ms;
-    }
-  }
-}
-
 .svc-string-editor:focus-within {
   .svc-string-editor__border--focus {
     opacity: var(--sjs2-opacity-visible);

@@ -230,13 +230,6 @@ svc-question {
   }
 }
 
-.svc-creator--disable-animations {
-  .svc-question--enter,
-  .svc-question--leave {
-    animation: none;
-  }
-}
-
 .svc-question__content:not(.svc-question__content--composite-question) {
   .sd-question:not(.sd-question--paneldynamic) {
     .sd-panel__content {
@@ -410,11 +403,6 @@ svc-question {
       &.svc-question--enter {
         animation-name: fadeIn, moveInWithOverflow;
       }
-    }
-  }
-  &.svc-creator--disable-animations {
-    .svc-question--enter {
-      animation: none;
     }
   }
 }

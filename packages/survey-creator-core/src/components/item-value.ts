@@ -13,7 +13,7 @@ import {
   ComputedUpdater,
   AnimationBoolean,
   ChoiceItem,
-  settings,
+  isAnimationEnabled,
   prepareElementForVerticalAnimation,
   cleanHtmlElementAfterAnimation
 } from "survey-core";
@@ -397,7 +397,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
           return this.question.getWrapperElement()?.querySelector(`#${this.item.panel.id}`).parentElement.parentElement as HTMLElement;
         },
         isAnimationEnabled: () => {
-          return settings.animationEnabled && this.creator.animationAllowed;
+          return isAnimationEnabled() && this.creator.animationAllowed;
         },
         getRerenderEvent: () => {
           return this.onElementRerendered;
