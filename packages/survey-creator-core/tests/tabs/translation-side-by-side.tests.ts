@@ -160,6 +160,31 @@ test("renderers: target getRendererForString is 'svc-string-editor', source is u
   expect(model.targetSurvey.getRendererForString(targetQuestion, "title", undefined)).toBe("svc-string-editor");
 });
 
+test("renderers: onSurveyInstanceCreated handlers override the string renderers of the panes", () => {
+  const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+  const areas: Array<string> = [];
+  creator.onSurveyInstanceCreated.add((_, options) => {
+    if (options.area === "translation-tab:target-survey") {
+      areas.push(options.area);
+      options.survey.getRendererForString = (): string => "custom-target-editor";
+      options.survey.getRendererContextForString = (): any => "custom-target-context";
+    }
+    if (options.area === "translation-tab:source-survey") {
+      areas.push(options.area);
+      options.survey.getRendererForString = (): string => "custom-source-renderer";
+    }
+  });
+  creator.JSON = JSON.parse(JSON.stringify(sideBySideJSON));
+  creator.activeTab = "translation";
+  const model = getModel(creator);
+  expect(areas).toEqual(["translation-tab:source-survey", "translation-tab:target-survey"]);
+  const srcQuestion = model.sourceSurvey.getQuestionByName("q1");
+  const targetQuestion = model.targetSurvey.getQuestionByName("q1");
+  expect(model.sourceSurvey.getRendererForString(srcQuestion, "title", undefined)).toBe("custom-source-renderer");
+  expect(model.targetSurvey.getRendererForString(targetQuestion, "title", undefined)).toBe("custom-target-editor");
+  expect(model.targetSurvey.getRendererContextForString(targetQuestion, targetQuestion.locTitle, undefined)).toBe("custom-target-context");
+});
+
 test("editing target copy writes target locale into creator.survey", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
