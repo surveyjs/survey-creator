@@ -773,9 +773,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (!!this.model.survey) {
       if (isThemeEmpty(theme)) {
         const preferredTheme = findSuitableTheme(undefined, this.creator.preferredColorPalette, undefined, undefined);
-        this.model.survey.applyTheme(preferredTheme || this.themeModel.toJSON());
+        this.model.survey.applyThemeCore(preferredTheme || this.themeModel.toJSON(), false);
       } else {
-        this.model.survey.applyTheme(theme);
+        this.model.survey.applyThemeCore(theme, false);
       }
     }
   }

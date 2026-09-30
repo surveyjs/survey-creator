@@ -185,7 +185,6 @@ test("Theme builder: survey settings", (): any => {
   expect(simulatorSurvey.backgroundImage).toBeFalsy();
   expect(simulatorSurvey.backgroundImageFit).toEqual("cover");
   expect(simulatorSurvey.backgroundOpacity).toEqual(1);
-  expect(simulatorSurvey["isCompact"]).toBe(false);
 
   themeModel.backgroundImage = "image-url";
   themeModel.backgroundImageFit = "auto";
@@ -195,7 +194,6 @@ test("Theme builder: survey settings", (): any => {
   expect(simulatorSurvey.backgroundImage).toEqual("image-url");
   expect(simulatorSurvey.backgroundImageFit).toEqual("auto");
   expect(simulatorSurvey.backgroundOpacity).toEqual(0.6);
-  expect(simulatorSurvey["isCompact"]).toBe(true);
 });
 
 test("Theme builder: composite question values are lost", (): any => {
