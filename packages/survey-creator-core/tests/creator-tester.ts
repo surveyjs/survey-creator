@@ -14,6 +14,8 @@ export class CreatorTester extends SurveyCreatorModel {
     this.locale = "";
     this.autoSaveDelay = 0;
     this.onSurveyInstanceCreated.add((creator, options) => {
+      // The side-by-side translation panes are tested with their own string renderers.
+      if (options.area === "translation-tab:source-survey" || options.area === "translation-tab:target-survey") return;
       options.survey.getRendererForString = (element: Base, name: string): any => {
         if (!this.readOnly && isStringEditable(element, name)) {
           return "editableStringRendererName";
