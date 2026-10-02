@@ -628,7 +628,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ]
   },
   "matrixdropdowncolumn@comment": {
-    properties: ["rows", "placeholder ", "maxLength"]
+    properties: ["rows", "placeholder", "maxLength"]
   },
   "matrixdropdowncolumn@boolean": {
     properties: [

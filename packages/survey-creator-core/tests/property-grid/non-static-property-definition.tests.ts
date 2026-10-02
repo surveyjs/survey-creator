@@ -428,3 +428,10 @@ test("Specialized column: no type specific definitions, Bug#8001", () => {
     { name: "logic", elements: ["visibleIf"] }
   ]);
 });
+test("Show placeholder property for a comment column", () => {
+  const matrix = new QuestionMatrixDynamicModel("q1");
+  const column = matrix.addColumn("col1");
+  column.cellType = "comment";
+  const propertyGrid = new PropertyGridModelTester(column);
+  expect(propertyGrid.survey.getQuestionByName("placeholder")).toBeTruthy();
+});
