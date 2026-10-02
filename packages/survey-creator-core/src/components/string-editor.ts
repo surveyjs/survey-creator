@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, toCssClasses } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, toCssClasses } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
