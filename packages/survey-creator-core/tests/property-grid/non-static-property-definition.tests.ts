@@ -227,3 +227,10 @@ test("Incorrect order in general tab with preset indeces", () => {
   expect(generalQuestions[3].name).toBe("inputType");
   expect(generalQuestions[4].name).toBe("maxLength");
 });
+test("Show placeholder property for a comment column", () => {
+  const matrix = new QuestionMatrixDynamicModel("q1");
+  const column = matrix.addColumn("col1");
+  column.cellType = "comment";
+  const propertyGrid = new PropertyGridModelTester(column);
+  expect(propertyGrid.survey.getQuestionByName("placeholder")).toBeTruthy();
+});
