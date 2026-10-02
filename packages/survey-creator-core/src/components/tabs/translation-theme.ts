@@ -314,5 +314,8 @@ export var translationCss = {
       buttonExpanded: "",
       buttonCollapsed: ""
     }
-  }
+  },
+  variables: {
+    mobileWidth: "",
+  },
 };
