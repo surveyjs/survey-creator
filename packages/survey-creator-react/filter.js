@@ -1,0 +1,218 @@
+// Filter control prototype (#11890) inside Survey Creator - the same survey as survey-react-ui's
+// filter.html. The products of the public OData Northwind service reach the matrix through a data
+// source with readRange, so the filter, the sort and the page all run on the server: the filter arrives
+// as a survey expression and is translated into $filter here. A data source is not part of the JSON,
+// and every tab builds a survey of its own, so it is attached to each Preview and Themes survey as
+// Creator creates it; the designer surface reads no data. Two buttons in Creator's toolbar keep that
+// survey's uiState (the filter's preset, search and edits) in localStorage across reloads.
+var ODATA = "https://services.odata.org/V4/Northwind/Northwind.svc/";
+// Record field -> OData property. The record is flat; Category is a navigation property.
+var fieldMap = { name: "ProductName", category: "Category/CategoryName", quantity: "QuantityPerUnit",
+  price: "UnitPrice", stock: "UnitsInStock", discontinued: "Discontinued" };
+var comparisons = { equal: "eq", notequal: "ne", greater: "gt", less: "lt", greaterorequal: "ge", lessorequal: "le" };
+
+function odataLiteral(value) {
+  if (value === null || value === undefined) return "null";
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+  return "'" + String(value).replace(/'/g, "''") + "'";
+}
+function untranslatable(op) {
+  throw new Error("No OData for: " + (!!op ? op.toString() : "a missing operand"));
+}
+// The right side of a comparison must be a value: a field, an arithmetic or a function there reads
+// as a value too (its name, or null) and would filter by something nobody asked for.
+function constValue(op) {
+  if (!op || op.getType() !== "const") untranslatable(op);
+  return op.correctValue;
+}
+function odataField(op) {
+  if (op.getType() !== "variable" || !fieldMap[op.variable]) untranslatable(op);
+  return fieldMap[op.variable];
+}
+function constValues(op) {
+  return !!op && op.getType() === "array" ? op.values.map(constValue) : [constValue(op)];
+}
+// Every node the filter control composes has an OData form here; anything else is refused, so a
+// filter is never silently narrowed to the part that happened to translate.
+function toOData(op) {
+  var type = op.getType();
+  if (type === "binary") {
+    var name = op.operator;
+    if (name === "and" || name === "or") {
+      return "(" + toOData(op.leftOperand) + " " + name + " " + toOData(op.rightOperand) + ")";
+    }
+    var field = odataField(op.leftOperand);
+    if (comparisons[name]) return field + " " + comparisons[name] + " " + odataLiteral(constValue(op.rightOperand));
+    if (name === "contains" || name === "notcontains") {
+      // OData contains() is case-sensitive, a survey expression's is not.
+      var text = "contains(tolower(" + field + "), " + odataLiteral(String(constValue(op.rightOperand)).toLowerCase()) + ")";
+      return name === "contains" ? text : "not " + text;
+    }
+    if (name === "anyof" || name === "noneof") {
+      // Northwind has no "in": a set is a chain of eq.
+      var anyOf = "(" + constValues(op.rightOperand).map(function (v) { return field + " eq " + odataLiteral(v); }).join(" or ") + ")";
+      return name === "anyof" ? anyOf : "not " + anyOf;
+    }
+  }
+  // The quick search composes a bare "false" when no field can match what was typed.
+  if (type === "const" && typeof op.correctValue === "boolean") return String(op.correctValue);
+  if (type === "unary") {
+    if (op.operator === "empty") return odataField(op.expression) + " eq null";
+    if (op.operator === "notempty") return odataField(op.expression) + " ne null";
+    if (op.operator === "negate") return "not (" + toOData(op.expression) + ")";
+  }
+  untranslatable(op);
+}
+window.filterToOData = function (expression) {
+  var operand = new Survey.ConditionsParser().parseExpression(expression);
+  if (!operand) throw new Error("Not a survey expression: " + expression);
+  return toOData(operand);
+};
+
+function toRecord(p) {
+  return { id: p.ProductID, name: p.ProductName, category: p.Category ? p.Category.CategoryName : null,
+    quantity: p.QuantityPerUnit, price: p.UnitPrice, stock: p.UnitsInStock, discontinued: p.Discontinued };
+}
+function readJson(url) {
+  return fetch(url).then(function (res) {
+    if (!res.ok) throw new Error("OData " + res.status + " " + res.statusText);
+    return res.json();
+  });
+}
+var productsSource = {
+  keyField: "id",
+  // Required by the contract; with readRange the list never calls it.
+  read: function () {
+    return productsSource.readRange({ skip: 0, take: 0, filter: "", sort: [] }).then(function (r) { return r.records; });
+  },
+  readRange: function (request) {
+    try {
+      var params = ["$count=true", "$expand=Category($select=CategoryName)",
+        "$select=ProductID,ProductName,QuantityPerUnit,UnitPrice,UnitsInStock,Discontinued"];
+      if (!!request.filter) {
+        params.push("$filter=" + encodeURIComponent(window.filterToOData(request.filter)));
+      }
+      if (request.sort.length > 0) {
+        params.push("$orderby=" + encodeURIComponent(request.sort.map(function (s) { return fieldMap[s.field] + " " + s.direction; }).join(",")));
+      }
+      if (request.skip > 0) params.push("$skip=" + request.skip);
+      if (request.take > 0) params.push("$top=" + request.take);
+      var url = ODATA + "Products?" + params.join("&");
+      console.log("odata", JSON.stringify(request.filter), "->", decodeURIComponent(url));
+      return readJson(url).then(function (data) {
+        showDataError("");
+        return { total: data["@odata.count"], records: data.value.map(toRecord) };
+      });
+    } catch (e) {
+      // A filter that does not translate is a failed read, reported through onDynamicDataError.
+      return Promise.reject(e);
+    }
+  }
+};
+
+// A failed read keeps the previous rows on screen, so without this the new filter would look applied.
+function showDataError(message) {
+  var el = document.getElementById("dataError");
+  if (!el) {
+    el = document.createElement("div");
+    el.id = "dataError";
+    el.style.cssText = "position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 3000; padding: 8px 12px; " +
+      "background: #fde8e8; color: #9b1c1c; border: 1px solid #f8b4b4; border-radius: 4px; font: 14px sans-serif;";
+    document.body.appendChild(el);
+  }
+  el.textContent = !!message ? "The filter was not applied: " + message : "";
+  el.style.display = !!message ? "block" : "none";
+}
+
+var UI_STATE_KEY = "surveyjs-creator-filter-demo-uiState";
+// The survey whose uiState is saved and restored is the one the Preview (or Themes) tab shows now.
+// Every localStorage call is guarded - a private window or blocked site data throws on access.
+function saveUIState(creator, model) {
+  try {
+    localStorage.setItem(UI_STATE_KEY, JSON.stringify(model.uiState));
+    creator.notify("uiState saved");
+  } catch (e) {
+    creator.notify("Could not save uiState: " + e.message, "error");
+  }
+}
+function restoreUIState(creator, model) {
+  try {
+    var text = localStorage.getItem(UI_STATE_KEY);
+    if (!text) {
+      creator.notify("No uiState saved yet");
+      return;
+    }
+    model.uiState = JSON.parse(text);
+    creator.notify("uiState restored");
+  } catch (e) {
+    creator.notify("Could not restore uiState: " + e.message, "error");
+  }
+}
+
+function renderCreator(categories) {
+  var json = { elements: [
+    { type: "filter", name: "products-filter", title: "Filter products", source: "products", showSearch: true,
+      // Text and choice fields only: a quick search over a number or a boolean would send contains()
+      // on a decimal, which OData refuses.
+      searchFields: ["name", "category", "quantity"],
+      items: [
+        { name: "cheap-beverages", title: "Cheap beverages", expression: "{category} anyof ['Beverages'] and {price} < 20" },
+        { name: "out-of-stock", title: "Out of stock", expression: "{stock} = 0" },
+        { name: "available", title: "Available", expression: "{stock} > 0 and {discontinued} = false" },
+        { name: "edges", title: "Cheap or premium (raw)", expression: "{price} < 10 or {price} > 100" },
+        { name: "ai", title: "AI: discontinued", type: "ai", prompt: "discontinued products", expression: "{discontinued} = true", allowEdit: false }
+      ] },
+    { type: "matrixdynamic", name: "products", title: "Products (OData Northwind)", rowsPerPage: 10, columns: [
+      { name: "name", title: "Product", cellType: "text", filterOperators: ["contains"] },
+      // Picked from a list of checkboxes and nothing else: anyof is the only operator the filter offers.
+      { name: "category", title: "Category", cellType: "dropdown", choices: categories, filterOperators: ["anyof"] },
+      { name: "quantity", title: "Quantity per unit", cellType: "text" },
+      { name: "price", title: "Price", cellType: "text", inputType: "number" },
+      { name: "stock", title: "In stock", cellType: "text", inputType: "number" },
+      { name: "discontinued", title: "Discontinued", cellType: "boolean", filterOperators: ["equal"] }] }
+  ] };
+  var creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
+  var previewSurvey = null;
+  // Raised once the survey has its JSON, so the matrix is already there. A survey the matrix was
+  // renamed or removed in simply gets no data source.
+  creator.onSurveyInstanceCreated.add(function (_, options) {
+    if (options.reason !== "preview" && options.reason !== "theme") return;
+    var model = options.survey;
+    previewSurvey = model;
+    showDataError("");
+    var matrix = model.getQuestionByName("products");
+    if (!!matrix) matrix.dataSource = productsSource;
+    model.onDynamicDataError.add(function (_, options) {
+      console.error("data source", options.operation, String(options.error));
+      showDataError(String(options.error && options.error.message || options.error));
+    });
+    model.onFilterChanged.add(function (_, options) { console.log("filter", options.question.name, options.filterExpression); });
+    model.onUIStateChanged.add(function () { console.log("uiState", JSON.stringify(model.uiState)); });
+  });
+  // Creator's own toolbar holds the uiState buttons; they are shown only on the tabs that run the survey.
+  var uiStateActions = [
+    new Survey.Action({ id: "save-ui-state", title: "Save uiState", visible: false,
+      action: function () { saveUIState(creator, previewSurvey); } }),
+    new Survey.Action({ id: "restore-ui-state", title: "Restore uiState", visible: false,
+      action: function () { restoreUIState(creator, previewSurvey); } })
+  ];
+  uiStateActions.forEach(function (action) { creator.toolbarItems.push(action); });
+  creator.onActiveTabChanged.add(function (_, options) {
+    var isSurveyTab = options.tabName === "preview" || options.tabName === "theme";
+    uiStateActions.forEach(function (action) { action.visible = isSurveyTab; });
+    // Leaving the tab leaves its survey behind, and its read error with it.
+    if (!isSurveyTab) {
+      previewSurvey = null;
+      showDataError("");
+    }
+  });
+  creator.JSON = json;
+  window.creator = creator;
+  ReactDOM.render(<SurveyCreator.SurveyCreatorComponent creator={creator} />, document.getElementById("root"));
+}
+
+readJson(ODATA + "Categories?$select=CategoryName").then(function (data) {
+  renderCreator(data.value.map(function (c) { return c.CategoryName; }));
+}).catch(function (e) {
+  document.getElementById("root").textContent = "Could not load the Northwind categories: " + e.message;
+});
