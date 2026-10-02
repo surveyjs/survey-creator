@@ -226,4 +226,419 @@ test("Incorrect order in general tab with preset indeces", () => {
   expect(generalQuestions[2].name).toBe("description");
   expect(generalQuestions[3].name).toBe("inputType");
   expect(generalQuestions[4].name).toBe("maxLength");
+<<<<<<< HEAD
 });
+||||||| parent of 2b7d035e3 (fix: Show matrix column comment placeholder (#8036))
+});
+const columnTypeProperties: ISurveyPropertyGridDefinition = {
+  generateOtherTab: false,
+  classes: {
+    question: {
+      properties: [
+        "name",
+        "title",
+        { name: "visibleIf", tab: "logic" }
+      ],
+      tabs: [
+        { name: "logic", index: 15 }
+      ]
+    },
+    file: {
+      properties: [
+        "allowMultiple",
+        { name: "maxSize", tab: "fileSettings" }
+      ],
+      tabs: [
+        { name: "fileSettings", index: 30 }
+      ]
+    },
+    "matrixdropdowncolumn@default": {
+      properties: [
+        "name",
+        "title",
+        "cellType",
+        { name: "visibleIf", tab: "logic" }
+      ],
+      tabs: [
+        { name: "general", index: 5 },
+        { name: "logic", index: 20 }
+      ]
+    }
+  }
+};
+test("Use the standalone question type definition if there is no matrixdropdowncolumn@<type> one, Bug#7976", () => {
+  matrixDropdownColumnTypes["file"] = {};
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const column = matrix.addColumn("col1");
+    column.cellType = "file";
+    const propertyGrid = new PropertyGridModelTester(column, undefined, columnTypeProperties);
+    const panels = propertyGrid.survey.getAllPanels();
+    expect(panels.map(panel => panel.name)).toStrictEqual(["general", "logic", "fileSettings"]);
+    expect(panels[0].elements.map(el => el.name)).toStrictEqual(["name", "title", "cellType", "allowMultiple"]);
+    expect(panels[1].elements.map(el => el.name)).toStrictEqual(["visibleIf"]);
+    expect(panels[2].elements.map(el => el.name)).toStrictEqual(["maxSize"]);
+  } finally {
+    delete matrixDropdownColumnTypes["file"];
+  }
+});
+test("Do not use the standalone question type definition if matrixdropdowncolumn@<type> is defined, Bug#7976", () => {
+  matrixDropdownColumnTypes["file"] = {};
+  const properties = Helpers.getUnbindValue(columnTypeProperties);
+  properties.classes["matrixdropdowncolumn@file"] = {
+    properties: [{ name: "maxSize", tab: "fileSettings" }],
+    tabs: [{ name: "fileSettings", index: 30 }]
+  };
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const column = matrix.addColumn("col1");
+    column.cellType = "file";
+    const propertyGrid = new PropertyGridModelTester(column, undefined, properties);
+    const panels = propertyGrid.survey.getAllPanels();
+    expect(panels.map(panel => panel.name)).toStrictEqual(["general", "logic", "fileSettings"]);
+    expect(panels[0].elements.map(el => el.name)).toStrictEqual(["name", "title", "cellType"]);
+    expect(panels[2].elements.map(el => el.name)).toStrictEqual(["maxSize"]);
+  } finally {
+    delete matrixDropdownColumnTypes["file"];
+  }
+});
+
+// Bug#8001: a specialized question type (questionJSON + inheritBaseProps) has no definition of its own by default.
+// Every definition below places different properties, so the expectations show which definitions were applied.
+const specializedTypeDefinitions: { [name: string]: any } = {
+  customRoot: {
+    properties: [{ name: "storeDataAsText", tab: "customSettings" }],
+    tabs: [{ name: "customSettings", index: 40 }]
+  },
+  customColumn: {
+    properties: ["storeDataAsText"]
+  },
+  wrappedColumn: {
+    properties: [{ name: "maxSize", tab: "fileSettings" }],
+    tabs: [{ name: "fileSettings", index: 30 }]
+  }
+};
+function createSpecializedTypeProperties(options: { wrappedRoot?: boolean, customRoot?: boolean, wrappedColumn?: boolean, customColumn?: boolean }): ISurveyPropertyGridDefinition {
+  const properties: ISurveyPropertyGridDefinition = Helpers.getUnbindValue(columnTypeProperties);
+  if (!options.wrappedRoot) {
+    delete properties.classes["file"];
+  }
+  if (options.customRoot) {
+    properties.classes["customfile"] = Helpers.getUnbindValue(specializedTypeDefinitions.customRoot);
+  }
+  if (options.wrappedColumn) {
+    properties.classes["matrixdropdowncolumn@file"] = Helpers.getUnbindValue(specializedTypeDefinitions.wrappedColumn);
+  }
+  if (options.customColumn) {
+    properties.classes["matrixdropdowncolumn@customfile"] = Helpers.getUnbindValue(specializedTypeDefinitions.customColumn);
+  }
+  return properties;
+}
+function getPanelsInfo(propertyGrid: PropertyGridModelTester): Array<{ name: string, elements: Array<string> }> {
+  return propertyGrid.survey.getAllPanels().map(panel => ({ name: panel.name, elements: panel.elements.map(el => el.name) }));
+}
+function checkSpecializedQuestion(properties: ISurveyPropertyGridDefinition, expected: Array<{ name: string, elements: Array<string> }>): void {
+  ComponentCollection.Instance.add({ name: "customfile", inheritBaseProps: true, questionJSON: { type: "file" } });
+  try {
+    const question = Serializer.createClass("customfile", { name: "q1" });
+    expect(question.getType()).toBe("customfile");
+    const propertyGrid = new PropertyGridModelTester(question, undefined, properties);
+    expect(getPanelsInfo(propertyGrid)).toStrictEqual(expected);
+  } finally {
+    ComponentCollection.Instance.clear();
+  }
+}
+function checkSpecializedColumn(properties: ISurveyPropertyGridDefinition, expected: Array<{ name: string, elements: Array<string> }>): void {
+  ComponentCollection.Instance.add({ name: "customfile", inheritBaseProps: true, questionJSON: { type: "file" } });
+  matrixDropdownColumnTypes["customfile"] = {};
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const column = matrix.addColumn("col1");
+    column.cellType = "customfile";
+    expect(column.templateQuestion.getType()).toBe("customfile");
+    const propertyGrid = new PropertyGridModelTester(column, undefined, properties);
+    expect(getPanelsInfo(propertyGrid)).toStrictEqual(expected);
+  } finally {
+    delete matrixDropdownColumnTypes["customfile"];
+    ComponentCollection.Instance.clear();
+  }
+}
+
+test("Specialized question: use its own definition together with the wrapped question definition, Bug#8001", () => {
+  checkSpecializedQuestion(createSpecializedTypeProperties({ wrappedRoot: true, customRoot: true }), [
+    { name: "general", elements: ["name", "title", "allowMultiple"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "fileSettings", elements: ["maxSize"] },
+    { name: "customSettings", elements: ["storeDataAsText"] }
+  ]);
+});
+test("Specialized question: use its own definition if the wrapped question doesn't have it, Bug#8001", () => {
+  checkSpecializedQuestion(createSpecializedTypeProperties({ customRoot: true }), [
+    { name: "general", elements: ["name", "title"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "customSettings", elements: ["storeDataAsText"] }
+  ]);
+});
+test("Specialized question: use the wrapped question definition if it doesn't have its own, Bug#8001", () => {
+  checkSpecializedQuestion(createSpecializedTypeProperties({ wrappedRoot: true }), [
+    { name: "general", elements: ["name", "title", "allowMultiple"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "fileSettings", elements: ["maxSize"] }
+  ]);
+});
+test("Specialized question: neither its own nor the wrapped question definition, Bug#8001", () => {
+  checkSpecializedQuestion(createSpecializedTypeProperties({}), [
+    { name: "general", elements: ["name", "title"] },
+    { name: "logic", elements: ["visibleIf"] }
+  ]);
+});
+
+// (a) the matrixdropdowncolumn@<specialized type> definition exists
+test("Specialized column: use matrixdropdowncolumn@<specialized type> definition, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({ wrappedRoot: true, customRoot: true, wrappedColumn: true, customColumn: true }), [
+    { name: "general", elements: ["name", "title", "cellType", "storeDataAsText"] },
+    { name: "logic", elements: ["visibleIf"] }
+  ]);
+});
+// (b.1) there is no matrixdropdowncolumn@<specialized type>, but matrixdropdowncolumn@<wrapped type> exists
+test("Specialized column: use matrixdropdowncolumn@<wrapped type> definition, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({ wrappedRoot: true, customRoot: true, wrappedColumn: true }), [
+    { name: "general", elements: ["name", "title", "cellType"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "fileSettings", elements: ["maxSize"] }
+  ]);
+});
+// (b.2) there are no column definitions, but the root <specialized type> definition exists
+test("Specialized column: use the root <specialized type> definition, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({ wrappedRoot: true, customRoot: true }), [
+    { name: "general", elements: ["name", "title", "cellType"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "customSettings", elements: ["storeDataAsText"] }
+  ]);
+});
+// (b.3.I) there are no column definitions and no root <specialized type> definition, but the root <wrapped type> definition exists
+test("Specialized column: use the root <wrapped type> definition, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({ wrappedRoot: true }), [
+    { name: "general", elements: ["name", "title", "cellType", "allowMultiple"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "fileSettings", elements: ["maxSize"] }
+  ]);
+});
+// (b.3.II) there are no type specific definitions at all: only matrixdropdowncolumn@default is applied
+test("Specialized column: no type specific definitions, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({}), [
+    { name: "general", elements: ["name", "title", "cellType"] },
+    { name: "logic", elements: ["visibleIf"] }
+  ]);
+});
+=======
+});
+const columnTypeProperties: ISurveyPropertyGridDefinition = {
+  generateOtherTab: false,
+  classes: {
+    question: {
+      properties: [
+        "name",
+        "title",
+        { name: "visibleIf", tab: "logic" }
+      ],
+      tabs: [
+        { name: "logic", index: 15 }
+      ]
+    },
+    file: {
+      properties: [
+        "allowMultiple",
+        { name: "maxSize", tab: "fileSettings" }
+      ],
+      tabs: [
+        { name: "fileSettings", index: 30 }
+      ]
+    },
+    "matrixdropdowncolumn@default": {
+      properties: [
+        "name",
+        "title",
+        "cellType",
+        { name: "visibleIf", tab: "logic" }
+      ],
+      tabs: [
+        { name: "general", index: 5 },
+        { name: "logic", index: 20 }
+      ]
+    }
+  }
+};
+test("Use the standalone question type definition if there is no matrixdropdowncolumn@<type> one, Bug#7976", () => {
+  matrixDropdownColumnTypes["file"] = {};
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const column = matrix.addColumn("col1");
+    column.cellType = "file";
+    const propertyGrid = new PropertyGridModelTester(column, undefined, columnTypeProperties);
+    const panels = propertyGrid.survey.getAllPanels();
+    expect(panels.map(panel => panel.name)).toStrictEqual(["general", "logic", "fileSettings"]);
+    expect(panels[0].elements.map(el => el.name)).toStrictEqual(["name", "title", "cellType", "allowMultiple"]);
+    expect(panels[1].elements.map(el => el.name)).toStrictEqual(["visibleIf"]);
+    expect(panels[2].elements.map(el => el.name)).toStrictEqual(["maxSize"]);
+  } finally {
+    delete matrixDropdownColumnTypes["file"];
+  }
+});
+test("Do not use the standalone question type definition if matrixdropdowncolumn@<type> is defined, Bug#7976", () => {
+  matrixDropdownColumnTypes["file"] = {};
+  const properties = Helpers.getUnbindValue(columnTypeProperties);
+  properties.classes["matrixdropdowncolumn@file"] = {
+    properties: [{ name: "maxSize", tab: "fileSettings" }],
+    tabs: [{ name: "fileSettings", index: 30 }]
+  };
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const column = matrix.addColumn("col1");
+    column.cellType = "file";
+    const propertyGrid = new PropertyGridModelTester(column, undefined, properties);
+    const panels = propertyGrid.survey.getAllPanels();
+    expect(panels.map(panel => panel.name)).toStrictEqual(["general", "logic", "fileSettings"]);
+    expect(panels[0].elements.map(el => el.name)).toStrictEqual(["name", "title", "cellType"]);
+    expect(panels[2].elements.map(el => el.name)).toStrictEqual(["maxSize"]);
+  } finally {
+    delete matrixDropdownColumnTypes["file"];
+  }
+});
+
+// Bug#8001: a specialized question type (questionJSON + inheritBaseProps) has no definition of its own by default.
+// Every definition below places different properties, so the expectations show which definitions were applied.
+const specializedTypeDefinitions: { [name: string]: any } = {
+  customRoot: {
+    properties: [{ name: "storeDataAsText", tab: "customSettings" }],
+    tabs: [{ name: "customSettings", index: 40 }]
+  },
+  customColumn: {
+    properties: ["storeDataAsText"]
+  },
+  wrappedColumn: {
+    properties: [{ name: "maxSize", tab: "fileSettings" }],
+    tabs: [{ name: "fileSettings", index: 30 }]
+  }
+};
+function createSpecializedTypeProperties(options: { wrappedRoot?: boolean, customRoot?: boolean, wrappedColumn?: boolean, customColumn?: boolean }): ISurveyPropertyGridDefinition {
+  const properties: ISurveyPropertyGridDefinition = Helpers.getUnbindValue(columnTypeProperties);
+  if (!options.wrappedRoot) {
+    delete properties.classes["file"];
+  }
+  if (options.customRoot) {
+    properties.classes["customfile"] = Helpers.getUnbindValue(specializedTypeDefinitions.customRoot);
+  }
+  if (options.wrappedColumn) {
+    properties.classes["matrixdropdowncolumn@file"] = Helpers.getUnbindValue(specializedTypeDefinitions.wrappedColumn);
+  }
+  if (options.customColumn) {
+    properties.classes["matrixdropdowncolumn@customfile"] = Helpers.getUnbindValue(specializedTypeDefinitions.customColumn);
+  }
+  return properties;
+}
+function getPanelsInfo(propertyGrid: PropertyGridModelTester): Array<{ name: string, elements: Array<string> }> {
+  return propertyGrid.survey.getAllPanels().map(panel => ({ name: panel.name, elements: panel.elements.map(el => el.name) }));
+}
+function checkSpecializedQuestion(properties: ISurveyPropertyGridDefinition, expected: Array<{ name: string, elements: Array<string> }>): void {
+  ComponentCollection.Instance.add({ name: "customfile", inheritBaseProps: true, questionJSON: { type: "file" } });
+  try {
+    const question = Serializer.createClass("customfile", { name: "q1" });
+    expect(question.getType()).toBe("customfile");
+    const propertyGrid = new PropertyGridModelTester(question, undefined, properties);
+    expect(getPanelsInfo(propertyGrid)).toStrictEqual(expected);
+  } finally {
+    ComponentCollection.Instance.clear();
+  }
+}
+function checkSpecializedColumn(properties: ISurveyPropertyGridDefinition, expected: Array<{ name: string, elements: Array<string> }>): void {
+  ComponentCollection.Instance.add({ name: "customfile", inheritBaseProps: true, questionJSON: { type: "file" } });
+  matrixDropdownColumnTypes["customfile"] = {};
+  try {
+    const matrix = new QuestionMatrixDynamicModel("q1");
+    const column = matrix.addColumn("col1");
+    column.cellType = "customfile";
+    expect(column.templateQuestion.getType()).toBe("customfile");
+    const propertyGrid = new PropertyGridModelTester(column, undefined, properties);
+    expect(getPanelsInfo(propertyGrid)).toStrictEqual(expected);
+  } finally {
+    delete matrixDropdownColumnTypes["customfile"];
+    ComponentCollection.Instance.clear();
+  }
+}
+
+test("Specialized question: use its own definition together with the wrapped question definition, Bug#8001", () => {
+  checkSpecializedQuestion(createSpecializedTypeProperties({ wrappedRoot: true, customRoot: true }), [
+    { name: "general", elements: ["name", "title", "allowMultiple"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "fileSettings", elements: ["maxSize"] },
+    { name: "customSettings", elements: ["storeDataAsText"] }
+  ]);
+});
+test("Specialized question: use its own definition if the wrapped question doesn't have it, Bug#8001", () => {
+  checkSpecializedQuestion(createSpecializedTypeProperties({ customRoot: true }), [
+    { name: "general", elements: ["name", "title"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "customSettings", elements: ["storeDataAsText"] }
+  ]);
+});
+test("Specialized question: use the wrapped question definition if it doesn't have its own, Bug#8001", () => {
+  checkSpecializedQuestion(createSpecializedTypeProperties({ wrappedRoot: true }), [
+    { name: "general", elements: ["name", "title", "allowMultiple"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "fileSettings", elements: ["maxSize"] }
+  ]);
+});
+test("Specialized question: neither its own nor the wrapped question definition, Bug#8001", () => {
+  checkSpecializedQuestion(createSpecializedTypeProperties({}), [
+    { name: "general", elements: ["name", "title"] },
+    { name: "logic", elements: ["visibleIf"] }
+  ]);
+});
+
+// (a) the matrixdropdowncolumn@<specialized type> definition exists
+test("Specialized column: use matrixdropdowncolumn@<specialized type> definition, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({ wrappedRoot: true, customRoot: true, wrappedColumn: true, customColumn: true }), [
+    { name: "general", elements: ["name", "title", "cellType", "storeDataAsText"] },
+    { name: "logic", elements: ["visibleIf"] }
+  ]);
+});
+// (b.1) there is no matrixdropdowncolumn@<specialized type>, but matrixdropdowncolumn@<wrapped type> exists
+test("Specialized column: use matrixdropdowncolumn@<wrapped type> definition, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({ wrappedRoot: true, customRoot: true, wrappedColumn: true }), [
+    { name: "general", elements: ["name", "title", "cellType"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "fileSettings", elements: ["maxSize"] }
+  ]);
+});
+// (b.2) there are no column definitions, but the root <specialized type> definition exists
+test("Specialized column: use the root <specialized type> definition, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({ wrappedRoot: true, customRoot: true }), [
+    { name: "general", elements: ["name", "title", "cellType"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "customSettings", elements: ["storeDataAsText"] }
+  ]);
+});
+// (b.3.I) there are no column definitions and no root <specialized type> definition, but the root <wrapped type> definition exists
+test("Specialized column: use the root <wrapped type> definition, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({ wrappedRoot: true }), [
+    { name: "general", elements: ["name", "title", "cellType", "allowMultiple"] },
+    { name: "logic", elements: ["visibleIf"] },
+    { name: "fileSettings", elements: ["maxSize"] }
+  ]);
+});
+// (b.3.II) there are no type specific definitions at all: only matrixdropdowncolumn@default is applied
+test("Specialized column: no type specific definitions, Bug#8001", () => {
+  checkSpecializedColumn(createSpecializedTypeProperties({}), [
+    { name: "general", elements: ["name", "title", "cellType"] },
+    { name: "logic", elements: ["visibleIf"] }
+  ]);
+});
+test("Show placeholder property for a comment column", () => {
+  const matrix = new QuestionMatrixDynamicModel("q1");
+  const column = matrix.addColumn("col1");
+  column.cellType = "comment";
+  const propertyGrid = new PropertyGridModelTester(column);
+  expect(propertyGrid.survey.getQuestionByName("placeholder")).toBeTruthy();
+});
+>>>>>>> 2b7d035e3 (fix: Show matrix column comment placeholder (#8036))
