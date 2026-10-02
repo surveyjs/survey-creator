@@ -1,0 +1,269 @@
+// The check menu an adorner opens: survey-core's popup, positioned against the button it was opened
+// from. The library draws the layer, places the box and takes it away again on a scroll; the card
+// inside it is ours, because popup chrome renders where the library's theme custom properties are not
+// defined - the same division the run button's mode menu is drawn under.
+//
+// The list itself is survey-core's own ListModel under names of ours (model/runnerCss.ts's
+// `checkListCss`), so `svt-checks__*` and `svt-check-row*` are classes the model was told to emit and
+// not `sv-list__*` being out-specified.
+
+// The library's own box around the content is left with nothing on it: it paints a card out of theme
+// variables that are not defined here, and it clips - which would cut this card's own corners and
+// shadow off.
+.svt-checks__popup {
+  .sv-popup__container {
+    overflow: visible;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .sv-popup__body-content {
+    max-height: none;
+  }
+
+  .sv-popup__content {
+    display: block;
+    overflow: visible;
+  }
+}
+
+.svt-checks {
+  width: 340px;
+  max-width: min(340px, 90vw);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1px solid var(--svt-gray-200);
+  border-radius: 8px;
+  background: var(--svt-card);
+  box-shadow: 0 10px 28px rgba(var(--svt-shadow-ink), 0.18);
+  overflow: hidden;
+  text-align: left;
+  line-height: normal;
+  white-space: normal;
+  font: 14px/1.45 var(--svt-font);
+  color: var(--svt-gray-900);
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+.svt-checks__box {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.svt-checks__filter {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--svt-gray-200);
+  background: var(--svt-page);
+}
+
+.svt-checks__filterbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  border: 1px solid var(--svt-gray-200);
+  border-radius: 6px;
+  background: var(--svt-card);
+
+  &:focus-within {
+    border-color: var(--svt-blue-600);
+  }
+}
+
+.svt-checks__filtericon,
+.svt-checks__clear {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+
+  .sv-svg-icon {
+    width: 14px;
+    height: 14px;
+    fill: var(--svt-gray-500);
+  }
+}
+
+.svt-checks__clear {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.svt-checks__search {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--svt-gray-900);
+  font: inherit;
+  font-size: 13px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.svt-checks__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.svt-checks__empty {
+  padding: 10px 12px;
+}
+
+.svt-checks__emptytext {
+  font-size: 12px;
+  color: var(--svt-gray-500);
+}
+
+.svt-checks__loading {
+  display: none;
+}
+
+// one check ---------------------------------------------------------------
+.svt-check-row {
+  border-bottom: 1px solid var(--svt-divider);
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--svt-page);
+  }
+}
+
+.svt-check-row--hovered,
+.svt-check-row--focused {
+  background: var(--svt-page);
+}
+
+// 44px, which is the recorder screen's target size everywhere else. The prototype reached this row
+// with `.recorder .checkrow__hit` and got 44 that way; the menu is a popup and is not reliably inside
+// the screen, so the figure is on the row itself.
+.svt-check-row__hit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 0;
+}
+
+// A check the case already asserts. The row is the same row - pressing it again takes the check out.
+.svt-check-row--on {
+  background: var(--svt-blue-50);
+}
+
+// The one whose picker is open below the list: it is the row the confirmation is about.
+.svt-check-row--picking {
+  background: var(--svt-blue-50);
+  box-shadow: inset 2px 0 0 var(--svt-blue-600);
+}
+
+.svt-check-row--off {
+  .svt-check-row__hit {
+    cursor: not-allowed;
+    color: var(--svt-gray-500);
+  }
+
+  .svt-check-row__name {
+    color: var(--svt-gray-500);
+  }
+}
+
+.svt-check-row__box {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  pointer-events: none;
+}
+
+.svt-check-row__name {
+  font-size: 13px;
+  color: var(--svt-gray-900);
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// A check that is not complete until something is picked says so before it is pressed.
+.svt-check-row__more {
+  font-size: 12px;
+  color: var(--svt-gray-500);
+  flex: 0 0 auto;
+}
+
+// What the check would assert right now, which is the tester's answer and never this widget's.
+.svt-check-row__value {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--svt-blue-800);
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 55%;
+}
+
+.svt-check-row__reason {
+  margin: 8px 12px;
+  font-size: 12px;
+  color: var(--svt-gray-500);
+}
+
+.svt-check-row__pending {
+  border-top: 1px solid var(--svt-gray-200);
+  background: var(--svt-page);
+}
+
+.svt-check-row__confirm {
+  display: flex;
+  gap: 8px;
+  padding: 0 12px 10px;
+}
+
+// The picker: the keys of a check that asserts more than one thing, every one of them ticked to begin
+// with, because only a narrowed list is a deviation.
+.svt-picker {
+  list-style: none;
+  margin: 0 12px 8px;
+  padding: 0;
+  max-height: 160px;
+  overflow: auto;
+}
+
+.svt-picker__hit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.svt-picker__text {
+  color: var(--svt-gray-500);
+}

@@ -1,0 +1,471 @@
+// The recorder screen: the form being filled in on the left, the steps of the case on the right, and
+// the session bar over both of them.
+//
+// The prototype had two blocks here - `.recorder`, which carried the palette and the taller controls,
+// and `.rec`, the screen inside it - and one widget has one recorder screen, so they are one block.
+// `svt-recorder__action` and `svt-recorder__popup` are handed out by TesterRecorderModel for the
+// session bar and its options menu, and they are members of this same block.
+
+.svt-recorder {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--svt-page);
+  color: var(--svt-gray-900);
+  font-size: 14px;
+
+  // Every interactive element is a 44px target and every one of them draws the same ring. A label that
+  // wraps to two lines is a button that has changed size: none of them do. This is where the
+  // prototype's taller `.btn` survives after the model layer merged its two button vocabularies into
+  // the one `svt-button` of blocks/svt-base.scss.
+  //
+  // The check menu's own rows are NOT in this list, although the prototype had them here: that menu is
+  // a survey-core popup and is not reliably a descendant of this element, so its targets are sized in
+  // blocks/svt-checks.scss where they hold wherever the layer is drawn.
+  .svt-button,
+  .svt-input {
+    min-height: 44px;
+  }
+
+  .svt-button {
+    min-width: 44px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 14px;
+    border: 1px solid var(--svt-gray-200);
+    border-radius: 6px;
+    background: var(--svt-card);
+    color: var(--svt-gray-900);
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: var(--svt-gray-100);
+      border-color: var(--svt-gray-200);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .svt-button--primary {
+    background: var(--svt-blue-600);
+    border-color: var(--svt-blue-600);
+    color: var(--svt-on-accent);
+    font-weight: 600;
+
+    &:hover:not(:disabled) {
+      background: var(--svt-blue-700);
+      border-color: var(--svt-blue-700);
+    }
+  }
+
+  .svt-button--link {
+    border-color: transparent;
+    background: none;
+    color: var(--svt-blue-700);
+    padding: 0 8px;
+    text-decoration: underline;
+
+    &:hover:not(:disabled) {
+      background: var(--svt-blue-50);
+    }
+  }
+
+  .svt-button--quiet {
+    border-color: transparent;
+    background: none;
+    color: var(--svt-blue-700);
+    padding: 0 8px;
+
+    &:hover:not(:disabled) {
+      background: var(--svt-blue-50);
+    }
+  }
+
+  .svt-input {
+    padding: 0 10px;
+    border: 1px solid var(--svt-gray-200);
+    border-radius: 6px;
+    background: var(--svt-control);
+    color: var(--svt-gray-900);
+    font: inherit;
+    font-size: 14px;
+  }
+
+  .svt-input--small {
+    min-height: 36px;
+    width: 110px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--svt-blue-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+// The session bar's verbs, and the wrapper the Action's own button sits in.
+.svt-recorder__action {
+  display: inline-flex;
+}
+
+// The bar's options menu. Same division as the run button's: survey-core draws the layer and this
+// draws the card, which is why the palette is on `.svt-menu` as well as on the screen.
+.svt-recorder__popup .sv-popup__content {
+  overflow: visible;
+}
+
+// the notes over the screen -----------------------------------------------
+.svt-note {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  border: 1px solid transparent;
+
+  em {
+    font-style: normal;
+    opacity: 0.85;
+  }
+}
+
+.svt-note--info {
+  background: var(--svt-blue-50);
+  border-color: var(--svt-blue-200);
+  color: var(--svt-blue-800);
+}
+
+.svt-note--warn {
+  background: var(--svt-amber-50);
+  border-color: var(--svt-amber-300);
+  color: var(--svt-amber-800);
+}
+
+.svt-note--bad {
+  background: var(--svt-red-50);
+  border-color: var(--svt-red-200);
+  color: var(--svt-red-700);
+}
+
+// the cards the two panes are made of -------------------------------------
+.svt-card {
+  background: var(--svt-card);
+  border: 1px solid var(--svt-gray-200);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.svt-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--svt-gray-200);
+
+  h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--svt-gray-900);
+  }
+
+  .svt-button--link {
+    margin-left: 0;
+  }
+}
+
+.svt-card__count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--svt-gray-500);
+}
+
+.svt-card__foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--svt-gray-200);
+}
+
+.svt-card__note {
+  font-size: 12px;
+  color: var(--svt-gray-500);
+}
+
+// What the quiet verify has against the case. The State column marks the row; this says the words.
+.svt-card__note--bad {
+  color: var(--svt-red-700);
+}
+
+.svt-card__foot--split .svt-card__note {
+  flex: 1 1 100%;
+}
+
+.svt-card__empty,
+.svt-card__hint {
+  margin: 0;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--svt-gray-500);
+}
+
+// the screen --------------------------------------------------------------
+// It grows with its two surveys and the screen scrolls as one: neither survey is given a scroller of
+// its own.
+.svt-recorder__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 10px 16px;
+  background: var(--svt-card);
+  border-bottom: 1px solid var(--svt-gray-200);
+}
+
+// The screen says which test it is about: arriving here is a transition the widget made, not the act
+// of choosing it, so the name has to be on the screen rather than remembered from the press before.
+.svt-recorder__name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--svt-gray-900);
+}
+
+.svt-recorder__count {
+  font-size: 12px;
+  color: var(--svt-gray-500);
+}
+
+.svt-recorder__acts {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// The two panes are not two halves. The form is the thing being used and it is as wide as the survey
+// the tester built; the list beside it holds three narrow columns - a number, a name and a word - and
+// an even split gave it room it had nothing to put in, taken from the pane where the work happens. So
+// it is capped and the form takes the rest. Below the breakpoint the two stack and the cap is moot.
+.svt-recorder__body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+  gap: 16px;
+  padding: 16px;
+  align-items: start;
+}
+
+.svt-recorder__col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.svt-recorder .svt-note {
+  margin: 12px 16px 0;
+}
+
+// the form ----------------------------------------------------------------
+// It takes the height its survey needs - the screen scrolls, the pane does not. Still the box the
+// survey's own adorner sticks within.
+.svt-form {
+  position: relative;
+  padding: 12px;
+  // The zoom, and the whole of it. At 100% every unit below is the theme's own value, so the form is
+  // rendered exactly as the theme draws it and nothing here has an opinion about how big a survey
+  // should be - the person reading it does.
+  //
+  // These are the six base units the Survey Creator's designer zoom scales, in the same dictionary and
+  // to the same rule. Everything the theme sizes is a multiple of one of them, so a control this file
+  // has never heard of scales with the rest and the proportions the theme was drawn with survive at
+  // every step. See model/zoom.ts, which owns the arithmetic and points here for the lever.
+  //
+  // The factor arrives as `--svt-zoom` in the pane's inline style, which is why the units are written
+  // here as a calc rather than by the component: the theme declares them under `:where(.sd-theme-root)`,
+  // which carries no specificity, and the survey root element holds both that class and
+  // `sd-root-modern`. A variable set on an ancestor would lose to a declaration on the root itself;
+  // this one lands on the root and wins, and reads `--svt-zoom` down the inheritance it does win.
+  //
+  // The runner's spectator pane has no zoom: it renders the survey a respondent would see, at the size
+  // they would see it.
+  --svt-zoom: 1;
+
+  .sd-root-modern {
+    --sjs2-base-unit-size: calc(8px * var(--svt-zoom));
+    --sjs2-base-unit-spacing: calc(8px * var(--svt-zoom));
+    --sjs2-base-unit-radius: calc(8px * var(--svt-zoom));
+    --sjs2-base-unit-border-width: calc(1px * var(--svt-zoom));
+    --sjs2-base-unit-font-size: calc(8px * var(--svt-zoom));
+    --sjs2-base-unit-line-height: calc(8px * var(--svt-zoom));
+  }
+}
+
+.svt-form--empty {
+  font-size: 13px;
+  color: var(--svt-gray-500);
+
+  code {
+    font-family: var(--svt-mono);
+    font-size: 12px;
+  }
+}
+
+// The backstop for a browser without `inert`. The attribute is the guarantee; this is the look of it,
+// and it binds to the session's own `formLocked` and never to the spinner's `replayState`.
+.svt-form--frozen {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.7;
+}
+
+// The zoom, in the screen's own header because it is about the whole of the form under it and not
+// about anything in it. The order is the Survey Creator's - zoom in, the reading, zoom out - and so is
+// what the reading does when it is pressed: it goes back to 100%.
+.svt-zoom {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.svt-zoom__label {
+  margin-right: 4px;
+  font-size: 12px;
+  color: var(--svt-gray-500);
+}
+
+.svt-recorder {
+  .svt-zoom__btn,
+  .svt-zoom__now {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    min-height: 24px;
+    padding: 0;
+    border: 1px solid var(--svt-gray-200);
+    border-radius: 4px;
+    background: var(--svt-card);
+    color: var(--svt-gray-700);
+    font: inherit;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      border-color: var(--svt-blue-600);
+      background: var(--svt-blue-50);
+      color: var(--svt-blue-700);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  .svt-zoom__btn {
+    width: 24px;
+    font-size: 14px;
+  }
+
+  // The reading is a button and is as wide as its widest word, so the two beside it do not move when
+  // the number goes from 20% to 100% and back.
+  .svt-zoom__now {
+    width: 52px;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// the form the recorder shows when there is no live model -----------------
+.svt-static-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.svt-static-form__where,
+.svt-static-form__empty {
+  margin: 0;
+  font-size: 12px;
+  color: var(--svt-gray-500);
+}
+
+.svt-static-form__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.svt-static-field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 10px;
+}
+
+.svt-static-field__title {
+  font-size: 14px;
+  color: var(--svt-gray-700);
+}
+
+.svt-static-field__name {
+  font-size: 11px;
+  color: var(--svt-gray-500);
+  text-align: right;
+}
+
+// Not an input with a disabled attribute - there is no input. This is the shape one left behind.
+.svt-static-field__value {
+  grid-column: 1 / -1;
+  padding: 10px 12px;
+  border: 1px solid var(--svt-gray-200);
+  border-radius: 6px;
+  background: var(--svt-gray-100);
+  color: var(--svt-gray-600);
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.svt-static-form__submit {
+  align-self: flex-start;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: var(--svt-gray-100);
+  color: var(--svt-gray-500);
+  font-size: 14px;
+  border: 1px solid var(--svt-gray-200);
+}
+
+// The narrow layout: the two panes stack, and the console stops being the taller half of the runner.
+// The prototype named `.runner__body` here as well, where it did nothing - that pane is a flex row and
+// takes `flex-direction`, not `grid-template-columns` - so it is said the way it works.
+@media (max-width: 1100px) {
+  .svt-recorder__body {
+    grid-template-columns: 1fr;
+  }
+
+  .svt-runner__body {
+    flex-direction: column;
+  }
+
+  .svt-console {
+    max-height: 420px;
+  }
+}

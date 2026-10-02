@@ -1,0 +1,145 @@
+// The adorners, inside the elements they are about.
+//
+// The box an adorner stands in is the survey's own markup, put there by the wrapper component the
+// renderer registers for a page, a panel, a question and a matrix cell. It adds nothing to the flow -
+// the survey on screen has the spacing it would have with no recorder at all - and it is what makes
+// the button scroll, reflow and disappear with the element instead of being placed over it by a
+// measurement.
+
+// The box has to be invisible to the layout, and a plain block is not: in a row of several elements
+// the survey makes the wrapper a flex container and sizes the element as its item, so the box takes
+// that role over and hands it down to the markup inside it. Without this a question in a two-column
+// row is its content wide instead of its column wide.
+.svt-adorned {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 100%;
+
+  > :not(.svt-adorner-slot) {
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+}
+
+.svt-adorned--question,
+.svt-adorned--panel {
+  flex: 1 1 auto;
+  align-self: stretch;
+}
+
+.svt-adorned--page {
+  width: 100%;
+}
+
+// The slot: the corner of the element, and the menu hangs from it. Each kind sits in the corner of its
+// own box, and the padding between a page, a panel and a question is what keeps two of them apart.
+.svt-adorner-slot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 12;
+  line-height: 0;
+}
+
+.svt-adorner-slot--cell {
+  top: 0;
+  right: 0;
+}
+
+// The page is the one box whose corner another element reliably shares: a page with no header puts its
+// first question within a button of its own top right, and no inset is safe because the padding
+// between the two is a theme variable. So the page is adorned on the left, where nothing else ever
+// stands - the page padding it sits in is the same padding that holds the title, and the title starts
+// below it.
+.svt-adorner-slot--page {
+  top: 4px;
+  right: auto;
+  left: 4px;
+}
+
+// The open one stands over everything under it. The menu is a survey-core popup - a fixed layer, so no
+// overflow clips it - but a z-index is only ever resolved inside its own stacking context, and every
+// slot is one: what the next question is ordered against is the slot, and it takes the menu down with
+// it. Only one slot is ever open, so raising that one lifts its menu clear of the form, of the buttons
+// under it and of the sticky survey button above.
+.svt-adorner-slot--open {
+  z-index: 2000;
+}
+
+// The survey is the one target with no element on the page. It stands in the corner of the pane and
+// stays there while the form scrolls under it.
+.svt-adorners {
+  position: sticky;
+  top: 0;
+  height: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.svt-adorner-slot--survey {
+  position: relative;
+  top: 0;
+  right: 0;
+  pointer-events: auto;
+}
+
+// Every one of them, all the time: an affordance that has to be found by hovering is one an author has
+// to know is there.
+.svt-adorner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 24px;
+  height: 22px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--svt-gray-200);
+  border-radius: 6px;
+  background: var(--svt-card);
+  color: var(--svt-blue-700);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(var(--svt-shadow-ink), 0.08);
+
+  &:hover:not(:disabled) {
+    border-color: var(--svt-blue-600);
+    background: var(--svt-blue-50);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// The one that says how many checks the case already asserts about its element is wider, because it
+// has a number in it as well as the mark.
+.svt-adorner--counted {
+  width: 40px;
+}
+
+// The survey is checked with the same button as everything else, standing in the corner of the form.
+.svt-adorner--survey {
+  border-color: var(--svt-blue-200);
+}
+
+.svt-adorner--open {
+  border-color: var(--svt-blue-600);
+  background: var(--svt-blue-50);
+}
+
+.svt-adorner__mark {
+  font-size: 12px;
+}
+
+.svt-adorner__count {
+  font-size: 11px;
+  color: var(--svt-gray-700);
+}

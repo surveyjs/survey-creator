@@ -1,0 +1,188 @@
+// The reused survey-core models, under names of ours.
+//
+// Nothing here overrides a library selector. The lists and the toolbars were each handed a map of
+// class names in model/runnerCss.ts - that is what `ActionContainer.cssClasses` and
+// `ListModel.cssClasses` are for - so what they emit is `svt-*` and this is simply its styling,
+// decided by the model rather than by a selector that has to out-specify the library's own.
+
+// The toolbars. An item wrapper is structure; the button inside it carries `svt-button` or `svt-link`,
+// which the Action sets as innerCss, so the two verbs of blocks/svt-base.scss do the drawing.
+.svt-bar {
+  display: inline-flex;
+  align-items: center;
+}
+
+.svt-bar__item {
+  display: inline-flex;
+
+  + .svt-bar__item {
+    margin-left: 8px;
+  }
+}
+
+.svt-bar__item--hidden {
+  display: none;
+}
+
+.svt-bar__item--space {
+  margin-left: auto;
+}
+
+.svt-bar__item-content {
+  display: inline-flex;
+  align-items: center;
+}
+
+.svt-bar__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+}
+
+.svt-bar__title {
+  font: inherit;
+  color: inherit;
+}
+
+.svt-bar__icon {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+// The lists. A row is a checkbox, a run, an expander and an expansion - not an option to be picked -
+// so the list paints no selection, no hover and no disabled state: the row says all of that in its own
+// markup, off its own model.
+.svt-list,
+.svt-list__items {
+  display: block;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.svt-list__item {
+  display: block;
+  width: 100%;
+}
+
+.svt-list__body {
+  display: block;
+}
+
+// A test the suite disabled is a disabled *item*, not a dead row: its JSON and its name box still
+// work, and `svt-test-row--disabled` is where the row says it is disabled.
+.svt-list__item--disabled {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.svt-list__empty,
+.svt-list__loading {
+  display: none;
+}
+
+// The run-mode picker's menu. This one IS a list of options, so it paints the one that is chosen.
+// survey-core's PopupModel draws the click-away layer, the positioning and the menu roles; the card is
+// ours, because popup chrome renders where the library's theme custom properties are not defined -
+// which is also why the palette is included on `.svt-menu` in tester.scss.
+.svt-run-button__popup .sv-popup__content {
+  overflow: visible;
+}
+
+.svt-menu {
+  min-width: 240px;
+  padding: 4px;
+  background: var(--svt-card);
+  border: 1px solid var(--svt-border);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(var(--svt-shadow-ink), 0.12);
+  font: 14px/1.45 var(--svt-font);
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+.svt-menu__items {
+  display: block;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.svt-menu__item {
+  display: block;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--svt-divider);
+  }
+}
+
+.svt-menu__item--hovered,
+.svt-menu__item--focused {
+  background: var(--svt-divider);
+}
+
+.svt-menu__body {
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--svt-ink-1);
+  text-align: left;
+
+  // Where the hand-rolled menu put a tick, and the space that keeps the two lines aligned without it.
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    margin-right: 8px;
+  }
+}
+
+.svt-menu__item--selected .svt-menu__body {
+  font-weight: 600;
+
+  &::before {
+    content: "\2713";
+    color: var(--svt-primary);
+  }
+}
+
+.svt-menu__empty {
+  padding: 8px 10px;
+}
+
+.svt-menu__empty-text {
+  font-size: 12px;
+  color: var(--svt-ink-3);
+}
+
+// The chevron the hand-rolled picker drew into its own label. createDropdownActionModel rewrites the
+// title on every choice, so it is drawn beside the title rather than written into it.
+.svt-run-button__mode .svt-bar__title::after {
+  content: " \25BE";
+}
+
+// The settings popup: the host-options survey (model/settingsModel.ts) in a survey-core popup, opened
+// from the runner's toolbar. Same division as the two menus above - the library draws the layer, this
+// draws the card - and the survey inside is drawn by the theme, untouched.
+.svt-settings__popup .sv-popup__content {
+  overflow: visible;
+}
+
+.svt-settings {
+  width: 420px;
+  max-width: min(420px, 90vw);
+  max-height: 70vh;
+  overflow: auto;
+  padding: 4px;
+  background: var(--svt-card);
+  border: 1px solid var(--svt-border);
+  border-radius: 6px;
+  text-align: left;
+}
