@@ -338,5 +338,8 @@ export var logicCss = {
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
   },
-  actionBar: defaultActionBarCss
+  actionBar: defaultActionBarCss,
+  variables: {
+    mobileWidth: "",
+  },
 };
