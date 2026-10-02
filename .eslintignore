@@ -16,4 +16,3 @@ visualRegressionTests-V2/tests/
 **/test-results/
 **/playwright-report/
 **/screenshotLegacyTests/*.ts
-filter.js
