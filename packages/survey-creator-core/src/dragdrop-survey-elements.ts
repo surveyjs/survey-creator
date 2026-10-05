@@ -50,6 +50,27 @@ export function calculateDragOverLocation(clientX: number, clientY: number, rect
   }
 }
 
+export function getPathToRootPageElement(element: ISurveyElement) {
+  let path = [];
+  let target: any = element;
+  let lastTarget = element;
+  while(!!target) {
+    if (target.isInteractiveDesignElement) {
+      path.push(target);
+      lastTarget = target;
+    }
+    let parent = target.parent || target.parentQuestion;
+    if (!parent && target.data && target.data.data && target.data.data.getType && target.data.data.getType() === "matrixdropdown") {
+      parent = target.data.data;
+    }
+    target = parent;
+  }
+  if (!lastTarget.isPage) {
+    path.push((element as any).page || (element as any).__page); // TODO: remove __page
+  }
+  return path;
+}
+
 export class DragDropSurveyElements extends DragDropCore<any> {
   public static newGhostPage: PageModel = null;
   public static restrictDragQuestionBetweenPages: boolean = false;
@@ -329,6 +350,44 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
     return allowOptions.allow;
   }
+  public prevDropTargetPath: ISurveyElement[] = [];
+  updatePathToDragOver(dropTarget: ISurveyElement, prevDropTarget: ISurveyElement) {
+    if (!dropTarget) {
+      this.leaveDragOverElements(this.prevDropTargetPath);
+      this.prevDropTargetPath = [];
+      return;
+    }
+    if (dropTarget !== prevDropTarget) {
+      let dropTargetPath = getPathToRootPageElement(dropTarget);
+      dropTargetPath = dropTargetPath.reverse();
+      for (let i = 0; i < this.prevDropTargetPath.length && i < dropTargetPath.length; i++) {
+        if (this.prevDropTargetPath[i] !== dropTargetPath[i]) {
+          this.leaveDragOverElements(this.prevDropTargetPath.slice(i));
+          this.enterDragOverElements(dropTargetPath.slice(i));
+          break;
+        }
+      }
+      this.prevDropTargetPath = dropTargetPath;
+    }
+  }
+  private leaveDragOverElements(elements: ISurveyElement[]) {
+    elements && elements.forEach((element) => {
+      const adorner = SurveyElementAdornerBase.GetAdorner(element as any);
+      if (adorner) {
+        adorner.dropIndicatorPosition = null;
+        adorner.dragLeave();
+      }
+    });
+  }
+  private enterDragOverElements(elements: ISurveyElement[]) {
+    elements && elements.forEach((element) => {
+      const adorner = SurveyElementAdornerBase.GetAdorner(element as any);
+      if (adorner) {
+        adorner.dragEnter();
+      }
+    });
+  }
+
   public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DropIndicatorPosition): void {
     const oldDragOverIndicatorElement = this.dragOverIndicatorElement;
     const oldDropTarget = this.dropTarget;
@@ -337,6 +396,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       return;
     }
     this.dropTarget = dropTarget;
+    this.updatePathToDragOver(dropTarget, oldDropTarget);
+    // this.updatePathToDragOver(null, null);
     this.dragOverLocation = dragOverLocation;
 
     this.parentElement = this.dropTarget.isPage
