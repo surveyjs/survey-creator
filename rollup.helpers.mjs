@@ -92,6 +92,21 @@ function pluginIgnoreStyles() {
     }
   };
 }
+const omitScssFromDeclarations = () => ({
+  name: "omit-scss-from-declarations",
+  generateBundle(options, bundle) {
+    for (const filename in bundle) {
+      if (filename.endsWith(".d.ts") && bundle[filename].type === "asset") {
+        const asset = bundle[filename];
+        let content = typeof asset.source === "string"
+          ? asset.source
+          : asset.source.toString("utf-8");
+        const scssImportRegex = /^import\s+['"][^'"]+\.scss['"];?\r?\n?/gm;
+        asset.source = content.replace(scssImportRegex, "");
+      }
+    }
+  }
+});
 
 export function createUmdConfig(options) {
 
@@ -128,6 +143,7 @@ export function createUmdConfig(options) {
             declarationDir: declarationDir
           }
         }),
+      omitScssFromDeclarations(),
       emitCss
         ? rollupPostcss({
           extract: emitCss,
