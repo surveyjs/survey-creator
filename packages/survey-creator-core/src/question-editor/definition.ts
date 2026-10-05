@@ -311,6 +311,11 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesByUrl", index: 11 }
     ]
   },
+  checkboxbase: {
+    properties: [
+      { name: "showShortcutKeys", tab: "choices" },
+    ]
+  },
   checkbox: {
     properties: [
       { name: "showSelectAllItem", tab: "choices" },
@@ -866,6 +871,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         name: "autoFocusFirstQuestion",
         tab: "question"
       },
+      { name: "showChoiceShortcutKeys", tab: "question" },
       { name: "maxTextLength", tab: "question" },
       { name: "maxCommentLength", tab: "question" },
       { name: "commentAreaRows", tab: "question" },
