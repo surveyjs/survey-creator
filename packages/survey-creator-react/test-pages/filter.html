@@ -37,6 +37,9 @@
   // and every tab builds a survey of its own, so it is attached to each Preview and Themes survey as
   // Creator creates it; the designer surface reads no data. Two buttons in Creator's toolbar keep that
   // survey's uiState (the filter's preset, search and edits) in localStorage across reloads.
+  // The first page has the presets; the next three filter the same products with no presets, by the
+  // quick filters alone, with the search, and with the advanced editor; the last one puts the quick
+  // filters over a fixed matrix whose rows are local data, with no server at all.
   var ODATA = "https://services.odata.org/V4/Northwind/Northwind.svc/";
   // Record field -> OData property. The record is flat; Category is a navigation property.
   var fieldMap = { name: "ProductName", category: "Category/CategoryName", quantity: "QuantityPerUnit",
@@ -180,39 +183,92 @@
     }
   }
 
+  // The columns of every products matrix; a new array per call, so no two matrices share one.
+  function productColumns(categories) {
+    return [
+      { name: "name", title: "Product", cellType: "text", filterOperators: ["contains"] },
+      // Picked from a list of checkboxes and nothing else: anyof is the only operator the filter offers.
+      { name: "category", title: "Category", cellType: "dropdown", choices: categories, filterOperators: ["anyof"] },
+      { name: "quantity", title: "Quantity per unit", cellType: "text" },
+      { name: "price", title: "Price", cellType: "text", inputType: "number" },
+      { name: "stock", title: "In stock", cellType: "text", inputType: "number" },
+      { name: "discontinued", title: "Discontinued", cellType: "boolean", filterOperators: ["equal"] }];
+  }
+  // The matrices that read the products from Northwind. Each one keeps a list of its own and sends its
+  // own requests, so they share the one data source.
+  var odataMatrices = ["products", "products-quick", "products-search", "products-advanced"];
+
   function renderCreator(categories) {
-    var json = { elements: [
-      { type: "filter", name: "products-filter", title: "Filter products", source: "products", showSearch: true,
-        // Text and choice fields only: a quick search over a number or a boolean would send contains()
-        // on a decimal, which OData refuses.
-        searchFields: ["name", "category", "quantity"],
-        items: [
-          { name: "cheap-beverages", title: "Cheap beverages", expression: "{category} anyof ['Beverages'] and {price} < 20" },
-          { name: "out-of-stock", title: "Out of stock", expression: "{stock} = 0" },
-          { name: "available", title: "Available", expression: "{stock} > 0 and {discontinued} = false" },
-          { name: "edges", title: "Cheap or premium (raw)", expression: "{price} < 10 or {price} > 100" },
-          { name: "ai", title: "AI: discontinued", type: "ai", prompt: "discontinued products", expression: "{discontinued} = true", allowEdit: false }
-        ] },
-      { type: "matrixdynamic", name: "products", title: "Products (OData Northwind)", rowsPerPage: 10, columns: [
-        { name: "name", title: "Product", cellType: "text", filterOperators: ["contains"] },
-        // Picked from a list of checkboxes and nothing else: anyof is the only operator the filter offers.
-        { name: "category", title: "Category", cellType: "dropdown", choices: categories, filterOperators: ["anyof"] },
-        { name: "quantity", title: "Quantity per unit", cellType: "text" },
-        { name: "price", title: "Price", cellType: "text", inputType: "number" },
-        { name: "stock", title: "In stock", cellType: "text", inputType: "number" },
-        { name: "discontinued", title: "Discontinued", cellType: "boolean", filterOperators: ["equal"] }] }
+    var json = { pages: [
+      { name: "presets", title: "Presets, search and the advanced editor", elements: [
+        { type: "filter", name: "products-filter", title: "Filter products", source: "products", showSearch: true,
+          // Text and choice fields only: a quick search over a number or a boolean would send contains()
+          // on a decimal, which OData refuses.
+          searchFields: ["name", "category", "quantity"],
+          items: [
+            { name: "cheap-beverages", title: "Cheap beverages", expression: "{category} anyof ['Beverages'] and {price} < 20" },
+            { name: "out-of-stock", title: "Out of stock", expression: "{stock} = 0" },
+            { name: "available", title: "Available", expression: "{stock} > 0 and {discontinued} = false" },
+            { name: "edges", title: "Cheap or premium (raw)", expression: "{price} < 10 or {price} > 100" },
+            { name: "ai", title: "AI: discontinued", type: "ai", prompt: "discontinued products", expression: "{discontinued} = true", allowEdit: false }
+          ] },
+        { type: "matrixdynamic", name: "products", title: "Products (OData Northwind)", rowsPerPage: 10, columns: productColumns(categories) }
+      ] },
+      // No items: the presets row has no presets and shows only Clear, once a field has a condition.
+      // No search box (showSearch is off by default) and no Advanced button: a badge per field and nothing else.
+      { name: "quick-only", title: "Quick filters only", elements: [
+        { type: "filter", name: "quick-filter", title: "Filter products", source: "products-quick", allowAdvancedMode: false },
+        { type: "matrixdynamic", name: "products-quick", title: "Products (OData Northwind)", rowsPerPage: 10, columns: productColumns(categories) }
+      ] },
+      { name: "quick-search", title: "Quick filters and search", elements: [
+        { type: "filter", name: "search-filter", title: "Filter products", source: "products-search", showSearch: true,
+          // The same fields as on the first page, for the same reason: OData refuses contains() on a decimal.
+          searchFields: ["name", "category", "quantity"], allowAdvancedMode: false },
+        { type: "matrixdynamic", name: "products-search", title: "Products (OData Northwind)", rowsPerPage: 10, columns: productColumns(categories) }
+      ] },
+      // The Advanced button is on by default, so only the presets and the search are left out.
+      { name: "quick-advanced", title: "Quick filters and the advanced editor", elements: [
+        { type: "filter", name: "advanced-filter", title: "Filter products", source: "products-advanced" },
+        { type: "matrixdynamic", name: "products-advanced", title: "Products (OData Northwind)", rowsPerPage: 10, columns: productColumns(categories) }
+      ] },
+      // A fixed matrix with no data source: its rows are the records, its columns the fields, and the
+      // list filters the cells of its value right here, with no request to anyone.
+      { name: "fixed-matrix", title: "Quick filters over a fixed matrix (local data)", elements: [
+        { type: "filter", name: "supplies-filter", title: "Filter supplies", source: "supplies", allowAdvancedMode: false },
+        { type: "matrixdropdown", name: "supplies", title: "Office supplies (local data)",
+          rows: [{ value: "pens", text: "Pens" }, { value: "paper", text: "Paper" }, { value: "stapler", text: "Stapler" },
+            { value: "toner", text: "Toner" }, { value: "notebooks", text: "Notebooks" }, { value: "markers", text: "Markers" },
+            { value: "folders", text: "Folders" }, { value: "tape", text: "Tape" }],
+          columns: [
+            { name: "category", title: "Category", cellType: "dropdown", choices: ["Writing", "Paper", "Equipment"], filterOperators: ["anyof"] },
+            { name: "price", title: "Price", cellType: "text", inputType: "number" },
+            { name: "stock", title: "In stock", cellType: "text", inputType: "number" },
+            { name: "reorder", title: "Reorder", cellType: "boolean", filterOperators: ["equal"] }],
+          defaultValue: {
+            pens: { category: "Writing", price: 2.5, stock: 120, reorder: false },
+            paper: { category: "Paper", price: 6, stock: 0, reorder: true },
+            stapler: { category: "Equipment", price: 12, stock: 8, reorder: false },
+            toner: { category: "Equipment", price: 85, stock: 0, reorder: true },
+            notebooks: { category: "Paper", price: 4, stock: 45, reorder: false },
+            markers: { category: "Writing", price: 3.2, stock: 3, reorder: true },
+            folders: { category: "Paper", price: 1.5, stock: 200, reorder: false },
+            tape: { category: "Equipment", price: 2, stock: 30, reorder: false }
+          } }
+      ] }
     ] };
     var creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
     var previewSurvey = null;
-    // Raised once the survey has its JSON, so the matrix is already there. A survey the matrix was
-    // renamed or removed in simply gets no data source.
+    // Raised once the survey has its JSON, so the matrices are already there. A matrix that was renamed
+    // or removed simply gets no data source.
     creator.onSurveyInstanceCreated.add(function (_, options) {
       if (options.reason !== "preview" && options.reason !== "theme") return;
       var model = options.survey;
       previewSurvey = model;
       showDataError("");
-      var matrix = model.getQuestionByName("products");
-      if (!!matrix) matrix.dataSource = productsSource;
+      odataMatrices.forEach(function (name) {
+        var matrix = model.getQuestionByName(name);
+        if (!!matrix) matrix.dataSource = productsSource;
+      });
       model.onDynamicDataError.add(function (_, options) {
         console.error("data source", options.operation, String(options.error));
         showDataError(String(options.error && options.error.message || options.error));
