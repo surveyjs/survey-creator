@@ -62,15 +62,13 @@ To add Open Sans using [Fontsource](https://fontsource.org/docs/getting-started/
 npm install @fontsource/open-sans
 ```
 
-The following example imports font weights 400, 600, and 700 alongside the component style sheets. You can also place the font imports in your application's entry file or root layout to load them once for all SurveyJS components.
+The following example imports font weights 400, 600, and 700. Place the font imports in your application's entry file or root layout to load them once for all SurveyJS components.
 
 ```js
-// components/SurveyCreator.tsx
-import "@fontsource/open-sans/400.css";
-import "@fontsource/open-sans/600.css";
-import "@fontsource/open-sans/700.css";
-import "survey-core/survey-core.css";
-import "survey-creator-core/survey-creator-core.css";
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
 ```
 
 ## Configure Survey Creator
@@ -119,13 +117,17 @@ export default function SurveyCreatorWidget(props: { json?: Object, options?: IC
   <summary>View Full Code</summary>
 
 ```js
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
+
+```js
 // components/SurveyCreator.tsx
 import { useState } from "react";
 import { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreator } from "survey-creator-react";
-import "@fontsource/open-sans/400.css";
-import "@fontsource/open-sans/600.css";
-import "@fontsource/open-sans/700.css";
 import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 
@@ -199,15 +201,19 @@ export default function SurveyCreator() {
   <summary>View Full Code</summary>
 
 ```js
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
+
+```js
 // components/SurveyCreator.tsx
 'use client'
 
 import { useState } from "react";
 import { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
-import "@fontsource/open-sans/400.css";
-import "@fontsource/open-sans/600.css";
-import "@fontsource/open-sans/700.css";
 import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 
@@ -366,15 +372,19 @@ export default function SurveyCreatorWidget(props: { json?: Object, options?: IC
   <summary>View Full Code</summary>
 
 ```js
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
+
+```js
 // components/SurveyCreator.tsx
 'use client'
 
 import { useState } from "react";
 import { ICreatorOptions } from "survey-creator-core";
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-import "@fontsource/open-sans/400.css";
-import "@fontsource/open-sans/600.css";
-import "@fontsource/open-sans/700.css";
 import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 
@@ -508,6 +518,13 @@ To view the application, run `npm run dev` in a command line and open [http://lo
   <summary>View Full Code</summary>
 
 ```js
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
+
+```js
 // components/SurveyCreator.tsx
 // ...
 'use client'
@@ -519,9 +536,6 @@ import {
   // UploadFileEvent
 } from "survey-creator-core";
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-import "@fontsource/open-sans/400.css";
-import "@fontsource/open-sans/600.css";
-import "@fontsource/open-sans/700.css";
 import "survey-core/survey-core.css";
 import "survey-creator-core/survey-creator-core.css";
 

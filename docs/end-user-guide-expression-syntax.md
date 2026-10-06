@@ -277,12 +277,19 @@ Arithmetic operators perform simple mathematical calculations on numeric values.
 
 ## Calculation Functions
 
-Calculation functions allow you to perform computations within your survey. All functions are divided into three groups: logical, date, and aggregation functions.
+Calculation functions allow you to perform computations within your survey. All functions are divided into four groups: logical, string, date, and aggregation functions.
 
 ### Logical Functions
 
-Expressions support one logical function&mdash;`iif`. It returns one value or the other based on whether a specified condition is true or false.      
+Expressions support one logical function&mdash;`iif`. It returns one value or the other based on whether a specified condition is true or false.
+
 Example: `"iif({q1} > 20, 'High', 'Low')"`
+
+### String Functions
+
+Expressions support one string function&mdash;`substring`. It returns part of a string between a start index (included) and an optional end index (excluded). Indices start at 0. If the end index is omitted, the function returns all characters from the start index to the end of the string.
+
+Example: `"substring('abcdef', 1, 3)"` ('bc')
 
 ### Date Functions
 
@@ -293,10 +300,10 @@ For date calculations, you can use the following functions:
 | `age`| Age according to a given birthdate. | `"age('2000-01-01')"` |
 | `currentDate` | Current date and time. | `"currentDate()"` |
 | `today` | Current date or a date shifted from the current by a given number of days. | `"today(-1)"`&nbsp;(yesterday)<br>`"today(1)"` (tomorrow) |
-| `year`| Year of a given date. | `"year('2000-01-01')"` (2000) |
-| `month`| Month of a given date as a value from 1 (January) to 12 (December). | `"month('2000-01-01')"` (1) |
-| `day`| Day of the month for a given date as a value from 1 to 31. | `"day('2000-01-30')"` (30) |
-| `weekday`| Day of the week for a given date as a value from 0 (Sunday) to 6 (Saturday). | `"weekday('2000-01-01')"` (6) |
+| `year`| Year of a given date, or the current year if the date argument is omitted or empty. | `"year('2000-01-01')"` (2000)<br>`"year()"` (current year) |
+| `month`| Month of a given date as a value from 1 (January) to 12 (December), or the current month if the date argument is omitted or empty. | `"month('2000-01-01')"` (1)<br>`"month()"` (current month) |
+| `day`| Day of the month for a given date as a value from 1 to 31, or the current day of the month if the date argument is omitted or empty. | `"day('2000-01-30')"` (30)<br>`"day()"` (current day of the month) |
+| `weekday`| Day of the week for a given date as a value from 0 (Sunday) to 6 (Saturday), or the current day of the week if the date argument is omitted or empty. | `"weekday('2000-01-01')"` (6)<br>`"weekday()"` (current day of the week) |
 | `dateDiff`| Difference between two given dates in days (default), hours, minutes, seconds, months, or years. | `"dateDiff('2000-01-01', '2000-02-01', "days")"` (31)<br>`"dateDiff('2000-01-01', '2000-04-01', "months")"` (3)<br>`"dateDiff('2000-01-01', '2009-02-01', "years")"` (9)<br>`"dateDiff('2000-01-01T01:00:00', '2000-01-01T03:00:00', "hours")"` (2)<br>`"dateDiff('2000-01-01T01:00:00', '2000-01-01T01:45:00', "minutes")"` (45)<br>`"dateDiff('2000-01-01T01:00:00', '2000-01-01T01:00:30', "seconds")"` (30) |
 | `dateAdd`| A `Date` value with an added or subtracted number of days (default), hours, minutes, seconds, months, or years. | `"dateAdd('2000-01-01', 10, "days")"` (`new Date(2000-01-11)`)<br>`"dateAdd('2000-01-01', 4, "months")"` (`new Date(2000-05-01)`)<br>`"dateAdd('2000-01-01', -5, "years")"` (`new Date(1995-01-01)`) |
 
@@ -306,7 +313,7 @@ For date calculations, you can use the following functions:
 
 Aggregation functions are used to summarize, combine, or otherwise process a set of values into a single value.
 
-Most survey questions support basic aggregation functions, such as `sum`, `min`, `max`, and `avg`. For Multi-Select Matrix, Dynamic Matrix, and Dynamic Panel, you can use advanced functions that aggregate values in a specific matrix column or panel question. The advanced functions provide an optional third parameter that allows you to filter values included in the calculation.
+Most survey questions support basic aggregation functions, such as `sum`, `min`, `max`, `avg`, and `count`. For Multi-Select Matrix, Dynamic Matrix, and Dynamic Panel, you can use advanced functions that aggregate values in a specific matrix column or panel question. The advanced functions provide an optional third parameter that allows you to filter values included in the calculation.
 
 The following table describes all aggregation functions that you can use in expressions:
 
@@ -316,6 +323,7 @@ The following table describes all aggregation functions that you can use in expr
 | `min` | Minimum of passed numbers. | `"min(10, 20, 30, 40)"` (10) |
 | `max` | Maximum of passed numbers. | `"max(10, 20, 30, 40)"` (40) |
 | `avg` | Average of passed numbers. | `"avg(10, 20, 30, 40)"` (25) |
+| `count` | Number of passed values or array items, including items in nested arrays. | `"count(10, 20, 30, 40)"` (4)<br>`"count([10, 20], 30)"` (3)<br>`"count({questionName})"` (number of selected choices in a multi-select question) |
 | `sumInArray` | Sum of numbers in a specific matrix column or panel question. | See below |
 | `minInArray` | Minimum of numbers in a specific matrix column or panel question. | See below |
 | `maxInArray` | Maximum of numbers in a specific matrix column or panel question. | See below |
