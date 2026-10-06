@@ -165,4 +165,7 @@ export var presetsCss = {
     rowEnter: "sps-table__row--enter",
     rowLeave: "sps-table__row--leave",
   },
+  variables: {
+    mobileWidth: "",
+  },
 };

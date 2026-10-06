@@ -930,12 +930,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.updateElementTranslationStates();
       const json = this.survey.toJSON();
       this.sourceSurvey = this.createInstance(json, "translation_source");
-      this.setupSourceSurvey(this.sourceSurvey);
       // With no target language selected there is nothing to edit: the target pane is not
       // rendered, so its copy is not created either and the source pane is the whole surface.
       if (!!this.targetLocale) {
         this.targetSurvey = this.createInstance(json, "translation_target");
-        this.setupTargetSurvey(this.targetSurvey);
         this.setupSourceEmptySpaces();
       }
       this.buildMappings();
@@ -1299,6 +1297,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         }
       });
       this.restoreRunnerElementStyles(survey);
+      // Runs before onSurveyInstanceCreated, so its handlers can override what the panes set up
+      // (getRendererForString and the like), as they can for the designer survey.
+      if (reason === "translation_source")this.setupSourceSurvey(survey);
+      if (reason === "translation_target")this.setupTargetSurvey(survey);
     });
   }
   // The panes are design-mode surveys, so the header parts render whenever the corresponding

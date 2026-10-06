@@ -1850,6 +1850,34 @@ An array of collection items to which the target item belongs ([`columns`](https
 
 **Related APIs:** [`onFastEntryFinished`](#onFastEntryFinished), [`onCollectionItemAllowOperations`](#onCollectionItemAllowOperations)
 
+### `onLintSurvey`
+
+An event that is raised before the [JSON Editor tab](/survey-creator/documentation/end-user-guide/user-interface#json-editor-tab) lints the survey JSON schema.
+
+Use this event to customize linter options, for example, disable individual rules, change their severity, or declare known variables and functions.
+
+
+Parameters:
+
+ - `sender`: `SurveyCreatorModel`  
+A Survey Creator instance that raised the event.
+- `options.lintOptions`: `ISurveyLintOptions`  
+Linter options used to validate the survey JSON schema in the JSON Editor tab. This object is initialized with default settings. Modify its properties to [configure rules](/form-library/documentation/survey-json-validation#linter-rules), [declare known variables, functions, and custom components](/form-library/documentation/survey-json-validation#handle-custom-variables-functions-and-components), or [suppress findings](/form-library/documentation/survey-json-validation#configure-suppressed-rules).
+
+The following code overrides individual [linting rules](/form-library/documentation/survey-json-validation#linter-rules) to report unknown properties as warnings and disable checks for unknown references:
+
+```js
+import { SurveyCreatorModel } from "survey-creator-core";
+
+const creator = new SurveyCreatorModel();
+creator.onLintSurvey.add((_, options) => {
+  options.lintOptions.rules["property/unknown"] = "warning";
+  options.lintOptions.rules["reference/unknown"] = "off";
+});
+```
+
+[Documentation: Survey JSON Validation](/form-library/documentation/survey-json-validation (linkStyle))
+
 ### `onLogicRuleGetDisplayText`
 
 An event that is raised when the Logic tab constructs a user-friendly display text for a logic rule. Use this event to modify this display text.

@@ -370,5 +370,8 @@ export var propertyGridCss = {
   },
   linkvalue: {
     content: "spg-link"
-  }
+  },
+  variables: {
+    mobileWidth: "",
+  },
 };

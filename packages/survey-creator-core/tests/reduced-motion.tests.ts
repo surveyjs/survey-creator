@@ -13,13 +13,13 @@ function rootHasDisabledAnimations(creator: CreatorTester): boolean {
 
 afterEach(() => {
   settings.animationEnabled = true;
-  settings.respectReducedMotion = true;
+  settings.animation.respectReducedMotion = true;
   setReducedMotion(false);
 });
 
 test("root css tracks reduced motion only after the creator is mounted", (): void => {
   settings.animationEnabled = true;
-  settings.respectReducedMotion = true;
+  settings.animation.respectReducedMotion = true;
   setReducedMotion(true);
   const creator = new CreatorTester();
   expect(rootHasDisabledAnimations(creator)).toBe(false);
@@ -45,7 +45,7 @@ test("root css tracks reduced motion only after the creator is mounted", (): voi
 
 test("respectReducedMotion false keeps creator animations on", (): void => {
   settings.animationEnabled = true;
-  settings.respectReducedMotion = false;
+  settings.animation.respectReducedMotion = false;
   setReducedMotion(true);
   const creator = new CreatorTester();
   const root = document.createElement("div");
@@ -64,7 +64,7 @@ test("animationEnabled false disables animations without reduced motion", (): vo
 
 test("toolbox animations follow reduced motion", (): void => {
   settings.animationEnabled = true;
-  settings.respectReducedMotion = true;
+  settings.animation.respectReducedMotion = true;
   setReducedMotion(false);
   const creator = new CreatorTester();
   creator.toolbox.supportOnElementRerenderedEvent = false;
@@ -76,7 +76,7 @@ test("toolbox animations follow reduced motion", (): void => {
   expect(creator.toolbox.animationAllowed).toBe(false);
   expect(creator.sidebar.animationAllowed).toBe(false);
 
-  settings.respectReducedMotion = false;
+  settings.animation.respectReducedMotion = false;
   expect(creator.toolbox.animationAllowed).toBe(true);
   expect(creator.sidebar.animationAllowed).toBe(true);
   creator.dispose();
@@ -84,7 +84,7 @@ test("toolbox animations follow reduced motion", (): void => {
 
 test("scrollElementIntoView uses auto while reduced motion is requested", (): void => {
   settings.animationEnabled = true;
-  settings.respectReducedMotion = true;
+  settings.animation.respectReducedMotion = true;
   const root = document.createElement("div");
   const el = document.createElement("div");
   el.id = "reduced-motion-target";
@@ -105,7 +105,7 @@ test("scrollElementIntoView uses auto while reduced motion is requested", (): vo
 
 test("scrollToElement drops smooth scrolling while reduced motion is requested", (): void => {
   settings.animationEnabled = true;
-  settings.respectReducedMotion = true;
+  settings.animation.respectReducedMotion = true;
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "q1" }] };
   const page = creator.survey.pages[0];
