@@ -31,8 +31,9 @@
 <script>
   // Filter control prototype (#11890) inside Survey Creator - the same survey as survey-react-ui's
   // filter.html. The products of the public OData Northwind service reach the matrix through a data
-  // source with readRange, so the filter, the sort and the page all run on the server: the filter arrives
-  // as a survey expression and is translated into $filter here. A data source is not part of the JSON,
+  // source that declares paging, filtering and sorting, so the filter, the sort and the page all run on
+  // the server: the filter arrives as a survey expression (the authored one and the control's, bracketed
+  // and joined) and is translated into $filter here. A data source is not part of the JSON,
   // and every tab builds a survey of its own, so it is attached to each Preview and Themes survey as
   // Creator creates it; the designer surface reads no data. Two buttons in Creator's toolbar keep that
   // survey's uiState (the filter's preset, search and edits) in localStorage across reloads.
@@ -112,11 +113,10 @@
   }
   var productsSource = {
     keyField: "id",
-    // Required by the contract; with readRange the list never calls it.
-    read: function () {
-      return productsSource.readRange({ skip: 0, take: 0, filter: "", sort: [] }).then(function (r) { return r.records; });
-    },
-    readRange: function (request) {
+    // Without the three flags the list would read every product once and filter, sort and page them
+    // itself; with them every page, filter and sort is one request to the server.
+    capabilities: { paging: true, filtering: true, sorting: true },
+    read: function (request) {
       try {
         var params = ["$count=true", "$expand=Category($select=CategoryName)",
           "$select=ProductID,ProductName,QuantityPerUnit,UnitPrice,UnitsInStock,Discontinued"];
