@@ -40,6 +40,10 @@
   // The first page has the presets; the next three filter the same products with no presets, by the
   // quick filters alone, with the search, and with the advanced editor; the last one puts the quick
   // filters over a fixed matrix whose rows are local data, with no server at all.
+  // The last three pages read DummyJSON (https://dummyjson.com/docs/products), an API that pages and
+  // sorts by one field but filters only by a search or by one category. Each declares less of it: paging
+  // and sorting with no filter (the list reads everything while a filter is set), all three with a filter
+  // DummyJSON refuses beyond what it can do, and nothing at all (the list does everything itself).
   var ODATA = "https://services.odata.org/V4/Northwind/Northwind.svc/";
   // Record field -> OData property. The record is flat; Category is a navigation property.
   var fieldMap = { name: "ProductName", category: "Category/CategoryName", quantity: "QuantityPerUnit",
@@ -110,7 +114,7 @@
   }
   function readJson(url) {
     return fetch(url).then(function (res) {
-      if (!res.ok) throw new Error("OData " + res.status + " " + res.statusText);
+      if (!res.ok) throw new Error("HTTP " + res.status + " " + res.statusText);
       return res.json();
     });
   }
@@ -143,6 +147,74 @@
       }
     }
   };
+
+  // DummyJSON pages and sorts by one field, but filters only by a search over the title and the
+  // description (q) or by one category: no comparisons, no two categories, no search inside a category.
+  var DUMMY = "https://dummyjson.com/products";
+  // The record fields are the API's own, so a sort or a filter field needs no mapping.
+  var dummySelect = "id,title,description,category,brand,price,stock,rating";
+  // The text of a search: contains over the title, the description or both, with one text - what the
+  // control's search box composes. q always looks in both fields, so a condition on the title alone can
+  // bring back more rows than it asks for.
+  function dummySearchText(op) {
+    if (op.getType() !== "binary") return undefined;
+    if (op.operator === "or") {
+      var left = dummySearchText(op.leftOperand);
+      return left !== undefined && left === dummySearchText(op.rightOperand) ? left : undefined;
+    }
+    var field = op.leftOperand;
+    if (op.operator !== "contains" || field.getType() !== "variable" ||
+      (field.variable !== "title" && field.variable !== "description")) return undefined;
+    return !!op.rightOperand && op.rightOperand.getType() === "const" ? String(op.rightOperand.correctValue) : undefined;
+  }
+  // One category: "=" or an anyof of a single value.
+  function dummyCategory(op) {
+    if (op.getType() !== "binary" || op.leftOperand.getType() !== "variable" || op.leftOperand.variable !== "category") return undefined;
+    var right = op.rightOperand;
+    if (!right) return undefined;
+    if (op.operator === "equal" && right.getType() === "const") return String(right.correctValue);
+    if (op.operator === "anyof" && right.getType() === "array" && right.values.length === 1 &&
+      right.values[0].getType() === "const") return String(right.values[0].correctValue);
+    return undefined;
+  }
+  // The endpoint and the parameters a filter maps to. Anything DummyJSON has no endpoint for is refused,
+  // so a filter is never silently narrowed to the part the server happens to understand.
+  function dummyFilterTarget(expression) {
+    if (!expression) return { path: "", params: [] };
+    var op = new Survey.ConditionsParser().parseExpression(expression);
+    if (!op) throw new Error("Not a survey expression: " + expression);
+    var text = dummySearchText(op);
+    if (text !== undefined) return { path: "/search", params: ["q=" + encodeURIComponent(text)] };
+    var category = dummyCategory(op);
+    if (category !== undefined) return { path: "/category/" + encodeURIComponent(category), params: [] };
+    throw new Error("DummyJSON filters by a search or by one category, not by: " + op.toString());
+  }
+  function readDummy(request) {
+    try {
+      if (request.sort.length > 1) throw new Error("DummyJSON sorts by one field only");
+      var target = dummyFilterTarget(request.filter);
+      // take is 0 for "everything from skip", and so is DummyJSON's limit.
+      var params = target.params.concat(["select=" + dummySelect, "limit=" + request.take]);
+      if (request.skip > 0) params.push("skip=" + request.skip);
+      if (request.sort.length > 0) {
+        params.push("sortBy=" + encodeURIComponent(request.sort[0].field), "order=" + request.sort[0].direction);
+      }
+      var url = DUMMY + target.path + "?" + params.join("&");
+      console.log("dummyjson", JSON.stringify(request.filter), "->", decodeURIComponent(url));
+      return readJson(url).then(function (data) {
+        showDataError("");
+        return { total: data.total, records: data.products };
+      });
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
+  // The same API declared three ways. Without filtering the list reads every product while a filter is
+  // set and filters them itself; with it every filter goes to DummyJSON, which refuses what it cannot do;
+  // without paging the list reads every product once and does everything on its side.
+  var dummyNoFilterSource = { keyField: "id", capabilities: { paging: true, sorting: true }, read: readDummy };
+  var dummyServerFilterSource = { keyField: "id", capabilities: { paging: true, filtering: true, sorting: true }, read: readDummy };
+  var dummyNoPagingSource = { keyField: "id", read: readDummy };
 
   // A failed read keeps the previous rows on screen, so without this the new filter would look applied.
   function showDataError(message) {
@@ -194,11 +266,34 @@
       { name: "stock", title: "In stock", cellType: "text", inputType: "number" },
       { name: "discontinued", title: "Discontinued", cellType: "boolean", filterOperators: ["equal"] }];
   }
-  // The matrices that read the products from Northwind. Each one keeps a list of its own and sends its
-  // own requests, so they share the one data source.
-  var odataMatrices = ["products", "products-quick", "products-search", "products-advanced"];
+  // The columns of every DummyJSON matrix. filterable, when given, names the only columns a filter may
+  // offer: the rest opt out with allowFiltering, so the control shows nothing the server cannot filter by.
+  function dummyColumns(categories, filterable) {
+    var columns = [
+      { name: "title", title: "Title", cellType: "text", filterOperators: ["contains"] },
+      { name: "description", title: "Description", cellType: "text", filterOperators: ["contains"] },
+      // One category at a time: that is all DummyJSON can filter by.
+      { name: "category", title: "Category", cellType: "dropdown", choices: categories, filterOperators: ["equal"] },
+      { name: "brand", title: "Brand", cellType: "text" },
+      { name: "price", title: "Price", cellType: "text", inputType: "number" },
+      { name: "stock", title: "In stock", cellType: "text", inputType: "number" },
+      { name: "rating", title: "Rating", cellType: "text", inputType: "number" }];
+    if (!!filterable) {
+      columns.forEach(function (column) {
+        if (filterable.indexOf(column.name) < 0) column.allowFiltering = false;
+      });
+    }
+    return columns;
+  }
+  // The source of every matrix that reads its rows from a server, by matrix name. Each matrix keeps a
+  // list of its own and sends its own requests, so the Northwind ones share the one data source.
+  var dataSources = {
+    "products": productsSource, "products-quick": productsSource, "products-search": productsSource,
+    "products-advanced": productsSource, "dummy-no-filter": dummyNoFilterSource,
+    "dummy-search-or-category": dummyServerFilterSource, "dummy-no-paging": dummyNoPagingSource
+  };
 
-  function renderCreator(categories) {
+  function renderCreator(categories, dummyCategories) {
     var json = { pages: [
       { name: "presets", title: "Presets, search and the advanced editor", elements: [
         { type: "filter", name: "products-filter", title: "Filter products", source: "products", showSearch: true,
@@ -254,7 +349,41 @@
             folders: { category: "Paper", price: 1.5, stock: 200, reorder: false },
             tape: { category: "Equipment", price: 2, stock: 30, reorder: false }
           } }
-      ] }
+      ] },
+      { name: "dummy-no-filter", title: "DummyJSON: paging and sorting, no server filter",
+        description: "The source declares paging and sorting only: with no filter every page is a request, and while a filter is set the list reads all 194 products and filters them itself.",
+        elements: [
+          { type: "filter", name: "dummy-no-filter-filter", title: "Filter products", source: "dummy-no-filter", showSearch: true,
+            searchFields: ["title", "brand"],
+            // Comparisons DummyJSON has no parameter for; they work here because the list does the filtering.
+            items: [
+              { name: "cheap", title: "Under $10", expression: "{price} < 10" },
+              { name: "top-rated", title: "Top rated", expression: "{rating} >= 4.5" }
+            ] },
+          { type: "matrixdynamic", name: "dummy-no-filter", title: "Products (DummyJSON)", rowsPerPage: 10, columns: dummyColumns(dummyCategories) }
+        ] },
+      { name: "dummy-search-or-category", title: "DummyJSON: the server filters by a search or one category",
+        description: "The source declares filtering, so every filter goes to DummyJSON, which takes a search or one category and nothing else: a search inside a category, or the Under $10 preset, is refused.",
+        elements: [
+          { type: "filter", name: "dummy-server-filter", title: "Filter products", source: "dummy-search-or-category", showSearch: true,
+            // The two fields DummyJSON's q looks in, so the search box asks the server exactly what it answers.
+            searchFields: ["title", "description"], allowChangeSearchFields: false, allowAdvancedMode: false,
+            items: [
+              { name: "smartphones", title: "Smartphones", expression: "{category} = 'smartphones'" },
+              { name: "laptops", title: "Laptops", expression: "{category} = 'laptops'" },
+              { name: "under-10", title: "Under $10 (the server cannot)", expression: "{price} < 10" }
+            ] },
+          { type: "matrixdynamic", name: "dummy-search-or-category", title: "Products (DummyJSON)", rowsPerPage: 10,
+            columns: dummyColumns(dummyCategories, ["title", "description", "category"]) }
+        ] },
+      { name: "dummy-no-paging", title: "DummyJSON: no paging, everything on the client",
+        description: "The source declares nothing: the list reads all 194 products once, and the pages, the filter and the search make no request.",
+        elements: [
+          { type: "filter", name: "dummy-no-paging-filter", title: "Filter products", source: "dummy-no-paging", showSearch: true,
+            searchFields: ["title", "brand"],
+            items: [{ name: "cheap", title: "Under $10", expression: "{price} < 10" }] },
+          { type: "matrixdynamic", name: "dummy-no-paging", title: "Products (DummyJSON)", rowsPerPage: 10, columns: dummyColumns(dummyCategories) }
+        ] }
     ] };
     var creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
     var previewSurvey = null;
@@ -265,9 +394,9 @@
       var model = options.survey;
       previewSurvey = model;
       showDataError("");
-      odataMatrices.forEach(function (name) {
+      Object.keys(dataSources).forEach(function (name) {
         var matrix = model.getQuestionByName(name);
-        if (!!matrix) matrix.dataSource = productsSource;
+        if (!!matrix) matrix.dataSource = dataSources[name];
       });
       model.onDynamicDataError.add(function (_, options) {
         console.error("data source", options.operation, String(options.error));
@@ -303,8 +432,15 @@
     window.surveyJSFramework = "react";
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
-    readJson(ODATA + "Categories?$select=CategoryName").then(function (data) {
-      renderCreator(data.value.map(function (c) { return c.CategoryName; }));
+    // The DummyJSON pages do without their categories rather than take the Northwind pages down with them.
+    var dummyCategories = readJson(DUMMY + "/categories").then(function (list) {
+      return list.map(function (c) { return { value: c.slug, text: c.name }; });
+    }).catch(function (e) {
+      console.error("Could not load the DummyJSON categories:", e.message);
+      return [];
+    });
+    Promise.all([readJson(ODATA + "Categories?$select=CategoryName"), dummyCategories]).then(function (res) {
+      renderCreator(res[0].value.map(function (c) { return c.CategoryName; }), res[1]);
     }).catch(function (e) {
       document.getElementById("survey-creator").textContent = "Could not load the Northwind categories: " + e.message;
     });
