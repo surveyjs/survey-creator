@@ -127,6 +127,8 @@ export class PropertyGridEditorQuestionRegionalFormat extends PropertyGridEditor
     const choices = getLocaleDataLocales().map(loc => new ItemValue(loc, getRegionLocaleName(loc)));
     SurveyHelper.sortItems(choices);
     question.choices = choices;
+    // the dropdown editor replaces the placeholder with the text of the empty locale ("Default (English)")
+    question.placeholder = editorLocalization.getPropertyPlaceholder("regionalformat", "locale");
   }
   private updateFormatPlaceholders(obj: Base, panel: PanelModel): void {
     if (!panel) return;
