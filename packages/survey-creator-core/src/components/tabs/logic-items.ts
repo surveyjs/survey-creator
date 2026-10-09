@@ -244,6 +244,10 @@ export class SurveyLogicItem {
   public removeAction(action: SurveyLogicAction) {
     this.replaceActionCore(null, action);
   }
+  // the actions saving the rule will clear (apply)
+  public getRemovedActions(): Array<SurveyLogicAction> {
+    return [].concat(this.removedActions);
+  }
   public replaceAction(
     newAction: SurveyLogicAction,
     oldAction: SurveyLogicAction
