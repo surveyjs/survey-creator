@@ -1,5 +1,5 @@
 import { CreatorTester } from "../tests/creator-tester";
-import { getCanvasElement, IPresencePeer, IPresencePeerEntry, IPresenceState, mapOffset, PresenceOverlay } from "../src/plugins/collaboration/presence";
+import { getCanvasElement, IPresencePeer, IPresencePeerEntry, IPresenceState, mapOffset, presenceColorSlot, PresenceOverlay } from "../src/plugins/collaboration/presence";
 import { CollaborationPlugin } from "../src/plugins/collaboration";
 
 const initialJSON = {
@@ -27,10 +27,22 @@ function createCreator(): { creator: CreatorTester, plugin: CollaborationPlugin,
 const peerEntry = (clientId: string, overrides: Partial<IPresencePeerEntry> = {}): IPresencePeerEntry => ({
   clientId,
   name: `User ${clientId}`,
-  color: "#e91e63",
   state: { tab: "designer", sel: null, focus: null, cur: null },
   ...overrides
 });
+
+// The mounted creator's theme root carries the user-color tokens the overlay
+// paints with; every slot gets a distinct value so a test can tell whose slot
+// painted a ring.
+const slotToken = (slot: number): string => "#00000" + slot;
+const peerColor = (clientId: string): string => slotToken(presenceColorSlot(clientId));
+function mountThemeRoot(): HTMLElement {
+  const root = document.createElement("div");
+  root.className = "svc-creator sd-theme-root";
+  for (let slot = 0; slot < 10; slot++) root.style.setProperty("--sjs2-color-utility-user-bg-color-" + slot, slotToken(slot));
+  document.body.appendChild(root);
+  return root;
+}
 
 // Build a designer-like adorner holding N string editors; focus one of them.
 function focusFakeEditor(questionName: string, editorCount = 1, focusIdx = 0): HTMLElement {
@@ -96,7 +108,6 @@ test("presence: peers roster ingress", (): any => {
   expect(plugin.peers.size).toEqual(2);
   expect(peersChanged).toEqual(1);
   expect(plugin.peers.get("c1").name).toEqual("User c1");
-  expect(plugin.peers.get("c1").color).toEqual("#e91e63");
 
   plugin.upsertPeer(peerEntry("c3"));
   expect(plugin.peers.size).toEqual(3);
@@ -118,8 +129,8 @@ test("presence: peers roster ingress", (): any => {
 test("presence: invalid peer entries are ignored", (): any => {
   const { plugin } = createCreator();
   plugin.upsertPeer(<any>null);
-  plugin.upsertPeer(<any>{ clientId: "", name: "x", color: "", state: {} });
-  plugin.upsertPeer(<any>{ clientId: "c1", name: "x", color: "", state: null });
+  plugin.upsertPeer(<any>{ clientId: "", name: "x", state: {} });
+  plugin.upsertPeer(<any>{ clientId: "c1", name: "x", state: null });
   expect(plugin.peers.size).toEqual(0);
 });
 
@@ -138,6 +149,7 @@ test("presence: remote selection decorates the native ring node", (): any => {
   designer.innerHTML =
     "<div data-sv-drop-target-survey-element=\"q1\"><div class=\"svc-question__content\"></div></div>";
   document.body.appendChild(designer);
+  const theme = mountThemeRoot();
   const content = <HTMLElement>designer.querySelector(".svc-question__content");
   const selState: any = {
     tab: "designer", sel: { loc: "/pages/page1/elements/q1", name: "q1" },
@@ -147,7 +159,7 @@ test("presence: remote selection decorates the native ring node", (): any => {
     plugin.upsertPeer(peerEntry("c1", { state: selState }));
     (<any>plugin.presence.overlay).render();
     expect(content.getAttribute("data-collab-focus")).toEqual("on");
-    expect(content.style.getPropertyValue("--collab-peer-color")).toEqual("#e91e63");
+    expect(content.style.getPropertyValue("--collab-peer-color")).toEqual(peerColor("c1"));
 
     // The peer walks to another tab: the capture clears sel with the tab
     // change, so the ring disappears instead of lingering.
@@ -165,6 +177,7 @@ test("presence: remote selection decorates the native ring node", (): any => {
     expect(content.style.getPropertyValue("--collab-peer-color")).toEqual("");
   } finally {
     designer.remove();
+    theme.remove();
     plugin.dispose();
   }
 });
@@ -179,6 +192,7 @@ test("presence: remote page selection decorates the page content node", (): any 
     "<div data-sv-drop-target-survey-element=\"page1\" data-sv-drop-target-page=\"page1\">" +
     "<div class=\"svc-page__content\" data-sv-drop-target-survey-page=\"page1\"></div></div>";
   document.body.appendChild(designer);
+  const theme = mountThemeRoot();
   const content = <HTMLElement>designer.querySelector(".svc-page__content");
   try {
     plugin.upsertPeer(peerEntry("c1", {
@@ -190,13 +204,14 @@ test("presence: remote page selection decorates the page content node", (): any 
     }));
     (<any>plugin.presence.overlay).render();
     expect(content.getAttribute("data-collab-focus")).toEqual("on");
-    expect(content.style.getPropertyValue("--collab-peer-color")).toEqual("#e91e63");
+    expect(content.style.getPropertyValue("--collab-peer-color")).toEqual(peerColor("c1"));
 
     plugin.removePeer("c1");
     (<any>plugin.presence.overlay).render();
     expect(content.hasAttribute("data-collab-focus")).toBeFalsy();
   } finally {
     designer.remove();
+    theme.remove();
     plugin.dispose();
   }
 });
@@ -634,8 +649,7 @@ test("presence: overlay maps surface px onto the local canvas, fractions for old
     ({ a: { s: "surface" }, ...extra });
   const setCur = (c: IPresenceState["cur"]): void => {
     peers.set("c1", <IPresencePeer>{
-      clientId: "c1", name: "User c1", color: "#e91e63",
-      state: { tab: "designer", sel: null, focus: null, cur: c }
+      clientId: "c1", name: "User c1",      state: { tab: "designer", sel: null, focus: null, cur: c }
     });
     (<any>overlay).render();
   };
@@ -694,8 +708,7 @@ test("presence: cursors hide under the flyout/mobile sidebar panel, docked does 
   const overlay = new PresenceOverlay(creator, () => peers);
   const setCur = (extra: any): void => {
     peers.set("c1", <IPresencePeer>{
-      clientId: "c1", name: "User c1", color: "#e91e63",
-      state: {
+      clientId: "c1", name: "User c1",      state: {
         tab: "designer", sel: null, focus: null,
         cur: { a: { s: "surface" }, ...extra }
       }
@@ -754,8 +767,7 @@ test("presence: fraction-anchored cursor points hide under the flyout panel too"
   const overlay = new PresenceOverlay(creator, () => peers);
   const setCur = (x: number, y: number): void => {
     peers.set("c1", <IPresencePeer>{
-      clientId: "c1", name: "User c1", color: "#e91e63",
-      state: {
+      clientId: "c1", name: "User c1",      state: {
         tab: "designer", sel: null, focus: null,
         cur: { a: { s: "el", n: "q1" }, x, y }
       }
@@ -793,8 +805,7 @@ test("presence: pg cursors keep drawing over the flyout panel", (): any => {
   const peers = new Map<string, IPresencePeer>();
   const overlay = new PresenceOverlay(creator, () => peers);
   peers.set("c1", <IPresencePeer>{
-    clientId: "c1", name: "User c1", color: "#e91e63",
-    state: {
+    clientId: "c1", name: "User c1",    state: {
       tab: "designer", sel: null, focus: null,
       cur: { a: { s: "pg", n: "title" }, x: 0.5, y: 0.5 }
     }
@@ -967,11 +978,12 @@ test("presence: remote translation focus decorates the right cell; unknown local
   const trState = (trCell: any): any =>
     ({ tab: "translation", sel: null, focus: { area: "tr", ...trCell }, cur: null });
   const trCell = { m: matrix.name, l: "de", loc: "/pages/page1/elements/q1", p: "title" };
+  const theme = mountThemeRoot();
   try {
     plugin.upsertPeer(peerEntry("c1", { state: trState(trCell) }));
     (<any>plugin.presence.overlay).render();
     expect((<HTMLElement>boxes[1]).getAttribute("data-collab-focus")).toEqual("on");
-    expect((<HTMLElement>boxes[1]).style.getPropertyValue("--collab-peer-color")).toEqual("#e91e63");
+    expect((<HTMLElement>boxes[1]).style.getPropertyValue("--collab-peer-color")).toEqual(peerColor("c1"));
     expect((<HTMLElement>boxes[0]).hasAttribute("data-collab-focus")).toBeFalsy();
 
     // A peer's matrix name that does not exist locally (different filters)
@@ -994,6 +1006,7 @@ test("presence: remote translation focus decorates the right cell; unknown local
     expect((<HTMLElement>boxes[1]).style.getPropertyValue("--collab-peer-color")).toEqual("");
   } finally {
     container.remove();
+    theme.remove();
     plugin.dispose();
   }
 });
@@ -1076,14 +1089,18 @@ test("presence: first peer wins a contested translation cell", (): any => {
     tab: "translation", sel: null,
     focus: { area: "tr", m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title" }, cur: null
   };
+  const theme = mountThemeRoot();
   try {
+    // The two peers are painted differently, so the ring tells who won.
+    expect(peerColor("c1")).not.toEqual(peerColor("c2"));
     plugin.upsertPeer(peerEntry("c1", { state: trState }));
-    plugin.upsertPeer(peerEntry("c2", { state: trState, color: "#2196f3" }));
+    plugin.upsertPeer(peerEntry("c2", { state: trState }));
     (<any>plugin.presence.overlay).render();
     expect(box.getAttribute("data-collab-focus")).toEqual("on");
-    expect(box.style.getPropertyValue("--collab-peer-color")).toEqual("#e91e63");
+    expect(box.style.getPropertyValue("--collab-peer-color")).toEqual(peerColor("c1"));
   } finally {
     container.remove();
+    theme.remove();
     plugin.dispose();
   }
 });
