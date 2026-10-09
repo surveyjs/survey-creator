@@ -1,6 +1,7 @@
 import { DomDocumentHelper, DomWindowHelper, EventBase } from "survey-core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { buildLocator } from "../journal/journal-locator";
+import { logicRuleKey, openLogicRule } from "./logic-rules";
 import { emptyPresenceState, encodeAnchor, encodeEditFocus, getCanvasElement, IPresenceFocus, IPresenceState, PRESENCE_SELECTORS } from "./presence-state";
 
 // Mouse updates are throttled to this interval (trailing edge).
@@ -87,9 +88,13 @@ export class PresenceCapture {
     this.hiddenFocus = null;
     this.cancelFocusClear();
     const tab = this.creator.activeTab ?? "";
+    const sel = tab === "designer" ? this.encodeSel(this.creator.selectedElement) : null;
+    const rule = this.currentRule();
     this.emit({
       tab,
-      sel: tab === "designer" ? this.encodeSel(this.creator.selectedElement) : null,
+      sel,
+      rule,
+      lock: this.resolveLock(sel, this.creator.selectedElement, rule),
       focus: null,
       trLoc: null,
       cur: null
@@ -115,9 +120,57 @@ export class PresenceCapture {
   private sendSelection(element: any): void {
     // Selection is shared only while the designer (the view that renders it)
     // is the sender's active tab; sendTab re-announces it on return.
-    this.emit({ sel: this.creator.activeTab === "designer" ? this.encodeSel(element) : null });
+    const sel = this.creator.activeTab === "designer" ? this.encodeSel(element) : null;
+    this.emit({ sel, lock: this.resolveLock(sel, element, this.state.rule ?? null) });
   }
   private onElementSelected = (_: unknown, options: any): void => this.sendSelection(options?.element);
+
+  // --- logic rule ----------------------------------------------------------------
+  // The Logic tab edits one rule at a time in a matrix row's detail panel; the
+  // row list is a generated survey, so - like the property grid - it is
+  // hooked at instance creation, which survives the list being rebuilt. The
+  // tab model sets the edited rule in its own detail-panel callback, so the
+  // state is read once the current dispatch is over.
+
+  private currentRule(): string | null {
+    if (this.creator.activeTab !== "logic") return null;
+    return logicRuleKey(openLogicRule((<any>this.creator.getPlugin("logic", false))?.model));
+  }
+  private trackLogicItemsSurvey(survey: any): void {
+    survey?.onMatrixDetailPanelVisibleChanged?.add(() => {
+      Promise.resolve().then(() => this.refreshLock());
+    });
+  }
+
+  // --- editing lock --------------------------------------------------------------
+  // Whether the selection (designer) or the open rule (Logic tab) is held as
+  // an editing lock is decided by the owners (`ElementLockGuard`,
+  // `LogicLockGuard`); without a resolver nothing is ever locked.
+
+  public lockResolver: (element: any) => boolean;
+  public ruleLockResolver: (rule: string) => boolean;
+
+  private resolveLock(sel: IPresenceState["sel"], element: any, rule: string | null): boolean {
+    if (sel) return !!element && !!this.lockResolver && this.lockResolver(element);
+    return !!rule && !!this.ruleLockResolver && this.ruleLockResolver(rule);
+  }
+  // Re-evaluate the shared selection / open rule and the lock without a
+  // selection change: the roster changed (a holder left, a race was lost),
+  // the selected element was renamed/moved (its locator changed), or a rule
+  // was opened or closed. Emits only on a real change - it runs on every
+  // roster update.
+  public refreshLock(): void {
+    if (this.disposed) return;
+    const element = this.creator.selectedElement;
+    const sel = this.creator.activeTab === "designer" ? this.encodeSel(element) : null;
+    const rule = this.currentRule();
+    const lock = this.resolveLock(sel, element, rule);
+    const changed: Partial<IPresenceState> = {};
+    if (JSON.stringify(sel) !== JSON.stringify(this.state.sel)) changed.sel = sel;
+    if (rule !== (this.state.rule ?? null)) changed.rule = rule;
+    if (lock !== !!this.state.lock) changed.lock = lock;
+    if (Object.keys(changed).length > 0)this.emit(changed);
+  }
 
   // --- keyboard focus ------------------------------------------------------------
   // At most one focus per participant (the caret is singular). Every source
@@ -156,6 +209,10 @@ export class PresenceCapture {
   // change - the exact mechanism PropertyGridModel uses internally.
 
   private onSurveyInstanceCreated = (_: unknown, options: any): void => {
+    if (options?.area === "logic-tab:condition-list") {
+      this.trackLogicItemsSurvey(options.survey);
+      return;
+    }
     if (options?.area === "translation-tab:table") {
       this.trackTranslationSurvey(options.survey);
       return;

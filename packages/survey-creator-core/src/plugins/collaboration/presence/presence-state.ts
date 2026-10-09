@@ -88,6 +88,19 @@ export interface IPresenceState {
     // element.name - direct DOM anchor; null for non-anchorable objects.
     name: string | null,
   };
+  // The Logic-tab rule the sender has open in its editor (an existing rule -
+  // a rule being created is nobody else's business), as `logicRuleKey`; null
+  // otherwise. Shared only on the Logic tab, like `sel` on the designer.
+  // Optional for wire compatibility - readers must treat absence as null.
+  rule?: string | null;
+  // The sender holds its `sel` (designer) or `rule` (Logic tab) as an editing
+  // lock: peers treat that question or panel (with its content), or that
+  // rule, as read-only. Viewers select a held element / open a held rule too,
+  // which is why `sel`/`rule` alone cannot tell the holder apart. Always false
+  // without a lockable `sel` or a `rule`; resets atomically with them. See
+  // `ElementLockGuard` and `LogicLockGuard`. Optional for wire compatibility
+  // with older senders - readers must treat absence as false.
+  lock?: boolean;
   // Keyboard focus, or null - see `IPresenceFocus`.
   focus: null | IPresenceFocus;
   // Sticky Translations-tab locale: the last locale column whose cell the
@@ -123,18 +136,17 @@ export interface IPresenceState {
 }
 
 // What the transport feeds into `CollaborationPlugin.upsertPeer`/`setPeers`.
+// No color: every surface derives it from `clientId` (presenceColorSlot).
 export interface IPresencePeerEntry {
   clientId: string;
   // Display name, stamped by the server from the connection URL.
   name: string;
-  // Server-assigned hex color.
-  color: string;
   state: IPresenceState;
 }
 
-// A remote participant as stored in the roster. Identity (`name`/`color`)
-// comes from the server envelope; liveness is the server's job, so the
-// roster keeps nothing beyond what the transport delivered.
+// A remote participant as stored in the roster. The name comes from the server
+// envelope; liveness is the server's job, so the roster keeps nothing beyond
+// what the transport delivered.
 export type IPresencePeer = IPresencePeerEntry;
 
 // ---------------------------------------------------------------------------
@@ -329,17 +341,32 @@ export function mapOffset(d: number, ws: number, wr: number): number {
 // A participant who is doing nothing observable. Used as the capture's initial
 // value and as what a collaboration plugin with presence switched off reports.
 export function emptyPresenceState(): IPresenceState {
-  return { tab: "", sel: null, focus: null, trLoc: null, cur: null };
+  return { tab: "", sel: null, rule: null, lock: false, focus: null, trLoc: null, cur: null };
 }
 
-// The theme's user-color slot for a participant: 1..9 and 0, matching the
+// The theme's user-color slots a participant may get - slots of the
 // --sjs2-color-utility-user-{bg,fg-on,border}-color-N token family.
+// Deliberately NOT 0..9: two of the ten theme slots are unusable for a peer.
+//  - 0 is the neutral "unknown peer" gray (see PRESENCE_UNKNOWN_COLOR).
+//  - 5 (yellow) is the only slot the theme pairs with a DARK foreground. The
+//    overlay's name badge and cursor pill draw white text unconditionally, so
+//    a peer on slot 5 would be illegible there.
+export const PRESENCE_COLOR_SLOTS: ReadonlyArray<number> = [1, 2, 3, 4, 6, 7, 8, 9];
+
+// The literal the overlay paints with when the theme's token cannot be read
+// (the creator is not mounted yet): slot 0's gray.
+export const PRESENCE_UNKNOWN_COLOR = "#808080";
+
+const USER_COLOR_TOKEN = "--sjs2-color-utility-user-bg-color-";
+
+// The theme's user-color slot for a participant.
 //
-// Derived from the clientId rather than taken from the server envelope so that
-// the color is theme-aware (the token family carries a legible foreground for
-// each slot, which a raw hex cannot) and so that every client independently
-// arrives at the SAME slot for the same peer - the derivation is deterministic,
-// so no agreement protocol is needed.
+// Derived on every client from the clientId - the relay assigns no colors.
+// The derivation is deterministic, so every client independently arrives at
+// the SAME slot for the same peer and every surface (avatar chips, rings,
+// badges, cursors) paints it alike; no agreement protocol is needed. Two peers
+// may share a slot - with eight of them that is the price of not asking the
+// server. A reconnect is a new clientId, hence possibly a new color.
 export function presenceColorSlot(clientId: string): number {
   const id = typeof clientId === "string" ? clientId : "";
   // FNV-1a, 32-bit. Math.imul keeps the multiply from losing precision.
@@ -347,7 +374,24 @@ export function presenceColorSlot(clientId: string): number {
   for (let i = 0; i < id.length; i++) {
     hash = Math.imul(hash ^ id.charCodeAt(i), 0x01000193);
   }
-  return Math.abs(hash % 10);
+  return PRESENCE_COLOR_SLOTS[(hash >>> 0) % PRESENCE_COLOR_SLOTS.length];
+}
+
+// The literal color of a slot as the live theme renders it, read from the
+// computed style of the creator's theme root. For surfaces outside that root
+// (the overlay layer on <body>), where a var() reference would not resolve.
+// A custom property's computed value is already var()-substituted; an
+// unreadable one falls back to PRESENCE_UNKNOWN_COLOR.
+export function presenceSlotColor(themeStyle: CSSStyleDeclaration | null | undefined, slot: number): string {
+  const value = themeStyle ? themeStyle.getPropertyValue(USER_COLOR_TOKEN + slot).trim() : "";
+  return !!value && value.indexOf("var(") < 0 ? value : PRESENCE_UNKNOWN_COLOR;
+}
+
+// The avatar circle: the base shape plus the theme's user-color slot. Shared by
+// every place that shows a participant as an avatar - the collab-bar chip and
+// roster marker, the Logic-tab rule holder.
+export function presenceAvatarCss(colorIndex: number): string {
+  return "svc-collab-bar__avatar svc-collab-bar__avatar--color-" + colorIndex;
 }
 
 export function presenceInitials(name: string): string {

@@ -1,7 +1,9 @@
 import { DomDocumentHelper, DomWindowHelper } from "survey-core";
 import { SurveyCreatorModel } from "survey-creator-core";
+import { getCollabString } from "../collaboration-strings";
 import { buildLocator, resolveLocator } from "../journal/journal-locator";
-import { getCanvasElement, IPresenceFocus, IPresencePeer, IPresenceState, mapOffset, PRESENCE_SELECTORS, resolveAnchor, resolveEditFocus } from "./presence-state";
+import { ElementLockGuard } from "./element-lock";
+import { getCanvasElement, IPresenceFocus, IPresencePeer, IPresenceState, mapOffset, presenceColorSlot, presenceSlotColor, PRESENCE_SELECTORS, resolveAnchor, resolveEditFocus } from "./presence-state";
 import "./presence.scss";
 
 // Above the creator content; below survey-core popups is acceptable (cosmetic).
@@ -21,6 +23,11 @@ const RING_WIDTH = 2;
 // badge hangs 4px below the ring, its right edge 8px inside the ring's.
 const BADGE_GAP = 4;
 const BADGE_INSET = 8;
+// Padlock glyph prepended to the badge of a held (editing-locked) element.
+const LOCK_ICON =
+  "<svg width=\"10\" height=\"10\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" " +
+  "style=\"display:inline-block;vertical-align:-1px;margin-right:4px\">" +
+  "<path fill=\"currentColor\" d=\"M8 1a4 4 0 0 0-4 4v2H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-1V5a4 4 0 0 0-4-4Zm-2 6V5a2 2 0 1 1 4 0v2H6Z\"/></svg>";
 
 interface IRect { left: number, top: number, width: number, height: number }
 
@@ -40,12 +47,24 @@ interface IDecoration {
   clip?: IRect;
   // Overlaying panel rect the badge must not draw over (flyout/mobile sidebar).
   avoid?: IRect;
+  // The peer holds this element as an editing lock (selection rings only).
+  locked?: boolean;
 }
+
+// Figma: sjs2/typography/x-small-strong on the user color, 4px radius.
+const BADGE_CSS =
+  "padding:4px 8px;border-radius:4px;color:#fff;white-space:nowrap;" +
+  "font-weight:600;font-size:10px;line-height:14px;" +
+  "font-family:var(--sjs2-font-family, system-ui, sans-serif);" +
+  "max-width:160px;overflow:hidden;text-overflow:ellipsis;";
 
 // Per-peer DOM artifacts, created lazily and repositioned every tick.
 interface IPeerArtifacts {
   cursor: HTMLElement;
   cursorName: HTMLElement;
+  // The color the cursor and its pill are painted with - repainted when the
+  // theme root resolves it differently (mounted later, theme switch).
+  color: string;
   // Receiver-side time of the last observed cursor change (staleness).
   curChangedAt: number;
   // Serialized last cursor - the change detector behind the idle fade.
@@ -68,7 +87,7 @@ export class PresenceOverlay {
   private disposed = false;
   private layer: HTMLElement;
   private artifacts = new Map<string, IPeerArtifacts>();
-  // Nodes currently carrying a decoration -> the applied peer color.
+  // Nodes currently carrying a decoration -> the applied color + lock state.
   private decorated = new Map<HTMLElement, string>();
   // Name badge (a layer artifact) per decorated node.
   private badges = new Map<HTMLElement, HTMLElement>();
@@ -80,7 +99,8 @@ export class PresenceOverlay {
   private mutationObserver: MutationObserver | undefined;
   private doc: Document;
 
-  constructor(private creator: SurveyCreatorModel, private getPeers: () => ReadonlyMap<string, IPresencePeer>) {
+  constructor(private creator: SurveyCreatorModel, private getPeers: () => ReadonlyMap<string, IPresencePeer>,
+    private lockGuard?: ElementLockGuard) {
     if (!DomDocumentHelper.isAvailable()) return;
     this.doc = DomDocumentHelper.getDocument();
     this.layer = this.doc.createElement("div");
@@ -168,22 +188,39 @@ export class PresenceOverlay {
     return node;
   }
 
-  private getArtifacts(peer: IPresencePeer): IPeerArtifacts {
+  private getArtifacts(peer: IPresencePeer, color: string): IPeerArtifacts {
     let a = this.artifacts.get(peer.clientId);
-    if (a) return a;
-    const color = peer.color || "#888";
-    a = {
-      cursor: this.el("collab-presence-cursor", "width:0;height:0;"),
-      cursorName: this.el("collab-presence-cursor-name", `padding:2px 7px;border-radius:10px;background:${color};color:#fff;white-space:nowrap;`),
-      curChangedAt: 0,
-      lastCurSig: undefined
-    };
-    a.cursor.innerHTML =
-      "<svg width=\"16\" height=\"18\" viewBox=\"0 0 16 18\" style=\"display:block\">" +
-      "<path d=\"M1 1 L1 14 L4.5 10.8 L7 16.5 L9.3 15.5 L6.8 9.9 L11.5 9.6 Z\" " +
-      `fill="${peer.color || "#888"}" stroke="#fff" stroke-width="1"/></svg>`;
-    this.artifacts.set(peer.clientId, a);
+    if (!a) {
+      a = {
+        cursor: this.el("collab-presence-cursor", "width:0;height:0;"),
+        cursorName: this.el("collab-presence-cursor-name", "padding:2px 7px;border-radius:10px;color:#fff;white-space:nowrap;"),
+        color: "",
+        curChangedAt: 0,
+        lastCurSig: undefined
+      };
+      a.cursor.innerHTML =
+        "<svg width=\"16\" height=\"18\" viewBox=\"0 0 16 18\" style=\"display:block\">" +
+        "<path d=\"M1 1 L1 14 L4.5 10.8 L7 16.5 L9.3 15.5 L6.8 9.9 L11.5 9.6 Z\" " +
+        "stroke=\"#fff\" stroke-width=\"1\"/></svg>";
+      this.artifacts.set(peer.clientId, a);
+    }
+    if (a.color !== color) {
+      a.color = color;
+      a.cursorName.style.background = color;
+      a.cursor.querySelector("path")?.setAttribute("fill", color);
+    }
     return a;
+  }
+
+  // The computed style of the creator's theme root, where the user-color tokens
+  // resolve. The mounted creator reports its root; before that, or for a host
+  // that never passes one, the root is found by its classes - BOTH of them, so
+  // the detached .sd-theme-root probe creator-core appends to <body> while
+  // calculating theme variables never matches.
+  private themeStyle(): CSSStyleDeclaration | null {
+    const root = this.creator.rootElement ?? this.doc.querySelector<HTMLElement>(".svc-creator.sd-theme-root");
+    const view = this.doc.defaultView;
+    return !!root && !!view ? view.getComputedStyle(root) : null;
   }
 
   private dropArtifacts(clientId: string): void {
@@ -362,16 +399,20 @@ export class PresenceOverlay {
     });
     stale.forEach((node) => {
       node.removeAttribute("data-collab-focus");
+      node.removeAttribute("data-collab-lock");
       node.style.removeProperty("--collab-peer-color");
       this.decorated.delete(node);
       this.badges.get(node)?.remove();
       this.badges.delete(node);
     });
     wanted.forEach((dec, node) => {
-      if (this.decorated.get(node) !== dec.color) {
+      const key = `${dec.color}|${dec.locked ? 1 : 0}`;
+      if (this.decorated.get(node) !== key) {
         node.setAttribute("data-collab-focus", "on");
+        if (dec.locked) node.setAttribute("data-collab-lock", "on");
+        else node.removeAttribute("data-collab-lock");
         node.style.setProperty("--collab-peer-color", dec.color);
-        this.decorated.set(node, dec.color);
+        this.decorated.set(node, key);
       }
       this.placeBadge(node, dec);
     });
@@ -383,12 +424,7 @@ export class PresenceOverlay {
   private placeBadge(node: HTMLElement, dec: IDecoration): void {
     let badge = this.badges.get(node);
     if (!badge) {
-      // Figma: sjs2/typography/x-small-strong on the user color, 4px radius.
-      badge = this.el("collab-presence-badge",
-        "padding:4px 8px;border-radius:4px;color:#fff;white-space:nowrap;" +
-        "font-weight:600;font-size:10px;line-height:14px;" +
-        "font-family:var(--sjs2-font-family, system-ui, sans-serif);" +
-        "max-width:160px;overflow:hidden;text-overflow:ellipsis;transform:translateX(-100%);");
+      badge = this.el("collab-presence-badge", BADGE_CSS + "transform:translateX(-100%);");
       this.badges.set(node, badge);
     }
     // An inline string editor draws its visible frame on the border child,
@@ -402,7 +438,7 @@ export class PresenceOverlay {
       this.hide(badge);
       return;
     }
-    badge.textContent = dec.name;
+    this.fillBadge(badge, dec.name, !!dec.locked);
     badge.style.background = dec.color;
     badge.style.display = "block"; // measurable before placing
     // On a node narrower than the badge (a checkbox) don't hang out past the
@@ -420,6 +456,22 @@ export class PresenceOverlay {
       return;
     }
     this.place(badge, rightEdge, top);
+  }
+
+  // Badge content: the name, with a padlock and an "is editing" tooltip for a
+  // lock holder. Rewritten only when it changes.
+  private fillBadge(badge: HTMLElement, name: string, locked: boolean): void {
+    const badgeKey = `${locked ? 1 : 0}|${name}`;
+    if (badge.dataset.key === badgeKey) return;
+    badge.dataset.key = badgeKey;
+    if (locked) {
+      badge.innerHTML = LOCK_ICON;
+      badge.appendChild(this.doc.createTextNode(name));
+      badge.title = getCollabString("collabElementLocked", name);
+    } else {
+      badge.textContent = name;
+      badge.removeAttribute("title");
+    }
   }
 
   // --- per-tick render -----------------------------------------------------------
@@ -460,13 +512,20 @@ export class PresenceOverlay {
     const translationRect = translation?.getBoundingClientRect();
     const stringsSurvey = translation
       ? (this.creator.getPlugin("translation", false) as any)?.model?.stringsSurvey : null;
-    // Desired decorations this tick; first peer to claim a node wins.
+    // Desired decorations this tick; first peer to claim a node wins - and
+    // lock holders go first, so a held element shows its holder, not a viewer.
     const wanted = new Map<HTMLElement, IDecoration>();
+    const ordered = Array.from(peers.values());
+    const isHolder = (peer: IPresencePeer): boolean => !!this.lockGuard && this.lockGuard.isHolder(peer.clientId);
+    ordered.sort((a, b) => (isHolder(a) ? 0 : 1) - (isHolder(b) ? 0 : 1));
+    // Read every tick, not frozen: the theme root may mount (or switch
+    // palettes) after a peer was first seen.
+    const themeStyle = this.themeStyle();
 
-    peers.forEach((peer) => {
-      const a = this.getArtifacts(peer);
+    ordered.forEach((peer) => {
+      const color = presenceSlotColor(themeStyle, presenceColorSlot(peer.clientId));
+      const a = this.getArtifacts(peer, color);
       const state = peer.state;
-      const color = peer.color || "#888";
 
       // 1) element focus ring - decorate the real node; independently, a
       // focused inline string editor lights up its native focus border
@@ -479,7 +538,8 @@ export class PresenceOverlay {
           const anchor = this.resolveSelectionNode(state.sel, designer);
           const target = anchor ? this.ringNode(anchor) : null;
           if (target instanceof HTMLElement && !wanted.has(target)) {
-            wanted.set(target, { color, name: peer.name, clip: designerRect, avoid: occluder });
+            const locked = !!this.lockGuard && this.lockGuard.isHolder(peer.clientId);
+            wanted.set(target, { color, name: peer.name, clip: designerRect, avoid: occluder, locked });
           }
         }
         if (state.focus?.area === "edit") {
@@ -514,7 +574,7 @@ export class PresenceOverlay {
         }
       }
 
-      // 2b) translation-cell ring. A cell the local user is editing is not
+      // 2a) translation-cell ring. A cell the local user is editing is not
       // decorated at all - the ring is also killed instantly by the
       // :focus-within guard in the CSS, and skipping here removes the badge
       // with it (a badge under a ringless cell reads as a broken highlight).

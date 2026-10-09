@@ -70,6 +70,10 @@ export class CollaborationPlugin implements ICreatorPlugin {
 
   private disposed = false;
   private peersChangedHandler: (sender: any, options: { peers: ReadonlyMap<string, IPresencePeer> }) => void;
+  // Every record this journal emitted - i.e. this client's own. A WeakSet: the
+  // journal may clear its records, and nothing here should keep them alive.
+  private localRecords: WeakSet<object> = new WeakSet<object>();
+  private localRecordHandler: (sender: any, options: { record: IJournalRecord }) => void;
   private inertStateChanged: EventBase<PresenceCapture, { state: IPresenceState }>;
   private inertPeersChanged: EventBase<any, { peers: ReadonlyMap<string, IPresencePeer> }>;
 
@@ -87,6 +91,13 @@ export class CollaborationPlugin implements ICreatorPlugin {
       this.bar = new CollabBarModel(creator, options);
       // The render slot the framework templates bind to.
       this.creator.collabBar = this.bar;
+      // The transport lists the very object the journal emitted in the room
+      // history, so identity is what tells the bar which rows are "You".
+      this.localRecordHandler = (_: any, opts: { record: IJournalRecord }) => {
+        this.localRecords.add(opts.record);
+      };
+      this.journal.onRecordAdded.add(this.localRecordHandler);
+      this.bar.isLocalChange = (change: ICollabChange) => this.localRecords.has(change);
       if (!!this.presence) {
         // Both instances are in hand, so the roster is wired directly. The old
         // separate plugins had to look each other up by name, which silently
@@ -120,6 +131,8 @@ export class CollaborationPlugin implements ICreatorPlugin {
     if (this.disposed) return;
     this.disposed = true;
     if (!!this.bar) {
+      if (!!this.localRecordHandler)this.journal.onRecordAdded.remove(this.localRecordHandler);
+      this.localRecordHandler = undefined;
       if (!!this.presence && !!this.peersChangedHandler) {
         this.presence.onPeersChanged.remove(this.peersChangedHandler);
       }
@@ -175,7 +188,9 @@ export class CollaborationPlugin implements ICreatorPlugin {
     return this.journal.snapshot(label);
   }
   public apply(input: IJournalRecord | Array<IJournalRecord> | string, options?: IJournalApplyOptions): Array<IJournalApplyResult> {
-    return this.journal.apply(input, options);
+    const results = this.journal.apply(input, options);
+    if (!!this.presence)this.presence.refreshLocks();
+    return results;
   }
 
   // --- presence --------------------------------------------------------------
@@ -191,6 +206,11 @@ export class CollaborationPlugin implements ICreatorPlugin {
     if (!!this.presence) return this.presence.onPeersChanged;
     if (!this.inertPeersChanged)this.inertPeersChanged = new EventBase<any, { peers: ReadonlyMap<string, IPresencePeer> }>();
     return this.inertPeersChanged;
+  }
+  // This participant's id as assigned by the transport/server. Breaks ties
+  // between participants who lock the same element at the same moment.
+  public setClientId(clientId: string): void {
+    if (!!this.presence)this.presence.setClientId(clientId);
   }
   public getState(): IPresenceState {
     return !!this.presence ? this.presence.getState() : emptyPresenceState();
@@ -234,7 +254,6 @@ function peersToParticipants(peers: ReadonlyMap<string, IPresencePeer>): Array<I
   return Array.from(peers.values()).map((peer) => ({
     id: peer.clientId,
     name: peer.name,
-    color: peer.color,
     tab: (peer.state && peer.state.tab) || ""
   }));
 }

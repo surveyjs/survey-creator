@@ -4,6 +4,7 @@ import { describeRecord } from "../journal/journal-describe";
 import { JournalOp } from "../journal/journal-record";
 import { ICollabChange } from "./bar-types";
 import { CollabRowAction } from "./collab-row-action";
+import { IHistoryEntry, normalizeHistory, SELF_AUTHOR } from "./version-history-normalize";
 
 import "./version-history.scss";
 
@@ -18,9 +19,18 @@ export class VersionHistoryRowAction extends CollabRowAction {
   public groupKey: string;
 }
 
+// Who made a change. Both halves are optional, so a bare timeline - a host
+// without presence, a test - still renders; its rows just carry no author.
+export interface IVersionAuthors {
+  // True for this client's own records.
+  isLocal?: (change: ICollabChange) => boolean;
+  // A peer's display name by connection id; undefined while unknown.
+  nameOf?: (clientId: string) => string | undefined;
+}
+
 type TimelineNode =
-  | { type: "named", change: ICollabChange }
-  | { type: "group", changes: Array<ICollabChange> };
+  | { type: "named", entry: IHistoryEntry }
+  | { type: "group", entries: Array<IHistoryEntry> };
 
 // A saved (named) version = a FullSnapshot carrying a non-empty label.
 export function isNamedVersion(c: ICollabChange): boolean {
@@ -28,34 +38,34 @@ export function isNamedVersion(c: ICollabChange): boolean {
     typeof c.payload.label === "string" && c.payload.label !== "";
 }
 
-// Partition the room change log (oldest to newest) into named versions and runs
-// of "autosaved" edits between them.
-export function buildTimeline(changes: ReadonlyArray<ICollabChange>): Array<TimelineNode> {
+// Partition the normalized history (oldest to newest) into named versions and
+// runs of "autosaved" edits between them.
+export function buildTimeline(entries: ReadonlyArray<IHistoryEntry>): Array<TimelineNode> {
   const nodes: Array<TimelineNode> = [];
-  let group: { type: "group", changes: Array<ICollabChange> } | null = null;
-  for (let i = 0; i < changes.length; i++) {
-    const c = changes[i];
-    if (isNamedVersion(c)) {
+  let group: { type: "group", entries: Array<IHistoryEntry> } | null = null;
+  for (let i = 0; i < entries.length; i++) {
+    const entry = entries[i];
+    if (isNamedVersion(entry.change)) {
       group = null;
-      nodes.push({ type: "named", change: c });
+      nodes.push({ type: "named", entry: entry });
     } else {
       if (!group) {
-        group = { type: "group", changes: [] };
+        group = { type: "group", entries: [] };
         nodes.push(group);
       }
-      group.changes.push(c);
+      group.entries.push(entry);
     }
   }
   return nodes;
 }
 
-// Stable key for a group (its first change), so expansion survives a live
-// refresh. Keyed by `seq` ONLY: the recorder coalesces rapid edits by rewriting
-// the last record in place INCLUDING its timestamp, so a timestamp-based key
-// would reset the group's expanded state on every keystroke.
+// Stable, unique key for a group (its first entry's row key), so expansion
+// survives a live refresh: re-sends and collapsed runs keep the row key while
+// their content and timestamp move on. A seq would not do - it counts per
+// client and per page load, so two groups often start with the same one.
 export function versionGroupKey(node: TimelineNode): string {
-  if (node.type !== "group" || node.changes.length === 0) return "";
-  return String(node.changes[0].seq);
+  if (node.type !== "group" || node.entries.length === 0) return "";
+  return node.entries[0].rowKey;
 }
 
 // Absolute date + 24h time, e.g. "Jul 10, 19:30".
@@ -77,9 +87,28 @@ function rowCss(kind: VersionHistoryRowKind, expanded?: boolean): string {
 
 interface IVersionRowOptions {
   time?: string;
+  author?: string;
   expanded?: boolean;
   groupKey?: string;
   onToggle?: (groupKey: string) => void;
+}
+
+// `Jane Doe <dot> Oct 7, 14:02`; either half alone when the other is unknown.
+function subtitleOf(author: string, time: string): string {
+  if (!author) return time;
+  if (!time) return author;
+  return getCollabString("collabVersionAuthorTime", author, time);
+}
+
+// The name the transport stamped wins; presence only fills in for a transport
+// that stamps the id alone.
+function authorOf(entry: IHistoryEntry, authors: IVersionAuthors): string {
+  if (entry.authorKey === SELF_AUTHOR) return getCollabString("collabVersionAuthorYou");
+  const change = entry.change;
+  if (typeof change.authorName === "string" && change.authorName !== "") return change.authorName;
+  const clientId = change.clientId;
+  if (!clientId || !authors.nameOf) return "";
+  return authors.nameOf(clientId) || "";
 }
 
 function createRow(id: string, kind: VersionHistoryRowKind, title: string,
@@ -94,11 +123,14 @@ function createRow(id: string, kind: VersionHistoryRowKind, title: string,
     component: "svc-collab-row",
     // The group header is the only interactive row: sv-list draws the <li> and
     // routes its click to `action`. Rows without one are inert.
-    action: isGroup && !!onToggle ? () => onToggle(groupKey) : undefined
+    action: isGroup && !!onToggle ? () => onToggle(groupKey) : undefined,
+    // ...and so the only tab stop: an inert row that takes focus promises an
+    // action just as a hand cursor does.
+    disableTabStop: !isGroup
   });
   row.kind = kind;
   row.groupKey = groupKey;
-  row.subtitle = options.time || "";
+  row.subtitle = subtitleOf(options.author || "", options.time || "");
   row.rowCss = rowCss(kind, options.expanded);
   if (isGroup) {
     // Only the group headers expand, so only they carry aria-expanded.
@@ -114,9 +146,11 @@ function createRow(id: string, kind: VersionHistoryRowKind, title: string,
 export function buildVersionRows(
   changes: ReadonlyArray<ICollabChange>,
   expandedByKey: Map<string, boolean>,
-  onToggle?: (groupKey: string) => void
+  onToggle?: (groupKey: string) => void,
+  authors: IVersionAuthors = {}
 ): Array<VersionHistoryRowAction> {
-  const timeline = buildTimeline(changes);
+  const isLocal = authors.isLocal || ((): boolean => false);
+  const timeline = buildTimeline(normalizeHistory(changes, isLocal));
   let newestGroupKey = "";
   for (let i = timeline.length - 1; i >= 0; i--) {
     if (timeline[i].type === "group") {
@@ -129,25 +163,26 @@ export function buildVersionRows(
   for (let i = timeline.length - 1; i >= 0; i--) {
     const node = timeline[i];
     if (node.type === "named") {
-      const label = node.change.payload && node.change.payload.label;
-      rows.push(createRow("named:" + node.change.seq, "named",
+      const change = node.entry.change;
+      const label = change.payload && change.payload.label;
+      rows.push(createRow("named:" + node.entry.rowKey, "named",
         label ? String(label) : getCollabString("collabVersionSaved"),
-        { time: formatVersionTime(node.change.timestamp) }));
+        { time: formatVersionTime(change.timestamp), author: authorOf(node.entry, authors) }));
       continue;
     }
     const key = versionGroupKey(node);
     const expanded = expandedByKey.has(key) ? !!expandedByKey.get(key) : key === newestGroupKey;
-    const count = node.changes.length;
+    const count = node.entries.length;
     rows.push(createRow("group:" + key, "group",
       count === 1
         ? getCollabString("collabVersionAutosavedOne", count)
         : getCollabString("collabVersionAutosaved", count),
       { expanded: expanded, groupKey: key, onToggle: onToggle }));
     if (!expanded) continue;
-    for (let j = node.changes.length - 1; j >= 0; j--) {
-      const change = node.changes[j];
-      rows.push(createRow("change:" + change.seq + ":" + j, "change", describeRecord(change),
-        { time: formatVersionTime(change.timestamp) }));
+    for (let j = node.entries.length - 1; j >= 0; j--) {
+      const entry = node.entries[j];
+      rows.push(createRow("change:" + entry.rowKey, "change", describeRecord(entry.change),
+        { time: formatVersionTime(entry.change.timestamp), author: authorOf(entry, authors) }));
     }
   }
   // The seed state; the transport carries no creation time, so no timestamp.
@@ -165,6 +200,7 @@ export class VersionHistoryModel extends Base {
   // Kept OUTSIDE the rows so expansion survives every rebuild.
   private expandedByKey: Map<string, boolean> = new Map<string, boolean>();
   private changes: ReadonlyArray<ICollabChange> = [];
+  private authors: IVersionAuthors = {};
 
   constructor() {
     super();
@@ -195,6 +231,14 @@ export class VersionHistoryModel extends Base {
     this.changes = changes || [];
     this.rebuild();
   }
+  public setAuthors(authors: IVersionAuthors): void {
+    this.authors = authors || {};
+    this.rebuild();
+  }
+  // Re-reads the authors: names arrive with presence, which may trail the records.
+  public refresh(): void {
+    this.rebuild();
+  }
   public toggleGroup(groupKey: string): void {
     if (!groupKey) return;
     const row = this.rows.filter((r) => r.groupKey === groupKey)[0];
@@ -211,6 +255,6 @@ export class VersionHistoryModel extends Base {
   }
 
   private rebuild(): void {
-    this.list.setItems(buildVersionRows(this.changes, this.expandedByKey, (key) => this.toggleGroup(key)));
+    this.list.setItems(buildVersionRows(this.changes, this.expandedByKey, (key) => this.toggleGroup(key), this.authors));
   }
 }
