@@ -227,3 +227,16 @@ test("Regional format property names and descriptions", () => {
   expect(panel.getQuestionByName("currencyPattern").description)
     .toEqual(editorLocalization.getString("pehelp.regionalformat.currencyPattern"));
 });
+
+test("Bug#11971 Clear the region in the property grid", () => {
+  const survey = new SurveyModel({ regionalFormat: { locale: "de" } });
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const localeQuestion = <QuestionDropdownModel>getRegionalFormatPanel(propertyGrid).getQuestionByName("locale");
+  expect(localeQuestion.allowClear, "the value can be cleared").toBe(true);
+  expect(localeQuestion.placeholder, "the placeholder is kept").toEqual("Same as survey language");
+  expect(localeQuestion.choices.filter(item => item.value === ""), "no empty item in the list").toHaveLength(0);
+  expect(localeQuestion.value).toEqual("de");
+  localeQuestion.clearValue();
+  expect(survey.regionalFormat.locale, "the region is cleared").toBeUndefined();
+  expect(survey.toJSON().regionalFormat, "nothing is serialized").toBeUndefined();
+});

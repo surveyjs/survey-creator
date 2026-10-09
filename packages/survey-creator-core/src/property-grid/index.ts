@@ -2011,7 +2011,8 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     const _renderAsButtonGroup = this.renderAsButtonGroup(prop, choices);
     var json: any = {
       type: _renderAsButtonGroup ? "buttongroup" : "dropdown",
-      choices: choices,
+      // the empty item is not a choice: it turns on allowClear, the same as in setChoicesCore
+      choices: Array.isArray(choices) ? choices.filter(item => !this.isEmptyChoice(item)) : choices,
       showOptionsCaption: false
     };
     this.updateObjBasedOnEmptyValueItem(prop, choices, json);
@@ -2135,10 +2136,12 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     if (!choices) return null;
     for (var i = 0; i < choices.length; i++) {
       var item = choices[i];
-      var value = item.value !== undefined ? item.value : item;
-      if (Helpers.isValueEmpty(value)) return this.getJsonItem(prop, item);
+      if (this.isEmptyChoice(item)) return this.getJsonItem(prop, item);
     }
     return null;
+  }
+  private isEmptyChoice(item: any): boolean {
+    return Helpers.isValueEmpty(item?.value !== undefined ? item.value : item);
   }
 }
 
