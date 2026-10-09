@@ -72,6 +72,184 @@ export function getConditionVariableNames(survey: SurveyModel, model: SurveyVari
   return res;
 }
 
+// The entries the condition editor lists in its question selector: questions (and the paths into
+// them, "matrix.row1.col1"), calculated values and runtime variables, with their display texts.
+// Shared with the AI context of the expression assistant, so the AI is offered exactly what an author
+// can pick. "editor" is the ConditionEditor when the list is built for one, and undefined when it is
+// not (a request from a property grid title action) - onConditionGetQuestionList hands it to the
+// host as options.editor. "questionsHash" collects the question behind each name; "getVariableQuestion"
+// gives the question that edits the value of a variable or a calculated value.
+export function buildConditionQuestionList(survey: SurveyModel, object: Base, propertyName: string, context: Question,
+  options: ISurveyCreatorOptions, editor: ConditionEditor, questionsHash: { [name: string]: Question },
+  getVariableQuestion: (name: string) => Question): Array<any> {
+  if (!survey) return [];
+  const res = [];
+  const questions = survey.getAllQuestions();
+  const isItemValueObject = isItemValue(object);
+  const contextObject = getConditionContextObject(object);
+  let sortOrder = settings.logic.questionSortOrder;
+  if (questions.length > 0) {
+    for (let i = 0; i < questions.length; i++) {
+      const question = questions[i];
+      if (contextObject === question && !isItemValueObject) continue;
+      const questionContext = contextObject ? contextObject : (!context || context === question);
+      if (settings.logic.includeComplexQuestions && question.isContainer) {
+        res.push({ question: question, name: question.name, text: question.title });
+      }
+      question.addConditionObjectsByContext(res, questionContext);
+    }
+    mergeSelectBasedQuestions(res);
+    removeEntriesByValueName(res);
+  }
+
+  const variableNames: Array<any> = getConditionVariableNames(survey, options?.variablePresetsModel);
+  addSurveyCalculatedValues(survey, variableNames);
+  sortOrder = options.onConditionQuestionsGetListCallback(propertyName, <any>object, editor, res, variableNames);
+
+  for (let i = 0; i < res.length; i++) {
+    res[i].value = res[i].name;
+    let question = !!res[i].question ? res[i].question : res[i];
+    let text = res[i].text;
+    //An item is a path to a question ("matrix.row1.col1"), not the question itself, so the default
+    //text cannot be derived from the question. Both the name and the title path are built already
+    if (!options.useElementTitles) {
+      text = res[i].name;
+      let valueName = question.valueName;
+      if (!!valueName && text.indexOf(valueName) == 0) {
+        text = text.replace(valueName, question.name);
+      }
+    }
+    res[i].text = options.getObjectDisplayName(question, "condition-editor", "condition", text);
+    const hashKey = res[i].name;
+    if (!questionsHash[hashKey] || question.name === hashKey) {
+      questionsHash[hashKey] = question;
+    }
+  }
+
+  addValuesIntoConditionQuestions(variableNames, res, questionsHash, getVariableQuestion);
+  if (sortOrder === "asc") {
+    SurveyHelper.sortItems(res);
+  }
+  return res;
+}
+function isItemValue(object: Base): boolean {
+  return !!object && object.isDescendantOf("itemvalue");
+}
+function getConditionContextObject(object: Base): Base {
+  if (isItemValue(object)) {
+    const res: any = (<ItemValue><any>object).locOwner;
+    if (!!res && res.getType) {
+      if (!!res.locOwner && res.locOwner.isDescendantOf("matrixdropdowncolumn"))
+        return res.locOwner;
+      return res;
+    }
+  }
+  return object;
+}
+function addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>, questionsHash: { [name: string]: Question },
+  getVariableQuestion: (name: string) => Question) {
+  for (let i = 0; i < values.length; i++) {
+    let name = !!values[i].name ? values[i].name : values[i];
+    // A host variable the definition describes is edited with the definition's own question - a
+    // dropdown with its choices, a number box with its range - rather than the plain text box a
+    // calculated value gets: the definition is where the host said what values the variable takes.
+    const question = getVariableQuestion(name);
+    questionsHash[name] = question;
+    res.push({
+      value: name,
+      text: name,
+      question: question
+    });
+  }
+}
+function addSurveyCalculatedValues(survey: SurveyModel, names: Array<any>) {
+  survey.calculatedValues.forEach(item => {
+    const index = names.indexOf(item.name.toLowerCase());
+    if (index > -1) {
+      names.splice(index, 1);
+    }
+    names.push(item.name);
+  });
+}
+function mergeSelectBasedQuestions(res: Array<any>): void {
+  const selectBaseHash = {};
+  for (let i = 0; i < res.length; i++) {
+    if (res[i].context) continue;
+    const q: Question = res[i].question;
+    if (q.isDescendantOf("selectbase")) {
+      const valueName = q.getFilteredName();
+      let qs = selectBaseHash[valueName];
+      if (!selectBaseHash[valueName]) {
+        qs = [];
+        selectBaseHash[valueName] = qs;
+      }
+      if (qs.length === 0 || qs[0].getType() === q.getType()) {
+        qs.push(q);
+      }
+    }
+  }
+  for (const valueName in selectBaseHash) {
+    const qs = selectBaseHash[valueName];
+    if (qs.length < 2) continue;
+    replaceQuestions(res, qs);
+  }
+}
+function removeEntriesByValueName(res: Array<any>): void {
+  const nameHash: any = {};
+  for (let i = 0; i < res.length; i++) {
+    const q: Question = res[i].question;
+    if (q && !q.valueName) {
+      nameHash[res[i].name] = q;
+    }
+  }
+  for (let i = res.length - 1; i >= 0; i--) {
+    const q: Question = res[i].question;
+    const nameQuestion = nameHash[res[i].name];
+    if (q && !!q.valueName && !!nameQuestion && q.parentQuestion === nameQuestion.parentQuestion) {
+      res.splice(i, 1);
+    }
+  }
+}
+function replaceQuestions(res: Array<any>, arr: Array<Question>): void {
+  const json = arr[0].toJSON();
+  json.type = arr[0].getType();
+  if (!json.choices) {
+    json.choices = [];
+  }
+  for (let i = 1; i < arr.length; i++) {
+    mergeSelectBasedTwoQuestions(arr[0], arr[i], json);
+  }
+  const question = Serializer.createClass(json.type, json);
+  for (let i = 0; i < arr.length; i++) {
+    mergeChoices(question, arr[i]);
+  }
+  for (let i = res.length - 1; i >= 0; i--) {
+    const item = res[i];
+    const index = arr.indexOf(item.question);
+    if (index > 0) {
+      res.splice(i, 1);
+    } else if (index === 0) {
+      item.question = question;
+    }
+  }
+}
+function mergeSelectBasedTwoQuestions(q1: Question, q2: Question, json: any): void {
+  const js = q2.toJSON();
+  for (let key in js) {
+    if (Helpers.isValueEmpty(json[key])) {
+      json[key] = js[key];
+    }
+  }
+}
+function mergeChoices(q1: Question, q2: Question): void {
+  for (let i = 0; i < q2.choices.length; i++) {
+    const choice = q2.choices[i];
+    if (!ItemValue.getItemByValue(q1.choices, choice.value)) {
+      q1.choices.push(new ItemValue(choice.value, choice.text));
+    }
+  }
+}
+
 export class ConditionEditor extends PropertyEditorSetupValue {
   public static canParseExpression(text: string): boolean {
     return ConditionEditorItemsBuilder.canParseExpression(text);
@@ -99,7 +277,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     survey: SurveyModel,
     object: Base = null,
     options: ISurveyCreatorOptions = null,
-    private propertyName = ""
+    public readonly propertyName = ""
   ) {
     super(options);
     this.surveyValue = survey;
@@ -503,90 +681,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     name = name.substring(0, indexInfo.index);
     return <Question>this.survey.getQuestionByValueName(name);
   }
-  private getConditionQuestionText(question: Question, name: string): string {
-    return this.options.getObjectDisplayName(question, "condition-editor", "condition", name);
-  }
   private createAllConditionQuestions(): Array<ItemValue> {
-    if (!this.survey) return [];
-    const res = [];
-    const questions = this.survey.getAllQuestions();
-    const contextObject = this.getContextObject();
-    let sortOrder = settings.logic.questionSortOrder;
-    if (questions.length > 0) {
-      for (let i = 0; i < questions.length; i++) {
-        const question = questions[i];
-        if (contextObject === question && !this.isItemValueObject) continue;
-        const context = contextObject ? contextObject : (!this.context || this.context === question);
-        if (settings.logic.includeComplexQuestions && question.isContainer) {
-          res.push({ question: question, name: question.name, text: question.title });
-        }
-        question.addConditionObjectsByContext(res, context);
-      }
-      this.mergeSelectBasedQuestions(res);
-      this.removeEntriesByValueName(res);
-    }
-
-    const variableNames = this.getVariableNames();
-    this.addSurveyCalculatedValues(variableNames);
-    sortOrder = this.options.onConditionQuestionsGetListCallback(this.propertyName, <any>this.object, this, res, variableNames);
-
-    for (let i = 0; i < res.length; i++) {
-      res[i].value = res[i].name;
-      let question = !!res[i].question ? res[i].question : res[i];
-      let text = res[i].text;
-      //An item is a path to a question ("matrix.row1.col1"), not the question itself, so the default
-      //text cannot be derived from the question. Both the name and the title path are built already
-      if (!this.options.useElementTitles) {
-        text = res[i].name;
-        let valueName = question.valueName;
-        if (!!valueName && text.indexOf(valueName) == 0) {
-          text = text.replace(valueName, question.name);
-        }
-      }
-      res[i].text = this.getConditionQuestionText(question, text);
-      const hashKey = res[i].name;
-      if (!this.addConditionQuestionsHash[hashKey] || question.name === hashKey) {
-        this.addConditionQuestionsHash[hashKey] = question;
-      }
-    }
-
-    this.addValuesIntoConditionQuestions(variableNames, res);
-    if (sortOrder === "asc") {
-      SurveyHelper.sortItems(res);
-    }
-    return res;
-  }
-  private getContextObject(): Base {
-    if (this.isItemValueObject) {
-      const res: any = (<ItemValue>this.object).locOwner;
-      if (!!res && res.getType) {
-        if (!!res.locOwner && res.locOwner.isDescendantOf("matrixdropdowncolumn"))
-          return res.locOwner;
-        return res;
-      }
-    }
-    return this.object;
-  }
-  private get isItemValueObject(): boolean {
-    return this.object && this.object.isDescendantOf("itemvalue");
-  }
-  private getVariableNames(): Array<string> {
-    return getConditionVariableNames(this.survey, this.options?.variablePresetsModel);
-  }
-  private addValuesIntoConditionQuestions(values: Array<any>, res: Array<any>) {
-    for (let i = 0; i < values.length; i++) {
-      let name = !!values[i].name ? values[i].name : values[i];
-      // A host variable the definition describes is edited with the definition's own question - a
-      // dropdown with its choices, a number box with its range - rather than the plain text box a
-      // calculated value gets: the definition is where the host said what values the variable takes.
-      const question = this.getHostVariableQuestion(name) || this.getCalculatedValueQuestion();
-      this.addConditionQuestionsHash[name] = question;
-      res.push({
-        value: name,
-        text: name,
-        question: question
-      });
-    }
+    return buildConditionQuestionList(this.survey, this.object, this.propertyName, this.context, this.options, this,
+      this.addConditionQuestionsHash, (name: string) => this.getHostVariableQuestion(name) || this.getCalculatedValueQuestion());
   }
   private getHostVariableQuestion(name: string): Question {
     return this.options?.variablePresetsModel?.getVariableQuestion(name);
@@ -598,93 +695,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!question) return false;
     if (question === this.calculatedValueQuestion) return true;
     return this.getHostVariableQuestion(question.getValueName()) === question;
-  }
-  private addSurveyCalculatedValues(names: Array<any>) {
-    this.survey.calculatedValues.forEach(item => {
-      const index = names.indexOf(item.name.toLowerCase());
-      if (index > -1) {
-        names.splice(index, 1);
-      }
-      names.push(item.name);
-    });
-  }
-  private mergeSelectBasedQuestions(res: Array<any>): void {
-    const selectBaseHash = {};
-    for (let i = 0; i < res.length; i++) {
-      if (res[i].context) continue;
-      const q: Question = res[i].question;
-      if (q.isDescendantOf("selectbase")) {
-        const valueName = q.getFilteredName();
-        let qs = selectBaseHash[valueName];
-        if (!selectBaseHash[valueName]) {
-          qs = [];
-          selectBaseHash[valueName] = qs;
-        }
-        if (qs.length === 0 || qs[0].getType() === q.getType()) {
-          qs.push(q);
-        }
-      }
-    }
-    for (const valueName in selectBaseHash) {
-      const qs = selectBaseHash[valueName];
-      if (qs.length < 2) continue;
-      this.replaceQuestions(res, qs);
-    }
-  }
-  private removeEntriesByValueName(res: Array<any>): void {
-    const nameHash: any = {};
-    for (let i = 0; i < res.length; i++) {
-      const q: Question = res[i].question;
-      if (q && !q.valueName) {
-        nameHash[res[i].name] = q;
-      }
-    }
-    for (let i = res.length - 1; i >= 0; i--) {
-      const q: Question = res[i].question;
-      const nameQuestion = nameHash[res[i].name];
-      if (q && !!q.valueName && !!nameQuestion && q.parentQuestion === nameQuestion.parentQuestion) {
-        res.splice(i, 1);
-      }
-    }
-  }
-  private replaceQuestions(res: Array<any>, arr: Array<Question>): void {
-    const json = arr[0].toJSON();
-    json.type = arr[0].getType();
-    if (!json.choices) {
-      json.choices = [];
-    }
-    for (let i = 1; i < arr.length; i++) {
-      this.mergeSelectBasedTwoQuestions(arr[0], arr[i], json);
-    }
-    const question = Serializer.createClass(json.type, json);
-    for (let i = 0; i < arr.length; i++) {
-      this.mergeChoices(question, arr[i]);
-    }
-    for (let i = res.length - 1; i >= 0; i--) {
-      const item = res[i];
-      const index = arr.indexOf(item.question);
-      if (index > 0) {
-        res.splice(i, 1);
-      } else if (index === 0) {
-        item.question = question;
-      }
-    }
-  }
-  private mergeSelectBasedTwoQuestions(q1: Question, q2: Question, json: any): void {
-    const js = q2.toJSON();
-    for (let key in js) {
-      if (Helpers.isValueEmpty(json[key])) {
-        json[key] = js[key];
-      }
-    }
-  }
-  private mergeChoices(q1: Question, q2: Question): void {
-    for (let i = 0; i < q2.choices.length; i++) {
-      const choice = q2.choices[i];
-      if (!ItemValue.getItemByValue(q1.choices, choice.value)) {
-        q1.choices.push(new ItemValue(choice.value, choice.text));
-      }
-    }
   }
   private calculatedValueQuestion: Question = null;
   private getCalculatedValueQuestion(): Question {

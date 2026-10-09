@@ -23,6 +23,10 @@ export class LintPathResolver {
     this.addArray(survey.completedHtmlOnCondition, "completedHtmlOnCondition");
     this.addArray(survey.navigateToUrlOnCondition, "navigateToUrlOnCondition");
   }
+  // every walked object with its path, in the order of the JSON (item values are not walked)
+  public forEachObject(callback: (obj: Base, path: string) => void): void {
+    this.paths.forEach((path, obj) => callback(obj, path));
+  }
   public getPath(obj: Base): string | undefined {
     if (!obj) return undefined;
     const res = this.paths.get(obj);
