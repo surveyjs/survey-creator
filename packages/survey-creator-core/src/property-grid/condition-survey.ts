@@ -319,10 +319,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     });
     this.text = !!this.object && this.propertyName ? this.object[this.propertyName] : "";
     this.updatePlaceholderVisibileIf();
-    this.setupExpressionAssistant();
   }
-  // The expression assistant: a title with the AI action above the builder, shown only when the application
-  // handles creator.onGenerateExpression. The modal and the Logic tab render this same survey.
+  // The expression assistant: a title with the AI action above the builder. It is added only to the
+  // Logic tab editor (isModal is false) and only when the application handles creator.onGenerateExpression.
+  // The modal does not have it: the property grid opens the assistant with its own title action.
   // The Logic tab replaces getExpressionCheckInput (its rule's sites), getExpressionDisplayText
   // (the rule text a host may change) and listens to onExpressionAssistantAccepted.
   public getExpressionCheckInput: () => IExpressionAssistantInput;
@@ -331,10 +331,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   public get assistantPrompt(): Question {
     return this.editSurvey.getQuestionByName("aiPrompt");
   }
-  private setupExpressionAssistant(): void {
-    const question = this.assistantPrompt;
-    if (!question) return;
-    question.visible = isExpressionAssistantAvailable(getExpressionAssistantCreator(this.survey));
+  private addAssistantPrompt(): void {
+    if (this.isModal || !!this.assistantPrompt || !isExpressionAssistantAvailable(getExpressionAssistantCreator(this.survey))) return;
+    // A title with the AI action only: an expression question has no input to render
+    const question = <Question>Serializer.createClass("expression");
+    question.fromJSON({ name: "aiPrompt", title: editorLocalization.getString("aiex.promptLineTitle") });
     this.editSurvey.onGetQuestionTitleActions.add((_, options) => {
       if (options.question !== question) return;
       options.actions.push({
@@ -344,6 +345,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         action: () => { this.showExpressionAssistant(); }
       });
     });
+    this.editSurvey.pages[0].addElement(question, 0);
   }
   public showExpressionAssistant(): ExpressionAssistant {
     const creator = getExpressionAssistantCreator(this.survey);
@@ -389,6 +391,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (val === this.isModalValue) return;
     this.isModalValue = val;
     this.updatePlaceholderVisibileIf();
+    this.addAssistantPrompt();
   }
   protected updatePlaceholderVisibileIf() {
     if (!!this.panel) {
@@ -403,13 +406,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   protected getSurveyJSON(): any {
     return {
       elements: [
-        {
-          // A title with the AI action only: an expression question has no input to render
-          type: "expression",
-          name: "aiPrompt",
-          title: editorLocalization.getString("aiex.promptLineTitle"),
-          visible: false
-        },
         {
           type: "paneldynamic",
           titleLocation: "hidden",

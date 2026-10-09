@@ -53,10 +53,11 @@ describe("The expression assistant: availability (ai-expressions)", () => {
     const q2 = creator.survey.getQuestionByName("q2");
     expect(getAssistantAction(creator, q2, "visibleIf")).toBeUndefined();
     const editor = new ConditionEditor(creator.survey, q2, creator, "visibleIf");
-    expect(editor.assistantPrompt.visible).toBe(false);
+    editor.isModal = false;
+    expect(editor.assistantPrompt).toBeFalsy();
     expect(editor.showExpressionAssistant()).toBeUndefined();
   });
-  test("with a handler: a title action on condition and expression properties, a prompt line in the editor", () => {
+  test("with a handler: a title action on condition and expression properties, a prompt line in the Logic tab editor only", () => {
     const { creator } = createCreator({ elements: [{ type: "text", name: "q1", inputType: "number" }, { type: "text", name: "q2" }] });
     const q1 = creator.survey.getQuestionByName("q1");
     const action = getAssistantAction(creator, q1, "visibleIf");
@@ -65,7 +66,12 @@ describe("The expression assistant: availability (ai-expressions)", () => {
     expect(action.iconName).toBe("icon-toolbox-expression-24x24");
     expect(getAssistantAction(creator, q1, "minValueExpression")).toBeTruthy();
     const editor = new ConditionEditor(creator.survey, q1, creator, "visibleIf");
-    expect(editor.assistantPrompt.visible).toBe(true);
+    // the modal: the property grid's title action opens the assistant
+    expect(editor.isModal).toBe(true);
+    expect(editor.assistantPrompt).toBeFalsy();
+    editor.isModal = false;
+    expect(editor.assistantPrompt).toBeTruthy();
+    expect(editor.editSurvey.getAllQuestions()[0]).toBe(editor.assistantPrompt);
     const titleActions = editor.assistantPrompt.getTitleActions();
     expect(titleActions.map(a => a.id)).toContain("condition-expression-assistant");
   });
@@ -371,9 +377,10 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     expect(requests[0].signal.aborted).toBe(true);
     expect(assistant.isDisposed).toBe(true);
   });
-  test("the condition editor's AI line is a title with the AI action and no input", () => {
+  test("the Logic tab condition editor's AI line is a title with the AI action and no input", () => {
     const { creator } = createCreator();
     const editor = new ConditionEditor(creator.survey, creator.survey.getQuestionByName("q2"), creator, "visibleIf");
+    editor.isModal = false;
     expect(editor.assistantPrompt.getType()).toBe("expression");
     expect(editor.assistantPrompt.hasTitle).toBe(true);
     editor.assistantPrompt.getTitleActions().filter(a => a.id === "condition-expression-assistant")[0].action();
@@ -420,7 +427,7 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
     (<PanelModel>panel.getElementByName("triggerQuestionsPanel")).getQuestionByName("setToName").value = "q3";
     const editor = logic.expressionEditor;
-    expect(editor.assistantPrompt.visible).toBe(true);
+    expect(editor.assistantPrompt).toBeTruthy();
     const assistant = editor.showExpressionAssistant();
     assistant.generate("apple");
     expect(requests[0].kind).toBe("modify");
