@@ -989,6 +989,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (question.name === "textEditor") {
       cssClasses.root += " svc-logic-question-text-editor";
     }
+    if (question.name === "aiPrompt") {
+      cssClasses.mainRoot += " svc-logic-question-ai-prompt";
+      cssClasses.content += " svc-logic-question-ai-prompt__content";
+    }
     if (question.name === "conjunction") {
       question.allowRootStyle = false;
       cssClasses.control += " svc-logic-operator svc-logic-operator--conjunction ";
