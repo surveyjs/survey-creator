@@ -3,6 +3,7 @@ import {
   PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme, ISurveyVariablePresets, ISurveyVariablePreset
 } from "survey-core";
 import { ISurveyLintOptions } from "survey-core/linter";
+import type { IExpressionContext } from "./expression-assistant/expression-context";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
@@ -1051,6 +1052,35 @@ export interface MachineTranslateEvent {
    * @param strings An array of translated strings.
    */
   callback: (strings: Array<string>) => void;
+}
+
+// What the expression assistant asks of the application. A kind this version of the handler does not
+// know must be ignored: the union is widened later (a whole logic rule, for example).
+export type ExpressionAssistantRequestKind = "generate" | "modify" | "fix" | "explain";
+
+export interface ExpressionAssistantRequestEvent {
+  kind: ExpressionAssistantRequestKind;
+  // the author's words; empty for "fix" and "explain"
+  prompt: string;
+  // the expression to modify or explain, or the one that failed the check ("fix")
+  expression: string;
+  isCondition: boolean;
+  // the first place the expression goes to; the Logic tab may have several, see sites
+  element: Base;
+  propertyName: string;
+  sites: Array<{ element: Base, propertyName: string }>;
+  // what the AI is told about the place - plain data, a copy per request: change it here to customize
+  context: IExpressionContext;
+  systemPrompt: string;
+  // "fix": what the check reported, in English
+  findings?: Array<{ ruleId: string, reason: string, severity: string, message: string }>;
+  history: Array<{ kind: string, prompt?: string, expression?: string, explanation?: string }>;
+  // aborted when the author cancels the request or closes the assistant
+  signal: AbortSignal;
+  // Answer here, once: the first call counts, later ones and calls after the abort are ignored.
+  // "text" is a raw model answer the assistant parses; "expression"/"explanation" are taken as
+  // they are; nothing or an empty expression is an empty result; "error" is shown to the author.
+  callback: (result?: { expression?: string, explanation?: string, text?: string, error?: string }) => void;
 }
 
 export interface DragDropAllowEvent {

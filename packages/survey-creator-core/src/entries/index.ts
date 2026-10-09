@@ -100,6 +100,8 @@ export type {
   IExpressionContext, IExpressionVariable, IExpressionContextFunction, IExpressionContextOperator, IExpressionContextChoice,
 } from "../expression-assistant/expression-context";
 export { parseExpressionResponse } from "../expression-assistant/expression-response";
+export { ExpressionAssistant, showExpressionAssistant } from "../expression-assistant/expression-assistant";
+export type { IExpressionAssistantOptions, IExpressionAssistantInput, ExpressionAssistantStatus } from "../expression-assistant/expression-assistant";
 export type { IExpressionResponse } from "../expression-assistant/expression-response";
 export { expressionGuideVersion, expressionGuideSections, getExpressionGuideText } from "../expression-assistant/expression-guide";
 export type { IExpressionGuideSection, IExpressionGuideExample } from "../expression-assistant/expression-guide";

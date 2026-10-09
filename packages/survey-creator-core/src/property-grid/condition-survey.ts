@@ -13,6 +13,11 @@ import { assignDefaultClasses } from "../utils/creator-utils";
 import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
+import { ExpressionToDisplayText } from "../expressionToDisplayText";
+import {
+  ExpressionAssistant, expressionAssistantIconName, getExpressionAssistantCreator, IExpressionAssistantInput,
+  isExpressionAssistantAvailable, showExpressionAssistant,
+} from "../expression-assistant/expression-assistant";
 
 // survey-core doesn't add the "-unwrapped" postfix (settings.expressionVariables.unwrapPostfix) into
 // question names any more - the plain {name} resolves to the unwrapped value. The postfix is still
@@ -314,6 +319,68 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     });
     this.text = !!this.object && this.propertyName ? this.object[this.propertyName] : "";
     this.updatePlaceholderVisibileIf();
+    this.setupExpressionAssistant();
+  }
+  // The expression assistant: a prompt line above the builder, shown only when the application
+  // handles creator.onGenerateExpression. The modal and the Logic tab render this same survey.
+  // The Logic tab replaces getExpressionCheckInput (its rule's sites), getExpressionDisplayText
+  // (the rule text a host may change) and listens to onExpressionAssistantAccepted.
+  public getExpressionCheckInput: () => IExpressionAssistantInput;
+  public getExpressionDisplayText: (expression: string) => string;
+  public onExpressionAssistantAccepted: (isTextEditor: boolean) => void;
+  public get assistantPrompt(): Question {
+    return this.editSurvey.getQuestionByName("aiPrompt");
+  }
+  private setupExpressionAssistant(): void {
+    const question = this.assistantPrompt;
+    if (!question) return;
+    question.visible = isExpressionAssistantAvailable(getExpressionAssistantCreator(this.survey));
+    (<any>question).onKeyDownPreprocess = (event: any) => {
+      if (!!event && event.key === "Enter") {
+        if (!!event.preventDefault) event.preventDefault();
+        this.showExpressionAssistant();
+      }
+    };
+    this.editSurvey.onGetQuestionTitleActions.add((_, options) => {
+      if (options.question !== question) return;
+      options.actions.push({
+        id: "condition-expression-assistant", iconName: expressionAssistantIconName, iconSize: "auto",
+        title: editorLocalization.getString("aiex.generate"), showTitle: true,
+        enabled: !this.editSurvey.readOnly,
+        action: () => { this.showExpressionAssistant(); }
+      });
+    });
+  }
+  public showExpressionAssistant(): ExpressionAssistant {
+    const creator = getExpressionAssistantCreator(this.survey);
+    if (!isExpressionAssistantAvailable(creator) || this.editSurvey.readOnly) return undefined;
+    return showExpressionAssistant({
+      creator: creator,
+      editor: this,
+      prompt: this.assistantPrompt.value || "",
+      getInput: (): IExpressionAssistantInput => !!this.getExpressionCheckInput ? this.getExpressionCheckInput()
+        : { sites: !!this.object && !!this.propertyName ? [{ obj: this.object, propertyName: this.propertyName }] : [] },
+      getExpression: (): string => this.text || "",
+      accept: (expression: string) => this.setTextFromAssistant(expression),
+      getDisplayText: (expression: string): string => !!this.getExpressionDisplayText ? this.getExpressionDisplayText(expression)
+        : new ExpressionToDisplayText(this.survey, this.options).toDisplayText(expression)
+    });
+  }
+  // Fills the editor with an accepted expression, routed by whether the builder can show it - also
+  // in the modal, where "set text" always parses into rows. The property is not written: the modal's
+  // Apply or the rule's Save does that, as for a typed expression.
+  public setTextFromAssistant(val: string): void {
+    const isTextEditor = !ConditionEditor.canBuildExpression(val);
+    if (isTextEditor) {
+      this.panel.panelCount = 0;
+      this.showTextEditor(val);
+    } else {
+      this.textEditor.value = val;
+      this.textEditor.visible = false;
+      this.processText(val);
+      this.panel.visible = true;
+    }
+    if (!!this.onExpressionAssistantAccepted)this.onExpressionAssistantAccepted(isTextEditor);
   }
   public get title(): string {
     return this.panel.title;
@@ -343,6 +410,14 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   protected getSurveyJSON(): any {
     return {
       elements: [
+        {
+          type: "text",
+          name: "aiPrompt",
+          title: editorLocalization.getString("aiex.promptLineTitle"),
+          placeholder: editorLocalization.getString("aiex.promptLinePlaceholder"),
+          textUpdateMode: "onTyping",
+          visible: false
+        },
         {
           type: "paneldynamic",
           titleLocation: "hidden",

@@ -1,0 +1,23 @@
+// The review in the expression assistant's dialog (expression-assistant.ts): rows of a label and a
+// value, rendered as text by an html question.
+.svc-expression-assistant {
+  .svc-expression-assistant__label {
+    font-weight: 600;
+  }
+
+  .svc-expression-assistant__current,
+  .svc-expression-assistant__suggested,
+  .svc-expression-assistant__display,
+  .svc-expression-assistant__explanation,
+  .svc-expression-assistant__note {
+    margin-bottom: var(--sjs2-spacing-x100, 8px);
+  }
+
+  .svc-expression-assistant__findings {
+    margin: var(--sjs2-spacing-x050, 4px) 0 0;
+  }
+
+  .svc-expression-assistant__finding--error strong {
+    color: var(--sjs2-color-fg-state-danger-default, #e50a3e);
+  }
+}

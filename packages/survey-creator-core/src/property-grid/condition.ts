@@ -7,6 +7,8 @@ import {
 import { ConditionEditor } from "./condition-survey";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
+import { ExpressionToDisplayText } from "../expressionToDisplayText";
+import { createExpressionAssistantTitleAction, getExpressionAssistantCreator } from "../expression-assistant/expression-assistant";
 
 export class PropertyGridEditorExpression extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
@@ -71,6 +73,16 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
   }
   public clearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): void {
     question.clearValue();
+  }
+  // The expression assistant's action, when the application handles creator.onGenerateExpression.
+  // Added here rather than through onPropertyEditorUpdateTitleActions, which fires after it: that
+  // event stays the host's way to hide or move the action.
+  public onGetQuestionTitleActions(obj: Base, options: any, creatorOptions: ISurveyCreatorOptions): void {
+    const action = createExpressionAssistantTitleAction(obj, options.question, (expression: string): string => {
+      const survey = (<any>obj).getSurvey ? (<any>obj).getSurvey() : undefined;
+      return !!survey ? new ExpressionToDisplayText(survey, getExpressionAssistantCreator(obj)).toDisplayText(expression) : expression;
+    });
+    if (!!action) options.actions.push(action);
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
     question.valueToDataCallback = (val: any): any => {
