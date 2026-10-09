@@ -203,12 +203,15 @@ function getRangeText(min: any, max: any): string {
 }
 
 // The container level an unknown trigger-target segment belongs to. matrixdropdown addresses
-// a row first and a column second, so its noun depends on how deep the segment is.
-function getSegmentNoun(containerType: string, segmentIndex: number): string {
-  if (containerType === "matrixdropdown") {
-    return getTerm("segmentNoun", segmentIndex === 2 ? "matrixdropdownColumn" : "matrixdropdownRow");
+// a row first and a column second, and the core says which of them the segment was meant to
+// name (segmentLevel) - a dotted row name moves the column further down the path. An older
+// core does not say, and there the column is always the third segment.
+function getSegmentNoun(data: { [key: string]: any }): string {
+  if (data.containerType === "matrixdropdown") {
+    const isColumn = data.segmentLevel !== undefined ? data.segmentLevel === "column" : data.segmentIndex === 2;
+    return getTerm("segmentNoun", isColumn ? "matrixdropdownColumn" : "matrixdropdownRow");
   }
-  return getTerm("segmentNoun", containerType);
+  return getTerm("segmentNoun", data.containerType);
 }
 
 export class JsonEditorLinterModel extends Base {
@@ -257,7 +260,7 @@ export class JsonEditorLinterModel extends Base {
       params.fieldNoun = getTerm("sourceField", data.sourceType);
     }
     if (finding.ruleId === "trigger/unknown-target") {
-      params.segmentNoun = getSegmentNoun(data.containerType, data.segmentIndex);
+      params.segmentNoun = getSegmentNoun(data);
       params.kindText = getTerm("targetKind", data.kind);
       params.verb = getTerm("triggerVerb", data.prop);
     }
