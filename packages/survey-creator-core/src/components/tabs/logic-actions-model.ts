@@ -5,6 +5,15 @@ import { ISurveyCreatorOptions } from "../../creator-settings";
 import { SurveyLogicAction } from "./logic-items";
 import { SurveyLogicType } from "./logic-types";
 import { PropertyGridEditorCollection } from "../../property-grid/index";
+import { IExpressionSite } from "../../expression-assistant/expression-check";
+
+// What saving one panel of the rule does, read without saving it (see
+// LogicItemEditor.getExpressionCheckInput): whether the panel keeps the action it was opened with,
+// and where the rule's expression goes for it.
+export interface ILogicActionCheckInfo {
+  keepsInitial: boolean;
+  site?: IExpressionSite;
+}
 
 export class LogicActionModelBase {
   public isTrigger: boolean;
@@ -23,6 +32,14 @@ export class LogicActionModelBase {
   constructor(protected panel: PanelModel, public initialLogicAction: SurveyLogicAction, public logicType: SurveyLogicType) { }
 
   updateCurrentLogicAction(survey: SurveyModel): boolean { return false; }
+  // Mirrors updateCurrentLogicAction and what saving does after it, without writing anything.
+  getExpressionCheckInfo(): ILogicActionCheckInfo {
+    return { keepsInitial: true, site: this.createCheckSite(this.initialLogicAction?.element) };
+  }
+  protected createCheckSite(element: Base): IExpressionSite {
+    if (!element || !this.logicType) return undefined;
+    return { obj: element, propertyName: this.logicType.propertyName, tag: this };
+  }
   afterUpdateInitialLogicAction(): void { }
   resetElements(): void { }
   getSelectedElement(): string { return null; }
@@ -71,10 +88,17 @@ export class LogicActionModel extends LogicActionModelBase {
 
   public updateCurrentLogicAction(survey: SurveyModel): boolean {
     const selectedElement = this.getElementBySelectorName(this.panel);
-    const createNewAction = !this.initialLogicAction || this.initialLogicAction.logicType != this.logicType || (!!selectedElement && this.initialLogicAction.element != selectedElement);
-    if (!createNewAction) return false;
+    if (!this.isNewActionNeeded(selectedElement)) return false;
     this.currentLogicAction = new SurveyLogicAction(this.logicType, selectedElement, survey);
     return true;
+  }
+  public getExpressionCheckInfo(): ILogicActionCheckInfo {
+    const selectedElement = this.getElementBySelectorName(this.panel);
+    if (!this.isNewActionNeeded(selectedElement)) return super.getExpressionCheckInfo();
+    return { keepsInitial: false, site: this.createCheckSite(selectedElement) };
+  }
+  private isNewActionNeeded(selectedElement: Base): boolean {
+    return !this.initialLogicAction || this.initialLogicAction.logicType != this.logicType || (!!selectedElement && this.initialLogicAction.element != selectedElement);
   }
 
   public resetElements(): void {
@@ -115,6 +139,18 @@ export class LogicActionSetValueModel extends LogicActionModel {
       return false;
     }
     return super.updateCurrentLogicAction(survey);
+  }
+  // Saving writes the panel's setValueExpression into the selected element: when the element has
+  // one already, or when a new action is created for it. Without it a loop through that value
+  // would go unnoticed.
+  public getExpressionCheckInfo(): ILogicActionCheckInfo {
+    const selectedElement = this.getElementBySelectorName(this.panel);
+    const writesValue = !!selectedElement && !!(<any>selectedElement).setValueExpression;
+    const res = writesValue ? LogicActionModelBase.prototype.getExpressionCheckInfo.call(this) : super.getExpressionCheckInfo();
+    if ((writesValue || !res.keepsInitial) && !!res.site && res.site.obj === selectedElement) {
+      res.site.siblings = { setValueExpression: this.getValueIfQuestion().value };
+    }
+    return res;
   }
   private setValueExpressionValue(): void {
     const selectedElement = this.getElementBySelectorName(this.panel);
@@ -241,6 +277,17 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
     if (!!this.panelObj) {
       this.logicType.saveNewElement(this.panelObj);
     }
+  }
+  // The panel edits a detached copy of the trigger (createNewObj). Saving copies it into the
+  // existing trigger of the same type, or adds it to the survey as a new one.
+  public getExpressionCheckInfo(): ILogicActionCheckInfo {
+    const createNewAction = !this.initialLogicAction || this.initialLogicAction.logicType != this.logicType;
+    const site = this.createCheckSite(this.panelObj);
+    if (!!site) {
+      site.draftJson = this.panelObj.toJSON();
+      if (!createNewAction) site.replaces = this.initialLogicAction.element;
+    }
+    return { keepsInitial: !createNewAction, site: site };
   }
   public updateCurrentLogicAction(survey: SurveyModel): boolean {
     const createNewAction = !this.initialLogicAction || this.initialLogicAction.logicType != this.logicType;

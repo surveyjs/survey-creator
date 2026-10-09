@@ -24,7 +24,12 @@ function newElementName(nameKind: string, taken: Array<string>): string {
     editorLocalization.getString(key));
 }
 
-export function getCreatorLintOptions(creator: SurveyCreatorModel): ISurveyLintOptions {
+// "knownVariables" are the runtime variable names a caller already knows about. The JSON tab
+// passes none; the expression check passes the names the condition editor offers, so a name the
+// author could pick there is not reported as unknown. They are added before onLintSurvey fires,
+// so the application still has the last word - and note that the event now fires for that check
+// too, not only for the JSON tab.
+export function getCreatorLintOptions(creator: SurveyCreatorModel, knownVariables?: Array<string>): ISurveyLintOptions {
   const rules: { [ruleId: string]: LintSeverity } = {
     "property/unknown": "error",
     "property/required": "error",
@@ -44,6 +49,9 @@ export function getCreatorLintOptions(creator: SurveyCreatorModel): ISurveyLintO
       variablePresets: creator.variablePresets,
     },
   };
+  if (Array.isArray(knownVariables) && knownVariables.length > 0) {
+    options.lintOptions.knownVariables = [].concat(knownVariables);
+  }
   // the application has the last word
   creator.onLintSurvey.fire(creator, options);
   return options.lintOptions;
@@ -54,8 +62,13 @@ export function getCreatorLintOptions(creator: SurveyCreatorModel): ISurveyLintO
 export function getFixTitle(error: SurveyTextWorkerError): string {
   const fallback = getLocString("ed.jsonFixError");
   if (!(error instanceof SurveyTextWorkerLinterFinding)) return fallback;
-  const finding = <SurveyTextWorkerLinterFinding>error;
-  const fix = finding.finding.fix;
+  return getLintFixTitle((<SurveyTextWorkerLinterFinding>error).finding);
+}
+
+// The same title for a finding that did not come through the text worker.
+export function getLintFixTitle(finding: ILintFinding): string {
+  const fallback = getLocString("ed.jsonFixError");
+  const fix = !!finding ? finding.fix : undefined;
   if (!fix) return fallback;
   const res = editorLocalization.getJsonValue("linter.fixes." + finding.ruleId + "." + fix.reason);
   return res === undefined ? fallback : res;
@@ -214,6 +227,190 @@ function getSegmentNoun(data: { [key: string]: any }): string {
   return getTerm("segmentNoun", data.containerType);
 }
 
+function getMessageParams(finding: ILintFinding): { [key: string]: any } {
+  const data = finding.messageData || {};
+  const params: { [key: string]: any } = {};
+  for (const key in data) params[key] = data[key];
+  // a nameless finding is addressed by its element, and a nameless element by its path
+  if (!params.name) params.name = finding.elementName || finding.path;
+  ["values", "available", "names", "setRoots"].forEach(key => {
+    if (Array.isArray(data[key])) params[key] = quoteList(data[key]);
+  });
+  if (finding.ruleId === "expression/type-mismatch") {
+    params.valueShapeText = getTerm("valueShape", data.valueShape);
+  }
+  if (finding.ruleId === "choices/dead-source") {
+    params.fieldNoun = getTerm("sourceField", data.sourceType);
+  }
+  if (finding.ruleId === "trigger/unknown-target") {
+    params.segmentNoun = getSegmentNoun(data);
+    params.kindText = getTerm("targetKind", data.kind);
+    params.verb = getTerm("triggerVerb", data.prop);
+  }
+  if (finding.ruleId === "page/empty") {
+    params.kindText = getTerm("containerKind", data.kind);
+  }
+  // a keyName names a column of a matrix or a question of a dynamic panel template
+  if (finding.reason === "keyNameNotFound") {
+    params.keyNoun = getTerm("segmentNoun", data.questionType);
+  }
+  // only the count reasons have a direction; the bound and step ones carry no count at all
+  if (finding.reason === "countOutOfBounds") {
+    params.direction = getLinterString(
+      "terms.countDirection." + (data.count < data.bound ? "below" : "above"));
+  }
+  if (finding.ruleId === "property/unknown" || finding.ruleId === "property/dead" ||
+    finding.ruleId === "property/invalid-value" || finding.ruleId === "property/required" ||
+    finding.ruleId === "property/not-an-array") {
+    params.ownerText = getOwnerText(data.name, data.className);
+  }
+  // the JSON form, the way the core prints it: an object would otherwise leave the placeholder
+  if (finding.ruleId === "property/required") {
+    params.valueText = quoteValue(data.value);
+  }
+  if (finding.ruleId === "property/invalid-value") {
+    params.valueText = quoteValue(data.value);
+    params.allowedText = quoteList(data.allowed);
+    params.rangeText = getRangeText(data.min, data.max);
+    if (typeof data.valueName === "string") {
+      params.rootKey = data.valueName.split(".")[0];
+    }
+  }
+  if (finding.ruleId === "name/shadowing") {
+    params.nameKindText = getTerm("nameKind", data.nameKind);
+    // a calculated value is not an element, and its elementType is a serializer class name
+    params.ownerText = data.nameKind === "calculatedValue"
+      ? getTerm("nameOwner", "calculatedValue")
+      : (finding.elementType || getTerm("nameOwner", undefined));
+  }
+  if (finding.ruleId === "choices/duplicate") {
+    params.valueText = quoteValue(data.value);
+    // an item this version has no word for is named by its own key rather than mislabelled
+    params.specialItemText = hasTerm("specialItem", data.specialItem)
+      ? getTerm("specialItem", data.specialItem)
+      : data.specialItem;
+  }
+  if (finding.ruleId === "validator/dead") {
+    params.effectText = getTerm("deadValidatorEffect", data.effect);
+    params.causeText = getTerm("deadValidatorCause", data.cause);
+  }
+  if (finding.ruleId === "element/never-visible") {
+    const dependsOn: Array<string> = Array.isArray(data.dependsOn) ? data.dependsOn : [];
+    params.reads = dependsOn.map(name => "{" + name + "}").join(", ");
+    params.deadClause = getLinterString(
+      "terms.deadValueClause." + (dependsOn.length > 1 ? "many" : "one"));
+  }
+  if (finding.ruleId === "cycle/value-write") {
+    const labels: Array<string> = Array.isArray(data.labels) ? data.labels : [];
+    params.label = labels[0];
+    params.chain = labels.join(" -> ");
+  }
+  if (finding.ruleId === "expression/contradiction" ||
+    finding.ruleId === "expression/meaningless-condition") {
+    params.facts = buildFacts(data);
+  }
+  if (finding.ruleId === "value/not-a-choice") {
+    params.valuesText = quoteList(data.values);
+    params.availableText = quoteList(data.available);
+    params.sourceValuesText = quoteList(data.sourceValues);
+    params.sourceShapeText = getTerm("copyShape", data.sourceShape);
+    params.targetShapeText = getTerm("copyShape", data.targetShape);
+  }
+  return params;
+}
+
+function getSuffixes(finding: ILintFinding, template: string): Array<string> {
+  const data = finding.messageData || {};
+  const res: Array<string> = [];
+  const suffix = (name: string, ...args: Array<any>): string =>
+    formatTemplate.apply(undefined, ["suffixes." + name].concat(args));
+  // one reason, two shapes: a name read from every entry of the container the call reads,
+  // or one the function resolves against the survey
+  if (finding.reason === "functionArgNotFound") {
+    res.push(!!data.containerName
+      ? suffix("functionArgInContainer", data.functionName, data.containerType, data.containerName)
+      : suffix("functionArgStandalone", data.functionName));
+  }
+  if (finding.ruleId === "expression/syntax") {
+    if (typeof data.at === "number") res.push(suffix("atPosition", data.at));
+    if (data.synthesized) res.push(suffix("fromLegacyTrigger"));
+  }
+  if (finding.ruleId === "name/duplicate" && !!data.scope) {
+    res.push(suffix("inScope", data.scope));
+  }
+  if (finding.ruleId === "cycle/trigger") res.push(suffix("loopMayBeUnreachable"));
+  // a member of the loop is a defaultValueExpression: it stops applying once the question is
+  // answered, so the loop may be shorter-lived than it reads
+  if (finding.ruleId === "cycle/value-write" && Array.isArray(data.labels) &&
+    data.labels.some((label: string) => label.indexOf("defaultValueExpression") > -1)) {
+    res.push(suffix("defaultValueExpressionNote"));
+  }
+  if (!!finding.suggestion) {
+    // for one rule the suggestion is prose rather than a name, and carries its own reason
+    const suggestionReason = data.suggestionReason;
+    if (!!suggestionReason) {
+      res.push(formatTemplate("suggestions." + suggestionReason, data.recordName || data.name));
+    } else {
+      res.push(suffix("didYouMean", finding.suggestion));
+    }
+  } else {
+    // an element with no type at all has no spelling a component definition could explain
+    if (finding.ruleId === "element/unknown-type" && finding.reason === "unknownType") {
+      res.push(suffix("customComponentHint"));
+    }
+    if (finding.ruleId === "expression/unknown-function") res.push(suffix("registerFunctionHint"));
+    if (finding.ruleId === "trigger/unknown-type") res.push(suffix("triggerTypeDroppedHint"));
+    if (finding.ruleId === "property/unknown") res.push(suffix("deserializerDropsKey"));
+    if (finding.ruleId === "validator/unknown-type") res.push(suffix("validatorDroppedHint"));
+  }
+  // the element is worth naming only where it is not the data key itself, which it is
+  // unless a valueName renamed it
+  if ((finding.reason === "commentKeyCollision" || finding.reason === "totalKeyCollision") &&
+    !!data.name && data.name !== data.dataName) {
+    res.push(suffix("dataKeyOwner", data.name));
+  }
+  // the answer shape a dead validator was judged by depends on the inputType of a text question
+  if (finding.ruleId === "validator/dead" && !!data.inputType) {
+    res.push(suffix("validatorInputType", data.inputType));
+  }
+  if (finding.ruleId === "trigger/unknown-target" && data.kind === "questionvalue" &&
+    finding.reason === "rootNotFound") {
+    res.push(suffix("knownVariablesHint"));
+  }
+  if (!!finding.hint) {
+    res.push(formatTemplate("hints." + finding.hint.reason, finding.hint.name));
+  }
+  if (finding.ruleId === "reference/unknown" && data.refKind === "binding") {
+    res.push(suffix("inBindings"));
+  } else if (finding.ruleId === "reference/unknown" && data.refKind === "choicesByUrlVariable") {
+    res.push(suffix("inChoicesByUrl", data.prop));
+  } else if (finding.ruleId === "reference/unknown" && data.refKind === "textPiping") {
+    res.push(suffix("inText", data.prop));
+  } else if (!!data.expression && template.indexOf("{expression}") < 0) {
+    // a template that quotes the expression itself needs no trailing "In expression: ..."
+    res.push(suffix("inExpression", data.expression));
+  }
+  return res;
+}
+
+// The English "message" of a finding is composed from a base sentence plus optional clauses.
+// The same composition is done here from (ruleId, reason) and messageData, so the whole text
+// is localized. Falls back to the English message when the finding carries no reason - the
+// creator and survey-core are versioned separately.
+export function composeLintMessage(finding: ILintFinding): string {
+  if (!finding.reason) return finding.message;
+  const template = getTemplate("messages." + finding.ruleId + "." + finding.reason);
+  if (template === undefined) return finding.message;
+  const params = getMessageParams(finding);
+  // a sentence built around the facts needs them: a newer core reporting a fact this version
+  // cannot name would otherwise read as "contradicts itself: ." - the English of the core is
+  // a worse language but a whole sentence
+  if (template.indexOf("{facts}") > -1 && !params.facts) return finding.message;
+  const parts = [formatNamed(template, params)];
+  getSuffixes(finding, template).forEach(suffix => { if (!!suffix) parts.push(suffix); });
+  return parts.join(" ");
+}
+
 export class JsonEditorLinterModel extends Base {
   public result: ISurveyLintResult;
   public findings: Array<SurveyTextWorkerLinterFinding> = [];
@@ -226,187 +423,7 @@ export class JsonEditorLinterModel extends Base {
     this.findings.forEach(item => { item.text = this.composeMessage(item.finding); });
   }
 
-  // The English "message" of a finding is composed from a base sentence plus optional clauses.
-  // The same composition is done here from (ruleId, reason) and messageData, so the whole text
-  // is localized. Falls back to the English message when the finding carries no reason - the
-  // creator and survey-core are versioned separately.
   public composeMessage(finding: ILintFinding): string {
-    if (!finding.reason) return finding.message;
-    const template = getTemplate("messages." + finding.ruleId + "." + finding.reason);
-    if (template === undefined) return finding.message;
-    const params = this.getMessageParams(finding);
-    // a sentence built around the facts needs them: a newer core reporting a fact this version
-    // cannot name would otherwise read as "contradicts itself: ." - the English of the core is
-    // a worse language but a whole sentence
-    if (template.indexOf("{facts}") > -1 && !params.facts) return finding.message;
-    const parts = [formatNamed(template, params)];
-    this.getSuffixes(finding, template).forEach(suffix => { if (!!suffix) parts.push(suffix); });
-    return parts.join(" ");
-  }
-
-  private getMessageParams(finding: ILintFinding): { [key: string]: any } {
-    const data = finding.messageData || {};
-    const params: { [key: string]: any } = {};
-    for (const key in data) params[key] = data[key];
-    // a nameless finding is addressed by its element, and a nameless element by its path
-    if (!params.name) params.name = finding.elementName || finding.path;
-    ["values", "available", "names", "setRoots"].forEach(key => {
-      if (Array.isArray(data[key])) params[key] = quoteList(data[key]);
-    });
-    if (finding.ruleId === "expression/type-mismatch") {
-      params.valueShapeText = getTerm("valueShape", data.valueShape);
-    }
-    if (finding.ruleId === "choices/dead-source") {
-      params.fieldNoun = getTerm("sourceField", data.sourceType);
-    }
-    if (finding.ruleId === "trigger/unknown-target") {
-      params.segmentNoun = getSegmentNoun(data);
-      params.kindText = getTerm("targetKind", data.kind);
-      params.verb = getTerm("triggerVerb", data.prop);
-    }
-    if (finding.ruleId === "page/empty") {
-      params.kindText = getTerm("containerKind", data.kind);
-    }
-    // a keyName names a column of a matrix or a question of a dynamic panel template
-    if (finding.reason === "keyNameNotFound") {
-      params.keyNoun = getTerm("segmentNoun", data.questionType);
-    }
-    // only the count reasons have a direction; the bound and step ones carry no count at all
-    if (finding.reason === "countOutOfBounds") {
-      params.direction = getLinterString(
-        "terms.countDirection." + (data.count < data.bound ? "below" : "above"));
-    }
-    if (finding.ruleId === "property/unknown" || finding.ruleId === "property/dead" ||
-      finding.ruleId === "property/invalid-value" || finding.ruleId === "property/required" ||
-      finding.ruleId === "property/not-an-array") {
-      params.ownerText = getOwnerText(data.name, data.className);
-    }
-    // the JSON form, the way the core prints it: an object would otherwise leave the placeholder
-    if (finding.ruleId === "property/required") {
-      params.valueText = quoteValue(data.value);
-    }
-    if (finding.ruleId === "property/invalid-value") {
-      params.valueText = quoteValue(data.value);
-      params.allowedText = quoteList(data.allowed);
-      params.rangeText = getRangeText(data.min, data.max);
-      if (typeof data.valueName === "string") {
-        params.rootKey = data.valueName.split(".")[0];
-      }
-    }
-    if (finding.ruleId === "name/shadowing") {
-      params.nameKindText = getTerm("nameKind", data.nameKind);
-      // a calculated value is not an element, and its elementType is a serializer class name
-      params.ownerText = data.nameKind === "calculatedValue"
-        ? getTerm("nameOwner", "calculatedValue")
-        : (finding.elementType || getTerm("nameOwner", undefined));
-    }
-    if (finding.ruleId === "choices/duplicate") {
-      params.valueText = quoteValue(data.value);
-      // an item this version has no word for is named by its own key rather than mislabelled
-      params.specialItemText = hasTerm("specialItem", data.specialItem)
-        ? getTerm("specialItem", data.specialItem)
-        : data.specialItem;
-    }
-    if (finding.ruleId === "validator/dead") {
-      params.effectText = getTerm("deadValidatorEffect", data.effect);
-      params.causeText = getTerm("deadValidatorCause", data.cause);
-    }
-    if (finding.ruleId === "element/never-visible") {
-      const dependsOn: Array<string> = Array.isArray(data.dependsOn) ? data.dependsOn : [];
-      params.reads = dependsOn.map(name => "{" + name + "}").join(", ");
-      params.deadClause = getLinterString(
-        "terms.deadValueClause." + (dependsOn.length > 1 ? "many" : "one"));
-    }
-    if (finding.ruleId === "cycle/value-write") {
-      const labels: Array<string> = Array.isArray(data.labels) ? data.labels : [];
-      params.label = labels[0];
-      params.chain = labels.join(" -> ");
-    }
-    if (finding.ruleId === "expression/contradiction" ||
-      finding.ruleId === "expression/meaningless-condition") {
-      params.facts = buildFacts(data);
-    }
-    if (finding.ruleId === "value/not-a-choice") {
-      params.valuesText = quoteList(data.values);
-      params.availableText = quoteList(data.available);
-      params.sourceValuesText = quoteList(data.sourceValues);
-      params.sourceShapeText = getTerm("copyShape", data.sourceShape);
-      params.targetShapeText = getTerm("copyShape", data.targetShape);
-    }
-    return params;
-  }
-
-  private getSuffixes(finding: ILintFinding, template: string): Array<string> {
-    const data = finding.messageData || {};
-    const res: Array<string> = [];
-    const suffix = (name: string, ...args: Array<any>): string =>
-      formatTemplate.apply(undefined, ["suffixes." + name].concat(args));
-    // one reason, two shapes: a name read from every entry of the container the call reads,
-    // or one the function resolves against the survey
-    if (finding.reason === "functionArgNotFound") {
-      res.push(!!data.containerName
-        ? suffix("functionArgInContainer", data.functionName, data.containerType, data.containerName)
-        : suffix("functionArgStandalone", data.functionName));
-    }
-    if (finding.ruleId === "expression/syntax") {
-      if (typeof data.at === "number") res.push(suffix("atPosition", data.at));
-      if (data.synthesized) res.push(suffix("fromLegacyTrigger"));
-    }
-    if (finding.ruleId === "name/duplicate" && !!data.scope) {
-      res.push(suffix("inScope", data.scope));
-    }
-    if (finding.ruleId === "cycle/trigger") res.push(suffix("loopMayBeUnreachable"));
-    // a member of the loop is a defaultValueExpression: it stops applying once the question is
-    // answered, so the loop may be shorter-lived than it reads
-    if (finding.ruleId === "cycle/value-write" && Array.isArray(data.labels) &&
-      data.labels.some((label: string) => label.indexOf("defaultValueExpression") > -1)) {
-      res.push(suffix("defaultValueExpressionNote"));
-    }
-    if (!!finding.suggestion) {
-      // for one rule the suggestion is prose rather than a name, and carries its own reason
-      const suggestionReason = data.suggestionReason;
-      if (!!suggestionReason) {
-        res.push(formatTemplate("suggestions." + suggestionReason, data.recordName || data.name));
-      } else {
-        res.push(suffix("didYouMean", finding.suggestion));
-      }
-    } else {
-      // an element with no type at all has no spelling a component definition could explain
-      if (finding.ruleId === "element/unknown-type" && finding.reason === "unknownType") {
-        res.push(suffix("customComponentHint"));
-      }
-      if (finding.ruleId === "expression/unknown-function") res.push(suffix("registerFunctionHint"));
-      if (finding.ruleId === "trigger/unknown-type") res.push(suffix("triggerTypeDroppedHint"));
-      if (finding.ruleId === "property/unknown") res.push(suffix("deserializerDropsKey"));
-      if (finding.ruleId === "validator/unknown-type") res.push(suffix("validatorDroppedHint"));
-    }
-    // the element is worth naming only where it is not the data key itself, which it is
-    // unless a valueName renamed it
-    if ((finding.reason === "commentKeyCollision" || finding.reason === "totalKeyCollision") &&
-      !!data.name && data.name !== data.dataName) {
-      res.push(suffix("dataKeyOwner", data.name));
-    }
-    // the answer shape a dead validator was judged by depends on the inputType of a text question
-    if (finding.ruleId === "validator/dead" && !!data.inputType) {
-      res.push(suffix("validatorInputType", data.inputType));
-    }
-    if (finding.ruleId === "trigger/unknown-target" && data.kind === "questionvalue" &&
-      finding.reason === "rootNotFound") {
-      res.push(suffix("knownVariablesHint"));
-    }
-    if (!!finding.hint) {
-      res.push(formatTemplate("hints." + finding.hint.reason, finding.hint.name));
-    }
-    if (finding.ruleId === "reference/unknown" && data.refKind === "binding") {
-      res.push(suffix("inBindings"));
-    } else if (finding.ruleId === "reference/unknown" && data.refKind === "choicesByUrlVariable") {
-      res.push(suffix("inChoicesByUrl", data.prop));
-    } else if (finding.ruleId === "reference/unknown" && data.refKind === "textPiping") {
-      res.push(suffix("inText", data.prop));
-    } else if (!!data.expression && template.indexOf("{expression}") < 0) {
-      // a template that quotes the expression itself needs no trailing "In expression: ..."
-      res.push(suffix("inExpression", data.expression));
-    }
-    return res;
+    return composeLintMessage(finding);
   }
 }

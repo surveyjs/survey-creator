@@ -64,6 +64,7 @@ import {
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
+  ExpressionAssistantRequestEvent,
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent, LintSurveyEvent,
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
@@ -435,6 +436,9 @@ export class SurveyCreatorModel extends Base
    * @since 2.5.7
    */
   public expressionsValidateSemantics: boolean = true;
+  // How many times the expression assistant asks the AI to correct a result the check reports errors
+  // for, before it shows the result with Accept disabled.
+  public expressionAssistantFixAttempts: number = 1;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   /**
    * Specifies whether the "Add Question" button remembers the type of the most recently added question and uses it for subsequent questions.
@@ -1143,6 +1147,10 @@ export class SurveyCreatorModel extends Base
    * @see startMachineTranslationTo
    */
   public onMachineTranslate: EventBase<SurveyCreatorModel, MachineTranslateEvent> = this.addCreatorEvent<SurveyCreatorModel, MachineTranslateEvent>();
+  // Raised when an author asks the expression assistant to write, change, fix or explain an expression.
+  // Survey Creator calls no AI service itself: the application answers through options.callback.
+  // The assistant's UI is shown only when this event has a handler.
+  public onGenerateExpression: EventBase<SurveyCreatorModel, ExpressionAssistantRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAssistantRequestEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.

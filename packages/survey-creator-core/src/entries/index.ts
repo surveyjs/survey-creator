@@ -90,6 +90,21 @@ export * from "../property-grid/maskSettings";
 export * from "../property-grid/header-settings";
 export * from "../property-grid/boolean-display-mode";
 export { propertyGridCss } from "../property-grid-theme/property-grid";
+export { checkExpression, getExpressionLintOptions } from "../expression-assistant/expression-check";
+export type {
+  IExpressionSite, IExpressionCheckPending, IExpressionCheckFinding, IExpressionCheckResult,
+} from "../expression-assistant/expression-check";
+export { getLintPath } from "../expression-assistant/lint-paths";
+export { buildExpressionContext, buildExpressionSystemPrompt } from "../expression-assistant/expression-context";
+export type {
+  IExpressionContext, IExpressionVariable, IExpressionContextFunction, IExpressionContextOperator, IExpressionContextChoice,
+} from "../expression-assistant/expression-context";
+export { parseExpressionResponse } from "../expression-assistant/expression-response";
+export { ExpressionAssistant, showExpressionAssistant } from "../expression-assistant/expression-assistant";
+export type { IExpressionAssistantOptions, IExpressionAssistantInput, ExpressionAssistantStatus } from "../expression-assistant/expression-assistant";
+export type { IExpressionResponse } from "../expression-assistant/expression-response";
+export { expressionGuideVersion, expressionGuideSections, getExpressionGuideText } from "../expression-assistant/expression-guide";
+export type { IExpressionGuideSection, IExpressionGuideExample } from "../expression-assistant/expression-guide";
 export * from "../questionconverter";
 export * from "../svgbundle";
 export * from "../textWorker";
