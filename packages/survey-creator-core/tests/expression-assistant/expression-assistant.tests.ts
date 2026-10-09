@@ -364,23 +364,21 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
   test("closing the dialog aborts a pending request", () => {
     const { creator, requests } = createCreator();
     const editor = new ConditionEditor(creator.survey, creator.survey.getQuestionByName("q2"), creator, "visibleIf");
-    editor.assistantPrompt.value = "apple";
     const assistant = editor.showExpressionAssistant();
-    expect(assistant.prompt).toBe("apple");
-    assistant.generate();
+    expect(assistant.prompt).toBe("");
+    assistant.generate("apple");
     dialogs[0].options.onHide();
     expect(requests[0].signal.aborted).toBe(true);
     expect(assistant.isDisposed).toBe(true);
   });
-  test("Enter in the prompt line opens the assistant prefilled", () => {
+  test("the condition editor's AI line is a title with the AI action and no input", () => {
     const { creator } = createCreator();
     const editor = new ConditionEditor(creator.survey, creator.survey.getQuestionByName("q2"), creator, "visibleIf");
-    editor.assistantPrompt.value = "apple";
-    let prevented = false;
-    (<any>editor.assistantPrompt).onKeyDownPreprocess({ key: "Enter", preventDefault: () => { prevented = true; } });
-    expect(prevented).toBe(true);
+    expect(editor.assistantPrompt.getType()).toBe("expression");
+    expect(editor.assistantPrompt.hasTitle).toBe(true);
+    editor.assistantPrompt.getTitleActions().filter(a => a.id === "condition-expression-assistant")[0].action();
     expect(dialogs).toHaveLength(1);
-    expect(dialogs[0].options.data.survey.getValue("prompt")).toBe("apple");
+    expect(dialogs[0].options.data.survey.getValue("prompt")).toBeFalsy();
   });
   test("condition modal: a buildable result fills the rows, another the text editor; Apply writes once", () => {
     const { creator, requests } = createCreator();

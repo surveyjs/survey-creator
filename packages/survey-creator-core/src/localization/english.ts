@@ -301,7 +301,6 @@ export var enStrings = {
     promptTitle: "Describe what the expression should do",
     promptPlaceholder: "For example: show this question when the respondent is 18 or older",
     promptLineTitle: "Describe the condition in words",
-    promptLinePlaceholder: "For example: when the respondent chose more than two fruits",
     generate: "Generate",
     refine: "Refine",
     explain: "Explain",

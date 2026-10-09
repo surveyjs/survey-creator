@@ -321,7 +321,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.updatePlaceholderVisibileIf();
     this.setupExpressionAssistant();
   }
-  // The expression assistant: a prompt line above the builder, shown only when the application
+  // The expression assistant: a title with the AI action above the builder, shown only when the application
   // handles creator.onGenerateExpression. The modal and the Logic tab render this same survey.
   // The Logic tab replaces getExpressionCheckInput (its rule's sites), getExpressionDisplayText
   // (the rule text a host may change) and listens to onExpressionAssistantAccepted.
@@ -335,12 +335,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const question = this.assistantPrompt;
     if (!question) return;
     question.visible = isExpressionAssistantAvailable(getExpressionAssistantCreator(this.survey));
-    (<any>question).onKeyDownPreprocess = (event: any) => {
-      if (!!event && event.key === "Enter") {
-        if (!!event.preventDefault) event.preventDefault();
-        this.showExpressionAssistant();
-      }
-    };
     this.editSurvey.onGetQuestionTitleActions.add((_, options) => {
       if (options.question !== question) return;
       options.actions.push({
@@ -357,7 +351,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return showExpressionAssistant({
       creator: creator,
       editor: this,
-      prompt: this.assistantPrompt.value || "",
       getInput: (): IExpressionAssistantInput => !!this.getExpressionCheckInput ? this.getExpressionCheckInput()
         : { sites: !!this.object && !!this.propertyName ? [{ obj: this.object, propertyName: this.propertyName }] : [] },
       getExpression: (): string => this.text || "",
@@ -411,11 +404,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return {
       elements: [
         {
-          type: "text",
+          // A title with the AI action only: an expression question has no input to render
+          type: "expression",
           name: "aiPrompt",
           title: editorLocalization.getString("aiex.promptLineTitle"),
-          placeholder: editorLocalization.getString("aiex.promptLinePlaceholder"),
-          textUpdateMode: "onTyping",
           visible: false
         },
         {
