@@ -72,6 +72,14 @@ const buildPlatformJson = {
       "types": "./typings/entries/presets.d.ts",
       "import": "./fesm/ui-preset-editor.mjs",
       "require": "./ui-preset-editor.js"
+    },
+    // The Tests widget's React rendering, built by rollup.tester.config.mjs. This block is the
+    // published one: the source package.json has no exports map at all, so `./tester` exists only
+    // because it is written here, into build/package.json, under emitNonSourceFiles.
+    "./tester": {
+      "types": "./typings/entries/tester.d.ts",
+      "import": "./fesm/tester.mjs",
+      "require": "./tester.js"
     }
   },
   peerDependencies: {

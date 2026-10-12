@@ -1,0 +1,60 @@
+// The Tests widget's stylesheet, and the whole of it.
+//
+// It is emitted beside the bundle by rollup.tester.config.mjs (`emitCss`), the way collaboration.css
+// is emitted beside collaboration.js, and it is the only css the widget needs: prompt 07 adds none.
+//
+// Two rules travel with everything below.
+//
+// 1. Every class is `svt-` prefixed and every one of them is in the mapping table of
+//    src/tester/README.md, which is the contract between the models that hand a class out, this file
+//    and the markup of prompt 07. A selector here that names no class of that table is a bug in one
+//    of the three.
+// 2. Not one library selector is overridden from outside its own context. The reused survey-core
+//    chrome models draw under names of ours (model/runnerCss.ts), so `svt-list__item` is a class the
+//    ListModel was told to emit and not an `sv-list__item` being out-specified. Where a library class
+//    IS named - `.sd-table__cell` inside the steps grid, `.sv-popup__container` inside the check menu
+//    - it is always inside an `svt-` block, it is always about fitting a rendered survey into a box
+//    this file drew, and it is the reason those two blocks are the longest ones here.
+//
+// The look is the prototype's, translated and not redesigned: aligning the widget with the Creator's
+// visual language is real work and is written down as a candidate prompt in
+// promts/creator-tester-notes.md rather than done by hand here.
+@use "palette" as *;
+@use "blocks/svt-base.scss";
+@use "blocks/svt-chrome.scss";
+@use "blocks/svt-runner.scss";
+@use "blocks/svt-console.scss";
+@use "blocks/svt-json.scss";
+@use "blocks/svt-recorder.scss";
+@use "blocks/svt-steps.scss";
+@use "blocks/svt-checks.scss";
+@use "blocks/svt-adorners.scss";
+
+// The palette, on every element that can be the outermost one the widget renders. The two popup cards
+// are in that list because a survey-core popup is not always drawn inside the subtree it was opened
+// from - see _palette.scss.
+.svt-tester,
+.svt-runner,
+.svt-recorder,
+.svt-checks,
+.svt-menu {
+  @include svt-palette;
+}
+
+// The shell. The prototype was the whole page and could set this on `body`; here it is the one
+// element the host hands over, and nothing outside it is touched.
+.svt-tester {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  background: var(--svt-bg);
+  color: var(--svt-ink);
+  font: 14px/1.45 var(--svt-font);
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}

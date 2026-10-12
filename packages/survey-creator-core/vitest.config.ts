@@ -175,6 +175,25 @@ export default defineConfig({
           setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
+      // The Tests widget (src/tester). It is a bundle of its own that imports survey-core and
+      // survey-core/tester and nothing of this package, so this project deliberately carries no
+      // "survey-creator-core" alias: an import of the creator from the widget has to fail here the
+      // way the ESLint fence makes it fail there.
+      {
+        plugins: [stubAssets],
+        oxc: oxcLegacyDecorators,
+        resolve: { alias: sharedAliases },
+        test: {
+          name: "tester",
+          include: ["tests-tester/**/*.{test,tests,spec}.{ts,tsx}"],
+          environment: "jsdom",
+          globals: true,
+          testTimeout: 30000,
+          hookTimeout: 30000,
+          dangerouslyIgnoreUnhandledErrors: true,
+          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+        },
+      },
     ],
   },
 });
