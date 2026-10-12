@@ -649,7 +649,7 @@ test("presence: overlay maps surface px onto the local canvas, fractions for old
     ({ a: { s: "surface" }, ...extra });
   const setCur = (c: IPresenceState["cur"]): void => {
     peers.set("c1", <IPresencePeer>{
-      clientId: "c1", name: "User c1",      state: { tab: "designer", sel: null, focus: null, cur: c }
+      clientId: "c1", name: "User c1", state: { tab: "designer", sel: null, focus: null, cur: c }
     });
     (<any>overlay).render();
   };
@@ -708,7 +708,7 @@ test("presence: cursors hide under the flyout/mobile sidebar panel, docked does 
   const overlay = new PresenceOverlay(creator, () => peers);
   const setCur = (extra: any): void => {
     peers.set("c1", <IPresencePeer>{
-      clientId: "c1", name: "User c1",      state: {
+      clientId: "c1", name: "User c1", state: {
         tab: "designer", sel: null, focus: null,
         cur: { a: { s: "surface" }, ...extra }
       }
@@ -767,7 +767,7 @@ test("presence: fraction-anchored cursor points hide under the flyout panel too"
   const overlay = new PresenceOverlay(creator, () => peers);
   const setCur = (x: number, y: number): void => {
     peers.set("c1", <IPresencePeer>{
-      clientId: "c1", name: "User c1",      state: {
+      clientId: "c1", name: "User c1", state: {
         tab: "designer", sel: null, focus: null,
         cur: { a: { s: "el", n: "q1" }, x, y }
       }
@@ -805,7 +805,7 @@ test("presence: pg cursors keep drawing over the flyout panel", (): any => {
   const peers = new Map<string, IPresencePeer>();
   const overlay = new PresenceOverlay(creator, () => peers);
   peers.set("c1", <IPresencePeer>{
-    clientId: "c1", name: "User c1",    state: {
+    clientId: "c1", name: "User c1", state: {
       tab: "designer", sel: null, focus: null,
       cur: { a: { s: "pg", n: "title" }, x: 0.5, y: 0.5 }
     }

@@ -209,7 +209,7 @@ test("logic lock: a rule writing a question held in the designer is read-only", 
   const { creator, plugin } = createCreator();
   try {
     plugin.upsertPeer({
-      clientId: "a", name: "User a",      state: <IPresenceState>{ tab: "designer", sel: { loc: "/pages/page1/elements/q2", name: "q2" }, lock: true, focus: null, cur: null }
+      clientId: "a", name: "User a", state: <IPresenceState>{ tab: "designer", sel: { loc: "/pages/page1/elements/q2", name: "q2" }, lock: true, focus: null, cur: null }
     });
     const model = await openRule(creator, RULE1);
     expect(plugin.getState().lock).toBe(false);
@@ -355,7 +355,7 @@ test("logic lock: a rule writing a question held in the designer shows that hold
   try {
     creator.makeNewViewActive("logic");
     plugin.upsertPeer({
-      clientId: "a", name: "User a",      state: <IPresenceState>{ tab: "designer", sel: { loc: "/pages/page1/elements/q2", name: "q2" }, lock: true, focus: null, cur: null }
+      clientId: "a", name: "User a", state: <IPresenceState>{ tab: "designer", sel: { loc: "/pages/page1/elements/q2", name: "q2" }, lock: true, focus: null, cur: null }
     });
     expect(holderChip(creator, RULE1).visible).toBe(true);
     expect(holderChip(creator, RULE1).title).toEqual("UA");
