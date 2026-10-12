@@ -14,7 +14,9 @@
 //  - "tabbar" a tab strip item                 #tab-{n}
 //  - "surface" the designer canvas content     #scrollableDiv-{tab} .svc-tab-designer_content
 //  - "root"   the tab's scroll container       #scrollableDiv-{tab}
-export type AnchorScope = "el" | "page" | "pg" | "q" | "tabbar" | "surface" | "root";
+//  - "rule"   a Logic-tab rule's summary row   n = logicRuleKey; resolved
+//             through the Logic-tab model, not a selector (see logic-rules.ts)
+export type AnchorScope = "el" | "page" | "pg" | "q" | "tabbar" | "surface" | "root" | "rule";
 
 export interface IAnchorRef {
   s: AnchorScope;
@@ -285,6 +287,8 @@ export function resolveAnchor(a: IAnchorRef, tabId: string, root: ParentNode): E
     case "tabbar": return a.n ? root.querySelector(PRESENCE_SELECTORS.tabItem(a.n)) : null;
     case "surface": return scoped(PRESENCE_SELECTORS.designerSurfaceContent) ?? scoped(PRESENCE_SELECTORS.designerSurface);
     case "root": return root.querySelector(PRESENCE_SELECTORS.tabContent(tabId));
+    // Needs the Logic-tab model: the overlay resolves it (resolveLogicRuleRow).
+    case "rule": return null;
     default: return null;
   }
 }

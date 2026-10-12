@@ -1,7 +1,7 @@
 import { DomDocumentHelper, DomWindowHelper, EventBase } from "survey-core";
 import { SurveyCreatorModel } from "survey-creator-core";
 import { buildLocator } from "../journal/journal-locator";
-import { logicRuleKey, openLogicRule } from "./logic-rules";
+import { encodeLogicRuleAnchor, logicRuleKey, openLogicRule } from "./logic-rules";
 import { emptyPresenceState, encodeAnchor, encodeEditFocus, getCanvasElement, IPresenceFocus, IPresenceState, PRESENCE_SELECTORS } from "./presence-state";
 
 // Mouse updates are throttled to this interval (trailing edge).
@@ -132,9 +132,12 @@ export class PresenceCapture {
   // tab model sets the edited rule in its own detail-panel callback, so the
   // state is read once the current dispatch is over.
 
+  private logicModel(): any {
+    return (<any>this.creator.getPlugin("logic", false))?.model;
+  }
   private currentRule(): string | null {
     if (this.creator.activeTab !== "logic") return null;
-    return logicRuleKey(openLogicRule((<any>this.creator.getPlugin("logic", false))?.model));
+    return logicRuleKey(openLogicRule(this.logicModel()));
   }
   private trackLogicItemsSurvey(survey: any): void {
     survey?.onMatrixDetailPanelVisibleChanged?.add(() => {
@@ -332,7 +335,13 @@ export class PresenceCapture {
       this.sendCur(null, "");
       return;
     }
-    const encoded = encodeAnchor(target, tabId);
+    // The Logic tab's rule editor and a rule being created live in each
+    // participant's own Logic-tab model: two people adding a rule each would
+    // see each other's cursor over their own draft. Only the summary rows of
+    // existing rules are shared there, addressed by the rule.
+    const encoded = this.creator.activeTab === "logic"
+      ? encodeLogicRuleAnchor(this.logicModel(), target)
+      : encodeAnchor(target, tabId);
     if (!encoded) {
       this.sendCur(null, "");
       return;

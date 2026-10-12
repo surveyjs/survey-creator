@@ -3,6 +3,7 @@ import { SurveyCreatorModel } from "survey-creator-core";
 import { getCollabString } from "../collaboration-strings";
 import { buildLocator, resolveLocator } from "../journal/journal-locator";
 import { ElementLockGuard } from "./element-lock";
+import { resolveLogicRuleRow } from "./logic-rules";
 import { getCanvasElement, IPresenceFocus, IPresencePeer, IPresenceState, mapOffset, presenceColorSlot, presenceSlotColor, PRESENCE_SELECTORS, resolveAnchor, resolveEditFocus } from "./presence-state";
 import "./presence.scss";
 
@@ -603,7 +604,11 @@ export class PresenceOverlay {
       // travels on the wire.
       if (cur && now - a.curChangedAt < CURSOR_IDLE_MS &&
         (cur.a.s === "tabbar" || state.tab === localTab)) {
-        const node = resolveAnchor(cur.a, localTabId, this.doc);
+        // A Logic-tab rule anchor lands on that rule's row of the LOCAL list,
+        // wherever the local editor has pushed it.
+        const node = cur.a.s === "rule"
+          ? resolveLogicRuleRow((<any>this.creator.getPlugin("logic", false))?.model, cur.a.n)
+          : resolveAnchor(cur.a, localTabId, this.doc);
         if (node) {
           const container = cur.a.s === "pg" ? sidebarRect
             : cur.a.s === "tabbar" ? undefined
