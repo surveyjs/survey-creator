@@ -11,7 +11,6 @@ import { CollaborationPlugin } from "../src/plugins/collaboration";
 const peerEntry = (clientId: string, state: Partial<IPresenceState>): IPresencePeerEntry => ({
   clientId,
   name: `User ${clientId}`,
-  color: "#e91e63",
   state: <IPresenceState>{ tab: "designer", sel: null, focus: null, trLoc: null, cur: null, ...state }
 });
 
