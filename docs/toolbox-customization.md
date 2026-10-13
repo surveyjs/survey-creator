@@ -9,13 +9,6 @@ The Toolbox contains available question and panel types. Users can click questio
 
 <img src="images/survey-creator-toolbox-full.png" alt="Survey Creator - Toolbox in full mode" width="1544" height="772">
 
-- [Full and Compact Modes](#full-and-compact-modes)
-- [Limit Available Question and Panel Types](#limit-available-question-and-panel-types)
-- [Group Toolbox Items by Categories](#group-toolbox-items-by-categories)
-- [Customize Predefined Toolbox Items](#customize-predefined-toolbox-items)
-- [Manage Toolbox Subitems](#manage-toolbox-subitems)
-- [Add a Custom Toolbox Item](#add-a-custom-toolbox-item)
-
 ## Full and Compact Modes
 
 The Toolbox supports full mode (illustrated above) and compact mode. In compact mode, element names are hidden. To see an individual element name, a user should move the mouse pointer over the element icon.
@@ -312,7 +305,7 @@ To remove a subitem, call the [`removeSubitem(subitem)`](/survey-creator/documen
   - `"password"`
   - `"range"`
   - `"tel"`
-  - `"text"`
+  - `"text-default"`
   - `"time"`
   - `"url"`
   - `"week"`
