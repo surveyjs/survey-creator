@@ -823,6 +823,7 @@ export class PropertyGridModel {
   private surveyValue: SurveyModel;
   private objValue: Base;
   private optionsValue: ISurveyCreatorOptions;
+  private groupingCssSurvey: SurveyModel;
   private titleActionsCreator: PropertyGridTitleActionsCreator;
   private classNameProperty: string;
   private classNameValue: any;
@@ -1064,7 +1065,38 @@ export class PropertyGridModel {
     this.survey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
     });
+    this.subscribeGroupingCssUpdates();
     this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
+  }
+  private subscribeGroupingCssUpdates(): void {
+    const survey = this.surveyValue;
+    if (!survey || this.groupingCssSurvey === survey) return;
+    this.groupingCssSurvey = survey;
+    const onIsVisibleChanged = (question: Question) => {
+      if (survey.isLoadingFromJson) return;
+      this.updateNextVisibleQuestionGroupingCss(question);
+    };
+    survey.getAllQuestions().forEach(question => {
+      question.registerFunctionOnPropertyValueChanged("isVisible", () => onIsVisibleChanged(question), "spgGroupingCss");
+    });
+    survey.onQuestionCreated.add((_, options) => {
+      const question = options.question;
+      if (!question) return;
+      question.registerFunctionOnPropertyValueChanged("isVisible", () => onIsVisibleChanged(question), "spgGroupingCss");
+    });
+  }
+  private updateNextVisibleQuestionGroupingCss(question: Question): void {
+    const parent = question && question.parent;
+    if (!parent) return;
+    const elements = parent.elements;
+    const index = elements.indexOf(question);
+    if (index < 0) return;
+    for (let i = index + 1; i < elements.length; i++) {
+      const el = elements[i];
+      if (!el.isVisible || !(el instanceof Question)) continue;
+      el.updateElementCss(true);
+      return;
+    }
   }
 
   private onCreateSurvey(survey: SurveyModel): void {
@@ -1577,13 +1609,13 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
   }
   private hasPreviousElementForGrouping(question: Question): boolean {
     if (!question || !question.parent) return false;
-    const elements = question.parent.elements.filter(el => el.visible);
+    const elements = question.parent.elements.filter(el => el.isVisible);
     const index = elements.indexOf(question);
-    if (index < 1) return;
-    const prevElement = question.parent.elements[index - 1];
-    const prevPrevElement = question.parent.elements[index - 2];
+    if (index < 1) return false;
+    const prevElement = elements[index - 1];
     if (prevElement.getType() === question.getType()) return true;
     //in case of overriding property
+    const prevPrevElement = index > 1 ? elements[index - 2] : undefined;
     if (index > 1 && !prevElement.startWithNewLine && prevPrevElement["property"] === prevElement["property"] && prevPrevElement.getType() === question.getType()) return true;
     return false;
   }
