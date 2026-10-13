@@ -10,7 +10,7 @@ test.describe(title, () => {
 
   test("Check section", async ({ page }) => {
     await page.evaluate(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false);
-    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.setViewportSize({ width: 1920, height: 1240 });
 
     await setJSON(page, {
       showQuestionNumbers: "on",
@@ -34,19 +34,20 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Choice Options" }).click();
 
     const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
+    const choicesEditor = sectionContentElement.locator("[data-name='choices']");
     await expect(sectionContentElement).toBeVisible();
     await compareScreenshot(page, sectionContentElement, "choices-section-default.png");
     await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector("[data-name='choices'] .sd-formbox__input").focus());
-    await compareScreenshot(page, sectionContentElement, "choices-section-default-focused.png");
+    await compareScreenshot(page, choicesEditor, "choices-section-default-focused.png");
     await resetFocusToBody(page);
     await sectionContentElement.locator(".sd-action").nth(0).hover();
-    await compareScreenshot(page, sectionContentElement, "choices-clear-button-hovered.png");
+    await compareScreenshot(page, choicesEditor, "choices-clear-button-hovered.png");
 
     await sectionContentElement.locator(".sd-action").nth(3).hover();
-    await compareScreenshot(page, sectionContentElement, "choices-edit-item-button-hovered.png");
+    await compareScreenshot(page, choicesEditor, "choices-edit-item-button-hovered.png");
 
     await sectionContentElement.locator(".sd-action").nth(3).click();
-    await compareScreenshot(page, sectionContentElement, "choices-edit-item-content.png");
+    await compareScreenshot(page, choicesEditor, "choices-edit-item-content.png");
   });
 
   test("Check items empty", async ({ page }) => {
@@ -74,10 +75,11 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Choice Options" }).click();
 
     const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
+    const choicesEditor = sectionContentElement.locator("[data-name='choices']");
     await compareScreenshot(page, sectionContentElement, "choices-empty-items.png");
 
     await sectionContentElement.locator(".spg-matrixdynamic__add-btn").hover();
-    await compareScreenshot(page, sectionContentElement, "choices-empty-add-btn-hovered.png");
+    await compareScreenshot(page, choicesEditor, "choices-empty-add-btn-hovered.png");
   });
 
   test("Collection editor headers", async ({ page }) => {
