@@ -299,7 +299,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showDontKnowItem", tab: "choices" },
       { name: "dontKnowText", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
-      { name: "showShortcutKeys", tab: "choices" },
+      { name: "choiceShortcutsEnabled", tab: "choices" },
       { name: "choicesByUrl", tab: "choicesByUrl" },
       { name: "colCount", tab: "layout" },
       { name: "hideIfChoicesEmpty", tab: "logic", index: 1000 },
@@ -319,7 +319,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "minSelectedChoices", tab: "choices" },
       { name: "maxSelectedChoices", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
-      { name: "showShortcutKeys", tab: "choices" },
+      { name: "choiceShortcutsEnabled", tab: "choices" },
       { name: "valuePropertyName", tab: "data" }
     ]
   },
@@ -337,7 +337,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       { name: "allowClear", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
-      { name: "showShortcutKeys", tab: "choices" },
+      { name: "choiceShortcutsEnabled", tab: "choices" },
     ]
   },
   dropdown: {
@@ -869,7 +869,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         name: "autoFocusFirstQuestion",
         tab: "question"
       },
-      { name: "showChoiceShortcutKeys", tab: "question" },
+      { name: "choiceShortcutsEnabled", tab: "question" },
       { name: "maxTextLength", tab: "question" },
       { name: "maxCommentLength", tab: "question" },
       { name: "commentAreaRows", tab: "question" },
