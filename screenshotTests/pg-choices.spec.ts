@@ -76,7 +76,8 @@ test.describe(title, () => {
 
     const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
     const choicesEditor = sectionContentElement.locator("[data-name='choices']");
-    await compareScreenshot(page, sectionContentElement, "choices-empty-items.png");
+    await page.mouse.move(10, 10);
+    await compareScreenshot(page, choicesEditor, "choices-empty-items.png");
 
     await sectionContentElement.locator(".spg-matrixdynamic__add-btn").hover();
     await compareScreenshot(page, choicesEditor, "choices-empty-add-btn-hovered.png");
