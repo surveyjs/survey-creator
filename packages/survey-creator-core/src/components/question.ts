@@ -274,7 +274,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       ) {
         (<any>surveyElement).setCanShowOptionItemCallback(
           (item: ItemValue): boolean => {
-            if (this.creator.readOnly) return false;
+            // Placeholder items exist to add them: none while choices cannot change.
+            if (this.creator.readOnly || !this.creator.isCanModifyProperty(surveyElement, "choices")) return false;
             if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
             return (
               this.creator.maxChoices < 1 || surveyElement["choices"].length < this.creator.maxChoices

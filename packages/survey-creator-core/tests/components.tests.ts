@@ -365,6 +365,36 @@ test("item value adorner and newItem value", () => {
   expect(question.newItem.value).toEqual("Item 1");
 });
 
+test("placeholder choices are hidden while the question choices cannot be modified", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onPropertyGetReadOnly.add((sender, options) => {
+    if (readOnly && options.propertyName === "choices") options.readOnly = true;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3], showOtherItem: true }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, undefined as any);
+  const placeholders = [question.newItem, question.noneItem, question.selectAllItem];
+  const allVisible = question.visibleChoices.length;
+  placeholders.forEach((item) => expect(question.visibleChoices).toContain(item));
+
+  // The visible choices are recalculated when the choices change; a caller
+  // that changes the permissions recalculates them itself.
+  readOnly = true;
+  question["onVisibleChoicesChanged"]();
+  placeholders.forEach((item) => expect(question.visibleChoices).not.toContain(item));
+  expect(question.visibleChoices).toContain(question.otherItem);
+  expect(question.visibleChoices).toContain(question.choices[0]);
+
+  readOnly = false;
+  question["onVisibleChoicesChanged"]();
+  expect(question.visibleChoices).toHaveLength(allVisible);
+
+  questionAdorner.dispose();
+});
+
 test("QuestionRatingAdornerViewModel read only mode", () => {
   const creator = new CreatorTester();
   creator.JSON = {
