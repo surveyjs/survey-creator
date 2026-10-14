@@ -829,6 +829,27 @@ test("remove() and ", () => {
   newItemAdorner.remove(newItemAdorner);
   expect(question.choices).toHaveLength(2);
 });
+test("item value remove() and add() do nothing without the permission", () => {
+  const creator = new CreatorTester();
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const noneAdorner = new ItemValueWrapperViewModel(creator, question, question.noneItem);
+  const newItemAdorner = new ItemValueWrapperViewModel(creator, question, question.newItem);
+
+  itemAdorner.remove(itemAdorner);
+  expect(question.choices.map((item) => item.value)).toEqual([1, 2, 3]);
+  newItemAdorner.add(newItemAdorner);
+  expect(question.choices.map((item) => item.value)).toEqual([1, 2, 3]);
+  noneAdorner.add(noneAdorner);
+  expect(question.showNoneItem).toBeFalsy();
+});
+
 test("Do not select choices if a question in a matrix mode (popup in our case) ", () => {
   const creator = new CreatorTester();
   creator.JSON = {
