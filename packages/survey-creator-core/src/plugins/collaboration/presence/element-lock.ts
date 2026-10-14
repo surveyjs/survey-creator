@@ -204,8 +204,13 @@ export class ElementLockGuard {
     return false;
   }
   private parentOf(element: any): any {
-    // Dynamic-panel template content has no `parent` chain up to the
-    // question - its template panel reports the owning question instead.
+    // Embedded panels - a choice item's detail section, a matrix detail panel,
+    // a dynamic panel's template - name their owning question as the element
+    // the designer selects for them. Their `parent` chain does not reach it:
+    // a choice panel reports the question's container, a matrix detail panel
+    // has no parent at all (a template has none either, only parentQuestion).
+    const owner = element?.isPanel === true ? element.selectedElementInDesign : null;
+    if (!!owner && owner !== element) return owner;
     return element?.parent || element?.parentQuestion || null;
   }
   private isLockable(element: any): boolean {
@@ -245,7 +250,11 @@ export class ElementLockGuard {
     // change on selection, which is rare, and containers depend on content.
     const survey: any = this.creator.survey;
     if (survey) {
-      const elements: Array<any> = [].concat(survey.pages || [], survey.getAllPanels?.(false, true) || [], survey.getAllQuestions?.(false, true) || []);
+      const questions: Array<any> = survey.getAllQuestions?.(false, true) || [];
+      const elements: Array<any> = [].concat(survey.pages || [], survey.getAllPanels?.(false, true) || [], questions);
+      // Embedded panels (choice detail sections, matrix detail panels) are
+      // not survey panels, but their adorners show the add-question button.
+      questions.forEach((question) => elements.push(...(question.getPanels?.() || [])));
       elements.forEach((element) => this.refreshAdorner(element));
     }
     this.blurLockedEditor();
