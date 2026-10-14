@@ -646,9 +646,7 @@ test.describe(title, () => {
     await page.evaluate(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false);
     await page.setViewportSize({ width: 1920, height: 1080 });
 
-    await setJSON(page, {
-      "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "question1" }] }]
-    });
+    await setJSON(page, { "elements": [{ "type": "checkbox", "name": "question1", "choices": ["Item 1", "Item 2", "Item 3"] }] });
 
     await page.locator(".svc-question__content").click({ position: { x: 10, y: 10 } });
     await getPropertyGridCategory(page, generalGroupName).click();
