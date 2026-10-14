@@ -642,6 +642,23 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".spg-row--multiple"), "overriding-property-editor.png");
   });
 
+  test("Check boolean editors grouping", async ({ page }) => {
+    await page.evaluate(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false);
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    await setJSON(page, {
+      "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "question1" }] }]
+    });
+
+    await page.locator(".svc-question__content").click({ position: { x: 10, y: 10 } });
+    await getPropertyGridCategory(page, generalGroupName).click();
+    await page.getByRole("button", { name: "Choice Options" }).click();
+
+    const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
+    await expect(sectionContentElement).toBeVisible();
+    await compareScreenshot(page, sectionContentElement, "boolean-editors-grouping.png");
+  });
+
   test("Check comment editor with reset button", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     await page.evaluate(() => {

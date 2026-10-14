@@ -823,7 +823,6 @@ export class PropertyGridModel {
   private surveyValue: SurveyModel;
   private objValue: Base;
   private optionsValue: ISurveyCreatorOptions;
-  private groupingCssSurvey: SurveyModel;
   private titleActionsCreator: PropertyGridTitleActionsCreator;
   private classNameProperty: string;
   private classNameValue: any;
@@ -1070,8 +1069,6 @@ export class PropertyGridModel {
   }
   private subscribeGroupingCssUpdates(): void {
     const survey = this.surveyValue;
-    if (!survey || this.groupingCssSurvey === survey) return;
-    this.groupingCssSurvey = survey;
     const onIsVisibleChanged = (question: Question) => {
       if (survey.isLoadingFromJson) return;
       this.updateNextVisibleQuestionGroupingCss(question);
