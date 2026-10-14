@@ -617,3 +617,28 @@ test("journal: adding into a choice detail section changes the item's elements",
   expectInSync();
   expect(b.survey.getQuestionByName("q8").parentQuestion).toBe(b.survey.getQuestionByName("q5"));
 });
+
+test("journal: a path to a removed choice does not fall back to another choice by index", (): any => {
+  const json = {
+    pages: [{
+      name: "page1",
+      elements: [
+        { type: "checkbox", name: "q5", choices: [1, 2, 3, 4] },
+        { type: "text", name: "q1", validators: [{ type: "numeric" }] }
+      ]
+    }]
+  };
+  const { a, b, pluginA, pluginB } = createPair(json);
+  // b removes choice 2 while a adds a question into its detail section.
+  const q5B: any = b.survey.getQuestionByName("q5");
+  q5B.choices.splice(1, 1);
+  (<any>a.survey.getQuestionByName("q5")).choices[1].panel.addNewQuestion("text", "q8");
+  expect((<IJournalArrayChangedPayload>pluginA.records[0].payload).target).toEqual("/pages/page1/elements/q5/choices/2/elements");
+  const results = pluginB.apply(pluginA.toText());
+  expect(results[0].success).toBe(false);
+  expect(b.survey.getQuestionByName("q8")).toBeFalsy();
+  expect(q5B.choices.map((item: any) => item.hasElements)).toEqual([false, false, false]);
+  expect(resolveLocator("/pages/page1/elements/q5/choices/2", b.survey)).toBeNull();
+  // Elements without an identity are still addressed by index.
+  expect(resolveLocator("/pages/page1/elements/q1/validators/0", b.survey)).toBe(b.survey.getQuestionByName("q1").validators[0]);
+});

@@ -38,6 +38,12 @@ const specificChoices = {
 };
 
 export class ItemValueWrapperViewModel extends Base implements IExpandCollapseChoice {
+  // Kept outside the item's property hash: setting a property on an item
+  // notifies its owner question (itemValuePropertyChanged).
+  private static adorners: WeakMap<ItemValue, ItemValueWrapperViewModel> = new WeakMap();
+  public static GetAdorner(item: ItemValue): ItemValueWrapperViewModel {
+    return ItemValueWrapperViewModel.adorners.get(item);
+  }
   @property({ defaultValue: false }) isNew: boolean;
   @property({ defaultValue: false }) isDragging: boolean;
   @property({ defaultValue: false }) isDragDropGhost: boolean;
@@ -83,15 +89,20 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     if (!this.allowItemOperations.allowAdd) {
       this.updateIsNewVisibility();
     }
-    if (!this.creator.isCanModifyProperty(question, "choices")) {
-      this.canTouchItems = false;
-    }
+    this.updateCanTouchItems();
     this.setupShowPanel();
+    ItemValueWrapperViewModel.adorners.set(item, this);
   }
 
   private dragOrClickHelper: DragOrClickHelper;
   private allowItemOperations: ICollectionItemAllowOperations;
-  private canTouchItems: boolean = true;
+  @property({ defaultValue: true }) protected canTouchItems: boolean;
+  // The question's permissions may change while the item is rendered (the
+  // creator's onElementAllowOperations / onPropertyGetReadOnly answers): the
+  // caller passes the new value, or it is re-read.
+  public updateCanTouchItems(canTouch: boolean = this.creator.isCanModifyProperty(this.question, "choices")): void {
+    this.canTouchItems = canTouch;
+  }
   private focusCameFromDown: boolean = false;
   private collectionProperty: JsonObjectProperty;
 
@@ -142,6 +153,9 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     return this.creator.expandCollapseManager;
   }
   public dispose(): void {
+    if (ItemValueWrapperViewModel.adorners.get(this.item) === this) {
+      ItemValueWrapperViewModel.adorners.delete(this.item);
+    }
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged

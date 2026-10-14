@@ -99,7 +99,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         showTitle: false,
         innerCss: "svc-image-item-value-controls__drag-area-indicator",
         data: { model: this },
-        visible: this.isDraggable,
+        visible: new ComputedUpdater(() => this.isDraggable) as unknown as boolean,
         appearance: { style: "brand", mode: "quaternary-surface", size: "small" },
       }),
       new Action({
@@ -108,6 +108,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         iconName: "icon-choosefile",
         showTitle: false,
         needSpace: true,
+        visible: new ComputedUpdater(() => this.canEditChoices) as unknown as boolean,
         appearance: { style: "brand", mode: "quaternary-surface", size: "small" },
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
@@ -147,7 +148,12 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     return this.topActionsContainerValue;
   }
 
+  // Choosing or uploading a file changes the question's choices.
+  private get canEditChoices(): boolean {
+    return !this.creator.readOnly && this.canTouchItems;
+  }
   chooseFile(model: ImageItemValueWrapperViewModel) {
+    if (!model.canEditChoices) return;
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
     const context = { element: model.question, item: model.item, elementType: model.question.getType(), propertyName: "imageLink" };
     model.creator.chooseFiles(fileInput, (files: File[]) => {
@@ -162,6 +168,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   }
 
   public uploadFiles(files) {
+    if (!this.canEditChoices) return;
     this.isUploading = true;
     const context = { element: this.question, item: undefined, elementType: this.question.getType(), propertyName: "imageLink" };
     this.creator.uploadFiles(files, this.question, (status, link) => {
