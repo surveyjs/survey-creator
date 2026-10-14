@@ -655,6 +655,9 @@ test.describe(title, () => {
     const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
     await expect(sectionContentElement).toBeVisible();
     await compareScreenshot(page, sectionContentElement, "boolean-editors-grouping.png");
+
+    await page.getByText('Enable the "None" option').click();
+    await compareScreenshot(page, sectionContentElement, "boolean-editors-no-grouping.png");
   });
 
   test("Check comment editor with reset button", async ({ page }) => {
