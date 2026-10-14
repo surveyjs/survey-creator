@@ -57,7 +57,7 @@ export function isExpressionAssistantAvailable(creator: SurveyCreatorModel): boo
   return !!creator && !!creator.onGenerateExpression && !creator.onGenerateExpression.isEmpty;
 }
 
-const iconName = "icon-toolbox-expression-24x24";
+const iconName = "icon-ai-24x24";
 export const expressionAssistantIconName = iconName;
 
 function escapeHtml(text: string): string {

@@ -63,7 +63,7 @@ describe("The expression assistant: availability (ai-expressions)", () => {
     const action = getAssistantAction(creator, q1, "visibleIf");
     expect(action).toBeTruthy();
     expect(action.enabled).toBe(true);
-    expect(action.iconName).toBe("icon-toolbox-expression-24x24");
+    expect(action.iconName).toBe("icon-ai-24x24");
     expect(getAssistantAction(creator, q1, "minValueExpression")).toBeTruthy();
     const editor = new ConditionEditor(creator.survey, q1, creator, "visibleIf");
     // the modal: the property grid's title action opens the assistant
