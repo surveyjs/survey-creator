@@ -340,6 +340,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       if (options.question !== question) return;
       options.actions.push({
         id: "condition-expression-assistant", iconName: expressionAssistantIconName, iconSize: "auto",
+        appearance: { style: "neutral", mode: "secondary" },
         title: editorLocalization.getString("aiex.generate"), showTitle: true,
         enabled: !this.editSurvey.readOnly,
         action: () => { this.showExpressionAssistant(); }

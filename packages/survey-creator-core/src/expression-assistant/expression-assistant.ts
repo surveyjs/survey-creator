@@ -461,6 +461,7 @@ export function createExpressionAssistantTitleAction(obj: Base, question: Questi
     id: "property-grid-expression-assistant",
     iconName: iconName,
     iconSize: "auto",
+    appearance: { style: "neutral", mode: "tertiary" },
     title: getLocString("aiex.actionTitle"),
     showTitle: false,
     enabled: !question.isReadOnly,

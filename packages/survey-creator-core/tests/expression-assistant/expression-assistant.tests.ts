@@ -75,6 +75,24 @@ describe("The expression assistant: availability (ai-expressions)", () => {
     const titleActions = editor.assistantPrompt.getTitleActions();
     expect(titleActions.map(a => a.id)).toContain("condition-expression-assistant");
   });
+  test("the AI action's appearance: neutral tertiary in the property grid, neutral secondary in the Logic tab editor", () => {
+    const { creator } = createCreator();
+    const q2 = creator.survey.getQuestionByName("q2");
+    const propertyGrid = new PropertyGridModelTester(q2, creator);
+    const pgAction = propertyGrid.survey.getQuestionByName("visibleIf").getTitleToolbar().getActionById("property-grid-expression-assistant");
+    const pgCss = pgAction.getActionBarItemCss();
+    expect(pgCss).toContain("sd-action--neutral");
+    expect(pgCss).toContain("sd-action--tertiary");
+    expect(pgCss).not.toContain("sd-action--secondary");
+
+    const editor = new ConditionEditor(creator.survey, q2, creator, "visibleIf");
+    editor.isModal = false;
+    const logicAction = editor.assistantPrompt.getTitleToolbar().getActionById("condition-expression-assistant");
+    const logicCss = logicAction.getActionBarItemCss();
+    expect(logicCss).toContain("sd-action--neutral");
+    expect(logicCss).toContain("sd-action--secondary");
+    expect(logicCss).not.toContain("sd-action--tertiary");
+  });
   test("a read-only property disables the action", () => {
     const { creator } = createCreator();
     creator.readOnly = true;
