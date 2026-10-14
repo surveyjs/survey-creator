@@ -10,7 +10,7 @@ test.describe(title, () => {
 
   test("Check section", async ({ page }) => {
     await page.evaluate(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false);
-    await page.setViewportSize({ width: 1920, height: 1240 });
+    await page.setViewportSize({ width: 1920, height: 1280 });
 
     await setJSON(page, {
       showQuestionNumbers: "on",
@@ -33,21 +33,20 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     await page.getByRole("button", { name: "Choice Options" }).click();
 
-    const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
-    const choicesEditor = sectionContentElement.locator("[data-name='choices']");
-    await expect(sectionContentElement).toBeVisible();
-    await compareScreenshot(page, sectionContentElement, "choices-section-default.png");
+    const choicesElement = page.getByRole("group", { name: "Choice Options" }).locator("[data-name='choices']");
+    await expect(choicesElement).toBeVisible();
+    await compareScreenshot(page, choicesElement, "choices-section-default.png");
     await page.evaluate(() => (window as any).creator.rootElement.getRootNode().querySelector("[data-name='choices'] .sd-formbox__input").focus());
-    await compareScreenshot(page, choicesEditor, "choices-section-default-focused.png");
+    await compareScreenshot(page, ".spg-table-wrapper", "choices-section-default-focused.png");
     await resetFocusToBody(page);
-    await sectionContentElement.locator(".sd-action").nth(0).hover();
-    await compareScreenshot(page, choicesEditor, "choices-clear-button-hovered.png");
+    await choicesElement.getByRole("button", { name: "Clear" }).hover();
+    await compareScreenshot(page, choicesElement, "choices-clear-button-hovered.png");
 
-    await sectionContentElement.locator(".sd-action").nth(3).hover();
-    await compareScreenshot(page, choicesEditor, "choices-edit-item-button-hovered.png");
+    await page.getByRole("button", { name: "Show Details" }).first().hover();
+    await compareScreenshot(page, choicesElement, "choices-edit-item-button-hovered.png");
 
-    await sectionContentElement.locator(".sd-action").nth(3).click();
-    await compareScreenshot(page, choicesEditor, "choices-edit-item-content.png");
+    await page.getByRole("button", { name: "Show Details" }).first().click();
+    await compareScreenshot(page, choicesElement, "choices-edit-item-content.png");
   });
 
   test("Check items empty", async ({ page }) => {
@@ -74,13 +73,11 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     await page.getByRole("button", { name: "Choice Options" }).click();
 
-    const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
-    const choicesEditor = sectionContentElement.locator("[data-name='choices']");
-    await page.mouse.move(10, 10);
-    await compareScreenshot(page, choicesEditor, "choices-empty-items.png");
+    const choicesElement = page.getByRole("group", { name: "Choice Options" }).locator("[data-name='choices']");
+    await compareScreenshot(page, choicesElement, "choices-empty-items.png");
 
-    await sectionContentElement.locator(".spg-matrixdynamic__add-btn").hover();
-    await compareScreenshot(page, choicesEditor, "choices-empty-add-btn-hovered.png");
+    await choicesElement.locator(".spg-matrixdynamic__add-btn").hover();
+    await compareScreenshot(page, choicesElement, "choices-empty-add-btn-hovered.png");
   });
 
   test("Collection editor headers", async ({ page }) => {
@@ -115,8 +112,7 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     await page.getByRole("button", { name: "Choice Options" }).click();
 
-    const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
-    await compareScreenshot(page, sectionContentElement, "collection-editor-header.png");
+    await compareScreenshot(page, ".spg-table-wrapper", "collection-editor-header.png");
   });
 
   test("Check choices editor with narrow property grid", async ({ page }) => {

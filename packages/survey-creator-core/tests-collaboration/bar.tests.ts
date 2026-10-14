@@ -5,6 +5,10 @@ import { JournalOp } from "../src/plugins/collaboration/journal";
 import { IPresencePeerEntry } from "../src/plugins/collaboration/presence";
 import { CollabRowAction, ICollabChange } from "../src/plugins/collaboration/bar";
 import { CollaborationPlugin, ICollaborationOptions } from "../src/plugins/collaboration";
+import { formatVersionTime } from "../src/plugins/collaboration/bar/version-history-model";
+
+// The separator of "author <dot> time" subtitles.
+const DOT = "·"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
 const initialJSON = {
   pages: [
@@ -35,7 +39,6 @@ function setup(options: ICollaborationOptions = {}): ISetup {
 const peerEntry = (clientId: string, tab: string): IPresencePeerEntry => ({
   clientId,
   name: `User ${clientId}`,
-  color: "#e91e63",
   state: { tab, sel: null, focus: null, cur: null }
 });
 
@@ -290,7 +293,7 @@ test("collab-bar: the menu opens the version history as a floating panel", () =>
   expect(titles[0]).toEqual("Current Version");
   expect(titles).toContain("First milestone");
   expect(titles).toContain("1 autosaved version");
-  expect(titles).toContain("Property \"title\" changed on \"q1\"");
+  expect(titles).toContain("Title of \"q1\" changed to \"Hello\"");
   expect(titles[titles.length - 1]).toEqual("Document created");
   cleanup();
 });
@@ -319,4 +322,44 @@ test("collab-bar: disposing releases the presence subscription", () => {
   collab.upsertPeer(peerEntry("b", "test"));
   // A roster change after dispose reaches nothing.
   expect(model.participantActions.actions.length).toEqual(afterDispose);
+});
+
+test("collab-bar: the history panel is wide enough for whole sentences", () => {
+  const { collab, cleanup } = setup();
+  expect(collab.bar.historyPanel.width).toEqual(480);
+  cleanup();
+});
+
+const peerTitle = (clientId: string): ICollabChange =>
+  ({ ...change(1, JournalOp.PropertyChanged, { target: "/pages/page1/elements/q1/title", value: "Hello" }), clientId });
+const changeRow = (collab: CollaborationPlugin) => collab.bar.versionHistory.rows.filter((r) => r.kind === "change")[0];
+
+test("collab-bar: a peer's rows carry the peer's name, even after they leave", () => {
+  const { collab, cleanup } = setup();
+  collab.upsertPeer(peerEntry("p1", "designer"));
+  collab.setHistory([peerTitle("p1")]);
+  expect(changeRow(collab).subtitle).toEqual("User p1 " + DOT + " " + formatVersionTime(1720000001000));
+  collab.removePeer("p1");
+  collab.setHistory([peerTitle("p1")]);
+  expect(changeRow(collab).subtitle).toEqual("User p1 " + DOT + " " + formatVersionTime(1720000001000));
+  cleanup();
+});
+
+test("collab-bar: a name that arrives after the record relabels the row", () => {
+  const { collab, cleanup } = setup();
+  collab.setHistory([peerTitle("p2")]);
+  // No name yet: the time alone, nothing like "undefined <dot> ".
+  expect(changeRow(collab).subtitle).toEqual(formatVersionTime(1720000001000));
+  collab.upsertPeer(peerEntry("p2", "designer"));
+  expect(changeRow(collab).subtitle).toEqual("User p2 " + DOT + " " + formatVersionTime(1720000001000));
+  cleanup();
+});
+
+test("collab-bar: a row is signed by the name the transport stamped, with no presence at all", () => {
+  // A peer who left before this client joined: presence never named them, the
+  // room log did.
+  const { collab, cleanup } = setup();
+  collab.setHistory([{ ...peerTitle("p3"), authorName: "Alice" }]);
+  expect(changeRow(collab).subtitle).toEqual("Alice " + DOT + " " + formatVersionTime(1720000001000));
+  cleanup();
 });

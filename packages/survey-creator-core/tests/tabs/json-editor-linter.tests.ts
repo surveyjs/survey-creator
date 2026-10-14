@@ -1210,3 +1210,23 @@ test("A name that is an object is spelled out in the JSON form, not left as a pl
   // an object written for a name means nothing in particular, so there is nothing to offer
   expect(editor.errorList.actions[0].data.showFixButton).toBeFalsy();
 });
+
+const dottedRowTrigger = {
+  elements: [{ type: "matrixdropdown", name: "md", rows: ["r.1"], columns: [{ name: "c" }] }],
+  triggers: [{ type: "setvalue", expression: "1 = 1", setToName: "md.r.1.cx", setToValue: 2 }]
+};
+
+test("A column after a dotted matrixdropdown row is named a column", () => {
+  expect(textOf(dottedRowTrigger, "trigger/unknown-target")).toContain(
+    "The setvalue trigger targets \"md.r.1.cx\", but matrixdropdown \"md\" has no column \"cx\".");
+});
+
+test("Without the segment level of an older core, the third segment of a matrixdropdown is its column", () => {
+  const editor = createEditor(JSON.stringify(dottedRowTrigger, null, 2));
+  const finding = editor.linter.findings.filter(f => f.ruleId === "trigger/unknown-target")[0].finding;
+  const olderCore = (segmentIndex: number): any => Object.assign({}, finding, {
+    messageData: Object.assign({}, finding.messageData, { segmentLevel: undefined, segmentIndex: segmentIndex })
+  });
+  expect(editor.linter.composeMessage(olderCore(2))).toContain("has no column \"cx\"");
+  expect(editor.linter.composeMessage(olderCore(1))).toContain("has no row \"cx\"");
+});

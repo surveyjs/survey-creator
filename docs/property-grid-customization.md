@@ -11,20 +11,9 @@ Property Grid displays the properties of a selected survey element and allows a 
 
 ## Hide Properties from the Property Grid
 
-If you want to prevent users from accessing or modifying a certain survey element's property, you can hide it from the Property Grid. Survey Creator allows you to hide either an individual property or multiple properties at once.
+If you want to prevent users from accessing or modifying a certain survey element's property, you can hide it from the Property Grid by handling the Survey Creator's [`onPropertyShowing`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyShowing) event. Its second parameter includes the `show` Boolean property. Disable it for the properties you want to hide.
 
-To hide a single property, access it using the `Serializer`'s `getProperty(className, propertyName)` method and set its `visible` attribute to `false`:
-
-```js
-// Hide the `title` property for Boolean questions
-Survey.Serializer.getProperty("boolean", "title").visible = false;
-
-// In modular applications:
-import { Serializer } from "survey-core";
-Serializer.getProperty("boolean", "title").visible = false;
-```
-
-If you want to hide multiple properties, handle the Survey Creator's [`onPropertyShowing`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyShowing) event. Its second parameter includes the `show` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
+The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
 
 ```js
 const blackList = [ "visible", "isRequired" ];
@@ -42,6 +31,16 @@ creator.onPropertyShowing.add((_, options) => {
 ```
 
 [View Demo](https://surveyjs.io/survey-creator/examples/removeproperties/ (linkStyle))
+
+Hiding a property from the Property Grid does not prevent users from editing it on the design surface. To disable in-place editing for a specific property, handle [`onAllowInplaceEdit`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onAllowInplaceEdit) and set `options.allow` to `false`. For example, use the following code to disable editing the survey description on the design surface:
+
+```js
+creator.onAllowInplaceEdit.add((_, options) => {
+  if (options.element.getType() === "survey" && options.propertyName === "description") {
+    options.allow = false;
+  }
+});
+```
 
 ## Override Default Property Values
 

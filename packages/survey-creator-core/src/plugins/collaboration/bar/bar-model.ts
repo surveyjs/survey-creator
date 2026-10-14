@@ -2,7 +2,7 @@ import { Action, ActionContainer, Base, IAction, ListModel, createDropdownAction
 import { ComponentContainerModel, SurveyCreatorModel, applyCreatorUiLocaleToPopup, editorLocalization } from "survey-creator-core";
 import { getCollabString } from "../collaboration-strings";
 import { FloatingPanelModel } from "./floating-panel/floating-panel-model";
-import { presenceColorSlot, presenceInitials } from "../presence/presence-state";
+import { presenceAvatarCss, presenceColorSlot, presenceInitials } from "../presence/presence-state";
 import { CollabBarStatus, ICollabBarOptions, ICollabChange, ICollabParticipant } from "./bar-types";
 import { CollabRowAction } from "./collab-row-action";
 import { VersionHistoryModel } from "./version-history-model";
@@ -54,7 +54,14 @@ export class CollabBarModel extends Base {
   // cursor move, and only these four fields affect what the bar shows.
   private participantsSig: string | undefined;
   private changes: ReadonlyArray<ICollabChange> = [];
+  // Every participant seen this session, by connection id. Never pruned: an id
+  // names one connection, so a peer who left still signs their edits.
+  private authorNames: Map<string, string> = new Map<string, string>();
   private inviteTimer: any;
+
+  // Tells this client's own records from relayed ones. Set by the plugin,
+  // which owns the journal; the bar cannot know on its own.
+  public isLocalChange: (change: ICollabChange) => boolean = () => false;
 
   constructor(private creator: SurveyCreatorModel, private options: ICollabBarOptions = {}) {
     super();
@@ -76,11 +83,20 @@ export class CollabBarModel extends Base {
     this.updateStatus();
 
     this.versionHistory = new VersionHistoryModel();
+    // Read at every rebuild, so a later `isLocalChange` or a newly learned name
+    // takes effect without re-wiring.
+    this.versionHistory.setAuthors({
+      isLocal: (change: ICollabChange) => this.isLocalChange(change),
+      nameOf: (clientId: string) => this.authorNames.get(clientId)
+    });
     this.historyPanel = new FloatingPanelModel({
       id: "collabVersionHistory",
       title: getCollabString("collabVersionHistory"),
       contentComponentName: "sv-list",
-      contentComponentData: { model: this.versionHistory.list }
+      contentComponentData: { model: this.versionHistory.list },
+      // Room for "who did what" sentences. Rows wrap rather than truncate
+      // (version-history.scss), so this only sets how often they wrap.
+      width: 480
     });
 
     this.container = this.createContainer();
@@ -135,7 +151,10 @@ export class CollabBarModel extends Base {
 
   public setParticipants(users: Array<ICollabParticipant>): void {
     const list = users || [];
-    const sig = list.map((u) => [u.id, u.name, u.color, u.colorIndex, u.tab].join("\n")).join("|");
+    // Ahead of the signature guard: a name learned here may sign history rows
+    // that arrived before the peer's presence did.
+    if (this.rememberAuthors(list))this.versionHistory.refresh();
+    const sig = list.map((u) => [u.id, u.name, u.tab].join("\n")).join("|");
     if (sig === this.participantsSig) return;
     this.participantsSig = sig;
     this.participants = list;
@@ -159,6 +178,16 @@ export class CollabBarModel extends Base {
     this.historyPanel.show();
   }
 
+  private rememberAuthors(users: Array<ICollabParticipant>): boolean {
+    let changed = false;
+    users.forEach((user) => {
+      if (!user || !user.id || this.authorNames.get(user.id) === user.name) return;
+      this.authorNames.set(user.id, user.name);
+      changed = true;
+    });
+    return changed;
+  }
+
   public dispose(): void {
     if (this.inviteTimer !== undefined) clearTimeout(this.inviteTimer);
     this.actions.dispose();
@@ -168,6 +197,7 @@ export class CollabBarModel extends Base {
     this.historyPanel = undefined;
     this.versionHistory.dispose();
     this.versionHistory = undefined;
+    this.authorNames.clear();
     super.dispose();
   }
 
@@ -306,7 +336,7 @@ export class CollabBarModel extends Base {
       tooltip: this.getParticipantTooltip(user),
       action: () => this.goToParticipant(user)
     });
-    action.innerCss = "svc-collab-bar__participant " + avatarCss(colorIndexOf(user));
+    action.innerCss = "svc-collab-bar__participant " + presenceAvatarCss(presenceColorSlot(user.id));
     return action;
   }
 
@@ -324,7 +354,7 @@ export class CollabBarModel extends Base {
     });
     row.rowCss = "svc-collab-bar__roster-item";
     row.markerText = presenceInitials(user.name);
-    row.markerCss = avatarCss(colorIndexOf(user)) + " svc-collab-bar__avatar--list";
+    row.markerCss = presenceAvatarCss(presenceColorSlot(user.id)) + " svc-collab-bar__avatar--list";
     return row;
   }
 
@@ -372,16 +402,4 @@ export class CollabBarModel extends Base {
       action.title = getCollabString("collabInvite");
     }, INVITE_COPIED_MS);
   }
-}
-
-// The avatar circle: the base shape plus the theme's user-color slot. Used for
-// the strip chip (on the action-bar button) and for the roster marker.
-function avatarCss(colorIndex: number): string {
-  return "svc-collab-bar__avatar svc-collab-bar__avatar--color-" + colorIndex;
-}
-
-// The transport may stamp the slot itself; otherwise every client derives the
-// same one from the id (see presenceColorSlot).
-function colorIndexOf(user: ICollabParticipant): number {
-  return typeof user.colorIndex === "number" ? user.colorIndex : presenceColorSlot(user.id);
 }
