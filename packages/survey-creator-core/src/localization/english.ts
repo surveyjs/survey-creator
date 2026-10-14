@@ -1598,9 +1598,9 @@ export var enStrings = {
     questionStartIndex: "Enter a number or letter with which you want to start numbering.",
     questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box.",
     autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry.",
-    choiceShortcutsEnabled: "Select to display letter codes (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker. Respondents can select a choice by typing its code.",
+    choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions.",
     checkboxbase: {
-      choiceShortcutsEnabled: "Select to display letter codes next to choices in this question and let respondents select a choice by typing its code. An empty value uses the survey-level setting. An explicit off disables shortcuts even when the survey setting is on."
+      choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
     },
     questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab.",
     maxTextLength: "For text entry questions only.",
