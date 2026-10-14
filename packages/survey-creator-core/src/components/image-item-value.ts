@@ -121,6 +121,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         title: new ComputedUpdater(() => this.removeFileTitle) as unknown as string,
         iconName: "icon-delete",
         showTitle: false,
+        visible: new ComputedUpdater(() => this.allowRemove) as unknown as boolean,
         appearance: { style: "alert", mode: "quaternary-surface", size: "small" },
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);

@@ -873,6 +873,28 @@ test("Refuse and Don't know items", () => {
   expect(q1.showDontKnowItem).toBeFalsy();
 });
 
+test("ImageItemValueWrapperViewModel remove action follows allowRemove", () => {
+  const creator = new CreatorTester();
+  creator.minChoices = 2;
+  creator.onCollectionItemAllowOperations.add((sender, options) => {
+    if (options.item.value === "b") options.allowDelete = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", choices: [
+      { value: "a", imageLink: "a.png" }, { value: "b", imageLink: "b.png" }, { value: "c", imageLink: "c.png" }
+    ] }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const adorners = question.choices.map((item) => new ImageItemValueWrapperViewModel(creator, question, item, undefined, {} as HTMLElement));
+  const removeVisible = () => adorners.map((adorner) => adorner.topActionsContainer.getActionById("remove").visible);
+  expect(removeVisible(), "allowDelete: false hides it").toEqual([true, false, true]);
+
+  question.choices.splice(2, 1);
+  expect(removeVisible().slice(0, 2), "minChoices reached").toEqual([false, false]);
+
+  adorners.forEach((adorner) => adorner.dispose());
+});
+
 test("ImageItemValueWrapperViewModel isUploading", () => {
   const creator = new CreatorTester();
   creator.JSON = {
