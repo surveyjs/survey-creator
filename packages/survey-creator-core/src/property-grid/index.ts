@@ -1060,27 +1060,18 @@ export class PropertyGridModel {
       const item = options.question.obj.getType() == "imageitemvalue" ? options.question.obj : undefined;
       this.options.clearFiles(options.value, question, callback, { element: options.question.obj, item: item, elementType: options.question.obj.getType(), propertyName: options.name });
     });
-    this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
-    this.survey.onQuestionCreated.add((_, opt) => {
-      opt.question.allowRootStyle = false;
-    });
-    this.subscribeGroupingCssUpdates();
-    this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
-  }
-  private subscribeGroupingCssUpdates(): void {
-    const survey = this.surveyValue;
-    const onIsVisibleChanged = (question: Question) => {
-      if (survey.isLoadingFromJson) return;
-      this.updateNextVisibleQuestionGroupingCss(question);
+    const survey = this.survey;
+    const setupQuestion = (question: Question) => {
+      question.allowRootStyle = false;
+      question.registerFunctionOnPropertyValueChanged("isVisible", () => {
+        if (!survey.isLoadingFromJson) {
+          this.updateNextVisibleQuestionGroupingCss(question);
+        }
+      }, "spgGroupingCss");
     };
-    survey.getAllQuestions().forEach(question => {
-      question.registerFunctionOnPropertyValueChanged("isVisible", () => onIsVisibleChanged(question), "spgGroupingCss");
-    });
-    survey.onQuestionCreated.add((_, options) => {
-      const question = options.question;
-      if (!question) return;
-      question.registerFunctionOnPropertyValueChanged("isVisible", () => onIsVisibleChanged(question), "spgGroupingCss");
-    });
+    survey.getAllQuestions().forEach(setupQuestion);
+    survey.onQuestionCreated.add((_, options) => setupQuestion(options.question));
+    this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
   }
   private updateNextVisibleQuestionGroupingCss(question: Question): void {
     const parent = question && question.parent;
