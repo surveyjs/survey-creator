@@ -347,6 +347,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       });
     });
     this.editSurvey.pages[0].addElement(question, 0);
+    // the builder no longer comes first: without a new line it would share the prompt's row
+    this.panel.startWithNewLine = true;
   }
   public showExpressionAssistant(): ExpressionAssistant {
     const creator = getExpressionAssistantCreator(this.survey);

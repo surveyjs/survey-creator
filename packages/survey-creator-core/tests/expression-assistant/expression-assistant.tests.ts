@@ -72,6 +72,11 @@ describe("The expression assistant: availability (ai-expressions)", () => {
     editor.isModal = false;
     expect(editor.assistantPrompt).toBeTruthy();
     expect(editor.editSurvey.getAllQuestions()[0]).toBe(editor.assistantPrompt);
+    // the prompt line has its own row: the builder goes below it
+    const rows = editor.editSurvey.pages[0].rows;
+    expect(rows.length).toBe(3);
+    expect(rows[0].elements.map(el => el.name)).toEqual(["aiPrompt"]);
+    expect(rows[1].elements.map(el => el.name)).toEqual(["panel"]);
     const titleActions = editor.assistantPrompt.getTitleActions();
     expect(titleActions.map(a => a.id)).toContain("condition-expression-assistant");
   });
