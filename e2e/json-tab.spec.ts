@@ -192,6 +192,7 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const creator = (window as any).creator;
       creator.autoSaveEnabled = true;
+      creator.autoSaveDelay = 200;
       creator.saveSurveyFunc = (no: number, callback: (num: number, isSuccess: boolean) => void) => {
         (window as any).savedJson = creator.JSON;
         callback(no, true);
@@ -204,16 +205,8 @@ test.describe(title, () => {
     await page.keyboard.type("I am saved");
 
     // the editor waits out a second, then the auto-save delay
-    await page.waitForTimeout(1800);
-    const saved = await page.evaluate(() => {
-      const creator = (window as any).creator;
-      return {
-        title: (window as any).savedJson?.pages[0].elements[0].title,
-        activeTab: creator.activeTab
-      };
-    });
-    expect(saved.title).toBe("I am saved");
-    expect(saved.activeTab).toBe("json");
+    await expect.poll(() => page.evaluate(() => (window as any).savedJson?.pages[0].elements[0].title), { timeout: 2000 }).toBe("I am saved");
+    expect(await page.evaluate(() => (window as any).creator.activeTab)).toBe("json");
   });
 
   test("Check fix error", async ({ page }) => {
