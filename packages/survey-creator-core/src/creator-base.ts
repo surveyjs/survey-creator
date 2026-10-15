@@ -1150,7 +1150,7 @@ export class SurveyCreatorModel extends Base
   // Raised when an author asks the expression assistant to write, change, fix or explain an expression.
   // Survey Creator calls no AI service itself: the application answers through options.callback.
   // The assistant's UI is shown only when this event has a handler.
-  public onGenerateExpression: EventBase<SurveyCreatorModel, ExpressionAssistantRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAssistantRequestEvent>();
+  public onExpressionAssistantRequest: EventBase<SurveyCreatorModel, ExpressionAssistantRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAssistantRequestEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.

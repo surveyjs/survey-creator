@@ -13,7 +13,7 @@ test.describe(title, () => {
     await page.evaluate(() => {
       const creator = window["creator"];
       creator.propertyGridNavigationMode = "buttons";
-      creator.onGenerateExpression.add((_, options) => {
+      creator.onExpressionAssistantRequest.add((_, options) => {
         options.callback({ expression: "{q1} = 'maybe'", explanation: "Shown when the answer to q1 is maybe." });
       });
       creator.JSON = {

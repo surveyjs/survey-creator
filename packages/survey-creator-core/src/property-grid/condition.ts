@@ -74,7 +74,7 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
   public clearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): void {
     question.clearValue();
   }
-  // The expression assistant's action, when the application handles creator.onGenerateExpression.
+  // The expression assistant's action, when the application handles creator.onExpressionAssistantRequest.
   // Added here rather than through onPropertyEditorUpdateTitleActions, which fires after it: that
   // event stays the host's way to hide or move the action.
   public onGetQuestionTitleActions(obj: Base, options: any, creatorOptions: ISurveyCreatorOptions): void {

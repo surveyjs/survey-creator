@@ -23,7 +23,7 @@ function createCreator(json: any = fruitJson, options?: any): { creator: Creator
   const creator = new CreatorTester(options);
   creator.JSON = json;
   const requests: Array<ExpressionAssistantRequestEvent> = [];
-  creator.onGenerateExpression.add((_, options) => { requests.push(options); });
+  creator.onExpressionAssistantRequest.add((_, options) => { requests.push(options); });
   return { creator: creator, requests: requests };
 }
 function getTitleActions(creator: CreatorTester, obj: any, propertyName: string): Array<any> {

@@ -54,7 +54,7 @@ export function getExpressionAssistantCreator(obj: any): SurveyCreatorModel {
 }
 
 export function isExpressionAssistantAvailable(creator: SurveyCreatorModel): boolean {
-  return !!creator && !!creator.onGenerateExpression && !creator.onGenerateExpression.isEmpty;
+  return !!creator && !!creator.onExpressionAssistantRequest && !creator.onExpressionAssistantRequest.isEmpty;
 }
 
 const iconName = "icon-ai-24x24";
@@ -206,7 +206,7 @@ export class ExpressionAssistant extends Base {
     if (!!findings) {
       options.findings = findings.map(f => ({ ruleId: f.ruleId, reason: f.reason, severity: f.severity, message: f.englishText }));
     }
-    this.creator.onGenerateExpression.fire(this.creator, options);
+    this.creator.onExpressionAssistantRequest.fire(this.creator, options);
   }
   private onResult(kind: ExpressionAssistantRequestKind,
     result: { expression?: string, explanation?: string, text?: string, error?: string }): void {

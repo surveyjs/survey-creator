@@ -321,7 +321,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.updatePlaceholderVisibileIf();
   }
   // The expression assistant: a title with the AI action above the builder. It is added only to the
-  // Logic tab editor (isModal is false) and only when the application handles creator.onGenerateExpression.
+  // Logic tab editor (isModal is false) and only when the application handles creator.onExpressionAssistantRequest.
   // The modal does not have it: the property grid opens the assistant with its own title action.
   // The Logic tab replaces getExpressionCheckInput (its rule's sites), getExpressionDisplayText
   // (the rule text a host may change) and listens to onExpressionAssistantAccepted.
