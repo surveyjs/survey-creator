@@ -638,6 +638,7 @@ export var enStrings = {
     questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "Error message alignment",
     autoFocusFirstQuestion: "Focus first question on a new page",
+    choiceShortcutsEnabled: "Enable choice shortcuts",
     questionOrder: "Question order",
     timeLimit: "Time limit to complete the survey",
     timeLimitPerPage: "Time limit to complete one page",
@@ -1597,6 +1598,10 @@ export var enStrings = {
     questionStartIndex: "Enter a number or letter with which you want to start numbering.",
     questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box.",
     autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry.",
+    choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions.",
+    checkboxbase: {
+      choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+    },
     questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab.",
     maxTextLength: "For text entry questions only.",
     maxCommentLength: "For question comments only.",
