@@ -644,7 +644,7 @@ test.describe(title, () => {
 
   test("Check boolean editors grouping", async ({ page }) => {
     await page.evaluate(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false);
-    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.setViewportSize({ width: 1920, height: 1920 });
 
     await setJSON(page, { "elements": [{ "type": "checkbox", "name": "question1", "choices": ["Item 1", "Item 2", "Item 3"] }] });
 
