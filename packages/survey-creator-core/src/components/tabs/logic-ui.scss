@@ -147,8 +147,9 @@
 }
 
 // A read-only operator (a read-only Logic tab, a rule locked by a collaborator)
-// opens nothing: no hover, no pointer.
-.svc-logic-operator.sl-dropdown--readonly {
+// opens nothing: no hover, no pointer. The class is survey-core's own
+// dropdown controlReadOnly - logicCss is merged over the default css.
+.svc-logic-operator.sd-formbox--readonly {
   pointer-events: none;
 }
 
