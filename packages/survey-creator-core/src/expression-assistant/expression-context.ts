@@ -455,6 +455,14 @@ export function buildExpressionContext(creator: SurveyCreatorModel, sites: Array
   return { context: context, systemPrompt: buildExpressionSystemPrompt(context) };
 }
 
+// The explanation is shown in the Creator UI, so it is written in the UI language. Named explicitly:
+// "the language the author wrote in" left the model to guess and it answered an English request in German.
+function getExplanationLanguage(locale: string): string {
+  locale = locale || "en";
+  const name = editorLocalization.getLocaleName(locale, null, true);
+  return !!name && name !== locale ? name + " (locale code \"" + locale + "\")" : "the language with locale code \"" + locale + "\"";
+}
+
 // Same context in, byte-identical prompt out: a host may cache it.
 export function buildExpressionSystemPrompt(context: IExpressionContext): string {
   const lines: Array<string> = [];
@@ -483,6 +491,8 @@ export function buildExpressionSystemPrompt(context: IExpressionContext): string
   lines.push("- When the request cannot be expressed with what is listed, say so in the explanation and return an empty expression.");
   lines.push("");
   lines.push("## Answer");
-  lines.push("Answer with JSON only, nothing around it: {\"expression\": \"...\", \"explanation\": \"...\"}. The explanation is one or two sentences in the language the author wrote in.");
+  lines.push("Answer with JSON only, nothing around it: {\"expression\": \"...\", \"explanation\": \"...\"}. The explanation is one or two sentences.");
+  lines.push("Write the explanation in " + getExplanationLanguage(context.locales && context.locales.creator) +
+    ", the language of the Survey Creator UI, whatever language the request or the survey texts use.");
   return lines.join("\n");
 }

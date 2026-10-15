@@ -8,7 +8,7 @@ import { CreatorTester } from "../creator-tester";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { settings } from "../../src/creator-settings";
-import { buildExpressionContext, creatorInternalFunctions, IExpressionContext } from "../../src/expression-assistant/expression-context";
+import { buildExpressionContext, buildExpressionSystemPrompt, creatorInternalFunctions, IExpressionContext } from "../../src/expression-assistant/expression-context";
 import { checkExpression, getExpressionLintOptions, IExpressionSite } from "../../src/expression-assistant/expression-check";
 
 export * from "../../src/components/link-value";
@@ -344,5 +344,14 @@ describe("Caps, examples and the system prompt (ai-expressions)", () => {
     expect(res.systemPrompt.indexOf(JSON.stringify(res.context, null, 2))).toBeGreaterThan(-1);
     expect(res.systemPrompt.indexOf("{\"expression\": \"...\", \"explanation\": \"...\"}")).toBeGreaterThan(-1);
     expect(res.systemPrompt.indexOf("must evaluate to true or false")).toBeGreaterThan(-1);
+  });
+  test("the system prompt names the language of the explanation: the Creator UI locale", () => {
+    const creator = createCreator({ elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] });
+    const res = buildExpressionContext(creator, [questionSite(creator, "q2")], "");
+    expect(res.systemPrompt.indexOf("Write the explanation in English (locale code \"en\")")).toBeGreaterThan(-1);
+    expect(res.systemPrompt.indexOf("the language the author wrote in")).toBe(-1);
+    // a locale survey-core has no name for is named by its code
+    res.context.locales.creator = "zz";
+    expect(buildExpressionSystemPrompt(res.context).indexOf("Write the explanation in the language with locale code \"zz\"")).toBeGreaterThan(-1);
   });
 });
