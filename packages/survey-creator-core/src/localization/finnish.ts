@@ -1201,6 +1201,8 @@ export var fiStrings = {
     questionErrorLocation: "Kysymyksen virheen sijainti",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Fokusoi ensimmäiseen kysymykseen sivun vaihtuessa",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Ota valintapikakuvakkeet käyttöön",
     // "Question order"
     questionOrder: "Kysymysten järjestys sivulla",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var fiStrings = {
     questionErrorLocation: "Määrittää virhesanoman sijainnin suhteessa kysymykseen, jonka syöte on virheellinen. Valitse seuraavista: \"Top\" - virheteksti sijoitetaan kysymysruudun yläosaan; \"Pohja\" - virheteksti sijoitetaan kysymysruudun alaosaan.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Valitse tämä, jos haluat, että kunkin sivun ensimmäinen syöttökenttä on valmis tekstinsyöttöä varten.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Näyttää kirjaimet (A, B, C, ...) vaihtoehtojen vieressä Radio Button Groupissa, Valintaruuduissa ja Kuvanvalitsijan kysymyksissä. Vastaajat voivat valita vaihtoehtoja painamalla vastaavia kirjainnäppäimiä. Voit ohittaa tämän asetuksen yksittäisille kysymyksille.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Näyttää kirjaimet (A, B, C, ...) vaihtoehtojen vieressä ja antaa vastaajien valita ne painamalla vastaavia kirjainnäppäimiä. \"Peritä\"-vaihtoehto käyttää kyselytason asetusta."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. Tämän asetuksen vaikutus näkyy vain Esikatselu-välilehdessä.",
     // [Auto-translated] "For text entry questions only."

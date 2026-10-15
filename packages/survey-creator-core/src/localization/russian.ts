@@ -1201,6 +1201,8 @@ export var ruStrings = {
     questionErrorLocation: "Размещение ошибки опроса",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Фокусирование на первом вопросе при изменении страницы",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Включить ярлыки выбора",
     // "Question order"
     questionOrder: "Сортировка элементов на странице",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var ruStrings = {
     questionErrorLocation: "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Выберите, если вы хотите, чтобы первое поле ввода на каждой странице было готово для ввода текста.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Отображается буквы (A, B, C, ...) рядом с вариантами в группе радиокнопок, галочках и вопросах выбора изображений. Респонденты могут выбрать варианты, нажав соответствующие буквенные клавиши. Вы можете переобойти эту настановку для отдельных вопросов.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Отображает буквы (A, B, C, ...) рядом с вариантами и позволяет респондентам выбирать их, нажимая соответствующие клавиши букв. Опция «Наследить» использует параметры на уровне опроса."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
     // [Auto-translated] "For text entry questions only."

@@ -1201,6 +1201,8 @@ export var germanTranslation = {
     questionErrorLocation: "Position der Fehlermeldungen",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Erste Frage auf einer neuen Seite fokussieren",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Wahlkürzeln aktivieren",
     // "Question order"
     questionOrder: "Reihenfolge der Fragen auf der Seite",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var germanTranslation = {
     questionErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Wählen Sie diese Option aus, wenn das erste Eingabefeld auf jeder Seite für die Texteingabe bereit sein soll.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Zeigt Buchstaben (A, B, C, ...) neben Auswahlmöglichkeiten in der Radio-Tasten-Gruppe, Kontrollkästchen und Bildauswähler-Fragen an. Befragte können Optionen auswählen, indem sie die entsprechenden Buchstabentasten drücken. Diese Einstellung können Sie für einzelne Fragen überschreiben.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Zeigt Buchstaben (A, B, C, ...) neben den Auswahlmöglichkeiten an und ermöglicht es den Befragten, diese durch Drücken der entsprechenden Buchstabentasten auszuwählen. Die Option \"Inherit\" verwendet die Einstellung auf Umfrageebene."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
     // [Auto-translated] "For text entry questions only."

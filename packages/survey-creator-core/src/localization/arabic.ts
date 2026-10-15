@@ -1201,6 +1201,8 @@ export var arStrings = {
     questionErrorLocation: "موقع خطأ في السؤال",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "ركز المؤشر على السؤال الأول عند تغير الصفحة",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "تمكين اختصارات الاختيار",
     // "Question order"
     questionOrder: "ترتيب العناصر على الصفحة",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var arStrings = {
     questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "حدد ما إذا كنت تريد أن يكون حقل الإدخال الأول في كل صفحة جاهزا لإدخال النص.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "يعرض الحروف (A, B, C, ...) بجانب الخيارات في مجموعة أزرار الراديو، ومربعات الاختيار، وأسئلة اختيار الصور. يمكن للمشاركين اختيار الخيارات بالضغط على مفاتيح الحروف المقابلة. يمكنك تجاوز هذا الإعداد للأسئلة الفردية.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "يعرض الحروف (A, B, C, ...) بجانب الخيارات ويسمح للمشاركين باختيارها بالضغط على مفاتيح الحروف المقابلة. يستخدم خيار \"الوراثة\" إعداد مستوى المسح."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
     // [Auto-translated] "For text entry questions only."

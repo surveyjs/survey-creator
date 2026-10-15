@@ -1201,6 +1201,8 @@ export var hrStrings = {
     questionErrorLocation: "Mjesto pogreške u pitanju",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Usredotočite prvo pitanje na promjenu stranice",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Omogući prečace za odabir",
     // "Question order"
     questionOrder: "Redoslijed elemenata na stranici",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var hrStrings = {
     questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Odaberite želite li da prvo polje za unos na svakoj stranici bude spremno za unos teksta.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Prikazuje slova (A, B, C, ...) pored opcija u pitanjima Radio Button Group, Checkboxs i Image Picker. Ispitanici mogu odabrati opcije pritiskom na odgovarajuće tipke za slova. Ovu postavku možete nadjačati za pojedinačna pitanja.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Prikazuje slova (A, B, C, ...) pored izbora i omogućuje ispitanicima da ih odaberu pritiskom na odgovarajuće tipke. Opcija \"Naslijedi\" koristi postavku na razini ankete."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
     // [Auto-translated] "For text entry questions only."

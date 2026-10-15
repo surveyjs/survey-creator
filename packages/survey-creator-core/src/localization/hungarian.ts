@@ -1201,6 +1201,8 @@ export var huStrings = {
     questionErrorLocation: "Kérdés hibaüzenetének helyzete",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Első kérdés automatikus kijelölése lapváltás esetén",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Opció gyorsítványok engedélyezése",
     // "Question order"
     questionOrder: "Elemek rendezése a lapon",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var huStrings = {
     questionErrorLocation: "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Válassza ki, ha azt szeretné, hogy az egyes oldalak első beviteli mezője készen álljon a szövegbevitelre.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Megjeleníti a betűket (A, B, C, ...) a Rádiógomb csoport, a Jelölőnégyzetek és a Képválasztó kérdések választásai mellett. A válaszadók a megfelelő betűgombok megnyomásával választhatnak választási lehetőségeket. Ezt a beállítást egyéni kérdéseknél felülírhatod.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Megjeleníti a betűket (A, B, C, ...) a választások mellett, és lehetővé teszi a válaszadók számára, hogy a megfelelő betűgombok megnyomásával válasszák ki őket. Az \"Örökölés\" opció a felmérés-szintű beállítást használja."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. A beállítás hatása csak az Előnézet lapon látható.",
     // [Auto-translated] "For text entry questions only."

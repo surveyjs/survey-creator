@@ -1201,6 +1201,8 @@ export var jaStrings = {
     questionErrorLocation: "質問エラーの場所",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "ページを変える際に最初の質問に焦点を合わせる",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "選択ショートカットを有効にする",
     // "Question order"
     questionOrder: "ページ上の要素の順序",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var jaStrings = {
     questionErrorLocation: "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "各ページの最初の入力フィールドをテキスト入力可能にするかどうかを選択します。",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "ラジオボタングループ、チェックボックス、画像ピッカーの質問の選択肢の横に文字(A、B、C、...)を表示します。回答者は対応する文字キーを押すことで選択肢を選択できます。個別の質問ではこの設定を上書きできます。",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "選択肢の横に文字(A、B、C、...)が表示され、回答者は対応するアルファベットキーを押して選択できます。「継承」オプションはアンケートレベルの設定を使用しています。"
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "質問の元の順序を維持するか、ランダム化します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
     // [Auto-translated] "For text entry questions only."

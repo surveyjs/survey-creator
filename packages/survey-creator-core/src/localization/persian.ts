@@ -1201,6 +1201,8 @@ export var persianStrings = {
     questionErrorLocation: "محل خطای سوال",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "تمرکز بر روی اولین سوال با تغییر صفحه",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "فعال سازی میانبرهای انتخاب",
     // "Question order"
     questionOrder: "ترتیب المان ها در صفحه",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var persianStrings = {
     questionErrorLocation: "مکان یک پیام خطا را در رابطه با سؤال با ورودی نامعتبر تنظیم می کند. انتخاب بین: \"بالا\" - یک متن خطا در بالای جعبه سوال قرار می گیرد؛ \"پایین\" - یک متن خطا در پایین جعبه سوال قرار می گیرد.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "انتخاب کنید که ایا می خواهید اولین فیلد ورودی در هر صفحه اماده برای ورود متن باشد.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "حروف (A، B، C، ...) را در کنار گزینه ها در گروه دکمه رادیویی، جعبه های تیک و سوالات انتخاب کننده تصویر نمایش می دهد. پاسخ دهندگان می توانند با فشار دادن کلیدهای حروف مربوطه گزینه ها را انتخاب کنند. شما می توانید این تنظیم را برای سوالات فردی نادیده بگیرید.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "حروف (A, B, C, ...) را در کنار گزینه ها نمایش می دهد و به پاسخ دهندگان اجازه می دهد با فشار دادن کلیدهای حروف مربوطه آن ها را انتخاب کنند. گزینه «ارث بردن» از تنظیمات سطح نظرسنجی استفاده می کند."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
     // [Auto-translated] "For text entry questions only."

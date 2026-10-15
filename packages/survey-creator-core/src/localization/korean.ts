@@ -1202,6 +1202,8 @@ export var koreanStrings = {
     questionErrorLocation: "질문 위치 오류",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "페이지 변경시 첫 번째 질문에 초점",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "선택 단축키를 활성화하세요",
     // "Question order"
     questionOrder: "페이지의 요소 순서",
     // "Time limit to complete the survey"
@@ -2940,6 +2942,12 @@ export var koreanStrings = {
     questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "라디오 버튼 그룹, 체크박스, 이미지 선택기 질문의 선택 옆에 문자(A, B, C, ...)가 표시됩니다. 응답자는 해당 문자 키를 눌러 선택지를 선택할 수 있습니다. 개별 질문에 대해서는 이 설정을 무시할 수 있습니다.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "선택지 옆에 문자(A, B, C, ...)를 표시하며, 응답자가 해당 문자 키를 눌러 선택할 수 있습니다. \"상속\" 옵션은 설문 수준 설정을 사용합니다."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
     // [Auto-translated] "For text entry questions only."

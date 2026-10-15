@@ -1201,6 +1201,8 @@ export var slStrings = {
     questionErrorLocation: "Poravnava sporočila o napaki",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Samodejno osredotoči prvo vprašanje na novi strani",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Omogočite bližnjice izbire",
     // "Question order"
     questionOrder: "Vrsta vprašanj",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var slStrings = {
     questionErrorLocation: "Nastavi lokacijo sporočila o napaki v povezavi z vprašanjem z neveljavnim vnosom. Izberite med: Na vrhu - sporočilo o napaki je postavljeno na vrh vprašanja, Na dnu - sporočilo o napaki je postavljeno na dno vprašanja",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Izberite, če želite, da je prvo vnosno polje na vsaki strani pripravljeno za vnos besedila",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Prikaže črke (A, B, C, ...) poleg izbir v vprašanjih Radio Button Group, Checkboxs in Image Picker. Anketiranci lahko izbirajo izbire z ustreznimi črkami. To nastavitev lahko preglasite za posamezna vprašanja.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Ob izbiri prikaže črke (A, B, C, ...) in omogoča anketirancem, da jih izberejo s pritiskom na ustrezne tipke za črke. Možnost \"Dedi\" uporablja nastavitev na ravni ankete."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Ohrani prvoten vrstni red vprašanj ali jih naključno postavi. Učinek te nastavitve je viden samo na zavihku Predogled",
     // "For text entry questions only."

@@ -1201,6 +1201,8 @@ export var czStrings = {
     questionErrorLocation: "Umístění chyby v otázce",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Zaměřte se na první otázku týkající se změny stránky",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Povolit zkratky volby",
     // "Question order"
     questionOrder: "Pořadí prvků na stránce",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var czStrings = {
     questionErrorLocation: "Nastaví umístění chybové zprávy ve vztahu k otázce s neplatným vstupem. Vyberte si mezi: \"Nahoře\" - text chyby je umístěn v horní části pole s otázkou; \"Bottom\" - text chyby je umístěn ve spodní části pole s otázkou.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Vyberte, zda chcete, aby první vstupní pole na každé stránce bylo připraveno pro zadání textu.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Zobrazuje písmena (A, B, C, ...) vedle možností v otázkách Radio Button Group, Checkboxes a Image Picker. Respondenti mohou vybírat volby stisknutím příslušných písmen. Toto nastavení můžete přepsat pro jednotlivé otázky.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Zobrazuje písmena (A, B, C, ...) vedle možností a umožňuje respondentům je vybrat stisknutím příslušných písmen. Možnost \"Dědit\" používá nastavení na úrovni průzkumu."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zachová původní pořadí otázek nebo je náhodně vybere. Účinek tohoto nastavení je viditelný pouze na kartě Náhled.",
     // [Auto-translated] "For text entry questions only."
