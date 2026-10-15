@@ -202,6 +202,7 @@ export var logicCss = {
     itemControl: "",
     itemDecorator: "",
     controlDisabled: "",
+    controlReadOnly: "sl-dropdown--readonly",
     controlLabel: "",
     materialDecorator: "",
     controlValue: "sl-dropdown__value",

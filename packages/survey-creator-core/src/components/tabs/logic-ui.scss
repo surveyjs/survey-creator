@@ -146,6 +146,12 @@
   }
 }
 
+// A read-only operator (a read-only Logic tab, a rule locked by a collaborator)
+// opens nothing: no hover, no pointer.
+.svc-logic-operator.sl-dropdown--readonly {
+  pointer-events: none;
+}
+
 .svc-logic-operator__error {
   display: none;
 }
@@ -186,8 +192,9 @@
   }
 }
 
-.sl-panel-wrapper--in-row:hover .svc-icon-remove,
-.sl-panel-wrapper--in-row:focus-within .svc-icon-remove {
+// A read-only remove button is never shown, like the paneldynamic's own one.
+.sl-panel-wrapper--in-row:hover .svc-icon-remove:not(.svc-action-button--disabled),
+.sl-panel-wrapper--in-row:focus-within .svc-icon-remove:not(.svc-action-button--disabled) {
   display: flex;
 }
 
