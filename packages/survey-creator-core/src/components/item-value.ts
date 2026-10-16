@@ -66,32 +66,40 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragItemValue);
 
-    this.allowItemOperations = { allowDelete: undefined, allowEdit: undefined, allowAdd: undefined };
     this.collectionProperty = Serializer.findProperty(question.getType(), this.collectionPropertyName);
-    this.creator.onCollectionItemAllowingCallback(question.ownerObj || question,
-      this.collectionProperty,
-      question.visibleChoices,
-      this.item,
-      this.allowItemOperations
-    );
-    if (this.allowItemOperations.allowDelete === undefined) {
-      this.allowItemOperations.allowDelete = true;
-    }
-    if (this.allowItemOperations.allowAdd === undefined) {
-      this.allowItemOperations.allowAdd = true;
-    }
-    if (!this.allowItemOperations.allowAdd) {
-      this.updateIsNewVisibility();
-    }
-    if (!this.creator.isCanModifyProperty(question, "choices")) {
-      this.canTouchItems = false;
-    }
+    this.updatePermissions();
     this.setupShowPanel();
+    // The permissions may change while the item is rendered: the creator
+    // tells when to recompute them.
+    this.creator.onPermissionsChanged.add(this.onPermissionsChangedHandler);
   }
 
   private dragOrClickHelper: DragOrClickHelper;
-  private allowItemOperations: ICollectionItemAllowOperations;
-  private canTouchItems: boolean = true;
+  // Properties, not fields: the rendered row follows them.
+  @property() private allowItemOperations: ICollectionItemAllowOperations;
+  @property({ defaultValue: true }) protected canTouchItems: boolean;
+  private onPermissionsChangedHandler = (): void => this.updatePermissions();
+  private updatePermissions(): void {
+    const operations: ICollectionItemAllowOperations = { allowDelete: undefined, allowEdit: undefined, allowAdd: undefined, allowDrag: undefined };
+    this.creator.onCollectionItemAllowingCallback(this.question.ownerObj || this.question,
+      this.collectionProperty,
+      this.question.visibleChoices,
+      this.item,
+      operations
+    );
+    if (operations.allowDelete === undefined) {
+      operations.allowDelete = true;
+    }
+    if (operations.allowAdd === undefined) {
+      operations.allowAdd = true;
+    }
+    if (operations.allowDrag === undefined) {
+      operations.allowDrag = true;
+    }
+    this.allowItemOperations = operations;
+    this.updateIsNewVisibility();
+    this.canTouchItems = this.creator.isCanModifyProperty(this.question, "choices");
+  }
   private focusCameFromDown: boolean = false;
   private collectionProperty: JsonObjectProperty;
 
@@ -142,6 +150,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     return this.creator.expandCollapseManager;
   }
   public dispose(): void {
+    this.creator.onPermissionsChanged.remove(this.onPermissionsChangedHandler);
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged
@@ -171,7 +180,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     }
   };
   get isDraggable() {
-    return this.isDraggableItem(this.item);
+    return this.allowItemOperations.allowDrag !== false && this.isDraggableItem(this.item);
   }
   public isDraggableItem(item: ItemValue) {
     if (this.creator.readOnly || !this.canTouchItems) return false;
