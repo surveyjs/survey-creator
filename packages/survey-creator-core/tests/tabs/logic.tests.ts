@@ -2739,6 +2739,30 @@ test("LogicItemUI readOnly", () => {
   logic.readOnly = true;
   expect(logic.matrixItems.isReadOnly).toBeTruthy();
 });
+test("LogicItemUI readOnly: operators get the read-only control class", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.editItem(logic.items[0]);
+  const conditionOperator = logic.expressionEditor.panel.panels[0].getQuestionByName("questionName");
+  const actionOperator = logic.itemEditor.panels[0].getQuestionByName("logicTypeName");
+  expect(conditionOperator.getControlClass()).not.toContain("sd-formbox--readonly");
+  expect(actionOperator.getControlClass()).not.toContain("sd-formbox--readonly");
+
+  logic.readOnly = true;
+  expect(conditionOperator.getControlClass()).toContain("svc-logic-operator");
+  expect(conditionOperator.getControlClass()).toContain("sd-formbox--readonly");
+  expect(actionOperator.getControlClass()).toContain("svc-logic-operator");
+  expect(actionOperator.getControlClass()).toContain("sd-formbox--readonly");
+
+  logic.readOnly = false;
+  expect(conditionOperator.getControlClass()).not.toContain("sd-formbox--readonly");
+  expect(actionOperator.getControlClass()).not.toContain("sd-formbox--readonly");
+});
 test("wrapTextByCurlyBraces", () => {
   expect(wrapTextByCurlyBraces("q1")).toEqual("{q1}");
   setDoubleBraces();
