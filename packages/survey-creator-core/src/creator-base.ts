@@ -88,6 +88,7 @@ import {
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
+import { ItemValueWrapperViewModel } from "./components/item-value";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 import { doMachineStringsTranslation } from "./utils/creator-locstrings";
 
@@ -4896,6 +4897,32 @@ export class SurveyCreatorModel extends Base
     this.onElementAllowOperations.fire(this, options);
     options.allowDrag = options.allowDragging = options.allowDrag && options.allowDragging;
     return options;
+  }
+
+  // The rendered choice rows of this creator's designer, by item. Kept outside
+  // the item's property hash: setting a property on an item notifies its owner
+  // question (itemValuePropertyChanged).
+  private itemValueAdorners: WeakMap<ItemValue, ItemValueWrapperViewModel> = new WeakMap();
+  /**
+   * @hidden
+   */
+  public getItemValueAdorner(item: ItemValue): ItemValueWrapperViewModel {
+    return this.itemValueAdorners.get(item);
+  }
+  /**
+   * @hidden
+   */
+  public registerItemValueAdorner(item: ItemValue, adorner: ItemValueWrapperViewModel): void {
+    this.itemValueAdorners.set(item, adorner);
+  }
+  /**
+   * @hidden
+   */
+  public unregisterItemValueAdorner(item: ItemValue, adorner: ItemValueWrapperViewModel): void {
+    // A re-render may register a new adorner before the old one is disposed.
+    if (this.itemValueAdorners.get(item) === adorner) {
+      this.itemValueAdorners.delete(item);
+    }
   }
 
   public getChoicesItemBaseTitle() {

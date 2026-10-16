@@ -83,15 +83,20 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     if (!this.allowItemOperations.allowAdd) {
       this.updateIsNewVisibility();
     }
-    if (!this.creator.isCanModifyProperty(question, "choices")) {
-      this.canTouchItems = false;
-    }
+    this.updateCanTouchItems();
     this.setupShowPanel();
+    this.creator.registerItemValueAdorner(item, this);
   }
 
   private dragOrClickHelper: DragOrClickHelper;
   private allowItemOperations: ICollectionItemAllowOperations;
-  private canTouchItems: boolean = true;
+  @property({ defaultValue: true }) protected canTouchItems: boolean;
+  // The question's permissions may change while the item is rendered (the
+  // creator's onElementAllowOperations / onPropertyGetReadOnly answers): the
+  // caller passes the new value, or it is re-read.
+  public updateCanTouchItems(canTouch: boolean = this.creator.isCanModifyProperty(this.question, "choices")): void {
+    this.canTouchItems = canTouch;
+  }
   private focusCameFromDown: boolean = false;
   private collectionProperty: JsonObjectProperty;
 
@@ -142,6 +147,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     return this.creator.expandCollapseManager;
   }
   public dispose(): void {
+    this.creator.unregisterItemValueAdorner(this.item, this);
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged

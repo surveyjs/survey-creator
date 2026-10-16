@@ -53,6 +53,8 @@ export class ElementLockGuard {
   // The selection seen by the last refresh and whether it was locked then.
   private trackedSelection: any = null;
   private trackedLocked = false;
+  // Whether a selectbase question's choices could change at the last refresh.
+  private choicesModifiable = new WeakMap<any, boolean>();
   private doc: Document | undefined;
 
   constructor(private creator: SurveyCreatorModel,
@@ -62,6 +64,8 @@ export class ElementLockGuard {
     creator.onElementAllowOperations.add(this.onElementAllowOperations);
     creator.onPropertyGetReadOnly.add(this.onPropertyGetReadOnly);
     creator.onDragDropAllow.add(this.onDragDropAllow);
+    creator.onCollectionItemAllowOperations.add(this.onCollectionItemAllowOperations);
+    creator.onCollectionItemDeleting.add(this.onCollectionItemDeleting);
     creator.onBeforeUndo.add(this.onBeforeUndo);
     creator.onBeforeRedo.add(this.onBeforeRedo);
     creator.onModified.add(this.onModified);
@@ -80,13 +84,22 @@ export class ElementLockGuard {
     this.creator.onElementAllowOperations.remove(this.onElementAllowOperations);
     this.creator.onPropertyGetReadOnly.remove(this.onPropertyGetReadOnly);
     this.creator.onDragDropAllow.remove(this.onDragDropAllow);
+    this.creator.onCollectionItemAllowOperations.remove(this.onCollectionItemAllowOperations);
+    this.creator.onCollectionItemDeleting.remove(this.onCollectionItemDeleting);
     this.creator.onBeforeUndo.remove(this.onBeforeUndo);
     this.creator.onBeforeRedo.remove(this.onBeforeRedo);
     this.creator.onModified.remove(this.onModified);
     this.creator.onElementSelected.remove(this.refresh);
     this.creator.onActiveTabChanged.remove(this.refresh);
     this.doc?.removeEventListener("focusin", this.onFocusIn, true);
-    this.holders.clear();
+    // The creator stays: what was locked must become editable again (the
+    // hooks are gone, so the refresh computes unrestricted operations).
+    if (this.holders.size > 0) {
+      this.holders.clear();
+      this.onLocksChanged();
+      if (this.trackedLocked)this.refreshPropertyGrid();
+    }
+    this.trackedLocked = false;
   }
 
   // --- queries -------------------------------------------------------------------
@@ -213,6 +226,15 @@ export class ElementLockGuard {
     if (!!owner && owner !== element) return owner;
     return element?.parent || element?.parentQuestion || null;
   }
+  // A choice item's detail section, when it has content (`panel` would create
+  // an empty one otherwise).
+  private choiceContent(item: any): any {
+    return item?.hasElements === true ? item.panel : null;
+  }
+  private hasLockedChoiceContent(item: any): boolean {
+    const content = this.choiceContent(item);
+    return !!content && this.hasLockedContent(content);
+  }
   private isLockable(element: any): boolean {
     return !!element && !element.isDisposed && (element.isQuestion === true || element.isPanel === true);
   }
@@ -252,12 +274,33 @@ export class ElementLockGuard {
     if (survey) {
       const questions: Array<any> = survey.getAllQuestions?.(false, true) || [];
       const elements: Array<any> = [].concat(survey.pages || [], survey.getAllPanels?.(false, true) || [], questions);
-      // Embedded panels (choice detail sections, matrix detail panels) are
-      // not survey panels, but their adorners show the add-question button.
-      questions.forEach((question) => elements.push(...(question.getPanels?.() || [])));
+      questions.forEach((question) => {
+        // Embedded panels (choice detail sections, matrix detail panels) are
+        // not survey panels, but their adorners show the add-question button.
+        elements.push(...(question.getPanels?.() || []));
+        this.refreshChoices(question);
+      });
       elements.forEach((element) => this.refreshAdorner(element));
     }
     this.blurLockedEditor();
+  }
+  // Choice rows keep their own copy of whether the choices may be touched
+  // (add/remove/drag), and placeholder items (new item, inactive none/other)
+  // are shown only while choices can change: both are evaluated on render.
+  private refreshChoices(question: any): void {
+    if (typeof question.setCanShowOptionItemCallback !== "function") return;
+    const canModify = this.creator.isCanModifyProperty(question, "choices");
+    // Recalculated whenever it may differ from what the question was rendered
+    // with: also the first time - the question may have been rendered locked.
+    if (this.choicesModifiable.get(question) !== canModify) {
+      this.choicesModifiable.set(question, canModify);
+      // Protected: the question's own recalculation, run when its choices
+      // change - there is no public trigger.
+      question.onVisibleChoicesChanged?.();
+    }
+    (question.visibleChoices || []).forEach((item: any) => {
+      this.creator.getItemValueAdorner(item)?.updateCanTouchItems(canModify && !this.hasLockedChoiceContent(item));
+    });
   }
   private refreshAdorner(element: any): void {
     const adorner: any = element?.getPropertyValue?.(ADORNER_PROPERTY);
@@ -277,9 +320,9 @@ export class ElementLockGuard {
   // follows isCanModifyProperty, i.e. allowEdit/onPropertyGetReadOnly): an
   // `onAllowInplaceEdit` veto would swap them for plain text, and viewers
   // would lose the ring showing which text the holder is typing in.
-  // contentEditable is read at render time and choice adorners compute their
-  // permissions once, so a lock arriving after the render would leave the
-  // editor live. Refuse the caret instead - independent of re-renders.
+  // contentEditable is read at render time, so a lock arriving after the
+  // render would leave the editor live. Refuse the caret instead -
+  // independent of re-renders.
 
   private elementOfNode(node: Element): any {
     const owner = node.closest("[data-sv-drop-target-survey-element]");
@@ -334,6 +377,19 @@ export class ElementLockGuard {
     }
   };
 
+  // A choice whose detail section holds a held element is a container with
+  // locked content: removing it would take that element along.
+  private onCollectionItemAllowOperations = (_: unknown, options: any): void => {
+    if (options.allowDelete === false || this.holders.size === 0) return;
+    if (this.hasLockedChoiceContent(options.item)) options.allowDelete = false;
+  };
+  // The same at the moment of deletion: an editor built before the lock (the
+  // property grid, a rendered row) may still offer the delete button.
+  private onCollectionItemDeleting = (_: unknown, options: any): void => {
+    if (!options.allowDelete || this.holders.size === 0) return;
+    if (this.isLocked(options.obj) || this.hasLockedChoiceContent(options.item)) options.allowDelete = false;
+  };
+
   private onPropertyGetReadOnly = (_: unknown, options: any): void => {
     if (options.readOnly || this.holders.size === 0) return;
     if (this.isLocked(options.element) || this.isLocked(options.parentElement)) options.readOnly = true;
@@ -382,7 +438,8 @@ export class ElementLockGuard {
   }
   // Array steps insert/remove elements: a held element (or one containing it)
   // among them is touched even though the array's owner is not. Undo may
-  // re-create items from JSON, so a same-named element counts too.
+  // re-create items from JSON, so a same-named element counts too. A choice
+  // item contains its detail section's elements.
   private itemsLockOwner(items: any): IPresencePeer | null {
     if (!Array.isArray(items)) return null;
     for (let i = 0; i < items.length; i++) {
@@ -390,9 +447,12 @@ export class ElementLockGuard {
       if (!item || typeof item !== "object") continue;
       const direct = this.getLockOwner(item);
       if (direct) return direct;
+      const content = this.choiceContent(item);
       let byName: IPresencePeer | null = null;
       this.holders.forEach((peer, held) => {
-        if (!byName && !!item.name && (held.name === item.name || this.isAncestor(item, held))) byName = peer;
+        if (byName) return;
+        if (!!item.name && (held.name === item.name || this.isAncestor(item, held))) byName = peer;
+        else if (!!content && this.isAncestor(content, held)) byName = peer;
       });
       if (byName) return byName;
     }

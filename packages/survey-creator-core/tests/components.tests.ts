@@ -211,6 +211,138 @@ test("item value allowRemove on events", () => {
   expect(secondItemAdorner.allowRemove).toBeTruthy();
 });
 
+test("item value operations follow a change of the question permissions", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const newItemAdorner = new ItemValueWrapperViewModel(creator, question, question.newItem);
+  expect(creator.getItemValueAdorner(question.choices[0])).toBe(itemAdorner);
+  expect(itemAdorner.allowRemove).toBeTruthy();
+  expect(itemAdorner.isDraggable).toBeTruthy();
+  expect(newItemAdorner.allowAdd).toBeTruthy();
+
+  readOnly = true;
+  itemAdorner.updateCanTouchItems();
+  newItemAdorner.updateCanTouchItems();
+  expect(itemAdorner.allowRemove).toBeFalsy();
+  expect(itemAdorner.isDraggable).toBeFalsy();
+  expect(newItemAdorner.allowAdd).toBeFalsy();
+
+  readOnly = false;
+  itemAdorner.updateCanTouchItems();
+  expect(itemAdorner.allowRemove).toBeTruthy();
+  // The caller may pass the value it computed once for the whole question.
+  itemAdorner.updateCanTouchItems(false);
+  expect(itemAdorner.allowRemove).toBeFalsy();
+
+  itemAdorner.dispose();
+  expect(creator.getItemValueAdorner(question.choices[0])).toBeUndefined();
+  expect(creator.getItemValueAdorner(question.newItem)).toBe(newItemAdorner);
+  newItemAdorner.dispose();
+});
+
+test("item value adorners are registered on their own creator", () => {
+  const json = { elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }] };
+  const creatorA = new CreatorTester();
+  creatorA.JSON = json;
+  const creatorB = new CreatorTester();
+  creatorB.JSON = json;
+  const questionB = <QuestionCheckboxModel>creatorB.survey.getAllQuestions()[0];
+  const itemB = questionB.choices[0];
+  const first = new ItemValueWrapperViewModel(creatorB, questionB, itemB);
+  expect(creatorB.getItemValueAdorner(itemB)).toBe(first);
+  expect(creatorA.getItemValueAdorner(itemB)).toBeUndefined();
+
+  // A re-render creates a new adorner before the old one is disposed: the
+  // old one must not unregister its successor.
+  const second = new ItemValueWrapperViewModel(creatorB, questionB, itemB);
+  expect(creatorB.getItemValueAdorner(itemB)).toBe(second);
+  first.dispose();
+  expect(creatorB.getItemValueAdorner(itemB)).toBe(second);
+  second.dispose();
+  expect(creatorB.getItemValueAdorner(itemB)).toBeUndefined();
+});
+
+test("image item actions follow a change of the question permissions", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", choices: [
+      { value: "a", imageLink: "a.png" }, { value: "b", imageLink: "b.png" }
+    ] }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const itemsRoot = { getElementsByClassName: () => [{}] } as any;
+  const itemAdorner = new ImageItemValueWrapperViewModel(creator, question, question.choices[0], undefined, itemsRoot);
+  const newItemAdorner = new ImageItemValueWrapperViewModel(creator, question, question.newItem, undefined, itemsRoot);
+  const actions = itemAdorner.topActionsContainer;
+  const visibility = () => ["drag", "choose", "remove"].map((id) => actions.getActionById(id).visible);
+  let chooserCalls = 0;
+  creator.onOpenFileChooser.add(() => chooserCalls++);
+  let uploads = 0;
+  creator.onUploadFile.add((sender, options) => {
+    uploads++;
+    options.callback("success", "c.png");
+  });
+  expect(visibility()).toEqual([true, true, true]);
+
+  readOnly = true;
+  itemAdorner.updateCanTouchItems();
+  newItemAdorner.updateCanTouchItems();
+  expect(visibility()).toEqual([false, false, false]);
+  itemAdorner.chooseFile(itemAdorner);
+  newItemAdorner.uploadFiles([{}]);
+  expect(question.choices).toHaveLength(2);
+  expect(chooserCalls).toBe(0);
+  expect(uploads).toBe(0);
+
+  readOnly = false;
+  itemAdorner.updateCanTouchItems();
+  newItemAdorner.updateCanTouchItems();
+  expect(visibility()).toEqual([true, true, true]);
+
+  itemAdorner.dispose();
+  newItemAdorner.dispose();
+});
+
+test("QuestionImageAdornerViewModel file input follows a change of the question permissions", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, <any>{}, null);
+  const chooseAction = imageAdorner.imageActionsContainer.getActionById("choose");
+  expect(imageAdorner.filePresentationModel.isInputReadOnly).toBeFalsy();
+  expect(chooseAction.visible).toBeTruthy();
+
+  readOnly = true;
+  imageAdorner["updateActionsProperties"]();
+  expect(imageAdorner.filePresentationModel.isInputReadOnly).toBeTruthy();
+  expect(chooseAction.visible).toBeFalsy();
+
+  readOnly = false;
+  imageAdorner["updateActionsProperties"]();
+  expect(imageAdorner.filePresentationModel.isInputReadOnly).toBeFalsy();
+  expect(chooseAction.visible).toBeTruthy();
+
+  imageAdorner.dispose();
+});
+
 test("item value allowAdd on events", () => {
   const creator = new CreatorTester();
 

@@ -3,6 +3,9 @@ import { IPresencePeerEntry, IPresenceState } from "../src/plugins/collaboration
 import { CollaborationPlugin } from "../src/plugins/collaboration";
 import { buildLocator } from "../src/plugins/collaboration/journal/journal-locator";
 import { PanelAdornerViewModel } from "../src/components/panel";
+import { ItemValueWrapperViewModel } from "../src/components/item-value";
+import { QuestionAdornerViewModel } from "../src/components/question";
+import { Serializer } from "survey-core";
 
 // ElementLockGuard: a question/panel a remote participant holds (selected on
 // the designer, `lock: true` in presence) is read-only for everyone else.
@@ -504,5 +507,169 @@ test("element lock: a question inside a detail section is claimed and keeps its 
   } finally {
     holder.plugin.dispose();
     viewer.plugin.dispose();
+  }
+});
+
+test("element lock: choice rows follow the lock when it moves to a newly added question", (): any => {
+  const emptyJSON = { pages: [{ name: "page1" }] };
+  const holder = createCreator("a", emptyJSON);
+  const viewer = createCreator("b", emptyJSON);
+  // The transport order: the journal record that adds a question reaches the
+  // viewer first, the holder's presence (the new selection) after it - and
+  // the viewer renders the new question in between.
+  const send = (_: any, o: any) => viewer.plugin.apply(JSON.stringify([o.record]));
+  holder.plugin.onRecordAdded.add(send);
+  holder.plugin.onRecordChanged.add(send);
+  let pending: any = null;
+  holder.plugin.onStateChanged.add((_, o) => { pending = { ...JSON.parse(JSON.stringify(o.state)), tab: "designer" }; });
+  const deliverPresence = (): void => viewer.plugin.upsertPeer({ clientId: "a", name: "User a", state: pending });
+  const radiogroup = holder.creator.toolbox.getItemByName("radiogroup").json;
+  const rows: Array<ItemValueWrapperViewModel> = [];
+  const renderRow = (question: any, item: any): ItemValueWrapperViewModel => {
+    const row = new ItemValueWrapperViewModel(viewer.creator, question, item);
+    rows.push(row);
+    return row;
+  };
+  try {
+    holder.creator.clickToolboxItem(radiogroup);
+    deliverPresence();
+    const r1 = q(viewer.creator, holder.creator.selectedElement.name);
+    expect(viewer.plugin.presence.lockGuard.isLocked(r1)).toBe(true);
+    const r1Row = renderRow(r1, r1.choices[0]);
+    expect(r1Row.allowRemove).toBe(false);
+
+    holder.creator.clickToolboxItem(radiogroup);
+    const r2 = q(viewer.creator, holder.creator.selectedElement.name);
+    expect(r2).not.toBe(r1);
+    const r2Row = renderRow(r2, r2.choices[0]);
+    const r2NewRow = renderRow(r2, r2.newItem);
+    expect(r2Row.allowRemove).toBe(true);
+    deliverPresence();
+
+    // The lock itself has moved.
+    expect(viewer.plugin.presence.lockGuard.isLocked(r2)).toBe(true);
+    expect(viewer.plugin.presence.lockGuard.isLocked(r1)).toBe(false);
+    // So have the choice operations rendered before it moved.
+    expect(r2Row.allowRemove).toBe(false);
+    expect(r2Row.isDraggable).toBe(false);
+    expect(r2NewRow.allowAdd).toBe(false);
+    expect(r1Row.allowRemove).toBe(true);
+    expect(r1Row.isDraggable).toBe(true);
+  } finally {
+    rows.forEach((row) => row.dispose());
+    holder.plugin.dispose();
+    viewer.plugin.dispose();
+  }
+});
+
+test("element lock: a choice whose detail section holds a held element cannot be removed", (): any => {
+  const { creator, plugin } = createCreator("b", nestedJSON);
+  const q5 = q(creator, "q5");
+  const heldRow = new ItemValueWrapperViewModel(creator, q5, q5.choices[0]);
+  const freeRow = new ItemValueWrapperViewModel(creator, q5, q5.choices[1]);
+  const choices = Serializer.findProperty("checkbox", "choices");
+  try {
+    expect(heldRow.allowRemove).toBe(true);
+    plugin.upsertPeer(peer("a", "q6"));
+    expect(heldRow.allowRemove).toBe(false);
+    expect(freeRow.allowRemove).toBe(true);
+    // The model refuses too: a property grid built before the lock still
+    // shows the row's delete button.
+    expect(creator.onCollectionItemDeletingCallback(q5, choices, q5.choices, q5.choices[0])).toBe(false);
+    expect(creator.onCollectionItemDeletingCallback(q5, choices, q5.choices, q5.choices[1])).toBe(true);
+    plugin.removePeer("a");
+    expect(heldRow.allowRemove).toBe(true);
+  } finally {
+    heldRow.dispose();
+    freeRow.dispose();
+    plugin.dispose();
+  }
+});
+
+test("element lock: placeholder choices of a held question are hidden until it is released", (): any => {
+  const { creator, plugin } = createCreator("b", nestedJSON);
+  const q5 = q(creator, "q5");
+  // The question's adorner installs the rule for placeholder items.
+  const adorner = new QuestionAdornerViewModel(creator, q5, undefined as any);
+  const placeholders = [q5.newItem, q5.noneItem, q5.otherItem];
+  try {
+    placeholders.forEach((item) => expect(q5.visibleChoices).toContain(item));
+    plugin.upsertPeer(peer("a", "q5"));
+    placeholders.forEach((item) => expect(q5.visibleChoices).not.toContain(item));
+    expect(q5.visibleChoices).toContain(q5.choices[0]);
+    plugin.removePeer("a");
+    placeholders.forEach((item) => expect(q5.visibleChoices).toContain(item));
+  } finally {
+    adorner.dispose();
+    plugin.dispose();
+  }
+});
+
+test("element lock: deleting a choice of a held question is refused by the model", (): any => {
+  const { creator, plugin } = createCreator();
+  const q2 = q(creator, "q2");
+  const choices = Serializer.findProperty("dropdown", "choices");
+  try {
+    plugin.upsertPeer(peer("a", "q2"));
+    expect(creator.onCollectionItemDeletingCallback(q2, choices, q2.choices, q2.choices[0])).toBe(false);
+    plugin.removePeer("a");
+    expect(creator.onCollectionItemDeletingCallback(q2, choices, q2.choices, q2.choices[0])).toBe(true);
+  } finally {
+    plugin.dispose();
+  }
+});
+
+test("element lock: undo of adding a choice waits while its detail section holds a held element", (): any => {
+  const holder = createCreator("a", nestedJSON);
+  const viewer = createCreator("b", nestedJSON);
+  const toViewer = (_: any, o: any) => viewer.plugin.apply(JSON.stringify([o.record]));
+  const toHolder = (_: any, o: any) => holder.plugin.apply(JSON.stringify([o.record]));
+  holder.plugin.onRecordAdded.add(toViewer);
+  holder.plugin.onRecordChanged.add(toViewer);
+  viewer.plugin.onRecordAdded.add(toHolder);
+  viewer.plugin.onRecordChanged.add(toHolder);
+  holder.plugin.onStateChanged.add((_, o) => viewer.plugin.upsertPeer({
+    clientId: "a", name: "User a", state: { ...JSON.parse(JSON.stringify(o.state)), tab: "designer" }
+  }));
+  try {
+    // The viewer adds a choice; the holder fills its detail section and
+    // selects what it added there.
+    const q5 = q(viewer.creator, "q5");
+    const added = viewer.creator.createNewItemValue(q5);
+    const holderItem = q(holder.creator, "q5").choices.filter((item: any) => item.value === added.value)[0];
+    holderItem.panel.addNewQuestion("text", "q9");
+    holder.creator.selectElement(q(holder.creator, "q9"));
+    const q9 = q(viewer.creator, "q9");
+    expect(q9.parent).toBe(added.panel);
+    expect(viewer.plugin.presence.lockGuard.isLocked(q9)).toBe(true);
+
+    viewer.creator.undo();
+    expect(q5.choices).toContain(added);
+    expect(q(viewer.creator, "q9")).toBe(q9);
+    expect(viewer.creator.undoRedoManager.canUndo()).toBe(true);
+  } finally {
+    holder.plugin.dispose();
+    viewer.plugin.dispose();
+  }
+});
+
+test("element lock: disposing the plugin releases what it locked", (): any => {
+  const { creator, plugin } = createCreator("b", nestedJSON);
+  const q5 = q(creator, "q5");
+  const adorner = new QuestionAdornerViewModel(creator, q5, undefined as any);
+  const row = new ItemValueWrapperViewModel(creator, q5, q5.choices[1]);
+  let disposed = false;
+  try {
+    plugin.upsertPeer(peer("a", "q5"));
+    expect(adorner.allowEdit).toBe(false);
+    expect(row.allowRemove).toBe(false);
+    plugin.dispose();
+    disposed = true;
+    expect(adorner.allowEdit).toBe(true);
+    expect(row.allowRemove).toBe(true);
+  } finally {
+    row.dispose();
+    adorner.dispose();
+    if (!disposed) plugin.dispose();
   }
 });
