@@ -521,3 +521,87 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     expect(assistant.getStatusText()).toBe("Add an action to the rule before asking the assistant.");
   });
 });
+
+describe("The expression assistant: a condition that reads nothing (ai-expressions)", () => {
+  test("is a warning in the review: no fix request, Accept stays enabled", () => {
+    const { creator, requests } = createCreator();
+    const assistant = createAssistant(creator);
+    assistant.generate("show it when the country is Narnia");
+    requests[0].callback({ expression: "false", explanation: "There is no such question." });
+    expect(requests).toHaveLength(1);
+    expect(assistant.status).toBe("review");
+    expect(assistant.checkResult.findings.map(f => f.ruleId)).toEqual(["expression/no-reference"]);
+    expect(assistant.checkResult.warningCount).toBe(1);
+    expect(assistant.canAccept).toBe(true);
+    expect(assistant.getReviewHtml().indexOf("does not read any question or variable")).toBeGreaterThan(-1);
+  });
+});
+
+describe("The expression assistant: the instruction Creator writes (ai-expressions)", () => {
+  const emptyOption = "If the request cannot be expressed with the listed variables and functions, return an empty expression and say why in the explanation.";
+  test("generate, then fix with the findings, then refine: the instruction and the messages of each request", () => {
+    const { creator, requests } = createCreator();
+    const assistant = createAssistant(creator);
+    assistant.generate("apple lovers");
+    const generate = "Write an expression for this request:\napple lovers\n\n" + emptyOption;
+    expect(requests[0].instruction).toBe(generate);
+    expect(requests[0].messages).toEqual([{ role: "user", content: generate }]);
+
+    requests[0].callback({ expression: "{frut} = 'apple'", explanation: "Apple." });
+    expect(requests[1].kind).toBe("fix");
+    const finding = requests[1].findings[0];
+    const fix = "This expression failed the check:\n{frut} = 'apple'\n\nProblems found:\n- [error] " + finding.message + "\n\n" +
+      "Return a corrected expression that still does what the author asked. " +
+      "If it cannot be corrected with the listed variables and functions, return an empty expression and say why in the explanation.";
+    expect(requests[1].instruction).toBe(fix);
+    const firstAnswer = { role: "assistant", content: JSON.stringify({ expression: "{frut} = 'apple'", explanation: "Apple." }) };
+    expect(requests[1].messages).toEqual([{ role: "user", content: generate }, firstAnswer, { role: "user", content: fix }]);
+
+    requests[1].callback({ expression: "{fruit} = 'apple'" });
+    assistant.refine("or banana");
+    const modify = "Current expression:\n{fruit} = 'apple'\n\nChange it as follows:\nor banana\n\n" + emptyOption;
+    expect(requests[2].kind).toBe("modify");
+    expect(requests[2].instruction).toBe(modify);
+    expect(requests[2].messages).toEqual([
+      { role: "user", content: generate }, firstAnswer, { role: "user", content: fix },
+      { role: "assistant", content: JSON.stringify({ expression: "{fruit} = 'apple'", explanation: "" }) },
+      { role: "user", content: modify },
+    ]);
+    // the fields a host builds its own messages from are still there
+    expect(requests[2].prompt).toBe("or banana");
+    expect(requests[2].expression).toBe("{fruit} = 'apple'");
+    expect(requests[2].history.length).toBeGreaterThan(0);
+  });
+  test("modify of the target's expression and explain", () => {
+    const { creator, requests } = createCreator();
+    creator.survey.getQuestionByName("q2").visibleIf = "{fruit} = 'banana'";
+    const assistant = createAssistant(creator);
+    assistant.explain();
+    const explain = "Explain what this expression does, in plain words for a form author:\n{fruit} = 'banana'\n\n" +
+      "Put the explanation in \"explanation\" and return the expression unchanged in \"expression\".";
+    expect(requests[0].instruction).toBe(explain);
+    expect(requests[0].messages).toEqual([{ role: "user", content: explain }]);
+    requests[0].callback({ explanation: "Shown for banana." });
+    assistant.generate("also apple");
+    const modify = "Current expression:\n{fruit} = 'banana'\n\nChange it as follows:\nalso apple\n\n" + emptyOption;
+    expect(requests[1].instruction).toBe(modify);
+    // an explanation is no turn of the conversation that writes the expression
+    expect(requests[1].messages).toEqual([{ role: "user", content: modify }]);
+  });
+  test("an empty answer is a turn; an error or a cancelled request is not", () => {
+    const { creator, requests } = createCreator();
+    const assistant = createAssistant(creator);
+    assistant.generate("first");
+    requests[0].callback({ error: "Network down" });
+    assistant.generate("second");
+    expect(requests[1].messages).toHaveLength(1);
+    requests[1].callback({ expression: "", explanation: "Not possible." });
+    expect(assistant.status).toBe("empty");
+    assistant.generate("third");
+    expect(requests[2].messages.map(m => m.role)).toEqual(["user", "assistant", "user"]);
+    expect(requests[2].messages[1].content).toBe(JSON.stringify({ expression: "", explanation: "Not possible." }));
+    assistant.cancel();
+    assistant.generate("fourth");
+    expect(requests[3].messages.map(m => m.role)).toEqual(["user", "assistant", "user"]);
+  });
+});

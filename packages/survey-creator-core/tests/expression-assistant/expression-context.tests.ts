@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import {
   ConditionsParser, FunctionFactory, QuestionCheckboxModel, QuestionMatrixDynamicModel, QuestionPanelDynamicModel,
-  settings as surveySettings,
+  SurveyModel, settings as surveySettings,
 } from "survey-core";
 import { CreatorTester } from "../creator-tester";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
@@ -353,5 +353,189 @@ describe("Caps, examples and the system prompt (ai-expressions)", () => {
     // a locale survey-core has no name for is named by its code
     res.context.locales.creator = "zz";
     expect(buildExpressionSystemPrompt(res.context).indexOf("Write the explanation in the language with locale code \"zz\"")).toBeGreaterThan(-1);
+  });
+});
+
+describe("Matrices and dynamic panels in the AI context (ai-expressions)", () => {
+  const orderJson = {
+    elements: [
+      { type: "dropdown", name: "country", choices: ["us", "de"] },
+      {
+        type: "matrixdynamic", name: "items", title: "Order items", rowCount: 1, cellType: "dropdown", choices: ["s", "m", "l"],
+        columns: [
+          { name: "product", cellType: "dropdown", choices: ["pen", "book"] },
+          { name: "quantity", cellType: "text", inputType: "number" },
+          { name: "giftWrap", cellType: "boolean" },
+          { name: "size" },
+        ],
+      },
+      { type: "paneldynamic", name: "kids", templateElements: [{ type: "text", name: "kidAge", inputType: "number" }] },
+      { type: "expression", name: "total" },
+      { type: "text", name: "note" },
+    ],
+  };
+  const fixedJson = {
+    elements: [
+      {
+        type: "matrixdropdown", name: "budget", rows: ["row1", "row2"],
+        columns: [{ name: "quantity", cellType: "text", inputType: "number" }, { name: "kind", cellType: "radiogroup", choices: ["a", "b"] }],
+      },
+      { type: "expression", name: "total" },
+    ],
+  };
+  function variable(context: IExpressionContext, name: string): any {
+    return context.variables.filter(v => v.name === name)[0];
+  }
+  function totalSite(creator: CreatorTester): IExpressionSite {
+    return { obj: creator.survey.getQuestionByName("total"), propertyName: "expression" };
+  }
+
+  test("a dynamic matrix: its value next to its row entries; each entry is described by its column", () => {
+    const creator = createCreator(orderJson);
+    const context = contextFor(creator, [questionSite(creator, "note")]);
+    expect(names(context)).toEqual([
+      "country",
+      // the editor's order: sorted (settings.logic.questionSortOrder), the matrix value before its first entry
+      "items", "items[0].giftWrap", "items[0].product", "items[0].quantity", "items[0].size",
+      "kids", "kids[0].kidAge",
+      "total",
+    ]);
+    expect(variable(context, "items")).toEqual({
+      name: "items", title: "Order items", kind: "question", type: "matrixdynamic", valueType: "array", page: "page1",
+      columns: [
+        { name: "product", title: "product", cellType: "dropdown" },
+        { name: "quantity", title: "quantity", cellType: "text" },
+        { name: "giftWrap", title: "giftWrap", cellType: "boolean" },
+        { name: "size", title: "size", cellType: "default" },
+      ],
+    });
+    const quantity = variable(context, "items[0].quantity");
+    expect(quantity.kind).toBe("question");
+    expect(quantity.type).toBe("text");
+    expect(quantity.valueType).toBe("number");
+    expect(quantity.page).toBe("page1");
+    expect(quantity.columns).toBeUndefined();
+    expect(variable(context, "items[0].product").choices).toEqual([{ value: "pen", text: "pen" }, { value: "book", text: "book" }]);
+    expect(variable(context, "items[0].giftWrap").type).toBe("boolean");
+    expect(variable(context, "items[0].giftWrap").valueType).toBe("boolean");
+    // cellType "default": the matrix's cell type, and the matrix's choices for a column with none
+    expect(variable(context, "items[0].size").type).toBe("dropdown");
+    expect(variable(context, "items[0].size").choices.map(c => c.value)).toEqual(["s", "m", "l"]);
+  });
+  test("a dynamic panel: its value is listed; its entries stay described by their template question", () => {
+    const creator = createCreator(orderJson);
+    const context = contextFor(creator, [questionSite(creator, "note")]);
+    expect(variable(context, "kids")).toEqual({
+      name: "kids", kind: "question", type: "paneldynamic", valueType: "array", page: "page1",
+      columns: [{ name: "kidAge", title: "kidAge", cellType: "text" }],
+    });
+    const kidAge = variable(context, "kids[0].kidAge");
+    expect(kidAge.type).toBe("text");
+    expect(kidAge.valueType).toBe("number");
+  });
+  test("a matrix with fixed rows: an object keyed by row, entries described by their column", () => {
+    const creator = createCreator(fixedJson);
+    const context = contextFor(creator, [totalSite(creator)]);
+    expect(names(context)).toEqual(["budget", "budget.row1.kind", "budget.row1.quantity", "budget.row2.kind", "budget.row2.quantity"]);
+    expect(variable(context, "budget")).toEqual({
+      name: "budget", kind: "question", type: "matrixdropdown", valueType: "object", page: "page1",
+      rows: [{ value: "row1", text: "row1" }, { value: "row2", text: "row2" }],
+      columns: [{ name: "quantity", title: "quantity", cellType: "text" }, { name: "kind", title: "kind", cellType: "radiogroup" }],
+    });
+    const quantity = variable(context, "budget.row1.quantity");
+    expect(quantity.type).toBe("text");
+    expect(quantity.valueType).toBe("number");
+    expect(quantity.rows).toBeUndefined();
+    expect(variable(context, "budget.row2.kind").choices.map(c => c.value)).toEqual(["a", "b"]);
+  });
+  test("the row prefix entries of a column are described by their column too", () => {
+    const creator = createCreator(orderJson);
+    const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("items");
+    const context = contextFor(creator, [{ obj: matrix.columns[0], propertyName: "visibleIf" }]);
+    const rowQuantity = variable(context, "row.quantity");
+    expect(rowQuantity.type).toBe("text");
+    expect(rowQuantity.valueType).toBe("number");
+    expect(names(context)).toContain("items");
+  });
+  test("a host that hides every entry of a matrix hides its value too", () => {
+    const creator = createCreator(orderJson);
+    creator.onConditionGetQuestionList.add((_, options) => {
+      options.list = options.list.filter(item => item.name.indexOf("items[") !== 0 && item.name !== "kids[0].kidAge");
+    });
+    const list = names(contextFor(creator, [questionSite(creator, "note")]));
+    expect(list).not.toContain("items");
+    expect(list).not.toContain("kids");
+    const partial = createCreator(orderJson);
+    partial.onConditionGetQuestionList.add((_, options) => {
+      options.list = options.list.filter(item => item.name !== "items[0].product");
+    });
+    expect(names(contextFor(partial, [questionSite(partial, "note")]))).toContain("items");
+  });
+  test("a complex question the condition editor lists itself is not listed twice", () => {
+    const saved = settings.logic.includeComplexQuestions;
+    settings.logic.includeComplexQuestions = true;
+    try {
+      const creator = createCreator(orderJson);
+      const list = names(contextFor(creator, [questionSite(creator, "note")]));
+      expect(list.filter(name => name === "items")).toHaveLength(1);
+      expect(list.filter(name => name === "kids")).toHaveLength(1);
+    } finally {
+      settings.logic.includeComplexQuestions = saved;
+    }
+  });
+  test("a matrix value the expression reads survives the cut", () => {
+    const caps = { ...settings.expressionAssistant };
+    try {
+      settings.expressionAssistant.maxVariables = 1;
+      const creator = createCreator(orderJson);
+      const context = contextFor(creator, [totalSite(creator)], "sumInArray({items}, 'quantity')");
+      expect(names(context)).toContain("items");
+      expect(context.truncated.variables).toBe(true);
+    } finally {
+      Object.assign(settings.expressionAssistant, caps);
+    }
+  });
+  test("the check accepts sumInArray over a dynamic and a fixed-row matrix, and the runtime sums both", () => {
+    const order = createCreator(orderJson);
+    expect(checkExpression(order, "sumInArray({items}, 'quantity')", [totalSite(order)]).findings).toEqual([]);
+    expect(checkExpression(order, "sumInArray({kids}, 'kidAge') > 10", [questionSite(order, "note")]).findings).toEqual([]);
+    const fixed = createCreator(fixedJson);
+    expect(checkExpression(fixed, "sumInArray({budget}, 'quantity')", [totalSite(fixed)]).findings).toEqual([]);
+
+    const orderSurvey = new SurveyModel({ elements: [orderJson.elements[1], { type: "expression", name: "total", expression: "sumInArray({items}, 'quantity')" }] });
+    orderSurvey.data = { items: [{ quantity: 2 }, { quantity: 5 }] };
+    expect(orderSurvey.getValue("total")).toBe(7);
+    const fixedSurvey = new SurveyModel({ elements: [fixedJson.elements[0], { type: "expression", name: "total", expression: "sumInArray({budget}, 'quantity')" }] });
+    fixedSurvey.data = { budget: { row1: { quantity: 3 }, row2: { quantity: 4 } } };
+    expect(fixedSurvey.getValue("total")).toBe(7);
+  });
+});
+
+describe("The target's title in the AI context (ai-expressions)", () => {
+  test("a title that differs from the name is passed; a name-only object has none", () => {
+    const creator = createCreator({
+      pages: [{
+        name: "p1", title: "Your order",
+        elements: [
+          { type: "text", name: "discount", title: "Your discount (%)", inputType: "number" },
+          { type: "text", name: "plain" },
+          { type: "panel", name: "pnl", title: "Delivery", elements: [{ type: "text", name: "q3" }] },
+          { type: "matrixdynamic", name: "m", columns: [{ name: "col1", title: "Column one" }, { name: "col2" }] },
+        ],
+      }],
+      calculatedValues: [{ name: "cv", expression: "1" }],
+    });
+    const survey = creator.survey;
+    const target = (obj: any, propertyName: string) => contextFor(creator, [{ obj: obj, propertyName: propertyName }]).target.objects[0];
+    expect(target(survey.getQuestionByName("discount"), "defaultValueExpression")).toEqual({
+      type: "text", name: "discount", title: "Your discount (%)", path: "pages[0].elements[0]", propertyName: "defaultValueExpression",
+    });
+    expect(target(survey.getQuestionByName("plain"), "visibleIf").title).toBeUndefined();
+    expect(target(survey.getPanelByName("pnl"), "visibleIf").title).toBe("Delivery");
+    expect(target(survey.pages[0], "visibleIf").title).toBe("Your order");
+    const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("m");
+    expect(target(matrix.columns[0], "visibleIf").title).toBe("Column one");
+    expect(target(matrix.columns[1], "visibleIf").title).toBeUndefined();
+    expect(target(survey.calculatedValues[0], "expression").title).toBeUndefined();
   });
 });

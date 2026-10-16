@@ -42,7 +42,7 @@ export interface IExpressionContext {
   target: {
     isCondition: boolean,
     resultType?: string,
-    objects: Array<{ type: string, name?: string, path?: string, propertyName: string }>,
+    objects: Array<{ type: string, name?: string, title?: string, path?: string, propertyName: string }>,
   };
   variables: Array<IExpressionVariable>;
   scopes: Array<{ prefix: string, meaning: string, names?: Array<string> }>;
@@ -199,6 +199,51 @@ function describeQuestion(variable: IExpressionVariable, question: Question): vo
   }
 }
 
+function isArrayContainer(question: any): boolean {
+  return !!question && typeof question.isDescendantOf === "function" &&
+    (question.isDescendantOf("matrixdropdownbase") || question.isDescendantOf("paneldynamic"));
+}
+
+// The matrix or dynamic panel at the survey level that holds a condition entry: "items[0].quantity"
+// and "row.quantity" (the matrix), "kids[0].kidAge" (the template question of kids). A nested one
+// answers through its outer container, so the outermost is taken.
+function getEntryContainer(question: any): Question {
+  let res: any = isArrayContainer(question) ? question : undefined;
+  if (!res && isArrayContainer(question?.parentQuestion)) res = question.parentQuestion;
+  for (let i = 0; !!res && isArrayContainer(res.parentQuestion) && i < 100; i++) res = res.parentQuestion;
+  return res;
+}
+
+// A matrix condition entry ("items[0].quantity", "budget.row1.quantity", "row.quantity") carries the
+// matrix as its question; the entry holds one cell, so it is described by its column's cell question
+// (or the detail panel question) instead.
+function getMatrixEntryCellQuestion(matrix: any, name: string): Question {
+  if (!matrix.isDescendantOf("matrixdropdownbase")) return undefined;
+  if (name.toLowerCase() === (matrix.getValueName() || "").toLowerCase()) return undefined;
+  const key = name.toLowerCase();
+  const rowElements: Array<any> = [].concat(matrix.columns);
+  if (matrix.detailPanelMode !== "none" && !!matrix.detailPanel) rowElements.push(...matrix.detailPanel.questions);
+  let found: any = undefined;
+  rowElements.forEach(el => {
+    const suffix = "." + (el.name || "").toLowerCase();
+    if (key.length > suffix.length && key.substring(key.length - suffix.length) === suffix && (!found || el.name.length > found.name.length)) {
+      found = el;
+    }
+  });
+  if (!found) return undefined;
+  return found instanceof MatrixDropdownColumn ? found.templateQuestion : found;
+}
+
+function describeMatrixEntry(variable: IExpressionVariable, matrix: any, cellQuestion: Question): void {
+  describeQuestion(variable, cellQuestion);
+  // a select column without choices of its own shows the matrix's choices
+  if (!variable.choices && Serializer.isDescendantOf(cellQuestion.getType(), "selectbase") && Array.isArray(matrix.choices) && matrix.choices.length > 0) {
+    variable.choices = toChoices(matrix.choices);
+  }
+  const page = getPageName(matrix);
+  if (!!page) variable.page = page; else delete variable.page;
+}
+
 function getSignature(reg: IFunctionRegistration): string {
   if (!Array.isArray(reg.parameters)) return undefined;
   const params = reg.parameters.map(p => (p.isRest ? "..." : "") + p.name + (p.optional ? "?" : "") + (!!p.type ? ": " + p.type : ""));
@@ -341,6 +386,22 @@ function buildVariables(creator: SurveyCreatorModel, sites: Array<IExpressionSit
   // Note the asymmetry: onConditionGetQuestionList hiding a name narrows what the AI is told, but the
   // check still accepts the name - the survey still holds it.
   const variables: Array<IExpressionVariable> = [];
+  // The whole value of a matrix or a dynamic panel ({items}, read by the inArray functions) is no
+  // entry of the condition editor. It is listed before the first entry of it that survived
+  // onConditionGetQuestionList, so a host that hides all of them hides the value too. A complex
+  // question the editor lists itself (settings.logic.includeComplexQuestions) is not added twice.
+  const listedNames = entries.map(entry => (entry.value || "").toLowerCase());
+  const addedContainers: Array<Question> = [];
+  const addContainer = (container: Question): void => {
+    if (!container || addedContainers.indexOf(container) > -1) return;
+    addedContainers.push(container);
+    const name = container.getValueName();
+    if (listedNames.indexOf(name.toLowerCase()) > -1) return;
+    const variable: IExpressionVariable = { name: name, kind: "question" };
+    if (!!container.title && container.title !== container.name) variable.title = container.title;
+    describeQuestion(variable, container);
+    variables.push(variable);
+  };
   entries.forEach(entry => {
     const name: string = entry.value;
     if (!name) return;
@@ -349,9 +410,14 @@ function buildVariables(creator: SurveyCreatorModel, sites: Array<IExpressionSit
     if (calculatedValues.indexOf(key) > -1) kind = "calculatedValue";
     else if (runtimeNames.indexOf(key) > -1) kind = surveyVariables.indexOf(key) > -1 ? "variable" : "hostVariable";
     if ((kind === "variable" || kind === "hostVariable") && !!lintKnown && lintKnown.indexOf(key) < 0) return;
+    if (kind === "question") addContainer(getEntryContainer(entry.question));
     const variable: IExpressionVariable = { name: name, kind: kind };
     if (!!entry.text && entry.text !== name) variable.title = entry.text;
-    if (kind === "question") describeQuestion(variable, entry.question);
+    if (kind === "question") {
+      const cellQuestion = !!entry.question ? getMatrixEntryCellQuestion(entry.question, name) : undefined;
+      if (!!cellQuestion) describeMatrixEntry(variable, entry.question, cellQuestion);
+      else describeQuestion(variable, entry.question);
+    }
     if (kind === "hostVariable") {
       // the definition question says what the variable is: its title, its type and its choices
       const hostQuestion = hostModel?.getVariableQuestion(name);
@@ -428,8 +494,11 @@ export function buildExpressionContext(creator: SurveyCreatorModel, sites: Array
     isCondition: isCondition,
     objects: sites.map(s => {
       const obj: any = s.obj;
-      const item: { type: string, name?: string, path?: string, propertyName: string } = { type: obj.getType(), propertyName: s.propertyName };
+      const item: IExpressionContext["target"]["objects"][0] = { type: obj.getType(), propertyName: s.propertyName };
       if (typeof obj.name === "string" && !!obj.name) item.name = obj.name;
+      // "Your discount (%)" says the value is a percentage; a question, a panel, a page and a
+      // matrix column have a title, a calculated value or a trigger has none
+      if (!(obj instanceof ItemValue) && typeof obj.title === "string" && !!obj.title && obj.title !== obj.name) item.title = obj.title;
       const path = resolver.getPath(!!s.replaces ? s.replaces : obj);
       if (path !== undefined) item.path = path;
       return item;
@@ -453,6 +522,30 @@ export function buildExpressionContext(creator: SurveyCreatorModel, sites: Array
     truncated: truncated,
   };
   return { context: context, systemPrompt: buildExpressionSystemPrompt(context) };
+}
+
+// The user turn of a request: what the system prompt's model is asked to do this time. Built here
+// so a host does not write its own and drop a part of it - a fix message without "return an empty
+// expression" got "false" back from a model that could not express the request.
+export function buildExpressionInstruction(kind: string, prompt: string, expression: string,
+  findings?: Array<{ severity: string, message: string }>): string {
+  const emptyOption = "If the request cannot be expressed with the listed variables and functions, return an empty expression and say why in the explanation.";
+  switch(kind) {
+    case "generate":
+      return "Write an expression for this request:\n" + (prompt || "") + "\n\n" + emptyOption;
+    case "modify":
+      return "Current expression:\n" + (expression || "") + "\n\nChange it as follows:\n" + (prompt || "") + "\n\n" + emptyOption;
+    case "fix":
+      return "This expression failed the check:\n" + (expression || "") + "\n\nProblems found:\n" +
+        (findings || []).map(f => "- [" + f.severity + "] " + f.message).join("\n") + "\n\n" +
+        "Return a corrected expression that still does what the author asked. " +
+        "If it cannot be corrected with the listed variables and functions, return an empty expression and say why in the explanation.";
+    case "explain":
+      return "Explain what this expression does, in plain words for a form author:\n" + (expression || "") + "\n\n" +
+        "Put the explanation in \"explanation\" and return the expression unchanged in \"expression\".";
+    default:
+      return prompt || "";
+  }
 }
 
 // The explanation is shown in the Creator UI, so it is written in the UI language. Named explicitly:

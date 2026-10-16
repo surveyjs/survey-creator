@@ -17,7 +17,7 @@ export interface IExpressionGuideSection {
   examples: Array<IExpressionGuideExample>;
 }
 
-export const expressionGuideVersion = "1";
+export const expressionGuideVersion = "2";
 
 const valid = (expression: string, note?: string): IExpressionGuideExample => ({ expression: expression, isValid: true, note: note });
 const invalid = (expression: string, note: string): IExpressionGuideExample => ({ expression: expression, isValid: false, note: note });
@@ -130,9 +130,10 @@ export const expressionGuideSections: Array<IExpressionGuideSection> = [
   },
   {
     title: "Functions",
-    text: "A function is called by its name with arguments in parentheses. iif(condition, valueIfTrue, valueIfFalse) chooses a value. Date functions: today(), age({birthdate}), dateDiff({from}, {to}, 'days'), dateAdd({date}, 7, 'days'), year(), month(), day(). The inArray family reads an array value (a dynamic matrix or panel): its second argument is a quoted field name, its last an optional condition over the item's own fields.",
+    text: "A function is called by its name with arguments in parentheses. iif(condition, valueIfTrue, valueIfFalse) chooses a value. There is no conditional ?: operator; use iif(condition, valueIfTrue, valueIfFalse). Date functions: today(), age({birthdate}), dateDiff({from}, {to}, 'days'), dateAdd({date}, 7, 'days'), year(), month(), day(). A matrix or dynamic panel variable ({orders}) is its whole value, for the inArray functions: an array of rows or panels (dynamic matrix, dynamic panel), or an object keyed by row value (matrix with fixed rows); the inArray functions accept both. Their second argument is a quoted column or question name, their last an optional condition over the row's own fields. A condition inside one row or panel uses {row.name} or {panel.name} instead.",
     examples: [
       valid("iif({score} > 50, 'pass', 'fail')"),
+      invalid("{score} > 50 ? 'pass' : 'fail'", "there is no ?: operator; write iif({score} > 50, 'pass', 'fail')"),
       valid("age({birthdate}) >= 18"),
       valid("{start} >= today()"),
       valid("dateDiff({start}, {end}, 'days') <= 30"),

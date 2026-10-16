@@ -95,7 +95,7 @@ export type {
   IExpressionSite, IExpressionCheckPending, IExpressionCheckFinding, IExpressionCheckResult,
 } from "../expression-assistant/expression-check";
 export { getLintPath } from "../expression-assistant/lint-paths";
-export { buildExpressionContext, buildExpressionSystemPrompt } from "../expression-assistant/expression-context";
+export { buildExpressionContext, buildExpressionInstruction, buildExpressionSystemPrompt } from "../expression-assistant/expression-context";
 export type {
   IExpressionContext, IExpressionVariable, IExpressionContextFunction, IExpressionContextOperator, IExpressionContextChoice,
 } from "../expression-assistant/expression-context";

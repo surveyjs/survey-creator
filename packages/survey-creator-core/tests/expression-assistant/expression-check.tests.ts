@@ -4,6 +4,7 @@ import {
   buildExpressionCheckJson, checkExpression, getExpressionFix, getExpressionLintOptions, isSameLintFinding,
 } from "../../src/expression-assistant/expression-check";
 import { getCreatorLintOptions } from "../../src/components/tabs/json-editor-linter";
+import { editorLocalization } from "../../src/editorLocalization";
 
 export * from "../../src/property-grid/condition-survey";
 
@@ -244,5 +245,41 @@ describe("Fixes the check offers (ai-expressions)", () => {
     expect(getExpressionFix(mixedFix, docs.candidate, docs.sites)).toBeUndefined();
     const siteFix: ILintFinding = { ...choiceFix, fix: { reason: "x", edits: [{ op: "set", path: "pages[0].elements[1].visibleIf", value: "{q1} = 'b'" }] } };
     expect(getExpressionFix(siteFix, docs.candidate, docs.sites).expression).toBe("{q1} = 'b'");
+  });
+});
+
+describe("A condition that reads no question or variable (ai-expressions)", () => {
+  const json = {
+    elements: [{ type: "text", name: "age", inputType: "number" }, { type: "text", name: "q2" }],
+    calculatedValues: [{ name: "cv", expression: "1 + {age}" }],
+  };
+  test("the check warns, with the localized message and no claim about the result", () => {
+    const creator = createCreator(json);
+    const template = editorLocalization.getJsonValue("linter.messages.expression/no-reference.noReference");
+    expect(template).toBe("The {prop} \"{expression}\" does not read any question or variable.");
+    ["false", "today() > '2026-12-31'"].forEach(expression => {
+      const res = checkQuestion(creator, "q2", "visibleIf", expression);
+      expect(ruleIds(res), expression).toEqual(["expression/no-reference"]);
+      const finding = res.findings[0];
+      expect(finding.severity).toBe("warning");
+      expect(finding.reason).toBe("noReference");
+      expect(finding.text).toBe("The visibleIf \"" + expression + "\" does not read any question or variable.");
+      expect(finding.text).not.toMatch(/always|never/);
+      expect(res.errorCount).toBe(0);
+      expect(res.warningCount).toBe(1);
+    });
+  });
+  test("nothing for a condition that reads a question, and nothing for a value expression", () => {
+    const creator = createCreator(json);
+    expect(checkQuestion(creator, "q2", "visibleIf", "{age} > 1").findings).toEqual([]);
+    expect(checkQuestion(creator, "q2", "defaultValueExpression", "today()").findings).toEqual([]);
+    expect(checkExpression(creator, "1", [{ obj: creator.survey.calculatedValues[0], propertyName: "expression" }]).findings).toEqual([]);
+  });
+  test("only the expression check turns the rule on: the JSON tab keeps the linter's default, and a host can switch it off", () => {
+    const creator = createCreator(json);
+    expect(getCreatorLintOptions(creator).rules["expression/no-reference"]).toBeUndefined();
+    expect(getExpressionLintOptions(creator).rules["expression/no-reference"]).toBe("warning");
+    creator.onLintSurvey.add((_, options) => { options.lintOptions.rules["expression/no-reference"] = "off"; });
+    expect(checkQuestion(creator, "q2", "visibleIf", "false").findings).toEqual([]);
   });
 });

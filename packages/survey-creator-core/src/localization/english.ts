@@ -2113,6 +2113,9 @@ export var enStrings = {
         meaninglessFragment: "Part of the {prop} \"{expression}\" has a result that is known upfront.",
         alwaysTrueViaConstants: "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing.",
       },
+      "expression/no-reference": {
+        noReference: "The {prop} \"{expression}\" does not read any question or variable.",
+      },
       "value/not-a-choice": {
         defaultValue: "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}.",
         correctAnswer: "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}.",

@@ -63,8 +63,11 @@ export interface IExpressionCheckResult {
 // editor offers. Build them once per request and pass them to every check of it - building them
 // fires creator.onLintSurvey.
 export function getExpressionLintOptions(creator: SurveyCreatorModel): ISurveyLintOptions {
+  // A condition that reads nothing ("false") is how an author switches an element off, so the
+  // linter and the JSON tab leave it alone; from an AI it usually means the request could not be
+  // expressed, so the check warns. A host can still switch it off in onLintSurvey.
   return getCreatorLintOptions(creator,
-    getConditionVariableNames(creator.survey, creator.variablePresetsModel));
+    getConditionVariableNames(creator.survey, creator.variablePresetsModel), { "expression/no-reference": "warning" });
 }
 
 // setValueIf and setValueExpression are one writer for the linter (rules/cycle-value-write.ts),

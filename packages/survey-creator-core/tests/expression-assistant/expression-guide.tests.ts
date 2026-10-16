@@ -37,6 +37,22 @@ describe("Expression syntax guide (ai-expressions)", () => {
     });
     expect(getExpressionGuideText()).toBe(text);
   });
+  test("there is no ?: operator: the guide says so and points to iif", () => {
+    // the text changed in version 2: a host caching a prompt built from version 1 knows it is stale
+    expect(expressionGuideVersion).toBe("2");
+    const text = getExpressionGuideText();
+    expect(text).toContain("There is no conditional ?: operator; use iif(condition, valueIfTrue, valueIfFalse).");
+    expect(new ConditionsParser().parseExpression("{score} > 50 ? 'pass' : 'fail'")).toBeFalsy();
+    expect(examples.filter(ex => !ex.isValid).map(ex => ex.expression)).toContain("{score} > 50 ? 'pass' : 'fail'");
+  });
+  test("a matrix or dynamic panel variable is its whole value, for the inArray functions", () => {
+    const text = getExpressionGuideText();
+    expect(text).toContain("A matrix or dynamic panel variable ({orders}) is its whole value");
+    expect(text).toContain("an array of rows or panels (dynamic matrix, dynamic panel)");
+    expect(text).toContain("an object keyed by row value (matrix with fixed rows)");
+    expect(text).toContain("{row.name}");
+    expect(examples.filter(ex => ex.isValid).map(ex => ex.expression)).toContain("sumInArray({orders}, 'total') > 100");
+  });
   test("the functions the guide calls are registered", () => {
     const parser = new ConditionsParser();
     const names: Array<string> = [];

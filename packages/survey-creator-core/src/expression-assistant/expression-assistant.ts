@@ -10,7 +10,7 @@ import { QuestionLinkValueModel } from "../components/link-value";
 import {
   checkExpression, getExpressionLintOptions, IExpressionCheckFinding, IExpressionCheckPending, IExpressionCheckResult, IExpressionSite,
 } from "./expression-check";
-import { buildExpressionContext, IExpressionContext } from "./expression-context";
+import { buildExpressionContext, buildExpressionInstruction, IExpressionContext } from "./expression-context";
 import { parseExpressionResponse } from "./expression-response";
 
 import "./expression-assistant.scss";
@@ -91,6 +91,8 @@ export class ExpressionAssistant extends Base {
   @property({ defaultValue: 0 }) fixCount: number;
   public checkResult: IExpressionCheckResult;
   public history: Array<IExpressionAssistantHistoryItem> = [];
+  // the request's "messages": every instruction sent and the answer it got, explanations excluded
+  private conversation: Array<{ role: "user" | "assistant", content: string }> = [];
   private controller: AbortController;
   private request: IAssistantRequest;
   private surveyValue: SurveyModel;
@@ -185,6 +187,9 @@ export class ExpressionAssistant extends Base {
     this.status = "loading";
     let isAnswered = false;
     const sites = this.request.input.sites || [];
+    const englishFindings = !!findings
+      ? findings.map(f => ({ ruleId: f.ruleId, reason: f.reason, severity: f.severity, message: f.englishText })) : undefined;
+    const instruction = buildExpressionInstruction(kind, prompt, expression, englishFindings);
     const options: ExpressionAssistantRequestEvent = {
       kind: kind, prompt: prompt || "", expression: expression || "",
       isCondition: this.request.context.target.isCondition,
@@ -195,21 +200,23 @@ export class ExpressionAssistant extends Base {
       context: clone(this.request.context),
       systemPrompt: this.request.systemPrompt,
       history: clone(this.history),
+      instruction: instruction,
+      messages: clone(this.conversation).concat([{ role: "user", content: instruction }]),
       signal: controller.signal,
       callback: (result) => {
         if (isAnswered || controller.signal.aborted || this.controller !== controller || this.isDisposed) return;
         isAnswered = true;
         this.controller = undefined;
-        this.onResult(kind, result);
+        this.onResult(kind, result, instruction);
       }
     };
-    if (!!findings) {
-      options.findings = findings.map(f => ({ ruleId: f.ruleId, reason: f.reason, severity: f.severity, message: f.englishText }));
+    if (!!englishFindings) {
+      options.findings = englishFindings;
     }
     this.creator.onExpressionAssistantRequest.fire(this.creator, options);
   }
   private onResult(kind: ExpressionAssistantRequestKind,
-    result: { expression?: string, explanation?: string, text?: string, error?: string }): void {
+    result: { expression?: string, explanation?: string, text?: string, error?: string }, instruction: string): void {
     if (!!result && !!result.error) {
       this.errorText = String(result.error);
       this.status = "error";
@@ -230,6 +237,9 @@ export class ExpressionAssistant extends Base {
       this.status = !!this.explanation ? "explained" : "empty";
       return;
     }
+    // the answer as the system prompt asks for it, so the next request shows the model its own turn
+    this.conversation.push({ role: "user", content: instruction });
+    this.conversation.push({ role: "assistant", content: JSON.stringify({ expression: expression, explanation: explanation || "" }) });
     if (!expression) {
       this.explanation = explanation || "";
       this.status = "empty";

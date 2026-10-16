@@ -28,8 +28,10 @@ function newElementName(nameKind: string, taken: Array<string>): string {
 // passes none; the expression check passes the names the condition editor offers, so a name the
 // author could pick there is not reported as unknown. They are added before onLintSurvey fires,
 // so the application still has the last word - and note that the event now fires for that check
-// too, not only for the JSON tab.
-export function getCreatorLintOptions(creator: SurveyCreatorModel, knownVariables?: Array<string>): ISurveyLintOptions {
+// too, not only for the JSON tab. "extraRules" are severities a caller sets on top of the tab's
+// own, before the event as well.
+export function getCreatorLintOptions(creator: SurveyCreatorModel, knownVariables?: Array<string>,
+  extraRules?: { [ruleId: string]: LintSeverity }): ISurveyLintOptions {
   const rules: { [ruleId: string]: LintSeverity } = {
     "property/unknown": "error",
     "property/required": "error",
@@ -41,6 +43,7 @@ export function getCreatorLintOptions(creator: SurveyCreatorModel, knownVariable
     // the presets are the host's data and no part of the text this tab edits; the tab checks
     // only the references the survey makes to the variables they declare
     "variable/preset": "off",
+    ...extraRules,
   };
   const options = {
     lintOptions: <ISurveyLintOptions>{
