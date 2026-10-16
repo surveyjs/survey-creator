@@ -38,12 +38,6 @@ const specificChoices = {
 };
 
 export class ItemValueWrapperViewModel extends Base implements IExpandCollapseChoice {
-  // Kept outside the item's property hash: setting a property on an item
-  // notifies its owner question (itemValuePropertyChanged).
-  private static adorners: WeakMap<ItemValue, ItemValueWrapperViewModel> = new WeakMap();
-  public static GetAdorner(item: ItemValue): ItemValueWrapperViewModel {
-    return ItemValueWrapperViewModel.adorners.get(item);
-  }
   @property({ defaultValue: false }) isNew: boolean;
   @property({ defaultValue: false }) isDragging: boolean;
   @property({ defaultValue: false }) isDragDropGhost: boolean;
@@ -91,7 +85,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     }
     this.updateCanTouchItems();
     this.setupShowPanel();
-    ItemValueWrapperViewModel.adorners.set(item, this);
+    this.creator.registerItemValueAdorner(item, this);
   }
 
   private dragOrClickHelper: DragOrClickHelper;
@@ -153,9 +147,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     return this.creator.expandCollapseManager;
   }
   public dispose(): void {
-    if (ItemValueWrapperViewModel.adorners.get(this.item) === this) {
-      ItemValueWrapperViewModel.adorners.delete(this.item);
-    }
+    this.creator.unregisterItemValueAdorner(this.item, this);
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged

@@ -1,5 +1,5 @@
 import { DomDocumentHelper } from "survey-core";
-import { ItemValueWrapperViewModel, SurveyCreatorModel, Transaction, UndoRedoArrayAction } from "survey-creator-core";
+import { SurveyCreatorModel, Transaction, UndoRedoArrayAction } from "survey-creator-core";
 import { getCollabString } from "../collaboration-strings";
 import { resolveLocator } from "../journal/journal-locator";
 import { acceptClaims, ILockClaim } from "./lock-order";
@@ -299,7 +299,7 @@ export class ElementLockGuard {
       question.onVisibleChoicesChanged?.();
     }
     (question.visibleChoices || []).forEach((item: any) => {
-      ItemValueWrapperViewModel.GetAdorner(item)?.updateCanTouchItems(canModify && !this.hasLockedChoiceContent(item));
+      this.creator.getItemValueAdorner(item)?.updateCanTouchItems(canModify && !this.hasLockedChoiceContent(item));
     });
   }
   private refreshAdorner(element: any): void {

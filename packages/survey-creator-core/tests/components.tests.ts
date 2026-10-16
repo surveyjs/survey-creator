@@ -223,7 +223,7 @@ test("item value operations follow a change of the question permissions", () => 
   const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
   const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
   const newItemAdorner = new ItemValueWrapperViewModel(creator, question, question.newItem);
-  expect(ItemValueWrapperViewModel.GetAdorner(question.choices[0])).toBe(itemAdorner);
+  expect(creator.getItemValueAdorner(question.choices[0])).toBe(itemAdorner);
   expect(itemAdorner.allowRemove).toBeTruthy();
   expect(itemAdorner.isDraggable).toBeTruthy();
   expect(newItemAdorner.allowAdd).toBeTruthy();
@@ -243,9 +243,31 @@ test("item value operations follow a change of the question permissions", () => 
   expect(itemAdorner.allowRemove).toBeFalsy();
 
   itemAdorner.dispose();
-  expect(ItemValueWrapperViewModel.GetAdorner(question.choices[0])).toBeUndefined();
-  expect(ItemValueWrapperViewModel.GetAdorner(question.newItem)).toBe(newItemAdorner);
+  expect(creator.getItemValueAdorner(question.choices[0])).toBeUndefined();
+  expect(creator.getItemValueAdorner(question.newItem)).toBe(newItemAdorner);
   newItemAdorner.dispose();
+});
+
+test("item value adorners are registered on their own creator", () => {
+  const json = { elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }] };
+  const creatorA = new CreatorTester();
+  creatorA.JSON = json;
+  const creatorB = new CreatorTester();
+  creatorB.JSON = json;
+  const questionB = <QuestionCheckboxModel>creatorB.survey.getAllQuestions()[0];
+  const itemB = questionB.choices[0];
+  const first = new ItemValueWrapperViewModel(creatorB, questionB, itemB);
+  expect(creatorB.getItemValueAdorner(itemB)).toBe(first);
+  expect(creatorA.getItemValueAdorner(itemB)).toBeUndefined();
+
+  // A re-render creates a new adorner before the old one is disposed: the
+  // old one must not unregister its successor.
+  const second = new ItemValueWrapperViewModel(creatorB, questionB, itemB);
+  expect(creatorB.getItemValueAdorner(itemB)).toBe(second);
+  first.dispose();
+  expect(creatorB.getItemValueAdorner(itemB)).toBe(second);
+  second.dispose();
+  expect(creatorB.getItemValueAdorner(itemB)).toBeUndefined();
 });
 
 test("image item actions follow a change of the question permissions", () => {
