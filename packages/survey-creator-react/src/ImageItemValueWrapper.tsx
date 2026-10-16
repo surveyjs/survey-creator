@@ -26,6 +26,9 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     this.rootRef = React.createRef();
   }
   protected createModel(props: any): void {
+    if (this.model && !this.model.isDisposed) {
+      this.model.dispose();
+    }
     this.model = new ImageItemValueWrapperViewModel(
       props.componentData.creator,
       props.question,
@@ -46,6 +49,12 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
   }
 
   componentDidMount() {
+    // React StrictMode mounts the same component again after
+    // componentWillUnmount disposed its model.
+    if (this.model.isDisposed) {
+      this.createModel(this.props);
+      this.forceUpdate();
+    }
     super.componentDidMount();
     this.model.itemsRoot = this.rootRef.current;
   }
@@ -53,6 +62,11 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
   componentDidUpdate(prevProps, prevState) {
     super.componentDidUpdate(prevProps, prevState);
     this.model.itemsRoot = this.rootRef.current;
+  }
+
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    this.model.dispose();
   }
 
   preventDragHandler = (e) => {

@@ -66,6 +66,7 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
 
   protected createModel(): void {
     if (this.componentData) {
+      this.adorner?.dispose();
       this.adorner = new ItemValueWrapperViewModel(this.creator, this.question, this.item);
       if (this.prevItem !== this.item) {
         this.setupContainer();
