@@ -1202,6 +1202,8 @@ export var danishStrings = {
     questionErrorLocation: "Spørgsmålsfejl placering",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Fokusér første spørgsmål ved sideskift",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Aktiver valggenveje",
     // "Question order"
     questionOrder: "Rækkefølge af spørgsmål på siden",
     // "Time limit to complete the survey"
@@ -2940,6 +2942,12 @@ export var danishStrings = {
     questionErrorLocation: "Angiver placeringen af en fejlmeddelelse i forhold til spørgsmålet med ugyldigt input. Vælg mellem: \"Top\" - en fejltekst placeres øverst i spørgsmålsfeltet; \"Nederst\" - en fejltekst placeres nederst i spørgsmålsfeltet.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Vælg, om det første indtastningsfelt på hver side skal være klar til indtastning af tekst.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Viser bogstaver (A, B, C, ...) ved siden af valgmuligheder i Radio Button Group, afkrydsningsfelter og spørgsmål i Image Picker. Respondenter kan vælge valg ved at trykke på de tilsvarende bogstavtaster. Du kan tilsidesætte denne indstilling for individuelle spørgsmål.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Viser bogstaver (A, B, C, ...) ved siden af valgmulighederne og lader respondenterne vælge dem ved at trykke på de tilsvarende bogstavtaster. Muligheden \"Inherit\" bruger undersøgelsesniveau-indstillingen."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Effekten af denne indstilling er kun synlig under fanen Eksempel.",
     // [Auto-translated] "For text entry questions only."

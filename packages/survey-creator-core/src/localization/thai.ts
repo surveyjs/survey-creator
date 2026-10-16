@@ -1201,6 +1201,8 @@ export const thStrings = {
     questionErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "โฟกัสคำถามแรกในหน้าใหม่",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "เปิดใช้งานทางลัดตัวเลือก",
     // "Question order"
     questionOrder: "ลำดับคำถาม",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export const thStrings = {
     questionErrorLocation: "ตั้งตำแหน่งของข้อความข้อผิดพลาดเมื่อเทียบกับคำถามที่มีอินพุตที่ไม่ถูกต้อง เลือกระหว่าง: \"ด้านบน\" - ข้อความข้อผิดพลาดจะวางที่ด้านบนของกล่องคำถาม; \"ด้านล่าง\" - ข้อความข้อผิดพลาดจะวางที่ด้านล่างของกล่องคำถาม",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "เลือกถ้าคุณต้องการให้ช่องป้อนข้อมูลแรกในแต่ละหน้าเตรียมพร้อมสำหรับการป้อนข้อความ",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "แสดงตัวอักษร (A, B, C, ...) ถัดจากตัวเลือกในคําถามกลุ่มปุ่มวิทยุ, ช่องทําเครื่องหมาย และตัวเลือกรูปภาพผู้ตอบสามารถเลือกตัวเลือกได้โดยกดปุ่มตัวอักษรที่เกี่ยวข้องคุณสามารถแทนที่การตั้งค่านี้สําหรับคําถามแต่ละข้อได้",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "แสดงตัวอักษร (A, B, C, ...) ข้างตัวเลือก และให้ผู้ตอบแบบสอบถามเลือกได้โดยกดปุ่มตัวอักษรที่เกี่ยวข้องตัวเลือก \"สืบทอด\" ใช้การตั้งค่าระดับแบบสํารวจ"
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "รักษาลำดับดั้งเดิมของคำถามหรือตั้งค่าให้สุ่ม ผลของการตั้งค่านี้จะแสดงในแท็บพรีวิวเท่านั้น",
     // "For text entry questions only."

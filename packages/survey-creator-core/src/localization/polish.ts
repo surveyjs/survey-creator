@@ -1202,6 +1202,8 @@ export var polishStrings = {
     questionErrorLocation: "Question error location",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Focus first question on changing the page",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Włącz skróty wyboru",
     // "Question order"
     questionOrder: "Elements order on the page",
     // "Time limit to complete the survey"
@@ -2940,6 +2942,12 @@ export var polishStrings = {
     questionErrorLocation: "Ustawia lokalizację komunikatu o błędzie w odniesieniu do pytania z nieprawidłowymi danymi wejściowymi. Wybierz pomiędzy: \"Góra\" - tekst błędu jest umieszczany w górnej części pola pytania; \"Na dole\" — tekst błędu jest umieszczany u dołu pola pytania.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Wybierz, jeśli chcesz, aby pierwsze pole wejściowe na każdej stronie było gotowe do wprowadzenia tekstu.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Wyświetla litery (A, B, C, ...) obok opcji w pytaniach Grupa Przycisków Radiowych, Pola Checkboxa oraz Wybór Obrazów. Respondenci mogą wybierać wybory, naciskając odpowiednie klawisze literowe. Możesz nadpisać to ustawienie dla poszczególnych pytań.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Wyświetla litery (A, B, C, ...) obok opcji i pozwala respondentom wybrać je przez naciśnięcie odpowiednich klawiszy literowych. Opcja \"Dziedzicz\" wykorzystuje ustawienie na poziomie ankiety."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zachowuje pierwotną kolejność pytań lub losuje je. Efekt tego ustawienia jest widoczny tylko na karcie Podgląd.",
     // [Auto-translated] "For text entry questions only."

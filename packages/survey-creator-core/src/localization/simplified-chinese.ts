@@ -1201,6 +1201,8 @@ export var simplifiedChineseTranslation = {
     questionErrorLocation: "问题错误定位",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "改变页面时聚焦在第一个问题",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "启用选择快捷方式",
     // "Question order"
     questionOrder: "页内问题顺序",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var simplifiedChineseTranslation = {
     questionErrorLocation: "设置与输入无效的问题相关的错误消息的位置。选择：“顶部” - 错误文本放置在问题框的顶部;“底部” - 错误文本放置在问题框的底部。",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "选择是否希望每个页面上的第一个输入字段准备好进行文本输入。",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "在无线按钮组、复选框和图片选择器问题的选项旁边显示字母（A、B、C、等）。回答者可以通过按相应的字母键选择选项。你可以针对单个问题覆盖此设置。",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "在选项旁显示字母（A、B、C、......），让受访者通过按相应的字母键选择。“继承”选项使用调查级别设置。"
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "保持问题的原始顺序或随机化问题。此设置的效果仅在“预览”选项卡中可见。",
     // [Auto-translated] "For text entry questions only."

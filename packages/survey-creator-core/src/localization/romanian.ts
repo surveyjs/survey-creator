@@ -1201,6 +1201,8 @@ export const roStrings = {
     questionErrorLocation: "Alinierea mesajului de eroare",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Focalizați pe prima întrebare la o pagină nouă",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Activează scurtăturile de alegere",
     // "Question order"
     questionOrder: "Ordinea întrebărilor",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export const roStrings = {
     questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării.",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Selectați dacă doriți ca primul câmp de intrare de pe fiecare pagină să fie pregătit pentru introducerea textului.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Afișează literele (A, B, C, ...) lângă opțiunile din Grupul de butoane Radio, Casele de bifat și întrebările cu selectorul de imagini. Respondenții pot selecta opțiuni apăsând tastele corespunzătoare ale literelor. Poți suprascrie această setare pentru întrebările individuale.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Afișează literele (A, B, C, ...) lângă opțiuni și permite respondenților să le selecteze apăsând tastele corespunzătoare. Opțiunea \"Moștenește\" folosește setarea la nivel de sondaj."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Efectul acestei setări este vizibil doar în fila Previzualizare.",
     // "For text entry questions only."

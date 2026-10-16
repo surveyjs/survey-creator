@@ -1201,6 +1201,8 @@ export var mnStrings = {
     questionErrorLocation: "Алдааны мэдэгдлийн байршил",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Эхний асуултыг шинэ хуудсанд төвлөрүүлэх",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Сонголтын богино замыг идэвхжүүлэх",
     // "Question order"
     questionOrder: "Хуудас дээрх элементийн дараалал",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var mnStrings = {
     questionErrorLocation: "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Текст оруулахад бэлэн болсон хуудас бүр дээрх эхний оролтын талбарыг хүсвэл сонгоно уу.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Radio Button Group, Checkboxes, Image Picker асуултуудын сонголтуудын хажууд (A, B, C, ...) үсгийг харуулдаг. Хариулагчид тохирох үсгийн товчлуурыг дарж сонголтоо сонгож болно. Та энэ тохиргоог тус бүрийн асуултад давж болно.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Сонголтын хажууд үсгүүдийг (A, B, C, ...) харуулж, хариулагчид тохирох үсгийн товчийг дарж сонгох боломж олгодог. \"Inherit\" сонголт нь судалгааны түвшний тохиргоог ашигладаг."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
     // [Auto-translated] "For text entry questions only."

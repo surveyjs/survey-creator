@@ -1201,6 +1201,8 @@ export var italianTranslation = {
     questionErrorLocation: "Posizione del messaggio di errore",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Al cambio pagina, posiziona il cursore sulla prima domanda",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Abilita scorciatoie di scelta",
     // "Question order"
     questionOrder: "Ordine delle domande sulla pagina",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var italianTranslation = {
     questionErrorLocation: "Imposta la posizione di un messaggio di errore in relazione alla domanda con input non valido. Scegli tra: \"In alto\" - un testo di errore viene posizionato nella parte superiore della casella della domanda; \"In basso\": un testo di errore viene inserito nella parte inferiore della casella della domanda.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Selezionare se si desidera che il primo campo di immissione di ogni pagina sia pronto per l'immissione di testo.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Mostra le lettere (A, B, C, ...) accanto alle opzioni nel Gruppo dei Pulsanti Radio, Caselle da Spuntare e domande con il Selezionatore di Immagini. I rispondenti possono selezionare le opzioni premendo i tasti delle lettere corrispondenti. Puoi sovrascrivere questa impostazione per le singole domande.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Mostra le lettere (A, B, C, ...) accanto alle opzioni e permette ai rispondenti di selezionarle premendo i tasti corrispondenti delle lettere. L'opzione \"Ereda\" utilizza l'impostazione a livello di sondaggio."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Mantiene l'ordine originale delle domande o le rende casuali. L'effetto di questa impostazione è visibile solo nella scheda Anteprima.",
     // [Auto-translated] "For text entry questions only."

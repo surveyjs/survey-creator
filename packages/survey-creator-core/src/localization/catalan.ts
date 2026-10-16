@@ -1201,6 +1201,8 @@ export var catalanTranslation = {
     questionErrorLocation: "Ubicación de error de la pregunta",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Enfoca la primera pregunta al cambiar la pàgina",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Activar dreceres d'elecció",
     // "Question order"
     questionOrder: "Orden de elementos en la pàgina",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var catalanTranslation = {
     questionErrorLocation: "Establece la ubicación de un mensaje de error en relación con la pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un text de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un text de error en la parte inferior del cuadro de pregunta.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Seleccione si desea que el primer campo de entrada de cada pàgina esté listo para la entrada de text.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Mostra les lletres (A, B, C, ...) al costat de les opcions de les preguntes del Grup de Botons de Radio, Caselles de Verificació i Selector d'Imatges. Els participants poden seleccionar opcions prement les tecles corresponents de lletras. Pots sobreescriure aquesta configuració per a preguntes individuals.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Mostra les lletres (A, B, C, ...) al costat de les opcions i permet als enquestats seleccionar-les prement les tecles corresponents. L'opció \"Heretar\" utilitza la configuració a nivell d'enquesta."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Mantiene el orden original de las preguntes o las aleatoriza. El efecto de esta configuració solo es visible en la pestaña Vista prèvia.",
     // [Auto-translated] "For text entry questions only."

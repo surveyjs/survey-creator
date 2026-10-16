@@ -198,7 +198,10 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     return undefined;
   }
 
+  // add/remove re-check the permissions: they may have changed after the
+  // buttons were rendered.
   public add(model: ItemValueWrapperViewModel) {
+    if (!model.allowAdd) return;
     const propName = this.getSpecificProp(model);
     if (propName) {
       model.question[propName] = true;
@@ -215,6 +218,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
 
   public remove(model: ItemValueWrapperViewModel) {
+    if (!model.allowRemove) return;
     const propName = this.getSpecificProp(model);
     if (propName) {
       model.question[propName] = false;

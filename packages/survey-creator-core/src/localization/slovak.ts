@@ -1201,6 +1201,8 @@ export var skStrings = {
     questionErrorLocation: "Poloha chyby otázky",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Prechod na prvú otázku pri zmene stránky",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Povoliť skratky na výber",
     // "Question order"
     questionOrder: "Poradie prvkov na stránke",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var skStrings = {
     questionErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Vyberte, či chcete prvé vstupné pole na každej strane pripraviť na zadávanie textu.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Zobrazuje písmená (A, B, C, ...) vedľa možností v otázkach Skupina rádiových tlačidiel, Zaškrtávacie políčka a Výber obrázkov. Respondenti si môžu vybrať možnosti stlačením príslušných písmenových klávesov. Toto nastavenie môžete prepísať pre jednotlivé otázky.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Zobrazuje písmená (A, B, C, ...) vedľa možností a umožňuje respondentom vybrať ich stlačením príslušných písmenových klávesov. Možnosť \"Dedičiť\" používa nastavenie na úrovni prieskumu."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
     // [Auto-translated] "For text entry questions only."

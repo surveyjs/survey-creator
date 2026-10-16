@@ -1201,6 +1201,8 @@ export var frenchTranslation = {
     questionErrorLocation: "Emplacement de l'erreur",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Focus sur la première question au changement de page",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Activer les raccourcis de choix",
     // "Question order"
     questionOrder: "Ordre des éléments sur la page",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var frenchTranslation = {
     questionErrorLocation: "Définit l’emplacement d’un message d’erreur par rapport à la question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Sélectionnez cette option si vous souhaitez que le premier champ de saisie de chaque page soit prêt pour la saisie de texte.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Affiche les lettres (A, B, C, ...) à côté des choix dans le groupe de boutons radio, les cases à cocher et les questions du sélecteur d’images. Les répondants peuvent sélectionner des choix en appuyant sur les touches correspondantes. Vous pouvez passer outre ce paramètre pour chaque question.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Affiche les lettres (A, B, C, ...) à côté des choix et permet aux répondants de les sélectionner en appuyant sur les touches correspondantes. L’option « Héritier » utilise le réglage au niveau de l’enquête."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’effet de ce paramètre n’est visible que dans l’onglet Aperçu.",
     // [Auto-translated] "For text entry questions only."

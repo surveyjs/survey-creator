@@ -1202,6 +1202,8 @@ export let svStrings = {
     questionErrorLocation: "Fråga fel placerad",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Fokusera på första frågan vid ändring av sidan",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Aktivera valgenvägar",
     // "Question order"
     questionOrder: "Element ordning på sidan",
     // "Time limit to complete the survey"
@@ -2940,6 +2942,12 @@ export let svStrings = {
     questionErrorLocation: "Anger platsen för ett felmeddelande i förhållande till frågan med ogiltig inmatning. Välj mellan: \"Överst\" - en feltext placeras högst upp i frågerutan; \"Nederst\" - en feltext placeras längst ner i frågerutan.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Välj om du vill att det första inmatningsfältet på varje sida ska vara klart för textinmatning.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Visar bokstäver (A, B, C, ...) bredvid val i Radio Button Group, kryssrutor och frågor i Bildväljare. Respondenter kan välja val genom att trycka på motsvarande bokstavstangenter. Du kan åsidosätta denna inställning för enskilda frågor.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Visar bokstäver (A, B, C, ...) bredvid valen och låter respondenter välja dem genom att trycka på motsvarande bokstavstangenter. Alternativet \"Inherit\" använder undersökningsnivåinställningen."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
     // [Auto-translated] "For text entry questions only."

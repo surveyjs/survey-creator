@@ -1201,6 +1201,8 @@ export var nlStrings = {
     questionErrorLocation: "Plek vraagfoutmelding",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Op volgende pagina focus op de eerste vraag zetten",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Schakel keuzesnelkoppelingen in",
     // "Question order"
     questionOrder: "Volgorde elementen op pagina",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var nlStrings = {
     questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Selecteer of u het eerste invoerveld op elke pagina klaar wilt maken voor tekstinvoer.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Toont letters (A, B, C, ...) naast keuzes in Radio Button Group, selectievakjes en vragen in de Image Picker. Respondenten kunnen keuzes selecteren door op de bijbehorende lettertoetsen te drukken. Je kunt deze instelling overschrijven voor individuele vragen.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Toont letters (A, B, C, ...) naast keuzes en laat respondenten deze selecteren door op de bijbehorende lettertoetsen te drukken. De optie \"Inherit\" gebruikt de instelling op enquêteniveau."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
     // [Auto-translated] "For text entry questions only."

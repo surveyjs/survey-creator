@@ -1201,6 +1201,8 @@ export var msStrings = {
     questionErrorLocation: "Lokasi ralat soalan",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Fokus soalan pertama pada perubahan halaman",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Aktifkan pintasan pilihan",
     // "Question order"
     questionOrder: "Susunan elemen pada halaman",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var msStrings = {
     questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Pilih jika anda inginkan medan input pertama pada setiap halaman sedia untuk entri teks.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Memaparkan huruf (A, B, C, ...) di sebelah pilihan dalam soalan Kumpulan Butang Radio, Kotak Semak, dan Pemilih Imej. Responden boleh memilih pilihan dengan menekan kekunci huruf yang sepadan. Anda boleh menggantikan tetapan ini untuk soalan individu.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Memaparkan huruf (A, B, C, ...) di sebelah pilihan dan membolehkan responden memilihnya dengan menekan kekunci huruf yang sepadan. Pilihan \"Warisi\" menggunakan tetapan tahap tinjauan."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Kesan seting ini hanya kelihatan dalam tab Pratonton.",
     // [Auto-translated] "For text entry questions only."

@@ -1201,6 +1201,8 @@ export var indonesianStrings = {
     questionErrorLocation: "Lokasi Pertanyaan Error",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Fokus ke pertanyaan pertama saat pergantian halaman",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Aktifkan pintasan pilihan",
     // "Question order"
     questionOrder: "Urutakan elemen pada halaan",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var indonesianStrings = {
     questionErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan pertanyaan dengan input yang tidak valid. Pilih antara: \"Atas\" - teks kesalahan ditempatkan di bagian atas kotak pertanyaan; \"Bawah\" - teks kesalahan ditempatkan di bagian bawah kotak pertanyaan.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Pilih apakah Anda ingin bidang input pertama pada setiap halaman siap untuk entri teks.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Menampilkan huruf (A, B, C, ...) di samping pilihan dalam pertanyaan Grup Tombol Radio, kotak centang, dan Pemilih Gambar. Responden dapat memilih pilihan dengan menekan tombol huruf yang sesuai. Anda dapat menimpa pengaturan ini untuk pertanyaan individual.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Menampilkan huruf (A, B, C, ...) di samping pilihan dan memungkinkan responden memilihnya dengan menekan tombol huruf yang sesuai. Opsi \"Warisi\" menggunakan pengaturan tingkat survei."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Efek pengaturan ini hanya terlihat di tab Pratinjau.",
     // [Auto-translated] "For text entry questions only."

@@ -1201,6 +1201,8 @@ export var htStrings = {
     questionErrorLocation: "Erè mesaj aliyman",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Konsantre premye kesyon sou yon nouvo paj",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Pèmèt rakoursi chwa",
     // "Question order"
     questionOrder: "Kesyon lòd",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var htStrings = {
     questionErrorLocation: "Mete kote yon mesaj erè an relasyon ak kesyon an ki pa valab. Chwazi ant: \"Top\" - yo mete yon tèks erè nan tèt bwat kesyon an; \"Anba\" - yo mete yon tèks erè nan pati anba bwat kesyon an.",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Chwazi si ou vle premye jaden antre nan chak paj pare pou antre tèks.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Montre lèt(A, B, C, ...) akote chwa nan Gwoup bouton radyo, Checkboxes, ak kesyon Picker Imaj. Moun ki repond yo ka chwazi chwa pa peze kle lèt ki koresponn lan. Ou ka ranplase anviwònman sa a pou kesyon endividyèl yo.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Montre lèt (A, B, C, ...) akote chwa yo epi kite moun ki repond yo chwazi yo pa peze kle lèt ki koresponn lan. Opsyon \"Eritye\" itilize anviwònman sondaj nivo."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Kenbe lòd orijinal la nan kesyon oswa randomize yo. Efè anviwònman sa a vizib sèlman nan tab la Preview.",
     // "For text entry questions only."

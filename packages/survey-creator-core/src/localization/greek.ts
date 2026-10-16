@@ -1201,6 +1201,8 @@ export var grStrings = {
     questionErrorLocation: "Στοίχιση μηνύματος σφάλματος",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Εστίαση στην πρώτη ερώτηση της νέας σελίδας",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Ενεργοποίηση συντομεύσεων επιλογής",
     // "Question order"
     questionOrder: "Σειρά ερωτήσεων",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var grStrings = {
     questionErrorLocation: "Ορίζει την τοποθεσία ενός μηνύματος σφάλματος σε σχέση με την ερώτηση με μη έγκυρη είσοδο. Επιλέξτε μεταξύ: \"Πάνω\" - το κείμενο σφάλματος τοποθετείται στην κορυφή του κουτιού ερώτησης; \"Κάτω\" - το κείμενο σφάλματος τοποθετείται στο κάτω μέρος του κουτιού ερώτησης.",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Επιλέξτε αν θέλετε το πρώτο πεδίο εισαγωγής σε κάθε σελίδα να είναι έτοιμο για είσοδο κειμένου.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Εμφανίζει γράμματα (A, B, C, ...) δίπλα στις επιλογές στην ομάδα κουμπιών επιλογής, στα πλαίσια ελέγχου και στις ερωτήσεις επιλογής εικόνας. Οι ερωτηθέντες μπορούν να επιλέξουν επιλογές πατώντας τα αντίστοιχα πλήκτρα γραμμάτων. Μπορείτε να παρακάμψετε αυτήν τη ρύθμιση για μεμονωμένες ερωτήσεις.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Εμφανίζει γράμματα (A, B, C, ...) δίπλα στις επιλογές και επιτρέπει στους ερωτηθέντες να τα επιλέξουν πατώντας τα αντίστοιχα πλήκτρα γραμμάτων. Η επιλογή \"Μεταβίβαση\" χρησιμοποιεί τη ρύθμιση σε επίπεδο έρευνας."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Διατηρεί την αρχική σειρά των ερωτήσεων ή τις τυχαία ανακατεύει. Η επίδραση αυτής της ρύθμισης είναι ορατή μόνο στην καρτέλα Προεπισκόπηση.",
     // "For text entry questions only."

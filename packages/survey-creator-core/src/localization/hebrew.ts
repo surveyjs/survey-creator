@@ -1201,6 +1201,8 @@ export var hebrewStrings = {
     questionErrorLocation: "מיקום הודעת השגיאה",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "התמקד על השאלה הראשונה בעמוד חדש",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "הפעלת קיצורי דרך לבחירה",
     // "Question order"
     questionOrder: "סדר הרכיבים בעמוד",
     // "Time limit to complete the survey"
@@ -2939,6 +2941,12 @@ export var hebrewStrings = {
     questionErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "בחר אם ברצונך ששדה הקלט הראשון בכל עמוד יהיה מוכן להזנת טקסט.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "מציג אותיות (A, B, C, ...) לצד בחירות בקבוצת כפתורי הרדיו, תיבות סימון ושאלות ב-Image Picker. המשיבים יכולים לבחור בחירות על ידי לחיצה על מקשי האותיות המתאימים. ניתן לעקוף הגדרה זו עבור שאלות בודדות.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "מציג אותיות (A, B, C, ...) ליד הבחירות ומאפשר למשיבים לבחור אותן על ידי לחיצה על מקשי האותיות המתאימים. אפשרות \"ירושה\" משתמשת בהגדרת רמת הסקר."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
     // [Auto-translated] "For text entry questions only."

@@ -475,6 +475,36 @@ test("item value adorner and newItem value", () => {
   expect(question.newItem.value).toEqual("Item 1");
 });
 
+test("placeholder choices are hidden while the question choices cannot be modified", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onPropertyGetReadOnly.add((sender, options) => {
+    if (readOnly && options.propertyName === "choices") options.readOnly = true;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3], showOtherItem: true }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, undefined as any);
+  const placeholders = [question.newItem, question.noneItem, question.selectAllItem];
+  const allVisible = question.visibleChoices.length;
+  placeholders.forEach((item) => expect(question.visibleChoices).toContain(item));
+
+  // The visible choices are recalculated when the choices change; a caller
+  // that changes the permissions recalculates them itself.
+  readOnly = true;
+  question["onVisibleChoicesChanged"]();
+  placeholders.forEach((item) => expect(question.visibleChoices).not.toContain(item));
+  expect(question.visibleChoices).toContain(question.otherItem);
+  expect(question.visibleChoices).toContain(question.choices[0]);
+
+  readOnly = false;
+  question["onVisibleChoicesChanged"]();
+  expect(question.visibleChoices).toHaveLength(allVisible);
+
+  questionAdorner.dispose();
+});
+
 test("QuestionRatingAdornerViewModel read only mode", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -939,6 +969,27 @@ test("remove() and ", () => {
   newItemAdorner.remove(newItemAdorner);
   expect(question.choices).toHaveLength(2);
 });
+test("item value remove() and add() do nothing without the permission", () => {
+  const creator = new CreatorTester();
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const noneAdorner = new ItemValueWrapperViewModel(creator, question, question.noneItem);
+  const newItemAdorner = new ItemValueWrapperViewModel(creator, question, question.newItem);
+
+  itemAdorner.remove(itemAdorner);
+  expect(question.choices.map((item) => item.value)).toEqual([1, 2, 3]);
+  newItemAdorner.add(newItemAdorner);
+  expect(question.choices.map((item) => item.value)).toEqual([1, 2, 3]);
+  noneAdorner.add(noneAdorner);
+  expect(question.showNoneItem).toBeFalsy();
+});
+
 test("Do not select choices if a question in a matrix mode (popup in our case) ", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -981,6 +1032,28 @@ test("Refuse and Don't know items", () => {
   expect(q1.showDontKnowItem).toBeTruthy();
   dontKnowItemAdorner.remove(dontKnowItemAdorner);
   expect(q1.showDontKnowItem).toBeFalsy();
+});
+
+test("ImageItemValueWrapperViewModel remove action follows allowRemove", () => {
+  const creator = new CreatorTester();
+  creator.minChoices = 2;
+  creator.onCollectionItemAllowOperations.add((sender, options) => {
+    if (options.item.value === "b") options.allowDelete = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", choices: [
+      { value: "a", imageLink: "a.png" }, { value: "b", imageLink: "b.png" }, { value: "c", imageLink: "c.png" }
+    ] }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const adorners = question.choices.map((item) => new ImageItemValueWrapperViewModel(creator, question, item, undefined, {} as HTMLElement));
+  const removeVisible = () => adorners.map((adorner) => adorner.topActionsContainer.getActionById("remove").visible);
+  expect(removeVisible(), "allowDelete: false hides it").toEqual([true, false, true]);
+
+  question.choices.splice(2, 1);
+  expect(removeVisible().slice(0, 2), "minChoices reached").toEqual([false, false]);
+
+  adorners.forEach((adorner) => adorner.dispose());
 });
 
 test("ImageItemValueWrapperViewModel isUploading", () => {
