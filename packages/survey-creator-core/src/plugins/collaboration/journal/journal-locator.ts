@@ -69,6 +69,13 @@ export function findStep(owner: any, child: any): { property: string, index: num
   return null;
 }
 
+// A choice item's detail section is a runtime panel: it is not in its
+// `parent`'s elements (that parent is the owner question's container), and its
+// content is serialized as the item's `elements` - address it as the item.
+function addressableObj(obj: any): any {
+  return !!obj && obj.isPanel === true && !!obj["choiceItem"] ? obj["choiceItem"] : obj;
+}
+
 // Builds a JSON-Pointer-style path (RFC 6901 syntax) for a survey object, or
 // returns `null` when the object cannot be addressed (the caller should
 // degrade to a whole-property value or a full snapshot).
@@ -87,9 +94,9 @@ export function buildLocator(obj: any, survey: SurveyModel): JournalLocator {
   // and the change is captured after the fact).
   if (obj.isPage === true && !!obj["name"]) return "/pages/" + escapeSegment(String(obj["name"]));
   const segments: Array<string> = [];
-  let current = obj;
+  let current = addressableObj(obj);
   for (let guard = 0; guard < 20; guard++) {
-    const owner = getOwner(current);
+    const owner = addressableObj(getOwner(current));
     if (!owner) return null;
     const step = findStep(owner, current);
     if (!step) return null;
@@ -121,6 +128,13 @@ export function resolveLocator(locator: JournalLocator, survey: SurveyModel): an
     obj = Array.isArray(obj) ? selectFromArray(obj, segments[i]) : obj[segments[i]];
   }
   return obj || null;
+}
+
+// Resolves the element container a locator addresses: a choice item stands for
+// its detail section (see `addressableObj`), which is what holds the elements.
+export function resolveElementContainer(locator: JournalLocator, survey: SurveyModel): any {
+  const obj = resolveLocator(locator, survey);
+  return !!obj && typeof obj.isDescendantOf === "function" && obj.isDescendantOf("choiceitem") ? obj.panel : obj;
 }
 
 function selectFromArray(array: Array<any>, segment: string): any {

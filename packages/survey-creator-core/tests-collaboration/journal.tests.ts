@@ -1,6 +1,7 @@
 import { ItemValue, QuestionDropdownModel, QuestionTextModel } from "survey-core";
 import { CreatorTester } from "../tests/creator-tester";
 import { CollaborationPlugin } from "../src/plugins/collaboration";
+import { buildLocator, resolveLocator } from "../src/plugins/collaboration/journal/journal-locator";
 import { IJournalArrayChangedPayload, IJournalElementMovedPayload, IJournalPropertyChangedPayload, JOURNAL_VERSION, JournalOp, JournalSyncError } from "../src/plugins/collaboration/journal/journal-record";
 
 const initialJSON = {
@@ -568,4 +569,51 @@ test("journal: dispose does not steal a validity callback installed by someone e
   creator.undoRedoManager.isTransactionValidCallback = foreign;
   plugin.dispose();
   expect(creator.undoRedoManager.isTransactionValidCallback).toBe(foreign);
+});
+
+// A choice item's detail section is a runtime panel: its content is serialized
+// as the item's `elements`, so that is where its paths go.
+const choicePanelJSON = {
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "checkbox", name: "q5", choices: [{ value: 1, elements: [{ type: "text", name: "q6" }] }, 2] }
+      ]
+    }
+  ]
+};
+
+test("journal: content of a choice detail section is addressed through its choice item", (): any => {
+  const { a } = createPair(choicePanelJSON);
+  const q5: any = a.survey.getQuestionByName("q5");
+  const q6 = a.survey.getQuestionByName("q6");
+  expect(buildLocator(q6, a.survey)).toEqual("/pages/page1/elements/q5/choices/1/elements/q6");
+  expect(resolveLocator("/pages/page1/elements/q5/choices/1/elements/q6", a.survey)).toBe(q6);
+  expect(buildLocator(q5.choices[0].panel, a.survey)).toEqual("/pages/page1/elements/q5/choices/1");
+});
+
+test("journal: an edit inside a choice detail section is recorded at its own path", (): any => {
+  const { a, pluginA, sync, expectInSync } = createPair(choicePanelJSON);
+  a.survey.getQuestionByName("q6").title = "Nested";
+  expect(pluginA.records).toHaveLength(1);
+  expect(pluginA.records[0].op).toEqual(JournalOp.PropertyChanged);
+  expect((<IJournalPropertyChangedPayload>pluginA.records[0].payload).target).toEqual("/pages/page1/elements/q5/choices/1/elements/q6/title");
+  sync();
+  expectInSync();
+});
+
+test("journal: adding into a choice detail section changes the item's elements", (): any => {
+  const { a, pluginA, b, sync, expectInSync } = createPair(choicePanelJSON);
+  // The second choice has no content yet: the receiver creates its panel on apply.
+  (<any>a.survey.getQuestionByName("q5")).choices[1].panel.addNewQuestion("text", "q8");
+  expect(pluginA.records).toHaveLength(1);
+  expect(pluginA.records[0].op).toEqual(JournalOp.ArrayChanged);
+  const payload = <IJournalArrayChangedPayload>pluginA.records[0].payload;
+  expect(payload.target).toEqual("/pages/page1/elements/q5/choices/2/elements");
+  expect(payload.fullValue).toBeUndefined();
+  sync();
+  expectInSync();
+  expect(b.survey.getQuestionByName("q8").parentQuestion).toBe(b.survey.getQuestionByName("q5"));
 });

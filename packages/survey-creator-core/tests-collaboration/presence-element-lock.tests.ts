@@ -2,6 +2,7 @@ import { CreatorTester } from "../tests/creator-tester";
 import { IPresencePeerEntry, IPresenceState } from "../src/plugins/collaboration/presence";
 import { CollaborationPlugin } from "../src/plugins/collaboration";
 import { buildLocator } from "../src/plugins/collaboration/journal/journal-locator";
+import { PanelAdornerViewModel } from "../src/components/panel";
 
 // ElementLockGuard: a question/panel a remote participant holds (selected on
 // the designer, `lock: true` in presence) is read-only for everyone else.
@@ -20,17 +21,35 @@ const initialJSON = {
   ]
 };
 
+// A choice with a detail section (nested content) and a matrix with a detail
+// panel: their content lives in embedded panels, not in the page.
+const nestedJSON = {
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "checkbox", name: "q5", choices: [{ value: 1, elements: [{ type: "text", name: "q6" }] }, 2] },
+        { type: "matrixdynamic", name: "m1", columns: [{ name: "col1" }], detailPanelMode: "underRow", detailElements: [{ type: "text", name: "q7" }] }
+      ]
+    }
+  ]
+};
+
 const LOC: { [name: string]: string } = {
   q1: "/pages/page1/elements/q1",
   q2: "/pages/page1/elements/q2",
   panel1: "/pages/page1/elements/panel1",
   q3: "/pages/page1/elements/panel1/elements/q3",
-  page1: "/pages/page1"
+  page1: "/pages/page1",
+  q5: "/pages/page1/elements/q5",
+  q6: "/pages/page1/elements/q5/choices/1/elements/q6",
+  m1: "/pages/page1/elements/m1"
 };
 
-function createCreator(localId: string = "b"): { creator: CreatorTester, plugin: CollaborationPlugin } {
+function createCreator(localId: string = "b", json: any = initialJSON): { creator: CreatorTester, plugin: CollaborationPlugin } {
   const creator = new CreatorTester();
-  creator.JSON = initialJSON;
+  creator.JSON = json;
   const plugin = new CollaborationPlugin(creator, { bar: false });
   creator.addPlugin("collaboration", plugin);
   plugin.setClientId(localId);
@@ -364,5 +383,126 @@ test("element lock: a tab switch releases the claim", (): any => {
     expect(plugin.getState().lock).toBe(true);
   } finally {
     plugin.dispose();
+  }
+});
+
+const dropInto = (creator: CreatorTester) => (options: any): boolean => {
+  const o = { allow: true, ...options };
+  creator.onDragDropAllow.fire(creator, o);
+  return o.allow;
+};
+
+test("element lock: a held selectbase locks the content of its choice detail sections", (): any => {
+  const { creator, plugin } = createCreator("b", nestedJSON);
+  try {
+    plugin.upsertPeer(peer("a", "q5"));
+    const item = q(creator, "q5").choices[0];
+    const q6 = q(creator, "q6");
+    expect(q6.parent).toBe(item.panel);
+    expect(plugin.presence.lockGuard.getLockOwner(q6)?.name).toEqual("User a");
+    expect(creator.isCanModifyProperty(q6, "title")).toBe(false);
+    expect(creator.getElementAllowOperations(q6).allowDelete).toBe(false);
+    // The section itself: no "Add Question" in it.
+    expect(creator.getElementAllowOperations(item.panel).allowEdit).toBe(false);
+    const drop = dropInto(creator);
+    expect(drop({ draggedElement: q(creator, "q1"), toElement: item.panel })).toBe(false);
+    expect(drop({ draggedElement: q(creator, "q1"), toElement: q6, insertAfter: q6 })).toBe(false);
+    expect(drop({ draggedElement: q6, toElement: q(creator, "q1"), insertAfter: q(creator, "q1") })).toBe(false);
+  } finally {
+    plugin.dispose();
+  }
+});
+
+test("element lock: the add-question button of an open detail section follows the lock", (): any => {
+  const { creator, plugin } = createCreator("b", nestedJSON);
+  const item = q(creator, "q5").choices[0];
+  const adorner = new PanelAdornerViewModel(creator, item.panel, undefined as any);
+  try {
+    expect(adorner.showAddQuestionButton).toBe(true);
+    plugin.upsertPeer(peer("a", "q5"));
+    expect(adorner.showAddQuestionButton).toBe(false);
+    plugin.removePeer("a");
+    expect(adorner.showAddQuestionButton).toBe(true);
+  } finally {
+    adorner.dispose();
+    plugin.dispose();
+  }
+});
+
+test("element lock: undo of a step inside a held selectbase's detail section waits", (): any => {
+  const { creator, plugin } = createCreator("b", nestedJSON);
+  try {
+    q(creator, "q6").title = "Edited";
+    q(creator, "q5").choices[1].panel.addNewQuestion("text", "q8");
+    creator.selectElement(q(creator, "q1"));
+    plugin.upsertPeer(peer("a", "q5"));
+    creator.undo();
+    expect(q(creator, "q8")).toBeTruthy();
+    creator.undo();
+    expect(q(creator, "q6").title).toEqual("Edited");
+  } finally {
+    plugin.dispose();
+  }
+});
+
+test("element lock: the caret is refused inside a nested question of a held selectbase", (): any => {
+  const { plugin } = createCreator("b", nestedJSON);
+  const adorner = document.createElement("div");
+  adorner.setAttribute("data-sv-drop-target-survey-element", "q6");
+  const editor = document.createElement("span");
+  editor.className = "svc-string-editor";
+  const input = document.createElement("input");
+  editor.appendChild(input);
+  adorner.appendChild(editor);
+  document.body.appendChild(adorner);
+  try {
+    let blurred = 0;
+    input.blur = () => { blurred++; };
+    plugin.upsertPeer(peer("a", "q5"));
+    input.dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
+    expect(blurred).toEqual(1);
+  } finally {
+    adorner.remove();
+    plugin.dispose();
+  }
+});
+
+test("element lock: a held matrix locks the content of its detail panel", (): any => {
+  const { creator, plugin } = createCreator("b", nestedJSON);
+  try {
+    plugin.upsertPeer(peer("a", "m1"));
+    const detailPanel = q(creator, "m1").detailPanel;
+    const q7 = detailPanel.getQuestionByName("q7");
+    expect(creator.isCanModifyProperty(q7, "title")).toBe(false);
+    expect(creator.getElementAllowOperations(detailPanel).allowEdit).toBe(false);
+  } finally {
+    plugin.dispose();
+  }
+});
+
+test("element lock: a question inside a detail section is claimed and keeps its owner in place", (): any => {
+  const holder = createCreator("a", nestedJSON);
+  const viewer = createCreator("b", nestedJSON);
+  // jsdom renders no creator root: the holder is on the designer by construction.
+  holder.plugin.onStateChanged.add((_, o) => viewer.plugin.upsertPeer({
+    clientId: "a", name: "User a", state: { ...JSON.parse(JSON.stringify(o.state)), tab: "designer" }
+  }));
+  try {
+    holder.creator.selectElement(q(holder.creator, "q6"));
+    expect(holder.plugin.getState().sel?.loc).toEqual(LOC.q6);
+    expect(holder.plugin.getState().lock).toBe(true);
+    expect(viewer.plugin.presence.lockGuard.isLocked(q(viewer.creator, "q6"))).toBe(true);
+    // The owner is not held, but it cannot be deleted, moved or converted
+    // from under q6 - and selecting it does not claim it.
+    const owner = q(viewer.creator, "q5");
+    expect(viewer.creator.isCanModifyProperty(owner, "title")).toBe(true);
+    const ops = viewer.creator.getElementAllowOperations(owner);
+    expect(ops.allowDelete).toBe(false);
+    expect(ops.allowChangeType).toBe(false);
+    viewer.creator.selectElement(owner);
+    expect(viewer.plugin.getState().lock).toBe(false);
+  } finally {
+    holder.plugin.dispose();
+    viewer.plugin.dispose();
   }
 });

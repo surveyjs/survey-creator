@@ -1055,3 +1055,63 @@ test("journal-sync: a composite added into a remotely created panel is painted o
     ComponentCollection.Instance.remove(COMPOSITE_TYPE);
   }
 });
+
+const choicePanelJSON = {
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "checkbox", name: "q5", choices: [{ value: 1, elements: [{ type: "text", name: "q6" }] }, 2] }
+      ]
+    }
+  ]
+};
+// A record that rewrites a whole array (or the survey) stands in for one the
+// recorder could not address - it clobbers the peers' concurrent edits.
+const expectAddressed = (records: Array<IJournalRecord>): void => {
+  records.forEach((record) => {
+    expect(record.op).not.toEqual(JournalOp.FullSnapshot);
+    expect((<any>record.payload).fullValue).toBeUndefined();
+  });
+};
+
+test("journal-sync: choice detail section - add, edit and delete propagate to the peer", () => {
+  const { creatorA, creatorB, pluginA } = makeCreators(choicePanelJSON);
+  (<any>creatorA.survey.getQuestionByName("q5")).choices[1].panel.addNewQuestion("text", "q8");
+  expect(creatorB.survey.getQuestionByName("q8")).toBeTruthy();
+  creatorA.survey.getQuestionByName("q8").title = "Eight";
+  expect(creatorB.survey.getQuestionByName("q8").title).toEqual("Eight");
+  creatorA.deleteElement(creatorA.survey.getQuestionByName("q6"));
+  expect(creatorB.survey.getQuestionByName("q6")).toBeFalsy();
+  expect(creatorB.JSON).toEqual(creatorA.JSON);
+  expectAddressed(pluginA.records);
+});
+
+test("journal-sync: choice detail section - undo/redo of a nested add round-trips on the peer", () => {
+  const { creatorA, creatorB, pluginA } = makeCreators(choicePanelJSON);
+  (<any>creatorA.survey.getQuestionByName("q5")).choices[0].panel.addNewQuestion("text", "q8");
+  expect(creatorB.survey.getQuestionByName("q8")).toBeTruthy();
+  creatorA.undo();
+  expect(creatorB.survey.getQuestionByName("q8")).toBeFalsy();
+  creatorA.redo();
+  expect(creatorB.survey.getQuestionByName("q8")).toBeTruthy();
+  expect(creatorB.JSON).toEqual(creatorA.JSON);
+  expectAddressed(pluginA.records);
+});
+
+test("journal-sync: a move into a choice detail section travels as one record, the peer keeps its instance", () => {
+  const { creatorA, creatorB, pluginA } = makeCreators(choicePanelJSON);
+  const qB = creatorB.survey.getQuestionByName("q1");
+  const q = creatorA.survey.getQuestionByName("q1");
+  const panelA = (<any>creatorA.survey.getQuestionByName("q5")).choices[0].panel;
+  creatorA.startUndoRedoTransaction("drag drop");
+  creatorA.survey.pages[0].elements.splice(0, 1);
+  panelA.elements.splice(1, 0, q);
+  creatorA.stopUndoRedoTransaction();
+  expect(pluginA.records).toHaveLength(1);
+  expect(pluginA.records[0].op).toEqual(JournalOp.ElementMoved);
+  expect(creatorB.JSON).toEqual(creatorA.JSON);
+  expect(creatorB.survey.getQuestionByName("q1")).toBe(qB);
+  expect(qB.parentQuestion).toBe(creatorB.survey.getQuestionByName("q5"));
+});
