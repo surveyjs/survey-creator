@@ -52,6 +52,14 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     this.initFilePresentationModel();
   }
 
+  protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
+    super.updateElementAllowOptions(options, operationsAllow);
+    // The first call comes from the base constructor, before the model exists.
+    if (this.filePresentationModel) {
+      this.filePresentationModel.forceIsInputReadOnly = !this.creator.isCanModifyProperty(this.question, "imageLink");
+    }
+  }
+
   protected detachElement(surveyElement: SurveyElement): void {
     if (surveyElement) {
       surveyElement.unRegisterFunctionOnPropertyValueChanged("imageLink", "imageLinkValueChanged");
