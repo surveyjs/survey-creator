@@ -294,6 +294,41 @@ export var enStrings = {
     listNameColumn: "Preset",
     listDescriptionColumn: "Description"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    title: "Expression Assistant",
+    actionTitle: "Write with AI",
+    promptTitle: "Describe what the expression should do",
+    promptPlaceholder: "For example: show this question when the respondent is 18 or older",
+    promptLineTitle: "Describe the condition in words",
+    generate: "Generate",
+    refine: "Refine",
+    explain: "Explain",
+    stop: "Stop",
+    accept: "Accept",
+    reject: "Reject",
+    applyFix: "Apply fix: {0}",
+    currentExpression: "Current expression",
+    newExpression: "Suggested expression",
+    readsAs: "Reads as",
+    explanation: "The assistant's explanation",
+    findings: "Check results",
+    severityError: "Error",
+    severityWarning: "Warning",
+    severityInfo: "Info",
+    inAction: "in \"{0}\"",
+    statusReady: "Describe the expression and select Generate.",
+    statusLoading: "Waiting for the assistant...",
+    statusCancelled: "The request was cancelled.",
+    statusError: "The assistant reported: {0}",
+    statusEmpty: "The assistant did not suggest an expression.",
+    statusReview: "Review the suggested expression.",
+    statusExplained: "The assistant explained the current expression.",
+    blockedByErrors: "The suggested expression has errors and cannot be accepted.",
+    notChecked: "The suggested expression could not be checked for every place it is written to, so it cannot be accepted.",
+    noActions: "Add an action to the rule before asking the assistant.",
+    fixedAutomatically: "The first suggestion had errors and was corrected automatically."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -2082,6 +2117,9 @@ export var enStrings = {
         notABoolean: "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no.",
         meaninglessFragment: "Part of the {prop} \"{expression}\" has a result that is known upfront.",
         alwaysTrueViaConstants: "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing.",
+      },
+      "expression/no-reference": {
+        noReference: "The {prop} \"{expression}\" does not read any question or variable.",
       },
       "value/not-a-choice": {
         defaultValue: "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}.",

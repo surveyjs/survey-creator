@@ -254,6 +254,16 @@ export class SurveyLogicUI extends SurveyLogic {
       res.expressionEditor.onContextChanged = (context: Question): void => {
         res.itemEditor.context = context;
       };
+      // the expression assistant checks a result against what saving this rule writes
+      res.expressionEditor.getExpressionCheckInput = () => res.itemEditor.getExpressionCheckInput();
+      res.expressionEditor.getExpressionDisplayText = (expression: string): string => {
+        const text = this.getExpressionAsDisplayText(expression);
+        return !!this.options ? this.options.onLogicGetTitleCallback(expression, text, text, item) : text;
+      };
+      res.expressionEditor.onExpressionAssistantAccepted = (isTextEditor: boolean): void => {
+        this.expressionEditorIsFastEntry = isTextEditor;
+        this.expressionEditorCanShowBuilder = ConditionEditor.canBuildExpression(res.expressionEditor.text);
+      };
       this.itemUIHash[item.id] = res;
     }
     return res;

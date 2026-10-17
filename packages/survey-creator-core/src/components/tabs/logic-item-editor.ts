@@ -1,4 +1,4 @@
-import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement, defaultCss } from "survey-core";
+import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement, defaultCss, Serializer } from "survey-core";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyEditorSetupValue } from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -10,6 +10,7 @@ import { copyCssClasses } from "../../utils/utils";
 import { assignDefaultClasses } from "../../utils/creator-utils";
 import { QuestionLinkValueModel } from "../../components/link-value";
 import { LogicActionModelBase, LogicActionModel, LogicActionTriggerModel } from "./logic-actions-model";
+import { IExpressionCheckPending, IExpressionSite } from "../../expression-assistant/expression-check";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 
 function logicTypeVisibleIf(params: any): boolean {
@@ -230,6 +231,49 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
     this.resetModified();
     return true;
+  }
+  // Where saving the rule writes its expression, and what else saving changes, read without saving:
+  // the same decisions apply() and SurveyLogicItem.apply() make. Unlike getEditingActions(), it
+  // writes nothing - not into an existing trigger, not into the survey. A rule with no action yet
+  // has no site, and its expression cannot be checked.
+  public getExpressionCheckInput(): { sites: Array<IExpressionSite>, pending: IExpressionCheckPending } {
+    const sites: Array<IExpressionSite> = [];
+    const removed: Array<SurveyLogicAction> = this.editableItem.getRemovedActions();
+    const kept: Array<SurveyLogicAction> = [];
+    this.panels.forEach(panel => {
+      const actionModel = this.getActionModelByPanel(panel);
+      if (!actionModel) return;
+      const info = actionModel.getExpressionCheckInfo();
+      const initial = actionModel.initialLogicAction;
+      if (!!initial) {
+        (info.keepsInitial ? kept : removed).push(initial);
+      }
+      if (!!info.site) sites.push(info.site);
+    });
+    // an action no panel shows keeps its place and gets the expression too
+    this.editableItem.actions.forEach(action => {
+      if (kept.indexOf(action) > -1 || removed.indexOf(action) > -1) return;
+      if (!action.element || !action.logicType) return;
+      sites.push({ obj: action.element, propertyName: action.logicType.propertyName });
+    });
+    const pending: IExpressionCheckPending = { cleared: [], removed: [] };
+    removed.forEach(action => {
+      const el = action.element;
+      if (!el || !action.logicType || pending.removed.indexOf(el) > -1) return;
+      // SurveyLogicAction.apply(""): a trigger or a completedHtmlOnCondition item leaves its
+      // collection, anything else loses the property - a set-value action its setValueExpression too
+      const type = el.getType();
+      if (Serializer.isDescendantOf(type, "surveytrigger") || Serializer.isDescendantOf(type, "expressionitem")) {
+        pending.removed.push(el);
+        return;
+      }
+      const propertyName = action.logicType.propertyName;
+      pending.cleared.push({ obj: el, propertyName: propertyName,
+        siblings: propertyName === "setValueIf" ? { setValueExpression: "" } : undefined });
+    });
+    const expression = this.editableItem.expression || "";
+    sites.forEach(site => site.currentExpression = expression);
+    return { sites: sites, pending: pending };
   }
   public getEditingActions(): Array<SurveyLogicAction> {
     return this.panels.map(panel => {
