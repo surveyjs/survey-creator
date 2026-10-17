@@ -244,6 +244,35 @@ function describeMatrixEntry(variable: IExpressionVariable, matrix: any, cellQue
   if (!!page) variable.page = page; else delete variable.page;
 }
 
+// A row entry of a single-choice matrix ("quality.durability") holds the answer in that row: one
+// column value, or several for cellType "checkbox". Described as the select question it amounts to,
+// the way survey-core builds one for the row (QuestionMatrixModel: isMultiSelect ? "checkbox" : "radiogroup").
+function isMatrixRowEntry(matrix: any, name: string): boolean {
+  if (!matrix || matrix.getType() !== "matrix") return false;
+  const prefix = (matrix.getValueName() || "").toLowerCase() + ".";
+  const key = name.toLowerCase();
+  return key.indexOf(prefix) === 0 && key.length > prefix.length;
+}
+
+function describeMatrixRowEntry(variable: IExpressionVariable, matrix: any): void {
+  // the entry's title as QuestionMatrixModel.addConditionObjectsByContext spells it, whatever the
+  // editor shows (settings.logic.showTitlesInExpressions)
+  const rowKey = variable.name.substring(matrix.getValueName().length + 1).toLowerCase();
+  const row: any = (matrix.rows || []).filter((item: ItemValue) => String(item.value).toLowerCase() === rowKey)[0];
+  if (!!row) {
+    const title = matrix.processedTitle + "." + row.calculatedText;
+    if (title !== variable.name) variable.title = title;
+  }
+  const columns: Array<ItemValue> = matrix.columns || [];
+  variable.type = matrix.isMultiSelect ? "checkbox" : "radiogroup";
+  const isNumeric = columns.length > 0 && columns.every(col => typeof col.value === "number");
+  variable.valueType = matrix.isMultiSelect ? "array" : isNumeric ? "number" : "string";
+  const page = getPageName(matrix);
+  if (!!page) variable.page = page;
+  const choices = toChoices(columns);
+  if (!!choices && choices.length > 0) variable.choices = choices;
+}
+
 function getSignature(reg: IFunctionRegistration): string {
   if (!Array.isArray(reg.parameters)) return undefined;
   const params = reg.parameters.map(p => (p.isRest ? "..." : "") + p.name + (p.optional ? "?" : "") + (!!p.type ? ": " + p.type : ""));
@@ -416,6 +445,7 @@ function buildVariables(creator: SurveyCreatorModel, sites: Array<IExpressionSit
     if (kind === "question") {
       const cellQuestion = !!entry.question ? getMatrixEntryCellQuestion(entry.question, name) : undefined;
       if (!!cellQuestion) describeMatrixEntry(variable, entry.question, cellQuestion);
+      else if (isMatrixRowEntry(entry.question, name)) describeMatrixRowEntry(variable, entry.question);
       else describeQuestion(variable, entry.question);
     }
     if (kind === "hostVariable") {

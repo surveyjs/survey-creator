@@ -511,6 +511,68 @@ describe("Matrices and dynamic panels in the AI context (ai-expressions)", () =>
   });
 });
 
+describe("Single-choice matrix rows in the AI context (ai-expressions)", () => {
+  const qualityJson = {
+    pages: [
+      { name: "p1", elements: [{ type: "text", name: "note" }] },
+      {
+        name: "p2", elements: [
+          {
+            type: "matrix", name: "quality", title: "Quality",
+            columns: [{ value: "bad", text: "Bad" }, { value: "good", text: "Good" }],
+            rows: [{ value: "price", text: "Price" }, { value: "durability", text: "Durability" }],
+          },
+          { type: "matrix", name: "score", columns: [1, 2, 3], rows: ["r1"] },
+          { type: "matrix", name: "features", cellType: "checkbox", columns: ["a", "b"], rows: ["r1"] },
+        ],
+      },
+    ],
+  };
+  function variable(context: IExpressionContext, name: string): any {
+    return context.variables.filter(v => v.name === name)[0];
+  }
+
+  test("a row entry is the answer in that row: one value, the columns as its choices, no rows", () => {
+    const creator = createCreator(qualityJson);
+    const context = contextFor(creator, [questionSite(creator, "note")]);
+    expect(variable(context, "quality.durability")).toEqual({
+      name: "quality.durability", title: "Quality.Durability", kind: "question", type: "radiogroup", valueType: "string", page: "p2",
+      choices: [{ value: "bad", text: "Bad" }, { value: "good", text: "Good" }],
+    });
+    // the whole matrix is still no container of its own
+    expect(names(context)).not.toContain("quality");
+  });
+  test("numeric column values give a number", () => {
+    const creator = createCreator(qualityJson);
+    const score = variable(contextFor(creator, [questionSite(creator, "note")]), "score.r1");
+    expect(score.type).toBe("radiogroup");
+    expect(score.valueType).toBe("number");
+    expect(score.choices.map(c => c.value)).toEqual([1, 2, 3]);
+    expect(score.rows).toBeUndefined();
+  });
+  test("a checkbox matrix row holds several answers", () => {
+    const creator = createCreator(qualityJson);
+    const features = variable(contextFor(creator, [questionSite(creator, "note")]), "features.r1");
+    expect(features.type).toBe("checkbox");
+    expect(features.valueType).toBe("array");
+    expect(features.choices.map(c => c.value)).toEqual(["a", "b"]);
+    expect(features.rows).toBeUndefined();
+  });
+  test("the check accepts a row comparison, and the runtime evaluates it", () => {
+    const creator = createCreator(qualityJson);
+    expect(checkExpression(creator, "{quality.durability} = 'bad'", [questionSite(creator, "note")]).findings).toEqual([]);
+    const survey = new SurveyModel({
+      elements: [qualityJson.pages[1].elements[0], { type: "text", name: "note", visibleIf: "{quality.durability} = 'bad'" }],
+    });
+    const note = survey.getQuestionByName("note");
+    expect(note.isVisible).toBe(false);
+    survey.setValue("quality", { price: "good", durability: "bad" });
+    expect(note.isVisible).toBe(true);
+    survey.setValue("quality", { price: "bad", durability: "good" });
+    expect(note.isVisible).toBe(false);
+  });
+});
+
 describe("The target's title in the AI context (ai-expressions)", () => {
   test("a title that differs from the name is passed; a name-only object has none", () => {
     const creator = createCreator({
