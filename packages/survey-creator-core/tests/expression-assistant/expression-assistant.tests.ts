@@ -313,6 +313,32 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     assistant.refine("y");
     expect(counter).toBe(2);
   });
+  test("a negate(...) answer calls an unknown function: a fix request follows and Accept is blocked", () => {
+    const { creator, requests } = createCreator();
+    const assistant = createAssistant(creator);
+    assistant.generate("not apple");
+    requests[0].callback({ expression: "negate({fruit} = 'apple')", explanation: "Not apple." });
+    expect(requests).toHaveLength(2);
+    expect(requests[1].kind).toBe("fix");
+    expect(requests[1].findings.map(f => f.ruleId)).toContain("expression/unknown-function");
+    expect(requests[1].findings.filter(f => f.ruleId === "expression/unknown-function")[0].severity).toBe("error");
+    requests[1].callback({ expression: "negate({fruit} = 'apple')", explanation: "Not apple." });
+    expect(assistant.status).toBe("review");
+    expect(assistant.canAccept).toBe(false);
+    assistant.refine("not apple, please");
+    requests[2].callback({ expression: "!({fruit} = 'apple')", explanation: "Not apple." });
+    expect(assistant.canAccept).toBe(true);
+  });
+  test("a host that lowers unknown-function to a warning gets no fix request for it", () => {
+    const { creator, requests } = createCreator();
+    creator.onLintSurvey.add((_, options) => { options.lintOptions.rules["expression/unknown-function"] = "warning"; });
+    const assistant = createAssistant(creator);
+    assistant.generate("not apple");
+    requests[0].callback({ expression: "negate({fruit} = 'apple')", explanation: "Not apple." });
+    expect(requests).toHaveLength(1);
+    expect(assistant.checkResult.findings.filter(f => f.ruleId === "expression/unknown-function")[0].severity).toBe("warning");
+    expect(assistant.canAccept).toBe(true);
+  });
   test("a name the host removes in onLintSurvey is neither offered nor accepted", () => {
     const { creator, requests } = createCreator();
     creator.variablePresets = { presets: [{ name: "p1", variables: { tier: "gold" } }] };
@@ -539,6 +565,11 @@ describe("The expression assistant: a condition that reads nothing (ai-expressio
 
 describe("The expression assistant: the instruction Creator writes (ai-expressions)", () => {
   const emptyOption = "If the request cannot be expressed with the listed variables and functions, return an empty expression and say why in the explanation.";
+  const modifyRules = "The request may describe a problem with the current expression (for example, that the question never shows) rather than a change. " +
+    "Then return the corrected expression that does what the author intended, not one that reproduces the problem. " +
+    "Keep the meaning of every part the request does not change. " +
+    "If the current expression relies on and binding tighter than or, keep that grouping and write the parentheses out. " +
+    "If you change the meaning of a part the author did not mention, say so in the explanation.";
   test("generate, then fix with the findings, then refine: the instruction and the messages of each request", () => {
     const { creator, requests } = createCreator();
     const assistant = createAssistant(creator);
@@ -559,7 +590,8 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
 
     requests[1].callback({ expression: "{fruit} = 'apple'" });
     assistant.refine("or banana");
-    const modify = "Current expression:\n{fruit} = 'apple'\n\nChange it as follows:\nor banana\n\n" + emptyOption;
+    // a refine of a result is a modify: it gets the same rules
+    const modify = "Current expression:\n{fruit} = 'apple'\n\nChange it as follows:\nor banana\n\n" + modifyRules + "\n\n" + emptyOption;
     expect(requests[2].kind).toBe("modify");
     expect(requests[2].instruction).toBe(modify);
     expect(requests[2].messages).toEqual([
@@ -583,7 +615,7 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     expect(requests[0].messages).toEqual([{ role: "user", content: explain }]);
     requests[0].callback({ explanation: "Shown for banana." });
     assistant.generate("also apple");
-    const modify = "Current expression:\n{fruit} = 'banana'\n\nChange it as follows:\nalso apple\n\n" + emptyOption;
+    const modify = "Current expression:\n{fruit} = 'banana'\n\nChange it as follows:\nalso apple\n\n" + modifyRules + "\n\n" + emptyOption;
     expect(requests[1].instruction).toBe(modify);
     // an explanation is no turn of the conversation that writes the expression
     expect(requests[1].messages).toEqual([{ role: "user", content: modify }]);

@@ -37,9 +37,33 @@ describe("Expression syntax guide (ai-expressions)", () => {
     });
     expect(getExpressionGuideText()).toBe(text);
   });
+  test("negation is taught as ! only, with a warning against negate(...)", () => {
+    // the text changed in version 3: a host caching a prompt built from version 2 knows it is stale
+    expect(expressionGuideVersion).toBe("3");
+    const text = getExpressionGuideText();
+    expect(text).not.toContain("or negate");
+    expect(text).toContain("Do not write negate(...): it calls a function named negate, which does not exist.");
+    expect(examples.filter(ex => ex.expression.indexOf("negate") > -1).map(ex => ex.expression)).toEqual([]);
+    expect(examples.filter(ex => ex.isValid).map(ex => ex.expression)).toContain("!({q1} = 1)");
+    const not = examples.filter(ex => ex.expression === "not ({q1} = 1)")[0];
+    expect(not.note).toBe("write ! instead of not");
+    // why: negate( is a call of an unknown function, while ! negates the group
+    const parser = new ConditionsParser();
+    expect(parser.parseExpression("negate({a} = 1 and {b} = 2)").getType()).toBe("function");
+    expect(parser.parseExpression("!({a} = 1 and {b} = 2)").getType()).toBe("unary");
+  });
+  test("and binds tighter than or: the guide says so and shows it", () => {
+    const text = getExpressionGuideText();
+    expect(text).toContain("and binds tighter than or: {a} = 1 or {b} = 2 and {c} = 3 means {a} = 1 or ({b} = 2 and {c} = 3).");
+    const example = examples.filter(ex => ex.expression === "{q1} = 1 or {q2} = 2 and {q3} = 3")[0];
+    expect(example.isValid).toBe(true);
+    expect(example.note).toBe("means {q1} = 1 or ({q2} = 2 and {q3} = 3)");
+    // the runtime agrees: true with q1 = 1 alone
+    const parser = new ConditionsParser();
+    expect(parser.parseExpression("{a} = 1 or {b} = 2 and {c} = 3").toString())
+      .toBe(parser.parseExpression("{a} = 1 or ({b} = 2 and {c} = 3)").toString());
+  });
   test("there is no ?: operator: the guide says so and points to iif", () => {
-    // the text changed in version 2: a host caching a prompt built from version 1 knows it is stale
-    expect(expressionGuideVersion).toBe("2");
     const text = getExpressionGuideText();
     expect(text).toContain("There is no conditional ?: operator; use iif(condition, valueIfTrue, valueIfFalse).");
     expect(new ConditionsParser().parseExpression("{score} > 50 ? 'pass' : 'fail'")).toBeFalsy();

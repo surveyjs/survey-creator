@@ -17,7 +17,7 @@ export interface IExpressionGuideSection {
   examples: Array<IExpressionGuideExample>;
 }
 
-export const expressionGuideVersion = "2";
+export const expressionGuideVersion = "3";
 
 const valid = (expression: string, note?: string): IExpressionGuideExample => ({ expression: expression, isValid: true, note: note });
 const invalid = (expression: string, note: string): IExpressionGuideExample => ({ expression: expression, isValid: false, note: note });
@@ -68,16 +68,20 @@ export const expressionGuideSections: Array<IExpressionGuideSection> = [
   },
   {
     title: "Logic",
-    text: "and (also &&), or (also ||), negation with ! or negate. Parentheses group. The word not does not exist: write ! or negate.",
+    // negate is a keyword of the grammar, but "negate(" parses as a call of a function named negate,
+    // so only ! is taught
+    text: "and (also &&), or (also ||), negation with !; negate a group with !(...). Parentheses group. " +
+      "and binds tighter than or: {a} = 1 or {b} = 2 and {c} = 3 means {a} = 1 or ({b} = 2 and {c} = 3). " +
+      "The word not does not exist: write !. Do not write negate(...): it calls a function named negate, which does not exist.",
     examples: [
       valid("{q1} = 1 and {q2} = 2"),
       valid("{q1} = 1 && {q2} = 2"),
       valid("{q1} = 1 or {q2} = 2"),
       valid("{q1} = 1 || {q2} = 2"),
       valid("!({q1} = 1)"),
-      valid("negate ({q1} = 1)"),
       valid("({q1} = 1 or {q2} = 2) and {q3} notempty"),
-      invalid("not ({q1} = 1)", "write ! or negate instead of not"),
+      valid("{q1} = 1 or {q2} = 2 and {q3} = 3", "means {q1} = 1 or ({q2} = 2 and {q3} = 3)"),
+      invalid("not ({q1} = 1)", "write ! instead of not"),
     ],
   },
   {

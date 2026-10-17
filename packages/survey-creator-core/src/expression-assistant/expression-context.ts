@@ -43,6 +43,10 @@ export interface IExpressionContext {
     isCondition: boolean,
     resultType?: string,
     objects: Array<{ type: string, name?: string, title?: string, path?: string, propertyName: string }>,
+    // the innermost dynamic panel or matrix every target runs in, once per entry or row
+    container?: { type: "paneldynamic" | "matrixdynamic" | "matrixdropdown", name: string, title?: string, valueName?: string },
+    // the targets run in different scopes; "scopes" lists only what they have in common
+    mixedScopes?: boolean,
   };
   variables: Array<IExpressionVariable>;
   scopes: Array<{ prefix: string, meaning: string, names?: Array<string> }>;
@@ -92,6 +96,9 @@ export const expressionOperatorSpellings: { [name: string]: Array<string> } = {
   power: ["^", "power"],
 };
 const nonConditionOperators = ["and", "or", "negate", "plus", "minus", "mul", "div", "mod", "power"];
+// Spellings the grammar accepts that the AI is not offered: "negate(" parses as a call of a function
+// named negate, which does not exist, so negation is advertised as ! only, as the guide teaches it.
+const untaughtOperatorSpellings: Array<string> = ["negate"];
 
 // What each scope prefix means, keyed by its settings.expressionVariables entry; the prefix itself
 // is read from the settings at call time, so a renamed prefix is what the AI is told.
@@ -293,37 +300,38 @@ function getFunctions(): Array<IExpressionContextFunction> {
     });
 }
 
+function getTaughtSpellings(name: string): Array<string> {
+  return (expressionOperatorSpellings[name] || [name]).filter(sp => untaughtOperatorSpellings.indexOf(sp) < 0);
+}
+
 function getOperators(): Array<IExpressionContextOperator> {
   const table: { [name: string]: Array<string> } = surveySettings.logic.operators;
   const res: Array<IExpressionContextOperator> = getConditionOperatorNames().map(name => ({
-    name: name, spellings: (expressionOperatorSpellings[name] || [name]).slice(),
+    name: name, spellings: getTaughtSpellings(name),
     questionTypes: Array.isArray(table[name]) ? table[name].slice() : [],
   }));
-  nonConditionOperators.forEach(name => res.push({ name: name, spellings: expressionOperatorSpellings[name].slice(), questionTypes: [] }));
+  nonConditionOperators.forEach(name => res.push({ name: name, spellings: getTaughtSpellings(name), questionTypes: [] }));
   return res;
 }
 
-// The scopes the first site's object runs in: a dynamic panel template, a matrix row, an item frame.
-function getScopes(site: IExpressionSite): Array<{ prefix: string, meaning: string, names?: Array<string> }> {
-  const res: Array<{ prefix: string, meaning: string, names?: Array<string> }> = [];
-  const add = (table: Array<{ key: string, meaning: string, hasNames?: boolean }>, names: Array<string>) => {
-    table.forEach(entry => {
-      const item: { prefix: string, meaning: string, names?: Array<string> } = { prefix: getPrefix(entry.key), meaning: entry.meaning };
-      if (entry.hasNames && !!names) item.names = names;
-      res.push(item);
-    });
-  };
+type ExpressionScope = IExpressionContext["scopes"][0];
+type ExpressionContainer = IExpressionContext["target"]["container"];
+
+// What a site's object runs in, innermost first: an item frame, a dynamic panel entry (the panel),
+// a matrix row (the matrix).
+function getScopeFrames(site: IExpressionSite): Array<{ kind: "item" | "panel" | "row", question?: any }> {
+  const res: Array<{ kind: "item" | "panel" | "row", question?: any }> = [];
   if (!site || !site.obj) return res;
   const obj: any = site.obj;
   if (obj instanceof ItemValue || itemConditionProperties.indexOf((site.propertyName || "").toLowerCase()) > -1) {
-    add(itemScope, undefined);
+    res.push({ kind: "item" });
   }
   // templateVisibleIf & co. sit on the dynamic panel and run inside its template
   if (obj.getType && obj.getType() === "paneldynamic" && (site.propertyName || "").indexOf("template") === 0) {
-    add(panelScope, obj.template.questions.map((q: Question) => q.name));
+    res.push({ kind: "panel", question: obj });
   }
   if (obj instanceof MatrixDropdownColumn) {
-    add(rowScope, (<any>obj.colOwner).columns.map((col: MatrixDropdownColumn) => col.name));
+    res.push({ kind: "row", question: obj.colOwner });
   }
   let el: any = obj instanceof ItemValue ? obj.locOwner : obj;
   for (let i = 0; !!el && i < 100; i++) {
@@ -332,18 +340,63 @@ function getScopes(site: IExpressionSite): Array<{ prefix: string, meaning: stri
     const owner: any = (<any>parent).selectedElementInDesign;
     const parentQuestion: any = el.parentQuestion;
     if (!!parentQuestion && parentQuestion.getType && parentQuestion.getType() === "paneldynamic" && parentQuestion.template === parent) {
-      add(panelScope, parentQuestion.template.questions.map((q: Question) => q.name));
+      res.push({ kind: "panel", question: parentQuestion });
       el = parentQuestion;
       continue;
     }
     if (!!owner && owner !== parent && owner.isDescendantOf && owner.isDescendantOf("matrixdropdownbase") && owner.detailPanel === parent) {
-      add(rowScope, owner.columns.map((col: MatrixDropdownColumn) => col.name));
+      res.push({ kind: "row", question: owner });
       el = owner;
       continue;
     }
     el = parent;
   }
   return res;
+}
+
+function getFrameScopes(frames: Array<{ kind: "item" | "panel" | "row", question?: any }>): Array<ExpressionScope> {
+  const res: Array<ExpressionScope> = [];
+  const add = (table: Array<{ key: string, meaning: string, hasNames?: boolean }>, names: Array<string>) => {
+    table.forEach(entry => {
+      const item: ExpressionScope = { prefix: getPrefix(entry.key), meaning: entry.meaning };
+      if (entry.hasNames && !!names) item.names = names;
+      res.push(item);
+    });
+  };
+  frames.forEach(frame => {
+    if (frame.kind === "item") add(itemScope, undefined);
+    if (frame.kind === "panel") add(panelScope, frame.question.template.questions.map((q: Question) => q.name));
+    if (frame.kind === "row") add(rowScope, frame.question.columns.map((col: MatrixDropdownColumn) => col.name));
+  });
+  return res;
+}
+
+function describeContainer(question: any): ExpressionContainer {
+  const type: ExpressionContainer["type"] = question.isDescendantOf("paneldynamic") ? "paneldynamic"
+    : question.isDescendantOf("matrixdynamic") ? "matrixdynamic" : "matrixdropdown";
+  const res: ExpressionContainer = { type: type, name: question.name };
+  if (typeof question.title === "string" && !!question.title && question.title !== question.name) res.title = question.title;
+  // the name its whole value is read by ({kids}), when it is not the question's name
+  const valueName = question.getValueName();
+  if (!!valueName && valueName !== question.name) res.valueName = valueName;
+  return res;
+}
+
+// The scopes every site runs in, and the innermost container they all share. Sites with different
+// scopes (a Logic rule over a template question and a top-level question) get only the scopes they
+// have in common and no container.
+function getSitesScope(sites: Array<IExpressionSite>): { scopes: Array<ExpressionScope>, container: any, isMixed: boolean } {
+  const perSite = sites.map(site => {
+    const frames = getScopeFrames(site);
+    const container = frames.filter(frame => !!frame.question)[0];
+    return { scopes: getFrameScopes(frames).map(scope => JSON.stringify(scope)), container: !!container ? container.question : undefined };
+  });
+  if (perSite.length === 0) return { scopes: [], container: undefined, isMixed: false };
+  const first = perSite[0];
+  const isMixed = perSite.some(item => item.container !== first.container ||
+    item.scopes.length !== first.scopes.length || item.scopes.some((scope, index) => scope !== first.scopes[index]));
+  const scopes = first.scopes.filter(scope => perSite.every(item => item.scopes.indexOf(scope) > -1)).map(scope => JSON.parse(scope));
+  return { scopes: scopes, container: isMixed ? undefined : first.container, isMixed: isMixed };
 }
 
 function getResultType(site: IExpressionSite, isCondition: boolean): string {
@@ -536,12 +589,15 @@ export function buildExpressionContext(creator: SurveyCreatorModel, sites: Array
   };
   const resultType = getResultType(site, isCondition);
   if (!!resultType) target.resultType = resultType;
+  const scope = getSitesScope(sites);
+  if (!!scope.container) target.container = describeContainer(scope.container);
+  if (scope.isMixed) target.mixedScopes = true;
   const variables = buildVariables(creator, sites, currentExpression, editor, lintOptions, truncated);
   const context: IExpressionContext = {
     guideVersion: expressionGuideVersion,
     target: target,
     variables: variables,
-    scopes: getScopes(site),
+    scopes: scope.scopes,
     functions: getFunctions(),
     operators: getOperators(),
     examples: buildExamples(creator, sites, truncated),
@@ -557,6 +613,15 @@ export function buildExpressionContext(creator: SurveyCreatorModel, sites: Array
 // The user turn of a request: what the system prompt's model is asked to do this time. Built here
 // so a host does not write its own and drop a part of it - a fix message without "return an empty
 // expression" got "false" back from a model that could not express the request.
+// A modify (and a refine of a result) must not change what the author did not ask about. Models
+// regrouped "a or b and c" as "(a or b) and c" while adding a clause, and answered "this never
+// shows, please fix it" with "false".
+const modifyRules = "The request may describe a problem with the current expression (for example, that the question never shows) rather than a change. " +
+  "Then return the corrected expression that does what the author intended, not one that reproduces the problem. " +
+  "Keep the meaning of every part the request does not change. " +
+  "If the current expression relies on and binding tighter than or, keep that grouping and write the parentheses out. " +
+  "If you change the meaning of a part the author did not mention, say so in the explanation.";
+
 export function buildExpressionInstruction(kind: string, prompt: string, expression: string,
   findings?: Array<{ severity: string, message: string }>): string {
   const emptyOption = "If the request cannot be expressed with the listed variables and functions, return an empty expression and say why in the explanation.";
@@ -564,7 +629,7 @@ export function buildExpressionInstruction(kind: string, prompt: string, express
     case "generate":
       return "Write an expression for this request:\n" + (prompt || "") + "\n\n" + emptyOption;
     case "modify":
-      return "Current expression:\n" + (expression || "") + "\n\nChange it as follows:\n" + (prompt || "") + "\n\n" + emptyOption;
+      return "Current expression:\n" + (expression || "") + "\n\nChange it as follows:\n" + (prompt || "") + "\n\n" + modifyRules + "\n\n" + emptyOption;
     case "fix":
       return "This expression failed the check:\n" + (expression || "") + "\n\nProblems found:\n" +
         (findings || []).map(f => "- [" + f.severity + "] " + f.message).join("\n") + "\n\n" +
@@ -586,6 +651,27 @@ function getExplanationLanguage(locale: string): string {
   return !!name && name !== locale ? name + " (locale code \"" + locale + "\")" : "the language with locale code \"" + locale + "\"";
 }
 
+// The target is evaluated once per entry or row and decides for it. Unsaid, a model asked about
+// "children under 10" from inside the panel aggregated over {kids} instead of reading {panel.kidAge}.
+function getPerEntryRule(context: IExpressionContext): string {
+  const container = context.target.container;
+  const isPanel = container.type === "paneldynamic";
+  // the prefix as the scopes list names it, so the prompt follows the context alone
+  const meaning = (isPanel ? panelScope : rowScope)[0].meaning;
+  const scope = context.scopes.filter(s => s.meaning === meaning)[0];
+  const prefix = !!scope ? scope.prefix : isPanel ? "panel" : "row";
+  const unit = isPanel ? "entry" : "row";
+  let res = "- The expression runs once for each " + unit + " of the " + (isPanel ? "dynamic panel" : "matrix") +
+    " \"" + container.name + "\"" + (!!container.title ? " (" + container.title + ")" : "") + " and decides for that " + unit + ". " +
+    (isPanel ? "Read the entry's own questions" : "Read the row's own cells") + " with {" + prefix + ".name}.";
+  // a nested container's value is no survey-level variable: there is nothing to aggregate over
+  const valueName = container.valueName || container.name;
+  if (context.variables.some(v => v.name === valueName)) {
+    res += " Use the inArray functions over {" + valueName + "} only when the request is about all " + (isPanel ? "entries" : "rows") + ".";
+  }
+  return res;
+}
+
 // Same context in, byte-identical prompt out: a host may cache it.
 export function buildExpressionSystemPrompt(context: IExpressionContext): string {
   const lines: Array<string> = [];
@@ -599,9 +685,11 @@ export function buildExpressionSystemPrompt(context: IExpressionContext): string
   lines.push("## Rules");
   lines.push("- Use only the names listed under \"variables\" and only the functions listed under \"functions\".");
   lines.push("- Compare a question with the values of its choices, never with their texts.");
-  lines.push(context.scopes.length > 0
-    ? "- Use the scope prefixes listed under \"scopes\" and no others."
-    : "- Use no scope prefix: this expression runs at the survey level.");
+  const target = context.target;
+  if (context.scopes.length > 0) lines.push("- Use the scope prefixes listed under \"scopes\" and no others.");
+  else lines.push(target.mixedScopes ? "- Use no scope prefix." : "- Use no scope prefix: this expression runs at the survey level.");
+  if (!!target.container) lines.push(getPerEntryRule(context));
+  if (target.mixedScopes) lines.push("- This expression is used at places with different scopes; use only references that work at all of them.");
   if (context.target.isCondition) {
     lines.push("- The expression is a condition: it must evaluate to true or false.");
   } else if (!!context.target.resultType) {

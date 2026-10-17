@@ -283,3 +283,25 @@ describe("A condition that reads no question or variable (ai-expressions)", () =
     expect(checkQuestion(creator, "q2", "visibleIf", "false").findings).toEqual([]);
   });
 });
+
+describe("An unknown function is an error of a candidate (ai-expressions)", () => {
+  const json = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
+  test("negate(...) calls a function that does not exist: an error", () => {
+    const creator = createCreator(json);
+    const res = checkQuestion(creator, "q2", "visibleIf", "negate({q1} = 1)");
+    const finding = res.findings.filter(f => f.ruleId === "expression/unknown-function")[0];
+    expect(finding).toBeTruthy();
+    expect(finding.severity).toBe("error");
+    expect(res.errorCount).toBeGreaterThan(0);
+    expect(checkQuestion(creator, "q2", "visibleIf", "!({q1} = 1)").errorCount).toBe(0);
+  });
+  test("only the expression check raises it: the JSON tab keeps the linter's default, and a host can lower it", () => {
+    const creator = createCreator(json);
+    expect(getCreatorLintOptions(creator).rules["expression/unknown-function"]).toBeUndefined();
+    expect(getExpressionLintOptions(creator).rules["expression/unknown-function"]).toBe("error");
+    creator.onLintSurvey.add((_, options) => { options.lintOptions.rules["expression/unknown-function"] = "warning"; });
+    const res = checkQuestion(creator, "q2", "visibleIf", "negate({q1} = 1)");
+    expect(res.findings.filter(f => f.ruleId === "expression/unknown-function")[0].severity).toBe("warning");
+    expect(res.errorCount).toBe(0);
+  });
+});

@@ -66,8 +66,11 @@ export function getExpressionLintOptions(creator: SurveyCreatorModel): ISurveyLi
   // A condition that reads nothing ("false") is how an author switches an element off, so the
   // linter and the JSON tab leave it alone; from an AI it usually means the request could not be
   // expressed, so the check warns. A host can still switch it off in onLintSurvey.
-  return getCreatorLintOptions(creator,
-    getConditionVariableNames(creator.survey, creator.variablePresetsModel), { "expression/no-reference": "warning" });
+  // The AI is offered exactly the functions FunctionFactory holds, so a call of any other function
+  // (negate(...) among them, which parses as one) never works at runtime: an error, which blocks
+  // Accept and triggers the fix request. A host can lower it in onLintSurvey.
+  return getCreatorLintOptions(creator, getConditionVariableNames(creator.survey, creator.variablePresetsModel),
+    { "expression/no-reference": "warning", "expression/unknown-function": "error" });
 }
 
 // setValueIf and setValueExpression are one writer for the linter (rules/cycle-value-write.ts),

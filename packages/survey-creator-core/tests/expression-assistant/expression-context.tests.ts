@@ -8,7 +8,9 @@ import { CreatorTester } from "../creator-tester";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { settings } from "../../src/creator-settings";
-import { buildExpressionContext, buildExpressionSystemPrompt, creatorInternalFunctions, IExpressionContext } from "../../src/expression-assistant/expression-context";
+import {
+  buildExpressionContext, buildExpressionSystemPrompt, creatorInternalFunctions, expressionOperatorSpellings, IExpressionContext,
+} from "../../src/expression-assistant/expression-context";
 import { checkExpression, getExpressionLintOptions, IExpressionSite } from "../../src/expression-assistant/expression-check";
 
 export * from "../../src/components/link-value";
@@ -260,14 +262,17 @@ describe("Functions and operators in the AI context (ai-expressions)", () => {
     const context = contextFor(creator, [questionSite(creator, "q1")]);
     const parser = new ConditionsParser();
     const failed: Array<string> = [];
-    context.operators.forEach(op => op.spellings.forEach(sp => {
+    // every spelling the grammar accepts, the advertised ones and those that are not taught
+    Object.keys(expressionOperatorSpellings).forEach(name => expressionOperatorSpellings[name].forEach(sp => {
       let text = "{a} " + sp + " {b}";
-      if (op.name === "empty" || op.name === "notempty") text = "{a} " + sp;
-      if (op.name === "negate") text = sp === "!" ? "!{a}" : sp + " {a}";
+      if (name === "empty" || name === "notempty") text = "{a} " + sp;
+      if (name === "negate") text = sp === "!" ? "!{a}" : sp + " {a}";
       const operand: any = parser.parseExpression(text);
-      if (!operand || operand.operator !== op.name) failed.push(op.name + ": " + text);
+      if (!operand || operand.operator !== name) failed.push(name + ": " + text);
     }));
     expect(failed).toEqual([]);
+    expect(expressionOperatorSpellings.negate).toEqual(["!", "negate"]);
+    context.operators.forEach(op => op.spellings.forEach(sp => expect(expressionOperatorSpellings[op.name], op.name).toContain(sp)));
     expect(context.operators.filter(op => op.name === "allof")[0].questionTypes).toEqual(["checkbox"]);
     const saved = surveySettings.logic.operators.allof;
     surveySettings.logic.operators.allof = ["checkbox", "tagbox"];
@@ -277,7 +282,12 @@ describe("Functions and operators in the AI context (ai-expressions)", () => {
       surveySettings.logic.operators.allof = saved;
     }
     expect(context.operators.map(op => op.name)).toContain("and");
-    expect(context.operators.filter(op => op.name === "negate")[0].spellings).toEqual(["!", "negate"]);
+    // "negate" parses, but negate(...) calls a function: only ! is taught
+    expect(context.operators.filter(op => op.name === "negate")[0].spellings).toEqual(["!"]);
+    const systemPrompt = buildExpressionContext(creator, [questionSite(creator, "q1")], "").systemPrompt;
+    // "negate" is there as the operator's name only, never as a spelling
+    expect(systemPrompt.split("\"negate\"").length).toBe(2);
+    expect(systemPrompt).toContain("\"name\": \"negate\"");
   });
 });
 
@@ -599,5 +609,142 @@ describe("The target's title in the AI context (ai-expressions)", () => {
     expect(target(matrix.columns[0], "visibleIf").title).toBe("Column one");
     expect(target(matrix.columns[1], "visibleIf").title).toBeUndefined();
     expect(target(survey.calculatedValues[0], "expression").title).toBeUndefined();
+  });
+});
+
+describe("Per-entry scope in the AI context (ai-expressions)", () => {
+  const json = {
+    elements: [
+      { type: "text", name: "householdSize", inputType: "number" },
+      {
+        type: "paneldynamic", name: "kids", title: "Children",
+        templateElements: [{ type: "text", name: "kidAge", inputType: "number" }, { type: "boolean", name: "allergies" }],
+      },
+      {
+        type: "matrixdynamic", name: "items", title: "Order items", detailPanelMode: "underRow",
+        columns: [{ name: "product" }, { name: "quantity", cellType: "text", inputType: "number" }],
+        detailElements: [{ type: "text", name: "note" }],
+      },
+      { type: "matrixdropdown", name: "budget", rows: ["r1"], columns: [{ name: "amount" }] },
+      { type: "text", name: "q1" },
+    ],
+  };
+  const panelRule = "- The expression runs once for each entry of the dynamic panel \"kids\" (Children) and decides for that entry. " +
+    "Read the entry's own questions with {panel.name}. Use the inArray functions over {kids} only when the request is about all entries.";
+  const matrixRule = "- The expression runs once for each row of the matrix \"items\" (Order items) and decides for that row. " +
+    "Read the row's own cells with {row.name}. Use the inArray functions over {items} only when the request is about all rows.";
+  const mixedRule = "- This expression is used at places with different scopes; use only references that work at all of them.";
+  function build(creator: CreatorTester, sites: Array<IExpressionSite>, editor?: ConditionEditor): { context: IExpressionContext, systemPrompt: string } {
+    return buildExpressionContext(creator, sites, "", editor, getExpressionLintOptions(creator));
+  }
+  function editLogicRule(creator: CreatorTester): { sites: Array<IExpressionSite>, editor: ConditionEditor } {
+    surveySettings.animationEnabled = false;
+    const plugin = <TabLogicPlugin>creator.getPlugin("logic");
+    plugin.activate();
+    const logic = plugin.model;
+    expect(logic.items).toHaveLength(1);
+    logic.editItem(logic.items[0]);
+    return { sites: logic.itemEditor.getExpressionCheckInput().sites, editor: logic.expressionEditor };
+  }
+
+  test("a dynamic panel template question: the panel is the container, and the prompt says it runs per entry", () => {
+    const creator = createCreator(json);
+    const kids = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("kids");
+    const res = build(creator, [{ obj: kids.template.getQuestionByName("allergies"), propertyName: "visibleIf" }]);
+    expect(res.context.target.container).toEqual({ type: "paneldynamic", name: "kids", title: "Children" });
+    expect(res.context.target.mixedScopes).toBeUndefined();
+    expect(res.systemPrompt).toContain(panelRule);
+    expect(res.systemPrompt).not.toContain(mixedRule);
+    // the whole value stays listed: an aggregate is right when the request asks about all entries
+    expect(names(res.context)).toContain("kids");
+    // templateVisibleIf sits on the panel and runs inside each entry
+    expect(build(creator, [{ obj: kids, propertyName: "templateVisibleIf" }]).context.target.container)
+      .toEqual({ type: "paneldynamic", name: "kids", title: "Children" });
+  });
+  test("a matrix column and a detail panel question: the matrix is the container", () => {
+    const creator = createCreator(json);
+    const items = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("items");
+    const column = build(creator, [{ obj: items.columns[1], propertyName: "visibleIf" }]);
+    expect(column.context.target.container).toEqual({ type: "matrixdynamic", name: "items", title: "Order items" });
+    expect(column.systemPrompt).toContain(matrixRule);
+    const detail = build(creator, [{ obj: items.detailPanel.getQuestionByName("note"), propertyName: "visibleIf" }]);
+    expect(detail.context.target.container).toEqual({ type: "matrixdynamic", name: "items", title: "Order items" });
+    expect(detail.systemPrompt).toContain(matrixRule);
+    const budget: any = creator.survey.getQuestionByName("budget");
+    const fixed = build(creator, [{ obj: budget.columns[0], propertyName: "visibleIf" }]);
+    expect(fixed.context.target.container).toEqual({ type: "matrixdropdown", name: "budget" });
+    expect(fixed.systemPrompt).toContain("- The expression runs once for each row of the matrix \"budget\" and decides for that row.");
+  });
+  test("a top-level question has no container and no per-entry rule", () => {
+    const creator = createCreator(json);
+    const res = build(creator, [questionSite(creator, "q1")]);
+    expect(res.context.target.container).toBeUndefined();
+    expect(res.context.target.mixedScopes).toBeUndefined();
+    expect(res.systemPrompt).not.toContain("runs once for each");
+    expect(res.systemPrompt).not.toContain(mixedRule);
+    expect(res.systemPrompt).toContain("- Use no scope prefix: this expression runs at the survey level.");
+  });
+  test("a Logic rule over two template questions of the same dynamic panel gets the container and the per-entry rule", () => {
+    const creator = createCreator({
+      elements: [{
+        type: "paneldynamic", name: "kids", title: "Children",
+        templateElements: [
+          { type: "text", name: "kidAge", inputType: "number" },
+          { type: "boolean", name: "allergies", visibleIf: "{panel.kidAge} < 10" },
+          { type: "comment", name: "allergyNote", visibleIf: "{panel.kidAge} < 10" },
+        ],
+      }],
+    }, { showLogicTab: true });
+    const input = editLogicRule(creator);
+    expect(input.sites.map(s => (<any>s.obj).name)).toEqual(["allergies", "allergyNote"]);
+    const res = build(creator, input.sites, input.editor);
+    expect(res.context.target.container).toEqual({ type: "paneldynamic", name: "kids", title: "Children" });
+    expect(res.context.target.mixedScopes).toBeUndefined();
+    expect(prefixes(res.context)[0]).toBe("panel");
+    expect(res.systemPrompt).toContain(panelRule);
+  });
+  test("a Logic rule over a template question and a top-level question: no container, no panel scope, the different-scopes rule", () => {
+    const creator = createCreator({
+      elements: [
+        { type: "text", name: "householdSize", inputType: "number" },
+        { type: "paneldynamic", name: "kids", templateElements: [{ type: "boolean", name: "allergies" }] },
+        { type: "text", name: "q1", visibleIf: "{householdSize} > 4" },
+      ],
+    }, { showLogicTab: true });
+    editLogicRule(creator);
+    // with no context, the question selector offers template questions too
+    const logic = (<TabLogicPlugin>creator.getPlugin("logic")).model;
+    logic.itemEditor.panel.addPanel();
+    const actionPanel = logic.itemEditor.panels[1];
+    actionPanel.getQuestionByName("logicTypeName").value = "question_visibility";
+    actionPanel.getQuestionByName("elementSelector").value = "kids.allergies";
+    const input = { sites: logic.itemEditor.getExpressionCheckInput().sites, editor: logic.expressionEditor };
+    expect(input.sites.map(s => (<any>s.obj).name)).toEqual(["q1", "allergies"]);
+    [input.sites, [].concat(input.sites).reverse()].forEach(sites => {
+      const res = build(creator, sites, input.editor);
+      expect(res.context.target.container).toBeUndefined();
+      expect(res.context.target.mixedScopes).toBe(true);
+      expect(res.context.scopes).toEqual([]);
+      expect(res.systemPrompt).not.toContain("runs once for each");
+      expect(res.systemPrompt).toContain(mixedRule);
+      expect(res.systemPrompt).not.toContain("this expression runs at the survey level");
+    });
+  });
+  test("two sites in different dynamic panels: no container", () => {
+    const creator = createCreator({
+      elements: [
+        { type: "paneldynamic", name: "a", templateElements: [{ type: "text", name: "x" }] },
+        { type: "paneldynamic", name: "b", templateElements: [{ type: "text", name: "x" }] },
+      ],
+    });
+    const a = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("a");
+    const b = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("b");
+    const res = build(creator, [
+      { obj: a.template.getQuestionByName("x"), propertyName: "visibleIf" },
+      { obj: b.template.getQuestionByName("x"), propertyName: "visibleIf" },
+    ]);
+    expect(res.context.target.container).toBeUndefined();
+    expect(res.context.target.mixedScopes).toBe(true);
+    expect(res.systemPrompt).toContain(mixedRule);
   });
 });
