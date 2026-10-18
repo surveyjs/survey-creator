@@ -1149,7 +1149,25 @@ export class SurveyCreatorModel extends Base
   public onMachineTranslate: EventBase<SurveyCreatorModel, MachineTranslateEvent> = this.addCreatorEvent<SurveyCreatorModel, MachineTranslateEvent>();
   // Raised when an author asks the expression assistant to write, change, fix or explain an expression.
   // Survey Creator calls no AI service itself: the application answers through options.callback.
-  // The assistant's UI is shown only when this event has a handler.
+  // The assistant's UI is shown only when this event has a handler: an AI button in the title of
+  // condition and expression properties in the property grid (visibleIf, defaultValueExpression, ...)
+  // and a "Generate" line above the condition editor of the Logic tab.
+  // The flow of one request:
+  // 1. The author types a request ("show this question to adults only") and clicks Generate, or clicks
+  //    Explain. Creator builds the AI context for the edited place and raises this event.
+  // 2. The handler sends options.systemPrompt and options.messages to an AI model and passes the answer
+  //    to options.callback. See ExpressionAssistantRequestEvent for every option and a sample handler.
+  // 3. Creator checks the returned expression (the same check as the survey linter: unknown names,
+  //    wrong choice values, syntax). If the check finds errors, Creator raises this event again with
+  //    kind "fix" and the problems found - expressionAssistantFixAttempts times at most (1 by default).
+  // 4. The author reviews the result: the current and the new expression, how the new one reads, the
+  //    explanation and the remaining findings. The author can type another request to refine it
+  //    (kind "modify"), accept it - only when the check finds no errors - or reject it.
+  //    In the property grid, an accepted expression is written to the property as one undo step;
+  //    on the Logic tab it fills the condition editor and is saved with the rule.
+  // Example: the author types "show if the respondent has children" for the visibleIf of the
+  // "childrenCount" question; the AI answers {"expression": "{hasChildren} = true", "explanation": "..."};
+  // the check finds no errors and the author accepts it, so childrenCount.visibleIf is "{hasChildren} = true".
   public onExpressionAssistantRequest: EventBase<SurveyCreatorModel, ExpressionAssistantRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAssistantRequestEvent>();
 
   /**
