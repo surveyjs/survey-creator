@@ -651,6 +651,8 @@ export var italianTranslation = {
       templateErrorLocation: "Allineamento dei messaggi di errore",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nuova posizione di ingresso",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panel per pagina dati",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Impedisci risposte duplicate nella seguente domanda"
     },
@@ -1083,6 +1085,8 @@ export var italianTranslation = {
     maxFiles: "Numero massimo di file",
     // "Row count"
     rowCount: "Numero delle righe",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Righe per pagina dati",
     // "Columns layout"
     columnLayout: "Layout delle colonne",
     // "\"Add Row\" button alignment"
@@ -2745,6 +2749,8 @@ export var italianTranslation = {
       confirmDelete: "Attiva una richiesta di conferma prima di rimuovere una voce.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Specifica un'espressione che calcoli il numero di voci. Questa espressione sovrascrive l'impostazione \"Numero iniziale di voci\" e viene rivalutata ogni volta che i valori a cui fa riferimento cambiano. Il risultato è limitato dalle impostazioni \"Numero minimo di voci\" e \"Numero massimo di voci\". Sebbene questa espressione sia impostata, i rispondenti non possono aggiungere o rimuovere voci manualmente.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Specifica il numero di pannelli visualizzati in ogni pagina dati. 0 disabilita la paginazione e mostra tutti i pannelli.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Assegna numeri alle domande nidificate all'interno del pannello dinamico."
     },
@@ -2756,6 +2762,8 @@ export var italianTranslation = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Espande automaticamente la sezione dei dettagli quando viene aggiunta una nuova riga alla matrice."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Specifica il numero di righe di matrice visualizzate in ogni pagina dati. 0 disabilita la paginazione e mostra tutte le righe.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplica le risposte dell'ultima riga e le assegna alla successiva riga dinamica aggiunta.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

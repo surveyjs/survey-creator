@@ -651,6 +651,8 @@ export var polishStrings = {
       templateErrorLocation: "Wyrównanie komunikatu o błędzie",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nowa lokalizacja wejścia",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panele na stronę danych",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zapobiegaj zduplikowanym odpowiedziom w następującym pytaniu"
     },
@@ -1084,6 +1086,8 @@ export var polishStrings = {
     maxFiles: "Maksymalna liczba plików",
     // [Auto-translated] "Row count"
     rowCount: "Liczba wierszy",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Wiersze na stronę danych",
     // [Auto-translated] "Columns layout"
     columnLayout: "Układ kolumn",
     // [Auto-translated] "\"Add Row\" button alignment"
@@ -2746,6 +2750,8 @@ export var polishStrings = {
       confirmDelete: "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem wpisu.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Określ wyrażenie, które oblicza liczbę wpisów. To wyrażenie nadpisuje ustawienie \"Początkowa liczba wpisów\" i jest ponownie oceniane za każdym razem, gdy zmieniają się wartości, do których się odwołuje. Wynik jest ograniczony ustawieniami \"Minimalna liczba wpisów\" i \"Maksymalna liczba wpisów\". Podczas gdy to wyrażenie jest ustawione, respondenci nie mogą ręcznie dodawać ani usuwać wpisów.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Określa liczbę paneli wyświetlanych na każdej stronie danych. 0 wyłącza paginację i wyświetla wszystkie panele.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w panelu dynamicznym."
     },
@@ -2757,6 +2763,8 @@ export var polishStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Automatycznie rozwija sekcję szczegółów po dodaniu nowego wiersza do macierzy."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Określa liczbę wierszy macierzy wyświetlanych na każdej stronie danych. 0 wyłącza paginację i wyświetla wszystkie wiersze.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego wiersza i przypisuje je do następnego dodanego wiersza dynamicznego.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

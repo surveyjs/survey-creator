@@ -651,6 +651,8 @@ export var huStrings = {
       templateErrorLocation: "Hibaüzenetek igazítása",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Új belépési hely",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panelek adatoldalonként",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Ismétlődő válaszok elkerülése a következő kérdésben"
     },
@@ -1083,6 +1085,8 @@ export var huStrings = {
     maxFiles: "Maximális fájlszám",
     // "Row count"
     rowCount: "Sorok száma",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Sorok adatoldalonként",
     // "Columns layout"
     columnLayout: "Oszlopok elrendezése",
     // "\"Add Row\" button alignment"
@@ -2745,6 +2749,8 @@ export var huStrings = {
       confirmDelete: "Megerősítő üzenetet indít el a bejegyzés eltávolítása előtt.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Határozz meg egy kifejezést, amely kiszámítja a bejegyzések számát. Ez a kifejezés felülírja a \"Kezdeti bejegyzések száma\" beállítást, és újraértékelik, amikor az adott értékek változnak. Az eredményt a \"Minimum bejegyzések száma\" és \"Maximális bejegyzések száma\" beállítások korlátozzák. Amíg ez az kifejezés be van állítva, a válaszadók nem adhatnak hozzá vagy törölhetnek bejegyzéseket manuálisan.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Megadja, hány panelt jelenít meg minden adatoldalon. 0 letiltja az oldalozást, és megjeleníti az összes panelt.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Számokat rendel a dinamikus panelbe ágyazott kérdésekhez."
     },
@@ -2756,6 +2762,8 @@ export var huStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Automatikusan kibontja a részletszakaszt, amikor új sort ad hozzá a mátrixhoz."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Megadja az egyes adatoldalakon megjelenített mátrixsorok számát. 0 letiltja az oldalozást, és megjeleníti az összes sort.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó sorból, és hozzárendeli őket a következő hozzáadott dinamikus sorhoz.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
