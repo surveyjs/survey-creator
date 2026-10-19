@@ -469,6 +469,34 @@ test("QuestionImageAdornerViewModel read only mode on events", () => {
   expect(imageAdornerRO.filePresentationModel.isInputReadOnly).toBeTruthy();
 });
 
+test("QuestionImageAdornerViewModel file input follows a change of the question permissions", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, <any>{}, null);
+  const chooseAction = imageAdorner.imageActionsContainer.getActionById("choose");
+  expect(imageAdorner.filePresentationModel.isInputReadOnly).toBeFalsy();
+  expect(chooseAction.visible).toBeTruthy();
+
+  readOnly = true;
+  imageAdorner["updateActionsProperties"]();
+  expect(imageAdorner.filePresentationModel.isInputReadOnly).toBeTruthy();
+  expect(chooseAction.visible).toBeFalsy();
+
+  readOnly = false;
+  imageAdorner["updateActionsProperties"]();
+  expect(imageAdorner.filePresentationModel.isInputReadOnly).toBeFalsy();
+  expect(chooseAction.visible).toBeTruthy();
+
+  imageAdorner.dispose();
+});
+
 test("QuestionImageAdornerViewModel acceptedTypes", () => {
   const creator = new CreatorTester();
   creator.JSON = {
