@@ -181,6 +181,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "rowCount",
       "minRowCount",
       "maxRowCount",
+      "pageSize",
       { name: "rowCountExpression", tab: "logic", index: 350 },
       "placeholder",
       { name: "hideColumnsIfEmpty", tab: "columns" },
@@ -195,6 +196,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "totalText",
       "placeholder",
+      "pageSize",
       { name: "rowOrder", tab: "rows" },
       { name: "hideIfRowsEmpty", tab: "rows" },
       { name: "rowTitleWidth", tab: "layout" },
@@ -734,6 +736,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "panelCount",
       "minPanelCount",
       "maxPanelCount",
+      "pageSize",
       { name: "panelCountExpression", tab: "logic", index: 350 },
       "panelsState",
       { name: "allowAddPanel" },
