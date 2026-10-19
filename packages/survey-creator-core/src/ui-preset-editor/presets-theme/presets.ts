@@ -31,6 +31,7 @@ export var presetsCss = {
     titleOnError: "sps-panel__title--error",
     description: "sps-description sps-panel__description",
     container: "sps-panel sps-row__panel",
+    expandableContent: "sps-panel__expandable-content",
     content: "sps-panel__content",
     icon: "sps-panel__icon",
     iconExpanded: "sps-panel__icon--expanded",

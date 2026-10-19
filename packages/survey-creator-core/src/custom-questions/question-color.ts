@@ -148,16 +148,15 @@ export class QuestionColorModel extends QuestionTextModel {
     popupModel.displayMode = IsTouch ? "overlay" : "popup";
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
-    popupModel.getTargetCallback = () => this.rootElement;
+    popupModel.getTargetCallback = () => this.contentElement;
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
     return action;
   }
-  private rootElement: HTMLElement;
   public afterRenderQuestionElement(el: HTMLElement): void {
     super.afterRenderQuestionElement(el);
-    this.rootElement = el;
-    if (el.tagName === "INPUT") {
-      this.rootElement = el.parentElement;
+    this.contentElement = el;
+    if (this.contentElement.tagName === "INPUT") {
+      this.contentElement = this.contentElement.parentElement;
     }
   }
   private updateChoices() {
