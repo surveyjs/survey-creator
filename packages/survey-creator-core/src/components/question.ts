@@ -247,6 +247,43 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     res.text = res.messageText;
     return res;
   }
+  // Whether the choices could change when the placeholder items were last
+  // evaluated - by the question itself (it recalculates them when its choices
+  // or its container change) or on a permissions change the creator reports.
+  private optionItemsModifiable: boolean;
+  // No initializer: attachElement runs in the base constructor, before the
+  // fields of this class are initialized. Created on the first subscription,
+  // kept so that remove() gets the same function.
+  private permissionsChangedHandler: () => void;
+  private canModifyChoices(): boolean {
+    return !this.creator.readOnly && this.creator.isCanModifyProperty(this.surveyElement, "choices");
+  }
+  private setCanShowOptionItemCallback(): void {
+    const question = <QuestionSelectBase>this.surveyElement;
+    question.setCanShowOptionItemCallback((item: ItemValue): boolean => {
+      // Placeholder items exist to add them: none while choices cannot change.
+      this.optionItemsModifiable = this.canModifyChoices();
+      if (!this.optionItemsModifiable) return false;
+      if (item !== question.newItem) return true;
+      return this.creator.maxChoices < 1 || question.choices.length < this.creator.maxChoices;
+    });
+  }
+  private updateOptionItems(): void {
+    // A newer adorner of the same element owns its callback.
+    const question: any = this.surveyElement;
+    if (!question || question.isDisposed || SurveyElementAdornerBase.GetAdorner(question) !== this) return;
+    const canModify = this.canModifyChoices();
+    if (canModify === this.optionItemsModifiable) return;
+    this.optionItemsModifiable = canModify;
+    // Setting the callback recalculates the visible choices.
+    this.setCanShowOptionItemCallback();
+  }
+  public detachFromUI(): void {
+    // detachElement is skipped for an element that is disposed or adorned by
+    // a newer adorner by now.
+    this.creator.onPermissionsChanged.remove(this.permissionsChangedHandler);
+    super.detachFromUI();
+  }
   protected detachElement(surveyElement: SurveyElement): void {
     if (surveyElement) {
       if (this.surveyElement instanceof QuestionHtmlModel) {
@@ -259,6 +296,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
       if (!!surveyElement["setCanShowOptionItemCallback"]) {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
+        this.creator.onPermissionsChanged.remove(this.permissionsChangedHandler);
       }
       delete (<any>surveyElement.locDescription).placeholder;
     }
@@ -272,16 +310,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         surveyElement.isQuestion &&
         !!surveyElement["setCanShowOptionItemCallback"]
       ) {
-        (<any>surveyElement).setCanShowOptionItemCallback(
-          (item: ItemValue): boolean => {
-            // Placeholder items exist to add them: none while choices cannot change.
-            if (this.creator.readOnly || !this.creator.isCanModifyProperty(surveyElement, "choices")) return false;
-            if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
-            return (
-              this.creator.maxChoices < 1 || surveyElement["choices"].length < this.creator.maxChoices
-            );
-          }
-        );
+        this.optionItemsModifiable = this.canModifyChoices();
+        this.setCanShowOptionItemCallback();
+        if (!this.permissionsChangedHandler) {
+          this.permissionsChangedHandler = () => this.updateOptionItems();
+        }
+        this.creator.onPermissionsChanged.add(this.permissionsChangedHandler);
       }
       if (this.surveyElement instanceof QuestionHtmlModel) {
         surveyElement.registerFunctionOnPropertyValueChanged("html", (newValue: any) => {

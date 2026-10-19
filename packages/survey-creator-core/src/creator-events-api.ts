@@ -397,6 +397,8 @@ export interface CollectionItemAllowOperationsEvent {
    * A Boolean property that you can set to `false` if you want to prevent the target item from being edited.
    */
   allowEdit: boolean;
+  // Set to `false` to prevent the target item from being reordered by drag and drop on the design surface.
+  allowDrag?: boolean;
 }
 
 export interface CollectionItemDeletingEvent {
