@@ -345,6 +345,8 @@ export interface ICreatorOptions {
    * @hidden
    */
   maxLogicItemsInCondition?: number;
+  // The number of rules per page in the Logic tab. See SurveyCreatorModel.logicRulesPageSize.
+  logicRulesPageSize?: number;
 
   /**
    * @deprecated Use the [`maxPanelNestingLevel`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#maxPanelNestingLevel) property instead.

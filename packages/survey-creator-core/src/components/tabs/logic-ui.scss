@@ -289,6 +289,59 @@
   }
 }
 
+// The pager under the rules (logicRulesPageSize), in the rule table's width (.sl-table): the matrix
+// has no bottom toolbar here, so the pager is alone at the start of the footer. The groups follow
+// survey-core's records pager (sd-pager.scss): [First] [Prev]  [page dropdown] of N  [Next] [Last].
+.sl-matrixdynamic__footer--pager {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 50%;
+  margin: 0 25%;
+  padding: var(--sjs2-spacing-x200) var(--sjs2-spacing-x400) 0;
+}
+
+.sl-matrixdynamic__records-bar {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.sl-matrixdynamic__pager {
+  .sd-action-bar {
+    --sd-action-bar-gap: var(--sjs2-spacing-x000);
+  }
+
+  .sd-action-bar__item--space {
+    margin-inline-start: var(--sjs2-spacing-x075);
+    margin-inline-end: 0;
+  }
+}
+
+.sd-question--mobile .sl-matrixdynamic__pager {
+  width: 100%;
+
+  .sd-action-bar {
+    width: 100%;
+  }
+
+  .sd-action-bar__item--space {
+    margin-inline-start: auto;
+  }
+}
+
+.sd-action.sl-pager__page {
+  flex-direction: row-reverse;
+  box-sizing: border-box;
+  min-width: var(--sjs2-spacing-x400);
+}
+
+.sd-action.sl-pager__total {
+  box-sizing: border-box;
+  min-width: var(--sjs2-spacing-x400);
+  --sd-action-disabled-background: var(--sd-action-background);
+  --sd-action-disabled-title-color: var(--sd-action-title-color);
+}
+
 .sl-dropdown {
   max-width: 45vw;
 }

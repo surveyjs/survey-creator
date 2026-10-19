@@ -1,5 +1,5 @@
 import { CreatorTester } from "../tests/creator-tester";
-import { IPresencePeer, IPresenceState, logicRuleKey, PresenceOverlay } from "../src/plugins/collaboration/presence";
+import { IPresencePeer, IPresenceState, logicRuleKey, PresenceOverlay, resolveLogicRuleRow } from "../src/plugins/collaboration/presence";
 import { CollaborationPlugin } from "../src/plugins/collaboration";
 
 // Logic-tab cursors. The rule editor (a row's detail panel) and a rule being
@@ -218,6 +218,62 @@ test("logic cursor: a rule the local list does not show hides the peer's cursor"
     expect(renderPeerCursor(overlay, peers, { a: { s: "rule", n: "|{q1} = 99" }, x: 0.5, y: 0.5 }).style.display).toEqual("none");
   } finally {
     overlay.dispose();
+    list.root.remove();
+    plugin.dispose();
+  }
+});
+
+// These tests page the rules by 100 (logicRulesPageSize; the default is 25): rule i is
+// q<i>.visibleIf = "{q0} = i", 250 rules make 3 pages. A rule is addressed by its record
+// (row.rowIndex), never by its position on the page.
+function createCreatorWithRules(count: number): { creator: CreatorTester, plugin: CollaborationPlugin } {
+  const elements: Array<any> = [{ type: "text", name: "q0" }];
+  for (let i = 1; i <= count; i++) {
+    elements.push({ type: "text", name: "q" + i, visibleIf: "{q0} = " + i });
+  }
+  const creator = new CreatorTester({ logicRulesPageSize: 100 });
+  creator.JSON = { elements };
+  const plugin = new CollaborationPlugin(creator, { bar: false });
+  creator.addPlugin("collaboration", plugin);
+  plugin.setClientId("b");
+  return { creator, plugin };
+}
+const pagedRule = (index: number): string => `|{q0} = ${index}`;
+function pageRowOf(creator: CreatorTester, ruleNo: number): any {
+  return logicModel(creator).matrixItems.visibleRows.find((row: any) => row.rowIndex === ruleNo);
+}
+
+test("logic cursor: a rule's row on page 2 is shared as that rule", async (): Promise<any> => {
+  const { creator, plugin } = createCreatorWithRules(250);
+  creator.makeNewViewActive("logic");
+  logicModel(creator).matrixItems.goToPage(1);
+  const list = mountRuleList(creator);
+  try {
+    const row = logicModel(creator).matrixItems.visibleRows[0];
+    expect(row.rowIndex).toBe(101);
+    await hover(list.header(row), 200, 10);
+    expect(plugin.getState().cur).toEqual({ a: { s: "rule", n: pagedRule(101) }, x: 0.25, y: 0.25 });
+  } finally {
+    list.root.remove();
+    plugin.dispose();
+  }
+});
+
+test("logic cursor: a peer's rule off the current page has no row", (): any => {
+  const { creator, plugin } = createCreatorWithRules(250);
+  creator.makeNewViewActive("logic");
+  const matrix = logicModel(creator).matrixItems;
+  matrix.goToPage(1);
+  let list = mountRuleList(creator);
+  try {
+    expect(resolveLogicRuleRow(logicModel(creator), pagedRule(5))).toBeNull();
+    expect(resolveLogicRuleRow(logicModel(creator), pagedRule(105))).toBe(list.header(pageRowOf(creator, 105)));
+    list.root.remove();
+    matrix.goToPage(0);
+    list = mountRuleList(creator);
+    expect(resolveLogicRuleRow(logicModel(creator), pagedRule(5))).toBe(list.header(pageRowOf(creator, 5)));
+    expect(resolveLogicRuleRow(logicModel(creator), pagedRule(105))).toBeNull();
+  } finally {
     list.root.remove();
     plugin.dispose();
   }

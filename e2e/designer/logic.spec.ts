@@ -730,4 +730,29 @@ test.describe(title, () => {
     await expect(logicQuestionSelector(page).first().locator("..").locator(".sv-popup")).toBeVisible();
     await expect(logicQuestionSelector(page).first().locator("..").locator(".sv-popup .sd-selectlist__filter")).toBeVisible();
   });
+
+  test("Rules are paged: go to page 2 with the pager and edit its first rule", async ({ page }) => {
+    // Rule i is q<i>.visibleIf = "{q0} = i": 60 rules make 3 pages of 25 / 25 / 10 (logicRulesPageSize, 25 by default).
+    const elements: Array<any> = [{ type: "text", name: "q0" }];
+    for (let i = 1; i <= 60; i++) {
+      elements.push({ type: "text", name: "q" + i, visibleIf: "{q0} = " + i });
+    }
+    await page.setViewportSize({ width: 1920, height: 900 });
+    await setJSON(page, { elements });
+    await getTabbedMenuItemByText(page, creatorTabLogicName).click();
+    await expect(tableRulesSelector(page)).toHaveCount(25);
+    await expect(tableRulesSelector(page).first()).toContainText("'q1'");
+
+    const pager = page.locator(".sl-matrixdynamic__pager");
+    await pager.scrollIntoViewIfNeeded();
+    await pager.getByRole("button", { name: "Next" }).click();
+    await expect(tableRulesSelector(page)).toHaveCount(25);
+    await expect(tableRulesSelector(page).first()).toContainText("'q26'");
+
+    await tableRulesSelector(page).first().hover();
+    await logicDetailButtonElement(page).first().click();
+    const editor = page.locator(".sl-table__cell--detail-panel").filter({ visible: true });
+    await expect(editor).toContainText("q26");
+    await expect(logicQuestionValueSelector(page)).toHaveValue("26");
+  });
 });

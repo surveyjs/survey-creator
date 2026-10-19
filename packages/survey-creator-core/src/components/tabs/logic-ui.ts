@@ -1,7 +1,7 @@
 import {
   SurveyModel, Action, Question, MatrixDropdownRowModelBase, MatrixDynamicRowModel,
   PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString, IDialogOptions,
-  ActionContainer
+  ActionContainer, QuestionMatrixDropdownRenderedRow
 } from "survey-core";
 import { settings as libSettings } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
@@ -50,12 +50,19 @@ export class SurveyLogicUI extends SurveyLogic {
       survey.css = logicCss;
     });
     this.itemsSurveyValue = newItemsSurveyValue;
+    // The rule is found through the row while it is removed: by onMatrixRowRemoved its record has left the matrix.
+    let removingRow: MatrixDropdownRowModelBase;
+    let removingItem: SurveyLogicItem;
     this.itemsSurvey.onMatrixRowRemoving.add((sender, options) => {
-      const item = this.visibleItems[options.rowIndex];
-      options.allow = this.canRemoveItem(item);
+      removingRow = options.row;
+      removingItem = this.getItemByRow(options.row);
+      options.allow = this.canRemoveItem(removingItem);
     });
     this.itemsSurvey.onMatrixRowRemoved.add((sender, options) => {
-      const item = this.visibleItems[options.rowIndex];
+      const item = options.row === removingRow ? removingItem : undefined;
+      removingRow = undefined;
+      removingItem = undefined;
+      if (!item) return;
       const isDeleteEditable = item === this.editableItem;
       this.removeItem(item, false);
       if (isDeleteEditable) {
@@ -68,17 +75,33 @@ export class SurveyLogicUI extends SurveyLogic {
       updateMatrixLogicExpandAction(<QuestionMatrixDynamicModel>options.question, options.actions, options.row);
       updateMatrixLogicRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);
     });
+    const matrix = this.matrixItems;
+    matrix.visibleRowsChangedCallback = () => {
+      if (matrix === this.matrixItems) {
+        this.onItemsRowsChanged();
+      }
+    };
+    matrix.onRenderedTableResetCallback = () => {
+      if (matrix === this.matrixItems) {
+        this.onRenderedTableReset();
+      }
+    };
+    matrix.registerFunctionOnPropertyValueChanged("pageIndex", () => {
+      if (matrix === this.matrixItems) {
+        this.onPageChanged();
+      }
+    }, "logic-ui");
     this.updateItemsSurveyData();
     this.onReadOnlyChanged();
   }
   @property({
     onSet: (value, target: SurveyLogicUI) => {
-      target.updateItemsSurveyData();
+      target.updateItemsSurveyData(true);
     }
   }) questionFilter: string;
   @property({
     onSet: (value, target: SurveyLogicUI) => {
-      target.updateItemsSurveyData();
+      target.updateItemsSurveyData(true);
     }
   }) actionTypeFilter: string;
   public dispose(): void {
@@ -92,12 +115,21 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   public addNewUI() {
     if (this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
-      this.matrixItems["lockResetRenderedTable"] = true;
+      // The lock keeps the rendered table, so the added row is animated. A paged matrix rebuilds the
+      // page's table on an add instead, and a reset asked for while the table is locked is dropped.
+      const lockTable = !(this.matrixItems.pageSize > 0);
+      if (lockTable) {
+        this.matrixItems["lockResetRenderedTable"] = true;
+      }
       this.addNew();
-      this.matrixItems["lockResetRenderedTable"] = false;
+      if (lockTable) {
+        this.matrixItems["lockResetRenderedTable"] = false;
+      }
     }
-    const rows = this.matrixItems.visibleRows;
-    rows[rows.length - 1].showDetailPanel();
+    const row = this.showItemRow(this.visibleItems[this.visibleItems.length - 1]);
+    if (!!row) {
+      row.showDetailPanel();
+    }
   }
   public toggleExpressionEditorIsFastEntry() {
     this.expressionEditorIsFastEntry = !this.expressionEditorIsFastEntry;
@@ -141,12 +173,11 @@ export class SurveyLogicUI extends SurveyLogic {
     return itemUI.expressionEditor.hasErrors() || itemUI.itemEditor.hasErrors();
   }
   private showErroredItem(item: SurveyLogicItem): void {
-    const index = this.visibleItems.indexOf(item);
-    const rows = this.matrixItems.visibleRows;
-    const row = index > -1 && index < rows.length ? rows[index] : null;
+    if (this.getItemRecordIndex(item) < 0) return;
+    this.matrixItems.visibleRows.forEach(r => r.hideDetailPanel());
+    this.mode = "view";
+    const row = this.showItemRow(item);
     if (!!row) {
-      rows.forEach(r => r.hideDetailPanel());
-      this.mode = "view";
       row.showDetailPanel();
       this.hasErrorInUI();
     }
@@ -349,6 +380,7 @@ export class SurveyLogicUI extends SurveyLogic {
           allowAddRows: false,
           allowAdaptiveActions: false,
           rowCount: 0,
+          pageSize: this.getItemsPageSize(),
           columns: [
             {
               cellType: "linkvalue",
@@ -376,6 +408,7 @@ export class SurveyLogicUI extends SurveyLogic {
           allowAddRows: false,
           allowAdaptiveActions: false,
           rowCount: 0,
+          pageSize: this.getItemsPageSize(),
           showHeader: false,
           columns: [
             {
@@ -388,6 +421,11 @@ export class SurveyLogicUI extends SurveyLogic {
         }
       ]
     };
+  }
+  // Read only here, when the rule list survey is built: 0 is no paging.
+  private getItemsPageSize(): number {
+    const pageSize = this.options.logicRulesPageSize;
+    return pageSize > 0 ? pageSize : 0;
   }
   private createExpressionPropertyEditor(): ConditionEditor {
     const res = new ConditionEditor(
@@ -422,8 +460,16 @@ export class SurveyLogicUI extends SurveyLogic {
     if (!this.options) return text;
     return this.options.onLogicGetTitleCallback(item.expression, item.expressionText, text, item);
   }
-  private updateItemsSurveyData() {
+  private updateItemsSurveyData(isNewList?: boolean) {
     if (!this.itemsSurvey) return;
+    this.isUpdatingItemsSurveyData = true;
+    try {
+      this.updateItemsSurveyDataCore(isNewList);
+    } finally {
+      this.isUpdatingItemsSurveyData = false;
+    }
+  }
+  private updateItemsSurveyDataCore(isNewList: boolean) {
     var data = [];
     this.visibleItems = this.getVisibleItems();
     this.visibleItems.forEach(item => {
@@ -439,14 +485,13 @@ export class SurveyLogicUI extends SurveyLogic {
         this.expressionEditorCanShowBuilder = row.isDetailPanelShowing;
         if (row.isDetailPanelShowing) {
           if (this.mode === "view") {
-            const logicItem = this.visibleItems[row.rowIndex - 1];
-            this.editItem(logicItem);
+            this.editItem(this.getItemByRow(row));
           }
           const condQuestion = <QuestionEmbeddedSurveyModel>panel.getQuestionByName("conditions");
           const actionsQuestion = <QuestionEmbeddedSurveyModel>panel.getQuestionByName("actions");
           condQuestion.embeddedSurvey = this.expressionEditor.editSurvey;
           actionsQuestion.embeddedSurvey = this.itemEditorValue.editSurvey;
-          this.updateRowIsAdditionalClasses(row.rowIndex - 1, false);
+          this.updateRowIsAdditionalClasses(row, false);
         } else {
           this.mode = "view";
           this.updateRenderedRows();
@@ -479,18 +524,84 @@ export class SurveyLogicUI extends SurveyLogic {
       options.cell.question.allowClear = false;
     };
     this.matrixItems.value = data;
+    if (isNewList) {
+      this.matrixItems.pageIndex = 0;
+    }
     this.updateRenderedRows();
   }
+  // The matrix pages the rules: its rows and its rendered table hold the current page only, and
+  // row.rowIndex is the 1-based record index across all pages - the rule's index in visibleItems + 1.
+  private getItemByRow(row: MatrixDropdownRowModelBase): SurveyLogicItem {
+    const index = !!row ? row.rowIndex - 1 : -1;
+    return index > -1 && index < this.visibleItems.length ? this.visibleItems[index] : undefined;
+  }
+  private getItemRecordIndex(item: SurveyLogicItem): number {
+    return this.visibleItems.indexOf(item);
+  }
+  // The effective page size is pageSize capped by survey-core's settings.maxPageSize.
+  private getRecordPageIndex(recordIndex: number): number {
+    let pageSize = this.matrixItems.pageSize;
+    const maxPageSize = libSettings.maxPageSize;
+    if (maxPageSize > 0 && pageSize > maxPageSize) pageSize = maxPageSize;
+    return pageSize > 0 ? Math.floor(recordIndex / pageSize) : 0;
+  }
+  // Goes to the page that holds the rule and returns the rule's row there.
+  private showItemRow(item: SurveyLogicItem): MatrixDropdownRowModelBase {
+    const index = this.getItemRecordIndex(item);
+    if (index < 0) return null;
+    this.matrixItems.pageIndex = this.getRecordPageIndex(index);
+    return this.matrixItems.visibleRows.find(row => row.rowIndex - 1 === index) || null;
+  }
+  private isUpdatingItemsSurveyData: boolean;
+  private isPageMoving: boolean;
+  // A page move drops the rows of the page it leaves: an open rule closes as a collapsed row does.
+  // A page move made while the list is rebuilt (a filter change, a save) leaves the editing alone.
+  private onPageChanged(): void {
+    this.isPageMoving = true;
+    if (this.isUpdatingItemsSurveyData || this.mode === "view") return;
+    this.expressionEditorCanShowBuilder = false;
+    this.mode = "view";
+    this.updateNewActionState();
+  }
+  // The rows of the page are rebuilt - a page move, a new value - and their rendered table is reset.
+  private onItemsRowsChanged(): void {
+    this.isPageMoving = false;
+    this.updateMarkedRenderedRows();
+  }
+  // The rendered table is reset without new rows: a row removal under paging. A page move resets it
+  // before its rows are rebuilt, onItemsRowsChanged follows.
+  private onRenderedTableReset(): void {
+    if (!this.isPageMoving) {
+      this.updateMarkedRenderedRows();
+    }
+  }
+  private isItemMarked(item: SurveyLogicItem): boolean {
+    return !!item && (item.isModified || item.isNew);
+  }
+  // The renderer builds the rendered table of the current page, and a new table marks no row: it is
+  // built here only when a rule on the current page is marked.
+  private updateMarkedRenderedRows(): void {
+    if (this.isUpdatingItemsSurveyData) return;
+    const pageIndex = this.matrixItems.pageIndex;
+    const hasMarkedRow = this.visibleItems.some((item, index) => this.isItemMarked(item) && this.getRecordPageIndex(index) === pageIndex);
+    if (hasMarkedRow) {
+      this.updateRenderedRows();
+    }
+  }
   private updateRenderedRows() {
-    this.visibleItems.forEach((_, index) => {
-      this.updateRowIsAdditionalClasses(index, this.visibleItems[index].isModified || this.visibleItems[index].isNew);
+    this.matrixItems.renderedTable.rows.forEach(renderedRow => {
+      if (!this.isDataRenderedRow(renderedRow)) return;
+      renderedRow.isAdditionalClasses = this.isItemMarked(this.getItemByRow(renderedRow.row));
     });
   }
-  private updateRowIsAdditionalClasses(index: number, isAdditionalClasses: boolean) {
-    if (!!this.matrixItems.renderedTable) {
-      const visibleRows = this.matrixItems.renderedTable.rows.filter(row => row.visible);
-      visibleRows[index].isAdditionalClasses = isAdditionalClasses;
+  private updateRowIsAdditionalClasses(row: MatrixDropdownRowModelBase, isAdditionalClasses: boolean) {
+    const renderedRow = this.matrixItems.renderedTable.rows.find(r => r.row === row && this.isDataRenderedRow(r));
+    if (!!renderedRow) {
+      renderedRow.isAdditionalClasses = isAdditionalClasses;
     }
+  }
+  private isDataRenderedRow(renderedRow: QuestionMatrixDropdownRenderedRow): boolean {
+    return !!renderedRow.row && !renderedRow.isDetailRow && !renderedRow.isErrorsRow;
   }
   private updateNewActionState(): void {
     this.addNewButton.enabled = this.mode !== "new";

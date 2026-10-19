@@ -1,6 +1,6 @@
 import { Action, IAction, QuestionHtmlModel } from "survey-core";
 import { getCollabString } from "../collaboration-strings";
-import { logicRuleKey, visibleLogicItems } from "./logic-rules";
+import { logicItemOfRow, logicRuleKey } from "./logic-rules";
 import { IPresencePeer, presenceAvatarCss, presenceColorSlot, presenceInitials } from "./presence-state";
 
 // The holder chip in a rule's row actions, and the survey-core row action it
@@ -50,14 +50,15 @@ export class LogicLockView {
   // Re-apply the lock owners to the chips and Remove buttons of the rows the
   // matrix has built actions for.
   public update(): void {
+    // A row of another page (the matrix pages the rules) is gone: its rule gets
+    // its chip when its page's row actions are built.
     const rows: Array<any> = this.model?.matrixItems?.visibleRows || [];
     this.rows.forEach((parts, row) => {
-      const index = rows.indexOf(row);
-      if (index < 0) {
+      if (rows.indexOf(row) < 0) {
         this.rows.delete(row);
         return;
       }
-      this.applyRow(parts, this.ownerAt(index));
+      this.applyRow(parts, this.ownerOf(row));
     });
   }
 
@@ -115,13 +116,12 @@ export class LogicLockView {
     else actions.push(chip);
     const parts: IRowParts = { chip, remove };
     this.rows.set(row, parts);
-    const rows: Array<any> = options.question?.visibleRows || [];
-    this.applyRow(parts, this.ownerAt(rows.indexOf(row)));
+    this.applyRow(parts, this.ownerOf(row));
   };
 
-  private ownerAt(index: number): IPresencePeer | null {
-    if (index < 0) return null;
-    return this.getLockOwner(logicRuleKey(visibleLogicItems(this.model)[index]));
+  private ownerOf(row: any): IPresencePeer | null {
+    const item = logicItemOfRow(this.model, row);
+    return item ? this.getLockOwner(logicRuleKey(item)) : null;
   }
 
   private applyRow(parts: IRowParts, owner: IPresencePeer | null): void {

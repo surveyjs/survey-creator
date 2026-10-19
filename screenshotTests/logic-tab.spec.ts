@@ -457,4 +457,23 @@ test.describe(title, () => {
     await page.click(".sl-table__detail-button");
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-condition-overflow-text.png");
   });
+
+  test("pager on page 2", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 900 });
+    // 30 rules make 2 pages (logicRulesPageSize, 25 by default): page 2 holds rules 26-30 and the pager.
+    const elements: Array<any> = [{ type: "text", name: "q0" }];
+    for (let i = 1; i <= 30; i++) {
+      elements.push({ type: "text", name: "q" + i, visibleIf: "{q0} = " + i });
+    }
+    await setJSON(page, { elements });
+    await getTabbedMenuItemByText(page, creatorTabLogicName).click();
+    const pager = page.locator(".sl-matrixdynamic__pager");
+    await pager.scrollIntoViewIfNeeded();
+    await pager.getByRole("button", { name: "Next" }).click();
+    await expect(page.locator(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filter({ visible: true })).toHaveCount(5);
+    await resetHoverToCreator(page);
+    await resetFocusToBody(page);
+    const tabContent = page.locator(".svc-creator-tab__content");
+    await compareScreenshot(page, tabContent, "logic-tab-pager-page-2.png");
+  });
 });

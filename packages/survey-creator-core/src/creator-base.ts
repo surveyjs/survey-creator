@@ -1252,6 +1252,13 @@ export class SurveyCreatorModel extends Base
   public set maxLogicItemsInCondition(val) {
     this.logicMaxItemsInCondition = val;
   }
+  // The number of rules per page in the Logic tab; a pager under the rule list moves between pages.
+  // Default: 25. 0 or a negative value shows every rule on one page, without a pager.
+  // The Logic tab reads it when it builds its rule list (when the tab is activated): a change made
+  // while the tab is open applies the next time the tab is opened.
+  // The page size cannot exceed the Form Library's `settings.maxPageSize` (100 by default): a larger
+  // value shows `settings.maxPageSize` rules per page unless the application raises that setting.
+  public logicRulesPageSize: number = 25;
 
   /**
    * @deprecated Use the [`useElementTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#useElementTitles) property instead.
