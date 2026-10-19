@@ -199,7 +199,7 @@ class PageWrapperComponent extends React.Component<IPageWrapperComponentProps, a
   }
   clearCallback(page?: PageModel) {
     if (!page) return;
-    page.unRegisterFunctionOnPropertyValueChanged("name");
+    page.unRegisterFunctionOnPropertyValueChanged("name", this.id);
   }
   componentDidUpdate(prevProps: IPageWrapperComponentProps, prevState: any): void {
     if (prevProps.page !== this.props.page) {

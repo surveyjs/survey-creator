@@ -1023,6 +1023,7 @@ svc-question,
     > .sd-question__header
     ~ .sd-question__content
     > .sd-panel
+    > .sd-panel__expandable-content
     > .sd-panel__content {
     row-gap: var(--sd-panel-content-row-gap);
     column-gap: var(--sd-panel-content-column-gap);

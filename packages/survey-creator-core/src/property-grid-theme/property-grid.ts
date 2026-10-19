@@ -42,6 +42,7 @@ export var propertyGridCss = {
     description: "spg-description spg-panel__description",
     container: "spg-panel spg-row__panel",
     content: "spg-panel__content",
+    expandableContent: "spg-panel__expandable-content",
     icon: "spg-panel__icon",
     iconExpanded: "spg-panel__icon--expanded",
     footer: "spg-panel__footer",

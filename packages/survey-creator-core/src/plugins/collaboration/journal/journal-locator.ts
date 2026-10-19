@@ -115,7 +115,8 @@ export function buildLocator(obj: any, survey: SurveyModel): JournalLocator {
 
 // Resolves a locator path against the given survey. Walks segment by segment:
 // a segment after an array-valued property selects the element by identity
-// (with a numeric-index fallback), any other segment is a property access.
+// (by index only an element that has none), any other segment is a property
+// access.
 // Returns `null` when the referenced object no longer exists.
 export function resolveLocator(locator: JournalLocator, survey: SurveyModel): any {
   if (typeof locator !== "string" || !survey) return null;
@@ -142,7 +143,12 @@ function selectFromArray(array: Array<any>, segment: string): any {
     const identity = getItemIdentity(array[i]);
     if (identity !== undefined && String(identity) === segment) return array[i];
   }
-  if (/^\d+$/.test(segment)) return array[parseInt(segment)];
+  // Only elements without an identity are addressed by index (buildLocator):
+  // a numeric identity that is gone must not select whatever sits there now.
+  if (/^\d+$/.test(segment)) {
+    const item = array[parseInt(segment)];
+    return getItemIdentity(item) === undefined ? item : undefined;
+  }
   return undefined;
 }
 

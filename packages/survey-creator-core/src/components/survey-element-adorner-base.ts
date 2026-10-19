@@ -241,7 +241,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
     event.stopPropagation();
   }
-  private allowEditOption: boolean;
+  // A property, not a field: `allowEdit` feeds computed action visibility, and
+  // the allowed operations may change while the element is rendered.
+  @property() private allowEditOption: boolean;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void = (_, options) => {
     if (options.name === "flyoutMode") {
       this.updateActionsProperties();

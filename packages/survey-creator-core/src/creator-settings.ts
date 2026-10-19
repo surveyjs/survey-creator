@@ -187,6 +187,7 @@ export interface ICollectionItemAllowOperations {
   allowDelete: boolean;
   allowEdit: boolean;
   allowAdd: boolean;
+  allowDrag?: boolean;
 }
 
 export interface ICreatorPlugin {
