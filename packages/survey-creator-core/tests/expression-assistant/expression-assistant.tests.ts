@@ -125,13 +125,10 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     expect(request.userPrompt).toBe("show when apple is chosen");
     expect(request.expression).toBe("");
     expect(request.isCondition).toBe(true);
-    expect(request.element).toBe(creator.survey.getQuestionByName("q2"));
-    expect(request.propertyName).toBe("visibleIf");
-    expect(request.targets).toEqual([{ element: request.element, propertyName: "visibleIf" }]);
+    expect(request.targets).toEqual([{ element: creator.survey.getQuestionByName("q2"), propertyName: "visibleIf" }]);
     expect(request.context.variables.map(v => v.name)).toEqual(["fruit"]);
     expect(request.systemPrompt.indexOf("SurveyJS expression syntax")).toBeGreaterThan(-1);
     expect(request.signal.aborted).toBe(false);
-    expect(request.history).toEqual([{ kind: "generate", prompt: "show when apple is chosen" }]);
     request.callback({ expression: "{fruit} = 'apple'", explanation: "Shown for apple." });
     expect(assistant.status).toBe("review");
     expect(assistant.expression).toBe("{fruit} = 'apple'");
@@ -158,7 +155,7 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     expect(creator.survey.getQuestionByName("q2").visibleIf).toBeFalsy();
     expect(creator.undoRedoManager.canUndo()).toBe(canUndo);
   });
-  test("modify when the target has an expression; Refine sends modify with the history", () => {
+  test("modify when the target has an expression; Refine sends modify with the previous turns", () => {
     const { creator, requests } = createCreator();
     creator.survey.getQuestionByName("q2").visibleIf = "{fruit} = 'banana'";
     const assistant = createAssistant(creator);
@@ -170,11 +167,10 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     expect(requests[1].kind).toBe("modify");
     expect(requests[1].userPrompt).toBe("only apple");
     expect(requests[1].expression).toBe("{fruit} anyof ['apple', 'banana']");
-    expect(requests[1].history).toEqual([
-      { kind: "modify", prompt: "also apple" },
-      { kind: "modify", expression: "{fruit} anyof ['apple', 'banana']" },
-      { kind: "modify", prompt: "only apple" },
-    ]);
+    expect(requests[1].messages.map(m => m.role)).toEqual(["user", "assistant", "user"]);
+    expect(requests[1].messages[0].content.indexOf("also apple")).toBeGreaterThan(-1);
+    expect(requests[1].messages[1].content.indexOf("{fruit} anyof ['apple', 'banana']")).toBeGreaterThan(-1);
+    expect(requests[1].messages[2].content.indexOf("only apple")).toBeGreaterThan(-1);
   });
   test("errors: one automatic fix with the English findings, then review", () => {
     const { creator, requests } = createCreator();
@@ -235,12 +231,25 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     assistant.explain();
     expect(requests[0].kind).toBe("explain");
     expect(requests[0].expression).toBe("{fruit} = 'apple'");
-    expect(requests[0].history).toEqual([]);
     requests[0].callback({ explanation: "Shown when the respondent picks apple." });
     expect(assistant.status).toBe("explained");
     expect(assistant.checkResult).toBeUndefined();
     expect(assistant.canAccept).toBe(false);
     expect(assistant.getReviewHtml().indexOf("Shown when the respondent picks apple.")).toBeGreaterThan(-1);
+  });
+  test("rebuildSystemPrompt: a handler that changes the context gets a prompt built from it", () => {
+    const { creator, requests } = createCreator();
+    const assistant = createAssistant(creator);
+    assistant.generate("apple");
+    const request = requests[0];
+    expect(request.systemPrompt.indexOf("\"fruit\"")).toBeGreaterThan(-1);
+    request.context.variables = request.context.variables.filter(v => v.name !== "fruit");
+    request.rebuildSystemPrompt();
+    expect(request.systemPrompt.indexOf("\"fruit\"")).toBe(-1);
+    expect(request.systemPrompt.indexOf("SurveyJS expression syntax")).toBeGreaterThan(-1);
+    // the next request starts from the full context again
+    assistant.generate("banana");
+    expect(requests[1].systemPrompt.indexOf("\"fruit\"")).toBeGreaterThan(-1);
   });
 });
 
@@ -570,12 +579,11 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     "Keep the meaning of every part the request does not change. " +
     "If the current expression relies on and binding tighter than or, keep that grouping and write the parentheses out. " +
     "If you change the meaning of a part the author did not mention, say so in the explanation.";
-  test("generate, then fix with the findings, then refine: the instruction and the messages of each request", () => {
+  test("generate, then fix with the findings, then refine: the messages of each request", () => {
     const { creator, requests } = createCreator();
     const assistant = createAssistant(creator);
     assistant.generate("apple lovers");
     const generate = "Write an expression for this request:\napple lovers\n\n" + emptyOption;
-    expect(requests[0].instruction).toBe(generate);
     expect(requests[0].messages).toEqual([{ role: "user", content: generate }]);
 
     requests[0].callback({ expression: "{frut} = 'apple'", explanation: "Apple." });
@@ -584,7 +592,6 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     const fix = "This expression failed the check:\n{frut} = 'apple'\n\nProblems found:\n- [error] " + finding.message + "\n\n" +
       "Return a corrected expression that still does what the author asked. " +
       "If it cannot be corrected with the listed variables and functions, return an empty expression and say why in the explanation.";
-    expect(requests[1].instruction).toBe(fix);
     const firstAnswer = { role: "assistant", content: JSON.stringify({ expression: "{frut} = 'apple'", explanation: "Apple." }) };
     expect(requests[1].messages).toEqual([{ role: "user", content: generate }, firstAnswer, { role: "user", content: fix }]);
 
@@ -593,7 +600,6 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     // a refine of a result is a modify: it gets the same rules
     const modify = "Current expression:\n{fruit} = 'apple'\n\nChange it as follows:\nor banana\n\n" + modifyRules + "\n\n" + emptyOption;
     expect(requests[2].kind).toBe("modify");
-    expect(requests[2].instruction).toBe(modify);
     expect(requests[2].messages).toEqual([
       { role: "user", content: generate }, firstAnswer, { role: "user", content: fix },
       { role: "assistant", content: JSON.stringify({ expression: "{fruit} = 'apple'", explanation: "" }) },
@@ -602,7 +608,6 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     // the fields a host builds its own messages from are still there
     expect(requests[2].userPrompt).toBe("or banana");
     expect(requests[2].expression).toBe("{fruit} = 'apple'");
-    expect(requests[2].history.length).toBeGreaterThan(0);
   });
   test("modify of the target's expression and explain", () => {
     const { creator, requests } = createCreator();
@@ -611,12 +616,10 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     assistant.explain();
     const explain = "Explain what this expression does, in plain words for a form author:\n{fruit} = 'banana'\n\n" +
       "Put the explanation in \"explanation\" and return the expression unchanged in \"expression\".";
-    expect(requests[0].instruction).toBe(explain);
     expect(requests[0].messages).toEqual([{ role: "user", content: explain }]);
     requests[0].callback({ explanation: "Shown for banana." });
     assistant.generate("also apple");
     const modify = "Current expression:\n{fruit} = 'banana'\n\nChange it as follows:\nalso apple\n\n" + modifyRules + "\n\n" + emptyOption;
-    expect(requests[1].instruction).toBe(modify);
     // an explanation is no turn of the conversation that writes the expression
     expect(requests[1].messages).toEqual([{ role: "user", content: modify }]);
   });

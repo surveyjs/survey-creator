@@ -10,7 +10,7 @@ import { QuestionLinkValueModel } from "../components/link-value";
 import {
   checkExpression, getExpressionLintOptions, IExpressionCheckFinding, IExpressionCheckPending, IExpressionCheckResult, IExpressionSite,
 } from "./expression-check";
-import { buildExpressionContext, buildExpressionInstruction, IExpressionContext } from "./expression-context";
+import { buildExpressionContext, buildExpressionInstruction, buildExpressionSystemPrompt, IExpressionContext } from "./expression-context";
 import { parseExpressionResponse } from "./expression-response";
 
 import "./expression-assistant.scss";
@@ -38,13 +38,6 @@ export interface IExpressionAssistantOptions {
 }
 
 export type ExpressionAssistantStatus = "ready" | "loading" | "review" | "explained" | "cancelled" | "error" | "empty" | "accepted";
-
-export interface IExpressionAssistantHistoryItem {
-  kind: string;
-  prompt?: string;
-  expression?: string;
-  explanation?: string;
-}
 
 // The creator a property grid or a condition editor works for: the designer survey carries it.
 export function getExpressionAssistantCreator(obj: any): SurveyCreatorModel {
@@ -90,7 +83,6 @@ export class ExpressionAssistant extends Base {
   @property({ defaultValue: "" }) errorText: string;
   @property({ defaultValue: 0 }) fixCount: number;
   public checkResult: IExpressionCheckResult;
-  public history: Array<IExpressionAssistantHistoryItem> = [];
   // the request's "messages": every instruction sent and the answer it got, explanations excluded
   private conversation: Array<{ role: "user" | "assistant", content: string }> = [];
   private controller: AbortController;
@@ -176,7 +168,6 @@ export class ExpressionAssistant extends Base {
     this.errorText = "";
     if (kind !== "explain") {
       this.checkResult = undefined;
-      this.history.push({ kind: kind, prompt: prompt });
     }
     this.send(kind, prompt, expression);
   }
@@ -193,14 +184,11 @@ export class ExpressionAssistant extends Base {
     const options: ExpressionAssistantRequestEvent = {
       kind: kind, userPrompt: prompt || "", expression: expression || "",
       isCondition: this.request.context.target.isCondition,
-      element: sites.length > 0 ? sites[0].obj : undefined,
-      propertyName: sites.length > 0 ? sites[0].propertyName : undefined,
       targets: sites.map(site => ({ element: site.obj, propertyName: site.propertyName })),
       // copies: a handler that adjusts them changes this request only
       context: clone(this.request.context),
       systemPrompt: this.request.systemPrompt,
-      history: clone(this.history),
-      instruction: instruction,
+      rebuildSystemPrompt: () => { options.systemPrompt = buildExpressionSystemPrompt(options.context); },
       messages: clone(this.conversation).concat([{ role: "user", content: instruction }]),
       signal: controller.signal,
       callback: (result) => {
@@ -245,7 +233,6 @@ export class ExpressionAssistant extends Base {
       this.status = "empty";
       return;
     }
-    this.history.push({ kind: kind, expression: expression, explanation: explanation });
     const check = this.setResult(expression, explanation || "", true);
     // an unchecked site is no defect of the expression: a correction request cannot help it
     if (check.errorCount > 0 && this.fixCount < Math.max(0, this.creator.expressionAssistantFixAttempts || 0)) {
