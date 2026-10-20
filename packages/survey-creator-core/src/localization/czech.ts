@@ -651,6 +651,8 @@ export var czStrings = {
       templateErrorLocation: "Zarovnání chybové zprávy",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nová vstupní lokace",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panely na datovou stránku",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
@@ -1083,6 +1085,8 @@ export var czStrings = {
     maxFiles: "Maximální počet souborů",
     // "Row count"
     rowCount: "Počet řádků",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Řádky na datovou stránku",
     // "Columns layout"
     columnLayout: "Rozložení sloupců",
     // "\"Add Row\" button alignment"
@@ -2745,6 +2749,8 @@ export var czStrings = {
       confirmDelete: "Spustí výzvu k potvrzení před odstraněním položky.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Zadejte výraz, který počítá počet záznamů. Tento výraz přepisuje nastavení \"Počáteční počet záznamů\" a je znovu vyhodnocován pokaždé, když se změní hodnoty, na které odkazuje. Výsledek je omezen nastavením \"Minimální počet záznamů\" a \"Maximální počet položek\". Dokud je tento výraz nastaven, respondenti nemohou položky ručně přidávat ani odebírat.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Určuje počet panelů zobrazených na každé datové stránce. 0 deaktivuje stránkování a zobrazuje všechny panely.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Přiřadí čísla otázkám vnořeným v dynamickém panelu."
     },
@@ -2756,6 +2762,8 @@ export var czStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Automaticky rozbalí podrobnou část, když je do matice přidán nový řádek."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Určuje počet maticových řádků zobrazených na každé datové stránce. 0 deaktivuje stránkování a zobrazuje všechny řádky.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplikuje odpovědi z posledního řádku a přiřadí je k dalšímu přidanému dynamickému řádku.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
