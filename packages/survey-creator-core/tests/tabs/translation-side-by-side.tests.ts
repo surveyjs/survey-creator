@@ -2104,6 +2104,32 @@ test("progress link: puts the input focus into the dialog's editor of the string
   // Nothing is rendered here, so the model keeps retrying - closing it drops the request.
   model.hideElementStringsDialog();
 });
+test("progress link: the dialog's own first-input focus goes to the editor of the string, not to the caption actions", () => {
+  withDialog(dialogs => {
+    const creator = createSideBySideCreator({
+      locale: "de",
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+            { type: "text", name: "q2", title: "Question 2" }
+          ]
+        }
+      ]
+    });
+    const model = getModel(creator);
+    const realQ2 = creator.survey.getQuestionByName("q2");
+    model.selectFirstUntranslatedString();
+    expect(dialogs).toHaveLength(1);
+    const row = getStringsRow(getStringsMatrix(model), realQ2.locTitle);
+    const cellQuestion = row.cells[row.cells.length - 1].question;
+    // The popup focuses its first input with a delay of its own; on a slow render that comes after
+    // the cell is focused, so the popup is pointed at the same editor.
+    expect(dialogs[0].model.focusFirstInputSelector).toBe("#" + cellQuestion.inputId);
+    model.hideElementStringsDialog();
+  });
+});
 
 test("progress link: the clear button drops the language strings after a confirmation and keeps translating it", () => {
   const originalCallback = surveySettings.confirmActionAsync;
