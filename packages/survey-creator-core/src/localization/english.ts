@@ -1992,6 +1992,7 @@ export var enStrings = {
       "name/shadowing": {
         builtInVariable: "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions.",
         valueNameShadowsElement: "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too.",
+        dropdownRowConflict: "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other.",
         commentKeyCollision: "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         totalKeyCollision: "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         variableShadowsQuestion: "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question.",
@@ -2254,6 +2255,11 @@ export var enStrings = {
       valueShape: {
         array: "an array",
         object: "an object",
+      },
+      dropdownRowSharer: {
+        matrix: "a row of matrix",
+        multipletext: "an item of multipletext",
+        default: "a row or item of a question",
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

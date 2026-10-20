@@ -759,6 +759,26 @@ test("A valueName shadowing a records element says what the container cannot see
     " \"q1\" - the variable answers {q1} from then on, not the question.");
 });
 
+test("A single-value choice sharing a matrix row names what collides", () => {
+  expect(editorLocalization.getJsonValue("linter.messages.name/shadowing.dropdownRowConflict")).toBeDefined();
+  expect(textOf({
+    elements: [
+      { type: "matrixdropdown", name: "md", rows: ["r1"], columns: [{ name: "c", cellType: "text" }] },
+      { type: "matrix", name: "m", valueName: "md", rows: ["r1"], columns: ["x", "y"] },
+    ]
+  }, "name/shadowing")).toBe(
+    "The row \"r1\" of matrixdropdown \"md\" is also a row of matrix \"m\" sharing its value - " +
+    "a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other.");
+  expect(textOf({
+    elements: [
+      { type: "matrixdropdown", name: "md", rows: ["r1"], columns: [{ name: "c", cellType: "text" }] },
+      { type: "multipletext", name: "mt", valueName: "md", items: [{ name: "r1" }] },
+    ]
+  }, "name/shadowing")).toBe(
+    "The row \"r1\" of matrixdropdown \"md\" is also an item of multipletext \"mt\" sharing its value - " +
+    "a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other.");
+});
+
 test("A key that matches no property names the class it was written on", () => {
   expect(textOf({ elements: [{ type: "text", name: "q1", nosuchprop: 1 }] }, "property/unknown")).toBe(
     "\"nosuchprop\" is not a property of \"q1\" (text)." +

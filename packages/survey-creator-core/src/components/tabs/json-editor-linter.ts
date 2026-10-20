@@ -299,6 +299,9 @@ export class JsonEditorLinterModel extends Base {
       params.ownerText = data.nameKind === "calculatedValue"
         ? getTerm("nameOwner", "calculatedValue")
         : (finding.elementType || getTerm("nameOwner", undefined));
+      if (finding.reason === "dropdownRowConflict") {
+        params.sharedKeyText = getTerm("dropdownRowSharer", finding.elementType);
+      }
     }
     if (finding.ruleId === "choices/duplicate") {
       params.valueText = quoteValue(data.value);
