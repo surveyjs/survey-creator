@@ -2105,6 +2105,37 @@ test("progress link: puts the input focus into the dialog's editor of the string
   model.hideElementStringsDialog();
 });
 
+test("progress link: the dialog's own initial focus goes to the editor of the string it goes to", () => {
+  withDialog(dialogs => {
+    const creator = createSideBySideCreator({
+      locale: "de",
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+            { type: "text", name: "q2", title: "Question 2" }
+          ]
+        }
+      ]
+    });
+    const model = getModel(creator);
+    // Opened from an element's button - nothing to go to, the dialog focuses as any other does.
+    model.showQuestionStringsDialog(model.targetSurvey.getQuestionByName("q1"));
+    expect(dialogs).toHaveLength(1);
+    expect(dialogs[0].model.focusFirstInputSelector).toBeUndefined();
+    // Opened by the progress link - the dialog focuses its first focusable element a moment after
+    // it is shown (the caption row's buttons), which would take the focus from the cell.
+    const realQ2 = creator.survey.getQuestionByName("q2");
+    model.selectFirstUntranslatedString();
+    expect(dialogs).toHaveLength(2);
+    const row = getStringsRow(getStringsMatrix(model), realQ2.locTitle);
+    const cell = row.cells[row.cells.length - 1].question;
+    expect(dialogs[1].model.focusFirstInputSelector).toBe("[id=\"" + cell.inputId + "\"]");
+    model.hideElementStringsDialog();
+  });
+});
+
 test("progress link: the clear button drops the language strings after a confirmation and keeps translating it", () => {
   const originalCallback = surveySettings.confirmActionAsync;
   let message = "";
