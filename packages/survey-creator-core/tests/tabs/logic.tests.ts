@@ -30,9 +30,10 @@ import { PropertyGridTriggerValueInLogicEditor } from "../../src/property-grid/v
 import { QuestionEmbeddedSurveyModel } from "../../src/components/embedded-survey";
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 import { CreatorTester } from "../creator-tester";
+import { SurveyCreatorModel } from "../../src/creator-base";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { wrapTextByCurlyBraces } from "../../src/utils/creator-utils";
-import { settings } from "../../src/creator-settings";
+import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyLogicType } from "../../src/components/tabs/logic-types";
 
@@ -4142,3 +4143,280 @@ test("SurveyLogicUI: display text respects survey locale when useElementTitles i
   expect(displayText).toContain("Question 2 en francais");
 });
 
+// The Logic tab pages its rules (logicRulesPageSize, 25 by default). One rule per question:
+// rule i is q<i>.visibleIf = "{q0} = i". activateLogicTabWithRules pages by 100 unless the options
+// say otherwise, so 250 rules make 3 pages: 100 / 100 / 50. The default has tests of its own.
+function getRulesJSON(count: number): any {
+  const elements: Array<any> = [{ type: "text", name: "q0" }];
+  for (let i = 1; i <= count; i++) {
+    elements.push({ type: "text", name: "q" + i, visibleIf: "{q0} = " + i });
+  }
+  return { elements: elements };
+}
+function activateLogicTabWithRules(count: number, options: any = {}): { creator: CreatorTester, logic: SurveyLogicUI } {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester({ showLogicTab: true, logicRulesPageSize: 100, ...options });
+  creator.JSON = getRulesJSON(count);
+  creator.makeNewViewActive("logic");
+  const logic = (<TabLogicPlugin>creator.getPlugin("logic")).model;
+  return { creator, logic };
+}
+function getRenderedDataRow(logic: SurveyLogicUI, row: any): any {
+  return logic.matrixItems.renderedTable.rows.find(r => r.row === row && !r.isDetailRow && !r.isErrorsRow);
+}
+function getRowAction(logic: SurveyLogicUI, row: any, id: string): any {
+  const actions: Array<any> = [];
+  getRenderedDataRow(logic, row).cells.filter(cell => cell.isActionsCell).forEach(cell => actions.push(...cell.item.value.actions));
+  return actions.find(action => action.id === id);
+}
+function getOpenRow(logic: SurveyLogicUI): any {
+  return logic.matrixItems.visibleRows.find(row => row.isDetailPanelShowing);
+}
+test("Logic tab pager: the rules are paged by 100", () => {
+  const { logic } = activateLogicTabWithRules(250);
+  expect(logic.items).toHaveLength(250);
+  expect(logic.items[100].expression).toBe("{q0} = 101");
+  const matrix = logic.matrixItems;
+  expect(matrix.pageCount).toBe(3);
+  expect(matrix.showPager).toBe(true);
+  expect(matrix.visibleRows).toHaveLength(100);
+  expect(matrix.visibleRows[0].rowIndex).toBe(1);
+  matrix.goToPage(2);
+  expect(matrix.visibleRows).toHaveLength(50);
+  expect(matrix.visibleRows[0].rowIndex).toBe(201);
+});
+test("Logic tab pager: activation builds the current page only", () => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = getRulesJSON(250);
+  let rowActionsCount = 0;
+  creator.onSurveyInstanceCreated.add((_, options) => {
+    if (options.reason !== "logic-items") return;
+    options.survey.onGetMatrixRowActions.add(() => { rowActionsCount++; });
+  });
+  creator.makeNewViewActive("logic");
+  expect(rowActionsCount).toBeGreaterThan(0);
+  expect(rowActionsCount).toBeLessThanOrEqual(25);
+  const logic = (<TabLogicPlugin>creator.getPlugin("logic")).model;
+  expect(logic.matrixItems.pageCount).toBe(10);
+  const dataRows = logic.matrixItems.renderedTable.rows.filter(r => !!r.row && !r.isDetailRow && !r.isErrorsRow);
+  expect(dataRows.length).toBeLessThanOrEqual(25);
+});
+test("Logic tab pager: edit a rule on page 2", () => {
+  const { creator, logic } = activateLogicTabWithRules(250);
+  const matrix = logic.matrixItems;
+  matrix.goToPage(1);
+  expect(matrix.pageIndex).toBe(1);
+  matrix.visibleRows[0].showDetailPanel();
+  expect(logic.mode).toBe("edit");
+  expect(logic.editableItem).toBe(logic.items[100]);
+  expect(logic.expressionEditor.text).toBe("{q0} = 101");
+  logic.expressionEditor.text = "{q0} = 1001";
+  expect(logic.saveEditableItem()).toBe(true);
+  expect(creator.survey.getQuestionByName("q101").visibleIf).toBe("{q0} = 1001");
+  for (let i = 1; i <= 250; i++) {
+    if (i === 101) continue;
+    expect(creator.survey.getQuestionByName("q" + i).visibleIf, "q" + i).toBe("{q0} = " + i);
+  }
+  expect(matrix.pageIndex).toBe(1);
+});
+test("Logic tab pager: remove a rule on page 3 through its row action", () => {
+  const { creator, logic } = activateLogicTabWithRules(250);
+  const matrix = logic.matrixItems;
+  const removingItems: Array<any> = [];
+  logic.onLogicItemRemoving.add((_, options) => { removingItems.push(options.item); });
+  matrix.goToPage(2);
+  const row = matrix.visibleRows[3];
+  expect(row.rowIndex).toBe(204);
+  const item = logic.items[203];
+  getRowAction(logic, row, "remove-row").action();
+  expect(removingItems).toEqual([item]);
+  expect(logic.items).toHaveLength(249);
+  expect(logic.items.indexOf(item)).toBe(-1);
+  expect(creator.survey.getQuestionByName("q204").visibleIf).toBeFalsy();
+  expect(creator.survey.getQuestionByName("q203").visibleIf).toBe("{q0} = 203");
+  expect(creator.survey.getQuestionByName("q205").visibleIf).toBe("{q0} = 205");
+  expect(matrix.pageCount).toBe(3);
+  expect(matrix.pageIndex).toBe(2);
+  while(matrix.pageIndex === 2 && matrix.visibleRows.length > 0) {
+    getRowAction(logic, matrix.visibleRows[0], "remove-row").action();
+  }
+  expect(logic.items).toHaveLength(200);
+  expect(matrix.pageCount).toBe(2);
+  expect(matrix.pageIndex).toBe(1);
+  expect(matrix.visibleRows).toHaveLength(100);
+  expect(matrix.visibleRows[0].rowIndex).toBe(101);
+});
+test("Logic tab pager: add a rule from page 1", () => {
+  const { logic } = activateLogicTabWithRules(250);
+  const matrix = logic.matrixItems;
+  expect(matrix.pageIndex).toBe(0);
+  logic.addNewUI();
+  expect(logic.items).toHaveLength(251);
+  expect(matrix.pageCount).toBe(3);
+  expect(matrix.pageIndex).toBe(2);
+  expect(logic.mode).toBe("new");
+  const openRow = getOpenRow(logic);
+  expect(openRow).toBeTruthy();
+  expect(openRow.rowIndex).toBe(251);
+  expect(logic.editableItem).toBe(logic.items[250]);
+  expect(logic.editableItem.isNew).toBe(true);
+  expect(getRenderedDataRow(logic, openRow)).toBeTruthy();
+});
+test("Logic tab pager: add a rule on the last page", () => {
+  const { logic } = activateLogicTabWithRules(250);
+  const matrix = logic.matrixItems;
+  matrix.goToPage(2);
+  expect(matrix.renderedTable.rows.filter(r => !!r.row && !r.isDetailRow && !r.isErrorsRow)).toHaveLength(50);
+  logic.addNewUI();
+  expect(matrix.pageIndex).toBe(2);
+  expect(matrix.visibleRows).toHaveLength(51);
+  const openRow = getOpenRow(logic);
+  expect(openRow.rowIndex).toBe(251);
+  expect(getRenderedDataRow(logic, openRow)).toBeTruthy();
+  expect(matrix.renderedTable.rows.filter(r => !!r.row && !r.isDetailRow && !r.isErrorsRow)).toHaveLength(51);
+});
+test("Logic tab pager: a modified rule keeps its row class across pages", () => {
+  const { logic } = activateLogicTabWithRules(250);
+  const matrix = logic.matrixItems;
+  const item = logic.items[4];
+  matrix.visibleRows[4].showDetailPanel();
+  expect(logic.editableItem).toBe(item);
+  logic.expressionEditor.text = "{q0} = 500";
+  matrix.goToPage(1);
+  expect(logic.mode).toBe("view");
+  expect(getOpenRow(logic)).toBeFalsy();
+  expect(item.isModified).toBe(true);
+  matrix.goToPage(0);
+  const row = matrix.visibleRows[4];
+  expect(row.rowIndex).toBe(5);
+  expect(getRenderedDataRow(logic, row).isAdditionalClasses).toBe(true);
+  expect(getRenderedDataRow(logic, matrix.visibleRows[3]).isAdditionalClasses).toBe(false);
+  expect(logic["getUnsavedItems"]()).toEqual([item]);
+});
+test("Logic tab pager: a page change builds the rendered table of the new page once", () => {
+  const { logic } = activateLogicTabWithRules(250);
+  const matrix = logic.matrixItems;
+  let rowActionsCount = 0;
+  logic.itemsSurvey.onGetMatrixRowActions.add(() => { rowActionsCount++; });
+  matrix.visibleRows[4].showDetailPanel();
+  logic.expressionEditor.text = "{q0} = 500";
+  matrix.goToPage(1);
+  expect(rowActionsCount).toBe(0);
+  matrix.renderedTable;
+  rowActionsCount = 0;
+  matrix.goToPage(0);
+  expect(rowActionsCount).toBe(100);
+  expect(getRenderedDataRow(logic, matrix.visibleRows[4]).isAdditionalClasses).toBe(true);
+  expect(rowActionsCount).toBe(100);
+});
+test("Logic tab pager: a modified rule keeps its row class after a removal on its page", () => {
+  const { logic } = activateLogicTabWithRules(250);
+  const matrix = logic.matrixItems;
+  const item = logic.items[4];
+  matrix.visibleRows[4].showDetailPanel();
+  logic.expressionEditor.text = "{q0} = 500";
+  matrix.visibleRows[4].hideDetailPanel();
+  expect(item.isModified).toBe(true);
+  expect(getRenderedDataRow(logic, matrix.visibleRows[4]).isAdditionalClasses).toBe(true);
+  getRowAction(logic, matrix.visibleRows[0], "remove-row").action();
+  expect(logic.items).toHaveLength(249);
+  const row = matrix.visibleRows[3];
+  expect(row.rowIndex).toBe(4);
+  expect(logic["visibleItems"][3]).toBe(item);
+  expect(getRenderedDataRow(logic, row).isAdditionalClasses).toBe(true);
+  expect(getRenderedDataRow(logic, matrix.visibleRows[4]).isAdditionalClasses).toBe(false);
+});
+test("Logic tab pager: an errored rule on another page is shown on tab leave", () => {
+  const { creator, logic } = activateLogicTabWithRules(250);
+  const matrix = logic.matrixItems;
+  matrix.goToPage(2);
+  matrix.visibleRows[4].showDetailPanel();
+  const item = logic.items[204];
+  expect(logic.editableItem).toBe(item);
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").clearValue();
+  matrix.goToPage(0);
+  expect(logic.mode).toBe("view");
+  creator.makeNewViewActive("designer");
+  expect(creator.activeTab).toBe("logic");
+  expect(matrix.pageIndex).toBe(2);
+  const openRow = getOpenRow(logic);
+  expect(openRow).toBeTruthy();
+  expect(openRow.rowIndex).toBe(205);
+  expect(logic.mode).toBe("edit");
+  expect(logic.editableItem).toBe(item);
+});
+test("Logic tab pager: a filter change goes back to page 1", () => {
+  const { logic } = activateLogicTabWithRules(250);
+  const matrix = logic.matrixItems;
+  matrix.goToPage(2);
+  logic.questionFilter = "q0";
+  expect(matrix.pageIndex).toBe(0);
+  expect(matrix.pageCount).toBe(3);
+  matrix.goToPage(2);
+  logic.questionFilter = "q7";
+  expect(matrix.pageIndex).toBe(0);
+  expect(matrix.pageCount).toBe(1);
+  expect(matrix.visibleRows).toHaveLength(1);
+  logic.questionFilter = "";
+  expect(matrix.pageCount).toBe(3);
+  matrix.goToPage(1);
+  logic.actionTypeFilter = "question_visibility";
+  expect(matrix.pageIndex).toBe(0);
+  expect(matrix.pageCount).toBe(3);
+});
+test("Logic tab pager: no pager for a page size of rules or fewer", () => {
+  let res = activateLogicTabWithRules(40);
+  expect(res.logic.matrixItems.showPager).toBe(false);
+  expect(res.logic.matrixItems.pageCount).toBe(1);
+  expect(res.logic.matrixItems.visibleRows).toHaveLength(40);
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = getRulesJSON(25);
+  creator.makeNewViewActive("logic");
+  let matrix = (<TabLogicPlugin>creator.getPlugin("logic")).model.matrixItems;
+  expect(matrix.showPager, "25 rules, default page size").toBe(false);
+  expect(matrix.visibleRows).toHaveLength(25);
+  creator.JSON = getRulesJSON(26);
+  creator.makeNewViewActive("logic");
+  matrix = (<TabLogicPlugin>creator.getPlugin("logic")).model.matrixItems;
+  expect(matrix.showPager, "26 rules, default page size").toBe(true);
+  expect(matrix.pageCount).toBe(2);
+});
+test("Logic tab pager: logicRulesPageSize option", () => {
+  expect(new SurveyCreatorModel({}).logicRulesPageSize).toBe(25);
+  expect(new EmptySurveyCreatorOptions().logicRulesPageSize).toBe(25);
+  let res = activateLogicTabWithRules(250, { logicRulesPageSize: 50 });
+  expect(res.logic.matrixItems.pageCount).toBe(5);
+  expect(res.logic.matrixItems.visibleRows).toHaveLength(50);
+  [0, -1].forEach(pageSize => {
+    res = activateLogicTabWithRules(250, { logicRulesPageSize: pageSize });
+    expect(res.logic.matrixItems.pageCount, "pageSize: " + pageSize).toBe(1);
+    expect(res.logic.matrixItems.showPager, "pageSize: " + pageSize).toBe(false);
+    expect(res.logic.matrixItems.visibleRows, "pageSize: " + pageSize).toHaveLength(250);
+  });
+  res = activateLogicTabWithRules(250);
+  const creator = res.creator;
+  creator.logicRulesPageSize = 50;
+  expect(res.logic.matrixItems.pageSize).toBe(100);
+  expect(res.logic.matrixItems.pageCount).toBe(3);
+  creator.makeNewViewActive("designer");
+  creator.makeNewViewActive("logic");
+  const logic = (<TabLogicPlugin>creator.getPlugin("logic")).model;
+  expect(logic.matrixItems.pageSize).toBe(50);
+  expect(logic.matrixItems.pageCount).toBe(5);
+});
+test("Logic tab pager: table view pages the rules and edits a rule on page 2", () => {
+  const { creator, logic } = activateLogicTabWithRules(250, { useTableViewInLogicTab: true });
+  const matrix = logic.matrixItems;
+  expect(matrix.columns.map(c => c.name)).toEqual(["conditions", "actions"]);
+  expect(matrix.pageCount).toBe(3);
+  expect(matrix.visibleRows).toHaveLength(100);
+  matrix.goToPage(1);
+  matrix.visibleRows[0].showDetailPanel();
+  expect(logic.editableItem).toBe(logic.items[100]);
+  logic.expressionEditor.text = "{q0} = 1001";
+  expect(logic.saveEditableItem()).toBe(true);
+  expect(creator.survey.getQuestionByName("q101").visibleIf).toBe("{q0} = 1001");
+  expect(creator.survey.getQuestionByName("q1").visibleIf).toBe("{q0} = 1");
+});

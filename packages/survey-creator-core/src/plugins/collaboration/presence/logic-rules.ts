@@ -17,10 +17,18 @@ export function logicRuleKey(item: any): string | null {
 }
 
 // The rules a Logic-tab model lists, in row order (SurveyLogicUI's private
-// getVisibleItems): the matrix row at index i shows the i-th of these.
+// getVisibleItems): the matrix row with rowIndex i + 1 shows the i-th of these.
 export function visibleLogicItems(model: any): Array<any> {
   const items: Array<any> = Array.isArray(model?.items) ? model.items : [];
   return items.filter((item) => item.isNew || item.isSuitable?.(model.questionFilter, model.actionTypeFilter));
+}
+
+// The rule a row of the rules matrix shows, or null. The matrix pages the
+// rules: its rows are the current page only, and row.rowIndex is the 1-based
+// record index across all pages, never the position on the page.
+export function logicItemOfRow(model: any, row: any): any {
+  const index = typeof row?.rowIndex === "number" ? row.rowIndex - 1 : -1;
+  return index > -1 ? visibleLogicItems(model)[index] || null : null;
 }
 
 // The rule the local user has open in the Logic-tab editor, or null (nothing
@@ -50,17 +58,17 @@ export function encodeLogicRuleAnchor(model: any, target: Element): { a: IAnchor
   const hit = rendered.find((r) => !!r.getRootElement?.()?.contains(target));
   const row = summaryRow(hit);
   if (!row) return null;
-  const index: number = model.matrixItems.visibleRows.indexOf(row);
-  const key = index > -1 ? logicRuleKey(visibleLogicItems(model)[index]) : null;
+  const key = logicRuleKey(logicItemOfRow(model, row));
   return key ? { a: { s: "rule", n: key }, el: hit.getRootElement() } : null;
 }
 
 // The local summary row of the rule `key` names; null when the local list
-// does not show it (filtered out, or not received yet).
+// does not show it (filtered out, on another page, or not received yet).
 export function resolveLogicRuleRow(model: any, key: string | undefined): Element | null {
   if (!key) return null;
   const index = visibleLogicItems(model).findIndex((item) => logicRuleKey(item) === key);
-  const row = index > -1 ? model.matrixItems?.visibleRows?.[index] : null;
+  const rows: Array<any> = model.matrixItems?.visibleRows || [];
+  const row = index > -1 ? rows.find((r) => r.rowIndex - 1 === index) : null;
   if (!row) return null;
   const rendered: Array<any> = model.matrixItems.renderedTable?.rows || [];
   return rendered.find((r) => summaryRow(r) === row)?.getRootElement?.() || null;

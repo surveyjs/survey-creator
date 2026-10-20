@@ -221,6 +221,7 @@ export interface ISurveyCreatorOptions {
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
   logicMaxItemsInCondition: number;
+  logicRulesPageSize: number;
   logicAllowTextEditExpressions: boolean;
   useElementTitles: boolean;
   maxColumns: number;
@@ -369,6 +370,7 @@ export interface ISurveyCreatorOptions {
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions, ILocalizableOwner {
   logicMaxItemsInCondition: number;
+  logicRulesPageSize: number = 25;
   previewShowResults: boolean;
   rootElement: HTMLElement;
   enableLinkFileEditor: boolean;

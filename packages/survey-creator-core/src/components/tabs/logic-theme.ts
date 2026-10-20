@@ -274,7 +274,13 @@ export var logicCss = {
     buttonAdd: "sl-matrixdynamic__add-btn",
     buttonRemove: "sl-matrixdynamic__remove-btn",
     iconAdd: "",
-    iconRemove: ""
+    iconRemove: "",
+    footer: "sl-matrixdynamic__footer",
+    footerWithPager: "sl-matrixdynamic__footer--pager",
+    recordsBar: "sl-matrixdynamic__records-bar",
+    pager: "sl-matrixdynamic__pager",
+    pagerPage: "sl-pager__page",
+    pagerTotal: "sl-pager__total"
   },
   rating: {
     root: "",

@@ -415,3 +415,55 @@ test("logic lock: the holder's name is escaped in the plate", async (): Promise<
     plugin.dispose();
   }
 });
+
+// These tests page the rules by 100 (logicRulesPageSize; the default is 25): rule i is
+// q<i>.visibleIf = "{q0} = i", 250 rules make 3 pages. A lock follows its rule's record
+// (row.rowIndex), never the position on the page.
+function createCreatorWithRules(count: number): { creator: CreatorTester, plugin: CollaborationPlugin } {
+  const elements: Array<any> = [{ type: "text", name: "q0" }];
+  for (let i = 1; i <= count; i++) {
+    elements.push({ type: "text", name: "q" + i, visibleIf: "{q0} = " + i });
+  }
+  const creator = new CreatorTester({ logicRulesPageSize: 100 });
+  creator.JSON = { elements };
+  const plugin = new CollaborationPlugin(creator, { bar: false });
+  creator.addPlugin("collaboration", plugin);
+  plugin.setClientId("b");
+  return { creator, plugin };
+}
+function pageRowActions(creator: CreatorTester, row: any): Array<any> {
+  const rendered = logicModel(creator).matrixItems.renderedTable.rows
+    .find((r: any) => r.row === row && !r.isDetailRow && !r.isErrorsRow);
+  const actions: Array<any> = [];
+  rendered.cells.filter((cell: any) => cell.isActionsCell).forEach((cell: any) => actions.push(...cell.item.value.actions));
+  return actions;
+}
+function pageRowAction(creator: CreatorTester, row: any, id: string): any {
+  return pageRowActions(creator, row).find((action) => action.id === id);
+}
+
+test("logic lock: a held rule on page 2 shows its chip on its own row only", (): any => {
+  const { creator, plugin } = createCreatorWithRules(250);
+  try {
+    creator.makeNewViewActive("logic");
+    plugin.upsertPeer(ruleHolder("a", "|{q0} = 105"));
+    const matrix = logicModel(creator).matrixItems;
+    matrix.visibleRows.forEach((row: any) => {
+      expect(pageRowAction(creator, row, "collab-rule-holder").visible, "page 1, rule " + row.rowIndex).toBe(false);
+      expect(pageRowAction(creator, row, "remove-row").visible, "page 1, rule " + row.rowIndex).toBe(true);
+    });
+    matrix.goToPage(1);
+    expect(matrix.visibleRows).toHaveLength(100);
+    matrix.visibleRows.forEach((row: any) => {
+      const isHeld = row.rowIndex === 105;
+      expect(pageRowAction(creator, row, "collab-rule-holder").visible, "page 2, rule " + row.rowIndex).toBe(isHeld);
+      expect(pageRowAction(creator, row, "remove-row").visible, "page 2, rule " + row.rowIndex).toBe(!isHeld);
+    });
+    matrix.goToPage(0);
+    matrix.visibleRows.forEach((row: any) => {
+      expect(pageRowAction(creator, row, "collab-rule-holder").visible, "page 1 again, rule " + row.rowIndex).toBe(false);
+    });
+  } finally {
+    plugin.dispose();
+  }
+});
