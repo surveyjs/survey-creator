@@ -711,12 +711,16 @@ test("A name the survey answers itself says which built-in wins", () => {
     " - the survey answers {locale} first, so this one is unreachable in expressions.");
 });
 
-test("A data key two elements write says what collides with what", () => {
+test("A valueName shadowing a records element says what the container cannot see", () => {
   expect(textOf({
-    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2", valueName: "q1" }]
+    elements: [
+      { type: "matrixdynamic", name: "q1", valueName: "q2", columns: [{ name: "c1", cellType: "text" }] },
+      { type: "paneldynamic", name: "q2", templateElements: [{ type: "text", name: "t1" }] },
+    ]
   }, "name/shadowing")).toBe(
-    "The valueName \"q1\" of \"q2\" is also the name of question \"q1\"" +
-    " - both store their answer under the data key \"q1\".");
+    "The valueName \"q2\" of \"q1\" shares the value of paneldynamic \"q2\"," +
+    " which has no valueName of its own - \"q2\" treats the fields \"q1\" adds as unknown," +
+    " and clearIncorrectValues() deletes them. Set its valueName to \"q2\" too.");
   expect(textOf({
     elements: [
       { type: "text", name: "q1", showCommentArea: true },

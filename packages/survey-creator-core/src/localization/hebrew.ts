@@ -3676,8 +3676,6 @@ export var hebrewStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "ה-{nameKindText} \"{name}\" של {ownerText} הזה הוא גם משתנה סקר מובנה {{builtIn}} - הסקר עונה ראשון על {{name}}, ולכן זה לא נגיש בביטויים.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "ה-valueName \"{valueName}\" של \"{name}\" הוא גם שם השאלה \"{otherName}\" - שניהם שומרים את התשובה תחת מפתח הנתונים \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "מפתח הנתונים \"{dataName}\" הוא גם מפתח התגובה של \"{base}\" (מפתח הנתונים שלו בתוספת \"{סיומת}\") - כתיבה אחת מחליפה את השנייה בשקט.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

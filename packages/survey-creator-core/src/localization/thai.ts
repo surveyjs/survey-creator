@@ -3676,8 +3676,6 @@ export const thStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" ของ {ownerText} นี้ก็เป็นตัวแปรสํารวจในตัว {{builtIn}} เช่นกัน - แบบสํารวจจะตอบ {{name}} ก่อน ดังนั้นแบบสํารวจนี้จึงไม่สามารถเข้าถึงได้ในนิพจน์",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" ของ \"{name}\" ก็เป็นชื่อของคําถาม \"{otherName}\" เช่นกัน - ทั้งสองจะเก็บคําตอบไว้ใต้คีย์ข้อมูล \"{valueName}\"",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "คีย์ข้อมูล \"{dataName}\" ยังเป็นคีย์ความคิดเห็นของ \"{base}\" (คีย์ข้อมูลของมันบวกกับ \"{suffix}\") - การเขียนหนึ่งจะเขียนทับอีกอันโดยไม่เขียน",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

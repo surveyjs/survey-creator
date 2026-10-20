@@ -3676,8 +3676,6 @@ export var htStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{non}\" nan sa a {ownerText} se tou bati-an sondaj varyab {{builtIn}} - sondaj la reponn {{non}} an premye, se konsa yon sèl sa a se inaccessible nan ekspresyon yo.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" nan \"{non}\" se tou non kesyon \"{otherName}\" - tou de estoke repons yo anba kle done \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Done kle a \"{dataName}\" se tou kle a kòmantè nan \"{baz}\" (kle done li yo plis \"{sifiks}\") - yon ekri an silans ranplase lòt la.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

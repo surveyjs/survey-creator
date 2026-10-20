@@ -3676,8 +3676,6 @@ export var huStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "A {ownerText} {nameKindText} \"{name}\" a beépített felmérési változó {{builtIn}} is – a felmérés először a {{name}} választ adja, így ez a kifejezések számára elérhetetlen.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "A \"{name}\" értéknameje \"{valueName}\" a \"{name}\" kérdés neve is – mindkettő a válaszokat a \"{valueName}\" adatkulcs alatt tárolja.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Az adatkulcs \"{dataName}\" egyben a \"{base}\" (az adatkulcs plusz a \"{suffix}\") kommentkulcsa is – az egyik írás némán felülírja a másikat.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

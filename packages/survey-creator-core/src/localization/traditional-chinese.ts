@@ -3677,8 +3677,6 @@ export var traditionalChineseTranslation = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "這個 {ownerText} 的 {nameKindText} 「{name}」同時也是內建的調查變數 {{builtIn}}——調查先回答 {{name}}，因此這個變數在表達式中無法到達。",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "「{name}」的值名稱「{valueName}」同時也是問題「{otherName}」的名稱——兩者的答案都儲存在資料鍵「{valueName}」下。",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "資料鍵「{dataName}」同時也是「{base}」的註解鍵（其資料鍵加上「{suffix}」）——一個寫入會靜默覆蓋另一個。",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

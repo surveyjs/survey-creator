@@ -3676,8 +3676,6 @@ export var turkishStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Bu {ownerText}'in {nameKindText} \"{name}\" aynı zamanda yerleşik anket değişkeni {{builtIn}}'dir - anket önce {{name}}'e cevap verir, bu yüzden bu değişken ifadelerde erişilemez.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "\"{name}\"nin valueName \"{valueName}\" kısmı aynı zamanda \"{otherName}\" sorusunun adıdır - her ikisi de cevablarını \"{valueName}\" veri anahtarı altında saklar.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "\"{dataName}\" veri anahtarı aynı zamanda \"{base}\" (veri anahtarı artı \"{suffix}\") yorum anahtarıdır - bir yazı sessizce diğerinin üzerine yazar.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

@@ -3676,8 +3676,6 @@ export const roStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" al acestui {ownerText} este și variabila de sondaj încorporată {{builtIn}} - sondajul răspunde mai întâi la {{name}}, deci aceasta este inaccesibilă în expresii.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "Numelevalorice \"{numeValori}\" din \"{nume}\" este, de asemenea, numele întrebării \"{altNume}\" – ambele își stochează răspunsul sub cheia de date \"{NumeValori}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Cheia de date \"{dataName}\" este de asemenea cheia de comentariu pentru \"{base}\" (cheia sa de date plus \"{sufix}\") – o scriere suprascrie silențios cealaltă.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

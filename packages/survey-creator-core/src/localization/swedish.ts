@@ -3677,8 +3677,6 @@ export let svStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" för denna {ownerText} är också den inbyggda surveyvariabeln {{builtIn}} – undersökningen svarar först på {{name}}, så denna är otillgänglig i uttryck.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" i \"{name}\" är också namnet på frågan \"{otherName}\" – båda lagrar sitt svar under datanyckeln \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Datanyckeln \"{dataName}\" är också kommentarsnyckeln till \"{base}\" (dess datanyckel plus \"{suffix}\") – en skrivning skriver tyst över den andra.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

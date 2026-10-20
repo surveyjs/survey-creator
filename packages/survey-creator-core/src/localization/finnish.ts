@@ -3676,8 +3676,6 @@ export var fiStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Tämän {ownerText}:n {nameKindText} \"{name}\" on myös sisäänrakennettu kyselymuuttuja {{builtIn}} – kysely vastaa ensin {{name}}, joten tämä ei ole saavutettavissa lausekkeissa.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" tai \"{name}\" on myös kysymyksen \"{otherName}\" nimi – molemmat tallentavat vastauksensa avaimen \"{valueName}\" alle.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Dataavain \"{dataName}\" on myös kommenttiavain \"{base}\" (sen data key plus \"{suffix}\") – yksi kirjoitus korvaa hiljaisesti toisen.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

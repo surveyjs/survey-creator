@@ -3676,8 +3676,6 @@ export var mnStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Энэ {ownerText}-ийн {nameKindText} \"{name}\" нь мөн {{builtIn}} суурилуулсан судалгааны хувьсагч бөгөөд судалгаа нь {{name}}-д эхэлж хариулдаг тул энэ нь илэрхийлэлд хүрч чадахгүй.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "\"{name}\"-ийн valueName \"{valueName}\" нь мөн \"{otherName}\" асуултын нэр бөгөөд хоёулаа хариултаа \"{valueName}\" өгөгдлийн түлхүүрээр хадгалдаг.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Өгөгдлийн түлхүүр \"{dataName}\" нь мөн \"{base}\" (өгөгдлийн түлхүүр болон \"{suffix}\") сэтгэгдлийн түлхүүр бөгөөд нэг бичлэг нөгөөг чимээгүй давтдаг.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

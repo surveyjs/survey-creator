@@ -3676,8 +3676,6 @@ export var hrStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" ovog {ownerText} također je ugrađena varijabla ankete {{builtIn}} - anketa odgovara prva {{name}}, pa je ova nedostupna u izrazima.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" od \"{name}\" također je naziv pitanja \"{otherName}\" – oba pohranjuju svoj odgovor pod podatkovnim ključem \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Podatkovni ključ \"{dataName}\" je također komentarni ključ za \"{base}\" (njegov podatkovni ključ plus \"{suffix}\") – jedan zapis tiho prepisuje drugog.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
