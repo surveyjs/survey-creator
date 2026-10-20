@@ -1056,10 +1056,10 @@ export interface MachineTranslateEvent {
 
 // What the expression assistant asks of the application:
 // - "generate": the target property is empty and the author describes a new expression.
-//   Example: prompt "show this question to adults only" -> "{age} >= 18".
+//   Example: userPrompt "show this question to adults only" -> "{age} >= 18".
 // - "modify": the target already has an expression (or the assistant shows a suggestion the author
 //   refines) and the author describes a change.
-//   Example: expression "{age} >= 18", prompt "and only for residents" -> "{age} >= 18 and {resident} = true".
+//   Example: expression "{age} >= 18", userPrompt "and only for residents" -> "{age} >= 18 and {resident} = true".
 // - "fix": raised by Creator itself, not by the author: the AI answered with an expression the check
 //   rejected, and Creator asks once more with the problems found (creator.expressionAssistantFixAttempts
 //   times at most, 1 by default). Example: the AI answered "{Age} >= 18" and the survey has no "Age".
@@ -1069,109 +1069,67 @@ export interface MachineTranslateEvent {
 // the author clicks Stop.
 export type ExpressionAssistantRequestKind = "generate" | "modify" | "fix" | "explain";
 
-// The options of creator.onExpressionAssistantRequest. A typical handler only passes systemPrompt and
-// messages to a chat API, the signal to the HTTP call, and the model's answer to callback as "text":
-//
-//   creator.onExpressionAssistantRequest.add(async (_, options) => {
-//     try {
-//       const res = await fetch("/api/ai", {
-//         method: "POST", signal: options.signal,
-//         body: JSON.stringify({ system: options.systemPrompt, messages: options.messages })
-//       });
-//       options.callback({ text: (await res.json()).text });
-//     } catch (e) {
-//       if (!options.signal.aborted) options.callback({ error: e.message });
-//     }
-//   });
-//
-// The other options are there for an application that adjusts what the AI is told or writes its own prompts.
 export interface ExpressionAssistantRequestEvent {
-  // what is asked; see ExpressionAssistantRequestKind
+  /**
+   * The requested operation. `"fix"` is requested automatically when a generated expression fails validation.
+   */
   kind: ExpressionAssistantRequestKind;
-  // The author's words as typed, in any language. Example: "show if the respondent has children".
-  // Empty for "fix" and "explain": those have no author text.
-  prompt: string;
-  // The expression the request is about:
-  // - "generate": empty
-  // - "modify": the expression to change - the suggestion under review when the author refines it,
-  //   otherwise the target's current value. Example: "{age} >= 18".
-  // - "fix": the AI's previous answer that failed the check. Example: "{Age} >= 18".
-  // - "explain": the target's current value (the value the property holds, not a suggestion)
+  /**
+   * The user's prompt. Empty for `"fix"` and `"explain"` requests.
+   */
+  userPrompt: string;
+  /**
+   * The expression to modify, correct, or explain. Contains the current suggestion when refining a result. Empty for `"generate"` requests.
+   */
   expression: string;
-  // true when the target property is a condition (property type "condition": visibleIf, enableIf,
-  // requiredIf, a logic rule or a trigger condition) and the result must be true or false; false
-  // for a value expression such as a calculated value's expression or defaultValueExpression.
-  // The same value as context.target.isCondition.
+  /**
+   * Indicates whether the expression must return a Boolean value.
+   */
   isCondition: boolean;
-  // The first place the expression goes to - a shortcut for the common case of one place.
-  // Example: the question "children" and "visibleIf".
+  /**
+   * The first target survey object in `options.targets`, or `undefined` if there are no targets.
+   */
   element: Base;
+  /**
+   * The first target property name in `options.targets`, or `undefined` if there are no targets.
+   */
   propertyName: string;
-  // Every place the expression goes to. The property grid passes exactly one (the same as element
-  // and propertyName). On the Logic tab, one rule's condition is used by all its actions, so there
-  // can be several. Example: [{ element: <question "children">, propertyName: "visibleIf" },
-  // { element: <question "childrenCount">, propertyName: "visibleIf" }].
-  sites: Array<{ element: Base, propertyName: string }>;
-  // What the AI is told about the survey and the place being edited (plain data, built for this
-  // request, see IExpressionContext): the target (isCondition, resultType such as "boolean" or "number",
-  // the edited objects, the dynamic panel or matrix the expression runs in), the variables the
-  // expression can use (questions with their choices, rows and columns, calculated values, variables),
-  // the scope prefixes ("panel", "row", ...), the functions and operators, existing expressions of
-  // the survey as examples, the Creator and survey locales, and which lists were cut because the
-  // survey is large (settings.expressionAssistant limits).
-  // This is a copy: changing it affects this request only. Note: systemPrompt is already built from
-  // the unchanged context. After changing the context, rebuild the prompt:
-  //   options.context.variables = options.context.variables.filter(v => v.name !== "internalId");
-  //   options.systemPrompt = buildExpressionSystemPrompt(options.context);
+  /**
+   * The survey objects and properties to which the expression applies.
+   */
+  targets: Array<{ element: Base, propertyName: string }>;
+  /**
+   * Survey and target information supplied to the AI model. If you modify this object, rebuild `options.systemPrompt` with `buildExpressionSystemPrompt(options.context)`.
+   */
   context: IExpressionContext;
-  // A ready system prompt built from the context: the SurveyJS expression syntax guide, the context as
-  // JSON, the rules (use only the listed names and functions, compare with choice values, the scope
-  // prefixes, the result type) and the answer format: {"expression": "...", "explanation": "..."}.
-  // The explanation is asked for in the Creator UI language. The same context always gives the same
-  // text, so the prompt can be cached. Send it as the system message.
+  /**
+   * A prepared system prompt to send to the AI model.
+   */
   systemPrompt: string;
-  // "fix" only: what the check reported about the expression, with messages in English (the language
-  // the prompts use, whatever the UI language). They are already included in "instruction".
-  // ruleId and reason are the survey-core linter's ids, severity is "error", "warning" or "info".
-  // Example: [{ ruleId: "reference/unknown", reason: "notFound", severity: "error",
-  //   message: <the linter's text saying that the survey has no "Age"> }]
-  findings?: Array<{ ruleId: string, reason: string, severity: string, message: string }>;
-  // The session log, oldest first: each request adds { kind, prompt } and each answer with an
-  // expression adds { kind, expression, explanation }. "explain" requests are not logged.
-  // Example: [{ kind: "generate", prompt: "adults only" },
-  //   { kind: "generate", expression: "{age} >= 18", explanation: "..." }]
-  // For an application that writes its own prompts or keeps an audit trail; messages already carry it.
+  /**
+   * Validation findings for `"fix"` requests, with messages in English. Already included in `options.instruction`.
+   */
+  validationFindings?: Array<{ ruleId: string, reason: string, severity: string, message: string }>;
+  /**
+   * The session's requests and responses in chronological order, excluding `"explain"` operations.
+   */
   history: Array<{ kind: string, prompt?: string, expression?: string, explanation?: string }>;
-  // The user message Creator writes for this kind: the author's words, the expression, the findings
-  // for "fix", and the option to return an empty expression with the reason. Send it after
-  // systemPrompt; prompt, expression, findings and history stay for an application that writes its own.
-  // Example ("generate"): "Write an expression for this request:\nshow this question to adults only\n\n
-  // If the request cannot be expressed with the listed variables and functions, return an empty
-  // expression and say why in the explanation."
+  /**
+   * The prepared user message for the current request. Included as the last entry in `options.messages`.
+   */
   instruction: string;
-  // The session so far as chat turns, ending with the instruction. Earlier turns let the AI refine its
-  // own answers: each previous instruction and the answer it got ("explain" requests are left out).
-  // No system message, so it fits both chat APIs: OpenAI takes [{ role: "system", content: systemPrompt },
-  // ...messages], Anthropic takes systemPrompt as "system" and these as "messages".
-  // Example (the author refines a result):
-  //   [{ role: "user", content: "Write an expression for this request:\nadults only..." },
-  //    { role: "assistant", content: "{\"expression\":\"{age} >= 18\",\"explanation\":\"...\"}" },
-  //    { role: "user", content: "Current expression:\n{age} >= 18\n\nChange it as follows:\nand residents..." }]
+  /**
+   * Prepared conversation messages, including the current request. Send them with `options.systemPrompt`, which is not included in this array.
+   */
   messages: Array<{ role: "user" | "assistant", content: string }>;
-  // Aborted when the author clicks Stop or Reject, closes the assistant, or starts another request.
-  // Pass it to fetch or the AI SDK so the HTTP call is cancelled too.
+  /**
+   * A cancellation signal to pass to your HTTP client or AI SDK.
+   */
   signal: AbortSignal;
-  // Answer here, once: the first call counts, later calls and calls after the abort are ignored.
-  // - { error: "..." }: the text is shown to the author; checked first.
-  // - { text: "..." }: the model's raw answer; Creator reads the JSON the system prompt asks for (also
-  //   inside a ```json block), a code block with just the expression, a line "Expression: ...", or a
-  //   bare one-line expression.
-  // - { expression: "...", explanation: "..." }: taken as they are; expression wins over text, and an
-  //   explanation passed here wins over the one read from text.
-  // - nothing, or an empty expression: no expression; an explanation is still shown (the AI says
-  //   why it could not write one).
-  // For "explain", only the explanation is used.
-  // An expression is then checked; the author can accept it only when the check finds no errors.
+  /**
+   * A callback that completes the request. Only the first call is processed; calls after cancellation are ignored.
+   * @param result The AI response as `text` or as `expression` and `explanation`, or an `error` message to display. Omit to return no result. For `"explain"` requests, only the explanation is used.
+   */
   callback: (result?: { expression?: string, explanation?: string, text?: string, error?: string }) => void;
 }
 

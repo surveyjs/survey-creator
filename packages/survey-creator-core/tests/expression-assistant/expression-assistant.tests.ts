@@ -122,12 +122,12 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     expect(requests).toHaveLength(1);
     const request = requests[0];
     expect(request.kind).toBe("generate");
-    expect(request.prompt).toBe("show when apple is chosen");
+    expect(request.userPrompt).toBe("show when apple is chosen");
     expect(request.expression).toBe("");
     expect(request.isCondition).toBe(true);
     expect(request.element).toBe(creator.survey.getQuestionByName("q2"));
     expect(request.propertyName).toBe("visibleIf");
-    expect(request.sites).toEqual([{ element: request.element, propertyName: "visibleIf" }]);
+    expect(request.targets).toEqual([{ element: request.element, propertyName: "visibleIf" }]);
     expect(request.context.variables.map(v => v.name)).toEqual(["fruit"]);
     expect(request.systemPrompt.indexOf("SurveyJS expression syntax")).toBeGreaterThan(-1);
     expect(request.signal.aborted).toBe(false);
@@ -168,7 +168,7 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     requests[0].callback({ expression: "{fruit} anyof ['apple', 'banana']" });
     assistant.refine("only apple");
     expect(requests[1].kind).toBe("modify");
-    expect(requests[1].prompt).toBe("only apple");
+    expect(requests[1].userPrompt).toBe("only apple");
     expect(requests[1].expression).toBe("{fruit} anyof ['apple', 'banana']");
     expect(requests[1].history).toEqual([
       { kind: "modify", prompt: "also apple" },
@@ -185,12 +185,12 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     expect(assistant.fixCount).toBe(1);
     expect(requests).toHaveLength(2);
     expect(requests[1].kind).toBe("fix");
-    expect(requests[1].prompt).toBe("");
+    expect(requests[1].userPrompt).toBe("");
     expect(requests[1].expression).toBe("{frut} = 'apple'");
-    expect(requests[1].findings).toEqual([{
-      ruleId: "reference/unknown", reason: "notFound", severity: "error", message: requests[1].findings[0].message,
+    expect(requests[1].validationFindings).toEqual([{
+      ruleId: "reference/unknown", reason: "notFound", severity: "error", message: requests[1].validationFindings[0].message,
     }]);
-    expect(requests[1].findings[0].message.indexOf("\"frut\" is not found")).toBe(0);
+    expect(requests[1].validationFindings[0].message.indexOf("\"frut\" is not found")).toBe(0);
     requests[1].callback({ expression: "{fruit} = 'apple'" });
     expect(assistant.status).toBe("review");
     expect(assistant.canAccept).toBe(true);
@@ -320,8 +320,8 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     requests[0].callback({ expression: "negate({fruit} = 'apple')", explanation: "Not apple." });
     expect(requests).toHaveLength(2);
     expect(requests[1].kind).toBe("fix");
-    expect(requests[1].findings.map(f => f.ruleId)).toContain("expression/unknown-function");
-    expect(requests[1].findings.filter(f => f.ruleId === "expression/unknown-function")[0].severity).toBe("error");
+    expect(requests[1].validationFindings.map(f => f.ruleId)).toContain("expression/unknown-function");
+    expect(requests[1].validationFindings.filter(f => f.ruleId === "expression/unknown-function")[0].severity).toBe("error");
     requests[1].callback({ expression: "negate({fruit} = 'apple')", explanation: "Not apple." });
     expect(assistant.status).toBe("review");
     expect(assistant.canAccept).toBe(false);
@@ -480,7 +480,7 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     const assistant = editor.showExpressionAssistant();
     assistant.generate("apple");
     expect(requests[0].kind).toBe("modify");
-    expect(requests[0].sites.map(s => s.propertyName)).toEqual(["visibleIf", "expression"]);
+    expect(requests[0].targets.map(s => s.propertyName)).toEqual(["visibleIf", "expression"]);
     requests[0].callback({ expression: "{nosuch} = 1" });
     requests[1].callback({ expression: "{nosuch} = 1" });
     expect(assistant.canAccept).toBe(false);
@@ -580,7 +580,7 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
 
     requests[0].callback({ expression: "{frut} = 'apple'", explanation: "Apple." });
     expect(requests[1].kind).toBe("fix");
-    const finding = requests[1].findings[0];
+    const finding = requests[1].validationFindings[0];
     const fix = "This expression failed the check:\n{frut} = 'apple'\n\nProblems found:\n- [error] " + finding.message + "\n\n" +
       "Return a corrected expression that still does what the author asked. " +
       "If it cannot be corrected with the listed variables and functions, return an empty expression and say why in the explanation.";
@@ -600,7 +600,7 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
       { role: "user", content: modify },
     ]);
     // the fields a host builds its own messages from are still there
-    expect(requests[2].prompt).toBe("or banana");
+    expect(requests[2].userPrompt).toBe("or banana");
     expect(requests[2].expression).toBe("{fruit} = 'apple'");
     expect(requests[2].history.length).toBeGreaterThan(0);
   });

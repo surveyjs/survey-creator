@@ -191,11 +191,11 @@ export class ExpressionAssistant extends Base {
       ? findings.map(f => ({ ruleId: f.ruleId, reason: f.reason, severity: f.severity, message: f.englishText })) : undefined;
     const instruction = buildExpressionInstruction(kind, prompt, expression, englishFindings);
     const options: ExpressionAssistantRequestEvent = {
-      kind: kind, prompt: prompt || "", expression: expression || "",
+      kind: kind, userPrompt: prompt || "", expression: expression || "",
       isCondition: this.request.context.target.isCondition,
       element: sites.length > 0 ? sites[0].obj : undefined,
       propertyName: sites.length > 0 ? sites[0].propertyName : undefined,
-      sites: sites.map(site => ({ element: site.obj, propertyName: site.propertyName })),
+      targets: sites.map(site => ({ element: site.obj, propertyName: site.propertyName })),
       // copies: a handler that adjusts them changes this request only
       context: clone(this.request.context),
       systemPrompt: this.request.systemPrompt,
@@ -211,7 +211,7 @@ export class ExpressionAssistant extends Base {
       }
     };
     if (!!englishFindings) {
-      options.findings = englishFindings;
+      options.validationFindings = englishFindings;
     }
     this.creator.onExpressionAssistantRequest.fire(this.creator, options);
   }
