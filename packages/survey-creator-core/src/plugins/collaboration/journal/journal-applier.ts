@@ -14,7 +14,7 @@ import {
   JournalOp,
   JournalSyncError
 } from "./journal-record";
-import { deserializeValue, findItemByIdentity, isSerializedSurveyObj, resolveLocator, splitPointer } from "./journal-locator";
+import { deserializeValue, findItemByIdentity, isSerializedSurveyObj, resolveElementContainer, resolveLocator, splitPointer } from "./journal-locator";
 import { JournalRecorder } from "./journal-recorder";
 import { JournalStackGuard } from "./journal-stack-guard";
 
@@ -210,7 +210,7 @@ export class JournalApplier {
     if (!existing) {
       throw new JournalSyncError("Cannot apply element move: \"" + payload.key + "\" not found (from " + JSON.stringify(payload.from) + " to " + JSON.stringify(payload.to) + ")");
     }
-    const dest: any = resolveLocator(splitPointer(payload.to).container, this.survey);
+    const dest: any = resolveElementContainer(splitPointer(payload.to).container, this.survey);
     if (!dest || typeof dest.addElement !== "function") {
       throw new JournalSyncError("Cannot apply element move: destination container not found: " + JSON.stringify(payload.to));
     }
@@ -232,7 +232,7 @@ export class JournalApplier {
     if (!existing) return false;
     const parent: any = existing.parent;
     if (!parent || typeof parent.removeElement !== "function" || parent.elements === array) return false;
-    const dest: any = resolveLocator(splitPointer(target).container, this.survey);
+    const dest: any = resolveElementContainer(splitPointer(target).container, this.survey);
     if (!dest || typeof dest.addElement !== "function") return false;
     this.relocateElement(existing, dest, index, array.length);
     return true;

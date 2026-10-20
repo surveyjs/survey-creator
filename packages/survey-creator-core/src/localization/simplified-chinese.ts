@@ -651,6 +651,8 @@ export var simplifiedChineseTranslation = {
       templateErrorLocation: "错误消息对齐",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新入场地点",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "每个数据页的面板数",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下问题中的重复回答"
     },
@@ -1083,6 +1085,8 @@ export var simplifiedChineseTranslation = {
     maxFiles: "最大文件数量",
     // "Row count"
     rowCount: "默认行数",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "每个数据页的行数",
     // "Columns layout"
     columnLayout: "列布局",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var simplifiedChineseTranslation = {
     questionErrorLocation: "问题错误定位",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "改变页面时聚焦在第一个问题",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "启用选择快捷方式",
     // "Question order"
     questionOrder: "页内问题顺序",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var simplifiedChineseTranslation = {
       confirmDelete: "在删除条目之前触发确认提示。",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "指定一个计算条目数量的表达式。该表达式覆盖“初始条目数”设置，并在引用值变化时重新评估。结果受限于“最小条目数”和“最大条目数”设置。在此表达式设置期间，受访者无法手动添加或删除条目。",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "指定每个数据页显示的面板数量。0 关闭分页并显示所有面板。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "为嵌套在动态面板中的问题分配编号。"
     },
@@ -2754,6 +2762,8 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "在向矩阵添加新行时自动展开详细信息部分。"
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "指定每个数据页显示的矩阵行数。0 禁用分页，显示所有行。",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "复制最后一行的答案，并将其分配给下一个添加的动态行。",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var simplifiedChineseTranslation = {
     questionErrorLocation: "设置与输入无效的问题相关的错误消息的位置。选择：“顶部” - 错误文本放置在问题框的顶部;“底部” - 错误文本放置在问题框的底部。",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "选择是否希望每个页面上的第一个输入字段准备好进行文本输入。",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "在无线按钮组、复选框和图片选择器问题的选项旁边显示字母（A、B、C、等）。回答者可以通过按相应的字母键选择选项。你可以针对单个问题覆盖此设置。",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "在选项旁显示字母（A、B、C、......），让受访者通过按相应的字母键选择。“继承”选项使用调查级别设置。"
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "保持问题的原始顺序或随机化问题。此设置的效果仅在“预览”选项卡中可见。",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var simplifiedChineseTranslation = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "该{ownerText}的{nameKindText} “{name}”也是内置的调查变量{{builtIn}}——调查先回答{{name}}，因此该变量在表达式中不可达。",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "“{name}”的值名“{valueName}”也是问题“{otherName}”的名称——两者都将答案存储在数据键“{valueName}”下。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "“{name}”的值名“{valueName}”与{otherType}“{otherName}”共享值，后者没有自身的valueName——“{otherName}”将“{name}”加法“视为未知字段，且clearIncorrectValues（）会删除它们。也将其值Name设置为”{valueName}“。",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "矩阵下拉选单“{otherName}”的行“{key}”也是{sharedKeyText} “{name}”共享其值——单元对象和单个值不能同时存在于一个键下;运行时保留其中一个并删除另一个。",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} “{name}” 与 {otherType} “{otherName}” 共享数据键 “{dataKey}” ——它保留 {shapeText}，而“{otherName}” 保留 {otherShapeText};其中一个不能保留另一个的值，因此 clearIncorrectValues（） 会删除它。",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "数据键“{dataName}”也是“{base}”的注释键（其数据键加上“{suffix}”）——一个写入静默覆盖另一个。",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var simplifiedChineseTranslation = {
         array: "一个数组",
         // [Auto-translated] "an object"
         object: "一个物体"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "一排矩阵",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "多重文本的一项",
+        // [Auto-translated] "a row or item of a question"
+        default: "问题的一行或一项"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "一组对象",
+        // [Auto-translated] "an object"
+        object: "一个物体",
+        // [Auto-translated] "a plain value"
+        plain: "一个普通值",
+        // [Auto-translated] "a value"
+        default: "一个值"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

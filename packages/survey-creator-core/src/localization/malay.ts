@@ -651,6 +651,8 @@ export var msStrings = {
       templateErrorLocation: "Penjajaran mesej ralat",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi kemasukan baharu",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panel setiap halaman data",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Elakkan respons pendua dalam soalan berikut"
     },
@@ -1083,6 +1085,8 @@ export var msStrings = {
     maxFiles: "Bilangan fail maksimum",
     // "Row count"
     rowCount: "Kiraan baris",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Baris setiap halaman data",
     // "Columns layout"
     columnLayout: "Tataletak lajur",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var msStrings = {
     questionErrorLocation: "Lokasi ralat soalan",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Fokus soalan pertama pada perubahan halaman",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Aktifkan pintasan pilihan",
     // "Question order"
     questionOrder: "Susunan elemen pada halaman",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var msStrings = {
       confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar entri.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Tentukan ungkapan yang mengira bilangan entri. Ungkapan ini menggantikan tetapan \"Bilangan awal entri\" dan dinilai semula setiap kali nilai yang dirujuk berubah. Keputusan dihadkan oleh tetapan \"Bilangan minimum entri\" dan \"Bilangan maksimum entri\". Semasa ungkapan ini ditetapkan, responden tidak boleh menambah atau mengeluarkan entri secara manual.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Menentukan bilangan panel yang dipaparkan pada setiap halaman data. 0 mematikan penpaginahan dan memaparkan semua panel.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Memperuntukkan nombor kepada soalan yang bersarang dalam panel dinamik."
     },
@@ -2754,6 +2762,8 @@ export var msStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Mengembangkan bahagian butiran secara automatik apabila baris baharu ditambah pada matriks."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Menentukan bilangan baris matriks yang dipaparkan pada setiap halaman data. 0 mematikan penpaginahan dan memaparkan semua baris.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var msStrings = {
     questionErrorLocation: "Mengesetkan lokasi mesej ralat berhubung dengan soalan dengan input tidak sah. Pilih antara: \"Atas\" - teks ralat diletakkan di bahagian atas kotak soalan; \"Bawah\" - teks ralat diletakkan di bahagian bawah kotak soalan.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Pilih jika anda inginkan medan input pertama pada setiap halaman sedia untuk entri teks.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Memaparkan huruf (A, B, C, ...) di sebelah pilihan dalam soalan Kumpulan Butang Radio, Kotak Semak, dan Pemilih Imej. Responden boleh memilih pilihan dengan menekan kekunci huruf yang sepadan. Anda boleh menggantikan tetapan ini untuk soalan individu.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Memaparkan huruf (A, B, C, ...) di sebelah pilihan dan membolehkan responden memilihnya dengan menekan kekunci huruf yang sepadan. Pilihan \"Warisi\" menggunakan tetapan tahap tinjauan."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Kesan seting ini hanya kelihatan dalam tab Pratonton.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var msStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" dalam {ownerText} ini juga merupakan pembolehubah tinjauan terbina dalam {{builtIn}} - tinjauan menjawab {{name}} terlebih dahulu, jadi yang ini tidak boleh dicapai dalam ungkapan.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "ValueName \"{valueName}\" dalam \"{name}\" juga merupakan nama soalan \"{otherName}\" - kedua-duanya menyimpan jawapan mereka di bawah kunci data \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" dalam \"{name}\" berkongsi nilai {otherType} \"{otherName}\", yang tidak mempunyai valueName sendiri - \"{otherName}\" menganggap medan \"{name}\" ditambah sebagai tidak diketahui, dan clearIncorrectValues() memadamkannya. Tetapkan valueName-nya kepada \"{valueName}\" juga.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Baris \"{key}\" dalam matrixdropdown \"{otherName}\" juga {sharedKeyText} \"{name}\" berkongsi nilainya - objek sel dan satu nilai tidak boleh berada di bawah satu kunci; runtime mengekalkan satu dan memadam yang lain.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" berkongsi kunci data \"{dataKey}\" dengan {otherType} \"{otherName}\" - ia mengekalkan {shapeText} di situ, manakala \"{otherName}\" mengekalkan {otherShapeText}; satu tidak boleh memegang nilai yang lain, jadi clearIncorrectValues() akan memadamkannya.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Kunci data \"{dataName}\" juga merupakan kunci komen bagi \"{base}\" (kunci datanya ditambah \"{akhiran}\") - satu penulisan menulis secara senyap menimpa yang lain.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var msStrings = {
         array: "satu tatasusunan",
         // [Auto-translated] "an object"
         object: "sebuah objek"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "satu baris matriks",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "item berbilang teks",
+        // [Auto-translated] "a row or item of a question"
+        default: "satu baris atau item dalam soalan"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "satu array objek",
+        // [Auto-translated] "an object"
+        object: "sebuah objek",
+        // [Auto-translated] "a plain value"
+        plain: "nilai biasa",
+        // [Auto-translated] "a value"
+        default: "nilai"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

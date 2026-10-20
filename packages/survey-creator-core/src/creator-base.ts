@@ -4365,12 +4365,14 @@ export class SurveyCreatorModel extends Base
       item: item,
       allowEdit: itemOptions.allowEdit,
       allowDelete: itemOptions.allowDelete,
-      allowAdd: itemOptions.allowAdd
+      allowAdd: itemOptions.allowAdd,
+      allowDrag: itemOptions.allowDrag
     };
     this.onCollectionItemAllowOperations.fire(this, options);
     itemOptions.allowEdit = options.allowEdit;
     itemOptions.allowDelete = options.allowDelete;
     itemOptions.allowAdd = options.allowAdd;
+    itemOptions.allowDrag = options.allowDrag;
   }
   onItemValueAddedCallback(
     obj: Base,
@@ -4935,6 +4937,16 @@ export class SurveyCreatorModel extends Base
     this.onElementAllowOperations.fire(this, options);
     options.allowDrag = options.allowDragging = options.allowDrag && options.allowDragging;
     return options;
+  }
+
+  // Rendered adorners compute the allowed operations (onElementAllowOperations,
+  // onPropertyGetReadOnly, onCollectionItemAllowOperations) when they are
+  // created. A host whose answers change while the designer is shown calls
+  // notifyPermissionsChanged(): the adorners listening to
+  // onPermissionsChanged recompute them.
+  public onPermissionsChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  public notifyPermissionsChanged(): void {
+    this.onPermissionsChanged.fire(this, {});
   }
 
   public getChoicesItemBaseTitle() {

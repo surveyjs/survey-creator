@@ -26,6 +26,7 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
   }
   protected createModel(): void {
     if (this.componentData) {
+      this.adorner?.dispose();
       this.adorner = new ImageItemValueWrapperViewModel(this.creator, this.question, this.item, <any>null, <any>null);
     }
   }
@@ -34,6 +35,10 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
   }
   protected getModel(): ImageItemValueWrapperViewModel {
     return this.adorner;
+  }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.adorner?.dispose();
   }
 
   get showDragDropGhostOnTop(): boolean {

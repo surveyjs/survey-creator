@@ -86,21 +86,24 @@ test.describe(title, () => {
     const json_t = { elements: [{ type: "checkbox", name: "q1", choices: ["Item 1", "Item 2"] }, { type: "radiogroup", name: "q2", choices: ["Item 3", "Item 4"] }] };
     await setJSON(page, json_t);
 
-    const itemSelector = ".svc-item-value__item .svc-string-editor .sv-string-editor";
-    expect(await page.locator(itemSelector).getByText("Item 1").nth(0).getAttribute("contenteditable")).toEqual("true");
-    expect(await page.locator(itemSelector).getByText("Item 2").nth(0).getAttribute("contenteditable")).toEqual("true");
-    expect(await page.locator(itemSelector).getByText("Item 3").nth(1).getAttribute("contenteditable")).toEqual("true");
-    expect(await page.locator(itemSelector).getByText("Item 4").nth(0).getAttribute("contenteditable")).toEqual("true");
+    // Scoped per question: q1's new item placeholder is also titled "Item 3".
+    const item = (question: string, text: string) =>
+      page.locator(`.sd-question[data-name=${question}] .svc-item-value__item .svc-string-editor .sv-string-editor`)
+        .getByText(text, { exact: true });
+    expect(await item("q1", "Item 1").getAttribute("contenteditable")).toEqual("true");
+    expect(await item("q1", "Item 2").getAttribute("contenteditable")).toEqual("true");
+    expect(await item("q2", "Item 3").getAttribute("contenteditable")).toEqual("true");
+    expect(await item("q2", "Item 4").getAttribute("contenteditable")).toEqual("true");
 
     await page.evaluate(() => {
       (window as any).Survey.Serializer.getProperty("itemvalue", "text").readOnly = true;
     });
     await setJSON(page, json_t);
 
-    expect(await page.locator(itemSelector).getByText("Item 1").nth(0).getAttribute("contenteditable")).toEqual("false");
-    expect(await page.locator(itemSelector).getByText("Item 2").nth(0).getAttribute("contenteditable")).toEqual("false");
-    expect(await page.locator(itemSelector).getByText("Item 3").nth(1).getAttribute("contenteditable")).toEqual("false");
-    expect(await page.locator(itemSelector).getByText("Item 4").nth(0).getAttribute("contenteditable")).toEqual("false");
+    expect(await item("q1", "Item 1").getAttribute("contenteditable")).toEqual("false");
+    expect(await item("q1", "Item 2").getAttribute("contenteditable")).toEqual("false");
+    expect(await item("q2", "Item 3").getAttribute("contenteditable")).toEqual("false");
+    expect(await item("q2", "Item 4").getAttribute("contenteditable")).toEqual("false");
 
     await page.evaluate(() => {
       (window as any).Survey.Serializer.getProperty("itemvalue", "text").readOnly = false;
@@ -108,10 +111,11 @@ test.describe(title, () => {
     });
     await setJSON(page, json_t);
 
-    expect(await page.locator(itemSelector).getByText("Item 1").nth(0).getAttribute("contenteditable")).toEqual("false");
-    expect(await page.locator(itemSelector).getByText("Item 2").nth(0).getAttribute("contenteditable")).toEqual("false");
-    expect(await page.locator(itemSelector).getByText("Item 3").nth(1).getAttribute("contenteditable")).toEqual("true");
-    expect(await page.locator(itemSelector).getByText("Item 4").nth(0).getAttribute("contenteditable")).toEqual("true");
+    expect(await item("q1", "Item 1").getAttribute("contenteditable")).toEqual("false");
+    expect(await item("q1", "Item 2").getAttribute("contenteditable")).toEqual("false");
+    await expect(item("q1", "Item 3")).toHaveCount(0);
+    expect(await item("q2", "Item 3").getAttribute("contenteditable")).toEqual("true");
+    expect(await item("q2", "Item 4").getAttribute("contenteditable")).toEqual("true");
 
     await page.evaluate(() => {
       (window as any).Survey.Serializer.getProperty("checkbox", "choices").readOnly = false;
@@ -122,10 +126,10 @@ test.describe(title, () => {
     });
     await setJSON(page, json_t);
 
-    expect(await page.locator(itemSelector).getByText("Item 1").nth(0).getAttribute("contenteditable")).toEqual("true");
-    expect(await page.locator(itemSelector).getByText("Item 2").nth(0).getAttribute("contenteditable")).toEqual("true");
-    expect(await page.locator(itemSelector).getByText("Item 3").nth(1).getAttribute("contenteditable")).toEqual("false");
-    expect(await page.locator(itemSelector).getByText("Item 4").nth(0).getAttribute("contenteditable")).toEqual("false");
+    expect(await item("q1", "Item 1").getAttribute("contenteditable")).toEqual("true");
+    expect(await item("q1", "Item 2").getAttribute("contenteditable")).toEqual("true");
+    expect(await item("q2", "Item 3").getAttribute("contenteditable")).toEqual("false");
+    expect(await item("q2", "Item 4").getAttribute("contenteditable")).toEqual("false");
   });
 
   test("Check creator events on string editor", async ({ page }) => {

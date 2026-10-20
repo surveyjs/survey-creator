@@ -651,6 +651,8 @@ export var slStrings = {
       templateErrorLocation: "Poravnava sporočila o napaki",
       // "New entry location"
       newPanelPosition: "Nova lokacija plošče",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Paneli na podatkovno stran",
       // "Prevent duplicate responses in the following question"
       keyName: "Prepreči podvojene odgovore v naslednjem vprašanju"
     },
@@ -1083,6 +1085,8 @@ export var slStrings = {
     maxFiles: "Največje število datotek",
     // "Row count"
     rowCount: "Število vrstic",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Vrstice na podatkovno stran",
     // "Columns layout"
     columnLayout: "Postavitev stolpcev",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var slStrings = {
     questionErrorLocation: "Poravnava sporočila o napaki",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Samodejno osredotoči prvo vprašanje na novi strani",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Omogočite bližnjice izbire",
     // "Question order"
     questionOrder: "Vrsta vprašanj",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var slStrings = {
       confirmDelete: "Sproži potrditveni poziv pred odstranitvijo plošče.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Določite izraz, ki izračuna število vnosov. Ta izraz preglasi nastavitev \"Začetno število vnosov\" in se ponovno oceni vsakič, ko se spremenijo vrednosti, na katere se sklicuje. Rezultat je omejen z nastavitvami \"Minimalno število vnosov\" in \"Največje število vnosov\". Medtem ko je ta izraz nastavljen, anketiranci ne morejo ročno dodajati ali odstranjevati vnosov.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Določa število panelov, prikazanih na vsaki podatkovni strani. 0 izklopi oštevilčenje in prikaže vse panele.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dodeli številke vprašanjem, ugnezdenim v dinamični plošči."
     },
@@ -2754,6 +2762,8 @@ export var slStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Samodejno razširi razdelek s podrobnostmi, ko je v matriko dodana nova vrstica."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Določa število vrstic matrike, prikazanih na vsaki podatkovni strani. 0 izklopi oštevilčenje in prikaže vse vrstice.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Podvoji odgovore iz zadnje vrstice in jih dodeli naslednji dinamično dodani vrstici.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var slStrings = {
     questionErrorLocation: "Nastavi lokacijo sporočila o napaki v povezavi z vprašanjem z neveljavnim vnosom. Izberite med: Na vrhu - sporočilo o napaki je postavljeno na vrh vprašanja, Na dnu - sporočilo o napaki je postavljeno na dno vprašanja",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Izberite, če želite, da je prvo vnosno polje na vsaki strani pripravljeno za vnos besedila",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Prikaže črke (A, B, C, ...) poleg izbir v vprašanjih Radio Button Group, Checkboxs in Image Picker. Anketiranci lahko izbirajo izbire z ustreznimi črkami. To nastavitev lahko preglasite za posamezna vprašanja.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Ob izbiri prikaže črke (A, B, C, ...) in omogoča anketirancem, da jih izberejo s pritiskom na ustrezne tipke za črke. Možnost \"Dedi\" uporablja nastavitev na ravni ankete."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Ohrani prvoten vrstni red vprašanj ali jih naključno postavi. Učinek te nastavitve je viden samo na zavihku Predogled",
     // "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var slStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" tega {ownerText} je tudi vgrajena spremenljivka ankete {{builtIn}} – anketa najprej odgovori {{name}}, zato je ta nedosegljiva v izrazih.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "ValueName \"{valueName}\" od \"{name}\" je tudi ime vprašanja \"{otherName}\" – oba shranjujeta svoj odgovor pod podatkovni ključ \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" od \"{name}\" deli vrednost {otherType} \"{otherName}\", ki nima lastne valueName – \"{otherName}\" obravnava polja z \"{name}\" kot neznana, clearIncorrectValues() pa jih izbriše. Nastavi tudi njegov valueName na \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Vrstica \"{key}\" v spustnem meniju matrike \"{otherName}\" je prav tako {sharedKeyText} \"{name}\", ki deli svojo vrednost – objekt celice in ena vrednost ne moreta hkrati obstajati pod enim ključem; čas izvajanja ohrani enega in izbriše drugega.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" si deli podatkovni ključ \"{dataKey}\" z {otherType} \"{otherName}\" – tam hrani {shapeText}, medtem ko \"{otherName}\" ohranja {otherShapeText}; eden ne more imeti vrednosti drugega, zato ga clearIncorrectValues() izbriše.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Podatkovni ključ \"{dataName}\" je tudi komentarni ključ za \"{base}\" (njegov podatkovni ključ plus \"{suffix}\") – en zapis tiho prepiše drugega.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var slStrings = {
         array: "polje",
         // [Auto-translated] "an object"
         object: "predmet"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "Vrstica matrike",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "Element večbesedila",
+        // [Auto-translated] "a row or item of a question"
+        default: "vrstica ali vprašanje"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "niz objektov",
+        // [Auto-translated] "an object"
+        object: "predmet",
+        // [Auto-translated] "a plain value"
+        plain: "Navadna vrednost",
+        // [Auto-translated] "a value"
+        default: "vrednost"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

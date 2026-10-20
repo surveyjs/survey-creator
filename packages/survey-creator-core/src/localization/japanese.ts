@@ -651,6 +651,8 @@ export var jaStrings = {
       templateErrorLocation: "エラー・メッセージのアライメント",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新しいエントリー場所",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "データページごとのパネル数",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "次の質問の重複回答の防止"
     },
@@ -1083,6 +1085,8 @@ export var jaStrings = {
     maxFiles: "最大ファイル数",
     // "Row count"
     rowCount: "列数",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "データページごとの行数",
     // "Columns layout"
     columnLayout: "行のレイアウト",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var jaStrings = {
     questionErrorLocation: "質問エラーの場所",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "ページを変える際に最初の質問に焦点を合わせる",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "選択ショートカットを有効にする",
     // "Question order"
     questionOrder: "ページ上の要素の順序",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var jaStrings = {
       confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "エントリ数を計算する式を指定します。この式は「初期エントリ数」設定を上書きし、参照する値が変わるたびに再評価されます。結果は「最小エントリ数」と「最大エントリ数」設定によって制限されます。この式が設定されている間、回答者は手動でエントリを追加または削除することはできません。",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "各データページに表示されるパネル数を指定します。0はページ分けを無効にし、すべてのパネルを表示します。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "動的パネル内にネストされた質問に番号を割り当てます。"
     },
@@ -2754,6 +2762,8 @@ export var jaStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "新しい行がマトリックスに追加されると、詳細セクションが自動的に展開されます。"
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "各データページに表示される行数を指定します。0はページ分けを無効にし、すべての行を表示します。",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "最後の行から回答を複製し、次に追加された動的行に割り当てます。",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var jaStrings = {
     questionErrorLocation: "無効な入力を含む質問に関連するエラーメッセージの場所を設定します。次から選択します: \"Top\" - 質問ボックスの上部にエラーテキストが配置されます。\"Bottom\" - 質問ボックスの下部にエラーテキストが配置されます。",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "各ページの最初の入力フィールドをテキスト入力可能にするかどうかを選択します。",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "ラジオボタングループ、チェックボックス、画像ピッカーの質問の選択肢の横に文字(A、B、C、...)を表示します。回答者は対応する文字キーを押すことで選択肢を選択できます。個別の質問ではこの設定を上書きできます。",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "選択肢の横に文字(A、B、C、...)が表示され、回答者は対応するアルファベットキーを押して選択できます。「継承」オプションはアンケートレベルの設定を使用しています。"
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "質問の元の順序を維持するか、ランダム化します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var jaStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "この{ownerText}の{nameKindText} 「{name}」は組み込みの調査変数{{builtIn}}でもあります。調査は先に{{name}}に答えるため、この変数は式で到達できません。",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "「{name}」のvalueName「{valueName}」は質問「{otherName}」の名前でもあり、どちらも回答はデータキー「{valueName}」の下に保存されます。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "「{name}」のvalueName「{valueName}」は{otherType}「{otherName}」の値を共有しており、後者は独自のvalueNameを持ちません。「{otherName}」は「{name}」が「{name}」を追加したフィールドを未知と扱い、clearIncorrectValues()がそれらを削除します。値Nameも「{valueName}」に設定してください。",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "matrixドロップダウン「{otherName}」の行「{key}」は{sharedKeyText}と「{name}」でもあり、同じ値を共有しています。セルオブジェクトと単一の値は同時に1つのキーの下に存在することはできません。ランタイムは一方を保持し、もう一方を削除します。",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} 「{name}」は{otherType} \"{otherName}}とデータキー「{dataKey}」を共有し、{shapeText}を保持し、「{otherName}」は{otherShapeText}を保持します。一方がもう一方の値を保持できないため、clearIncorrectValues() は削除します。",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "データキー「{dataName}」は「{base}」のコメントキーでもあり(そのデータキーと「{suffix}」)、一方の書き込みはもう一方を無言で上書きします。",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var jaStrings = {
         array: "配列",
         // [Auto-translated] "an object"
         object: "物体"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "行列",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "マルチテキストの項目",
+        // [Auto-translated] "a row or item of a question"
+        default: "質問の行や項目"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "オブジェクトの配列",
+        // [Auto-translated] "an object"
+        object: "物体",
+        // [Auto-translated] "a plain value"
+        plain: "単純な値",
+        // [Auto-translated] "a value"
+        default: "値"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

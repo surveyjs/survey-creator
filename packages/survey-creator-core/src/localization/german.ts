@@ -651,6 +651,8 @@ export var germanTranslation = {
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Neuer Einstiegsort",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panels pro Datenseite",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
@@ -1083,6 +1085,8 @@ export var germanTranslation = {
     maxFiles: "Maximale Anzahl von Dateien",
     // "Row count"
     rowCount: "Zeilenanzahl",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Zeilen pro Datenseite",
     // "Columns layout"
     columnLayout: "Spaltenlayout",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var germanTranslation = {
     questionErrorLocation: "Position der Fehlermeldungen",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Erste Frage auf einer neuen Seite fokussieren",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Wahlkürzeln aktivieren",
     // "Question order"
     questionOrder: "Reihenfolge der Fragen auf der Seite",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var germanTranslation = {
       confirmDelete: "Löst eine Bestätigungsaufforderung aus, bevor ein Eintrag entfernt wird.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Spezifizieren Sie einen Ausdruck, der die Anzahl der Einträge berechnet. Dieser Ausdruck überschreibt die Einstellung \"Anfangszahl der Einträge\" und wird neu bewertet, sobald sich die auf ihn bezogenen Werte ändern. Das Ergebnis ist durch die Einstellungen \"Mindestanzahl der Einträge\" und \"Maximale Anzahl von Einträgen\" begrenzt. Während dieser Ausdruck gesetzt ist, können Befragte Einträge nicht manuell hinzufügen oder entfernen.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Spezifiziert die Anzahl der auf jeder Datenseite angezeigten Panels. 0 deaktiviert die Paginierung und zeigt alle Panels an.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Weist Fragen, die im dynamischen Bereich verschachtelt sind, Nummern zu."
     },
@@ -2754,6 +2762,8 @@ export var germanTranslation = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Erweitert den Detailabschnitt automatisch, wenn der Matrix eine neue Zeile hinzugefügt wird."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Spezifiziert die Anzahl der auf jeder Datenseite angezeigten Matrixzeilen. 0 deaktiviert die Paginierung und zeigt alle Zeilen an.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var germanTranslation = {
     questionErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Wählen Sie diese Option aus, wenn das erste Eingabefeld auf jeder Seite für die Texteingabe bereit sein soll.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Zeigt Buchstaben (A, B, C, ...) neben Auswahlmöglichkeiten in der Radio-Tasten-Gruppe, Kontrollkästchen und Bildauswähler-Fragen an. Befragte können Optionen auswählen, indem sie die entsprechenden Buchstabentasten drücken. Diese Einstellung können Sie für einzelne Fragen überschreiben.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Zeigt Buchstaben (A, B, C, ...) neben den Auswahlmöglichkeiten an und ermöglicht es den Befragten, diese durch Drücken der entsprechenden Buchstabentasten auszuwählen. Die Option \"Inherit\" verwendet die Einstellung auf Umfrageebene."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var germanTranslation = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Das {nameKindText} \"{name}\" dieses {ownerText} ist auch die eingebaute Survey-Variable {{builtIn}} – die Umfrage antwortet zuerst {{name}}, daher ist diese in Ausdrücken nicht erreichbar.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "Der valueName \"{valueName}\" von \"{name}\" ist auch der Name der Frage \"{otherName}\" – beide speichern ihre Antwort unter dem Datenschlüssel \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "Der valueName \"{valueName}\" von \"{name}\" teilt sich den Wert von {otherType} \"{otherName}\", der keinen eigenen Wert hat – \"{otherName}\" behandelt die Felder, die \"{name}\" hinzufügt, als unbekannt, und clearIncorrectValues() löscht sie. Setze auch seinen valueName auf \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Die Zeile \"{key}\" im Matrixdropdown \"{otherName}\" ist ebenfalls {sharedKeyText} \"{name}\" und teilt ihren Wert – ein Zellobjekt und ein einzelner Wert können nicht beide unter einem Schlüssel liegen; die Laufzeit behält einen und löscht den anderen.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "Der {type} \"{name}\" teilt sich den Datenschlüssel \"{dataKey}\" mit {otherType} \"{otherName}\" – er behält {shapeText} dort, während \"{otherName}\" {otherShapeText} beibehält; man kann den Wert des anderen nicht speichern, daher löscht clearIncorrectValues() ihn.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Der Datenschlüssel \"{dataName}\" ist auch der Kommentarschlüssel von \"{base}\" (sein Datenschlüssel plus \"{Suffix}\") – ein Schreib überschreibt den anderen stillschweigend.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var germanTranslation = {
         array: "Ein Array",
         // [Auto-translated] "an object"
         object: "ein Objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "eine Matrixzeile",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "Ein Mehrfachtext",
+        // [Auto-translated] "a row or item of a question"
+        default: "Eine Zeile oder ein Punkt einer Frage"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "ein Array von Objekten",
+        // [Auto-translated] "an object"
+        object: "ein Objekt",
+        // [Auto-translated] "a plain value"
+        plain: "Ein einfacher Wert",
+        // [Auto-translated] "a value"
+        default: "Ein Wert"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

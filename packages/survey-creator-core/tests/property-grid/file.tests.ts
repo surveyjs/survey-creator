@@ -271,7 +271,7 @@ test("Check onOpenFileChooser called and onUploadFile context exists", () => {
   const question = creator.survey.getAllQuestions()[0];
   const propertyGrid = new PropertyGridModelTester(question, creator);
   const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
-  questionEditor["rootElement"] = <any>{ querySelectorAll: () => [{}] };
+  questionEditor["contentElement"] = <any>{ querySelectorAll: () => [{}] };
   let uploadCount = 0;
   let log = "";
   let lastContext: any;

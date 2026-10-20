@@ -23,6 +23,9 @@ const model = useCreatorModel(
       props.componentData.question,
       null as any
     ),
-  [() => props.componentData.data, () => props.componentData.question]
+  [() => props.componentData.data, () => props.componentData.question],
+  (value) => {
+    value.dispose();
+  }
 );
 </script>

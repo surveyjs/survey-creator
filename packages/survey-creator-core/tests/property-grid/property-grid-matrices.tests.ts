@@ -7,7 +7,8 @@ import {
   QuestionImagePickerModel,
   QuestionSliderModel,
   ActionContainer,
-  QuestionRadiogroupModel
+  QuestionRadiogroupModel,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
@@ -843,4 +844,24 @@ test("Choices property editor: the detail row renders the detail panel, #8029", 
   expect(detailRow.cells).toHaveLength(1);
   expect(detailRow.cells[0].panel).toBe(matrix.visibleRows[0].detailPanel);
   expect(detailRow.cells[0].colSpans).toBe(rowColSpans);
+});
+test("pageSize property editor in the general category for matrices and dynamic panel", () => {
+  // pageSize is hidden in survey-core's Serializer until the pager UI ships
+  const props = [Serializer.findProperty("matrixdropdownbase", "pageSize"), Serializer.findProperty("paneldynamic", "pageSize")];
+  props.forEach(prop => prop.visible = true);
+  const checkPageSize = (obj: any, title: string, description: string) => {
+    const propertyGrid = new PropertyGridModelTester(obj);
+    const pageSizeQuestion = propertyGrid.survey.getPanelByName("general").getQuestionByName("pageSize");
+    expect(pageSizeQuestion, obj.getType()).toBeTruthy();
+    expect(pageSizeQuestion.title, obj.getType()).toBe(title);
+    expect(pageSizeQuestion.description, obj.getType()).toBe(description);
+    pageSizeQuestion.value = 5;
+    expect(obj.pageSize, obj.getType()).toBe(5);
+  };
+  const rowsHelp = "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows.";
+  checkPageSize(new QuestionMatrixDynamicModel("q1"), "Rows per data page", rowsHelp);
+  checkPageSize(new QuestionMatrixDropdownModel("q1"), "Rows per data page", rowsHelp);
+  checkPageSize(new QuestionPanelDynamicModel("q1"), "Panels per data page",
+    "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels.");
+  props.forEach(prop => prop.visible = false);
 });

@@ -642,6 +642,24 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".spg-row--multiple"), "overriding-property-editor.png");
   });
 
+  test("Check boolean editors grouping", async ({ page }) => {
+    await page.evaluate(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false);
+    await page.setViewportSize({ width: 1920, height: 1920 });
+
+    await setJSON(page, { "elements": [{ "type": "checkbox", "name": "question1", "choices": ["Item 1", "Item 2", "Item 3"] }] });
+
+    await page.locator(".svc-question__content").click({ position: { x: 10, y: 10 } });
+    await getPropertyGridCategory(page, generalGroupName).click();
+    await page.getByRole("button", { name: "Choice Options" }).click();
+
+    const sectionContentElement = page.getByRole("group", { name: "Choice Options" });
+    await expect(sectionContentElement).toBeVisible();
+    await compareScreenshot(page, sectionContentElement, "boolean-editors-grouping.png");
+
+    await page.getByText('Enable the "None" option').click();
+    await compareScreenshot(page, sectionContentElement, "boolean-editors-no-grouping.png");
+  });
+
   test("Check comment editor with reset button", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     await page.evaluate(() => {

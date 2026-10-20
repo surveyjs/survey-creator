@@ -711,12 +711,16 @@ test("A name the survey answers itself says which built-in wins", () => {
     " - the survey answers {locale} first, so this one is unreachable in expressions.");
 });
 
-test("A data key two elements write says what collides with what", () => {
+test("A valueName shadowing a records element says what the container cannot see", () => {
   expect(textOf({
-    elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2", valueName: "q1" }]
+    elements: [
+      { type: "matrixdynamic", name: "q1", valueName: "q2", columns: [{ name: "c1", cellType: "text" }] },
+      { type: "paneldynamic", name: "q2", templateElements: [{ type: "text", name: "t1" }] },
+    ]
   }, "name/shadowing")).toBe(
-    "The valueName \"q1\" of \"q2\" is also the name of question \"q1\"" +
-    " - both store their answer under the data key \"q1\".");
+    "The valueName \"q2\" of \"q1\" shares the value of paneldynamic \"q2\"," +
+    " which has no valueName of its own - \"q2\" treats the fields \"q1\" adds as unknown," +
+    " and clearIncorrectValues() deletes them. Set its valueName to \"q2\" too.");
   expect(textOf({
     elements: [
       { type: "text", name: "q1", showCommentArea: true },
@@ -753,6 +757,44 @@ test("A data key two elements write says what collides with what", () => {
   }, "name/shadowing")).toBe(
     "The setvalue trigger sets the variable \"q1\", which is also the data key of question" +
     " \"q1\" - the variable answers {q1} from then on, not the question.");
+});
+
+test("A single-value choice sharing a matrix row names what collides", () => {
+  expect(editorLocalization.getJsonValue("linter.messages.name/shadowing.dropdownRowConflict")).toBeDefined();
+  expect(textOf({
+    elements: [
+      { type: "matrixdropdown", name: "md", rows: ["r1"], columns: [{ name: "c", cellType: "text" }] },
+      { type: "matrix", name: "m", valueName: "md", rows: ["r1"], columns: ["x", "y"] },
+    ]
+  }, "name/shadowing")).toBe(
+    "The row \"r1\" of matrixdropdown \"md\" is also a row of matrix \"m\" sharing its value - " +
+    "a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other.");
+  expect(textOf({
+    elements: [
+      { type: "matrixdropdown", name: "md", rows: ["r1"], columns: [{ name: "c", cellType: "text" }] },
+      { type: "multipletext", name: "mt", valueName: "md", items: [{ name: "r1" }] },
+    ]
+  }, "name/shadowing")).toBe(
+    "The row \"r1\" of matrixdropdown \"md\" is also an item of multipletext \"mt\" sharing its value - " +
+    "a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other.");
+});
+
+test("Questions sharing a key with different value shapes say what each keeps", () => {
+  expect(editorLocalization.getJsonValue("linter.messages.name/shadowing.valueShapeConflict")).toBeDefined();
+  const editor = createEditor(JSON.stringify({
+    elements: [
+      { type: "matrixdynamic", name: "k", columns: [{ name: "c", cellType: "text" }] },
+      { type: "text", name: "p", valueName: "k" },
+    ],
+  }, null, 2));
+  const finding = editor.linter.findings.filter(item => item.ruleId === "name/shadowing")[0];
+  expect(finding.text).toBe(
+    "The text \"p\" shares the data key \"k\" with matrixdynamic \"k\" - it keeps a plain value there, " +
+    "while \"k\" keeps an array of objects; one cannot hold the other's value, so clearIncorrectValues() deletes it.");
+  const withoutShapes: any = Object.assign({}, finding.finding, {
+    messageData: Object.assign({}, finding.finding.messageData, { shape: undefined, otherShape: undefined }),
+  });
+  expect(editor.linter.composeMessage(withoutShapes)).toBe(finding.finding.message);
 });
 
 test("A key that matches no property names the class it was written on", () => {

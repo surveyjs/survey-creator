@@ -651,6 +651,8 @@ export var nbStrings = {
       templateErrorLocation: "Justering av feilmelding",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny inngangsplassering",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Paneler per dataside",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Forhindre dupliserte svar i følgende spørsmål"
     },
@@ -1083,6 +1085,8 @@ export var nbStrings = {
     maxFiles: "Maksimalt antall filer",
     // "Row count"
     rowCount: "Antall rader",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Rader per dataside",
     // "Columns layout"
     columnLayout: "Antall kolonner",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var nbStrings = {
     questionErrorLocation: "Spørsmål feil plassering",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Sett fokus på første spørsmål når en endrer side",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Aktiver snarveier til valg",
     // "Question order"
     questionOrder: "Rekkefølge på elementer på siden",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var nbStrings = {
       confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en oppføring.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Spesifiser et uttrykk som beregner antall oppføringer. Dette uttrykket overstyrer innstillingen \"Innledende antall oppføringer\" og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene \"Minimum antall oppføringer\" og \"Maksimalt antall oppføringer\". Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne oppføringer manuelt.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Angir antall paneler som vises på hver dataside. 0 deaktiverer paginering og viser alle paneler.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tildeler numre til spørsmål som er nestet i det dynamiske panelet."
     },
@@ -2754,6 +2762,8 @@ export var nbStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Utvider automatisk detaljdelen når en ny rad legges til i matrisen."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Angir antall matriserader som vises på hver dataside. 0 deaktiverer paginering og viser alle rader.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliserer svar fra den siste raden og tilordner dem til den neste dynamiske raden som er lagt til.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var nbStrings = {
     questionErrorLocation: "Angir plasseringen til en feilmelding i forhold til spørsmålet med ugyldige inndata. Velg mellom: \"Topp\" - en feiltekst plasseres øverst i spørsmålsboksen; \"Bunn\" - en feiltekst er plassert nederst i spørsmålsboksen.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Velg om du vil at det første inntastingsfeltet på hver side skal være klart for tekstinntasting.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Viser bokstaver (A, B, C, ...) ved siden av valg i Radio Button Group, avkrysningsbokser og spørsmål i Image Picker. Respondenter kan velge valg ved å trykke på de tilsvarende bokstavtastene. Du kan overstyre denne innstillingen for individuelle spørsmål.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Viser bokstaver (A, B, C, ...) ved siden av valgene og lar respondentene velge dem ved å trykke på de tilsvarende bokstavtastene. Alternativet \"Inherit\" bruker undersøkelsesnivå-innstillingen."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var nbStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" til denne {ownerText} er også den innebygde survey-variabelen {{builtIn}} – surveyen svarer først på {{name}}, så denne er utilgjengelig i uttrykk.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" i \"{name}\" er også navnet på spørsmålet \"{otherName}\" – begge lagrer svaret sitt under datanøkkelen \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" av \"{name}\" deler verdien {otherType} \"{otherName}\", som ikke har noen egen verdiName – \"{otherName}\" behandler feltene \"{name}\" legger til som ukjent, og clearIncorrectValues() sletter dem. Sett også valueName til \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Raden \"{key}\" i matrixdropdown-menyen \"{otherName}\" er også {sharedKeyText} \"{name}\" som deler sin verdi – et celleobjekt og en enkelt verdi kan ikke begge ligge under én nøkkel; kjøretiden beholder den ene og sletter den andre.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" deler datanøkkelen \"{dataKey}\" med {otherType} \"{otherName}\" – den beholder {shapeText} der, mens \"{otherName}\" beholder {otherShapeText}; én kan ikke holde den andres verdi, så clearIncorrectValues() sletter den.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Datanøkkelen \"{dataName}\" er også kommentarnøkkelen til \"{base}\" (dens datanøkkel pluss \"{suffix}\") – den ene skrivingen overskriver stille den andre.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var nbStrings = {
         array: "et array",
         // [Auto-translated] "an object"
         object: "et objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "en rad med matrise",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "et flertekstelement",
+        // [Auto-translated] "a row or item of a question"
+        default: "en rad eller et spørsmål"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "et array av objekter",
+        // [Auto-translated] "an object"
+        object: "et objekt",
+        // [Auto-translated] "a plain value"
+        plain: "en enkel verdi",
+        // [Auto-translated] "a value"
+        default: "en verdi"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

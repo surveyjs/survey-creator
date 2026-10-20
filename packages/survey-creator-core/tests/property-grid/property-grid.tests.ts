@@ -3051,6 +3051,35 @@ test("Has no narrow style after invisible question", () => {
   expect(correctAnswerQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeFalsy();
   defaultValueProperty.visible = oldVisible;
 });
+test("Narrow style updates when a visibleIf property between booleans changes visibility", () => {
+  Serializer.addProperty("question", {
+    name: "gapText",
+    visibleIf: (obj: any) => obj.inputType === "color"
+  });
+  try {
+    const question = new QuestionTextModel("q1");
+    const propertyGrid = new PropertyGridModelTester(question, undefined, {
+      generateOtherTab: false,
+      classes: {
+        question: {
+          properties: ["isRequired", "gapText", "readOnly"]
+        }
+      }
+    });
+    const gapText = propertyGrid.survey.getQuestionByName("gapText");
+    const readOnlyQuestion = propertyGrid.survey.getQuestionByName("readOnly");
+    expect(gapText.isVisible).toBeFalsy();
+    expect(readOnlyQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeTruthy();
+    question.inputType = "color";
+    expect(gapText.isVisible).toBeTruthy();
+    expect(readOnlyQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeFalsy();
+    question.inputType = "text";
+    expect(gapText.isVisible).toBeFalsy();
+    expect(readOnlyQuestion.cssRoot.indexOf("spg-row-narrow__question") > -1).toBeTruthy();
+  } finally {
+    Serializer.removeProperty("question", "gapText");
+  }
+});
 test("nextToProperty on the same line", () => {
   const maxProperty = Serializer.findProperty("text", "max");
   const oldNextToProperty = maxProperty.nextToProperty;

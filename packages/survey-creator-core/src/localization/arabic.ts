@@ -651,6 +651,8 @@ export var arStrings = {
       templateErrorLocation: "محاذاة رسالة الخطأ",
       // [Auto-translated] "New entry location"
       newPanelPosition: "موقع دخول جديد",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "اللوحات لكل صفحة بيانات",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "منع الردود المكررة في السؤال التالي"
     },
@@ -1083,6 +1085,8 @@ export var arStrings = {
     maxFiles: "الحد الأقصى لعدد الملفات",
     // "Row count"
     rowCount: "عدد الصفوف",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "الصفوف لكل صفحة بيانات",
     // "Columns layout"
     columnLayout: "تخطيط الأعمدة",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var arStrings = {
     questionErrorLocation: "موقع خطأ في السؤال",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "ركز المؤشر على السؤال الأول عند تغير الصفحة",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "تمكين اختصارات الاختيار",
     // "Question order"
     questionOrder: "ترتيب العناصر على الصفحة",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var arStrings = {
       confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "حدد تعبيرا يحسب عدد الإدخالات. هذا التعبير يتجاوز إعداد \"العدد الأولي للإدخالات\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الإدخالات\" و\"الحد الأقصى لعدد الإدخالات\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الإدخالات يدويا.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "يحدد عدد اللوحات المعروضة على كل صفحة بيانات. 0 يعطل الترقيم ويعرض جميع اللوحات.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "تعيين أرقام للأسئلة المتداخلة داخل اللوحة الديناميكية."
     },
@@ -2754,6 +2762,8 @@ export var arStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "يوسع قسم التفاصيل تلقائيا عند إضافة صف جديد إلى المصفوفة."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "يحدد عدد صفوف المصفوفة المعروضة في كل صفحة بيانات. 0 يعطل ترقيم الصفحات ويعرض جميع الصفوف.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var arStrings = {
     questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "حدد ما إذا كنت تريد أن يكون حقل الإدخال الأول في كل صفحة جاهزا لإدخال النص.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "يعرض الحروف (A, B, C, ...) بجانب الخيارات في مجموعة أزرار الراديو، ومربعات الاختيار، وأسئلة اختيار الصور. يمكن للمشاركين اختيار الخيارات بالضغط على مفاتيح الحروف المقابلة. يمكنك تجاوز هذا الإعداد للأسئلة الفردية.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "يعرض الحروف (A, B, C, ...) بجانب الخيارات ويسمح للمشاركين باختيارها بالضغط على مفاتيح الحروف المقابلة. يستخدم خيار \"الوراثة\" إعداد مستوى المسح."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var arStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "المتغير {nameKindText} \"{name}\" لهذا {ownerText} هو أيضا المتغير المدمج {{builtIn}} - حيث يجيب المسح على {{name}} أولا، لذا هذا السؤال غير قابل للوصول في التعبيرات.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "الاسم \"{valueName}\" ل \"{name}\" هو أيضا اسم السؤال \"{otherName}\" - كلاهما يخزن إجابته تحت مفتاح البيانات \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" ل \"{name}\" يشارك قيمة {otherType} \"{otherName}\"، والتي لا تملك valueName خاصة بها - \"{otherName}\" تعامل الحقول التي \"{name}\" تضيفها كغير معروفة، وclearIncorrectValues() تحذفها. اضبط valueName الخاص بها على \"{valueName}\" أيضا.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "الصف \"{key}\" في نظام السطو \"{otherName}\" هو أيضا {sharedKeyText} \"{name}\" يشارك قيمته - حيث لا يمكن لعنصر الخلية وقيمة واحدة أن يعيشا تحت مفتاح واحد؛ يحافظ وقت التشغيل على أحدهما ويحذف الآخر.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "يشارك {type} \"{name}\" مفتاح البيانات \"{dataKey}\" مع {otherType} \"{otherName}\" - يحتفظ ب {shapeText} هناك، بينما \"{otherName}\" يحتفظ ب {otherShapeText}; لا يمكن لأي منهما الاحتفاظ بقيمة الآخر، لذا يقوم clearIncorrectValues() بحذفه.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "مفتاح البيانات \"{dataName}\" هو أيضا مفتاح التعليق ل \"{base}\" (مفتاح بياناته بالإضافة إلى \"{لاحقة}\") - حيث يتم كتابة واحدة بصمت فوق الأخرى.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var arStrings = {
         array: "مصفوفة",
         // [Auto-translated] "an object"
         object: "كائن"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "صف من المصفوفة",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "عنصر متعدد النصوص",
+        // [Auto-translated] "a row or item of a question"
+        default: "صف أو بند من سؤال"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "مصفوفة من الكائنات",
+        // [Auto-translated] "an object"
+        object: "كائن",
+        // [Auto-translated] "a plain value"
+        plain: "قيمة بسيطة",
+        // [Auto-translated] "a value"
+        default: "قيمة"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

@@ -651,6 +651,8 @@ export var koreanStrings = {
       templateErrorLocation: "오류 메시지 맞춤",
       // [Auto-translated] "New entry location"
       newPanelPosition: "새로운 진입 위치",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "데이터 페이지당 패널 수",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "다음 질문에서 중복 응답 방지"
     },
@@ -1084,6 +1086,8 @@ export var koreanStrings = {
     maxFiles: "최대 파일 수",
     // "Row count"
     rowCount: "행 수",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "데이터 페이지당 행 수",
     // "Columns layout"
     columnLayout: "열 위치",
     // "\"Add Row\" button alignment"
@@ -1202,6 +1206,8 @@ export var koreanStrings = {
     questionErrorLocation: "질문 위치 오류",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "페이지 변경시 첫 번째 질문에 초점",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "선택 단축키를 활성화하세요",
     // "Question order"
     questionOrder: "페이지의 요소 순서",
     // "Time limit to complete the survey"
@@ -2744,6 +2750,8 @@ export var koreanStrings = {
       confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "항목 수를 계산하는 표현식을 지정하세요. 이 표현식은 \"초기 항목 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 항목 수\"와 \"최대 항목 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 항목을 추가하거나 제거할 수 없습니다.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "각 데이터 페이지에 표시되는 패널 수를 지정합니다. 0은 페이지네이션을 비활성화하고 모든 패널을 표시합니다.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
@@ -2755,6 +2763,8 @@ export var koreanStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "행렬에 새 행이 추가될 때 세부 정보 섹션을 자동으로 확장합니다."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "각 데이터 페이지에 표시되는 행렬 행의 수를 지정합니다. 0은 페이지네이션을 비활성화하고 모든 행을 표시합니다.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2940,6 +2950,12 @@ export var koreanStrings = {
     questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "라디오 버튼 그룹, 체크박스, 이미지 선택기 질문의 선택 옆에 문자(A, B, C, ...)가 표시됩니다. 응답자는 해당 문자 키를 눌러 선택지를 선택할 수 있습니다. 개별 질문에 대해서는 이 설정을 무시할 수 있습니다.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "선택지 옆에 문자(A, B, C, ...)를 표시하며, 응답자가 해당 문자 키를 눌러 선택할 수 있습니다. \"상속\" 옵션은 설문 수준 설정을 사용합니다."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
     // [Auto-translated] "For text entry questions only."
@@ -3669,8 +3685,12 @@ export var koreanStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "이 {ownerText}의 {nameKindText} \"{name}\"은 내장된 설문조사 변수 {{builtIn}}이기도 합니다 - 설문조사가 먼저 {{name}}에 답하기 때문에 이 변수는 표현식에서 접근할 수 없습니다.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "\"{name}\"의 valueName \"{valueName}\"은 질문 \"{otherName}\"의 이름이기도 하며, 두 경우 모두 데이터 키 \"{valueName}\" 아래에 답변을 저장합니다.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "\"{name}\"의 valueName \"{valueName}\"는 {otherType} \"{otherName}\"의 값을 공유하며, {otherName}은 자체 값Name이 없습니다. \"{otherName}\"은 \"{name}\"이 추가된 필드를 미확인으로 처리하며, clearIncorrectValues()가 이를 삭제합니다. 값Name도 \"{valueName}\"로 설정하세요.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "matrix dropdown의 \"{key}\" 행은 {sharedKeyText} \"{name}\"도 값을 공유합니다 - 셀 객체와 단일 값이 모두 하나의 키 아래에 존재할 수 없습니다; 런타임은 한 값을 유지하고 다른 하나를 삭제합니다.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\"는 {otherType} \"{otherName}\"과 데이터 키 \"{dataKey}\"를 공유하며, {shapeText}를 유지하고, \"{otherName}\"은 {otherShapeText}를 유지합니다; 한 가지 값은 다른 쪽의 값을 유지할 수 없으므로 clearIncorrectValues()가 이를 삭제합니다.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "데이터 키 \"{dataName}\"은 또한 \"{base}\"의 주석 키이기도 하며(데이터 키와 \"{suffix}\"\") - 한 쓰기가 다른 것을 조용히 덮어씁니다.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4096,6 +4116,24 @@ export var koreanStrings = {
         array: "배열",
         // [Auto-translated] "an object"
         object: "객체"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "매트릭스의 한 줄로",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "다중 텍스트 항목",
+        // [Auto-translated] "a row or item of a question"
+        default: "질문의 한 행이나 항목"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "객체들의 배열입니다",
+        // [Auto-translated] "an object"
+        object: "객체",
+        // [Auto-translated] "a plain value"
+        plain: "평범한 값",
+        // [Auto-translated] "a value"
+        default: "가치"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

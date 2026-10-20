@@ -651,6 +651,8 @@ export var hebrewStrings = {
       templateErrorLocation: "יישור הודעת שגיאה",
       // [Auto-translated] "New entry location"
       newPanelPosition: "מיקום כניסה חדש",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "פאנלים לפי דף נתונים",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
@@ -1083,6 +1085,8 @@ export var hebrewStrings = {
     maxFiles: "מספר מקסימלי של קבצים",
     // "Row count"
     rowCount: "כמות השורות",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "שורות לכל דף נתונים",
     // "Columns layout"
     columnLayout: "סידור העמודות",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var hebrewStrings = {
     questionErrorLocation: "מיקום הודעת השגיאה",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "התמקד על השאלה הראשונה בעמוד חדש",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "הפעלת קיצורי דרך לבחירה",
     // "Question order"
     questionOrder: "סדר הרכיבים בעמוד",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var hebrewStrings = {
       confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "יש לציין ביטוי שמחשב את מספר הערכים. ביטוי זה גובר על הגדרת \"מספר הרשומות ההתחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של רשומות\" ו\"מספר מקסימלי של כניסות\". בעוד שהביטוי הזה מוגדר, המשיבים אינם יכולים להוסיף או להסיר רשומות ידנית.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "מגדיר את מספר הפאנלים המוצגים בכל דף נתונים. 0 מבטל את דפדוף הדפים ומציג את כל הלוחות.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בחלונית הדינמית."
     },
@@ -2754,6 +2762,8 @@ export var hebrewStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "מרחיב אוטומטית את מקטע הפירוט בעת הוספת שורה חדשה למטריצה."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "מגדיר את מספר שורות המטריצה המוצגות בכל דף נתונים. 0 מבטל את הפיגינצ'ינג ומציג את כל השורות.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var hebrewStrings = {
     questionErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "בחר אם ברצונך ששדה הקלט הראשון בכל עמוד יהיה מוכן להזנת טקסט.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "מציג אותיות (A, B, C, ...) לצד בחירות בקבוצת כפתורי הרדיו, תיבות סימון ושאלות ב-Image Picker. המשיבים יכולים לבחור בחירות על ידי לחיצה על מקשי האותיות המתאימים. ניתן לעקוף הגדרה זו עבור שאלות בודדות.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "מציג אותיות (A, B, C, ...) ליד הבחירות ומאפשר למשיבים לבחור אותן על ידי לחיצה על מקשי האותיות המתאימים. אפשרות \"ירושה\" משתמשת בהגדרת רמת הסקר."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var hebrewStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "ה-{nameKindText} \"{name}\" של {ownerText} הזה הוא גם משתנה סקר מובנה {{builtIn}} - הסקר עונה ראשון על {{name}}, ולכן זה לא נגיש בביטויים.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "ה-valueName \"{valueName}\" של \"{name}\" הוא גם שם השאלה \"{otherName}\" - שניהם שומרים את התשובה תחת מפתח הנתונים \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ה-valueName \"{valueName}\" של \"{name}\" משתף את הערך של {otherType} \"{otherName}\", שאין לו valueName משלו - \"{otherName}\" מתייחס לשדות \"{name}\" כלא ידועים, ו-clearIncorrectValues() מוחק אותם. הגדר גם את ה-valueName שלו ל-\"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "השורה \"{key}\" בתחתית המטריקס \"{otherName}\" היא גם {sharedKeyText} \"{name}\" החולקת את ערכה - אובייקט תא וערך אחד לא יכולים להיות שניהם תחת מפתח אחד; זמן הריצה שומר על אחד ומוחק את השני.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "ה-{type} \"{name}\" חולק את מפתח הנתונים \"{dataKey}\" עם {otherType} \"{otherName}\" - הוא שומר את {shapeText} שם, בעוד ש\"{otherName}\" שומר את {otherShapeText}; אחד לא יכול להחזיק את הערך של השני, ולכן clearIncorrectValues() מוחק אותו.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "מפתח הנתונים \"{dataName}\" הוא גם מפתח התגובה של \"{base}\" (מפתח הנתונים שלו בתוספת \"{סיומת}\") - כתיבה אחת מחליפה את השנייה בשקט.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var hebrewStrings = {
         array: "מערך",
         // [Auto-translated] "an object"
         object: "אובייקט"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "שורה של מטריצה",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "פריט של טקסט מרובה",
+        // [Auto-translated] "a row or item of a question"
+        default: "שורה או פריט בשאלה"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "מערך של אובייקטים",
+        // [Auto-translated] "an object"
+        object: "אובייקט",
+        // [Auto-translated] "a plain value"
+        plain: "ערך פשוט",
+        // [Auto-translated] "a value"
+        default: "ערך"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

@@ -651,6 +651,8 @@ export const thStrings = {
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       // "New entry location"
       newPanelPosition: "ตำแหน่งแผงใหม่",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "แผงต่อหน้าข้อมูล",
       // "Prevent duplicate responses in the following question"
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
@@ -1083,6 +1085,8 @@ export const thStrings = {
     maxFiles: "จํานวนไฟล์สูงสุด",
     // "Row count"
     rowCount: "จำนวนแถว",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "จํานวนแถวต่อหน้าข้อมูล",
     // "Columns layout"
     columnLayout: "เค้าโครงคอลัมน์",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export const thStrings = {
     questionErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "โฟกัสคำถามแรกในหน้าใหม่",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "เปิดใช้งานทางลัดตัวเลือก",
     // "Question order"
     questionOrder: "ลำดับคำถาม",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export const thStrings = {
       confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนรายการนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนรายการเริ่มต้น\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดด้วยการตั้งค่า \"จํานวนรายการขั้นต่ํา\" และ \"จํานวนรายการสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบไม่สามารถเพิ่มหรือลบรายการด้วยตนเองได้",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "ระบุจํานวนแผงที่แสดงในแต่ละหน้าข้อมูล 0 ปิดการแบ่งหน้าและแสดงแผงทั้งหมด",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงแบบไดนามิก"
     },
@@ -2754,6 +2762,8 @@ export const thStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "ขยายส่วนรายละเอียดโดยอัตโนมัติเมื่อมีการเพิ่มแถวใหม่ลงในเมทริส"
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "ระบุจํานวนแถวเมทริกซ์ที่แสดงในแต่ละหน้าข้อมูล 0 ปิดการแบ่งหน้าและแสดงทุกแถว",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแถวสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแถวไดนามิกถัดไป",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export const thStrings = {
     questionErrorLocation: "ตั้งตำแหน่งของข้อความข้อผิดพลาดเมื่อเทียบกับคำถามที่มีอินพุตที่ไม่ถูกต้อง เลือกระหว่าง: \"ด้านบน\" - ข้อความข้อผิดพลาดจะวางที่ด้านบนของกล่องคำถาม; \"ด้านล่าง\" - ข้อความข้อผิดพลาดจะวางที่ด้านล่างของกล่องคำถาม",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "เลือกถ้าคุณต้องการให้ช่องป้อนข้อมูลแรกในแต่ละหน้าเตรียมพร้อมสำหรับการป้อนข้อความ",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "แสดงตัวอักษร (A, B, C, ...) ถัดจากตัวเลือกในคําถามกลุ่มปุ่มวิทยุ, ช่องทําเครื่องหมาย และตัวเลือกรูปภาพผู้ตอบสามารถเลือกตัวเลือกได้โดยกดปุ่มตัวอักษรที่เกี่ยวข้องคุณสามารถแทนที่การตั้งค่านี้สําหรับคําถามแต่ละข้อได้",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "แสดงตัวอักษร (A, B, C, ...) ข้างตัวเลือก และให้ผู้ตอบแบบสอบถามเลือกได้โดยกดปุ่มตัวอักษรที่เกี่ยวข้องตัวเลือก \"สืบทอด\" ใช้การตั้งค่าระดับแบบสํารวจ"
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "รักษาลำดับดั้งเดิมของคำถามหรือตั้งค่าให้สุ่ม ผลของการตั้งค่านี้จะแสดงในแท็บพรีวิวเท่านั้น",
     // "For text entry questions only."
@@ -3668,8 +3684,12 @@ export const thStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" ของ {ownerText} นี้ก็เป็นตัวแปรสํารวจในตัว {{builtIn}} เช่นกัน - แบบสํารวจจะตอบ {{name}} ก่อน ดังนั้นแบบสํารวจนี้จึงไม่สามารถเข้าถึงได้ในนิพจน์",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" ของ \"{name}\" ก็เป็นชื่อของคําถาม \"{otherName}\" เช่นกัน - ทั้งสองจะเก็บคําตอบไว้ใต้คีย์ข้อมูล \"{valueName}\"",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" ของ \"{name}\" มีค่าเดียวกับ {otherType} \"{otherName}\" ซึ่งไม่มี valueName ของตัวเอง - \"{otherName}\" จะถือว่าฟิลด์ที่ \"{name}\" เพิ่มเป็นไม่ทราบ และ clearIncorrectValues() จะลบฟิลด์เหล่านั้นตั้งค่า valueName เป็น \"{valueName}\" ด้วย",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "แถว \"{key}\" ในเมทริกซ์ดรอปดาวน์ \"{otherName}\" ก็เป็น {sharedKeyText} \"{name}\" ที่มีค่าร่วมกัน - วัตถุเซลล์และค่าเดียวไม่สามารถอยู่ใต้คีย์เดียวกันพร้อมกัน;รันไทม์จะเก็บกุญแจหนึ่งไว้และลบอีกกุญแจหนึ่ง",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" ใช้คีย์ข้อมูล \"{dataKey}\" ร่วมกับ {otherType} \"{otherName}\" - มันจะเก็บ {shapeText} ไว้ ในขณะที่ \"{otherName}\" จะเก็บ {otherShapeText};ตัวหนึ่งไม่สามารถเก็บค่าของอีกตัวได้ ดังนั้น clearIncorrectValues() จะลบมันออก",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "คีย์ข้อมูล \"{dataName}\" ยังเป็นคีย์ความคิดเห็นของ \"{base}\" (คีย์ข้อมูลของมันบวกกับ \"{suffix}\") - การเขียนหนึ่งจะเขียนทับอีกอันโดยไม่เขียน",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export const thStrings = {
         array: "อาร์เรย์",
         // [Auto-translated] "an object"
         object: "วัตถุ"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "แถวของเมทริกซ์",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "รายการข้อความหลายข้อความ",
+        // [Auto-translated] "a row or item of a question"
+        default: "แถวหรือรายการของคําถาม"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "อาร์เรย์ของวัตถุ",
+        // [Auto-translated] "an object"
+        object: "วัตถุ",
+        // [Auto-translated] "a plain value"
+        plain: "ค่าธรรมดา",
+        // [Auto-translated] "a value"
+        default: "ค่า"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

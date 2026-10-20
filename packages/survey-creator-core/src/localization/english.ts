@@ -377,6 +377,7 @@ export var enStrings = {
       templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
+      pageSize: "Panels per data page",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -614,6 +615,7 @@ export var enStrings = {
     maxSize: "Maximum file size (in bytes)",
     maxFiles: "Maximum number of files",
     rowCount: "Row count",
+    pageSize: "Rows per data page",
     columnLayout: "Columns layout",
     addRowButtonLocation: "\"Add Row\" button alignment",
     transposeData: "Transpose rows to columns",
@@ -673,6 +675,7 @@ export var enStrings = {
     questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "Error message alignment",
     autoFocusFirstQuestion: "Focus first question on a new page",
+    choiceShortcutsEnabled: "Enable choice shortcuts",
     questionOrder: "Question order",
     timeLimit: "Time limit to complete the survey",
     timeLimitPerPage: "Time limit to complete one page",
@@ -1521,6 +1524,7 @@ export var enStrings = {
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
       confirmDelete: "Triggers a confirmation prompt before removing an entry.",
       panelCountExpression: "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually.",
+      pageSize: "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels.",
       showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
@@ -1528,6 +1532,7 @@ export var enStrings = {
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
       detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix."
     },
+    pageSize: "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows.",
     copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
     defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
     resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set).",
@@ -1632,6 +1637,10 @@ export var enStrings = {
     questionStartIndex: "Enter a number or letter with which you want to start numbering.",
     questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box.",
     autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry.",
+    choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions.",
+    checkboxbase: {
+      choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+    },
     questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab.",
     maxTextLength: "For text entry questions only.",
     maxCommentLength: "For question comments only.",
@@ -2021,7 +2030,9 @@ export var enStrings = {
       },
       "name/shadowing": {
         builtInVariable: "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions.",
-        valueNameShadowsElement: "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\".",
+        valueNameShadowsElement: "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too.",
+        dropdownRowConflict: "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other.",
+        valueShapeConflict: "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it.",
         commentKeyCollision: "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         totalKeyCollision: "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         variableShadowsQuestion: "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question.",
@@ -2287,6 +2298,17 @@ export var enStrings = {
       valueShape: {
         array: "an array",
         object: "an object",
+      },
+      dropdownRowSharer: {
+        matrix: "a row of matrix",
+        multipletext: "an item of multipletext",
+        default: "a row or item of a question",
+      },
+      sharedValueShape: {
+        records: "an array of objects",
+        object: "an object",
+        plain: "a plain value",
+        default: "a value",
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

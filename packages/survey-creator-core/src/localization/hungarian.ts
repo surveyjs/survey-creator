@@ -651,6 +651,8 @@ export var huStrings = {
       templateErrorLocation: "Hibaüzenetek igazítása",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Új belépési hely",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panelek adatoldalonként",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Ismétlődő válaszok elkerülése a következő kérdésben"
     },
@@ -1083,6 +1085,8 @@ export var huStrings = {
     maxFiles: "Maximális fájlszám",
     // "Row count"
     rowCount: "Sorok száma",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Sorok adatoldalonként",
     // "Columns layout"
     columnLayout: "Oszlopok elrendezése",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var huStrings = {
     questionErrorLocation: "Kérdés hibaüzenetének helyzete",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Első kérdés automatikus kijelölése lapváltás esetén",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Opció gyorsítványok engedélyezése",
     // "Question order"
     questionOrder: "Elemek rendezése a lapon",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var huStrings = {
       confirmDelete: "Megerősítő üzenetet indít el a bejegyzés eltávolítása előtt.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Határozz meg egy kifejezést, amely kiszámítja a bejegyzések számát. Ez a kifejezés felülírja a \"Kezdeti bejegyzések száma\" beállítást, és újraértékelik, amikor az adott értékek változnak. Az eredményt a \"Minimum bejegyzések száma\" és \"Maximális bejegyzések száma\" beállítások korlátozzák. Amíg ez az kifejezés be van állítva, a válaszadók nem adhatnak hozzá vagy törölhetnek bejegyzéseket manuálisan.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Megadja, hány panelt jelenít meg minden adatoldalon. 0 letiltja az oldalozást, és megjeleníti az összes panelt.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Számokat rendel a dinamikus panelbe ágyazott kérdésekhez."
     },
@@ -2754,6 +2762,8 @@ export var huStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Automatikusan kibontja a részletszakaszt, amikor új sort ad hozzá a mátrixhoz."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Megadja az egyes adatoldalakon megjelenített mátrixsorok számát. 0 letiltja az oldalozást, és megjeleníti az összes sort.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó sorból, és hozzárendeli őket a következő hozzáadott dinamikus sorhoz.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var huStrings = {
     questionErrorLocation: "Beállítja az érvénytelen bevitelű kérdéssel kapcsolatos hibaüzenet helyét. Válasszon a következők közül: \"Felső\" - egy hibaüzenet kerül a kérdésmező tetejére; \"Alsó\" - egy hibaüzenet kerül a kérdésmező aljára.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Válassza ki, ha azt szeretné, hogy az egyes oldalak első beviteli mezője készen álljon a szövegbevitelre.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Megjeleníti a betűket (A, B, C, ...) a Rádiógomb csoport, a Jelölőnégyzetek és a Képválasztó kérdések választásai mellett. A válaszadók a megfelelő betűgombok megnyomásával választhatnak választási lehetőségeket. Ezt a beállítást egyéni kérdéseknél felülírhatod.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Megjeleníti a betűket (A, B, C, ...) a választások mellett, és lehetővé teszi a válaszadók számára, hogy a megfelelő betűgombok megnyomásával válasszák ki őket. Az \"Örökölés\" opció a felmérés-szintű beállítást használja."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. A beállítás hatása csak az Előnézet lapon látható.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var huStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "A {ownerText} {nameKindText} \"{name}\" a beépített felmérési változó {{builtIn}} is – a felmérés először a {{name}} választ adja, így ez a kifejezések számára elérhetetlen.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "A \"{name}\" értéknameje \"{valueName}\" a \"{name}\" kérdés neve is – mindkettő a válaszokat a \"{valueName}\" adatkulcs alatt tárolja.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "A \"{name}\" értéke a \"{name}\" értéke osztja meg {otherType} \"{otherName}\" értékét, amelynek nincs saját értéke – a \"{otherName}\" ismeretlennek kezeli a \"{name}\" által hozzáadott mezőket, és a clearIncorrectValues() törli azokat. Állítsd be a valueName \"{valueName}\" értékre is.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "A \"{otherName}\" mátrixleugró menü \"{key}\" sor is {sharedKeyText}} \"{name}\" osztja meg az értékét – egy cella objektum és egyetlen érték nem élhet egyetlen kulcs alatt; a futás az egyiket megtartja, a másikat törli.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "A {type} \"{name}\" megosztja a \"{dataKey}\" adatkulcsot az {otherType} \"{otherName}\" használatával – ott tartja a {shapeText}, míg a \"{otherName}\" megtartja a {otherShapeText}; az egyik nem tarthatja meg a másik értékét, így a clearIncorrectValues() törli azt.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Az adatkulcs \"{dataName}\" egyben a \"{base}\" (az adatkulcs plusz a \"{suffix}\") kommentkulcsa is – az egyik írás némán felülírja a másikat.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var huStrings = {
         array: "egy tömb",
         // [Auto-translated] "an object"
         object: "egy tárgy"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "egy mátrixsor",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "egy többszörös szöveg tárgya",
+        // [Auto-translated] "a row or item of a question"
+        default: "egy sor vagy tétel egy kérdésből"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "egy objektumokból álló tömb",
+        // [Auto-translated] "an object"
+        object: "egy tárgy",
+        // [Auto-translated] "a plain value"
+        plain: "egy egyszerű érték",
+        // [Auto-translated] "a value"
+        default: "egy érték"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

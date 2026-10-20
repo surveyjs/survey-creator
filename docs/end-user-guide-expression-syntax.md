@@ -157,6 +157,16 @@ Complex question types (Multiple Textboxes, Dynamic Panel, matrices) and multi-s
         <td><code>{parentPanel.q1}</code></td>
       </tr>
       <tr>
+        <td><code>{panelIndex}</code></td>
+        <td>Accesses the current entry's index among all entries. The index starts at 1 in the <b>Entry title pattern</b> and <b>Tab title pattern</b> settings and at 0 in expressions.</td>
+        <td><code>Entry #{panelIndex}</code><br><code>{panelIndex} = 0</code> (first entry)</td>
+      </tr>
+      <tr>
+        <td><code>{visiblePanelIndex}</code></td>
+        <td>Accesses the current entry's index among visible entries. The index starts at 1 in the <b>Entry title pattern</b> and <b>Tab title pattern</b> settings and at 0 in expressions.</td>
+        <td><code>Entry #{visiblePanelIndex}</code><br><code>{visiblePanelIndex} = 0</code> (first visible entry)</td>
+      </tr>
+      <tr>
         <td><code>{dpanelid[panelindex].qid}</code></td>
         <td>Use a zero-based panel index to access a question in a specific panel.</td>
         <td><code>{dpanel1[0].q1}</code></td>

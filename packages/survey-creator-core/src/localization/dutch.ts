@@ -651,6 +651,8 @@ export var nlStrings = {
       templateErrorLocation: "Uitlijning van foutmeldingen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nieuwe ingangslocatie",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panelen per datapagina",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Voorkom dubbele antwoorden op de volgende vraag"
     },
@@ -1083,6 +1085,8 @@ export var nlStrings = {
     maxFiles: "Maximaal aantal bestanden",
     // "Row count"
     rowCount: "Aantal rijen",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Rijen per datapagina",
     // "Columns layout"
     columnLayout: "Kolommen layout",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var nlStrings = {
     questionErrorLocation: "Plek vraagfoutmelding",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Op volgende pagina focus op de eerste vraag zetten",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Schakel keuzesnelkoppelingen in",
     // "Question order"
     questionOrder: "Volgorde elementen op pagina",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var nlStrings = {
       confirmDelete: "Activeert een bevestigingsprompt voordat een item wordt verwijderd.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Specificeer een expressie die het aantal vermeldingen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aanstellingen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal vermeldingen\" en \"Maximaal aantal vermeldingen\". Terwijl deze uitdrukking is ingesteld, kunnen respondenten geen vermeldingen handmatig toevoegen of verwijderen.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Specificeert het aantal panelen dat op elke datapagina wordt weergegeven. 0 schakelt paginering uit en toont alle panelen.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Wijst nummers toe aan vragen die zijn genest in het dynamische paneel."
     },
@@ -2754,6 +2762,8 @@ export var nlStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Breidt de detailsectie automatisch uit wanneer een nieuwe rij aan de matrix wordt toegevoegd."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Specificeert het aantal matrixrijen dat op elke datapagina wordt weergegeven. 0 schakelt de paginering uit en toont alle rijen.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var nlStrings = {
     questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Selecteer of u het eerste invoerveld op elke pagina klaar wilt maken voor tekstinvoer.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Toont letters (A, B, C, ...) naast keuzes in Radio Button Group, selectievakjes en vragen in de Image Picker. Respondenten kunnen keuzes selecteren door op de bijbehorende lettertoetsen te drukken. Je kunt deze instelling overschrijven voor individuele vragen.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Toont letters (A, B, C, ...) naast keuzes en laat respondenten deze selecteren door op de bijbehorende lettertoetsen te drukken. De optie \"Inherit\" gebruikt de instelling op enquêteniveau."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var nlStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "De {nameKindText} \"{name}\" van deze {ownerText} is ook de ingebouwde surveyvariabele {{builtIn}} - de survey beantwoordt eerst {{name}}, dus deze is niet bereikbaar in expressies.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "De valueName \"{valueName}\" van \"{name}\" is ook de naam van de vraag \"{otherName}\" - beide slaan hun antwoord op onder de datasleutel \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "De valueName \"{valueName}\" van \"{name}\" deelt de waarde van {otherType} \"{otherName}\", die geen eigen waarde heeft - \"{otherName}\" behandelt de velden die \"{name}\" toevoegt als onbekend, en clearIncorrectValues() verwijdert ze. Stel ook de valueName in op \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "De rij \"{key}\" van het matrixdropdown \"{otherName}\" is ook {sharedKeyText} \"{name}\" en deelt zijn waarde - een celobject en één enkele waarde kunnen niet allebei onder één sleutel staan; de runtime behoudt de ene en verwijdert de andere.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "De {type} \"{name}\" deelt de datasleutel \"{dataKey}\" met {otherType} \"{otherName}\" - het houdt {shapeText} daar, terwijl \"{otherName}\" {otherShapeText} behoudt; de ene kan de waarde van de ander niet vasthouden, dus clearIncorrectValues() verwijdert deze.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "De datasleutel \"{dataName}\" is ook de commentaarsleutel van \"{base}\" (de datasleutel plus \"{suffix}\") - de ene schrijfwijze overschrijft stilletjes de andere.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var nlStrings = {
         array: "een array",
         // [Auto-translated] "an object"
         object: "een object"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "een rij matrix",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "een item van meervoudige tekst",
+        // [Auto-translated] "a row or item of a question"
+        default: "een rij of item van een vraag"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "een array van objecten",
+        // [Auto-translated] "an object"
+        object: "een object",
+        // [Auto-translated] "a plain value"
+        plain: "een gewone waarde",
+        // [Auto-translated] "a value"
+        default: "Een waarde"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

@@ -159,6 +159,12 @@ export class UndoRedoManager {
   // rolling it back / re-applying it. Undefined means every transaction is
   // valid (single-creator behavior is unchanged).
   public isTransactionValidCallback: (transaction: Transaction, isUndo: boolean) => boolean;
+  // The transaction the next undo() (isUndo) or redo() would run, without
+  // running it; undefined when the stack has nothing in that direction. Lets
+  // an `onBeforeUndo`/`onBeforeRedo` handler decide on the step's content.
+  public peekTransaction(isUndo: boolean): Transaction {
+    return isUndo ? this._getCurrentTransaction() : this._getNextTransaction();
+  }
   private _dropInvalidTransactions(isUndo: boolean): boolean {
     if (!this.isTransactionValidCallback) return false;
     let dropped = false;

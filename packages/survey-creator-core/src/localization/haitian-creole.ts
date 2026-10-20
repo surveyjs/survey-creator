@@ -651,6 +651,8 @@ export var htStrings = {
       templateErrorLocation: "Erè mesaj aliyman",
       // "New entry location"
       newPanelPosition: "Nouvo kote panèl",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panno pou chak paj done",
       // "Prevent duplicate responses in the following question"
       keyName: "Anpeche repons doub nan kesyon sa a"
     },
@@ -1083,6 +1085,8 @@ export var htStrings = {
     maxFiles: "Maksimòm kantite dosye",
     // "Row count"
     rowCount: "Konte ranje",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Ranje pou chak paj done",
     // "Columns layout"
     columnLayout: "Layout kolòn yo",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var htStrings = {
     questionErrorLocation: "Erè mesaj aliyman",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Konsantre premye kesyon sou yon nouvo paj",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Pèmèt rakoursi chwa",
     // "Question order"
     questionOrder: "Kesyon lòd",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var htStrings = {
       confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon panèl.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Espesifye yon ekspresyon ki kalkile kantite antre yo. Ekspresyon sa a depase anviwònman an \"Premye kantite antre\" epi li re-evalye chak fwa valè yo li referans chanje. Rezilta a limite pa \"Kantite minimòm antre yo\" ak \"Maksimòm kantite antre\". Pandan ke ekspresyon sa a mete, moun ki repond yo pa ka ajoute oswa retire antre manyèlman.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Espesifye kantite panno ki parèt sou chak paj done. 0 enfim paginasyon ak montre tout panno",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Asiyen nimewo nan kesyon ki enbrike nan panèl dinamik la."
     },
@@ -2754,6 +2762,8 @@ export var htStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Otomatikman ogmante seksyon an detay lè yon nouvo ranje ajoute nan matris la."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Espesifye kantite ranje matris ki parèt sou chak paj done 0 enfim paginasyon ak montre tout ranje.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplike repons ki soti nan dènye ranje a epi asiyen yo nan pwochen ranje dinamik ajoute a.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var htStrings = {
     questionErrorLocation: "Mete kote yon mesaj erè an relasyon ak kesyon an ki pa valab. Chwazi ant: \"Top\" - yo mete yon tèks erè nan tèt bwat kesyon an; \"Anba\" - yo mete yon tèks erè nan pati anba bwat kesyon an.",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Chwazi si ou vle premye jaden antre nan chak paj pare pou antre tèks.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Montre lèt(A, B, C, ...) akote chwa nan Gwoup bouton radyo, Checkboxes, ak kesyon Picker Imaj. Moun ki repond yo ka chwazi chwa pa peze kle lèt ki koresponn lan. Ou ka ranplase anviwònman sa a pou kesyon endividyèl yo.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Montre lèt (A, B, C, ...) akote chwa yo epi kite moun ki repond yo chwazi yo pa peze kle lèt ki koresponn lan. Opsyon \"Eritye\" itilize anviwònman sondaj nivo."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Kenbe lòd orijinal la nan kesyon oswa randomize yo. Efè anviwònman sa a vizib sèlman nan tab la Preview.",
     // "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var htStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{non}\" nan sa a {ownerText} se tou bati-an sondaj varyab {{builtIn}} - sondaj la reponn {{non}} an premye, se konsa yon sèl sa a se inaccessible nan ekspresyon yo.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" nan \"{non}\" se tou non kesyon \"{otherName}\" - tou de estoke repons yo anba kle done \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" nan \"{name}\" pataje valè a nan {otherType} \"{otherName}\", ki pa gen okenn valè Nome pwòp li yo - \"{otherName}\" trete jaden yo \"{name}\" ajoute kòm enkoni, ak clearIncorrectValues() efase yo. Mete valè li yo nan \"{valueName}\" tou.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Ranje a \"{kle}\" nan matrixdropdown \"{otherName}\" se tou {sharedKeyText} \"{non}\" pataje valè li yo - yon objè selil ak yon valè sèl pa ka tou de viv anba yon sèl kle; tan an kenbe youn ak efase lòt la.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{non}\" pataje kle done a \"{dataKey}\" ak {otherType} \"{otherName}\" - li kenbe {shapeText} la, pandan y ap \"{otherName}\" kenbe {otherShapeText}; youn pa ka kenbe valè lòt la, kidonk clearIncorrectValues () efase li.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Done kle a \"{dataName}\" se tou kle a kòmantè nan \"{baz}\" (kle done li yo plis \"{sifiks}\") - yon ekri an silans ranplase lòt la.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var htStrings = {
         array: "yon etalaj",
         // [Auto-translated] "an object"
         object: "yon objè"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "yon ranje nan matris",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "Yon atik nan Multipletext",
+        // [Auto-translated] "a row or item of a question"
+        default: "yon ranje oswa atik nan yon kesyon"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "yon etalaj de objè",
+        // [Auto-translated] "an object"
+        object: "yon objè",
+        // [Auto-translated] "a plain value"
+        plain: "yon valè plenn",
+        // [Auto-translated] "a value"
+        default: "yon valè"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

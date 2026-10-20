@@ -181,6 +181,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "rowCount",
       "minRowCount",
       "maxRowCount",
+      "pageSize",
       { name: "rowCountExpression", tab: "logic", index: 350 },
       "placeholder",
       { name: "hideColumnsIfEmpty", tab: "columns" },
@@ -195,6 +196,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       "totalText",
       "placeholder",
+      "pageSize",
       { name: "rowOrder", tab: "rows" },
       { name: "hideIfRowsEmpty", tab: "rows" },
       { name: "rowTitleWidth", tab: "layout" },
@@ -299,6 +301,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "showDontKnowItem", tab: "choices" },
       { name: "dontKnowText", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
+      { name: "choiceShortcutsEnabled", tab: "choices" },
       { name: "choicesByUrl", tab: "choicesByUrl" },
       { name: "colCount", tab: "layout" },
       { name: "hideIfChoicesEmpty", tab: "logic", index: 1000 },
@@ -318,6 +321,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "minSelectedChoices", tab: "choices" },
       { name: "maxSelectedChoices", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
+      { name: "choiceShortcutsEnabled", tab: "choices" },
       { name: "valuePropertyName", tab: "data" }
     ]
   },
@@ -335,6 +339,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       { name: "allowClear", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
+      { name: "choiceShortcutsEnabled", tab: "choices" },
     ]
   },
   dropdown: {
@@ -731,6 +736,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "panelCount",
       "minPanelCount",
       "maxPanelCount",
+      "pageSize",
       { name: "panelCountExpression", tab: "logic", index: 350 },
       "panelsState",
       { name: "allowAddPanel" },
@@ -866,6 +872,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         name: "autoFocusFirstQuestion",
         tab: "question"
       },
+      { name: "choiceShortcutsEnabled", tab: "question" },
       { name: "maxTextLength", tab: "question" },
       { name: "maxCommentLength", tab: "question" },
       { name: "commentAreaRows", tab: "question" },

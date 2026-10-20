@@ -145,7 +145,7 @@
 }
 
 .spg-panel.spg-panel--group {
-  & > .spg-panel__content {
+  & > .spg-panel__expandable-content .spg-panel__content {
     row-gap: var(--sjs2-spacing-x100);
     padding: 0;
     box-shadow: none;

@@ -1,3 +1,5 @@
+@use "../../../variables" as *;
+
 // Remote-collaborator focus decorations. The presence renderer stamps
 // data-collab-focus="on" plus an inline --collab-peer-color variable
 // onto the REAL creator nodes; these rules draw the same box-shadow ring the
@@ -13,6 +15,27 @@
 .svc-side-bar .spg-question__content[data-collab-focus="on"],
 .svc-side-bar .sd-checkbox__decorator[data-collab-focus="on"] {
   box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused));
+}
+
+// A peer holds the element as an editing lock: their ring stays visible even
+// when the element is selected locally (the local user is a viewer then - the
+// holder's color says whose element it is), and its inline editors refuse the
+// caret (ElementLockGuard blurs them) - show that on hover.
+.svc-question__content.svc-question__content--selected[data-collab-lock="on"] {
+  box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused));
+}
+
+.sd-panel .svc-question__content.svc-question__content--selected[data-collab-lock="on"] {
+  box-shadow: none;
+}
+
+.sd-panel .svc-question__content.svc-question__content--selected[data-collab-lock="on"]::after {
+  box-shadow: 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused)) inset;
+  outline: none;
+}
+
+.svc-question__content[data-collab-lock="on"] .svc-string-editor {
+  cursor: not-allowed;
 }
 
 // Property-grid ring hugs the input area; round it like the row itself.
@@ -69,4 +92,58 @@
 // .svc-creator--mobile block in page.scss) - mirror it for peer rings.
 .svc-creator--mobile .svc-page__content[data-collab-focus="on"]:not(.svc-page__content--selected) {
   box-shadow: inset 0px 0px 0px var(--sjs2-border-width-x200) var(--collab-peer-color, var(--sjs2-color-utility-shadow-surface-focused));
+}
+
+// Logic tab: the owner of a locked rule, drawn by LogicLockView with the rule
+// list's own matrix parts. The chip is a row action whose <button> carries the
+// avatar classes (Action.innerCss), like the collab-bar chip, so the action's
+// own box gives way to the circle (bar.scss hands the initials the avatar's
+// typography). Scoped by the table cell: two and three classes beat
+// survey-core's single-class .sd-action rules whatever the stylesheet order.
+// Unlike the row's icon actions it is not hover-only.
+.sl-table__cell .svc-collab-rule-holder {
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
+  // Centered on the first line of the rule title: the action cell starts level
+  // with the title, whose first line box is its top padding plus one line.
+  margin-top: calc(var(--sjs2-spacing-x050) + (var(--sjs2-typography-line-height-medium) - var(--sjs2-size-x300)) / 2);
+  min-width: auto;
+  padding: 0;
+  gap: 0;
+  box-shadow: none;
+}
+
+@for $i from 0 through 9 {
+  .sl-table__cell .svc-collab-rule-holder.svc-collab-bar__avatar--color-#{$i} {
+    background: var(--sjs2-color-utility-user-bg-color-#{$i});
+    color: var(--sjs2-color-utility-user-fg-on-color-#{$i});
+  }
+}
+
+// The plate atop an open locked rule's detail panel: the owner's avatar and
+// "<name> is editing this rule.", in the markup of a "svc-collab-row". It is an
+// html question's content, and survey-core's .sd-html hands every span and div
+// inside the article font (two selectors deep), so the parts are styled two
+// classes deep.
+.svc-collab-rule-lock {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--sjs2-spacing-x100);
+  // The detail panel starts flush with the rule text; set the plate off it.
+  margin-top: var(--sjs2-spacing-x100);
+  color: var(--sjs2-color-fg-basic-secondary);
+}
+
+.svc-collab-rule-lock .svc-collab-rule-lock__avatar {
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
+  box-shadow: none;
+  cursor: default;
+
+  @include sjs2--typography--small-strong;
+}
+
+.svc-collab-rule-lock .svc-collab-row__title {
+  @include sjs2--typography--default;
 }

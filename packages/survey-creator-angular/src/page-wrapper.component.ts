@@ -26,7 +26,7 @@ export class PageWrapperComponent extends EmbeddedViewContentComponent implement
   }
   private clearCallback(page?: PageModel) {
     if (!page) return;
-    page.unRegisterFunctionOnPropertyValueChanged("name");
+    page.unRegisterFunctionOnPropertyValueChanged("name", this.id);
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.page && changes.page.currentValue !== changes.page.previousValue) {

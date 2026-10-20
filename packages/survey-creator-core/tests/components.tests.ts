@@ -211,6 +211,169 @@ test("item value allowRemove on events", () => {
   expect(secondItemAdorner.allowRemove).toBeTruthy();
 });
 
+test("item value operations follow a change of the question permissions", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const newItemAdorner = new ItemValueWrapperViewModel(creator, question, question.newItem);
+  expect(itemAdorner.allowRemove).toBeTruthy();
+  expect(itemAdorner.isDraggable).toBeTruthy();
+  expect(newItemAdorner.allowAdd).toBeTruthy();
+
+  readOnly = true;
+  creator.notifyPermissionsChanged();
+  expect(itemAdorner.allowRemove).toBeFalsy();
+  expect(itemAdorner.isDraggable).toBeFalsy();
+  expect(newItemAdorner.allowAdd).toBeFalsy();
+
+  readOnly = false;
+  creator.notifyPermissionsChanged();
+  expect(itemAdorner.allowRemove).toBeTruthy();
+  expect(itemAdorner.isDraggable).toBeTruthy();
+  expect(newItemAdorner.allowAdd).toBeTruthy();
+
+  itemAdorner.dispose();
+  newItemAdorner.dispose();
+});
+
+test("item value operations follow a change of the collection item permissions", () => {
+  const creator = new CreatorTester();
+  let veto: { allowDelete?: boolean, allowDrag?: boolean } = { allowDelete: false, allowDrag: false };
+  creator.onCollectionItemAllowOperations.add((sender, options) => {
+    if ((<any>options.item).value !== 2) return;
+    if (veto.allowDelete === false) options.allowDelete = false;
+    if (veto.allowDrag === false) options.allowDrag = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  // Rendered while the item is vetoed.
+  const vetoed = new ItemValueWrapperViewModel(creator, question, question.choices[1]);
+  const free = new ItemValueWrapperViewModel(creator, question, question.choices[2]);
+  expect(vetoed.allowRemove).toBeFalsy();
+  expect(vetoed.isDraggable).toBeFalsy();
+  expect(free.allowRemove).toBeTruthy();
+  expect(free.isDraggable).toBeTruthy();
+
+  veto = {};
+  creator.notifyPermissionsChanged();
+  expect(vetoed.allowRemove).toBeTruthy();
+  expect(vetoed.isDraggable).toBeTruthy();
+
+  // Reordering is vetoed on its own: the item can still be removed.
+  veto = { allowDrag: false };
+  creator.notifyPermissionsChanged();
+  expect(vetoed.allowRemove).toBeTruthy();
+  expect(vetoed.isDraggable).toBeFalsy();
+
+  vetoed.dispose();
+  free.dispose();
+});
+
+test("a disposed item value adorner stops following the permissions", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  let calls = 0;
+  creator.onElementAllowOperations.add((sender, options) => {
+    calls++;
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  itemAdorner.dispose();
+  calls = 0;
+  readOnly = true;
+  creator.notifyPermissionsChanged();
+  expect(calls).toBe(0);
+});
+
+test("image item actions follow a change of the question permissions", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", choices: [
+      { value: "a", imageLink: "a.png" }, { value: "b", imageLink: "b.png" }
+    ] }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const itemsRoot = { getElementsByClassName: () => [{}] } as any;
+  const itemAdorner = new ImageItemValueWrapperViewModel(creator, question, question.choices[0], undefined, itemsRoot);
+  const newItemAdorner = new ImageItemValueWrapperViewModel(creator, question, question.newItem, undefined, itemsRoot);
+  const actions = itemAdorner.topActionsContainer;
+  const visibility = () => ["drag", "choose", "remove"].map((id) => actions.getActionById(id).visible);
+  let chooserCalls = 0;
+  creator.onOpenFileChooser.add(() => chooserCalls++);
+  let uploads = 0;
+  creator.onUploadFile.add((sender, options) => {
+    uploads++;
+    options.callback("success", "c.png");
+  });
+  expect(visibility()).toEqual([true, true, true]);
+
+  readOnly = true;
+  creator.notifyPermissionsChanged();
+  expect(visibility()).toEqual([false, false, false]);
+  itemAdorner.chooseFile(itemAdorner);
+  newItemAdorner.uploadFiles([{}]);
+  expect(question.choices).toHaveLength(2);
+  expect(chooserCalls).toBe(0);
+  expect(uploads).toBe(0);
+
+  readOnly = false;
+  creator.notifyPermissionsChanged();
+  expect(visibility()).toEqual([true, true, true]);
+
+  itemAdorner.dispose();
+  newItemAdorner.dispose();
+});
+
+test("a new image choice refused while the choices are locked does not affect the next upload", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", choices: [{ value: "a", imageLink: "a.png" }] }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const itemsRoot = { getElementsByClassName: () => [{}] } as any;
+  const newItemAdorner = new ImageItemValueWrapperViewModel(creator, question, question.newItem, undefined, itemsRoot);
+  // The lock arrives while the file dialog is open.
+  creator.onOpenFileChooser.add((sender, options) => {
+    readOnly = true;
+    creator.notifyPermissionsChanged();
+    options.callback([{}]);
+  });
+  creator.onUploadFile.add((sender, options) => options.callback("success", "c.png"));
+  let addedEvents = 0;
+  creator.onItemValueAdded.add(() => addedEvents++);
+  newItemAdorner.chooseNewFile(newItemAdorner);
+  expect(question.choices).toHaveLength(1);
+
+  readOnly = false;
+  creator.notifyPermissionsChanged();
+  // A file dropped on the new item adds a choice without the event.
+  newItemAdorner.uploadFiles([{}]);
+  expect(question.choices).toHaveLength(2);
+  expect(addedEvents).toBe(0);
+  newItemAdorner.dispose();
+});
+
 test("item value allowAdd on events", () => {
   const creator = new CreatorTester();
 
@@ -365,6 +528,194 @@ test("item value adorner and newItem value", () => {
   expect(question.newItem.value).toEqual("Item 1");
 });
 
+test("placeholder choices are hidden while the question choices cannot be modified", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onPropertyGetReadOnly.add((sender, options) => {
+    if (readOnly && options.propertyName === "choices") options.readOnly = true;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3], showOtherItem: true }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, undefined as any);
+  const placeholders = [question.newItem, question.noneItem, question.selectAllItem];
+  const allVisible = question.visibleChoices.length;
+  placeholders.forEach((item) => expect(question.visibleChoices).toContain(item));
+
+  // The visible choices are recalculated when the choices change; a caller
+  // that changes the permissions recalculates them itself.
+  readOnly = true;
+  question["onVisibleChoicesChanged"]();
+  placeholders.forEach((item) => expect(question.visibleChoices).not.toContain(item));
+  expect(question.visibleChoices).toContain(question.otherItem);
+  expect(question.visibleChoices).toContain(question.choices[0]);
+
+  readOnly = false;
+  question["onVisibleChoicesChanged"]();
+  expect(question.visibleChoices).toHaveLength(allVisible);
+
+  questionAdorner.dispose();
+});
+
+test("placeholder choices follow the creator's permissions revision", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onPropertyGetReadOnly.add((sender, options) => {
+    if (readOnly && options.propertyName === "choices") options.readOnly = true;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, undefined as any);
+  const placeholders = [question.newItem, question.noneItem, question.selectAllItem];
+  const recalculation = vi.spyOn(<any>question, "onVisibleChoicesChanged");
+
+  // Recalculated only when the answer differs from the rendered one.
+  creator.notifyPermissionsChanged();
+  expect(recalculation).not.toHaveBeenCalled();
+
+  readOnly = true;
+  creator.notifyPermissionsChanged();
+  expect(recalculation).toHaveBeenCalledTimes(1);
+  placeholders.forEach((item) => expect(question.visibleChoices).not.toContain(item));
+
+  readOnly = false;
+  creator.notifyPermissionsChanged();
+  placeholders.forEach((item) => expect(question.visibleChoices).toContain(item));
+
+  questionAdorner.dispose();
+  recalculation.mockClear();
+  readOnly = true;
+  creator.notifyPermissionsChanged();
+  expect(recalculation).not.toHaveBeenCalled();
+});
+
+test("a question adorner of a replaced survey stops following the permissions", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "checkbox", name: "q1", choices: [1, 2] }] };
+  const adorner = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined as any);
+  // The old survey is disposed before the UI detaches its adorners.
+  creator.JSON = { elements: [{ type: "text", name: "q2" }] };
+  adorner.dispose();
+  expect(() => creator.notifyPermissionsChanged()).not.toThrow();
+});
+
+test("a question adorner displaced by a newer one stops following the permissions", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onPropertyGetReadOnly.add((sender, options) => {
+    if (readOnly && options.propertyName === "choices") options.readOnly = true;
+  });
+  creator.JSON = { elements: [{ type: "checkbox", name: "q1", choices: [1, 2] }] };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  // A re-render creates the new adorner before the old one is unmounted.
+  const first = new QuestionAdornerViewModel(creator, question, undefined as any);
+  const second = new QuestionAdornerViewModel(creator, question, undefined as any);
+  first.dispose();
+  readOnly = true;
+  expect(() => creator.notifyPermissionsChanged()).not.toThrow();
+  expect(question.visibleChoices).not.toContain(question.newItem);
+  readOnly = false;
+  creator.notifyPermissionsChanged();
+  expect(question.visibleChoices).toContain(question.newItem);
+  second.dispose();
+});
+
+test("notifyPermissionsChanged fires onPermissionsChanged", () => {
+  const creator = new CreatorTester();
+  let calls = 0;
+  creator.onPermissionsChanged.add(() => calls++);
+  creator.notifyPermissionsChanged();
+  expect(calls).toBe(1);
+});
+
+test("item value and question adorners stop listening to onPermissionsChanged when released", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "checkbox", name: "q1", choices: [1, 2] }] };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const listeners = creator.onPermissionsChanged.length;
+  const row = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const adorner = new QuestionAdornerViewModel(creator, question, undefined as any);
+  expect(creator.onPermissionsChanged.length).toBe(listeners + 2);
+  row.dispose();
+  expect(creator.onPermissionsChanged.length).toBe(listeners + 1);
+  adorner.detachFromUI();
+  expect(creator.onPermissionsChanged.length).toBe(listeners);
+  adorner.dispose();
+});
+
+test("a permissions notification does not change the creator's own properties", () => {
+  // The creator's root component re-renders on any of its properties.
+  const creator = new CreatorTester();
+  const changed: Array<string> = [];
+  creator.onPropertyChanged.add((sender, options) => changed.push(options.name));
+  creator.notifyPermissionsChanged();
+  expect(changed).toEqual([]);
+});
+
+test("placeholder choices follow a recalculation the question makes on its own", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onPropertyGetReadOnly.add((sender, options) => {
+    if (readOnly && options.propertyName === "choices") options.readOnly = true;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const questionAdorner = new QuestionAdornerViewModel(creator, question, undefined as any);
+
+  // The question recalculates its visible choices (here: on a choices
+  // change) with the answer of the moment, before the host notifies.
+  readOnly = true;
+  question.choices.push(new ItemValue(4));
+  expect(question.visibleChoices).not.toContain(question.newItem);
+
+  readOnly = false;
+  creator.notifyPermissionsChanged();
+  expect(question.visibleChoices).toContain(question.newItem);
+
+  questionAdorner.dispose();
+});
+
+test("rating rate value actions follow the creator's permissions revision", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "rating", name: "q1" }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+  const ratingAdorner = new QuestionRatingAdornerViewModel(creator, question, <any>{});
+  const actions = ratingAdorner.rateActionsContainer;
+  const visibility = () => ["remove", "add"].map((id) => actions.getActionById(id).visible);
+  expect(visibility()).toEqual([true, true]);
+
+  readOnly = true;
+  creator.notifyPermissionsChanged();
+  expect(visibility()).toEqual([false, false]);
+
+  readOnly = false;
+  creator.notifyPermissionsChanged();
+  expect(visibility()).toEqual([true, true]);
+  ratingAdorner.dispose();
+});
+
+test("a disposed rating adorner stops listening to onPermissionsChanged", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "rating", name: "q1" }] };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+  const listeners = creator.onPermissionsChanged.length;
+  const ratingAdorner = new QuestionRatingAdornerViewModel(creator, question, <any>{});
+  expect(creator.onPermissionsChanged.length).toBe(listeners + 1);
+  ratingAdorner.dispose();
+  expect(creator.onPermissionsChanged.length).toBe(listeners);
+});
+
 test("QuestionRatingAdornerViewModel read only mode", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -437,6 +788,34 @@ test("QuestionImageAdornerViewModel read only mode on events", () => {
   );
   expect(imageAdornerRO.allowEdit).toBeFalsy();
   expect(imageAdornerRO.filePresentationModel.isInputReadOnly).toBeTruthy();
+});
+
+test("QuestionImageAdornerViewModel file input follows a change of the question permissions", () => {
+  const creator = new CreatorTester();
+  let readOnly = false;
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (readOnly) options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, <any>{}, null);
+  const chooseAction = imageAdorner.imageActionsContainer.getActionById("choose");
+  expect(imageAdorner.filePresentationModel.isInputReadOnly).toBeFalsy();
+  expect(chooseAction.visible).toBeTruthy();
+
+  readOnly = true;
+  imageAdorner["updateActionsProperties"]();
+  expect(imageAdorner.filePresentationModel.isInputReadOnly).toBeTruthy();
+  expect(chooseAction.visible).toBeFalsy();
+
+  readOnly = false;
+  imageAdorner["updateActionsProperties"]();
+  expect(imageAdorner.filePresentationModel.isInputReadOnly).toBeFalsy();
+  expect(chooseAction.visible).toBeTruthy();
+
+  imageAdorner.dispose();
 });
 
 test("QuestionImageAdornerViewModel acceptedTypes", () => {
@@ -829,6 +1208,27 @@ test("remove() and ", () => {
   newItemAdorner.remove(newItemAdorner);
   expect(question.choices).toHaveLength(2);
 });
+test("item value remove() and add() do nothing without the permission", () => {
+  const creator = new CreatorTester();
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowEdit = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  const noneAdorner = new ItemValueWrapperViewModel(creator, question, question.noneItem);
+  const newItemAdorner = new ItemValueWrapperViewModel(creator, question, question.newItem);
+
+  itemAdorner.remove(itemAdorner);
+  expect(question.choices.map((item) => item.value)).toEqual([1, 2, 3]);
+  newItemAdorner.add(newItemAdorner);
+  expect(question.choices.map((item) => item.value)).toEqual([1, 2, 3]);
+  noneAdorner.add(noneAdorner);
+  expect(question.showNoneItem).toBeFalsy();
+});
+
 test("Do not select choices if a question in a matrix mode (popup in our case) ", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -871,6 +1271,28 @@ test("Refuse and Don't know items", () => {
   expect(q1.showDontKnowItem).toBeTruthy();
   dontKnowItemAdorner.remove(dontKnowItemAdorner);
   expect(q1.showDontKnowItem).toBeFalsy();
+});
+
+test("ImageItemValueWrapperViewModel remove action follows allowRemove", () => {
+  const creator = new CreatorTester();
+  creator.minChoices = 2;
+  creator.onCollectionItemAllowOperations.add((sender, options) => {
+    if (options.item.value === "b") options.allowDelete = false;
+  });
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", choices: [
+      { value: "a", imageLink: "a.png" }, { value: "b", imageLink: "b.png" }, { value: "c", imageLink: "c.png" }
+    ] }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const adorners = question.choices.map((item) => new ImageItemValueWrapperViewModel(creator, question, item, undefined, {} as HTMLElement));
+  const removeVisible = () => adorners.map((adorner) => adorner.topActionsContainer.getActionById("remove").visible);
+  expect(removeVisible(), "allowDelete: false hides it").toEqual([true, false, true]);
+
+  question.choices.splice(2, 1);
+  expect(removeVisible().slice(0, 2), "minChoices reached").toEqual([false, false]);
+
+  adorners.forEach((adorner) => adorner.dispose());
 });
 
 test("ImageItemValueWrapperViewModel isUploading", () => {

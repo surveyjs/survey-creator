@@ -651,6 +651,8 @@ export var turkishStrings = {
       templateErrorLocation: "Hata iletisi hizalaması",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Yeni giriş konumu",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Veri sayfası başına paneller",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
@@ -1083,6 +1085,8 @@ export var turkishStrings = {
     maxFiles: "Maksimum dosya sayısı",
     // "Row count"
     rowCount: "Satır sayısı",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Veri sayfası başına satır sayısı",
     // "Columns layout"
     columnLayout: "Kolon yerleşimi",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var turkishStrings = {
     questionErrorLocation: "Soru hatası konumu",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "İlk soruyu sayfayı değiştirmeye odakla",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Seçim kısayollarını etkinleştir",
     // "Question order"
     questionOrder: "Sayfadaki öğelerin sırası",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var turkishStrings = {
       confirmDelete: "Bir girişi kaldırmadan önce bir onay istemini tetikler.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Giriş sayısını hesaplayan bir ifade belirtin. Bu ifade \"Başlangıç girdi sayısı\" ayarını geçersiz kılar ve referans verdiği değerler değiştiğinde yeniden değerlendirilir. Sonuç, \"Minimum giriş sayısı\" ve \"En fazla giriş sayısı\" ayarlarıyla sınırlıdır. Bu ifade ayarlanmışken, katılımcılar girişleri manuel olarak ekleyip çıkaramaz.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Her veri sayfasında gösterilen panel sayısını belirtir. 0, sayfa seçimini devre dışı bırakır ve tüm panelleri gösterir.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dinamik panelde iç içe geçmiş sorulara numaralar atar."
     },
@@ -2754,6 +2762,8 @@ export var turkishStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Matrise yeni bir satır eklendiğinde ayrıntı bölümünü otomatik olarak genişletir."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Her veri sayfasında gösterilen matris satır sayısını belirtir. 0, sayfa sayısını devre dışı bırakır ve tüm satırları gösterir.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var turkishStrings = {
     questionErrorLocation: "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Her sayfadaki ilk giriş alanının metin girişi için hazır olmasını istiyorsanız seçin.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Radyo Düğme Grubu, Kontrol Kutuları ve Görsel Seçici sorularındaki seçeneklerin yanında harfler (A, B, C, ...) gösterilir. Katılımcılar, ilgili harf tuşlarına basarak seçenekleri seçebilirler. Bu ayarı bireysel sorular için geçersiz kılabilirsiniz.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Seçeneklerin yanında harfler (A, B, C, ...) gösterir ve yanıtıcıların ilgili harf tuşlarına basarak seçmelerine olanak tanır. \"Miras\" seçeneği, anket seviyesindeki ayarı kullanır."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var turkishStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Bu {ownerText}'in {nameKindText} \"{name}\" aynı zamanda yerleşik anket değişkeni {{builtIn}}'dir - anket önce {{name}}'e cevap verir, bu yüzden bu değişken ifadelerde erişilemez.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "\"{name}\"nin valueName \"{valueName}\" kısmı aynı zamanda \"{otherName}\" sorusunun adıdır - her ikisi de cevablarını \"{valueName}\" veri anahtarı altında saklar.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "\"{name}\"nin valueName \"{valueName}\" değerini paylaşan \"{name}\" değerini paylaşan {otherType} \"{otherName}\" değerini paylaşıyor; bunun kendi değeri olmayan - \"{otherName}\" \"{name}\" eklediği alanları bilinmeyen olarak kabul eder ve clearIncorrectValues() bunları siler. Değername'i de \"{valueName}\" olarak ayarlayın.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "\"{otherName}\" adlı matrix açılır menüsündeki \"{key}\" satırı da {sharedKeyText} \"{name}\" değerini paylaşır - bir hücre nesnesi ve tek bir değer aynı anahtar altında yaşayamaz; çalışma zamanı birini tutar ve diğerini siler.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\", veri anahtarı \"{dataKey}\"i {otherType} ile {otherType} \"{otherName}\" ile paylaşır - {shapeText} orada kalırken, \"{otherName}\" {otherShapeText} tutar; biri diğerinin değerini tutamaz, bu yüzden clearIncorrectValues() onu siler.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "\"{dataName}\" veri anahtarı aynı zamanda \"{base}\" (veri anahtarı artı \"{suffix}\") yorum anahtarıdır - bir yazı sessizce diğerinin üzerine yazar.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var turkishStrings = {
         array: "bir dizi",
         // [Auto-translated] "an object"
         object: "bir nesne"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "bir matris satırı",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "çoklu metnin bir öğesi",
+        // [Auto-translated] "a row or item of a question"
+        default: "bir soru satırı veya maddesi"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "bir nesne dizisi",
+        // [Auto-translated] "an object"
+        object: "bir nesne",
+        // [Auto-translated] "a plain value"
+        plain: "Bir düz değer",
+        // [Auto-translated] "a value"
+        default: "bir değer"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

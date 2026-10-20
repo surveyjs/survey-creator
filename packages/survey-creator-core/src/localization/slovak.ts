@@ -651,6 +651,8 @@ export var skStrings = {
       templateErrorLocation: "Zarovnanie chybových hlásení",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nové miesto vstupu",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panely na dátovú stránku",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
@@ -1083,6 +1085,8 @@ export var skStrings = {
     maxFiles: "Maximálny počet súborov",
     // "Row count"
     rowCount: "Počet riadkov",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Riadky na dátovú stránku",
     // "Columns layout"
     columnLayout: "Rozloženie stĺpcov",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var skStrings = {
     questionErrorLocation: "Poloha chyby otázky",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Prechod na prvú otázku pri zmene stránky",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Povoliť skratky na výber",
     // "Question order"
     questionOrder: "Poradie prvkov na stránke",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var skStrings = {
       confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Špecifikujte výraz, ktorý vypočíta počet záznamov. Tento výraz prepíše nastavenie \"Počiatočný počet záznamov\" a je znovu vyhodnocovaný vždy, keď sa zmenia hodnoty, na ktoré odkazuje. Výsledok je obmedzený nastaveniami \"Minimálny počet záznamov\" a \"Maximálny počet záznamov\". Kým je tento výraz nastavený, respondenti nemôžu manuálne pridávať alebo odstraňovať položky.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Určuje počet panelov zobrazených na každej dátovej stránke. 0 deaktivuje stránkovanie a zobrazuje všetky panely.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Priraďuje čísla otázkam vnoreným do dynamického panela."
     },
@@ -2754,6 +2762,8 @@ export var skStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Automaticky rozbalí sekciu podrobností, keď sa do matice pridá nový riadok."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Určuje počet riadkov matice zobrazených na každej dátovej stránke. 0 deaktivuje stránkovanie a zobrazuje všetky riadky.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var skStrings = {
     questionErrorLocation: "Nastaví umiestnenie chybového hlásenia vo vzťahu k otázke s neplatným zadaním. Vyberte si medzi: \"Hore\" - v hornej časti poľa otázok sa umiestni chybový text; \"Dole\" - v dolnej časti poľa otázok je umiestnený chybový text.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Vyberte, či chcete prvé vstupné pole na každej strane pripraviť na zadávanie textu.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Zobrazuje písmená (A, B, C, ...) vedľa možností v otázkach Skupina rádiových tlačidiel, Zaškrtávacie políčka a Výber obrázkov. Respondenti si môžu vybrať možnosti stlačením príslušných písmenových klávesov. Toto nastavenie môžete prepísať pre jednotlivé otázky.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Zobrazuje písmená (A, B, C, ...) vedľa možností a umožňuje respondentom vybrať ich stlačením príslušných písmenových klávesov. Možnosť \"Dedičiť\" používa nastavenie na úrovni prieskumu."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var skStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" tohto {ownerText} je zároveň zabudovaná prieskumná premenná {{builtIn}} – prieskum odpovedá ako prvá {{name}}, takže táto je nedosiahnuteľná vo výrazoch.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" z \"{name}\" je zároveň názvom otázky \"{otherName}\" – obe ukladajú svoju odpoveď pod dátový kľúč \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" z \"{name}\" zdieľa hodnotu {otherType} \"{otherName}\", ktorý nemá vlastnú valueName – \"{otherName}\" považuje polia \"{name}\" za neznáme a clearIncorrectValues() ich maže. Nastavte jeho valueName na \"{valueName}\" tiež.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Riadok \"{key}\" v maticovom rozbaľovacom menu \"{otherName}\" je tiež {sharedKeyText}} \"{name}\", ktorý zdieľa svoju hodnotu – objekt bunky a jedna hodnota nemôžu byť súčasne pod jedným kľúčom; runtime si ponechá jeden kľúč a druhý vymaže.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" zdieľa dátový kľúč \"{dataKey}\" s {otherType} \"{otherName}\" – ponecháva {shapeText}, zatiaľ čo \"{otherName}\" si ponecháva {otherShapeText}; jeden nemôže držať hodnotu druhého, takže clearIncorrectValues() ho vymaže.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Dátový kľúč \"{dataName}\" je zároveň komentárovým kľúčom \"{base}\" (jeho dátový kľúč plus \"{suffix}\") – jeden zápis ticho prepíše druhý.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var skStrings = {
         array: "pole",
         // [Auto-translated] "an object"
         object: "objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "riadok matice",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "položka s viacerými textami",
+        // [Auto-translated] "a row or item of a question"
+        default: "riadok alebo položka otázky"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "pole objektov",
+        // [Auto-translated] "an object"
+        object: "objekt",
+        // [Auto-translated] "a plain value"
+        plain: "Čistá hodnota",
+        // [Auto-translated] "a value"
+        default: "Hodnota"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

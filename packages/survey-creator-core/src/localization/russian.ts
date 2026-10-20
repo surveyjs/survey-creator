@@ -651,6 +651,8 @@ export var ruStrings = {
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Новое место входа",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Панели на странице данных",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -1083,6 +1085,8 @@ export var ruStrings = {
     maxFiles: "Максимальное количество файлов",
     // "Row count"
     rowCount: "Количество строк",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Строки на страницу данных",
     // "Columns layout"
     columnLayout: "Макет столбцов",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var ruStrings = {
     questionErrorLocation: "Размещение ошибки опроса",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Фокусирование на первом вопросе при изменении страницы",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Включить ярлыки выбора",
     // "Question order"
     questionOrder: "Сортировка элементов на странице",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var ruStrings = {
       confirmDelete: "Запускает запрос на подтверждение перед удалением записи.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Укажите выражение, которое вычисляет количество записей. Это выражение переопределяет параметры «Начальное количество записей» и пересчитывается при каждом изменении ссылающихся значений. Результат ограничен настройками «Минимальное количество записей» и «Максимальное количество записей». Пока это выражение установлено, респонденты не могут вручную добавлять или удалять записи.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Указывает количество панелей, отображаемых на каждой странице данных. 0 отключает страницирование и отображает все панели.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присваивает номера вопросам, вложенным в динамическую панель."
     },
@@ -2754,6 +2762,8 @@ export var ruStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Автоматически разворачивает раздел сведений при добавлении в матрицу новой строки."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Задаёт количество матричных строк, отображаемых на каждой странице данных. 0 отключает пагинацию и отображает все строки.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var ruStrings = {
     questionErrorLocation: "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Выберите, если вы хотите, чтобы первое поле ввода на каждой странице было готово для ввода текста.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Отображается буквы (A, B, C, ...) рядом с вариантами в группе радиокнопок, галочках и вопросах выбора изображений. Респонденты могут выбрать варианты, нажав соответствующие буквенные клавиши. Вы можете переобойти эту настановку для отдельных вопросов.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Отображает буквы (A, B, C, ...) рядом с вариантами и позволяет респондентам выбирать их, нажимая соответствующие клавиши букв. Опция «Наследить» использует параметры на уровне опроса."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var ruStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} «{name}» этого {ownerText} также является встроенной переменной опроса {{builtIn}} — опрос отвечает первым на {{name}}, поэтому этот вариант недоступен в выражениях.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "ValueName «{valueName}» из «{name}» также является именем вопроса «{otherName}» — оба хранят ответ под ключом данных «{valueName}».",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" из \"{name}\" разделяет значение {otherType} \"{otherName}\", которое не имеет собственного valueName — \"{otherName}\" считает поля, добавленные \"{name}\", неизвестными, и clearIncorrectValues() удаляет их. Установите его valueName на \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Строка «{key}» в matrixdropdown «{otherName}» также является {sharedKeyText} «{name}», разделяющей своё значение — объект ячейки и одно значение не могут одновременно находиться под одним ключом; время выполнения сохраняет одно и удаляет другое.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} «{name}» разделяет ключ данных «{dataKey}» с {otherType} «{otherName}» — он сохраняет {shapeText}, а «{otherName}» — {otherShapeText}; один не может удерживать значение другого, поэтому clearIncorrectValues() удаляет его.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Ключ данных «{dataName}» также является ключом комментария к «{base}» (его ключ данных плюс «{suffix}») — одна запись тихо перезаписывает другую.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var ruStrings = {
         array: "массив",
         // [Auto-translated] "an object"
         object: "объект"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "строка матрицы",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "элемент с множественным текстом",
+        // [Auto-translated] "a row or item of a question"
+        default: "Строка или пункт вопроса"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "массив объектов",
+        // [Auto-translated] "an object"
+        object: "объект",
+        // [Auto-translated] "a plain value"
+        plain: "простое значение",
+        // [Auto-translated] "a value"
+        default: "ценность"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

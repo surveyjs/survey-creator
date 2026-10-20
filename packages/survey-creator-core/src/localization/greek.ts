@@ -651,6 +651,8 @@ export var grStrings = {
       templateErrorLocation: "Στοίχιση μηνύματος σφάλματος",
       // "New entry location"
       newPanelPosition: "Θέση νέου πλαισίου",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Πίνακες ανά σελίδα δεδομένων",
       // "Prevent duplicate responses in the following question"
       keyName: "Αποτροπή διπλών απαντήσεων στην εξής ερώτηση"
     },
@@ -1083,6 +1085,8 @@ export var grStrings = {
     maxFiles: "Μέγιστος αριθμός αρχείων",
     // "Row count"
     rowCount: "Αριθμός γραμμών",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Γραμμές ανά σελίδα δεδομένων",
     // "Columns layout"
     columnLayout: "Διάταξη στηλών",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var grStrings = {
     questionErrorLocation: "Στοίχιση μηνύματος σφάλματος",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Εστίαση στην πρώτη ερώτηση της νέας σελίδας",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Ενεργοποίηση συντομεύσεων επιλογής",
     // "Question order"
     questionOrder: "Σειρά ερωτήσεων",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var grStrings = {
       confirmDelete: "Ενεργοποιεί μια προτροπή επιβεβαίωσης πριν από την κατάργηση ενός πίνακα.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των καταχωρήσεων. Αυτή η έκφραση παρακάμπτει τη ρύθμιση \"Αρχικός αριθμός καταχωρήσεων\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός καταχωρήσεων\" και \"Μέγιστος αριθμός καταχωρήσεων\". Ενώ έχει οριστεί αυτή η έκφραση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν καταχωρήσεις με μη αυτόματο τρόπο.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Καθορίζει τον αριθμό των πινάκων που εμφανίζονται σε κάθε σελίδα δεδομένων. 0 Απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλους τους πίνακες.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Αντιστοιχίζει αριθμούς σε ερωτήσεις που είναι ένθετες στον δυναμικό πίνακα."
     },
@@ -2754,6 +2762,8 @@ export var grStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Επεκτείνει αυτόματα την ενότητα λεπτομερειών όταν προστίθεται μια νέα γραμμή στον πίνακα."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Καθορίζει τον αριθμό των γραμμών μήτρας που εμφανίζονται σε κάθε σελίδα δεδομένων. 0 Απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλες τις γραμμές.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Δημιουργεί αντίγραφο των απαντήσεων από την τελευταία γραμμή και τις αναθέτει στη επόμενη προστιθέμενη δυναμική γραμμή.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var grStrings = {
     questionErrorLocation: "Ορίζει την τοποθεσία ενός μηνύματος σφάλματος σε σχέση με την ερώτηση με μη έγκυρη είσοδο. Επιλέξτε μεταξύ: \"Πάνω\" - το κείμενο σφάλματος τοποθετείται στην κορυφή του κουτιού ερώτησης; \"Κάτω\" - το κείμενο σφάλματος τοποθετείται στο κάτω μέρος του κουτιού ερώτησης.",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Επιλέξτε αν θέλετε το πρώτο πεδίο εισαγωγής σε κάθε σελίδα να είναι έτοιμο για είσοδο κειμένου.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Εμφανίζει γράμματα (A, B, C, ...) δίπλα στις επιλογές στην ομάδα κουμπιών επιλογής, στα πλαίσια ελέγχου και στις ερωτήσεις επιλογής εικόνας. Οι ερωτηθέντες μπορούν να επιλέξουν επιλογές πατώντας τα αντίστοιχα πλήκτρα γραμμάτων. Μπορείτε να παρακάμψετε αυτήν τη ρύθμιση για μεμονωμένες ερωτήσεις.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Εμφανίζει γράμματα (A, B, C, ...) δίπλα στις επιλογές και επιτρέπει στους ερωτηθέντες να τα επιλέξουν πατώντας τα αντίστοιχα πλήκτρα γραμμάτων. Η επιλογή \"Μεταβίβαση\" χρησιμοποιεί τη ρύθμιση σε επίπεδο έρευνας."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Διατηρεί την αρχική σειρά των ερωτήσεων ή τις τυχαία ανακατεύει. Η επίδραση αυτής της ρύθμισης είναι ορατή μόνο στην καρτέλα Προεπισκόπηση.",
     // "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var grStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Το {nameKindText} \"{name}\" αυτού του {ownerText} είναι επίσης η ενσωματωμένη μεταβλητή έρευνας {{builtIn}} - η έρευνα απαντά πρώτα στο {{name}}, επομένως αυτή δεν είναι προσβάσιμη σε εκφράσεις.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "Το valueName \"{valueName}\" του \"{name}\" είναι επίσης το όνομα της ερώτησης \"{otherName}\" - και οι δύο αποθηκεύουν την απάντησή τους κάτω από το κλειδί δεδομένων \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "Το valueName \"{valueName}\" του \"{name}\" μοιράζεται την τιμή του {otherType} \"{otherName}\", το οποίο δεν έχει δικό του valueName - το \"{otherName}\" αντιμετωπίζει τα πεδία που προσθέτει το \"{name}\" ως άγνωστα και το clearIncorrectValues() τα διαγράφει. Ορίστε επίσης το valueName του σε \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Η σειρά \"{key}\" του matrixdropdown \"{otherName}\" είναι επίσης {sharedKeyText} \"{name}\" που μοιράζεται την τιμή του - ένα αντικείμενο κελιού και μια μεμονωμένη τιμή δεν μπορούν να ζουν και τα δύο κάτω από ένα κλειδί. ο χρόνος εκτέλεσης διατηρεί το ένα και διαγράφει το άλλο.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "Το {type} \"{name}\" μοιράζεται το κλειδί δεδομένων \"{dataKey}\" με το {otherType} \"{otherName}\" - διατηρεί το {shapeText} εκεί, ενώ το \"{otherName}\" διατηρεί το {otherShapeText}. Το ένα δεν μπορεί να κρατήσει την τιμή του άλλου, οπότε το clearIncorrectValues() το διαγράφει.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Το κλειδί δεδομένων \"{dataName}\" είναι επίσης το κλειδί σχολίου του \"{base}\" (το κλειδί δεδομένων του συν το \"{επίθημα}\") - η μία εγγραφή αντικαθιστά σιωπηλά την άλλη.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var grStrings = {
         array: "μια συστοιχία",
         // [Auto-translated] "an object"
         object: "ένα αντικείμενο"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "μια σειρά από μήτρα",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "ένα στοιχείο πολλαπλού κειμένου",
+        // [Auto-translated] "a row or item of a question"
+        default: "μια γραμμή ή ένα στοιχείο μιας ερώτησης"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "μια σειρά αντικειμένων",
+        // [Auto-translated] "an object"
+        object: "ένα αντικείμενο",
+        // [Auto-translated] "a plain value"
+        plain: "μια απλή τιμή",
+        // [Auto-translated] "a value"
+        default: "μια τιμή"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

@@ -651,6 +651,8 @@ export var czStrings = {
       templateErrorLocation: "Zarovnání chybové zprávy",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nová vstupní lokace",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panely na datovou stránku",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
@@ -1083,6 +1085,8 @@ export var czStrings = {
     maxFiles: "Maximální počet souborů",
     // "Row count"
     rowCount: "Počet řádků",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Řádky na datovou stránku",
     // "Columns layout"
     columnLayout: "Rozložení sloupců",
     // "\"Add Row\" button alignment"
@@ -1201,6 +1205,8 @@ export var czStrings = {
     questionErrorLocation: "Umístění chyby v otázce",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Zaměřte se na první otázku týkající se změny stránky",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Povolit zkratky volby",
     // "Question order"
     questionOrder: "Pořadí prvků na stránce",
     // "Time limit to complete the survey"
@@ -2743,6 +2749,8 @@ export var czStrings = {
       confirmDelete: "Spustí výzvu k potvrzení před odstraněním položky.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Zadejte výraz, který počítá počet záznamů. Tento výraz přepisuje nastavení \"Počáteční počet záznamů\" a je znovu vyhodnocován pokaždé, když se změní hodnoty, na které odkazuje. Výsledek je omezen nastavením \"Minimální počet záznamů\" a \"Maximální počet položek\". Dokud je tento výraz nastaven, respondenti nemohou položky ručně přidávat ani odebírat.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Určuje počet panelů zobrazených na každé datové stránce. 0 deaktivuje stránkování a zobrazuje všechny panely.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Přiřadí čísla otázkám vnořeným v dynamickém panelu."
     },
@@ -2754,6 +2762,8 @@ export var czStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Automaticky rozbalí podrobnou část, když je do matice přidán nový řádek."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Určuje počet maticových řádků zobrazených na každé datové stránce. 0 deaktivuje stránkování a zobrazuje všechny řádky.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplikuje odpovědi z posledního řádku a přiřadí je k dalšímu přidanému dynamickému řádku.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2939,6 +2949,12 @@ export var czStrings = {
     questionErrorLocation: "Nastaví umístění chybové zprávy ve vztahu k otázce s neplatným vstupem. Vyberte si mezi: \"Nahoře\" - text chyby je umístěn v horní části pole s otázkou; \"Bottom\" - text chyby je umístěn ve spodní části pole s otázkou.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Vyberte, zda chcete, aby první vstupní pole na každé stránce bylo připraveno pro zadání textu.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Zobrazuje písmena (A, B, C, ...) vedle možností v otázkách Radio Button Group, Checkboxes a Image Picker. Respondenti mohou vybírat volby stisknutím příslušných písmen. Toto nastavení můžete přepsat pro jednotlivé otázky.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Zobrazuje písmena (A, B, C, ...) vedle možností a umožňuje respondentům je vybrat stisknutím příslušných písmen. Možnost \"Dědit\" používá nastavení na úrovni průzkumu."
+    },
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zachová původní pořadí otázek nebo je náhodně vybere. Účinek tohoto nastavení je viditelný pouze na kartě Náhled.",
     // [Auto-translated] "For text entry questions only."
@@ -3668,8 +3684,12 @@ export var czStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" této {ownerText} je také vestavěnou proměnnou průzkumu {{builtIn}} – průzkum odpovídá jako první, takže tato je v výrazech nedosažitelná.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" z \"{name}\" je také názvem otázky \"{otherName}\" – obě ukládají svou odpověď pod datový klíč \"{valueName}\".",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" z \"{name}\" sdílí hodnotu {otherType} \"{otherName}\", která nemá vlastní valueName – \"{otherName}\" považuje pole \"{name}\" za neznámá a clearIncorrectValues() je maže. Nastavte také jeho valueName na \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Řádek \"{key}\" v maticovém rozbalovacím menu \"{otherName}\" je také {sharedKeyText} \"{name}\" sdílející svou hodnotu – objekt buňky a jedna hodnota nemohou být zároveň pod jedním klíčem; runtime si jeden zachová a druhý smaže.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" sdílí datový klíč \"{dataKey}\" s {otherType} \"{otherName}\" – {shapeText} tam ponechává, zatímco \"{otherName}\" si ponechává {otherShapeText}; jeden nemůže držet hodnotu druhého, takže clearIncorrectValues() jej maže.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Datový klíč \"{dataName}\" je také komentářovým klíčem \"{base}\" (jeho datový klíč plus \"{suffix}\") – jeden zápis tiše přepisuje druhý.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4095,6 +4115,24 @@ export var czStrings = {
         array: "pole",
         // [Auto-translated] "an object"
         object: "objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "řádek matice",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "položka s více texty",
+        // [Auto-translated] "a row or item of a question"
+        default: "řádek nebo položka otázky"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "pole objektů",
+        // [Auto-translated] "an object"
+        object: "objekt",
+        // [Auto-translated] "a plain value"
+        plain: "čistá hodnota",
+        // [Auto-translated] "a value"
+        default: "Hodnota"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {
