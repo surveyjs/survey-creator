@@ -779,6 +779,24 @@ test("A single-value choice sharing a matrix row names what collides", () => {
     "a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other.");
 });
 
+test("Questions sharing a key with different value shapes say what each keeps", () => {
+  expect(editorLocalization.getJsonValue("linter.messages.name/shadowing.valueShapeConflict")).toBeDefined();
+  const editor = createEditor(JSON.stringify({
+    elements: [
+      { type: "matrixdynamic", name: "k", columns: [{ name: "c", cellType: "text" }] },
+      { type: "text", name: "p", valueName: "k" },
+    ],
+  }, null, 2));
+  const finding = editor.linter.findings.filter(item => item.ruleId === "name/shadowing")[0];
+  expect(finding.text).toBe(
+    "The text \"p\" shares the data key \"k\" with matrixdynamic \"k\" - it keeps a plain value there, " +
+    "while \"k\" keeps an array of objects; one cannot hold the other's value, so clearIncorrectValues() deletes it.");
+  const withoutShapes: any = Object.assign({}, finding.finding, {
+    messageData: Object.assign({}, finding.finding.messageData, { shape: undefined, otherShape: undefined }),
+  });
+  expect(editor.linter.composeMessage(withoutShapes)).toBe(finding.finding.message);
+});
+
 test("A key that matches no property names the class it was written on", () => {
   expect(textOf({ elements: [{ type: "text", name: "q1", nosuchprop: 1 }] }, "property/unknown")).toBe(
     "\"nosuchprop\" is not a property of \"q1\" (text)." +
