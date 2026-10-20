@@ -3684,6 +3684,12 @@ export var ruStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} «{name}» этого {ownerText} также является встроенной переменной опроса {{builtIn}} — опрос отвечает первым на {{name}}, поэтому этот вариант недоступен в выражениях.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" из \"{name}\" разделяет значение {otherType} \"{otherName}\", которое не имеет собственного valueName — \"{otherName}\" считает поля, добавленные \"{name}\", неизвестными, и clearIncorrectValues() удаляет их. Установите его valueName на \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Строка «{key}» в matrixdropdown «{otherName}» также является {sharedKeyText} «{name}», разделяющей своё значение — объект ячейки и одно значение не могут одновременно находиться под одним ключом; время выполнения сохраняет одно и удаляет другое.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} «{name}» разделяет ключ данных «{dataKey}» с {otherType} «{otherName}» — он сохраняет {shapeText}, а «{otherName}» — {otherShapeText}; один не может удерживать значение другого, поэтому clearIncorrectValues() удаляет его.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Ключ данных «{dataName}» также является ключом комментария к «{base}» (его ключ данных плюс «{suffix}») — одна запись тихо перезаписывает другую.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var ruStrings = {
         array: "массив",
         // [Auto-translated] "an object"
         object: "объект"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "строка матрицы",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "элемент с множественным текстом",
+        // [Auto-translated] "a row or item of a question"
+        default: "Строка или пункт вопроса"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "массив объектов",
+        // [Auto-translated] "an object"
+        object: "объект",
+        // [Auto-translated] "a plain value"
+        plain: "простое значение",
+        // [Auto-translated] "a value"
+        default: "ценность"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

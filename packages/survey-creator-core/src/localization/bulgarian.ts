@@ -3684,6 +3684,12 @@ export var bgStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" на този {ownerText} също е вградената променлива {{builtIn}} – проучването отговаря първо на {{name}}, така че това е недостъпно в изразите.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" на \"{name}\" споделя стойността на {otherType} \"{otherName}\", която няма собствено valueName - \"{otherName}\" третира полетата, които добавя \"{name}\", като неизвестни и clearIncorrectValues() ги изтрива. Задайте и неговото valueName на \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Редът \"{key}\" в матрицата надолу \"{otherName}\" също е {sharedKeyText} \"{name}\", споделяйки своята стойност – клетъчен обект и една стойност не могат едновременно да съществуват под един ключ; runtime запазва единия и изтрива другия.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" споделя ключа за данни \"{dataKey}\" с {otherType} \"{otherName}\" – той държи {shapeText} там, докато \"{otherName}\" запазва {otherShapeText}; единият не може да държи стойността на другия, затова clearIncorrectValues() я изтрива.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Ключът за данни \"{dataName}\" е също ключ за коментари на \"{base}\" (неговият ключов ключ плюс \"{suffix}\") – единият запис безшумно презаписва другия.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var bgStrings = {
         array: "масив",
         // [Auto-translated] "an object"
         object: "Обект"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "ред от матрица",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "елемент с мултитекст",
+        // [Auto-translated] "a row or item of a question"
+        default: "Ред или елемент от въпрос"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "масив от обекти",
+        // [Auto-translated] "an object"
+        object: "Обект",
+        // [Auto-translated] "a plain value"
+        plain: "Чиста стойност",
+        // [Auto-translated] "a value"
+        default: "Стойност"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

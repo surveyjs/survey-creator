@@ -3684,6 +3684,12 @@ export var nbStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" til denne {ownerText} er også den innebygde survey-variabelen {{builtIn}} – surveyen svarer først på {{name}}, så denne er utilgjengelig i uttrykk.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" av \"{name}\" deler verdien {otherType} \"{otherName}\", som ikke har noen egen verdiName – \"{otherName}\" behandler feltene \"{name}\" legger til som ukjent, og clearIncorrectValues() sletter dem. Sett også valueName til \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Raden \"{key}\" i matrixdropdown-menyen \"{otherName}\" er også {sharedKeyText} \"{name}\" som deler sin verdi – et celleobjekt og en enkelt verdi kan ikke begge ligge under én nøkkel; kjøretiden beholder den ene og sletter den andre.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" deler datanøkkelen \"{dataKey}\" med {otherType} \"{otherName}\" – den beholder {shapeText} der, mens \"{otherName}\" beholder {otherShapeText}; én kan ikke holde den andres verdi, så clearIncorrectValues() sletter den.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Datanøkkelen \"{dataName}\" er også kommentarnøkkelen til \"{base}\" (dens datanøkkel pluss \"{suffix}\") – den ene skrivingen overskriver stille den andre.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var nbStrings = {
         array: "et array",
         // [Auto-translated] "an object"
         object: "et objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "en rad med matrise",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "et flertekstelement",
+        // [Auto-translated] "a row or item of a question"
+        default: "en rad eller et spørsmål"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "et array av objekter",
+        // [Auto-translated] "an object"
+        object: "et objekt",
+        // [Auto-translated] "a plain value"
+        plain: "en enkel verdi",
+        // [Auto-translated] "a value"
+        default: "en verdi"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

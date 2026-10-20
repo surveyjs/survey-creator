@@ -3684,6 +3684,12 @@ export var simplifiedChineseTranslation = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "该{ownerText}的{nameKindText} “{name}”也是内置的调查变量{{builtIn}}——调查先回答{{name}}，因此该变量在表达式中不可达。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "“{name}”的值名“{valueName}”与{otherType}“{otherName}”共享值，后者没有自身的valueName——“{otherName}”将“{name}”加法“视为未知字段，且clearIncorrectValues（）会删除它们。也将其值Name设置为”{valueName}“。",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "矩阵下拉选单“{otherName}”的行“{key}”也是{sharedKeyText} “{name}”共享其值——单元对象和单个值不能同时存在于一个键下;运行时保留其中一个并删除另一个。",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} “{name}” 与 {otherType} “{otherName}” 共享数据键 “{dataKey}” ——它保留 {shapeText}，而“{otherName}” 保留 {otherShapeText};其中一个不能保留另一个的值，因此 clearIncorrectValues（） 会删除它。",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "数据键“{dataName}”也是“{base}”的注释键（其数据键加上“{suffix}”）——一个写入静默覆盖另一个。",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var simplifiedChineseTranslation = {
         array: "一个数组",
         // [Auto-translated] "an object"
         object: "一个物体"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "一排矩阵",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "多重文本的一项",
+        // [Auto-translated] "a row or item of a question"
+        default: "问题的一行或一项"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "一组对象",
+        // [Auto-translated] "an object"
+        object: "一个物体",
+        // [Auto-translated] "a plain value"
+        plain: "一个普通值",
+        // [Auto-translated] "a value"
+        default: "一个值"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

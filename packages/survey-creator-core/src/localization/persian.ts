@@ -3684,6 +3684,12 @@ export var persianStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} «{name}» این {ownerText} همچنین متغیر نظرسنجی داخلی {{builtIn}} است - نظرسنجی ابتدا به {{name}} پاسخ می دهد، بنابراین این گزینه در عبارات قابل دسترسی نیست.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" از \"{name}\" مقدار {otherType} \"{otherName} را به اشتراک می گذارد که خودش valueName ندارد - \"{otherName}\" فیلدهای \"{name}\" را به عنوان ناشناخته در نظر می گیرد و clearIncorrectValues() آن ها را حذف می کند. valueName آن را نیز روی \"{valueName}\" تنظیم کنید.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "ردیف \"{key}\" در ماتریکس کسترداون \"{otherName}\" همچنین {sharedKeyText} \"{name}\" است که مقدار خود را به اشتراک می گذارد - یک شیء سلولی و یک مقدار نمی توانند هر دو زیر یک کلید باشند؛ زمان اجرا یکی را نگه می دارد و دیگری را حذف می کند.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" کلید داده \"{dataKey}\" را با {otherType} \"{otherName}\" به اشتراک می گذارد - {shapeText} را آنجا نگه می دارد، در حالی که «{otherName}» {otherShapeText} را نگه می دارد؛ یکی نمی تواند مقدار دیگری را نگه دارد، بنابراین clearIncorrectValues() آن را حذف می کند.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "کلید داده «{dataName}» همچنین کلید نظر «{base}» است (کلید داده آن به علاوه «{suffix}») - یک نوشتن به طور خاموش دیگری را بازنویسی می کند.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var persianStrings = {
         array: "یک آرایه",
         // [Auto-translated] "an object"
         object: "یک شیء"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "یک ردیف ماتریس",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "یک آیتم چندمتنی",
+        // [Auto-translated] "a row or item of a question"
+        default: "یک ردیف یا آیتم از یک سؤال"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "آرایه ای از اشیاء",
+        // [Auto-translated] "an object"
+        object: "یک شیء",
+        // [Auto-translated] "a plain value"
+        plain: "یک مقدار ساده",
+        // [Auto-translated] "a value"
+        default: "یک مقدار"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

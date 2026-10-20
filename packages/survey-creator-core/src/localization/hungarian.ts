@@ -3684,6 +3684,12 @@ export var huStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "A {ownerText} {nameKindText} \"{name}\" a beépített felmérési változó {{builtIn}} is – a felmérés először a {{name}} választ adja, így ez a kifejezések számára elérhetetlen.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "A \"{name}\" értéke a \"{name}\" értéke osztja meg {otherType} \"{otherName}\" értékét, amelynek nincs saját értéke – a \"{otherName}\" ismeretlennek kezeli a \"{name}\" által hozzáadott mezőket, és a clearIncorrectValues() törli azokat. Állítsd be a valueName \"{valueName}\" értékre is.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "A \"{otherName}\" mátrixleugró menü \"{key}\" sor is {sharedKeyText}} \"{name}\" osztja meg az értékét – egy cella objektum és egyetlen érték nem élhet egyetlen kulcs alatt; a futás az egyiket megtartja, a másikat törli.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "A {type} \"{name}\" megosztja a \"{dataKey}\" adatkulcsot az {otherType} \"{otherName}\" használatával – ott tartja a {shapeText}, míg a \"{otherName}\" megtartja a {otherShapeText}; az egyik nem tarthatja meg a másik értékét, így a clearIncorrectValues() törli azt.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Az adatkulcs \"{dataName}\" egyben a \"{base}\" (az adatkulcs plusz a \"{suffix}\") kommentkulcsa is – az egyik írás némán felülírja a másikat.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var huStrings = {
         array: "egy tömb",
         // [Auto-translated] "an object"
         object: "egy tárgy"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "egy mátrixsor",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "egy többszörös szöveg tárgya",
+        // [Auto-translated] "a row or item of a question"
+        default: "egy sor vagy tétel egy kérdésből"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "egy objektumokból álló tömb",
+        // [Auto-translated] "an object"
+        object: "egy tárgy",
+        // [Auto-translated] "a plain value"
+        plain: "egy egyszerű érték",
+        // [Auto-translated] "a value"
+        default: "egy érték"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

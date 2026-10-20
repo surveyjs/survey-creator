@@ -3685,6 +3685,12 @@ export var koreanStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "이 {ownerText}의 {nameKindText} \"{name}\"은 내장된 설문조사 변수 {{builtIn}}이기도 합니다 - 설문조사가 먼저 {{name}}에 답하기 때문에 이 변수는 표현식에서 접근할 수 없습니다.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "\"{name}\"의 valueName \"{valueName}\"는 {otherType} \"{otherName}\"의 값을 공유하며, {otherName}은 자체 값Name이 없습니다. \"{otherName}\"은 \"{name}\"이 추가된 필드를 미확인으로 처리하며, clearIncorrectValues()가 이를 삭제합니다. 값Name도 \"{valueName}\"로 설정하세요.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "matrix dropdown의 \"{key}\" 행은 {sharedKeyText} \"{name}\"도 값을 공유합니다 - 셀 객체와 단일 값이 모두 하나의 키 아래에 존재할 수 없습니다; 런타임은 한 값을 유지하고 다른 하나를 삭제합니다.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\"는 {otherType} \"{otherName}\"과 데이터 키 \"{dataKey}\"를 공유하며, {shapeText}를 유지하고, \"{otherName}\"은 {otherShapeText}를 유지합니다; 한 가지 값은 다른 쪽의 값을 유지할 수 없으므로 clearIncorrectValues()가 이를 삭제합니다.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "데이터 키 \"{dataName}\"은 또한 \"{base}\"의 주석 키이기도 하며(데이터 키와 \"{suffix}\"\") - 한 쓰기가 다른 것을 조용히 덮어씁니다.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4110,6 +4116,24 @@ export var koreanStrings = {
         array: "배열",
         // [Auto-translated] "an object"
         object: "객체"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "매트릭스의 한 줄로",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "다중 텍스트 항목",
+        // [Auto-translated] "a row or item of a question"
+        default: "질문의 한 행이나 항목"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "객체들의 배열입니다",
+        // [Auto-translated] "an object"
+        object: "객체",
+        // [Auto-translated] "a plain value"
+        plain: "평범한 값",
+        // [Auto-translated] "a value"
+        default: "가치"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

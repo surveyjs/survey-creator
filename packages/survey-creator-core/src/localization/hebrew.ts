@@ -3684,6 +3684,12 @@ export var hebrewStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "ה-{nameKindText} \"{name}\" של {ownerText} הזה הוא גם משתנה סקר מובנה {{builtIn}} - הסקר עונה ראשון על {{name}}, ולכן זה לא נגיש בביטויים.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ה-valueName \"{valueName}\" של \"{name}\" משתף את הערך של {otherType} \"{otherName}\", שאין לו valueName משלו - \"{otherName}\" מתייחס לשדות \"{name}\" כלא ידועים, ו-clearIncorrectValues() מוחק אותם. הגדר גם את ה-valueName שלו ל-\"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "השורה \"{key}\" בתחתית המטריקס \"{otherName}\" היא גם {sharedKeyText} \"{name}\" החולקת את ערכה - אובייקט תא וערך אחד לא יכולים להיות שניהם תחת מפתח אחד; זמן הריצה שומר על אחד ומוחק את השני.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "ה-{type} \"{name}\" חולק את מפתח הנתונים \"{dataKey}\" עם {otherType} \"{otherName}\" - הוא שומר את {shapeText} שם, בעוד ש\"{otherName}\" שומר את {otherShapeText}; אחד לא יכול להחזיק את הערך של השני, ולכן clearIncorrectValues() מוחק אותו.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "מפתח הנתונים \"{dataName}\" הוא גם מפתח התגובה של \"{base}\" (מפתח הנתונים שלו בתוספת \"{סיומת}\") - כתיבה אחת מחליפה את השנייה בשקט.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var hebrewStrings = {
         array: "מערך",
         // [Auto-translated] "an object"
         object: "אובייקט"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "שורה של מטריצה",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "פריט של טקסט מרובה",
+        // [Auto-translated] "a row or item of a question"
+        default: "שורה או פריט בשאלה"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "מערך של אובייקטים",
+        // [Auto-translated] "an object"
+        object: "אובייקט",
+        // [Auto-translated] "a plain value"
+        plain: "ערך פשוט",
+        // [Auto-translated] "a value"
+        default: "ערך"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

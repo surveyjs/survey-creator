@@ -3684,6 +3684,12 @@ export var arStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "المتغير {nameKindText} \"{name}\" لهذا {ownerText} هو أيضا المتغير المدمج {{builtIn}} - حيث يجيب المسح على {{name}} أولا، لذا هذا السؤال غير قابل للوصول في التعبيرات.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" ل \"{name}\" يشارك قيمة {otherType} \"{otherName}\"، والتي لا تملك valueName خاصة بها - \"{otherName}\" تعامل الحقول التي \"{name}\" تضيفها كغير معروفة، وclearIncorrectValues() تحذفها. اضبط valueName الخاص بها على \"{valueName}\" أيضا.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "الصف \"{key}\" في نظام السطو \"{otherName}\" هو أيضا {sharedKeyText} \"{name}\" يشارك قيمته - حيث لا يمكن لعنصر الخلية وقيمة واحدة أن يعيشا تحت مفتاح واحد؛ يحافظ وقت التشغيل على أحدهما ويحذف الآخر.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "يشارك {type} \"{name}\" مفتاح البيانات \"{dataKey}\" مع {otherType} \"{otherName}\" - يحتفظ ب {shapeText} هناك، بينما \"{otherName}\" يحتفظ ب {otherShapeText}; لا يمكن لأي منهما الاحتفاظ بقيمة الآخر، لذا يقوم clearIncorrectValues() بحذفه.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "مفتاح البيانات \"{dataName}\" هو أيضا مفتاح التعليق ل \"{base}\" (مفتاح بياناته بالإضافة إلى \"{لاحقة}\") - حيث يتم كتابة واحدة بصمت فوق الأخرى.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var arStrings = {
         array: "مصفوفة",
         // [Auto-translated] "an object"
         object: "كائن"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "صف من المصفوفة",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "عنصر متعدد النصوص",
+        // [Auto-translated] "a row or item of a question"
+        default: "صف أو بند من سؤال"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "مصفوفة من الكائنات",
+        // [Auto-translated] "an object"
+        object: "كائن",
+        // [Auto-translated] "a plain value"
+        plain: "قيمة بسيطة",
+        // [Auto-translated] "a value"
+        default: "قيمة"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

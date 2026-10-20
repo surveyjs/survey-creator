@@ -3684,6 +3684,12 @@ export var slStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" tega {ownerText} je tudi vgrajena spremenljivka ankete {{builtIn}} – anketa najprej odgovori {{name}}, zato je ta nedosegljiva v izrazih.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" od \"{name}\" deli vrednost {otherType} \"{otherName}\", ki nima lastne valueName – \"{otherName}\" obravnava polja z \"{name}\" kot neznana, clearIncorrectValues() pa jih izbriše. Nastavi tudi njegov valueName na \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Vrstica \"{key}\" v spustnem meniju matrike \"{otherName}\" je prav tako {sharedKeyText} \"{name}\", ki deli svojo vrednost – objekt celice in ena vrednost ne moreta hkrati obstajati pod enim ključem; čas izvajanja ohrani enega in izbriše drugega.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" si deli podatkovni ključ \"{dataKey}\" z {otherType} \"{otherName}\" – tam hrani {shapeText}, medtem ko \"{otherName}\" ohranja {otherShapeText}; eden ne more imeti vrednosti drugega, zato ga clearIncorrectValues() izbriše.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Podatkovni ključ \"{dataName}\" je tudi komentarni ključ za \"{base}\" (njegov podatkovni ključ plus \"{suffix}\") – en zapis tiho prepiše drugega.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var slStrings = {
         array: "polje",
         // [Auto-translated] "an object"
         object: "predmet"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "Vrstica matrike",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "Element večbesedila",
+        // [Auto-translated] "a row or item of a question"
+        default: "vrstica ali vprašanje"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "niz objektov",
+        // [Auto-translated] "an object"
+        object: "predmet",
+        // [Auto-translated] "a plain value"
+        plain: "Navadna vrednost",
+        // [Auto-translated] "a value"
+        default: "vrednost"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

@@ -3684,6 +3684,12 @@ export var mnStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Энэ {ownerText}-ийн {nameKindText} \"{name}\" нь мөн {{builtIn}} суурилуулсан судалгааны хувьсагч бөгөөд судалгаа нь {{name}}-д эхэлж хариулдаг тул энэ нь илэрхийлэлд хүрч чадахгүй.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "\"{name}\"-ийн valueName \"{valueName}\" нь {otherType} \"{otherName}-ийн утгыг хуваалцдаг бөгөөд энэ нь өөрийн гэсэн valueName-гүй - \"{otherName}\" нь \"{name}\" нэмэх талбаруудыг үл мэдэгддэг гэж үзэж, clearIncorrectValues() устгана. ValueName-г мөн \"{valueName}\" болгож тохируулна.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Matrixdropdown-ийн \"{otherName}\" мөр нь мөн {sharedKeyText} \"{name}\" гэсэн утгатай бөгөөд үүний утгыг хуваалцдаг - эсийн объект болон нэг утга нэг түлхүүр дор хоёулаа орших боломжгүй; runtime нь нэгийг нь хадгалж, нөгөөг устгадаг.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name} нь өгөгдлийн түлхүүр \"{dataKey}\"-ийг {otherType} \"{otherName}\"-тэй хуваалцдаг - энэ нь {shapeText}-ийг хадгалдаг, харин \"{otherName}\" нь {otherShapeText}-ийг хадгалдаг; нэг нь нөгөө утгыг хадгалж чадахгүй тул clearIncorrectValues() нь устгана.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Өгөгдлийн түлхүүр \"{dataName}\" нь мөн \"{base}\" (өгөгдлийн түлхүүр болон \"{suffix}\") сэтгэгдлийн түлхүүр бөгөөд нэг бичлэг нөгөөг чимээгүй давтдаг.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var mnStrings = {
         array: "массив",
         // [Auto-translated] "an object"
         object: "объект"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "матрицын мөр",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "Олон тексттэй элемент",
+        // [Auto-translated] "a row or item of a question"
+        default: "Асуултын мөр эсвэл зүйл"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "объектуудын массив",
+        // [Auto-translated] "an object"
+        object: "объект",
+        // [Auto-translated] "a plain value"
+        plain: "энгийн үнэ цэн",
+        // [Auto-translated] "a value"
+        default: "a үнэ цэн"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

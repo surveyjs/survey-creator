@@ -3684,6 +3684,12 @@ export var czStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" této {ownerText} je také vestavěnou proměnnou průzkumu {{builtIn}} – průzkum odpovídá jako první, takže tato je v výrazech nedosažitelná.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" z \"{name}\" sdílí hodnotu {otherType} \"{otherName}\", která nemá vlastní valueName – \"{otherName}\" považuje pole \"{name}\" za neznámá a clearIncorrectValues() je maže. Nastavte také jeho valueName na \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Řádek \"{key}\" v maticovém rozbalovacím menu \"{otherName}\" je také {sharedKeyText} \"{name}\" sdílející svou hodnotu – objekt buňky a jedna hodnota nemohou být zároveň pod jedním klíčem; runtime si jeden zachová a druhý smaže.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" sdílí datový klíč \"{dataKey}\" s {otherType} \"{otherName}\" – {shapeText} tam ponechává, zatímco \"{otherName}\" si ponechává {otherShapeText}; jeden nemůže držet hodnotu druhého, takže clearIncorrectValues() jej maže.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Datový klíč \"{dataName}\" je také komentářovým klíčem \"{base}\" (jeho datový klíč plus \"{suffix}\") – jeden zápis tiše přepisuje druhý.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var czStrings = {
         array: "pole",
         // [Auto-translated] "an object"
         object: "objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "řádek matice",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "položka s více texty",
+        // [Auto-translated] "a row or item of a question"
+        default: "řádek nebo položka otázky"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "pole objektů",
+        // [Auto-translated] "an object"
+        object: "objekt",
+        // [Auto-translated] "a plain value"
+        plain: "čistá hodnota",
+        // [Auto-translated] "a value"
+        default: "Hodnota"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

@@ -3684,6 +3684,12 @@ export const roStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" al acestui {ownerText} este și variabila de sondaj încorporată {{builtIn}} - sondajul răspunde mai întâi la {{name}}, deci aceasta este inaccesibilă în expresii.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" din \"{name}\" împărtășește valoarea {otherType} \"{otherName}\", care nu are nicio valoare proprie - \"{otherName}\" tratează câmpurile adăugate de \"{name}\" ca necunoscute, iar clearIncorrectValues() le șterge. Setează valueName pe \"{valueName}\" de asemenea.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Rândul \"{key}\" din matrixdropdown \"{otherName}\" este, de asemenea, {sharedKeyText} \"{name}\" împărțind valoarea sa – un obiect celulă și o singură valoare nu pot trăi ambele sub aceeași cheie; runtime-ul păstrează una și șterge cealaltă.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{Type} \"{name}\" împarte cheia de date \"{dataKey}\" cu {otherType} \"{otherName}\" - păstrează {shapeText} acolo, în timp ce \"{otherName}\" păstrează {otherShapeText}; unul nu poate ține valoarea celuilalt, așa că clearIncorrectValues() o șterge.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Cheia de date \"{dataName}\" este de asemenea cheia de comentariu pentru \"{base}\" (cheia sa de date plus \"{sufix}\") – o scriere suprascrie silențios cealaltă.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export const roStrings = {
         array: "Un tablou",
         // [Auto-translated] "an object"
         object: "un obiect"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "un rând de matrice",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "un element de multipletext",
+        // [Auto-translated] "a row or item of a question"
+        default: "un rând sau un element al unei întrebări"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "o matrice de obiecte",
+        // [Auto-translated] "an object"
+        object: "un obiect",
+        // [Auto-translated] "a plain value"
+        plain: "o valoare simplă",
+        // [Auto-translated] "a value"
+        default: "o valoare"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

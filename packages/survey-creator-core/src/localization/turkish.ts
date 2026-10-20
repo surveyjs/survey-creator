@@ -3684,6 +3684,12 @@ export var turkishStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Bu {ownerText}'in {nameKindText} \"{name}\" aynı zamanda yerleşik anket değişkeni {{builtIn}}'dir - anket önce {{name}}'e cevap verir, bu yüzden bu değişken ifadelerde erişilemez.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "\"{name}\"nin valueName \"{valueName}\" değerini paylaşan \"{name}\" değerini paylaşan {otherType} \"{otherName}\" değerini paylaşıyor; bunun kendi değeri olmayan - \"{otherName}\" \"{name}\" eklediği alanları bilinmeyen olarak kabul eder ve clearIncorrectValues() bunları siler. Değername'i de \"{valueName}\" olarak ayarlayın.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "\"{otherName}\" adlı matrix açılır menüsündeki \"{key}\" satırı da {sharedKeyText} \"{name}\" değerini paylaşır - bir hücre nesnesi ve tek bir değer aynı anahtar altında yaşayamaz; çalışma zamanı birini tutar ve diğerini siler.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\", veri anahtarı \"{dataKey}\"i {otherType} ile {otherType} \"{otherName}\" ile paylaşır - {shapeText} orada kalırken, \"{otherName}\" {otherShapeText} tutar; biri diğerinin değerini tutamaz, bu yüzden clearIncorrectValues() onu siler.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "\"{dataName}\" veri anahtarı aynı zamanda \"{base}\" (veri anahtarı artı \"{suffix}\") yorum anahtarıdır - bir yazı sessizce diğerinin üzerine yazar.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var turkishStrings = {
         array: "bir dizi",
         // [Auto-translated] "an object"
         object: "bir nesne"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "bir matris satırı",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "çoklu metnin bir öğesi",
+        // [Auto-translated] "a row or item of a question"
+        default: "bir soru satırı veya maddesi"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "bir nesne dizisi",
+        // [Auto-translated] "an object"
+        object: "bir nesne",
+        // [Auto-translated] "a plain value"
+        plain: "Bir düz değer",
+        // [Auto-translated] "a value"
+        default: "bir değer"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

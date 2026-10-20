@@ -3684,6 +3684,12 @@ export var fiStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Tämän {ownerText}:n {nameKindText} \"{name}\" on myös sisäänrakennettu kyselymuuttuja {{builtIn}} – kysely vastaa ensin {{name}}, joten tämä ei ole saavutettavissa lausekkeissa.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" \"{name}\" jakaa arvon {otherType} \"{otherName}\", jolla ei ole omaa valueName - \"{otherName}\" käsittelee kentät, jotka \"{name}\" lisää, tuntemattomina, ja clearIncorrectValues() poistaa ne. Aseta myös sen valueName muotoon \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Matrixin pudotusvalikon \"{otherName}\" rivi \"{key}\" on myös {sharedKeyText} \"{name}\" jakaa arvonsa – soluobjekti ja yksittäinen arvo eivät voi molemmat olla saman avaimen alla; ajonaikainen laite säilyttää toisen ja poistaa toisen.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" jakaa tietoavaimen \"{dataKey}\" {otherType} \"{otherName}\" kanssa – se pitää {shapeText} siellä, kun taas \"{otherName}\" säilyttää {otherShapeText}; toisen arvoa ei voi pitää sisällään, joten clearIncorrectValues() poistaa sen.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Dataavain \"{dataName}\" on myös kommenttiavain \"{base}\" (sen data key plus \"{suffix}\") – yksi kirjoitus korvaa hiljaisesti toisen.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var fiStrings = {
         array: "taulukko",
         // [Auto-translated] "an object"
         object: "objekti"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "matriisirivi",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "monitekstin alkio",
+        // [Auto-translated] "a row or item of a question"
+        default: "rivi tai kysymys"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "taulukko objekteja",
+        // [Auto-translated] "an object"
+        object: "objekti",
+        // [Auto-translated] "a plain value"
+        plain: "pelkkä arvo",
+        // [Auto-translated] "a value"
+        default: "arvo"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

@@ -3684,6 +3684,12 @@ export var jaStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "この{ownerText}の{nameKindText} 「{name}」は組み込みの調査変数{{builtIn}}でもあります。調査は先に{{name}}に答えるため、この変数は式で到達できません。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "「{name}」のvalueName「{valueName}」は{otherType}「{otherName}」の値を共有しており、後者は独自のvalueNameを持ちません。「{otherName}」は「{name}」が「{name}」を追加したフィールドを未知と扱い、clearIncorrectValues()がそれらを削除します。値Nameも「{valueName}」に設定してください。",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "matrixドロップダウン「{otherName}」の行「{key}」は{sharedKeyText}と「{name}」でもあり、同じ値を共有しています。セルオブジェクトと単一の値は同時に1つのキーの下に存在することはできません。ランタイムは一方を保持し、もう一方を削除します。",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} 「{name}」は{otherType} \"{otherName}}とデータキー「{dataKey}」を共有し、{shapeText}を保持し、「{otherName}」は{otherShapeText}を保持します。一方がもう一方の値を保持できないため、clearIncorrectValues() は削除します。",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "データキー「{dataName}」は「{base}」のコメントキーでもあり(そのデータキーと「{suffix}」)、一方の書き込みはもう一方を無言で上書きします。",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var jaStrings = {
         array: "配列",
         // [Auto-translated] "an object"
         object: "物体"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "行列",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "マルチテキストの項目",
+        // [Auto-translated] "a row or item of a question"
+        default: "質問の行や項目"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "オブジェクトの配列",
+        // [Auto-translated] "an object"
+        object: "物体",
+        // [Auto-translated] "a plain value"
+        plain: "単純な値",
+        // [Auto-translated] "a value"
+        default: "値"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

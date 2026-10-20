@@ -3685,6 +3685,12 @@ export var polishStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" tego {ownerText} jest również wbudowaną zmienną ankiety {{builtIn}} – ankieta odpowiada jako pierwsza {{name}}, więc ta jest nieosiągalna w wyrażeniach.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" w \"{name}\" dzieli wartość {otherType} \"{otherName}\", które nie ma własnej valueName – \"{otherName}\" traktuje pola dodawane przez \"{name}\" jako nieznane, a clearIncorrectValues() je usuwa. Ustaw również valueName na \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Wiersz \"{key}\" w rozkładanym menu macierzy \"{otherName}\" to także {sharedKeyText}} \"{name}\" dzielący swoją wartość – obiekt komórki i pojedyncza wartość nie mogą istnieć pod jednym kluczem; środowisko uruchomieniowe zachowuje jeden klucz, a usuwa drugi.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" dzieli klucz danych \"{dataKey}\" z {otherType} \"{otherName}\" – zachowuje {shapeText}, podczas gdy \"{otherName}\" zachowuje {otherShapeText}; jeden nie może przechowywać wartości drugiego, więc clearIncorrectValues() go usuwa.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Klucz danych \"{dataName}\" jest także kluczem komentarza \"{base}\" (jego klucz danych plus \"{suffix}\") – jeden zapis bezgłośnie nadpisuje drugi.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4110,6 +4116,24 @@ export var polishStrings = {
         array: "tablica",
         // [Auto-translated] "an object"
         object: "obiekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "Rząd macierzy",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "element wielotekstowy",
+        // [Auto-translated] "a row or item of a question"
+        default: "Wiersz lub punkt pytania"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "tablica obiektów",
+        // [Auto-translated] "an object"
+        object: "obiekt",
+        // [Auto-translated] "a plain value"
+        plain: "wartość czysta",
+        // [Auto-translated] "a value"
+        default: "wartość"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

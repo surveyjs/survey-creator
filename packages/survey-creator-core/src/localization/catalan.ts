@@ -3684,6 +3684,12 @@ export var catalanTranslation = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "El {nameKindText} \"{name}\" d'aquest {ownerText} també és la variable d'enquesta incorporada {{builtIn}} - l'enquesta respon {{name}} primer, així que aquesta és inabastable en expressions.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "El valueName \"{valueName}\" de \"{name}\" comparteix el valor de {otherType} \"{otherName}\", que no té valorName propi - \"{otherName}\" tracta els camps que afegeix \"{name}\" com a desconeguts, i clearIncorrectValues() els elimina. Configura el seu valueName a \"{valueName}\" també.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "La fila \"{key}\" de matrixdropdown \"{otherName}\" també és {sharedKeyText} \"{name}\" compartint el seu valor: un objecte cel·la i un sol valor no poden viure tots dos sota una mateixa clau; el runtime manté un i elimina l'altre.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "El {tipus} \"{nom}\" comparteix la clau de dades \"{dataKey}\" amb {otherType} \"{otherName}\" - manté {shapeText} allà, mentre que \"{otherName}\" manté {otherShapeText}; un no pot retenir el valor de l'altre, així que clearIncorrectValues() l'elimina.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "La clau de dades \"{dataName}\" també és la clau de comentari de \"{base}\" (la seva clau de dades més \"{sufix}\") — una escriptura sobreescriu silenciosament l'altra.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var catalanTranslation = {
         array: "una matriu",
         // [Auto-translated] "an object"
         object: "un objecte"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "una fila de matrius",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "un element de múltiples textos",
+        // [Auto-translated] "a row or item of a question"
+        default: "una fila o element d'una pregunta"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "una matriu d'objectes",
+        // [Auto-translated] "an object"
+        object: "un objecte",
+        // [Auto-translated] "a plain value"
+        plain: "un valor pla",
+        // [Auto-translated] "a value"
+        default: "un valor"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

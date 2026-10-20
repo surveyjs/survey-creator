@@ -3684,6 +3684,12 @@ export var grStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Το {nameKindText} \"{name}\" αυτού του {ownerText} είναι επίσης η ενσωματωμένη μεταβλητή έρευνας {{builtIn}} - η έρευνα απαντά πρώτα στο {{name}}, επομένως αυτή δεν είναι προσβάσιμη σε εκφράσεις.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "Το valueName \"{valueName}\" του \"{name}\" μοιράζεται την τιμή του {otherType} \"{otherName}\", το οποίο δεν έχει δικό του valueName - το \"{otherName}\" αντιμετωπίζει τα πεδία που προσθέτει το \"{name}\" ως άγνωστα και το clearIncorrectValues() τα διαγράφει. Ορίστε επίσης το valueName του σε \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Η σειρά \"{key}\" του matrixdropdown \"{otherName}\" είναι επίσης {sharedKeyText} \"{name}\" που μοιράζεται την τιμή του - ένα αντικείμενο κελιού και μια μεμονωμένη τιμή δεν μπορούν να ζουν και τα δύο κάτω από ένα κλειδί. ο χρόνος εκτέλεσης διατηρεί το ένα και διαγράφει το άλλο.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "Το {type} \"{name}\" μοιράζεται το κλειδί δεδομένων \"{dataKey}\" με το {otherType} \"{otherName}\" - διατηρεί το {shapeText} εκεί, ενώ το \"{otherName}\" διατηρεί το {otherShapeText}. Το ένα δεν μπορεί να κρατήσει την τιμή του άλλου, οπότε το clearIncorrectValues() το διαγράφει.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Το κλειδί δεδομένων \"{dataName}\" είναι επίσης το κλειδί σχολίου του \"{base}\" (το κλειδί δεδομένων του συν το \"{επίθημα}\") - η μία εγγραφή αντικαθιστά σιωπηλά την άλλη.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var grStrings = {
         array: "μια συστοιχία",
         // [Auto-translated] "an object"
         object: "ένα αντικείμενο"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "μια σειρά από μήτρα",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "ένα στοιχείο πολλαπλού κειμένου",
+        // [Auto-translated] "a row or item of a question"
+        default: "μια γραμμή ή ένα στοιχείο μιας ερώτησης"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "μια σειρά αντικειμένων",
+        // [Auto-translated] "an object"
+        object: "ένα αντικείμενο",
+        // [Auto-translated] "a plain value"
+        plain: "μια απλή τιμή",
+        // [Auto-translated] "a value"
+        default: "μια τιμή"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {

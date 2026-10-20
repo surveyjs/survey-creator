@@ -3684,6 +3684,12 @@ export var msStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" dalam {ownerText} ini juga merupakan pembolehubah tinjauan terbina dalam {{builtIn}} - tinjauan menjawab {{name}} terlebih dahulu, jadi yang ini tidak boleh dicapai dalam ungkapan.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" dalam \"{name}\" berkongsi nilai {otherType} \"{otherName}\", yang tidak mempunyai valueName sendiri - \"{otherName}\" menganggap medan \"{name}\" ditambah sebagai tidak diketahui, dan clearIncorrectValues() memadamkannya. Tetapkan valueName-nya kepada \"{valueName}\" juga.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Baris \"{key}\" dalam matrixdropdown \"{otherName}\" juga {sharedKeyText} \"{name}\" berkongsi nilainya - objek sel dan satu nilai tidak boleh berada di bawah satu kunci; runtime mengekalkan satu dan memadam yang lain.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" berkongsi kunci data \"{dataKey}\" dengan {otherType} \"{otherName}\" - ia mengekalkan {shapeText} di situ, manakala \"{otherName}\" mengekalkan {otherShapeText}; satu tidak boleh memegang nilai yang lain, jadi clearIncorrectValues() akan memadamkannya.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Kunci data \"{dataName}\" juga merupakan kunci komen bagi \"{base}\" (kunci datanya ditambah \"{akhiran}\") - satu penulisan menulis secara senyap menimpa yang lain.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
@@ -4109,6 +4115,24 @@ export var msStrings = {
         array: "satu tatasusunan",
         // [Auto-translated] "an object"
         object: "sebuah objek"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "satu baris matriks",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "item berbilang teks",
+        // [Auto-translated] "a row or item of a question"
+        default: "satu baris atau item dalam soalan"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "satu array objek",
+        // [Auto-translated] "an object"
+        object: "sebuah objek",
+        // [Auto-translated] "a plain value"
+        plain: "nilai biasa",
+        // [Auto-translated] "a value"
+        default: "nilai"
       },
       // the shapes the two ends of a copyvalue trigger hold
       copyShape: {
