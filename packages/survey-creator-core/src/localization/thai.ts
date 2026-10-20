@@ -651,6 +651,8 @@ export const thStrings = {
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       // "New entry location"
       newPanelPosition: "ตำแหน่งแผงใหม่",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "แผงต่อหน้าข้อมูล",
       // "Prevent duplicate responses in the following question"
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
@@ -1083,6 +1085,8 @@ export const thStrings = {
     maxFiles: "จํานวนไฟล์สูงสุด",
     // "Row count"
     rowCount: "จำนวนแถว",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "จํานวนแถวต่อหน้าข้อมูล",
     // "Columns layout"
     columnLayout: "เค้าโครงคอลัมน์",
     // "\"Add Row\" button alignment"
@@ -2745,6 +2749,8 @@ export const thStrings = {
       confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนรายการนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนรายการเริ่มต้น\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดด้วยการตั้งค่า \"จํานวนรายการขั้นต่ํา\" และ \"จํานวนรายการสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบไม่สามารถเพิ่มหรือลบรายการด้วยตนเองได้",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "ระบุจํานวนแผงที่แสดงในแต่ละหน้าข้อมูล 0 ปิดการแบ่งหน้าและแสดงแผงทั้งหมด",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงแบบไดนามิก"
     },
@@ -2756,6 +2762,8 @@ export const thStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "ขยายส่วนรายละเอียดโดยอัตโนมัติเมื่อมีการเพิ่มแถวใหม่ลงในเมทริส"
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "ระบุจํานวนแถวเมทริกซ์ที่แสดงในแต่ละหน้าข้อมูล 0 ปิดการแบ่งหน้าและแสดงทุกแถว",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแถวสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแถวไดนามิกถัดไป",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

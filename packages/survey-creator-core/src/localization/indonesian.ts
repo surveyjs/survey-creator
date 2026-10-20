@@ -651,6 +651,8 @@ export var indonesianStrings = {
       templateErrorLocation: "Perataan pesan kesalahan",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi entri baru",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Panel per halaman data",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
@@ -1083,6 +1085,8 @@ export var indonesianStrings = {
     maxFiles: "Jumlah file maksimum",
     // "Row count"
     rowCount: "Jumlah baris",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Baris per halaman data",
     // "Columns layout"
     columnLayout: "Tata letak kolom",
     // "\"Add Row\" button alignment"
@@ -2745,6 +2749,8 @@ export var indonesianStrings = {
       confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Tentukan ekspresi yang menghitung jumlah entri. Ekspresi ini menimpa pengaturan \"Jumlah awal entri\" dan dievaluasi ulang setiap kali nilai yang dirujuk berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah minimum entri\" dan \"Jumlah maksimum entri\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus entri secara manual.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Menentukan jumlah panel yang ditampilkan di setiap halaman data. 0 menonaktifkan paginasi dan menampilkan semua panel.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Menetapkan nomor ke pertanyaan yang bersarang dalam panel dinamis."
     },
@@ -2756,6 +2762,8 @@ export var indonesianStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Secara otomatis memperluas bagian detail saat baris baru ditambahkan ke matriks."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Menentukan jumlah baris matriks yang ditampilkan di setiap halaman data. 0 menonaktifkan paginasi dan menampilkan semua baris.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

@@ -651,6 +651,8 @@ export var turkishStrings = {
       templateErrorLocation: "Hata iletisi hizalaması",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Yeni giriş konumu",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Veri sayfası başına paneller",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
@@ -1083,6 +1085,8 @@ export var turkishStrings = {
     maxFiles: "Maksimum dosya sayısı",
     // "Row count"
     rowCount: "Satır sayısı",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Veri sayfası başına satır sayısı",
     // "Columns layout"
     columnLayout: "Kolon yerleşimi",
     // "\"Add Row\" button alignment"
@@ -2745,6 +2749,8 @@ export var turkishStrings = {
       confirmDelete: "Bir girişi kaldırmadan önce bir onay istemini tetikler.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Giriş sayısını hesaplayan bir ifade belirtin. Bu ifade \"Başlangıç girdi sayısı\" ayarını geçersiz kılar ve referans verdiği değerler değiştiğinde yeniden değerlendirilir. Sonuç, \"Minimum giriş sayısı\" ve \"En fazla giriş sayısı\" ayarlarıyla sınırlıdır. Bu ifade ayarlanmışken, katılımcılar girişleri manuel olarak ekleyip çıkaramaz.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Her veri sayfasında gösterilen panel sayısını belirtir. 0, sayfa seçimini devre dışı bırakır ve tüm panelleri gösterir.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dinamik panelde iç içe geçmiş sorulara numaralar atar."
     },
@@ -2756,6 +2762,8 @@ export var turkishStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Matrise yeni bir satır eklendiğinde ayrıntı bölümünü otomatik olarak genişletir."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Her veri sayfasında gösterilen matris satır sayısını belirtir. 0, sayfa sayısını devre dışı bırakır ve tüm satırları gösterir.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

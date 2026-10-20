@@ -651,6 +651,8 @@ export var bgStrings = {
       templateErrorLocation: "Подравняване на съобщение за грешка",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ново място за влизане",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Панели на страница с данни",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
@@ -1083,6 +1085,8 @@ export var bgStrings = {
     maxFiles: "Максимален брой файлове",
     // "Row count"
     rowCount: "Брой редове",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Редове на страница с данни",
     // "Columns layout"
     columnLayout: "Разположение на колоните",
     // "\"Add Row\" button alignment"
@@ -2745,6 +2749,8 @@ export var bgStrings = {
       confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Задайте израз, който изчислява броя на записите. Този израз замества настройката \"Начален брой записи\" и се преоценява всеки път, когато стойностите, към които се позовава, се променят. Резултатът е ограничен от настройките \"Минимален брой записи\" и \"Максимален брой записи\". Докато този израз е зададен, респондентите не могат да добавят или премахват записи ръчно.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Определя броя на панелите, показани на всяка страница с данни. 0 изключва страницирането и показва всички панели.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присвоява номера на въпроси, вложени в динамичния панел."
     },
@@ -2756,6 +2762,8 @@ export var bgStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Автоматично разширява раздела с подробности, когато се добави нов ред към матрицата."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Определя броя на матричните редове, показани на всяка страница с данни. 0 изключва пагинацията и показва всички редове.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

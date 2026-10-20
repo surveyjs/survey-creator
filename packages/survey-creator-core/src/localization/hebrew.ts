@@ -651,6 +651,8 @@ export var hebrewStrings = {
       templateErrorLocation: "יישור הודעת שגיאה",
       // [Auto-translated] "New entry location"
       newPanelPosition: "מיקום כניסה חדש",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "פאנלים לפי דף נתונים",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
@@ -1083,6 +1085,8 @@ export var hebrewStrings = {
     maxFiles: "מספר מקסימלי של קבצים",
     // "Row count"
     rowCount: "כמות השורות",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "שורות לכל דף נתונים",
     // "Columns layout"
     columnLayout: "סידור העמודות",
     // "\"Add Row\" button alignment"
@@ -2745,6 +2749,8 @@ export var hebrewStrings = {
       confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "יש לציין ביטוי שמחשב את מספר הערכים. ביטוי זה גובר על הגדרת \"מספר הרשומות ההתחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של רשומות\" ו\"מספר מקסימלי של כניסות\". בעוד שהביטוי הזה מוגדר, המשיבים אינם יכולים להוסיף או להסיר רשומות ידנית.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "מגדיר את מספר הפאנלים המוצגים בכל דף נתונים. 0 מבטל את דפדוף הדפים ומציג את כל הלוחות.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בחלונית הדינמית."
     },
@@ -2756,6 +2762,8 @@ export var hebrewStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "מרחיב אוטומטית את מקטע הפירוט בעת הוספת שורה חדשה למטריצה."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "מגדיר את מספר שורות המטריצה המוצגות בכל דף נתונים. 0 מבטל את הפיגינצ'ינג ומציג את כל השורות.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

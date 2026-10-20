@@ -1244,7 +1244,7 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
   const testInput = document.createElement("input");
   testContainer.appendChild(testInput);
   testInput.id = backgroundImageEditor.inputId;
-  backgroundImageEditor["rootElement"] = testContainer;
+  backgroundImageEditor["contentElement"] = testContainer;
   backgroundImageEditor.chooseFile(new MouseEvent("click"));
   expect(log).toBe("->onOpenFileChooser->uploadFile");
   expect(lastContext).toStrictEqual({ element: themePlugin.themeModel, elementType: "theme", propertyName: "backgroundImage" });
@@ -1255,7 +1255,7 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
   const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerBackgroundImageEditor = groupHeader.elements[0].contentPanel.getElementByName("backgroundImage");
   testInput.id = headerBackgroundImageEditor.inputId;
-  headerBackgroundImageEditor["rootElement"] = testContainer;
+  headerBackgroundImageEditor["contentElement"] = testContainer;
   headerBackgroundImageEditor.chooseFile(new MouseEvent("click"));
   expect(log).toBe("->onOpenFileChooser->uploadFile->onOpenFileChooser->uploadFile");
   expect(lastContext).toStrictEqual({ element: themeModel.header, elementType: "header", propertyName: "backgroundImage" });

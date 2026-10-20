@@ -651,6 +651,8 @@ export var grStrings = {
       templateErrorLocation: "Στοίχιση μηνύματος σφάλματος",
       // "New entry location"
       newPanelPosition: "Θέση νέου πλαισίου",
+      // [Auto-translated] "Panels per data page"
+      pageSize: "Πίνακες ανά σελίδα δεδομένων",
       // "Prevent duplicate responses in the following question"
       keyName: "Αποτροπή διπλών απαντήσεων στην εξής ερώτηση"
     },
@@ -1083,6 +1085,8 @@ export var grStrings = {
     maxFiles: "Μέγιστος αριθμός αρχείων",
     // "Row count"
     rowCount: "Αριθμός γραμμών",
+    // [Auto-translated] "Rows per data page"
+    pageSize: "Γραμμές ανά σελίδα δεδομένων",
     // "Columns layout"
     columnLayout: "Διάταξη στηλών",
     // "\"Add Row\" button alignment"
@@ -2745,6 +2749,8 @@ export var grStrings = {
       confirmDelete: "Ενεργοποιεί μια προτροπή επιβεβαίωσης πριν από την κατάργηση ενός πίνακα.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των καταχωρήσεων. Αυτή η έκφραση παρακάμπτει τη ρύθμιση \"Αρχικός αριθμός καταχωρήσεων\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός καταχωρήσεων\" και \"Μέγιστος αριθμός καταχωρήσεων\". Ενώ έχει οριστεί αυτή η έκφραση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν καταχωρήσεις με μη αυτόματο τρόπο.",
+      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
+      pageSize: "Καθορίζει τον αριθμό των πινάκων που εμφανίζονται σε κάθε σελίδα δεδομένων. 0 Απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλους τους πίνακες.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Αντιστοιχίζει αριθμούς σε ερωτήσεις που είναι ένθετες στον δυναμικό πίνακα."
     },
@@ -2756,6 +2762,8 @@ export var grStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Επεκτείνει αυτόματα την ενότητα λεπτομερειών όταν προστίθεται μια νέα γραμμή στον πίνακα."
     },
+    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
+    pageSize: "Καθορίζει τον αριθμό των γραμμών μήτρας που εμφανίζονται σε κάθε σελίδα δεδομένων. 0 Απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλες τις γραμμές.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Δημιουργεί αντίγραφο των απαντήσεων από την τελευταία γραμμή και τις αναθέτει στη επόμενη προστιθέμενη δυναμική γραμμή.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

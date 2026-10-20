@@ -124,7 +124,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     } else {
       event.preventDefault();
       event.stopPropagation();
-      const input = this["rootElement"].querySelectorAll("input[type='file']")[0];
+      const input = this.contentElement.querySelectorAll("input[type='file']")[0] as HTMLInputElement;
       this.onChooseFilesCallback(input, (files) => {
         this.loadFiles(files);
       });
