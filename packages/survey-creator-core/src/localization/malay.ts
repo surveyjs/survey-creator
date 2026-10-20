@@ -3684,8 +3684,6 @@ export var msStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" dalam {ownerText} ini juga merupakan pembolehubah tinjauan terbina dalam {{builtIn}} - tinjauan menjawab {{name}} terlebih dahulu, jadi yang ini tidak boleh dicapai dalam ungkapan.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "ValueName \"{valueName}\" dalam \"{name}\" juga merupakan nama soalan \"{otherName}\" - kedua-duanya menyimpan jawapan mereka di bawah kunci data \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Kunci data \"{dataName}\" juga merupakan kunci komen bagi \"{base}\" (kunci datanya ditambah \"{akhiran}\") - satu penulisan menulis secara senyap menimpa yang lain.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

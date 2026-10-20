@@ -3684,8 +3684,6 @@ export var skStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" tohto {ownerText} je zároveň zabudovaná prieskumná premenná {{builtIn}} – prieskum odpovedá ako prvá {{name}}, takže táto je nedosiahnuteľná vo výrazoch.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" z \"{name}\" je zároveň názvom otázky \"{otherName}\" – obe ukladajú svoju odpoveď pod dátový kľúč \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Dátový kľúč \"{dataName}\" je zároveň komentárovým kľúčom \"{base}\" (jeho dátový kľúč plus \"{suffix}\") – jeden zápis ticho prepíše druhý.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

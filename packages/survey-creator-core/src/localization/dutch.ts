@@ -3684,8 +3684,6 @@ export var nlStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "De {nameKindText} \"{name}\" van deze {ownerText} is ook de ingebouwde surveyvariabele {{builtIn}} - de survey beantwoordt eerst {{name}}, dus deze is niet bereikbaar in expressies.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "De valueName \"{valueName}\" van \"{name}\" is ook de naam van de vraag \"{otherName}\" - beide slaan hun antwoord op onder de datasleutel \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "De datasleutel \"{dataName}\" is ook de commentaarsleutel van \"{base}\" (de datasleutel plus \"{suffix}\") - de ene schrijfwijze overschrijft stilletjes de andere.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

@@ -3684,8 +3684,6 @@ export var grStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "Το {nameKindText} \"{name}\" αυτού του {ownerText} είναι επίσης η ενσωματωμένη μεταβλητή έρευνας {{builtIn}} - η έρευνα απαντά πρώτα στο {{name}}, επομένως αυτή δεν είναι προσβάσιμη σε εκφράσεις.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "Το valueName \"{valueName}\" του \"{name}\" είναι επίσης το όνομα της ερώτησης \"{otherName}\" - και οι δύο αποθηκεύουν την απάντησή τους κάτω από το κλειδί δεδομένων \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Το κλειδί δεδομένων \"{dataName}\" είναι επίσης το κλειδί σχολίου του \"{base}\" (το κλειδί δεδομένων του συν το \"{επίθημα}\") - η μία εγγραφή αντικαθιστά σιωπηλά την άλλη.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

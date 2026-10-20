@@ -234,6 +234,10 @@ export class JsonEditorLinterModel extends Base {
     if (!finding.reason) return finding.message;
     const template = getTemplate("messages." + finding.ruleId + "." + finding.reason);
     if (template === undefined) return finding.message;
+    if (finding.ruleId === "name/shadowing" && finding.reason === "valueShapeConflict") {
+      const data = finding.messageData || {};
+      if (!data.shape || !data.otherShape) return finding.message;
+    }
     const params = this.getMessageParams(finding);
     // a sentence built around the facts needs them: a newer core reporting a fact this version
     // cannot name would otherwise read as "contradicts itself: ." - the English of the core is
@@ -299,6 +303,14 @@ export class JsonEditorLinterModel extends Base {
       params.ownerText = data.nameKind === "calculatedValue"
         ? getTerm("nameOwner", "calculatedValue")
         : (finding.elementType || getTerm("nameOwner", undefined));
+      if (finding.reason === "dropdownRowConflict") {
+        params.sharedKeyText = getTerm("dropdownRowSharer", finding.elementType);
+      }
+      if (finding.reason === "valueShapeConflict") {
+        params.shapeText = getTerm("sharedValueShape", data.shape);
+        params.otherShapeText = getTerm("sharedValueShape", data.otherShape);
+        params.type = finding.elementType;
+      }
     }
     if (finding.ruleId === "choices/duplicate") {
       params.valueText = quoteValue(data.value);

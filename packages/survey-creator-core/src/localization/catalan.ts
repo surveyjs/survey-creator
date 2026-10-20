@@ -3684,8 +3684,6 @@ export var catalanTranslation = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "El {nameKindText} \"{name}\" d'aquest {ownerText} també és la variable d'enquesta incorporada {{builtIn}} - l'enquesta respon {{name}} primer, així que aquesta és inabastable en expressions.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "El valueName \"{valueName}\" de \"{name}\" també és el nom de la pregunta \"{otherName}\" — tots dos emmagatzemen la seva resposta sota la clau de dades \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "La clau de dades \"{dataName}\" també és la clau de comentari de \"{base}\" (la seva clau de dades més \"{sufix}\") — una escriptura sobreescriu silenciosament l'altra.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

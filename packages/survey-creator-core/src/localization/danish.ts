@@ -3685,8 +3685,6 @@ export var danishStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" for denne {ownerText} er også den indbyggede surveyvariabel {{builtIn}} - surveyen svarer først på {{name}}, så denne er utilgængelig i udtryk.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" af \"{name}\" er også navnet på spørgsmålet \"{otherName}\" – begge gemmer deres svar under datanøglen \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Datanøglen \"{dataName}\" er også kommentarnøglen til \"{base}\" (dens datanøgle plus \"{suffix}\") – den ene skrivning overskriver lydløst den anden.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

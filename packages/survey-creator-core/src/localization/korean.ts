@@ -3685,8 +3685,6 @@ export var koreanStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "이 {ownerText}의 {nameKindText} \"{name}\"은 내장된 설문조사 변수 {{builtIn}}이기도 합니다 - 설문조사가 먼저 {{name}}에 답하기 때문에 이 변수는 표현식에서 접근할 수 없습니다.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "\"{name}\"의 valueName \"{valueName}\"은 질문 \"{otherName}\"의 이름이기도 하며, 두 경우 모두 데이터 키 \"{valueName}\" 아래에 답변을 저장합니다.",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "데이터 키 \"{dataName}\"은 또한 \"{base}\"의 주석 키이기도 하며(데이터 키와 \"{suffix}\"\") - 한 쓰기가 다른 것을 조용히 덮어씁니다.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

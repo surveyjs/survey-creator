@@ -3684,8 +3684,6 @@ export var jaStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "この{ownerText}の{nameKindText} 「{name}」は組み込みの調査変数{{builtIn}}でもあります。調査は先に{{name}}に答えるため、この変数は式で到達できません。",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "「{name}」のvalueName「{valueName}」は質問「{otherName}」の名前でもあり、どちらも回答はデータキー「{valueName}」の下に保存されます。",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "データキー「{dataName}」は「{base}」のコメントキーでもあり(そのデータキーと「{suffix}」)、一方の書き込みはもう一方を無言で上書きします。",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

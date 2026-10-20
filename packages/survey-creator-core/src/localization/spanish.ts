@@ -3684,8 +3684,6 @@ export var spanishTranslation = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "El {nameKindText} \"{name}\" de este {ownerText} también es la variable de encuesta incorporada {{builtIn}} - la encuesta responde {{name}} primero, por lo que esta es inaccesible en las expresiones.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "El nombrevalorNombre \"{nombreValor}\" de \"{nombre}\" también es el nombre de la pregunta \"{otroNombre}\"; ambos almacenan su respuesta bajo la clave de datos \"{NombreValor}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "La clave de datos \"{dataName}\" es también la clave de comentario de \"{base}\" (su clave de datos más \"{sufijo}\") — una escritura sobrescribe silenciosamente a la otra.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

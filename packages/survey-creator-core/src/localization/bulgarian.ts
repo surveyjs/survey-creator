@@ -3684,8 +3684,6 @@ export var bgStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" на този {ownerText} също е вградената променлива {{builtIn}} – проучването отговаря първо на {{name}}, така че това е недостъпно в изразите.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "ValueName \"{valueName}\" на \"{name}\" е и името на въпроса \"{otherName}\" – и двата съхраняват отговора си под ключа с данни \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Ключът за данни \"{dataName}\" е също ключ за коментари на \"{base}\" (неговият ключов ключ плюс \"{suffix}\") – единият запис безшумно презаписва другия.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."

@@ -3684,8 +3684,6 @@ export var czStrings = {
       "name/shadowing": {
         // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
         builtInVariable: "{nameKindText} \"{name}\" této {ownerText} je také vestavěnou proměnnou průzkumu {{builtIn}} – průzkum odpovídá jako první, takže tato je v výrazech nedosažitelná.",
-        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is also the name of question \"{otherName}\" - both store their answer under the data key \"{valueName}\"."
-        valueNameShadowsElement: "valueName \"{valueName}\" z \"{name}\" je také názvem otázky \"{otherName}\" – obě ukládají svou odpověď pod datový klíč \"{valueName}\".",
         // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
         commentKeyCollision: "Datový klíč \"{dataName}\" je také komentářovým klíčem \"{base}\" (jeho datový klíč plus \"{suffix}\") – jeden zápis tiše přepisuje druhý.",
         // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
