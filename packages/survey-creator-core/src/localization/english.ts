@@ -342,7 +342,7 @@ export var enStrings = {
       templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
-      pageSize: "Entries per data page",
+      pageSize: "Entries per page",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -580,7 +580,7 @@ export var enStrings = {
     maxSize: "Maximum file size (in bytes)",
     maxFiles: "Maximum number of files",
     rowCount: "Row count",
-    pageSize: "Rows per data page",
+    pageSize: "Rows per page",
     columnLayout: "Columns layout",
     addRowButtonLocation: "\"Add Row\" button alignment",
     transposeData: "Transpose rows to columns",
@@ -1489,7 +1489,7 @@ export var enStrings = {
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
       confirmDelete: "Triggers a confirmation prompt before removing an entry.",
       panelCountExpression: "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually.",
-      pageSize: "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries.",
+      pageSize: "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows.",
       showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
@@ -1497,7 +1497,7 @@ export var enStrings = {
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
       detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix."
     },
-    pageSize: "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows.",
+    pageSize: "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows.",
     copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
     defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
     resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set).",
