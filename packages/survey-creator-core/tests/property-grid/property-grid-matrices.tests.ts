@@ -861,7 +861,7 @@ test("pageSize property editor in the general category for matrices and dynamic 
   const rowsHelp = "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows.";
   checkPageSize(new QuestionMatrixDynamicModel("q1"), "Rows per data page", rowsHelp);
   checkPageSize(new QuestionMatrixDropdownModel("q1"), "Rows per data page", rowsHelp);
-  checkPageSize(new QuestionPanelDynamicModel("q1"), "Panels per data page",
-    "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels.");
+  checkPageSize(new QuestionPanelDynamicModel("q1"), "Entries per data page",
+    "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries.");
   props.forEach(prop => prop.visible = false);
 });
