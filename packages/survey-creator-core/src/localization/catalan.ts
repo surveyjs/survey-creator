@@ -651,8 +651,8 @@ export var catalanTranslation = {
       templateErrorLocation: "Alineación de mensajes de error",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nova ubicación de entrada",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Entrades per pàgina de dades",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Entrades per pàgina",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evitar respuestas duplicadas en la següent pregunta"
     },
@@ -1085,8 +1085,8 @@ export var catalanTranslation = {
     maxFiles: "Número máximo de fitxers",
     // "Row count"
     rowCount: "Número de files",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Files per pàgina de dades",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Files per pàgina",
     // "Columns layout"
     columnLayout: "Diseño de columnes",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var catalanTranslation = {
       confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Especifica una expressió que calculi el nombre d'entrades. Aquesta expressió sobreescriu l'opció \"Nombre inicial d'entrades\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions \"Nombre mínim d'entrades\" i \"Nombre màxim d'entrades\". Mentre aquesta expressió està establerta, els participants no poden afegir o eliminar entrades manualment.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Especifica el nombre d'entrades mostrades a cada pàgina de dades. 0 desactiva la paginació i mostra totes les entrades.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Especifica el nombre d'entrades mostrades a cada pàgina del panell. '0' desactiva la paginació i mostra totes les files.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Assigna números a les preguntes anidades dins del panell dinàmic."
     },
@@ -2762,8 +2762,8 @@ export var catalanTranslation = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Expande automáticamente la sección de detalles cuando se agrega una nova fila a la matriz."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Especifica el nombre de files de matriu mostrades a cada pàgina de dades. 0 desactiva la paginació i mostra totes les files.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Especifica el nombre de files que es mostren a cada pàgina de la matriu. '0' desactiva la paginació i mostra totes les files.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplica las respuestas de la última fila y las asigna a la següent fila dinámica agregada.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

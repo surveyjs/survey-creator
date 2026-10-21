@@ -651,8 +651,8 @@ export var skStrings = {
       templateErrorLocation: "Zarovnanie chybových hlásení",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nové miesto vstupu",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Záznamy na dátovú stránku",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Záznamy na stránku",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
@@ -1085,8 +1085,8 @@ export var skStrings = {
     maxFiles: "Maximálny počet súborov",
     // "Row count"
     rowCount: "Počet riadkov",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Riadky na dátovú stránku",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Riadky na stránku",
     // "Columns layout"
     columnLayout: "Rozloženie stĺpcov",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var skStrings = {
       confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Špecifikujte výraz, ktorý vypočíta počet záznamov. Tento výraz prepíše nastavenie \"Počiatočný počet záznamov\" a je znovu vyhodnocovaný vždy, keď sa zmenia hodnoty, na ktoré odkazuje. Výsledok je obmedzený nastaveniami \"Minimálny počet záznamov\" a \"Maximálny počet záznamov\". Kým je tento výraz nastavený, respondenti nemôžu manuálne pridávať alebo odstraňovať položky.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Určuje počet položiek zobrazených na každej dátovej stránke. 0 deaktivuje stránkovanie a zobrazuje všetky položky.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Určuje počet položiek zobrazených na každej stránke panelu. '0' deaktivuje stránkovanie a zobrazuje všetky riadky.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Priraďuje čísla otázkam vnoreným do dynamického panela."
     },
@@ -2762,8 +2762,8 @@ export var skStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Automaticky rozbalí sekciu podrobností, keď sa do matice pridá nový riadok."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Určuje počet riadkov matice zobrazených na každej dátovej stránke. 0 deaktivuje stránkovanie a zobrazuje všetky riadky.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Určuje počet riadkov zobrazených na každej stránke matice. '0' deaktivuje stránkovanie a zobrazuje všetky riadky.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

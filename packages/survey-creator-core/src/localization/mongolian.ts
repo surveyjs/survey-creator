@@ -651,8 +651,8 @@ export var mnStrings = {
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Шинэ оролцооны байршил",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Өгөгдлийн хуудас бүрт бичлэг",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Хуудас бүрт бичлэг тоо",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
@@ -1085,8 +1085,8 @@ export var mnStrings = {
     maxFiles: "Файлын хамгийн их тоо",
     // "Row count"
     rowCount: "Мөрний тоо",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Өгөгдлийн хуудас бүрт мөрүүд",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Хуудас тутамд мөр",
     // "Columns layout"
     columnLayout: "Баганы зохион байгуулалт",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var mnStrings = {
       confirmDelete: "Тайлбарыг арилгахаас өмнө баталгааны өдөөлт үүсгэнэ.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Бичлэгийн тоог тооцоолдог илэрхийллийг тодорхойл. Энэ илэрхийлэл нь \"Эхний оролтын тоо\" тохиргоог давж, хамаарах утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага оруулалтын тоо\" болон \"Хамгийн их оруулалтын тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийлэл тохируулсан үед хариуцагчид гараар нэмэх эсвэл хасах боломжгүй.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Өгөгдлийн хуудас бүрт харагдах бичлэгийн тоог заана. 0 нь хуудаслалтыг идэвхгүй болгож, бүх бичлэгийг харуулдаг.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Панелийн хуудас бүрт харагдах бичлэгийн тоог заана. '0' нь хуудаслалыг идэвхгүй болгож, бүх мөрүүдийг харуулдаг.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Динамик панел дотор байрласан асуултуудад дугаар онооно."
     },
@@ -2762,8 +2762,8 @@ export var mnStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Матрицад шинэ мөр нэмэх үед нарийвчилсан хэсгийг автоматаар өргөжүүлнэ."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Өгөгдлийн хуудас бүрт харагдаж буй матриц мөрийн тоог заана. 0 нь хуудаслаллыг идэвхгүй болгож, бүх мөрүүдийг харуулдаг.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Матрицын хуудас бүрт харагдах мөрийн тоог заана. '0' нь хуудаслалыг идэвхгүй болгож, бүх мөрүүдийг харуулдаг.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Сүүлийн мөрнөөс хариултуудыг хуулбарлаж, дараагийн нэмэлт динамик мөрөнд хуваарилна.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

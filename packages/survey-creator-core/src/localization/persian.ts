@@ -651,8 +651,8 @@ export var persianStrings = {
       templateErrorLocation: "همترازسازی پیام خطا",
       // [Auto-translated] "New entry location"
       newPanelPosition: "محل ورود جدید",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "ورودی ها در هر صفحه داده",
+      // [Auto-translated] "Entries per page"
+      pageSize: "ورودی ها در هر صفحه",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "از پاسخ های تکراری در سوال زیر جلوگیری کنید"
     },
@@ -1085,8 +1085,8 @@ export var persianStrings = {
     maxFiles: "حداکثر تعداد فایل ها",
     // "Row count"
     rowCount: "تعداد سطر",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "ردیف ها در هر صفحه داده",
+    // [Auto-translated] "Rows per page"
+    pageSize: "ردیف ها در هر صفحه",
     // "Columns layout"
     columnLayout: "قالب ستون ها",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var persianStrings = {
       confirmDelete: "قبل از حذف یک ورودی، یک اعلان تأیید را فعال می کند.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "یک عبارت مشخص کنید که تعداد ورودی ها را محاسبه کند. این عبارت تنظیم «تعداد اولیه ورودی» را لغو می کند و هرگاه مقادیر ارجاع داده شده تغییر کنند، مجددا ارزیابی می شود. نتیجه محدود به تنظیمات «حداقل تعداد ورودی» و «حداکثر تعداد ورودی» است. در حالی که این عبارت تنظیم شده است، پاسخ دهندگان نمی توانند ورودی ها را به صورت دستی اضافه یا حذف کنند.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "تعداد ورودی های نمایش داده شده در هر صفحه داده را مشخص می کند. ۰ صفحه بندی را غیرفعال کرده و همه ورودی ها را نمایش می دهد.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "تعداد ورودی های نمایش داده شده در هر صفحه پنل را مشخص می کند. '0' صفحه بندی را غیرفعال کرده و همه ردیف ها را نمایش می دهد.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "اعداد را به سؤالات تودرتو در پانل پویا اختصاص می دهد."
     },
@@ -2762,8 +2762,8 @@ export var persianStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "هنگامی که یک ردیف جدید به ماتریس اضافه می شود، به طور خودکار بخش جزئیات را گسترش می دهد."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "تعداد ردیف های ماتریس نمایش داده شده در هر صفحه داده را مشخص می کند. 0 صفحه بندی را غیرفعال کرده و همه ردیف ها را نمایش می دهد.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "تعداد ردیف های نمایش داده شده در هر صفحه ماتریس را مشخص می کند. '0' صفحه بندی را غیرفعال کرده و همه ردیف ها را نمایش می دهد.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

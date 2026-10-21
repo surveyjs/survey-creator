@@ -651,8 +651,8 @@ export var danishStrings = {
       templateErrorLocation: "Justering af fejlmeddelelse",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny indgangsplacering",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Poster pr. dataside",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Indlæg pr. side",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
@@ -1086,8 +1086,8 @@ export var danishStrings = {
     maxFiles: "Maksimalt antal filer",
     // "Row count"
     rowCount: "Antal rækker",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Rækker pr. dataside",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Rækker pr. side",
     // "Columns layout"
     columnLayout: "Kolonnelayout",
     // "\"Add Row\" button alignment"
@@ -2750,8 +2750,8 @@ export var danishStrings = {
       confirmDelete: "Udløser en bekræftelsesprompt, før en post fjernes.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Angiv et udtryk, der beregner antallet af poster. Dette udtryk tilsidesætter indstillingen \"Initial number of postries\" og revurderes, hver gang de værdier, det refererer til, ændres. Resultatet er begrænset af indstillingerne \"Minimum antal poster\" og \"Maximum antal poster\". Mens dette udtryk er sat, kan respondenter ikke tilføje eller fjerne poster manuelt.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Angiver antallet af poster, der vises på hver dataside. 0 deaktiverer paginering og viser alle poster.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Angiver antallet af opslag, der vises på hver side i panelet. '0' deaktiverer paginering og viser alle rækker.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i det dynamiske panel."
     },
@@ -2763,8 +2763,8 @@ export var danishStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Udvider automatisk detaljesektionen, når en ny række føjes til matrixen."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Angiver antallet af matrixrækker, der vises på hver dataside. 0 deaktiverer paginering og viser alle rækker.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Angiver antallet af rækker, der vises på hver side i matricen. '0' deaktiverer paginering og viser alle rækker.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

@@ -651,8 +651,8 @@ export var germanTranslation = {
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Neuer Einstiegsort",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Einträge pro Datenseite",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Einträge pro Seite",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
@@ -1085,8 +1085,8 @@ export var germanTranslation = {
     maxFiles: "Maximale Anzahl von Dateien",
     // "Row count"
     rowCount: "Zeilenanzahl",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Zeilen pro Datenseite",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Zeilen pro Seite",
     // "Columns layout"
     columnLayout: "Spaltenlayout",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var germanTranslation = {
       confirmDelete: "Löst eine Bestätigungsaufforderung aus, bevor ein Eintrag entfernt wird.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Spezifizieren Sie einen Ausdruck, der die Anzahl der Einträge berechnet. Dieser Ausdruck überschreibt die Einstellung \"Anfangszahl der Einträge\" und wird neu bewertet, sobald sich die auf ihn bezogenen Werte ändern. Das Ergebnis ist durch die Einstellungen \"Mindestanzahl der Einträge\" und \"Maximale Anzahl von Einträgen\" begrenzt. Während dieser Ausdruck gesetzt ist, können Befragte Einträge nicht manuell hinzufügen oder entfernen.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Spezifiziert die Anzahl der auf jeder Datenseite angezeigten Einträge. 0 deaktiviert die Paginierung und zeigt alle Einträge an.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Spezifiziert die Anzahl der auf jeder Seite des Panels angezeigten Einträge. '0' deaktiviert die Paginierung und zeigt alle Zeilen an.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Weist Fragen, die im dynamischen Bereich verschachtelt sind, Nummern zu."
     },
@@ -2762,8 +2762,8 @@ export var germanTranslation = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Erweitert den Detailabschnitt automatisch, wenn der Matrix eine neue Zeile hinzugefügt wird."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Spezifiziert die Anzahl der auf jeder Datenseite angezeigten Matrixzeilen. 0 deaktiviert die Paginierung und zeigt alle Zeilen an.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Spezifiziert die Anzahl der auf jeder Seite der Matrix angezeigten Zeilen. '0' deaktiviert die Paginierung und zeigt alle Zeilen an.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

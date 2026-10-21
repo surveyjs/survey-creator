@@ -651,8 +651,8 @@ export var koreanStrings = {
       templateErrorLocation: "오류 메시지 맞춤",
       // [Auto-translated] "New entry location"
       newPanelPosition: "새로운 진입 위치",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "데이터 페이지별 항목",
+      // [Auto-translated] "Entries per page"
+      pageSize: "페이지당 항목 수",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "다음 질문에서 중복 응답 방지"
     },
@@ -1086,8 +1086,8 @@ export var koreanStrings = {
     maxFiles: "최대 파일 수",
     // "Row count"
     rowCount: "행 수",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "데이터 페이지당 행 수",
+    // [Auto-translated] "Rows per page"
+    pageSize: "페이지당 행 수",
     // "Columns layout"
     columnLayout: "열 위치",
     // "\"Add Row\" button alignment"
@@ -2750,8 +2750,8 @@ export var koreanStrings = {
       confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "항목 수를 계산하는 표현식을 지정하세요. 이 표현식은 \"초기 항목 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 항목 수\"와 \"최대 항목 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 항목을 추가하거나 제거할 수 없습니다.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "각 데이터 페이지에 표시되는 항목 수를 지정합니다. 0은 페이지네이션을 비활성화하고 모든 항목을 표시합니다.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "패널의 각 페이지에 표시되는 항목 수를 지정합니다. '0'은 페이지네이션을 비활성화하고 모든 행을 표시합니다.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
@@ -2763,8 +2763,8 @@ export var koreanStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "행렬에 새 행이 추가될 때 세부 정보 섹션을 자동으로 확장합니다."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "각 데이터 페이지에 표시되는 행렬 행의 수를 지정합니다. 0은 페이지네이션을 비활성화하고 모든 행을 표시합니다.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "매트릭스의 각 페이지에 표시되는 행 수를 지정합니다. '0'은 페이지네이션을 비활성화하고 모든 행을 표시합니다.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

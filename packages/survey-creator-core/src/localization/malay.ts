@@ -651,8 +651,8 @@ export var msStrings = {
       templateErrorLocation: "Penjajaran mesej ralat",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi kemasukan baharu",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Entri setiap halaman data",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Entri setiap halaman",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Elakkan respons pendua dalam soalan berikut"
     },
@@ -1085,8 +1085,8 @@ export var msStrings = {
     maxFiles: "Bilangan fail maksimum",
     // "Row count"
     rowCount: "Kiraan baris",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Baris setiap halaman data",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Baris setiap halaman",
     // "Columns layout"
     columnLayout: "Tataletak lajur",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var msStrings = {
       confirmDelete: "Mencetuskan gesaan pengesahan sebelum mengalih keluar entri.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Tentukan ungkapan yang mengira bilangan entri. Ungkapan ini menggantikan tetapan \"Bilangan awal entri\" dan dinilai semula setiap kali nilai yang dirujuk berubah. Keputusan dihadkan oleh tetapan \"Bilangan minimum entri\" dan \"Bilangan maksimum entri\". Semasa ungkapan ini ditetapkan, responden tidak boleh menambah atau mengeluarkan entri secara manual.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Menentukan bilangan entri yang dipaparkan pada setiap halaman data. 0 mematikan penpaginahan dan memaparkan semua entri.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Menentukan bilangan entri yang dipaparkan pada setiap halaman panel. '0' menyahaktifkan penpaginahan dan memaparkan semua baris.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Memperuntukkan nombor kepada soalan yang bersarang dalam panel dinamik."
     },
@@ -2762,8 +2762,8 @@ export var msStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Mengembangkan bahagian butiran secara automatik apabila baris baharu ditambah pada matriks."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Menentukan bilangan baris matriks yang dipaparkan pada setiap halaman data. 0 mematikan penpaginahan dan memaparkan semua baris.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Menentukan bilangan baris yang dipaparkan pada setiap halaman matriks. '0' mematikan penpaginahan dan memaparkan semua baris.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Pendua jawapan dari baris terakhir dan menguntukkannya ke baris dinamik tambahan seterusnya.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

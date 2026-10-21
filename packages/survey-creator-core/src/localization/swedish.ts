@@ -651,8 +651,8 @@ export let svStrings = {
       templateErrorLocation: "Justering av felmeddelande",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny plats för inresa",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Poster per datasida",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Poster per sida",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Förhindra dubbla svar i följande fråga"
     },
@@ -1086,8 +1086,8 @@ export let svStrings = {
     maxFiles: "Maximalt antal filer",
     // "Row count"
     rowCount: "Antal rader",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Rader per datasida",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Rader per sida",
     // "Columns layout"
     columnLayout: "Stil på kolumn",
     // "\"Add Row\" button alignment"
@@ -2750,8 +2750,8 @@ export let svStrings = {
       confirmDelete: "Utlöser en bekräftelseprompt innan en post tas bort.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Ange ett uttryck som beräknar antalet poster. Detta uttryck åsidosätter inställningen \"Initialt antal poster\" och omvärderas varje gång värdena det refererar till ändras. Resultatet begränsas av inställningarna \"Minsta antal poster\" och \"Maximalt antal poster\". Medan detta uttryck är inställt kan respondenter inte lägga till eller ta bort poster manuellt.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Specificerar antalet poster som visas på varje datasida. 0 inaktiverar paginering och visar alla poster.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Specificerar antalet poster som visas på varje sida i panelen. '0' inaktiverar paginering och visar alla rader.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tilldelar nummer till frågor som är kapslade i den dynamiska panelen."
     },
@@ -2763,8 +2763,8 @@ export let svStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Expanderar automatiskt detaljavsnittet när en ny rad läggs till i matrisen."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Specificerar antalet matrisrader som visas på varje datasida. 0 inaktiverar paginering och visar alla rader.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Specificerar antalet rader som visas på varje sida i matrisen. '0' inaktiverar paginering och visar alla rader.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

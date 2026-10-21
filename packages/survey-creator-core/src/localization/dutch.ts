@@ -651,8 +651,8 @@ export var nlStrings = {
       templateErrorLocation: "Uitlijning van foutmeldingen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nieuwe ingangslocatie",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Vermeldingen per datapagina",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Vermeldingen per pagina",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Voorkom dubbele antwoorden op de volgende vraag"
     },
@@ -1085,8 +1085,8 @@ export var nlStrings = {
     maxFiles: "Maximaal aantal bestanden",
     // "Row count"
     rowCount: "Aantal rijen",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Rijen per datapagina",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Rijen per pagina",
     // "Columns layout"
     columnLayout: "Kolommen layout",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var nlStrings = {
       confirmDelete: "Activeert een bevestigingsprompt voordat een item wordt verwijderd.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Specificeer een expressie die het aantal vermeldingen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aanstellingen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal vermeldingen\" en \"Maximaal aantal vermeldingen\". Terwijl deze uitdrukking is ingesteld, kunnen respondenten geen vermeldingen handmatig toevoegen of verwijderen.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Specificeert het aantal vermeldingen dat op elke datapagina wordt weergegeven. 0 schakelt paginering uit en toont alle vermeldingen.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Specificeert het aantal vermeldingen dat op elke pagina van het paneel wordt weergegeven. '0' schakelt de paginering uit en toont alle rijen.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Wijst nummers toe aan vragen die zijn genest in het dynamische paneel."
     },
@@ -2762,8 +2762,8 @@ export var nlStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Breidt de detailsectie automatisch uit wanneer een nieuwe rij aan de matrix wordt toegevoegd."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Specificeert het aantal matrixrijen dat op elke datapagina wordt weergegeven. 0 schakelt de paginering uit en toont alle rijen.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Specificeert het aantal rijen dat op elke pagina van de matrix wordt weergegeven. '0' schakelt de paginering uit en toont alle rijen.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

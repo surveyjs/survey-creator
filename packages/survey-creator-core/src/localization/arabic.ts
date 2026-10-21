@@ -651,8 +651,8 @@ export var arStrings = {
       templateErrorLocation: "محاذاة رسالة الخطأ",
       // [Auto-translated] "New entry location"
       newPanelPosition: "موقع دخول جديد",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "الإدخالات حسب صفحة البيانات",
+      // [Auto-translated] "Entries per page"
+      pageSize: "الإدخالات في الصفحة",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "منع الردود المكررة في السؤال التالي"
     },
@@ -1085,8 +1085,8 @@ export var arStrings = {
     maxFiles: "الحد الأقصى لعدد الملفات",
     // "Row count"
     rowCount: "عدد الصفوف",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "الصفوف لكل صفحة بيانات",
+    // [Auto-translated] "Rows per page"
+    pageSize: "الصفوف في الصفحة",
     // "Columns layout"
     columnLayout: "تخطيط الأعمدة",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var arStrings = {
       confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "حدد تعبيرا يحسب عدد الإدخالات. هذا التعبير يتجاوز إعداد \"العدد الأولي للإدخالات\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الإدخالات\" و\"الحد الأقصى لعدد الإدخالات\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الإدخالات يدويا.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "يحدد عدد الإدخالات المعروضة في كل صفحة بيانات. 0 يعطل الترقيم ويعرض جميع الإدخالات.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "يحدد عدد الإدخالات المعروضة في كل صفحة من اللوحة. '0' يعطل تقسيم الصفحات ويعرض جميع الصفوف.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "تعيين أرقام للأسئلة المتداخلة داخل اللوحة الديناميكية."
     },
@@ -2762,8 +2762,8 @@ export var arStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "يوسع قسم التفاصيل تلقائيا عند إضافة صف جديد إلى المصفوفة."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "يحدد عدد صفوف المصفوفة المعروضة في كل صفحة بيانات. 0 يعطل ترقيم الصفحات ويعرض جميع الصفوف.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "يحدد عدد الصفوف المعروضة على كل صفحة من المصفوفة. '0' يعطل تقسيم الصفحات ويعرض جميع الصفوف.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

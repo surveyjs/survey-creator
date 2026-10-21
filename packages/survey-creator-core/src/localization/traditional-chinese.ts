@@ -651,8 +651,8 @@ export var traditionalChineseTranslation = {
       templateErrorLocation: "錯誤消息對齊",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新入場地點",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "每個資料頁的條目",
+      // [Auto-translated] "Entries per page"
+      pageSize: "每頁條目",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下問題中的重複回答"
     },
@@ -1086,8 +1086,8 @@ export var traditionalChineseTranslation = {
     maxFiles: "最大檔案數量",
     // "Row count"
     rowCount: "默認行數",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "每個資料頁的列數",
+    // [Auto-translated] "Rows per page"
+    pageSize: "每頁行數",
     // [Auto-translated] "Columns layout"
     columnLayout: "列佈局",
     // [Auto-translated] "\"Add Row\" button alignment"
@@ -2750,8 +2750,8 @@ export var traditionalChineseTranslation = {
       confirmDelete: "在刪除條目之前觸發確認提示。",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "指定一個計算條目數量的表達式。此表達式覆蓋「初始條目數」設定，且每當參考值改變時會重新評估。結果受限於「最少條目數」與「最大條目數」設定。在此表達式設定期間，受訪者無法手動新增或移除條目。",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "指定每個資料頁顯示的條目數量。0 則停用分頁並顯示所有條目。",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "指定面板每頁顯示的條目數量。「0」則停用分頁並顯示所有列。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "將編號指派給巢狀在動態面板中的問題。"
     },
@@ -2763,8 +2763,8 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "在向矩陣添加新行時自動展開詳細資訊部分。"
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "指定每個資料頁顯示的矩陣列數。0 則停用分頁並顯示所有列。",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "指定矩陣每頁顯示的列數。「0」則停用分頁並顯示所有列。",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "複製最後一行的答案，並將其分配給下一個添加的動態行。",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

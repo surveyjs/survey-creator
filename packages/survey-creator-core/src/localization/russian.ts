@@ -651,8 +651,8 @@ export var ruStrings = {
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Новое место входа",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Записи по странице данных",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Количество записей на страницу",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -1085,8 +1085,8 @@ export var ruStrings = {
     maxFiles: "Максимальное количество файлов",
     // "Row count"
     rowCount: "Количество строк",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Строки на страницу данных",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Строки на странице",
     // "Columns layout"
     columnLayout: "Макет столбцов",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var ruStrings = {
       confirmDelete: "Запускает запрос на подтверждение перед удалением записи.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Укажите выражение, которое вычисляет количество записей. Это выражение переопределяет параметры «Начальное количество записей» и пересчитывается при каждом изменении ссылающихся значений. Результат ограничен настройками «Минимальное количество записей» и «Максимальное количество записей». Пока это выражение установлено, респонденты не могут вручную добавлять или удалять записи.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Указывает количество записей, отображаемых на каждой странице данных. 0 отключает страницирование и отображает все записи.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Указывает количество записей, отображаемых на каждой странице панели. '0' отключает пагинацию и отображает все строки.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присваивает номера вопросам, вложенным в динамическую панель."
     },
@@ -2762,8 +2762,8 @@ export var ruStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Автоматически разворачивает раздел сведений при добавлении в матрицу новой строки."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Задаёт количество матричных строк, отображаемых на каждой странице данных. 0 отключает пагинацию и отображает все строки.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Указывает количество строк, отображаемых на каждой странице матрицы. '0' отключает пагинацию и отображает все строки.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

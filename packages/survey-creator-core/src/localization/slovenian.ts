@@ -651,8 +651,8 @@ export var slStrings = {
       templateErrorLocation: "Poravnava sporočila o napaki",
       // "New entry location"
       newPanelPosition: "Nova lokacija plošče",
-      // [Auto-translated] "Entries per data page"
-      pageSize: "Vnosi na podatkovno stran",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Vnosi na stran",
       // "Prevent duplicate responses in the following question"
       keyName: "Prepreči podvojene odgovore v naslednjem vprašanju"
     },
@@ -1085,8 +1085,8 @@ export var slStrings = {
     maxFiles: "Največje število datotek",
     // "Row count"
     rowCount: "Število vrstic",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Vrstice na podatkovno stran",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Vrstice na stran",
     // "Columns layout"
     columnLayout: "Postavitev stolpcev",
     // "\"Add Row\" button alignment"
@@ -2749,8 +2749,8 @@ export var slStrings = {
       confirmDelete: "Sproži potrditveni poziv pred odstranitvijo plošče.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Določite izraz, ki izračuna število vnosov. Ta izraz preglasi nastavitev \"Začetno število vnosov\" in se ponovno oceni vsakič, ko se spremenijo vrednosti, na katere se sklicuje. Rezultat je omejen z nastavitvami \"Minimalno število vnosov\" in \"Največje število vnosov\". Medtem ko je ta izraz nastavljen, anketiranci ne morejo ročno dodajati ali odstranjevati vnosov.",
-      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
-      pageSize: "Določa število vnosov, prikazanih na vsaki podatkovni strani. 0 onemogoči oštevilčevanje in prikaže vse vnose.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
+      pageSize: "Določa število vnosov, prikazanih na vsaki strani panela. '0' onemogočeva oštevilčenje in prikaže vse vrstice.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dodeli številke vprašanjem, ugnezdenim v dinamični plošči."
     },
@@ -2762,8 +2762,8 @@ export var slStrings = {
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Samodejno razširi razdelek s podrobnostmi, ko je v matriko dodana nova vrstica."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Določa število vrstic matrike, prikazanih na vsaki podatkovni strani. 0 izklopi oštevilčenje in prikaže vse vrstice.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Določa število vrstic, prikazanih na vsaki strani matrike. '0' onemogoči oštevilčenje in prikaže vse vrstice.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Podvoji odgovore iz zadnje vrstice in jih dodeli naslednji dinamično dodani vrstici.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
