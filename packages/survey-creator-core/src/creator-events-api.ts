@@ -1081,73 +1081,44 @@ export interface ExpressionAssistantRequestEvent {
    */
   userPrompt: string;
   /**
-   * The expression to modify, correct, or explain. Contains the current suggestion when refining a result. Empty for `"generate"` requests.
+   * The expression to process: empty for `"generate"`, the property value or suggestion to revise for `"modify"`, the invalid AI result for `"fix"`, or the current property value for `"explain"`.
    */
-  // "fix": the AI's previous answer that failed the check. "explain": the value the property holds,
-  // never a suggestion under review.
   expression: string;
   /**
    * Indicates whether the expression must return a Boolean value.
    */
-  // The same value as context.target.isCondition: true for condition properties (visibleIf, enableIf,
-  // requiredIf, a logic rule or trigger condition), false for value expressions such as defaultValueExpression.
   isCondition: boolean;
   /**
-   * The survey objects and properties to which the expression applies.
+   * The survey object instances and property names to which the expression applies.
    */
-  // The property grid passes exactly one target. On the Logic tab, one rule's condition is shared by
-  // all its actions, so there can be several: a handler that reads only targets[0] ignores the rest.
-  // Not the same as context.target: that one is plain data describing the targets for the AI.
   targets: Array<{ element: Base, propertyName: string }>;
   /**
-   * Survey and target information supplied to the AI model. If you modify this object, call `options.rebuildSystemPrompt()`.
+   * A copy of the survey and target information for this request. After editing it, call `options.rebuildSystemPrompt()` to update `options.systemPrompt`. Changes apply only to this request.
    */
-  // A copy built for this request: changing it affects this request only. Example:
-  //   options.context.variables = options.context.variables.filter(v => v.name !== "internalId");
-  //   options.rebuildSystemPrompt();
   context: IExpressionContext;
   /**
-   * A prepared system prompt to send to the AI model.
+   * A prepared system prompt built from `options.context`. Send it to the AI model or replace it with custom text.
    */
-  // Built from options.context: the expression syntax guide, the context as JSON, the rules and the
-  // answer format {"expression": "...", "explanation": "..."}. The explanation is requested in the
-  // Creator UI language. The same context always gives the same text, so the prompt can be cached.
-  // A handler can also replace it with its own text.
   systemPrompt: string;
-  // Rebuilds options.systemPrompt from the current options.context. Call it after changing the context;
-  // the exported buildExpressionSystemPrompt(context) does the same outside the event (on a server, for example).
+  /**
+   * Rebuilds `options.systemPrompt` from the current `options.context`. Call this function after editing the context.
+   */
   rebuildSystemPrompt: () => void;
   /**
-   * Validation findings for `"fix"` requests, with messages in English. Already included in the last entry of `options.messages`.
+   * Validation findings for `"fix"` requests, with messages in English. Included in the last entry of `options.messages`.
    */
-  // ruleId and reason are survey-core linter ids; severity is "error", "warning" or "info".
-  // "fix" requests are limited by creator.expressionAssistantFixAttempts (1 by default).
   validationFindings?: Array<{ ruleId: string, reason: string, severity: string, message: string }>;
   /**
-   * Prepared conversation messages, including the current request. Send them with `options.systemPrompt`, which is not included in this array.
+   * Prepared conversation messages in chronological order, ending with the current request. Previous `"explain"` requests are excluded. Send these messages with `options.systemPrompt`, which is not included in this array.
    */
-  // The last entry is the user message Creator wrote for this request; read
-  // messages[messages.length - 1].content for a single-turn call. Earlier entries are previous requests
-  // and their answers ("explain" requests are left out). No system message, so it fits both chat APIs:
-  // OpenAI takes [{ role: "system", content: systemPrompt }, ...messages], Anthropic takes systemPrompt
-  // as "system" and these as "messages".
   messages: Array<{ role: "user" | "assistant", content: string }>;
   /**
    * A cancellation signal to pass to your HTTP client or AI SDK.
    */
-  // Aborted when the author clicks Stop or Reject, closes the assistant, or starts another request.
   signal: AbortSignal;
   /**
-   * A callback that completes the request. Only the first call is processed; calls after cancellation are ignored.
-   * @param result The AI response as `text` or as `expression` and `explanation`, or an `error` message to display. Omit to return no result. For `"explain"` requests, only the explanation is used.
+   * A callback that completes the request. Pass an object containing the AI response as `text`, as `expression` and `explanation`, or as `error`. Omit the argument to return no result.
    */
-  // - error is checked first and shown to the author.
-  // - text is the model's raw answer: Creator reads the JSON the system prompt asks for (also inside a
-  //   ```json block), a code block with just the expression, an "Expression: ..." line, or a bare
-  //   one-line expression.
-  // - expression wins over text; an explanation passed here wins over the one read from text.
-  // - No result or an empty expression: no expression; an explanation is still shown.
-  // A returned expression is then checked; the author can accept it only when the check finds no errors.
   callback: (result?: { expression?: string, explanation?: string, text?: string, error?: string }) => void;
 }
 

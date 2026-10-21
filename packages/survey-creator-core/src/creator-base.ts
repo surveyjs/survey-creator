@@ -1152,7 +1152,7 @@ export class SurveyCreatorModel extends Base
    *
    * For information on event handler parameters, refer to descriptions within the interface.
    *
-   * This example uses an application endpoint that returns the AI response as `{ text: "..." }`:
+   * The example below uses an application endpoint that returns the AI response as `{ text: "..." }`:
    *
    * ```ts
    * import { SurveyCreatorModel } from "survey-creator-core";
