@@ -511,6 +511,14 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private focusElementStringsItem(locStr: ILocalizableString): void {
     if (!locStr || !this.elementStringsModel) return;
     this.focusedStringsItem = locStr;
+    // A shown dialog focuses its first focusable element a moment later (the caption row's
+    // buttons), and that would take the focus from a cell rendered and focused before it. Aimed at
+    // the cell's input, the dialog's own focus lands where the request does - and the dialog still
+    // gives the focus back to where it was when it closes.
+    const inputId = this.elementStringsModel.getItemInputId(locStr);
+    if (!!this.elementStringsPopup && !!inputId) {
+      this.elementStringsPopup.model.focusFirstInputSelector = "[id=\"" + inputId + "\"]";
+    }
     this.elementStringsModel.focusItem(locStr);
   }
   private applyFocusedStringsItem(): void {
@@ -1901,6 +1909,11 @@ export class TranslationElementStrings extends TranslationBase {
     }
     this.focusCellAttempts = focusCellMaxAttempts;
     this.focusCellInput();
+  }
+  // The id of the input of the dialog's editor of a string.
+  public getItemInputId(locStr: ILocalizableString): string {
+    const question = this.getItemCellQuestion(locStr);
+    return !!question ? question.inputId : undefined;
   }
   // The cell whose input is still owed the focus, and what is left of the waiting for it.
   private focusCell: Question;

@@ -194,8 +194,9 @@ test.describe(title, () => {
     await progressLink.click();
     const stringsDialog = getStringsDialog(page);
     await expect(stringsDialog).toBeVisible();
-    await expect(stringsDialog.locator("textarea:focus")).toHaveCount(1);
-    await stringsDialog.locator("textarea:focus").fill("Uebersetzt");
+    const editor = stringsDialog.getByRole("textbox", { name: "row Question title, column Target: Deutsch" });
+    await expect(editor).toBeFocused();
+    await editor.fill("Uebersetzt");
     await page.keyboard.press("Tab");
     await expect(progressLink).not.toHaveText(before!);
     await closeStringsDialog(page);
