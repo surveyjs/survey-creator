@@ -750,8 +750,13 @@ svc-question,
           & > * {
             display: none;
           }
-          .sd-question__header {
+          // Left title stays in the row next to the body. The collapsed card shows
+          // the overlay title instead, so the native one must stay hidden.
+          .sd-question__header:not(.sd-question__header--location--left) {
             display: flex;
+          }
+          .sd-question__header--location--left {
+            display: none;
           }
         }
       }
@@ -761,17 +766,19 @@ svc-question,
           display: none;
         }
       }
-
-      .sd-question__header--location--left {
-        display: none;
-      }
     }
   }
 
   .svc-question__content--collapsed {
     flex-grow: 0;
-    padding-bottom: var(--sjs2-spacing-x400, 32px);
     padding-top: var(--sjs2-spacing-x400, 32px);
+    // Content row-gap is removed with the question body after the height animation.
+    // Grow bottom padding by that gap so the card edge stays put. Default gap is spacing-x200,
+    // which keeps the previous spacing-x400 padding.
+    padding-bottom: calc(
+      var(--sjs2-spacing-x200, 16px) +
+        var(--sjs2-layout-component-question-box-gap-vertical, var(--sjs2-spacing-x200, 16px))
+    );
 
     .sd-element__header,
     .sd-element--complex > .sd-element__header {
