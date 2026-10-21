@@ -342,7 +342,7 @@ export var enStrings = {
       templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
-      pageSize: "Panels per data page",
+      pageSize: "Entries per data page",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -1489,7 +1489,7 @@ export var enStrings = {
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
       confirmDelete: "Triggers a confirmation prompt before removing an entry.",
       panelCountExpression: "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually.",
-      pageSize: "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels.",
+      pageSize: "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries.",
       showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
