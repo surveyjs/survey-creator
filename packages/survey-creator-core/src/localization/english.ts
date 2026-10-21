@@ -2245,6 +2245,7 @@ export var enStrings = {
       panelStandalone: "\"{0}\" is only available inside a dynamic panel.",
       itemScope: "\"{0}\" is only available inside choice, row and column conditions.",
       compositeScopePrefix: "\"{0}.\" references are only available inside a composite question.",
+      inArrayFilterScope: "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey.",
       matrixColumn: "\"{0}\" is a column of this matrix - reference it with the row prefix.",
       panelQuestion: "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix.",
     },
