@@ -345,7 +345,15 @@ export interface ICreatorOptions {
    * @hidden
    */
   maxLogicItemsInCondition?: number;
-  // The number of rules per page in the Logic tab. See SurveyCreatorModel.logicRulesPageSize.
+  /**
+   * Specifies the maximum number of rules displayed per page in the Logic tab.
+   *
+   * Default value: 25
+   *
+   * Set this property to 0 to display all rules on one page without a pager.
+   *
+   * Positive values are limited by the Form Library's [`settings.maxPageSize`](https://surveyjs.io/form-library/documentation/api-reference/settings#maxPageSize) setting (100 by default).
+   */
   logicRulesPageSize?: number;
 
   /**
