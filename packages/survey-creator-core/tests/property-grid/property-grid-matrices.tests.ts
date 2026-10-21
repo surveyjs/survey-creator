@@ -858,10 +858,10 @@ test("pageSize property editor in the general category for matrices and dynamic 
     pageSizeQuestion.value = 5;
     expect(obj.pageSize, obj.getType()).toBe(5);
   };
-  const rowsHelp = "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows.";
-  checkPageSize(new QuestionMatrixDynamicModel("q1"), "Rows per data page", rowsHelp);
-  checkPageSize(new QuestionMatrixDropdownModel("q1"), "Rows per data page", rowsHelp);
-  checkPageSize(new QuestionPanelDynamicModel("q1"), "Entries per data page",
-    "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries.");
+  const rowsHelp = "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows.";
+  checkPageSize(new QuestionMatrixDynamicModel("q1"), "Rows per page", rowsHelp);
+  checkPageSize(new QuestionMatrixDropdownModel("q1"), "Rows per page", rowsHelp);
+  checkPageSize(new QuestionPanelDynamicModel("q1"), "Entries per page",
+    "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows.");
   props.forEach(prop => prop.visible = false);
 });
