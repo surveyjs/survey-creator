@@ -651,8 +651,8 @@ export var hebrewStrings = {
       templateErrorLocation: "יישור הודעת שגיאה",
       // [Auto-translated] "New entry location"
       newPanelPosition: "מיקום כניסה חדש",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "פאנלים לפי דף נתונים",
+      // [Auto-translated] "Entries per data page"
+      pageSize: "רשומות לפי עמוד נתונים",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
@@ -2749,8 +2749,8 @@ export var hebrewStrings = {
       confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "יש לציין ביטוי שמחשב את מספר הערכים. ביטוי זה גובר על הגדרת \"מספר הרשומות ההתחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של רשומות\" ו\"מספר מקסימלי של כניסות\". בעוד שהביטוי הזה מוגדר, המשיבים אינם יכולים להוסיף או להסיר רשומות ידנית.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "מגדיר את מספר הפאנלים המוצגים בכל דף נתונים. 0 מבטל את דפדוף הדפים ומציג את כל הלוחות.",
+      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
+      pageSize: "מגדיר את מספר הערכים המוצגים בכל דף נתונים. 0 מבטל את הפיגינציה ומציג את כל הרשומים.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בחלונית הדינמית."
     },

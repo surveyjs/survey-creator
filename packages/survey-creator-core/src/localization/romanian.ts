@@ -651,8 +651,8 @@ export const roStrings = {
       templateErrorLocation: "Alinierea mesajului de eroare",
       // "New entry location"
       newPanelPosition: "Locația noului panou",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "Panouri pe pagină de date",
+      // [Auto-translated] "Entries per data page"
+      pageSize: "Intrări pe pagină de date",
       // "Prevent duplicate responses in the following question"
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
@@ -2749,8 +2749,8 @@ export const roStrings = {
       confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Specifică o expresie care calculează numărul de intrări. Această expresie suprascrie setarea \"Număr inițial de intrări\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de intrări\" și \"Număr maxim de intrări\". Deși această expresie este setată, respondenții nu pot adăuga sau elimina manual elementele.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "Specifică numărul de panouri afișate pe fiecare pagină de date. 0 dezactivează paginarea și afișează toate panourile.",
+      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
+      pageSize: "Specifică numărul de intrări afișate pe fiecare pagină de date. 0 dezactivează paginarea și afișează toate intrările.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Atribuie numere întrebărilor imbricate în panoul dinamic."
     },

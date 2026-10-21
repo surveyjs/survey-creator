@@ -651,8 +651,8 @@ export var nlStrings = {
       templateErrorLocation: "Uitlijning van foutmeldingen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nieuwe ingangslocatie",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "Panelen per datapagina",
+      // [Auto-translated] "Entries per data page"
+      pageSize: "Vermeldingen per datapagina",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Voorkom dubbele antwoorden op de volgende vraag"
     },
@@ -2749,8 +2749,8 @@ export var nlStrings = {
       confirmDelete: "Activeert een bevestigingsprompt voordat een item wordt verwijderd.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Specificeer een expressie die het aantal vermeldingen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aanstellingen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal vermeldingen\" en \"Maximaal aantal vermeldingen\". Terwijl deze uitdrukking is ingesteld, kunnen respondenten geen vermeldingen handmatig toevoegen of verwijderen.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "Specificeert het aantal panelen dat op elke datapagina wordt weergegeven. 0 schakelt paginering uit en toont alle panelen.",
+      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
+      pageSize: "Specificeert het aantal vermeldingen dat op elke datapagina wordt weergegeven. 0 schakelt paginering uit en toont alle vermeldingen.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Wijst nummers toe aan vragen die zijn genest in het dynamische paneel."
     },

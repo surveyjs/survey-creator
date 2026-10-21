@@ -651,8 +651,8 @@ export var jaStrings = {
       templateErrorLocation: "エラー・メッセージのアライメント",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新しいエントリー場所",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "データページごとのパネル数",
+      // [Auto-translated] "Entries per data page"
+      pageSize: "データページごとのエントリー数",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "次の質問の重複回答の防止"
     },
@@ -2749,8 +2749,8 @@ export var jaStrings = {
       confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "エントリ数を計算する式を指定します。この式は「初期エントリ数」設定を上書きし、参照する値が変わるたびに再評価されます。結果は「最小エントリ数」と「最大エントリ数」設定によって制限されます。この式が設定されている間、回答者は手動でエントリを追加または削除することはできません。",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "各データページに表示されるパネル数を指定します。0はページ分けを無効にし、すべてのパネルを表示します。",
+      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
+      pageSize: "各データページに表示されるエントリ数を指定します。0はページ分けを無効にし、すべてのエントリーを表示します。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "動的パネル内にネストされた質問に番号を割り当てます。"
     },

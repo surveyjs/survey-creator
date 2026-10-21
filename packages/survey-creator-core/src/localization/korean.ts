@@ -651,8 +651,8 @@ export var koreanStrings = {
       templateErrorLocation: "오류 메시지 맞춤",
       // [Auto-translated] "New entry location"
       newPanelPosition: "새로운 진입 위치",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "데이터 페이지당 패널 수",
+      // [Auto-translated] "Entries per data page"
+      pageSize: "데이터 페이지별 항목",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "다음 질문에서 중복 응답 방지"
     },
@@ -2750,8 +2750,8 @@ export var koreanStrings = {
       confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "항목 수를 계산하는 표현식을 지정하세요. 이 표현식은 \"초기 항목 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 항목 수\"와 \"최대 항목 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 항목을 추가하거나 제거할 수 없습니다.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "각 데이터 페이지에 표시되는 패널 수를 지정합니다. 0은 페이지네이션을 비활성화하고 모든 패널을 표시합니다.",
+      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
+      pageSize: "각 데이터 페이지에 표시되는 항목 수를 지정합니다. 0은 페이지네이션을 비활성화하고 모든 항목을 표시합니다.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },

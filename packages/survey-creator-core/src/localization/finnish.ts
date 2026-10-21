@@ -651,8 +651,8 @@ export var fiStrings = {
       templateErrorLocation: "Virhesanoman tasaus",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Uusi sisääntulopaikka",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "Paneelit per datasivu",
+      // [Auto-translated] "Entries per data page"
+      pageSize: "Merkinnät per tietosivu",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Estä päällekkäiset vastaukset seuraavassa kysymyksessä"
     },
@@ -2749,8 +2749,8 @@ export var fiStrings = {
       confirmDelete: "Käynnistää vahvistuskehotteen ennen merkinnän poistamista.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Määritä lauseke, joka laskee merkintöjen määrän. Tämä lauseke ohittaa \"Alkuperäinen merkintöjen määrä\" -asetuksen ja sitä arvioidaan uudelleen aina, kun viittaavat arvot muuttuvat. Tulos on rajoitettu \"Vähimmäismäärä merkintöjä\" ja \"Suurin määrä merkintöjä\" -asetuksilla. Kun tämä lauseke on asetettu, vastaajat eivät voi lisätä tai poistaa merkintöjä manuaalisesti.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "Määrittelee, kuinka monta paneelia näytetään kussakin tietosivussa. 0 poistaa sivuttamisen käytöstä ja näyttää kaikki paneelit.",
+      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
+      pageSize: "Määrittää, kuinka monta merkintää näytetään kullakin datasivulla. 0 poistaa sivutuksen käytöstä ja näyttää kaikki merkinnät.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Määrittää numerot kysymyksiin, jotka on sisäkkäin dynaamisessa paneelissa."
     },

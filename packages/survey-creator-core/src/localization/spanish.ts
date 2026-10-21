@@ -651,8 +651,8 @@ export var spanishTranslation = {
       templateErrorLocation: "Alineación de mensajes de error",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nueva ubicación de entrada",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "Página de paneles por datos",
+      // [Auto-translated] "Entries per data page"
+      pageSize: "Entradas por página de datos",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evitar respuestas duplicadas en la siguiente pregunta"
     },
@@ -2749,8 +2749,8 @@ export var spanishTranslation = {
       confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Especifica una expresión que calcule el número de entradas. Esta expresión anula la configuración de \"Número inicial de entradas\" y se reevalúa cada vez que cambian los valores a los que se referencia. El resultado está limitado por las configuraciones de \"Número mínimo de entradas\" y \"Número máximo de entradas\". Mientras esta expresión está establecida, los encuestados no pueden añadir ni eliminar entradas manualmente.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "Especifica el número de paneles que se muestran en cada página de datos. 0 desactiva la paginación y muestra todos los paneles.",
+      // [Auto-translated] "Specifies the number of entries displayed on each data page. 0 disables pagination and displays all entries."
+      pageSize: "Especifica el número de entradas que se muestran en cada página de datos. 0 desactiva la paginación y muestra todas las entradas.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Asigna números a las preguntas anidadas dentro del panel dinámico."
     },
