@@ -1512,6 +1512,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     toolbar.flushUpdates();
     this.surveyTitleToolbar = toolbar;
     Object.defineProperty(survey, "hasTitleActions", { get: (): boolean => true, configurable: true });
+    Object.defineProperty(survey, "hasVisibleTitleActions", { get: (): boolean => true, configurable: true });
     survey.getTitleToolbar = (): AdaptiveActionContainer => toolbar;
   }
   // The translate title action of a target-pane element opens a dialog with a strings matrix
