@@ -3,6 +3,7 @@ import {
   PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme, ISurveyVariablePresets, ISurveyVariablePreset
 } from "survey-core";
 import { ISurveyLintOptions } from "survey-core/linter";
+import type { IExpressionContext } from "./expression-assistant/expression-context";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
@@ -1053,6 +1054,72 @@ export interface MachineTranslateEvent {
    * @param strings An array of translated strings.
    */
   callback: (strings: Array<string>) => void;
+}
+
+// What the expression assistant asks of the application:
+// - "generate": the target property is empty and the author describes a new expression.
+//   Example: userPrompt "show this question to adults only" -> "{age} >= 18".
+// - "modify": the target already has an expression (or the assistant shows a suggestion the author
+//   refines) and the author describes a change.
+//   Example: expression "{age} >= 18", userPrompt "and only for residents" -> "{age} >= 18 and {resident} = true".
+// - "fix": raised by Creator itself, not by the author: the AI answered with an expression the check
+//   rejected, and Creator asks once more with the problems found (creator.expressionAssistantFixAttempts
+//   times at most, 1 by default). Example: the AI answered "{Age} >= 18" and the survey has no "Age".
+// - "explain": the author clicked Explain; the AI describes the target's current expression in words.
+// The union is widened later (a whole logic rule, for example). Answer a kind the handler does not
+// know with options.callback() or an error: a request without an answer stays in progress until
+// the author clicks Stop.
+export type ExpressionAssistantRequestKind = "generate" | "modify" | "fix" | "explain";
+
+export interface ExpressionAssistantRequestEvent {
+  /**
+   * The requested operation. `"fix"` is requested automatically when a generated expression fails validation.
+   */
+  kind: ExpressionAssistantRequestKind;
+  /**
+   * The user's prompt. Empty for `"fix"` and `"explain"` requests.
+   */
+  userPrompt: string;
+  /**
+   * The expression to process: empty for `"generate"`, the property value or suggestion to revise for `"modify"`, the invalid AI result for `"fix"`, or the current property value for `"explain"`.
+   */
+  expression: string;
+  /**
+   * Indicates whether the expression must return a Boolean value.
+   */
+  isCondition: boolean;
+  /**
+   * The survey object instances and property names to which the expression applies.
+   */
+  targets: Array<{ element: Base, propertyName: string }>;
+  /**
+   * A copy of the survey and target information for this request. After editing it, call `options.rebuildSystemPrompt()` to update `options.systemPrompt`. Changes apply only to this request.
+   */
+  context: IExpressionContext;
+  /**
+   * A prepared system prompt built from `options.context`. Send it to the AI model or replace it with custom text.
+   */
+  systemPrompt: string;
+  /**
+   * Rebuilds `options.systemPrompt` from the current `options.context`. Call this function after editing the context.
+   */
+  rebuildSystemPrompt: () => void;
+  /**
+   * Validation findings for `"fix"` requests, with messages in English. Included in the last entry of `options.messages`.
+   */
+  validationFindings?: Array<{ ruleId: string, reason: string, severity: string, message: string }>;
+  /**
+   * Prepared conversation messages in chronological order, ending with the current request. Previous `"explain"` requests are excluded. Send these messages with `options.systemPrompt`, which is not included in this array.
+   */
+  messages: Array<{ role: "user" | "assistant", content: string }>;
+  /**
+   * A cancellation signal to pass to your HTTP client or AI SDK.
+   */
+  signal: AbortSignal;
+  /**
+   * A callback that completes the request. Pass an object containing the AI response as `text`, as `expression` and `explanation`, or as `error`. Omit the argument to return no result.
+   */
+  callback: (result?: { expression?: string, explanation?: string, text?: string, error?: string }) => void;
 }
 
 export interface DragDropAllowEvent {

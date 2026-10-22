@@ -79,6 +79,14 @@ export var settings = {
       question: true
     }
   },
+  // How much of a large survey the AI context of the expression assistant describes. Questions the
+  // current expression reads are never cut; the rest is cut in the order: the target's page, then
+  // calculated values and variables, then the other questions.
+  expressionAssistant: {
+    maxVariables: 150,
+    maxChoicesPerQuestion: 30,
+    maxExamples: 8,
+  },
   /*
    * Determines which types of questions the conversion will be available for.
    */
