@@ -641,6 +641,7 @@ export var enStrings = {
     questionErrorLocation: "Error message alignment",
     autoFocusFirstQuestion: "Focus first question on a new page",
     choiceShortcutsEnabled: "Enable choice shortcuts",
+    keyboardHintsEnabled: "Show keyboard hints",
     questionOrder: "Question order",
     timeLimit: "Time limit to complete the survey",
     timeLimitPerPage: "Time limit to complete one page",
@@ -1606,6 +1607,7 @@ export var enStrings = {
     checkboxbase: {
       choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
     },
+    keyboardHintsEnabled: "Displays keyboard shortcuts under each question, such as arrow keys to select a choice or Enter to proceed to the next page.",
     questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab.",
     maxTextLength: "For text entry questions only.",
     maxCommentLength: "For question comments only.",

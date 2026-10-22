@@ -873,6 +873,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         tab: "question"
       },
       { name: "choiceShortcutsEnabled", tab: "question" },
+      { name: "keyboardHintsEnabled", tab: "question" },
       { name: "maxTextLength", tab: "question" },
       { name: "maxCommentLength", tab: "question" },
       { name: "commentAreaRows", tab: "question" },
