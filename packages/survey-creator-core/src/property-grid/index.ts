@@ -1690,10 +1690,14 @@ export class PropertyGridEditorUndefinedBoolean extends PropertyGridEditor {
   }
 
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const choiceText = (value: string, fallbackKey: string): string => {
+      const specific = editorLocalization.getStringByPath(["pv", prop.name, value]);
+      return specific !== value ? specific : editorLocalization.getString(fallbackKey);
+    };
     const choices: Array<any> = [
-      { value: "auto", text: editorLocalization.getString("pe.inherit") },
-      { value: "false", text: editorLocalization.getString("pe.disabled") },
-      { value: "true", text: editorLocalization.getString("pe.enabled") },
+      { value: "auto", text: choiceText("auto", "pe.inherit") },
+      { value: "false", text: choiceText("false", "pe.disabled") },
+      { value: "true", text: choiceText("true", "pe.enabled") },
     ];
 
     const _renderAsButtonGroup = creatorSettings.propertyGrid.useButtonGroup;
