@@ -4414,3 +4414,56 @@ test("Show the wrapped question properties for a specialized question used as a 
     ComponentCollection.Instance.clear();
   }
 });
+test("readOnlyMode is editable next to readOnly", () => {
+  const choiceValues = (question: Question) => question.visibleChoices.map(item => item.value);
+  const choiceTexts = (question: Question) => question.visibleChoices.map(item => item.text);
+  const open = (obj: Base) => {
+    const propertyGrid = new PropertyGridModelTester(obj);
+    const question = propertyGrid.survey.getQuestionByName("readOnlyMode");
+    const readOnly = propertyGrid.survey.getQuestionByName("readOnly");
+    return { question, readOnly };
+  };
+
+  const text = new QuestionTextModel("q1");
+  const textEditor = open(text);
+  expect(textEditor.question).toBeTruthy();
+  expect(textEditor.question.title).toBe("Read-only mode");
+  expect(textEditor.question.parent.name).toBe("general");
+  const generalNames = textEditor.question.parent.elements.map(el => el.name);
+  expect(generalNames.indexOf("readOnlyMode")).toBe(generalNames.indexOf("readOnly_overridingProperty") + 1);
+  expect(choiceValues(textEditor.question)).toEqual(["default", "readonly", "view"]);
+  expect(choiceTexts(textEditor.question)).toEqual(["Inherit", "Read-only", "View"]);
+  expect(textEditor.question.value).toBe("default");
+  textEditor.question.value = "view";
+  expect(text.readOnlyMode).toBe("view");
+
+  const panel = new PanelModel("p1");
+  const panelEditor = open(panel);
+  expect(panelEditor.question.parent.name).toBe("general");
+  expect(choiceValues(panelEditor.question)).toEqual(["default", "readonly", "view"]);
+  panelEditor.question.value = "readonly";
+  expect(panel.readOnlyMode).toBe("readonly");
+
+  const page = new PageModel("page1");
+  const pageEditor = open(page);
+  expect(choiceValues(pageEditor.question)).toEqual(["default", "readonly", "view"]);
+
+  const survey = new SurveyModel();
+  const surveyEditor = open(survey);
+  expect(surveyEditor.question.title).toBe("Read-only mode");
+  expect(choiceValues(surveyEditor.question)).toEqual(["readonly", "view"]);
+  expect(choiceTexts(surveyEditor.question)).toEqual(["Read-only", "View"]);
+  expect(surveyEditor.question.value).toBe("readonly");
+  surveyEditor.question.value = "view";
+  expect(survey.readOnlyMode).toBe("view");
+
+  const matrix = new QuestionMatrixDynamicModel("m1");
+  const column = matrix.addColumn("col1");
+  const columnEditor = open(column);
+  expect(columnEditor.question.parent.name).toBe("general");
+  const columnNames = columnEditor.question.parent.elements.map(el => el.name);
+  expect(columnNames.indexOf("readOnlyMode")).toBe(columnNames.indexOf("readOnly") + 1);
+  expect(choiceValues(columnEditor.question)).toEqual(["default", "readonly", "view"]);
+  columnEditor.question.value = "view";
+  expect(column.readOnlyMode).toBe("view");
+});
