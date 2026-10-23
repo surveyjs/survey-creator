@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, LocalizableString, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, settings as coreSettings } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, LocalizableString, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, PanelModelBase, settings as coreSettings } from "survey-core";
 import { Translation, TranslationGroup, TranslationItem } from "../../src/components/tabs/translation";
 import {
   countRootBuilds, createTreeOnceCreator, getModelSnapshot, getTranslationModel, getTranslationPlugin, getTreeOnceJSON, getTreeSnapshot
@@ -159,6 +159,28 @@ test("Recreated strings survey uses a distinct element id space so React remount
   // and the cell textareas never render. Distinct id spaces make the keys differ and force a remount.
   expect(keys1.length).toBeGreaterThan(0);
   expect(keys2.some(k => keys1.indexOf(k) !== -1)).toBe(false);
+});
+test("The strings survey has a fixed responsive width mode and does not compute it over its elements", () => {
+  const survey = new SurveyModel({ pages: [
+    { name: "page1", elements: [{ type: "panel", name: "panel1", elements: [{ type: "text", name: "q1", title: "Q1" }] }] },
+    { name: "page2", elements: [{ type: "radiogroup", name: "q2", choices: ["Item 1", "Item 2"] }] }
+  ] });
+  const translation = new Translation(survey);
+  const spy = vi.spyOn(PanelModelBase.prototype, "needResponsiveWidth");
+  let contexts: Array<any>;
+  try {
+    translation.reset();
+    contexts = spy.mock.contexts.slice();
+  } finally {
+    spy.mockRestore();
+  }
+  const stringsSurvey = translation.stringsSurvey;
+  // The header survey (a single matrix) still resolves "auto" - only the grid no longer walks its elements.
+  expect(contexts.filter(panel => panel.survey === stringsSurvey)).toHaveLength(0);
+  expect(stringsSurvey.widthMode).toBe("responsive");
+  // "auto" resolved to the same value: every strings-grid matrix needs a responsive width.
+  expect(stringsSurvey.calculatedWidthMode).toBe("responsive");
+  expect(stringsSurvey.getAllQuestions().length).toBeGreaterThan(0);
 });
 test("stringsSurvey - one question in survey", () => {
   const survey = new SurveyModel({

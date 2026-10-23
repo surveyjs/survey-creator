@@ -909,7 +909,10 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected onSurveyStringsCreated(survey: SurveyModel): void { }
   protected onSurveyStringsHeaderCreated(survey: SurveyModel): void { }
   private createStringsSurvey(): SurveyModel {
-    var json = { autoGrowComment: true, allowResizeComment: false };
+    // widthMode is fixed to what "auto" resolves to here (every strings-grid matrix needs a responsive
+    // width): with "auto", endLoadingFromJson computes it by reading every element of the grid under a
+    // dependency collector, which takes most of the build time on a large survey.
+    var json = { autoGrowComment: true, allowResizeComment: false, widthMode: "responsive" };
     setSurveyJSONForPropertyGrid(json, false);
     const survey: SurveyModel = this.options.createSurvey(json, "translation_strings", this, (survey: SurveyModel): void => {
       this.makeSurveyIdSpaceUnique(survey);
