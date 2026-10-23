@@ -777,9 +777,22 @@ export class TranslationBase extends Base implements ITranslationLocales {
   }) showAllStrings: boolean;
   @property({
     onSet: (_, target: TranslationBase) => {
-      target.reset();
+      if (!target.isPageFilterResetSuspended) target.reset();
     }
   }) filteredPage: PageModel;
+  private isPageFilterResetSuspended = false;
+  // Replaces the survey and drops the page filter with a single rebuild: on its own, the filter's
+  // onSet would rebuild the tree over the old survey (or the old filter) just before the survey
+  // setter rebuilds it again.
+  public setSurveyAndClearPageFilter(survey: SurveyModel): void {
+    this.isPageFilterResetSuspended = true;
+    try {
+      this.filteredPage = null;
+    } finally {
+      this.isPageFilterResetSuspended = false;
+    }
+    this.survey = survey;
+  }
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
   private stringsSurveyInstanceId = 0;
@@ -1245,9 +1258,10 @@ export class TranslationBase extends Base implements ITranslationLocales {
     const rootInfo = this.getRootTranslationObj();
     const rootObj = rootInfo.obj;
     const rootName = rootInfo.name;
+    // The constructor builds the tree. setAsRoot needs no rebuild after it: the root flag only
+    // changes the names (fullName, getNameForChild), and they are computed when read.
     this.root = new TranslationGroup(rootName, rootObj, this);
     this.root.setAsRoot();
-    this.root.reset();
     this.resetLocales();
     this.isEmpty = !this.root.hasItems;
     this.updateLocalesOnReset(prevVisibleLocales);
@@ -1336,9 +1350,9 @@ export class TranslationBase extends Base implements ITranslationLocales {
   // whole survey unless rootInfo narrows it to an element.
   protected createUsedStringsRoot(rootInfo?: { obj: Base, name: string }): TranslationGroup {
     const info = rootInfo || { obj: this.survey, name: "survey" };
+    // Built by the constructor; see reset for why setAsRoot needs no rebuild.
     const root = new TranslationGroup(info.name, info.obj, new TranslationUsedStringsOwner(this));
     root.setAsRoot();
-    root.reset();
     return root;
   }
   public exportToCSV(): string {
