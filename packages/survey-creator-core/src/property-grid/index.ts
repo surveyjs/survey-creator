@@ -907,8 +907,28 @@ export class PropertyGridModel {
       this.setObj(value);
     }
   }
+  // A column property may be shown by a value of its matrix (column.allowSort follows the matrix's
+  // allowSort), which dependsOn cannot reach: a change of the matrix re-runs the grid's conditions.
+  private columnOwner: Base;
+  private onColumnOwnerPropertyChanged = (sender: Base, options: any): void => {
+    if (!Serializer.hasOriginalProperty(sender, options.name)) return;
+    if (!!this.surveyValue && !this.surveyValue.isDisposed) {
+      this.surveyValue.runExpressions();
+    }
+  };
+  private connectColumnOwner(): void {
+    if (!!this.columnOwner) {
+      this.columnOwner.onPropertyChanged.remove(this.onColumnOwnerPropertyChanged);
+      this.columnOwner = undefined;
+    }
+    const owner = !!this.obj && this.obj.isDescendantOf("matrixdropdowncolumn") ? (<any>this.obj).colOwner : undefined;
+    if (!owner || !owner.onPropertyChanged) return;
+    this.columnOwner = owner;
+    owner.onPropertyChanged.add(this.onColumnOwnerPropertyChanged);
+  }
   private setObj(value: Base) {
     this.objValue = value;
+    this.connectColumnOwner();
     if (this.onSetNewObjectCallback) {
       this.onSetNewObjectCallback();
     }
