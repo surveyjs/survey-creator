@@ -1,5 +1,9 @@
 import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, LocalizableString, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, settings as coreSettings } from "survey-core";
-import { Translation, TranslationItem } from "../../src/components/tabs/translation";
+import { Translation, TranslationGroup, TranslationItem } from "../../src/components/tabs/translation";
+import {
+  countRootBuilds, createTreeOnceCreator, getModelSnapshot, getTranslationModel, getTranslationPlugin, getTreeOnceJSON, getTreeSnapshot
+} from "./translation-tree-once-helper";
+import { treeOnceBaseline } from "./translation-tree-once-baseline";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { EmptySurveyCreatorOptions, settings } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
@@ -3118,4 +3122,79 @@ test("Page filter dropdown shows page titles, it does not edit them: no inplace 
 
   tabTranslationPlugin.model.filteredPage = creator.survey.pages[1];
   expect(filterPageAction.locTitle?.renderAs).toEqual(defaultRenderer);
+});
+
+describe("Translation tree is built once: default mode", () => {
+  // The state recorded on the commit before the change, when the tree was built twice per reset.
+  const EXPECTED = treeOnceBaseline.defaultMode;
+  const getUpdateSnapshot = (creator: CreatorTester): any => {
+    const action = creator.toolbar.getActionById("svc-translation-filter-page");
+    const selected = (<ListModel>action.data).selectedItem;
+    return {
+      model: getModelSnapshot(getTranslationModel(creator)),
+      action: { title: action.title, selected: !!selected ? selected.id : null }
+    };
+  };
+  const filters: Array<{ name: string, apply: (creator: CreatorTester) => void }> = [
+    { name: "undefined", apply: () => { } },
+    { name: "null", apply: (creator) => { getTranslationModel(creator).filteredPage = null; } },
+    { name: "first page", apply: (creator) => { getTranslationModel(creator).filteredPage = creator.survey.pages[0]; } },
+    { name: "later page", apply: (creator) => { getTranslationModel(creator).filteredPage = creator.survey.pages[1]; } }
+  ];
+
+  test("the tree and the strings survey: all pages, the first page, a later page", () => {
+    const creator = createTreeOnceCreator();
+    const model = getTranslationModel(creator);
+    expect(getModelSnapshot(model)).toEqual(EXPECTED.all);
+    model.filteredPage = creator.survey.pages[0];
+    expect(getModelSnapshot(model)).toEqual(EXPECTED.firstPage);
+    model.filteredPage = creator.survey.pages[1];
+    expect(getModelSnapshot(model)).toEqual(EXPECTED.laterPage);
+  });
+  test("the root is built once per activation and per update", () => {
+    const creator = createTreeOnceCreator({}, false);
+    const plugin = getTranslationPlugin(creator);
+    const counts: any = {};
+    counts.activation = countRootBuilds(creator, () => { creator.activeTab = "translation"; });
+    counts.firstUpdate = countRootBuilds(creator, () => { plugin.update(); });
+    counts.laterUpdate = countRootBuilds(creator, () => { plugin.update(); });
+    // A new JSON updates the active tab's plugin twice (SurveyCreatorModel.updatePlugin ignores
+    // the plugin name), so it is two update() calls.
+    counts.json = countRootBuilds(creator, () => { creator.JSON = getTreeOnceJSON(); });
+    const page = creator.survey.pages[1];
+    getTranslationModel(creator).filteredPage = page;
+    counts.jsonWithLaterPage = countRootBuilds(creator, () => { creator.JSON = getTreeOnceJSON(); }, [page]);
+    // Before the change: 2, 4, 2, 4 and 4 (plus 2 builds rooted on the old survey's page).
+    const once = { main: 1, used: 0, copy: 0, page: 0, other: 0 };
+    const twice = { main: 2, used: 0, copy: 0, page: 0, other: 0 };
+    expect(counts).toEqual({ activation: once, firstUpdate: once, laterUpdate: once, json: twice, jsonWithLaterPage: twice });
+  });
+  test("update() with a new survey: the same state whatever the page filter was", () => {
+    filters.forEach(filter => {
+      const creator = createTreeOnceCreator();
+      filter.apply(creator);
+      const oldPages = creator.survey.pages.slice();
+      creator.JSON = getTreeOnceJSON();
+      expect(creator.survey.pages[0]).not.toBe(oldPages[0]);
+      expect(getUpdateSnapshot(creator), filter.name).toEqual(EXPECTED.update);
+    });
+  });
+  test("a single update() clears the page filter: the same state whatever the filter was", () => {
+    filters.forEach(filter => {
+      const creator = createTreeOnceCreator();
+      filter.apply(creator);
+      getTranslationPlugin(creator).update();
+      expect(getUpdateSnapshot(creator), filter.name).toEqual(EXPECTED.update);
+    });
+  });
+  test("a root built by hand (new + setAsRoot + reset) is the same as the model's", () => {
+    const creator = createTreeOnceCreator();
+    const model = getTranslationModel(creator);
+    const root = new TranslationGroup("survey", creator.survey, model);
+    root.setAsRoot();
+    root.reset();
+    expect(root.isRoot).toBeTruthy();
+    expect(getTreeSnapshot(root)).toEqual(getTreeSnapshot(model.root));
+    expect(getTreeSnapshot(root)).toEqual(EXPECTED.all.tree);
+  });
 });
