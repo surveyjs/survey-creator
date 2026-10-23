@@ -18,6 +18,8 @@ test.describe(title, () => {
     const objectSelectorPopup = page.locator(".sv-popup.svc-object-selector");
     await objectSelectorButton(page).click();
     await expect(objectSelectorPopup).toBeVisible();
+    // Escape is handled by the popup, so wait until it moves the focus inside.
+    await expect(objectSelectorPopup.locator(".sd-menu-item").first()).toBeFocused();
     await page.keyboard.press("Escape");
     await expect(objectSelectorPopup).not.toBeVisible();
     await expect(page.locator(".sv-popup").first()).toHaveCount(1);
