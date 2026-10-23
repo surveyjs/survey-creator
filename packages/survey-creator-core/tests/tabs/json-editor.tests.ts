@@ -2,7 +2,7 @@ import { getScrollTopForCaret, TabJsonEditorTextareaPlugin, TextareaJsonEditorMo
 import { AceJsonEditorModel, TabJsonEditorAcePlugin } from "../../src/components/tabs/json-editor-ace";
 import { CreatorTester } from "../creator-tester";
 import { settings } from "../../src/creator-settings";
-import { SurveyTextWorker } from "../../src/textWorker";
+import { SurveyTextWorker, SurveyTextWorkerLinterFinding } from "../../src/textWorker";
 import { vi } from "vitest";
 
 test("JsonEditor & showErrors/errorList", () => {
@@ -1187,4 +1187,90 @@ test("A fix clicked after a denied tab switch still applies to the current text"
   expect(fixed.title).toBe("Survey");
   expect(fixed.pages[0].elements.map((e: any) => e.name)).toEqual(["q1", "question1"]);
   expect(model.hasErrors).toBeFalsy();
+});
+
+describe("JSON textarea: a keystroke lints after the pause, not at once", () => {
+  // what the textarea components do on input
+  function typeIntoTextarea(model: TextareaJsonEditorModel, value: string): void {
+    model.onTextInput(value);
+  }
+  const invalidText = "{ \"elements\": [ ";
+  function hasParseError(model: TextareaJsonEditorModel): boolean {
+    return model.errors.some(error => !(error instanceof SurveyTextWorkerLinterFinding));
+  }
+  function textWithTitle(title: string): string {
+    return JSON.stringify({ title: title, elements: [{ type: "text", name: "q1" }] }, null, 2);
+  }
+
+  test("an edit that breaks the JSON shows the error, an edit that repairs it clears it", () => {
+    vi.useFakeTimers();
+    try {
+      const creator = createJsonTabCreator();
+      creator.activeTab = "json";
+      const model = getJsonTabModel(creator);
+      typeIntoTextarea(model, invalidText);
+      vi.advanceTimersByTime(1000);
+      expect(model.hasErrors).toBe(true);
+      expect(hasParseError(model)).toBe(true);
+      typeIntoTextarea(model, jsonTabRenamedText);
+      vi.advanceTimersByTime(1000);
+      expect(model.hasErrors).toBe(false);
+      expect(model.errors).toHaveLength(0);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+  test("an edit is linted once, after the pause", () => {
+    vi.useFakeTimers();
+    let counter = 0;
+    SurveyTextWorker.onProcessJson = (): void => { counter++; };
+    try {
+      const creator = createJsonTabCreator();
+      creator.activeTab = "json";
+      const model = getJsonTabModel(creator);
+      counter = 0;
+      typeIntoTextarea(model, textWithTitle("a"));
+      expect(counter).toBe(0);
+      vi.advanceTimersByTime(999);
+      expect(counter).toBe(0);
+      vi.advanceTimersByTime(1);
+      expect(counter).toBe(1);
+
+      counter = 0;
+      ["b", "bc", "bcd", "bcde", "bcdef"].forEach(title => {
+        typeIntoTextarea(model, textWithTitle(title));
+        vi.advanceTimersByTime(100);
+      });
+      expect(counter).toBe(0);
+      vi.advanceTimersByTime(1000);
+      expect(counter).toBe(1);
+      expect(model.hasErrors).toBe(false);
+    } finally {
+      SurveyTextWorker.onProcessJson = undefined;
+      vi.useRealTimers();
+    }
+  });
+  test("leaving the tab right after an edit applies a valid text and refuses an invalid one", () => {
+    vi.useFakeTimers();
+    try {
+      const creator = createJsonTabCreator();
+      creator.activeTab = "json";
+      typeIntoTextarea(getJsonTabModel(creator), jsonTabRenamedText);
+      creator.activeTab = "designer";
+      expect(creator.activeTab).toBe("designer");
+      expect(getQuestionNames(creator)).toBe("q_renamed");
+
+      creator.activeTab = "json";
+      const model = getJsonTabModel(creator);
+      typeIntoTextarea(model, invalidText);
+      creator.activeTab = "designer";
+      expect(creator.activeTab).toBe("json");
+      expect(getQuestionNames(creator)).toBe("q_renamed");
+      // the refused switch shows its errors without waiting for the pause
+      expect(model.hasErrors).toBe(true);
+      expect(hasParseError(model)).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
