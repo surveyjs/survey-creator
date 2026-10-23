@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { url, test, expect, getToolboxItemByText, setJSON } from "../helper";
+import { url, test, expect, getToolboxItemByText, setJSON, objectSelectorButton } from "../helper";
 
 const title = "Creator";
 
@@ -14,6 +14,14 @@ test.describe(title, () => {
   });
 
   test("Creator dispose", async ({ page }) => {
+    // Popups render their tree when they open first, so open and close one before dispose.
+    const objectSelectorPopup = page.locator(".sv-popup.svc-object-selector");
+    await objectSelectorButton(page).click();
+    await expect(objectSelectorPopup).toBeVisible();
+    // Escape is handled by the popup, so wait until it moves the focus inside.
+    await expect(objectSelectorPopup.locator(".sd-menu-item").first()).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(objectSelectorPopup).not.toBeVisible();
     await expect(page.locator(".sv-popup").first()).toHaveCount(1);
     await page.evaluate(() => {
       window["creator"].dispose();
