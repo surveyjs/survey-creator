@@ -315,6 +315,30 @@ describe("Variable presets in Preview (issue #7982)", () => {
     const survey = getPreviewModel(creator).survey;
     expect(survey.getVariableNames()).toStrictEqual(["customertier", "yearsinbusiness"]);
   });
+  test("An edit of a preset that is not active keeps the answers and the survey", () => {
+    const creator = new CreatorTester({ variablePresets: createContainer() });
+    creator.JSON = surveyJSON;
+    getManager(creator).active = "Gold customer";
+    const model = getPreviewModel(creator);
+    const survey = model.survey;
+    survey.setValue("q1", "kept");
+    const edited = createContainer().presets;
+    edited[1].variables.yearsInBusiness = 5;
+    getManager(creator).setPresets(edited, "Gold customer");
+    expect(model.survey).toBe(survey);
+    expect(model.survey.getValue("q1")).toBe("kept");
+  });
+  test("A preset chosen while Preview is hidden applies on the next activation, the schema unchanged", () => {
+    const creator = new CreatorTester({ variablePresets: createContainer() });
+    creator.JSON = surveyJSON;
+    getManager(creator).active = "Gold customer";
+    expect(getPreviewModel(creator).survey.getVariable("customertier")).toBe("gold");
+    creator.activeTab = "designer";
+    getManager(creator).active = "Newcomer";
+    const survey = getPreviewModel(creator).survey;
+    expect(survey.getVariable("customertier")).toBe("basic");
+    expect(survey.getQuestionByName("gold").isVisible).toBeFalsy();
+  });
 });
 
 describe("The variable preset actions in the page toolbar (issue #7982)", () => {
