@@ -53,6 +53,9 @@ export class QuestionLinkValueModel extends Question {
   public get tooltip() {
     return this.showTooltip ? this.linkValueText : undefined;
   }
+  public get supportClearTitleAction(): boolean {
+    return false;
+  }
   public getType(): string {
     return "linkvalue";
   }
