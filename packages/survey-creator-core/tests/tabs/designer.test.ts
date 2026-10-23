@@ -9,6 +9,7 @@ import { PageAdorner } from "../../src/components/page";
 import { QuestionAdornerViewModel } from "../../src/components/question";
 import { TabDesignerViewModel } from "../../src/components/tabs/designer";
 import { TabControlModel } from "../../src/components/side-bar/tab-control-model";
+import { SurveyElementAdornerBase } from "../../src/components/survey-element-adorner-base";
 import { send } from "process";
 export * from "../../src/property-grid/matrices";
 
@@ -878,6 +879,226 @@ test("expand/collapse methods", () => {
 
   creator.expandElement(question);
   expect(questionAdorner.collapsed).toBeFalsy();
+});
+describe("Collapse/expand all without layout reads", () => {
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { type: "panel", name: "panel1", elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] },
+          { type: "text", name: "q3" }
+        ]
+      },
+      { name: "page2", elements: [{ type: "text", name: "q4" }] },
+      { name: "page3", elements: [{ type: "text", name: "q5" }] }
+    ]
+  };
+  const createAdorners = (creator: CreatorTester): Array<SurveyElementAdornerBase> => {
+    const survey = creator.survey;
+    const res: Array<SurveyElementAdornerBase> = survey.pages.map(p => new PageAdorner(creator, p));
+    survey.getAllPanels().forEach(p => res.push(new QuestionAdornerViewModel(creator, p as any, undefined)));
+    survey.getAllQuestions().forEach(q => res.push(new QuestionAdornerViewModel(creator, q, undefined)));
+    return res;
+  };
+  // Gives the adorner an animated element and counts onBeforeRunAnimation calls of its live animation.
+  const instrumentAnimation = (adorner: SurveyElementAdornerBase): { before: number } => {
+    const counter = { before: 0 };
+    const el = document.createElement("div");
+    adorner["getAnimatedElement"] = () => el;
+    adorner["getInnerAnimatedElements"] = () => [];
+    adorner.enableOnElementRerenderedEvent();
+    const options = adorner["animationCollapsed"]["animationOptions"];
+    ["getEnterOptions", "getLeaveOptions"].forEach(name => {
+      const getOptions = options[name];
+      options[name] = () => {
+        const res = getOptions();
+        const onBefore = res.onBeforeRunAnimation;
+        res.onBeforeRunAnimation = (elem: HTMLElement) => {
+          counter.before++;
+          onBefore(elem);
+        };
+        return res;
+      };
+    });
+    return counter;
+  };
+  const flush = () => new Promise(resolve => setTimeout(resolve, 0));
+  const sum = (counters: Array<{ before: number }>) => counters.reduce((res, c) => res + c.before, 0);
+  const runToolbarAction = (creator: CreatorTester, id: string) => {
+    const action = (creator.getPlugin("designer") as TabDesignerPlugin).model.surfaceToolbar.getActionById(id);
+    action.action(action);
+  };
+
+  test("collapseAll / expandAll end state", () => {
+    surveySettings.animationEnabled = false;
+    try {
+      const creator = new CreatorTester();
+      creator.expandCollapseButtonVisibility = "always";
+      creator.onElementGetExpandCollapseState.add((_, o) => {
+        if (o.reason === "loading" && o.element.name === "q3") o.collapsed = true;
+      });
+      creator.JSON = json;
+      const adorners = createAdorners(creator);
+      const q3Adorner = SurveyElementAdornerBase.GetAdorner<SurveyElementAdornerBase>(creator.survey.getQuestionByName("q3"));
+      expect(adorners).toHaveLength(9);
+      expect(q3Adorner.collapsed).toBeTruthy();
+      expect(q3Adorner.needToRenderContent).toBeFalsy();
+
+      creator.collapseAll();
+      adorners.forEach(a => {
+        expect(a.collapsed, a.element.name).toBeTruthy();
+        expect(a.renderedCollapsed, a.element.name).toBeTruthy();
+        expect(creator.designerStateManager.getElementCollapsed(a.element), a.element.name).toBeTruthy();
+      });
+
+      creator.expandAll();
+      adorners.forEach(a => {
+        expect(a.collapsed, a.element.name).toBeFalsy();
+        expect(a.renderedCollapsed, a.element.name).toBeFalsy();
+        expect(creator.designerStateManager.getElementCollapsed(a.element), a.element.name).toBeFalsy();
+        expect(a.needToRenderContent, a.element.name).toBeTruthy();
+      });
+    } finally {
+      surveySettings.animationEnabled = true;
+    }
+  });
+
+  test("bulk collapse/expand does not run the animation", async () => {
+    surveySettings.animationEnabled = true;
+    try {
+      const checkBulk = async (collapse: (creator: CreatorTester) => void, expand: (creator: CreatorTester) => void) => {
+        const creator = new CreatorTester();
+        creator.expandCollapseButtonVisibility = "always";
+        creator.JSON = json;
+        const adorners = createAdorners(creator);
+        const counters = adorners.map(a => instrumentAnimation(a));
+
+        collapse(creator);
+        adorners.forEach(a => {
+          expect(a.renderedCollapsed, a.element.name).toBeTruthy();
+          expect(a.expandCollapseAnimationRunning, a.element.name).toBeFalsy();
+        });
+        await flush();
+        expect(sum(counters)).toBe(0);
+
+        expand(creator);
+        await flush();
+        adorners.forEach(a => a.afterRerender());
+        await flush();
+        adorners.forEach(a => {
+          expect(a.renderedCollapsed, a.element.name).toBeFalsy();
+          expect(a.expandCollapseAnimationRunning, a.element.name).toBeFalsy();
+        });
+        expect(sum(counters)).toBe(0);
+      };
+      await checkBulk(creator => creator.collapseAll(), creator => creator.expandAll());
+      await checkBulk(creator => runToolbarAction(creator, "collapseAll"), creator => runToolbarAction(creator, "expandAll"));
+    } finally {
+      surveySettings.animationEnabled = true;
+    }
+  });
+
+  const createSingleAdorner = (creatorAnimationEnabled: boolean) => {
+    const creator = new CreatorTester();
+    creator["animationEnabled"] = creatorAnimationEnabled;
+    creator.expandCollapseButtonVisibility = "always";
+    creator.JSON = json;
+    const adorner = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q3"), undefined);
+    return { adorner, counter: instrumentAnimation(adorner) };
+  };
+
+  test("creator animationEnabled = false stops a single collapse's JS animation", async () => {
+    surveySettings.animationEnabled = true;
+    try {
+      const { adorner, counter } = createSingleAdorner(false);
+      adorner.collapsed = true;
+      expect(adorner.expandCollapseAnimationRunning).toBeFalsy();
+      expect(adorner.renderedCollapsed).toBeTruthy();
+      await flush();
+      expect(counter.before).toBe(0);
+      expect(adorner.expandCollapseAnimationRunning).toBeFalsy();
+
+      const fresh = createSingleAdorner(true);
+      fresh.adorner.collapsed = true;
+      await flush();
+      expect(fresh.counter.before).toBe(1);
+    } finally {
+      surveySettings.animationEnabled = true;
+    }
+  });
+
+  test("a single collapse/expand still animates", async () => {
+    surveySettings.animationEnabled = true;
+    try {
+      const { adorner, counter } = createSingleAdorner(true);
+      adorner.collapsed = true;
+      expect(adorner.expandCollapseAnimationRunning).toBeTruthy();
+      await flush();
+      expect(counter.before).toBe(1);
+      expect(adorner.renderedCollapsed).toBeTruthy();
+      expect(adorner.expandCollapseAnimationRunning).toBeFalsy();
+
+      adorner.collapsed = false;
+      await flush();
+      adorner.afterRerender();
+      expect(counter.before).toBe(2);
+      expect(adorner.renderedCollapsed).toBeFalsy();
+      expect(adorner.expandCollapseAnimationRunning).toBeFalsy();
+    } finally {
+      surveySettings.animationEnabled = true;
+    }
+  });
+
+  test("drag start still animates the page collapse", async () => {
+    surveySettings.animationEnabled = true;
+    try {
+      const creator = new CreatorTester();
+      creator.expandCollapseButtonVisibility = "always";
+      creator.JSON = json;
+      const adorners = createAdorners(creator);
+      const counters = adorners.map(a => instrumentAnimation(a));
+      creator.collapseAllPagesOnDragStart(creator.survey.pages[0]);
+      await flush();
+      adorners.forEach((a, index) => {
+        expect(a.collapsed, a.element.name).toBe(a.element.isPage);
+        expect(counters[index].before, a.element.name).toBe(a.element.isPage ? 1 : 0);
+      });
+    } finally {
+      surveySettings.animationEnabled = true;
+    }
+  });
+
+  test("onElementGetExpandCollapseState fires once per element", () => {
+    surveySettings.animationEnabled = false;
+    try {
+      const creator = new CreatorTester();
+      creator.expandCollapseButtonVisibility = "always";
+      const counts: { [key: string]: number } = {};
+      creator.onElementGetExpandCollapseState.add((_, o) => {
+        if (o.reason === "loading") return;
+        const key = o.reason + ":" + o.element.name;
+        counts[key] = (counts[key] || 0) + 1;
+        if (o.reason === "collapse-all" && o.element.name === "q1") o.collapsed = false;
+      });
+      creator.JSON = json;
+      createAdorners(creator);
+
+      runToolbarAction(creator, "collapseAll");
+      ["page1", "page2", "page3", "panel1", "q1", "q2", "q3", "q4", "q5"].forEach(name => {
+        expect(counts["collapse-all:" + name], name).toBe(1);
+      });
+      const q1 = creator.survey.getQuestionByName("q1");
+      expect(SurveyElementAdornerBase.GetAdorner<SurveyElementAdornerBase>(q1).collapsed).toBeFalsy();
+      expect(creator.designerStateManager.getElementCollapsed(q1)).toBeFalsy();
+      expect(SurveyElementAdornerBase.GetAdorner<SurveyElementAdornerBase>(creator.survey.getQuestionByName("q2")).collapsed).toBeTruthy();
+
+      creator.collapseAllPagesOnDragStart(creator.survey.pages[0]);
+      ["page1", "page2", "page3"].forEach(name => expect(counts["drag-start:" + name], name).toBe(1));
+    } finally {
+      surveySettings.animationEnabled = true;
+    }
+  });
 });
 test("Create topToolbar on request and setup it, Bug#6665", () => {
   const creator = new CreatorTester();
