@@ -170,6 +170,7 @@ export abstract class JsonEditorBaseModel extends Base {
     // the check list localizes the findings before the error list shows them
     this.linter.update(textWorker);
     this.setErrors(textWorker.errors);
+    this.errorsTextWorker = textWorker;
   }
   // true: nothing to apply, or applied. false: the text does not parse or has a blocking error,
   // and the survey is left as it is. Leaving the tab passes ignoreBlockingErrors: the host may
@@ -199,11 +200,19 @@ export abstract class JsonEditorBaseModel extends Base {
   // "error" severity, which onActiveTabChanging may still allow. true: warnings at most.
   public allowingDeactivate(): boolean {
     const textWorker: SurveyTextWorker = this.createTextWorker();
-    if (!textWorker.isJsonCorrect) return undefined;
-    return !textWorker.isJsonHasErrors;
+    const res = !textWorker.isJsonCorrect ? undefined : !textWorker.isJsonHasErrors;
+    // the list is rebuilt a second after the last keystroke: a refusal within that second shows
+    // the errors it refuses for now. The worker is the one just built, so this does not lint again.
+    // A pending auto-save apply is cancelled with the timer; it would be refused the same way.
+    if (res !== true && this.errorsTextWorker !== textWorker) {
+      this.cancelScheduledProcessing();
+      this.processErrors(this.text);
+    }
+    return res;
   }
   private lastTextWorker: SurveyTextWorker;
   private lastTextWorkerText: string;
+  private errorsTextWorker: SurveyTextWorker;
   // One worker per text: allowingDeactivate asks right after processErrors has linted the same
   // text, and a lint pass over a large survey is not free
   private createTextWorker(): SurveyTextWorker {
@@ -219,6 +228,7 @@ export abstract class JsonEditorBaseModel extends Base {
     this.cancelScheduledProcessing();
     this.lastTextWorker = undefined;
     this.lastTextWorkerText = undefined;
+    this.errorsTextWorker = undefined;
     super.dispose();
   }
   public get readOnly(): boolean {

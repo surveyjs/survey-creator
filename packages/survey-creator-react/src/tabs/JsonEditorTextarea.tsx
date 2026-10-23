@@ -52,7 +52,7 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
             className="svc-json-editor-tab__content-area"
             value={this.model.text}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-              (this.model.text = e.target.value)
+              this.model.onTextInput(e.target.value)
             }
             onKeyDown={(e) => this.model.checkKey(e, e)}
             disabled={this.model.readOnly}
