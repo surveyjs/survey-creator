@@ -1,6 +1,6 @@
 import {
   Action, IDialogOptions, ListModel, MatrixDropdownColumn, PopupBaseViewModel, PopupModalManager, Question,
-  QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionPanelDynamicModel, QuestionTextModel, Serializer, SurveyModel,
+  QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionPanelDynamicModel, Serializer, SurveyModel,
   settings as surveySettings, surveyLocalization
 } from "survey-core";
 import { CreatorTester } from "../creator-tester";
@@ -122,11 +122,11 @@ describe("Property grid: records sorting", () => {
     expect(getSortCriteriaText([{ field: "a" }]), "#3").toBe("a " + up);
     expect(getSortCriteriaText([{ field: "a", direction: "desc" }, { field: "b", direction: "asc" }]), "#4").toBe("a " + down + ", b " + up);
   });
-  test("the text is read-only, shows the stored field names and follows every change of sortCriteria", () => {
+  test("the text is an expression, shows the stored field names and follows every change of sortCriteria", () => {
     const creator = createCreator();
     const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
-    const question = <QuestionTextModel>gridQuestion(creator, "sortCriteria");
-    expect([question.getType(), question.isReadOnly, question.isEmpty(), question.renderedPlaceholder], "#1").toEqual(["text", true, true, "Not sorted"]);
+    const question = gridQuestion(creator, "sortCriteria");
+    expect([question.getType(), question.isReadOnly, question.isEmpty()], "#1").toEqual(["expression", false, true]);
     expect([matrix.toJSON().sortCriteria, creator.undoRedoManager.canUndo()], "#2: the grid writes nothing").toEqual([undefined, false]);
 
     matrix.sortCriteria = [{ field: "col1" }, { field: "col2", direction: "desc" }];
@@ -147,12 +147,12 @@ describe("Property grid: records sorting", () => {
     creator.redo();
     expect(question.value, "#10: redo").toBe("col2 " + up);
     matrix.sortCriteria = [];
-    expect([question.value, question.renderedPlaceholder], "#11: empty").toEqual(["", "Not sorted"]);
+    expect([question.value, (<any>question).formatedValue], "#11: empty").toEqual(["", ""]);
 
     creator.JSON = { elements: [Object.assign({}, matrixJSON, { sortCriteria: [{ field: "col2", direction: "desc" }] })] };
     creator.selectElement(creator.survey.getQuestionByName("matrix"));
     const newQuestion = gridQuestion(creator, "sortCriteria");
-    expect([newQuestion.value, newQuestion.isReadOnly], "#12: the JSON").toEqual(["col2 " + down, true]);
+    expect([newQuestion.value, (<any>newQuestion).formatedValue], "#12: the JSON").toEqual(["col2 " + down, "col2 " + down]);
     expect(creator.survey.getQuestionByName("matrix").toJSON().sortCriteria, "#13: still the authored value").toEqual([{ field: "col2", direction: "desc" }]);
   });
   test("the grid never writes sortCriteria back", () => {
@@ -208,7 +208,7 @@ describe("Property grid: records sorting", () => {
     const question = gridQuestion(creator, "sortCriteria");
     const clear = findAction(question, "property-grid-clear");
     expect([clear.visible, clear.disabled], "#1").toEqual([true, false]);
-    expect(getActions(question).filter(action => action.id === "property-grid-clear").length, "#2: no generic clear next to it").toBe(1);
+    expect(getActions(question).map(action => action.id), "#2: More... before the one clear").toEqual(["property-grid-help", "property-grid-sort-more", "property-grid-clear"]);
     clear.action();
     expect([sortOf(matrix), question.value, clear.visible], "#3").toEqual([[], "", false]);
     creator.undo();
@@ -235,38 +235,38 @@ describe("Property grid: records sorting", () => {
     creator.undo();
     expect(sortOf(panel), "#5: apply undone").toEqual([]);
   });
-  test("More... is disabled while no field sorts", () => {
+  test("More... is enabled while no field sorts", () => {
     const creator = createCreator({ type: "matrixdynamic", name: "matrix", rowCount: 0, columns: [{ name: "tags", cellType: "checkbox", choices: ["a"] }] });
     const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
-    const more = findAction(gridQuestion(creator, "sortCriteria"), "property-grid-sort-more");
-    expect(more.disabled, "#1: a checkbox column").toBe(true);
-    matrix.addColumn("col1");
-    expect(more.disabled, "#2: a text column added").toBe(false);
-    matrix.columns.splice(1, 1);
-    expect(more.disabled, "#3: removed").toBe(true);
+    const question = gridQuestion(creator, "sortCriteria");
+    expect(findAction(question, "property-grid-sort-more").disabled, "#1: a checkbox column").toBe(false);
+    let { popup } = openDialog(question);
+    expect(popup.model.isVisible, "#2: the dialog opens").toBe(true);
+    popup.model.isVisible = false;
     matrix.columns.splice(0, 1);
-    expect(more.disabled, "#4: no columns").toBe(true);
+    expect(findAction(question, "property-grid-sort-more").disabled, "#3: no columns").toBe(false);
+    popup = openDialog(question).popup;
+    expect(popup.model.isVisible, "#4: the dialog opens").toBe(true);
   });
-  test("the actions follow the permission to edit the property, not the read-only text", () => {
+  test("the actions are disabled only while the property may not be edited", () => {
     const creator = createCreator(Object.assign({}, matrixJSON, { allowSort: true, sortCriteria: [{ field: "col1" }] }));
-    let question = gridQuestion(creator, "sortCriteria");
-    expect(question.isReadOnly, "#1").toBe(true);
-    expect([findAction(question, "property-grid-sort-more").disabled, findAction(question, "property-grid-clear").disabled], "#2: editable Creator").toEqual([false, false]);
+    const reselect = (): Question => {
+      creator.selectElement(creator.survey);
+      creator.selectElement(creator.survey.getQuestionByName("matrix"));
+      return gridQuestion(creator, "sortCriteria");
+    };
+    const state = (question: Question): Array<any> => [question.isReadOnly,
+      findAction(question, "property-grid-sort-more").disabled, findAction(question, "property-grid-clear").disabled];
+    expect(state(gridQuestion(creator, "sortCriteria")), "#1: editable Creator").toEqual([false, false, false]);
 
     creator.readOnly = true;
-    creator.selectElement(creator.survey);
-    creator.selectElement(creator.survey.getQuestionByName("matrix"));
-    question = gridQuestion(creator, "sortCriteria");
-    expect([findAction(question, "property-grid-sort-more"), findAction(question, "property-grid-clear")], "#3: read-only Creator").toEqual([undefined, undefined]);
+    expect(state(reselect()), "#2: read-only Creator").toEqual([true, true, true]);
     creator.readOnly = false;
 
     const prop = Serializer.findProperty("matrixdynamic", "sortCriteria");
     prop.readOnly = true;
     try {
-      creator.selectElement(creator.survey);
-      creator.selectElement(creator.survey.getQuestionByName("matrix"));
-      question = gridQuestion(creator, "sortCriteria");
-      expect([findAction(question, "property-grid-sort-more"), findAction(question, "property-grid-clear")], "#4: a read-only property").toEqual([undefined, undefined]);
+      expect(state(reselect()), "#3: a read-only property").toEqual([true, true, true]);
     } finally {
       prop.readOnly = false;
     }
@@ -275,20 +275,14 @@ describe("Property grid: records sorting", () => {
     creator.onPropertyGetReadOnly.add((_, options) => {
       if (options.propertyName === "sortCriteria") options.readOnly = readOnlySort;
     });
-    creator.selectElement(creator.survey);
-    creator.selectElement(creator.survey.getQuestionByName("matrix"));
-    question = gridQuestion(creator, "sortCriteria");
-    expect([findAction(question, "property-grid-sort-more"), findAction(question, "property-grid-clear")], "#5: onPropertyGetReadOnly").toEqual([undefined, undefined]);
+    expect(state(reselect()), "#4: onPropertyGetReadOnly").toEqual([true, true, true]);
     const visibleIf = gridQuestion(creator, "visibleIf");
     visibleIf.value = "{q1} = 1";
     const visibleIfClear = findAction(visibleIf, "property-grid-clear");
-    expect([visibleIf.isReadOnly, visibleIfClear.disabled, visibleIfClear.visible], "#6: another property keeps its own clear").toEqual([false, false, true]);
+    expect([visibleIf.isReadOnly, visibleIfClear.disabled, visibleIfClear.visible], "#5: another property keeps its own clear").toEqual([false, false, true]);
 
     readOnlySort = false;
-    creator.selectElement(creator.survey);
-    creator.selectElement(creator.survey.getQuestionByName("matrix"));
-    question = gridQuestion(creator, "sortCriteria");
-    expect([!!findAction(question, "property-grid-sort-more"), !!findAction(question, "property-grid-clear")], "#7: the callback is asked again on the next build").toEqual([true, true]);
+    expect(state(reselect()), "#6: the callback is asked again on the next build").toEqual([false, false, false]);
   });
   test("the dialog uses the Creator's locale for its whole life; the survey's locale is untouched", () => {
     const creatorLocale = "sort-creator-test";

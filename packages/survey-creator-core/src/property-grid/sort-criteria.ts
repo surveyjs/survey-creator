@@ -1,5 +1,5 @@
-import { Base, ComputedUpdater, IAction, ISortCriterion, JsonObjectProperty, Question, QuestionRecordsModel } from "survey-core";
-import { PropertyGridEditorCollection, PropertyGridEditor, PropertyJSONGenerator } from "./index";
+import { Base, IAction, ISortCriterion, JsonObjectProperty, Question, QuestionRecordsModel } from "survey-core";
+import { PropertyGridEditorCollection, PropertyGridEditor } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { editorLocalization, getLocString } from "../editorLocalization";
 
@@ -17,28 +17,24 @@ export function getSortCriteriaText(criteria: Array<ISortCriterion>): string {
 
 const sortCriteriaItemsKey = "sortCriteriaItems";
 
-// sortCriteria is edited with survey-core's "Sort by" dialog only. The grid shows it as read-only
-// text and offers the dialog and a clear action next to it.
+// sortCriteria is edited with survey-core's "Sort by" dialog only. The grid shows it as an expression
+// question (text nobody types into) and offers the dialog and a clear action next to it. The question
+// is read-only only when the property may not be edited (a read-only Creator, prop.readOnly,
+// onPropertyGetReadOnly), and both actions follow it.
 export class PropertyGridEditorSortCriteria extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type === "sortcriteria";
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     return {
-      type: "text",
-      readOnly: true
+      type: "expression"
     };
   }
   // The question is bound to the property like any other grid question, so the survey brings it
   // every assignment, push and splice, undo/redo and JSON changes included. It shows the text and
-  // never writes: it is read-only, and it has no valueToDataCallback.
+  // never writes: an expression question has no input, and there is no valueToDataCallback.
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
     question.valueFromDataCallback = (val: any): any => getSortCriteriaText(val);
-    // A read-only text question hides its placeholder; this one is read-only by design.
-    Object.defineProperty(question, "renderedPlaceholder", {
-      configurable: true,
-      get: (): string => question.placeholder
-    });
     // An edit of an item's field or direction raises no change of the property: the items are
     // followed one by one, and again whenever the array changes.
     const update = (): void => { this.updateItemsSubscription(obj, question, prop); };
@@ -49,19 +45,16 @@ export class PropertyGridEditorSortCriteria extends PropertyGridEditor {
     obj.unRegisterFunctionOnPropertyValueChanged(prop.name, this.getHandlerKey(question));
     this.releaseItems(question);
   }
-  // The generic clear and setup actions are enabled by !question.isReadOnly, and this question is
-  // always read-only. The editor adds its own actions, shown by whether the property may be edited.
+  // Called by the grid's generic clear action.
+  public clearPropertyValue(obj: Base, prop: JsonObjectProperty, question: Question, options: ISurveyCreatorOptions): void {
+    this.setSortCriteria(obj, prop, []);
+  }
+  // "More..." goes before the generic clear action.
   public onGetQuestionTitleActions(obj: Base, options: any, creatorOptions: ISurveyCreatorOptions): void {
     const question: Question = options.question;
-    const prop: JsonObjectProperty = (<any>question).property;
-    if (!this.canEditProperty(obj, prop, creatorOptions)) return;
-    options.actions.push(this.createMoreAction(obj, prop, creatorOptions));
-    options.actions.push(this.createClearAction(obj, prop));
-  }
-  // Recomputed every time the actions are built: onPropertyGetReadOnly may change its answer.
-  public canEditProperty(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): boolean {
-    if (!obj || !prop || !options || options.readOnly) return false;
-    return !PropertyJSONGenerator.isPropertyReadOnly(prop, options, obj, null, null);
+    const actions: Array<IAction> = options.actions;
+    const clearIndex = actions.map(action => action.id).indexOf("property-grid-clear");
+    actions.splice(clearIndex > -1 ? clearIndex : actions.length, 0, this.createMoreAction(obj, question, creatorOptions));
   }
   public showSortDialog(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
     // The dialog reads its texts on every update, so the Creator's locale is passed to it rather
@@ -72,47 +65,23 @@ export class PropertyGridEditorSortCriteria extends PropertyGridEditor {
       locale: editorLocalization.locale
     });
   }
-  public clearSortCriteria(obj: Base, prop: JsonObjectProperty): void {
-    this.setSortCriteria(obj, prop, []);
-  }
   // One assignment is one undo step: survey-core writes the array with one splice (setArrayPropertyValue).
   private setSortCriteria(obj: Base, prop: JsonObjectProperty, criteria: Array<ISortCriterion>): void {
     obj[prop.name] = criteria;
   }
-  private createMoreAction(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): IAction {
+  // Enabled whenever the property may be edited, even with no field to sort by: the dialog then
+  // shows it has nothing to offer.
+  private createMoreAction(obj: Base, question: Question, options: ISurveyCreatorOptions): IAction {
+    const prop: JsonObjectProperty = (<any>question).property;
     return {
       id: "property-grid-sort-more",
       title: getLocString("ed.sortCriteriaMore"),
       showTitle: false,
       iconName: "icon-edit",
       iconSize: "auto",
-      // The dialog has nothing to offer without a field whose values sort.
-      enabled: <any>new ComputedUpdater<boolean>(() => this.hasSortFields(obj)),
+      enabled: !question.isReadOnly,
       action: () => { this.showSortDialog(obj, prop, options); }
     };
-  }
-  private createClearAction(obj: Base, prop: JsonObjectProperty): IAction {
-    return {
-      id: "property-grid-clear",
-      title: getLocString("pe.clear"),
-      showTitle: false,
-      iconName: "icon-clear",
-      iconSize: "auto",
-      appearance: { style: "alert", mode: "tertiary-muted" },
-      visible: <any>new ComputedUpdater<boolean>(() => {
-        const val = obj[prop.name];
-        return Array.isArray(val) && val.length > 0;
-      }),
-      action: () => { this.clearSortCriteria(obj, prop); }
-    };
-  }
-  // The fields the designer's dialog offers. survey-core keeps the list protected
-  // (getDesignSortFieldCandidates) and exposes no public check.
-  private hasSortFields(obj: Base): boolean {
-    const func = (<any>obj).getDesignSortFieldCandidates;
-    if (typeof func !== "function") return false;
-    const fields: Array<{ field: string }> = func.call(obj);
-    return Array.isArray(fields) && fields.some(item => !!item && !!item.field);
   }
   private updateItemsSubscription(obj: Base, question: Question, prop: JsonObjectProperty): void {
     this.releaseItems(question);

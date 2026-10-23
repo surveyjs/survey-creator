@@ -31,7 +31,7 @@ test.describe(title, () => {
     await setJSON(page, json);
   });
 
-  const sortText = (page) => page.locator("[data-name='sortCriteria'] input");
+  const sortText = (page) => page.locator("[data-name='sortCriteria'] div[aria-live='polite']:not([role])");
   const dialog = (page) => page.locator(".sv-popup--records-sort");
   const dialogRows = (page) => dialog(page).locator(".sd-sort-dialog__row");
   const rowDirection = (page, row: number) => dialogRows(page).nth(row - 1).locator("button").nth(1);
@@ -54,8 +54,7 @@ test.describe(title, () => {
 
   test("set the default sort with More..., undo and redo it, and preview it", async ({ page }) => {
     await page.locator("[data-name='matrix']").first().click();
-    await expect(sortText(page)).toHaveValue("");
-    await expect(sortText(page)).toHaveAttribute("placeholder", "Not sorted");
+    await expect(sortText(page)).toHaveText("");
 
     await page.locator("[data-name='sortCriteria']").hover();
     await page.getByRole("button", { name: "More...", exact: true }).click();
@@ -69,14 +68,14 @@ test.describe(title, () => {
     expect(await rowsShown(page)).toEqual([["col1", "Alphabet, A - Z"], ["col2", "Alphabet, Z - A"]]);
     await dialogButton(page, "Apply").click();
     await expect(dialog(page)).toHaveCount(0);
-    await expect(sortText(page)).toHaveValue("col1 " + up + ", col2 " + down);
+    await expect(sortText(page)).toHaveText("col1 " + up + ", col2 " + down);
     expect(await page.evaluate(() => window["creator"].JSON.pages[0].elements[0].sortCriteria))
       .toEqual([{ field: "col1" }, { field: "col2", direction: "desc" }]);
 
     await undo(page).click();
-    await expect(sortText(page)).toHaveValue("");
+    await expect(sortText(page)).toHaveText("");
     await redo(page).click();
-    await expect(sortText(page)).toHaveValue("col1 " + up + ", col2 " + down);
+    await expect(sortText(page)).toHaveText("col1 " + up + ", col2 " + down);
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await expect.poll(() => previewRows(page)).toEqual(["a/y", "a/x", "b/x"]);

@@ -1481,8 +1481,7 @@ export var enStrings = {
     panellayoutcolumn: {
       effectiveWidth: "Ex.: 30%",
       questionTitleWidth: "Ex.: 200px"
-    },
-    sortCriteria: "Not sorted"
+    }
   },
   pehelp: {
     panel: {
