@@ -100,14 +100,21 @@ export class ExpandCollapseManager {
     });
   }
   private updateCollapsed(elements: SurveyElement[], value: boolean, reason: ElementGetExpandCollapseStateEventReason) {
+    // Collapse/expand all and loading change many elements at once. Animating each of them reads layout
+    // element by element (a forced layout per element), so only the drag-start page collapse animates.
+    const animate = reason === "drag-start";
     this.sortElements(elements).forEach(element => {
       if (element.isQuestion && this._lockQuestions) return;
       const collapsed = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
       this.creator.designerStateManager?.setElementCollapsed(element, collapsed);
       const adorner = SurveyElementAdornerBase.GetAdorner(element);
       if (adorner && adorner.allowExpandCollapse) {
-        const newState = this.creator.getElementExpandCollapseState(element as Question | PageModel | PanelModel, reason, value);
-        adorner.collapsed = newState;
+        if (!animate) adorner.blockAnimations();
+        try {
+          adorner.collapsed = collapsed;
+        } finally {
+          if (!animate) adorner.releaseAnimations();
+        }
       }
     });
   }

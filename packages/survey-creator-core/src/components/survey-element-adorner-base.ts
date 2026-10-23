@@ -171,15 +171,25 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         };
       },
       getAnimatedElement: () => this.getAnimatedElement(),
-      isAnimationEnabled: () => this.animationAllowed
+      isAnimationEnabled: () => this.isExpandCollapseAnimationEnabled()
     };
+  }
+  // creator.animationEnabled = false only turns the CSS animations off; also skip the JS part
+  // (it measures the element and forces a layout) since the animation would end at once anyway.
+  private isExpandCollapseAnimationEnabled(): boolean {
+    return this.animationAllowed && this.creator?.["animationEnabled"] !== false;
   }
 
   private animationCollapsed = new AnimationBoolean(this.getExpandCollapseAnimationOptions(), (val) => {
     this._renderedCollapsed = !val;
   }, () => !this.renderedCollapsed);
   public set renderedCollapsed(val: boolean) {
-    if (this.animationAllowed && val !== this.renderedCollapsed)this.expandCollapseAnimationRunning = true;
+    if (!this.isExpandCollapseAnimationEnabled()) {
+      // sync() cancels a pending or running animation, so its afterRunAnimation may never run
+      this.expandCollapseAnimationRunning = false;
+    } else if (val !== this.renderedCollapsed) {
+      this.expandCollapseAnimationRunning = true;
+    }
     this.animationCollapsed.sync(!val);
   }
   public get renderedCollapsed(): boolean {
