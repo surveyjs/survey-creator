@@ -54,6 +54,7 @@ test.describe(title, () => {
 
   test("set the default sort with More..., undo and redo it, and preview it", async ({ page }) => {
     await page.locator("[data-name='matrix']").first().click();
+    await page.locator(".svc-sidebar-tabs").getByTitle("Rows", { exact: true }).click();
     await expect(sortText(page)).toHaveText("");
 
     await page.locator("[data-name='sortCriteria']").hover();
