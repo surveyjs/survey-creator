@@ -114,6 +114,12 @@ svc-page {
   text-align: center;
   .sd-loading-indicator {
     display: inline-block;
+
+    // A placeholder is replaced by the page content as soon as it scrolls into view, and an infinite rotation
+    // would keep repainting every off-screen placeholder each frame while the designer is open.
+    .sv-svg-icon {
+      animation: none;
+    }
   }
 }
 
