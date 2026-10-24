@@ -29,6 +29,12 @@ const localizationNameByProperty: { [key: string]: string | ((obj: any) => strin
   otherErrorText: "otherRequiredError"
 };
 
+// Questions and panels, nested ones included: the size the strings grid follows. Cheap - counting
+// the strings themselves would mean building the translation tree.
+function getSurveyElementCount(survey: SurveyModel): number {
+  return survey.getAllQuestions(false, false, true).length + survey.getAllPanels().length;
+}
+
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
     super();
@@ -776,11 +782,69 @@ export class TranslationBase extends Base implements ITranslationLocales {
     }
   }) showAllStrings: boolean;
   @property({
-    onSet: (_, target: TranslationBase) => {
+    onSet: (val: PageModel, target: TranslationBase) => {
+      if (!!val) target.lastFilteredPageName = val.name;
       if (!target.isPageFilterResetSuspended) target.reset();
     }
   }) filteredPage: PageModel;
   private isPageFilterResetSuspended = false;
+  // The name of the last page the grid was scoped to: a grid that must stay scoped (see
+  // canShowAllPages) goes back to it after the survey is replaced or the filter is cleared.
+  private lastFilteredPageName: string = "";
+  // Set by the translation tab only - the dialogs built on the same classes keep their own scope.
+  public limitAllPagesOnLargeSurvey: boolean = false;
+  // False when the strings grid must be scoped to a single page: building and rendering it over the
+  // whole survey takes about 1 ms per element, so a large multi-page survey gets no "All Pages"
+  // (see settings.translation.maxElementsForAllPages).
+  public get canShowAllPages(): boolean {
+    if (!this.limitAllPagesOnLargeSurvey || !this.survey || this.survey.pages.length < 2) return true;
+    const max = settings.translation.maxElementsForAllPages;
+    if (!(max > 0)) return true;
+    return getSurveyElementCount(this.survey) <= max;
+  }
+  // The page scope is imposed by the size limit rather than chosen, so the bulk operations (the
+  // locales list, CSV export, locale deletion and merge) still cover the whole survey.
+  protected get isPageScopeForced(): boolean {
+    return !!this.filteredPage && !this.canShowAllPages;
+  }
+  private applyPageScopeLimit(): void {
+    if (!this.hasStringsSurveyUI || this.canShowAllPages) return;
+    const pages = this.survey.pages;
+    if (!!this.filteredPage && pages.indexOf(this.filteredPage) > -1) return;
+    const lastPage = !!this.lastFilteredPageName ? this.survey.getPageByName(this.lastFilteredPageName) : null;
+    // The caller builds the tree right after, so the filter's own rebuild is suspended.
+    this.isPageFilterResetSuspended = true;
+    try {
+      this.filteredPage = lastPage || pages[0];
+    } finally {
+      this.isPageFilterResetSuspended = false;
+    }
+  }
+  private isPageScopeIgnored = false;
+  // A tree over the whole survey with the model's own filters, whatever page the grid is scoped to.
+  protected createWholeSurveyRoot(): TranslationGroup {
+    this.isPageScopeIgnored = true;
+    try {
+      const root = new TranslationGroup("survey", this.survey, this);
+      root.setAsRoot();
+      return root;
+    } finally {
+      this.isPageScopeIgnored = false;
+    }
+  }
+  // The tree the bulk operations work on (see isPageScopeForced).
+  protected getBulkOperationsRoot(): TranslationGroup {
+    return this.isPageScopeForced ? this.createWholeSurveyRoot() : this.root;
+  }
+  // The locales stored anywhere in the survey, in the form TranslationGroup.fillLocales gives them
+  // (no default locale key), without building a tree over the whole survey.
+  protected fillSurveyLocales(locales: Array<string>): void {
+    const used = new Array<string>();
+    this.survey.addUsedLocales(used);
+    used.forEach(loc => {
+      if (!!loc && loc !== LocalizableString.defaultLocale && locales.indexOf(loc) < 0) locales.push(loc);
+    });
+  }
   // Replaces the survey and drops the page filter with a single rebuild: on its own, the filter's
   // onSet would rebuild the tree over the old survey (or the old filter) just before the survey
   // setter rebuilds it again.
@@ -837,7 +901,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     this.runWithoutSurveyReaction(() => {
       this.options.startUndoRedoTransaction("Delete strings for locale: " + locale);
       try {
-        this.root.deleteLocaleStrings(locale);
+        this.getBulkOperationsRoot().deleteLocaleStrings(locale);
       } finally {
         this.options.stopUndoRedoTransaction();
       }
@@ -1249,7 +1313,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
   }
   public canShowElementGroup(obj: Base): boolean {
     if (!this.canShowElementGroupCore(obj)) return false;
-    if (!this.isFirstPageFiltered) return true;
+    if (!this.isFirstPageFiltered || this.isPageScopeIgnored) return true;
     // The tree is rooted on the survey while the grid is scoped to the first page - every other
     // page is left out of it.
     const el = <any>obj;
@@ -1257,6 +1321,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
   }
   public reset(alwaysReset: boolean = true): void {
     if (!alwaysReset && !!this.root) return;
+    this.applyPageScopeLimit();
     const prevVisibleLocales = this.getVisibleLocales();
     const rootInfo = this.getRootTranslationObj();
     const rootObj = rootInfo.obj;
@@ -1371,7 +1436,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     }
     res.push(headerRow);
     let itemsHash = <HashTable<TranslationItem>>{};
-    this.fillItemsHash("", this.root, itemsHash);
+    this.fillItemsHash("", this.getBulkOperationsRoot(), itemsHash);
     for (let key in itemsHash) {
       let row = [key];
       let item: TranslationItem = itemsHash[key];
