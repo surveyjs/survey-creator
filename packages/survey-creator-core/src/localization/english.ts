@@ -194,7 +194,6 @@ export var enStrings = {
     choices_Item: "Item ",
     selectFile: "Select a file",
     removeFile: "Remove the file",
-    sortCriteriaMore: "More...",
     lg: {
       addNewItem: "Add New Rule",
       empty_tab: "Create a rule to customize the flow of the survey.",
@@ -430,6 +429,10 @@ export var enStrings = {
     calculatedvalue: {
       expression: "Expression"
     },
+    sortcriterion: {
+      field: "Sort by",
+      direction: "Order"
+    },
     urlconditionitem: {
       expression: "Expression"
     },
@@ -556,6 +559,7 @@ export var enStrings = {
     "listIsEmpty@triggers": "You don't have any triggers yet",
     "listIsEmpty@navigateToUrlOnCondition": "You don't have any links yet",
     "listIsEmpty@pages": "You don't have any pages yet",
+    "listIsEmpty@sortCriteria": "You don't have any sort levels yet",
     "addNew@choices": "Add new choice",
     "addNew@columns": "Add new column",
     "addNew@rows": "Add new row",
@@ -564,6 +568,7 @@ export var enStrings = {
     "addNew@triggers": "Add new trigger",
     "addNew@navigateToUrlOnCondition": "Add new URL",
     "addNew@pages": "Add new page",
+    "addNew@sortCriteria": "Add new sort level",
     value: "Value",
     text: "Text",
     imageLink: "Image or video file URL",
@@ -1535,12 +1540,12 @@ export var enStrings = {
       panelCountExpression: "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually.",
       pageSize: "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries.",
       allowSort: "Allows respondents to sort entries from the sort bar.",
-      sortCriteria: "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Use the \"More...\" button to set the sort fields.",
+      sortCriteria: "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority.",
       showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
       allowSort: "Allows respondents to sort rows by clicking column headers or from the sort bar.",
-      sortCriteria: "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Use the \"More...\" button to set the sort columns.",
+      sortCriteria: "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority.",
       showSortBar: "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well.",
       rowCountExpression: "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually.",
       confirmDelete: "Triggers a confirmation prompt before removing a row.",

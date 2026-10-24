@@ -89,7 +89,6 @@ export * from "../property-grid/search-manager";
 export * from "../property-grid/maskSettings";
 export * from "../property-grid/header-settings";
 export * from "../property-grid/boolean-display-mode";
-export * from "../property-grid/sort-criteria";
 export { propertyGridCss } from "../property-grid-theme/property-grid";
 export { checkExpression, getExpressionLintOptions } from "../expression-assistant/expression-check";
 export type {

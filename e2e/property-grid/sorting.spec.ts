@@ -1,12 +1,9 @@
-import { url, test, expect, setJSON, getTabbedMenuItemByText, creatorTabDesignerName, creatorTabPreviewName } from "../helper";
+import { url, test, expect, setJSON, getTabbedMenuItemByText, creatorTabDesignerName, creatorTabPreviewName, doDragDrop } from "../helper";
 
 const title = "Property Grid: records sorting";
 
-const up = "↑"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-const down = "↓"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-
-// The rows are out of order for "col1 asc, col2 desc" and tie on col1: the preview fails without the
-// sort and without its second level.
+// "col2 desc, col3 asc" and "col3 asc, col2 desc" order the rows differently, and both differ from the
+// stored order: the preview checks the levels and their priority.
 const json = {
   elements: [{
     type: "matrixdynamic",
@@ -15,9 +12,17 @@ const json = {
     rowCount: 0,
     columns: [
       { name: "col1", cellType: "text" },
-      { name: "col2", cellType: "text" }
+      { name: "col2", cellType: "text" },
+      { name: "col3", cellType: "text" }
     ],
-    defaultValue: [{ col1: "b", col2: "x" }, { col1: "a", col2: "x" }, { col1: "a", col2: "y" }]
+    defaultValue: [{ col1: "a", col2: "x", col3: "2" }, { col1: "b", col2: "y", col3: "3" }, { col1: "c", col2: "y", col3: "1" }]
+  }]
+};
+const panelJSON = {
+  elements: [{
+    type: "paneldynamic",
+    name: "panel",
+    templateElements: [{ type: "text", name: "q1", title: "Question 1" }, { type: "text", name: "q2", title: "Question 2" }]
   }]
 };
 
@@ -28,66 +33,92 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].propertyGridNavigationMode = "buttons";
     });
-    await setJSON(page, json);
   });
 
-  const sortText = (page) => page.locator("[data-name='sortCriteria'] div[aria-live='polite']:not([role])");
-  const dialog = (page) => page.locator(".sv-popup--records-sort");
-  const dialogRows = (page) => dialog(page).locator(".sd-sort-dialog__row");
-  const rowDirection = (page, row: number) => dialogRows(page).nth(row - 1).locator("button").nth(1);
-  const dialogButton = (page, text: string) => dialog(page).locator(".sv-popup__body-footer").getByRole("button", { name: text, exact: true });
-  const openLists = (page) => page.locator(".sv-popup--menu-popup .sv-popup__container").filter({ visible: true });
-  // A list closes with an animation: the next one is opened once the previous one is gone.
-  const pick = async (page, text: string): Promise<void> => {
-    await openLists(page).getByRole("menuitemradio", { name: text, exact: true }).click();
-    await expect(openLists(page)).toHaveCount(0);
+  const grid = (page) => page.locator("[data-name='sortCriteria']");
+  const gridRows = (page) => grid(page).locator("[data-sv-drop-target-matrix-row]");
+  // the title action; the empty matrix shows a second Add button
+  const addLevel = (page) => grid(page).locator("button[title='Add new sort level']");
+  // The combobox is the dropdown's filter input; the value is drawn over it, so the cell is clicked and read.
+  const dropdownCell = (page, row: number, column: number) =>
+    gridRows(page).nth(row - 1).locator("td").filter({ has: page.getByRole("combobox") }).nth(column);
+  const pick = async (page, row: number, column: number, text: string): Promise<void> => {
+    // Away from the viewport's bottom edge, where the list would open upwards over the row above
+    await gridRows(page).nth(row - 1).evaluate((el: HTMLElement) => el.scrollIntoView({ block: "center" }));
+    await dropdownCell(page, row, column).click();
+    await page.getByRole("option", { name: text, exact: true }).filter({ visible: true }).click();
+    // A list closes with an animation: the next one is opened once the previous one is gone.
+    await expect(page.getByRole("listbox").filter({ visible: true })).toHaveCount(0);
   };
   const rowsShown = async (page): Promise<Array<Array<string>>> =>
-    dialogRows(page).evaluateAll((rows: Array<HTMLElement>) => rows.map((row) =>
-      Array.prototype.map.call(row.querySelectorAll(".sd-action__title"), (el: Element): string => el.textContent) as Array<string>));
+    gridRows(page).evaluateAll((rows: Array<HTMLElement>) => rows.map((row) =>
+      Array.prototype.map.call(row.querySelectorAll("[role=combobox]"), (el: Element): string => el.parentElement.textContent.trim()) as Array<string>));
+  const sortJSON = (page) => page.evaluate(() => window["creator"].JSON.pages[0].elements[0].sortCriteria);
   const previewRows = async (page): Promise<Array<string>> =>
     page.locator(".sd-table__row").filter({ visible: true }).evaluateAll((rows: Array<HTMLElement>) => rows.map((row) =>
       Array.prototype.map.call(row.querySelectorAll("input[type=text]"), (el: HTMLInputElement): string => el.value).join("/")));
-  const previewSortBar = (page) => page.locator(".sd-matrixdynamic__sort-bar").filter({ visible: true });
   const undo = (page) => page.getByRole("button", { name: "Undo" }).filter({ visible: true }).first();
   const redo = (page) => page.getByRole("button", { name: "Redo" }).filter({ visible: true }).first();
+  const dragRow = async (page, from: number, to: number): Promise<void> => {
+    const target = gridRows(page).nth(to - 1);
+    const handle = gridRows(page).nth(from - 1).locator(".spg-drag-element__svg");
+    await gridRows(page).nth(from - 1).hover();
+    await handle.waitFor({ state: "visible" });
+    await doDragDrop({ page, element: handle, target: target, options: { elementPosition: { x: 5, y: 5 }, targetPosition: { x: 5, y: 5 } } });
+  };
 
-  test("set the default sort with More..., undo and redo it, and preview it", async ({ page }) => {
+  test("edit the default sort of a matrix as sort levels", async ({ page }) => {
+    await setJSON(page, json);
     await page.locator("[data-name='matrix']").first().click();
     await page.locator(".svc-sidebar-tabs").getByTitle("Rows", { exact: true }).click();
-    await expect(sortText(page)).toHaveText("");
+    await expect(grid(page).getByText("You don't have any sort levels yet")).toBeVisible();
 
-    await page.locator("[data-name='sortCriteria']").hover();
-    await page.getByRole("button", { name: "More...", exact: true }).click();
-    await expect(dialog(page).locator(".sv-popup__body-header")).toHaveText("Sort by");
-    expect(await rowsShown(page)).toEqual([["col1", "Default"]]);
-    await rowDirection(page, 1).click();
-    await pick(page, "Alphabet, A - Z");
-    await dialogButton(page, "Add New").click();
-    await rowDirection(page, 2).click();
-    await pick(page, "Alphabet, Z - A");
-    expect(await rowsShown(page)).toEqual([["col1", "Alphabet, A - Z"], ["col2", "Alphabet, Z - A"]]);
-    await dialogButton(page, "Apply").click();
-    await expect(dialog(page)).toHaveCount(0);
-    await expect(sortText(page)).toHaveText("col1 " + up + ", col2 " + down);
-    expect(await page.evaluate(() => window["creator"].JSON.pages[0].elements[0].sortCriteria))
-      .toEqual([{ field: "col1" }, { field: "col2", direction: "desc" }]);
+    await addLevel(page).click();
+    await addLevel(page).click();
+    expect(await rowsShown(page)).toEqual([["col1", "Ascending"], ["col2", "Ascending"]]);
+    expect(await sortJSON(page)).toEqual([{ field: "col1" }, { field: "col2" }]);
+
+    await pick(page, 1, 0, "col3");
+    await pick(page, 2, 1, "Descending");
+    expect(await rowsShown(page)).toEqual([["col3", "Ascending"], ["col2", "Descending"]]);
+    expect(await sortJSON(page)).toEqual([{ field: "col3" }, { field: "col2", direction: "desc" }]);
+
+    await dragRow(page, 2, 1);
+    await expect.poll(() => rowsShown(page)).toEqual([["col2", "Descending"], ["col3", "Ascending"]]);
+    expect(await sortJSON(page)).toEqual([{ field: "col2", direction: "desc" }, { field: "col3" }]);
 
     await undo(page).click();
-    await expect(sortText(page)).toHaveText("");
+    await expect.poll(() => rowsShown(page)).toEqual([["col3", "Ascending"], ["col2", "Descending"]]);
     await redo(page).click();
-    await expect(sortText(page)).toHaveText("col1 " + up + ", col2 " + down);
+    await expect.poll(() => rowsShown(page)).toEqual([["col2", "Descending"], ["col3", "Ascending"]]);
+
+    await gridRows(page).nth(1).hover();
+    await gridRows(page).nth(1).getByRole("button", { name: "Remove" }).click();
+    await expect(gridRows(page)).toHaveCount(1);
+    expect(await sortJSON(page)).toEqual([{ field: "col2", direction: "desc" }]);
+    await undo(page).click();
+    await expect(gridRows(page)).toHaveCount(2);
+    expect(await sortJSON(page)).toEqual([{ field: "col2", direction: "desc" }, { field: "col3" }]);
 
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await expect.poll(() => previewRows(page)).toEqual(["a/y", "a/x", "b/x"]);
-    await expect(previewSortBar(page)).toHaveCount(0);
-
+    await expect.poll(() => previewRows(page)).toEqual(["c/y/1", "b/y/3", "a/x/2"]);
     await getTabbedMenuItemByText(page, creatorTabDesignerName).click();
-    await page.locator("[data-name='matrix']").first().click();
-    await page.locator("[data-name='showSortBar']").getByText("Always", { exact: true }).click();
-    expect(await page.evaluate(() => window["creator"].survey.getQuestionByName("matrix").showSortBar)).toBe("always");
-    await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
-    await expect(previewSortBar(page)).toBeVisible();
-    await expect.poll(() => previewRows(page)).toEqual(["a/y", "a/x", "b/x"]);
+  });
+
+  test("edit the default sort of a dynamic panel as sort levels", async ({ page }) => {
+    await setJSON(page, panelJSON);
+    await page.locator("[data-name='panel']").first().click();
+    await page.locator(".svc-sidebar-tabs").getByTitle("Entries", { exact: true }).click();
+    await addLevel(page).click();
+    await pick(page, 1, 0, "Question 2");
+    await pick(page, 1, 1, "Descending");
+    expect(await rowsShown(page)).toEqual([["Question 2", "Descending"]]);
+    expect(await sortJSON(page)).toEqual([{ field: "q2", direction: "desc" }]);
+    await addLevel(page).click();
+    expect(await rowsShown(page)).toEqual([["Question 2", "Descending"], ["Question 1", "Ascending"]]);
+    await expect(addLevel(page)).toBeDisabled();
+    await undo(page).click();
+    await expect(gridRows(page)).toHaveCount(1);
+    expect(await sortJSON(page)).toEqual([{ field: "q2", direction: "desc" }]);
   });
 });

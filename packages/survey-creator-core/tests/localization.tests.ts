@@ -323,7 +323,7 @@ test("Support preset locale strings", () => {
   editorLocalization.defaultLocale = "";
 });
 test("All properties should be in English translation", () => {
-  const classes = ["survey", "matrixdropdown", "calculatedvalue", "choicesByUrl", "multipletextitem"];
+  const classes = ["survey", "matrixdropdown", "calculatedvalue", "choicesByUrl", "multipletextitem", "sortcriterion"];
   const addClasses = (baseClassName: string): void => {
     classes.push(baseClassName);
     Serializer.getChildrenClasses(baseClassName, true).forEach((qType) => {

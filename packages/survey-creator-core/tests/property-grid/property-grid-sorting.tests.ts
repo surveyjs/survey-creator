@@ -1,18 +1,14 @@
 import {
-  Action, IDialogOptions, ListModel, MatrixDropdownColumn, PopupBaseViewModel, PopupModalManager, Question,
-  QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionPanelDynamicModel, Serializer, SurveyModel,
-  settings as surveySettings, surveyLocalization
+  Action, MatrixDropdownColumn, MatrixDynamicRowModel, Question, QuestionDropdownModel, QuestionMatrixDynamicModel,
+  QuestionPanelDynamicModel, Serializer, SurveyModel
 } from "survey-core";
 import { CreatorTester } from "../creator-tester";
 import { PropertyGridModelTester } from "./property-grid.base";
-import { getSortCriteriaText, PropertyGridEditorSortCriteria } from "../../src/property-grid/sort-criteria";
+import { PropertyGridEditorMatrixSortCriteria } from "../../src/property-grid/matrices";
 import { PropertyGridEditorCollection } from "../../src/property-grid";
-import { editorLocalization } from "../../src/editorLocalization";
+import { UndoRedoAction } from "../../src/plugins/undo-redo/undo-redo-manager";
 
-export * from "../../src/property-grid/sort-criteria";
-
-const up = "↑"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-const down = "↓"; // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+export * from "../../src/property-grid/matrices";
 
 const matrixJSON = {
   type: "matrixdynamic", name: "matrix", rowCount: 0,
@@ -25,6 +21,9 @@ const panelJSON = {
   type: "paneldynamic", name: "panel",
   templateElements: [{ type: "text", name: "q1", title: "Question 1" }, { type: "text", name: "q2", title: "Question 2" }]
 };
+function withSort(json: any, sortCriteria: Array<any>): any {
+  return Object.assign({}, json, { sortCriteria: sortCriteria });
+}
 function createCreator(element: any = matrixJSON): CreatorTester {
   const creator = new CreatorTester();
   creator.JSON = { elements: [element] };
@@ -34,53 +33,30 @@ function createCreator(element: any = matrixJSON): CreatorTester {
 function gridQuestion(creator: CreatorTester, name: string): Question {
   return <Question>creator.propertyGrid.getQuestionByName(name);
 }
+function sortGrid(creator: CreatorTester): QuestionMatrixDynamicModel {
+  return <QuestionMatrixDynamicModel>gridQuestion(creator, "sortCriteria");
+}
 function sortOf(q: any): Array<any> {
   return q.sortCriteria.map((item: any): any => ({ field: item.field, direction: item.direction }));
 }
-function getActions(question: Question): Array<Action> {
-  return question.getTitleToolbar().actions;
+function cell(grid: QuestionMatrixDynamicModel, rowIndex: number, name: string): QuestionDropdownModel {
+  return <QuestionDropdownModel>grid.visibleRows[rowIndex].getQuestionByName(name);
+}
+function cellValues(grid: QuestionMatrixDynamicModel): Array<Array<any>> {
+  return grid.visibleRows.map((row, index) => [cell(grid, index, "field").value, cell(grid, index, "direction").value]);
+}
+function fieldChoices(grid: QuestionMatrixDynamicModel, rowIndex: number): Array<Array<string>> {
+  return cell(grid, rowIndex, "field").choices.map(item => [item.value, item.text]);
 }
 function findAction(question: Question, id: string): Action {
-  return getActions(question).filter(action => action.id === id)[0];
+  return question.getTitleToolbar().actions.filter(action => action.id === id)[0];
 }
-
-let manager: PopupModalManager;
-let savedShowDialog: any;
-let dialogs: Array<IDialogOptions>;
-beforeEach(() => {
-  savedShowDialog = surveySettings.showDialog;
-  manager = new PopupModalManager();
-  dialogs = [];
-  surveySettings.showDialog = <any>((options: IDialogOptions, rootElement?: HTMLElement): any => {
-    dialogs.push(options);
-    return manager.addDialog(options, rootElement);
-  });
-});
-afterEach(() => {
-  manager.clear();
-  surveySettings.showDialog = savedShowDialog;
-});
-
-function openDialog(question: Question): { dialog: any, popup: PopupBaseViewModel } {
-  findAction(question, "property-grid-sort-more").action();
-  const modals = manager.getModals();
-  const popup = modals[modals.length - 1];
-  return { dialog: popup.model.contentComponentData.model, popup: popup };
+function addLevel(grid: QuestionMatrixDynamicModel): void {
+  findAction(grid, "add-item").action();
 }
-const rowActions = (dialog: any, index: number): Array<Action> => <Array<Action>>dialog.rows[index].actions;
-const fieldListOf = (dialog: any, index: number): ListModel => <ListModel>rowActions(dialog, index)[0].data;
-const directionListOf = (dialog: any, index: number): ListModel => <ListModel>rowActions(dialog, index)[1].data;
-const rowsOf = (dialog: any): Array<Array<any>> => dialog.rows.map((row: any): Array<any> => [row.actions[0].title, row.actions[1].title]);
-const titlesOf = (list: ListModel): Array<string> => list.actions.map(item => item.title);
-function pick(list: ListModel, title: string): void {
-  const item = list.actions.filter(action => action.title === title)[0];
-  expect(item, "no item " + title).toBeTruthy();
-  list.onItemClick(item);
+function undoCount(creator: CreatorTester): number {
+  return (<any>creator.undoRedoManager)._transactions.length;
 }
-const footerAction = (popup: PopupBaseViewModel, id: string): Action => popup.footerToolbar.getActionById(id);
-const addNew = (popup: PopupBaseViewModel): Action => footerAction(popup, "sv-sort-dialog-add");
-const removeRow = (dialog: any, index: number): void => { rowActions(dialog, index)[2].action(); };
-const apply = (popup: PopupBaseViewModel): void => { footerAction(popup, "apply").action(); };
 
 describe("Property grid: records sorting", () => {
   test("the sorting properties of the dynamic matrix, the dynamic panel and the multi-select matrix", () => {
@@ -116,245 +92,277 @@ describe("Property grid: records sorting", () => {
       .map(name => !!gridQuestion(dropdownCreator, name) && gridQuestion(dropdownCreator, name).isVisible), "#13: none on the multi-select matrix")
       .toEqual([false, false, false, false]);
   });
-  test("getSortCriteriaText", () => {
-    expect(getSortCriteriaText([]), "#1").toBe("");
-    expect(getSortCriteriaText(<any>undefined), "#2").toBe("");
-    expect(getSortCriteriaText([{ field: "a" }]), "#3").toBe("a " + up);
-    expect(getSortCriteriaText([{ field: "a", direction: "desc" }, { field: "b", direction: "asc" }]), "#4").toBe("a " + down + ", b " + up);
+  test("the editor is the matrix one registered for the sortcriteria type", () => {
+    expect(PropertyGridEditorCollection.getEditor(Serializer.findProperty("matrixdynamic", "sortCriteria")) instanceof PropertyGridEditorMatrixSortCriteria, "#1").toBe(true);
+    expect(PropertyGridEditorCollection.getEditor(Serializer.findProperty("paneldynamic", "sortCriteria")) instanceof PropertyGridEditorMatrixSortCriteria, "#2").toBe(true);
   });
-  test("the text is an expression, shows the stored field names and follows every change of sortCriteria", () => {
+  test("sortCriteria is a matrix with a row per sort level, and a row edits the item itself", () => {
+    const check = (element: any, fields: Array<string>, titles: Array<string>): void => {
+      const creator = createCreator(withSort(element, [{ field: fields[0] }, { field: fields[1], direction: "desc" }]));
+      const question = creator.survey.getAllQuestions()[0];
+      const grid = sortGrid(creator);
+      expect([grid.getType(), grid.isReadOnly, grid.allowRowReorder], "#1 " + element.type).toEqual(["matrixdynamic", false, true]);
+      expect(grid.columns.map(col => [col.name, col.title, col.cellType]), "#2 " + element.type).toEqual(
+        [["field", "Sort by", "dropdown"], ["direction", "Order", "dropdown"]]);
+      expect(grid.visibleRows.length, "#3 " + element.type).toBe(2);
+      expect(grid.visibleRows.map(row => row.editingObj === question.sortCriteria[grid.visibleRows.indexOf(row)]), "#4: the items themselves " + element.type).toEqual([true, true]);
+      expect(cellValues(grid), "#5: a missing direction shows ascending " + element.type).toEqual([[fields[0], "asc"], [fields[1], "desc"]]);
+      expect(fieldChoices(grid, 0).map(item => item[1]), "#6 " + element.type).toEqual(titles);
+      expect(cell(grid, 1, "direction").choices.map(item => [item.value, item.text]), "#7 " + element.type).toEqual([["asc", "Ascending"], ["desc", "Descending"]]);
+      expect([cell(grid, 0, "field").allowClear, cell(grid, 0, "direction").allowClear], "#8: no clear button " + element.type).toEqual([false, false]);
+      expect(grid.visibleRows[0].hasPanel, "#9: no detail panel " + element.type).toBe(false);
+      expect([findAction(grid, "property-grid-clear"), findAction(grid, "property-grid-sort-more")], "#10: no clear and no More... " + element.type).toEqual([undefined, undefined]);
+      expect([question.toJSON().sortCriteria, creator.undoRedoManager.canUndo()], "#11: building the grid writes nothing " + element.type).toEqual(
+        [[{ field: fields[0] }, { field: fields[1], direction: "desc" }], false]);
+    };
+    check(matrixJSON, ["col1", "col2"], ["Column 1", "Column 2"]);
+    check(panelJSON, ["q1", "q2"], ["Question 1", "Question 2"]);
+  });
+  test("the field choices: every column whose values sort, by title; the template questions of a dynamic panel", () => {
+    const creator = createCreator({
+      type: "matrixdynamic", name: "matrix", rowCount: 0, sortCriteria: [{ field: "col1" }],
+      columns: [
+        { name: "col1", title: "Column 1", cellType: "text" },
+        { name: "hidden", title: "Hidden", cellType: "text", visible: false },
+        { name: "tags", cellType: "checkbox", choices: ["a"] },
+        { name: "num", cellType: "text", inputType: "number", allowSort: false },
+        { name: "noTitle", cellType: "dropdown", choices: ["a"] }
+      ]
+    });
+    expect(fieldChoices(sortGrid(creator), 0), "#1: invisible and allowSort: false offered, a checkbox is not").toEqual(
+      [["col1", "Column 1"], ["hidden", "Hidden"], ["num", "num"], ["noTitle", "noTitle"]]);
+
+    const panelCreator = createCreator(withSort({
+      type: "paneldynamic", name: "panel",
+      templateElements: [
+        { type: "text", name: "q1", title: "Question 1" },
+        { type: "checkbox", name: "q2", choices: ["a"] },
+        { type: "panel", name: "inner", elements: [{ type: "dropdown", name: "q3", title: "Question 3", choices: ["a"] }] }
+      ]
+    }, [{ field: "q1" }]));
+    expect(fieldChoices(sortGrid(panelCreator), 0), "#2: a nested template question, not a checkbox").toEqual([["q1", "Question 1"], ["q3", "Question 3"]]);
+  });
+  test("Add takes the first unused field with no direction, as one undo step", () => {
     const creator = createCreator();
     const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
-    const question = gridQuestion(creator, "sortCriteria");
-    expect([question.getType(), question.isReadOnly, question.isEmpty()], "#1").toEqual(["expression", false, true]);
-    expect([matrix.toJSON().sortCriteria, creator.undoRedoManager.canUndo()], "#2: the grid writes nothing").toEqual([undefined, false]);
-
-    matrix.sortCriteria = [{ field: "col1" }, { field: "col2", direction: "desc" }];
-    expect(question.value, "#3: an assignment").toBe("col1 " + up + ", col2 " + down);
-    matrix.sortCriteria.push({ field: "col3", direction: "desc" });
-    expect(question.value, "#4: a push").toBe("col1 " + up + ", col2 " + down + ", col3 " + down);
-    matrix.sortCriteria.splice(2, 1);
-    expect(question.value, "#5: a splice").toBe("col1 " + up + ", col2 " + down);
-    matrix.sortCriteria[0].direction = "desc";
-    expect(question.value, "#6: an item's direction").toBe("col1 " + down + ", col2 " + down);
-    matrix.sortCriteria[1].field = "col3";
-    expect(question.value, "#7: an item's field").toBe("col1 " + down + ", col3 " + down);
-    // an item edit from code is not recorded for undo (an item has no survey); an assignment is
-    matrix.sortCriteria = [{ field: "col2" }];
-    expect(question.value, "#8").toBe("col2 " + up);
+    const grid = sortGrid(creator);
+    expect([grid.visibleRows.length, grid.noRowsText], "#1").toEqual([0, "You don't have any sort levels yet"]);
+    const add = findAction(grid, "add-item");
+    expect([add.title, add.enabled], "#2").toEqual(["Add new sort level", true]);
+    let modified = 0;
+    creator.onModified.add(() => modified++);
+    addLevel(grid);
+    expect([sortOf(matrix), matrix.toJSON().sortCriteria], "#3").toEqual([[{ field: "col1", direction: "asc" }], [{ field: "col1" }]]);
+    expect(matrix.sortCriteria[0].getPropertyValueWithoutDefault("direction"), "#3a: no direction").toBeUndefined();
+    expect([grid.visibleRows.length, grid.visibleRows[0].editingObj === matrix.sortCriteria[0], cellValues(grid)], "#4").toEqual([1, true, [["col1", "asc"]]]);
+    expect([undoCount(creator), modified], "#5: one undo step").toEqual([1, 1]);
     creator.undo();
-    expect(question.value, "#9: undo").toBe("col1 " + down + ", col3 " + down);
+    expect([sortOf(matrix), grid.visibleRows.length], "#6: undo removes it").toEqual([[], 0]);
     creator.redo();
-    expect(question.value, "#10: redo").toBe("col2 " + up);
-    matrix.sortCriteria = [];
-    expect([question.value, (<any>question).formatedValue], "#11: empty").toEqual(["", ""]);
+    expect([sortOf(matrix), grid.visibleRows.length], "#7: redo").toEqual([[{ field: "col1", direction: "asc" }], 1]);
+    addLevel(grid);
+    expect(sortOf(matrix), "#8: the next unused field").toEqual([{ field: "col1", direction: "asc" }, { field: "col2", direction: "asc" }]);
+    expect([add.enabled, grid.canAddRow], "#9: every field is used").toEqual([false, false]);
+  });
+  test("Add follows the fields while the grid is open", () => {
+    const creator = createCreator(withSort(matrixJSON, [{ field: "col1" }, { field: "col2" }]));
+    const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+    const grid = sortGrid(creator);
+    const add = findAction(grid, "add-item");
+    expect(add.enabled, "#1").toBe(false);
+    matrix.addColumn("col3");
+    expect([add.enabled, fieldChoices(grid, 0).map(item => item[0])], "#2: a column added in the designer").toEqual([true, ["col1", "col2", "col3"]]);
+    matrix.columns[2].cellType = "checkbox";
+    expect([add.enabled, fieldChoices(grid, 1).map(item => item[0])], "#3: its cell type does not sort").toEqual([false, ["col1", "col2"]]);
+    matrix.columns[2].cellType = "dropdown";
+    expect(add.enabled, "#4").toBe(true);
+    matrix.columns.splice(2, 1);
+    expect(add.enabled, "#5: removed").toBe(false);
+    matrix.sortCriteria.splice(1, 1);
+    expect(add.enabled, "#6: a level removed from code").toBe(true);
+    creator.undo();
+    expect([sortOf(matrix).length, add.enabled], "#7: undo").toEqual([2, false]);
 
-    creator.JSON = { elements: [Object.assign({}, matrixJSON, { sortCriteria: [{ field: "col2", direction: "desc" }] })] };
-    creator.selectElement(creator.survey.getQuestionByName("matrix"));
-    const newQuestion = gridQuestion(creator, "sortCriteria");
-    expect([newQuestion.value, (<any>newQuestion).formatedValue], "#12: the JSON").toEqual(["col2 " + down, "col2 " + down]);
-    expect(creator.survey.getQuestionByName("matrix").toJSON().sortCriteria, "#13: still the authored value").toEqual([{ field: "col2", direction: "desc" }]);
+    const panelCreator = createCreator(withSort(panelJSON, [{ field: "q1" }, { field: "q2" }]));
+    const panel = <QuestionPanelDynamicModel>panelCreator.survey.getQuestionByName("panel");
+    const panelAdd = findAction(sortGrid(panelCreator), "add-item");
+    expect(panelAdd.enabled, "#8").toBe(false);
+    panel.template.addNewQuestion("text", "q3");
+    expect([panelAdd.enabled, fieldChoices(sortGrid(panelCreator), 0).map(item => item[0])], "#9: a template question added").toEqual([true, ["q1", "q2", "q3"]]);
+    addLevel(sortGrid(panelCreator));
+    expect(sortOf(panel).map(item => item.field), "#10").toEqual(["q1", "q2", "q3"]);
   });
-  test("the grid never writes sortCriteria back", () => {
-    const creator = createCreator(Object.assign({}, matrixJSON, { sortCriteria: [{ field: "col1", direction: "desc" }] }));
-    const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
-    const items = matrix.sortCriteria.slice();
-    let changes = 0;
-    matrix.registerFunctionOnPropertyValueChanged("sortCriteria", () => changes++, "test");
-    creator.selectElement(creator.survey);
-    creator.selectElement(matrix);
-    const question = gridQuestion(creator, "sortCriteria");
-    expect(question.value, "#1").toBe("col1 " + down);
-    expect([changes, matrix.sortCriteria[0] === items[0], creator.undoRedoManager.canUndo()], "#2").toEqual([0, true, false]);
-    matrix.unRegisterFunctionOnPropertyValueChanged("sortCriteria", "test");
-  });
-  test("More... opens the runtime dialog with the current sort, Apply writes it as one undo step", () => {
-    const creator = createCreator(Object.assign({}, matrixJSON, { sortCriteria: [{ field: "col2", direction: "desc" }] }));
-    const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
-    const question = gridQuestion(creator, "sortCriteria");
-    const more = findAction(question, "property-grid-sort-more");
-    expect([more.title, more.disabled, more.visible], "#1").toEqual(["More...", false, true]);
-    const { dialog, popup } = openDialog(question);
-    expect([dialogs.length, dialogs[0].componentName, popup.model.isVisible], "#2").toEqual([1, "sv-records-sort-dialog", true]);
-    expect(rowsOf(dialog), "#3: the current sort, by column titles").toEqual([["Column 2", "Alphabet, Z - A"]]);
-    expect(titlesOf(fieldListOf(dialog, 0)), "#4").toEqual(["Column 1", "Column 2"]);
-    pick(fieldListOf(dialog, 0), "Column 1");
-    pick(directionListOf(dialog, 0), "Alphabet, A - Z");
-    addNew(popup).action();
-    pick(directionListOf(dialog, 1), "Alphabet, Z - A");
-    apply(popup);
-    expect([sortOf(matrix), question.value], "#5").toEqual([
-      [{ field: "col1", direction: "asc" }, { field: "col2", direction: "desc" }], "col1 " + up + ", col2 " + down]);
-    expect(popup.model.isVisible, "#5a: closed").toBe(false);
-    creator.undo();
-    expect([sortOf(matrix), question.value], "#6: one undo step").toEqual([[{ field: "col2", direction: "desc" }], "col2 " + down]);
-    creator.undo();
-    expect(sortOf(matrix), "#7: nothing else was recorded").toEqual([{ field: "col2", direction: "desc" }]);
-    creator.redo();
-    expect([sortOf(matrix), question.value], "#8: redo").toEqual([
-      [{ field: "col1", direction: "asc" }, { field: "col2", direction: "desc" }], "col1 " + up + ", col2 " + down]);
-    expect(matrix.toJSON().sortCriteria, "#9").toEqual([{ field: "col1" }, { field: "col2", direction: "desc" }]);
-  });
-  test("an unchanged Apply records nothing", () => {
-    const creator = createCreator(Object.assign({}, matrixJSON, { sortCriteria: [{ field: "col2", direction: "desc" }] }));
-    const question = gridQuestion(creator, "sortCriteria");
-    const { popup } = openDialog(question);
-    apply(popup);
-    expect([popup.model.isVisible, creator.undoRedoManager.canUndo()], "#1").toEqual([false, false]);
-  });
-  test("Clear empties sortCriteria, is undoable and shows only while there is a sort", () => {
-    const creator = createCreator(Object.assign({}, matrixJSON, { sortCriteria: [{ field: "col2", direction: "desc" }] }));
-    const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
-    const question = gridQuestion(creator, "sortCriteria");
-    const clear = findAction(question, "property-grid-clear");
-    expect([clear.visible, clear.disabled], "#1").toEqual([true, false]);
-    expect(getActions(question).map(action => action.id), "#2: More... before the one clear").toEqual(["property-grid-help", "property-grid-sort-more", "property-grid-clear"]);
-    clear.action();
-    expect([sortOf(matrix), question.value, clear.visible], "#3").toEqual([[], "", false]);
-    creator.undo();
-    expect([sortOf(matrix), question.value, clear.visible], "#4").toEqual([[{ field: "col2", direction: "desc" }], "col2 " + down, true]);
-    matrix.sortCriteria.splice(0, 1);
-    expect(clear.visible, "#5: a splice").toBe(false);
-    matrix.sortCriteria.push({ field: "col1" });
-    expect(clear.visible, "#6: a push").toBe(true);
-  });
-  test("More... and Clear on a dynamic panel", () => {
-    const creator = createCreator(panelJSON);
-    const panel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("panel");
-    const question = gridQuestion(creator, "sortCriteria");
-    const { dialog, popup } = openDialog(question);
-    expect(titlesOf(fieldListOf(dialog, 0)), "#1").toEqual(["Question 1", "Question 2"]);
-    pick(fieldListOf(dialog, 0), "Question 2");
-    pick(directionListOf(dialog, 0), "Alphabet, Z - A");
-    apply(popup);
-    expect([sortOf(panel), question.value], "#2").toEqual([[{ field: "q2", direction: "desc" }], "q2 " + down]);
-    findAction(question, "property-grid-clear").action();
-    expect([sortOf(panel), question.value], "#3").toEqual([[], ""]);
-    creator.undo();
-    expect(sortOf(panel), "#4: clear undone").toEqual([{ field: "q2", direction: "desc" }]);
-    creator.undo();
-    expect(sortOf(panel), "#5: apply undone").toEqual([]);
-  });
-  test("More... is enabled while no field sorts", () => {
+  test("a matrix with no field to sort by", () => {
     const creator = createCreator({ type: "matrixdynamic", name: "matrix", rowCount: 0, columns: [{ name: "tags", cellType: "checkbox", choices: ["a"] }] });
     const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
-    const question = gridQuestion(creator, "sortCriteria");
-    expect(findAction(question, "property-grid-sort-more").disabled, "#1: a checkbox column").toBe(false);
-    let { popup } = openDialog(question);
-    expect(popup.model.isVisible, "#2: the dialog opens").toBe(true);
-    popup.model.isVisible = false;
-    matrix.columns.splice(0, 1);
-    expect(findAction(question, "property-grid-sort-more").disabled, "#3: no columns").toBe(false);
-    popup = openDialog(question).popup;
-    expect(popup.model.isVisible, "#4: the dialog opens").toBe(true);
+    const grid = sortGrid(creator);
+    expect([findAction(grid, "add-item").enabled, grid.canAddRow], "#1").toEqual([false, false]);
+    grid.addRow();
+    expect([sortOf(matrix), grid.visibleRows.length, creator.undoRedoManager.canUndo()], "#2: no add path adds an empty level").toEqual([[], 0, false]);
   });
-  test("the actions are disabled only while the property may not be edited", () => {
-    const creator = createCreator(Object.assign({}, matrixJSON, { allowSort: true, sortCriteria: [{ field: "col1" }] }));
-    const reselect = (): Question => {
+  test("editing a cell changes the item in place, one undo step each", () => {
+    const savedMergeTime = UndoRedoAction.maximumMergeTime;
+    UndoRedoAction.maximumMergeTime = 0;
+    try {
+      const creator = createCreator(withSort(Object.assign({}, matrixJSON, { columns: matrixJSON.columns.concat([{ name: "col3", cellType: "text" }]) }),
+        [{ field: "col1" }, { field: "col2", direction: "desc" }]));
+      const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+      const items = matrix.sortCriteria.slice();
+      const grid = sortGrid(creator);
+      const modified: Array<any> = [];
+      creator.onModified.add((_, options) => modified.push([options.type, options.name, options.target === items[0]]));
+      cell(grid, 0, "field").value = "col3";
+      expect([sortOf(matrix)[0], matrix.sortCriteria[0] === items[0]], "#1: the same item").toEqual([{ field: "col3", direction: "asc" }, true]);
+      cell(grid, 0, "direction").value = "desc";
+      expect(sortOf(matrix)[0], "#2").toEqual({ field: "col3", direction: "desc" });
+      expect([undoCount(creator), modified], "#3: one step and one notification each").toEqual(
+        [2, [["PROPERTY_CHANGED", "field", true], ["PROPERTY_CHANGED", "direction", true]]]);
+      expect(matrix.toJSON().sortCriteria, "#4").toEqual([{ field: "col3", direction: "desc" }, { field: "col2", direction: "desc" }]);
+      creator.undo();
+      expect([sortOf(matrix)[0], cellValues(grid)[0]], "#5: undo").toEqual([{ field: "col3", direction: "asc" }, ["col3", "asc"]]);
+      creator.undo();
+      expect([sortOf(matrix)[0], cellValues(grid)[0], matrix.sortCriteria[0] === items[0]], "#6").toEqual([{ field: "col1", direction: "asc" }, ["col1", "asc"], true]);
+      creator.redo();
+      creator.redo();
+      expect([sortOf(matrix)[0], cellValues(grid)[0]], "#7: redo").toEqual([{ field: "col3", direction: "desc" }, ["col3", "desc"]]);
+
+      const steps = undoCount(creator);
+      cell(grid, 1, "field").value = "col3";
+      expect(cell(grid, 1, "field").errors.length, "#8: the unique error").toBe(1);
+      expect([sortOf(matrix)[1], undoCount(creator)], "#9: the item keeps its field, nothing recorded").toEqual([{ field: "col2", direction: "desc" }, steps]);
+    } finally {
+      UndoRedoAction.maximumMergeTime = savedMergeTime;
+    }
+  });
+  test("remove and reorder levels, one undo step each", () => {
+    const creator = createCreator(withSort(Object.assign({}, matrixJSON, { columns: matrixJSON.columns.concat([{ name: "col3", cellType: "text" }]) }),
+      [{ field: "col1" }, { field: "col2", direction: "desc" }, { field: "col3" }]));
+    const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+    const items = matrix.sortCriteria.slice();
+    const grid = sortGrid(creator);
+    const modified: Array<string> = [];
+    creator.onModified.add((_, options) => modified.push(options.type));
+    const fields = (): Array<string> => sortOf(matrix).map(item => item.field);
+
+    grid.dragDropMatrixRows.onDragStart.fire(<any>{}, <any>{});
+    grid.moveRowByIndex(2, 0);
+    grid.dragDropMatrixRows.onDragClear.fire(<any>{}, <any>{});
+    expect([fields(), cellValues(grid).map(row => row[0])], "#1: a drag").toEqual([["col3", "col1", "col2"], ["col3", "col1", "col2"]]);
+    expect([undoCount(creator), modified], "#2: one undo step").toEqual([1, ["ELEMENT_REORDERED"]]);
+    expect([matrix.sortCriteria[0] === items[2], grid.visibleRows[0].editingObj === items[2]], "#3: the same item").toEqual([true, true]);
+    creator.undo();
+    expect([fields(), matrix.sortCriteria.every((item, index) => item === items[index])], "#4: undo").toEqual([["col1", "col2", "col3"], true]);
+    creator.redo();
+    expect(fields(), "#5: redo").toEqual(["col3", "col1", "col2"]);
+
+    grid.removeRow(1);
+    expect([fields(), grid.visibleRows.length, undoCount(creator)], "#6: remove").toEqual([["col3", "col2"], 2, 2]);
+    creator.undo();
+    expect([fields(), matrix.sortCriteria[1] === items[0], grid.visibleRows[1].editingObj === items[0]], "#7: undo puts the item back").toEqual(
+      [["col3", "col1", "col2"], true, true]);
+    cell(grid, 1, "direction").value = "desc";
+    expect(matrix.sortCriteria[1].direction, "#8: the restored row still edits it").toBe("desc");
+  });
+  test("changes from outside rebuild the rows", () => {
+    const creator = createCreator();
+    const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+    const grid = sortGrid(creator);
+    matrix.sortCriteria = [{ field: "col2", direction: "desc" }, { field: "col1" }];
+    expect(cellValues(grid), "#1: an assignment").toEqual([["col2", "desc"], ["col1", "asc"]]);
+    matrix.sortCriteria.splice(0, 1);
+    expect(cellValues(grid), "#2: a splice").toEqual([["col1", "asc"]]);
+    matrix.sortCriteria.push({ field: "col2" });
+    expect([cellValues(grid), grid.visibleRows[1].editingObj === matrix.sortCriteria[1]], "#3: a push").toEqual([[["col1", "asc"], ["col2", "asc"]], true]);
+    matrix.sortCriteria[1].direction = "desc";
+    expect(cellValues(grid), "#4: an item edited from code").toEqual([["col1", "asc"], ["col2", "desc"]]);
+    creator.undo();
+    expect(cellValues(grid), "#5: undo").toEqual([["col1", "asc"], ["col2", "asc"]]);
+
+    creator.JSON = { elements: [withSort(matrixJSON, [{ field: "col2", direction: "desc" }])] };
+    creator.selectElement(creator.survey.getQuestionByName("matrix"));
+    expect(cellValues(sortGrid(creator)), "#6: the JSON").toEqual([["col2", "desc"]]);
+  });
+  test("a stored field that is not among the choices is kept", () => {
+    const creator = createCreator(withSort(matrixJSON, [{ field: "gone", direction: "desc" }, { field: "col1" }]));
+    const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+    const grid = sortGrid(creator);
+    const json = [{ field: "gone", direction: "desc" }, { field: "col1" }];
+    expect([cellValues(grid), matrix.toJSON().sortCriteria], "#1: the grid is built").toEqual([[["gone", "desc"], ["col1", "asc"]], json]);
+    const field = cell(grid, 0, "field");
+    expect([fieldChoices(grid, 0), field.selectedItem.text], "#2: the stored name, a choice of its own row only").toEqual(
+      [[["col1", "Column 1"], ["col2", "Column 2"], ["gone", "gone"]], "gone"]);
+    expect(fieldChoices(grid, 1).map(item => item[0]), "#3").toEqual(["col1", "col2"]);
+    expect([grid.hasErrors(true), field.errors.length], "#4: no error").toEqual([false, 0]);
+    field.dropdownListModel.popupModel.toggleVisibility();
+    field.dropdownListModel.popupModel.toggleVisibility();
+    matrix.addColumn("col3");
+    expect([matrix.toJSON().sortCriteria, field.value, field.errors.length], "#5: opened, closed, choices refreshed").toEqual([json, "gone", 0]);
+    expect(fieldChoices(grid, 0).map(item => item[0]), "#6").toEqual(["col1", "col2", "col3", "gone"]);
+    expect(undoCount(creator), "#7: only the column").toBe(1);
+    field.value = "col2";
+    expect([sortOf(matrix)[0].field, fieldChoices(grid, 0).map(item => item[0])], "#8: picked, the stale choice goes").toEqual(["col2", ["col1", "col2", "col3"]]);
+    creator.undo();
+    expect([sortOf(matrix)[0].field, field.value, fieldChoices(grid, 0).map(item => item[0])], "#9: undo brings it back").toEqual(
+      ["gone", "gone", ["col1", "col2", "col3", "gone"]]);
+  });
+  test("the matrix is read-only only while the property may not be edited", () => {
+    const creator = createCreator(withSort(matrixJSON, [{ field: "col1" }]));
+    const reselect = (): QuestionMatrixDynamicModel => {
       creator.selectElement(creator.survey);
       creator.selectElement(creator.survey.getQuestionByName("matrix"));
-      return gridQuestion(creator, "sortCriteria");
+      return sortGrid(creator);
     };
-    const state = (question: Question): Array<any> => [question.isReadOnly,
-      findAction(question, "property-grid-sort-more").disabled, findAction(question, "property-grid-clear").disabled];
-    expect(state(gridQuestion(creator, "sortCriteria")), "#1: editable Creator").toEqual([false, false, false]);
-
+    const state = (grid: QuestionMatrixDynamicModel): Array<any> => [grid.isReadOnly, grid.canAddRow, cell(grid, 0, "field").isReadOnly];
+    expect(state(sortGrid(creator)), "#1: editable Creator").toEqual([false, true, false]);
     creator.readOnly = true;
-    expect(state(reselect()), "#2: read-only Creator").toEqual([true, true, true]);
+    expect(state(reselect()), "#2: read-only Creator").toEqual([true, false, true]);
     creator.readOnly = false;
-
-    const prop = Serializer.findProperty("matrixdynamic", "sortCriteria");
-    prop.readOnly = true;
-    try {
-      expect(state(reselect()), "#3: a read-only property").toEqual([true, true, true]);
-    } finally {
-      prop.readOnly = false;
-    }
-
-    let readOnlySort = true;
     creator.onPropertyGetReadOnly.add((_, options) => {
-      if (options.propertyName === "sortCriteria") options.readOnly = readOnlySort;
+      if (options.propertyName === "sortCriteria") options.readOnly = true;
     });
-    expect(state(reselect()), "#4: onPropertyGetReadOnly").toEqual([true, true, true]);
-    const visibleIf = gridQuestion(creator, "visibleIf");
-    visibleIf.value = "{q1} = 1";
-    const visibleIfClear = findAction(visibleIf, "property-grid-clear");
-    expect([visibleIf.isReadOnly, visibleIfClear.disabled, visibleIfClear.visible], "#5: another property keeps its own clear").toEqual([false, false, true]);
-
-    readOnlySort = false;
-    expect(state(reselect()), "#6: the callback is asked again on the next build").toEqual([false, false, false]);
+    expect(state(reselect()), "#3: onPropertyGetReadOnly").toEqual([true, false, true]);
   });
-  test("the dialog uses the Creator's locale for its whole life; the survey's locale is untouched", () => {
-    const creatorLocale = "sort-creator-test";
-    const surveyLocale = "sort-survey-test";
-    surveyLocalization.locales[creatorLocale] = { sortByText: "Order", sortDefaultText: "Stored", sortNoDirectionText: "None", sortAddNewText: "New level",
-      modalApplyButtonText: "Use", sortAZText: "A first", sortZAText: "Z first" };
-    surveyLocalization.locales[surveyLocale] = { sortByText: "Trier", sortDefaultText: "Par defaut", sortNoDirectionText: "Rien", sortAddNewText: "Ajouter",
-      modalApplyButtonText: "Appliquer", sortAZText: "A-Z", sortZAText: "Z-A" };
-    try {
-      const creator = createCreator();
-      creator.survey.locale = surveyLocale;
-      editorLocalization.currentLocale = creatorLocale;
-      const question = gridQuestion(creator, "sortCriteria");
-      const { dialog, popup } = openDialog(question);
-      const texts = (): Array<string> => [popup.title, addNew(popup).title, footerAction(popup, "apply").title];
-      expect([texts(), rowsOf(dialog)], "#1: opening").toEqual([["Order", "New level", "Use"], [["Column 1", "Stored"]]]);
-      expect(titlesOf(directionListOf(dialog, 0)), "#2").toEqual(["Stored", "A first", "Z first"]);
-      addNew(popup).action();
-      expect([texts(), rowsOf(dialog)], "#3: Add New").toEqual([["Order", "New level", "Use"], [["Column 1", "Stored"], ["Column 2", "None"]]]);
-      removeRow(dialog, 1);
-      expect(texts(), "#4: a removed row").toEqual(["Order", "New level", "Use"]);
-      pick(fieldListOf(dialog, 0), "Column 2");
-      expect(texts(), "#5: a field pick").toEqual(["Order", "New level", "Use"]);
-      pick(directionListOf(dialog, 0), "Z first");
-      expect([texts(), rowsOf(dialog)], "#6: a direction pick").toEqual([["Order", "New level", "Use"], [["Column 2", "Z first"]]]);
-      expect([creator.survey.locale, surveyLocalization.currentLocale], "#7: the survey's locale").toEqual([surveyLocale, ""]);
-      apply(popup);
-
-      editorLocalization.currentLocale = surveyLocale;
-      const second = openDialog(question);
-      expect(second.popup.title, "#8: the same locale").toBe("Trier");
-      second.popup.clickClose();
-    } finally {
-      editorLocalization.currentLocale = "";
-      delete surveyLocalization.locales[creatorLocale];
-      delete surveyLocalization.locales[surveyLocale];
-    }
+  test("onSetPropertyEditorOptions: Add stays off when it turns Add off", () => {
+    const creator = new CreatorTester();
+    creator.onSetPropertyEditorOptions.add((_, options) => {
+      if (options.propertyName === "sortCriteria") options.editorOptions.allowAddRemoveItems = false;
+    });
+    creator.JSON = { elements: [matrixJSON] };
+    creator.selectElement(creator.survey.getQuestionByName("matrix"));
+    const grid = sortGrid(creator);
+    expect(grid.canAddRow, "#1").toBe(false);
+    (<QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix")).addColumn("col3");
+    expect(grid.canAddRow, "#2").toBe(false);
   });
   test("disposing the grid releases its subscriptions", () => {
-    const creator = createCreator(Object.assign({}, matrixJSON, { sortCriteria: [{ field: "col1" }] }));
+    const creator = createCreator(withSort(matrixJSON, [{ field: "col1" }]));
     const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
-    const question = gridQuestion(creator, "sortCriteria");
-    const item = matrix.sortCriteria[0];
-    const key = "sortCriteriaText_" + question.id;
-    const hasHandler = (obj: any, name: string): boolean => !!obj["propChangeHandlers"] && !!obj["propChangeHandlers"].get(name) && obj["propChangeHandlers"].get(name).has(key);
-    expect([hasHandler(matrix, "sortCriteria"), hasHandler(item, "field"), hasHandler(item, "direction")], "#0: subscribed").toEqual([true, true, true]);
+    const modifiedHandlers = creator.onModified.length;
+    const grid = sortGrid(creator);
+    const key = "sortCriteriaGrid_" + grid.id;
+    const hasHandler = (): boolean => !!matrix["propChangeHandlers"] && !!matrix["propChangeHandlers"].get("sortCriteria") && matrix["propChangeHandlers"].get("sortCriteria").has(key);
+    expect(hasHandler(), "#0: subscribed").toBe(true);
     creator.selectElement(creator.survey);
-    expect(question.isDisposed, "#1").toBe(true);
-    expect([hasHandler(matrix, "sortCriteria"), hasHandler(item, "field"), hasHandler(item, "direction")], "#1a: released").toEqual([false, false, false]);
-    const updateValueFromSurvey = vi.spyOn(question, "updateValueFromSurvey");
+    expect([grid.isDisposed, hasHandler(), creator.onModified.length], "#1: released").toEqual([true, false, modifiedHandlers - 1]);
     matrix.sortCriteria = [{ field: "col2" }];
-    item.direction = "desc";
-    matrix.sortCriteria[0].direction = "desc";
-    expect(updateValueFromSurvey, "#2").not.toHaveBeenCalled();
-    updateValueFromSurvey.mockRestore();
+    matrix.addColumn("col3");
+    expect(grid.isDisposed, "#2: nothing throws").toBe(true);
   });
   test("two grids on the same matrix keep their own subscriptions", () => {
-    const survey = new SurveyModel({ elements: [Object.assign({}, matrixJSON, { sortCriteria: [{ field: "col1" }] })] });
+    const survey = new SurveyModel({ elements: [withSort(matrixJSON, [{ field: "col1" }])] });
     const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("matrix");
     const grid1 = new PropertyGridModelTester(matrix);
     const grid2 = new PropertyGridModelTester(matrix);
-    const q1 = grid1.survey.getQuestionByName("sortCriteria");
-    const q2 = grid2.survey.getQuestionByName("sortCriteria");
-    matrix.sortCriteria[0].direction = "desc";
-    expect([q1.value, q2.value], "#1").toEqual(["col1 " + down, "col1 " + down]);
+    const q1 = <QuestionMatrixDynamicModel>grid1.survey.getQuestionByName("sortCriteria");
+    const q2 = <QuestionMatrixDynamicModel>grid2.survey.getQuestionByName("sortCriteria");
+    expect([q1.canAddRow, q2.canAddRow], "#1").toEqual([true, true]);
+    matrix.sortCriteria.push({ field: "col2" });
+    expect([q1.canAddRow, q2.canAddRow, q1.visibleRows.length, q2.visibleRows.length], "#2").toEqual([false, false, 2, 2]);
     grid1.obj = null;
-    matrix.sortCriteria[0].direction = "asc";
-    expect(q2.value, "#2").toBe("col1 " + up);
-  });
-  test("the editor is the one registered for the sortcriteria type", () => {
-    const prop = Serializer.findProperty("matrixdynamic", "sortCriteria");
-    expect(PropertyGridEditorCollection.getEditor(prop) instanceof PropertyGridEditorSortCriteria, "#1").toBe(true);
+    matrix.sortCriteria.splice(1, 1);
+    expect([q2.canAddRow, q2.visibleRows.length], "#3").toEqual([true, 1]);
+    (<MatrixDynamicRowModel>q2.visibleRows[0]).getQuestionByName("direction").value = "desc";
+    expect(matrix.sortCriteria[0].direction, "#4").toBe("desc");
   });
   test("the column's allowSort follows the matrix's allowSort in the column grid", () => {
     const creator = createCreator();
