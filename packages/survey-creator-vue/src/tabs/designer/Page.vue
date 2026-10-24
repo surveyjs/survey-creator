@@ -41,21 +41,38 @@
         <div class="svc-panel__placeholder">{{ model.placeholderText }}</div>
       </div>
     </div>
-    <div
-      v-if="model.allowDragging && !model.isGhost"
-      class="svc-question__drag-area"
-      v-on:pointerdown="(e) => model.onPointerDown(e)"
-    >
-      <SvComponent
-        :is="'sv-svg-icon'"
-        class="svc-question__drag-element"
-        v-bind="{
-          css: 'svc-question__drag-element',
-          iconName: 'icon-drag-area-indicator_24x16',
-          size: 'auto',
-        }"
-      ></SvComponent>
-      <div class="svc-page__content-actions">
+    <!-- The loading placeholder renders no header and no footer: reading their action containers builds them -->
+    <template v-if="model.needRenderContent">
+      <div
+        v-if="model.allowDragging && !model.isGhost"
+        class="svc-question__drag-area"
+        v-on:pointerdown="(e) => model.onPointerDown(e)"
+      >
+        <SvComponent
+          :is="'sv-svg-icon'"
+          class="svc-question__drag-element"
+          v-bind="{
+            css: 'svc-question__drag-element',
+            iconName: 'icon-drag-area-indicator_24x16',
+            size: 'auto',
+          }"
+        ></SvComponent>
+        <div class="svc-page__content-actions">
+          <SvComponent
+            :is="'sv-action-bar'"
+            :model="model.actionContainer"
+          ></SvComponent>
+          <SvComponent
+            v-if="model.topActionContainer.hasActions"
+            :is="'sv-action-bar'"
+            :model="model.topActionContainer"
+          ></SvComponent>
+        </div>
+      </div>
+      <div
+        v-if="!model.allowDragging || model.isGhost"
+        class="svc-page__content-actions"
+      >
         <SvComponent
           :is="'sv-action-bar'"
           :model="model.actionContainer"
@@ -66,25 +83,11 @@
           :model="model.topActionContainer"
         ></SvComponent>
       </div>
-    </div>
-    <div
-      v-if="!model.allowDragging || model.isGhost"
-      class="svc-page__content-actions"
-    >
       <SvComponent
         :is="'sv-action-bar'"
-        :model="model.actionContainer"
+        :model="model.footerActionsBar"
       ></SvComponent>
-      <SvComponent
-        v-if="model.topActionContainer.hasActions"
-        :is="'sv-action-bar'"
-        :model="model.topActionContainer"
-      ></SvComponent>
-    </div>
-    <SvComponent
-      :is="'sv-action-bar'"
-      :model="model.footerActionsBar"
-    ></SvComponent>
+    </template>
   </div>
 </template>
 <script lang="ts" setup>
