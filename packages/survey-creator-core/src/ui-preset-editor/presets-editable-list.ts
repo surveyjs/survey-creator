@@ -7,6 +7,7 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
   //  return inputString?.replace(/[^a-zA-Z0-9]/g, "-");
   //}
   private defaultIcon = "square-dashed-24x24";
+  private static popupSurveyInstanceId = 0;
   protected get nameItems() { return this.path + "_items"; }
   protected get nameMatrix() { return this.fullPath + "_matrix"; }
   protected hasIcon(_: string) { return false; }
@@ -276,6 +277,9 @@ export class CreatorPresetEditableList extends CreatorPresetEditableBase {
     const index = (matrix.visibleRows as any).findIndex(r => r === row);
     const data = matrix.value[index];
     const survey = new SurveyModel({ elements: matrix.toJSON().detailElements });
+    // Each survey numbers its element ids from zero, so without a prefix the popup reuses the ids of the
+    // presets survey rendered behind it and aria-labelledby can resolve to that survey's titles.
+    survey.elementIdPrefix = "sps-popup-" + (++CreatorPresetEditableList.popupSurveyInstanceId) + "-";
     survey.fitToContainer = false;
     survey.showNavigationButtons = false;
     survey.data = data;
