@@ -152,6 +152,11 @@
             choices: ["Search engine", "A friend", "Social media", "Newspaper"]
           },
           {
+            type: "dropdown", name: "country", title: "Country",
+            choices: ["Canada", "Germany", "United Kingdom", "United States"]
+          },
+          { type: "text", name: "zip", title: "Postal code", startWithNewLine: false },
+          {
             type: "panel", name: "contact", title: "Contact details", elements: [
               { type: "text", name: "email", title: "Email", inputType: "email" },
               { type: "text", name: "phone", title: "Phone", inputType: "tel", startWithNewLine: false }
@@ -189,7 +194,7 @@
     let currentTheme = "DefaultLight";
     let currentWidth = "900px";
 
-    const liveSurvey = new Survey.Model(window.demoJson);
+    let liveSurvey = new Survey.Model(window.demoJson);
     window.liveSurvey = liveSurvey;
 
     const createCreator = (options) => {
@@ -246,9 +251,17 @@
         return React.createElement(SurveyCreator.SurveyCreatorComponent, { creator: this.state.creator });
       }
     }
-    ReactDOMClient.createRoot(document.getElementById("live-survey")).render(
-      React.createElement(SurveyReact.Survey, { model: liveSurvey })
-    );
+    const liveRoot = ReactDOMClient.createRoot(document.getElementById("live-survey"));
+    liveRoot.render(React.createElement(SurveyReact.Survey, { model: liveSurvey }));
+    // Recreates both the live survey and the creator with the same JSON (the layout probe uses it).
+    window.setDemoJson = (json) => {
+      window.demoJson = json;
+      liveSurvey = new Survey.Model(json);
+      window.liveSurvey = liveSurvey;
+      liveRoot.render(React.createElement(SurveyReact.Survey, { model: liveSurvey, key: "live-" + Date.now() }));
+      window.updateCreatorModel({}, json);
+      window.setDemoTheme(currentTheme);
+    };
     ReactDOMClient.createRoot(document.getElementById("survey-creator")).render(
       React.createElement(React.StrictMode, { children: React.createElement(SurveyCreatorRenderComponent) })
     );

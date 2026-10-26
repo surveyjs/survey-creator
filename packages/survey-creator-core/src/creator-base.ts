@@ -531,6 +531,8 @@ export class SurveyCreatorModel extends Base
    * @see allowModifyPages
    */
   public get pageEditMode(): "standard" | "single" | "bypage" {
+    // Inline mode shows one page at a time, as the live survey does. The stored value stays untouched.
+    if (this.isInlineLayout && this.pageEditModeValue !== "single") return "bypage";
     return this.pageEditModeValue;
   }
   public set pageEditMode(val: "standard" | "single" | "bypage") {
@@ -579,8 +581,34 @@ export class SurveyCreatorModel extends Base
     } else {
       survey["cssVariables"] = {};
     }
+    survey.liveLayoutInDesignMode = isInline;
+    if (!isInline) {
+      survey.setIsMobile(!!this.isMobileView);
+    }
+    if (this.pageEditModeValue !== "single" && this.pageEditModeValue !== "bypage") {
+      this.onPropertyChanged.fire(this, { name: "pageEditMode", oldValue: isInline ? this.pageEditModeValue : "bypage", newValue: this.pageEditMode });
+    }
+    // Placeholder choice items depend on the mode (SP04).
+    survey.getAllQuestions(false, true, true).forEach((q: Question) => {
+      const adorner = SurveyElementAdornerBase.GetAdorner<any>(q);
+      adorner?.refreshOptionItems?.();
+    });
     const designerPlugin = this.getPlugin<TabDesignerPlugin>("designer", false);
     designerPlugin?.model?.updateInlineLayout();
+  }
+  // Inline mode: the placeholders of an empty survey or page title and of an empty survey logo show only
+  // while that element is selected, so the surface keeps the live survey's layout.
+  public beforeShowEmptyPlaceholder(element: Base, propertyName: string, show: boolean): boolean {
+    if (!this.isInlineLayout || !show) return show;
+    return this.isElementSelected(element);
+  }
+  // Inline mode: element descriptions are cached in hasDescription; recompute them on a selection change.
+  private updateInlineDescriptions(elements: Array<Base>): void {
+    if (!this.isInlineLayout) return;
+    elements.forEach((el: any) => {
+      if (!el || el.isDisposed || typeof el.calcDescriptionVisibility !== "function") return;
+      el.hasDescription = el.calcDescriptionVisibility();
+    });
   }
   // CreatorResponsivityManager.dispose() resets only the toolbox and page navigator permissions.
   private resetResponsivityState(): void {
@@ -2768,6 +2796,10 @@ export class SurveyCreatorModel extends Base
   }
 
   beforeShowInplaceDescriptionEditor(element: SurveyModel | Question | PageModel | PanelModel, show: boolean): boolean {
+    // Inline mode: an empty description shows its placeholder only for the selected element (SP04).
+    if (this.isInlineLayout && show && !!element.locDescription && element.locDescription.isEmpty && !this.isElementSelected(element)) {
+      show = false;
+    }
     if (this.onBeforeShowInplaceDescriptionEditor.isEmpty) return show;
     const options: BeforeShowInplaceDescriptionEditorEvent = {
       element: element,
@@ -3139,6 +3171,7 @@ export class SurveyCreatorModel extends Base
     }
     if (reason === "designer" && this.isInlineLayout) {
       this.applyInlineSurfaceTheme(survey);
+      survey.liveLayoutInDesignMode = true;
     }
     this.onSurveyInstanceCreated.fire(this, {
       survey: survey,
@@ -3744,6 +3777,7 @@ export class SurveyCreatorModel extends Base
             true
           );
         }
+        this.updateInlineDescriptions([oldValue, this.selectedElementValue]);
       }
     }
     if (oldValue !== element || !!propertyName) {
@@ -5494,6 +5528,9 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
   model.isPopupEditorContent = false;
   model.beforeShowInplaceDescriptionEditorCallback = (element: SurveyModel | Question | PageModel | PanelModel, show: boolean): boolean => {
     return creator.beforeShowInplaceDescriptionEditor(element, show);
+  };
+  model.beforeShowEmptyPlaceholderCallback = (element: Base, propertyName: string, show: boolean): boolean => {
+    return creator.beforeShowEmptyPlaceholder(element, propertyName, show);
   };
   model.onElementWrapperComponentName.add((_, opt) => {
     const compName = opt.componentName;

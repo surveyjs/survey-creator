@@ -117,7 +117,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.hoverTimeout = undefined;
       this.isHovered = false;
     }
-    this.actionContainer.allowResponsiveness();
+    // Inline mode keeps the action containers unbuilt until something renders them.
+    if (!this.creator.isInlineLayout || this.isActionContainerCreated) {
+      this.actionContainer.allowResponsiveness();
+    }
   }
 
   private getExpandCollapseAnimationOptions(): IAnimationConsumer {
@@ -340,7 +343,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.restoreState();
       if (surveyElement.getPropertyValue("isSelectedInDesigner")) {
         this.onElementSelectedChanged(true);
-        this.actionContainer.allowResponsiveness();
+        if (!this.creator.isInlineLayout || this.isActionContainerCreated) {
+          this.actionContainer.allowResponsiveness();
+        }
       }
       this.updateActionsContainer(surveyElement);
       this.updateTopActionContainer();
@@ -399,6 +404,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
     this.updateActionsProperties();
+    if (this.creator.isInlineLayout && !this.isActionContainerCreated) return;
     this.actionContainer.allowResponsiveness();
   }
   protected getExpandCollapseAction(): IAction {

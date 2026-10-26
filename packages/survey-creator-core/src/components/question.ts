@@ -264,6 +264,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       // Placeholder items exist to add them: none while choices cannot change.
       this.optionItemsModifiable = this.canModifyChoices();
       if (!this.optionItemsModifiable) return false;
+      // Inline mode: placeholder items (new, select all, none, other) only for the selected question (SP04).
+      if (this.creator.isInlineLayout && !this.creator.isElementSelected(question)) return false;
       if (item !== question.newItem) return true;
       return this.creator.maxChoices < 1 || question.choices.length < this.creator.maxChoices;
     });
@@ -277,6 +279,18 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.optionItemsModifiable = canModify;
     // Setting the callback recalculates the visible choices.
     this.setCanShowOptionItemCallback();
+  }
+  // Re-evaluates the placeholder choice items: setting the callback again recalculates the visible choices.
+  public refreshOptionItems(): void {
+    const question: any = this.surveyElement;
+    if (!question || question.isDisposed || !question.setCanShowOptionItemCallback || SurveyElementAdornerBase.GetAdorner(question) !== this) return;
+    this.setCanShowOptionItemCallback();
+  }
+  protected onElementSelectedChanged(isSelected: boolean): void {
+    super.onElementSelectedChanged(isSelected);
+    if (this.creator.isInlineLayout) {
+      this.refreshOptionItems();
+    }
   }
   public detachFromUI(): void {
     // detachElement is skipped for an element that is disposed or adorned by

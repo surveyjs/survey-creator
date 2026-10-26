@@ -102,9 +102,12 @@ export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = Quest
       undefined, { disableTabStop: this.disableTabStop() });
   }
   protected renderHeader(): React.JSX.Element {
+    // Inline mode (SP03): no drag area and no top actions; their models stay unbuilt.
+    if (this.model.creator.isInlineLayout) return null;
     return ReactElementFactory.Instance.createElement("svc-question-header", { model: this.model });
   }
   protected renderFooter(): React.JSX.Element {
+    if (this.model.creator.isInlineLayout) return null;
     const allowInteractions = this.model.element
       .isInteractiveDesignElement;
     return allowInteractions ? ReactElementFactory.Instance.createElement("svc-question-footer", { className: "svc-question__content-actions", model: this.model }) : null;
@@ -115,7 +118,8 @@ export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = Quest
   }
 
   protected renderQuestionTitle(): React.JSX.Element {
-    if (!this.model.showHiddenTitle) return null;
+    // Inline mode has no collapse: the header that stands in for a hidden or collapsed title would take space.
+    if (!this.model.showHiddenTitle || this.model.creator.isInlineLayout) return null;
     const element = this.model.element as Question | PanelModel;
     return (
       <div

@@ -1,0 +1,355 @@
+// Inline layout mode (creator.layoutMode = "inline"), prompt 02: the design surface keeps the live survey's
+// layout. Every adorner frame (question, panel, page, row) takes no space, and survey-core values that the
+// standard designer overrides are restored with survey-core's own expressions. Hover and selection are
+// outlines that take no space.
+//
+// Inside the surface, --sjs2-* resolve against the survey theme (01). The outline colors are therefore
+// declared on the Creator root, where --sjs2-* are still the Creator's, and inherited as computed values.
+.svc-creator--inline {
+  --svc-inline-outline-color: var(--sjs2-color-utility-shadow-surface-focused, #19b394);
+  --svc-inline-outline-offset: 4px;
+}
+
+.svc-creator--inline .svc-tab-designer--inline {
+  // Static width: the live container is full width and its body is centered; the designer caps the container.
+  .sd-container-modern.sd-container-modern--static {
+    max-width: none;
+  }
+
+  // Pages: the wrappers are plain blocks; the page and its content keep survey-core's padding.
+  .svc-page {
+    margin: 0;
+  }
+
+  .svc-page__content,
+  .svc-page__content.svc-page__content--no-header,
+  .svc-page__content:not(.svc-page__content--collapsed),
+  .svc-page__content--collapse-onhover,
+  .svc-page__content--collapse-always {
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+    background: none;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    border-radius: 0;
+  }
+
+  .svc-page__content .sd-page {
+    margin: 0;
+    padding-top: var(--sjs2-layout-component-page-box-padding-top);
+    padding-bottom: var(--sjs2-layout-component-page-box-padding-bottom);
+    padding-left: var(--sjs2-layout-component-page-box-padding-horizontal);
+    padding-right: var(--sjs2-layout-component-page-box-padding-horizontal);
+  }
+
+  .svc-page__content .sd-page__content {
+    padding-top: var(--sjs2-layout-component-page-content-area-padding-top);
+    padding-bottom: var(--sjs2-layout-component-page-content-area-padding-bottom);
+    padding-left: var(--sjs2-layout-component-page-content-area-padding-horizontal);
+    padding-right: var(--sjs2-layout-component-page-content-area-padding-horizontal);
+  }
+
+  // Questions and panels (SP01): the adorner wrappers stay (events, drop targets) but take no space.
+  .svc-question__adorner {
+    display: block;
+
+    &:before {
+      content: none;
+    }
+  }
+
+  .svc-question__content,
+  .svc-question__content--title-bottom,
+  .svc-question__content--title-hidden,
+  .svc-question__content--panel,
+  .svc-question__content--empty {
+    display: block;
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+    min-width: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    outline: none;
+  }
+
+  // Rows: no Creator spacing; multi-question rows get survey-core's negative margin and gaps back.
+  .svc-row,
+  .sd-panel .svc-row,
+  .sd-panel .svc-row:first-of-type {
+    margin-top: 0;
+  }
+
+  .svc-row > .sd-row.sd-row--multiple {
+    overflow: visible;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0 0 0 calc(-1 * var(--sjs2-layout-component-page-content-area-gap-horizontal));
+    width: calc(100% + var(--sjs2-layout-component-page-content-area-gap-horizontal));
+    row-gap: var(--sjs2-layout-component-page-content-area-gap-vertical);
+
+    & > div {
+      padding-left: var(--sjs2-layout-component-page-content-area-gap-horizontal);
+    }
+  }
+
+  .sd-panel .svc-row > .sd-row.sd-row--multiple {
+    padding: 0;
+    margin: 0 0 0 calc(var(--sjs2-layout-component-panel-content-area-gap-horizontal) * -1);
+    width: calc(100% + var(--sjs2-layout-component-panel-content-area-gap-horizontal));
+    row-gap: var(--sjs2-layout-component-panel-content-area-gap-vertical);
+
+    & > div {
+      padding: 0 0 0 var(--sjs2-layout-component-panel-content-area-gap-horizontal);
+    }
+  }
+
+  // Pages: header, title and gaps as in survey-core.
+  .svc-page__content .sd-page {
+    row-gap: var(--sjs2-layout-component-page-box-gap-vertical);
+  }
+
+  .svc-page__content .sd-page__header {
+    margin: 0 0 var(--sjs2-layout-component-page-header-gap-vertical) 0;
+    padding: var(--sjs2-layout-component-page-header-padding-top, 40px) var(--sjs2-layout-component-page-header-padding-horizontal, 40px) var(--sjs2-layout-component-page-header-padding-bottom, 0) var(--sjs2-layout-component-page-header-padding-horizontal, 40px);
+  }
+
+  .svc-page .sd-page__title {
+    margin-top: 0;
+    gap: normal;
+  }
+
+  .svc-page .sd-page__description {
+    margin-bottom: 0;
+  }
+
+  // Panels.
+  .svc-question__content .sd-panel__content {
+    gap: normal;
+    padding-inline: var(--sd-panel-content-padding-inline);
+    padding-block: var(--sd-panel-content-padding-block);
+    row-gap: var(--sd-panel-content-row-gap);
+  }
+
+  .svc-question__content .sd-element--complex > .sd-element__header--location-top {
+    padding-block: var(--sd-panel-header-padding-block);
+    padding-inline: var(--sd-panel-header-padding-inline);
+  }
+
+  .svc-question__content .sd-element--complex > .sd-question__container > .sd-question__header-and-content-container > .sd-element__header--location-top {
+    padding-block: var(--sd-question-header-padding-block);
+    padding-inline: var(--sd-question-header-padding-inline);
+  }
+
+  // Matrices.
+  .svc-question__content .sd-question.sd-question--table {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .svc-question__content .sd-question.sd-question--table > .sd-question__container > .sd-question__header-and-content-container > .sd-question__content {
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+  }
+
+  .svc-question__content .sd-table-wrapper {
+    padding-inline: var(--sjs2-layout-component-matrix-box-padding-left) var(--sjs2-layout-component-matrix-box-padding-right);
+    padding-block: var(--sjs2-layout-component-matrix-box-padding-top) var(--sjs2-layout-component-matrix-box-padding-bottom);
+  }
+
+  .svc-question__content .sd-question--mobile .sd-table-wrapper {
+    padding: 0;
+  }
+
+  // A mobile matrix cell is a flex column with a gap; the cell adorner sits between it and its content.
+  .sd-question--mobile .sd-table__cell > .svc-matrix-cell {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+  }
+
+  // Dynamic panels (design mode shows the template, without the Remove / Add new buttons: see the report).
+  .svc-question__content--paneldynamic .sd-question__content {
+    margin: 0;
+    padding: 0;
+  }
+
+  .svc-question__content .sd-paneldynamic__panels-container,
+  .svc-question__content--paneldynamic .sd-paneldynamic__panels-container {
+    margin: 0;
+    padding-top: var(--sjs2-layout-component-panel-dynamic-content-area-padding-top);
+    padding-bottom: var(--sjs2-layout-component-panel-dynamic-content-area-padding-bottom);
+    padding-inline-start: var(--sjs2-layout-component-panel-dynamic-content-area-padding-horizontal);
+    padding-inline-end: var(--sjs2-layout-component-panel-dynamic-content-area-padding-horizontal);
+  }
+
+  // The footer (Add new) is rendered in inline mode (survey-core liveLayoutInDesignMode) and made inert.
+  .svc-question__content .sd-paneldynamic__footer {
+    display: block;
+  }
+
+  .svc-question__content .sd-paneldynamic__footer .sd-paneldynamic__separator {
+    display: block;
+  }
+
+  // Rating: the +/- controls take no space and show for the selected question.
+  .svc-question__content .sd-rating {
+    margin-inline-start: 0;
+    max-width: 100%;
+  }
+
+  .svc-rating-question-content {
+    position: relative;
+  }
+
+  .svc-question__content .svc-rating-question-controls {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    width: auto;
+  }
+
+  .svc-question__content:not(.svc-question__content--selected) .svc-rating-question-controls {
+    display: none;
+  }
+
+  // Select-base questions: no Creator gutters around the items.
+  .svc-question__content .sd-selectbase:not(.sd-imagepicker, .sd-boolean-fieldset) {
+    padding: 0;
+    margin: 0;
+    overflow-x: visible;
+  }
+
+  .svc-question__content .sd-selectbase__column,
+  .svc-question__content .sd-selectbase__column:first-of-type,
+  .svc-question__content .sd-selectbase--mobile .sd-selectbase__column {
+    margin-left: 0;
+  }
+
+  .svc-question__content .sd-selectbase__column:not(:last-child) {
+    padding-right: var(--sjs2-layout-component-labeled-group-box-gap-horizontal);
+  }
+
+  .svc-question__content:not(.svc-question__content--composite-question) .sd-question__content {
+    min-width: auto;
+  }
+
+  // Choice adorners (SP09): no negative margin, the controls take no space and show for the selected question.
+  .svc-item-value-wrapper {
+    display: block;
+    margin-left: 0;
+    gap: 0;
+  }
+
+  .svc-item-value-wrapper > .svc-item-value-controls {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    margin: 0;
+    min-width: 0;
+    height: 100%;
+    align-items: center;
+  }
+
+  .svc-item-value-wrapper > .svc-choice-elements-button-container {
+    right: auto;
+    left: 100%;
+  }
+
+  .svc-question__content:not(.svc-question__content--selected) .svc-item-value-controls {
+    display: none;
+  }
+
+  .svc-question__dropdown-choice .svc-item-value__item,
+  .sd-selectbase .svc-item-value__item {
+    padding-right: 0;
+  }
+
+  .svc-item-value-wrapper .sd-item {
+    padding: calc(var(--sjs2-layout-component-labeled-group-box-gap-vertical) / 2) 0;
+  }
+
+  .svc-item-value-wrapper:first-child .sd-item:not(.sd-selectbase__item--inline) {
+    padding-top: var(--sjs2-layout-component-labeled-group-box-padding-vertical);
+  }
+
+  // Titles are blocks in the live survey; the standard designer makes them flex containers.
+  .sd-title {
+    display: block;
+  }
+
+  // In-place string editors (SP05): inside titles they flow inline like the live title text, so a required mark
+  // or a number stays next to the text. Their border and controls are absolutely positioned already.
+  .sd-element__header .svc-string-editor,
+  .sd-title .svc-string-editor,
+  .sd-element__header .svc-string-editor__content,
+  .sd-title .svc-string-editor__content,
+  .sd-element__header .svc-string-editor__input,
+  .sd-title .svc-string-editor__input,
+  .sd-table__cell--header .svc-string-editor,
+  .sd-table__cell--header .svc-string-editor__content,
+  .sd-table__cell--header .svc-string-editor__input {
+    display: inline;
+  }
+
+  // Empty panel / empty page (SP08): one dashed line to select and drop into. The live survey renders nothing.
+  .svc-panel__placeholder_frame-wrapper {
+    padding: 0;
+  }
+
+  .svc-panel__placeholder_frame,
+  .svc-page__placeholder_frame .svc-panel__placeholder_frame {
+    padding: 0 var(--sjs2-spacing-x100, 8px);
+    min-height: 0;
+  }
+
+  .svc-page__placeholder_frame {
+    margin: 0;
+    padding: 0 var(--sjs2-layout-component-page-content-area-padding-horizontal);
+  }
+
+  // Header.
+  .svc-designer-header {
+    border-bottom: none;
+  }
+
+  .svc-logo-image-container {
+    padding: 0;
+  }
+
+  // Nested questions (panels, dynamic panel templates) draw a dashed frame with ::after in the standard designer.
+  .svc-question__content::after {
+    content: none;
+  }
+
+  // Hover and selection (SP02): outlines take no space.
+  .svc-hovered > .svc-question__content,
+  .svc-question__content:focus {
+    box-shadow: none;
+    outline: 1px solid var(--svc-inline-outline-color);
+    outline-offset: var(--svc-inline-outline-offset);
+  }
+
+  .svc-question__content--selected:not(.svc-question__content--dragged),
+  .svc-question__content.svc-question__content--selected {
+    box-shadow: none;
+    outline: 2px solid var(--svc-inline-outline-color);
+    outline-offset: var(--svc-inline-outline-offset);
+  }
+
+  .svc-hovered > .svc-page__content:not(.svc-page__content--selected) {
+    outline: 1px solid var(--svc-inline-outline-color);
+    outline-offset: calc(-1 * var(--svc-inline-outline-offset));
+  }
+
+  .svc-page__content--selected.svc-page__content--selected {
+    box-shadow: none;
+    outline: 2px solid var(--svc-inline-outline-color);
+    outline-offset: calc(-1 * var(--svc-inline-outline-offset));
+  }
+}

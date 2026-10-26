@@ -18,7 +18,7 @@ export class PanelAdornerComponent extends QuestionAdornerComponent<PanelAdorner
           <div className="svc-panel__placeholder">
             {this.model.placeholderText}
           </div>
-          {this.model.showAddQuestionButton ? <SurveyActionBar model={this.model.addQuestionActionsContainer}></SurveyActionBar> : null}
+          {this.model.showAddQuestionButton && !this.model.creator.isInlineLayout ? <SurveyActionBar model={this.model.addQuestionActionsContainer}></SurveyActionBar> : null}
         </div>
       </div>
     );
@@ -35,6 +35,8 @@ export class PanelAdornerComponent extends QuestionAdornerComponent<PanelAdorner
   }
 
   protected renderFooter(): React.JSX.Element {
+    // Inline mode (SP03): no add-question bar and no footer actions.
+    if (this.model.creator.isInlineLayout) return null;
     return (<React.Fragment>
       {!this.model.isEmptyElement && this.model.element.isPanel && this.model.showAddQuestionButton ? (
         <SurveyActionBar model={this.model.addQuestionActionsContainer} handleClick={false}></SurveyActionBar>
