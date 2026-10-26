@@ -562,6 +562,73 @@ export var skStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Popis"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistent výrazov",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Píšte s AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Opíšte, čo by mal výraz robiť",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Napríklad: zobraziť túto otázku, keď má respondent 18 alebo viac rokov",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Opíšte stav slovami",
+    // [Auto-translated] "Generate"
+    generate: "Generovať",
+    // [Auto-translated] "Refine"
+    refine: "Zdokonaliť",
+    // [Auto-translated] "Explain"
+    explain: "Vysvetli",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Prijať",
+    // [Auto-translated] "Reject"
+    reject: "Odmietnuť",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplikujte opravu: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Súčasný výraz",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Navrhovaný výraz",
+    // [Auto-translated] "Reads as"
+    readsAs: "Číta sa takto",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Vysvetlenie asistenta",
+    // [Auto-translated] "Check results"
+    findings: "Skontrolujte výsledky",
+    // [Auto-translated] "Error"
+    severityError: "Chyba",
+    // [Auto-translated] "Warning"
+    severityWarning: "Upozornenie",
+    // [Auto-translated] "Info"
+    severityInfo: "Informácie",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "v \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Popíšte výraz a vyberte Generovať.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Čaká na asistenta...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Žiadosť bola zrušená.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asistent uviedol: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistent nenavrhol žiadny výraz.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Preštudujte si navrhovaný výraz.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistent vysvetlil aktuálny výraz.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Navrhovaný výraz obsahuje chyby a nemožno ho akceptovať.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Navrhovaný výraz nebolo možné skontrolovať na každom mieste, kam je zapísaný, takže ho nemožno akceptovať.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Pridajte k pravidlu akciu predtým, než sa opýtate asistenta.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Prvý návrh obsahoval chyby a bol automaticky opravený."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var skStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "Heslo {prop} \"{expression}\" vždy platí, pretože {facts} - nič nerozhoduje."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" nečíta žiadnu otázku ani premennú."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Predvolená hodnota \"{name}\" je {valuesText}, ktorú nikdy nemôže držať. Povolené: {availableText}.",
@@ -4034,6 +4105,8 @@ export var skStrings = {
       itemScope: "\"{0}\" je dostupné len v podmienkach výberu, riadkov a stĺpcov.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Odkazy na \"{0}.\" sú dostupné iba v zloženej otázke.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" nie je dostupné vo vnútri inArray filtra, ktorý beží proti položke a potom prieskumu.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" je stĺpec tejto matice – odkazujte naň s predponou riadku.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

@@ -210,8 +210,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public update(): void {
     if (!this.model) return;
-    this.model.survey = this.creator.survey;
     if (this.isSideBySide && !this.isSideBySideGrid) {
+      this.model.survey = this.creator.survey;
       const model = <TranslationSideBySide>this.model;
       const pages = this.creator.survey.pages;
       model.selectedPageName = pages.length > 0 ? pages[0].name : "";
@@ -219,12 +219,12 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       this.updateSideBySidePagesAction();
       model.updateSettingsSurveyValues();
     } else if (this.isSideBySideGrid) {
-      this.model.filteredPage = null;
+      this.model.setSurveyAndClearPageFilter(this.creator.survey);
       this.setFilterPageActionItems();
       this.updateFilterPageAction(true);
       (<TranslationSideBySide>this.model).updateSettingsSurveyValues();
     } else {
-      this.model.filteredPage = null;
+      this.model.setSurveyAndClearPageFilter(this.creator.survey);
       this.updateFilterPageAction(true);
       this.updateTabControl();
     }

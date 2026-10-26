@@ -562,6 +562,73 @@ export var huStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Leírás"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Expresszációs asszisztens",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Írj MI-vel",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Írd le, mit kell csinálnia a kifejezésnek",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Például: mutassuk meg ezt a kérdést, ha a válaszadó 18 éves vagy idősebb",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Írja le az állapotot szavakkal",
+    // [Auto-translated] "Generate"
+    generate: "Generálj",
+    // [Auto-translated] "Refine"
+    refine: "Finomítás",
+    // [Auto-translated] "Explain"
+    explain: "Magyarázd el",
+    // [Auto-translated] "Stop"
+    stop: "Állj meg",
+    // [Auto-translated] "Accept"
+    accept: "Elfogadom",
+    // [Auto-translated] "Reject"
+    reject: "Elutasítás",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Javítás alkalmazása: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Jelenlegi kifejezés",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Javasolt kifejezés",
+    // [Auto-translated] "Reads as"
+    readsAs: "Így olvasható:",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Az asszisztens magyarázata",
+    // [Auto-translated] "Check results"
+    findings: "Eredmények ellenőrzése",
+    // [Auto-translated] "Error"
+    severityError: "Hiba",
+    // [Auto-translated] "Warning"
+    severityWarning: "Figyelem",
+    // [Auto-translated] "Info"
+    severityInfo: "Információ",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "a \"{0}\" című filmben",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Írja le az expressziációt, és válassza a Generálást.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Várva az asszisztensre...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "A kérést törölték.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Az asszisztens így jelentett: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Az asszisztens nem javasolt kifejezést.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Nézd át a javasolt kifejezést.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Az asszisztens elmagyarázta a jelenlegi arckifejezést.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "A javasolt kifejezés hibákkal rendelkezik, és nem fogadható el.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "A javasolt kifejezést nem lehet minden helyen ellenőrizni, ahol írják, így nem fogadható el.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Mielőtt megkérdezed az asszisztenst, adj hozzá egy műveletet.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Az első javaslat hibákkal bírt, és automatikusan kijavították."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var huStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "A {prop} \"{expression}\" mindig érvényes, mert {facts} - semmit sem dönt."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "A {prop} \"{expression}\" nem olvas semmilyen kérdést vagy változót."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "A \"{name}\" alapértelmezett értéke {valuesText}, amelyet soha nem tud tartani. Engedélyezett: {availableText}.",
@@ -4034,6 +4105,8 @@ export var huStrings = {
       itemScope: "Az \"{0}\" csak a választás, sor- és oszlopfeltételek között érhető el.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Az \"{0}.\" hivatkozások csak összetett kérdésben érhetők el.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "Az \"{0}\" nem érhető el egy inArray szűrőben, amely az elem és a felmérés ellen működik.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "Az \"{0}\" ennek a mátrixnak az oszlopa – hivatkozz rá a sor előtaggal.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

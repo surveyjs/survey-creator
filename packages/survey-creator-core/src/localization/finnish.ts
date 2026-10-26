@@ -562,6 +562,73 @@ export var fiStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Kuvaus"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Expression Assistant",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Kirjoita tekoälyllä",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Kuvaile, mitä lausekkeen tulisi tehdä",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Esimerkiksi: näytä tämä kysymys, kun vastaaja on vähintään 18-vuotias",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Kuvaile tilaa sanoin",
+    // [Auto-translated] "Generate"
+    generate: "Luo",
+    // [Auto-translated] "Refine"
+    refine: "Jalostus",
+    // [Auto-translated] "Explain"
+    explain: "Selitä",
+    // [Auto-translated] "Stop"
+    stop: "Seis",
+    // [Auto-translated] "Accept"
+    accept: "Hyväksy",
+    // [Auto-translated] "Reject"
+    reject: "Hylkää",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Apply fix: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Nykyinen lauseke",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Ehdotettu ilmaus",
+    // [Auto-translated] "Reads as"
+    readsAs: "Lukee seuraavasti",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Avustajan selitys",
+    // [Auto-translated] "Check results"
+    findings: "Tarkista tulokset",
+    // [Auto-translated] "Error"
+    severityError: "Virhe",
+    // [Auto-translated] "Warning"
+    severityWarning: "Varoitus",
+    // [Auto-translated] "Info"
+    severityInfo: "Tietoa",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "\"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Kuvaile ilmentymä ja valitse Generoi.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Odotan avustajaa...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Pyyntö peruttiin.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Avustaja raportoi: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Avustaja ei ehdottanut ilmettä.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Käy läpi ehdotettu ilmaus.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Avustaja selitti nykyisen ilmeen.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Ehdotettu lauseke sisältää virheitä eikä sitä voi hyväksyä.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Ehdotettua lauseketta ei voitu tarkistaa jokaisessa paikassa, johon se on kirjoitettu, joten sitä ei voi hyväksyä.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Lisää sääntöön toiminto ennen kuin kysyt avustajalta.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Ensimmäisessä ehdotuksessa oli virheitä ja se korjattiin automaattisesti."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var fiStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{Prop} \"{expression}\" pätee aina, koska {faktat} - se ei ratkaise mitään."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" ei lue mitään kysymystä tai muuttujaa."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "\"{name}\" oletusarvo on {valuesText}, jota se ei koskaan voi pitää. Sallittu: {availableText}.",
@@ -4034,6 +4105,8 @@ export var fiStrings = {
       itemScope: "\"{0}\" on saatavilla vain valinta-, rivi- ja sarakkeehtojen sisällä.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" -viitteet ovat saatavilla vain koostetehtävässä.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" ei ole saatavilla inArray-suodattimessa, joka toimii kohteen ja sitten kyselyn kanssa.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" on tämän matriisin sarake – viittaa siihen rivin etuliitteellä.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
