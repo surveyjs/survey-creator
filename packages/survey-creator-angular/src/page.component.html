@@ -10,7 +10,7 @@
     [model]="adorner.page" 
     [survey]="survey">
   </svc-page-element-content>
-  <div *ngIf="!adorner.needRenderContent" class="svc-page__loading-content">
+  <div *ngIf="!adorner.needRenderContent" [class]="adorner.loadingContentCss">
     <sv-ng-loading-indicator></sv-ng-loading-indicator>
   </div>
   <div *ngIf="adorner.showPlaceholder" class="svc-page__placeholder_frame">
