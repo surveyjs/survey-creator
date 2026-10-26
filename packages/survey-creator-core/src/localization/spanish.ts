@@ -562,6 +562,73 @@ export var spanishTranslation = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Descripción"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistente de Expresión",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Escribe con IA",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Describe qué debería hacer la expresión",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Por ejemplo: muestra esta pregunta cuando el encuestado tenga 18 años o más",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Describe la condición con palabras",
+    // [Auto-translated] "Generate"
+    generate: "Generar",
+    // [Auto-translated] "Refine"
+    refine: "Refinar",
+    // [Auto-translated] "Explain"
+    explain: "Explica",
+    // [Auto-translated] "Stop"
+    stop: "¡Para",
+    // [Auto-translated] "Accept"
+    accept: "Aceptar",
+    // [Auto-translated] "Reject"
+    reject: "Rechazar",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplica la solución: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Expresión actual",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Expresión sugerida",
+    // [Auto-translated] "Reads as"
+    readsAs: "Se lee como",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "La explicación del asistente",
+    // [Auto-translated] "Check results"
+    findings: "Consulta los resultados",
+    // [Auto-translated] "Error"
+    severityError: "Error",
+    // [Auto-translated] "Warning"
+    severityWarning: "Advertencia",
+    // [Auto-translated] "Info"
+    severityInfo: "Información",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "en \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Describe la expresión y selecciona Generar.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Esperando al asistente...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "La solicitud fue cancelada.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "El asistente informó: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "El asistente no sugirió ninguna expresión.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Revisa la expresión sugerida.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "La asistente explicó la expresión actual.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "La expresión sugerida contiene errores y no puede ser aceptada.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "La expresión sugerida no pudo comprobarse en todos los lugares donde se escribe, por lo que no puede ser aceptada.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Añade una acción a la regla antes de preguntar al asistente.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "La primera sugerencia tenía errores y se corrigió automáticamente."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var spanishTranslation = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "La {prop} \"{expresión}\" siempre se cumple, porque {hechos} - no decide nada."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "La {proposición} \"{expresión}\" no lee ninguna pregunta ni variable."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "El valor predeterminado de \"{name}\" es {valuesText}, que nunca podrá cumplir. Permitido: {availableText}.",
@@ -4034,6 +4105,8 @@ export var spanishTranslation = {
       itemScope: "\"{0}\" solo está disponible dentro de las condiciones de elección, fila y columna.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" referencias solo están disponibles dentro de una pregunta compuesta.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" no está disponible dentro de un filtro inArray, que se ejecuta sobre el elemento y luego contra la encuesta.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" es una columna de esta matriz: refírala con el prefijo de fila.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

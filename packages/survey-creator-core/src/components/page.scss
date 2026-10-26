@@ -123,6 +123,13 @@ svc-page {
   animation: none;
 }
 
+// The placeholder renders no footer. Keep the footer's height (its margin-top plus the add-question
+// button) so that the scroll height and the number of pages rendered at load stay the same.
+// Collapsed pages hide the footer, so they do not need it.
+.svc-page__content:not(.svc-page__content--collapsed) > .svc-page__loading-content {
+  padding-bottom: calc(var(--sjs2-spacing-x500, 40px) + 3 * var(--sjs2-spacing-x200, 16px) + var(--sjs2-typography-line-height-component-action-large-content, 24px));
+}
+
 .svc-question__drag-area > .svc-page__content-actions {
   inset-inline-start: 50%;
 }

@@ -1,3 +1,5 @@
+import { ListModel, PopupDropdownViewModel } from "survey-core";
+import { vi } from "vitest";
 import { PageAdorner } from "../src/components/page";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { settings } from "../src/creator-settings";
@@ -341,4 +343,66 @@ test("Page content lazy rendering: the content is rendered if IntersectionObserv
   } finally {
     (window as any).IntersectionObserver = original;
   }
+});
+
+test("Page adorner builds questionTypeSelectorModel on first read", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = createPagesJSON(2);
+  const page = creator.survey.pages[1];
+  const getSelectorSpy = vi.spyOn(creator, "getQuestionTypeSelectorModel");
+  const pageAdorner = new PageAdorner(creator, page);
+  expect(getSelectorSpy).toHaveBeenCalledTimes(0);
+  expect(pageAdorner["questionTypeSelectorModelValue"]).toBeUndefined();
+
+  const selectorModel = pageAdorner.questionTypeSelectorModel;
+  expect(selectorModel).toBeTruthy();
+  expect(getSelectorSpy).toHaveBeenCalledTimes(1);
+  expect(pageAdorner.questionTypeSelectorModel).toBe(selectorModel);
+  expect(getSelectorSpy).toHaveBeenCalledTimes(1);
+
+  const popupViewModel = new PopupDropdownViewModel(selectorModel.popupModel); // need for popupModel.onShow
+  selectorModel.popupModel.show();
+  const listModel = selectorModel.popupModel.contentComponentData.model as ListModel;
+  listModel.onItemClick(listModel.actions.filter(action => action.id === "comment")[0]);
+  expect(page.elements).toHaveLength(2);
+  expect(page.elements[1].getType()).toBe("comment");
+
+  pageAdorner.dispose();
+  expect(selectorModel.isDisposed).toBe(true);
+  popupViewModel.dispose();
+  getSelectorSpy.mockRestore();
+});
+
+test("Page adorner fires onPageGetFooterActions when footerActionsBar is first read", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = createPagesJSON(2);
+  let counter = 0;
+  creator.onPageGetFooterActions.add((sender, options) => {
+    counter++;
+    expect(options.page).toBe(creator.survey.pages[0]);
+  });
+  const pageAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  expect(counter).toBe(0);
+  expect(pageAdorner["_footerActionsBar"]).toBeUndefined();
+  const footer = pageAdorner.footerActionsBar;
+  expect(counter).toBe(1);
+  expect(pageAdorner.footerActionsBar).toBe(footer);
+  expect(counter).toBe(1);
+});
+
+test("Page adorner disposes its footerActionsBar if it was built", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = createPagesJSON(2);
+  const pageAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  const footer = pageAdorner.footerActionsBar;
+  const addQuestionAction = footer.actions[0];
+  expect(footer.isDisposed).toBe(false);
+  pageAdorner.dispose();
+  expect(footer.isDisposed).toBe(true);
+  expect(addQuestionAction.isDisposed).toBe(true);
+
+  // the footer was never read: nothing to dispose, and dispose does not build it
+  const notRenderedAdorner = new PageAdorner(creator, creator.survey.pages[1]);
+  notRenderedAdorner.dispose();
+  expect(notRenderedAdorner["_footerActionsBar"]).toBeUndefined();
 });

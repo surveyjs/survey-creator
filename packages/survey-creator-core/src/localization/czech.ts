@@ -562,6 +562,73 @@ export var czStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Popis"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistent výrazů",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Pište s AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Popište, co by měl výraz dělat",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Například: uveďte tuto otázku, když je respondentovi 18 let nebo více",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Popište stav slovy",
+    // [Auto-translated] "Generate"
+    generate: "Generuj",
+    // [Auto-translated] "Refine"
+    refine: "Zdokonalit",
+    // [Auto-translated] "Explain"
+    explain: "Vysvětlete",
+    // [Auto-translated] "Stop"
+    stop: "Zastav",
+    // [Auto-translated] "Accept"
+    accept: "Přijmout",
+    // [Auto-translated] "Reject"
+    reject: "Odmítnout",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplikujte opravu: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Současný výraz",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Navrhovaný výraz",
+    // [Auto-translated] "Reads as"
+    readsAs: "Čte se takto",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Vysvětlení asistenta",
+    // [Auto-translated] "Check results"
+    findings: "Zkontrolujte výsledky",
+    // [Auto-translated] "Error"
+    severityError: "Chyba",
+    // [Auto-translated] "Warning"
+    severityWarning: "Varování",
+    // [Auto-translated] "Info"
+    severityInfo: "Informace",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "v \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Popište výraz a vyberte Generovat.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Čekám na asistenta...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Žádost byla zrušena.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asistent uvedl: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistent nenaznačil žádný výraz.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Zkontrolujte navrhovaný výraz.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistent vysvětlil současný výraz.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Navrhovaný výraz obsahuje chyby a nelze jej přijmout.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Navrhovaný výraz nelze ověřit na každém místě, kam je napsán, takže jej nelze přijmout.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Přidejte k pravidlu akci před tím, než se zeptáte asistenta.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "První návrh obsahoval chyby a byl automaticky opraven."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var czStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "Heslo {prop} \"{expression}\" vždy platí, protože {facts} - nic nerozhoduje."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" nečte žádnou otázku ani proměnnou."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Výchozí hodnota \"{name}\" je {valuesText}, kterou nikdy nemůže držet. Povoleno: {availableText}.",
@@ -4034,6 +4105,8 @@ export var czStrings = {
       itemScope: "\"{0}\" je dostupná pouze uvnitř podmínek volby, řádku a sloupce.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Odkazy na \"{0}.\" jsou dostupné pouze v kompozitní otázce.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" není dostupné uvnitř filtru inArray, který běží proti položce a poté dotazníku.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" je sloupec této matice – odkazujte na něj pomocí předpony řádku.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

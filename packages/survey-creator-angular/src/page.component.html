@@ -18,19 +18,22 @@
       <div class="svc-panel__placeholder">{{adorner.placeholderText}}</div>
     </div>
   </div>
-  <div *ngIf="adorner.allowDragging && !adorner.isGhost" class="svc-question__drag-area"
-    (pointerdown)="adorner.onPointerDown($event)">
-    <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="'auto'"
-      sv-ng-svg-icon></svg>
-    <div class="svc-page__content-actions">
-      <sv-action-bar [model]="adorner.actionContainer" #container></sv-action-bar>
+  <!-- The loading placeholder renders no header and no footer: reading their action containers builds them -->
+  <ng-container *ngIf="adorner.needRenderContent">
+    <div *ngIf="adorner.allowDragging && !adorner.isGhost" class="svc-question__drag-area"
+      (pointerdown)="adorner.onPointerDown($event)">
+      <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="'auto'"
+        sv-ng-svg-icon></svg>
+      <div class="svc-page__content-actions">
+        <sv-action-bar [model]="adorner.actionContainer" #container></sv-action-bar>
+        <sv-action-bar *ngIf="adorner.topActionContainer.hasActions" [model]="adorner.topActionContainer"></sv-action-bar>
+      </div>
+    </div>
+    <div *ngIf="!adorner.allowDragging || adorner.isGhost" class="svc-page__content-actions">
+      <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>
       <sv-action-bar *ngIf="adorner.topActionContainer.hasActions" [model]="adorner.topActionContainer"></sv-action-bar>
     </div>
-  </div>
-  <div *ngIf="!adorner.allowDragging || adorner.isGhost" class="svc-page__content-actions">
-    <sv-action-bar [model]="adorner.actionContainer"></sv-action-bar>
-    <sv-action-bar *ngIf="adorner.topActionContainer.hasActions" [model]="adorner.topActionContainer"></sv-action-bar>
-  </div>
-  <sv-action-bar [model]="adorner.footerActionsBar"></sv-action-bar>
+    <sv-action-bar [model]="adorner.footerActionsBar"></sv-action-bar>
+  </ng-container>
 </div>
 </ng-template>

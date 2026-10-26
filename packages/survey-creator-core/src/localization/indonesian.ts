@@ -562,6 +562,73 @@ export var indonesianStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Deskripsi"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asisten Ekspresi",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Menulis dengan AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Jelaskan apa yang harus dilakukan ekspresi tersebut",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Misalnya: tampilkan pertanyaan ini saat responden berusia 18 tahun atau lebih",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Jelaskan kondisi dengan kata-kata",
+    // [Auto-translated] "Generate"
+    generate: "Menghasilkan",
+    // [Auto-translated] "Refine"
+    refine: "menyempurnakan",
+    // [Auto-translated] "Explain"
+    explain: "Jelaskan",
+    // [Auto-translated] "Stop"
+    stop: "Berhenti",
+    // [Auto-translated] "Accept"
+    accept: "Terima",
+    // [Auto-translated] "Reject"
+    reject: "Tolak",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Terapkan perbaikan: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Ekspresi saat ini",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Ekspresi yang disarankan",
+    // [Auto-translated] "Reads as"
+    readsAs: "Dibaca sebagai",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Penjelasan dari asisten",
+    // [Auto-translated] "Check results"
+    findings: "Periksa hasil",
+    // [Auto-translated] "Error"
+    severityError: "Kesalahan",
+    // [Auto-translated] "Warning"
+    severityWarning: "Peringatan",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "dalam \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Jelaskan ekspresi dan pilih Generate.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Menunggu asisten...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Permintaan tersebut dibatalkan.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asisten melaporkan: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asisten itu tidak menyarankan ekspresi.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Tinjau ekspresi yang disarankan.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asisten menjelaskan ekspresi saat itu.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Ekspresi yang disarankan memiliki kesalahan dan tidak dapat diterima.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Ekspresi yang disarankan tidak dapat diperiksa untuk setiap tempat penulisannya, sehingga tidak dapat diterima.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Tambahkan tindakan ke aturan sebelum meminta bantuan asisten.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Saran pertama memiliki kesalahan dan otomatis diperbaiki."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var indonesianStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{ekspresi}\" selalu berlaku, karena {facts} - tidak menentukan apa pun."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" tidak membaca pertanyaan atau variabel apa pun."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Nilai default \"{name}\" adalah {valuesText}, yang tidak pernah bisa ditahan. Diizinkan: {availableText}.",
@@ -4034,6 +4105,8 @@ export var indonesianStrings = {
       itemScope: "\"{0}\" hanya tersedia dalam kondisi pilihan, baris, dan kolom.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Referensi \"{0}.\" hanya tersedia dalam pertanyaan komposit.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" tidak tersedia di dalam filter inArray, yang berjalan terhadap item dan kemudian survei.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" adalah kolom dari matriks ini - referensikan dengan awalan baris.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
