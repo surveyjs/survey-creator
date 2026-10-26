@@ -16,7 +16,8 @@ export interface IInlinePropertyGridAnchor {
 // root on show and closes on Escape from anywhere. Only its pure geometry helpers are reused.
 // Position is `fixed` (viewport coordinates): the panel does not follow selection or scrolling once open (PG02).
 export class InlinePropertyGridPanelModel extends Base {
-  public static Width = 320;
+  // The grid (320) plus the category strip (57) in the one-category mode.
+  public static Width = 377;
   // Space between the panel and the viewport edges / the element's outline.
   public static Gap = 8;
   // The panel keeps at least this height when it opens low in the viewport (it is moved up instead).

@@ -1,6 +1,7 @@
 import {
-  Action, ActionContainer, Base, DomDocumentHelper, DomWindowHelper, PanelModelBase, property, defaultActionBarCss,
-  PopupModel, ListModel, createPopupModelWithListModel, menuListCss, IElement, IPanel, PageModel, SurveyElement
+  Action, ActionContainer, Base, ComputedUpdater, DomDocumentHelper, DomWindowHelper, PanelModelBase, property, defaultActionBarCss,
+  PopupModel, ListModel, createPopupModelWithListModel, createDropdownActionModel, menuListCss, IElement, IPanel, PageModel,
+  SurveyElement, SurveyModel
 } from "survey-core";
 import type { SurveyCreatorModel } from "../../creator-base";
 import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
@@ -51,6 +52,10 @@ export class InlineDesignerModel extends Base {
   public extraActions: ActionContainer;
   // The floating property grid (05). Hidden by default; it shows the designer plugin's own grid view model.
   public propertyGridPanel: InlinePropertyGridPanelModel;
+  // The grid's categories (its pages) as icon buttons, and the current category's title for the panel header.
+  public propertyGridCategories: ActionContainer;
+  @property({ defaultValue: "" }) propertyGridCategoryTitle: string;
+  private propertyGridCategoriesSurvey: SurveyModel;
   // The latest sidebar.executeOnExpand callback (PG05), kept while the panel is closed or not mounted yet.
   private pendingPropertyGridCallback: () => void;
   private propertyGridReturnFocus: HTMLElement;
@@ -111,20 +116,65 @@ export class InlineDesignerModel extends Base {
       // Capture: decided before survey-core's editors handle the key (they do not consume Escape).
       DomWindowHelper.addEventListener("keydown", this.onPropertyGridKeyDown, true);
     }
-    // PG03: accordion while inline. Through the plugin's setter (it rebuilds the grid only); the creator's stored
-    // value is left alone, and dispose() restores the plugin from it.
-    const plugin = this.designerPlugin;
-    if (!!plugin && plugin.showOneCategoryInPropertyGrid) {
-      plugin.showOneCategoryInPropertyGrid = false;
-      this.creator.expandCategoryIfNeeded();
+    // The grid keeps the creator's navigation mode: one category per page (V3), with the categories as an icon
+    // strip in the panel instead of the sidebar's tab control.
+    this.propertyGridCategories = new ActionContainer();
+    const pgModel = this.propertyGridViewModel;
+    if (!!pgModel) {
+      pgModel.registerPropertyChangedHandlers(["survey"], this.onPropertyGridSurveyChanged, "inline-designer-categories");
     }
+    this.onPropertyGridSurveyChanged();
   }
-  private restorePropertyGridMode(): void {
-    const plugin = this.designerPlugin;
-    if (!!plugin && plugin.showOneCategoryInPropertyGrid !== this.creator.showOneCategoryInPropertyGrid) {
-      plugin.showOneCategoryInPropertyGrid = this.creator.showOneCategoryInPropertyGrid;
+  public get isPropertyGridMultiPage(): boolean {
+    return !!this.designerPlugin && this.designerPlugin.showOneCategoryInPropertyGrid;
+  }
+  // The grid survey is rebuilt on every selection: refill the category strip from its pages.
+  private onPropertyGridSurveyChanged = (): void => {
+    if (this.isDisposed) return;
+    const prev = this.propertyGridCategoriesSurvey;
+    if (!!prev) {
+      prev.onCurrentPageChanged.remove(this.onPropertyGridCurrentPageChanged);
+      prev.onPageVisibleChanged.remove(this.onPropertyGridPageVisibleChanged);
     }
-  }
+    const survey = this.isPropertyGridMultiPage ? this.propertyGridViewModel?.survey : undefined;
+    this.propertyGridCategoriesSurvey = survey;
+    const actions: Array<Action> = [];
+    if (!!survey) {
+      survey.onCurrentPageChanged.add(this.onPropertyGridCurrentPageChanged);
+      survey.onPageVisibleChanged.add(this.onPropertyGridPageVisibleChanged);
+      // As the sidebar's tab control (TabDesignerPlugin.getPropertyGridTabActions).
+      survey.pages.forEach(page => {
+        if (page.elements.length === 0) return;
+        actions.push(new Action({
+          id: page.name,
+          iconName: page["iconName"],
+          iconSize: "auto",
+          tooltip: page.title,
+          title: page.title,
+          showTitle: false,
+          active: page === survey.currentPage,
+          visible: page.isVisible,
+          action: () => { survey.currentPage = page; }
+        }));
+      });
+    }
+    const old = this.propertyGridCategories.actions.slice();
+    this.propertyGridCategories.setItems(actions);
+    old.forEach(a => a.dispose());
+    this.propertyGridCategoryTitle = survey?.currentPage?.title || "";
+  };
+  private onPropertyGridCurrentPageChanged = (survey: SurveyModel): void => {
+    const page = survey.currentPage;
+    this.propertyGridCategories.actions.forEach(a => a.active = !!page && a.id === page.name);
+    this.propertyGridCategoryTitle = page?.title || "";
+    // Each category starts at the top.
+    const body = this.propertyGridPanel?.rootElement?.querySelector(".svc-inline-property-grid__body");
+    if (!!body) body.scrollTop = 0;
+  };
+  private onPropertyGridPageVisibleChanged = (_: SurveyModel, options: { page: PageModel }): void => {
+    const action = this.propertyGridCategories.getActionById(options.page.name);
+    if (!!action) action.visible = options.page.isVisible;
+  };
   // Opens the panel for the selected element (the settings action, Survey Settings, or host code).
   public showPropertyGrid(focusFirstEditor: boolean = true): void {
     if (this.isDisposed) return;
@@ -480,6 +530,7 @@ export class InlineDesignerModel extends Base {
         // 05: the floating property grid for the survey (the survey is selected while its toolbar shows).
         action: () => this.showPropertyGrid()
       }));
+      actions.push(this.createSelectPageAction());
     } else if (!!target && (target.isPage || target.isPanel)) {
       // Appends inside the panel or page (TB04), as the old "Add question" button did.
       actions.push(this.createAddQuestionAction(() => ({ container: target, page: target.isPage ? target : undefined })));
@@ -500,6 +551,42 @@ export class InlineDesignerModel extends Base {
     const old = this.extraActions.actions.slice();
     this.extraActions.setItems(actions);
     old.forEach(a => a.dispose());
+  }
+  // Survey toolbar: a page list next to Survey Settings. Picking a page selects it, which scrolls it into view.
+  // The list is refilled on every show (pages are added, removed and renamed while the toolbar stays).
+  private createSelectPageAction(): Action {
+    const action = createDropdownActionModel({
+      id: "selectPage",
+      iconName: "icon-select-page",
+      iconSize: "auto",
+      title: this.creator.getLocString("ed.selectPage"),
+      tooltip: this.creator.getLocString("ed.selectPage"),
+      // Only with something to choose from; follows pages added or removed while the survey toolbar shows.
+      visible: <any>new ComputedUpdater<boolean>(() => this.creator.survey.pages.length > 1)
+    }, {
+      items: [],
+      allowSelection: false,
+      verticalPosition: "bottom",
+      horizontalPosition: "center",
+      cssClass: "svc-creator-popup",
+      onSelectionChanged: (item: Action) => {
+        const page = this.creator.survey.getPageByName(item.id);
+        if (!!page)this.creator.selectElement(page, undefined, true);
+      }
+    }, this.creator);
+    action.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
+    action.popupModel.onVisibilityChanged.add((_: PopupModel, options: { isVisible: boolean }) => {
+      if (!options.isVisible) return;
+      const listModel: ListModel = action.popupModel.contentComponentData.model;
+      const old = listModel.actions.slice();
+      listModel.setItems(this.creator.survey.pages.map(page => new Action({
+        id: page.name,
+        title: this.creator.getObjectDisplayName(page, "designer-tab:page-selector", "page-selector")
+      })));
+      listModel.flushUpdates();
+      old.forEach(a => a.dispose());
+    });
+    return action;
   }
   private createAddQuestionAction(getContext: () => IInlineToolboxContext): Action {
     const action: Action = new Action({
@@ -675,7 +762,7 @@ export class InlineDesignerModel extends Base {
       DomDocumentHelper.removeEventListener("keydown", this.onDocumentKeyDown);
     }
     clearInterval(this.checkTimer);
-    // 05: leaving inline mode closes the panel; the sidebar shows the grid again, in the creator's navigation mode.
+    // 05: leaving inline mode closes the panel; the sidebar shows the grid again.
     if (DomWindowHelper.isAvailable()) {
       DomWindowHelper.removeEventListener("keydown", this.onPropertyGridKeyDown, true);
     }
@@ -685,7 +772,13 @@ export class InlineDesignerModel extends Base {
     this.pendingPropertyGridCallback = undefined;
     this.propertyGridReturnFocus = undefined;
     this.propertyGridPanel.dispose();
-    this.restorePropertyGridMode();
+    this.propertyGridViewModel?.unregisterPropertyChangedHandlers(["survey"], "inline-designer-categories");
+    if (!!this.propertyGridCategoriesSurvey) {
+      this.propertyGridCategoriesSurvey.onCurrentPageChanged.remove(this.onPropertyGridCurrentPageChanged);
+      this.propertyGridCategoriesSurvey.onPageVisibleChanged.remove(this.onPropertyGridPageVisibleChanged);
+      this.propertyGridCategoriesSurvey = undefined;
+    }
+    this.propertyGridCategories.dispose();
     this.resizeObserver?.disconnect();
     this.resizeObserver = undefined;
     const adorner: any = this.toolbarAdorner;

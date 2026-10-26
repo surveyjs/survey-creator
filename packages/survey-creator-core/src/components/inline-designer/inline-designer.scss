@@ -173,12 +173,40 @@
   user-select: none;
 }
 
-.svc-creator--inline .svc-inline-property-grid__title {
+// The category (one-category mode) and, below it, the element: as the sidebar's property grid header.
+.svc-creator--inline .svc-inline-property-grid__caption {
+  display: flex;
   flex: 1 1 auto;
+  flex-direction: column;
   min-width: 0;
+}
 
+.svc-creator--inline .svc-inline-property-grid__title {
   @include sjs2--typography--default-strong;
   @include textEllipsis;
+}
+
+.svc-creator--inline .svc-inline-property-grid__subtitle {
+  color: var(--sjs2-color-fg-basic-secondary);
+
+  @include sjs2--typography--small;
+  @include textEllipsis;
+}
+
+// The grid and the category strip side by side; each scrolls on its own.
+.svc-creator--inline .svc-inline-property-grid__content {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.svc-creator--inline .svc-inline-property-grid__tabs {
+  flex: none;
+  justify-content: flex-start;
+  padding-top: var(--sjs2-spacing-x150, 12px);
+  padding-bottom: var(--sjs2-spacing-x150, 12px);
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .svc-creator--inline .svc-inline-property-grid__close {
@@ -215,6 +243,7 @@
 // survey's own Scroll). Here it takes its content's height and the panel body scrolls.
 .svc-creator--inline .svc-inline-property-grid__body {
   flex: 1 1 auto;
+  min-width: 0;
   min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -243,12 +272,5 @@
     top: 0;
     // Above the grid's title actions (help icons) that scroll under it; the grid's popups stack above (2000).
     z-index: 10;
-  }
-
-  // rootCss reads the creator's navigation mode (buttons), not the plugin's (accordion while inline): undo the
-  // multi-page gaps so the grid looks like the standard accordion.
-  .spg-container--multi-page .spg-page__content {
-    row-gap: normal;
-    column-gap: normal;
   }
 }
