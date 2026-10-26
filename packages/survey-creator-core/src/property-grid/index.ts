@@ -2267,6 +2267,25 @@ export class PropertyGridEditorQuestionCarryForward extends PropertyGridEditorQu
   protected isQuestionFit(question: Question): boolean {
     return question.isValueArray || super.isQuestionFit(question);
   }
+  protected getQuestions(survey: SurveyModel, obj: Base): Array<Question> {
+    const questions = super.getQuestions(survey, obj);
+    const currentName = obj["choicesFromQuestion"];
+    // Exclude questions that already copy choices from obj (directly or through a chain) to prevent circular references.
+    // Keep the currently selected question, so an existing circular reference is still displayed and can be cleared.
+    return questions.filter(q => q.name === currentName || !this.isCopyingChoicesFrom(survey, q, obj));
+  }
+  private isCopyingChoicesFrom(survey: SurveyModel, question: Question, obj: Base): boolean {
+    const visited: Array<Question> = [];
+    let q: Question = question;
+    while(!!q && visited.indexOf(q) < 0) {
+      visited.push(q);
+      const sourceName = q["choicesFromQuestion"];
+      if (!sourceName) return false;
+      q = survey.getQuestionByName(sourceName);
+      if (q === obj) return true;
+    }
+    return false;
+  }
 }
 
 export class PropertyGridEditorQuestionValue extends PropertyGridEditorQuestion {
