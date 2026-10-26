@@ -57,6 +57,12 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
     this.processErrors(value);
     this.isProcessingImmediately = false;
   }
+  // The textarea's input: linting a large survey takes long enough to hold up typing, so a
+  // keystroke is linted a second after the last one, the way Ace's change is. Assigning
+  // model.text still lints at once. _text's onSet calls onTextChanged, which schedules the lint.
+  public onTextInput(value: string): void {
+    this._text = value;
+  }
   protected gotoError(at: number, row: number, column: number): void {
     if (!this.textElement) return;
     const el = this.textElement;
