@@ -239,6 +239,34 @@ test("Page content lazy rendering: the observer resolves the loading placeholder
   }
 });
 
+test("Page content lazy rendering: the loading placeholder is marked as visible only while the page is in the viewport", (): any => {
+  const restoreIntersectionObserver = useFakeIntersectionObserver();
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = createPagesJSON(6);
+    // keep the placeholder on screen instead of replacing it with the page content
+    (creator.survey as any)._isLazyRenderingSuspended = true;
+    const page = creator.survey.pages[5];
+    const pageAdorner = new PageAdorner(creator, page);
+    expect(pageAdorner.loadingContentCss).toBe("svc-page__loading-content");
+
+    const rootElement = document.createElement("div");
+    pageAdorner.attachToUI(page, rootElement);
+    const observer = FakeIntersectionObserver.observersFor(rootElement)[0];
+
+    observer.fireIntersecting(true);
+    expect(pageAdorner.needRenderContent).toBe(false);
+    expect(pageAdorner.loadingContentCss).toBe("svc-page__loading-content svc-page__loading-content--visible");
+
+    observer.fireIntersecting(false);
+    expect(pageAdorner.loadingContentCss).toBe("svc-page__loading-content");
+
+    pageAdorner.detachFromUI();
+  } finally {
+    restoreIntersectionObserver();
+  }
+});
+
 test("Page content lazy rendering: setRootElement should not create a second observer for the same element", (): any => {
   const restoreIntersectionObserver = useFakeIntersectionObserver();
   try {

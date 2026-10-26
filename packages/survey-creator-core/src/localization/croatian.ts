@@ -720,6 +720,8 @@ export var hrStrings = {
       newPanelPosition: "Nova lokacija ulaska",
       // [Auto-translated] "Entries per page"
       pageSize: "Unosi po stranici",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Dopustite korisnicima sortiranje unosa",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Sprječavanje dupliciranih odgovora u sljedećem pitanju"
     },
@@ -807,6 +809,12 @@ export var hrStrings = {
       // [Auto-translated] "Expression"
       expression: "Izraz"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sortiraj po",
+      // [Auto-translated] "Order"
+      direction: "Red"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Izražavanje"
@@ -860,7 +868,9 @@ export var hrStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Učinite stupac potrebnim ako",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Svaka mogućnost u zasebnom stupcu"
+      showInMultipleColumns: "Svaka mogućnost u zasebnom stupcu",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Dopustite sortiranje po ovom stupcu"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var hrStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Još nemate poveznice",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Još nemate stranice",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Još nemaš nikakve razine sortiranja",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Dodavanje novog izbora",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var hrStrings = {
     "addNew@navigateToUrlOnCondition": "Dodaj novi URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Dodaj novu stranicu",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Dodajte novu razinu sortiranja",
     // "Value"
     value: "Vrijednost",
     // "Text"
@@ -1154,6 +1168,14 @@ export var hrStrings = {
     rowCount: "Broj redaka",
     // [Auto-translated] "Rows per page"
     pageSize: "Redovi po stranici",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Dopustite korisnicima sortiranje redaka",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maksimalne razine sortiranja",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Zadani redoslijed sortiranja",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Prikaži traku sortiranja",
     // "Columns layout"
     columnLayout: "Raspored stupaca",
     // "\"Add Row\" button alignment"
@@ -1426,9 +1448,9 @@ export var hrStrings = {
     waitForUpload: "Pričekajte da se prijenos dovrši",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Poravnanje pojedinosti retka",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Najmanji broj redaka",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Minimalan broj redova",
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maksimalan broj redaka",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Izraz broja redaka",
@@ -1684,6 +1706,8 @@ export var hrStrings = {
       columns: "Stupce",
       // "Rows"
       rows: "Redaka",
+      // [Auto-translated] "Entries"
+      entries: "Prijave",
       // "Choice Options"
       choices: "Izbora",
       // "Items"
@@ -2278,6 +2302,8 @@ export var hrStrings = {
     underRowSingle: "Ispod retka prikažite samo jedan odjeljak",
     // "Auto"
     auto: "Automobil",
+    // [Auto-translated] "Always"
+    always: "Uvijek",
     timerInfoMode: {
       // "Both"
       combined: "Oba"
@@ -2816,14 +2842,24 @@ export var hrStrings = {
       confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Specificirajte izraz koji izračunava broj unosa. Ovaj izraz nadjačava postavku \"Početni broj unosa\" i ponovno se procjenjuje kad god se vrijednosti na koje se odnosi promijene. Rezultat je ograničen postavkama \"Minimalan broj unosa\" i \"Maksimalan broj unosa\". Dok je ovaj izraz postavljen, ispitanici ne mogu ručno dodavati ili uklanjati unose.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Specificira broj unosa prikazanih na svakoj stranici panela. '0' onemogućuje paginaciju i prikazuje sve retke.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Specificira broj unosa prikazanih na svakoj stranici panela. '0' onemogućuje paginaciju i prikazuje sve unose.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Omogućuje ispitanicima sortiranje unosa pomoću trake za sortiranje.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definira početni redoslijed unosa. Ispitanici ga mogu promijeniti ako je dopušteno sortiranje. Kod sortiranja po više pitanja, svako pitanje sortira unose unutar redoslijeda utvrđenog prethodnim pitanjem. Povlačite pitanja kako biste promijenili prioritet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar dinamičke ploče."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Specificirajte izraz koji izračunava broj redaka. Ovaj izraz nadjačava postavku \"Broj redaka\" i ponovno se procjenjuje kad se vrijednosti na koje se poziva promijene. Rezultat je ograničen postavkama \"Minimalni broj redaka\" i \"Maksimalan broj redaka\". Dok je ovaj izraz postavljen, ispitanici ne mogu ručno dodavati ili uklanjati retke.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Omogućuje ispitanicima sortiranje redaka klikom na zaglavlje stupaca ili korištenjem trake za sortiranje.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definira početni redoslijed redaka. Ispitanici ga mogu promijeniti ako je dopušteno sortiranje. Kod sortiranja po više stupaca, svaki stupac sortira retke unutar redoslijeda koji je uspostavio prethodni stupac. Prevucite stupce kako biste promijenili njihov prioritet.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" prikazuje traku za sortiranje samo kada matrica nema zaglavlja stupaca koja se mogu sortirati: zaglavlja su skrivena, matrica koristi mobilni raspored ili su retki prebačeni u stupce. \"Uvijek\" prikazuje traku za sortiranje čak i kada su vidljivi naslovi stupaca koji se mogu sortirati.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificirajte izraz koji izračunava broj redaka. Ovaj izraz nadjačava postavku \"Početni broj redaka\" i ponovno se procjenjuje svaki put kad se vrijednosti na koje se poziva promijene. Rezultat je ograničen postavkama \"Minimalan broj redaka\" i \"Maksimalan broj redaka\". Dok je ovaj izraz postavljen, ispitanici ne mogu ručno dodavati ili uklanjati retke.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Aktivira upit za potvrdu prije uklanjanja retka.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var hrStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Specificira broj redaka prikazanih na svakoj stranici matrice. '0' onemogućuje paginaciju i prikazuje sve retke.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specificira po koliko polja ispitanik može sortirati istovremeno.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

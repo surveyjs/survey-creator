@@ -720,6 +720,8 @@ export var htStrings = {
       newPanelPosition: "Nouvo kote panèl",
       // [Auto-translated] "Entries per page"
       pageSize: "Entries pou chak paj",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Pèmèt itilizatè yo sòt antre yo",
       // "Prevent duplicate responses in the following question"
       keyName: "Anpeche repons doub nan kesyon sa a"
     },
@@ -807,6 +809,12 @@ export var htStrings = {
       // "Expression"
       expression: "Ekspresyon"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Triye pa",
+      // [Auto-translated] "Order"
+      direction: "Lòd"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Ekspresyon"
@@ -860,7 +868,9 @@ export var htStrings = {
       // "Make the column required if"
       requiredIf: "Fè kolòn ki nesesè si",
       // "Each option in a separate column"
-      showInMultipleColumns: "Chak opsyon nan yon kolòn separe"
+      showInMultipleColumns: "Chak opsyon nan yon kolòn separe",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Pèmèt klasman pa kolòn sa a"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var htStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Ou poko gen okenn lyen",
     // "You don't have any pages yet"
     "listIsEmpty@pages": "Ou poko gen okenn paj",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Ou pa gen okenn nivo sòt ankò",
     // "Add new choice"
     "addNew@choices": "Ajoute nouvo chwa",
     // "Add new column"
@@ -1046,6 +1058,8 @@ export var htStrings = {
     "addNew@navigateToUrlOnCondition": "Ajoute nouvo URL",
     // "Add new page"
     "addNew@pages": "Ajoute nouvo paj",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Ajoute nouvo nivo sòt",
     // "Value"
     value: "Valè",
     // "Text"
@@ -1154,6 +1168,14 @@ export var htStrings = {
     rowCount: "Konte ranje",
     // [Auto-translated] "Rows per page"
     pageSize: "Ranje pou chak paj",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Pèmèt itilizatè yo sòt ranje ranje",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Nivo maksimòm sòt",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Lòd sòt default",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Montre triye ba",
     // "Columns layout"
     columnLayout: "Layout kolòn yo",
     // "\"Add Row\" button alignment"
@@ -1684,6 +1706,8 @@ export var htStrings = {
       columns: "Kolòn",
       // "Rows"
       rows: "Ranje",
+      // [Auto-translated] "Entries"
+      entries: "Antre yo",
       // "Choice Options"
       choices: "Opsyon Chwa",
       // "Items"
@@ -2278,6 +2302,8 @@ export var htStrings = {
     underRowSingle: "Anba ranje a, montre yon sèl ekspansyon ranje sèlman",
     // "Auto"
     auto: "Oto",
+    // [Auto-translated] "Always"
+    always: "Toujou",
     timerInfoMode: {
       // "Both"
       combined: "Tou de"
@@ -2816,14 +2842,24 @@ export var htStrings = {
       confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon panèl.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Espesifye yon ekspresyon ki kalkile kantite antre yo. Ekspresyon sa a depase anviwònman an \"Premye kantite antre\" epi li re-evalye chak fwa valè yo li referans chanje. Rezilta a limite pa \"Kantite minimòm antre yo\" ak \"Maksimòm kantite antre\". Pandan ke ekspresyon sa a mete, moun ki repond yo pa ka ajoute oswa retire antre manyèlman.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Espesifye kantite antre yo montre sou chak paj nan panèl la. '0' enfim paginasyon ak montre tout ranje.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Espesifye kantite antre yo montre sou chak paj nan panèl la. '0' enfim paginasyon ak montre tout antre yo.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Pèmèt moun ki repond sòt antre lè l sèvi avèk ba a sòt.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Defini lòd antre inisyal la. Moun ki repond yo ka chanje li si klasman pèmèt. Lè triye pa kesyon miltip, chak kesyon sòt antre nan lòd la etabli pa kesyon anvan an. Trennen kesyon yo chanje priyorite yo.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Asiyen nimewo nan kesyon ki enbrike nan panèl dinamik la."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Espesifye yon ekspresyon ki kalkile kantite ranje. Ekspresyon sa a depase anviwònman an \"Konte ranje\" epi li re-evalye chak fwa valè yo li referans chanje. Rezilta a limite pa anviwònman \"Kantite ranje minimòm\" ak \"Maksimòm konte ranje\". Pandan ke ekspresyon sa a mete, moun ki repond yo pa ka ajoute oswa retire ranje manyèlman.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Pèmèt moun ki repond sòt ranje ranje pa klike sou kolòn oswa lè l sèvi avèk ba a sòt.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Defini lòd premye ranje a. Moun ki repond yo ka chanje li si se klasman pèmèt. Lè triye pa kolòn miltip, chak kolòn sòt ranje ranje nan lòd la etabli pa kolòn anvan an. Trennen kolòn yo chanje priyorite yo.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" montre ba a sòt sèlman lè matris la pa gen okenn kolòn triyabl: yo kache, matris la itilize Layout mobil lan, oswa ranje yo transpoze nan kolòn. \"Toujou\" montre ba a sòt menm lè kolòn triyabl yo vizib.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Presize yon ekspresyon ki kalkile kantite ranje. Ekspresyon sa a depase anviwònman an \"Nimewo inisyal ranje\" epi li re-evalye chak fwa valè yo li referans chanje. Rezilta a limite pa \"Kantite minimòm\" ak \"Maksimòm kantite ranje\" anviwònman. Pandan ke ekspresyon sa a mete, moun ki repond yo pa ka ajoute oswa retire ranje manyèlman.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Deklanche yon konfimasyon pouse anvan ou retire yon ranje.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var htStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Espesifye kantite ranje ki parèt sou chak paj nan matris la. '0' enfim paginasyon ak montre tout ranje.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Espesifye konbyen jaden yon moun ki repond ka sòt pa nan yon fwa.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplike repons ki soti nan dènye ranje a epi asiyen yo nan pwochen ranje dinamik ajoute a.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

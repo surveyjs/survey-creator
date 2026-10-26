@@ -720,6 +720,8 @@ export var simplifiedChineseTranslation = {
       newPanelPosition: "新入场地点",
       // [Auto-translated] "Entries per page"
       pageSize: "每页条目",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "允许用户排序条目",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下问题中的重复回答"
     },
@@ -807,6 +809,12 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Expression"
       expression: "表达"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "排序",
+      // [Auto-translated] "Order"
+      direction: "秩序"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "表达"
@@ -860,7 +868,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "如果满足以下条件，则使该列为必填项",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "每个选项都在单独的列中"
+      showInMultipleColumns: "每个选项都在单独的列中",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "允许按此列排序"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var simplifiedChineseTranslation = {
     "listIsEmpty@navigateToUrlOnCondition": "您还没有任何链接",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "您还没有任何页面",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "你还没有任何等级",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "添加新选择",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var simplifiedChineseTranslation = {
     "addNew@navigateToUrlOnCondition": "添加新 URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "添加新页面",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "添加新的排序层级",
     // "Value"
     value: "值",
     // "Text"
@@ -1154,6 +1168,14 @@ export var simplifiedChineseTranslation = {
     rowCount: "默认行数",
     // [Auto-translated] "Rows per page"
     pageSize: "每页行数",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "允许用户排序行",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "最高排序等级",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "默认排序顺序",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "显示排序栏",
     // "Columns layout"
     columnLayout: "列布局",
     // "\"Add Row\" button alignment"
@@ -1426,9 +1448,9 @@ export var simplifiedChineseTranslation = {
     waitForUpload: "等待上传完成",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "行详细信息对齐方式",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "最小行数",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "最大行数",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "行计数表达式",
@@ -1684,6 +1706,8 @@ export var simplifiedChineseTranslation = {
       columns: "设置列",
       // "Rows"
       rows: "设置行",
+      // [Auto-translated] "Entries"
+      entries: "参赛作品",
       // "Choice Options"
       choices: "设置选项",
       // [Auto-translated] "Items"
@@ -2278,6 +2302,8 @@ export var simplifiedChineseTranslation = {
     underRowSingle: "在行下，仅显示一个部分",
     // "Auto"
     auto: "自动",
+    // [Auto-translated] "Always"
+    always: "总是这样",
     timerInfoMode: {
       // "Both"
       combined: "双"
@@ -2816,14 +2842,24 @@ export var simplifiedChineseTranslation = {
       confirmDelete: "在删除条目之前触发确认提示。",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "指定一个计算条目数量的表达式。该表达式覆盖“初始条目数”设置，并在引用值变化时重新评估。结果受限于“最小条目数”和“最大条目数”设置。在此表达式设置期间，受访者无法手动添加或删除条目。",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "指定面板每页显示的条目数量。“0”禁用分页，显示所有行。",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "指定面板每页显示的条目数量。“0”禁用分页，显示所有条目。",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "允许受访者使用排序栏对条目进行排序。",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "定义初始输入顺序。如果允许排序，受访者可以更改。在按多个问题排序时，每个问题会按照前一个问题确定的顺序排序条目。拖拽问题以改变其优先级。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "为嵌套在动态面板中的问题分配编号。"
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "请指定一个计算行数的表达式。该表达式覆盖“行数”设置，并在引用值变化时重新评估。结果受限于“最小行数”和“最大行数”设置。在此表达式设置期间，受访者无法手动添加或删除行。",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "允许受访者通过点击列头或使用排序栏来排序行。",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "定义初始行顺序。如果允许排序，受访者可以更改顺序。在多列排序时，每列排序顺序与前一列确定的顺序相同。拖动列以更改优先级。",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "“自动”仅在矩阵没有可排序列头时显示排序栏：标题隐藏、矩阵使用移动版布局，或行被转为列时。“始终”显示排序栏，即使可排序列头可见。",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "指定一个计算行数的表达式。该表达式覆盖“初始行数”设置，并在引用值变化时重新评估。结果受限于“最小行数”和“最大行数”设置。在此表达式设置期间，受访者无法手动添加或删除行数。",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "在删除行之前触发确认提示。",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var simplifiedChineseTranslation = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "指定矩阵每页显示的行数。“0”关闭分码，显示所有行。",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "指定受访者一次可排序的字段数量。",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "复制最后一行的答案，并将其分配给下一个添加的动态行。",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

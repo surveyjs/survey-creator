@@ -720,6 +720,8 @@ export var koreanStrings = {
       newPanelPosition: "새로운 진입 위치",
       // [Auto-translated] "Entries per page"
       pageSize: "페이지당 항목 수",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "사용자가 항목을 정렬할 수 있게 합니다",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "다음 질문에서 중복 응답 방지"
     },
@@ -808,6 +810,12 @@ export var koreanStrings = {
       // [Auto-translated] "Expression"
       expression: "식"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "정렬",
+      // [Auto-translated] "Order"
+      direction: "순서"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "표현"
@@ -861,7 +869,9 @@ export var koreanStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "다음과 같은 경우 열을 필수로 만듭니다.",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "별도의 열에 있는 각 옵션"
+      showInMultipleColumns: "별도의 열에 있는 각 옵션",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "이 열에 따라 정렬 허용"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1031,6 +1041,8 @@ export var koreanStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "아직 링크가 없습니다.",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "아직 페이지가 없습니다.",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "아직 어떤 종류의 레벨도 없어요",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "새 선택 항목 추가",
     // [Auto-translated] "Add new column"
@@ -1047,6 +1059,8 @@ export var koreanStrings = {
     "addNew@navigateToUrlOnCondition": "새 URL 추가",
     // [Auto-translated] "Add new page"
     "addNew@pages": "새 페이지 추가",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "새로운 정렬 레벨 추가",
     // "Value"
     value: "값",
     // "Text"
@@ -1155,6 +1169,14 @@ export var koreanStrings = {
     rowCount: "행 수",
     // [Auto-translated] "Rows per page"
     pageSize: "페이지당 행 수",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "사용자가 행을 정렬할 수 있게 합니다",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "최대 정렬 단계",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "기본 정렬 순서",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "쇼 정렬 바",
     // "Columns layout"
     columnLayout: "열 위치",
     // "\"Add Row\" button alignment"
@@ -1427,10 +1449,10 @@ export var koreanStrings = {
     waitForUpload: "업로드가 완료될 때까지 기다리십시오.",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "행 세부 정보 정렬",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "최소 행 개수",
-    // [Auto-translated] "Maximum row count"
-    maxRowCount: "최대 행 개수",
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "최소 행 수",
+    // [Auto-translated] "Maximum number of rows"
+    maxRowCount: "최대 행 수",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "행 수 표현식",
     // "Confirm row removal"
@@ -1685,6 +1707,8 @@ export var koreanStrings = {
       columns: "열",
       // "Rows"
       rows: "행",
+      // [Auto-translated] "Entries"
+      entries: "출전",
       // "Choice Options"
       choices: "선택",
       // "Items"
@@ -2279,6 +2303,8 @@ export var koreanStrings = {
     underRowSingle: "행 아래에 하나의 섹션만 표시합니다.",
     // "Auto"
     auto: "자동",
+    // [Auto-translated] "Always"
+    always: "항상",
     timerInfoMode: {
       // "Both"
       combined: "둘다"
@@ -2817,14 +2843,24 @@ export var koreanStrings = {
       confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "항목 수를 계산하는 표현식을 지정하세요. 이 표현식은 \"초기 항목 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 항목 수\"와 \"최대 항목 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 항목을 추가하거나 제거할 수 없습니다.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "패널의 각 페이지에 표시되는 항목 수를 지정합니다. '0'은 페이지네이션을 비활성화하고 모든 행을 표시합니다.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "패널의 각 페이지에 표시되는 항목 수를 지정합니다. '0'은 페이지 지정을 비활성화하고 모든 항목을 표시합니다.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "응답자가 정렬 바를 사용해 항목을 정렬할 수 있게 합니다.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "초기 입력 순서를 정의합니다. 정렬이 허용된다면 응답자는 이를 변경할 수 있습니다. 여러 질문으로 정렬할 때, 각 질문은 이전 질문이 정한 순서로 항목을 정렬합니다. 질문을 드래그하여 우선순위를 변경합니다.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "행 수를 계산하는 식을 지정하세요. 이 표현식은 \"행 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 행 수\"와 \"최대 행 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안에는 응답자가 수동으로 행을 추가하거나 제거할 수 없습니다.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "응답자가 열 헤더를 클릭하거나 정렬 바를 사용하여 행을 정렬할 수 있게 합니다.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "초기 행 순서를 정의합니다. 정렬이 허용되면 응답자가 변경할 수 있습니다. 여러 열로 정렬할 때, 각 열은 앞선 열이 정한 순서 내에서 행을 정렬합니다. 열을 드래그하면 우선순위를 변경할 수 있습니다.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\"는 정렬 가능한 열 헤더가 없을 때만 정렬 바를 표시합니다: 헤더가 숨겨져 있거나, 매트릭스가 모바일 레이아웃을 사용하거나, 행이 열로 옮겨졌을 때입니다. \"Always\"는 정렬 가능한 열 헤더가 보여도 정렬 바를 표시합니다.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "행 수를 계산하는 식을 지정하세요. 이 표현식은 \"초기 행 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 행 수\"와 \"최대 행 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 행을 추가하거나 제거할 수 없습니다.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "행을 제거하기 전에 확인 프롬프트를 트리거합니다.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2832,6 +2868,8 @@ export var koreanStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "매트릭스의 각 페이지에 표시되는 행 수를 지정합니다. '0'은 페이지네이션을 비활성화하고 모든 행을 표시합니다.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "응답자가 한 번에 정렬할 수 있는 필드 수를 지정합니다.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

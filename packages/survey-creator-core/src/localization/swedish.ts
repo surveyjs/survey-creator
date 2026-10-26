@@ -720,6 +720,8 @@ export let svStrings = {
       newPanelPosition: "Ny plats för inresa",
       // [Auto-translated] "Entries per page"
       pageSize: "Poster per sida",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Tillåt användare att sortera poster",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Förhindra dubbla svar i följande fråga"
     },
@@ -808,6 +810,12 @@ export let svStrings = {
       // [Auto-translated] "Expression"
       expression: "Uttryck"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sortera efter",
+      // [Auto-translated] "Order"
+      direction: "Ordning"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Uttryck"
@@ -861,7 +869,9 @@ export let svStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Gör kolumnen obligatorisk om",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Varje alternativ i en separat kolumn"
+      showInMultipleColumns: "Varje alternativ i en separat kolumn",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Tillåt sortering efter denna kolumn"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1031,6 +1041,8 @@ export let svStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Du har inga länkar ännu",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Du har inga sidor ännu",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Du har inga sortnivåer än",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Lägg till nytt val",
     // [Auto-translated] "Add new column"
@@ -1047,6 +1059,8 @@ export let svStrings = {
     "addNew@navigateToUrlOnCondition": "Lägg till ny URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Lägg till ny sida",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Lägg till ny sorteringsnivå",
     // "Value"
     value: "Värde",
     // [Auto-translated] "Text"
@@ -1155,6 +1169,14 @@ export let svStrings = {
     rowCount: "Antal rader",
     // [Auto-translated] "Rows per page"
     pageSize: "Rader per sida",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Tillåt användare att sortera rader",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maximala sorteringsnivåer",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Standardsorteringsordning",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Showsorteringsbar",
     // "Columns layout"
     columnLayout: "Stil på kolumn",
     // "\"Add Row\" button alignment"
@@ -1427,9 +1449,9 @@ export let svStrings = {
     waitForUpload: "Vänta tills uppladdningen är klar",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Justering av raddetaljer",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Minsta antal rader",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maximalt antal rader",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Radräkningsuttryck",
@@ -1685,6 +1707,8 @@ export let svStrings = {
       columns: "Kolumner",
       // "Rows"
       rows: "Rader",
+      // [Auto-translated] "Entries"
+      entries: "Bidrag",
       // "Choice Options"
       choices: "Välj",
       // "Items"
@@ -2279,6 +2303,8 @@ export let svStrings = {
     underRowSingle: "Under raden visas endast ett avsnitt",
     // "Auto"
     auto: "Automatisk",
+    // [Auto-translated] "Always"
+    always: "Alltid",
     timerInfoMode: {
       // "Both"
       combined: "Båda"
@@ -2817,14 +2843,24 @@ export let svStrings = {
       confirmDelete: "Utlöser en bekräftelseprompt innan en post tas bort.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Ange ett uttryck som beräknar antalet poster. Detta uttryck åsidosätter inställningen \"Initialt antal poster\" och omvärderas varje gång värdena det refererar till ändras. Resultatet begränsas av inställningarna \"Minsta antal poster\" och \"Maximalt antal poster\". Medan detta uttryck är inställt kan respondenter inte lägga till eller ta bort poster manuellt.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Specificerar antalet poster som visas på varje sida i panelen. '0' inaktiverar paginering och visar alla rader.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Specificerar antalet poster som visas på varje sida i panelen. '0' inaktiverar paginering och visar alla poster.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Tillåter respondenter att sortera poster med hjälp av sorteringsfältet.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definierar den initiala inmatningsordningen. Respondenter kan ändra den om sortering är tillåten. När man sorterar efter flera frågor sorterar varje fråga poster inom den ordning som fastställts av föregående fråga. Dra frågor för att ändra deras prioritet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tilldelar nummer till frågor som är kapslade i den dynamiska panelen."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Specificera ett uttryck som beräknar antalet rader. Detta uttryck åsidosätter inställningen \"Radräkning\" och utvärderas om varje gång värdena det refererar till ändras. Resultatet begränsas av inställningarna \"Minsta radantal\" och \"Maximalt radantal\". Medan detta uttryck är inställt kan respondenter inte lägga till eller ta bort rader manuellt.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Tillåter respondenter att sortera rader genom att klicka på kolumnrubriker eller använda sorteringsfältet.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definierar den initiala radordningen. Respondenter kan ändra den om sortering är tillåten. När man sorterar efter flera kolumner sorterar varje kolumn rader inom den ordning som fastställts av föregående kolumn. Dra kolumner för att ändra deras prioritet.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" visar sorteringsfältet endast när matrisen inte har några sorterbara kolumnrubriker: rubrikerna är dolda, matrisen använder den mobila layouten, eller rader transponeras till kolumner. \"Alltid\" visar sorteringsfältet även när sorterbara kolumnhuvuden är synliga.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificera ett uttryck som beräknar antalet rader. Detta uttryck åsidosätter inställningen \"Initialt antal rader\" och omvärderas när de värden det refererar till ändras. Resultatet begränsas av inställningarna \"Minsta antal rader\" och \"Maximalt antal rader\". Medan detta uttryck är satt kan respondenter inte lägga till eller ta bort rader manuellt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Utlöser en bekräftelseprompt innan en rad tas bort.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2832,6 +2868,8 @@ export let svStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Specificerar antalet rader som visas på varje sida i matrisen. '0' inaktiverar paginering och visar alla rader.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specificerar hur många fält en respondent kan sortera efter samtidigt.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

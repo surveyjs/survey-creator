@@ -720,6 +720,8 @@ export const thStrings = {
       newPanelPosition: "ตำแหน่งแผงใหม่",
       // [Auto-translated] "Entries per page"
       pageSize: "จํานวนรายการต่อหน้า",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "อนุญาตให้ผู้ใช้จัดเรียงรายการ",
       // "Prevent duplicate responses in the following question"
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
@@ -807,6 +809,12 @@ export const thStrings = {
       // "Expression"
       expression: "นิพจน์"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "เรียงตาม",
+      // [Auto-translated] "Order"
+      direction: "ลําดับ"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "การแสดงออก"
@@ -860,7 +868,9 @@ export const thStrings = {
       // "Make the column required if"
       requiredIf: "ทำให้คอลัมน์จำเป็นถ้า",
       // "Each option in a separate column"
-      showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก"
+      showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export const thStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "คุณยังไม่มีลิงก์ใดๆ",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "คุณยังไม่มีหน้าใด ๆ",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "คุณยังไม่มีระดับการแบ่งประเภทเลย",
     // "Add new choice"
     "addNew@choices": "เพิ่มตัวเลือกใหม่",
     // "Add new column"
@@ -1046,6 +1058,8 @@ export const thStrings = {
     "addNew@navigateToUrlOnCondition": "เพิ่ม URL ใหม่",
     // [Auto-translated] "Add new page"
     "addNew@pages": "เพิ่มหน้าใหม่",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "เพิ่มระดับการจัดเรียงใหม่",
     // "Value"
     value: "ค่า",
     // "Text"
@@ -1154,6 +1168,14 @@ export const thStrings = {
     rowCount: "จำนวนแถว",
     // [Auto-translated] "Rows per page"
     pageSize: "จํานวนแถวต่อหน้า",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "อนุญาตให้ผู้ใช้จัดเรียงแถว",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "ระดับการจัดเรียงสูงสุด",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "ลําดับการจัดเรียงเริ่มต้น",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "แสดงแถบจัดเรียง",
     // "Columns layout"
     columnLayout: "เค้าโครงคอลัมน์",
     // "\"Add Row\" button alignment"
@@ -1684,6 +1706,8 @@ export const thStrings = {
       columns: "คอลัมน์",
       // "Rows"
       rows: "แถว",
+      // [Auto-translated] "Entries"
+      entries: "ผลงาน",
       // "Choice Options"
       choices: "ตัวเลือก",
       // "Items"
@@ -2278,6 +2302,8 @@ export const thStrings = {
     underRowSingle: "ใต้แถว แสดงการขยายแถวเดียว",
     // "Auto"
     auto: "อัตโนมัติ",
+    // [Auto-translated] "Always"
+    always: "เสมอ",
     timerInfoMode: {
       // "Both"
       combined: "ทั้งสอง"
@@ -2816,14 +2842,24 @@ export const thStrings = {
       confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนรายการนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนรายการเริ่มต้น\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดด้วยการตั้งค่า \"จํานวนรายการขั้นต่ํา\" และ \"จํานวนรายการสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบไม่สามารถเพิ่มหรือลบรายการด้วยตนเองได้",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "ระบุจํานวนรายการที่แสดงในแต่ละหน้าของแผง'0' ปิดการแบ่งหน้าและแสดงทุกแถว",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "ระบุจํานวนรายการที่แสดงในแต่ละหน้าของแผง'0' จะปิดการแบ่งหน้าและแสดงรายการทั้งหมด",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "อนุญาตให้ผู้ตอบแบบสอบถามจัดเรียงรายการโดยใช้แถบเรียงลําดับ",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "กําหนดลําดับการป้อนข้อมูลเริ่มต้นผู้ตอบสามารถเปลี่ยนลําดับได้หากอนุญาตให้จัดเรียงเมื่อจัดเรียงตามคําถามหลายข้อ แต่ละคําถามจะจัดเรียงรายการภายในลําดับที่กําหนดโดยคําถามก่อนหน้าลากคําถามเพื่อเปลี่ยนลําดับความสําคัญ",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงแบบไดนามิก"
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนแถวนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนแถว\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดโดยการตั้งค่า \"จํานวนแถวขั้นต่ํา\" และ \"จํานวนแถวสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบแบบสอบถามไม่สามารถเพิ่มหรือลบแถวด้วยตนเองได้",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "อนุญาตให้ผู้ตอบแบบสอบถามจัดเรียงแถวโดยคลิกที่หัวคอลัมน์หรือใช้แถบจัดเรียง",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "กําหนดลําดับแถวเริ่มต้นผู้ตอบแบบสอบถามสามารถเปลี่ยนได้หากอนุญาตให้จัดเรียงเมื่อจัดเรียงตามหลายคอลัมน์ แต่ละคอลัมน์จะจัดเรียงแถวภายในลําดับที่กําหนดโดยคอลัมน์ก่อนหน้าลากคอลัมน์เพื่อเปลี่ยนลําดับความสําคัญ",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" จะแสดงแถบเรียงลําดับเฉพาะเมื่อเมทริกซ์ไม่มีหัวคอลัมน์ที่เรียงได้: หัวคอลัมน์ถูกซ่อน, เมทริกซ์ใช้รูปแบบเคลื่อนที่ หรือแถวถูกสลับไปยังคอลัมน์\"เสมอ\" จะแสดงแถบเรียงลําดับแม้จะมีหัวคอลัมน์ที่เรียงลําดับได้แสดงอยู่",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนแถวนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนแถวเริ่มต้น\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดด้วยการตั้งค่า \"จํานวนแถวขั้นต่ํา\" และ \"จํานวนแถวสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบแบบสอบถามไม่สามารถเพิ่มหรือลบแถวด้วยตนเองได้",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนที่จะลบแถว",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export const thStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "ระบุจํานวนแถวที่แสดงในแต่ละหน้าของเมทริกซ์'0' ปิดการแบ่งหน้าและแสดงแถวทั้งหมด",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "ระบุจํานวนฟิลด์ที่ผู้ตอบสามารถเรียงลําดับได้พร้อมกัน",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแถวสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแถวไดนามิกถัดไป",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

@@ -720,6 +720,8 @@ export var skStrings = {
       newPanelPosition: "Nové miesto vstupu",
       // [Auto-translated] "Entries per page"
       pageSize: "Záznamy na stránku",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Umožniť používateľom triediť položky",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabránenie duplicitným odpovediam v nasledujúcej otázke"
     },
@@ -807,6 +809,12 @@ export var skStrings = {
       // [Auto-translated] "Expression"
       expression: "Výraz"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Zoradiť podľa",
+      // [Auto-translated] "Order"
+      direction: "Poradie"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Vyjadrenie"
@@ -860,7 +868,9 @@ export var skStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Nastavte stĺpec ako povinný, ak",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Každá možnosť v samostatnom stĺpci"
+      showInMultipleColumns: "Každá možnosť v samostatnom stĺpci",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Povoľte triedenie podľa tohto stĺpca"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var skStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Zatiaľ nemáte žiadne odkazy",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Zatiaľ nemáte žiadne stránky",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Ešte nemáš žiadne úrovne triedenia",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Pridanie novej možnosti",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var skStrings = {
     "addNew@navigateToUrlOnCondition": "Pridať novú URL adresu",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Pridať novú stránku",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Pridajte novú úroveň triedenia",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1154,6 +1168,14 @@ export var skStrings = {
     rowCount: "Počet riadkov",
     // [Auto-translated] "Rows per page"
     pageSize: "Riadky na stránku",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Umožniť používateľom triediť riadky",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maximálne úrovne triedenia",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Predvolené poradie triedenia",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Zobraziť triediaci panel",
     // "Columns layout"
     columnLayout: "Rozloženie stĺpcov",
     // "\"Add Row\" button alignment"
@@ -1426,9 +1448,9 @@ export var skStrings = {
     waitForUpload: "Počkajte na dokončenie nahrávania",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Zarovnanie detailov riadkov",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Minimálny počet riadkov",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maximálny počet riadkov",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Výraz počtu riadkov",
@@ -1684,6 +1706,8 @@ export var skStrings = {
       columns: "Stĺpce",
       // "Rows"
       rows: "Riadky",
+      // [Auto-translated] "Entries"
+      entries: "Príspevky",
       // "Choice Options"
       choices: "Možnosti",
       // "Items"
@@ -2278,6 +2302,8 @@ export var skStrings = {
     underRowSingle: "Pod riadkom zobrazte iba jednu sekciu",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Vždy",
     timerInfoMode: {
       // "Both"
       combined: "Obidva"
@@ -2816,14 +2842,24 @@ export var skStrings = {
       confirmDelete: "Spustí výzvu na potvrdenie pred odstránením položky.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Špecifikujte výraz, ktorý vypočíta počet záznamov. Tento výraz prepíše nastavenie \"Počiatočný počet záznamov\" a je znovu vyhodnocovaný vždy, keď sa zmenia hodnoty, na ktoré odkazuje. Výsledok je obmedzený nastaveniami \"Minimálny počet záznamov\" a \"Maximálny počet záznamov\". Kým je tento výraz nastavený, respondenti nemôžu manuálne pridávať alebo odstraňovať položky.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Určuje počet položiek zobrazených na každej stránke panelu. '0' deaktivuje stránkovanie a zobrazuje všetky riadky.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Určuje počet položiek zobrazených na každej stránke panela. '0' deaktivuje stránkovanie a zobrazuje všetky položky.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Umožňuje respondentom triediť položky pomocou triediacej lišty.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definuje počiatočné poradie prihlášok. Respondenti ho môžu zmeniť, ak je triedenie povolené. Pri triedení podľa viacerých otázok každá otázka triedi položky v poradí stanovenom predchádzajúcou otázkou. Otázky potiahnite na zmenu priority.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Priraďuje čísla otázkam vnoreným do dynamického panela."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Špecifikujte výraz, ktorý vypočíta počet riadkov. Tento výraz prepíše nastavenie \"Počet riadkov\" a je znovu vyhodnocovaný vždy, keď sa zmenia hodnoty, na ktoré odkazuje. Výsledok je obmedzený nastaveniami \"Minimálny počet riadkov\" a \"Maximálny počet riadkov\". Kým je tento výraz nastavený, respondenti nemôžu riadky manuálne pridávať alebo odstraňovať.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Umožňuje respondentom triediť riadky kliknutím na hlavičky stĺpcov alebo použitím triediacej lišty.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definuje počiatočné poradie riadkov. Respondenti ho môžu zmeniť, ak je triedenie povolené. Pri triedení podľa viacerých stĺpcov každý stĺpec triedi riadky v poradí stanovenom predchádzajúcim stĺpcom. Potiahnite stĺpce, aby ste zmenili ich prioritu.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" zobrazuje triediaci panel len vtedy, keď matica nemá zoraditeľné hlavičky stĺpcov: hlavičky sú skryté, matica používa mobilné rozloženie alebo riadky sú premenené na stĺpce. \"Vždy\" zobrazuje triediaci panel aj vtedy, keď sú viditeľné zoraditeľné hlavičky stĺpcov.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Špecifikujte výraz, ktorý vypočíta počet riadkov. Tento výraz prepíše nastavenie \"Počiatočný počet riadkov\" a znovu sa vyhodnocuje vždy, keď sa zmenia hodnoty, na ktoré odkazuje. Výsledok je obmedzený nastaveniami \"Minimálny počet riadkov\" a \"Maximálny počet riadkov\". Kým je tento výraz nastavený, respondenti nemôžu riadky manuálne pridávať alebo odstraňovať.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Spustí výzvu na potvrdenie pred odstránením riadka.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var skStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Určuje počet riadkov zobrazených na každej stránke matice. '0' deaktivuje stránkovanie a zobrazuje všetky riadky.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Špecifikuje, podľa koľkých polí môže respondent triediť naraz.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplikuje odpovede z posledného riadka a priradí ich k ďalšiemu pridanému dynamickému riadku.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

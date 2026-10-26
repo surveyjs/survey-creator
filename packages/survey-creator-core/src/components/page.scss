@@ -117,6 +117,12 @@ svc-page {
   }
 }
 
+// An infinite rotation would keep repainting every off-screen placeholder each frame while the designer is open,
+// so only the placeholders in the viewport rotate.
+.svc-page__loading-content:not(.svc-page__loading-content--visible) .sd-loading-indicator .sv-svg-icon {
+  animation: none;
+}
+
 // The placeholder renders no footer. Keep the footer's height (its margin-top plus the add-question
 // button) so that the scroll height and the number of pages rendered at load stay the same.
 // Collapsed pages hide the footer, so they do not need it.

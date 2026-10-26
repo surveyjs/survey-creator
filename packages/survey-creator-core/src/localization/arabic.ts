@@ -720,6 +720,8 @@ export var arStrings = {
       newPanelPosition: "موقع دخول جديد",
       // [Auto-translated] "Entries per page"
       pageSize: "الإدخالات في الصفحة",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "السماح للمستخدمين بفرز الإدخالات",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "منع الردود المكررة في السؤال التالي"
     },
@@ -807,6 +809,12 @@ export var arStrings = {
       // [Auto-translated] "Expression"
       expression: "تعبير"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "الترتيب حسب",
+      // [Auto-translated] "Order"
+      direction: "الترتيب"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "التعبير"
@@ -860,7 +868,9 @@ export var arStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "اجعل العمود مطلوبا إذا",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "كل خيار في عمود منفصل"
+      showInMultipleColumns: "كل خيار في عمود منفصل",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "السماح بالترتيب حسب هذا العمود"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var arStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "ليس لديك أي روابط حتى الآن",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "ليس لديك أي صفحات حتى الآن",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "ليس لديك أي مستويات تصنيف بعد",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "إضافة خيار جديد",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var arStrings = {
     "addNew@navigateToUrlOnCondition": "إضافة عنوان URL جديد",
     // [Auto-translated] "Add new page"
     "addNew@pages": "إضافة صفحة جديدة",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "إضافة مستوى فرز جديد",
     // "Value"
     value: "القيمة",
     // "Text"
@@ -1154,6 +1168,14 @@ export var arStrings = {
     rowCount: "عدد الصفوف",
     // [Auto-translated] "Rows per page"
     pageSize: "الصفوف في الصفحة",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "السماح للمستخدمين بفرز الصفوف",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "أقصى مستويات الفرز",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "ترتيب الفرز الافتراضي",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "شريط فرز العرض",
     // "Columns layout"
     columnLayout: "تخطيط الأعمدة",
     // "\"Add Row\" button alignment"
@@ -1426,9 +1448,9 @@ export var arStrings = {
     waitForUpload: "انتظر حتى يكتمل التحميل",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "محاذاة تفاصيل الصف",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "الحد الأدنى لعدد الصفوف",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "الحد الأقصى لعدد الصفوف",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "تعبير عدد الصفوف",
@@ -1684,6 +1706,8 @@ export var arStrings = {
       columns: "الأعمدة",
       // "Rows"
       rows: "الصفوف",
+      // [Auto-translated] "Entries"
+      entries: "المشاركات",
       // "Choice Options"
       choices: "الخيارات",
       // "Items"
@@ -2278,6 +2302,8 @@ export var arStrings = {
     underRowSingle: "أسفل الصف، اعرض قسما واحدا فقط",
     // "Auto"
     auto: "تلقائي",
+    // [Auto-translated] "Always"
+    always: "دائما",
     timerInfoMode: {
       // "Both"
       combined: "كلا"
@@ -2816,14 +2842,24 @@ export var arStrings = {
       confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "حدد تعبيرا يحسب عدد الإدخالات. هذا التعبير يتجاوز إعداد \"العدد الأولي للإدخالات\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الإدخالات\" و\"الحد الأقصى لعدد الإدخالات\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الإدخالات يدويا.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "يحدد عدد الإدخالات المعروضة في كل صفحة من اللوحة. '0' يعطل تقسيم الصفحات ويعرض جميع الصفوف.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "يحدد عدد الإدخالات المعروضة في كل صفحة من اللوحة. '0' يعطل تقسيم الصفحات ويعرض جميع الإدخالات.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "يسمح للمشاركين بفرز الإدخالات باستخدام شريط الفرز.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "يحدد ترتيب الإدخال الأولي. يمكن للمشاركين تغييره إذا كان الفرز مسموحا. عند الفرز حسب عدة أسئلة، يقوم كل سؤال بفرز المدخلات ضمن الترتيب الذي حدده السؤال السابق. اسحب الأسئلة لتغيير أولويتها.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "تعيين أرقام للأسئلة المتداخلة داخل اللوحة الديناميكية."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "حدد تعبيرا يحسب عدد الصفوف. هذا التعبير يتجاوز إعداد \"عدد الصفوف\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الصفوف\" و\"الحد الأقصى لعدد الصفوف\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الصفوف يدويا.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "يسمح للمشاركين بفرز الصفوف بالنقر على رؤوس الأعمدة أو باستخدام شريط الفرز.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "يحدد ترتيب الصفوف الأولي. يمكن للمشاركين تغييره إذا كان الفرز مسموحا. عند الفرز حسب عدة أعمدة، يقوم كل عمود بفرز الصفوف ضمن الترتيب الذي حدده العمود السابق. اسحب الأعمدة لتغيير أولويتها.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"تلقائي\" يعرض شريط الفرز فقط عندما لا تحتوي المصفوفة على رؤوس أعمدة قابلة للفرز: تكون الرؤوس مخفية، أو تستخدم المصفوفة تخطيط المتحرك، أو تنقل الصفوف إلى أعمدة. \"دائما\" يعرض شريط الفرز حتى عندما تكون رؤوس الأعمدة القابلة للفرز مرئية.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "حدد تعبيرا يحسب عدد الصفوف. هذا التعبير يتجاوز إعداد \"العدد الابتدائي للصفوف\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الصفوف\" و\"الحد الأقصى لعدد الصفوف\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الصفوف يدويا.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "يؤدي إلى تشغيل مطالبة تأكيد قبل إزالة صف.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var arStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "يحدد عدد الصفوف المعروضة على كل صفحة من المصفوفة. '0' يعطل تقسيم الصفحات ويعرض جميع الصفوف.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "يحدد عدد الحقول التي يمكن للمجيب فرز بها في نفس الوقت.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
