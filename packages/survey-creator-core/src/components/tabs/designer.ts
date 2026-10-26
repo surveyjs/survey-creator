@@ -8,6 +8,7 @@ import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
 import { assign } from "../../utils/utils";
 import "./designer.scss";
 import "../inline-designer/inline-surface.scss";
+import { InlineDesignerModel } from "../inline-designer/inline-designer";
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.designMode.showEmptyTitles;
 
@@ -115,6 +116,18 @@ export class TabDesignerViewModel extends Base {
     this.initSurvey();
     this.updateUnitDictionaryFromTheme();
     this.updateSurfaceCssVariables();
+    this.updateInlineDesigner();
+  }
+
+  // Inline mode (G02): the floating parts (element toolbar, later the toolbox popup and the property grid panel).
+  @property() inlineDesigner: InlineDesignerModel;
+  private updateInlineDesigner(): void {
+    if (this.creator.isInlineLayout && !this.inlineDesigner) {
+      this.inlineDesigner = new InlineDesignerModel(this.creator, () => this.inlineRootElement);
+    } else if (!this.creator.isInlineLayout && !!this.inlineDesigner) {
+      this.inlineDesigner.dispose();
+      this.inlineDesigner = undefined;
+    }
   }
 
   public updateUnitDictionaryFromTheme() {
@@ -137,11 +150,15 @@ export class TabDesignerViewModel extends Base {
   public updateInlineLayout(): void {
     this.checkNewPage(true);
     this.updatePages();
+    this.updateInlineDesigner();
   }
   // Inline mode (SP10): the design survey becomes mobile at the same width as the live one. The live survey
   // observes its root and compares its width with the --sd-mobile-width css variable; so does this.
   private inlineResizeObserver: ResizeObserver;
+  public inlineRootElement: HTMLElement;
   public setInlineRootElement(el: HTMLElement): void {
+    this.inlineRootElement = el;
+    this.inlineDesigner?.resolveTarget();
     this.inlineResizeObserver?.disconnect();
     this.inlineResizeObserver = undefined;
     if (!el || !this.creator.isInlineLayout || typeof ResizeObserver === "undefined") return;
@@ -388,6 +405,9 @@ export class TabDesignerViewModel extends Base {
     this.pages = this.survey.pages.concat(this.showNewPage ? [this.newPage] : []);
   }
   public dispose(): void {
+    this.inlineDesigner?.dispose();
+    this.inlineDesigner = undefined;
+    this.inlineRootElement = undefined;
     this.inlineResizeObserver?.disconnect();
     this.inlineResizeObserver = undefined;
     super.dispose();

@@ -11,6 +11,10 @@ class SurveyElementResponsivityManager extends ResponsivityManager {
   shouldProcessResponsiveness(): boolean {
     return (this["model"] as SurveyElementActionContainer).isResponsivenessAllowed && super.shouldProcessResponsiveness();
   }
+  protected getAvailableSpace(): number {
+    const callback = (this["model"] as SurveyElementActionContainer).getAvailableSpaceCallback;
+    return !!callback ? callback() : super.getAvailableSpace();
+  }
 }
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   public alwaysShrink = false;
@@ -111,6 +115,13 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
   }
   public get isResponsivenessAllowed() {
     return this._isResponsivenessAllowed;
+  }
+  // Inline designer (prototype): the floating element toolbar hugs its content, so the bar's own width
+  // says nothing about the space it may take. The toolbar supplies that space and asks for a new fit.
+  public getAvailableSpaceCallback: () => number;
+  public updateResponsiveness(): void {
+    if (!this._isResponsivenessAllowed) return;
+    this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
   }
   protected createResponsivityManager(container: HTMLDivElement): ResponsivityManager {
     return new SurveyElementResponsivityManager(container, this);

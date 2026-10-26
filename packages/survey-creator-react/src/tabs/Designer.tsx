@@ -11,6 +11,7 @@ import {
 import { SurveyCreatorModel, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../PageNavigator";
 import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
+import "../inline-designer/InlineElementToolbar";
 interface ITabDesignerComponentProps {
   data: TabDesignerViewModel;
 }
@@ -96,18 +97,15 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
         {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
       </div>
     );
-    // Inline mode: no toolbox column and no Scroll, the host page scrolls.
+    // Inline mode: no toolbox column and no Scroll, the host page scrolls. The element toolbar is a sibling
+    // of the surface: the survey theme variables and clickDesigner stay on the surface (ET02).
     if (this.creator.isInlineLayout) {
+      const inlineDesigner = this.model.inlineDesigner;
       return (
-        <div ref={this.setInlineRoot} className={designerTabClassName} style={this.model.getRootStyle()} onClick={() => this.model.clickDesigner()}
-          onClickCapture={(e) => {
-            if (this.model.isInlineInertTarget(e.target as HTMLElement)) {
-              e.stopPropagation();
-              e.preventDefault();
-            }
-          }}>
-          {content}
-        </div>
+        <React.Fragment>
+          {this.renderInlineSurface(designerTabClassName, content)}
+          {!!inlineDesigner ? ReactElementFactory.Instance.createElement("svc-inline-element-toolbar", { model: inlineDesigner, key: "svc-inline-element-toolbar" }) : null}
+        </React.Fragment>
       );
     }
 
@@ -122,6 +120,20 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           </Scroll>
         </div>
       </React.Fragment>
+    );
+  }
+  private renderInlineSurface(designerTabClassName: string, content: React.JSX.Element): React.JSX.Element {
+    // Keyed: the standard branch's first child is a div too, and React must not reuse it for the inline root.
+    return (
+      <div key="svc-inline-surface" ref={this.setInlineRoot} className={designerTabClassName} style={this.model.getRootStyle()} onClick={() => this.model.clickDesigner()}
+        onClickCapture={(e) => {
+          if (this.model.isInlineInertTarget(e.target as HTMLElement)) {
+            e.stopPropagation();
+            e.preventDefault();
+          }
+        }}>
+        {content}
+      </div>
     );
   }
 

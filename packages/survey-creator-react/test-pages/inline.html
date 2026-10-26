@@ -122,6 +122,8 @@
       <button data-theme="FlatDark" onclick="setDemoTheme('FlatDark')">Flat dark</button>
       <button data-theme="ContrastLightPanelless" onclick="setDemoTheme('ContrastLightPanelless')">Contrast light panelless</button>
     </div>
+    <div class="group">Selected: <b id="selected-name">-</b>
+    </div>
   </div>
   <div class="demo-columns" id="demo-columns">
     <section class="demo-column">
@@ -200,6 +202,14 @@
     const createCreator = (options) => {
       const creator = new SurveyCreator.SurveyCreator(Object.assign({ layoutMode: "inline", showLogicTab: true, showTranslationTab: true, showThemeTab: true }, options || {}));
       creator["animationEnabled"] = false;
+      // The demo toolbar's "Selected:" line.
+      const showSelected = () => {
+        if (window.creator !== creator) return;
+        const el = creator.selectedElement;
+        document.getElementById("selected-name").textContent = !el ? "(none)" : (el === creator.survey ? "survey" : (el.name || el.getType()));
+      };
+      creator.onElementSelected.add(showSelected);
+      setTimeout(showSelected, 0);
       return creator;
     };
     const creator = createCreator();

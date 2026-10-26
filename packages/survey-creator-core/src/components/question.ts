@@ -550,7 +550,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       }
     });
     newAction.iconName = <any>new ComputedUpdater(() => {
-      if (newAction.mode === "small") {
+      // A measurement already queued by a responsivity manager may switch the mode after the adorner was detached
+      // (inline designer: the floating toolbar outlives the adorner it shows).
+      if (newAction.mode === "small" && !!this.element) {
         return this.creator.toolbox.getItemByName(this.element.getType())?.iconName;
       }
       return "icon-chevron_16x16";

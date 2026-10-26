@@ -56,8 +56,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.rootElementValue = val;
     if (oldRootElement !== val) {
       this.onRootElementChanged();
+      this.rootElementChangedCallback?.(this);
     }
   }
+  // Inline designer (prototype): the floating toolbar follows the adorner it shows and must drop it as soon as
+  // the renderer detaches it (detachFromUI clears rootElement first).
+  public rootElementChangedCallback: (adorner: SurveyElementAdornerBase) => void;
 
   @property({ defaultValue: null }) dropIndicatorPosition: DropIndicatorPosition;
   @property({ defaultValue: false }) isBeingDragged: boolean;
@@ -459,8 +463,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
     this.updateActionVisibility("collapse", this.allowExpandCollapse);
     if (options.allowShowSettings === undefined) {
-      const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
-      this.updateActionVisibility("settings", settingsVisibility && this.creator.removeSidebar !== true);
+      // Inline layout has no sidebar: settings is the only way to the element's properties (05 opens a panel).
+      const isInline = this.creator.isInlineLayout;
+      const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : (this.creator.sidebar.flyoutMode || isInline);
+      this.updateActionVisibility("settings", settingsVisibility && (isInline || this.creator.removeSidebar !== true));
     } else {
       this.updateActionVisibility("settings", options.allowShowSettings);
     }
@@ -512,6 +518,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         visibleIndex: 20,
         iconSize: "auto",
         action: () => {
+          // Inline layout: the sidebar is not rendered. 05 opens the floating property grid here.
+          if (this.creator.isInlineLayout) return;
           this.creator.setShowSidebar(true, true);
           if (!this.creator.isMobileView) {
             this.creator.sidebar.executeOnExpand(() => {
