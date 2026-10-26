@@ -378,6 +378,7 @@ export var enStrings = {
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
       pageSize: "Entries per page",
+      allowSort: "Allow users to sort panels",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -428,6 +429,10 @@ export var enStrings = {
     calculatedvalue: {
       expression: "Expression"
     },
+    sortcriterion: {
+      field: "Sort by",
+      direction: "Order"
+    },
     urlconditionitem: {
       expression: "Expression"
     },
@@ -459,7 +464,8 @@ export var enStrings = {
       rows: "Input field height (in lines)",
       visibleIf: "Make the column visible if",
       requiredIf: "Make the column required if",
-      showInMultipleColumns: "Each option in a separate column"
+      showInMultipleColumns: "Each option in a separate column",
+      allowSort: "Allow sorting by this column"
     },
     matrixcolumn: {
       isExclusive: "Clear others in the same row"
@@ -553,6 +559,7 @@ export var enStrings = {
     "listIsEmpty@triggers": "You don't have any triggers yet",
     "listIsEmpty@navigateToUrlOnCondition": "You don't have any links yet",
     "listIsEmpty@pages": "You don't have any pages yet",
+    "listIsEmpty@sortCriteria": "You don't have any sort levels yet",
     "addNew@choices": "Add new choice",
     "addNew@columns": "Add new column",
     "addNew@rows": "Add new row",
@@ -561,6 +568,7 @@ export var enStrings = {
     "addNew@triggers": "Add new trigger",
     "addNew@navigateToUrlOnCondition": "Add new URL",
     "addNew@pages": "Add new page",
+    "addNew@sortCriteria": "Add new sort level",
     value: "Value",
     text: "Text",
     imageLink: "Image or video file URL",
@@ -614,8 +622,12 @@ export var enStrings = {
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size (in bytes)",
     maxFiles: "Maximum number of files",
-    rowCount: "Row count",
+    rowCount: "Initial number of rows",
     pageSize: "Rows per page",
+    allowSort: "Allow users to sort rows",
+    maxSortLevel: "Maximum sort levels",
+    sortCriteria: "Default sort order",
+    showSortBar: "Show sort bar",
     columnLayout: "Columns layout",
     addRowButtonLocation: "\"Add Row\" button alignment",
     transposeData: "Transpose rows to columns",
@@ -753,8 +765,8 @@ export var enStrings = {
     acceptedTypes: "Additional file extensions",
     waitForUpload: "Wait for upload to complete",
     detailPanelMode: "Row details alignment",
-    minRowCount: "Minimum row count",
-    maxRowCount: "Maximum row count",
+    minRowCount: "Minimum number of rows",
+    maxRowCount: "Maximum number of rows",
     rowCountExpression: "Row count expression",
     confirmDelete: "Confirm row removal",
     confirmDeleteText: "Confirmation message",
@@ -894,6 +906,7 @@ export var enStrings = {
       html: "HTML Editor",
       columns: "Columns",
       rows: "Rows",
+      entries: "Entries",
       choices: "Choice Options",
       items: "Items",
       visibleIf: "Visible If",
@@ -1208,6 +1221,7 @@ export var enStrings = {
     underRow: "Under the row",
     underRowSingle: "Under the row, display one section only",
     auto: "Auto",
+    always: "Always",
     timerInfoMode: {
       combined: "Both"
     },
@@ -1524,15 +1538,21 @@ export var enStrings = {
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
       confirmDelete: "Triggers a confirmation prompt before removing an entry.",
       panelCountExpression: "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually.",
-      pageSize: "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows.",
+      pageSize: "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries.",
+      allowSort: "Allows respondents to sort entries from the sort bar.",
+      sortCriteria: "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority.",
       showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
-      rowCountExpression: "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually.",
+      allowSort: "Allows respondents to sort rows by clicking column headers or from the sort bar.",
+      sortCriteria: "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority.",
+      showSortBar: "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well.",
+      rowCountExpression: "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually.",
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
       detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix."
     },
     pageSize: "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows.",
+    maxSortLevel: "Specifies how many fields a respondent can sort by at once.",
     copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
     defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
     resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set).",

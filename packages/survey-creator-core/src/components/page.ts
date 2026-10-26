@@ -17,7 +17,21 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   @property() showPlaceholder: boolean;
-  public questionTypeSelectorModel: any;
+  // Only the footer's add-question button reads it, and the footer is not rendered while the page
+  // shows the loading placeholder, so build it on first read.
+  private questionTypeSelectorModelValue: any;
+  public get questionTypeSelectorModel(): any {
+    if (!this.questionTypeSelectorModelValue) {
+      this.questionTypeSelectorModelValue = this.creator.getQuestionTypeSelectorModel(
+        (type) => {
+          this.currentAddQuestionType = type;
+          this.addGhostPage(false);
+          this.creator.survey.currentPage = this.page;
+        }
+      );
+    }
+    return this.questionTypeSelectorModelValue;
+  }
   private dragOrClickHelper: DragOrClickHelper;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   get currentAddQuestionType(): string {
@@ -38,19 +52,18 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   constructor(creator: SurveyCreatorModel, page: PageModel) {
     super(creator, page);
-    this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
-      (type) => {
-        this.currentAddQuestionType = type;
-        this.addGhostPage(false);
-        this.creator.survey.currentPage = this.page;
-      }
-    );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
     this.creator.onPropertyChanged.add(this.creatorPropertyChanged);
   }
   public dispose() {
     this.creator.onPropertyChanged.remove(this.creatorPropertyChanged);
     super.dispose();
+    if (!!this.questionTypeSelectorModelValue && !this.questionTypeSelectorModelValue.isDisposed) {
+      this.questionTypeSelectorModelValue.dispose();
+    }
+    if (!!this._footerActionsBar && !this._footerActionsBar.isDisposed) {
+      this._footerActionsBar.dispose();
+    }
   }
   protected onElementTypeRestrictionChanged(elType: string): void {
     super.onElementTypeRestrictionChanged(elType);
@@ -211,6 +224,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       "add_ghost"
     );
     this.patchPageForDragDrop(this.surveyElement, this.addGhostPage);
+  }
+  // The loading indicator rotates only while the page is in the viewport, off-screen placeholders stay static
+  // so they don't repaint every frame.
+  public get loadingContentCss(): string {
+    return toCssClasses("svc-page__loading-content", this.isVisibleInViewPort && "svc-page__loading-content--visible");
   }
   public get placeholderText(): string {
     if (this.creator.isMobileView)

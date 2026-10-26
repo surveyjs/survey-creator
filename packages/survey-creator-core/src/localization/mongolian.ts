@@ -562,6 +562,73 @@ export var mnStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Тайлбар"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Илэрхийллийн туслах",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "AI-ээр бичих",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Энэ хэллэг юу хийх ёстойг тодорхойл",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Жишээ нь: хариуцагч 18 ба түүнээс дээш насны үед энэ асуултыг харуулна уу",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Энэ нөхцөл байдлыг үгээр тодорхойл",
+    // [Auto-translated] "Generate"
+    generate: "Үүсгэх",
+    // [Auto-translated] "Refine"
+    refine: "Сайжруулна",
+    // [Auto-translated] "Explain"
+    explain: "Тайлбарла",
+    // [Auto-translated] "Stop"
+    stop: "Зогс",
+    // [Auto-translated] "Accept"
+    accept: "Хүлээн авна",
+    // [Auto-translated] "Reject"
+    reject: "Татгалзах",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Засвар хэрэглэх: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Одоогийн илэрхийлэл",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Санал болгосон илэрхийлэл",
+    // [Auto-translated] "Reads as"
+    readsAs: "Дараах байдлаар уншигддаг",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Туслахын тайлбар",
+    // [Auto-translated] "Check results"
+    findings: "Үр дүнг шалгах",
+    // [Auto-translated] "Error"
+    severityError: "Алдаа",
+    // [Auto-translated] "Warning"
+    severityWarning: "Анхааруулга",
+    // [Auto-translated] "Info"
+    severityInfo: "Мэдээлэл",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "\"{0}\" ангид.",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Илэрхийллийг тодорхойлж, Generate гэж сонгоорой.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Туслахыг хүлээж байна...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Хүсэлтийг цуцалсан.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Туслах ажилтан мэдээлсэн: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Туслах нь ямар нэгэн илэрхийлэл илэрхийлээгүй.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Санал болгосон илэрхийллийг дахин шалгаарай.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Туслах нь одоогийн илэрхийллийг тайлбарлав.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Санал болгосон илэрхийлэл нь алдаатай тул хүлээн зөвшөөрөгдөхгүй.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Санал болгосон илэрхийллийг бичигдсэн бүх газарт шалгаж болохгүй тул хүлээн авах боломжгүй.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Туслахаас асуухаасаа өмнө дүрэмд үйлдэл нэмээрэй.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Эхний санал алдаатай байсан бөгөөд автоматаар засагдсан."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export var mnStrings = {
       newPanelPosition: "Шинэ оролцооны байршил",
       // [Auto-translated] "Entries per page"
       pageSize: "Хуудас бүрт бичлэг тоо",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Хэрэглэгчдэд самбаруудыг эрэмбэлэх боломж олгох",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
@@ -740,6 +809,12 @@ export var mnStrings = {
       // [Auto-translated] "Expression"
       expression: "Өгүүлбэр"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Эрэмбэл",
+      // [Auto-translated] "Order"
+      direction: "Дараалал"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Илэрхийлэл"
@@ -793,7 +868,9 @@ export var mnStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Шаардлагатай баганыг хий",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Тус тусдаа баганад байгаа сонголт бүр"
+      showInMultipleColumns: "Тус тусдаа баганад байгаа сонголт бүр",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Энэ баганаар эрэмбэлэхийг зөвшөөрнө"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var mnStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Танд ямар ч холбоос байхгүй",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Танд одоохондоо хуудас байхгүй байна",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Чи одоогоор төрөлжүүлэх түвшингүй байна",
     // "Add new choice"
     "addNew@choices": "Сонголт оруулах",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var mnStrings = {
     "addNew@navigateToUrlOnCondition": "Шинэ URL нэмэх",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Шинэ хуудас нэмж",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Шинэ эрэглэлийн түвшин нэмэх",
     // "Value"
     value: "Утга",
     // "Text"
@@ -1087,6 +1168,14 @@ export var mnStrings = {
     rowCount: "Мөрний тоо",
     // [Auto-translated] "Rows per page"
     pageSize: "Хуудас тутамд мөр",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Хэрэглэгчдэд мөрүүдийг эрэмбэлэх боломж олгох",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Хамгийн их ангиллын түвшин",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Анхдагч эрэмбэрийн дараалал",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Шоу ангиллын бар",
     // "Columns layout"
     columnLayout: "Баганы зохион байгуулалт",
     // "\"Add Row\" button alignment"
@@ -1617,6 +1706,8 @@ export var mnStrings = {
       columns: "Багана",
       // "Rows"
       rows: "Мөр",
+      // [Auto-translated] "Entries"
+      entries: "Оролцогчид",
       // "Choice Options"
       choices: "Сонголт",
       // "Items"
@@ -2211,6 +2302,8 @@ export var mnStrings = {
     underRowSingle: "Мөрийн доор, зөвхөн ганц панел харагдана",
     // "Auto"
     auto: "Авто",
+    // [Auto-translated] "Always"
+    always: "Үргэлж",
     timerInfoMode: {
       // "Both"
       combined: "Аль аль нь"
@@ -2749,14 +2842,24 @@ export var mnStrings = {
       confirmDelete: "Тайлбарыг арилгахаас өмнө баталгааны өдөөлт үүсгэнэ.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Бичлэгийн тоог тооцоолдог илэрхийллийг тодорхойл. Энэ илэрхийлэл нь \"Эхний оролтын тоо\" тохиргоог давж, хамаарах утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага оруулалтын тоо\" болон \"Хамгийн их оруулалтын тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийлэл тохируулсан үед хариуцагчид гараар нэмэх эсвэл хасах боломжгүй.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Панелийн хуудас бүрт харагдах бичлэгийн тоог заана. '0' нь хуудаслалыг идэвхгүй болгож, бүх мөрүүдийг харуулдаг.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Панелийн хуудас бүрт харагдах бичлэгийн тоог заадаг. '0' нь хуудаслалыг идэвхгүй болгож, бүх бичлэгийг харуулдаг.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Хариуцагчид sort bar-аас бүртгэлүүдийг эрэмбэлэх боломж олгодог.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Судалгаа эхлэх үед орчуулгын дарааллыг тодорхойлдог. Хэрэв эрэмбэл оролцогчид үүнийг өөрчилж болно. Эрэглэл бүрийн түвшин нэг асуултаар эрэмбэлдэг; дээд түвшин эхэлж хэрэглэгддэг. Давхаргуудыг чирж давхаргыг нь өөрчилнө.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Динамик панел дотор байрласан асуултуудад дугаар онооно."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Мөрийн тоог тооцох илэрхийллийг тодорхойлно. Энэ илэрхийлэл нь \"Мөрийн тоо\" тохиргоог даван туулж, иш татсан утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага мөрийн тоо\" болон \"Хамгийн их мөрийн тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийллийг тохируулсан үед хариуцагчид мөрүүдийг гараар нэмэх, устгах боломжгүй.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Хариуцагчдад баганын толгойг дарж эсвэл эрэмбэлэх самбараас мөрүүдийг эрэмбэлэх боломж олгодог.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Судалгаа эхлэх үед мөрүүдийн дарааллыг тодорхойлдог. Хэрэв эрэмбэлэх зөвшөөрөгдсөн бол оролцогчид үүнийг өөрчилж болно. Ангилах түвшин бүрийг нэг баганаар эрэмбэлдэг; дээд түвшин эхэлж хэрэглэгддэг. Давхаргуудыг нь чирж давуу талтайг нь өөрчилнө.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" нь зөвхөн матриц дээр эрэглэх боломжтой баганын толгойгүй үед л sort bar-ийг харуулдаг: толгой нь нуугдсан, матриц нь мобайл зохион байгуулалтыг ашигладаг, эсвэл мөрүүдийг баган руу шилжүүлдэг. \"Always\" нь баганын толгойн хажууд байрлах эрэглэлийн самбарыг харуулдаг.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Мөрийн тоог тооцох илэрхийллийг тодорхойлно. Энэ илэрхийлэл нь \"Эхний мөрийн тоо\" тохиргоог даван туулж, иш татсан утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага мөрийн тоо\" болон \"Хамгийн их мөрийн тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийллийг тохируулсан үед хариу өгөх хүмүүс мөрүүдийг гараар нэмэх эсвэл хасах боломжгүй.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Мөрийг арилгахаас өмнө баталгааны хүсэлтийг өдөөнө.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2764,6 +2867,8 @@ export var mnStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Матрицын хуудас бүрт харагдах мөрийн тоог заана. '0' нь хуудаслалыг идэвхгүй болгож, бүх мөрүүдийг харуулдаг.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Хариулагч нэг дор хэдэн талбараар эрэмбэлж болохыг заана.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Сүүлийн мөрнөөс хариултуудыг хуулбарлаж, дараагийн нэмэлт динамик мөрөнд хуваарилна.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var mnStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{expression}\" үргэлж хүчинтэй, учир нь {facts} - юу ч шийдэхгүй."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" нь ямар ч асуулт эсвэл хувьсагчийг уншдаггүй."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "\"{name}\"-ийн анхдагч утга нь {valuesText} бөгөөд үүнийг хэзээ ч барьж чадахгүй. Зөвшөөрсөн: {availableText}.",
@@ -4034,6 +4143,8 @@ export var mnStrings = {
       itemScope: "\"{0}\" нь зөвхөн сонголт, мөр болон баганын нөхцөлд л байдаг.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" лавлагаа зөвхөн нийлмэл асуултын дотор байдаг.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" нь inArray шүүлтүүр дотор байхгүй бөгөөд энэ шүүлтүүр нь тухайн зүйл болон судалгаатай холбогддог.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" нь энэ матрицын багана бөгөөд мөрийн урьдчилсан хуудсаар иш тат.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

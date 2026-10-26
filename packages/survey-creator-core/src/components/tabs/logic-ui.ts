@@ -1,7 +1,7 @@
 import {
   SurveyModel, Action, Question, MatrixDropdownRowModelBase, MatrixDynamicRowModel,
   PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString, IDialogOptions,
-  ActionContainer
+  ActionContainer, QuestionMatrixDropdownRenderedTable, QuestionMatrixDropdownRenderedRow
 } from "survey-core";
 import { settings as libSettings } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
@@ -68,6 +68,11 @@ export class SurveyLogicUI extends SurveyLogic {
       updateMatrixLogicExpandAction(<QuestionMatrixDynamicModel>options.question, options.actions, options.row);
       updateMatrixLogicRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);
     });
+    // The rendered table is built by its first read (usually the renderer's): every table built is
+    // marked here, so the tab never has to build one itself to mark it.
+    this.matrixItems.onRenderedTableCreatedCallback = (table: QuestionMatrixDropdownRenderedTable): void => {
+      this.markRenderedRows(table);
+    };
     this.updateItemsSurveyData();
     this.onReadOnlyChanged();
   }
@@ -491,16 +496,32 @@ export class SurveyLogicUI extends SurveyLogic {
     this.matrixItems.value = data;
     this.updateRenderedRows();
   }
+  private get isRenderedTableCreated(): boolean {
+    return this.matrixItems["isRenderedTableCreated"];
+  }
+  // A table that is not built yet is marked when it is built (onRenderedTableCreatedCallback).
   private updateRenderedRows() {
-    this.visibleItems.forEach((_, index) => {
-      this.updateRowIsAdditionalClasses(index, this.visibleItems[index].isModified || this.visibleItems[index].isNew);
+    if (this.isRenderedTableCreated) {
+      this.markRenderedRows(this.matrixItems.renderedTable);
+    }
+  }
+  private markRenderedRows(table: QuestionMatrixDropdownRenderedTable): void {
+    this.getRenderedDataRows(table).forEach((row, index) => {
+      const item = this.visibleItems?.[index];
+      row.isAdditionalClasses = !!item && (item.isModified || item.isNew) && !row.row.isDetailPanelShowing;
     });
   }
   private updateRowIsAdditionalClasses(index: number, isAdditionalClasses: boolean) {
-    if (!!this.matrixItems.renderedTable) {
-      const visibleRows = this.matrixItems.renderedTable.rows.filter(row => row.visible);
-      visibleRows[index].isAdditionalClasses = isAdditionalClasses;
+    if (!this.isRenderedTableCreated) return;
+    const row = this.getRenderedDataRows(this.matrixItems.renderedTable)[index];
+    if (!!row) {
+      row.isAdditionalClasses = isAdditionalClasses;
     }
+  }
+  // The n-th data row shows visibleItems[n]: the matrix has no paging and its rows follow the data
+  // assigned in updateItemsSurveyData. Detail rows are visible, so row.visible cannot skip them.
+  private getRenderedDataRows(table: QuestionMatrixDropdownRenderedTable): Array<QuestionMatrixDropdownRenderedRow> {
+    return table.rows.filter(row => !row.isDetailRow && !row.isErrorsRow && !!row.row);
   }
   private updateNewActionState(): void {
     this.addNewButton.enabled = this.mode !== "new";

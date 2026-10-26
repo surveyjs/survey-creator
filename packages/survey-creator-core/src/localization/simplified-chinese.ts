@@ -562,6 +562,73 @@ export var simplifiedChineseTranslation = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "描述"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "表达助理",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "用AI写作",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "描述表达式应该做什么",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "例如：当受访者年满18岁时，请展示此问题",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "用语言描述这种状况",
+    // [Auto-translated] "Generate"
+    generate: "生成",
+    // [Auto-translated] "Refine"
+    refine: "精炼",
+    // [Auto-translated] "Explain"
+    explain: "解释一下",
+    // [Auto-translated] "Stop"
+    stop: "停下",
+    // [Auto-translated] "Accept"
+    accept: "接受",
+    // [Auto-translated] "Reject"
+    reject: "拒绝",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "应用修正：{0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "现行表达",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "建议表达",
+    // [Auto-translated] "Reads as"
+    readsAs: "读作",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "助理的解释",
+    // [Auto-translated] "Check results"
+    findings: "检查结果",
+    // [Auto-translated] "Error"
+    severityError: "错误",
+    // [Auto-translated] "Warning"
+    severityWarning: "警告",
+    // [Auto-translated] "Info"
+    severityInfo: "信息",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "在《{0}》中",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "描述表达式并选择生成。",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "等助理......",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "该请求被取消。",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "助理报告说：{0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "助理没有提出任何表情。",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "请审阅建议表达。",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "助理解释了当时的表情。",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "建议表达式存在错误，无法接受。",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "建议表达式无法在每个写入点都被检查，因此无法接受。",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "在询问助理之前，先在规则中添加一个动作。",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "第一个建议有错误，自动被纠正。"
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export var simplifiedChineseTranslation = {
       newPanelPosition: "新入场地点",
       // [Auto-translated] "Entries per page"
       pageSize: "每页条目",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "允许用户排序面板",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下问题中的重复回答"
     },
@@ -740,6 +809,12 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Expression"
       expression: "表达"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "排序",
+      // [Auto-translated] "Order"
+      direction: "秩序"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "表达"
@@ -793,7 +868,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "如果满足以下条件，则使该列为必填项",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "每个选项都在单独的列中"
+      showInMultipleColumns: "每个选项都在单独的列中",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "允许按此列排序"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var simplifiedChineseTranslation = {
     "listIsEmpty@navigateToUrlOnCondition": "您还没有任何链接",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "您还没有任何页面",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "你还没有任何等级",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "添加新选择",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var simplifiedChineseTranslation = {
     "addNew@navigateToUrlOnCondition": "添加新 URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "添加新页面",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "添加新的排序层级",
     // "Value"
     value: "值",
     // "Text"
@@ -1087,6 +1168,14 @@ export var simplifiedChineseTranslation = {
     rowCount: "默认行数",
     // [Auto-translated] "Rows per page"
     pageSize: "每页行数",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "允许用户排序行",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "最高排序等级",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "默认排序顺序",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "显示排序栏",
     // "Columns layout"
     columnLayout: "列布局",
     // "\"Add Row\" button alignment"
@@ -1359,9 +1448,9 @@ export var simplifiedChineseTranslation = {
     waitForUpload: "等待上传完成",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "行详细信息对齐方式",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "最小行数",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "最大行数",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "行计数表达式",
@@ -1617,6 +1706,8 @@ export var simplifiedChineseTranslation = {
       columns: "设置列",
       // "Rows"
       rows: "设置行",
+      // [Auto-translated] "Entries"
+      entries: "参赛作品",
       // "Choice Options"
       choices: "设置选项",
       // [Auto-translated] "Items"
@@ -2211,6 +2302,8 @@ export var simplifiedChineseTranslation = {
     underRowSingle: "在行下，仅显示一个部分",
     // "Auto"
     auto: "自动",
+    // [Auto-translated] "Always"
+    always: "总是这样",
     timerInfoMode: {
       // "Both"
       combined: "双"
@@ -2749,14 +2842,24 @@ export var simplifiedChineseTranslation = {
       confirmDelete: "在删除条目之前触发确认提示。",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "指定一个计算条目数量的表达式。该表达式覆盖“初始条目数”设置，并在引用值变化时重新评估。结果受限于“最小条目数”和“最大条目数”设置。在此表达式设置期间，受访者无法手动添加或删除条目。",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "指定面板每页显示的条目数量。“0”禁用分页，显示所有行。",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "指定面板每页显示的条目数量。“0”禁用分页，显示所有条目。",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "允许受访者从排序栏中排序条目。",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "定义调查开始时条目显示的顺序。如果允许排序，受访者可以更改排序。每个排序层次按一个问题排序;最上层优先排序。拖动层级以更改优先级。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "为嵌套在动态面板中的问题分配编号。"
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "请指定一个计算行数的表达式。该表达式覆盖“行数”设置，并在引用值变化时重新评估。结果受限于“最小行数”和“最大行数”设置。在此表达式设置期间，受访者无法手动添加或删除行。",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "允许受访者通过点击列头或排序栏来排序行。",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "定义调查开始时行的显示顺序。如果允许排序，受访者可以更改顺序。每个排序层级按一列排序;最顶层优先排序。拖拽层级以更改优先级。",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "“自动”仅在矩阵没有可排序列头时显示排序栏：标题被隐藏、矩阵使用移动版布局，或行被转为列时。“Always”也会在列标题旁边显示排序栏。",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "指定一个计算行数的表达式。该表达式覆盖“初始行数”设置，并在引用值变化时重新评估。结果受限于“最小行数”和“最大行数”设置。在此表达式设置期间，受访者无法手动添加或删除行数。",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "在删除行之前触发确认提示。",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2764,6 +2867,8 @@ export var simplifiedChineseTranslation = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "指定矩阵每页显示的行数。“0”关闭分码，显示所有行。",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "指定受访者一次可排序的字段数量。",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "复制最后一行的答案，并将其分配给下一个添加的动态行。",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var simplifiedChineseTranslation = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} “{expression}” 总是成立，因为 {facts} - 它不决定任何事。"
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} “{expression}” 不读取任何问题或变量。"
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "“{name}”的默认值是{valuesText}，但它永远无法保持。允许：{availableText}。",
@@ -4034,6 +4143,8 @@ export var simplifiedChineseTranslation = {
       itemScope: "“{0}”仅在选择、行和列条件内可用。",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "“{0}.”的引用仅存在于综合问题中。",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "“{0}”在 inArray 筛选中不可用，这个筛选器先对项目运行，再对调查结果。",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "“{0}”是该矩阵中的一列——用行前缀引用它。",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

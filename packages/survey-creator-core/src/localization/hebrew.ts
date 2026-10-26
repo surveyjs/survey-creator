@@ -562,6 +562,73 @@ export var hebrewStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "תיאור"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "עוזר הבעה",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "כתוב עם בינה מלאכותית",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "תאר מה הביטוי אמור לעשות",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "לדוגמה: הצג את השאלה הזו כאשר המשיב בן 18 ומעלה",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "תאר את המצב במילים",
+    // [Auto-translated] "Generate"
+    generate: "Generate",
+    // [Auto-translated] "Refine"
+    refine: "ללטש",
+    // [Auto-translated] "Explain"
+    explain: "הסבר",
+    // [Auto-translated] "Stop"
+    stop: "עצור",
+    // [Auto-translated] "Accept"
+    accept: "קבל",
+    // [Auto-translated] "Reject"
+    reject: "דחו",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "החלו תיקון: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "ביטוי עכשווי",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "הצעה לביטוי",
+    // [Auto-translated] "Reads as"
+    readsAs: "קורא כ",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "ההסבר של העוזר",
+    // [Auto-translated] "Check results"
+    findings: "בדוק תוצאות",
+    // [Auto-translated] "Error"
+    severityError: "שגיאה",
+    // [Auto-translated] "Warning"
+    severityWarning: "אזהרה",
+    // [Auto-translated] "Info"
+    severityInfo: "מידע",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "ב\"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "תאר את הביטוי ובחר ייצור.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "מחכה לעוזרת...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "הבקשה בוטלה.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "העוזר דיווח: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "העוזרת לא הציעה הבעה.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "בדוק את הביטוי המוצע.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "העוזרת הסבירה את ההבעה הנוכחית.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "הביטוי המוצע מכיל שגיאות ואינו ניתן לקבל.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "הביטוי המוצע לא יכול היה להיבדק בכל מקום אליו הוא נכתב, ולכן לא ניתן לקבל אותו.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "הוסף פעולה לכלל לפני שתשאל את העוזר.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "ההצעה הראשונה כללה שגיאות ותוקנה אוטומטית."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export var hebrewStrings = {
       newPanelPosition: "מיקום כניסה חדש",
       // [Auto-translated] "Entries per page"
       pageSize: "רשומות בעמוד",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "אפשר למשתמשים למיין לוחות",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
@@ -740,6 +809,12 @@ export var hebrewStrings = {
       // [Auto-translated] "Expression"
       expression: "ביטוי"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "מיין לפי",
+      // [Auto-translated] "Order"
+      direction: "סדר"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "ביטוי"
@@ -793,7 +868,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "הפוך את העמודה לנדרשת אם",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "כל אפשרות בעמודה נפרדת"
+      showInMultipleColumns: "כל אפשרות בעמודה נפרדת",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "אפשר מיון לפי עמודה זו"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var hebrewStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "עדיין אין לך קישורים",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "עדיין אין לך דפים",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "עדיין אין לך שום רמות מסוגים",
     // "Add new choice"
     "addNew@choices": "הוסף ברירת בחירה",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var hebrewStrings = {
     "addNew@navigateToUrlOnCondition": "הוספת כתובת URL חדשה",
     // [Auto-translated] "Add new page"
     "addNew@pages": "הוספת עמוד חדש",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "הוספת רמת מיון חדשה",
     // "Value"
     value: "ערך",
     // "Text"
@@ -1087,6 +1168,14 @@ export var hebrewStrings = {
     rowCount: "כמות השורות",
     // [Auto-translated] "Rows per page"
     pageSize: "שורות בעמוד",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "אפשר למשתמשים למיין שורות",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "רמות מיון מקסימליות",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "סדר מיון ברירת מחדל",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "סרגל מיון התוכנית",
     // "Columns layout"
     columnLayout: "סידור העמודות",
     // "\"Add Row\" button alignment"
@@ -1617,6 +1706,8 @@ export var hebrewStrings = {
       columns: "עמודות",
       // "Rows"
       rows: "שורות",
+      // [Auto-translated] "Entries"
+      entries: "רשומות",
       // "Choice Options"
       choices: "בחירות",
       // "Items"
@@ -2211,6 +2302,8 @@ export var hebrewStrings = {
     underRowSingle: "מתחת לשורה, עם פאנל יחיד בלבד",
     // "Auto"
     auto: "אוטומטי",
+    // [Auto-translated] "Always"
+    always: "תמיד",
     timerInfoMode: {
       // "Both"
       combined: "שני הצדדים"
@@ -2749,14 +2842,24 @@ export var hebrewStrings = {
       confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "יש לציין ביטוי שמחשב את מספר הערכים. ביטוי זה גובר על הגדרת \"מספר הרשומות ההתחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של רשומות\" ו\"מספר מקסימלי של כניסות\". בעוד שהביטוי הזה מוגדר, המשיבים אינם יכולים להוסיף או להסיר רשומות ידנית.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "מציין את מספר הערכים המוצגים בכל עמוד בפאנל. '0' מבטל את הפיגינצ'ר ומציג את כל השורות.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "מציין את מספר הערכים המוצגים בכל עמוד של הפאנל. '0' מבטל את העמוד ומציג את כל הערכים.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "מאפשר למשיבים למיין רשומות מתוך סרגל המיון.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "מגדיר את סדר הצגת הערכים כאשר הסקר מתחיל. המשיבים יכולים לשנות זאת אם מותר מיון. כל רמת מיון ממיין לפי שאלה אחת; הרמה העליונה חלה ראשונה. גרור רמות כדי לשנות את העדיפויות שלהן.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בחלונית הדינמית."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "ציין ביטוי שמחשב את מספר השורות. ביטוי זה מחליף את הגדרת \"ספירת שורות\" ומוערך מחדש בכל פעם שהערכים אליהם הוא מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר השורות המינימלי\" ו\"מספר השורות המקסימלי\". בזמן שהביטוי מוגדר, המשיבים אינם יכולים להוסיף או להסיר שורות ידנית.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "מאפשר למשיבים למיין שורות על ידי לחיצה על כותרות עמודות או מתוך שורת המיון.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "מגדיר את הסדר שבו מוצגות השורות כאשר הסקר מתחיל. המשיבים יכולים לשנות זאת אם מותר מיון. כל רמת מיון ממיין לפי עמודה אחת; הרמה העליונה חלה ראשונה. גרור רמות כדי לשנות את העדיפויות שלהן.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" מציג את שורת המיון רק כאשר למטריצה אין כותרות עמודות שניתן למיין: הכותרות מוסתרות, המטריצה משתמשת בפריסת הנייד, או שהשורות מועברות לעמודות. \"תמיד\" מציג גם את שורת המיון ליד כותרות העמודות.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "ציין ביטוי שמחשב את מספר השורות. ביטוי זה מחליף את הגדרת \"מספר שורות התחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של שורות\" ו\"מספר מקסימלי של שורות\". כאשר ביטוי זה מוגדר, המשיבים אינם יכולים להוסיף או להסיר שורות ידנית.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "מפעיל בקשת אישור לפני הסרת שורה.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2764,6 +2867,8 @@ export var hebrewStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "מגדיר את מספר השורות המוצגות בכל עמוד במטריצה. '0' מבטל את העמוד ומציג את כל השורות.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "מגדיר כמה שדות יכול המשיב למיין בו זמנית.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var hebrewStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "ה-{prop} \"{expression} תמיד תקף, כי {facts} - הוא לא מחליט כלום."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "ה-{prop} \"{expression}\" אינו קורא שום שאלה או משתנה."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "הערך ברירת המחדל של \"{name}\" הוא {valuesText}, שהוא לעולם לא יכול להחזיק. מותר: {availableText}.",
@@ -4034,6 +4143,8 @@ export var hebrewStrings = {
       itemScope: "\"{0}\" זמין רק בתוך תנאי בחירה, שורה ועמודה.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "הפניות \"{0}.\" זמינות רק בתוך שאלה מורכבת.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" אינו זמין בתוך מסנן inArray שרץ מול הפריט ואז מול הסקר.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" היא עמודה במטריצה זו - יש להתייחס אליה עם קידומת השורה.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

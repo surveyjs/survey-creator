@@ -407,6 +407,9 @@ export const Advanced = {
               { name: "timer", index: 700 }
             ]
           },
+          matrixdropdowncolumn: {
+            properties: ["name", "title"]
+          },
           "matrixdropdowncolumn@default": {
             properties: [
               "name",
@@ -549,6 +552,12 @@ export const Advanced = {
             tabs: [
               { name: "mask", index: 250 }
             ]
+          },
+          "multipletext@items": {
+            properties: ["name", "title"]
+          },
+          "calculatedvalue@items": {
+            properties: ["name", "expression"]
           },
         }
       }

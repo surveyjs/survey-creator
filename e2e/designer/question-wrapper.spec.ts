@@ -227,7 +227,7 @@ test.describe(title, () => {
     await page.locator(".sv-string-editor").getByText("Row 1").click();
     await expect(page.locator(selectedObjectTextSelector)).toHaveText("question1");
     await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Columns")).not.toBeVisible();
-    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Rows")).toBeVisible();
+    await expect(page.locator("div[id$=ariaTitle][id^=pg-sq].spg-title").getByText("Rows", { exact: true })).toBeVisible();
   });
 
   test("Matrix dropdown with detail panel", async ({ page }) => {

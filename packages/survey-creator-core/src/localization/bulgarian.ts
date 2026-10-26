@@ -562,6 +562,73 @@ export var bgStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Описание"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Асистент по изразяване",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Пиши с изкуствен интелект",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Опишете какво трябва да прави изразът",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Например: покажете този въпрос, когато респондентът е на 18 или повече години",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Опишете състоянието с думи",
+    // [Auto-translated] "Generate"
+    generate: "Генерирай",
+    // [Auto-translated] "Refine"
+    refine: "Усъвършенствайте",
+    // [Auto-translated] "Explain"
+    explain: "Обяснете",
+    // [Auto-translated] "Stop"
+    stop: "Спри",
+    // [Auto-translated] "Accept"
+    accept: "Приемам",
+    // [Auto-translated] "Reject"
+    reject: "Отхвърли",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Прилагане на поправка: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Текущо изражение",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Предложено изразяване",
+    // [Auto-translated] "Reads as"
+    readsAs: "Звучи като",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Обяснението на асистентката",
+    // [Auto-translated] "Check results"
+    findings: "Проверете резултати",
+    // [Auto-translated] "Error"
+    severityError: "Грешка",
+    // [Auto-translated] "Warning"
+    severityWarning: "Предупреждение",
+    // [Auto-translated] "Info"
+    severityInfo: "Информация",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "в \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Опишете израза и изберете Генериране.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Чакам асистента...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Заявката беше отменена.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Асистентът докладва: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Асистентът не показа изражение.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Прегледайте предложеното изразяване.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Асистентът обясни настоящото изражение.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Предложеното изразяване съдържа грешки и не може да бъде прието.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Предложеното изразяване не може да бъде проверено на всяко място, където е написано, затова не може да бъде приет.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Добавете действие към правилото, преди да питате асистента.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Първото предложение имаше грешки и беше коригирано автоматично."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export var bgStrings = {
       newPanelPosition: "Ново място за влизане",
       // [Auto-translated] "Entries per page"
       pageSize: "Записи на страница",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Позволете на потребителите да сортират панели",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
@@ -740,6 +809,12 @@ export var bgStrings = {
       // [Auto-translated] "Expression"
       expression: "Изразяване"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Сортирайте по",
+      // [Auto-translated] "Order"
+      direction: "Ред"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Изразяване"
@@ -793,7 +868,9 @@ export var bgStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Направете колоната задължителна, ако",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Всяка опция в отделна колона"
+      showInMultipleColumns: "Всяка опция в отделна колона",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Позволете сортиране по тази колона"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var bgStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Все още нямате връзки",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Все още нямате страници",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Все още нямаш никакви нива на сортиране",
     // "Add new choice"
     "addNew@choices": "Добавяне на възможност за избор",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var bgStrings = {
     "addNew@navigateToUrlOnCondition": "Добавяне на нов URL адрес",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Добавяне на нова страница",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Добавете ново ниво на сортиране",
     // "Value"
     value: "Стойност",
     // "Text"
@@ -1087,6 +1168,14 @@ export var bgStrings = {
     rowCount: "Брой редове",
     // [Auto-translated] "Rows per page"
     pageSize: "Редове на страница",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Позволете на потребителите да сортират редове",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Максимални нива на сортиране",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Подразбиращ се ред на сортиране",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Лента за сортиране на шоу",
     // "Columns layout"
     columnLayout: "Разположение на колоните",
     // "\"Add Row\" button alignment"
@@ -1617,6 +1706,8 @@ export var bgStrings = {
       columns: "Колони",
       // "Rows"
       rows: "редове",
+      // [Auto-translated] "Entries"
+      entries: "Участия",
       // "Choice Options"
       choices: "Избори",
       // "Items"
@@ -2211,6 +2302,8 @@ export var bgStrings = {
     underRowSingle: "Под реда се вижда само един панел.",
     // "Auto"
     auto: "Авто",
+    // [Auto-translated] "Always"
+    always: "Винаги",
     timerInfoMode: {
       // "Both"
       combined: "И двете"
@@ -2749,14 +2842,24 @@ export var bgStrings = {
       confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Задайте израз, който изчислява броя на записите. Този израз замества настройката \"Начален брой записи\" и се преоценява всеки път, когато стойностите, към които се позовава, се променят. Резултатът е ограничен от настройките \"Минимален брой записи\" и \"Максимален брой записи\". Докато този израз е зададен, респондентите не могат да добавят или премахват записи ръчно.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Определя броя на записите, показани на всяка страница от панела. '0' изключва пагинацията и показва всички редове.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Определя броя на записите, показани на всяка страница от панела. '0' изключва пагинацията и показва всички записи.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Позволява на респондентите да сортират записите от лентата за сортиране.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Определя реда, в който се показват записите, когато започне проучването. Респондентите могат да го променят, ако е позволено сортиране. Всяко ниво на сортиране сортира по един въпрос; първо се прилага най-горното ниво. Плъзгайте нивата, за да промените приоритета си.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присвоява номера на въпроси, вложени в динамичния панел."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Задайте израз, който изчислява броя на редовете. Този израз замества настройката \"Брой редове\" и се преоценява всеки път, когато стойностите, към които се позовава, се променят. Резултатът е ограничен от настройките \"Минимален брой редове\" и \"Максимален брой редове\". Докато този израз е зададен, респондентите не могат да добавят или премахват редове ръчно.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Позволява на респондентите да сортират редове чрез кликване върху заглавията на колоните или от лентата за сортиране.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Определя реда, в който се показват редовете, когато започне проучването. Респондентите могат да го променят, ако е позволено сортиране. Всяко ниво на сортиране сортира по една колона; първо се прилага най-горното ниво. Плъзгай нивата, за да променят приоритета си.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Автоматично\" показва лентата за сортиране само когато матрицата няма сортируеми заглавия на колони: заглавията са скрити, матрицата използва мобилното оформление или редовете се транспонират в колони. \"Винаги\" показва лентата за сортиране до заглавията на колоните.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Задайте израз, който изчислява броя на редовете. Този израз замества настройката \"Начален брой редове\" и се преоценява всеки път, когато стойностите, към които се позовава, се променят. Резултатът е ограничен от настройките \"Минимален брой редове\" и \"Максимален брой редове\". Докато този израз е зададен, респондентите не могат ръчно да добавят или премахват редове.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Задейства подкана за потвърждение, преди да премахнете ред.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2764,6 +2867,8 @@ export var bgStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Определя броя на редовете, показани на всяка страница от матрицата. '0' изключва пагинацията и показва всички редове.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Определя колко полета може да сортира респондентът едновременно.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var bgStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{expression}\" винаги е валиден, защото {facts} - не решава нищо."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" не чете никакъв въпрос или променлива."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "По подразбиране стойността на \"{name}\" е {valuesText}, която никога не може да задържи. Позволено: {availableText}.",
@@ -4034,6 +4143,8 @@ export var bgStrings = {
       itemScope: "\"{0}\" е достъпна само в условията за избор, ред и колона.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" препратки са достъпни само в рамките на композитен въпрос.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" не е налична в inArray филтъра, който се свързва с елемента, а след това и с анкетата.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" е колона от тази матрица – свържете се с префикса на реда.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

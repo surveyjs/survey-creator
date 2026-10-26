@@ -562,6 +562,73 @@ export var portugueseTranslation = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Descrição"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Assistente de Expressão",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Escreva com IA",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Descreva o que a expressão deve fazer",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Por exemplo: mostre esta pergunta quando o respondente tiver 18 anos ou mais",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Descreva a condição em palavras",
+    // [Auto-translated] "Generate"
+    generate: "Gerar",
+    // [Auto-translated] "Refine"
+    refine: "Refino",
+    // [Auto-translated] "Explain"
+    explain: "Explique",
+    // [Auto-translated] "Stop"
+    stop: "Pare",
+    // [Auto-translated] "Accept"
+    accept: "Aceite",
+    // [Auto-translated] "Reject"
+    reject: "Rejeitar",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplicar a correção: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Expressão atual",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Expressão sugerida",
+    // [Auto-translated] "Reads as"
+    readsAs: "Diz como",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "A explicação do assistente",
+    // [Auto-translated] "Check results"
+    findings: "Verifique os resultados",
+    // [Auto-translated] "Error"
+    severityError: "Erro",
+    // [Auto-translated] "Warning"
+    severityWarning: "Aviso",
+    // [Auto-translated] "Info"
+    severityInfo: "Informações",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "em \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Descreva a expressão e selecione Gerar.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Esperando o assistente...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "O pedido foi cancelado.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "O assistente relatou: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "O assistente não sugeriu nenhuma expressão.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Revise a expressão sugerida.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "A assistente explicou a expressão atual.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "A expressão sugerida contém erros e não pode ser aceita.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "A expressão sugerida não pôde ser verificada em todos os lugares onde foi escrita, então não pode ser aceita.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Adicione uma ação à regra antes de perguntar ao assistente.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "A primeira sugestão tinha erros e foi corrigida automaticamente."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export var portugueseTranslation = {
       newPanelPosition: "Novo local de entrada",
       // [Auto-translated] "Entries per page"
       pageSize: "Entradas por página",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Permitir que os usuários ordenem painéis",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evite respostas duplicadas na seguinte pergunta"
     },
@@ -740,6 +809,12 @@ export var portugueseTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expressão"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Ordenar por",
+      // [Auto-translated] "Order"
+      direction: "Ordem"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Expressão"
@@ -793,7 +868,9 @@ export var portugueseTranslation = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Tornar a coluna obrigatória se",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Cada opção em uma coluna separada"
+      showInMultipleColumns: "Cada opção em uma coluna separada",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Permitir ordenação por esta coluna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var portugueseTranslation = {
     "listIsEmpty@navigateToUrlOnCondition": "Você ainda não tem nenhum link",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Você ainda não tem páginas",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Você ainda não tem nenhum nível de Kind",
     // "Add new choice"
     "addNew@choices": "Adicionar uma opção",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var portugueseTranslation = {
     "addNew@navigateToUrlOnCondition": "Adicionar novo URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Adicionar nova página",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Adicionar novo nível de ordenação",
     // "Value"
     value: "Valor",
     // "Text"
@@ -1087,6 +1168,14 @@ export var portugueseTranslation = {
     rowCount: "Contagem de linhas",
     // [Auto-translated] "Rows per page"
     pageSize: "Linhas por página",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Permitir que os usuários ordenem linhas",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Níveis máximos de ordenação",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Ordem padrão de ordenação",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Barra de ordenação para mostrar",
     // "Columns layout"
     columnLayout: "Layout das colunas",
     // "\"Add Row\" button alignment"
@@ -1617,6 +1706,8 @@ export var portugueseTranslation = {
       columns: "Colunas",
       // "Rows"
       rows: "Linhas",
+      // [Auto-translated] "Entries"
+      entries: "Inscrições",
       // "Choice Options"
       choices: "Opções",
       // "Items"
@@ -2211,6 +2302,8 @@ export var portugueseTranslation = {
     underRowSingle: "Sob a linha, apenas um painel é visível",
     // "Auto"
     auto: "Automático",
+    // [Auto-translated] "Always"
+    always: "Sempre",
     timerInfoMode: {
       // "Both"
       combined: "Ambos"
@@ -2749,14 +2842,24 @@ export var portugueseTranslation = {
       confirmDelete: "Aciona um prompt de confirmação antes de remover uma entrada.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Especifique uma expressão que calcule o número de entradas. Essa expressão sobrepõe a configuração \"Número inicial de entradas\" e é reavaliada sempre que os valores referenciados mudam. O resultado é limitado pelas configurações \"Número mínimo de entradas\" e \"Número máximo de entradas\". Enquanto essa expressão está definida, os respondentes não podem adicionar ou remover entradas manualmente.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Especifica o número de entradas exibidas em cada página do painel. '0' desativa a paginação e exibe todas as linhas.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Especifica o número de entradas exibidas em cada página do painel. '0' desativa a paginação e exibe todas as entradas.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Permite que os respondentes ordenem entradas a partir da barra de ordenação.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Define a ordem em que as entradas são exibidas quando a pesquisa começa. Os respondentes podem alterá-la se a ordenação for permitida. Cada nível de ordenação é ordenado por uma pergunta; o nível superior se aplica primeiro. Arraste os níveis para alterar sua prioridade.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Atribui números a perguntas aninhadas no painel dinâmico."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Especifique uma expressão que calcule o número de linhas. Essa expressão sobrepõe a configuração de \"Contagem de linhas\" e é reavaliada sempre que os valores referenciados mudam. O resultado é limitado pelas configurações de \"Contagem mínima de linhas\" e \"Contagem máxima de linhas\". Enquanto essa expressão estiver definida, os respondentes não podem adicionar ou remover linhas manualmente.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Permite que os respondentes ordenem linhas clicando em cabeçalhos de colunas ou a partir da barra de ordenação.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Define a ordem em que as linhas são exibidas quando a pesquisa começa. Os respondentes podem alterá-la se a ordenação for permitida. Cada nível de ordenação é ordenado por uma coluna; o nível superior se aplica primeiro. Arraste os níveis para alterar sua prioridade.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" exibe a barra de ordenação apenas quando a matriz não possui cabeçalhos de coluna ordenáveis: os cabeçalhos estão ocultos, a matriz usa o layout móvel ou as linhas são transpostas para colunas. \"Sempre\" exibe a barra de ordenação ao lado dos cabeçalhos das colunas também.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Especifique uma expressão que calcule o número de linhas. Essa expressão substitui a configuração \"Número inicial de linhas\" e é reavaliada sempre que os valores referenciados mudam. O resultado é limitado pelas configurações \"Número mínimo de linhas\" e \"Número máximo de linhas\". Enquanto essa expressão estiver definida, os respondentes não podem adicionar ou remover linhas manualmente.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Aciona um prompt de confirmação antes de remover uma linha.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2764,6 +2867,8 @@ export var portugueseTranslation = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Especifica o número de linhas exibidas em cada página da matriz. '0' desativa a paginação e exibe todas as linhas.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Especifica quantos campos um respondente pode ordenar ao mesmo tempo.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplica as respostas da última linha e as atribui à próxima linha dinâmica adicionada.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var portugueseTranslation = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "A {prop} \"{expressão}\" sempre se mantém, porque {fatos} - não decide nada."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "A {prop} \"{expressão}\" não lê nenhuma pergunta ou variável."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "O valor padrão de \"{name}\" é {valuesText}, que nunca poderá ser mantido. Permitido: {availableText}.",
@@ -4034,6 +4143,8 @@ export var portugueseTranslation = {
       itemScope: "\"{0}\" está disponível apenas dentro das condições de escolha, linha e coluna.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" referências só estão disponíveis dentro de uma pergunta composta.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" não está disponível dentro de um filtro inArray, que roda contra o item e depois contra a pesquisa.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" é uma coluna dessa matriz - referencia-a com o prefixo da linha.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

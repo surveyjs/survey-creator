@@ -562,6 +562,73 @@ export var catalanTranslation = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Descripció"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Assistent d'expressió",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Escriu amb IA",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Descriu què hauria de fer l'expressió",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Per exemple: mostra aquesta pregunta quan el respondent tingui 18 anys o més",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Descriu la condició amb paraules",
+    // [Auto-translated] "Generate"
+    generate: "Generar",
+    // [Auto-translated] "Refine"
+    refine: "Refinar",
+    // [Auto-translated] "Explain"
+    explain: "Explica",
+    // [Auto-translated] "Stop"
+    stop: "Atura't",
+    // [Auto-translated] "Accept"
+    accept: "Accepta",
+    // [Auto-translated] "Reject"
+    reject: "Rebutjar",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplica la solució: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Expressió actual",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Expressió suggerida",
+    // [Auto-translated] "Reads as"
+    readsAs: "Es llegeix com",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "L'explicació de l'assistent",
+    // [Auto-translated] "Check results"
+    findings: "Comprova els resultats",
+    // [Auto-translated] "Error"
+    severityError: "Error",
+    // [Auto-translated] "Warning"
+    severityWarning: "Avís",
+    // [Auto-translated] "Info"
+    severityInfo: "Informació",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "a \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Descriu l'expressió i selecciona Genera.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Esperant l'assistent...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "La sol·licitud va ser cancel·lada.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "L'assistent va informar: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "L'assistent no va suggerir cap expressió.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Revisa l'expressió suggerida.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "L'assistent va explicar l'expressió actual.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "L'expressió suggerida té errors i no es pot acceptar.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "L'expressió suggerida no es podia comprovar a cada lloc on s'escrivia, així que no es pot acceptar.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Afegeix una acció a la norma abans de preguntar a l'assistent.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "La primera suggerència tenia errors i es corregia automàticament."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export var catalanTranslation = {
       newPanelPosition: "Nova ubicación de entrada",
       // [Auto-translated] "Entries per page"
       pageSize: "Entrades per pàgina",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Permetre als usuaris ordenar els panells",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evitar respuestas duplicadas en la següent pregunta"
     },
@@ -740,6 +809,12 @@ export var catalanTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expressió"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Ordenar per",
+      // [Auto-translated] "Order"
+      direction: "Ordre"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Expressió"
@@ -793,7 +868,9 @@ export var catalanTranslation = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Haga que la columna sea obligatòria si",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Cada opción en una columna separada"
+      showInMultipleColumns: "Cada opción en una columna separada",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Permet ordenar per aquesta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var catalanTranslation = {
     "listIsEmpty@navigateToUrlOnCondition": "Todavía no tienes ningún enlace",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Todavía no tienes ninguna pàgina",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Encara no tens cap nivell de tipus",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var catalanTranslation = {
     "addNew@navigateToUrlOnCondition": "Agregar nova URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Agregar nova pàgina",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Afegeix un nou nivell d'ordenació",
     // "Value"
     value: "Valor",
     // [Auto-translated] "Text"
@@ -1087,6 +1168,14 @@ export var catalanTranslation = {
     rowCount: "Número de files",
     // [Auto-translated] "Rows per page"
     pageSize: "Files per pàgina",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Permetre als usuaris ordenar files",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Nivells màxims d'ordenació",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Ordre d'ordenació per defecte",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Barra d'ordenació de mostrar",
     // "Columns layout"
     columnLayout: "Diseño de columnes",
     // "\"Add Row\" button alignment"
@@ -1617,6 +1706,8 @@ export var catalanTranslation = {
       columns: "Columnas",
       // "Rows"
       rows: "Filas",
+      // [Auto-translated] "Entries"
+      entries: "Inscripcions",
       // "Choice Options"
       choices: "Opcions",
       // "Items"
@@ -2211,6 +2302,8 @@ export var catalanTranslation = {
     underRowSingle: "Debajo de la fila, sólo un panell es visible",
     // "Auto"
     auto: "Automàtic",
+    // [Auto-translated] "Always"
+    always: "Sempre",
     timerInfoMode: {
       // "Both"
       combined: "Ambos"
@@ -2749,14 +2842,24 @@ export var catalanTranslation = {
       confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Especifica una expressió que calculi el nombre d'entrades. Aquesta expressió sobreescriu l'opció \"Nombre inicial d'entrades\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions \"Nombre mínim d'entrades\" i \"Nombre màxim d'entrades\". Mentre aquesta expressió està establerta, els participants no poden afegir o eliminar entrades manualment.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Especifica el nombre d'entrades mostrades a cada pàgina del panell. '0' desactiva la paginació i mostra totes les files.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Especifica el nombre d'entrades mostrades a cada pàgina del panell. El '0' desactiva la paginació i mostra totes les entrades.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Permet als enquestats ordenar entrades des de la barra d'ordenació.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Defineix l'ordre en què es mostren les entrades quan comença l'enquesta. Els enquestats poden canviar-ho si es permet ordenar. Cada nivell d'ordenació ordena per una pregunta; el nivell superior s'aplica primer. Arrossega els nivells per canviar-ne la prioritat.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Assigna números a les preguntes anidades dins del panell dinàmic."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Especifica una expressió que calculi el nombre de files. Aquesta expressió sobreescriu l'opció de \"Recompte de files\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions de \"Recompte mínim de files\" i \"Recompte màxim de files\". Mentre aquesta expressió està establerta, els enquestats no poden afegir ni eliminar files manualment.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Permet als enquestats ordenar files fent clic a les capçaleres de columnes o des de la barra d'ordenació.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Defineix l'ordre en què es mostren les files quan comença l'enquesta. Els enquestats poden canviar-ho si es permet ordenar. Cada nivell d'ordenació es classifica per una columna; s'aplica primer el nivell superior. Arrossega els nivells per canviar-ne la prioritat.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" mostra la barra d'ordenació només quan la matriu no té capçaleres de columna ordenables: les capçaleres estan ocultes, la matriu utilitza la disposició mòbil, o les files es transposen a columnes. \"Sempre\" mostra la barra d'ordenació al costat de les capçaleres de columna també.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Especifica una expressió que calculi el nombre de files. Aquesta expressió sobreescriu l'opció \"Nombre inicial de files\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions \"Nombre mínim de files\" i \"Nombre màxim de files\". Mentre aquesta expressió està establerta, els enquestats no poden afegir ni eliminar files manualment.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Desencadena un mensaje de confirmación antes de quitar una fila.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2764,6 +2867,8 @@ export var catalanTranslation = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Especifica el nombre de files que es mostren a cada pàgina de la matriu. '0' desactiva la paginació i mostra totes les files.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Especifica quants camps pot ordenar un respondent alhora.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplica las respuestas de la última fila y las asigna a la següent fila dinámica agregada.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var catalanTranslation = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "El {prop} \"{expressió}\" sempre es compleix, perquè {facts} - no decideix res."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "El {prop} \"{expressió}\" no llegeix cap pregunta ni variable."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "El valor per defecte de \"{name}\" és {valuesText}, que mai podrà mantenir. Permès: {availableText}.",
@@ -4034,6 +4143,8 @@ export var catalanTranslation = {
       itemScope: "\"{0}\" només està disponible dins de les condicions de elecció, fila i columna.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" referències només estan disponibles dins d'una pregunta composta.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" no està disponible dins d'un filtre inArray, que s'executa contra l'element i després contra l'enquesta.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" és una columna d'aquesta matriu: referencia-la amb el prefix de la fila.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

@@ -562,6 +562,73 @@ export var polishStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Opis"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asystent ekspresji",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Pisz z pomocą AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Opisać, co powinno robić wyrażenie",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Na przykład: pokaż to pytanie, gdy respondent ma 18 lat lub więcej",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Opisz stan słowami",
+    // [Auto-translated] "Generate"
+    generate: "Generuj",
+    // [Auto-translated] "Refine"
+    refine: "Udoskonal",
+    // [Auto-translated] "Explain"
+    explain: "Wyjaśnij",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Akceptuj",
+    // [Auto-translated] "Reject"
+    reject: "Odrzuć",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Stosuj naprawę: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Obecne wyrażenie",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Sugerowana ekspresja",
+    // [Auto-translated] "Reads as"
+    readsAs: "Brzmi to jako",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Wyjaśnienie asystenta",
+    // [Auto-translated] "Check results"
+    findings: "Sprawdź wyniki",
+    // [Auto-translated] "Error"
+    severityError: "Błąd",
+    // [Auto-translated] "Warning"
+    severityWarning: "Ostrzeżenie",
+    // [Auto-translated] "Info"
+    severityInfo: "Informacje",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "w \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Opisz wyrażenie i wybierz Generuj.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Czekam na asystenta...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Wniosek został anulowany.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asystent poinformował: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asystent nie zasugerował żadnego wyrazu twarzy.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Przejrzyj sugerowane wyrażenie.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asystent wyjaśnił obecny wyraz twarzy.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Sugerowane wyrażenie zawiera błędy i nie może być zaakceptowane.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Sugerowanego wyrażenia nie można sprawdzić dla każdego miejsca, do którego jest zapisane, więc nie można go zaakceptować.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Dodaj akcję do reguły przed zapytaniem asystenta.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Pierwsza sugestia zawierała błędy i została automatycznie poprawiona."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export var polishStrings = {
       newPanelPosition: "Nowa lokalizacja wejścia",
       // [Auto-translated] "Entries per page"
       pageSize: "Wpisy na stronę",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Pozwól użytkownikom na sortowanie paneli",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zapobiegaj zduplikowanym odpowiedziom w następującym pytaniu"
     },
@@ -741,6 +810,12 @@ export var polishStrings = {
       // [Auto-translated] "Expression"
       expression: "Wyrażenie"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sortuj według",
+      // [Auto-translated] "Order"
+      direction: "Zamówienie"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Ekspresja"
@@ -794,7 +869,9 @@ export var polishStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Ustaw kolumnę jako wymaganą, jeśli",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Każda opcja w osobnej kolumnie"
+      showInMultipleColumns: "Każda opcja w osobnej kolumnie",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Zezwalaj na sortowanie według tej kolumny"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -964,6 +1041,8 @@ export var polishStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Nie masz jeszcze żadnych linków",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Nie masz jeszcze żadnych stron",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Nie masz jeszcze żadnych poziomów sortowania",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Dodaj nowy wybór",
     // [Auto-translated] "Add new column"
@@ -980,6 +1059,8 @@ export var polishStrings = {
     "addNew@navigateToUrlOnCondition": "Dodaj nowy adres URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Dodaj nową stronę",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Dodaj nowy poziom sortowania",
     // "Value"
     value: "Wartość",
     // "Text"
@@ -1084,10 +1165,18 @@ export var polishStrings = {
     maxSize: "Maximum file size in bytes",
     // [Auto-translated] "Maximum number of files"
     maxFiles: "Maksymalna liczba plików",
-    // [Auto-translated] "Row count"
-    rowCount: "Liczba wierszy",
+    // [Auto-translated] "Initial number of rows"
+    rowCount: "Początkowa liczba wierszy",
     // [Auto-translated] "Rows per page"
     pageSize: "Wiersze na stronę",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Pozwól użytkownikom na sortowanie wierszy",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maksymalne poziomy sortowania",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Domyślna kolejność sortowania",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Pasek sortowania pokaż",
     // [Auto-translated] "Columns layout"
     columnLayout: "Układ kolumn",
     // [Auto-translated] "\"Add Row\" button alignment"
@@ -1360,9 +1449,9 @@ export var polishStrings = {
     waitForUpload: "Poczekaj na zakończenie przesyłania",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Wyrównanie szczegółów wiersza",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Minimalna liczba wierszy",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maksymalna liczba wierszy",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Wyrażenie o liczbie wierszy",
@@ -1618,6 +1707,8 @@ export var polishStrings = {
       columns: "Kolumny",
       // "Rows"
       rows: "Wiersze",
+      // [Auto-translated] "Entries"
+      entries: "Zgłoszenia",
       // "Choice Options"
       choices: "Odpowiedzi",
       // [Auto-translated] "Items"
@@ -2212,6 +2303,8 @@ export var polishStrings = {
     underRowSingle: "Pod wierszem wyświetl tylko jedną sekcję",
     // "Auto"
     auto: "Automatycznie",
+    // [Auto-translated] "Always"
+    always: "Zawsze",
     timerInfoMode: {
       // "Both"
       combined: "Obie"
@@ -2750,14 +2843,24 @@ export var polishStrings = {
       confirmDelete: "Powoduje wyświetlenie monitu o potwierdzenie przed usunięciem wpisu.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Określ wyrażenie, które oblicza liczbę wpisów. To wyrażenie nadpisuje ustawienie \"Początkowa liczba wpisów\" i jest ponownie oceniane za każdym razem, gdy zmieniają się wartości, do których się odwołuje. Wynik jest ograniczony ustawieniami \"Minimalna liczba wpisów\" i \"Maksymalna liczba wpisów\". Podczas gdy to wyrażenie jest ustawione, respondenci nie mogą ręcznie dodawać ani usuwać wpisów.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Określa liczbę wpisów wyświetlanych na każdej stronie panelu. '0' wyłącza paginację i wyświetla wszystkie wiersze.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Określa liczbę wpisów wyświetlanych na każdej stronie panelu. '0' wyłącza paginację i wyświetla wszystkie wpisy.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Pozwala respondentom sortować wpisy z paska sortowania.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Określa kolejność wyświetlania wpisów na początku ankiety. Respondenci mogą ją zmienić, jeśli dozwolone jest sortowanie. Każdy poziom sortowania sortuje według jednego pytania; najpierw stosuje się najwyższy poziom. Przeciągnij poziomy, aby zmienić ich priorytet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w panelu dynamicznym."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Określ wyrażenie, które oblicza liczbę wierszy. To wyrażenie nadpisuje ustawienie \"Liczba wierszy\" i jest ponownie oceniane za każdym razem, gdy zmieniają się wartości, do których się odwołuje. Wynik jest ograniczony ustawieniami \"Minimalna liczba wierszy\" i \"Maksymalna liczba wierszy\". Podczas gdy to wyrażenie jest ustawione, respondenci nie mogą ręcznie dodawać ani usuwać wierszy.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Pozwala respondentom sortować wiersze klikając nagłówki kolumn lub z paska sortowania.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Określa kolejność wyświetlania wierszy na początku ankiety. Respondenci mogą ją zmienić, jeśli sortowanie jest dozwolone. Każdy poziom sortowania sortuje według jednej kolumny; najpierw stosuje się poziom najwyższy. Przeciągnij poziomy, aby zmienić ich priorytet.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" wyświetla pasek sortowania tylko wtedy, gdy macierz nie ma nagłówków kolumn do sortowania: nagłówki są ukryte, macierz korzysta z mobilnego układu lub wiersze są przekształcane w kolumny. \"Zawsze\" wyświetla pasek sortowania obok nagłówków kolumn.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Określ wyrażenie, które oblicza liczbę wierszy. To wyrażenie nadpisuje ustawienie \"Początkowa liczba wierszy\" i jest ponownie oceniane za każdym razem, gdy zmieniają się wartości, do których się odwołuje. Wynik jest ograniczony ustawieniami \"Minimalna liczba wierszy\" i \"Maksymalna liczba wierszy\". Podczas gdy to wyrażenie jest ustawione, respondenci nie mogą ręcznie dodawać ani usuwać wierszy.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Powoduje wyzwolenie monitu o potwierdzenie przed usunięciem wiersza.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2765,6 +2868,8 @@ export var polishStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Określa liczbę wierszy wyświetlanych na każdej stronie macierzy. '0' wyłącza paginację i wyświetla wszystkie wiersze.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Określa, ile pól respondent może sortować jednocześnie.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplikuje odpowiedzi z ostatniego wiersza i przypisuje je do następnego dodanego wiersza dynamicznego.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3838,6 +3943,10 @@ export var polishStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "Zasada {prop} \"{expression}\" zawsze się sprawdza, bo {facts} – nic nie decyduje."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" nie odczytuje żadnego pytania ani zmiennej."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Domyślna wartość \"{name}\" to {valuesText}, której nigdy nie może utrzymać. Dozwolone: {availableText}.",
@@ -4035,6 +4144,8 @@ export var polishStrings = {
       itemScope: "\"{0}\" jest dostępne tylko w warunkach wyboru, wiersza i kolumny.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Odniesienia do \"{0}.\" są dostępne tylko w złożonym pytaniu.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" nie jest dostępne w filtrze inArray, który działa na tym elementie, a następnie na ankiecie.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" to kolumna tej macierzy – odniesiej do niej za pomocą przedrostka wiersza.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
