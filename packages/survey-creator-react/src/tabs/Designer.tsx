@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Base, SurveyModel, PageModel } from "survey-core";
 import {
+  ComponentsContainer,
   ReactElementFactory,
   Scroll,
   SurveyActionBar,
@@ -77,6 +78,19 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   }
   renderElement(): React.JSX.Element {
     const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
+    const content = (
+      <div className="svc-tab-designer_content">
+        {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
+      </div>
+    );
+    // Inline mode: no toolbox column and no Scroll, the host page scrolls.
+    if (this.creator.isInlineLayout) {
+      return (
+        <div className={designerTabClassName} style={this.model.getRootStyle()} onClick={() => this.model.clickDesigner()}>
+          {content}
+        </div>
+      );
+    }
 
     return (
       <React.Fragment>
@@ -85,9 +99,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
         </div>
         <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
           <Scroll>
-            <div className="svc-tab-designer_content">
-              {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
-            </div>
+            {content}
           </Scroll>
         </div>
       </React.Fragment>
@@ -98,6 +110,12 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     if (!condition) return null;
 
     const survey: SurveyModel = this.creator.survey;
+    // Inline mode renders the header the live survey renders: the advanced header is a layout element.
+    if (this.creator.isInlineLayout && survey.headerView !== "basic") {
+      return (<div className="svc-designer-header">
+        <ComponentsContainer survey={survey} container={"header"} needRenderWrapper={false}></ComponentsContainer>
+      </div>);
+    }
     return (<React.Fragment>
       <div className="svc-designer-header">
         <SurveyHeader survey={survey}></SurveyHeader>
@@ -121,7 +139,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   renderTabContent(): React.JSX.Element {
     const survey: SurveyModel = this.creator.survey;
     const surveyHeader = this.renderHeader(this.creator.showSurveyHeader);
-    const style: any = { ...this.model.surfaceCssVariables };
+    const style: any = { ...this.model.getSurfaceCssVariables() };
     style.maxWidth = survey.renderedWidth;
 
     const tabTools = this.renderTabTools();

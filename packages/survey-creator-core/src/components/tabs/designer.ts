@@ -83,6 +83,8 @@ export class TabDesignerViewModel extends Base {
   }
   private get canShowNewPage(): boolean {
     if (!this.survey || this.creator.pageEditMode === "single" || !this.creator.allowModifyPages) return false;
+    // Inline mode has no ghost page; the empty-survey placeholder (showPlaceholder) still gets its drop target.
+    if (this.creator.isInlineLayout) return false;
     return true;
     // if (this.creator.pageEditMode === "bypage") return true;
     // const pages: PageModel[] = this.survey.pages;
@@ -101,7 +103,7 @@ export class TabDesignerViewModel extends Base {
       const cssVariables = {};
       if (!this.creator.dragDropChoices["parentElement"]?.survey["isPopupEditorContent"]) {
         shortcut.classList.add("svc-surface-drag-drop-choices-shortcut");
-        assign(cssVariables, this.surfaceCssVariables);
+        assign(cssVariables, this.getSurfaceCssVariables());
       }
       Object.keys(cssVariables).forEach((key) => {
         shortcut.style.setProperty(key, cssVariables[key]);
@@ -122,6 +124,18 @@ export class TabDesignerViewModel extends Base {
 
   public updateSurfaceCssVariables() {
     this.surfaceCssVariables = { ...this.creator.defaultSurfaceCssVariables, ...this.scaleCssVariables };
+  }
+  // Inline mode paints the surface with the survey's own theme. The designer never renders the survey's
+  // root, which is where the live survey puts these variables.
+  public getSurfaceCssVariables(): { [index: string]: string } {
+    return this.creator.isInlineLayout ? this.survey.themeVariables : this.surfaceCssVariables;
+  }
+  public getRootStyle(): { [index: string]: string } {
+    return this.creator.isInlineLayout ? this.survey.themeVariables : undefined;
+  }
+  public updateInlineLayout(): void {
+    this.checkNewPage(true);
+    this.updatePages();
   }
 
   private initSurfaceToolbar() {
@@ -246,9 +260,10 @@ export class TabDesignerViewModel extends Base {
   }
   public get showSurfaceToolbar(): boolean {
     const hasVisibleItems = this.surfaceToolbar.actions.some((action) => action.visible);
-    return this.creator.allowShowSurfaceToolbar && hasVisibleItems;
+    return this.creator.allowShowSurfaceToolbar && !this.creator.isInlineLayout && hasVisibleItems;
   }
   public get showSurfaceTools(): boolean {
+    if (this.creator.isInlineLayout) return false;
     return !this.creator.isMobileView && (this.showSurfaceToolbar || (this.creator.showPageNavigator && (this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage")));
   }
 
@@ -413,6 +428,10 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
+    if (this.creator.isInlineLayout) {
+      // The live survey's root carries rootTheme too; without it the variables would resolve differently here.
+      rootCss += " " + this.survey.css.rootTheme + " svc-tab-designer--inline";
+    }
     if (this.showSurfaceTools) {
       rootCss += " svc-tab-designer--with-surface-tools";
     }

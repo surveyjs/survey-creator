@@ -53,6 +53,7 @@ import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
+import { findSuitableTheme, isThemeEmpty } from "./components/tabs/theme-model";
 import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { PageAdorner } from "./components/page";
 import {
@@ -201,7 +202,13 @@ export class SurveyCreatorModel extends Base
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
    */
-  @property({ defaultValue: true }) allowZoom: boolean;
+  public get allowZoom(): boolean {
+    return !this.isInlineLayout && this.allowZoomValue;
+  }
+  public set allowZoom(val: boolean) {
+    this.allowZoomValue = val;
+  }
+  @property({ defaultValue: true }) private allowZoomValue: boolean;
   /**
    * Specifies whether to display the [Translation](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#translation-tab) tab.
    *
@@ -539,6 +546,62 @@ export class SurveyCreatorModel extends Base
     if (oldValue !== val) {
       this.onPropertyChanged.fire(this, { name: "pageEditMode", oldValue: oldValue, newValue: val });
     }
+  }
+
+  @property({
+    defaultValue: "standard", onSet: (val, creator: SurveyCreatorModel) => {
+      creator.updateInlineLayout();
+    }
+  }) layoutMode: "standard" | "inline";
+  public get isInlineLayout(): boolean {
+    return this.layoutMode === "inline";
+  }
+  // Applies or reverts everything the inline layout changes. The constructor runs setOptions before the
+  // survey, the toolbox and the plugins exist: createSurvey and setRootElement cover that case.
+  protected updateInlineLayout(): void {
+    const isInline = this.isInlineLayout;
+    if (isInline) {
+      if (!!this.responsivityManager) {
+        this.resetResponsivityManager();
+        this.resetResponsivityState();
+      }
+      if (!!this.pluginMenuHash["designer"] && this.activeTab !== "designer") {
+        this.switchTab("designer");
+      }
+    } else if (!!this.rootElement && !this.responsivityManager && !!this.toolbox) {
+      this.initResponsivityManager(this.rootElement as HTMLDivElement);
+    }
+    const survey = this.survey;
+    if (!survey) return;
+    survey.css = this.getSurfaceCss();
+    if (isInline) {
+      this.applyInlineSurfaceTheme(survey);
+    } else {
+      survey["cssVariables"] = {};
+    }
+    const designerPlugin = this.getPlugin<TabDesignerPlugin>("designer", false);
+    designerPlugin?.model?.updateInlineLayout();
+  }
+  // CreatorResponsivityManager.dispose() resets only the toolbox and page navigator permissions.
+  private resetResponsivityState(): void {
+    this.isMobileView = undefined;
+    this.showTabs = undefined;
+    this.showToolbar = undefined;
+    this.allowShowSurfaceToolbar = true;
+    if (!!this.sidebar) {
+      this.sidebar.flyoutMode = false;
+      this.sidebar.narrowMode = false;
+    }
+  }
+  // The designer never renders the survey's root element, so the renderer puts survey.themeVariables on the
+  // surface itself. Only cssVariables are applied: the other ITheme keys (backgroundImage, headerView, ...)
+  // are serializable survey properties and would leak into the edited JSON and the undo stack.
+  private applyInlineSurfaceTheme(survey: SurveyModel): void {
+    let theme: ITheme = this.theme;
+    if (isThemeEmpty(theme)) {
+      theme = findSuitableTheme(undefined, this.preferredColorPalette, undefined, undefined);
+    }
+    survey.applyTheme({ cssVariables: { ...(theme?.cssVariables || {}) }, isPanelless: theme?.isPanelless });
   }
 
   @property() surveyValue: SurveyModel;
@@ -1592,6 +1655,9 @@ export class SurveyCreatorModel extends Base
     if (!!surveyTheme && surveyTheme.headerView) {
       this.survey.headerView = surveyTheme.headerView;
     }
+    if (this.isInlineLayout && !!this.survey) {
+      this.applyInlineSurfaceTheme(this.survey);
+    }
   }
 
   private _doSaveThemeCore(onSaveComplete?: () => void) {
@@ -1877,6 +1943,8 @@ export class SurveyCreatorModel extends Base
    */
   public switchTab(tabName: string): boolean {
     if (tabName == this.viewType) return false;
+    // Inline mode shows only the designer; the other tabs stay registered for the switch back.
+    if (this.isInlineLayout && this.fixPluginName(tabName) !== "designer" && !!this.pluginMenuHash["designer"]) return false;
     const plugin: ICreatorPlugin = this.currentPlugin;
     if (!!plugin && !!plugin.canDeactivateAsync) {
       plugin.canDeactivateAsync(() => {
@@ -1950,7 +2018,7 @@ export class SurveyCreatorModel extends Base
   @property() removeSidebar: boolean;
   public sidebar: SidebarModel;
   public get isSidebarVisible() {
-    return this.sidebar && !this.removeSidebar;
+    return this.sidebar && !this.removeSidebar && !this.isInlineLayout;
   }
 
   constructor(protected options: ICreatorOptions = {}, options2?: ICreatorOptions) {
@@ -2006,7 +2074,7 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: true }) allowShowToolbox: boolean;
   @property({ defaultValue: true }) showToolboxValue: boolean;
   public get showToolbox() {
-    return this.showToolboxValue && this.allowShowToolbox;
+    return this.showToolboxValue && this.allowShowToolbox && !this.isInlineLayout;
   }
   /**
    * Specifies whether to show the Toolbox.
@@ -2552,7 +2620,9 @@ export class SurveyCreatorModel extends Base
   private existingPages: {};
   private getSurfaceCss() {
     const result = JSON.parse(JSON.stringify(defaultCss));
-    result.header += " svc-surface-header";
+    if (!this.isInlineLayout) {
+      result.header += " svc-surface-header";
+    }
 
     return result;
   }
@@ -3067,6 +3137,9 @@ export class SurveyCreatorModel extends Base
     if (callback) {
       callback(survey);
     }
+    if (reason === "designer" && this.isInlineLayout) {
+      this.applyInlineSurfaceTheme(survey);
+    }
     this.onSurveyInstanceCreated.fire(this, {
       survey: survey,
       reason: reason,
@@ -3083,7 +3156,8 @@ export class SurveyCreatorModel extends Base
     }
 
     survey.onPopupVisibleChanged.add((_, options) => {
-      if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
+      // In inline mode the root grows with its content and can be shorter than a dropdown, so popups use the window.
+      if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.isInlineLayout ? undefined : this.rootElement; };
       if (reason === "property-grid" && options.question?.parentQuestion?.isDescendantOf("matrixdropdownbase") && options.question?.parent?.getType() !== "panel") {
         options.popup.setWidthByTarget = false;
       }
@@ -4072,7 +4146,9 @@ export class SurveyCreatorModel extends Base
     this._rootElementValue = element;
     ensureBaseThemeStyles(element);
     this.initKeyboardShortcuts(element);
-    this.initResponsivityManager(element as HTMLDivElement);
+    if (!this.isInlineLayout) {
+      this.initResponsivityManager(element as HTMLDivElement);
+    }
     this.subscribeToReducedMotion();
   }
   public unsubscribeRootElement() {
@@ -4997,15 +5073,28 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: true }) private showPageNavigatorValue;
 
   public get showPageNavigator() {
-    return this.showPageNavigatorValue && this.allowShowPageNavigator;
+    return this.showPageNavigatorValue && this.allowShowPageNavigator && !this.isInlineLayout;
   }
   public set showPageNavigator(val: boolean) {
     this.showPageNavigatorValue = val;
   }
   public showTabsDefault: boolean = settings.layout.showTabs;
   public showToolbarDefault: boolean = settings.layout.showToolbar;
-  @property({ getDefaultValue: (obj: any) => { return obj.showTabsDefault; } }) showTabs;
-  @property({ getDefaultValue: (obj: any) => { return obj.showToolbarDefault; } }) showToolbar;
+  // The stored values stay untouched in inline mode, so switching back to "standard" restores them.
+  @property({ getDefaultValue: (obj: any) => { return obj.showTabsDefault; } }) private showTabsValue: boolean;
+  @property({ getDefaultValue: (obj: any) => { return obj.showToolbarDefault; } }) private showToolbarValue: boolean;
+  public get showTabs(): boolean {
+    return !this.isInlineLayout && this.showTabsValue;
+  }
+  public set showTabs(val: boolean) {
+    this.showTabsValue = val;
+  }
+  public get showToolbar(): boolean {
+    return !this.isInlineLayout && this.showToolbarValue;
+  }
+  public set showToolbar(val: boolean) {
+    this.showToolbarValue = val;
+  }
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
   @property({ getDefaultValue: () => { return settings.designer.showAddQuestionButton; } }) showAddQuestionButton;
   @property({
@@ -5194,6 +5283,7 @@ export class SurveyCreatorModel extends Base
       "svc-creator",
       "sd-theme-root",
       "sjs-theme-overrides",
+      this.isInlineLayout && "svc-creator--inline",
       this.isMobileView && "svc-creator--mobile",
       this.isTouch && "svc-creator--touch",
       (reducedMotion || !this.animationEnabled) && "svc-creator--disable-animations"

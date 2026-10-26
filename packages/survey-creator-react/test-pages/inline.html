@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inline designer demo</title>
+  <script defer type="module">
+    import React from "https://esm.sh/react@19/?dev";
+    import ReactDOMClient from "https://esm.sh/react-dom@19/client?dev";
+    import ReactDOM from "https://esm.sh/react-dom@19?dev";
+    window.ReactDOMClient = ReactDOMClient;
+    window.React = React;
+    window.ReactDOM = ReactDOM;
+  </script>
+  <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/survey-core.css" />
+  <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
+  <link rel="stylesheet" type="text/css" href="../fonts.css" />
+  <script src="../node_modules/survey-core/survey.core.js" defer></script>
+  <script src="../node_modules/survey-core/survey.i18n.js" defer></script>
+  <script src="../node_modules/survey-core/themes/index.js" defer></script>
+  <script src="../node_modules/survey-creator-core/survey-creator-core.js" defer></script>
+  <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js" defer></script>
+  <script src="../node_modules/survey-react-ui/survey-react-ui.js" defer></script>
+  <script src="../build/survey-creator-react.js" defer></script>
+  <script src="./sc.js" defer></script>
+  <style>
+    /* A host-like page: the live survey and the inline Creator sit in boxes of the same width. */
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: #f3efe6;
+      color: #2b2b2b;
+    }
+    .host-header {
+      padding: 24px 32px 8px;
+    }
+    .host-header h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+    .host-header p {
+      margin: 0;
+      max-width: 760px;
+      line-height: 1.5;
+    }
+    .demo-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      padding: 12px 32px;
+      background: #2b2b2b;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+    .demo-toolbar .group {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .demo-toolbar button {
+      font: inherit;
+      padding: 4px 10px;
+      border: 1px solid #888;
+      border-radius: 4px;
+      background: #444;
+      color: #fff;
+      cursor: pointer;
+    }
+    .demo-toolbar button.active {
+      background: #f3efe6;
+      color: #2b2b2b;
+    }
+    .demo-columns {
+      --demo-width: 900px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      padding: 24px 32px 64px;
+      align-items: flex-start;
+    }
+    .demo-column {
+      width: var(--demo-width);
+      max-width: 100%;
+      flex: 0 0 auto;
+    }
+    .demo-column h2 {
+      font-size: 18px;
+      margin: 0 0 8px;
+    }
+    .demo-box {
+      border: 1px dashed #b5a98f;
+    }
+    #survey-creator.standard-layout {
+      height: 800px;
+    }
+  </style>
+</head>
+
+<body spellcheck="false">
+  <div class="host-header">
+    <h1>Acme Store</h1>
+    <p>Thanks for shopping with us. The form below is the survey your customers see. Next to it, the same survey
+      is open in Survey Creator's inline layout: it should take the same space and look the same.</p>
+  </div>
+  <div class="demo-toolbar">
+    <div class="group">Layout:
+      <button id="btn-layout" onclick="toggleLayoutMode()">Inline</button>
+    </div>
+    <div class="group">Width:
+      <button data-width="600px" onclick="setDemoWidth('600px')">600</button>
+      <button data-width="900px" onclick="setDemoWidth('900px')">900</button>
+      <button data-width="100%" onclick="setDemoWidth('100%')">full</button>
+    </div>
+    <div class="group">Theme:
+      <button data-theme="DefaultLight" onclick="setDemoTheme('DefaultLight')">Default light</button>
+      <button data-theme="FlatDark" onclick="setDemoTheme('FlatDark')">Flat dark</button>
+      <button data-theme="ContrastLightPanelless" onclick="setDemoTheme('ContrastLightPanelless')">Contrast light panelless</button>
+    </div>
+  </div>
+  <div class="demo-columns" id="demo-columns">
+    <section class="demo-column">
+      <h2>Live survey</h2>
+      <div class="demo-box" id="live-survey"></div>
+    </section>
+    <section class="demo-column">
+      <h2>Inline Creator</h2>
+      <div class="demo-box" id="survey-creator"></div>
+    </section>
+  </div>
+</body>
+<script>
+  const logo = "data:image/svg+xml;base64," + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60"><rect width="120" height="60" rx="8" fill="#19b394"/><text x="60" y="38" font-family="Arial" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">ACME</text></svg>');
+  window.demoJson = {
+    title: "Customer feedback",
+    description: "Tell us about your last order. It takes about two minutes.",
+    logo: logo,
+    logoPosition: "right",
+    pages: [
+      {
+        name: "page1",
+        title: "About you",
+        elements: [
+          { type: "text", name: "name", title: "Your name", isRequired: true },
+          {
+            type: "checkbox", name: "channels", title: "How did you hear about us?", colCount: 2,
+            choices: ["Search engine", "A friend", "Social media", "Newspaper"]
+          },
+          {
+            type: "panel", name: "contact", title: "Contact details", elements: [
+              { type: "text", name: "email", title: "Email", inputType: "email" },
+              { type: "text", name: "phone", title: "Phone", inputType: "tel", startWithNewLine: false }
+            ]
+          }
+        ]
+      },
+      {
+        name: "page2",
+        title: "Your order",
+        elements: [
+          {
+            type: "matrix", name: "quality", title: "Rate our service",
+            columns: ["Poor", "Fair", "Good", "Excellent"],
+            rows: ["Delivery speed", "Packaging", "Support"]
+          },
+          {
+            type: "paneldynamic", name: "items", title: "Items you ordered", panelCount: 1,
+            templateElements: [
+              { type: "text", name: "item", title: "Item" },
+              { type: "rating", name: "satisfaction", title: "Satisfaction", startWithNewLine: false }
+            ]
+          },
+          { type: "comment", name: "comments", title: "Anything else?" }
+        ]
+      }
+    ]
+  };
+
+  window.addEventListener("DOMContentLoaded", () => {
+    window.surveyJSFramework = "react";
+    SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+    SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
+
+    let currentTheme = "DefaultLight";
+    let currentWidth = "900px";
+
+    const liveSurvey = new Survey.Model(window.demoJson);
+    window.liveSurvey = liveSurvey;
+
+    const createCreator = (options) => {
+      const creator = new SurveyCreator.SurveyCreator(Object.assign({ layoutMode: "inline", showLogicTab: true, showTranslationTab: true, showThemeTab: true }, options || {}));
+      creator["animationEnabled"] = false;
+      return creator;
+    };
+    const creator = createCreator();
+    creator.JSON = window.demoJson;
+    window.creator = creator;
+
+    const updateToolbar = () => {
+      const isInline = window.creator.layoutMode === "inline";
+      document.getElementById("btn-layout").textContent = isInline ? "Inline (click for standard)" : "Standard (click for inline)";
+      document.getElementById("survey-creator").classList.toggle("standard-layout", !isInline);
+      document.querySelectorAll("[data-width]").forEach(b => b.classList.toggle("active", b.dataset.width === currentWidth));
+      document.querySelectorAll("[data-theme]").forEach(b => b.classList.toggle("active", b.dataset.theme === currentTheme));
+    };
+    window.toggleLayoutMode = () => {
+      window.creator.layoutMode = window.creator.layoutMode === "inline" ? "standard" : "inline";
+      updateToolbar();
+    };
+    window.setLayoutMode = (mode) => {
+      window.creator.layoutMode = mode;
+      updateToolbar();
+    };
+    window.setDemoWidth = (width) => {
+      currentWidth = width;
+      document.getElementById("demo-columns").style.setProperty("--demo-width", width);
+      updateToolbar();
+    };
+    window.setDemoTheme = (name) => {
+      currentTheme = name;
+      const theme = SurveyTheme[name];
+      liveSurvey.applyTheme(theme);
+      window.creator.theme = theme;
+      updateToolbar();
+    };
+
+    class SurveyCreatorRenderComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { creator: creator };
+        window.updateCreatorModel = (options, json) => {
+          window.prevCreator = window.creator;
+          const creator = createCreator(options);
+          creator.JSON = json;
+          this.setState({ creator });
+          window.creator = creator;
+          updateToolbar();
+        };
+      }
+      render() {
+        return React.createElement(SurveyCreator.SurveyCreatorComponent, { creator: this.state.creator });
+      }
+    }
+    ReactDOMClient.createRoot(document.getElementById("live-survey")).render(
+      React.createElement(SurveyReact.Survey, { model: liveSurvey })
+    );
+    ReactDOMClient.createRoot(document.getElementById("survey-creator")).render(
+      React.createElement(React.StrictMode, { children: React.createElement(SurveyCreatorRenderComponent) })
+    );
+    window.setDemoTheme(currentTheme);
+    window.setDemoWidth(currentWidth);
+  });
+</script>
+
+</html>

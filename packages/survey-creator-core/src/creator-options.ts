@@ -472,6 +472,9 @@ export interface ICreatorOptions {
    * [View Page-By-Page Mode Demo](https://surveyjs.io/survey-creator/examples/page-level-editing/ (linkStyle))
    */
   pageEditMode?: "standard" | "single" | "bypage";
+  // "inline" turns the Creator into a bare design surface that keeps the live survey's layout:
+  // no tabs, toolbar, sidebar, docked toolbox or surface tools, auto height, the survey's theme.
+  layoutMode?: "standard" | "inline";
   enableLinkFileEditor?: boolean;
   /**
    * Specifies the visibility of the buttons that expand and collapse survey elements on the design surface.

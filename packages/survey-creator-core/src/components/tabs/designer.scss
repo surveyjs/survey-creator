@@ -227,3 +227,31 @@ svc-tab-designer {
     --sjs2-border-effect-component-formbox-hovered: var(--sjs2-border-effect-component-formbox-default);
   }
 }
+
+// Inline layout mode: no fixed height, no designer background, no surface padding. The element also carries
+// the survey's root classes (sd-root-modern, sd-theme-root) and its theme variables, so the background it
+// paints is the live survey's.
+.svc-creator--inline {
+  svc-tab-designer {
+    height: auto;
+    background: none;
+  }
+
+  .svc-tab-designer.svc-tab-designer--inline {
+    height: auto;
+    width: 100%;
+    background: none;
+    background-color: var(--sjs2-color-utility-body);
+
+    // The live root paints its survey surface color with this overlay; the standard designer turns it off.
+    &:before {
+      content: "";
+    }
+  }
+
+  .svc-tab-designer--inline .svc-tab-designer_content {
+    padding: 0;
+    // Above the :before overlay, as .sd-root-modern__wrapper is in the live survey.
+    position: relative;
+  }
+}
