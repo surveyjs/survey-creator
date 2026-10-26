@@ -106,6 +106,25 @@ describe("CreatorPresetEditableBase", () => {
       expect(survey.data).toEqual(mockMatrix.value[0]);
     });
 
+    it("should render popup survey element ids that do not collide with other surveys", () => {
+      mockShowDialog.mockImplementation((options) => {
+        return { dispose: vi.fn() };
+      });
+      const mainSurvey = new SurveyModel({ elements: [{ type: "text", name: "question1" }] });
+
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
+      base["showDetailPanelInPopup"](mockMatrix, mockRow, mockRootElement, {});
+
+      const popupSurvey1 = mockShowDialog.mock.calls[0][0].data.survey;
+      const popupSurvey2 = mockShowDialog.mock.calls[1][0].data.survey;
+      const mainId = mainSurvey.getQuestionByName("question1").ariaTitleId;
+      const popupId1 = popupSurvey1.getQuestionByName("question1").ariaTitleId;
+      const popupId2 = popupSurvey2.getQuestionByName("question1").ariaTitleId;
+      expect(popupId1).not.toBe(mainId);
+      expect(popupId2).not.toBe(mainId);
+      expect(popupId1).not.toBe(popupId2);
+    });
+
     it("should update row value when applying valid data", () => {
       // Arrange
       const newValue = { question1: "new value" };

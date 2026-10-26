@@ -170,6 +170,7 @@ export abstract class JsonEditorBaseModel extends Base {
     // the check list localizes the findings before the error list shows them
     this.linter.update(textWorker);
     this.setErrors(textWorker.errors);
+    this.errorsTextWorker = textWorker;
   }
   // true: nothing to apply, or applied. false: the text does not parse or has a blocking error,
   // and the survey is left as it is. Leaving the tab passes ignoreBlockingErrors: the host may
@@ -197,13 +198,25 @@ export abstract class JsonEditorBaseModel extends Base {
   }
   // undefined: the text does not parse, and nothing may override that. false: a finding at
   // "error" severity, which onActiveTabChanging may still allow. true: warnings at most.
+  // A plain check: creator.JSON, creator.text and save() ask it through applyChanges, and a read
+  // must neither touch the error list nor cut the pause short.
   public allowingDeactivate(): boolean {
     const textWorker: SurveyTextWorker = this.createTextWorker();
     if (!textWorker.isJsonCorrect) return undefined;
     return !textWorker.isJsonHasErrors;
   }
+  // The list is rebuilt a second after the last keystroke: a tab switch refused within that second
+  // shows the errors it refuses for now. The worker is the one allowingDeactivate has just built,
+  // so this does not lint again. A pending auto-save apply is cancelled with the timer; it would
+  // be refused the same way.
+  public updateOutdatedErrors(): void {
+    if (this.errorsTextWorker === this.createTextWorker()) return;
+    this.cancelScheduledProcessing();
+    this.processErrors(this.text);
+  }
   private lastTextWorker: SurveyTextWorker;
   private lastTextWorkerText: string;
+  private errorsTextWorker: SurveyTextWorker;
   // One worker per text: allowingDeactivate asks right after processErrors has linted the same
   // text, and a lint pass over a large survey is not free
   private createTextWorker(): SurveyTextWorker {
@@ -219,6 +232,7 @@ export abstract class JsonEditorBaseModel extends Base {
     this.cancelScheduledProcessing();
     this.lastTextWorker = undefined;
     this.lastTextWorkerText = undefined;
+    this.errorsTextWorker = undefined;
     super.dispose();
   }
   public get readOnly(): boolean {
@@ -330,9 +344,14 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   public applyPendingChanges(): boolean {
     return !this.model || this.model.applyChanges();
   }
+  // only a tab switch asks this: the refusal is where the user waits for the errors
   public defaultAllowingDeactivate(): boolean {
     if (!this.model) return true;
-    return this.model.allowingDeactivate();
+    const res = this.model.allowingDeactivate();
+    if (res !== true) {
+      this.model.updateOutdatedErrors();
+    }
+    return res;
   }
   protected abstract createModel(
     creator: SurveyCreatorModel

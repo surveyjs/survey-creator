@@ -562,6 +562,73 @@ export const roStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Descriere"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistent de expresie",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Scrie cu AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Descrie ce ar trebui să facă expresia",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "De exemplu: arată această întrebare când respondentul are 18 ani sau mai mult",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Descrie condiția în cuvinte",
+    // [Auto-translated] "Generate"
+    generate: "Generează",
+    // [Auto-translated] "Refine"
+    refine: "Rafinare",
+    // [Auto-translated] "Explain"
+    explain: "Explică",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Acceptă",
+    // [Auto-translated] "Reject"
+    reject: "Respinge",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplică soluția: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Expresia curentă",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Expresie sugerată",
+    // [Auto-translated] "Reads as"
+    readsAs: "Se citește ca",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Explicația asistentului",
+    // [Auto-translated] "Check results"
+    findings: "Verifică rezultatele",
+    // [Auto-translated] "Error"
+    severityError: "Eroare",
+    // [Auto-translated] "Warning"
+    severityWarning: "Atenție",
+    // [Auto-translated] "Info"
+    severityInfo: "Informații",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "în \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Descrie expresia și selectează Generate.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Așteptând asistenta...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Cererea a fost anulată.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asistentul a raportat: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistentul nu a sugerat nicio expresie.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Revizuiește expresia sugerată.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistentul i-a explicat expresia curentă.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Expresia sugerată conține erori și nu poate fi acceptată.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Expresia sugerată nu putea fi verificată pentru fiecare loc în care este scrisă, deci nu poate fi acceptată.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Adaugă o acțiune la regulă înainte de a întreba asistentul.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Prima sugestie avea erori și a fost corectată automat."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export const roStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{Prop} \"{expresie}\" este întotdeauna valabilă, pentru că {faptele} - nu decide nimic."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expresie}\" nu citește nicio întrebare sau variabilă."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Valoarea implicită a \"{name}\" este {valuesText}, pe care nu o poate menține niciodată. Permis: {availableText}.",
@@ -4034,6 +4105,8 @@ export const roStrings = {
       itemScope: "\"{0}\" este disponibil doar în interiorul condițiilor de alegere, rând și coloană.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unei întrebări compozite.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" nu este disponibil în interiorul unui filtru inArray, care rulează atât pe element, cât și apoi pe sondaj.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" este o coloană a acestei matrice – refereți-o cu prefixul rândului.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

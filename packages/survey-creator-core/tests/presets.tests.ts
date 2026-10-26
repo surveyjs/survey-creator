@@ -1,9 +1,11 @@
 import { CreatorTester } from "./creator-tester";
 import { UIPreset, ICreatorPresetData, registerUIPreset, CreatorPresets, PredefinedCreatorPresets } from "../src/ui-presets-creator/presets";
 import { defaultStrings, editorLocalization } from "../src/editorLocalization";
-import { surveyLocalization } from "survey-core";
+import { surveyLocalization, QuestionMatrixDynamicModel } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { Advanced } from "../src/ui-presets";
+import "../src/property-grid/matrices";
 export * from "../src/localization/german";
 
 test("show/hidetabs", () => {
@@ -554,4 +556,26 @@ test("ui preset registration", () => {
   delete CreatorPresets["basic"];
   delete CreatorPresets["advanced"];
   PredefinedCreatorPresets.splice(0, PredefinedCreatorPresets.length);
+});
+test("Advanced preset: list editors show the same columns as the default property grid, library#12092", () => {
+  const creator = new CreatorTester();
+  new UIPreset(Advanced as any).apply(creator);
+  creator.JSON = {
+    calculatedValues: [{ name: "var1", expression: "1" }],
+    elements: [
+      { type: "matrixdropdown", name: "q1", columns: [{ name: "col1" }], rows: ["row1"] },
+      { type: "matrixdynamic", name: "q2", columns: [{ name: "col1" }] },
+      { type: "multipletext", name: "q3", items: [{ name: "item1" }] }
+    ]
+  };
+  const getColumnNames = (propName: string): Array<string> =>
+    (<QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName(propName)).columns.map(col => col.name);
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  expect(getColumnNames("columns")).toEqual(["name", "title"]);
+  creator.selectElement(creator.survey.getQuestionByName("q2"));
+  expect(getColumnNames("columns")).toEqual(["name", "title"]);
+  creator.selectElement(creator.survey.getQuestionByName("q3"));
+  expect(getColumnNames("items")).toEqual(["name", "title"]);
+  creator.selectElement(creator.survey);
+  expect(getColumnNames("calculatedValues")).toEqual(["name", "expression"]);
 });

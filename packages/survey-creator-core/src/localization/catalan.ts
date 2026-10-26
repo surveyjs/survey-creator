@@ -562,6 +562,73 @@ export var catalanTranslation = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Descripció"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Assistent d'expressió",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Escriu amb IA",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Descriu què hauria de fer l'expressió",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Per exemple: mostra aquesta pregunta quan el respondent tingui 18 anys o més",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Descriu la condició amb paraules",
+    // [Auto-translated] "Generate"
+    generate: "Generar",
+    // [Auto-translated] "Refine"
+    refine: "Refinar",
+    // [Auto-translated] "Explain"
+    explain: "Explica",
+    // [Auto-translated] "Stop"
+    stop: "Atura't",
+    // [Auto-translated] "Accept"
+    accept: "Accepta",
+    // [Auto-translated] "Reject"
+    reject: "Rebutjar",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplica la solució: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Expressió actual",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Expressió suggerida",
+    // [Auto-translated] "Reads as"
+    readsAs: "Es llegeix com",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "L'explicació de l'assistent",
+    // [Auto-translated] "Check results"
+    findings: "Comprova els resultats",
+    // [Auto-translated] "Error"
+    severityError: "Error",
+    // [Auto-translated] "Warning"
+    severityWarning: "Avís",
+    // [Auto-translated] "Info"
+    severityInfo: "Informació",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "a \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Descriu l'expressió i selecciona Genera.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Esperant l'assistent...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "La sol·licitud va ser cancel·lada.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "L'assistent va informar: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "L'assistent no va suggerir cap expressió.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Revisa l'expressió suggerida.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "L'assistent va explicar l'expressió actual.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "L'expressió suggerida té errors i no es pot acceptar.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "L'expressió suggerida no es podia comprovar a cada lloc on s'escrivia, així que no es pot acceptar.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Afegeix una acció a la norma abans de preguntar a l'assistent.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "La primera suggerència tenia errors i es corregia automàticament."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var catalanTranslation = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "El {prop} \"{expressió}\" sempre es compleix, perquè {facts} - no decideix res."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "El {prop} \"{expressió}\" no llegeix cap pregunta ni variable."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "El valor per defecte de \"{name}\" és {valuesText}, que mai podrà mantenir. Permès: {availableText}.",
@@ -4034,6 +4105,8 @@ export var catalanTranslation = {
       itemScope: "\"{0}\" només està disponible dins de les condicions de elecció, fila i columna.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" referències només estan disponibles dins d'una pregunta composta.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" no està disponible dins d'un filtre inArray, que s'executa contra l'element i després contra l'enquesta.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" és una columna d'aquesta matriu: referencia-la amb el prefix de la fila.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

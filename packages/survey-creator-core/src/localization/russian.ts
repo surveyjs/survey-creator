@@ -562,6 +562,73 @@ export var ruStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Описание"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Ассистент по выражению выражения",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Пишите с помощью ИИ",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Опишите, что должно делать это выражение",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Например: покажите этот вопрос, если респонденту 18 лет и старше",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Опишите состояние словами",
+    // [Auto-translated] "Generate"
+    generate: "Генерировать",
+    // [Auto-translated] "Refine"
+    refine: "Уточняйте",
+    // [Auto-translated] "Explain"
+    explain: "Объясните",
+    // [Auto-translated] "Stop"
+    stop: "Стой",
+    // [Auto-translated] "Accept"
+    accept: "Принимаю",
+    // [Auto-translated] "Reject"
+    reject: "Отклонить",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Применить исправление: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Текущее выражение",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Рекомендуемое выражение",
+    // [Auto-translated] "Reads as"
+    readsAs: "Читается как",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Объяснение ассистента",
+    // [Auto-translated] "Check results"
+    findings: "Проверьте результаты",
+    // [Auto-translated] "Error"
+    severityError: "Ошибка",
+    // [Auto-translated] "Warning"
+    severityWarning: "Предупреждение",
+    // [Auto-translated] "Info"
+    severityInfo: "Информация",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "в «{0}»",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Опишите выражение и выберите Генерировать.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Жду помощника...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Запрос был отменён.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Ассистент сообщил: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Ассистент не показал выражения лица.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Пересмотрите предложенное выражение.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Ассистент объяснил текущее выражение лица.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Предложенное выражение содержит ошибки и не может быть принято.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Предлагаемое выражение нельзя было проверять в каждом месте, куда оно было записано, поэтому его нельзя принять.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Добавьте действие в правило, прежде чем обращаться к ассистенту.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Первое предложение содержало ошибки и исправлялось автоматически."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var ruStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} «{expression}» всегда выполняется, потому что {facts} — он ничего не решает."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} «{expression}» не читает никакой вопрос или переменную."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "По умолчанию значение «{name}» — {valuesText}, которое оно никогда не может удержать. Разрешено: {availableText}.",
@@ -4034,6 +4105,8 @@ export var ruStrings = {
       itemScope: "«{0}» доступна только внутри условий выбора, строки и столбцов.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "«{0}.» Ссылки доступны только в составном вопросе.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "«{0}» недоступна внутри фильтра inArray, который работает с элементом и опросом.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "«{0}» — это столбец этой матрицы, ссылайтесь на неё с префиксом строки.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

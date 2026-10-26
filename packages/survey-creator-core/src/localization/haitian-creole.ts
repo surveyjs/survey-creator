@@ -562,6 +562,73 @@ export var htStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Deskripsyon"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistan ekspresyon",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Ekri ak AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Dekri sa ekspresyon an dwe fè",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Pa egzanp: montre kesyon sa a lè moun ki repond la gen 18 ane oswa plis",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Dekri kondisyon an mo",
+    // [Auto-translated] "Generate"
+    generate: "Jenere",
+    // [Auto-translated] "Refine"
+    refine: "Rafine",
+    // [Auto-translated] "Explain"
+    explain: "Eksplike",
+    // [Auto-translated] "Stop"
+    stop: "Rete",
+    // [Auto-translated] "Accept"
+    accept: "Aksepte",
+    // [Auto-translated] "Reject"
+    reject: "Rejte",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplike ranje: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Ekspresyon aktyèl",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Sijere ekspresyon",
+    // [Auto-translated] "Reads as"
+    readsAs: "li kòm",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Eksplikasyon asistan an",
+    // [Auto-translated] "Check results"
+    findings: "Tcheke rezilta yo",
+    // [Auto-translated] "Error"
+    severityError: "Erè",
+    // [Auto-translated] "Warning"
+    severityWarning: "Avètisman",
+    // [Auto-translated] "Info"
+    severityInfo: "Enfòmasyon sou",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "nan \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Dekri ekspresyon an epi chwazi jenere",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Ap tann pou asistan an...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Demann lan te anile",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asistan an rapòte: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistan an pa t 'sijere yon ekspresyon.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Revize ekspresyon sijere a.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistan an eksplike ekspresyon aktyèl la.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Ekspresyon an sijere gen erè epi yo pa ka aksepte.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Ekspresyon an sijere pa t 'kapab tcheke pou chak kote li ekri pou li pa ka aksepte.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Ajoute yon aksyon nan règ la anvan ou mande asistan an.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Sijesyon an premye te gen erè epi li te korije otomatikman."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var htStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{ekspresyon}\" toujou kenbe paske {reyalite} - li pa deside anyen."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{ekspresyon}\" pa li okenn kesyon oswa varyab."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Valè default \"{non}\" se {valuesText}, ki li pa janm ka kenbe. Pèmèt: {availableText}.",
@@ -4034,6 +4105,8 @@ export var htStrings = {
       itemScope: "\"{0}\" se sèlman ki disponib andedan chwa, ranje ak kolòn kondisyon.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" Referans yo disponib sèlman andedan yon kesyon konpoze.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" pa disponib andedan yon filtre inArray ki kouri kont atik la ak Lè sa a, sondaj la.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" se yon kolòn nan matris sa a - referans li ak ranje prefiks la.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

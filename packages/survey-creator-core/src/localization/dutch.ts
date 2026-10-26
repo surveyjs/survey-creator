@@ -562,6 +562,73 @@ export var nlStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Beschrijving"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Expressieassistent",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Schrijf met AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Beschrijf wat de uitdrukking moet doen",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Bijvoorbeeld: toon deze vraag wanneer de respondent 18 jaar of ouder is",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Beschrijf de aandoening in woorden",
+    // [Auto-translated] "Generate"
+    generate: "Genereren",
+    // [Auto-translated] "Refine"
+    refine: "Verfijnen",
+    // [Auto-translated] "Explain"
+    explain: "Leg het uit",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Accepteer",
+    // [Auto-translated] "Reject"
+    reject: "Weiger",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Apply fix: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Huidige uitdrukking",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Voorgestelde uitdrukking",
+    // [Auto-translated] "Reads as"
+    readsAs: "Luidt als volgt",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "De uitleg van de assistent",
+    // [Auto-translated] "Check results"
+    findings: "Controleer de resultaten",
+    // [Auto-translated] "Error"
+    severityError: "Fout",
+    // [Auto-translated] "Warning"
+    severityWarning: "Waarschuwing",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "In \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Beschrijf de expressie en selecteer Genereren.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Wachten op de assistent...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Het verzoek werd geannuleerd.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "De assistent meldde: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "De assistent maakte geen uitdrukking.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Bekijk de voorgestelde uitdrukking.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "De assistent legde de huidige uitdrukking uit.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "De voorgestelde uitdrukking bevat fouten en kan niet worden geaccepteerd.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "De voorgestelde uitdrukking kon niet voor elke plek worden gecontroleerd waar deze naartoe geschreven is, dus deze kan niet worden geaccepteerd.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Voeg een actie toe aan de regel voordat je het aan de assistent vraagt.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "De eerste suggestie bevatte fouten en werd automatisch gecorrigeerd."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var nlStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "De {prop} \"{expressie}\" geldt altijd, omdat {feiten} - het beslist niets."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "De {prop} \"{expressie}\" leest geen vraag of variabele."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "De standaardwaarde van \"{naam}\" is {valuesText}, die het nooit kan vasthouden. Toegestaan: {availableText}.",
@@ -4034,6 +4105,8 @@ export var nlStrings = {
       itemScope: "\"{0}\" is alleen beschikbaar binnen keuze-, rij- en kolomcondities.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\"-referenties zijn alleen beschikbaar binnen een samengestelde kwestie.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" is niet beschikbaar binnen een inArray-filter, dat zowel tegen het item als de enquête draait.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" is een kolom van deze matrix - verwijs ernaar met het rijvoorvoegsel.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

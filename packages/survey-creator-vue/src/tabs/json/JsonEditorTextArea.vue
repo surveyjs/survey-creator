@@ -5,7 +5,7 @@
         class="svc-json-editor-tab__content-area"
         :aria-label="model.ariaLabel"
         :disabled="model.readOnly"
-        v-model="model.text"
+        v-model="text"
         @keydown="model.checkKey(model, $event)"
         ref="inputEl"
       >
@@ -20,11 +20,16 @@
 import { SvComponent } from "survey-vue3-ui";
 import type { TextareaJsonEditorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 
 const props = defineProps<{ model: TextareaJsonEditorModel }>();
 const inputEl = ref<HTMLTextAreaElement>();
 const model = props.model;
+// v-model keeps its composition handling (IME); the input goes through the debounced path
+const text = computed({
+  get: () => props.model.text,
+  set: (value: string) => props.model.onTextInput(value)
+});
 model.canShowErrors = false;
 useBase(() => props.model);
 onMounted(() => {
