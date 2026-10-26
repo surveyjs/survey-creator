@@ -198,17 +198,21 @@ export abstract class JsonEditorBaseModel extends Base {
   }
   // undefined: the text does not parse, and nothing may override that. false: a finding at
   // "error" severity, which onActiveTabChanging may still allow. true: warnings at most.
+  // A plain check: creator.JSON, creator.text and save() ask it through applyChanges, and a read
+  // must neither touch the error list nor cut the pause short.
   public allowingDeactivate(): boolean {
     const textWorker: SurveyTextWorker = this.createTextWorker();
-    const res = !textWorker.isJsonCorrect ? undefined : !textWorker.isJsonHasErrors;
-    // the list is rebuilt a second after the last keystroke: a refusal within that second shows
-    // the errors it refuses for now. The worker is the one just built, so this does not lint again.
-    // A pending auto-save apply is cancelled with the timer; it would be refused the same way.
-    if (res !== true && this.errorsTextWorker !== textWorker) {
-      this.cancelScheduledProcessing();
-      this.processErrors(this.text);
-    }
-    return res;
+    if (!textWorker.isJsonCorrect) return undefined;
+    return !textWorker.isJsonHasErrors;
+  }
+  // The list is rebuilt a second after the last keystroke: a tab switch refused within that second
+  // shows the errors it refuses for now. The worker is the one allowingDeactivate has just built,
+  // so this does not lint again. A pending auto-save apply is cancelled with the timer; it would
+  // be refused the same way.
+  public updateOutdatedErrors(): void {
+    if (this.errorsTextWorker === this.createTextWorker()) return;
+    this.cancelScheduledProcessing();
+    this.processErrors(this.text);
   }
   private lastTextWorker: SurveyTextWorker;
   private lastTextWorkerText: string;
@@ -340,9 +344,14 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   public applyPendingChanges(): boolean {
     return !this.model || this.model.applyChanges();
   }
+  // only a tab switch asks this: the refusal is where the user waits for the errors
   public defaultAllowingDeactivate(): boolean {
     if (!this.model) return true;
-    return this.model.allowingDeactivate();
+    const res = this.model.allowingDeactivate();
+    if (res !== true) {
+      this.model.updateOutdatedErrors();
+    }
+    return res;
   }
   protected abstract createModel(
     creator: SurveyCreatorModel
