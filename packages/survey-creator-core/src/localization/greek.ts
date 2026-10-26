@@ -562,6 +562,73 @@ export var grStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Περιγραφή"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Βοηθός έκφρασης",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Γράψτε με AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Περιγράψτε τι πρέπει να κάνει η έκφραση",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Για παράδειγμα: εμφάνιση αυτής της ερώτησης όταν ο ερωτώμενος είναι 18 ετών και άνω",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Περιγράψτε την κατάσταση με λέξεις",
+    // [Auto-translated] "Generate"
+    generate: "Δημιουργία",
+    // [Auto-translated] "Refine"
+    refine: "Βελτιώστε",
+    // [Auto-translated] "Explain"
+    explain: "Εξηγήστε",
+    // [Auto-translated] "Stop"
+    stop: "Σταμάτα",
+    // [Auto-translated] "Accept"
+    accept: "Αποδοχή",
+    // [Auto-translated] "Reject"
+    reject: "Απόρριψη",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Εφαρμογή διόρθωσης: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Τρέχουσα έκφραση",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Προτεινόμενη έκφραση",
+    // [Auto-translated] "Reads as"
+    readsAs: "Διαβάζεται ως",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Η εξήγηση του βοηθού",
+    // [Auto-translated] "Check results"
+    findings: "Ελέγξτε τα αποτελέσματα",
+    // [Auto-translated] "Error"
+    severityError: "Λάθος",
+    // [Auto-translated] "Warning"
+    severityWarning: "Προειδοποίηση",
+    // [Auto-translated] "Info"
+    severityInfo: "Πληροφορίες",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "στο \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Περιγράψτε την έκφραση και επιλέξτε Δημιουργία.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Περιμένοντας τον βοηθό...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Το αίτημα ακυρώθηκε.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Ο βοηθός ανέφερε: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Ο βοηθός δεν πρότεινε έκφραση.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Εξετάστε την προτεινόμενη έκφραση.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Ο βοηθός εξήγησε την τρέχουσα έκφραση.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Η προτεινόμενη έκφραση έχει λάθη και δεν μπορεί να γίνει αποδεκτή.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Η προτεινόμενη έκφραση δεν μπορούσε να ελεγχθεί για κάθε μέρος στο οποίο γράφτηκε, επομένως δεν μπορεί να γίνει αποδεκτή.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Προσθέστε μια ενέργεια στον κανόνα πριν ρωτήσετε τον βοηθό.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Η πρώτη πρόταση είχε λάθη και διορθώθηκε αυτόματα."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var grStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "Το {prop} \"{expression}\" ισχύει πάντα, επειδή {facts} - δεν αποφασίζει τίποτα."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "Το {prop} \"{expression}\" δεν διαβάζει καμία ερώτηση ή μεταβλητή."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Η προεπιλεγμένη τιμή του \"{name}\" είναι {valuesText}, την οποία δεν μπορεί ποτέ να κρατήσει. Επιτρέπεται: {availableText}.",
@@ -4034,6 +4105,8 @@ export var grStrings = {
       itemScope: "Το \"{0}\" είναι διαθέσιμο μόνο μέσα σε συνθήκες επιλογής, γραμμής και στήλης.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Οι αναφορές \"{0}.\" είναι διαθέσιμες μόνο μέσα σε μια σύνθετη ερώτηση.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "Το \"{0}\" δεν είναι διαθέσιμο μέσα σε ένα φίλτρο inArray, το οποίο εκτελείται στο στοιχείο και στη συνέχεια στην έρευνα.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "Το \"{0}\" είναι μια στήλη αυτού του πίνακα - αναφέρετέ το με το πρόθεμα σειράς.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

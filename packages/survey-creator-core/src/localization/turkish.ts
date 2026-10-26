@@ -562,6 +562,73 @@ export var turkishStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Tanım"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "İfade Asistanı",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Yapay Zeka ile Yaz",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "İfadenin ne yapması gerektiğini anlatın",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Örneğin: bu soruyu yanıtlayan 18 yaş veya üzerindeyken gösterin",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Durumu kelimelerle tanımlayın",
+    // [Auto-translated] "Generate"
+    generate: "Oluştur",
+    // [Auto-translated] "Refine"
+    refine: "Geliştirme",
+    // [Auto-translated] "Explain"
+    explain: "Açıklayın",
+    // [Auto-translated] "Stop"
+    stop: "Dur",
+    // [Auto-translated] "Accept"
+    accept: "Kabul et",
+    // [Auto-translated] "Reject"
+    reject: "Reddet",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Düzeltmeyi uygula: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Güncel ifade",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Önerilen ifade",
+    // [Auto-translated] "Reads as"
+    readsAs: "Şöyle okunur:",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Asistanın açıklaması",
+    // [Auto-translated] "Check results"
+    findings: "Sonuçları kontrol et",
+    // [Auto-translated] "Error"
+    severityError: "Hata",
+    // [Auto-translated] "Warning"
+    severityWarning: "Uyarı",
+    // [Auto-translated] "Info"
+    severityInfo: "Bilgi",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "\"{0}\"de",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "İfadeyi tanımlayın ve Oluştur'u seçin.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Asistanı bekliyorum...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Talep iptal edildi.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asistan şöyle bildirdi: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistan bir ifade önermedi.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Önerilen ifadeyi gözden geçirin.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistan mevcut ifadeyi açıkladı.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Önerilen ifadede hatalar vardır ve kabul edilemez.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Önerilen ifade, yazıldığı her yer için kontrol edilemez, bu yüzden kabul edilemez.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Kurala bir eylem ekleyin, sonra asistana sorun.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "İlk öneride hatalar vardı ve otomatik olarak düzeltildi."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var turkishStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{Prop} \"{expression}\" her zaman geçerli, çünkü {facts} - hiçbir şey karar vermez."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" herhangi bir soru veya değişkeni okumaz."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "\"{name}\" değerinin varsayılan değeri {valuesText}'dir ve bu değeri asla tutamaz. İzin verilir: {availableText}.",
@@ -4034,6 +4105,8 @@ export var turkishStrings = {
       itemScope: "\"{0}\" yalnızca seçim, satır ve sütun koşulları içinde kullanılabilir.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" referansları yalnızca bileşik soru içinde bulunabilir.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" inArray filtresinde bulunmaz; filtre önce öğeye ve sonra ankete karşı çalışır.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" bu matrisin bir sütunudur - satır önekiyle referans verin.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

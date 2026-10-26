@@ -562,6 +562,73 @@ export var mnStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Тайлбар"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Илэрхийллийн туслах",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "AI-ээр бичих",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Энэ хэллэг юу хийх ёстойг тодорхойл",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Жишээ нь: хариуцагч 18 ба түүнээс дээш насны үед энэ асуултыг харуулна уу",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Энэ нөхцөл байдлыг үгээр тодорхойл",
+    // [Auto-translated] "Generate"
+    generate: "Үүсгэх",
+    // [Auto-translated] "Refine"
+    refine: "Сайжруулна",
+    // [Auto-translated] "Explain"
+    explain: "Тайлбарла",
+    // [Auto-translated] "Stop"
+    stop: "Зогс",
+    // [Auto-translated] "Accept"
+    accept: "Хүлээн авна",
+    // [Auto-translated] "Reject"
+    reject: "Татгалзах",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Засвар хэрэглэх: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Одоогийн илэрхийлэл",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Санал болгосон илэрхийлэл",
+    // [Auto-translated] "Reads as"
+    readsAs: "Дараах байдлаар уншигддаг",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Туслахын тайлбар",
+    // [Auto-translated] "Check results"
+    findings: "Үр дүнг шалгах",
+    // [Auto-translated] "Error"
+    severityError: "Алдаа",
+    // [Auto-translated] "Warning"
+    severityWarning: "Анхааруулга",
+    // [Auto-translated] "Info"
+    severityInfo: "Мэдээлэл",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "\"{0}\" ангид.",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Илэрхийллийг тодорхойлж, Generate гэж сонгоорой.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Туслахыг хүлээж байна...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Хүсэлтийг цуцалсан.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Туслах ажилтан мэдээлсэн: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Туслах нь ямар нэгэн илэрхийлэл илэрхийлээгүй.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Санал болгосон илэрхийллийг дахин шалгаарай.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Туслах нь одоогийн илэрхийллийг тайлбарлав.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Санал болгосон илэрхийлэл нь алдаатай тул хүлээн зөвшөөрөгдөхгүй.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Санал болгосон илэрхийллийг бичигдсэн бүх газарт шалгаж болохгүй тул хүлээн авах боломжгүй.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Туслахаас асуухаасаа өмнө дүрэмд үйлдэл нэмээрэй.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Эхний санал алдаатай байсан бөгөөд автоматаар засагдсан."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var mnStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{expression}\" үргэлж хүчинтэй, учир нь {facts} - юу ч шийдэхгүй."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" нь ямар ч асуулт эсвэл хувьсагчийг уншдаггүй."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "\"{name}\"-ийн анхдагч утга нь {valuesText} бөгөөд үүнийг хэзээ ч барьж чадахгүй. Зөвшөөрсөн: {availableText}.",
@@ -4034,6 +4105,8 @@ export var mnStrings = {
       itemScope: "\"{0}\" нь зөвхөн сонголт, мөр болон баганын нөхцөлд л байдаг.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" лавлагаа зөвхөн нийлмэл асуултын дотор байдаг.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" нь inArray шүүлтүүр дотор байхгүй бөгөөд энэ шүүлтүүр нь тухайн зүйл болон судалгаатай холбогддог.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" нь энэ матрицын багана бөгөөд мөрийн урьдчилсан хуудсаар иш тат.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

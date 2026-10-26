@@ -562,6 +562,73 @@ export var hrStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Opis"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistent za izraze",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Pišite s umjetnom inteligencijom",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Opišite što izraz treba učiniti",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Na primjer: pokažite ovo pitanje kada je ispitanik stariji od 18 godina",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Opišite stanje riječima",
+    // [Auto-translated] "Generate"
+    generate: "Generirajte",
+    // [Auto-translated] "Refine"
+    refine: "Rafinirati",
+    // [Auto-translated] "Explain"
+    explain: "Objasnite",
+    // [Auto-translated] "Stop"
+    stop: "Stani",
+    // [Auto-translated] "Accept"
+    accept: "Prihvati",
+    // [Auto-translated] "Reject"
+    reject: "Odbij",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Primijeni popravak: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Trenutni izraz",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Predloženi izraz",
+    // [Auto-translated] "Reads as"
+    readsAs: "Čita se kao",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Objašnjenje asistenta",
+    // [Auto-translated] "Check results"
+    findings: "Provjerite rezultate",
+    // [Auto-translated] "Error"
+    severityError: "Pogreška",
+    // [Auto-translated] "Warning"
+    severityWarning: "Upozorenje",
+    // [Auto-translated] "Info"
+    severityInfo: "Informacije",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "u \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Opišite izraz i odaberite Generiraj.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Čekam asistenta...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Zahtjev je otkazan.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Pomoćnik je izvijestio: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistent nije predložio izraz lica.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Pregledajte predloženi izraz.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistent je objasnio trenutni izraz.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Predloženi izraz sadrži pogreške i ne može se prihvatiti.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Predloženi izraz nije se mogao provjeriti na svakom mjestu na koje je napisan, pa se ne može prihvatiti.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Dodajte radnju pravilu prije nego što pitate asistenta.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Prvi prijedlog imao je pogreške i automatski je ispravljen."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var hrStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{expression}\" uvijek vrijedi, jer {facts} - ne odlučuje ništa."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" ne čita nijedno pitanje ili varijablu."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Zadana vrijednost \"{name}\" je {valuesText}, koju nikada ne može zadržati. Dopušteno: {availableText}.",
@@ -4034,6 +4105,8 @@ export var hrStrings = {
       itemScope: "\"{0}\" je dostupan samo unutar uvjeta izbora, retka i stupca.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" reference dostupne su samo unutar složenog pitanja.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" nije dostupan unutar inArray filtra, koji se pokreće protiv predmeta, a zatim i ankete.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" je stupac ove matrice – referencirajte je prefiksom retka.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

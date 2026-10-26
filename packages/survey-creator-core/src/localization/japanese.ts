@@ -562,6 +562,73 @@ export var jaStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "概要"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "表現アシスタント",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "AIで書く",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "表現が何をすべきか説明してください",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "例えば:回答者が18歳以上の場合にこの質問を提示してください",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "その状態を言葉で説明してください",
+    // [Auto-translated] "Generate"
+    generate: "生成",
+    // [Auto-translated] "Refine"
+    refine: "リファイン",
+    // [Auto-translated] "Explain"
+    explain: "説明してください",
+    // [Auto-translated] "Stop"
+    stop: "やめて",
+    // [Auto-translated] "Accept"
+    accept: "受け入れろ",
+    // [Auto-translated] "Reject"
+    reject: "拒否",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "修正を適用:{0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "現在の表現",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "提案表現",
+    // [Auto-translated] "Reads as"
+    readsAs: "読み上げは",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "助手の説明",
+    // [Auto-translated] "Check results"
+    findings: "結果を確認してください",
+    // [Auto-translated] "Error"
+    severityError: "エラー",
+    // [Auto-translated] "Warning"
+    severityWarning: "警告",
+    // [Auto-translated] "Info"
+    severityInfo: "情報",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "「{0}」にて",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "式を説明し、「生成」を選択します。",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "助手を待ってる...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "その要請は取り消されました。",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "助手はこう報告しました。{0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "助手は表情を示さなかった。",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "提案された表現を見直してください。",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "助手はその表情について説明した。",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "提案された表現には誤りがあり、受け入れられません。",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "提案された式は、書き込まれたすべての場所で検証できないため、受け入れられません。",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "アシスタントに聞く前にルールにアクションを追加してください。",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "最初の提案には誤りがあり、自動的に修正されました。"
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var jaStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} 「{expression}」は常に成り立つ。なぜなら{facts}は何も決定しないからだ。"
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} 「{expression}」は質問や変数を読み取っていません。"
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "「{name}」のデフォルト値は{valuesText}であり、保持することはできません。許可:{availableText}。",
@@ -4034,6 +4105,8 @@ export var jaStrings = {
       itemScope: "「{0}」は選択肢、行、列の条件の内側のみ利用可能です。",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "「{0}.」の参照は、複合質問の中でのみ利用可能です。",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "「{0}」はinArrayフィルター内では利用できず、アイテムとアンケートの両方で処理されます。",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "「{0}」はこの行列の一列であり、行プレフィックスで参照してください。",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

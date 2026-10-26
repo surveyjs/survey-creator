@@ -562,6 +562,73 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "描述"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "表達助理",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "用 AI 寫作",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "描述這個表達式應該做什麼",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "例如：當受訪者年滿18歲時，請出示此問題",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "用文字描述這個狀況",
+    // [Auto-translated] "Generate"
+    generate: "生成",
+    // [Auto-translated] "Refine"
+    refine: "精煉",
+    // [Auto-translated] "Explain"
+    explain: "請解釋",
+    // [Auto-translated] "Stop"
+    stop: "停下",
+    // [Auto-translated] "Accept"
+    accept: "接受",
+    // [Auto-translated] "Reject"
+    reject: "拒絕",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "應用修正：{0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "現行表達",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "建議表達方式",
+    // [Auto-translated] "Reads as"
+    readsAs: "讀作",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "助理的解釋",
+    // [Auto-translated] "Check results"
+    findings: "檢查結果",
+    // [Auto-translated] "Error"
+    severityError: "錯誤",
+    // [Auto-translated] "Warning"
+    severityWarning: "警告",
+    // [Auto-translated] "Info"
+    severityInfo: "資訊",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "在《{0}》中",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "描述表達式並選擇產生。",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "在等助理......",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "申請被取消了。",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "助理報告：{0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "助理沒有提出什麼表情。",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "檢視建議的表達方式。",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "助理解釋了當時的表情。",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "建議的表達式存在錯誤，無法接受。",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "建議表達式無法在每個寫入位置都被檢查，因此無法被接受。",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "在詢問助理之前，先在規則中加入一個動作。",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "第一個建議有錯誤，並自動被修正。"
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3838,6 +3905,10 @@ export var traditionalChineseTranslation = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} 「{expression}」總是成立，因為 {facts} - 它不會決定任何事。"
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} 「{expression}」不會讀取任何問題或變數。"
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "「{name}」的預設值是 {valuesText}，但它永遠無法保持。允許：{availableText}。",
@@ -4035,6 +4106,8 @@ export var traditionalChineseTranslation = {
       itemScope: "「{0}」僅在選擇、列與列條件中提供。",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "「{0}.」的引用僅存在於綜合問題中。",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "「{0}」無法在 inArray 篩選器中使用，該篩選器會先對項目和調查結果計算。",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "「{0}」是該矩陣的一欄——請以列前綴作為參考。",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

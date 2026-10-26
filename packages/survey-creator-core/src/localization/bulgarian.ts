@@ -562,6 +562,73 @@ export var bgStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Описание"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Асистент по изразяване",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Пиши с изкуствен интелект",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Опишете какво трябва да прави изразът",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Например: покажете този въпрос, когато респондентът е на 18 или повече години",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Опишете състоянието с думи",
+    // [Auto-translated] "Generate"
+    generate: "Генерирай",
+    // [Auto-translated] "Refine"
+    refine: "Усъвършенствайте",
+    // [Auto-translated] "Explain"
+    explain: "Обяснете",
+    // [Auto-translated] "Stop"
+    stop: "Спри",
+    // [Auto-translated] "Accept"
+    accept: "Приемам",
+    // [Auto-translated] "Reject"
+    reject: "Отхвърли",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Прилагане на поправка: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Текущо изражение",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Предложено изразяване",
+    // [Auto-translated] "Reads as"
+    readsAs: "Звучи като",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Обяснението на асистентката",
+    // [Auto-translated] "Check results"
+    findings: "Проверете резултати",
+    // [Auto-translated] "Error"
+    severityError: "Грешка",
+    // [Auto-translated] "Warning"
+    severityWarning: "Предупреждение",
+    // [Auto-translated] "Info"
+    severityInfo: "Информация",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "в \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Опишете израза и изберете Генериране.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Чакам асистента...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Заявката беше отменена.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Асистентът докладва: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Асистентът не показа изражение.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Прегледайте предложеното изразяване.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Асистентът обясни настоящото изражение.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Предложеното изразяване съдържа грешки и не може да бъде прието.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Предложеното изразяване не може да бъде проверено на всяко място, където е написано, затова не може да бъде приет.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Добавете действие към правилото, преди да питате асистента.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Първото предложение имаше грешки и беше коригирано автоматично."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var bgStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{expression}\" винаги е валиден, защото {facts} - не решава нищо."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" не чете никакъв въпрос или променлива."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "По подразбиране стойността на \"{name}\" е {valuesText}, която никога не може да задържи. Позволено: {availableText}.",
@@ -4034,6 +4105,8 @@ export var bgStrings = {
       itemScope: "\"{0}\" е достъпна само в условията за избор, ред и колона.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" препратки са достъпни само в рамките на композитен въпрос.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" не е налична в inArray филтъра, който се свързва с елемента, а след това и с анкетата.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" е колона от тази матрица – свържете се с префикса на реда.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

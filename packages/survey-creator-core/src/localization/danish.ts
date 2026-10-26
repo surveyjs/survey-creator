@@ -562,6 +562,73 @@ export var danishStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Beskrivelse"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Udtryksassistent",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Skriv med AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Beskriv, hvad udtrykket skal gøre",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "For eksempel: vis dette spørgsmål, når respondenten er 18 år eller ældre",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Beskriv tilstanden med ord",
+    // [Auto-translated] "Generate"
+    generate: "Generer",
+    // [Auto-translated] "Refine"
+    refine: "Forfine",
+    // [Auto-translated] "Explain"
+    explain: "Forklar",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Accepter",
+    // [Auto-translated] "Reject"
+    reject: "Afvis",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Påfør rettelse: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Nuværende udtryk",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Foreslået udtryk",
+    // [Auto-translated] "Reads as"
+    readsAs: "Lyder som",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Assistentens forklaring",
+    // [Auto-translated] "Check results"
+    findings: "Tjek resultater",
+    // [Auto-translated] "Error"
+    severityError: "Fejl",
+    // [Auto-translated] "Warning"
+    severityWarning: "Advarsel",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "i \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Beskriv udtrykket og vælg Generer.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Venter på assistenten...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Anmodningen blev annulleret.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Assistenten rapporterede: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Assistenten foreslog ikke noget udtryk.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Gennemgå det foreslåede udtryk.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Assistenten forklarede det nuværende udtryk.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Det foreslåede udtryk har fejl og kan ikke accepteres.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Det foreslåede udtryk kunne ikke kontrolleres for alle steder, det er skrevet til, så det kan ikke accepteres.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Tilføj en handling til reglen, før du spørger assistenten.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Det første forslag havde fejl og blev rettet automatisk."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3838,6 +3905,10 @@ export var danishStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{udtryk}\" gælder altid, fordi {facts} - det afgør ingenting."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{udtryk}\" læser ikke noget spørgsmål eller variabel."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Standardværdien for \"{name}\" er {valuesText}, som den aldrig kan holde. Tilladt: {availableText}.",
@@ -4035,6 +4106,8 @@ export var danishStrings = {
       itemScope: "\"{0}\" er kun tilgængelig inden for valg-, række- og kolonneforhold.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" referencer er kun tilgængelige i et sammensat spørgsmål.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" er ikke tilgængeligt i et inArray-filter, som kører mod elementet og derefter undersøgelsen.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" er en kolonne i denne matrix – referer til den med rækkepræfikset.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

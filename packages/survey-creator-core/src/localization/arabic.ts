@@ -562,6 +562,73 @@ export var arStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "الوصف"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "مساعد التعبير",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "اكتب بالذكاء الاصطناعي",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "صف ما يجب أن يفعله التعبير",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "على سبيل المثال: عرض هذا السؤال عندما يكون المدعى عليه في الثامنة عشرة أو أكثر",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "وصف الحالة بالكلمات",
+    // [Auto-translated] "Generate"
+    generate: "توليد",
+    // [Auto-translated] "Refine"
+    refine: "التنقية",
+    // [Auto-translated] "Explain"
+    explain: "اشرح",
+    // [Auto-translated] "Stop"
+    stop: "توقف",
+    // [Auto-translated] "Accept"
+    accept: "قبول",
+    // [Auto-translated] "Reject"
+    reject: "رفض",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "تطبيق الإصلاح: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "التعبير الحالي",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "تعبير مقترح",
+    // [Auto-translated] "Reads as"
+    readsAs: "تقرأ ك",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "شرح المساعد",
+    // [Auto-translated] "Check results"
+    findings: "تحقق من النتائج",
+    // [Auto-translated] "Error"
+    severityError: "خطأ",
+    // [Auto-translated] "Warning"
+    severityWarning: "تحذير",
+    // [Auto-translated] "Info"
+    severityInfo: "معلومات",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "في \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "صف التعبير واختر التوليد.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "ينتظر المساعد...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "تم إلغاء الطلب.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "أبلغ المساعد: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "لم يقترح المساعد تعبيرا.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "راجع التعبير المقترح.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "شرح المساعد التعبير الحالي.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "التعبير المقترح يحتوي على أخطاء ولا يمكن قبوله.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "لا يمكن التحقق من التعبير المقترح في كل مكان يكتب فيه، لذا لا يمكن قبوله.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "أضف إجراء إلى القاعدة قبل أن تسأل المساعد.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "الاقتراح الأول كان فيه أخطاء وتم تصحيحه تلقائيا."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var arStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "المقولة {prop} \"{تعبير} دائما صحيحة، لأن {facts} - لا تقرر شيئا."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "لا يقرأ \"{تعبير} {prop} أي سؤال أو متغير."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "القيمة الافتراضية ل \"{name}\" هي {valuesText}، والتي لا يمكن أن تحتفظ بها أبدا. مسموح بها: {availableText}.",
@@ -4034,6 +4105,8 @@ export var arStrings = {
       itemScope: "\"{0}\" متاح فقط داخل ظروف الاختيار، الصف، والأعمدة.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "المراجع \"{0}.\" متاحة فقط داخل السؤال المركب.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" غير متوفر داخل مرشح inArray الذي يعمل على العنصر ثم الاستبيان.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" هو عمود من هذه المصفوفة - الإشارة إليه بالبادئة الصف.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
