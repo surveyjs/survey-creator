@@ -225,6 +225,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     );
     this.patchPageForDragDrop(this.surveyElement, this.addGhostPage);
   }
+  // The loading indicator rotates only while the page is in the viewport, off-screen placeholders stay static
+  // so they don't repaint every frame.
+  public get loadingContentCss(): string {
+    return toCssClasses("svc-page__loading-content", this.isVisibleInViewPort && "svc-page__loading-content--visible");
+  }
   public get placeholderText(): string {
     if (this.creator.isMobileView)
       return getLocString("ed.pagePlaceHolderMobile");

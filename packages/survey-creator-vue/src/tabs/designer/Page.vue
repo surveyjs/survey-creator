@@ -31,7 +31,7 @@
       v-if="model.needRenderContent"
     />
     <div
-      class="svc-page__loading-content"
+      :class="model.loadingContentCss"
       v-if="!model.needRenderContent"
     >
       <SvComponent :is="'sv-loading-indicator'" />
