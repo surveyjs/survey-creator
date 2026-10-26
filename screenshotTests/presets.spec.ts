@@ -251,3 +251,35 @@ test.describe(title, () => {
     });
   });
 });
+
+test.describe(title, () => {
+  test.beforeEach(async ({ page }) => {
+    await page.waitForLoadState("networkidle");
+    await page.goto(`${urlPresets}`);
+  });
+
+  test("Advanced preset: matrix columns and multiple text items editors", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.evaluate(() => {
+      const creator = (window as any).creator;
+      new (window as any).SurveyCreatorCore.UIPreset((window as any).SurveyCreatorUIPreset.Advanced).applyTo(creator);
+      creator.propertyGridNavigationMode = "buttons";
+      creator.JSON = {
+        elements: [
+          { type: "matrixdropdown", name: "q1", columns: [{ name: "column1" }, { name: "column2" }], rows: ["row1"] },
+          { type: "multipletext", name: "q2", items: [{ name: "text1" }, { name: "text2" }] }
+        ]
+      };
+      creator.selectElement(creator.survey.getQuestionByName("q1"));
+    });
+    await page.locator(".svc-sidebar-tabs").getByTitle("Columns").click();
+    await compareScreenshot(page, page.locator(".spg-question[data-name='columns']"), "advanced-preset-matrix-columns.png");
+
+    await page.evaluate(() => {
+      const creator = (window as any).creator;
+      creator.selectElement(creator.survey.getQuestionByName("q2"));
+    });
+    await page.locator(".svc-sidebar-tabs").getByTitle("Items").click();
+    await compareScreenshot(page, page.locator(".spg-question[data-name='items']"), "advanced-preset-multipletext-items.png");
+  });
+});
