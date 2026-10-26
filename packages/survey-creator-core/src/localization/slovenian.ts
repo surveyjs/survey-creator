@@ -720,6 +720,8 @@ export var slStrings = {
       newPanelPosition: "Nova lokacija plošče",
       // [Auto-translated] "Entries per page"
       pageSize: "Vnosi na stran",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Omogočiti uporabnikom razvrščanje panelov",
       // "Prevent duplicate responses in the following question"
       keyName: "Prepreči podvojene odgovore v naslednjem vprašanju"
     },
@@ -807,6 +809,12 @@ export var slStrings = {
       // "Expression"
       expression: "Izraz"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Razvrsti po",
+      // [Auto-translated] "Order"
+      direction: "Red"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Izražanje"
@@ -860,7 +868,9 @@ export var slStrings = {
       // "Make the column required if"
       requiredIf: "Naredi stolpec obvezen, če",
       // "Each option in a separate column"
-      showInMultipleColumns: "Vsaka možnost v ločenem stolpcu"
+      showInMultipleColumns: "Vsaka možnost v ločenem stolpcu",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Dovoli razvrščanje po tem stolpcu"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var slStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Še nimate nobenih povezav",
     // "You don't have any pages yet"
     "listIsEmpty@pages": "Še nimate nobenih strani",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Še nimaš nobenih sort nivojev",
     // "Add new choice"
     "addNew@choices": "Dodaj novo možnost",
     // "Add new column"
@@ -1046,6 +1058,8 @@ export var slStrings = {
     "addNew@navigateToUrlOnCondition": "Dodaj novo URL",
     // "Add new page"
     "addNew@pages": "Dodaj novo stran",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Dodajte novo stopnjo sortiranja",
     // "Value"
     value: "Vrednost",
     // "Text"
@@ -1154,6 +1168,14 @@ export var slStrings = {
     rowCount: "Število vrstic",
     // [Auto-translated] "Rows per page"
     pageSize: "Vrstice na stran",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Uporabnikom omogočite razvrščanje vrstic",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Največje ravni sortiranja",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Privzeti vrstni red razporejanja",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Pokaži vrstico za razvrščanje",
     // "Columns layout"
     columnLayout: "Postavitev stolpcev",
     // "\"Add Row\" button alignment"
@@ -1684,6 +1706,8 @@ export var slStrings = {
       columns: "Stolpci",
       // "Rows"
       rows: "Vrstice",
+      // [Auto-translated] "Entries"
+      entries: "Prispevki",
       // "Choice Options"
       choices: "Možnosti izbire",
       // "Items"
@@ -2278,6 +2302,8 @@ export var slStrings = {
     underRowSingle: "Pod řádkem, zobrazit pouze jednu expanze řádku",
     // "Auto"
     auto: "Automaticky",
+    // [Auto-translated] "Always"
+    always: "Vedno",
     timerInfoMode: {
       // "Both"
       combined: "Obojí"
@@ -2816,14 +2842,24 @@ export var slStrings = {
       confirmDelete: "Sproži potrditveni poziv pred odstranitvijo plošče.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Določite izraz, ki izračuna število vnosov. Ta izraz preglasi nastavitev \"Začetno število vnosov\" in se ponovno oceni vsakič, ko se spremenijo vrednosti, na katere se sklicuje. Rezultat je omejen z nastavitvami \"Minimalno število vnosov\" in \"Največje število vnosov\". Medtem ko je ta izraz nastavljen, anketiranci ne morejo ročno dodajati ali odstranjevati vnosov.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Določa število vnosov, prikazanih na vsaki strani panela. '0' onemogočeva oštevilčenje in prikaže vse vrstice.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Določa število vnosov, prikazanih na vsaki strani panela. '0' onemogoči oštevilčenje in prikaže vse vnose.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Omogoča anketirancem, da razvrstijo vnose iz vrstice za urejanje.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Določa vrstni red, v katerem so vnosi prikazani ob začetku ankete. Anketiranci ga lahko spremenijo, če je razvrščanje dovoljeno. Vsaka stopnja sortiranja razvrsti po enem vprašanju; najprej se uporabi najvišja raven. Povlecite nivoje, da spremenite njihovo prioriteto.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dodeli številke vprašanjem, ugnezdenim v dinamični plošči."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Določite izraz, ki izračuna število vrstic. Ta izraz preglasi nastavitev \"Število vrstic\" in se ponovno oceni vsakič, ko se spremenijo vrednosti, na katere se sklicuje. Rezultat je omejen z nastavitvami \"Minimalno število vrstic\" in \"Največje število vrstic\". Medtem ko je ta izraz nastavljen, anketiranci ne morejo ročno dodajati ali odstranjevati vrstic.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Omogoča anketirancem, da razvrstijo vrstice s klikom na glave stolpcev ali iz vrstice za urejanje.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Določa vrstni red, v katerem so vrstice prikazane ob začetku ankete. Anketiranci ga lahko spremenijo, če je razvrščanje dovoljeno. Vsaka razporejena stopnja razvrsti po enem stolpcu; najprej velja najvišja raven. Povlecite nivoje, da spremenite njihovo prioriteto.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" prikazuje vrstico za urejanje le, kadar matrika nima uredljivih glav stolpcev: glave so skrite, matrika uporablja mobilno postavitev ali pa so vrstice prestavljene v stolpce. \"Vedno\" prikazuje vrstico za urejanje poleg glav stolpcev.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Določite izraz, ki izračuna število vrstic. Ta izraz preglasi nastavitev \"Začetno število vrstic\" in se ponovno oceni vsakič, ko se spremenijo vrednosti, na katere se sklicuje. Rezultat je omejen z nastavitvami \"Minimalno število vrstic\" in \"Največje število vrstic\". Medtem ko je ta izraz nastavljen, anketiranci ne morejo ročno dodajati ali odstranjevati vrstic.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Sproži potrditveni poziv pred odstranitvijo vrstice.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var slStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Določa število vrstic, prikazanih na vsaki strani matrike. '0' onemogoči oštevilčenje in prikaže vse vrstice.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Določa, koliko polj lahko anketiranec razvrsti hkrati.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Podvoji odgovore iz zadnje vrstice in jih dodeli naslednji dinamično dodani vrstici.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

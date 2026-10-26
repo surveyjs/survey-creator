@@ -720,6 +720,8 @@ export var turkishStrings = {
       newPanelPosition: "Yeni giriş konumu",
       // [Auto-translated] "Entries per page"
       pageSize: "Sayfa başına başvuru sayısı",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Kullanıcıların panelleri sıralamasına izin verin",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
@@ -807,6 +809,12 @@ export var turkishStrings = {
       // [Auto-translated] "Expression"
       expression: "İfade"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sıralayın",
+      // [Auto-translated] "Order"
+      direction: "Düzen"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "İfade"
@@ -860,7 +868,9 @@ export var turkishStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Aşağıdaki durumlarda sütunu gerekli yap",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Her seçenek ayrı bir sütunda"
+      showInMultipleColumns: "Her seçenek ayrı bir sütunda",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Bu sütuna göre sıralamaya izin verin"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var turkishStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Henüz bağlantınız yok",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Henüz hiç sayfanız yok",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Henüz sıralama seviyen yok",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Yeni seçim ekle",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var turkishStrings = {
     "addNew@navigateToUrlOnCondition": "Yeni URL ekle",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Yeni sayfa ekle",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Yeni sıralama seviyesi ekleyin",
     // "Value"
     value: "Değer",
     // "Text"
@@ -1154,6 +1168,14 @@ export var turkishStrings = {
     rowCount: "Satır sayısı",
     // [Auto-translated] "Rows per page"
     pageSize: "Sayfa başına satır sayısı",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Kullanıcıların satırları sıralamasına izin verin",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maksimum sıralama seviyeleri",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Varsayılan sıralama sırası",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Gösteri sıralama çubuğu",
     // "Columns layout"
     columnLayout: "Kolon yerleşimi",
     // "\"Add Row\" button alignment"
@@ -1426,9 +1448,9 @@ export var turkishStrings = {
     waitForUpload: "Yüklemenin tamamlanmasını bekleyin",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Satır ayrıntıları hizalaması",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Minimum satır sayısı",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maksimum satır sayısı",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Satır sayısı ifadesi",
@@ -1684,6 +1706,8 @@ export var turkishStrings = {
       columns: "Kolonlar",
       // "Rows"
       rows: "Satırlar",
+      // [Auto-translated] "Entries"
+      entries: "Kayıtlar",
       // "Choice Options"
       choices: "Seçenekler",
       // "Items"
@@ -2278,6 +2302,8 @@ export var turkishStrings = {
     underRowSingle: "Satırın altında yalnızca bir bölüm görüntüleyin",
     // "Auto"
     auto: "Otomatik",
+    // [Auto-translated] "Always"
+    always: "Her zaman",
     timerInfoMode: {
       // "Both"
       combined: "Her ikisi"
@@ -2816,14 +2842,24 @@ export var turkishStrings = {
       confirmDelete: "Bir girişi kaldırmadan önce bir onay istemini tetikler.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Giriş sayısını hesaplayan bir ifade belirtin. Bu ifade \"Başlangıç girdi sayısı\" ayarını geçersiz kılar ve referans verdiği değerler değiştiğinde yeniden değerlendirilir. Sonuç, \"Minimum giriş sayısı\" ve \"En fazla giriş sayısı\" ayarlarıyla sınırlıdır. Bu ifade ayarlanmışken, katılımcılar girişleri manuel olarak ekleyip çıkaramaz.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Panelin her sayfasında gösterilen giriş sayısını belirtir. '0' sayfa sayısını devre dışı bırakır ve tüm satırları gösterir.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Panelin her sayfasında gösterilen giriş sayısını belirtir. '0' sayfa sayısını devre dışı bırakır ve tüm girişleri gösterir.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Katılımcıların sıralama çubuğundan girişleri sıralamasına izin verir.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Anket başladığında girişlerin gösterilme sırasını tanımlar. Yanıtlayanlar sıralamaya izin verilirse bunu değiştirebilir. Her sıralama seviyesi bir soruya göre sıralanır; ilk seviye uygulanır. Önceliklerini değiştirmek için seviyeleri sürükleyin.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dinamik panelde iç içe geçmiş sorulara numaralar atar."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Satır sayısını hesaplayan bir ifade belirtin. Bu ifade, \"Satır sayısı\" ayarını geçersiz kılır ve referans verdiği değerler değiştiğinde yeniden değerlendirilir. Sonuç, \"Minimum satır sayısı\" ve \"Maksimum satır sayısı\" ayarlarıyla sınırlıdır. Bu ifade ayarlanmışken, yanıtlayıcılar el ile satır ekleyemez veya kaldıramaz.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Yanıtçıların sütun başlıklarına tıklayarak veya sıralama çubuğundan satır sıralarını sıralamalarına olanak tanır.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Anket başladığında satır sırasını tanımlar. Yanıtlayanlar sıralamaya izin verilirse bunu değiştirebilir. Her sıralama seviyesi bir sütuna göre sıralanır; ilk üst seviye uygulanır. Önceliklerini değiştirmek için seviyeleri sürükleyin.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Otomatik\" sıralama çubuğunu yalnızca matrisin sıralanabilir sütun başlıkları olmadığında gösterir: başlıklar gizli, matris mobil düzeni kullanır veya satırlar sütunlara aktarılır. \"Her zaman\" ayrıca sütun başlıklarının yanında sıralama çubuğu da gösterir.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Satır sayısını hesaplayan bir ifade belirtin. Bu ifade \"İlk satır sayısı\" ayarını geçersiz kılar ve referans verdiği değerler değiştiğinde yeniden değerlendirilir. Sonuç, \"Minimum satır sayısı\" ve \"Maksimum satır sayısı\" ayarlarıyla sınırlıdır. Bu ifade ayarlanmışken, yanıtlayıcılar el ile satır ekleyemez veya çıkaramaz.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Bir satırı kaldırmadan önce bir onay istemini tetikler.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var turkishStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Matrisin her sayfasında gösterilen satır sayısını belirtir. '0' sayfa sayısını devre dışı bırakır ve tüm satırları gösterir.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Bir katılımcının aynı anda kaç alana göre sıralayabileceğini belirtir.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

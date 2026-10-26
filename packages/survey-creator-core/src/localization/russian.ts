@@ -720,6 +720,8 @@ export var ruStrings = {
       newPanelPosition: "Новое место входа",
       // [Auto-translated] "Entries per page"
       pageSize: "Количество записей на страницу",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Позвольте пользователям сортировать панели",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -807,6 +809,12 @@ export var ruStrings = {
       // [Auto-translated] "Expression"
       expression: "Выражение"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Сортировать по",
+      // [Auto-translated] "Order"
+      direction: "Порядок"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Выражение"
@@ -860,7 +868,9 @@ export var ruStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Сделайте столбец обязательным, если",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Каждый вариант в отдельной колонке"
+      showInMultipleColumns: "Каждый вариант в отдельной колонке",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Разрешите сортировку по этому столбцу"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var ruStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "У вас еще нет ссылок",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "У вас еще нет страниц",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "У тебя пока нет уровней сортировки",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Добавить новый вариант",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var ruStrings = {
     "addNew@navigateToUrlOnCondition": "Добавить новый URL-адрес",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Добавить новую страницу",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Добавить новый уровень сортировки",
     // "Value"
     value: "Значение",
     // "Text"
@@ -1154,6 +1168,14 @@ export var ruStrings = {
     rowCount: "Количество строк",
     // [Auto-translated] "Rows per page"
     pageSize: "Строки на странице",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Разрешить пользователям сортировать строки",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Максимальные уровни сортировки",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Порядок сортировки по умолчанию",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Панель сортировки показать",
     // "Columns layout"
     columnLayout: "Макет столбцов",
     // "\"Add Row\" button alignment"
@@ -1426,9 +1448,9 @@ export var ruStrings = {
     waitForUpload: "Дождитесь завершения загрузки",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Выравнивание сведений о строке",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Минимальное количество строк",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Максимальное количество строк",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Выражение количества строк",
@@ -1684,6 +1706,8 @@ export var ruStrings = {
       columns: "Столбцы",
       // "Rows"
       rows: "Строки",
+      // [Auto-translated] "Entries"
+      entries: "Участники",
       // "Choice Options"
       choices: "Выбор",
       // "Items"
@@ -2278,6 +2302,8 @@ export var ruStrings = {
     underRowSingle: "Под строкой отображается только один раздел",
     // "Auto"
     auto: "Авто",
+    // [Auto-translated] "Always"
+    always: "Всегда",
     timerInfoMode: {
       // "Both"
       combined: "Оба"
@@ -2816,14 +2842,24 @@ export var ruStrings = {
       confirmDelete: "Запускает запрос на подтверждение перед удалением записи.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Укажите выражение, которое вычисляет количество записей. Это выражение переопределяет параметры «Начальное количество записей» и пересчитывается при каждом изменении ссылающихся значений. Результат ограничен настройками «Минимальное количество записей» и «Максимальное количество записей». Пока это выражение установлено, респонденты не могут вручную добавлять или удалять записи.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Указывает количество записей, отображаемых на каждой странице панели. '0' отключает пагинацию и отображает все строки.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Указывает количество записей, отображаемых на каждой странице панели. '0' отключает пагинацию и отображает все записи.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Позволяет респондентам сортировать записи с панели сортировки.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Определяет порядок отображения записей при начале опроса. Респонденты могут изменить его, если разрешена сортировка. Каждый уровень сортировки сортирует по одному вопросу; первым применяется верхний уровень. Перетаскивайте уровни для изменения приоритета.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присваивает номера вопросам, вложенным в динамическую панель."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Укажите выражение, которое вычисляет количество строк. Это выражение переопределяет параметр «Количество строк» и пересчитывается при каждом изменении ссылающихся значений. Результат ограничен настройками «Минимальное количество строк» и «Максимальное количество строк». Пока это выражение установлено, респонденты не могут вручную добавлять или удалять строки.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Позволяет респондентам сортировать строки, кликая по заголовкам столбцов или с панели сортировки.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Определяет порядок отображения строк при начале опроса. Респонденты могут изменить его, если разрешена сортировка. Каждый уровень сортировки сортируется по одному столбцу; первым применяется верхний уровень. Перетаскивайте уровни для изменения приоритета.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "«Авто» отображает панель сортировки только тогда, когда в матрице нет сортируемых заголовков столбцов: заголовки скрыты, матрица использует мобильную структуру или строки переносятся в столбцы. «Всегда» также отображает панель сортировки рядом с заголовками столбцов.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Закажите выражение, которое вычисляет количество строк. Это выражение переопределяет параметры «Начальное количество строк» и пересчитывается при изменении значений, на которые оно ссылается. Результат ограничен настройками «Минимальное количество строк» и «Максимальное количество строк». Пока это выражение зададено, респонденты не могут вручную добавлять или удалять строки.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Запускает запрос на подтверждение перед удалением строки.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var ruStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Указывает количество строк, отображаемых на каждой странице матрицы. '0' отключает пагинацию и отображает все строки.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Указывает, по какому полям респондент может отсортировать одновременно.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

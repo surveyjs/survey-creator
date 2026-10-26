@@ -720,6 +720,8 @@ export var grStrings = {
       newPanelPosition: "Θέση νέου πλαισίου",
       // [Auto-translated] "Entries per page"
       pageSize: "Καταχωρήσεις ανά σελίδα",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Να επιτρέπεται στους χρήστες να ταξινομούν πίνακες",
       // "Prevent duplicate responses in the following question"
       keyName: "Αποτροπή διπλών απαντήσεων στην εξής ερώτηση"
     },
@@ -807,6 +809,12 @@ export var grStrings = {
       // "Expression"
       expression: "Έκφραση"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Ταξινόμηση ανά",
+      // [Auto-translated] "Order"
+      direction: "Παραγγελία"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Έκφραση"
@@ -860,7 +868,9 @@ export var grStrings = {
       // "Make the column required if"
       requiredIf: "Υποχρεωτική στήλη εάν",
       // "Each option in a separate column"
-      showInMultipleColumns: "Κάθε επιλογή σε ξεχωριστή στήλη"
+      showInMultipleColumns: "Κάθε επιλογή σε ξεχωριστή στήλη",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var grStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Δεν έχετε προσθέσει συνδέσμους",
     // "You don't have any pages yet"
     "listIsEmpty@pages": "Δεν έχετε προσθέσει σελίδες",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Δεν έχετε ακόμη επίπεδα ταξινόμησης",
     // "Add new choice"
     "addNew@choices": "Προσθήκη νέας επιλογής",
     // "Add new column"
@@ -1046,6 +1058,8 @@ export var grStrings = {
     "addNew@navigateToUrlOnCondition": "Προσθήκη νέου URL",
     // "Add new page"
     "addNew@pages": "Προσθήκη νέας σελίδας",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Προσθήκη νέου επιπέδου ταξινόμησης",
     // "Value"
     value: "Τιμή",
     // "Text"
@@ -1154,6 +1168,14 @@ export var grStrings = {
     rowCount: "Αριθμός γραμμών",
     // [Auto-translated] "Rows per page"
     pageSize: "Σειρές ανά σελίδα",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Να επιτρέπεται στους χρήστες η ταξινόμηση γραμμών",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Μέγιστα επίπεδα ταξινόμησης",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Προεπιλεγμένη σειρά ταξινόμησης",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Εμφάνιση γραμμής ταξινόμησης",
     // "Columns layout"
     columnLayout: "Διάταξη στηλών",
     // "\"Add Row\" button alignment"
@@ -1684,6 +1706,8 @@ export var grStrings = {
       columns: "Στήλες",
       // "Rows"
       rows: "Σειρές",
+      // [Auto-translated] "Entries"
+      entries: "Συμμετοχές",
       // "Choice Options"
       choices: "Επιλογές Επιλογής",
       // "Items"
@@ -2278,6 +2302,8 @@ export var grStrings = {
     underRowSingle: "Κάτω από τη σειρά, εμφάνιση μόνο μίας επέκτασης σειράς",
     // "Auto"
     auto: "Αυτόματο",
+    // [Auto-translated] "Always"
+    always: "Πάντα",
     timerInfoMode: {
       // "Both"
       combined: "Και τα δύο"
@@ -2816,14 +2842,24 @@ export var grStrings = {
       confirmDelete: "Ενεργοποιεί μια προτροπή επιβεβαίωσης πριν από την κατάργηση ενός πίνακα.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των καταχωρήσεων. Αυτή η έκφραση παρακάμπτει τη ρύθμιση \"Αρχικός αριθμός καταχωρήσεων\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός καταχωρήσεων\" και \"Μέγιστος αριθμός καταχωρήσεων\". Ενώ έχει οριστεί αυτή η έκφραση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν καταχωρήσεις με μη αυτόματο τρόπο.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Καθορίζει τον αριθμό των καταχωρήσεων που εμφανίζονται σε κάθε σελίδα του πίνακα. Το '0' απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλες τις γραμμές.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Καθορίζει τον αριθμό των καταχωρήσεων που εμφανίζονται σε κάθε σελίδα του πίνακα. Το '0' απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλες τις καταχωρήσεις.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Επιτρέπει στους ερωτηθέντες να ταξινομούν τις καταχωρήσεις από τη γραμμή ταξινόμησης.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Καθορίζει τη σειρά με την οποία εμφανίζονται οι καταχωρήσεις κατά την έναρξη της έρευνας. Οι ερωτηθέντες μπορούν να την αλλάξουν εάν επιτρέπεται η ταξινόμηση. Κάθε επίπεδο ταξινόμησης ταξινομείται κατά μία ερώτηση. Το ανώτερο επίπεδο εφαρμόζεται πρώτο. Σύρετε τα επίπεδα για να αλλάξετε την προτεραιότητά τους.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Αντιστοιχίζει αριθμούς σε ερωτήσεις που είναι ένθετες στον δυναμικό πίνακα."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των γραμμών. Αυτή η παράσταση παρακάμπτει τη ρύθμιση \"Πλήθος γραμμών\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός γραμμών\" και \"Μέγιστος αριθμός γραμμών\". Ενώ έχει οριστεί αυτή η παράσταση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν σειρές με μη αυτόματο τρόπο.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Επιτρέπει στους ερωτηθέντες να ταξινομούν σειρές κάνοντας κλικ στις κεφαλίδες στηλών ή από τη γραμμή ταξινόμησης.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Καθορίζει τη σειρά με την οποία εμφανίζονται οι γραμμές κατά την έναρξη της έρευνας. Οι ερωτηθέντες μπορούν να την αλλάξουν εάν επιτρέπεται η ταξινόμηση. Κάθε επίπεδο ταξινόμησης ταξινομείται κατά μία στήλη. Το ανώτερο επίπεδο εφαρμόζεται πρώτο. Σύρετε τα επίπεδα για να αλλάξετε την προτεραιότητά τους.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "Το \"Auto\" εμφανίζει τη γραμμή ταξινόμησης μόνο όταν η μήτρα δεν έχει κεφαλίδες στηλών με δυνατότητα ταξινόμησης: οι κεφαλίδες είναι κρυφές, η μήτρα χρησιμοποιεί τη διάταξη για κινητά ή οι σειρές μεταφέρονται σε στήλες. Το \"Always\" εμφανίζει επίσης τη γραμμή ταξινόμησης δίπλα στις κεφαλίδες στηλών.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των σειρών. Αυτή η έκφραση παρακάμπτει τη ρύθμιση \"Αρχικός αριθμός γραμμών\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός γραμμών\" και \"Μέγιστος αριθμός γραμμών\". Ενώ έχει οριστεί αυτή η έκφραση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν σειρές με μη αυτόματο τρόπο.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Ενεργοποιεί ένα μήνυμα επιβεβαίωσης πριν από την κατάργηση μιας σειράς.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var grStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Καθορίζει τον αριθμό των γραμμών που εμφανίζονται σε κάθε σελίδα του πίνακα. Το '0' απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλες τις γραμμές.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Καθορίζει τον αριθμό των πεδίων που μπορεί να ταξινομήσει ένας ερωτώμενος ταυτόχρονα.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Δημιουργεί αντίγραφο των απαντήσεων από την τελευταία γραμμή και τις αναθέτει στη επόμενη προστιθέμενη δυναμική γραμμή.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

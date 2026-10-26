@@ -720,6 +720,8 @@ export var nbStrings = {
       newPanelPosition: "Ny inngangsplassering",
       // [Auto-translated] "Entries per page"
       pageSize: "Oppføringer per side",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "La brukere sortere paneler",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Forhindre dupliserte svar i følgende spørsmål"
     },
@@ -807,6 +809,12 @@ export var nbStrings = {
       // [Auto-translated] "Expression"
       expression: "Uttrykk"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sorter etter",
+      // [Auto-translated] "Order"
+      direction: "Rekkefølge"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Uttrykk"
@@ -860,7 +868,9 @@ export var nbStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Gjør kolonnen obligatorisk hvis",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Hvert alternativ i en egen kolonne"
+      showInMultipleColumns: "Hvert alternativ i en egen kolonne",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Tillat sortering etter denne kolonnen"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var nbStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Du har ingen koblinger ennå",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Du har ingen sider ennå",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Du har ingen type-nivåer ennå",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Legg til nytt valg",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var nbStrings = {
     "addNew@navigateToUrlOnCondition": "Legg til ny URL-adresse",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Legg til ny side",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Legg til nytt sorteringsnivå",
     // "Value"
     value: "Verdi",
     // "Text"
@@ -1154,6 +1168,14 @@ export var nbStrings = {
     rowCount: "Antall rader",
     // [Auto-translated] "Rows per page"
     pageSize: "Rader per side",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "La brukere sortere rader",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maksimale sorteringsnivåer",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Standard sorteringsrekkefølge",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Sorteringslinje for visning",
     // "Columns layout"
     columnLayout: "Antall kolonner",
     // "\"Add Row\" button alignment"
@@ -1426,10 +1448,10 @@ export var nbStrings = {
     waitForUpload: "Vent til opplastingen er fullført",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Justering av raddetaljer",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Minimum radantall",
-    // [Auto-translated] "Maximum row count"
-    maxRowCount: "Maksimalt radantall",
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Minimum antall rader",
+    // [Auto-translated] "Maximum number of rows"
+    maxRowCount: "Maksimalt antall rader",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Radantallsuttrykk",
     // "Confirm row removal"
@@ -1684,6 +1706,8 @@ export var nbStrings = {
       columns: "Kolonner",
       // "Rows"
       rows: "Rader",
+      // [Auto-translated] "Entries"
+      entries: "Påmeldinger",
       // "Choice Options"
       choices: "Valg",
       // "Items"
@@ -2278,6 +2302,8 @@ export var nbStrings = {
     underRowSingle: "Under raden viser du bare én inndeling",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Alltid",
     timerInfoMode: {
       // "Both"
       combined: "Begge"
@@ -2816,14 +2842,24 @@ export var nbStrings = {
       confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en oppføring.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Spesifiser et uttrykk som beregner antall oppføringer. Dette uttrykket overstyrer innstillingen \"Innledende antall oppføringer\" og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene \"Minimum antall oppføringer\" og \"Maksimalt antall oppføringer\". Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne oppføringer manuelt.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Angir antall oppføringer som vises på hver side i panelet. '0' deaktiverer paginering og viser alle rader.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Angir antall oppføringer som vises på hver side i panelet. '0' deaktiverer paginering og viser alle oppføringer.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Lar respondentene sortere oppføringer fra sorteringslinjen.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Definerer rekkefølgen oppføringene vises i når undersøkelsen starter. Respondentene kan endre det hvis sortering er tillatt. Hvert sorteringsnivå sorterer etter ett spørsmål; det øverste nivået gjelder først. Drag nivåer for å endre prioriteten deres.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tildeler numre til spørsmål som er nestet i det dynamiske panelet."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Spesifiser et uttrykk som beregner antall rader. Dette uttrykket overstyrer innstillingen «Radantall» og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene «Minimum radantall» og «Maksimum radantall». Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne rader manuelt.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Lar respondenter sortere rader ved å klikke på kolonneoverskrifter eller fra sorteringslinjen.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Definerer rekkefølgen radene vises i når undersøkelsen starter. Respondenter kan endre den hvis sortering er tillatt. Hvert sorteringsnivå sorterer etter én kolonne; øverste nivå gjelder først. Drag nivåer for å endre prioriteten sin.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" viser sorteringslinjen bare når matrisen ikke har sorterbare kolonneoverskrifter: overskriftene er skjult, matrisen bruker det mobile oppsettet, eller rader overføres til kolonner. \"Alltid\" viser sorteringslinjen ved siden av kolonneoverskriftene også.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Spesifiser et uttrykk som beregner antall rader. Dette uttrykket overstyrer innstillingen «Startantall rader» og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene «Minimum antall rader» og «Maksimalt antall rader». Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne rader manuelt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en rad.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var nbStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Angir antall rader som vises på hver side i matrisen. '0' deaktiverer paginering og viser alle rader.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Spesifiserer hvor mange felt en respondent kan sortere etter samtidig.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliserer svar fra den siste raden og tilordner dem til den neste dynamiske raden som er lagt til.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

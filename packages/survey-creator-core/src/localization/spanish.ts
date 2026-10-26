@@ -720,6 +720,8 @@ export var spanishTranslation = {
       newPanelPosition: "Nueva ubicación de entrada",
       // [Auto-translated] "Entries per page"
       pageSize: "Entradas por página",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Permitir a los usuarios ordenar paneles",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evitar respuestas duplicadas en la siguiente pregunta"
     },
@@ -807,6 +809,12 @@ export var spanishTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expresión"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Ordenar por",
+      // [Auto-translated] "Order"
+      direction: "Orden"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Expresión"
@@ -860,7 +868,9 @@ export var spanishTranslation = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Haga que la columna sea obligatoria si",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Cada opción en una columna separada"
+      showInMultipleColumns: "Cada opción en una columna separada",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Permitir ordenación por esta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var spanishTranslation = {
     "listIsEmpty@navigateToUrlOnCondition": "Todavía no tienes ningún enlace",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Todavía no tienes ninguna página",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Aún no tienes niveles de tipo",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var spanishTranslation = {
     "addNew@navigateToUrlOnCondition": "Agregar nueva URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Agregar nueva página",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Añadir nuevo nivel de ordenación",
     // "Value"
     value: "Valor",
     // "Text"
@@ -1154,6 +1168,14 @@ export var spanishTranslation = {
     rowCount: "Número de filas",
     // [Auto-translated] "Rows per page"
     pageSize: "Filas por página",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Permitir a los usuarios ordenar filas",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Niveles máximos de ordenación",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Orden de ordenamiento por defecto",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Barra de ordenación de mostrar",
     // "Columns layout"
     columnLayout: "Diseño de columnas",
     // "\"Add Row\" button alignment"
@@ -1684,6 +1706,8 @@ export var spanishTranslation = {
       columns: "Columnas",
       // "Rows"
       rows: "Filas",
+      // [Auto-translated] "Entries"
+      entries: "Inscripciones",
       // "Choice Options"
       choices: "Opciones",
       // "Items"
@@ -2278,6 +2302,8 @@ export var spanishTranslation = {
     underRowSingle: "Debajo de la fila, sólo un panel es visible",
     // "Auto"
     auto: "Automático",
+    // [Auto-translated] "Always"
+    always: "Siempre",
     timerInfoMode: {
       // "Both"
       combined: "Ambos"
@@ -2816,14 +2842,24 @@ export var spanishTranslation = {
       confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Especifica una expresión que calcule el número de entradas. Esta expresión anula la configuración de \"Número inicial de entradas\" y se reevalúa cada vez que cambian los valores a los que se referencia. El resultado está limitado por las configuraciones de \"Número mínimo de entradas\" y \"Número máximo de entradas\". Mientras esta expresión está establecida, los encuestados no pueden añadir ni eliminar entradas manualmente.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Especifica el número de entradas que aparecen en cada página del panel. '0' desactiva la paginación y muestra todas las filas.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Especifica el número de entradas que aparecen en cada página del panel. '0' desactiva la paginación y muestra todas las entradas.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Permite a los encuestados ordenar las entradas desde la barra de ordenación.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Define el orden en que se muestran las entradas cuando comienza la encuesta. Los encuestados pueden cambiarlo si se permite ordenar. Cada nivel de ordenación se ordena por una pregunta; el nivel superior se aplica primero. Arrastra los niveles para cambiar su prioridad.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Asigna números a las preguntas anidadas dentro del panel dinámico."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Especifica una expresión que calcule el número de filas. Esta expresión anula la configuración de \"Recuento de filas\" y se reevalúa cada vez que cambian los valores que referencia. El resultado está limitado por los ajustes de \"Recuento mínimo de filas\" y \"Recuento máximo de filas\". Mientras esta expresión está establecida, los encuestados no pueden añadir ni eliminar filas manualmente.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Permite a los encuestados ordenar filas haciendo clic en cabeceras de columna o desde la barra de ordenación.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Define el orden en que se muestran las filas cuando comienza la encuesta. Los encuestados pueden cambiarlo si se permite ordenar. Cada nivel de ordenación se ordena por una columna; el nivel superior se aplica primero. Arrastra los niveles para cambiar su prioridad.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" muestra la barra de ordenación solo cuando la matriz no tiene cabeceras de columna ordenables: las cabeceras están ocultas, la matriz utiliza la disposición móvil o las filas se transponen a columnas. \"Siempre\" muestra también la barra de ordenación junto a las cabeceras de columna.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Especifique una expresión que calcule el número de filas. Esta expresión anula el ajuste de \"Número inicial de filas\" y se reevalúa cada vez que cambian los valores a los que se referencia. El resultado está limitado por los ajustes de \"Número mínimo de filas\" y \"Número máximo de filas\". Mientras esta expresión está establecida, los encuestados no pueden añadir ni eliminar filas manualmente.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Desencadena un mensaje de confirmación antes de quitar una fila.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var spanishTranslation = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Especifica el número de filas que se muestran en cada página de la matriz. '0' desactiva la paginación y muestra todas las filas.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Especifica cuántos campos puede ordenar un encuestado a la vez.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplica las respuestas de la última fila y las asigna a la siguiente fila dinámica agregada.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

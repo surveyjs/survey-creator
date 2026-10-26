@@ -720,6 +720,8 @@ export var czStrings = {
       newPanelPosition: "Nová vstupní lokace",
       // [Auto-translated] "Entries per page"
       pageSize: "Záznamy na stránce",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Umožnit uživatelům třídit panely",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
@@ -807,6 +809,12 @@ export var czStrings = {
       // [Auto-translated] "Expression"
       expression: "Výraz"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Seřadit podle",
+      // [Auto-translated] "Order"
+      direction: "Řád"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Vyjádření"
@@ -860,7 +868,9 @@ export var czStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Vytvořte sloupec jako povinný, pokud",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Každá možnost v samostatném sloupci"
+      showInMultipleColumns: "Každá možnost v samostatném sloupci",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Povolit třídění podle tohoto sloupce"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var czStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Zatím nemáte žádné odkazy",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Zatím nemáte žádné stránky",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Ještě nemáš žádné úrovně třídění",
     // "Add new choice"
     "addNew@choices": "Přidat volbu",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var czStrings = {
     "addNew@navigateToUrlOnCondition": "Přidat novou adresu URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Přidat novou stránku",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Přidejte novou úroveň třídění",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1154,6 +1168,14 @@ export var czStrings = {
     rowCount: "Počet řádků",
     // [Auto-translated] "Rows per page"
     pageSize: "Řádky na stránku",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Umožnit uživatelům třídit řádky",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maximální úrovně třídění",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Výchozí pořadí třídění",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Zobrazit řazení",
     // "Columns layout"
     columnLayout: "Rozložení sloupců",
     // "\"Add Row\" button alignment"
@@ -1684,6 +1706,8 @@ export var czStrings = {
       columns: "Sloupce",
       // "Rows"
       rows: "Řádky",
+      // [Auto-translated] "Entries"
+      entries: "Příspěvky",
       // "Choice Options"
       choices: "Volby",
       // "Items"
@@ -2278,6 +2302,8 @@ export var czStrings = {
     underRowSingle: "Pod řádkem, pouze jeden panel je viditelný",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Vždy",
     timerInfoMode: {
       // "Both"
       combined: "Obě"
@@ -2816,14 +2842,24 @@ export var czStrings = {
       confirmDelete: "Spustí výzvu k potvrzení před odstraněním položky.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Zadejte výraz, který počítá počet záznamů. Tento výraz přepisuje nastavení \"Počáteční počet záznamů\" a je znovu vyhodnocován pokaždé, když se změní hodnoty, na které odkazuje. Výsledek je omezen nastavením \"Minimální počet záznamů\" a \"Maximální počet položek\". Dokud je tento výraz nastaven, respondenti nemohou položky ručně přidávat ani odebírat.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Určuje počet položek zobrazených na každé stránce panelu. '0' deaktivuje stránkování a zobrazuje všechny řádky.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Určuje počet položek zobrazených na každé stránce panelu. '0' deaktivuje stránkování a zobrazuje všechny položky.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Umožňuje respondentům třídit položky z řadicího panelu.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Definuje pořadí, v jakém jsou položky zobrazeny na začátku průzkumu. Respondenti jej mohou změnit, pokud je třídění povoleno. Každá úroveň třídění třídí podle jedné otázky; nejvyšší úroveň platí jako první. Úrovně přetahují, aby se změnila jejich priorita.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Přiřadí čísla otázkám vnořeným v dynamickém panelu."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Zadejte výraz, který počítá počet řádků. Tento výraz přepisuje nastavení \"Počet řádků\" a je znovu vyhodnocován pokaždé, když se změní hodnoty, na které odkazuje. Výsledek je omezen nastavením \"Minimální počet řádků\" a \"Maximální počet řádků\". Zatímco je tento výraz nastaven, respondenti nemohou ručně přidávat ani odebírat řádky.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Umožňuje respondentům třídit řádky kliknutím na záhlaví sloupců nebo z řadicího panelu.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Definuje pořadí, v jakém jsou řádky zobrazeny na začátku průzkumu. Respondenti jej mohou změnit, pokud je třídění povoleno. Každá úroveň třídění se třídí podle jednoho sloupce; nejvyšší úroveň se uplatní jako první. Táhněte úrovně pro změnu priority.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" zobrazuje řazovací lištu pouze tehdy, když matice nemá žádné tříditelné hlavičky sloupců: hlavičky jsou skryté, matice používá mobilní rozložení nebo jsou řádky převedeny do sloupců. \"Always\" zobrazuje také řazovací lištu vedle hlaviček sloupců.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Zadejte výraz, který počítá počet řádků. Tento výraz přepisuje nastavení \"Počáteční počet řádků\" a je znovu vyhodnocován vždy, když se změní hodnoty, na které odkazuje. Výsledek je omezen nastavením \"Minimální počet řádků\" a \"Maximální počet řádků\". Dokud je tento výraz nastaven, respondenti nemohou řádky přidávat ani odebírat ručně.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Spustí výzvu k potvrzení před odstraněním řádku.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var czStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Určuje počet řádků zobrazených na každé stránce matice. '0' deaktivuje stránkování a zobrazuje všechny řádky.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specifikuje, podle kolika polí může respondent třídit najednou.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplikuje odpovědi z posledního řádku a přiřadí je k dalšímu přidanému dynamickému řádku.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

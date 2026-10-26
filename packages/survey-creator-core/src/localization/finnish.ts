@@ -720,6 +720,8 @@ export var fiStrings = {
       newPanelPosition: "Uusi sisääntulopaikka",
       // [Auto-translated] "Entries per page"
       pageSize: "Merkinnät per sivu",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Anna käyttäjien lajitella paneeleja",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Estä päällekkäiset vastaukset seuraavassa kysymyksessä"
     },
@@ -807,6 +809,12 @@ export var fiStrings = {
       // [Auto-translated] "Expression"
       expression: "Lauseke"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Lajittele mukaan",
+      // [Auto-translated] "Order"
+      direction: "Järjestys"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Ilmentyminen"
@@ -860,7 +868,9 @@ export var fiStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Tee sarakkeesta pakollinen, jos",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Jokainen vaihtoehto erillisessä sarakkeessa"
+      showInMultipleColumns: "Jokainen vaihtoehto erillisessä sarakkeessa",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Salli lajittelu tämän sarakkeen mukaan"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var fiStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Sinulla ei ole vielä linkkejä",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Sinulla ei ole vielä sivuja",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Sinulla ei ole vielä lajittelutasoja",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Lisää uusi valinta",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var fiStrings = {
     "addNew@navigateToUrlOnCondition": "Lisää uusi URL-osoite",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Lisää uusi sivu",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Lisää uusi lajittelutaso",
     // "Value"
     value: "Arvo",
     // "Text"
@@ -1154,6 +1168,14 @@ export var fiStrings = {
     rowCount: "Rivien määrä",
     // [Auto-translated] "Rows per page"
     pageSize: "Rivit per sivu",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Salli käyttäjien lajitella rivejä",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maksimilajittelutasot",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Oletuslajittelujärjestys",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Näytä lajittelupalkki",
     // "Columns layout"
     columnLayout: "Sarakkeiden asettelu",
     // "\"Add Row\" button alignment"
@@ -1426,10 +1448,10 @@ export var fiStrings = {
     waitForUpload: "Odota latauksen valmistumista",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Rivin tietojen tasaus",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Rivien vähimmäismäärä",
-    // [Auto-translated] "Maximum row count"
-    maxRowCount: "Rivien enimmäismäärä",
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Rivien minimimäärä",
+    // [Auto-translated] "Maximum number of rows"
+    maxRowCount: "Suurin rivimäärä",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Rivimäärälauseke",
     // "Confirm row removal"
@@ -1684,6 +1706,8 @@ export var fiStrings = {
       columns: "Sarakkeet",
       // "Rows"
       rows: "Rivit",
+      // [Auto-translated] "Entries"
+      entries: "Osallistujat",
       // "Choice Options"
       choices: "Valinnat",
       // "Items"
@@ -2278,6 +2302,8 @@ export var fiStrings = {
     underRowSingle: "Näytä rivin alla vain yksi osio",
     // "Auto"
     auto: "Automaattinen",
+    // [Auto-translated] "Always"
+    always: "Aina",
     timerInfoMode: {
       // "Both"
       combined: "Molemmat"
@@ -2816,14 +2842,24 @@ export var fiStrings = {
       confirmDelete: "Käynnistää vahvistuskehotteen ennen merkinnän poistamista.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Määritä lauseke, joka laskee merkintöjen määrän. Tämä lauseke ohittaa \"Alkuperäinen merkintöjen määrä\" -asetuksen ja sitä arvioidaan uudelleen aina, kun viittaavat arvot muuttuvat. Tulos on rajoitettu \"Vähimmäismäärä merkintöjä\" ja \"Suurin määrä merkintöjä\" -asetuksilla. Kun tämä lauseke on asetettu, vastaajat eivät voi lisätä tai poistaa merkintöjä manuaalisesti.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Määrittää, kuinka monta merkintää näytetään jokaisella paneelin sivulla. '0' poistaa sivutuksen käytöstä ja näyttää kaikki rivit.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Määrittää, kuinka monta merkintää näytetään jokaisella paneelin sivulla. '0' poistaa sivuttamisen käytöstä ja näyttää kaikki merkinnät.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Mahdollistaa vastaajien lajitella merkinnät lajittelupalkista.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Määrittelee, missä järjestyksessä merkinnät näytetään kyselyn alkaessa. Vastaajat voivat muuttaa sitä, jos lajittelu on sallittua. Jokainen lajittelutaso lajitellaan yhden kysymyksen mukaan; ylin taso sovelletaan ensin. Vedä tasoja muuttaaksesi niiden prioriteettia.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Määrittää numerot kysymyksiin, jotka on sisäkkäin dynaamisessa paneelissa."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Määritä lauseke, joka laskee rivien määrän. Tämä lauseke ohittaa \"Rivimäärä\" -asetuksen ja arvioidaan uudelleen aina, kun viittaavat arvot muuttuvat. Tulos on rajoitettu \"Minimirivimäärä\" ja \"Maksimirivimäärä\" -asetuksilla. Kun tämä lauseke on asetettu, vastaajat eivät voi lisätä tai poistaa rivejä manuaalisesti.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Sallii vastaajien lajitella rivejä klikkaamalla sarakeotsikoita tai lajittelupalkista.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Määrittelee järjestyksen, jossa rivit näytetään kyselyn alkaessa. Vastaajat voivat muuttaa sitä, jos lajittelu on sallittua. Jokainen lajittelutaso lajitellaan yhden sarakkeen mukaan; ylin taso sovelletaan ensin. Vedä tasoja muuttaaksesi niiden prioriteettia.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" näyttää lajittelupalkin vain, kun matriisissa ei ole lajiteltavia sarakeotsikoita: otsikot ovat piilotettuja, matriisi käyttää mobiiliasettelua tai rivit on siirretty sarakkeiksi. \"Aina\" näyttää lajittelupalkin myös sarakkeiden otsikoiden vieressä.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Määritä lauseke, joka laskee rivien määrän. Tämä lauseke ohittaa \"Alkuperäinen rivien määrä\" -asetuksen ja arvioidaan uudelleen aina, kun viittaamat arvot muuttuvat. Tulos on rajoitettu asetuksilla \"Minimimäärä rivejä\" ja \"Suurin määrä rivejä\". Vaikka tämä lauseke on asetettu, vastaajat eivät voi lisätä tai poistaa rivejä manuaalisesti.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Käynnistää vahvistuskehotteen ennen rivin poistamista.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var fiStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Määrittää, kuinka monta riviä näytetään jokaisella matriisin sivulla. '0' poistaa sivuttamisen käytöstä ja näyttää kaikki rivit.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Määrittelee, kuinka monen kentän mukaan vastaaja voi lajitella yhtä aikaa.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Monistaa vastaukset viimeiseltä riviltä ja määrittää ne seuraavalle lisätylle dynaamiselle riville.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

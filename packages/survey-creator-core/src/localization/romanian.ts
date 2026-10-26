@@ -720,6 +720,8 @@ export const roStrings = {
       newPanelPosition: "Locația noului panou",
       // [Auto-translated] "Entries per page"
       pageSize: "Înscrieri pe pagină",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Permite utilizatorilor să sorteze panourile",
       // "Prevent duplicate responses in the following question"
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
@@ -807,6 +809,12 @@ export const roStrings = {
       // "Expression"
       expression: "Expresie"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sortează după",
+      // [Auto-translated] "Order"
+      direction: "Ordinea"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Exprimare"
@@ -860,7 +868,9 @@ export const roStrings = {
       // "Make the column required if"
       requiredIf: "Fă coloana obligatorie dacă",
       // "Each option in a separate column"
-      showInMultipleColumns: "Fiecare opțiune într-o coloană separată"
+      showInMultipleColumns: "Fiecare opțiune într-o coloană separată",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Permiteți sortarea după această coloană"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export const roStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Nu aveți încă niciun link",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Nu aveți încă nicio pagină",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Nu ai încă niveluri de tip",
     // "Add new choice"
     "addNew@choices": "Adăugați o alegere nouă",
     // "Add new column"
@@ -1046,6 +1058,8 @@ export const roStrings = {
     "addNew@navigateToUrlOnCondition": "Adăugați un URL nou",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Adaugă o pagină nouă",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Adaugă un nou nivel de sortare",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"
@@ -1154,6 +1168,14 @@ export const roStrings = {
     rowCount: "Număr de rânduri",
     // [Auto-translated] "Rows per page"
     pageSize: "Rânduri pe pagină",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Permite utilizatorilor să sorteze rândurile",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Niveluri maxime de sortare",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Ordinea implicită de sortare",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Afișează bara de sortare",
     // "Columns layout"
     columnLayout: "Aspect coloane",
     // "\"Add Row\" button alignment"
@@ -1684,6 +1706,8 @@ export const roStrings = {
       columns: "Coloane",
       // "Rows"
       rows: "Rânduri",
+      // [Auto-translated] "Entries"
+      entries: "Înscrieri",
       // "Choice Options"
       choices: "Opțiuni de alegere",
       // "Items"
@@ -2278,6 +2302,8 @@ export const roStrings = {
     underRowSingle: "Sub rând, afișați doar o singură extindere de rând",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Întotdeauna",
     timerInfoMode: {
       // "Both"
       combined: "Ambele"
@@ -2816,14 +2842,24 @@ export const roStrings = {
       confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Specifică o expresie care calculează numărul de intrări. Această expresie suprascrie setarea \"Număr inițial de intrări\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de intrări\" și \"Număr maxim de intrări\". Deși această expresie este setată, respondenții nu pot adăuga sau elimina manual elementele.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Specifică numărul de intrări afișate pe fiecare pagină a panoului. \"0\" dezactivează paginarea și afișează toate rândurile.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Specifică numărul de intrări afișate pe fiecare pagină a panoului. '0' dezactivează paginarea și afișează toate intrările.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Permite respondenților să sorteze intrările din bara de sortare.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Definește ordinea în care intrările sunt afișate la începutul sondajului. Respondenții pot schimba acest lucru dacă sortarea este permisă. Fiecare nivel de sortare sortează după o întrebare; nivelul superior se aplică primul. Trage nivelurile pentru a schimba prioritatea lor.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Atribuie numere întrebărilor imbricate în panoul dinamic."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Specifică o expresie care calculează numărul de rânduri. Această expresie suprascrie setarea \"Număr de rânduri\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de rânduri\" și \"Număr maxim de rânduri\". Deși această expresie este setată, respondenții nu pot adăuga sau elimina rânduri manual.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Permite respondenților să sorteze rândurile făcând clic pe anteturile coloanelor sau din bara de sortare.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Definește ordinea în care rândurile sunt afișate la începutul sondajului. Respondenții pot schimba acest lucru dacă sortarea este permisă. Fiecare nivel de sortare se sortează după o coloană; nivelul superior se aplică primul. Trageți nivelurile pentru a le schimba prioritatea.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" afișează bara de sortare doar atunci când matricea nu are antete de coloană sortabile: antetele sunt ascunse, matricea folosește structura mobilă sau rândurile sunt transpuse în coloane. \"Întotdeauna\" afișează bara de sortare de lângă anteturile coloanelor.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specifică o expresie care calculează numărul de rânduri. Această expresie suprascrie setarea \"Număr inițial de rânduri\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de rânduri\" și \"Număr maxim de rânduri\". În timp ce această expresie este setată, respondenții nu pot adăuga sau elimina rânduri manual.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un rând.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export const roStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Specifică numărul de rânduri afișate pe fiecare pagină a matricei. '0' dezactivează paginarea și afișează toate rândurile.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specifică câte câmpuri poate sorta un respondent simultan.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

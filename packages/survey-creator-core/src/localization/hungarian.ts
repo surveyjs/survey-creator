@@ -720,6 +720,8 @@ export var huStrings = {
       newPanelPosition: "Új belépési hely",
       // [Auto-translated] "Entries per page"
       pageSize: "Bejegyzések oldalonként",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Lehetővé tenni a felhasználók számára, hogy paneleket rendezzenek",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Ismétlődő válaszok elkerülése a következő kérdésben"
     },
@@ -807,6 +809,12 @@ export var huStrings = {
       // [Auto-translated] "Expression"
       expression: "Kifejezés"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Rendezd",
+      // [Auto-translated] "Order"
+      direction: "Rend"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Kifejezés"
@@ -860,7 +868,9 @@ export var huStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Tegye kötelezővé az oszlopot, ha",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Minden beállítás külön oszlopban"
+      showInMultipleColumns: "Minden beállítás külön oszlopban",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Engedélyezzük a rendezést ezen oszlop szerint"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var huStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Még nincsenek linkek",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Még nincsenek oldalai",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Még nincsenek sortozási szintjeid",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Új választás hozzáadása",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var huStrings = {
     "addNew@navigateToUrlOnCondition": "Új URL hozzáadása",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Új oldal hozzáadása",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Új rendezési szint hozzáadása",
     // "Value"
     value: "Érték",
     // "Text"
@@ -1154,6 +1168,14 @@ export var huStrings = {
     rowCount: "Sorok száma",
     // [Auto-translated] "Rows per page"
     pageSize: "Sorok oldalonként",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Engedd a felhasználók sorok rendezését",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maximális rendezési szintek",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Alapértelmezett rendezési sorrend",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Műsorozási sáv",
     // "Columns layout"
     columnLayout: "Oszlopok elrendezése",
     // "\"Add Row\" button alignment"
@@ -1426,10 +1448,10 @@ export var huStrings = {
     waitForUpload: "Várja meg, amíg a feltöltés befejeződik",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Sorrészletek igazítása",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Sorszám minimális száma",
-    // [Auto-translated] "Maximum row count"
-    maxRowCount: "Sorszám maximális száma",
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Minimális sor száma",
+    // [Auto-translated] "Maximum number of rows"
+    maxRowCount: "Maximális sor száma",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Sorszámkifejezés",
     // "Confirm row removal"
@@ -1684,6 +1706,8 @@ export var huStrings = {
       columns: "Oszlopok",
       // "Rows"
       rows: "Sorok",
+      // [Auto-translated] "Entries"
+      entries: "Bejegyzések",
       // "Choice Options"
       choices: "Lehetőségek",
       // "Items"
@@ -2278,6 +2302,8 @@ export var huStrings = {
     underRowSingle: "A sor alatt csak egy szakasz megjelenítése",
     // "Auto"
     auto: "Kocsi",
+    // [Auto-translated] "Always"
+    always: "Mindig",
     timerInfoMode: {
       // "Both"
       combined: "Mindkettő"
@@ -2816,14 +2842,24 @@ export var huStrings = {
       confirmDelete: "Megerősítő üzenetet indít el a bejegyzés eltávolítása előtt.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Határozz meg egy kifejezést, amely kiszámítja a bejegyzések számát. Ez a kifejezés felülírja a \"Kezdeti bejegyzések száma\" beállítást, és újraértékelik, amikor az adott értékek változnak. Az eredményt a \"Minimum bejegyzések száma\" és \"Maximális bejegyzések száma\" beállítások korlátozzák. Amíg ez az kifejezés be van állítva, a válaszadók nem adhatnak hozzá vagy törölhetnek bejegyzéseket manuálisan.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Megadja, hogy hány bejegyzést jelenítenek meg a panel egyes oldalain. A '0' letiltja az oldalozást, és minden sort megjelenít.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Megadja, hogy hány bejegyzést jelenítsen meg a panel egyes oldalain. A '0' letiltja az oldalozást, és minden bejegyzést megjelenít.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Lehetővé teszi a válaszadók számára, hogy a sortozó sávból rendezzék be a bejegyzéseket.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Meghatározza a sorrendet, ahogyan a bejegyzések megjelennek, amikor a felmérés elkezdődik. A válaszadók módosíthatják azt, ha a rendezés engedélyezett. Minden rendezési szint egy kérdés szerint rendeződik; a legfelső szint érvényes először. Húzd a szinteket, hogy megváltoztasd az prioritásukat.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Számokat rendel a dinamikus panelbe ágyazott kérdésekhez."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Határozz meg egy kifejezést, amely kiszámítja a sorok számát. Ez a kifejezés felülírja a \"Sorszám\" beállítást, és újraértékelik, amikor az általa hivatkozott értékek változnak. Az eredményt a \"Minimum sorszám\" és \"Maximum sorszám\" beállítások korlátozzák. Amíg ez a kifejezés be van állítva, a válaszadók nem adhatnak hozzá vagy távolíthatnak sorokat manuálisan.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Lehetővé teszi a válaszadók számára, hogy sorokat válogassanak oszlopfejlécekre kattintva vagy a rendezési sávból.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Meghatározza, hogy a sorok sorok sorban jelennek meg a felmérés kezdetekor. A válaszadók módosíthatják azt, ha a rendezés engedélyezett. Minden rendezési szint egy oszlop szerint rendeződik; a legfelső szint érvényes először. Húzd a szinteket, hogy megváltoztasd az elsőbbséget.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "Az \"Auto\" csak akkor jeleníti meg a rendezési sávot, ha a mátrixnak nincsenek rendezhető oszlopfejlécei: a fejlécek el vannak rejtve, a mátrix mobil elrendezést használja, vagy a sorokat oszlopokba transzponálják. A \"Mindig\" a sorozássáv is megjelenik az oszlopfejlécek mellett.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Határozz meg egy kifejezést, amely kiszámítja a sorok számát. Ez a kifejezés felülírja a \"Kezdeti sorszám\" beállítást, és újraértékelik, amikor az említett értékek változnak. Az eredményt korlátozzák a \"Minimum sorszám\" és \"Maximális sorszám\" beállítások. Amíg ez a kifejezés be van állítva, a válaszadók nem adhatnak hozzá vagy távolíthatnak sorokat manuálisan.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Megerősítő kérést indít el a sor eltávolítása előtt.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var huStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Megadja, hogy hány sor jelenik meg a mátrix egyes oldalain. A '0' letiltja az oldalozást, és minden sort megjelenít.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Megadja, hogy egy válaszadó egyszerre hány mező szerint tud rendezni.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Megkettőzi a válaszokat az utolsó sorból, és hozzárendeli őket a következő hozzáadott dinamikus sorhoz.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."

@@ -720,6 +720,8 @@ export var indonesianStrings = {
       newPanelPosition: "Lokasi entri baru",
       // [Auto-translated] "Entries per page"
       pageSize: "Entri per halaman",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Izinkan pengguna mengurutkan panel",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
@@ -807,6 +809,12 @@ export var indonesianStrings = {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Urutkan berdasarkan",
+      // [Auto-translated] "Order"
+      direction: "Pesanan"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
@@ -860,7 +868,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Buat kolom diperlukan jika",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Setiap opsi dalam kolom terpisah"
+      showInMultipleColumns: "Setiap opsi dalam kolom terpisah",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Izinkan pengurutan berdasarkan kolom ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1030,6 +1040,8 @@ export var indonesianStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Anda belum memiliki tautan apa pun",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Anda belum memiliki halaman apa pun",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Kamu belum punya tingkat sorting",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Tambahkan pilihan baru",
     // [Auto-translated] "Add new column"
@@ -1046,6 +1058,8 @@ export var indonesianStrings = {
     "addNew@navigateToUrlOnCondition": "Tambahkan URL baru",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Tambahkan halaman baru",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Tambahkan tingkat pengurutan baru",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1154,6 +1168,14 @@ export var indonesianStrings = {
     rowCount: "Jumlah baris",
     // [Auto-translated] "Rows per page"
     pageSize: "Baris per halaman",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Izinkan pengguna mengurutkan baris",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Tingkat pengurutan maksimum",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Urutan pengurutan default",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Tampilkan bilah pengurutan",
     // "Columns layout"
     columnLayout: "Tata letak kolom",
     // "\"Add Row\" button alignment"
@@ -1426,9 +1448,9 @@ export var indonesianStrings = {
     waitForUpload: "Tunggu hingga upload selesai",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Perataan detail baris",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Jumlah baris minimum",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Jumlah baris maksimum",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Ekspresi hitungan baris",
@@ -1684,6 +1706,8 @@ export var indonesianStrings = {
       columns: "Kolom",
       // "Rows"
       rows: "Baris",
+      // [Auto-translated] "Entries"
+      entries: "Entri",
       // "Choice Options"
       choices: "Pilihan",
       // "Items"
@@ -2278,6 +2302,8 @@ export var indonesianStrings = {
     underRowSingle: "Di bawah baris, tampilkan satu bagian saja",
     // [Auto-translated] "Auto"
     auto: "Otomatis",
+    // [Auto-translated] "Always"
+    always: "Selalu",
     timerInfoMode: {
       // "Both"
       combined: "Keduanya"
@@ -2816,14 +2842,24 @@ export var indonesianStrings = {
       confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Tentukan ekspresi yang menghitung jumlah entri. Ekspresi ini menimpa pengaturan \"Jumlah awal entri\" dan dievaluasi ulang setiap kali nilai yang dirujuk berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah minimum entri\" dan \"Jumlah maksimum entri\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus entri secara manual.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Menentukan jumlah entri yang ditampilkan di setiap halaman panel. '0' menonaktifkan paginasi dan menampilkan semua baris.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Menentukan jumlah entri yang ditampilkan di setiap halaman panel. '0' menonaktifkan paginasi dan menampilkan semua entri.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Memungkinkan responden mengurutkan entri dari bilah pengurutan.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Mendefinisikan urutan entri ditampilkan saat survei dimulai. Responden dapat mengubahnya jika pengurutan diizinkan. Setiap tingkat pengurutan mengurutkan berdasarkan satu pertanyaan; tingkat atas berlaku terlebih dahulu. Seret tingkat untuk mengubah prioritasnya.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Menetapkan nomor ke pertanyaan yang bersarang dalam panel dinamis."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Tentukan ekspresi yang menghitung jumlah baris. Ekspresi ini menimpa pengaturan \"Jumlah baris\" dan dievaluasi ulang setiap kali nilai yang direferensikan berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah baris minimum\" dan \"Jumlah baris maksimum\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus baris secara manual.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Memungkinkan responden mengurutkan baris dengan mengklik header kolom atau dari bilah pengurutan.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Mendefinisikan urutan baris ditampilkan saat survei dimulai. Responden dapat mengubahnya jika pengurutan diizinkan. Setiap tingkat pengurutan mengurutkan berdasarkan satu kolom; tingkat atas berlaku terlebih dahulu. Seret tingkat untuk mengubah prioritasnya.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" hanya menampilkan bar pengurutan ketika matriks tidak memiliki header kolom yang dapat diurutkan: header disembunyikan, matriks menggunakan tata letak mobile, atau baris ditransposisi ke kolom. \"Selalu\" juga menampilkan bar pengurutan di samping header kolom.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Tentukan ekspresi yang menghitung jumlah baris. Ekspresi ini menggantikan pengaturan \"Jumlah baris awal\" dan dievaluasi ulang setiap kali nilai yang dirujuk berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah minimum baris\" dan \"Jumlah maksimum baris\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus baris secara manual.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Memicu perintah konfirmasi sebelum menghapus baris.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2831,6 +2867,8 @@ export var indonesianStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Menentukan jumlah baris yang ditampilkan di setiap halaman matriks. '0' menonaktifkan paginasi dan menampilkan semua baris.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Menentukan berapa banyak bidang yang dapat diurutkan oleh responden sekaligus.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
