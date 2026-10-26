@@ -751,6 +751,54 @@ test("Selecting elements in creator does not modify the survey or the undo stack
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
   expect(JSON.stringify(creator.JSON)).toEqual(json);
 });
+test("Switching the edited object does not unbind the old grid's editors", () => {
+  const choices = [];
+  for (let i = 1; i <= 50; i++) choices.push(i);
+  const survey = new SurveyModel({ elements: [{ type: "checkbox", name: "q1", choices: choices }, { type: "text", name: "q2" }] });
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const unbind = vi.spyOn(Question.prototype, "unbindValue");
+  const dataSet = vi.spyOn(SurveyModel.prototype, "data", "set");
+  const switchObj = (count: number): void => {
+    for (let i = 0; i < count; i++) {
+      propertyGrid.obj = propertyGrid.obj === q1 ? q2 : q1;
+    }
+  };
+  switchObj(1);
+  expect(propertyGrid.survey.editingObj).toBe(q2);
+  switchObj(9);
+  expect(propertyGrid.survey.editingObj).toBe(q1);
+  expect.soft(unbind).toHaveBeenCalledTimes(0);
+  expect.soft(dataSet).toHaveBeenCalledTimes(0);
+  switchObj(10);
+  expect(propertyGrid.survey.editingObj).toBe(q1);
+  expect.soft(unbind).toHaveBeenCalledTimes(0);
+  expect.soft(dataSet).toHaveBeenCalledTimes(0);
+  unbind.mockRestore();
+  dataSet.mockRestore();
+});
+test("Selecting elements does not unbind the previous property grid's editors", () => {
+  const creator = new CreatorTester();
+  const elements = [];
+  for (let i = 1; i <= 20; i++) {
+    elements.push(i % 2 === 1 ? { type: "checkbox", name: "q" + i, choices: [1, 2, 3] } : { type: "text", name: "q" + i });
+  }
+  creator.JSON = { elements: elements };
+  const select = (name: string): void => {
+    creator.selectElement(creator.survey.getQuestionByName(name));
+  };
+  select("q1");
+  const unbind = vi.spyOn(Question.prototype, "unbindValue");
+  for (let i = 2; i <= 11; i++) select("q" + i);
+  expect(creator.propertyGrid.editingObj).toBe(creator.survey.getQuestionByName("q11"));
+  expect.soft(unbind).toHaveBeenCalledTimes(0);
+  for (let i = 12; i <= 20; i++) select("q" + i);
+  select("q1");
+  expect(creator.propertyGrid.editingObj).toBe(creator.survey.getQuestionByName("q1"));
+  expect.soft(unbind).toHaveBeenCalledTimes(0);
+  unbind.mockRestore();
+});
 test("Support property visibleIf attribute", () => {
   var question = new QuestionCheckboxModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
