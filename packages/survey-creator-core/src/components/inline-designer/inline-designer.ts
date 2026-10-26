@@ -1,11 +1,22 @@
-import { Action, ActionContainer, Base, DomDocumentHelper, DomWindowHelper, PanelModelBase, property, defaultActionBarCss } from "survey-core";
+import {
+  Action, ActionContainer, Base, DomDocumentHelper, DomWindowHelper, PanelModelBase, property, defaultActionBarCss,
+  PopupModel, ListModel, createPopupModelWithListModel, menuListCss, IElement, IPanel, PageModel, SurveyElement
+} from "survey-core";
 import type { SurveyCreatorModel } from "../../creator-base";
 import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import "./inline-designer.scss";
 
-// Inline layout mode (prompt 03, prototype): owns the floating parts of the inline designer. For now that is
-// the selected element's toolbar; the toolbox popup (04) and the property grid panel (05) come later.
+// Where the toolbox popup inserts (04): after `after` in its parent, or appended to `container` (a panel or a
+// page; none for a survey without pages). `page` is set when the popup was opened from a page's toolbar.
+interface IInlineToolboxContext {
+  after?: IElement;
+  container?: IPanel;
+  page?: PageModel;
+}
+
+// Inline layout mode (prompts 03-04, prototype): owns the floating parts of the inline designer: the selected
+// element's toolbar (03), the "+" handle and the toolbox popup (04). The property grid panel (05) comes later.
 // Created by TabDesignerViewModel only in inline mode and disposed when the mode or the tab changes.
 export class InlineDesignerModel extends Base {
   public static ToolbarMinWidth = 240;
@@ -23,6 +34,16 @@ export class InlineDesignerModel extends Base {
   @property({ defaultValue: "above" }) toolbarPlacement: "above" | "below" | "inside";
   // Changes whenever the toolbar shows another adorner's action container: the renderer re-keys the bar.
   @property({ defaultValue: 0 }) toolbarVersion: number;
+  // The "+" handle (04): left of the selected element's box, at its top.
+  @property({ defaultValue: 0 }) addHandleTop: number;
+  @property({ defaultValue: 0 }) addHandleLeft: number;
+  private static AddHandleGap = 4;
+  // One toolbox popup for every target (04); its list is refilled on show.
+  public toolboxPopupModel: PopupModel;
+  private toolboxListModel: ListModel;
+  private toolboxPopupTarget: HTMLElement;
+  private toolboxContext: IInlineToolboxContext;
+  private addHandleElement: HTMLElement;
 
   public extraActions: ActionContainer;
   private toolbarElement: HTMLElement;
@@ -52,7 +73,142 @@ export class InlineDesignerModel extends Base {
     // detached by the renderer without an event the toolbar could follow, and rows above the target change
     // height without resizing the target. Re-check the target and its position a few times per second.
     this.checkTimer = setInterval(() => this.resolveTarget(), 300);
+    this.createToolboxPopup();
     this.setTarget(this.creator.selectedElement);
+  }
+
+  // --- The "+" handle and the toolbox popup (04) ---
+
+  // Questions and panels (an element in a row); pages and the survey use their toolbar's Add Question.
+  public get isAddHandleVisible(): boolean {
+    return this.isToolbarVisible && this.isToolbarPositioned && !this.isSurveyTarget && !this.isPageTarget && !this.creator.readOnly;
+  }
+  public get addHandleCss(): string {
+    return "svc-inline-add-handle" + (this.isAddHandleVisible ? "" : " svc-inline-add-handle--hidden");
+  }
+  public get addHandleStyle(): { [index: string]: string } {
+    return { top: this.addHandleTop + "px", left: this.addHandleLeft + "px" };
+  }
+  public get addHandleTitle(): string {
+    return this.creator.getLocString("ed.addNewQuestion");
+  }
+  public setAddHandleElement(el: HTMLElement): void {
+    if (this.addHandleElement === el) return;
+    this.addHandleElement = el;
+    this.schedulePositionUpdate();
+  }
+  public onAddHandleClick(): void {
+    const target: any = this.toolbarTarget;
+    if (!this.isAddHandleVisible || !target) return;
+    this.showToolboxPopup({ after: target }, this.addHandleElement);
+  }
+  public showToolboxPopup(context: IInlineToolboxContext, targetElement: HTMLElement): void {
+    if (this.creator.readOnly || !targetElement) return;
+    this.toolboxContext = context;
+    this.toolboxPopupTarget = targetElement;
+    // Focus the search box on show and return focus to the handle (or the toolbar action) on close.
+    this.toolboxPopupModel.isFocusedContent = true;
+    this.toolboxPopupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
+    if (this.toolboxPopupModel.isVisible)this.toolboxPopupModel.hide();
+    this.toolboxPopupModel.show();
+  }
+  public hideToolboxPopup(): void {
+    if (!!this.toolboxPopupModel && this.toolboxPopupModel.isVisible)this.toolboxPopupModel.hide();
+  }
+  private createToolboxPopup(): void {
+    // Not createDropdownActionModel: the popup is shown from the "+" handle and from toolbar actions, not from one
+    // dropdown action. isFocusedContent is set explicitly: createPopupModelWithListModel reads it from showFilter
+    // once, while the list is still empty.
+    const listOptions: any = {
+      items: [],
+      allowSelection: false,
+      searchEnabled: true,
+      forceShowFilter: true,
+      cssClasses: { ...menuListCss },
+      locOwner: this.creator
+    };
+    this.toolboxPopupModel = createPopupModelWithListModel(listOptions, {
+      cssClass: "svc-creator-popup svc-inline-toolbox-popup",
+      // With a side position, "bottom" aligns the popup's top with the target's top (PopupUtils.calculatePosition).
+      verticalPosition: "bottom",
+      horizontalPosition: "left",
+      // No pointer: with a side position, survey-core moves the container with a transform (sv-popup--show-pointer
+      // .sv-popup--left), which becomes the containing block of the nested subitems popup and clips it.
+      showPointer: false,
+      displayMode: this.creator.isTouch ? "overlay" : "popup"
+    });
+    this.toolboxListModel = this.toolboxPopupModel.contentComponentData.model;
+    this.toolboxPopupModel.isFocusedContent = true;
+    this.toolboxPopupModel.getTargetCallback = () => this.toolboxPopupTarget;
+    this.toolboxPopupModel.onVisibilityChanged.add(this.onToolboxPopupVisibilityChanged);
+  }
+  private onToolboxPopupVisibilityChanged = (_: PopupModel, options: { isVisible: boolean }) => {
+    if (!options.isVisible) return;
+    const old = this.toolboxListModel.actions.slice();
+    this.toolboxListModel.setItems(this.createToolboxActions());
+    this.toolboxListModel.flushUpdates();
+    old.forEach(a => a.dispose());
+    // The list stays mounted between shows and keeps its scroll position: start every show at the top.
+    setTimeout(() => {
+      try {
+        const scroller = this.toolboxListModel.scrollableContainer;
+        if (!!scroller) scroller.scrollTop = 0;
+      } catch(e) {
+        // Not rendered (no DOM).
+      }
+    }, 0);
+  };
+  // The same items and filters as the "Add Question" dropdown (getAvailableToolboxItems), so toolbox
+  // customization shows here too, with a separator at each category change.
+  private createToolboxActions(): Array<Action> {
+    const context = this.toolboxContext || {};
+    const owner = this.getToolboxOwner(context);
+    const items = this.creator.getAvailableToolboxItems(owner);
+    const actions = this.creator.createToolboxItemActions(items, (type: string, json?: any) => this.onToolboxItemPicked(type, json), true);
+    if (!!context.page) {
+      actions.push(new Action({
+        id: "svc-inline-add-page",
+        title: this.addPageText,
+        iconName: "icon-pg-pages-24x24",
+        iconSize: "auto",
+        needSeparator: actions.length > 0,
+        action: () => this.onAddPagePicked()
+      }));
+    }
+    return actions;
+  }
+  // The element whose nesting rules apply (getAvailableToolboxItems): the parent the new element goes into.
+  private getToolboxOwner(context: IInlineToolboxContext): SurveyElement {
+    const parent: any = !!context.after ? context.after.parent : context.container;
+    if (!parent || parent.isPage) return undefined;
+    return this.creator._getActualElementToAddNewElements(parent);
+  }
+  private get addPageText(): string {
+    return this.creator.getLocString("ed.addNewTypeQuestion").replace("{0}", this.creator.getLocString("ed.pageTypeName"));
+  }
+  private onToolboxItemPicked(type: string, json?: any): void {
+    const context = this.toolboxContext || {};
+    this.closeToolboxPopupBeforeAdd();
+    let elementJson = json;
+    if (!elementJson) {
+      const item = this.creator.toolbox.getItemByName(type);
+      elementJson = !!item && !!item.json ? item.json : { type: type };
+    }
+    this.creator.addNewElementAfter(context.after, elementJson, context.container);
+  }
+  private onAddPagePicked(): void {
+    const context = this.toolboxContext || {};
+    this.closeToolboxPopupBeforeAdd();
+    this.creator.addNewPageAfter(context.page);
+  }
+  private closeToolboxPopupBeforeAdd(): void {
+    // The new element is selected and its title editor takes focus: do not return focus to the handle.
+    if (this.creator.startEditTitleOnQuestionAdded)this.toolboxPopupModel.isFocusedContent = false;
+    this.hideToolboxPopup();
+  }
+  private getActionElement(action: Action): HTMLElement {
+    const doc = DomDocumentHelper.getDocument();
+    return !!doc ? doc.getElementById(action.renderedId) as HTMLElement : undefined;
   }
 
   public get isSurveyTarget(): boolean {
@@ -162,6 +318,7 @@ export class InlineDesignerModel extends Base {
 
   private setTarget(target: Base): void {
     if (this.toolbarTarget !== target) {
+      this.hideToolboxPopup();
       this.toolbarTarget = target;
       this.isToolbarPositioned = false;
       this.updateExtraActions();
@@ -174,6 +331,10 @@ export class InlineDesignerModel extends Base {
     const actions: Array<Action> = [];
     const target: any = this.toolbarTarget;
     if (this.isSurveyTarget) {
+      // An empty survey has no page and no element to anchor the popup to (04, TB02).
+      if (this.creator.survey.pageCount === 0) {
+        actions.push(this.createAddQuestionAction(() => ({})));
+      }
       actions.push(new Action({
         id: "surveySettings",
         iconName: "icon-settings_16x16",
@@ -184,23 +345,37 @@ export class InlineDesignerModel extends Base {
         action: () => { }
       }));
     } else if (!!target && (target.isPage || target.isPanel)) {
-      actions.push(new Action({
-        id: "addQuestion",
-        iconName: "icon-add_16x16",
-        iconSize: "auto",
-        title: this.creator.getLocString("ed.addNewQuestion"),
-        // Prototype: adds the default question type, as the old "Add question" button did. 04 opens the toolbox popup.
-        action: () => {
-          const adorner: any = this.toolbarAdorner;
-          if (!adorner || typeof adorner.addNewQuestion !== "function") return;
-          if (target.isPage) adorner.addNewQuestion(adorner, null);
-          else adorner.addNewQuestion();
-        }
-      }));
+      // Appends inside the panel or page (TB04), as the old "Add question" button did.
+      actions.push(this.createAddQuestionAction(() => ({ container: target, page: target.isPage ? target : undefined })));
+      if (target.isPage) {
+        actions.push(new Action({
+          id: "addPage",
+          iconName: "icon-add_16x16",
+          iconSize: "auto",
+          title: this.addPageText,
+          action: () => {
+            this.hideToolboxPopup();
+            this.creator.addNewPageAfter(target);
+          }
+        }));
+      }
     }
-    const old = this.extraActions.actions;
+    // A copy: setItems may refill the same array, and disposing it would dispose the new actions.
+    const old = this.extraActions.actions.slice();
     this.extraActions.setItems(actions);
     old.forEach(a => a.dispose());
+  }
+  private createAddQuestionAction(getContext: () => IInlineToolboxContext): Action {
+    const action: Action = new Action({
+      id: "addQuestion",
+      iconName: "icon-add_16x16",
+      iconSize: "auto",
+      title: this.creator.getLocString("ed.addNewQuestion"),
+      action: () => {
+        this.showToolboxPopup(getContext(), this.getActionElement(action));
+      }
+    });
+    return action;
   }
   private getAdornerFor(target: Base): SurveyElementAdornerBase {
     if (!target || target.isDisposed || this.isSurveyTarget) return undefined;
@@ -342,6 +517,15 @@ export class InlineDesignerModel extends Base {
     if (this.toolbarTop !== newTop)this.toolbarTop = newTop;
     if (this.toolbarLeft !== newLeft)this.toolbarLeft = newLeft;
     if (this.toolbarPlacement !== placement)this.toolbarPlacement = placement;
+
+    // The "+" handle: outside the selection outline, left of the box, aligned with its top. Kept inside the viewport
+    // (a question at the left edge of a narrow host), where it overlaps the outline rather than leaving the screen.
+    const handleWidth = this.addHandleElement?.offsetWidth || 24;
+    const handleLeft = Math.max(2, anchorRect.left - outset - InlineDesignerModel.AddHandleGap - handleWidth);
+    const newHandleTop = Math.round(anchorRect.top - containerRect.top + container.clientTop);
+    const newHandleLeft = Math.round(handleLeft - containerRect.left + container.clientLeft);
+    if (this.addHandleTop !== newHandleTop)this.addHandleTop = newHandleTop;
+    if (this.addHandleLeft !== newHandleLeft)this.addHandleLeft = newHandleLeft;
     if (!this.isToolbarPositioned)this.isToolbarPositioned = true;
   }
 
@@ -366,6 +550,13 @@ export class InlineDesignerModel extends Base {
     this.anchorElement = undefined;
     this.observedRoot = undefined;
     this.extraActions.dispose();
+    if (!!this.toolboxPopupModel) {
+      this.toolboxPopupModel.onVisibilityChanged.remove(this.onToolboxPopupVisibilityChanged);
+      this.toolboxPopupModel.isVisible = false;
+      this.toolboxPopupModel.dispose();
+    }
+    this.toolboxPopupTarget = undefined;
+    this.addHandleElement = undefined;
     super.dispose();
   }
 }

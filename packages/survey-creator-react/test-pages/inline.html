@@ -202,6 +202,21 @@
     const createCreator = (options) => {
       const creator = new SurveyCreator.SurveyCreator(Object.assign({ layoutMode: "inline", showLogicTab: true, showTranslationTab: true, showThemeTab: true }, options || {}));
       creator["animationEnabled"] = false;
+      // A custom toolbox item with a panel JSON (04): the toolbox popup reads the same items as the toolbox.
+      creator.toolbox.addItem({
+        name: "contact-block",
+        title: "Contact block",
+        iconName: "icon-panel",
+        category: "Blocks",
+        json: {
+          type: "panel", name: "contactBlock", title: "Contact",
+          elements: [
+            { type: "text", name: "contactName", title: "Name" },
+            { type: "text", name: "contactEmail", title: "Email", inputType: "email" },
+            { type: "text", name: "contactPhone", title: "Phone", inputType: "tel", startWithNewLine: false }
+          ]
+        }
+      });
       // The demo toolbar's "Selected:" line.
       const showSelected = () => {
         if (window.creator !== creator) return;

@@ -3478,11 +3478,53 @@ export class SurveyCreatorModel extends Base
     if (panel) {
       parent = panel;
     }
+    this.addElementIntoParent(element, parent, index, modifiedType);
+  }
+  private addElementIntoParent(element: IElement, parent: IPanel, index: number, modifiedType: string): void {
     this.addNewElementReason = modifiedType;
     element.setVisibleIndex(-1);
     parent.addElement(element, index);
     this.addNewElementReason = "";
     this.setModified({ type: modifiedType, question: element });
+  }
+  // Inline layout mode (prompt 04, prototype): the toolbox popup's insertion. With `target`, the new element goes
+  // right after it in target.parent (inside panels and dynamic panel templates too); otherwise it is appended to
+  // `container` (a panel or a page). Unlike clickToolboxItem, it never climbs to the top-level element and ignores
+  // addNewQuestionLast. A survey without pages gets one first.
+  @undoRedoTransaction()
+  public addNewElementAfter(target: IElement, json: any, container?: IPanel): IElement {
+    if (this.readOnly || !json) return null;
+    let parent: IPanel = container;
+    let index = -1;
+    if (this.survey.pageCount == 0) {
+      parent = this.addNewPageIntoSurvey();
+    } else if (!!target && !!target.parent) {
+      parent = target.parent;
+      index = parent.elements.indexOf(target);
+      if (index > -1) {
+        index++;
+        // Keep the target's row intact: a new full-width element placed before a `startWithNewLine: false`
+        // neighbour would pull it into its own row (and undo would then reset that neighbour's flag).
+        while(index < parent.elements.length && parent.elements[index].startWithNewLine === false) index++;
+      }
+    }
+    if (!parent) parent = this.currentPage;
+    if (!parent) return null;
+    const newElement: IElement = json["getType"] === undefined ? this.createNewElement(json) : json;
+    this.survey.lazyRenderEnabled = false;
+    this.addElementIntoParent(newElement, parent, index, "ADDED_FROM_TOOLBOX");
+    this.selectElement(newElement, null, true, this.startEditTitleOnQuestionAdded);
+    return newElement;
+  }
+  // Inline layout mode (prompt 04, prototype): "Add Page" after the given page (or at the end), then selects it.
+  @undoRedoTransaction()
+  public addNewPageAfter(page?: PageModel): PageModel {
+    if (this.readOnly) return null;
+    const pageIndex = !!page ? this.survey.pages.indexOf(page) : -1;
+    const index = pageIndex > -1 ? pageIndex + 1 : -1;
+    const newPage = this.survey.addNewPage(SurveyHelper.getNewPageName(this.survey.pages), index);
+    this.selectElement(newPage);
+    return newPage;
   }
 
   public setNewNames(element: ISurveyElement) {
@@ -4925,10 +4967,7 @@ export class SurveyCreatorModel extends Base
     };
     const getActions = () => {
       const ownerElement = this._getActualElementToAddNewElements(element);
-      const availableTypes = this.getAvailableToolboxItems(ownerElement).map((item) => {
-        return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
-      });
-      return availableTypes;
+      return this.createToolboxItemActions(this.getAvailableToolboxItems(ownerElement), onSelectQuestionType);
     };
 
     const newAction = createDropdownActionModel({
@@ -4992,6 +5031,16 @@ export class SurveyCreatorModel extends Base
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
 
+  // Shared by the "Add Question" dropdown (item's own needSeparator) and the inline toolbox popup
+  // (separatorsByCategory: a separator at each category change, as in getConvertToTypesActions).
+  public createToolboxItemActions(items: Array<QuestionToolboxItem>, onSelectQuestionType: (questionType: string, json?: any) => void, separatorsByCategory: boolean = false): Array<Action> {
+    let lastItem: QuestionToolboxItem = null;
+    return items.map((item) => {
+      const needSeparator = separatorsByCategory ? !!lastItem && item.category != lastItem.category : item.needSeparator;
+      lastItem = item;
+      return this.createIActionBarItemByClass(item, needSeparator, onSelectQuestionType);
+    });
+  }
   createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, json?: any) => void): Action {
     const action = new Action({
       title: item.title,

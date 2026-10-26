@@ -2,6 +2,7 @@ import * as React from "react";
 import { Base, SurveyModel, PageModel } from "survey-core";
 import {
   ComponentsContainer,
+  Popup,
   ReactElementFactory,
   Scroll,
   SurveyActionBar,
@@ -12,6 +13,7 @@ import { SurveyCreatorModel, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../PageNavigator";
 import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
 import "../inline-designer/InlineElementToolbar";
+import "../inline-designer/InlineAddHandle";
 interface ITabDesignerComponentProps {
   data: TabDesignerViewModel;
 }
@@ -105,6 +107,9 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
         <React.Fragment>
           {this.renderInlineSurface(designerTabClassName, content)}
           {!!inlineDesigner ? ReactElementFactory.Instance.createElement("svc-inline-element-toolbar", { model: inlineDesigner, key: "svc-inline-element-toolbar" }) : null}
+          {!!inlineDesigner ? ReactElementFactory.Instance.createElement("svc-inline-add-handle", { model: inlineDesigner, key: "svc-inline-add-handle" }) : null}
+          {/* The toolbox popup (04): a sibling too, not inside the toolbar root, which hides on every re-target. */}
+          {!!inlineDesigner ? <Popup key="svc-inline-toolbox-popup" model={inlineDesigner.toolboxPopupModel}></Popup> : null}
         </React.Fragment>
       );
     }

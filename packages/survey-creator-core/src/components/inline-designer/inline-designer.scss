@@ -84,3 +84,52 @@
   flex: 1 1 auto;
   min-width: 0;
 }
+
+// Inline layout mode, prompt 04: the "+" handle left of the selected element. A sibling of .svc-tab-designer,
+// like the toolbar; the model writes top / left.
+.svc-creator--inline .svc-inline-add-handle {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sjs2-size-x300, 24px);
+  height: var(--sjs2-size-x300, 24px);
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--sjs2-color-bg-basic-primary, #fff);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+  cursor: pointer;
+  outline: none;
+
+  .sv-svg-icon {
+    width: 24px;
+    height: 24px;
+
+    use {
+      fill: var(--svc-inline-outline-color, #19b394);
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--sjs2-color-bg-basic-primary, #fff), 0 0 0 4px var(--svc-inline-outline-color, #19b394);
+  }
+}
+
+.svc-creator--inline .svc-inline-add-handle--hidden {
+  display: none;
+}
+
+// The toolbox popup: a fixed-width list, 8px away from the handle; the popup view model caps its height by the
+// viewport and reads the margins when it places the popup. Direct child only: the subitems popup is nested inside.
+.svc-creator--inline .svc-inline-toolbox-popup > .sv-popup__container {
+  width: 240px;
+  max-width: calc(100vw - 32px);
+  margin: 0 var(--sjs2-spacing-x100, 8px);
+}
