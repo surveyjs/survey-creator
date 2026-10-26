@@ -3383,3 +3383,56 @@ describe("Translation tab: no \"All Pages\" on a large survey", () => {
     expect(translation.filteredPage).toBeFalsy();
   });
 });
+
+describe("Translation tab: a large survey builds the strings of one page", () => {
+  // Every question has a title, so it is a used string and the default filter shows it.
+  const getPagesJSON = (pageCount: number): any => {
+    const pages = [];
+    for (let p = 1; p <= pageCount; p++) {
+      const elements = [];
+      for (let q = 1; q <= 10; q++) {
+        elements.push({ type: "text", name: "p" + p + "q" + q, title: "Question " + p + "." + q });
+      }
+      pages.push({ name: "page" + p, elements: elements });
+    }
+    return { title: "Survey title", pages: pages };
+  };
+  const getBuiltStrings = (pageCount: number, options: any = {}): any => {
+    const creator = new CreatorTester(Object.assign({ showTranslationTab: true }, options));
+    creator.JSON = getPagesJSON(pageCount);
+    const spy = vi.spyOn(<any>TranslationGroup.prototype, "fillItems");
+    try {
+      creator.activeTab = "translation";
+      const model = getTranslationModel(creator);
+      return {
+        matrices: model.stringsSurvey.getAllQuestions().length,
+        items: model.root.allLocItems.length,
+        groups: spy.mock.contexts.filter((group: any) => group.translation === model).length,
+        page: !!model.filteredPage ? model.filteredPage.name : undefined
+      };
+    } finally {
+      spy.mockRestore();
+    }
+  };
+  test("the default element limit is 500", () => {
+    expect(settings.translation.maxElementsForAllPages).toBe(500);
+  });
+  test("the strings built do not grow with the number of pages", () => {
+    const expected = { matrices: 11, items: 11, groups: 12, page: "page1" };
+    const n = getBuiltStrings(60);
+    const n2 = getBuiltStrings(120);
+    expect(n).toEqual(expected);
+    expect(n2).toEqual(n);
+  });
+  test("side-by-side grid view: the strings built do not grow with the number of pages", () => {
+    const options = { translationMode: "sideBySide", translationSideBySideView: "grid" };
+    const expected = { matrices: 11, items: 11, groups: 12, page: "page1" };
+    const n = getBuiltStrings(60, options);
+    const n2 = getBuiltStrings(120, options);
+    expect(n).toEqual(expected);
+    expect(n2).toEqual(n);
+  });
+  test("below the limit the strings of all pages are built", () => {
+    expect(getBuiltStrings(4)).toEqual({ matrices: 41, items: 41, groups: 45, page: undefined });
+  });
+});
