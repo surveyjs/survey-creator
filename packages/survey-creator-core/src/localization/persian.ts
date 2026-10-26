@@ -562,6 +562,73 @@ export var persianStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "توضیحات"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "دستیار بیان",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "نوشتن با هوش مصنوعی",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "توضیح دهید که عبارت باید چه کاری انجام دهد",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "برای مثال: این سؤال را زمانی نشان دهید که پاسخ دهنده ۱۸ سال یا بیشتر دارد",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "وضعیت را با کلمات توصیف کنید",
+    // [Auto-translated] "Generate"
+    generate: "تولید کنید",
+    // [Auto-translated] "Refine"
+    refine: "پالایش",
+    // [Auto-translated] "Explain"
+    explain: "توضیح دهید",
+    // [Auto-translated] "Stop"
+    stop: "بس کن",
+    // [Auto-translated] "Accept"
+    accept: "قبول کن",
+    // [Auto-translated] "Reject"
+    reject: "رد",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "اصلاح: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "بیان کنونی",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "بیان پیشنهادی",
+    // [Auto-translated] "Reads as"
+    readsAs: "به صورت زیر خوانده می شود",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "توضیح دستیار",
+    // [Auto-translated] "Check results"
+    findings: "نتایج را بررسی کنید",
+    // [Auto-translated] "Error"
+    severityError: "خطا",
+    // [Auto-translated] "Warning"
+    severityWarning: "هشدار",
+    // [Auto-translated] "Info"
+    severityInfo: "اطلاعات",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "در «{0}»",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "عبارت را توصیف کنید و گزینه تولید را انتخاب کنید.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "منتظر دستیار...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "درخواست لغو شد.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "دستیار گزارش داد: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "دستیار هیچ حالتی به خود نداد.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "عبارت پیشنهادی را مرور کنید.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "دستیار حالت فعلی را توضیح داد.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "عبارت پیشنهادی دارای خطا است و قابل پذیرش نیست.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "عبارت پیشنهادی نمی توانست برای هر جایی که نوشته شده بررسی شود، بنابراین قابل پذیرش نیست.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "قبل از پرسیدن از دستیار، یک اقدام به قانون اضافه کنید.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "پیشنهاد اول اشتباهاتی داشت و به طور خودکار اصلاح می شد."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var persianStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} «{expression} همیشه برقرار است، چون {facts} - هیچ چیز را تعیین نمی کند."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} «{expression}» هیچ سوال یا متغیری را نمی خواند."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "مقدار پیش فرض «{name}» {valuesText} است که هرگز نمی تواند آن را نگه دارد. مجاز: {availableText}.",
@@ -4034,6 +4105,8 @@ export var persianStrings = {
       itemScope: "«{0}» فقط در شرایط انتخاب، ردیف و ستون در دسترس است.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "ارجاعات «{0}.» فقط در داخل یک سؤال ترکیبی موجود است.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "«{0}» در داخل فیلتر inArray که روی آیتم و سپس نظرسنجی اجرا می شود، در دسترس نیست.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "«{0}» ستونی از این ماتریس است - آن را با پیشوند سطر ارجاع دهید.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

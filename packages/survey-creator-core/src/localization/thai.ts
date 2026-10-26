@@ -562,6 +562,73 @@ export const thStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "คําอธิบาย"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "ผู้ช่วยแสดงออก",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "เขียนด้วย AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "อธิบายว่านิพจน์ควรทําอะไร",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "ตัวอย่างเช่น: แสดงคําถามนี้เมื่อผู้ตอบมีอายุ 18 ปีขึ้นไป",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "อธิบายเงื่อนไขด้วยคําพูด",
+    // [Auto-translated] "Generate"
+    generate: "สร้าง",
+    // [Auto-translated] "Refine"
+    refine: "ปรับแต่ง",
+    // [Auto-translated] "Explain"
+    explain: "อธิบายหน่อย",
+    // [Auto-translated] "Stop"
+    stop: "หยุด",
+    // [Auto-translated] "Accept"
+    accept: "ยอมรับ",
+    // [Auto-translated] "Reject"
+    reject: "ปฏิเสธ",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "แก้ไข: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "นิพจน์ปัจจุบัน",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "นิพจน์ที่แนะนํา",
+    // [Auto-translated] "Reads as"
+    readsAs: "อ่านเป็น",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "คําอธิบายของผู้ช่วย",
+    // [Auto-translated] "Check results"
+    findings: "ตรวจสอบผลลัพธ์",
+    // [Auto-translated] "Error"
+    severityError: "ข้อผิดพลาด",
+    // [Auto-translated] "Warning"
+    severityWarning: "คําเตือน",
+    // [Auto-translated] "Info"
+    severityInfo: "ข้อมูล",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "ใน \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "อธิบายนิพจน์และเลือก สร้าง",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "รอผู้ช่วย...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "คําขอถูกยกเลิก",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "ผู้ช่วยรายงานว่า: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "ผู้ช่วยไม่ได้แสดงสีหน้าใด ๆ",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "ตรวจสอบนิพจน์ที่แนะนํา",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "ผู้ช่วยอธิบายสีหน้าปัจจุบัน",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "นิพจน์ที่แนะนํามีข้อผิดพลาดและไม่สามารถยอมรับได้",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "นิพจน์ที่แนะนําไม่สามารถตรวจสอบได้ทุกที่ที่เขียน จึงไม่สามารถยอมรับได้",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "เพิ่มการกระทําในกฎก่อนถามผู้ช่วย",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "ข้อเสนอแรกมีข้อผิดพลาดและได้รับการแก้ไขโดยอัตโนมัติ"
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export const thStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{expression}\" เป็นจริงเสมอ เพราะ {facts} - มันไม่ได้ตัดสินใจอะไรเลย"
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" จะไม่อ่านคําถามหรือตัวแปรใด ๆ"
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "ค่าเริ่มต้นของ \"{name}\" คือ {valuesText} ซึ่งไม่สามารถถือไว้ได้อนุญาต: {availableText}",
@@ -4034,6 +4105,8 @@ export const thStrings = {
       itemScope: "\"{0}\" มีให้เฉพาะในเงื่อนไขเลือก แถว และคอลัมน์เท่านั้น",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" อ้างอิงจะมีเฉพาะในคําถามประกอบเท่านั้น",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" ไม่สามารถใช้งานได้ภายในตัวกรอง inArray ซึ่งจะทํางานกับรายการและจากนั้นกับการสํารวจ",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" คือคอลัมน์ของเมทริกซ์นี้ - อ้างอิงด้วยคํานําหน้าแถว",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

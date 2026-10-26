@@ -562,6 +562,73 @@ export var slStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Opis"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Pomočnik za izraze",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Pišite z umetno inteligenco",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Opišite, kaj naj izraz počne",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Na primer: pokažite to vprašanje, ko je anketiranec star 18 let ali več",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Opišite stanje z besedami",
+    // [Auto-translated] "Generate"
+    generate: "Generiraj",
+    // [Auto-translated] "Refine"
+    refine: "Rafinirajte",
+    // [Auto-translated] "Explain"
+    explain: "Pojasnite",
+    // [Auto-translated] "Stop"
+    stop: "Ustavi se",
+    // [Auto-translated] "Accept"
+    accept: "Sprejmi",
+    // [Auto-translated] "Reject"
+    reject: "Zavrni",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Uporabi popravek: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Trenutni izraz",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Predlagani izraz",
+    // [Auto-translated] "Reads as"
+    readsAs: "Bere se kot",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Pojasnilo pomočnika",
+    // [Auto-translated] "Check results"
+    findings: "Preverite rezultate",
+    // [Auto-translated] "Error"
+    severityError: "Napaka",
+    // [Auto-translated] "Warning"
+    severityWarning: "Opozorilo",
+    // [Auto-translated] "Info"
+    severityInfo: "Informacije",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "v \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Opišite izraz in izberite Generiraj.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Čakam na pomočnika...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Prošnja je bila preklicana.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Pomočnik je poročal: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Pomočnik ni predlagal izraza.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Preberite predlagani izraz.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistent je pojasnil trenutni izraz.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Predlagani izraz vsebuje napake in ga ni mogoče sprejeti.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Predlaganega izraza ni bilo mogoče preveriti za vsako mesto, kamor je zapisan, zato ga ni mogoče sprejeti.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Dodajte dejanje k pravilu, preden vprašate pomočnika.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Prvi predlog je imel napake in je bil samodejno popravljen."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var slStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{expression}\" vedno velja, ker {facts} - ne odloča ničesar."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" ne bere nobenega vprašanja ali spremenljivke."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Privzeta vrednost \"{name}\" je {valuesText}, ki je nikoli ne more hraniti. Dovoljeno: {availableText}.",
@@ -4034,6 +4105,8 @@ export var slStrings = {
       itemScope: "\"{0}\" je na voljo le znotraj pogojev izbire, vrstic in stolpcev.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" so na voljo le znotraj sestavljenega vprašanja.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" ni na voljo znotraj inArray filtra, ki teče proti elementu in nato anketi.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" je stolpec te matrike – referenco uporabite s predpono vrstice.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

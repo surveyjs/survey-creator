@@ -562,6 +562,73 @@ export let svStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Beskrivning"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Expressionsassistent",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Skriv med AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Beskriv vad uttrycket ska göra",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Till exempel: visa denna fråga när respondenten är 18 år eller äldre",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Beskriv tillståndet med ord",
+    // [Auto-translated] "Generate"
+    generate: "Generera",
+    // [Auto-translated] "Refine"
+    refine: "Förfina",
+    // [Auto-translated] "Explain"
+    explain: "Förklara",
+    // [Auto-translated] "Stop"
+    stop: "Stopp",
+    // [Auto-translated] "Accept"
+    accept: "Acceptera",
+    // [Auto-translated] "Reject"
+    reject: "Avvisa",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Applicera fix: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Aktuell uttryck",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Föreslagen uttrycksform",
+    // [Auto-translated] "Reads as"
+    readsAs: "Lyder som",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Assistentens förklaring",
+    // [Auto-translated] "Check results"
+    findings: "Kontrollera resultat",
+    // [Auto-translated] "Error"
+    severityError: "Fel",
+    // [Auto-translated] "Warning"
+    severityWarning: "Varning",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "I \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Beskriv uttrycket och välj Generera.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Väntar på assistenten...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Begäran avbröts.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Assistenten rapporterade: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Assistenten visade ingen min.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Gå igenom det föreslagna uttrycket.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Assistenten förklarade det nuvarande uttrycket.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Det föreslagna uttrycket har fel och kan inte accepteras.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Det föreslagna uttrycket kunde inte kontrolleras för varje plats det är skrivet till, så det kan inte accepteras.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Lägg till en åtgärd i regeln innan du frågar assistenten.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Det första förslaget hade fel och rättades automatiskt."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3838,6 +3905,10 @@ export let svStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{uttryck}\" gäller alltid, eftersom {fakta} – den avgör ingenting."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" läser ingen fråga eller variabel."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Standardvärdet för \"{name}\" är {valuesText}, vilket den aldrig kan hålla. Tillåtet: {availableText}.",
@@ -4035,6 +4106,8 @@ export let svStrings = {
       itemScope: "\"{0}\" finns endast i val-, rad- och kolumnförhållanden.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" referenser finns endast i en sammansatt fråga.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" finns inte tillgängligt i ett inArray-filter, som körs mot objektet och sedan undersökningen.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" är en kolumn i denna matris – referera till den med radprefixet.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

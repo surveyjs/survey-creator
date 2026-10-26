@@ -17,7 +17,12 @@ test.describe(title, () => {
     expect(await page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item.svc-tabbed-menu-item--icon").filter({ visible: true }).count()).toBe(0);
     expect(await page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item:not(.svc-tabbed-menu-item--icon)").filter({ visible: true }).count()).toBe(4);
     expect(await page.locator(".svc-tabbed-menu-item-container.sv-dots").isVisible()).toBeTruthy();
-    expect(await page.locator(".svc-tabbed-menu-item-container.sv-dots .sd-menu-item").count()).toBe(1);
+    // The overflow menu renders its list when it opens first.
+    await page.locator(".svc-tabbed-menu-item-container.sv-dots .sv-dots__item").click();
+    await expect(page.locator(".svc-tabbed-menu-item-container.sv-dots .sv-popup")).toBeVisible();
+    await expect(page.locator(".svc-tabbed-menu-item-container.sv-dots .sd-menu-item")).toHaveCount(1);
+    await page.keyboard.press("Escape");
+    await expect(page.locator(".svc-tabbed-menu-item-container.sv-dots .sv-popup")).not.toBeVisible();
     await page.setViewportSize({ width: 800, height: 1080 });
     await page.waitForTimeout(1000);
     expect(await page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item:not(.svc-tabbed-menu-item--icon)").filter({ visible: true }).count()).toBe(0);
@@ -28,7 +33,12 @@ test.describe(title, () => {
     expect(await page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item.svc-tabbed-menu-item--icon").filter({ visible: true }).count()).toBe(0);
     expect(await page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item:not(.svc-tabbed-menu-item--icon)").filter({ visible: true }).count()).toBe(4);
     expect(await page.locator(".svc-tabbed-menu-item-container.sv-dots").isVisible()).toBeTruthy();
-    expect(await page.locator(".svc-tabbed-menu-item-container.sv-dots .sd-menu-item").count()).toBe(1);
+    // The overflow menu renders its list when it opens first.
+    await page.locator(".svc-tabbed-menu-item-container.sv-dots .sv-dots__item").click();
+    await expect(page.locator(".svc-tabbed-menu-item-container.sv-dots .sv-popup")).toBeVisible();
+    await expect(page.locator(".svc-tabbed-menu-item-container.sv-dots .sd-menu-item")).toHaveCount(1);
+    await page.keyboard.press("Escape");
+    await expect(page.locator(".svc-tabbed-menu-item-container.sv-dots .sv-popup")).not.toBeVisible();
     await page.setViewportSize({ width: 1500, height: 1080 });
     await page.waitForTimeout(1000);
     expect(await page.locator(".svc-tabbed-menu-item-container .svc-tabbed-menu-item.svc-tabbed-menu-item--icon").filter({ visible: true }).count()).toBe(0);

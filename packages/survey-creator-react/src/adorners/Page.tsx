@@ -121,7 +121,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
   protected renderContent(): React.JSX.Element {
     if (!this.model.needRenderContent) {
-      return <div className={"svc-page__loading-content"}><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
+      return <div className={this.model.loadingContentCss}><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
     }
     return (
       <PageElementContent
@@ -132,6 +132,9 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     );
   }
   protected renderHeader(): React.JSX.Element {
+    // The loading placeholder renders no header and no footer: reading their action containers builds them
+    // (and fires onElementGetActions / onPageGetFooterActions) for every page, rendered or not.
+    if (!this.model.needRenderContent) return null;
     const actions = (<div className="svc-page__content-actions">
       <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
       {(this.model.topActionContainer.hasActions ? <SurveyActionBar model={this.model.topActionContainer}></SurveyActionBar> : null)}
@@ -149,6 +152,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     );
   }
   protected renderFooter(): React.JSX.Element {
+    if (!this.model.needRenderContent) return null;
     return <SurveyActionBar model={this.model.footerActionsBar}></SurveyActionBar>;
   }
 }

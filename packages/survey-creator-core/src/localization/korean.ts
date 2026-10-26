@@ -562,6 +562,73 @@ export var koreanStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "설명"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "표현 어시스턴트",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "AI로 글쓰기",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "표현이 무엇을 해야 하는지 설명해 주세요",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "예를 들어: 응답자가 18세 이상일 때 이 질문을 보여주세요",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "상태를 말로 설명하세요",
+    // [Auto-translated] "Generate"
+    generate: "생성",
+    // [Auto-translated] "Refine"
+    refine: "정제",
+    // [Auto-translated] "Explain"
+    explain: "설명해 주세요",
+    // [Auto-translated] "Stop"
+    stop: "멈춰",
+    // [Auto-translated] "Accept"
+    accept: "수락하세요",
+    // [Auto-translated] "Reject"
+    reject: "거부",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "수정 적용: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "현재 표현",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "제안 표현",
+    // [Auto-translated] "Reads as"
+    readsAs: "읽기:",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "조수의 설명",
+    // [Auto-translated] "Check results"
+    findings: "결과 확인",
+    // [Auto-translated] "Error"
+    severityError: "오류",
+    // [Auto-translated] "Warning"
+    severityWarning: "경고",
+    // [Auto-translated] "Info"
+    severityInfo: "정보",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "\"{0}\"에서",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "표현식을 설명하고 생성을 선택하세요.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "조수 기다리는 중...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "요청은 취소되었습니다.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "조수는 다음과 같이 보고했다: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "조수는 어떤 표현도 제안하지 않았다.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "제안된 표현을 검토해 보세요.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "조수가 현재 표정을 설명했다.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "제안된 표현에는 오류가 있어 받아들일 수 없습니다.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "제안된 표현식은 쓰여진 모든 위치에 대해 검증할 수 없으므로 받아들일 수 없습니다.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "조수에게 요청하기 전에 규칙에 액션을 추가하세요.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "첫 번째 제안에는 오류가 있었고 자동으로 수정되었습니다."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3838,6 +3905,10 @@ export var koreanStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{expression}\"은 항상 성립합니다. 왜냐하면 {facts} - 아무것도 결정하지 않기 때문입니다."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\"은 어떤 질문이나 변수도 읽지 않습니다."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "\"{name}\"의 기본 값은 {valuesText}이며, 절대 유지할 수 없습니다. 허용: {availableText}.",
@@ -4035,6 +4106,8 @@ export var koreanStrings = {
       itemScope: "\"{0}\"은 선택, 행, 열의 조건 내에서만 사용할 수 있습니다.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" 참조는 합성 질문 안에서만 사용할 수 있습니다.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\"은 inArray 필터 내에서 제공되지 않으며, 이 필터는 아이템과 설문조사를 비교해 실행됩니다.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\"는 이 행렬의 열이며, 행 접두사로 참조하세요.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

@@ -562,6 +562,73 @@ export var hebrewStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "תיאור"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "עוזר הבעה",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "כתוב עם בינה מלאכותית",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "תאר מה הביטוי אמור לעשות",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "לדוגמה: הצג את השאלה הזו כאשר המשיב בן 18 ומעלה",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "תאר את המצב במילים",
+    // [Auto-translated] "Generate"
+    generate: "Generate",
+    // [Auto-translated] "Refine"
+    refine: "ללטש",
+    // [Auto-translated] "Explain"
+    explain: "הסבר",
+    // [Auto-translated] "Stop"
+    stop: "עצור",
+    // [Auto-translated] "Accept"
+    accept: "קבל",
+    // [Auto-translated] "Reject"
+    reject: "דחו",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "החלו תיקון: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "ביטוי עכשווי",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "הצעה לביטוי",
+    // [Auto-translated] "Reads as"
+    readsAs: "קורא כ",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "ההסבר של העוזר",
+    // [Auto-translated] "Check results"
+    findings: "בדוק תוצאות",
+    // [Auto-translated] "Error"
+    severityError: "שגיאה",
+    // [Auto-translated] "Warning"
+    severityWarning: "אזהרה",
+    // [Auto-translated] "Info"
+    severityInfo: "מידע",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "ב\"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "תאר את הביטוי ובחר ייצור.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "מחכה לעוזרת...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "הבקשה בוטלה.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "העוזר דיווח: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "העוזרת לא הציעה הבעה.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "בדוק את הביטוי המוצע.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "העוזרת הסבירה את ההבעה הנוכחית.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "הביטוי המוצע מכיל שגיאות ואינו ניתן לקבל.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "הביטוי המוצע לא יכול היה להיבדק בכל מקום אליו הוא נכתב, ולכן לא ניתן לקבל אותו.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "הוסף פעולה לכלל לפני שתשאל את העוזר.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "ההצעה הראשונה כללה שגיאות ותוקנה אוטומטית."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var hebrewStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "ה-{prop} \"{expression} תמיד תקף, כי {facts} - הוא לא מחליט כלום."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "ה-{prop} \"{expression}\" אינו קורא שום שאלה או משתנה."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "הערך ברירת המחדל של \"{name}\" הוא {valuesText}, שהוא לעולם לא יכול להחזיק. מותר: {availableText}.",
@@ -4034,6 +4105,8 @@ export var hebrewStrings = {
       itemScope: "\"{0}\" זמין רק בתוך תנאי בחירה, שורה ועמודה.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "הפניות \"{0}.\" זמינות רק בתוך שאלה מורכבת.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" אינו זמין בתוך מסנן inArray שרץ מול הפריט ואז מול הסקר.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" היא עמודה במטריצה זו - יש להתייחס אליה עם קידומת השורה.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

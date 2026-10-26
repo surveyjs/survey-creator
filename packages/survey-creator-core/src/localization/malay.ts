@@ -562,6 +562,73 @@ export var msStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Penerangan"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Pembantu Ekspresi",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Tulis dengan AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Terangkan apa yang sepatutnya dilakukan oleh ungkapan tersebut",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Sebagai contoh: tunjukkan soalan ini apabila responden berumur 18 tahun atau lebih",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Terangkan keadaan dalam kata-kata",
+    // [Auto-translated] "Generate"
+    generate: "jana",
+    // [Auto-translated] "Refine"
+    refine: "memperjelas",
+    // [Auto-translated] "Explain"
+    explain: "Terangkan",
+    // [Auto-translated] "Stop"
+    stop: "Berhenti",
+    // [Auto-translated] "Accept"
+    accept: "Terima",
+    // [Auto-translated] "Reject"
+    reject: "Tolak",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Gunakan pembaikan: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Ungkapan semasa",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Ungkapan yang dicadangkan",
+    // [Auto-translated] "Reads as"
+    readsAs: "Dibaca sebagai",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Penjelasan pembantu",
+    // [Auto-translated] "Check results"
+    findings: "Semak keputusan",
+    // [Auto-translated] "Error"
+    severityError: "Ralat",
+    // [Auto-translated] "Warning"
+    severityWarning: "Amaran",
+    // [Auto-translated] "Info"
+    severityInfo: "Maklumat",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "Dalam \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Terangkan ungkapan dan pilih Jana.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Menunggu pembantu...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Permintaan itu dibatalkan.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Pembantu melaporkan: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Pembantu itu tidak mencadangkan ekspresi.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Semak ungkapan yang dicadangkan.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Pembantu itu menerangkan ekspresi semasa.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Ungkapan yang dicadangkan mempunyai ralat dan tidak boleh diterima.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Ungkapan yang dicadangkan tidak dapat diperiksa untuk setiap tempat ia ditulis, jadi ia tidak boleh diterima.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Tambah tindakan ke dalam peraturan sebelum bertanya kepada pembantu.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Cadangan pertama mempunyai ralat dan diperbetulkan secara automatik."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -3837,6 +3904,10 @@ export var msStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{ekspresi}\" sentiasa berlaku, kerana {facts} - ia tidak menentukan apa-apa."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{ekspresi}\" tidak membaca sebarang soalan atau pembolehubah."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Nilai lalai \"{name}\" ialah {valuesText}, yang tidak akan pernah dipegang. Dibenarkan: {availableText}.",
@@ -4034,6 +4105,8 @@ export var msStrings = {
       itemScope: "\"{0}\" hanya tersedia dalam syarat pilihan, baris dan lajur.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Rujukan \"{0}.\" hanya tersedia dalam soalan komposit.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" tidak tersedia di dalam penapis inArray, yang dijalankan terhadap item dan kemudian tinjauan.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" ialah lajur dalam matriks ini - rujuknya dengan awalan baris.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
