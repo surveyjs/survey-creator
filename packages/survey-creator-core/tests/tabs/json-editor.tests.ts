@@ -1273,4 +1273,27 @@ describe("JSON textarea: a keystroke lints after the pause, not at once", () => 
       vi.useRealTimers();
     }
   });
+  test("reading creator.JSON during the pause leaves the error list to the pause", () => {
+    vi.useFakeTimers();
+    try {
+      const creator = createJsonTabCreator();
+      creator.autoSaveEnabled = true;
+      creator.activeTab = "json";
+      const model = getJsonTabModel(creator);
+      typeIntoTextarea(model, invalidText);
+      expect(creator.JSON.pages[0].elements[0].name).toBe("q1");
+      // a getter does not rebuild the list, nor does it cancel the pause that will
+      expect(model.hasErrors).toBe(false);
+      vi.advanceTimersByTime(1000);
+      expect(model.hasErrors).toBe(true);
+      expect(hasParseError(model)).toBe(true);
+
+      typeIntoTextarea(model, jsonTabRenamedText);
+      vi.advanceTimersByTime(1000);
+      expect(getQuestionNames(creator)).toBe("q_renamed");
+      expect(model.hasErrors).toBe(false);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
