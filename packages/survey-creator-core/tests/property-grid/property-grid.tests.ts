@@ -763,6 +763,37 @@ test("Support select base question property editor", () => {
   gotoNamePropEd.value = "q3";
   expect(question.choicesFromQuestion).toEqual("q3");
 });
+test("choicesFromQuestion editor doesn't list questions that copy choices from the edited question, Bug#8096", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "checkbox", name: "q1" },
+      { type: "checkbox", name: "q2", choicesFromQuestion: "q1" },
+      { type: "checkbox", name: "q3", choicesFromQuestion: "q2" },
+      { type: "checkbox", name: "q4" }
+    ]
+  });
+  const getChoiceValues = (name: string): Array<string> => {
+    const propertyGrid = new PropertyGridModelTester(survey.getQuestionByName(name));
+    const editor = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("choicesFromQuestion");
+    return editor.choices.map(item => item.value);
+  };
+  expect(getChoiceValues("q1"), "q1: q2 and q3 copy choices from q1 directly or through q2").toEqual(["q4"]);
+  expect(getChoiceValues("q2"), "q2: q3 copies choices from q2").toEqual(["q1", "q4"]);
+  expect(getChoiceValues("q3"), "q3: nobody copies choices from q3").toEqual(["q1", "q2", "q4"]);
+  expect(getChoiceValues("q4"), "q4: nobody copies choices from q4").toEqual(["q1", "q2", "q3"]);
+});
+test("choicesFromQuestion editor handles an existing circular reference, Bug#8096", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "checkbox", name: "q1", choicesFromQuestion: "q2" },
+      { type: "checkbox", name: "q2", choicesFromQuestion: "q1" },
+      { type: "checkbox", name: "q3" }
+    ]
+  });
+  const propertyGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
+  const editor = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("choicesFromQuestion");
+  expect(editor.choices.map(item => item.value)).toEqual(["q2", "q3"]);
+});
 
 test("check Fast Entry for Rating", () => {
   const question = new QuestionRatingModel("q1");
