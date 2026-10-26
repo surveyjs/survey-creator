@@ -53,6 +53,7 @@ export * from "../tabs/logic-operator";
 export * from "../tabs/Designer";
 export * from "../inline-designer/InlineElementToolbar";
 export * from "../inline-designer/InlineAddHandle";
+export * from "../inline-designer/InlinePropertyGrid";
 export * from "../tabs/JsonEditorAce";
 export * from "../tabs/JsonEditorTextarea";
 export * from "../tabs/Logic";

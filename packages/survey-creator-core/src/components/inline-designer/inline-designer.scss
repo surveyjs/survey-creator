@@ -133,3 +133,122 @@
   max-width: calc(100vw - 32px);
   margin: 0 var(--sjs2-spacing-x100, 8px);
 }
+
+// Inline layout mode, prompt 05: the floating property grid. A sibling of .svc-tab-designer, like the toolbar, so the
+// grid keeps the Creator theme. Fixed: the model writes left / top / width / max-height in viewport coordinates.
+.svc-creator--inline .svc-inline-property-grid {
+  position: fixed;
+  // Above the host page's own sticky chrome (the demo bar is 100), below survey-core popups and modals (2000):
+  // the grid's dropdowns render inside the panel, its modal editors in body.
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--sjs2-color-bg-basic-primary, #fff);
+  color: var(--sjs2-color-fg-basic-primary);
+  border-radius: var(--sjs2-radius-x150, 12px);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+  text-align: start;
+
+  @include sjs2--typography--default;
+}
+
+.svc-creator--inline .svc-inline-property-grid__header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sjs2-spacing-x050, 4px);
+  padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x200, 16px);
+  border-bottom: 1px solid var(--sjs2-color-border-basic-secondary, #e5e5e5);
+  cursor: grab;
+  touch-action: none;
+
+  @include disableUserSelect;
+}
+
+.svc-creator--inline .svc-inline-property-grid--dragging,
+.svc-creator--inline .svc-inline-property-grid--dragging .svc-inline-property-grid__header {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.svc-creator--inline .svc-inline-property-grid__title {
+  flex: 1 1 auto;
+  min-width: 0;
+
+  @include sjs2--typography--default-strong;
+  @include textEllipsis;
+}
+
+.svc-creator--inline .svc-inline-property-grid__close {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--sjs2-size-x400, 32px);
+  height: var(--sjs2-size-x400, 32px);
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: var(--sjs2-radius-x075, 6px);
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+
+  .sv-svg-icon {
+    width: 16px;
+    height: 16px;
+
+    use {
+      fill: var(--sjs2-color-fg-basic-secondary, #767676);
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--sjs2-color-bg-basic-primary-dim, #f4f4f4);
+  }
+}
+
+// The grid normally fills a sized sidebar (spg-container 100% high, spg-root-modern height 0 + flex-grow, with the
+// survey's own Scroll). Here it takes its content's height and the panel body scrolls.
+.svc-creator--inline .svc-inline-property-grid__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  .spg-container {
+    height: auto;
+  }
+
+  .spg-root-modern {
+    height: auto;
+    flex-grow: 0;
+  }
+
+  .spg-root-modern .sv-scroll__wrapper {
+    height: auto;
+  }
+
+  .spg-root-modern .sv-scroll__scrollbar {
+    display: none;
+  }
+
+  // The search box stays on top while the categories scroll (its look comes from spg-search-editor.scss).
+  .svc-search {
+    position: sticky;
+    top: 0;
+    // Above the grid's title actions (help icons) that scroll under it; the grid's popups stack above (2000).
+    z-index: 10;
+  }
+
+  // rootCss reads the creator's navigation mode (buttons), not the plugin's (accordion while inline): undo the
+  // multi-page gaps so the grid looks like the standard accordion.
+  .spg-container--multi-page .spg-page__content {
+    row-gap: normal;
+    column-gap: normal;
+  }
+}

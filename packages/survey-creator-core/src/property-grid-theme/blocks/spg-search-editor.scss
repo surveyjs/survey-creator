@@ -1,6 +1,8 @@
 @use "../../variables.scss" as *;
 
-.svc-side-bar {
+// The inline designer's floating property grid (05) shows the same search box outside the sidebar.
+.svc-side-bar,
+.svc-inline-property-grid {
   .svc-search {
     border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
     background: var(--sjs2-color-bg-basic-secondary);

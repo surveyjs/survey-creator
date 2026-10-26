@@ -14,6 +14,7 @@ import { SurveyPageNavigator } from "../PageNavigator";
 import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
 import "../inline-designer/InlineElementToolbar";
 import "../inline-designer/InlineAddHandle";
+import "../inline-designer/InlinePropertyGrid";
 interface ITabDesignerComponentProps {
   data: TabDesignerViewModel;
 }
@@ -110,6 +111,8 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
           {!!inlineDesigner ? ReactElementFactory.Instance.createElement("svc-inline-add-handle", { model: inlineDesigner, key: "svc-inline-add-handle" }) : null}
           {/* The toolbox popup (04): a sibling too, not inside the toolbar root, which hides on every re-target. */}
           {!!inlineDesigner ? <Popup key="svc-inline-toolbox-popup" model={inlineDesigner.toolboxPopupModel}></Popup> : null}
+          {/* The floating property grid (05): outside .svc-tab-designer, so it keeps the Creator theme. */}
+          {!!inlineDesigner ? ReactElementFactory.Instance.createElement("svc-inline-property-grid", { model: inlineDesigner, key: "svc-inline-property-grid" }) : null}
         </React.Fragment>
       );
     }

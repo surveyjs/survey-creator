@@ -5,6 +5,9 @@ import {
 import type { SurveyCreatorModel } from "../../creator-base";
 import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
 import { SurveyElementActionContainer } from "../action-container-view-model";
+import type { TabDesignerPlugin } from "../tabs/designer-plugin";
+import type { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
+import { InlinePropertyGridPanelModel, IInlinePropertyGridAnchor } from "./inline-property-grid";
 import "./inline-designer.scss";
 
 // Where the toolbox popup inserts (04): after `after` in its parent, or appended to `container` (a panel or a
@@ -15,8 +18,8 @@ interface IInlineToolboxContext {
   page?: PageModel;
 }
 
-// Inline layout mode (prompts 03-04, prototype): owns the floating parts of the inline designer: the selected
-// element's toolbar (03), the "+" handle and the toolbox popup (04). The property grid panel (05) comes later.
+// Inline layout mode (prompts 03-05, prototype): owns the floating parts of the inline designer: the selected
+// element's toolbar (03), the "+" handle and the toolbox popup (04), and the floating property grid panel (05).
 // Created by TabDesignerViewModel only in inline mode and disposed when the mode or the tab changes.
 export class InlineDesignerModel extends Base {
   public static ToolbarMinWidth = 240;
@@ -46,6 +49,11 @@ export class InlineDesignerModel extends Base {
   private addHandleElement: HTMLElement;
 
   public extraActions: ActionContainer;
+  // The floating property grid (05). Hidden by default; it shows the designer plugin's own grid view model.
+  public propertyGridPanel: InlinePropertyGridPanelModel;
+  // The latest sidebar.executeOnExpand callback (PG05), kept while the panel is closed or not mounted yet.
+  private pendingPropertyGridCallback: () => void;
+  private propertyGridReturnFocus: HTMLElement;
   private toolbarElement: HTMLElement;
   private anchorElement: HTMLElement;
   private resizeObserver: ResizeObserver;
@@ -74,8 +82,134 @@ export class InlineDesignerModel extends Base {
     // height without resizing the target. Re-check the target and its position a few times per second.
     this.checkTimer = setInterval(() => this.resolveTarget(), 300);
     this.createToolboxPopup();
+    this.initPropertyGrid();
     this.setTarget(this.creator.selectedElement);
   }
+
+  // --- The floating property grid (05) ---
+
+  private get designerPlugin(): TabDesignerPlugin {
+    return this.creator.getPlugin<TabDesignerPlugin>("designer", false);
+  }
+  // PG03: the plugin's own grid (identity): it already follows the selection through designerPropertyGrid.obj.
+  public get propertyGridViewModel(): PropertyGridViewModel {
+    return this.designerPlugin?.propertyGridViewModel;
+  }
+  public get isPropertyGridOpen(): boolean {
+    return !!this.propertyGridPanel && this.propertyGridPanel.isOpen;
+  }
+  public get propertyGridTitle(): string {
+    return this.propertyGridViewModel?.selectedElementName || "";
+  }
+  public get propertyGridCloseText(): string {
+    return this.creator.getLocString("pe.close");
+  }
+  private initPropertyGrid(): void {
+    this.propertyGridPanel = new InlinePropertyGridPanelModel();
+    this.creator.sidebar.executeOnExpandHandler = this.onSidebarExecuteOnExpand;
+    if (DomWindowHelper.isAvailable()) {
+      // Capture: decided before survey-core's editors handle the key (they do not consume Escape).
+      DomWindowHelper.addEventListener("keydown", this.onPropertyGridKeyDown, true);
+    }
+    // PG03: accordion while inline. Through the plugin's setter (it rebuilds the grid only); the creator's stored
+    // value is left alone, and dispose() restores the plugin from it.
+    const plugin = this.designerPlugin;
+    if (!!plugin && plugin.showOneCategoryInPropertyGrid) {
+      plugin.showOneCategoryInPropertyGrid = false;
+      this.creator.expandCategoryIfNeeded();
+    }
+  }
+  private restorePropertyGridMode(): void {
+    const plugin = this.designerPlugin;
+    if (!!plugin && plugin.showOneCategoryInPropertyGrid !== this.creator.showOneCategoryInPropertyGrid) {
+      plugin.showOneCategoryInPropertyGrid = this.creator.showOneCategoryInPropertyGrid;
+    }
+  }
+  // Opens the panel for the selected element (the settings action, Survey Settings, or host code).
+  public showPropertyGrid(focusFirstEditor: boolean = true): void {
+    if (this.isDisposed) return;
+    this.hideToolboxPopup();
+    const doc = DomDocumentHelper.getDocument();
+    const active = !!doc ? doc.activeElement as HTMLElement : undefined;
+    if (!!active && active !== DomDocumentHelper.getBody() && !this.isInsidePropertyGrid(active)) {
+      this.propertyGridReturnFocus = active;
+    }
+    if (focusFirstEditor) {
+      // As the standard settings action: this replaces a pending selectProperty callback.
+      this.pendingPropertyGridCallback = () => {
+        const pg = this.creator.propertyGrid;
+        const q = !!pg ? pg.getAllQuestions()[0] : undefined;
+        if (!!q) q.focus();
+      };
+    }
+    const wasOpen = this.isPropertyGridOpen;
+    this.propertyGridPanel.open(this.getPropertyGridAnchor());
+    if (wasOpen && !!this.propertyGridPanel.rootElement)this.runPendingPropertyGridCallback();
+  }
+  public hidePropertyGrid(restoreFocus: boolean = false): void {
+    if (!this.isPropertyGridOpen) return;
+    this.propertyGridPanel.close();
+    const el = this.propertyGridReturnFocus;
+    this.propertyGridReturnFocus = undefined;
+    if (restoreFocus && !!el && el.isConnected && typeof el.focus === "function") el.focus({ preventScroll: true });
+  }
+  public togglePropertyGrid(): void {
+    if (this.isPropertyGridOpen)this.hidePropertyGrid();
+    else this.showPropertyGrid();
+  }
+  // The renderer reports the panel root on mount / unmount: pending callbacks run once the grid is mounted.
+  public setPropertyGridElement(el: HTMLElement): void {
+    if (this.isDisposed || !this.propertyGridPanel) return;
+    this.propertyGridPanel.setRootElement(el);
+    if (!!el && this.isPropertyGridOpen)this.runPendingPropertyGridCallback();
+  }
+  public onPropertyGridHeaderPointerDown(event: PointerEvent): void {
+    this.propertyGridPanel.onHeaderPointerDown(event);
+  }
+  private runPendingPropertyGridCallback(): void {
+    const cb = this.pendingPropertyGridCallback;
+    this.pendingPropertyGridCallback = undefined;
+    if (!!cb) cb();
+  }
+  // PG05: in inline mode the sidebar is not rendered (its renderedIsVisible says nothing). Run the callback now when
+  // the panel is open and mounted; otherwise keep the latest one until the panel opens.
+  // While open, the callback usually follows a selection that has just rebuilt the grid survey (selectProperty
+  // focuses an editor that is not rendered yet), so it waits for the panel's next render (setPropertyGridElement
+  // from componentDidUpdate), with a timer as a fallback when nothing re-renders.
+  private onSidebarExecuteOnExpand = (callback: () => void): void => {
+    this.pendingPropertyGridCallback = callback;
+    if (this.isPropertyGridOpen && !!this.propertyGridPanel.rootElement) {
+      setTimeout(() => {
+        if (!this.isDisposed && this.isPropertyGridOpen && this.pendingPropertyGridCallback === callback)this.runPendingPropertyGridCallback();
+      }, 100);
+    }
+  };
+  private getPropertyGridAnchor(): IInlinePropertyGridAnchor {
+    const el = this.anchorElement || this.getInlineRoot();
+    if (!el || !el.isConnected) return undefined;
+    const rect = el.getBoundingClientRect();
+    const outset = this.isSurveyTarget || this.isPageTarget ? 0 : InlineDesignerModel.OutlineOutset;
+    const handle = this.isAddHandleVisible ? (this.addHandleElement?.offsetWidth || 24) + InlineDesignerModel.AddHandleGap : 0;
+    return { left: rect.left - outset, top: rect.top - outset, right: rect.right + outset, bottom: rect.bottom + outset, leftReserve: handle };
+  }
+  public isInsidePropertyGrid(target: any): boolean {
+    const panelEl = this.propertyGridPanel?.rootElement;
+    return !!panelEl && !!target && panelEl.contains(target);
+  }
+  // PG04: Escape closes the panel only when focus is inside it and the key is not for a popup, an open dropdown or a
+  // modal editor (survey-core closes those without preventDefault). Capture phase: the popups are still open here.
+  private onPropertyGridKeyDown = (event: KeyboardEvent) => {
+    if (event.key !== "Escape" || event.defaultPrevented || !this.isPropertyGridOpen) return;
+    const target = event.target as HTMLElement;
+    if (!this.isInsidePropertyGrid(target) || !target.closest) return;
+    if (!!target.closest(".sv-popup, [aria-expanded='true']")) return;
+    const popups = this.propertyGridPanel.rootElement.querySelectorAll(".sv-popup");
+    for (let i = 0; i < popups.length; i++) {
+      if ((popups[i] as HTMLElement).style.display !== "none") return;
+    }
+    event.preventDefault();
+    this.hidePropertyGrid(true);
+  };
 
   // --- The "+" handle and the toolbox popup (04) ---
 
@@ -296,6 +430,8 @@ export class InlineDesignerModel extends Base {
     const root = this.creator.rootElement;
     if (!!target && target.closest) {
       if (target.closest("input, textarea, select, [contenteditable='true'], .sv-popup")) return;
+      // Keys in the property grid panel (05) are the grid's: selecting the parent would switch the grid's object.
+      if (this.isInsidePropertyGrid(target)) return;
       const isBody = target === DomDocumentHelper.getBody() || target === DomDocumentHelper.getDocumentElement();
       if (!isBody && !(!!root && root.contains(target))) return;
     }
@@ -341,8 +477,8 @@ export class InlineDesignerModel extends Base {
         iconSize: "auto",
         title: this.creator.getLocString("ed.surveySettings"),
         tooltip: this.creator.getLocString("ed.surveySettingsTooltip"),
-        // 05 opens the floating property grid for the survey here.
-        action: () => { }
+        // 05: the floating property grid for the survey (the survey is selected while its toolbar shows).
+        action: () => this.showPropertyGrid()
       }));
     } else if (!!target && (target.isPage || target.isPanel)) {
       // Appends inside the panel or page (TB04), as the old "Add question" button did.
@@ -539,6 +675,17 @@ export class InlineDesignerModel extends Base {
       DomDocumentHelper.removeEventListener("keydown", this.onDocumentKeyDown);
     }
     clearInterval(this.checkTimer);
+    // 05: leaving inline mode closes the panel; the sidebar shows the grid again, in the creator's navigation mode.
+    if (DomWindowHelper.isAvailable()) {
+      DomWindowHelper.removeEventListener("keydown", this.onPropertyGridKeyDown, true);
+    }
+    if (this.creator.sidebar.executeOnExpandHandler === this.onSidebarExecuteOnExpand) {
+      this.creator.sidebar.executeOnExpandHandler = undefined;
+    }
+    this.pendingPropertyGridCallback = undefined;
+    this.propertyGridReturnFocus = undefined;
+    this.propertyGridPanel.dispose();
+    this.restorePropertyGridMode();
     this.resizeObserver?.disconnect();
     this.resizeObserver = undefined;
     const adorner: any = this.toolbarAdorner;

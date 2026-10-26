@@ -122,6 +122,9 @@
       <button data-theme="FlatDark" onclick="setDemoTheme('FlatDark')">Flat dark</button>
       <button data-theme="ContrastLightPanelless" onclick="setDemoTheme('ContrastLightPanelless')">Contrast light panelless</button>
     </div>
+    <div class="group">
+      <button id="btn-properties" onclick="toggleInlineProperties()" title="Host code: opens the inline property grid for the selected element">Properties</button>
+    </div>
     <div class="group">Selected: <b id="selected-name">-</b>
     </div>
   </div>
@@ -241,6 +244,11 @@
     window.toggleLayoutMode = () => {
       window.creator.layoutMode = window.creator.layoutMode === "inline" ? "standard" : "inline";
       updateToolbar();
+    };
+    // Host code (05): the same open method the element toolbar's Settings button uses.
+    window.toggleInlineProperties = () => {
+      const inlineDesigner = window.creator.getPlugin("designer").model?.inlineDesigner;
+      if (!!inlineDesigner) inlineDesigner.togglePropertyGrid();
     };
     window.setLayoutMode = (mode) => {
       window.creator.layoutMode = mode;

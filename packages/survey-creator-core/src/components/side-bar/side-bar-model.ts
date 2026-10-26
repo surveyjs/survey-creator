@@ -83,7 +83,15 @@ export class SidebarModel extends Base {
     this.onExpandCallback && this.onExpandCallback();
     this.onExpandCallback = undefined;
   }
+  // Inline layout (05): the sidebar is not rendered there, so renderedIsVisible says nothing. The inline designer's
+  // floating property grid decides when the callback runs (now, when it is open; later, when it opens).
+  public executeOnExpandHandler: (callback: () => void) => void;
   public executeOnExpand(callback: () => void) {
+    if (this.creator.isInlineLayout) {
+      this.onExpandCallback = undefined;
+      if (!!this.executeOnExpandHandler)this.executeOnExpandHandler(callback);
+      return;
+    }
     if (this.renderedIsVisible) {
       callback();
     }

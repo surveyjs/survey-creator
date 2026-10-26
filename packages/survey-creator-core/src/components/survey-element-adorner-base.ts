@@ -518,8 +518,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         visibleIndex: 20,
         iconSize: "auto",
         action: () => {
-          // Inline layout: the sidebar is not rendered. 05 opens the floating property grid here.
-          if (this.creator.isInlineLayout) return;
+          // Inline layout: the sidebar is not rendered; open the floating property grid instead (05, PG04).
+          if (this.creator.isInlineLayout) {
+            const inlineDesigner = this.creator.getPlugin<any>("designer", false)?.model?.inlineDesigner;
+            if (!!inlineDesigner) inlineDesigner.showPropertyGrid(true);
+            return;
+          }
           this.creator.setShowSidebar(true, true);
           if (!this.creator.isMobileView) {
             this.creator.sidebar.executeOnExpand(() => {
